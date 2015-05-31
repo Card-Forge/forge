@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JMenu;
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.FThreads;
 import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.gui.FNetOverlay;
+import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
@@ -30,6 +33,7 @@ import forge.net.server.FServerManager;
 import forge.net.server.ServerGameLobby;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
+import forge.properties.ForgeProfileProperties;
 import forge.screens.home.CLobby;
 import forge.screens.home.VLobby;
 import forge.screens.home.sanctioned.ConstructedGameMenu;
@@ -45,17 +49,45 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         initialize();
     }
 
-    final void host(final int portNumber) {
-        promptNameIfNeeded();
+    void connectToServer() {
+        final String url = SOptionPane.showInputDialog("Enter URL of server to join. Leave blank to host your own server.", "Connect to Server");
+        if (url == null) { return; }
 
+        //prompt user for player one name if needed
+        if (StringUtils.isBlank(FModel.getPreferences().getPref(FPref.PLAYER_NAME))) {
+            GamePlayerUtil.setPlayerName();
+        }
+
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                if (url.length() > 0) {
+                    join(url);
+                }
+                else {
+                    host();
+                }
+            }
+        });
+    }
+
+    private void host() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SOverlayUtils.startGameOverlay("Starting server...");
+                SOverlayUtils.showOverlay();
+            }
+        });
+
+        final int port = ForgeProfileProperties.getServerPort();
         final FServerManager server = FServerManager.getInstance();
         final ServerGameLobby lobby = new ServerGameLobby();
         final VLobby view = VSubmenuOnlineLobby.SINGLETON_INSTANCE.setLobby(lobby);
 
-        server.startServer(portNumber);
+        server.startServer(port);
         server.setLobby(lobby);
 
-        FNetOverlay.SINGLETON_INSTANCE.showUp("Hosting game");
         lobby.setListener(new IUpdateable() {
             @Override
             public final void update(final boolean fullUpdate) {
@@ -103,11 +135,24 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
 
         view.update(true);
 
-        FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Hosting on port %d", portNumber));
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SOverlayUtils.hideOverlay();
+                FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Hosting on port %d", port));
+                VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
+            }
+        });
     }
 
-    final void join(final String hostname, final int port) {
-        promptNameIfNeeded();
+    private void join(final String url) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SOverlayUtils.startGameOverlay("Connecting to server...");
+                SOverlayUtils.showOverlay();
+            }
+        });
 
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui);
@@ -138,16 +183,35 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
                 client.send(event);
             }
         });
+
+        final String hostname;
+        int port0 = ForgeProfileProperties.getServerPort();
+
+        //see if port specified in URL
+        int index = url.indexOf(':');
+        if (index >= 0) {
+            hostname = url.substring(0, index);
+            String portStr = url.substring(index + 1);
+            try {
+                port0 = Integer.parseInt(portStr);
+            }
+            catch (Exception ex) {}
+        }
+        else {
+            hostname = url;
+        }
+        final int port = port0;
+
         client.connect(hostname, port);
 
-        FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Connected to %s:%d", hostname, port));
-    }
-
-    private static void promptNameIfNeeded() {
-        //prompt user for player one name if needed
-        if (StringUtils.isBlank(FModel.getPreferences().getPref(FPref.PLAYER_NAME))) {
-            GamePlayerUtil.setPlayerName();
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SOverlayUtils.hideOverlay();
+                FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Connected to %s:%d", hostname, port));
+                VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
+            }
+        });
     }
 
     @Override
@@ -155,7 +219,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.home.ICSubmenu#initialize()
+     * @see forge.gui.home.ICSubmenu#update()
      */
     @Override
     public void update() {

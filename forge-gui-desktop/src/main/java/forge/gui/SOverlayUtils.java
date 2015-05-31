@@ -35,6 +35,9 @@ public final class SOverlayUtils {
      * A standardized overlay for a game start condition.
      */
     public static void startGameOverlay() {
+        startGameOverlay("Loading new game...");
+    }
+    public static void startGameOverlay(String message) {
         final JPanel overlay = SOverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
         final int h = overlay.getHeight();
@@ -53,7 +56,7 @@ public final class SOverlayUtils {
         pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkinProp.ICO_LOGO))
                 .iconScaleFactor(1d).iconInBackground().build(),
                 "w " + logoSize + "px!, h " + logoSize + "px!, align center");
-        pnl.add(new FLabel.Builder().text("Loading new game...")
+        pnl.add(new FLabel.Builder().text(message)
                 .fontSize(22).build(), "h " + labelHeight + "px!, align center");
 
         overlay.add(pnl);
