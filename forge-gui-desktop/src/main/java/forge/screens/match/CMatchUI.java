@@ -573,9 +573,7 @@ public final class CMatchUI
                 @Override public final void run() {
                     btn1.setFocusable(true);
                     btn2.setFocusable(true);
-                    if (!SOverlayUtils.overlayHasFocus()) {
-                        toFocus.requestFocus();
-                    }
+                    toFocus.requestFocus();
                 }
             });
         }
