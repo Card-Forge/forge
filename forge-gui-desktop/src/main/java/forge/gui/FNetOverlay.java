@@ -6,9 +6,6 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
@@ -94,7 +91,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
             }
 
             if (remote != null) {
-                remote.send(new MessageEvent(FModel.getPreferences().getPref(FPref.PLAYER_NAME), message));
+                remote.send(new MessageEvent(prefs.getPref(FPref.PLAYER_NAME), message));
             }
         }
     };
@@ -205,15 +202,8 @@ public enum FNetOverlay implements IOnlineChatInterface {
         window.setBounds(x, y, w, height);
     }
 
-    private final static SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
-    public void addMessage(final String origin, final String message) {
-        final String now = inFormat.format(new Date());
-        final String toAdd;
-        if (origin == null) {
-            toAdd = String.format("%n[%s] %s", now, message);
-        } else {
-            toAdd = String.format("%n[%s] %s: %s", now, origin, message);
-        }
-        txtLog.append(toAdd);
+    @Override
+    public void addMessage(final String message) {
+        txtLog.append(message);
     }
 }

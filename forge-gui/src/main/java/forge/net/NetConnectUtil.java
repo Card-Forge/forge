@@ -1,5 +1,8 @@
 package forge.net;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;
@@ -69,7 +72,7 @@ public class NetConnectUtil {
             }
             @Override
             public final void message(final String source, final String message) {
-                chatInterface.addMessage(source, message);
+                chatInterface.addMessage(formatMessage(source, message));
             }
             @Override
             public final void close() {
@@ -81,7 +84,7 @@ public class NetConnectUtil {
             public final void send(final NetEvent event) {
                 if (event instanceof MessageEvent) {
                     final MessageEvent message = (MessageEvent) event;
-                    chatInterface.addMessage(message.getSource(), message.getMessage());
+                    chatInterface.addMessage(formatMessage(message.getSource(), message.getMessage()));
                     server.broadcast(event);
                 }
             }
@@ -108,7 +111,7 @@ public class NetConnectUtil {
         client.addLobbyListener(new ILobbyListener() {
             @Override
             public final void message(final String source, final String message) {
-                chatInterface.addMessage(source, message);
+                chatInterface.addMessage(formatMessage(source, message));
             }
             @Override
             public final void update(final GameLobbyData state, final int slot) {
@@ -145,5 +148,19 @@ public class NetConnectUtil {
         client.connect(hostname, port);
 
         return String.format("Connected to %s:%d", hostname, port);
+    }
+
+    private final static SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
+
+    public static String formatMessage(final String origin, final String message) {
+        final String now = inFormat.format(new Date());
+        final String toAdd;
+        if (origin == null) {
+            toAdd = String.format("%n[%s] %s", now, message);
+        }
+        else {
+            toAdd = String.format("%n[%s] %s: %s", now, origin, message);
+        }
+        return toAdd;
     }
 }
