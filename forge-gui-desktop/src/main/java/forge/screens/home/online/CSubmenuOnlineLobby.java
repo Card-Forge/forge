@@ -13,6 +13,7 @@ import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.gui.FNetOverlay;
 import forge.gui.SOverlayUtils;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
@@ -34,6 +35,7 @@ import forge.net.server.ServerGameLobby;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProfileProperties;
+import forge.screens.home.CHomeUI;
 import forge.screens.home.CLobby;
 import forge.screens.home.VLobby;
 import forge.screens.home.sanctioned.ConstructedGameMenu;
@@ -139,8 +141,10 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             @Override
             public void run() {
                 SOverlayUtils.hideOverlay();
-                FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Hosting on port %d", port));
-                VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
+                FNetOverlay.SINGLETON_INSTANCE.show(String.format("Hosting on port %d", port));
+                if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
+                    VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
+                }
             }
         });
     }
@@ -208,8 +212,10 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             @Override
             public void run() {
                 SOverlayUtils.hideOverlay();
-                FNetOverlay.SINGLETON_INSTANCE.showUp(String.format("Connected to %s:%d", hostname, port));
-                VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
+                FNetOverlay.SINGLETON_INSTANCE.show(String.format("Connected to %s:%d", hostname, port));
+                if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
+                    VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
+                }
             }
         });
     }

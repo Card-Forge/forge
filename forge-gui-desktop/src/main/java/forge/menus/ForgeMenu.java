@@ -15,8 +15,8 @@ import javax.swing.event.PopupMenuListener;
 
 import forge.Singletons;
 import forge.control.RestartUtil;
-import forge.gui.FNetOverlay;
 import forge.gui.GuiUtils;
+import forge.screens.home.online.OnlineMenu;
 import forge.util.ReflectionUtil;
 
 public final class ForgeMenu {
@@ -74,7 +74,7 @@ public final class ForgeMenu {
         add(new LayoutMenu().getMenu());
         add(HelpMenu.getMenu());
         addSeparator();
-        add(getMenuItem_ChatPanel());
+        add(OnlineMenu.getMenu());
         addSeparator();
         add(getMenuItem_Restart());
         add(getMenuItem_Exit());
@@ -121,20 +121,6 @@ public final class ForgeMenu {
             }
         }
         return false;
-    }
-
-    private static JMenuItem getMenuItem_ChatPanel() {
-        final JMenuItem menuItem = new JMenuItem("Open chat panel");
-        menuItem.addActionListener(getChatPanelAction());
-        return menuItem;
-    }
-
-    private static ActionListener getChatPanelAction() {
-        return new ActionListener() {
-            @Override public final void actionPerformed(final ActionEvent e) {
-                FNetOverlay.SINGLETON_INSTANCE.shopUp();
-            }
-        };
     }
 
     private static JMenuItem getMenuItem_Restart() {

@@ -22,6 +22,7 @@ import forge.net.IRemote;
 import forge.net.event.MessageEvent;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.home.online.OnlineMenu;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
@@ -63,6 +64,7 @@ public enum FNetOverlay {
             if (b0) {
                 hasBeenShown = true;
             }
+            OnlineMenu.chatItem.setState(b0);
         }
     };
     public FDialog getWindow() {
@@ -125,10 +127,14 @@ public enum FNetOverlay {
         cmdSend.setCommand(new Runnable() { @Override public void run() { onSend.actionPerformed(null); } });
     }
 
-    public void shopUp() {
-        showUp(null);
+    public void hide() {
+        window.setVisible(false);
     }
-    public void showUp(final String message) { 
+
+    public void show() {
+        show(null);
+    }
+    public void show(final String message) { 
         if (!hasBeenShown) {
             hasBeenShown = true;
             loadLocation();

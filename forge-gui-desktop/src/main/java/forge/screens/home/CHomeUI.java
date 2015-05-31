@@ -25,6 +25,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
     /** */
     SINGLETON_INSTANCE;
 
+    EDocID currentDocID;
     Object previousDoc = null;
 
     private LblMenuItem lblSelected = new LblMenuItem(VSubmenuConstructed.SINGLETON_INSTANCE);
@@ -38,6 +39,8 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
             lblSelected.setSelected(false);
             lblSelected.repaintSelf();
         }
+
+        currentDocID = id0;
 
         if (previousDoc != null) {
             if (!previousDoc.equals(id0.getDoc().getLayoutControl())) {
@@ -55,6 +58,10 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
         prefs.save();
 
         previousDoc = id0.getDoc().getLayoutControl();
+    }
+
+    public EDocID getCurrentDocID() {
+        return currentDocID;
     }
 
     /** @param lbl0 {@link forge.screens.home.LblMenuItem} */
