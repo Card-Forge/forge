@@ -64,6 +64,11 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IVTop
             });
             container.setLayout(new MigLayout("insets 0, gap 0, ax center, ay center"));
             container.add(btnConnect, "w 300!, h 75!");
+
+            if (container.isShowing()) {
+                container.validate();
+                container.repaint();
+            }
             return;
         }
 
