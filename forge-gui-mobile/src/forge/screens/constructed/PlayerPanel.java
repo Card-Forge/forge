@@ -82,27 +82,14 @@ public class PlayerPanel extends FContainer {
         allowNetworking = allowNetworking0;
         index = index0;
         populateTeamsComboBoxes();
-        if (slot == null) {
-            setTeam(index);
-            if (index > 0) {
-                setType(LobbySlotType.AI);
-            }
-            else {
-                setIsArchenemy(true);
-            }
-            setPlayerName("");
-            setAvatarIndex(0);
-        }
-        else {
-            setTeam(slot.getTeam());
-            setIsArchenemy(slot.isArchenemy());
-            setType(slot.getType());
-            setPlayerName(slot.getName());
-            setAvatarIndex(slot.getAvatarIndex());
-        }
+        setTeam(slot.getTeam());
+        setIsArchenemy(slot.isArchenemy());
+        setType(slot.getType());
+        setPlayerName(slot.getName());
+        setAvatarIndex(slot.getAvatarIndex());
 
         btnDeck.setEnabled(false); //disable deck button until done loading decks
-        
+
         boolean isAi = isAi();
         deckChooser = new FDeckChooser(GameType.Constructed, isAi, new FEventHandler() {
             @Override
@@ -299,9 +286,6 @@ public class PlayerPanel extends FContainer {
         public void handleEvent(FEvent e) {
             boolean wasAi = isAi();
             boolean isAi = humanAiSwitch.isToggled();
-            if (wasAi != isAi) {
-                onIsAiChanged(isAi);
-            }
             if (isAi) {
                 type = LobbySlotType.AI;
             }
@@ -312,6 +296,18 @@ public class PlayerPanel extends FContainer {
             else {
                 type = LobbySlotType.LOCAL;
             }
+
+            if (wasAi != isAi) {
+                onIsAiChanged(isAi);
+            }
+
+            LobbySlot slot = screen.getLobby().getSlot(index);
+            slot.setType(type);
+
+            //update may edit in-case it changed as a result of the AI change
+            setMayEdit(screen.getLobby().mayEdit(index));
+            setAvatarIndex(slot.getAvatarIndex());
+            setPlayerName(slot.getName());
         }
     };
 
@@ -615,6 +611,11 @@ public class PlayerPanel extends FContainer {
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
         updateVariantControlsVisibility();
+
+        //if panel has height already, ensure height updated to account for button visibility changes
+        if (getHeight() > 0) {
+            screen.getPlayersScroll().revalidate();
+        }
     }
 
     public void setMayControl(boolean mayControl0) {

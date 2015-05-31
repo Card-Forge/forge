@@ -11,7 +11,7 @@ import forge.match.LobbySlotType;
 //Temporary lobby instance to use for OnlineLobby before connecting to a server
 public final class OfflineLobby extends GameLobby {
     public OfflineLobby() {
-        super(false);
+        super(true);
 
         final String humanName = localName();
         final int[] avatarIndices = localAvatarIndices();

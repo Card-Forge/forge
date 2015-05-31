@@ -42,24 +42,29 @@ public final class ServerGameLobby extends GameLobby {
         updateView(false);
     }
 
-    @Override public boolean hasControl() {
+    @Override
+    public boolean hasControl() {
         return true;
     }
 
-    @Override public boolean mayEdit(final int index) {
+    @Override
+    public boolean mayEdit(final int index) {
         final LobbySlotType type = getSlot(index).getType();
         return type != LobbySlotType.REMOTE && type != LobbySlotType.OPEN;
     }
 
-    @Override public boolean mayControl(final int index) {
+    @Override
+    public boolean mayControl(final int index) {
         return getSlot(index).getType() != LobbySlotType.REMOTE;
     }
 
-    @Override public boolean mayRemove(final int index) {
+    @Override
+    public boolean mayRemove(final int index) {
         return true;
     }
 
-    @Override protected IGuiGame getGui(final int index) {
+    @Override
+    protected IGuiGame getGui(final int index) {
         return FServerManager.getInstance().getGui(index);
     }
 
