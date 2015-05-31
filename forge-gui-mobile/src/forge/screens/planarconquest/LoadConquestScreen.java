@@ -239,11 +239,6 @@ public class LoadConquestScreen extends LaunchScreen {
         changeConquest();
     }
 
-    @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        return false; //this override isn't needed
-    }
-
     private class ConquestFileLister extends FList<ConquestData> {
         private int selectedIndex = 0;
         

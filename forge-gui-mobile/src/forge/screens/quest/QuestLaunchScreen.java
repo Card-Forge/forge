@@ -21,9 +21,6 @@ public abstract class QuestLaunchScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
-        if (creatingMatch) { return; }
-        creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
-
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
@@ -35,21 +32,14 @@ public abstract class QuestLaunchScreen extends LaunchScreen {
                                 @Override
                                 public void run() {
                                     QuestUtil.finishStartingGame();
-                                    creatingMatch = false;
                                 }
                             });
                         }
                     });
                     return;
                 }
-                creatingMatch = false;
             }
         });
-    }
-
-    @Override
-    protected final boolean buildLaunchParams(LaunchParams launchParams) {
-        return false; //this override isn't needed
     }
 
     public final void update() {

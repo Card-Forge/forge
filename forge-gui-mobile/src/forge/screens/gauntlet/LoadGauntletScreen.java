@@ -24,6 +24,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
+import forge.screens.LoadingOverlay;
 import forge.screens.home.LoadGameMenu;
 import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.settings.SettingsScreen;
@@ -133,19 +134,18 @@ public class LoadGauntletScreen extends LaunchScreen {
             });
             return;
         }
-        super.startMatch();
-    }
 
-    @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        final GauntletData gauntlet = FModel.getGauntletData();
-        launchParams.gameType = GameType.Gauntlet;
-        RegisteredPlayer humanPlayer = new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
-        launchParams.humanPlayers.add(humanPlayer);
-        launchParams.players.add(humanPlayer);
-        launchParams.players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
-        gauntlet.startRound(launchParams.players, humanPlayer);
-        return false; //return false since we're creating the match here
+        LoadingOverlay.show("Loading new game...", new Runnable() {
+            @Override
+            public void run() {
+                final GauntletData gauntlet = FModel.getGauntletData();
+                List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+                RegisteredPlayer humanPlayer = new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+                players.add(humanPlayer);
+                players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
+                gauntlet.startRound(players, humanPlayer);
+            }
+        });
     }
 
     private void renameGauntlet(final GauntletData gauntlet) {

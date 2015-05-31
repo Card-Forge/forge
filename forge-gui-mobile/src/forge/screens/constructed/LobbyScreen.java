@@ -5,37 +5,34 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.google.common.collect.Iterables;
 
 import forge.AIOption;
 import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
-import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
-import forge.game.player.RegisteredPlayer;
 import forge.interfaces.ILobbyView;
 import forge.interfaces.IPlayerChangeListener;
-import forge.item.PaperCard;
 import forge.match.GameLobby;
 import forge.match.LobbySlot;
 import forge.match.LobbySlotType;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.net.event.UpdateLobbyPlayerEvent;
-import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
+import forge.screens.LoadingOverlay;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
@@ -43,7 +40,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Lang;
 import forge.util.Utils;
@@ -65,7 +61,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     // Variants frame and variables
     private final FLabel lblVariants = new FLabel.Builder().text("Variants:").font(VARIANTS_FONT).build();
     private final FComboBox<Object> cbVariants;
-    private final Set<GameType> appliedVariants = new TreeSet<GameType>();
 
     private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
     private final FScrollPane playersScroll = new FScrollPane() {
@@ -131,7 +126,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             @Override
             public void handleEvent(FEvent e) {
                 if (cbVariants.getSelectedIndex() <= 0) {
-                    appliedVariants.clear();
+                    lobby.clearVariants();
                     updateLayoutForVariants();
                 }
                 else if (cbVariants.getSelectedIndex() == cbVariants.getItemCount() - 1) {
@@ -139,8 +134,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     updateVariantSelection();
                 }
                 else {
-                    appliedVariants.clear();
-                    appliedVariants.add((GameType)cbVariants.getSelectedItem());
+                    lobby.clearVariants();
+                    lobby.applyVariant((GameType)cbVariants.getSelectedItem());
                     updateLayoutForVariants();
                 }
             }
@@ -189,10 +184,17 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     private void updateVariantSelection() {
-        if (appliedVariants.isEmpty()) {
+        if (lobby == null) {
+            cbVariants.setSelectedIndex(0);
+            return;
+        }
+
+        Iterable<GameType> appliedVariants = lobby.getAppliedVariants();
+        int size = Iterables.size(appliedVariants);
+        if (size == 0) {
             cbVariants.setSelectedIndex(0);
         }
-        else if (appliedVariants.size() == 1) {
+        else if (size == 1) {
             cbVariants.setSelectedItem(appliedVariants.iterator().next());
         }
         else {
@@ -235,6 +237,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         return playerPanels.get(playernum).getDeckChooser();
     }
 
+    GameType getCurrentGameMode() {
+        return lobby.getGameType();
+    }
+    void setCurrentGameMode(final GameType mode) {
+        lobby.setGameType(mode);
+        update(true);
+    }
+
     public int getNumPlayers() {
         return cbPlayerCount.getSelectedItem();
     }
@@ -243,141 +253,21 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        launchParams.gameType = GameType.Constructed;
-
-        if (!isEnoughTeams()) {
-            FOptionPane.showMessageDialog("There are not enough teams! Please adjust team allocations.");
-            return false;
-        }
-
-        for (int i = 0; i < getNumPlayers(); i++) {
-            if (getDeckChooser(i).getPlayer(true) == null) {
-                FOptionPane.showMessageDialog("Please specify a deck for " + getPlayerName(i));
-                return false;
-            }
-        } // Is it even possible anymore? I think current implementation assigns decks automatically.
-
-        GameType autoGenerateVariant = null;
-        boolean isCommanderMatch = false;
-        if (!appliedVariants.isEmpty()) {
-            launchParams.appliedVariants.addAll(appliedVariants);
-
-            isCommanderMatch = appliedVariants.contains(GameType.Commander);
-            if (!isCommanderMatch) {
-                for (GameType variant : appliedVariants) {
-                    if (variant.isAutoGenerated()) {
-                        autoGenerateVariant = variant;
-                        break;
-                    }
-                }
-            }
-        }
-
-        boolean checkLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
-
-        //Auto-generated decks don't need to be checked here
-        //Commander deck replaces regular deck and is checked later
-        if (checkLegality && autoGenerateVariant == null && !isCommanderMatch) { 
-            for (int i = 0; i < getNumPlayers(); i++) {
-                String name = getPlayerName(i);
-                String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(getDeckChooser(i).getPlayer(false).getDeck());
-                if (errMsg != null) {
-                    FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Deck");
-                    return false;
-                }
-            }
-        }
-
-        int playerCount = getNumPlayers();
-        for (int i = 0; i < playerCount; i++) {
-            PlayerPanel playerPanel = playerPanels.get(i);
-            String name = getPlayerName(i);
-            LobbyPlayer lobbyPlayer = playerPanel.isAi() ? GamePlayerUtil.createAiPlayer(name,
-                    getPlayerAvatar(i)) : GamePlayerUtil.getGuiPlayer(name, playerPanel.getAvatarIndex(), i == 0);
-            RegisteredPlayer rp = playerPanel.getDeckChooser().getPlayer(false);
-
-            if (appliedVariants.isEmpty()) {
-                rp.setTeamNumber(playerPanel.getTeam());
-                launchParams.players.add(rp.setPlayer(lobbyPlayer));
-            }
-            else {
-                Deck deck = null;
-                PaperCard vanguardAvatar = null;
-                if (isCommanderMatch) {
-                    deck = playerPanel.getCommanderDeck();
-                    if (checkLegality) {
-                        String errMsg = GameType.Commander.getDeckFormat().getDeckConformanceProblem(deck);
-                        if (errMsg != null) {
-                            FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Commander Deck");
-                            return false;
+    protected void startMatch() {
+        FThreads.invokeInBackgroundThread(new Runnable() { //must call startGame in background thread in case there are alerts
+            @Override
+            public void run() {
+                final Runnable startGame = lobby.startGame();
+                if (startGame != null) {
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            LoadingOverlay.show("Loading new game...", startGame);
                         }
-                    }
+                    });
                 }
-                else if (autoGenerateVariant != null) {
-                    deck = autoGenerateVariant.autoGenerateDeck(rp);
-                    CardPool avatarPool = deck.get(DeckSection.Avatar);
-                    if (avatarPool != null) {
-                        vanguardAvatar = avatarPool.get(0);
-                    }
-                }
-
-                // Initialize variables for other variants
-                deck = deck == null ? rp.getDeck() : deck;
-                Iterable<PaperCard> schemes = null;
-                boolean playerIsArchenemy = isPlayerArchenemy(i);
-                Iterable<PaperCard> planes = null;
-
-                //Archenemy
-                if (appliedVariants.contains(GameType.ArchenemyRumble)
-                        || (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy)) {
-                    Deck schemeDeck = playerPanel.getSchemeDeck();
-                    CardPool schemePool = schemeDeck.get(DeckSection.Schemes);
-                    if (checkLegality) {
-                        String errMsg = DeckFormat.getSchemeSectionConformanceProblem(schemePool);
-                        if (errMsg != null) {
-                            FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Scheme Deck");
-                            return false;
-                        }
-                    }
-                    schemes = schemePool.toFlatList();
-                }
-
-                //Planechase
-                if (appliedVariants.contains(GameType.Planechase)) {
-                    Deck planarDeck = playerPanel.getPlanarDeck();
-                    CardPool planePool = planarDeck.get(DeckSection.Planes);
-                    if (checkLegality) {
-                        String errMsg = DeckFormat.getPlaneSectionConformanceProblem(planePool);
-                        if (null != errMsg) {
-                            FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Planar Deck");
-                            return false;
-                        }
-                    }
-                    planes = planePool.toFlatList();
-                }
-
-                //Vanguard
-                if (appliedVariants.contains(GameType.Vanguard)) {
-                    vanguardAvatar = playerPanel.getVanguardAvatar();
-                    if (vanguardAvatar == null) {
-                        FOptionPane.showErrorDialog("No Vanguard avatar selected for " + name
-                                + ". Please choose one or disable the Vanguard variant");
-                        return false;
-                    }
-                }
-
-                rp = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, schemes, playerIsArchenemy, planes, vanguardAvatar);
-                rp.setTeamNumber(playerPanel.getTeam());
-                launchParams.players.add(rp.setPlayer(lobbyPlayer));
             }
-            if (!playerPanel.isAi()) {
-                launchParams.humanPlayers.add(rp);
-            }
-            getDeckChooser(i).saveState();
-        }
-
-        return true;
+        });
     }
 
     /** Saves avatar prefs for players one and two. */
@@ -430,24 +320,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         return playerPanels.get(i).getAvatarIndex();
     }
 
-    public boolean isEnoughTeams() {
-        int lastTeam = -1;
-        boolean isArchenemy = hasVariant(GameType.Archenemy);
-        int team;
-
-        for (int i = 0; i < getNumPlayers(); i++) {
-            PlayerPanel panel = playerPanels.get(i);
-            team = isArchenemy ? panel.getArchenemyTeam() : panel.getTeam();
-            if (lastTeam == -1) {
-                lastTeam = team;
-            }
-            else if (lastTeam != team) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /////////////////////////////////////////////
     //========== Various listeners in build order
     
@@ -481,38 +353,15 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             private void draw(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
                 x += w - h;
                 w = h;
-                FCheckBox.drawCheckBox(g, SettingsScreen.DESC_COLOR, color, appliedVariants.contains(gameType), x, y, w, h);
+                FCheckBox.drawCheckBox(g, SettingsScreen.DESC_COLOR, color, lobby.hasVariant(gameType), x, y, w, h);
             }
 
             private void toggle() {
-                if (appliedVariants.contains(gameType)) {
-                    appliedVariants.remove(gameType);
+                if (lobby.hasVariant(gameType)) {
+                    lobby.removeVariant(gameType);
                 }
                 else {
-                    appliedVariants.add(gameType);
-
-                    //only allow setting one of Archenemy or ArchenemyRumble
-                    //don't allow setting MomirBasic along with Vanguard or Commander 
-                    switch (gameType) {
-                    case Archenemy:
-                        appliedVariants.remove(GameType.ArchenemyRumble);
-                        break;
-                    case ArchenemyRumble:
-                        appliedVariants.remove(GameType.Archenemy);
-                        break;
-                    case Commander:
-                        appliedVariants.remove(GameType.MomirBasic);
-                        break;
-                    case Vanguard:
-                        appliedVariants.remove(GameType.MomirBasic);
-                        break;
-                    case MomirBasic:
-                        appliedVariants.remove(GameType.Commander);
-                        appliedVariants.remove(GameType.Vanguard);
-                        break;
-                    default:
-                        break;
-                    }
+                    lobby.applyVariant(gameType);
                 }
                 updateVariantSelection();
                 updateLayoutForVariants();
@@ -549,13 +398,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 g.drawText(value.gameType.getDescription(), SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, HAlignment.LEFT, false);            
             }
         }
-    }
-
-    /////////////////////////////////////
-    //========== METHODS FOR VARIANTS
-
-    public Set<GameType> getAppliedVariants() {
-        return appliedVariants;
     }
 
     public boolean isPlayerAI(final int playernum) {
@@ -722,10 +564,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
     }
 
-    void removePlayer(final int index) {
+    public void removePlayer(final int index) {
         lobby.removeSlot(index);
     }
-    boolean hasVariant(final GameType variant) {
+    public boolean hasVariant(final GameType variant) {
         return lobby.hasVariant(variant);
     }
 

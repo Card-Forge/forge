@@ -16,6 +16,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
+import forge.screens.LoadingOverlay;
 import forge.screens.home.LoadGameMenu;
 import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
@@ -69,23 +70,27 @@ public class LoadSealedScreen extends LaunchScreen {
     }
 
     @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
+    protected void startMatch() {
         final DeckProxy human = lstDecks.getSelectedItem();
         if (human == null) {
             FOptionPane.showErrorDialog("You must select an existing deck or build a deck from a new sealed pool.", "No Deck");
-            return false;
+            return;
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = GameType.Sealed.getDeckFormat().getDeckConformanceProblem(human.getDeck());
             if (errorMessage != null) {
                 FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
-                return false;
+                return;
             }
         }
 
-        final int matches = FModel.getDecks().getSealed().get(human.getName()).getAiDecks().size();
-        FModel.getGauntletMini().launch(matches, human.getDeck(), GameType.Sealed);
-        return false; //prevent launching via launch screen since gauntlet handles it
+        LoadingOverlay.show("Loading new game...", new Runnable() {
+            @Override
+            public void run() {
+                final int matches = FModel.getDecks().getSealed().get(human.getName()).getAiDecks().size();
+                FModel.getGauntletMini().launch(matches, human.getDeck(), GameType.Sealed);
+            }
+        });
     }
 }

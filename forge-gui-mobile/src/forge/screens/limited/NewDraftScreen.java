@@ -63,9 +63,4 @@ public class NewDraftScreen extends LaunchScreen {
             }
         });
     }
-
-    @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        return false; //not needed here
-    }
 }

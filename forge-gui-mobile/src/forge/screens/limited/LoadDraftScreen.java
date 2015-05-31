@@ -73,16 +73,12 @@ public class LoadDraftScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
-        if (creatingMatch) { return; }
-        creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
-
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
                 final DeckProxy humanDeck = lstDecks.getSelectedItem();
                 if (humanDeck == null) {
                     FOptionPane.showErrorDialog("You must select an existing deck or build a deck from a new booster draft game.", "No Deck");
-                    creatingMatch = false;
                     return;
                 }
 
@@ -90,7 +86,6 @@ public class LoadDraftScreen extends LaunchScreen {
                     String errorMessage = GameType.Draft.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
                     if (errorMessage != null) {
                         FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
-                        creatingMatch = false;
                         return;
                     }
                 }
@@ -98,7 +93,6 @@ public class LoadDraftScreen extends LaunchScreen {
                 final Integer rounds = SGuiChoose.getInteger("How many opponents are you willing to face?",
                         1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
                 if (rounds == null) {
-                    creatingMatch = false;
                     return;
                 }
 
@@ -110,17 +104,11 @@ public class LoadDraftScreen extends LaunchScreen {
                             public void run() {
                                 FModel.getGauntletMini().resetGauntletDraft();
                                 FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), GameType.Draft);
-                                creatingMatch = false;
                             }
                         });
                     }
                 });
             }
         });
-    }
-
-    @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        return false; //this override isn't needed
     }
 }

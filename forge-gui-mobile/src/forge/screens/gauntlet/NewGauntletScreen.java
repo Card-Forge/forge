@@ -75,11 +75,6 @@ public class NewGauntletScreen extends LaunchScreen {
         });
     }
 
-    @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        return false; //this override isn't needed
-    }
-
     private void createQuickGauntlet() {
         GuiChoose.getInteger("How many opponents are you willing to face?", 3, 50, new Callback<Integer>() {
             @Override

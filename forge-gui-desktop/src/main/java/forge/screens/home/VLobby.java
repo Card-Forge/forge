@@ -182,8 +182,12 @@ public class VLobby implements ILobbyView {
 
             // Start button event handling
             btnStart.addActionListener(new ActionListener() {
-                @Override public final void actionPerformed(final ActionEvent arg0) {
-                    lobby.startGame();
+                @Override
+                public final void actionPerformed(final ActionEvent arg0) {
+                    Runnable startGame = lobby.startGame();
+                    if (startGame != null) {
+                        startGame.run();
+                    }
                 }
             });
         }

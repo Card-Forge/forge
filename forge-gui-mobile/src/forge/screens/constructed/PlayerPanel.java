@@ -26,6 +26,7 @@ import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.DeckManager;
+import forge.match.GameLobby;
 import forge.match.LobbySlot;
 import forge.match.LobbySlotType;
 import forge.model.FModel;
@@ -64,7 +65,6 @@ public class PlayerPanel extends FContainer {
     private final FTextField txtPlayerName = new FTextField("Player name");
     private final FToggleSwitch humanAiSwitch = new FToggleSwitch("Human", "AI");
 
-    private boolean isArchenemy = false;
     private FComboBox<Object> cbTeam = new FComboBox<Object>();
     private FComboBox<Object> cbArchenemyTeam = new FComboBox<Object>();
 
@@ -267,7 +267,8 @@ public class PlayerPanel extends FContainer {
 
     public float getPreferredHeight() {
         int rows = 3;
-        if (!screen.getAppliedVariants().isEmpty()) {
+        GameLobby lobby = screen.getLobby();
+        if (lobby != null && lobby.hasAnyVariant()) {
             if (!btnDeck.isVisible()) {
                 rows--;
             }
@@ -367,12 +368,12 @@ public class PlayerPanel extends FContainer {
         boolean isArchenemyApplied = false;
         boolean archenemyVisiblity = false;
         boolean isDeckBuildingAllowed = true;
-        
-        for (GameType variant : screen.getAppliedVariants()) {
+
+        for (GameType variant : screen.getLobby().getAppliedVariants()) {
             switch (variant) {
             case Archenemy:
                 isArchenemyApplied = true;
-                if (isArchenemy) {
+                if (isArchenemy()) {
                     archenemyVisiblity = true;
                 }
                 break;
@@ -404,7 +405,6 @@ public class PlayerPanel extends FContainer {
 
         cbTeam.setVisible(!isArchenemyApplied);
         cbArchenemyTeam.setVisible(isArchenemyApplied);
-        cbArchenemyTeam.setEnabled(!(isArchenemyApplied && isArchenemy));
 
         btnPlanarDeck.setVisible(isPlanechaseApplied);
         btnVanguardAvatar.setVisible(isVanguardApplied);
@@ -415,13 +415,15 @@ public class PlayerPanel extends FContainer {
     }
 
     public boolean isArchenemy() {
-        return isArchenemy;
+        return cbArchenemyTeam.getSelectedIndex() == 0;
+    }
+    public void setIsArchenemy(boolean isArchenemy0) {
+        cbArchenemyTeam.setSelectedIndex(isArchenemy0 ? 0 : 1);
     }
 
     private void populateTeamsComboBoxes() {
         cbArchenemyTeam.addItem("Archenemy");
         cbArchenemyTeam.addItem("Heroes");
-        cbArchenemyTeam.setEnabled(isArchenemy);
 
         for (int i = 1; i <= LobbyScreen.MAX_PLAYERS; i++) {
             cbTeam.addItem("Team " + i);
@@ -444,7 +446,7 @@ public class PlayerPanel extends FContainer {
                     for (PlayerPanel pp : screen.getPlayerPanels()) {
                         int i = pp.index;
                         int team = i == screen.lastArchenemy ? 0 : 1;
-                        pp.cbArchenemyTeam.setSelectedIndex(team);
+                        pp.setArchenemyTeam(team);
                         pp.toggleIsPlayerArchenemy();
                     }
                 }
@@ -454,10 +456,10 @@ public class PlayerPanel extends FContainer {
 
     public void toggleIsPlayerArchenemy() {
         if (screen.hasVariant(GameType.Archenemy)) {
-            isArchenemy = screen.lastArchenemy == index;
+            setIsArchenemy(screen.lastArchenemy == index);
         }
         else {
-            isArchenemy = screen.hasVariant(GameType.ArchenemyRumble);
+            setIsArchenemy(screen.hasVariant(GameType.ArchenemyRumble));
         }
         screen.updateLayoutForVariants();
     }
@@ -599,10 +601,6 @@ public class PlayerPanel extends FContainer {
         if (type == LobbySlotType.LOCAL) {
             humanAiSwitch.setOffText(isReady ? "Ready" : "Human");
         }
-    }
-
-    public void setIsArchenemy(boolean isArchenemy0) {
-        isArchenemy = isArchenemy0;
     }
 
     public void setMayEdit(boolean mayEdit0) {

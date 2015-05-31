@@ -244,11 +244,6 @@ public class LoadQuestScreen extends LaunchScreen {
         changeQuest();
     }
 
-    @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        return false; //this override isn't needed
-    }
-
     private class QuestFileLister extends FList<QuestData> {
         private int selectedIndex = 0;
 

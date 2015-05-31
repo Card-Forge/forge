@@ -1,23 +1,10 @@
 package forge.screens;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.badlogic.gdx.Input.Keys;
 
 import forge.Graphics;
-import forge.GuiBase;
 import forge.assets.FSkinImage;
-import forge.game.GameType;
-import forge.game.player.RegisteredPlayer;
-import forge.interfaces.IGuiGame;
-import forge.match.HostedMatch;
 import forge.menu.FPopupMenu;
-import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.util.Utils;
@@ -28,7 +15,6 @@ public abstract class LaunchScreen extends FScreen {
     private static final float PADDING = FOptionPane.PADDING;
 
     protected final StartButton btnStart = add(new StartButton());
-    protected boolean creatingMatch;
 
     public LaunchScreen(String headerCaption) {
         super(headerCaption);
@@ -51,43 +37,7 @@ public abstract class LaunchScreen extends FScreen {
     }
 
     protected abstract void doLayoutAboveBtnStart(float startY, float width, float height);
-    protected abstract boolean buildLaunchParams(LaunchParams launchParams);
-
-    protected class LaunchParams {
-        public GameType gameType;
-        public final List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
-        public final Set<GameType> appliedVariants = new HashSet<GameType>();
-        public final Set<RegisteredPlayer> humanPlayers = new HashSet<RegisteredPlayer>();
-    }
-
-    protected void startMatch() {
-        if (creatingMatch) { return; }
-        creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
-
-        LoadingOverlay.show("Loading new game...", new Runnable() {
-            @Override
-            public void run() {
-                final LaunchParams launchParams = new LaunchParams();
-                if (buildLaunchParams(launchParams)) {
-                    if (launchParams.gameType == null) {
-                        throw new RuntimeException("Must set launchParams.gameType");
-                    }
-                    if (launchParams.players.isEmpty()) {
-                        throw new RuntimeException("Must add at least one player to launchParams.players");
-                    }
-
-                    final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<RegisteredPlayer, IGuiGame>();
-                    for (final RegisteredPlayer human : launchParams.humanPlayers) {
-                        guiMap.put(human, MatchController.instance);
-                    }
-
-                    final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-                    hostedMatch.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players, guiMap);
-                }
-                creatingMatch = false;
-            }
-        });
-    }
+    protected abstract void startMatch();
 
     protected class StartButton extends FDisplayObject {
         private boolean pressed;

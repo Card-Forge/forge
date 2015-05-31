@@ -75,6 +75,10 @@ public abstract class GameLobby {
         currentGameType = type;
     }
 
+    public boolean hasAnyVariant() {
+        return !data.appliedVariants.isEmpty();
+    }
+
     public boolean hasVariant(final GameType variant) {
         return data.appliedVariants.contains(variant);
     }
@@ -254,6 +258,14 @@ public abstract class GameLobby {
         updateView(true);
     }
 
+    public void clearVariants() {
+        data.appliedVariants.clear();
+    }
+
+    public Iterable<GameType> getAppliedVariants() {
+        return data.appliedVariants;
+    }
+
     private boolean isEnoughTeams() {
         int lastTeam = -1;
         final boolean useArchenemyTeams = data.appliedVariants.contains(GameType.Archenemy);
@@ -274,11 +286,11 @@ public abstract class GameLobby {
         }
     }
 
-    /** Starts a match with the applied variants. */
-    public void startGame() {
+    /** Returns a runnable to start a match with the applied variants if allowed. */
+    public Runnable startGame() {
         if (!isEnoughTeams()) {
             SOptionPane.showMessageDialog("There are not enough teams! Please adjust team allocations.");
-            return;
+            return null;
         }
 
         final List<LobbySlot> activeSlots = Lists.newArrayListWithCapacity(getNumberOfSlots());
@@ -291,16 +303,16 @@ public abstract class GameLobby {
         for (final LobbySlot slot : activeSlots) {
             if (!slot.isReady() && slot.getType() != LobbySlotType.OPEN) {
                 SOptionPane.showMessageDialog(String.format("Player %s is not ready", slot.getName()));
-                return;
+                return null;
             }
             if (slot.getDeck() == null) {
                 SOptionPane.showMessageDialog(String.format("Please specify a deck for %s", slot.getName()));
-                return;
+                return null;
             }
             if (hasVariant(GameType.Commander) || hasVariant(GameType.TinyLeaders)) {
                 if (!slot.getDeck().has(DeckSection.Commander)) {
                     SOptionPane.showMessageDialog(String.format("%s doesn't have a commander", slot.getName()));
-                    return;
+                    return null;
                 }
             }
         }
@@ -333,7 +345,7 @@ public abstract class GameLobby {
                 final String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(slot.getDeck());
                 if (null != errMsg) {
                     SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Deck");
-                    return;
+                    return null;
                 }
             }
         }
@@ -377,7 +389,7 @@ public abstract class GameLobby {
                         final String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
                         if (null != errMsg) {
                             SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid " + commanderGameType + " Deck");
-                            return;
+                            return null;
                         }
                     }
                 } else if (autoGenerateVariant != null) {
@@ -403,7 +415,7 @@ public abstract class GameLobby {
                         final String errMsg = DeckFormat.getSchemeSectionConformanceProblem(schemePool);
                         if (null != errMsg) {
                             SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Scheme Deck");
-                            return;
+                            return null;
                         }
                     }
                     schemes = schemePool == null ? Collections.<PaperCard>emptyList() : schemePool.toFlatList();
@@ -416,7 +428,7 @@ public abstract class GameLobby {
                         final String errMsg = DeckFormat.getPlaneSectionConformanceProblem(planePool);
                         if (null != errMsg) {
                             SOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Planar Deck");
-                            return;
+                            return null;
                         }
                     }
                     planes = planePool == null ? Collections.<PaperCard>emptyList() : planePool.toFlatList();
@@ -427,7 +439,7 @@ public abstract class GameLobby {
                     if (vanguardAvatar == null) { //ERROR! null if avatar deselected on list
                         SOptionPane.showMessageDialog("No Vanguard avatar selected for " + name
                                 + ". Please choose one or disable the Vanguard variant");
-                        return;
+                        return null;
                     }
                 }
 
@@ -442,17 +454,23 @@ public abstract class GameLobby {
             playerToSlot.put(rp, slot);
         }
 
-        hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
+        //if above checks succeed, return runnable that can be used to finish starting game
+        return new Runnable() {
+            @Override
+            public void run() {
+                hostedMatch = GuiBase.getInterface().hostMatch();
+                hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
 
-        for (final Player p : hostedMatch.getGame().getPlayers()) {
-            final LobbySlot slot = playerToSlot.get(p.getRegisteredPlayer());
-            if (p.getController() instanceof IGameController) {
-                gameControllers.put(slot, (IGameController) p.getController());
+                for (final Player p : hostedMatch.getGame().getPlayers()) {
+                    final LobbySlot slot = playerToSlot.get(p.getRegisteredPlayer());
+                    if (p.getController() instanceof IGameController) {
+                        gameControllers.put(slot, (IGameController) p.getController());
+                    }
+                }
+
+                onGameStarted();
             }
-        }
-
-        onGameStarted();
+        };
     }
 
     public final static class GameLobbyData implements Serializable {
