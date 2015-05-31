@@ -19,7 +19,7 @@ public final class OfflineLobby extends GameLobby {
         final LobbySlot slot0 = new LobbySlot(LobbySlotType.LOCAL, humanName, avatarIndices[0], 0, true, true, Collections.<AIOption>emptySet());
         addSlot(slot0);
 
-        final LobbySlot slot1 = new LobbySlot(LobbySlotType.OPEN, null, avatarIndices[1], 1, false, false, Collections.<AIOption>emptySet());
+        final LobbySlot slot1 = new LobbySlot(LobbySlotType.OPEN, "Open", avatarIndices[1], 1, false, false, Collections.<AIOption>emptySet());
         addSlot(slot1);
     }
 
