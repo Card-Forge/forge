@@ -519,7 +519,12 @@ public class PlayerPanel extends FContainer {
 
     public void setAvatarIndex(int newAvatarIndex) {
         avatarIndex = newAvatarIndex;
-        avatarLabel.setIcon(new FTextureRegionImage(FSkin.getAvatars().get(newAvatarIndex)));
+        if (avatarIndex != -1) {
+            avatarLabel.setIcon(new FTextureRegionImage(FSkin.getAvatars().get(newAvatarIndex)));
+        }
+        else {
+            avatarLabel.setIcon(null);
+        }
     }
 
     public int getAvatarIndex() {
