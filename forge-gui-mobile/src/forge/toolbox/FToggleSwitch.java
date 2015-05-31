@@ -20,7 +20,7 @@ public class FToggleSwitch extends FDisplayObject {
     private static final float PADDING = Utils.scale(3);
 
     private FSkinFont font;
-    private final String offText, onText;
+    private String offText, onText;
     private boolean toggled, pressed;
     private FEventHandler changedHandler;
 
@@ -32,6 +32,19 @@ public class FToggleSwitch extends FDisplayObject {
         offText = offText0;
         onText = onText0;
         font = FSkinFont.get(14);
+    }
+
+    public String getOffText() {
+        return offText;
+    }
+    public void setOffText(String offText0) {
+        offText = offText0;
+    }
+    public String getOnText() {
+        return onText;
+    }
+    public void setOnText(String onText0) {
+        onText = onText0;
     }
 
     public void setFontSize(int fontSize0) {

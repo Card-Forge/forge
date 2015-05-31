@@ -240,7 +240,7 @@ public class VLobby implements ILobbyView {
                 final LobbySlotType type = slot.getType();
                 panel.setType(type);
                 panel.setPlayerName(slot.getName());
-                panel.setAvatar(slot.getAvatarIndex());
+                panel.setAvatarIndex(slot.getAvatarIndex());
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
                 panel.setIsArchenemy(slot.isArchenemy());

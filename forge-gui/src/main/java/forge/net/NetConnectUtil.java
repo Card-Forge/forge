@@ -152,14 +152,14 @@ public class NetConnectUtil {
 
     private final static SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
 
-    public static String formatMessage(final String origin, final String message) {
+    public static String formatMessage(final String source, final String message) {
         final String now = inFormat.format(new Date());
         final String toAdd;
-        if (origin == null) {
+        if (source == null) {
             toAdd = String.format("%n[%s] %s", now, message);
         }
         else {
-            toAdd = String.format("%n[%s] %s: %s", now, origin, message);
+            toAdd = String.format("%n[%s] %s: %s", now, source, message);
         }
         return toAdd;
     }

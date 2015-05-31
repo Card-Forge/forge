@@ -145,7 +145,7 @@ public class PlayerPanel extends FPanel {
         teamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
         aeTeamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
 
-        createReadyButtion();
+        createReadyButton();
         if (allowNetworking) {
             this.add(radioOpen, "cell 4 1, ax left, sx 2");
             this.add(chkReady, "cell 5 1, ax left, sx 2, wrap");
@@ -181,7 +181,7 @@ public class PlayerPanel extends FPanel {
 
         this.type = slot == null ? LobbySlotType.LOCAL : slot.getType();
         this.setPlayerName(slot == null ? "" : slot.getName());
-        this.setAvatar(slot == null ? 0 : slot.getAvatarIndex());
+        this.setAvatarIndex(slot == null ? 0 : slot.getAvatarIndex());
 
         update();
     }
@@ -282,7 +282,7 @@ public class PlayerPanel extends FPanel {
                 lbl.setCommand(new UiCommand() {
                     @Override
                     public void run() {
-                        setAvatar(Integer.valueOf(lbl.getName().substring(11)));
+                        setAvatarIndex(Integer.valueOf(lbl.getName().substring(11)));
                         aSel.setVisible(false);
                     }
                 });
@@ -374,7 +374,7 @@ public class PlayerPanel extends FPanel {
         return radioAi.isSelected() && radioAiUseSimulation.isSelected();
     }
     public void setUseAiSimulation(final boolean useSimulation) {
-        radioAi.setSelected(useSimulation);
+        radioAiUseSimulation.setSelected(useSimulation);
     }
 
     public boolean isLocal() {
@@ -563,7 +563,7 @@ public class PlayerPanel extends FPanel {
         tempBtnGroup.add(radioOpen);
     }
 
-    private void createReadyButtion() {
+    private void createReadyButton() {
         chkReady = new FCheckBox("Ready");
         chkReady.addActionListener(new ActionListener() {
             @Override public final void actionPerformed(final ActionEvent e) {
@@ -677,7 +677,7 @@ public class PlayerPanel extends FPanel {
         do {
             random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
         } while (usedAvatars.contains(random));
-        setAvatar(random);
+        setAvatarIndex(random);
 
         if (fireListeners) {
             lobby.firePlayerChangeListener(index);
@@ -702,9 +702,9 @@ public class PlayerPanel extends FPanel {
     public int getAvatarIndex() {
         return avatarIndex;
     }
-    public void setAvatar(final int newAvatarIndex) {
-        avatarIndex = newAvatarIndex;
-        final SkinImage icon = FSkin.getAvatars().get(newAvatarIndex);
+    public void setAvatarIndex(final int avatarIndex0) {
+        avatarIndex = avatarIndex0;
+        final SkinImage icon = FSkin.getAvatars().get(avatarIndex);
         avatarLabel.setIcon(icon);
         avatarLabel.repaintSelf();
     }
