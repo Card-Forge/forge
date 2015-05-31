@@ -167,8 +167,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                         }
                     });
                 }
-                else { //handle offline lobby case
-                    playerPanels.get(1).setDeckSelectorButtonText("Waiting for opponent...");
+                else {
                     Gdx.graphics.requestRendering();
                 }
             }

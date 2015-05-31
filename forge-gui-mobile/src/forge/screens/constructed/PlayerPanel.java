@@ -26,7 +26,6 @@ import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.DeckManager;
-import forge.match.GameLobby;
 import forge.match.LobbySlot;
 import forge.match.LobbySlotType;
 import forge.model.FModel;
@@ -201,8 +200,6 @@ public class PlayerPanel extends FContainer {
         setMayEdit(mayEdit0);
         setMayControl(mayControl0);
 
-        updateVariantControlsVisibility();
-
         //disable team combo boxes for now
         cbTeam.setEnabled(false);
     }
@@ -268,23 +265,20 @@ public class PlayerPanel extends FContainer {
 
     public float getPreferredHeight() {
         int rows = 3;
-        GameLobby lobby = screen.getLobby();
-        if (lobby != null && lobby.hasAnyVariant()) {
-            if (!btnDeck.isVisible()) {
-                rows--;
-            }
-            if (btnCommanderDeck.isVisible()) {
-                rows++;
-            }
-            if (btnSchemeDeck.isVisible()) {
-                rows++;
-            }
-            if (btnPlanarDeck.isVisible()) {
-                rows++;
-            }
-            if (btnVanguardAvatar.isVisible()) {
-                rows++;
-            }
+        if (!btnDeck.isVisible()) {
+            rows--;
+        }
+        if (btnCommanderDeck.isVisible()) {
+            rows++;
+        }
+        if (btnSchemeDeck.isVisible()) {
+            rows++;
+        }
+        if (btnPlanarDeck.isVisible()) {
+            rows++;
+        }
+        if (btnVanguardAvatar.isVisible()) {
+            rows++;
         }
         return rows * (txtPlayerName.getHeight() + PADDING) + PADDING;
     }
@@ -368,7 +362,7 @@ public class PlayerPanel extends FContainer {
         boolean isVanguardApplied = false;
         boolean isArchenemyApplied = false;
         boolean archenemyVisiblity = false;
-        boolean isDeckBuildingAllowed = true;
+        boolean isDeckBuildingAllowed = mayEdit;
 
         for (GameType variant : screen.getLobby().getAppliedVariants()) {
             switch (variant) {
@@ -400,15 +394,15 @@ public class PlayerPanel extends FContainer {
         }
 
         btnDeck.setVisible(isDeckBuildingAllowed);
-        btnCommanderDeck.setVisible(isCommanderApplied);
+        btnCommanderDeck.setVisible(isCommanderApplied && mayEdit);
 
-        btnSchemeDeck.setVisible(archenemyVisiblity);
+        btnSchemeDeck.setVisible(archenemyVisiblity && mayEdit);
 
         cbTeam.setVisible(!isArchenemyApplied);
         cbArchenemyTeam.setVisible(isArchenemyApplied);
 
-        btnPlanarDeck.setVisible(isPlanechaseApplied);
-        btnVanguardAvatar.setVisible(isVanguardApplied);
+        btnPlanarDeck.setVisible(isPlanechaseApplied && mayEdit);
+        btnVanguardAvatar.setVisible(isVanguardApplied && mayEdit);
     }
 
     public boolean isAi() {
@@ -615,7 +609,7 @@ public class PlayerPanel extends FContainer {
         avatarLabel.setEnabled(mayEdit);
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
-        btnDeck.setVisible(mayEdit);
+        updateVariantControlsVisibility();
     }
 
     public void setMayControl(boolean mayControl0) {
