@@ -35,8 +35,8 @@ import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.gui.CardDetailPanel;
+import forge.interfaces.ILobbyView;
 import forge.interfaces.IPlayerChangeListener;
-import forge.interfaces.IUpdateable;
 import forge.item.PaperCard;
 import forge.match.GameLobby;
 import forge.match.LobbySlot;
@@ -66,7 +66,7 @@ import forge.util.storage.IStorage;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public class VLobby implements IUpdateable {
+public class VLobby implements ILobbyView {
 
     static final int MAX_PLAYERS = 8;
     private static final ForgePreferences prefs = FModel.getPreferences();

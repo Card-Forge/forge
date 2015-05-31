@@ -17635,6 +17635,7 @@ forge-gui/src/main/java/forge/interfaces/IGameController.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiGame.java -text
 forge-gui/src/main/java/forge/interfaces/ILobbyListener.java -text
+forge-gui/src/main/java/forge/interfaces/ILobbyView.java -text
 forge-gui/src/main/java/forge/interfaces/IMayViewCards.java -text
 forge-gui/src/main/java/forge/interfaces/IPlayerChangeListener.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
@@ -17711,7 +17712,10 @@ forge-gui/src/main/java/forge/model/UnOpenedMeta.java -text
 forge-gui/src/main/java/forge/model/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/net/GameProtocolHandler.java -text
 forge-gui/src/main/java/forge/net/GameProtocolSender.java -text
+forge-gui/src/main/java/forge/net/IOnlineChatInterface.java -text
+forge-gui/src/main/java/forge/net/IOnlineLobby.java -text
 forge-gui/src/main/java/forge/net/IRemote.java -text
+forge-gui/src/main/java/forge/net/NetConnectUtil.java -text
 forge-gui/src/main/java/forge/net/ProtocolMethod.java -text
 forge-gui/src/main/java/forge/net/ReplyPool.java -text
 forge-gui/src/main/java/forge/net/client/ClientGameLobby.java -text

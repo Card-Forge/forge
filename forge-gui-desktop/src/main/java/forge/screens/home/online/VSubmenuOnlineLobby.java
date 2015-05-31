@@ -15,7 +15,9 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
+import forge.interfaces.ILobbyView;
 import forge.match.GameLobby;
+import forge.net.IOnlineLobby;
 import forge.net.client.FGameClient;
 import forge.net.server.FServerManager;
 import forge.screens.home.EMenuGroup;
@@ -26,7 +28,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FSkin;
 import forge.util.gui.SOptionPane;
 
-public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IVTopLevelUI {
+public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnlineLobby, IVTopLevelUI {
     SINGLETON_INSTANCE;
 
     private DragCell parentCell;
@@ -37,13 +39,13 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IVTop
     private VSubmenuOnlineLobby() {
     }
 
-    VLobby setLobby(final GameLobby lobby) {
+    public ILobbyView setLobby(final GameLobby lobby) {
         this.lobby = new VLobby(lobby);
         getLayoutControl().setLobby(this.lobby);
         return this.lobby;
     }
 
-    void setClient(final FGameClient client) {
+    public void setClient(final FGameClient client) {
         this.client = client;
     }
 

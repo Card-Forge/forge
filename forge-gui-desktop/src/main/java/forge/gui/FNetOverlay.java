@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Singletons;
 import forge.gui.framework.SDisplayUtil;
 import forge.model.FModel;
+import forge.net.IOnlineChatInterface;
 import forge.net.IRemote;
 import forge.net.event.MessageEvent;
 import forge.properties.ForgePreferences;
@@ -34,7 +35,7 @@ import forge.view.FDialog;
 import forge.view.FFrame;
 
 
-public enum FNetOverlay {
+public enum FNetOverlay implements IOnlineChatInterface {
     SINGLETON_INSTANCE;
 
     private static final String COORD_DELIM = ",";
