@@ -40,7 +40,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FToggleSwitch;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FEvent.FEventType;
 import forge.util.Callback;
 import forge.util.Lang;
 import forge.util.NameGenerator;
@@ -53,6 +52,7 @@ public class PlayerPanel extends FContainer {
 
     private final LobbyScreen screen;
     private final int index;
+    private final boolean allowNetworking;
     private boolean mayEdit = true;
     private boolean isReady, mayControl, mayRemove, useAiSimulation;
     private LobbySlotType type = LobbySlotType.LOCAL;
@@ -77,9 +77,10 @@ public class PlayerPanel extends FContainer {
     private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstPlanarDecks;
     private final FVanguardChooser lstVanguardAvatars;
 
-    public PlayerPanel(final LobbyScreen screen0, final boolean allowNetworking, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
+    public PlayerPanel(final LobbyScreen screen0, final boolean allowNetworking0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
         super();
         screen = screen0;
+        allowNetworking = allowNetworking0;
         index = index0;
         setMayEdit(mayEdit0);
         setMayControl(mayControl0);
@@ -295,14 +296,31 @@ public class PlayerPanel extends FContainer {
     private final FEventHandler humanAiSwitched = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            boolean isAi = isAi();
-            deckChooser.setIsAi(isAi);
-            lstCommanderDecks.setIsAi(isAi);
-            lstPlanarDecks.setIsAi(isAi);
-            lstSchemeDecks.setIsAi(isAi);
-            lstVanguardAvatars.setIsAi(isAi);
+            boolean wasAi = isAi();
+            boolean isAi = humanAiSwitch.isToggled();
+            if (wasAi != isAi) {
+                onIsAiChanged(isAi);
+            }
+            if (isAi) {
+                type = LobbySlotType.AI;
+            }
+            else if (allowNetworking && index > 0) {
+                type = isReady ? LobbySlotType.REMOTE : LobbySlotType.OPEN;
+                humanAiSwitch.setOffText(isReady ? "Ready" : "Open");
+            }
+            else {
+                type = LobbySlotType.LOCAL;
+            }
         }
     };
+
+    private void onIsAiChanged(boolean isAi) {
+        deckChooser.setIsAi(isAi);
+        lstCommanderDecks.setIsAi(isAi);
+        lstPlanarDecks.setIsAi(isAi);
+        lstSchemeDecks.setIsAi(isAi);
+        lstVanguardAvatars.setIsAi(isAi);
+    }
 
     //Listens to name text fields and gives the appropriate player focus.
     //Also saves the name preference when leaving player one's text field. */
@@ -520,7 +538,7 @@ public class PlayerPanel extends FContainer {
         if (type == type0) { return; }
 
         boolean wasAi = isAi();
-        
+
         type = type0;
 
         switch (type) {
@@ -542,7 +560,7 @@ public class PlayerPanel extends FContainer {
 
         boolean isAi = isAi();
         if (isAi != wasAi && deckChooser != null) {
-            humanAiSwitched.handleEvent(new FEvent(this, FEventType.CHANGE, isAi));
+            onIsAiChanged(isAi);
         }
     }
 
