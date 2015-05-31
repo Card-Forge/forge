@@ -944,9 +944,7 @@ forge-gui-desktop/src/main/java/forge/screens/home/gauntlet/VSubmenuGauntletBuil
 forge-gui-desktop/src/main/java/forge/screens/home/gauntlet/VSubmenuGauntletContests.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/gauntlet/VSubmenuGauntletLoad.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/gauntlet/VSubmenuGauntletQuick.java -text
-forge-gui-desktop/src/main/java/forge/screens/home/online/COnlineLobby.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/online/CSubmenuOnlineLobby.java -text
-forge-gui-desktop/src/main/java/forge/screens/home/online/VOnlineLobby.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/online/VSubmenuOnlineLobby.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/package-info.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuChallenges.java -text

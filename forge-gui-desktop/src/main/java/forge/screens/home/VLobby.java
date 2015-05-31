@@ -154,7 +154,8 @@ public class VLobby implements IUpdateable {
         if (lobby.hasControl()) {
             addPlayerBtn.setFocusable(true);
             addPlayerBtn.setCommand(new Runnable() {
-                @Override public final void run() {
+                @Override
+                public final void run() {
                     lobby.addSlot();
                 }
             });
