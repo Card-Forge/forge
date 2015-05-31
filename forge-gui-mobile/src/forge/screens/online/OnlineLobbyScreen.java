@@ -1,11 +1,17 @@
 package forge.screens.online;
 
+import forge.FThreads;
+import forge.Forge;
 import forge.interfaces.ILobbyView;
 import forge.match.GameLobby;
+import forge.net.IOnlineChatInterface;
 import forge.net.IOnlineLobby;
+import forge.net.NetConnectUtil;
 import forge.net.OfflineLobby;
 import forge.net.client.FGameClient;
+import forge.screens.LoadingOverlay;
 import forge.screens.constructed.LobbyScreen;
+import forge.screens.online.OnlineMenu.OnlineScreen;
 
 public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
     public OnlineLobbyScreen() {
@@ -22,5 +28,44 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
     public void setClient(FGameClient client) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public void onActivate() {
+        if (getLobby() instanceof OfflineLobby) {
+            //prompt to connect to server when offline lobby activated
+            FThreads.invokeInBackgroundThread(new Runnable() {
+                @Override
+                public void run() {
+                    final String url = NetConnectUtil.getServerUrl();
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (url == null) {
+                                Forge.back(); //go back to previous screen if user cancels connection
+                                return;
+                            }
+
+                            final boolean joinServer = url.length() > 0;
+                            final String caption = joinServer ? "Starting server..." : "Connecting to server...";
+                            LoadingOverlay.show(caption, new Runnable() {
+                                @Override
+                                public void run() {
+                                    final String result;
+                                    final IOnlineChatInterface chatInterface = (IOnlineChatInterface)OnlineScreen.Chat.getScreen();
+                                    if (joinServer) {
+                                        result = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
+                                    }
+                                    else {
+                                        result = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
+                                    }
+                                    chatInterface.addMessage(result);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
     }
 }

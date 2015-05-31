@@ -55,6 +55,11 @@ public class OnlineMenu extends FPopupMenu {
             initializeScreen();
             Forge.setBackScreen(screen);
         }
+
+        public FScreen getScreen() {
+            initializeScreen();
+            return screen;
+        }
     }
 
     private static final ForgePreferences prefs = FModel.getPreferences();
