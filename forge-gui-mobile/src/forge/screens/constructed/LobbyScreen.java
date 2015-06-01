@@ -23,7 +23,6 @@ import forge.interfaces.IPlayerChangeListener;
 import forge.match.GameLobby;
 import forge.match.LobbySlot;
 import forge.match.LobbySlotType;
-import forge.match.LocalLobby;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.net.event.UpdateLobbyPlayerEvent;
@@ -246,6 +245,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     @Override
     protected void startMatch() {
+        if (lobby.isAllowNetworking()) { //flag that player 1 is ready when Start button tapped
+            lobby.getSlot(0).setIsReady(true);
+        }
         for (int i = 0; i < getNumPlayers(); i++) {
             updateDeck(i);
         }
