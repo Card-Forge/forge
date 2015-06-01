@@ -17,88 +17,6 @@
  */
 package forge.toolbox;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Composite;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Frame;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.LayoutManager;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Vector;
-
-import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ComboBoxModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.ListModel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
-import javax.swing.text.JTextComponent;
-
-import org.apache.commons.lang3.text.WordUtils;
-
 import forge.FThreads;
 import forge.Singletons;
 import forge.assets.FSkinProp;
@@ -110,18 +28,40 @@ import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
+import org.apache.commons.lang3.text.WordUtils;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
+import javax.swing.text.JTextComponent;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
  * hashtable, access using .get(settingName) method.
  */
+@SuppressWarnings("unused")
 public class FSkin {
 
     /**
      * Retrieves a color from this skin's color map.
      *
      * @param c0 &emsp; Colors property (from enum)
-     * @return {@link forge.toolbox.SkinColor}
+     * @return {@link forge.toolbox.FSkin.SkinColor}
      */
     public static SkinColor getColor(final Colors c0) {
         return SkinColor.baseColors.get(c0);
@@ -167,7 +107,8 @@ public class FSkin {
     }
 
     /**
-     * @see http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
+     * @see <a href="http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx">
+     *     http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx</a>
      */
     public static boolean isColorBright(final Color c) {
         final int v = (int)Math.sqrt(
@@ -202,8 +143,8 @@ public class FSkin {
     }
 
     public static class SkinColor {
-        private static final HashMap<Colors, SkinColor> baseColors = new HashMap<Colors, SkinColor>();
-        private static final HashMap<String, SkinColor> derivedColors = new HashMap<String, SkinColor>();
+        private static final HashMap<Colors, SkinColor> baseColors = new HashMap<>();
+        private static final HashMap<String, SkinColor> derivedColors = new HashMap<>();
         private static final int NO_BRIGHTNESS_DELTA = 0;
         private static final int NO_STEP = -999; //needs to be large negative since small negative values are valid
         private static final int NO_ALPHA = -1;
@@ -419,7 +360,7 @@ public class FSkin {
         private Color color;
         private final FSkinProp skinProp;
 
-        private Colors(final FSkinProp skinProp0) {
+        Colors(final FSkinProp skinProp0) {
             skinProp = skinProp0;
         }
 
@@ -436,7 +377,7 @@ public class FSkin {
             for (final Colors c : Colors.values()) {
                 c.updateColor();
             }
-            if (SkinColor.baseColors.size() == 0) { //initialize base skin colors if needed
+            if (SkinColor.baseColors.isEmpty()) { //initialize base skin colors if needed
                 for (final Colors c : Colors.values()) {
                     SkinColor.baseColors.put(c, new SkinColor(c));
                 }
@@ -474,7 +415,7 @@ public class FSkin {
      * Gets an image.
      *
      * @param s0 &emsp; FSkinProp enum
-     * @return {@link forge.toolbox.SkinImage}
+     * @return {@link forge.toolbox.FSkin.SkinImage}
      */
     public static SkinImage getImage(final FSkinProp s0) {
         SkinImage image = SkinImage.images.get(s0);
@@ -496,7 +437,7 @@ public class FSkin {
      *            int new width
      * @param h0
      *            int new height
-     * @return {@link forge.toolbox.SkinImage}
+     * @return {@link forge.toolbox.FSkin.SkinImage}
      */
     public static SkinImage getImage(final FSkinProp s0, int w0, int h0) {
         w0 = (w0 < 1) ? 1 : w0;
@@ -505,7 +446,7 @@ public class FSkin {
     }
 
     public static class SkinImage implements ISkinImage {
-        private static final Map<FSkinProp, SkinImage> images = new HashMap<FSkinProp, SkinImage>();
+        private static final Map<FSkinProp, SkinImage> images = new HashMap<>();
 
         private static void setImage(final FSkinProp s0, final Image image0) {
             SkinImage skinImage = images.get(s0);
@@ -520,7 +461,6 @@ public class FSkin {
 
         /**
          * setImage, with auto-scaling assumed true.
-         *
          * @param s0
          */
         private static void setImage(final FSkinProp s0) {
@@ -580,7 +520,7 @@ public class FSkin {
 
         public SkinImage resize(final int w, final int h) {
             if (this.scaledImages == null) {
-                this.scaledImages = new HashMap<String, SkinImage>();
+                this.scaledImages = new HashMap<>();
             }
             final String key = w + "x" + h;
             SkinImage scaledImage = this.scaledImages.get(key);
@@ -615,7 +555,7 @@ public class FSkin {
         }
         public SkinImage scale(final double scaleX, final double scaleY) {
             if (this.scaledImages == null) {
-                this.scaledImages = new HashMap<String, SkinImage>();
+                this.scaledImages = new HashMap<>();
             }
             final String key = scaleX + "|" + scaleY;
             SkinImage scaledImage = this.scaledImages.get(key);
@@ -659,7 +599,7 @@ public class FSkin {
 
         private SkinCursor toCursor(final int hotSpotX, final int hotSpotY, final String name) {
             if (this.cursors == null) {
-                this.cursors = new HashMap<String, SkinCursor>();
+                this.cursors = new HashMap<>();
             }
             final String key = hotSpotX + "|" + hotSpotY + "|" + name;
             SkinCursor cursor = this.cursors.get(key);
@@ -716,7 +656,7 @@ public class FSkin {
      * Gets an image.
      *
      * @param s0 &emsp; FSkinProp enum
-     * @return {@link forge.toolbox.SkinCursor}
+     * @return {@link forge.toolbox.FSkin.SkinCursor}
      */
     public static SkinCursor getCursor(final FSkinProp s0, final int hotSpotX, final int hotSpotY, final String name) {
         return getImage(s0).toCursor(hotSpotX, hotSpotY, name);
@@ -743,7 +683,7 @@ public class FSkin {
      * Gets an icon.
      *
      * @param s0 &emsp; FSkinProp enum
-     * @return {@link forge.toolbox.SkinImage}
+     * @return {@link forge.toolbox.FSkin.SkinImage}
      */
     public static SkinIcon getIcon(final FSkinProp s0) {
         final SkinIcon icon = SkinIcon.icons.get(s0);
@@ -754,7 +694,7 @@ public class FSkin {
     }
 
     public static class SkinIcon extends SkinImage {
-        private static final Map<FSkinProp, SkinIcon> icons = new HashMap<FSkinProp, SkinIcon>();
+        private static final Map<FSkinProp, SkinIcon> icons = new HashMap<>();
 
         private static void setIcon(final FSkinProp s0, final ImageIcon imageIcon0) {
             SkinIcon skinIcon = icons.get(s0);
@@ -914,7 +854,7 @@ public class FSkin {
     }
 
     private static Map<Integer, SkinImage> avatars;
-    private static Map<Integer, Font> fixedFonts = new HashMap<Integer, Font>();
+    private static Map<Integer, Font> fixedFonts = new HashMap<>();
 
     /** @return {@link java.awt.font} */
     public static Font getFixedFont(final int size) {
@@ -927,7 +867,7 @@ public class FSkin {
     }
 
     /**
-     * @return {@link forge.toolbox.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getFont() {
         return getFont(defaultFontSize);
@@ -935,14 +875,14 @@ public class FSkin {
 
     /**
      * @param size - integer, pixel size
-     * @return {@link forge.toolbox.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getFont(final int size) {
         return SkinFont.get(Font.PLAIN, size);
     }
 
     /**
-     * @return {@link forge.toolbox.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getBoldFont() {
         return getBoldFont(defaultFontSize);
@@ -950,14 +890,14 @@ public class FSkin {
 
     /**
      * @param size - integer, pixel size
-     * @return {@link forge.toolbox.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getBoldFont(final int size) {
         return SkinFont.get(Font.BOLD, size);
     }
 
     /**
-     * @return {@link forge.toolbox.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getItalicFont() {
         return getItalicFont(defaultFontSize);
@@ -965,7 +905,7 @@ public class FSkin {
 
     /**
      * @param size - integer, pixel size
-     * @return {@link forge.toolbox.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getItalicFont(final int size) {
         return SkinFont.get(Font.ITALIC, size);
@@ -977,7 +917,7 @@ public class FSkin {
 
     public static class SkinFont {
         private static Font baseFont;
-        private static Map<String, SkinFont> fonts = new HashMap<String, SkinFont>();
+        private static Map<String, SkinFont> fonts = new HashMap<>();
 
         private static SkinFont get(final int style0, final int size0) {
             final String key = style0 + "|" + size0;
@@ -1099,10 +1039,10 @@ public class FSkin {
             FThreads.assertExecutedByEdt(false);
 
             if (allSkins == null) { //initialize
-                allSkins = new ArrayList<String>();
+                allSkins = new ArrayList<>();
                 final List<String> skinDirectoryNames = getSkinDirectoryNames();
-                for (int i = 0; i < skinDirectoryNames.size(); i++) {
-                    allSkins.add(WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' ')));
+                for (String skinDirectoryName : skinDirectoryNames) {
+                    allSkins.add(WordUtils.capitalize(skinDirectoryName.replace('_', ' ')));
                 }
                 Collections.sort(allSkins);
             }
@@ -1120,7 +1060,7 @@ public class FSkin {
                 if (skinName.equals("default")) {
                     throw new RuntimeException("Cannot find default skin.");
                 }
-                loadLight("default", onInit);
+                loadLight("default", true);
                 return;
             }
 
@@ -1172,7 +1112,7 @@ public class FSkin {
 
             // Preferred skin name must be called via loadLight() method,
             // which does some cleanup and init work.
-            if (preferredName.isEmpty()) { loadLight("default", onInit); }
+            if (preferredName.isEmpty()) { loadLight("default", true); }
         }
 
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 7);
@@ -1285,7 +1225,9 @@ public class FSkin {
         //establish encoding symbols
         final File dir = new File(ForgeConstants.CACHE_SYMBOLS_DIR);
         if (!dir.mkdir()) { //ensure symbols directory exists and is empty
-            for (final File file : dir.listFiles()) {
+            File[] files = dir.listFiles();
+            assert files != null;
+            for (final File file : files) {
                 file.delete();
             }
         }
@@ -1338,17 +1280,21 @@ public class FSkin {
      * @return the skins
      */
     public static List<String> getSkinDirectoryNames() {
-        final List<String> mySkins = new ArrayList<String>();
+        final List<String> mySkins = new ArrayList<>();
 
         final File dir = new File(ForgeConstants.SKINS_DIR);
         final String[] children = dir.list();
         if (children == null) {
             System.err.println("FSkin > can't find skins directory!");
         } else {
-            for (int i = 0; i < children.length; i++) {
-                if (children[i].equalsIgnoreCase(".svn")) { continue; }
-                if (children[i].equalsIgnoreCase(".DS_Store")) { continue; }
-                mySkins.add(children[i]);
+            for (String aChildren : children) {
+                if (aChildren.equalsIgnoreCase(".svn")) {
+                    continue;
+                }
+                if (aChildren.equalsIgnoreCase(".DS_Store")) {
+                    continue;
+                }
+                mySkins.add(aChildren);
             }
         }
 
@@ -1359,7 +1305,6 @@ public class FSkin {
         return allSkins;
     }
 
-    /** @return Map<Integer, Image> */
     public static Map<Integer, SkinImage> getAvatars() {
         return avatars;
     }
@@ -1367,11 +1312,9 @@ public class FSkin {
     public static boolean isLoaded() { return loaded; }
 
     /**
-     * <p>
-     * getColorFromPixel.
-     * </p>
-     *
-     * @param {@link java.lang.Integer} pixel information
+     * getColorFromPixel
+     * @param pixel
+     * @return
      */
     private static Color getColorFromPixel(final int pixel) {
         int r, g, b, a;
@@ -1403,7 +1346,7 @@ public class FSkin {
 
         // Test if various points of requested sub-image are transparent.
         // If any return true, image exists.
-        int x = 0, y = 0;
+        int x, y;
         Color c;
 
         // Center
@@ -1433,7 +1376,7 @@ public class FSkin {
     }
 
     private static void assembleAvatars() {
-        avatars = new HashMap<Integer, SkinImage>();
+        avatars = new HashMap<>();
         int counter = 0;
         Color pxTest;
 
@@ -1449,17 +1392,22 @@ public class FSkin {
                     avatars.put(counter++, new SkinImage(bimPreferredAvatars.getSubimage(i, j, 100, 100)));
                 }
             }
-        }
+        } else {
 
-        final int aw = bimDefaultAvatars.getWidth();
-        final int ah = bimDefaultAvatars.getHeight();
+            final int aw = bimDefaultAvatars.getWidth();
+            final int ah = bimDefaultAvatars.getHeight();
 
-        for (int j = 0; j < ah; j += 100) {
-            for (int i = 0; i < aw; i += 100) {
-                if (i == 0 && j == 0) { continue; }
-                pxTest = getColorFromPixel(bimDefaultAvatars.getRGB(i + 50, j + 50));
-                if (pxTest.getAlpha() == 0) { continue; }
-                avatars.put(counter++, new SkinImage(bimDefaultAvatars.getSubimage(i, j, 100, 100)));
+            for (int j = 0; j < ah; j += 100) {
+                for (int i = 0; i < aw; i += 100) {
+                    if (i == 0 && j == 0) {
+                        continue;
+                    }
+                    pxTest = getColorFromPixel(bimDefaultAvatars.getRGB(i + 50, j + 50));
+                    if (pxTest.getAlpha() == 0) {
+                        continue;
+                    }
+                    avatars.put(counter++, new SkinImage(bimDefaultAvatars.getSubimage(i, j, 100, 100)));
+                }
             }
         }
     }
@@ -1787,8 +1735,8 @@ public class FSkin {
         }
     }
 
-    public static interface ISkinnedComponent<T extends Component> {
-        public ComponentSkin<T> getSkin();
+    public interface ISkinnedComponent<T extends Component> {
+        ComponentSkin<T> getSkin();
     }
 
     public static class SkinnedFrame extends JFrame implements ISkinnedComponent<JFrame> {
@@ -1799,7 +1747,7 @@ public class FSkin {
         private WindowSkin<JFrame> skin;
         @Override
         public WindowSkin<JFrame> getSkin() {
-            if (skin == null) { skin = new WindowSkin<JFrame>(); }
+            if (skin == null) { skin = new WindowSkin<>(); }
             return skin;
         }
 
@@ -1840,7 +1788,7 @@ public class FSkin {
         private WindowSkin<JDialog> skin;
         @Override
         public WindowSkin<JDialog> getSkin() {
-            if (skin == null) { skin = new WindowSkin<JDialog>(); }
+            if (skin == null) { skin = new WindowSkin<>(); }
             return skin;
         }
 
@@ -1880,7 +1828,7 @@ public class FSkin {
         private JComponentSkin<JLayeredPane> skin;
         @Override
         public JComponentSkin<JLayeredPane> getSkin() {
-            if (skin == null) { skin = new JComponentSkin<JLayeredPane>(); }
+            if (skin == null) { skin = new JComponentSkin<>(); }
             return skin;
         }
 
@@ -1901,7 +1849,7 @@ public class FSkin {
         private JComponentSkin<JMenuBar> skin;
         @Override
         public JComponentSkin<JMenuBar> getSkin() {
-            if (skin == null) {skin = new JComponentSkin<JMenuBar>(); }
+            if (skin == null) {skin = new JComponentSkin<>(); }
             return skin;
         }
 
@@ -1934,7 +1882,7 @@ public class FSkin {
         private JLabelSkin<JLabel> skin;
         @Override
         public JLabelSkin<JLabel> getSkin() {
-            if (skin == null) { skin = new JLabelSkin<JLabel>(); }
+            if (skin == null) { skin = new JLabelSkin<>(); }
             return skin;
         }
 
@@ -1971,7 +1919,7 @@ public class FSkin {
         private JComponentSkin<JComboBox<E>> skin;
         @Override
         public JComponentSkin<JComboBox<E>> getSkin() {
-            if (skin == null) { skin = new JComponentSkin<JComboBox<E>>(); }
+            if (skin == null) { skin = new JComponentSkin<>(); }
             return skin;
         }
 
@@ -2007,7 +1955,7 @@ public class FSkin {
         private JSkinSkin<JList<E>> skin;
         @Override
         public JSkinSkin<JList<E>> getSkin() {
-            if (skin == null) { skin = new JSkinSkin<JList<E>>(); }
+            if (skin == null) { skin = new JSkinSkin<>(); }
             return skin;
         }
 
@@ -2048,7 +1996,7 @@ public class FSkin {
         private JComponentSkin<JPanel> skin;
         @Override
         public JComponentSkin<JPanel> getSkin() {
-            if (skin == null) { skin = new JComponentSkin<JPanel>(); }
+            if (skin == null) { skin = new JComponentSkin<>(); }
             return skin;
         }
 
@@ -2115,7 +2063,7 @@ public class FSkin {
         private JComponentSkin<JScrollPane> skin;
         @Override
         public JComponentSkin<JScrollPane> getSkin() {
-            if (skin == null) { skin = new JComponentSkin<JScrollPane>(); }
+            if (skin == null) { skin = new JComponentSkin<>(); }
             return skin;
         }
 
@@ -2194,7 +2142,7 @@ public class FSkin {
                 int height = thumbBounds.height - 1;
 
                 //build polygon for thumb
-                int[] xPoints = null, yPoints = null;
+                int[] xPoints, yPoints;
                 if (vertical) {
                     x += 2;
                     width -= 4;
@@ -2304,7 +2252,7 @@ public class FSkin {
         private JComponentSkin<JTabbedPane> skin;
         @Override
         public JComponentSkin<JTabbedPane> getSkin() {
-            if (skin == null) { skin = new JComponentSkin<JTabbedPane>(); }
+            if (skin == null) { skin = new JComponentSkin<>(); }
             return skin;
         }
 
@@ -2337,7 +2285,7 @@ public class FSkin {
         private AbstractButtonSkin<JButton> skin;
         @Override
         public AbstractButtonSkin<JButton> getSkin() {
-            if (skin == null) { skin = new AbstractButtonSkin<JButton>(); }
+            if (skin == null) { skin = new AbstractButtonSkin<>(); }
             return skin;
         }
 
@@ -2380,7 +2328,7 @@ public class FSkin {
         private AbstractButtonSkin<JCheckBox> skin;
         @Override
         public AbstractButtonSkin<JCheckBox> getSkin() {
-            if (skin == null) { skin = new AbstractButtonSkin<JCheckBox>(); }
+            if (skin == null) { skin = new AbstractButtonSkin<>(); }
             return skin;
         }
 
@@ -2414,7 +2362,7 @@ public class FSkin {
         private AbstractButtonSkin<JRadioButton> skin;
         @Override
         public AbstractButtonSkin<JRadioButton> getSkin() {
-            if (skin == null) { skin = new AbstractButtonSkin<JRadioButton>(); }
+            if (skin == null) { skin = new AbstractButtonSkin<>(); }
             return skin;
         }
 
@@ -2448,7 +2396,7 @@ public class FSkin {
         private AbstractButtonSkin<JMenu> skin;
         @Override
         public AbstractButtonSkin<JMenu> getSkin() {
-            if (skin == null) { skin = new AbstractButtonSkin<JMenu>(); }
+            if (skin == null) { skin = new AbstractButtonSkin<>(); }
             return skin;
         }
 
@@ -2471,7 +2419,7 @@ public class FSkin {
         private AbstractButtonSkin<JMenuItem> skin;
         @Override
         public AbstractButtonSkin<JMenuItem> getSkin() {
-            if (skin == null) { skin = new AbstractButtonSkin<JMenuItem>(); }
+            if (skin == null) { skin = new AbstractButtonSkin<>(); }
             return skin;
         }
 
@@ -2494,7 +2442,7 @@ public class FSkin {
         private AbstractButtonSkin<JCheckBoxMenuItem> skin;
         @Override
         public AbstractButtonSkin<JCheckBoxMenuItem> getSkin() {
-            if (skin == null) { skin = new AbstractButtonSkin<JCheckBoxMenuItem>(); }
+            if (skin == null) { skin = new AbstractButtonSkin<>(); }
             return skin;
         }
 
@@ -2517,7 +2465,7 @@ public class FSkin {
         private AbstractButtonSkin<JRadioButtonMenuItem> skin;
         @Override
         public AbstractButtonSkin<JRadioButtonMenuItem> getSkin() {
-            if (skin == null) { skin = new AbstractButtonSkin<JRadioButtonMenuItem>(); }
+            if (skin == null) { skin = new AbstractButtonSkin<>(); }
             return skin;
         }
 
@@ -2540,7 +2488,7 @@ public class FSkin {
         private JTextComponentSkin<JTextField> skin;
         @Override
         public JTextComponentSkin<JTextField> getSkin() {
-            if (skin == null) { skin = new JTextComponentSkin<JTextField>(); }
+            if (skin == null) { skin = new JTextComponentSkin<>(); }
             return skin;
         }
 
@@ -2577,7 +2525,7 @@ public class FSkin {
         private JTextComponentSkin<JTextField> skin;
         @Override
         public JTextComponentSkin<JTextField> getSkin() {
-            if (skin == null) { skin = new JTextComponentSkin<JTextField>(); }
+            if (skin == null) { skin = new JTextComponentSkin<>(); }
             return skin;
         }
 
@@ -2613,7 +2561,7 @@ public class FSkin {
         private JTextComponentSkin<JTextArea> skin;
         @Override
         public JTextComponentSkin<JTextArea> getSkin() {
-            if (skin == null) { skin = new JTextComponentSkin<JTextArea>(); }
+            if (skin == null) { skin = new JTextComponentSkin<>(); }
             return skin;
         }
 
@@ -2650,7 +2598,7 @@ public class FSkin {
         private JTextComponentSkin<JTextPane> skin;
         @Override
         public JTextComponentSkin<JTextPane> getSkin() {
-            if (skin == null) { skin = new JTextComponentSkin<JTextPane>(); }
+            if (skin == null) { skin = new JTextComponentSkin<>(); }
             return skin;
         }
 
@@ -2686,7 +2634,7 @@ public class FSkin {
         private JTextComponentSkin<JEditorPane> skin;
         @Override
         public JTextComponentSkin<JEditorPane> getSkin() {
-            if (skin == null) { skin = new JTextComponentSkin<JEditorPane>(); }
+            if (skin == null) { skin = new JTextComponentSkin<>(); }
             return skin;
         }
 
@@ -2723,7 +2671,7 @@ public class FSkin {
         private JTextComponentSkin<JFormattedTextField> skin;
         @Override
         public JTextComponentSkin<JFormattedTextField> getSkin() {
-            if (skin == null) { skin = new JTextComponentSkin<JFormattedTextField>(); }
+            if (skin == null) { skin = new JTextComponentSkin<>(); }
             return skin;
         }
 
@@ -2776,7 +2724,7 @@ public class FSkin {
         private JComponentSkin<JSlider> skin;
         @Override
         public JComponentSkin<JSlider> getSkin() {
-            if (skin == null) { skin = new JComponentSkin<JSlider>(); }
+            if (skin == null) { skin = new JComponentSkin<>(); }
             return skin;
         }
 
@@ -2813,7 +2761,7 @@ public class FSkin {
         private JTableSkin<JTable> skin;
         @Override
         public JTableSkin<JTable> getSkin() {
-            if (skin == null) { skin = new JTableSkin<JTable>(); }
+            if (skin == null) { skin = new JTableSkin<>(); }
             return skin;
         }
 
@@ -2855,7 +2803,7 @@ public class FSkin {
         private JComponentSkin<JTableHeader> skin;
         @Override
         public JComponentSkin<JTableHeader> getSkin() {
-            if (skin == null) { skin = new JComponentSkin<JTableHeader>(); }
+            if (skin == null) { skin = new JComponentSkin<>(); }
             return skin;
         }
 
