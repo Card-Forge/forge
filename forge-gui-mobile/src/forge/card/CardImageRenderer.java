@@ -88,11 +88,13 @@ public class CardImageRenderer {
         }
 
         //determine colors for borders
-        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, canShow);
-        DetailColors borderColor = borderColors.get(0);
+        // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
+        final boolean isFaceDown = card.getCurrentState().getState() == CardStateName.FaceDown;
+        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, canShow); // canShow doesn't work here for face down Morphs
+        DetailColors borderColor = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : borderColors.get(0);
         Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         Color color2 = null;
-        if (borderColors.size() > 1) {
+        if (borderColors.size() > 1 && !isFaceDown) {
             borderColor = borderColors.get(1);
             color2 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         }
@@ -369,11 +371,13 @@ public class CardImageRenderer {
         final boolean canShow = MatchController.instance.mayView(card);
 
         //determine colors for borders
+        // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
+        final boolean isFaceDown = card.getCurrentState().getState() == CardStateName.FaceDown;
         List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, canShow);
-        DetailColors borderColor = borderColors.get(0);
+        DetailColors borderColor = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : borderColors.get(0);
         Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         Color color2 = null;
-        if (borderColors.size() > 1) {
+        if (borderColors.size() > 1 && !isFaceDown) {
             borderColor = borderColors.get(1);
             color2 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         }

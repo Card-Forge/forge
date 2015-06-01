@@ -300,8 +300,10 @@ public class CardRenderer {
 
         boolean canShow = MatchController.instance.mayView(card);
 
-        CardStateView details = card.getCurrentState();
-        DetailColors borderColor = CardDetailUtil.getBorderColor(details, canShow);
+        // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
+        final CardStateView details = card.getCurrentState();
+        final boolean isFaceDown = details.getState() == CardStateName.FaceDown;
+        final DetailColors borderColor = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(details, canShow); // canShow doesn't work here for face down Morphs
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
 
