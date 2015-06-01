@@ -34,7 +34,6 @@ import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
-import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -238,11 +237,7 @@ public class CardDetailPanel extends SkinnedPanel {
             setInfoLabel.setBorder(BorderFactory.createLineBorder(foreColor));
         }
 
-        if (state.getState() == CardStateName.FaceDown) {
-            updateBorder(state, false); // TODO: HACK! A temporary measure until the morphs still leaking color can be fixed properly.
-        } else {
-            updateBorder(state, mayView);
-        }
+        updateBorder(state, mayView);
 
         powerToughnessLabel.setText(CardDetailUtil.formatPowerToughness(state, mayView));
 
