@@ -60,6 +60,14 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                                         result = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
                                     }
                                     chatInterface.addMessage(result);
+                                    if (!joinServer) {
+                                        FThreads.invokeInBackgroundThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                NetConnectUtil.copyHostedServerUrl();
+                                            }
+                                        });
+                                    }
                                 }
                             });
                         }

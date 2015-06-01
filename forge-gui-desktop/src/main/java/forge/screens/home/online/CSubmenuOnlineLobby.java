@@ -65,6 +65,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
                 if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
                     VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
                 }
+                NetConnectUtil.copyHostedServerUrl();
             }
         });
     }
