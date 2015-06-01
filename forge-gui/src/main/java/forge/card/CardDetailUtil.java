@@ -71,6 +71,7 @@ public class CardDetailUtil {
 
         if (cardColors == null || !canShow) {
             borderColors.add(DetailColors.FACE_DOWN);
+            return borderColors;
         }
         else if (cardColors.isColorless()) {
             if (isLand) { //use different color for lands vs. other colorless cards
