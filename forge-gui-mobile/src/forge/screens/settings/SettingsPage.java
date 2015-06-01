@@ -10,6 +10,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.game.GameLogEntryType;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
@@ -165,7 +166,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_COLOR_IDENTITY,
                 "Display Color Identity",
                 "Displays the color identity of cards in the card detail information panel.",
-                new String[]{"Never", "Only Multicolor", "Always"}),
+                new String[]{ForgeConstants.DISP_COLOR_IDENT_NEVER, ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR, ForgeConstants.DISP_COLOR_IDENT_ALWAYS}),
                 4);
 
         //Card Overlays

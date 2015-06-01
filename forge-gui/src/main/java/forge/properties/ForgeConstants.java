@@ -177,4 +177,10 @@ public final class ForgeConstants {
     private static final String URL_CARDFORGE = "http://downloads.cardforge.link";
     public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
     public static final String URL_PRICE_DOWNLOAD = "http://www.cardforge.org/MagicInfo/pricegen.php";
+
+    // Constants for Display Card Identity game setting
+    public static final String DISP_COLOR_IDENT_ALWAYS = "Always";
+    public static final String DISP_COLOR_IDENT_MULTICOLOR = "Only Multicolor";
+    public static final String DISP_COLOR_IDENT_NEVER = "Never";
+
 }
