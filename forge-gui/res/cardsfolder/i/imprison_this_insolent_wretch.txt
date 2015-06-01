@@ -7,5 +7,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent.ChosenCtrl | Affe
 T:Mode$ Attacks | ValidCard$ Card | Attacked$ Player.Chosen | Execute$ Abandon | TriggerZones$ Command | TriggerDescription$ When the chosen player is attacked or becomes the target of a spell or ability, abandon this scheme.
 T:Mode$ BecomesTarget | ValidTarget$ Player.Chosen | TriggerZones$ Command | Execute$ Abandon | Secondary$ True | TriggerDescription$ When the chosen player is attacked or becomes the target of a spell or ability, abandon this scheme.
 SVar:Abandon:AB$ Abandon | Cost$ 0
-SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/imprison_this_insolent_wretch.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/Imprison This Insolent Wretch.full.jpg
 Oracle:When you set this scheme in motion, choose an opponent.\nPermanents the chosen player controls don't untap during his or her untap step.\nWhen the chosen player is attacked or becomes the target of a spell or ability, abandon this scheme.

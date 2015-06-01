@@ -9,6 +9,6 @@ SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife | Re
 SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$CardCounters.DEATH
 SVar:Turns:Count$TotalTurns
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/necropotence_avatar.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Necropotence Avatar.full.jpg
 SVar:RemAIDeck:True
 Oracle:Hand +0, life +4\nSkip your draw step.\nAt the beginning of your end step, if it's not the first turn of the game, put a death counter on Necropotence Avatar. You draw X cards and you lose X life, where X is the number of death counters on Necropotence Avatar.

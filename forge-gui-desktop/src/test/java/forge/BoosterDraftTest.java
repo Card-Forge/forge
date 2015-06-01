@@ -17,7 +17,7 @@ import java.util.List;
  * <p>
  * BoosterDraftTest class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: BoosterDraftTest.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
@@ -31,7 +31,7 @@ public class BoosterDraftTest implements IBoosterDraft {
      * <p>
      * getDecks.
      * </p>
-     * 
+     *
      * @return an array of {@link forge.deck.Deck} objects.
      */
     @Override
@@ -44,7 +44,7 @@ public class BoosterDraftTest implements IBoosterDraft {
      * <p>
      * nextChoice.
      * </p>
-     * 
+     *
      * @return a {@link forge.CardList} object.
      */
     @Override
@@ -66,7 +66,7 @@ public class BoosterDraftTest implements IBoosterDraft {
      * <p>
      * hasNextChoice.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     @Override
@@ -78,7 +78,7 @@ public class BoosterDraftTest implements IBoosterDraft {
      * <p>
      * getChosenCards.
      * </p>
-     * 
+     *
      * @return a {@link forge.CardList} object.
      */
     public List<Card> getChosenCards() {
@@ -89,21 +89,11 @@ public class BoosterDraftTest implements IBoosterDraft {
      * <p>
      * getUnchosenCards.
      * </p>
-     * 
+     *
      * @return a {@link forge.CardList} object.
      */
     public List<Card> getUnchosenCards() {
         return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.game.limited.IBoosterDraft#finishedDrafting()
-     */
-    @Override
-    public void finishedDrafting() {
-
     }
 
     @Override

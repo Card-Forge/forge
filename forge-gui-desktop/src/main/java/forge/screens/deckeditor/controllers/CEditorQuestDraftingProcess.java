@@ -6,21 +6,18 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.screens.deckeditor.controllers;
 
-import java.util.Map.Entry;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.assets.FSkinProp;
 import forge.card.MagicColor;
 import forge.deck.Deck;
@@ -48,24 +45,26 @@ import forge.toolbox.FSkin;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
 
+import java.util.Map.Entry;
+
 /**
  * Updates the deck editor UI as necessary draft selection mode.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
- * 
+ *
  * @author Forge
  * @version $Id: CEditorDraftingProcess.java 24872 2014-02-17 07:35:47Z drdev $
  */
 public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
-    
+
     private CSubmenuQuestDraft draftQuest;
     private QuestController quest;
-    
+
     public void setDraftQuest(CSubmenuQuestDraft testDraftQuest) {
         this.draftQuest = testDraftQuest;
         this.quest = FModel.getQuest();
     }
-    
+
     private IBoosterDraft boosterDraft;
 
     private String ccAddLabel = "Add card";
@@ -100,7 +99,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
     /**
      * Show GuiBase.getInterface().
-     * 
+     *
      * @param inBoosterDraft
      *            the in_booster draft
      */
@@ -126,7 +125,6 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
             this.showChoices(this.boosterDraft.nextChoice());
         }
         else {
-            this.boosterDraft.finishedDrafting();
             this.saveDraft();
         }
     }
@@ -152,9 +150,9 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
      * <p>
      * showChoices.
      * </p>
-     * 
+     *
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a {@link ItemPool<PaperCard>} object.
      */
     private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
@@ -167,7 +165,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
      * <p>
      * getPlayersDeck.
      * </p>
-     * 
+     *
      * @return a {@link forge.deck.Deck} object.
      */
     public Deck getPlayersDeck() {
@@ -217,9 +215,9 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
         FScreen.DRAFTING_PROCESS.close();
-        
+
         draftQuest.setCompletedDraft(finishedDraft);
-        
+
     }
 
     //========== Overridden from ACEditorBase
@@ -231,7 +229,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#getController()
      */
     @Override
@@ -241,7 +239,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#updateView()
      */
     @Override
@@ -250,7 +248,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
     @Override

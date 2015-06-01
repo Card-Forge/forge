@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,10 +31,9 @@ public class GuiDownloadQuestImages extends GuiDownloadService {
     @Override
     protected final Map<String, String> getNeededFiles() {
         // read all card names and urls
-        final Map<String, String> urls = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+        final Map<String, String> urls = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE,  ForgeConstants.CACHE_ICON_PICS_DIR);
-        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE,  ForgeConstants.CACHE_ICON_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE,        ForgeConstants.CACHE_BOOSTER_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_FATPACKS_FILE,        ForgeConstants.CACHE_FATPACK_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERBOXES_FILE,    ForgeConstants.CACHE_BOOSTERBOX_PICS_DIR);

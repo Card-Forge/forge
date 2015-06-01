@@ -7,5 +7,5 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ Ouch
 SVar:Ouch:Count$Valid Permanent.YouCtrl
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/morinfen_avatar.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Morinfen Avatar.full.jpg
 Oracle:Hand +0, life +30\nAt the beginning of your upkeep, you lose 1 life for each permanent you control.

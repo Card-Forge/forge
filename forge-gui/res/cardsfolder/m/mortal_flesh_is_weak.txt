@@ -4,5 +4,5 @@ Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ShowTheWeakness | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent's life total becomes the lowest life total among your opponents.
 SVar:ShowTheWeakness:AB$ SetLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ X | References$ X
 SVar:X:PlayerCountOpponents$LowestLifeTotal
-SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/mortal_flesh_is_weak.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/Mortal Flesh Is Weak.full.jpg
 Oracle:When you set this scheme in motion, each opponent's life total becomes the lowest life total among your opponents.

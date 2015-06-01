@@ -1,16 +1,5 @@
 package forge.screens.deckeditor.controllers;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
@@ -19,6 +8,13 @@ import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class DeckHtmlSerializer {
     public static void writeDeckHtml(final Deck d, final File f) {
@@ -40,11 +36,9 @@ public class DeckHtmlSerializer {
      *            a {@link forge.deck.Deck} object.
      * @param out
      *            a {@link java.io.BufferedWriter} object.
-     * @throws java.io.IOException
-     *             if any.
      */
     private static void writeDeckHtml(final Deck d, final BufferedWriter out) {
-        Template temp = null;
+        Template temp;
         final int cardBorder = 0;
         final int height = 319;
         final int width = 222;
@@ -68,19 +62,19 @@ public class DeckHtmlSerializer {
             temp = cfg.getTemplate("proxy-template.ftl");
 
             /* Create a data-model */
-            final Map<String, Object> root = new HashMap<String, Object>();
+            final Map<String, Object> root = new HashMap<>();
             root.put("title", d.getName());
-            final List<String> list = new ArrayList<String>();
+            final List<String> list = new ArrayList<>();
             for (final Entry<PaperCard, Integer> card : d.getMain()) {
                 // System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
-                for (int i = card.getValue().intValue(); i > 0; --i ) {
+                for (int i = card.getValue(); i > 0; --i ) {
                     final PaperCard r = card.getKey();
                     final String url = ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(r, false);
                     list.add(url);
                 }
             }
 
-            final Map<String, Integer> map = new TreeMap<String, Integer>();
+            final Map<String, Integer> map = new TreeMap<>();
             for (final Entry<PaperCard, Integer> entry : d.getMain()) {
                 map.put(entry.getKey().getName(), entry.getValue());
                 // System.out.println(entry.getValue() + " " +
@@ -97,9 +91,7 @@ public class DeckHtmlSerializer {
             /* Merge data-model with template */
             temp.process(root, out);
             out.flush();
-        } catch (final IOException e) {
-            System.out.println(e.toString());
-        } catch (final TemplateException e) {
+        } catch (final IOException | TemplateException e) {
             System.out.println(e.toString());
         }
     }

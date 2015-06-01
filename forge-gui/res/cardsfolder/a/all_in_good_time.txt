@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GoodTimes | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, take an extra turn after this one. Schemes can't be set in motion that turn.
 SVar:GoodTimes:AB$ AddTurn | Cost$ 0 | NumTurns$ 1 | NoSchemes$ True
-SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/all_in_good_time.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/All in Good Time.full.jpg
 Oracle:When you set this scheme in motion, take an extra turn after this one. Schemes can't be set in motion that turn.

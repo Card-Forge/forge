@@ -6,5 +6,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlim
 A:AB$ Draw | ActivationZone$ Command | Cost$ 0 | NumCards$ 3 | Defined$ You | ActivationLimit$ 1 | SubAbility$ DBSkipTurn | SpellDescription$ Draw three cards. You skip your next turn. Activate this ability only once each turn.
 SVar:DBSkipTurn:DB$ SkipTurn | NumTurns$ 1 | Defined$ You
 SVar:RemAIDeck:True
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/chronatog_avatar.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Chronatog Avatar.full.jpg
 Oracle:Hand -1, life +1\nYou have no maximum hand size.\n{0}: Draw three cards. You skip your next turn. Activate this ability only once each turn.

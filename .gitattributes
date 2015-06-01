@@ -16308,7 +16308,6 @@ forge-gui/res/lists/net-decks-commander.txt -text
 forge-gui/res/lists/net-decks.txt -text
 forge-gui/res/lists/precon-images.txt svneol=native#text/plain
 forge-gui/res/lists/quest-opponent-icons.txt svneol=native#text/plain
-forge-gui/res/lists/quest-pet-shop-icons.txt svneol=native#text/plain
 forge-gui/res/lists/quest-pet-token-images.txt svneol=native#text/plain
 forge-gui/res/lists/token-images.txt svneol=native#text/plain
 forge-gui/res/lists/tournamentpack-images.txt svneol=native#text/plain

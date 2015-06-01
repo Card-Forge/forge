@@ -23,7 +23,7 @@
 
     <issueManagement>
         <system>Mantis</system>
-        <url>http://cardforge.org/bugz</url>
+        <url>http://bugs.cardforge.link/</url>
     </issueManagement>
 
     <properties>

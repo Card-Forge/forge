@@ -17,21 +17,12 @@
  */
 package forge.model;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;
 import forge.FThreads;
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.achievement.AchievementCollection;
-import forge.achievement.ConstructedAchievements;
-import forge.achievement.DraftAchievements;
-import forge.achievement.QuestAchievements;
-import forge.achievement.SealedAchievements;
+import forge.achievement.*;
 import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
 import forge.card.CardType;
@@ -57,6 +48,11 @@ import forge.util.Localizer;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * The default Model implementation for Forge.
  *
@@ -66,7 +62,7 @@ import forge.util.storage.StorageBase;
  * In case we need to convert it into an interface in the future, all fields of
  * this class must be either private or public static final.
  */
-public class FModel {
+public final class FModel {
     private FModel() { } //don't allow creating instance
 
     private static StaticData magicDb;
@@ -152,14 +148,14 @@ public class FModel {
         }
 
         ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN; // && preferences.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
+        ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
 
         formats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.BLOCK_DATA_DIR + "formats.txt")));
-        blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
+        blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
         questPreferences = new QuestPreferences();
         conquestPreferences = new ConquestPreferences();
-        fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
-        worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt"));
+        fantasyBlocks = new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
+        worlds = new StorageBase<>("Quest worlds", new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt"));
 
         loadDynamicGamedata();
 
@@ -180,7 +176,7 @@ public class FModel {
         DeckPreferences.load();
         ItemManagerConfig.load();
 
-        achievements = new HashMap<GameType, AchievementCollection>();
+        achievements = new HashMap<>();
         achievements.put(GameType.Constructed, new ConstructedAchievements());
         achievements.put(GameType.Draft, new DraftAchievements());
         achievements.put(GameType.Sealed, new SealedAchievements());
@@ -209,7 +205,7 @@ public class FModel {
 
             List<String> tList = null;
 
-            if (typeListFile.size() > 0) {
+            if (!typeListFile.isEmpty()) {
                 for (final String s : typeListFile) {
                     if (s.equals("[BasicTypes]")) {
                         tList = CardType.Constant.BASIC_TYPES;
@@ -226,7 +222,9 @@ public class FModel {
                     } else if (s.equals("[WalkerTypes]")) {
                         tList = CardType.Constant.WALKER_TYPES;
                     } else if (s.length() > 1) {
-                        tList.add(s);
+                        if (tList != null) {
+                            tList.add(s);
+                        }
                     }
                 }
             }

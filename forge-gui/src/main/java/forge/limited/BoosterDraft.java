@@ -17,27 +17,12 @@
  */
 package forge.limited;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.NoSuchElementException;
-import java.util.Stack;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.google.common.base.Supplier;
-
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.game.card.Card;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
@@ -45,11 +30,14 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
-import forge.util.HttpUtil;
 import forge.util.ItemPool;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.io.File;
+import java.util.*;
 
 /**
  * Booster Draft Format.
@@ -65,10 +53,10 @@ public class BoosterDraft implements IBoosterDraft {
     private List<List<PaperCard>> pack; // size 8
 
     /** The draft picks. */
-    private final Map<String, Float> draftPicks = new TreeMap<String, Float>();
+    private final Map<String, Float> draftPicks = new TreeMap<>();
     protected LimitedPoolType draftFormat;
 
-    protected final List<Supplier<List<PaperCard>>> product = new ArrayList<Supplier<List<PaperCard>>>();
+    protected final List<Supplier<List<PaperCard>>> product = new ArrayList<>();
 
     public static BoosterDraft createDraft(final LimitedPoolType draftType) {
         final BoosterDraft draft = new BoosterDraft(draftType);
@@ -89,7 +77,7 @@ public class BoosterDraft implements IBoosterDraft {
 
         case Block: // Draft from cards by block or set
         case FantasyBlock:
-            final List<CardBlock> blocks = new ArrayList<CardBlock>();
+            final List<CardBlock> blocks = new ArrayList<>();
             final IStorage<CardBlock> storage = this.draftFormat == LimitedPoolType.Block
                     ? FModel.getBlocks()
                     : FModel.getFantasyBlocks();
@@ -109,7 +97,7 @@ public class BoosterDraft implements IBoosterDraft {
                 return false;
             }
 
-            final Stack<String> sets = new Stack<String>();
+            final Stack<String> sets = new Stack<>();
             for (int k = cardSets.size() - 1; k >= 0; k--) {
                 sets.add(cardSets.get(k).getCode());
             }
@@ -167,10 +155,8 @@ public class BoosterDraft implements IBoosterDraft {
     public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {
         final BoosterDraft draft = new BoosterDraft(draftType);
 
-        final int nPacks = boosters.length;
-
-        for (int i = 0; i < nPacks; i++) {
-            draft.product.add(block.getBooster(boosters[i]));
+        for (String booster : boosters) {
+            draft.product.add(block.getBooster(booster));
         }
 
         IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
@@ -215,7 +201,7 @@ public class BoosterDraft implements IBoosterDraft {
     /** Looks for draft files, reads them, returns a list. */
     private static List<CustomLimited> loadCustomDrafts() {
         String[] dList;
-        final List<CustomLimited> customs = new ArrayList<CustomLimited>();
+        final List<CustomLimited> customs = new ArrayList<>();
 
         // get list of custom draft files
         final File dFolder = new File(ForgeConstants.DRAFT_DIR);
@@ -247,7 +233,7 @@ public class BoosterDraft implements IBoosterDraft {
      */
     @Override
     public CardPool nextChoice() {
-        if (this.pack.get(this.getCurrentBoosterIndex()).size() == 0) {
+        if (this.pack.get(this.getCurrentBoosterIndex()).isEmpty()) {
             this.pack = this.get8BoosterPack();
         }
 
@@ -269,7 +255,7 @@ public class BoosterDraft implements IBoosterDraft {
             return null;
         }
 
-        final List<List<PaperCard>> list = new ArrayList<List<PaperCard>>();
+        final List<List<PaperCard>> list = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             list.add(this.product.get(this.nextBoosterGroup).get());
         }
@@ -298,12 +284,7 @@ public class BoosterDraft implements IBoosterDraft {
         final int iHumansBooster = this.getCurrentBoosterIndex();
         int iPlayer = 0;
         for (int i = 1; i < this.pack.size(); i++) {
-            final List<Card> forAi = new ArrayList<Card>();
             final List<PaperCard> booster = this.pack.get((iHumansBooster + i) % this.pack.size());
-            for (final IPaperCard cr : booster) {
-                forAi.add(Card.getCardForUi(cr)); // ai is supposed to analyze it only
-            }
-
             final PaperCard aiPick = this.draftAI.choose(booster, iPlayer++);
             booster.remove(aiPick);
         }
@@ -348,7 +329,7 @@ public class BoosterDraft implements IBoosterDraft {
                 final PaperCard cc = thisBooster.get(i);
                 final String cnBk = cc.getName() + "|" + cc.getEdition();
 
-                float pickValue = 0;
+                float pickValue;
                 if (cc.equals(c)) {
                     pickValue = thisBooster.size()
                             * (1f - (((float) this.currentBoosterPick / this.currentBoosterSize) * 2f));
@@ -372,21 +353,6 @@ public class BoosterDraft implements IBoosterDraft {
         this.currentBoosterPick++;
     } // setChoice()
 
-    /** This will upload drafting picks to cardforge HQ. */
-    @Override
-    public void finishedDrafting() {
-        if (!ForgePreferences.UPLOAD_DRAFT || 1 >= draftPicks.size()) {
-            return;
-        }
-
-        final List<String> outDraftData = new ArrayList<String>();
-        for (final Entry<String, Float> key : draftPicks.entrySet()) {
-            outDraftData.add(key.getValue() + "|" + key.getKey());
-        }
-        Collections.sort(outDraftData);
-        HttpUtil.upload(ForgeConstants.URL_DRAFT_UPLOAD + "?fmt=" + draftFormat, outDraftData);
-    }
-
     @Override
     public boolean isPileDraft() {
         return false;
@@ -394,7 +360,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     private static List<String> getSetCombos(final List<String> setz) {
         final String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-        final List<String> setCombos = new ArrayList<String>();
+        final List<String> setCombos = new ArrayList<>();
         if (sets.length >= 2) {
             setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
             setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[1]));

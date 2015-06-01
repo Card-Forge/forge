@@ -1,10 +1,6 @@
 package forge.screens.settings;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.ai.AiProfileUtil;
@@ -25,6 +21,9 @@ import forge.toolbox.FCheckBox;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.util.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<Setting>());
@@ -70,10 +69,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_HOT_SEAT_MODE,
                 "Hot Seat Mode",
                 "When starting a game with 2 human players, use single prompt to control both players."),
-                1);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_UPLOAD_DRAFT,
-                "Upload Draft Picks",
-                "Sends draft picks to Forge servers for analysis, to improve draft AI."),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
                 "Allow AI Cheating",
@@ -379,7 +374,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             g.drawText(value.label, font, foreColor, x, y, w, h, false, HAlignment.LEFT, false);
             value.drawPrefValue(g, font, foreColor, x, y, w, h);
             h += SettingsScreen.SETTING_PADDING;
-            g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, HAlignment.LEFT, false);            
+            g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, HAlignment.LEFT, false);
         }
     }
 }

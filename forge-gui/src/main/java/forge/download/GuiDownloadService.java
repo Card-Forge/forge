@@ -6,36 +6,18 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.download;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.URL;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.esotericsoftware.minlog.Log;
-
 import forge.FThreads;
 import forge.GuiBase;
 import forge.UiCommand;
@@ -44,7 +26,12 @@ import forge.interfaces.IButton;
 import forge.interfaces.IProgressBar;
 import forge.interfaces.ITextField;
 import forge.util.FileUtil;
-import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.io.*;
+import java.net.*;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @SuppressWarnings("serial")
 public abstract class GuiDownloadService implements Runnable {
@@ -183,7 +170,7 @@ public abstract class GuiDownloadService implements Runnable {
                 numNonzero--;
             }
         }
-        
+
         tptr++;
         return tTime / Math.max(1, numNonzero);
     }
@@ -201,7 +188,7 @@ public abstract class GuiDownloadService implements Runnable {
                 final int a = getAverageTimePerObject();
 
                 if (count != files.size()) {
-                    sb.append(count + "/" + files.size() + " - ");
+                    sb.append(count).append("/").append(files.size()).append(" - ");
 
                     long t2Go = (files.size() - count) * a;
 
@@ -215,7 +202,7 @@ public abstract class GuiDownloadService implements Runnable {
                     } else {
                         sb.append("00:");
                     }
-                    
+
                     sb.append(String.format("%02d remaining.", t2Go / 1000));
                 }
                 else {
@@ -240,8 +227,7 @@ public abstract class GuiDownloadService implements Runnable {
 
     @Override
     public void run() {
-        final Random r = MyRandom.getRandom();
-        
+
         Proxy p = getProxy();
 
         int bufferLength;
@@ -270,6 +256,7 @@ public abstract class GuiDownloadService implements Runnable {
 
                 if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                     conn.disconnect();
+                    System.out.println(url);
                     System.out.println("Skipped Download for: " + fileDest.getPath());
                     update(++iCard, fileDest);
                     skipped++;
@@ -308,12 +295,6 @@ public abstract class GuiDownloadService implements Runnable {
 
             update(++iCard, fileDest);
 
-            // throttle to reduce load on the server
-            try {
-                Thread.sleep(r.nextInt(50) + 50);
-            } catch (final InterruptedException e) {
-                Log.error("GuiDownloader", "Sleep Error", e);
-            }
         }
     }
 

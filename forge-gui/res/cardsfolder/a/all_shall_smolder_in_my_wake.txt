@@ -5,5 +5,5 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ Ignite | TriggerZones$ Com
 SVar:Ignite:AB$ Destroy | Cost$ 0 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact to destroy | SubAbility$ Burn
 SVar:Burn:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment to destroy | SubAbility$ Smolder
 SVar:Smolder:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land to destroy
-SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/all_shall_smolder_in_my_wake.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/All Shall Smolder in My Wake.full.jpg
 Oracle:When you set this scheme in motion, destroy up to one target artifact, up to one target enchantment, and up to one target nonbasic land.

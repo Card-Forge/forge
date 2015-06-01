@@ -1,27 +1,5 @@
 package forge.screens.home.settings;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.control.FControl.CloseAction;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
@@ -34,13 +12,20 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBoxPanel;
-import forge.toolbox.FLabel;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedTextField;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 
 /**
  * Assembles Swing components of preferences submenu singleton.
@@ -73,7 +58,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
     private final JCheckBox cbAnte = new OptionsCheckBox("Play for Ante");
     private final JCheckBox cbAnteMatchRarity = new OptionsCheckBox("Match Ante Rarity");
-    private final JCheckBox cbUploadDraft = new OptionsCheckBox("Upload Draft Picks");
     private final JCheckBox cbEnableAICheats = new OptionsCheckBox("Allow AI Cheating");
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox("Prompt Mana Pool Emptying");
@@ -99,17 +83,17 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
     private final JCheckBox cbStackCreatures = new OptionsCheckBox("Stack Creatures");
 
-    private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
+    private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
-    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<GameLogEntryType>("Game Log Verbosity:");
-    private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<CloseAction>("Close Action:");
-    private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<String>("AI Personality:");
+    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<>("Game Log Verbosity:");
+    private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>("Close Action:");
+    private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<>("AI Personality:");
 
     /**
      * Constructor.
      */
-    private VSubmenuPreferences() {
+    VSubmenuPreferences() {
 
         pnlPrefs.setOpaque(false);
         pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
@@ -152,9 +136,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbAnteMatchRarity, regularConstraints);
         pnlPrefs.add(new NoteLabel("Attempts to make antes the same rarity for all players."), regularConstraints);
-
-        pnlPrefs.add(cbUploadDraft, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Sends draft picks to Forge servers for analysis, to improve draft AI."), regularConstraints);
 
         pnlPrefs.add(cbEnableAICheats, regularConstraints);
         pnlPrefs.add(new NoteLabel("Allow the AI to cheat to gain advantage (for personalities that have cheat shuffling options set)."), regularConstraints);
@@ -317,8 +298,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     /** Consolidates checkbox styling in one place. */
     @SuppressWarnings("serial")
-    private class OptionsCheckBox extends FCheckBox {
-        public OptionsCheckBox(final String txt0) {
+    private final class OptionsCheckBox extends FCheckBox {
+        private OptionsCheckBox(final String txt0) {
             super(txt0);
             this.setFont(FSkin.getBoldFont(12));
         }
@@ -326,8 +307,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     /** Consolidates section title label styling in one place. */
     @SuppressWarnings("serial")
-    private class SectionLabel extends SkinnedLabel {
-        public SectionLabel(final String txt0) {
+    private final class SectionLabel extends SkinnedLabel {
+        private SectionLabel(final String txt0) {
             super(txt0);
             this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             setHorizontalAlignment(SwingConstants.CENTER);
@@ -338,8 +319,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     /** Consolidates notation label styling in one place. */
     @SuppressWarnings("serial")
-    private class NoteLabel extends SkinnedLabel {
-        public NoteLabel(final String txt0) {
+    private final class NoteLabel extends SkinnedLabel {
+        private NoteLabel(final String txt0) {
             super(txt0);
             this.setFont(FSkin.getItalicFont(12));
             this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
@@ -359,7 +340,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
          * A JTextField plus a "codeString" property, that stores keycodes for
          * the shortcut. Also, an action listener that handles translation of
          * keycodes into characters and (dis)assembly of keycode stack.
-         * 
+         *
          * @param shortcut0 &emsp; Shortcut object
          */
         public KeyboardShortcutField(final Shortcut shortcut0) {
@@ -398,7 +379,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         /**
          * Gets the code string.
-         * 
+         *
          * @return String
          */
         public final String getCodeString() {
@@ -407,7 +388,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         /**
          * Sets the code string.
-         * 
+         *
          * @param str0
          *            &emsp; The new code string (space delimited)
          */
@@ -418,8 +399,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
             this.codeString = str0.trim();
 
-            final List<String> codes = new ArrayList<String>(Arrays.asList(this.codeString.split(" ")));
-            final List<String> displayText = new ArrayList<String>();
+            final List<String> codes = new ArrayList<>(Arrays.asList(this.codeString.split(" ")));
+            final List<String> displayText = new ArrayList<>();
 
             for (final String s : codes) {
                 if (!s.isEmpty()) {
@@ -452,11 +433,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbUploadDraft() {
-        return cbUploadDraft;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableAICheats() {
         return cbEnableAICheats;
     }
@@ -475,7 +451,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public JCheckBox getCbAnte() {
         return cbAnte;
     }
-    
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbAnteMatchRarity() {
         return cbAnteMatchRarity;
@@ -579,7 +555,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public final JCheckBox getCbStackCreatures() {
         return cbStackCreatures;
     }
-    
+
     public final JCheckBox getCbManaLostPrompt() {
     	return cbManaLostPrompt;
     }

@@ -1,18 +1,5 @@
 package forge.screens.home.settings;
 
-import java.awt.Desktop;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JCheckBox;
-import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.Singletons;
 import forge.UiCommand;
 import forge.ai.AiProfileUtil;
@@ -31,6 +18,16 @@ import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxPanel;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controls the preferences submenu in the home UI.
@@ -46,7 +43,7 @@ public enum CSubmenuPreferences implements ICDoc {
     private ForgePreferences prefs;
     private boolean updating;
 
-    private final List<Pair<JCheckBox, FPref>> lstControls = new ArrayList<Pair<JCheckBox,FPref>>();
+    private final List<Pair<JCheckBox, FPref>> lstControls = new ArrayList<>();
 
     @Override
     public void register() {
@@ -100,7 +97,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbRemoveSmall(), FPref.DECKGEN_NOSMALL));
         lstControls.add(Pair.of(view.getCbRemoveArtifacts(), FPref.DECKGEN_ARTIFACTS));
         lstControls.add(Pair.of(view.getCbSingletons(), FPref.DECKGEN_SINGLETONS));
-        lstControls.add(Pair.of(view.getCbUploadDraft(), FPref.UI_UPLOAD_DRAFT));
         lstControls.add(Pair.of(view.getCbEnableAICheats(), FPref.UI_ENABLE_AI_CHEATS));
         lstControls.add(Pair.of(view.getCbDisplayFoil(), FPref.UI_OVERLAY_FOIL_EFFECT));
         lstControls.add(Pair.of(view.getCbRandomFoil(), FPref.UI_RANDOM_FOIL));
@@ -285,7 +281,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private void initializeCloseActionComboBox() {
         final FComboBoxPanel<CloseAction> panel = this.view.getCloseActionComboBoxPanel();
-        final FComboBox<CloseAction> comboBox = new FComboBox<CloseAction>(CloseAction.values());
+        final FComboBox<CloseAction> comboBox = new FComboBox<>(CloseAction.values());
         comboBox.addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {
                 Singletons.getControl().setCloseAction(comboBox.getSelectedItem());
@@ -303,7 +299,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private <E> FComboBox<E> createComboBox(final E[] items, final ForgePreferences.FPref setting) {
-        final FComboBox<E> comboBox = new FComboBox<E>(items);
+        final FComboBox<E> comboBox = new FComboBox<>(items);
         addComboBoxListener(comboBox, setting);
         return comboBox;
     }

@@ -17,17 +17,16 @@
  */
 package forge.download;
 
-import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.CardRules;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class GuiDownloadPicturesLQ extends GuiDownloadService {
     @Override
@@ -37,7 +36,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
 
     @Override
     protected final Map<String, String> getNeededFiles() {
-        final Map<String, String> downloads = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+        final Map<String, String> downloads = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
             addDLObject(c, downloads, false);
@@ -78,7 +77,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
         final String urlToDownload;
         int urlIndex = 0;
         int allUrlsLen = 1;
-        if (urls.indexOf("\\") < 0) {
+        if (!urls.contains("\\")) {
             urlToDownload = urls;
         } else {
             final String[] allUrls = urls.split("\\\\");
@@ -87,7 +86,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
             urlToDownload = allUrls[urlIndex];
         }
 
-        //System.out.println(c.getName() + "|" + c.getEdition() + " - " + c.getArtIndex() + " -> " + urlIndex + "/" + allUrlsLen + " === " + filename + " <<< " + urlToDownload);
+        System.out.println(c.getName() + "|" + c.getEdition() + " - " + c.getArtIndex() + " -> " + urlIndex + "/" + allUrlsLen + " === " + filename + " <<< " + urlToDownload);
         downloads.put(destFile.getAbsolutePath(), urlToDownload);
     }
 }

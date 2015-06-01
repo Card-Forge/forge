@@ -7,5 +7,5 @@ SVar:Wolf:DB$ Token | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wo
 SVar:Antelope:DB$ Token | TokenAmount$ 1 | TokenName$ Antelope | TokenTypes$ Creature,Antelope | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 3 | TokenKeywords$ Forestwalk | SpellDescription$ Antelope
 SVar:Cat:DB$ Token | TokenAmount$ 1 | TokenName$ Cat | TokenTypes$ Creature,Cat | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 2 | TokenKeywords$ Shroud | SpellDescription$ Cat
 SVar:Rhino:DB$ Token | TokenAmount$ 1 | TokenName$ Rhino | TokenTypes$ Creature,Rhino | TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Trample | SpellDescription$ Rhino
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/master_of_the_wild_hunt_avatar.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Master of the Wild Hunt Avatar.full.jpg
 Oracle:Hand +1, life +3\n{2}{G}: Put a green creature token onto the battlefield that's a 2/2 Wolf, a 2/3 Antelope with forestwalk, a 3/2 Cat with shroud, or a 4/4 Rhino with trample, chosen at random.

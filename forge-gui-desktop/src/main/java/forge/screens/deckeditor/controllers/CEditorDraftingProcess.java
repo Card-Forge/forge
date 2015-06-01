@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -45,9 +45,9 @@ import java.util.Map.Entry;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
- * 
+ *
  * @author Forge
  * @version $Id: CEditorDraftingProcess.java 24872 2014-02-17 07:35:47Z drdev $
  */
@@ -84,7 +84,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     /**
      * Show GuiBase.getInterface().
-     * 
+     *
      * @param inBoosterDraft
      *            the in_booster draft
      */
@@ -110,7 +110,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
             this.showChoices(this.boosterDraft.nextChoice());
         }
         else {
-            this.boosterDraft.finishedDrafting();
             this.saveDraft();
         }
     }
@@ -136,9 +135,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * <p>
      * showChoices.
      * </p>
-     * 
+     *
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a {@link ItemPool<PaperCard>} object.
      */
     private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
@@ -151,7 +150,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * <p>
      * getPlayersDeck.
      * </p>
-     * 
+     *
      * @return a {@link forge.deck.Deck} object.
      */
     private Deck getPlayersDeck() {
@@ -194,7 +193,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         // Cancel button will be null; OK will return string.
         // Must check for null value first, then string length.
         // Recurse, if either null or empty string.
-        if (s == null || s.length() == 0) {
+        if (s == null || s.isEmpty()) {
             saveDraft();
             return;
         }
@@ -241,7 +240,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#getController()
      */
     @Override
@@ -251,7 +250,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#updateView()
      */
     @Override
@@ -260,7 +259,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
     @Override

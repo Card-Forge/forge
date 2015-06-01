@@ -4,5 +4,5 @@ Types:Vanguard
 HandLifeModifier:+0/-3
 S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add one mana of any color to your mana pool."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/birds_of_paradise_avatar.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Birds of Paradise Avatar1.full.jpg
 Oracle:Hand +0, life -3\nLands you control have "{T}: Add one mana of any color to your mana pool."

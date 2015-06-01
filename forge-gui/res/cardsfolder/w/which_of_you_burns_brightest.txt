@@ -4,5 +4,5 @@ Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | OptionalDecider$ You | TriggerDescription$ When you set this scheme in motion, you may pay {X}. If you do, this scheme deals X damage to target opponent and each creature he or she controls.
 SVar:DarkEffect:AB$ DamageAll | Cost$ X | NumDmg$ X | ValidTgts$ Player | TgtPrompt$ Select a player | ValidCards$ Creature | ValidPlayers$ Targeted | ValidDescription$ target player and each creature he or she controls. | References$ X
 SVar:X:Count$xPaid
-SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/which_of_you_burns_brightest.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/Which of You Burns Brightest.full.jpg
 Oracle:When you set this scheme in motion, you may pay {X}. If you do, this scheme deals X damage to target opponent and each creature he or she controls.

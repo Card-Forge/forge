@@ -7,5 +7,5 @@ T:Mode$ AttackersDeclared | DelayedTrigger$ DelTrigEOC | CheckSVar$ NatureShield
 SVar:DelTrigEOC:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ Abandon | TriggerDescription$ Abandon this scheme at end of combat.
 SVar:Abandon:AB$ Abandon | Cost$ 0
 SVar:NatureShields:Count$Valid Creature.attackingYou
-SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/nature_shields_its_own.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/Nature Shields Its Own.full.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nWhenever a creature attacks and isn't blocked, if you're the defending player, put a 0/1 green Plant creature token onto the battlefield blocking that creature.\nWhen four or more creatures attack you, abandon this scheme at end of combat.

@@ -5,5 +5,5 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DmgAll | TriggerZones$ Com
 SVar:DmgAll:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X | References$ X
 SVar:X:PlayerCountRemembered$CardsInHand
-SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/know_naught_but_fire.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/Know Naught but Fire.full.jpg
 Oracle:When you set this scheme in motion, it deals damage to each opponent equal to the number of cards in that player's hand.

@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-1/+7
 S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/tahngarth.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Tahngarth.full.jpg
 Oracle:Hand -1, life +7\nCreatures you control have haste.

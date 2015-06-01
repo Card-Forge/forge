@@ -59,7 +59,7 @@ def initKeywords():
         keyWords.append('Undying')
         keyWords.append('Vigilance')
         keyWords.append('Wither')
-        
+
 
 def handleKeyords(line,keywords):
     # split line by spaces to see if first token matches a keyword
@@ -80,7 +80,7 @@ def handleKeyords(line,keywords):
                 allKeywords = False
 
     return allKeywords
-        
+
 if not os.path.exists(pathToMtgData) :
         print("This script requires the text version of Arch's mtg-data to be present.You can download it from slightlymagic.net's forum and either place the text version next to this script or edit this script and provide the path to the file at the top.")
         print("Press Enter to exit")
@@ -156,7 +156,7 @@ while line:
         card.sets = prevLine.rstrip()
         # store Card object in hash table
         mtgDataCards[cardName] = card
-        
+
 inputName = raw_input("Enter Card Name: ")
 inputName = inputName.rstrip()
 while inputName != 'quit' :
@@ -178,7 +178,7 @@ while inputName != 'quit' :
                 	    vangModifier = cardData.pt.replace('Hand ','')
                 	    vangModifier = vangModifier.replace(', life ','/')
                 	    print 'HandLifeModifier:'+vangModifier
-                
+
                 for text in cardData.oracle :
                         # do some prescripting
                         tokens = line.split(' ');
@@ -204,9 +204,9 @@ while inputName != 'quit' :
                                         print text
                 #print "\n"
                 if cardData.types.find('Scheme') != -1 :
-                        print 'SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/'+cleanName+'.jpg'
+                        print 'SVar:Picture:http://downloads.cardforge.link/images/cards/HOP/'+cardData.name+'.jpg'
                 elif cardData.types.find('Vanguard') != -1 :
-                        print 'SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/'+cleanName+'.jpg'
+                        print 'SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/'+cardData.name+'.full.jpg'
                 else :
                         print 'SVar:Picture:http://www.wizards.com/global/images/magic/general/'+cleanName+'.jpg'
                 print '\n'

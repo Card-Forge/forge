@@ -4,5 +4,5 @@ Types:Vanguard
 HandLifeModifier:+3/-4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Opponent | AddKeyword$ Play with your hand revealed. | Description$ Your opponents play with their hands revealed.
 SVar:RemAIDeck:True
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/squee.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Squee.full.jpg
 Oracle:Hand +3, life -4\nYour opponents play with their hands revealed.

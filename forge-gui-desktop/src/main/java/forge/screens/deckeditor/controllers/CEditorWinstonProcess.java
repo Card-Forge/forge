@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -54,6 +54,7 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: CEditorDraftingProcess.java 24872 2014-02-17 07:35:47Z drdev $
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private IBoosterDraft boosterDraft;
 
@@ -202,7 +203,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
         // Cancel button will be null; OK will return string.
         // Must check for null value first, then string length.
         // Recurse, if either null or empty string.
-        if (s == null || s.length() == 0) {
+        if (s == null || s.isEmpty()) {
             saveDraft();
             return;
         }
@@ -251,7 +252,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#getController()
      */
     @Override
@@ -261,7 +262,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#updateView()
      */
     @Override
@@ -270,7 +271,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
     @Override
@@ -376,7 +377,6 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
             }
         }
         // If we get here, there's no choices left. Finish the draft and then save it
-        this.boosterDraft.finishedDrafting();
         this.saveDraft();
     }
 

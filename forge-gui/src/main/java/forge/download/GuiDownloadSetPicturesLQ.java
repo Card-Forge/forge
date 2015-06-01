@@ -17,19 +17,17 @@
  */
 package forge.download;
 
-import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
-
 import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
     @Override
@@ -39,7 +37,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
 
     @Override
     protected final Map<String, String> getNeededFiles() {
-        final Map<String, String> downloads = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+        final Map<String, String> downloads = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         for (final PaperCard c : Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCards(), FModel.getMagicDb().getVariantCards().getAllCards())) {
             final String setCode3 = c.getEdition();

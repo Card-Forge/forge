@@ -1,27 +1,14 @@
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.StaticData;
-import forge.assets.FImage;
-import forge.assets.FSkin;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.FTextureRegionImage;
+import forge.assets.*;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardPreferences;
@@ -32,8 +19,8 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
-import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.ItemManagerConfig;
+import forge.itemmanager.filters.ItemFilter;
 import forge.limited.BoosterDraft;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
@@ -45,17 +32,20 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage MAIN_DECK_ICON = FSkinImage.DECKLIST;
@@ -291,7 +281,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 switch (editorType) {
                                 case Draft:
                                 case Sealed:
-                                    //use most recent edition that all cards in limited pool came before or in 
+                                    //use most recent edition that all cards in limited pool came before or in
                                     defaultLandSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(deck.getAllCardsInASinglePool());
                                     break;
                                 default:
@@ -1100,7 +1090,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
-    
+
                             removeCard(card, result);
                             parentScreen.getSideboardPage().addCard(card, result);
                         }
@@ -1254,7 +1244,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             else {
                 hideTab(); //hide this tab page when finished drafting
-                draft.finishedDrafting();
                 parentScreen.save(null);
             }
         }

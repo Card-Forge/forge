@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,7 +33,6 @@ public final class ForgeConstants {
     public static final String TYPE_LIST_FILE                        = LISTS_DIR + "TypeLists.txt";
     public static final String IMAGE_LIST_TOKENS_FILE                = LISTS_DIR + "token-images.txt";
     public static final String IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE  = LISTS_DIR + "quest-opponent-icons.txt";
-    public static final String IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE  = LISTS_DIR + "quest-pet-shop-icons.txt";
     public static final String IMAGE_LIST_QUEST_TOKENS_FILE          = LISTS_DIR + "quest-pet-token-images.txt";
     public static final String IMAGE_LIST_QUEST_BOOSTERS_FILE        = LISTS_DIR + "booster-images.txt";
     public static final String IMAGE_LIST_QUEST_FATPACKS_FILE        = LISTS_DIR + "fatpack-images.txt";
@@ -74,12 +73,12 @@ public final class ForgeConstants {
     public static final String SKINS_DIR         = RES_DIR + "skins/";
     public static final String DEFAULT_SKINS_DIR = SKINS_DIR + "default/";
     //don't associate these skin files with a directory since skin directory will be determined later
-    public static final String SPRITE_ICONS_FILE      = "sprite_icons.png"; 
+    public static final String SPRITE_ICONS_FILE      = "sprite_icons.png";
     public static final String SPRITE_FOILS_FILE      = "sprite_foils.png";
     public static final String SPRITE_OLD_FOILS_FILE  = "sprite_old_foils.png";
     public static final String SPRITE_TROPHIES_FILE   = "sprite_trophies.png";
     public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
-    public static final String SPRITE_PLANAR_CONQUEST_FILE = "sprite_planar_conquest.png"; 
+    public static final String SPRITE_PLANAR_CONQUEST_FILE = "sprite_planar_conquest.png";
     public static final String FONT_FILE              = "font1.ttf";
     public static final String SPLASH_BG_FILE         = "bg_splash.png";
     public static final String MATCH_BG_FILE          = "bg_match.jpg";
@@ -175,8 +174,7 @@ public final class ForgeConstants {
             CACHE_TOURNAMENTPACK_PICS_DIR };
 
     // URLs
-    private static final String URL_CARDFORGE = "http://cardforge.org";
-    public static final String URL_DRAFT_UPLOAD   = URL_CARDFORGE + "/draftAI/submitDraftData.php";
-    public static final String URL_PIC_DOWNLOAD   = URL_CARDFORGE + "/fpics/";
-    public static final String URL_PRICE_DOWNLOAD = URL_CARDFORGE + "/MagicInfo/pricegen.php";
+    private static final String URL_CARDFORGE = "http://downloads.cardforge.link";
+    public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
+    public static final String URL_PRICE_DOWNLOAD = "http://www.cardforge.org/MagicInfo/pricegen.php";
 }

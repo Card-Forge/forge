@@ -6,5 +6,5 @@ T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Player | TriggerZones$ Command | Exe
 SVar:TrigAddMana:AB$ Mana | Cost$ 0 | Produced$ G | Amount$ 2 | Defined$ TriggeredPlayer
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/eladamri_lord_of_leaves_avatar.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Eladamri, Lord of Leaves Avatar.full.jpg
 Oracle:Hand -1, life +2\nAt the beginning of each player's precombat main phase, that player adds {G}{G} to his or her mana pool.

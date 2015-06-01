@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+3/-4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ You may cast artifact, creature, and enchantment spells as though they had flash.
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/tawnos.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Tawnos.full.jpg
 Oracle:Hand +3, life -4\nYou may cast artifact, creature, and enchantment spells as though they had flash.

@@ -4,5 +4,5 @@ Types:Vanguard
 HandLifeModifier:+1/+6
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.nonCreature+YouCtrl | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ Each noncreature artifact you control is an artifact creature with power and toughness each equal to its converted mana cost.
 SVar:AffectedX:Count$CardManaCost
-SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/karn.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Karn.full.jpg
 Oracle:Hand +1, life +6\nEach noncreature artifact you control is an artifact creature with power and toughness each equal to its converted mana cost.

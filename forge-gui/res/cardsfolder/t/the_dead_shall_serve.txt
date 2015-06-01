@@ -6,5 +6,5 @@ SVar:TrigControl:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Bat
 SVar:DBPump:DB$ PumpAll | ValidCards$ Card.IsRemembered | KW$ HIDDEN CARDNAME attacks specific player each combat if able:CardOwner | UntilLoseControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:OneEach:PlayerCountOpponents$Amount
-SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/the_dead_shall_serve.jpg
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/The Dead Shall Serve.full.jpg
 Oracle:When you set this scheme in motion, for each opponent, put up to one target creature card from that player's graveyard onto the battlefield under your control. Each of those creatures attacks its owner each combat if able.
