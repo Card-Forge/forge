@@ -89,6 +89,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<>("Game Log Verbosity:");
     private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>("Close Action:");
     private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<>("AI Personality:");
+    private final FComboBoxPanel<String> cbpDisplayColorIdentity = new FComboBoxPanel<>("Display Color Identity:");
 
     /**
      * Constructor.
@@ -223,6 +224,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbStackCreatures, regularConstraints);
         pnlPrefs.add(new NoteLabel("Stacks identical creatures on the battlefield like lands, artifacts, and enchantments."), regularConstraints);
+
+        pnlPrefs.add(cbpDisplayColorIdentity, "w 80%!, gap 10% 0 0 10px, span 2 1");
+        pnlPrefs.add(new NoteLabel("Displays the color identity of cards in the card detail information panel."), regularConstraints);
 
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
@@ -492,6 +496,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
+    }
+
+    public FComboBoxPanel<String> getDisplayColorIdentity() {
+        return cbpDisplayColorIdentity;
     }
 
     public FComboBoxPanel<CloseAction> getCloseActionComboBoxPanel() {

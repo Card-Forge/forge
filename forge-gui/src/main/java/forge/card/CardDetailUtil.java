@@ -18,6 +18,8 @@ import forge.game.card.CounterType;
 import forge.item.InventoryItemFromSet;
 import forge.item.PreconDeck;
 import forge.item.SealedProduct;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.util.Lang;
 
 public class CardDetailUtil {
@@ -153,6 +155,19 @@ public class CardDetailUtil {
         return borderColors;
     }
 
+    public static String getColorIdentity(final CardStateView c) {
+        ColorSet identity = c.getColors();
+        String strIdentity = ""; 
+
+        if (identity.hasWhite()) { strIdentity += "{W}"; }
+        if (identity.hasBlue())  { strIdentity += "{U}"; }
+        if (identity.hasBlack()) { strIdentity += "{B}"; }
+        if (identity.hasRed())   { strIdentity += "{R}"; }
+        if (identity.hasGreen()) { strIdentity += "{G}"; }
+
+        return strIdentity;
+    }
+    
     public static DetailColors getRarityColor(final CardRarity rarity) {
         switch (rarity) {
             case Uncommon:
@@ -490,6 +505,20 @@ public class CardDetailUtil {
             }
             final String mustBlockThese = Lang.joinHomogenous(card.getMustBlockCards());
             area.append("Must block " + mustBlockThese);
+        }
+
+        //show card color identity if enabled
+        String colorIdentMode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_DISPLAY_COLOR_IDENTITY);
+        if (!colorIdentMode.equals("Never")) {
+            final String colorIdent = getColorIdentity(state);
+            final int numColors = state.getColors().countColors();
+            if (!colorIdentMode.equals("Only Multicolor") || numColors > 1) {
+                if (area.length() != 0) {
+                    area.append("\n\n");
+                }
+                area.append("Color identity: ");
+                area.append(colorIdent.isEmpty() ? "colorless" : colorIdent);
+            }
         }
 
         //show current storm count for storm cards

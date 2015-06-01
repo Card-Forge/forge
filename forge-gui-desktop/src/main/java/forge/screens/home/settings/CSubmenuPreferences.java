@@ -172,6 +172,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
         initializeAiProfilesComboBox();
+        initializeColorIdentityCombobox();
         initializePlayerNameButton();
     }
 
@@ -298,6 +299,15 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
     }
 
+    private void initializeColorIdentityCombobox() {
+        final String[] elems = {"Never", "Only Multicolor", "Always"};
+        final FPref userSetting = FPref.UI_DISPLAY_COLOR_IDENTITY;
+        final FComboBoxPanel<String> panel = this.view.getDisplayColorIdentity();
+        final FComboBox<String> comboBox = createComboBox(elems, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+    
     private <E> FComboBox<E> createComboBox(final E[] items, final ForgePreferences.FPref setting) {
         final FComboBox<E> comboBox = new FComboBox<>(items);
         addComboBoxListener(comboBox, setting);
