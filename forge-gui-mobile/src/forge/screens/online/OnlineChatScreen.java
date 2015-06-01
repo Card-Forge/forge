@@ -2,6 +2,8 @@ package forge.screens.online;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+
 import forge.model.FModel;
 import forge.net.IOnlineChatInterface;
 import forge.net.IRemote;
@@ -41,8 +43,6 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
 
         txtSendMessage.setText("");
 
-        addMessage(message);
-
         if (gameClient != null) {
             gameClient.send(new MessageEvent(prefs.getPref(FPref.PLAYER_NAME), message));
         }
@@ -68,5 +68,6 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
     public void addMessage(String message) {
         lstLog.addItem(message);
         lstLog.scrollToBottom();
+        Gdx.graphics.requestRendering();
     }
 }
