@@ -35,8 +35,13 @@ public class SacrificeAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        // AI should only activate this during Human's turn
-        boolean chance = sacrificeTgtAI(ai, sa);
+        if (sa.hasParam("AILogic")) {
+            if ("OpponentOnly".equals(sa.getParam("AILogic"))) {
+                if (sa.getActivatingPlayer() == ai) {
+                	return false;
+                }
+            }
+        }
 
         // Improve AI for triggers. If source is a creature with:
         // When ETB, sacrifice a creature. Check to see if the AI has something
@@ -45,7 +50,7 @@ public class SacrificeAi extends SpellAbilityAi {
         // Eventually, we can call the trigger of ETB abilities with not
         // mandatory as part of the checks to cast something
 
-        return chance || mandatory;
+        return sacrificeTgtAI(ai, sa) || mandatory;
     }
 
     private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa) {

@@ -524,9 +524,14 @@ public class ComputerUtil {
         final CardCollection sacrificed = new CardCollection();
         final Card host = source.getHostCard();
 
-        if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) { 
+        if ("OpponentOnly".equals(source.getParam("AILogic"))) {
+        	if(!source.getActivatingPlayer().isOpponentOf(ai)) {
+        		return sacrificed; // sacrifice none 
+        	}
+        } else if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) { 
             return sacrificed; // sacrifice none 
         }
+
         if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit")) {
         	if (source.hasParam("Exploit")) {
         		for (Trigger t : host.getTriggers()) {
