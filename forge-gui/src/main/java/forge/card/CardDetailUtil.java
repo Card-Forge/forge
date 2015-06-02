@@ -233,6 +233,54 @@ public class CardDetailUtil {
         return id.isEmpty() ? id : "[" + id + "]";
     }
 
+    public static String formatCardColorIdentity(final CardStateView state) {
+        //show card color identity if enabled
+        final String colorIdentMode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_DISPLAY_COLOR_IDENTITY);
+        final CardView card = state.getCard();
+        boolean showIdentity = false;
+        String colorIdent = "";
+
+        if (!colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_NEVER)) {
+            colorIdent = getColorIdentity(state);
+
+            if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_CHANGED)) {
+                String origIdent = "";
+                PaperCard origPaperCard = null;
+                Card origCard = null;
+                try {
+                    if (!card.getName().isEmpty()) {
+                        origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getName());
+                    } else {
+                        // probably a morph or manifest, try to get its identity from the alternate state
+                        String altName = card.getAlternateState().getName();
+                        if (!altName.isEmpty()) {
+                            origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getAlternateState().getName());
+                        }
+                    }
+                    if (origPaperCard != null) {
+                        origCard = Card.getCardForUi(origPaperCard); // if null, probably a variant card
+                    }
+                    origIdent = origCard != null ? getColorIdentity(CardView.get(origCard).getCurrentState()) : "";
+                } catch(Exception ex) {
+                    System.err.println("Unexpected behavior: card " + card.getName() + "[" + card.getId() + "] tripped an exception when trying to process color identity.");
+                } 
+                showIdentity = !colorIdent.equals(origIdent);
+            } else if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR)) {
+                final int numColors = state.getColors().countColors();
+                showIdentity = numColors > 1;
+            } else if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_ALWAYS)) {
+                showIdentity = true;
+            }
+
+            // do not show identity for temp effect cards, emblems and the like
+            if (state.getType().hasSubtype("Effect")) {
+                showIdentity = false;
+            }
+        }
+
+        return showIdentity ? colorIdent : "";
+    }
+
     public static String composeCardText(final CardStateView state, final GameView gameView, final boolean canShow) {
         if (!canShow) { return ""; }
 
@@ -511,52 +559,13 @@ public class CardDetailUtil {
         }
 
         //show card color identity if enabled
-        String colorIdentMode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_DISPLAY_COLOR_IDENTITY);
-        if (!colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_NEVER)) {
-            final String colorIdent = getColorIdentity(state);
-            boolean showIdentity = false;
-
-            if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_CHANGED)) {
-                String origIdent = "";
-                PaperCard origPaperCard = null;
-                Card origCard = null;
-                try {
-                    if (!card.getName().isEmpty()) {
-                        origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getName());
-                    } else {
-                        // probably a morph or manifest, try to get its identity from the alternate state
-                        String altName = card.getAlternateState().getName();
-                        if (!altName.isEmpty()) {
-                            origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getAlternateState().getName());
-                        }
-                    }
-                    if (origPaperCard != null) {
-                        origCard = Card.getCardForUi(origPaperCard); // if null, probably a variant card
-                    }
-                    origIdent = origCard != null ? getColorIdentity(CardView.get(origCard).getCurrentState()) : "";
-                } catch(Exception ex) {
-                    System.err.println("Unexpected behavior: card " + card.getName() + "[" + card.getId() + "] tripped an exception when trying to process color identity.");
-                } 
-                showIdentity = !colorIdent.equals(origIdent);
-            } else if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR)) {
-                final int numColors = state.getColors().countColors();
-                showIdentity = numColors > 1;
-            } else if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_ALWAYS)) {
-                showIdentity = true;
+        String colorIdent = formatCardColorIdentity(state);
+        if (!colorIdent.isEmpty()) {
+            if (area.length() != 0) {
+                area.append("\n\n");
             }
-
-            // do not show identity for temp effect cards, emblems and the like
-            if (state.getType().hasSubtype("Effect")) {
-                showIdentity = false;
-            }
-
-            if (showIdentity) {
-                if (area.length() != 0) {
-                    area.append("\n\n");
-                }
-                area.append("Color identity: ");
-                area.append(colorIdent.isEmpty() ? "colorless" : colorIdent);
-            }
+            area.append("Color identity: ");
+            area.append(colorIdent.isEmpty() ? "colorless" : colorIdent);
         }
 
         //show current storm count for storm cards
