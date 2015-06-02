@@ -234,7 +234,6 @@ public class CardDetailUtil {
     }
 
     public static String formatCardColorIdentity(final CardStateView state) {
-        //show card color identity if enabled
         final String colorIdentMode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_DISPLAY_COLOR_IDENTITY);
         final CardView card = state.getCard();
         boolean showIdentity = false;
