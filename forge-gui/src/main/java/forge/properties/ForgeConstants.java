@@ -180,7 +180,8 @@ public final class ForgeConstants {
 
     // Constants for Display Card Identity game setting
     public static final String DISP_COLOR_IDENT_ALWAYS = "Always";
-    public static final String DISP_COLOR_IDENT_MULTICOLOR = "Only Multicolor";
+    public static final String DISP_COLOR_IDENT_CHANGED = "Changed";
+    public static final String DISP_COLOR_IDENT_MULTICOLOR = "Multicolor";
     public static final String DISP_COLOR_IDENT_NEVER = "Never";
 
 }

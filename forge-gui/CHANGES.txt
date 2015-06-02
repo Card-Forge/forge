@@ -35,11 +35,13 @@ The interface has received several small changes.
 There's a new option "Display Color Identity" in both desktop and mobile Forge 
 that allows you to display the current color identity of cards. It's disabled
 by default (set to "Never") but can be toggled to "Always" (which displays color
-identity for all cards, even mono-color) or to "Only Multicolor" (which only
-displays color identity of cards that are currently of two or more colors). This
-might help with effects such as Painter's Servant which add colors to cards and
-which make all cards display with the gold border. The option is currently found
-under "Graphic Options" for both versions of Forge.
+identity for all cards, even mono-color), to "Changed" (which displays color
+identity of all cards whose color identity has been altered compared to its 
+"pristine" state) or "Multicolor" (which only displays color identity of cards 
+that are currently of two or more colors). This might help with effects such as
+ Painter's Servant which add colors to cards and which make all cards display 
+with the gold border. The option is currently found under "Graphic Options" for
+both versions of Forge.
 
 
 - Display tokens on the same row as other cards / on their own row -

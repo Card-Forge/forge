@@ -11,14 +11,17 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Sets;
 
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.item.InventoryItemFromSet;
+import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.item.SealedProduct;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.util.Lang;
 
@@ -509,10 +512,37 @@ public class CardDetailUtil {
 
         //show card color identity if enabled
         String colorIdentMode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_DISPLAY_COLOR_IDENTITY);
-        if (!colorIdentMode.equals("Never")) {
+        if (!colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_NEVER)) {
             final String colorIdent = getColorIdentity(state);
-            final int numColors = state.getColors().countColors();
-            if (!colorIdentMode.equals("Only Multicolor") || numColors > 1) {
+            boolean showIdentity = false;
+
+            if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_CHANGED)) {
+                String origIdent = "";
+                PaperCard origPaperCard = null;
+                Card origCard = null;
+                try {
+                    if (!card.getName().isEmpty()) {
+                        origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getName());
+                    } else {
+                        // probably a morph, try to get its identity from the alternate state
+                        origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getAlternateState().getName());
+                    }
+                    if (origPaperCard != null) {
+                        origCard = Card.getCardForUi(origPaperCard); // if null, probably a variant card
+                    }
+                    origIdent = origCard != null ? getColorIdentity(CardView.get(origCard).getCurrentState()) : "";
+                } catch(Exception ex) {
+                    System.err.println("Unexpected behavior: card " + card.getName() + "[" + card.getId() + "] tripped an exception when trying to process color identity.");
+                } 
+                showIdentity = !colorIdent.equals(origIdent);
+            } else if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR)) {
+                final int numColors = state.getColors().countColors();
+                showIdentity = numColors > 1;
+            } else if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_ALWAYS)) {
+                showIdentity = true;
+            }
+
+            if (showIdentity) {
                 if (area.length() != 0) {
                     area.append("\n\n");
                 }

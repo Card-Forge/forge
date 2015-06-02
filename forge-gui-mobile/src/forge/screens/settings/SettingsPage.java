@@ -166,7 +166,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_COLOR_IDENTITY,
                 "Display Color Identity",
                 "Displays the color identity of cards in the card detail information panel.",
-                new String[]{ForgeConstants.DISP_COLOR_IDENT_NEVER, ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR, ForgeConstants.DISP_COLOR_IDENT_ALWAYS}),
+                new String[]{
+                    ForgeConstants.DISP_COLOR_IDENT_NEVER, ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR, 
+                    ForgeConstants.DISP_COLOR_IDENT_CHANGED, ForgeConstants.DISP_COLOR_IDENT_ALWAYS}),
                 4);
 
         //Card Overlays
