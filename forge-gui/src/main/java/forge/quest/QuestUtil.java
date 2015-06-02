@@ -17,13 +17,7 @@
  */
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.collect.ImmutableMap;
-
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
@@ -51,6 +45,10 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -202,7 +200,7 @@ public class QuestUtil {
 
         if (qCtrl.getWorld() != newWorld) {
             boolean needRemove = false;
-            if (nextChallengeInWins() < 1 && qCtrl.getAchievements().getCurrentChallenges().size() > 0) {
+            if (nextChallengeInWins() < 1 && !qCtrl.getAchievements().getCurrentChallenges().isEmpty()) {
                 needRemove = true;
 
                 if (!SOptionPane.showConfirmDialog(
@@ -296,7 +294,7 @@ public class QuestUtil {
                 view.getCbxPet().removeAllItems();
 
                 // Pet list visibility
-                if (petList.size() > 0) {
+                if (!petList.isEmpty()) {
                     view.getCbxPet().setVisible(true);
                     view.getCbxPet().addItem("Don't summon a pet");
 
@@ -570,13 +568,13 @@ public class QuestUtil {
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
+        gui.setPlayerAvatar(aiPlayer, event);
         FThreads.invokeInEdtNowOrLater(new Runnable(){
             @Override
             public void run() {
                 hostedMatch.startMatch(rules, null, starter, ImmutableMap.of(humanStart, gui));
             }
         });
-        gui.setPlayerAvatar(aiPlayer, event);
     }
 
     private static Deck getDeckForNewGame() {
