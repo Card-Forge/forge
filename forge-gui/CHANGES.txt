@@ -39,7 +39,7 @@ identity for all cards, even mono-color), to "Changed" (which displays color
 identity of all cards whose color identity has been altered compared to its 
 "pristine" state) or "Multicolor" (which only displays color identity of cards 
 that are currently of two or more colors). This might help with effects such as
- Painter's Servant which add colors to cards and which make all cards display 
+ Painter's Servant which add colors to cards and which make most cards display 
 with the gold border. The option is currently found under "Graphic Options" for
 both versions of Forge.
 
