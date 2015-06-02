@@ -9,4 +9,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ StoreDragons | Static$ True
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons
 SVar:StoreNoDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 0 | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_tongue_invocation.jpg
-Oracle:As an additional cost to cast Foul-Tongue Invocation, you may reveal a Dragon card from your hand.\nTarget player sacrifices a creature. If you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, you gain 4 life.
+Oracle:As an additional cost to cast Foul-Tongue Invocation, you may reveal a Dragon card from your hand.\nTarget player sacrifices a creature. If you revealed a Dragon card or controlled a Dragon as you cast Foul-Tongue Invocation, you gain 4 life.
