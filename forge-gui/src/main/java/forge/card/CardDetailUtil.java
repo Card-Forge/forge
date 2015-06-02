@@ -545,6 +545,11 @@ public class CardDetailUtil {
                 showIdentity = true;
             }
 
+            // do not show identity for temp effect cards, emblems and the like
+            if (state.getType().hasSubtype("Effect")) {
+                showIdentity = false;
+            }
+
             if (showIdentity) {
                 if (area.length() != 0) {
                     area.append("\n\n");
