@@ -168,6 +168,10 @@ public class CardDetailUtil {
         if (identity.hasRed())   { strIdentity += "{R}"; }
         if (identity.hasGreen()) { strIdentity += "{G}"; }
 
+        if (strIdentity.isEmpty()) {
+            strIdentity = "colorless";
+        }
+
         return strIdentity;
     }
     
@@ -564,7 +568,7 @@ public class CardDetailUtil {
                 area.append("\n\n");
             }
             area.append("Color identity: ");
-            area.append(colorIdent.isEmpty() ? "colorless" : colorIdent);
+            area.append(colorIdent);
         }
 
         //show current storm count for storm cards
