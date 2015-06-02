@@ -524,8 +524,11 @@ public class CardDetailUtil {
                     if (!card.getName().isEmpty()) {
                         origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getName());
                     } else {
-                        // probably a morph, try to get its identity from the alternate state
-                        origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getAlternateState().getName());
+                        // probably a morph or manifest, try to get its identity from the alternate state
+                        String altName = card.getAlternateState().getName();
+                        if (!altName.isEmpty()) {
+                            origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getAlternateState().getName());
+                        }
                     }
                     if (origPaperCard != null) {
                         origCard = Card.getCardForUi(origPaperCard); // if null, probably a variant card
