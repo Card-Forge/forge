@@ -87,17 +87,6 @@ public class ReplaceDamage extends ReplacementEffect {
                 }
             }
         }
-        if (getMapParams().containsKey("IsNonCombat")) {
-            if (getMapParams().get("IsNonCombat").equals("True")) {
-                if (((Boolean) runParams.get("IsCombat"))) {
-                    return false;
-                }
-            } else {
-                if (!(Boolean) runParams.get("IsCombat")) {
-                    return false;
-                }
-            }
-        }
         if (getMapParams().containsKey("IsEquipping") && !getHostCard().isEquipping()) {
             return false;
         }
