@@ -527,6 +527,11 @@ public class ComputerUtilMana {
             return manaChoices.get(0);
         }
 
+        // if we are simulating mana payment for the human controller, use the first mana available (and avoid prompting the human player)
+        if (!(ai.getController() instanceof PlayerControllerAi)) {
+            return manaChoices.get(0); 
+        }
+
         // Let them choose then
         return ai.getController().chooseManaFromPool(manaChoices);
     }
