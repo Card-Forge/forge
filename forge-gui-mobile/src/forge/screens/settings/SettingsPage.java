@@ -168,7 +168,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Displays the color identity of cards in the card detail information panel.",
                 new String[]{
                     ForgeConstants.DISP_COLOR_IDENT_NEVER, ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR, 
-                    ForgeConstants.DISP_COLOR_IDENT_CHANGED, ForgeConstants.DISP_COLOR_IDENT_ALWAYS}),
+                    ForgeConstants.DISP_COLOR_IDENT_CHANGED, ForgeConstants.DISP_COLOR_IDENT_MULTI_OR_CHANGED,
+                    ForgeConstants.DISP_COLOR_IDENT_ALWAYS}),
                 4);
 
         //Card Overlays
