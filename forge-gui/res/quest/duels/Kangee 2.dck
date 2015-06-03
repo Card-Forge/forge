@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Kangee 2
+Title=Kangee
+Difficulty=medium
+Description=WU Bird deck
+Icon=Kangee.jpg
+Deck Type=constructed
+[main]
+1 Abzan Skycaptain
+1 Ageless Sentinels
+2 Airborne Aid
+1 Anvilwrought Raptor
+1 Aven Envoy
+3 Aven Skirmisher
+2 Battle Screech
+1 Carrier Pigeons
+1 Coast Watcher
+1 Duskrider Falcon
+4 Flood Plain
+4 Flooded Strand
+1 Freewind Falcon
+1 Glacial Fortress
+4 Hallowed Fountain
+2 Island
+1 Kingfisher
+1 Palace Familiar
+2 Plains
+1 Roc Egg
+1 Runewing
+1 Skyshroud Condor
+1 Soulcatchers' Aerie
+4 Storm Crow
+1 Talon Trooper
+4 Tundra
+4 Veil of Birds
+1 Kangee, Aerie Keeper
+1 Aven Brigadier
+1 Cloudreach Cavalry
+1 Giant Albatross
+2 Warden of Evos Isle
+3 Soulcatcher
+[sideboard]
