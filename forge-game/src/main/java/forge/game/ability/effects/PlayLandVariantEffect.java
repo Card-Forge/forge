@@ -1,17 +1,13 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
+import com.google.common.collect.Maps;
 import forge.StaticData;
-import forge.card.CardStateName;
 import forge.card.CardRulesPredicates;
+import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -27,39 +23,38 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 
+import java.util.List;
+import java.util.Map;
+
 public class PlayLandVariantEffect extends SpellAbilityEffect {
 
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
-    public void resolve(SpellAbility sa) {
-        Card source = sa.getHostCard();
-        Player activator = sa.getActivatingPlayer();
+    public void resolve(final SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        final Player activator = sa.getActivatingPlayer();
         final Game game = source.getGame();
         final String landType = sa.getParam("Clone");
         List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
         if ("BasicLand".equals(landType)) {
-            Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES);
+            final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES);
             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
         }
         // current color of source card
-        ColorSet color = CardUtil.getColors(source);
+        final ColorSet color = CardUtil.getColors(source);
         if (color.isColorless()) {
             return;
         }
         // find basic lands that can produce mana of one of the card's colors
-        final List<String> landnames = new ArrayList<String>();
+        final List<String> landNames = Lists.newArrayList();
         for (byte i = 0; i < MagicColor.WUBRG.length; i++) {
             if (color.hasAnyColor(MagicColor.WUBRG[i])) {
-                landnames.add(MagicColor.Constant.BASIC_LANDS.get(i));
+                landNames.add(MagicColor.Constant.BASIC_LANDS.get(i));
             }
         }
-        Predicate<PaperCard> cp = Predicates.compose(new Predicate<String>() {
+        final Predicate<PaperCard> cp = Predicates.compose(new Predicate<String>() {
             @Override
             public boolean apply(final String name) {
-                return landnames.contains(name);
+                return landNames.contains(name);
             }
         }, PaperCard.FN_GET_NAME);
         cards = Lists.newArrayList(Iterables.filter(cards, cp));
@@ -74,12 +69,12 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
             random = CardFactory.getCard(ran, activator, game);
         }
 
-        String imageFileName = game.getRules().canCloneUseTargetsImage ? source.getImageKey() : random.getImageKey();
+        final String imageFileName = game.getRules().canCloneUseTargetsImage() ? source.getImageKey() : random.getImageKey();
         source.addAlternateState(CardStateName.Cloner, false);
         source.switchStates(CardStateName.Original, CardStateName.Cloner, false);
         source.setState(CardStateName.Original, false);
         source.updateStateForView();
-        CardStateName stateToCopy = random.getCurrentStateName();
+        final CardStateName stateToCopy = random.getCurrentStateName();
         CardFactory.copyState(random, stateToCopy, source, source.getCurrentStateName());
         source.setImageKey(imageFileName);
         
@@ -90,7 +85,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         game.fireEvent(new GameEventLandPlayed(activator, source));
         
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Card", source);
         game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
         game.getStack().unfreezeStack();

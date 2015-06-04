@@ -4,19 +4,19 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public class GameRules {
-    private GameType gameType;
+    private final GameType gameType;
     private boolean manaBurn;
     private int poisonCountersToLose = 10; // is commonly 10, but turns into 15 for 2HG
     private int gamesPerMatch = 3;
     private int gamesToWinMatch = 2;
     private boolean playForAnte = false;
     private boolean matchAnteRarity = false;
-    private EnumSet<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
+    private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
 
     // it's a preference, not rule... but I could hardly find a better place for it
-    public boolean canCloneUseTargetsImage;
-    
-    public GameRules(GameType type) {
+    private boolean canCloneUseTargetsImage;
+
+    public GameRules(final GameType type) {
         this.gameType = type;
     }
 
@@ -24,28 +24,19 @@ public class GameRules {
         return gameType;
     }
 
-    /**
-     * @return the manaBurn
-     */
     public boolean hasManaBurn() {
         return manaBurn;
     }
-    /**
-     * @param manaBurn the manaBurn to set
-     */
-    public void setManaBurn(boolean manaBurn) {
+
+    public void setManaBurn(final boolean manaBurn) {
         this.manaBurn = manaBurn;
     }
-    /**
-     * @return the poisonCountersToLose
-     */
+
     public int getPoisonCountersToLose() {
         return poisonCountersToLose;
     }
-    /**
-     * @param poisonCountersToLose the poisonCountersToLose to set
-     */
-    public void setPoisonCountersToLose(int amount) {
+
+    public void setPoisonCountersToLose(final int amount) {
         this.poisonCountersToLose = amount;
     }
 
@@ -53,7 +44,7 @@ public class GameRules {
         return gamesPerMatch;
     }
 
-    public void setGamesPerMatch(int gamesPerMatch) {
+    public void setGamesPerMatch(final int gamesPerMatch) {
         this.gamesPerMatch = gamesPerMatch;
         this.gamesToWinMatch = gamesPerMatch / 2 + 1;
     }
@@ -62,7 +53,7 @@ public class GameRules {
         return playForAnte;
     }
 
-    public void setPlayForAnte(boolean useAnte) {
+    public void setPlayForAnte(final boolean useAnte) {
         this.playForAnte = useAnte;
     }
 
@@ -70,7 +61,7 @@ public class GameRules {
         return matchAnteRarity;
     }
 
-    public void setMatchAnteRarity(boolean matchRarity) {
+    public void setMatchAnteRarity(final boolean matchRarity) {
         matchAnteRarity = matchRarity;
     }
 
@@ -78,15 +69,22 @@ public class GameRules {
         return gamesToWinMatch;
     }
 
-    public void setAppliedVariants(Set<GameType> appliedVariants) {
+    public void setAppliedVariants(final Set<GameType> appliedVariants) {
         this.appliedVariants.addAll(appliedVariants);
     }
 
-    public boolean hasAppliedVariant(GameType variant) {
+    public boolean hasAppliedVariant(final GameType variant) {
         return appliedVariants.contains(variant);
     }
 
     public boolean hasCommander() {
         return appliedVariants.contains(GameType.Commander) || appliedVariants.contains(GameType.TinyLeaders);
+    }
+
+    public boolean canCloneUseTargetsImage() {
+        return canCloneUseTargetsImage;
+    }
+    public void setCanCloneUseTargetsImage(final boolean canCloneUseTargetsImage) {
+        this.canCloneUseTargetsImage = canCloneUseTargetsImage;
     }
 }

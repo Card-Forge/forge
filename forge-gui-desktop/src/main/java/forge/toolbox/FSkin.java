@@ -1058,7 +1058,7 @@ public class FSkin {
             final File f = new File(preferredDir + ForgeConstants.SPLASH_BG_FILE);
             if (!f.exists()) {
                 if (skinName.equals("default")) {
-                    throw new RuntimeException("Cannot find default skin.");
+                    throw new RuntimeException(String.format("Cannot find default skin at %s", f.getAbsolutePath()));
                 }
                 loadLight("default", true);
                 return;

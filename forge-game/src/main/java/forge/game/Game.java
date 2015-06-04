@@ -233,7 +233,7 @@ public class Game {
      */
     public final FCollectionView<Player> getNonactivePlayers() {
         // Don't use getPlayersInTurnOrder to prevent copying the player collection twice
-        final FCollection<Player> players = new FCollection<Player>(ingamePlayers);;
+        final FCollection<Player> players = new FCollection<>(ingamePlayers);
         players.remove(phaseHandler.getPlayerTurn());
         if (!turnOrder.isDefaultDirection()) {
             Collections.reverse(players);
@@ -636,12 +636,12 @@ public class Game {
             List<CardRarity> validRarities = new ArrayList<>(Arrays.asList(CardRarity.values()));
             for (final Player player : getPlayers()) {
                 final Set<CardRarity> playerRarity = getValidRarities(player.getCardsIn(ZoneType.Library));
-                if (onePlayerHasTimeShifted == false) {
+                if (!onePlayerHasTimeShifted) {
                     onePlayerHasTimeShifted = playerRarity.contains(CardRarity.Special);
                 }
                 validRarities.retainAll(playerRarity);
             }
-            
+
             if (validRarities.size() == 0) { //If no possible rarity matches were found, use the original method to choose antes
                 for (Player player : getPlayers()) {
                     chooseRandomCardsForAnte(player, anteed);
