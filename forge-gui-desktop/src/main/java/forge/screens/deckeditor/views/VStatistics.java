@@ -39,20 +39,11 @@ public enum VStatistics implements IVDoc<CStatistics> {
     private FLabel lblAMC = new FLabel.Builder()
             .text("AVERAGE MANA COST: 0.00").tooltip("Average mana cost")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
-    private FLabel lblTSCWhite = new FLabel.Builder()
-            .text("WHITE MANA SYMBOLS IN MANA COST: 0").tooltip("White mana symbol count")
+    private FLabel lblCardCountHeader = new FLabel.Builder()
+            .text("CARDS BY COLOR, TYPE AND CMC:").tooltip("Breakdown of cards by color, type and CMC")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
-    private FLabel lblTSCBlue = new FLabel.Builder()
-            .text("BLUE MANA SYMBOLS IN MANA COST: 0").tooltip("Blue mana symbol count")
-            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
-    private FLabel lblTSCBlack = new FLabel.Builder()
-            .text("BLACK MANA SYMBOLS IN MANA COST: 0").tooltip("Black mana symbol count")
-            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
-    private FLabel lblTSCRed = new FLabel.Builder()
-            .text("RED MANA SYMBOLS IN MANA COST: 0").tooltip("Red mana symbol count")
-            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
-    private FLabel lblTSCGreen = new FLabel.Builder()
-            .text("GREEN MANA SYMBOLS IN MANA COST: 0").tooltip("Green mana symbol count")
+    private FLabel lblShardCountHeader = new FLabel.Builder()
+            .text("COLORED MANA SYMBOLS IN COST:").tooltip("Amount of mana symbols in mana cost of cards")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
 
     // Total and color count labels
@@ -64,6 +55,13 @@ public enum VStatistics implements IVDoc<CStatistics> {
     private final FLabel lblRed = buildLabel(StatTypes.RED, true);
     private final FLabel lblWhite = buildLabel(StatTypes.WHITE, false);
     private final FLabel lblColorless = buildLabel(StatTypes.COLORLESS, true);
+
+    // Colored mana symbol count labels
+    private final FLabel lblWhiteShard = buildLabel(StatTypes.WHITE, true);
+    private final FLabel lblBlueShard = buildLabel(StatTypes.BLUE, true);
+    private final FLabel lblBlackShard = buildLabel(StatTypes.BLACK, true);
+    private final FLabel lblRedShard = buildLabel(StatTypes.RED, false);
+    private final FLabel lblGreenShard = buildLabel(StatTypes.GREEN, false);
 
     // Card type labels
     private final FLabel lblArtifact = buildLabel(StatTypes.ARTIFACT, true);
@@ -99,6 +97,13 @@ public enum VStatistics implements IVDoc<CStatistics> {
         lblWhite.setToolTipText("White Card Count");
         lblColorless.setToolTipText("Colorless Card Count");
 
+        // Colored mana symbol count stats
+        lblBlackShard.setToolTipText("Black Mana Symbol Count");
+        lblBlueShard.setToolTipText("Blue Mana Symbol Count");
+        lblGreenShard.setToolTipText("Green Mana Symbol Count");
+        lblRedShard.setToolTipText("Red Mana Symbol Count");
+        lblWhiteShard.setToolTipText("White Mana Symbol Count");
+
         // Type stats
         lblArtifact.setToolTipText("Artifact Card Count");
         lblCreature.setToolTipText("Creature Card Count");
@@ -127,6 +132,8 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
         // Add labels to container
         final String constraints = "w 32%!, h 35px!";
+        pnlStats.add(lblCardCountHeader, "w 96%!, h 40px!, span 3 1, gap 2% 0 0 0");
+
         pnlStats.add(lblMulti, constraints);
         pnlStats.add(lblArtifact, constraints);
         pnlStats.add(lblCMC0, constraints);
@@ -155,11 +162,13 @@ public enum VStatistics implements IVDoc<CStatistics> {
         pnlStats.add(lblSorcery, constraints);
         pnlStats.add(lblCMC6, constraints);
 
-        pnlStats.add(lblTSCWhite, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
-        pnlStats.add(lblTSCBlue, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
-        pnlStats.add(lblTSCBlack, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
-        pnlStats.add(lblTSCRed, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
-        pnlStats.add(lblTSCGreen, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
+        // Shard count stats container
+        pnlStats.add(lblShardCountHeader, "w 96%!, h 40px!, span 3 1, gap 2% 0 0 0");
+        pnlStats.add(lblWhiteShard, constraints);
+        pnlStats.add(lblBlueShard, constraints);
+        pnlStats.add(lblBlackShard, constraints);
+        pnlStats.add(lblRedShard, constraints);
+        pnlStats.add(lblGreenShard, constraints);
     }
 
     //========== Overridden methods
@@ -231,6 +240,17 @@ public enum VStatistics implements IVDoc<CStatistics> {
     public FLabel getLblColorless() { return lblColorless; }
 
     /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblBlackShard() { return lblBlackShard; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblBlueShard() { return lblBlueShard; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblGreenShard() { return lblGreenShard; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblRedShard() { return lblRedShard; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblWhiteShard() { return lblWhiteShard; }
+
+    /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblArtifact() { return lblArtifact; }
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblEnchantment() { return lblEnchantment; }
@@ -265,17 +285,6 @@ public enum VStatistics implements IVDoc<CStatistics> {
     public FLabel getLblTMC() { return lblTMC; }
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblAMC() { return lblAMC; }
-
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblTSCWhite() { return lblTSCWhite; }
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblTSCBlue() { return lblTSCBlue; }
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblTSCBlack() { return lblTSCBlack; }
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblTSCRed() { return lblTSCRed; }
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblTSCGreen() { return lblTSCGreen; }
 
     //========== Other methods
 

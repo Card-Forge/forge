@@ -55,6 +55,11 @@ public enum CStatistics implements ICDoc {
         label.setText(tmp + " (" + calculatePercentage(tmp, total) + "%)");
     }
 
+    private void setLabelValue(final JLabel label, final String str, final int value, final int total) {
+        String labelText = String.format("%s%d (%d%%)", str, value, calculatePercentage(value, total));
+        label.setText(labelText);
+    }
+
     //========== Other methods
     @SuppressWarnings("unchecked")
     private <T extends InventoryItem, TModel extends DeckBase> void analyze() {
@@ -95,11 +100,12 @@ public enum CStatistics implements ICDoc {
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC5(), deck, StatTypes.CMC_5.predicate, total);
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC6(), deck, StatTypes.CMC_6.predicate, total);
 
-        VStatistics.SINGLETON_INSTANCE.getLblTSCWhite().setText("WHITE MANA SYMBOLS IN MANA COST: " + shardCount[0]);
-        VStatistics.SINGLETON_INSTANCE.getLblTSCBlue().setText("BLUE MANA SYMBOLS IN MANA COST: " + shardCount[1]);
-        VStatistics.SINGLETON_INSTANCE.getLblTSCBlack().setText("BLACK MANA SYMBOLS IN MANA COST: " + shardCount[2]);
-        VStatistics.SINGLETON_INSTANCE.getLblTSCRed().setText("RED MANA SYMBOLS IN MANA COST: " + shardCount[3]);
-        VStatistics.SINGLETON_INSTANCE.getLblTSCGreen().setText("GREEN MANA SYMBOLS IN MANA COST: " + shardCount[4]);
+        int totShards = calculateTotalShards(shardCount);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblWhiteShard(), "Shards:", shardCount[0], totShards);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblBlueShard(), "Shards:", shardCount[1], totShards);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblBlackShard(), "Shards:", shardCount[2], totShards);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblRedShard(), "Shards:", shardCount[3], totShards);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblGreenShard(), "Shards:", shardCount[4], totShards);
 
         int tmc = 0;
         for (final Entry<PaperCard, Integer> e : deck) {
@@ -132,5 +138,13 @@ public enum CStatistics implements ICDoc {
             }
         }
         return counts;
+    }
+
+    public static int calculateTotalShards(int[] counts) {
+        int total = 0;
+        for (int count : counts) {
+            total += count;
+        }
+        return total;
     }
 }
