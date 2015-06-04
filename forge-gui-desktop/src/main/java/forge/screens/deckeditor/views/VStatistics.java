@@ -43,7 +43,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
             .text("CARDS BY COLOR, TYPE AND CMC:").tooltip("Breakdown of cards by color, type and CMC")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblShardCountHeader = new FLabel.Builder()
-            .text("COLORED MANA SYMBOLS IN COST:").tooltip("Amount of mana symbols in mana cost of cards")
+            .text("COLORED MANA SYMBOLS IN MANA COST:").tooltip("Amount of mana symbols in mana cost of cards")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
 
     // Total and color count labels
