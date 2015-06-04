@@ -1,18 +1,17 @@
 package forge.ios;
 
-import org.robovm.apple.foundation.NSAutoreleasePool;
-import org.robovm.apple.uikit.UIApplication;
-import org.robovm.apple.uikit.UIPasteboard;
-
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
 import com.badlogic.gdx.backends.iosrobovm.IOSFiles;
-
 import forge.Forge;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
+import org.robovm.apple.foundation.NSAutoreleasePool;
+import org.robovm.apple.uikit.UIApplication;
+import org.robovm.apple.uikit.UIPasteboard;
 
 public class Main extends IOSApplication.Delegate {
 
@@ -67,8 +66,18 @@ public class Main extends IOSApplication.Delegate {
         }
 
         @Override
-        public boolean openFile(String filename) {
+        public boolean openFile(final String filename) {
             return new IOSFiles().local(filename).exists();
+        }
+
+        @Override
+        public void setLandscapeMode(final boolean landscapeMode) {
+            // TODO implement this
+        }
+
+        @Override
+        public boolean isTablet() {
+            return Gdx.graphics.getWidth() > Gdx.graphics.getHeight();
         }
 
         @Override
