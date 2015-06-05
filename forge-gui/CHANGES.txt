@@ -1,7 +1,7 @@
-Forge Beta: #-#-2015 ver 1.5.39
+Forge Beta: 65-2015 ver 1.5.40
 
 
-# cards in total.
+14747 cards in total.
 
 
 -------------
@@ -112,14 +112,14 @@ You will need to update your color bias quest setting as the values are now much
 New Cards
 ---------
 
-Risen Executioner
+Commune with Lava
 Draconic Roar
+Dragonlord's Prerogative
 Foul-Tongue Invocation
 Orator of Ojutai
-Dragonlord's Prerogative
+Risen Executioner
 Scaleguard Sentinels
 Silumgar's Scorn
-Commune with Lava
 Taste of Paradise
 
 
@@ -191,7 +191,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+asepetci
+DrDev
+elcnesh
+Gos
+KrazyTheFox
+Sharkus
+Sloth
+Sol
+Swordshine
+tojammot
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
