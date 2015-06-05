@@ -384,7 +384,7 @@ public class PhaseHandler implements java.io.Serializable {
         game.getStack().unfreezeStack();
 
         // Rule 514.3a
-        if (phase == PhaseType.CLEANUP && !game.getStack().isEmpty()) {
+        if (phase == PhaseType.CLEANUP && (!game.getStack().isEmpty() || game.getStack().hasSimultaneousStackEntries())) {
             bRepeatCleanup = true;
             givePriorityToPlayer = true;
         }
