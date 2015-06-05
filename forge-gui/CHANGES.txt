@@ -58,8 +58,8 @@ Three new quest preferences (Playset Size: Basic Lands, Playset Size: Any
 Number, and Playset Size) have been added to control the number of cards to keep
  before selling extras in quest mode. One is for basic lands, one is for 
 "unlimited" cards (Relentless Rats and Shadowborn Apostle), and the last one is 
-for all other cards. This is mostly useful when playing for antes and you want t
-o keep an extra couple of cards on hand, just in case, or if you want to keep 
+for all other cards. This is mostly useful when playing for antes and you want 
+to keep an extra couple of cards on hand, just in case, or if you want to keep 
 fewer copies of basic lands around.
 
 
