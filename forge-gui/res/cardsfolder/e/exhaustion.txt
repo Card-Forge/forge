@@ -1,6 +1,12 @@
 Name:Exhaustion
 ManaCost:2 U
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Creature.OppCtrl,Land.OppCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True | SpellDescription$ Creatures and lands target opponent controls don't untap during his or her next untap step.
+A:SP$ Effect | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | SVars$ FlagUntapStep,ExileEffect,UntapCount | RememberObjects$ Targeted | Duration$ Permanent | Name$ Exhaustion Effect | SpellDescription$ Creatures and lands target opponent controls don't untap during his or her next untap step.
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.RememberedPlayerCtrl,Land.RememberedPlayerCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
+SVar:FlagUntapStep:DB$ SetSVar | SVar$ UntapCount | Type$ CountSVar | Expression$ UntapCount/Plus.1
+SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | ConditionCheckSVar$ UntapCount | ConditionSVarCompare$ EQ1 | Execute$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:UntapCount:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exhaustion.jpg
 Oracle:Creatures and lands target opponent controls don't untap during his or her next untap step.
+
