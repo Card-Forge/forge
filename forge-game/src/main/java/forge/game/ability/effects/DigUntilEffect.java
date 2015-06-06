@@ -107,6 +107,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
 
         for (final Player p : getTargetPlayers(sa)) {
+            if (p == null) {
+                continue;
+            }
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (optional && !p.getController().confirmAction(sa, null, "Do you want to dig your library?")) {
                     continue;
