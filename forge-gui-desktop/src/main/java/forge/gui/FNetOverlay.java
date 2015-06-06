@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+
 import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
@@ -15,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Singletons;
 import forge.gui.framework.SDisplayUtil;
 import forge.model.FModel;
+import forge.net.ChatMessage;
 import forge.net.IOnlineChatInterface;
 import forge.net.IRemote;
 import forge.net.event.MessageEvent;
@@ -132,7 +134,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
     public void show() {
         show(null);
     }
-    public void show(final String message) { 
+    public void show(final ChatMessage message) { 
         if (!hasBeenShown) {
             hasBeenShown = true;
             loadLocation();
@@ -144,7 +146,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
             });
         }
         if (message != null) {
-            txtLog.setText(message);
+            txtLog.setText(message.getFormattedMessage());
         }
         window.setVisible(true);
     }
@@ -203,7 +205,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
     }
 
     @Override
-    public void addMessage(final String message) {
-        txtLog.append(message);
+    public void addMessage(final ChatMessage message) {
+        txtLog.append(message.getFormattedMessage());
     }
 }

@@ -1,8 +1,5 @@
 package forge.net;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;
@@ -41,7 +38,7 @@ public class NetConnectUtil {
         return url;
     }
 
-    public static String host(final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
+    public static ChatMessage host(final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
         final int port = ForgeProfileProperties.getServerPort();
         final FServerManager server = FServerManager.getInstance();
         final ServerGameLobby lobby = new ServerGameLobby();
@@ -72,7 +69,7 @@ public class NetConnectUtil {
             }
             @Override
             public final void message(final String source, final String message) {
-                chatInterface.addMessage(formatMessage(source, message));
+                chatInterface.addMessage(new ChatMessage(source, message));
             }
             @Override
             public final void close() {
@@ -84,7 +81,7 @@ public class NetConnectUtil {
             public final void send(final NetEvent event) {
                 if (event instanceof MessageEvent) {
                     final MessageEvent message = (MessageEvent) event;
-                    chatInterface.addMessage(formatMessage(message.getSource(), message.getMessage()));
+                    chatInterface.addMessage(new ChatMessage(message.getSource(), message.getMessage()));
                     server.broadcast(event);
                 }
             }
@@ -97,7 +94,7 @@ public class NetConnectUtil {
 
         view.update(true);
 
-        return String.format("Hosting on port %d.", port);
+        return new ChatMessage(null, String.format("Hosting on port %d.", port));
     }
 
     public static void copyHostedServerUrl() {
@@ -107,7 +104,7 @@ public class NetConnectUtil {
         SOptionPane.showMessageDialog("Share the following URL with anyone who wishes to join your server. It has been copied to your clipboard for convenience.\n\n" + url, "Server URL", SOptionPane.INFORMATION_ICON);
     }
 
-    public static String join(final String url, final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
+    public static ChatMessage join(final String url, final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui);
         onlineLobby.setClient(client);
@@ -118,7 +115,7 @@ public class NetConnectUtil {
         client.addLobbyListener(new ILobbyListener() {
             @Override
             public final void message(final String source, final String message) {
-                chatInterface.addMessage(formatMessage(source, message));
+                chatInterface.addMessage(new ChatMessage(source, message));
             }
             @Override
             public final void update(final GameLobbyData state, final int slot) {
@@ -154,20 +151,6 @@ public class NetConnectUtil {
 
         client.connect(hostname, port);
 
-        return String.format("Connected to %s:%d", hostname, port);
-    }
-
-    private final static SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm:ss");
-
-    public static String formatMessage(final String source, final String message) {
-        final String now = inFormat.format(new Date());
-        final String toAdd;
-        if (source == null) {
-            toAdd = String.format("%n[%s] %s", now, message);
-        }
-        else {
-            toAdd = String.format("%n[%s] %s: %s", now, source, message);
-        }
-        return toAdd;
+        return new ChatMessage(null, String.format("Connected to %s:%d", hostname, port));
     }
 }

@@ -4,6 +4,7 @@ import forge.FThreads;
 import forge.Forge;
 import forge.interfaces.ILobbyView;
 import forge.match.GameLobby;
+import forge.net.ChatMessage;
 import forge.net.IOnlineChatInterface;
 import forge.net.IOnlineLobby;
 import forge.net.NetConnectUtil;
@@ -51,7 +52,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                             LoadingOverlay.show(caption, new Runnable() {
                                 @Override
                                 public void run() {
-                                    final String result;
+                                    final ChatMessage result;
                                     final IOnlineChatInterface chatInterface = (IOnlineChatInterface)OnlineScreen.Chat.getScreen();
                                     if (joinServer) {
                                         result = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);

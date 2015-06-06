@@ -13,6 +13,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
+import forge.net.ChatMessage;
 import forge.net.NetConnectUtil;
 import forge.screens.home.CHomeUI;
 import forge.screens.home.CLobby;
@@ -55,7 +56,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             }
         });
 
-        final String result = NetConnectUtil.host(VSubmenuOnlineLobby.SINGLETON_INSTANCE, FNetOverlay.SINGLETON_INSTANCE);
+        final ChatMessage result = NetConnectUtil.host(VSubmenuOnlineLobby.SINGLETON_INSTANCE, FNetOverlay.SINGLETON_INSTANCE);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -79,7 +80,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             }
         });
 
-        final String result = NetConnectUtil.join(url, VSubmenuOnlineLobby.SINGLETON_INSTANCE, FNetOverlay.SINGLETON_INSTANCE);
+        final ChatMessage result = NetConnectUtil.join(url, VSubmenuOnlineLobby.SINGLETON_INSTANCE, FNetOverlay.SINGLETON_INSTANCE);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
