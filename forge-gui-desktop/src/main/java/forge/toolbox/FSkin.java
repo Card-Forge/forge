@@ -54,7 +54,6 @@ import java.util.Map.Entry;
  * Assembles settings from selected or default theme as appropriate. Saves in a
  * hashtable, access using .get(settingName) method.
  */
-@SuppressWarnings("unused")
 public class FSkin {
 
     /**

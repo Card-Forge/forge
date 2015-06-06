@@ -54,7 +54,6 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: CEditorDraftingProcess.java 24872 2014-02-17 07:35:47Z drdev $
  */
-@SuppressWarnings("FieldCanBeLocal")
 public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private IBoosterDraft boosterDraft;
 
