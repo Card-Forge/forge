@@ -8,6 +8,12 @@
         <build.min.memory>-Xms128m</build.min.memory>
         <build.max.memory>-Xmx1024m</build.max.memory>
         <alpha-version>1.5.41.001</alpha-version>
+        <sign.keystore>keystore</sign.keystore>
+        <sign.alias>alias</sign.alias>
+        <sign.storepass>storepass</sign.storepass>
+        <sign.keypass>keypass</sign.keypass>
+        <cardforge.user>ftpuser</cardforge.user>
+        <cardforge.pass>ftppass</cardforge.pass>
     </properties>
 
     <parent>
@@ -109,9 +115,9 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                        <groupId>com.simpligility.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
-                        <version>3.9.0-rc.2</version>
+                        <version>4.2.1</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -121,7 +127,6 @@
                                 <platform>20</platform>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
-                            <deleteConflictingFiles>true</deleteConflictingFiles>
                             <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                             <assetsDirectory>${project.basedir}/assets</assetsDirectory>
                             <resourceDirectory>${project.basedir}/res</resourceDirectory>
@@ -138,10 +143,6 @@
                                     <argument>${build.max.memory}</argument>
                                 </jvmArguments>
                             </dex>
-                            <jvmArguments>
-                                <argument>${build.min.memory}</argument>
-                                <argument>${build.max.memory}</argument>
-                            </jvmArguments>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -155,9 +156,9 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                        <groupId>com.simpligility.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
-                        <version>3.9.0-rc.2</version>
+                        <version>4.2.1</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -170,7 +171,6 @@
                                 <verbose>false</verbose>
                             </zipalign>
                             <dexForceJumbo>true</dexForceJumbo>
-                            <deleteConflictingFiles>true</deleteConflictingFiles>
                             <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                             <assetsDirectory>${project.basedir}/assets</assetsDirectory>
                             <resourceDirectory>${project.basedir}/res</resourceDirectory>
@@ -187,10 +187,6 @@
                                     <argument>${build.max.memory}</argument>
                                 </jvmArguments>
                             </dex>
-                            <jvmArguments>
-                                <argument>${build.min.memory}</argument>
-                                <argument>${build.max.memory}</argument>
-                            </jvmArguments>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -238,9 +234,9 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                        <groupId>com.simpligility.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
-                        <version>3.9.0-rc.2</version>
+                        <version>4.2.1</version>
                         <inherited>true</inherited>
                         <configuration>
                             <sign>
@@ -328,12 +324,12 @@
                             <dependency>
                                 <groupId>commons-net</groupId>
                                 <artifactId>commons-net</artifactId>
-                                <version>1.4.1</version>
+                                <version>3.3</version>
                             </dependency>
                             <dependency>
-                                <groupId>ant</groupId>
+                                <groupId>org.apache.ant</groupId>
                                 <artifactId>ant-commons-net</artifactId>
-                                <version>1.6.5</version>
+                                <version>1.9.4</version>
                             </dependency>
                         </dependencies>
                         <executions>

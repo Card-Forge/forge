@@ -8,6 +8,7 @@ forge-ai/target
 forge-core/forge-core.iml
 forge-core/target
 forge-game/target
+forge-gui-android/*.iml
 forge-gui-android/*.keystore
 forge-gui-android/assets/fallback_skin/Thumbs.db
 forge-gui-android/bin
@@ -47,7 +48,9 @@ forge-gui-android/res/values/target
 forge-gui-android/target
 forge-gui-desktop/*.iml
 forge-gui-desktop/target
+forge-gui-ios/*.iml
 forge-gui-ios/target
+forge-gui-mobile-dev/*.iml
 forge-gui-mobile-dev/bin
 forge-gui-mobile-dev/fallback_skin/Thumbs.db
 forge-gui-mobile-dev/res
