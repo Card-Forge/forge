@@ -98,7 +98,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
                 }
                 y += bubble.getHeight() + PADDING;
             }
-            return new ScrollBounds(visibleWidth, y - PADDING);
+            return new ScrollBounds(visibleWidth, y);
         }
 
         private void addMessage(ChatMessage message) {
