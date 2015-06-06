@@ -46,7 +46,8 @@ public class GuiDownloader extends FDialog {
 
     @SuppressWarnings("serial")
     private final UiCommand cmdClose = new UiCommand() {
-        @Override public void run() {
+        @Override
+        public void run() {
             Forge.stopContinuousRendering();
             service.setCancel(true);
             hide();
@@ -84,7 +85,8 @@ public class GuiDownloader extends FDialog {
 
         getButton(0).setText("Start");
         initButton(1, "Cancel", new FEventHandler() {
-            @Override public void handleEvent(final FEvent e) {
+            @Override
+            public void handleEvent(final FEvent e) {
                 cmdClose.run();
             }
         });
@@ -98,7 +100,7 @@ public class GuiDownloader extends FDialog {
     public void show() {
         Forge.startContinuousRendering();
 
-        show();
+        super.show();
 
         service.initialize(txtAddress, txtPort, progressBar, getButton(0), cmdClose, new Runnable() {
             @Override
