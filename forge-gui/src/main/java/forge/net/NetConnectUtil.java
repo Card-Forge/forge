@@ -101,7 +101,7 @@ public class NetConnectUtil {
     }
 
     public static void copyHostedServerUrl() {
-        String hostname = "localhost";
+        String hostname = FServerManager.getInstance().getLocalAddress();
         String url = hostname + ":" + ForgeProfileProperties.getServerPort();
         GuiBase.getInterface().copyToClipboard(url);
         SOptionPane.showMessageDialog("Share the following URL with anyone who wishes to join your server. It has been copied to your clipboard for convenience.\n\n" + url, "Server URL", SOptionPane.INFORMATION_ICON);

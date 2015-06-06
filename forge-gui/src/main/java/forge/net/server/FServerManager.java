@@ -31,7 +31,6 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -196,14 +195,18 @@ public final class FServerManager {
         return null;
     }
 
-    private void mapNatPort(final int port) {
-        final String localAddress;
+    public String getLocalAddress() {
         try {
-            localAddress = InetAddress.getLocalHost().getHostAddress();
-        } catch (final UnknownHostException e) {
-            throw new RuntimeException(e);
+            return InetAddress.getLocalHost().getHostAddress();
         }
+        catch (final Exception e) {
+            e.printStackTrace();
+            return "localhost";
+        }
+    }
 
+    private void mapNatPort(final int port) {
+        final String localAddress = getLocalAddress();
         final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
         if (upnpService != null) {
             // Safeguard shutdown call, to prevent lingering port mappings
