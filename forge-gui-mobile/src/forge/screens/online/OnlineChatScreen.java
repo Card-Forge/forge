@@ -51,9 +51,6 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
 
         if (gameClient != null) {
             String source = prefs.getPref(FPref.PLAYER_NAME);
-            if (lstLog.getChildCount() % 2 == 1) {
-                source = "RemoteGuy"; //TODO: Remove this
-            }
             gameClient.send(new MessageEvent(source, message));
         }
     }
