@@ -79,10 +79,10 @@ public final class QuestUtilCards {
      */
     public static ItemPool<PaperCard> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
         final ICardDatabase db = FModel.getMagicDb().getCommonCards();
-        final ItemPool<PaperCard> pool = new ItemPool<PaperCard>(PaperCard.class);
+        final ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
 
-        List<String> landCodes = new ArrayList<String>();
-        List<String> snowLandCodes = new ArrayList<String>();
+        List<String> landCodes = new ArrayList<>();
+        List<String> snowLandCodes = new ArrayList<>();
 
         if (usedFormat != null) {
             List<String> availableEditions = usedFormat.getAllowedSetCodes();
@@ -391,7 +391,7 @@ public final class QuestUtilCards {
 
     /**
      * Lose card.
-     * @param cards
+     * @param cards The cards to lose
      */
     public void loseCards(final List<PaperCard> cards) {
         for(PaperCard pc: cards)
@@ -533,6 +533,9 @@ public final class QuestUtilCards {
                 filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, isLegalInQuestFormat(qc.getFormat()));
             }
             Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
+            if (!rightEditions.iterator().hasNext()) {
+                continue;
+            }
             this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)));
         }
     }
@@ -610,7 +613,7 @@ public final class QuestUtilCards {
      *            the count
      */
     private void generatePreconsInShop(final int count) {
-        final List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
+        final List<PreconDeck> meetRequirements = new ArrayList<>();
         for (final PreconDeck deck : QuestController.getPrecons()) {
             if (QuestController.getPreconDeals(deck).meetsRequiremnts(this.qc.getAchievements())
                     && (null == qc.getFormat() || qc.getFormat().isSetLegal(deck.getEdition()))) {
