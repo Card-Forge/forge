@@ -1,14 +1,9 @@
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
+import com.google.common.collect.ImmutableList;
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
+import forge.card.BoosterSlots;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
@@ -22,11 +17,8 @@ import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerView;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
-import forge.item.BoosterPack;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.SealedProduct;
-import forge.item.TournamentPack;
+import forge.item.*;
+import forge.item.IPaperCard.Predicates;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
@@ -36,6 +28,13 @@ import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
 import forge.util.gui.SGuiChoose;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
 
 public class QuestWinLoseController {
     private final GameView lastGame;
@@ -212,11 +211,11 @@ public class QuestWinLoseController {
         // TODO use q.qdPrefs to write bonus credits in prefs file
         final StringBuilder sb = new StringBuilder();
 
-        int credTotal = 0;
-        int credBase = 0;
+        int credTotal;
+        int credBase;
         int credGameplay = 0;
         int credUndefeated = 0;
-        int credEstates = 0;
+        int credEstates;
 
         // Basic win bonus
         final int base = FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_BASE);
@@ -391,7 +390,7 @@ public class QuestWinLoseController {
      */
     private void awardRandomRare(final String message) {
         final PaperCard c = qData.getCards().addRandomRare();
-        final List<PaperCard> cardsWon = new ArrayList<PaperCard>();
+        final List<PaperCard> cardsWon = new ArrayList<>();
         cardsWon.add(c);
 
         view.showCards(message, cardsWon);
@@ -409,7 +408,7 @@ public class QuestWinLoseController {
 
         final List<PaperCard> cardsWon = new ArrayList<>();
         List<PaperCard> cardsToAdd;
-        String typeWon = "";
+        String typeWon;
         boolean addDraftToken = false;
 
         switch (currentStreak) {
@@ -466,7 +465,7 @@ public class QuestWinLoseController {
             qData.getAchievements().addDraftToken();
         }
 
-        if (cardsWon.size() > 0) {
+        if (!cardsWon.isEmpty()) {
             view.showCards("You have achieved a " + (currentStreak == 0 ? "50" : currentStreak) + " win streak and won " + cardsWon.size() + " " + typeWon + " card" + ((cardsWon.size() != 1) ? "s" : "") + "!", cardsWon);
         }
     }
@@ -491,11 +490,12 @@ public class QuestWinLoseController {
      *
      */
     private void awardBooster() {
-        List<PaperCard> cardsWon = null;
+        List<PaperCard> cardsWon;
 
         String title;
         if (qData.getFormat() == null) {
-            final List<GameFormat> formats = new ArrayList<GameFormat>();
+
+            final List<GameFormat> formats = new ArrayList<>();
             final String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
             GameFormat pref = null;
@@ -515,13 +515,27 @@ public class QuestWinLoseController {
             qData.getCards().addAllCards(cardsWon);
 
             title = "Bonus booster pack from the \"" + selected.getName() + "\" format!";
-        }
-        else {
-            final List<String> sets = new ArrayList<String>();
+
+        } else {
+
+            final List<String> sets = new ArrayList<>();
 
             for (final SealedProduct.Template bd : FModel.getMagicDb().getBoosters()) {
                 if (bd != null && qData.getFormat().isSetLegal(bd.getEdition())) {
                     sets.add(bd.getEdition());
+                }
+            }
+
+            boolean customBooster = false;
+
+            //No boosters found for current quest settings
+            if (sets.isEmpty()) {
+                customBooster = true;
+                CardEdition.Collection editions = FModel.getMagicDb().getEditions();
+                for (CardEdition edition : editions) {
+                    if (qData.getFormat().isSetLegal(edition.getCode())) {
+                        sets.add(edition.getCode());
+                    }
                 }
             }
 
@@ -535,7 +549,7 @@ public class QuestWinLoseController {
                 maxChoices += qData.getAssets().getItemLevel(QuestItemType.MEMBERSHIP_TOKEN);
             }
 
-            final List<CardEdition> options = new ArrayList<CardEdition>();
+            final List<CardEdition> options = new ArrayList<>();
 
             while (!sets.isEmpty() && maxChoices > 0) {
                 final int ix = MyRandom.getRandom().nextInt(sets.size());
@@ -547,16 +561,32 @@ public class QuestWinLoseController {
 
             final CardEdition chooseEd = SGuiChoose.one("Choose bonus booster set", options);
 
-            final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode()));
-            cardsWon = product.get();
+            if (customBooster) {
+                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(Predicates.printedInSet(chooseEd.getCode()));
+                final IUnOpenedProduct product = new UnOpenedProduct(getBoosterTemplate(), cards);
+                cardsWon = product.get();
+            } else {
+                final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode()));
+                cardsWon = product.get();
+            }
+
             qData.getCards().addAllCards(cardsWon);
             title = "Bonus " + chooseEd.getName() + " booster pack!";
+
         }
 
         if (cardsWon != null) {
             BoosterUtils.sort(cardsWon);
             view.showCards(title, cardsWon);
         }
+    }
+
+    private SealedProduct.Template getBoosterTemplate() {
+        return new SealedProduct.Template(ImmutableList.of(
+                Pair.of(BoosterSlots.COMMON, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_COMMONS)),
+                Pair.of(BoosterSlots.UNCOMMON, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_UNCOMMONS)),
+                Pair.of(BoosterSlots.RARE_MYTHIC, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_RARES))
+        ));
     }
 
     /**
@@ -571,11 +601,11 @@ public class QuestWinLoseController {
 
         final StringBuilder sb = new StringBuilder();
         sb.append("Challenge completed.\n\n");
-        sb.append("Challenge bounty: " + questRewardCredits + " credits.");
+        sb.append("Challenge bounty: ").append(questRewardCredits).append(" credits.");
 
         qData.getAssets().addCredits(questRewardCredits);
 
-        view.showMessage(sb.toString(), "Challenge Rewards for \"" + ((QuestEventChallenge) qEvent).getTitle() + "\"", FSkinProp.ICO_QUEST_BOX);
+        view.showMessage(sb.toString(), "Challenge Rewards for \"" + qEvent.getTitle() + "\"", FSkinProp.ICO_QUEST_BOX);
 
         awardSpecialReward(null);
     }
@@ -594,20 +624,19 @@ public class QuestWinLoseController {
             return;
         }
 
-        final List<PaperCard> cardsWon = new ArrayList<PaperCard>();
+        final List<PaperCard> cardsWon = new ArrayList<>();
 
         for (final InventoryItem ii : itemsWon) {
             if (ii instanceof PaperCard) {
                 cardsWon.add((PaperCard) ii);
             }
             else if (ii instanceof TournamentPack || ii instanceof BoosterPack) {
-                final List<PaperCard> boosterCards = new ArrayList<PaperCard>();
-                SealedProduct booster = null;
+                final List<PaperCard> boosterCards = new ArrayList<>();
+                SealedProduct booster;
                 if (ii instanceof BoosterPack) {
                     booster = (BoosterPack) ((BoosterPack) ii).clone();
                     boosterCards.addAll(booster.getCards());
-                }
-                else if (ii instanceof TournamentPack) {
+                } else {
                     booster = (TournamentPack) ((TournamentPack) ii).clone();
                     boosterCards.addAll(booster.getCards());
                 }
@@ -618,7 +647,7 @@ public class QuestWinLoseController {
             }
             else if (ii instanceof IQuestRewardCard) {
                 final List<PaperCard> cardChoices = ((IQuestRewardCard) ii).getChoices();
-                final PaperCard chosenCard = (null == cardChoices ? null : SGuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName(), cardChoices));
+                final PaperCard chosenCard = (null == cardChoices ? null : SGuiChoose.one("Choose " + ii.getName(), cardChoices));
                 if (null != chosenCard) {
                     cardsWon.add(chosenCard);
                 }

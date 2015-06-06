@@ -18,7 +18,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
 
     private final SealedProduct.Template tpl;
     private final Map<String, PrintSheet> sheets;
-    private boolean poolLimited = false; // if true after successful generation cards are removed from printsheets. 
+    private boolean poolLimited = false; // if true after successful generation cards are removed from printsheets.
 
     public final boolean isPoolLimited() {
         return poolLimited;
@@ -27,7 +27,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     public final void setLimitedPool(boolean considerNumbersInPool) {
         this.poolLimited = considerNumbersInPool; // TODO: Add 0 to parameter's name.
     }
-    
+
 
     // Means to select from all unique cards (from base game, ie. no schemes or avatars)
     public UnOpenedProduct(SealedProduct.Template template) {
@@ -42,7 +42,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
 
     public UnOpenedProduct(SealedProduct.Template template, Iterable<PaperCard> cards) {
         tpl = template;
-        sheets = new TreeMap<String, PrintSheet>();
+        sheets = new TreeMap<>();
         prebuildSheets(cards);
     }
 
@@ -62,15 +62,15 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     }
 
     // If they request cards from an arbitrary pool, there's no use to cache printsheets.
-    private final List<PaperCard> getBoosterPack() {
-        List<PaperCard> result = new ArrayList<PaperCard>();
+    private List<PaperCard> getBoosterPack() {
+        List<PaperCard> result = new ArrayList<>();
         for(Pair<String, Integer> slot : tpl.getSlots()) {
             PrintSheet ps = sheets.get(slot.getLeft());
             if(ps.isEmpty() &&  poolLimited ) {
                 throw new IllegalStateException("The cardpool has been depleted and has no more cards for slot " + slot.getKey());
             }
 
-            List<PaperCard> foundCards = ps.random(slot.getRight().intValue(), true); 
+            List<PaperCard> foundCards = ps.random(slot.getRight(), true);
             if(poolLimited)
                 ps.removeAll(foundCards);
             result.addAll(foundCards);
@@ -79,4 +79,3 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     }
 
 }
- 

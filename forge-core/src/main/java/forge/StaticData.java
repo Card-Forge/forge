@@ -1,9 +1,5 @@
 package forge;
 
-import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
-
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -14,10 +10,14 @@ import forge.item.SealedProduct;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
+import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
+
 
  /**
  * The class holding game invariants, such as cards, editions, game formats. All that data, which is not supposed to be changed by player
- * 
+ *
  * @author Max
  */
 public class StaticData {
@@ -37,8 +37,8 @@ public class StaticData {
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         lastInstance = this;
 
-        final Map<String, CardRules> regularCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
-        final Map<String, CardRules> variantsCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
+        final Map<String, CardRules> regularCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        final Map<String, CardRules> variantsCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         for (CardRules card : reader.loadCards()) {
             if (null == card) continue;
@@ -59,15 +59,15 @@ public class StaticData {
         commonCards.initialize(false, false);
         variantCards.initialize(false, false);
 
-        this.boosters = new StorageBase<SealedProduct.Template>("Boosters", editions.getBoosterGenerator());
-        this.specialBoosters = new StorageBase<SealedProduct.Template>("Special boosters", new SealedProduct.Template.Reader(new File(blockDataFolder, "boosters-special.txt")));
-        this.tournaments = new StorageBase<SealedProduct.Template>("Starter sets", new SealedProduct.Template.Reader(new File(blockDataFolder, "starters.txt")));
-        this.fatPacks = new StorageBase<FatPack.Template>("Fat packs", new FatPack.Template.Reader(blockDataFolder + "fatpacks.txt"));
-        this.boosterBoxes = new StorageBase<BoosterBox.Template>("Booster boxes", new BoosterBox.Template.Reader(blockDataFolder + "boosterboxes.txt"));
-        this.printSheets = new StorageBase<PrintSheet>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
+        this.boosters = new StorageBase<>("Boosters", editions.getBoosterGenerator());
+        this.specialBoosters = new StorageBase<>("Special boosters", new SealedProduct.Template.Reader(new File(blockDataFolder, "boosters-special.txt")));
+        this.tournaments = new StorageBase<>("Starter sets", new SealedProduct.Template.Reader(new File(blockDataFolder, "starters.txt")));
+        this.fatPacks = new StorageBase<>("Fat packs", new FatPack.Template.Reader(blockDataFolder + "fatpacks.txt"));
+        this.boosterBoxes = new StorageBase<>("Booster boxes", new BoosterBox.Template.Reader(blockDataFolder + "boosterboxes.txt"));
+        this.printSheets = new StorageBase<>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
     }
 
-    public final static StaticData instance() { 
+    public static StaticData instance() {
         return lastInstance;
     }
 
@@ -75,21 +75,21 @@ public class StaticData {
         return this.editions;
     }
 
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.item.FatPackTemplate}> */
+    /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
     public IStorage<FatPack.Template> getFatPacks() {
         return fatPacks;
     }
-    
+
     public IStorage<BoosterBox.Template> getBoosterBoxes() {
         return boosterBoxes;
     }
 
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
+    /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
     public final IStorage<SealedProduct.Template> getTournamentPacks() {
         return tournaments;
     }
 
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
+    /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
     public final IStorage<SealedProduct.Template> getBoosters() {
         return boosters;
     }
