@@ -49,7 +49,7 @@ public enum CSubmenuQuestData implements ICDoc {
         }
     };
 
-    List<Byte> preferredColors = new ArrayList<>();
+    private List<Byte> preferredColors = new ArrayList<>();
     private PoolType poolType = PoolType.BALANCED;
     private boolean includeArtifacts = true;
 

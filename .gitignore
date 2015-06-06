@@ -53,6 +53,7 @@ forge-gui-mobile-dev/fallback_skin/Thumbs.db
 forge-gui-mobile-dev/res
 forge-gui-mobile-dev/target
 forge-gui-mobile-dev/testAssets
+forge-gui-mobile/*.iml
 forge-gui-mobile/bin
 forge-gui-mobile/target
 forge-gui/forge-gui.iml

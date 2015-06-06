@@ -133,8 +133,18 @@ public class DialogChooseColors {
                 cbxRed.setEnabled(radBalanced.isSelected());
                 cbxWhite.setEnabled(radBalanced.isSelected());
                 cbxColorless.setEnabled(radBalanced.isSelected());
+                cbxArtifacts.setEnabled(!radSurpriseMe.isSelected());
             }
         };
+
+        clearColors.setEnabled(radBalanced.isSelected());
+        cbxBlack.setEnabled(radBalanced.isSelected());
+        cbxBlue.setEnabled(radBalanced.isSelected());
+        cbxGreen.setEnabled(radBalanced.isSelected());
+        cbxRed.setEnabled(radBalanced.isSelected());
+        cbxWhite.setEnabled(radBalanced.isSelected());
+        cbxColorless.setEnabled(radBalanced.isSelected());
+        cbxArtifacts.setEnabled(!radSurpriseMe.isSelected());
 
         radBalanced.setToolTipText("A balanced distribution will provide a roughly equal number of cards in each selected color.");
         radRandom.setToolTipText("A random distribution will be almost entirely randomly selected. This ignores any color selections.");

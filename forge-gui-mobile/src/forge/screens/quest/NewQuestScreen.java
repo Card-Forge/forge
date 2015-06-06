@@ -78,7 +78,7 @@ public class NewQuestScreen extends FScreen {
                     }
                     obj.setBounds(xAdjustment, y, visWidth, h); //make label take up half of line so combo boxes all the same width
                     x += obj.getWidth();
-                    if (colorBoxCount == 3 || colorBoxCount == 6) {
+                    if (colorBoxCount % 3 == 0) {
                         y += h + gapY;
                         x = PADDING;
                     }
@@ -228,7 +228,7 @@ public class NewQuestScreen extends FScreen {
                 cbRed.setEnabled(radBalanced.isSelected());
                 cbWhite.setEnabled(radBalanced.isSelected());
                 cbColorless.setEnabled(radBalanced.isSelected());
-                cbIncludeArtifacts.setEnabled(radBalanced.isSelected());
+                cbIncludeArtifacts.setEnabled(!radSurpriseMe.isSelected());
             }
         };
 
