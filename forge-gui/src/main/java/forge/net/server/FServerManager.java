@@ -158,9 +158,12 @@ public final class FServerManager {
     }
     private void broadcastTo(final NetEvent event, final Iterable<RemoteClient> to) {
         for (final RemoteClient client : to) {
-            event.updateForClient(client);
-            client.send(event);
+            broadcastTo(event, client);
         }
+    }
+    private void broadcastTo(final NetEvent event, final RemoteClient to) {
+        event.updateForClient(to);
+        to.send(event);
     }
 
     public void setLobby(final ServerGameLobby lobby) {
@@ -217,7 +220,8 @@ public final class FServerManager {
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
-        @Override public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
+        @Override
+        public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof MessageEvent) {
                 broadcast(new MessageEvent(client.getUsername(), ((MessageEvent) msg).getMessage()));
