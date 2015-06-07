@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm 2
+Title=Wilhelm Grimm
+Difficulty=medium
+Description=GB Token deck with Parallel Lives
+Icon=Wilhelm Grimm.jpg
+Deck Type=constructed
+[main]
+4 Bayou
+5 Forest
+3 Marsh Flats
+2 Overgrown Tomb
+3 Swamp
+4 Verdant Catacombs
+3 Wooded Foothills
+2 Champion of Lambholt
+3 Creakwood Liege
+4 Essence Warden
+4 Awakening Zone
+3 Bitterblossom
+3 Doubling Season
+1 Fists of Ironwood
+3 Parallel Lives
+2 Abrupt Decay
+1 Gilt-Leaf Ambush
+2 Naturalize
+1 Violet Pall
+1 Army of the Damned
+2 Kin-Tree Invocation
+1 Lab Rats
+1 Chatter of the Squirrel
+1 Vile Rebirth
+1 Brindle Shoat
+[sideboard]
