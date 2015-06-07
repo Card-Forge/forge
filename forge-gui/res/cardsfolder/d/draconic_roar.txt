@@ -4,8 +4,11 @@ Types:Instant
 Text:As an additional cost to cast Draconic Roar, you may reveal a Dragon card from your hand.\n
 K:Kicker Reveal<1/Dragon> : Generic
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DBDamageController | SpellDescription$ CARDNAME deals 3 damage to target creature. If you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, CARDNAME deals 3 damage to that creature's controller. | StackDescription$ SpellDescription
-SVar:DBDamageController:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | ConditionDragonPresence$ True | StackDescription$ None
+SVar:DBDamageController:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | ConditionCheckSVar$ TotalDragonPresence | ConditionSVarCompare$ GE1 | StackDescription$ None
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ StoreDragons | Static$ True
+SVar:DragonPresence:Number$0
+SVar:WasDragonRevealed:Count$ValidStack Card.Self+pseudokicked+wasCast
+SVar:TotalDragonPresence:SVar$DragonPresence/Plus.WasDragonRevealed
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons
 SVar:StoreNoDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 0 | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/draconic_roar.jpg
