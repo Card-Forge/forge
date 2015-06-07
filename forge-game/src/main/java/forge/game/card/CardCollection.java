@@ -2,8 +2,6 @@ package forge.game.card;
 
 import forge.util.collect.FCollection;
 
-import java.util.Objects;
-
 public class CardCollection extends FCollection<Card> implements CardCollectionView {
     private static final long serialVersionUID = -8133537013727100275L;
 
@@ -64,7 +62,9 @@ public class CardCollection extends FCollection<Card> implements CardCollectionV
      *             if {@code views} is {@code null}.
      */
     public static CardCollectionView combine(final CardCollectionView... views) {
-        Objects.requireNonNull(views);
+        if (views == null) {
+            throw new NullPointerException("The 'views' parameter was null when CardCollection.combine was called");
+        }
 
         CardCollection newCol = null;
         CardCollectionView viewWithCards = null;
