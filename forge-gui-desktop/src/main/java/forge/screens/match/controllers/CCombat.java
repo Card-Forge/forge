@@ -11,7 +11,7 @@ import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VCombat;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
 import forge.util.Lang;
 
 /**

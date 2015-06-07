@@ -62,7 +62,7 @@ import forge.match.input.InputPayMana;
 import forge.match.input.InputPayManaOfCostPayment;
 import forge.match.input.InputPayManaSimple;
 import forge.match.input.InputSelectCardsFromList;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
 

@@ -1,7 +1,7 @@
 package forge.game.combat;
 
-import forge.util.FCollection;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
 /** 
  * TODO: Write javadoc for this type.

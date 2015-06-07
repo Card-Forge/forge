@@ -30,7 +30,7 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 public class CardView extends GameEntityView {
     private static final long serialVersionUID = -3624090829028979255L;

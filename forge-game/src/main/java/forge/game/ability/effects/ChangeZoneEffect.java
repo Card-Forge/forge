@@ -25,7 +25,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.Lang;
 import forge.util.MessageUtil;
 

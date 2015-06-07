@@ -22,7 +22,7 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.Utils;
 
 public class CardZoom extends FOverlay {

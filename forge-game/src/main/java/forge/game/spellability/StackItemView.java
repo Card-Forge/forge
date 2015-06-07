@@ -6,7 +6,7 @@ import forge.game.player.PlayerView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 public class StackItemView extends TrackableObject implements IHasCardView {
     private static final long serialVersionUID = 6733415646691356052L;

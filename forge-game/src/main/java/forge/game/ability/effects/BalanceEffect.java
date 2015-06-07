@@ -8,7 +8,7 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;

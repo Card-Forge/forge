@@ -41,7 +41,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
 
 /**
  * <p>

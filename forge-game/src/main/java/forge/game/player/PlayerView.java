@@ -24,8 +24,8 @@ import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
-import forge.util.FCollection;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.util.Lang;
 
 public class PlayerView extends GameEntityView {

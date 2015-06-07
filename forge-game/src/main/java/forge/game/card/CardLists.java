@@ -27,7 +27,7 @@ import com.google.common.collect.Iterables;
 
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
 
 /**

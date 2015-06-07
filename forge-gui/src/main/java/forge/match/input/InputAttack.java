@@ -40,7 +40,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.player.PlayerControllerHuman;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
 
 /**

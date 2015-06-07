@@ -22,6 +22,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
+import forge.util.collect.FCollection;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -154,10 +155,10 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         getView().updateEnchantedBy(this);
     }
     public final boolean isEnchanted() {
-        return CardCollection.hasCard(enchantedBy);
+        return FCollection.hasElements(enchantedBy);
     }
     public final boolean isEnchantedBy(Card c) {
-        return CardCollection.hasCard(enchantedBy, c);
+        return FCollection.hasElement(enchantedBy, c);
     }
     public final boolean isEnchantedBy(final String cardName) {
         for (final Card aura : getEnchantedBy(false)) {

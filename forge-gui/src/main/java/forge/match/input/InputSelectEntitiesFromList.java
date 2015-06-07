@@ -7,8 +7,8 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.player.PlayerControllerHuman;
-import forge.util.FCollection;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
 
 public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSelectManyBase<T> {

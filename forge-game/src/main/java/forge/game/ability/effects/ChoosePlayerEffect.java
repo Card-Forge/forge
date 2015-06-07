@@ -7,7 +7,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.Aggregates;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 import java.util.List;
 

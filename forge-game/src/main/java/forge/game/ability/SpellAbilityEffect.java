@@ -15,7 +15,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
 
 /**
  * <p>

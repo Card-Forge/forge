@@ -30,7 +30,7 @@ import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.Arrays;

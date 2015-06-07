@@ -105,8 +105,8 @@ import forge.item.PaperCard;
 import forge.trackable.TrackableProperty;
 import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
-import forge.util.FCollection;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.Visitor;
@@ -686,10 +686,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return CardCollection.getView(imprintedCards);
     }
     public final boolean hasImprintedCard() {
-        return CardCollection.hasCard(imprintedCards);
+        return FCollection.hasElements(imprintedCards);
     }
     public final boolean hasImprintedCard(Card c) {
-        return CardCollection.hasCard(imprintedCards, c);
+        return FCollection.hasElement(imprintedCards, c);
     }
     public final void addImprintedCard(final Card c) {
         imprintedCards = view.addCard(imprintedCards, c, TrackableProperty.ImprintedCards);
@@ -711,10 +711,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return CardCollection.getView(encodedCards);
     }
     public final boolean hasEncodedCard() {
-        return CardCollection.hasCard(encodedCards);
+        return FCollection.hasElements(encodedCards);
     }
     public final boolean hasEncodedCard(Card c) {
-        return CardCollection.hasCard(encodedCards, c);
+        return FCollection.hasElement(encodedCards, c);
     }
     public final void addEncodedCard(final Card c) {
         if (encodedCards == null) {
@@ -1216,10 +1216,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         chosenCards = view.setCards(chosenCards, cards, TrackableProperty.ChosenColors);
     }
     public boolean hasChosenCard() {
-        return CardCollection.hasCard(chosenCards);
+        return FCollection.hasElements(chosenCards);
     }
     public boolean hasChosenCard(Card c) {
-        return CardCollection.hasCard(chosenCards, c);
+        return FCollection.hasElement(chosenCards, c);
     }
 
     public Direction getChosenDirection() {
@@ -1257,10 +1257,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         gainControlTargets = view.removeCard(gainControlTargets, c, TrackableProperty.GainControlTargets);
     }
     public final boolean hasGainControlTarget() {
-        return CardCollection.hasCard(gainControlTargets);
+        return FCollection.hasElements(gainControlTargets);
     }
     public final boolean hasGainControlTarget(Card c) {
-        return CardCollection.hasCard(gainControlTargets, c);
+        return FCollection.hasElement(gainControlTargets, c);
     }
 
     public final String getSpellText() {
@@ -2281,10 +2281,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         equippedBy = view.setCards(equippedBy, cards, TrackableProperty.EquippedBy);
     }
     public final boolean isEquipped() {
-        return CardCollection.hasCard(equippedBy);
+        return FCollection.hasElements(equippedBy);
     }
     public final boolean isEquippedBy(Card c) {
-        return CardCollection.hasCard(equippedBy, c);
+        return FCollection.hasElement(equippedBy, c);
     }
 
     public final CardCollectionView getFortifiedBy(boolean allowModify) {
@@ -2297,10 +2297,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         fortifiedBy = view.setCards(fortifiedBy, cards, TrackableProperty.FortifiedBy);
     }
     public final boolean isFortified() {
-        return CardCollection.hasCard(fortifiedBy);
+        return FCollection.hasElements(fortifiedBy);
     }
     public final boolean isFortifiedBy(Card c) {
-        return CardCollection.hasCard(fortifiedBy, c);
+        return FCollection.hasElement(fortifiedBy, c);
     }
 
     public final Card getEquipping() {
@@ -5923,10 +5923,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return CardCollection.getView(hauntedBy);
     }
     public final boolean isHaunted() {
-        return CardCollection.hasCard(hauntedBy);
+        return FCollection.hasElements(hauntedBy);
     }
     public final boolean isHauntedBy(Card c) {
-        return CardCollection.hasCard(hauntedBy, c);
+        return FCollection.hasElement(hauntedBy, c);
     }
     public final void addHauntedBy(Card c) {
         hauntedBy = view.addCard(hauntedBy, c, TrackableProperty.HauntedBy);

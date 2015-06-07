@@ -70,7 +70,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
 import forge.util.MyRandom;
 
 

@@ -61,7 +61,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.util.Aggregates;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
 import forge.util.Lang;
 import forge.util.MyRandom;
 

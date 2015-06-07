@@ -26,7 +26,7 @@ import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 /**
  * <p>

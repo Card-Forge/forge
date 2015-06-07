@@ -41,7 +41,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.item.PaperToken;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
 
 public class TokenEffect extends SpellAbilityEffect {

@@ -40,7 +40,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.Utils;
 
 public class VStack extends FDropDown {

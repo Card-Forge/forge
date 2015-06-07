@@ -1,45 +1,82 @@
 package forge.game.card;
 
-import java.util.Collection;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
+
+import java.util.Objects;
 
 public class CardCollection extends FCollection<Card> implements CardCollectionView {
     private static final long serialVersionUID = -8133537013727100275L;
 
-    public static final CardCollectionView EMPTY = new CardCollection();
+    /**
+     * An empty, immutable {@link CardCollectionView}.
+     */
+    public static final CardCollectionView EMPTY = new EmptyCardCollection();
 
-    public static boolean hasCard(CardCollection cards) {
-        return cards != null && !cards.isEmpty();
-    }
-    public static boolean hasCard(CardCollection cards, Card c) {
-        return cards != null && cards.contains(c);
-    }
-    public static CardCollectionView getView(CardCollection cards) {
+    /**
+     * Get the view corresponding to an {@link Iterable} of {@link Card}
+     * objects.
+     *
+     * @param cards
+     *            a collection.
+     * @return an unmodifiable view of the collection.
+     */
+    public static CardCollectionView getView(final Iterable<Card> cards) {
         return getView(cards, false);
     }
-    public static CardCollectionView getView(CardCollection cards, boolean allowModify) {
+
+    /**
+     * Get the view corresponding to an {@link Iterable} of {@link Card}
+     * objects.
+     *
+     * @param cards
+     *            a collection.
+     * @param allowModify
+     *            whether to make a shallow copy of the collection to make the
+     *            returned view independent from the original collection.
+     * @return an unmodifiable view of the collection.
+     */
+    public static CardCollectionView getView(final Iterable<Card> cards, final boolean allowModify) {
         if (cards == null) {
             return EMPTY;
         }
         if (allowModify) { //create copy to allow modifying original set while iterating
             return new CardCollection(cards);
         }
-        return cards;
+
+        if (cards instanceof CardCollectionView) {
+            return (CardCollectionView) cards;
+        }
+        return new CardCollection(cards);
     }
-    public static CardCollectionView combine(CardCollectionView... views) {
+
+    /**
+     * Combine multiple instances of {@link CardCollectionView} into a single
+     * view. The returned value is a view of the collections at the moment this
+     * method is called, and is not backed by those collections. The returned
+     * collection does respect the order, both of the order in which the
+     * collections are supplied, and of the elements of those collections.
+     *
+     * @param views
+     *            an array of card collections.
+     * @return the elements of the collections in {@code views} combined into a
+     *         single collection.
+     * @throws NullPointerException
+     *             if {@code views} is {@code null}.
+     */
+    public static CardCollectionView combine(final CardCollectionView... views) {
+        Objects.requireNonNull(views);
+
         CardCollection newCol = null;
         CardCollectionView viewWithCards = null;
-        for (CardCollectionView v : views) {
+        for (final CardCollectionView v : views) {
             if (!v.isEmpty()) {
                 if (viewWithCards == null) {
                     viewWithCards = v;
-                }
-                else if (newCol == null) { //if multiple views have cards, we need to create a new collection
+                } else if (newCol == null) { //if multiple views have cards, we need to create a new collection
                     newCol = new CardCollection(viewWithCards);
                     newCol.addAll(v);
                     viewWithCards = newCol;
-                }
-                else {
+                } else {
                     newCol.addAll(v);
                 }
             }
@@ -50,25 +87,50 @@ public class CardCollection extends FCollection<Card> implements CardCollectionV
         return viewWithCards;
     }
 
+    /**
+     * Construct a new, empty {@link CardCollection}.
+     */
     public CardCollection() {
         super();
     }
-    public CardCollection(Card card) {
+
+    /**
+     * Construct a new {@link CardCollection} containing a single element.
+     *
+     * @param card
+     *            the element contained by the new collection.
+     */
+    public CardCollection(final Card card) {
         super(card);
     }
-    public CardCollection(Collection<Card> cards) {
-        super(cards);
-    }
-    public CardCollection(Iterable<Card> cards) {
+
+    /**
+     * Construct a new {@link CardCollection} from an iterable of {@link Card}
+     * objects, respecting the order in which those objects appear.
+     *
+     * @param cards
+     *            an {@link Iterable}.
+     */
+    public CardCollection(final Iterable<Card> cards) {
         super(cards);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected FCollection<Card> createNew() {
-        return new CardCollection();
+    public CardCollection subList(final int fromIndex, final int toIndex) {
+        return new CardCollection(super.subList(fromIndex, toIndex));
     }
 
-    public CardCollection subList(int fromIndex, int toIndex) {
-        return (CardCollection)super.subList(fromIndex, toIndex);
+    /**
+     * An unmodifiable, empty {@link CardCollection}.
+     */
+    private final static class EmptyCardCollection extends EmptyFCollection<Card> implements CardCollectionView {
+        private static final long serialVersionUID = -3218771134502034727L;
+
+        private EmptyCardCollection() {
+            super();
+        }
     }
 }

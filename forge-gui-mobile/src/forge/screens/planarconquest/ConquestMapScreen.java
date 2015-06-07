@@ -19,7 +19,7 @@ import forge.planarconquest.ConquestPlane.Region;
 import forge.screens.FScreen;
 import forge.toolbox.FList;
 import forge.toolbox.FList.ListItemRenderer;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 public class ConquestMapScreen extends FScreen {
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.6f);

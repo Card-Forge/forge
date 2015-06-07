@@ -44,7 +44,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;

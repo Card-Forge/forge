@@ -12,8 +12,8 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.util.FCollection;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
 public class AttackRestriction {
 

@@ -22,7 +22,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -30,8 +29,23 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AttachEffect;
-import forge.game.card.*;
-import forge.game.event.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterType;
+import forge.game.event.GameEventCardChangeZone;
+import forge.game.event.GameEventCardDestroyed;
+import forge.game.event.GameEventCardRegenerated;
+import forge.game.event.GameEventCardSacrificed;
+import forge.game.event.GameEventCardStatsChanged;
+import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventFlipCoin;
+import forge.game.event.GameEventGameStarted;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -51,15 +65,25 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
-import forge.util.FCollection;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.util.ThreadUtil;
 import forge.util.Visitor;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Methods for common actions performed during a game.
@@ -643,7 +667,7 @@ public class GameAction {
         }
 
         for (Player p : game.getPlayers()) {
-            for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterator()) {
+            for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterable()) {
                 if (!c.getController().equals(p)) {
                     controllerChangeZoneCorrection(c);
                     affectedCards.add(c);
@@ -699,13 +723,13 @@ public class GameAction {
             checkStaticAbilities(false, affectedCards);
             boolean checkAgain = false;
 
-            for (Player p : game.getPlayers()) {
-                for (ZoneType zt : ZoneType.values()) {
+            for (final Player p : game.getPlayers()) {
+                for (final ZoneType zt : ZoneType.values()) {
                     if (zt == ZoneType.Battlefield) {
                         continue;
                     }
-                    Iterable<Card> cards = p.getCardsIn(zt).threadSafeIterator();
-                    for (Card c : cards) {
+                    final Iterable<Card> cards = p.getCardsIn(zt).threadSafeIterable();
+                    for (final Card c : cards) {
                         // If a token is in a zone other than the battlefield, it ceases to exist.
                         checkAgain |= stateBasedAction704_5d(c);
                     }

@@ -14,7 +14,7 @@ import forge.game.card.CardView;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
 
 public class CombatView extends TrackableObject {
     private static final long serialVersionUID = 68085618912864941L;

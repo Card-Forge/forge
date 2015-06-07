@@ -51,7 +51,7 @@ import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 /**
  * Assembles Swing components of stack report.

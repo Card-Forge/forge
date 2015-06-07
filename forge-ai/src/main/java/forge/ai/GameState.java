@@ -22,7 +22,7 @@ import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 public abstract class GameState {
     private static final Map<ZoneType, String> ZONES = new HashMap<ZoneType, String>();

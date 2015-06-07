@@ -45,7 +45,7 @@ import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 import forge.util.CollectionSuppliers;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 

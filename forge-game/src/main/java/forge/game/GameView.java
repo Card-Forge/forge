@@ -21,7 +21,7 @@ import forge.game.zone.MagicStack;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;

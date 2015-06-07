@@ -2,7 +2,7 @@ package forge.match.input;
 
 import forge.game.card.Card;
 import forge.player.PlayerControllerHuman;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 
 public class InputSelectCardsFromList extends InputSelectEntitiesFromList<Card> {
     private static final long serialVersionUID = 6230360322294805986L;

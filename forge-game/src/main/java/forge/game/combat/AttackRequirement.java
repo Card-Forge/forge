@@ -14,8 +14,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.FCollectionView;
-import forge.util.MapToAmountUtil;
+import forge.util.collect.FCollectionView;
+import forge.util.maps.MapToAmountUtil;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
 

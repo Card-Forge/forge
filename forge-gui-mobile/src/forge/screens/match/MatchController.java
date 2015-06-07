@@ -54,7 +54,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.MessageUtil;
 import forge.util.WaitCallback;

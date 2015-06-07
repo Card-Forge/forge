@@ -1,6 +1,5 @@
 package forge.ai;
 
-import forge.ai.AiAttackController;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -12,7 +11,7 @@ import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 

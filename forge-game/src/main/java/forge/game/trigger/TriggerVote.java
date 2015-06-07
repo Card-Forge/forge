@@ -26,7 +26,7 @@ import com.google.common.collect.ListMultimap;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
 
 /**
  * <p>

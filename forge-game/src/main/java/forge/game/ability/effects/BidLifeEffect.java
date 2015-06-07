@@ -10,7 +10,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.util.FCollection;
+import forge.util.collect.FCollection;
 
 public class BidLifeEffect extends SpellAbilityEffect {
     @Override

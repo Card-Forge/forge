@@ -31,9 +31,9 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
-import forge.util.FCollection;
-import forge.util.FCollectionView;
-import forge.util.MapToAmountUtil;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
+import forge.util.maps.MapToAmountUtil;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
 

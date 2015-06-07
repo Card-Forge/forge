@@ -60,7 +60,7 @@ import forge.game.zone.ZoneType;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectManyBase;
 import forge.util.Aggregates;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 

@@ -69,7 +69,7 @@ import forge.gamesimulationtests.util.playeractions.DeclareBlockersAction;
 import forge.gamesimulationtests.util.playeractions.PlayerActions;
 import forge.item.PaperCard;
 import forge.player.HumanPlay;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
 

@@ -31,7 +31,7 @@ import forge.game.trigger.Trigger;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
 
 public class Match {

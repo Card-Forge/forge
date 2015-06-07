@@ -45,7 +45,7 @@ import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.MouseTriggerEvent;
-import forge.util.FCollectionView;
+import forge.util.collect.FCollectionView;
 import forge.util.Lang;
 import forge.view.FDialog;
 import forge.view.FFrame;
