@@ -233,7 +233,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel("Stacks identical creatures on the battlefield like lands, artifacts, and enchantments."), regularConstraints);
 
         pnlPrefs.add(cbpDisplayCurrentCardColors, "w 80%!, gap 10% 0 0 10px, span 2 1");
-        pnlPrefs.add(new NoteLabel("Displays the current color of cards in the card detail information panel."), regularConstraints);
+        pnlPrefs.add(new NoteLabel("Displays the breakdown of the current color of cards in the card detail information panel."), regularConstraints);
 
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");

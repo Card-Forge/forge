@@ -165,7 +165,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_CURRENT_COLORS,
                 "Detailed Card Color",
-                "Displays the current color of cards in the card detail information panel.",
+                "Displays the breakdown of the current color of cards in the card detail information panel.",
                 new String[]{
                     ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR, 
                     ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
