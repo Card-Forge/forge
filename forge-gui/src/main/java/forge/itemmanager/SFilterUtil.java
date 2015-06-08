@@ -165,9 +165,10 @@ public class SFilterUtil {
             public boolean apply(PaperCard card) {
                 CardRules rules = card.getRules();
                 ColorSet color = rules.getColor();
+                boolean allColorsFilteredOut = colors == 0;
 
                 //use color identity for lands, which allows filtering to just lands that can be played in your deck
-                boolean useColorIdentity = rules.getType().isLand();
+                boolean useColorIdentity = rules.getType().isLand() && !allColorsFilteredOut;
                 if (useColorIdentity) {
                     color = rules.getColorIdentity();
                 }
@@ -177,7 +178,7 @@ public class SFilterUtil {
                     if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
                         result = color.isMulticolor() || (wantColorless && color.isColorless());
                     } else if (colors != ColorSet.ALL_COLORS.getColor()) {
-                        if (useColorIdentity) {
+                        if (useColorIdentity && !allColorsFilteredOut) {
                             result = color.hasAnyColor(colors);
                         } else {
                             result = rules.canCastWithAvailable(colors);
@@ -186,7 +187,7 @@ public class SFilterUtil {
                 } else {
                     result = !color.isMulticolor();
                     if (colors != ColorSet.ALL_COLORS.getColor()) {
-                        if (useColorIdentity) {
+                        if (useColorIdentity && !allColorsFilteredOut) {
                             result = result && color.hasAnyColor(colors);
                         } else {
                             result = result && rules.canCastWithAvailable(colors);
