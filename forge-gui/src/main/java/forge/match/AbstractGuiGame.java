@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -103,6 +102,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (player == null) {
             throw new IllegalArgumentException();
         }
+
         if (gameController == null) {
             if (originalGameControllers.containsKey(player)) {
                 gameControllers.put(player, originalGameControllers.get(player));
@@ -110,7 +110,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 gameControllers.remove(player);
                 autoPassUntilEndOfTurn.remove(player);
                 final PlayerView currentPlayer = getCurrentPlayer();
-                if (Objects.equals(player, currentPlayer)) {
+                if (player.equals(currentPlayer)) {
                     // set current player to a value known to be legal
                     setCurrentPlayer(Iterables.getFirst(gameControllers.keySet(), null));
                 }
