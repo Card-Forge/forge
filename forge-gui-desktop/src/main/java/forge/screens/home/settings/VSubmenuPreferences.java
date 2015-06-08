@@ -82,7 +82,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
     private final JCheckBox cbStackCreatures = new OptionsCheckBox("Stack Creatures");
-    private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox("Filter Lands by Color Identity");
+    private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox("Filter Lands by Color when Using Color Filters");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -176,7 +176,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new SectionLabel("Deck Editor Options"), sectionConstraints);
 
         pnlPrefs.add(cbFilterLandsByColorId, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Filter lands by their color identity to make it easier to find relevant mana producing lands."), regularConstraints);
+        pnlPrefs.add(new NoteLabel("When using card color filters, filter lands in a way to make it easier to find relevant mana producing lands."), regularConstraints);
 
         // Advanced
         pnlPrefs.add(new SectionLabel("Advanced Settings"), sectionConstraints);
