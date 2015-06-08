@@ -79,6 +79,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_PAUSE_WHILE_MINIMIZED("false"),
         UI_TOKENS_IN_SEPARATE_ROW("false"), // Display tokens in their own battlefield row.
         UI_DISPLAY_CURRENT_COLORS("Never"),
+        UI_FILTER_LANDS_BY_COLOR_IDENTITY("true"),
 
         UI_FOR_TOUCHSCREN("false"),
 

@@ -90,7 +90,12 @@ longer considered unless they can be produced by a land in the deck
 - Land Color Filtering in Deck Editor -
 When filtering colors in the Deck Editor, lands that produce all selected colors will now be shown
 This means if you filter to show only green and white cards, lands that produce green and white will now be shown
-This should hopefully make finding multicolor lands for your decks easier
+This should hopefully make finding multicolor lands for your decks easier.
+An attempt was made to make this option behave in a more consistent and helpful way - now lands won't suddenly 
+disappear when one color is filtered out, basic lands of appropriate colors will be shown, lands that feature at 
+least one of the colors relevant for the deck will be shown. Also, the mode to filter lands in this way is now 
+optional and can be toggled on or off in the Preferences ("Filter Lands by Color Identity" under "Deck Editor 
+Options").
 
 
 - Quest Starting Pool Configuration -

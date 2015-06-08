@@ -82,6 +82,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
     private final JCheckBox cbStackCreatures = new OptionsCheckBox("Stack Creatures");
+    private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox("Filter Lands by Color Identity");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -170,6 +171,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbRemoveArtifacts, regularConstraints);
         pnlPrefs.add(new NoteLabel("Disables artifact cards in generated decks."), regularConstraints);
+
+        // Deck building options
+        pnlPrefs.add(new SectionLabel("Deck Editor Options"), sectionConstraints);
+
+        pnlPrefs.add(cbFilterLandsByColorId, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Filter lands by their color identity to make it easier to find relevant mana producing lands."), regularConstraints);
 
         // Advanced
         pnlPrefs.add(new SectionLabel("Advanced Settings"), sectionConstraints);
@@ -434,6 +441,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRemoveArtifacts() {
         return cbRemoveArtifacts;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbFilterLandsByColorId() {
+        return cbFilterLandsByColorId;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

@@ -13,6 +13,8 @@ import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.util.BinaryUtil;
 import forge.util.PredicateString.StringOp;
 
@@ -168,7 +170,7 @@ public class SFilterUtil {
                 boolean allColorsFilteredOut = colors == 0;
 
                 //use color identity for lands, which allows filtering to just lands that can be played in your deck
-                boolean useColorIdentity = rules.getType().isLand() && !allColorsFilteredOut;
+                boolean useColorIdentity = rules.getType().isLand() && !allColorsFilteredOut && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY);
                 if (useColorIdentity) {
                     color = rules.getColorIdentity();
                 }
