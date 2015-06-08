@@ -82,7 +82,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
     private final JCheckBox cbStackCreatures = new OptionsCheckBox("Stack Creatures");
-    private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox("Filter Lands by Color when Using Color Filters");
+    private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox("Filter Lands by Color in Activated Abilities");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
