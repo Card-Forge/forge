@@ -163,13 +163,13 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Show Match Background",
                 "Show match background image on battlefield, otherwise background texture shown instead."),
                 4);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_COLOR_IDENTITY,
-                "Display Color Identity",
-                "Displays the color identity of cards in the card detail information panel.",
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_CURRENT_COLORS,
+                "Display Card Color Info",
+                "Displays the current color of cards in the card detail information panel.",
                 new String[]{
-                    ForgeConstants.DISP_COLOR_IDENT_NEVER, ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR, 
-                    ForgeConstants.DISP_COLOR_IDENT_CHANGED, ForgeConstants.DISP_COLOR_IDENT_MULTI_OR_CHANGED,
-                    ForgeConstants.DISP_COLOR_IDENT_ALWAYS}),
+                    ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR, 
+                    ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
+                    ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}),
                 4);
 
         //Card Overlays

@@ -158,21 +158,21 @@ public class CardDetailUtil {
         return borderColors;
     }
 
-    public static String getColorIdentity(final CardStateView c) {
-        ColorSet identity = c.getColors();
-        String strIdentity = ""; 
+    public static String getCurrentColors(final CardStateView c) {
+        ColorSet curColors = c.getColors();
+        String strCurColors = ""; 
 
-        if (identity.hasWhite()) { strIdentity += "{W}"; }
-        if (identity.hasBlue())  { strIdentity += "{U}"; }
-        if (identity.hasBlack()) { strIdentity += "{B}"; }
-        if (identity.hasRed())   { strIdentity += "{R}"; }
-        if (identity.hasGreen()) { strIdentity += "{G}"; }
+        if (curColors.hasWhite()) { strCurColors += "{W}"; }
+        if (curColors.hasBlue())  { strCurColors += "{U}"; }
+        if (curColors.hasBlack()) { strCurColors += "{B}"; }
+        if (curColors.hasRed())   { strCurColors += "{R}"; }
+        if (curColors.hasGreen()) { strCurColors += "{G}"; }
 
-        if (strIdentity.isEmpty()) {
-            strIdentity = "colorless";
+        if (strCurColors.isEmpty()) {
+            strCurColors = "colorless";
         }
 
-        return strIdentity;
+        return strCurColors;
     }
     
     public static DetailColors getRarityColor(final CardRarity rarity) {
@@ -237,24 +237,24 @@ public class CardDetailUtil {
         return id.isEmpty() ? id : "[" + id + "]";
     }
 
-    public static String formatCardColorIdentity(final CardStateView state) {
-        final String colorIdentMode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_DISPLAY_COLOR_IDENTITY);
-        boolean showIdentity = false;
-        String colorIdent = "";
+    public static String formatCurrentCardColors(final CardStateView state) {
+        final String showCurColorMode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_DISPLAY_CURRENT_COLORS);
+        boolean showCurColors = false;
+        String curColors = "";
 
-        // do not show identity for temp effect cards, emblems and the like
+        // do not show current colors for temp effect cards, emblems and the like
         if (state.getType().hasSubtype("Effect")) {
             return "";
         }
 
-        if (!colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_NEVER)) {
+        if (!showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_NEVER)) {
             final CardView card = state.getCard();
             boolean isMulticolor = state.getColors().countColors() > 1;
             boolean isChanged = false;
-            colorIdent = getColorIdentity(state);
+            curColors = getCurrentColors(state);
 
             // do not waste CPU cycles on this if the mode does not involve checking for changed color identity
-            if (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_CHANGED) || colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_MULTI_OR_CHANGED)) {
+            if (showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_CHANGED) || showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED)) {
                 String origIdent = "";
                 PaperCard origPaperCard = null;
                 Card origCard = null;
@@ -271,22 +271,22 @@ public class CardDetailUtil {
                     if (origPaperCard != null) {
                         origCard = Card.getCardForUi(origPaperCard); // if null, probably a variant card
                     }
-                    origIdent = origCard != null ? getColorIdentity(CardView.get(origCard).getCurrentState()) : "";
+                    origIdent = origCard != null ? getCurrentColors(CardView.get(origCard).getCurrentState()) : "";
                 } catch(Exception ex) {
                     System.err.println("Unexpected behavior: card " + card.getName() + "[" + card.getId() + "] tripped an exception when trying to process color identity.");
                 } 
-                isChanged = !colorIdent.equals(origIdent);
+                isChanged = !curColors.equals(origIdent);
             }
 
-            if ((colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR) && isMulticolor) ||
-                    (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_CHANGED) && isChanged) ||
-                    (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_MULTI_OR_CHANGED) && (isChanged || isMulticolor)) ||
-                    (colorIdentMode.equals(ForgeConstants.DISP_COLOR_IDENT_ALWAYS))) {
-                showIdentity = true;
+            if ((showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR) && isMulticolor) ||
+                    (showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_CHANGED) && isChanged) ||
+                    (showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED) && (isChanged || isMulticolor)) ||
+                    (showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_ALWAYS))) {
+                showCurColors = true;
             }
         }
 
-        return showIdentity ? colorIdent : "";
+        return showCurColors ? curColors : "";
     }
 
     public static String composeCardText(final CardStateView state, final GameView gameView, final boolean canShow) {
@@ -566,14 +566,14 @@ public class CardDetailUtil {
             area.append("Must block " + mustBlockThese);
         }
 
-        //show card color identity if enabled
-        String colorIdent = formatCardColorIdentity(state);
-        if (!colorIdent.isEmpty()) {
+        //show current card colors if enabled
+        String curCardColors = formatCurrentCardColors(state);
+        if (!curCardColors.isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n\n");
             }
-            area.append("Color identity: ");
-            area.append(colorIdent);
+            area.append("Current Card Colors: ");
+            area.append(curCardColors);
         }
 
         //show current storm count for storm cards

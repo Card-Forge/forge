@@ -300,10 +300,10 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeColorIdentityCombobox() {
-        final String[] elems = {ForgeConstants.DISP_COLOR_IDENT_NEVER, ForgeConstants.DISP_COLOR_IDENT_CHANGED, 
-            ForgeConstants.DISP_COLOR_IDENT_MULTICOLOR, ForgeConstants.DISP_COLOR_IDENT_MULTI_OR_CHANGED,
-            ForgeConstants.DISP_COLOR_IDENT_ALWAYS};
-        final FPref userSetting = FPref.UI_DISPLAY_COLOR_IDENTITY;
+        final String[] elems = {ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_CHANGED, 
+            ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
+            ForgeConstants.DISP_CURRENT_COLORS_ALWAYS};
+        final FPref userSetting = FPref.UI_DISPLAY_CURRENT_COLORS;
         final FComboBoxPanel<String> panel = this.view.getDisplayColorIdentity();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);

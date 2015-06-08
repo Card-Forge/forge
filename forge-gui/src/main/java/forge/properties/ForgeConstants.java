@@ -179,10 +179,10 @@ public final class ForgeConstants {
     public static final String URL_PRICE_DOWNLOAD = "http://www.cardforge.org/MagicInfo/pricegen.php";
 
     // Constants for Display Card Identity game setting
-    public static final String DISP_COLOR_IDENT_ALWAYS = "Always";
-    public static final String DISP_COLOR_IDENT_CHANGED = "Changed";
-    public static final String DISP_COLOR_IDENT_MULTICOLOR = "Multicolor";
-    public static final String DISP_COLOR_IDENT_MULTI_OR_CHANGED = "Multi+Changed";
-    public static final String DISP_COLOR_IDENT_NEVER = "Never";
+    public static final String DISP_CURRENT_COLORS_ALWAYS = "Always";
+    public static final String DISP_CURRENT_COLORS_CHANGED = "Changed";
+    public static final String DISP_CURRENT_COLORS_MULTICOLOR = "Multicolor";
+    public static final String DISP_CURRENT_COLORS_MULTI_OR_CHANGED = "Multi+Changed";
+    public static final String DISP_CURRENT_COLORS_NEVER = "Never";
 
 }
