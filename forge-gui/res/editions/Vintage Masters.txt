@@ -249,7 +249,7 @@ C Tangle
 C Tribute to the Wild
 C Wild Mongrel
 U Yavimaya Elder
-U Æther Mutation
+U AEther Mutation
 U Armadillo Cloak
 R Baleful Strix
 R Basandra, Battle Seraph
