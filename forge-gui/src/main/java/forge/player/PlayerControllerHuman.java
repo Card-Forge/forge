@@ -180,9 +180,11 @@ public class PlayerControllerHuman
     private final Set<Card> tempShownCards = new HashSet<Card>();
     public <T> void tempShow(final Iterable<T> objects) {
         for (final T t : objects) {
+            // assume you may see any card passed through here
             if (t instanceof Card) {
-                // assume you may see any card passed through here
                 tempShowCard((Card) t);
+            } else if (t instanceof CardView) {
+                tempShowCard(game.getCard((CardView) t));
             }
         }
     }
@@ -432,6 +434,9 @@ public class PlayerControllerHuman
         }
 
         tempShow(optionList);
+        if (delayedReveal != null) {
+            tempShow(delayedReveal.getCards());
+        }
         final GameEntityView result = getGui().chooseSingleEntityForEffect(title, GameEntityView.getEntityCollection(optionList), delayedReveal, isOptional);
         endTempShowCards();
 
