@@ -52,6 +52,10 @@ which has changed). This might help with effects such as Painter's Servant which
 add colors to cards and which make most cards display with the gold border. The
 option is currently found under "Graphic Options" for both versions of Forge.
 
+Starting with v1.5.41 this option has been renamed to "Show Detailed Card Color"
+in order to avoid confusion (because card identity is a Magic: the Gathering
+term that is not equivalent to the sum of card colors).
+
 
 - New Quest Preferences -
 Three new quest preferences (Playset Size: Basic Lands, Playset Size: Any 
