@@ -18,6 +18,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.collect.FCollection;
@@ -1165,6 +1166,17 @@ public class AbilityUtils {
             final Object o = root.getTriggeringObject(triggeringType);
             if (o instanceof SpellAbility) {
                 s = (SpellAbility) o;
+                // if there is no target information in SA, look in SpellAbilityTargetingCards triggering object before giving up
+                final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject("SpellAbilityTargetingCards");
+                if (s.getTargets() != null && s.getTargets().getNumTargeted() == 0) {
+                    if (tgtList != null && tgtList.size() > 0) {
+                        TargetChoices tc = new TargetChoices();
+                        for (Card c : tgtList) {
+                            tc.add(c);
+                        }
+                        s.setTargets(tc);
+                    }
+                }
             }
         }
         else if (defined.equals("Remembered")) {
