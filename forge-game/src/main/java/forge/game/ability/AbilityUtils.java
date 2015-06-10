@@ -1166,15 +1166,18 @@ public class AbilityUtils {
             final Object o = root.getTriggeringObject(triggeringType);
             if (o instanceof SpellAbility) {
                 s = (SpellAbility) o;
-                // if there is no target information in SA, look in SpellAbilityTargetingCards triggering object before giving up
-                final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject("SpellAbilityTargetingCards");
-                if (s.getTargets() != null && s.getTargets().getNumTargeted() == 0) {
-                    if (tgtList != null && tgtList.size() > 0) {
-                        TargetChoices tc = new TargetChoices();
-                        for (Card c : tgtList) {
-                            tc.add(c);
+                // if there is no target information in SA but targets are listed in SpellAbilityTargeting cards, copy that
+                // information so it's not lost if the calling code is interested in targets of the triggered SA.
+                if (triggeringType.equals("SpellAbility")) {
+                    final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject("SpellAbilityTargetingCards");
+                    if (s.getTargets() != null && s.getTargets().getNumTargeted() == 0) {
+                        if (tgtList != null && tgtList.size() > 0) {
+                            TargetChoices tc = new TargetChoices();
+                            for (Card c : tgtList) {
+                                tc.add(c);
+                            }
+                            s.setTargets(tc);
                         }
-                        s.setTargets(tc);
                     }
                 }
             }
