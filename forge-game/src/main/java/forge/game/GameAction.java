@@ -135,6 +135,12 @@ public class GameAction {
             return c;
         }
 
+        if (toBattlefield && !c.isPermanent()) {
+            // Rules 304.4, 307.4: non-permanents (instants, sorceries) can't enter the battlefield and remain
+            // in their previous zone
+            return c;
+        }
+
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
         Card copied = null;
