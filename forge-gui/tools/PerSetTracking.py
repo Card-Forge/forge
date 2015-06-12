@@ -3,41 +3,93 @@
 ############IMPLEMENTATION FOLLOWS############
 import os,sys,fnmatch,re
 
-pathToMtgData = os.path.join(sys.path[0], "mtg-data.txt")
+# TODO Move these somewhere else?
+ignoredSet = [ 'ASTRAL', 'ATH', 'BD', 'BR', 'CM1', 'DD2', 'DDC', 'DDD', 'DDE', 'DDF',
+	'DDG', 'DDH', 'DDI', 'DDJ', 'DDK', 'DDL', 'DDM', 'DDN', 'DKM', 'DRB', 'DREAM', 'EVG', 'H09', 'MD1', 'ME2',
+	'ME3', 'ME4', 'MED', 'PD2', 'PD3', 'SDC', 'UG', 'UGL', 'UNH', 'V09', 'V10', 'V11', 'V12',
+	'V13', 'V14', '', 'DD3_DVD']
 
-def getSetByFormat(requestedFormat):
-	# Parse out Standard sets from the Format file
-	formatLocation = os.path.join(sys.path[0], 'formats.txt')
+toolsDir = os.path.abspath(os.path.dirname( __file__ ))
+resDir = os.path.abspath(os.path.join(toolsDir, '..', 'res'))
+pathToMtgData = os.path.join(toolsDir, "mtg-data.txt")
+
+def initializeFormats():
+	formats = {}
+	formatLocation = os.path.join(resDir, 'blockdata', 'formats.txt')
+	print "Looking for formats in ", formatLocation
 	with open(formatLocation) as formatFile:
-		formats = formatFile.readlines()
+		while formatFile:
+			try:
+				line = formatFile.readline().strip()
+				if not line:
+					# this should only happen when the file is done processing if we did things correctly?
+					break
 
-		for format in formats:
-			if requestedFormat not in format:
+				format = line[1:-1]
+				formats[format] = {}
+			except:
+				break
+
+			# Pull valid sets
+			while line != '':
+				line = formatFile.readline().strip()
+				if line.startswith('Sets:'):
+					sets = line.split(':')[1]
+					formats[format]['sets'] = sets.split(', ')
+				elif line.startswith('Banned'):
+					banned = line.split(':')[1]
+					formats[format]['banned'] = sets.split('; ')
+
+	print formats
+	return formats
+
+def writeToFiles(text, files):
+	for f in files:
+		if f:
+			f.write(text)
+
+def printOverallEditions(totalDataList, setCodeToName, releaseFile=None):
+	totalPercentage = 0
+	totalMissing = 0
+	totalImplemented = 0
+	fullTotal = 0
+	if releaseFile:
+		releaseFile.write("[spoiler=Overall Editions]\n")
+	with open(os.path.join(toolsDir, "PerSetTrackingResults", "CompleteStats.txt"), "w") as statsfile:
+		files = [statsfile, releaseFile]
+		writeToFiles("Set: Implemented (Missing) / Total = Percentage Implemented\n", files)
+		for k,dataKey in totalDataList :
+			totalImplemented += dataKey[0]
+			totalMissing += dataKey[1]
+			fullTotal += dataKey[2]
+			if dataKey[2] == 0:
+				print "SetCode unknown", k
 				continue
-			parsed = format.split('|')
-			for p in parsed:
-				if not p.startswith('Sets:'):
-					continue
+			writeToFiles(setCodeToName[k].lstrip() + ": " + str(dataKey[0]) + " (" + str(dataKey[1]) + ") / " + str(dataKey[2]) + " = " + str(round(dataKey[3], 2)) + "%\n", files)
+		totalPercentage = totalImplemented / fullTotal
+		writeToFiles("\nTotal over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal) + "\n", files)
 
-				sets = p.strip().split(':')[1]
-				return sets.split(', ')
+	if releaseFile:
+		releaseFile.write("[/spoiler]\n\n")
 
-	return []
-
-def printCardSet(implementedSet, missingSet, fileName, setCoverage=None, printImplemented=False, printMissing=True):
+def printCardSet(implementedSet, missingSet, fileName, setCoverage=None, printImplemented=False, printMissing=True, releaseFile=None):
 	# Add another file that will print out whichever set is requested
 	# Convert back to lists so they can be sorted
 	impCount = len(implementedSet)
 	misCount = len(missingSet)
 	totalCount = impCount + misCount
 
-	filePath = os.path.join(sys.path[0], "PerSetTrackingResults", fileName)
+	if releaseFile:
+		releaseFile.write("[spoiler=%s]\n" % fileName)
+
+	filePath = os.path.join(toolsDir, "PerSetTrackingResults", fileName)
 	with open(filePath, "w") as outfile:
+		files = [outfile, releaseFile]
 		if setCoverage:
-			outfile.write(' '.join(setCoverage))
-			outfile.write('\n')
-		outfile.write("Implemented (Missing) / Total = Percentage Implemented\n")
-		outfile.write("%d (%d) / %d = %.2f %%\n" % (impCount, misCount, totalCount, float(impCount)/totalCount*100))
+			writeToFiles(' '.join(setCoverage), files)
+			writeToFiles('\n', files)
+		writeToFiles("Implemented (Missing) / Total = Percentage Implemented\n", files)
+		writeToFiles("%d (%d) / %d = %.2f %%\n" % (impCount, misCount, totalCount, float(impCount)/totalCount*100), files)
 
 		# If you really need to, we can print implemented cards
 		if printImplemented:
@@ -51,14 +103,17 @@ def printCardSet(implementedSet, missingSet, fileName, setCoverage=None, printIm
 		if printMissing:
 			missing = list(missingSet)
 			missing.sort()
-			outfile.write("\nMissing (%d):" % misCount)
+			writeToFiles("\nMissing (%d):" % misCount, files)
 			for s in missing:
-				outfile.write("\n%s" % s)
+				writeToFiles("\n%s" % s, files)
 
-		outfile.write("\n")
+		writeToFiles("\n", files)
+
+	if releaseFile:
+		releaseFile.write("[/spoiler]\n\n")
 
 def printDistinctOracle(missingSet, fileName):
-	filePath = os.path.join(sys.path[0], "PerSetTrackingResults", fileName)
+	filePath = os.path.join(toolsDir, "PerSetTrackingResults", fileName)
 	missing = list(missingSet)
 	missing.sort()
 	with open(filePath, "w") as outfile:
@@ -76,8 +131,8 @@ if __name__ == '__main__':
 		raw_input("")
 		sys.exit()
 
-	if not os.path.isdir(sys.path[0] + os.sep + 'PerSetTrackingResults') :
-		os.mkdir(sys.path[0] + os.sep + 'PerSetTrackingResults')
+	if not os.path.isdir(toolsDir + os.sep + 'PerSetTrackingResults') :
+		os.mkdir(toolsDir + os.sep + 'PerSetTrackingResults')
 
 	forgeFolderFiles = []
 	forgeCards = []
@@ -133,7 +188,7 @@ if __name__ == '__main__':
 
 	#Parse Forge
 	print("Parsing Forge")
-	cardsfolderLocation = os.path.join(sys.path[0], '..', 'res', 'cardsfolder')
+	cardsfolderLocation = os.path.join(resDir, 'cardsfolder')
 	for root, dirnames, filenames in os.walk(cardsfolderLocation):
 		for fileName in fnmatch.filter(filenames, '*.txt'):
 			with open(os.path.join(root, fileName))  as currentForgeCard :
@@ -149,27 +204,23 @@ if __name__ == '__main__':
 	currentImplemented = []
 	allMissing = set()
 	allImplemented = set()
+	formats = initializeFormats()
+	unknownFormat =  {'sets': []}
 
-	standardSets = getSetByFormat('Standard')
+	standardSets = formats.get('Standard', unknownFormat)['sets']
 	standardMissing = set()
 	standardImplemented = set()
 
-	modernSets = getSetByFormat('Modern')
+	modernSets = formats.get('Modern', unknownFormat)['sets']
 	modernMissing = set()
 	modernImplemented = set()
 
-	extendedSets = getSetByFormat('Extended')
-	extendedMissing = set()
-	extendedImplemented = set()
+	#extendedSets = formats.get('Extended', unknownFormat)['sets']
+	#extendedMissing = set()
+	#extendedImplemented = set()
 
 	total = 0
 	percentage = 0
-
-
-	ignoredSet = [ 'ASTRAL', 'ATH', 'BD', 'BR', 'CM1', 'DD2', 'DDC', 'DDD', 'DDE', 'DDF',
-		'DDG', 'DDH', 'DDI', 'DDJ', 'DDK', 'DDL', 'DDM', 'DDN', 'DKM', 'DRB', 'DREAM', 'EVG', 'H09', 'MD1', 'ME2',
-		'ME3', 'ME4', 'MED', 'PD2', 'PD3', 'SDC', 'UG', 'UGL', 'UNH', 'V09', 'V10', 'V11', 'V12',
-		'V13', 'V14', '']
 
 	for currentSet in setCodes :
 		# Ignore any sets that we don't tabulate
@@ -188,7 +239,8 @@ if __name__ == '__main__':
 		currentMissing.sort()
 		currentImplemented.sort()
 
-		with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "set_" + currentSet.strip() + ".txt", "w") as output :
+		# Output each edition file on it's own
+		with open(toolsDir + os.sep + "PerSetTrackingResults" + os.sep + "set_" + currentSet.strip() + ".txt", "w") as output :
 			output.write("Implemented (" + str(len(currentImplemented)) + "):\n")
 			for everyImplemented in currentImplemented :
 				output.write(everyImplemented + '\n')
@@ -209,9 +261,9 @@ if __name__ == '__main__':
 		if currentSet in modernSets:
 			modernMissing |= set(currentMissing)
 			modernImplemented |= set(currentImplemented)
-		if currentSet in extendedSets:
-			extendedMissing |= set(currentMissing)
-			extendedImplemented |= set(currentImplemented)
+		#if currentSet in extendedSets:
+		#	extendedMissing |= set(currentMissing)
+		#	extendedImplemented |= set(currentImplemented)
 
 
 		del currentMissing[:]
@@ -220,27 +272,15 @@ if __name__ == '__main__':
 	#sort sets by percentage completed
 	totalDataList = sorted(totalData.items(), key=lambda k: k[1][3], reverse=True)
 
-	totalPercentage = 0
-	totalMissing = 0
-	totalImplemented = 0
-	fullTotal = 0
+	releaseOutput = open(os.path.join(toolsDir, "PerSetTrackingResults", "ReleaseStats.txt"), "w")
 
-	with open(os.path.join(sys.path[0], "PerSetTrackingResults", "CompleteStats.txt"), "w") as statsfile:
-		statsfile.write("Set: Implemented (Missing) / Total = Percentage Implemented\n")
-		for k,dataKey in totalDataList :
-			totalImplemented += dataKey[0]
-			totalMissing += dataKey[1]
-			fullTotal += dataKey[2]
-			statsfile.write(setCodeToName[k].lstrip() + ": " + str(dataKey[0]) + " (" + str(dataKey[1]) + ") / " + str(dataKey[2]) + " = " + str(round(dataKey[3], 2)) + "%\n")
-		totalPercentage = totalImplemented / fullTotal
-		statsfile.write("\n")
-		statsfile.write("Total over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal))
-		statsfile.write("\n")
-
-	printCardSet(allImplemented, allMissing, "DistinctStats.txt")
-	printCardSet(standardImplemented, standardMissing, "FormatStandard.txt", setCoverage=standardSets)
-	printCardSet(extendedImplemented, extendedMissing, "FormatExtended.txt", setCoverage=extendedSets)
-	printCardSet(modernImplemented, modernMissing, "FormatModern.txt", setCoverage=modernSets)
+	printCardSet(allImplemented, allMissing, "DistinctStats.txt", releaseFile=releaseOutput)
+	printOverallEditions(totalDataList, setCodeToName, releaseFile=releaseOutput)
+	printCardSet(standardImplemented, standardMissing, "FormatStandard.txt", setCoverage=standardSets, releaseFile=releaseOutput)
+	#printCardSet(extendedImplemented, extendedMissing, "FormatExtended.txt", setCoverage=extendedSets)
+	printCardSet(modernImplemented, modernMissing, "FormatModern.txt", setCoverage=modernSets, releaseFile=releaseOutput)
 	printDistinctOracle(allMissing, "DistinctOracle.txt")
+
+	releaseOutput.close()
 
 	print ("Done!")
