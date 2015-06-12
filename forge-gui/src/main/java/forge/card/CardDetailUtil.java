@@ -249,11 +249,11 @@ public class CardDetailUtil {
 
         if (!showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_NEVER)) {
             final CardView card = state.getCard();
-            boolean isMulticolor = state.getColors().countColors() > 1;
+            boolean isMulticolor = state.getColors().isMulticolor();
             boolean isChanged = false;
             curColors = getCurrentColors(state);
 
-            // do not waste CPU cycles on this if the mode does not involve checking for changed color identity
+            // do not waste CPU cycles on this if the mode does not involve checking for changed colors
             if (showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_CHANGED) || showCurColorMode.equals(ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED)) {
                 String origIdent = "";
                 PaperCard origPaperCard = null;
@@ -273,7 +273,7 @@ public class CardDetailUtil {
                     }
                     origIdent = origCard != null ? getCurrentColors(CardView.get(origCard).getCurrentState()) : "";
                 } catch(Exception ex) {
-                    System.err.println("Unexpected behavior: card " + card.getName() + "[" + card.getId() + "] tripped an exception when trying to process color identity.");
+                    System.err.println("Unexpected behavior: card " + card.getName() + "[" + card.getId() + "] tripped an exception when trying to process current card colors.");
                 } 
                 isChanged = !curColors.equals(origIdent);
             }
