@@ -40,7 +40,7 @@ def initializeFormats():
 					banned = line.split(':')[1]
 					formats[format]['banned'] = sets.split('; ')
 
-	print formats
+	#print formats
 	return formats
 
 def writeToFiles(text, files):
