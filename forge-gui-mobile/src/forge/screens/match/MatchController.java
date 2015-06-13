@@ -118,7 +118,14 @@ public class MatchController extends AbstractGuiGame {
         final FCollectionView<PlayerView> allPlayers = getGameView().getPlayers();
         final List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
         for (final PlayerView p : allPlayers) {
-            playerPanels.add(new VPlayerPanel(p, noHumans || isLocalPlayer(p)));
+            final boolean isLocal = isLocalPlayer(p);
+            final VPlayerPanel playerPanel = new VPlayerPanel(p, isLocal || noHumans);
+            if (isLocal && !playerPanels.isEmpty()) {
+                playerPanels.add(0, playerPanel); //ensure local player always first among player panels
+            }
+            else {
+                playerPanels.add(playerPanel);
+            }
         }
         view = new MatchScreen(playerPanels);
 
