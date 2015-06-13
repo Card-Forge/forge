@@ -81,7 +81,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             return DeckgenUtil.generatePlanarDeck();
         default:
             while (true) {
-                switch (Aggregates.random(DeckType.values())) {
+                switch (Aggregates.random(DeckType.ConstructedOptions)) {
                 case PRECONSTRUCTED_DECK:
                     return Aggregates.random(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons())).getDeck();
                 case QUEST_OPPONENT_DECK:

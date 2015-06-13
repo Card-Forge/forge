@@ -26,7 +26,7 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
     }
 
     public void refresh(final DeckType deckType) {
-        setModel(new DefaultComboBoxModel<DeckType>(DeckType.values()));
+        setModel(new DefaultComboBoxModel<DeckType>(DeckType.ConstructedOptions));
         setSelectedItem(deckType);
     }
 
