@@ -111,6 +111,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         add(lblVariants);
         cbVariants = add(new FComboBox<Object>());
+        cbVariants.setEnabled(lobby.hasControl());
         cbVariants.setFont(VARIANTS_FONT);
         cbVariants.addItem("(None)");
         cbVariants.addItem(GameType.Vanguard);
@@ -160,7 +161,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
-                        btnStart.setEnabled(true);
+                        btnStart.setEnabled(lobby.hasControl());
                     }
                 });
             }
@@ -177,7 +178,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     protected void initLobby(GameLobby lobby0) {
         lobby = lobby0;
         lobby.setListener(this);
-        btnStart.setVisible(lobby.hasControl());
+
+        boolean hasControl = lobby.hasControl();
+        btnStart.setEnabled(hasControl);
+        if (cbVariants != null) {
+            cbVariants.setEnabled(hasControl);
+        }
     }
 
     private void updateVariantSelection() {

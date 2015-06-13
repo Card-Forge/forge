@@ -39,6 +39,7 @@ public final class ServerGameLobby extends GameLobby {
         final LobbySlot slot = getSlot(index);
         slot.setType(LobbySlotType.OPEN);
         slot.setName(StringUtils.EMPTY);
+        slot.setIsReady(false);
         updateView(false);
     }
 

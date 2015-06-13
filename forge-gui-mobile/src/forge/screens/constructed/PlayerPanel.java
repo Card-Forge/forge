@@ -604,6 +604,7 @@ public class PlayerPanel extends FContainer {
         return isReady;
     }
     public void setIsReady(boolean isReady0) {
+        if (isReady == isReady0) { return; }
         isReady = isReady0;
         humanAiSwitch.setToggled(isReady);
     }
