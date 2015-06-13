@@ -906,7 +906,13 @@ public class PlayerControllerHuman
     public CardCollection chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
         final int max = player.getMaxHandSize();
 
-        final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, nDiscard, nDiscard, player.getZone(ZoneType.Hand).getCards());
+        @SuppressWarnings("serial")
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, nDiscard, nDiscard, player.getZone(ZoneType.Hand).getCards()) {
+            @Override
+            protected final boolean allowAwaitNextInput() {
+                return true; //prevent Cleanup message getting stuck during opponent's next turn
+            }
+        };
         final String message = "Cleanup Phase\nSelect " + nDiscard + " card" + (nDiscard > 1 ? "s" : "") +
                 " to discard to bring your hand down to the maximum of " + max + " cards.";
         inp.setMessage(message);
