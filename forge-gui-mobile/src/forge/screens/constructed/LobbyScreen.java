@@ -58,7 +58,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     // Variants frame and variables
     private final FLabel lblVariants = new FLabel.Builder().text("Variants:").font(VARIANTS_FONT).build();
-    private final FComboBox<Object> cbVariants;
+    private final FComboBox<Object> cbVariants = new FComboBox<Object>();
 
     private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
     private final FScrollPane playersScroll = new FScrollPane() {
@@ -110,8 +110,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         });
 
         add(lblVariants);
-        cbVariants = add(new FComboBox<Object>());
-        cbVariants.setEnabled(lobby.hasControl());
+        add(cbVariants);
         cbVariants.setFont(VARIANTS_FONT);
         cbVariants.addItem("(None)");
         cbVariants.addItem(GameType.Vanguard);
@@ -181,9 +180,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         boolean hasControl = lobby.hasControl();
         btnStart.setEnabled(hasControl);
-        if (cbVariants != null) {
-            cbVariants.setEnabled(hasControl);
-        }
+        lblVariants.setEnabled(hasControl);
+        cbVariants.setEnabled(hasControl);
     }
 
     private void updateVariantSelection() {
