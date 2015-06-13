@@ -293,6 +293,7 @@ public class PlayerPanel extends FContainer {
             boolean toggled = humanAiSwitch.isToggled();
             if (allowNetworking) {
                 setIsReady(toggled);
+                screen.setReady(index, toggled);
             }
             else {
                 type = toggled ? LobbySlotType.AI : LobbySlotType.LOCAL;
@@ -330,6 +331,9 @@ public class PlayerPanel extends FContainer {
                         && StringUtils.isAlphanumericSpace(newName) && prefs.getPref(FPref.PLAYER_NAME) != newName) {
                     prefs.setPref(FPref.PLAYER_NAME, newName);
                     prefs.save();
+                    if (allowNetworking) {
+                        screen.firePlayerChangeListener(index);
+                    }
                 }
             }
         }
@@ -345,6 +349,9 @@ public class PlayerPanel extends FContainer {
 
                     if (index < 2) {
                         screen.updateAvatarPrefs();
+                    }
+                    if (allowNetworking) {
+                        screen.firePlayerChangeListener(index);
                     }
                 }
             });
@@ -474,6 +481,9 @@ public class PlayerPanel extends FContainer {
                         if (index == 0) {
                             prefs.setPref(FPref.PLAYER_NAME, newName);
                             prefs.save();
+                        }
+                        if (allowNetworking) {
+                            screen.firePlayerChangeListener(index);
                         }
                     }
                 });

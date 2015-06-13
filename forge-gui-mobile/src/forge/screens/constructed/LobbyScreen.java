@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.collect.Iterables;
 
@@ -446,6 +447,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 if (isNewPanel) {
                     panel.setVisible(true);
                 }
+                Gdx.graphics.requestRendering();
             }
             else if (hasPanel) {
                 playerPanels.get(i).setVisible(false);
