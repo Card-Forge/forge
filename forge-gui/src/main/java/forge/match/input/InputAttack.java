@@ -6,33 +6,24 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.match.input;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-
 import forge.events.UiEventAttackerDeclared;
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -40,14 +31,18 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.player.PlayerControllerHuman;
-import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
+import forge.util.collect.FCollectionView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
  * InputAttack class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: InputAttack.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
@@ -96,12 +91,6 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     @Override
-    protected final boolean allowAwaitNextInput() {
-        //wait for opponent to declare blockers if any attackers
-        return !combat.getAttackers().isEmpty();
-    }
-
-    @Override
     protected final void onOk() {
         // Propaganda costs could have been paid here.
         setCurrentDefender(null); // remove highlights
@@ -114,7 +103,7 @@ public class InputAttack extends InputSyncronizedBase {
         //either alpha strike or undeclare all attackers based on whether any attackers have been declared
         if (canCallBackAttackers()) {
             //undeclare all attackers
-            List<Card> attackers = new ArrayList<Card>(combat.getAttackers()); //must copy list since it will be modified
+            List<Card> attackers = new ArrayList<>(combat.getAttackers()); //must copy list since it will be modified
             for (Card c : attackers) {
                 undeclareAttacker(c);
             }
@@ -281,7 +270,7 @@ public class InputAttack extends InputSyncronizedBase {
         return true;
     }
 
-    private final void setCurrentDefender(final GameEntity def) {
+    private void setCurrentDefender(final GameEntity def) {
         currentDefender = def;
         for (final GameEntity ge : defenders) {
             if (ge instanceof Card) {
@@ -295,7 +284,7 @@ public class InputAttack extends InputSyncronizedBase {
         updateMessage();
     }
 
-    private final void activateBand(final AttackingBand band) {
+    private void activateBand(final AttackingBand band) {
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) {
                 getController().getGui().setUsedToPay(CardView.get(card), false);

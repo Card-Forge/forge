@@ -6,18 +6,16 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.match.input;
-
-import java.util.List;
 
 import forge.FThreads;
 import forge.events.UiEventBlockerAssigned;
@@ -34,11 +32,13 @@ import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 
+import java.util.List;
+
 /**
  * <p>
  * Input_Block class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: InputBlock.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
@@ -116,8 +116,7 @@ public class InputBlock extends InputSyncronizedBase {
         boolean isCorrectAction = false;
         if (triggerEvent != null && triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
-            card.getGame().fireEvent(new UiEventBlockerAssigned(
-                    CardView.get(card), (CardView) null));
+            card.getGame().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
             isCorrectAction = true;
         }
         else {
@@ -132,8 +131,7 @@ public class InputBlock extends InputSyncronizedBase {
                     if (combat.isBlocking(card, currentAttacker)) {
                         //if creature already blocking current attacker, remove blocker from combat
                         combat.removeBlockAssignment(currentAttacker, card);
-                        card.getGame().fireEvent(new UiEventBlockerAssigned(
-                                CardView.get(card), (CardView) null));
+                        card.getGame().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
                         isCorrectAction = true;
                     }
                     else {
