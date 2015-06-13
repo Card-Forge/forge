@@ -288,16 +288,22 @@ public abstract class GameLobby {
 
     /** Returns a runnable to start a match with the applied variants if allowed. */
     public Runnable startGame() {
-        if (!isEnoughTeams()) {
-            SOptionPane.showMessageDialog("There are not enough teams! Please adjust team allocations.");
-            return null;
-        }
 
         final List<LobbySlot> activeSlots = Lists.newArrayListWithCapacity(getNumberOfSlots());
         for (final LobbySlot slot : data.slots) {
             if (slot.getType() != LobbySlotType.OPEN) {
                 activeSlots.add(slot);
             }
+        }
+
+        if (activeSlots.size() < 2) {
+            SOptionPane.showMessageDialog("At least two players are required to start a game.");
+            return null;
+        }
+
+        if (!isEnoughTeams()) {
+            SOptionPane.showMessageDialog("There are not enough teams! Please adjust team allocations.");
+            return null;
         }
 
         for (final LobbySlot slot : activeSlots) {
