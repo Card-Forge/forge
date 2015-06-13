@@ -614,7 +614,7 @@ public class PlayerPanel extends FContainer {
         avatarLabel.setEnabled(mayEdit);
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
-        humanAiSwitch.setEnabled(mayEdit && mayControl);
+        humanAiSwitch.setEnabled(mayEdit);
         updateVariantControlsVisibility();
 
         //if panel has height already, ensure height updated to account for button visibility changes
@@ -626,7 +626,6 @@ public class PlayerPanel extends FContainer {
     public void setMayControl(boolean mayControl0) {
         if (mayControl == mayControl0) { return; }
         mayControl = mayControl0;
-        humanAiSwitch.setEnabled(mayEdit && mayControl);
     }
 
     public void setMayRemove(boolean mayRemove0) {

@@ -39,9 +39,9 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Utils;
-import forge.util.gui.SOptionPane;
 
 public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private static final ForgePreferences prefs = FModel.getPreferences();
@@ -177,6 +177,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     protected void initLobby(GameLobby lobby0) {
         lobby = lobby0;
         lobby.setListener(this);
+        btnStart.setVisible(lobby.hasControl());
     }
 
     private void updateVariantSelection() {
@@ -504,10 +505,13 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     void setReady(final int index, final boolean ready) {
-        if (ready && decks[index] == null) {
-            SOptionPane.showErrorDialog("Select a deck before readying!");
-            update(false);
-            return;
+        if (ready) {
+            updateDeck(index);
+            if (decks[index] == null) {
+                FOptionPane.showErrorDialog("Select a deck before readying!");
+                update(false);
+                return;
+            }
         }
 
         firePlayerChangeListener(index);
