@@ -61,7 +61,7 @@ public final class ServerGameLobby extends GameLobby {
 
     @Override
     public boolean mayRemove(final int index) {
-        return true;
+        return index >= 2;
     }
 
     @Override
