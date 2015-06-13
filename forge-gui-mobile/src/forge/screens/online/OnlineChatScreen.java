@@ -42,7 +42,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
             }
         });
     }
-    
+
     private void sendMessage() {
         String message = txtSendMessage.getText();
         if (message.isEmpty()) { return; }

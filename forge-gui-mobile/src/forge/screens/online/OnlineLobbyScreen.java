@@ -48,7 +48,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                             }
 
                             final boolean joinServer = url.length() > 0;
-                            final String caption = joinServer ? "Starting server..." : "Connecting to server...";
+                            final String caption = joinServer ? "Connecting to server..." : "Starting server...";
                             LoadingOverlay.show(caption, new Runnable() {
                                 @Override
                                 public void run() {
