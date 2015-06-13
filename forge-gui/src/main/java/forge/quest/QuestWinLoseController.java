@@ -3,10 +3,7 @@ package forge.quest;
 import com.google.common.collect.ImmutableList;
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
-import forge.card.BoosterSlots;
-import forge.card.CardEdition;
-import forge.card.IUnOpenedProduct;
-import forge.card.UnOpenedProduct;
+import forge.card.*;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
@@ -495,12 +492,13 @@ public class QuestWinLoseController {
         String title;
         if (qData.getFormat() == null) {
 
-            final List<GameFormat> formats = new ArrayList<>();
+            //final List<GameFormat> formats = new ArrayList<>();
+            final List<String> formats = new ArrayList<>();
             final String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
             GameFormat pref = null;
             for (final GameFormat f : FModel.getFormats().getOrderedList()) {
-                formats.add(f);
+                formats.add(f.toString());
                 if (f.toString().equals(preferredFormat)) {
                     pref = f;
                 }
@@ -508,13 +506,39 @@ public class QuestWinLoseController {
 
             Collections.sort(formats);
 
-            final GameFormat selected = SGuiChoose.getChoices("Choose bonus booster format", 1, 1, formats, pref, null).get(0);
-            FModel.getQuestPreferences().setPref(QPref.BOOSTER_FORMAT, selected.toString());
+            formats.addAll(SealedProduct.specialSets);
 
-            cardsWon = qData.getCards().generateQuestBooster(selected.getFilterPrinted());
+            String preferredSelection = null;
+            if (pref != null) {
+                preferredSelection = pref.toString();
+            }
+            final String selected = SGuiChoose.getChoices("Choose bonus booster format", 1, 1, formats, preferredSelection, null).get(0);
+
+            if (SealedProduct.specialSets.contains(selected)) {
+
+                BoosterPack boosterPack = BoosterPack.FN_FROM_COLOR.apply(selected);
+                assert boosterPack != null;
+                cardsWon = boosterPack.getCards();
+                title = "Bonus " + selected + " Booster Pack!";
+
+            } else {
+
+                GameFormat selectedFormat = null;
+                for (final GameFormat f : FModel.getFormats().getOrderedList()) {
+                    if (f.toString().equals(selected)) {
+                        selectedFormat = f;
+                    }
+                }
+
+                assert selectedFormat != null;
+                FModel.getQuestPreferences().setPref(QPref.BOOSTER_FORMAT, selected);
+
+                cardsWon = qData.getCards().generateQuestBooster(selectedFormat.getFilterPrinted());
+                title = "Bonus booster pack from the \"" + selectedFormat.getName() + "\" format!";
+
+            }
+
             qData.getCards().addAllCards(cardsWon);
-
-            title = "Bonus booster pack from the \"" + selected.getName() + "\" format!";
 
         } else {
 
@@ -549,29 +573,43 @@ public class QuestWinLoseController {
                 maxChoices += qData.getAssets().getItemLevel(QuestItemType.MEMBERSHIP_TOKEN);
             }
 
-            final List<CardEdition> options = new ArrayList<>();
+            final List<String> options = new ArrayList<>();
 
             while (!sets.isEmpty() && maxChoices > 0) {
                 final int ix = MyRandom.getRandom().nextInt(sets.size());
                 final String set = sets.get(ix);
                 sets.remove(ix);
-                options.add(FModel.getMagicDb().getEditions().get(set));
+                if (SealedProduct.specialSets.contains(set)) {
+                    options.add(set);
+                } else {
+                    options.add(FModel.getMagicDb().getEditions().get(set).toString());
+                }
+                if (FModel.getQuestPreferences().getPrefInt(QPref.SPECIAL_BOOSTERS) == 1) {
+                    if (Math.random() > 0.85 - (double) (maxChoices) / 10.0) {
+                        options.add(SealedProduct.specialSets.get((int) (Math.random() * SealedProduct.specialSets.size())));
+                    }
+                }
                 maxChoices--;
             }
 
-            final CardEdition chooseEd = SGuiChoose.one("Choose bonus booster set", options);
+            String chooseEd = SGuiChoose.one("Choose bonus booster set", options);
 
-            if (customBooster) {
-                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(Predicates.printedInSet(chooseEd.getCode()));
+            if (SealedProduct.specialSets.contains(chooseEd)) {
+                final IUnOpenedProduct product = new UnOpenedProduct(QuestUtilCards.getColoredBoosterTemplate(chooseEd));
+                cardsWon = product.get();
+            } else if (customBooster) {
+                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(Predicates.printedInSet(FModel.getMagicDb().getEditions().get(chooseEd).getCode()));
                 final IUnOpenedProduct product = new UnOpenedProduct(getBoosterTemplate(), cards);
                 cardsWon = product.get();
             } else {
-                final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode()));
+                String chosenEdition = chooseEd.substring(chooseEd.lastIndexOf("(") + 1, chooseEd.lastIndexOf(")"));
+                chooseEd = chooseEd.substring(0, chooseEd.lastIndexOf("(")).trim();
+                final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chosenEdition));
                 cardsWon = product.get();
             }
 
             qData.getCards().addAllCards(cardsWon);
-            title = "Bonus " + chooseEd.getName() + " booster pack!";
+            title = "Bonus " + chooseEd + " Booster Pack!";
 
         }
 

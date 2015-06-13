@@ -24,6 +24,7 @@ import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardEdition.FoilType;
 import forge.item.IPaperCard;
+import forge.item.IPaperCard.Predicates.Presets;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.util.Aggregates;
@@ -76,7 +77,7 @@ public class BoosterGenerator {
 
             String[] sType = TextUtil.splitWithParenthesis(slotType, ' ');
             String setCode = sType.length == 1 && template.getEdition() != null ?  template.getEdition() : null;
-            String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode: slotType.trim();
+            String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode : slotType.trim();
 
             boolean foilInThisSlot = hasFoil && slotType.startsWith(foilSlot);
             if (foilInThisSlot)
@@ -220,6 +221,32 @@ public class BoosterGenerator {
                 operator = StringUtils.strip(operator.substring(4), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
                 toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
+            } else if (operator.startsWith("color(")) {
+                operator = StringUtils.strip(operator.substring("color(".length() + 1), "()\" ");
+                switch (operator.toLowerCase()) {
+                    case "black":
+                        toAdd = Presets.IS_BLACK;
+                        break;
+                    case "blue":
+                        toAdd = Presets.IS_BLUE;
+                        break;
+                    case "green":
+                        toAdd = Presets.IS_GREEN;
+                        break;
+                    case "red":
+                        toAdd = Presets.IS_RED;
+                        break;
+                    case "white":
+                        toAdd = Presets.IS_WHITE;
+                        break;
+                    case "colorless":
+                        toAdd = Presets.IS_COLORLESS;
+                        break;
+                }
+            } else if (operator.startsWith("fromSets(")) {
+                operator = StringUtils.strip(operator.substring("fromSets(".length() + 1), "()\" ");
+                String[] sets = operator.split(",");
+                toAdd = IPaperCard.Predicates.printedInSets(sets);
             } else if (operator.startsWith("fromSheet(") && invert) {
                 String sheetName = StringUtils.strip(operator.substring(9), "()\" ");
                 Iterable<PaperCard> src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();

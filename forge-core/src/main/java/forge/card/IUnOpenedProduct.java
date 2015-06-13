@@ -5,11 +5,11 @@ import forge.item.PaperCard;
 
 import java.util.List;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
 
 public interface IUnOpenedProduct extends Supplier<List<PaperCard>> {
-    public List<PaperCard> get();
+    List<PaperCard> get();
 }

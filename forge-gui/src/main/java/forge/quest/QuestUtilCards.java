@@ -23,12 +23,12 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.item.*;
+import forge.item.SealedProduct.Template;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.QuestItemType;
@@ -40,7 +40,6 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -538,6 +537,15 @@ public final class QuestUtilCards {
             }
             this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)));
         }
+
+        if (qpref.getPrefInt(QPref.SPECIAL_BOOSTERS) == 1) {
+            for (String color : SealedProduct.specialSets) {
+                for (int i = 0; i < count; i++) {
+                    this.qa.getShopList().add(new BoosterPack(color, getColoredBoosterTemplate(color)));
+                }
+            }
+        }
+
     }
 
     /**
@@ -638,6 +646,37 @@ public final class QuestUtilCards {
             Pair.of(BoosterSlots.UNCOMMON, this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS)),
             Pair.of(BoosterSlots.RARE_MYTHIC, this.qpref.getPrefInt(QPref.BOOSTER_RARES))
         ));
+    }
+
+    public static SealedProduct.Template getColoredBoosterTemplate(final String color) {
+        if (FModel.getQuest().getFormat() == null) {
+            return new Template("?", ImmutableList.of(
+                    Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 11),
+                    Pair.of(BoosterSlots.UNCOMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 3),
+                    Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 1),
+                    Pair.of(BoosterSlots.LAND + ":color(\"" + color + "\")", 1))
+            );
+        } else {
+            String restrictions = "";
+            List<String> allowedSetCodes = FModel.getQuest().getFormat().getAllowedSetCodes();
+            if (allowedSetCodes.isEmpty()) {
+                for (String restrictedCard : FModel.getQuest().getFormat().getRestrictedCards()) {
+                    restrictions += ":!name(\"" + restrictedCard + "\")";
+                }
+            } else {
+                restrictions += ":fromSets(\"";
+                for (String set : allowedSetCodes) {
+                    restrictions += set + ",";
+                }
+                restrictions += ")";
+            }
+            return new Template("?", ImmutableList.of(
+                    Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 11),
+                    Pair.of(BoosterSlots.UNCOMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 3),
+                    Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 1),
+                    Pair.of(BoosterSlots.LAND + ":color(\"" + color + "\")" + restrictions, 1))
+            );
+        }
     }
 
     /**
@@ -755,6 +794,17 @@ public final class QuestUtilCards {
     }
 
     public int getCompletionPercent(String edition) {
+
+        for (String color : SealedProduct.specialSets) {
+            if (color.equals(edition)) {
+                return 0;
+            }
+        }
+
+        if (edition.equals("?")) {
+            return 0;
+        }
+
         // get all cards in the specified edition
         Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(edition);
         Iterable<PaperCard> editionCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter);

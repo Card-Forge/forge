@@ -1,17 +1,16 @@
 package forge;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.CardDb;
 import forge.item.*;
 import forge.util.FileUtil;
 import forge.util.ImageUtil;
+import org.apache.commons.lang3.StringUtils;
 
-public class ImageKeys {
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+public final class ImageKeys {
     public static final String CARD_PREFIX           = "c:";
     public static final String TOKEN_PREFIX          = "t:";
     public static final String ICON_PREFIX           = "i:";
@@ -31,7 +30,7 @@ public class ImageKeys {
         CACHE_FATPACK_PICS_DIR, CACHE_BOOSTERBOX_PICS_DIR, CACHE_PRECON_PICS_DIR, CACHE_TOURNAMENTPACK_PICS_DIR;
     private static Map<String, String> CACHE_CARD_PICS_SUBDIR;
 
-    private static Map<String, Boolean> editionImageLookup = new HashMap<String, Boolean>();
+    private static Map<String, Boolean> editionImageLookup = new HashMap<>();
 
     /**
      * Private constructor to prevent instantiation.
@@ -60,7 +59,7 @@ public class ImageKeys {
         return ImageKeys.CARD_PREFIX + pc.getName() + CardDb.NameSetSeparator + pc.getEdition() + CardDb.NameSetSeparator + pc.getArtIndex() + (altState ? BACKFACE_POSTFIX : "");
     }
 
-    // Inventory items don't have to know how a certain client should draw them. 
+    // Inventory items don't have to know how a certain client should draw them.
     // That's why this method is not encapsulated and overloaded in the InventoryItem descendants
     public static String getImageKey(InventoryItem ii, boolean altState) {
         if (ii instanceof PaperCard) {
@@ -71,6 +70,9 @@ public class ImageKeys {
         }
         if (ii instanceof BoosterPack) {
             BoosterPack bp = (BoosterPack)ii;
+            if (SealedProduct.specialSets.contains(bp.getEdition()) || bp.getEdition().equals("?")) {
+                return "b:" + bp.getName().substring(0, bp.getName().indexOf(bp.getItemType()) - 1);
+            }
             int cntPics = StaticData.instance().getEditions().get(bp.getEdition()).getCntBoosterPictures();
             String suffix = (1 >= cntPics) ? "" : ("_" + bp.getArtIndex());
             return ImageKeys.BOOSTER_PREFIX + bp.getEdition() + suffix;
@@ -145,7 +147,7 @@ public class ImageKeys {
         }
 
         // try without set name
-        if (dir == CACHE_TOKEN_PICS_DIR) {
+        if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
             int index = filename.lastIndexOf('_');
             if (index != -1) {
                 String setlessFilename = filename.substring(0, index);

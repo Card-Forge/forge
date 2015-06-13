@@ -17,17 +17,16 @@
  */
 package forge.quest.io;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import com.esotericsoftware.minlog.Log;
-
 import forge.card.MagicColor;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * <p>
@@ -73,12 +72,13 @@ public class ReadPriceList {
      * @return a {@link java.util.HashMap} object.
      */
     private Map<String, Integer> readFile(final String file) {
-        final Map<String, Integer> map = new HashMap<String, Integer>();
+
+        final Map<String, Integer> map = new HashMap<>();
         final Random r = MyRandom.getRandom();
 
         final List<String> lines = FileUtil.readFile(file);
         for (final String line : lines) {
-            if (line.trim().length() == 0) {
+            if (line.trim().isEmpty()) {
                 break;
             }
 
@@ -95,8 +95,8 @@ public class ReadPriceList {
             try {
                 int val = Integer.parseInt(price.trim());
 
-                if (!(MagicColor.Constant.BASIC_LANDS.contains(name) || MagicColor.Constant.SNOW_LANDS.contains(name))) {
-                    float ff = 0;
+                if (!(MagicColor.Constant.BASIC_LANDS.contains(name) || MagicColor.Constant.SNOW_LANDS.contains(name)) && !ForgeConstants.PRICES_BOOSTER_FILE.equals(file)) {
+                    float ff;
                     if (r.nextInt(100) < 90) {
                         ff = r.nextInt(10) * (float) .01;
                     }

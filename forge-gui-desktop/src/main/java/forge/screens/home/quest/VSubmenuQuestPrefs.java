@@ -340,6 +340,11 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlBooster.add(new FLabel.Builder().text("Rare").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlBooster.add(new PrefInput(QPref.BOOSTER_RARES, QuestPreferencesErrType.BOOSTER), fieldConstraints);
 
+        FLabel specialBoosters = new FLabel.Builder().text("Special Boosters").fontAlign(SwingConstants.RIGHT).build();
+        specialBoosters.setToolTipText("Allows special, color-specific boosters to appear in the shop and as match rewards.");
+        pnlBooster.add(specialBoosters, labelConstraints);
+        pnlBooster.add(new PrefInput(QPref.SPECIAL_BOOSTERS, QuestPreferencesErrType.BOOSTER), fieldConstraints);
+
     }
 
     private void populateShop() {

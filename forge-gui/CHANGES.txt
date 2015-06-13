@@ -8,11 +8,18 @@ Forge Beta: 65-2015 ver 1.5.41
 Release Notes
 -------------
 
+- Special Quest Booster Packs -
+New booster packs have been added to quest mode that contain cards of a single
+color. Blue Booster Packs will contain only blue cards, White Booster Packs
+will contain only white cards, and so on. There's a pack for each color and
+these new packs can be disabled by setting the "Special Boosters" quest
+preference to "0".
+
 - Updated Forge Content Downloads -
-Card images for the latest sets are now available for download, including 
+Card images for the latest sets are now available for download, including
 Tempest Remastered and Modern Masters 2015. All images have also been moved to a
- new server for increased reliability and performance and many previously 
-missing images have been added. There are still a few images missing in Forge 
+ new server for increased reliability and performance and many previously
+missing images have been added. There are still a few images missing in Forge
 and rectifying that is an ongoing effort.
 
 
@@ -40,12 +47,12 @@ The interface has received several small changes.
 
 
 - Display Color Identity -
-There's a new option "Display Color Identity" in both desktop and mobile Forge 
+There's a new option "Display Color Identity" in both desktop and mobile Forge
 that allows you to display the current color identity of cards. It's disabled
 by default (set to "Never") but can be toggled to "Always" (which displays color
 identity for all cards, even mono-color), to "Changed" (which displays color
-identity of all cards whose color identity has been altered compared to its 
-"pristine" state), to "Multicolor" (which only displays color identity of cards 
+identity of all cards whose color identity has been altered compared to its
+"pristine" state), to "Multicolor" (which only displays color identity of cards
 that are currently of two or more colors) or to "Multi+Changed" (which displays
 color identity of all multicolor cards and also of all cards the identity of
 which has changed). This might help with effects such as Painter's Servant which
@@ -58,12 +65,12 @@ term that is not equivalent to the sum of card colors).
 
 
 - New Quest Preferences -
-Three new quest preferences (Playset Size: Basic Lands, Playset Size: Any 
+Three new quest preferences (Playset Size: Basic Lands, Playset Size: Any
 Number, and Playset Size) have been added to control the number of cards to keep
- before selling extras in quest mode. One is for basic lands, one is for 
-"unlimited" cards (Relentless Rats and Shadowborn Apostle), and the last one is 
-for all other cards. This is mostly useful when playing for antes and you want 
-to keep an extra couple of cards on hand, just in case, or if you want to keep 
+ before selling extras in quest mode. One is for basic lands, one is for
+"unlimited" cards (Relentless Rats and Shadowborn Apostle), and the last one is
+for all other cards. This is mostly useful when playing for antes and you want
+to keep an extra couple of cards on hand, just in case, or if you want to keep
 fewer copies of basic lands around.
 
 
@@ -72,7 +79,7 @@ By default the game now displays tokens on the same row as non-token cards (and
 to the right of them), which makes the game use the battlefield space more
 effectively. For example, creature tokens are displayed to the right of regular
 non-token creatures in the same row. If you prefer the classic Forge behavior
-(when tokens are displayed on their own row), the option that controls this 
+(when tokens are displayed on their own row), the option that controls this
 behavior can be found in Forge preferences under "Graphic Options". It is called
 "Display Tokens in a Separate Row".
 
@@ -95,26 +102,11 @@ longer considered unless they can be produced by a land in the deck
 When filtering colors in the Deck Editor, lands that produce all selected colors will now be shown
 This means if you filter to show only green and white cards, lands that produce green and white will now be shown
 This should hopefully make finding multicolor lands for your decks easier.
-An attempt was made to make this option behave in a more consistent and helpful way - now lands won't suddenly 
-disappear when one color is filtered out, basic lands of appropriate colors will be shown, lands that feature at 
-least one of the colors relevant for the deck will be shown. Also, the mode to filter lands in this way is now 
+An attempt was made to make this option behave in a more consistent and helpful way - now lands won't suddenly
+disappear when one color is filtered out, basic lands of appropriate colors will be shown, lands that feature at
+least one of the colors relevant for the deck will be shown. Also, the mode to filter lands in this way is now
 optional and can be toggled on or off in the Preferences ("Filter Lands by Color in Activated Abilities" under
 "Deck Editor Options").
-
-
-- Quest Starting Pool Configuration -
-When starting a new quest, you now have many more options to configure your starting pool. Instead of just picking a
-single color, you can pick any combination of them, including colorless. There's also the option to include artifacts in
-the pool alongside your colored cards or not.
-The "color bias" option in the quest settings is now the percentage of your generated card pool that will contain the
-settings you've selected. For example, if you picked Green cards and a color bias of 75, your card pool would be 75%
-green, 25% all other colors.
-
-Finally, there's three settings to choose your color distribution. "Balanced" maintains an equal balance between your
-selected colors. "Random" completely randomizes the pool and makes only miniscule attempts to control the cards you get.
-"Surprise Me" is much like "Balanced", except it will pick all your settings for you and not tell you what they were!
-The New/Load quest menu has been given a small facelift to accommodate these changes and make it easier to read.
-You will need to update your color bias quest setting as the values are now much too low.
 
 
 ---------
@@ -144,7 +136,7 @@ Known Issues
 ------------
 
 - Dragon Presence cards from DTK -
-Work has started on the Dragon Presence cards. These cards should typically work on their own merits, but a few corner cases dealing with copying/cloning may not work as expected. As these cases are fairly limited, it was decided to add these cards for people to be able to use. 
+Work has started on the Dragon Presence cards. These cards should typically work on their own merits, but a few corner cases dealing with copying/cloning may not work as expected. As these cases are fairly limited, it was decided to add these cards for people to be able to use.
 
 - Dragons of Tarkir -
 Forge now includes many of the new Dragons of Tarkir cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.

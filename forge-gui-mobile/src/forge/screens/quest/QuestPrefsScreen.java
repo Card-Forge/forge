@@ -73,6 +73,7 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Common", QPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Uncommon", QPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Rare", QPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Special Boosters", QPref.SPECIAL_BOOSTERS, PrefsGroup.BOOSTER));
 
         //Shop Preferences
         scroller.add(new PrefsHeader("Shop Preferences", FSkinImage.QUEST_COIN, PrefsGroup.SHOP));

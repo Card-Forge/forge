@@ -1,3 +1,9 @@
+http://downloads.cardforge.link/images/products/boosters/Black.jpg
+http://downloads.cardforge.link/images/products/boosters/Blue.jpg
+http://downloads.cardforge.link/images/products/boosters/Colorless.jpg
+http://downloads.cardforge.link/images/products/boosters/Green.jpg
+http://downloads.cardforge.link/images/products/boosters/Red.jpg
+http://downloads.cardforge.link/images/products/boosters/White.jpg
 http://downloads.cardforge.link/images/products/boosters/10E_1.jpg
 http://downloads.cardforge.link/images/products/boosters/10E_2.jpg
 http://downloads.cardforge.link/images/products/boosters/10E_3.jpg

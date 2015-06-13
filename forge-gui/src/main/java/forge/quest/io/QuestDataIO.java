@@ -743,7 +743,11 @@ public class QuestDataIO {
 
         protected void write(final BoosterPack booster, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("booster");
-            writer.addAttribute("s", booster.getEdition());
+            if (booster.getEdition().equals("?")) {
+                writer.addAttribute("s", booster.getName().substring(0, booster.getName().indexOf(booster.getItemType()) - 1));
+            } else {
+                writer.addAttribute("s", booster.getEdition());
+            }
             writer.addAttribute("n", count.toString());
             writer.endNode();
         }
@@ -841,8 +845,13 @@ public class QuestDataIO {
         }
 
         protected BoosterPack readBooster(final HierarchicalStreamReader reader) {
-            final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
-            return BoosterPack.FN_FROM_SET.apply(ed);
+            String s = reader.getAttribute("s");
+            if (SealedProduct.specialSets.contains(s) || s.equals("?")) {
+                return BoosterPack.FN_FROM_COLOR.apply(s);
+            } else {
+                final CardEdition ed = FModel.getMagicDb().getEditions().get(s);
+                return BoosterPack.FN_FROM_SET.apply(ed);
+            }
         }
 
         protected TournamentPack readTournamentPack(final HierarchicalStreamReader reader) {

@@ -186,6 +186,13 @@ public class QuestSpellShop {
                     SealedProduct booster = null;
                     if (item instanceof BoosterPack) {
                         booster = (BoosterPack) ((BoosterPack) item).clone();
+                        //Replace the booster here if it's a special colored booster
+                        //This is to ensure that the correct sets are included in the booster
+                        //When loading a quest save, the set information is not available to the booster loader
+                        if (SealedProduct.specialSets.contains(booster.getEdition()) || booster.getEdition().equals("?")) {
+                            String color = booster.getName().substring(0, booster.getName().indexOf(booster.getItemType()) - 1);
+                            booster = new BoosterPack(color, QuestUtilCards.getColoredBoosterTemplate(color));
+                        }
                     }
                     else if (item instanceof TournamentPack) {
                         booster = (TournamentPack) ((TournamentPack) item).clone();

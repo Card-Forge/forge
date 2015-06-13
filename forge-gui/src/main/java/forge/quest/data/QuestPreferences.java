@@ -37,6 +37,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         // The preferred format of the won booster pack
         BOOSTER_FORMAT("Standard"),
 
+        SPECIAL_BOOSTERS("1"),
+
         // How many credits are lost for losing a match
         PENALTY_LOSS("15"),
 
@@ -263,6 +265,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
                 }
                 break;
 
+            case SPECIAL_BOOSTERS:
             case ITEM_LEVEL_RESTRICTION:
                 if (val != 0 && val != 1) {
                     return "Only values 0 or 1 are acceptable; 1 for enabled, 0 for disabled.";

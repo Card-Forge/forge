@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -50,25 +50,25 @@ import java.util.Map.Entry;
  * <p>
  * CardSet class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: CardSet.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardEdition implements Comparable<CardEdition> { // immutable
     public enum Type {
         UNKNOWN,
-        
+
         CORE,
         EXPANSION,
-        
+
         REPRINT,
         ONLINE,
         STARTER,
-        
+
         DUEL_DECKS,
         PREMIUM_DECK_SERIES,
         FROM_THE_VAULT,
-        
+
         OTHER,
         THIRDPARTY // custom sets
     }
@@ -78,7 +78,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         OLD_STYLE, // sets between Urza's Legacy and 8th Edition
         MODERN // 8th Edition and newer
     }
-    
+
     public static class CardInSet {
         public final CardRarity rarity;
         public final String name;
@@ -89,10 +89,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
     }
 
-    
+
     /** The Constant unknown. */
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    
+
     public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "??", "???", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
 
     private Date date;
@@ -106,19 +106,19 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private double foilChanceInBooster = 0;
     private boolean foilAlwaysInCommonSlot = false;
     private final CardInSet[] cards;
-    
-    
+
+
     private int boosterArts = 1;
     private SealedProduct.Template boosterTpl = null;
 
     private CardEdition(CardInSet[] cards) {
         this.cards = cards;
     }
-    
+
     /**
      * Instantiates a new card set.
-     * 
-     * @param index indicates order of set release date
+     *
+     * @param date indicates order of set release date
      * @param code2 the 2 (usually) letter code used for image filenames/URLs distributed by the HQ pics team that
      *   use Magic Workstation-type edition codes. Older sets only had 2-letter codes, and some of the 3-letter
      *   codes they use now aren't the same as the official list of 3-letter codes.  When Forge downloads set-pics,
@@ -126,7 +126,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * @param code the MTG 3-letter set code
      * @param type the set type
      * @param name the name of the set
-     * @param an optional secondary code alias for the set
+     * @param cards the cards in the set
      */
     private CardEdition(String date, String code2, String code, Type type, String name, FoilType foil, CardInSet[] cards) {
         this(cards);
@@ -137,9 +137,9 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         this.date = parseDate(date);
         this.foilType = foil;
     }
-    
+
     private static Date parseDate(String date) {
-        if( date.length() <= 7 ) 
+        if( date.length() <= 7 )
             date = date + "-01";
         try {
             return formatter.parse(date);
@@ -220,19 +220,17 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public boolean hasBoosterTemplate() {
         return boosterTpl != null;
     }
-    
+
     public static class Reader extends StorageReaderFolder<CardEdition> {
         public Reader(File path) {
             super(path, CardEdition.FN_GET_CODE);
         }
-        
-        public final static CardInSet[] arrCards = new CardInSet[] {};
 
         @Override
         protected CardEdition read(File file) {
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
 
-            List<CardEdition.CardInSet> processedCards = new ArrayList<CardEdition.CardInSet>();
+            List<CardEdition.CardInSet> processedCards = new ArrayList<>();
             for(String line : contents.get("cards")) {
                 if (StringUtils.isBlank(line))
                     continue;
@@ -240,26 +238,26 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 // You may omit rarity for early development
                 CardRarity r = CardRarity.smartValueOf(line.substring(0, 1));
                 boolean hadRarity = r != CardRarity.Unknown && line.charAt(1) == ' ';
-                String cardName = hadRarity ? line.substring(2) : line; 
+                String cardName = hadRarity ? line.substring(2) : line;
                 CardInSet cis = new CardInSet(cardName, r);
                 processedCards.add(cis);
             }
 
-            CardEdition res = new CardEdition(processedCards.toArray(arrCards));
-            
-            
+            CardEdition res = new CardEdition(processedCards.toArray(new CardInSet[processedCards.size()]));
+
             FileSection section = FileSection.parse(contents.get("metadata"), "=");
             res.name  = section.get("name");
             res.date  = parseDate(section.get("date"));
             res.code  = section.get("code");
             res.code2 = section.get("code2");
-            if( res.code2 == null ) 
+            if (res.code2 == null) {
                 res.code2 = res.code;
-            
+            }
+
             res.boosterArts = section.getInt("BoosterCovers", 1);
             String boosterDesc = section.get("Booster");
             res.boosterTpl = boosterDesc == null ? null : new SealedProduct.Template(res.code, SealedProduct.Template.Reader.parseSlots(boosterDesc));
-            
+
             res.alias = section.get("alias");
             res.whiteBorder = "white".equalsIgnoreCase(section.get("border"));
             String type  = section.get("type");
@@ -267,7 +265,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             if (null != type && !type.isEmpty()) {
                 try {
                     enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
-                } catch (IllegalArgumentException e) {
+                } catch (IllegalArgumentException ignored) {
                     // ignore; type will get UNKNOWN
                     System.err.println(String.format("Ignoring unknown type in set definitions: name: %s; type: %s", res.name, type));
                 }
@@ -292,7 +290,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
             res.foilChanceInBooster = section.getDouble("FoilChanceInBooster", 21.43F) / 100.0F;
             res.foilAlwaysInCommonSlot = section.getBoolean("FoilAlwaysInCommonSlot", true);
-            
+
             return res;
         }
 
@@ -312,7 +310,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     public static class Collection extends StorageBase<CardEdition> {
 
-        private final Map<String, CardEdition> aliasToEdition = new TreeMap<String, CardEdition>(String.CASE_INSENSITIVE_ORDER);
+        private final Map<String, CardEdition> aliasToEdition = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         public Collection(IItemReader<CardEdition> reader) {
             super("Card editions", reader);
@@ -328,7 +326,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
         /**
          * Gets a sets by code.  It will search first by three letter codes, then by aliases and two-letter codes.
-         * 
+         *
          * @param code
          *            the code
          * @return the sets the by code
@@ -342,9 +340,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             CardEdition baseResult = super.get(code);
             return baseResult == null ? aliasToEdition.get(code) : baseResult;
         }
-        
-        
-        
+
         public Iterable<CardEdition> getOrderedEditions() {
             List<CardEdition> res = Lists.newArrayList(this);
             Collections.sort(res);
@@ -354,7 +350,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
         /**
          * Gets the sets by code or throw.
-         * 
+         *
          * @param code
          *            the code
          * @return the sets the by code or throw
@@ -370,7 +366,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         // used by image generating code
         /**
          * Gets the code2 by code.
-         * 
+         *
          * @param code
          *            the code
          * @return the code2 by code
@@ -384,38 +380,38 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             @Override
             public CardEdition apply(String code) {
                 return Collection.this.get(code);
-            };
+            }
         };
 
         /**
          * TODO: Write javadoc for this method.
-         * @return
+         * @return ItemReader<SealedProduct.Template>
          */
         public IItemReader<SealedProduct.Template> getBoosterGenerator() {
             // TODO Auto-generated method stub
             return new StorageReaderBase<SealedProduct.Template>(null) {
-                
+
                 @Override
                 public Map<String, SealedProduct.Template> readAll() {
-                    Map<String, SealedProduct.Template> map = new TreeMap<String, SealedProduct.Template>(String.CASE_INSENSITIVE_ORDER);
+                    Map<String, SealedProduct.Template> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                     for(CardEdition ce : Collection.this) {
                          map.put(ce.getCode(), ce.getBoosterTemplate());
                     }
                     return map;
                 }
-                
+
                 @Override
                 public String getItemKey(SealedProduct.Template item) {
                     return item.getEdition();
                 }
             };
         }
-        
+
         public CardEdition getEarliestEditionWithAllCards(CardPool cards) {
-            Set<String> minEditions = new HashSet<String>();
-            
+            Set<String> minEditions = new HashSet<>();
+
             SetPreference strictness = SetPreference.EarliestCoreExp;
-            
+
             for(Entry<PaperCard, Integer> k : cards) {
                 PaperCard cp = StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), strictness);
                 if( cp == null && strictness == SetPreference.EarliestCoreExp) {
@@ -424,14 +420,14 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
                 if ( cp == null )
                     cp = k.getKey(); // it's unlikely, this code will ever run
-                
+
                 minEditions.add(cp.getEdition());
             }
 
             for(CardEdition ed : getOrderedEditions()) {
                 if(minEditions.contains(ed.getCode()))
                     return ed;
-            }            
+            }
             return UNKNOWN;
         }
     }
@@ -448,10 +444,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
 
 
-        public final static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
+        public static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
             return Aggregates.random(Iterables.filter(allEditions, hasBasicLands));
         }
-        
+
         public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
         private static class CanMakeStarter implements Predicate<CardEdition> {
             @Override
@@ -485,7 +481,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                         return false;
                 }
                 return true;
-            };
+            }
         };
     }
 
