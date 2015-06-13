@@ -169,7 +169,7 @@ public class CardDetailUtil {
         if (curColors.hasGreen()) { strCurColors += "{G}"; }
 
         if (strCurColors.isEmpty()) {
-            strCurColors = "colorless";
+            strCurColors = "{X} (colorless)";
         }
 
         return strCurColors;

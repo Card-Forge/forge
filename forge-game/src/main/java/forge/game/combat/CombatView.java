@@ -56,11 +56,19 @@ public class CombatView extends TrackableObject {
     }
 
     public Iterable<CardView> getAttackers() {
-        return new HashSet<CardView>(getAttackersWithDefenders().keySet());
+        final HashSet<CardView> allAttackers;
+        synchronized (this) {
+            allAttackers = new HashSet<CardView>(getAttackersWithDefenders().keySet());
+        }
+        return allAttackers;
     }
 
     public Iterable<GameEntityView> getDefenders() {
-        return new HashSet<GameEntityView>(getAttackersWithDefenders().values());
+        final HashSet<GameEntityView> allDefenders;
+        synchronized (this) {
+            allDefenders = new HashSet<GameEntityView>(getAttackersWithDefenders().values());
+        }
+        return allDefenders;
     }
 
     public GameEntityView getDefender(final CardView attacker) {
