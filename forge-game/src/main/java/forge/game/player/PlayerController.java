@@ -229,6 +229,10 @@ public abstract class PlayerController {
 
     public abstract void autoPassCancel();
 
+    public abstract void awaitNextInput();
+
+    public abstract void cancelAwaitNextInput();
+
     public boolean isGuiPlayer() {
         return false;
     }

@@ -872,4 +872,13 @@ public class PlayerControllerAi extends PlayerController {
     public void autoPassCancel() {
         // Do nothing
     }
+
+    @Override
+    public void awaitNextInput() {
+        // Do nothing
+    }
+    @Override
+    public void cancelAwaitNextInput() {
+        // Do nothing
+    }
 }

@@ -1486,6 +1486,11 @@ public class GameAction {
             goesFirst = game.getPlayers().get(0); // does not really matter who plays first - it's controlled from the same computer.
         }
 
+        for (Player p : game.getPlayers()) {
+            if (p != goesFirst) {
+                p.getController().awaitNextInput(); //show "Waiting for opponent..." while first player chooses whether to go first or keep their hand
+            }
+        }
         goesFirst = goesFirst.getController().chooseStartingPlayer(isFirstGame);
         return goesFirst;
     }

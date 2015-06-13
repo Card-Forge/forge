@@ -659,4 +659,13 @@ public class PlayerControllerForTests extends PlayerController {
     public void autoPassCancel() {
         // Not used by the controller for tests
     }
+
+    @Override
+    public void awaitNextInput() {
+        // Not used by the controller for tests
+    }
+    @Override
+    public void cancelAwaitNextInput() {
+        // Not used by the controller for tests
+    }
 }

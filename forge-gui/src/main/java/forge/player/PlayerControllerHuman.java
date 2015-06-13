@@ -1813,9 +1813,11 @@ public class PlayerControllerHuman
     public void autoPassCancel() {
         getGui().autoPassCancel(getLocalPlayerView());
     }
+    @Override
     public void awaitNextInput() {
         getGui().awaitNextInput();
     }
+    @Override
     public void cancelAwaitNextInput() {
         getGui().cancelAwaitNextInput();
     }
