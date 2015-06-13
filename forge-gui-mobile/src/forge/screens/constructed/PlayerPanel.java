@@ -62,7 +62,7 @@ public class PlayerPanel extends FContainer {
     private int avatarIndex;
 
     private final FTextField txtPlayerName = new FTextField("Player name");
-    private final FToggleSwitch humanAiSwitch = new FToggleSwitch("Human", "AI");
+    private final FToggleSwitch humanAiSwitch;
 
     private FComboBox<Object> cbTeam = new FComboBox<Object>();
     private FComboBox<Object> cbArchenemyTeam = new FComboBox<Object>();
@@ -80,6 +80,12 @@ public class PlayerPanel extends FContainer {
         super();
         screen = screen0;
         allowNetworking = allowNetworking0;
+        if (allowNetworking) {
+            humanAiSwitch = new FToggleSwitch("Not Ready", "Ready");
+        }
+        else {
+            humanAiSwitch = new FToggleSwitch("Human", "AI");
+        }
         index = index0;
         populateTeamsComboBoxes();
         setTeam(slot.getTeam());
@@ -284,30 +290,22 @@ public class PlayerPanel extends FContainer {
     private final FEventHandler humanAiSwitched = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            boolean wasAi = isAi();
-            boolean isAi = humanAiSwitch.isToggled();
-            if (isAi) {
-                type = LobbySlotType.AI;
-            }
-            else if (allowNetworking && index > 0) {
-                type = isReady ? LobbySlotType.REMOTE : LobbySlotType.OPEN;
-                humanAiSwitch.setOffText(isReady ? "Ready" : "Open");
+            boolean toggled = humanAiSwitch.isToggled();
+            if (allowNetworking) {
+                setIsReady(toggled);
             }
             else {
-                type = LobbySlotType.LOCAL;
+                type = toggled ? LobbySlotType.AI : LobbySlotType.LOCAL;
+                onIsAiChanged(toggled);
+
+                LobbySlot slot = screen.getLobby().getSlot(index);
+                slot.setType(type);
+
+                //update may edit in-case it changed as a result of the AI change
+                setMayEdit(screen.getLobby().mayEdit(index));
+                setAvatarIndex(slot.getAvatarIndex());
+                setPlayerName(slot.getName());
             }
-
-            if (wasAi != isAi) {
-                onIsAiChanged(isAi);
-            }
-
-            LobbySlot slot = screen.getLobby().getSlot(index);
-            slot.setType(type);
-
-            //update may edit in-case it changed as a result of the AI change
-            setMayEdit(screen.getLobby().mayEdit(index));
-            setAvatarIndex(slot.getAvatarIndex());
-            setPlayerName(slot.getName());
         }
     };
 
@@ -552,12 +550,11 @@ public class PlayerPanel extends FContainer {
             humanAiSwitch.setToggled(true);
             break;
         case OPEN:
-            humanAiSwitch.setOffText("Open");
+            isReady = false;
             humanAiSwitch.setToggled(false);
             break;
         case REMOTE:
-            humanAiSwitch.setOffText("Ready");
-            humanAiSwitch.setToggled(false);
+            humanAiSwitch.setToggled(isReady);
             break;
         }
 
@@ -597,11 +594,8 @@ public class PlayerPanel extends FContainer {
         return isReady;
     }
     public void setIsReady(boolean isReady0) {
-        if (isReady == isReady0) { return; }
-
-        if (type == LobbySlotType.LOCAL) {
-            humanAiSwitch.setOffText(isReady ? "Ready" : "Human");
-        }
+        isReady = isReady0;
+        humanAiSwitch.setToggled(isReady);
     }
 
     public void setMayEdit(boolean mayEdit0) {
@@ -610,6 +604,7 @@ public class PlayerPanel extends FContainer {
         avatarLabel.setEnabled(mayEdit);
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
+        humanAiSwitch.setEnabled(mayEdit && mayControl);
         updateVariantControlsVisibility();
 
         //if panel has height already, ensure height updated to account for button visibility changes
@@ -621,7 +616,7 @@ public class PlayerPanel extends FContainer {
     public void setMayControl(boolean mayControl0) {
         if (mayControl == mayControl0) { return; }
         mayControl = mayControl0;
-        humanAiSwitch.setEnabled(mayControl);
+        humanAiSwitch.setEnabled(mayEdit && mayControl);
     }
 
     public void setMayRemove(boolean mayRemove0) {

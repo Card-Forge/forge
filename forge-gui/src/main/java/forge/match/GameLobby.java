@@ -154,7 +154,7 @@ public abstract class GameLobby {
         }
 
         data.slots.add(slot);
-        if (StringUtils.isEmpty(slot.getName())) {
+        if (StringUtils.isEmpty(slot.getName()) && slot.getType() != LobbySlotType.OPEN) {
             slot.setName(randomName());
         }
         if (data.slots.size() == 1) {
