@@ -68,6 +68,11 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public void invokeInEdtNow(final Runnable proc) {
+        proc.run();
+    }
+
+    @Override
     public void invokeInEdtLater(final Runnable proc) {
         SwingUtilities.invokeLater(proc);
     }

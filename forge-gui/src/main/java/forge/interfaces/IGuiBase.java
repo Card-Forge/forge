@@ -21,6 +21,7 @@ public interface IGuiBase {
     boolean isRunningOnDesktop();
     String getCurrentVersion();
     String getAssetsDir();
+    void invokeInEdtNow(Runnable runnable);
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(Runnable proc);
     boolean isGuiThread();

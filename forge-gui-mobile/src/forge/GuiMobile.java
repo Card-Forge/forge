@@ -65,6 +65,12 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public void invokeInEdtNow(final Runnable proc) {
+        proc.run();
+        Gdx.graphics.requestRendering(); //must request rendering in case this procedure wasn't triggered by a local event
+    }
+
+    @Override
     public void invokeInEdtLater(final Runnable proc) {
         Gdx.app.postRunnable(proc);
     }

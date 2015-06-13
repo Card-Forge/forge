@@ -21,16 +21,16 @@ public class FThreads {
         }
     }
 
-    public static void invokeInEdtLater(final Runnable runnable) {
-        GuiBase.getInterface().invokeInEdtLater(runnable);
+    public static void invokeInEdtLater(final Runnable proc) {
+        GuiBase.getInterface().invokeInEdtLater(proc);
     }
 
     public static void invokeInEdtNowOrLater(final Runnable proc) {
         if (isGuiThread()) {
-            proc.run();
+            GuiBase.getInterface().invokeInEdtNow(proc);
         }
         else {
-            invokeInEdtLater(proc);
+            GuiBase.getInterface().invokeInEdtLater(proc);
         }
     }
 
