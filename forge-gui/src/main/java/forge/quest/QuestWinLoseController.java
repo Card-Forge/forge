@@ -511,6 +511,8 @@ public class QuestWinLoseController {
             String preferredSelection = null;
             if (pref != null) {
                 preferredSelection = pref.toString();
+            } else if (SealedProduct.specialSets.contains(preferredFormat)) {
+                preferredSelection = preferredFormat;
             }
             final String selected = SGuiChoose.getChoices("Choose bonus booster format", 1, 1, formats, preferredSelection, null).get(0);
 
@@ -519,6 +521,7 @@ public class QuestWinLoseController {
                 BoosterPack boosterPack = BoosterPack.FN_FROM_COLOR.apply(selected);
                 assert boosterPack != null;
                 cardsWon = boosterPack.getCards();
+                FModel.getQuestPreferences().setPref(QPref.BOOSTER_FORMAT, selected);
                 title = "Bonus " + selected + " Booster Pack!";
 
             } else {
