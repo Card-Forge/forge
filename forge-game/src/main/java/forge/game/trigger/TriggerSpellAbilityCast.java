@@ -21,7 +21,6 @@ import java.util.List;
 
 import forge.game.Game;
 import forge.game.GameObject;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
