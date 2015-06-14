@@ -1092,9 +1092,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         final String splitTargetRestrictions = tgt.getSAValidTargeting();
         if (splitTargetRestrictions != null) {
-            // TODO What about spells with SubAbilities with Targets?
+            // TODO Ensure that spells with subabilities are processed correctly
 
-            final TargetChoices matchTgt = topSA.getTargets();
+            TargetChoices matchTgt = topSA.getTargets();
 
             if (matchTgt == null) {
                 return false;
@@ -1106,6 +1106,26 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard())) {
                     result = true;
                     break;
+                }
+            }
+
+            // spells with subabilities
+            if (!result) {
+                AbilitySub subAb = topSA.getSubAbility();
+                while (subAb != null) {
+                    if (subAb.getTargetRestrictions() != null) {
+                        matchTgt = subAb.getTargets();
+                        if (matchTgt == null) {
+                            continue;
+                        }
+                        for (final GameObject o : matchTgt.getTargets()) {
+                            if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard())) {
+                                result = true;
+                                break;
+                            }
+                        }
+                    }
+                    subAb = subAb.getSubAbility();
                 }
             }
 
