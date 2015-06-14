@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -51,6 +52,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final String counterName = sa.getParam("CounterType");
+        final Game game = host.getGame();
         int cntToMove = 0;
         if (!sa.getParam("CounterNum").equals("All")) {
             cntToMove = AbilityUtils.calculateAmount(host, sa.getParam("CounterNum"), sa);
@@ -82,6 +84,12 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 if (source.equals(dest)) {
                     continue;
                 }
+                Card cur = game.getCardState(dest);
+                if (cur.getTimestamp() != dest.getTimestamp()) {
+                    // Test to see if the card we're trying to add is in the expected state
+                    continue;
+                }
+
                 if (!"Any".matches(counterName)) {
                     if (dest.canReceiveCounters(cType)
                             && source.getCounters(cType) >= cntToMove) {

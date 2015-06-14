@@ -3288,7 +3288,7 @@ public class CardFactoryUtil {
 
             final int m = Integer.parseInt(parse.substring(6));
             final String abStr = "AB$ MoveCounter | Cost$ 0 | Source$ Self | "
-                    + "Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1";
+                    + "Defined$ TriggeredCardLKI | CounterType$ P1P1 | CounterNum$ 1";
             card.setSVar("GraftTrig", abStr);
 
             String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other | "
