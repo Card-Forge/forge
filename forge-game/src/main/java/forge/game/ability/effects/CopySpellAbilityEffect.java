@@ -106,12 +106,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 mayChoseNewTargets = false;
                 for (GameEntity o : candidates) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
-                    copy.resetFirstTarget(o, targetedSA);
-                    AbilitySub subAb = copy.getSubAbility();
-                    while (subAb != null) {
-                        subAb.resetFirstTarget(o, targetedSA);
-                        subAb = subAb.getSubAbility();
-                    }
+                    resetFirstTargetOnCopy(copy, o, targetedSA);
                     copies.add(copy);
                 }
             } else {// Precursor Golem, Ink-Treader Nephilim
@@ -128,12 +123,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 mayChoseNewTargets = false;
                 for (Card c : valid) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
-                    copy.resetFirstTarget(c, targetedSA);
-                    AbilitySub subAb = copy.getSubAbility();
-                    while (subAb != null) {
-                        subAb.resetFirstTarget(c, targetedSA);
-                        subAb = subAb.getSubAbility();
-                    }
+                    resetFirstTargetOnCopy(copy, c, targetedSA);
                     copies.add(copy);
                 }
             }
@@ -150,5 +140,14 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             controller.getController().playSpellAbilityForFree(copySA, mayChoseNewTargets);
         }
     } // end resolve
+
+    private void resetFirstTargetOnCopy(SpellAbility copy, GameEntity obj, SpellAbility targetedSA) {
+        copy.resetFirstTarget(obj, targetedSA);
+        AbilitySub subAb = copy.getSubAbility();
+        while (subAb != null) {
+            subAb.resetFirstTarget(obj, targetedSA);
+            subAb = subAb.getSubAbility();
+        }
+    }
 
 }
