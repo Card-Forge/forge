@@ -12,8 +12,9 @@
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
         <sign.keypass>keypass</sign.keypass>
-        <cardforge.user>ftpuser</cardforge.user>
-        <cardforge.pass>ftppass</cardforge.pass>
+        <cardforge.user>user</cardforge.user>
+        <cardforge.pass>pass</cardforge.pass>
+        <cardforge.server>ftp.cardforge.org</cardforge.server>
     </properties>
 
     <parent>
@@ -338,10 +339,10 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
-                                        <ftp action="mkdir" password="${cardforge.pass}" server="ftp.cardforge.org"
+                                        <ftp action="mkdir" password="${cardforge.pass}" server="${cardforge.server}"
                                             userid="${cardforge.user}" passive="true"
                                             remotedir="releases/forge/forge-gui-android/${alpha-version}" />
-                                        <ftp password="${cardforge.pass}" server="ftp.cardforge.org"
+                                        <ftp password="${cardforge.pass}" server="${cardforge.server}"
                                             userid="${cardforge.user}" passive="true"
                                             remotedir="releases/forge/forge-gui-android/${alpha-version}/">
                                             <fileset dir="${project.build.directory}">
@@ -349,7 +350,7 @@
                                                 <include name="assets.zip" />
                                             </fileset>
                                         </ftp>
-                                        <ftp password="${cardforge.pass}" server="ftp.cardforge.org"
+                                        <ftp password="${cardforge.pass}" server="${cardforge.server}"
                                             userid="${cardforge.user}" passive="true"
                                             remotedir="releases/forge/forge-gui-android/">
                                             <fileset dir="${project.build.directory}/classes">
