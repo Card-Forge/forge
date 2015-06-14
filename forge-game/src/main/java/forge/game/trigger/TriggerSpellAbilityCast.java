@@ -71,7 +71,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
         final Card cast = spellAbility.getHostCard();
         final Game game = cast.getGame();
-        SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
+        final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
 
         if (this.getMode() == TriggerType.SpellCast) {
             if (!spellAbility.isSpell()) {
