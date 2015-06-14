@@ -36,6 +36,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -385,8 +387,19 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.targetsSingleTarget()) {
             final TargetChoices matchTgt = sa.getTargets();
             if (matchTgt == null || matchTgt.getFirstTargetedSpell() == null
-            		|| matchTgt.getFirstTargetedSpell().getTargets() == null
-            		|| matchTgt.getFirstTargetedSpell().getTargets().getNumTargeted() != 1) {
+            		|| matchTgt.getFirstTargetedSpell().getTargets() == null) {
+                return false;
+
+            }
+
+            Set<GameObject> targets = new HashSet<>();
+            for (TargetChoices tc : sa.getAllTargetChoices()) {
+                targets.addAll(tc.getTargets());
+                if (targets.size() > 1) {
+                    return false;
+                }
+            }
+            if (targets.size() != 1) {
                 return false;
             }
         }

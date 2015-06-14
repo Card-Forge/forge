@@ -1115,15 +1115,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
 
         if (tgt.isSingleTarget()) {
-            int totalTargets = 0;
-            for(TargetChoices tc : topSA.getAllTargetChoices()) {
-                totalTargets += tc.getNumTargeted();
-                if (totalTargets > 1) {
+            Set<GameObject> targets = new HashSet<>();
+            for (TargetChoices tc : topSA.getAllTargetChoices()) {
+                targets.addAll(tc.getTargets());
+                if (targets.size() > 1) {
                     // As soon as we get more than one, bail out
                     return false;
                 }
             }
-            if (totalTargets != 1) {
+            if (targets.size() != 1) {
                 // Make sure that there actually is one target
                 return false;
             }

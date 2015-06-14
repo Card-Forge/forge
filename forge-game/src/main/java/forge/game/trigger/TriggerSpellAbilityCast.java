@@ -20,6 +20,8 @@ package forge.game.trigger;
 import java.util.List;
 
 import forge.game.Game;
+import forge.game.GameObject;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
@@ -31,6 +33,8 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -68,7 +72,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
         final Card cast = spellAbility.getHostCard();
         final Game game = cast.getGame();
-        final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
+        SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
 
         if (this.getMode() == TriggerType.SpellCast) {
             if (!spellAbility.isSpell()) {
@@ -174,11 +178,14 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
 
         if (this.mapParams.containsKey("IsSingleTarget")) {
-            int numTargeted = 0;
+            Set<GameObject> targets = new HashSet<>();
             for (TargetChoices tc : spellAbility.getAllTargetChoices()) {
-                numTargeted += tc.getNumTargeted();
+                targets.addAll(tc.getTargets());
+                if (targets.size() > 1) {
+                    return false;
+                }
             }
-            if (numTargeted != 1) {
+            if (targets.size() != 1) {
                 return false;
             }
         }

@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 
@@ -106,6 +107,11 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 for (GameEntity o : candidates) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
                     copy.resetFirstTarget(o, targetedSA);
+                    AbilitySub subAb = copy.getSubAbility();
+                    while (subAb != null) {
+                        subAb.resetFirstTarget(o, targetedSA);
+                        subAb = subAb.getSubAbility();
+                    }
                     copies.add(copy);
                 }
             } else {// Precursor Golem, Ink-Treader Nephilim
@@ -123,6 +129,11 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 for (Card c : valid) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
                     copy.resetFirstTarget(c, targetedSA);
+                    AbilitySub subAb = copy.getSubAbility();
+                    while (subAb != null) {
+                        subAb.resetFirstTarget(c, targetedSA);
+                        subAb = subAb.getSubAbility();
+                    }
                     copies.add(copy);
                 }
             }
