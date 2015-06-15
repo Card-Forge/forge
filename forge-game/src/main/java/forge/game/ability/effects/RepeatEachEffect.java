@@ -105,6 +105,9 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("RepeatPlayers")) {
             final FCollection<Player> repeatPlayers = AbilityUtils.getDefinedPlayers(source, sa.getParam("RepeatPlayers"), sa);
+            if (sa.hasParam("ClearRememberedBeforeLoop")) {
+                source.clearRemembered();
+            }
             boolean optional = sa.hasParam("RepeatOptionalForEachPlayer");
             if (sa.hasParam("StartingWithActivator")) {
                 int size = repeatPlayers.size();

@@ -5318,7 +5318,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         receivedDamageFromThisTurn = receivedDamageList;
     }
     public final void addReceivedDamageFromThisTurn(final Card c, final int damage) {
-        receivedDamageFromThisTurn.put(c, damage);
+        int currentDamage = 0;
+        if (receivedDamageFromThisTurn.containsKey(c)) {
+            currentDamage = receivedDamageFromThisTurn.get(c);
+        }
+        receivedDamageFromThisTurn.put(c, damage+currentDamage);
     }
     public final void resetReceivedDamageFromThisTurn() {
         receivedDamageFromThisTurn.clear();
@@ -5332,6 +5336,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return total;
     }
 
+    // TODO: Combine getDealtDamageToThisTurn with addDealtDamageToPlayerThisTurn using GameObject, Integer
     public final Map<Card, Integer> getDealtDamageToThisTurn() {
         return dealtDamageToThisTurn;
     }
@@ -5339,7 +5344,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         dealtDamageToThisTurn = dealtDamageList;
     }
     public final void addDealtDamageToThisTurn(final Card c, final int damage) {
-        dealtDamageToThisTurn.put(c, damage);
+        int currentDamage = 0;
+        if (dealtDamageToThisTurn.containsKey(c)) {
+            currentDamage = dealtDamageToThisTurn.get(c);
+        }
+        dealtDamageToThisTurn.put(c, damage+currentDamage);
     }
     public final void resetDealtDamageToThisTurn() {
         dealtDamageToThisTurn.clear();
@@ -5352,7 +5361,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         dealtDamageToPlayerThisTurn = dealtDamageList;
     }
     public final void addDealtDamageToPlayerThisTurn(final String player, final int damage) {
-        dealtDamageToPlayerThisTurn.put(player, damage);
+        int currentDamage = 0;
+        if (dealtDamageToPlayerThisTurn.containsKey(player)) {
+            currentDamage = dealtDamageToPlayerThisTurn.get(player);
+        }
+        dealtDamageToPlayerThisTurn.put(player, damage+currentDamage);
     }
     public final void resetDealtDamageToPlayerThisTurn() {
         dealtDamageToPlayerThisTurn.clear();
