@@ -130,6 +130,10 @@ public class GameAction {
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
         boolean toHand = zoneTo.is(ZoneType.Hand);
 
+        // TODO: part of a workaround for suspend-cast creaturs bounced to hand
+        boolean zoneChangedEarly = false;
+        Zone originalZone = c.getZone();
+
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
         if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
             return c;
@@ -148,6 +152,13 @@ public class GameAction {
 
         if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
             c.setState(CardStateName.Original, true);
+        }
+
+        if (fromBattlefield && toHand && c.wasSuspendCast()) {
+            // TODO: This has to be set early for suspend-cast creatures bounced to hand, otherwise they
+            // end up in a state when they are considered on the battlefield. Should be a better solution.
+            c.setZone(zoneTo);
+            zoneChangedEarly = true;
         }
 
         // Don't copy Tokens, copy only cards leaving the battlefield
@@ -204,6 +215,9 @@ public class GameAction {
 
             ReplacementResult repres = game.getReplacementHandler().run(repParams);
             if (repres != ReplacementResult.NotReplaced) {
+                if (zoneChangedEarly) {
+                    c.setZone(originalZone); // TODO: part of a workaround for bounced suspend-cast cards 
+                }
                 if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
                 	copied.getOwner().removeInboundToken(copied);
                 	return moveToGraveyard(c);
