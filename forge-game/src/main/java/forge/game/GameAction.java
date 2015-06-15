@@ -156,7 +156,7 @@ public class GameAction {
 
         if (fromBattlefield && toHand && c.wasSuspendCast()) {
             // TODO: This has to be set early for suspend-cast creatures bounced to hand, otherwise they
-            // end up in a state when they are considered on the battlefield. Should be a better solution.
+            // end up in a state when they are considered on the battlefield. There should be a better solution.
             c.setZone(zoneTo);
             zoneChangedEarly = true;
         }
