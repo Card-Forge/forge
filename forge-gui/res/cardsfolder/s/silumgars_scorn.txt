@@ -4,7 +4,7 @@ Types:Instant
 K:Kicker Reveal<1/Dragon> : Generic
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ StoreDragons | Static$ True
 A:SP$ Counter | Cost$ U U | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ 1 | ConditionCheckSVar$ TotalDragonPresence | ConditionSVarCompare$ EQ0 | StackDescription$ SpellDescription | SubAbility$ DBCounter | SpellDescription$ Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, counter that spell instead.
-SVar:DBCounter:DB$ Counter | Defined$ Targeted | References$ TotalDragonPresence,DragonPresence | ConditionCheckSVar$ TotalDragonPresence | ConditionSVarCompare$ GE1 | StackDescription$ None
+SVar:DBCounter:DB$ Counter | Defined$ Targeted | References$ TotalDragonPresence | ConditionCheckSVar$ TotalDragonPresence | ConditionSVarCompare$ GE1 | StackDescription$ None
 SVar:WasDragonRevealed:Count$ValidStack Card.Self+pseudokicked+wasCast
 SVar:TotalDragonPresence:SVar$DragonPresence/Plus.WasDragonRevealed
 # Empty Dragon Presence SVar is needed to avoid undefined SVar error messages. Note that defining it to a preset value (e.g. Number$0) does not work.
