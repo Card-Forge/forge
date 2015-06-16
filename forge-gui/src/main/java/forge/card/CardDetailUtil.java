@@ -271,7 +271,7 @@ public class CardDetailUtil {
                     if (origPaperCard != null) {
                         origCard = Card.getCardForUi(origPaperCard); // if null, probably a variant card
                     }
-                    origIdent = origCard != null ? getCurrentColors(CardView.get(origCard).getCurrentState()) : "";
+                    origIdent = origCard != null ? getCurrentColors(origCard.isFaceDown() ? CardView.get(origCard).getState(false) : CardView.get(origCard).getCurrentState()) : "";
                 } catch(Exception ex) {
                     System.err.println("Unexpected behavior: card " + card.getName() + "[" + card.getId() + "] tripped an exception when trying to process current card colors.");
                 } 
