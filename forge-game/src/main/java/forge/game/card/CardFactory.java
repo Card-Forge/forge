@@ -462,6 +462,8 @@ public class CardFactory {
     	}
 
     	final boolean fromIsFlipCard = from.isFlipCard();
+        final boolean fromIsTransformedCard = from.getView().getCurrentState().getState() == CardStateName.Transformed;
+
     	if (fromIsFlipCard) {
     		if (to.getCurrentStateName().equals(CardStateName.Flipped)) {
     			copyState(from, CardStateName.Original, to, CardStateName.Original);
@@ -469,15 +471,11 @@ public class CardFactory {
     			copyState(from, CardStateName.Original, to, to.getCurrentStateName());
     		}
     		copyState(from, CardStateName.Flipped, to, CardStateName.Flipped);
-    	} else {
-            final boolean fromIsTransformedCard = from.getView().getCurrentState().getState() == CardStateName.Transformed;
-            if (fromIsTransformedCard) {
-                copyState(from, CardStateName.Transformed, to, CardStateName.Original);
-            } else {
-        		copyState(from, from.getCurrentStateName(), to, to.getCurrentStateName());
-            }
-    	}
-
+    	} else if (fromIsTransformedCard) {
+            copyState(from, CardStateName.Transformed, to, CardStateName.Original);
+        } else {
+            copyState(from, from.getCurrentStateName(), to, to.getCurrentStateName());
+        }
     }
     
     /**
@@ -498,9 +496,14 @@ public class CardFactory {
     	}
 
     	final boolean fromIsFlipCard = from.isFlipCard();
+        final boolean fromIsTransformedCard = from.getView().getCurrentState().getState() == CardStateName.Transformed;
+
     	if (fromIsFlipCard) {
     		copyAbilities(from, CardStateName.Original, to, to.getCurrentStateName());
     		copyAbilities(from, CardStateName.Flipped, to, CardStateName.Flipped);
+        }
+        else if (fromIsTransformedCard) {
+    		copyAbilities(from, CardStateName.Transformed, to, CardStateName.Original);
     	} else {
     		copyAbilities(from, from.getCurrentStateName(), to, to.getCurrentStateName());
     	}
