@@ -470,8 +470,14 @@ public class CardFactory {
     		}
     		copyState(from, CardStateName.Flipped, to, CardStateName.Flipped);
     	} else {
-    		copyState(from, from.getCurrentStateName(), to, to.getCurrentStateName());
+            final boolean fromIsTransformedCard = from.getView().getCurrentState().getState() == CardStateName.Transformed;
+            if (fromIsTransformedCard) {
+                copyState(from, CardStateName.Transformed, to, CardStateName.Original);
+            } else {
+        		copyState(from, from.getCurrentStateName(), to, to.getCurrentStateName());
+            }
     	}
+
     }
     
     /**
