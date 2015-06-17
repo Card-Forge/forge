@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Finn the Human 2
+Title=Finn the Human
+Difficulty=medium
+Description=RG Heroic deck
+Icon=Finn the Human.jpg
+Deck Type=constructed
+[main]
+1 Arid Mesa
+3 Forest
+5 Mountain
+2 Rootbound Crag
+2 Stomping Ground
+4 Taiga
+1 Windswept Heath
+4 Wooded Foothills
+1 Akroan Crusader
+2 Akroan Line Breaker
+2 Arena Athlete
+3 Aura Gnarlid
+2 Hero of Leina Tower
+1 Labyrinth Champion
+2 Monastery Swiftspear
+3 Satyr Hoplite
+3 Setessan Oathsworn
+1 Staunch-Hearted Warrior
+1 Hammerhand
+1 Mark of Fury
+1 Dust Corona
+1 Madcap Skills
+2 One with Nature
+2 Rancor
+2 Spider Umbra
+2 Treetop Bracers
+1 Epic Confrontation
+1 Destructive Revelry
+3 Flame Slash
+1 Harmonize
+[sideboard]
