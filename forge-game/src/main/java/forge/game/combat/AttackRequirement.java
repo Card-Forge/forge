@@ -45,6 +45,10 @@ public class AttackRequirement {
                 nAttackAnything++;
             }
         }
+        final GameEntity mustAttack3 = attacker.getMustAttackEntity();
+        if (mustAttack3 != null) {
+            defenderSpecific.add(mustAttack3);
+        }
 
         final Game game = attacker.getGame();
         for (final GameEntity defender : possibleDefenders) {

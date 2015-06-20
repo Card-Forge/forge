@@ -35,6 +35,10 @@ public class MustAttackEffect extends SpellAbilityEffect {
             sb.append("Creatures ").append(player).append(" controls attack ");
             sb.append(defender).append(" during his or her next turn.");
         }
+        for (final Card c : getTargetCards(sa)) {
+            sb.append(c).append(" must attack ");
+            sb.append(defender).append(" during its controller's next turn if able.");
+        }
 
         return sb.toString();
     }
@@ -43,20 +47,25 @@ public class MustAttackEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final String defender = sa.getParam("Defender");
+        final GameEntity entity;
+        if (defender.equals("Self")) {
+            entity = sa.getHostCard();
+        } else if (defender.equals("You")) {
+            entity = sa.getActivatingPlayer();
+        } else {
+            throw new RuntimeException("Illegal defender " + defender + " for MustAttackEffect in card " + sa.getHostCard());
+        }
+        // System.out.println("Setting mustAttackEntity to: "+entity);
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-            	final String defender = sa.getParam("Defender");
-                final GameEntity entity;
-                if (defender.equals("Self")) {
-                    entity = sa.getHostCard();
-                } else if (defender.equals("You")) {
-                    entity = sa.getActivatingPlayer();
-                } else {
-                	throw new RuntimeException("Illegal defender " + defender + " for MustAttackEffect in card " + sa.getHostCard());
-                }
-                // System.out.println("Setting mustAttackEntity to: "+entity);
                 p.setMustAttackEntity(entity);
+            }
+        }
+        for (final Card c : getTargetCards(sa)) {
+            if ((tgt == null) || c.canBeTargetedBy(sa)) {
+                c.setMustAttackEntity(entity);
             }
         }
 

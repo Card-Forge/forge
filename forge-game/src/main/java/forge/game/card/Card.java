@@ -151,6 +151,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
+    private GameEntity mustAttackEntity = null;
 
     private final Map<Player, CardPlayOption> mayPlay = Maps.newTreeMap();
 
@@ -879,6 +880,18 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void clearMustBlockCards() {
         mustBlockCards = view.clearCards(mustBlockCards, TrackableProperty.MustBlockCards);
+    }
+
+    public final void setMustAttackEntity(final GameEntity e) {
+        mustAttackEntity = e;
+    }
+    public final GameEntity getMustAttackEntity() {
+        return mustAttackEntity;
+    }
+    public final void clearMustAttackEntity(final Player playerturn) {
+    	if (this.getController().equals(playerturn)) {
+    		mustAttackEntity = null;
+    	}
     }
 
     public final CardCollectionView getClones() {
@@ -4931,6 +4944,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (property.equals("attackingYou")) return combat.isAttacking(this, sourceController);
         } else if (property.startsWith("notattacking")) {
             return null == combat || !combat.isAttacking(this);
+        } else if (property.equals("attackedThisCombat")) {
+        	if (null == combat || !this.getDamageHistory().getCreatureAttackedThisCombat()) {
+                return false;
+        	}
         } else if (property.equals("attackedBySourceThisCombat")) {
             if (null == combat) return false;
             final GameEntity defender = combat.getDefenderByAttacker(source);
@@ -6320,6 +6337,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         getDamageHistory().newTurn();
         setRegeneratedThisTurn(0);
         setBecameTargetThisTurn(false);
+        clearMustAttackEntity(turn);
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());
         getDamageHistory().setCreatureAttackedThisTurn(false);
