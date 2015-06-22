@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.card.CardStateName;
+import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -44,7 +45,10 @@ public class MillEffect extends SpellAbilityEffect {
                 // Reveal the milled cards, so players don't have to manually inspect the
                 // graveyard to figure out which ones were milled.
                 if (!facedown && reveal) { // do not reveal when exiling face down
-                    p.getGame().getAction().reveal(milled, p, false);
+                    //p.getGame().getAction().reveal(milled, p, false);
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(p).append(" milled ").append(milled).append(" to ").append(destination);
+                    p.getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
                 }
                 if (destination.equals(ZoneType.Exile) && facedown) {
                     for (final Card c : milled) {
