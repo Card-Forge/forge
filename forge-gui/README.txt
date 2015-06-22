@@ -1372,7 +1372,34 @@ Fix bug in default preferences causing game to crash.
 If you cancel casting a spell after selecting cards to Delve, the selected cards will no longer get exiled.
 
 
-Our Lawyers Made Us Do This:
+- Morph/Manifest images -
+Forge now supports proper images for face-down creatures. In order to correctly
+use these images, it's necessary to remove a file in your picture directory
+(see below), then redownload token images. Alternatively, you can do this
+yourself by renaming the current file "morph.jpg" to "hidden.jpg" and adding
+new files "morph.jpg" and "manifest.jpg" for the morph and manifest reminder
+overlays, respectively. All these files are located inside the "tokens"
+subdirectory of your image cache, which can be found here:
+- Windows: [home directory]/Application Data/Forge/Cache/pics
+- Mac:     [home directory]/Library/Caches/Forge/pics
+- Linux:   [home directory]/.cache/forge/pics
+
+
+- Interface Update -
+The interface has received several small changes.
+- The "Players" panel has been removed. This information can now be viewed by
+  hovering the cursor over a player's avatar.
+- The poison counters value has been moved to next to a players life total.
+  This is only visible if the player has any poison counters.
+- The poison counters button has been replaced with a Command Zone button.
+  The command zone panels have been removed.
+
+
+- Smarter Deck Color Determination -
+When determining the color of decks, colors of hybrid and phyrexian cards are no
+longer considered unless they can be produced by a land in the deckOur Lawyers Made Us Do This:
+
+
 ----------------------------
 
 This product includes software developed by the Indiana University Extreme! Lab (http://www.extreme.indiana.edu/).

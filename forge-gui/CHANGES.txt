@@ -8,6 +8,7 @@ Forge Beta: 65-2015 ver 1.5.41
 Release Notes
 -------------
 
+
 - Special Quest Booster Packs -
 New booster packs have been added to quest mode that contain cards of a single
 color. Blue Booster Packs will contain only blue cards, White Booster Packs
@@ -15,35 +16,13 @@ will contain only white cards, and so on. There's a pack for each color and
 these new packs can be disabled by setting the "Special Boosters" quest
 preference to "0".
 
+
 - Updated Forge Content Downloads -
 Card images for the latest sets are now available for download, including
 Tempest Remastered and Modern Masters 2015. All images have also been moved to a
  new server for increased reliability and performance and many previously
 missing images have been added. There are still a few images missing in Forge
 and rectifying that is an ongoing effort.
-
-
-- Morph/Manifest images -
-Forge now supports proper images for face-down creatures. In order to correctly
-use these images, it's necessary to remove a file in your picture directory
-(see below), then redownload token images. Alternatively, you can do this
-yourself by renaming the current file "morph.jpg" to "hidden.jpg" and adding
-new files "morph.jpg" and "manifest.jpg" for the morph and manifest reminder
-overlays, respectively. All these files are located inside the "tokens"
-subdirectory of your image cache, which can be found here:
-- Windows: [home directory]/Application Data/Forge/Cache/pics
-- Mac:     [home directory]/Library/Caches/Forge/pics
-- Linux:   [home directory]/.cache/forge/pics
-
-
-- Interface Update -
-The interface has received several small changes.
-- The "Players" panel has been removed. This information can now be viewed by
-  hovering the cursor over a player's avatar.
-- The poison counters value has been moved to next to a players life total.
-  This is only visible if the player has any poison counters.
-- The poison counters button has been replaced with a Command Zone button.
-  The command zone panels have been removed.
 
 
 - Display Color Identity -
@@ -84,20 +63,6 @@ behavior can be found in Forge preferences under "Graphic Options". It is called
 "Display Tokens in a Separate Row".
 
 
-- Network play (BETA) -
-This version of Forge includes a preliminary version of peer-to-peer (P2P)
-network support. If one player hosts, other players can connect to that
-player's machine by filling out the corresponding IP address and port number
-(default 36743), provided the lobby contains one or more open player slots.
-Do not expect network support to work reliably yet, any bug reports or other
-comments are welcome!
-
-
-- Smarter Deck Color Determination -
-When determining the color of decks, colors of hybrid and phyrexian cards are no
-longer considered unless they can be produced by a land in the deck
-
-
 - Land Color Filtering in Deck Editor -
 When filtering colors in the Deck Editor, lands that produce all selected colors will now be shown
 This means if you filter to show only green and white cards, lands that produce green and white will now be shown
@@ -109,26 +74,60 @@ optional and can be toggled on or off in the Preferences ("Filter Lands by Color
 "Deck Editor Options").
 
 
+
+- Network play (BETA) -
+This version of Forge includes a preliminary version of peer-to-peer (P2P)
+network support. If one player hosts, other players can connect to that
+player's machine by filling out the corresponding IP address and port number
+(default 36743), provided the lobby contains one or more open player slots.
+Do not expect network support to work reliably yet, any bug reports or other
+comments are welcome!
+
+
 ---------
 New Cards
 ---------
 
-Commune with Lava
-Draconic Roar
-Dragonlord's Prerogative
-Foul-Tongue Invocation
-Orator of Ojutai
-Risen Executioner
-Scaleguard Sentinels
-Silumgar's Scorn
-Taste of Paradise
 
 
---------------------
-New ORI branch Cards
---------------------
+
+------------------------------
+New Magic Origins branch Cards
+------------------------------
 
 Liliana, Heretical Healer
+Akroan Jailer
+Grasp of the Hieromancer
+Heavy Infantry
+Sentinel of the Eternal Watch
+Valor in Akros
+Hydrolash
+Jhessian Thief
+Ringwarden Owl
+Separatist Voidmage
+Chandra, Fire of Kaladesh
+Deadbridge Shaman
+Eyeblight Assassin
+Malakir Cullblade
+Rabid Bloodsucker
+Reave Soul
+Shambling Ghoul
+Avaricious Dragon
+Enthralling Victor
+Lightning Javelin
+Pia and Kiran Nalaar
+Seismic Elemental
+Subterranean Scout
+Volcanic Rambler
+Conclave Naturalists
+Dwynen, Gilt-Leaf Daen
+Elemental Bond
+Hitchclaw Recluse
+Joraga Invocation
+Mantle of Webs
+Nissa, Vastwood Seer
+Kytheon, Hero of Akros
+Jace, Vryn's Prodigy
 
 
 ------------
@@ -192,18 +191,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-asepetci
-DrDev
-elcnesh
-Gos
-KrazyTheFox
-Sharkus
-Sloth
-Sol
-Swordshine
-tojammot
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
