@@ -658,6 +658,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerAttackerUnblocked.java svneol
 forge-game/src/main/java/forge/game/trigger/TriggerAttackersDeclared.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerAttacks.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerBecomeMonstrous.java -text
+forge-game/src/main/java/forge/game/trigger/TriggerBecomeRenowned.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerBecomesTarget.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerBlockersDeclared.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerBlocks.java svneol=native#text/plain

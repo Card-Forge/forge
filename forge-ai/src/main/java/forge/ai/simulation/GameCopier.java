@@ -235,7 +235,9 @@ public class GameCopier {
                 newCard.setMonstrous(true);
                 newCard.setMonstrosityNum(c.getMonstrosityNum());
             }
-
+            if (c.isRenowned()) {
+                newCard.setRenowned(true);
+            }
             if (c.isPlaneswalker()) {
                 for (SpellAbility sa : c.getAllSpellAbilities()) {
                     SpellAbilityRestriction restrict = sa.getRestrictions();

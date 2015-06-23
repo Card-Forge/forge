@@ -141,6 +141,12 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         runParams.put("Card", tgtCard);
                         tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
                     }
+                    if (sa.hasParam("Renown")) {
+                        tgtCard.setRenowned(true);
+                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                        runParams.put("Card", tgtCard);
+                        tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, runParams, false);
+                    }
                 } else {
                     // adding counters to something like re-suspend cards
                     // etbcounter should apply multiplier

@@ -195,6 +195,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean monstrous = false;
     private int monstrosityNum = 0;
+    
+    private boolean renowned = false;
 
     private boolean manifested = false;
 
@@ -1650,6 +1652,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (monstrous) {
             sb.append("Monstrous\r\n");
+        }
+        if (renowned) {
+            sb.append("Renowned\r\n");
         }
         if (manifested) {
             sb.append("Manifested\r\n");
@@ -5082,6 +5087,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (isMonstrous()) {
                 return false;
             }
+        } else if (property.equals("IsRenowned")) {
+            if (!isRenowned()) {
+                return false;
+            }
+        } else if (property.equals("IsNotRenowned")) {
+            if (isRenowned()) {
+                return false;
+            }
         } else if (property.startsWith("non")) {
             // ... Other Card types
             if (getType().hasStringType(property.substring(3))) {
@@ -5901,6 +5914,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setMonstrosityNum(final int num) {
         monstrosityNum = num;
+    }
+
+    public final boolean isRenowned() {
+        return renowned;
+    }
+    public final void setRenowned(final boolean renowned0) {
+        renowned = renowned0;
     }
 
     public final boolean isManifested() {

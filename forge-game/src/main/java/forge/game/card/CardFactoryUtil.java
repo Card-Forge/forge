@@ -2343,6 +2343,20 @@ public class CardFactoryUtil {
                 final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, true);
                 card.addTrigger(parsedUpkeepTrig);
             }
+            else if (keyword.startsWith("Renown")) {
+                final String[] k = keyword.split(" ");
+                final String suffix = !k[1].equals("1") ? "s" : "";
+                card.removeIntrinsicKeyword(keyword);
+                String renownTrig = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player"
+                		+ " | IsPresent$ Card.Self+IsNotRenowned | CombatDamage$ True | Execute$"
+                		+ " TrigBecomeRenown | TriggerDescription$ Renown " + k[1] +" (When this "
+                		+ "creature deals combat damage to a player, if it isn't renowned, put " 
+                		+ k[1] + " +1/+1 counter" + suffix + " on it and it becomes renowned.) ";
+                card.setSVar("TrigBecomeRenown", "AB$ PutCounter | Cost$ 0 | Defined$ Self | "
+                		+ "CounterType$ P1P1 | CounterNum$ " + k[1] + " | Renown$ True");
+                final Trigger parseRenownTrig = TriggerHandler.parseTrigger(renownTrig, card, true);
+                card.addTrigger(parseRenownTrig);
+            }
             else if (keyword.startsWith("Vanishing")) {
                 final String[] k = keyword.split(":");
                 // etbcounter

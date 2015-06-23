@@ -451,7 +451,8 @@ public final class CardScriptParser {
             "IsImprinted", "IsNotImprinted", "hasActivatedAbilityWithTapCost",
             "hasActivatedAbility", "hasManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
-            "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander");
+            "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
+            "IsRenowned", "IsNotRenowned");
     private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
             .of("named", "notnamed", "OwnedBy", "ControlledBy",
                     "ControllerControls", "AttachedTo", "EnchantedBy",
