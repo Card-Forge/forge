@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -58,6 +59,13 @@ public class ChooseCardNameAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // TODO - there is no AILogic implemented yet
         return false;
+    }
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
+     */
+    @Override
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+        return ComputerUtilCard.getBestAI(options);
     }
 
 }

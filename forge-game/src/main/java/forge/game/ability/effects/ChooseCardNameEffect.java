@@ -4,18 +4,22 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ComparableOp;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -49,6 +53,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         }
 
         boolean randomChoice = sa.hasParam("AtRandom");
+        boolean chooseFromDefined = sa.hasParam("ChooseFromDefinedCards");
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 String chosen = "";
@@ -72,7 +77,11 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     } else {
                         chosen = "";
                     }
-                    
+                } else if (chooseFromDefined) {
+                    CardCollection choices = AbilityUtils.getDefinedCards(host, sa.getParam("ChooseFromDefinedCards"), sa);
+                    choices = CardLists.getValidCards(choices, valid, host.getController(), host);
+                    Card c = p.getController().chooseSingleEntityForEffect(choices, sa, "Choose a card name");
+                    chosen = c != null ? c.getName() : "";
                 } else {
                     final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
                     
