@@ -1450,6 +1450,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("\r\n");
                 }
                 sb.append("Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)");
+            } else if (keyword.equals("Menace")) {
+                if (sb.length() != 0) {
+                    sb.append("\r\n");
+                }
+                sb.append("Menace (This creature can't be blocked except by two or more creatures.)");
             } else if (keyword.endsWith(" offering")) {
                 String offeringType = keyword.split(" ")[0];
                 if (sb.length() != 0) {

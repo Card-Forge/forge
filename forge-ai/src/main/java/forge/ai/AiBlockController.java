@@ -181,7 +181,8 @@ public class AiBlockController {
         for (final Card attacker : attackersLeft) {
 
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
-                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
+                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")
+                    || attacker.hasKeyword("Menace")) {
                 continue;
             }
 
@@ -290,6 +291,7 @@ public class AiBlockController {
         // 6. Blockers that don't survive until the next turn anyway
         for (final Card attacker : attackersLeft) {
         	if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
+        			|| attacker.hasKeyword("Menace")
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
@@ -456,6 +458,7 @@ public class AiBlockController {
         for (final Card attacker : attackersLeft) {
 
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
+        			|| attacker.hasKeyword("Menace")
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
@@ -492,7 +495,7 @@ public class AiBlockController {
         Card attacker = attackers.get(0);
 
         if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
+                || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.") || attacker.hasKeyword("Menace")) {
             attackers.remove(0);
             makeChumpBlocks(combat, attackers);
             return;
@@ -541,6 +544,7 @@ public class AiBlockController {
         for (final Card attacker : currentAttackers) {
 
             if (!attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
+        			&& !attacker.hasKeyword("Menace")
                     && !attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
@@ -582,7 +586,7 @@ public class AiBlockController {
 
         for (final Card attacker : tramplingAttackers) {
 
-            if ((attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") && !combat.isBlocked(attacker))
+            if (((attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("Menace")) && !combat.isBlocked(attacker))
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
