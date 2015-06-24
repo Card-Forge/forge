@@ -5,7 +5,6 @@ import forge.game.Direction;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
-import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 
 public enum TrackableProperty {
@@ -45,6 +44,7 @@ public enum TrackableProperty {
     Enchanting(TrackableTypes.GameEntityViewType),
     Fortifying(TrackableTypes.CardViewType),
     FortifiedBy(TrackableTypes.CardViewCollectionType),
+    EncodedCards(TrackableTypes.CardViewCollectionType),
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
     Cloner(TrackableTypes.StringType),

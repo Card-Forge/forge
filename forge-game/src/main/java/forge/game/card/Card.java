@@ -720,26 +720,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         return FCollection.hasElement(encodedCards, c);
     }
     public final void addEncodedCard(final Card c) {
-        if (encodedCards == null) {
-            encodedCards = new CardCollection();
-        }
-        encodedCards.add(c);
+        encodedCards = view.addCard(encodedCards, c, TrackableProperty.EncodedCards);
     }
     public final void addEncodedCards(final Iterable<Card> cards) {
-        if (encodedCards == null) {
-            encodedCards = new CardCollection();
-        }
-        encodedCards.addAll(cards);
+        encodedCards = view.addCards(encodedCards, cards, TrackableProperty.EncodedCards);
     }
     public final void removeEncodedCard(final Card c) {
-        if (encodedCards.remove(c)) {
-            if (encodedCards.isEmpty()) {
-                encodedCards = null;
-            }
-        }
+        encodedCards = view.removeCard(encodedCards, c, TrackableProperty.EncodedCards);
     }
     public final void clearEncodedCards() {
-        encodedCards = null;
+        encodedCards = view.clearCards(encodedCards, TrackableProperty.EncodedCards);
     }
 
     public final String getFlipResult(final Player flipper) {

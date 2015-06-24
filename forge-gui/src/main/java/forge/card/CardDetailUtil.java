@@ -557,6 +557,14 @@ public class CardDetailUtil {
             area.append("Haunting " + card.getHaunting());
         }
 
+        // Cipher
+        if (card.getEncodedCards() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Encoded: " + card.getEncodedCards());
+        }
+
         // must block
         if (card.getMustBlockCards() != null) {
             if (area.length() != 0) {

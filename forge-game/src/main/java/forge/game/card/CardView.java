@@ -452,6 +452,10 @@ public class CardView extends GameEntityView {
         return getEquippedBy() != null; //isEmpty check not needed since we won't keep an empty collection around
     }
 
+    public FCollectionView<CardView> getEncodedCards() {
+        return get(TrackableProperty.EncodedCards);
+    }
+
     public GameEntityView getEnchanting() {
         return get(TrackableProperty.Enchanting);
     }
