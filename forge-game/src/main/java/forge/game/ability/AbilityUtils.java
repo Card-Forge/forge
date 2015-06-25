@@ -126,8 +126,9 @@ public class AbilityUtils {
         }
         else if (defined.startsWith("Triggered") && (sa != null)) {
             final SpellAbility root = sa.getRootAbility();
-            if (defined.contains("LKICopy")) { //TriggeredCardLKICopy
-                final Object crd = root.getTriggeringObject(defined.substring(9, 13));
+            if (defined.contains("LKICopy")) { //Triggered*LKICopy
+                int lkiPosition = defined.indexOf("LKICopy");
+                final Object crd = root.getTriggeringObject(defined.substring(9, lkiPosition));
                 if (crd instanceof Card) {
                     c = (Card) crd;
                 }
