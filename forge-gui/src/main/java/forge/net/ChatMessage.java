@@ -37,8 +37,8 @@ public class ChatMessage {
 
     public String getFormattedMessage() {
         if (source == null) {
-            return String.format("%n[%s] %s", timestamp, message);
+            return String.format("[%s] %s", timestamp, message);
         }
-        return String.format("%n[%s] %s: %s", timestamp, source, message);
+        return String.format("[%s] %s: %s", timestamp, source, message);
     }
 }

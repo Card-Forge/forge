@@ -206,6 +206,6 @@ public enum FNetOverlay implements IOnlineChatInterface {
 
     @Override
     public void addMessage(final ChatMessage message) {
-        txtLog.append(message.getFormattedMessage());
+        txtLog.append("\n" + message.getFormattedMessage());
     }
 }
