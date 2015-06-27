@@ -37,7 +37,7 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.WinningTeam, -1);
 
         GameRules rules = game.getRules();
-        set(TrackableProperty.Commander, rules.hasCommander());
+        set(TrackableProperty.IsCommander, rules.hasCommander());
         set(TrackableProperty.GameType, rules.getGameType());
         set(TrackableProperty.PoisonCountersToLose, rules.getPoisonCountersToLose());
         set(TrackableProperty.NumGamesInMatch, rules.getGamesPerMatch());
@@ -56,7 +56,7 @@ public class GameView extends TrackableObject {
         return get(TrackableProperty.Title);
     }
     public boolean isCommander() {
-        return get(TrackableProperty.Commander);
+        return get(TrackableProperty.IsCommander);
     }
     public GameType getGameType() {
         return get(TrackableProperty.GameType);

@@ -24,9 +24,70 @@ public class TrackableTypes {
         private TrackableType() {
         }
 
+        protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
+            to.set(prop, from.get(prop));
+        }
         protected abstract T getDefaultValue();
         protected abstract T deserialize(TrackableDeserializer td, T oldValue);
         protected abstract void serialize(TrackableSerializer ts, T value);
+    }
+
+    public static abstract class TrackableObjectType<T extends TrackableObject> extends TrackableType<T> {
+        private final HashMap<Integer, T> objLookup = new HashMap<Integer, T>();
+
+        private TrackableObjectType() {
+        }
+
+        public void clearLookupDictionary() {
+            objLookup.clear();
+        }
+
+        @Override
+        protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
+            T newObj = from.get(prop);
+            if (newObj != null) {
+                T existingObj = objLookup.get(newObj.getId());
+                if (existingObj != null) { //if object exists already, update its changed properties
+                    existingObj.copyChangedProps(newObj);
+                    newObj = existingObj;
+                }
+                else { //if object is new, cache in object lookup
+                    objLookup.put(newObj.getId(), newObj);
+                }
+            }
+            to.set(prop, newObj);
+        }
+    }
+
+    private static abstract class TrackableCollectionType<T extends TrackableObject> extends TrackableType<TrackableCollection<T>> {
+        private final TrackableObjectType<T> itemType;
+
+        private TrackableCollectionType(TrackableObjectType<T> itemType0) {
+            itemType = itemType0;
+        }
+
+        @Override
+        protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
+            TrackableCollection<T> newCollection = from.get(prop);
+            if (newCollection != null) {
+                //swap in objects in old collection for objects in new collection
+                for (int i = 0; i < newCollection.size(); i++) {
+                    T newObj = newCollection.get(i);
+                    if (newObj != null) {
+                        T existingObj = itemType.objLookup.get(newObj.getId());
+                        if (existingObj != null) { //if object exists already, update its changed properties
+                            existingObj.copyChangedProps(newObj);
+                            newCollection.remove(i);
+                            newCollection.add(i, existingObj);
+                        }
+                        else { //if object is new, cache in object lookup
+                            itemType.objLookup.put(newObj.getId(), newObj);
+                        }
+                    }
+                }
+            }
+            to.set(prop, newCollection);
+        }
     }
 
     public static final TrackableType<Boolean> BooleanType = new TrackableType<Boolean>() {
@@ -111,7 +172,7 @@ public class TrackableTypes {
         return type;
     }
 
-    public static final TrackableType<CardView> CardViewType = new TrackableType<CardView>() {
+    public static final TrackableObjectType<CardView> CardViewType = new TrackableObjectType<CardView>() {
         @Override
         protected CardView getDefaultValue() {
             return null;
@@ -131,7 +192,7 @@ public class TrackableTypes {
             ts.write(value == null ? -1 : value.getId()); //just write ID for lookup via index when deserializing
         }
     };
-    public static final TrackableType<TrackableCollection<CardView>> CardViewCollectionType = new TrackableType<TrackableCollection<CardView>>() {
+    public static final TrackableCollectionType<CardView> CardViewCollectionType = new TrackableCollectionType<CardView>(CardViewType) {
         @Override
         protected TrackableCollection<CardView> getDefaultValue() {
             return null;
@@ -147,7 +208,7 @@ public class TrackableTypes {
             ts.write(value);
         }
     };
-    public static final TrackableType<CardStateView> CardStateViewType = new TrackableType<CardStateView>() {
+    public static final TrackableObjectType<CardStateView> CardStateViewType = new TrackableObjectType<CardStateView>() {
         @Override
         protected CardStateView getDefaultValue() {
             return null;
@@ -191,7 +252,7 @@ public class TrackableTypes {
             }
         }
     };
-    public static final TrackableType<PlayerView> PlayerViewType = new TrackableType<PlayerView>() {
+    public static final TrackableObjectType<PlayerView> PlayerViewType = new TrackableObjectType<PlayerView>() {
         @Override
         protected PlayerView getDefaultValue() {
             return null;
@@ -211,7 +272,7 @@ public class TrackableTypes {
             ts.write(value == null ? -1 : value.getId()); //just write ID for lookup via index when deserializing
         }
     };
-    public static final TrackableType<TrackableCollection<PlayerView>> PlayerViewCollectionType = new TrackableType<TrackableCollection<PlayerView>>() {
+    public static final TrackableCollectionType<PlayerView> PlayerViewCollectionType = new TrackableCollectionType<PlayerView>(PlayerViewType) {
         @Override
         protected TrackableCollection<PlayerView> getDefaultValue() {
             return null;
@@ -227,7 +288,7 @@ public class TrackableTypes {
             ts.write(value);
         }
     };
-    public static final TrackableType<GameEntityView> GameEntityViewType = new TrackableType<GameEntityView>() {
+    public static final TrackableObjectType<GameEntityView> GameEntityViewType = new TrackableObjectType<GameEntityView>() {
         @Override
         protected GameEntityView getDefaultValue() {
             return null;
@@ -262,7 +323,7 @@ public class TrackableTypes {
             }
         }
     };
-    public static final TrackableType<StackItemView> StackItemViewType = new TrackableType<StackItemView>() {
+    public static final TrackableObjectType<StackItemView> StackItemViewType = new TrackableObjectType<StackItemView>() {
         @Override
         protected StackItemView getDefaultValue() {
             return null;
@@ -284,7 +345,7 @@ public class TrackableTypes {
             }
         }
     };
-    public static final TrackableType<TrackableCollection<StackItemView>> StackItemViewListType = new TrackableType<TrackableCollection<StackItemView>>() {
+    public static final TrackableCollectionType<StackItemView> StackItemViewListType = new TrackableCollectionType<StackItemView>(StackItemViewType) {
         @Override
         protected TrackableCollection<StackItemView> getDefaultValue() {
             return new TrackableCollection<StackItemView>();

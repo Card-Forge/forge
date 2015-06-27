@@ -166,6 +166,10 @@ public enum TrackableProperty {
         return respectFreeze;
     }
 
+    public void copyChangedProps(TrackableObject from, TrackableObject to) {
+        type.copyChangedProps(from, to, this);
+    }
+
     @SuppressWarnings("unchecked")
     public <T> T getDefaultValue() {
         return ((TrackableType<T>)type).getDefaultValue();

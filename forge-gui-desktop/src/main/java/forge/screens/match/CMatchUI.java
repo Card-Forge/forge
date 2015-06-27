@@ -174,14 +174,14 @@ public final class CMatchUI
     }
 
     @Override
-    public void setGameView(final GameView gameView) {
-        super.setGameView(gameView);
-        cDetailPicture.setGameView(gameView);
-        screen.setTabCaption(gameView.getTitle());
+    public void setGameView(GameView gameView0) {
+        super.setGameView(gameView0);
+        gameView0 = getGameView(); //ensure updated game view used for below logic
+        if (gameView0 == null) { return; }
+
+        cDetailPicture.setGameView(gameView0);
+        screen.setTabCaption(gameView0.getTitle());
         if (sortedPlayers != null) {
-            for (final PlayerView pv : sortedPlayers) {
-                pv.copy(gameView.getPlayers());
-            }
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override public final void run() {
                     for (final VField f : getFieldViews()) {

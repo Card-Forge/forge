@@ -44,6 +44,7 @@ import forge.quest.QuestController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableTypes;
 import forge.util.CollectionSuppliers;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
@@ -127,6 +128,11 @@ public class HostedMatch {
     }
 
     public void startGame() {
+        //ensure lookup dictionaries are cleared before each game
+        TrackableTypes.CardViewType.clearLookupDictionary();
+        TrackableTypes.PlayerViewType.clearLookupDictionary();
+        TrackableTypes.StackItemViewType.clearLookupDictionary();
+
         nextGameDecisions.clear();
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MATCH);
 
@@ -168,6 +174,7 @@ public class HostedMatch {
                 final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                 humanController.setGui(gui);
+                gui.setGameView(null); //clear out game view first so we don't copy into old game view
                 gui.setGameView(gameView);
                 gui.setOriginalGameController(p.getView(), humanController);
 

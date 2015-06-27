@@ -65,8 +65,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameView;
     }
     @Override
-    public void setGameView(final GameView gameView) {
-        this.gameView = gameView;
+    public void setGameView(final GameView gameView0) {
+        if (gameView == null || gameView0 == null) {
+            gameView = gameView0;
+            return;
+        }
+
+        //if game view set to another instance without being first cleared,
+        //update existing game view object instead of overwriting it
+        gameView.copyChangedProps(gameView0);
     }
 
     public final IGameController getGameController() {

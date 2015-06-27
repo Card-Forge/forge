@@ -18,16 +18,4 @@ public class TrackableCollection<T extends TrackableObject> extends FCollection<
     public TrackableCollection(Iterable<T> i) {
         super(i);
     }
-
-    @Override
-    public boolean add(T item) {
-        //TODO: Track change
-        return super.add(item);
-    }
-
-    @Override
-    public boolean remove(Object item) {
-        //TODO: Track change
-        return super.remove(item);
-    }
 }

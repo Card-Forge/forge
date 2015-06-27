@@ -64,26 +64,11 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     }
 
     /**
-     * Copy to this Trackable object the first object of the provided iterator
-     * whose id matches.
-     * 
-     * @see TrackableObject#copy(TrackableObject)
+     * Copy all change properties of another Trackable object to this object.
      */
-    public final void copy(final Iterable<? extends TrackableObject> others) {
-        for (final TrackableObject other : others) {
-            if (this.equals(other)) {
-                copy(other);
-                break;
-            }
-        }
-    }
-
-    /**
-     * Copy all properties of another Trackable object to this object.
-     */
-    public final void copy(final TrackableObject other) {
-        for (final TrackableProperty prop : other.props.keySet()) {
-            set(prop, other.get(prop));
+    public final void copyChangedProps(final TrackableObject from) {
+        for (final TrackableProperty prop : from.changedProps) {
+            prop.copyChangedProps(from, this);
         }
     }
 
