@@ -145,10 +145,9 @@ public class FScreen {
 
     private final IVTopLevelUI view;
     private final ICDoc controller;
-    private String tabCaption;
+    private String tabCaption, closeButtonTooltip;
     private final SkinImage tabIcon;
     private final boolean allowTabClose;
-    private final String closeButtonTooltip;
     private final FileLocation layoutFile;
     private final boolean isMatch;
 
@@ -204,6 +203,9 @@ public class FScreen {
 
     public String getCloseButtonTooltip() {
         return closeButtonTooltip;
+    }
+    public void setCloseButtonTooltip(String closeButtonTooltip0) {
+        closeButtonTooltip = closeButtonTooltip0;
     }
 
     public boolean onSwitching(final FScreen toScreen) {

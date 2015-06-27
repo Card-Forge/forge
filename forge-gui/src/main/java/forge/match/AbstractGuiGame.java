@@ -216,15 +216,25 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             } else {
                 return true;
             }
-        } else {
-            if (showConfirmDialog("This will close this game and you will not be able to resume watching it.\n\nClose anyway?", "Close Game?", "Close", "Cancel")) {
-                //if (playbackControl != null) {
-                    //playbackControl.onGameStopRequested();
-                //}
-                return true;
-            }
-            return false;
         }
+        else if (spectator == null) {
+            return true; //if no local players or spectator, just quit
+        }
+        else {
+            if (showConfirmDialog("This will close this game and you will not be able to resume watching it.\n\nClose anyway?", "Close Game?", "Close", "Cancel")) {
+                IGameController controller = spectator;
+                spectator = null; //ensure we don't prompt again, including when calling nextGameDecision below
+                controller.nextGameDecision(NextGameDecision.QUIT);
+            }
+            return false; //let logic above handle closing current screen
+        }
+    }
+
+    public String getConcedeCaption() {
+        if (hasLocalPlayers()) {
+            return "Concede";
+        }
+        return "Stop Watching";
     }
 
     @Override

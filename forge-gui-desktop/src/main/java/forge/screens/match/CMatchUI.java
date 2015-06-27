@@ -271,6 +271,8 @@ public final class CMatchUI
 
         initHandViews();
         registerDocs();
+
+        screen.setCloseButtonTooltip(getConcedeCaption() + " Game");
     }
 
     private void initHandViews() {

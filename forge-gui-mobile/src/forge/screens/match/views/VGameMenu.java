@@ -19,8 +19,7 @@ public class VGameMenu extends FDropDownMenu {
 
     @Override
     protected void buildMenu() {
-        
-        addItem(new FMenuItem("Concede", FSkinImage.CONCEDE, new FEventHandler() {
+        addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {

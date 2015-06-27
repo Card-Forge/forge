@@ -103,4 +103,13 @@ public class WatchLocalGame extends PlayerControllerHuman {
     public IDevModeCheats cheat() {
         return IDevModeCheats.NO_CHEAT;
     }
+
+    @Override
+    public void awaitNextInput() {
+        // Do nothing
+    }
+    @Override
+    public void cancelAwaitNextInput() {
+        // Do nothing
+    }
 }

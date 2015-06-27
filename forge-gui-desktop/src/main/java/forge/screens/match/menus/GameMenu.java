@@ -91,7 +91,7 @@ public final class GameMenu {
     }
 
     private SkinnedMenuItem getMenuItem_Concede() {
-        SkinnedMenuItem menuItem = new SkinnedMenuItem("Concede");
+        SkinnedMenuItem menuItem = new SkinnedMenuItem(matchUI.getConcedeCaption());
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_CONCEDE) : null));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_Q));
         menuItem.addActionListener(getConcedeAction());
