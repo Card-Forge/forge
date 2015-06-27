@@ -189,11 +189,20 @@ public class FTextField extends FDisplayObject implements ITextField {
 
     @Override
     public boolean press(float x, float y) {
-        if (isEditing) { //support placing text cursor
+        placeTextCursor(x, y);
+        return false;
+    }
+
+    public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
+        placeTextCursor(x, y);
+        return true;
+    }
+
+    private void placeTextCursor(float x, float y) {
+        if (isEditing) {
             selStart = getCharIndexAtPoint(x, y);
             selLength = 0;
         }
-        return false;
     }
 
     @Override
