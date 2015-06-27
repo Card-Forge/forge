@@ -11,6 +11,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.interfaces.ITextField;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Utils;
@@ -37,6 +39,41 @@ public class FTextField extends FDisplayObject implements ITextField {
     private HAlignment alignment;
     private int selStart, selLength;
     private boolean isEditing, readOnly;
+
+    private final FPopupMenu contextMenu = new FPopupMenu() {
+        @Override
+        protected void buildMenu() {
+            if (text.length() > 0) {
+                if (!readOnly) {
+                    addItem(new FMenuItem("Cut", new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            Forge.getClipboard().setContents(getSelectedText());
+                            textBeforeKeyInput = text;
+                            insertText("");
+                            endEdit();
+                        }
+                    }));
+                }
+                addItem(new FMenuItem("Copy", new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        Forge.getClipboard().setContents(getSelectedText());
+                    }
+                }));
+            }
+            if (!readOnly) {
+                addItem(new FMenuItem("Paste", new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        textBeforeKeyInput = text;
+                        insertText(Forge.getClipboard().getContents());
+                        endEdit();
+                    }
+                }));
+            }
+        }
+    };
 
     public FTextField() {
         this("");
@@ -157,6 +194,17 @@ public class FTextField extends FDisplayObject implements ITextField {
             selLength = 0;
         }
         return false;
+    }
+
+    @Override
+    public boolean longPress(float x, float y) {
+        if (isEditing) {
+            endEdit(); //end previous edit first
+        }
+        selStart = 0;
+        selLength = text.length(); //select text while context menu open
+        contextMenu.show(this, x, y);
+        return true;
     }
 
     @Override
@@ -335,8 +383,8 @@ public class FTextField extends FDisplayObject implements ITextField {
             }
         }
 
-        //draw selection if key input is active
-        if (isEditing) {
+        //draw selection if key input is active or context menu is shown
+        if (isEditing || contextMenu.isVisible()) {
             float selLeft = getTextLeft();
             if (selStart > 0) {
                 selLeft += renderedFont.getBounds(text.substring(0, selStart)).width;
