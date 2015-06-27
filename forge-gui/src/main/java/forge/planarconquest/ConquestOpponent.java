@@ -10,6 +10,7 @@ import forge.planarconquest.ConquestPlane.Region;
 
 public class ConquestOpponent {
     private final PaperCard commander;
+    @SuppressWarnings("unused")
     private final Region region;
     private final ISkinImage mapIcon;
 

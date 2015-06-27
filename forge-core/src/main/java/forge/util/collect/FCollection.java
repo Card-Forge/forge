@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.Serializable;
@@ -221,6 +222,7 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("hiding")
     public <T> T[] toArray(final T[] a) {
         return list.toArray(a);
     }
@@ -611,7 +613,9 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
             return this;
         }
         @Override public final Object[] toArray() { return ArrayUtils.EMPTY_OBJECT_ARRAY; }
-        @Override public final <T> T[] toArray(final T[] a) {
+        @Override
+        @SuppressWarnings("hiding")
+        public final <T> T[] toArray(final T[] a) {
             if (a.length > 0) {
                 a[0] = null;
             }

@@ -1070,7 +1070,7 @@ public class CardView extends GameEntityView {
         }
         boolean needFlagAsChanged = false;
         for (Card c : cardsToAdd) {
-            if (c !=null && oldCards.add(c)) {
+            if (c != null && oldCards.add(c)) {
                 if (views == null) {
                     views = new TrackableCollection<CardView>();
                     views.add(c.getView());

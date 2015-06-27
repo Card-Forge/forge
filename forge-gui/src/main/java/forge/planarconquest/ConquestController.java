@@ -33,7 +33,6 @@ import forge.ImageKeys;
 import forge.LobbyPlayer;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.Deck;
 import forge.game.GameRules;
@@ -112,7 +111,7 @@ public class ConquestController {
         SGuiChoose.reveal(commander.getName() + " brought along " + Lang.nounWithAmount(newCards.size(), "new card"), newCards);
     }
 
-    private void playGame(final ConquestCommander commander, final int opponentIndex, final boolean isHumanDefending, final IVCommandCenter commandCenter) {
+    /*private void playGame(final ConquestCommander commander, final int opponentIndex, final boolean isHumanDefending, final IVCommandCenter commandCenter) {
         gameRunner = new GameRunner(commander, opponentIndex, isHumanDefending, commandCenter);
         gameRunner.invokeAndWait();
 
@@ -120,7 +119,7 @@ public class ConquestController {
         if (gameRunner.wonGame) {
         }
         gameRunner = null;
-    }
+    }*/
 
     public class GameRunner {
         private class Lock {
@@ -131,6 +130,7 @@ public class ConquestController {
         public final ConquestCommander opponent;
         public final boolean isHumanDefending;
         private final IVCommandCenter commandCenter;
+        @SuppressWarnings("unused")
         private boolean wonGame;
 
         private GameRunner(final ConquestCommander commander0, final int opponentIndex, final boolean isHumanDefending0, final IVCommandCenter commandCenter0) {
@@ -268,7 +268,7 @@ public class ConquestController {
         }
     }
 
-    private boolean recruit(ConquestCommander commander) {
+    /*private boolean recruit(ConquestCommander commander) {
         boolean bonusCard = Aggregates.randomInt(1, 100) <= FModel.getConquestPreferences().getPrefInt(CQPref.RECRUIT_BONUS_CARD_ODDS);
         return awardNewCards(model.getCurrentPlane().getCardPool().getAllCards(),
                 commander.getName() + " recruited", "new creature", null, null,
@@ -280,7 +280,7 @@ public class ConquestController {
         return awardNewCards(model.getCurrentPlane().getCardPool().getAllCards(),
                 commander.getName() + " unlocked", "new spell", null, null,
                 CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, bonusCard ? 2 : 1);
-    }
+    }*/
 
     public void showGameRewards(final GameView game, final IWinLoseView<? extends IButton> view) {
         if (game.isMatchWonBy(humanPlayer)) {

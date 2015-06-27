@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
@@ -32,6 +33,7 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.PredicateString.StringOp;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -195,7 +197,7 @@ public final class BoosterUtils {
             if (i < colorBias) {
 
                 int index = (int) ((double) i / preferredBias);
-                for (Byte ignored : otherColors) {
+                for (@SuppressWarnings("unused") Byte ignored : otherColors) {
 
                     //Add artifacts here if there's no colorless selection
                     if (i % 8 == 0 && !preferredColors.contains(MagicColor.COLORLESS) && includeArtifacts) {

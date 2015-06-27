@@ -60,9 +60,9 @@ import forge.toolbox.FSkin;
 @SuppressWarnings("serial")
 public final class DeckManager extends ItemManager<DeckProxy> implements IHasGameType {
     private static final FSkin.SkinIcon icoDelete = FSkin.getIcon(FSkinProp.ICO_DELETE);
-    private static final FSkin.SkinIcon icoDeleteOver = FSkin.getIcon(FSkinProp.ICO_DELETE_OVER);
+    //private static final FSkin.SkinIcon icoDeleteOver = FSkin.getIcon(FSkinProp.ICO_DELETE_OVER);
     private static final FSkin.SkinIcon icoEdit = FSkin.getIcon(FSkinProp.ICO_EDIT);
-    private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
+    //private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
 
     private final GameType gameType;
     private UiCommand cmdDelete, cmdSelect;
@@ -301,7 +301,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     public class DeckActionsRenderer extends ItemCellRenderer {
-        private final int overActionIndex = -1;
+        //private final int overActionIndex = -1;
         private static final int imgSize = 20;
 
         @Override
@@ -373,8 +373,8 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         public final void paint(final Graphics g) {
             super.paint(g);
 
-            FSkin.drawImage(g, overActionIndex == 0 ? icoDeleteOver : icoDelete, 0, 0, imgSize, imgSize);
-            FSkin.drawImage(g, overActionIndex == 1 ? icoEditOver : icoEdit, imgSize - 1, -1, imgSize, imgSize);
+            FSkin.drawImage(g, /*overActionIndex == 0 ? icoDeleteOver : */icoDelete, 0, 0, imgSize, imgSize);
+            FSkin.drawImage(g, /*overActionIndex == 0 ? icoDeleteOver : */icoEdit, imgSize - 1, -1, imgSize, imgSize);
         }
     }
 }
