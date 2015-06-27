@@ -147,7 +147,7 @@ public enum TrackableProperty {
     StormCount(TrackableTypes.IntegerType),
     GameOver(TrackableTypes.BooleanType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
-    GameLog(TrackableTypes.PlayerViewType),
+    GameLog(TrackableTypes.StringType),
     PlayerTurn(TrackableTypes.PlayerViewType),
     Phase(TrackableTypes.EnumType(PhaseType.class));
 
