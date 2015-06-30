@@ -34,6 +34,7 @@ import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardType;
 import forge.card.ColorSet;
+import forge.card.ICardFace;
 import forge.deck.generation.DeckGenPool;
 import forge.deck.generation.DeckGeneratorBase.FilterCMC;
 import forge.deck.generation.IDeckGenPool;
@@ -59,7 +60,13 @@ public enum DeckFormat {
 
         @Override
         public boolean apply(CardRules rules) {
-            if (rules.getManaCost().getCMC() > 3) {
+            // Check for split cards explicitly, as using rules.getManaCost().getCMC()
+            // will return the sum of the costs, which is not what we want.
+            if (rules.getMainPart().getManaCost().getCMC() > 3) {
+                return false; //only cards with CMC less than 3 are allowed
+            }
+            ICardFace otherPart = rules.getOtherPart();
+            if (otherPart != null && otherPart.getManaCost().getCMC() > 3) {
                 return false; //only cards with CMC less than 3 are allowed
             }
             if (bannedCards.contains(rules.getName())) {
