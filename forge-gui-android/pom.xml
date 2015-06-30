@@ -14,7 +14,7 @@
         <sign.keypass>keypass</sign.keypass>
         <cardforge.user>user</cardforge.user>
         <cardforge.pass>pass</cardforge.pass>
-        <cardforge.server>ftp.cardforge.org</cardforge.server>
+        <cardforge.server>ftp.cardforge.link</cardforge.server>
     </properties>
 
     <parent>
