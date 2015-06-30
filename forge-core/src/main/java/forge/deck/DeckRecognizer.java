@@ -124,7 +124,8 @@ public class DeckRecognizer {
         if (StringUtils.isBlank(rawLine)) {
             return new Token(TokenType.Comment, 0, rawLine);
         }
-        final String line = rawLine.trim();
+        final char smartQuote = (char) 8217;
+        final String line = rawLine.trim().replace(smartQuote, '\'');
 
         Token result = null;
         final Matcher foundNumbersInFront = DeckRecognizer.SEARCH_NUMBERS_IN_FRONT.matcher(line);
