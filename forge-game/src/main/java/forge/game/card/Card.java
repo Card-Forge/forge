@@ -4858,6 +4858,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.getDelved().contains(this)) {
                 return false;
             }
+        } else if (property.startsWith("unequalPT")) {
+        	if (getNetPower() == getNetToughness()) {
+        		return false;
+        	}
         } else if (property.startsWith("power") || property.startsWith("toughness")
                 || property.startsWith("cmc") || property.startsWith("totalPT")) {
             int x = 0;
