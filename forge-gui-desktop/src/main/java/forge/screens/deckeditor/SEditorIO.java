@@ -30,6 +30,7 @@ public class SEditorIO {
         final DeckController<?> controller = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
         final String name = VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().getText();
         final String deckStr = DeckProxy.getDeckString(controller.getModelPath(), name);
+        boolean performSave = false;
 
         // Warn if no name
         if (name == null || name.isEmpty()) {
@@ -39,26 +40,21 @@ public class SEditorIO {
         }
         // Confirm if overwrite
         else if (controller.fileExists(name)) {
-            boolean confirmResult = true;
             if (!StringUtils.equals(name, controller.getModelName())) { // prompt only if name was changed
-                confirmResult = FOptionPane.showConfirmDialog(
+                performSave = FOptionPane.showConfirmDialog(
                     "There is already a deck named '" + name + "'. Overwrite?",
                     "Overwrite Deck?");
-            }
-
-            if (confirmResult) {
-                controller.save();
-                DeckProxy deck = VAllDecks.SINGLETON_INSTANCE.getLstDecks().stringToItem(deckStr);
-                if (deck != null) { //reload DeckProxy to pull changes into deck list
-                    deck.reloadFromStorage();
-                    VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedItem(deck);
-                    VAllDecks.SINGLETON_INSTANCE.getLstDecks().repaint();
-                }
+            } else {
+                performSave = true;
             }
         }
         // Confirm if a new deck will be created
         else if (FOptionPane.showConfirmDialog("This will create a new deck named '" +
                 name + "'. Continue?", "Create Deck?")) {
+            performSave = true;
+        }
+
+        if (performSave) {
             controller.saveAs(name);
             CAllDecks.SINGLETON_INSTANCE.refresh(); //pull new deck into deck list and select it
             VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
