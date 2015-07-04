@@ -575,6 +575,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sa.setFlashBackAbility(false);
         }
         else if (source.hasKeyword("Rebound")
+                && !fizzle
                 && source.getCastFrom() == ZoneType.Hand
                 && game.getZoneOf(source).is(ZoneType.Stack)
                 && source.getOwner().equals(source.getController())) //"If you cast this spell from your hand"
