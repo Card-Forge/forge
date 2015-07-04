@@ -35,7 +35,7 @@ public class AssetsDownloader {
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
         if (connectedToInternet) {
             try {
-                URL versionUrl = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/version.txt");
+                URL versionUrl = new URL("http://cardforge.link/android/releases/forge/forge-gui-android/version.txt");
                 String version = FileUtil.readFileToString(versionUrl);
                 if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
                     splashScreen.prepareForDialogs();
@@ -49,7 +49,7 @@ public class AssetsDownloader {
                     if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
                         String filename = "forge-android-" + version + "-signed-aligned.apk";
                         String apkFile = new GuiDownloadZipService("", "update",
-                                "http://cardforge.org/android/releases/forge/forge-gui-android/" + version + "/" + filename,
+                                "http://cardforge.link/android/releases/forge/forge-gui-android/" + version + "/" + filename,
                                 Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
                             Forge.getDeviceAdapter().openFile(apkFile);
@@ -132,7 +132,7 @@ public class AssetsDownloader {
         }
 
         new GuiDownloadZipService("", "resource files",
-                "http://cardforge.org/android/releases/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/" + "assets.zip",
+                "http://cardforge.link/android/releases/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/" + "assets.zip",
                 ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, splashScreen.getProgressBar()).downloadAndUnzip();
 
         FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
