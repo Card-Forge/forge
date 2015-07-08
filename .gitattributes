@@ -3716,6 +3716,7 @@ forge-gui/res/cardsfolder/c/conspiracy.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/constant_mists.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/constricting_sliver.txt -text
 forge-gui/res/cardsfolder/c/constricting_tendrils.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/consuls_lieutenant.txt -text
 forge-gui/res/cardsfolder/c/consult_the_necrosages.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/consume_spirit.txt -text
 forge-gui/res/cardsfolder/c/consume_strength.txt -text
@@ -5221,6 +5222,7 @@ forge-gui/res/cardsfolder/e/enigma_eidolon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/enigma_sphinx.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/enigma_sphinx_avatar.txt -text
 forge-gui/res/cardsfolder/e/enlarge.txt -text
+forge-gui/res/cardsfolder/e/enlightened_ascetic.txt -text
 forge-gui/res/cardsfolder/e/enlightened_tutor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/enlisted_wurm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/enlistment_officer.txt svneol=native#text/plain
@@ -6317,6 +6319,7 @@ forge-gui/res/cardsfolder/g/gideon_champion_of_justice.txt -text
 forge-gui/res/cardsfolder/g/gideon_jura.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gideons_avenger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gideons_lawkeeper.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/gideons_phalanx.txt -text
 forge-gui/res/cardsfolder/g/gift_of_estates.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gift_of_granite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gift_of_immortality.txt -text
@@ -6932,6 +6935,7 @@ forge-gui/res/cardsfolder/h/hallowed_burial.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hallowed_fountain.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hallowed_ground.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hallowed_healer.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/hallowed_moonlight.txt -text
 forge-gui/res/cardsfolder/h/hallowed_spiritkeeper.txt -text
 forge-gui/res/cardsfolder/h/halls_of_mist.txt -text
 forge-gui/res/cardsfolder/h/halo_hunter.txt svneol=native#text/plain

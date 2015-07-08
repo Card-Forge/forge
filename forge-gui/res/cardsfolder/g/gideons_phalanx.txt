@@ -1,0 +1,8 @@
+Name:Gideon's Phalanx
+ManaCost:5 W W
+Types:Instant
+A:SP$ Token | Cost$ 5 W W | TokenAmount$ 4 | TokenName$ Knight | TokenTypes$ Creature,Kngiht | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Vigilance | TokenImage$ w 2 2 knight ori | SubAbility$ DBPumpAll | SpellDescription$ Put four 2/2 white Knight creature tokens with vigilance onto the battlefield. Spell mastery - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gideons_phalanx.jpg
+Oracle:Put four 2/2 white Knight creature tokens with vigilance onto the battlefield.\nSpell mastery - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.

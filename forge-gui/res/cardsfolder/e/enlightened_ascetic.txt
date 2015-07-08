@@ -1,0 +1,9 @@
+Name:Enlightened Ascetic
+ManaCost:1 W
+Types:Creature Cat Monk
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target enchantment.
+SVar:TrigDestroy:DB$ Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Choose target enchantment.
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_ascetic.jpg
+Oracle:When Enlightened Ascetic enters the battlefield, you may destroy target enchantment.
