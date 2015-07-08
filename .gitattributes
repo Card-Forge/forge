@@ -1711,6 +1711,7 @@ forge-gui/res/cardsfolder/a/amok.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/amphibious_kavu.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/amphin_cutthroat.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/amphin_pathmage.txt -text
+forge-gui/res/cardsfolder/a/ampryn_tactician.txt -text
 forge-gui/res/cardsfolder/a/amrou_kithkin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/amrou_scout.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/amrou_seekers.txt svneol=native#text/plain
@@ -1824,6 +1825,7 @@ forge-gui/res/cardsfolder/a/annihilating_fire.txt -text
 forge-gui/res/cardsfolder/a/annul.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/anodet_lurker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/anoint.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/anointer_of_champions.txt -text
 forge-gui/res/cardsfolder/a/anowon_the_ruin_sage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/ant_queen.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/antagonism.txt -text
@@ -1916,6 +1918,7 @@ forge-gui/res/cardsfolder/a/archaeomancer.txt -text
 forge-gui/res/cardsfolder/a/archangel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/archangel_of_strife.txt -text
 forge-gui/res/cardsfolder/a/archangel_of_thune.txt -text
+forge-gui/res/cardsfolder/a/archangel_of_tithes.txt -text
 forge-gui/res/cardsfolder/a/archangels_light.txt -text
 forge-gui/res/cardsfolder/a/archdemon_of_unx.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/archers_of_qarsi.txt -text
@@ -2165,6 +2168,7 @@ forge-gui/res/cardsfolder/a/avatar_of_will.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/avatar_of_woe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aven_archer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aven_augur.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/aven_battle_priest.txt -text
 forge-gui/res/cardsfolder/a/aven_brigadier.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aven_cloudchaser.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aven_envoy.txt svneol=native#text/plain

@@ -1,0 +1,7 @@
+Name:Anointer of Champions
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ Pump | Cost$ T | NumAtt$ 1 | NumDef$ 1 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Target attacking creature gets +1/+1 until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anointer_of_champions.jpg
+Oracle:{T}: Target attacking creature gets +1/+1 until end of turn.
