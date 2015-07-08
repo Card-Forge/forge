@@ -14335,6 +14335,7 @@ forge-gui/res/cardsfolder/t/thorn_of_amethyst.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thorn_thallid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thorn_thrash_viashino.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thornbite_staff.txt -text
+forge-gui/res/cardsfolder/t/thornbow_archer.txt -text
 forge-gui/res/cardsfolder/t/thorncaster_sliver.txt -text
 forge-gui/res/cardsfolder/t/thornling.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thornscape_apprentice.txt svneol=native#text/plain

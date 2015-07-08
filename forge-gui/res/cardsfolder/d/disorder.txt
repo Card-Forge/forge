@@ -1,14 +1,7 @@
 Name:Disorder
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.White | NumDmg$ 2 | SubAbility$ RepeatedDisorder | RememberDamaged$ True | SpellDescription$ Disorder deals 2 damage to each white creature and each player who controls a white creature.
-SVar:RepeatedDisorder:DB$ RepeatEach | Cost$ 2 W W | RepeatPlayers$ Player | RepeatSubAbility$ DisorderPlayerDmg | SubAbility$ DBCleanup
-SVar:DisorderPlayerDmg:DB$ DealDamage | Defined$ Player.IsRemembered | ConditionCheckSVar$ DisorderX | ConditionSVarCompare$ GE1 | NumDmg$ 2 | References$ DisorderX,StillInPlay,AlreadyDestroyed
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-#Seeing as it should seal the damage to the creatures and players simultaneously, check whether the player DID have white creatures before the creature damage.
-SVar:AlreadyDestroyed:RememberedLKI$Valid Creature.White+RememberedPlayerCtrl
-SVar:StillInPlay:Count$Valid Creature.White+RememberedPlayerCtrl
-SVar:DisorderX:SVar$AlreadyDestroyed/Plus.StillInPlay
+A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.White | ValidPlayers$ Player.controlsCreature.White_GE1 | NumDmg$ 2 | SpellDescription$ Disorder deals 2 damage to each white creature and each player who controls a white creature.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disorder.jpg
 Oracle:Disorder deals 2 damage to each white creature and each player who controls a white creature.

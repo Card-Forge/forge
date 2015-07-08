@@ -62,12 +62,15 @@ import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
+import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.MyRandom;
 
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentSkipListMap;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>
@@ -1727,7 +1730,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
-        final String[] incR = restriction.split("\\.");
+        final String[] incR = restriction.split("\\.", 2);
 
         if (incR[0].equals("Opponent")) {
             if (equals(sourceController) || !isOpponentOf(sourceController)) {
@@ -1858,6 +1861,15 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (property.equals("IsPoisoned")) {
             if (getPoisonCounters() <= 0) {
+                return false;
+            }
+        } else if (property.startsWith("controls")) {
+            final String[] type = property.substring(8).split("_");
+            final CardCollectionView list = CardLists.getValidCards(getCardsIn(ZoneType.Battlefield), type[0], sourceController, source);
+            String comparator = type[1];
+            String compareTo = comparator.substring(2);
+            int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
+            if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
         } else if (property.startsWith("withMore")) {
