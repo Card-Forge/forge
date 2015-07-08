@@ -1,0 +1,8 @@
+Name:Dwynen's Elite
+ManaCost:1 G
+Types:Creature Elf Warrior
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.YouCtrl+Other+Elf | PresentCompare$ GE1 | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control another Elf, put a 1/1 green Elf Warrior creature token onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 elf warrior ORI
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dwynens_elite.jpg
+Oracle:When Dwynen's Elite enters the battlefield, if you control another Elf, put a 1/1 green Elf Warrior creature token onto the battlefield.

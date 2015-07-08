@@ -4957,6 +4957,7 @@ forge-gui/res/cardsfolder/d/dwarven_warriors.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dwarven_weaponsmith.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dwell_on_the_past.txt -text
 forge-gui/res/cardsfolder/d/dwynen_gilt_leaf_daen.txt -text
+forge-gui/res/cardsfolder/d/dwynens_elite.txt -text
 forge-gui/res/cardsfolder/d/dying_wail.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dying_wish.txt -text
 forge-gui/res/cardsfolder/d/dynacharge.txt -text
@@ -6432,6 +6433,7 @@ forge-gui/res/cardsfolder/g/gnarled_effigy.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gnarled_mass.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gnarled_scarhide.txt -text
 forge-gui/res/cardsfolder/g/gnarlid_pack.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/gnarlroot_trapper.txt -text
 forge-gui/res/cardsfolder/g/gnat_alley_creeper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gnat_miser.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gnathosaur.txt svneol=native#text/plain
@@ -9997,6 +9999,7 @@ forge-gui/res/cardsfolder/n/nissa_vastwood_seer.txt -text
 forge-gui/res/cardsfolder/n/nissa_worldwaker.txt -text
 forge-gui/res/cardsfolder/n/nissas_chosen.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nissas_expedition.txt -text
+forge-gui/res/cardsfolder/n/nissas_pilgrimage.txt -text
 forge-gui/res/cardsfolder/n/niv_mizzet_dracogenius.txt -text
 forge-gui/res/cardsfolder/n/niv_mizzet_the_firemind.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/niveous_wisps.txt svneol=native#text/plain
@@ -12573,6 +12576,7 @@ forge-gui/res/cardsfolder/s/shaman_en_kor.txt -text
 forge-gui/res/cardsfolder/s/shaman_of_forgotten_ways.txt -text
 forge-gui/res/cardsfolder/s/shaman_of_spring.txt -text
 forge-gui/res/cardsfolder/s/shaman_of_the_great_hunt.txt -text
+forge-gui/res/cardsfolder/s/shaman_of_the_pack.txt -text
 forge-gui/res/cardsfolder/s/shamanic_revelation.txt -text
 forge-gui/res/cardsfolder/s/shambleshark.txt -text
 forge-gui/res/cardsfolder/s/shambling_attendants.txt -text
@@ -13268,6 +13272,7 @@ forge-gui/res/cardsfolder/s/soul_strings.txt -text
 forge-gui/res/cardsfolder/s/soul_summons.txt -text
 forge-gui/res/cardsfolder/s/soul_tithe.txt -text
 forge-gui/res/cardsfolder/s/soul_warden.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/soulblade_djinn.txt -text
 forge-gui/res/cardsfolder/s/soulblast.txt -text
 forge-gui/res/cardsfolder/s/soulbound_guardians.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soulbright_flamekin.txt -text
@@ -15505,6 +15510,7 @@ forge-gui/res/cardsfolder/v/voyager_staff.txt -text
 forge-gui/res/cardsfolder/v/voyages_end.txt -text
 forge-gui/res/cardsfolder/v/voyaging_satyr.txt -text
 forge-gui/res/cardsfolder/v/vraska_the_unseen.txt -text
+forge-gui/res/cardsfolder/v/vryn_wingmare.txt -text
 forge-gui/res/cardsfolder/v/vug_lizard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vulpine_goliath.txt -text
 forge-gui/res/cardsfolder/v/vulshok_battlegear.txt svneol=native#text/plain

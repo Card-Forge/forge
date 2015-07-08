@@ -1,0 +1,10 @@
+Name:Soulblade Djinn
+ManaCost:3 U U
+Types:Creature Djinn
+PT:4/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1
+SVar:BuffedBy:Card.nonCreature+nonLand
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soulblade_djinn.jpg
+Oracle:Flying\nWhenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn.
