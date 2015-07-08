@@ -1,0 +1,9 @@
+Name:Patron of the Valiant
+ManaCost:3 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each creature you control with a +1/+1 counter on it.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | CounterType$ P1P1 | CounterNum$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/patron_of_the_valiant.jpg
+Oracle:Flying\nWhen Patron of the Valiant enters the battlefield, put a +1/+1 counter on each creature you control with a +1/+1 counter on it.

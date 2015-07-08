@@ -1,0 +1,9 @@
+Name:Conclave Naturalists
+ManaCost:4 G
+Types:Creature Dryad
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Choose target artifact or enchantment.
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conclave_naturalists.jpg
+Oracle:When Conclave Naturalists enters the battlefield, you may destroy target artifact or enchantment.

@@ -1,0 +1,8 @@
+Name:Chandra's Ignition
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ Pump | Cost$ 3 R R | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | RememberObjects$ Targeted | SubAbility$ IgnitionDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to each other creature and each opponent.
+SVar:IgnitionDamage:DB$ DamageAll | ValidCards$ Creature.IsNotRemembered | ValidPlayers$ Player.Opponent | NumDmg$ X | References$ X | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_ignition.jpg
+Oracle:Target creature you control deals damage equal to its power to each other creature and each opponent.

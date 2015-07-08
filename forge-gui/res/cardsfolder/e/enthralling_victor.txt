@@ -1,0 +1,9 @@
+Name:Enthralling Victor
+ManaCost:3 R
+Types:Creature Human Warrior
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target creature an opponent controls with power 2 or less until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:TrigChange:AB$ GainControl | Cost$ 0 | TgtPrompt$ Choose target creature an opponent controls with power 2 or less | ValidTgts$ Creature.OppCtrl+powerLE2 | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature an opponent controls with power 2 or less until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:PlayMain1:OPPONENTCREATURES
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enthralling_victor.jpg
+Oracle:When Enthralling Victor enters the battlefield, gain control of target creature an opponent controls with power 2 or less until end of turn. Untap that creature. It gains haste until end of turn.

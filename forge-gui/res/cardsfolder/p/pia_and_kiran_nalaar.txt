@@ -1,0 +1,9 @@
+Name:Pia and Kiran Nalaar
+ManaCost:2 R R
+Types:Legendary Creature Human Artificer
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter ORI
+A:AB$ DealDamage | Cost$ 2 R Sac<1/Artifact> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pia_and_kiran_nalaar.jpg
+Oracle:When Pia and Kiran Nalaar enters the battlefield, put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.\n{2}{R}, Sacrifice an artifact: Pia and Kiran Nalaar deals 2 damage to target creature or player.

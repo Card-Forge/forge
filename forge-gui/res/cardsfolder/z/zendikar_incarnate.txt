@@ -1,0 +1,8 @@
+Name:Zendikar Incarnate
+ManaCost:2 R G
+Types:Creature Elemental
+PT:*/4
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zendikar_incarnate.jpg
+Oracle:Zendikar Incarnate's power is equal to the number of lands you control.

@@ -1,0 +1,9 @@
+Name:Sentinel of the Eternal Watch
+ManaCost:5 W
+Types:Creature Giant Soldier
+PT:4/6
+K:Vigilance
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ Opponent | Execute$ TapCreature | TriggerDescription$ At the beginning of combat on each opponent's turn, tap target creature that player controls.
+SVar:TapCreature:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Choose target creature the active player controls.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sentinel_of_the_eternal_watch.jpg
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nAt the beginning of combat on each opponent's turn, tap target creature that player controls.

@@ -1,0 +1,9 @@
+Name:Undead Servant
+ManaCost:3 B
+Types:Creature Zombie
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 2/2 black Zombie creature tokenonto the battlefield for each card named Undead Servant in your graveyard.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b_2_2_zombie_ori
+SVar:X:Count$ValidGraveyard Card.YouOwn+namedUndead Servant
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_servant.jpg
+Oracle:When Undead Servant enters the battlefield, put a 2/2 black Zombie creature tokenonto the battlefield for each card named Undead Servant in your graveyard.

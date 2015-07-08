@@ -1,0 +1,9 @@
+Name:Subterranean Scout
+ManaCost:1 R
+Types:Creature Goblin Scout
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature with power 2 or less can't be blocked this turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | KW$ HIDDEN Unblockable
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/subterranean_scout.jpg
+Oracle:When Subterranean Scout enters the battlefield, target creature with power 2 or less can't be blocked this turn.

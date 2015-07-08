@@ -1,0 +1,29 @@
+Name:Jace, Vryn's Prodigy
+ManaCost:1 U
+Types:Legendary Creature Human Wizard
+PT:0/2
+A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Draw a card, then discard a card. If there are five or more cards in your graveyard, exile CARDNAME, then return him to the battefield transformed under his owner's control.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBExile | StackDescription$ None
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ GE5 | SubAbility$ DBReturn | StackDescription$ None
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | WithCounters$ LOYALTY_5 | ForgetOtherRemembered$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Card.YouOwn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_vryns_prodigy.jpg
+AlternateMode:DoubleFaced
+Oracle:{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn''s Prodigy, then return him to the battefield transformed under his owner's control.
+
+ALTERNATE
+
+Name:Jace, Telepath Unbound
+ManaCost:no cost
+Colors:blue
+Types:Planeswalker Jace
+Loyalty:5
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -2 | IsCurse$ True | UntilYourNextTurn$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Up to one target creature gets -2/-0 until your next turn.
+A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card | KW$ HIDDEN May be played & HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | PumpZone$ Graveyard | SpellDescription$ You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
+A:AB$ Effect | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Jace, Telepath Unbound emblem | Image$ jace_telepath_unbound_emblem | Triggers$ TrigSpellCast | SVars$ EffSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".
+SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard.
+SVar:EffSpellCast:AB$ Mill | Cost$ 0 | NumCards$ 5 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to mill
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_telepath_unbound.jpg
+Oracle:[+1] Up to one target creature gets -2/-0 until your next turn.\n[-3] You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.\n[-9] You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".

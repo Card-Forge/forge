@@ -1,0 +1,7 @@
+Name:Shambling Ghoul
+ManaCost:1 B
+Types:Creature Zombie
+PT:2/3
+K:CARDNAME enters the battlefield tapped.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shambling_ghoul.jpg
+Oracle:Shambling Ghoul enters the battlefield tapped.

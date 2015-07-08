@@ -1,0 +1,11 @@
+Name:Nightsnare
+ManaCost:3 B
+Types:Sorcery
+A:SP$ RevealHand | Cost$ 3 B | ValidTgts$ Opponent | RememberRevealed$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals his or her hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards.
+SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Hand | Amount$ 1 | Choices$ Card.nonLand+IsRemembered | SubAbility$ DBDiscard | ChoiceTitle$ You may choose a nonland card | StackDescription$ None
+SVar:DBDiscard:DB$ Discard | DefinedCards$ ChosenCard | Defined$ Targeted | Mode$ Defined | SubAbility$ DBCleanup | StackDescription$ None | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBDiscard2
+SVar:DBDiscard2:DB$ Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nightsnare.jpg
+Oracle:Target opponent reveals his or her hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards.

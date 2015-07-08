@@ -1,0 +1,14 @@
+Name:Dwynen, Gilt-Leaf Daen
+ManaCost:2 G G
+Types:Legendary Creature Elf Warrior
+PT:3/4
+K:Reach
+S:Mode$ Continuous | Affected$ Creature.Elf+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elf creatures you control get +1/+1.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks, you gain 1 life for each attacking Elf you control.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+SVar:X:Count$Valid Creature.YouCtrl+Elf+attacking
+SVar:HasAttackEffect:TRUE 
+DeckHints:Type$Elf
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dwynen_gilt_leaf_daen.jpg
+Oracle:Reach\nOther Elf creatures you control get +1/+1.\nWhenever Dwynen, Gilt-Leaf Daen attacks, you gain 1 life for each attacking Elf you control.

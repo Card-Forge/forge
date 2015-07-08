@@ -1,0 +1,7 @@
+Name:Knight of the Pilgrim's Road
+ManaCost:2 W
+Types:Creature Human Knight
+PT:3/2
+K:Renown 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_pilgrims_road.jpg
+Oracle:Renown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)

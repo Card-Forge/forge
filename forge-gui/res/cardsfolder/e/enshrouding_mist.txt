@@ -1,0 +1,7 @@
+Name:Enshrouding Mist
+ManaCost:W
+Types:Instant
+A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | SubAbility$ DBUntap | SpellDescription$ Target creature gets +1/+1 until end of turn. Prevent all damage that would be dealt to it this turn. If it's renowned, untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Card.IsRenowned
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enshrouding_mist.jpg
+Oracle:Target creature gets +1/+1 until end of turn. Prevent all damage that would be dealt to it this turn. If it's renowned, untap it.

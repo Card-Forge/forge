@@ -1,0 +1,9 @@
+Name:Faerie Miscreant
+ManaCost:U
+Types:Creature Faerie Rogue
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl+Other+namedFaerie Miscreant | PresentCompare$ GE1 | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if you control another creature named Faerie Miscreant, draw a card.
+SVar:TrigDraw:DB$ Draw | Cost$ 0 | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_miscreant.jpg
+Oracle:Flying\nWhen Faerie Miscreant enters the battlefield, if you control another creature named Faerie Miscreant, draw a card.

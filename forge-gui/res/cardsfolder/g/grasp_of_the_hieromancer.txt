@@ -1,0 +1,11 @@
+Name:Grasp of the Hieromancer
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ TrigTap | AddSVar$ HieroTap & HasAttackEffect | Description$ Enchanted creature gets +1/+1 and has "Whenever this creature attacks, tap target creature defending player controls."
+SVar:TrigTap:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HieroTap | TriggerDescription$ Whenever this creature attacks, tap target creature defending player controls.
+SVar:HieroTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls
+SVar:HasAttackEffect:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grasp_of_the_hieromancer.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has "Whenever this creature attacks, tap target creature defending player controls."

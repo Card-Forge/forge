@@ -1,0 +1,30 @@
+Name:Nissa, Vastwood Seer
+ManaCost:2 G
+Types:Legendary Creature Elf Scout
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle your library.
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Forest.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | IsPresent$ Land.YouCtrl | PresentCompare$ GE7 | Execute$ TrigExile | TriggerDescription$ Whenever a land enters the battlefield under your control, if you control seven or more lands, exile CARDNAME, then return her to the battlefield transformed under her owner's control.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | WithCounters$ LOYALTY_3 | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_vastwood_seer.jpg
+AlternateMode:DoubleFaced
+Oracle:When Nissa, Vastwood Seer enters the battlefield, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle your library.\nWhenever a land enters the battlefield under your control, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.
+
+ALTERNATE
+
+Name:Nissa, Sage Animist
+ManaCost:no cost
+Colors:green
+Types:Planeswalker Nissa
+Loyalty:3
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | DestinationZone2$ Hand | SpellDescription$ Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenImage$ g 4 4 Ashaya | TokenName$ Ashaya, the Awoken World | TokenTypes$ Legendary,Creature,Elemental | TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | SpellDescription$ Put a legendary 4/4 green Elemental creature token named Ashaya, the Awoken World onto the battlefield.
+ | SpellDescription$ Return target nonlegendary creature card with converted mana cost X from your graveyard to the battlefield.
+A:AB$ Untap | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Land | TgtPrompt$ Choose target land | TargetMin$ 0 | TargetMax$ 6 | RememberTargets$ True | SubAbility$ DBAnimate | SpellDescription$ Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered  | Power$ 6 | Toughness$ 6 | Types$ Creature,Elemental | Permanent$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_sage_animist.jpg
+Oracle:[+1] Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.\n[-2] Put a legendary 4/4 green Elemental creature token named Ashaya, the Awoken World onto the battlefield.\n[-7] Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
+

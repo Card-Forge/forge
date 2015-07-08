@@ -1,0 +1,7 @@
+Name:Elemental Bond
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE3+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with power 3 or greater enters the battlefield under your control, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elemental_bond.jpg
+Oracle:Whenever a creature with power 3 or greater enters the battlefield under your control, draw a card.

@@ -1,0 +1,9 @@
+Name:Gilt-Leaf Winnower
+ManaCost:3 B B
+Types:Creature Elf Warrior
+PT:4/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target non-Elf creature whose power and toughness aren't equal.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature.nonElf+unequalPT | TgtPrompt$ Select target non-Elf creature whose power and toughness aren't equal.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_winnower.jpg
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Gilt-Leaf Winnower enters the battlefield, you may destroy target non-Elf creature whose power and toughness aren't equal.

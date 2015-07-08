@@ -1,0 +1,12 @@
+Name:Alhammarret, High Arbiter
+ManaCost:5 U U
+Types:Legendary Creature Sphinx
+PT:5/5
+K:Flying
+K:ETBReplacement:Other:RevealHand
+SVar:RevealHand:DB$ RevealHand | Defined$ Player.Opponent | RememberRevealed$ True | SubAbility$ DBNameCard | SpellDescription$ As CARDNAME enters the battlefield, each opponent reveals his or her hand. You choose the name of a nonland card revealed this way.
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ChooseFromDefinedCards$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Caster$ Player.Opponent | Description$ Your opponents can't cast spells with the chosen name (as long as this creature is on the battlefield).
+SVar:Picture:http://www.wizards.com/global/images/magic/general/alhammaret_high_arbiter.jpg
+Oracle:Flying\nAs Alhammaret, High Arbiter enters the battlefield, each opponent reveals his or her hand. You choose the name of a nonland card revealed this way.\nYour opponents can't cast spells with the chosen name (as long as this creature is on the battlefield).

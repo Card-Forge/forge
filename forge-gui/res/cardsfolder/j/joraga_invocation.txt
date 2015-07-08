@@ -1,0 +1,6 @@
+Name:Joraga Invocation
+ManaCost:4 G G
+Types:Sorcery
+A:SP$ PumpAll | Cost$ 4 G G | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ HIDDEN CARDNAME must be blocked if able. | SpellDescription$ Creatures you control get +3/+3 and must be blocked this turn if able.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_invocation.jpg
+Oracle:Creatures you control get +3/+3 and must be blocked this turn if able.

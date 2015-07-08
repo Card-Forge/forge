@@ -1,0 +1,7 @@
+Name:Volcanic Rambler
+ManaCost:5 R
+Types:Creature Elemental
+PT:6/4
+A:AB$ DealDamage | Cost$ 2 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_rambler.jpg
+Oracle:{2}{R}: Voclanic Rambler deals 1 damage to target player.

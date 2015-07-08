@@ -1,0 +1,6 @@
+Name:Languish
+ManaCost:2 B B
+Types:Sorcery
+A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ All creatures get -4/-4 until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/languish.jpg
+Oracle:All creatures get -4/-4 until end of turn.

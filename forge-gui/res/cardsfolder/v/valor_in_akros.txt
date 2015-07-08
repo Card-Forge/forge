@@ -1,0 +1,8 @@
+Name:Valor in Akros
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever a creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1
+SVar:BuffedBy:Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/valor_in_akros.jpg
+Oracle:Whenever a creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn. 

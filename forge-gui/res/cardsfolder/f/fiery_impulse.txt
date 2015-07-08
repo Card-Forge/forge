@@ -1,0 +1,8 @@
+Name:Fiery Impulse
+ManaCost:R
+Types:Instant
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBDamage | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | References$ X | SpellDescription$ CARDNAME deals 2 damage to target creature.
+SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X | SpellDescription$ Spell mastery - If there are two or more instant and/or sorcery cards in your graveyard, CARDNAME deals 3 damage to that creature instead.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_impulse.jpg
+Oracle:Fiery Impulse deals 2 damage to target creature.\nSpell mastery - If there are two or more instant and/or sorcery cards in your graveyard, Fiery Impulse deals 3 damage to that creature instead.

@@ -1,0 +1,9 @@
+Name:Separatist Voidmage
+ManaCost:3 U
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature to its owner's hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature.
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/separatist_voidmage.jpg
+Oracle:When Separatist Voidmage enters the battlefield, you may return target creature to its owner's hand. 

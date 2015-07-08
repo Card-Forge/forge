@@ -1,0 +1,9 @@
+Name:Day's Undoing
+ManaCost:2 U
+Types:Sorcery
+A:SP$ ChangeZoneAll | Cost$ 2 U |  ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | Random$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | SpellDescription$ Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards. If it's your turn, end the turn. (Exile all spells and abilities on the stack, including this card. Discard down to your maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
+SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Each | SubAbility$ DBEnd
+SVar:DBEnd:DB$ EndTurn | ConditionPlayerTurn$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/days_undoing.jpg
+Oracle:Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards. If it's your turn, end the turn. (Exile all spells and abilities on the stack, including this card. Discard down to your maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)

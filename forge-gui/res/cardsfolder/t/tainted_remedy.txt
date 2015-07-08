@@ -1,0 +1,10 @@
+Name:Tainted Remedy
+ManaCost:2 B
+Types:Enchantment
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ReplaceWith$ RLoseLife | Description$ If an opponent would gain life, that player loses that much life instead.
+SVar:RLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ X | Defined$ ReplacedPlayer | References$ X
+SVar:X:ReplaceCount$LifeGained
+SVar:NonStackingEffect:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_remedy.jpg
+Oracle:If an opponent would gain life, that player loses that much life instead.

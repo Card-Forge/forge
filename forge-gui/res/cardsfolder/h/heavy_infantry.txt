@@ -1,0 +1,9 @@
+Name:Heavy Infantry
+ManaCost:4 W
+Types:Creature Human Soldier
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target creature an opponent controls.
+SVar:TrigTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heavy_infantry.jpg
+Oracle:When Heavy Infantry enters the battlefield, tap target creature an opponent controls.
