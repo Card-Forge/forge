@@ -1,0 +1,9 @@
+Name:Aspiring Aeronaut
+ManaCost:3 U
+Types:Creature Human Artificer
+PT:1/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter ORI
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aspiring_aeronaut.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Aspiring Aeronaut enters the battlefield, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.

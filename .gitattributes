@@ -2067,6 +2067,7 @@ forge-gui/res/cardsfolder/a/aspect_of_mongoose.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aspect_of_wolf.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/asphodel_wanderer.txt -text
 forge-gui/res/cardsfolder/a/asphyxiate.txt -text
+forge-gui/res/cardsfolder/a/aspiring_aeronaut.txt -text
 forge-gui/res/cardsfolder/a/assassinate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/assassins_blade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/assassins_strike.txt -text
@@ -6491,6 +6492,7 @@ forge-gui/res/cardsfolder/g/goblin_gardener.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/goblin_gaveleer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/goblin_general.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/goblin_glider.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/goblin_glory_chaser.txt -text
 forge-gui/res/cardsfolder/g/goblin_goon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/goblin_grappler.txt -text
 forge-gui/res/cardsfolder/g/goblin_grenade.txt svneol=native#text/plain
@@ -6975,6 +6977,7 @@ forge-gui/res/cardsfolder/h/harabaz_druid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/harbinger_of_night.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/harbinger_of_spring.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/harbinger_of_the_hunt.txt -text
+forge-gui/res/cardsfolder/h/harbinger_of_the_tides.txt -text
 forge-gui/res/cardsfolder/h/harbor_bandit.txt -text
 forge-gui/res/cardsfolder/h/harbor_guardian.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/harbor_serpent.txt svneol=native#text/plain
@@ -7138,6 +7141,7 @@ forge-gui/res/cardsfolder/h/helm_of_kaldra.txt -text
 forge-gui/res/cardsfolder/h/helm_of_obedience.txt -text
 forge-gui/res/cardsfolder/h/helm_of_possession.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/helm_of_the_ghastlord.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/helm_of_the_gods.txt -text
 forge-gui/res/cardsfolder/h/helvault.txt -text
 forge-gui/res/cardsfolder/h/hematite_golem.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hematite_talisman.txt svneol=native#text/plain
@@ -7614,6 +7618,7 @@ forge-gui/res/cardsfolder/i/infiltrator_il_kor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/infiltrators_magemark.txt -text
 forge-gui/res/cardsfolder/i/infinite_authority.txt -text
 forge-gui/res/cardsfolder/i/infinite_hourglass.txt -text
+forge-gui/res/cardsfolder/i/infinite_obliteration.txt -text
 forge-gui/res/cardsfolder/i/infinite_reflection.txt -text
 forge-gui/res/cardsfolder/i/inflame.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/information_dealer.txt svneol=native#text/plain
@@ -9504,6 +9509,7 @@ forge-gui/res/cardsfolder/m/molten_ravager.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/molten_sentry.txt -text
 forge-gui/res/cardsfolder/m/molten_slagheap.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/molten_tail_masticore.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/molten_vortex.txt -text
 forge-gui/res/cardsfolder/m/moltensteel_dragon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/molting_harpy.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/molting_skin.txt svneol=native#text/plain
@@ -14407,6 +14413,7 @@ forge-gui/res/cardsfolder/t/thistledown_duo.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thistledown_liege.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thopter_assembly.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thopter_foundry.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/thopter_spy_network.txt -text
 forge-gui/res/cardsfolder/t/thopter_squadron.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thorn_elemental.txt -text
 forge-gui/res/cardsfolder/t/thorn_of_amethyst.txt svneol=native#text/plain
