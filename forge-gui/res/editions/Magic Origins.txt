@@ -1,0 +1,298 @@
+[metadata]
+Code=ORI
+Date=2015-07-17
+Name=Magic Origins
+Code2=ORI
+Type=Core
+BoosterCovers=5
+Booster=10 Common:!fromSheet("ORI Sample Cards"), 3 Uncommon:!fromSheet("ORI Sample Cards"), 1 RareMythic:!fromSheet("ORI Sample Cards"), 1 BasicLand
+
+[cards]
+C Akroan Jailer
+C Ampryn Tactician
+U Anointer of Champions
+M Archangel of Tithes
+C Auramancer
+C Aven Battle Priest
+U Blessed Spirits
+C Celestial Flare
+C Charging Griffin
+C Cleric of the Forward Order
+U Consul's Lieutenant
+C Enlightened Ascetic
+C Enshrouding Mist
+R Gideon's Phalanx
+C Grasp of the Hieromancer
+R Hallowed Moonlight
+C Healing Hands
+C Heavy Infantry
+R Hixus, Prison Warden
+C Knight of the Pilgrim's Road
+R Knight of the White Orchid
+U Knightly Valor
+M Kytheon, Hero of Akros
+R Kytheon's Irregulars
+C Kytheon's Tactics
+C Mighty Leap
+U Murder Investigation
+U Patron of the Valiant
+R Relic Seeker
+U Sentinel of the Eternal Watch
+R Sigil of the Empty Throne
+C Stalwart Aven
+M Starfield of Nyx
+C Suppression Bonds
+U Swift Reckoning
+C Topan Freeblade
+U Totem-Guide Hartebeest
+R Tragic Arrogance
+U Valor in Akros
+R Vryn Wingmare
+U War Oracle
+C Yoked Ox
+R Alhammarret, High Arbiter
+U Anchor to the Æther
+C Artificer's Epiphany
+C Aspiring Aeronaut
+C Bone to Ash
+C Calculated Dismissal
+U Clash of Wills
+C Claustrophobia
+M Day's Undoing
+C Deep-Sea Terror
+M Disciple of the Ring
+C Disperse
+R Displacement Wave
+C Dreadwaters
+C Faerie Miscreant
+R Harbinger of the Tides
+U Hydrolash
+M Jace, Vryn's Prodigy
+R Jace's Sanctum
+U Jhessian Thief
+C Maritime Guard
+R Mizzium Meddler
+C Negate
+C Nivix Barrier
+U Psychic Rebuttal
+C Ringwarden Owl
+C Scrapskin Drake
+C Screeching Skaab
+C Send to Sleep
+C Separatist Voidmage
+U Sigiled Starfish
+U Skaab Goliath
+R Soulblade Djinn
+U Sphinx's Tutelage
+C Stratus Walk
+R Talent of the Telepath
+R Thopter Spy Network
+U Tower Geist
+U Turn to Frog
+C Watercourser
+U Whirler Rogue
+R Willbreaker
+U Blightcaster
+C Catacomb Slug
+U Consecrated by Blood
+U Cruel Revival
+C Dark Dabbling
+R Dark Petition
+C Deadbridge Shaman
+M Demonic Pact
+R Despoiler of Souls
+M Erebos's Titan
+C Eyeblight Assassin
+U Eyeblight Massacre
+C Fetid Imp
+U Fleshbag Marauder
+R Gilt-Leaf Winnower
+U Gnarlroot Trapper
+R Graveblade Marauder
+C Infernal Scarring
+R Infinite Obliteration
+R Kothophed, Soul Hoarder
+R Languish
+M Liliana, Heretical Healer
+C Macabre Waltz
+U Malakir Cullblade
+C Nantuko Husk
+U Necromantic Summons
+C Nightsnare
+R Priest of the Blood Rite
+C Rabid Bloodsucker
+C Read the Bones
+C Reave Soul
+C Returned Centaur
+U Revenant
+U Shadows of the Past
+C Shambling Ghoul
+R Tainted Remedy
+C Thornbow Archer
+U Tormented Thoughts
+C Touch of Moonglove
+C Undead Servant
+C Unholy Hunger
+C Weight of the Underworld
+R Abbot of Keral Keep
+U Acolyte of the Inferno
+C Act of Treason
+C Akroan Sergeant
+M Avaricious Dragon
+C Bellows Lizard
+C Boggart Brute
+U Call of the Full Moon
+M Chandra, Fire of Kaladesh
+C Chandra's Fury
+R Chandra's Ignition
+C Cobblebrute
+C Demolish
+C Dragon Fodder
+R Embermaw Hellion
+U Enthralling Victor
+R Exquisite Firecraft
+U Fiery Conclusion
+C Fiery Impulse
+C Firefiend Elemental
+R Flameshadow Conjuring
+U Ghirapur Æther Grid
+C Ghirapur Gearcrafter
+U Goblin Glory Chaser
+R Goblin Piledriver
+C Infectious Bloodlust
+C Lightning Javelin
+C Mage-Ring Bully
+U Magmatic Insight
+R Molten Vortex
+R Pia and Kiran Nalaar
+C Prickleboar
+U Ravaging Blaze
+R Scab-Clan Berserker
+U Seismic Elemental
+U Skyraker Giant
+C Smash to Smithereens
+C Subterranean Scout
+U Thopter Engineer
+C Titan's Strength
+C Volcanic Rambler
+C Aerial Volley
+R Animist's Awakening
+C Caustic Caterpillar
+U Conclave Naturalists
+R Dwynen, Gilt-Leaf Daen
+U Dwynen's Elite
+U Elemental Bond
+C Elvish Visionary
+R Evolutionary Leap
+R Gaea's Revenge
+U Gather the Pack
+M The Great Aurora
+R Herald of the Pantheon
+C Hitchclaw Recluse
+R Honored Hierarch
+U Joraga Invocation
+C Leaf Gilder
+C Llanowar Empath
+R Managorger Hydra
+C Mantle of Webs
+C Might of the Masses
+M Nissa, Vastwood Seer
+C Nissa's Pilgrimage
+R Nissa's Revelation
+C Orchard Spirit
+R Outland Colossus
+C Pharika's Disciple
+C Reclaim
+C Rhox Maulers
+U Skysnare Spider
+U Somberwald Alpha
+U Sylvan Messenger
+C Timberpack Wolf
+C Titanic Growth
+U Undercity Troll
+U Valeron Wardens
+C Vastwood Gorger
+C Vine Snare
+C Wild Instincts
+M Woodland Bellower
+C Yeva's Forcemage
+U Zendikar's Roil
+U Blazing Hellhound
+U Blood-Cursed Knight
+U Bounding Krasis
+U Citadel Castellan
+U Iroas's Champion
+U Possessed Skaab
+U Reclusive Artificer
+U Shaman of the Pack
+U Thunderclap Wyvern
+U Zendikar Incarnate
+C Alchemist's Vial
+M Alhammarret's Archive
+U Angel's Tomb
+C Bonded Construct
+U Brawler's Plate
+U Chief of the Foundry
+U Gold-Forged Sentinel
+C Guardian Automaton
+C Guardians of Meletis
+R Hangarback Walker
+R Helm of the Gods
+U Jayemdae Tome
+R Mage-Ring Responder
+U Meteorite
+R Orbs of Warding
+U Prism Ring
+M Pyromancer's Goggles
+U Ramroller
+U Runed Servitor
+U Sigil of Valor
+R Sword of the Animist
+U Throwing Knife
+C Veteran's Sidearm
+U War Horn
+R Battlefield Forge
+R Caves of Koilos
+C Evolving Wilds
+U Foundry of the Consuls
+R Llanowar Wastes
+U Mage-Ring Network
+U Rogue's Passage
+R Shivan Reef
+R Yavimaya Coast
+L Plains
+L Plains
+L Plains
+L Plains
+L Island
+L Island
+L Island
+L Island
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Forest
+L Forest
+L Forest
+L Forest
+R Aegis Angel
+C Divine Verdict
+C Eagle of the Watch
+U Serra Angel
+U Into the Void
+R Mahamoti Djinn
+C Weave Fate
+C Flesh to Dust
+C Mind Rot
+R Nightmare
+U Sengir Vampire
+C Fiery Hellhound
+R Shivan Dragon
+C Plummet
+U Prized Unicorn
+R Terra Stomper

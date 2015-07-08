@@ -85,3 +85,4 @@ KTK: 36 Boosters
 FRF: 36 Boosters
 DTK: 36 Boosters
 MM2: 24 Boosters
+ORI: 36 Boosters

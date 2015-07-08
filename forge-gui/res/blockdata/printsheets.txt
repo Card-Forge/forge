@@ -725,3 +725,21 @@
 1 Shivan Dragon|M15
 1 Terra Stomper|M15
 1 Walking Corpse|M15
+
+[ORI Sample Cards]
+1 Aegis Angel|ORI
+1 Divine Verdict|ORI
+1 Eagle of the Watch|ORI
+1 Serra Angel|ORI
+1 Into the Void|ORI
+1 Mahamoti Djinn|ORI
+1 Weave Fate|ORI
+1 Flesh to Dust|ORI
+1 Mind Rot|ORI
+1 Nightmare|ORI
+1 Sengir Vampire|ORI
+1 Fiery Hellhound|ORI
+1 Shivan Dragon|ORI
+1 Plummet|ORI
+1 Prized Unicorn|ORI
+1 Terra Stomper|ORI

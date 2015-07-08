@@ -58,3 +58,4 @@ Khans of Tarkir, 3/6/KTK, KTK FRF
 Dragons of Tarkir, 3/6/DTK, DTK FRF
 Tempest Remastered, 3/6/TPR, TPR
 Modern Masters 2015, 3/6/M15, MM2
+Magic Origins, 3/6/ORI, ORI
