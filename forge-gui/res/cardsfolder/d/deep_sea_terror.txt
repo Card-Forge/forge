@@ -1,0 +1,9 @@
+Name:Deep-Sea Terror
+ManaCost:4 U U
+Types:Creature Serpent
+PT:6/6
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ LT7 | Description$ CARDNAME can't attack unless there are seven or more cards in your graveyard.
+SVar:X:Count$InYourYard
+SVar:BuffedBy:Instant,Sorcery
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_sea_terror.jpg
+Oracle:Deep-Sea Terror can't attack unless there are seven or more cards in your graveyard.

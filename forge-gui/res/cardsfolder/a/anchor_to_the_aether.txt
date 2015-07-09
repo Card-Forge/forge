@@ -1,0 +1,7 @@
+Name:Anchor to the AEther
+ManaCost:2 U
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ DBScry | SpellDescription$ Put target creature on top of its owner's library. Scry 1.
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anchor_to_the_aether.jpg
+Oracle:Put target creature on top of its owner's library. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.) 

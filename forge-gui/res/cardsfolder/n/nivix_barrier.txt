@@ -1,0 +1,10 @@
+Name:Nivix Barrier
+ManaCost:3 U
+Types:Creature Illusion Wall
+PT:0/4
+K:Flash
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpCurse | TriggerDescription$ When CARDNAME enters the battlefield, target attacking creature gets -4/-0 until end of turn.
+SVar:TrigPumpCurse:DB$Pump| ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | IsCurse$ True | NumAtt$ -4
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nivix_barrier.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nDefender (This creature can't attack.)\nWhen Nivix Barrier enters the battlefield, target attacking creature gets -4/-0 until end of turn.
