@@ -1,0 +1,9 @@
+Name:Consecrated by Blood
+ManaCost:2 B B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | AddAbility$ Regenerate | Description$ Enchanted creature gets +2/+2 and has flying and "Sacrifice two other creatures: Regenerate this creature."
+SVar:Regenerate:AB$Regenerate | Cost$ Sac<2/Creature.Other/other creature> | SpellDescription$ Regenerate this creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/consecrated_by_blood.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying and "Sacrifice two other creatures: Regenerate this creature." (The next time the creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)

@@ -1,0 +1,10 @@
+Name:Shadows of the Past
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever a creature dies, scry 1.
+SVar:TrigScry:AB$ Scry | Cost$ 0 | ScryNum$ 1
+A:AB$ LoseLife | Cost$ 4 B | Defined$ Player.Opponent | LifeAmount$ 2 | CheckSVar$ X | SVarCompare$ GE4 | References$ X | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life. Activate this ability only if there are four or more creature cards in your graveyard.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shadows_of_the_past.jpg
+Oracle:Whenever a creature dies, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\n{4}{B}: Each opponent loses 2 life and you gain 2 life. Activate this ability only if there are four or more creature cards in your graveyard.

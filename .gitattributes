@@ -3717,6 +3717,7 @@ forge-gui/res/cardsfolder/c/conquer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conquering_manticore.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conquerors_pledge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/consecrate_land.txt -text
+forge-gui/res/cardsfolder/c/consecrated_by_blood.txt -text
 forge-gui/res/cardsfolder/c/consecrated_sphinx.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conservator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/consign_to_dream.txt -text
@@ -4137,6 +4138,7 @@ forge-gui/res/cardsfolder/d/daring_thief.txt -text
 forge-gui/res/cardsfolder/d/dark_banishing.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_betrayal.txt -text
 forge-gui/res/cardsfolder/d/dark_confidant.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/dark_dabbling.txt -text
 forge-gui/res/cardsfolder/d/dark_deal.txt -text
 forge-gui/res/cardsfolder/d/dark_depths.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_favor.txt svneol=native#text/plain
@@ -5459,6 +5461,7 @@ forge-gui/res/cardsfolder/e/eye_of_ugin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/eye_of_yawgmoth.txt -text
 forge-gui/res/cardsfolder/e/eye_spy.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/eyeblight_assassin.txt -text
+forge-gui/res/cardsfolder/e/eyeblight_massacre.txt -text
 forge-gui/res/cardsfolder/e/eyeblights_ending.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/eyes_in_the_skies.txt -text
 forge-gui/res/cardsfolder/e/eyes_of_the_watcher.txt svneol=native#text/plain
@@ -5662,6 +5665,7 @@ forge-gui/res/cardsfolder/f/festival_of_the_guildpact.txt -text
 forge-gui/res/cardsfolder/f/festival_of_trokin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fetid_heath.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fetid_horror.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/fetid_imp.txt -text
 forge-gui/res/cardsfolder/f/fettergeist.txt -text
 forge-gui/res/cardsfolder/f/feudkillers_verdict.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fever_charm.txt svneol=native#text/plain
@@ -12604,6 +12608,7 @@ forge-gui/res/cardsfolder/s/shadowborn_demon.txt -text
 forge-gui/res/cardsfolder/s/shadowcloak_vampire.txt -text
 forge-gui/res/cardsfolder/s/shadowfeed.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shadowmage_infiltrator.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/shadows_of_the_past.txt -text
 forge-gui/res/cardsfolder/s/shadowstorm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shah_of_naar_isle.txt -text
 forge-gui/res/cardsfolder/s/shaleskin_bruiser.txt svneol=native#text/plain
