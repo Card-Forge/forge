@@ -1,0 +1,9 @@
+Name:Whirler Rogue
+ManaCost:2 U U
+Types:Creature Human Rogue Artificer
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter ORI
+A:AB$ Pump | Cost$ tapXType<2/Artifact> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whirler_rogue.jpg
+Oracle:When Whirler Rogue enters the battlefield, put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.\nTap two untapped artifacts you control: Target creature can't be blocked this turn.

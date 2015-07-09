@@ -6254,6 +6254,7 @@ forge-gui/res/cardsfolder/g/ghastly_discovery.txt -text
 forge-gui/res/cardsfolder/g/ghastly_remains.txt -text
 forge-gui/res/cardsfolder/g/ghave_guru_of_spores.txt -text
 forge-gui/res/cardsfolder/g/ghazban_ogre.txt -text
+forge-gui/res/cardsfolder/g/ghirapur_gearcrafter.txt -text
 forge-gui/res/cardsfolder/g/ghitu_encampment.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/ghitu_fire.txt -text
 forge-gui/res/cardsfolder/g/ghitu_fire_eater.txt svneol=native#text/plain
@@ -11451,6 +11452,7 @@ forge-gui/res/cardsfolder/r/reckless_wurm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/reclaim.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/reclamation.txt -text
 forge-gui/res/cardsfolder/r/reclamation_sage.txt -text
+forge-gui/res/cardsfolder/r/reclusive_artificer.txt -text
 forge-gui/res/cardsfolder/r/reclusive_wight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/recoil.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/recollect.txt svneol=native#text/plain
@@ -12188,6 +12190,7 @@ forge-gui/res/cardsfolder/s/sawback_manticore.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sawtooth_loon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sawtooth_ogre.txt -text
 forge-gui/res/cardsfolder/s/sawtooth_thresher.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/scab_clan_berserker.txt -text
 forge-gui/res/cardsfolder/s/scab_clan_charger.txt -text
 forge-gui/res/cardsfolder/s/scab_clan_giant.txt -text
 forge-gui/res/cardsfolder/s/scab_clan_mauler.txt svneol=native#text/plain
@@ -15816,6 +15819,7 @@ forge-gui/res/cardsfolder/w/whipstitched_zombie.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/whiptail_moloch.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/whiptail_wurm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/whiptongue_frog.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/w/whirler_rogue.txt -text
 forge-gui/res/cardsfolder/w/whirling_catapult.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/whirling_dervish.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/whirlpool_drake.txt svneol=native#text/plain
