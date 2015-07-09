@@ -1,0 +1,7 @@
+Name:Healing Hands
+ManaCost:2 W
+Types:Sorcery
+A:SP$ GainLife | Cost$ 2 W | LifeAmount$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDraw | SpellDescription$ Target player gains 4 life. Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/healing_hands.jpg
+Oracle:Target player gains 4 life.\nDraw a card.

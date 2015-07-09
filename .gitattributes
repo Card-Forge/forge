@@ -7067,6 +7067,7 @@ forge-gui/res/cardsfolder/h/heal.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/heal_the_scars.txt -text
 forge-gui/res/cardsfolder/h/healer_of_the_pride.txt -text
 forge-gui/res/cardsfolder/h/healers_headdress.txt -text
+forge-gui/res/cardsfolder/h/healing_hands.txt -text
 forge-gui/res/cardsfolder/h/healing_leaves.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/healing_salve.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/heap_doll.txt svneol=native#text/plain
@@ -7257,6 +7258,7 @@ forge-gui/res/cardsfolder/h/hive_mind.txt -text
 forge-gui/res/cardsfolder/h/hive_stirrings.txt -text
 forge-gui/res/cardsfolder/h/hivestone.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hivis_of_the_scale.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/hixus_prison_warden.txt -text
 forge-gui/res/cardsfolder/h/hoar_shade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hoard_smelter_dragon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hoarders_greed.txt svneol=native#text/plain
@@ -8376,6 +8378,7 @@ forge-gui/res/cardsfolder/k/kyren_toy.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/k/kyscu_drake.txt -text
 forge-gui/res/cardsfolder/k/kytheon_hero_of_akros.txt -text
 forge-gui/res/cardsfolder/k/kytheons_irregulars.txt -text
+forge-gui/res/cardsfolder/k/kytheons_tactics.txt -text
 forge-gui/res/cardsfolder/l/lab_rats.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/laboratory_maniac.txt -text
 forge-gui/res/cardsfolder/l/labyrinth_champion.txt -text
@@ -13978,6 +13981,7 @@ forge-gui/res/cardsfolder/s/supplant_form.txt -text
 forge-gui/res/cardsfolder/s/supply_demand.txt -text
 forge-gui/res/cardsfolder/s/supply_line_cranes.txt -text
 forge-gui/res/cardsfolder/s/suppress.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/s/suppression_bonds.txt -text
 forge-gui/res/cardsfolder/s/suppression_field.txt -text
 forge-gui/res/cardsfolder/s/supreme_exemplar.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/supreme_inquisitor.txt svneol=native#text/plain
@@ -14039,6 +14043,7 @@ forge-gui/res/cardsfolder/s/swerve.txt -text
 forge-gui/res/cardsfolder/s/swift_justice.txt -text
 forge-gui/res/cardsfolder/s/swift_kick.txt -text
 forge-gui/res/cardsfolder/s/swift_maneuver.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/swift_reckoning.txt -text
 forge-gui/res/cardsfolder/s/swift_silence.txt -text
 forge-gui/res/cardsfolder/s/swift_warkite.txt -text
 forge-gui/res/cardsfolder/s/swiftfoot_boots.txt svneol=native#text/plain
@@ -14756,6 +14761,7 @@ forge-gui/res/cardsfolder/t/trade_secrets.txt -text
 forge-gui/res/cardsfolder/t/tradewind_rider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tradewind_rider_avatar.txt -text
 forge-gui/res/cardsfolder/t/trading_post.txt -text
+forge-gui/res/cardsfolder/t/tragic_arrogance.txt -text
 forge-gui/res/cardsfolder/t/tragic_poet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tragic_slip.txt -text
 forge-gui/res/cardsfolder/t/trail_of_mystery.txt -text
@@ -15664,6 +15670,7 @@ forge-gui/res/cardsfolder/w/war_falcon.txt -text
 forge-gui/res/cardsfolder/w/war_flare.txt -text
 forge-gui/res/cardsfolder/w/war_mammoth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/war_name_aspirant.txt -text
+forge-gui/res/cardsfolder/w/war_oracle.txt -text
 forge-gui/res/cardsfolder/w/war_priest_of_thune.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/war_report.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/war_spike_changeling.txt svneol=native#text/plain
