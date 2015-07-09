@@ -1,0 +1,9 @@
+Name:Animist's Awakening
+ManaCost:X G
+Types:Sorcery
+A:SP$ Dig | Cost$ X G | DigNum$ X | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | RememberChanged$ True | RestRandomOrder$ True | SubAbility$ DBUntap | References$ X | SpellDescription$ Reveal the top X cards of your library. Put all land cards revealed this way onto the battlefield tapped and the rest on the bottom of your library in a random order. Spell mastery - If there are two or more instant and/or sorcery cards in your graeyard, untap those lands.
+SVar:DBUntap:DB$ Untap | Defined$ Remembered | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE2 | References$ Y
+SVar:X:Count$xPaid
+SVar:Y:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/animists_awakening.jpg
+Oracle:Reveal the top X cards of your library. Put all land cards revealed this way onto the battlefield tapped and the rest on the bottom of your library in a random order.\nSpell mastery - If there are two or more instant and/or sorcery cards in your graeyard, untap those lands.

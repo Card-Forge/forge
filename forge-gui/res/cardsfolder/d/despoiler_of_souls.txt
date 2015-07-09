@@ -1,0 +1,8 @@
+Name:Despoiler of Souls
+ManaCost:B B
+Types:Creature Horror
+PT:3/1
+K:CARDNAME can't block.
+A:AB$ ChangeZone | Cost$ B B ExileFromGrave<2/Creature.Other> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/despoiler_of_souls.jpg
+Oracle:Despoiler of Souls can't block.\n{B}{B}, Exile two other creature cards from your graveyard: Return Despoiler of Souls from your graveyard to the battlefield.

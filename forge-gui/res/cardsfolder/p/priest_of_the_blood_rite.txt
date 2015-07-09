@@ -1,0 +1,11 @@
+Name:Priest of the Blood Rite
+ManaCost:3 B B
+Types:Creature Human Cleric
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 5/5 black Demon creature token with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Demon | TokenTypes$ Creature,Demon | TokenOwner$ TriggeredCardController | TokenColors$ Black | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying | TokenImage$ b 5 5 demon ori
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
+SVar:SacMe:4
+SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_the_blood_rite.jpg
+Oracle:When Priest of the Blood Rite enters the battlefield, put a 5/5 black Demon creature token with flying onto the battlefield.\nAt the beginning of your upkeep, you lose 2 life.
