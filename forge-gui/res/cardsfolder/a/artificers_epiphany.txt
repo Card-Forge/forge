@@ -1,0 +1,7 @@
+Name:Artificer's Epiphany
+ManaCost:2 U
+Types:Instant
+A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards. If you control no artifacts, discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ EQ0 | Mode$ TgtChoose
+SVar:Picture:http://www.wizards.com/global/images/magic/general/artificers_epiphany.jpg
+Oracle:Draw two cards. If you control no artifacts, discard a card.
