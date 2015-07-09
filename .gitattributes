@@ -5286,6 +5286,7 @@ forge-gui/res/cardsfolder/e/erayo_soratami_ascendant_erayos_essence.txt -text
 forge-gui/res/cardsfolder/e/erdwal_ripper.txt -text
 forge-gui/res/cardsfolder/e/erebos_god_of_the_dead.txt -text
 forge-gui/res/cardsfolder/e/ereboss_emissary.txt -text
+forge-gui/res/cardsfolder/e/ereboss_titan.txt -text
 forge-gui/res/cardsfolder/e/erg_raiders.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/erhnam_djinn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/erhnam_djinn_avatar.txt -text
@@ -5387,6 +5388,7 @@ forge-gui/res/cardsfolder/e/evincars_justice.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/eviscerator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/evolution_charm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/evolution_vat.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/e/evolutionary_leap.txt -text
 forge-gui/res/cardsfolder/e/evolving_wilds.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/exalted_angel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/exalted_dragon.txt -text
@@ -6007,6 +6009,7 @@ forge-gui/res/cardsfolder/f/foul_spirit.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/foul_tongue_invocation.txt -text
 forge-gui/res/cardsfolder/f/foul_tongue_shriek.txt -text
 forge-gui/res/cardsfolder/f/foundry_champion.txt -text
+forge-gui/res/cardsfolder/f/foundry_of_the_consul.txt -text
 forge-gui/res/cardsfolder/f/foundry_street_denizen.txt -text
 forge-gui/res/cardsfolder/f/fountain_of_cho.txt -text
 forge-gui/res/cardsfolder/f/fountain_of_youth.txt svneol=native#text/plain
@@ -10021,6 +10024,7 @@ forge-gui/res/cardsfolder/n/nissa_worldwaker.txt -text
 forge-gui/res/cardsfolder/n/nissas_chosen.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nissas_expedition.txt -text
 forge-gui/res/cardsfolder/n/nissas_pilgrimage.txt -text
+forge-gui/res/cardsfolder/n/nissas_revelation.txt -text
 forge-gui/res/cardsfolder/n/niv_mizzet_dracogenius.txt -text
 forge-gui/res/cardsfolder/n/niv_mizzet_the_firemind.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/niveous_wisps.txt svneol=native#text/plain
@@ -15902,6 +15906,7 @@ forge-gui/res/cardsfolder/w/will_forged_golem.txt -text
 forge-gui/res/cardsfolder/w/will_o_the_wisp.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/will_of_the_naga.txt -text
 forge-gui/res/cardsfolder/w/willbender.txt -text
+forge-gui/res/cardsfolder/w/willbreaker.txt -text
 forge-gui/res/cardsfolder/w/willow_dryad.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/willow_elf.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/willow_faerie.txt svneol=native#text/plain

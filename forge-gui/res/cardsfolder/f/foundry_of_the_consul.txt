@@ -1,0 +1,7 @@
+Name:Foundry of the Consuls
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Token | Cost$ 5 T Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 2 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter ORI | SpellDescription$ Put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/foundry_of_the_consul.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{5}, {T}, Sacrifice Foundry of the Consul: Put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
