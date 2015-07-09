@@ -2654,6 +2654,7 @@ forge-gui/res/cardsfolder/b/blood_chin_rager.txt -text
 forge-gui/res/cardsfolder/b/blood_clock.txt -text
 forge-gui/res/cardsfolder/b/blood_crypt.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blood_cultist.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/blood_cursed_knight.txt -text
 forge-gui/res/cardsfolder/b/blood_feud.txt -text
 forge-gui/res/cardsfolder/b/blood_frenzy.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blood_funnel.txt -text
@@ -8873,6 +8874,7 @@ forge-gui/res/cardsfolder/m/magmasaur.txt -text
 forge-gui/res/cardsfolder/m/magmatic_chasm.txt -text
 forge-gui/res/cardsfolder/m/magmatic_core.txt -text
 forge-gui/res/cardsfolder/m/magmatic_force.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/magmatic_insight.txt -text
 forge-gui/res/cardsfolder/m/magmaw.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnetic_flux.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnetic_mine.txt svneol=native#text/plain
@@ -13047,6 +13049,7 @@ forge-gui/res/cardsfolder/s/skyshroud_troll.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skyshroud_troopers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skyshroud_vampire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skyshroud_war_beast.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/skysnare_spider.txt -text
 forge-gui/res/cardsfolder/s/skyspear_cavalry.txt -text
 forge-gui/res/cardsfolder/s/skyward_eye_prophets.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skywatcher_adept.txt svneol=native#text/plain
@@ -13215,6 +13218,7 @@ forge-gui/res/cardsfolder/s/soltari_priest.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soltari_trooper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soltari_visionary.txt -text
 forge-gui/res/cardsfolder/s/somber_hoverguard.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/somberwald_alpha.txt -text
 forge-gui/res/cardsfolder/s/somberwald_dryad.txt -text
 forge-gui/res/cardsfolder/s/somberwald_sage.txt -text
 forge-gui/res/cardsfolder/s/somberwald_spider.txt -text
@@ -13613,6 +13617,7 @@ forge-gui/res/cardsfolder/s/stalking_tiger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stalking_tiger_avatar.txt -text
 forge-gui/res/cardsfolder/s/stalking_vengeance.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stalking_yeti.txt -text
+forge-gui/res/cardsfolder/s/stalwart_aven.txt -text
 forge-gui/res/cardsfolder/s/stalwart_shield_bearers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stamina.txt -text
 forge-gui/res/cardsfolder/s/stampede.txt svneol=native#text/plain
@@ -16197,6 +16202,7 @@ forge-gui/res/cardsfolder/z/zektar_shrine_expedition.txt svneol=native#text/plai
 forge-gui/res/cardsfolder/z/zelyon_sword.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/z/zendikar_farguide.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/z/zendikar_incarnate.txt -text
+forge-gui/res/cardsfolder/z/zendikars_roil.txt -text
 forge-gui/res/cardsfolder/z/zephid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/z/zephids_embrace.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/z/zephyr_charge.txt -text

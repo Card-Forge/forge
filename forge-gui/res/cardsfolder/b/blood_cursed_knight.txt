@@ -1,0 +1,9 @@
+Name:Blood-Cursed Knight
+ManaCost:1 W B
+Types:Creature Vampire Knight
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control an enchantment, CARDNAME gets +1/+1 and has lifelink.
+SVar:X:Count$Valid Enchantment.YouCtrl
+SVar:BuffedBy:Enchantment
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_cursed_knight.jpg
+Oracle:As long as you control an enchantment, Blood-Cursed Knight gets +1/+1 and has lifelink. (Damage dealt by this creature also causes you to gain that much life.)
