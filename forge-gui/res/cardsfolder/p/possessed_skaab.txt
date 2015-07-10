@@ -1,0 +1,10 @@
+Name:Possessed Skaab
+ManaCost:3 U B
+Types:Creature Zombie
+PT:3/2
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would die, exile it instead.
+SVar:Exile:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target instant, sorcery, or creature card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl,Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_skaab.jpg
+Oracle:When Possessed Skaab enters the battlefield, return target instant, sorcery, or creature card from your graveyard to your hand.\nIf Possessed Skaab would die, exile it instead.

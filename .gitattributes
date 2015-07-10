@@ -7753,6 +7753,7 @@ forge-gui/res/cardsfolder/i/iridescent_angel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/iridescent_drake.txt -text
 forge-gui/res/cardsfolder/i/irini_sengir.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/iroas_god_of_victory.txt -text
+forge-gui/res/cardsfolder/i/iroass_champion.txt -text
 forge-gui/res/cardsfolder/i/iron_barb_hellion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/iron_heart_chimera.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/iron_lance.txt svneol=native#text/plain
@@ -10887,6 +10888,7 @@ forge-gui/res/cardsfolder/p/possessed_barbarian.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/possessed_centaur.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/possessed_nomad.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/possessed_portal.txt -text
+forge-gui/res/cardsfolder/p/possessed_skaab.txt -text
 forge-gui/res/cardsfolder/p/possibility_storm.txt -text
 forge-gui/res/cardsfolder/p/postmortem_lunge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/poultice_sliver.txt svneol=native#text/plain
@@ -14573,6 +14575,7 @@ forge-gui/res/cardsfolder/t/thunderblust.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thunderbolt.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thunderbreak_regent.txt -text
 forge-gui/res/cardsfolder/t/thunderclap.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/thunderclap_wyvern.txt -text
 forge-gui/res/cardsfolder/t/thundercloud_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thundercloud_shaman.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thunderfoot_baloth.txt -text
