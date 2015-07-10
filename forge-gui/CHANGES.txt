@@ -9,6 +9,10 @@ Release Notes
 -------------
 
 
+- Magic Origins -
+Forge now includes many of the new Magic Origins cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
+
+
 - Special Quest Booster Packs -
 New booster packs have been added to quest mode that contain cards of a single
 color. Blue Booster Packs will contain only blue cards, White Booster Packs
@@ -88,46 +92,192 @@ comments are welcome!
 New Cards
 ---------
 
-
-
-
-------------------------------
-New Magic Origins branch Cards
-------------------------------
-
-Liliana, Heretical Healer
+Abbot of Keral Keep
+Acolyte of the Inferno
+Aerial Volley
 Akroan Jailer
-Grasp of the Hieromancer
-Heavy Infantry
-Sentinel of the Eternal Watch
-Valor in Akros
-Hydrolash
-Jhessian Thief
-Ringwarden Owl
-Separatist Voidmage
-Chandra, Fire of Kaladesh
-Deadbridge Shaman
-Eyeblight Assassin
-Malakir Cullblade
-Rabid Bloodsucker
-Reave Soul
-Shambling Ghoul
+Akroan Sergeant
+Alchemist's Vial
+Alhammaret, High Arbiter
+Alhammarret's Archive
+Alhammarret's Archive
+Ampryn Tactician
+Anchor to the AEther
+Animist's Awakening
+Anointer of Champions
+Archangel of Tithes
+Archangel of Tithes
+Artificer's Epiphany
+Aspiring Aeronaut
 Avaricious Dragon
-Enthralling Victor
-Lightning Javelin
-Pia and Kiran Nalaar
-Seismic Elemental
-Subterranean Scout
-Volcanic Rambler
+Aven Battle Priest
+Blessed Spirits
+Blood-Cursed Knight
+Boggart Brute
+Bonded Construct
+Bounding Krasis
+Calculated Dismissal
+Call of the Full Moon
+Caustic Caterpillar
+Chandra's Ignition
+Chandra, Fire of Kaladesh
+Chief of the Foundry
+Citadel Castellan
+Citadel Castellan
+Clash of Wills
+Cleric of the Forward Order
 Conclave Naturalists
+Consecrated by Blood
+Consul's Lieutenant
+Dark Dabbling
+Dark Petition
+Day's Undoing
+Deadbridge Shaman
+Deep-Sea Terror
+Despoiler of Souls
+Disciple of the Ring
+Displacement Wave
+Dwynen's Elite
 Dwynen, Gilt-Leaf Daen
 Elemental Bond
+Embermaw Hellion
+Enlightened Ascetic
+Enshrouding Mist
+Enthralling Victor
+Erebos's Titan
+Evolutionary Leap
+Exquisite Firecraft
+Exquisite Firecraft
+Eyeblight Assassin
+Eyeblight Massacre
+Faerie Miscreant
+Fetid Imp
+Fiery Impulse
+Fiery Impulse
+Firefiend Elemental
+Flameshadow Conjuring
+Foundry of the Consuls
+Gather the Pack
+Ghirapur AEther Grid
+Ghirapur Gearcrafter
+Gideon's Phalanx
+Gilt-Leaf Winnower
+Gnarlroot Trapper
+Goblin Glory Chaser
+Grasp of the Hieromancer
+Graveblade Marauder
+Guardian Automaton
+Hallowed Moonlight
+Hangarback Walker
+Harbinger of the Tides
+Healing Hands
+Heavy Infantry
+Helm of the Gods
+Herald of the Pantheon
 Hitchclaw Recluse
-Joraga Invocation
-Mantle of Webs
-Nissa, Vastwood Seer
-Kytheon, Hero of Akros
+Hixus, Prison Warden
+Honored Hierarch
+Hydrolash
+Infectious Bloodlust
+Infernal Scarring
+Infinite Obliteration
+Iroas's Champion
+Jace's Sanctum
 Jace, Vryn's Prodigy
+Jhessian Thief
+Joraga Invocation
+Knight of the Pilgrim's Road
+Kothophed, Soul Hoarder
+Kytheon's Irregulars
+Kytheon's Tactics
+Kytheon, Hero of Akros
+Languish
+Lightning Javelin
+Liliana, Heretical Healer
+Mage-Ring Bully
+Mage-Ring Network
+Mage-Ring Responder
+Magmatic Insight
+Malakir Cullblade
+Managorger Hydra
+Mantle of Webs
+Mizzium Meddler
+Molten Vortex
+Necromantic Summons
+Nightsnare
+Nissa's Pilgrimage
+Nissa's Revelation
+Nissa, Vastwood Seer
+Nivix Barrier
+Orbs of Warding
+Outland Colossus
+Patron of the Valiant
+Pharika's Disciple
+Pia and Kiran Nalaar
+Possessed Skaab
+Prickleboar
+Priest of the Blood Rite
+Prism Ring
+Psychic Rebuttal
+Rabid Bloodsucker
+Ramroller
+Ravaging Blaze
+Reave Soul
+Reclusive Artificer
+Relic Seeker
+Rhox Maulers
+Ringwarden Owl
+Scab-Clan Berserker
+Seismic Elemental
+Send to Sleep
+Sentinel of the Eternal Watch
+Separatist Voidmage
+Shadows of the Past
+Shaman of the Pack
+Shambling Ghoul
+Sigil of Valor
+Skyraker Giant
+Skysnare Spider
+Somberwald Alpha
+Soulblade Djinn
+Sphinx's Tutelage
+Stalwart Aven
+Starfield of Nyx
+Subterranean Scout
+Suppression Bonds
+Swift Reckoning
+Sword of the Animist
+Tainted Remedy
+Talent of the Telepath
+The Great Aurora
+Thopter Engineer
+Thopter Spy Network
+Thornbow Archer
+Throwing Knife
+Thunderclap Wyvern
+Topan Freeblade
+Topan Freeblade
+Tragic Arrogance
+Undead Servant
+Undercity Troll
+Unholy Hunger
+Unholy Hunger
+Valeron Wardens
+Valeron Wardens
+Valor in Akros
+Veteran's Sidearm
+Vine Snare
+Volcanic Rambler
+Vryn Wingmare
+War Horn
+War Oracle
+Whirler Rogue
+Wild Instincts
+Willbreaker
+Woodland Bellower
+Woodland Bellower
+Zendikar Incarnate
+Zendikar's Roil
 
 
 ------------
