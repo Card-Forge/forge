@@ -14188,6 +14188,7 @@ forge-gui/res/cardsfolder/t/talas_merchant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/talas_researcher.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/talas_scout.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/talas_warrior.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/talent_of_the_telepath.txt -text
 forge-gui/res/cardsfolder/t/talisman_of_dominance.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/talisman_of_impulse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/talisman_of_indulgence.txt svneol=native#text/plain

@@ -1,0 +1,11 @@
+Name:Talent of the Telepath
+ManaCost:2 U U
+Types:Sorcery
+A:SP$ Dig | Cost$ 2 U U | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | Reveal$ True | NoMove$ True | DigNum$ 7 | RememberRevealed$ True | SubAbility$ TelepathCast | SpellDescription$ Target opponent reveals the top seven cards of his or her library. You may cast an instant or sorcery card from among them without paying its mana cost. Then that player puts the rest into his or her graveyard. Spell mastery - If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two revealed instant and/or sorcery cards instead of one.
+SVar:TelepathCast:DB$ Play | ValidZone$ Library | Valid$ Instant.IsRemembered,Sorcery.IsRemembered | Controller$ You | WithoutManaCost$ True | Optional$ True | References$ X,Y | Amount$ X | SubAbility$ MillRevealed
+SVar:MillRevealed:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | Defined$ Remembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Compare Y GE2.2.1
+SVar:Y:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talent_of_the_telepath.jpg
+Oracle:Target opponent reveals the top seven cards of his or her library. You may cast an instant or sorcery card from among them without paying its mana cost. Then that player puts the rest into his or her graveyard.\nSpell mastery - If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two revealed instant and/or sorcery cards instead of one.
