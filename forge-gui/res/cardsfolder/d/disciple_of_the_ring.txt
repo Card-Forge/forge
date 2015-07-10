@@ -8,4 +8,4 @@ SVar:DBPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:DBUntap:DB$ UntTap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_the_ring.jpg
-Oracle:{1}, Exile an instant or sorcery card from your graveyard: Choose one -\n• Counter target noncreature spell unless its controller pays {2}.\n• CARDNAME gets +1/+1 until end of turn.\n• Tap target creature.\n• Untap target creature.
+Oracle:{1}, Exile an instant or sorcery card from your graveyard: Choose one -\nâ€¢ Counter target noncreature spell unless its controller pays {2}.\nâ€¢ Disciple of the Ring gets +1/+1 until end of turn.\nâ€¢ Tap target creature.\nâ€¢ Untap target creature.
