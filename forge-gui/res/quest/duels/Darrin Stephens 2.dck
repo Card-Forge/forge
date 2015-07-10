@@ -7,11 +7,12 @@ Description=Mono U Affinity deck with Affinity for artifacts and Modular cards
 Icon=Darrin Stephens.jpg
 Deck Type=constructed
 [main]
-4 Thoughtcast
+3 Thoughtcast
+1 Artificer's Epiphany
 1 Ethersworn Adjudicator
 1 Scepter of Insight
 1 Tezzeret the Seeker
-4 Master of Etherium
+3 Master of Etherium
 1 Trinket Mage
 4 Frogmite
 1 Ancient Den
@@ -33,4 +34,5 @@ Deck Type=constructed
 3 Arcbound Worker
 1 Chrome Steed
 1 Snapsail Glider
+1 Thopter Spy Network
 [sideboard]

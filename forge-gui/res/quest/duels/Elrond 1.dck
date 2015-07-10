@@ -3,7 +3,7 @@
 Name=Elrond 1
 Title=Elrond
 Difficulty=easy
-Description=WG Aura deck with Rabid Wombat
+Description=WG Aura deck with Aura Gnarlid and Rabid Wombat
 Icon=Elrond.jpg
 Deck Type=constructed
 [main]
@@ -15,7 +15,8 @@ Deck Type=constructed
 3 Razorverge Thicket
 4 Sunpetal Grove
 2 Aura Gnarlid
-3 Rabid Wombat
+2 Rabid Wombat
+1 Blessed Spirits
 1 Kor Spiritdancer
 2 Gatherer of Graces
 2 Graceblade Artisan

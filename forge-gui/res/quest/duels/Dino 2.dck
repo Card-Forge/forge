@@ -10,7 +10,7 @@ Deck Type=constructed
 1 Tomb of the Spirit Dragon
 1 Steel Wall
 1 Mycosynth Golem
-4 Frogmite
+3 Frogmite
 3 Ancient Den
 1 Tanglebloom
 1 Defense Grid
@@ -21,7 +21,7 @@ Deck Type=constructed
 1 Tooth of Chiss-Goria
 3 Vault of Whispers
 1 Scale of Chiss-Goria
-3 Metallic Sliver
+2 Metallic Sliver
 1 Arcbound Slith
 1 Shield Sphere
 1 Alpha Myr
@@ -44,4 +44,6 @@ Deck Type=constructed
 1 Rusted Relic
 1 Razorfield Rhino
 1 Ugin's Construct
+1 Chief of the Foundry
+1 Ramroller
 [sideboard]

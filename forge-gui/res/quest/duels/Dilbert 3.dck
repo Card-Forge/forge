@@ -3,7 +3,7 @@
 Name=Dilbert 3
 Title=Dilbert
 Difficulty=hard
-Description=BRG Ball Lightning deck with Smoke, Mighty Emergence and Kavu Lair
+Description=BRG Ball Lightning deck with Smoke, Mighty Emergence and Elemental Bond
 Icon=Dilbert.jpg
 Deck Type=constructed
 [main]
@@ -11,7 +11,7 @@ Deck Type=constructed
 2 Deathgreeter
 3 Quest for the Gravelord
 3 Hellspark Elemental
-2 Kavu Lair
+2 Elemental Bond
 3 Smoke
 3 Ball Lightning
 3 Groundbreaker
