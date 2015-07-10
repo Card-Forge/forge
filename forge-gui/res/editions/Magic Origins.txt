@@ -51,7 +51,7 @@ R Vryn Wingmare
 U War Oracle
 C Yoked Ox
 R Alhammarret, High Arbiter
-U Anchor to the Æther
+U Anchor to the AEther
 C Artificer's Epiphany
 C Aspiring Aeronaut
 C Bone to Ash
@@ -155,7 +155,7 @@ U Fiery Conclusion
 C Fiery Impulse
 C Firefiend Elemental
 R Flameshadow Conjuring
-U Ghirapur Æther Grid
+U Ghirapur AEther Grid
 C Ghirapur Gearcrafter
 U Goblin Glory Chaser
 R Goblin Piledriver
