@@ -1,0 +1,9 @@
+Name:Alhammarret's Archive
+ManaCost:5
+Types:Legendary Artifact
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainDouble | Description$ If you would gain life, you gain twice that much life instead.
+SVar:GainDouble:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+SVar:X:ReplaceCount$LifeGained/Twice
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | NotFirstCardInDrawStep$ True | ReplaceWith$ DrawTwo | Description$ If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.
+SVar:DrawTwo:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
+Oracle:If you would gain life, you gain twice that much life instead.\nIf you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.

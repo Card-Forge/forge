@@ -1,0 +1,8 @@
+Name:Topan Freeblade
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+K:Vigilance
+K:Renown 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/topan_freeblade.jpg
+Oracle:Vigilance\nRenown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)
