@@ -467,10 +467,10 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (c.getNetToughness() <= -defense) {
+                    if (c.getSVar("Targeting").equals("Dies") || c.getNetToughness() <= -defense) {
                         return true; // can kill indestructible creatures
                     }
-                    return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
+                    return (ComputerUtilCombat.getDamageToKill(c) <= -defense && !c.hasKeyword("Indestructible"));
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end

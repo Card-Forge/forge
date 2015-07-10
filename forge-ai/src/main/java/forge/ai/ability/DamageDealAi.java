@@ -170,8 +170,9 @@ public class DamageDealAi extends DamageAiBase {
         final List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(ai, c)
-                        && !(c.getSVar("SacMe").length() > 0);
+                return c.getSVar("Targeting").equals("Dies") 
+                        || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(ai, c)
+                            && !(c.getSVar("SacMe").length() > 0);
             }
         });
 

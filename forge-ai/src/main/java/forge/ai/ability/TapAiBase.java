@@ -47,7 +47,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             tapList.remove(c);
         }
 
-        if (tapList.size() == 0) {
+        if (tapList.isEmpty()) {
             return false;
         }
 
@@ -55,7 +55,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             Card choice = null;
 
             if (tapList.size() == 0) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -68,7 +68,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                 }
             }
 
-            if (CardLists.getNotType(tapList, "Creature").size() == 0) {
+            if (CardLists.getNotType(tapList, "Creature").isEmpty()) {
                 // if only creatures take the best
                 choice = ComputerUtilCard.getBestCreatureAI(tapList);
             } else {
@@ -76,7 +76,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             if (choice == null) { // can't find anything left
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -117,9 +117,9 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         final Player opp = ai.getOpponent();
         final Game game = ai.getGame();
         CardCollection tapList = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
-        tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
         tapList = CardLists.getTargetableCards(tapList, sa);
+        tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.filter(tapList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -162,17 +162,18 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         	return false;
         }
 
+        boolean goodTargets = false;
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
             if (tapList.isEmpty()) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
                     return false;
                 } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
+                    if (!goodTargets && !ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         return false;
                     }
                     break;
@@ -180,8 +181,11 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             PhaseHandler phase = game.getPhaseHandler();
-            if (phase.isPlayerTurn(ai)
-                    && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            Card primeTarget = ComputerUtil.getKilledByTargeting(sa, tapList);
+            if (primeTarget != null) {
+            	choice = primeTarget;
+            	goodTargets = true;
+            } else if (phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
                 List<Card> attackers;
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -224,7 +228,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             if (choice == null) { // can't find anything left
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }

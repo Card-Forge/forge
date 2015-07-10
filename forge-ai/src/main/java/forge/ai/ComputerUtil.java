@@ -1732,6 +1732,17 @@ public class ComputerUtil {
         return safeCards;
     }
 
+    public static Card getKilledByTargeting(final SpellAbility sa, CardCollectionView validCards) {
+        CardCollection killables = new CardCollection(validCards);
+        killables = CardLists.filter(killables, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getController() != sa.getActivatingPlayer() && c.getSVar("Targeting").equals("Dies");
+            }
+        });
+        return ComputerUtilCard.getBestCreatureAI(killables);
+    }
+
     public static int damageFromETB(final Player player, final Card permanent) {
         int damage = 0;
         final Game game = player.getGame();
