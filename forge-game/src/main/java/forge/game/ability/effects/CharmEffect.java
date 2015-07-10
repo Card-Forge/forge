@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -15,10 +16,22 @@ public class CharmEffect extends SpellAbilityEffect {
 
     public static List<AbilitySub> makePossibleOptions(final SpellAbility sa) {
         final Card source = sa.getHostCard();
-
+        Iterable<Object> restriction = null;
         final String[] saChoices = sa.getParam("Choices").split(",");
+
+        if (sa.hasParam("ChoiceRestriction")) {
+            String rest = sa.getParam("ChoiceRestriction");
+            if (rest.equals("NotRemembered")) {
+                restriction = source.getRemembered();
+            }
+        }
+
         List<AbilitySub> choices = new ArrayList<AbilitySub>();
         for (final String saChoice : saChoices) {
+            if (restriction != null && Iterables.contains(restriction, saChoice)) {
+                // If there is a choice restriction, and the current choice fails that, skip it.
+                continue;
+            }
             final String ab = source.getSVar(saChoice);
             AbilitySub sub = (AbilitySub) AbilityFactory.getAbility(ab, source);
             sub.setTrigger(sa.isTrigger());

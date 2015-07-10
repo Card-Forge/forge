@@ -4428,6 +4428,7 @@ forge-gui/res/cardsfolder/d/demonic_collusion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/demonic_consultation.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/demonic_dread.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/demonic_hordes.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/demonic_pact.txt -text
 forge-gui/res/cardsfolder/d/demonic_rising.txt -text
 forge-gui/res/cardsfolder/d/demonic_taskmaster.txt -text
 forge-gui/res/cardsfolder/d/demonic_torment.txt svneol=native#text/plain

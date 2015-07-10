@@ -240,6 +240,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
+        if (sp.getApi() == ApiType.Charm) {
+            boolean remember = sp.hasParam("RememberChoice");
+            if (remember) {
+                // Remember the ChoiceName here for later handling
+                source.addRemembered(sp.getSubAbility().getParam("ChoiceName"));
+            }
+        }
+
         //cancel auto-pass for all opponents of activating player
         //when a new non-triggered ability is put on the stack
         if (!sp.isTrigger()) { 
