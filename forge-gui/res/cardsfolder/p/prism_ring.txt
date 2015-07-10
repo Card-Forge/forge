@@ -1,0 +1,9 @@
+Name:Prism Ring
+ManaCost:1
+Types:Artifact
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInComputerDeck
+T:Mode$ SpellCast | ValidCard$ Card.ChosenColor | ValidActivatingPlayer$ You | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell of the chosen color, you gain 1 life.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prism_ring.jpg
+Oracle:As Prism Ring enters the battlefield, choose a color.\nWhenever you cast a spell of the chosen color, you gain 1 life.

@@ -1,0 +1,10 @@
+Name:Mage-Ring Responder
+ManaCost:7
+Types:Artifact Creature Golem
+PT:7/7
+K:CARDNAME doesn't untap during your untap step.
+A:AB$ Untap | Cost$ 7 | SpellDescription$ Untap CARDNAME.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 7 damage to target creature defending player controls.
+SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumDmg$ 7
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mage_ring_responder.jpg
+Oracle:Mage-Ring Responder doesn't untap during your untap step.\n{7}: Untap Mage-Ring Responder.\nWhenever Mage-Ring Responder attacks, it deals 7 damage to target creature defending player controls.

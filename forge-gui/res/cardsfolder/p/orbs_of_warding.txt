@@ -1,0 +1,7 @@
+Name:Orbs of Warding
+ManaCost:5
+Types:Artifact
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof. (You can't be the target of spells or abilities your opponents control.)
+S:Mode$ PreventDamage | Target$ You | Source$ Creature.inZoneBattlefield | Amount$ 1 | Description$ If a creature would deal damage to you, prevent 1 of that damage.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orbs_of_warding.jpg
+Oracle:You have hexproof. (You can't be the target of spells or abilities your opponents control.)\nIf a creature would deal damage to you, prevent 1 of that damage.

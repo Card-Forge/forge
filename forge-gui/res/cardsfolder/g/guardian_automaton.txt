@@ -1,0 +1,8 @@
+Name:Guardian Automaton
+ManaCost:4
+Types:Artifact Creature Construct
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you gain 3 life.
+SVar:TrigSac:AB$ GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_automaton.jpg
+Oracle:When Guardian Automaton dies, you gain 3 life.
