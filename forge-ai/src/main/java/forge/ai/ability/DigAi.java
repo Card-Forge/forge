@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -9,6 +10,7 @@ import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -57,6 +59,18 @@ public class DigAi extends SpellAbilityAi {
             return false;
         }
 
+        final String num = sa.getParam("DigNum");
+        if (num != null && num.equals("X") && host.getSVar(num).equals("Count$xPaid")) {
+            // Set PayX here to maximum value.
+            if (!(sa instanceof AbilitySub) || host.getSVar("PayX").equals("")) {
+                int numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                if (numCards <= 0) {
+                    return false;
+                }
+                host.setSVar("PayX", Integer.toString(numCards));
+            }
+        }
+
         if (SpellAbilityAi.playReusable(ai, sa)) {
             return true;
         }
@@ -64,7 +78,7 @@ public class DigAi extends SpellAbilityAi {
         if ((!game.getPhaseHandler().getNextTurn().equals(ai)
                 || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
             && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
-            && ai.getCardsIn(ZoneType.Hand).size() > 1
+            && (ai.getCardsIn(ZoneType.Hand).size() > 1 || game.getPhaseHandler().getPhase().isBefore(PhaseType.DRAW))
             && !ComputerUtil.activateForCost(sa, ai)) {
         	return false;
         }
