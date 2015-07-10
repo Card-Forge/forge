@@ -1472,6 +1472,7 @@ forge-gui/res/cardsfolder/a/acidic_dagger.txt -text
 forge-gui/res/cardsfolder/a/acidic_slime.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/acidic_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/acidic_soil.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/acolyte_of_the_inferno.txt -text
 forge-gui/res/cardsfolder/a/acolyte_of_xathrid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/acolytes_reward.txt -text
 forge-gui/res/cardsfolder/a/acorn_catapult.txt -text
@@ -1617,6 +1618,7 @@ forge-gui/res/cardsfolder/a/akroan_jailer.txt -text
 forge-gui/res/cardsfolder/a/akroan_line_breaker.txt -text
 forge-gui/res/cardsfolder/a/akroan_mastiff.txt -text
 forge-gui/res/cardsfolder/a/akroan_phalanx.txt -text
+forge-gui/res/cardsfolder/a/akroan_sergeant.txt -text
 forge-gui/res/cardsfolder/a/akroan_skyguard.txt -text
 forge-gui/res/cardsfolder/a/akroma_angel_of_fury.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/akroma_angel_of_wrath.txt svneol=native#text/plain
@@ -3106,6 +3108,7 @@ forge-gui/res/cardsfolder/c/caldera_kavu.txt -text
 forge-gui/res/cardsfolder/c/caldera_lake.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/call_for_blood.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/call_of_the_conclave.txt -text
+forge-gui/res/cardsfolder/c/call_of_the_full_moon.txt -text
 forge-gui/res/cardsfolder/c/call_of_the_herd.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/call_of_the_nightwing.txt -text
 forge-gui/res/cardsfolder/c/call_of_the_wild.txt svneol=native#text/plain
@@ -5741,6 +5744,7 @@ forge-gui/res/cardsfolder/f/firebrand_ranger.txt -text
 forge-gui/res/cardsfolder/f/firebreathing.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/firecat_blitz.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/firedrinker_satyr.txt -text
+forge-gui/res/cardsfolder/f/firefiend_elemental.txt -text
 forge-gui/res/cardsfolder/f/firefist_striker.txt -text
 forge-gui/res/cardsfolder/f/firefly.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/firefright_mage.txt -text
@@ -6265,6 +6269,7 @@ forge-gui/res/cardsfolder/g/ghastly_discovery.txt -text
 forge-gui/res/cardsfolder/g/ghastly_remains.txt -text
 forge-gui/res/cardsfolder/g/ghave_guru_of_spores.txt -text
 forge-gui/res/cardsfolder/g/ghazban_ogre.txt -text
+forge-gui/res/cardsfolder/g/ghirapur_aether_grid.txt -text
 forge-gui/res/cardsfolder/g/ghirapur_gearcrafter.txt -text
 forge-gui/res/cardsfolder/g/ghitu_encampment.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/ghitu_fire.txt -text
@@ -8858,6 +8863,7 @@ forge-gui/res/cardsfolder/m/maelstrom_pulse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/maelstrom_wanderer.txt -text
 forge-gui/res/cardsfolder/m/maga_traitor_to_mortals.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mage_il_vec.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/mage_ring_bully.txt -text
 forge-gui/res/cardsfolder/m/mage_slayer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magebane_armor.txt -text
 forge-gui/res/cardsfolder/m/magefire_wings.txt svneol=native#text/plain
@@ -10937,6 +10943,7 @@ forge-gui/res/cardsfolder/p/preyseizer_dragon.txt -text
 forge-gui/res/cardsfolder/p/price_of_glory.txt -text
 forge-gui/res/cardsfolder/p/price_of_knowledge.txt -text
 forge-gui/res/cardsfolder/p/price_of_progress.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/prickleboar.txt -text
 forge-gui/res/cardsfolder/p/prickly_boggart.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pride_guardian.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pride_of_lions.txt -text
@@ -13041,6 +13048,7 @@ forge-gui/res/cardsfolder/s/skyknight_legionnaire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skylasher.txt -text
 forge-gui/res/cardsfolder/s/skyline_predator.txt -text
 forge-gui/res/cardsfolder/s/skymark_roc.txt -text
+forge-gui/res/cardsfolder/s/skyraker_giant.txt -text
 forge-gui/res/cardsfolder/s/skyreach_manta.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skyreaping.txt -text
 forge-gui/res/cardsfolder/s/skyrider_trainee.txt svneol=native#text/plain
@@ -14453,6 +14461,7 @@ forge-gui/res/cardsfolder/t/thirst_for_knowledge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thistledown_duo.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thistledown_liege.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thopter_assembly.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/thopter_engineer.txt -text
 forge-gui/res/cardsfolder/t/thopter_foundry.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thopter_spy_network.txt -text
 forge-gui/res/cardsfolder/t/thopter_squadron.txt svneol=native#text/plain

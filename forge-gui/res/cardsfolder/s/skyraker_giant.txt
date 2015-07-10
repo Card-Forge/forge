@@ -1,0 +1,7 @@
+Name:Skyraker Giant
+ManaCost:2 R R
+Types:Creature Giant
+PT:4/3
+K:Reach
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyraker_giant.jpg
+Oracle:Reach (This creature can block creatures with flying.)

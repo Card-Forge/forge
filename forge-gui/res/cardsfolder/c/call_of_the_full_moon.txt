@@ -1,0 +1,10 @@
+Name:Call of the Full Moon
+ManaCost:1 R
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Enchanted creature gets +3/+2 and has trample.
+T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice CARDNAME.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+SVar:Picture:http://www.wizards.com/global/images/magic/general/call_of_the_full_moon.jpg
+Oracle:Enchant creature\nEnchanted creature gets +3/+2 and has trample. (It can deal excess combat damage to defending player or planeswalker while attacking.)\nAt the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice Call of the Full Moon.
