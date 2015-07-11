@@ -902,7 +902,7 @@ public class ComputerUtilCard {
         
         //evaluate threat of targeted card
         float threat = 0;
-        if (c.isCreature()) {
+        if (c.isCreature() && ai.getLife() > 0) {
             Combat combat = ai.getGame().getCombat();
             threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true) / ai.getLife();
             //TODO:add threat from triggers and other abilities (ie. Master of Cruelties)
@@ -1007,7 +1007,7 @@ public class ComputerUtilCard {
         float chance = 0;
         
         //create and buff attackers
-        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
+        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai) && opp.getLife() > 0) {
             //1. become attacker for whatever reason
             if (!ComputerUtilCard.doesCreatureAttackAI(ai, c) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
                 float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
@@ -1096,7 +1096,7 @@ public class ComputerUtilCard {
             }
             
             //3. buff attacker
-            if (combat.isAttacking(c)) {
+            if (combat.isAttacking(c) && opp.getLife() > 0) {
                 int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
                 int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
                 if (combat.isBlocked(c)) {
@@ -1128,7 +1128,7 @@ public class ComputerUtilCard {
             }
             
             //4. lifelink
-            if (ai.canGainLife() && !c.hasKeyword("Lifelink") && keywords.contains("Lifelink")
+            if (ai.canGainLife() && ai.getLife() > 0 && !c.hasKeyword("Lifelink") && keywords.contains("Lifelink")
                     && (combat.isAttacking(c) || combat.isBlocking(c))) {
                 int dmg = pumped.getNetCombatDamage();
                 //The actual dmg inflicted should be the sum of ComputerUtilCombat.predictDamageTo() for opposing creature
