@@ -21,3 +21,10 @@ GTC Simic Guild: 10 Common:fromSheet("GTC Simic Guild"), 3 Uncommon:fromSheet("G
 RTR Rakdos Guild: 10 Common:fromSheet("RTR Rakdos Guild"), 3 Uncommon:fromSheet("RTR Rakdos Guild"), 1 RareMythic:fromSheet("RTR Rakdos Guild"), 1 promo("Rakdos GuildGate|RTR")
 RTR Golgari Guild: 10 Common:fromSheet("RTR Golgari Guild"), 3 Uncommon:fromSheet("RTR Golgari Guild"), 1 RareMythic:fromSheet("RTR Golgari Guild"), 1 promo("Golgari GuildGate|RTR")
 GTC Gruul Guild: 10 Common:fromSheet("GTC Gruul Guild"), 3 Uncommon:fromSheet("GTC Gruul Guild"), 1 RareMythic:fromSheet("GTC Gruul Guild"), 1 promo("Gruul GuildGate|GTC")
+
+# ORI Prerelase
+ORI Prerelease Gideon: 4 Common:fromSheet("ORI Gideon"), 2 Uncommon:fromSheet("ORI Gideon"), 1 RareMythic:fromSheet("ORI Gideon")
+ORI Prerelease Jace: 4 Common:fromSheet("ORI Jace"), 2 Uncommon:fromSheet("ORI Jace"), 1 RareMythic:fromSheet("ORI Jace")
+ORI Prerelease Liliana: 4 Common:fromSheet("ORI Liliana"), 2 Uncommon:fromSheet("ORI Liliana"), 1 RareMythic:fromSheet("ORI Liliana")
+ORI Prerelease Chandra: 4 Common:fromSheet("ORI Chandra"), 2 Uncommon:fromSheet("ORI Chandra"), 1 RareMythic:fromSheet("ORI Chandra")
+ORI Prerelease Nissa: 4 Common:fromSheet("ORI Nissa"), 2 Uncommon:fromSheet("ORI Nissa"), 1 RareMythic:fromSheet("ORI Nissa")

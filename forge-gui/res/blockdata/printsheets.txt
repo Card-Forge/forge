@@ -743,3 +743,222 @@
 1 Plummet|ORI
 1 Prized Unicorn|ORI
 1 Terra Stomper|ORI
+
+[ORI Gideon]
+Akroan Jailer|ORI
+Ampryn Tactician|ORI
+Anointer of Champions|ORI
+Archangel of Tithes|ORI
+Auramancer|ORI
+Aven Battle Priest|ORI
+Blessed Spirits|ORI
+Celestial Flare|ORI
+Charging Griffin|ORI
+Cleric of the Forward Order|ORI
+Consul's Lieutenant|ORI
+Enlightened Ascetic|ORI
+Enshrouding Mist|ORI
+Gideon's Phalanx|ORI
+Grasp of the Hieromancer|ORI
+Hallowed Moonlight|ORI
+Healing Hands|ORI
+Heavy Infantry|ORI
+Hixus, Prison Warden|ORI
+Knight of the Pilgrim's Road|ORI
+Knight of the White Orchid|ORI
+Knightly Valor|ORI
+Kytheon, Hero of Akros|ORI
+Kytheon's Irregulars|ORI
+Kytheon's Tactics|ORI
+Mighty Leap|ORI
+Murder Investigation|ORI
+Patron of the Valiant|ORI
+Relic Seeker|ORI
+Sentinel of the Eternal Watch|ORI
+Sigil of the Empty Throne|ORI
+Stalwart Aven|ORI
+Starfield of Nyx|ORI
+Suppression Bonds|ORI
+Swift Reckoning|ORI
+Topan Freeblade|ORI
+Totem-Guide Hartebeest|ORI
+Tragic Arrogance|ORI
+Valor in Akros|ORI
+Vryn Wingmare|ORI
+War Oracle|ORI
+Yoked Ox|ORI
+
+[ORI Jace]
+Alhammarret, High Arbiter|ORI
+Anchor to the AEther|ORI
+Artificer's Epiphany|ORI
+Aspiring Aeronaut|ORI
+Bone to Ash|ORI
+Calculated Dismissal|ORI
+Clash of Wills|ORI
+Claustrophobia|ORI
+Day's Undoing|ORI
+Deep-Sea Terror|ORI
+Disciple of the Ring|ORI
+Disperse|ORI
+Displacement Wave|ORI
+Dreadwaters|ORI
+Faerie Miscreant|ORI
+Harbinger of the Tides|ORI
+Hydrolash|ORI
+Jace, Vryn's Prodigy|ORI
+Jace's Sanctum|ORI
+Jhessian Thief|ORI
+Maritime Guard|ORI
+Mizzium Meddler|ORI
+Negate|ORI
+Nivix Barrier|ORI
+Psychic Rebuttal|ORI
+Ringwarden Owl|ORI
+Scrapskin Drake|ORI
+Screeching Skaab|ORI
+Send to Sleep|ORI
+Separatist Voidmage|ORI
+Sigiled Starfish|ORI
+Skaab Goliath|ORI
+Soulblade Djinn|ORI
+Sphinx's Tutelage|ORI
+Stratus Walk|ORI
+Talent of the Telepath|ORI
+Thopter Spy Network|ORI
+Tower Geist|ORI
+Turn to Frog|ORI
+Watercourser|ORI
+Whirler Rogue|ORI
+Willbreaker|ORI
+
+[ORI Liliana]
+Blightcaster|ORI
+Catacomb Slug|ORI
+Consecrated by Blood|ORI
+Cruel Revival|ORI
+Dark Dabbling|ORI
+Dark Petition|ORI
+Deadbridge Shaman|ORI
+Demonic Pact|ORI
+Despoiler of Souls|ORI
+Erebos's Titan|ORI
+Eyeblight Assassin|ORI
+Eyeblight Massacre|ORI
+Fetid Imp|ORI
+Fleshbag Marauder|ORI
+Gilt-Leaf Winnower|ORI
+Gnarlroot Trapper|ORI
+Graveblade Marauder|ORI
+Infernal Scarring|ORI
+Infinite Obliteration|ORI
+Kothophed, Soul Hoarder|ORI
+Languish|ORI
+Liliana, Heretical Healer|ORI
+Macabre Waltz|ORI
+Malakir Cullblade|ORI
+Nantuko Husk|ORI
+Necromantic Summons|ORI
+Nightsnare|ORI
+Priest of the Blood Rite|ORI
+Rabid Bloodsucker|ORI
+Read the Bones|ORI
+Reave Soul|ORI
+Returned Centaur|ORI
+Revenant|ORI
+Shadows of the Past|ORI
+Shambling Ghoul|ORI
+Tainted Remedy|ORI
+Thornbow Archer|ORI
+Tormented Thoughts|ORI
+Touch of Moonglove|ORI
+Undead Servant|ORI
+Unholy Hunger|ORI
+Weight of the Underworld|ORI
+
+[ORI Chandra]
+Abbot of Keral Keep|ORI
+Acolyte of the Inferno|ORI
+Act of Treason|ORI
+Akroan Sergeant|ORI
+Avaricious Dragon|ORI
+Bellows Lizard|ORI
+Boggart Brute|ORI
+Call of the Full Moon|ORI
+Chandra, Fire of Kaladesh|ORI
+Chandra's Fury|ORI
+Chandra's Ignition|ORI
+Cobblebrute|ORI
+Demolish|ORI
+Dragon Fodder|ORI
+Embermaw Hellion|ORI
+Enthralling Victor|ORI
+Exquisite Firecraft|ORI
+Fiery Conclusion|ORI
+Fiery Impulse|ORI
+Firefiend Elemental|ORI
+Flameshadow Conjuring|ORI
+Ghirapur AEther Grid|ORI
+Ghirapur Gearcrafter|ORI
+Goblin Glory Chaser|ORI
+Goblin Piledriver|ORI
+Infectious Bloodlust|ORI
+Lightning Javelin|ORI
+Mage-Ring Bully|ORI
+Magmatic Insight|ORI
+Molten Vortex|ORI
+Pia and Kiran Nalaar|ORI
+Prickleboar|ORI
+Ravaging Blaze|ORI
+Scab-Clan Berserker|ORI
+Seismic Elemental|ORI
+Skyraker Giant|ORI
+Smash to Smithereens|ORI
+Subterranean Scout|ORI
+Thopter Engineer|ORI
+Titan's Strength|ORI
+Volcanic Rambler|ORI
+
+[ORI Nissa]
+Aerial Volley|ORI
+Animist's Awakening|ORI
+Caustic Caterpillar|ORI
+Conclave Naturalists|ORI
+Dwynen, Gilt-Leaf Daen|ORI
+Dwynen's Elite|ORI
+Elemental Bond|ORI
+Elvish Visionary|ORI
+Evolutionary Leap|ORI
+Gaea's Revenge|ORI
+Gather the Pack|ORI
+The Great Aurora|ORI
+Herald of the Pantheon|ORI
+Hitchclaw Recluse|ORI
+Honored Hierarch|ORI
+Joraga Invocation|ORI
+Leaf Gilder|ORI
+Llanowar Empath|ORI
+Managorger Hydra|ORI
+Mantle of Webs|ORI
+Might of the Masses|ORI
+Nissa, Vastwood Seer|ORI
+Nissa's Pilgrimage|ORI
+Nissa's Revelation|ORI
+Orchard Spirit|ORI
+Outland Colossus|ORI
+Pharika's Disciple|ORI
+Reclaim|ORI
+Rhox Maulers|ORI
+Skysnare Spider|ORI
+Somberwald Alpha|ORI
+Sylvan Messenger|ORI
+Timberpack Wolf|ORI
+Titanic Growth|ORI
+Undercity Troll|ORI
+Valeron Wardens|ORI
+Vastwood Gorger|ORI
+Vine Snare|ORI
+Wild Instincts|ORI
+Woodland Bellower|ORI
+Yeva's Forcemage|ORI
+Zendikar's Roil|ORI

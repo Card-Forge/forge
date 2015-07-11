@@ -279,6 +279,7 @@ public class SealedCardPoolGenerator {
      * @return an ArrayList of the set choices.
      */
     private static List<String> getSetCombos(final List<String> setz, final int nPacks) {
+        // TODO These permutations really should be completely generated
         String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
         List<String> setCombos = new ArrayList<String>();
 
@@ -335,19 +336,28 @@ public class SealedCardPoolGenerator {
                 setCombos.add(String.format("%s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[0]));
             }
         }
-        else if (nPacks == 7 && sets.length >= 7) {
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[2], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[2], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[1], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
+        else if (nPacks == 7 && (sets.length == 4 || sets.length >= 7)) {
+            // Sorry. This whole function is awful, it really needs to be rewritten to just generate permutations
+            if (sets.length >= 7) {
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[0], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[2], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[2], sets[0], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[1], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
+                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
+            } else if (sets.length == 4) {
+                if( sets[1].equals(sets[2]) && sets[1].equals(sets[0])) {
+                    setCombos.add(String.format("%s, 6 %s", sets[3], sets[0])); // for origins sealed
+                } else {
+                    setCombos.add(String.format("%s, 2 %s, 2 %s, 2 %s", sets[3], sets[2], sets[1], sets[0]));
+                }
+            }
         }
         else if (nPacks == 8 && sets.length >= 8) {
             setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[7], sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
