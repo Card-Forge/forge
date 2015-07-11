@@ -4157,8 +4157,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("DamagedBy")) {
-            if (!receivedDamageFromThisTurn.containsKey(source)) {
+            if ((property.endsWith("Source") || property.equals("DamagedBy")) &&
+                    !receivedDamageFromThisTurn.containsKey(source)) {
                 return false;
+            } else if (property.endsWith("Remembered")) {
+                boolean matched = false;
+                for (final Object obj : source.getRemembered()) {
+                    if (!(obj instanceof Card)) {
+                        continue;
+                    }
+                    matched |= !receivedDamageFromThisTurn.containsKey(source);
+                }
+                if (!matched)
+                    return matched;
             }
         } else if (property.startsWith("Damaged")) {
             if (!dealtDamageToThisTurn.containsKey(source)) {
