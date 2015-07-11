@@ -177,7 +177,7 @@ public class ComputerUtilCost {
                     amount = AbilityUtils.calculateAmount(source, payLife.getAmount(), sourceAbility);
                 }
     
-                if ((ai.getLife() - amount) < remainingLife) {
+                if (ai.getLife() - amount < remainingLife && !ai.cantLoseForZeroOrLessLife()) {
                     return false;
                 }
             }
@@ -322,6 +322,9 @@ public class ComputerUtilCost {
     
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {
+                if (!ai.cantLoseForZeroOrLessLife()) {
+                    continue;
+                }
                 final int remainingLife = ai.getLife();
                 final int lifeCost = ((CostPayLife) part).convertAmount();
                 if ((remainingLife - lifeCost) < 10) {

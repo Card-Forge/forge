@@ -1081,7 +1081,8 @@ public class AiController {
             if (!checkETBEffects(card, spell, null)) {
                 return AiPlayDecision.BadEtbEffects;
             }
-            if (ComputerUtil.damageFromETB(player, card) >= player.getLife() && player.canLoseLife()) {
+            if (ComputerUtil.damageFromETB(player, card) >= player.getLife() && !player.cantLoseForZeroOrLessLife() 
+                    && player.canLoseLife()) {
                 return AiPlayDecision.BadEtbEffects;
             }
         }
@@ -1096,7 +1097,8 @@ public class AiController {
             CardCollection landsWannaPlay = getLandsToPlay();
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
                 Card land = chooseBestLandToPlay(landsWannaPlay);
-                if (ComputerUtil.damageFromETB(player, land) < player.getLife() || !player.canLoseLife()) {
+                if (ComputerUtil.damageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
+                        || player.cantLoseForZeroOrLessLife() ) {
                     game.PLAY_LAND_SURROGATE.setHostCard(land);
                     final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
                     abilities.add(game.PLAY_LAND_SURROGATE);

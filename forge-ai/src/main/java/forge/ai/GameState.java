@@ -212,7 +212,7 @@ public abstract class GameState {
             playerCards.put(kv.getKey(), processCardsForZone(value.isEmpty() ? new String[0] : value.split(";"), p));
         }
 
-        if (life > 0) p.setLife(life, null);
+        if (life >= 0) p.setLife(life, null);
         for (Entry<ZoneType, CardCollectionView> kv : playerCards.entrySet()) {
             if (kv.getKey() == ZoneType.Battlefield) {
                 List<Card> cards = new ArrayList<Card>();
