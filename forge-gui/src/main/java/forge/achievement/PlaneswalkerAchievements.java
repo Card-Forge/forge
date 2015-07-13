@@ -36,6 +36,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Chandra Ablaze", "Chandra's Bargain", "I feel like I've seen those before...");
         add("Chandra Nalaar", "Chandra's Rage", "Feel the power of my wrath!");
         add("Chandra, Pyromaster", "Chandra's Vengeance", "Please file in triplicate!");
+        add("Chandra, Roaring Flame", "Chandra's Roar", "The opponent continues to burn...");
         add("Chandra, the Firebrand", "Chandra's Hex", "When burning five is just not enough.");
         add("Dack Fayden", "Dack's Discount", "Do you have any evidence it was me?");
         add("Daretti, Scrap Savant", "Daretti's Recycler", "Save the environment!");
@@ -50,10 +51,12 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Garruk, Caller of Beasts", "Garruk's Wild Pair", "Can you beat two for the price of one?");
         add("Garruk, Primal Hunter", "Garruk's Garden", "They came out after a rain...");
         add("Gideon Jura", "Gideon's Brawl", "Are you man enough to mess with me?");
+        add("Gideon, Battle Forged", "Gideon's First Steps", "I still have a long road ahead of me...");
         add("Gideon, Champion of Justice", "Gideon's Aftermath", "Gideon stands alone!");
         add("Jace Beleren", "Jace's Grind", "Nice memories... not!");
         add("Jace, Architect of Thought", "Jace's Incantation", "I like that one. I'll steal it!");
         add("Jace, Memory Adept", "Jace's Revelation", "So many things to learn!");
+        add("Jace, Telepath Unbound", "Jace's Erasure", "First empty your mind and then... nope, that's it.");
         add("Jace, the Living Guildpact", "Jace's Timetwister", "Symmetry? What symmetry?");
         add("Jace, the Mind Sculptor", "Jace's Lobotomy", "What do you mean, \"overpowered\"?");
         add("Karn Liberated", "Karn's Reset", "Let's do this again!");
@@ -62,10 +65,12 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Liliana Vess", "Liliana's Bidding", "Stop being lazy and go to work!");
         add("Liliana of the Dark Realms", "Liliana's Ritual", "What do you mean, \"out of character\"?");
         add("Liliana of the Veil", "Liliana's Choice", "Which one of your children do you love best?");
+        add("Liliana, Defiant Necromancer", "Liliana's Necromastery", "Come join the Dark Side...");
         add("Nahiri, the Lithomancer", "Nahiri's Gift", "I pulled it out! Now I'm a king!");
         add("Narset Transcendent", "Narset's One Rule", "No spells for you!");
         add("Nicol Bolas, Planeswalker", "Bolas's Ultimatum", "Whatever you do, don't call him \"Nicol\"!");
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
+        add("Nissa, Sage Animist", "Nissa's Wake-Up Call", "Wake up! Time to work!");
         add("Nissa, Worldwaker", "Nissa's Awakening", "The whole country is here!");
         add("Ob Nixilis of the Black Oath", "Nixilis's Black Oath", "We all have to bring sacrifices sometimes.");
         add("Ral Zarek", "Ral's Long Day", "So much work, so much time!");
