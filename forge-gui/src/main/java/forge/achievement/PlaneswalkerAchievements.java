@@ -51,7 +51,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Garruk, Caller of Beasts", "Garruk's Wild Pair", "Can you beat two for the price of one?");
         add("Garruk, Primal Hunter", "Garruk's Garden", "They came out after a rain...");
         add("Gideon Jura", "Gideon's Brawl", "Are you man enough to mess with me?");
-        add("Gideon, Battle Forged", "Gideon's First Steps", "I still have a long road ahead of me...");
+        add("Gideon, Battle-Forged", "Gideon's First Steps", "I still have a long road ahead of me...");
         add("Gideon, Champion of Justice", "Gideon's Aftermath", "Gideon stands alone!");
         add("Jace Beleren", "Jace's Grind", "Nice memories... not!");
         add("Jace, Architect of Thought", "Jace's Incantation", "I like that one. I'll steal it!");
