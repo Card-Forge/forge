@@ -379,14 +379,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         repParams.put("Affected", this);
         repParams.put("LifeGained", toGain);
         repParams.put("Source", source);
+
+        if (!canGainLife()) {
+            return false;
+        }
+
         if (game.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return false;
         }
 
         boolean newLifeSet = false;
-        if (!canGainLife()) {
-            return false;
-        }
         final int lifeGain = toGain;
 
         if (lifeGain > 0) {
