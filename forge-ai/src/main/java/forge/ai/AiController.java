@@ -1138,6 +1138,9 @@ public class AiController {
             for (final Map.Entry<Card, GameEntity> mandatoryAttacker : legal.entrySet()) {
                 combat.addAttacker(mandatoryAttacker.getKey(), mandatoryAttacker.getValue());
             }
+            if (!CombatUtil.validateAttackers(combat)) {
+                aiAtk.declareAttackers(combat);
+            }
         }
 
         for (final Card element : combat.getAttackers()) {

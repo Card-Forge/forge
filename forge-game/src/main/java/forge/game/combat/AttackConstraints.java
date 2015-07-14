@@ -298,6 +298,8 @@ public class AttackConstraints {
                 final int previousNeeded = attackersNeeded;
                 attackersNeeded = Ints.max(3 - (myAttackers.size() + reserved.size()), 0);
                 localMaximum -= Ints.max(attackersNeeded - previousNeeded, 0);
+            } else if (restrictions.get(req.attacker).getTypes().contains(AttackRestrictionType.NOT_ALONE)) {
+                attackersNeeded = Ints.max(2 - (myAttackers.size() + reserved.size()), 0);
             }
         }
 
