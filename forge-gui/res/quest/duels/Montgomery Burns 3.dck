@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Montgomery Burns 3
+Title=Montgomery Burns
+Difficulty=hard
+Description=WBRG Tainted Remedy deck with Kavu Predator and Wall of Shards
+Icon=Montgomery Burns.jpg
+Deck Type=constructed
+[main]
+1 Plains
+1 Swamp
+1 Forest
+1 Badlands
+1 Bayou
+1 Savannah
+1 Plateau
+4 Scrubland
+4 Marsh Flats
+1 Verdant Catacombs
+1 Windswept Heath
+4 Grove of the Burnwillows
+4 Tainted Remedy
+4 Kavu Predator
+3 Needlebite Trap
+3 Punishing Fire
+4 Grollub
+1 Alms Beast
+4 Wall of Shards
+1 Benevolent Offering
+1 Armistice
+3 Condemn
+4 Swords to Plowshares
+3 Oust
+2 Nature's Claim
+2 Devour Flesh
+[sideboard]
