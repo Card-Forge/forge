@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Human Knight
 PT:2/2
 K:Flanking
-A:AB$ Pump | Cost$ 1 R | KW$ HIDDEN CantBeBlockedByAmount LT2 | SpellDescription$ CARDNAME can't be blocked except by two or more creatures this turn.
+A:AB$ Pump | Cost$ 1 R | KW$ Menace | SpellDescription$ CARDNAME gains menace until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_spear_askari.jpg
-Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{R}: Searing Spear Askari can't be blocked except by two or more creatures this turn.
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{R}: Searing Spear Askari gains menace until end of turn.

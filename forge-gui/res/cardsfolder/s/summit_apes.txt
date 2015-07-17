@@ -2,8 +2,8 @@ Name:Summit Apes
 ManaCost:3 G
 Types:Creature Ape
 PT:5/2
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CantBeBlockedByAmount LT2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a Mountain, CARDNAME can't be blocked except by two or more creatures.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a Mountain, CARDNAME has menace.
 SVar:X:Count$Valid Mountain.YouCtrl
 SVar:BuffedBy:Mountain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summit_apes.jpg
-Oracle:As long as you control a Mountain, Summit Apes can't be blocked except by two or more creatures.
+Oracle:As long as you control a Mountain, Summit Apes has menace.

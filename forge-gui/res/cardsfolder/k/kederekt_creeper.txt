@@ -3,6 +3,6 @@ ManaCost:U B R
 Types:Creature Horror
 PT:2/3
 K:Deathtouch
-K:CantBeBlockedByAmount LT2
+K:Menace
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kederekt_creeper.jpg
-Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nKederekt Creeper can't be blocked except by two or more creatures.
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nMenace

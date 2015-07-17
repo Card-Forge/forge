@@ -5,8 +5,8 @@ PT:7/4
 K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT7 | References$ X | Description$ As long as your devotion to red and white is less than seven, CARDNAME isn't a creature.
 SVar:X:Count$DevotionDual.Red.White
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CantBeBlockedByAmount LT2 | Description$ Creatures you control can't be blocked except by two or more creatures.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Description$ Creatures you control have menace.
 S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddHiddenKeyword$ Prevent all damage that would be dealt to CARDNAME. | Description$ Prevent all damage that would be dealt to attacking creatures you control.
 SVar:BuffedBy:Permanent.White,Permanent.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iroas_god_of_victory.jpg
-Oracle:Indestructible\nAs long as your devotion to red and white is less than seven, Iroas isn't a creature.\nCreatures you control can't be blocked except by two or more creatures.\nPrevent all damage that would be dealt to attacking creatures you control.
+Oracle:Indestructible\nAs long as your devotion to red and white is less than seven, Iroas isn't a creature.\nCreatures you control have menace.\nPrevent all damage that would be dealt to attacking creatures you control.

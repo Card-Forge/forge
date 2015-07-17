@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | NumDef$ +0 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
-K:CantBeBlockedByAmount LT2
+K:Menace
 K:CARDNAME can block an additional creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/two_headed_dragon.jpg
-Oracle:Flying\n{1}{R}: Two-Headed Dragon gets +2/+0 until end of turn.\nTwo-Headed Dragon can't be blocked except by two or more creatures.\nTwo-Headed Dragon can block an additional creature.
+Oracle:Flying,menace\n{1}{R}: Two-Headed Dragon gets +2/+0 until end of turn.\nTwo-Headed Dragon can block an additional creature.
