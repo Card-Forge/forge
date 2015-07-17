@@ -1429,7 +1429,11 @@ public class ComputerUtil {
         final Card source = sa.getHostCard();
         final Zone zone = source.getZone();
         final Game game = source.getGame();
- 
+
+        if (sa.isTrigger()) {
+        	return true;
+        }
+
         if (zone.getZoneType() == ZoneType.Battlefield) {
             if (predictThreatenedObjects(ai, null).contains(source)) {
                 return true;

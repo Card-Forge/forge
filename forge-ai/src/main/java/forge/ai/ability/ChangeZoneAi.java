@@ -356,7 +356,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // make sure this will actually do something:
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = aiPlayer.getOpponent();
-        if ((tgt != null) && tgt.canTgtPlayer()) {
+        if (tgt != null && tgt.canTgtPlayer()) {
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
@@ -595,7 +595,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            if (!isPreferredTarget(ai, sa, false)) {
+            if (!isPreferredTarget(ai, sa, false, false)) {
                 return false;
             }
         } else {
@@ -658,7 +658,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
         
-        //don't uearth after attacking is possible
+        //don't unearth after attacking is possible
         if (sa.hasParam("Unearth") && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
         	return false;
         }
@@ -696,7 +696,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return true;
         }
 
-        return isPreferredTarget(aiPlayer, sa, false);
+        return isPreferredTarget(aiPlayer, sa, false, true);
     }
 
     /**
@@ -712,7 +712,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean isPreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    private static boolean isPreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory, boolean immediately) {
         final Card source = sa.getHostCard();
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
@@ -758,6 +758,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             return false;
         }
+        
+        immediately |= ComputerUtil.playImmediately(ai, sa);
 
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
@@ -870,11 +872,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         } else if (origin.equals(ZoneType.Graveyard)) {
         	if (destination.equals(ZoneType.Exile) || destination.equals(ZoneType.Library)) {
                 // Don't use these abilities before main 2 if possible
-                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+                if (!immediately && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                         && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
                     return false;
                 }
-                if ((!game.getPhaseHandler().getNextTurn().equals(ai)
+                if (!immediately && (!game.getPhaseHandler().getNextTurn().equals(ai)
                             || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                         && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
                         && !ComputerUtil.activateForCost(sa, ai)) {
@@ -910,12 +912,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (destination.equals(ZoneType.Exile) || origin.equals(ZoneType.Battlefield)) {
 
             // don't rush bouncing stuff when not going to attack
-            if (!sa.isTrigger() && sa.getPayCosts() != null
+            if (!immediately && sa.getPayCosts() != null
                     && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                     && game.getPhaseHandler().isPlayerTurn(ai)
                     && ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }
+
             list = CardLists.filterControlledBy(list, ai.getOpponents());
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
@@ -962,8 +965,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     } else {
                         choice = mostExpensive;
                     }
+                    
                     //option to hold removal instead only applies for single targeted removal
-                    if (!sa.isTrigger() && tgt.getMaxTargets(source, sa) == 1) {
+                    if (!immediately && tgt.getMaxTargets(source, sa) == 1) {
                         if (!ComputerUtilCard.useRemovalNow(sa, choice, 0, destination)) {
                             return false;
                         }
@@ -1147,7 +1151,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if ((sa.getTargets().getNumTargeted() == 0) || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+                if (sa.getTargets().getNumTargeted() == 0 || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                     sa.resetTargets();
                     return false;
                 } else {
@@ -1192,7 +1196,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
             }
-        } else if (isPreferredTarget(ai, sa, mandatory)) {
+        } else if (isPreferredTarget(ai, sa, mandatory, true)) {
             // do nothing
         } else if (!isUnpreferredTarget(ai, sa, mandatory)) {
             return false;
