@@ -2,7 +2,7 @@ Name:Kithkin Mourncaller
 ManaCost:2 G
 Types:Creature Kithkin Scout
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Kithkin+attacking+YouOwn,Creature.Elf+attacking+YouOwn | Execute$ TrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever an attacking Kithkin or Elf is put into your graveyard from the battlefield, you may draw a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Kithkin+attackingLKI+YouOwn,Creature.Elf+attackingLKI+YouOwn | Execute$ TrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever an attacking Kithkin or Elf is put into your graveyard from the battlefield, you may draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_mourncaller.jpg

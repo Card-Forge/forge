@@ -243,7 +243,10 @@ public class Combat {
         return Lists.newArrayList(attackedByBands.values());
     } 
     
-    public final boolean isAttacking(final Card c) {
+    /**
+     * Checks if a card is attacking, returns true if the card was attacking when it left the battlefield
+     */
+    public final boolean isLKIAttacking(final Card c) {
         AttackingBand ab = getBandOfAttacker(c);
         return ab != null;
     }
@@ -253,6 +256,18 @@ public class Combat {
         for (Entry<GameEntity, AttackingBand> ee : attackedByBands.entries()) {
             if (ee.getValue() == ab) {
                 return ee.getKey() == defender;
+            }
+        }
+        return false;
+    }
+  
+    /**
+     * Checks if a card is currently attacking, returns false if the card is not currently attacking, even if its LKI was.
+     */
+    public final boolean isAttacking(Card card) {
+        for (AttackingBand ab : attackedByBands.values()) {
+            if (ab.contains(card)) {
+                return true;
             }
         }
         return false;

@@ -660,18 +660,13 @@ public class CombatUtil {
         // if a creature does not block but should, return false
         for (final Card blocker : defendersArmy) {
             if (blocker.getMustBlockCards() != null) {
-                final int mustBlockAmt = blocker.getMustBlockCards().size();
-                final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
-                final CardCollection remainingBlockables = new CardCollection();
-                for (final Card attacker : attackers) {
-                    if (!blockedSoFar.contains(attacker) && CombatUtil.canBlock(attacker, blocker)) {
-                        remainingBlockables.add(attacker);
-                    }
-                }
-                boolean canBlockAnother = CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar);
-                if (canBlockAnother && mustBlockAmt > blockedSoFar.size() && remainingBlockables.size() > 0) {
-                    return String.format("%s must still block %s.", blocker, Lang.joinHomogenous(remainingBlockables));
-                }
+               final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
+               for (Card cardToBeBlocked : blocker.getMustBlockCards()) {
+                 if (!blockedSoFar.contains(cardToBeBlocked) && CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar) 
+                         && combat.isAttacking(cardToBeBlocked) && CombatUtil.canBlock(cardToBeBlocked, blocker)) {
+                     return String.format("%s must still block %s.", blocker, cardToBeBlocked);
+                 }
+               } 
             }
             // lure effects
             if (!blockers.contains(blocker) && CombatUtil.mustBlockAnAttacker(blocker, combat)) {
