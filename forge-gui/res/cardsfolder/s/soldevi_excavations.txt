@@ -2,7 +2,7 @@ Name:Soldevi Excavations
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 U | SpellDescription$ Add {1}{U} to your mana pool.
-A:AB$ Dig | Cost$ 1 T | DigNum$ 1 | DestinationZone$ Library | Optional$ True | LibraryPosition$ -1 | LibraryPosition2$ 0 | SpellDescription$ Look at the top card of your library. You may put that card on the bottom of your library.
+A:AB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice an untapped Island instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
 SVar:PayBeforeETB:AB$ Sacrifice | Cost$ 0 | SacValid$ Island.untapped | Defined$ You | RememberSacrificed$ True | SubAbility$ MoveToGraveyard
 SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ MoveToBattlefield

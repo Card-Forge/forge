@@ -1,7 +1,7 @@
 Name:Opt
 ManaCost:U
 Types:Instant
-A:SP$ Dig | Cost$ U | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ -1 | Optional$ True | LibraryPosition2$ 0 | SubAbility$ DBDraw | SpellDescription$ Look at the top card of your library. You may put that card on the bottom of your library. Draw a card.
+A:AB$ Scry | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 1. Draw a card.
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opt.jpg
