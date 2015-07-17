@@ -181,14 +181,15 @@ public class PumpAi extends PumpAiBase {
 
                     return true;
                 }
-                if (!card.getController().isOpponentOf(ai) && ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords)) {
+                if (!card.getController().isOpponentOf(ai) 
+                        && ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
                     return true;
                 }
             }
             return false;
         }
         //Targeted
-        if (!pumpTgtAI(ai, sa, defense, attack, false)) {
+        if (!pumpTgtAI(ai, sa, defense, attack, false, false)) {
             return false;
         }
 
@@ -258,13 +259,16 @@ public class PumpAi extends PumpAiBase {
         return false;
     }
     
-    private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
+    private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory, 
+    		boolean immediately) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
+        
+        immediately |= ComputerUtil.playImmediately(ai, sa);
 
         if (!mandatory
-                && !sa.isTrigger()
+                && !immediately
                 && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
@@ -310,7 +314,7 @@ public class PumpAi extends PumpAiBase {
                 ZoneType zone = tgt.getZone().get(0);
                 list = new CardCollection(game.getCardsIn(zone));
             } else {
-                list = getPumpCreatures(ai, sa, defense, attack, keywords);
+                list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
             }
             if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
@@ -366,7 +370,7 @@ public class PumpAi extends PumpAiBase {
 
             t = ComputerUtilCard.getBestAI(list);
             //option to hold removal instead only applies for single targeted removal
-            if (!sa.isTrigger() && tgt.getMaxTargets(source, sa) == 1 && sa.isCurse() && defense < 0) {
+            if (!immediately && tgt.getMaxTargets(source, sa) == 1 && sa.isCurse() && defense < 0) {
                 if (!ComputerUtilCard.useRemovalNow(sa, t, -defense, ZoneType.Graveyard) 
                         && !ComputerUtil.activateForCost(sa, ai)) {
                     return false;
@@ -487,7 +491,7 @@ public class PumpAi extends PumpAiBase {
                 return true;
             }
         } else {
-            return pumpTgtAI(ai, sa, defense, attack, mandatory);
+            return pumpTgtAI(ai, sa, defense, attack, mandatory, true);
         }
 
         return true;
@@ -533,7 +537,7 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             //Targeted
-            if (!pumpTgtAI(ai, sa, defense, attack, false)) {
+            if (!pumpTgtAI(ai, sa, defense, attack, false, true)) {
                 return false;
             }
         }

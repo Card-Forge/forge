@@ -952,9 +952,8 @@ public class ComputerUtilCard {
      * @param keywords additional keywords from sa (only for Pump)
      * @return
      */
-    public static boolean shouldPumpCard(final Player ai,
-            final SpellAbility sa, final Card c, final int toughness,
-            final int power, final List<String> keywords) {
+    public static boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int toughness,
+            final int power, final List<String> keywords, boolean immediately) {
         final Game game = ai.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final Combat combat = phase.getCombat();
@@ -989,7 +988,7 @@ public class ComputerUtilCard {
         }
 
         // buff attacker/blocker using triggered pump
-        if (sa.isTrigger() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (immediately && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             if (phase.isPlayerTurn(ai)) {
                 if (CombatUtil.canAttack(c)) {
                     return true;

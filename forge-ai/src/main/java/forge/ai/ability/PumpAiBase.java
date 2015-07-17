@@ -428,12 +428,13 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * 
      * @return a {@link forge.CardList} object.
      */
-    protected CardCollection getPumpCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
+    protected CardCollection getPumpCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack,
+            final List<String> keywords, final boolean immediately) {
         CardCollection list = ai.getCreaturesInPlay();
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return ComputerUtilCard.shouldPumpCard(ai, sa, c, defense, attack, keywords);
+                return ComputerUtilCard.shouldPumpCard(ai, sa, c, defense, attack, keywords, immediately);
             }
         });
         return list;

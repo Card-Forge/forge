@@ -121,7 +121,7 @@ public class PumpAllAi extends PumpAiBase {
             return true;
         } // end Curse
 
-        return !CardLists.getValidCards(getPumpCreatures(ai, sa, defense, power, keywords), valid, source.getController(), source).isEmpty();
+        return !CardLists.getValidCards(getPumpCreatures(ai, sa, defense, power, keywords, false), valid, source.getController(), source).isEmpty();
     } // pumpAllCanPlayAI()
 
     @Override
