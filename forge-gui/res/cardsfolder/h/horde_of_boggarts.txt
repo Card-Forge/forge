@@ -2,10 +2,10 @@ Name:Horde of Boggarts
 ManaCost:3 R
 Types:Creature Goblin
 PT:*/*
-K:CantBeBlockedByAmount LT2
+K:Menace
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of red permanents you control.
 SVar:X:Count$Valid Permanent.Red+YouCtrl
 SVar:BuffedBy:Permanent.Red
 SVar:NoZeroToughnessAI:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horde_of_boggarts.jpg
-Oracle:Horde of Boggarts's power and toughness are each equal to the number of red permanents you control.\nHorde of Boggarts can't be blocked except by two or more creatures.
+Oracle:Horde of Boggarts's power and toughness are each equal to the number of red permanents you control.\nMenace

@@ -2,8 +2,7 @@ Name:Blood-Chin Rager
 ManaCost:1 B
 Types:Creature Human Warrior
 PT:2/2
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, each Warrior creature you control can't be blocked this turn except by two or more creatures.
-SVar:TrigPump:DB$ Effect | StaticAbilities$ Blocking
-SVar:Blocking:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.Warrior+YouCtrl | AddHiddenKeyword$ CantBeBlockedByAmount LT2 | Description$ Warrior creatures you control can't be blocked this turn except by two or more creatures.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, Warrior creatures you control gain menace.
+SVar:TrigPump:DB$ PumpAll | Cost$ 3 R R | ValidCards$ Creature.Warrior+YouCtrl | KW$ Menace
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_chin_rager.jpg
-Oracle:Whenever Blood-Chin Rager attacks, each Warrior creature you control can't be blocked this turn except by two or more creatures.
+Oracle:Whenever Blood-Chin Rager attacks, Warrior creatures you control gains menace.

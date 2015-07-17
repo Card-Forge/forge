@@ -2,6 +2,6 @@ Name:Gruul Nodorog
 ManaCost:4 G G
 Types:Creature Beast
 PT:4/4
-A:AB$ Pump | Cost$ R | KW$ HIDDEN CantBeBlockedByAmount LT2 | SpellDescription$ CARDNAME can't be blocked this turn except by two or more creatures.
+A:AB$ Pump | Cost$ R | KW$ Menace | SpellDescription$ CARDNAME gains menace until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_nodorog.jpg
-Oracle:{R}: Gruul Nodorog can't be blocked this turn except by two or more creatures.
+Oracle:{R}: Gruul Nodorog gains menace until end of turn.

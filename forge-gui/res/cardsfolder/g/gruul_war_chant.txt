@@ -1,7 +1,7 @@
 Name:Gruul War Chant
 ManaCost:2 R G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+attacking | AddPower$ 1 | AddHiddenKeyword$ CantBeBlockedByAmount LT2 | Description$ Each attacking creature you control gets +1/+0 and can't be blocked except by two or more creatures.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+attacking | AddPower$ 1 | AddKeyword$ Menace | Description$ Attacking creatures you control gets +1/+0 and have menace.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_war_chant.jpg
-Oracle:Each attacking creature you control gets +1/+0 and can't be blocked except by two or more creatures.
+Oracle:Attacking creatures you control gets +1/+0 and have menace.

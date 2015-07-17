@@ -3,6 +3,6 @@ ManaCost:R
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CantBeBlockedByAmount LT2 | Description$ Enchanted creature can't be blocked except by two or more creatures.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Menace | Description$ Enchanted creature can't be blocked except by two or more creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imposing_visage.jpg
-Oracle:Enchant creature\nEnchanted creature can't be blocked except by two or more creatures.
+Oracle:Enchant creature\nEnchanted creature has menace.

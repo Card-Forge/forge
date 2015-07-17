@@ -1,8 +1,8 @@
 Name:Goblin War Drums
 ManaCost:2 R
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CantBeBlockedByAmount LT2 | Description$ Each creature you control can't be blocked except by two or more creatures.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Description$ Creatures you control have menace.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_drums.jpg
-Oracle:Each creature you control can't be blocked except by two or more creatures.
+Oracle:Creatures you control have menace.
