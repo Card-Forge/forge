@@ -1442,13 +1442,28 @@ public class ComputerUtil {
         return false;
     }
 
-    // Computer mulligans if there are no cards with converted mana cost of
-    // 0 in its hand
+    // Computer mulligans if there are no cards with converted mana cost of 0 in its hand
     public static boolean wantMulligan(Player ai) {
         final CardCollectionView handList = ai.getCardsIn(ZoneType.Hand);
-        final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        return (handList.size() > aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) && hasLittleCmc0Cards;
+        
+        // don't mulligan when already too low
+        if (handList.size() <= aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) {
+        	return false;
+        }
+        
+        final CardCollectionView lands = CardLists.filter(handList, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                if (c.getManaCost().getCMC() > 0 || c.hasSVar("NeedsToPlay") 
+                		|| (!c.getType().isLand() && !c.getType().isArtifact())) {
+                    return false;
+                }
+                return true;
+            }
+        });
+
+        return lands.size() < 2 ;
     }
     
     public static CardCollection getPartialParisCandidates(Player ai) {
