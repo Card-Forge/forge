@@ -953,6 +953,11 @@ public class ComputerUtilCard {
      * @return
      */
     public static boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int toughness,
+                                         final int power, final List<String> keywords) {
+        return shouldPumpCard(ai, sa, c, toughness, power, keywords, false);
+    }
+
+    public static boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int toughness,
             final int power, final List<String> keywords, boolean immediately) {
         final Game game = ai.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
