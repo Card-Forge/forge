@@ -119,19 +119,19 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
     };
 
-    public PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index) {
-        this(c, edition0, rare, index, false);
+    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0) {
+        this(rules0, edition0, rarity0, artIndex0, false);
     }
-
-    public PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
-        if ( edition0 == null || c == null || rare == null )
+    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0, final boolean foil0) {
+        if (rules0 == null || edition0 == null || rarity0 == null) {
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
-        this.rules = c;
-        this.name = c.getName();
-        this.edition = edition0;
-        this.artIndex = index;
-        this.foil = foil;
-        this.rarity = rare;
+        }
+        rules = rules0;
+        name = rules0.getName();
+        edition = edition0;
+        artIndex = artIndex0;
+        foil = foil0;
+        rarity = rarity0;
     }
 
     // Want this class to be a key for HashTable
