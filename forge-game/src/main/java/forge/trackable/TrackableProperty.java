@@ -135,6 +135,7 @@ public enum TrackableProperty {
     BandsWithPlannedBlockers(TrackableTypes.CardViewCollectionType, false),
 
     //Game
+    Players(TrackableTypes.PlayerViewCollectionType),
     GameType(TrackableTypes.EnumType(GameType.class)),
     Title(TrackableTypes.StringType),
     Turn(TrackableTypes.IntegerType),
@@ -164,6 +165,11 @@ public enum TrackableProperty {
 
     public boolean respectFreeze() {
         return respectFreeze;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> void updateObjLookup(T newObj) {
+        ((TrackableType<T>)type).updateObjLookup(newObj);
     }
 
     public void copyChangedProps(TrackableObject from, TrackableObject to) {

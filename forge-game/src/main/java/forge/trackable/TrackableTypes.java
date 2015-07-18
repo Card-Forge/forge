@@ -24,6 +24,8 @@ public class TrackableTypes {
         private TrackableType() {
         }
 
+        protected void updateObjLookup(T newObj) {
+        }
         protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
             to.set(prop, from.get(prop));
         }
@@ -40,6 +42,13 @@ public class TrackableTypes {
 
         public void clearLookupDictionary() {
             objLookup.clear();
+        }
+
+        @Override
+        protected void updateObjLookup(T newObj) {
+            if (!objLookup.containsKey(newObj.getId())) {
+                objLookup.put(newObj.getId(), newObj);
+            }
         }
 
         @Override
@@ -64,6 +73,15 @@ public class TrackableTypes {
 
         private TrackableCollectionType(TrackableObjectType<T> itemType0) {
             itemType = itemType0;
+        }
+
+        @Override
+        protected void updateObjLookup(TrackableCollection<T> newCollection) {
+            for (T newObj : newCollection) {
+                if (newObj != null) {
+                    itemType.updateObjLookup(newObj);
+                }
+            }
         }
 
         @Override

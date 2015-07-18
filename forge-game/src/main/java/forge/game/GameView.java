@@ -18,7 +18,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.MagicStack;
-import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.collect.FCollectionView;
@@ -26,7 +25,6 @@ import forge.util.collect.FCollectionView;
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;
 
-    private final TrackableCollection<PlayerView> players;
     private CombatView combatView;
     private final transient Game game; //TODO: Remove this when possible before network support added
 
@@ -45,11 +43,11 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.GameLog, game.getGameLog());
         set(TrackableProperty.NumPlayedGamesInMatch, game.getMatch().getPlayedGames().size());
 
-        players = PlayerView.getCollection(game.getPlayers());
+        set(TrackableProperty.Players, PlayerView.getCollection(game.getPlayers()));
     }
 
     public FCollectionView<PlayerView> getPlayers() {
-        return players;
+        return get(TrackableProperty.Players);
     }
 
     public String getTitle() {
