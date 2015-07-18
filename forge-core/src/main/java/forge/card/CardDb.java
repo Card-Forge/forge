@@ -175,6 +175,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     private void addCard(PaperCard paperCard) {
         allCardsByName.put(paperCard.getName(), paperCard);
+
+        if (paperCard.getRules().getSplitType() == CardSplitType.None) { return; }
+
+        //allow looking up card by the name of other faces
+        allCardsByName.put(paperCard.getRules().getOtherPart().getName(), paperCard);
+        if (paperCard.getRules().getSplitType() == CardSplitType.Split) {
+            //also include main part for split cards
+            allCardsByName.put(paperCard.getRules().getMainPart().getName(), paperCard);
+        }
     }
 
     private void reIndex() {
