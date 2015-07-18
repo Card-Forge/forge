@@ -110,10 +110,6 @@ public abstract class SpellAbilityAi {
             return false;
         }
         
-        if (sa.isTrigger()) {
-            return true;
-        }
-        
         if (ComputerUtil.playImmediately(ai, sa)) {
             return true;
         }
