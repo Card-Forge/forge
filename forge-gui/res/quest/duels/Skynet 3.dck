@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Skynet 3
+Title=Skynet
+Difficulty=hard
+Description=WU March of the Machines deck
+Icon=Skynet.jpg
+Deck Type=constructed
+[main]
+4 Flooded Strand
+5 Island
+1 Mishra's Workshop
+3 Nimbus Maze
+3 Plains
+4 Tundra
+1 Sol Ring
+1 Akroma's Memorial
+2 Cumber Stone
+2 Sun Droplet
+1 Defense Grid
+1 Darksteel Axe
+1 Darksteel Brute
+1 Darksteel Ingot
+1 Dolmen Gate
+3 Fieldmist Borderpost
+3 Golem Foundry
+2 Norn's Annex
+2 Spear of Heliod
+1 Talisman of Progress
+1 Unwinding Clock
+1 Etched Champion
+3 Etherium Sculptor
+2 Master of Etherium
+4 March of the Machines
+1 Ancestral Recall
+2 Idyllic Tutor
+3 Thoughtcast
+1 Time Walk
+[sideboard]
