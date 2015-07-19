@@ -1468,8 +1468,8 @@ public class ComputerUtil {
         });
         
         // mulligan when at the threshold, with a no land hand
-        if (handList.size() == aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD) && lands.isEmpty()) {
-        	return true;
+        if (handList.size() == aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD) && !lands.isEmpty()) {
+        	return false;
         }
 
         return lands.size() < 2 ;
