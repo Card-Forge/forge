@@ -11,6 +11,8 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -186,6 +188,29 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         list = CardLists.getNotType(list, type); // Filter out Basic Lands that have the same type as the changing type
+        
+        // Don't target fetchlands
+        list = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                //Check for cards that can be sacrificed in response
+                for (final SpellAbility ability : c.getAllSpellAbilities()) {
+                    if (ability.isAbility()) {
+                        final Cost cost = ability.getPayCosts();
+                        for (final CostPart part : cost.getCostParts()) {
+                            if (!(part instanceof CostSacrifice)) {
+                                continue;
+                            }
+                            CostSacrifice sacCost = (CostSacrifice) part;
+                            if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController())) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+        });
 
         final Card c = ComputerUtilCard.getBestAI(list);
 
