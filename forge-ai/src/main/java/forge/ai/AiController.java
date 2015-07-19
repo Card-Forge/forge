@@ -711,6 +711,11 @@ public class AiController {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa instanceof Spell) {
+            
+            if (ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife() 
+            		&& !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+                return AiPlayDecision.CurseEffects;
+            }
             return canPlaySpellBasic(card);
         }
         return AiPlayDecision.WillPlay;
@@ -1009,6 +1014,13 @@ public class AiController {
 
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
         final Card card = spell.getHostCard();
+        
+        int damage = ComputerUtil.getDamageForPlaying(player, spell);
+        
+        if (damage >= player.getLife() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+            return AiPlayDecision.CurseEffects;
+        }
+
         if (spell instanceof SpellApiBased) {
             boolean chance = false;
             if (withoutPayingManaCost) {
@@ -1081,7 +1093,7 @@ public class AiController {
             if (!checkETBEffects(card, spell, null)) {
                 return AiPlayDecision.BadEtbEffects;
             }
-            if (ComputerUtil.damageFromETB(player, card) >= player.getLife() && !player.cantLoseForZeroOrLessLife() 
+            if (damage + ComputerUtil.getDamageFromETB(player, card) >= player.getLife() && !player.cantLoseForZeroOrLessLife() 
                     && player.canLoseLife()) {
                 return AiPlayDecision.BadEtbEffects;
             }
@@ -1097,7 +1109,7 @@ public class AiController {
             CardCollection landsWannaPlay = getLandsToPlay();
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
                 Card land = chooseBestLandToPlay(landsWannaPlay);
-                if (ComputerUtil.damageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
+                if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
                         || player.cantLoseForZeroOrLessLife() ) {
                     game.PLAY_LAND_SURROGATE.setHostCard(land);
                     final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
