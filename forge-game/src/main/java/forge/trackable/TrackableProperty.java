@@ -32,7 +32,7 @@ public enum TrackableProperty {
     AssignedDamage(TrackableTypes.IntegerType),
     ShieldCount(TrackableTypes.IntegerType),
     ChosenType(TrackableTypes.StringType),
-    ChosenColors(TrackableTypes.CardViewCollectionType),
+    ChosenColors(TrackableTypes.StringListType),
     ChosenPlayer(TrackableTypes.PlayerViewType),
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
     Remembered(TrackableTypes.StringType),

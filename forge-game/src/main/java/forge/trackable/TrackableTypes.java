@@ -1,7 +1,9 @@
 package forge.trackable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -56,11 +58,9 @@ public class TrackableTypes {
 
         @Override
         protected void updateObjLookup(T newObj) {
-            if (newObj != null) {
-                if (!objLookup.containsKey(newObj.getId())) {
-                    objLookup.put(newObj.getId(), newObj);
-                    newObj.updateObjLookup();
-                }
+            if (newObj != null && !objLookup.containsKey(newObj.getId())) {
+                objLookup.put(newObj.getId(), newObj);
+                newObj.updateObjLookup();
             }
         }
 
@@ -428,6 +428,33 @@ public class TrackableTypes {
         @Override
         public void serialize(TrackableSerializer ts, ColorSet value) {
             ts.write(value.getColor());
+        }
+    };
+    public static final TrackableType<List<String>> StringListType = new TrackableType<List<String>>() {
+        @Override
+        public List<String> getDefaultValue() {
+            return null;
+        }
+
+        @Override
+        public List<String> deserialize(TrackableDeserializer td, List<String> oldValue) {
+            int size = td.readInt();
+            if (size > 0) {
+                List<String> set = new ArrayList<String>();
+                for (int i = 0; i < size; i++) {
+                    set.add(td.readString());
+                }
+                return set;
+            }
+            return null;
+        }
+
+        @Override
+        public void serialize(TrackableSerializer ts, List<String> value) {
+            ts.write(value.size());
+            for (String s : value) {
+                ts.write(s);
+            }
         }
     };
     public static final TrackableType<Set<String>> StringSetType = new TrackableType<Set<String>>() {
