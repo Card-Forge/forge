@@ -1452,7 +1452,7 @@ public class ComputerUtil {
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         
         // don't mulligan when already too low
-        if (handList.size() <= aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) {
+        if (handList.size() < aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) {
         	return false;
         }
         
@@ -1466,6 +1466,11 @@ public class ComputerUtil {
                 return true;
             }
         });
+        
+        // mulligan when at the threshold, with a no land hand
+        if (handList.size() == aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD) && lands.isEmpty()) {
+        	return true;
+        }
 
         return lands.size() < 2 ;
     }
