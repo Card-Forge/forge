@@ -1085,7 +1085,8 @@ public class ComputerUtilCard {
             }
             if (survivor) {
                 for (Card o : opposing) {
-                    if (!ComputerUtilCombat.combatantWouldBeDestroyed(opp, o, combat)) {
+                    if (!ComputerUtilCombat.combatantWouldBeDestroyed(opp, o, combat) 
+                    		&& !(o.hasSVar("SacMe") && Integer.parseInt(o.getSVar("SacMe")) > 2)) {
                         if (isAttacking) {
                             if (ComputerUtilCombat.blockerWouldBeDestroyed(opp, o, pumpedCombat)) {
                                 return true;

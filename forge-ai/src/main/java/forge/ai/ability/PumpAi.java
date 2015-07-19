@@ -153,15 +153,13 @@ public class PumpAi extends PumpAiBase {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
         }
 
-        if ((numDefense.contains("X") && defense == 0)
-                || (numAttack.contains("X") && attack == 0)) {
+        if ((numDefense.contains("X") && defense == 0) || (numAttack.contains("X") && attack == 0)) {
             return false;
         }
 
         //Untargeted
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(),
-                    sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
             if (cards.isEmpty()) {
                 return false;
