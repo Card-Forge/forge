@@ -56,9 +56,11 @@ public class TrackableTypes {
 
         @Override
         protected void updateObjLookup(T newObj) {
-            if (!objLookup.containsKey(newObj.getId())) {
-                objLookup.put(newObj.getId(), newObj);
-                newObj.updateObjLookup();
+            if (newObj != null) {
+                if (!objLookup.containsKey(newObj.getId())) {
+                    objLookup.put(newObj.getId(), newObj);
+                    newObj.updateObjLookup();
+                }
             }
         }
 
@@ -88,9 +90,11 @@ public class TrackableTypes {
 
         @Override
         protected void updateObjLookup(TrackableCollection<T> newCollection) {
-            for (T newObj : newCollection) {
-                if (newObj != null) {
-                    itemType.updateObjLookup(newObj);
+            if (newCollection != null) {
+                for (T newObj : newCollection) {
+                    if (newObj != null) {
+                        itemType.updateObjLookup(newObj);
+                    }
                 }
             }
         }
