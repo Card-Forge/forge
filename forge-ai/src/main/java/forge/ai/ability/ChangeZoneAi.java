@@ -738,6 +738,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (source.isInZone(ZoneType.Hand)) {
             list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
         }
+        if (sa.isSpell()) {
+            list.remove(source); // spells can't target their own source, because it's actually in the stack zone
+        }
         //System.out.println("isPreferredTarget " + list);
         if (sa.hasParam("AttachedTo")) {
             //System.out.println("isPreferredTarget att " + list);
