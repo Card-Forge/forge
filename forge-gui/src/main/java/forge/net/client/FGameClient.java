@@ -111,7 +111,7 @@ public class FGameClient implements IToServer {
 
     void setGameControllers(final Iterable<PlayerView> myPlayers) {
         for (final PlayerView p : myPlayers) {
-            clientGui.setGameController(p, new NetGameController(this));
+            clientGui.setOriginalGameController(p, new NetGameController(this));
         }
     }
 

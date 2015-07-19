@@ -40,6 +40,16 @@ public class TrackableTypes {
         private TrackableObjectType() {
         }
 
+        public T lookup(T from) {
+            if (from == null) { return null; }
+            T to = objLookup.get(from.getId());
+            if (to == null) {
+                objLookup.put(from.getId(), from);
+                return from;
+            }
+            return to;
+        }
+
         public void clearLookupDictionary() {
             objLookup.clear();
         }

@@ -52,11 +52,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return currentPlayer;
     }
     @Override
-    public final void setCurrentPlayer(final PlayerView player) {
+    public final void setCurrentPlayer(PlayerView player) {
+        player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
+
         if (!gameControllers.containsKey(player)) {
             throw new IllegalArgumentException();
         }
-        this.currentPlayer = player;
+
+        currentPlayer = player;
         updateCurrentPlayer(player);
     }
     protected abstract void updateCurrentPlayer(PlayerView player);
@@ -99,10 +102,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void setOriginalGameController(final PlayerView player, final IGameController gameController) {
+    public void setOriginalGameController(PlayerView player, final IGameController gameController) {
         if (player == null || gameController == null) {
             throw new IllegalArgumentException();
         }
+
+        player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
         final boolean doSetCurrentPlayer = originalGameControllers.isEmpty();
         originalGameControllers.put(player, gameController);
@@ -113,15 +118,18 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void setGameController(final PlayerView player, final IGameController gameController) {
+    public void setGameController(PlayerView player, final IGameController gameController) {
         if (player == null) {
             throw new IllegalArgumentException();
         }
 
+        player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
+
         if (gameController == null) {
             if (originalGameControllers.containsKey(player)) {
                 gameControllers.put(player, originalGameControllers.get(player));
-            } else {
+            }
+            else {
                 gameControllers.remove(player);
                 autoPassUntilEndOfTurn.remove(player);
                 final PlayerView currentPlayer = getCurrentPlayer();
@@ -130,8 +138,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     setCurrentPlayer(Iterables.getFirst(gameControllers.keySet(), null));
                 }
             }
-        } else {
-            this.gameControllers.put(player, gameController);
+        }
+        else {
+            gameControllers.put(player, gameController);
         }
     }
 
