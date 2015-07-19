@@ -27,6 +27,7 @@ import forge.game.player.PlayerView;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
+import forge.trackable.TrackableTypes;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;
@@ -67,6 +68,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void setGameView(final GameView gameView0) {
         if (gameView == null || gameView0 == null) {
+            if (gameView0 != null) {
+                //ensure lookup dictionaries are reset before each game
+                TrackableTypes.CardViewType.clearLookupDictionary();
+                TrackableTypes.PlayerViewType.clearLookupDictionary();
+                TrackableTypes.StackItemViewType.clearLookupDictionary();
+                gameView0.updateObjLookup();
+            }
             gameView = gameView0;
             return;
         }

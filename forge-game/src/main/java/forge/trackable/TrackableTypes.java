@@ -48,6 +48,7 @@ public class TrackableTypes {
         protected void updateObjLookup(T newObj) {
             if (!objLookup.containsKey(newObj.getId())) {
                 objLookup.put(newObj.getId(), newObj);
+                newObj.updateObjLookup();
             }
         }
 

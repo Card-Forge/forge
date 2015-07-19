@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import forge.game.IIdentifiable;
@@ -63,6 +64,12 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         else if (!value.equals(props.put(key, value))) {
             changedProps.add(key);
             key.updateObjLookup(value);
+        }
+    }
+
+    public final void updateObjLookup() {
+        for (final Entry<TrackableProperty, Object> prop : props.entrySet()) {
+            prop.getKey().updateObjLookup(prop.getValue());
         }
     }
 
