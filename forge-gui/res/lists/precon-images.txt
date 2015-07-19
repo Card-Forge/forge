@@ -6,6 +6,7 @@ http://downloads.cardforge.link/images/products/precons/armada.jpg
 http://downloads.cardforge.link/images/products/precons/army_of_entropy.jpg
 http://downloads.cardforge.link/images/products/precons/army_of_justice.jpg
 http://downloads.cardforge.link/images/products/precons/assassin.jpg
+http://downloads.cardforge.link/images/products/precons/assemble_victory.jpg
 http://downloads.cardforge.link/images/products/precons/aura_mastery.jpg
 http://downloads.cardforge.link/images/products/precons/azorius_advance.jpg
 http://downloads.cardforge.link/images/products/precons/azorius_ascendant.jpg
@@ -26,6 +27,7 @@ http://downloads.cardforge.link/images/products/precons/bomber.jpg
 http://downloads.cardforge.link/images/products/precons/boros_battalion.jpg
 http://downloads.cardforge.link/images/products/precons/bound_by_strength.jpg
 http://downloads.cardforge.link/images/products/precons/breath_of_fire.jpg
+http://downloads.cardforge.link/images/products/precons/brave_the_battle.jpg
 http://downloads.cardforge.link/images/products/precons/brute_force.jpg
 http://downloads.cardforge.link/images/products/precons/carnival_of_blood.jpg
 http://downloads.cardforge.link/images/products/precons/cho-mannos_resolve.jpg
@@ -45,6 +47,7 @@ http://downloads.cardforge.link/images/products/precons/deaths_encroach.jpg
 http://downloads.cardforge.link/images/products/precons/deaths_minions.jpg
 http://downloads.cardforge.link/images/products/precons/decay.jpg
 http://downloads.cardforge.link/images/products/precons/deep_freeze.jpg
+http://downloads.cardforge.link/images/products/precons/demonic_deals.jpg
 http://downloads.cardforge.link/images/products/precons/depths_of_power.jpg
 http://downloads.cardforge.link/images/products/precons/devotion_to_darkness.jpg
 http://downloads.cardforge.link/images/products/precons/devouring_skies.jpg
@@ -87,6 +90,7 @@ http://downloads.cardforge.link/images/products/precons/gruul_siege.jpg
 http://downloads.cardforge.link/images/products/precons/gruul_wilding.jpg
 http://downloads.cardforge.link/images/products/precons/heavy_hitters.jpg
 http://downloads.cardforge.link/images/products/precons/hold_the_line.jpg
+http://downloads.cardforge.link/images/products/precons/hunting_pack.jpg
 http://downloads.cardforge.link/images/products/precons/infect_and_defile.jpg
 http://downloads.cardforge.link/images/products/precons/infestation.jpg
 http://downloads.cardforge.link/images/products/precons/into_the_breach.jpg
@@ -178,6 +182,7 @@ http://downloads.cardforge.link/images/products/precons/superabundance.jpg
 http://downloads.cardforge.link/images/products/precons/suspended_sentence.jpg
 http://downloads.cardforge.link/images/products/precons/sweet_revenge.jpg
 http://downloads.cardforge.link/images/products/precons/swift_justice.jpg
+http://downloads.cardforge.link/images/products/precons/take_to_the_sky.jpg
 http://downloads.cardforge.link/images/products/precons/the_adventurers.jpg
 http://downloads.cardforge.link/images/products/precons/the_spikes.jpg
 http://downloads.cardforge.link/images/products/precons/the_swarm.jpg

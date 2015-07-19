@@ -17022,6 +17022,7 @@ forge-gui/res/quest/precons/Armada.dck -text
 forge-gui/res/quest/precons/Army[!!-~]of[!!-~]Entropy.dck -text
 forge-gui/res/quest/precons/Army[!!-~]of[!!-~]Justice.dck -text
 forge-gui/res/quest/precons/Assassin.dck -text
+forge-gui/res/quest/precons/Assemble[!!-~]Victory.dck -text
 forge-gui/res/quest/precons/Aura[!!-~]Mastery.dck -text
 forge-gui/res/quest/precons/Azorius[!!-~]Advance.dck -text
 forge-gui/res/quest/precons/Azorius[!!-~]Ascendant.dck -text
@@ -17040,6 +17041,7 @@ forge-gui/res/quest/precons/Boggart[!!-~]Feast.dck -text
 forge-gui/res/quest/precons/Bomber.dck -text
 forge-gui/res/quest/precons/Boros[!!-~]Battalion.dck -text
 forge-gui/res/quest/precons/Bound[!!-~]by[!!-~]Strength.dck -text
+forge-gui/res/quest/precons/Brave[!!-~]the[!!-~]Battle.dck -text
 forge-gui/res/quest/precons/Breath[!!-~]of[!!-~]Fire.dck -text
 forge-gui/res/quest/precons/Brute[!!-~]Force.dck -text
 forge-gui/res/quest/precons/Carnival[!!-~]of[!!-~]Blood.dck -text
@@ -17063,6 +17065,7 @@ forge-gui/res/quest/precons/Deathly[!!-~]Dominion.dck -text
 forge-gui/res/quest/precons/Deaths[!!-~]Encroach.dck -text
 forge-gui/res/quest/precons/Decay.dck -text
 forge-gui/res/quest/precons/Deep[!!-~]Freeze.dck -text
+forge-gui/res/quest/precons/Demonic[!!-~]Deals.dck -text
 forge-gui/res/quest/precons/Depths[!!-~]of[!!-~]Power.dck -text
 forge-gui/res/quest/precons/Devotion[!!-~]to[!!-~]Darkness.dck -text
 forge-gui/res/quest/precons/Devouring[!!-~]Skies.dck -text
@@ -17112,6 +17115,7 @@ forge-gui/res/quest/precons/Gruul[!!-~]Wilding.dck -text
 forge-gui/res/quest/precons/Heavy[!!-~]Hitters.dck -text
 forge-gui/res/quest/precons/Hit[!!-~]The[!!-~]Ground[!!-~]Running.dck -text
 forge-gui/res/quest/precons/Hold[!!-~]the[!!-~]Line.dck -text
+forge-gui/res/quest/precons/Hunting[!!-~]Pack.dck -text
 forge-gui/res/quest/precons/Infect[!!-~]and[!!-~]Defile.dck -text
 forge-gui/res/quest/precons/Infernal[!!-~]Intervention.dck -text
 forge-gui/res/quest/precons/Infestation.dck -text
@@ -17213,6 +17217,7 @@ forge-gui/res/quest/precons/Surprise[!!-~]Attack.dck -text
 forge-gui/res/quest/precons/Suspended[!!-~]Sentence.dck -text
 forge-gui/res/quest/precons/Sweet[!!-~]Revenge.dck -text
 forge-gui/res/quest/precons/Swift[!!-~]Justice.dck -text
+forge-gui/res/quest/precons/Take[!!-~]to[!!-~]the[!!-~]Sky.dck -text
 forge-gui/res/quest/precons/Temur[!!-~]Avalanche.dck -text
 forge-gui/res/quest/precons/The[!!-~]Adventurers.dck -text
 forge-gui/res/quest/precons/The[!!-~]Spikes.dck -text
