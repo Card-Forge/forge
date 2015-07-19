@@ -581,4 +581,19 @@ public class TrackableTypes {
           //TODO
         }
     };
+    public static final TrackableType<Map<Object, Object>> GenericMapType = new TrackableType<Map<Object, Object>>() {
+        @Override
+        public Map<Object, Object> getDefaultValue() {
+            return null;
+        }
+
+        @Override
+        public Map<Object, Object> deserialize(TrackableDeserializer td, Map<Object, Object> oldValue) {
+            return null; //TODO
+        }
+
+        @Override
+        public void serialize(TrackableSerializer ts, Map<Object, Object> value) {
+        }
+    };
 }

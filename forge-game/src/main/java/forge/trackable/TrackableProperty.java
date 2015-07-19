@@ -127,12 +127,12 @@ public enum TrackableProperty {
     OptionalTrigger(TrackableTypes.BooleanType),
 
     //Combat
-    AttackersWithDefenders(TrackableTypes.CardViewCollectionType, false), //TODO: change out for proper types when serialization needed
-    AttackersWithBlockers(TrackableTypes.CardViewCollectionType, false),
-    BandsWithDefenders(TrackableTypes.CardViewCollectionType, false),
-    BandsWithBlockers(TrackableTypes.CardViewCollectionType, false),
-    AttackersWithPlannedBlockers(TrackableTypes.CardViewCollectionType, false),
-    BandsWithPlannedBlockers(TrackableTypes.CardViewCollectionType, false),
+    AttackersWithDefenders(TrackableTypes.GenericMapType, false),
+    AttackersWithBlockers(TrackableTypes.GenericMapType, false),
+    BandsWithDefenders(TrackableTypes.GenericMapType, false),
+    BandsWithBlockers(TrackableTypes.GenericMapType, false),
+    AttackersWithPlannedBlockers(TrackableTypes.GenericMapType, false),
+    BandsWithPlannedBlockers(TrackableTypes.GenericMapType, false),
 
     //Game
     Players(TrackableTypes.PlayerViewCollectionType),
