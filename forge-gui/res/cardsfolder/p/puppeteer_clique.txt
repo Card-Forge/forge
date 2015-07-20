@@ -6,10 +6,11 @@ K:Flying
 K:Persist
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. At the beginning of your next end step, exile it.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select target creature from an opponent's graveyard | RememberChanged$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | Permanent$ True | SubAbility$ DelTrig
+SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Remembered | Permanent$ True | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ Exile creature at the beginning of your next end step. | SubAbility$ DBCleanup
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | Defined$ DelayTriggerRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:ALWAYS
+SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppeteer_clique.jpg
 Oracle:Flying\nWhen Puppeteer Clique enters the battlefield, put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. At the beginning of your next end step, exile it.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
