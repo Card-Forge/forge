@@ -1,4 +1,4 @@
-Forge Beta: 65-2015 ver 1.5.41
+Forge Beta: 6-5-2015 ver 1.5.41
 
 
 14747 cards in total.
@@ -100,12 +100,10 @@ Akroan Sergeant
 Alchemist's Vial
 Alhammaret, High Arbiter
 Alhammarret's Archive
-Alhammarret's Archive
 Ampryn Tactician
 Anchor to the AEther
 Animist's Awakening
 Anointer of Champions
-Archangel of Tithes
 Archangel of Tithes
 Artificer's Epiphany
 Aspiring Aeronaut
@@ -123,7 +121,6 @@ Chandra's Ignition
 Chandra, Fire of Kaladesh
 Chief of the Foundry
 Citadel Castellan
-Citadel Castellan
 Clash of Wills
 Cleric of the Forward Order
 Conclave Naturalists
@@ -134,6 +131,7 @@ Dark Petition
 Day's Undoing
 Deadbridge Shaman
 Deep-Sea Terror
+Demonic Pact
 Despoiler of Souls
 Disciple of the Ring
 Displacement Wave
@@ -147,12 +145,10 @@ Enthralling Victor
 Erebos's Titan
 Evolutionary Leap
 Exquisite Firecraft
-Exquisite Firecraft
 Eyeblight Assassin
 Eyeblight Massacre
 Faerie Miscreant
 Fetid Imp
-Fiery Impulse
 Fiery Impulse
 Firefiend Elemental
 Flameshadow Conjuring
@@ -256,11 +252,10 @@ Thornbow Archer
 Throwing Knife
 Thunderclap Wyvern
 Topan Freeblade
-Topan Freeblade
+Touch of Moonglove
 Tragic Arrogance
 Undead Servant
 Undercity Troll
-Unholy Hunger
 Unholy Hunger
 Valeron Wardens
 Valeron Wardens
@@ -274,7 +269,6 @@ War Oracle
 Whirler Rogue
 Wild Instincts
 Willbreaker
-Woodland Bellower
 Woodland Bellower
 Zendikar Incarnate
 Zendikar's Roil
