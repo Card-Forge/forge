@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
@@ -20,7 +19,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.5.41-SNAPSHOT</version>
+        <version>1.5.41</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -286,14 +285,10 @@
                                                 <exclude name="res/cardsfolder/**" />
                                             </fileset>
                                         </copy>
-                                        <mkdir
-                                            dir="${project.build.directory}/res/res/cardsfolder" />
-                                        <zip
-                                            destfile="${project.build.directory}/res/res/cardsfolder/cardsfolder.zip"
-                                            basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
-                                        <zip destfile="${project.build.directory}/assets.zip"
-                                            basedir="${project.build.directory}/res" level="1" />
-                                        <delete dir="${project.build.directory}/res"/>
+                                        <mkdir dir="${project.build.directory}/res/res/cardsfolder" />
+                                        <zip destfile="${project.build.directory}/res/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
+                                        <zip destfile="${project.build.directory}/assets.zip" basedir="${project.build.directory}/res" level="1" />
+                                        <delete dir="${project.build.directory}/res" />
                                     </target>
                                 </configuration>
                                 <goals>
@@ -339,20 +334,14 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
-                                        <ftp action="mkdir" password="${cardforge.pass}" server="${cardforge.server}"
-                                            userid="${cardforge.user}" passive="true"
-                                            remotedir="releases/forge/forge-gui-android/${alpha-version}" />
-                                        <ftp password="${cardforge.pass}" server="${cardforge.server}"
-                                            userid="${cardforge.user}" passive="true"
-                                            remotedir="releases/forge/forge-gui-android/${alpha-version}/">
+                                        <ftp action="mkdir" password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="releases/forge/forge-gui-android/${alpha-version}" />
+                                        <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="releases/forge/forge-gui-android/${alpha-version}/">
                                             <fileset dir="${project.build.directory}">
                                                 <include name="${project.build.finalName}-signed-aligned.apk" />
                                                 <include name="assets.zip" />
                                             </fileset>
                                         </ftp>
-                                        <ftp password="${cardforge.pass}" server="${cardforge.server}"
-                                            userid="${cardforge.user}" passive="true"
-                                            remotedir="releases/forge/forge-gui-android/">
+                                        <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="releases/forge/forge-gui-android/">
                                             <fileset dir="${project.build.directory}/classes">
                                                 <include name="version.txt" />
                                             </fileset>
