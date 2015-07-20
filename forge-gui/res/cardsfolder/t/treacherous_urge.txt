@@ -2,9 +2,10 @@ Name:Treacherous Urge
 ManaCost:4 B
 Types:Instant
 A:SP$ ChangeZone | Cost$ 4 B | Origin$ Hand | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Creature | GainControl$ True | SubAbility$ DBPump | RememberChanged$ True | IsCurse$ True | SpellDescription$ Target opponent reveals his or her hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | KW$ Haste | Defined$ Remembered | Permanent$ True | SubAbility$ DelTrig
+SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Remembered | Permanent$ True | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Remembered | TriggerDescription$ CARDNAME - Sacrifice the creature at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
 SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_urge.jpg
 Oracle:Target opponent reveals his or her hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step.
