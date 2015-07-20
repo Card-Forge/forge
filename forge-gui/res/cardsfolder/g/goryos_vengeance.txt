@@ -2,10 +2,11 @@ Name:Goryo's Vengeance
 ManaCost:1 B
 Types:Instant Arcane
 A:SP$ ChangeZone | Cost$ 1 B  | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Legendary+YouCtrl | TgtPrompt$ Select target legendary creature in your graveyard | GainControl$ True | SubAbility$ DBPump | AILogic$ BeforeCombat | SpellDescription$ Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step.
-SVar:DBPump:DB$Pump | KW$ Haste | Defined$ Targeted | Permanent$ True | SubAbility$ DelTrig
+SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Targeted | Permanent$ True | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Targeted | TriggerDescription$ Exile it at the beginning of the next end step. | AILogic$ Always
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
 K:Splice onto Arcane 2 B
 SVar:RemRandomDeck:True
+SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goryos_vengeance.jpg
 Oracle:Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step.\nSplice onto Arcane {2}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

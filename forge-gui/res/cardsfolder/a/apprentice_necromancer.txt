@@ -2,11 +2,11 @@ Name:Apprentice Necromancer
 ManaCost:1 B
 Types:Creature Zombie Wizard
 PT:1/1
-A:AB$ ChangeZone | Cost$ B T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | GainControl$ True | SubAbility$ DBPump | AILogic$ BeforeCombat | SpellDescription$ Return target creature card from your graveyard to the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice it.
-SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Targeted | Permanent$ True | SubAbility$ DelTrig
+A:AB$ ChangeZone | Cost$ B T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | AITgts$ Card.cmcGE5 | TgtPrompt$ Select target creature in your graveyard | GainControl$ True | SubAbility$ DBPump | AILogic$ BeforeCombat | SpellDescription$ Return target creature card from your graveyard to the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice it.
+SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Targeted | sVars$ SneakAttackEOT | Permanent$ True | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ CARDNAME - At the beginning of the next end step, sacrifice it. | SubAbility$ DBCleanup | AILogic$ Always
 SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_necromancer.jpg
 Oracle:{B}, {T}, Sacrifice Apprentice Necromancer: Return target creature card from your graveyard to the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice it.
