@@ -17053,6 +17053,7 @@ forge-gui/res/quest/precons/Cruel[!!-~]Plots.dck -text
 forge-gui/res/quest/precons/Crusher.dck -text
 forge-gui/res/quest/precons/Cunning[!!-~]Plan.dck -text
 forge-gui/res/quest/precons/Custom[!!-~]Creatures.dck -text
+forge-gui/res/quest/precons/Dark[!!-~]Devotion.dck -text
 forge-gui/res/quest/precons/Dark[!!-~]Sacrifice.dck -text
 forge-gui/res/quest/precons/Dead[!!-~]Ahead.dck -text
 forge-gui/res/quest/precons/Deadspread.dck -text
@@ -17147,6 +17148,7 @@ forge-gui/res/quest/precons/Mercenaries.dck -text
 forge-gui/res/quest/precons/Merrow[!!-~]Riverways.dck -text
 forge-gui/res/quest/precons/Metalcraft.dck -text
 forge-gui/res/quest/precons/Migraine.dck -text
+forge-gui/res/quest/precons/Mind[!!-~]Swarm.dck -text
 forge-gui/res/quest/precons/Mirromancy.dck -text
 forge-gui/res/quest/precons/Mob[!!-~]Rule.dck -text
 forge-gui/res/quest/precons/Molimo's[!!-~]Might.dck -text
@@ -17158,6 +17160,7 @@ forge-gui/res/quest/precons/Mysterious[!!-~]Realms.dck -text
 forge-gui/res/quest/precons/Mystical[!!-~]Might.dck -text
 forge-gui/res/quest/precons/Naya[!!-~]Behemoths.dck -text
 forge-gui/res/quest/precons/Naya[!!-~]Domain.dck -text
+forge-gui/res/quest/precons/Ninjutsu.dck -text
 forge-gui/res/quest/precons/Orzhov[!!-~]Oppression.dck -text
 forge-gui/res/quest/precons/Overkill.dck -text
 forge-gui/res/quest/precons/Pantheon's[!!-~]Power.dck -text
@@ -17175,6 +17178,7 @@ forge-gui/res/quest/precons/Radiant's[!!-~]Revenge.dck -text
 forge-gui/res/quest/precons/Rakdos[!!-~]Bloodsport.dck -text
 forge-gui/res/quest/precons/Rakdos[!!-~]Raid.dck -text
 forge-gui/res/quest/precons/Rapid[!!-~]Fire.dck -text
+forge-gui/res/quest/precons/Rat's[!!-~]Nest.dck -text
 forge-gui/res/quest/precons/Ravaging[!!-~]Swarm.dck -text
 forge-gui/res/quest/precons/Rebels[!!-~]Unite.dck -text
 forge-gui/res/quest/precons/Reign[!!-~]of[!!-~]Vampirism.dck -text
@@ -17215,6 +17219,7 @@ forge-gui/res/quest/precons/Sunburst.dck -text
 forge-gui/res/quest/precons/Superabundance.dck -text
 forge-gui/res/quest/precons/Surprise[!!-~]Attack.dck -text
 forge-gui/res/quest/precons/Suspended[!!-~]Sentence.dck -text
+forge-gui/res/quest/precons/Swarm[!!-~]and[!!-~]Slam.dck -text
 forge-gui/res/quest/precons/Sweet[!!-~]Revenge.dck -text
 forge-gui/res/quest/precons/Swift[!!-~]Justice.dck -text
 forge-gui/res/quest/precons/Take[!!-~]to[!!-~]the[!!-~]Sky.dck -text
@@ -17226,6 +17231,7 @@ forge-gui/res/quest/precons/The[!!-~]Wilds[!!-~]and[!!-~]the[!!-~]Deep.dck -text
 forge-gui/res/quest/precons/Time[!!-~]Drain.dck -text
 forge-gui/res/quest/precons/Tombstone.dck -text
 forge-gui/res/quest/precons/Totem[!!-~]Power.dck -text
+forge-gui/res/quest/precons/Transference.dck -text
 forge-gui/res/quest/precons/Trounce-O-Matic.dck -text
 forge-gui/res/quest/precons/Truth[!!-~]Seekers.dck -text
 forge-gui/res/quest/precons/Turnabout.dck -text
