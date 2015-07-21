@@ -941,9 +941,6 @@ public class AiAttackController {
                 // not record that it can't kill everything
                 if (canKillAllDangerous && !ComputerUtilCombat.canDestroyBlocker(ai, defender, attacker, combat, false)) {
                     canKillAll = false;
-                    if (!canKillAllDangerous) {
-                        continue;
-                    }
                     if (defender.getSVar("HasCombatEffect").equals("TRUE") || defender.getSVar("HasBlockEffect").equals("TRUE")) {
                         canKillAllDangerous = false;
                     } else {

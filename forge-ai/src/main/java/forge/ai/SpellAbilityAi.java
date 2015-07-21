@@ -55,13 +55,9 @@ public abstract class SpellAbilityAi {
                 if (opp.canBeTargetedBy(sa)) {
                     sa.resetTargets();
                     sa.getTargets().add(opp);
-                } else if (mandatory) {
-                    if (aiPlayer.canBeTargetedBy(sa)) {
-                        sa.resetTargets();
-                        sa.getTargets().add(opp);
-                    } else {
-                        return false;
-                    }
+                } else if (aiPlayer.canBeTargetedBy(sa)) {
+                	sa.resetTargets();
+                    sa.getTargets().add(aiPlayer);
                 } else {
                     return false;
                 }
