@@ -57,6 +57,9 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             if (c.hasKeyword("Intimidate")) {
                 value += addValue(power * 6, "intimidate");
             }
+            if (c.hasStartOfKeyword("Menace")) {
+                value += addValue(power * 4, "menace");
+            }
             if (c.hasStartOfKeyword("CantBeBlockedBy")) {
                 value += addValue(power * 3, "block-restrict");
             }
