@@ -2,9 +2,10 @@ Name:Dromoka's Command
 ManaCost:G W
 Types:Instant
 A:SP$ Charm | Cost$ G W | Choices$ DBPrevent,DBSacrifice,DBPutCounter,DBPump | CharmNum$ 2 | SpellDescription$ Choose two - Prevent all damage target instant or sorcery spell would deal this turn; Target player sacrifices an enchantment; Put a +1/+1 counter on target creature; Target creature you control fights target creature you don't control.
-SVar:DBPrevent:DB$ Effect | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtZone$ Stack | TgtPrompt$ Select target instant or sorcery spell to prevent damage from | ReplacementEffects$ PreventDmg | Triggers$ TargetMoved | SVars$ ExileEffect | RememberObjects$ Targeted | SpellDescription$ Prevent all damage target instant or sorcery spell would deal this turn.
-SVar:PreventDmg:Event$ DamageDone | ValidSource$ Card.IsRemembered | PreventionEffect$ True | Description$ Prevent all damage that would be dealt by target instant or sorcery spell this turn.
-SVar:TargetMoved:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
+# The target lists a second zone to a Card is returned instead of a SA
+SVar:DBPrevent:DB$ Effect | ValidTgts$ Instant,Sorcery | TgtZone$ Stack,Battlefield | TgtPrompt$ Select target instant or sorcery spell to prevent damage from | StaticAbilities$ PreventDmg | Triggers$ TargetMoved | SVars$ ExileEffect | RememberObjects$ Targeted | SpellDescription$ Prevent all damage target instant or sorcery spell would deal this turn.
+SVar:PreventDmg:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.IsRemembered | AddHiddenKeyword$ Prevent all damage that would be dealt by CARDNAME. | Description$ Prevent all damage target instant or sorcery spell would deal this turn.
+SVar:TargetMoved:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Enchantment | SacMessage$ Enchantment | SpellDescription$ Target player sacrifices an enchantment.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
