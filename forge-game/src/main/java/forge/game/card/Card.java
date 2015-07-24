@@ -4166,7 +4166,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (!(obj instanceof Card)) {
                         continue;
                     }
-                    matched |= !receivedDamageFromThisTurn.containsKey(source);
+                    matched |= receivedDamageFromThisTurn.containsKey(obj);
                 }
                 if (!matched)
                     return matched;
