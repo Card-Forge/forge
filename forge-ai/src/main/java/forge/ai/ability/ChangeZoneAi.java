@@ -822,7 +822,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
             }
-            
+
             // if it's blink or bounce, try to save my about to die stuff
             if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile)
                     && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered")))))
@@ -834,6 +834,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return true;
                 }
                 
+                // bounce opponents stuff
+                list = CardLists.filterControlledBy(list, ai.getOpponents());
                 if (!CardLists.getNotType(list, "Land").isEmpty()) {
 	                // When bouncing opponents stuff other than lands, don't bounce cards with CMC 0
 	                list = CardLists.filter(list, new Predicate<Card>() {
@@ -968,7 +970,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     } else {
                         choice = mostExpensive;
                     }
-                    
+
                     //option to hold removal instead only applies for single targeted removal
                     if (!immediately && tgt.getMaxTargets(source, sa) == 1) {
                         if (!ComputerUtilCard.useRemovalNow(sa, choice, 0, destination)) {
