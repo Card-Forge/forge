@@ -207,6 +207,11 @@ http://downloads.cardforge.link/images/products/boosters/ONS_2.jpg
 http://downloads.cardforge.link/images/products/boosters/ONS_3.jpg
 http://downloads.cardforge.link/images/products/boosters/ONS_4.jpg
 http://downloads.cardforge.link/images/products/boosters/ONS_5.jpg
+http://downloads.cardforge.link/images/products/boosters/ORI_1.jpg
+http://downloads.cardforge.link/images/products/boosters/ORI_2.jpg
+http://downloads.cardforge.link/images/products/boosters/ORI_3.jpg
+http://downloads.cardforge.link/images/products/boosters/ORI_4.jpg
+http://downloads.cardforge.link/images/products/boosters/ORI_5.jpg
 http://downloads.cardforge.link/images/products/boosters/PCY.jpg
 http://downloads.cardforge.link/images/products/boosters/PLC_1.jpg
 http://downloads.cardforge.link/images/products/boosters/PLC_2.jpg

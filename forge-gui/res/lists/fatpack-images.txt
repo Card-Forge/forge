@@ -37,6 +37,7 @@ http://downloads.cardforge.link/images/products/fatpacks/NMS.jpg
 http://downloads.cardforge.link/images/products/fatpacks/NPH.jpg
 http://downloads.cardforge.link/images/products/fatpacks/ODY.jpg
 http://downloads.cardforge.link/images/products/fatpacks/ONS.jpg
+http://downloads.cardforge.link/images/products/fatpacks/ORI.jpg
 http://downloads.cardforge.link/images/products/fatpacks/PCY.jpg
 http://downloads.cardforge.link/images/products/fatpacks/PLC.jpg
 http://downloads.cardforge.link/images/products/fatpacks/PLS.jpg
