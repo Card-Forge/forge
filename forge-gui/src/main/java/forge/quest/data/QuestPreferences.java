@@ -118,22 +118,22 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         WINS_RANKUP_EXPERT("6"),
 
         // Matches won to unlock Medium Opponents, by difficulty
-        WINS_MEDIUMAI_EASY("10"),
-        WINS_MEDIUMAI_MEDIUM("9"),
-        WINS_MEDIUMAI_HARD("8"),
-        WINS_MEDIUMAI_EXPERT("7"),
+        WINS_MEDIUMAI_EASY("20"),
+        WINS_MEDIUMAI_MEDIUM("15"),
+        WINS_MEDIUMAI_HARD("12"),
+        WINS_MEDIUMAI_EXPERT("10"),
 
         // Matches won to unlock Hard Opponents, by difficulty
-        WINS_HARDAI_EASY("20"),
-        WINS_HARDAI_MEDIUM("18"),
-        WINS_HARDAI_HARD("16"),
-        WINS_HARDAI_EXPERT("14"),
+        WINS_HARDAI_EASY("40"),
+        WINS_HARDAI_MEDIUM("30"),
+        WINS_HARDAI_HARD("25"),
+        WINS_HARDAI_EXPERT("20"),
 
         // Matches won to unlock Expert Opponents, by difficulty
-        WINS_EXPERTAI_EASY("40"),
-        WINS_EXPERTAI_MEDIUM("36"),
-        WINS_EXPERTAI_HARD("32"),
-        WINS_EXPERTAI_EXPERT("28"),
+        WINS_EXPERTAI_EASY("80"),
+        WINS_EXPERTAI_MEDIUM("60"),
+        WINS_EXPERTAI_HARD("50"),
+        WINS_EXPERTAI_EXPERT("40"),
 
         WINS_UNLOCK_SET("20"),
 
