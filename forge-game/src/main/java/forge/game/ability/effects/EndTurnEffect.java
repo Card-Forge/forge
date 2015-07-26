@@ -26,6 +26,8 @@ public class EndTurnEffect extends SpellAbilityEffect {
             game.getAction().exile(c);
         }
         game.getStack().clear();
+        game.getStack().clearSimultaneousStack();
+        game.getTriggerHandler().clearWaitingTriggers();
 
         // 2) All attacking and blocking creatures are removed from combat.
         game.getPhaseHandler().endCombat();

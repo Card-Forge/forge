@@ -324,6 +324,10 @@ public class TriggerHandler {
         return checkStatics;
     }
 
+    public void clearWaitingTriggers() {
+        waitingTriggers.clear();
+    }
+
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerType mode, 
             final Map<String, Object> runParams, final List<Trigger> delayedTriggersWorkingCopy ) {
 
