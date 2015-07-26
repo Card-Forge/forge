@@ -18,7 +18,7 @@ New booster packs have been added to quest mode that contain cards of a single
 color. Blue Booster Packs will contain only blue cards, White Booster Packs
 will contain only white cards, and so on. There's a pack for each color and
 these new packs can be disabled by setting the "Special Boosters" quest
-preference to "0".
+preference to "0". Special thanks to "P for Pizza" for the booster pack images!
 
 
 - Updated Forge Content Downloads -
