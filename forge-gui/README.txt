@@ -1400,6 +1400,63 @@ When determining the color of decks, colors of hybrid and phyrexian cards are no
 longer considered unless they can be produced by a land in the deckOur Lawyers Made Us Do This:
 
 
-----------------------------
+-- Updated Forge Content Downloads -
+Card images for the latest sets are now available for download, including
+Tempest Remastered and Modern Masters 2015. All images have also been moved to a
+ new server for increased reliability and performance and many previously
+missing images have been added. There are still a few images missing in Forge
+and rectifying that is an ongoing effort.
+
+
+- Display Color Identity -
+There's a new option "Display Color Identity" in both desktop and mobile Forge
+that allows you to display the current color identity of cards. It's disabled
+by default (set to "Never") but can be toggled to "Always" (which displays color
+identity for all cards, even mono-color), to "Changed" (which displays color
+identity of all cards whose color identity has been altered compared to its
+"pristine" state), to "Multicolor" (which only displays color identity of cards
+that are currently of two or more colors) or to "Multi+Changed" (which displays
+color identity of all multicolor cards and also of all cards the identity of
+which has changed). This might help with effects such as Painter's Servant which
+add colors to cards and which make most cards display with the gold border. The
+option is currently found under "Graphic Options" for both versions of Forge.
+
+Starting with v1.6.0 this option has been renamed to "Show Detailed Card Color"
+in order to avoid confusion (because card identity is a Magic: the Gathering
+term that is not equivalent to the sum of card colors).
+
+
+- New Quest Preferences -
+Three new quest preferences (Playset Size: Basic Lands, Playset Size: Any
+Number, and Playset Size) have been added to control the number of cards to keep
+ before selling extras in quest mode. One is for basic lands, one is for
+"unlimited" cards (Relentless Rats and Shadowborn Apostle), and the last one is
+for all other cards. This is mostly useful when playing for antes and you want
+to keep an extra couple of cards on hand, just in case, or if you want to keep
+fewer copies of basic lands around.
+
+
+- Display tokens on the same row as other cards / on their own row -
+By default the game now displays tokens on the same row as non-token cards (and
+to the right of them), which makes the game use the battlefield space more
+effectively. For example, creature tokens are displayed to the right of regular
+non-token creatures in the same row. If you prefer the classic Forge behavior
+(when tokens are displayed on their own row), the option that controls this
+behavior can be found in Forge preferences under "Graphic Options". It is called
+"Display Tokens in a Separate Row".
+
+
+- Land Color Filtering in Deck Editor -
+When filtering colors in the Deck Editor, lands that produce all selected colors will now be shown
+This means if you filter to show only green and white cards, lands that produce green and white will now be shown
+This should hopefully make finding multicolor lands for your decks easier.
+An attempt was made to make this option behave in a more consistent and helpful way - now lands won't suddenly
+disappear when one color is filtered out, basic lands of appropriate colors will be shown, lands that feature at
+least one of the colors relevant for the deck will be shown. Also, the mode to filter lands in this way is now
+optional and can be toggled on or off in the Preferences ("Filter Lands by Color in Activated Abilities" under
+"Deck Editor Options").
+
+
+---------------------------
 
 This product includes software developed by the Indiana University Extreme! Lab (http://www.extreme.indiana.edu/).
