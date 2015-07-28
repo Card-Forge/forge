@@ -34,15 +34,15 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (sa.hasParam("AtEOT") && !aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
             return false;
+        }
+
+        if (sa.getTargetRestrictions() != null && sa.hasParam("TargetingPlayer")) {
+            sa.resetTargets();
+            Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
+            sa.setTargetingPlayer(targetingPlayer);
+            return targetingPlayer.getController().chooseTargetsFor(sa);
         } else {
-            if (sa.getTargetRestrictions() != null && sa.hasParam("TargetingPlayer")) {
-                sa.resetTargets();
-                Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
-                sa.setTargetingPlayer(targetingPlayer);
-                return targetingPlayer.getController().chooseTargetsFor(sa);
-            } else {
-                return this.doTriggerAINoCost(aiPlayer, sa, false);
-            }
+            return this.doTriggerAINoCost(aiPlayer, sa, false);
         }
     }
 
@@ -57,7 +57,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (abTgt != null) {
             sa.resetTargets();
-            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), abTgt.getValidTgts(), source.getController(), source);
+
+            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(abTgt.getZone()), abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
