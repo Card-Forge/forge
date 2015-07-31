@@ -1,7 +1,7 @@
-Forge Beta: #-#-2015 ver 1.5.42
+Forge Beta: 7-31-2015 ver 1.5.42
 
 
-# cards in total.
+14927 cards in total.
 
 
 -------------
@@ -28,13 +28,6 @@ player's machine by filling out the corresponding IP address and port number
 (default 36743), provided the lobby contains one or more open player slots.
 Do not expect network support to work reliably yet, any bug reports or other
 comments are welcome!
-
-
----------
-New Cards
----------
-
-
 
 
 ------------
@@ -98,7 +91,15 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+DrDev
+Fizanko
+Gos
+KrazyTheFox
+Pizza
+Sloth
+Sol
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
