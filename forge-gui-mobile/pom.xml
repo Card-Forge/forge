@@ -8,7 +8,7 @@
 	</parent>
 
 	<artifactId>forge-gui-mobile</artifactId>
-    <version>1.5.42-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>Forge Mobile</name>
 
 	<build>

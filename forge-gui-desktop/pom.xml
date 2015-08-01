@@ -1,18 +1,16 @@
- 
- 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
- 
+
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
         <version>1.5.42-SNAPSHOT</version>
     </parent>
- 
+
     <artifactId>forge-gui-desktop</artifactId>
     <packaging>jar</packaging>
     <name>Forge</name>
- 
+
     <build>
         <plugins>
             <plugin>
@@ -62,7 +60,7 @@
                     </execution>
                 </executions>
             </plugin>
- 
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -154,10 +152,10 @@
                     </execution>
                 </executions>
             </plugin>
- 
+
         </plugins>
     </build>
- 
+
     <dependencies>
         <dependency>
             <groupId>forge</groupId>
@@ -249,7 +247,7 @@
             <type>jar</type>
         </dependency>
     </dependencies>
- 
+
     <profiles>
         <profile>
             <id>windows-linux</id>
@@ -297,7 +295,7 @@
                             </execution>
                         </executions>
                     </plugin>
- 
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
@@ -395,7 +393,7 @@
                 </plugins>
             </build>
         </profile>
- 
+
         <profile>
             <properties>
                 <license.file.name>"LICENSE.txt"</license.file.name>
@@ -501,11 +499,11 @@
                             </execution>
                         </executions>
                     </plugin>
- 
+
                 </plugins>
             </build>
         </profile>
- 
+
         <profile>
             <id>test-deploy</id>
             <distributionManagement>
