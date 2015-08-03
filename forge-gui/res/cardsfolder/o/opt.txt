@@ -1,7 +1,7 @@
 Name:Opt
 ManaCost:U
 Types:Instant
-A:AB$ Scry | Cost$ U | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 1. Draw a card.
+A:SP$ Scry | Cost$ U | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 1. Draw a card.
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opt.jpg
