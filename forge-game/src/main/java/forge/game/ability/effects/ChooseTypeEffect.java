@@ -109,8 +109,9 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         //loop through sorted list and move each type to the front of the validTypes collection
         for (Entry<String, Integer> entry : sortedList) {
             String type = entry.getKey();
-            validTypes.remove(type);
-            validTypes.add(0, type);
+            if (validTypes.remove(type)) { //ensure an invalid type isn't introduced
+                validTypes.add(0, type);
+            }
         }
     }
 }
