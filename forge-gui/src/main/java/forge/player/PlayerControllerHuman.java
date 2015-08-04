@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -795,10 +797,44 @@ public class PlayerControllerHuman
         if (invalidTypes != null && !invalidTypes.isEmpty()) {
             Iterables.removeAll(types, invalidTypes);
         }
+        if (kindOfType.equals("Creature")) {
+            sortCreatureTypes(types);
+        }
         if (isOptional) {
             return getGui().oneOrNone("Choose a " + kindOfType.toLowerCase() + " type", types);
         }
         return getGui().one("Choose a " + kindOfType.toLowerCase() + " type", types);
+    }
+
+    //sort creature types such that those most prevalent in player's deck are sorted to the top
+    private void sortCreatureTypes(List<String> types) {
+        //build map of creature types in player's main deck against the occurrences of each
+        CardPool pool = player.getRegisteredPlayer().getDeck().getMain();
+        HashMap<String, Integer> typesInDeck = new HashMap<String, Integer>();
+        for (Entry<PaperCard, Integer> entry : pool) {
+            Set<String> cardCreatureTypes = entry.getKey().getRules().getType().getCreatureTypes();
+            for (String type : cardCreatureTypes) {
+                Integer count = typesInDeck.get(type);
+                if (count == null) { count = 0; }
+                typesInDeck.put(type, count + entry.getValue());
+            }
+        }
+
+        //create sorted list from map from least to most frequent 
+        List<Entry<String, Integer>> sortedList = new LinkedList<Entry<String, Integer>>(typesInDeck.entrySet());
+        Collections.sort(sortedList, new Comparator<Entry<String, Integer>>() {
+            public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+
+        //loop through sorted list and move each type to the front of the validTypes collection
+        for (Entry<String, Integer> entry : sortedList) {
+            String type = entry.getKey();
+            if (types.remove(type)) { //ensure an invalid type isn't introduced
+                types.add(0, type);
+            }
+        }
     }
 
     @Override
