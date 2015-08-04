@@ -8,6 +8,10 @@ Forge Beta: 7-31-2015 ver 1.5.42
 Release Notes
 -------------
 
+- Easier creature type selection -
+Now, when prompted to select a creature type for a card like Obelisk of Urd, creature types present in your deck will appear on top, sorted from most to least frequent, followed by all other creature types.
+This should make it so, more often than not, you can just accept the dialog without searching.
+
 
 - Magic Origins -
 Forge now includes many of the new Magic Origins cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
