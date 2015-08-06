@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Goblin.YouCtrl | AddKeyword$ Menace | Description
 S:Mode$ Continuous | Affected$ Elemental.YouCtrl | AddKeyword$ Menace | Description$ Elemental creatures you control gain menace.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caterwauling_boggart.jpg
-Oracle:Goblin creatures you control gain menace.\Elemental creatures you control gain menace.
+Oracle:Goblin creatures you control gain menace.\nElemental creatures you control gain menace.
