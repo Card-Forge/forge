@@ -339,6 +339,9 @@ public class DamageDealAi extends DamageAiBase {
                     }
                     continue;
                 }
+                if ("RoundedDown".equals(sa.getParam("DivideEvenly"))) {
+                    dmg = dmg * sa.getTargets().getNumTargeted() / (sa.getTargets().getNumTargeted() +1);
+                }
 
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
