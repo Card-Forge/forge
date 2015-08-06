@@ -88,7 +88,11 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 List<Card> attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (c.isCreature() && CombatUtil.canAttack(c, human));
+                        if (c.equals(sa.getHostCard()) && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost() 
+                                && !combat.isAttacking(c)) {
+                            return false;
+                        }
+                        return (c.isCreature() && CombatUtil.canAttack(c, human) || combat.isAttacking(c));
                     }
                 });
                 if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
@@ -104,7 +108,11 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             List<Card> attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return (c.isCreature() && CombatUtil.canAttack(c, human));
+                    if (c.equals(sa.getHostCard()) && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost() 
+                            && !combat.isAttacking(c)) {
+                        return false;
+                    }
+                    return (c.isCreature() && CombatUtil.canAttack(c, human) || combat.isAttacking(c));
                 }
             });
             if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
