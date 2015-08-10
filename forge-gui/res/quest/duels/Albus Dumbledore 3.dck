@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Albus Dumbledore 3
+Title=Albus Dumbledore
+Difficulty=hard
+Description=UR Arcane Melee deck
+Icon=Albus Dumbledore.jpg
+Deck Type=constructed
+[main]
+1 Arid Mesa
+1 Flooded Strand
+6 Island
+2 Mountain
+4 Scalding Tarn
+1 Steam Vents
+4 Sulfur Falls
+4 Volcanic Island
+4 Goblin Electromancer
+1 Charmbreaker Devils
+4 Arcane Melee
+4 Jace's Sanctum
+1 Beacon of Destruction
+2 Capsize
+1 Cunning Strike
+2 Cyclonic Rift
+2 Electrolyze
+3 Prophetic Bolt
+2 Repulse
+2 Think Twice
+2 Vapor Snag
+1 Whispers of the Muse
+2 Beacon of Tomorrows
+1 Concentrate
+1 Flame Wave
+2 Mizzium Mortars
+[sideboard]
