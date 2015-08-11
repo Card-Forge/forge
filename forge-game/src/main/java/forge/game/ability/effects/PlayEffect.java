@@ -156,7 +156,9 @@ public class PlayEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            tgtCards.remove(tgtCard);
+            if (!sa.hasParam("AllowRepeats")) {
+                tgtCards.remove(tgtCard);
+            }
 
             if (wasFaceDown) {
                 tgtCard.updateStateForView();

@@ -10,7 +10,7 @@ SVar:DBMayBePlay:DB$ Pump | Defined$ Remembered | PumpZone$ Exile | KW$ HIDDEN M
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Mill | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | NumCards$ 10 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.
 SVar:DBChoose:DB$ ChooseCard | Choices$ Instant.IsRemembered,Sorcery.IsRemembered | ChoiceZone$ Exile | Defined$ You | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Defined$ ChosenCard | WithoutManaCost$ True | CopyCard$ True | Amount$ 3 | Controller$ You | Optional$ True | SubAbility$ DBCleanup
+SVar:DBPlay:DB$ Play | Defined$ ChosenCard | WithoutManaCost$ True | CopyCard$ True | Amount$ 3 | AllowRepeats$ True | Controller$ You | Optional$ True | SubAbility$ DBCleanup
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_pyromaster.jpg
 Oracle:[+1] Chandra, Pyromaster deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn.\n[0] Exile the top card of your library. You may play it this turn.\n[-7] Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.
