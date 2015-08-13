@@ -7,5 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBMayBePlay
 SVar:DBMayBePlay:DB$ Pump | Defined$ Remembered | PumpZone$ Exile | KW$ HIDDEN May be played | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:ALWAYS
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abbot_of_keral_keep.jpg
 Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Abbot of Keral Keep enters the battlefield, exile the top card of your library. Until end of turn, you may play that card.
