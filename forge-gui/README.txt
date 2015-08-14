@@ -1457,6 +1457,14 @@ optional and can be toggled on or off in the Preferences ("Filter Lands by Color
 "Deck Editor Options").
 
 
+- Special Quest Booster Packs -
+New booster packs have been added to quest mode that contain cards of a single
+color. Blue Booster Packs will contain only blue cards, White Booster Packs
+will contain only white cards, and so on. There's a pack for each color and
+these new packs can be disabled by setting the "Special Boosters" quest
+preference to "0". Special thanks to "P for Pizza" for the booster pack images!
+
+
 ---------------------------
 
 This product includes software developed by the Indiana University Extreme! Lab (http://www.extreme.indiana.edu/).
