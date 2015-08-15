@@ -316,6 +316,9 @@ public class CountersPutAi extends SpellAbilityAi {
                                 }
                             }
                         }
+                        if (sa.getHostCard().getName().equals("Dromoka's Command")) {
+                            choice = CountersAi.chooseBoonTarget(list, type);
+                        }
                     } else {
                         choice = CountersAi.chooseBoonTarget(list, type);
                     }
