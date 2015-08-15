@@ -26,7 +26,7 @@ public class CharmAi extends SpellAbilityAi {
 
         // reset the chosen list. Otherwise it will be locked in forever
         sa.setChosenList(null);
-        List<AbilitySub> chosenList = chooseOptionsAi(sa, ai, timingRight, num, min, false);
+        List<AbilitySub> chosenList = min > 1 ? chooseMultipleOptionsAi(sa, ai, min) : chooseOptionsAi(sa, ai, timingRight, num, min, false);
 
         if (chosenList.isEmpty()) {
             return false;
@@ -91,6 +91,32 @@ public class CharmAi extends SpellAbilityAi {
         }
         return chosenList;
     }
+
+    //Extension of chooseOptionsAi specific to multi-option charms (eg. Cryptic Command, DTK commands)
+    private List<AbilitySub> chooseMultipleOptionsAi(SpellAbility sa, final Player ai, int min) {
+        if (sa.getChosenList() != null) {
+            return sa.getChosenList();
+        }
+        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
+        // select first n playable options
+        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+        for (AbilitySub sub : choices) {
+            sub.setActivatingPlayer(ai);
+            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+                chosenList.add(sub);
+                if (chosenList.size() == min) {
+                    break;
+                }
+            }
+        }
+        
+        if (chosenList.size() != min) {
+            return new ArrayList<AbilitySub>();
+        } else {
+            return chosenList;
+        }
+    } 
 
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> opponents) {
