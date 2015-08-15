@@ -1,7 +1,7 @@
 Name:Skullcrack
 ManaCost:1 R
 Types:Instant
-A:SP$ Effect | Cost$ 1 R | Name$ Skullcrack Effect | StaticAbilities$ STCantGain,STCantPrevent | SubAbility$ DBDamage | SpellDescription$ Players can't gain life this turn. Damage can't be prevented this turn. CARDNAME deals 3 damage to target player.
+A:SP$ Effect | Cost$ 1 R | Name$ Skullcrack Effect | StaticAbilities$ STCantGain,STCantPrevent | AILogic$ Burn | SubAbility$ DBDamage | SpellDescription$ Players can't gain life this turn. Damage can't be prevented this turn. CARDNAME deals 3 damage to target player.
 SVar:STCantGain:Mode$ Continuous | EffectZone$ Command | Affected$ Player | AddKeyword$ You can't gain life. | Description$ Players can't gain life.
 SVar:STCantPrevent:Mode$ Continuous | EffectZone$ Command | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | NoPrevention$ True

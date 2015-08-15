@@ -1,8 +1,8 @@
 Name:Wild Slash
 ManaCost:R
 Types:Instant
-A:SP$ Effect | Cost$ R | Name$ Wild Slash Effect | StaticAbilities$ STCantPrevent | AILogic$ Always | SubAbility$ DBDmg | ConditionPresent$ Creature.YouCtrl+powerGE4 | SpellDescription$ Ferocious - If you control a creature with power 4 or greater, damage can't be prevented this turn. CARDNAME deals 2 damage to target creature or player.
+A:SP$ Effect | Cost$ R | Name$ Wild Slash Effect | StaticAbilities$ STCantPrevent | AILogic$ Burn | SubAbility$ DBDmg | ConditionPresent$ Creature.YouCtrl+powerGE4 | SpellDescription$ Ferocious - If you control a creature with power 4 or greater, damage can't be prevented this turn. CARDNAME deals 2 damage to target creature or player.
 SVar:STCantPrevent:Mode$ Continuous | EffectZone$ Command | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
-SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | AILogic$ Burn | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_slash.jpg
 Oracle:Ferocious - If you control a creature with power 4 or greater, damage can't be prevented this turn.\nWild Slash deals 2 damage to target creature or player.

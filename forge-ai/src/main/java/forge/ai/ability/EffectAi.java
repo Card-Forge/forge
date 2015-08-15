@@ -7,6 +7,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -140,8 +141,7 @@ public class EffectAi extends SpellAbilityAi {
                     }
                 }
                 randomReturn = threatened;
-            }
-            else if (logic.equals("Fight")) {
+            } else if (logic.equals("Fight")) {
                 CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
                 humCreatures = CardLists.getTargetableCards(humCreatures, sa);
                 ComputerUtilCard.sortByEvaluateCreature(humCreatures);
@@ -184,6 +184,10 @@ public class EffectAi extends SpellAbilityAi {
                 		}
                 	}
                 }
+            } else if (logic.equals("Burn")) {
+                // for DamageDeal sub-abilities (eg. Wild Slash, Skullcrack)
+                SpellAbility burn = sa.getSubAbility();
+                return SpellApiToAi.Converter.get(burn.getApi()).canPlayAIWithSubs(ai, burn);
             }
         } else { //no AILogic
             return false;
