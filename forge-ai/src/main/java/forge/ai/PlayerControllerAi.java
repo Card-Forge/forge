@@ -178,6 +178,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean confirmTrigger(SpellAbility sa, Trigger regtrig, Map<String, String> triggerParams, boolean isMandatory) {
+        if (sa.getHostCard().getName().equals("Deathmist Raptor")) {
+            return true;
+        }
         if (triggerParams.containsKey("DelayedTrigger") || isMandatory) {
             //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker,
             //      needs to be expanded when a more difficult cards comes up
