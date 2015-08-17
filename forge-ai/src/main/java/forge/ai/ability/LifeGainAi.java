@@ -11,6 +11,7 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.util.MyRandom;
 
 public class LifeGainAi extends SpellAbilityAi {
 
@@ -127,7 +128,15 @@ public class LifeGainAi extends SpellAbilityAi {
                 return false;
             }
         }
-
+        // Save instant-speed life-gain unless it is really worth it
+        if (!SpellAbilityAi.isSorcerySpeed(sa)) {
+            final float value = 0.9f * lifeAmount / life;
+            if (value < 0.2f) {
+                return false;
+            } else {
+                return MyRandom.getRandom().nextFloat() < value;
+            }
+        }
         return true;
     }
 

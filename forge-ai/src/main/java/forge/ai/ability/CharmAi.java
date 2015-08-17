@@ -98,19 +98,27 @@ public class CharmAi extends SpellAbilityAi {
             return sa.getChosenList();
         }
         List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        AbilitySub goodChoice = null;
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
         // select first n playable options
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
-            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
-                chosenList.add(sub);
-                if (chosenList.size() == min) {
-                    break;
+            if ("Good".equals(sub.getParam("AILogic")) && aic.doTrigger(sub, false)) {
+                goodChoice = sub;
+            } else {
+                if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+                    chosenList.add(sub);
+                    if (chosenList.size() == min) {
+                        break;
+                    }
                 }
             }
         }
-        
+        if (chosenList.size() == min - 1 && goodChoice != null) {
+            chosenList.add(goodChoice);
+            return chosenList;
+        }
         if (chosenList.size() != min) {
             return new ArrayList<AbilitySub>();
         } else {

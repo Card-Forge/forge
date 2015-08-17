@@ -8,7 +8,7 @@ SVar:PreventDmg:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | A
 SVar:TargetMoved:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Enchantment | SacMessage$ Enchantment | SpellDescription$ Target player sacrifices an enchantment.
-SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Good | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Choose target creature you control | StackDescription$ None | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromokas_command.jpg
