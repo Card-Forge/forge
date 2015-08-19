@@ -116,7 +116,7 @@ public class CharmAi extends SpellAbilityAi {
             }
         }
         if (chosenList.size() == min - 1 && goodChoice != null) {
-            chosenList.add(goodChoice);
+            chosenList.add(0, goodChoice);  //hack to make Dromoka's Charm fight targets work
             return chosenList;
         }
         if (chosenList.size() != min) {
