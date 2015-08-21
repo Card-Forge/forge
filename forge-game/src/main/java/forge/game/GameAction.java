@@ -38,14 +38,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
-import forge.game.event.GameEventCardChangeZone;
-import forge.game.event.GameEventCardDestroyed;
-import forge.game.event.GameEventCardRegenerated;
-import forge.game.event.GameEventCardSacrificed;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventCardTapped;
-import forge.game.event.GameEventFlipCoin;
-import forge.game.event.GameEventGameStarted;
+import forge.game.event.*;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -1592,7 +1585,15 @@ public class GameAction {
                 p.shuffle(null);
             }
         }
+
+        //Vancouver Mulligan
+        for(Player p : whoCanMulligan) {
+            if (p.getStartingHandSize() > p.getZone(ZoneType.Hand).size()) {
+                p.scry(1);
+            }
+        }
     }
+
 
     private void runOpeningHandActions(final Player first) {
         Player takesAction = first;

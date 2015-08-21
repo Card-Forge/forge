@@ -50,48 +50,10 @@ public class ScryEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                scry(p, num);
+                p.scry(num);
             }
         }
     }
 
-    private static void scry(final Player p, final int numScry) {
-        final CardCollection topN = new CardCollection();
-        final PlayerZone library = p.getZone(ZoneType.Library);
-        final int actualNumScry = Math.min(numScry, library.size());
 
-        if (actualNumScry == 0) { return; }
-
-        for (int i = 0; i < actualNumScry; i++) {
-            topN.add(library.get(i));
-        }
-
-        final ImmutablePair<CardCollection, CardCollection> lists = p.getController().arrangeForScry(topN);
-        final CardCollection toTop = lists.getLeft();
-        final CardCollection toBottom = lists.getRight();
-
-        int numToBottom = 0;
-        int numToTop = 0;
-        
-        if (toBottom != null) {
-            for(Card c : toBottom) {
-                p.getGame().getAction().moveToBottomOfLibrary(c);
-                numToBottom++;
-            }
-        }
-
-        if (toTop != null) {
-            Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
-            for(Card c : toTop) {
-                p.getGame().getAction().moveToLibrary(c);
-                numToTop++;
-            }
-        }
-
-        p.getGame().fireEvent(new GameEventScry(p, numToTop, numToBottom));
-
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Player", p);
-        p.getGame().getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
-    }
 }
