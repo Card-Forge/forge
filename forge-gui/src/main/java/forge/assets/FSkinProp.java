@@ -204,6 +204,7 @@ public enum FSkinProp {
     ICO_LIST            (new int[] {640, 660, 20, 20}, PropType.ICON),
     ICO_CARD_IMAGE      (new int[] {660, 660, 20, 20}, PropType.ICON),
     ICO_FOLDER          (new int[] {640, 680, 20, 20}, PropType.ICON),
+    ICO_SEARCH          (new int[] {660, 680, 20, 20}, PropType.ICON),
     ICO_UNKNOWN         (new int[] {0, 720, 80, 80}, PropType.ICON),
     ICO_LOGO            (new int[] {480, 0, 200, 200}, PropType.ICON),
     ICO_FLIPCARD        (new int[] {400, 0, 80, 120}, PropType.ICON),

@@ -168,6 +168,7 @@ public enum FSkinImage implements FImage {
     LIST            (FSkinProp.ICO_LIST, SourceFile.ICONS),
     CARD_IMAGE      (FSkinProp.ICO_CARD_IMAGE, SourceFile.ICONS),
     FOLDER          (FSkinProp.ICO_FOLDER, SourceFile.ICONS),
+    SEARCH          (FSkinProp.ICO_SEARCH, SourceFile.ICONS),
     UNKNOWN         (FSkinProp.ICO_UNKNOWN, SourceFile.ICONS),
     LOGO            (FSkinProp.ICO_LOGO, SourceFile.ICONS),
     FLIPCARD        (FSkinProp.ICO_FLIPCARD, SourceFile.ICONS),

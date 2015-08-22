@@ -742,7 +742,15 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     protected abstract TextSearchFilter<? extends T> createSearchFilter();
 
     public void addFilter(final ItemFilter<? extends T> filter) {
-        filters.add(filter);
+        addFilter(-1, filter);
+    }
+    public void addFilter(int index, final ItemFilter<? extends T> filter) {
+        if (index == -1) {
+            filters.add(filter);
+        }
+        else {
+            filters.add(index, filter);
+        }
         add(filter.getWidget());
 
         boolean visible = !hideFilters;
