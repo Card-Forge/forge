@@ -52,7 +52,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.maps.MapToAmount;
 
