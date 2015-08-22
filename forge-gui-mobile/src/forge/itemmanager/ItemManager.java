@@ -78,7 +78,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         .icon(VIEW_OPTIONS_ICON).iconScaleFactor(0.9f)
         .build();
 
-    private final FLabel lblSort;
     private final FComboBox<ItemColumn> cbxSortOptions;
 
     private final List<ItemView<T>> views = new ArrayList<ItemView<T>>();
@@ -123,13 +122,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         add(btnAdvancedSearchOptions);
         btnAdvancedSearchOptions.setSelected(!hideFilters);
         if (allowSortChange()) {
-            lblSort = add(new FLabel.Builder().text("Sort:").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
-            lblSort.setWidth(lblSort.getAutoSizeBounds().width);
-            cbxSortOptions = add(new FComboBox<ItemColumn>());
-            cbxSortOptions.setFont(lblSort.getFont());
+            cbxSortOptions = add(new FComboBox<ItemColumn>("Sort: "));
+            cbxSortOptions.setFont(FSkinFont.get(12));
         }
         else {
-            lblSort = null;
             cbxSortOptions = null;
         }
         add(currentView.getPnlOptions());
@@ -323,7 +319,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
             }
             if (allowSortChange()) {
-                helper.include(lblSort, lblSort.getWidth(), fieldHeight);
                 helper.fillLine(cbxSortOptions, fieldHeight);
             }
             helper.newLine(-ItemFilter.PADDING);
@@ -856,7 +851,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             filter.getWidget().setVisible(visible);
         }
         if (allowSortChange()) {
-            lblSort.setVisible(visible);
             cbxSortOptions.setVisible(visible);
         }
         for (ItemView<T> view : views) {
@@ -1099,5 +1093,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void activate(int index) {
         setSelectedIndex(index);
         showMenu(true);
+    }
+
+    public FComboBox<ItemColumn> getSortOptions() {
+        return cbxSortOptions;
     }
 }

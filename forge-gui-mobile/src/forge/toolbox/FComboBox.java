@@ -14,11 +14,16 @@ import forge.toolbox.FEvent.*;
 public class FComboBox<T> extends FTextField implements IComboBox<T> {
     private final List<T> items = new ArrayList<T>();
     private T selectedItem;
+    private String label = "";
     private final DropDown dropDown = new DropDown();
     private FEventHandler dropDownItemTap, dropDownChangeHandler;
 
     public FComboBox() {
         initialize();
+    }
+    public FComboBox(String label0) {
+        initialize();
+        setLabel(label0);
     }
     public FComboBox(T[] itemArray) {
         for (T item : itemArray) {
@@ -36,6 +41,21 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     private void initialize() {
         if (!items.isEmpty()) {
             setSelectedItem(items.get(0)); //select first item by default
+        }
+    }
+    
+    public String getLabel() {
+        return label;
+    }
+    public void setLabel(String label0) {
+        if (label0 == null) { label0 = ""; }
+        if (label.equals(label0)) { return; }
+        label = label0;
+        if (selectedItem != null) {
+            super.setText(label + selectedItem.toString());
+        }
+        else {
+            super.setText(label);
         }
     }
 
@@ -95,13 +115,13 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         if (item != null) {
             if (items.contains(item)) {
                 selectedItem = item;
-                super.setText(item.toString());
+                super.setText(label + item.toString());
             }
             else { return; }
         }
         else {
             selectedItem = null;
-            super.setText("");
+            super.setText(label);
         }
 
         if (getChangedHandler() != null) {
@@ -118,7 +138,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
             }
         }
         selectedItem = null;
-        super.setText(text0);
+        super.setText(label + text0);
     }
 
     @Override

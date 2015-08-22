@@ -135,10 +135,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
-    private final FLabel lblGroupBy = new FLabel.Builder().text("Groups:").font(LABEL_FONT).textColor(FLabel.INLINE_LABEL_COLOR).build();
-    private final FComboBox<Object> cbGroupByOptions = new FComboBox<Object>();
-    private final FLabel lblPileBy = new FLabel.Builder().text("Piles:").font(LABEL_FONT).textColor(FLabel.INLINE_LABEL_COLOR).build();
-    private final FComboBox<Object> cbPileByOptions = new FComboBox<Object>();
+    private final FComboBox<Object> cbGroupByOptions = new FComboBox<Object>("Groups: ");
+    private final FComboBox<Object> cbPileByOptions = new FComboBox<Object>("Piles: ");
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
@@ -171,9 +169,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         cbGroupByOptions.setFont(LABEL_FONT);
         cbPileByOptions.setFont(LABEL_FONT);
         getPnlOptions().add(btnExpandCollapseAll);
-        getPnlOptions().add(lblGroupBy);
         getPnlOptions().add(cbGroupByOptions);
-        getPnlOptions().add(lblPileBy);
         getPnlOptions().add(cbPileByOptions);
 
         Group group = new Group(""); //add default group
@@ -391,19 +387,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         float y = padding;
         btnExpandCollapseAll.setBounds(x, y, h, h);
         x += h + padding;
-        lblGroupBy.setBounds(x, y, lblGroupBy.getAutoSizeBounds().width, h);
-        x += lblGroupBy.getWidth();
 
-        //determine width of combo boxes based on available width versus auto-size widths
-        float lblPileByWidth = lblPileBy.getAutoSizeBounds().width;
-        float availableComboBoxWidth = width - x - lblPileByWidth - padding;
-        float groupByWidth = availableComboBoxWidth * 0.6f;
-        float pileByWidth = availableComboBoxWidth - groupByWidth;
+        float pileByWidth = itemManager.getSortOptions().getWidth();
+        float groupByWidth = width - x - padding - pileByWidth;
 
         cbGroupByOptions.setBounds(x, y, groupByWidth, h);
         x += groupByWidth + padding;
-        lblPileBy.setBounds(x, y, lblPileByWidth, h);
-        x += lblPileByWidth;
         cbPileByOptions.setBounds(x, y, pileByWidth, h);
     }
 

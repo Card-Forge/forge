@@ -87,7 +87,7 @@ public abstract class ItemView<T extends InventoryItem> {
         return false;
     }
     protected abstract float getScrollHeight();
-    protected abstract void layoutOptionsPanel(float visibleWidth, float height);
+    protected abstract void layoutOptionsPanel(float width, float height);
 
     private class OptionsPanel extends FContainer {
         @Override
