@@ -2131,6 +2131,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Dash")) {
                 card.addSpellAbility(makeDashSpell(card, keyword));
             }
+            else if (keyword.startsWith("Awaken")) {
+                card.addSpellAbility(makeAwakenSpell(card, keyword));
+            }
             else if (keyword.startsWith("Monstrosity")) {
                 final String[] k = keyword.split(":");
                 final String magnitude = k[0].substring(12);
@@ -3060,6 +3063,40 @@ public class CardFactoryUtil {
         dashSpell.setPayCosts(dashCost);
         dashSpell.setDash(true);
         return dashSpell;
+    }
+
+    /**
+     * make Awaken keyword
+     * @param card
+     * @param awakenKeyword
+     * @return
+     */
+    private static SpellAbility makeAwakenSpell(final Card card, final String awakenKeyword) {
+        final String[] k = awakenKeyword.split(":");
+        final String counters = k[1];
+        final String suffix = !counters.equals("1") ? "s" : "";
+        final Cost awakenCost = new Cost(k[2], false);
+        card.removeIntrinsicKeyword(awakenKeyword);
+        
+        final SpellAbility awakenSpell = card.getFirstSpellAbility().copy();
+        
+        final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
+                + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | SubAbility$"
+                + " AwakenAnimate";
+        final String dbAnimate = "DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$"
+                + " Creature,Elemental | Permanent$ True | Keywords$ Haste";
+        card.setSVar("AwakenAnimate", dbAnimate);
+        final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(awaken, card);
+        awakenSpell.setSubAbility(awakenSub);
+        awakenSub.setParent(awakenSpell);
+        String desc = "Awaken " + counters + " - " + awakenCost.toSimpleString() + " (If you cast "
+                + "this spell for " + awakenCost.toSimpleString() + ", also put " + counters
+                + " +1/+1 counter"+ suffix + " on target land you control and it becomes a 0/0 "
+                + "Elemental creature with haste. It's still a land.)";
+        awakenSpell.setDescription(desc);
+        awakenSpell.setBasicSpell(false);
+        awakenSpell.setPayCosts(awakenCost);
+        return awakenSpell;
     }
 
     /**
