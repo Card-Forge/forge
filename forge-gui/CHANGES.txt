@@ -1,7 +1,7 @@
-Forge Beta: 8-14-2015 ver 1.5.43
+Forge Beta: #-#-2015 ver 1.5.44
 
 
-14927 cards in total.
+# cards in total.
 
 
 -------------
@@ -9,9 +9,8 @@ Release Notes
 -------------
 
 
-- Easier creature type selection -
-Now, when prompted to select a creature type for a card like Obelisk of Urd, creature types present in your deck will appear on top, sorted from most to least frequent, followed by all other creature types.
-This should make it so, more often than not, you can just accept the dialog without searching.
+- New Battle for Zendikar cards -
+We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
 - Network play (BETA) -
@@ -21,6 +20,17 @@ player's machine by filling out the corresponding IP address and port number
 (default 36743), provided the lobby contains one or more open player slots.
 Do not expect network support to work reliably yet, any bug reports or other
 comments are welcome!
+
+
+-----------------------------
+New Battle for Zendikar cards
+-----------------------------
+
+Veteran Warleader
+Retreat to Kazandu
+Sheer Drop
+Dominator Drone
+Forerunner of Slaughter
 
 
 ------------
@@ -87,14 +97,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-DrDev
-excessum
-Gos
-Sloth
-Sol
-Swordshine
-tojammot
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)

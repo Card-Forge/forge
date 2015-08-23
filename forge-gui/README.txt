@@ -1465,6 +1465,11 @@ these new packs can be disabled by setting the "Special Boosters" quest
 preference to "0". Special thanks to "P for Pizza" for the booster pack images!
 
 
+- Easier creature type selection -
+Now, when prompted to select a creature type for a card like Obelisk of Urd, creature types present in your deck will appear on top, sorted from most to least frequent, followed by all other creature types.
+This should make it so, more often than not, you can just accept the dialog without searching.
+
+
 ---------------------------
 
 This product includes software developed by the Indiana University Extreme! Lab (http://www.extreme.indiana.edu/).
