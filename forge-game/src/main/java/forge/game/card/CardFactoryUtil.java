@@ -3180,6 +3180,10 @@ public class CardFactoryUtil {
             card.addLeavesPlayCommand(sunburstLP);
         }
 
+        if (hasKeyword(card, "Devoid") != -1) {
+            card.addColor("1", false, card.getTimestamp());
+        }
+
         if (hasKeyword(card, "Morph") != -1) {
             final int n = hasKeyword(card, "Morph");
             if (n != -1) {
@@ -3502,6 +3506,19 @@ public class CardFactoryUtil {
         final Trigger exploitTrigger = TriggerHandler.parseTrigger(trigExploit.toString(), card, true);
         for (int i = 0; i < exploit; i++) {
             card.addTrigger(exploitTrigger);
+        } // Exploit
+        final int ingest = card.getAmountOfKeyword("Ingest");
+        card.removeIntrinsicKeyword("Ingest");
+        final StringBuilder trigIngest = new StringBuilder(
+                "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True"
+                + " | Execute$ IngestExile | TriggerZones$ Battlefield | TriggerDescription$ Ingest "
+                + "(Whenever this creature deals combat damage to a player, that player exiles the "
+                + "top card of his or her library.)");
+        final String abStringIngest = "DB$ Mill | NumCards$ 1 | Destination$ Exile | Defined$ TriggeredTarget";
+        card.setSVar("IngestExile", abStringIngest);
+        final Trigger ingestTrigger = TriggerHandler.parseTrigger(trigIngest.toString(), card, true);
+        for (int i = 0; i < ingest; i++) {
+            card.addTrigger(ingestTrigger);
         } // Exploit
     }
 
