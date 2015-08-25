@@ -10,7 +10,6 @@ import forge.util.PredicateString.StringOp;
 import java.util.*;
 
 public class BooleanExpression {
-
     private Stack<Operator> operators = new Stack<>();
     private Stack<Predicate<CardRules>> operands = new Stack<>();
 
@@ -18,8 +17,7 @@ public class BooleanExpression {
 
     private boolean inName, inType, inText, inCost;
 
-    private enum Operator {
-
+    public enum Operator {
         AND("&", 0), OR("|", 0), NOT("!", 1), OPEN_PAREN("(", 2), CLOSE_PAREN(")", 2), ESCAPE("\\", -1);
 
         private final String token;
@@ -30,6 +28,9 @@ public class BooleanExpression {
             this.precedence = precedence;
         }
 
+        public String toString() {
+            return this.token;
+        }
     }
 
     public BooleanExpression(final String expression, final boolean inName, final boolean inType, final boolean inText, final boolean inCost) {
