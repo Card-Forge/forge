@@ -239,6 +239,17 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
             }
         }
 
+        private void removeNextFilter(Filter fromFilter) {
+            int index = scroller.indexOf(fromFilter);
+            if (index < scroller.getChildCount() - 1) {
+                Filter nextFilter = (Filter)scroller.getChildAt(index + 1);
+                fromFilter.btnAnd.setSelected(nextFilter.btnAnd.isSelected());
+                fromFilter.btnOr.setSelected(nextFilter.btnOr.isSelected());
+                scroller.remove(nextFilter);
+                scroller.revalidate();
+            }
+        }
+
         private enum FilterOption {
             NONE("Filter...", null, null, -1, -1),
             CMC("CMC", ComparableOp.NUMBER_OPS, ComparableOp.EQUALS, 0, 20),
@@ -297,15 +308,25 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
                 btnAnd = add(new FLabel.Builder().align(HAlignment.CENTER).text("AND").selectable().command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        btnOr.setSelected(false);
-                        addNewFilter(Filter.this);
+                        if (btnAnd.isSelected()) {
+                            btnOr.setSelected(false);
+                            addNewFilter(Filter.this);
+                        }
+                        else {
+                            removeNextFilter(Filter.this);
+                        }
                     }
                 }).build());
                 btnOr = add(new FLabel.Builder().align(HAlignment.CENTER).text("OR").selectable().command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        btnAnd.setSelected(false);
-                        addNewFilter(Filter.this);
+                        if (btnOr.isSelected()) {
+                            btnAnd.setSelected(false);
+                            addNewFilter(Filter.this);
+                        }
+                        else {
+                            removeNextFilter(Filter.this);
+                        }
                     }
                 }).build());
             }
