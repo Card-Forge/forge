@@ -25,6 +25,10 @@ public abstract class FContainer extends FDisplayObject {
         children.clear();
     }
 
+    public int indexOf(FDisplayObject child) {
+        return children.indexOf(child);
+    }
+
     public FDisplayObject getChildAt(int index) {
         return children.get(index);
     }

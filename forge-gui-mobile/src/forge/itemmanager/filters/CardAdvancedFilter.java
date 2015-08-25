@@ -12,10 +12,14 @@ import forge.assets.FSkinImage;
 import forge.item.PaperCard;
 import forge.itemmanager.BooleanExpression.Operator;
 import forge.itemmanager.ItemManager;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.menu.FTooltip;
 import forge.screens.FScreen;
+import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
+import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
@@ -126,7 +130,18 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
     }
 
     private void updateLabel() {
-        label.setText("Filters: ");
+        StringBuilder builder = new StringBuilder();
+        builder.append("Filters: ");
+        if (expression.isEmpty()) {
+            builder.append("(none)");
+        }
+        else {
+            builder.append(expression.get(0));
+            for (int i = 1; i < expression.size(); i++) {
+                builder.append(", " + expression.get(i));
+            }
+        }
+        label.setText(builder.toString());
     }
 
     private String getTooltip() {
@@ -190,17 +205,15 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
         private FScrollPane scroller = add(new FScrollPane() {
             @Override
             protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-                float x = PADDING;
-                float y = PADDING;
-                float w = visibleWidth - 2 * PADDING;
-                float fieldHeight = FTextField.getDefaultHeight();
-                float dy = fieldHeight + PADDING;
+                float x = 0;
+                float y = FList.PADDING;
+                float w = visibleWidth;
+                float h = FTextField.getDefaultHeight();
+                float dy = h + FList.PADDING;
 
                 for (FDisplayObject child : getChildren()) {
-                    if (child.isVisible()) {
-                        child.setBounds(x, y, w, fieldHeight);
-                        y += dy;
-                    }
+                    child.setBounds(x, y, w, h);
+                    y += dy;
                 }
 
                 return new ScrollBounds(visibleWidth, y);
@@ -209,11 +222,143 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
 
         private EditScreen() {
             super("Advanced Search");
+
+            scroller.add(new OptionRow(false));
         }
 
         @Override
         protected void doLayout(float startY, float width, float height) {
             scroller.setBounds(0, startY, width, height - startY);
+        }
+        
+        private void addFilter(ItemFilter<PaperCard> filter, OptionRow belowRow) {
+            if (scroller.getChildAt(scroller.getChildCount() - 1) == belowRow) {
+                scroller.add(new OptionRow(filter));
+                scroller.add(new OptionRow(true));
+                scroller.revalidate();
+                scroller.scrollToBottom();
+            }
+            else { //support swapping out one filter for another
+                OptionRow filterRow = (OptionRow)scroller.getChildAt(scroller.indexOf(belowRow) + 1);
+                filterRow.filter = filter;
+                filterRow.clear();
+                filterRow.add(filter.getWidget());
+                filterRow.revalidate();
+            }
+        }
+
+        private void addFilterSelectRow(OptionRow belowRow) {
+            if (scroller.getChildAt(scroller.getChildCount() - 1) == belowRow) {
+                scroller.add(new OptionRow(false));
+                scroller.revalidate();
+                scroller.scrollToBottom();
+            }
+        }
+
+        private class OptionRow extends FContainer {
+            private FLabel btnOpenParen, btnCloseParen, btnAnd, btnOr, btnNot;
+            private ItemFilter<PaperCard> filter;
+
+            private OptionRow(ItemFilter<PaperCard> filter0) {
+                filter = filter0;
+                add(filter.getWidget());
+            }
+            private OptionRow(boolean includeOperators) {
+                if (includeOperators) {
+                    btnCloseParen = add(new FLabel.Builder().align(HAlignment.CENTER).selectable().text(")").build());
+                    btnAnd = add(new FLabel.Builder().align(HAlignment.CENTER).text("AND").selectable().command(new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            btnOr.setSelected(false);
+                            addFilterSelectRow(OptionRow.this);
+                        }
+                    }).build());
+                    btnOr = add(new FLabel.Builder().align(HAlignment.CENTER).text("OR").selectable().command(new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            btnAnd.setSelected(false);
+                            addFilterSelectRow(OptionRow.this);
+                        }
+                    }).build());
+                }
+                else {
+                    btnOpenParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("(").selectable().build());
+                    btnNot = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
+                    add(new FLabel.ButtonBuilder().text("...").command(new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            FPopupMenu menu = new FPopupMenu() {
+                                @Override
+                                protected void buildMenu() {
+                                    addItem(new FMenuItem("CMC", new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            addFilter(new CardCMCFilter(itemManager), OptionRow.this);
+                                        }
+                                    }));
+                                    addItem(new FMenuItem("Colorless Cost", new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            addFilter(new CardColorlessCostFilter(itemManager), OptionRow.this);
+                                        }
+                                    }));
+                                    addItem(new FMenuItem("Power", new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            addFilter(new CardPowerFilter(itemManager), OptionRow.this);
+                                        }
+                                    }));
+                                    addItem(new FMenuItem("Toughness", new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            addFilter(new CardToughnessFilter(itemManager), OptionRow.this);
+                                        }
+                                    }));
+                                    addItem(new FMenuItem("Name", new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            addFilter(new CardSearchFilter(itemManager, true, false, false, false), OptionRow.this);
+                                        }
+                                    }));
+                                    addItem(new FMenuItem("Type", new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            addFilter(new CardSearchFilter(itemManager, false, true, false, false), OptionRow.this);
+                                        }
+                                    }));
+                                    addItem(new FMenuItem("Rules Text", new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            addFilter(new CardSearchFilter(itemManager, false, false, true, false), OptionRow.this);
+                                        }
+                                    }));
+                                    addItem(new FMenuItem("Mana Cost", new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            addFilter(new CardSearchFilter(itemManager, false, false, false, true), OptionRow.this);
+                                        }
+                                    }));
+                                }
+                            };
+                            FDisplayObject button = e.getSource();
+                            menu.show(button, 0, button.getHeight());
+                        }
+                    }).build());
+                }
+            }
+
+            @Override
+            protected void doLayout(float width, float height) {
+                float padding = FList.PADDING;
+                float buttonCount = getChildCount();
+                float buttonWidth = (width - padding * (buttonCount + 1)) / buttonCount;
+
+                float x = padding;
+                for (FDisplayObject button : getChildren()) {
+                    button.setBounds(x, 0, buttonWidth, height);
+                    x += buttonWidth + padding;
+                }
+            }
         }
     }
 }

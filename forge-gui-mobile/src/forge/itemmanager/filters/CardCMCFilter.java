@@ -9,14 +9,14 @@ import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 
 
-public class CardCMCRangeFilter extends ValueRangeFilter<PaperCard> {
-    public CardCMCRangeFilter(ItemManager<? super PaperCard> itemManager0) {
+public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
+    public CardCMCFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
     }
 
     @Override
     public ItemFilter<PaperCard> createCopy() {
-        return new CardCMCRangeFilter(itemManager);
+        return new CardCMCFilter(itemManager);
     }
 
     @Override
