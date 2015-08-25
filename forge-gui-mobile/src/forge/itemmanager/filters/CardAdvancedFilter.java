@@ -224,6 +224,7 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
             super("Advanced Search");
 
             scroller.add(new OptionRow(false));
+            scroller.add(new OptionRow(null));
         }
 
         @Override
@@ -231,60 +232,35 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
             scroller.setBounds(0, startY, width, height - startY);
         }
         
-        private void addFilter(ItemFilter<PaperCard> filter, OptionRow belowRow) {
-            if (scroller.getChildAt(scroller.getChildCount() - 1) == belowRow) {
-                scroller.add(new OptionRow(filter));
-                scroller.add(new OptionRow(true));
-                scroller.revalidate();
-                scroller.scrollToBottom();
-            }
-            else { //support swapping out one filter for another
-                OptionRow filterRow = (OptionRow)scroller.getChildAt(scroller.indexOf(belowRow) + 1);
-                filterRow.filter = filter;
-                filterRow.clear();
-                filterRow.add(filter.getWidget());
-                filterRow.revalidate();
-            }
+        private void addFilter(ItemFilter<PaperCard> filter, OptionRow filterRow) {
+            filterRow.clear();
+            filterRow.filter = filter;
+            filterRow.add(filter.getWidget());
+            scroller.add(new OptionRow(true));
+            scroller.revalidate();
+            scroller.scrollToBottom();
         }
 
         private void addFilterSelectRow(OptionRow belowRow) {
             if (scroller.getChildAt(scroller.getChildCount() - 1) == belowRow) {
                 scroller.add(new OptionRow(false));
+                scroller.add(new OptionRow(null));
                 scroller.revalidate();
                 scroller.scrollToBottom();
             }
         }
 
         private class OptionRow extends FContainer {
-            private FLabel btnOpenParen, btnCloseParen, btnAnd, btnOr, btnNot;
+            private FLabel btnOpenParen, btnCloseParen, btnAnd, btnOr, btnNot1, btnNot2;
             private ItemFilter<PaperCard> filter;
 
             private OptionRow(ItemFilter<PaperCard> filter0) {
-                filter = filter0;
-                add(filter.getWidget());
-            }
-            private OptionRow(boolean includeOperators) {
-                if (includeOperators) {
-                    btnCloseParen = add(new FLabel.Builder().align(HAlignment.CENTER).selectable().text(")").build());
-                    btnAnd = add(new FLabel.Builder().align(HAlignment.CENTER).text("AND").selectable().command(new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            btnOr.setSelected(false);
-                            addFilterSelectRow(OptionRow.this);
-                        }
-                    }).build());
-                    btnOr = add(new FLabel.Builder().align(HAlignment.CENTER).text("OR").selectable().command(new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            btnAnd.setSelected(false);
-                            addFilterSelectRow(OptionRow.this);
-                        }
-                    }).build());
+                if (filter0 != null) {
+                    filter = filter0;
+                    add(filter.getWidget());
                 }
                 else {
-                    btnOpenParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("(").selectable().build());
-                    btnNot = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
-                    add(new FLabel.ButtonBuilder().text("...").command(new FEventHandler() {
+                    add(new FLabel.ButtonBuilder().text("Filter...").command(new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
                             FPopupMenu menu = new FPopupMenu() {
@@ -344,6 +320,30 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
                             menu.show(button, 0, button.getHeight());
                         }
                     }).build());
+                }
+            }
+            private OptionRow(boolean includeOperators) {
+                if (includeOperators) {
+                    btnCloseParen = add(new FLabel.Builder().align(HAlignment.CENTER).selectable().text(")").build());
+                    btnAnd = add(new FLabel.Builder().align(HAlignment.CENTER).text("AND").selectable().command(new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            btnOr.setSelected(false);
+                            addFilterSelectRow(OptionRow.this);
+                        }
+                    }).build());
+                    btnOr = add(new FLabel.Builder().align(HAlignment.CENTER).text("OR").selectable().command(new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            btnAnd.setSelected(false);
+                            addFilterSelectRow(OptionRow.this);
+                        }
+                    }).build());
+                }
+                else {
+                    btnNot1 = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
+                    btnOpenParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("(").selectable().build());
+                    btnNot1 = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
                 }
             }
 
