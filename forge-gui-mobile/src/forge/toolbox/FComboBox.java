@@ -59,6 +59,25 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         }
     }
 
+    public void setItems(T[] itemArray, T selectedItem0) {
+        items.clear();
+        if (itemArray != null) {
+            for (T item : itemArray) {
+                items.add(item);
+            }
+        }
+        setSelectedItem(selectedItem0);
+    }
+    public void setItems(Iterable<T> items0, T selectedItem0) {
+        items.clear();
+        if (items0 != null) {
+            for (T item : items0) {
+                items.add(item);
+            }
+        }
+        setSelectedItem(selectedItem0);
+    }
+
     public void addItem(T item) {
         items.add(item);
         if (items.size() == 1) {
