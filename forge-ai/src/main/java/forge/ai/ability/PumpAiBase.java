@@ -109,10 +109,10 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 @Override
                 public boolean apply(final Card c) {
                     if (c.equals(sa.getHostCard()) && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost() 
-                            && !combat.isAttacking(c)) {
+                            && (combat != null && !combat.isAttacking(c))) {
                         return false;
                     }
-                    return (c.isCreature() && CombatUtil.canAttack(c, human) || combat.isAttacking(c));
+                    return (c.isCreature() && CombatUtil.canAttack(c, human) || (combat != null && combat.isAttacking(c)));
                 }
             });
             if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
