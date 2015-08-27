@@ -6824,6 +6824,7 @@ forge-gui/res/cardsfolder/g/grindstone.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/grinning_demon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/grinning_demon_avatar.txt -text
 forge-gui/res/cardsfolder/g/grinning_ignus.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/grinning_totem.txt -text
 forge-gui/res/cardsfolder/g/grip_of_amnesia.txt -text
 forge-gui/res/cardsfolder/g/grip_of_chaos.txt -text
 forge-gui/res/cardsfolder/g/griptide.txt -text
