@@ -3519,7 +3519,7 @@ public class CardFactoryUtil {
         final Trigger ingestTrigger = TriggerHandler.parseTrigger(trigIngest.toString(), card, true);
         for (int i = 0; i < ingest; i++) {
             card.addTrigger(ingestTrigger);
-        } // Exploit
+        } // Ingest
     }
 
     public final static void refreshTotemArmor(Card c) {
