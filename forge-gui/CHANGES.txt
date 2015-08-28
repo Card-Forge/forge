@@ -1,7 +1,7 @@
-Forge Beta: #-#-2015 ver 1.5.44
+Forge Beta: 8-28-2015 ver 1.5.44
 
 
-# cards in total.
+14928 cards in total.
 
 
 -------------
@@ -22,6 +22,13 @@ Do not expect network support to work reliably yet, any bug reports or other
 comments are welcome!
 
 
+---------
+New cards
+---------
+
+Grinning Toem
+
+
 -----------------------------
 New Battle for Zendikar cards
 -----------------------------
@@ -31,6 +38,7 @@ Retreat to Kazandu
 Sheer Drop
 Dominator Drone
 Forerunner of Slaughter
+Guardian of Tazeem
 
 
 ------------
@@ -97,7 +105,14 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+excessum
+Gos
+Marek14
+Sol
+Swordshine
+tojammot
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
