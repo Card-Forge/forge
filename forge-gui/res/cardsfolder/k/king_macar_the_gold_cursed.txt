@@ -2,8 +2,8 @@ Name:King Macar, the Gold-Cursed
 ManaCost:2 B B
 Types:Legendary Creature Human
 PT:2/3
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Inspired - Whenever CARDNAME becomes untapped, you may exile target creature. If you do, put a colorless artifact token named Gold onto the battlefield. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | Optional$ True | RememberChanged$ True | SubAbility$ DBToken
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Inspired - Whenever CARDNAME becomes untapped, you may exile target creature. If you do, put a colorless artifact token named Gold onto the battlefield. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenName$ Gold | TokenTypes$ Artifact | TokenColors$ Colorless | TokenOwner$ You | TokenAmount$ 1 | TokenAbilities$ ABMana | TokenImage$ c gold | References$ ABMana | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
