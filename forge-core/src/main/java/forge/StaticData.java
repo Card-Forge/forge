@@ -11,6 +11,9 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -73,6 +76,19 @@ public class StaticData {
 
     public final CardEdition.Collection getEditions() {
         return this.editions;
+    }
+
+    private List<CardEdition> sortedEditions;
+    public final List<CardEdition> getSortedEditions() {
+        if (sortedEditions == null) {
+            sortedEditions = new ArrayList<CardEdition>();
+            for (CardEdition set : editions) {
+                sortedEditions.add(set);
+            }
+            Collections.sort(sortedEditions);
+            Collections.reverse(sortedEditions); //put newer sets at the top
+        }
+        return sortedEditions;
     }
 
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */

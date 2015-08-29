@@ -124,13 +124,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
             lstSets.addGroup("Custom Sets");
             lstSets.addGroup("Other Sets");
 
-            List<CardEdition> sets = new ArrayList<CardEdition>();
-            for (CardEdition set : FModel.getMagicDb().getEditions()) {
-                sets.add(set);
-            }
-            Collections.sort(sets);
-            Collections.reverse(sets);
-
+            List<CardEdition> sets = FModel.getMagicDb().getSortedEditions();
             for (CardEdition set : sets) {
                 switch (set.getType()) {
                 case CORE:

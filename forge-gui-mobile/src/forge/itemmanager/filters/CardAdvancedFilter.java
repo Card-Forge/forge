@@ -257,7 +257,7 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
                 btnNotAfterParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
 
                 btnFilter = add(new FLabel.ButtonBuilder().text("Select Filter...").command(new FEventHandler() {
-                	@Override
+                    @Override
                     public void handleEvent(FEvent e) {
                     }
                 }).build());

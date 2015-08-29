@@ -553,6 +553,33 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return CoreType.allCoreTypeNames;
     }
 
+    private static List<String> sortedCoreAndSuperTypes;
+    public static List<String> getSortedCoreAndSuperTypes() {
+        if (sortedCoreAndSuperTypes == null) {
+            sortedCoreAndSuperTypes = new ArrayList<String>();
+            sortedCoreAndSuperTypes.addAll(CoreType.allCoreTypeNames);
+            sortedCoreAndSuperTypes.addAll(Supertype.allSuperTypeNames);
+            Collections.sort(sortedCoreAndSuperTypes);
+        }
+        return sortedCoreAndSuperTypes;
+    }
+
+    private static List<String> sortedSubTypes;
+    public static List<String> getSortedSubTypes() {
+        if (sortedSubTypes == null) {
+            sortedSubTypes = new ArrayList<String>();
+            sortedSubTypes.addAll(Constant.BASIC_TYPES);
+            sortedSubTypes.addAll(Constant.LAND_TYPES);
+            sortedSubTypes.addAll(Constant.CREATURE_TYPES);
+            sortedSubTypes.addAll(Constant.SPELL_TYPES);
+            sortedSubTypes.addAll(Constant.ENCHANTMENT_TYPES);
+            sortedSubTypes.addAll(Constant.ARTIFACT_TYPES);
+            sortedSubTypes.addAll(Constant.WALKER_TYPES);
+            Collections.sort(sortedSubTypes);
+        }
+        return sortedSubTypes;
+    }
+
     public static List<String> getBasicTypes() {
         return Collections.unmodifiableList(Constant.BASIC_TYPES);
     }
