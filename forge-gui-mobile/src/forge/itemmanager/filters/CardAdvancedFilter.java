@@ -12,11 +12,8 @@ import forge.assets.FSkinImage;
 import forge.item.PaperCard;
 import forge.itemmanager.BooleanExpression.Operator;
 import forge.itemmanager.ItemManager;
-import forge.menu.FMenuItem;
-import forge.menu.FPopupMenu;
 import forge.menu.FTooltip;
 import forge.screens.FScreen;
-import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
@@ -25,7 +22,6 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.util.ComparableOp;
 
 
 public class CardAdvancedFilter extends ItemFilter<PaperCard> {
@@ -250,41 +246,9 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
             }
         }
 
-        private enum FilterOption {
-            NONE("Filter...", null, null, -1, -1),
-            CMC("CMC", ComparableOp.NUMBER_OPS, ComparableOp.EQUALS, 0, 20),
-            COLORLESS_COST("Colorless Cost", ComparableOp.NUMBER_OPS, ComparableOp.EQUALS, 0, 20),
-            POWER("Power", ComparableOp.NUMBER_OPS, ComparableOp.EQUALS, 0, 20),
-            TOUGHNESS("Toughness", ComparableOp.NUMBER_OPS, ComparableOp.EQUALS, 0, 20),
-            NAME("Name", ComparableOp.STRING_OPS, ComparableOp.CONTAINS, -1, -1),
-            TYPE("Type", ComparableOp.STRING_OPS, ComparableOp.CONTAINS, -1, -1),
-            RULES_TEXT("Rules Text", ComparableOp.STRING_OPS, ComparableOp.CONTAINS, -1, -1),
-            MANA_COST("Mana Cost", ComparableOp.STRING_OPS, ComparableOp.EQUALS, -1, -1);
-
-            private final String name;
-            private final ComparableOp[] availableOps;
-            private final ComparableOp defaultOp;
-            private final int min, max;
-
-            private FilterOption(String name0, ComparableOp[] availableOps0, ComparableOp defaultOp0, int min0, int max0) {
-                name = name0;
-                availableOps = availableOps0;
-                defaultOp = defaultOp0;
-                min = min0;
-                max = max0;
-            }
-
-            @Override
-            public String toString() {
-                return name;
-            }
-        }
-
         private class Filter extends FContainer {
             private final FLabel btnNotBeforeParen, btnOpenParen, btnNotAfterParen;
-            private final FComboBox<FilterOption> cbFilter;
-            private final FComboBox<ComparableOp> cbFilterOperator;
-            private final FTextField txtFilterValue;
+            private final FLabel btnFilter;
             private final FLabel btnCloseParen, btnAnd, btnOr;
 
             private Filter() {
@@ -292,17 +256,11 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
                 btnOpenParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("(").selectable().build());
                 btnNotAfterParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
 
-                cbFilter = add(new FComboBox<FilterOption>(FilterOption.values()));
-                cbFilter.setChangedHandler(new FEventHandler() {
-                    @Override
+                btnFilter = add(new FLabel.ButtonBuilder().text("Select Filter...").command(new FEventHandler() {
+                	@Override
                     public void handleEvent(FEvent e) {
-                        FilterOption filterOption = cbFilter.getSelectedItem();
-                        cbFilterOperator.setItems(filterOption.availableOps, filterOption.defaultOp);
-                        txtFilterValue.setText(filterOption.min == -1 ? "" : String.valueOf(filterOption.min));
                     }
-                });
-                cbFilterOperator = add(new FComboBox<ComparableOp>());
-                txtFilterValue = add(new FTextField());
+                }).build());
 
                 btnCloseParen = add(new FLabel.Builder().align(HAlignment.CENTER).selectable().text(")").build());
                 btnAnd = add(new FLabel.Builder().align(HAlignment.CENTER).text("AND").selectable().command(new FEventHandler() {
@@ -334,19 +292,28 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
             @Override
             protected void doLayout(float width, float height) {
                 float padding = FList.PADDING;
-                float controlWidth = (width - padding * 4) / 3;
-                float controlHeight = (height - padding * 3) / 3;
+                float buttonWidth = (width - padding * 4) / 3;
+                float buttonHeight = (height - padding * 3) / 3;
 
                 float x = padding;
                 float y = padding;
-                for (FDisplayObject obj : getChildren()) {
-                    obj.setBounds(x, y, controlWidth, controlHeight);
-                    x += controlWidth + padding;
-                    if (x > width - controlWidth) {
-                        x = padding;
-                        y += controlHeight + padding;
-                    }
-                }
+                float dx = buttonWidth + padding;
+                float dy = buttonHeight + padding;
+
+                btnNotBeforeParen.setBounds(x, y, buttonWidth, buttonHeight);
+                x += dx;
+                btnOpenParen.setBounds(x, y, buttonWidth, buttonHeight);
+                x += dx;
+                btnNotAfterParen.setBounds(x, y, buttonWidth, buttonHeight);
+                x = padding;
+                y += dy;
+                btnFilter.setBounds(x, y, width - 2 * padding, buttonHeight);
+                y += dy;
+                btnCloseParen.setBounds(x, y, buttonWidth, buttonHeight);
+                x += dx;
+                btnAnd.setBounds(x, y, buttonWidth, buttonHeight);
+                x += dx;
+                btnOr.setBounds(x, y, buttonWidth, buttonHeight);
             }
         }
     }

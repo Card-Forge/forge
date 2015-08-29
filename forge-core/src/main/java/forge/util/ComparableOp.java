@@ -29,17 +29,7 @@ public enum ComparableOp {
     GREATER_THAN(">"),
     LESS_THAN("<"),
     GT_OR_EQUAL(">="),
-    LT_OR_EQUAL("<="),
-    CONTAINS("contains"),
-    STARTS_WITH("starts with"),
-    ENDS_WITH("ends with");
-
-    public static final ComparableOp[] NUMBER_OPS = new ComparableOp[] {
-        EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GT_OR_EQUAL, LT_OR_EQUAL
-    };
-    public static final ComparableOp[] STRING_OPS = new ComparableOp[] {
-        CONTAINS, STARTS_WITH, ENDS_WITH
-    };
+    LT_OR_EQUAL("<=");
     
     private final String caption;
     
