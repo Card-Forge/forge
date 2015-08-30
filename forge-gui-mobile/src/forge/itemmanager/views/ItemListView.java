@@ -71,12 +71,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    protected FImage getIcon() {
+    public FImage getIcon() {
         return FSkinImage.LIST;
     }
 
     @Override
-    protected String getCaption() {
+    public String getCaption() {
         return "List View";
     }
 

@@ -8,6 +8,7 @@ import forge.assets.FSkinFont;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.item.PaperCard;
+import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.CardColorFilter;
 import forge.itemmanager.filters.CardFormatFilter;
 import forge.itemmanager.filters.CardSearchFilter;
@@ -33,6 +34,11 @@ public class CardManager extends ItemManager<PaperCard> {
         return createSearchFilter(this);
     }
 
+    @Override
+    protected AdvancedSearchFilter<PaperCard> createAdvancedSearchFilter() {
+        return createAdvancedSearchFilter(this);
+    }
+
     /* Static overrides shared with SpellShopManager*/
 
     public static void addDefaultFilters(final ItemManager<? super PaperCard> itemManager) {
@@ -43,6 +49,10 @@ public class CardManager extends ItemManager<PaperCard> {
 
     public static TextSearchFilter<PaperCard> createSearchFilter(final ItemManager<? super PaperCard> itemManager) {
         return new CardSearchFilter(itemManager);
+    }
+
+    public static AdvancedSearchFilter<PaperCard> createAdvancedSearchFilter(final ItemManager<? super PaperCard> itemManager) {
+        return new AdvancedSearchFilter<PaperCard>(itemManager);
     }
 
     @Override

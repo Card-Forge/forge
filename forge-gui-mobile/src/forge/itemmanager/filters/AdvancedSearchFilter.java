@@ -8,8 +8,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.Forge;
-import forge.assets.FSkinImage;
-import forge.item.PaperCard;
+import forge.item.InventoryItem;
 import forge.itemmanager.BooleanExpression.Operator;
 import forge.itemmanager.ItemManager;
 import forge.menu.FTooltip;
@@ -24,26 +23,25 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 
 
-public class CardAdvancedFilter extends ItemFilter<PaperCard> {
+public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     private final List<Object> expression = new ArrayList<Object>();
 
     private FiltersLabel label;
-    private FLabel btnEdit;
     private boolean isAdded;
     private EditScreen editScreen;
 
-    public CardAdvancedFilter(ItemManager<? super PaperCard> itemManager0) {
+    public AdvancedSearchFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
     }
 
     @Override
-    public ItemFilter<PaperCard> createCopy() {
-        CardAdvancedFilter copy = new CardAdvancedFilter(itemManager);
+    public ItemFilter<T> createCopy() {
+        AdvancedSearchFilter<T> copy = new AdvancedSearchFilter<T>(itemManager);
         return copy;
     }
 
     @Override
-    protected final Predicate<PaperCard> buildPredicate() {
+    protected final Predicate<T> buildPredicate() {
         if (expression.isEmpty()) {
             return Predicates.alwaysTrue();
         }
@@ -65,9 +63,9 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
     }
 
     @SuppressWarnings("unchecked")
-    private Predicate<PaperCard> getPredicatePiece(ExpressionIterator iterator) {
-        Predicate<PaperCard> pred = null;
-        Predicate<PaperCard> predPiece = null;
+    private Predicate<T> getPredicatePiece(ExpressionIterator iterator) {
+        Predicate<T> pred = null;
+        Predicate<T> predPiece = null;
         Operator operator = null;
         boolean applyNot = false;
 
@@ -92,7 +90,7 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
                 continue;
             }
             else {
-                predPiece = ((ItemFilter<PaperCard>) piece).buildPredicate();
+                predPiece = ((ItemFilter<T>) piece).buildPredicate();
             }
             if (applyNot) {
                 predPiece = Predicates.not(predPiece);
@@ -168,22 +166,11 @@ public class CardAdvancedFilter extends ItemFilter<PaperCard> {
         label = new FiltersLabel();
         updateLabel();
         widget.add(label);
-
-        btnEdit = new FLabel.ButtonBuilder().icon(FSkinImage.SEARCH).iconScaleFactor(0.9f).command(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                edit();
-            }
-        }).build();
-        widget.add(btnEdit);
     }
 
     @Override
     protected void doWidgetLayout(float width, float height) {
-        float buttonWidth = height;
-        float buttonHeight = height;
-        btnEdit.setBounds(width - buttonWidth, (height - buttonHeight) / 2, buttonWidth, buttonHeight);
-        label.setSize(btnEdit.getLeft() - ItemFilter.PADDING, height);
+        label.setSize(width, height);
     }
 
     private class FiltersLabel extends FLabel {

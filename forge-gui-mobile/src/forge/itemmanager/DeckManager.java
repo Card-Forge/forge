@@ -12,6 +12,7 @@ import forge.deck.FDeckViewer;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.IHasGameType;
+import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.DeckColorFilter;
 import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.DeckSearchFilter;
@@ -70,6 +71,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     @Override
     protected TextSearchFilter<DeckProxy> createSearchFilter() {
         return new DeckSearchFilter(this);
+    }
+
+    @Override
+    protected AdvancedSearchFilter<DeckProxy> createAdvancedSearchFilter() {
+        return new AdvancedSearchFilter<DeckProxy>(this);
     }
 
     @Override

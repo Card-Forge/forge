@@ -21,7 +21,6 @@ import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.filters.CardAdvancedFilter;
 import forge.itemmanager.filters.ItemFilter;
 import forge.limited.BoosterDraft;
 import forge.menu.FCheckBoxMenuItem;
@@ -185,7 +184,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build());
     private final FLabel btnSave = deckHeader.add(new FLabel.Builder().icon(FSkinImage.SAVE).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
     private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
-    private final CardAdvancedFilter advancedSearchFilter;
 
     public FDeckEditor(EditorType editorType0, DeckProxy editDeck, boolean showMainDeck) {
         this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck);
@@ -226,8 +224,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
         }
-
-        advancedSearchFilter = catalogPage != null ? new CardAdvancedFilter(catalogPage.cardManager) : null;
 
         switch (editorType) {
         case Sealed:
@@ -305,15 +301,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
                             }
                         }));
-                        if (advancedSearchFilter != null) {
-                            addItem(new FMenuItem("Advanced Search", FSkinImage.SEARCH, new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    advancedSearchFilter.edit();
-                                    setSelectedPage(getCatalogPage()); //select catalog page if needed so catalog is visible below dialog
-                                }
-                            }));
-                        }
                         if (!isLimitedEditor()) {
                             addItem(new FMenuItem("Import from Clipboard", FSkinImage.OPEN, new FEventHandler() {
                                 @Override

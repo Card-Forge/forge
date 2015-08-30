@@ -33,12 +33,15 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardZoom.ActivateHandler;
 import forge.item.InventoryItem;
+import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemView;
 import forge.menu.FDropDownMenu;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
@@ -58,6 +61,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ItemPool<T> pool;
     protected final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
+    private AdvancedSearchFilter<? extends T> advancedSearchFilter;
     private final List<ItemFilter<? extends T>> filters = new ArrayList<ItemFilter<? extends T>>();
     private boolean hideFilters = false;
     private boolean wantUnique = false;
@@ -72,10 +76,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     private final TextSearchFilter<? extends T> searchFilter;
 
-    private static final FSkinImage VIEW_OPTIONS_ICON = FSkinImage.SETTINGS;
+    private final FLabel btnSearch = new FLabel.ButtonBuilder()
+        .icon(FSkinImage.SEARCH).iconScaleFactor(0.9f).build();
+    private final FLabel btnView = new FLabel.ButtonBuilder()
+        .iconScaleFactor(0.9f).build(); //icon set later
     private final FLabel btnAdvancedSearchOptions = new FLabel.Builder()
         .selectable(true).align(HAlignment.CENTER)
-        .icon(VIEW_OPTIONS_ICON).iconScaleFactor(0.9f)
+        .icon(FSkinImage.SETTINGS).iconScaleFactor(0.9f)
         .build();
 
     private final FComboBox<ItemColumn> cbxSortOptions;
@@ -107,18 +114,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         views.add(listView);
         views.add(imageView);
         currentView = listView;
-
-        //initialize views
-        for (int i = 0; i < views.size(); i++) {
-            views.get(i).initialize(i);
-        }
+        btnView.setIcon(currentView.getIcon());
 
         //build display
         add(searchFilter.getWidget());
-        for (ItemView<T> view : views) {
-            add(view.getButton());
-            view.getButton().setSelected(view == currentView);
-        }
+        add(btnSearch);
+        add(btnView);
         add(btnAdvancedSearchOptions);
         btnAdvancedSearchOptions.setSelected(!hideFilters);
         if (allowSortChange()) {
@@ -131,6 +132,57 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         add(currentView.getPnlOptions());
         add(currentView.getScroller());
 
+        btnSearch.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        addItem(new FMenuItem("Advanced Search", FSkinImage.SEARCH, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                if (advancedSearchFilter == null) {
+                                    advancedSearchFilter = createAdvancedSearchFilter();
+                                }
+                                advancedSearchFilter.edit();
+                            }
+                        }));
+                        addItem(new FMenuItem("Reset Filters", FSkinImage.DELETE, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                resetFilters();
+                            }
+                        }));
+                    }
+                };
+                menu.show(btnSearch, 0, btnSearch.getHeight());
+            }
+        });
+        btnView.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        for (int i = 0; i < views.size(); i++) {
+                            final int index = i;
+                            ItemView<T> view = views.get(i);
+                            FMenuItem item = new FMenuItem(view.getCaption(), view.getIcon(), new FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e) {
+                                    setViewIndex(index);
+                                }
+                            });
+                            if (currentView == view) {
+                                item.setSelected(true);
+                            }
+                            addItem(item);
+                        }
+                    }
+                };
+                menu.show(btnView, 0, btnView.getHeight());
+            }
+        });
         btnAdvancedSearchOptions.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -287,13 +339,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             itemsToSelect = null;
         }
 
-        currentView.getButton().setSelected(false);
         remove(currentView.getPnlOptions());
         remove(currentView.getScroller());
 
         currentView = view;
+        btnView.setIcon(view.getIcon());
 
-        view.getButton().setSelected(true);
         view.refresh(itemsToSelect, backupIndexToSelect, 0);
 
         add(view.getPnlOptions());
@@ -306,12 +357,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         LayoutHelper helper = new LayoutHelper(this, ItemFilter.PADDING, ItemFilter.PADDING);
         float fieldHeight = searchFilter.getMainComponent().getHeight();
         float viewButtonWidth = fieldHeight;
-        float viewButtonCount = views.size() + 1;
         helper.offset(0, ItemFilter.PADDING);
-        helper.fillLine(searchFilter.getWidget(), fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount); //leave room for view buttons
-        for (ItemView<T> view : views) {
-            helper.include(view.getButton(), viewButtonWidth, fieldHeight);
-        }
+        helper.fillLine(searchFilter.getWidget(), fieldHeight, (viewButtonWidth + helper.getGapX()) * 3); //leave room for search, view, and options buttons
+        helper.include(btnSearch, viewButtonWidth, fieldHeight);
+        helper.include(btnView, viewButtonWidth, fieldHeight);
         helper.include(btnAdvancedSearchOptions, viewButtonWidth, fieldHeight);
         helper.newLine();
         if (!hideFilters) {
@@ -740,6 +789,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     protected abstract void addDefaultFilters();
     protected abstract TextSearchFilter<? extends T> createSearchFilter();
+    protected abstract AdvancedSearchFilter<? extends T> createAdvancedSearchFilter();
 
     public void addFilter(final ItemFilter<? extends T> filter) {
         addFilter(-1, filter);
@@ -776,6 +826,20 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         addDefaultFilters();
         lockFiltering = false;
         revalidate();
+        applyFilters();
+    }
+
+    public void resetFilters() {
+        lockFiltering = true; //prevent updating filtering from this change until all filters reset
+        for (final ItemFilter<? extends T> filter : filters) {
+            filter.reset();
+        }
+        searchFilter.reset();
+        if (advancedSearchFilter != null) {
+            advancedSearchFilter.reset();
+        }
+        lockFiltering = false;
+
         applyFilters();
     }
 
@@ -1103,7 +1167,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         showMenu(true);
     }
 
-    public FComboBox<ItemColumn> getSortOptions() {
-        return cbxSortOptions;
+    public float getPileByWidth() {
+        if (cbxSortOptions != null) {
+            return cbxSortOptions.getWidth();
+        }
+        return filters.get(filters.size() - 1).getWidget().getWidth();
     }
 }

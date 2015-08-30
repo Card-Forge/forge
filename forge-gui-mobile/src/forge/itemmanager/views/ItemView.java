@@ -12,9 +12,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 
 import java.util.ArrayList;
@@ -22,7 +20,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class ItemView<T extends InventoryItem> {
@@ -33,7 +30,6 @@ public abstract class ItemView<T extends InventoryItem> {
     protected int minSelections = 0;
     protected int maxSelections = 1;
     private final Scroller scroller = new Scroller();
-    private final FLabel button;
     private final OptionsPanel pnlOptions = new OptionsPanel();
 
     private float heightBackup;
@@ -42,8 +38,6 @@ public abstract class ItemView<T extends InventoryItem> {
     protected ItemView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         itemManager = itemManager0;
         model = model0;
-        button = new FLabel.Builder().selectable(true).align(HAlignment.CENTER)
-                .iconScaleFactor(0.9f).icon(getIcon()).build();
     }
 
     private class Scroller extends FScrollPane {
@@ -94,24 +88,6 @@ public abstract class ItemView<T extends InventoryItem> {
         protected void doLayout(float width, float height) {
             layoutOptionsPanel(width, height);
         }
-    }
-
-    public void initialize(final int index) {
-        button.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (button.isSelected()) {
-                    itemManager.setViewIndex(index);
-                }
-                else {
-                    button.setSelected(true); //prevent toggling off button
-                }
-            }
-        });
-    }
-
-    public FLabel getButton() {
-        return button;
     }
 
     public FScrollPane getScroller() {
@@ -285,8 +261,8 @@ public abstract class ItemView<T extends InventoryItem> {
     public abstract int getIndexAtPoint(float x, float y);
     public abstract void scrollSelectionIntoView();
     public abstract Rectangle getSelectionBounds();
-    protected abstract FImage getIcon();
-    protected abstract String getCaption();
+    public abstract FImage getIcon();
+    public abstract String getCaption();
     protected abstract void onSetSelectedIndex(int index);
     protected abstract void onSetSelectedIndices(Iterable<Integer> indices);
 }

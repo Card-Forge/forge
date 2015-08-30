@@ -1244,7 +1244,7 @@ forge-gui-mobile/src/forge/itemmanager/CardManager.java -text
 forge-gui-mobile/src/forge/itemmanager/DeckManager.java -text
 forge-gui-mobile/src/forge/itemmanager/ItemManager.java -text
 forge-gui-mobile/src/forge/itemmanager/SpellShopManager.java -text
-forge-gui-mobile/src/forge/itemmanager/filters/CardAdvancedFilter.java -text
+forge-gui-mobile/src/forge/itemmanager/filters/AdvancedSearchFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardCMCFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardColorFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardColorlessCostFilter.java -text

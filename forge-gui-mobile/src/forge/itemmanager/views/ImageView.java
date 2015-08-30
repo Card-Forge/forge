@@ -388,7 +388,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         btnExpandCollapseAll.setBounds(x, y, h, h);
         x += h + padding;
 
-        float pileByWidth = itemManager.getSortOptions().getWidth();
+        float pileByWidth = itemManager.getPileByWidth();
         float groupByWidth = width - x - padding - pileByWidth;
 
         cbGroupByOptions.setBounds(x, y, groupByWidth, h);
@@ -654,7 +654,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    protected FImage getIcon() {
+    public FImage getIcon() {
         if (itemManager.getGenericType().equals(DeckProxy.class)) {
             return FSkinImage.PACK;
         }
@@ -662,7 +662,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    protected String getCaption() {
+    public String getCaption() {
         return "Image View";
     }
 
