@@ -170,6 +170,7 @@ Pirate
 Plant
 Praetor
 Prism
+Processor
 Rabbit
 Rat
 Rebel
@@ -184,6 +185,7 @@ Sand
 Saproling
 Satyr
 Scarecrow
+Scion
 Scorpion
 Scout
 Serf
