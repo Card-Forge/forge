@@ -1,5 +1,6 @@
 package forge.itemmanager;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,8 +27,8 @@ public class AdvancedSearch {
         CARD_GENERIC_COST("Generic Cost", FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
         CARD_POWER("Power", FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
         CARD_TOUGHNESS("Toughness", FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
-        CARD_MANA_COST("Mana Cost", FilterOperator.STRING_OPS, new StringValueSelector())/*,
-        CARD_RARITY("Rarity", FilterOperator.CUSTOM_LIST_OPS, new CustomListValueSelector(CardRarity.values()))*/;
+        CARD_MANA_COST("Mana Cost", FilterOperator.STRING_OPS, new StringValueSelector()),
+        CARD_RARITY("Rarity", FilterOperator.CUSTOM_LIST_OPS, new CustomListValueSelector<CardRarity>(Arrays.asList(CardRarity.values())));
 
         private final String name;
         private final FilterOperator[] operatorOptions;
