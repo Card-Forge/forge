@@ -373,8 +373,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public boolean setState(final CardStateName state, boolean updateView) {
         if (state == CardStateName.FaceDown && isDoubleFaced()) {
-            // TODO I believe No longer true with Manifest, needs to be tested out
-            return false; // Doublefaced cards can't be turned face-down.
+            // This check happens higher up, no need for it twice.
         }
 
         if (!states.containsKey(state)) {
@@ -5187,7 +5186,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("wasCastFrom")) {
-            final String strZone = property.substring(11);
+            // How are we getting in here with a comma?
+            final String strZone = property.split(",")[0].substring(11);
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
             if (realZone != getCastFrom()) {
                 return false;
