@@ -10322,6 +10322,7 @@ forge-gui/res/cardsfolder/o/oran_rief_the_vastwood.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orator_of_ojutai.txt -text
 forge-gui/res/cardsfolder/o/oraxid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orb_of_dreams.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/orbs_of_warding.txt -text
 forge-gui/res/cardsfolder/o/orbweaver_kumo.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orc_general.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orc_sureshot.txt -text
@@ -10448,7 +10449,6 @@ forge-gui/res/cardsfolder/o/oxidda_golem.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/oxidda_scrapmelter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/oxidize.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/oyobi_who_split_the_heavens.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/p/orbs_of_warding.txt -text
 forge-gui/res/cardsfolder/p/pacifism.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pack_hunt.txt -text
 forge-gui/res/cardsfolder/p/pack_rat.txt -text
