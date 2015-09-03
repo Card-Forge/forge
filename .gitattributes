@@ -11084,6 +11084,7 @@ forge-gui/res/cardsfolder/p/psychic_spear.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/psychic_spiral.txt -text
 forge-gui/res/cardsfolder/p/psychic_strike.txt -text
 forge-gui/res/cardsfolder/p/psychic_surgery.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/psychic_theft.txt -text
 forge-gui/res/cardsfolder/p/psychic_trance.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/p/psychic_transfer.txt -text
 forge-gui/res/cardsfolder/p/psychic_venom.txt svneol=native#text/plain

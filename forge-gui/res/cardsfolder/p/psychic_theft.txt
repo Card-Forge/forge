@@ -1,0 +1,19 @@
+Name:Psychic Theft
+ManaCost:1 U
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Player | Origin$ Hand | Destination$ Exile | ChangeType$ Instant,Sorcery | IsCurse$ True | Chooser$ You | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ TheftEffect | SpellDescription$ Target player reveals his or her hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand. | StackDescription$ SpellDescription
+SVar:TheftEffect:DB$ Effect | StaticAbilities$ STThieving | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigReturn,TrigCast | SVars$ ActivePsychic,RemoveEffect,DBReturn | SubAbility$ DBResetSVar
+# Even though the Effect is "Permanent", it's not really permanent
+SVar:DBResetSVar:DB$ StoreSvar | SVar$ ActivePsychic | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:ActivePsychic:Number$1
+SVar:STThieving:Mode$ Continuous | Affected$ Card.IsRemembered+OppOwn | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | CheckSVar$ ActivePsychic | Description$ You may cast that card for as long as it remains exiled.
+# Return the card as a normal trigger
+SVar:TrigReturn:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Command | Execute$ DBReturn | TriggerDescription$ At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ RemoveEffect
+SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+# Remove Effect when the card is played
+SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_theft.jpg
+Oracle:Target player reveals his or her hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
