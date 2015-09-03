@@ -1480,7 +1480,10 @@ public class CardFactoryUtil {
             }
             return doXMath(n, m, c);
         }
-
+        // Count$Converge
+        if (sq[0].contains("Converge")) {
+            return doXMath(c.getSunburstValue(), m, c);
+        }
         // Count$ColoredCreatures *a DOMAIN for creatures*
         if (sq[0].contains("ColoredCreatures")) {
             int mask = 0;
