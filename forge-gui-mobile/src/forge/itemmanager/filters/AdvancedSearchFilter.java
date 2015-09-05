@@ -253,7 +253,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                         FThreads.invokeInBackgroundThread(new Runnable() {
                             @Override
                             public void run() {
-                                final AdvancedSearch.Filter<T> newFilter = AdvancedSearch.getFilter(itemManager.getGenericType());
+                                final AdvancedSearch.Filter<T> newFilter = AdvancedSearch.getFilter(itemManager.getGenericType(), filter);
                                 if (newFilter != null) {
                                     FThreads.invokeInEdtLater(new Runnable() {
                                         @Override

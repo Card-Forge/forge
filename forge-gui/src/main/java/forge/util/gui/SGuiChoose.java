@@ -29,18 +29,23 @@ public class SGuiChoose {
      * @see #getChoices(String, int, int, Object...)
      */
     public static <T> T oneOrNone(final String message, final T[] choices) {
+        return oneOrNone(message, choices, null, null);
+    }
+    public static <T> T oneOrNone(final String message, final T[] choices, T selected, Function<T, String> display) {
         if ((choices == null) || (choices.length == 0)) {
             return null;
         }
-        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices);
+        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices, selected, display);
         return choice.isEmpty() ? null : choice.get(0);
     }
-
     public static <T> T oneOrNone(final String message, final Collection<T> choices) {
+        return oneOrNone(message, choices, null, null);
+    }
+    public static <T> T oneOrNone(final String message, final Collection<T> choices, T selected, Function<T, String> display) {
         if ((choices == null) || choices.isEmpty()) {
             return null;
         }
-        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices);
+        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices, selected, display);
         return choice.isEmpty() ? null : choice.get(0);
     }
 
@@ -143,11 +148,12 @@ public class SGuiChoose {
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
         return getChoices(message, min, max, Arrays.asList(choices), null, null);
     }
-
+    public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices, final T selected, final Function<T, String> display) {
+        return getChoices(message, min, max, Arrays.asList(choices), selected, display);
+    }
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
         return getChoices(message, min, max, choices, null, null);
     }
-
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
         return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
     }

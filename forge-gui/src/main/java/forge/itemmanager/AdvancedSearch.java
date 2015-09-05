@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
 import forge.card.CardRarity;
@@ -22,7 +22,7 @@ public class AdvancedSearch {
     private enum FilterOption {
         CARD_NAME("Name", PaperCard.class, FilterOperator.STRING_OPS, new StringValueSelector()),
         CARD_RULES_TEXT("Rules Text", PaperCard.class, FilterOperator.STRING_OPS, new StringValueSelector()),
-        CARD_EXPANSION("Expansion", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListValueSelector<CardEdition>(FModel.getMagicDb().getSortedEditions())),
+        CARD_SET("Set", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListValueSelector<CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE)),
         CARD_FORMAT("Format", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListValueSelector<GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList())),
         CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListValueSelector<String>(MagicColor.Constant.COLORS_AND_COLORLESS)),
         CARD_TYPE("Type", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListValueSelector<String>(CardType.getSortedCoreAndSuperTypes())),
@@ -37,9 +37,9 @@ public class AdvancedSearch {
         private final String name;
         private final Class<? extends InventoryItem> type;
         private final FilterOperator[] operatorOptions;
-        private final FilterValueSelector<?> valueSelector;
+        private final FilterValueSelector valueSelector;
 
-        private FilterOption(String name0, Class<? extends InventoryItem> type0, FilterOperator[] operatorOptions0, FilterValueSelector<?> valueSelector0) {
+        private FilterOption(String name0, Class<? extends InventoryItem> type0, FilterOperator[] operatorOptions0, FilterValueSelector valueSelector0) {
             name = name0;
             type = type0;
             operatorOptions = operatorOptions0;
@@ -114,11 +114,11 @@ public class AdvancedSearch {
         MANY_AND
     }
 
-    private static abstract class FilterValueSelector<T> {
-        public abstract List<T> getValues(String message, FilterOption option, FilterOperator operator);
+    private static abstract class FilterValueSelector {
+        public abstract <T extends InventoryItem> Filter<T> createFilter(String message, FilterOption option, FilterOperator operator);
     }
 
-    private static class NumericValueSelector extends FilterValueSelector<Integer> {
+    private static class NumericValueSelector extends FilterValueSelector {
         private final int min, max;
 
         public NumericValueSelector(int min0, int max0) {
@@ -127,7 +127,7 @@ public class AdvancedSearch {
         }
 
         @Override
-        public List<Integer> getValues(String message, FilterOption option, FilterOperator operator) {
+        public <T extends InventoryItem> Filter<T> createFilter(String message, FilterOption option, FilterOperator operator) {
             String msg = message;
             if (operator.valueCount == FilterValueCount.TWO) {
                 msg += " (Lower Bound)";
@@ -135,55 +135,111 @@ public class AdvancedSearch {
             Integer lowerBound = SGuiChoose.getInteger(msg, min, max);
             if (lowerBound == null) { return null; }
 
-            List<Integer> values = new ArrayList<Integer>();
-            values.add(lowerBound);
+            final String caption;
             if (operator.valueCount == FilterValueCount.TWO) { //prompt for upper bound if needed
                 msg = message + " (Upper Bound)";
                 Integer upperBound = SGuiChoose.getInteger(msg, lowerBound, max);
                 if (upperBound == null) { return null; }
-                values.add(upperBound);
+
+                caption = String.format(operator.formatStr, option.name, lowerBound, upperBound);
             }
-            return values;
+            else {
+                caption = String.format(operator.formatStr, option.name, lowerBound);
+            }
+
+            return new Filter<T>(option, operator, caption, null);
         }
     }
 
-    private static class StringValueSelector extends FilterValueSelector<String> {
+    private static class StringValueSelector extends FilterValueSelector {
         public StringValueSelector() {
         }
 
         @Override
-        public List<String> getValues(String message, FilterOption option, FilterOperator operator) {
+        public <T extends InventoryItem> Filter<T> createFilter(String message, FilterOption option, FilterOperator operator) {
             String value = SOptionPane.showInputDialog("", message);
             if (value == null) { return null; }
 
-            List<String> values = new ArrayList<String>();
-            values.add(value);
-            return values;
+            final String caption = String.format(operator.formatStr, option.name, value);
+
+            return new Filter<T>(option, operator, caption, null);
         }
     }
 
-    private static class CustomListValueSelector<T> extends FilterValueSelector<T> {
-        private final Collection<T> choices;
+    private static class CustomListValueSelector<V> extends FilterValueSelector {
+        private final Collection<V> choices;
+        private final Function<V, String> toShortString, toLongString;
 
-        public CustomListValueSelector(Collection<T> choices0) {
+        public CustomListValueSelector(Collection<V> choices0) {
+            this(choices0, null, null);
+        }
+        public CustomListValueSelector(Collection<V> choices0, Function<V, String> toShortString0) {
+            this(choices0, toShortString0, null);
+        }
+        public CustomListValueSelector(Collection<V> choices0, Function<V, String> toShortString0, Function<V, String> toLongString0) {
             choices = choices0;
+            toShortString = toShortString0;
+            toLongString = toLongString0;
         }
 
         @Override
-        public List<T> getValues(String message, FilterOption option, FilterOperator operator) {
+        public <T extends InventoryItem> Filter<T> createFilter(String message, FilterOption option, FilterOperator operator) {
             int max = choices.size();
             if (operator == FilterOperator.IS_EXACTLY && option.operatorOptions == FilterOperator.SINGLE_LIST_OPS) {
                 max = 1;
             }
-            List<T> values = SGuiChoose.getChoices(message, 0, max, choices);
+            List<V> values = SGuiChoose.getChoices(message, 0, max, choices);
             if (values == null || values.isEmpty()) {
                 return null;
             }
-            return values;
+
+            String valuesStr;
+            switch (operator.valueCount) {
+            case MANY:
+                valuesStr = formatValues(values, " ", " ");
+                break;
+            case MANY_OR:
+                valuesStr = formatValues(values, ", ", " or ");
+                break;
+            case MANY_AND:
+            default:
+                valuesStr = formatValues(values, ", ", " and ");
+                break;
+            }
+            
+
+            final String caption = String.format(operator.formatStr, option.name, valuesStr);
+
+            return new Filter<T>(option, operator, caption, null);
+        }
+
+        private String formatValues(List<V> values, String delim, String finalDelim) {
+            int valueCount = values.size();
+            switch (valueCount) {
+            case 1:
+                return formatValue(values.get(0));
+            case 2:
+                return formatValue(values.get(0)) + finalDelim + " " + formatValue(values.get(1));
+            default:
+                int lastValueIdx = valueCount - 1;
+                String result = formatValue(values.get(0));
+                for (int i = 1; i < lastValueIdx; i++) {
+                    result += delim + formatValue(values.get(i));
+                }
+                result += delim.trim() + finalDelim + formatValue(values.get(lastValueIdx));
+                return result;
+            }
+        }
+
+        private String formatValue(V value) {
+            if (toShortString == null) {
+                return value.toString();
+            }
+            return toShortString.apply(value);
         }
     }
 
-    public static <T extends InventoryItem> Filter<T> getFilter(Class<? super T> type) {
+    public static <T extends InventoryItem> Filter<T> getFilter(Class<? super T> type, Filter<T> editFilter) {
         //build list of filter options based on ItemManager type
         List<FilterOption> options = new ArrayList<FilterOption>();
         for (FilterOption opt : FilterOption.values()) {
@@ -192,66 +248,38 @@ public class AdvancedSearch {
             }
         }
 
-        final FilterOption option = SGuiChoose.oneOrNone("Select a filter type", options);
+        final FilterOption defaultOption = editFilter == null ? null : editFilter.option;
+        final FilterOption option = SGuiChoose.oneOrNone("Select a filter type", options, defaultOption, null);
         if (option == null) { return null; }
 
-        final FilterOperator operator = SGuiChoose.oneOrNone("Select an operator for " + option.name, option.operatorOptions);
+        final FilterOperator defaultOperator = option == defaultOption ? editFilter.operator : null;
+        final FilterOperator operator = SGuiChoose.oneOrNone("Select an operator for " + option.name, option.operatorOptions, defaultOperator, null);
         if (operator == null) { return null; }
 
         final String message = option.name + " " + operator.caption + " ?";
-        final List<?> values = option.valueSelector.getValues(message, option, operator);
-        if (values == null) { return null; }
-
-        return new Filter<T>(option, operator, values);
+        return option.valueSelector.createFilter(message, option, operator);
     }
 
     public static class Filter<T extends InventoryItem> {
         private final FilterOption option;
         private final FilterOperator operator;
-        private final List<?> values;
         private final String caption;
+        private final Predicate<T> predicate;
 
-        private Filter(FilterOption option0, FilterOperator operator0, List<?> values0) {
+        private Filter(FilterOption option0, FilterOperator operator0, String caption0, Predicate<T> predicate0) {
             option = option0;
             operator = operator0;
-            values = values0;
+            caption = caption0;
+            predicate = predicate0;
+        }
 
-            switch (operator.valueCount) {
-            case ONE:
-                caption = String.format(operator.formatStr, option.name, values.get(0));
-                break;
-            case TWO:
-                caption = String.format(operator.formatStr, option.name, values.get(0), values.get(1));
-                break;
-            case MANY:
-                caption = String.format(operator.formatStr, option.name, StringUtils.join(values, ", "));
-                break;
-            case MANY_OR:
-                caption = String.format(operator.formatStr, option.name, formatValues(", ", "or"));
-                break;
-            case MANY_AND:
-            default:
-                caption = String.format(operator.formatStr, option.name, formatValues(", ", "and"));
-                break;
-            }
+        public Predicate<T> getPredicate() {
+            return predicate;
         }
 
         @Override
         public String toString() {
             return caption;
-        }
-
-        private String formatValues(String delim, String finalDelim) {
-            switch (values.size()) {
-            case 1:
-                return values.get(0).toString();
-            case 2:
-                return values.get(0) + " " + finalDelim + " " + values.get(1);
-            default:
-                String result = StringUtils.join(values, delim);
-                int index = result.lastIndexOf(delim) + delim.length();
-                return result.substring(0, index) + finalDelim + " " + result.substring(index);
-            }
         }
     }
 }
