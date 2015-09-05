@@ -69,6 +69,7 @@ public enum TriggerType {
     Taps(TriggerTaps.class),
     TapsForMana(TriggerTapsForMana.class),
     Transformed(TriggerTransformed.class),
+    TurnBegin(TriggerTurnBegin.class),
     TurnFaceUp(TriggerTurnFaceUp.class),
     Unequip(TriggerUnequip.class),
     Untaps(TriggerUntaps.class),

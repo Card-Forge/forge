@@ -705,6 +705,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerSpellAbilityCast.java svneol=
 forge-game/src/main/java/forge/game/trigger/TriggerTaps.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerTapsForMana.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerTransformed.java -text
+forge-game/src/main/java/forge/game/trigger/TriggerTurnBegin.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerTurnFaceUp.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerType.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerUnequip.java svneol=native#text/plain
@@ -1892,6 +1893,7 @@ forge-gui/res/cardsfolder/a/arbiter_of_knollridge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arbiter_of_the_ideal.txt -text
 forge-gui/res/cardsfolder/a/arbor_colossus.txt -text
 forge-gui/res/cardsfolder/a/arbor_elf.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/arboria.txt -text
 forge-gui/res/cardsfolder/a/arc_blade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arc_lightning.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arc_mage.txt svneol=native#text/plain

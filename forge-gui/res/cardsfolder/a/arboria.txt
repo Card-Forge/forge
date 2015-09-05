@@ -1,0 +1,13 @@
+Name:Arboria
+ManaCost:2 G G
+Types:World Enchantment
+# Sorry for the double negative. Players can only be attacked if they did "something" on their last turn
+S:Mode$ CantAttack | ValidCard$ Creature | Target$ Player.IsNotRemembered | Description$ Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during his or her last turn.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player.Active+IsNotRemembered | Static$ True | Execute$ RememberCaster
+SVar:RememberCaster:DB$ Pump | Defined$ TriggeredCardController | RememberObjects$ TriggeredCardController
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.ActivePlayerCtrl+nonToken | Static$ True | Execute$ RememberController
+SVar:RememberController:DB$ Pump | Defined$ TriggeredCardController | RememberObjects$ TriggeredCardController
+T:Mode$ TurnBegin | ValidPlayer$ Player | Execute$ ClearActivePlayer | Static$ True
+SVar:ClearActivePlayer:DB$ Cleanup | ForgetDefinedPlayer$ ActivePlayer
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arboria.jpg
+Oracle:Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during his or her last turn.

@@ -443,6 +443,10 @@ public class PhaseHandler implements java.io.Serializable {
                 bPreventCombatDamageThisTurn = false;
                 if (!bRepeatCleanup) {
                     setPlayerTurn(handleNextTurn());
+                    // "Trigger" for begin turn to get around a phase skipping
+                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    runParams.put("Player", playerTurn);
+                    game.getTriggerHandler().runTrigger(TriggerType.TurnBegin, runParams, false);
                 }
                 planarDiceRolledthisTurn = 0;
                 // Play the End Turn sound

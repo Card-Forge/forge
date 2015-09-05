@@ -5,6 +5,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 public class CleanUpEffect extends SpellAbilityEffect {
@@ -24,6 +25,11 @@ public class CleanUpEffect extends SpellAbilityEffect {
         if (sa.hasParam("ForgetDefined")) {
             for (final Card card : AbilityUtils.getDefinedCards(source, sa.getParam("ForgetDefined"), sa)) {
                 source.removeRemembered(card);
+            }
+        }
+        if (sa.hasParam("ForgetDefinedPlayer")) {
+            for (final Player player : AbilityUtils.getDefinedPlayers(source, sa.getParam("ForgetDefinedPlayer"), sa)) {
+                source.removeRemembered(player);
             }
         }
         if (sa.hasParam("ClearImprinted")) {
