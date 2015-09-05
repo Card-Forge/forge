@@ -22,17 +22,17 @@ public class AdvancedSearch {
     private enum FilterOption {
         CARD_NAME("Name", PaperCard.class, FilterOperator.STRING_OPS, new StringValueSelector()),
         CARD_RULES_TEXT("Rules Text", PaperCard.class, FilterOperator.STRING_OPS, new StringValueSelector()),
-        CARD_EXPANSION("Expansion", PaperCard.class, FilterOperator.CUSTOM_LIST_OPS, new CustomListValueSelector<CardEdition>(FModel.getMagicDb().getSortedEditions())),
-        CARD_FORMAT("Format", PaperCard.class, FilterOperator.CUSTOM_LIST_OPS, new CustomListValueSelector<GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList())),
-        CARD_COLOR("Color", PaperCard.class, FilterOperator.CUSTOM_LIST_OPS, new CustomListValueSelector<String>(MagicColor.Constant.COLORS_AND_COLORLESS)),
-        CARD_TYPE("Type", PaperCard.class, FilterOperator.CUSTOM_LIST_OPS, new CustomListValueSelector<String>(CardType.getSortedCoreAndSuperTypes())),
-        CARD_SUB_TYPE("Subtype", PaperCard.class, FilterOperator.CUSTOM_LIST_OPS, new CustomListValueSelector<String>(CardType.getSortedSubTypes())),
+        CARD_EXPANSION("Expansion", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListValueSelector<CardEdition>(FModel.getMagicDb().getSortedEditions())),
+        CARD_FORMAT("Format", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListValueSelector<GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList())),
+        CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListValueSelector<String>(MagicColor.Constant.COLORS_AND_COLORLESS)),
+        CARD_TYPE("Type", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListValueSelector<String>(CardType.getSortedCoreAndSuperTypes())),
+        CARD_SUB_TYPE("Subtype", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListValueSelector<String>(CardType.getSortedSubTypes())),
         CARD_CMC("CMC", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
         CARD_GENERIC_COST("Generic Cost", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
         CARD_POWER("Power", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
         CARD_TOUGHNESS("Toughness", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
         CARD_MANA_COST("Mana Cost", PaperCard.class, FilterOperator.STRING_OPS, new StringValueSelector()),
-        CARD_RARITY("Rarity", PaperCard.class, FilterOperator.CUSTOM_LIST_OPS, new CustomListValueSelector<CardRarity>(Arrays.asList(CardRarity.values())));
+        CARD_RARITY("Rarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListValueSelector<CardRarity>(Arrays.asList(CardRarity.values())));
 
         private final String name;
         private final Class<? extends InventoryItem> type;
@@ -71,7 +71,7 @@ public class AdvancedSearch {
         ENDS_WITH("ends with", "%1$s ends with '%2$s'", FilterValueCount.ONE),
 
         //Custom list operators
-        IS_EXACTLY("is exactly", "%1$s is exactly %2$s", FilterValueCount.MANY),
+        IS_EXACTLY("is exactly", "%1$s is %2$s", FilterValueCount.MANY),
         IS_ANY("is any of", "%1$s is %2$s", FilterValueCount.MANY_OR),
         IS_ALL("is all of", "%1$s is %2$s", FilterValueCount.MANY_AND),
         IS_NONE("is none of", "%1$s is not %2$s", FilterValueCount.MANY_OR),
@@ -84,7 +84,10 @@ public class AdvancedSearch {
         public static final FilterOperator[] STRING_OPS = new FilterOperator[] {
             IS, IS_NOT, CONTAINS, STARTS_WITH, ENDS_WITH
         };
-        public static final FilterOperator[] CUSTOM_LIST_OPS = new FilterOperator[] {
+        public static final FilterOperator[] SINGLE_LIST_OPS = new FilterOperator[] {
+            IS_EXACTLY, IS_ANY, IS_NONE
+        };
+        public static final FilterOperator[] MULTI_LIST_OPS = new FilterOperator[] {
             IS_EXACTLY, IS_ANY, IS_ALL, IS_NONE, INCLUDES_ANY, INCLUDES_ALL
         };
 
@@ -102,70 +105,6 @@ public class AdvancedSearch {
             return caption;
         }
     }
-    
-    public static <T extends InventoryItem> Filter<T> getFilter(Class<? super T> type) {
-        //build list of filter options based on ItemManager type
-        List<FilterOption> options = new ArrayList<FilterOption>();
-        for (FilterOption opt : FilterOption.values()) {
-            if (opt.type == type) {
-                options.add(opt);
-            }
-        }
-
-        final FilterOption option = SGuiChoose.oneOrNone("Select a filter type", options);
-        if (option == null) { return null; }
-
-        final FilterOperator operator = SGuiChoose.oneOrNone("Select an operator for " + option.name, option.operatorOptions);
-        if (operator == null) { return null; }
-
-        final String message = option.name + " " + operator.caption + " ?";
-        final List<?> values = option.valueSelector.getValues(message, operator.valueCount);
-        if (values == null) { return null; }
-
-        return new Filter<T>(option, operator, values);
-    }
-
-    public static class Filter<T extends InventoryItem> {
-        private final FilterOption option;
-        private final FilterOperator operator;
-        private final List<?> values;
-
-        private Filter(FilterOption option0, FilterOperator operator0, List<?> values0) {
-            option = option0;
-            operator = operator0;
-            values = values0;
-        }
-
-        @Override
-        public String toString() {
-            switch (operator.valueCount) {
-            case ONE:
-                return String.format(operator.formatStr, option.name, values.get(0));
-            case TWO:
-                return String.format(operator.formatStr, option.name, values.get(0), values.get(1));
-            case MANY:
-                return String.format(operator.formatStr, option.name, StringUtils.join(values, ", "));
-            case MANY_OR:
-                return String.format(operator.formatStr, option.name, formatValues(", ", "or"));
-            case MANY_AND:
-                return String.format(operator.formatStr, option.name, formatValues(", ", "and"));
-            }
-            return "";
-        }
-
-        private String formatValues(String delim, String finalDelim) {
-            switch (values.size()) {
-            case 1:
-                return values.get(0).toString();
-            case 2:
-                return values.get(0) + " " + finalDelim + " " + values.get(1);
-            default:
-                String result = StringUtils.join(values, delim);
-                int index = result.lastIndexOf(delim) + delim.length();
-                return result.substring(0, index) + finalDelim + " " + result.substring(index);
-            }
-        }
-    }
 
     private enum FilterValueCount {
         ONE,
@@ -176,7 +115,7 @@ public class AdvancedSearch {
     }
 
     private static abstract class FilterValueSelector<T> {
-        public abstract List<T> getValues(String message, FilterValueCount count);
+        public abstract List<T> getValues(String message, FilterOption option, FilterOperator operator);
     }
 
     private static class NumericValueSelector extends FilterValueSelector<Integer> {
@@ -188,9 +127,9 @@ public class AdvancedSearch {
         }
 
         @Override
-        public List<Integer> getValues(String message, FilterValueCount count) {
+        public List<Integer> getValues(String message, FilterOption option, FilterOperator operator) {
             String msg = message;
-            if (count == FilterValueCount.TWO) {
+            if (operator.valueCount == FilterValueCount.TWO) {
                 msg += " (Lower Bound)";
             }
             Integer lowerBound = SGuiChoose.getInteger(msg, min, max);
@@ -198,7 +137,7 @@ public class AdvancedSearch {
 
             List<Integer> values = new ArrayList<Integer>();
             values.add(lowerBound);
-            if (count == FilterValueCount.TWO) { //prompt for upper bound if needed
+            if (operator.valueCount == FilterValueCount.TWO) { //prompt for upper bound if needed
                 msg = message + " (Upper Bound)";
                 Integer upperBound = SGuiChoose.getInteger(msg, lowerBound, max);
                 if (upperBound == null) { return null; }
@@ -213,7 +152,7 @@ public class AdvancedSearch {
         }
 
         @Override
-        public List<String> getValues(String message, FilterValueCount count) {
+        public List<String> getValues(String message, FilterOption option, FilterOperator operator) {
             String value = SOptionPane.showInputDialog("", message);
             if (value == null) { return null; }
 
@@ -231,12 +170,88 @@ public class AdvancedSearch {
         }
 
         @Override
-        public List<T> getValues(String message, FilterValueCount count) {
-            List<T> values = SGuiChoose.getChoices(message, 0, choices.size(), choices);
-            if (values == null || values.size() == 0) {
+        public List<T> getValues(String message, FilterOption option, FilterOperator operator) {
+            int max = choices.size();
+            if (operator == FilterOperator.IS_EXACTLY && option.operatorOptions == FilterOperator.SINGLE_LIST_OPS) {
+                max = 1;
+            }
+            List<T> values = SGuiChoose.getChoices(message, 0, max, choices);
+            if (values == null || values.isEmpty()) {
                 return null;
             }
             return values;
+        }
+    }
+
+    public static <T extends InventoryItem> Filter<T> getFilter(Class<? super T> type) {
+        //build list of filter options based on ItemManager type
+        List<FilterOption> options = new ArrayList<FilterOption>();
+        for (FilterOption opt : FilterOption.values()) {
+            if (opt.type == type) {
+                options.add(opt);
+            }
+        }
+
+        final FilterOption option = SGuiChoose.oneOrNone("Select a filter type", options);
+        if (option == null) { return null; }
+
+        final FilterOperator operator = SGuiChoose.oneOrNone("Select an operator for " + option.name, option.operatorOptions);
+        if (operator == null) { return null; }
+
+        final String message = option.name + " " + operator.caption + " ?";
+        final List<?> values = option.valueSelector.getValues(message, option, operator);
+        if (values == null) { return null; }
+
+        return new Filter<T>(option, operator, values);
+    }
+
+    public static class Filter<T extends InventoryItem> {
+        private final FilterOption option;
+        private final FilterOperator operator;
+        private final List<?> values;
+        private final String caption;
+
+        private Filter(FilterOption option0, FilterOperator operator0, List<?> values0) {
+            option = option0;
+            operator = operator0;
+            values = values0;
+
+            switch (operator.valueCount) {
+            case ONE:
+                caption = String.format(operator.formatStr, option.name, values.get(0));
+                break;
+            case TWO:
+                caption = String.format(operator.formatStr, option.name, values.get(0), values.get(1));
+                break;
+            case MANY:
+                caption = String.format(operator.formatStr, option.name, StringUtils.join(values, ", "));
+                break;
+            case MANY_OR:
+                caption = String.format(operator.formatStr, option.name, formatValues(", ", "or"));
+                break;
+            case MANY_AND:
+            default:
+                caption = String.format(operator.formatStr, option.name, formatValues(", ", "and"));
+                break;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return caption;
+        }
+
+        private String formatValues(String delim, String finalDelim) {
+            switch (values.size()) {
+            case 1:
+                return values.get(0).toString();
+            case 2:
+                return values.get(0) + " " + finalDelim + " " + values.get(1);
+            default:
+                String result = StringUtils.join(values, delim);
+                int index = result.lastIndexOf(delim) + delim.length();
+                return result.substring(0, index) + finalDelim + " " + result.substring(index);
+            }
         }
     }
 }
