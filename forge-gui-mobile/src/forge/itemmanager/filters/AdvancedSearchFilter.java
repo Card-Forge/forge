@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.item.InventoryItem;
 import forge.itemmanager.BooleanExpression.Operator;
+import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;
 import forge.menu.FTooltip;
 import forge.screens.FScreen;
@@ -186,7 +188,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         }
     }
 
-    private static class EditScreen extends FScreen {
+    private class EditScreen extends FScreen {
         private FScrollPane scroller = add(new FScrollPane() {
             @Override
             protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
@@ -237,15 +239,34 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             private final FLabel btnNotBeforeParen, btnOpenParen, btnNotAfterParen;
             private final FLabel btnFilter;
             private final FLabel btnCloseParen, btnAnd, btnOr;
+            private AdvancedSearch.Filter<T> filter;
 
             private Filter() {
                 btnNotBeforeParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
                 btnOpenParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("(").selectable().build());
                 btnNotAfterParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
 
-                btnFilter = add(new FLabel.ButtonBuilder().text("Select Filter...").command(new FEventHandler() {
+                final String emptyFilterText = "Select Filter...";
+                btnFilter = add(new FLabel.ButtonBuilder().text(emptyFilterText).command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
+                        FThreads.invokeInBackgroundThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                filter = AdvancedSearch.getFilter(itemManager.getGenericType());
+                                FThreads.invokeInEdtLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (filter == null) {
+                                            btnFilter.setText(emptyFilterText);
+                                        }
+                                        else {
+                                            btnFilter.setText(filter.toString());
+                                        }
+                                    }
+                                });
+                            }
+                        });
                     }
                 }).build());
 
