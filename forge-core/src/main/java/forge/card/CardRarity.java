@@ -17,31 +17,42 @@
  */
 package forge.card;
 
+import com.google.common.base.Function;
+
 public enum CardRarity {
-    BasicLand("L"),
-    Common("C"),
-    Uncommon("U"),
-    Rare("R"),
-    MythicRare("M"),
-    Special("S"), // Timeshifted
-    Unknown("?"); // In development
+    BasicLand("L", "Basic Land"),
+    Common("C", "Common"),
+    Uncommon("U", "Uncommon"),
+    Rare("R", "Rare"),
+    MythicRare("M", "Mythic Rare"),
+    Special("S", "Special"), // Timeshifted
+    Unknown("?", "Unknown"); // In development
 
-    private final String strValue;
+    private final String shortName, longName;
 
-    private CardRarity(final String sValue) {
-        this.strValue = sValue;
+    private CardRarity(final String shortName0, final String longName0) {
+        shortName = shortName0;
+        longName = longName0;
     }
 
     @Override
     public String toString() {
-        return this.strValue;
+        return shortName;
     }
     
     public static CardRarity smartValueOf(String input) {
-        for(CardRarity r : CardRarity.values()) {
-            if( r.name().equalsIgnoreCase(input) || r.strValue.equalsIgnoreCase(input))
+        for (CardRarity r : CardRarity.values()) {
+            if (r.name().equalsIgnoreCase(input) || r.shortName.equalsIgnoreCase(input) || r.longName.equalsIgnoreCase(input)) {
                 return r;
+            }
         }
         return Unknown;
     }
+
+    public static final Function<CardRarity, String> FN_GET_LONG_NAME = new Function<CardRarity, String>() {
+        @Override
+        public String apply(final CardRarity rarity) {
+            return rarity.longName;
+        }
+    };
 }

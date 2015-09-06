@@ -26,6 +26,7 @@ import forge.util.gui.SOptionPane;
 
 public class AdvancedSearch {
     private enum FilterOption {
+        NONE("(none)", null, null, null),
         CARD_NAME("Name", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
             @Override
             protected String getItemValue(PaperCard input) {
@@ -140,7 +141,7 @@ public class AdvancedSearch {
                 return input.getRules().getManaCost().toString();
             }
         }),
-        CARD_RARITY("Rarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardRarity>(Arrays.asList(CardRarity.values())) {
+        CARD_RARITY("Rarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardRarity>(Arrays.asList(CardRarity.values()), CardRarity.FN_GET_LONG_NAME, CardRarity.FN_GET_LONG_NAME) {
             @Override
             protected CardRarity getItemValue(PaperCard input) {
                 return input.getRarity();
@@ -567,6 +568,9 @@ public class AdvancedSearch {
     public static <T extends InventoryItem> Filter<T> getFilter(Class<? super T> type, Filter<T> editFilter) {
         //build list of filter options based on ItemManager type
         List<FilterOption> options = new ArrayList<FilterOption>();
+        if (editFilter != null) {
+            options.add(FilterOption.NONE); //provide option to clear existing filter
+        }
         for (FilterOption opt : FilterOption.values()) {
             if (opt.type == type) {
                 options.add(opt);
@@ -575,11 +579,13 @@ public class AdvancedSearch {
 
         final FilterOption defaultOption = editFilter == null ? null : editFilter.option;
         final FilterOption option = SGuiChoose.oneOrNone("Select a filter type", options, defaultOption, null);
-        if (option == null) { return null; }
+        if (option == null) { return editFilter; }
+
+        if (option == FilterOption.NONE) { return null; } //allow user to clear filter by selecting "(none)"
 
         final FilterOperator defaultOperator = option == defaultOption ? editFilter.operator : null;
         final FilterOperator operator = SGuiChoose.oneOrNone("Select an operator for " + option.name, option.operatorOptions, defaultOperator, null);
-        if (operator == null) { return null; }
+        if (operator == null) { return editFilter; }
 
         final String message = option.name + " " + operator.caption + " ?";
         return (Filter<T>)option.evaluator.createFilter(message, option, operator);

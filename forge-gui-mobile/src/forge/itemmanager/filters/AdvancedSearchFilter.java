@@ -224,6 +224,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             }
         }
 
+        @SuppressWarnings("unchecked")
         private void removeNextFilter(Filter fromFilter) {
             int index = scroller.indexOf(fromFilter);
             if (index < scroller.getChildCount() - 1) {
@@ -254,12 +255,17 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                             @Override
                             public void run() {
                                 final AdvancedSearch.Filter<T> newFilter = AdvancedSearch.getFilter(itemManager.getGenericType(), filter);
-                                if (newFilter != null) {
+                                if (filter != newFilter) {
                                     FThreads.invokeInEdtLater(new Runnable() {
                                         @Override
                                         public void run() {
                                             filter = newFilter;
-                                            btnFilter.setText(filter.toString());
+                                            if (filter != null) {
+                                                btnFilter.setText(filter.toString());
+                                            }
+                                            else {
+                                                btnFilter.setText(emptyFilterText);
+                                            }
                                         }
                                     });
                                 }
