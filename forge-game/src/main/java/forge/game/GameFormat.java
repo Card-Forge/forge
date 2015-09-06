@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
@@ -35,8 +36,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 
 /**
@@ -293,8 +296,18 @@ public class GameFormat implements Comparable<GameFormat> {
             }
             return NoFormat;
         }
-        
-        public Iterable<GameFormat> getAllFormatsOfDeck(Deck deck) {
+
+        public Set<GameFormat> getAllFormatsOfCard(PaperCard card) {
+            Set<GameFormat> result = new HashSet<GameFormat>();
+            for (GameFormat gf : naturallyOrdered) {
+                if (gf.getFilterRules().apply(card)) {
+                    result.add(gf);
+                }
+            }
+            return result;
+        }
+
+        public List<GameFormat> getAllFormatsOfDeck(Deck deck) {
             List<GameFormat> result = new ArrayList<GameFormat>();
             CardPool allCards = deck.getAllCardsInASinglePool();
             for(GameFormat gf : naturallyOrdered) {

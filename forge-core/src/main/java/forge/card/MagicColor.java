@@ -151,4 +151,32 @@ public final class MagicColor {
         private Constant() {
         }
     }
+
+    public enum Color {
+        WHITE(Constant.WHITE, MagicColor.WHITE),
+        BLUE(Constant.BLUE, MagicColor.BLUE),
+        BLACK(Constant.BLACK, MagicColor.BLACK),
+        RED(Constant.RED, MagicColor.RED),
+        GREEN(Constant.GREEN, MagicColor.GREEN),
+        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS);
+
+        private final String name;
+        private final byte colormask;
+
+        private Color(String name0, byte colormask0) {
+            name = name0;
+            colormask = colormask0;
+        }
+
+        public String getName() {
+            return name;
+        }
+        public byte getColormask() {
+            return colormask;
+        }
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
 }

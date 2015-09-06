@@ -18,11 +18,11 @@
 package forge.card;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import com.google.common.collect.UnmodifiableIterator;
 
+import forge.card.MagicColor.Color;
 import forge.card.mana.ManaCost;
 import forge.util.BinaryUtil;
 
@@ -300,6 +300,16 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
 
     public ColorSet getOffColors(final ColorSet ccOther) {
         return fromMask(~this.myColor & ccOther.myColor);
+    }
+
+    public Set<Color> toEnumSet() {
+        List<Color> list = new ArrayList<Color>();
+        for (Color c : Color.values()) {
+            if (hasAnyColor(c.getColormask())) {
+                list.add(c);
+            }
+        }
+        return EnumSet.copyOf(list);
     }
 
     @Override

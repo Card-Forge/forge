@@ -3,14 +3,20 @@ package forge.itemmanager;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
 import forge.card.CardRarity;
+import forge.card.CardRules;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.CardType.CoreType;
+import forge.card.CardType.Supertype;
 import forge.game.GameFormat;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -20,30 +26,137 @@ import forge.util.gui.SOptionPane;
 
 public class AdvancedSearch {
     private enum FilterOption {
-        CARD_NAME("Name", PaperCard.class, FilterOperator.STRING_OPS, new StringValueSelector()),
-        CARD_RULES_TEXT("Rules Text", PaperCard.class, FilterOperator.STRING_OPS, new StringValueSelector()),
-        CARD_SET("Set", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListValueSelector<CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE)),
-        CARD_FORMAT("Format", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListValueSelector<GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList())),
-        CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListValueSelector<String>(MagicColor.Constant.COLORS_AND_COLORLESS)),
-        CARD_TYPE("Type", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListValueSelector<String>(CardType.getSortedCoreAndSuperTypes())),
-        CARD_SUB_TYPE("Subtype", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListValueSelector<String>(CardType.getSortedSubTypes())),
-        CARD_CMC("CMC", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
-        CARD_GENERIC_COST("Generic Cost", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
-        CARD_POWER("Power", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
-        CARD_TOUGHNESS("Toughness", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericValueSelector(0, 20)),
-        CARD_MANA_COST("Mana Cost", PaperCard.class, FilterOperator.STRING_OPS, new StringValueSelector()),
-        CARD_RARITY("Rarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListValueSelector<CardRarity>(Arrays.asList(CardRarity.values())));
+        CARD_NAME("Name", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
+            @Override
+            protected String getItemValue(PaperCard input) {
+                return input.getName();
+            }
+        }),
+        CARD_RULES_TEXT("Rules Text", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
+            @Override
+            protected String getItemValue(PaperCard input) {
+                return input.getRules().getOracleText();
+            }
+        }),
+        CARD_SET("Set", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
+            @Override
+            protected CardEdition getItemValue(PaperCard input) {
+                return FModel.getMagicDb().getEditions().get(input.getEdition());
+            }
+        }),
+        CARD_FORMAT("Format", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList()) {
+            @Override
+            protected GameFormat getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<GameFormat> getItemValues(PaperCard input) {
+                return FModel.getFormats().getAllFormatsOfCard(input);
+            }
+        }),
+        CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, MagicColor.Color>(Arrays.asList(MagicColor.Color.values())) {
+            @Override
+            protected MagicColor.Color getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<MagicColor.Color> getItemValues(PaperCard input) {
+                return input.getRules().getColor().toEnumSet();
+            }
+        }),
+        CARD_COLOR_IDENTITY("Color Identity", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, MagicColor.Color>(Arrays.asList(MagicColor.Color.values())) {
+            @Override
+            protected MagicColor.Color getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<MagicColor.Color> getItemValues(PaperCard input) {
+                return input.getRules().getColorIdentity().toEnumSet();
+            }
+        }),
+        CARD_TYPE("Type", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getSortedCoreAndSuperTypes()) {
+            @Override
+            protected String getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(PaperCard input) {
+                final CardType type = input.getRules().getType();
+                final Set<String> types = new HashSet<String>();
+                for (Supertype t : type.getSupertypes()) {
+                    types.add(t.name());
+                }
+                for (CoreType t : type.getCoreTypes()) {
+                    types.add(t.name());
+                }
+                return types;
+            }
+        }),
+        CARD_SUB_TYPE("Subtype", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getSortedSubTypes()) {
+            @Override
+            protected String getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(PaperCard input) {
+                return (Set<String>)input.getRules().getType().getSubtypes();
+            }
+        }),
+        CARD_CMC("CMC", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
+            @Override
+            protected Integer getItemValue(PaperCard input) {
+                return input.getRules().getManaCost().getCMC();
+            }
+        }),
+        CARD_GENERIC_COST("Generic Cost", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
+            @Override
+            protected Integer getItemValue(PaperCard input) {
+                return input.getRules().getManaCost().getGenericCost();
+            }
+        }),
+        CARD_POWER("Power", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
+            @Override
+            protected Integer getItemValue(PaperCard input) {
+                CardRules rules = input.getRules();
+                if (rules.getType().isCreature()) {
+                    return rules.getIntPower();
+                }
+                return null;
+            }
+        }),
+        CARD_TOUGHNESS("Toughness", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
+            @Override
+            protected Integer getItemValue(PaperCard input) {
+                CardRules rules = input.getRules();
+                if (rules.getType().isCreature()) {
+                    return rules.getIntToughness();
+                }
+                return null;
+            }
+        }),
+        CARD_MANA_COST("Mana Cost", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
+            @Override
+            protected String getItemValue(PaperCard input) {
+                return input.getRules().getManaCost().toString();
+            }
+        }),
+        CARD_RARITY("Rarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardRarity>(Arrays.asList(CardRarity.values())) {
+            @Override
+            protected CardRarity getItemValue(PaperCard input) {
+                return input.getRarity();
+            }
+        });
 
         private final String name;
         private final Class<? extends InventoryItem> type;
         private final FilterOperator[] operatorOptions;
-        private final FilterValueSelector valueSelector;
+        private final FilterEvaluator<? extends InventoryItem, ?> evaluator;
 
-        private FilterOption(String name0, Class<? extends InventoryItem> type0, FilterOperator[] operatorOptions0, FilterValueSelector valueSelector0) {
+        private FilterOption(String name0, Class<? extends InventoryItem> type0, FilterOperator[] operatorOptions0, FilterEvaluator<? extends InventoryItem, ?> evaluator0) {
             name = name0;
             type = type0;
             operatorOptions = operatorOptions0;
-            valueSelector = valueSelector0;
+            evaluator = evaluator0;
         }
 
         @Override
@@ -54,29 +167,189 @@ public class AdvancedSearch {
 
     private enum FilterOperator {
         //Numeric operators
-        EQUALS("is equal to", "%1$s=%2$d", FilterValueCount.ONE),
-        NOT_EQUALS("is not equal to", "%1$s<>%2$d", FilterValueCount.ONE),
-        GREATER_THAN("is greater than", "%1$s>%2$d", FilterValueCount.ONE),
-        LESS_THAN("is less than", "%1$s<%2$d", FilterValueCount.ONE),
-        GT_OR_EQUAL("is greater than or equal to", "%1$s>=%2$d", FilterValueCount.ONE),
-        LT_OR_EQUAL("is less than or equal to", "%1$s<=%2$d", FilterValueCount.ONE),
-        BETWEEN_INCLUSIVE("is between (inclusive)", "%2$d<=%1$s<=%3$d", FilterValueCount.TWO),
-        BETWEEN_EXCLUSIVE("is between (exclusive)", "%2$d<%1$s<%3$d", FilterValueCount.TWO),
+        EQUALS("is equal to", "%1$s=%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+            @Override
+            public boolean apply(Integer input, List<Integer> values) {
+                if (input != null) {
+                    return input.intValue() == values.get(0).intValue();
+                }
+                return false;
+            }
+        }),
+        NOT_EQUALS("is not equal to", "%1$s<>%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+            @Override
+            public boolean apply(Integer input, List<Integer> values) {
+                if (input != null) {
+                    return input.intValue() != values.get(0).intValue();
+                }
+                return true;
+            }
+        }),
+        GREATER_THAN("is greater than", "%1$s>%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+            @Override
+            public boolean apply(Integer input, List<Integer> values) {
+                if (input != null) {
+                    return input.intValue() > values.get(0).intValue();
+                }
+                return false;
+            }
+        }),
+        LESS_THAN("is less than", "%1$s<%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+            @Override
+            public boolean apply(Integer input, List<Integer> values) {
+                if (input != null) {
+                    return input.intValue() < values.get(0).intValue();
+                }
+                return false;
+            }
+        }),
+        GT_OR_EQUAL("is greater than or equal to", "%1$s>=%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+            @Override
+            public boolean apply(Integer input, List<Integer> values) {
+                if (input != null) {
+                    return input.intValue() >= values.get(0).intValue();
+                }
+                return false;
+            }
+        }),
+        LT_OR_EQUAL("is less than or equal to", "%1$s<=%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+            @Override
+            public boolean apply(Integer input, List<Integer> values) {
+                if (input != null) {
+                    return input.intValue() <= values.get(0).intValue();
+                }
+                return false;
+            }
+        }),
+        BETWEEN_INCLUSIVE("is between (inclusive)", "%2$d<=%1$s<=%3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
+            @Override
+            public boolean apply(Integer input, List<Integer> values) {
+                if (input != null) {
+                    int inputValue = input.intValue();
+                    return values.get(0).intValue() <= inputValue && inputValue <= values.get(1).intValue();
+                }
+                return false;
+            }
+        }),
+        BETWEEN_EXCLUSIVE("is between (exclusive)", "%2$d<%1$s<%3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
+            @Override
+            public boolean apply(Integer input, List<Integer> values) {
+                if (input != null) {
+                    int inputValue = input.intValue();
+                    return values.get(0).intValue() < inputValue && inputValue < values.get(1).intValue();
+                }
+                return false;
+            }
+        }),
 
         //String operators
-        IS("is", "%1$s is '%2$s'", FilterValueCount.ONE),
-        IS_NOT("is not", "%1$s is not '%2$s'", FilterValueCount.ONE),
-        CONTAINS("contains", "%1$s contains '%2$s'", FilterValueCount.ONE),
-        STARTS_WITH("starts with", "%1$s starts with '%2$s'", FilterValueCount.ONE),
-        ENDS_WITH("ends with", "%1$s ends with '%2$s'", FilterValueCount.ONE),
+        IS("is", "%1$s is '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
+            @Override
+            public boolean apply(String input, List<String> values) {
+                if (input != null) {
+                    return input.toLowerCase().equals(values.get(0).toLowerCase());
+                }
+                return false;
+            }
+        }),
+        IS_NOT("is not", "%1$s is not '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
+            @Override
+            public boolean apply(String input, List<String> values) {
+                if (input != null) {
+                    return !input.toLowerCase().equals(values.get(0).toLowerCase());
+                }
+                return true;
+            }
+        }),
+        CONTAINS("contains", "%1$s contains '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
+            @Override
+            public boolean apply(String input, List<String> values) {
+                if (input != null) {
+                    return input.toLowerCase().indexOf(values.get(0).toLowerCase()) != -1;
+                }
+                return false;
+            }
+        }),
+        STARTS_WITH("starts with", "%1$s starts with '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
+            @Override
+            public boolean apply(String input, List<String> values) {
+                if (input != null) {
+                    return input.toLowerCase().startsWith(values.get(0).toLowerCase());
+                }
+                return false;
+            }
+        }),
+        ENDS_WITH("ends with", "%1$s ends with '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
+            @Override
+            public boolean apply(String input, List<String> values) {
+                if (input != null) {
+                    return input.toLowerCase().endsWith(values.get(0).toLowerCase());
+                }
+                return false;
+            }
+        }),
 
         //Custom list operators
-        IS_EXACTLY("is exactly", "%1$s is %2$s", FilterValueCount.MANY),
-        IS_ANY("is any of", "%1$s is %2$s", FilterValueCount.MANY_OR),
-        IS_ALL("is all of", "%1$s is %2$s", FilterValueCount.MANY_AND),
-        IS_NONE("is none of", "%1$s is not %2$s", FilterValueCount.MANY_OR),
-        INCLUDES_ANY("includes any of", "%1$s includes %2$s", FilterValueCount.MANY_OR),
-        INCLUDES_ALL("includes all of", "%1$s includes %2$s", FilterValueCount.MANY_AND);
+        IS_EXACTLY("is exactly", "%1$s is %2$s", FilterValueCount.MANY, new OperatorEvaluator<Object>() {
+            @Override
+            public boolean apply(Object input, List<Object> values) {
+                return false;
+            }
+            @Override
+            public boolean apply(Set<Object> inputs, List<Object> values) {
+                return false;
+            }
+        }),
+        IS_ANY("is any of", "%1$s is %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+            @Override
+            public boolean apply(Object input, List<Object> values) {
+                return false;
+            }
+            @Override
+            public boolean apply(Set<Object> inputs, List<Object> values) {
+                return false;
+            }
+        }),
+        IS_ALL("is all of", "%1$s is %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
+            @Override
+            public boolean apply(Object input, List<Object> values) {
+                return false;
+            }
+            @Override
+            public boolean apply(Set<Object> inputs, List<Object> values) {
+                return false;
+            }
+        }),
+        IS_NONE("is none of", "%1$s is not %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+            @Override
+            public boolean apply(Object input, List<Object> values) {
+                return false;
+            }
+            @Override
+            public boolean apply(Set<Object> inputs, List<Object> values) {
+                return false;
+            }
+        }),
+        INCLUDES_ANY("includes any of", "%1$s includes %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+            @Override
+            public boolean apply(Object input, List<Object> values) {
+                return false;
+            }
+            @Override
+            public boolean apply(Set<Object> inputs, List<Object> values) {
+                return false;
+            }
+        }),
+        INCLUDES_ALL("includes all of", "%1$s includes %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
+            @Override
+            public boolean apply(Object input, List<Object> values) {
+                return false;
+            }
+            @Override
+            public boolean apply(Set<Object> inputs, List<Object> values) {
+                return false;
+            }
+        });
 
         public static final FilterOperator[] NUMBER_OPS = new FilterOperator[] {
             EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GT_OR_EQUAL, LT_OR_EQUAL, BETWEEN_INCLUSIVE, BETWEEN_EXCLUSIVE
@@ -93,11 +366,13 @@ public class AdvancedSearch {
 
         private final String caption, formatStr;
         private final FilterValueCount valueCount;
+        private final OperatorEvaluator<?> evaluator;
 
-        private FilterOperator(String caption0, String formatStr0, FilterValueCount valueCount0) {
+        private FilterOperator(String caption0, String formatStr0, FilterValueCount valueCount0, OperatorEvaluator<?> evaluator0) {
             caption = caption0;
             formatStr = formatStr0;
             valueCount = valueCount0;
+            evaluator = evaluator0;
         }
 
         @Override
@@ -114,20 +389,62 @@ public class AdvancedSearch {
         MANY_AND
     }
 
-    private static abstract class FilterValueSelector {
-        public abstract <T extends InventoryItem> Filter<T> createFilter(String message, FilterOption option, FilterOperator operator);
+    private static abstract class OperatorEvaluator<V> {
+        protected abstract boolean apply(V input, List<V> values);
+
+        protected boolean apply(Set<V> inputs, List<V> values) {
+            return false; //available for options that have multiple inputs
+        }
     }
 
-    private static class NumericValueSelector extends FilterValueSelector {
+    private static abstract class FilterEvaluator<T extends InventoryItem, V> {
+        @SuppressWarnings("unchecked")
+        public final Filter<T> createFilter(String message, FilterOption option, FilterOperator operator) {
+            final List<V> values = getValues(message, option, operator);
+            if (values == null || values.isEmpty()) { return null; }
+
+            String caption = getCaption(values, option, operator);
+
+            final OperatorEvaluator<V> evaluator = (OperatorEvaluator<V>)operator.evaluator;
+            Predicate<T> predicate;
+            if (option.operatorOptions == FilterOperator.MULTI_LIST_OPS) {
+                predicate = new Predicate<T>() {
+                    @Override
+                    public boolean apply(T input) {
+                        return evaluator.apply(getItemValues(input), values);
+                    }
+                };
+            }
+            else {
+                predicate = new Predicate<T>() {
+                    @Override
+                    public boolean apply(T input) {
+                        return evaluator.apply(getItemValue(input), values);
+                    }
+                };
+            }
+            return new Filter<T>(option, operator, caption, predicate);
+        }
+
+        protected abstract List<V> getValues(String message, FilterOption option, FilterOperator operator);
+        protected abstract String getCaption(List<V> values, FilterOption option, FilterOperator operator);
+        protected abstract V getItemValue(T input);
+
+        protected Set<V> getItemValues(T input) { //available for options that have multiple inputs
+            return null;
+        }
+    }
+
+    private static abstract class NumericEvaluator<T extends InventoryItem> extends FilterEvaluator<T, Integer> {
         private final int min, max;
 
-        public NumericValueSelector(int min0, int max0) {
+        public NumericEvaluator(int min0, int max0) {
             min = min0;
             max = max0;
         }
 
         @Override
-        public <T extends InventoryItem> Filter<T> createFilter(String message, FilterOption option, FilterOperator operator) {
+        protected List<Integer> getValues(String message, FilterOption option, FilterOperator operator) {
             String msg = message;
             if (operator.valueCount == FilterValueCount.TWO) {
                 msg += " (Lower Bound)";
@@ -135,64 +452,75 @@ public class AdvancedSearch {
             Integer lowerBound = SGuiChoose.getInteger(msg, min, max);
             if (lowerBound == null) { return null; }
 
-            final String caption;
+            final List<Integer> values = new ArrayList<Integer>();
+            values.add(lowerBound);
+
             if (operator.valueCount == FilterValueCount.TWO) { //prompt for upper bound if needed
                 msg = message + " (Upper Bound)";
                 Integer upperBound = SGuiChoose.getInteger(msg, lowerBound, max);
                 if (upperBound == null) { return null; }
 
-                caption = String.format(operator.formatStr, option.name, lowerBound, upperBound);
+                values.add(upperBound);
             }
-            else {
-                caption = String.format(operator.formatStr, option.name, lowerBound);
-            }
-
-            return new Filter<T>(option, operator, caption, null);
-        }
-    }
-
-    private static class StringValueSelector extends FilterValueSelector {
-        public StringValueSelector() {
+            return values;
         }
 
         @Override
-        public <T extends InventoryItem> Filter<T> createFilter(String message, FilterOption option, FilterOperator operator) {
-            String value = SOptionPane.showInputDialog("", message);
-            if (value == null) { return null; }
-
-            final String caption = String.format(operator.formatStr, option.name, value);
-
-            return new Filter<T>(option, operator, caption, null);
+        protected String getCaption(List<Integer> values, FilterOption option, FilterOperator operator) {
+            if (operator.valueCount == FilterValueCount.TWO) {
+                return String.format(operator.formatStr, option.name, values.get(0), values.get(1));
+            }
+            return String.format(operator.formatStr, option.name, values.get(0));
         }
     }
 
-    private static class CustomListValueSelector<V> extends FilterValueSelector {
+    private static abstract class StringEvaluator<T extends InventoryItem> extends FilterEvaluator<T, String> {
+        public StringEvaluator() {
+        }
+
+        @Override
+        protected List<String> getValues(String message, FilterOption option, FilterOperator operator) {
+            String value = SOptionPane.showInputDialog("", message);
+            if (value == null) { return null; }
+
+            List<String> values = new ArrayList<String>();
+            values.add(value);
+            return values;
+        }
+
+        @Override
+        protected String getCaption(List<String> values, FilterOption option, FilterOperator operator) {
+            return String.format(operator.formatStr, option.name, values.get(0));
+        }
+    }
+
+    private static abstract class CustomListEvaluator<T extends InventoryItem, V> extends FilterEvaluator<T, V> {
         private final Collection<V> choices;
         private final Function<V, String> toShortString, toLongString;
 
-        public CustomListValueSelector(Collection<V> choices0) {
+        public CustomListEvaluator(Collection<V> choices0) {
             this(choices0, null, null);
         }
-        public CustomListValueSelector(Collection<V> choices0, Function<V, String> toShortString0) {
+        public CustomListEvaluator(Collection<V> choices0, Function<V, String> toShortString0) {
             this(choices0, toShortString0, null);
         }
-        public CustomListValueSelector(Collection<V> choices0, Function<V, String> toShortString0, Function<V, String> toLongString0) {
+        public CustomListEvaluator(Collection<V> choices0, Function<V, String> toShortString0, Function<V, String> toLongString0) {
             choices = choices0;
             toShortString = toShortString0;
             toLongString = toLongString0;
         }
 
         @Override
-        public <T extends InventoryItem> Filter<T> createFilter(String message, FilterOption option, FilterOperator operator) {
+        protected List<V> getValues(String message, FilterOption option, FilterOperator operator) {
             int max = choices.size();
             if (operator == FilterOperator.IS_EXACTLY && option.operatorOptions == FilterOperator.SINGLE_LIST_OPS) {
                 max = 1;
             }
-            List<V> values = SGuiChoose.getChoices(message, 0, max, choices);
-            if (values == null || values.isEmpty()) {
-                return null;
-            }
+            return SGuiChoose.getChoices(message, 0, max, choices, null, toLongString);
+        }
 
+        @Override
+        protected String getCaption(List<V> values, FilterOption option, FilterOperator operator) {
             String valuesStr;
             switch (operator.valueCount) {
             case MANY:
@@ -206,11 +534,7 @@ public class AdvancedSearch {
                 valuesStr = formatValues(values, ", ", " and ");
                 break;
             }
-            
-
-            final String caption = String.format(operator.formatStr, option.name, valuesStr);
-
-            return new Filter<T>(option, operator, caption, null);
+            return String.format(operator.formatStr, option.name, valuesStr);
         }
 
         private String formatValues(List<V> values, String delim, String finalDelim) {
@@ -239,6 +563,7 @@ public class AdvancedSearch {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static <T extends InventoryItem> Filter<T> getFilter(Class<? super T> type, Filter<T> editFilter) {
         //build list of filter options based on ItemManager type
         List<FilterOption> options = new ArrayList<FilterOption>();
@@ -257,7 +582,7 @@ public class AdvancedSearch {
         if (operator == null) { return null; }
 
         final String message = option.name + " " + operator.caption + " ?";
-        return option.valueSelector.createFilter(message, option, operator);
+        return (Filter<T>)option.evaluator.createFilter(message, option, operator);
     }
 
     public static class Filter<T extends InventoryItem> {
