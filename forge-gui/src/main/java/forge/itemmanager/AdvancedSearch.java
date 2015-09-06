@@ -46,7 +46,7 @@ public class AdvancedSearch {
                 return FModel.getMagicDb().getEditions().get(input.getEdition());
             }
         }),
-        CARD_FORMAT("Format", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList()) {
+        CARD_FORMAT("Format", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList()) {
             @Override
             protected GameFormat getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -166,7 +166,7 @@ public class AdvancedSearch {
                 return input.getPath();
             }
         }),
-        DECK_FORMAT("Format", DeckProxy.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<DeckProxy, GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList()) {
+        DECK_FORMAT("Format", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList()) {
             @Override
             protected GameFormat getItemValue(DeckProxy input) {
                 throw new RuntimeException("getItemValues should be called instead");
