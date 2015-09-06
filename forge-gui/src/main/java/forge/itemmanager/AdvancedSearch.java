@@ -588,7 +588,11 @@ public class AdvancedSearch {
         if (operator == null) { return editFilter; }
 
         final String message = option.name + " " + operator.caption + " ?";
-        return (Filter<T>)option.evaluator.createFilter(message, option, operator);
+        Filter<T> filter = (Filter<T>)option.evaluator.createFilter(message, option, operator);
+        if (filter == null) {
+            filter = editFilter;
+        }
+        return filter;
     }
 
     public static class Filter<T extends InventoryItem> {
