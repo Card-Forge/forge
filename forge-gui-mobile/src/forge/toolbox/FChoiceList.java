@@ -18,8 +18,12 @@ import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
+import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.AdvancedSearch.FilterOperator;
+import forge.itemmanager.CardManager;
+import forge.itemmanager.filters.AdvancedSearchFilter;
+import forge.itemmanager.filters.ItemFilter;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
@@ -85,6 +89,11 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             @Override
             public boolean layoutHorizontal() {
                 return renderer.layoutHorizontal();
+            }
+
+            @Override
+            public AdvancedSearchFilter<? extends InventoryItem> getAdvancedSearchFilter(ListChooser<T> listChooser) {
+                return renderer.getAdvancedSearchFilter(listChooser);
             }
 
             @Override
@@ -290,6 +299,10 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         public boolean layoutHorizontal() {
             return false; //this doesn't need to be overridden to specify vertical layouts
         }
+
+        public AdvancedSearchFilter<? extends InventoryItem> getAdvancedSearchFilter(ListChooser<T> listChooser) {
+            return null; //allow overriding to support advanced search
+        }
     }
     protected class DefaultItemRenderer extends ItemRenderer {
         @Override
@@ -373,6 +386,30 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
+        }
+
+        @Override
+        public AdvancedSearchFilter<? extends InventoryItem> getAdvancedSearchFilter(final ListChooser<T> listChooser) {
+            //must create a fake CardManager in order to utilize advance search filter
+            final CardManager manager = new CardManager(true) {
+                @Override
+                public void applyNewOrModifiedFilter(final ItemFilter<? extends PaperCard> filter) {
+                    //handle update the visibility of the advanced search filter
+                    boolean empty = filter.isEmpty();
+                    ItemFilter<? extends PaperCard>.Widget widget = filter.getWidget();
+                    if (widget.isVisible() == empty) {
+                        widget.setVisible(!empty);
+                        listChooser.revalidate();
+                    }
+                    listChooser.applyFilters();
+                }
+
+                @Override
+                protected void addDefaultFilters() {
+                    //avoid creating unneeded filters
+                }
+            };
+            return CardManager.createAdvancedSearchFilter(manager);
         }
     }
     //special renderer for cards

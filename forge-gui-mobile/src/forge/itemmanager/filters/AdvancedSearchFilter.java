@@ -46,9 +46,13 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         if (expression.isEmpty()) {
             return Predicates.alwaysTrue();
         }
+        return getPredicate();
+    }
+
+    public Predicate<T> getPredicate() {
         return getPredicatePiece(new ExpressionIterator());
     }
-    
+
     private class ExpressionIterator {
         private int index;
         private boolean hasNext() {

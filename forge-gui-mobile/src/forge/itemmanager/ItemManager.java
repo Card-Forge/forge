@@ -866,7 +866,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         if (lockFiltering || !initialized) { return false; }
 
         List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
-        for (ItemFilter<? extends T> filter : filters) { //TODO: Support custom filter logic
+        for (ItemFilter<? extends T> filter : filters) {
             if (!filter.isEmpty()) {
                 predicates.add(filter.buildPredicate(genericType));
             }

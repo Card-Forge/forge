@@ -11,6 +11,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
+import forge.item.InventoryItem;
+import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
@@ -299,6 +301,10 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
 
         public boolean layoutHorizontal() {
             return false; //this doesn't need to be overridden to specify vertical layouts
+        }
+
+        public AdvancedSearchFilter<? extends InventoryItem> getAdvancedSearchFilter(ListChooser<V> listChooser) {
+            return null; //allow overriding to support advanced search
         }
     }
 

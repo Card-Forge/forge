@@ -19,11 +19,21 @@
 package forge.toolbox;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import forge.FThreads;
 import forge.Graphics;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
+import forge.item.InventoryItem;
+import forge.itemmanager.filters.AdvancedSearchFilter;
+import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.filters.ListLabelFilter;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
@@ -66,11 +76,13 @@ public class ListChooser<T> extends FContainer {
 
     // initialized before; listeners may be added to it
     private FTextField txtSearch;
+    private FLabel btnSearch;
     private ChoiceList lstChoices;
     private FOptionPane optionPane;
     private final Collection<T> list;
     private final Function<T, String> display;
     private final Callback<List<T>> callback;
+    private AdvancedSearchFilter<? extends InventoryItem> advancedSearchFilter;
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list0, final Function<T, String> display0, final Callback<List<T>> callback0) {
         FThreads.assertExecutedByEdt(true);
@@ -87,26 +99,38 @@ public class ListChooser<T> extends FContainer {
             txtSearch.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    String pattern = txtSearch.getText().toLowerCase();
-                    lstChoices.clearSelection();
-                    if (pattern.isEmpty()) {
-                        lstChoices.setListData(list);
-                    }
-                    else {
-                        List<T> filteredList = new ArrayList<T>();
-                        for (T option : list) {
-                            if (lstChoices.getChoiceText(option).toLowerCase().contains(pattern)) {
-                                filteredList.add(option);
-                            }
-                        }
-                        lstChoices.setListData(filteredList);
-                    }
-                    if (!lstChoices.isEmpty() && maxChoices > 0) {
-                        lstChoices.addSelectedIndex(0);
-                    }
-                    lstChoices.setScrollTop(0);
+                    applyFilters();
                 }
             });
+
+            advancedSearchFilter = lstChoices.getListItemRenderer().getAdvancedSearchFilter(this);
+            if (advancedSearchFilter != null) {
+                btnSearch = add(new FLabel.ButtonBuilder()
+                    .icon(FSkinImage.SEARCH).iconScaleFactor(0.9f).command(new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            FPopupMenu menu = new FPopupMenu() {
+                                @Override
+                                protected void buildMenu() {
+                                    addItem(new FMenuItem("Advanced Search", FSkinImage.SEARCH, new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            advancedSearchFilter.edit();
+                                        }
+                                    }));
+                                    addItem(new FMenuItem("Reset Filters", FSkinImage.DELETE, new FEventHandler() {
+                                        @Override
+                                        public void handleEvent(FEvent e) {
+                                            resetFilters();
+                                        }
+                                    }));
+                                }
+                            };
+                            menu.show(btnSearch, 0, btnSearch.getHeight());
+                        }
+                    }).build());
+                add(advancedSearchFilter.getWidget());
+            }
         }
 
         final List<String> options;
@@ -138,6 +162,51 @@ public class ListChooser<T> extends FContainer {
                 return false; //allow list to go straight up against buttons
             }
         };
+    }
+
+    public void resetFilters() {
+        txtSearch.setText("");
+        if (advancedSearchFilter != null) {
+            advancedSearchFilter.reset();
+            ItemFilter<? extends InventoryItem>.Widget widget = advancedSearchFilter.getWidget();
+            if (widget.isVisible()) {
+                widget.setVisible(false);
+                revalidate();
+            }
+        }
+        applyFilters();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void applyFilters() {
+        lstChoices.clearSelection();
+
+        List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
+
+        final String pattern = txtSearch.getText().toLowerCase();
+        if (!pattern.isEmpty()) {
+            predicates.add(new Predicate<T>() {
+                @Override
+                public boolean apply(T input) {
+                    return lstChoices.getChoiceText(input).toLowerCase().contains(pattern);
+                }
+            });
+        }
+        if (advancedSearchFilter != null && !advancedSearchFilter.isEmpty()) {
+            predicates.add((Predicate<? super T>)advancedSearchFilter.getPredicate());
+        }
+
+        if (predicates.isEmpty()) {
+            lstChoices.setListData(list);
+        }
+        else {
+            lstChoices.setListData(Iterables.filter(list, Predicates.and(predicates)));
+        }
+
+        if (!lstChoices.isEmpty() && lstChoices.getMaxChoices() > 0) {
+            lstChoices.addSelectedIndex(0);
+        }
+        lstChoices.setScrollTop(0);
     }
 
     private void updateHeight() {
@@ -193,10 +262,24 @@ public class ListChooser<T> extends FContainer {
     protected void doLayout(float width, float height) {
         float y = 0;
         if (txtSearch != null) {
-            float padding = txtSearch.getHeight() * 0.25f;
+            float fieldWidth = width;
+            float fieldHeight = txtSearch.getHeight();
+            float padding = fieldHeight * 0.25f;
             y += padding;
-            txtSearch.setBounds(0, y, width, txtSearch.getHeight());
-            y += txtSearch.getHeight() + padding;
+            if (btnSearch != null) {
+                float buttonWidth = fieldHeight;
+                btnSearch.setBounds(width - buttonWidth, y, buttonWidth, fieldHeight);
+                fieldWidth -= buttonWidth + ItemFilter.PADDING;
+            }
+            txtSearch.setBounds(0, y, fieldWidth, fieldHeight);
+
+            if (advancedSearchFilter != null && advancedSearchFilter.getWidget().isVisible()) {
+                padding = ItemFilter.PADDING;
+                y += fieldHeight + padding;
+                fieldHeight = FTextField.getDefaultHeight(ListLabelFilter.LABEL_FONT);
+                advancedSearchFilter.getWidget().setBounds(0, y, width, fieldHeight);
+            }
+            y += fieldHeight + padding;
         }
         lstChoices.setBounds(0, y, width, height - y);
     }
