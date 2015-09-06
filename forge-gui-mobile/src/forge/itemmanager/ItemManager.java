@@ -143,6 +143,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                             public void handleEvent(FEvent e) {
                                 if (advancedSearchFilter == null) {
                                     advancedSearchFilter = createAdvancedSearchFilter();
+                                    ItemManager.this.add(advancedSearchFilter.getWidget());
                                 }
                                 advancedSearchFilter.edit();
                             }
@@ -363,6 +364,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         helper.include(btnView, viewButtonWidth, fieldHeight);
         helper.include(btnAdvancedSearchOptions, viewButtonWidth, fieldHeight);
         helper.newLine();
+        if (advancedSearchFilter != null && advancedSearchFilter.getWidget().isVisible()) {
+            helper.fillLine(advancedSearchFilter.getWidget(), fieldHeight);
+        }
         if (!hideFilters) {
             for (ItemFilter<? extends T> filter : filters) {
                 helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
@@ -792,15 +796,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     protected abstract AdvancedSearchFilter<? extends T> createAdvancedSearchFilter();
 
     public void addFilter(final ItemFilter<? extends T> filter) {
-        addFilter(-1, filter);
-    }
-    public void addFilter(int index, final ItemFilter<? extends T> filter) {
-        if (index == -1) {
-            filters.add(filter);
-        }
-        else {
-            filters.add(index, filter);
-        }
+        filters.add(filter);
         add(filter.getWidget());
 
         boolean visible = !hideFilters;
@@ -812,8 +808,19 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     //apply filters and focus existing filter's main component if filtering not locked
-    private void applyNewOrModifiedFilter(final ItemFilter<? extends T> filter) {
+    public void applyNewOrModifiedFilter(final ItemFilter<? extends T> filter) {
         if (lockFiltering) { return; }
+
+        if (filter == advancedSearchFilter) {
+            //handle update the visibility of the advanced search filter
+            boolean empty = filter.isEmpty();
+            ItemFilter<? extends T>.Widget widget = filter.getWidget();
+            if (widget.isVisible() == empty) {
+                widget.setVisible(!empty);
+                revalidate();
+            }
+        }
+
         applyFilters();
     }
 
@@ -837,6 +844,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         searchFilter.reset();
         if (advancedSearchFilter != null) {
             advancedSearchFilter.reset();
+            ItemFilter<? extends T>.Widget widget = advancedSearchFilter.getWidget();
+            if (widget.isVisible()) {
+                widget.setVisible(false);
+                revalidate();
+            }
         }
         lockFiltering = false;
 
@@ -861,6 +873,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
         if (!searchFilter.isEmpty()) {
             predicates.add(searchFilter.buildPredicate(genericType));
+        }
+        if (advancedSearchFilter != null && !advancedSearchFilter.isEmpty()) {
+            predicates.add(advancedSearchFilter.buildPredicate(genericType));
         }
 
         Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);

@@ -10,7 +10,6 @@ import com.google.common.base.Predicates;
 import forge.FThreads;
 import forge.Forge;
 import forge.item.InventoryItem;
-import forge.itemmanager.BooleanExpression.Operator;
 import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;
 import forge.menu.FTooltip;
@@ -23,13 +22,13 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.util.Callback;
 
 
 public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     private final List<Object> expression = new ArrayList<Object>();
 
     private FiltersLabel label;
-    private boolean isAdded;
     private EditScreen editScreen;
 
     public AdvancedSearchFilter(ItemManager<? super T> itemManager0) {
@@ -92,7 +91,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 continue;
             }
             else {
-                predPiece = ((ItemFilter<T>) piece).buildPredicate();
+                predPiece = ((AdvancedSearch.Filter<T>) piece).getPredicate();
             }
             if (applyNot) {
                 predPiece = Predicates.not(predPiece);
@@ -117,14 +116,6 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             editScreen = new EditScreen();
         }
         Forge.openScreen(editScreen);
-        /*if (!isAdded) {
-            isAdded = true;
-            itemManager.addFilter(0, this);
-        }
-        else {
-            itemManager.removeFilter(this);
-            isAdded = false;
-        }*/
     }
 
     private void updateLabel() {
@@ -134,9 +125,8 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             builder.append("(none)");
         }
         else {
-            builder.append(expression.get(0));
-            for (int i = 1; i < expression.size(); i++) {
-                builder.append(", " + expression.get(i));
+            for (Object piece : expression) {
+                builder.append(piece);
             }
         }
         label.setText(builder.toString());
@@ -146,10 +136,18 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         if (expression.isEmpty()) { return ""; }
 
         StringBuilder builder = new StringBuilder();
-        builder.append(expression.get(0));
+        builder.append("Filters:\n");
 
-        for (int i = 1; i < expression.size(); i++) {
-            builder.append("\n" + expression.get(i));
+        String indent = "";
+
+        for (Object piece : expression) {
+            if (piece.equals(Operator.CLOSE_PAREN) && !indent.isEmpty()) {
+                indent = indent.substring(2); //trim an indent level when a close paren is hit
+            }
+            builder.append("\n" + indent + piece.toString().trim());
+            if (piece.equals(Operator.OPEN_PAREN)) {
+                indent += "  "; //add an indent level when an open paren is hit
+            }
         }
         return builder.toString();
     }
@@ -161,6 +159,11 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
     @Override
     public void reset() {
+        expression.clear();
+        editScreen = null;
+        if (label != null) {
+            updateLabel();
+        }
     }
 
     @Override
@@ -168,6 +171,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         label = new FiltersLabel();
         updateLabel();
         widget.add(label);
+        widget.setVisible(!isEmpty());
     }
 
     @Override
@@ -209,6 +213,48 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         private EditScreen() {
             super("Advanced Search");
             scroller.add(new Filter());
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public void onClose(Callback<Boolean> canCloseCallback) {
+            //build expression when closing screen
+            expression.clear();
+
+            for (FDisplayObject child : scroller.getChildren()) {
+                Filter filter = (Filter)child;
+                if (filter.filter == null) { continue; } //skip any blank filters
+
+                if (filter.btnNotBeforeParen.isSelected()) {
+                    expression.add(Operator.NOT);
+                }
+                if (filter.btnOpenParen.isSelected()) {
+                    expression.add(Operator.OPEN_PAREN);
+                }
+                if (filter.btnNotAfterParen.isSelected()) {
+                    expression.add(Operator.NOT);
+                }
+
+                expression.add(filter.filter);
+
+                if (filter.btnCloseParen.isSelected()) {
+                    expression.add(Operator.CLOSE_PAREN);
+                }
+                if (filter.btnAnd.isSelected()) {
+                    expression.add(Operator.AND);
+                }
+                else if (filter.btnOr.isSelected()) {
+                    expression.add(Operator.OR);
+                }
+            }
+
+            if (label != null) {
+                updateLabel();
+            }
+
+            itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
+
+            super.onClose(canCloseCallback);
         }
 
         @Override
@@ -327,6 +373,24 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 x += dx;
                 btnOr.setBounds(x, y, buttonWidth, buttonHeight);
             }
+        }
+    }
+
+    private enum Operator {
+        AND(" AND "),
+        OR(" OR "),
+        NOT(" NOT "),
+        OPEN_PAREN("("),
+        CLOSE_PAREN(")");
+
+        private final String token;
+
+        private Operator(String token0) {
+            token = token0;
+        }
+
+        public String toString() {
+            return token;
         }
     }
 }
