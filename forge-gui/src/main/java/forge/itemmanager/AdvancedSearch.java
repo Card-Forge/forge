@@ -305,24 +305,6 @@ public class AdvancedSearch {
         }),
 
         //String operators
-        IS("is", "%1$s is '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
-            @Override
-            public boolean apply(String input, List<String> values) {
-                if (input != null) {
-                    return input.toLowerCase().equals(values.get(0).toLowerCase());
-                }
-                return false;
-            }
-        }),
-        IS_NOT("is not", "%1$s is not '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
-            @Override
-            public boolean apply(String input, List<String> values) {
-                if (input != null) {
-                    return !input.toLowerCase().equals(values.get(0).toLowerCase());
-                }
-                return true;
-            }
-        }),
         CONTAINS("contains", "%1$s contains '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
             @Override
             public boolean apply(String input, List<String> values) {
@@ -417,43 +399,19 @@ public class AdvancedSearch {
                 }
                 return false;
             }
-        }),
-        IS_NONE("is none of", "%1$s is not %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
-            @Override
-            public boolean apply(Object input, List<Object> values) {
-                if (input != null) {
-                    for (Object value : values) {
-                        if (input.equals(value)) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            }
-            @Override
-            public boolean apply(Set<Object> inputs, List<Object> values) {
-                if (inputs != null) {
-                    for (Object value : values) {
-                        if (inputs.contains(value)) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            }
         });
 
         public static final FilterOperator[] NUMBER_OPS = new FilterOperator[] {
             EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GT_OR_EQUAL, LT_OR_EQUAL, BETWEEN_INCLUSIVE, BETWEEN_EXCLUSIVE
         };
         public static final FilterOperator[] STRING_OPS = new FilterOperator[] {
-            IS, IS_NOT, CONTAINS, STARTS_WITH, ENDS_WITH
+            CONTAINS, STARTS_WITH, ENDS_WITH
         };
         public static final FilterOperator[] SINGLE_LIST_OPS = new FilterOperator[] {
-            IS_EXACTLY, IS_ANY, IS_NONE
+            IS_EXACTLY, IS_ANY
         };
         public static final FilterOperator[] MULTI_LIST_OPS = new FilterOperator[] {
-            IS_EXACTLY, IS_ANY, IS_ALL, IS_NONE
+            IS_EXACTLY, IS_ANY, IS_ALL
         };
 
         private final String caption, formatStr;
