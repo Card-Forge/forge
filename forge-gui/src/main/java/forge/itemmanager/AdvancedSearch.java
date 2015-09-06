@@ -1,11 +1,7 @@
 package forge.itemmanager;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -17,7 +13,9 @@ import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.CardType.CoreType;
 import forge.card.CardType.Supertype;
+import forge.deck.CardPool;
 import forge.deck.DeckProxy;
+import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -212,6 +210,22 @@ public class AdvancedSearch {
             @Override
             protected Integer getItemValue(DeckProxy input) {
                 return input.getAverageCMC();
+            }
+        }),
+        DECK_MAIN("Main Deck", DeckProxy.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<DeckProxy>() {
+            @Override
+            protected Map<String, Integer> getItemValue(DeckProxy input) {
+                return input.getDeck().getMain().toNameLookup();
+            }
+        }),
+        DECK_SIDEBOARD("Sideboard", DeckProxy.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<DeckProxy>() {
+            @Override
+            protected Map<String, Integer> getItemValue(DeckProxy input) {
+                CardPool sideboard = input.getDeck().get(DeckSection.Sideboard);
+                if (sideboard != null) {
+                    sideboard.toNameLookup();
+                }
+                return null;
             }
         }),
         DECK_MAIN_SIZE("Main Deck Size", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(40, 250) {
@@ -437,6 +451,28 @@ public class AdvancedSearch {
                 }
                 return false;
             }
+        }),
+
+        //Deck content operators
+        CONTAINS_CARD("contains card", "%1$s contains %2$s", FilterValueCount.ONE, new OperatorEvaluator<Map<PaperCard, Integer>>() {
+            @Override
+            public boolean apply(Map<PaperCard, Integer> input, List<Map<PaperCard, Integer>> values) {
+                if (input != null) {
+                    Entry<PaperCard, Integer> entry = values.get(0).entrySet().iterator().next();
+                    return input.containsKey(entry.getKey());
+                }
+                return false;
+            }
+        }),
+        CONTAINS_X_COPIES_OF_CARD("contains X copies of card", "%1$s contains %3$d %2$s", FilterValueCount.TWO, new OperatorEvaluator<Map<PaperCard, Integer>>() {
+            @Override
+            public boolean apply(Map<PaperCard, Integer> input, List<Map<PaperCard, Integer>> values) {
+                if (input != null) {
+                    Entry<PaperCard, Integer> entry = values.get(0).entrySet().iterator().next();
+                    return input.get(entry.getKey()) == entry.getValue();
+                }
+                return false;
+            }
         });
 
         public static final FilterOperator[] BOOLEAN_OPS = new FilterOperator[] {
@@ -453,6 +489,9 @@ public class AdvancedSearch {
         };
         public static final FilterOperator[] MULTI_LIST_OPS = new FilterOperator[] {
             IS_EXACTLY, IS_ANY, IS_ALL
+        };
+        public static final FilterOperator[] DECK_CONTENT_OPS = new FilterOperator[] {
+            CONTAINS_CARD, CONTAINS_X_COPIES_OF_CARD
         };
 
         private final String caption, formatStr;
@@ -684,6 +723,39 @@ public class AdvancedSearch {
                 return String.format(operator.formatStr, option.name, formatValues(values, "", ""));
             }
             return super.getCaption(values, option, operator);
+        }
+    }
+
+    private static abstract class DeckContentEvaluator<T extends InventoryItem> extends FilterEvaluator<T, Map<String, Integer>> {
+        public DeckContentEvaluator() {
+        }
+
+        @Override
+        protected List<Map<String, Integer>> getValues(String message, FilterOption option, FilterOperator operator) {
+            PaperCard card = SGuiChoose.oneOrNone(message, FModel.getMagicDb().getCommonCards().getUniqueCards());
+            if (card == null) { return null; }
+
+            Integer amount = -1;
+            if (operator == FilterOperator.CONTAINS_X_COPIES_OF_CARD) { //prompt for quantity if needed
+                amount = SGuiChoose.getInteger("How many copies of " + card.getName() + "?", 0, 4);
+                if (amount == null) { return null; }
+            }
+
+            Map<String, Integer> map = new HashMap<String, Integer>();
+            map.put(card.getName(), amount);
+
+            List<Map<String, Integer>> values = new ArrayList<Map<String, Integer>>();
+            values.add(map);
+            return values;
+        }
+
+        @Override
+        protected String getCaption(List<Map<String, Integer>> values, FilterOption option, FilterOperator operator) {
+            Entry<String, Integer> entry = values.get(0).entrySet().iterator().next();
+            if (operator == FilterOperator.CONTAINS_X_COPIES_OF_CARD) {
+                return String.format(operator.formatStr, option.name, entry.getKey(), entry.getValue());
+            }
+            return String.format(operator.formatStr, option.name, entry.getKey());
         }
     }
 

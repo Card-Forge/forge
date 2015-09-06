@@ -38,7 +38,6 @@ import java.util.Map.Entry;
 public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Integer>>, Serializable {
     private static final long serialVersionUID = 6572047177527559797L;
 
-    /** The fn to printed. */
     public final transient Function<Entry<T, Integer>, T> FN_GET_KEY = new Function<Entry<T, Integer>, T>() {
         @Override
         public T apply(final Entry<T, Integer> from) {
@@ -46,7 +45,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         }
     };
 
-    /** The fn to item name. */
     public final transient Function<Entry<T, Integer>, String> FN_GET_NAME = new Function<Entry<T, Integer>, String>() {
         @Override
         public String apply(final Entry<T, Integer> from) {
@@ -54,22 +52,13 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         }
     };
 
-    /** The fn to count. */
     public final transient Function<Entry<T, Integer>, Integer> FN_GET_COUNT = new Function<Entry<T, Integer>, Integer>() {
         @Override
         public Integer apply(final Entry<T, Integer> from) {
             return from.getValue();
         }
     };
-    
-    // Constructors here
-    /**
-     * 
-     * ItemPool Constructor.
-     * 
-     * @param cls
-     *            a T
-     */
+
     public ItemPool(final Class<T> cls) {
         this(new LinkedHashMap<T, Integer>(), cls);
     }
@@ -87,7 +76,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         }
         return result;
     }
-
 
     @SuppressWarnings("unchecked")
     public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(final Iterable<Tin> from, final Class<Tout> clsHint) {
@@ -115,25 +103,11 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     private final Class<T> myClass; // class does not keep this in runtime by
                                     // itself
 
-    /**
-     * iterator.
-     * 
-     * @return Iterator<Entry<T, Integer>>
-     */
     @Override
     public final Iterator<Entry<T, Integer>> iterator() {
         return this.items.entrySet().iterator();
     }
 
-    // Items read only operations
-    /**
-     * 
-     * contains.
-     * 
-     * @param item
-     *            a T
-     * @return boolean
-     */
     public final boolean contains(final T item) {
         if (this.items == null) {
             return false;
@@ -141,14 +115,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return this.items.containsKey(item);
     }
 
-    /**
-     * 
-     * count.
-     * 
-     * @param item
-     *            a T
-     * @return int
-     */
     public final int count(final T item) {
         if (this.items == null || item == null) {
             return 0;
@@ -157,12 +123,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return boxed == null ? 0 : boxed.intValue();
     }
 
-    /**
-     * 
-     * countAll.
-     * 
-     * @return int
-     */
     public final int countAll() {
         return countAll(null, myClass); 
     }
@@ -185,33 +145,15 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         }
         return result;
     }
-    
-    /**
-     * 
-     * countDistinct.
-     * 
-     * @return int
-     */
+
     public final int countDistinct() {
         return this.items.size();
     }
 
-    /**
-     * 
-     * isEmpty.
-     * 
-     * @return boolean
-     */
     public final boolean isEmpty() {
         return (this.items == null) || this.items.isEmpty();
     }
 
-    /**
-     * 
-     * toFlatList.
-     * 
-     * @return List<T>
-     */
     public final List<T> toFlatList() {
         final List<T> result = new ArrayList<T>();
         for (final Entry<T, Integer> e : this) {
@@ -222,47 +164,26 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return result;
     }
 
-    /**
-     * Gets the my class.
-     * 
-     * @return the myClass
-     */
+    public Map<String, Integer> toNameLookup() {
+        final Map<String, Integer> result = new HashMap<String, Integer>();
+        for (final Entry<T, Integer> e : this) {
+            result.put(e.getKey().getName(), e.getValue());
+        }
+        return result;
+    }
+
     public Class<T> getMyClass() {
         return this.myClass;
-    }    
-    
-    // get
-    /**
-     * 
-     * Get item view.
-     * 
-     * @return a ItemPoolView
-     */
+    }
+
     public ItemPool<T> getView() {
         return new ItemPool<T>(Collections.unmodifiableMap(this.items), this.getMyClass());
     }
 
-    // Items manipulation
-    /**
-     * 
-     * Add a single item.
-     * 
-     * @param item
-     *            a T
-     */
     public void add(final T item) {
         this.add(item, 1);
     }
 
-    /**
-     * 
-     * Add multiple items.
-     * 
-     * @param item
-     *            a T
-     * @param amount
-     *            a int
-     */
     public void add(final T item, final int amount) {
         if (item == null || amount <= 0) {
             return;
@@ -270,14 +191,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         this.items.put(item, Integer.valueOf(this.count(item) + amount));
     }
 
-    /**
-     * addAllFlat.
-     * 
-     * @param <U>
-     *            a InventoryItem
-     * @param items
-     *            a Iterable<U>
-     */
     @SuppressWarnings("unchecked")
     public <U extends InventoryItem> void addAllFlat(final Iterable<U> items) {
         for (final U cr : items) {
@@ -287,14 +200,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         }
     }
 
-    /**
-     * addAll.
-     * 
-     * @param <U>
-     *            an InventoryItem
-     * @param map
-     *            a Iterable<Entry<U, Integer>>
-     */
     @SuppressWarnings("unchecked")
     public <U extends InventoryItem> void addAll(final Iterable<Entry<U, Integer>> map) {
         Class<T> myClass = this.getMyClass();
@@ -305,26 +210,10 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         }
     }
 
-    /**
-     * 
-     * Remove.
-     * 
-     * @param item
-     *            a T
-     */
     public boolean remove(final T item) {
         return this.remove(item, 1);
     }
 
-    /**
-     * 
-     * Remove.
-     * 
-     * @param item
-     *            a T
-     * @param amount
-     *            a int
-     */
     public boolean remove(final T item, final int amount) {
         final int count = this.count(item);
         if ((count == 0) || (amount <= 0)) {
@@ -341,14 +230,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     public boolean removeAll(final T item) {
         return this.items.remove(item) != null;
     }
-    
-    /**
-     * 
-     * RemoveAll.
-     * 
-     * @param map
-     *            a T
-     */
+
     public void removeAll(final Iterable<Entry<T, Integer>> map) {
         for (final Entry<T, Integer> e : map) {
             this.remove(e.getKey(), e.getValue());
@@ -356,11 +238,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         // need not set out-of-sync: either remove did set, or nothing was removed
     }
 
-    /**
-     * 
-     * TODO: Write javadoc for this method.
-     * @param flat Iterable<T>
-     */
     public void removeAllFlat(final Iterable<T> flat) {
         for (final T e : flat) {
             this.remove(e);
@@ -368,10 +245,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         // need not set out-of-sync: either remove did set, or nothing was removed
     }
 
-    /**
-     * 
-     * Clear.
-     */
     public void clear() {
         this.items.clear();
     }
