@@ -118,6 +118,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         Forge.openScreen(editScreen);
     }
 
+    @SuppressWarnings("unchecked")
     private void updateLabel() {
         StringBuilder builder = new StringBuilder();
         builder.append("Filter: ");
@@ -125,8 +126,29 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             builder.append("(none)");
         }
         else {
+            int prevFilterEndIdx = -1;
+            AdvancedSearch.Filter<T> filter, prevFilter = null;
             for (Object piece : expression) {
-                builder.append(piece);
+                if (piece instanceof AdvancedSearch.Filter) {
+                    filter = (AdvancedSearch.Filter<T>)piece;
+                    if (filter.canMergeCaptionWith(prevFilter)) {
+                        //convert boolean operators between filters to lowercase
+                        builder.replace(prevFilterEndIdx, builder.length(), builder.substring(prevFilterEndIdx).toLowerCase());
+                        //append only values for filter
+                        builder.append(filter.extractValuesFromCaption());
+                    }
+                    else {
+                        builder.append(filter);
+                    }
+                    prevFilter = filter;
+                    prevFilterEndIdx = builder.length();
+                }
+                else {
+                    if (piece.equals(Operator.OPEN_PAREN) || piece.equals(Operator.CLOSE_PAREN)) {
+                        prevFilter = null; //prevent merging filters with parentheses in between
+                    }
+                    builder.append(piece);
+                }
             }
         }
         label.setText(builder.toString());

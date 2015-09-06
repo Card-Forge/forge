@@ -808,6 +808,17 @@ public class AdvancedSearch {
             predicate = predicate0;
         }
 
+        public boolean canMergeCaptionWith(Filter<T> filter) {
+            return filter != null && option == filter.option && operator == filter.operator;
+        }
+
+        public String extractValuesFromCaption() {
+            //build empty caption to determine index where values would begin
+            String emptyCaption = operator.formatStr.replace("%1$s", option.name);
+            emptyCaption = emptyCaption.replaceAll("'?%\\d\\$[sd]'?", ""); //strip other arguments
+            return caption.substring(emptyCaption.length());
+        }
+
         public Predicate<T> getPredicate() {
             return predicate;
         }
