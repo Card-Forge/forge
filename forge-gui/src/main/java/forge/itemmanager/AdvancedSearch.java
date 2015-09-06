@@ -543,7 +543,7 @@ public class AdvancedSearch {
             case 1:
                 return formatValue(values.get(0));
             case 2:
-                return formatValue(values.get(0)) + finalDelim + " " + formatValue(values.get(1));
+                return formatValue(values.get(0)) + finalDelim + formatValue(values.get(1));
             default:
                 int lastValueIdx = valueCount - 1;
                 String result = formatValue(values.get(0));
