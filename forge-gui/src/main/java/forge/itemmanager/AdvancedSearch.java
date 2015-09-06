@@ -55,7 +55,7 @@ public class AdvancedSearch {
                 return FModel.getFormats().getAllFormatsOfCard(input);
             }
         }),
-        CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, MagicColor.Color>(Arrays.asList(MagicColor.Color.values()), MagicColor.FN_GET_SYMBOL) {
+        CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<PaperCard>() {
             @Override
             protected MagicColor.Color getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -65,7 +65,7 @@ public class AdvancedSearch {
                 return input.getRules().getColor().toEnumSet();
             }
         }),
-        CARD_COLOR_IDENTITY("Color Identity", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, MagicColor.Color>(Arrays.asList(MagicColor.Color.values()), MagicColor.FN_GET_SYMBOL) {
+        CARD_COLOR_IDENTITY("Color Identity", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<PaperCard>() {
             @Override
             protected MagicColor.Color getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -568,7 +568,7 @@ public class AdvancedSearch {
             return String.format(operator.formatStr, option.name, valuesStr);
         }
 
-        private String formatValues(List<V> values, String delim, String finalDelim) {
+        protected String formatValues(List<V> values, String delim, String finalDelim) {
             int valueCount = values.size();
             switch (valueCount) {
             case 1:
@@ -586,11 +586,26 @@ public class AdvancedSearch {
             }
         }
 
-        private String formatValue(V value) {
+        protected String formatValue(V value) {
             if (toShortString == null) {
                 return value.toString();
             }
             return toShortString.apply(value);
+        }
+    }
+
+    private static abstract class ColorEvaluator<T extends InventoryItem> extends CustomListEvaluator<T, MagicColor.Color> {
+        public ColorEvaluator() {
+            super(Arrays.asList(MagicColor.Color.values()), MagicColor.FN_GET_SYMBOL);
+        }
+
+        @Override
+        protected String getCaption(List<MagicColor.Color> values, FilterOption option, FilterOperator operator) {
+            if (operator == FilterOperator.IS_EXACTLY) {
+                //handle special case for formatting colors with no spaces in between for is exactly operator
+                return String.format(operator.formatStr, option.name, formatValues(values, "", ""));
+            }
+            return super.getCaption(values, option, operator);
         }
     }
 
