@@ -379,7 +379,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
     private enum Operator {
         AND(" AND "),
         OR(" OR "),
-        NOT(" NOT "),
+        NOT("NOT "),
         OPEN_PAREN("("),
         CLOSE_PAREN(")");
 
