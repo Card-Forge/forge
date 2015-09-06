@@ -16,6 +16,7 @@ import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
@@ -52,6 +53,7 @@ public class DeckProxy implements InventoryItem {
     protected Set<GameFormat> formats;
     private Integer mainSize = null;
     private Integer sbSize = null;
+    private Integer avgCMC = null;
     private final String path;
     private final Function<IHasName, Deck> fnGetDeck;
     private CardEdition edition;
@@ -284,6 +286,32 @@ public class DeckProxy implements InventoryItem {
             }
         }
         return sbSize;
+    }
+
+    public Integer getAverageCMC() {
+        if (avgCMC == null) {
+            int totalCMC = 0;
+            int totalCount = 0;
+            for (final Entry<DeckSection, CardPool> deckEntry : getDeck()) {
+                switch (deckEntry.getKey()) {
+                case Main:
+                case Commander:
+                    for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                        CardRules rules = poolEntry.getKey().getRules();
+                        CardType type = rules.getType();
+                        if (!type.isLand() && (type.isArtifact() || type.isCreature() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery())) {
+                            totalCMC += rules.getManaCost().getCMC();
+                            totalCount++;
+                        }
+                    }
+                    break;
+                default:
+                    break; //ignore other sections
+                }
+            }
+            avgCMC = Math.round(totalCMC / totalCount);
+        }
+        return avgCMC;
     }
 
     public boolean isGeneratedDeck() {

@@ -76,6 +76,12 @@ public class AdvancedSearch {
                 return input.getRules().getColorIdentity().toEnumSet();
             }
         }),
+        CARD_COLOR_COUNT("Color Count", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 5) {
+            @Override
+            protected Integer getItemValue(PaperCard input) {
+                return input.getRules().getColor().countColors();
+            }
+        }),
         CARD_TYPE("Type", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getSortedCoreAndSuperTypes()) {
             @Override
             protected String getItemValue(PaperCard input) {
@@ -114,12 +120,6 @@ public class AdvancedSearch {
             @Override
             protected Integer getItemValue(PaperCard input) {
                 return input.getRules().getManaCost().getGenericCost();
-            }
-        }),
-        CARD_COLOR_COUNT("Color Count", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 5) {
-            @Override
-            protected Integer getItemValue(PaperCard input) {
-                return input.getRules().getColor().countColors();
             }
         }),
         CARD_POWER("Power", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
@@ -194,6 +194,18 @@ public class AdvancedSearch {
             @Override
             protected Set<MagicColor.Color> getItemValues(DeckProxy input) {
                 return input.getColorIdentity().toEnumSet();
+            }
+        }),
+        DECK_COLOR_COUNT("Color Count", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 5) {
+            @Override
+            protected Integer getItemValue(DeckProxy input) {
+                return input.getColor().countColors();
+            }
+        }),
+        DECK_AVERAGE_CMC("Average CMC", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 20) {
+            @Override
+            protected Integer getItemValue(DeckProxy input) {
+                return input.getAverageCMC();
             }
         }),
         DECK_MAIN_SIZE("Main Deck Size", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(40, 250) {
