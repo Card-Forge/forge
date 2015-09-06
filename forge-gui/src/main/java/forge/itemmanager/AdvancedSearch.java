@@ -55,7 +55,7 @@ public class AdvancedSearch {
                 return FModel.getFormats().getAllFormatsOfCard(input);
             }
         }),
-        CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, MagicColor.Color>(Arrays.asList(MagicColor.Color.values())) {
+        CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, MagicColor.Color>(Arrays.asList(MagicColor.Color.values()), MagicColor.FN_GET_SYMBOL) {
             @Override
             protected MagicColor.Color getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -65,7 +65,7 @@ public class AdvancedSearch {
                 return input.getRules().getColor().toEnumSet();
             }
         }),
-        CARD_COLOR_IDENTITY("Color Identity", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, MagicColor.Color>(Arrays.asList(MagicColor.Color.values())) {
+        CARD_COLOR_IDENTITY("Color Identity", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, MagicColor.Color>(Arrays.asList(MagicColor.Color.values()), MagicColor.FN_GET_SYMBOL) {
             @Override
             protected MagicColor.Color getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");

@@ -9,6 +9,7 @@ import forge.UiCommand;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinProp;
+import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.interfaces.IButton;
@@ -33,6 +34,7 @@ public class FLabel extends FDisplayObject implements IButton {
         private boolean bldIconInBackground = false;
         private boolean bldIconScaleAuto    = true;
         private boolean bldEnabled          = true;
+        private boolean bldParseSymbols     = true;
 
         private String bldText;
         private FImage bldIcon;
@@ -63,6 +65,8 @@ public class FLabel extends FDisplayObject implements IButton {
         public Builder iconInBackground() { iconInBackground(true); return this; }
         public Builder textColor(final FSkinColor c0) { this.bldTextColor = c0; return this; }
         public Builder pressedColor(final FSkinColor c0) { this.bldPressedColor = c0; return this; }
+        public Builder parseSymbols() { parseSymbols(true); return this; }
+        public Builder parseSymbols(final boolean b0) { this.bldParseSymbols = b0; return this; }
     }
 
     // sets better defaults for button labels
@@ -105,6 +109,7 @@ public class FLabel extends FDisplayObject implements IButton {
     private FImage icon;
     private FSkinColor textColor, pressedColor;
     private FEventHandler command;
+    private TextRenderer textRenderer;
 
     // Call this using FLabel.Builder()...
     protected FLabel(final Builder b0) {
@@ -123,6 +128,9 @@ public class FLabel extends FDisplayObject implements IButton {
         textColor = b0.bldTextColor;
         pressedColor = b0.bldPressedColor;
         command = b0.bldCommand;
+        if (b0.bldParseSymbols) {
+            textRenderer = new TextRenderer();
+        }
         setEnabled(b0.bldEnabled);
     }
 
@@ -328,7 +336,7 @@ public class FLabel extends FDisplayObject implements IButton {
                 if (alignment == HAlignment.CENTER) {
                     float dx;
                     while (true) {
-                        dx = (w - iconOffset - font.getMultiLineBounds(text).width) / 2;
+                        dx = (w - iconOffset - getTextWidth()) / 2;
                         if (dx > 0) {
                             x += dx;
                             break;
@@ -342,7 +350,7 @@ public class FLabel extends FDisplayObject implements IButton {
                 else if (alignment == HAlignment.RIGHT) {
                     float dx;
                     while (true) {
-                        dx = (w - iconWidth - font.getMultiLineBounds(text).width - insets.x);
+                        dx = (w - iconWidth - getTextWidth() - insets.x);
                         if (dx > 0) {
                             x += dx;
                             break;
@@ -365,16 +373,31 @@ public class FLabel extends FDisplayObject implements IButton {
                 }
                 x += iconOffset;
                 w -= iconOffset;
-                g.startClip(x, y, w, h);
-                g.drawText(text, font, textColor, x, y, w, h, false, HAlignment.LEFT, true);
-                g.endClip();
+
+                drawText(g, x, y, w, h, HAlignment.LEFT);
             }
         }
         else if (!text.isEmpty()) {
-            g.startClip(x, y, w, h);
-            g.drawText(text, font, textColor, x, y, w, h, false, alignment, true);
-            g.endClip();
+            drawText(g, x, y, w, h, alignment);
         }
+    }
+
+    private void drawText(Graphics g, float x, float y, float w, float h, HAlignment align) {
+        g.startClip(x, y, w, h);
+        if (textRenderer == null) {
+            g.drawText(text, font, textColor, x, y, w, h, false, align, true);
+        }
+        else {
+            textRenderer.drawText(g, text, font, textColor, x, y, w, h, y, h, false, align, true);
+        }
+        g.endClip();
+    }
+
+    private float getTextWidth() {
+        if (textRenderer == null) {
+            return font.getMultiLineBounds(text).width;
+        }
+        return textRenderer.getBounds(text, font).width;
     }
 
     //use FEventHandler one except when references as IButton

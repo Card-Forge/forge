@@ -120,7 +120,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
     private void updateLabel() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Filters: ");
+        builder.append("Filter: ");
         if (expression.isEmpty()) {
             builder.append("(none)");
         }
@@ -136,7 +136,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         if (expression.isEmpty()) { return ""; }
 
         StringBuilder builder = new StringBuilder();
-        builder.append("Filters:\n");
+        builder.append("Filter:\n");
 
         String indent = "";
 
@@ -181,7 +181,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
     private class FiltersLabel extends FLabel {
         private FiltersLabel() {
-            super(new FLabel.Builder().align(HAlignment.LEFT).font(ListLabelFilter.LABEL_FONT));
+            super(new FLabel.Builder().align(HAlignment.LEFT).parseSymbols(true).font(ListLabelFilter.LABEL_FONT));
         }
 
         @Override
@@ -294,7 +294,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 btnNotAfterParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
 
                 final String emptyFilterText = "Select Filter...";
-                btnFilter = add(new FLabel.ButtonBuilder().text(emptyFilterText).command(new FEventHandler() {
+                btnFilter = add(new FLabel.ButtonBuilder().text(emptyFilterText).parseSymbols(true).command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         FThreads.invokeInBackgroundThread(new Runnable() {

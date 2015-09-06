@@ -1,5 +1,6 @@
 package forge.card;
 
+import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -153,19 +154,20 @@ public final class MagicColor {
     }
 
     public enum Color {
-        WHITE(Constant.WHITE, MagicColor.WHITE),
-        BLUE(Constant.BLUE, MagicColor.BLUE),
-        BLACK(Constant.BLACK, MagicColor.BLACK),
-        RED(Constant.RED, MagicColor.RED),
-        GREEN(Constant.GREEN, MagicColor.GREEN),
-        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS);
+        WHITE(Constant.WHITE, MagicColor.WHITE, "{W}"),
+        BLUE(Constant.BLUE, MagicColor.BLUE, "{U}"),
+        BLACK(Constant.BLACK, MagicColor.BLACK, "{B}"),
+        RED(Constant.RED, MagicColor.RED, "{R}"),
+        GREEN(Constant.GREEN, MagicColor.GREEN, "{G}"),
+        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "{X}");
 
-        private final String name;
+        private final String name, symbol;
         private final byte colormask;
 
-        private Color(String name0, byte colormask0) {
+        private Color(String name0, byte colormask0, String symbol0) {
             name = name0;
             colormask = colormask0;
+            symbol = symbol0;
         }
 
         public String getName() {
@@ -174,9 +176,19 @@ public final class MagicColor {
         public byte getColormask() {
             return colormask;
         }
+        public String getSymbol() {
+            return symbol;
+        }
         @Override
         public String toString() {
             return name;
         }
     }
+
+    public static final Function<Color, String> FN_GET_SYMBOL = new Function<Color, String>() {
+        @Override
+        public String apply(final Color color) {
+            return color.symbol;
+        }
+    };
 }
