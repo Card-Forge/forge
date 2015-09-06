@@ -407,7 +407,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        IS_ANY("is any of", "%1$s is %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+        CONTAINS_ANY("contains", "%1$s contains %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 if (input != null) {
@@ -431,7 +431,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        IS_ALL("is all of", "%1$s is %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
+        CONTAINS_ALL("contains all", "%1$s contains %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 if (input != null && values.size() == 1) {
@@ -485,10 +485,10 @@ public class AdvancedSearch {
             CONTAINS, STARTS_WITH, ENDS_WITH
         };
         public static final FilterOperator[] SINGLE_LIST_OPS = new FilterOperator[] {
-            IS_EXACTLY, IS_ANY
+            IS_EXACTLY, CONTAINS_ANY
         };
         public static final FilterOperator[] MULTI_LIST_OPS = new FilterOperator[] {
-            IS_EXACTLY, IS_ANY, IS_ALL
+            IS_EXACTLY, CONTAINS_ANY, CONTAINS_ALL
         };
         public static final FilterOperator[] DECK_CONTENT_OPS = new FilterOperator[] {
             CONTAINS_CARD, CONTAINS_X_COPIES_OF_CARD
