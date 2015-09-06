@@ -407,6 +407,19 @@ public class AdvancedSearch {
                 return false;
             }
         }),
+        IS_ANY("is any of", "%1$s is %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+            @Override
+            public boolean apply(Object input, List<Object> values) {
+                if (input != null) {
+                    for (Object value : values) {
+                        if (input.equals(value)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }),
         CONTAINS_ANY("contains", "%1$s contains %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
@@ -485,7 +498,7 @@ public class AdvancedSearch {
             CONTAINS, STARTS_WITH, ENDS_WITH
         };
         public static final FilterOperator[] SINGLE_LIST_OPS = new FilterOperator[] {
-            IS_EXACTLY, CONTAINS_ANY
+            IS_ANY
         };
         public static final FilterOperator[] MULTI_LIST_OPS = new FilterOperator[] {
             IS_EXACTLY, CONTAINS_ANY, CONTAINS_ALL
@@ -788,9 +801,15 @@ public class AdvancedSearch {
 
         if (option == FilterOption.NONE) { return null; } //allow user to clear filter by selecting "(none)"
 
-        final FilterOperator defaultOperator = option == defaultOption ? editFilter.operator : null;
-        final FilterOperator operator = SGuiChoose.oneOrNone("Select an operator for " + option.name, option.operatorOptions, defaultOperator, null);
-        if (operator == null) { return editFilter; }
+        final FilterOperator operator;
+        if (option.operatorOptions.length > 1) {
+            final FilterOperator defaultOperator = option == defaultOption ? editFilter.operator : null;
+            operator = SGuiChoose.oneOrNone("Select an operator for " + option.name, option.operatorOptions, defaultOperator, null);
+            if (operator == null) { return editFilter; }
+        }
+        else {
+            operator = option.operatorOptions[0];
+        }
 
         Filter<T> filter = (Filter<T>)option.evaluator.createFilter(option, operator);
         if (filter == null) {
