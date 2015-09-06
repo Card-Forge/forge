@@ -608,7 +608,11 @@ public class AdvancedSearch {
 
             if (operator.valueCount == FilterValueCount.TWO) { //prompt for upper bound if needed
                 message = lowerBound + message.substring(1) + " ?";
-                Integer upperBound = SGuiChoose.getInteger(message, lowerBound, max);
+                int upperBoundMin = lowerBound;
+                if (operator == FilterOperator.BETWEEN_EXCLUSIVE) {
+                    upperBoundMin += 2; //if exclusive, ensure it's possible to have numbers in between
+                }
+                Integer upperBound = SGuiChoose.getInteger(message, upperBoundMin, max);
                 if (upperBound == null) { return null; }
 
                 values.add(upperBound);
