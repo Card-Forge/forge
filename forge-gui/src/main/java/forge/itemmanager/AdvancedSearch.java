@@ -166,6 +166,12 @@ public class AdvancedSearch {
                 return input.getPath();
             }
         }),
+        DECK_FAVORITE("Favorite", DeckProxy.class, FilterOperator.BOOLEAN_OPS, new BooleanEvaluator<DeckProxy>() {
+            @Override
+            protected Boolean getItemValue(DeckProxy input) {
+                return input.isFavoriteDeck();
+            }
+        }),
         DECK_FORMAT("Format", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList()) {
             @Override
             protected GameFormat getItemValue(DeckProxy input) {
@@ -240,6 +246,26 @@ public class AdvancedSearch {
     }
 
     private enum FilterOperator {
+        //Boolean operators
+        IS_TRUE("is true", "%1$s is true", FilterValueCount.ZERO, new OperatorEvaluator<Boolean>() {
+            @Override
+            public boolean apply(Boolean input, List<Boolean> values) {
+                if (input != null) {
+                    return input.booleanValue();
+                }
+                return false;
+            }
+        }),
+        IS_FALSE("is false", "%1$s is false", FilterValueCount.ZERO, new OperatorEvaluator<Boolean>() {
+            @Override
+            public boolean apply(Boolean input, List<Boolean> values) {
+                if (input != null) {
+                    return !input.booleanValue();
+                }
+                return false;
+            }
+        }),
+
         //Numeric operators
         EQUALS("is equal to", "%1$s = %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
@@ -413,6 +439,9 @@ public class AdvancedSearch {
             }
         });
 
+        public static final FilterOperator[] BOOLEAN_OPS = new FilterOperator[] {
+            IS_TRUE, IS_FALSE
+        };
         public static final FilterOperator[] NUMBER_OPS = new FilterOperator[] {
             EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GT_OR_EQUAL, LT_OR_EQUAL, BETWEEN_INCLUSIVE, BETWEEN_EXCLUSIVE
         };
@@ -444,6 +473,7 @@ public class AdvancedSearch {
     }
 
     private enum FilterValueCount {
+        ZERO,
         ONE,
         TWO,
         MANY,
@@ -494,6 +524,23 @@ public class AdvancedSearch {
 
         protected Set<V> getItemValues(T input) { //available for options that have multiple inputs
             return null;
+        }
+    }
+
+    private static abstract class BooleanEvaluator<T extends InventoryItem> extends FilterEvaluator<T, Boolean> {
+        public BooleanEvaluator() {
+        }
+
+        @Override
+        protected List<Boolean> getValues(String message, FilterOption option, FilterOperator operator) {
+            List<Boolean> values = new ArrayList<Boolean>();
+            values.add(operator == FilterOperator.IS_TRUE); //just always add a single boolean value so other logic works
+            return values;
+        }
+
+        @Override
+        protected String getCaption(List<Boolean> values, FilterOption option, FilterOperator operator) {
+            return String.format(operator.formatStr, option.name);
         }
     }
 
