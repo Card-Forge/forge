@@ -294,61 +294,91 @@ public class AdvancedSearch {
         IS_EXACTLY("is exactly", "%1$s is %2$s", FilterValueCount.MANY, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
+                if (input != null && values.size() == 1) {
+                    return input.equals(values.get(0));
+                }
                 return false;
             }
             @Override
             public boolean apply(Set<Object> inputs, List<Object> values) {
+                if (inputs != null && inputs.size() == values.size()) {
+                    for (Object value : values) {
+                        if (!inputs.contains(value)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
                 return false;
             }
         }),
         IS_ANY("is any of", "%1$s is %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
+                if (input != null) {
+                    for (Object value : values) {
+                        if (input.equals(value)) {
+                            return true;
+                        }
+                    }
+                }
                 return false;
             }
             @Override
             public boolean apply(Set<Object> inputs, List<Object> values) {
+                if (inputs != null) {
+                    for (Object value : values) {
+                        if (inputs.contains(value)) {
+                            return true;
+                        }
+                    }
+                }
                 return false;
             }
         }),
         IS_ALL("is all of", "%1$s is %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
+                if (input != null && values.size() == 1) {
+                    return input.equals(values.get(0));
+                }
                 return false;
             }
             @Override
             public boolean apply(Set<Object> inputs, List<Object> values) {
+                if (inputs != null) {
+                    for (Object value : values) {
+                        if (!inputs.contains(value)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
                 return false;
             }
         }),
         IS_NONE("is none of", "%1$s is not %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
-                return false;
+                if (input != null) {
+                    for (Object value : values) {
+                        if (input.equals(value)) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
             }
             @Override
             public boolean apply(Set<Object> inputs, List<Object> values) {
-                return false;
-            }
-        }),
-        INCLUDES_ANY("includes any of", "%1$s includes %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
-            @Override
-            public boolean apply(Object input, List<Object> values) {
-                return false;
-            }
-            @Override
-            public boolean apply(Set<Object> inputs, List<Object> values) {
-                return false;
-            }
-        }),
-        INCLUDES_ALL("includes all of", "%1$s includes %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
-            @Override
-            public boolean apply(Object input, List<Object> values) {
-                return false;
-            }
-            @Override
-            public boolean apply(Set<Object> inputs, List<Object> values) {
-                return false;
+                if (inputs != null) {
+                    for (Object value : values) {
+                        if (inputs.contains(value)) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
             }
         });
 
@@ -362,7 +392,7 @@ public class AdvancedSearch {
             IS_EXACTLY, IS_ANY, IS_NONE
         };
         public static final FilterOperator[] MULTI_LIST_OPS = new FilterOperator[] {
-            IS_EXACTLY, IS_ANY, IS_ALL, IS_NONE, INCLUDES_ANY, INCLUDES_ALL
+            IS_EXACTLY, IS_ANY, IS_ALL, IS_NONE
         };
 
         private final String caption, formatStr;
