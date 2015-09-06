@@ -49,7 +49,7 @@ public class DeckProxy implements InventoryItem {
     // cached values
     protected ColorSet color;
     protected ColorSet colorIdentity;
-    protected Iterable<GameFormat> formats;
+    protected Set<GameFormat> formats;
     private Integer mainSize = null;
     private Integer sbSize = null;
     private final String path;
@@ -245,7 +245,7 @@ public class DeckProxy implements InventoryItem {
         return highestRarity;
     }
 
-    public Iterable<GameFormat> getFormats() {
+    public Set<GameFormat> getFormats() {
         if (formats == null) {
             formats = FModel.getFormats().getAllFormatsOfDeck(getDeck());
         }

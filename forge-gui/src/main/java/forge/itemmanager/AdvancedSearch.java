@@ -17,6 +17,7 @@ import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.CardType.CoreType;
 import forge.card.CardType.Supertype;
+import forge.deck.DeckProxy;
 import forge.game.GameFormat;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -115,6 +116,12 @@ public class AdvancedSearch {
                 return input.getRules().getManaCost().getGenericCost();
             }
         }),
+        CARD_COLOR_COUNT("Color Count", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 5) {
+            @Override
+            protected Integer getItemValue(PaperCard input) {
+                return input.getRules().getColor().countColors();
+            }
+        }),
         CARD_POWER("Power", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
             @Override
             protected Integer getItemValue(PaperCard input) {
@@ -145,6 +152,60 @@ public class AdvancedSearch {
             @Override
             protected CardRarity getItemValue(PaperCard input) {
                 return input.getRarity();
+            }
+        }),
+        DECK_NAME("Name", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
+            @Override
+            protected String getItemValue(DeckProxy input) {
+                return input.getName();
+            }
+        }),
+        DECK_FOLDER("Folder", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
+            @Override
+            protected String getItemValue(DeckProxy input) {
+                return input.getPath();
+            }
+        }),
+        DECK_FORMAT("Format", DeckProxy.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<DeckProxy, GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList()) {
+            @Override
+            protected GameFormat getItemValue(DeckProxy input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<GameFormat> getItemValues(DeckProxy input) {
+                return input.getFormats();
+            }
+        }),
+        DECK_COLOR("Color", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<DeckProxy>() {
+            @Override
+            protected MagicColor.Color getItemValue(DeckProxy input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<MagicColor.Color> getItemValues(DeckProxy input) {
+                return input.getColor().toEnumSet();
+            }
+        }),
+        DECK_COLOR_IDENTITY("Color Identity", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<DeckProxy>() {
+            @Override
+            protected MagicColor.Color getItemValue(DeckProxy input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<MagicColor.Color> getItemValues(DeckProxy input) {
+                return input.getColorIdentity().toEnumSet();
+            }
+        }),
+        DECK_MAIN_SIZE("Main Deck Size", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(40, 250) {
+            @Override
+            protected Integer getItemValue(DeckProxy input) {
+                return input.getMainSize();
+            }
+        }),
+        DECK_SIDE_SIZE("Sideboard Size", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 15) {
+            @Override
+            protected Integer getItemValue(DeckProxy input) {
+                return Math.min(input.getSideSize(), 0);
             }
         });
 

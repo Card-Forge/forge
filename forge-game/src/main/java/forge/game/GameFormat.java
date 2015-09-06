@@ -304,18 +304,23 @@ public class GameFormat implements Comparable<GameFormat> {
                     result.add(gf);
                 }
             }
+            if (result.isEmpty()) {
+                result.add(NoFormat);
+            }
             return result;
         }
 
-        public List<GameFormat> getAllFormatsOfDeck(Deck deck) {
-            List<GameFormat> result = new ArrayList<GameFormat>();
+        public Set<GameFormat> getAllFormatsOfDeck(Deck deck) {
+            Set<GameFormat> result = new HashSet<GameFormat>();
             CardPool allCards = deck.getAllCardsInASinglePool();
             for(GameFormat gf : naturallyOrdered) {
-                if (gf.isPoolLegal(allCards))
+                if (gf.isPoolLegal(allCards)) {
                     result.add(gf);
+                }
             }
-            if( result.isEmpty())
+            if (result.isEmpty()) {
                 result.add(NoFormat);
+            }
             return result;
         }
     }
