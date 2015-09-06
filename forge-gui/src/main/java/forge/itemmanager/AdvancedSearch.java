@@ -168,7 +168,7 @@ public class AdvancedSearch {
 
     private enum FilterOperator {
         //Numeric operators
-        EQUALS("is equal to", "%1$s=%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        EQUALS("is equal to", "%1$s = %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -177,7 +177,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        NOT_EQUALS("is not equal to", "%1$s<>%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        NOT_EQUALS("is not equal to", "%1$s <> %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -186,7 +186,7 @@ public class AdvancedSearch {
                 return true;
             }
         }),
-        GREATER_THAN("is greater than", "%1$s>%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        GREATER_THAN("is greater than", "%1$s > %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -195,7 +195,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        LESS_THAN("is less than", "%1$s<%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        LESS_THAN("is less than", "%1$s < %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -204,7 +204,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        GT_OR_EQUAL("is greater than or equal to", "%1$s>=%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        GT_OR_EQUAL("is greater than or equal to", "%1$s >= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -213,7 +213,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        LT_OR_EQUAL("is less than or equal to", "%1$s<=%2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        LT_OR_EQUAL("is less than or equal to", "%1$s <= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -222,7 +222,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        BETWEEN_INCLUSIVE("is between (inclusive)", "%2$d<=%1$s<=%3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
+        BETWEEN_INCLUSIVE("is between (inclusive)", "%2$d <= %1$s <= %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -232,7 +232,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        BETWEEN_EXCLUSIVE("is between (exclusive)", "%2$d<%1$s<%3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
+        BETWEEN_EXCLUSIVE("is between (exclusive)", "%2$d < %1$s < %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
