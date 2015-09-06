@@ -24,7 +24,7 @@ import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 
 public class AdvancedSearch {
-    private enum FilterOption {
+    public enum FilterOption {
         NONE("(none)", null, null, null),
         CARD_NAME("Name", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
             @Override
@@ -259,7 +259,7 @@ public class AdvancedSearch {
         }
     }
 
-    private enum FilterOperator {
+    public enum FilterOperator {
         //Boolean operators
         IS_TRUE("is true", "%1$s is true", FilterValueCount.ZERO, new OperatorEvaluator<Boolean>() {
             @Override
@@ -281,7 +281,7 @@ public class AdvancedSearch {
         }),
 
         //Numeric operators
-        EQUALS("is equal to", "%1$s = %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        EQUALS("=", "%1$s = %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -290,7 +290,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        NOT_EQUALS("is not equal to", "%1$s <> %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        NOT_EQUALS("<>", "%1$s <> %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -299,7 +299,7 @@ public class AdvancedSearch {
                 return true;
             }
         }),
-        GREATER_THAN("is greater than", "%1$s > %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        GREATER_THAN(">", "%1$s > %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -308,7 +308,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        LESS_THAN("is less than", "%1$s < %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        LESS_THAN("<", "%1$s < %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -317,7 +317,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        GT_OR_EQUAL("is greater than or equal to", "%1$s >= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        GT_OR_EQUAL(">=", "%1$s >= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -326,7 +326,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        LT_OR_EQUAL("is less than or equal to", "%1$s <= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        LT_OR_EQUAL("<=", "%1$s <= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -335,7 +335,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        BETWEEN_INCLUSIVE("is between (inclusive)", "%2$d <= %1$s <= %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
+        BETWEEN_INCLUSIVE("<=|<=", "%2$d <= %1$s <= %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -345,7 +345,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        BETWEEN_EXCLUSIVE("is between (exclusive)", "%2$d < %1$s < %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
+        BETWEEN_EXCLUSIVE("<|<", "%2$d < %1$s < %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -530,8 +530,8 @@ public class AdvancedSearch {
 
     private static abstract class FilterEvaluator<T extends InventoryItem, V> {
         @SuppressWarnings("unchecked")
-        public final Filter<T> createFilter(String message, FilterOption option, FilterOperator operator) {
-            final List<V> values = getValues(message, option, operator);
+        public final Filter<T> createFilter(FilterOption option, FilterOperator operator) {
+            final List<V> values = getValues(option, operator);
             if (values == null || values.isEmpty()) { return null; }
 
             String caption = getCaption(values, option, operator);
@@ -557,7 +557,7 @@ public class AdvancedSearch {
             return new Filter<T>(option, operator, caption, predicate);
         }
 
-        protected abstract List<V> getValues(String message, FilterOption option, FilterOperator operator);
+        protected abstract List<V> getValues(FilterOption option, FilterOperator operator);
         protected abstract String getCaption(List<V> values, FilterOption option, FilterOperator operator);
         protected abstract V getItemValue(T input);
 
@@ -571,7 +571,7 @@ public class AdvancedSearch {
         }
 
         @Override
-        protected List<Boolean> getValues(String message, FilterOption option, FilterOperator operator) {
+        protected List<Boolean> getValues(FilterOption option, FilterOperator operator) {
             List<Boolean> values = new ArrayList<Boolean>();
             values.add(operator == FilterOperator.IS_TRUE); //just always add a single boolean value so other logic works
             return values;
@@ -592,20 +592,23 @@ public class AdvancedSearch {
         }
 
         @Override
-        protected List<Integer> getValues(String message, FilterOption option, FilterOperator operator) {
-            String msg = message;
-            if (operator.valueCount == FilterValueCount.TWO) {
-                msg += " (Lower Bound)";
+        protected List<Integer> getValues(FilterOption option, FilterOperator operator) {
+            String message;
+            if (operator.valueCount == FilterValueCount.ONE) {
+                message = option.name + " " + operator.caption + " ?";
             }
-            Integer lowerBound = SGuiChoose.getInteger(msg, min, max);
+            else {
+                message = "? " + operator.caption.replace("|", " " + option.name + " ");
+            }
+            Integer lowerBound = SGuiChoose.getInteger(message, min, max);
             if (lowerBound == null) { return null; }
 
             final List<Integer> values = new ArrayList<Integer>();
             values.add(lowerBound);
 
             if (operator.valueCount == FilterValueCount.TWO) { //prompt for upper bound if needed
-                msg = message + " (Upper Bound)";
-                Integer upperBound = SGuiChoose.getInteger(msg, lowerBound, max);
+                message = lowerBound + message.substring(1) + " ?";
+                Integer upperBound = SGuiChoose.getInteger(message, lowerBound, max);
                 if (upperBound == null) { return null; }
 
                 values.add(upperBound);
@@ -627,7 +630,8 @@ public class AdvancedSearch {
         }
 
         @Override
-        protected List<String> getValues(String message, FilterOption option, FilterOperator operator) {
+        protected List<String> getValues(FilterOption option, FilterOperator operator) {
+            String message = option.name + " " + operator.caption + " ?";
             String value = SOptionPane.showInputDialog("", message);
             if (value == null) { return null; }
 
@@ -659,11 +663,12 @@ public class AdvancedSearch {
         }
 
         @Override
-        protected List<V> getValues(String message, FilterOption option, FilterOperator operator) {
+        protected List<V> getValues(FilterOption option, FilterOperator operator) {
             int max = choices.size();
             if (operator == FilterOperator.IS_EXACTLY && option.operatorOptions == FilterOperator.SINGLE_LIST_OPS) {
                 max = 1;
             }
+            String message = option.name + " " + operator.caption + " ?";
             return SGuiChoose.getChoices(message, 0, max, choices, null, toLongString);
         }
 
@@ -731,7 +736,8 @@ public class AdvancedSearch {
         }
 
         @Override
-        protected List<Map<String, Integer>> getValues(String message, FilterOption option, FilterOperator operator) {
+        protected List<Map<String, Integer>> getValues(FilterOption option, FilterOperator operator) {
+            String message = option.name + " " + operator.caption + " ?";
             PaperCard card = SGuiChoose.oneOrNone(message, FModel.getMagicDb().getCommonCards().getUniqueCards());
             if (card == null) { return null; }
 
@@ -782,8 +788,7 @@ public class AdvancedSearch {
         final FilterOperator operator = SGuiChoose.oneOrNone("Select an operator for " + option.name, option.operatorOptions, defaultOperator, null);
         if (operator == null) { return editFilter; }
 
-        final String message = option.name + " " + operator.caption + " ?";
-        Filter<T> filter = (Filter<T>)option.evaluator.createFilter(message, option, operator);
+        Filter<T> filter = (Filter<T>)option.evaluator.createFilter(option, operator);
         if (filter == null) {
             filter = editFilter;
         }

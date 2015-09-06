@@ -19,6 +19,7 @@ import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
 import forge.item.PaperCard;
+import forge.itemmanager.AdvancedSearch.FilterOperator;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
@@ -67,7 +68,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         else if (item instanceof PlayerView) {
             renderer = new PlayerItemRenderer();
         }
-        else if (item instanceof Integer) {
+        else if (item instanceof Integer || item == FilterOperator.EQUALS) { //allow numeric operators to be selected horizontally
             renderer = new NumberRenderer();
         }
         else {
