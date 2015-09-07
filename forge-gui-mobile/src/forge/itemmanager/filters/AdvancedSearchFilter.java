@@ -9,11 +9,14 @@ import com.google.common.base.Predicates;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.game.keyword.Keyword;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;
+import forge.itemmanager.AdvancedSearch.FilterOption;
 import forge.menu.FTooltip;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
@@ -337,6 +340,13 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                                             }
                                             else {
                                                 btnFilter.setText(emptyFilterText);
+                                            }
+                                            if (filter.getOption() == FilterOption.CARD_KEYWORDS) {
+                                                //the first time the user selects keywords, preload keywords for all cards
+                                                Runnable preloadTask = Keyword.getPreloadTask();
+                                                if (preloadTask != null) {
+                                                    LoadingOverlay.runBackgroundTask("Loading keywords...", preloadTask);
+                                                }
                                             }
                                         }
                                     });

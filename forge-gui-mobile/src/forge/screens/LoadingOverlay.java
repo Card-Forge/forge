@@ -38,6 +38,23 @@ public class LoadingOverlay extends FOverlay {
         });
     }
 
+    public static void runBackgroundTask(String caption0, final Runnable task) {
+        final LoadingOverlay loader = new LoadingOverlay(caption0);
+        loader.show();
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                task.run();
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        loader.hide();
+                    }
+                });
+            }
+        });
+    }
+
     private String caption;
 
     public LoadingOverlay(String caption0) {

@@ -891,6 +891,14 @@ public class AdvancedSearch {
             return caption.substring(emptyCaption.length());
         }
 
+        public FilterOption getOption() {
+            return option;
+        }
+
+        public FilterOperator getOperator() {
+            return operator;
+        }
+
         public Predicate<T> getPredicate() {
             return predicate;
         }

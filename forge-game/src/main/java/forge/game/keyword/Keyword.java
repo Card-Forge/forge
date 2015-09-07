@@ -2,6 +2,7 @@ package forge.game.keyword;
 
 import java.util.*;
 
+import forge.StaticData;
 import forge.game.card.Card;
 import forge.item.PaperCard;
 
@@ -182,10 +183,11 @@ public enum Keyword {
         return keywords;
     }
 
-    private static final Map<PaperCard, Set<Keyword>> cardKeywordsLookup = new HashMap<PaperCard, Set<Keyword>>();
+    private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<String, Set<Keyword>>();
 
     public static Set<Keyword> getKeywordSet(PaperCard card) {
-        Set<Keyword> keywordSet = cardKeywordsLookup.get(card);
+        String key = card.getName();
+        Set<Keyword> keywordSet = cardKeywordSetLookup.get(key);
         if (keywordSet == null) {
             keywordSet = new HashSet<Keyword>();
             List<String> keywords = Card.getCardForUi(card).getKeywords();
@@ -195,8 +197,23 @@ public enum Keyword {
                     keywordSet.add(keyword);
                 }
             }
-            cardKeywordsLookup.put(card, keywordSet);
+            cardKeywordSetLookup.put(card.getName(), keywordSet);
         }
         return keywordSet;
+    }
+
+    public static Runnable getPreloadTask() {
+        if (cardKeywordSetLookup.size() < 10000) { //allow preloading even if some but not all cards loaded
+            return new Runnable() {
+                @Override
+                public void run() {
+                    final Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
+                    for (PaperCard card : cards) {
+                        getKeywordSet(card);
+                    }
+                }
+            };
+        }
+        return null;
     }
 }
