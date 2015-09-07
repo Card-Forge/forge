@@ -19,8 +19,6 @@ package forge.itemmanager;
 
 import java.awt.Component;
 import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -63,7 +61,6 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinIcon;
-import forge.toolbox.FSkin.SkinnedCheckBox;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
@@ -95,13 +92,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     private final CDetailPicture cDetailPicture;
     private ItemManagerConfig config;
     private final List<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
-
-    private final SkinnedCheckBox chkEnableFilters = new SkinnedCheckBox();
-
-    private final FTextField txtFilterLogic = new FTextField.Builder()
-        .tooltip("Use '&','|','!' symbols (AND,OR,NOT) in combination with filter numbers and optional grouping \"()\" to build Boolean expression evaluated when applying filters")
-        .readonly() //TODO: Support editing filter logic
-        .build();
 
     private final ItemFilter<? extends T> mainSearchFilter;
     private final SkinnedPanel pnlButtons = new SkinnedPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
@@ -152,6 +142,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.model = new ItemManagerModel<T>(genericType0);
 
         this.mainSearchFilter = createSearchFilter();
+        this.mainSearchFilter.setAllowRemove(false);
 
         this.listView = new ItemListView<T>(this, this.model);
         this.imageView = createImageView(this.model);
@@ -180,31 +171,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             this.views.get(i).initialize(i);
         }
 
-        //build enable filters checkbox
-        ItemFilter.layoutCheckbox(this.chkEnableFilters);
-        this.chkEnableFilters.setText("(*)");
-        this.chkEnableFilters.setSelected(true);
-        this.chkEnableFilters.addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent arg0) {
-                lockFiltering = true;
-                final boolean enabled = chkEnableFilters.isSelected();
-                for (final ItemFilter<? extends T> filter : orderedFilters) {
-                    filter.setEnabled(enabled);
-                }
-                txtFilterLogic.setEnabled(enabled);
-                mainSearchFilter.setEnabled(enabled);
-                mainSearchFilter.updateEnabled(); //need to call updateEnabled since no listener for filter checkbox
-                lockFiltering = false;
-                applyFilters();
-            }
-        });
-
         //build display
         this.setOpaque(false);
         this.setLayout(null);
-        this.add(this.chkEnableFilters);
-        this.add(this.txtFilterLogic);
-        this.add(mainSearchFilter.getWidget());
+        mainSearchFilter.getPanel().setBorder(null);
+        mainSearchFilter.getPanel().setVisible(!hideFilters);
+        this.add(mainSearchFilter.getPanel());
         this.pnlButtons.setOpaque(false);
         this.pnlButtons.setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FSkin.getColor(Colors.CLR_TEXT)));
         this.add(this.pnlButtons);
@@ -272,15 +244,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
                     GuiUtils.addMenuItem(menu, "Show Filters", null, cmdHideFilters);
                 } else {
                     final JMenu addMenu = GuiUtils.createMenu("Add");
-                    if (mainSearchFilter.isEnabled()) {
-                        GuiUtils.addMenuItem(addMenu, "Current text search",
-                                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                                cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
-                        if (config != ItemManagerConfig.STRING_ONLY) {
-                            buildAddFilterMenu(addMenu);
-                        }
-                    } else {
-                        addMenu.setEnabled(false);
+                    GuiUtils.addMenuItem(addMenu, "Current text search",
+                            KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
+                    if (config != ItemManagerConfig.STRING_ONLY) {
+                        buildAddFilterMenu(addMenu);
                     }
                     menu.add(addMenu);
                     GuiUtils.addSeparator(menu);
@@ -394,19 +362,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
                 this.pnlButtons.setBounds(0, 0, 0, 0); //prevent horizontal line appearing
             }
         } else {
-            int number = 0;
-            final StringBuilder logicBuilder = new StringBuilder();
             for (final ItemFilter<? extends T> filter : this.orderedFilters) {
-                filter.setNumber(++number);
-                logicBuilder.append(number + "&");
                 helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
             }
-            this.txtFilterLogic.setText(logicBuilder.toString());
-            helper.newLine();
-            helper.include(this.chkEnableFilters, 41, FTextField.HEIGHT);
-            helper.offset(-1, 0); //ensure widgets line up
-            helper.include(this.txtFilterLogic, this.txtFilterLogic.getAutoSizeWidth(), FTextField.HEIGHT);
-            helper.fillLine(this.mainSearchFilter.getWidget(), ItemFilter.PANEL_HEIGHT);
+            helper.fillLine(this.mainSearchFilter.getPanel(), ItemFilter.PANEL_HEIGHT);
             helper.newLine(-3);
             helper.fillLine(this.pnlButtons, showButtonPanel ? buttonPanelHeight : 1); //just show border if no buttons
         }
@@ -951,7 +910,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
                 predicates.add(filter.buildPredicate(this.genericType));
             }
         }
-        if (!this.mainSearchFilter.isEmpty()) {
+        if (this.mainSearchFilter.isEnabled() && !this.mainSearchFilter.isEmpty()) {
             predicates.add(mainSearchFilter.buildPredicate(this.genericType));
         }
 
@@ -998,9 +957,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         for (final ItemFilter<? extends T> filter : this.orderedFilters) {
             filter.getPanel().setVisible(visible);
         }
-        this.chkEnableFilters.setVisible(visible);
-        this.txtFilterLogic.setVisible(visible);
-        this.mainSearchFilter.getWidget().setVisible(visible);
+        this.mainSearchFilter.getPanel().setVisible(visible);
 
         if (this.initialized) {
             this.revalidate();
@@ -1032,12 +989,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         mainSearchFilter.reset();
         lockFiltering = false;
 
-        if (mainSearchFilter.isEnabled()) {
-            applyFilters();
-        }
-        else {
-            chkEnableFilters.setSelected(true); //this will apply filters in itemStateChanged handler
-        }
+        applyFilters();
     }
 
     /**

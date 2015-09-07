@@ -21,10 +21,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public abstract class ItemFilter<T extends InventoryItem> {
     public final static int PANEL_HEIGHT = 28;
 
@@ -39,7 +36,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
     private FilterPanel panel;
     private Widget widget;
     private final SkinnedCheckBox chkEnable = new SkinnedCheckBox();
-    private RemoveButton btnRemove;
+    private final RemoveButton btnRemove = new RemoveButton();
 
     protected ItemFilter(ItemManager<? super T> itemManager0) {
         this.itemManager = itemManager0;
@@ -65,8 +62,6 @@ public abstract class ItemFilter<T extends InventoryItem> {
                 updateEnabled();
             }
             this.panel.add(this.widget);
-
-            this.btnRemove = new RemoveButton();
             this.panel.add(this.btnRemove);
         }
         return this.panel;
@@ -90,16 +85,19 @@ public abstract class ItemFilter<T extends InventoryItem> {
         return getWidget();
     }
 
-    public void setNumber(int number) {
-        this.chkEnable.setText("(" + number + ")");
-    }
-
     public boolean isEnabled() {
         return this.chkEnable.isSelected();
     }
 
     public void setEnabled(boolean enabled0) {
         this.chkEnable.setSelected(enabled0);
+    }
+
+    public boolean allowRemove() {
+        return this.btnRemove.isVisible();
+    }
+    public void setAllowRemove(boolean b0) {
+        this.btnRemove.setVisible(b0);
     }
 
     public void updateEnabled() {
@@ -161,12 +159,14 @@ public abstract class ItemFilter<T extends InventoryItem> {
         @Override
         public void doLayout() {
             LayoutHelper helper = new LayoutHelper(this);
-            int removeButtonSize = 17;
-            helper.include(chkEnable, 43, FTextField.HEIGHT);
+            int removeButtonSize = allowRemove() ? 17 : 0;
+            helper.include(chkEnable, 23, FTextField.HEIGHT);
             helper.offset(-3, 0); //avoid extra padding between checkbox and widget
             helper.fillLine(widget, PANEL_HEIGHT, removeButtonSize); //leave room for remove button
-            helper.offset(-3, (PANEL_HEIGHT - removeButtonSize) / 2 - 1); //shift position of remove button
-            helper.include(btnRemove, removeButtonSize, removeButtonSize);
+            if (removeButtonSize > 0) {
+                helper.offset(-3, (PANEL_HEIGHT - removeButtonSize) / 2 - 1); //shift position of remove button
+                helper.include(btnRemove, removeButtonSize, removeButtonSize);
+            }
         }
     }
 
