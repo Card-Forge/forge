@@ -98,10 +98,13 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
             @Override
             public boolean tap(Integer index, T value, float x, float y, int count) {
+                boolean activate = (count == 2 && index == prevTapIndex);
                 if (maxChoices > 1) {
                     if (selectedIndices.contains(index)) {
-                        selectedIndices.remove(index);
-                        onSelectionChange();
+                        if (!activate) { //retain selected item if double tapped
+                            selectedIndices.remove(index);
+                            onSelectionChange();
+                        }
                     }
                     else if (selectedIndices.size() < maxChoices) {
                         selectedIndices.add(index);
@@ -118,7 +121,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
                     prevTapIndex = index;
                     return true; //don't activate if renderer handles tap
                 }
-                if (count == 2 && index == prevTapIndex) {
+                if (activate) {
                     onItemActivate(index, value);
                 }
                 prevTapIndex = index;
