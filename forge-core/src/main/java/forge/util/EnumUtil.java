@@ -22,4 +22,25 @@ public final class EnumUtil {
         }
         return builder.build();
     }
+
+    public static String getEnumDisplayName(Enum<?> value) {
+        boolean uppercase = true;
+        String name = value.name();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < name.length(); i++) {
+            char ch = name.charAt(i);
+            if (ch == '_') {
+                builder.append(' ');
+                uppercase = true;
+            }
+            else if (uppercase) {
+                builder.append(ch); //assume enum name is ALL_CAPS format
+                uppercase = false;
+            }
+            else {
+                builder.append(Character.toLowerCase(ch));
+            }
+        }
+        return builder.toString();
+    }
 }

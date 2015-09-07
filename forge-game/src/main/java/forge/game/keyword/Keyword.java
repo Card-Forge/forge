@@ -2,9 +2,12 @@ package forge.game.keyword;
 
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.StaticData;
 import forge.game.card.Card;
 import forge.item.PaperCard;
+import forge.util.EnumUtil;
 
 public enum Keyword {
     UNDEFINED(SimpleKeyword.class, false, ""),
@@ -107,7 +110,7 @@ public enum Keyword {
         type = type0;
         isMultipleRedundant = isMultipleRedundant0;
         reminderText = reminderText0;
-        displayName = this.name().toLowerCase().replace('_', ' ');
+        displayName = EnumUtil.getEnumDisplayName(this);
     }
 
     public static KeywordInstance<?> getInstance(String k) {
