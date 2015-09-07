@@ -100,12 +100,13 @@ public enum Keyword {
 
     protected final Class<? extends KeywordInstance<?>> type;
     protected final boolean isMultipleRedundant;
-    protected final String reminderText;
+    protected final String reminderText, displayName;
 
     private Keyword(Class<? extends KeywordInstance<?>> type0, boolean isMultipleRedundant0, String reminderText0) {
         type = type0;
         isMultipleRedundant = isMultipleRedundant0;
         reminderText = reminderText0;
+        displayName = this.name().toLowerCase().replace('_', ' ');
     }
 
     public static KeywordInstance<?> getInstance(String k) {
@@ -169,7 +170,7 @@ public enum Keyword {
     }
 
     public String toString() {
-        return this.name().toLowerCase().replace('_', ' ');
+        return displayName;
     }
 
     public static List<Keyword> getAllKeywords() {
