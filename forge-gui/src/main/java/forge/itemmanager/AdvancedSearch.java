@@ -431,7 +431,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        CONTAINS_ANY("contains", "%1$s contains %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+        CONTAINS_ANY("contains any of", "%1$s contains %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 if (input != null) {
