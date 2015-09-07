@@ -1,5 +1,10 @@
 package forge.game.keyword;
 
+import java.util.*;
+
+import forge.game.card.Card;
+import forge.item.PaperCard;
+
 public enum Keyword {
     UNDEFINED(SimpleKeyword.class, false, ""),
     ABSORB(KeywordWithAmount.class, false, "If a source would deal damage to this creature, prevent %d of that damage."),
@@ -161,5 +166,36 @@ public enum Keyword {
         }
         inst.initialize(keyword, details);
         return inst;
+    }
+
+    public String toString() {
+        return this.name().toLowerCase().replace('_', ' ');
+    }
+
+    public static List<Keyword> getAllKeywords() {
+        Keyword[] values = values();
+        List<Keyword> keywords = new ArrayList<Keyword>();
+        for (int i = 1; i < values.length; i++) { //skip UNDEFINED
+            keywords.add(values[i]);
+        }
+        return keywords;
+    }
+
+    private static final Map<PaperCard, Set<Keyword>> cardKeywordsLookup = new HashMap<PaperCard, Set<Keyword>>();
+
+    public static Set<Keyword> getKeywordSet(PaperCard card) {
+        Set<Keyword> keywordSet = cardKeywordsLookup.get(card);
+        if (keywordSet == null) {
+            keywordSet = new HashSet<Keyword>();
+            List<String> keywords = Card.getCardForUi(card).getKeywords();
+            for (String k : keywords) {
+                Keyword keyword = Keyword.getInstance(k).getKeyword();
+                if (keyword != Keyword.UNDEFINED) {
+                    keywordSet.add(keyword);
+                }
+            }
+            cardKeywordsLookup.put(card, keywordSet);
+        }
+        return keywordSet;
     }
 }

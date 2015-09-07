@@ -17,6 +17,7 @@ import forge.deck.CardPool;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
+import forge.game.keyword.Keyword;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -36,6 +37,16 @@ public class AdvancedSearch {
             @Override
             protected String getItemValue(PaperCard input) {
                 return input.getRules().getOracleText();
+            }
+        }),
+        CARD_KEYWORDS("Keywords", PaperCard.class, FilterOperator.COLLECTION_OPS, new CustomListEvaluator<PaperCard, Keyword>(Keyword.getAllKeywords()) {
+            @Override
+            protected Keyword getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<Keyword> getItemValues(PaperCard input) {
+                return Keyword.getKeywordSet(input);
             }
         }),
         CARD_SET("Set", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
@@ -444,13 +455,48 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        CONTAINS_ALL("contains all", "%1$s contains %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
+        CONTAINS_ALL("contains all of", "%1$s contains %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 if (input != null && values.size() == 1) {
                     return input.equals(values.get(0));
                 }
                 return false;
+            }
+            @Override
+            public boolean apply(Set<Object> inputs, List<Object> values) {
+                if (inputs != null) {
+                    for (Object value : values) {
+                        if (!inputs.contains(value)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+        }),
+        CONTAIN_ANY("contain any of", "%1$s contain %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+            @Override
+            public boolean apply(Object input, List<Object> values) {
+                throw new RuntimeException("shouldn't be called with a single input");
+            }
+            @Override
+            public boolean apply(Set<Object> inputs, List<Object> values) {
+                if (inputs != null) {
+                    for (Object value : values) {
+                        if (inputs.contains(value)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }),
+        CONTAIN_ALL("contain all of", "%1$s contain %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
+            @Override
+            public boolean apply(Object input, List<Object> values) {
+                throw new RuntimeException("shouldn't be called with a single input");
             }
             @Override
             public boolean apply(Set<Object> inputs, List<Object> values) {
@@ -503,6 +549,9 @@ public class AdvancedSearch {
         public static final FilterOperator[] MULTI_LIST_OPS = new FilterOperator[] {
             IS_EXACTLY, CONTAINS_ANY, CONTAINS_ALL
         };
+        public static final FilterOperator[] COLLECTION_OPS = new FilterOperator[] {
+            CONTAIN_ANY, CONTAIN_ALL
+        };
         public static final FilterOperator[] DECK_CONTENT_OPS = new FilterOperator[] {
             CONTAINS_CARD, CONTAINS_X_COPIES_OF_CARD
         };
@@ -551,7 +600,7 @@ public class AdvancedSearch {
 
             final OperatorEvaluator<V> evaluator = (OperatorEvaluator<V>)operator.evaluator;
             Predicate<T> predicate;
-            if (option.operatorOptions == FilterOperator.MULTI_LIST_OPS) {
+            if (option.operatorOptions == FilterOperator.MULTI_LIST_OPS || option.operatorOptions == FilterOperator.COLLECTION_OPS) {
                 predicate = new Predicate<T>() {
                     @Override
                     public boolean apply(T input) {
