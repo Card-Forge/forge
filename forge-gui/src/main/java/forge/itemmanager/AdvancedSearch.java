@@ -80,7 +80,7 @@ public class AdvancedSearch {
                 return input.getRules().getColor().countColors();
             }
         }),
-        CARD_TYPE("Type", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getSortedCoreAndSuperTypes()) {
+        CARD_TYPE("Type", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getCombinedSuperAndCoreTypes()) {
             @Override
             protected String getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");

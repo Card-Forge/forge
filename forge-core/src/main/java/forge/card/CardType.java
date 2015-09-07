@@ -553,15 +553,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return CoreType.allCoreTypeNames;
     }
 
-    private static List<String> sortedCoreAndSuperTypes;
-    public static List<String> getSortedCoreAndSuperTypes() {
-        if (sortedCoreAndSuperTypes == null) {
-            sortedCoreAndSuperTypes = new ArrayList<String>();
-            sortedCoreAndSuperTypes.addAll(CoreType.allCoreTypeNames);
-            sortedCoreAndSuperTypes.addAll(Supertype.allSuperTypeNames);
-            Collections.sort(sortedCoreAndSuperTypes);
+    private static List<String> combinedSuperAndCoreTypes;
+    public static List<String> getCombinedSuperAndCoreTypes() {
+        if (combinedSuperAndCoreTypes == null) {
+            combinedSuperAndCoreTypes = new ArrayList<String>();
+            combinedSuperAndCoreTypes.addAll(Supertype.allSuperTypeNames);
+            combinedSuperAndCoreTypes.addAll(CoreType.allCoreTypeNames);
         }
-        return sortedCoreAndSuperTypes;
+        return combinedSuperAndCoreTypes;
     }
 
     private static List<String> sortedSubTypes;
