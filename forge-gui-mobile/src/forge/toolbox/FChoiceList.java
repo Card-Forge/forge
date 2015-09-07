@@ -118,8 +118,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
                     onSelectionChange();
                 }
                 if (renderer.tap(index, value, x, y, count)) {
-                    prevTapIndex = index;
-                    return true; //don't activate if renderer handles tap
+                    activate = false; //don't activate if renderer handles tap
                 }
                 if (activate) {
                     onItemActivate(index, value);
