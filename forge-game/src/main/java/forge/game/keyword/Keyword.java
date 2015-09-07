@@ -2,8 +2,6 @@ package forge.game.keyword;
 
 import java.util.*;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.StaticData;
 import forge.game.card.Card;
 import forge.item.PaperCard;
