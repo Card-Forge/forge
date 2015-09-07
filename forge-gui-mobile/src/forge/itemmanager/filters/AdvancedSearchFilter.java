@@ -1,22 +1,16 @@
 package forge.itemmanager.filters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.FThreads;
 import forge.Forge;
-import forge.game.keyword.Keyword;
+import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;
-import forge.itemmanager.AdvancedSearch.FilterOption;
 import forge.menu.FTooltip;
 import forge.screens.FScreen;
-import forge.screens.LoadingOverlay;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
@@ -29,13 +23,14 @@ import forge.util.Callback;
 
 
 public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
-    private final List<Object> expression = new ArrayList<Object>();
+    private final AdvancedSearch.Model<T> model;
 
     private FiltersLabel label;
     private EditScreen editScreen;
 
     public AdvancedSearchFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
+        model = new AdvancedSearch.Model<T>();
     }
 
     @Override
@@ -46,76 +41,14 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
     @Override
     protected final Predicate<T> buildPredicate() {
-        if (expression.isEmpty()) {
+        if (model.isEmpty()) {
             return Predicates.alwaysTrue();
         }
-        return getPredicate();
+        return model.getPredicate();
     }
 
-    public Predicate<T> getPredicate() {
-        return getPredicatePiece(new ExpressionIterator());
-    }
-
-    private class ExpressionIterator {
-        private int index;
-        private boolean hasNext() {
-            return index < expression.size();
-        }
-        private ExpressionIterator next() {
-            index++;
-            return this;
-        }
-        private Object get() {
-            return expression.get(index);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private Predicate<T> getPredicatePiece(ExpressionIterator iterator) {
-        Predicate<T> pred = null;
-        Predicate<T> predPiece = null;
-        Operator operator = null;
-        boolean applyNot = false;
-
-        for (; iterator.hasNext(); iterator.next()) {
-            Object piece = iterator.get();
-            if (piece.equals(Operator.OPEN_PAREN)) {
-                predPiece = getPredicatePiece(iterator.next());
-            }
-            else if (piece.equals(Operator.CLOSE_PAREN)) {
-                return pred;
-            }
-            else if (piece.equals(Operator.AND)) {
-                operator = Operator.AND;
-                continue;
-            }
-            else if (piece.equals(Operator.OR)) {
-                operator = Operator.OR;
-                continue;
-            }
-            else if (piece.equals(Operator.NOT)) {
-                applyNot = !applyNot;
-                continue;
-            }
-            else {
-                predPiece = ((AdvancedSearch.Filter<T>) piece).getPredicate();
-            }
-            if (applyNot) {
-                predPiece = Predicates.not(predPiece);
-                applyNot = false;
-            }
-            if (pred == null) {
-                pred = predPiece;
-            }
-            else if (operator == Operator.AND) {
-                pred = Predicates.and(pred, predPiece);
-            }
-            else if (operator == Operator.OR) {
-                pred = Predicates.or(pred, predPiece);
-            }
-            operator = null;
-        }
-        return pred;
+    public Predicate<? super T> getPredicate() {
+        return model.getPredicate();
     }
 
     public void edit() {
@@ -125,80 +58,21 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         Forge.openScreen(editScreen);
     }
 
-    @SuppressWarnings("unchecked")
-    private void updateLabel() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Filter: ");
-        if (expression.isEmpty()) {
-            builder.append("(none)");
-        }
-        else {
-            int prevFilterEndIdx = -1;
-            AdvancedSearch.Filter<T> filter, prevFilter = null;
-            for (Object piece : expression) {
-                if (piece instanceof AdvancedSearch.Filter) {
-                    filter = (AdvancedSearch.Filter<T>)piece;
-                    if (filter.canMergeCaptionWith(prevFilter)) {
-                        //convert boolean operators between filters to lowercase
-                        builder.replace(prevFilterEndIdx, builder.length(), builder.substring(prevFilterEndIdx).toLowerCase());
-                        //append only values for filter
-                        builder.append(filter.extractValuesFromCaption());
-                    }
-                    else {
-                        builder.append(filter);
-                    }
-                    prevFilter = filter;
-                    prevFilterEndIdx = builder.length();
-                }
-                else {
-                    if (piece.equals(Operator.OPEN_PAREN) || piece.equals(Operator.CLOSE_PAREN)) {
-                        prevFilter = null; //prevent merging filters with parentheses in between
-                    }
-                    builder.append(piece);
-                }
-            }
-        }
-        label.setText(builder.toString());
-    }
-
-    private String getTooltip() {
-        if (expression.isEmpty()) { return ""; }
-
-        StringBuilder builder = new StringBuilder();
-        builder.append("Filter:\n");
-
-        String indent = "";
-
-        for (Object piece : expression) {
-            if (piece.equals(Operator.CLOSE_PAREN) && !indent.isEmpty()) {
-                indent = indent.substring(2); //trim an indent level when a close paren is hit
-            }
-            builder.append("\n" + indent + piece.toString().trim());
-            if (piece.equals(Operator.OPEN_PAREN)) {
-                indent += "  "; //add an indent level when an open paren is hit
-            }
-        }
-        return builder.toString();
-    }
-
     @Override
     public boolean isEmpty() {
-        return expression.isEmpty();
+        return model.isEmpty();
     }
 
     @Override
     public void reset() {
-        expression.clear();
+        model.reset();
         editScreen = null;
-        if (label != null) {
-            updateLabel();
-        }
     }
 
     @Override
     protected void buildWidget(Widget widget) {
         label = new FiltersLabel();
-        updateLabel();
+        model.setLabel(label);
         widget.add(label);
         widget.setVisible(!isEmpty());
     }
@@ -215,7 +89,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
         @Override
         public boolean tap(float x, float y, int count) {
-            FTooltip tooltip = new FTooltip(getTooltip());
+            FTooltip tooltip = new FTooltip(model.getTooltip());
             tooltip.show(this, x, getHeight());
             return true;
         }
@@ -241,48 +115,16 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
         private EditScreen() {
             super("Advanced Search");
-            scroller.add(new Filter());
+            Filter filter = new Filter();
+            model.addFilterControl(filter);
+            scroller.add(filter);
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public void onClose(Callback<Boolean> canCloseCallback) {
-            //build expression when closing screen
-            expression.clear();
-
-            for (FDisplayObject child : scroller.getChildren()) {
-                Filter filter = (Filter)child;
-                if (filter.filter == null) { continue; } //skip any blank filters
-
-                if (filter.btnNotBeforeParen.isSelected()) {
-                    expression.add(Operator.NOT);
-                }
-                if (filter.btnOpenParen.isSelected()) {
-                    expression.add(Operator.OPEN_PAREN);
-                }
-                if (filter.btnNotAfterParen.isSelected()) {
-                    expression.add(Operator.NOT);
-                }
-
-                expression.add(filter.filter);
-
-                if (filter.btnCloseParen.isSelected()) {
-                    expression.add(Operator.CLOSE_PAREN);
-                }
-                if (filter.btnAnd.isSelected()) {
-                    expression.add(Operator.AND);
-                }
-                else if (filter.btnOr.isSelected()) {
-                    expression.add(Operator.OR);
-                }
-            }
-
-            if (label != null) {
-                updateLabel();
-            }
-
+            //update expression when screen closed
+            model.updateExpression();
             itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
-
             super.onClose(canCloseCallback);
         }
 
@@ -293,7 +135,9 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
         private void addNewFilter(Filter fromFilter) {
             if (scroller.getChildAt(scroller.getChildCount() - 1) == fromFilter) {
-                scroller.add(new Filter());
+                Filter filter = new Filter();
+                model.addFilterControl(filter);
+                scroller.add(filter);
                 scroller.revalidate();
                 scroller.scrollToBottom();
             }
@@ -304,14 +148,13 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             int index = scroller.indexOf(fromFilter);
             if (index < scroller.getChildCount() - 1) {
                 Filter nextFilter = (Filter)scroller.getChildAt(index + 1);
-                fromFilter.btnAnd.setSelected(nextFilter.btnAnd.isSelected());
-                fromFilter.btnOr.setSelected(nextFilter.btnOr.isSelected());
+                model.removeFilterControl(nextFilter);
                 scroller.remove(nextFilter);
                 scroller.revalidate();
             }
         }
 
-        private class Filter extends FContainer {
+        private class Filter extends FContainer implements AdvancedSearch.IFilterControl<T> {
             private final FLabel btnNotBeforeParen, btnOpenParen, btnNotAfterParen;
             private final FLabel btnFilter;
             private final FLabel btnCloseParen, btnAnd, btnOr;
@@ -321,41 +164,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 btnNotBeforeParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
                 btnOpenParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("(").selectable().build());
                 btnNotAfterParen = add(new FLabel.Builder().align(HAlignment.CENTER).text("NOT").selectable().build());
-
-                final String emptyFilterText = "Select Filter...";
-                btnFilter = add(new FLabel.ButtonBuilder().text(emptyFilterText).parseSymbols(true).command(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        FThreads.invokeInBackgroundThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                final AdvancedSearch.Filter<T> newFilter = AdvancedSearch.getFilter(itemManager.getGenericType(), filter);
-                                if (filter != newFilter) {
-                                    FThreads.invokeInEdtLater(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            filter = newFilter;
-                                            if (filter != null) {
-                                                btnFilter.setText(filter.toString());
-                                            }
-                                            else {
-                                                btnFilter.setText(emptyFilterText);
-                                            }
-                                            if (filter.getOption() == FilterOption.CARD_KEYWORDS) {
-                                                //the first time the user selects keywords, preload keywords for all cards
-                                                Runnable preloadTask = Keyword.getPreloadTask();
-                                                if (preloadTask != null) {
-                                                    LoadingOverlay.runBackgroundTask("Loading keywords...", preloadTask);
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        });
-                    }
-                }).build());
-
+                btnFilter = add(new FLabel.ButtonBuilder().parseSymbols(true).build());
                 btnCloseParen = add(new FLabel.Builder().align(HAlignment.CENTER).selectable().text(")").build());
                 btnAnd = add(new FLabel.Builder().align(HAlignment.CENTER).text("AND").selectable().command(new FEventHandler() {
                     @Override
@@ -409,24 +218,47 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 x += dx;
                 btnOr.setBounds(x, y, buttonWidth, buttonHeight);
             }
-        }
-    }
 
-    private enum Operator {
-        AND(" AND "),
-        OR(" OR "),
-        NOT("NOT "),
-        OPEN_PAREN("("),
-        CLOSE_PAREN(")");
-
-        private final String token;
-
-        private Operator(String token0) {
-            token = token0;
-        }
-
-        public String toString() {
-            return token;
+            @Override
+            public IButton getBtnNotBeforeParen() {
+                return btnNotBeforeParen;
+            }
+            @Override
+            public IButton getBtnOpenParen() {
+                return btnOpenParen;
+            }
+            @Override
+            public IButton getBtnNotAfterParen() {
+                return btnNotAfterParen;
+            }
+            @Override
+            public IButton getBtnFilter() {
+                return btnFilter;
+            }
+            @Override
+            public IButton getBtnCloseParen() {
+                return btnCloseParen;
+            }
+            @Override
+            public IButton getBtnAnd() {
+                return btnAnd;
+            }
+            @Override
+            public IButton getBtnOr() {
+                return btnOr;
+            }
+            @Override
+            public AdvancedSearch.Filter<T> getFilter() {
+                return filter;
+            }
+            @Override
+            public void setFilter(AdvancedSearch.Filter<T> filter0) {
+                filter = filter0;
+            }
+            @Override
+            public Class<? super T> getGenericType() {
+                return itemManager.getGenericType();
+            }
         }
     }
 }

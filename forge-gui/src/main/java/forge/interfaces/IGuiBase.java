@@ -51,4 +51,5 @@ public interface IGuiBase {
     void showBazaar();
     IGuiGame getNewGuiGame();
     HostedMatch hostMatch();
+    void runBackgroundTask(String message, Runnable task);
 }

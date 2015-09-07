@@ -27,6 +27,7 @@ import forge.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.properties.ForgeConstants;
+import forge.screens.LoadingOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.GuiDownloader;
@@ -278,5 +279,10 @@ public class GuiMobile implements IGuiBase {
     @Override
     public HostedMatch hostMatch() {
         return MatchController.hostMatch();
+    }
+
+    @Override
+    public void runBackgroundTask(String message, Runnable task) {
+        LoadingOverlay.runBackgroundTask(message, task);
     }
 }

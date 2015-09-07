@@ -5,7 +5,11 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
+import forge.FThreads;
+import forge.GuiBase;
+import forge.UiCommand;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -18,6 +22,7 @@ import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.game.keyword.Keyword;
+import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -906,6 +911,264 @@ public class AdvancedSearch {
         @Override
         public String toString() {
             return caption;
+        }
+    }
+
+    public interface IFilterControl<T extends InventoryItem> {
+        IButton getBtnNotBeforeParen();
+        IButton getBtnOpenParen();
+        IButton getBtnNotAfterParen();
+        IButton getBtnFilter();
+        IButton getBtnCloseParen();
+        IButton getBtnAnd();
+        IButton getBtnOr();
+        Filter<T> getFilter();
+        void setFilter(Filter<T> filter0);
+        Class<? super T> getGenericType();
+    }
+
+    public static class Model<T extends InventoryItem> {
+        private final List<Object> expression = new ArrayList<Object>();
+        private final List<IFilterControl<T>> controls = new ArrayList<IFilterControl<T>>();
+        private IButton label;
+
+        public Model() {
+        }
+
+        public Predicate<T> getPredicate() {
+            return getPredicatePiece(new ExpressionIterator());
+        }
+
+        @SuppressWarnings("unchecked")
+        private Predicate<T> getPredicatePiece(ExpressionIterator iterator) {
+            Predicate<T> pred = null;
+            Predicate<T> predPiece = null;
+            Operator operator = null;
+            boolean applyNot = false;
+
+            for (; iterator.hasNext(); iterator.next()) {
+                Object piece = iterator.get();
+                if (piece.equals(Operator.OPEN_PAREN)) {
+                    predPiece = getPredicatePiece(iterator.next());
+                }
+                else if (piece.equals(Operator.CLOSE_PAREN)) {
+                    return pred;
+                }
+                else if (piece.equals(Operator.AND)) {
+                    operator = Operator.AND;
+                    continue;
+                }
+                else if (piece.equals(Operator.OR)) {
+                    operator = Operator.OR;
+                    continue;
+                }
+                else if (piece.equals(Operator.NOT)) {
+                    applyNot = !applyNot;
+                    continue;
+                }
+                else {
+                    predPiece = ((AdvancedSearch.Filter<T>) piece).getPredicate();
+                }
+                if (applyNot) {
+                    predPiece = Predicates.not(predPiece);
+                    applyNot = false;
+                }
+                if (pred == null) {
+                    pred = predPiece;
+                }
+                else if (operator == Operator.AND) {
+                    pred = Predicates.and(pred, predPiece);
+                }
+                else if (operator == Operator.OR) {
+                    pred = Predicates.or(pred, predPiece);
+                }
+                operator = null;
+            }
+            return pred;
+        }
+
+        public boolean isEmpty() {
+            return expression.isEmpty();
+        }
+
+        public void reset() {
+            expression.clear();
+            updateLabel();
+        }
+
+        @SuppressWarnings("serial")
+        public void addFilterControl(final IFilterControl<T> control) {
+            final String emptyFilterText = "Select Filter...";
+            control.getBtnFilter().setText(emptyFilterText);
+            control.getBtnFilter().setCommand(new UiCommand() {
+                @Override
+                public void run() {
+                    FThreads.invokeInBackgroundThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Filter<T> filter = getFilter(control.getGenericType(), control.getFilter());
+                            if (control.getFilter() != filter) {
+                                FThreads.invokeInEdtLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        control.setFilter(filter);
+                                        if (filter != null) {
+                                            control.getBtnFilter().setText(filter.toString());
+                                        }
+                                        else {
+                                            control.getBtnFilter().setText(emptyFilterText);
+                                        }
+                                        if (filter.getOption() == FilterOption.CARD_KEYWORDS) {
+                                            //the first time the user selects keywords, preload keywords for all cards
+                                            Runnable preloadTask = Keyword.getPreloadTask();
+                                            if (preloadTask != null) {
+                                                GuiBase.getInterface().runBackgroundTask("Loading keywords...", preloadTask);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+            controls.add(control);
+        }
+        public void removeFilterControl(IFilterControl<T> control) {
+            int index = controls.indexOf(control);
+            if (index > 0) {
+                IFilterControl<T> prevControl = controls.get(index - 1);
+                prevControl.getBtnAnd().setSelected(control.getBtnAnd().isSelected());
+                prevControl.getBtnOr().setSelected(control.getBtnOr().isSelected());
+            }
+            controls.remove(index);
+        }
+
+        public void setLabel(IButton label0) {
+            label = label0;
+            updateLabel();
+        }
+
+        @SuppressWarnings("unchecked")
+        public void updateLabel() {
+            if (label == null) { return; }
+
+            StringBuilder builder = new StringBuilder();
+            builder.append("Filter: ");
+            if (expression.isEmpty()) {
+                builder.append("(none)");
+            }
+            else {
+                int prevFilterEndIdx = -1;
+                AdvancedSearch.Filter<T> filter, prevFilter = null;
+                for (Object piece : expression) {
+                    if (piece instanceof AdvancedSearch.Filter) {
+                        filter = (AdvancedSearch.Filter<T>)piece;
+                        if (filter.canMergeCaptionWith(prevFilter)) {
+                            //convert boolean operators between filters to lowercase
+                            builder.replace(prevFilterEndIdx, builder.length(), builder.substring(prevFilterEndIdx).toLowerCase());
+                            //append only values for filter
+                            builder.append(filter.extractValuesFromCaption());
+                        }
+                        else {
+                            builder.append(filter);
+                        }
+                        prevFilter = filter;
+                        prevFilterEndIdx = builder.length();
+                    }
+                    else {
+                        if (piece.equals(Operator.OPEN_PAREN) || piece.equals(Operator.CLOSE_PAREN)) {
+                            prevFilter = null; //prevent merging filters with parentheses in between
+                        }
+                        builder.append(piece);
+                    }
+                }
+            }
+            label.setText(builder.toString());
+        }
+
+        public String getTooltip() {
+            if (expression.isEmpty()) { return ""; }
+
+            StringBuilder builder = new StringBuilder();
+            builder.append("Filter:\n");
+
+            String indent = "";
+
+            for (Object piece : expression) {
+                if (piece.equals(Operator.CLOSE_PAREN) && !indent.isEmpty()) {
+                    indent = indent.substring(2); //trim an indent level when a close paren is hit
+                }
+                builder.append("\n" + indent + piece.toString().trim());
+                if (piece.equals(Operator.OPEN_PAREN)) {
+                    indent += "  "; //add an indent level when an open paren is hit
+                }
+            }
+            return builder.toString();
+        }
+
+        public void updateExpression() {
+            expression.clear();
+
+            for (IFilterControl<T> control : controls) {
+                if (control.getFilter() == null) { continue; } //skip any blank filters
+
+                if (control.getBtnNotBeforeParen().isSelected()) {
+                    expression.add(Operator.NOT);
+                }
+                if (control.getBtnOpenParen().isSelected()) {
+                    expression.add(Operator.OPEN_PAREN);
+                }
+                if (control.getBtnNotAfterParen().isSelected()) {
+                    expression.add(Operator.NOT);
+                }
+
+                expression.add(control.getFilter());
+
+                if (control.getBtnCloseParen().isSelected()) {
+                    expression.add(Operator.CLOSE_PAREN);
+                }
+                if (control.getBtnAnd().isSelected()) {
+                    expression.add(Operator.AND);
+                }
+                else if (control.getBtnOr().isSelected()) {
+                    expression.add(Operator.OR);
+                }
+            }
+
+            updateLabel();
+        }
+
+        private class ExpressionIterator {
+            private int index;
+            private boolean hasNext() {
+                return index < expression.size();
+            }
+            private ExpressionIterator next() {
+                index++;
+                return this;
+            }
+            private Object get() {
+                return expression.get(index);
+            }
+        }
+
+        private enum Operator {
+            AND(" AND "),
+            OR(" OR "),
+            NOT("NOT "),
+            OPEN_PAREN("("),
+            CLOSE_PAREN(")");
+
+            private final String token;
+
+            private Operator(String token0) {
+                token = token0;
+            }
+
+            public String toString() {
+                return token;
+            }
         }
     }
 }

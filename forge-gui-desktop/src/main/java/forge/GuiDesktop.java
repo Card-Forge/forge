@@ -273,4 +273,9 @@ public class GuiDesktop implements IGuiBase {
         return match;
     }
 
+    @Override
+    public void runBackgroundTask(String message, Runnable task) {
+        //TODO: Show loading overlay
+        FThreads.invokeInBackgroundThread(task);
+    }
 }
