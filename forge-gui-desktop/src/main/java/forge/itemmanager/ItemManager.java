@@ -96,8 +96,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     private final ItemFilter<? extends T> mainSearchFilter;
     private final SkinnedPanel pnlButtons = new SkinnedPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
 
+    private static final SkinIcon SEARCH_ICON = FSkin.getIcon(FSkinProp.ICO_SEARCH).resize(20, 20);
     private final FLabel btnFilters = new FLabel.ButtonBuilder()
-        .text("Filters")
+        .icon(SEARCH_ICON).iconScaleAuto(false)
         .tooltip("Click to configure filters")
         .reactOnMouseDown()
         .build();
@@ -243,7 +244,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
                 if (hideFilters) {
                     GuiUtils.addMenuItem(menu, "Show Filters", null, cmdHideFilters);
                 } else {
-                    final JMenu addMenu = GuiUtils.createMenu("Add");
+                    final JMenu addMenu = GuiUtils.createMenu("Add Filter");
                     GuiUtils.addMenuItem(addMenu, "Current text search",
                             KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
                             cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
@@ -369,12 +370,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             helper.newLine(-3);
             helper.fillLine(this.pnlButtons, showButtonPanel ? buttonPanelHeight : 1); //just show border if no buttons
         }
+        final int viewButtonWidth = FTextField.HEIGHT;
         helper.newLine();
         helper.offset(1, 0); //align filters button with expand/collapse all button
-        helper.include(this.btnFilters, 61, FTextField.HEIGHT);
+        helper.include(this.btnFilters, viewButtonWidth, FTextField.HEIGHT);
         int captionWidth = this.lblCaption.getAutoSizeWidth();
         final int ratioWidth = this.lblRatio.getAutoSizeWidth();
-        final int viewButtonWidth = FTextField.HEIGHT;
         final int viewButtonCount = this.views.size() + 1;
         final int availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - helper.getX() - (viewButtonCount + 2) * helper.getGapX();
         if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
