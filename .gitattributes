@@ -848,6 +848,7 @@ forge-gui-desktop/src/main/java/forge/itemmanager/DeckManager.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/ItemManager.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/ItemManagerContainer.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/SpellShopManager.java -text
+forge-gui-desktop/src/main/java/forge/itemmanager/filters/AdvancedSearchFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardCMCFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardCMCRangeFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardColorFilter.java -text

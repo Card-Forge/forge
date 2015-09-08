@@ -154,5 +154,24 @@ public class CardManager extends ItemManager<PaperCard> {
                 itemManager.addFilter(new CardToughnessFilter(itemManager));
             }
         }, itemManager.getFilter(CardToughnessFilter.class) == null);
+
+        GuiUtils.addSeparator(menu);
+
+        GuiUtils.addMenuItem(menu, "Advanced...", null, new Runnable() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public void run() {
+                AdvancedSearchFilter<PaperCard> filter = itemManager.getFilter(AdvancedSearchFilter.class);
+                if (filter != null) {
+                    filter.edit();
+                }
+                else {
+                    filter = new AdvancedSearchFilter<PaperCard>(itemManager);
+                    if (filter.edit()) {
+                        itemManager.addFilter(filter);
+                    }
+                }
+            }
+        });
     }
 }

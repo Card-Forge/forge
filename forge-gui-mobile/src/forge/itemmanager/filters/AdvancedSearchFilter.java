@@ -2,8 +2,6 @@ package forge.itemmanager.filters;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import forge.Forge;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
@@ -41,9 +39,6 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
     @Override
     protected final Predicate<T> buildPredicate() {
-        if (model.isEmpty()) {
-            return Predicates.alwaysTrue();
-        }
         return model.getPredicate();
     }
 

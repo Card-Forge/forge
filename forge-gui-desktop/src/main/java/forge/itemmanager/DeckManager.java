@@ -30,6 +30,7 @@ import forge.game.IHasGameType;
 import forge.gui.GuiUtils;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
+import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.DeckColorFilter;
 import forge.itemmanager.filters.DeckFolderFilter;
 import forge.itemmanager.filters.DeckFormatFilter;
@@ -222,6 +223,25 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 addFilter(new DeckColorFilter(DeckManager.this));
             }
         }, getFilter(DeckColorFilter.class) == null);
+
+        GuiUtils.addSeparator(menu);
+
+        GuiUtils.addMenuItem(menu, "Advanced...", null, new Runnable() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public void run() {
+                AdvancedSearchFilter<DeckProxy> filter = getFilter(AdvancedSearchFilter.class);
+                if (filter != null) {
+                    filter.edit();
+                }
+                else {
+                    filter = new AdvancedSearchFilter<DeckProxy>(DeckManager.this);
+                    if (filter.edit()) {
+                        addFilter(filter);
+                    }
+                }
+            }
+        });
     }
 
     private void editDeck(final DeckProxy deck) {
