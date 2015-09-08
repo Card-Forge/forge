@@ -134,4 +134,8 @@ public class FScrollPanel extends FScrollPane {
         }
         super.removeAll();
     }
+
+    public Component[] getInnerComponents() {
+        return innerPanel.getComponents();
+    }
 }
