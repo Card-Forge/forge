@@ -235,8 +235,11 @@ public class ManaCostAdjustment {
                     if (activator == null ) {
                         return;
                     }
-                    if (CardLists.filterControlledBy(activator.getGame().getStack().getSpellsCastThisTurn(),
-                            activator).size() > 0) {
+                    CardCollection list = CardLists.filterControlledBy(activator.getGame().getStack().getSpellsCastThisTurn(), activator);
+                    if (params.containsKey("ValidCard")) {
+                        list = CardLists.getValidCards(list, params.get("ValidCard"), hostCard.getController(), hostCard);
+                    }
+                    if (list.size() > 0) {
                         return;
                     }
                 }
@@ -380,8 +383,11 @@ public class ManaCostAdjustment {
                     if (activator == null ) {
                         return;
                     }
-                    if (CardLists.filterControlledBy(activator.getGame().getStack().getSpellsCastThisTurn(),
-                            activator).size() > 0) {
+                    CardCollection list = CardLists.filterControlledBy(activator.getGame().getStack().getSpellsCastThisTurn(), activator);
+                    if (params.containsKey("ValidCard")) {
+                        list = CardLists.getValidCards(list, params.get("ValidCard"), hostCard.getController(), hostCard);
+                    }
+                    if (list.size() > 0) {
                         return;
                     }
                 }
