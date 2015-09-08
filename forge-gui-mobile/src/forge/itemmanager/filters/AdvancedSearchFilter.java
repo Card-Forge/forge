@@ -2,6 +2,7 @@ package forge.itemmanager.filters;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
+
 import forge.Forge;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
@@ -78,13 +79,24 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
     }
 
     private class FiltersLabel extends FLabel {
+        private String toolTipText;
+
         private FiltersLabel() {
             super(new FLabel.Builder().align(HAlignment.LEFT).parseSymbols(true).font(ListLabelFilter.LABEL_FONT));
         }
 
         @Override
+        public String getToolTipText() {
+            return toolTipText;
+        }
+        @Override
+        public void setToolTipText(String s0) {
+            toolTipText = s0;
+        }
+
+        @Override
         public boolean tap(float x, float y, int count) {
-            FTooltip tooltip = new FTooltip(model.getTooltip());
+            FTooltip tooltip = new FTooltip(toolTipText);
             tooltip.show(this, x, getHeight());
             return true;
         }

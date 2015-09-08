@@ -1088,6 +1088,7 @@ public class AdvancedSearch {
                 }
             }
             label.setText(builder.toString());
+            label.setToolTipText(getTooltip());
         }
 
         public String getTooltip() {

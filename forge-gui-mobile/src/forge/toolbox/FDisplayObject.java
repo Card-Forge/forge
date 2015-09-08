@@ -99,6 +99,13 @@ public abstract class FDisplayObject {
         rotate180 = b0;
     }
 
+    //these tooltip functions exist for the sake of interfaces, should be overriden if values needed
+    public String getToolTipText() {
+        return null;
+    }
+    public void setToolTipText(String s0) {
+    }
+
     //override to return true if drawOverlay should be called on container before drawing this object
     protected boolean drawAboveOverlay() {
         return false;

@@ -84,6 +84,13 @@ public class FComboBoxWrapper<E> implements IComboBox<E> {
         comboBox.setText(text0);
     }
 
+    public String getToolTipText() {
+        return comboBox.getToolTipText();
+    }
+    public void setToolTipText(String s0) {
+        comboBox.setToolTipText(s0);
+    }
+
     public void setMaximumRowCount(final int count) {
         comboBox.setMaximumRowCount(count);
     }
