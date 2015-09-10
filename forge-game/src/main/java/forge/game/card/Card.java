@@ -6194,7 +6194,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return;
                 }
                 if (kw.equals("Shroud")) {
-                    result.setFalse();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Can target CardUID_").append(String.valueOf(getId()));
+                    sb.append(" with spells and abilities as though it didn't have shroud.");
+                    if (!sa.getActivatingPlayer().hasKeyword(sb.toString())) {
+                        result.setFalse();
+                    }
                 }
                 else if (kw.equals("Hexproof")) {
                     if (sa.getActivatingPlayer().getOpponents().contains(getController())) {
