@@ -11,8 +11,8 @@ Release Notes
 
 - Keyboard shortcuts for Auto Yield -
 There are two new keyboard shortcuts now that can be used to quickly set up an
-auto-yield for the current ability on stack without having to use the mouse and
-make a lot of clicks. By default the shortcuts are:
+auto-yield for the current ability on stack without having to use the mouse. 
+By default the shortcuts are:
 - "Y" enables auto-yield and, if applicable, enables "Always Yes" (if the trigger
 is optional).
 - "N" enables auto-yield and, if applicable, enables "Always No" (if the trigger
