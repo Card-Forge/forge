@@ -20,7 +20,6 @@ import javax.swing.*;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
 
 
 public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -83,7 +82,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         private static final int HEIGHT = 500;
         
         private final FScrollPanel scroller;
-        private FOptionPane optionPane;
+        //private FOptionPane optionPane;
 
         private EditDialog() {
             scroller = new FScrollPanel(null, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER) {
@@ -108,7 +107,8 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         }
 
         private boolean show() {
-            optionPane = new FOptionPane(null, "Advanced Search", null, scroller, ImmutableList.of("OK", "Cancel"), 0);
+            FOptionPane.showMessageDialog("Coming Soon!", "Advanced Search", FOptionPane.INFORMATION_ICON);
+            /*optionPane = new FOptionPane(null, "Advanced Search", null, scroller, ImmutableList.of("OK", "Cancel"), 0);
             optionPane.setVisible(true);
 
             int result = optionPane.getResult();
@@ -117,7 +117,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             if (result != 1) {
                 model.updateExpression(); //update expression when dialog accepted
                 return true;
-            }
+            }*/
             return false;
         }
 
