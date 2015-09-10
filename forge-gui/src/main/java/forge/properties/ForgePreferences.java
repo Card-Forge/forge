@@ -161,7 +161,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_CONCEDE ("17"),
         SHORTCUT_ENDTURN ("69"),
         SHORTCUT_ALPHASTRIKE ("65"),
-        SHORTCUT_SHOWTARGETING ("84");
+        SHORTCUT_SHOWTARGETING ("84"),
+        SHORTCUT_AUTOYIELD_ALWAYS_YES ("89"),
+        SHORTCUT_AUTOYIELD_ALWAYS_NO ("78");
 
         private final String strDefaultVal;
 

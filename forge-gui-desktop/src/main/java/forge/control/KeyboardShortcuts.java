@@ -17,6 +17,7 @@ import javax.swing.KeyStroke;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.game.spellability.StackItemView;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.model.FModel;
@@ -131,6 +132,43 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Auto-yield current item on stack (and respond Always Yes if applicable). */
+        final Action actAutoYieldAndYes = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                StackItemView si = matchUI.getGameView().peekStack();
+                if (si != null && si.isAbility()) {
+                    matchUI.setShouldAutoYield(si.getKey(), true);
+                    int triggerID = Integer.valueOf(si.getSourceTrigger());
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
+                        matchUI.setShouldAlwaysAcceptTrigger(triggerID);
+                    }
+                    matchUI.getGameController().passPriority();
+                }
+            }
+        };
+
+        /** Auto-yield current item on stack (and respond Always No if applicable). */
+        final Action actAutoYieldAndNo = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                StackItemView si = matchUI.getGameView().peekStack();
+                if (si != null && si.isAbility()) {
+                    matchUI.setShouldAutoYield(si.getKey(), true);
+                    int triggerID = Integer.valueOf(si.getSourceTrigger());
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
+                        matchUI.setShouldAlwaysDeclineTrigger(triggerID);
+                    }
+                    matchUI.getGameController().passPriority();
+                }
+            }
+        };
+
+        
         //========== Instantiate shortcut objects and add to list.
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, "Match: show stack panel", actShowStack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWCOMBAT, "Match: show combat panel", actShowCombat, am, im));
@@ -140,6 +178,8 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, "Match: pass priority until EOT or next stack event", actEndTurn, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ALPHASTRIKE, "Match: Alpha Strike (attack with all available)", actAllAttack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, "Match: toggle targeting visual overlay", actTgtOverlay, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_YES, "Match: auto-yield ability on stack (Always Yes)", actAutoYieldAndYes, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_NO, "Match: auto-yield ability on stack (Always No)", actAutoYieldAndNo, am, im));
         return list;
     } // End initMatchShortcuts()
 
