@@ -9,6 +9,18 @@ Release Notes
 -------------
 
 
+- Keyboard shortcuts for Auto Yield -
+There are two new keyboard shortcuts now that can be used to quickly set up an
+auto-yield for the current ability on stack without having to use the mouse and
+make a lot of clicks. By default the shortcuts are:
+- "Y" enables auto-yield and, if applicable, enables "Always Yes" (if the trigger
+is optional).
+- "N" enables auto-yield and, if applicable, enables "Always No" (if the trigger
+is optional).
+The shortcuts can be changed in the Preferences under Game Settings in the main
+Forge menu. 
+
+
 - New Battle for Zendikar cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
