@@ -139,10 +139,10 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
-                if (si != null && si.isAbility()) {
+                if (si != null && si.isAbility() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
                     matchUI.setShouldAutoYield(si.getKey(), true);
                     int triggerID = Integer.valueOf(si.getSourceTrigger());
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
+                    if (si.isOptionalTrigger()) {
                         matchUI.setShouldAlwaysAcceptTrigger(triggerID);
                     }
                     matchUI.getGameController().passPriority();
@@ -157,10 +157,10 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
-                if (si != null && si.isAbility()) {
+                if (si != null && si.isAbility() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
                     matchUI.setShouldAutoYield(si.getKey(), true);
                     int triggerID = Integer.valueOf(si.getSourceTrigger());
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
+                    if (si.isOptionalTrigger()) {
                         matchUI.setShouldAlwaysDeclineTrigger(triggerID);
                     }
                     matchUI.getGameController().passPriority();
