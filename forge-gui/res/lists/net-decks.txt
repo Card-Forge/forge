@@ -1,28 +1,28 @@
-Top Decks | http://www.slightlymagic.net/forum/download/file.php?id=21835
-World Championship | http://www.slightlymagic.net/forum/download/file.php?id=21727
-The Week That Was | http://www.slightlymagic.net/forum/download/file.php?id=21791
-Single Card Strategy | http://www.slightlymagic.net/forum/download/file.php?id=21758
-WotC Preconstructed | http://www.slightlymagic.net/forum/download/file.php?id=3373
-Serious Fun | http://www.slightlymagic.net/forum/download/file.php?id=21832
-ReConstructed | http://www.slightlymagic.net/forum/download/file.php?id=21829
-Pro Tour | http://www.slightlymagic.net/forum/download/file.php?id=21729
-Perilous Research | http://www.slightlymagic.net/forum/download/file.php?id=21827
-Into the AEther | http://www.slightlymagic.net/forum/download/file.php?id=21793
-Level One | http://www.slightlymagic.net/forum/download/file.php?id=21825
-Latest Developments | http://www.slightlymagic.net/forum/download/file.php?id=21753
-From the Lab | http://www.slightlymagic.net/forum/download/file.php?id=21418
-Feature Article | http://www.slightlymagic.net/forum/download/file.php?id=21752
-Daily Deck List | http://www.slightlymagic.net/forum/download/file.php?id=21821
-Building on a Budget | http://www.slightlymagic.net/forum/download/file.php?id=21748
-Breaking Through | http://www.slightlymagic.net/forum/download/file.php?id=21747
-Woo Brews | http://www.slightlymagic.net/forum/download/file.php?id=21761
-Swimming with Sharks | http://www.slightlymagic.net/forum/download/file.php?id=21797
-Learning Curve | http://www.slightlymagic.net/forum/download/file.php?id=21796
-Squandered Resources | http://www.slightlymagic.net/forum/download/file.php?id=4366
-Deconstructing Famous | http://www.slightlymagic.net/forum/download/file.php?id=21751
-Going Rogue | http://www.slightlymagic.net/forum/download/file.php?id=13498
-Uncommon Knowledge | http://www.slightlymagic.net/forum/download/file.php?id=21760
-MagicTheGathering.Combos | http://www.slightlymagic.net/forum/download/file.php?id=21750
-Players Championship 2012 | http://www.slightlymagic.net/forum/download/file.php?id=7324
-Brewing on a Budget | http://www.slightlymagic.net/forum/download/file.php?id=6584
-Grand Prix Lincoln 2012 | http://www.slightlymagic.net/forum/download/file.php?id=5318
+Top Decks | http://downloads.cardforge.link/decks/topdecks.zip
+World Championship | http://downloads.cardforge.link/decks/worldchampion.zip
+The Week That Was | http://downloads.cardforge.link/decks/theweekthatwas.zip
+Single Card Strategy | http://downloads.cardforge.link/decks/singlecardstrategy.zip
+WotC Preconstructed | http://downloads.cardforge.link/decks/precon.zip
+Serious Fun | http://downloads.cardforge.link/decks/seriousfun.zip
+ReConstructed | http://downloads.cardforge.link/decks/recon.zip
+Pro Tour | http://downloads.cardforge.link/decks/protour.zip
+Perilous Research | http://downloads.cardforge.link/decks/perilousresearch.zip
+Into the AEther | http://downloads.cardforge.link/decks/intotheaether.zip
+Level One | http://downloads.cardforge.link/decks/levelone.zip
+Latest Developments | http://downloads.cardforge.link/decks/latestdevelopments.zip
+From the Lab | http://downloads.cardforge.link/decks/fromthelab.zip
+Feature Article | http://downloads.cardforge.link/decks/feature.zip
+Daily Deck List | http://downloads.cardforge.link/decks/dailydecks.zip
+Building on a Budget | http://downloads.cardforge.link/decks/buildingonabudget.zip
+Breaking Through | http://downloads.cardforge.link/decks/breakingthrough.zip
+Woo Brews | http://downloads.cardforge.link/decks/woobrews.zip
+Swimming with Sharks | http://downloads.cardforge.link/decks/swimmingwithsharks.zip
+Learning Curve | http://downloads.cardforge.link/decks/learningcurve.zip
+Squandered Resources | http://downloads.cardforge.link/decks/squanderedresources.zip
+Deconstructing Famous | http://downloads.cardforge.link/decks/dfd.zip
+Going Rogue | http://downloads.cardforge.link/decks/goingrogue.zip
+Uncommon Knowledge | http://downloads.cardforge.link/decks/uncommonknowledge.zip
+MagicTheGathering.Combos | http://downloads.cardforge.link/decks/combos.zip
+Players Championship 2012 | http://downloads.cardforge.link/decks/magicplayerschampionship.zip
+Brewing on a Budget | http://downloads.cardforge.link/decks/brewingonabudget.zip
+Grand Prix Lincoln 2012 | http://downloads.cardforge.link/decks/gplincoln2012.zip

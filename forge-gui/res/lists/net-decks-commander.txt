@@ -1,10 +1,10 @@
-The Week That Was | http://www.slightlymagic.net/forum/download/file.php?id=19986
-WotC Preconstructed | http://www.slightlymagic.net/forum/download/file.php?id=21413
-Serious Fun | http://www.slightlymagic.net/forum/download/file.php?id=21279
-ReConstructed | http://www.slightlymagic.net/forum/download/file.php?id=21275
-Latest Developments | http://www.slightlymagic.net/forum/download/file.php?id=13259
-From the Lab | http://www.slightlymagic.net/forum/download/file.php?id=21263
-Feature Article | http://www.slightlymagic.net/forum/download/file.php?id=21259
-Daily Deck List | http://www.slightlymagic.net/forum/download/file.php?id=18670
-Command Tower | http://www.slightlymagic.net/forum/download/file.php?id=21414
-Going Rogue | http://www.slightlymagic.net/forum/download/file.php?id=14064
+The Week That Was | http://downloads.cardforge.link/decks/theweekthatwas-commander.zip
+WotC Preconstructed | http://downloads.cardforge.link/decks/precon-commander.zip
+Serious Fun | http://downloads.cardforge.link/decks/seriousfun-commander.zip
+ReConstructed | http://downloads.cardforge.link/decks/recon-commander.zip
+Latest Developments | http://downloads.cardforge.link/decks/latestdevelopments-commander.zip
+From the Lab | http://downloads.cardforge.link/decks/fromthelab-commander.zip
+Feature Article | http://downloads.cardforge.link/decks/feature-commander.zip
+Daily Deck List | http://downloads.cardforge.link/decks/dailydecks-commander.zip
+Command Tower | http://downloads.cardforge.link/decks/commandtower.zip
+Going Rogue | http://downloads.cardforge.link/decks/goingrogue-commander.zip
