@@ -16492,6 +16492,7 @@ forge-gui/res/licenses/xpp3-license.txt svneol=native#text/plain
 forge-gui/res/licenses/xstream-license.txt svneol=native#text/plain
 forge-gui/res/lists/NonStackingKWList.txt svneol=native#text/plain
 forge-gui/res/lists/TypeLists.txt svneol=native#text/plain
+forge-gui/res/lists/achievement-images.txt -text
 forge-gui/res/lists/booster-images.txt svneol=native#text/plain
 forge-gui/res/lists/boosterbox-images.txt -text
 forge-gui/res/lists/fatpack-images.txt svneol=native#text/plain
@@ -17830,6 +17831,7 @@ forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text
 forge-gui/src/main/java/forge/deck/NetDeckCategory.java -text
 forge-gui/src/main/java/forge/deck/RandomDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
+forge-gui/src/main/java/forge/download/GuiDownloadAchievementImages.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadPicturesLQ.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadPrices.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadQuestImages.java -text
