@@ -142,7 +142,7 @@ public class KeyboardShortcuts {
                 if (si != null && si.isAbility()) {
                     matchUI.setShouldAutoYield(si.getKey(), true);
                     int triggerID = Integer.valueOf(si.getSourceTrigger());
-                    if (si.isOptionalTrigger()) {
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
                         matchUI.setShouldAlwaysAcceptTrigger(triggerID);
                     }
                     matchUI.getGameController().passPriority();
@@ -160,7 +160,7 @@ public class KeyboardShortcuts {
                 if (si != null && si.isAbility()) {
                     matchUI.setShouldAutoYield(si.getKey(), true);
                     int triggerID = Integer.valueOf(si.getSourceTrigger());
-                    if (si.isOptionalTrigger()) {
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
                         matchUI.setShouldAlwaysDeclineTrigger(triggerID);
                     }
                     matchUI.getGameController().passPriority();
