@@ -1,23 +1,9 @@
 package forge.game.card;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.ImageKeys;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.CardTypeView;
-import forge.card.ColorSet;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.Direction;
 import forge.game.GameEntityView;
@@ -31,6 +17,12 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CardView extends GameEntityView {
     private static final long serialVersionUID = -3624090829028979255L;
@@ -144,7 +136,7 @@ public class CardView extends GameEntityView {
     }
     void updateAttacking(Card c) {
         Combat combat = c.getGame().getCombat();
-        set(TrackableProperty.Attacking, combat == null ? false : combat.isAttacking(c));
+        set(TrackableProperty.Attacking, combat != null && combat.isAttacking(c));
     }
 
     public boolean isBlocking() {
@@ -152,7 +144,7 @@ public class CardView extends GameEntityView {
     }
     void updateBlocking(Card c) {
         Combat combat = c.getGame().getCombat();
-        set(TrackableProperty.Blocking, combat == null ? false : combat.isBlocking(c));
+        set(TrackableProperty.Blocking, combat != null && combat.isBlocking(c));
     }
 
     public boolean isPhasedOut() {
@@ -434,7 +426,7 @@ public class CardView extends GameEntityView {
         if (isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer)) {
             return true;
         }
-        if (getController().isOpponentOf(viewer) && getCurrentState().getOpponentMayLook()) { 
+        if (getController().isOpponentOf(viewer) && getCurrentState().getOpponentMayLook()) {
             return true;
         }
         return false;
@@ -861,7 +853,7 @@ public class CardView extends GameEntityView {
             String rulesText = null;
 
             if (type.isVanguard() && rules != null) {
-                rulesText = "Hand Modifier: " + rules.getHand() + 
+                rulesText = "Hand Modifier: " + rules.getHand() +
                         "\r\nLife Modifier: " + rules.getLife();
             }
             set(TrackableProperty.RulesText, rulesText);

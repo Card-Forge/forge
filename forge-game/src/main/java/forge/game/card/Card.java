@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -117,10 +117,10 @@ import forge.util.maps.MapOfLists;
  * <p>
  * Card class.
  * </p>
- * 
+ *
  * Can now be used as keys in Tree data structures. The comparison is based
  * entirely on id.
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -195,7 +195,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean monstrous = false;
     private int monstrosityNum = 0;
-    
+
     private boolean renowned = false;
 
     private boolean manifested = false;
@@ -304,7 +304,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public Card(final int id0, final IPaperCard paperCard0, final boolean allowCache, final Game game0) {
         super(id0);
-        
+
         game = game0;
         if (id0 >= 0 && allowCache && game != null) {
             game.addCard(id0, this);
@@ -454,7 +454,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // flip and face-down don't overlap. That is there is no chance to turn face down a flipped permanent
         // and then any effect have it turn upface again and demand its former flip state to be restored
-        // Proof: Morph cards never have ability that makes them flip, Ixidron does not suppose cards to be turned face up again, 
+        // Proof: Morph cards never have ability that makes them flip, Ixidron does not suppose cards to be turned face up again,
         // Illusionary Mask affects cards in hand.
         CardStateName oldState = getCurrentStateName();
         if (mode.equals("Transform") && isDoubleFaced()) {
@@ -463,7 +463,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             CardStateName destState = oldState == CardStateName.Transformed ? CardStateName.Original : CardStateName.Transformed;
             return changeToState(destState);
-            
+
         } else if (mode.equals("Flip") && isFlipCard()) {
             CardStateName destState = oldState == CardStateName.Flipped ? CardStateName.Original : CardStateName.Flipped;
             return changeToState(destState);
@@ -562,6 +562,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public void updateAttackingForView() {
         view.updateAttacking(this);
+        getGame().updateCombatForView();
     }
     public void updateBlockingForView() {
         view.updateBlocking(this);
@@ -616,7 +617,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         devouredCards.add(c);
     }
-    
+
     public final void clearDevoured() {
         devouredCards = null;
     }
@@ -630,7 +631,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         delvedCards.add(c);
     }
-    
+
     public final void clearDelved() {
         delvedCards = null;
     }
@@ -941,7 +942,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getTotalCountersToAdd() {
         return countersAdded;
     }
-    
+
     public final void setTotalCountersToAdd(int value) {
         countersAdded = value;
     }
@@ -997,7 +998,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters() || loyaltyBefore != getCurrentLoyalty()) {
                     getGame().fireEvent(new GameEventCardStatsChanged(this));
                 }
-    
+
                 // play the Add Counter sound
                 getGame().fireEvent(new GameEventCardCounters(this, counterType, oldValue == null ? 0 : oldValue.intValue(), newValue));
             }
@@ -1742,7 +1743,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Give spellText line breaks for easier reading
         sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
-        
+
         // NOTE:
         if (sb.toString().contains(" (NOTE: ")) {
             sb.insert(sb.indexOf("(NOTE: "), "\r\n");
@@ -2511,7 +2512,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public Map<Long, CardChangedType> getChangedCardTypes() {
         return Collections.unmodifiableMap(changedCardTypes);
     }
-    
+
     public Map<Long, KeywordsChange> getChangedCardKeywords() {
         return changedCardKeywords;
     }
@@ -2652,9 +2653,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * 
+     *
      * Get the latest set Power and Toughness of this Card.
-     * 
+     *
      * @return the latest set Power and Toughness of this {@link Card} as the
      * left and right values of a {@link Pair}, respectively. A value of -1
      * means that particular property has not been set.
@@ -2794,7 +2795,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getNetToughness() {
         return getNetToughnessBreakdown().getTotal();
     }
-    
+
     public final boolean toughnessAssignsDamage() {
     	return getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)
         		|| hasKeyword("CARDNAME assigns combat damage equal to its toughness rather than its power");
@@ -2954,7 +2955,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean hasKeyword(String keyword) {
         return hasKeyword(keyword, currentState);
     }
-        
+
     public final boolean hasKeyword(String keyword, CardState state) {
         if (keyword.startsWith("HIDDEN")) {
             keyword = keyword.substring(7);
@@ -3166,7 +3167,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Change a SVar due to a text change effect. Change is volatile and will be
      * reverted upon refreshing text changes (unless it is changed again at that
      * time).
-     * 
+     *
      * @param key the SVar name.
      * @param value the new SVar value.
      */
@@ -3516,7 +3517,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return hasStartOfKeyword(keyword, currentState);
     }
     public final boolean hasStartOfKeyword(String keyword, CardState state) {
-        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword, true); 
+        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword, true);
         visitKeywords(state, visitor);
         return visitor.getCount() > 0;
     }
@@ -3525,7 +3526,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return hasStartOfUnHiddenKeyword(keyword, currentState);
     }
     public final boolean hasStartOfUnHiddenKeyword(String keyword, CardState state) {
-        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword, true); 
+        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword, true);
         visitUnhiddenKeywords(state, visitor);
         return visitor.getCount() > 0;
     }
@@ -3560,7 +3561,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getAmountOfKeyword(k, currentState);
     }
     public final int getAmountOfKeyword(final String k, CardState state) {
-        CountKeywordVisitor visitor = new CountKeywordVisitor(k); 
+        CountKeywordVisitor visitor = new CountKeywordVisitor(k);
         visitKeywords(state, visitor);
         return visitor.getCount();
     }
@@ -3619,7 +3620,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return !testFailed;
-    } 
+    }
 
     // Takes arguments like Blue or withFlying
     @Override
@@ -6037,7 +6038,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Gets the total damage done by card this turn (after prevention and redirects).
-     * 
+     *
      * @return the damage done to player p this turn
      */
     public final int getTotalDamageDoneBy() {
@@ -6668,7 +6669,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 count++;
             }
         }
- 
+
         public int getCount() {
             return count;
         }
@@ -6682,7 +6683,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         public void visit(String kw) {
             keywords.add(kw);
         }
- 
+
         public List<String> getKeywords() {
             return keywords;
         }
