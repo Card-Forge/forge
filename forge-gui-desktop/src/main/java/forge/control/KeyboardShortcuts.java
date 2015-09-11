@@ -139,7 +139,7 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
-                if (si != null && si.isAbility() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
+                if (si != null && si.isAbility()) {
                     matchUI.setShouldAutoYield(si.getKey(), true);
                     int triggerID = Integer.valueOf(si.getSourceTrigger());
                     if (si.isOptionalTrigger()) {
@@ -157,7 +157,7 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
-                if (si != null && si.isAbility() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
+                if (si != null && si.isAbility()) {
                     matchUI.setShouldAutoYield(si.getKey(), true);
                     int triggerID = Integer.valueOf(si.getSourceTrigger());
                     if (si.isOptionalTrigger()) {
