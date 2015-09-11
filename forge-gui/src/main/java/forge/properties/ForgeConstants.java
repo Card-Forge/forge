@@ -39,6 +39,7 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_QUEST_BOOSTERBOXES_FILE    = LISTS_DIR + "boosterbox-images.txt";
     public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = LISTS_DIR + "precon-images.txt";
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = LISTS_DIR + "tournamentpack-images.txt";
+    public static final String IMAGE_LIST_ACHIEVEMENTS_FILE          = LISTS_DIR + "achievement-images.txt";
     public static final String NET_DECKS_LIST_FILE                   = LISTS_DIR + "net-decks.txt";
     public static final String NET_DECKS_COMMANDER_LIST_FILE         = LISTS_DIR + "net-decks-commander.txt";
 

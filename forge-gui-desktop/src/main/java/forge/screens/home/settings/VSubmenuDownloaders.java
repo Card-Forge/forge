@@ -20,7 +20,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** 
+/**
  * Assembles Swing components of utilities submenu singleton.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
@@ -38,19 +38,20 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap, ay center"));
     private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
 
-    private final FLabel btnDownloadSetPics     = _makeButton("Download LQ Set Pictures");
-    private final FLabel btnDownloadPics        = _makeButton("Download LQ Card Pictures");
-    private final FLabel btnDownloadQuestImages = _makeButton("Download Quest Images");
-    private final FLabel btnReportBug           = _makeButton("Report a Bug");
-    private final FLabel btnImportPictures      = _makeButton("Import Data");
-    private final FLabel btnHowToPlay           = _makeButton("How To Play");
-    private final FLabel btnDownloadPrices      = _makeButton("Download Card Prices");
-    private final FLabel btnLicensing           = _makeButton("License Details");
+    private final FLabel btnDownloadSetPics           = _makeButton("Download LQ Set Pictures");
+    private final FLabel btnDownloadPics              = _makeButton("Download LQ Card Pictures");
+    private final FLabel btnDownloadQuestImages       = _makeButton("Download Quest Images");
+    private final FLabel btnDownloadAchievementImages = _makeButton("Download Achievement Images");
+    private final FLabel btnReportBug                 = _makeButton("Report a Bug");
+    private final FLabel btnImportPictures            = _makeButton("Import Data");
+    private final FLabel btnHowToPlay                 = _makeButton("How To Play");
+    private final FLabel btnDownloadPrices            = _makeButton("Download Card Prices");
+    private final FLabel btnLicensing                 = _makeButton("License Details");
 
     /**
      * Constructor.
      */
-    private VSubmenuDownloaders() {
+    VSubmenuDownloaders() {
         final String constraintsLBL = "w 90%!, h 20px!, center, gap 0 0 3px 8px";
         final String constraintsBTN = "h 30px!, w 50%!, center";
 
@@ -64,6 +65,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         pnlContent.add(btnDownloadQuestImages, constraintsBTN);
         pnlContent.add(_makeLabel("Download tokens and icons used in Quest mode."), constraintsLBL);
+
+        pnlContent.add(btnDownloadAchievementImages, constraintsBTN);
+        pnlContent.add(_makeLabel("Download achievement images to really make your trophies stand out."), constraintsLBL);
 
         pnlContent.add(btnDownloadPrices, constraintsBTN);
         pnlContent.add(_makeLabel("Download up-to-date price list for in-game card shops."), constraintsLBL);
@@ -103,14 +107,15 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         return EMenuGroup.SETTINGS;
     }
 
-    public void setDownloadPicsCommand(UiCommand command)        { btnDownloadPics.setCommand(command);        }
-    public void setDownloadSetPicsCommand(UiCommand command)     { btnDownloadSetPics.setCommand(command);     }
-    public void setDownloadQuestImagesCommand(UiCommand command) { btnDownloadQuestImages.setCommand(command); }
-    public void setReportBugCommand(UiCommand command)           { btnReportBug.setCommand(command);           }
-    public void setImportPicturesCommand(UiCommand command)      { btnImportPictures.setCommand(command);      }
-    public void setHowToPlayCommand(UiCommand command)           { btnHowToPlay.setCommand(command);           }
-    public void setDownloadPricesCommand(UiCommand command)      { btnDownloadPrices.setCommand(command);      }
-    public void setLicensingCommand(UiCommand command)           { btnLicensing.setCommand(command);           }
+    public void setDownloadPicsCommand(UiCommand command)              { btnDownloadPics.setCommand(command);        }
+    public void setDownloadSetPicsCommand(UiCommand command)           { btnDownloadSetPics.setCommand(command);     }
+    public void setDownloadQuestImagesCommand(UiCommand command)       { btnDownloadQuestImages.setCommand(command); }
+    public void setDownloadAchievementImagesCommand(UiCommand command) { btnDownloadAchievementImages.setCommand(command); }
+    public void setReportBugCommand(UiCommand command)                 { btnReportBug.setCommand(command);           }
+    public void setImportPicturesCommand(UiCommand command)            { btnImportPictures.setCommand(command);      }
+    public void setHowToPlayCommand(UiCommand command)                 { btnHowToPlay.setCommand(command);           }
+    public void setDownloadPricesCommand(UiCommand command)            { btnDownloadPrices.setCommand(command);      }
+    public void setLicensingCommand(UiCommand command)                 { btnLicensing.setCommand(command);           }
 
     public void focusTopButton() {
         btnDownloadPics.requestFocusInWindow();
@@ -123,7 +128,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         FPanel p = new FPanel(new MigLayout("insets dialog, wrap, center"));
         p.setOpaque(false);
         p.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
-        
+
         final FButton btnClose = new FButton("OK");
         btnClose.addActionListener(new ActionListener() { @Override
             public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
@@ -132,7 +137,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         p.add(btnClose, "w 200!, h pref+12!, center, gaptop 30");
         overlay.add(p, "gap 0 0 10% 10%");
         SOverlayUtils.showOverlay();
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -143,7 +148,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             }
         });
     }
-    
+
     public void showLicensing() {
         String license = "<html>Forge License Information<br><br>"
                 + "This program is free software : you can redistribute it and/or modify "
@@ -156,7 +161,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 + "GNU General Public License for more details.<br><br>"
                 + "You should have received a copy of the GNU General Public License "
                 + "along with this program.  If not, see http://www.gnu.org/licenses/.</html>";
-        
+
         FLabel licenseLabel = new FLabel.Builder().text(license).fontSize(15).build();
 
         _showDialog(licenseLabel, null);
@@ -229,11 +234,11 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public DragCell getParentCell() {
         return parentCell;
     }
-    
+
     private static FLabel _makeButton(String label) {
         return new FLabel.Builder().opaque().hoverable().text(label).fontSize(14).build();
     }
-    
+
     private static FLabel _makeLabel(String label) {
         return new FLabel.Builder().fontAlign(SwingConstants.CENTER)
                 .text(label).fontStyle(Font.ITALIC).build();

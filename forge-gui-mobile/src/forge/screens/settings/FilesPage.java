@@ -1,5 +1,6 @@
 package forge.screens.settings;
 
+import forge.download.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -8,11 +9,6 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.download.GuiDownloadPicturesLQ;
-import forge.download.GuiDownloadPrices;
-import forge.download.GuiDownloadQuestImages;
-import forge.download.GuiDownloadService;
-import forge.download.GuiDownloadSetPicturesLQ;
 import forge.properties.ForgeProfileProperties;
 import forge.screens.TabPageScreen.TabPage;
 import forge.toolbox.FFileChooser;
@@ -54,6 +50,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadQuestImages();
+            }
+        }, 0);
+        lstItems.addItem(new ContentDownloader("Download Achievement Images",
+                "Download achievement images to really make your trophies stand out.") {
+            @Override
+            protected GuiDownloadService createService() {
+                return new GuiDownloadAchievementImages();
             }
         }, 0);
         lstItems.addItem(new ContentDownloader("Download Card Prices",
@@ -98,7 +101,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
         protected String label;
         protected String description;
 
-        public FilesItem(String label0, String description0) {
+        FilesItem(String label0, String description0) {
             label = label0;
             description = description0;
         }
@@ -131,12 +134,12 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
             g.drawText(value.label, font, foreColor, x, y, w, h, false, HAlignment.LEFT, false);
             h += SettingsScreen.SETTING_PADDING;
-            g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, HAlignment.LEFT, false);            
+            g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, HAlignment.LEFT, false);
         }
     }
 
     private abstract class ContentDownloader extends FilesItem {
-        public ContentDownloader(String label0, String description0) {
+        ContentDownloader(String label0, String description0) {
             super(label0, description0);
         }
 
@@ -148,7 +151,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
     }
 
     private abstract class StorageOption extends FilesItem {
-        public StorageOption(String name0, String dir0) {
+        StorageOption(String name0, String dir0) {
             super(name0, dir0);
         }
 

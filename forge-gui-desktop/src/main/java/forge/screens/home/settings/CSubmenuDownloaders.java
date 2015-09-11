@@ -1,20 +1,16 @@
 package forge.screens.home.settings;
 
-import javax.swing.SwingUtilities;
-
 import forge.UiCommand;
-import forge.download.GuiDownloadPicturesLQ;
-import forge.download.GuiDownloadPrices;
-import forge.download.GuiDownloadQuestImages;
-import forge.download.GuiDownloadSetPicturesLQ;
-import forge.download.GuiDownloader;
+import forge.download.*;
 import forge.error.BugReporter;
 import forge.gui.ImportDialog;
 import forge.gui.framework.ICDoc;
 
-/** 
+import javax.swing.*;
+
+/**
  * Controls the utilities submenu in the home UI.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
@@ -40,6 +36,11 @@ public enum CSubmenuDownloaders implements ICDoc {
     private final UiCommand cmdQuestImages = new UiCommand() {
         @Override public void run() {
             new GuiDownloader(new GuiDownloadQuestImages()).show();
+        }
+    };
+    private final UiCommand cmdAchievementImages = new UiCommand() {
+        @Override public void run() {
+            new GuiDownloader(new GuiDownloadAchievementImages()).show();
         }
     };
     private final UiCommand cmdDownloadPrices = new UiCommand() {
@@ -76,6 +77,7 @@ public enum CSubmenuDownloaders implements ICDoc {
         view.setDownloadPicsCommand(cmdPicDownload);
         view.setDownloadSetPicsCommand(cmdSetDownload);
         view.setDownloadQuestImagesCommand(cmdQuestImages);
+        view.setDownloadAchievementImagesCommand(cmdAchievementImages);
         view.setReportBugCommand(cmdReportBug);
         view.setImportPicturesCommand(cmdImportPictures);
         view.setHowToPlayCommand(cmdHowToPlay);
