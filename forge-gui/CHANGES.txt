@@ -8,6 +8,10 @@ Forge Beta: 8-28-2015 ver 1.5.44
 Release Notes
 -------------
 
+- Permanent locations for Net Decks and Achievement trophies -
+All Net Deck categories should now find decks and won't stop returning decks when new decks are added
+A new "Download Achievement Images" button has been added to Content Downloaders for downloading awesome trophies for each achievement.
+
 
 - Keyboard shortcuts for Auto Yield -
 There are two new keyboard shortcuts now that can be used to quickly set up an
