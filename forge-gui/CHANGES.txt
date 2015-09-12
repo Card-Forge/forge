@@ -1,7 +1,7 @@
-Forge Beta: 8-28-2015 ver 1.5.44
+Forge Beta: 9-12-2015 ver 1.5.45
 
 
-14928 cards in total.
+14931 cards in total.
 
 
 -------------
@@ -48,6 +48,9 @@ New cards
 ---------
 
 Grinning Toem
+Psychic Theft
+Arboria
+Autumn Willow
 
 
 -----------------------------
@@ -60,6 +63,49 @@ Sheer Drop
 Dominator Drone
 Forerunner of Slaughter
 Guardian of Tazeem
+Oblivion Sower
+Hero of Goma Fada
+Hedron Archive
+Radiant Flames
+Conduit of Ruin
+Barrage Tyrant
+Defiant Bloodlord
+Gideon's Reproach
+Incubator Drone
+Mist Intruder
+Omnath, Locus of Rage
+Oran-Rief Hydra
+Eldrazi Devastator
+Kozilek's Channeler
+Ruinous Path
+Titan's Presence
+Ulamog, the Cealess Hunger
+Canopy Vista
+Cinder Glade
+Felidar Cub
+Gideon, Ally of Zendikar
+Prairie Stream
+Smoldering Marsh
+Sunken Hollow
+Blight Herder
+Breaker of Armies
+Brood Butcher
+Coastal Discovery
+Drowner of Hope
+Lantern Scout
+Nissa's Renewal
+Retreat to Emeria
+Skitterskin
+Bring to Light
+Deep-Sea Scavenger
+Desolation Twin
+Kiora, Master of the Depths
+Lumbering Falls
+Ob Nixilis Reignited
+Planar Outburst
+Scythe Leopard
+Stasis Snare
+Undergrowth Champion
 
 
 ------------
@@ -126,13 +172,13 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
+Agetian
 DrDev
-excessum
 Gos
+KrazyTheFox
 Marek14
 Sol
 Swordshine
-tojammot
 Chris H
 
 
