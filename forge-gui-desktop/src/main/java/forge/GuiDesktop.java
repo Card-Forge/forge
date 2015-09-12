@@ -278,4 +278,9 @@ public class GuiDesktop implements IGuiBase {
         //TODO: Show loading overlay
         FThreads.invokeInBackgroundThread(task);
     }
+
+    @Override
+    public String encodeSymbols(String str, boolean formatReminderText) {
+        return FSkin.encodeSymbols(str, formatReminderText);
+    }
 }

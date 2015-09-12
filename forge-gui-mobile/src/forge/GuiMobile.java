@@ -285,4 +285,9 @@ public class GuiMobile implements IGuiBase {
     public void runBackgroundTask(String message, Runnable task) {
         LoadingOverlay.runBackgroundTask(message, task);
     }
+
+    @Override
+    public String encodeSymbols(String str, boolean formatReminderText) {
+        return str; //not needed for mobile
+    }
 }

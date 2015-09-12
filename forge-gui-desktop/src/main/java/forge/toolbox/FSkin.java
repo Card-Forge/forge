@@ -988,6 +988,9 @@ public class FSkin {
             e.printStackTrace();
         }
 
+        //ensure paragraph and line breaks aren't lost
+        str = str.replaceAll("\r?\n", "<br>");
+
         return "<html>" + str + "</html>"; //must wrap in <html> tag for images to appear
     }
 

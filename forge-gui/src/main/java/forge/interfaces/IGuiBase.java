@@ -52,4 +52,5 @@ public interface IGuiBase {
     IGuiGame getNewGuiGame();
     HostedMatch hostMatch();
     void runBackgroundTask(String message, Runnable task);
+    String encodeSymbols(String str, boolean formatReminderText);
 }

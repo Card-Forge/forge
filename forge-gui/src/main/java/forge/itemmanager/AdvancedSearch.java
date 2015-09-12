@@ -1016,7 +1016,7 @@ public class AdvancedSearch {
                                     public void run() {
                                         control.setFilter(filter);
                                         if (filter != null) {
-                                            control.getBtnFilter().setText(filter.toString());
+                                            control.getBtnFilter().setText(GuiBase.getInterface().encodeSymbols(filter.toString(), false));
                                         }
                                         else {
                                             control.getBtnFilter().setText(emptyFilterText);
@@ -1087,7 +1087,7 @@ public class AdvancedSearch {
                     }
                 }
             }
-            label.setText(builder.toString());
+            label.setText(GuiBase.getInterface().encodeSymbols(builder.toString(), false));
             label.setToolTipText(getTooltip());
         }
 
@@ -1108,7 +1108,7 @@ public class AdvancedSearch {
                     indent += "  "; //add an indent level when an open paren is hit
                 }
             }
-            return builder.toString();
+            return GuiBase.getInterface().encodeSymbols(builder.toString(), false);
         }
 
         public void updateExpression() {
