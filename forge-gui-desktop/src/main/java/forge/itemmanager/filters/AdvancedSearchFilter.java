@@ -10,7 +10,7 @@ import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-import forge.toolbox.FScrollPanel;
+import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
@@ -20,6 +20,7 @@ import javax.swing.*;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 
 
 public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -73,19 +74,20 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
     @Override
     public boolean merge(ItemFilter<?> filter) {
-        return true;
+        return false;
     }
 
     @SuppressWarnings("serial")
     private class EditDialog {
         private static final int WIDTH = 400;
         private static final int HEIGHT = 500;
-        
-        private final FScrollPanel scroller;
-        //private FOptionPane optionPane;
+
+        private final JPanel panel;
+        private final FScrollPane scroller;
+        private FOptionPane optionPane;
 
         private EditDialog() {
-            scroller = new FScrollPanel(null, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER) {
+            panel = new JPanel(null) {
                 @Override
                 public void doLayout() {
                     int x = 0;
@@ -93,22 +95,25 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                     int w = getWidth();
                     int h = 100;
 
-                    for (Component child : getInnerComponents()) {
+                    for (Component child : getComponents()) {
                         child.setBounds(x, y, w, h);
                         y += h;
                     }
                 }  
             };
+            panel.setOpaque(false);
+            scroller = new FScrollPane(panel, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             scroller.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 
             Filter filter = new Filter();
             model.addFilterControl(filter);
-            scroller.add(filter);
+            panel.add(filter);
         }
 
         private boolean show() {
-            FOptionPane.showMessageDialog("Coming Soon!", "Advanced Search", FOptionPane.INFORMATION_ICON);
-            /*optionPane = new FOptionPane(null, "Advanced Search", null, scroller, ImmutableList.of("OK", "Cancel"), 0);
+            optionPane = new FOptionPane(null, "Advanced Search", null, scroller, ImmutableList.of("OK", "Cancel"), 0);
+            scroller.revalidate();
+            scroller.repaint();
             optionPane.setVisible(true);
 
             int result = optionPane.getResult();
@@ -117,28 +122,29 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             if (result != 1) {
                 model.updateExpression(); //update expression when dialog accepted
                 return true;
-            }*/
+            }
             return false;
         }
 
         private void addNewFilter(Filter fromFilter) {
-            if (scroller.getComponent(scroller.getComponentCount() - 1) == fromFilter) {
+            if (panel.getComponent(panel.getComponentCount() - 1) == fromFilter) {
                 Filter filter = new Filter();
                 model.addFilterControl(filter);
-                scroller.add(filter);
-                scroller.revalidate();
+                panel.add(filter);
+                panel.revalidate();
+                panel.repaint();
                 scroller.scrollToBottom();
             }
         }
 
         @SuppressWarnings("unchecked")
         private void removeNextFilter(Filter fromFilter) {
-            int index = ArrayUtils.indexOf(scroller.getComponents(), fromFilter);
-            if (index < scroller.getComponentCount() - 1) {
-                Filter nextFilter = (Filter)scroller.getComponent(index + 1);
+            int index = ArrayUtils.indexOf(panel.getComponents(), fromFilter);
+            if (index < panel.getComponentCount() - 1) {
+                Filter nextFilter = (Filter)panel.getComponent(index + 1);
                 model.removeFilterControl(nextFilter);
-                scroller.remove(nextFilter);
-                scroller.revalidate();
+                panel.remove(nextFilter);
+                panel.revalidate();
             }
         }
 
@@ -150,13 +156,14 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
             private Filter() {
                 super(null);
+                setOpaque(false);
 
-                btnNotBeforeParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("NOT").selectable().build();
-                btnOpenParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("(").selectable().build();
-                btnNotAfterParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("NOT").selectable().build();
+                btnNotBeforeParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("NOT").hoverable().selectable().build();
+                btnOpenParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("(").hoverable().selectable().build();
+                btnNotAfterParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("NOT").hoverable().selectable().build();
                 btnFilter = new FLabel.ButtonBuilder().build();
-                btnCloseParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).selectable().text(")").build();
-                btnAnd = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("AND").selectable().cmdClick(new UiCommand() {
+                btnCloseParen = new FLabel.Builder().fontAlign(SwingConstants.CENTER).hoverable().selectable().text(")").build();
+                btnAnd = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("AND").hoverable().selectable().cmdClick(new UiCommand() {
                     @Override
                     public void run() {
                         if (btnAnd.isSelected()) {
@@ -168,7 +175,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                         }
                     }
                 }).build();
-                btnOr = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("OR").selectable().cmdClick(new UiCommand() {
+                btnOr = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text("OR").hoverable().selectable().cmdClick(new UiCommand() {
                     @Override
                     public void run() {
                         if (btnOr.isSelected()) {

@@ -232,7 +232,9 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             public void run() {
                 AdvancedSearchFilter<DeckProxy> filter = getFilter(AdvancedSearchFilter.class);
                 if (filter != null) {
-                    filter.edit();
+                    if (filter.edit()) {
+                        applyNewOrModifiedFilter(filter);
+                    }
                 }
                 else {
                     filter = new AdvancedSearchFilter<DeckProxy>(DeckManager.this);

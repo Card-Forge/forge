@@ -13,6 +13,11 @@ All Net Deck categories should now find decks and won't stop returning decks whe
 A new "Download Achievement Images" button has been added to Content Downloaders for downloading awesome trophies for each achievement.
 
 
+- Advanced Search in Card and Deck managers -
+"Filter" button replaced with smaller button with search icon
+When click, Add Filter > Advanced... will open Advanced Search dialog which will allow configuring an advanced search filter using any combination of filter options and operators, connected in an easy to build boolean expression.
+
+
 - Keyboard shortcuts for Auto Yield -
 There are two new keyboard shortcuts now that can be used to quickly set up an
 auto-yield for the current ability on stack without having to use the mouse. 

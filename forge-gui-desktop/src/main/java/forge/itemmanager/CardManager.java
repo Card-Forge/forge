@@ -163,7 +163,9 @@ public class CardManager extends ItemManager<PaperCard> {
             public void run() {
                 AdvancedSearchFilter<PaperCard> filter = itemManager.getFilter(AdvancedSearchFilter.class);
                 if (filter != null) {
-                    filter.edit();
+                    if (filter.edit()) {
+                        itemManager.applyNewOrModifiedFilter(filter);
+                    }
                 }
                 else {
                     filter = new AdvancedSearchFilter<PaperCard>(itemManager);

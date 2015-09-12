@@ -820,7 +820,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     protected abstract void buildAddFilterMenu(JMenu menu);
 
     protected <F extends ItemFilter<? extends T>> F getFilter(final Class<F> filterClass) {
-        return ReflectionUtil.safeCast(this.filters.get(filterClass), filterClass);
+        List<ItemFilter<? extends T>> filters = this.filters.get(filterClass);
+        if (filters == null || filters.isEmpty()) {
+            return null;
+        }
+        return ReflectionUtil.safeCast(filters.get(0), filterClass);
     }
 
     @SuppressWarnings("unchecked")
@@ -856,7 +860,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     //apply filters and focus existing filter's main component if filtering not locked
-    private void applyNewOrModifiedFilter(final ItemFilter<? extends T> filter) {
+    protected void applyNewOrModifiedFilter(final ItemFilter<? extends T> filter) {
         if (this.lockFiltering) {
             filter.afterFiltersApplied(); //ensure this called even if filters currently locked
             return;
