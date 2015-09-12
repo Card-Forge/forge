@@ -48,6 +48,7 @@ http://downloads.cardforge.link/images/products/fatpacks/SCG.jpg
 http://downloads.cardforge.link/images/products/fatpacks/SHM.jpg
 http://downloads.cardforge.link/images/products/fatpacks/SOK.jpg
 http://downloads.cardforge.link/images/products/fatpacks/SOM.jpg
+http://downloads.cardforge.link/images/products/fatpacks/THS.jpg
 http://downloads.cardforge.link/images/products/fatpacks/TOR.jpg
 http://downloads.cardforge.link/images/products/fatpacks/TSP.jpg
 http://downloads.cardforge.link/images/products/fatpacks/WWK.jpg
