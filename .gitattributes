@@ -5110,6 +5110,7 @@ forge-gui/res/cardsfolder/e/elite_vanguard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/elixir_of_immortality.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/elixir_of_vitality.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/elkin_bottle.txt -text
+forge-gui/res/cardsfolder/e/elkin_lair.txt -text
 forge-gui/res/cardsfolder/e/eloren_wilds.txt -text
 forge-gui/res/cardsfolder/e/elsewhere_flask.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/e/elspeth_knight_errant.txt svneol=native#text/plain
