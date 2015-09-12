@@ -9,8 +9,9 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 # Fix for Kytheon except for Manifested corner case
 T:Mode$ Attacks | ValidCard$ Card.YouCtrl | Execute$ KytheonReset | Static$ True
 SVar:KytheonReset:DB$ StoreSVar | SVar$ CanFlip | Type$ Number | Expression$ 0 | SubAbility$ KytheonsFriends
-SVar:KytheonsFriends:DB$ StoreSVar | SVar$ CanFlip | Type$ Count | Expression$ Valid Card.attackedThisCombat | IsPresent$ Card.attackedThisCombat+Self
+SVar:KytheonsFriends:DB$ StoreSVar | SVar$ CanFlip | Type$ Count | Expression$ Valid Card.attackedThisCombat | ConditionPresent$ Card.attackedThisCombat+Self
 A:AB$ Pump | Cost$ 2 W | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+SVar:CanFlip:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kytheon_hero_of_akros.jpg
 AlternateMode:DoubleFaced
 Oracle:At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon, then return him to the battlefield transformed under his owner's control.\n{2}{W}: Kytheon gains indestructible until end of turn.
