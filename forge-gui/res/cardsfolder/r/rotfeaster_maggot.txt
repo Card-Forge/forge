@@ -2,7 +2,7 @@ Name:Rotfeaster Maggot
 ManaCost:4 B
 Types:Creature Insect
 PT:3/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature card from a graveyard. You gain life equal to that card's toughness.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature card from a graveyard. You gain life equal to that card's toughness.
 SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature |  RememberLKI$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
