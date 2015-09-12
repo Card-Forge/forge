@@ -362,6 +362,7 @@ forge-game/src/main/java/forge/game/ability/effects/CopyPermanentEffect.java -te
 forge-game/src/main/java/forge/game/ability/effects/CopySpellAbilityEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/CounterEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/CountersMoveEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/CountersNoteEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/CountersProliferateEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/CountersPutAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/CountersPutEffect.java -text

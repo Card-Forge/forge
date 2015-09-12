@@ -84,6 +84,7 @@ public enum ApiType {
     MustAttack (MustAttackEffect.class),
     MustBlock (MustBlockEffect.class),
     NameCard (ChooseCardNameEffect.class),
+    NoteCounters (CountersNoteEffect.class),
     PeekAndReveal (PeekAndRevealEffect.class),
     PermanentCreature (PermanentCreatureEffect.class),
     PermanentNoncreature (PermanentNoncreatureEffect.class),

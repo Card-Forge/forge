@@ -1,11 +1,16 @@
 Name:Oubliette
 ManaCost:1 B B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return that exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the other exiled cards to the battlefield under their owner's control attached to that permanent.
-SVar:TrigExile:DB$ChangeZone | Cost$ 0 | TargetMin$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
-SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ OublietteImprint | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
+SVar:OublietteImprint:DB$ Pump | ValidTgts$ Creature | ImprintCards$ Targeted | SubAbility$ DBRememberAura
+SVar:DBRememberAura:DB$ PumpAll | ValidCards$ Aura.AttachedTo Creature.IsImprinted | RememberAllPumped$ True | StackDescription$ None | SubAbility$ RecordCounters
+SVar:RecordCounters:DB$ NoteCounters | Mode$ Store | Defined$ Imprinted | SubAbility$ TrigExile
+SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.IsRemembered,Card.IsImprinted
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ RestoreCounters | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return that exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the other exiled cards to the battlefield under their owner's control attached to that permanent.
+SVar:RestoreCounters:DB$ NoteCounters | Mode$ Load | Defined$ Imprinted | SubAbility$ TrigReturn
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SubAbility$ TrigAuraReturn
+SVar:TrigAuraReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | AttachedTo$ Valid Creature.IsImprinted
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/med/en-us/card159135.jpg
 Oracle:When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.\nWhen Oubliette leaves the battlefield, return that exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the other exiled cards to the battlefield under their owner's control attached to that permanent.
