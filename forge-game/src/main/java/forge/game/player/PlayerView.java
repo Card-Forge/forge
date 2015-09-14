@@ -337,6 +337,10 @@ public class PlayerView extends GameEntityView {
         }
     }
 
+    void updateFlashbackForPlayer(Player p) {
+        set(TrackableProperty.Flashback, CardView.getCollection(p.getCardsIn(ZoneType.Flashback)));
+    }
+
     public int getMana(final byte color) {
         Integer count = getMana().get(color);
         return count != null ? count.intValue() : 0;

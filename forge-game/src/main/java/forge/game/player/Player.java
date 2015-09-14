@@ -267,6 +267,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateOpponents(this);
     }
 
+    public void updateFlashbackForView() {
+        view.updateFlashbackForPlayer(this);
+    }
+
     //get single opponent for player if only one, otherwise returns null
     //meant to be used after game ends for the sake of achievements
     public Player getSingleOpponent() {

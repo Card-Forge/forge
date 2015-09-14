@@ -47,10 +47,12 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
+import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
+import forge.game.event.GameEventZone;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementEffect;
@@ -414,6 +416,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put("Target", sp.getTargetCard());
 
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
+        }
+
+        game.fireEvent(new GameEventZone(ZoneType.Stack, sp.getActivatingPlayer(), EventValueChangeType.Added, source));
+
+        if (sp.getActivatingPlayer() != null && !game.getCardsPlayerCanActivateInStack().isEmpty()) {
+            // This is a bit of a hack that forces the update of externally activatable cards in flashback zone (e.g. Lightning Storm).
+            for (Player p : game.getPlayers()) {
+                p.updateFlashbackForView();
+            }
         }
     }
 
