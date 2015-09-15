@@ -210,7 +210,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     || !this.getZone().equals(ZoneType.Hand)) {
                 return false;
             }
-            if (cardZone.is(ZoneType.Stack)) {
+            if (cardZone != null && cardZone.is(ZoneType.Stack)) {
                 return false;
             }
             if (c.mayPlay(activator) != null) {
