@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Shapeshifter
 PT:1/1
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
-A:AB$ AnimateAll | Cost$ X | Power$ X | Toughness$ X | References$ X | Types$ AllCreatureTypes | ValidCards$ Creature.YouCtrl | SpellDescription$ Until end of turn, creatures you control have base power and toughness X/X and gain all creature types.
+A:AB$ AnimateAll | Cost$ X | Power$ X | Toughness$ X | References$ X | Types$ AllCreatureTypes | ValidCards$ Creature.YouCtrl | SpellDescription$ Until end of turn, creatures you control have base power and toughness X/X and gain all creature types. | StackDescription$ SpellDescription
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_entity.jpg
