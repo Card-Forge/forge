@@ -817,6 +817,11 @@ public class ComputerUtilCard {
         	return true;
         }
         
+        //Check for cards that profit from spells - for example Prowess or Threshold
+        if (game.getPhaseHandler().getPhase().equals(PhaseType.MAIN1) && ComputerUtil.castSpellInMain1(ai, sa)) {
+            return true;
+        }
+
         //interrupt 1:remove blocker to save my attacker
         if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             Combat currCombat = game.getCombat();
