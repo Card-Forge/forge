@@ -4,6 +4,8 @@ http://downloads.cardforge.link/images/products/fatpacks/9ED.jpg
 http://downloads.cardforge.link/images/products/fatpacks/ALA.jpg
 http://downloads.cardforge.link/images/products/fatpacks/APC.jpg
 http://downloads.cardforge.link/images/products/fatpacks/ARB.jpg
+http://downloads.cardforge.link/images/products/fatpacks/BFZ.jpg
+http://downloads.cardforge.link/images/products/fatpacks/BNG.jpg
 http://downloads.cardforge.link/images/products/fatpacks/BOK.jpg
 http://downloads.cardforge.link/images/products/fatpacks/CFX.jpg
 http://downloads.cardforge.link/images/products/fatpacks/CHK.jpg

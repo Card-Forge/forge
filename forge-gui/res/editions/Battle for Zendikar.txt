@@ -1,0 +1,309 @@
+[metadata]
+Name=Battle for Zendikar
+Date=2015-10-02
+Code=BFZ
+Code2=BFZ
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand BFZ
+
+[cards]
+U Adverse Conditions
+M Akoum Firebird
+R Akoum Hellkite
+U Akoum Stonewaker
+R Aligned Hedron Network
+R Ally Encampment
+C Altar's Reap
+U Angel of Renewal
+R Angelic Captain
+C Angelic Gift
+C Anticipate
+U Bane of Bala Ged
+R Barrage Tyrant
+R Beastcaller Savant
+C Belligerent Whiptail
+C Benthic Infiltrator
+R Blight Herder
+U Blighted Cataract
+U Blighted Fen
+U Blighted Gorge
+U Blighted Steppe
+U Blighted Woodland
+C Blisterpod
+U Bloodbond Vampire
+C Boiling Earth
+C Bone Splinters
+U Breaker of Armies
+C Brilliant Spectrum
+R Bring to Light
+R Brood Butcher
+U Brood Monitor
+C Broodhunter Wurm
+R Brutal Expulsion
+C Call the Scions
+R Canopy Vista
+U Carrier Thrall
+U Catacomb Sifter
+U Chasm Guide
+R Cinder Glade
+C Cliffside Lookout
+C Cloud Manta
+C Clutch of Currents
+U Coastal Discovery
+C Complete Disregard
+R Conduit of Ruin
+C Coralhelm Guide
+C Courier Griffin
+U Crumble to Dust
+U Cryptic Cruiser
+C Culling Drone
+U Dampening Pulse
+U Deathless Behemoth
+R Defiant Bloodlord
+C Demon's Grasp
+R Desolation Twin
+C Dispel
+C Dominator Drone
+M Dragonmaster Outcast
+M Drana, Liberator of Malakir
+U Drana's Emissary
+R Drowner of Hope
+R Dust Stalker
+C Dutiful Return
+C Earthen Arms
+C Eldrazi Devastator
+C Eldrazi Skyspawner
+R Emeria Shepherd
+U Encircling Fissure
+R Endless One
+C Evolving Wilds
+R Exert Influence
+U Expedition Envoy
+C Eyeless Watcher
+R Fathom Feeder
+C Felidar Cub
+R Felidar Sovereign
+C Fertile Thicket
+U Firemantle Mage
+U Forerunner of Slaughter
+C Fortified Rampart
+R From Beyond
+C Geyserfield Stalker
+C Ghostly Sentinel
+C Giant Mantis
+C Gideon's Reproach
+M Gideon, Ally of Zendikar
+C Goblin War Paint
+C Grave Birthing
+M Greenwarden of Murasa
+U Grip of Desolation
+U Grove Rumbler
+U Grovetender Druids
+R Gruesome Slaughter
+R Guardian of Tazeem
+R Guul Draz Overseer
+U Hagra Sharpshooter
+U Halimar Tidecaller
+U Hedron Archive
+C Hedron Blade
+U Herald of Kozilek
+R Hero of Goma Fada
+U Horribly Awry
+C Incubator Drone
+U Infuse with the Elements
+C Inspired Charge
+U Jaddi Offshoot
+C Kalastria Healer
+C Kalastria Nightwatch
+M Kiora, Master of the Depths
+C Kitesail Scout
+U Kor Bladewhirl
+C Kor Castigator
+U Kor Entanglers
+C Kozilek's Channeler
+C Kozilek's Sentinel
+R Lantern Scout
+C Lavastep Raider
+C Lifespring Druid
+C Lithomancer's Focus
+C Looming Spires
+R Lumbering Falls
+C Makindi Patrol
+C Makindi Sliderunner
+U Malakir Familiar
+R March from the Tomb
+C Mind Raker
+C Mire's Malice
+C Mist Intruder
+U Molten Nursery
+C Mortuary Mire
+R Munda, Ambush Leader
+U Murasa Ranger
+C Murk Strider
+C Natural Connection
+C Nettle Drone
+C Nirkana Assassin
+R Nissa's Renewal
+R Noyan Dar, Roil Shaper
+M Ob Nixilis Reignited
+M Oblivion Sower
+M Omnath, Locus of Rage
+C Ondu Champion
+C Ondu Greathorn
+U Ondu Rising
+C Oracle of Dust
+R Oran-Rief Hydra
+C Oran-Rief Invoker
+C Outnumber
+R Painful Truths
+M Part the Waterveil
+U Pathway Arrows
+U Pilgrim's Eye
+R Planar Outburst
+U Plated Crusher
+C Plummet
+R Prairie Stream
+R Prism Array
+U Processor Assault
+M Quarantine Field
+R Radiant Flames
+C Reckless Cohort
+C Reclaiming Vines
+U Resolute Blademaster
+U Retreat to Coralhelm
+U Retreat to Emeria
+U Retreat to Hagra
+U Retreat to Kazandu
+U Retreat to Valakut
+U Rising Miasma
+U Roil Spout
+U Roil's Retribution
+C Roilmage's Trick
+U Rolling Thunder
+U Rot Shambler
+C Ruin Processor
+U Ruination Guide
+R Ruinous Path
+C Rush of Ice
+C Salvage Drone
+R Sanctum of Ugin
+C Sandstone Bridge
+R Scatter to the Winds
+C Scour from Existence
+U Scythe Leopard
+C Seek the Wilds
+U Serene Steward
+R Serpentine Spike
+C Shadow Glider
+R Shambling Vent
+C Shatterskull Recruit
+C Sheer Drop
+R Shrine of the Forsaken Gods
+C Silent Skimmer
+M Sire of Stagnation
+U Skitterskin
+C Skyline Cascade
+U Skyrider Elf
+U Slab Hammer
+C Sludge Crawler
+C Smite the Monstrous
+R Smoldering Marsh
+R Smothering Abomination
+C Snapping Gnarlid
+U Spawning Bed
+C Spell Shrivel
+U Stasis Snare
+C Stone Haven Medic
+C Stonefury
+R Sunken Hollow
+C Sure Strike
+C Swarm Surge
+C Swell of Growth
+U Sylvan Scrying
+C Tajuru Beastmaster
+C Tajuru Stalwart
+U Tajuru Warcaller
+C Tandem Tactics
+C Territorial Baloth
+U Tide Drifter
+C Tightening Coils
+U Titan's Presence
+C Touch of the Void
+U Transgress the Mind
+U Tunneling Geopede
+U Turn Against
+R Ugin's Insight
+U Ulamog's Despoiler
+U Ulamog's Nullifier
+U Ulamog's Reclaimer
+M Ulamog, the Ceaseless Hunger
+M Undergrowth Champion
+U Unified Front
+C Unnatural Aggression
+C Valakut Invoker
+C Valakut Predator
+U Vampiric Rites
+C Vestige of Emrakul
+R Veteran Warleader
+U Vile Aggregate
+U Void Attendant
+M Void Winnower
+C Volcanic Upheaval
+C Voracious Null
+R Wasteland Strangler
+C Wave-Wing Elemental
+U Windrider Patrol
+R Woodland Wanderer
+R Zada, Hedron Grinder
+U Zulaport Cutthroat
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
+L Island
+L Island
+L Island
+L Island
+L Island
+L Island
+L Island
+L Island
+L Island
+L Island
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+L Plains
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp

@@ -15,6 +15,7 @@ http://downloads.cardforge.link/images/products/boosterboxes/ARB.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/ARN.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/ATQ.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/AVR.jpg
+http://downloads.cardforge.link/images/products/boosterboxes/BFZ.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/BNG.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/BOK.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/CFX.jpg
