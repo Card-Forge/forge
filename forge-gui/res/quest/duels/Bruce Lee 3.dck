@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Bruce Lee 3
+Title=Bruce Lee
+Difficulty=hard
+Description=WUR Prowess deck
+Icon=Bruce Lee.jpg
+Deck Type=constructed
+[main]
+3 Arid Mesa
+3 Flooded Strand
+3 Mystic Monastery
+3 Plateau
+3 Scalding Tarn
+3 Tundra
+3 Volcanic Island
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+3 Elusive Spellfist
+1 Mage-Ring Bully
+3 Monastery Mentor
+3 Monastery Swiftspear
+3 Seeker of the Way
+1 Cast Through Time
+1 Mark of Fury
+1 Ancestral Recall
+1 Dramatic Rescue
+1 Electrolyze
+1 Gorilla War Cry
+1 Lightning Helix
+1 Swords to Plowshares
+1 Eye of Nowhere
+3 Flame Slash
+1 Great Teacher's Decree
+2 Revoke Existence
+2 Silent Departure
+1 Swift Reckoning
+1 Time Walk
+1 Timetwister
+1 Treasure Cruise
+1 Wheel of Fate
+1 Wheel of Fortune
+[sideboard]
