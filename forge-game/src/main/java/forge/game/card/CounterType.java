@@ -58,6 +58,8 @@ public enum CounterType {
 
     CREDIT(),
 
+    CRYSTAL(),
+
     CUBE(),
 
     CURRENCY(),
