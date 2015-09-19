@@ -88,6 +88,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 List<Card> attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
+                        if (combat == null) {
+                            return false;
+                        }
                         if (c.equals(sa.getHostCard()) && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost() 
                                 && !combat.isAttacking(c)) {
                             return false;
