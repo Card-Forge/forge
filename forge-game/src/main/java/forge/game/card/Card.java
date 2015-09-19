@@ -5197,6 +5197,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!getType().hasSubtype(subType)) {
                 return false;
             }
+        } else if (property.startsWith("HasNoSubtype")) {
+            final String subType = property.substring(13);
+            if (getType().hasSubtype(subType)) {
+                return false;
+            }
         } else {
             if (!getType().hasStringType(property)) {
                 return false;
