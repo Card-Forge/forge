@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -43,7 +43,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
         final String desc = getTypeDescription() == null ? getType() : getTypeDescription();
         sb.append(Cost.convertAmountTypeToWords(i, getAmount(), desc));
 
-        sb.append(" into its owner's graveyard");
+        sb.append(" from exile into that player's graveyard");
 
         return sb.toString();
     }
@@ -71,10 +71,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
         CardCollectionView typeList = activator.getGame().getCardsIn(ZoneType.Exile);
 
         typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source);
-        if (typeList.size() < i) {
-            return false;
-        }
-        return true;
+        return typeList.size() >= i;
     }
 
     @Override
