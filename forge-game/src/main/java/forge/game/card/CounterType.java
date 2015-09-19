@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,7 +22,7 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * The class Counters.
- * 
+ *
  * @author Clemens Koza
  * @version V0.0 17.02.2010
  */
@@ -78,7 +78,7 @@ public enum CounterType {
 
     DOOM(),
 
-    ECHO(),    
+    ECHO(),
 
     ELIXIR(),
 
@@ -128,6 +128,8 @@ public enum CounterType {
 
     INTERVENTION(),
 
+    ISOLATION(),
+
     JAVELIN(),
 
     KI(),
@@ -151,9 +153,9 @@ public enum CounterType {
     MAGNET(),
 
     MANA(),
-    
+
     MANIFESTATION(),
-    
+
     MANNEQUIN(),
 
     MATRIX(),
@@ -167,7 +169,7 @@ public enum CounterType {
     MUSIC(),
 
     MUSTER(),
-    
+
     NET(),
 
     OMEN(),
@@ -203,7 +205,7 @@ public enum CounterType {
     P1P0("+1/+0"),
 
     P1P2("+1/+2"),
-    
+
     P2P0("+2/+0"),
 
     P2P2("+2/+2"),
@@ -273,7 +275,7 @@ public enum CounterType {
      * Constructor for Counters.
      * </p>
      */
-    private CounterType() {
+    CounterType() {
         this.name = this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
     }
 
@@ -281,19 +283,19 @@ public enum CounterType {
      * <p>
      * Constructor for Counters.
      * </p>
-     * 
+     *
      * @param name
      *            a {@link java.lang.String} object.
      */
-    private CounterType(final String nameIn) {
-        this.name = nameIn;
+    CounterType(final String name) {
+        this.name = name;
     }
 
     /**
      * <p>
      * Getter for the field <code>name</code>.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public String getName() {
@@ -304,7 +306,7 @@ public enum CounterType {
      * <p>
      * getType.
      * </p>
-     * 
+     *
      * @param name
      *            a {@link java.lang.String} object.
      * @return a {@link forge.game.card.CounterType} object.
