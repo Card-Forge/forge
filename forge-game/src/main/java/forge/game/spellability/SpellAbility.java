@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -50,7 +50,7 @@ import java.util.*;
  * <p>
  * Abstract SpellAbility class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -372,7 +372,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void clearManaPaid() {
         payingMana.clear();
-    }    
+    }
 
     public List<SpellAbility> getPayingManaAbilities() {
         return paidAbilities;
@@ -903,7 +903,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     /**
      * Gets the chosen target.
-     * 
+     *
      * @return the chosenTarget
      */
     public TargetChoices getTargets() {
@@ -920,7 +920,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     /**
      * Reset the first target.
-     * 
+     *
      */
     public void resetFirstTarget(GameObject c, SpellAbility originalSA) {
         SpellAbility sa = this;
@@ -942,7 +942,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * <p>
      * getAllTargetChoices.
      * </p>
-     * 
+     *
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
@@ -972,7 +972,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * <p>
      * Setter for the field <code>targetCard</code>.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      */
@@ -992,7 +992,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * <p>
      * findTargetCards.
      * </p>
-     * 
+     *
      * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public CardCollectionView findTargetedCards() {
@@ -1249,11 +1249,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setTotalManaSpent(int totManaSpent) {
         totalManaSpent = totManaSpent;
     }
-    
+
     public int getTotalManaSpent() {
         return totalManaSpent;
     }
-    
+
     public List<AbilitySub> getChosenList() {
         return chosenList;
     }
