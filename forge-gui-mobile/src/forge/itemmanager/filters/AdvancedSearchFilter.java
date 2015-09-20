@@ -4,10 +4,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
 
 import forge.Forge;
+import forge.assets.FSkinImage;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.menu.FTooltip;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
@@ -96,6 +99,35 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (count == 1) {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        addItem(new FMenuItem("Edit Advanced Search", FSkinImage.EDIT, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                edit();
+                            }
+                        }));
+                        addItem(new FMenuItem("Clear Advanced Search", FSkinImage.DELETE, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                reset();
+                                itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
+                            }
+                        }));
+                    }
+                };
+                menu.show(this, x, y);
+            }
+            else if (count == 2) {
+                edit();
+            }
+            return true;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
             FTooltip tooltip = new FTooltip(toolTipText);
             tooltip.show(this, x, getHeight());
             return true;
