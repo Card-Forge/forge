@@ -377,16 +377,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
-        // changing zones for spells on the stack
+        boolean altDest = false;
         if (sa.hasParam("DestinationAlternative")) {
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getParam("AlternativeDestinationMessage"));
 
             if (!player.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
                 destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
+                altDest = true;
             }
         }
         
+        // changing zones for spells on the stack
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
                 continue;
@@ -439,7 +441,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (destination.equals(ZoneType.Library)) {
                 // library position is zero indexed
-                final int libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
+                int libraryPosition = 0;
+                if (!altDest) {
+                    libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
+                } else {
+                    libraryPosition = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
+                }
 
                 movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition);
 
