@@ -34,6 +34,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T> {
     protected GameFormat format;
     private String selectedFormat;
+    private boolean preventHandling = false;
     private FComboBox<Object> cbxFormats = new FComboBox<Object>();
 
     public FormatFilter(ItemManager<? super T> itemManager0) {
@@ -48,8 +49,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         selectedFormat = cbxFormats.getText();
 
         cbxFormats.setChangedHandler(new FEventHandler() {
-            private boolean preventHandling = false;
-
             @Override
             public void handleEvent(FEvent e) {
                 if (preventHandling) { return; }
@@ -84,6 +83,9 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
 
     @Override
     public void reset() {
+        preventHandling = true;
+        cbxFormats.setSelectedIndex(0);
+        preventHandling = false;
         format = null;
     }
 
