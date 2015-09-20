@@ -996,6 +996,7 @@ public class AdvancedSearch {
 
         public void reset() {
             expression.clear();
+            controls.clear();
             updateLabel();
         }
 
