@@ -73,14 +73,22 @@ public class EffectAi extends SpellAbilityAi {
                 final TargetRestrictions tgt = sa.getTargetRestrictions();
                 if (tgt != null) {
                     sa.resetTargets();
-                    List<Card> list = game.getCombat().getAttackers();
-                    list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
-                    list = CardLists.getTargetableCards(list, sa);
-                    Card target = ComputerUtilCard.getBestCreatureAI(list);
-                    if (target == null) {
-                        return false;
+                    if (tgt.canOnlyTgtOpponent()) {
+                        if (sa.canTarget(ai.getOpponent())) {
+                            sa.getTargets().add(ai.getOpponent());
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        List<Card> list = game.getCombat().getAttackers();
+                        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
+                        list = CardLists.getTargetableCards(list, sa);
+                        Card target = ComputerUtilCard.getBestCreatureAI(list);
+                        if (target == null) {
+                            return false;
+                        }
+                        sa.getTargets().add(target);
                     }
-                    sa.getTargets().add(target);
                 }
                 randomReturn = true;
             } else if (logic.equals("ChainVeil")) {
