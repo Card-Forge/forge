@@ -3,10 +3,10 @@ ManaCost:5 R R
 Types:Creature Elemental Cat
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlip | TriggerDescription$ When CARDNAME enters the battlefield, flip a coin until you lose a flip. Put a +1/+1 counter on CARDNAME for each flip you win.
-SVar:TrigFlip:AB$ FlipACoin | Cost$ 0 | WinSubAbility$ DBFlipAgain | RememberWinner$ True
-SVar:DBFlipAgain:DB$ FlipACoin | Cost$ 0 | WinSubAbility$ DBFlipAgain | LoseSubAbility$ DBPutCounter | RememberWinner$ True
-SVar:DBPutCounter:DB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanUp | References$ X
-SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+SVar:TrigFlip:AB$ FlipACoin | Cost$ 0 | WinSubAbility$ CountAndFlipAgain
+SVar:CountAndFlipAgain:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1 | SubAbility$ DBFlipAgain
+SVar:DBFlipAgain:DB$ FlipACoin | Cost$ 0 | WinSubAbility$ CountAndFlipAgain | LoseSubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X
+SVar:X:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crazed_firecat.jpg
 Oracle:When Crazed Firecat enters the battlefield, flip a coin until you lose a flip. Put a +1/+1 counter on Crazed Firecat for each flip you win.
