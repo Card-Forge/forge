@@ -374,10 +374,19 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = player.getGame();
 
-        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
+        ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
         // changing zones for spells on the stack
+        if (sa.hasParam("DestinationAlternative")) {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(sa.getParam("AlternativeDestinationMessage"));
+
+            if (!player.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
+                destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
+            }
+        }
+        
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
                 continue;
