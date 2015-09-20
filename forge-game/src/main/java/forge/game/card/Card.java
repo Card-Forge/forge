@@ -1616,7 +1616,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary()) {
-                sb.append(trig.toString()).append("\r\n");
+                sb.append(trig.toString().replaceAll("\\\\r\\\\n", "\r\n")).append("\r\n");
             }
         }
 
