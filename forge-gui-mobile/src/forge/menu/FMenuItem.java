@@ -9,6 +9,7 @@ import forge.UiCommand;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinProp;
 import forge.interfaces.IButton;
@@ -36,6 +37,7 @@ public class FMenuItem extends FDisplayObject implements IButton {
     private final FEventHandler handler;
     private boolean pressed, allowForIcon, selected, tabMode;
     private float textWidth;
+    private TextRenderer textRenderer;
 
     public FMenuItem(String text0, FEventHandler handler0) {
         this(text0, null, handler0, true);
@@ -69,6 +71,10 @@ public class FMenuItem extends FDisplayObject implements IButton {
 
     public void setTabMode(boolean tabMode0) {
         tabMode = tabMode0;
+    }
+
+    public void setTextRenderer(TextRenderer textRenderer0) {
+        textRenderer = textRenderer0;
     }
 
     public float getMinWidth() {
@@ -128,7 +134,12 @@ public class FMenuItem extends FDisplayObject implements IButton {
             x += ICON_SIZE + GAP_X;
         }
 
-        g.drawText(text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, false, HAlignment.LEFT, true);
+        if (textRenderer == null) {
+            g.drawText(text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, false, HAlignment.LEFT, true);
+        }
+        else {
+            textRenderer.drawText(g, text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, 0, h, false, HAlignment.LEFT, true);
+        }
 
         //draw separator line
         if (tabMode) {

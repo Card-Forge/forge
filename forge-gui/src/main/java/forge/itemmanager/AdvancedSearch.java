@@ -837,21 +837,26 @@ public class AdvancedSearch {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends InventoryItem> Filter<T> getFilter(Class<? super T> type, Filter<T> editFilter) {
-        //build list of filter options based on ItemManager type
-        List<FilterOption> options = new ArrayList<FilterOption>();
-        if (editFilter != null) {
-            options.add(FilterOption.NONE); //provide option to clear existing filter
-        }
-        for (FilterOption opt : FilterOption.values()) {
-            if (opt.type == type) {
-                options.add(opt);
-            }
-        }
-
+    public static <T extends InventoryItem> Filter<T> getFilter(Class<? super T> type, Filter<T> editFilter, boolean reselectOption) {
+        final FilterOption option;
         final FilterOption defaultOption = editFilter == null ? null : editFilter.option;
-        final FilterOption option = SGuiChoose.oneOrNone("Select a filter type", options, defaultOption, null);
-        if (option == null) { return editFilter; }
+        if (defaultOption == null || reselectOption) {
+            //build list of filter options based on ItemManager type
+            List<FilterOption> options = new ArrayList<FilterOption>();
+            if (editFilter != null) {
+                options.add(FilterOption.NONE); //provide option to clear existing filter
+            }
+            for (FilterOption opt : FilterOption.values()) {
+                if (opt.type == type) {
+                    options.add(opt);
+                }
+            }
+            option = SGuiChoose.oneOrNone("Select a filter type", options, defaultOption, null);
+            if (option == null) { return editFilter; }
+        }
+        else {
+            option = defaultOption;
+        }
 
         if (option == FilterOption.NONE) { return null; } //allow user to clear filter by selecting "(none)"
 
@@ -928,6 +933,8 @@ public class AdvancedSearch {
     }
 
     public static class Model<T extends InventoryItem> {
+        private static final String EMPTY_FILTER_TEXT = "Select Filter...";
+
         private final List<Object> expression = new ArrayList<Object>();
         private final List<IFilterControl<T>> controls = new ArrayList<IFilterControl<T>>();
         private IButton label;
@@ -1002,42 +1009,16 @@ public class AdvancedSearch {
 
         @SuppressWarnings("serial")
         public void addFilterControl(final IFilterControl<T> control) {
-            final String emptyFilterText = "Select Filter...";
-            control.getBtnFilter().setText(emptyFilterText);
+            control.getBtnFilter().setText(EMPTY_FILTER_TEXT);
             control.getBtnFilter().setCommand(new UiCommand() {
                 @Override
                 public void run() {
-                    FThreads.invokeInBackgroundThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            final Filter<T> filter = getFilter(control.getGenericType(), control.getFilter());
-                            if (control.getFilter() != filter) {
-                                FThreads.invokeInEdtLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        control.setFilter(filter);
-                                        if (filter != null) {
-                                            control.getBtnFilter().setText(GuiBase.getInterface().encodeSymbols(filter.toString(), false));
-                                        }
-                                        else {
-                                            control.getBtnFilter().setText(emptyFilterText);
-                                        }
-                                        if (filter.getOption() == FilterOption.CARD_KEYWORDS) {
-                                            //the first time the user selects keywords, preload keywords for all cards
-                                            Runnable preloadTask = Keyword.getPreloadTask();
-                                            if (preloadTask != null) {
-                                                GuiBase.getInterface().runBackgroundTask("Loading keywords...", preloadTask);
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    });
+                    editFilterControl(control, null);
                 }
             });
             controls.add(control);
         }
+
         public void removeFilterControl(IFilterControl<T> control) {
             int index = controls.indexOf(control);
             if (index > 0) {
@@ -1046,6 +1027,43 @@ public class AdvancedSearch {
                 prevControl.getBtnOr().setSelected(control.getBtnOr().isSelected());
             }
             controls.remove(index);
+        }
+
+        public void editFilterControl(final IFilterControl<T> control, final Runnable onChange) {
+            FThreads.invokeInBackgroundThread(new Runnable() {
+                @Override
+                public void run() {
+                    final Filter<T> filter = getFilter(control.getGenericType(), control.getFilter(), onChange == null); //reselect option if no change handler passed
+                    if (control.getFilter() != filter) {
+                        FThreads.invokeInEdtLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                control.setFilter(filter);
+                                if (filter != null) {
+                                    control.getBtnFilter().setText(GuiBase.getInterface().encodeSymbols(filter.toString(), false));
+                                }
+                                else {
+                                    control.getBtnFilter().setText(EMPTY_FILTER_TEXT);
+                                }
+                                if (filter.getOption() == FilterOption.CARD_KEYWORDS) {
+                                    //the first time the user selects keywords, preload keywords for all cards
+                                    Runnable preloadTask = Keyword.getPreloadTask();
+                                    if (preloadTask != null) {
+                                        GuiBase.getInterface().runBackgroundTask("Loading keywords...", preloadTask);
+                                    }
+                                }
+                                if (onChange != null) {
+                                    onChange.run();
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        public Iterable<IFilterControl<T>> getControls() {
+            return controls;
         }
 
         public void setLabel(IButton label0) {

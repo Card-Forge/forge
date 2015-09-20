@@ -5,10 +5,12 @@ import com.google.common.base.Predicate;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
+import forge.assets.TextRenderer;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;
+import forge.itemmanager.AdvancedSearch.IFilterControl;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FTooltip;
@@ -81,6 +83,15 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         label.setSize(width, height);
     }
 
+    private final Runnable onFilterChange = new Runnable() {
+        @Override
+        public void run() {
+            //update expression when edit screen closed or a single filter is changed
+            model.updateExpression();
+            itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
+        }
+    };
+
     private class FiltersLabel extends FLabel {
         private String toolTipText;
 
@@ -103,13 +114,24 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 FPopupMenu menu = new FPopupMenu() {
                     @Override
                     protected void buildMenu() {
-                        addItem(new FMenuItem("Edit Advanced Search", FSkinImage.EDIT, new FEventHandler() {
+                        //add a menu item for each filter to allow easily editing just that filter
+                        for (final IFilterControl<T> control : model.getControls()) {
+                            FMenuItem item = new FMenuItem(control.getFilter().toString(), FSkinImage.EDIT, new FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e) {
+                                    model.editFilterControl(control, onFilterChange);
+                                }
+                            });
+                            item.setTextRenderer(new TextRenderer()); //ensure symbols are displayed
+                            addItem(item);
+                        }
+                        addItem(new FMenuItem("Edit Expression", FSkinImage.EDIT, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 edit();
                             }
                         }));
-                        addItem(new FMenuItem("Clear Advanced Search", FSkinImage.DELETE, new FEventHandler() {
+                        addItem(new FMenuItem("Remove Filter", FSkinImage.DELETE, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 reset();
@@ -161,9 +183,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
         @Override
         public void onClose(Callback<Boolean> canCloseCallback) {
-            //update expression when screen closed
-            model.updateExpression();
-            itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
+            onFilterChange.run();
             super.onClose(canCloseCallback);
         }
 
