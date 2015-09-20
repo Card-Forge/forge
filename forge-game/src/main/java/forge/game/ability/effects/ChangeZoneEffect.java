@@ -237,7 +237,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         sb.append(" ");
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
 
         final StringBuilder sbTargets = new StringBuilder();
 
@@ -531,7 +531,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Fizzle")) {
                         final FCollectionView<SpellAbility> spells = tgtC.getSpellAbilities();
                         for (SpellAbility spell : spells) {
-                            if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand)) {
+                            if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand) || tgtC.isInZone(ZoneType.Stack)) {
                                 final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
                                 if (si != null) { 
                                     game.getStack().remove(si);
