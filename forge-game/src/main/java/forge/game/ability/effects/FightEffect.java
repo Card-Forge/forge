@@ -35,12 +35,21 @@ public class FightEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
+        final Card host = sa.getHostCard();
         List<Card> fighters = getFighters(sa);
 
         if (fighters.size() < 2 || !fighters.get(0).isInPlay()
                 || !fighters.get(1).isInPlay()) {
             return;
         }
+        
+        if (sa.hasParam("RememberObjects")) {
+            final String remembered = sa.getParam("RememberObjects");
+            for (final Object o : AbilityUtils.getDefinedObjects(host, remembered, sa)) {
+                host.addRemembered(o);
+            }
+        }
+        
         boolean fightToughness = sa.hasParam("FightWithToughness");
         final int dmg1 = fightToughness ? fighters.get(0).getNetToughness() : fighters.get(0).getNetPower();
         final int dmg2 = fightToughness ? fighters.get(1).getNetToughness() : fighters.get(1).getNetPower();
