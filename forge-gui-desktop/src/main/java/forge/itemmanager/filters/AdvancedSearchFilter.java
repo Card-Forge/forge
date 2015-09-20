@@ -2,15 +2,20 @@ package forge.itemmanager.filters;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
 
 import forge.UiCommand;
+import forge.gui.GuiUtils;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;
+import forge.itemmanager.AdvancedSearch.IFilterControl;
 import forge.toolbox.FLabel;
+import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
@@ -41,6 +46,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
     @Override
     public void reset() {
         model.reset();
+        editDialog = null;
     }
 
     @Override
@@ -56,6 +62,50 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
     @Override
     protected final void buildWidget(JPanel widget) {
         label = new FLabel.Builder().fontAlign(SwingConstants.LEFT).fontSize(12).build();
+        label.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftDoubleClick(final MouseEvent e) {
+                edit();
+            }
+
+            @Override
+            public void onRightClick(final MouseEvent e) {
+                final JPopupMenu menu = new JPopupMenu("AdvancedSearchContextMenu");
+
+                boolean hasFilters = !isEmpty();
+                if (hasFilters) {
+                    //add a menu item for each filter to allow easily editing just that filter
+                    for (final IFilterControl<T> control : model.getControls()) {
+                        GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(control.getFilter().toString(), false), null, new Runnable() {
+                            @Override
+                            public void run() {
+                                model.editFilterControl(control, onFilterChange);
+                            }
+                        });
+                    }
+                    GuiUtils.addSeparator(menu);
+                }
+
+                GuiUtils.addMenuItem(menu, "Edit Expression", null, new Runnable() {
+                    @Override
+                    public void run() {
+                        edit();
+                    }
+                });
+
+                if (hasFilters) {
+                    GuiUtils.addMenuItem(menu, "Clear Filter", null, new Runnable() {
+                        @Override
+                        public void run() {
+                            reset();
+                            itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
+                        }
+                    });
+                }
+
+                menu.show(e.getComponent(), e.getX(), e.getY());
+            }
+        });
         model.setLabel(label);
         widget.add(label);
     }
@@ -76,6 +126,15 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
     public boolean merge(ItemFilter<?> filter) {
         return false;
     }
+
+    private final Runnable onFilterChange = new Runnable() {
+        @Override
+        public void run() {
+            //update expression when edit screen closed or a single filter is changed
+            model.updateExpression();
+            itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
+        }
+    };
 
     @SuppressWarnings("serial")
     private class EditDialog {
@@ -120,7 +179,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
             optionPane.dispose();
             if (result != 1) {
-                model.updateExpression(); //update expression when dialog accepted
+                onFilterChange.run();
                 return true;
             }
             return false;

@@ -860,7 +860,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     //apply filters and focus existing filter's main component if filtering not locked
-    protected void applyNewOrModifiedFilter(final ItemFilter<? extends T> filter) {
+    public void applyNewOrModifiedFilter(final ItemFilter<? extends T> filter) {
         if (this.lockFiltering) {
             filter.afterFiltersApplied(); //ensure this called even if filters currently locked
             return;
