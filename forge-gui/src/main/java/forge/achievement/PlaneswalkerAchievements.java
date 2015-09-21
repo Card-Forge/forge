@@ -75,7 +75,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Nissa, Sage Animist", "Nissa's Wake-Up Call", "Wake up! Time to work!");
         add("Nissa, Worldwaker", "Nissa's Awakening", "The whole country is here!");
         add("Ob Nixilis of the Black Oath", "Nixilis's Black Oath", "We all have to bring sacrifices sometimes.");
-        add("Ob Nixilis Reignited", "Ob Nixilis's Torment", "I'll give you dreams from beyond underworld!");
+        add("Ob Nixilis Reignited", "Ob Nixilis's Torment", "I'll give you dreams from beyond the underworld!");
         add("Ral Zarek", "Ral's Long Day", "So much work, so much time!");
         add("Sarkhan Vol", "Sarkhan's Dragons", "Go forth, my minions!");
         add("Sarkhan the Mad", "Sarkhan's Beatdown", "Tag! You're it!");
