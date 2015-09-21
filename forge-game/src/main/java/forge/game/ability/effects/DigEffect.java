@@ -189,6 +189,16 @@ public class DigEffect extends SpellAbilityEffect {
                         andOrCards = new CardCollection();
                     }
 
+                    if (!sa.hasParam("Reveal")) {
+                        // make sure at least the controller gets to see the card
+                        game.getAction().revealTo(top, player);
+                    }
+
+                    // Optional ability
+                    String message = sa.hasParam("OptionalMessage") ? sa.getParam("OptionalMessage") : "Would you like to proceed with the optional ability for " + host.getName() + "?";
+                    if ( !valid.isEmpty() && sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
+                        return;
+                    
                     if (changeAll) {
                         movedCards = new CardCollection(valid);
                     }
