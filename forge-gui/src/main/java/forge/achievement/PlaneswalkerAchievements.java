@@ -53,6 +53,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Gideon Jura", "Gideon's Brawl", "Are you man enough to mess with me?");
         add("Gideon, Battle-Forged", "Gideon's First Steps", "I still have a long road ahead of me...");
         add("Gideon, Champion of Justice", "Gideon's Aftermath", "Gideon stands alone!");
+        add("Gideon, Ally of Zendikar", "Gideon's Anthem", "Let's all rally against the Eldrazi threat!");
         add("Jace Beleren", "Jace's Grind", "Nice memories... not!");
         add("Jace, Architect of Thought", "Jace's Incantation", "I like that one. I'll steal it!");
         add("Jace, Memory Adept", "Jace's Revelation", "So many things to learn!");
@@ -60,6 +61,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Jace, the Living Guildpact", "Jace's Timetwister", "Symmetry? What symmetry?");
         add("Jace, the Mind Sculptor", "Jace's Lobotomy", "What do you mean, \"overpowered\"?");
         add("Karn Liberated", "Karn's Reset", "Let's do this again!");
+        add("Kiora, Master of the Depths", "Kiora's Fight Club", "First rule is not to talk about the sucker punches");
         add("Kiora, the Crashing Wave", "Kiora's Kraken", "Say hello to Cthulhu for me!");
         add("Koth of the Hammer", "Koth's Eruption", "You won't like the mountains when they are angry!");
         add("Liliana Vess", "Liliana's Bidding", "Stop being lazy and go to work!");
@@ -73,6 +75,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Nissa, Sage Animist", "Nissa's Wake-Up Call", "Wake up! Time to work!");
         add("Nissa, Worldwaker", "Nissa's Awakening", "The whole country is here!");
         add("Ob Nixilis of the Black Oath", "Nixilis's Black Oath", "We all have to bring sacrifices sometimes.");
+        add("Ob Nixilis Reignited", "Ob Nixilis's Torment", "I'll give you dreams from beyond underworld!");
         add("Ral Zarek", "Ral's Long Day", "So much work, so much time!");
         add("Sarkhan Vol", "Sarkhan's Dragons", "Go forth, my minions!");
         add("Sarkhan the Mad", "Sarkhan's Beatdown", "Tag! You're it!");
