@@ -70,6 +70,9 @@ public class TargetRestrictions {
     private String minTargets;
     private String maxTargets;
 
+    // What's the max CMC of targeted?
+    private String maxTotalCMC;
+
     // For "Divided" cards. Is this better in TargetChoices?
     private boolean dividedAsYouChoose = false;
     private HashMap<Object, Integer> dividedMap = new HashMap<Object, Integer>();
@@ -93,6 +96,7 @@ public class TargetRestrictions {
         this.validTgts = this.originalValidTgts.clone();
         this.minTargets = target.getMinTargets();
         this.maxTargets = target.getMaxTargets();
+        this.maxTotalCMC = target.getMaxTotalCMC();
         this.tgtZone = target.getZone();
         this.saValidTargeting = target.getSAValidTargeting();
         this.dividedAsYouChoose = target.isDividedAsYouChoose();
@@ -155,6 +159,18 @@ public class TargetRestrictions {
 
     /**
      * <p>
+     * setMaxTotalCMC.
+     * </p>
+     * 
+     * @param cmc
+     *            a String.
+     */
+    public final void setMaxTotalCMC(final String cmc) {
+        this.maxTotalCMC = cmc;
+    }
+
+    /**
+     * <p>
      * doesTarget.
      * </p>
      * 
@@ -202,6 +218,19 @@ public class TargetRestrictions {
      */
     private final String getMaxTargets() {
         return this.maxTargets;
+    }
+
+    /**
+     * Gets the max targets.
+     *
+     * @return the max targets
+     */
+    private final String getMaxTotalCMC() {
+        return this.maxTotalCMC;
+    }
+
+    public final int getMaxTotalCMC(final Card c, final SpellAbility sa) {
+        return AbilityUtils.calculateAmount(c, this.maxTotalCMC, sa);
     }
 
     /**

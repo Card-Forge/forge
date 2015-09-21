@@ -464,6 +464,24 @@ public final class CardUtil {
             }
         }
 
+        // Remove cards exceeding total CMC
+        if (ability.hasParam("MaxTotalTargetCMC")) {
+            int totalCMCTargeted = 0;
+            for (final Card c : targeted) {
+                totalCMCTargeted += c.getCMC(); 
+            }
+
+            final List<Card> choicesCopy = Lists.newArrayList(choices);
+            for (final Card c : choicesCopy) {
+                if (c.getCMC() > tgt.getMaxTotalCMC(c, ability)) {
+                    choices.remove(c);
+                }
+                if (c.getCMC() > tgt.getMaxTotalCMC(c, ability) - totalCMCTargeted) {
+                    choices.remove(c);
+                }
+            }
+        }
+
         // If all cards (including subability targets) must have the same controller
         if (tgt.isSameController() && !targetedObjects.isEmpty()) {
             final List<Card> list = new ArrayList<Card>();

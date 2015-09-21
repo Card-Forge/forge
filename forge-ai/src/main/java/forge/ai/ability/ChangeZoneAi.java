@@ -1021,6 +1021,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
 
+            // if max CMC exceeded, stop choosing
+            if (sa.hasParam("MaxTotalTargetCMC")) {
+                if (choice.getCMC() > sa.getTargetRestrictions().getMaxTotalCMC(choice, sa) - sa.getTargets().getTotalTargetedCMC()) {
+                    list.remove(choice);
+                    continue;
+                }
+            }
+
             list.remove(choice);
             sa.getTargets().add(choice);
         }

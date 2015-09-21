@@ -48,6 +48,14 @@ public class TargetChoices implements Cloneable {
         return numTargeted;
     }
 
+    public final int getTotalTargetedCMC() {
+        int totalCMC = 0;
+        for (Card c : targetCards) {
+            totalCMC += c.getCMC();
+        }
+        return totalCMC;
+    }
+
     public final boolean add(final GameObject o) {
         if (o instanceof Player) {
             return addTarget((Player) o);

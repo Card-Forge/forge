@@ -230,6 +230,11 @@ public final class AbilityFactory {
             abTgt.setZone(ZoneType.listValueOf(mapParams.get("TgtZone")));
         }
 
+        if (mapParams.containsKey("MaxTotalTargetCMC")) {
+            // only target cards up to a certain total max CMC
+            abTgt.setMaxTotalCMC(mapParams.get("MaxTotalTargetCMC"));
+        }
+
         // TargetValidTargeting most for Counter: e.g. target spell that
         // targets X.
         if (mapParams.containsKey("TargetValidTargeting")) {
