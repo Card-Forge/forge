@@ -1021,7 +1021,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
 
-            // if max CMC exceeded, stop choosing
+            // if max CMC exceeded, do not choose this card (but keep looking for other options)
             if (sa.hasParam("MaxTotalTargetCMC")) {
                 if (choice.getCMC() > sa.getTargetRestrictions().getMaxTotalCMC(choice, sa) - sa.getTargets().getTotalTargetedCMC()) {
                     list.remove(choice);
