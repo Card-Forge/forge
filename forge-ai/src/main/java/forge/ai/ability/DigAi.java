@@ -115,8 +115,18 @@ public class DigAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        // looks like perfect code for Delver of Secrets, but what about other cards? 
         Card topc = player.getZone(ZoneType.Library).get(0);
+
+        // AI actions for individual cards (until this AI can be generalized)
+        if (sa.getHostCard() != null) {
+            if (sa.getHostCard().getName().equals("Explorer's Scope")) {
+                // for Explorer's Scope, always put a land on the battlefield tapped
+                // (TODO: might not always be a good idea, e.g. when a land ETBing can have detrimental effects)
+                return true;
+            }
+        }
+
+        // looks like perfect code for Delver of Secrets, but what about other cards? 
         return topc.isInstant() || topc.isSorcery();
     }
 }
