@@ -1430,8 +1430,8 @@ public class ComputerUtil {
         final Zone zone = source.getZone();
         final Game game = source.getGame();
 
-        if (sa.isTrigger()) {
-        	return true;
+        if (sa.isTrigger() || zone == null) {
+            return true;
         }
 
         if (zone.getZoneType() == ZoneType.Battlefield) {
@@ -1441,6 +1441,13 @@ public class ComputerUtil {
             if (game.getPhaseHandler().inCombat() && 
             		ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, game.getCombat())) {
             	return true;
+            }
+        } else if (zone.getZoneType() == ZoneType.Exile) {
+            // play cards in exile that can only be played that turn
+            if (game.getPhaseHandler().getPhase() == PhaseType.MAIN2) {
+                if (source.hasKeyword("May be played")) {
+                    return true;
+                }
             }
         }
         return false;
