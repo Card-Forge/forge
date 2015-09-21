@@ -117,6 +117,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             final List<Trigger> addedTriggers, final List<ReplacementEffect> addedReplacements, 
             final boolean givesStAbs, final List<SpellAbility> removedAbilities, final long timestamp) {
 
+        if (sa.hasParam("LastsIndefinitely")) {
+            return;
+        }
+
         c.removeNewPT(timestamp);
 
         c.removeChangedCardKeywords(timestamp);
