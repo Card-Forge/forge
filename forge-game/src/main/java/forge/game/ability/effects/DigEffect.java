@@ -195,7 +195,7 @@ public class DigEffect extends SpellAbilityEffect {
                     }
 
                     // Optional ability
-                    String message = sa.hasParam("OptionalMessage") ? sa.getParam("OptionalMessage") : "Would you like to proceed with the optional ability for " + host.getName() + "?";
+                    String message = sa.hasParam("OptionalMessage") ? sa.getParam("OptionalMessage") : "Would you like to proceed with the optional ability for " + host.getName() + "?\n\n(" + sa.getDescription() + ")";
                     if ( !valid.isEmpty() && sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
                         return;
                     
