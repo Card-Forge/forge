@@ -259,16 +259,16 @@ public class DamageDealAi extends DamageAiBase {
             }
             return true;
         }
-        
-        sa.resetTargets();
-        // target loop
-        TargetChoices tcs = sa.getTargets();
 
         if (tgt.getMaxTargets(source, sa) <= 0) {
             return false;
         }
         
         immediately |= ComputerUtil.playImmediately(ai, sa);
+
+        sa.resetTargets();
+        // target loop
+        TargetChoices tcs = sa.getTargets();
 
         if ("ChoiceBurn".equals(sa.getParam("AILogic"))) {
             // do not waste burns on player if other choices are present
@@ -435,7 +435,7 @@ public class DamageDealAi extends DamageAiBase {
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
                         || sa.getPayCosts() == null || immediately
                         || this.shouldTgtP(ai, sa, dmg, noPrevention)) {
-                    sa.getTargets().add(enemy);
+                	tcs.add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
                         break;
@@ -444,7 +444,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
             // fell through all the choices, no targets left?
-            if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
+            if (tcs.getNumTargeted() < tgt.getMinTargets(source, sa) || tcs.getNumTargeted() == 0) {
                 if (!mandatory) {
                     sa.resetTargets();
                     return false;
@@ -536,6 +536,8 @@ public class DamageDealAi extends DamageAiBase {
         // this is for Triggered targets that are mandatory
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
+        final Player opp = ai.getOpponent();
+        System.out.println("damageChooseRequiredTargets " + ai + " " + sa);
 
         while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             // TODO: Consider targeting the planeswalker
@@ -545,6 +547,16 @@ public class DamageDealAi extends DamageAiBase {
                     sa.getTargets().add(c);
                     if (divided) {
                         tgt.addDividedAllocation(c, dmg);
+                        break;
+                    }
+                    continue;
+                }
+            }
+
+            if (sa.canTarget(opp)) {
+                if (sa.getTargets().add(opp)) {
+                    if (divided) {
+                        tgt.addDividedAllocation(opp, dmg);
                         break;
                     }
                     continue;
