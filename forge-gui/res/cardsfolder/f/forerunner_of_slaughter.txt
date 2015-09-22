@@ -1,0 +1,10 @@
+Name:Forerunner of Slaughter
+ManaCost:R B
+Types:Creature Eldrazi Drone
+PT:3/2
+K:Devoid
+A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.Colorless | TgtPrompt$ Select target colorless creature | KW$ Haste | SpellDescription$ Target colorless creature gains haste until end of turn.
+SVar:PlayMain1:Always
+SVar:BuffedBy:Creature.Colorless
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forerunner_of_slaughter.jpg
+Oracle:Devoid (This card has no color.)\n{1}: Target colorless creature gains haste until end of turn.

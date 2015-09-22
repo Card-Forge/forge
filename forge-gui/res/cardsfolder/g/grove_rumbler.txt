@@ -1,0 +1,10 @@
+Name:Grove Rumbler
+ManaCost:2 R G
+Types:Creature Elemental
+PT:3/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +2 | NumDef$ +2
+SVar:BuffedBy:Land
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grove_rumbler.jpg
+Oracle:Trample\nLandfall - Whenever a land enters the battlefield under your control, Grove Rumbler gets +2/+2 until end of turn.

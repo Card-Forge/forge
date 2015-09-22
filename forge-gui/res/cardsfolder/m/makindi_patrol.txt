@@ -1,0 +1,11 @@
+Name:Makindi Patrol
+ManaCost:2 W
+Types:Creature Human Knight Ally
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, creatures you control gain vigilance until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpAll | Secondary$ True | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, creatures you control gain vigilance until end of turn.
+SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Vigilance
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
+SVar:Picture:http://www.wizards.com/global/images/magic/general/makindi_patrol.jpg
+Oracle:Rally — Whenever Makindi Patrol or another Ally enters the battlefield under your control, creatures you control gain vigilance until end of turn.

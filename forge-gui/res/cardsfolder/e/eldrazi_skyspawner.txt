@@ -1,0 +1,11 @@
+Name:Eldrazi Skyspawner
+ManaCost:2 U
+Types:Creature Eldrazi Drone
+PT:2/1
+K:Devoid
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add 1 to your mana pool."
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAbilities$ ABMana
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add {1} to your mana pool.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_skyspawner.jpg
+Oracle:Devoid (This card has no color.)\nFlying\nWhen Eldrazi Skyspawner enters the battlefield, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add 1 to your mana pool."

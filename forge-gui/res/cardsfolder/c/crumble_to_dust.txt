@@ -1,0 +1,9 @@
+Name:Crumble to Dust
+ManaCost:3 R
+Types:Sorcery
+k:devoid
+A:SP$ ChangeZone | Cost$ 3 R | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles his or library.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.sameName | Origin$ Graveyard,Hand,Library | Defined$ TargetedController | Destination$ Exile | Search$ True | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble_to_dust.jpg
+Oracle:Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles his or library.

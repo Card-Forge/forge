@@ -1,0 +1,8 @@
+Name:Desolation Twin
+ManaCost:10
+Types:Creature Eldrazi
+PT:10/10
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast CARDNAME, put a 10/10 colorless Eldrazi creature token onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi | TokenTypes$ Creature,Eldrazi | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 10 | TokenToughness$ 10
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation_twin.jpg
+Oracle:When you cast Desolation Twin, put a 10/10 colorless Eldrazi creature token onto the battlefield.

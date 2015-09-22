@@ -1,0 +1,13 @@
+Name:Kiora, Master of the Depths
+ManaCost:2 G U
+Types:Planeswalker Kiora
+Loyalty:4
+A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Choose target creature | TargetMin$ 0 | TargetMax$ 1 | Planeswalker$ True | SubAbility$ DBUntap | SpellDescription$ Untap up to one target creature and up to one target land.
+SVar:DBUntap:DB$ Untap | ValidTgts$ Land | TgtPrompt$ Choose target land | TargetMin$ 0 | TargetMax$ 1
+A:AB$ Dig | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | DigNum$ 4 | Reveal$ True | ChangeNum$ 2 | ChangeValid$ Creature | AndOrValid$ Land | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard.
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Kiora, Master of the Depths emblem | Image$ kiora_master_of_the_depths_emblem | Triggers$ TrigFight | SVars$ DBFight | Duration$ Permanent | AILogic$ Always | SubAbility$ DBToken | SpellDescription$ You get an emblem with "Whenever a creature enters the battlefield under your control, you may have it fight target creature." Then put three 8/8 blue Octopus creature tokens onto the battlefield under your control.
+SVar:TrigFight:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | Execute$ DBFight | OptionalDecider$ You | TriggerZones$ Command | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may have it fight target creature.
+SVar:DBFight:AB$ Fight | Cost$ 0 | Defined$ TriggeredCard | ValidTgts$ Creature | TgtPrompt$ Choose target creature
+SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenName$ Octopus | TokenTypes$ Creature,Octopus | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 8 | TokenToughness$ 8
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kiora_master_of_the_depths.jpg
+Oracle:[+1] Untap up to one target creature and up to one target land.\n[-2] Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard.\n[-8] You get an emblem with "Whenever a creature enters the battlefield under your control, you may have it fight target creature." Then put three 8/8 blue Octopus creature tokens onto the battlefield under your control.

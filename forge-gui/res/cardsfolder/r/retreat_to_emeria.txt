@@ -1,0 +1,9 @@
+Name:Retreat to Emeria
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, choose one -\r\n• Put a 1/1 white Kor Ally creature token onto the battlefield.\r\n• Creatures you control get +1/+1 until end of turn.
+SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBToken,DBPumpAll | SpellDescription$ Choose one - Put a 1/1 white Kor Ally creature token onto the battlefield; Creatures you control get +1/+1 until end of turn.
+SVar:DBToken:DB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Kor Ally | TokenTypes$ Creature,Kor,Ally | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Kor Ally creature token onto the battlefield.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/retreat_to_emeria.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, choose one -\n• Put a 1/1 white Kor Ally creature token onto the battlefield.\n• Creatures you control get +1/+1 until end of turn.

@@ -1,0 +1,8 @@
+Name:Culling Drone
+ManaCost:1 B
+Types:Creature Eldrazi Drone
+PT:2/2
+K:Devoid
+K:Ingest
+SVar:Picture:http://www.wizards.com/global/images/magic/general/culling_drone.jpg
+Oracle:Devoid (This card has no color.)\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)

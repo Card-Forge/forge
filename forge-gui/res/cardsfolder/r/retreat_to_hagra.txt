@@ -1,0 +1,10 @@
+Name:Retreat to Hagra
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, choose one -\r\n• Target creature gets +1/+0 and gains deathtouch until end of turn.\r\n• Each opponent loses 1 life and you gain 1 life.
+SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBPump,DBLoseLife | SpellDescription$ Choose one - Target creature gets +1/+0 and gains deathtouch until end of turn; Each opponent loses 1 life and you gain 1 life.
+SVar:DBPump:DB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Deathtouch | SpellDescription$ Target creature gets +1/+0 and gains deathtouch until end of turn.
+SVar:DBLoseLife:DB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/retreat_to_hagra.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, choose one -\n• Target creature gets +1/+0 and gains deathtouch until end of turn.\n• Each opponent loses 1 life and you gain 1 life.

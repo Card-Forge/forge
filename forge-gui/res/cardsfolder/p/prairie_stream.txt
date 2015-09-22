@@ -1,0 +1,9 @@
+Name:Prairie Stream
+ManaCost:no cost
+Types:Land Plains Island
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped unless you control two or more basic lands.
+SVar:LandTapped:AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar | ConditionSVarCompare$ LE1 | References$ ETBCheckSVar | SubAbility$ MoveToPlay
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:ETBCheckSVar:Count$Valid Land.Basic+YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prairie_stream.jpg
+Oracle:({T}: Add {W} or {U} to your mana pool.)\nPrairie Stream enters the battlefield tapped unless you control two or more basic lands.

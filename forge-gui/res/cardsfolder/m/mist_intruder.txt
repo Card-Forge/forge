@@ -1,0 +1,9 @@
+Name:Mist Intruder
+ManaCost:1 U
+Types:Creature Eldrazi Drone
+PT:1/2
+K:Devoid
+K:Flying
+K:Ingest
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_intruder.jpg
+Oracle:Devoid (This card has no color.)\nFlying\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)

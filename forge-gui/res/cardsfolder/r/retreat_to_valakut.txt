@@ -1,0 +1,9 @@
+Name:Retreat to Valakut
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, choose one -\r\n• Target creature gets +2/+0 until end of turn.\r\n• Target creature can't block this turn.
+SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBPump1,DBPump2 | SpellDescription$ Choose one - Target creature gets +2/+0 until end of turn; Target creature can't block this turn.
+SVar:DBPump1:DB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
+SVar:DBPump2:DB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/retreat_to_valakut.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, choose one -\n• Target creature gets +2/+0 until end of turn.\n• Target creature can't block this turn.

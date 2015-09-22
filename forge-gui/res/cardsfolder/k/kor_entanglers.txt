@@ -1,0 +1,11 @@
+Name:Kor Entanglers
+ManaCost:4 W
+Types:Creature Kor Soldier Ally
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, tap target creature an opponent controls.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTap | Secondary$ True | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, tap target creature an opponent controls.
+SVar:TrigTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_entanglers.jpg
+Oracle:Rally — Whenever Kor Entanglers or another Ally enters the battlefield under your control, tap target creature an opponent controls.

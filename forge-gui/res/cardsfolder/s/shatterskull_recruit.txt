@@ -1,0 +1,9 @@
+Name:Shatterskull Recruit
+ManaCost:3 R R
+Types:Creature Giant Warrior Ally
+PT:4/4
+K:Menace
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterskull_recruit.jpg
+Oracle:

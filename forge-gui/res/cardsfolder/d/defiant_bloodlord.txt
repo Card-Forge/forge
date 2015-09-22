@@ -1,0 +1,10 @@
+Name:Defiant Bloodlord
+ManaCost:5 B B
+Types:Creature Vampire
+PT:4/5
+K:Flying
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
+SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | ValidTgts$ Opponent | TgtPromp$ Select target opponent | LifeAmount$ X | References$ X
+SVar:X:TriggerCount$LifeAmount
+SVar:Picture:http://www.wizards.com/global/images/magic/general/defiant_bloodlord.jpg
+Oracle:Flying\nWhenever you gain life, target opponent loses that much life.

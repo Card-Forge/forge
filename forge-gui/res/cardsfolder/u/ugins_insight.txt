@@ -1,0 +1,9 @@
+Name:Ugin's Insight
+ManaCost:3 U U
+Types:Sorcery
+A:SP$ Scry | Cost$ 3 U U | ScryNum$ X | References$ X | SpellDescription$ Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards. | SubAbility$ DBDraw
+SVar:X:Count$MaxCMCYouCtrl
+SVar:DBDraw:DB$Draw | NumCards$ 3
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ugins_insight.jpg
+Oracle:Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards.

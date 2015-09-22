@@ -1,0 +1,7 @@
+Name:Transgress the Mind
+ManaCost:1 B
+Types:Sorcery
+K:Devoid
+A:SP$ ChangeZone | Cost$ 1 B | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ValidTgts$ Player | Chooser$ You | ChangeType$ Card.cmcGE3 | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Target player reveals his or her hand. You choose a card from it with converted mana cost 3 or greater and exile that card.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/transgress_the_mind.jpg
+Oracle:Devoid (This card has no color.)\nTarget player reveals his or her hand. You choose a card with converted mana cost 3 or greater and exile that card.

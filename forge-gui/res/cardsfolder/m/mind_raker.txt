@@ -1,0 +1,10 @@
+Name:Mind Raker
+ManaCost:3 B
+Types:Creature Eldrazi Processor
+PT:3/3
+K:Devoid
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, each opponent discards a card.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Graveyard | ValidTgts$ Card.OppOwn | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_raker.jpg
+Oracle:Devoid (This card has no color.)\nWhen Mind Raker enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, each opponent discards a card.

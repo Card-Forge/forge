@@ -1,0 +1,10 @@
+Name:Conduit of Ruin
+ManaCost:6
+Types:Creature Eldrazi
+PT:5/5
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When you cast CARDNAME, you may search your library for a colorless creature card with converted mana cost 7 or higher and reveal it. If you do, shuffle your library, then put that card on top of it..
+SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature.Colorless+cmcGE7 | ChangeNum$ 1 | ShuffleNonMandatory$ True
+S:Mode$ ReduceCost | EffectZone$ Battlefield | ValidCard$ Card.Creature | Activator$ You | Type$ Spell | OnlyFirstSpell$ True | Amount$ 2 | Description$ The first creature spell you cast each turn costs {2} less to cast.
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conduit_of_ruin.jpg
+Oracle:When you cast Conduit of Ruin, you may search your library for a colorless creature card with converted mana cost 7 or higher and reveal it. If you do, shuffle your library, then put that card on top of it.\nThe first creature spell you cast each turn costs 2 less to cast.

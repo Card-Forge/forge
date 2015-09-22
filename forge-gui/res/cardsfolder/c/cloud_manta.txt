@@ -1,0 +1,7 @@
+Name:Cloud Manta
+ManaCost:3 U
+Types:Creature Fish
+PT:3/2
+K:Flying
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_manta.jpg
+Oracle:Flying

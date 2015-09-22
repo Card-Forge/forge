@@ -1,0 +1,9 @@
+Name:Canopy Vista
+ManaCost:no cost
+Types:Land Forest Plains
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped unless you control two or more basic lands.
+SVar:LandTapped:AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar | ConditionSVarCompare$ LE1 | References$ ETBCheckSVar | SubAbility$ MoveToPlay
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:ETBCheckSVar:Count$Valid Land.Basic+YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_vista.jpg
+Oracle:({T}: Add {G} or {W} to your mana pool.)\nCanopy Vista enters the battlefield tapped unless you control two or more basic lands.

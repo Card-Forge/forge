@@ -1,0 +1,8 @@
+Name:Beastcaller Savant
+ManaCost:1 G
+Types:Creature Elf Shaman Ally
+PT:1/1
+K:Haste
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Card.Creature | SpellDescription$ Add 1 mana of any color to your mana pool. Use this mana only to cast creature spells.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beastcaller_expert.jpg
+Oracle:Haste\n{T}: Add 1 mana of any color to your mana pool. Use this mana only to cast creature spells.

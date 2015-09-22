@@ -1,0 +1,7 @@
+Name:Hedron Archive
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | SpellDescription$ Add {2} to your mana pool.
+A:AB$ Draw | Cost$ 2 T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_archive.jpg
+Oracle:{T}: Add {2} to your mana pool.\n{2}, {T}, Sacrifice Hedron Archive: Draw two cards.
