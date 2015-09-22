@@ -53,7 +53,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Gideon Jura", "Gideon's Brawl", "Are you man enough to mess with me?");
         add("Gideon, Battle-Forged", "Gideon's First Steps", "I still have a long road ahead of me...");
         add("Gideon, Champion of Justice", "Gideon's Aftermath", "Gideon stands alone!");
-        add("Gideon, Ally of Zendikar", "Gideon's Anthem", "Let's all rally against the Eldrazi threat!");
+        add("Gideon, Ally of Zendikar", "Gideon's Anthem", "Giddy up! Let's all rally against the Eldrazi threat!");
         add("Jace Beleren", "Jace's Grind", "Nice memories... not!");
         add("Jace, Architect of Thought", "Jace's Incantation", "I like that one. I'll steal it!");
         add("Jace, Memory Adept", "Jace's Revelation", "So many things to learn!");
