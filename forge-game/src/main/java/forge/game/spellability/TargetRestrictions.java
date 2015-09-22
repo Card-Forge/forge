@@ -70,7 +70,7 @@ public class TargetRestrictions {
     private String minTargets;
     private String maxTargets;
 
-    // What's the max CMC of targeted?
+    // What's the max total CMC of targets?
     private String maxTotalCMC;
 
     // For "Divided" cards. Is this better in TargetChoices?

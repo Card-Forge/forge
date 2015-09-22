@@ -473,9 +473,6 @@ public final class CardUtil {
 
             final List<Card> choicesCopy = Lists.newArrayList(choices);
             for (final Card c : choicesCopy) {
-                if (c.getCMC() > tgt.getMaxTotalCMC(c, ability)) {
-                    choices.remove(c);
-                }
                 if (c.getCMC() > tgt.getMaxTotalCMC(c, ability) - totalCMCTargeted) {
                     choices.remove(c);
                 }
