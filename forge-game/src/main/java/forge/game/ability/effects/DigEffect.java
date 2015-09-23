@@ -73,6 +73,14 @@ public class DigEffect extends SpellAbilityEffect {
         final boolean noMove = sa.hasParam("NoMove");
         final boolean skipReorder = sa.hasParam("SkipReorder");
 
+        // A hack for cards like Explorer's Scope that need to ensure that a card is revealed to the player activating the ability
+        final boolean forceRevealToController = sa.hasParam("ForceRevealToController");
+
+        // These parameters are used to indicate that a dialog box must be show to the player asking if the player wants to proceed
+        // with an optional ability, otherwise the optional ability is skipped.
+        final boolean mayBeSkipped = sa.hasParam("PromptToSkipOptionalAbility");
+        final String optionalAbilityPrompt = sa.hasParam("OptionalAbilityPrompt") ? sa.getParam("OptionalAbilityPrompt") : "";
+
         boolean changeAll = false;
         boolean allButOne = false;
         final List<String> keywords = new ArrayList<String>();
@@ -189,24 +197,21 @@ public class DigEffect extends SpellAbilityEffect {
                         andOrCards = new CardCollection();
                     }
 
-                    if (sa.hasParam("ForcedRevealToController")) {
-                        // TODO: this parameter is used on Explorer's Scope to ensure the card is shown to the ability controller
-                        // (making this global for ChangeNum=All,NumToDig=1 causes cards like Quest for Ula's Temple to reveal the card multiple times,
-                        // but something has to be done about this to make it more universal)
+                    if (forceRevealToController) {
+                        // Force revealing the card to the player activating the ability (e.g. Explorer's Scope)
                         game.getAction().revealTo(top, player);
+                    }
+
+                    // Optional abilities that use a dialog box to prompt the user to skip the ability (e.g. Explorer's Scope, Quest for Ula's Temple)
+                    if (optional && mayBeSkipped && !valid.isEmpty()) {
+                        String prompt = !optionalAbilityPrompt.isEmpty() ? optionalAbilityPrompt : "Would you like to proceed with the optional ability for " + sa.getHostCard() + "?\n\n(" + sa.getDescription() + ")";
+                        if (!p.getController().confirmAction(sa, null, prompt)) {
+                            return;
+                        }
                     }
 
                     if (changeAll) {
                         movedCards = new CardCollection(valid);
-
-                        if (optional && !valid.isEmpty() && sa.hasParam("ShowOptionalAbilityPrompt")) {
-                            // TODO: Without ShowOptionalAbilityPrompt, ChangeAll mode with NumToDig = 1 does not give the player any confirmation request
-                            // (however, making it global for this mode causes it to appear for cards with subabilities which do not require extra
-                            // prompting, e.g. Write into Being or Quest for Ula's Temple).
-                            if (!p.getController().confirmAction(sa, null, sa.getParam("ShowOptionalAbilityPrompt"))) {
-                                return;
-                            }
-                        }
                     }
                     else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
