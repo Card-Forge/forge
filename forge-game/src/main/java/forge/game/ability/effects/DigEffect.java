@@ -189,18 +189,24 @@ public class DigEffect extends SpellAbilityEffect {
                         andOrCards = new CardCollection();
                     }
 
-                    if (!sa.hasParam("Reveal")) {
-                        // make sure at least the controller gets to see the card
+                    if (sa.hasParam("ForcedRevealToController")) {
+                        // TODO: this parameter is used on Explorer's Scope to ensure the card is shown to the ability controller
+                        // (making this global for ChangeNum=All,NumToDig=1 causes cards like Quest for Ula's Temple to reveal the card multiple times,
+                        // but something has to be done about this to make it more universal)
                         game.getAction().revealTo(top, player);
                     }
 
-                    // Optional ability
-                    String message = sa.hasParam("OptionalMessage") ? sa.getParam("OptionalMessage") : "Would you like to proceed with the optional ability for " + host.getName() + "?\n\n(" + sa.getDescription() + ")";
-                    if ( !valid.isEmpty() && sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
-                        return;
-                    
                     if (changeAll) {
                         movedCards = new CardCollection(valid);
+
+                        if (optional && !valid.isEmpty() && sa.hasParam("ShowOptionalAbilityPrompt")) {
+                            // TODO: Without ShowOptionalAbilityPrompt, ChangeAll mode with NumToDig = 1 does not give the player any confirmation request
+                            // (however, making it global for this mode causes it to appear for cards with subabilities which do not require extra
+                            // prompting, e.g. Write into Being or Quest for Ula's Temple).
+                            if (!p.getController().confirmAction(sa, null, sa.getParam("ShowOptionalAbilityPrompt"))) {
+                                return;
+                            }
+                        }
                     }
                     else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
