@@ -504,6 +504,23 @@ public class TargetRestrictions {
      * @return a List<Object>.
      */
     public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
+        return getAllCandidates(sa, isTargeted, false);
+    }
+
+    /**
+     * <p>
+     * getAllCandidates.
+     * </p>
+     * 
+     * @param sa
+     *            the sa
+     * @param isTargeted
+     *            Check Valid Candidates and Targeting
+     * @param onlyNonCard
+     *            Only return non-card (e.g. player) Candidates
+     * @return a List<Object>.
+     */
+    public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean isTargeted, final boolean onlyNonCard) {
         final Game game = sa.getActivatingPlayer().getGame();
         final List<GameEntity> candidates = Lists.newArrayList();
         for (Player player : game.getPlayers()) {
@@ -513,6 +530,10 @@ public class TargetRestrictions {
         }
 
         this.applyTargetTextChanges(sa);
+
+        if (onlyNonCard) {
+            return candidates;
+        }
 
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
         if (this.tgtZone.contains(ZoneType.Stack)) {
