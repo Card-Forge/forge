@@ -714,6 +714,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
+            if (hasParam("MaxTotalTargetCMC") && entity instanceof Card) {
+                final Card c = (Card) entity;
+                if (c.getCMC() > tr.getMaxTotalCMC(c, this)) {
+                    return false;
+                }
+            }
+
             String[] validTgt = tr.getValidTgts();
             if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, getActivatingPlayer(), getHostCard())) {
                return false;
