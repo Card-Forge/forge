@@ -40,8 +40,12 @@ public class DestroyAllAi extends SpellAbilityAi {
         
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            sa.getTargets().add(ai.getOpponent());
-            computerlist.clear();
+            if (sa.canTarget(ai.getOpponent())) {
+                sa.getTargets().add(ai.getOpponent());
+                computerlist.clear();
+            } else {
+                return false;
+            }
         }
 
         humanlist = CardLists.filter(humanlist, predicate);
