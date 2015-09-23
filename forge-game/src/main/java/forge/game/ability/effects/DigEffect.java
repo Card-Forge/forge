@@ -205,7 +205,7 @@ public class DigEffect extends SpellAbilityEffect {
                     // Optional abilities that use a dialog box to prompt the user to skip the ability (e.g. Explorer's Scope, Quest for Ula's Temple)
                     if (optional && mayBeSkipped && !valid.isEmpty()) {
                         String prompt = !optionalAbilityPrompt.isEmpty() ? optionalAbilityPrompt : "Would you like to proceed with the optional ability for " + sa.getHostCard() + "?\n\n(" + sa.getDescription() + ")";
-                        if (!p.getController().confirmAction(sa, null, prompt)) {
+                        if (!p.getController().confirmAction(sa, null, prompt.replace("CARDNAME", sa.getHostCard().getName()))) {
                             return;
                         }
                     }
