@@ -434,7 +434,12 @@ public class CountersPutAi extends SpellAbilityAi {
                 if (sa.isCurse()) {
                     choice = CountersAi.chooseCursedTarget(list, type, amount);
                 } else {
-                    choice = CountersAi.chooseBoonTarget(list, type);
+                	String txt = source.getAbilityText();
+                	if (txt != null && txt.contains("Awaken ")) {
+                		choice = ComputerUtilCard.getWorstLand(list);
+                	} else {
+                		choice = CountersAi.chooseBoonTarget(list, type);
+                	}
                 }
 
                 if (choice == null) { // can't find anything left
