@@ -1443,7 +1443,7 @@ public class CardFactoryUtil {
 
         // Count$Morbid.<True>.<False>
         if (sq[0].startsWith("Morbid")) {
-            final CardCollection res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c);
+            final CardCollection res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c, true);
             if (res.size() > 0) {
                 return doXMath(Integer.parseInt(sq[1]), m, c);
             }

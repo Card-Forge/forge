@@ -50,6 +50,8 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
     protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
+    protected final transient MapOfLists<ZoneType, Card> latestStateCardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
+    protected final transient MapOfLists<ZoneType, Card> latestStateCardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
 
     public Zone(final ZoneType zone0, Game game0) {
         zoneType = zone0;
@@ -73,11 +75,16 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public void add(final Card c, final Integer index) {
+        add(c, null, null);
+    }
+
+    public void add(final Card c, final Integer index, final Card latestState) {
         // Immutable cards are usually emblems and effects
         if (!c.isImmutable()) {
             final Zone oldZone = game.getZoneOf(c);
             final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType();
             cardsAddedThisTurn.add(zt, c);
+            latestStateCardsAddedThisTurn.add(zt, latestState != null ? latestState : c);
         }
 
         c.setTurnInZone(game.getPhaseHandler().getTurn());
@@ -157,18 +164,42 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return cardsAddedThisTurn;
     }
 
+    public final MapOfLists<ZoneType, Card> getCardsAddedThisTurn(boolean latestState) {
+        if (latestState) {
+            return latestStateCardsAddedThisTurn;
+        } else {
+            return cardsAddedThisTurn;
+        }
+    }
+    
     public final MapOfLists<ZoneType, Card> getCardsAddedLastTurn() {
         return cardsAddedLastTurn;
     }
 
+    public final MapOfLists<ZoneType, Card> getCardsAddedLastTurn(boolean latestState) {
+        if (latestState) {
+            return latestStateCardsAddedLastTurn;
+        } else {
+            return cardsAddedLastTurn;
+        }
+    }
+
     public final CardCollectionView getCardsAddedThisTurn(final ZoneType origin) {
+        return getCardsAddedThisTurn(origin, false);
+    }
+
+    public final CardCollectionView getCardsAddedThisTurn(final ZoneType origin, boolean latestState) {
         //System.out.print("Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
-        return getCardsAdded(cardsAddedThisTurn, origin);
+        return getCardsAdded(latestState ? latestStateCardsAddedThisTurn : cardsAddedThisTurn, origin);
     }
 
     public final CardCollectionView getCardsAddedLastTurn(final ZoneType origin) {
+        return getCardsAddedLastTurn(origin, false);
+    }
+
+    public final CardCollectionView getCardsAddedLastTurn(final ZoneType origin, boolean latestState) {
         //System.out.print("Last turn - Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
-        return getCardsAdded(cardsAddedLastTurn, origin);
+        return getCardsAdded(latestState ? latestStateCardsAddedLastTurn : cardsAddedLastTurn, origin);
     }
 
     private static CardCollectionView getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
@@ -187,10 +218,15 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     public final void resetCardsAddedThisTurn() {
         cardsAddedLastTurn.clear();
+        latestStateCardsAddedLastTurn.clear();
         for (final Entry<ZoneType, Collection<Card>> entry : cardsAddedThisTurn.entrySet()) {
             cardsAddedLastTurn.addAll(entry.getKey(), entry.getValue());
         }
+        for (final Entry<ZoneType, Collection<Card>> entry : latestStateCardsAddedThisTurn.entrySet()) {
+            latestStateCardsAddedLastTurn.addAll(entry.getKey(), entry.getValue());
+        }
         cardsAddedThisTurn.clear();
+        latestStateCardsAddedThisTurn.clear();
     }
 
     @Override
