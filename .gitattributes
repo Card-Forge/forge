@@ -17293,6 +17293,7 @@ forge-gui/res/quest/precons/Bound[!!-~]by[!!-~]Strength.dck -text
 forge-gui/res/quest/precons/Brave[!!-~]the[!!-~]Battle.dck -text
 forge-gui/res/quest/precons/Breath[!!-~]of[!!-~]Fire.dck -text
 forge-gui/res/quest/precons/Brute[!!-~]Force.dck -text
+forge-gui/res/quest/precons/Call[!!-~]of[!!-~]Blood.dck -text
 forge-gui/res/quest/precons/Carnival[!!-~]of[!!-~]Blood.dck -text
 forge-gui/res/quest/precons/Cho-Manno's[!!-~]Resolve.dck -text
 forge-gui/res/quest/precons/Code[!!-~]of[!!-~]the[!!-~]Orzhov.dck -text
@@ -17324,6 +17325,7 @@ forge-gui/res/quest/precons/Disrupter.dck -text
 forge-gui/res/quest/precons/Domain.dck -text
 forge-gui/res/quest/precons/Doom[!!-~]Inevitable.dck -text
 forge-gui/res/quest/precons/Eldrazi[!!-~]Arisen.dck -text
+forge-gui/res/quest/precons/Eldrazi[!!-~]Assault.dck -text
 forge-gui/res/quest/precons/Eldritch[!!-~]Onslaught.dck -text
 forge-gui/res/quest/precons/Elementals[!!-~]Path.dck -text
 forge-gui/res/quest/precons/Elvish[!!-~]Predation.dck -text
@@ -17426,6 +17428,7 @@ forge-gui/res/quest/precons/Pumped[!!-~]Up.dck -text
 forge-gui/res/quest/precons/Radiant's[!!-~]Revenge.dck -text
 forge-gui/res/quest/precons/Rakdos[!!-~]Bloodsport.dck -text
 forge-gui/res/quest/precons/Rakdos[!!-~]Raid.dck -text
+forge-gui/res/quest/precons/Rallying[!!-~]Cry.dck -text
 forge-gui/res/quest/precons/Rapid[!!-~]Fire.dck -text
 forge-gui/res/quest/precons/Rat's[!!-~]Nest.dck -text
 forge-gui/res/quest/precons/Ravaging[!!-~]Swarm.dck -text
@@ -17496,6 +17499,7 @@ forge-gui/res/quest/precons/Wicked[!!-~]Big.dck -text
 forge-gui/res/quest/precons/Wild[!!-~]Rush.dck -text
 forge-gui/res/quest/precons/Will[!!-~]Of[!!-~]The[!!-~]Masses.dck -text
 forge-gui/res/quest/precons/World[!!-~]Aflame.dck -text
+forge-gui/res/quest/precons/Zendikar's[!!-~]Rage.dck -text
 forge-gui/res/quest/precons/Zombies[!!-~]Unleashed.dck -text
 forge-gui/res/quest/themes/-1[!!-~]-1[!!-~]Counters[!!-~]BG.thm -text
 forge-gui/res/quest/themes/Anti[!!-~]Black[!!-~]WB.thm -text
