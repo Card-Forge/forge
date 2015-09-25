@@ -10690,6 +10690,7 @@ forge-gui/res/cardsfolder/p/path_of_peace.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/path_to_exile.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pathbreaker_wurm.txt -text
 forge-gui/res/cardsfolder/p/pathrazer_of_ulamog.txt -text
+forge-gui/res/cardsfolder/p/pathway_arrows.txt -text
 forge-gui/res/cardsfolder/p/patriarchs_bidding.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/patriarchs_desire.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/p/patricians_scorn.txt -text svneol=unset#text/plain
