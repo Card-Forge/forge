@@ -3,9 +3,6 @@ ManaCost:7
 Types:Creature Eldrazi Processor
 PT:7/8
 T:Mode$ SpellCast | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigHerd | TriggerDescription$ When you cast CARDNAME, you may put a card an opponent owns from exile into that player's graveyard. If you do, you gain 5 life.
-SVar:TrigHerd:DB$ ChooseCard | ChoiceZone$ Exile | Choices$ Card.OppOwn | Amount$ 1 | RememberChosen$ True | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Graveyard | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 5 | ConditionDefined$ Remembered | ConditionPresent$ Card.IsRemembered | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+SVar:TrigHerd:AB$ GainLife | Cost$ ExiledMoveToGrave<1/Card.OppOwn/card an opponent owns> | Defined$ You | LifeAmount$ 5
 http://www.wizards.com/global/images/magic/general/ruin_processor.jpg
 Oracle:When you cast Ruin Processor, you may put a card an opponent owns from exile into that player's graveyard. If you do, you gain 5 life.
