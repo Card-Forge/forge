@@ -4,7 +4,7 @@ Types:Creature Vampire
 PT:3/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl+HasSubtype Swamp | TriggerZones$ Battlefield | Execute$ TrigPumpAll2 | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, other creatures you control get +1/+0 until end of turn. If that land is a Swamp, those creatures get +2/+0 until end of turn instead.
-T:Mode$ ChangesZone | Secondary$ True | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl+HasNoSubtype Swamp | Execute$ TrigPumpAll | TriggerDescription$ Landfall - Whenever a land enters the battlefield, other creatures you control get +1/+0 until end of turn.
+T:Mode$ ChangesZone | Secondary$ True | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl+HasNoSubtype Swamp | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Landfall - Whenever a land enters the battlefield, other creatures you control get +1/+0 until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Other+YouCtrl | NumAtt$ 1
 SVar:TrigPumpAll2:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Other+YouCtrl | NumAtt$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guul_draz_overseer.jpg
