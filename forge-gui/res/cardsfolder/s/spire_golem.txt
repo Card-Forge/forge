@@ -5,5 +5,6 @@ PT:2/4
 K:Flying
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for Islands (This spell costs {1} less to cast for each Island you control.)
 SVar:X:Count$Valid Island.YouCtrl
+DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_golem.jpg
 Oracle:Affinity for Islands (This spell costs {1} less to cast for each Island you control.)\nFlying
