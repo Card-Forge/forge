@@ -2319,6 +2319,7 @@ forge-gui/res/cardsfolder/b/bamboozle.txt -text
 forge-gui/res/cardsfolder/b/bandage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bane_alley_blackguard.txt -text
 forge-gui/res/cardsfolder/b/bane_alley_broker.txt -text
+forge-gui/res/cardsfolder/b/bane_of_bala_ged.txt -text
 forge-gui/res/cardsfolder/b/bane_of_progress.txt -text
 forge-gui/res/cardsfolder/b/bane_of_the_living.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/banefire.txt -text
