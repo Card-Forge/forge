@@ -453,7 +453,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (list.size() < c) {
             return null;
         }
-        final CardCollection choice = controller.getGame().getCardList(controller.getGui().many("Choose an exiled card to put into graveyard", "To graveyard", c, CardView.getCollection(list), CardView.get(source)));
+        Integer min = c;
+        if (ability.isOptionalTrigger()) {
+            min = 0;
+        }
+        final CardCollection choice = controller.getGame().getCardList(controller.getGui().many("Choose an exiled card to put into graveyard", "To graveyard", min, c, CardView.getCollection(list), CardView.get(source)));
+        
+        if (choice == null || choice.size() < c) {
+            return null;
+        }
         return PaymentDecision.card(choice);
     }
 
