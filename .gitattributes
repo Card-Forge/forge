@@ -1674,6 +1674,7 @@ forge-gui/res/cardsfolder/a/alhammarrets_archive.txt -text
 forge-gui/res/cardsfolder/a/ali_baba.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/ali_from_cairo.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/alibans_tower.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/aligned_hedron_network.txt -text
 forge-gui/res/cardsfolder/a/alive_well.txt -text
 forge-gui/res/cardsfolder/a/all_hallows_eve.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/all_in_good_time.txt -text
