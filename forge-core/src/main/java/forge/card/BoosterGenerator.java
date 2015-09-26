@@ -90,6 +90,8 @@ public class BoosterGenerator {
 
             if (foilInThisSlot && !foilAtEndOfPack) {
                 if (!extraFoilSheetKey.isEmpty()) {
+                    // TODO: extra foil sheets are currently reliably supported only for boosters with FoilAlwaysInCommonSlot=True.
+                    // If FoilAlwaysInCommonSlot is false, a card from the extra sheet may still replace a card in any slot.
                     List<PaperCard> foilCards = new ArrayList<>();
                     for (PaperCard card : ps.toFlatList()) {
                         if (!foilCards.contains(card)) {
