@@ -55,28 +55,26 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 FSkin.changeSkin(newValue);
             }
         }, 0);
-        if (Forge.getDeviceAdapter().isTablet()) { //only offer landscape option on tablets
-            lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
-                    "Landscape Mode",
-                    "Use landscape (horizontal) orientation for app instead of portrait (vertical).") {
-                        @Override
-                        public void select() {
-                            super.select();
-                            boolean landscapeMode = FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE);
-                            Forge.getDeviceAdapter().setLandscapeMode(landscapeMode); //ensure device able to save off ini file so landscape change takes effect
-                            if (Forge.isLandscapeMode() != landscapeMode) {
-                                FOptionPane.showConfirmDialog("You must restart Forge for this change to take effect.", "Restart Forge", "Restart", "Later", new Callback<Boolean>() {
-                                    @Override
-                                    public void run(Boolean result) {
-                                        if (result) {
-                                            Forge.restart(true);
-                                        }
+        lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
+                "Landscape Mode",
+                "Use landscape (horizontal) orientation for app instead of portrait (vertical).") {
+                    @Override
+                    public void select() {
+                        super.select();
+                        boolean landscapeMode = FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE);
+                        Forge.getDeviceAdapter().setLandscapeMode(landscapeMode); //ensure device able to save off ini file so landscape change takes effect
+                        if (Forge.isLandscapeMode() != landscapeMode) {
+                            FOptionPane.showConfirmDialog("You must restart Forge for this change to take effect.", "Restart Forge", "Restart", "Later", new Callback<Boolean>() {
+                                @Override
+                                public void run(Boolean result) {
+                                    if (result) {
+                                        Forge.restart(true);
                                     }
-                                });
-                            }
+                                }
+                            });
                         }
-                    }, 0);
-        }
+                    }
+                }, 0);
 
         //Gameplay Options
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
