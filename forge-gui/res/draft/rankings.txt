@@ -1,4 +1,259 @@
 //Rank|Name|Rarity|Set
+#1|Quarantine Field|M|BFZ
+#2|Ulamog, the Ceaseless Hunger|M|BFZ
+#3|Omnath, Locus of Rage|M|BFZ
+#4|BFZwarden of Murasa|M|BFZ
+#5|Gideon, Ally of Zendikar|M|BFZ
+#6|Drana, Liberator of Malakir|M|BFZ
+#7|Ob Nixilis Reignited|M|BFZ
+#8|Kiora, Master of the Depths|M|BFZ
+#9|Dragonmaster Outcast|M|BFZ
+#10|Sire of Stagnation|M|BFZ
+#11|Void Winnower|M|BFZ
+#12|Oblivion Sower|M|BFZ
+#13|Undergrowth Champion|M|BFZ
+#14|Akoum Firebird|M|BFZ
+#15|Desolation Twin|R|BFZ
+#16|Ruinous Path|R|BFZ
+#17|Brood Butcher|R|BFZ
+#18|Planar Outburst|R|BFZ
+#19|Conduit of Ruin|R|BFZ
+#20|Hero of Goma Fada|R|BFZ
+#21|Drowner of Hope|R|BFZ
+#22|Lantern Scout|R|BFZ
+#23|Barrage Tyrant|R|BFZ
+#24|Blight Herder|R|BFZ
+#25|Veteran Warleader|R|BFZ
+#26|Noyan Dar, Roil Shaper|R|BFZ
+#27|Felidar Sovereign|R|BFZ
+#28|Munda, Ambush Leader|R|BFZ
+#29|Akoum Hellkite|R|BFZ
+#30|Emeria Shepherd|R|BFZ
+#31|Woodland Wanderer|R|BFZ
+#32|Serpentine Spike|R|BFZ
+#33|Guardian of Tazeem|R|BFZ
+#34|Smothering Abomination|R|BFZ
+#35|Angelic Captain|R|BFZ
+#36|Part the Waterveil|M|BFZ
+#37|Endless One|R|BFZ
+#38|Brutal Expulsion|R|BFZ
+#39|Fathom Feeder|R|BFZ
+#40|Dust Stalker|R|BFZ
+#41|Guul Draz Overseer|R|BFZ
+#42|From Beyond|R|BFZ
+#43|March from the Tomb|R|BFZ
+#44|Radiant Flames|R|BFZ
+#45|Wasteland Strangler|R|BFZ
+#46|Oran-Rief Hydra|R|BFZ
+#47|Stasis Snare|U|BFZ
+#48|Beastcaller Savant|R|BFZ
+#49|Rolling Thunder|U|BFZ
+#50|Zada, Hedron Grinder|R|BFZ
+#51|Lumbering Falls|R|BFZ
+#52|Grip of Desolation|U|BFZ
+#53|Defiant Bloodlord|R|BFZ
+#54|Ugin's Insight|R|BFZ
+#55|Shambling Vent|R|BFZ
+#56|Bane of Bala Ged|U|BFZ
+#57|Gruesome Slaughter|R|BFZ
+#58|Ally Encampment|R|BFZ
+#59|Brood Monitor|U|BFZ
+#60|Smoldering Marsh|R|BFZ
+#61|Nissa's Renewal|R|BFZ
+#62|Scatter to the Winds|R|BFZ
+#63|Exert Influence|R|BFZ
+#64|Canopy Vista|R|BFZ
+#65|Sunken Hollow|R|BFZ
+#66|Cinder Glade|R|BFZ
+#67|Kor Bladewhirl|U|BFZ
+#68|Tajuru Warcaller|U|BFZ
+#69|Aligned Hedron Network|R|BFZ
+#70|Drana's Emissary|U|BFZ
+#71|Painful Truths|R|BFZ
+#72|Prairie Stream|R|BFZ
+#73|Breaker of Armies|U|BFZ
+#74|Resolute Blademaster|U|BFZ
+#75|Angel of Renewal|U|BFZ
+#76|Kor Entanglers|U|BFZ
+#77|Roil's Retribution|U|BFZ
+#78|Ruination Guide|U|BFZ
+#79|Retreat to Emeria|U|BFZ
+#80|Carrier Thrall|U|BFZ
+#81|Plated Crusher|U|BFZ
+#82|Serene Steward|U|BFZ
+#83|Malakir Familiar|U|BFZ
+#84|Hedron Archive|U|BFZ
+#85|Roil Spout|U|BFZ
+#86|Catacomb Sifter|U|BFZ
+#87|Firemantle Mage|U|BFZ
+#88|Deathless Behemoth|U|BFZ
+#89|Vile Aggregate|U|BFZ
+#90|Rising Miasma|U|BFZ
+#91|Grove Rumbler|U|BFZ
+#92|Tunneling Geopede|U|BFZ
+#93|Grovetender Druids|U|BFZ
+#94|Bloodbond Vampire|U|BFZ
+#95|Herald of Kozilek|U|BFZ
+#96|Bring to Light|R|BFZ
+#97|Sanctum of Ugin|R|BFZ
+#98|Titan's Presence|U|BFZ
+#99|Void Attendant|U|BFZ
+#100|Windrider Patrol|U|BFZ
+#101|Turn Against|U|BFZ
+#102|Retreat to Kazandu|U|BFZ
+#103|Ulamog's Despoiler|U|BFZ
+#104|Skyrider Elf|U|BFZ
+#105|Sheer Drop|C|BFZ
+#106|Halimar Tidecaller|U|BFZ
+#107|Touch of the Void|C|BFZ
+#108|Gideon's Reproach|C|BFZ
+#109|Zulaport Cutthroat|U|BFZ
+#110|Shrine of the Forsaken Gods|R|BFZ
+#111|Eldrazi Skyspawner|C|BFZ
+#112|Tide Drifter|U|BFZ
+#113|Coastal Discovery|U|BFZ
+#114|Ulamog's Nullifier|U|BFZ
+#115|Lifespring Druid|C|BFZ
+#116|Ondu Rising|U|BFZ
+#117|Chasm Guide|U|BFZ
+#118|Ulamog's Reclaimer|U|BFZ
+#119|Expedition Envoy|U|BFZ
+#120|Spawning Bed|U|BFZ
+#121|Akoum Stonewaker|U|BFZ
+#122|Complete Disregard|C|BFZ
+#123|Forerunner of Slaughter|U|BFZ
+#124|Rot Shambler|U|BFZ
+#125|Adverse Conditions|U|BFZ
+#126|Hagra Sharpshooter|U|BFZ
+#127|Scythe Leopard|U|BFZ
+#128|Blighted Fen|U|BFZ
+#129|Skitterskin|U|BFZ
+#130|Blighted Woodland|U|BFZ
+#131|Retreat to Hagra|U|BFZ
+#132|Unified Front|U|BFZ
+#133|Evolving Wilds|C|BFZ
+#134|Benthic Infiltrator|C|BFZ
+#135|Horribly Awry|U|BFZ
+#136|Eyeless Watcher|C|BFZ
+#137|Dominator Drone|C|BFZ
+#138|Murasa Ranger|U|BFZ
+#139|Kozilek's Channeler|C|BFZ
+#140|Unnatural Aggression|C|BFZ
+#141|Demon's Grasp|C|BFZ
+#142|Kor Castigator|C|BFZ
+#143|Encircling Fissure|U|BFZ
+#144|Processor Assault|U|BFZ
+#145|Nettle Drone|C|BFZ
+#146|Clutch of Currents|C|BFZ
+#147|Smite the Monstrous|C|BFZ
+#148|Pilgrim's Eye|U|BFZ
+#149|Makindi Patrol|C|BFZ
+#150|Mist Intruder|C|BFZ
+#151|Culling Drone|C|BFZ
+#152|Snapping Gnarlid|C|BFZ
+#153|Transgress the Mind|U|BFZ
+#154|Vestige of Emrakul|C|BFZ
+#155|Call the Scions|C|BFZ
+#156|Murk Strider|C|BFZ
+#157|Retreat to Coralhelm|U|BFZ
+#158|Eldrazi Devastator|C|BFZ
+#159|Incubator Drone|C|BFZ
+#160|Tajuru Stalwart|C|BFZ
+#161|Kalastria Healer|C|BFZ
+#162|Natural Connection|C|BFZ
+#163|Makindi Sliderunner|C|BFZ
+#164|Silent Skimmer|C|BFZ
+#165|Bone Splinters|C|BFZ
+#166|Kozilek's Sentinel|C|BFZ
+#167|Outnumber|C|BFZ
+#168|Valakut Predator|C|BFZ
+#169|Sylvan Scrying|U|BFZ
+#170|Molten Nursery|U|BFZ
+#171|Ruin Processor|C|BFZ
+#172|Belligerent Whiptail|C|BFZ
+#173|Courier Griffin|C|BFZ
+#174|Territorial Baloth|C|BFZ
+#175|Ondu Champion|C|BFZ
+#176|Shatterskull Recruit|C|BFZ
+#177|Stonefury|C|BFZ
+#178|Cryptic Cruiser|U|BFZ
+#179|Slab Hammer|U|BFZ
+#180|Grave Birthing|C|BFZ
+#181|Lithomancer's Focus|C|BFZ
+#182|Tajuru Beastmaster|C|BFZ
+#183|Tandem Tactics|C|BFZ
+#184|Swell of Growth|C|BFZ
+#185|Oran-Rief Invoker|C|BFZ
+#186|Scour from Existence|C|BFZ
+#187|Blisterpod|C|BFZ
+#188|Spell Shrivel|C|BFZ
+#189|Giant Mantis|C|BFZ
+#190|Blighted Cataract|U|BFZ
+#191|Dampening Pulse|U|BFZ
+#192|Shadow Glider|C|BFZ
+#193|Ondu Greathorn|C|BFZ
+#194|Cloud Manta|C|BFZ
+#195|Coralhelm Guide|C|BFZ
+#196|Oracle of Dust|C|BFZ
+#197|Felidar Cub|C|BFZ
+#198|Salvage Drone|C|BFZ
+#199|Broodhunter Wurm|C|BFZ
+#200|Kalastria Nightwatch|C|BFZ
+#201|Mind Raker|C|BFZ
+#202|Nirkana Assassin|C|BFZ
+#203|Ghostly Sentinel|C|BFZ
+#204|Sure Strike|C|BFZ
+#205|Valakut Invoker|C|BFZ
+#206|Rush of Ice|C|BFZ
+#207|Tightening Coils|C|BFZ
+#208|Reckless Cohort|C|BFZ
+#209|Cliffside Lookout|C|BFZ
+#210|Anticipate|C|BFZ
+#211|Earthen Arms|C|BFZ
+#212|Stone Haven Medic|C|BFZ
+#213|Vampiric Rites|U|BFZ
+#214|Inspired Charge|C|BFZ
+#215|Sludge Crawler|C|BFZ
+#216|Swarm Surge|C|BFZ
+#217|Fertile Thicket|C|BFZ
+#218|Mortuary Mire|C|BFZ
+#219|Seek the Wilds|C|BFZ
+#220|Boiling Earth|C|BFZ
+#221|Blighted Gorge|U|BFZ
+#222|Retreat to Valakut|U|BFZ
+#223|Wave-Wing Elemental|C|BFZ
+#224|Voracious Null|C|BFZ
+#225|Jaddi Offshoot|U|BFZ
+#226|Angelic Gift|C|BFZ
+#227|Geyserfield Stalker|C|BFZ
+#228|Skyline Cascade|C|BFZ
+#229|Plummet|C|BFZ
+#230|Sandstone Bridge|C|BFZ
+#231|Altar's Reap|C|BFZ
+#232|Reclaiming Vines|C|BFZ
+#233|Lavastep Raider|C|BFZ
+#234|Fortified Rampart|C|BFZ
+#235|Infuse with the Elements|U|BFZ
+#236|Looming Spires|C|BFZ
+#237|Mire's Malice|C|BFZ
+#238|Dutiful Return|C|BFZ
+#239|Kitesail Scout|C|BFZ
+#240|Hedron Blade|C|BFZ
+#241|Goblin War Paint|C|BFZ
+#242|Volcanic Upheaval|C|BFZ
+#243|Pathway Arrows|U|BFZ
+#244|Dispel|C|BFZ
+#245|Roilmage's Trick|C|BFZ
+#246|Brilliant Spectrum|C|BFZ
+#247|Prism Array|R|BFZ
+#248|Crumble to Dust|U|BFZ
+#249|Blighted Steppe|U|BFZ
+#250|Mountain|L|BFZ
+#251|Island|L|BFZ
+#252|Forest|L|BFZ
+#253|Plains|L|BFZ
+#254|Swamp|L|BFZ
+//Rank|Name|Rarity|Set
 #1|Archangel of Tithes|M|ORI
 #2|Woodland Bellower|M|ORI
 #3|Avaricious Dragon|M|ORI
