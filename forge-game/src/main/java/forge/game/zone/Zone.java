@@ -185,7 +185,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public final CardCollectionView getCardsAddedThisTurn(final ZoneType origin) {
-        return getCardsAddedThisTurn(origin, false);
+        return getCardsAddedThisTurn(origin, true);
     }
 
     public final CardCollectionView getCardsAddedThisTurn(final ZoneType origin, boolean latestState) {
@@ -194,7 +194,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public final CardCollectionView getCardsAddedLastTurn(final ZoneType origin) {
-        return getCardsAddedLastTurn(origin, false);
+        return getCardsAddedLastTurn(origin, true);
     }
 
     public final CardCollectionView getCardsAddedLastTurn(final ZoneType origin, boolean latestState) {
