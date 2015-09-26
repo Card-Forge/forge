@@ -110,11 +110,11 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             .icon(FSkin.getIcon(FSkinProp.ICO_MINUS))
             .iconScaleAuto(false).hoverable().build();
 
-    private final FLabel btnCycleSection = new FLabel.Builder()
+    private final FLabel btnAddBasicLands = new FLabel.Builder()
             .fontSize(14)
-            .text("Change Section")
-            .tooltip("Toggle between editing the deck and the sideboard/planar/scheme/vanguard parts of this deck")
-            .icon(FSkin.getIcon(FSkinProp.ICO_EDIT))
+            .text("Add Basic Lands")
+            .tooltip("Add basic lands to the deck")
+            .icon(FSkin.getImage(FSkinProp.IMG_LAND, 18, 18))
             .iconScaleAuto(false).hoverable().build();
 
     protected ACEditorBase(final FScreen screen0, final CDetailPicture cDetailPicture) {
@@ -299,9 +299,14 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 4);
             }
         });
+        btnAddBasicLands.setCommand(new UiCommand() {
+            @Override public void run() {
+                
+            }
+        });
         itemManager.getPnlButtons().add(btnRemove, "w 30%!, h 30px!, gapx 5");
         itemManager.getPnlButtons().add(btnRemove4, "w 30%!, h 30px!, gapx 5");
-        itemManager.getPnlButtons().add(btnCycleSection, "w 30%!, h 30px!, gapx 5");
+        itemManager.getPnlButtons().add(btnAddBasicLands, "w 30%!, h 30px!, gapx 5");
     }
 
     /**
@@ -393,7 +398,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FLabel getBtnAdd4()    { return btnAdd4; }
     public FLabel getBtnRemove()  { return btnRemove; }
     public FLabel getBtnRemove4() { return btnRemove4; }
-    public FLabel getBtnCycleSection() { return btnCycleSection; }
+    public FLabel getBtnAddBasicLands() { return btnAddBasicLands; }
+    public FLabel getBtnCycleSection() { return deckManager.getBtnCycleSection(); }
 
     public ContextMenuBuilder createContextMenuBuilder(final boolean isAddContextMenu0) {
         return new EditorContextMenuBuilder(isAddContextMenu0);
