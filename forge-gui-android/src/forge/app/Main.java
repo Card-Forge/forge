@@ -3,11 +3,14 @@ package forge.app;
 import java.io.File;
 import java.util.concurrent.Callable;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -149,11 +152,28 @@ public class Main extends AndroidApplication {
 
         @Override
         public void restart() {
-            // Replace the current task with a new one for this
-            final Intent restart = new Intent(Main.this, Main.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK // CLEAR_TASK requires this
-                            | Intent.FLAG_ACTIVITY_CLEAR_TASK); // finish everything else in the task
-            startActivity(restart);
+            try { //solution from http://stackoverflow.com/questions/6609414/howto-programatically-restart-android-app
+                Context c = getApplicationContext();
+                PackageManager pm = c.getPackageManager();
+                if (pm != null) {
+                    //create the intent with the default start activity for your application
+                    Intent mStartActivity = pm.getLaunchIntentForPackage(c.getPackageName());
+                    if (mStartActivity != null) {
+                        mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        //create a pending intent so the application is restarted after System.exit(0) was called. 
+                        // We use an AlarmManager to call this intent in 100ms
+                        int mPendingIntentId = 223344;
+                        PendingIntent mPendingIntent = PendingIntent.getActivity(c, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                        AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+                        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                        //kill the application
+                        System.exit(0);
+                    }
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -161,7 +181,7 @@ public class Main extends AndroidApplication {
             // Replace the current task with one that is excluded from the recent
             // apps and that will finish itself immediately. It's critical that this
             // activity get launched in the task that you want to hide.
-            final Intent relaunch = new Intent(Main.this, Exiter.class)
+            final Intent relaunch = new Intent(getApplicationContext(), Exiter.class)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK // CLEAR_TASK requires this
                             | Intent.FLAG_ACTIVITY_CLEAR_TASK // finish everything else in the task
                             | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS); // hide (remove, in this case) task from recents
