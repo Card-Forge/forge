@@ -16716,6 +16716,7 @@ forge-gui/res/editions/Vintage[!!-~]Masters.txt -text
 forge-gui/res/editions/Visions.txt -text
 forge-gui/res/editions/Weatherlight.txt -text
 forge-gui/res/editions/Worldwake.txt -text
+forge-gui/res/editions/Zendikar[!!-~]Expeditions.txt -text
 forge-gui/res/editions/Zendikar.txt -text
 forge-gui/res/effects/lightning.gif -text
 forge-gui/res/howto.txt svneol=native#text/plain

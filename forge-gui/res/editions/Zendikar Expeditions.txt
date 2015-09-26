@@ -1,0 +1,32 @@
+[metadata]
+Code=EXP
+Date=2015-10-02
+Name=Zendikar Expeditions
+Type=Other
+
+[cards]
+M Prairie Stream
+M Sunken Hollow
+M Smoldering Marsh
+M Cinder Glade
+M Canopy Vista
+M Hallowed Fountain
+M Watery Grave
+M Blood Crypt
+M Stomping Ground
+M Temple Garden
+M Godless Shrine
+M Steam Vents
+M Overgrown Tomb
+M Sacred Foundry
+M Breeding Pool
+M Flooded Strand
+M Polluted Delta
+M Bloodstained Mire
+M Wooded Foothills
+M Windswept Heath
+M Marsh Flats
+M Scalding Tarn
+M Verdant Catacombs
+M Arid Mesa
+M Misty Rainforest
