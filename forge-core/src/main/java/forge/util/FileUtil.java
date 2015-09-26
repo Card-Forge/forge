@@ -98,6 +98,17 @@ public final class FileUtil {
         return dir.delete();
     }
 
+    public static boolean deleteFile(String filename) {
+        try {
+            File file = new File(filename);
+            return file.delete();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static void copyFile(String sourceFilename, String destFilename) {
         File source = new File(sourceFilename);
         if (!source.exists()) { return; } //if source doesn't exist, nothing to copy

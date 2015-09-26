@@ -31,9 +31,6 @@ public class Main extends AndroidApplication {
 
         AndroidAdapter adapter = new AndroidAdapter(this.getContext());
 
-        //enforce orientation based on whether device is a tablet
-        adapter.setLandscapeMode(adapter.isTablet);
-
         //establish assets directory
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             Gdx.app.error("Forge", "Can't access external storage");
@@ -45,6 +42,16 @@ public class Main extends AndroidApplication {
             Gdx.app.error("Forge", "Can't access external storage");
             adapter.exit();
             return;
+        }
+
+        //enforce orientation based on whether device is a tablet and user preference
+        adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
+        boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
+        if (landscapeMode) {
+            Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+        else {
+            Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
         initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir));
@@ -87,6 +94,7 @@ public class Main extends AndroidApplication {
     private class AndroidAdapter implements IDeviceAdapter {
         private final boolean isTablet;
         private final ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        private String switchOrientationFile;
 
         private AndroidAdapter(Context context) {
             isTablet = (context.getResources().getConfiguration().screenLayout
@@ -167,11 +175,12 @@ public class Main extends AndroidApplication {
 
         @Override
         public void setLandscapeMode(boolean landscapeMode) {
-            if (landscapeMode) {
-                Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            //create file to indicate that portrait mode should be used for tablet or landscape should be used for phone
+            if (landscapeMode != isTablet) {
+                FileUtil.writeFile(switchOrientationFile, "1");
             }
             else {
-                Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                FileUtil.deleteFile(switchOrientationFile);
             }
         }
     }

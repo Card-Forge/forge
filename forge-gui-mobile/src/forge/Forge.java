@@ -121,8 +121,15 @@ public class Forge implements ApplicationListener {
         openScreen(HomeScreen.instance);
         splashScreen = null;
 
-        if (isLandscapeMode()) { //open preferred new game screen by default if landscape mode
+        boolean isLandscapeMode = isLandscapeMode();
+        if (isLandscapeMode) { //open preferred new game screen by default if landscape mode
             NewGameMenu.getPreferredScreen().open();
+        }
+
+        //update landscape mode preference if it doesn't match what the app loaded as
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode) {
+            FModel.getPreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode);
+            FModel.getPreferences().save();
         }
     }
 

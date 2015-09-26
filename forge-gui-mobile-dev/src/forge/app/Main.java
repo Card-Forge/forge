@@ -3,6 +3,7 @@ package forge.app;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
@@ -21,11 +22,22 @@ public class Main {
             FileUtil.ensureDirectoryExists(assetsDir);
         }
 
-        new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(),
-                assetsDir), "Forge", Utils.DEV_SCREEN_WIDTH, Utils.DEV_SCREEN_HEIGHT);
+        String switchOrientationFile = assetsDir + "switch_orientation.ini";
+        boolean landscapeMode = FileUtil.doesFileExist(switchOrientationFile);
+        int screenWidth = landscapeMode ? (int)(Utils.BASE_HEIGHT * 16 / 9) : (int)Utils.BASE_WIDTH;
+        int screenHeight = (int)Utils.BASE_HEIGHT;
+
+        new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(switchOrientationFile),
+                assetsDir), "Forge", screenWidth, screenHeight);
     }
 
     private static class DesktopAdapter implements IDeviceAdapter {
+        private final String switchOrientationFile;
+
+        private DesktopAdapter(String switchOrientationFile0) {
+            switchOrientationFile = switchOrientationFile0;
+        }
+
         //just assume desktop always connected to wifi
         @Override
         public boolean isConnectedToInternet() {
@@ -73,7 +85,13 @@ public class Main {
 
         @Override
         public void setLandscapeMode(boolean landscapeMode) {
-            //TODO: Consider supporting toggling this on desktop for testing
+            //create file to indicate that landscape mode should be used
+            if (landscapeMode) {
+                FileUtil.writeFile(switchOrientationFile, "1");
+            }
+            else {
+                FileUtil.deleteFile(switchOrientationFile);
+            }
         }
     }
 }

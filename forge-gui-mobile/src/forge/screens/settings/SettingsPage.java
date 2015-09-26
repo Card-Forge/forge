@@ -62,7 +62,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         @Override
                         public void select() {
                             super.select();
-                            if (Forge.isLandscapeMode() != FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE)) {
+                            boolean landscapeMode = FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE);
+                            Forge.getDeviceAdapter().setLandscapeMode(landscapeMode); //ensure device able to save off ini file so landscape change takes effect
+                            if (Forge.isLandscapeMode() != landscapeMode) {
                                 FOptionPane.showConfirmDialog("You must restart Forge for this change to take effect.", "Restart Forge", "Restart", "Later", new Callback<Boolean>() {
                                     @Override
                                     public void run(Boolean result) {
