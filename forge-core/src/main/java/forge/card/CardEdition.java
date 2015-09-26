@@ -105,6 +105,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private FoilType foilType = FoilType.NOT_SUPPORTED;
     private double foilChanceInBooster = 0;
     private boolean foilAlwaysInCommonSlot = false;
+    private String additionalSheetForFoils = "";
     private final CardInSet[] cards;
 
 
@@ -157,6 +158,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public FoilType getFoilType() { return foilType; }
     public double getFoilChanceInBooster() { return foilChanceInBooster; }
     public boolean getFoilAlwaysInCommonSlot() { return foilAlwaysInCommonSlot; }
+    public String getAdditionalSheetForFoils() { return additionalSheetForFoils; }
     public CardInSet[] getCards() { return cards; }
 
     /** The Constant fnGetName. */
@@ -290,6 +292,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
             res.foilChanceInBooster = section.getDouble("FoilChanceInBooster", 21.43F) / 100.0F;
             res.foilAlwaysInCommonSlot = section.getBoolean("FoilAlwaysInCommonSlot", true);
+
+            res.additionalSheetForFoils = section.get("AdditionalSheetForFoils", "");
 
             return res;
         }

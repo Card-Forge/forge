@@ -70,6 +70,7 @@ public class BoosterGenerator {
         boolean hasFoil = edition != null && !template.getSlots().isEmpty() && MyRandom.getRandom().nextDouble() < edition.getFoilChanceInBooster() && edition.getFoilType() != FoilType.NOT_SUPPORTED;
         boolean foilAtEndOfPack = hasFoil && edition.getFoilAlwaysInCommonSlot();
         String foilSlot = !hasFoil ? null : foilAtEndOfPack ? BoosterSlots.COMMON : Aggregates.random(template.getSlots()).getKey();
+        String extraFoilSheetKey = edition != null ? edition.getAdditionalSheetForFoils() : "";
 
         for(Pair<String, Integer> slot : template.getSlots()) {
             String slotType = slot.getLeft(); // add expansion symbol here?
@@ -88,7 +89,18 @@ public class BoosterGenerator {
             sheetsUsed.add(ps);
 
             if (foilInThisSlot && !foilAtEndOfPack) {
-                result.add(generateFoilCard(ps));
+                if (!extraFoilSheetKey.isEmpty()) {
+                    List<PaperCard> foilCards = new ArrayList<>();
+                    for (PaperCard card : ps.toFlatList()) {
+                        if (!foilCards.contains(card)) {
+                            foilCards.add(card);
+                        }
+                    }
+                    addCardsFromExtraSheet(foilCards, sheetKey);
+                    result.add(generateFoilCard(foilCards));
+                } else {
+                    result.add(generateFoilCard(ps));
+                }
             }
         }
 
@@ -101,10 +113,22 @@ public class BoosterGenerator {
                     }
                 }
             }
+            if (!extraFoilSheetKey.isEmpty()) {
+                addCardsFromExtraSheet(foilCards, extraFoilSheetKey);
+            }
             result.add(generateFoilCard(foilCards));
         }
 
         return result;
+    }
+
+    public static void addCardsFromExtraSheet(List<PaperCard> dest, String printSheetKey) {
+        PrintSheet extraSheet = getPrintSheet(printSheetKey);
+        for (PaperCard card : extraSheet.toFlatList()) {
+            if (!dest.contains(card)) {
+                dest.add(card);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
