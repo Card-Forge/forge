@@ -3079,7 +3079,8 @@ public class CardFactoryUtil {
         final String counters = k[1];
         final String suffix = !counters.equals("1") ? "s" : "";
         final Cost awakenCost = new Cost(k[2], false);
-        card.removeIntrinsicKeyword(awakenKeyword);
+        // Leave intrinsic Keyword for retrieval by Halimar Tidecaller
+        //card.removeIntrinsicKeyword(awakenKeyword);
         
         final SpellAbility awakenSpell = card.getFirstSpellAbility().copy();
         

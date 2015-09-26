@@ -7060,6 +7060,7 @@ forge-gui/res/cardsfolder/h/halcyon_glaze.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/halfdane.txt -text
 forge-gui/res/cardsfolder/h/halimar_depths.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/halimar_excavator.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/halimar_tidecaller.txt -text
 forge-gui/res/cardsfolder/h/halimar_wavewatch.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hall_of_gemstone.txt -text
 forge-gui/res/cardsfolder/h/hall_of_the_bandit_lord.txt -text
