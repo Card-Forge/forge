@@ -183,6 +183,26 @@ public class Forge implements ApplicationListener {
         }
     }
 
+    public static void restart(boolean silent) {
+        if (exited) { return; } //don't allow exiting multiple times
+
+        Callback<Boolean> callback = new Callback<Boolean>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    exited = true;
+                    deviceAdapter.restart();
+                }
+            }
+        };
+        if (silent) {
+            callback.run(true);
+        }
+        else {
+            FOptionPane.showConfirmDialog("Are you sure you wish to restart Forge?", "Restart Forge", "Restart", "Cancel", callback);
+        }
+    }
+
     public static void exit(boolean silent) {
         if (exited) { return; } //don't allow exiting multiple times
 

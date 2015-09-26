@@ -91,7 +91,7 @@ public class Main extends AndroidApplication {
         private AndroidAdapter(Context context) {
             isTablet = (context.getResources().getConfiguration().screenLayout
                     & Configuration.SCREENLAYOUT_SIZE_MASK)
-                    >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
+                    >= Configuration.SCREENLAYOUT_SIZE_LARGE;
         }
 
         @Override
@@ -137,6 +137,15 @@ public class Main extends AndroidApplication {
                 e.printStackTrace();
             }
             return false;
+        }
+
+        @Override
+        public void restart() {
+            // Replace the current task with a new one for this
+            final Intent restart = new Intent(Main.this, Main.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK // CLEAR_TASK requires this
+                            | Intent.FLAG_ACTIVITY_CLEAR_TASK); // finish everything else in the task
+            startActivity(restart);
         }
 
         @Override

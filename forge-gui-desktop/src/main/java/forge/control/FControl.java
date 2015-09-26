@@ -61,6 +61,7 @@ import forge.quest.io.QuestDataIO;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.RestartUtil;
 import forge.util.gui.SOptionPane;
 import forge.view.FFrame;
 import forge.view.FView;
@@ -189,6 +190,18 @@ public enum FControl implements KeyEventDispatcher {
             return false;
         }
         return true;
+    }
+
+    public boolean restartForge() {
+        if (!canExitForge(true)) {
+            return false;
+        }
+
+        if (RestartUtil.prepareForRestart()) {
+            System.exit(0);
+            return true;
+        }
+        return false;
     }
 
     public boolean exitForge() {

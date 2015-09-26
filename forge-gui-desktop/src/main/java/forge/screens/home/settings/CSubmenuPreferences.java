@@ -4,7 +4,6 @@ import forge.Singletons;
 import forge.UiCommand;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
-import forge.control.RestartUtil;
 import forge.game.GameLogEntryType;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -213,7 +212,7 @@ public enum CSubmenuPreferences implements ICDoc {
             prefs.reset();
             prefs.save();
             update();
-            RestartUtil.restartApplication(null);
+            Singletons.getControl().restartForge();
         }
     }
 

@@ -1,6 +1,7 @@
 package forge.screens.settings;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.ai.AiProfileUtil;
@@ -21,6 +22,8 @@ import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
+import forge.toolbox.FOptionPane;
+import forge.util.Callback;
 import forge.util.Utils;
 
 import java.util.ArrayList;
@@ -52,6 +55,26 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 FSkin.changeSkin(newValue);
             }
         }, 0);
+        if (Forge.getDeviceAdapter().isTablet()) { //only offer landscape option on tablets
+            lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
+                    "Landscape Mode",
+                    "Use landscape (horizontal) orientation for app instead of portrait (vertical).") {
+                        @Override
+                        public void select() {
+                            super.select();
+                            if (Forge.isLandscapeMode() != FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE)) {
+                                FOptionPane.showConfirmDialog("You must restart Forge for this change to take effect.", "Restart Forge", "Restart", "Later", new Callback<Boolean>() {
+                                    @Override
+                                    public void run(Boolean result) {
+                                        if (result) {
+                                            Forge.restart(true);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }, 0);
+        }
 
         //Gameplay Options
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
@@ -142,7 +165,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_TABS,
                 "Compact Tabs",
-                "Show smaller tabs on the top of tab page screens (such as this screen)") {
+                "Show smaller tabs on the top of tab page screens (such as this screen).") {
                     @Override
                     public void select() {
                         super.select();

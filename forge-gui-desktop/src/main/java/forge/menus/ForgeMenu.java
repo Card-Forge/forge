@@ -14,7 +14,6 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
 import forge.Singletons;
-import forge.control.RestartUtil;
 import forge.gui.GuiUtils;
 import forge.screens.home.online.OnlineMenu;
 import forge.util.ReflectionUtil;
@@ -134,7 +133,7 @@ public final class ForgeMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RestartUtil.restartApplication(null);
+                Singletons.getControl().restartForge();
             }
         };
     }

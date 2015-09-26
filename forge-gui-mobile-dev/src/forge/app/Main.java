@@ -3,7 +3,6 @@ package forge.app;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
@@ -12,6 +11,7 @@ import forge.Forge;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
+import forge.util.RestartUtil;
 import forge.util.Utils;
 
 public class Main {
@@ -52,6 +52,13 @@ public class Main {
                 e.printStackTrace();
             }
             return false;
+        }
+
+        @Override
+        public void restart() {
+            if (RestartUtil.prepareForRestart()) {
+                Gdx.app.exit();
+            }
         }
 
         @Override

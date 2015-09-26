@@ -792,7 +792,6 @@ forge-gui-desktop/src/main/java/forge/ImageLoader.java -text
 forge-gui-desktop/src/main/java/forge/Singletons.java -text
 forge-gui-desktop/src/main/java/forge/control/FControl.java -text
 forge-gui-desktop/src/main/java/forge/control/KeyboardShortcuts.java -text
-forge-gui-desktop/src/main/java/forge/control/RestartUtil.java -text
 forge-gui-desktop/src/main/java/forge/control/package-info.java -text
 forge-gui-desktop/src/main/java/forge/deckchooser/DecksComboBox.java -text
 forge-gui-desktop/src/main/java/forge/deckchooser/DecksComboBoxEvent.java -text
@@ -18312,6 +18311,7 @@ forge-gui/src/main/java/forge/util/IgnoringXStream.java -text
 forge-gui/src/main/java/forge/util/LineReader.java -text
 forge-gui/src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/OperatingSystem.java -text
+forge-gui/src/main/java/forge/util/RestartUtil.java -text
 forge-gui/src/main/java/forge/util/WaitCallback.java -text
 forge-gui/src/main/java/forge/util/WaitRunnable.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text

@@ -34,6 +34,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         CONSTRUCTED_P6_DECK_STATE(""),
         CONSTRUCTED_P7_DECK_STATE(""),
         CONSTRUCTED_P8_DECK_STATE(""),
+        UI_LANDSCAPE_MODE ("false"),
         UI_COMPACT_MAIN_MENU ("false"),
         UI_USE_OLD ("false"),
         UI_RANDOM_FOIL ("false"),

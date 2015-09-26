@@ -1,6 +1,4 @@
-package forge.control;
-
-import forge.Singletons;
+package forge.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,10 +20,7 @@ public class RestartUtil {
      * Restart the current Java application.
      * @param runBeforeRestart some custom code to be run before restarting
      */
-    public static void restartApplication(final Runnable runBeforeRestart) {
-        if (!Singletons.getControl().canExitForge(true)) {
-            return;
-        }
+    public static boolean prepareForRestart() {
         try {
             // java binary
             final String java = System.getProperty("java.home")
@@ -72,14 +67,11 @@ public class RestartUtil {
                     }
                 }
             });
-            // execute some custom code before restarting
-            if (runBeforeRestart != null) {
-                runBeforeRestart.run();
-            }
-            // exit
-            System.exit(0);
-        } catch (final Exception ex) {
+            return true;
+        }
+        catch (final Exception ex) {
             //ErrorViewer.showError(ex, "Restart \"%s\" exception", "");
+            return false;
         }
     }
 }

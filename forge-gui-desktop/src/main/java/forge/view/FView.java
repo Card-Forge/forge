@@ -32,7 +32,6 @@ import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.assets.FSkinProp;
-import forge.control.RestartUtil;
 import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
@@ -228,9 +227,9 @@ public enum FView {
                         btnOk.addActionListener(new ActionListener() {
                             @Override public void actionPerformed(final ActionEvent e) {
                                 if (remainingFiles.isEmpty()) {
-                                    RestartUtil.restartApplication(null);
+                                    Singletons.getControl().restartForge();
                                 } else {
-                                    System.exit(0);
+                                    Singletons.getControl().exitForge();
                                 }
                             }
                         });
