@@ -81,6 +81,11 @@ public class Main extends IOSApplication.Delegate {
         }
 
         @Override
+        public void restart() {
+            // Not possible on iOS
+        }
+
+        @Override
         public void exit() {
             // Not possible on iOS
         }
