@@ -181,7 +181,7 @@ public class SFilterUtil {
                         result = color.isMulticolor() || (wantColorless && color.isColorless());
                     } else if (colors != ColorSet.ALL_COLORS.getColor()) {
                         if (useColorIdentity && !allColorsFilteredOut) {
-                            result = color.hasAnyColor(colors);
+                            result = color.hasAnyColor(colors) || (wantColorless && color.isColorless());
                         } else {
                             result = rules.canCastWithAvailable(colors);
                         }
@@ -190,7 +190,7 @@ public class SFilterUtil {
                     result = !color.isMulticolor();
                     if (colors != ColorSet.ALL_COLORS.getColor()) {
                         if (useColorIdentity && !allColorsFilteredOut) {
-                            result = result && color.hasAnyColor(colors);
+                            result = result && (color.hasAnyColor(colors) || (wantColorless && color.isColorless()));
                         } else {
                             result = result && rules.canCastWithAvailable(colors);
                         }
