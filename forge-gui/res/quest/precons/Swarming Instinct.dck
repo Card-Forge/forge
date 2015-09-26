@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Swarming Instinct
-Description=Battle for Zendikar Blue/Green Intro Deck
+Description=Battle for Zendikar Colorless (Blue/Green Devoid) Intro Deck
 Deck Type=constructed
 Set=BFZ
 Image=swarming_instinct.jpg

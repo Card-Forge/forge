@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Eldrazi Assault
-Description=Battle for Zendikar Black/Red Intro Deck
+Description=Battle for Zendikar Colorless (Black/Red Devoid) Intro Deck
 Deck Type=constructed
 Set=BFZ
 Image=eldrazi_assault.jpg
