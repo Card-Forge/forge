@@ -183,12 +183,14 @@ public class Cost {
         for (int iCp = 0; iCp < costParts.size(); iCp++) {
             CostPart cp = costParts.get(iCp);
 
-            // my guess why Q/T are to be first and are followed by mana parts
-            // is because Q/T are undoable and mana is interactive, so it well be easy to rollback if player refuses to pay
+            // untap cost has to be last so that a card can't use e.g. its own mana ability while paying for a part of its own mana cost
+            // (e.g. Zhur-Taa Druid equipped with Umbral Mantle, paying the mana cost of {3}, {Q} )
             if (cp instanceof CostUntap) {
                 costParts.remove(iCp);
-                costParts.add(0, cp);
+                costParts.add(cp);
             }
+            // tap cost has to be first so that a card can't use e.g. its own mana ability while paying for a part of its own mana cost
+            // (e.g. Ally Encampment with the cost of 1, {T} )
             if (cp instanceof CostTap) {
                 costParts.remove(iCp);
                 costParts.add(0, cp);
