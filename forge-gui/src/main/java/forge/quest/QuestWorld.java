@@ -18,12 +18,19 @@
 package forge.quest;
 
 import com.google.common.base.Function;
+
+import forge.deck.Deck;
+import forge.game.GameFormat;
+import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.quest.data.GameFormatQuest;
 import forge.util.storage.StorageReaderFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /** 
  * This function holds the "world info" for the current quest.
@@ -180,5 +187,33 @@ public class QuestWorld implements Comparable<QuestWorld>{
             return -1;
         }
         return name.compareTo(other.name);
+    }
+
+    public static Set<QuestWorld> getAllQuestWorldsOfCard(PaperCard card) {
+        Set<QuestWorld> result = new HashSet<QuestWorld>();
+        for (QuestWorld qw : FModel.getWorlds()) {
+            GameFormat format = qw.getFormat();
+            if (format == null) {
+                format = FModel.getQuest().getMainFormat();
+            }
+            if (format == null || format.getFilterRules().apply(card)) {
+                result.add(qw);
+            }
+        }
+        return result;
+    }
+
+    public static Set<QuestWorld> getAllQuestWorldsOfDeck(Deck deck) {
+        Set<QuestWorld> result = new HashSet<QuestWorld>();
+        for (QuestWorld qw : FModel.getWorlds()) {
+            GameFormat format = qw.getFormat();
+            if (format == null) {
+                format = FModel.getQuest().getMainFormat();
+            }
+            if (format == null || format.isDeckLegal(deck)) {
+                result.add(qw);
+            }
+        }
+        return result;
     }
 }

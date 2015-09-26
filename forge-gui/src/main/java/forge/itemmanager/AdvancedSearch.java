@@ -3,6 +3,7 @@ package forge.itemmanager;
 import java.util.*;
 import java.util.Map.Entry;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -26,6 +27,7 @@ import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.quest.QuestWorld;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 
@@ -68,6 +70,16 @@ public class AdvancedSearch {
             @Override
             protected Set<GameFormat> getItemValues(PaperCard input) {
                 return FModel.getFormats().getAllFormatsOfCard(input);
+            }
+        }),
+        CARD_QUEST_WORLD("Quest World", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
+            @Override
+            protected QuestWorld getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<QuestWorld> getItemValues(PaperCard input) {
+                return QuestWorld.getAllQuestWorldsOfCard(input);
             }
         }),
         CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<PaperCard>() {
@@ -194,6 +206,16 @@ public class AdvancedSearch {
             @Override
             protected Set<GameFormat> getItemValues(DeckProxy input) {
                 return input.getFormats();
+            }
+        }),
+        DECK_QUEST_WORLD("Quest World", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
+            @Override
+            protected QuestWorld getItemValue(DeckProxy input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<QuestWorld> getItemValues(DeckProxy input) {
+                return QuestWorld.getAllQuestWorldsOfDeck(input.getDeck());
             }
         }),
         DECK_COLOR("Color", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<DeckProxy>() {
