@@ -242,30 +242,6 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(16, simGame.getPlayers().get(0).getLife());
     }
     
-    public void testEchoCostState() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(1);
-
-        String c1Name = "Acridian";
-        String c2Name = "Goblin Patrol";
-        Card c1 = addCard(c1Name, p);
-        Card c2 = addCard(c2Name, p);
-        
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
-        game.getAction().checkStateEffects(true);
-
-        assertTrue(c1.hasStartOfKeyword("(Echo unpaid)"));
-        assertTrue(c2.hasStartOfKeyword("(Echo unpaid)"));
-        c2.removeAllExtrinsicKeyword("(Echo unpaid)");
-
-        GameSimulator sim = createSimulator(game, p);
-        Game simGame = sim.getSimulatedGameState();
-        Card c1Copy = findCardWithName(simGame, c1Name);
-        assertTrue(c1Copy.hasStartOfKeyword("(Echo unpaid)"));
-        Card c2Copy = findCardWithName(simGame, c2Name);
-        assertFalse(c2Copy.hasStartOfKeyword("(Echo unpaid)"));
-    }
-    
     public void testSimulateUnmorph() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);

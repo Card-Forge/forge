@@ -17,15 +17,12 @@
  */
 package forge.game.phase;
 
-import com.google.common.base.Predicate;
-
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
@@ -72,40 +69,8 @@ public class Upkeep extends Phase {
         game.getStack().freezeStack();
 
         Upkeep.upkeepUpkeepCost(game); // sacrifice unless upkeep cost is paid
-        Upkeep.upkeepEcho(game);
 
         game.getStack().unfreezeStack();
-    }
-
-    private static void upkeepEcho(final Game game) {
-        CardCollectionView list = game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasStartOfKeyword("(Echo unpaid)");
-            }
-        });
-
-        for (int i = 0; i < list.size(); i++) {
-            final Card c = list.get(i);
-            if (c.hasStartOfKeyword("(Echo unpaid)")) {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Echo for ").append(c).append("\n");
-                String ref = "X".equals(c.getEchoCost()) ? " | References$ X" : "";
-                String effect = "AB$ Sacrifice | Cost$ 0 | SacValid$ Self | "
-                        + "Echo$ " + c.getEchoCost() + ref;
-
-                SpellAbility sacAbility = AbilityFactory.getAbility(effect, c);
-                sacAbility.setTrigger(true);
-                sacAbility.setActivatingPlayer(c.getController());
-                sacAbility.setStackDescription(sb.toString());
-                sacAbility.setDescription(sb.toString());
-
-                game.getStack().addSimultaneousStackEntry(sacAbility);
-
-                c.removeAllExtrinsicKeyword("(Echo unpaid)");
-            }
-        }
     }
 
     private static void upkeepUpkeepCost(final Game game) {
