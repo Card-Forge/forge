@@ -293,8 +293,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
         }
 
-        currentState.getView().updateColors(this);
-
         return true;
     }
 
@@ -350,6 +348,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (updateView) {
             view.updateState(this);
+            currentState.getView().updateColors(this);
 
             final Game game = getGame();
             if (game != null) {
