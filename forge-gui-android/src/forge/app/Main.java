@@ -91,7 +91,7 @@ public class Main extends AndroidApplication {
         private AndroidAdapter(Context context) {
             isTablet = (context.getResources().getConfiguration().screenLayout
                     & Configuration.SCREENLAYOUT_SIZE_MASK)
-                    >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+                    >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
         }
 
         @Override
