@@ -45,12 +45,12 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
     /** {@inheritDoc} */
     @Override
-    public final void add(final Card c, final Integer position) {
+    public final void add(final Card c, final Integer position, final Card latestState) {
         if (c == null) {
             throw new RuntimeException("PlayerZoneComesInto Play : add() object is null");
         }
 
-        super.add(c, position);
+        super.add(c, position, latestState);
 
         if (trigger) {
             // ETBTapped static abilities
