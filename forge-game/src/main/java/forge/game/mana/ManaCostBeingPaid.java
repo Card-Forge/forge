@@ -580,4 +580,12 @@ public class ManaCostBeingPaid {
         }
         return 0;
     }
+
+    public final byte getUnpaidColors() {
+        byte result = 0;
+        for (ManaCostShard s : unpaidShards.keySet()) {
+            result |= s.getColorMask();
+        }
+        return result;
+    }
 }

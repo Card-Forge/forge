@@ -54,12 +54,17 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
         }
         else {
             byte chosenColor;
-            final ColorSet colors = CardUtil.getColors(card);
-            if (colors.isMonoColor()) {
+            ColorSet colors = CardUtil.getColors(card);
+            if (colors.isMulticolor()) {
+                //if card is multicolor, strip out any colors which can't be paid towards remaining cost
+                colors = ColorSet.fromMask(colors.getColor() & remainingCost.getUnpaidColors());
+            }
+            if (!colors.isMulticolor()) {
                 // Since the convoke mana logic can use colored mana as colorless if needed,
                 // there is no need to prompt the user when convoking with a mono-color creature.
                 chosenColor = colors.getColor();
-            } else {
+            }
+            else { //prompt user if more than one option for which color to pay towards convoke
                 chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, colors);
             }
             final ManaCostShard shard = remainingCost.payManaViaConvoke(chosenColor);
