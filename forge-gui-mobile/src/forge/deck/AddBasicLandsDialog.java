@@ -261,6 +261,9 @@ public class AddBasicLandsDialog extends FDialog {
         NumberFormat percent = NumberFormat.getPercentInstance();
         int newLandCount = pnlPlains.count + pnlIsland.count + pnlSwamp.count + pnlMountain.count + pnlForest.count;
         double totalSymbolCount = pnlPlains.symbolCount + pnlIsland.symbolCount + pnlSwamp.symbolCount + pnlMountain.symbolCount + pnlForest.symbolCount;
+        if (totalSymbolCount == 0) {
+            totalSymbolCount = 1; //prevent divide by 0 error
+        }
         int newTotalCount = nonLandCount + oldLandCount + newLandCount;
         lblDeckInfo.setText(
                 nonLandCount + " non-lands + " +
