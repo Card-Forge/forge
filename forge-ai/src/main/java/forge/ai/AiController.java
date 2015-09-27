@@ -793,16 +793,18 @@ public class AiController {
         private int getSpellAbilityPriority(SpellAbility sa) {
             int p = 0;
             Card source = sa.getHostCard();
+            final Player ai = source.getController();
+            final boolean noCreatures = ai.getCreaturesInPlay().isEmpty();
             // puts creatures in front of spells
             if (source.isCreature()) {
                 p += 1;
             }
             // don't play equipments before having any creatures
-            if (source.isEquipment() && sa.getHostCard().getController().getCreaturesInPlay().isEmpty()) {
+            if (source.isEquipment() && noCreatures) {
                 p -= 9;
             }
             // artifacts and enchantments with effects that do not stack
-            if ("True".equals(source.getSVar("NonStackingEffect")) && source.getController().isCardInPlay(source.getName())) {
+            if ("True".equals(source.getSVar("NonStackingEffect")) && ai.isCardInPlay(source.getName())) {
                 p -= 9;
             }
             // sort planeswalker abilities for ultimate
@@ -814,7 +816,11 @@ public class AiController {
     
             if (ApiType.DestroyAll == sa.getApi()) {
                 p += 4;
-            } 
+            }
+            if (ApiType.Token == sa.getApi() && noCreatures) {
+            	//hack to force planeswalkers to defend themselves
+            	p += 3;
+            }
             else if (ApiType.Mana == sa.getApi()) {
             	p -= 9;
             }
