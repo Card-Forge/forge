@@ -58,7 +58,7 @@ import forge.view.arcane.CardPanel;
 @SuppressWarnings("serial")
 public class AddBasicLandsDialog {
     private static final int WIDTH = 800;
-    private static final int HEIGHT = 375;
+    private static final int HEIGHT = 370;
     private static final int ADD_BTN_SIZE = 30;
     private static final int LAND_PANEL_PADDING = 3;
 
@@ -101,8 +101,7 @@ public class AddBasicLandsDialog {
         panel.add(pnlForest);
         panel.add(lblDeckInfo);
 
-        lblDeckInfo.setAlignmentX(0.5f);
-        lblDeckInfo.setFont(FSkin.getFont(12));
+        lblDeckInfo.setFont(FSkin.getFont(14));
 
         cbLandSet.addActionListener(new ActionListener() {
             @Override
@@ -221,16 +220,17 @@ public class AddBasicLandsDialog {
         int newLandCount = pnlPlains.count + pnlIsland.count + pnlSwamp.count + pnlMountain.count + pnlForest.count;
         double totalSymbolCount = pnlPlains.symbolCount + pnlIsland.symbolCount + pnlSwamp.symbolCount + pnlMountain.symbolCount + pnlForest.symbolCount;
         int newTotalCount = nonLandCount + oldLandCount + newLandCount;
-        lblDeckInfo.setText(FSkin.encodeSymbols(
+        lblDeckInfo.setText(FSkin.encodeSymbols("<div 'text-align: center;'>" +
                 nonLandCount + " non-lands + " +
                 oldLandCount + " lands + " +
                 newLandCount + " added lands = " +
-                newTotalCount + " cards\n" +
+                newTotalCount + " cards</div><div style='text-align: center;'>" +
                 "{W} " + integer.format(pnlPlains.symbolCount) + " (" + percent.format(pnlPlains.symbolCount / totalSymbolCount) + ") | " +
                 "{U} " + integer.format(pnlIsland.symbolCount) + " (" + percent.format(pnlIsland.symbolCount / totalSymbolCount) + ") | " +
                 "{B} " + integer.format(pnlSwamp.symbolCount) + " (" + percent.format(pnlSwamp.symbolCount / totalSymbolCount) + ") | " +
                 "{R} " + integer.format(pnlMountain.symbolCount) + " (" + percent.format(pnlMountain.symbolCount / totalSymbolCount) + ") | " +
-                "{G} " + integer.format(pnlForest.symbolCount) + " (" + percent.format(pnlForest.symbolCount / totalSymbolCount) + ")", true));
+                "{G} " + integer.format(pnlForest.symbolCount) + " (" + percent.format(pnlForest.symbolCount / totalSymbolCount) + ")" + 
+                "</div>", false));
     }
 
     private class MainPanel extends SkinnedPanel {
@@ -299,7 +299,7 @@ public class AddBasicLandsDialog {
                     cardPanel.repaint();
                 }
             });
-            lblCount = new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build();
+            lblCount = new FLabel.Builder().text("0").fontSize(22).fontAlign(SwingConstants.CENTER).build();
             btnSubtract = new FLabel.ButtonBuilder().icon(FSkin.getIcon(FSkinProp.ICO_MINUS)).cmdClick(new UiCommand() {
                 @Override
                 public void run() {
