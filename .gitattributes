@@ -893,6 +893,7 @@ forge-gui-desktop/src/main/java/forge/menus/MenuUtil.java -text
 forge-gui-desktop/src/main/java/forge/package-info.java -text
 forge-gui-desktop/src/main/java/forge/screens/bazaar/CBazaarUI.java -text
 forge-gui-desktop/src/main/java/forge/screens/bazaar/VBazaarUI.java -text
+forge-gui-desktop/src/main/java/forge/screens/deckeditor/AddBasicLandsDialog.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/CDeckEditorUI.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/DeckImport.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/SEditorIO.java -text

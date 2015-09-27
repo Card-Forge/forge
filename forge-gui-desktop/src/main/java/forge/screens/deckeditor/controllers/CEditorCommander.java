@@ -65,6 +65,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      * This is the least restrictive mode;
      * all cards are available.
      */
+    @SuppressWarnings("serial")
     public CEditorCommander(final CDetailPicture cDetailPicture) {
         super(FScreen.DECK_EDITOR_COMMANDER, cDetailPicture);
         allSections.add(DeckSection.Main);
@@ -89,6 +90,13 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
             }
         };
         this.controller = new DeckController<Deck>(FModel.getDecks().getCommander(), this, newCreator);
+
+        getBtnAddBasicLands().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CEditorConstructed.addBasicLands(CEditorCommander.this, null);
+            }
+        });
     }
 
     //=========== Overridden from ACEditorBase

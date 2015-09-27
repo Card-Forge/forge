@@ -22,6 +22,7 @@ import com.google.common.base.Supplier;
 
 import forge.UiCommand;
 import forge.card.CardRulesPredicates;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.framework.FScreen;
@@ -30,6 +31,7 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
@@ -59,6 +61,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
      * This is the least restrictive mode;
      * all cards are available.
      */
+    @SuppressWarnings("serial")
     public CEditorConstructed(final CDetailPicture cDetailPicture) {
         super(FScreen.DECK_EDITOR_CONSTRUCTED, cDetailPicture);
 
@@ -91,6 +94,13 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         };
 
         this.controller = new DeckController<Deck>(FModel.getDecks().getConstructed(), this, newCreator);
+
+        getBtnAddBasicLands().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CEditorConstructed.addBasicLands(CEditorConstructed.this, null);
+            }
+        });
     }
 
     //=========== Overridden from ACEditorBase
@@ -319,6 +329,17 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         }
 
         this.controller.updateCaptions();
+    }
+
+    public static void addBasicLands(ACEditorBase<PaperCard, Deck> editor, ItemPool<PaperCard> restrictedCatalog) {
+        Deck deck = editor.getDeckController().getModel();
+        if (deck == null) { return; }
+
+        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, null, restrictedCatalog);
+        CardPool landsToAdd = dialog.show();
+        if (landsToAdd != null) {
+            editor.onAddItems(landsToAdd, false);
+        }
     }
 
     /* (non-Javadoc)

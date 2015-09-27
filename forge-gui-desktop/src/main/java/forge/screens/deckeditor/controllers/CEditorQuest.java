@@ -90,6 +90,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      *
      * @param questData0 &emsp; {@link forge.quest.QuestController}
      */
+    @SuppressWarnings("serial")
     public CEditorQuest(final QuestController questData0, final CDetailPicture cDetailPicture) {
         super(FScreen.DECK_EDITOR_QUEST, cDetailPicture);
 
@@ -117,6 +118,13 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         };
 
         this.controller = new DeckController<Deck>(questData0.getMyDecks(), this, newCreator);
+
+        getBtnAddBasicLands().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CEditorConstructed.addBasicLands(CEditorQuest.this, questData.getCards().getCardpool());
+            }
+        });
     }
 
     // fills number of decks using each card
@@ -292,5 +300,4 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
         }
     }
-
 }

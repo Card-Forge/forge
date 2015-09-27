@@ -151,5 +151,5 @@ public class DeckGroup extends DeckBase {
     @Override
     public boolean isEmpty() {
         return humanDeck == null || humanDeck.isEmpty();
-    }    
+    }
 }

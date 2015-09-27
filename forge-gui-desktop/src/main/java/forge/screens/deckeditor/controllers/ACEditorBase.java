@@ -299,11 +299,6 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 4);
             }
         });
-        btnAddBasicLands.setCommand(new UiCommand() {
-            @Override public void run() {
-                
-            }
-        });
         itemManager.getPnlButtons().add(btnRemove, "w 30%!, h 30px!, gapx 5");
         itemManager.getPnlButtons().add(btnRemove4, "w 30%!, h 30px!, gapx 5");
         itemManager.getPnlButtons().add(btnAddBasicLands, "w 30%!, h 30px!, gapx 5");
@@ -374,6 +369,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     protected void resetUI() {
         getBtnAdd4().setVisible(true);
         getBtnRemove4().setVisible(true);
+        getBtnAddBasicLands().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(true);

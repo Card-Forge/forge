@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 
+import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.framework.DragCell;
@@ -61,6 +62,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      * This is the least restrictive mode;
      * all cards are available.
      */
+    @SuppressWarnings("serial")
     public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final DeckSection deckSection0, final FScreen screen0, final CDetailPicture cDetailPicture) {
         super(screen0, cDetailPicture);
 
@@ -82,6 +84,13 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
             }
         };
         this.controller = new DeckController<Deck>(folder, this, newCreator);
+
+        getBtnAddBasicLands().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CEditorConstructed.addBasicLands(CEditorVariant.this, null);
+            }
+        });
     }
 
     //=========== Overridden from ACEditorBase

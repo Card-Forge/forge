@@ -1,10 +1,13 @@
 package forge.toolbox;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+
+import com.google.common.collect.ImmutableList;
 
 import forge.toolbox.FSkin.SkinnedLabel;
 
@@ -25,25 +28,40 @@ public class FComboBoxPanel<E> extends JPanel {
 
     private String comboBoxCaption = "";
     private FComboBox<E> comboBox = null;
+    private int flowLayout;
 
-    public FComboBoxPanel(final String comboBoxCaption) {
+    public FComboBoxPanel(final String comboBoxCaption0) {
+        this(comboBoxCaption0, FlowLayout.LEFT);
+    }
+    public FComboBoxPanel(final String comboBoxCaption0, int flowLayout0) {
         super();
-        this.comboBoxCaption = comboBoxCaption;
+        comboBoxCaption = comboBoxCaption0;
+        flowLayout = flowLayout0;
         applyLayoutAndSkin();
         allPanels.add(this);
     }
 
-    public void setComboBox(final FComboBox<E> comboBox, final E selectedItem) {
+    public FComboBoxPanel(final String comboBoxCaption0, Iterable<E> items) {
+        this(comboBoxCaption0, FlowLayout.LEFT, items);
+    }
+    public FComboBoxPanel(final String comboBoxCaption0, int flowLayout0, Iterable<E> items) {
+        this(comboBoxCaption0, flowLayout0);
+
+        List<E> list = ImmutableList.copyOf(items);
+        setComboBox(new FComboBox<E>(list), list.get(0));
+    }
+
+    public void setComboBox(final FComboBox<E> comboBox0, final E selectedItem) {
         removeExistingComboBox();
-        this.comboBox = comboBox;
-        this.comboBox.setSelectedItem(selectedItem);
+        comboBox = comboBox0;
+        comboBox.setSelectedItem(selectedItem);
         setComboBoxLayout();
     }
 
     private void removeExistingComboBox() {
-        if (this.comboBox != null) {
-            this.remove(this.comboBox);
-            this.comboBox = null;
+        if (comboBox != null) {
+            remove(comboBox);
+            comboBox = null;
         }
     }
 
@@ -54,42 +72,46 @@ public class FComboBoxPanel<E> extends JPanel {
     }
 
     private void setPanelLayout() {
-        final FlowLayout panelLayout = new FlowLayout(FlowLayout.LEFT);
+        final FlowLayout panelLayout = new FlowLayout(flowLayout);
         panelLayout.setVgap(0);
-        this.setLayout(panelLayout);
-        this.setOpaque(false);
+        setLayout(panelLayout);
+        setOpaque(false);
     }
 
     private void setLabelLayout() {
-        if (this.comboBoxCaption != null && !this.comboBoxCaption.isEmpty()) {
-            final SkinnedLabel comboLabel = new SkinnedLabel(this.comboBoxCaption);
+        if (comboBoxCaption != null && !comboBoxCaption.isEmpty()) {
+            final SkinnedLabel comboLabel = new SkinnedLabel(comboBoxCaption);
             comboLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             comboLabel.setFont(FSkin.getBoldFont(12));
-            this.add(comboLabel);
+            add(comboLabel);
         }
     }
 
     private void setComboBoxLayout() {
-        if (this.comboBox != null) {
-            this.comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-            this.comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            this.comboBox.setFont(FSkin.getFont(12));
-            this.comboBox.setEditable(false);
-            this.comboBox.setFocusable(true);
-            this.comboBox.setOpaque(true);
-            this.add(this.comboBox);
+        if (comboBox != null) {
+            comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+            comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            comboBox.setFont(FSkin.getFont(12));
+            comboBox.setEditable(false);
+            comboBox.setFocusable(true);
+            comboBox.setOpaque(true);
+            add(comboBox);
         }
     }
 
-    public void setSelectedItem(final Object item) {
-        this.comboBox.setSelectedItem(item);
+    public void addActionListener(final ActionListener l) {
+        comboBox.addActionListener(l);
     }
 
-    public Object getSelectedItem() {
-        return this.comboBox.getSelectedItem();
+    public void setSelectedItem(final Object item) {
+        comboBox.setSelectedItem(item);
+    }
+
+    public E getSelectedItem() {
+        return comboBox.getSelectedItem();
     }
 
     private void refreshSkin() {
-        this.comboBox = FComboBoxWrapper.refreshComboBoxSkin(this.comboBox);
+        comboBox = FComboBoxWrapper.refreshComboBoxSkin(comboBox);
     }
 }

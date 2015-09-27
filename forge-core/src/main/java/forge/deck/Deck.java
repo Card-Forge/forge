@@ -239,5 +239,5 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
         }
         return true;
-    }    
+    }
 }

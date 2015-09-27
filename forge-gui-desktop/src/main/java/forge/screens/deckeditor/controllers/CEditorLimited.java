@@ -19,6 +19,10 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Supplier;
 
+import forge.StaticData;
+import forge.UiCommand;
+import forge.card.CardEdition;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -27,6 +31,7 @@ import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -34,6 +39,7 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.ItemPool;
 import forge.util.storage.IStorage;
 
 import java.util.Map.Entry;
@@ -59,6 +65,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      *
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
+    @SuppressWarnings("serial")
     public CEditorLimited(final IStorage<DeckGroup> deckMap0, final FScreen screen0, final CDetailPicture cDetailPicture) {
         super(screen0, cDetailPicture);
 
@@ -80,6 +87,13 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
             }
         };
         this.controller = new DeckController<DeckGroup>(deckMap0, this, newCreator);
+
+        getBtnAddBasicLands().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CEditorLimited.addBasicLands(CEditorLimited.this, null);
+            }
+        });
     }
 
     /**
@@ -153,6 +167,18 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     @Override
     public DeckController<DeckGroup> getDeckController() {
         return this.controller;
+    }
+
+    public static void addBasicLands(ACEditorBase<PaperCard, DeckGroup> editor, ItemPool<PaperCard> restrictedCatalog) {
+        Deck deck = editor.getDeckController().getModel().getHumanDeck();
+        if (deck == null) { return; }
+
+        CardEdition defaultLandSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(deck.getAllCardsInASinglePool());
+        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, restrictedCatalog);
+        CardPool landsToAdd = dialog.show();
+        if (landsToAdd != null) {
+            editor.onAddItems(landsToAdd, false);
+        }
     }
 
     /* (non-Javadoc)

@@ -235,6 +235,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         CDRemLabel = this.getBtnRemove().getText();
         this.getBtnRemove().setText("Sell Card");
 
+        this.getBtnAddBasicLands().setVisible(false);
+
         VProbabilities.SINGLETON_INSTANCE.getTabLabel().setVisible(false);
 
         prevRem4Label = this.getBtnRemove4().getText();

@@ -74,6 +74,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
     /**
      * Updates the deck editor UI as necessary draft selection mode.
      */
+    @SuppressWarnings("serial")
     public CEditorWinstonProcess(final CDetailPicture cDetailPicture) {
         super(FScreen.DRAFTING_PROCESS, cDetailPicture);
 
@@ -90,6 +91,13 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
+
+        getBtnAddBasicLands().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CEditorLimited.addBasicLands(CEditorWinstonProcess.this, null);
+            }
+        });
     }
 
     /**

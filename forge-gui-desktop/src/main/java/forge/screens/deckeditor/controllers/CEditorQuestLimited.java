@@ -26,6 +26,7 @@ import java.util.Map.Entry;
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 
+import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -90,6 +91,7 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
      *
      * @param questData0 &emsp; {@link forge.quest.QuestController}
      */
+    @SuppressWarnings("serial")
     public CEditorQuestLimited(final QuestController questData0, final CDetailPicture cDetailPicture) {
         super(FScreen.DECK_EDITOR_QUEST_TOURNAMENT, cDetailPicture);
 
@@ -120,6 +122,12 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
         controller.getView().getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
         controller.setModel(questData0.getDraftDecks().get(QuestEventDraft.DECK_NAME));
 
+        getBtnAddBasicLands().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CEditorLimited.addBasicLands(CEditorQuestLimited.this, questData.getCards().getCardpool());
+            }
+        });
     }
 
     // fills number of decks using each card
@@ -221,7 +229,6 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
 
     @Override
     public void update() {
-
         this.getCatalogManager().setup(getScreen() == FScreen.DECK_EDITOR_DRAFT ? ItemManagerConfig.DRAFT_POOL : ItemManagerConfig.SEALED_POOL);
         this.getDeckManager().setup(ItemManagerConfig.DECK_EDITOR);
 
