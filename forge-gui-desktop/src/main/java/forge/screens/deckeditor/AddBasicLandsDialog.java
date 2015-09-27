@@ -296,6 +296,7 @@ public class AddBasicLandsDialog {
                     int artIndex = cbLandArt.getSelectedIndex();
                     if (artIndex < 0) { return; }
                     card = generateCard(artIndex); //generate card for display
+                    cardPanel.repaint();
                 }
             });
             lblCount = new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build();
