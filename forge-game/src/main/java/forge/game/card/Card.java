@@ -138,7 +138,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean drawnThisTurn = false;
     private boolean becameTargetThisTurn = false;
     private boolean startedTheTurnUntapped = false;
-    private boolean underControlSinceLastUpkeep = true; // for Echo
     private boolean tapped = false;
     private boolean sickness = true; // summoning sickness
     private boolean token = false;
@@ -207,6 +206,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private NavigableMap<Long, Player> tempControllers = new TreeMap<>();
 
     private String originalText = "", text = "";
+    private String echoCost = "";
     private Cost miracleCost = null;
     private String chosenType = "";
     private List<String> chosenColors;
@@ -1099,6 +1099,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void setTurnInZone(final int turn) {
         turnInZone = turn;
+    }
+
+    public final void setEchoCost(final String s) {
+        echoCost = s;
+    }
+
+    public final String getEchoCost() {
+        return echoCost;
     }
 
     public final void setManaCost(final ManaCost s) {
@@ -2149,14 +2157,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public void setStartedTheTurnUntapped(boolean untapped) {
         startedTheTurnUntapped = untapped;
-    }
-    
-    public boolean cameUnderControlSinceLastUpkeep() {
-        return underControlSinceLastUpkeep;
-    }
-
-    public void setUnderControlSinceLastUpkeep(boolean underControlSinceLastUpkeep) {
-        this.underControlSinceLastUpkeep = underControlSinceLastUpkeep;
     }
 
     public final Player getOwner() {
@@ -4614,10 +4614,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("startedTheTurnUntapped")) {
             if (!hasStartedTheTurnUntapped()) {
-                return false;
-            }
-        } else if (property.startsWith("cameUnderControlSinceLastUpkeep")) {
-            if (!cameUnderControlSinceLastUpkeep()) {
                 return false;
             }
         } else if (property.equals("attackedOrBlockedSinceYourLastUpkeep")) {

@@ -2306,18 +2306,19 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Echo")) {
                 final String[] k = keyword.split(":");
                 final String manacost = k[1];
-                
-                String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
-                        " | Execute$ TrigUpkeepEcho | IsPresent$ Card.Self+cameUnderControlSinceLastUpkeep | Secondary$ True | " +
-                        "TriggerDescription$ Echo: At the beginning of your upkeep, if CARDNAME came under your control since the " +
-                        "beginning of your last upkeep, sacrifice it unless you pay the Echo cost";
 
-                String ref = "X".equals(manacost) ? " | References$ X" : "";
-                card.setSVar("TrigUpkeepEcho", "AB$ Sacrifice | Cost$ 0 | SacValid$ Self | "
-                        + "Echo$ " + manacost + ref);
+                card.setEchoCost(manacost);
 
-                final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, true);
-                card.addTrigger(parsedUpkeepTrig);
+                final GameCommand intoPlay = new GameCommand() {
+
+                    private static final long serialVersionUID = -7913835645603984242L;
+
+                    @Override
+                    public void run() {
+                        card.addExtrinsicKeyword("(Echo unpaid)");
+                    }
+                };
+                card.addComesIntoPlayCommand(intoPlay);
             }
             else if (keyword.startsWith("Suspend")) {
                 card.removeIntrinsicKeyword(keyword);

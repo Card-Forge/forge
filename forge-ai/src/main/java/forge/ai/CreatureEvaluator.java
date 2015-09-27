@@ -165,7 +165,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value -= subValue(30, "cupkeep");
         } else if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
             value -= subValue(20, "sac-unless");
-        } else if (c.hasStartOfKeyword("Echo") && c.cameUnderControlSinceLastUpkeep()) {
+        } else if (c.hasStartOfKeyword("(Echo unpaid)")) {
             value -= subValue(10, "echo-unpaid");
         }
     
