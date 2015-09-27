@@ -18,7 +18,6 @@
 package forge.screens.deckeditor.controllers;
 
 import forge.Singletons;
-import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -30,7 +29,6 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -39,8 +37,6 @@ import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
-import forge.util.MyRandom;
-
 import java.util.Map.Entry;
 
 /**
@@ -159,7 +155,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         // add sideboard to deck
         deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
 
-        final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
+        //no need to add basic lands now that Add Basic Lands button exists
+        /*final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
         final boolean isZendikarSet = landSet.equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
         final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
 
@@ -177,7 +174,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
             } else {
                 deck.get(DeckSection.Sideboard).add(landName, landSet, 30);
             }
-        }
+        }*/
 
         return deck;
     } // getPlayersDeck()

@@ -120,7 +120,7 @@ public enum CSubmenuSealed implements ICDoc {
 
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
-        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(true);
+        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(false);
         if (sealed == null) { return; }
 
         final ACEditorBase<? extends InventoryItem, T> editor = (ACEditorBase<? extends InventoryItem, T>) new CEditorLimited(
