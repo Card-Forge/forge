@@ -2,7 +2,7 @@
 #1|Quarantine Field|M|BFZ
 #2|Ulamog, the Ceaseless Hunger|M|BFZ
 #3|Omnath, Locus of Rage|M|BFZ
-#4|BFZwarden of Murasa|M|BFZ
+#4|Greenwarden of Murasa|M|BFZ
 #5|Gideon, Ally of Zendikar|M|BFZ
 #6|Drana, Liberator of Malakir|M|BFZ
 #7|Ob Nixilis Reignited|M|BFZ
