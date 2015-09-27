@@ -471,14 +471,12 @@ public class GameAction {
         oldBattlefield.remove(c);
         newBattlefield.add(c);
         c.setSickness(true);
-        if (c.hasStartOfKeyword("Echo")) {
-            c.addExtrinsicKeyword("(Echo unpaid)");
-        }
         if (game.getPhaseHandler().inCombat()) {
             game.getCombat().removeFromCombat(c);
         }
 
         c.setTurnInZone(tiz);
+        c.setCameUnderControlSinceLastUpkeep(true);
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
