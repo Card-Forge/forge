@@ -465,7 +465,7 @@ public class AiController {
                         }
 
                         // Glacial Fortress and friends
-                        if (land.hasSVar("ETBCheckSVar") && CardFactoryUtil.xCount(land, land.getSVar("ETBCheckSVar")) == 0) {
+                        if (land.hasSVar("ETBCheckSVar")) {
                             continue;
                         }
 
