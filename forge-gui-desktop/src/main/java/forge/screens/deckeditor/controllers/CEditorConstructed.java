@@ -19,8 +19,10 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
+import forge.StaticData;
 
 import forge.UiCommand;
+import forge.card.CardEdition;
 import forge.card.CardRulesPredicates;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -34,11 +36,14 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.Aggregates;
 import forge.util.ItemPool;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -335,7 +340,24 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         Deck deck = editor.getDeckController().getModel();
         if (deck == null) { return; }
 
-        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, null, restrictedCatalog);
+        List<String> landCodes = new ArrayList<>();
+        Set<String> availableEditions = new HashSet<>();
+
+        for (PaperCard c : deck.getAllCardsInASinglePool().toFlatList()) {
+            availableEditions.add(c.getEdition());
+        }
+
+        for (String edCode : availableEditions) {
+            CardEdition ed = FModel.getMagicDb().getEditions().get(edCode);
+            // Sets with only 2 types of lands (e.g. duel decks) are handled by Predicated.hasBasicLands
+            if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
+                landCodes.add(edCode);
+            }
+        }
+
+        CardEdition defaultLandSet = FModel.getMagicDb().getEditions().get(landCodes.isEmpty() ? "ZEN" : Aggregates.random(landCodes));
+
+        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, restrictedCatalog);
         CardPool landsToAdd = dialog.show();
         if (landsToAdd != null) {
             editor.onAddItems(landsToAdd, false);
