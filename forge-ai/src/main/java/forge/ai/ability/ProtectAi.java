@@ -14,6 +14,7 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
@@ -110,6 +111,7 @@ public class ProtectAi extends SpellAbilityAi {
         final PhaseHandler ph = game.getPhaseHandler();
         
         CardCollection list = ai.getCreaturesInPlay();
+        final List<GameObject> threatenedObjects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -122,12 +124,9 @@ public class ProtectAi extends SpellAbilityAi {
                     return false;
                 }
 
-                if (!game.stack.isEmpty()) {
-                    //counter bad effect on stack
-                    if (ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(c)) {
+                    if (threatenedObjects.contains(c)) {
                         return true;
-                    }
-                }
+                    }}
                 
                 if (combat != null) {
                     //creature is blocking and would be destroyed itself

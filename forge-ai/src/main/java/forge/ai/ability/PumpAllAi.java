@@ -139,12 +139,11 @@ public class PumpAllAi extends PumpAiBase {
 
     boolean pumpAgainstRemoval(Player ai, SpellAbility sa, List<Card> comp) {
         final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
-        final List<Card> threatenedTargets = new ArrayList<Card>();
         for (final Card c : comp) {
             if (objects.contains(c)) {
-                threatenedTargets.add(c);
+                return true;
             }
         }
-        return !threatenedTargets.isEmpty();
+        return false;
     }
 }
