@@ -17,12 +17,16 @@ works in all major modes (Constructed, Booster Draft, Sealed Deck) including Que
 - Quest mode changes related to basic lands -
 Now that Add Basic Lands can be used to add basic lands to your deck, Quest mode underwent several changes to adapt to this new
 functionality. In particular:
-- Quest mode now depends on the player using Add Basic Lands to add basic lands to his decks instead of buying basic lands from the quest shop or using the generated basic lands from the initial card pool.
-- Basic lands added in Quest mode using "Add Basic Lands" cannot be sold (and are not shown in the Quest Spell Shop interface) to avoid cheating.
+- Quest mode now depends on the player using Add Basic Lands to add basic lands to decks instead of buying basic lands from the
+quest shop or using the generated basic lands from the initial card pool.
+- Basic lands added in Quest mode using "Add Basic Lands" cannot be sold (and are not shown in the Quest Spell Shop interface)
+ to avoid cheating.
 - Quest mode no longer generates basic lands for the starting card pool to avoid clutter.
 - Quest mode shop no longer sells basic lands (to avoid clutter; you can add any basic lands you want anyway).
-- Quest mode draft tournament correctly allows to use "Add Basic Lands" only after drafting is over and deck construction begins (and the button is hidden during the drafting process).
-- Otherwise, basic lands found normally during the quest (e.g. found in booster packs, drafted in quest draft tournaments (if anyone ever drafts basic lands), purchased in preconstructed decks etc.) function as before and can be sold normally via the quest shop interface.
+- Quest mode draft tournament correctly allows to use "Add Basic Lands" only after drafting is over and deck construction begins
+ (and the button is hidden during the drafting process).
+- Otherwise, basic lands found normally during the quest (e.g. found in booster packs, drafted in quest draft tournaments,
+purchased in preconstructed decks etc.) function as before and can be sold normally via the quest shop interface.
 
 
 - Permanent locations for Net Decks and Achievement trophies -
