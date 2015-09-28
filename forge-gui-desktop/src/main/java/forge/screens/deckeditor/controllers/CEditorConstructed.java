@@ -19,7 +19,6 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-import forge.StaticData;
 
 import forge.UiCommand;
 import forge.card.CardEdition;
@@ -36,14 +35,11 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.util.Aggregates;
 import forge.util.ItemPool;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -340,22 +336,14 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         Deck deck = editor.getDeckController().getModel();
         if (deck == null) { return; }
 
-        List<String> landCodes = new ArrayList<>();
-        Set<String> availableEditions = new HashSet<>();
+        List<CardEdition> availableEditions = new ArrayList<>();
 
         for (PaperCard c : deck.getAllCardsInASinglePool().toFlatList()) {
-            availableEditions.add(c.getEdition());
+            availableEditions.add(FModel.getMagicDb().getEditions().get(c.getEdition()));
         }
 
-        for (String edCode : availableEditions) {
-            CardEdition ed = FModel.getMagicDb().getEditions().get(edCode);
-            // Sets with only 2 types of lands (e.g. duel decks) are handled by Predicated.hasBasicLands
-            if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
-                landCodes.add(edCode);
-            }
-        }
-
-        CardEdition defaultLandSet = FModel.getMagicDb().getEditions().get(landCodes.isEmpty() ? "ZEN" : Aggregates.random(landCodes));
+        CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
+        CardEdition defaultLandSet = randomLandSet == null ? FModel.getMagicDb().getEditions().get("ZEN") : randomLandSet;
 
         AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, restrictedCatalog);
         CardPool landsToAdd = dialog.show();

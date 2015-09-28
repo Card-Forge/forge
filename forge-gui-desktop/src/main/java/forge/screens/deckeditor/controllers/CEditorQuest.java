@@ -51,7 +51,6 @@ import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.util.Aggregates;
 import forge.util.ItemPool;
 
 /**
@@ -313,18 +312,15 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         Deck deck = editor.getDeckController().getModel();
         if (deck == null) { return; }
 
-        List<String> landCodes = new ArrayList<>();
-        List<String> availableEditions = questFormat != null ? questFormat.getAllowedSetCodes() : Lists.newArrayList(FModel.getMagicDb().getEditions().getItemNames());
+        List<String> availableEditionCodes = questFormat != null ? questFormat.getAllowedSetCodes() : Lists.newArrayList(FModel.getMagicDb().getEditions().getItemNames());
+        List<CardEdition> availableEditions = new ArrayList<>();
 
-        for (String edCode : availableEditions) {
-            CardEdition ed = FModel.getMagicDb().getEditions().get(edCode);
-            // Sets with only 2 types of lands (e.g. duel decks) are handled by Predicated.hasBasicLands
-            if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
-                landCodes.add(edCode);
-            }
+        for (String s : availableEditionCodes) {
+            availableEditions.add(FModel.getMagicDb().getEditions().get(s));
         }
 
-        CardEdition defaultLandSet = FModel.getMagicDb().getEditions().get(landCodes.isEmpty() ? "ZEN" : Aggregates.random(landCodes));
+        CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
+        CardEdition defaultLandSet = randomLandSet == null ? FModel.getMagicDb().getEditions().get("ZEN") : randomLandSet;
 
         AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, restrictedCatalog);
         CardPool landsToAdd = dialog.show();
