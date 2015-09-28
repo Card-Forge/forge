@@ -2,6 +2,8 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
+import forge.game.Game;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -18,13 +20,15 @@ public class PermanentNoncreatureAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
+        Game game = aiPlayer.getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
 
         if ("DontCast".equals(logic)) {
             return false;
         }
 
         // Wait for Main2 if possible
-        if (aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)
+        if (ph.is(PhaseType.MAIN1) && ph.isPlayerTurn(aiPlayer)
                 && !ComputerUtil.castPermanentInMain1(aiPlayer, sa)) {
             return false;
         }

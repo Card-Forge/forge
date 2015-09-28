@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import java.util.Iterator;
+
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
@@ -10,6 +12,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
@@ -119,7 +122,24 @@ public class CounterAi extends SpellAbilityAi {
             if (game.getStack().isEmpty()) {
                 return false;
             }
-            final SpellAbility topSA = game.getStack().peekAbility();
+            
+            SpellAbility topSA = game.getStack().peekAbility();
+            
+            // triggered abilities see themselves on the stack, so find another spell on the stack
+            if (sa.isTrigger() && topSA.isTrigger() && game.getStack().size() > 1) {
+                Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
+                SpellAbilityStackInstance si = game.getStack().peek();
+                while (it.hasNext()) {
+                    si = it.next();
+                    if (si.isTrigger()) {
+                        it.remove();
+                    } else {
+                    	break;
+                    }
+                }
+            	topSA = si.getSpellAbility(true);
+            }
+        	
             if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai) {
                 return false;
             }
@@ -170,7 +190,6 @@ public class CounterAi extends SpellAbilityAi {
         // force the Human into making decisions)
 
         // But really it should be more picky about how it counters things
-
         return true;
     }
 

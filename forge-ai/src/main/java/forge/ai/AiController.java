@@ -226,7 +226,7 @@ public class AiController {
             }
             
             // if trigger is not mandatory - no problem
-            if (params.get("OptionalDecider") != null) {
+            if (params.get("OptionalDecider") != null && api == null) {
                 continue;
             }
 
@@ -243,6 +243,11 @@ public class AiController {
                 } else {
                     rightapi = true;
                 }
+                if (!(exSA instanceof AbilitySub)) {
+                	if (!ComputerUtilCost.canPayCost(exSA, player)) {
+                		return false;
+                	}
+                }
             }
 
             if (sa != null) {
@@ -255,7 +260,7 @@ public class AiController {
 
             // Run non-mandatory trigger.
             // These checks only work if the Executing SpellAbility is an Ability_Sub.
-            if ((exSA instanceof AbilitySub) && !doTrigger(exSA, false)) {
+            if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
                 // AI would not run this trigger if given the chance
                 return false;
             }
@@ -691,6 +696,7 @@ public class AiController {
                     && (game.getPhaseHandler().isPlayerTurn(player)
                             || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
                     && (!card.hasETBTrigger(true) || card.hasSVar("AmbushAI"))
+                    && game.getStack().isEmpty()
                     && !ComputerUtil.castPermanentInMain1(player, sa)) {
                 return AiPlayDecision.AnotherTime;
             }

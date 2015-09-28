@@ -79,7 +79,7 @@ public class PermanentCreatureAi extends SpellAbilityAi {
         }
 
         // Wait for Main2 if possible
-        if (ph.is(PhaseType.MAIN1)
+        if (ph.is(PhaseType.MAIN1) && ph.isPlayerTurn(aiPlayer)
                 && !ComputerUtil.castPermanentInMain1(aiPlayer, sa)) {
             return false;
         }
