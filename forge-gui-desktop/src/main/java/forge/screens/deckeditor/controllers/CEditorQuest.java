@@ -25,8 +25,11 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
+import com.google.common.collect.Lists;
 
 import forge.UiCommand;
+import forge.card.CardEdition;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.framework.DragCell;
@@ -40,12 +43,15 @@ import forge.itemmanager.views.ItemTableColumn;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
+import forge.quest.data.GameFormatQuest;
+import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.Aggregates;
 import forge.util.ItemPool;
 
 /**
@@ -60,6 +66,7 @@ import forge.util.ItemPool;
  */
 public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     private final QuestController questData;
+    private static GameFormatQuest questFormat;
     private final DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
     private DragCell allDecksParent = null;
@@ -122,7 +129,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override
             public void run() {
-                CEditorConstructed.addBasicLands(CEditorQuest.this, questData.getCards().getCardpool());
+                questFormat = questData.getFormat();
+                CEditorQuest.addBasicLands(CEditorQuest.this, questData.getCards().getCardpool());
             }
         });
     }
@@ -298,6 +306,30 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         }
         if (allDecksParent != null) {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        }
+    }
+
+    public static void addBasicLands(ACEditorBase<PaperCard, Deck> editor, ItemPool<PaperCard> restrictedCatalog) {
+        Deck deck = editor.getDeckController().getModel();
+        if (deck == null) { return; }
+
+        List<String> landCodes = new ArrayList<>();
+        List<String> availableEditions = questFormat != null ? questFormat.getAllowedSetCodes() : Lists.newArrayList(FModel.getMagicDb().getEditions().getItemNames());
+
+        for (String edCode : availableEditions) {
+            CardEdition ed = FModel.getMagicDb().getEditions().get(edCode);
+            // Sets with only 2 types of lands (e.g. duel decks) are handled by Predicated.hasBasicLands
+            if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
+                landCodes.add(edCode);
+            }
+        }
+
+        CardEdition defaultLandSet = FModel.getMagicDb().getEditions().get(landCodes.isEmpty() ? "ZEN" : Aggregates.random(landCodes));
+
+        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, restrictedCatalog);
+        CardPool landsToAdd = dialog.show();
+        if (landsToAdd != null) {
+            editor.onAddItems(landsToAdd, false);
         }
     }
 }
