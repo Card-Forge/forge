@@ -37,7 +37,6 @@ import com.google.common.collect.Iterables;
 
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
-import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
@@ -483,36 +482,37 @@ public class AiController {
             }
         }
 
-        //play basic lands that are needed the most
-        if (Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
-            final CardCollectionView combined = player.getCardsIn(ZoneType.Battlefield);
+        //play lands with a basic type that is needed the most
+        final CardCollectionView landsInBattlefield = player.getCardsIn(ZoneType.Battlefield);
+        final List<String> basics = new ArrayList<String>();
 
-            final List<String> basics = new ArrayList<String>();
-    
-            // what types can I go get?
-            for (final String name : CardType.Constant.BASIC_TYPES) {
-                if (Iterables.any(landList, CardPredicates.isType(name))) {
-                    basics.add(name);
-                }
+        // what types can I go get?
+        for (final String name : MagicColor.Constant.BASIC_LANDS) {
+            if (!CardLists.getType(landList, name).isEmpty()) {
+                basics.add(name);
             }
-    
-            // Which basic land is least available from hand and play, that I still
-            // have in my deck
-            int minSize = Integer.MAX_VALUE;
-            String minType = null;
-    
-            for (int i = 0; i < basics.size(); i++) {
-                final String b = basics.get(i);
-                final int num = CardLists.getType(combined, b).size();
-                if (num < minSize) {
-                    minType = b;
-                    minSize = num;
-                }
-            }
-    
-            if (minType != null) {
-                landList = CardLists.getType(landList, minType);
-            }
+        }
+        if (!basics.isEmpty()) {
+	        // Which basic land is least available
+	        int minSize = Integer.MAX_VALUE;
+	        String minType = null;
+
+	        for (String b : basics) {
+	            final int num = CardLists.getType(landsInBattlefield, b).size();
+	            if (num < minSize) {
+	                minType = b;
+	                minSize = num;
+	            }
+	        }
+
+	        if (minType != null) {
+	            landList = CardLists.getType(landList, minType);
+	        }
+
+	        // pick dual lands if available
+	        if (Iterables.any(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS))) {
+	            landList = CardLists.filter(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
+	        }
         }
         return landList.get(0);
     }
