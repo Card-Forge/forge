@@ -19,7 +19,6 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.collect.ImmutableList;
 import forge.assets.FSkinProp;
-import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -31,7 +30,6 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.QuestEventDraft;
 import forge.screens.deckeditor.views.VAllDecks;
@@ -43,7 +41,6 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.util.ItemPool;
-import forge.util.MyRandom;
 
 import java.util.Map.Entry;
 
