@@ -403,9 +403,12 @@ public class AddBasicLandsDialog {
 
                 final Graphics2D g2d = (Graphics2D) g;
 
-                final BufferedImage img = ImageCache.getImage(card, getWidth(), getHeight());
+                int width = getWidth();
+                int height = getHeight();
+
+                final BufferedImage img = ImageCache.getImage(card, width, height);
                 if (img != null) {
-                    g2d.drawImage(img, null, 0, 0);
+                    g2d.drawImage(img, null, (width - img.getWidth()) / 2, (height - img.getHeight()) / 2);
                 }
             }
         }
