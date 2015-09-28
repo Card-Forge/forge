@@ -302,8 +302,9 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_HARD, QuestPreferencesErrType.DIFFICULTY), fieldConstraints);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_EXPERT, QuestPreferencesErrType.DIFFICULTY), fieldConstraints);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Starting Basic Lands").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
-        pnlDifficulty.add(new PrefInput(QPref.STARTING_BASIC_LANDS, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
+        // Basic lands are no longer generated for quest mode (we now use Add Basic Lands)
+        //pnlDifficulty.add(new FLabel.Builder().text("Starting Basic Lands").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        //pnlDifficulty.add(new PrefInput(QPref.STARTING_BASIC_LANDS, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
         pnlDifficulty.add(new FLabel.Builder().text("Wins for New Draft").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlDifficulty.add(new PrefInput(QPref.WINS_NEW_DRAFT, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");

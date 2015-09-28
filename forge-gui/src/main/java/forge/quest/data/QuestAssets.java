@@ -177,8 +177,9 @@ public class QuestAssets {
         if (useFormat != null && !useFormat.hasSnowLands()) {
             snowLands = 0;
         }
+        // Non-snow basic lands are no longer generated (we use Add Basic Lands)
         final ItemPool<PaperCard> lands = QuestUtilCards.generateBasicLands(
-                prefs.getPrefInt(QPref.STARTING_BASIC_LANDS), snowLands, useFormat);
+                /*prefs.getPrefInt(QPref.STARTING_BASIC_LANDS)*/0,  snowLands, useFormat);
         this.getCardPool().addAll(lands);
     }
 

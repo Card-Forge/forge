@@ -70,7 +70,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         REWARDS_TURN1("1500"),
 
         // How many basic your starting pool has (if appropriate)
-        STARTING_BASIC_LANDS("20"),
+        //STARTING_BASIC_LANDS("20"),
         STARTING_SNOW_LANDS("5"),
 
         // Starting pool color bias effect

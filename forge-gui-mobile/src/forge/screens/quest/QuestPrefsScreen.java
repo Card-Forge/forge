@@ -90,7 +90,7 @@ public class QuestPrefsScreen extends FScreen {
 
         //Difficulty Adjustments (All)
         scroller.add(new PrefsHeader("Difficulty Adjustments (All)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_ALL));
-        scroller.add(new PrefsOption("Starting basic lands", QPref.STARTING_BASIC_LANDS, PrefsGroup.DIFFICULTY_ALL));
+        //scroller.add(new PrefsOption("Starting basic lands", QPref.STARTING_BASIC_LANDS, PrefsGroup.DIFFICULTY_ALL)); // Add Basic Lands is used instead
         scroller.add(new PrefsOption("Starting snow lands", QPref.STARTING_SNOW_LANDS, PrefsGroup.DIFFICULTY_ALL));
         scroller.add(new PrefsOption("Color bias (1-100%)", QPref.STARTING_POOL_COLOR_BIAS, PrefsGroup.DIFFICULTY_ALL));
         scroller.add(new PrefsOption("Penalty for loss", QPref.PENALTY_LOSS, PrefsGroup.DIFFICULTY_ALL));

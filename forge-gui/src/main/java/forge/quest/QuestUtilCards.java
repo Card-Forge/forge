@@ -710,7 +710,8 @@ public final class QuestUtilCards {
         if (qc.getFormat() != null && !qc.getFormat().hasSnowLands()) {
             numberSnowLands = 0;
         }
-        this.qa.getShopList().addAll(QuestUtilCards.generateBasicLands(10, numberSnowLands, qc.getFormat()));
+        // Spell shop no longer sells basic lands (we use "Add Basic Lands" instead)
+        this.qa.getShopList().addAll(QuestUtilCards.generateBasicLands(/*10*/0, numberSnowLands, qc.getFormat()));
     }
 
     /**

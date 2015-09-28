@@ -93,6 +93,8 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
 
+        getBtnAddBasicLands().setVisible(false);
+
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
     }
@@ -174,7 +176,8 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         // add sideboard to deck
         deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
 
-        final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
+        // No need to add basic lands now that Add Basic Lands button exists
+        /*final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
         final boolean isZendikarSet = landSet.equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
         final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
 
@@ -193,6 +196,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
                 deck.get(DeckSection.Sideboard).add(landName, landSet, 30);
             }
         }
+        */
 
         return deck;
     } // getPlayersDeck()
