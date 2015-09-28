@@ -124,10 +124,10 @@ public class ProtectAi extends SpellAbilityAi {
                     return false;
                 }
 
-                    if (threatenedObjects.contains(c)) {
-                        return true;
-                    }}
-                
+                if (threatenedObjects.contains(c)) {
+                    return true;
+                }
+
                 if (combat != null) {
                     //creature is blocking and would be destroyed itself
                     if (combat.isBlocking(c) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, c, combat)) {
