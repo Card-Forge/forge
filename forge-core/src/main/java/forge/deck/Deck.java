@@ -81,7 +81,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public Deck(final Deck other, final String newName) {
         super(newName);
         setComment(other.getComment());
-        for (final Entry<DeckSection, CardPool> sections : parts.entrySet()) {
+        for (final Entry<DeckSection, CardPool> sections : other.parts.entrySet()) {
             parts.put(sections.getKey(), new CardPool(sections.getValue()));
         }
         tags.addAll(other.getTags());
