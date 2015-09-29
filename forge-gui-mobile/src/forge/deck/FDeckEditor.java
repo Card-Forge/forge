@@ -290,8 +290,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     defaultLandSet = FModel.getQuest().getDefaultLandSet();
                                     break;
                                 default:
-                                    //TODO: Support loading/saving default land set for non-limited decks
-                                    defaultLandSet = StaticData.instance().getEditions().get("ZEN");
+                                    defaultLandSet = DeckProxy.getDefaultLandSet(deck);
                                     break;
                                 }
                                 AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<CardPool>() {

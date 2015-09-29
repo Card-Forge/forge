@@ -41,6 +41,7 @@ import forge.card.CardRules;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.toolbox.FComboBox;
@@ -85,7 +86,7 @@ public class AddBasicLandsDialog {
         deck = deck0;
 
         if (defaultLandSet == null) {
-            defaultLandSet = StaticData.instance().getEditions().get("ZEN");
+            defaultLandSet = DeckProxy.getDefaultLandSet(deck);
         }
 
         panel.setMinimumSize(new Dimension(WIDTH, HEIGHT));

@@ -21,7 +21,6 @@ import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 
 import forge.UiCommand;
-import forge.card.CardEdition;
 import forge.card.CardRulesPredicates;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -336,16 +335,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         Deck deck = editor.getDeckController().getModel();
         if (deck == null) { return; }
 
-        List<CardEdition> availableEditions = new ArrayList<>();
-
-        for (PaperCard c : deck.getAllCardsInASinglePool().toFlatList()) {
-            availableEditions.add(FModel.getMagicDb().getEditions().get(c.getEdition()));
-        }
-
-        CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
-        CardEdition defaultLandSet = randomLandSet == null ? FModel.getMagicDb().getEditions().get("ZEN") : randomLandSet;
-
-        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet);
+        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck);
         CardPool landsToAdd = dialog.show();
         if (landsToAdd != null) {
             editor.onAddItems(landsToAdd, false);
