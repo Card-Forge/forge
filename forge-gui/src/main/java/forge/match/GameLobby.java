@@ -406,7 +406,7 @@ public abstract class GameLobby {
                 deck = deck == null ? rp.getDeck() : deck;
 
                 final CardPool avatarPool = deck.get(DeckSection.Avatar);
-                if (avatarPool != null) {
+                if (avatarPool != null && (hasVariant(GameType.Vanguard) || hasVariant(GameType.MomirBasic))) {
                     vanguardAvatar = avatarPool.get(0);
                 }
 
