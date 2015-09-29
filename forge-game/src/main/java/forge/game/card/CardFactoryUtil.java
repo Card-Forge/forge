@@ -3081,7 +3081,15 @@ public class CardFactoryUtil {
         //card.removeIntrinsicKeyword(awakenKeyword);
         
         final SpellAbility awakenSpell = card.getFirstSpellAbility().copy();
-        
+
+        // get the last subability of the spell to attach awaken in the end
+        SpellAbility lastSub = awakenSpell;
+        while (lastSub.getSubAbility() != null) {
+            final AbilitySub copySubSA = ((AbilitySub) lastSub.getSubAbility()).getCopy();
+            lastSub.setSubAbility(copySubSA);
+            lastSub = copySubSA;
+        }
+
         final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
                 + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | SubAbility$"
                 + " AwakenAnimate";
@@ -3089,8 +3097,7 @@ public class CardFactoryUtil {
                 + " Creature,Elemental | Permanent$ True | Keywords$ Haste";
         card.setSVar("AwakenAnimate", dbAnimate);
         final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(awaken, card);
-        awakenSpell.setSubAbility(awakenSub);
-        awakenSub.setParent(awakenSpell);
+        lastSub.setSubAbility(awakenSub);
         String desc = "Awaken " + counters + " - " + awakenCost.toSimpleString() + " (If you cast "
                 + "this spell for " + awakenCost.toSimpleString() + ", also put " + counters
                 + " +1/+1 counter"+ suffix + " on target land you control and it becomes a 0/0 "
