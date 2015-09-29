@@ -125,7 +125,7 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override
             public void run() {
-                CEditorLimited.addBasicLands(CEditorQuestLimited.this, questData.getCards().getCardpool());
+                CEditorLimited.addBasicLands(CEditorQuestLimited.this);
             }
         });
     }

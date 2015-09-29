@@ -92,9 +92,6 @@ public class AddBasicLandsDialog extends FDialog {
     private CardEdition landSet;
 
     public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Callback<CardPool> callback0) {
-        this(deck, defaultLandSet, null, callback0);
-    }
-    public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, CardPool restrictedCatalog0, final Callback<CardPool> callback0) {
         super("Add Basic Lands \n" + deck.getName(), 2);
 
         callback = callback0;

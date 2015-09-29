@@ -94,7 +94,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override
             public void run() {
-                CEditorConstructed.addBasicLands(CEditorCommander.this, null);
+                CEditorConstructed.addBasicLands(CEditorCommander.this);
             }
         });
     }

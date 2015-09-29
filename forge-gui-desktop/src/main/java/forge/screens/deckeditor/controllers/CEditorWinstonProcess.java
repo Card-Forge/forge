@@ -95,7 +95,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override
             public void run() {
-                CEditorLimited.addBasicLands(CEditorWinstonProcess.this, null);
+                CEditorLimited.addBasicLands(CEditorWinstonProcess.this);
             }
         });
     }

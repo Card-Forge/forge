@@ -286,6 +286,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     //use most recent edition that all cards in limited pool came before or in
                                     defaultLandSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(deck.getAllCardsInASinglePool());
                                     break;
+                                case Quest:
+                                    defaultLandSet = FModel.getQuest().getDefaultLandSet();
+                                    break;
                                 default:
                                     //TODO: Support loading/saving default land set for non-limited decks
                                     defaultLandSet = StaticData.instance().getEditions().get("ZEN");

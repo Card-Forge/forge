@@ -99,7 +99,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override
             public void run() {
-                CEditorConstructed.addBasicLands(CEditorConstructed.this, null);
+                CEditorConstructed.addBasicLands(CEditorConstructed.this);
             }
         });
     }
@@ -332,7 +332,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         this.controller.updateCaptions();
     }
 
-    public static void addBasicLands(ACEditorBase<PaperCard, Deck> editor, ItemPool<PaperCard> restrictedCatalog) {
+    public static void addBasicLands(ACEditorBase<PaperCard, Deck> editor) {
         Deck deck = editor.getDeckController().getModel();
         if (deck == null) { return; }
 
@@ -345,7 +345,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
         CardEdition defaultLandSet = randomLandSet == null ? FModel.getMagicDb().getEditions().get("ZEN") : randomLandSet;
 
-        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, restrictedCatalog);
+        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet);
         CardPool landsToAdd = dialog.show();
         if (landsToAdd != null) {
             editor.onAddItems(landsToAdd, false);

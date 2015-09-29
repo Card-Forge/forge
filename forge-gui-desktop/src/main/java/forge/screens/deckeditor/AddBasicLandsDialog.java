@@ -51,7 +51,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.util.ItemPool;
 import forge.view.arcane.CardPanel;
 
 
@@ -80,12 +79,9 @@ public class AddBasicLandsDialog {
     private CardEdition landSet;
 
     public AddBasicLandsDialog(Deck deck0) {
-        this(deck0, null, null);
+        this(deck0, null);
     }
     public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet) {
-        this(deck0, defaultLandSet, null);
-    }
-    public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet, ItemPool<PaperCard> restrictedCatalog0) {
         deck = deck0;
 
         if (defaultLandSet == null) {
