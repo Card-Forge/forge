@@ -445,29 +445,38 @@ public class AiController {
                 unreflectedLands.remove(l);
             }
         }
-
         if (!unreflectedLands.isEmpty()) {
             landList = unreflectedLands;
         }
 
+        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
+
+        //try to skip lands that enter the battlefield tapped
+        if (!nonLandsInHand.isEmpty()) {
+	        CardCollection nonTappeddLands = new CardCollection(landList);
+	        for (Card land : landList) {
+	            // Is this the best way to check if a land ETB Tapped?
+	            if (land.hasSVar("ETBTappedSVar")) {
+	                continue;
+	            }
+	            // Glacial Fortress and friends
+	            if (land.hasSVar("ETBCheckSVar") && CardFactoryUtil.xCount(land, land.getSVar("ETBCheckSVar")) == 0) {
+	                continue;
+	            }
+	            nonTappeddLands.add(land);
+	        }
+	        if (!nonTappeddLands.isEmpty()) {
+	            landList = nonTappeddLands;
+	        }
+        }
+
         // Choose first land to be able to play a one drop
         if (player.getLandsInPlay().isEmpty()) {
-            CardCollection oneDrops = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(1));
+            CardCollection oneDrops = CardLists.filter(nonLandsInHand, CardPredicates.hasCMC(1));
             for (int i = 0; i < MagicColor.WUBRG.length; i++) {
                 byte color = MagicColor.WUBRG[i];
                 if (!CardLists.filter(oneDrops, CardPredicates.isColor(color)).isEmpty()) {
                     for (Card land : landList) {
-                        // Don't play ETB Tapped land if you have a 1 drop can be played
-                        // Is this the best way to check if a land ETB Tapped?
-                        if (land.hasSVar("ETBTappedSVar")) {
-                            continue;
-                        }
-
-                        // Glacial Fortress and friends
-                        if (land.hasSVar("ETBCheckSVar")) {
-                            continue;
-                        }
-
                         if (land.getType().hasSubtype(MagicColor.Constant.BASIC_LANDS.get(i))) {
                             return land;
                         }
