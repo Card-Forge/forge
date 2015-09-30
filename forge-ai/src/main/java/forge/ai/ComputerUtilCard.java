@@ -821,9 +821,25 @@ public class ComputerUtilCard {
         if (game.getPhaseHandler().getPhase().equals(PhaseType.MAIN1) && ComputerUtil.castSpellInMain1(ai, sa)) {
             return true;
         }
+        
+        //interrupt 1: Check whether a possible blocker will be killed for the AI to make a bigger attack
+        if (ph.is(PhaseType.MAIN1) && ph.isPlayerTurn(ai) && c.isCreature()) {
+            AiAttackController aiAtk = new AiAttackController(ai);
+            final Combat combat = new Combat(ai);
+            aiAtk.removeBlocker(c);
+            aiAtk.declareAttackers(combat);
+        	if (!combat.getAttackers().isEmpty()) {
+                AiAttackController aiAtk2 = new AiAttackController(ai);
+                final Combat combat2 = new Combat(ai);
+                aiAtk2.declareAttackers(combat2);
+                if (combat.getAttackers().size() > combat2.getAttackers().size()) {
+                	return true;
+                }
+        	}
+        }
 
-        //interrupt 1:remove blocker to save my attacker
-        if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+        // interrupt 2: remove blocker to save my attacker
+        if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !ph.isPlayerTurn(ai)) {
             Combat currCombat = game.getCombat();
             if (currCombat != null && !currCombat.getAllBlockers().isEmpty() && currCombat.getAllBlockers().contains(c)) {
                 for (Card attacker : currCombat.getAttackersBlockedBy(c)) {
@@ -846,6 +862,29 @@ public class ComputerUtilCard {
             }
         }
         
+        // interrupt 3:  two for one = good
+        if (c.isEnchanted()) {
+            boolean myEnchants = false;
+            for (Card enc : c.getEnchantedBy(false)) {
+                if (enc.getOwner().equals(ai)) {
+                    myEnchants = true;
+                    break;
+                }
+            }
+            if (!myEnchants) {
+                return true;    //card advantage > tempo
+            }
+        }
+        
+        //interrupt 4: opponent pumping target (only works if the pump target is the chosen best target to begin with)
+        final MagicStack stack = game.getStack();
+        if (!stack.isEmpty()) {
+            final SpellAbility topStack = stack.peekAbility();
+            if (topStack.getActivatingPlayer().equals(opp) && c.equals(topStack.getTargetCard()) && topStack.isSpell()) {
+            	return true;
+            }
+        }
+        
         //burn and curse spells
         float valueBurn = 0;
         if (dmg > 0) {
@@ -856,6 +895,9 @@ public class ComputerUtilCard {
             valueBurn *= valueBurn;
             if (sa.getTargetRestrictions().canTgtPlayer()) {
                 valueBurn /= 2;     //preserve option to burn to the face
+            }
+            if (valueBurn >= 0.8 && ph.getPhase().isBefore(PhaseType.COMBAT_END)) {
+            	return true;
             }
         }
         
@@ -880,37 +922,29 @@ public class ComputerUtilCard {
         if (c.isLand()) {
             valueTempo += 0.5f / opp.getLandsInPlay().size();   //set back opponent's mana
         }
-        if (c.isEnchanted()) {
-            boolean myEnchants = false;
-            for (Card enc : c.getEnchantedBy(false)) {
-                if (enc.getOwner().equals(ai)) {
-                    myEnchants = true;
-                    break;
-                }
-            }
-            if (!myEnchants) {
-                valueTempo += 1;    //card advantage > tempo
-            }
-        }
         if (!ph.isPlayerTurn(ai) && ph.getPhase().equals(PhaseType.END_OF_TURN)) {
             valueTempo *= 2;    //prefer to cast at opponent EOT
         }
-        
-        //interrupt 2:opponent pumping target (only works if the pump target is the chosen best target to begin with)
-        final MagicStack stack = ai.getGame().getStack();
-        if (!stack.isEmpty()) {
-            final SpellAbility topStack = stack.peekAbility();
-            if (topStack.getActivatingPlayer().equals(opp) && c.equals(topStack.getTargetCard()) && topStack.isSpell()) {
-                valueTempo += 1;
-            }
+        if (valueTempo >= 0.8 && ph.getPhase().isBefore(PhaseType.COMBAT_END)) {
+        	return true;
         }
         
         //evaluate threat of targeted card
         float threat = 0;
-        if (c.isCreature() && ai.getLife() > 0) {
-            Combat combat = ai.getGame().getCombat();
-            threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true) / ai.getLife();
-            //TODO:add threat from triggers and other abilities (ie. Master of Cruelties)
+        if (c.isCreature()) {
+        	// the base value for evaluate creature is 100
+        	threat += (-1 + 1.0f * ComputerUtilCard.evaluateCreature(c) / 100) / costRemoval;
+        	if (ai.getLife() > 0 && ComputerUtilCombat.canAttackNextTurn(c)) {
+        		Combat combat = game.getCombat();
+        		threat += 1.0f * ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true) / ai.getLife();
+        		//TODO:add threat from triggers and other abilities (ie. Master of Cruelties)
+        	}
+        	if (ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+        		threat *= 0.1;
+        	}
+        	if (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+        		threat *= 0.1;
+        	}
         } else {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();

@@ -133,6 +133,10 @@ public class AiAttackController {
         }
         return defenders;
     }
+    
+    public void removeBlocker(Card blocker) {
+    	this.oppList.remove(blocker);
+    }
 
     /** Choose opponent for AI to attack here. Expand as necessary. */
     private Player choosePreferredDefenderPlayer() {
