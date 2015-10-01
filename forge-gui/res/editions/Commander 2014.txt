@@ -214,7 +214,7 @@ C Lys Alana Huntmaster
 R Masked Admirers
 U Overrun
 R Overwhelming Stampede
-M PrAEtor's Counsel
+M Praetor's Counsel
 C Priest of Titania
 R Primordial Sage
 M Rampaging Baloths
