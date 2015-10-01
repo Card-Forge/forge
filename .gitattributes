@@ -18323,6 +18323,7 @@ forge-gui/src/main/java/forge/util/package-info.java -text
 forge-gui/src/main/resources/log4jConfig.config -text
 forge-gui/src/main/resources/proxy-template.ftl -text
 forge-gui/src/site/apt/index.apt -text
+forge-gui/tools/EditionTracking.py -text
 forge-gui/tools/PerSetTracking.py svneol=native#text/x-python
 forge-gui/tools/assignSetInfo.py svneol=native#text/x-python
 forge-gui/tools/cardTemplateScript.py svneol=native#text/x-python

@@ -1,0 +1,300 @@
+#!/usr/bin/env python
+
+############IMPLEMENTATION FOLLOWS############
+import os,sys,fnmatch,re
+
+toolsDir = os.path.abspath(os.path.dirname( __file__ ))
+resDir = os.path.abspath(os.path.join(toolsDir, '..', 'res'))
+editionsDir = os.path.join(resDir, 'editions')
+
+def initializeEditions():
+	ignoredTypes = [ "From_the_Vault", "Duel_Decks", "Online", "Premium_Deck_Series" ]
+	print("Parsing Editions folder")
+	for root, dirnames, filenames in os.walk(editionsDir):
+		for fileName in fnmatch.filter(filenames, '*.txt'):
+			#print "Parsing...", fileName
+			with open(os.path.join(root, fileName)) as currentEdition:
+				# Check all names for this card
+				metadata = True
+				setcode = setname = settype = None
+				for line in currentEdition.readlines():
+					if metadata:
+						if line.startswith("[cards]"):
+							metadata = False
+							if setcode:
+								setCodes.append(setcode)
+								setCodeToName[setcode] = setname
+								if settype in ignoredTypes:
+									ignoredSet.append(setcode)
+
+						elif line.startswith("Code="):
+							setcode = line.split("=")[1].rstrip()
+
+						elif line.startswith("Name="):
+							setname = line.split("=")[1].rstrip()
+
+						elif line.startswith("Type="):
+							settype = line.split("=")[1].rstrip()
+
+					else:
+						if line:
+							card = line.split(" ", 1)[1].replace("AE","Ae").rstrip()
+							if card not in mtgDataCards:
+								#print card
+								mtgDataCards[card] = [setcode]
+
+							else:
+								mtgDataCards[card].append(setcode)
+
+	print "Total Cards Found in all editions", len(mtgDataCards)
+	print "These sets will be ignored in some output files", ignoredSet
+
+def initializeOracleText():
+	pass
+
+def initializeForgeCards():
+	#Parse Forge
+	print("Parsing Forge")
+	cardsfolderLocation = os.path.join(resDir, 'cardsfolder')
+	for root, dirnames, filenames in os.walk(cardsfolderLocation):
+		for fileName in fnmatch.filter(filenames, '*.txt'):
+			with open(os.path.join(root, fileName))  as currentForgeCard :
+				# Check all names for this card
+				name = ''
+				split = False
+				for line in currentForgeCard.readlines():
+					if line.startswith("Name:"):
+						if split:
+							name += ' // '
+
+						if not name or split:
+							name += line[5:].replace("AE","Ae").rstrip()
+						
+					elif line.startswith("AlternateMode") and 'Split' in line:
+						split = True
+
+				forgeCards.append(name)
+
+def initializeFormats():
+	formats = {}
+	formatLocation = os.path.join(resDir, 'blockdata', 'formats.txt')
+	print "Looking for formats in ", formatLocation
+	with open(formatLocation) as formatFile:
+		while formatFile:
+			try:
+				line = formatFile.readline().strip()
+				if not line:
+					# this should only happen when the file is done processing if we did things correctly?
+					break
+
+				format = line[1:-1]
+				formats[format] = {}
+			except:
+				break
+
+			# Pull valid sets
+			while line != '':
+				line = formatFile.readline().strip()
+				if line.startswith('Sets:'):
+					sets = line.split(':')[1]
+					formats[format]['sets'] = sets.split(', ')
+				elif line.startswith('Banned'):
+					banned = line.split(':')[1]
+					formats[format]['banned'] = banned.split('; ')
+
+	return formats
+
+def writeToFiles(text, files):
+	for f in files:
+		if f:
+			f.write(text)
+
+def printOverallEditions(totalDataList, setCodeToName, releaseFile=None):
+	totalPercentage = 0
+	totalMissing = 0
+	totalImplemented = 0
+	fullTotal = 0
+	if releaseFile:
+		releaseFile.write("[spoiler=Overall Editions]\n")
+	with open(os.path.join(toolsDir, "EditionTrackingResults", "CompleteStats.txt"), "w") as statsfile:
+		files = [statsfile, releaseFile]
+		writeToFiles("Set: Implemented (Missing) / Total = Percentage Implemented\n", files)
+		for k,dataKey in totalDataList :
+			totalImplemented += dataKey[0]
+			totalMissing += dataKey[1]
+			fullTotal += dataKey[2]
+			if dataKey[2] == 0:
+				print "SetCode unknown", k
+				continue
+			writeToFiles(setCodeToName[k].lstrip() + ": " + str(dataKey[0]) + " (" + str(dataKey[1]) + ") / " + str(dataKey[2]) + " = " + str(round(dataKey[3], 2)) + "%\n", files)
+		totalPercentage = totalImplemented / fullTotal
+		writeToFiles("\nTotal over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal) + "\n", files)
+
+	if releaseFile:
+		releaseFile.write("[/spoiler]\n\n")
+
+def printCardSet(implementedSet, missingSet, fileName, setCoverage=None, printImplemented=False, printMissing=True, releaseFile=None):
+	# Add another file that will print out whichever set is requested
+	# Convert back to lists so they can be sorted
+	impCount = len(implementedSet)
+	misCount = len(missingSet)
+	totalCount = impCount + misCount
+	print fileName, "Counts: ", impCount, misCount, totalCount
+
+	if totalCount == 0:
+		print "Something definitely wrong, why is total count 0 for ", fileName
+		return
+
+	if releaseFile:
+		releaseFile.write("[spoiler=%s]\n" % fileName)
+
+	filePath = os.path.join(toolsDir, "EditionTrackingResults", fileName)
+	with open(filePath, "w") as outfile:
+		files = [outfile, releaseFile]
+		if setCoverage:
+			writeToFiles(' '.join(setCoverage), files)
+			writeToFiles('\n', files)
+		writeToFiles("Implemented (Missing) / Total = Percentage Implemented\n", files)
+		writeToFiles("%d (%d) / %d = %.2f %%\n" % (impCount, misCount, totalCount, float(impCount)/totalCount*100), files)
+
+		# If you really need to, we can print implemented cards
+		if printImplemented:
+			implemented = list(implementedSet)
+			implemented.sort()
+			outfile.write("\nImplemented (%d):" % impCount)
+			for s in implemented:
+				outfile.write("\n%s" % s)
+
+		# By default Missing will print, but you can disable it
+		if printMissing:
+			missing = list(missingSet)
+			missing.sort()
+			writeToFiles("\nMissing (%d):" % misCount, files)
+			for s in missing:
+				writeToFiles("\n%s" % s, files)
+
+		writeToFiles("\n", files)
+
+	if releaseFile:
+		releaseFile.write("[/spoiler]\n\n")
+
+def printDistinctOracle(missingSet, fileName):
+	filePath = os.path.join(toolsDir, "EditionTrackingResults", fileName)
+	missing = list(missingSet)
+	missing.sort()
+	with open(filePath, "w") as outfile:
+		for s in missing:
+			if s:
+				oracle = mtgOracleCards.get(s, "")
+				outfile.write("%s\n%s" % (s, oracle))
+		outfile.write("\n")
+
+
+if __name__ == '__main__':
+	if not os.path.isdir(toolsDir + os.sep + 'EditionTrackingResults') :
+		os.mkdir(toolsDir + os.sep + 'EditionTrackingResults')
+
+	ignoredSet = []
+	forgeFolderFiles = []
+	forgeCards = []
+	mtgDataCards = {}
+	mtgOracleCards = {}
+	setCodes = []
+	setCodeToName = {}
+	forgeCardCount = 0
+	mtgDataCardCount = 0
+	setCodeCount = 0
+
+	hasFetchedSets = False
+	hasFetchedCardName = False
+	tmpName = ""
+	line = ""
+	prevline = ""
+
+	# Initialize Editions
+	initializeEditions()
+
+	initializeForgeCards()
+
+	#Compare datasets and output results
+	print("Comparing datasets and outputting results.")
+	totalData = {}
+	currentMissing = []
+	currentImplemented = []
+	allMissing = set()
+	allImplemented = set()
+	formats = initializeFormats()
+	unknownFormat =  {'sets': []}
+
+	standardSets = formats.get('Standard', unknownFormat)['sets']
+	#print "Standard sets", standardSets, len(standardSets)
+	standardMissing = set()
+	standardImplemented = set()
+
+	modernSets = formats.get('Modern', unknownFormat)['sets']
+	modernMissing = set()
+	modernImplemented = set()
+
+	total = 0
+	percentage = 0
+
+	for currentSet in setCodes :
+		# Ignore any sets that we don't tabulate
+		if currentSet in ignoredSet: continue
+		#print "Tabulating set", currentSet
+
+		for key in mtgDataCards.keys():
+			setList = mtgDataCards[key]
+			if currentSet in setList:
+				if key in forgeCards:
+					currentImplemented.append(key)
+				elif key != "":
+					currentMissing.append(key)
+		total = len(currentMissing)+len(currentImplemented)
+		percentage = 0       
+		if total > 0 :
+			percentage = (float(len(currentImplemented))/float(total))*100
+		currentMissing.sort()
+		currentImplemented.sort()
+
+		# Output each edition file on it's own
+		with open(toolsDir + os.sep + "EditionTrackingResults" + os.sep + "set_" + currentSet.strip() + ".txt", "w") as output :
+			output.write("Implemented (" + str(len(currentImplemented)) + "):\n")
+			for everyImplemented in currentImplemented :
+				output.write(everyImplemented + '\n')
+			output.write("\n")
+			output.write("Missing (" + str(len(currentMissing)) + "):\n")
+			for everyMissing in currentMissing :
+				output.write(everyMissing + '\n')
+				output.write(mtgOracleCards.get(everyMissing, ""))
+			output.write("\n")
+			output.write("Total: " + str(total) + "\n")
+			output.write("Percentage implemented: " + str(round(percentage,2)) + "%\n")
+		totalData[currentSet] = (len(currentImplemented),len(currentMissing),total,percentage)
+		allMissing |= set(currentMissing)
+		allImplemented |= set(currentImplemented)
+		if currentSet in standardSets:
+			#print "Found a standard set", currentSet
+			standardMissing |= set(currentMissing)
+			standardImplemented |= set(currentImplemented)
+		if currentSet in modernSets:
+			modernMissing |= set(currentMissing)
+			modernImplemented |= set(currentImplemented)
+
+		del currentMissing[:]
+		del currentImplemented[:]
+
+	#sort sets by percentage completed
+	totalDataList = sorted(totalData.items(), key=lambda k: k[1][3], reverse=True)
+
+	releaseOutput = open(os.path.join(toolsDir, "EditionTrackingResults", "ReleaseStats.txt"), "w")
+
+	printCardSet(allImplemented, allMissing, "DistinctStats.txt", releaseFile=releaseOutput)
+	printOverallEditions(totalDataList, setCodeToName, releaseFile=releaseOutput)
+	printCardSet(standardImplemented, standardMissing, "FormatStandard.txt", setCoverage=standardSets, releaseFile=releaseOutput)
+	printCardSet(modernImplemented, modernMissing, "FormatModern.txt", setCoverage=modernSets, releaseFile=releaseOutput)
+	printDistinctOracle(allMissing, "DistinctOracle.txt")
+
+	releaseOutput.close()
+
+	print ("Done!")
