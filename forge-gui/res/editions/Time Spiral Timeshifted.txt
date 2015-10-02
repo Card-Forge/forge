@@ -3,7 +3,7 @@ Code=TSB
 Date=2006-10-06
 Name=Time Spiral "Timeshifted"
 Code2=TSB
-Type=Expansion
+Type=Other
 
 [cards]
 S Akroma, Angel of Wrath
