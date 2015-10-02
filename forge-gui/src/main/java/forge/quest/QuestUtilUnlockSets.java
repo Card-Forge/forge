@@ -184,6 +184,11 @@ public class QuestUtilUnlockSets {
         IStorage<SealedProduct.Template> boosters = FModel.getMagicDb().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
+        String additionalSet = unlockedSet.getAdditionalUnlockSet();
+        if (!additionalSet.isEmpty()) {
+            qData.getFormat().unlockSet(additionalSet);
+        }
+
         List<PaperCard> cardsWon = new ArrayList<PaperCard>();
 
         if (starters.contains(unlockedSet.getCode())) {

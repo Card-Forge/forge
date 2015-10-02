@@ -106,6 +106,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private double foilChanceInBooster = 0;
     private boolean foilAlwaysInCommonSlot = false;
     private String additionalSheetForFoils = "";
+    private String additionalUnlockSet = "";
     private final CardInSet[] cards;
 
 
@@ -159,6 +160,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public double getFoilChanceInBooster() { return foilChanceInBooster; }
     public boolean getFoilAlwaysInCommonSlot() { return foilAlwaysInCommonSlot; }
     public String getAdditionalSheetForFoils() { return additionalSheetForFoils; }
+    public String getAdditionalUnlockSet() { return additionalUnlockSet; }
     public CardInSet[] getCards() { return cards; }
 
     /** The Constant fnGetName. */
@@ -292,8 +294,9 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
             res.foilChanceInBooster = section.getDouble("FoilChanceInBooster", 21.43F) / 100.0F;
             res.foilAlwaysInCommonSlot = section.getBoolean("FoilAlwaysInCommonSlot", true);
-
             res.additionalSheetForFoils = section.get("AdditionalSheetForFoils", "");
+
+            res.additionalUnlockSet = section.get("AdditionalSetUnlockedInQuest", ""); // e.g. Time Spiral Timeshifted (TSB) for Time Spiral
 
             return res;
         }
