@@ -1,7 +1,7 @@
-Forge Beta: 9-12-2015 ver 1.5.45
+Forge Beta: 10-02-2015 ver 1.5.46
 
 
-14931 cards in total.
+15164 cards in total.
 
 
 -------------
@@ -52,7 +52,8 @@ Forge menu.
 
 
 - New Battle for Zendikar cards -
-We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+- Battle for Zendikar -
+Forge now includes many of the new Battle for Zendikar cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 
 - Network play (BETA) -
@@ -68,65 +69,239 @@ comments are welcome!
 New cards
 ---------
 
-Grinning Toem
-Psychic Theft
-Arboria
-Autumn Willow
-
-
------------------------------
-New Battle for Zendikar cards
------------------------------
-
-Veteran Warleader
-Retreat to Kazandu
-Sheer Drop
-Dominator Drone
-Forerunner of Slaughter
-Guardian of Tazeem
-Oblivion Sower
-Hero of Goma Fada
-Hedron Archive
-Radiant Flames
-Conduit of Ruin
+Adverse Conditions
+Akoum Firebird
+Akoum Hellkite
+Akoum Stonewaker
+Aligned Hedron Network
+Ally Encampment
+Angel of Renewal
+Angelic Captain
+Angelic Gift
+Bane of Bala Ged
 Barrage Tyrant
-Defiant Bloodlord
-Gideon's Reproach
-Incubator Drone
-Mist Intruder
-Omnath, Locus of Rage
-Oran-Rief Hydra
-Eldrazi Devastator
-Kozilek's Channeler
-Ruinous Path
-Titan's Presence
-Ulamog, the Cealess Hunger
-Canopy Vista
-Cinder Glade
-Felidar Cub
-Gideon, Ally of Zendikar
-Prairie Stream
-Smoldering Marsh
-Sunken Hollow
+Beastcaller Savant
+Belligerent Whiptail
+Benthic Infiltrator
 Blight Herder
+Blighted Cataract
+Blighted Fen
+Blighted Gorge
+Blighted Steppe
+Blighted Woodland
+Blisterpod
+Bloodbond Vampire
+Boiling Earth
 Breaker of Armies
-Brood Butcher
-Coastal Discovery
-Drowner of Hope
-Lantern Scout
-Nissa's Renewal
-Retreat to Emeria
-Skitterskin
+Brilliant Spectrum
 Bring to Light
+Brood Butcher
+Brood Monitor
+Broodhunter Wurm
+Brutal Expulsion
+Call the Scions
+Canopy Vista
+Carrier Thrall
+Catacomb Sifter
+Chasm Guide
+Cinder Glade
+Cliffside Lookout
+Cloud Manta
+Clutch of Currents
+Coastal Discovery
+Complete Disregard
+Conduit of Ruin
+Coralhelm Guide
+Courier Griffin
+Crumble to Dust
+Cryptic Cruiser
+Culling Drone
+Dampening Pulse
+Deathless Behemoth
 Deep-Sea Scavenger
+Defiant Bloodlord
+Demon's Grasp
 Desolation Twin
+Dominator Drone
+Drana's Emissary
+Drana, Liberator of Malakir
+Drowner of Hope
+Dust Stalker
+Earthen Arms
+Eldrazi Devastator
+Eldrazi Skyspawner
+Elkin Lair
+Emeria Shepherd
+Encircling Fissure
+Endless One
+Exert Influence
+Expedition Envoy
+Eyeless Watcher
+Felidar Cub
+Fertile Thicket
+Firemantle Mage
+Forerunner of Slaughter
+Fortified Rampart
+From Beyond
+Geyserfield Stalker
+Ghostly Sentinel
+Gideon's Reproach
+Gideon, Ally of Zendikar
+Grave Birthing
+Greenwarden of Murasa
+Grip of Desolation
+Grove Rumbler
+Grovetender Druids
+Gruesome Slaughter
+Guardian of Tazeem
+Guul Draz Overseer
+Hagra Sharpshooter
+Halimar Tidecaller
+Hedron Archive
+Hedron Blade
+Herald of Kozilek
+Hero of Goma Fada
+Horribly Awry
+Incubator Drone
+Infuse with the Elements
+Jaddi Offshoot
+Kalastria Healer
+Kalastria Nightwatch
 Kiora, Master of the Depths
+Kitesail Scout
+Kor Bladewhirl
+Kor Castigator
+Kor Entanglers
+Kozilek's Channeler
+Kozilek's Sentinel
+Lantern Scout
+Lavastep Raider
+Lifespring Druid
+Lithomancer's Focus
+Looming Spires
 Lumbering Falls
+Makindi Patrol
+Makindi Sliderunner
+Malakir Familiar
+March from the Tomb
+Mind Raker
+Mire's Malice
+Mist Intruder
+Molten Nursery
+Mortuary Mire
+Munda, Ambush Leader
+Murasa Ranger
+Murk Strider
+Natural Connection
+Nettle Drone
+Nirkana Assassin
+Nissa's Renewal
+Noyan Dar, Roil Shaper
 Ob Nixilis Reignited
+Oblivion Sower
+Omnath, Locus of Rage
+Ondu Champion
+Ondu Greathorn
+Ondu Rising
+Oracle of Dust
+Oran-Rief Hydra
+Oran-Rief Invoker
+Outnumber
+Painful Truths
+Part the Waterveil
+Pathway Arrows
 Planar Outburst
+Plated Crusher
+Prairie Stream
+Prism Array
+Processor Assault
+Quarantine Field
+Radiant Flames
+Reckless Cohort
+Reclaiming Vines
+Resolute Blademaster
+Retreat to Coralhelm
+Retreat to Emeria
+Retreat to Hagra
+Retreat to Kazandu
+Retreat to Valakut
+Rising Miasma
+Roil Spout
+Roil's Retribution
+Roilmage's Trick
+Rot Shambler
+Ruin Processor
+Ruination Guide
+Ruinous Path
+Rush of Ice
+Salvage Drone
+Sanctum of Ugin
+Sandstone Bridge
+Scatter to the Winds
+Scour from Existence
 Scythe Leopard
+Seek the Wilds
+Serene Steward
+Serpentine Spike
+Shadow Glider
+Shambling Vent
+Shatterskull Recruit
+Sheer Drop
+Shrine of the Forsaken Gods
+Silent Skimmer
+Sire of Stagnation
+Skitterskin
+Skyline Cascade
+Skyrider Elf
+Slab Hammer
+Sludge Crawler
+Smoldering Marsh
+Smothering Abomination
+Snapping Gnarlid
+Spawning Bed
+Spell Shrivel
 Stasis Snare
+Stone Haven Medic
+Stonefury
+Sunken Hollow
+Sure Strike
+Swarm Surge
+Swell of Growth
+Tajuru Beastmaster
+Tajuru Stalwart
+Tajuru Warcaller
+Tandem Tactics
+Tide Drifter
+Tightening Coils
+Titan's Presence
+Touch of the Void
+Transgress the Mind
+Tunneling Geopede
+Turn Against
+Ugin's Insight
+Ulamog's Despoiler
+Ulamog's Nullifier
+Ulamog's Reclaimer
+Ulamog, the Cealess Hunger
 Undergrowth Champion
+Unified Front
+Unnatural Aggression
+Valakut Invoker
+Valakut Predator
+Vampiric Rites
+Vestige of Emrakul
+Veteran Warleader
+Vile Aggregate
+Void Attendant
+Void Winnower
+Volcanic Upheaval
+Voracious Null
+Wasteland Strangler
+Wave-Wing Elemental
+Windrider Patrol
+Woodland Wanderer
+Zada, Hedron Grinder
+Zulaport Cutthroat
 
 
 ------------
@@ -195,11 +370,16 @@ Contributors to This Release
 
 Agetian
 DrDev
+excessum
 Gos
+Hanmac
 KrazyTheFox
 Marek14
+Sloth
 Sol
+squee1968
 Swordshine
+tojammot
 Chris H
 
 
