@@ -19,7 +19,6 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Supplier;
 
-import forge.StaticData;
 import forge.UiCommand;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
@@ -31,6 +30,7 @@ import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
@@ -40,8 +40,10 @@ import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.storage.IStorage;
+import java.util.HashSet;
 
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Child controller for limited deck editor UI.
@@ -172,7 +174,13 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
         Deck deck = editor.getDeckController().getModel().getHumanDeck();
         if (deck == null) { return; }
 
-        CardEdition defaultLandSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(deck.getAllCardsInASinglePool());
+        Set<CardEdition> availableEditionCodes = new HashSet<>();
+        for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
+            availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
+        }
+
+        CardEdition defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
+
         AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet);
         CardPool landsToAdd = dialog.show();
         if (landsToAdd != null) {
