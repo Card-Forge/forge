@@ -1,12 +1,11 @@
 package forge.ai;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -18,7 +17,6 @@ import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -483,20 +481,16 @@ public class ComputerUtilCost {
     }
 
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {
-        return getAvailableManaColors(ai, Sets.newHashSet(additionalLand));
+        return getAvailableManaColors(ai, Lists.newArrayList(additionalLand));
     }
 
-    public static Set<String> getAvailableManaColors(Player ai, Set<Card> additionalLands) {
+    public static Set<String> getAvailableManaColors(Player ai, List<Card> additionalLands) {
         CardCollection lands = ai.getLandsInPlay();
         Set<String> colorsAvailable = new HashSet<>();
 
         if (additionalLands != null) {
-            List<Card> additionalLandCopies = new ArrayList<>();
-            for (Card c : additionalLands) {
-                additionalLandCopies.add(CardFactory.copyCard(c, true));
-            }
-            GameActionUtil.grantBasicLandsManaAbilities(additionalLandCopies);
-            lands.addAll(additionalLandCopies);
+            GameActionUtil.grantBasicLandsManaAbilities(additionalLands);
+            lands.addAll(additionalLands);
         }
 
         for (Card c : lands) {
