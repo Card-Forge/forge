@@ -1942,66 +1942,26 @@ public class ComputerUtil {
         return bestBoardPosition;
     }
 
-    public static boolean hasGoodTargetForAura(final Player ai, final Card aura) {
-        // This is currently used by ComputerUtilCost.willPayUnlessCost to determine if there's a viable target for a spell
-        // that can be paid for with an untapped shockland.
-
-        if (ai == null || aura == null) {
+    public static boolean hasReasonToPlayCardThisTurn(final Player ai, final Card c) {
+        if (ai == null || c == null) {
             return false;
         }
         if (!(ai.getController() instanceof PlayerControllerAi)) {
-            System.err.println("Unexpected behavior: ComputerUtil::hasGoodTargetforAura called with the non-AI player as a parameter.");
+            System.err.println("Unexpected behavior: ComputerUtil::getReasonToPlayCard called with the non-AI player as a parameter.");
             return false;
         }
 
-        if (aura.getFirstAttachSpell() == null) {
-            // Something went majorly wrong here, should never happen
-            System.err.println("Unexpected behavior: first attach spell for Aura card " + aura.getName() + " was null in ComputerUtil::hasGoodTargetForAura.");
-            return false;
-        }
-
-        boolean hasTarget = false;
-        boolean aiHasTargets = false, oppHasTargets = false;
-
-        aiHasTargets = !CardLists.filter(ai.getAllCards(), CardPredicates.isTargetableBy(aura.getFirstAttachSpell())).isEmpty();
-        for (Player p : ai.getOpponents()) {
-            if (!CardLists.filter(p.getAllCards(), CardPredicates.isTargetableBy(aura.getFirstAttachSpell())).isEmpty()) {
-                oppHasTargets = true;
-                break;
+        for (SpellAbility sa : c.getAllPossibleAbilities(ai, true)) {
+            if (sa.getApi() == ApiType.Counter) {
+                // return true for counterspells so that the AI can take into account that it may need to cast it later in the opponent's turn
+                return true;
+            }
+            AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(sa);
+            if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
+                return true;
             }
         }
 
-        boolean isCurse = false;
-        for (SpellAbility ability : aura.getAllSpellAbilities()) {
-            if (ability.isCurse() || (ability.hasParam("AILogic") && ability.getParam("AILogic").equals("Curse"))) {
-                isCurse = true;
-                break;
-            }
-        }
-        if (isCurse && oppHasTargets) {
-            hasTarget = true;
-        } else if (!isCurse && aiHasTargets) {
-            hasTarget = true;
-        }
-
-        return hasTarget;
-    }
-
-    public static boolean hasReasonToPlaySaThisTurn(final Player ai, final SpellAbility sa) {
-        // This is currently used by ComputerUtilCost.willPayUnlessCost to determine if there's a viable reason to cast a spell
-        // that can be paid for with an untapped shockland.
-
-        if (ai == null || sa == null) {
-            return false;
-        }
-        if (!(ai.getController() instanceof PlayerControllerAi)) {
-            System.err.println("Unexpected behavior: ComputerUtil::hasReasonToPlaySaThisTurn called with the non-AI player as a parameter.");
-            return false;
-        }
-
-        AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(sa);
-        boolean willPlay = decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2;
-
-        return willPlay;
+        return false;
     }
 }

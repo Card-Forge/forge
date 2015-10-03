@@ -7,6 +7,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
@@ -417,25 +418,19 @@ public class ComputerUtilCost {
             }
         } else if (shockland) {
             if (payer.getLife() > 3 && payer.canPayLife(2)) {
-                // If the new land size would equal the CMC of a card in AIs hand, play it untapped
                 final int landsize = payer.getLandsInPlay().size() + 1;
                 for (Card c : payer.getCardsIn(ZoneType.Hand)) {
-                    int cmc = c.getCMC();
+                    // if the new land size would equal the CMC of a card in AIs hand, consider playing it untapped, 
+                    // otherwise don't bother running other checks
+                    if (landsize != c.getCMC()) {
+                        continue; 
+                    }
+                    // try to determine in the AI is actually planning to play a spell ability from the card
+                    boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
                     // try to determine if the mana shards provided by the lands would be applicable to pay the mana cost
                     boolean canPay = c.getManaCost().canBePaidWithAvaliable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
                     // try to determine that there is a valid target for a spell (very basic, consider expanding)
-                    boolean requirementsMet = true;
-                    if (c.isAura()) {
-                        // for auras, make sure that a good enough target exists
-                        requirementsMet = ComputerUtil.hasGoodTargetForAura(payer, c);
-                    } else if (c.isSorcery()) {
-                        // for sorceries with one mode, consider actually checking for a reason for the AI to decide to play the spell ability
-                        if (c.getAllSpellAbilities().size() == 1) {
-                            SpellAbility ability = c.getFirstSpellAbility();
-                            requirementsMet = ComputerUtil.hasReasonToPlaySaThisTurn(payer, ability);
-                        }
-                    }
-                    if (landsize == cmc && canPay && requirementsMet) {
+                    if (canPay && willPlay) {
                         return true;
                     }
                 }
@@ -492,15 +487,15 @@ public class ComputerUtilCost {
     }
 
     public static Set<String> getAvailableManaColors(Player ai, List<Card> additionalLands) {
-        CardCollection lands = ai.getLandsInPlay();
+        CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.UNTAPPED);
         Set<String> colorsAvailable = new HashSet<>();
 
         if (additionalLands != null) {
             GameActionUtil.grantBasicLandsManaAbilities(additionalLands);
-            lands.addAll(additionalLands);
+            cardsToConsider.addAll(additionalLands);
         }
 
-        for (Card c : lands) {
+        for (Card c : cardsToConsider) {
             for (SpellAbility sa : c.getManaAbilities()) {
                 colorsAvailable.add(sa.getManaPart().getOrigProduced());
             }
