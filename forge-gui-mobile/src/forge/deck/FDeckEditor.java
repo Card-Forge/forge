@@ -328,6 +328,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck if visible below dialog
                                 }
                             }));
+                            addItem(new FMenuItem("Save As...", FSkinImage.SAVEAS, new FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e) {
+                                    String defaultName = editorType.getController().getNextAvailableName();
+                                    FOptionPane.showInputDialog("Enter name for new copy of deck", defaultName, new Callback<String>() {
+                                        @Override
+                                        public void run(String result) {
+                                            if (!StringUtils.isEmpty(result)) {
+                                                editorType.getController().saveAs(result);
+                                            }
+                                        }
+                                    });
+                                }
+                            }));
                         }
                         if (allowRename()) {
                             addItem(new FMenuItem("Rename Deck", FSkinImage.EDIT, new FEventHandler() {
@@ -1481,6 +1495,23 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             saveAs(name0);
             currentFolder.delete(oldName); //delete deck with old name
+        }
+
+        public String getNextAvailableName() {
+            String name = model.getName();
+            int idx = name.lastIndexOf('(');
+            if (idx != -1) {
+                name = name.substring(0, idx).trim(); //strip old number
+            }
+
+            String baseName = name;
+            int number = 2;
+            do {
+                name = baseName + " (" + number + ")";
+                number++;
+            } while (fileExists(name));
+
+            return name;
         }
 
         public boolean isSaved() {
