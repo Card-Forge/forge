@@ -1508,7 +1508,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     String operand = part.substring(kwLength + 2);
                     postponedAdjectives.add(Pair.of(true, "power" + opName + operand));
                 } else if (CardType.isACreatureType(part)) {
-                    creatures = StringUtils.capitalize(Lang.getPlural(part)) + (creatures == null ? "" : " or " + creatures);
+                    if (CardType.isACreatureType(creatures)) { // e.g. Kor Castigator
+                        creatures = StringUtils.capitalize(Lang.getPlural(part)) + (creatures == null ? "" : creatures);
+                    } else {
+                        creatures = StringUtils.capitalize(Lang.getPlural(part)) + (creatures == null ? "" : " or " + creatures);
+                    }
                 } else {
                     prependedAdjectives.add(Pair.of(positive, part.toLowerCase()));
                 }
