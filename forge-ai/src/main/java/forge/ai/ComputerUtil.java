@@ -1959,9 +1959,9 @@ public class ComputerUtil {
         boolean hasTarget = false;
         boolean aiHasTargets = false, oppHasTargets = false;
 
-        aiHasTargets = !CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(aura.getFirstAttachSpell())).isEmpty();
+        aiHasTargets = !CardLists.filter(ai.getAllCards(), CardPredicates.isTargetableBy(aura.getFirstAttachSpell())).isEmpty();
         for (Player p : ai.getOpponents()) {
-            if (!CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(aura.getFirstAttachSpell())).isEmpty()) {
+            if (!CardLists.filter(p.getAllCards(), CardPredicates.isTargetableBy(aura.getFirstAttachSpell())).isEmpty()) {
                 oppHasTargets = true;
                 break;
             }
