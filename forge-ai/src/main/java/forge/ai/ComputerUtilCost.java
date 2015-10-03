@@ -420,7 +420,6 @@ public class ComputerUtilCost {
                 // If the new land size would equal the CMC of a card in AIs hand, play it untapped
                 final int landsize = payer.getLandsInPlay().size() + 1;
                 for (Card c : payer.getCardsIn(ZoneType.Hand)) {
-                    int cmc = c.getCMC();
                     // try to determine if the mana shards provided by the lands would be applicable to pay the mana cost
                     boolean canPay = c.getManaCost().canBePaidWithAvaliable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
                     // try to determine that there is a valid target for a spell (very basic, consider expanding)
@@ -438,7 +437,7 @@ public class ComputerUtilCost {
                             }
                         }
                     }
-                    if (landsize == cmc && canPay && requirementsMet) {
+                    if (landsize == c.getCMC() && canPay && requirementsMet) {
                         return true;
                     }
                 }
