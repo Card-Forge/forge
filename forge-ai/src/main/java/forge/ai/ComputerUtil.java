@@ -1982,4 +1982,18 @@ public class ComputerUtil {
 
         return hasTarget;
     }
+
+    public static boolean hasReasonToPlaySaThisTurn(final Player ai, final SpellAbility sa) {
+        // This is currently used by ComputerUtilCost.willPayUnlessCost to determine if there's a viable reason to cast a spell
+        // that can be paid for with an untapped shockland.
+
+        if (ai == null || sa == null) {
+            return false;
+        }
+
+        AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(sa);
+        boolean willPlay = decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2;
+
+        return willPlay;
+    }
 }
