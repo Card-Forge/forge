@@ -1,0 +1,83 @@
+[metadata]
+Code=DDP
+Date=2015-08-28
+Name=Duel Decks: Zendikar vs. Eldrazi
+Code2=DDP
+Type=Duel_Decks
+
+[cards]
+M Oblivion Sower
+U Artisan of Kozilek
+R It That Betrays
+C Ulamog's Crusher
+C Bloodrite Invoker
+C Bloodthrone Vampire
+R Butcher of Malakir
+C Cadaver Imp
+C Consume the Meek
+U Corpsehatch
+C Dominator Drone
+C Heartstabber Mosquito
+C Induce Despair
+U Marsh Casualties
+U Pawn of Ulamog
+C Read the Bones
+U Smother
+U Vampire Nighthawk
+C Emrakul's Hatcher
+C Forked Bolt
+C Hellion Eruption
+R Magmaw
+C Torch Slinger
+U Forerunner of Slaughter
+U Mind Stone
+U Runed Servitor
+U Akoum Refuge
+U Eldrazi Temple
+U Rocky Tar Pit
+L Swamp
+L Swamp
+L Swamp
+L Mountain
+L Mountain
+L Mountain
+M Avenger of Zendikar
+U Affa Guard Hound
+C Caravan Escort
+U Kabira Vindicator
+C Knight of Cliffhaven
+C Makindi Griffin
+U Oust
+C Repel the Darkness
+C Sheer Drop
+U Beastbreaker of Bala Ged
+C Daggerback Basilisk
+U Frontier Guide
+U Graypelt Hunter
+C Grazing Gladehart
+C Groundswell
+C Harrow
+C Joraga Bard
+C Khalni Heart Expedition
+C Ondu Giant
+R Primal Command
+U Retreat to Kazandu
+R Scute Mob
+U Tajuru Archer
+C Territorial Baloth
+U Turntimber Basilisk
+C Wildheart Invoker
+R Veteran Warleader
+C Explorer's Scope
+R Seer's Sundial
+C Stonework Puma
+C Evolving Wilds
+U Graypelt Refuge
+R Stirring Wildwood
+C Turntimber Grove
+L Plains
+L Plains
+L Plains
+L Forest
+L Forest
+L Forest
