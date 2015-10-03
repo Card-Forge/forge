@@ -1942,4 +1942,44 @@ public class ComputerUtil {
         return bestBoardPosition;
     }
 
+    public static boolean hasGoodTargetForAura(final Player ai, final Card aura) {
+        // This is currently used by ComputerUtilCost.willPayUnlessCost to determine if there's a viable target for a spell
+        // that can be paid for with an untapped shockland.
+
+        if (ai == null || aura == null) {
+            return false;
+        }
+
+        if (aura.getFirstAttachSpell() == null) {
+            // Something went majorly wrong here, should never happen
+            System.err.println("Unexpected behavior: first attach spell for Aura card " + aura.getName() + " was null in ComputerUtil::hasGoodTargetForAura.");
+            return false;
+        }
+
+        boolean hasTarget = false;
+        boolean aiHasTargets = false, oppHasTargets = false;
+
+        aiHasTargets = !CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(aura.getFirstAttachSpell())).isEmpty();
+        for (Player p : ai.getOpponents()) {
+            if (!CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(aura.getFirstAttachSpell())).isEmpty()) {
+                oppHasTargets = true;
+                break;
+            }
+        }
+
+        boolean isCurse = false;
+        for (SpellAbility ability : aura.getAllSpellAbilities()) {
+            if (ability.isCurse() || (ability.hasParam("AILogic") && ability.getParam("AILogic").equals("Curse"))) {
+                isCurse = true;
+                break;
+            }
+        }
+        if (isCurse && oppHasTargets) {
+            hasTarget = true;
+        } else if (!isCurse && aiHasTargets) {
+            hasTarget = true;
+        }
+
+        return hasTarget;
+    }
 }

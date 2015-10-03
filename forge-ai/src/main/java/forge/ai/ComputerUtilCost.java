@@ -1,8 +1,12 @@
 package forge.ai;
 
+import com.google.common.collect.Sets;
+import forge.card.ColorSet;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -14,6 +18,10 @@ import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -414,7 +422,15 @@ public class ComputerUtilCost {
                 // If the new land size would equal the CMC of a card in AIs hand, play it untapped
                 final int landsize = payer.getLandsInPlay().size() + 1;
                 for (Card c : payer.getCardsIn(ZoneType.Hand)) {
-                    if (landsize == c.getCMC()) {
+                    int cmc = c.getCMC();
+                    // try to determine if the mana shards provided by the lands would be applicable to pay the mana cost
+                    boolean canPay = c.getManaCost().canBePaidWithAvaliable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
+                    // try to determine that there is a valid target for a spell (very basic, consider expanding)
+                    boolean requirementsMet = true;
+                    if (c.isAura()) {
+                        requirementsMet = ComputerUtil.hasGoodTargetForAura(payer, c);
+                    }
+                    if (landsize == cmc && canPay && requirementsMet) {
                         return true;
                     }
                 }
@@ -466,4 +482,29 @@ public class ComputerUtilCost {
             && (!source.getName().equals("Chain of Vapor") || (payer.getOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3));
     }
 
+    public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {
+        return getAvailableManaColors(ai, Sets.newHashSet(additionalLand));
+    }
+
+    public static Set<String> getAvailableManaColors(Player ai, Set<Card> additionalLands) {
+        CardCollection lands = ai.getLandsInPlay();
+        Set<String> colorsAvailable = new HashSet<>();
+
+        if (additionalLands != null) {
+            List<Card> additionalLandCopies = new ArrayList<>();
+            for (Card c : additionalLands) {
+                additionalLandCopies.add(CardFactory.copyCard(c, true));
+            }
+            GameActionUtil.grantBasicLandsManaAbilities(additionalLandCopies);
+            lands.addAll(additionalLandCopies);
+        }
+
+        for (Card c : lands) {
+            for (SpellAbility sa : c.getManaAbilities()) {
+                colorsAvailable.add(sa.getManaPart().getOrigProduced());
+            }
+        }
+
+        return colorsAvailable;
+    }
 }
