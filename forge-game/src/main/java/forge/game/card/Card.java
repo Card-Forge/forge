@@ -1729,6 +1729,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
+        // TODO A lot of these keywords should really show up before the SAs
         // keyword descriptions
         for (final String keyword : kw) {
             if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
@@ -1744,7 +1745,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("May be played") || keyword.startsWith("Conspire")
                     || keyword.startsWith("Cascade") || keyword.startsWith("Wither")
                     || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
-                    || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))) {
+                    || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
+                    || (keyword.startsWith("Devoid"))) {
                 sb.append(keyword).append("\r\n");
             } else if (keyword.equals("You may cast CARDNAME as though it had flash if you pay 2 more to cast it.")) {
                 sb.append(keyword).append("\r\n");
