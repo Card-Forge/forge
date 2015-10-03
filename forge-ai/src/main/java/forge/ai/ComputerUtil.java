@@ -1946,7 +1946,11 @@ public class ComputerUtil {
         // This is currently used by ComputerUtilCost.willPayUnlessCost to determine if there's a viable target for a spell
         // that can be paid for with an untapped shockland.
 
-        if (ai == null || aura == null || !(ai.getController() instanceof PlayerControllerAi)) {
+        if (ai == null || aura == null) {
+            return false;
+        }
+        if (!(ai.getController() instanceof PlayerControllerAi)) {
+            System.err.println("Unexpected behavior: ComputerUtil::hasGoodTargetforAura called with the non-AI player as a parameter.");
             return false;
         }
 
@@ -1987,7 +1991,11 @@ public class ComputerUtil {
         // This is currently used by ComputerUtilCost.willPayUnlessCost to determine if there's a viable reason to cast a spell
         // that can be paid for with an untapped shockland.
 
-        if (ai == null || sa == null || !(ai.getController() instanceof PlayerControllerAi)) {
+        if (ai == null || sa == null) {
+            return false;
+        }
+        if (!(ai.getController() instanceof PlayerControllerAi)) {
+            System.err.println("Unexpected behavior: ComputerUtil::hasReasonToPlaySaThisTurn called with the non-AI player as a parameter.");
             return false;
         }
 
