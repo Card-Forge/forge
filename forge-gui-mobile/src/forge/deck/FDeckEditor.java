@@ -8,7 +8,6 @@ import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.StaticData;
 import forge.assets.*;
 import forge.card.CardDb;
 import forge.card.CardEdition;
@@ -45,9 +44,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage MAIN_DECK_ICON = FSkinImage.DECKLIST;
@@ -283,8 +284,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 switch (editorType) {
                                 case Draft:
                                 case Sealed:
-                                    //use most recent edition that all cards in limited pool came before or in
-                                    defaultLandSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(deck.getAllCardsInASinglePool());
+                                    //suggest a random set from the ones used in the limited card pool that have all basic lands
+                                    Set<CardEdition> availableEditionCodes = new HashSet<>();
+                                    for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
+                                        availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
+                                    }
+                                    defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
                                     break;
                                 case Quest:
                                     defaultLandSet = FModel.getQuest().getDefaultLandSet();
