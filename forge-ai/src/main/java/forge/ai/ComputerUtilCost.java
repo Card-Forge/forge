@@ -429,7 +429,7 @@ public class ComputerUtilCost {
                     boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
                     // try to determine if the mana shards provided by the lands would be applicable to pay the mana cost
                     boolean canPay = c.getManaCost().canBePaidWithAvaliable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
-                    // try to determine that there is a valid target for a spell (very basic, consider expanding)
+
                     if (canPay && willPlay) {
                         return true;
                     }
