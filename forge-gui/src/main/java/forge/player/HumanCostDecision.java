@@ -1157,6 +1157,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (c > typeList.size()) {
+            controller.getGui().message("Not enough valid cards left to tap to pay the cost.", "Cost payment invalid");
             return null; // not enough targets anymore (e.g. Crackleburr + Smokebraider tapped to get mana)
         }
 
