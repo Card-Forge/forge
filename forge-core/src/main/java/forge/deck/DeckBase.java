@@ -19,17 +19,16 @@ package forge.deck;
 
 import forge.item.InventoryItem;
 
+import java.io.File;
 import java.io.Serializable;
 
-/**
- * TODO: Write javadoc for this type.
- * 
- */
+
 public abstract class DeckBase implements Serializable, Comparable<DeckBase>, InventoryItem {
     private static final long serialVersionUID = -7538150536939660052L;
     // gameType is from Constant.GameType, like GameType.Regular
 
     private final String name;
+    private transient String directory;
     private String comment = null;
 
     /**
@@ -38,7 +37,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      * @param name0 the name0
      */
     public DeckBase(final String name0) {
-        this.name = name0.replace('/', '_');
+        name = name0.replace('/', '_');
     }
 
     /* (non-Javadoc)
@@ -46,7 +45,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      */
     @Override
     public int compareTo(final DeckBase d) {
-        return this.getName().compareTo(d.getName());
+        return name.compareTo(d.name);
     }
 
     /** {@inheritDoc} */
@@ -54,7 +53,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     public boolean equals(final Object o) {
         if (o instanceof DeckBase) {
             final DeckBase d = (DeckBase) o;
-            return this.getName().equals(d.getName());
+            return name.equals(d.name);
         }
         return false;
     }
@@ -66,19 +65,28 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      */
     @Override
     public int hashCode() {
-        return (this.name.hashCode() * 17) + this.name.hashCode();
+        return (name.hashCode() * 17) + name.hashCode();
     }
 
-    /* (non-Javadoc)
-     * @see forge.util.IHasName#getName()
-     */
     public String getName() {
-        return this.name;
+        return name;
+    }
+
+    public String getDirectory() {
+        return directory;
+    }
+    public void setDirectory(File file, String rootDir) {
+        directory = file.getParent().substring(rootDir.length());
+    }
+
+    public String getUniqueKey() {
+        if (directory == null) { return name; }
+        return directory + "/" + name;
     }
 
     @Override
     public String toString() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -86,8 +94,8 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      *
      * @param comment the new comment
      */
-    public void setComment(final String comment) {
-        this.comment = comment;
+    public void setComment(final String comment0) {
+        comment = comment0;
     }
 
     /**
@@ -98,7 +106,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      * @return a {@link java.lang.String} object.
      */
     public String getComment() {
-        return this.comment;
+        return comment;
     }
 
     /**
@@ -115,7 +123,8 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      * @param clone the clone
      */
     protected void cloneFieldsTo(final DeckBase clone) {
-        clone.comment = this.comment;
+        clone.directory = directory;
+        clone.comment = comment;
     }
 
     /**
@@ -125,8 +134,8 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      * @return the deck base
      */
     public DeckBase copyTo(final String name0) {
-        final DeckBase obj = this.newInstance(name0);
-        this.cloneFieldsTo(obj);
+        final DeckBase obj = newInstance(name0);
+        cloneFieldsTo(obj);
         return obj;
     }
 
@@ -136,7 +145,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
      * @return the best file name
      */
     public final String getBestFileName() {
-        return this.getName().replaceAll("[^-_$#@.,{[()]} a-zA-Z0-9]", "");
+        return name.replaceAll("[^-_$#@.,{[()]} a-zA-Z0-9]", "");
     }
 
     public abstract boolean isEmpty();

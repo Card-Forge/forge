@@ -33,8 +33,10 @@ import java.util.Map;
  * This class knows how to make a file out of a deck object and vice versa.
  */
 public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSerializer<Deck> {
-    private final boolean moveWronglyNamedDecks;
     public static final String FILE_EXTENSION = ".dck";
+
+    private final String rootDir;
+    private final boolean moveWronglyNamedDecks;
 
     /** Constant <code>DCKFileFilter</code>. */
     public static final FilenameFilter DCK_FILE_FILTER = new FilenameFilter() {
@@ -44,12 +46,13 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
         }
     };
 
-    public DeckStorage(final File deckDir0) {
-        this(deckDir0, false);
+    public DeckStorage(final File deckDir0, final String rootDir0) {
+        this(deckDir0, rootDir0, false);
     }
 
-    public DeckStorage(final File deckDir0, boolean moveWrongDecks) {
+    public DeckStorage(final File deckDir0, final String rootDir0, boolean moveWrongDecks) {
         super(deckDir0, Deck.FN_NAME_SELECTOR);
+        rootDir = rootDir0;
         moveWronglyNamedDecks = moveWrongDecks;
     }
 
@@ -60,7 +63,7 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
     public IItemReader<Deck> getReaderForFolder(File subfolder) {
         if ( !subfolder.getParentFile().equals(directory) )
             throw new UnsupportedOperationException("Only child folders of " + directory + " may be processed");
-        return new DeckStorage(subfolder, false);
+        return new DeckStorage(subfolder, rootDir, false);
     }
 
     @Override
@@ -84,6 +87,10 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
 
         if (moveWronglyNamedDecks) {
             adjustFileLocation(file, result);
+        }
+
+        if (result != null) {
+            result.setDirectory(file, rootDir);
         }
         return result;
     }

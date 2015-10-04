@@ -47,15 +47,15 @@ public class CardCollections {
     public CardCollections() {
         final StopWatch sw = new StopWatch();
         sw.start();
-        constructed = new StorageImmediatelySerialized<Deck>     ("Constructed decks",       new DeckStorage(new File(ForgeConstants.DECK_CONSTRUCTED_DIR), true), true);
-        draft       = new StorageImmediatelySerialized<DeckGroup>("Draft deck sets",         new DeckGroupSerializer(new File(ForgeConstants.DECK_DRAFT_DIR)));
-        sealed      = new StorageImmediatelySerialized<DeckGroup>("Sealed deck sets",        new DeckGroupSerializer(new File(ForgeConstants.DECK_SEALED_DIR)));
-        winston     = new StorageImmediatelySerialized<DeckGroup>("Winston draft deck sets", new DeckGroupSerializer(new File(ForgeConstants.DECK_WINSTON_DIR)));
-        cube        = new StorageImmediatelySerialized<Deck>     ("Cubes",                   new DeckStorage(new File(ForgeConstants.DECK_CUBE_DIR)));
-        scheme      = new StorageImmediatelySerialized<Deck>     ("Archenemy decks",         new DeckStorage(new File(ForgeConstants.DECK_SCHEME_DIR)));
-        plane       = new StorageImmediatelySerialized<Deck>     ("Planechase decks",        new DeckStorage(new File(ForgeConstants.DECK_PLANE_DIR)));
-        commander   = new StorageImmediatelySerialized<Deck>     ("Commander decks",         new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR)));
-        tinyLeaders = new StorageImmediatelySerialized<Deck>     ("Commander decks",         new DeckStorage(new File(ForgeConstants.DECK_TINY_LEADERS_DIR)));
+        constructed = new StorageImmediatelySerialized<Deck>     ("Constructed decks",       new DeckStorage(new File(ForgeConstants.DECK_CONSTRUCTED_DIR), ForgeConstants.DECK_BASE_DIR, true), true);
+        draft       = new StorageImmediatelySerialized<DeckGroup>("Draft deck sets",         new DeckGroupSerializer(new File(ForgeConstants.DECK_DRAFT_DIR), ForgeConstants.DECK_BASE_DIR));
+        sealed      = new StorageImmediatelySerialized<DeckGroup>("Sealed deck sets",        new DeckGroupSerializer(new File(ForgeConstants.DECK_SEALED_DIR), ForgeConstants.DECK_BASE_DIR));
+        winston     = new StorageImmediatelySerialized<DeckGroup>("Winston draft deck sets", new DeckGroupSerializer(new File(ForgeConstants.DECK_WINSTON_DIR), ForgeConstants.DECK_BASE_DIR));
+        cube        = new StorageImmediatelySerialized<Deck>     ("Cubes",                   new DeckStorage(new File(ForgeConstants.DECK_CUBE_DIR), ForgeConstants.RES_DIR));
+        scheme      = new StorageImmediatelySerialized<Deck>     ("Archenemy decks",         new DeckStorage(new File(ForgeConstants.DECK_SCHEME_DIR), ForgeConstants.DECK_BASE_DIR));
+        plane       = new StorageImmediatelySerialized<Deck>     ("Planechase decks",        new DeckStorage(new File(ForgeConstants.DECK_PLANE_DIR), ForgeConstants.DECK_BASE_DIR));
+        commander   = new StorageImmediatelySerialized<Deck>     ("Commander decks",         new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR), ForgeConstants.DECK_BASE_DIR));
+        tinyLeaders = new StorageImmediatelySerialized<Deck>     ("Commander decks",         new DeckStorage(new File(ForgeConstants.DECK_TINY_LEADERS_DIR), ForgeConstants.DECK_BASE_DIR));
         sw.stop();
         System.out.printf("Read decks (%d ms): %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar, %d commander, %d tiny leaders.%n", sw.getTime(), constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size(), commander.size(), tinyLeaders.size());
     }
