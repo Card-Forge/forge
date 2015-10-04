@@ -1156,10 +1156,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(inp.getSelected());
         }
 
-        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList);
         if (c > typeList.size()) {
             return null; // not enough targets anymore (e.g. Crackleburr + Smokebraider tapped to get mana)
         }
+
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList);
         inp.setCancelAllowed(true);
         inp.setMessage("Select a " + cost.getDescriptiveType() + " to tap (%d left)");
         inp.showAndWait();
