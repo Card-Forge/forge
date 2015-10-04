@@ -177,6 +177,10 @@ public class GameAction {
 
                 copied.setUnearthed(c.isUnearthed());
                 copied.setTapped(false);
+                if (fromBattlefield) {
+                    // when a card leaves the battlefield, ensure it's in its original state
+                    copied.setState(CardStateName.Original, false);
+                }
                 for (final Trigger trigger : copied.getTriggers()) {
                     trigger.setHostCard(copied);
                 }
