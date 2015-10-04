@@ -74,6 +74,7 @@ public class DeckgenUtil {
     
             // After generating card lists, build deck.
             deck = new Deck("Random deck : " + deckName);
+            deck.setDirectory("generated/color");
             deck.getMain().addAll(cards);
             return deck;
         }
@@ -316,6 +317,7 @@ public class DeckgenUtil {
 
         // After generating card lists, build deck.
         deck = new Deck("Generated " + gameType.toString() + " deck (" + commander.getName() + ")");
+        deck.setDirectory("generated/commander");
         deck.getMain().addAll(cards);
         deck.getOrCreate(DeckSection.Commander).add(commander);
 

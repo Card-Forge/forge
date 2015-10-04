@@ -130,6 +130,7 @@ public class SealedCardPoolGenerator {
         }
 
         final DeckGroup sealed = new DeckGroup(sDeckName);
+        deck.setDirectory(sealedDecks.getName());
         sealed.setHumanDeck(deck);
         for (int i = 0; i < rounds; i++) {
             // Generate other decks for next N opponents

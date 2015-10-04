@@ -189,8 +189,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
             parts.put(p.getKey(), newPool);
         }
-        
-
     }
 
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {

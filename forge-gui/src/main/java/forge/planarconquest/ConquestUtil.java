@@ -62,6 +62,7 @@ public class ConquestUtil {
         CardPool cards = gen.getDeck(60, forAi);
 
         Deck deck = new Deck(commander.getName());
+        deck.setDirectory("generated/conquest");
         deck.getMain().addAll(cards);
         deck.getOrCreate(DeckSection.Commander).add(commander);
 

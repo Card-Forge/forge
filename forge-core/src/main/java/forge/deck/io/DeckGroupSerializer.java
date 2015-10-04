@@ -76,21 +76,15 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
         final Deck humanDeck = DeckSerializer.fromFile(new File(file, humanDeckFile));
         if (humanDeck == null) { return null; }
 
-        humanDeck.setDirectory(file, rootDir);
-
         final DeckGroup d = new DeckGroup(humanDeck.getName());
+        d.setDirectory(file.getParent().substring(rootDir.length()));
         d.setHumanDeck(humanDeck);
         for (int i = 1; i < DeckGroupSerializer.MAX_DRAFT_PLAYERS; i++) {
             final File theFile = new File(file, "ai-" + i + ".dck");
             if (!theFile.exists()) {
                 break;
             }
-
-            Deck aiDeck = DeckSerializer.fromFile(theFile);
-            if (aiDeck != null) {
-                aiDeck.setDirectory(theFile, rootDir);
-                d.addAiDeck(aiDeck);
-            }
+            d.addAiDeck(DeckSerializer.fromFile(theFile));
         }
         return d;
     }

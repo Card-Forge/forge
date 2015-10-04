@@ -49,7 +49,7 @@ public class DeckGroup extends DeckBase {
      * @return the human deck
      */
     public final Deck getHumanDeck() {
-        return this.humanDeck;
+        return humanDeck;
     }
 
     /**
@@ -58,7 +58,7 @@ public class DeckGroup extends DeckBase {
      * @return the ai decks
      */
     public final List<Deck> getAiDecks() {
-        return this.aiDecks;
+        return aiDecks;
     }
 
     /**
@@ -66,8 +66,11 @@ public class DeckGroup extends DeckBase {
      *
      * @param humanDeck the new human deck
      */
-    public final void setHumanDeck(final Deck humanDeck) {
-        this.humanDeck = humanDeck;
+    public final void setHumanDeck(final Deck humanDeck0) {
+        humanDeck = humanDeck0;
+        if (humanDeck != null) {
+            humanDeck.setDirectory(getDirectory());
+        }
     }
 
     /**
@@ -76,7 +79,7 @@ public class DeckGroup extends DeckBase {
      * 
      */
     public final void rankAiDecks(Comparator<Deck> comparator) {
-        if (this.aiDecks.size() < 2) {
+        if (aiDecks.size() < 2) {
             return;
         }
         Collections.sort(aiDecks, comparator);
@@ -92,10 +95,10 @@ public class DeckGroup extends DeckBase {
         super.cloneFieldsTo(clone);
 
         DeckGroup myClone = (DeckGroup) clone;
-        myClone.setHumanDeck((Deck) this.getHumanDeck().copyTo(getName())); //human deck name should always match DeckGroup name
+        myClone.setHumanDeck((Deck) humanDeck.copyTo(getName())); //human deck name should always match DeckGroup name
 
-        for (int i = 0; i < this.getAiDecks().size(); i++) {
-            Deck src = this.getAiDecks().get(i);
+        for (int i = 0; i < aiDecks.size(); i++) {
+            Deck src = aiDecks.get(i);
             myClone.addAiDeck((Deck) src.copyTo(src.getName()));
         }
     }
@@ -109,7 +112,8 @@ public class DeckGroup extends DeckBase {
         if (aiDeck == null) {
             return;
         }
-        this.aiDecks.add(aiDeck);
+        aiDeck.setDirectory(getDirectory());
+        aiDecks.add(aiDeck);
     }
 
     /**
@@ -119,7 +123,7 @@ public class DeckGroup extends DeckBase {
      */
     public void addAiDecks(final Deck[] computer) {
         for (final Deck element : computer) {
-            this.aiDecks.add(element);
+            aiDecks.add(element);
         }
     }
 
@@ -144,7 +148,7 @@ public class DeckGroup extends DeckBase {
     public static final Function<DeckGroup, Deck> FN_HUMAN_DECK = new Function<DeckGroup, Deck>() {
         @Override
         public Deck apply(DeckGroup arg1) {
-            return arg1.getHumanDeck();
+            return arg1.humanDeck;
         }
     };
 

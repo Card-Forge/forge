@@ -19,7 +19,6 @@ package forge.deck;
 
 import forge.item.InventoryItem;
 
-import java.io.File;
 import java.io.Serializable;
 
 
@@ -75,8 +74,8 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     public String getDirectory() {
         return directory;
     }
-    public void setDirectory(File file, String rootDir) {
-        directory = file.getParent().substring(rootDir.length());
+    public void setDirectory(String directory0) {
+        directory = directory0;
     }
 
     public String getUniqueKey() {
