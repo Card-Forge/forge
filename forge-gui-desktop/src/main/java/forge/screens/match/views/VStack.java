@@ -284,10 +284,6 @@ public class VStack implements IVDoc<CStack> {
                     }
                     else {
                         controller.getMatchUI().setShouldAlwaysAcceptTrigger(triggerID);
-                        if (controller.getMatchUI().getGameView().peekStack() == item) {
-                            //auto-yes if ability is on top of stack
-                            controller.getMatchUI().getGameController().selectButtonOk();
-                        }
                     }
                 }
             });
@@ -302,10 +298,6 @@ public class VStack implements IVDoc<CStack> {
                     }
                     else {
                         controller.getMatchUI().setShouldAlwaysDeclineTrigger(triggerID);
-                        if (controller.getMatchUI().getGameView().peekStack() == item) {
-                            //auto-no if ability is on top of stack
-                            controller.getMatchUI().getGameController().selectButtonCancel();
-                        }
                     }
                 }
             });
