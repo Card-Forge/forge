@@ -66,7 +66,7 @@ public class NetDeckCategory extends StorageBase<Deck> {
             NetDeckCategory category = categories.get(name);
             if (category != null && category.map.isEmpty()) {
                 //if name passed in, try to load decks from current cached files
-                File downloadDir = new File(category.getDownloadLocation());
+                File downloadDir = new File(category.getFullPath());
                 if (downloadDir.exists()) {
                     for (File file : downloadDir.listFiles(DeckStorage.DCK_FILE_FILTER)) {
                         Deck deck = DeckSerializer.fromFile(file);
@@ -86,7 +86,7 @@ public class NetDeckCategory extends StorageBase<Deck> {
             WaitCallback<Boolean> callback = new WaitCallback<Boolean>() {
                 @Override
                 public void run() {
-                    String downloadLoc = c.getDownloadLocation();
+                    String downloadLoc = c.getFullPath();
                     GuiBase.getInterface().download(new GuiDownloadZipService(c.getName(), "decks", c.getUrl(), downloadLoc, downloadLoc, null) {
                         @Override
                         protected void copyInputStream(InputStream in, String outPath) throws IOException {
@@ -108,12 +108,8 @@ public class NetDeckCategory extends StorageBase<Deck> {
     private final String url;
 
     private NetDeckCategory(String name0, String url0) {
-        super(name0, new HashMap<String, Deck>());
+        super(name0, ForgeConstants.DECK_NET_DIR + name0, new HashMap<String, Deck>());
         url = url0;
-    }
-
-    public String getDownloadLocation() {
-        return ForgeConstants.DECK_NET_DIR + name + "/";
     }
 
     public String getUrl() {

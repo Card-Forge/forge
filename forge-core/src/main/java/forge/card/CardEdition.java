@@ -397,7 +397,6 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         public IItemReader<SealedProduct.Template> getBoosterGenerator() {
             // TODO Auto-generated method stub
             return new StorageReaderBase<SealedProduct.Template>(null) {
-
                 @Override
                 public Map<String, SealedProduct.Template> readAll() {
                     Map<String, SealedProduct.Template> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -410,6 +409,11 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 @Override
                 public String getItemKey(SealedProduct.Template item) {
                     return item.getEdition();
+                }
+
+                @Override
+                public String getFullPath() {
+                    return null;
                 }
             };
         }

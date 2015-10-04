@@ -18,7 +18,9 @@
 package forge.util.storage;
 
 import com.google.common.base.Function;
+
 import forge.util.FileUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -52,7 +54,12 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
      */
     public StorageReaderFile(final File file0, final Function<? super T, String> keySelector0) {
         super(keySelector0);
-        this.file = file0;
+        file = file0;
+    }
+
+    @Override
+    public String getFullPath() {
+        return file.getPath();
     }
 
     /* (non-Javadoc)
@@ -63,14 +70,14 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
         final Map<String, T> result = new TreeMap<String, T>();
 
         int idx = 0;
-        for (final String s : FileUtil.readFile(this.file)) {
-            if (!this.lineContainsObject(s)) {
+        for (final String s : FileUtil.readFile(file)) {
+            if (!lineContainsObject(s)) {
                 continue;
             }
 
-            final T item = this.read(s, idx);
+            final T item = read(s, idx);
             if (null == item) {
-                final String msg = "An object stored in " + this.file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
+                final String msg = "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
                 throw new RuntimeException(msg);
             }
 
@@ -110,6 +117,6 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
      */
     @Override
     public String getItemKey(final T item) {
-        return this.keySelector.apply(item);
+        return keySelector.apply(item);
     }
 }

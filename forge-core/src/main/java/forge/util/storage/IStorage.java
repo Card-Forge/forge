@@ -24,6 +24,7 @@ import com.google.common.base.Predicate;
 import forge.util.IHasName;
 
 public interface IStorage<T> extends Iterable<T>, IHasName {
+    String getFullPath();
     T get(String name);
     T find(Predicate<T> condition);
     Collection<String> getItemNames();

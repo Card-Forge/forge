@@ -18,7 +18,9 @@
 package forge.util.storage;
 
 import com.google.common.base.Function;
+
 import forge.util.FileUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -42,7 +44,12 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
 
     public StorageReaderFileSections(final File file0, final Function<? super T, String> keySelector0) {
         super(keySelector0);
-        this.file = file0;
+        file = file0;
+    }
+
+    @Override
+    public String getFullPath() {
+        return file.getPath();
     }
 
     protected Map<String, T> createMap() {
@@ -57,34 +64,36 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
         final Map<String, T> result = createMap();
 
         int idx = 0;
-        Iterable<String> file = FileUtil.readFile(this.file);
+        Iterable<String> contents = FileUtil.readFile(file);
 
         List<String> accumulator = new ArrayList<String>();
         String header = null;
 
-        for (final String s : file) {
-            if (!this.lineContainsObject(s)) {
+        for (final String s : contents) {
+            if (!lineContainsObject(s)) {
                 continue;
             }
 
-            if(s.charAt(0) == '[') {
+            if (s.charAt(0) == '[') {
                 if( header != null ) {
                     // read previously collected item
                     T item = readItem(header, accumulator, idx);
                     if( item != null ) {
-                        result.put(this.keySelector.apply(item), item);
+                        result.put(keySelector.apply(item), item);
                         idx++;
                     }
                 }
 
                 header = StringUtils.strip(s, "[] ");
                 accumulator.clear();
-            } else
+            }
+            else {
                 accumulator.add(s);
+            }
         }
 
         // store the last item
-        if ( !accumulator.isEmpty() ) {
+        if (!accumulator.isEmpty()) {
             T item = readItem(header, accumulator, idx);
             if( item != null ) {
                 String newKey = keySelector.apply(item);
@@ -98,10 +107,10 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
     }
 
     private final T readItem(String header, Iterable<String> accumulator, int idx) {
-        final T item = this.read(header, accumulator, idx);
+        final T item = read(header, accumulator, idx);
         if (null != item) return item;
 
-        final String msg = "An object stored in " + this.file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
+        final String msg = "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
         throw new RuntimeException(msg);
     }
 
@@ -130,6 +139,6 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
      */
     @Override
     public String getItemKey(final T item) {
-        return this.keySelector.apply(item);
+        return keySelector.apply(item);
     }
 }

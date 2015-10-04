@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class ConquestDeckMap extends StorageBase<Deck> {
     public ConquestDeckMap(Map<String, Deck> in) {
-        super("Conquest decks", in);
+        super("Conquest decks", null, in);
     }
 
     @Override

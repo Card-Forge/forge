@@ -27,12 +27,11 @@ import java.util.Map;
  * 
  */
 public class QuestDeckMap extends StorageBase<Deck> {
-
     /**
      * Instantiates a new quest deck map.
      */
     public QuestDeckMap(Map<String, Deck> in) {
-        super("Quest decks", in);
+        super("Quest decks", null, in);
     }
 
 

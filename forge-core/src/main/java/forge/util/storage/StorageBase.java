@@ -35,42 +35,42 @@ import java.util.*;
 public class StorageBase<T> implements IStorage<T> {
     protected final Map<String, T> map;
 
-    public final static StorageBase<?> emptyMap = new StorageBase<Object>("Empty", new HashMap<String, Object>());
-    public final String name;
+    public final static StorageBase<?> emptyMap = new StorageBase<Object>("Empty", null, new HashMap<String, Object>());
+    public final String name, fullPath;
 
-    public StorageBase(final String name, final IItemReader<T> io) {
-        this.name = name;
-        this.map = io.readAll();
+    public StorageBase(final String name0, final IItemReader<T> io) {
+        this(name0, io.getFullPath(), io.readAll());
     }
 
-    public StorageBase(final String name, final Map<String, T> inMap) {
-        this.name = name;
-        this.map = inMap;
+    public StorageBase(final String name0, final String fullPath0, final Map<String, T> map0) {
+        name = name0;
+        fullPath = fullPath0;
+        map = map0;
     }
 
     @Override
     public T get(final String name) {
-        return this.map.get(name);
+        return map.get(name);
     }
 
     @Override
     public final Collection<String> getItemNames() {
-        return new ArrayList<String>(this.map.keySet());
+        return new ArrayList<String>(map.keySet());
     }
 
     @Override
     public Iterator<T> iterator() {
-        return this.map.values().iterator();
+        return map.values().iterator();
     }
 
     @Override
     public boolean contains(String name) {
-        return name == null ? false : this.map.containsKey(name);
+        return name == null ? false : map.containsKey(name);
     }
 
     @Override
     public int size() {
-        return this.map.size();
+        return map.size();
     }
 
     @Override
@@ -95,13 +95,17 @@ public class StorageBase<T> implements IStorage<T> {
         return (IStorage<IStorage<T>>) emptyMap;
     }
 
-    /* (non-Javadoc)
-     * @see forge.util.IHasName#getName()
-     */
     @Override
-    public String getName() {
-        // TODO Auto-generated method stub
+    public final String getName() {
         return name;
+    }
+
+    @Override
+    public final String getFullPath() {
+        if (fullPath == null) {
+            return name;
+        }
+        return fullPath;
     }
 
     @Override

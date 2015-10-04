@@ -18,6 +18,7 @@
 package forge.item;
 
 import com.google.common.base.Function;
+
 import forge.StaticData;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;

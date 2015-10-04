@@ -26,21 +26,10 @@ import java.util.Map;
  * @param <T> the generic type
  */
 public interface IItemReader<T> {
+    String getFullPath();
 
-    /**
-     * Read all.
-     *
-     * @return the map
-     */
     Map<String, T> readAll();
-    // T read(File file);
 
-    /**
-     * Gets the item key.
-     *
-     * @param item the item
-     * @return the item key
-     */
     String getItemKey(T item);
     
     Iterable<File> getSubFolders();

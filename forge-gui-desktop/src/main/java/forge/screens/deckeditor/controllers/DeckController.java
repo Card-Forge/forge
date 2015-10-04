@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Supplier;
 
 import forge.deck.DeckBase;
+import forge.properties.ForgeConstants;
 import forge.screens.deckeditor.menus.DeckFileMenu;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
@@ -45,14 +46,14 @@ public class DeckController<T extends DeckBase> {
      * @param newModelCreator0 the new model creator0
      */
     public DeckController(final IStorage<T> folder0, final ACEditorBase<?, T> view0, final Supplier<T> newModelCreator0) {
-        this.rootFolder = folder0;
-        this.currentFolder = rootFolder;
-        this.view = view0;
-        this.model = null;
-        this.saved = true;
-        this.modelInStorage = false;
-        this.modelPath = "";
-        this.newModelCreator = newModelCreator0;
+        rootFolder = folder0;
+        currentFolder = rootFolder;
+        view = view0;
+        model = null;
+        saved = true;
+        modelInStorage = false;
+        modelPath = "";
+        newModelCreator = newModelCreator0;
     }
 
     /**
@@ -61,11 +62,11 @@ public class DeckController<T extends DeckBase> {
      * @return the document
      */
     public T getModel() {
-        return this.model;
+        return model;
     }
 
     public String getModelPath() {
-        return this.modelPath;
+        return modelPath;
     }
 
     public boolean isEmpty() {
@@ -77,27 +78,27 @@ public class DeckController<T extends DeckBase> {
      *
      */
     public void setModel(final T document) {
-        this.setModel(document, false);
+        setModel(document, false);
     }
     public void setModel(final T document, final boolean isStored) {
-        this.modelInStorage = isStored;
-        this.model = document;
-        this.view.resetTables();
+        modelInStorage = isStored;
+        model = document;
+        view.resetTables();
 
         CStatistics.SINGLETON_INSTANCE.update();
         CProbabilities.SINGLETON_INSTANCE.update();
 
         if (isStored) {
-            if (this.isModelInSyncWithFolder()) {
-                this.setSaved(true);
+            if (isModelInSyncWithFolder()) {
+                setSaved(true);
             }
             else {
-                this.notifyModelChanged();
+                notifyModelChanged();
             }
         } else { //TODO: Make this smarter
-            this.currentFolder = this.rootFolder;
-            this.modelPath = "";
-            this.setSaved(true);
+            currentFolder = rootFolder;
+            modelPath = "";
+            setSaved(true);
         }
     }
 
@@ -106,16 +107,16 @@ public class DeckController<T extends DeckBase> {
             return true;
         }
 
-        final T modelStored = this.currentFolder.get(this.model.getName());
+        final T modelStored = currentFolder.get(model.getName());
         // checks presence in dictionary only.
-        if (modelStored == this.model) {
+        if (modelStored == model) {
             return true;
         }
         if (modelStored == null) {
             return false;
         }
 
-        return modelStored.equals(this.model);
+        return modelStored.equals(model);
     }
 
     /**
@@ -124,7 +125,7 @@ public class DeckController<T extends DeckBase> {
      * @return the view
      */
     public ACEditorBase<?, T> getView() {
-        return this.view;
+        return view;
     }
 
     /**
@@ -132,7 +133,7 @@ public class DeckController<T extends DeckBase> {
      */
     public void notifyModelChanged() {
         if (saved) {
-            this.setSaved(false);
+            setSaved(false);
         }
     }
 
@@ -145,7 +146,7 @@ public class DeckController<T extends DeckBase> {
      * Reload current model
      */
     public void reload() {
-        final String name = this.getModelName();
+        final String name = getModelName();
         if (name.isEmpty()) {
             newModel();
         }
@@ -172,12 +173,12 @@ public class DeckController<T extends DeckBase> {
      */
     @SuppressWarnings("unchecked")
     private void load(final String name) {
-        final T newModel = this.currentFolder.get(name);
+        final T newModel = currentFolder.get(name);
         if (newModel != null) {
-            this.setModel((T) newModel.copyTo(name), true);
+            setModel((T) newModel.copyTo(name), true);
         }
         else {
-            this.setSaved(true);
+            setSaved(true);
         }
     }
 
@@ -191,9 +192,10 @@ public class DeckController<T extends DeckBase> {
         }
 
         // copy to new instance before adding to current folder so further changes are auto-saved
-        this.currentFolder.add((T) this.model.copyTo(this.model.getName()));
-        this.modelInStorage = true;
-        this.setSaved(true);
+        currentFolder.add((T) model.copyTo(model.getName()));
+        model.setDirectory(currentFolder.getFullPath().substring(ForgeConstants.DECK_BASE_DIR.length()));
+        modelInStorage = true;
+        setSaved(true);
 
         VSubmenuConstructed.SINGLETON_INSTANCE.getLobby().updateDeckPanel();
     }
@@ -205,10 +207,10 @@ public class DeckController<T extends DeckBase> {
      */
     @SuppressWarnings("unchecked")
     public void saveAs(final String name0) {
-        this.model = (T)this.model.copyTo(name0);
-        this.modelInStorage = false;
-        this.save();
-        this.view.resetTables(); //ensure pool updated in CCurrentDeck
+        model = (T)model.copyTo(name0);
+        modelInStorage = false;
+        save();
+        view.resetTables(); //ensure pool updated in CCurrentDeck
     }
 
     /**
@@ -217,7 +219,7 @@ public class DeckController<T extends DeckBase> {
      * @return true, if is saved
      */
     public boolean isSaved() {
-        return this.saved;
+        return saved;
     }
 
     /**
@@ -227,18 +229,18 @@ public class DeckController<T extends DeckBase> {
      * @return true, if successful
      */
     public boolean fileExists(final String deckName) {
-        return this.currentFolder.contains(deckName);
+        return currentFolder.contains(deckName);
     }
 
     /**
      * Refresh current model or create new one if none
      */
     public void refreshModel() {
-        if (this.model == null) {
+        if (model == null) {
             newModel();
         }
         else {
-            setModel(this.model, this.modelInStorage);
+            setModel(model, modelInStorage);
         }
     }
 
@@ -246,25 +248,25 @@ public class DeckController<T extends DeckBase> {
      * New model.
      */
     public void newModel() {
-        this.model = this.newModelCreator.get();
-        this.setSaved(true);
-        this.view.resetTables();
+        model = newModelCreator.get();
+        setSaved(true);
+        view.resetTables();
     }
 
     public String getModelName() {
-        return this.model != null ? this.model.getName() : "";
+        return model != null ? model.getName() : "";
     }
 
     public void updateCaptions() {
         String tabCaption = "Current Deck";
-        final String title = this.getModelName();
+        final String title = getModelName();
         String itemManagerCaption = title.isEmpty() ? "[Untitled]" : title;
 
         if (!saved) {
             tabCaption = "*" + tabCaption;
             itemManagerCaption = "*" + itemManagerCaption;
         }
-        itemManagerCaption += " - " + this.view.getSectionMode().name();
+        itemManagerCaption += " - " + view.getSectionMode().name();
 
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(tabCaption);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(title);

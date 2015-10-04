@@ -9,7 +9,7 @@ public class StorageNestedFolders<T> extends StorageBase<IStorage<T>> {
     private final File thisFolder;
 
     public StorageNestedFolders(File thisFolder, Iterable<File> subfolders, Function<File, IStorage<T>> factory) {
-        super("<Subfolders>", new HashMap<String, IStorage<T>>());
+        super("<Subfolders>", thisFolder.getPath(), new HashMap<String, IStorage<T>>());
         this.thisFolder = thisFolder;
         for (File sf : subfolders) {
             IStorage<T> newUnit = factory.apply(sf);

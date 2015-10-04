@@ -40,6 +40,11 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
         return directory;
     }
 
+    @Override
+    public String getFullPath() {
+        return directory.getPath();
+    }
+
     protected final File directory;
 
     /**
