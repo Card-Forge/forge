@@ -128,16 +128,19 @@ public class LifeGainAi extends SpellAbilityAi {
                 return false;
             }
         }
-        // Save instant-speed life-gain unless it is really worth it
-        if (!SpellAbilityAi.isSorcerySpeed(sa)) {
-            final float value = 0.9f * lifeAmount / life;
-            if (value < 0.2f) {
-                return false;
-            } else {
-                return MyRandom.getRandom().nextFloat() < value;
-            }
+        
+        if (SpellAbilityAi.isSorcerySpeed(sa)
+        		|| sa.getSubAbility() != null
+        		|| SpellAbilityAi.playReusable(ai, sa)) {
+        	return true;
         }
-        return true;
+        
+        // Save instant-speed life-gain unless it is really worth it
+        final float value = 0.9f * lifeAmount / life;
+        if (value < 0.2f) {
+            return false;
+        }
+        return MyRandom.getRandom().nextFloat() < value;
     }
 
 
