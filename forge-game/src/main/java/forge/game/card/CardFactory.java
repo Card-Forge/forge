@@ -107,7 +107,6 @@ public class CardFactory {
         out.setEnchantedBy(in.getEnchantedBy(false));
         out.setEnchanting(in.getEnchanting());
 
-
         out.setClones(in.getClones());
         out.setZone(in.getZone());
         for (final Object o : in.getRemembered()) {
@@ -117,6 +116,7 @@ public class CardFactory {
             out.addImprintedCard(o);
         }
         out.setCommander(in.isCommander());
+
         /*
         if(out.isCommander())
         {
@@ -130,6 +130,38 @@ public class CardFactory {
          */
         return out;
 
+    }
+
+    /**
+     * <p>
+     * copyCardWithChangedStats
+     * </p>
+     * 
+     * This method copies the card together with certain temporarily changed stats of the card
+     * (namely, changed color, changed types, changed keywords).
+     * 
+     * copyCardWithChangedStats must NOT be used for ordinary card copy operations because
+     * according to MTG rules the changed text (including keywords, types) is not copied over
+     * to cards cloned by another card. However, this method is useful, for example, for certain
+     * triggers that demand the latest information about the changes to the card which is lost
+     * when the card changes its zone after GameAction::changeZone is called.
+     * 
+     * @param in
+     *            a {@link forge.game.card.Card} object.
+     * @param assignNewId
+     *            a boolean
+     * @return a {@link forge.game.card.Card} object.
+     */
+    public static final Card copyCardWithChangedStats(final Card in, boolean assignNewId) {
+        Card out = copyCard(in, assignNewId);
+        
+        // Copy changed color, type, keyword arrays (useful for some triggers that require
+        // information about the latest state of the card as it left the battlefield)
+        out.setChangedCardColors(in.getChangedCardColors());
+        out.setChangedCardKeywords(in.getChangedCardKeywords());
+        out.setChangedCardTypes(in.getChangedCardTypes());
+
+        return out;
     }
 
     /**

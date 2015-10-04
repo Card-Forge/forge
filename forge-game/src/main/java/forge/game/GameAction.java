@@ -1178,17 +1178,17 @@ public class GameAction {
             return null;
         }
 
-        final Card newCard = sacrificeDestroy(c);
-
         // Play the Sacrifice sound
         game.fireEvent(new GameEventCardSacrificed());
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Card", c);
+        // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
+        runParams.put("Card", CardFactory.copyCardWithChangedStats(c, false)); 
         runParams.put("Cause", source);
         game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
-        return newCard;
+
+        return sacrificeDestroy(c);
     }
 
     public final boolean destroy(final Card c, final SpellAbility sa) {

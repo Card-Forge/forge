@@ -2474,6 +2474,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return changedCardKeywords;
     }
 
+    public Map<Long, CardColor> getChangedCardColors() {
+        return changedCardColors;
+    }
+
     public final void addChangedCardTypes(final CardType addType, final CardType removeType,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeCreatureTypes, final long timestamp) {
@@ -6663,6 +6667,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.changedCardKeywords.clear();
         for (Entry<Long, KeywordsChange> entry : changedCardKeywords.entrySet()) {
             this.changedCardKeywords.put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    public void setChangedCardColors(Map<Long, CardColor> changedCardColors) {
+        this.changedCardColors.clear();
+        for (Entry<Long, CardColor> entry : changedCardColors.entrySet()) {
+            this.changedCardColors.put(entry.getKey(), entry.getValue());
         }
     }
 }
