@@ -24,7 +24,6 @@ public class QuestDraftUtils {
     private static boolean waitForUserInput = false;
 
     public static void completeDraft(final DeckGroup finishedDraft) {
-
         final List<Deck> aiDecks = new ArrayList<Deck>(finishedDraft.getAiDecks());
         finishedDraft.getAiDecks().clear();
 
@@ -40,7 +39,6 @@ public class QuestDraftUtils {
         draft.add(finishedDraft);
 
         FModel.getQuest().save();
-
     }
 
     public static String getDeckLegality() {
@@ -71,54 +69,43 @@ public class QuestDraftUtils {
         }
 
         switch (currentSet) {
-
         case 7:
             addMatchup(0, 1, draft);
             addMatchup(2, 3, draft);
             addMatchup(4, 5, draft);
             addMatchup(6, 7, draft);
             break;
-
         case 8:
             addMatchup(2, 3, draft);
             addMatchup(4, 5, draft);
             addMatchup(6, 7, draft);
             break;
-
         case 9:
             addMatchup(4, 5, draft);
             addMatchup(6, 7, draft);
             break;
-
         case 10:
             addMatchup(6, 7, draft);
             break;
-
         case 11:
             addMatchup(8, 9, draft);
             addMatchup(10, 11, draft);
             break;
-
         case 12:
             addMatchup(10, 11, draft);
             break;
-
         case 13:
             addMatchup(12, 13, draft);
             break;
-
         case 14:
         default:
             return;
-
         }
 
         update(gui);
-
     }
 
     private static void addMatchup(final int player1, final int player2, final QuestEventDraft draft) {
-
         final DraftMatchup matchup = new DraftMatchup();
         final DeckGroup decks = FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME);
 
@@ -128,7 +115,8 @@ public class QuestDraftUtils {
         if (draft.getStandings()[player1].equals(QuestEventDraft.HUMAN)) {
             humanIndex = player1;
             aiIndex = player2;
-        } else if (draft.getStandings()[player2].equals(QuestEventDraft.HUMAN)) {
+        }
+        else if (draft.getStandings()[player2].equals(QuestEventDraft.HUMAN)) {
             humanIndex = player2;
             aiIndex = player1;
         }
@@ -140,9 +128,8 @@ public class QuestDraftUtils {
 
             final int aiDeckIndex = Integer.parseInt(draft.getStandings()[aiIndex]) - 1;
             matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(GamePlayerUtil.createAiPlayer(draft.getAINames()[aiName], draft.getAIIcons()[aiName])));
-
-        } else {
-
+        }
+        else {
             final int aiName1 = Integer.parseInt(draft.getStandings()[player1]) - 1;
             final int aiName2 = Integer.parseInt(draft.getStandings()[player2]) - 1;
 
@@ -151,7 +138,6 @@ public class QuestDraftUtils {
 
             aiDeckIndex = Integer.parseInt(draft.getStandings()[player2]) - 1;
             matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(GamePlayerUtil.createAiPlayer(draft.getAINames()[aiName2], draft.getAIIcons()[aiName2])));
-
         }
 
         matchups.add(matchup);
