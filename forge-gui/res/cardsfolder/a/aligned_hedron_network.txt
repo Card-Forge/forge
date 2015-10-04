@@ -8,6 +8,5 @@ SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Valid
 SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:PlayMain1:TRUE
-SVar:OblivionRing:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aligned_hedron_network.jpg
 Oracle:When Aligned Hedron Network enters the battlefield, exile all creatures with power 5 or greater until Aligned Hedron Network leaves the battlefield. (Those creatures return under their owners' control.)
