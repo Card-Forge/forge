@@ -460,7 +460,7 @@ public class AiController {
 
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
-	        CardCollection nonTappeddLands = new CardCollection(landList);
+	        CardCollection nonTappeddLands = new CardCollection();
 	        for (Card land : landList) {
 	            // Is this the best way to check if a land ETB Tapped?
 	            if (land.hasSVar("ETBTappedSVar")) {
