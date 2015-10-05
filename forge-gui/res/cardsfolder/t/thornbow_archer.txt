@@ -6,4 +6,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescript
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent+controlsElf_EQ0 | LifeAmount$ 1
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornbow_archer.jpg
-Oracle:Whenever Infectious Horror attacks, each opponent who doesn't control an Elf loses 1 life.
+Oracle:Whenever Thornbow Archer attacks, each opponent who doesn't control an Elf loses 1 life.
