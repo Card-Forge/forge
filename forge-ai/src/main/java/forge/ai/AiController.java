@@ -162,14 +162,21 @@ public class AiController {
 
     private boolean checkCurseEffects(final SpellAbility sa) {
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            if (c.hasSVar("CurseEffect")) {
-                final String curse = c.getSVar("CurseEffect");
+            if (c.hasSVar("AICurseEffect")) {
+                final String curse = c.getSVar("AICurseEffect");
+                final Card host = sa.getHostCard();
                 if ("NonActive".equals(curse) && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
                     return true;
-                } else if ("DestroyCreature".equals(curse) && sa.isSpell() && sa.getHostCard().isCreature()
+                } else if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
                         && !sa.getHostCard().hasKeyword("Indestructible")) {
                     return true;
-                }
+                } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment()
+                        && !sa.getHostCard().hasKeyword("CARDNAME can't be countered.")) {
+                    return true;
+                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && !host.hasKeyword("CARDNAME can't be countered.")
+                		&& host.getCMC() == c.getCounters(CounterType.CHARGE)) {
+                    return true;
+                } 
             }
         }
         return false;
