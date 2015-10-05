@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 PT:0/0
 K:etbCounter:P1P1:X
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put X 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield, where X is the number of +1/+1 counters on CARDNAME.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ Y | References$ Y | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter |  TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter ORI
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ Y | References$ Y | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter |  TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter ORI | TokenAltImages$ c 1 1 thopter2 ORI
 SVar:Y:TriggeredCard$CardCounters.P1P1
 A:AB$ PutCounter | Cost$ 1 T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:X:Count$xPaid

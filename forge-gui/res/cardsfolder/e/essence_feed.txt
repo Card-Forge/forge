@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Sorcery
 A:SP$ LoseLife | Cost$ 5 B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 3 life. You gain 3 life and put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana | TokenAltImages$ c_0_1_eldrazi_spawn2,c_0_1_eldrazi_spawn3
+SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana | TokenImage$ c_0_1_eldrazi_spawn3
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add {1} to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_feed.jpg
 Oracle:Target player loses 3 life. You gain 3 life and put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
