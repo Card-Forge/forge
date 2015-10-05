@@ -2,7 +2,7 @@ Name:Razorverge Thicket
 ManaCost:no cost
 Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
-SVar:LandTapped:AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT2 | References$ ETBCheckSVar | SubAbility$ MoveToPlay
+SVar:LandTapped:AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT2 | References$ ETBCheckSVar2 | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:ETBCheckSVar2:Count$Valid Land.YouCtrl
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
