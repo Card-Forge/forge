@@ -1,0 +1,55 @@
+[duel]
+[metadata]
+Name=Bamm Bamm Rubble 2
+Title=Bamm Bamm Rubble
+Difficulty=medium
+Description=WUBRG Domain deck
+Icon=Bamm Bamm Rubble.jpg
+Deck Type=constructed
+[main]
+1 Badlands
+1 Bayou
+1 Plateau
+1 Savannah
+1 Scrubland
+1 Taiga
+1 Tropical Island
+1 Tundra
+1 Underground Sea
+1 Volcanic Island
+1 Arid Mesa
+1 Marsh Flats
+2 Misty Rainforest
+2 Scalding Tarn
+1 Verdant Catacombs
+1 Bloodstained Mire
+1 Flooded Strand
+1 Polluted Delta
+1 Windswept Heath
+2 Wooded Foothills
+4 Matca Rioters
+4 Tribal Flames
+1 Aven Trailblazer
+1 Might of Alara
+2 Allied Strategies
+2 Collective Restraint
+1 Manaforce Mace
+1 Ordered Migration
+1 Exploding Borders
+2 Exotic Curse
+2 Drag Down
+1 Spore Burst
+2 Evasive Action
+1 Stratadon
+1 Tek
+1 Draco
+1 Last Stand
+1 Sejiri Merfolk
+1 Hedge Troll
+1 Loam Lion
+1 Sedge Troll
+2 Wild Nacatl
+1 Kird Ape
+1 Flinthoof Boar
+1 Prismatic Omen
+[sideboard]
