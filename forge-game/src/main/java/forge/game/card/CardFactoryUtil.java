@@ -3190,7 +3190,7 @@ public class CardFactoryUtil {
         }
 
         if (hasKeyword(card, "Devoid") != -1) {
-            card.addColor("1", false, card.getTimestamp());
+            card.setColor("1");
         }
 
         if (hasKeyword(card, "Morph") != -1) {
