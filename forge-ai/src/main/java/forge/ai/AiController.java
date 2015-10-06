@@ -159,7 +159,8 @@ public class AiController {
         }
         return spellAbilities;
     }
-
+    
+    // look for cards on the battlefield that should prevent the AI from using that spellability
     private boolean checkCurseEffects(final SpellAbility sa) {
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.hasSVar("AICurseEffect")) {
@@ -176,6 +177,17 @@ public class AiController {
                 } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && !host.hasKeyword("CARDNAME can't be countered.")
                 		&& host.getCMC() == c.getCounters(CounterType.CHARGE)) {
                     return true;
+                }  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && !host.hasKeyword("CARDNAME can't be countered.")) {
+                	for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+                		if (!card.isToken() && card.getName().equals(host.getName())) {
+                			return true;
+                		}
+                	}
+                	for (Card card : game.getCardsIn(ZoneType.Graveyard)) {
+                		if (card.getName().equals(host.getName())) {
+                			return true;
+                		}
+                	}
                 } 
             }
         }
