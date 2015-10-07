@@ -139,9 +139,22 @@ public class CostRemoveCounter extends CostPartWithList {
                 typeList = CardLists.getValidCards(activator.getCardsIn(this.zone), type.split(";"), activator, source);
             }
             if (amount != null) {
-                for (Card c : typeList) {
-                    if (c.getCounters(cntrs) - amount >= 0) {
+                if (this.getTypeDescription().equals("among creatures you control")) {
+                    // remove X counters from among creatures you control
+                    int totalCounters = 0;
+                    for (Card c : typeList) {
+                        totalCounters += c.getCounters(cntrs);
+                    }
+                    if (totalCounters >= amount) {
                         return true;
+                    }
+                    
+                } else {
+                    // (default logic) remove X counters from a single permanent
+                    for (Card c : typeList) {
+                        if (c.getCounters(cntrs) - amount >= 0) {
+                            return true;
+                        }
                     }
                 }
                 return false;
