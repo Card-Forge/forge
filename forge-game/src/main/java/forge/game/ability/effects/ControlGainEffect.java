@@ -128,6 +128,9 @@ public class ControlGainEffect extends SpellAbilityEffect {
             if (null != kws) {
                 for (final String kw : kws) {
                     tgtC.addExtrinsicKeyword(kw);
+                    if (kw.equals("Haste")) {
+                        tgtC.updateStateForView(); // ensure that summoning sickness icon is removed
+                    }
                 }
             }
 
