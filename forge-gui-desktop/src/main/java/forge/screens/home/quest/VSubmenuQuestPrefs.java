@@ -306,6 +306,9 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         //pnlDifficulty.add(new FLabel.Builder().text("Starting Basic Lands").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         //pnlDifficulty.add(new PrefInput(QPref.STARTING_BASIC_LANDS, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
+        pnlDifficulty.add(new FLabel.Builder().text("Wins for New Challenge").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlDifficulty.add(new PrefInput(QPref.WINS_NEW_CHALLENGE, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
+        
         pnlDifficulty.add(new FLabel.Builder().text("Wins for New Draft").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlDifficulty.add(new PrefInput(QPref.WINS_NEW_DRAFT, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 

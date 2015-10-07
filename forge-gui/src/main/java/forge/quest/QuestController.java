@@ -489,15 +489,17 @@ public class QuestController {
 
 
     public int getTurnsToUnlockChallenge() {
+    	int turns = FModel.getQuestPreferences().getPrefInt(QPref.WINS_NEW_CHALLENGE);
+    	
         if (FModel.getQuest().getAssets().hasItem(QuestItemType.ZEPPELIN)) {
-            return 8;
+        	turns -= 2;
         }
         // User may have MAP and ZEPPELIN, so MAP must be tested second.
         else if (FModel.getQuest().getAssets().hasItem(QuestItemType.MAP)) {
-            return 9;
+        	turns -= 1;
         }
 
-        return 10;
+        return Math.max(turns, 1);
     }
 
 

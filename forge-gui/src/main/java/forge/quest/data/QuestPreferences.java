@@ -99,6 +99,9 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         STARTING_CREDITS_MEDIUM("200"),
         STARTING_CREDITS_HARD("150"),
         STARTING_CREDITS_EXPERT("100"),
+        
+        // Matches won per challenge unlock
+        WINS_NEW_CHALLENGE("10"),
 
         // Matches won per draft unlock
         WINS_NEW_DRAFT("5"),
@@ -283,6 +286,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case SHOP_WINS_FOR_ADDITIONAL_PACK:
             case PLAYSET_SIZE:
             case PLAYSET_ANY_NUMBER_SIZE:
+            case WINS_NEW_CHALLENGE:
             case WINS_NEW_DRAFT:
             case WINS_ROTATE_DRAFT:
             case WINS_UNLOCK_SET:
