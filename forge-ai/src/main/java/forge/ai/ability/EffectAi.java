@@ -149,6 +149,17 @@ public class EffectAi extends SpellAbilityAi {
                     }
                 }
                 randomReturn = threatened;
+            } else if (logic.equals("NoGain")) {
+            	// basic logic to cancel GainLife on stack
+                if (game.getStack().isEmpty()) {
+                    return false;
+                }
+                final SpellAbility topStack = game.getStack().peekAbility();
+                if (topStack.getActivatingPlayer() == ai.getOpponent() && topStack.getApi() == ApiType.GainLife) {
+                	return true;
+                } else {
+                	return false;
+                }
             } else if (logic.equals("Fight")) {
                 CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
                 humCreatures = CardLists.getTargetableCards(humCreatures, sa);

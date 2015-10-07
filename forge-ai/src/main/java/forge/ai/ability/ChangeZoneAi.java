@@ -290,6 +290,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (!activateForCost && list.isEmpty()) {
                 return false;
             }
+            if ("Atarka's Command".equals(source.getName()) 
+            		&& (list.size() < 2 || ai.getLandsPlayedThisTurn() < 1)) {
+            	// be strict on playing lands off charms
+            	return false;
+            }
 
             String num = sa.getParam("ChangeNum");
             if (num != null) {

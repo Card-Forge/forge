@@ -213,7 +213,10 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageTargetAI(final Player ai, final SpellAbility saMe, final int dmg, final boolean immediately) {
         final TargetRestrictions tgt = saMe.getTargetRestrictions();
-
+        if ("Atarka's Command".equals(saMe.getHostCard().getName())) {
+        	// playReusable in damageChooseNontargeted wrongly assumes that CharmEffect options are re-usable
+        	return this.shouldTgtP(ai, saMe, dmg, false);
+        }
         if (tgt == null) {
             return this.damageChooseNontargeted(ai, saMe, dmg);
         }
