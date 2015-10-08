@@ -10,6 +10,8 @@ import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollection;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class CharmEffect extends SpellAbilityEffect {
@@ -27,6 +29,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         List<AbilitySub> choices = new ArrayList<AbilitySub>();
+        int indx = 0;
         for (final String saChoice : saChoices) {
             if (restriction != null && Iterables.contains(restriction, saChoice)) {
                 // If there is a choice restriction, and the current choice fails that, skip it.
@@ -35,7 +38,10 @@ public class CharmEffect extends SpellAbilityEffect {
             final String ab = source.getSVar(saChoice);
             AbilitySub sub = (AbilitySub) AbilityFactory.getAbility(ab, source);
             sub.setTrigger(sa.isTrigger());
+
+            sub.setSVar("CharmOrder", Integer.toString(indx));
             choices.add(sub);
+            indx++;
         }
         return choices;
     }
@@ -83,13 +89,24 @@ public class CharmEffect extends SpellAbilityEffect {
             saDeepest = saDeepest.getSubAbility();
         }
 
+        // Sort Chosen by SA order
+        Collections.sort(chosen, new Comparator<AbilitySub>() {
+            @Override
+            public int compare(AbilitySub o1, AbilitySub o2) {
+                return Integer.parseInt(o1.getSVar("CharmOrder")) - Integer.parseInt(o2.getSVar("CharmOrder"));
+            }
+        });
+
         for (AbilitySub sub : chosen) {
             saDeepest.setSubAbility(sub);
             sub.setActivatingPlayer(saDeepest.getActivatingPlayer());
             sub.setParent(saDeepest);
 
-            // to chain the next one
+            // to chain the next one (but make sure it goes all the way at the end of the SA chain)
             saDeepest = sub;
+            while (saDeepest.getSubAbility() != null) {
+                saDeepest = saDeepest.getSubAbility();
+            }
         }
     }
 
