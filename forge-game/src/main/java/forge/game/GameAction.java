@@ -310,6 +310,13 @@ public class GameAction {
             copied.clearDelved();
         }
 
+        // rule 504.6: reveal a face-down card leaving the stack 
+        if (zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield) && c.isFaceDown()) {
+            c.setState(CardStateName.Original, true);
+            reveal(new CardCollection(c), c.getOwner(), true, "Face-down card moves from the stack: ");
+            c.setState(CardStateName.FaceDown, true);
+        }
+
         if (fromBattlefield) {
             if (!c.isToken()) {
                 copied.setSuspendCast(false);
