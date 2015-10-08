@@ -3,9 +3,8 @@ ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
-# This trigger is being reapplied when the creature dies, and getting a new ID. And triggering twice. Here's a minor hack for a fix.
-S:Mode$ Continuous | Affected$ Card.EnchantedBy+inZoneBattlefield | AddPower$ 2 | AddTrigger$ TrigDraw | AddSVar$ InfernalDraw | Description$ Enchanted creature gets +2/+0 and has "When this creature dies, draw a card."
-SVar:TrigDraw:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ InfernalDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, draw a card.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddTrigger$ TrigDraw | AddSVar$ InfernalDraw | Description$ Enchanted creature gets +2/+0 and has "When this creature dies, draw a card."
+SVar:TrigDraw:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ InfernalDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, draw a card.
 SVar:InfernalDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredCardController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_scarring.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has "When this creature dies, draw a card."
