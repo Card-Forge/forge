@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Ally | SpellDescription$ Add one mana of any color to your mana pool. Spend this mana only to cast an Ally spell.
-A:AB$ ChangeZone | Cost$ 1 T Sacrifice<1/CARDNAME> | ValidTgts$ Ally.YouCtrl | TgtPrompt$ Select target Ally you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Ally you control to its owner's hand.
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Ally.YouCtrl | TgtPrompt$ Select target Ally you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Ally you control to its owner's hand.
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ally_encampment.jpg
