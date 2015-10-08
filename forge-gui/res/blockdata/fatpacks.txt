@@ -57,3 +57,4 @@ KTK: 9 Boosters, 80 BasicLands
 FRF: 9 Boosters, 80 BasicLands
 DTK: 9 Boosters, 80 BasicLands 
 ORI: 9 Boosters, 80 BasicLands
+BFZ: 9 Boosters, 80 BasicLands
