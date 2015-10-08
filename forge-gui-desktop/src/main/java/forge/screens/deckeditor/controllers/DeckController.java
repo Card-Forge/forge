@@ -193,7 +193,13 @@ public class DeckController<T extends DeckBase> {
 
         // copy to new instance before adding to current folder so further changes are auto-saved
         currentFolder.add((T) model.copyTo(model.getName()));
-        model.setDirectory(currentFolder.getFullPath().substring(ForgeConstants.DECK_BASE_DIR.length()));
+        try {
+            model.setDirectory(currentFolder.getFullPath().substring(ForgeConstants.DECK_BASE_DIR.length()));
+        } catch (Exception exception) {
+            // Set directory failed?
+            // TEMPORARILY Adding to fix quest mode saving
+
+        }
         modelInStorage = true;
         setSaved(true);
 
