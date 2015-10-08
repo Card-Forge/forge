@@ -2,10 +2,8 @@ Name:Hedron Blade
 ManaCost:1
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
-T:Mode$ Blocks | ValidCard$ Card.EquippedBy | ValidBlocked$ Creature.Colorless | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature becomes blocked by one or more colorless creatures, it gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
-T:Mode$ AttackerBlocked | ValidCard$ Card.EquippedBy | ValidBlocker$ Creature.Colorless | Execute$ TrigPump2 | Secondary$ True | TriggerDescription$ Whenever equipped creature becomes blocked by one or more colorless creatures, it gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
-SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredBlocker | KW$ Deathtouch
-SVar:TrigPump2:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ Deathtouch
+T:Mode$ AttackerBlocked | ValidCard$ Card.EquippedBy | ValidBlocker$ Creature.Colorless | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature becomes blocked by one or more colorless creatures, it gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ Deathtouch
 K:Equip 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_blade.jpg
 Oracle:Equipped creature gets +1/+1.\nWhenever equipped creature becomes blocked by one or more colorless creatures, it gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
