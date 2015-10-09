@@ -340,6 +340,9 @@ public class AiBlockController {
                 final List<Card> firstStrikeBlockers = new ArrayList<>();
                 final List<Card> blockGang = new ArrayList<>();
                 for (Card blocker : blockers) {
+                	if (ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(blocker, attacker, false)) {
+                		continue;
+                	}
                     if (blocker.hasFirstStrike() || blocker.hasDoubleStrike()) {
                         firstStrikeBlockers.add(blocker);
                     }
@@ -611,7 +614,6 @@ public class AiBlockController {
 
         List<Card> safeBlockers;
         List<Card> blockers;
-
         List<Card> targetAttackers = CardLists.filter(blockedButUnkilled, Predicates.not(rampagesOrNeedsManyToBlock));
 
         // TODO - should check here for a "rampage-like" trigger that replaced
@@ -637,6 +639,10 @@ public class AiBlockController {
 	                blockers.remove(blocker); // Don't check them again next
 	            }
             }
+            // don't try to kill what can't be killed
+            if (attacker.hasKeyword("indestructible") || ComputerUtil.canRegenerate(ai, attacker)) {
+            	continue;
+            }
 
             // Try to add blockers that could be destroyed, but are worth less than the attacker
             // Don't use blockers without First Strike or Double Strike if attacker has it
@@ -657,7 +663,8 @@ public class AiBlockController {
                 if (damageNeeded > currentDamage
                         && damageNeeded <= currentDamage + additionalDamage
                         && ComputerUtilCard.evaluateCreature(blocker) + diff < ComputerUtilCard.evaluateCreature(attacker)
-                        && CombatUtil.canBlock(attacker, blocker, combat)) {
+                        && CombatUtil.canBlock(attacker, blocker, combat)
+                        && !ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(blocker, attacker, false)) {
                     combat.addBlocker(attacker, blocker);
                     blockersLeft.remove(blocker);
                 }

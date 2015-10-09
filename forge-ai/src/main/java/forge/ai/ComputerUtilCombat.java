@@ -616,26 +616,30 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
-    public static int shieldDamage(final Card attacker, final Card defender) {
+    public static int shieldDamage(final Card attacker, final Card blocker) {
+
+        if (ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(blocker, attacker, false)) {
+        	return 0;
+        }
 
         int flankingMagnitude = 0;
-        if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
+        if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
 
             flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
 
-            if (flankingMagnitude >= defender.getNetToughness()) {
+            if (flankingMagnitude >= blocker.getNetToughness()) {
                 return 0;
             }
-            if ((flankingMagnitude >= (defender.getNetToughness() - defender.getDamage()))
-                    && !defender.hasKeyword("Indestructible")) {
+            if ((flankingMagnitude >= (blocker.getNetToughness() - blocker.getDamage()))
+                    && !blocker.hasKeyword("Indestructible")) {
                 return 0;
             }
 
         } // flanking
 
-        final int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
+        final int defBushidoMagnitude = blocker.getKeywordMagnitude("Bushido");
 
-        final int defenderDefense = (defender.getLethalDamage() - flankingMagnitude) + defBushidoMagnitude;
+        final int defenderDefense = (blocker.getLethalDamage() - flankingMagnitude) + defBushidoMagnitude;
 
         return defenderDefense;
     } // shieldDamage
@@ -782,7 +786,7 @@ public class ComputerUtilCombat {
                     return false;
                 }
             }
-        } else if (mode == TriggerType.AttackerBlocked) {
+        } else if (mode == TriggerType.AttackerBlocked || mode == TriggerType.AttackerBlockedByCreature) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocker")) {
                 if (!CardTraitBase.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {
@@ -1022,10 +1026,15 @@ public class ComputerUtilCombat {
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
             final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+            String abType = "";
+            if (abilityParams.containsKey("AB")) {
+            	abType = abilityParams.get("AB");
+            } else if (abilityParams.containsKey("DB")) {
+            	abType = abilityParams.get("DB");
+            }
 
             // DealDamage triggers
-            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
-                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
+            if (abType.equals("DealDamage")) {
                 if (!abilityParams.containsKey("Defined") || !abilityParams.get("Defined").equals("TriggeredBlocker")) {
                     continue;
                 }
@@ -1040,11 +1049,27 @@ public class ComputerUtilCombat {
                 continue;
             }
 
-            // Pump triggers
-            if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
+            // -1/-1 PutCounter triggers
+            if (abType.equals("PutCounter")) {
+                if (!abilityParams.containsKey("Defined") || !abilityParams.get("Defined").equals("TriggeredBlocker")) {
+                    continue;
+                }
+                if (!abilityParams.containsKey("CounterType") || !abilityParams.get("CounterType").equals("M1M1")) {
+                    continue;
+                }
+                int num = 0;
+                try {
+                    num = Integer.parseInt(abilityParams.get("CounterNum"));
+                } catch (final NumberFormatException nfe) {
+                    // can't parse the number (X for example)
+                    continue;
+                }
+                toughness -= num;
                 continue;
             }
-            if (abilityParams.containsKey("DB") && !abilityParams.get("DB").equals("Pump")) {
+
+            // Pump triggers
+            if (!abType.equals("Pump")) {
                 continue;
             }
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
@@ -1492,76 +1517,28 @@ public class ComputerUtilCombat {
         }
         return toughness;
     }
-
-    // Sylvan Basilisk and friends
-    /**
-     * <p>
-     * checkDestroyBlockerTrigger.
-     * </p>
-     * 
-     * @param attacker
-     *            a {@link forge.game.card.Card} object.
-     * @param defender
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
-    public static boolean checkDestroyBlockerTrigger(final Card attacker, final Card defender) {
-        final Game game = attacker.getGame();
-        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
-        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
-            theTriggers.addAll(card.getTriggers());
-        }
-        for (Trigger trigger : theTriggers) {
-            Map<String, String> trigParams = trigger.getMapParams();
-            final Card source = trigger.getHostCard();
-
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, null)) {
-                continue;
-            }
-            //consider delayed triggers
-            if (trigParams.containsKey("DelayedTrigger")) {
-                String sVarName = trigParams.get("DelayedTrigger");
-                trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
-                trigParams = trigger.getMapParams();
-            }
-            if (!trigParams.containsKey("Execute")) {
-                continue;
-            }
-            String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
-            // Destroy triggers
-            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
-                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
-                if (!abilityParams.containsKey("Defined")) {
-                    continue;
-                }
-                if (abilityParams.get("Defined").equals("TriggeredBlocker")) {
-                    return true;
-                }
-                if (abilityParams.get("Defined").equals("Self") && source.equals(defender)) {
-                    return true;
-                }
-                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(attacker)) {
-                    return true;
-                }
+    
+    // check whether the attacker will be destroyed by triggered abilities before First Strike damage
+    public static boolean canDestroyAttackerBeforeFirstStrike(final Card attacker, final Card blocker, final Combat combat,
+            final boolean withoutAbilities) {
+        if (blocker.isEquipped()) {
+            for (Card equipment : blocker.getEquippedBy(false)) {
+            	if (equipment.getName().equals("Godsend")) {
+            		return true;
+            	}
             }
         }
-        return false;
-    }
+        if (attacker.hasKeyword("Indestructible") || ComputerUtil.canRegenerate(attacker.getController(), attacker)) {
+            return false;
+        }
+        
+        //Check triggers that deal damage or shrink the attacker
+        if (ComputerUtilCombat.getDamageToKill(attacker)
+        		+ ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities) <= 0) {
+        	return true;
+        }
 
-    // Cockatrice and friends
-    /**
-     * <p>
-     * checkDestroyBlockerTrigger.
-     * </p>
-     * 
-     * @param attacker
-     *            a {@link forge.game.card.Card} object.
-     * @param defender
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
-    public static boolean checkDestroyAttackerTrigger(final Card attacker, final Card defender) {
+        // check Destroy triggers (Cockatrice and friends)
         final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
         for (Card card : attacker.getGame().getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
@@ -1570,7 +1547,7 @@ public class ComputerUtilCombat {
             Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, null)) {
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
             //consider delayed triggers
@@ -1584,7 +1561,6 @@ public class ComputerUtilCombat {
             }
             String ability = source.getSVar(trigParams.get("Execute"));
             final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
-            // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
                 if (!abilityParams.containsKey("Defined")) {
@@ -1596,7 +1572,7 @@ public class ComputerUtilCombat {
                 if (abilityParams.get("Defined").equals("Self") && source.equals(attacker)) {
                     return true;
                 }
-                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(defender)) {
+                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(blocker)) {
                     return true;
                 }
             }
@@ -1623,18 +1599,13 @@ public class ComputerUtilCombat {
      */
     public static boolean canDestroyAttacker(Player ai, final Card attacker, final Card blocker, final Combat combat,
             final boolean withoutAbilities) {
+    	if (canDestroyAttackerBeforeFirstStrike(attacker, blocker, combat, withoutAbilities)) {
+    		return true;
+    	}
 
-        if (attacker.getName().equals("Sylvan Basilisk") && !blocker.hasKeyword("Indestructible")) {
-            return false;
-        }
-
-        if (blocker.isEquipped()) {
-            for (Card equipment : blocker.getEquippedBy(false)) {
-            	if (equipment.getName().equals("Godsend")) {
-            		return true;
-            	}
-            }
-        }
+    	if (canDestroyBlockerBeforeFirstStrike(blocker, attacker, withoutAbilities)) {
+    		return false;
+    	}
 
         int flankingMagnitude = 0;
         if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
@@ -1657,17 +1628,6 @@ public class ComputerUtilCombat {
                 || (attacker.hasKeyword("Undying") && !attacker.canReceiveCounters(CounterType.P1P1) && (attacker
                         .getCounters(CounterType.P1P1) == 0))) {
             return false;
-        }
-        if (checkDestroyAttackerTrigger(attacker, blocker) && !attacker.hasKeyword("Indestructible")) {
-            return true;
-        }
-
-        if (attacker.isEquipped()) {
-            for (Card equipment : attacker.getEquippedBy(false)) {
-            	if (equipment.getName().equals("Godsend")) {
-            		return false;
-            	}
-            }
         }
 
         if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
@@ -1779,25 +1739,7 @@ public class ComputerUtilCombat {
         return false;
     }
 
-    // can the attacker destroy this blocker?
-    /**
-     * <p>
-     * canDestroyBlocker.
-     * </p>
-     * @param ai 
-     * 
-     * @param blocker
-     *            a {@link forge.game.card.Card} object.
-     * @param attacker
-     *            a {@link forge.game.card.Card} object.
-     * @param combat
-     *            a {@link forge.game.combat.Combat} object.
-     * @param withoutAbilities
-     *            a boolean.
-     * @return a boolean.
-     */
-    public static boolean canDestroyBlocker(Player ai, final Card blocker, final Card attacker, final Combat combat,
-            final boolean withoutAbilities) {
+    public static boolean canDestroyBlockerBeforeFirstStrike(final Card blocker, final Card attacker, final boolean withoutAbilities) {
 
         if (attacker.isEquipped()) {
             for (Card equipment : attacker.getEquippedBy(false)) {
@@ -1819,6 +1761,83 @@ public class ComputerUtilCombat {
                 return true;
             }
         } // flanking
+        
+        if (blocker.hasKeyword("Indestructible") || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
+            return false;
+        }
+
+        if (ComputerUtilCombat.getDamageToKill(blocker)
+        		+ ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities) <= 0) {
+        	return true;
+        }
+
+        final Game game = blocker.getGame();
+        final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
+        for (Trigger trigger : theTriggers) {
+            Map<String, String> trigParams = trigger.getMapParams();
+            final Card source = trigger.getHostCard();
+
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
+                continue;
+            }
+            //consider delayed triggers
+            if (trigParams.containsKey("DelayedTrigger")) {
+                String sVarName = trigParams.get("DelayedTrigger");
+                trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
+                trigParams = trigger.getMapParams();
+            }
+            if (!trigParams.containsKey("Execute")) {
+                continue;
+            }
+            String ability = source.getSVar(trigParams.get("Execute"));
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+            // Destroy triggers
+            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
+                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
+                if (!abilityParams.containsKey("Defined")) {
+                    continue;
+                }
+                if (abilityParams.get("Defined").equals("TriggeredBlocker")) {
+                    return true;
+                }
+                if (abilityParams.get("Defined").equals("Self") && source.equals(blocker)) {
+                    return true;
+                }
+                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(attacker)) {
+                    return true;
+                }
+            }
+        }
+        
+    	return false;
+    }
+    
+    // can the attacker destroy this blocker?
+    /**
+     * <p>
+     * canDestroyBlocker.
+     * </p>
+     * @param ai 
+     * 
+     * @param blocker
+     *            a {@link forge.game.card.Card} object.
+     * @param attacker
+     *            a {@link forge.game.card.Card} object.
+     * @param combat
+     *            a {@link forge.game.combat.Combat} object.
+     * @param withoutAbilities
+     *            a boolean.
+     * @return a boolean.
+     */
+    public static boolean canDestroyBlocker(Player ai, final Card blocker, final Card attacker, final Combat combat,
+            final boolean withoutAbilities) {
+
+    	if (canDestroyBlockerBeforeFirstStrike(blocker, attacker, withoutAbilities)) {
+    		return true;
+    	}
 
         if (((blocker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(ai, blocker) && !withoutAbilities)) && !(attacker
                 .hasKeyword("Wither") || attacker.hasKeyword("Infect")))
@@ -1829,17 +1848,9 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        if (checkDestroyBlockerTrigger(attacker, blocker) && !blocker.hasKeyword("Indestructible")) {
-            return true;
-        }
-
-        if (blocker.isEquipped()) {
-            for (Card equipment : blocker.getEquippedBy(false)) {
-            	if (equipment.getName().equals("Godsend")) {
-            		return false;
-            	}
-            }
-        }
+    	if (canDestroyAttackerBeforeFirstStrike(attacker, blocker, combat, withoutAbilities)) {
+    		return false;
+    	}
         
         int defenderDamage;
         int attackerDamage;
