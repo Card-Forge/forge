@@ -87,6 +87,8 @@ import java.util.Set;
 public class GameAction {
     private final Game game;
 
+    private boolean holdCheckingStaticAbilities = false;
+
     public GameAction(Game game0) {
         game = game0;
     }
@@ -591,6 +593,9 @@ public class GameAction {
         checkStaticAbilities(true, new CardCollection());
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards) {
+        if (isCheckingStaticAbilitiesOnHold()) {
+            return;
+        }
         if (game.isGameOver()) {
             return;
         }
@@ -809,6 +814,7 @@ public class GameAction {
                 }
             }
 
+            setHoldCheckingStaticAbilities(true);
             if (noRegCreats != null) {
                 for (Card c : noRegCreats) {
                     sacrificeDestroy(c);
@@ -819,6 +825,8 @@ public class GameAction {
                     destroy(c, null);
                 }
             }
+            setHoldCheckingStaticAbilities(false);
+            checkStaticAbilities();
 
             if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
@@ -1652,5 +1660,17 @@ public class GameAction {
         else {
             ThreadUtil.invokeInGameThread(proc);
         }
+    }
+
+    // Temporarily disable (if mode = true) actively checking static abilities.
+    // Used to e.g. destroy all creatures with marked lethal damage in combat simultaneously
+    // before checking static abilities (prevents e.g. Erebos's Titan gaining Indestructible
+    // prematurely when dealing lethal damage to the last opponent's creature on the battlefield
+    // while also being dealt lethal damage at the same time)
+    private void setHoldCheckingStaticAbilities(boolean mode) {
+        holdCheckingStaticAbilities = mode;
+    }
+    private boolean isCheckingStaticAbilitiesOnHold() {
+        return holdCheckingStaticAbilities;
     }
 }
