@@ -749,5 +749,4 @@ public class Game {
         }
         return rarities;
     }
-
 }
