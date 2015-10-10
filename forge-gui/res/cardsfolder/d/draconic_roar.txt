@@ -6,8 +6,7 @@ K:Kicker Reveal<1/Dragon> : Generic
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DBDamageController | SpellDescription$ CARDNAME deals 3 damage to target creature. If you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, CARDNAME deals 3 damage to that creature's controller. | StackDescription$ SpellDescription
 SVar:DBDamageController:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | References$ TotalDragonPresence | ConditionCheckSVar$ TotalDragonPresence | ConditionSVarCompare$ GE1 | StackDescription$ None
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ StoreDragons | Static$ True
-# Empty Dragon Presence SVar is needed to avoid undefined SVar error messages. Note that defining it to a preset value (e.g. Number$0) does not work.
-SVar:DragonPresence:
+SVar:DragonPresence:Number$0
 SVar:WasDragonRevealed:Count$ValidStack Card.Self+pseudokicked+wasCast
 SVar:TotalDragonPresence:SVar$DragonPresence/Plus.WasDragonRevealed
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons

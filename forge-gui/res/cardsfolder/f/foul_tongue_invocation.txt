@@ -6,8 +6,7 @@ K:Kicker Reveal<1/Dragon> : Generic
 A:SP$ Sacrifice | Cost$ 2 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBGainLife | SpellDescription$ Target player sacrifices a creature. If you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, you gain 4 life. | StackDescription$ SpellDescription
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | References$ TotalDragonPresence | ConditionCheckSVar$ TotalDragonPresence | ConditionSVarCompare$ GE1
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ StoreDragons | Static$ True
-# Empty Dragon Presence SVar is needed to avoid undefined SVar error messages. Note that defining it to a preset value (e.g. Number$0) does not work.
-SVar:DragonPresence:
+SVar:DragonPresence:Number$0
 SVar:WasDragonRevealed:Count$ValidStack Card.Self+pseudokicked+wasCast
 SVar:TotalDragonPresence:SVar$DragonPresence/Plus.WasDragonRevealed
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons

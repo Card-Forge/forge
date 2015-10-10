@@ -10,8 +10,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notpseudokicked+wasCast | CheckSVar$ DragonPresence | SVarCompare$ EQ1 | Execute$ TrigKicker | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, draw a card.
 SVar:TrigKicker:DB$ Draw | Defined$ You | NumCards$ 1
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ StoreDragons | Static$ True
-# Empty Dragon Presence SVar is needed to avoid undefined SVar error messages. Note that defining it to a preset value (e.g. Number$0) does not work.
-SVar:DragonPresence:
+SVar:DragonPresence:Number$0
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons
 SVar:StoreNoDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 0 | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orator_of_ojutai.jpg
