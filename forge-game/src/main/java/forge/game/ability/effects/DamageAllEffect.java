@@ -45,6 +45,7 @@ public class DamageAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
         final Card card = definedSources.get(0);
+        final Card sourceLKI = card.getGame().getChangeZoneLKIInfo(card);
         final Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
@@ -74,7 +75,7 @@ public class DamageAllEffect extends SpellAbilityEffect {
         list = AbilityUtils.filterListByType(list, sa.getParam("ValidCards"), sa);
 
         for (final Card c : list) {
-            if (c.addDamage(dmg, card) && (sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedCreature"))) {
+            if (c.addDamage(dmg, sourceLKI) && (sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedCreature"))) {
                 source.addRemembered(c);
             }
         }
@@ -82,7 +83,7 @@ public class DamageAllEffect extends SpellAbilityEffect {
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                if (p.addDamage(dmg, card) && (sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedPlayer"))) {
+                if (p.addDamage(dmg, sourceLKI) && (sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedPlayer"))) {
                     source.addRemembered(p);
                 }
             }

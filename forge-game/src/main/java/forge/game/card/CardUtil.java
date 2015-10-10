@@ -290,6 +290,10 @@ public final class CardUtil {
             newCopy.addImprintedCard(o);
         }
 
+        newCopy.setChangedCardColors(in.getChangedCardColors());
+        newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
+        newCopy.setChangedCardTypes(in.getChangedCardTypes());
+
         return newCopy;
     }
 

@@ -117,6 +117,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
             return;
         }
         final Card source = definedSources.get(0);
+        final Card sourceLKI = sa.getHostCard().getGame().getChangeZoneLKIInfo(definedSources.get(0));
 
         if (divideOnResolution) {
             // Dividing Damage up to multiple targets using combat damage box
@@ -135,9 +136,9 @@ public class DamageDealEffect extends SpellAbilityEffect {
             }
 
             Player assigningPlayer = players.get(0);
-            Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(source, assigneeCards, dmg, null, true);
+            Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
             for (Entry<Card, Integer> dt : map.entrySet()) {
-                dt.getKey().addDamage(dt.getValue(), source);
+                dt.getKey().addDamage(dt.getValue(), sourceLKI);
             }
             
             return;
@@ -154,18 +155,18 @@ public class DamageDealEffect extends SpellAbilityEffect {
                         c.clearAssignedDamage();
                     }
                     else if (noPrevention) {
-                        if (c.addDamageWithoutPrevention(dmg, source) && remember) {
+                        if (c.addDamageWithoutPrevention(dmg, sourceLKI) && remember) {
                             source.addRemembered(c);
                         }
                     } else if (combatDmg) {
                         HashMap<Card, Integer> combatmap = new HashMap<Card, Integer>();
-                        combatmap.put(source, dmg);
+                        combatmap.put(sourceLKI, dmg);
                         c.addCombatDamage(combatmap);
                         if (remember) {
                             source.addRemembered(c);
                         }
                     } else {
-                        if (c.addDamage(dmg, source) && remember) {
+                        if (c.addDamage(dmg, sourceLKI) && remember) {
                             source.addRemembered(c);
                         }
                     }
@@ -175,16 +176,16 @@ public class DamageDealEffect extends SpellAbilityEffect {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
                     if (noPrevention) {
-                        if (p.addDamageWithoutPrevention(dmg, source) && remember) {
+                        if (p.addDamageWithoutPrevention(dmg, sourceLKI) && remember) {
                             source.addRemembered(p);
                         }
                     } else if (combatDmg) {
-                        p.addCombatDamage(dmg, source);
+                        p.addCombatDamage(dmg, sourceLKI);
                         if (remember) {
                             source.addRemembered(p);
                         }
                     } else {
-                        if (p.addDamage(dmg, source) && remember) {
+                        if (p.addDamage(dmg, sourceLKI) && remember) {
                             source.addRemembered(p);
                         }
                     }

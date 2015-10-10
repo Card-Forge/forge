@@ -512,6 +512,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature() && game.getZoneOf(source).is(ZoneType.Graveyard)) {
             handleHauntForNonPermanents(sa);
         }
+
+        if (isEmpty()) {
+            // FIXME: assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object). Is this correct?
+            game.clearChangeZoneLKIInfo();
+        }
     }
 
     private void handleHauntForNonPermanents(final SpellAbility sa) {

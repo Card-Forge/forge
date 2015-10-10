@@ -72,18 +72,20 @@ public class DamageEachEffect extends SpellAbilityEffect {
 
         for (final Object o : tgts) {
             for (final Card source : sources) {
+                final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
+
                 final int dmg = CardFactoryUtil.xCount(source, sa.getSVar("X"));
                 // System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                        c.addDamage(dmg, source);
+                        c.addDamage(dmg, sourceLKI);
                     }
 
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!targeted || p.canBeTargetedBy(sa)) {
-                        p.addDamage(dmg, source);
+                        p.addDamage(dmg, sourceLKI);
                     }
                 }
             }
@@ -92,20 +94,24 @@ public class DamageEachEffect extends SpellAbilityEffect {
         if (sa.hasParam("DefinedCards")) {
             if (sa.getParam("DefinedCards").equals("Self")) {
                 for (final Card source : sources) {
+                    final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
+
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
                     // System.out.println(source+" deals "+dmg+" damage to "+source);
-                    source.addDamage(dmg, source);
+                    source.addDamage(dmg, sourceLKI);
                 }
             }
             if (sa.getParam("DefinedCards").equals("Remembered")) {
                 for (final Card source : sources) {
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
+                    final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
+
                     Card rememberedcard;
                     for (final Object o : sa.getHostCard().getRemembered()) {
                         if (o instanceof Card) {
                             rememberedcard = (Card) o;
                             // System.out.println(source + " deals " + dmg + " damage to " + rememberedcard);
-                            rememberedcard.addDamage(dmg, source);
+                            rememberedcard.addDamage(dmg, sourceLKI);
                         }
                     }
                 }

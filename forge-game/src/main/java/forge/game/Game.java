@@ -42,6 +42,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -71,6 +72,7 @@ import forge.util.Aggregates;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.Visitor;
+import java.util.HashMap;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -140,6 +142,24 @@ public class Game {
         CardCollection list = new CardCollection();
         cardCache.addToList(cardViews, list);
         return list;
+    }
+
+    // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
+    private final HashMap<Integer, Card> changeZoneLKIInfo = new HashMap<>();
+    public final void setChangeZoneLKIInfo(Card c) {
+        if (c == null) {
+            return;
+        }
+        changeZoneLKIInfo.put(c.getId(), CardUtil.getLKICopy(c));
+    }
+    public final Card getChangeZoneLKIInfo(Card c) {
+        if (c == null) {
+            return null;
+        }
+        return changeZoneLKIInfo.containsKey(c.getId()) ? changeZoneLKIInfo.get(c.getId()) : c;
+    }
+    public final void clearChangeZoneLKIInfo() {
+        changeZoneLKIInfo.clear();
     }
 
     private final GameEntityCache<SpellAbility, SpellAbilityView> spabCache = new GameEntityCache<>();
@@ -729,4 +749,5 @@ public class Game {
         }
         return rarities;
     }
+
 }
