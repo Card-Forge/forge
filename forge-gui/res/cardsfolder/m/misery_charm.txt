@@ -2,9 +2,9 @@ Name:Misery Charm
 ManaCost:B
 Types:Instant
 A:SP$ Charm | Cost$ B | Choices$ DBDestroy,DBChangeZone,DBLoseLife | CharmNum$ 1 | SpellDescription$ Choose one - Destroy target Cleric; or return target Cleric card from your graveyard to your hand; or target player loses 2 life.
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.Cleric | TgtPrompt$ Select target cleric. | SpellDescription$ Destroy target Cleric
-SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature.Cleric | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Cleric card from your graveyard to your hand
-SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player to lose 2 life | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.Cleric | TgtPrompt$ Select target cleric. | SpellDescription$ Destroy target Cleric.
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature.Cleric | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Cleric card from your graveyard to your hand.
+SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player to lose 2 life | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misery_charm.jpg
