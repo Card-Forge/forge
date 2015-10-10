@@ -589,6 +589,15 @@ public class GameAction {
         }
     }
 
+    // Temporarily disable (if mode = true) actively checking static abilities.
+    private void setHoldCheckingStaticAbilities(boolean mode) {
+        holdCheckingStaticAbilities = mode;
+    }
+
+    private boolean isCheckingStaticAbilitiesOnHold() {
+        return holdCheckingStaticAbilities;
+    }
+
     public final void checkStaticAbilities() {
         checkStaticAbilities(true, new CardCollection());
     }
@@ -1664,11 +1673,4 @@ public class GameAction {
         }
     }
 
-    // Temporarily disable (if mode = true) actively checking static abilities.
-    private void setHoldCheckingStaticAbilities(boolean mode) {
-        holdCheckingStaticAbilities = mode;
-    }
-    private boolean isCheckingStaticAbilitiesOnHold() {
-        return holdCheckingStaticAbilities;
-    }
 }
