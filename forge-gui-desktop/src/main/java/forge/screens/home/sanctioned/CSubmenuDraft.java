@@ -5,8 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import forge.GuiBase;
 import forge.Singletons;
@@ -44,6 +43,14 @@ public enum CSubmenuDraft implements ICDoc {
         @Override
         public void run() {
             VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+            fillOpponentComboBox();
+        }
+    };
+
+    private final ActionListener radioAction = new ActionListener() {
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            fillOpponentComboBox();
         }
     };
 
@@ -73,6 +80,10 @@ public enum CSubmenuDraft implements ICDoc {
                 startGame(GameType.Draft);
             }
         });
+
+        view.getRadSingle().addActionListener(radioAction);
+
+        view.getRadAll().addActionListener(radioAction);
     }
 
     /* (non-Javadoc)
@@ -88,6 +99,7 @@ public enum CSubmenuDraft implements ICDoc {
 
         if (!view.getLstDecks().getPool().isEmpty()) {
             btnStart.setEnabled(true);
+            fillOpponentComboBox();
         }
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -104,7 +116,6 @@ public enum CSubmenuDraft implements ICDoc {
     private void startGame(final GameType gameType) {
         final boolean gauntlet = !VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected();
         final DeckProxy humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
-        final int aiIndex = (int) Math.floor(Math.random() * 7);
 
         if (humanDeck == null) {
             FOptionPane.showErrorDialog("No deck selected for human.\n(You may need to build a new deck)", "No Deck");
@@ -120,10 +131,15 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         FModel.getGauntletMini().resetGauntletDraft();
-
+        String duelType = (String)VSubmenuDraft.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
+        final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
         if (gauntlet) {
-            final int rounds = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
-            FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
+            if ("Gauntlet".equals(duelType)) {
+                final int rounds = opponentDecks.getAiDecks().size();
+                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
+            } else if ("Tournament".equals(duelType)) {
+                // TODO Allow for tournament style draft, instead of always a gauntlet
+            }
             return;
         }
 
@@ -135,7 +151,8 @@ public enum CSubmenuDraft implements ICDoc {
             }
         });
 
-        final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
+        // Restore Zero Indexing
+        final int aiIndex = Integer.parseInt(duelType)-1;
         final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
         if (aiDeck == null) {
             throw new IllegalStateException("Draft: Computer deck is null!");
@@ -174,6 +191,29 @@ public enum CSubmenuDraft implements ICDoc {
 
         Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draftController);
+    }
+
+    private void fillOpponentComboBox() {
+        final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
+        JComboBox<String> combo = view.getCbOpponent();
+        combo.removeAllItems();
+
+        final DeckProxy humanDeck = view.getLstDecks().getSelectedItem();
+
+        if (VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected()) {
+            // Single opponent
+            final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
+            int indx = 0;
+            for (Deck d : opponentDecks.getAiDecks()) {
+                indx++;
+                // 1-7 instead of 0-6
+                combo.addItem(String.valueOf(indx));
+            }
+        } else {
+            // Gauntlet/Tournament
+            combo.addItem("Gauntlet");
+            //combo.addItem("Tournament");
+        }
     }
 
 }

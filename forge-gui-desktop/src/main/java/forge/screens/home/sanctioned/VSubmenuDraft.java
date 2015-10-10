@@ -2,12 +2,9 @@ package forge.screens.home.sanctioned;
 
 import java.awt.Font;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
+import forge.toolbox.*;
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
@@ -22,10 +19,6 @@ import forge.screens.home.LblHeader;
 import forge.screens.home.StartButton;
 import forge.screens.home.VHomeUI;
 import forge.screens.home.VHomeUI.PnlDisplay;
-import forge.toolbox.FLabel;
-import forge.toolbox.FRadioButton;
-import forge.toolbox.FSkin;
-import forge.toolbox.JXButtonPanel;
 
 /** 
  * Assembles Swing components of draft submenu singleton.
@@ -48,8 +41,10 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
     private final DeckManager lstDecks = new DeckManager(GameType.Draft, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
-    private final JRadioButton radSingle = new FRadioButton("Play one opponent");
+    private final JRadioButton radSingle = new FRadioButton("Play an opponent");
     private final JRadioButton radAll = new FRadioButton("Play all 7 opponents");
+
+    private final JComboBox<String> cbOpponent = new JComboBox<String>();
 
     private final JLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
@@ -82,6 +77,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         grpPanel.add(radSingle, "w 200px!, h 30px!");
         grpPanel.add(radAll, "w 200px!, h 30px!");
         radSingle.setSelected(true);
+        grpPanel.add(cbOpponent, "w 200px!, h 30px!");
 
         pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         pnlStart.setOpaque(false);
@@ -113,7 +109,6 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         return EDocID.HOME_DRAFT;
     }
 
-    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
     public FLabel getBtnBuildDeck() {
         return this.btnBuildDeck;
     }
@@ -132,6 +127,10 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     public DeckManager getLstDecks() {
         return lstDecks;
     }
+
+    public JComboBox<String> getCbOpponent() { return cbOpponent; }
+    public JRadioButton getRadSingle() { return radSingle; }
+    public JRadioButton getRadAll() { return radAll; }
 
     //========== Overridden from IVDoc
 
