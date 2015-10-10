@@ -105,8 +105,6 @@ public class GameAction {
     }
 
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position) {
-        game.setChangeZoneLKIInfo(c);
-
         if (c.isCopiedSpell() || (c.isImmutable() && zoneTo.is(ZoneType.Exile))) {
             // Remove Effect from command immediately, this is essential when some replacement
             // effects happen during the resolving of a spellability ("the next time ..." effect)
@@ -141,6 +139,8 @@ public class GameAction {
         if (toBattlefield && !c.isPermanent()) {
             return c;
         }
+
+        game.setChangeZoneLKIInfo(c);
 
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
