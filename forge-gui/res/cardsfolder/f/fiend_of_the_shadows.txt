@@ -9,6 +9,7 @@ S:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Regenerate | Cost$ Sac<1/Human> | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiend_of_the_shadows.jpg
