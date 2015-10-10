@@ -33,6 +33,8 @@ import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -125,6 +127,7 @@ public final class CMatchUI
     private final Map<String, String> avatarImages = new HashMap<String, String>();
     private boolean allHands;
     private boolean showOverlay = true;
+    private JPopupMenu openAbilityMenu;
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
 
@@ -596,6 +599,10 @@ public final class CMatchUI
         if (lbl != null) {
             lbl.setActive(true);
         }
+
+        if (openAbilityMenu != null) { //ensure ability menu can't remain open between phases
+            openAbilityMenu.setVisible(false);
+        }
     }
 
     @Override
@@ -748,7 +755,21 @@ public final class CMatchUI
                 x = triggerEvent.getX();
                 y = triggerEvent.getY();
             }
+            menu.addPopupMenuListener(new PopupMenuListener() {
+                @Override
+                public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                }
+                @Override
+                public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+                    openAbilityMenu = null;
+                }
+                @Override
+                public void popupMenuCanceled(PopupMenuEvent e) {
+                    openAbilityMenu = null;
+                }
+            });
             menu.show(menuParent, x, y);
+            openAbilityMenu = menu;
 
             final int _firstEnabled = firstEnabled;
             SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first enabled ability selected by default
