@@ -814,6 +814,8 @@ public class GameAction {
                 }
             }
 
+            // only check static abilities once after destroying all the creatures
+            // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);
             if (noRegCreats != null) {
                 for (Card c : noRegCreats) {
@@ -1663,10 +1665,6 @@ public class GameAction {
     }
 
     // Temporarily disable (if mode = true) actively checking static abilities.
-    // Used to e.g. destroy all creatures with marked lethal damage in combat simultaneously
-    // before checking static abilities (prevents e.g. Erebos's Titan gaining Indestructible
-    // prematurely when dealing lethal damage to the last opponent's creature on the battlefield
-    // while also being dealt lethal damage at the same time)
     private void setHoldCheckingStaticAbilities(boolean mode) {
         holdCheckingStaticAbilities = mode;
     }
