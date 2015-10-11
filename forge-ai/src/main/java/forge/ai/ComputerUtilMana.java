@@ -317,45 +317,15 @@ public class ComputerUtilMana {
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable) {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
-
         if (payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
-            return true;
+            return true;	// paid all from floating mana
         }
-
-        // arrange all mana abilities by color produced.
-        final ListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
-        if (manaAbilityMap.isEmpty()) {
-            refundMana(manaSpentToPay, ai, sa);
-
-            handleOfferingsAI(sa, test, cost.isPaid());
-            return false;
-        }
-
-        if (DEBUG_MANA_PAYMENT) {
-            System.out.println("DEBUG_MANA_PAYMENT: manaAbilityMap = " + manaAbilityMap);
-        }
-
-        // select which abilities may be used for each shard
-        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        
         boolean hasConverge = sa.getHostCard().hasConverge();
-        if (hasConverge) {	// add extra colors for paying converge
-        	final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
-        	for (final byte b : ColorSet.fromMask(unpaidColors)) {
-        		final ManaCostShard shard = ManaCostShard.valueOf(b);
-        		if (!sourcesForShards.containsKey(shard)) {
-        			if (ai.getManaPool().canPayForShardWithColor(shard, b)) {
-                        for (SpellAbility saMana : manaAbilityMap.get((int)b)) {
-                        	sourcesForShards.get(shard).add(sourcesForShards.get(shard).size(), saMana);
-                        }
-                    }
-        		}
-        	}
-        }
-
-        sortManaAbilities(sourcesForShards);
-
-        if (DEBUG_MANA_PAYMENT) {
-            System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
+        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
+				checkPlayable, manaSpentToPay, hasConverge);
+        if (sourcesForShards == null) {
+        	return false;	// no mana abilities to use for paying
         }
 
         final ManaPool manapool = ai.getManaPool();
@@ -480,6 +450,45 @@ public class ComputerUtilMana {
         sa.getHostCard().setSunburstValue(cost.getSunburst());
         return true;
     } // payManaCost()
+
+	/**
+	 * Creates a mapping between the required mana shards and the available spell abilities to pay for them
+	 */
+	private static ListMultimap<ManaCostShard, SpellAbility> getSourcesForShards(final ManaCostBeingPaid cost,
+			final SpellAbility sa, final Player ai, final boolean test, final boolean checkPlayable,
+			List<Mana> manaSpentToPay, final boolean hasConverge) {
+		// arrange all mana abilities by color produced.
+        final ListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
+        if (manaAbilityMap.isEmpty()) {	// no mana abilities, bailing out
+            refundMana(manaSpentToPay, ai, sa);
+            handleOfferingsAI(sa, test, cost.isPaid());
+            return null;
+        }
+        if (DEBUG_MANA_PAYMENT) {
+            System.out.println("DEBUG_MANA_PAYMENT: manaAbilityMap = " + manaAbilityMap);
+        }
+
+        // select which abilities may be used for each shard
+        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        if (hasConverge) {	// add extra colors for paying converge
+        	final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
+        	for (final byte b : ColorSet.fromMask(unpaidColors)) {
+        		final ManaCostShard shard = ManaCostShard.valueOf(b);
+        		if (!sourcesForShards.containsKey(shard)) {
+        			if (ai.getManaPool().canPayForShardWithColor(shard, b)) {
+                        for (SpellAbility saMana : manaAbilityMap.get((int)b)) {
+                        	sourcesForShards.get(shard).add(sourcesForShards.get(shard).size(), saMana);
+                        }
+                    }
+        		}
+        	}
+        }
+        sortManaAbilities(sourcesForShards);
+        if (DEBUG_MANA_PAYMENT) {
+            System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
+        }
+		return sourcesForShards;
+	}
 
     /**
      * Checks if the given mana cost can be paid from floating mana.
