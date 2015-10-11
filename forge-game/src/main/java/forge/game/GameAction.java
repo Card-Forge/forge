@@ -140,7 +140,8 @@ public class GameAction {
             return c;
         }
 
-        if (zoneFrom != null && zoneTo != null && !zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Stack)) {
+        if (zoneFrom != null && zoneTo != null && !zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Stack)
+                && !zoneFrom.is(ZoneType.Flashback) && !zoneTo.is(ZoneType.Flashback)) {
             game.setChangeZoneLKIInfo(c);
         }
 
