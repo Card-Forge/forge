@@ -140,7 +140,9 @@ public class GameAction {
             return c;
         }
 
-        game.setChangeZoneLKIInfo(c);
+        if (zoneFrom != null && zoneTo != null && !zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Stack)) {
+            game.setChangeZoneLKIInfo(c);
+        }
 
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
