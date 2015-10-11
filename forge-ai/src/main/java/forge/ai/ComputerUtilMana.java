@@ -238,7 +238,7 @@ public class ComputerUtilMana {
                 }
 
                 // get a mana of this type from floating, bail if none available
-                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction());
+                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), (byte) -1);
                 if (mana != null) {
                     if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
                         manaSpentToPay.add(0, mana);
@@ -337,6 +337,20 @@ public class ComputerUtilMana {
 
         // select which abilities may be used for each shard
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        boolean hasConverge = sa.getHostCard().hasConverge();
+        if (hasConverge) {	// add extra colors for paying converge
+        	final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
+        	for (final byte b : ColorSet.fromMask(unpaidColors)) {
+        		final ManaCostShard shard = ManaCostShard.valueOf(b);
+        		if (!sourcesForShards.containsKey(shard)) {
+        			if (ai.getManaPool().canPayForShardWithColor(shard, b)) {
+                        for (SpellAbility saMana : manaAbilityMap.get((int)b)) {
+                        	sourcesForShards.get(shard).add(sourcesForShards.get(shard).size(), saMana);
+                        }
+                    }
+        		}
+        	}
+        }
 
         sortManaAbilities(sourcesForShards);
 
@@ -350,7 +364,25 @@ public class ComputerUtilMana {
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost);
 
-            Collection<SpellAbility> saList = sourcesForShards.get(toPay);
+            Collection<SpellAbility> saList = null;
+            if (hasConverge && 
+            		(toPay == ManaCostShard.COLORLESS || toPay == ManaCostShard.X)) {
+            	final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
+            	for (final byte b : ColorSet.fromMask(unpaidColors)) {	// try and pay other colors for converge
+            		final ManaCostShard shard = ManaCostShard.valueOf(b);
+            		saList = sourcesForShards.get(shard);
+            		if (saList != null && !saList.isEmpty()) {
+            			toPay = shard;
+            			break;
+            		}
+            	}
+            	if (saList == null || saList.isEmpty()) {	// failed to converge, revert to paying colorless
+            		saList = sourcesForShards.get(toPay);
+            		hasConverge = false;
+            	}
+            } else {
+            	saList = sourcesForShards.get(toPay);
+            }
             if (saList == null) {
                 break;
             }
@@ -404,6 +436,17 @@ public class ComputerUtilMana {
 
                 // no need to remove abilities from resource map,
                 // once their costs are paid and consume resources, they can not be used again
+                
+                if (hasConverge) {	// hack to prevent converge re-using sources
+                	// remove from available lists
+	                Iterator<SpellAbility> itSa = sourcesForShards.values().iterator();
+	                while (itSa.hasNext()) {
+	                    SpellAbility srcSa = itSa.next();
+	                    if (srcSa.getHostCard().equals(saPayment.getHostCard())) {
+	                        itSa.remove();
+	                    }
+	                }
+                }
             }
         }
 
@@ -449,6 +492,7 @@ public class ComputerUtilMana {
      */
     private static boolean payManaCostFromPool(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, 
             final boolean test, List<Mana> manaSpentToPay) {
+    	final boolean hasConverge = sa.getHostCard().hasConverge();
         List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
         Collections.sort(unpaidShards); // most difficult shards must come first
         for (ManaCostShard part : unpaidShards) {
@@ -458,7 +502,7 @@ public class ComputerUtilMana {
                 }
 
                 // get a mana of this type from floating, bail if none available
-                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction());
+                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1);
                 if (mana != null) {
                     if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
                         manaSpentToPay.add(0, mana);
@@ -487,8 +531,8 @@ public class ComputerUtilMana {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link forge.game.mana.Mana} object.
      */
-    private static Mana getMana(final Player ai, final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
-        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(ai.getManaPool(), shard, saBeingPaidFor, restriction);
+    private static Mana getMana(final Player ai, final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction, final byte colorsPaid) {
+        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(ai.getManaPool(), shard, saBeingPaidFor, restriction, colorsPaid);
 
         // Exclude border case
         if (weightedOptions.isEmpty()) {
@@ -536,7 +580,8 @@ public class ComputerUtilMana {
         return ai.getController().chooseManaFromPool(manaChoices);
     }
 
-    private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
+	private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard,
+			final SpellAbility saBeingPaidFor, String restriction, final byte colorsPaid) {
         final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<>();
         for (final Mana thisMana : manapool) {
             if (!manapool.canPayForShardWithColor(shard, thisMana.getColor())) {
@@ -556,8 +601,14 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            // prefer colorless mana to spend
-            int weight = thisMana.isColorless() ? 5 : 0;
+            int weight = 0;
+            if (colorsPaid == -1) {
+            	// prefer colorless mana to spend
+            	weight += thisMana.isColorless() ? 5 : 0;
+            } else {
+            	// get more colors for converge
+            	weight += (thisMana.getColor() | colorsPaid) != colorsPaid ? 5 : 0;
+            }
 
             // prefer restricted mana to spend
             if (thisMana.isRestricted()) {

@@ -873,6 +873,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean hasSecondStrike() {
         return hasDoubleStrike() || !hasFirstStrike();
     }
+    
+    public final boolean hasConverge() {
+    	return "Count$Converge".equals(getSVar("X")) || "Count$Converge".equals(getSVar("Y")) || hasKeyword("Sunburst");
+    }
 
     public final boolean canReceiveCounters(final CounterType type) {
         if (hasKeyword("CARDNAME can't have counters placed on it.")) {
