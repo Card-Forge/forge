@@ -1,20 +1,6 @@
 package forge.screens.home.quest;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JRadioButton;
-import javax.swing.SwingUtilities;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
@@ -32,11 +18,11 @@ import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.itemmanager.DeckManager;
 import forge.limited.BoosterDraft;
-import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestDraftUtils;
 import forge.quest.QuestEventDraft;
+import forge.quest.QuestEventDraft.QuestDraftFormat;
 import forge.quest.QuestUtil;
 import forge.quest.data.QuestAchievements;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -50,6 +36,12 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.JXButtonPanel;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controls the quest draft submenu in the home UI.
@@ -184,7 +176,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
                     final int totalPacks = prizes.boosterPacks.size();
                     int currentPack = 0;
 
-                    while (prizes.boosterPacks.size() > 0) {
+                    while (!prizes.boosterPacks.isEmpty()) {
 
                         final BoosterPack pack = prizes.boosterPacks.remove(0);
                         currentPack++;
@@ -211,7 +203,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
 
                     final List<PaperCard> cards = new ArrayList<>();
 
-                    while (prizes.boosterPacks.size() > 0) {
+                    while (!prizes.boosterPacks.isEmpty()) {
                         final BoosterPack pack = prizes.boosterPacks.remove(0);
                         cards.addAll(pack.getCards());
                     }
@@ -306,11 +298,21 @@ public enum CSubmenuQuestDraft implements ICDoc {
 
         if (achievements != null) {
 
-            final CardBlock block = GuiChoose.oneOrNone("Choose Draft Format", QuestEventDraft.getAvailableBlocks(FModel.getQuest()));
+            List<QuestDraftFormat> formats = QuestEventDraft.getAvailableFormats(FModel.getQuest());
 
-            if (block != null) {
+            if (formats.isEmpty()) {
+                FOptionPane.showErrorDialog(
+                        "You do not have any draft-able sets unlocked!\n" +
+                        "Come back later when you've unlocked more sets.",
+                        "No Available Drafts");
+                return;
+            }
 
-                achievements.spendDraftToken(block);
+            final QuestDraftFormat format = GuiChoose.oneOrNone("Choose Draft Format", formats);
+
+            if (format != null) {
+
+                achievements.spendDraftToken(format);
 
                 update();
                 VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
@@ -516,6 +518,8 @@ public enum CSubmenuQuestDraft implements ICDoc {
     private void startDraft() {
 
         if (drafting) {
+            FOptionPane.showErrorDialog("You are currently in a draft.\n" +
+                    "You should leave or finish that draft before starting another.");
             return;
         }
 
@@ -572,6 +576,12 @@ public enum CSubmenuQuestDraft implements ICDoc {
 
         if (message != null) {
             FOptionPane.showMessageDialog(message, "Deck Invalid");
+            return;
+        }
+
+        if (QuestDraftUtils.matchInProgress) {
+            FOptionPane.showErrorDialog("There is already a match in progress.\n" +
+                    "Please wait for the current round to end before attempting to continue.");
             return;
         }
 

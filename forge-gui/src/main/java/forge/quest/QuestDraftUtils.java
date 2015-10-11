@@ -1,8 +1,5 @@
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -17,14 +14,17 @@ import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.storage.IStorage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuestDraftUtils {
-    private static final List<DraftMatchup> matchups = new ArrayList<DraftMatchup>();
+    private static final List<DraftMatchup> matchups = new ArrayList<>();
 
     public static boolean matchInProgress = false;
     private static boolean waitForUserInput = false;
 
     public static void completeDraft(final DeckGroup finishedDraft) {
-        final List<Deck> aiDecks = new ArrayList<Deck>(finishedDraft.getAiDecks());
+        final List<Deck> aiDecks = new ArrayList<>(finishedDraft.getAiDecks());
         finishedDraft.getAiDecks().clear();
 
         for (int i = 0; i < aiDecks.size(); i++) {
@@ -49,8 +49,40 @@ public class QuestDraftUtils {
         return null;
     }
 
+    private static int getPreviousMatchup(final int position) {
+        switch (position) {
+            case 0:
+            case 1:
+                return 0;
+            case 2:
+            case 3:
+                return 2;
+            case 4:
+            case 5:
+                return 4;
+            case 6:
+            case 7:
+                return 6;
+            case 8:
+                return 0;
+            case 9:
+                return 2;
+            case 10:
+                return 4;
+            case 11:
+                return 6;
+            case 12:
+                return 8;
+            case 13:
+                return 10;
+            case 14:
+                return 12;
+        }
+        return -1;
+    }
+
     public static void startNextMatch(final IGuiGame gui) {
-        if (matchups.size() > 0) {
+        if (!matchups.isEmpty()) {
             return;
         }
 
@@ -68,38 +100,69 @@ public class QuestDraftUtils {
             }
         }
 
-        switch (currentSet) {
-        case 7:
-            addMatchup(0, 1, draft);
-            addMatchup(2, 3, draft);
-            addMatchup(4, 5, draft);
-            addMatchup(6, 7, draft);
-            break;
-        case 8:
-            addMatchup(2, 3, draft);
-            addMatchup(4, 5, draft);
-            addMatchup(6, 7, draft);
-            break;
-        case 9:
-            addMatchup(4, 5, draft);
-            addMatchup(6, 7, draft);
-            break;
-        case 10:
-            addMatchup(6, 7, draft);
-            break;
-        case 11:
-            addMatchup(8, 9, draft);
-            addMatchup(10, 11, draft);
-            break;
-        case 12:
-            addMatchup(10, 11, draft);
-            break;
-        case 13:
-            addMatchup(12, 13, draft);
-            break;
-        case 14:
-        default:
-            return;
+        int latestSet = currentSet;
+        //Choose the start of each matchup; it's always even (0v1 2v3 4v5)
+        if (latestSet % 2 == 1) {
+            latestSet--;
+        }
+
+        //Fill in any missing spots in previous brackets
+        boolean foundMatchups = false;
+        for (int i = 0; i <= latestSet && i <= 14; i += 2) {
+            if (currentStandings[i].equals(QuestEventDraft.UNDETERMINED) && !currentStandings[i + 1].equals(QuestEventDraft.UNDETERMINED)) {
+                int previousMatchup = getPreviousMatchup(i);
+                addMatchup(previousMatchup, previousMatchup + 1, draft);
+                foundMatchups = true;
+            } else if (!currentStandings[i].equals(QuestEventDraft.UNDETERMINED) && currentStandings[i + 1].equals(QuestEventDraft.UNDETERMINED)) {
+                int previousMatchup = getPreviousMatchup(i + 1);
+                addMatchup(previousMatchup, previousMatchup + 1, draft);
+                foundMatchups = true;
+            } else if (currentStandings[i].equals(QuestEventDraft.UNDETERMINED) && currentStandings[i + 1].equals(QuestEventDraft.UNDETERMINED)) {
+                int previousMatchup = getPreviousMatchup(i);
+                addMatchup(previousMatchup, previousMatchup + 1, draft);
+                if (i >= 8) {
+                    previousMatchup = getPreviousMatchup(i + 1);
+                    addMatchup(previousMatchup, previousMatchup + 1, draft);
+                }
+                foundMatchups = true;
+            }
+        }
+
+        //If no previous matches need doing, start the next round as normal
+        if (!foundMatchups) {
+            switch (currentSet) {
+                case 7:
+                    addMatchup(0, 1, draft);
+                    addMatchup(2, 3, draft);
+                    addMatchup(4, 5, draft);
+                    addMatchup(6, 7, draft);
+                    break;
+                case 8:
+                    addMatchup(2, 3, draft);
+                    addMatchup(4, 5, draft);
+                    addMatchup(6, 7, draft);
+                    break;
+                case 9:
+                    addMatchup(4, 5, draft);
+                    addMatchup(6, 7, draft);
+                    break;
+                case 10:
+                    addMatchup(6, 7, draft);
+                    break;
+                case 11:
+                    addMatchup(8, 9, draft);
+                    addMatchup(10, 11, draft);
+                    break;
+                case 12:
+                    addMatchup(10, 11, draft);
+                    break;
+                case 13:
+                    addMatchup(12, 13, draft);
+                    break;
+                case 14:
+                default:
+                    return;
+            }
         }
 
         update(gui);
@@ -128,8 +191,7 @@ public class QuestDraftUtils {
 
             final int aiDeckIndex = Integer.parseInt(draft.getStandings()[aiIndex]) - 1;
             matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(GamePlayerUtil.createAiPlayer(draft.getAINames()[aiName], draft.getAIIcons()[aiName])));
-        }
-        else {
+        } else {
             final int aiName1 = Integer.parseInt(draft.getStandings()[player1]) - 1;
             final int aiName2 = Integer.parseInt(draft.getStandings()[player2]) - 1;
 
@@ -180,8 +242,14 @@ public class QuestDraftUtils {
         update(gui);
     }
 
+    public static void cancelFurtherMatches() {
+        matchInProgress = false;
+        waitForUserInput = false;
+        matchups.clear();
+    }
+
     private static final class DraftMatchup {
-        private final List<RegisteredPlayer> matchStarter = new ArrayList<RegisteredPlayer>();
+        private final List<RegisteredPlayer> matchStarter = new ArrayList<>();
         private RegisteredPlayer humanPlayer = null;
         private void setHumanPlayer(final RegisteredPlayer humanPlayer) {
             this.matchStarter.add(humanPlayer);

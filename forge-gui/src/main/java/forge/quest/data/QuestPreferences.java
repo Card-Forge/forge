@@ -275,12 +275,6 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
                 }
                 break;
 
-            case PLAYSET_BASIC_LAND_SIZE:
-                if (val < 10) {
-                    return "Value too small (minimum 10).";
-                }
-                break;
-
             case SHOP_MAX_PACKS:
             case SHOP_MAX_SELLING_PRICE:
             case SHOP_WINS_FOR_ADDITIONAL_PACK:
@@ -298,6 +292,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case BOOSTER_COMMONS:
             case BOOSTER_UNCOMMONS:
             case BOOSTER_RARES:
+            case PLAYSET_BASIC_LAND_SIZE:
             case STARTING_CREDITS_EASY:
             case STARTING_CREDITS_MEDIUM:
             case STARTING_CREDITS_HARD:

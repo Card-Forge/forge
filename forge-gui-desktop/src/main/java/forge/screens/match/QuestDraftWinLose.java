@@ -16,13 +16,10 @@
  */
 package forge.screens.match;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.assets.FSkinProp;
 import forge.game.GameView;
+import forge.game.player.PlayerView;
 import forge.match.NextGameDecision;
 import forge.model.FModel;
 import forge.quest.QuestController;
@@ -31,6 +28,9 @@ import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * <p>
@@ -46,9 +46,6 @@ public class QuestDraftWinLose extends ControlWinLose {
 
     /**
      * Instantiates a new quest win lose handler.
-     *
-     * @param view0 ViewWinLose object
-     * @param match2
      */
     public QuestDraftWinLose(final ViewWinLose view0, final GameView game0, final CMatchUI matchUI) {
         super(view0, game0, matchUI);
@@ -71,7 +68,6 @@ public class QuestDraftWinLose extends ControlWinLose {
 
         if (lastGame.isMatchOver()) {
             final String winner = lastGame.getWinningPlayerName();
-
             quest.getAchievements().getCurrentDraft().setWinner(winner);
             quest.save();
         }
@@ -107,9 +103,29 @@ public class QuestDraftWinLose extends ControlWinLose {
             public void actionPerformed(final ActionEvent e) {
                 if (warningString == null ||
                         FOptionPane.showOptionDialog(warningString, warningCaption, FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), ImmutableList.of("Yes", "No"), 1) == 0) {
-                    matchUI.getGameController().nextGameDecision(NextGameDecision.QUIT);
-                    QuestDraftUtils.matchInProgress = false;
-                    QuestDraftUtils.continueMatches(matchUI);
+                    if (warningString != null) {
+                        PlayerView humanPlayer = null;
+                        for (PlayerView playerView : matchUI.getLocalPlayers()) {
+                            humanPlayer = playerView;
+                        }
+                        for (PlayerView playerView : lastGame.getPlayers()) {
+                            if (humanPlayer == null) {
+                                throw new IllegalStateException("Forfeit tournament button was pressed in a match without human players.");
+                            }
+                            if (playerView != humanPlayer) {
+                                quest.getAchievements().getCurrentDraft().setWinner(playerView.getName());
+                                quest.save();
+                                CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
+                                VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
+                            }
+                        }
+                        //The player is probably not interested in watching more AI matches.
+                        QuestDraftUtils.cancelFurtherMatches();
+                    } else {
+                        matchUI.getGameController().nextGameDecision(NextGameDecision.QUIT);
+                        QuestDraftUtils.matchInProgress = false;
+                        QuestDraftUtils.continueMatches(matchUI);
+                    }
                 }
             }
         });

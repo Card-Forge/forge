@@ -213,6 +213,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return whiteBorder;
     }
 
+    public boolean isLargeSet() {
+        return cards.length > 200;
+    }
+
     public int getCntBoosterPictures() {
         return boosterArts;
     }

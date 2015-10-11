@@ -17,16 +17,6 @@
  */
 package forge.quest;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import forge.GuiBase;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
@@ -44,8 +34,10 @@ import forge.player.GamePlayerUtil;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.NameGenerator;
-import forge.util.TextUtil;
 import forge.util.storage.IStorage;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * <p>
@@ -69,14 +61,14 @@ public class QuestEventDraft {
         }
 
         public boolean hasBoosterPacks() {
-            return boosterPacks != null && boosterPacks.size() > 0;
+            return boosterPacks != null && !boosterPacks.isEmpty();
         }
 
         public boolean hasIndividualCards() {
-            return individualCards != null && individualCards.size() > 0;
+            return individualCards != null && !individualCards.isEmpty();
         }
 
-        public boolean selectRareFromSets() { return selectRareCards != null && selectRareCards.size() > 0; }
+        public boolean selectRareFromSets() { return selectRareCards != null && !selectRareCards.isEmpty(); }
 
         public void addSelectedCard(final PaperCard card) {
             FModel.getQuest().getCards().addSingleCard(card, 1);
@@ -362,19 +354,8 @@ public class QuestEventDraft {
 
         cards.add(getPromoCard());
 
-        int creditsForPacks = (credits / 2); //Spend 50% of the credits on packs
-
-        while (true) {
-            final BoosterPack pack = getBoosterPack();
-            final int price = getBoosterPrice(pack);
-            if (price > creditsForPacks + creditsForPacks * 0.1f) { //Add a little room for near-same price packs.
-                break;
-            }
-            creditsForPacks -= price;
-            boosters.add(pack);
-        }
-
-        credits = (credits / 2) + creditsForPacks; //Add the leftover credits + 50%
+        int creditsLeftAfterPacks = generateBoosters((credits / 2), boosters); //Spend 75% of the credits on packs
+        credits = (credits / 2) + creditsLeftAfterPacks; //Add the leftover credits + 50%
 
         final QuestDraftPrizes prizes = new QuestDraftPrizes();
         prizes.credits = credits;
@@ -394,19 +375,9 @@ public class QuestEventDraft {
 
         cards.add(getPromoCard());
 
-        int creditsForPacks = (credits / 4) * 3; //Spend 75% of the credits on packs
+        int creditsLeftAfterPacks = generateBoosters((credits / 4) * 3, boosters); //Spend 75% of the credits on packs
 
-        while (true) {
-            final BoosterPack pack = getBoosterPack();
-            final int price = getBoosterPrice(pack);
-            if (price > creditsForPacks + creditsForPacks * 0.1f) { //Add a little room for near-same price packs.
-                break;
-            }
-            creditsForPacks -= price;
-            boosters.add(pack);
-        }
-
-        credits = (credits / 4) + creditsForPacks; //Add the leftover credits + 25%
+        credits = (credits / 4) + creditsLeftAfterPacks; //Add the leftover credits + 25%
 
         final QuestDraftPrizes prizes = new QuestDraftPrizes();
         prizes.credits = credits;
@@ -450,6 +421,20 @@ public class QuestEventDraft {
 
         return prizes;
 
+    }
+
+    private int generateBoosters(final int creditsForPacks, final List<BoosterPack> boosters) {
+        int creditsAfterPacks = creditsForPacks;
+        while (true) {
+            final BoosterPack pack = getBoosterPack();
+            final int price = getBoosterPrice(pack);
+            if (price > creditsAfterPacks * 1.1f) { //Add a little room for near-same price packs.
+                break;
+            }
+            creditsAfterPacks -= price;
+            boosters.add(pack);
+        }
+        return creditsAfterPacks;
     }
 
     private void awardSelectedRare(final QuestDraftPrizes prizes) {
@@ -682,14 +667,60 @@ public class QuestEventDraft {
         return title;
     }
 
-    public static List<CardBlock> getAvailableBlocks(final QuestController quest) {
+    public static class QuestDraftFormat implements Comparable<QuestDraftFormat> {
 
-        final List<CardBlock> possibleBlocks = new ArrayList<>();
+        private CardEdition edition;
+        private CardBlock block;
+
+        public QuestDraftFormat(final CardEdition edition) {
+            this.edition = edition;
+        }
+
+        public QuestDraftFormat(final CardBlock block) {
+            this.block = block;
+        }
+
+        private boolean isSet() {
+            return edition != null;
+        }
+
+        @Override
+        public String toString() {
+            if (edition != null) {
+                return edition.getName() + " (" + edition.getCode() + ")";
+            }
+            String blockString = block.getName() + " (";
+            List<CardEdition> sets = block.getSets();
+            for (int i = 0; i < sets.size(); i++) {
+                CardEdition cardEdition = sets.get(i);
+                blockString += cardEdition.getCode();
+                if (i < sets.size() - 1) {
+                    blockString += ", ";
+                }
+            }
+            blockString += ")";
+            return blockString;
+        }
+
+        public String getName() {
+            if (edition != null) {
+                return edition.getName();
+            }
+            return block.getName();
+        }
+
+        @Override
+        public int compareTo(final QuestDraftFormat other) {
+            return toString().compareToIgnoreCase(other.toString());
+        }
+
+    }
+
+    private static List<CardEdition> getAllowedSets(final QuestController quest) {
+
         final List<CardEdition> allowedQuestSets = new ArrayList<>();
 
-        final boolean questUsesLimitedCardPool = quest.getFormat() != null;
-
-        if (questUsesLimitedCardPool) {
+        if (quest.getFormat() != null) {
 
             final List<String> allowedSetCodes = quest.getFormat().getAllowedSetCodes();
 
@@ -698,6 +729,12 @@ public class QuestEventDraft {
             }
 
         }
+
+        return allowedQuestSets;
+
+    }
+
+    private static List<CardBlock> getBlocks() {
 
         final List<CardBlock> blocks = new ArrayList<>();
         final IStorage<CardBlock> storage = FModel.getBlocks();
@@ -708,29 +745,72 @@ public class QuestEventDraft {
             }
         }
 
-        if (questUsesLimitedCardPool) {
+        return blocks;
+
+    }
+
+    public static List<QuestDraftFormat> getAvailableFormats(final QuestController quest) {
+
+        final List<CardEdition> allowedQuestSets = getAllowedSets(quest);
+        final List<QuestDraftFormat> possibleFormats = new ArrayList<>();
+        final List<CardBlock> blocks = getBlocks();
+
+        List<String> singleSets = new ArrayList<>();
+        if (!allowedQuestSets.isEmpty()) {
             for (final CardBlock block : blocks) {
 
-                boolean blockAllowed = true;
+                boolean blockAllowed = false;
+                boolean largeSetUnlocked = false;
+                int unlockedSets = 0;
                 final boolean allBlocksSanctioned = quest.getFormat().getAllowedSetCodes().isEmpty();
 
                 for (final CardEdition set : block.getSets()) {
                     if (!allowedQuestSets.contains(set) && !allBlocksSanctioned) {
-                        blockAllowed = false;
-                        break;
+                        continue;
+                    }
+                    unlockedSets++;
+                    if (set.isLargeSet()) {
+                        largeSetUnlocked = true;
                     }
                 }
 
+                //Allow partially unlocked blocks if they contain at least one large and one small unlocked set.
+                if (largeSetUnlocked && unlockedSets > 1) {
+                    blockAllowed = true;
+                }
+
+                if (largeSetUnlocked && block.getSets().size() == 1) {
+                    blockAllowed = true;
+                    singleSets.add(block.getSets().get(0).getCode());
+                }
+
                 if (blockAllowed) {
-                    possibleBlocks.add(block);
+                    possibleFormats.add(new QuestDraftFormat(block));
                 }
 
             }
+
+            for (CardEdition allowedQuestSet : allowedQuestSets) {
+                if (allowedQuestSet.isLargeSet() && !singleSets.contains(allowedQuestSet.getCode())) {
+                    possibleFormats.add(new QuestDraftFormat(allowedQuestSet));
+                }
+            }
+
         } else {
-            possibleBlocks.addAll(blocks);
+            for (CardBlock block : blocks) {
+                possibleFormats.add(new QuestDraftFormat(block));
+                if (block.getSets().size() > 1) {
+                    for (CardEdition edition : block.getSets()) {
+                        if (edition.isLargeSet()) {
+                            possibleFormats.add(new QuestDraftFormat(edition));
+                        }
+                    }
+                }
+            }
         }
 
-        return possibleBlocks.isEmpty() ? null : possibleBlocks;
+        Collections.sort(possibleFormats);
+        return possibleFormats;
 
     }
 
@@ -741,41 +821,42 @@ public class QuestEventDraft {
      */
     public static QuestEventDraft getRandomDraftOrNull(final QuestController quest) {
 
-        final List<CardBlock> possibleBlocks = getAvailableBlocks(quest);
+        final List<QuestDraftFormat> possibleFormats = getAvailableFormats(quest);
 
-        if (possibleBlocks == null) {
+        if (possibleFormats.isEmpty()) {
             return null;
         }
 
-        Collections.shuffle(possibleBlocks);
-        return getDraftOrNull(quest, possibleBlocks.get(0));
+        Collections.shuffle(possibleFormats);
+        return getDraftOrNull(quest, possibleFormats.get(0));
 
     }
 
     /**
-     * Generates a  draft event based on the provided block.
+     * Generates a draft event based on the provided format.
      * @return The created draft or null in the event no draft could be created.
      */
-    public static QuestEventDraft getDraftOrNull(final QuestController quest, final CardBlock block) {
+    public static QuestEventDraft getDraftOrNull(final QuestController quest, final QuestDraftFormat format) {
 
-        final QuestEventDraft event = new QuestEventDraft(block.getName());
+        final QuestEventDraft event = new QuestEventDraft(format.getName());
 
-        if (block.getNumberSets() == 1) {
+        if (format.isSet()) {
+            CardEdition edition = format.edition;
             String boosterConfiguration = "";
-            for (int i = 0; i < block.getCntBoostersDraft(); i++) {
-                boosterConfiguration += block.getSets().get(0).getCode();
-                if (i != block.getCntBoostersDraft() - 1) {
+            for (int i = 0; i < 3; i++) {
+                boosterConfiguration += edition.getCode();
+                if (i != 2) {
                     boosterConfiguration += "/";
                 }
                 event.boosterConfiguration = boosterConfiguration;
             }
         } else {
-            final List<String> possibleSetCombinations = getSetCombos(block);
+            final List<String> possibleSetCombinations = new ArrayList<>(getSetCombos(quest, format.block));
             Collections.shuffle(possibleSetCombinations);
             event.boosterConfiguration = possibleSetCombinations.get(0);
         }
 
-        event.block = block.getName();
+        event.block = format.getName();
         event.entryFee = calculateEntryFee(event.boosterConfiguration.split("/"));
 
         final List<String> players = new ArrayList<>();
@@ -850,57 +931,76 @@ public class QuestEventDraft {
 
     }
 
-    private static List<String> getSetCombos(final CardBlock block) {
-        final List<String> result = new ArrayList<>();
+    private static Set<String> getSetCombos(final QuestController quest, final CardBlock block) {
 
+        final Set<String> possibleCombinations = new LinkedHashSet<>();
         final List<CardEdition> sets = block.getSets();
+
         final String s0c = sets.get(0).getCode();
         if (sets.size() == 1) {
-            result.add(String.format("%s/%s/%s", s0c, s0c, s0c));
-            return result;
+            int numBoosters = block.getCntBoostersDraft();
+            String combination = "";
+            for (int i = 0; i < numBoosters; i++) {
+                combination += s0c;
+                if (i < numBoosters - 1) {
+                    combination += "/";
+                }
+            }
+            possibleCombinations.add(combination);
+            return possibleCombinations;
         }
 
-        final String s1c = sets.get(1).getCode();
-        final String s2c = sets.size() > 2 ? sets.get(2).getCode() : null;
-
-        final boolean s0isLarge = sets.get(0).getCards().length > 200;
-        final boolean s1isLarge = sets.get(1).getCards().length > 200;
-
-        final String largerSet = s0isLarge == s1isLarge ? null : s0isLarge ? s0c : s1c;
-
-        if (s2c == null) {
-            if (largerSet != null ) {
-                result.add(String.format("%s/%s/%s", s0c, largerSet, s1c));
-            } else {
-                result.add(String.format("%s/%s/%s", s1c, s1c, s1c));
-                result.add(String.format("%s/%s/%s", s0c, s1c, s1c));
-                result.add(String.format("%s/%s/%s", s0c, s0c, s1c));
-                result.add(String.format("%s/%s/%s", s0c, s0c, s0c));
-            }
+        List<CardEdition> allowedSets;
+        if (quest.getFormat() == null) {
+            allowedSets = new ArrayList<>(sets);
         } else {
-            result.add(String.format("%s/%s/%s", s0c, s0c, s0c));
-            result.add(String.format("%s/%s/%s", s0c, s1c, s2c));
+            allowedSets = getAllowedSets(quest);
+            allowedSets.retainAll(sets);
+        }
 
-            // allow separate drafts with 3rd large set (ex: ROE, AVR)
-            if( sets.get(2).getCards().length > 200) {
-                result.add(String.format("%s/%s/%s", s2c, s2c, s2c));
+        final boolean oldSetsFirst = sets.get(0).getDate().before(FModel.getMagicDb().getEditions().get("SOM").getDate());
+        Collections.sort(allowedSets, new Comparator<CardEdition>() {
+            @Override
+            public int compare(final CardEdition edition1, final CardEdition edition2) {
+                if (edition1.getDate().before(edition2.getDate())) {
+                    return oldSetsFirst ? -1 : 1;
+                } else if (edition1.getDate().after(edition2.getDate())) {
+                    return oldSetsFirst ? 1 : -1;
+                }
+                return 0;
+            }
+        });
+
+        boolean largeSetFound = false;
+        for (CardEdition allowedSet : allowedSets) {
+            if (allowedSet.isLargeSet()) {
+                largeSetFound = true;
+                break;
             }
         }
 
-        // This is set to Scars of Mirrodin date to account for the fact that MBS is drafted as a part of the Scars of Mirrodin block.
-        // Setting it to the date of Mirrodin Besieged makes it treat all drafts that feature Scars of Mirrodin incorrectly.
-        final Date SOMDate = FModel.getMagicDb().getEditions().get("SOM").getDate();
-        final boolean openOlderPacksFirst = sets.get(0).getDate().before(SOMDate); // before Mirrodin Besieged, sets were drafted in the opposite order (old->new instead of new->old)
+        if (!largeSetFound) {
+            throw new IllegalStateException(allowedSets + " does not contain a large set for quest draft generation.");
+        }
 
-        if( !openOlderPacksFirst ){
-            for(int i = result.size() - 1; i >= 0; i--) {
-                final List<String> parts = Arrays.asList(TextUtil.split(result.get(i), '/'));
-                Collections.reverse(parts);
-                result.set(i, TextUtil.join(parts, "/"));
+        if (allowedSets.containsAll(sets)) {
+            CardEdition set0 = allowedSets.get(0);
+            CardEdition set1 = allowedSets.get(1);
+            if (allowedSets.size() == 2) {
+                if (set0.isLargeSet()) {
+                    possibleCombinations.add(String.format("%s/%s/%s", set0.getCode(), set0.getCode(), set1.getCode()));
+                } else {
+                    possibleCombinations.add(String.format("%s/%s/%s", set0.getCode(), set1.getCode(), set1.getCode()));
+                }
+            }
+            if (allowedSets.size() == 3) {
+                CardEdition set2 = allowedSets.get(2);
+                possibleCombinations.add(String.format("%s/%s/%s", set0.getCode(), set1.getCode(), set2.getCode()));
             }
         }
 
-        return result;
+        return possibleCombinations;
+
     }
 
 }

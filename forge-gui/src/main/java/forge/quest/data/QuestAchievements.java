@@ -1,8 +1,8 @@
 package forge.quest.data;
 
-import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.quest.QuestEventDraft;
+import forge.quest.QuestEventDraft.QuestDraftFormat;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 
@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
@@ -23,7 +23,7 @@ public class QuestAchievements {
 
     private List<String> completedChallenges = new ArrayList<>();
     private List<String> currentChallenges = new ArrayList<>();
-    
+
     private QuestEventDraftContainer drafts = new QuestEventDraftContainer();
     private int currentDraft = -1;
     private int draftsToGenerate = 1;
@@ -33,16 +33,16 @@ public class QuestAchievements {
     private int winstreakBest = 0;
     private int winstreakCurrent = 0;
     private int lost;
-    
+
     private int firstPlaceDraftFinishes = 0;
     private int secondPlaceDraftFinishes = 0;
     private int thirdPlaceDraftFinishes = 0;
     private int fourthPlaceDraftFinishes = 0;
-    
+
     // Difficulty - will store only index from now.
     private int difficulty;
-    
-    private transient CardBlock nextDraftBlock;
+
+    private transient QuestDraftFormat nextDraftFormat;
 
     public QuestAchievements() { //needed for XML serialization
     }
@@ -54,14 +54,14 @@ public class QuestAchievements {
     public QuestAchievements(int diff) {
         difficulty = diff;
     }
-    
+
     public void deleteDraft(QuestEventDraft draft) {
         if (currentDraft == drafts.indexOf(draft)) {
             currentDraft = -1;
         }
         drafts.remove(draft);
     }
-    
+
     public void endCurrentTournament(final int place) {
         drafts.remove(drafts.get(currentDraft));
         currentDraft = -1;
@@ -77,7 +77,7 @@ public class QuestAchievements {
      * Adds the win.
      */
     public void addWin() { // changes getRank()
-		
+
         win++;
         winstreakCurrent++;
 
@@ -92,17 +92,17 @@ public class QuestAchievements {
         if (win % FModel.getQuestPreferences().getPrefInt(QPref.WINS_NEW_DRAFT) == 0) {
             draftsToGenerate++;
         }
-        
+
         if (winstreakCurrent > winstreakBest) {
             winstreakBest = winstreakCurrent;
         }
-		
+
     }
 
     // Challenge performance
     /**
      * Gets the challenges played.
-     * 
+     *
      * @return the challenges played
      */
     public int getChallengesPlayed() {
@@ -118,7 +118,7 @@ public class QuestAchievements {
 
     /**
      * Returns stored list of non-repeatable challenge IDs.
-     * 
+     *
      * @return List<Integer>
      */
     public List<String> getLockedChallenges() {
@@ -130,7 +130,7 @@ public class QuestAchievements {
      * addCompletedChallenge.
      * </p>
      * Add non-repeatable challenge ID to list.
-     * 
+     *
      * @param i
      *            the i
      */
@@ -140,7 +140,7 @@ public class QuestAchievements {
 
     /**
      * Stores a list of current challenges.
-     * 
+     *
      * @return List<Integer>
      */
     public List<String> getCurrentChallenges() {
@@ -153,7 +153,7 @@ public class QuestAchievements {
 
     /**
      * Returns the stored list of current challenges.
-     * 
+     *
      * @param lst0 List<Integer>
      */
     public void setCurrentChallenges(final List<String> lst0) {
@@ -171,7 +171,7 @@ public class QuestAchievements {
     // Level, read-only ( note: it increments in addWin() )
     /**
      * Gets the level.
-     * 
+     *
      * @return the level
      */
     public int getLevel() {
@@ -182,7 +182,7 @@ public class QuestAchievements {
     // Wins & Losses
     /**
      * Gets the lost.
-     * 
+     *
      * @return the lost
      */
     public int getLost() {
@@ -191,7 +191,7 @@ public class QuestAchievements {
 
     /**
      * Gets the win.
-     * 
+     *
      * @return the win
      */
     public int getWin() {
@@ -218,7 +218,7 @@ public class QuestAchievements {
 
     /**
      * Gets the difficulty index.
-     * 
+     *
      * @return the difficulty index
      */
     public int getDifficulty() {
@@ -230,7 +230,7 @@ public class QuestAchievements {
     }
 
     public void generateDrafts() {
-        
+
         if (drafts == null) {
             drafts = new QuestEventDraftContainer();
             draftsToGenerate = 1;
@@ -251,9 +251,9 @@ public class QuestAchievements {
 
         for (int i = 0; i < draftsToGenerate; i++) {
             QuestEventDraft draft;
-            if (nextDraftBlock != null) {
-                draft = QuestEventDraft.getDraftOrNull(FModel.getQuest(), nextDraftBlock);
-                nextDraftBlock = null;
+            if (nextDraftFormat != null) {
+                draft = QuestEventDraft.getDraftOrNull(FModel.getQuest(), nextDraftFormat);
+                nextDraftFormat = null;
             } else {
                 draft = QuestEventDraft.getRandomDraftOrNull(FModel.getQuest());
             }
@@ -264,7 +264,7 @@ public class QuestAchievements {
         }
 
         FModel.getQuest().save();
-        
+
     }
 
     public void addDraftToken() {
@@ -276,7 +276,7 @@ public class QuestAchievements {
     }
 
     public QuestEventDraft getCurrentDraft() {
-        if (drafts == null || drafts.size() == 0) {
+        if (drafts == null || drafts.isEmpty()) {
             return null;
         }
         if (currentDraft > drafts.size() - 1) {
@@ -286,11 +286,11 @@ public class QuestAchievements {
         }
         return drafts.get(currentDraft);
     }
-    
+
     public int getCurrentDraftIndex() {
         return currentDraft;
     }
-    
+
     public int getWinsForPlace(final int place) {
         switch (place) {
             case 1:
@@ -302,7 +302,7 @@ public class QuestAchievements {
             case 4:
                 return fourthPlaceDraftFinishes;
         }
-        
+
         return 0;
     }
 
@@ -327,13 +327,13 @@ public class QuestAchievements {
         return draftTokens;
     }
 
-    public void spendDraftToken(final CardBlock block) {
+    public void spendDraftToken(final QuestDraftFormat format) {
         if (draftTokens > 0) {
             draftTokens--;
             draftsToGenerate++;
-            nextDraftBlock = block;
+            nextDraftFormat = format;
             generateDrafts();
         }
     }
-    
+
 }
