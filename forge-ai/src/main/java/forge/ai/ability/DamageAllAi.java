@@ -29,7 +29,9 @@ public class  DamageAllAi extends SpellAbilityAi {
 
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
-
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$Converge")) {
+        	dmg = ComputerUtilMana.getConvergeCount(sa, ai);
+        }
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);

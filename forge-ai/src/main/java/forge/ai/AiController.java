@@ -667,10 +667,26 @@ public class AiController {
             if (mana.countX() > 0) {
                 // Set PayX here to maximum value.
                 final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
-                if (xPay <= 0) {
-                    return AiPlayDecision.CantAffordX;
+                final Card source = sa.getHostCard();
+                if (source.hasConverge()) {
+                	card.setSVar("PayX", Integer.toString(0));
+                	int nColors = ComputerUtilMana.getConvergeCount(sa, player);
+                	for (int i = 1; i <= xPay; i++) {
+                		card.setSVar("PayX", Integer.toString(i));
+                		int newColors = ComputerUtilMana.getConvergeCount(sa, player);
+                		if (newColors > nColors) {
+                			nColors = newColors;
+                		} else {
+                			card.setSVar("PayX", Integer.toString(i - 1));
+                			break;
+                		}
+                	}
+                } else {
+	                if (xPay <= 0) {
+	                    return AiPlayDecision.CantAffordX;
+	                }
+	                card.setSVar("PayX", Integer.toString(xPay));
                 }
-                card.setSVar("PayX", Integer.toString(xPay));
             }
             
             // Check for valid targets before casting

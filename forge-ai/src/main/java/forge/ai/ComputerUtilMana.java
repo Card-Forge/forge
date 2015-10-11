@@ -58,6 +58,18 @@ public class ComputerUtilMana {
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana) {
         return payManaCost(sa, ai, true, extraMana, true);
     }
+    
+    /**
+     * Return the number of colors used for payment for Converge
+     */
+    public static int getConvergeCount(final SpellAbility sa, final Player ai) {
+    	ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
+    	if (payManaCost(cost, sa, ai, true, true)) {
+    		return cost.getSunburst();
+    	} else {
+    		return 0;
+    	}
+    }
 
     // Does not check if mana sources can be used right now, just checks for potential chance.
     public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
