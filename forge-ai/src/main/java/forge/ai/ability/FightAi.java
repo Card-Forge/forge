@@ -173,10 +173,10 @@ public class FightAi extends SpellAbilityAi {
         // Evaluate creature pairs
         for (Card humanCreature : humCreatures) {
             for (Card aiCreature : aiCreatures) {
-                if (sa.isSpell()) {   // heroic triggers adding counters
-                    final int heroic = getHeroicBonus(aiCreature);
-                    power += heroic;
-                    toughness += heroic;
+                if (source.isSpell()) {   // heroic triggers adding counters and prowess
+                	final int bonus = getSpellBonus(aiCreature);
+                    power += bonus;
+                    toughness += bonus;
                 }
                 if ("PowerDmg".equals(sa.getParam("AILogic"))) {
                     if (FightAi.canKill(aiCreature, humanCreature, power)) {
@@ -204,9 +204,9 @@ public class FightAi extends SpellAbilityAi {
     }
 
 	/**
-	 * Compute the number of +1/+1 counters added by Heroic
+	 * Compute the bonus from Heroic +1/+1 counters or Prowess
 	 */
-	private static int getHeroicBonus(final Card aiCreature) {
+	private static int getSpellBonus(final Card aiCreature) {
 		for (Trigger t : aiCreature.getTriggers()) {
 		    if (t.getMode() == TriggerType.SpellCast) {
 		        final Map<String, String> params = t.getMapParams();
@@ -217,6 +217,9 @@ public class FightAi extends SpellAbilityAi {
 		                return AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
 		            }
 		            break;
+		        }
+		        if ("ProwessPump".equals(params.get("Execute"))) {
+		        	return 1;
 		        }
 		    }
 		}
