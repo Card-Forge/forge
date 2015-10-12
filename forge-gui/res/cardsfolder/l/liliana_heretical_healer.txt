@@ -6,7 +6,7 @@ K:Lifelink
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Whenever another nontoken creature you control dies, exile CARDNAME, then return her to the battlefield transformed under her owner's control. If you do, put a 2/2 black Zombie creature token onto the battlefield.
 SVar:TrigTransform:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | WithCounters$ LOYALTY_3 | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | b 2 2 zombie ORI | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie ORI | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_heretical_healer.jpg
 AlternateMode:DoubleFaced
