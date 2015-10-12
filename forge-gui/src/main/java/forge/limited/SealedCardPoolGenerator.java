@@ -77,13 +77,8 @@ public class SealedCardPoolGenerator {
         final CardPool humanPool = sd.getCardPool(true);
         if (humanPool == null) { return null; }
 
-        // System.out.println(humanPool);
-
-        // This seems to be limited by the MAX_DRAFT_PLAYERS constant
-        // in DeckGroupSerializer.java. You could create more AI decks
-        // but only the first seven would load. --BBU
-        Integer rounds = SGuiChoose.getInteger("How many opponents are you willing to face?", 1, 7);
-        if (rounds == null) { return null; }
+        // Just assume 7 opponents, allow to play any/all later
+        int rounds = 7;
 
         final String sDeckName = SOptionPane.showInputDialog(
                 "Save this card pool as:",

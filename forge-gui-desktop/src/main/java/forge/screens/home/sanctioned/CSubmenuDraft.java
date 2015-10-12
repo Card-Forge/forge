@@ -199,6 +199,9 @@ public enum CSubmenuDraft implements ICDoc {
         combo.removeAllItems();
 
         final DeckProxy humanDeck = view.getLstDecks().getSelectedItem();
+        if (humanDeck == null) {
+            return;
+        }
 
         if (VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected()) {
             // Single opponent

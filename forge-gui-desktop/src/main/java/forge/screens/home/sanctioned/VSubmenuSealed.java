@@ -5,14 +5,13 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import forge.toolbox.*;
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.game.GameType;
@@ -29,10 +28,6 @@ import forge.screens.home.LblHeader;
 import forge.screens.home.StartButton;
 import forge.screens.home.VHomeUI;
 import forge.screens.home.VHomeUI.PnlDisplay;
-import forge.toolbox.FButton;
-import forge.toolbox.FLabel;
-import forge.toolbox.FPanel;
-import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextPane;
 
 /** 
@@ -51,8 +46,14 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     /** */
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Sealed Deck");
 
+    private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart = new StartButton();
     private final DeckManager lstDecks = new DeckManager(GameType.Sealed, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
+
+    private final JRadioButton radSingle = new FRadioButton("Play an opponent");
+    private final JRadioButton radAll = new FRadioButton("Play all 7 opponents");
+
+    private final JComboBox<String> cbOpponent = new JComboBox<String>();
 
     private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
@@ -103,7 +104,19 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
 
         pnlDisplay.add(btnBuildDeck, "w 250px!, h 30px!, ax center, gap 0 10% 0 20px");
         pnlDisplay.add(new ItemManagerContainer(lstDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
-        pnlDisplay.add(btnStart, "gap 0 10% 50px 50px, ax center");
+        //pnlDisplay.add(btnStart, "gap 0 10% 50px 50px, ax center");
+
+        final JXButtonPanel grpPanel = new JXButtonPanel();
+        grpPanel.add(radSingle, "w 200px!, h 30px!");
+        grpPanel.add(radAll, "w 200px!, h 30px!");
+        radSingle.setSelected(true);
+        grpPanel.add(cbOpponent, "w 200px!, h 30px!");
+        pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        pnlStart.setOpaque(false);
+        pnlStart.add(grpPanel, "gapright 20");
+        pnlStart.add(btnStart);
+
+        pnlDisplay.add(pnlStart, "gap 0 10% 50px 50px, ax center");
 
         pnlDisplay.repaintSelf();
         pnlDisplay.revalidate();
@@ -152,6 +165,14 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     public DeckManager getLstDecks() {
         return lstDecks;
     }
+
+    public boolean isSingleSelected() {
+        return radSingle.isSelected();
+    }
+    public JComboBox<String> getCbOpponent() { return cbOpponent; }
+    public JRadioButton getRadSingle() { return radSingle; }
+    public JRadioButton getRadAll() { return radAll; }
+
 
     /** */
     public void showDirections() {
