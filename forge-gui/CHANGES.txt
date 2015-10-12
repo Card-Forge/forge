@@ -8,6 +8,12 @@ Forge Beta: 10-02-2015 ver 1.5.46
 Release Notes
 -------------
 
+- Quest Draft Tournament Fixes -
+Draft tournaments have gone through a round of bug fixes and improvements. Many bugs have been fixed and extra
+safeguards have been put in place. More sets have been made available to the draft generator to increase variety.
+Previously broken drafts that crashed Forge should also now work, allowing you to continue your tournament.
+
+
 - Add Basic Lands in desktop version of the game -
 Forge now has an "Add Basic Lands" window (can be found in the deck editor next to the Main Deck/Sideboard toggle) which allows you
 to easily and quickly add the needed basic lands (from any set you like and with any art you prefer) to your deck. This functionality
@@ -41,14 +47,14 @@ When click, Add Filter > Advanced... will open Advanced Search dialog which will
 
 - Keyboard shortcuts for Auto Yield -
 There are two new keyboard shortcuts now that can be used to quickly set up an
-auto-yield for the current ability on stack without having to use the mouse. 
+auto-yield for the current ability on stack without having to use the mouse.
 By default the shortcuts are:
 - "Y" enables auto-yield and, if applicable, enables "Always Yes" (if the trigger
 is optional).
 - "N" enables auto-yield and, if applicable, enables "Always No" (if the trigger
 is optional).
 The shortcuts can be changed in the Preferences under Game Settings in the main
-Forge menu. 
+Forge menu.
 
 
 - New Battle for Zendikar cards -
