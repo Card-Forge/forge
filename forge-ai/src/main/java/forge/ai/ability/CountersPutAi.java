@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.ai.*;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
@@ -15,18 +14,14 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class CountersPutAi extends SpellAbilityAi {
@@ -133,43 +128,7 @@ public class CountersPutAi extends SpellAbilityAi {
         	if (type.equals("P1P1")) {
         		nPump = amount;
         	}
-        	final AbilitySub tgtFight = sa.getSubAbility();
-            CardCollection aiCreatures = ai.getCreaturesInPlay();
-            aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
-            aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
-            ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
-
-            CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
-            humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
-            ComputerUtilCard.sortByEvaluateCreature(humCreatures);
-            if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
-            	return false;
-            }
-            for (Card humanCreature : humCreatures) {
-            	for (Card aiCreature : aiCreatures) {
-            	    if (sa.isSpell()) {   //heroic triggers adding counters
-                        for (Trigger t : aiCreature.getTriggers()) {
-                            if (t.getMode() == TriggerType.SpellCast) {
-                                final Map<String, String> params = t.getMapParams();
-                                if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer")) 
-                                		&& params.containsKey("Execute")) {
-                                    SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
-                                    if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
-                                        int n = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
-                                        nPump += n;
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
-            		if (FightAi.shouldFight(aiCreature, humanCreature, nPump, nPump)) {
-            			sa.getTargets().add(aiCreature);
-            			tgtFight.getTargets().add(humanCreature);
-            			return true;
-            		}
-            	}
-            }
+        	return FightAi.canFightAi(ai, sa, nPump, nPump);
         }
         
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {

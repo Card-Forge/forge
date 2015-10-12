@@ -4,15 +4,21 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class FightAi extends SpellAbilityAi {
@@ -131,13 +137,99 @@ public class FightAi extends SpellAbilityAi {
         }
         return true;
     }
-    public static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {
+    
+    /**
+     * Logic for evaluating fight effects
+     * @param ai controlling player
+     * @param sa host SpellAbility
+     * @param toughness bonus to toughness
+     * @param power	bonus to power
+     * @return true if fight effect should be played, false otherwise
+     */
+    public static boolean canFightAi(final Player ai, final SpellAbility sa, int power, int toughness) {
+    	final Card source = sa.getHostCard();
+        final AbilitySub tgtFight = sa.getSubAbility();
+        if ("Savage Punch".equals(source.getName()) && !ai.hasFerocious()) {
+            power = 0;
+            toughness = 0;
+        }
+        // Get sorted creature lists
+        CardCollection aiCreatures = ai.getCreaturesInPlay();
+        CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
+		if ("Time to Feed".equals(source.getName())) {	// flip sa
+			aiCreatures = CardLists.getTargetableCards(aiCreatures, tgtFight);
+			aiCreatures = ComputerUtil.getSafeTargets(ai, tgtFight, aiCreatures);
+			humCreatures = CardLists.getTargetableCards(humCreatures, sa);
+		} else {
+			aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
+			aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
+			humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
+		}
+        ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
+        ComputerUtilCard.sortByEvaluateCreature(humCreatures);
+        if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
+            return false;
+        }
+        // Evaluate creature pairs
+        for (Card humanCreature : humCreatures) {
+            for (Card aiCreature : aiCreatures) {
+                if (sa.isSpell()) {   // heroic triggers adding counters
+                    final int heroic = getHeroicBonus(aiCreature);
+                    power += heroic;
+                    toughness += heroic;
+                }
+                if ("PowerDmg".equals(sa.getParam("AILogic"))) {
+                    if (FightAi.canKill(aiCreature, humanCreature, power)) {
+                        sa.getTargets().add(aiCreature);
+                        tgtFight.resetTargets();
+                        tgtFight.getTargets().add(humanCreature);
+                        return true;
+                    }
+                } else {
+                    if (FightAi.shouldFight(aiCreature, humanCreature, power, toughness)) {
+                    	if ("Time to Feed".equals(source.getName())) {	// flip targets
+                    		final Card tmp = aiCreature;
+                    		aiCreature = humanCreature;
+                    		humanCreature = tmp;
+                    	}
+                        sa.getTargets().add(aiCreature);
+                        tgtFight.resetTargets();
+                        tgtFight.getTargets().add(humanCreature);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+	/**
+	 * Compute the number of +1/+1 counters added by Heroic
+	 */
+	private static int getHeroicBonus(final Card aiCreature) {
+		for (Trigger t : aiCreature.getTriggers()) {
+		    if (t.getMode() == TriggerType.SpellCast) {
+		        final Map<String, String> params = t.getMapParams();
+		        if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer")) 
+		                && params.containsKey("Execute")) {
+		            SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
+		            if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
+		                return AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
+		            }
+		            break;
+		        }
+		    }
+		}
+		return 0;
+	}
+    
+    private static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {
     	if (canKill(fighter, opponent, pumpAttack)) {
-    		if (!canKill(opponent, fighter, -pumpDefense)) {
+    		if (!canKill(opponent, fighter, -pumpDefense)) {	// can survive
     			return true;
     		} else {
     			final Random r = MyRandom.getRandom();
-    			if (r.nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {
+    			if (r.nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {	// trade
     				return true;
     			}
     		}

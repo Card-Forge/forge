@@ -3,33 +3,25 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
-import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class EffectAi extends SpellAbilityAi {
@@ -161,48 +153,7 @@ public class EffectAi extends SpellAbilityAi {
                 	return false;
                 }
             } else if (logic.equals("Fight")) {
-                CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
-                humCreatures = CardLists.getTargetableCards(humCreatures, sa);
-                ComputerUtilCard.sortByEvaluateCreature(humCreatures);
-
-                final AbilitySub tgtFight = sa.getSubAbility();
-                CardCollection aiCreatures = ai.getCreaturesInPlay();
-                aiCreatures = CardLists.getTargetableCards(aiCreatures, tgtFight);
-                aiCreatures = ComputerUtil.getSafeTargets(ai, tgtFight, aiCreatures);
-                ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
-
-                if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
-                	return false;
-                }
-                int buffedAtk = 0, buffedDef = 0;
-                for (Card humanCreature : humCreatures) {
-                	for (Card aiCreature : aiCreatures) {
-                	    if (sa.isSpell()) {   //heroic triggers adding counters
-                            for (Trigger t : aiCreature.getTriggers()) {
-                                if (t.getMode() == TriggerType.SpellCast) {
-                                    final Map<String, String> params = t.getMapParams();
-                                    if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer")) 
-                                    		&& params.containsKey("Execute")) {
-                                        SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
-                                        if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
-                                            int amount = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
-                                            buffedAtk += amount;
-                                            buffedDef += amount;
-                                        }
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                		if (FightAi.shouldFight(aiCreature, humanCreature, buffedAtk, buffedDef)) {
-                			tgtFight.getTargets().add(aiCreature);
-                			sa.getTargets().add(humanCreature);
-                			return true;
-                		} else {
-                		    return false;
-                		}
-                	}
-                }
+                return FightAi.canFightAi(ai, sa, 0, 0);
             } else if (logic.equals("Burn")) {
                 // for DamageDeal sub-abilities (eg. Wild Slash, Skullcrack)
                 SpellAbility burn = sa.getSubAbility();
