@@ -190,7 +190,12 @@ public class QuestDataIO {
         }
 
         if (saveVersion < 8) {
-        	QuestDataIO.setFinalField(QuestData.class, "isCharmActive", newData, false);
+            // Active Charm replaced by matchLength field
+        	//QuestDataIO.setFinalField(QuestData.class, "isCharmActive", newData, false);
+        }
+
+        if (saveVersion < 10) {
+            QuestDataIO.setFinalField(QuestData.class, "matchLength", newData, 3);
         }
 
         final QuestAssets qS = newData.getAssets();

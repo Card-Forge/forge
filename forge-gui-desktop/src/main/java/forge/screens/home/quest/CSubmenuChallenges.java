@@ -103,11 +103,14 @@ public enum CSubmenuChallenges implements ICDoc {
             }
         });
 
-        view.getCbCharm().addActionListener(new ActionListener() {
+        view.getCbxMatchLength().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                quest.setCharmState(view.getCbCharm().isSelected());
-                quest.save();
+                String match = view.getCbxMatchLength().getSelectedItem();
+                if (match != null) {
+                    quest.setMatchLength(match.substring(match.length() - 1));
+                    quest.save();
+                }
             }
         });
     }
@@ -153,6 +156,10 @@ public enum CSubmenuChallenges implements ICDoc {
         }
 
         final JXButtonPanel grpPanel = new JXButtonPanel();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Match - Best of ").append(FModel.getQuest().getMatchLength());
+        view.getCbxMatchLength().setSelectedItem(sb.toString());
 
         boolean haveAnyChallenges = true;
         for (final QuestEventChallenge qc : challenges) {

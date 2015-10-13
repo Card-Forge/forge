@@ -48,7 +48,9 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     private final StartButton btnStart  = new StartButton();
     private final FComboBoxWrapper<String> cbxPet  = new FComboBoxWrapper<String>();
     private final FCheckBox cbPlant = new FCheckBox("Summon Plant");
-    private final FCheckBox cbCharm = new FCheckBox("Use Charm of Vigor");
+
+    private final FComboBoxWrapper<String> cbxMatchLength  = new FComboBoxWrapper<String>();
+
     private final FLabel lblZep   = new FLabel.Builder().text("<html>Launch<br>Zeppelin</html>")
             .hoverable(true).icon(FSkin.getIcon(FSkinProp.ICO_QUEST_ZEP))
             .fontSize(16).build();
@@ -106,7 +108,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         pnlStats.add(lblLife, constraints);
         pnlStats.add(lblWorld, constraints);
         pnlStats.add(cbPlant, constraints);
-        pnlStats.add(cbCharm, constraints);
+        cbxMatchLength.addTo(pnlStats, constraints);
         cbxPet.addTo(pnlStats, constraints);
         pnlStats.add(lblZep, "w 130px!, h 60px!, gap 0 0 0 5px");
         pnlStats.setOpaque(false);
@@ -292,12 +294,9 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         return parentCell;
     }
 
-    /**
-     * @return the cbCharm
-     */
     @Override
-    public FCheckBox getCbCharm() {
-        return cbCharm;
+    public FComboBoxWrapper<String> getCbxMatchLength() {
+        return cbxMatchLength;
     }
 
     @Override

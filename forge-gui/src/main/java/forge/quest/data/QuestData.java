@@ -41,7 +41,7 @@ import java.util.Map;
  */
 public final class QuestData {
     /** Holds the latest version of the Quest Data. */
-    public static final int CURRENT_VERSION_NUMBER = 9;
+    public static final int CURRENT_VERSION_NUMBER = 10;
 
     // This field places the version number into QD instance,
     // but only when the object is created through the constructor
@@ -63,7 +63,7 @@ public final class QuestData {
     private QuestAssets assets;
     private QuestAchievements achievements;
     private final Map<Integer, String> petSlots = new HashMap<>();
-    private boolean isCharmActive = false;
+    private int matchLength = 3;
 
     public QuestData() { //needed for XML serialization
     }
@@ -210,17 +210,6 @@ public final class QuestData {
         worldId = newId;
     }
 
-	/**
-	 * @return the isCharmActive
-	 */
-	public boolean isCharmActive() {
-		return isCharmActive;
-	}
-
-	/**
-	 * @param isCharmActive the isCharmActive to set
-	 */
-	public void setCharmActive(boolean isCharmActive) {
-		this.isCharmActive = isCharmActive;
-	}
+    public void setMatchLength(int len) { matchLength = len; }
+    public int getMatchLength() { return matchLength; }
 }

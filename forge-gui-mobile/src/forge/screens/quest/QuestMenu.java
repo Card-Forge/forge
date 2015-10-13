@@ -304,8 +304,8 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     }
 
     @Override
-    public ICheckBox getCbCharm() {
-        return statsScreen.getCbCharm();
+    public IComboBox<String> getCbxMatchLength() {
+        return statsScreen.getCbxMatchLength();
     }
 
     @Override

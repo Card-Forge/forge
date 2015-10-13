@@ -43,6 +43,7 @@ public enum QuestItemType {
     POUND_FLESH("Pound of Flesh", QuestItemPoundFlesh.class, QuestItemCondition.class),
     /** The AMULET. */
     CHARM("Charm of Vigor", QuestItemCharmOfVigor.class, QuestItemCondition.class),
+    CHARM_VIM("Charm of Vim", QuestItemCharmOfVim.class, QuestItemCondition.class),
 
     CASH_STAKES("Cash Stakes", QuestItemBasic.class, QuestItemCondition.class),
 

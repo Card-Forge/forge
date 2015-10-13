@@ -311,12 +311,21 @@ public class QuestUtil {
             }
         }
 
+        view.getCbxMatchLength().removeAllItems();
+        boolean activeCharms = false;
+        StringBuilder matchLength = new StringBuilder();
+        matchLength.append("Match - Best of ").append(qCtrl.getMatchLength());
+        if (qCtrl.getAssets().hasItem(QuestItemType.CHARM_VIM)) {
+            view.getCbxMatchLength().addItem("Match - Best of 1");
+            activeCharms = true;
+        }
+        view.getCbxMatchLength().addItem("Match - Best of 3");
         if (qCtrl.getAssets().hasItem(QuestItemType.CHARM)) {
-            view.getCbCharm().setVisible(true);
+            view.getCbxMatchLength().addItem("Match - Best of 5");
+            activeCharms = true;
         }
-        else {
-            view.getCbCharm().setVisible(false);
-        }
+        view.getCbxMatchLength().setSelectedItem(matchLength.toString());
+        view.getCbxMatchLength().setVisible(activeCharms);
 
         if (view.isChallengesView()) {
             view.getLblZep().setVisible(qCtrl.getAssets().hasItem(QuestItemType.ZEPPELIN));
@@ -413,7 +422,7 @@ public class QuestUtil {
             // Classic mode display changes
             view0.getCbxPet().setVisible(false);
             view0.getCbPlant().setVisible(false);
-            view0.getCbCharm().setVisible(false);
+            view0.getCbxMatchLength().setVisible(false);
             view0.getLblZep().setVisible(false);
             view0.getLblNextChallengeInWins().setVisible(false);
             view0.getBtnBazaar().setVisible(false);
@@ -563,7 +572,7 @@ public class QuestUtil {
         final GameRules rules = new GameRules(GameType.Quest);
         rules.setPlayForAnte(useAnte);
         rules.setMatchAnteRarity(matchAnteRarity);
-        rules.setGamesPerMatch(qData.getCharmState() ? 5 : 3);
+        rules.setGamesPerMatch(qData.getMatchLength());
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();

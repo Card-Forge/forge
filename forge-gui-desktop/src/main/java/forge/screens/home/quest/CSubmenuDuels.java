@@ -71,11 +71,14 @@ public enum CSubmenuDuels implements ICDoc {
             }
         });
 
-        view.getCbCharm().addActionListener(new ActionListener() {
+        view.getCbxMatchLength().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                quest.setCharmState(view.getCbCharm().isSelected());
-                quest.save();
+                String match = view.getCbxMatchLength().getSelectedItem();
+                if (match != null) {
+                    quest.setMatchLength(match.substring(match.length() - 1));
+                    quest.save();
+                }
             }
         });
 
@@ -153,6 +156,10 @@ public enum CSubmenuDuels implements ICDoc {
                 grpPanel.add(temp, rad, "w 100%!, h 135px!, gapy 15px");
             }
             view.getPnlDuels().add(grpPanel, "w 100%!");
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Match - Best of ").append(FModel.getQuest().getMatchLength());
+            view.getCbxMatchLength().setSelectedItem(sb.toString());
         }
     }
 

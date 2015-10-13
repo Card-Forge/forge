@@ -23,8 +23,8 @@ public interface IVQuestStats {
     IButton getLblWinStreak();
 
     IComboBox<String> getCbxPet();
+    IComboBox<String> getCbxMatchLength();
     ICheckBox getCbPlant();
-    ICheckBox getCbCharm();
 
     IButton getLblZep();
 

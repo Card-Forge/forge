@@ -32,6 +32,7 @@
         <string>Map</string>
         <string>Zeppelin</string>
         <string>Charm of Vigor</string>
+        <string>Charm of Vim</string>
       </items> 	
     </stall>
     <stall name="Nursery" displayName="Force of Nature Nursery" icon="ICO_QUEST_LEAF">
@@ -92,6 +93,12 @@ Effect: Reduces maximum life by 1.</description>
 
 Effect: Gives +1 to maximum life.
 Fine Print: Loses effectiveness after 15 uses.</description>
+    </item>
+    <item name="Charm of Vim" maxLevel="1" basePrice="1000"
+    	itemType="CHARM_VIM" icon="ICO_QUEST_CHARM">
+    	<description>A charm fills you with energy, speeding your movements.
+    	
+Effect: You may have each match be best of 1 instead of 3.</description>
     </item>
     <item name="Charm of Vigor" maxLevel="1" basePrice="1000"
     	itemType="CHARM" icon="ICO_QUEST_CHARM">

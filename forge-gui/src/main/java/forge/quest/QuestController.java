@@ -116,17 +116,17 @@ public class QuestController {
                 this.model.getPetSlots().put(slot, name);
         }
     }
-    
-    public void setCharmState(boolean active) {
-    	if (this.model != null) {
-    		this.model.setCharmActive(active);
-    	}
+
+    public void setMatchLength(String len) {
+        if (this.model != null) {
+            this.model.setMatchLength(Integer.parseInt(len));
+        }
     }
-    
-    public boolean getCharmState() {
-    	return this.model == null ? false : this.model.isCharmActive();
+
+    public int getMatchLength() {
+        return this.model == null ? 3 : this.model.getMatchLength();
     }
-    
+
     /**
      * 
      * @param slot &emsp; int

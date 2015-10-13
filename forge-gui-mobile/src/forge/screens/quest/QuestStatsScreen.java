@@ -60,7 +60,7 @@ public class QuestStatsScreen extends FScreen {
         .icon(FSkinImage.QUEST_MAP)
         .font(FSkinFont.get(16)).iconScaleFactor(1).build());
     private final FComboBox<String> cbxPet = scroller.add(new FComboBox<String>());
-    private final FCheckBox cbCharm = scroller.add(new FCheckBox("Use Charm of Vigor"));
+    private final FComboBox<String> cbxMatchLength  = new FComboBox<String>();
     private final FCheckBox cbPlant = scroller.add(new FCheckBox("Summon Plant"));
     private final FLabel lblZep = scroller.add(new FLabel.Builder().text("Launch Zeppelin").icon(FSkinImage.QUEST_ZEP).font(FSkinFont.get(16)).opaque().build());
 
@@ -88,8 +88,8 @@ public class QuestStatsScreen extends FScreen {
     public ICheckBox getCbPlant() {
         return cbPlant;
     }
-    public ICheckBox getCbCharm() {
-        return cbCharm;
+    public IComboBox<String> getCbxMatchLength() {
+        return cbxMatchLength;
     }
     public IButton getLblZep() {
         return lblZep;
@@ -110,13 +110,18 @@ public class QuestStatsScreen extends FScreen {
                 FModel.getQuest().save();
             }
         });
-        cbCharm.setCommand(new FEventHandler() {
+
+        cbxMatchLength.setDropDownChangeHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FModel.getQuest().setCharmState(cbCharm.isSelected());
-                FModel.getQuest().save();
+                String match = cbxMatchLength.getSelectedItem();
+                if (match != null) {
+                    FModel.getQuest().setMatchLength(match.substring(match.length() - 1));
+                    FModel.getQuest().save();
+                }
             }
         });
+
         cbPlant.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
