@@ -134,7 +134,13 @@ public class CostDiscard extends CostPartWithList {
                     }
                     return false;
                 }
-                if ((amount != null) && (amount > handList.size())) {
+                int adjustment = 0;
+                if (source.isInZone(ZoneType.Hand) && activator.equals(source.getOwner())) {
+                    // If this card is in my hand, I can't use it to pay for it's own cost
+                    adjustment = 1;
+                }
+
+                if ((amount != null) && (amount > handList.size() - adjustment)) {
                     // not enough cards in hand to pay
                     return false;
                 }
