@@ -21,6 +21,7 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
@@ -125,8 +126,39 @@ public class DrawAi extends SpellAbilityAi {
             return false;
         }
 
+        if (!canLoot(ai, sa)) {
+        	return false;
+        }
         return true;
     }
+
+    /**
+     * Check if looter (draw + discard) effects are worthwhile
+     */
+	private boolean canLoot(Player ai, SpellAbility sa) {
+		final AbilitySub sub = sa.getSubAbility();
+        if (sub != null && sub.getApi() == ApiType.Discard) {
+        	int numHand = ai.getCardsIn(ZoneType.Hand).size();
+        	if (sa.getHostCard().isSpell()) {
+        		numHand--;	// remember to count looter card if it is a spell
+        	}
+        	int numDraw = 1;
+            if (sa.hasParam("NumCards")) {
+                numDraw = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+            }
+            int numDiscard = 1;
+            if (sub.hasParam("NumCards")) {
+            	numDiscard = AbilityUtils.calculateAmount(sa.getHostCard(), sub.getParam("NumCards"), sub);
+            }
+            if (numHand == 0 && numDraw == numDiscard) {
+            	return false;	// no looting since everything is dumped
+            }
+            if (numHand + numDraw < numDiscard) {
+            	return false;	// net loss of cards
+            }
+        }
+        return true;
+	}
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
