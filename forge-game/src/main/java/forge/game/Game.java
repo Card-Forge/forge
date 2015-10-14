@@ -146,7 +146,7 @@ public class Game {
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
     private final HashMap<Integer, Card> changeZoneLKIInfo = new HashMap<>();
-    public final void setChangeZoneLKIInfo(Card c) {
+    public final void addChangeZoneLKIInfo(Card c) {
         if (c == null) {
             return;
         }
