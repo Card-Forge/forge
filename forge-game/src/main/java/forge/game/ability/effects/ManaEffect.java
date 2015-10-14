@@ -43,20 +43,24 @@ public class ManaEffect extends SpellAbilityEffect {
                 int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa) : 1;
                 if (tgt == null || p.canBeTargetedBy(sa)) {
                     Player activator = sa.getActivatingPlayer();
-                    //String colorsNeeded = abMana.getExpressChoice();
+                    String express = abMana.getExpressChoice();
                     String[] colorsProduced = abMana.getComboColors().split(" ");
-                    
                     
                     final StringBuilder choiceString = new StringBuilder();
                     ColorSet colorOptions = null;
+                    String[] colorsNeeded = express.isEmpty() ? null : express.split(" ");
                     if (!abMana.isAnyMana()) {
                         colorOptions = ColorSet.fromNames(colorsProduced);
-                    }
-                    else {
-                        colorOptions = ColorSet.fromNames(MagicColor.Constant.ONLY_COLORS);
-                    }
+					} else {
+						colorOptions = ColorSet.fromNames(MagicColor.Constant.ONLY_COLORS);
+					}
+                    final ColorSet fullOptions = colorOptions;
                     for (int nMana = 1; nMana <= amount; nMana++) {
                         String choice = "";
+                        if (colorsNeeded != null && colorsNeeded.length >= nMana) {	// select from express choices if possible
+							colorOptions = ColorSet
+									.fromMask(fullOptions.getColor() & MagicColor.fromName(colorsNeeded[nMana - 1]));
+                        }
                         byte chosenColor = activator.getController().chooseColor("Select Mana to Produce", sa, colorOptions);
                         if (chosenColor == 0)
                             throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + activator + " color mana choice is empty for " + card.getName());
