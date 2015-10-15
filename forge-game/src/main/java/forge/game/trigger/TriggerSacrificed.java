@@ -78,4 +78,12 @@ public class TriggerSacrificed extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Sacrificed: ").append(this.getRunParams().get("Card"));
+        return sb.toString();
+    }
+
 }

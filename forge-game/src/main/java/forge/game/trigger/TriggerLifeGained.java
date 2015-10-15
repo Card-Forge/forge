@@ -66,4 +66,12 @@ public class TriggerLifeGained extends Trigger {
         sa.setTriggeringObject("LifeAmount", this.getRunParams().get("LifeAmount"));
         sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Player: ").append(this.getRunParams().get("Player")).append(", ");
+        sb.append("Gained Amount: ").append(this.getRunParams().get("LifeAmount"));
+        return sb.toString();
+    }
 }

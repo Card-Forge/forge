@@ -69,4 +69,10 @@ public class TriggerUntaps extends Trigger {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
 
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Untapped: ").append(this.getRunParams().get("Card"));
+        return sb.toString();
+    }
 }

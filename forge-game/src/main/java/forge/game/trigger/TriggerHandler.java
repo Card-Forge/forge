@@ -537,7 +537,8 @@ public class TriggerHandler {
         final WrappedAbility wrapperAbility = new WrappedAbility(regtrig, sa, decider);
         wrapperAbility.setTrigger(true);
         wrapperAbility.setMandatory(isMandatory);
-        wrapperAbility.setDescription(wrapperAbility.getStackDescription());
+        //wrapperAbility.setDescription(wrapperAbility.getStackDescription());
+        wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
         if (regtrig.isStatic()) {
             wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);

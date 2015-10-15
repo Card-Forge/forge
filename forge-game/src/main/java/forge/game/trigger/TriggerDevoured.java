@@ -64,4 +64,11 @@ public class TriggerDevoured extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Devoured", this.getRunParams().get("Devoured"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Devoured: ").append(this.getRunParams().get("Devoured"));
+        return sb.toString();
+    }
 }

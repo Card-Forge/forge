@@ -71,4 +71,11 @@ public class TriggerFlippedCoin extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Player: ").append(this.getRunParams().get("Player"));
+        return sb.toString();
+    }
 }

@@ -240,4 +240,13 @@ public class TriggerSpellAbilityCast extends Trigger {
         sa.setTriggeringObject("CurrentStormCount", this.getRunParams().get("CurrentStormCount"));
         sa.setTriggeringObject("CastSACMC", this.getRunParams().get("CastSACMC"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Card: ").append(this.getRunParams().get("Card")).append(", ");
+        sb.append("Activator: ").append(this.getRunParams().get("Activator")).append(", ");
+        sb.append("SpellAbility: ").append(this.getRunParams().get("SpellAbility"));
+        return sb.toString();
+    }
 }

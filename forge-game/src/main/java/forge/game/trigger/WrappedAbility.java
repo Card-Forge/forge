@@ -189,8 +189,13 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
+    public String toUnsuppressedString() {
+        return regtrig.toString();
+    }
+
+    @Override
     public String getStackDescription() {
-        final StringBuilder sb = new StringBuilder(regtrig.toString());
+        final StringBuilder sb = new StringBuilder(toUnsuppressedString());
         if (this.getTargetRestrictions() != null) {
             sb.append(" (Targeting ");
             for (final GameObject o : this.getTargets().getTargets()) {
@@ -204,6 +209,10 @@ public class WrappedAbility extends Ability {
             }
             sb.append(")");
         }
+
+        sb.append(" [");
+        sb.append(regtrig.getImportantStackObjects(this));
+        sb.append("]");
 
         return sb.toString();
     }

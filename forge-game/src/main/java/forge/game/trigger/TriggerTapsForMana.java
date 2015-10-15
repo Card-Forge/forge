@@ -108,4 +108,13 @@ public class TriggerTapsForMana extends Trigger {
         sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
         sa.setTriggeringObject("Produced", this.getRunParams().get("Produced"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tapped for Mana: ").append(this.getRunParams().get("Card"));
+        sb.append("Produced: ").append(this.getRunParams().get("Produced"));
+        return sb.toString();
+    }
+
 }

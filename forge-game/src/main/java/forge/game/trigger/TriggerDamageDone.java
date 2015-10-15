@@ -107,4 +107,13 @@ public class TriggerDamageDone extends Trigger {
         // This parameter is here because LKI information related to combat doesn't work properly
         sa.setTriggeringObject("DefendingPlayer", this.getRunParams().get("DefendingPlayer"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Damage Source: ").append(this.getRunParams().get("DamageSource")).append(", ");
+        sb.append("Damaged: ").append(this.getRunParams().get("DamageTarget")).append(", ");
+        sb.append("Amount: ").append(this.getRunParams().get("DamageAmount"));
+        return sb.toString();
+    }
 }

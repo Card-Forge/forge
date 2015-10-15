@@ -75,4 +75,11 @@ public class TriggerAttached extends Trigger {
         sa.setTriggeringObject("Source", this.getRunParams().get("AttachSource"));
         sa.setTriggeringObject("Target", this.getRunParams().get("AttachTarget"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Attachee: ").append(this.getRunParams().get("AttachTarget"));
+        return sb.toString();
+    }
 }

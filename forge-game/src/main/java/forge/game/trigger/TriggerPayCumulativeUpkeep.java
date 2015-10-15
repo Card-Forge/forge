@@ -72,4 +72,11 @@ public class TriggerPayCumulativeUpkeep extends Trigger {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
         sa.setTriggeringObject("PayingMana", this.getRunParams().get("PayingMana"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Mana: ").append(this.getRunParams().get("PayingMana"));
+        return sb.toString();
+    }
 }

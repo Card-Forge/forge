@@ -72,4 +72,9 @@ public class TriggerClashed extends Trigger {
     public void setTriggeringObjects(final SpellAbility sa) {
         // No triggered-variables for you :(
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        return "";
+    }
 }

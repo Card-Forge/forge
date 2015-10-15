@@ -88,4 +88,12 @@ public class TriggerDiscarded extends Trigger {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
         sa.setTriggeringObject("Cause", this.getRunParams().get("Cause"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Discarded: ").append(this.getRunParams().get("Card")).append(", ");
+        sb.append("Cause: ").append(this.getRunParams().get("Cause"));
+        return sb.toString();
+    }
 }

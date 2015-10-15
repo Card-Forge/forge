@@ -74,4 +74,11 @@ public class TriggerChampioned extends Trigger {
         sa.setTriggeringObject("Championed", this.getRunParams().get("Championed"));
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Championed: ").append(this.getRunParams().get("Championed"));
+        return sb.toString();
+    }
 }

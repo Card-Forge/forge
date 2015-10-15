@@ -82,4 +82,12 @@ public class TriggerAttackerBlocked extends Trigger {
         sa.setTriggeringObject("Blockers", this.getRunParams().get("Blockers"));
         sa.setTriggeringObject("NumBlockers", this.getRunParams().get("NumBlockers"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Attacker: ").append(this.getRunParams().get("Attacker"));
+        sb.append(" Number Blockers: ").append(this.getRunParams().get("NumBlockers"));
+        return sb.toString();
+    }
 }

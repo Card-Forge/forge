@@ -82,4 +82,12 @@ public class TriggerCountered extends Trigger {
         sa.setTriggeringObject("Cause", this.getRunParams().get("Cause"));
         sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Countered: ").append(this.getRunParams().get("Card")).append(", ");
+        sb.append("Cause: ").append(this.getRunParams().get("Cause"));
+        return sb.toString();
+    }
 }

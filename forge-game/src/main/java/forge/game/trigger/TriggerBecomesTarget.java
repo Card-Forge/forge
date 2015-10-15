@@ -92,4 +92,12 @@ public class TriggerBecomesTarget extends Trigger {
         sa.setTriggeringObject("Source", ((SpellAbility) this.getRunParams().get("SourceSA")).getHostCard());
         sa.setTriggeringObject("Target", this.getRunParams().get("Target"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Source: ").append(((SpellAbility) this.getRunParams().get("SourceSA")).getHostCard()).append(", ");
+        sb.append("Target: ").append(this.getRunParams().get("Target"));
+        return sb.toString();
+    }
 }

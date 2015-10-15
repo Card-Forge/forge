@@ -68,6 +68,14 @@ public class TriggerVote extends Trigger {
         sa.setTriggeringObject("OtherVoters", getVoters(this.getHostCard().getController(), votes, true, true));
     }
 
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Voters: ").append(this.getRunParams().get("OtherVoters"));
+        return sb.toString();
+    }
+
+
     private static FCollection<Player> getVoters(final Player player,
             final ListMultimap<Object, Player> votes,
             final boolean isOpponent, final boolean votedOtherchoice) {

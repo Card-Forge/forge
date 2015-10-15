@@ -91,4 +91,11 @@ public class TriggerBlocks extends Trigger {
         sa.setTriggeringObject("Blocker", this.getRunParams().get("Blocker"));
         sa.setTriggeringObject("Attackers", this.getRunParams().get("Attackers"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Blocker: ").append(this.getRunParams().get("Blocker"));
+        return sb.toString();
+    }
 }

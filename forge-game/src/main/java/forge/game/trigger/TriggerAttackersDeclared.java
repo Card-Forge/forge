@@ -76,4 +76,11 @@ public class TriggerAttackersDeclared extends Trigger {
         sa.setTriggeringObject("Attackers", this.getRunParams().get("Attackers"));
         sa.setTriggeringObject("AttackingPlayer", this.getRunParams().get("AttackingPlayer"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Number Attackers: ").append(this.getRunParams().get("Attackers"));
+        return sb.toString();
+    }
 }

@@ -83,4 +83,12 @@ public class TriggerCombatDamageDoneOnce extends Trigger {
         sa.setTriggeringObject("Sources", this.getRunParams().get("DamageSources"));
         sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Sources: ").append(this.getRunParams().get("DamageSources")).append(", ");
+        sb.append("Target: ").append(this.getRunParams().get("DamageTarget"));
+        return sb.toString();
+    }
 }

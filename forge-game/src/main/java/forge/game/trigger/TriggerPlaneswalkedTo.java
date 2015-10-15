@@ -55,4 +55,10 @@ public class TriggerPlaneswalkedTo extends Trigger {
         sa.setTriggeringObject("Cards", this.getRunParams().get("Cards"));
     }
 
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Planeswalked To: ").append(this.getRunParams().get("Cards"));
+        return sb.toString();
+    }
 }

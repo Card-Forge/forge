@@ -65,4 +65,9 @@ public class TriggerSetInMotion extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Scheme", this.getRunParams().get("Scheme"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        return "";
+    }
 }

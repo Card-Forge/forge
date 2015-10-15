@@ -56,4 +56,9 @@ public class TriggerNewGame extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        return "";
+    }
 }

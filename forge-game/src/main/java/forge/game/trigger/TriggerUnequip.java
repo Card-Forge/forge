@@ -75,4 +75,13 @@ public class TriggerUnequip extends Trigger {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
         sa.setTriggeringObject("Equipment", this.getRunParams().get("Equipment"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Equippee: ").append(this.getRunParams().get("Card")).append(", ");
+        sb.append("Equipment: ").append(this.getRunParams().get("Equipment"));
+        return sb.toString();
+    }
+
 }

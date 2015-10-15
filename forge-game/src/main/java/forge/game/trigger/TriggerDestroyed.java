@@ -70,4 +70,12 @@ public class TriggerDestroyed extends Trigger {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
         sa.setTriggeringObject("Causer", this.getRunParams().get("Causer"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Destroyed: ").append(this.getRunParams().get("Card")).append(", ");
+        sb.append("Destroyer: ").append(this.getRunParams().get("Causer"));
+        return sb.toString();
+    }
 }

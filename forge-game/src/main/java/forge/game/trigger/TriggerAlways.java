@@ -58,4 +58,9 @@ public class TriggerAlways extends Trigger {
     @Override
     public void setTriggeringObjects(final SpellAbility sa) {
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        return "";
+    }
 }

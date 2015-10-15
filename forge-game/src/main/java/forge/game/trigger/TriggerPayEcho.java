@@ -71,4 +71,9 @@ public class TriggerPayEcho extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        return "";
+    }
 }

@@ -73,4 +73,11 @@ public class TriggerAttackerUnblocked extends Trigger {
         sa.setTriggeringObject("Defender", this.getRunParams().get("Defender"));
         sa.setTriggeringObject("DefendingPlayer", this.getRunParams().get("DefendingPlayer"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Attacker: ").append(this.getRunParams().get("Attacker"));
+        return sb.toString();
+    }
 }

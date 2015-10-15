@@ -63,4 +63,12 @@ public class TriggerTransformed extends Trigger {
         sa.setTriggeringObject("Transformer", this.getRunParams().get("Transformer"));
     }
 
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Transformed: ").append(this.getRunParams().get("Transformer"));
+        return sb.toString();
+    }
+
+
 }

@@ -66,4 +66,11 @@ public class TriggerFight extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Fighter", this.getRunParams().get("Fighter"));
     }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Fighter: ").append(this.getRunParams().get("Fighter"));
+        return sb.toString();
+    }
 }
