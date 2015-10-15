@@ -68,7 +68,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         .fontSize(12).build();
 
     private final FLabel lblDir3 = new FLabel.Builder()
-        .text("Then, you will play against each of the AI opponents.")
+        .text("Then, you may play against each of the AI opponents, or one of the opponents.")
         .fontSize(12).build();
 
     private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("Build New Sealed Deck").fontSize(16).build();

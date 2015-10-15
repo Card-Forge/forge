@@ -134,14 +134,14 @@ public enum CSubmenuSealed implements ICDoc {
             }
         }
 
-        String duelType = (String)VSubmenuDraft.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
+        String duelType = (String)VSubmenuSealed.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
         final DeckGroup opponentDecks = FModel.getDecks().getSealed().get(humanDeck.getName());
         if (gauntlet) {
             if ("Gauntlet".equals(duelType)) {
                 final int rounds = opponentDecks.getAiDecks().size();
                 FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
             } else if ("Tournament".equals(duelType)) {
-                // TODO Allow for tournament style draft, instead of always a gauntlet
+                // TODO Allow for tournament style sealed, instead of always a gauntlet
             }
             return;
         }
@@ -158,7 +158,7 @@ public enum CSubmenuSealed implements ICDoc {
         final int aiIndex = Integer.parseInt(duelType)-1;
         final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
         if (aiDeck == null) {
-            throw new IllegalStateException("Draft: Computer deck is null!");
+            throw new IllegalStateException("Sealed: Computer deck is null!");
         }
 
         final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
@@ -167,7 +167,7 @@ public enum CSubmenuSealed implements ICDoc {
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+        hostedMatch.startMatch(GameType.Sealed, null, starter, human, GuiBase.getInterface().getNewGuiGame());
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -201,7 +201,7 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         }
 
-        if (VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected()) {
+        if (VSubmenuSealed.SINGLETON_INSTANCE.isSingleSelected()) {
             // Single opponent
             final DeckGroup opponentDecks = FModel.getDecks().getSealed().get(humanDeck.getName());
             int indx = 0;
