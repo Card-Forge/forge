@@ -135,30 +135,31 @@ public class DrawAi extends SpellAbilityAi {
     /**
      * Check if looter (draw + discard) effects are worthwhile
      */
-	private boolean canLoot(Player ai, SpellAbility sa) {
-		final AbilitySub sub = sa.getSubAbility();
+    private boolean canLoot(Player ai, SpellAbility sa) {
+        final AbilitySub sub = sa.getSubAbility();
         if (sub != null && sub.getApi() == ApiType.Discard) {
-        	int numHand = ai.getCardsIn(ZoneType.Hand).size();
-        	if (sa.getHostCard().isSpell()) {
-        		numHand--;	// remember to count looter card if it is a spell
-        	}
-        	int numDraw = 1;
+            final Card source = sa.getHostCard();
+            int numHand = ai.getCardsIn(ZoneType.Hand).size();
+            if (source.isSpell() && ai.getCardsIn(ZoneType.Hand).contains(source)) {
+                numHand--; // remember to count looter card if it is a spell in hand
+            }
+            int numDraw = 1;
             if (sa.hasParam("NumCards")) {
-                numDraw = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+                numDraw = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
             }
             int numDiscard = 1;
             if (sub.hasParam("NumCards")) {
-            	numDiscard = AbilityUtils.calculateAmount(sa.getHostCard(), sub.getParam("NumCards"), sub);
+                numDiscard = AbilityUtils.calculateAmount(source, sub.getParam("NumCards"), sub);
             }
             if (numHand == 0 && numDraw == numDiscard) {
-            	return false;	// no looting since everything is dumped
+                return false; // no looting since everything is dumped
             }
             if (numHand + numDraw < numDiscard) {
-            	return false;	// net loss of cards
+                return false; // net loss of cards
             }
         }
         return true;
-	}
+    }
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
