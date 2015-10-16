@@ -67,7 +67,7 @@ public class TriggerPhase extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(this.getRunParams().get("Player"));
+        sb.append("Phase: ").append(sa.getTriggeringObject("Player"));
         return sb.toString();
     }
 }

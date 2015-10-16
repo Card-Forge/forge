@@ -114,7 +114,8 @@ public class TriggerAttacks extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attacker: ").append(this.getRunParams().get("Attacker"));
+
+        sb.append("Attacker: ").append(sa.getTriggeringObject("Attacker"));
         return sb.toString();
     }
 }
