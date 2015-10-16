@@ -46,7 +46,7 @@ public class TriggerLosesGame extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(this.getRunParams().get("Player"));
+        sb.append("Player: ").append(sa.getTriggeringObject("Player"));
         return sb.toString();
     }
 }

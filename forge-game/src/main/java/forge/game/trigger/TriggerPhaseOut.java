@@ -41,7 +41,7 @@ public class TriggerPhaseOut extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Phased Out: ").append(this.getRunParams().get("Card"));
+        sb.append("Phased Out: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 }

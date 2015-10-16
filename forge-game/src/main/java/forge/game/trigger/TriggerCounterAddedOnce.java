@@ -79,7 +79,7 @@ public class TriggerCounterAddedOnce extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Added once: ").append(this.getRunParams().get("Card"));
+        sb.append("Added once: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 }

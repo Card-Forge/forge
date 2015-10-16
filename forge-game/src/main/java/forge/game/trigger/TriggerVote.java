@@ -71,7 +71,7 @@ public class TriggerVote extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Voters: ").append(this.getRunParams().get("OtherVoters"));
+        sb.append("Voters: ").append(sa.getTriggeringObject("OtherVoters"));
         return sb.toString();
     }
 

@@ -79,7 +79,7 @@ public class TriggerAttached extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attachee: ").append(this.getRunParams().get("AttachTarget"));
+        sb.append("Attachee: ").append(sa.getTriggeringObject("Target"));
         return sb.toString();
     }
 }

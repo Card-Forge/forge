@@ -68,7 +68,7 @@ public class TriggerTurnFaceUp extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Turn Face up: ").append(this.getRunParams().get("Card"));
+        sb.append("Turn Face up: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 

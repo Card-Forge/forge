@@ -92,8 +92,8 @@ public class TriggerDiscarded extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Discarded: ").append(this.getRunParams().get("Card")).append(", ");
-        sb.append("Cause: ").append(this.getRunParams().get("Cause"));
+        sb.append("Discarded: ").append(sa.getTriggeringObject("Card")).append(", ");
+        sb.append("Cause: ").append(sa.getTriggeringObject("Cause"));
         return sb.toString();
     }
 }

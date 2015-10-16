@@ -70,7 +70,7 @@ public class TriggerFight extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Fighter: ").append(this.getRunParams().get("Fighter"));
+        sb.append("Fighter: ").append(sa.getTriggeringObject("Fighter"));
         return sb.toString();
     }
 }

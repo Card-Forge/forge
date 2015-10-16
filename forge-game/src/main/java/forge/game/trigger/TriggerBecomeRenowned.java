@@ -68,7 +68,7 @@ public class TriggerBecomeRenowned extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Renowned: ").append(this.getRunParams().get("Card"));
+        sb.append("Renowned: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 }

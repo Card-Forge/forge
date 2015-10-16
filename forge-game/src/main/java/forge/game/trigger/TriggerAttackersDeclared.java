@@ -80,7 +80,7 @@ public class TriggerAttackersDeclared extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Number Attackers: ").append(this.getRunParams().get("Attackers"));
+        sb.append("Number Attackers: ").append(sa.getTriggeringObject("Attackers"));
         return sb.toString();
     }
 }

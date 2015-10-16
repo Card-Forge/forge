@@ -95,7 +95,7 @@ public class TriggerBlocks extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Blocker: ").append(this.getRunParams().get("Blocker"));
+        sb.append("Blocker: ").append(sa.getTriggeringObject("Blocker"));
         return sb.toString();
     }
 }

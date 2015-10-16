@@ -35,7 +35,7 @@ public class TriggerPhaseIn extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Phased In: ").append(this.getRunParams().get("Card"));
+        sb.append("Phased In: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 }

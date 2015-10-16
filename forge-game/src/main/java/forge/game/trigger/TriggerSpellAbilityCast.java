@@ -244,9 +244,9 @@ public class TriggerSpellAbilityCast extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Card: ").append(this.getRunParams().get("Card")).append(", ");
-        sb.append("Activator: ").append(this.getRunParams().get("Activator")).append(", ");
-        sb.append("SpellAbility: ").append(this.getRunParams().get("SpellAbility"));
+        sb.append("Card: ").append(sa.getTriggeringObject("Card")).append(", ");
+        sb.append("Activator: ").append(sa.getTriggeringObject("Activator")).append(", ");
+        sb.append("SpellAbility: ").append(sa.getTriggeringObject("SpellAbility"));
         return sb.toString();
     }
 }

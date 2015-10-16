@@ -74,8 +74,8 @@ public class TriggerDestroyed extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Destroyed: ").append(this.getRunParams().get("Card")).append(", ");
-        sb.append("Destroyer: ").append(this.getRunParams().get("Causer"));
+        sb.append("Destroyed: ").append(sa.getTriggeringObject("Card")).append(", ");
+        sb.append("Destroyer: ").append(sa.getTriggeringObject("Causer"));
         return sb.toString();
     }
 }

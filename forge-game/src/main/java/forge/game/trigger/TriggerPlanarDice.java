@@ -61,7 +61,7 @@ public class TriggerPlanarDice extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Roller: ").append(this.getRunParams().get("Player"));
+        sb.append("Roller: ").append(sa.getTriggeringObject("Player"));
         return sb.toString();
     }
 }

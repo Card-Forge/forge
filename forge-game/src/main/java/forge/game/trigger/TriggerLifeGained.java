@@ -70,8 +70,8 @@ public class TriggerLifeGained extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player: ").append(this.getRunParams().get("Player")).append(", ");
-        sb.append("Gained Amount: ").append(this.getRunParams().get("LifeAmount"));
+        sb.append("Player: ").append(sa.getTriggeringObject("Player")).append(", ");
+        sb.append("Gained Amount: ").append(sa.getTriggeringObject("LifeAmount"));
         return sb.toString();
     }
 }

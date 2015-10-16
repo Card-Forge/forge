@@ -58,7 +58,7 @@ public class TriggerPlaneswalkedFrom extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Planeswalked From: ").append(this.getRunParams().get("Cards"));
+        sb.append("Planeswalked From: ").append(sa.getTriggeringObject("Cards"));
         return sb.toString();
     }
 

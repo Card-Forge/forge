@@ -111,9 +111,9 @@ public class TriggerDamageDone extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Damage Source: ").append(this.getRunParams().get("DamageSource")).append(", ");
-        sb.append("Damaged: ").append(this.getRunParams().get("DamageTarget")).append(", ");
-        sb.append("Amount: ").append(this.getRunParams().get("DamageAmount"));
+        sb.append("Damage Source: ").append(sa.getTriggeringObject("Source")).append(", ");
+        sb.append("Damaged: ").append(sa.getTriggeringObject("Target")).append(", ");
+        sb.append("Amount: ").append(sa.getTriggeringObject("DamageAmount"));
         return sb.toString();
     }
 }

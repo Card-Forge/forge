@@ -76,7 +76,7 @@ public class TriggerPayCumulativeUpkeep extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Mana: ").append(this.getRunParams().get("PayingMana"));
+        sb.append("Mana: ").append(sa.getTriggeringObject("PayingMana"));
         return sb.toString();
     }
 }

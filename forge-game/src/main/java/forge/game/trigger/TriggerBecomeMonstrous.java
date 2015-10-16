@@ -68,7 +68,7 @@ public class TriggerBecomeMonstrous extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Monstrosity: ").append(this.getRunParams().get("Card"));
+        sb.append("Monstrous: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 }

@@ -88,7 +88,7 @@ public class TriggerCounterRemoved extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Removed to: ").append(this.getRunParams().get("Card"));
+        sb.append("Removed from: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 }

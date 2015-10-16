@@ -112,8 +112,8 @@ public class TriggerTapsForMana extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Tapped for Mana: ").append(this.getRunParams().get("Card"));
-        sb.append("Produced: ").append(this.getRunParams().get("Produced"));
+        sb.append("Tapped for Mana: ").append(sa.getTriggeringObject("Card"));
+        sb.append("Produced: ").append(sa.getTriggeringObject("Produced"));
         return sb.toString();
     }
 

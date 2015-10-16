@@ -73,7 +73,7 @@ public class TriggerTaps extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Tapped: ").append(this.getRunParams().get("Card"));
+        sb.append("Tapped: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 

@@ -94,8 +94,8 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Attacker: ").append(this.getRunParams().get("Attacker"));
-        sb.append(",  Blocker: ").append(this.getRunParams().get("Blocker"));
+        sb.append("Attacker: ").append(sa.getTriggeringObject("Attacker")).append(", ");
+        sb.append("Blocker: ").append(sa.getTriggeringObject("Blocker"));
         return sb.toString();
     }
 }

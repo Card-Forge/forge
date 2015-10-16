@@ -78,7 +78,7 @@ public class TriggerChampioned extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Championed: ").append(this.getRunParams().get("Championed"));
+        sb.append("Championed: ").append(sa.getTriggeringObject("Championed"));
         return sb.toString();
     }
 }

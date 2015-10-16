@@ -57,7 +57,7 @@ public class TriggerLandPlayed extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Land played: ").append(this.getRunParams().get("Card"));
+        sb.append("Land played: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 

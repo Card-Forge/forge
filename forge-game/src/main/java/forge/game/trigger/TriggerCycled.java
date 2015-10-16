@@ -55,7 +55,7 @@ public class TriggerCycled extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Cycled: ").append(this.getRunParams().get("Card"));
+        sb.append("Cycled: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
     }
 
