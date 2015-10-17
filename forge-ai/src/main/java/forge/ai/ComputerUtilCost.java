@@ -390,6 +390,17 @@ public class ComputerUtilCost {
                 }
             }
         }
+        
+        // Try not to lose Planeswalker if not threatened
+        if (sa.getRestrictions().isPwAbility()) {
+            final CostPart cost = sa.getPayCosts().getCostParts().get(0);
+            if (cost instanceof CostRemoveCounter && cost.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {
+                // refuse to pay if opponent has no creature threats or 
+                if (player.getOpponent().getCreaturesInPlay().isEmpty() || MyRandom.getRandom().nextFloat() < .5f) {
+                    return false;
+                }
+            }
+        }
 
         return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded) 
             && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);

@@ -64,6 +64,8 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -857,22 +859,25 @@ public class AiController {
             if ("True".equals(source.getSVar("NonStackingEffect")) && ai.isCardInPlay(source.getName())) {
                 p -= 9;
             }
-            // sort planeswalker abilities for ultimate
+            // sort planeswalker abilities with most costly first
             if (sa.getRestrictions().isPwAbility()) {
+                final CostPart cost = sa.getPayCosts().getCostParts().get(0);
+                if (cost instanceof CostRemoveCounter) {
+                    p += cost.convertAmount();
+                } else if (cost instanceof CostPutCounter) {
+                    p -= cost.convertAmount();
+                }
                 if (sa.hasParam("Ultimate")) {
                     p += 9;
                 }
             }
-    
+
             if (ApiType.DestroyAll == sa.getApi()) {
                 p += 4;
             }
-            if (ApiType.Token == sa.getApi() && noCreatures) {
-            	//hack to force planeswalkers to defend themselves
-            	p += 3;
-            }
+
             else if (ApiType.Mana == sa.getApi()) {
-            	p -= 9;
+                p -= 9;
             }
 
             return p;

@@ -21,6 +21,8 @@ import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -121,6 +123,22 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
         
+        boolean pwAbility = sa.getRestrictions().isPwAbility();
+        if (pwAbility) {
+            // Planeswalker token ability with loyalty costs should be played in Main1 or it might
+            // never be used due to other positive abilities. AI is kept from spamming them by the
+            // loyalty cost of each usage. Zero/loyalty gain token abilities can be evaluated as
+            // per normal.
+            boolean hasCost = false;
+            for (CostPart c : sa.getPayCosts().getCostParts()) {
+                if (c instanceof CostRemoveCounter) {
+                    hasCost = true;
+                    break;
+                }
+            }
+            pwAbility = hasCost;
+        }
+        
         PhaseHandler ph = game.getPhaseHandler();
         // Don't generate tokens without haste before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2)
@@ -133,13 +151,13 @@ public class TokenAi extends SpellAbilityAi {
                     buff = true;
                 }
             }
-            if (!buff && !sacOnStack) {
+            if (!buff && !sacOnStack && !pwAbility) {
                 return false;
             }
         }
         if ((ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn")
-                && !SpellAbilityAi.isSorcerySpeed(sa) && !haste && !sacOnStack) {
+                && !SpellAbilityAi.isSorcerySpeed(sa) && !haste && !sacOnStack && !pwAbility) {
             return false;
         }
         if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || game.getPhaseHandler().isPlayerTurn(opp))
