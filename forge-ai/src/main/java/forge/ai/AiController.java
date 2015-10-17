@@ -863,7 +863,7 @@ public class AiController {
             if (sa.getRestrictions().isPwAbility()) {
                 final CostPart cost = sa.getPayCosts().getCostParts().get(0);
                 if (cost instanceof CostRemoveCounter) {
-                    p += cost.convertAmount();
+                    p += cost.convertAmount() == null ? 1 : cost.convertAmount();
                 } else if (cost instanceof CostPutCounter) {
                     p -= cost.convertAmount();
                 }
