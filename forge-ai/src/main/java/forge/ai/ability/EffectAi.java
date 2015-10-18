@@ -8,6 +8,7 @@ import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -141,6 +142,22 @@ public class EffectAi extends SpellAbilityAi {
                     }
                 }
                 randomReturn = threatened;
+            } else if (logic.equals("Prevent")) {   // prevent burn spell from opponent
+                if (game.getStack().isEmpty()) {
+                    return false;
+                }
+                final SpellAbility saTop = game.getStack().peekAbility();
+                final Card host = saTop.getHostCard();
+                if (saTop.getActivatingPlayer() != ai   // from opponent
+                        && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)  // no prevent damage
+                        && host != null && (host.isInstant() || host.isSorcery())) {  // valid target
+                    final ApiType type = saTop.getApi();
+                    if (type == ApiType.DealDamage || type == ApiType.DamageAll) {  // burn spell
+                        sa.getTargets().add(host);
+                        return true;
+                    }
+                }
+                return false;
             } else if (logic.equals("NoGain")) {
             	// basic logic to cancel GainLife on stack
                 if (game.getStack().isEmpty()) {
