@@ -202,7 +202,8 @@ public class PumpAi extends PumpAiBase {
                 && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
-                && !sa.hasParam("UntilYourNextTurn")) {
+                && !sa.hasParam("UntilYourNextTurn")
+                && !"Snapcaster".equals(sa.getParam("AILogic"))) {
             return false;
         }
 
@@ -278,6 +279,26 @@ public class PumpAi extends PumpAiBase {
         if (!sa.isCurse()) {
             // Don't target cards that will die.
             list = ComputerUtil.getSafeTargets(ai, sa, list);
+        }
+        
+        if ("Snapcaster".equals(sa.getParam("AILogic"))) {  // can afford to and will play snap-casted spell
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            Card targetSnapcast = null;
+            for (Card c : list) {
+                for (SpellAbility ab : c.getSpellAbilities()) {
+                    final boolean play = AiPlayDecision.WillPlay == aic.canPlaySa(ab);
+                    final boolean pay = ComputerUtilCost.canPayCost(ab, ai);
+                    if (play && pay) {
+                        targetSnapcast = c;
+                        break;
+                    }
+                }
+            }
+            if (targetSnapcast == null) {
+                return false;
+            } else {
+                sa.getTargets().add(targetSnapcast);
+            }
         }
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {

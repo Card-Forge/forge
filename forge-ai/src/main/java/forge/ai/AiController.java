@@ -855,6 +855,10 @@ public class AiController {
             if (source.isEquipment() && noCreatures) {
                 p -= 9;
             }
+            // move snap-casted spells to front
+            if (source.isInZone(ZoneType.Graveyard) && source.hasKeyword("May be played")) {
+                p += 50;
+            }
             // artifacts and enchantments with effects that do not stack
             if ("True".equals(source.getSVar("NonStackingEffect")) && ai.isCardInPlay(source.getName())) {
                 p -= 9;

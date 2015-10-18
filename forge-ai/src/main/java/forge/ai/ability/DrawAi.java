@@ -23,6 +23,9 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
@@ -140,6 +143,23 @@ public class DrawAi extends SpellAbilityAi {
         if (sub != null && sub.getApi() == ApiType.Discard) {
             final Card source = sa.getHostCard();
             int numHand = ai.getCardsIn(ZoneType.Hand).size();
+            if ("Jace, Vryn's Prodigy".equals(source.getName())) {
+                boolean hasJace = false;
+                for (Card pw : CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
+                    for (String type : pw.getType().getSubtypes()) {
+                        if (type.equals("Jace")) {
+                            hasJace = true;
+                            break;
+                        }
+                    }
+                }
+                if (ai.getCardsIn(ZoneType.Graveyard).size() > 3) {
+                    if (hasJace) {
+                        return false;
+                    }
+                    return true;
+                }
+            }
             if (source.isSpell() && ai.getCardsIn(ZoneType.Hand).contains(source)) {
                 numHand--; // remember to count looter card if it is a spell in hand
             }
