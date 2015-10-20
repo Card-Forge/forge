@@ -4534,6 +4534,7 @@ forge-gui/res/cardsfolder/d/deserted_temple.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deserters_quarters.txt -text
 forge-gui/res/cardsfolder/d/desertion.txt -text
 forge-gui/res/cardsfolder/d/desolate_lighthouse.txt -text
+forge-gui/res/cardsfolder/d/desolation.txt -text
 forge-gui/res/cardsfolder/d/desolation_angel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/desolation_giant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/desolation_twin.txt -text

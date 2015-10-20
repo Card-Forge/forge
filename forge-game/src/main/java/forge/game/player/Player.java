@@ -120,6 +120,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private GameEntity mustAttackEntity = null;
     private boolean attackedWithCreatureThisTurn = false;
     private boolean activateLoyaltyAbilityThisTurn = false;
+    private boolean tappedLandForManaThisTurn = false;
     private int attackersDeclaredThisTurn = 0;
 
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
@@ -1565,7 +1566,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         stats.nextTurn();
     }
 
-    public final boolean getActivateLoyaltyAbilityThisTurn() {
+    public boolean hasTappedLandForManaThisTurn() {
+		return tappedLandForManaThisTurn;
+	}
+
+	public void setTappedLandForManaThisTurn(boolean tappedLandForManaThisTurn) {
+		this.tappedLandForManaThisTurn = tappedLandForManaThisTurn;
+	}
+
+	public final boolean getActivateLoyaltyAbilityThisTurn() {
         return activateLoyaltyAbilityThisTurn;
     }
     public final void setActivateLoyaltyAbilityThisTurn(final boolean b) {
@@ -1872,6 +1881,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (property.startsWith("DeclaredAttackerThisTurn")) {
             if (attackersDeclaredThisTurn <= 0) {
+                return false;
+            }
+        } else if (property.startsWith("TappedLandForManaThisTurn")) {
+            if (!this.tappedLandForManaThisTurn) {
                 return false;
             }
         } else if (property.startsWith("NoCardsInHandAtBeginningOfTurn")) {
@@ -2253,6 +2266,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
         setAttackedWithCreatureThisTurn(false);
         setActivateLoyaltyAbilityThisTurn(false);
+        setTappedLandForManaThisTurn(false);
         resetLandsPlayedThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();

@@ -169,6 +169,9 @@ public class AbilityManaPart implements java.io.Serializable {
         runParams.put("AbilityMana", sa);
         runParams.put("Produced", afterReplace);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
+        if (source.isLand()) {
+        	player.setTappedLandForManaThisTurn(true);
+        }
         // Clear Mana replacement
         this.manaReplaceType = "";
     } // end produceMana(String)
