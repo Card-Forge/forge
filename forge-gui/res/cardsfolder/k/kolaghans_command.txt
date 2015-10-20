@@ -2,7 +2,7 @@ Name:Kolaghan's Command
 ManaCost:1 B R
 Types:Instant
 A:SP$ Charm | Cost$ 1 B R | Choices$ DBReturn,DBDiscard,DBDestroy,DBDamage | CharmNum$ 2 | SpellDescription$ Choose two - Return target creature card from your graveyard to your hand; Target player discards a card; Destroy target artifact; CARDNAME deals 2 damage to target creature or player.
-SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature card | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature card | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
