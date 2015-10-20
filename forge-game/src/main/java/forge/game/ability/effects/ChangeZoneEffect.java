@@ -361,9 +361,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * <p>
      * changeKnownOriginResolve.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
@@ -547,6 +545,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Fizzle")) {
                         final FCollectionView<SpellAbility> spells = tgtC.getSpellAbilities();
                         for (SpellAbility spell : spells) {
+                            // Only fizzle spells, not anything else.
+                            if (!spell.isSpell())
+                                continue;
+
                             if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand) || tgtC.isInZone(ZoneType.Stack)) {
                                 final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
                                 if (si != null) { 
