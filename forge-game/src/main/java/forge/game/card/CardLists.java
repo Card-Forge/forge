@@ -59,6 +59,15 @@ public class CardLists {
         });
     }
 
+    public static CardCollection filterPower(final Iterable<Card> in, final int atLeastPower) {
+        return CardLists.filter(in, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.getNetPower() >= atLeastPower;
+            }
+        });
+    }
+
     public static final Comparator<Card> ToughnessComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
@@ -98,6 +107,18 @@ public class CardLists {
     public static void sortByCmcDesc(final List<Card> list) {
         Collections.sort(list, CmcComparatorInv);
     } // sortCMC
+
+    /**
+     * <p>
+     * sortAttackLowFirst.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     */
+    public static void sortByToughnessAsc(final List<Card> list) {
+        Collections.sort(list, ToughnessComparator);
+    } // sortAttackLowFirst()
 
     /**
      * <p>

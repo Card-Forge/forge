@@ -83,6 +83,24 @@ public class PumpAi extends PumpAiBase {
             if (sa.getParam("AILogic").equals("Never")) {
             	return false;
             }
+            if (sa.getParam("AILogic").equals("FellTheMighty")) {
+            	CardCollection aiList = ai.getCreaturesInPlay();
+            	if (aiList.isEmpty()) {
+            		return false;
+            	}
+            	CardLists.sortByPowerAsc(aiList);
+            	Card lowest = aiList.get(0);
+            	if (!sa.canTarget(lowest)) {
+            		return false;
+            	}
+            	CardCollection oppList = ai.getOpponent().getCreaturesInPlay();
+            	oppList = CardLists.filterPower(oppList, lowest.getNetPower()+1);
+            	if (ComputerUtilCard.evaluateCreatureList(oppList) > 200) {
+            		sa.resetTargets();
+            		sa.getTargets().add(lowest);
+            		return true;
+            	}
+            }
         }
         
         if (ComputerUtil.preventRunAwayActivations(sa)) {
