@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Birdy the Mighty 3
+Title=Birdy the Mighty
+Difficulty=hard
+Description=Mono G Eldrazi deck with Descendants' Path
+Icon=Birdy the Mighty.jpg
+Deck Type=constructed
+[main]
+4 Blisterpod
+2 Nest Invader
+4 All Is Dust
+1 Breaker of Armies
+4 Conduit of Ruin
+4 Eldrazi Temple
+1 Emrakul, the Aeons Torn
+2 Eye of Ugin
+4 Eyeless Watcher
+10 Forest
+4 Kozilek's Channeler
+2 Kozilek, Butcher of Truth
+1 Mox Emerald
+1 Mox Jet
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+4 Oblivion Sower
+3 Descendants' Path
+1 Sol Ring
+1 Grim Monolith
+1 Ulamog, the Ceaseless Hunger
+1 Ulamog, the Infinite Gyre
+2 Void Winnower
+[sideboard]
