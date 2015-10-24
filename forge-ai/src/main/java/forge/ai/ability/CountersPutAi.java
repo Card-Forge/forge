@@ -486,6 +486,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
             }
             else {
+                list = ComputerUtil.getSafeTargets(ai, sa, list);
                 if (preferred) {
                     choice = CountersAi.chooseBoonTarget(list, type);
                 }
