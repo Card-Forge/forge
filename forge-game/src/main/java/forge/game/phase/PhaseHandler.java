@@ -785,7 +785,7 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         if (nextPlayer.hasKeyword("Skip your next turn.")) {
-            nextPlayer.removeKeyword("Skip your next turn.");
+            nextPlayer.removeKeyword("Skip your next turn.", false);
             if (extraTurn == null) { 
                 setPlayerTurn(nextPlayer);
             }

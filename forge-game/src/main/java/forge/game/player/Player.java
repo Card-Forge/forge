@@ -936,11 +936,19 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param keyword the keyword to remove.
      */
     public final void removeKeyword(final String keyword) {
+    	removeKeyword(keyword, true);
+    }
+    
+    
+    public final void removeKeyword(final String keyword, final boolean allInstances) {
         boolean keywordRemoved = false;
 
         for (final KeywordsChange ck : changedKeywords.values()) {
             if (ck.getKeywords().remove(keyword)) {
                 keywordRemoved = true;
+                if (!allInstances) {
+                	break;
+                }
             }
         }
 
