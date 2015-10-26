@@ -740,6 +740,20 @@ public class ComputerUtilCombat {
                     return false;
                 }
             }
+            if (trigParams.containsKey("Attacked")) {
+            	if (combat.isAttacking(attacker)) {
+	            	GameEntity attacked = combat.getDefenderByAttacker(attacker);
+	                if (!CardTraitBase.matchesValid(attacked, trigParams.get("Attacked").split(","), source)) {
+	                    return false;
+	                }
+            	} else {
+            		if ("You,Planeswalker.YouCtrl".equals(trigParams.get("Attacked"))) {
+            			if (source.getController() == attacker.getController()) {
+            				return false;
+            			}
+            		}
+            	}
+            }
         }
 
         // defender == null means unblocked
