@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Agent K 2
+Title=Agent K
+Difficulty=medium
+Description=Mono B mill deck with Mindcrank
+Icon=Agent K.jpg
+Deck Type=constructed
+[main]
+23 Swamp
+1 Bojuka Bog
+1 Trepanation Blade
+4 Mindcrank
+4 Culling Drone
+4 Balustrade Spy
+4 Grisly Spectacle
+4 Returned Centaur
+4 Nightveil Specter
+2 Extractor Demon
+1 Lord of the Void
+1 Horrifying Revelation
+1 Destroy the Evidence
+2 Geth's Verdict
+1 Basilica Screecher
+1 Geralf's Messenger
+1 Laquatus's Champion
+1 Animate Dead
+[sideboard]
