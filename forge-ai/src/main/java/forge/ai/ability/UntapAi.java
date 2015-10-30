@@ -159,11 +159,22 @@ public class UntapAi extends SpellAbilityAi {
                 }
             } 
             else {
-	            if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
-	                choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
-	            } else {
-	                choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
-	            }
+            	//Untap Time Vault? - Yes please!
+            	for (Card c : untapList) {
+            		if (c.getName().equals("Time Vault")) {
+            			choice = c;
+            			break;
+            		}
+            	}
+            	if (choice == null) {
+	            	if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
+		                choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
+		            } else {
+		            	if (!sa.getPayCosts().hasManaCost() || sa.isTrigger()) {
+		            		choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
+		            	}
+		            }
+            	}
             }
 
             if (choice == null) { // can't find anything left
