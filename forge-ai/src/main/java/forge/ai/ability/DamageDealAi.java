@@ -176,9 +176,14 @@ public class DamageDealAi extends DamageAiBase {
             }
         });
 
-        Card targetCard;
+        Card targetCard = null;
         if (pl.isOpponentOf(ai) && !killables.isEmpty()) {
-            targetCard = ComputerUtilCard.getBestCreatureAI(killables);
+            if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
+                targetCard = ComputerUtilCard.getBestPlaneswalkerAI(killables);
+            }
+            if (targetCard == null) {
+                targetCard = ComputerUtilCard.getBestCreatureAI(killables);
+            }
 
             return targetCard;
         }
@@ -189,7 +194,12 @@ public class DamageDealAi extends DamageAiBase {
 
         if (!hPlay.isEmpty()) {
             if (pl.isOpponentOf(ai)) {
-                targetCard = ComputerUtilCard.getBestCreatureAI(hPlay);
+                if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
+                    targetCard = ComputerUtilCard.getBestPlaneswalkerAI(hPlay);
+                }
+                if (targetCard == null) {
+                    targetCard = ComputerUtilCard.getBestCreatureAI(hPlay);
+                }
             } else {
                 targetCard = ComputerUtilCard.getWorstCreatureAI(hPlay);
             }
@@ -400,7 +410,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
                 
-            } else if (tgt.canTgtCreature()) {
+            } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal

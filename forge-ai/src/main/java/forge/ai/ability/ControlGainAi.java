@@ -31,7 +31,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -175,8 +174,7 @@ public class ControlGainAi extends SpellAbilityAi {
             }
 
             if (hasPW) {
-                CardCollection planeswalkers = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
-                t = ComputerUtilCard.getMostExpensivePermanentAI(planeswalkers, sa, true);
+                t = ComputerUtilCard.getBestPlaneswalkerAI(list);
             } else if (hasCreature) {
                 t = ComputerUtilCard.getBestCreatureAI(list);
                 if (lose != null && lose.contains("EOT")) {

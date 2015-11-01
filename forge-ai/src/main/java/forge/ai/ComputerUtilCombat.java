@@ -2080,7 +2080,7 @@ public class ComputerUtilCombat {
      */
     public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat,
             final boolean noPrevention) {
-        final int killDamage = ComputerUtilCombat.getDamageToKill(c);
+        final int killDamage = c.isPlaneswalker() ? c.getCurrentLoyalty() : ComputerUtilCombat.getDamageToKill(c);
 
         if (c.hasKeyword("Indestructible") || c.getShieldCount() > 0) {
             if (!(source.hasKeyword("Wither") || source.hasKeyword("Infect"))) {

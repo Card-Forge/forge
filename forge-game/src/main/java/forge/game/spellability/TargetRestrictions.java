@@ -422,6 +422,20 @@ public class TargetRestrictions {
         }
         return false;
     }
+    
+    /**
+     * Can tgt planeswalker.
+     * 
+     * @return true, if successful
+     */
+    public final boolean canTgtPlaneswalker() {
+        for (final String s : this.validTgts) {
+            if (s.startsWith("Planeswalker")) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * <p>
