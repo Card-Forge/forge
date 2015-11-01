@@ -940,11 +940,13 @@ public class ComputerUtilCard {
         		//TODO:add threat from triggers and other abilities (ie. Master of Cruelties)
         	}
         	if (ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-        		threat *= 0.1;
+        		threat *= 0.1f;
         	}
         	if (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
-        		threat *= 0.1;
+        		threat *= 0.1f;
         	}
+        } else if (c.isPlaneswalker()) {
+            threat = 1;
         } else {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();
