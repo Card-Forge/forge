@@ -31,6 +31,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -74,6 +75,7 @@ public class ControlGainAi extends SpellAbilityAi {
         boolean hasArtifact = false;
         boolean hasEnchantment = false;
         boolean hasLand = false;
+        boolean hasPW = false;
 
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
@@ -157,6 +159,9 @@ public class ControlGainAi extends SpellAbilityAi {
                 if (c.isEnchantment()) {
                     hasEnchantment = true;
                 }
+                if (c.isPlaneswalker()) {
+                    hasPW = true;
+                }
             }
 
             if (list.isEmpty()) {
@@ -169,7 +174,10 @@ public class ControlGainAi extends SpellAbilityAi {
                 }
             }
 
-            if (hasCreature) {
+            if (hasPW) {
+                CardCollection planeswalkers = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
+                t = ComputerUtilCard.getMostExpensivePermanentAI(planeswalkers, sa, true);
+            } else if (hasCreature) {
                 t = ComputerUtilCard.getBestCreatureAI(list);
                 if (lose != null && lose.contains("EOT")) {
                     // Remember to always attack with this creature since it'll bounce back to its owner at end of turn anyway
@@ -192,6 +200,7 @@ public class ControlGainAi extends SpellAbilityAi {
             hasArtifact = false;
             hasLand = false;
             hasEnchantment = false;
+            hasPW = false;
         }
 
         return true;
