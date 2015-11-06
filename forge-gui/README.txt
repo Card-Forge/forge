@@ -1470,6 +1470,37 @@ Now, when prompted to select a creature type for a card like Obelisk of Urd, cre
 This should make it so, more often than not, you can just accept the dialog without searching.
 
 
+- Add Basic Lands in desktop version of the game -
+Forge now has an "Add Basic Lands" window (can be found in the deck editor next to the Main Deck/Sideboard toggle) which allows you
+to easily and quickly add the needed basic lands (from any set you like and with any art you prefer) to your deck. This functionality
+works in all major modes (Constructed, Booster Draft, Sealed Deck) including Quest mode.
+
+
+- Quest mode changes related to basic lands -
+Now that Add Basic Lands can be used to add basic lands to your deck, Quest mode underwent several changes to adapt to this new
+functionality. In particular:
+- Quest mode now depends on the player using Add Basic Lands to add basic lands to decks instead of buying basic lands from the
+quest shop or using the generated basic lands from the initial card pool.
+- Basic lands added in Quest mode using "Add Basic Lands" cannot be sold (and are not shown in the Quest Spell Shop interface)
+ to avoid cheating.
+- Quest mode no longer generates basic lands for the starting card pool to avoid clutter.
+- Quest mode shop no longer sells basic lands (to avoid clutter; you can add any basic lands you want anyway).
+- Quest mode draft tournament correctly allows to use "Add Basic Lands" only after drafting is over and deck construction begins
+ (and the button is hidden during the drafting process).
+- Otherwise, basic lands found normally during the quest (e.g. found in booster packs, drafted in quest draft tournaments,
+purchased in preconstructed decks etc.) function as before and can be sold normally via the quest shop interface.
+
+
+- Permanent locations for Net Decks and Achievement trophies -
+All Net Deck categories should now find decks and won't stop returning decks when new decks are added
+A new "Download Achievement Images" button has been added to Content Downloaders for downloading awesome trophies for each achievement.
+
+
+- Advanced Search in Card and Deck managers -
+"Filter" button replaced with smaller button with search icon
+When click, Add Filter > Advanced... will open Advanced Search dialog which will allow configuring an advanced search filter using any combination of filter options and operators, connected in an easy to build boolean expression.
+
+
 ---------------------------
 
 This product includes software developed by the Indiana University Extreme! Lab (http://www.extreme.indiana.edu/).
