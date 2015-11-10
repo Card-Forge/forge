@@ -26,7 +26,7 @@ public class CharmAi extends SpellAbilityAi {
 
         // reset the chosen list. Otherwise it will be locked in forever
         sa.setChosenList(null);
-        List<AbilitySub> chosenList = min > 1 ? chooseMultipleOptionsAi(sa, ai, min) : chooseOptionsAi(sa, ai, timingRight, num, min, false);
+        List<AbilitySub> chosenList = min > 1 ? chooseMultipleOptionsAi(sa, ai, min) : chooseOptionsAi(sa, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"), false);
 
         if (chosenList.isEmpty()) {
             return false;
@@ -38,7 +38,7 @@ public class CharmAi extends SpellAbilityAi {
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    public static List<AbilitySub> chooseOptionsAi(SpellAbility sa, final Player ai, boolean playNow, int num, int min, boolean opponentChoser) {
+    public static List<AbilitySub> chooseOptionsAi(SpellAbility sa, final Player ai, boolean playNow, int num, int min, boolean allowRepeat, boolean opponentChoser) {
         if (sa.getChosenList() != null) {
             return sa.getChosenList();
         }

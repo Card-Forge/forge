@@ -184,7 +184,7 @@ public abstract class PlayerController {
     public abstract boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
     public abstract Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap);
 
-    public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num);
+    public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat);
 
     public abstract byte chooseColor(String message, SpellAbility sa, ColorSet colors);
     public abstract byte chooseColorAllowColorless(String message, Card c, ColorSet colors);

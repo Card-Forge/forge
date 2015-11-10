@@ -501,8 +501,8 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#chooseModeForAbility(forge.card.spellability.SpellAbility, java.util.List, int, int)
      */
     @Override
-    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num) {
-        return CharmAi.chooseOptionsAi(sa, player, sa.isTrigger(), num, min, !player.equals(sa.getActivatingPlayer()));
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
+        return CharmAi.chooseOptionsAi(sa, player, sa.isTrigger(), num, min, allowRepeat, !player.equals(sa.getActivatingPlayer()));
     }
 
     @Override

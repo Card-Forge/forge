@@ -52,9 +52,9 @@ public class CharmEffect extends SpellAbilityEffect {
         // so nothing to do in this resolve
     }
 
-
     @Override
     protected String getStackDescription(SpellAbility sa) {
+        // TODO Build StackDescription based on Chosen SubAbilities
         return "";
     }
 
@@ -79,7 +79,7 @@ public class CharmEffect extends SpellAbilityEffect {
             source.setChosenPlayer(chooser);
         }
         
-        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, min, num);
+        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, min, num, sa.hasParam(("CanRepeatModes")));
         chainAbilities(sa, chosen);
     }
 
@@ -98,12 +98,15 @@ public class CharmEffect extends SpellAbilityEffect {
         });
 
         for (AbilitySub sub : chosen) {
-            saDeepest.setSubAbility(sub);
-            sub.setActivatingPlayer(saDeepest.getActivatingPlayer());
-            sub.setParent(saDeepest);
+            // Clone the chosen, just in case the some subAb gets chosen multiple times
+            AbilitySub clone = (AbilitySub)sub.getCopy();
+
+            saDeepest.setSubAbility(clone);
+            clone.setActivatingPlayer(saDeepest.getActivatingPlayer());
+            clone.setParent(saDeepest);
 
             // to chain the next one (but make sure it goes all the way at the end of the SA chain)
-            saDeepest = sub;
+            saDeepest = clone;
             while (saDeepest.getSubAbility() != null) {
                 saDeepest = saDeepest.getSubAbility();
             }

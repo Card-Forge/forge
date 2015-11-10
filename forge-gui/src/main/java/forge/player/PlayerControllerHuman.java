@@ -1082,7 +1082,7 @@ public class PlayerControllerHuman
      * @see forge.game.player.PlayerController#chooseModeForAbility(forge.card.spellability.SpellAbility, java.util.List, int, int)
      */
     @Override
-    public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, final int min, final int num) {
+    public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, final int min, final int num, boolean allowRepeat) {
         final List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
         final String modeTitle = String.format("%s activated %s - Choose a mode", sa.getActivatingPlayer(), sa.getHostCard());
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
@@ -1098,7 +1098,9 @@ public class PlayerControllerHuman
                 break;
             }
 
-            choices.remove(a);
+            if (!allowRepeat) {
+                choices.remove(a);
+            }
             chosen.add(a);
         }
         return chosen;

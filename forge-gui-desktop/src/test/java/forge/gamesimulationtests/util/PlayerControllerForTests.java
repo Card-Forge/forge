@@ -444,7 +444,7 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num) {
+	public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
 		throw new IllegalStateException("Erring on the side of caution here...");
 	}
 
