@@ -18092,6 +18092,7 @@ forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text
 forge-gui/src/main/java/forge/deck/NetDeckCategory.java -text
 forge-gui/src/main/java/forge/deck/RandomDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
+forge-gui/src/main/java/forge/deck/io/DeckRecords.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadAchievementImages.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadPicturesLQ.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadPrices.java -text

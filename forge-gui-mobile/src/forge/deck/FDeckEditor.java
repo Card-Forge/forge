@@ -28,7 +28,6 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.planarconquest.ConquestUtil;
-import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
@@ -1444,7 +1443,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             // copy to new instance before adding to current folder so further changes are auto-saved
             currentFolder.add((T) model.copyTo(model.getName()));
-            model.setDirectory(currentFolder.getFullPath().substring(ForgeConstants.DECK_BASE_DIR.length()));
+            model.setDirectory(DeckProxy.getDeckDirectory(currentFolder));
             modelInStorage = true;
             setSaved(true);
 

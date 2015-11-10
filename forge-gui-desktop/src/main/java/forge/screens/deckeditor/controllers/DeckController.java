@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Supplier;
 
 import forge.deck.DeckBase;
-import forge.properties.ForgeConstants;
+import forge.deck.DeckProxy;
 import forge.screens.deckeditor.menus.DeckFileMenu;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
@@ -193,13 +193,7 @@ public class DeckController<T extends DeckBase> {
 
         // copy to new instance before adding to current folder so further changes are auto-saved
         currentFolder.add((T) model.copyTo(model.getName()));
-        try {
-            model.setDirectory(currentFolder.getFullPath().substring(ForgeConstants.DECK_BASE_DIR.length()));
-        } catch (Exception exception) {
-            // Set directory failed?
-            // TEMPORARILY Adding to fix quest mode saving
-
-        }
+        model.setDirectory(DeckProxy.getDeckDirectory(currentFolder));
         modelInStorage = true;
         setSaved(true);
 

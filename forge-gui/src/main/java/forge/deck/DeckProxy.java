@@ -27,6 +27,7 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
@@ -127,6 +128,15 @@ public class DeckProxy implements InventoryItem {
             return name;
         }
         return path + "/" + name;
+    }
+
+    public static String getDeckDirectory(final IStorage<?> currentFolder) {
+        String directory = currentFolder.getFullPath();
+        if (directory.startsWith(ForgeConstants.DECK_BASE_DIR)) {
+            //trim deck base directory from start of directory path
+            directory = directory.substring(ForgeConstants.DECK_BASE_DIR.length());
+        }
+        return directory;
     }
 
     public void invalidateCache() {
