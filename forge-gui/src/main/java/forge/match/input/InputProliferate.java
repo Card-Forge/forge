@@ -31,12 +31,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
         }
         else {
             for (final Entry<GameEntity, CounterType> ge : chosenCounters.entrySet()) {
-                if (ge.getKey() instanceof Player) {
-                    sb.append("* A poison counter to player ").append(ge.getKey()).append("\n");
-                }
-                else {
-                    sb.append("* ").append(ge.getKey()).append(" -> ").append(ge.getValue()).append("counter\n");
-                }
+                sb.append("* ").append(ge.getKey()).append(" -> ").append(ge.getValue()).append("counter\n");
             }
         }
 
@@ -79,7 +74,8 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
 
     @Override
     protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
-        if (player.getPoisonCounters() == 0 || player.hasKeyword("You can't get poison counters")) {
+        if (!player.hasCounters()) {
+            // Can't select a player without counters
             return;
         }
 
@@ -87,7 +83,21 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
         if (entityWasSelected) {
             this.chosenCounters.remove(player);
         } else {
-            this.chosenCounters.put(player, null /* POISON counter is meant */);
+            final List<CounterType> choices = new ArrayList<CounterType>();
+
+            for (final CounterType ct : player.getCounters().keySet()) {
+                if (player.getCounters(ct) > 0) {
+                    choices.add(ct);
+                }
+            }
+            if (player.hasKeyword("You can't get poison counters")) {
+                choices.remove(CounterType.POISON);
+            }
+
+            final CounterType toAdd = choices.size() == 1 ? choices.get(0) : getController().getGui().one("Select counter type", choices);
+            chosenCounters.put(player, toAdd);
+
+            this.chosenCounters.put(player, CounterType.POISON);
         }
 
         refresh();

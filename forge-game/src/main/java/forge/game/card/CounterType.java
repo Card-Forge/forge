@@ -268,7 +268,13 @@ public enum CounterType {
 
     WIND(),
 
-    WISH();
+    WISH(),
+
+    // Player Counters
+
+    EXPERIENCE(),
+
+    POISON();
 
     private String name;
 

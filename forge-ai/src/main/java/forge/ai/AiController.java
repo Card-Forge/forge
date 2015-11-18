@@ -1485,8 +1485,15 @@ public class AiController {
         }
         
         for (Player e : enemies) {
-            if (e.getPoisonCounters() > 0) {
-                result.put(e, null); // poison counter type is hardcoded at data consumer's side (this works while players may have no other counters)
+            // TODO In the future check of enemies can get poison counters and give them some other bad counter type
+            if (e.getCounters(CounterType.POISON) > 0) {
+                result.put(e, CounterType.POISON);
+            }
+        }
+
+        for (Player pl : allies) {
+            if (pl.getCounters(CounterType.EXPERIENCE) > 0) {
+                result.put(pl, CounterType.EXPERIENCE);
             }
         }
 

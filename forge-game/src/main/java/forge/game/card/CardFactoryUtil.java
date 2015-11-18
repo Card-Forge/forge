@@ -1158,6 +1158,12 @@ public class CardFactoryUtil {
             return doXMath(c.getTotalDamageRecievedThisTurn(), m, c);
         }
 
+        if (sq[0].startsWith("YourCounters")) {
+            // "YourCountersExperience" or "YourCountersPoison"
+            String counterType = sq[0].substring(12);
+            return doXMath(cc.getCounters(CounterType.getType(counterType)), m, c);
+        }
+
         if (sq[0].contains("YourPoisonCounters")) {
             return doXMath(cc.getPoisonCounters(), m, c);
         }

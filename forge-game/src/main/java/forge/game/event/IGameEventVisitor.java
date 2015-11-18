@@ -33,6 +33,7 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventMulligan event);
     T visit(GameEventPlayerControl event);
     T visit(GameEventPlayerDamaged gameEventPlayerDamaged);
+    T visit(GameEventPlayerCounters event);
     T visit(GameEventPlayerPoisoned event);
     T visit(GameEventPlayerPriority event);
     T visit(GameEventPlayerStatsChanged event);
@@ -77,6 +78,7 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventManaBurn event) { return null; }
         public T visit(GameEventMulligan event) { return null; }
         public T visit(GameEventPlayerControl event) { return null; }
+        public T visit(GameEventPlayerCounters event) { return null; }
         public T visit(GameEventPlayerPoisoned event) { return null; }
         public T visit(GameEventPlayerPriority event) { return null; }
         public T visit(GameEventPlayerStatsChanged event) { return null; }

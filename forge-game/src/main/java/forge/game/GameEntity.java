@@ -20,6 +20,7 @@ package forge.game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.util.collect.FCollection;
@@ -34,6 +35,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     private int preventNextDamage = 0;
     private CardCollection enchantedBy;
     private Map<Card, Map<String, String>> preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
+    protected Map<CounterType, Integer> counters = new TreeMap<>();
 
     protected GameEntity(int id0) {
         id = id0;
@@ -197,6 +199,33 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public abstract boolean hasProtectionFrom(final Card source);
+
+    // Counters!
+    public boolean hasCounters() {
+        return !counters.isEmpty();
+    }
+
+    // get all counters from a card
+    public final Map<CounterType, Integer> getCounters() {
+        return counters;
+    }
+
+    public final int getCounters(final CounterType counterName) {
+        Integer value = counters.get(counterName);
+        return value == null ? 0 : value;
+    }
+
+    public void setCounters(final CounterType counterType, final Integer num) {
+        counters.put(counterType, num);
+    }
+
+    abstract public void setCounters(final Map<CounterType, Integer> allCounters);
+
+    abstract public boolean canReceiveCounters(final CounterType type);
+    abstract protected void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier, final boolean fireEvents);
+    abstract public void subtractCounter(final CounterType counterName, final int n);
+    abstract public void clearCounters();
+
 
     @Override
     public final boolean equals(Object o) {

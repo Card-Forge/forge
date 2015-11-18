@@ -32,12 +32,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
 import forge.game.keyword.KeywordCollection;
@@ -88,7 +83,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private final Map<Card, Integer> commanderDamage = new HashMap<Card, Integer>();
 
-    private int poisonCounters = 0;
     private int life = 20;
     private int startingLife = 20;
     private final Map<Card, Integer> assignedDamage = new HashMap<Card, Integer>();
@@ -853,25 +847,144 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
+    public final boolean canReceiveCounters(final CounterType type) {
+        if (hasKeyword("PLAYER can't have counters placed on him or her.")) {
+            return false;
+        }
+        if (type == CounterType.POISON) {
+            if (hasKeyword("You can't get poison counters")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public final void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier) {
+        addCounter(counterType, n, applyMultiplier, true);
+    }
+
+    @Override
+    protected void addCounter(CounterType counterType, int n, boolean applyMultiplier, boolean fireEvents) {
+        if (!canReceiveCounters(counterType)) {
+            return;
+        }
+
+        int addAmount = n;
+        if(addAmount <= 0) {
+            // Can't add negative or 0 counters, bail out now
+            return;
+        }
+        /* TODO Add Counter replacement if it ever effects Players
+        final HashMap<String, Object> repParams = new HashMap<>();
+        repParams.put("Event", "AddCounter");
+        repParams.put("Affected", this);
+        repParams.put("CounterType", counterType);
+        repParams.put("CounterNum", addAmount);
+        repParams.put("EffectOnly", applyMultiplier);
+        if (getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+            return;
+        }
+        */
+
+        final int oldValue = getCounters(counterType);
+        final int newValue = addAmount + oldValue;
+        counters.put(counterType, newValue);
+        view.updateCounters(this);
+
+        if (fireEvents) {
+            getGame().fireEvent(new GameEventPlayerCounters(this, counterType, oldValue, newValue));
+        }
+
+        /* TODO Run triggers when something cares
+        final Map<String, Object> runParams = new TreeMap<>();
+        runParams.put("Player", this);
+        runParams.put("CounterType", counterType);
+        for (int i = 0; i < addAmount; i++) {
+            getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams, false);
+        }
+        if (addAmount > 0) {
+            getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, runParams, false);
+        }
+        */
+    }
+
+    @Override
+    public void subtractCounter(CounterType counterName, int num) {
+        int oldValue = getCounters(counterName);
+        int newValue = Math.max(oldValue - num, 0);
+
+        final int delta = oldValue - newValue;
+        if (delta == 0) { return; }
+
+
+        if (newValue > 0) {
+            counters.put(counterName, newValue);
+        }
+        else {
+            counters.remove(counterName);
+        }
+        view.updateCounters(this);
+
+        getGame().fireEvent(new GameEventPlayerCounters(this, counterName, oldValue, newValue));
+
+        /* TODO Run triggers when something cares
+        int curCounters = oldValue;
+        for (int i = 0; i < delta && curCounters != 0; i++) {
+            final Map<String, Object> runParams = new TreeMap<>();
+            runParams.put("Card", this);
+            runParams.put("CounterType", counterName);
+            runParams.put("NewCounterAmount", --curCounters);
+            getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
+        }
+        */
+    }
+
+    public final void clearCounters() {
+        if (counters.isEmpty()) { return; }
+        counters.clear();
+        view.updateCounters(this);
+        getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
+    }
+
+    public void setCounters(final CounterType counterType, final Integer num) {
+        counters.put(counterType, num);
+        view.updateCounters(this);
+        getGame().fireEvent(new GameEventPlayerCounters(this, counterType, 0, 0));
+    }
+
+    @Override
+    public void setCounters(Map<CounterType, Integer> allCounters) {
+        counters = allCounters;
+        view.updateCounters(this);
+        getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
+    }
+
+    // TODO Merge These calls into the primary counter calls
     public final int getPoisonCounters() {
-        return poisonCounters;
+        return getCounters(CounterType.POISON);
     }
     public final void setPoisonCounters(final int num, Card source) {
-        if (poisonCounters == num) { return; }
-
-        int oldPoison = poisonCounters;
-        poisonCounters = num;
-        view.updatePoisonCounters(this);
+        int oldPoison = getCounters(CounterType.POISON);
+        setCounters(CounterType.POISON, num);
         game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
     }
     public final void addPoisonCounters(final int num, final Card source) {
-        if (!hasKeyword("You can't get poison counters")) {
-            setPoisonCounters(poisonCounters + num, source);
+        int oldPoison = getCounters(CounterType.POISON);
+        addCounter(CounterType.POISON, num, false, true);
+
+        if (oldPoison != getCounters(CounterType.POISON)) {
+            game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
         }
     }
     public final void removePoisonCounters(final int num, final Card source) {
-        setPoisonCounters(poisonCounters - num, source);
+        int oldPoison = getCounters(CounterType.POISON);
+        subtractCounter(CounterType.POISON, num);
+
+        if (oldPoison != getCounters(CounterType.POISON)) {
+            game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
+        }
     }
+    // ================ POISON Merged =================================
 
     public final void addChangedKeywords(final String[] addKeywords, final String[] removeKeywords, final Long timestamp) {
         addChangedKeywords(ImmutableList.copyOf(addKeywords), ImmutableList.copyOf(removeKeywords), timestamp);
@@ -1681,7 +1794,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
-        if (poisonCounters >= 10) {
+        if (getCounters(CounterType.POISON) >= 10) {
             return loseConditionMet(GameLossReason.Poisoned, null);
         }
 

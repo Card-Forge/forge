@@ -29,7 +29,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
             return;
         for(Entry<GameEntity, CounterType> ge: proliferateChoice.entrySet()) {
             if( ge.getKey() instanceof Player )
-                ((Player) ge.getKey()).addPoisonCounters(1, sa.getHostCard());
+                ((Player) ge.getKey()).addCounter(ge.getValue(), 1, true);
             else if( ge.getKey() instanceof Card)
                 ((Card) ge.getKey()).addCounter(ge.getValue(), 1, true);
         }

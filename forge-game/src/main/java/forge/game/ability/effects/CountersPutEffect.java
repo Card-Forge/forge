@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Lists;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -95,63 +97,72 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         CardCollection tgtCards = new CardCollection();
+        List<GameObject> tgtObjects = Lists.newArrayList();
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
             tgtCards.addAll(activator.getController().chooseCardsForEffect(leastToughness, sa, "Choose a creature with the least toughness", 1, 1, false));
+            tgtObjects.addAll(tgtCards);
         } else {
-            tgtCards.addAll(getDefinedCardsOrTargeted(sa));
+            tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }
 
-        for (final Card tgtCard : tgtCards) {
-            counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;
-            if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
-                if (max != -1) {
-                    counterAmount = max - tgtCard.getCounters(counterType);
-                }
-                if (sa.hasParam("Tribute")) {
-                    String message = "Do you want to put " + tgtCard.getKeywordMagnitude("Tribute") + " +1/+1 counters on " + tgtCard + " ?";
-                    Player chooser = activator.getController().chooseSingleEntityForEffect(activator.getOpponents(), sa, "Choose an opponent");
-                    if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
-                        tgtCard.setTributed(true);
-                    } else {
-                        continue;
+        for (final GameObject obj : tgtObjects) {
+            if (obj instanceof Card) {
+                Card tgtCard = (Card) obj;
+                counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;
+                if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
+                    if (max != -1) {
+                        counterAmount = max - tgtCard.getCounters(counterType);
                     }
-                }
-                if (rememberCards) {
-                    card.addRemembered(tgtCard);
-                }
-                final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
-                if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
-                    tgtCard.addCounter(counterType, counterAmount, true);
-                    if (remember) {
-                        final int value = tgtCard.getTotalCountersToAdd();
-                        tgtCard.addCountersAddedBy(card, counterType, value);
+                    if (sa.hasParam("Tribute")) {
+                        String message = "Do you want to put " + tgtCard.getKeywordMagnitude("Tribute") + " +1/+1 counters on " + tgtCard + " ?";
+                        Player chooser = activator.getController().chooseSingleEntityForEffect(activator.getOpponents(), sa, "Choose an opponent");
+                        if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
+                            tgtCard.setTributed(true);
+                        } else {
+                            continue;
+                        }
                     }
+                    if (rememberCards) {
+                        card.addRemembered(tgtCard);
+                    }
+                    final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
+                    if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
+                        tgtCard.addCounter(counterType, counterAmount, true);
+                        if (remember) {
+                            final int value = tgtCard.getTotalCountersToAdd();
+                            tgtCard.addCountersAddedBy(card, counterType, value);
+                        }
 
-                    if (sa.hasParam("Evolve")) {
-                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                        runParams.put("Card", tgtCard);
-                        tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.Evolved, runParams, false);
+                        if (sa.hasParam("Evolve")) {
+                            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                            runParams.put("Card", tgtCard);
+                            tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.Evolved, runParams, false);
+                        }
+                        if (sa.hasParam("Monstrosity")) {
+                            tgtCard.setMonstrous(true);
+                            tgtCard.setMonstrosityNum(counterAmount);
+                            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                            runParams.put("Card", tgtCard);
+                            tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
+                        }
+                        if (sa.hasParam("Renown")) {
+                            tgtCard.setRenowned(true);
+                            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                            runParams.put("Card", tgtCard);
+                            tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, runParams, false);
+                        }
+                    } else {
+                        // adding counters to something like re-suspend cards
+                        // etbcounter should apply multiplier
+                        tgtCard.addCounter(counterType, counterAmount, etbcounter);
                     }
-                    if (sa.hasParam("Monstrosity")) {
-                        tgtCard.setMonstrous(true);
-                        tgtCard.setMonstrosityNum(counterAmount);
-                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                        runParams.put("Card", tgtCard);
-                        tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
-                    }
-                    if (sa.hasParam("Renown")) {
-                        tgtCard.setRenowned(true);
-                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                        runParams.put("Card", tgtCard);
-                        tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, runParams, false);
-                    }
-                } else {
-                    // adding counters to something like re-suspend cards
-                    // etbcounter should apply multiplier
-                    tgtCard.addCounter(counterType, counterAmount, etbcounter);
                 }
+            } else if (obj instanceof Player) {
+                // Add Counters to players!
+                Player pl = (Player) obj;
+                pl.addCounter(counterType, counterAmount, true);
             }
         }
     }

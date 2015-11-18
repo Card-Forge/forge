@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.card.CounterType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Objects;
@@ -157,6 +158,13 @@ public class PlayerView extends GameEntityView {
     }
     void updatePoisonCounters(Player p) {
         set(TrackableProperty.PoisonCounters, p.getPoisonCounters());
+    }
+
+    public Map<CounterType, Integer> getCounters() {
+            return get(TrackableProperty.Counters);
+    }
+    void updateCounters(Player p) {
+        set(TrackableProperty.Counters, p.getCounters());
     }
 
     public int getMaxHandSize() {
@@ -359,10 +367,16 @@ public class PlayerView extends GameEntityView {
     private List<String> getDetailsList() {
         final List<String> details = Lists.newArrayListWithCapacity(8);
         details.add(String.format("Life: %d", getLife()));
-        final int poison = getPoisonCounters();
-        if (poison > 0) {
-            details.add(String.format("Poison counters: %d", poison));
+
+        Map<CounterType, Integer> counters = getCounters();
+        if (counters != null) {
+            for (Entry<CounterType, Integer> p : counters.entrySet()) {
+                if (p.getValue() > 0) {
+                    details.add(String.format("%s counters: %d", p.getKey().getName(), p.getValue()));
+                }
+            }
         }
+
         details.add(String.format("Cards in hand: %d/%s", getHandSize(), getMaxHandString()));
         details.add(String.format("Cards drawn this turn: %d", getNumDrawnThisTurn()));
         details.add(String.format("Damage prevention: %d", getPreventNextDamage()));

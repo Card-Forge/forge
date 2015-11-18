@@ -12,6 +12,7 @@ public enum TrackableProperty {
     Text(TrackableTypes.StringType),
     PreventNextDamage(TrackableTypes.IntegerType),
     EnchantedBy(TrackableTypes.CardViewCollectionType),
+    Counters(TrackableTypes.CounterMapType),
 
     //Card 
     Owner(TrackableTypes.PlayerViewType),
@@ -27,7 +28,6 @@ public enum TrackableProperty {
     Tapped(TrackableTypes.BooleanType),
     Token(TrackableTypes.BooleanType),
     IsCommander(TrackableTypes.BooleanType),
-    Counters(TrackableTypes.CounterMapType),
     Damage(TrackableTypes.IntegerType),
     AssignedDamage(TrackableTypes.IntegerType),
     ShieldCount(TrackableTypes.IntegerType),

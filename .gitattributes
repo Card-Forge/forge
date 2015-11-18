@@ -548,6 +548,7 @@ forge-game/src/main/java/forge/game/event/GameEventManaBurn.java -text
 forge-game/src/main/java/forge/game/event/GameEventManaPool.java -text
 forge-game/src/main/java/forge/game/event/GameEventMulligan.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerControl.java -text
+forge-game/src/main/java/forge/game/event/GameEventPlayerCounters.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerDamaged.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerLivesChanged.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerPoisoned.java -text
@@ -4300,6 +4301,7 @@ forge-gui/res/cardsfolder/d/dawnstrider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dawnstrike_paladin.txt -text
 forge-gui/res/cardsfolder/d/dawntreader_elk.txt -text
 forge-gui/res/cardsfolder/d/daxos_of_meletis.txt -text
+forge-gui/res/cardsfolder/d/daxos_the_returned.txt -text
 forge-gui/res/cardsfolder/d/day_of_destiny.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/day_of_judgment.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/day_of_the_dragons.txt svneol=native#text/plain

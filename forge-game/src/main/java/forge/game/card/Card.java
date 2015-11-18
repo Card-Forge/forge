@@ -92,7 +92,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private ZoneType castFrom = null;
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
-    private Map<CounterType, Integer> counters = new TreeMap<>();
     private Map<Card, Map<CounterType, Integer>> countersAddedBy = new TreeMap<>();
     private List<String> extrinsicKeyword = new ArrayList<>();
     // Hidden keywords won't be displayed on the card
@@ -911,7 +910,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         addCounter(counterType, n, applyMultiplier, false);
     }
 
-    private void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier, final boolean fireEvents) {
+    protected void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier, final boolean fireEvents) {
         int addAmount = n;
         if(addAmount < 0) {
             addAmount = 0; // As per rule 107.1b
@@ -1041,20 +1040,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             runParams.put("NewCounterAmount", --curCounters);
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
         }
-    }
-
-    public final int getCounters(final CounterType counterName) {
-        Integer value = counters.get(counterName);
-        return value == null ? 0 : value;
-    }
-
-    // get all counters from a card
-    public final Map<CounterType, Integer> getCounters() {
-        return counters;
-    }
-
-    public final boolean hasCounters() {
-        return !counters.isEmpty();
     }
 
     public final void setCounters(final Map<CounterType, Integer> allCounters) {
