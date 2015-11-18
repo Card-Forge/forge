@@ -202,6 +202,10 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
                         } else {
                             defender = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("CopyAttacking"), sa).get(0);
+                            if (sa.hasParam("ChoosePlayerOrPlaneswalker") && defender != null) {
+                                FCollectionView<GameEntity> defs = game.getCombat().getDefendersControlledBy((Player) defender);
+                                defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c + " {defender: "+ defender + "}", false);
+                            }
                         }
                         game.getCombat().addAttacker(copyInPlay, defender);
                         game.fireEvent(new GameEventCombatChanged());
@@ -240,6 +244,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 if (sa.hasParam("AtEOT")) {
                     final String location = sa.getParam("AtEOT");
                     registerDelayedTrigger(sa, location, crds);
+                }
+                if (sa.hasParam("ImprintCopied")) {
+                    hostCard.addImprintedCards(crds);
                 }
             } // end canBeTargetedBy
         } // end foreach Card

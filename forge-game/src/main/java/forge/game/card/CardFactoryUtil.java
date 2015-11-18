@@ -2404,6 +2404,32 @@ public class CardFactoryUtil {
                 card.setSVar("ProvokeAbility", abString);
                 card.setSVar("ProvokeUntap", dbString);
             }
+            else if (keyword.equals("Myriad")) {
+                final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | Execute$ "
+                        + "MyriadAbility | Secondary$ True | TriggerDescription$ Myriad (When this "
+                        + "creature attacks, for each opponent other than defending player, you may"
+                        + " put a token that's a copy of this creature onto the battlefield tapped "
+                        + "and attacking that player or a planeswalker he or she controls. Exile the"
+                        + " tokens at end of combat.)";
+                final String abString = "DB$ RepeatEach | RepeatPlayers$ OpponentsOtherThanDefendingPlayer"
+                        + " | RepeatSubAbility$ MyriadCopy | SubAbility$ MyriadDelTrig";
+                final String dbString1 = "DB$ CopyPermanent | Defined$ Self | Tapped$ True | "
+                        + "Optional$ True | CopyAttacking$ Remembered | ChoosePlayerOrPlaneswalker$"
+                        + " True | ImprintCopied$ True";
+                final String dbString2 = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | "
+                        + "Execute$ MyriadExile | RememberObjects$ Imprinted | TriggerDescription$"
+                        + " Exile the tokens at end of combat. | SubAbility$ MyriadCleanup";
+                final String dbString3 = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$"
+                        + " Battlefield | Destination$ Exile";
+                final String dbString4 = "DB$ Cleanup | ClearImprinted$ True";
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
+                card.addTrigger(parsedTrigger);
+                card.setSVar("MyriadAbility", abString);
+                card.setSVar("MyriadCopy", dbString1);
+                card.setSVar("MyriadDelTrig", dbString2);
+                card.setSVar("MyriadExile", dbString3);
+                card.setSVar("MyriadCleanup", dbString4);
+            }
             else if (keyword.equals("Living Weapon")) {
                 card.removeIntrinsicKeyword(keyword);
 

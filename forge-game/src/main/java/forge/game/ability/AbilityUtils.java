@@ -1053,6 +1053,10 @@ public class AbilityUtils {
         else if (defined.equals("DefendingPlayer")) {
             players.add(game.getCombat().getDefendingPlayerRelatedTo(card));
         }
+        else if (defined.equals("OpponentsOtherThanDefendingPlayer")) {
+            players.addAll(sa.getActivatingPlayer().getOpponents());
+            players.remove(game.getCombat().getDefendingPlayerRelatedTo(card));
+        }
         else if (defined.equals("ChosenPlayer")) {
             final Player p = card.getChosenPlayer();
             if (p != null && !players.contains(p)) {

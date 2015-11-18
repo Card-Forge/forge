@@ -1,0 +1,8 @@
+Name:Herald of the Host
+ManaCost:3 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+K:Vigilance
+K:Myriad
+SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_the_host.jpg
