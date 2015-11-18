@@ -1,0 +1,350 @@
+[metadata]
+Code=C15
+Date=2015-11-13
+Name=Commander 2015
+Code2=C15
+Type=Other
+
+[cards]
+R Bastion Protector
+R Dawnbreak Reclaimer
+R Grasp of Fate
+U Herald of the Host
+R Kalemne's Captain
+U Oreskos Explorer
+R Righteous Confluence
+R Shielded by Faith
+R AEthersnatch
+U Broodbirth Viper
+R Gigantoplasm
+U Illusory Ambusher
+U Mirror Match
+R Mystic Confluence
+R Synthetic Destiny
+U Banshee of the Dread Choir
+U Corpse Augur
+R Daxos's Torment
+R Deadly Tempest
+R Dread Summons
+R Scourge of Nel Toth
+U Thief of Blood
+R Wretched Confluence
+R Awaken the Sky Tyrant
+R Dream Pillager
+R Fiery Confluence
+R Magus of the Wheel
+U Meteor Blast
+R Mizzix's Mastery
+U Rite of the Raging Storm
+U Warchief Giant
+R Arachnogenesis
+R Bloodspore Thrinax
+U Caller of the Pack
+R Centaur Vinecrasher
+R Ezuri's Predation
+U Great Oak Guardian
+R Pathbreaker Ibex
+U Skullwinder
+R Verdant Confluence
+M Anya, Merciless Angel
+M Arjun, the Shifting Flame
+M Daxos the Returned
+M Ezuri, Claw of Progress
+M Kalemne, Disciple of Iroas
+M Karlov of the Ghost Council
+M Kaseto, Orochi Archmage
+M Mazirek, Kraul Death Priest
+M Meren of Clan Nel Toth
+M Mizzix of the Izmagnus
+R Blade of Selves
+U Sandstone Oracle
+R Scytheclaw
+R Seal of the Guildpact
+C Thought Vessel
+R Command Beacon
+R Ajani's Chosen
+M Angel of Serenity
+R Arbiter of Knollridge
+U Aura of Silence
+U Banishing Light
+C Cage of Hands
+R Celestial Ancient
+R Celestial Archon
+U Crib Swap
+U Dawn to Dusk
+C Dawnglare Invoker
+R Dictate of Heliod
+C Faith's Fetters
+U Ghostblade Eidolon
+R Jareth, Leonine Titan
+R Karmic Justice
+C Kor Sanctifiers
+R Marshal's Anthem
+R Mesa Enchantress
+U Monk Idealist
+R Open the Vaults
+C Orim's Thunder
+C Seal of Cleansing
+R Sigil of the Empty Throne
+R Silent Sentinel
+M Sun Titan
+R Victory's Herald
+U Vow of Duty
+U AEtherize
+R Bident of Thassa
+R Blatant Thievery
+R Blue Sun's Zenith
+U Blustersquall
+C Brainstorm
+R Day of the Dragons
+U Dominate
+C Echoing Truth
+U Fact or Fiction
+R Jace's Archivist
+R Lone Revenant
+U Mulldrifter
+U Mystic Retrieval
+C Ninja of the Deep Hours
+U Plaxmanta
+C Preordain
+U Rapid Hybridization
+R Reins of Power
+C Repeal
+R Rite of Replication
+U Sleep
+R Stolen Goods
+R Stroke of Genius
+R Talrand, Sky Summoner
+R Thought Reflection
+U Windfall
+C Altar's Reap
+U Ambition's Cost
+R Ancient Craving
+U Barter in Blood
+R Black Market
+C Blood Bairn
+R Butcher of Malakir
+M Champion of Stray Souls
+U Diabolic Servitude
+R Doomwake Giant
+C Dreadbringer Lampads
+R Eater of Hope
+R Extractor Demon
+U Fallen Ideal
+R Fate Unraveler
+R Gild
+C Grave Peril
+R Nighthowler
+R Phyrexian Arena
+R Phyrexian Plaguelord
+C Phyrexian Rager
+U Phyrexian Reclamation
+U Rise from the Grave
+C Seal of Doom
+R Sever the Bloodline
+U Shriekmaw
+R Underworld Connections
+U Victimize
+U Vow of Malice
+U Act of Aggression
+R Borderland Behemoth
+U Breath of Darigaaz
+R Chain Reaction
+R Charmbreaker Devils
+M Comet Storm
+U Curse of the Nightly Hunt
+R Desolation Giant
+U Desperate Ravings
+R Disaster Radius
+R Dragon Mage
+R Earthquake
+C Faithless Looting
+C Fall of the Hammer
+R Fumiko the Lowblood
+R Hamletback Goliath
+R Hammerfist Giant
+R Hostility
+R Hunted Dragon
+M Inferno Titan
+R Magma Giant
+R Magmaquake
+R Mizzium Mortars
+C Stinkdrinker Daredevil
+U Stoneshock Giant
+R Sunrise Sovereign
+R Taurean Mauler
+U Thundercloud Shaman
+R Urza's Rage
+U Vandalblast
+R Warstorm Surge
+R Word of Seizing
+U Acidic Slime
+R Arbor Colossus
+R Bane of Progress
+R Beastmaster Ascension
+R Caller of the Claw
+R Chameleon Colossus
+R Cloudthresher
+U Cobra Trap
+U Desert Twister
+C Elvish Visionary
+U Eternal Witness
+U Experiment One
+R Forgotten Ancient
+U Indrik Stomphowler
+R Kessig Cagebreakers
+C Kodama's Reach
+U Krosan Grip
+R Loaming Shaman
+C Mulch
+R Mycoloth
+U Noble Quarry
+R Ohran Viper
+U Overrun
+R Overwhelming Stampede
+U Patagia Viper
+C Primal Growth
+C Rampant Growth
+C Sakura-Tribe Elder
+C Satyr Wayfinder
+U Spider Spawning
+U Stingerfling Spider
+R Terastodon
+R Thelonite Hermit
+U Tribute to the Wild
+R Verdant Force
+C Viridian Emissary
+U Viridian Shaman
+R Viridian Zealot
+U Wall of Blossoms
+C Wood Elves
+C Coiling Oracle
+R Counterflux
+R Death Grasp
+M Epic Experiment
+R Etherium-Horn Sorcerer
+R Firemind's Foresight
+M Gisela, Blade of Goldnight
+C Goblin Electromancer
+U Golgari Charm
+C Grisly Salvage
+M Jarad, Golgari Lich Lord
+U Korozda Guildmage
+U Lorescale Coatl
+R Lotleth Troll
+R Melek, Izzet Paragon
+R Mystic Snake
+R Necromancer's Covenant
+M Prime Speaker Zegana
+R Prophetic Bolt
+U Putrefy
+R Steam Augury
+R Teysa, Envoy of Ghosts
+R Treasury Thrull
+U Trygon Predator
+U Underworld Coinsmith
+R Vulturous Zombie
+R Biomantic Mastery
+R Call the Skybreaker
+R Cold-Eyed Selkie
+C Snakeform
+U Wistful Selkie
+U Basalt Monolith
+R Bonehoard
+C Boros Cluestone
+C Boros Signet
+U Burnished Hart
+U Coldsteel Heart
+U Crystal Chimes
+U Darksteel Ingot
+U Dreamstone Hedron
+M Eldrazi Monument
+U Fellwar Stone
+C Golgari Signet
+C Izzet Signet
+U Lightning Greaves
+R Loxodon Warhammer
+U Mind Stone
+R Orochi Hatchery
+C Orzhov Cluestone
+C Orzhov Signet
+R Psychosis Crawler
+R Seer's Sundial
+U Simic Keyrune
+C Simic Signet
+U Skullclamp
+U Sol Ring
+R Solemn Simulacrum
+R Staff of Nin
+U Swiftfoot Boots
+R Sword of Vengeance
+R Urza's Incubator
+C Wayfarer's Bauble
+U Worn Powerstone
+R Ancient Amphitheater
+C Barren Moor
+U Blasted Landscape
+C Boros Garrison
+C Boros Guildgate
+C Command Tower
+C Drifting Meadow
+C Evolving Wilds
+C Forgotten Cave
+U Ghost Quarter
+C Golgari Guildgate
+C Golgari Rot Farm
+R Grim Backwoods
+R High Market
+C Izzet Boilerworks
+C Izzet Guildgate
+C Jungle Hollow
+U Llanowar Reborn
+R Mosswort Bridge
+U New Benalia
+U Novijen, Heart of Progress
+R Oran-Rief, the Vastwood
+C Orzhov Basilica
+C Orzhov Guildgate
+C Polluted Mire
+U Reliquary Tower
+U Rogue's Passage
+C Scoured Barrens
+C Secluded Steppe
+C Simic Growth Chamber
+C Simic Guildgate
+C Slippery Karst
+C Smoldering Crater
+R Spinerock Knoll
+C Swiftwater Cliffs
+U Tainted Field
+U Tainted Wood
+U Temple of the False God
+C Terramorphic Expanse
+C Thornwood Falls
+U Vivid Crag
+U Vivid Creek
+U Vivid Grove
+U Vivid Marsh
+U Vivid Meadow
+C Wind-Scarred Crag
+U Zoetic Cavern
+L Plains
+L Plains
+L Plains
+L Plains
+L Island
+L Island
+L Island
+L Island
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Forest
+L Forest
+L Forest
+L Forest
