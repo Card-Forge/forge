@@ -1552,6 +1552,7 @@ forge-gui/res/cardsfolder/a/aetherize.txt -text
 forge-gui/res/cardsfolder/a/aetherling.txt -text
 forge-gui/res/cardsfolder/a/aethermages_touch.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aetherplasm.txt -text
+forge-gui/res/cardsfolder/a/aethersnatch.txt -text
 forge-gui/res/cardsfolder/a/aethersnipe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aetherspouts.txt -text
 forge-gui/res/cardsfolder/a/aethertow.txt -text
@@ -1891,6 +1892,7 @@ forge-gui/res/cardsfolder/a/aqueous_form.txt -text
 forge-gui/res/cardsfolder/a/aquitects_will.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aquus_steed.txt -text
 forge-gui/res/cardsfolder/a/araba_mothrider.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/arachnogenesis.txt -text
 forge-gui/res/cardsfolder/a/arachnoid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arachnus_spinner.txt -text
 forge-gui/res/cardsfolder/a/arachnus_web.txt -text
@@ -1995,6 +1997,7 @@ forge-gui/res/cardsfolder/a/argothian_swine.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/argothian_treefolk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/argothian_wurm.txt -text
 forge-gui/res/cardsfolder/a/arid_mesa.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/arjun_the_shifting_flame.txt -text
 forge-gui/res/cardsfolder/a/ark_of_blight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arm_with_aether.txt -text
 forge-gui/res/cardsfolder/a/armada_wurm.txt -text
