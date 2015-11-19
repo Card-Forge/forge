@@ -2339,6 +2339,7 @@ forge-gui/res/cardsfolder/b/banishing_stroke.txt -text
 forge-gui/res/cardsfolder/b/banishment_decree.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/banners_raised.txt -text
 forge-gui/res/cardsfolder/b/banshee.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/banshee_of_the_dread_choir.txt -text
 forge-gui/res/cardsfolder/b/banshees_blade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bant.txt -text
 forge-gui/res/cardsfolder/b/bant_battlemage.txt svneol=native#text/plain
@@ -3034,6 +3035,7 @@ forge-gui/res/cardsfolder/b/brood_keeper.txt -text
 forge-gui/res/cardsfolder/b/brood_monitor.txt -text
 forge-gui/res/cardsfolder/b/brood_of_cockroaches.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/brood_sliver.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/broodbirth_viper.txt -text
 forge-gui/res/cardsfolder/b/broodhatch_nantuko.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/broodhunter_wurm.txt -text
 forge-gui/res/cardsfolder/b/brooding_saurian.txt -text
