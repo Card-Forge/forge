@@ -5556,6 +5556,7 @@ forge-gui/res/cardsfolder/e/eyeless_watcher.txt -text
 forge-gui/res/cardsfolder/e/eyes_in_the_skies.txt -text
 forge-gui/res/cardsfolder/e/eyes_of_the_watcher.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/eyes_of_the_wisent.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/e/ezuri_claw_of_progress.txt -text
 forge-gui/res/cardsfolder/e/ezuri_renegade_leader.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/ezuris_archers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/ezuris_brigade.txt svneol=native#text/plain
