@@ -5784,6 +5784,7 @@ forge-gui/res/cardsfolder/f/fierce_empath.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fierce_invocation.txt -text
 forge-gui/res/cardsfolder/f/fiery_bombardment.txt -text
 forge-gui/res/cardsfolder/f/fiery_conclusion.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/fiery_confluence.txt -text
 forge-gui/res/cardsfolder/f/fiery_fall.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fiery_gambit.txt -text
 forge-gui/res/cardsfolder/f/fiery_hellhound.txt svneol=native#text/plain
@@ -9922,6 +9923,7 @@ forge-gui/res/cardsfolder/m/myrsmith.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mysteries_of_the_deep.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mystic_barrier.txt -text
 forge-gui/res/cardsfolder/m/mystic_compass.txt -text
+forge-gui/res/cardsfolder/m/mystic_confluence.txt -text
 forge-gui/res/cardsfolder/m/mystic_crusader.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mystic_decree.txt -text
 forge-gui/res/cardsfolder/m/mystic_denial.txt svneol=native#text/plain
@@ -11934,6 +11936,7 @@ forge-gui/res/cardsfolder/r/righteous_avengers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/righteous_blow.txt -text
 forge-gui/res/cardsfolder/r/righteous_cause.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/righteous_charge.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/righteous_confluence.txt -text
 forge-gui/res/cardsfolder/r/righteous_fury.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/righteous_indignation.txt -text
 forge-gui/res/cardsfolder/r/righteous_war.txt svneol=native#text/plain
@@ -15591,6 +15594,7 @@ forge-gui/res/cardsfolder/v/vensers_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vent_sentinel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/ventifact_bottle.txt -text
 forge-gui/res/cardsfolder/v/verdant_catacombs.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/v/verdant_confluence.txt -text
 forge-gui/res/cardsfolder/v/verdant_eidolon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/verdant_embrace.txt -text
 forge-gui/res/cardsfolder/v/verdant_field.txt svneol=native#text/plain
@@ -16424,6 +16428,7 @@ forge-gui/res/cardsfolder/w/wrens_run_packmaster.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wrens_run_vanquisher.txt -text
 forge-gui/res/cardsfolder/w/wretched_anurid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wretched_banquet.txt -text
+forge-gui/res/cardsfolder/w/wretched_confluence.txt -text
 forge-gui/res/cardsfolder/w/wrexial_the_risen_deep.txt -text
 forge-gui/res/cardsfolder/w/wring_flesh.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/writ_of_passage.txt -text
