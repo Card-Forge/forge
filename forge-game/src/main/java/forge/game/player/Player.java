@@ -2160,6 +2160,10 @@ public class Player extends GameEntity implements Comparable<Player> {
                     return false;
                 }
             }
+        } else if (property.startsWith("LessThanHalfStartingLifeTotal")) {
+            if (this.getLife() >= (int) Math.ceil(this.getStartingLife() / 2.0)) {
+                return false;
+            }
         }
         return true;
     }
