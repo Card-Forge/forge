@@ -1,0 +1,11 @@
+Name:Bloodspore Thrinax
+ManaCost:2 G G
+Types:Creature Lizard
+PT:2/2
+K:Devour:1
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | ReplaceWith$ AddExtraCounter | Description$ Each other creature you control enters the battlefield with an additional X +1/+1 counters on it, where X is the number of +1/+1 counters on CARDNAME.
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:X:Count$CardCounters.P1P1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodspore_thrinax.jpg
+Oracle:Devour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with that many +1/+1 counters on it.)\nEach other creature you control enters the battlefield with an additional X +1/+1 counters on it, where X is the number of +1/+1 counters on Bloodspore Thrinax.
