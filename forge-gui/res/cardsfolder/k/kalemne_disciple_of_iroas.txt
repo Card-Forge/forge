@@ -2,7 +2,7 @@ Name:Kalemne, Disciple of Iroas
 ManaCost:2 R W
 Types:Legendary Creature Giant Soldier
 PT:3/3
-K:Double strike
+K:Double Strike
 K:Vigilance
 T:Mode$ SpellCast | ValidCard$ Creature.cmcGE5 | ValidActivatingPlayer$ You | Execute$ TrigExperience | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with converted mana cost 5 or greater, you get an experience counter.
 SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
