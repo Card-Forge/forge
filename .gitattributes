@@ -8159,6 +8159,7 @@ forge-gui/res/cardsfolder/k/karametra_god_of_harvests.txt -text
 forge-gui/res/cardsfolder/k/karametras_acolyte.txt -text
 forge-gui/res/cardsfolder/k/karametras_favor.txt -text
 forge-gui/res/cardsfolder/k/kargan_dragonlord.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/k/karlov_of_the_ghost_council.txt -text
 forge-gui/res/cardsfolder/k/karma.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/karmic_guide.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/karmic_justice.txt -text
@@ -9377,6 +9378,7 @@ forge-gui/res/cardsfolder/m/mercurial_chemister.txt -text
 forge-gui/res/cardsfolder/m/mercurial_kite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mercurial_pretender.txt -text
 forge-gui/res/cardsfolder/m/mercy_killing.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/m/meren_of_clan_nel_toth.txt -text
 forge-gui/res/cardsfolder/m/merfolk_assassin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/merfolk_looter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/merfolk_mesmerist.txt svneol=native#text/plain
