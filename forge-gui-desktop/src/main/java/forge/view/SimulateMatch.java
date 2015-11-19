@@ -69,7 +69,6 @@ public class SimulateMatch {
         }
 
         List<RegisteredPlayer> pp = new ArrayList<RegisteredPlayer>();
-
         StringBuilder sb = new StringBuilder();
 
         int i = 1;
@@ -85,7 +84,15 @@ public class SimulateMatch {
             String name = String.format("Ai(%s)-%s", i, d.getName());
             sb.append(name);
 
-            pp.add(new RegisteredPlayer(d).setPlayer(GamePlayerUtil.createAiPlayer(name, i-1)));
+            RegisteredPlayer rp = null;
+
+            if (type.equals(GameType.Commander)) {
+                rp = RegisteredPlayer.forCommander(d);
+            } else {
+                rp = new RegisteredPlayer(d);
+            }
+            rp.setPlayer(GamePlayerUtil.createAiPlayer(name, i - 1));
+            pp.add(rp);
             i++;
         }
         sb.append(" - ").append(Lang.nounWithNumeral(nGames, "game")).append(" of ").append(type);
@@ -93,6 +100,8 @@ public class SimulateMatch {
         System.out.println(sb.toString());
 
         GameRules rules = new GameRules(type);
+        rules.setAppliedVariants(EnumSet.of(type));
+
         Match mc = new Match(rules, pp, "Test");
         for (int iGame = 0; iGame < nGames; iGame++) {
             simulateSingleMatch(mc, iGame);
@@ -130,6 +139,10 @@ public class SimulateMatch {
             System.out.println(l);
 
         System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName()));
+    }
+
+    public static Match simulateOffthreadGame(List<Deck> decks, GameType format, int games) {
+        return null;
     }
 
     private static Deck deckFromCommandLineParameter(String deckname, GameType type) {
