@@ -9645,6 +9645,7 @@ forge-gui/res/cardsfolder/m/mizzium_meddler.txt -text
 forge-gui/res/cardsfolder/m/mizzium_mortars.txt -text
 forge-gui/res/cardsfolder/m/mizzium_skin.txt -text
 forge-gui/res/cardsfolder/m/mizzium_transreliquat.txt -text
+forge-gui/res/cardsfolder/m/mizzix_of_the_izmagnus.txt -text
 forge-gui/res/cardsfolder/m/mnemonic_nexus.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mnemonic_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mnemonic_wall.txt svneol=native#text/plain
@@ -12355,6 +12356,7 @@ forge-gui/res/cardsfolder/s/sandsteppe_scavenger.txt -text
 forge-gui/res/cardsfolder/s/sandstone_bridge.txt -text
 forge-gui/res/cardsfolder/s/sandstone_deadfall.txt -text
 forge-gui/res/cardsfolder/s/sandstone_needle.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/sandstone_oracle.txt -text
 forge-gui/res/cardsfolder/s/sandstone_warrior.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sandstorm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sandstorm_charger.txt -text
