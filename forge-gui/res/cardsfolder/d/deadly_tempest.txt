@@ -1,0 +1,11 @@
+Name:Deadly Tempest
+ManaCost:4 B B
+Types:Sorcery
+A:SP$ DestroyAll | Cost$ 4 B B | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all creatures. Each player loses life equal to the number of creatures he or she controlled that were destroyed this way.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X | Defined$ Player.IsRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$FilterControlledByRemembered_Number$1
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_tempest.jpg
+Oracle:Destroy all creatures. Each player loses life equal to the number of creatures he or she controlled that were destroyed this way.

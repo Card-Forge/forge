@@ -3,8 +3,9 @@ ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
 K:Morph:W
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, prevent all combat damage non-Soldier creatures would deal this turn.
-SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.nonSoldier | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCurseNonSoldiers | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, prevent all combat damage non-Soldier creatures would deal this turn.
+SVar:TrigCurseNonSoldiers:Effect | Name$ Frontline Strategist Effect | StaticAbilities$ Curse
+SVar:Curse:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.nonSoldier | CombatDamage$ True | Description$ Prevent all combat damage non-Soldier creatures would deal this turn.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frontline_strategist.jpg
-Oracle:Morph {W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Frontline Strategist is turned face up, prevent all combat damage non-Soldier creatures would deal this turn.
+Oracle:Morph {W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Frontline Strategist is turned face up, prevent all combat damage non-Soldier creatures would deal this turn. 

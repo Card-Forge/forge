@@ -2236,6 +2236,7 @@ forge-gui/res/cardsfolder/a/avizoa.txt -text
 forge-gui/res/cardsfolder/a/avoid_fate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/awaken_the_ancient.txt -text
 forge-gui/res/cardsfolder/a/awaken_the_bear.txt -text
+forge-gui/res/cardsfolder/a/awaken_the_sky_tyrant.txt -text
 forge-gui/res/cardsfolder/a/awakener_druid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/awakening.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/awakening_zone.txt svneol=native#text/plain
@@ -2404,6 +2405,7 @@ forge-gui/res/cardsfolder/b/basilica_screecher.txt -text
 forge-gui/res/cardsfolder/b/basilisk_collar.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/basking_rootwalla.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bassara_tower_archer.txt -text
+forge-gui/res/cardsfolder/b/bastion_protector.txt -text
 forge-gui/res/cardsfolder/b/bathe_in_dragonfire.txt -text
 forge-gui/res/cardsfolder/b/bathe_in_light.txt -text
 forge-gui/res/cardsfolder/b/baton_of_courage.txt svneol=native#text/plain
@@ -4328,6 +4330,7 @@ forge-gui/res/cardsfolder/d/deadly_allure.txt -text
 forge-gui/res/cardsfolder/d/deadly_grub.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deadly_insect.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deadly_recluse.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/deadly_tempest.txt -text
 forge-gui/res/cardsfolder/d/deadly_wanderings.txt -text
 forge-gui/res/cardsfolder/d/deadshot.txt -text
 forge-gui/res/cardsfolder/d/deadshot_minotaur.txt svneol=native#text/plain
@@ -6458,6 +6461,7 @@ forge-gui/res/cardsfolder/g/gifts_ungiven.txt -text
 forge-gui/res/cardsfolder/g/gigadrowse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gigantiform.txt -text
 forge-gui/res/cardsfolder/g/gigantomancer.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/gigantoplasm.txt -text
 forge-gui/res/cardsfolder/g/gigapede.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gild.txt -text
 forge-gui/res/cardsfolder/g/gilded_drake.txt -text
@@ -7654,6 +7658,7 @@ forge-gui/res/cardsfolder/i/illusionary_wall.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/illusionists_bracers.txt -text
 forge-gui/res/cardsfolder/i/illusionists_gambit.txt -text
 forge-gui/res/cardsfolder/i/illusions_of_grandeur.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/i/illusory_ambusher.txt -text
 forge-gui/res/cardsfolder/i/illusory_angel.txt -text
 forge-gui/res/cardsfolder/i/illusory_demon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/illusory_gains.txt -text
