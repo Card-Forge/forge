@@ -3351,6 +3351,7 @@ forge-gui/res/cardsfolder/c/centaur_omenreader.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/centaur_rootcaster.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/centaur_safeguard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/centaur_veteran.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/centaur_vinecrasher.txt -text
 forge-gui/res/cardsfolder/c/centaurs_herald.txt -text
 forge-gui/res/cardsfolder/c/center_soul.txt -text
 forge-gui/res/cardsfolder/c/cephalid_aristocrat.txt svneol=native#text/plain
@@ -4306,6 +4307,7 @@ forge-gui/res/cardsfolder/d/dawnstrike_paladin.txt -text
 forge-gui/res/cardsfolder/d/dawntreader_elk.txt -text
 forge-gui/res/cardsfolder/d/daxos_of_meletis.txt -text
 forge-gui/res/cardsfolder/d/daxos_the_returned.txt -text
+forge-gui/res/cardsfolder/d/daxoss_torment.txt -text
 forge-gui/res/cardsfolder/d/day_of_destiny.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/day_of_judgment.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/day_of_the_dragons.txt svneol=native#text/plain
@@ -4892,6 +4894,7 @@ forge-gui/res/cardsfolder/d/dream_fighter.txt -text
 forge-gui/res/cardsfolder/d/dream_fracture.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dream_halls.txt -text
 forge-gui/res/cardsfolder/d/dream_leash.txt -text
+forge-gui/res/cardsfolder/d/dream_pillager.txt -text
 forge-gui/res/cardsfolder/d/dream_prowler.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dream_salvage.txt -text
 forge-gui/res/cardsfolder/d/dream_stalker.txt svneol=native#text/plain
@@ -9072,6 +9075,7 @@ forge-gui/res/cardsfolder/m/magus_of_the_scroll.txt -text
 forge-gui/res/cardsfolder/m/magus_of_the_tabernacle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magus_of_the_unseen.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magus_of_the_vineyard.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/magus_of_the_wheel.txt -text
 forge-gui/res/cardsfolder/m/mahamoti_djinn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/major_teroh.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/make_a_wish.txt -text
@@ -9429,6 +9433,7 @@ forge-gui/res/cardsfolder/m/metathran_elite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/metathran_soldier.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/metathran_transport.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/metathran_zombie.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/meteor_blast.txt -text
 forge-gui/res/cardsfolder/m/meteor_crater.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/meteor_shower.txt -text
 forge-gui/res/cardsfolder/m/meteor_storm.txt svneol=native#text/plain
@@ -12528,6 +12533,7 @@ forge-gui/res/cardsfolder/s/scourge_devil.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scourge_of_fleets.txt -text
 forge-gui/res/cardsfolder/s/scourge_of_geier_reach.txt -text
 forge-gui/res/cardsfolder/s/scourge_of_kher_ridges.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/scourge_of_nel_toth.txt -text
 forge-gui/res/cardsfolder/s/scourge_of_numai.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scourge_of_skola_vale.txt -text
 forge-gui/res/cardsfolder/s/scourge_of_the_nobilis.txt svneol=native#text/plain
@@ -12927,6 +12933,7 @@ forge-gui/res/cardsfolder/s/shield_of_the_oversoul.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shield_of_the_righteous.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shield_sphere.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shield_wall.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/shielded_by_faith.txt -text
 forge-gui/res/cardsfolder/s/shielded_passage.txt -text
 forge-gui/res/cardsfolder/s/shieldhide_dragon.txt -text
 forge-gui/res/cardsfolder/s/shielding_plax.txt svneol=native#text/plain

@@ -1,0 +1,10 @@
+Name:Meteor Blast
+ManaCost:X R R R
+Types:Sorcery
+A:SP$ DealDamage | Cost$ X R R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TargetMin$ 0 | TargetMax$ MaxTargets | NumDmg$ 4 | References$ X,MaxTargets,MaxPlayers,MaxCreatures | SpellDescription$ CARDNAME deals 4 damage to each of X target creatures and/or players.
+SVar:X:Count$xPaid 
+SVar:MaxTargets:SVar$MaxPlayers/Plus.MaxCreatures
+SVar:MaxPlayers:PlayerCountPlayers$Amount
+SVar:MaxCreatures:Count$Valid Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_blast.jpg
+Oracle:Meteor Blast deals 4 damage to X target creatures and/or players.
