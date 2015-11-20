@@ -3175,6 +3175,7 @@ forge-gui/res/cardsfolder/c/call_to_the_netherworld.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/caller_of_gales.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/caller_of_the_claw.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/caller_of_the_hunt.txt -text
+forge-gui/res/cardsfolder/c/caller_of_the_pack.txt -text
 forge-gui/res/cardsfolder/c/callous_deceiver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/callous_giant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/callous_oppressor.txt -text
@@ -16006,6 +16007,7 @@ forge-gui/res/cardsfolder/w/war_wing_siren.txt -text
 forge-gui/res/cardsfolder/w/warbreak_trumpeter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/warbringer.txt -text
 forge-gui/res/cardsfolder/w/warchanter_of_mogis.txt -text
+forge-gui/res/cardsfolder/w/warchief_giant.txt -text
 forge-gui/res/cardsfolder/w/warclamp_mastiff.txt -text
 forge-gui/res/cardsfolder/w/ward_of_bones.txt -text
 forge-gui/res/cardsfolder/w/ward_of_lights.txt -text
