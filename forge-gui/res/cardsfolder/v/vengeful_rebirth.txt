@@ -2,7 +2,7 @@ Name:Vengeful Rebirth
 ManaCost:4 R G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 4 R G | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBVengefulRebirthDamage | RememberTargets$ True | SpellDescription$ Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, CARDNAME deals damage equal to that card's converted mana cost to target creature or player. Exile CARDNAME.
-SVar:DBVengefulRebirthDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ VengefulRebirthX | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ GE1 | SubAbility$ DBVengefulRebirthExile
+SVar:DBVengefulRebirthDamage:DB$ DealDamage | ValidTgts$ Creature,Player | References$ VengefulRebirthX | TgtPrompt$ Select target creature or player | NumDmg$ VengefulRebirthX | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ GE1 | SubAbility$ DBVengefulRebirthExile
 SVar:DBVengefulRebirthExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | SubAbility$ DBVengefulRebirthCleanup
 SVar:DBVengefulRebirthCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:VengefulRebirthX:Remembered$CardManaCost

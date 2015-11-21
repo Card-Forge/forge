@@ -7,4 +7,4 @@ SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTg
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_confluence.jpg
-Oracle:Choose three. You may choose the same mode more than once.\nâ€¢ Counter target spell unless its controller pays 3.\nâ€¢ Return target creature to its owner's hand.\nâ€¢ Draw a card.
+Oracle:Choose three. You may choose the same mode more than once.\n• Counter target spell unless its controller pays 3.\n• Return target creature to its owner's hand.\n• Draw a card.
