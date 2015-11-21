@@ -2585,6 +2585,7 @@ forge-gui/res/cardsfolder/b/black_ward.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blackcleave_cliffs.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blackcleave_goblin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blackmail.txt -text
+forge-gui/res/cardsfolder/b/blade_of_selves.txt -text
 forge-gui/res/cardsfolder/b/blade_of_the_bloodchief.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blade_of_the_sixth_pride.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blade_sliver.txt svneol=native#text/plain
@@ -3735,6 +3736,7 @@ forge-gui/res/cardsfolder/c/coma_veil.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/combat_medic.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/combust.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/comet_storm.txt -text
+forge-gui/res/cardsfolder/c/command_beacon.txt -text
 forge-gui/res/cardsfolder/c/command_of_unsummoning.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/command_tower.txt -text
 forge-gui/res/cardsfolder/c/commandeer.txt -text
@@ -6859,6 +6861,7 @@ forge-gui/res/cardsfolder/g/great_defender.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/great_furnace.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/great_hart.txt -text
 forge-gui/res/cardsfolder/g/great_horn_krushok.txt -text
+forge-gui/res/cardsfolder/g/great_oak_guardian.txt -text
 forge-gui/res/cardsfolder/g/great_sable_stag.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/great_teachers_decree.txt -text
 forge-gui/res/cardsfolder/g/great_wall.txt svneol=native#text/plain
@@ -10722,6 +10725,7 @@ forge-gui/res/cardsfolder/p/path_of_angers_flame.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/path_of_bravery.txt -text
 forge-gui/res/cardsfolder/p/path_of_peace.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/path_to_exile.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/pathbreaker_ibex.txt -text
 forge-gui/res/cardsfolder/p/pathbreaker_wurm.txt -text
 forge-gui/res/cardsfolder/p/pathrazer_of_ulamog.txt -text
 forge-gui/res/cardsfolder/p/pathway_arrows.txt -text
@@ -12019,6 +12023,7 @@ forge-gui/res/cardsfolder/r/rite_of_flame.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rite_of_passage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rite_of_replication.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rite_of_ruin.txt -text
+forge-gui/res/cardsfolder/r/rite_of_the_raging_storm.txt -text
 forge-gui/res/cardsfolder/r/rite_of_the_serpent.txt -text
 forge-gui/res/cardsfolder/r/rite_of_undoing.txt -text
 forge-gui/res/cardsfolder/r/rites_of_flourishing.txt svneol=native#text/plain
