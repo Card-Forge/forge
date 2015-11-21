@@ -18391,6 +18391,7 @@ forge-gui/tools/extractSetInfo.py -text
 forge-gui/tools/formatCards -text
 forge-gui/tools/formats.txt -text
 forge-gui/tools/guilds.xlsx -text
+forge-gui/tools/jsonOraclizer.py -text
 forge-gui/tools/missingPreconFiles.py -text
 forge-gui/tools/mtg-data.txt svneol=native#text/plain
 forge-gui/tools/mtgdata-sets-to-forge.txt svneol=native#text/plain

@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
 ############IMPLEMENTATION FOLLOWS############
+import json
 import os,sys,fnmatch,re
+import requests
 
 toolsDir = os.path.abspath(os.path.dirname( __file__ ))
 resDir = os.path.abspath(os.path.join(toolsDir, '..', 'res'))
 editionsDir = os.path.join(resDir, 'editions')
+allJson = os.path.join(toolsDir, 'AllCards.json')
+allJsonUrl = 'http://mtgjson.com/json/AllCards.json'
 
 def initializeEditions():
 	ignoredTypes = [ "From_the_Vault", "Duel_Decks", "Online", "Premium_Deck_Series" ]
@@ -50,7 +54,26 @@ def initializeEditions():
 	print "These sets will be ignored in some output files", ignoredSet
 
 def initializeOracleText():
-	pass
+	print "Initializing Oracle text"
+	oracleDict = None
+	if not os.path.exists(allJson):
+		print "Need to download Json file..."
+		r = requests.get(allJsonUrl)
+		with open(allJson, 'w') as f:
+			f.write(r.text)
+
+		oracleDict = r.json()
+
+	else:
+		with open(allJson) as f:
+			oracleDict = json.loads(f.read())
+
+	print "Found Oracle text for ", len(oracleDict)
+	return oracleDict
+
+def normalizeOracle(oracle):
+	return oracle.replace(u'\u2014', '-').replace(u'\u2018', "'").replace(u'\u201c', '"').replace(u'\u201d', '"').replace(u'\u2022', '-')
+
 
 def initializeForgeCards():
 	#Parse Forge
@@ -185,8 +208,12 @@ def printDistinctOracle(missingSet, fileName):
 	with open(filePath, "w") as outfile:
 		for s in missing:
 			if s:
-				oracle = mtgOracleCards.get(s, "")
-				outfile.write("%s\n%s" % (s, oracle))
+				try:
+					oracle = normalizeOracle(mtgOracleCards.get(s).get('text'))
+					outfile.write("%s\n%s\n\n" % (s, oracle))
+				except:
+					outfile.write("%s\n\n" % (s))
+					print "Failed to grab oracle for ", s
 		outfile.write("\n")
 
 
@@ -198,7 +225,6 @@ if __name__ == '__main__':
 	forgeFolderFiles = []
 	forgeCards = []
 	mtgDataCards = {}
-	mtgOracleCards = {}
 	setCodes = []
 	setCodeToName = {}
 	forgeCardCount = 0
@@ -215,6 +241,7 @@ if __name__ == '__main__':
 	initializeEditions()
 
 	initializeForgeCards()
+	mtgOracleCards = initializeOracleText()
 
 	#Compare datasets and output results
 	print("Comparing datasets and outputting results.")
@@ -263,10 +290,36 @@ if __name__ == '__main__':
 			for everyImplemented in currentImplemented :
 				output.write(everyImplemented + '\n')
 			output.write("\n")
-			output.write("Missing (" + str(len(currentMissing)) + "):\n")
+			output.write("Missing (%s):\n" % len(currentMissing))
 			for everyMissing in currentMissing :
 				output.write(everyMissing + '\n')
-				output.write(mtgOracleCards.get(everyMissing, ""))
+				orc = mtgOracleCards.get(everyMissing)
+				try:
+					if 'manaCost' in orc:
+						output.write(orc.get('manaCost') + '\n')
+
+					#output.write(' '.join(orc.get('supertypes', [])))
+					#output.write(' '.join(orc.get('types', [])))
+					#output.write(' '.join(orc.get('subtypes', [])))
+					output.write(normalizeOracle(orc.get('type')))
+					output.write('\n')
+
+					if 'power' in orc:
+						output.write( "PT:" + orc.get('power') + '/' + orc.get('toughness') + '\n')
+					if 'loyalty' in orc:
+						output.write('Loyalty:' + orc.get('loyalty'))
+				except:
+					print "some issue?"
+
+				# Blah
+
+
+				try:
+					text = normalizeOracle(orc.get('text'))
+				except:
+					text = ''
+				
+				output.write(text + '\n\n')
 			output.write("\n")
 			output.write("Total: " + str(total) + "\n")
 			output.write("Percentage implemented: " + str(round(percentage,2)) + "%\n")
