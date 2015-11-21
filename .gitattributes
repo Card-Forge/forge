@@ -4885,6 +4885,7 @@ forge-gui/res/cardsfolder/d/dread_slag.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dread_slaver.txt -text
 forge-gui/res/cardsfolder/d/dread_specter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dread_statuary.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/dread_summons.txt -text
 forge-gui/res/cardsfolder/d/dread_warlock.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dread_wight.txt -text
 forge-gui/res/cardsfolder/d/dreadbore.txt -text
