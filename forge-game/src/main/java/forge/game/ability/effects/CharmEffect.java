@@ -100,10 +100,10 @@ public class CharmEffect extends SpellAbilityEffect {
         for (AbilitySub sub : chosen) {
             // Clone the chosen, just in case the some subAb gets chosen multiple times
             AbilitySub clone = (AbilitySub)sub.getCopy();
-            clone.setTargets(sub.getTargets());
 
             saDeepest.setSubAbility(clone);
             clone.setActivatingPlayer(saDeepest.getActivatingPlayer());
+            clone.setTargets(sub.getTargets()); // do not forget what was targeted by the subability
             clone.setParent(saDeepest);
 
             // to chain the next one (but make sure it goes all the way at the end of the SA chain)
