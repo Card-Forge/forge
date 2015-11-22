@@ -159,6 +159,8 @@ public class Combat {
 
     public final CardCollection getAttackersOf(GameEntity defender) {
         CardCollection result = new CardCollection();
+        if (!attackedByBands.containsKey(defender))
+            return result;
         for (AttackingBand v : attackedByBands.get(defender)) {
             result.addAll(v.getAttackers());
         }
