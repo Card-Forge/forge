@@ -86,6 +86,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return new Deck();
             }
         })),
+        TinyLeaders(new DeckController<Deck>(FModel.getDecks().getCommander(), new Supplier<Deck>() {
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
+        })),
         Archenemy(new DeckController<Deck>(FModel.getDecks().getScheme(), new Supplier<Deck>() {
             @Override
             public Deck get() {
@@ -143,6 +149,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SEALED_POOL)
             };
         case Commander:
+        case TinyLeaders:
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
                     new DeckSectionPage(DeckSection.Main),
@@ -463,6 +470,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Winston:
             return CardLimit.None;
         case Commander:
+        case TinyLeaders:
         case PlanarConquest:
             return CardLimit.Singleton;
         }
@@ -1455,6 +1463,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Commander:
                 DeckPreferences.setCommanderDeck(deckStr);
+                break;
+            case TinyLeaders:
+                DeckPreferences.setTinyLeadersDeck(deckStr);
                 break;
             case Archenemy:
                 DeckPreferences.setSchemeDeck(deckStr);

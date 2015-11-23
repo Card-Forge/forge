@@ -335,13 +335,12 @@ public enum DeckFormat {
         return rules.getOracleText().contains("can be your commander");
     }
 
-    public List<Deck> getLegalDecks(Iterable<Deck> decks) {
-        List<Deck> filteredDecks = new ArrayList<Deck>();
-        for (Deck deck : decks) {
-            if (getDeckConformanceProblem(deck) == null) {
-                filteredDecks.add(deck);
+    public Predicate<Deck> isLegalPredicate() {
+        return new Predicate<Deck>() {
+            @Override
+            public boolean apply(Deck input) {
+                return getDeckConformanceProblem(input) == null;
             }
-        }
-        return filteredDecks;
+        };
     }
 }

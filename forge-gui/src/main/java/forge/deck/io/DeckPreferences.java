@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
  *
  */
 public class DeckPreferences {
-    private static String currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "", planarDeck = "", schemeDeck = "";
+    private static String currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "", tinyLeadersDeck = "", planarDeck = "", schemeDeck = "";
     private static Map<String, DeckPreferences> allPrefs = new HashMap<String, DeckPreferences>();
 
     public static String getCurrentDeck() {
@@ -57,6 +57,15 @@ public class DeckPreferences {
     public static void setCommanderDeck(String commanderDeck0) {
         if (commanderDeck.equals(commanderDeck0)) { return; }
         commanderDeck = commanderDeck0;
+        save();
+    }
+
+    public static String getTinyLeadersDeck() {
+        return tinyLeadersDeck;
+    }
+    public static void setTinyLeadersDeck(String tinyLeadersDeck0) {
+        if (tinyLeadersDeck.equals(tinyLeadersDeck0)) { return; }
+        tinyLeadersDeck = tinyLeadersDeck0;
         save();
     }
 
@@ -100,6 +109,7 @@ public class DeckPreferences {
             draftDeck = root.getAttribute("draftDeck");
             sealedDeck = root.getAttribute("sealedDeck");
             commanderDeck = root.getAttribute("commanderDeck");
+            tinyLeadersDeck = root.getAttribute("tinyLeadersDeck");
             planarDeck = root.getAttribute("planarDeck");
             schemeDeck = root.getAttribute("schemeDeck");
 
@@ -129,6 +139,7 @@ public class DeckPreferences {
             root.setAttribute("draftDeck", draftDeck);
             root.setAttribute("sealedDeck", sealedDeck);
             root.setAttribute("commanderDeck", commanderDeck);
+            root.setAttribute("tinyLeadersDeck", tinyLeadersDeck);
             root.setAttribute("planarDeck", planarDeck);
             root.setAttribute("schemeDeck", schemeDeck);
             document.appendChild(root);

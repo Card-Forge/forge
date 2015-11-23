@@ -23,6 +23,7 @@ import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.game.GameView;
+import forge.game.IHasGameType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGameController;
@@ -36,7 +37,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
 
-public abstract class GameLobby {
+public abstract class GameLobby implements IHasGameType {
     private final static int MAX_PLAYERS = 8;
 
     private GameLobbyData data = new GameLobbyData();

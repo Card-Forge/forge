@@ -31,6 +31,7 @@ import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
+import forge.deck.RandomDeckGenerator;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.game.card.CardView;
@@ -59,7 +60,6 @@ import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
-import forge.util.storage.IStorage;
 
 /**
  * Lobby view. View of a number of players at the deck selection stage.
@@ -111,6 +111,9 @@ public class VLobby implements ILobbyView {
     // Variants
     private final List<FList<Object>> commanderDeckLists = new ArrayList<FList<Object>>();
     private final List<FPanel> commanderDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
+
+    private final List<FList<Object>> tinyLeadersDeckLists = new ArrayList<FList<Object>>();
+    private final List<FPanel> tinyLeadersDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
 
     private final List<FList<Object>> schemeDeckLists = new ArrayList<FList<Object>>();
     private final List<FPanel> schemeDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
@@ -375,6 +378,25 @@ public class VLobby implements ILobbyView {
         commanderDeckPanel.add(scrCommander, "grow, push");
         commanderDeckLists.add(commanderDeckList);
         commanderDeckPanels.add(commanderDeckPanel);
+        
+        // Tiny Leaders deck list
+        final FPanel tinyLeadersDeckPanel = new FPanel();
+        tinyLeadersDeckPanel.setBorderToggle(false);
+        tinyLeadersDeckPanel.setLayout(new MigLayout(sectionConstraints));
+        tinyLeadersDeckPanel.add(new FLabel.Builder().text("Select Tiny Leaders deck:").build(), labelConstraints);
+        final FList<Object> tinyLeadersDeckList = new FList<Object>();
+        tinyLeadersDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tinyLeadersDeckList.addListSelectionListener(new ListSelectionListener() {
+            @Override public final void valueChanged(final ListSelectionEvent e) {
+                selectTinyLeadersDeck(playerIndex);
+            }
+        });
+
+        final FScrollPane scrTinyLeaders = new FScrollPane(tinyLeadersDeckList, true,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        tinyLeadersDeckPanel.add(scrTinyLeaders, "grow, push");
+        tinyLeadersDeckLists.add(tinyLeadersDeckList);
+        tinyLeadersDeckPanels.add(tinyLeadersDeckPanel);
 
         // Planar deck list
         final FPanel planarDeckPanel = new FPanel();
@@ -460,9 +482,9 @@ public class VLobby implements ILobbyView {
                     sel = "Random";
                 }
             }
-            final IStorage<Deck> sDecks = FModel.getDecks().getScheme();
-            if (sel.equals("Random") && sDecks.size() != 0) {
-                schemePool = Aggregates.random(sDecks).get(DeckSection.Schemes);
+            if (sel.equals("Random")) {
+                final Deck randomDeck = RandomDeckGenerator.getRandomUserDeck(lobby, playerPanels.get(playerIndex).isAi());
+                schemePool = randomDeck.get(DeckSection.Schemes);
             }
         } else if (selected instanceof Deck) {
             schemePool = ((Deck) selected).get(DeckSection.Schemes);
@@ -475,24 +497,42 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectCommanderDeck(final int playerIndex) {
-        if (playerIndex >= activePlayersNum || !(hasVariant(GameType.Commander) || hasVariant(GameType.TinyLeaders))) {
+        if (playerIndex >= activePlayersNum || !hasVariant(GameType.Commander)) {
             return;
         }
 
         final Object selected = getCommanderDeckLists().get(playerIndex).getSelectedValue();
         Deck deck = null;
         if (selected instanceof String) {
-            final String sel = (String) selected;
-            final IStorage<Deck> comDecks = FModel.getDecks().getCommander();
-            if (sel.equals("Random") && comDecks.size() > 0) {
-                deck = Aggregates.random(comDecks);
+            if (selected.equals("Random")) {
+                deck = RandomDeckGenerator.getRandomUserDeck(lobby, playerPanels.get(playerIndex).isAi());
             }
         } else if (selected instanceof Deck) {
             deck = (Deck) selected;
         }
-        final GameType commanderGameType = hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders : GameType.Commander;
         if (deck == null) { //Can be null if player deselects the list selection or chose Generate
-            deck = DeckgenUtil.generateCommanderDeck(isPlayerAI(playerIndex), commanderGameType);
+            deck = DeckgenUtil.generateCommanderDeck(isPlayerAI(playerIndex), GameType.Commander);
+        }
+        fireDeckChangeListener(playerIndex, deck);
+        getDeckChooser(playerIndex).saveState();
+    }
+
+    private void selectTinyLeadersDeck(final int playerIndex) {
+        if (playerIndex >= activePlayersNum || !hasVariant(GameType.TinyLeaders)) {
+            return;
+        }
+
+        final Object selected = getCommanderDeckLists().get(playerIndex).getSelectedValue();
+        Deck deck = null;
+        if (selected instanceof String) {
+            if (selected.equals("Random")) {
+                deck = RandomDeckGenerator.getRandomUserDeck(lobby, playerPanels.get(playerIndex).isAi());
+            }
+        } else if (selected instanceof Deck) {
+            deck = (Deck) selected;
+        }
+        if (deck == null) { //Can be null if player deselects the list selection or chose Generate
+            deck = DeckgenUtil.generateCommanderDeck(isPlayerAI(playerIndex), GameType.TinyLeaders);
         }
         fireDeckChangeListener(playerIndex, deck);
         getDeckChooser(playerIndex).saveState();
@@ -515,9 +555,9 @@ public class VLobby implements ILobbyView {
                     sel = "Random";
                 }
             }
-            final IStorage<Deck> pDecks = FModel.getDecks().getPlane();
-            if (sel.equals("Random") && pDecks.size() != 0) {
-                planePool = Aggregates.random(pDecks).get(DeckSection.Planes);
+            if (sel.equals("Random")) {
+                final Deck randomDeck = RandomDeckGenerator.getRandomUserDeck(lobby, playerPanels.get(playerIndex).isAi());
+                planePool = randomDeck.get(DeckSection.Planes);
             }
         } else if (selected instanceof Deck) {
             planePool = ((Deck) selected).get(DeckSection.Planes);
@@ -589,26 +629,38 @@ public class VLobby implements ILobbyView {
             return;
         }
 
-        if (GameType.Constructed == forGameType) {
+        switch (forGameType) {
+        case Constructed:
             decksFrame.add(deckChoosers.get(playerWithFocus), "grow, push");
             if (deckChoosers.get(playerWithFocus).getSelectedDeckType().toString().contains("Random")) {
                 final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
                 decksFrame.add(cbSingletons, strCheckboxConstraints);
                 decksFrame.add(cbArtifacts, strCheckboxConstraints);
             }
-        } else if (GameType.Archenemy == forGameType || GameType.ArchenemyRumble == forGameType) {
+            break;
+        case Archenemy:
+        case ArchenemyRumble:
             if (isPlayerArchenemy(playerWithFocus)) {
                 decksFrame.add(schemeDeckPanels.get(playerWithFocus), "grow, push");
             } else {
                 populateDeckPanel(GameType.Constructed);
             }
-        } else if (GameType.Commander == forGameType || GameType.TinyLeaders == forGameType) {
+            break;
+        case Commander:
             decksFrame.add(commanderDeckPanels.get(playerWithFocus), "grow, push");
-        } else if (GameType.Planechase == forGameType) {
+            break;
+        case TinyLeaders:
+            decksFrame.add(tinyLeadersDeckPanels.get(playerWithFocus), "grow, push");
+            break;
+        case Planechase:
             decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
-        } else if (GameType.Vanguard == forGameType) {
+            break;
+        case Vanguard:
             updateVanguardList(playerWithFocus);
             decksFrame.add(vgdPanels.get(playerWithFocus), "grow, push");
+            break;
+        default:
+            break;
         }
         refreshPanels(false, true);
     }
@@ -791,6 +843,11 @@ public class VLobby implements ILobbyView {
     /** Gets the list of commander deck lists. */
     public List<FList<Object>> getCommanderDeckLists() {
         return commanderDeckLists;
+    }
+
+    /** Gets the list of tiny leaders deck lists. */
+    public List<FList<Object>> getTinyLeadersDeckLists() {
+        return tinyLeadersDeckLists;
     }
 
     /** Gets the list of scheme deck lists. */

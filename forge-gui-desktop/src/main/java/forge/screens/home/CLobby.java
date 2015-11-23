@@ -6,12 +6,13 @@ import java.util.Vector;
 
 import javax.swing.SwingUtilities;
 
-import forge.deck.Deck;
+import com.google.common.collect.Iterables;
+
+import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
 import forge.deckchooser.IDecksComboBoxListener;
-import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -27,7 +28,10 @@ public class CLobby {
     public void update() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override public final void run() {
-                final CardCollections cColl = FModel.getDecks();
+                final Iterable<DeckProxy> commanderDecks = DeckProxy.getAllCommanderDecks();
+                final Iterable<DeckProxy> tinyLeadersDecks = DeckProxy.getAllTinyLeadersDecks();
+                final Iterable<DeckProxy> planarDecks = DeckProxy.getAllPlanarDecks();
+                final Iterable<DeckProxy> schemeDecks = DeckProxy.getAllSchemeDecks();
                 FList<Object> deckList;
                 Vector<Object> listData;
                 Object val;
@@ -37,10 +41,10 @@ public class CLobby {
                     deckList = view.getCommanderDeckLists().get(i);
                     listData = new Vector<Object>();
                     listData.add("Generate");
-                    if (cColl.getCommander().size() > 0) {
+                    if (!Iterables.isEmpty(commanderDecks)) {
                         listData.add("Random");
-                        for (Deck comDeck : cColl.getCommander()) {
-                            listData.add(comDeck);
+                        for (DeckProxy comDeck : commanderDecks) {
+                            listData.add(comDeck.getDeck());
                         }
                     }
                     val = deckList.getSelectedValue();
@@ -52,15 +56,34 @@ public class CLobby {
                         deckList.setSelectedIndex(0);
                     } // End Commander
 
+                    // Tiny Leaders: reinit deck list and restore last selections (if any)
+                    deckList = view.getTinyLeadersDeckLists().get(i);
+                    listData = new Vector<Object>();
+                    listData.add("Generate");
+                    if (!Iterables.isEmpty(tinyLeadersDecks)) {
+                        listData.add("Random");
+                        for (DeckProxy tlDeck : tinyLeadersDecks) {
+                            listData.add(tlDeck.getDeck());
+                        }
+                    }
+                    val = deckList.getSelectedValue();
+                    deckList.setListData(listData);
+                    if (null != val) {
+                        deckList.setSelectedValue(val, true);
+                    }
+                    if (-1 == deckList.getSelectedIndex()) {
+                        deckList.setSelectedIndex(0);
+                    } // Tiny Leaders
+
                     // Archenemy: reinit deck list and restore last selections (if any)
                     deckList = view.getSchemeDeckLists().get(i);
                     listData = new Vector<Object>();
                     listData.add("Use deck's scheme section (random if unavailable)");
                     listData.add("Generate");
-                    if (cColl.getScheme().size() > 0) {
+                    if (!Iterables.isEmpty(schemeDecks)) {
                         listData.add("Random");
-                        for (Deck schemeDeck : cColl.getScheme()) {
-                            listData.add(schemeDeck);
+                        for (DeckProxy schemeDeck : schemeDecks) {
+                            listData.add(schemeDeck.getDeck());
                         }
                     }
                     val = deckList.getSelectedValue();
@@ -78,10 +101,10 @@ public class CLobby {
 
                     listData.add("Use deck's planes section (random if unavailable)");
                     listData.add("Generate");
-                    if (cColl.getPlane().size() > 0) {
+                    if (!Iterables.isEmpty(planarDecks)) {
                         listData.add("Random");
-                        for (Deck planarDeck : cColl.getPlane()) {
-                            listData.add(planarDeck);
+                        for (DeckProxy planarDeck : planarDecks) {
+                            listData.add(planarDeck.getDeck());
                         }
                     }
 

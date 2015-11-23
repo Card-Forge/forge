@@ -4,6 +4,7 @@ public enum DeckType {
     CUSTOM_DECK ("Custom User Decks"),
     CONSTRUCTED_DECK ("Constructed Decks"),
     COMMANDER_DECK ("Commander Decks"),
+    TINY_LEADERS_DECKS ("Tiny Leaders Decks"),
     SCHEME_DECKS ("Scheme Decks"),
     PLANAR_DECKS ("Planar Decks"),
     DRAFT_DECKS ("Draft Decks"),

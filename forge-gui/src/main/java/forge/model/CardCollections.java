@@ -42,7 +42,6 @@ public class CardCollections {
     private final IStorage<Deck> scheme;
     private final IStorage<Deck> plane;
     private final IStorage<Deck> commander;
-    private final IStorage<Deck> tinyLeaders;
 
     public CardCollections() {
         final StopWatch sw = new StopWatch();
@@ -55,9 +54,8 @@ public class CardCollections {
         scheme      = new StorageImmediatelySerialized<Deck>     ("Archenemy decks",         new DeckStorage(new File(ForgeConstants.DECK_SCHEME_DIR), ForgeConstants.DECK_BASE_DIR));
         plane       = new StorageImmediatelySerialized<Deck>     ("Planechase decks",        new DeckStorage(new File(ForgeConstants.DECK_PLANE_DIR), ForgeConstants.DECK_BASE_DIR));
         commander   = new StorageImmediatelySerialized<Deck>     ("Commander decks",         new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR), ForgeConstants.DECK_BASE_DIR));
-        tinyLeaders = new StorageImmediatelySerialized<Deck>     ("Commander decks",         new DeckStorage(new File(ForgeConstants.DECK_TINY_LEADERS_DIR), ForgeConstants.DECK_BASE_DIR));
         sw.stop();
-        System.out.printf("Read decks (%d ms): %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar, %d commander, %d tiny leaders.%n", sw.getTime(), constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size(), commander.size(), tinyLeaders.size());
+        System.out.printf("Read decks (%d ms): %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar, %d commander.%n", sw.getTime(), constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size(), commander.size());
     }
 
     public final IStorage<Deck> getConstructed() {

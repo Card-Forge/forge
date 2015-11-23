@@ -335,36 +335,44 @@ public class DeckProxy implements InventoryItem {
     // TODO: The methods below should not take the decks collections from singletons, instead they are supposed to use data passed in parameters
     public static Iterable<DeckProxy> getAllConstructedDecks() {
         final List<DeckProxy> result = new ArrayList<DeckProxy>();
-        addDecksRecursivelly("Constructed", GameType.Constructed, result, "", FModel.getDecks().getConstructed());
+        addDecksRecursivelly("Constructed", GameType.Constructed, result, "", FModel.getDecks().getConstructed(), null);
         return result;
     }
 
     public static Iterable<DeckProxy> getAllCommanderDecks() {
         final List<DeckProxy> result = new ArrayList<DeckProxy>();
-        addDecksRecursivelly("Commander", GameType.Commander, result, "", FModel.getDecks().getCommander());
+        addDecksRecursivelly("Commander", GameType.Commander, result, "", FModel.getDecks().getCommander(), null);
+        return result;
+    }
+
+    public static Iterable<DeckProxy> getAllTinyLeadersDecks() {
+        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getCommander(), DeckFormat.TinyLeaders.isLegalPredicate());
         return result;
     }
 
     public static Iterable<DeckProxy> getAllSchemeDecks() {
         final List<DeckProxy> result = new ArrayList<DeckProxy>();
-        addDecksRecursivelly("Scheme", GameType.Archenemy, result, "", FModel.getDecks().getScheme());
+        addDecksRecursivelly("Scheme", GameType.Archenemy, result, "", FModel.getDecks().getScheme(), null);
         return result;
     }
 
     public static Iterable<DeckProxy> getAllPlanarDecks() {
         final List<DeckProxy> result = new ArrayList<DeckProxy>();
-        addDecksRecursivelly("Plane", GameType.Planechase, result, "", FModel.getDecks().getPlane());
+        addDecksRecursivelly("Plane", GameType.Planechase, result, "", FModel.getDecks().getPlane(), null);
         return result;
     }
 
-    private static void addDecksRecursivelly(final String deckType, final GameType gameType, final List<DeckProxy> list, final String path, final IStorage<Deck> folder) {
+    private static void addDecksRecursivelly(final String deckType, final GameType gameType, final List<DeckProxy> list, final String path, final IStorage<Deck> folder, final Predicate<Deck> condition) {
         for (final IStorage<Deck> f : folder.getFolders()) {
             final String subPath = (StringUtils.isBlank(path) ? "" : path) + "/" + f.getName();
-            addDecksRecursivelly(deckType, gameType, list, subPath, f);
+            addDecksRecursivelly(deckType, gameType, list, subPath, f, condition);
         }
 
         for (final Deck d : folder) {
-            list.add(new DeckProxy(d, deckType, gameType, path, folder, null));
+            if (condition == null || condition.apply(d)) {
+                list.add(new DeckProxy(d, deckType, gameType, path, folder, null));
+            }
         }
     }
 
@@ -517,7 +525,7 @@ public class DeckProxy implements InventoryItem {
     public static List<DeckProxy> getNetDecks(final NetDeckCategory category) {
         final List<DeckProxy> decks = new ArrayList<DeckProxy>();
         if (category != null) {
-            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category);
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
         }
         return decks;
     }

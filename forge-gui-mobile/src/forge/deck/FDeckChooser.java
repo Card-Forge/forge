@@ -206,8 +206,10 @@ public class FDeckChooser extends FScreen {
             refreshDecksList(selectedDeckType, true, null);
             switch (lstDecks.getGameType()) {
             case Commander:
-            case TinyLeaders:
                 lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
+                break;
+            case TinyLeaders:
+                lstDecks.setSelectedString(DeckPreferences.getTinyLeadersDeck());
                 break;
             case Archenemy:
                 lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
@@ -219,6 +221,9 @@ public class FDeckChooser extends FScreen {
                 switch (selectedDeckType) {
                 case COMMANDER_DECK:
                     lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
+                    break;
+                case TINY_LEADERS_DECKS:
+                    lstDecks.setSelectedString(DeckPreferences.getTinyLeadersDeck());
                     break;
                 case SCHEME_DECKS:
                     lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
@@ -350,6 +355,8 @@ public class FDeckChooser extends FScreen {
             switch (selectedDeckType) {
             case COMMANDER_DECK:
                 return EditorType.Commander;
+            case TINY_LEADERS_DECKS:
+                return EditorType.TinyLeaders;
             case SCHEME_DECKS:
                 return EditorType.Archenemy;
             case PLANAR_DECKS:
@@ -378,6 +385,9 @@ public class FDeckChooser extends FScreen {
         switch (editorType) {
         case Commander:
             DeckPreferences.setCommanderDeck(deck.getName());
+            break;
+        case TinyLeaders:
+            DeckPreferences.setTinyLeadersDeck(deck.getName());
             break;
         case Archenemy:
             DeckPreferences.setSchemeDeck(deck.getName());
@@ -425,6 +435,7 @@ public class FDeckChooser extends FScreen {
             case DeckManager:
                 cmbDeckTypes.addItem(DeckType.CONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.COMMANDER_DECK);
+                cmbDeckTypes.addItem(DeckType.TINY_LEADERS_DECKS);
                 cmbDeckTypes.addItem(DeckType.SCHEME_DECKS);
                 cmbDeckTypes.addItem(DeckType.PLANAR_DECKS);
                 cmbDeckTypes.addItem(DeckType.DRAFT_DECKS);
@@ -511,6 +522,10 @@ public class FDeckChooser extends FScreen {
                 pool = DeckProxy.getAllCommanderDecks();
                 config = ItemManagerConfig.COMMANDER_DECKS;
                 break;
+            case TinyLeaders:
+                pool = DeckProxy.getAllTinyLeadersDecks();
+                config = ItemManagerConfig.COMMANDER_DECKS;
+                break;
             case Archenemy:
                 pool = DeckProxy.getAllSchemeDecks();
                 config = ItemManagerConfig.SCHEME_DECKS;
@@ -531,6 +546,10 @@ public class FDeckChooser extends FScreen {
             break;
         case COMMANDER_DECK:
             pool = DeckProxy.getAllCommanderDecks();
+            config = ItemManagerConfig.COMMANDER_DECKS;
+            break;
+        case TINY_LEADERS_DECKS:
+            pool = DeckProxy.getAllTinyLeadersDecks();
             config = ItemManagerConfig.COMMANDER_DECKS;
             break;
         case SCHEME_DECKS:

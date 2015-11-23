@@ -8,7 +8,6 @@ import com.google.common.collect.Iterables;
 
 import forge.game.GameType;
 import forge.game.IHasGameType;
-import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.util.Aggregates;
 
@@ -27,6 +26,11 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         decks.add(new RandomDeckGenerator("Random Favorite Deck", RandomDeckType.Favorite, lstDecks0, isAi0));
 
         return decks;
+    }
+
+    public static Deck getRandomUserDeck(final IHasGameType lstDecks0, final boolean isAi0) {
+        RandomDeckGenerator generator = new RandomDeckGenerator(null, RandomDeckType.User, lstDecks0, isAi0);
+        return generator.getDeck();
     }
 
     private final String name;
@@ -103,28 +107,28 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
     }
 
     private Deck getUserDeck() {
-        Iterable<Deck> decks;
+        Iterable<DeckProxy> decks;
         switch (lstDecks.getGameType()) {
         case Commander:
-            decks = FModel.getDecks().getCommander();
+            decks = DeckProxy.getAllCommanderDecks();
             break;
         case TinyLeaders:
-            decks = DeckFormat.TinyLeaders.getLegalDecks(FModel.getDecks().getCommander());
+            decks = DeckProxy.getAllTinyLeadersDecks();
             break;
         case Archenemy:
-            decks = FModel.getDecks().getScheme();
+            decks = DeckProxy.getAllSchemeDecks();
             break;
         case Planechase:
-            decks = FModel.getDecks().getPlane();
+            decks = DeckProxy.getAllPlanarDecks();
             break;
         default:
-            decks = FModel.getDecks().getConstructed();
+            decks = DeckProxy.getAllConstructedDecks();
             break;
         }
         if (Iterables.isEmpty(decks)) {
             return getGeneratedDeck(); //fall back to generated deck if no decks in filtered list
         }
-        return Aggregates.random(decks);
+        return Aggregates.random(decks).getDeck();
     }
 
     private Deck getFavoriteDeck() {
@@ -134,11 +138,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             decks = DeckProxy.getAllCommanderDecks();
             break;
         case TinyLeaders:
-            decks = Iterables.filter(DeckProxy.getAllCommanderDecks(), new Predicate<DeckProxy>() {
-                @Override public boolean apply(final DeckProxy deck) {
-                    return DeckFormat.TinyLeaders.getDeckConformanceProblem(deck.getDeck()) == null;
-                }
-            });
+            decks = DeckProxy.getAllTinyLeadersDecks();
             break;
         case Archenemy:
             decks = DeckProxy.getAllSchemeDecks();
