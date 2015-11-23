@@ -230,6 +230,8 @@ public class DualListBox<T> extends FDialog {
                 return true;
             }
             break;
+        case Keys.BACK:
+            return true; //suppress Back button
         }
         return super.keyDown(keyCode);
     }
