@@ -1399,7 +1399,6 @@ forge-gui/LICENSE.txt -text
 forge-gui/README.txt -text
 forge-gui/forge.profile.properties.example -text
 forge-gui/pom.xml -text
-forge-gui/res/.nomedia -text
 forge-gui/res/ai/Default.ai -text
 forge-gui/res/ai/Reckless.ai -text
 forge-gui/res/blockdata/blocks.txt svneol=native#text/plain
