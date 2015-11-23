@@ -243,9 +243,6 @@ public abstract class GameLobby {
             return;
         }
 
-        if (data.appliedVariants.isEmpty()) {
-            data.appliedVariants.add(GameType.Constructed);
-        }
         if (variant == currentGameType) {
             if (hasVariant(GameType.Commander)) {
                 currentGameType = GameType.Commander;
@@ -482,7 +479,7 @@ public abstract class GameLobby {
     public final static class GameLobbyData implements Serializable {
         private static final long serialVersionUID = 9184758307999646864L;
 
-        private final Set<GameType> appliedVariants = EnumSet.of(GameType.Constructed);
+        private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
         private final List<LobbySlot> slots = Lists.newArrayList();
 
         public GameLobbyData() {
