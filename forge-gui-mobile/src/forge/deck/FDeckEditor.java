@@ -2,10 +2,10 @@ package forge.deck;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.*;
@@ -61,70 +61,86 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             public Deck get() {
                 return new Deck();
             }
-        })),
+        }), null),
         Draft(new DeckController<DeckGroup>(FModel.getDecks().getDraft(), new Supplier<DeckGroup>() {
             @Override
             public DeckGroup get() {
                 return new DeckGroup("");
             }
-        })),
+        }), null),
         Sealed(new DeckController<DeckGroup>(FModel.getDecks().getSealed(), new Supplier<DeckGroup>() {
             @Override
             public DeckGroup get() {
                 return new DeckGroup("");
             }
-        })),
+        }), null),
         Winston(new DeckController<DeckGroup>(FModel.getDecks().getWinston(), new Supplier<DeckGroup>() {
             @Override
             public DeckGroup get() {
                 return new DeckGroup("");
             }
-        })),
+        }), null),
         Commander(new DeckController<Deck>(FModel.getDecks().getCommander(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
-        })),
+        }), null),
         TinyLeaders(new DeckController<Deck>(FModel.getDecks().getCommander(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
-        })),
+        }), DeckFormat.TinyLeaders.isLegalCardPredicate()),
         Archenemy(new DeckController<Deck>(FModel.getDecks().getScheme(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
-        })),
+        }), null),
         Planechase(new DeckController<Deck>(FModel.getDecks().getPlane(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
-        })),
+        }), null),
         Quest(new DeckController<Deck>(null, new Supplier<Deck>() { //delay setting root folder until quest loaded
             @Override
             public Deck get() {
                 return new Deck();
             }
-        })),
+        }), null),
         PlanarConquest(new DeckController<Deck>(null, new Supplier<Deck>() { //delay setting root folder until conquest loaded
             @Override
             public Deck get() {
                 return new Deck();
             }
-        }));
+        }), null);
 
         private final DeckController<? extends DeckBase> controller;
+        private final Predicate<PaperCard> cardFilter;
 
         public DeckController<? extends DeckBase> getController() {
             return controller;
         }
 
-        private EditorType(DeckController<? extends DeckBase> controller0) {
+        private EditorType(DeckController<? extends DeckBase> controller0, Predicate<PaperCard> cardFilter0) {
             controller = controller0;
+            cardFilter = cardFilter0;
+        }
+
+        private ItemPool<PaperCard> applyCardFilter(ItemPool<PaperCard> cardPool) {
+            if (cardFilter == null) {
+                return cardPool;
+            }
+
+            ItemPool<PaperCard> filteredPool = new ItemPool<PaperCard>(PaperCard.class);
+            for (Entry<PaperCard, Integer> entry : cardPool) {
+                if (cardFilter.apply(entry.getKey())) {
+                    filteredPool.add(entry.getKey(), entry.getValue());
+                }
+            }
+            return filteredPool;
         }
     }
 
@@ -833,7 +849,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public void refresh() {
-            switch (parentScreen.getEditorType()) {
+            final EditorType editorType = parentScreen.getEditorType();
+            switch (editorType) {
             case Archenemy:
                 cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class), true);
                 break;
@@ -841,23 +858,23 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class), true);
                 break;
             case Quest:
-                final ItemPool<PaperCard> cardpool = new ItemPool<PaperCard>(PaperCard.class);
-                cardpool.addAll(FModel.getQuest().getCards().getCardpool());
+                final ItemPool<PaperCard> questPool = new ItemPool<PaperCard>(PaperCard.class);
+                questPool.addAll(FModel.getQuest().getCards().getCardpool());
                 // remove bottom cards that are in the deck from the card pool
-                cardpool.removeAll(parentScreen.getDeck().getMain());
+                questPool.removeAll(parentScreen.getDeck().getMain());
                 // remove sideboard cards from the catalog
-                cardpool.removeAll(parentScreen.getDeck().getOrCreate(DeckSection.Sideboard));
-                cardManager.setPool(cardpool);
+                questPool.removeAll(parentScreen.getDeck().getOrCreate(DeckSection.Sideboard));
+                cardManager.setPool(questPool);
                 break;
             case PlanarConquest:
                 cardManager.setPool(ConquestUtil.getAvailablePool(parentScreen.getDeck()));
                 break;
             default:
                 if (cardManager.getWantUnique()) {
-                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class), true);
+                    cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class)), true);
                 }
                 else {
-                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+                    cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class)), true);
                 }
                 break;
             }

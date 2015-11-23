@@ -347,7 +347,7 @@ public class DeckProxy implements InventoryItem {
 
     public static Iterable<DeckProxy> getAllTinyLeadersDecks() {
         final List<DeckProxy> result = new ArrayList<DeckProxy>();
-        addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getCommander(), DeckFormat.TinyLeaders.isLegalPredicate());
+        addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getCommander(), DeckFormat.TinyLeaders.isLegalDeckPredicate());
         return result;
     }
 

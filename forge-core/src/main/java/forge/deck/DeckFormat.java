@@ -335,11 +335,20 @@ public enum DeckFormat {
         return rules.getOracleText().contains("can be your commander");
     }
 
-    public Predicate<Deck> isLegalPredicate() {
+    public Predicate<Deck> isLegalDeckPredicate() {
         return new Predicate<Deck>() {
             @Override
-            public boolean apply(Deck input) {
-                return getDeckConformanceProblem(input) == null;
+            public boolean apply(Deck deck) {
+                return getDeckConformanceProblem(deck) == null;
+            }
+        };
+    }
+
+    public Predicate<PaperCard> isLegalCardPredicate() {
+        return new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard card) {
+                return isLegalCard(card);
             }
         };
     }
