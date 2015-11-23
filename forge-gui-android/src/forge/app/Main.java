@@ -47,6 +47,13 @@ public class Main extends AndroidApplication {
             return;
         }
 
+        //ensure .nomedia file exists in Forge directory so its images
+        //and other media files don't appear in Gallery or other apps
+        String noMediaFile = assetsDir + ".nomedia";
+        if (!FileUtil.doesFileExist(noMediaFile)) {
+            FileUtil.writeFile(noMediaFile, "");
+        }
+
         //enforce orientation based on whether device is a tablet and user preference
         adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
         boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
