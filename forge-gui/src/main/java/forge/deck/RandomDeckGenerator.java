@@ -108,21 +108,22 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
 
     private Deck getUserDeck() {
         Iterable<DeckProxy> decks;
-        switch (lstDecks.getGameType()) {
+        final GameType gameType = lstDecks.getGameType();
+        switch (gameType) {
         case Commander:
-            decks = DeckProxy.getAllCommanderDecks();
+            decks = DeckProxy.getAllCommanderDecks(DeckFormat.Commander.isLegalDeckPredicate());
             break;
         case TinyLeaders:
-            decks = DeckProxy.getAllTinyLeadersDecks();
+            decks = DeckProxy.getAllTinyLeadersDecks(); //already applies isLegal check for TinyLeaders
             break;
         case Archenemy:
-            decks = DeckProxy.getAllSchemeDecks();
+            decks = DeckProxy.getAllSchemeDecks(DeckFormat.Archenemy.isLegalDeckPredicate());
             break;
         case Planechase:
-            decks = DeckProxy.getAllPlanarDecks();
+            decks = DeckProxy.getAllPlanarDecks(DeckFormat.Planechase.isLegalDeckPredicate());
             break;
         default:
-            decks = DeckProxy.getAllConstructedDecks();
+            decks = DeckProxy.getAllConstructedDecks(gameType.getDeckFormat().isLegalDeckPredicate());
             break;
         }
         if (Iterables.isEmpty(decks)) {
