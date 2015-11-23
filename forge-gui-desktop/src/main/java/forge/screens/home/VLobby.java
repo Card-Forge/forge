@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -329,7 +330,7 @@ public class VLobby implements ILobbyView {
     @SuppressWarnings("serial")
     private void buildDeckPanel(final int playerIndex) {
         final String sectionConstraints = "insets 0, gap 0, wrap";
-        final String labelConstraints = "gaptop 10px, gapbottom 5px";
+        final String labelConstraints = "gaptop 10px, gapbottom 5px, growx, pushx";
 
         // Main deck
         final FDeckChooser mainChooser = new FDeckChooser(null, false);
@@ -345,7 +346,9 @@ public class VLobby implements ILobbyView {
         final FPanel schemeDeckPanel = new FPanel();
         schemeDeckPanel.setBorderToggle(false);
         schemeDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        schemeDeckPanel.add(new FLabel.Builder().text("Select Scheme deck:").build(), labelConstraints);
+        schemeDeckPanel.add(new FLabel.Builder().text("Select Scheme deck:")
+                .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
+                .build(), labelConstraints);
         final FList<Object> schemeDeckList = new FList<Object>();
         schemeDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         schemeDeckList.addListSelectionListener(new ListSelectionListener() {
@@ -364,7 +367,9 @@ public class VLobby implements ILobbyView {
         final FPanel commanderDeckPanel = new FPanel();
         commanderDeckPanel.setBorderToggle(false);
         commanderDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        commanderDeckPanel.add(new FLabel.Builder().text("Select Commander deck:").build(), labelConstraints);
+        commanderDeckPanel.add(new FLabel.Builder().text("Select Commander Deck")
+                .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
+                .build(), labelConstraints);
         final FList<Object> commanderDeckList = new FList<Object>();
         commanderDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         commanderDeckList.addListSelectionListener(new ListSelectionListener() {
@@ -383,7 +388,9 @@ public class VLobby implements ILobbyView {
         final FPanel tinyLeadersDeckPanel = new FPanel();
         tinyLeadersDeckPanel.setBorderToggle(false);
         tinyLeadersDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        tinyLeadersDeckPanel.add(new FLabel.Builder().text("Select Tiny Leaders deck:").build(), labelConstraints);
+        tinyLeadersDeckPanel.add(new FLabel.Builder().text("Select Tiny Leaders Deck")
+                .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
+                .build(), labelConstraints);
         final FList<Object> tinyLeadersDeckList = new FList<Object>();
         tinyLeadersDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tinyLeadersDeckList.addListSelectionListener(new ListSelectionListener() {
@@ -402,7 +409,9 @@ public class VLobby implements ILobbyView {
         final FPanel planarDeckPanel = new FPanel();
         planarDeckPanel.setBorderToggle(false);
         planarDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        planarDeckPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), labelConstraints);
+        planarDeckPanel.add(new FLabel.Builder().text("Select Planar Deck")
+                .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
+                .build(), labelConstraints);
         final FList<Object> planarDeckList = new FList<Object>();
         planarDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         planarDeckList.addListSelectionListener(new ListSelectionListener() {
@@ -437,7 +446,9 @@ public class VLobby implements ILobbyView {
         vgdAvatarDetails.add(vgdDetail);
 
         vgdDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        vgdDeckPanel.add(new FLabel.Builder().text("Select a Vanguard avatar:").build(), labelConstraints);
+        vgdDeckPanel.add(new FLabel.Builder().text("Select Vanguard Avatar")
+                .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
+                .build(), labelConstraints);
         vgdDeckPanel.add(scrAvatars, "grow, push");
         vgdDeckPanel.add(vgdDetail, "h 200px, pushx, growx, hidemode 3");
         vgdAvatarLists.add(vgdAvatarList);
