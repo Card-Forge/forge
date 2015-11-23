@@ -173,6 +173,7 @@ public class FDeckChooser extends FScreen {
         case Constructed:
             break; //delay initialize for constructed until saved decks can be reloaded
         case Commander:
+        case TinyLeaders:
         case Gauntlet:
             initialize(null, DeckType.CUSTOM_DECK);
             break;
@@ -205,6 +206,7 @@ public class FDeckChooser extends FScreen {
             refreshDecksList(selectedDeckType, true, null);
             switch (lstDecks.getGameType()) {
             case Commander:
+            case TinyLeaders:
                 lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
                 break;
             case Archenemy:
@@ -360,6 +362,7 @@ public class FDeckChooser extends FScreen {
                 return EditorType.Constructed;
             }
         case Commander:
+        case TinyLeaders:
             return EditorType.Commander;
         case Archenemy:
             return EditorType.Archenemy;
@@ -414,6 +417,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 break;
             case Commander:
+            case TinyLeaders:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);

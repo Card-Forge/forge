@@ -382,6 +382,7 @@ public class PlayerPanel extends FContainer {
                 archenemyVisiblity = true;
                 break;
             case Commander:
+            case TinyLeaders:
                 isCommanderApplied = true;
                 isDeckBuildingAllowed = false; //Commander deck replaces basic deck, so hide that
                 break;

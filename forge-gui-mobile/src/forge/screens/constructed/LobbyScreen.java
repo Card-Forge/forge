@@ -116,6 +116,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbVariants.addItem(GameType.Vanguard);
         cbVariants.addItem(GameType.MomirBasic);
         cbVariants.addItem(GameType.Commander);
+        cbVariants.addItem(GameType.TinyLeaders);
         cbVariants.addItem(GameType.Planechase);
         cbVariants.addItem(GameType.Archenemy);
         cbVariants.addItem(GameType.ArchenemyRumble);
@@ -333,6 +334,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             lstVariants.addItem(new Variant(GameType.Vanguard));
             lstVariants.addItem(new Variant(GameType.MomirBasic));
             lstVariants.addItem(new Variant(GameType.Commander));
+            lstVariants.addItem(new Variant(GameType.TinyLeaders));
             lstVariants.addItem(new Variant(GameType.Planechase));
             lstVariants.addItem(new Variant(GameType.Archenemy));
             lstVariants.addItem(new Variant(GameType.ArchenemyRumble));
