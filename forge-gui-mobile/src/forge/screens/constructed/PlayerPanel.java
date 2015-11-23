@@ -67,13 +67,14 @@ public class PlayerPanel extends FContainer {
     private FComboBox<Object> cbTeam = new FComboBox<Object>();
     private FComboBox<Object> cbArchenemyTeam = new FComboBox<Object>();
 
-    private final FLabel btnDeck           = new FLabel.ButtonBuilder().text("Loading Deck...").build();
-    private final FLabel btnSchemeDeck     = new FLabel.ButtonBuilder().text("Scheme Deck: Random Generated Deck").build();
-    private final FLabel btnCommanderDeck  = new FLabel.ButtonBuilder().text("Commander Deck: Random Generated Deck").build();
-    private final FLabel btnPlanarDeck     = new FLabel.ButtonBuilder().text("Planar Deck: Random Generated Deck").build();
-    private final FLabel btnVanguardAvatar = new FLabel.ButtonBuilder().text("Vanguard Avatar: Random").build();
+    private final FLabel btnDeck            = new FLabel.ButtonBuilder().text("Loading Deck...").build();
+    private final FLabel btnSchemeDeck      = new FLabel.ButtonBuilder().text("Scheme Deck: Random Generated Deck").build();
+    private final FLabel btnCommanderDeck   = new FLabel.ButtonBuilder().text("Commander Deck: Random Generated Deck").build();
+    private final FLabel btnTinyLeadersDeck = new FLabel.ButtonBuilder().text("Tiny Leaders Deck: Random Generated Deck").build();
+    private final FLabel btnPlanarDeck      = new FLabel.ButtonBuilder().text("Planar Deck: Random Generated Deck").build();
+    private final FLabel btnVanguardAvatar  = new FLabel.ButtonBuilder().text("Vanguard Avatar: Random").build();
 
-    private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstPlanarDecks;
+    private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstTinyLeadersDecks, lstPlanarDecks;
     private final FVanguardChooser lstVanguardAvatars;
 
     public PlayerPanel(final LobbyScreen screen0, final boolean allowNetworking0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
@@ -109,6 +110,12 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 btnCommanderDeck.setText("Commander Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+            }
+        });
+        lstTinyLeadersDecks = new FDeckChooser(GameType.TinyLeaders, isAi, new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                btnTinyLeadersDeck.setText("Tiny Leaders Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
             }
         });
         lstSchemeDecks = new FDeckChooser(GameType.Archenemy, isAi, new FEventHandler() {
@@ -165,6 +172,14 @@ public class PlayerPanel extends FContainer {
                 Forge.openScreen(lstCommanderDecks);
             }
         });
+        add(btnTinyLeadersDeck);
+        btnTinyLeadersDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                lstTinyLeadersDecks.setHeaderCaption("Select Tiny Leaders Deck for " + txtPlayerName.getText());
+                Forge.openScreen(lstTinyLeadersDecks);
+            }
+        });
         add(btnSchemeDeck);
         btnSchemeDeck.setCommand(new FEventHandler() {
             @Override
@@ -205,6 +220,7 @@ public class PlayerPanel extends FContainer {
     public void initialize(FPref savedStateSetting, DeckType defaultDeckType) {
         deckChooser.initialize(savedStateSetting, defaultDeckType);
         lstCommanderDecks.initialize(null, DeckType.RANDOM_DECK);
+        lstTinyLeadersDecks.initialize(null, DeckType.RANDOM_DECK);
         lstPlanarDecks.initialize(null, DeckType.RANDOM_DECK);
         lstSchemeDecks.initialize(null, DeckType.RANDOM_DECK);
     }
@@ -244,6 +260,10 @@ public class PlayerPanel extends FContainer {
             btnCommanderDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
         }
+        else if (btnTinyLeadersDeck.isVisible()) {
+            btnTinyLeadersDeck.setBounds(x, y, w, fieldHeight);
+            y += dy;
+        }
         else if (btnDeck.isVisible()) {
             btnDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
@@ -266,7 +286,7 @@ public class PlayerPanel extends FContainer {
         if (!btnDeck.isVisible()) {
             rows--;
         }
-        if (btnCommanderDeck.isVisible()) {
+        if (btnCommanderDeck.isVisible() || btnTinyLeadersDeck.isVisible()) {
             rows++;
         }
         if (btnSchemeDeck.isVisible()) {
@@ -364,6 +384,7 @@ public class PlayerPanel extends FContainer {
 
     public void updateVariantControlsVisibility() {
         boolean isCommanderApplied = false;
+        boolean isTinyLeadersApplied = false;
         boolean isPlanechaseApplied = false;
         boolean isVanguardApplied = false;
         boolean isArchenemyApplied = false;
@@ -382,9 +403,12 @@ public class PlayerPanel extends FContainer {
                 archenemyVisiblity = true;
                 break;
             case Commander:
-            case TinyLeaders:
                 isCommanderApplied = true;
                 isDeckBuildingAllowed = false; //Commander deck replaces basic deck, so hide that
+                break;
+            case TinyLeaders:
+                isTinyLeadersApplied = true;
+                isDeckBuildingAllowed = false; //Tiny Leaders deck replaces basic deck, so hide that
                 break;
             case Planechase:
                 isPlanechaseApplied = true;
@@ -402,6 +426,7 @@ public class PlayerPanel extends FContainer {
 
         btnDeck.setVisible(isDeckBuildingAllowed);
         btnCommanderDeck.setVisible(isCommanderApplied && mayEdit);
+        btnTinyLeadersDeck.setVisible(isTinyLeadersApplied && mayEdit);
 
         btnSchemeDeck.setVisible(archenemyVisiblity && mayEdit);
 
