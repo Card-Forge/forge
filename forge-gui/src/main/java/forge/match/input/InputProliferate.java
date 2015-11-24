@@ -95,9 +95,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
             }
 
             final CounterType toAdd = choices.size() == 1 ? choices.get(0) : getController().getGui().one("Select counter type", choices);
-            chosenCounters.put(player, toAdd);
-
-            this.chosenCounters.put(player, CounterType.POISON);
+            this.chosenCounters.put(player, toAdd);
         }
 
         refresh();
