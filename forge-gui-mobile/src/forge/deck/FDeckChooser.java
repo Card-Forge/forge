@@ -371,8 +371,9 @@ public class FDeckChooser extends FScreen {
                 return EditorType.Constructed;
             }
         case Commander:
-        case TinyLeaders:
             return EditorType.Commander;
+        case TinyLeaders:
+            return EditorType.TinyLeaders;
         case Archenemy:
             return EditorType.Archenemy;
         case Planechase:
