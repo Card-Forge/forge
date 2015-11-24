@@ -890,6 +890,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         final int newValue = addAmount + oldValue;
         counters.put(counterType, newValue);
         view.updateCounters(this);
+        if (counterType.equals(CounterType.POISON)) {
+            view.updatePoisonCounters(this);
+        }
 
         if (fireEvents) {
             getGame().fireEvent(new GameEventPlayerCounters(this, counterType, oldValue, newValue));
@@ -923,6 +926,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         else {
             counters.remove(counterName);
         }
+        if (counterName.equals(CounterType.POISON)) {
+            view.updatePoisonCounters(this);
+        }
         view.updateCounters(this);
 
         getGame().fireEvent(new GameEventPlayerCounters(this, counterName, oldValue, newValue));
@@ -943,12 +949,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (counters.isEmpty()) { return; }
         counters.clear();
         view.updateCounters(this);
+        view.updatePoisonCounters(this);
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
     public void setCounters(final CounterType counterType, final Integer num) {
         counters.put(counterType, num);
         view.updateCounters(this);
+        if (counterType.equals(CounterType.POISON)) {
+            view.updatePoisonCounters(this);
+        }
         getGame().fireEvent(new GameEventPlayerCounters(this, counterType, 0, 0));
     }
 
@@ -956,6 +966,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void setCounters(Map<CounterType, Integer> allCounters) {
         counters = allCounters;
         view.updateCounters(this);
+        view.updatePoisonCounters(this);
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
@@ -2718,15 +2729,15 @@ public class Player extends GameEntity implements Comparable<Player> {
             DetachedCardEffect eff = new DetachedCardEffect(cmd, "Commander Effect");
 
             eff.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard");
-            eff.setSVar("DBCommanderIncCast","DB$ StoreSVar | SVar$ CommanderCostRaise | Type$ CountSVar | Expression$ CommanderCostRaise/Plus.2");
+            eff.setSVar("DBCommanderIncCast","DB$ StoreSVar | References$ CommanderCostRaise | SVar$ CommanderCostRaise | Type$ CountSVar | Expression$ CommanderCostRaise/Plus.2");
             eff.setSVar("CommanderCostRaise","Number$0");
 
-            Trigger t = TriggerHandler.parseTrigger("Mode$ SpellCast | Static$ True | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | Execute$ DBCommanderIncCast", eff, true);
+            Trigger t = TriggerHandler.parseTrigger("Mode$ SpellCast | Static$ True | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | References$ CommanderCostRaise | Execute$ DBCommanderIncCast", eff, true);
             eff.addTrigger(t);
             ReplacementEffect r = ReplacementHandler.parseReplacement("Event$ Moved | Destination$ Graveyard,Exile,Hand,Library | ValidCard$ Card.IsCommander+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement | Description$ If a commander would be exiled or put into hand, graveyard, or library from anywhere, that player may put it into the command zone instead.", eff, true);
             eff.addReplacementEffect(r);
             eff.addStaticAbility("Mode$ Continuous | EffectZone$ Command | AddKeyword$ May be played | Affected$ Card.YouOwn+IsCommander | AffectedZone$ Command");
-            eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | EffectZone$ All | AffectedZone$ Command,Stack");
+            eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | References$ CommanderCostRaise | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | EffectZone$ All | AffectedZone$ Command,Stack");
 
             com.add(eff);
         }
