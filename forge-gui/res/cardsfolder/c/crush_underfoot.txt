@@ -5,6 +5,6 @@ A:SP$ ChooseCard | Cost$ 1 R | Defined$ You | Amount$ 1 | Choices$ Creature.Gian
 SVar:DBDmg:DB$ DealDamage | NumDmg$ X | References$ X | DamageSource$ Remembered | ValidTgts$ Creature | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
-SVar:BuffedBy:Giant
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crush_underfoot.jpg
 Oracle:Choose a Giant creature you control. It deals damage equal to its power to target creature.
