@@ -1195,20 +1195,44 @@ public class PlayerControllerHuman
         return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
     }
 
+    //stores saved order for different sets of SpellAbilities
+    private final HashMap<String, List<Integer>> orderedSALookup = new HashMap<String, List<Integer>>();
+
     @Override
     public void orderAndPlaySimultaneousSa(final List<SpellAbility> activePlayerSAs) {
         List<SpellAbility> orderedSAs = activePlayerSAs;
-        if (activePlayerSAs.size() > 1) { // give a dual list form to create instead of needing to do it one at a time
+        if (activePlayerSAs.size() > 1) {
             final String firstStr = orderedSAs.get(0).toString();
-            for (int i = 1; i < orderedSAs.size(); i++) { //don't prompt user if all options are the same
-                if (!orderedSAs.get(i).toString().equals(firstStr)) {
+            boolean needPrompt = false;
+            String saLookupKey = firstStr;
+            char delim = (char)5;
+            for (int i = 1; i < orderedSAs.size(); i++) {
+                final String saStr = orderedSAs.get(i).toString();
+                if (!needPrompt && !saStr.equals(firstStr)) {
+                    needPrompt = true; //prompt by default unless all abilities are the same
+                }
+                saLookupKey += delim + saStr;
+            }
+            if (needPrompt) {
+                List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
+                if (savedOrder == null) { //prompt if no saved order for the current set of abilities
                     orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", activePlayerSAs, null);
-                    break;
+                    //save order to avoid needing to prompt a second time to order the same abilties
+                    savedOrder = new ArrayList<Integer>(activePlayerSAs.size());
+                    for (SpellAbility sa : activePlayerSAs) {
+                        savedOrder.add(orderedSAs.indexOf(sa));
+                    }
+                    orderedSALookup.put(saLookupKey, savedOrder);
+                }
+                else { //avoid prompt and just apply saved order
+                    orderedSAs = new ArrayList<SpellAbility>();
+                    for (Integer index : savedOrder) {
+                        orderedSAs.add(activePlayerSAs.get(index));
+                    }
                 }
             }
         }
-        final int size = orderedSAs.size();
-        for (int i = size - 1; i >= 0; i--) {
+        for (int i = orderedSAs.size() - 1; i >= 0; i--) {
             final SpellAbility next = orderedSAs.get(i);
             if (next.isTrigger()) {
                 HumanPlay.playSpellAbility(this, player, next);
