@@ -24,7 +24,6 @@ import java.awt.geom.Rectangle2D;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-@SuppressWarnings({"FieldCanBeLocal"})
 public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
 
     SINGLETON_INSTANCE;

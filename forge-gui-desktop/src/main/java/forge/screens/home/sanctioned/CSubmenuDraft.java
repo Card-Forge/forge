@@ -207,7 +207,7 @@ public enum CSubmenuDraft implements ICDoc {
             // Single opponent
             final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
             int indx = 0;
-            for (Deck d : opponentDecks.getAiDecks()) {
+            for (@SuppressWarnings("unused") Deck d : opponentDecks.getAiDecks()) {
                 indx++;
                 // 1-7 instead of 0-6
                 combo.addItem(String.valueOf(indx));

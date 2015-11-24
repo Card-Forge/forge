@@ -12,6 +12,7 @@ import forge.game.GameOutcome;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 
+@SuppressWarnings("unused")
 public class DeckRecords {
     private static final Map<String, DeckRecords> recordLookup = new HashMap<String, DeckRecords>();
 
