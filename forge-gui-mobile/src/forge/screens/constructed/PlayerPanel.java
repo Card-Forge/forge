@@ -674,6 +674,10 @@ public class PlayerPanel extends FContainer {
         return lstCommanderDecks.getDeck();
     }
 
+    public Deck getTinyLeadersDeck() {
+        return lstTinyLeadersDecks.getDeck();
+    }
+
     public Deck getSchemeDeck() {
         return lstSchemeDecks.getDeck();
     }

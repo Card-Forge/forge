@@ -473,8 +473,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         PlayerPanel playerPanel = playerPanels.get(playerIndex);
 
         Deck deck;
-        if (hasVariant(GameType.Commander) || hasVariant(GameType.TinyLeaders)) {
+        if (hasVariant(GameType.Commander)) {
             deck = playerPanel.getCommanderDeck();
+        }
+        else if (hasVariant(GameType.TinyLeaders)) {
+            deck = playerPanel.getTinyLeadersDeck();
         }
         else {
             deck = playerPanel.getDeck();

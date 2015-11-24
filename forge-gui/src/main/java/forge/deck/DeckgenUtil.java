@@ -303,11 +303,11 @@ public class DeckgenUtil {
         } while (colorID.countColors() != 2);
 
         List<String> comColors = new ArrayList<String>(2);
-        if (colorID.hasWhite()) {	comColors.add("White"); }
-        if (colorID.hasBlue()) {	comColors.add("Blue"); }
-        if (colorID.hasBlack()) {	comColors.add("Black"); }
-        if (colorID.hasRed()) {		comColors.add("Red"); }
-        if (colorID.hasGreen()) {	comColors.add("Green"); }
+        if (colorID.hasWhite()) { comColors.add("White"); }
+        if (colorID.hasBlue())  { comColors.add("Blue"); }
+        if (colorID.hasBlack()) { comColors.add("Black"); }
+        if (colorID.hasRed())   { comColors.add("Red"); }
+        if (colorID.hasGreen()) { comColors.add("Green"); }
 
         DeckGeneratorBase gen = null;
         gen = new DeckGenerator2Color(cardDb, format, comColors.get(0), comColors.get(1));

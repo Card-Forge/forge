@@ -287,6 +287,7 @@ public class FDeckChooser extends FScreen {
                     if (lstDecks.getGameType() == GameType.DeckManager) {
                         switch (selectedDeckType) {
                         case COMMANDER_DECK:
+                        case TINY_LEADERS_DECKS:
                         case SCHEME_DECKS:
                         case PLANAR_DECKS:
                         case DRAFT_DECKS:
@@ -314,6 +315,7 @@ public class FDeckChooser extends FScreen {
         case CUSTOM_DECK:
         case CONSTRUCTED_DECK:
         case COMMANDER_DECK:
+        case TINY_LEADERS_DECKS:
         case SCHEME_DECKS:
         case PLANAR_DECKS:
         case DRAFT_DECKS:
@@ -879,7 +881,13 @@ public class FDeckChooser extends FScreen {
 
         if (selectedDeckType == DeckType.COMMANDER_DECK || selectedDeckType == DeckType.NET_COMMANDER_DECK) {
             //cannot create gauntlet for commander decks, so just start single match
-            testCommanderDeck(userDeck);
+            testVariantDeck(userDeck, GameType.Commander);
+            return;
+        }
+
+        if (selectedDeckType == DeckType.TINY_LEADERS_DECKS) {
+            //cannot create gauntlet for tiny leaders decks, so just start single match
+            testVariantDeck(userDeck, GameType.TinyLeaders);
             return;
         }
 
@@ -921,8 +929,8 @@ public class FDeckChooser extends FScreen {
         });
     }
 
-    private void testCommanderDeck(final Deck userDeck) {
-        promptForDeck("Select Opponent's Deck", GameType.Commander, true, new Callback<Deck>() {
+    private void testVariantDeck(final Deck userDeck, final GameType variant) {
+        promptForDeck("Select Opponent's Deck", variant, true, new Callback<Deck>() {
             @Override
             public void run(final Deck aiDeck) {
                 if (aiDeck == null) { return; }
@@ -931,7 +939,7 @@ public class FDeckChooser extends FScreen {
                     @Override
                     public void run() {
                         Set<GameType> appliedVariants = new HashSet<GameType>();
-                        appliedVariants.add(GameType.Commander);
+                        appliedVariants.add(variant);
 
                         List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
                         RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, userDeck, null, false, null, null);
