@@ -890,9 +890,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         final int newValue = addAmount + oldValue;
         counters.put(counterType, newValue);
         view.updateCounters(this);
-        if (counterType.equals(CounterType.POISON)) {
-            view.updatePoisonCounters(this);
-        }
 
         if (fireEvents) {
             getGame().fireEvent(new GameEventPlayerCounters(this, counterType, oldValue, newValue));
@@ -926,9 +923,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         else {
             counters.remove(counterName);
         }
-        if (counterName.equals(CounterType.POISON)) {
-            view.updatePoisonCounters(this);
-        }
         view.updateCounters(this);
 
         getGame().fireEvent(new GameEventPlayerCounters(this, counterName, oldValue, newValue));
@@ -949,16 +943,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (counters.isEmpty()) { return; }
         counters.clear();
         view.updateCounters(this);
-        view.updatePoisonCounters(this);
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
     public void setCounters(final CounterType counterType, final Integer num) {
         counters.put(counterType, num);
         view.updateCounters(this);
-        if (counterType.equals(CounterType.POISON)) {
-            view.updatePoisonCounters(this);
-        }
         getGame().fireEvent(new GameEventPlayerCounters(this, counterType, 0, 0));
     }
 
@@ -966,7 +956,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void setCounters(Map<CounterType, Integer> allCounters) {
         counters = allCounters;
         view.updateCounters(this);
-        view.updatePoisonCounters(this);
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
