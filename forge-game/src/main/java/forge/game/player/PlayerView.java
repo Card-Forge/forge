@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import forge.game.card.CounterType;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Objects;
@@ -153,15 +154,18 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Life, p.getLife());
     }
 
-    public int getPoisonCounters() {
-        return get(TrackableProperty.PoisonCounters);
-    }
-    void updatePoisonCounters(Player p) {
-        set(TrackableProperty.PoisonCounters, p.getPoisonCounters());
-    }
-
     public Map<CounterType, Integer> getCounters() {
-            return get(TrackableProperty.Counters);
+        return get(TrackableProperty.Counters);
+    }
+    public int getCounters(CounterType counterType) {
+        final Map<CounterType, Integer> counters = getCounters();
+        if (counters != null) {
+            Integer count = counters.get(counterType);
+            if (count != null) {
+                return count;
+            }
+        }
+        return 0;
     }
     void updateCounters(Player p) {
         set(TrackableProperty.Counters, p.getCounters());

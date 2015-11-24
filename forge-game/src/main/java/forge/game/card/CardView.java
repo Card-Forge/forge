@@ -191,6 +191,16 @@ public class CardView extends GameEntityView {
     public Map<CounterType, Integer> getCounters() {
         return get(TrackableProperty.Counters);
     }
+    public int getCounters(CounterType counterType) {
+        final Map<CounterType, Integer> counters = getCounters();
+        if (counters != null) {
+            Integer count = counters.get(counterType);
+            if (count != null) {
+                return count;
+            }
+        }
+        return 0;
+    }
     public boolean hasSameCounters(CardView otherCard) {
         Map<CounterType, Integer> counters = getCounters();
         if (counters == null) {

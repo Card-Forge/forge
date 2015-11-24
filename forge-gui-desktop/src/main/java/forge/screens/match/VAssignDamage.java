@@ -39,6 +39,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
+import forge.game.card.CounterType;
 import forge.game.player.PlayerView;
 import forge.gui.SOverlayUtils;
 import forge.toolbox.FButton;
@@ -429,7 +430,7 @@ public class VAssignDamage {
         if (card == null) {
             if (defender instanceof PlayerView) {
                 final PlayerView p = (PlayerView)defender;
-                lethalDamage = attackerHasInfect ? matchUI.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
+                lethalDamage = attackerHasInfect ? matchUI.getGameView().getPoisonCountersToLose() - p.getCounters(CounterType.POISON) : p.getLife();
             }
             else if (defender instanceof CardView) { // planeswalker
                 final CardView pw = (CardView)defender;

@@ -29,6 +29,7 @@ import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
+import forge.game.card.CounterType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -238,7 +239,7 @@ public class VField implements IVDoc<CField> {
         }
 
         // Update poison counters
-        final int poison = player.getPoisonCounters();
+        final int poison = player.getCounters(CounterType.POISON);
         if (poison > 0) {
             addLblPoison();
             lblPoison.setText(String.valueOf(poison));
