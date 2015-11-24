@@ -1,9 +1,13 @@
 package forge.screens.match.views;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
 import forge.assets.FImage;
+import forge.assets.FSkinFont;
+import forge.game.card.CounterType;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
@@ -53,5 +57,14 @@ public class VAvatar extends FDisplayObject {
         float w = getWidth();
         float h = getHeight();
         g.drawImage(image, 0, 0, w, h);
+
+        //display XP in lower right corner of avatar
+        int xp = player.getCounters(CounterType.EXPERIENCE);
+        if (xp > 0) {
+            //use font and padding from phase indicator so text lines up
+            FSkinFont font = VPhaseIndicator.BASE_FONT;
+            float xpHeight = font.getCapHeight();
+            g.drawOutlinedText(xp + " XP", font, Color.WHITE, Color.BLACK, 0, h - xpHeight - VPhaseIndicator.PADDING_Y, w - VPhaseIndicator.PADDING_X, h, false, HAlignment.RIGHT, false);
+        }
     }
 }

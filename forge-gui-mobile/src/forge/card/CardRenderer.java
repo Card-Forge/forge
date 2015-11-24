@@ -427,7 +427,7 @@ public class CardRenderer {
         w = boxWidth;
         h = boxHeight;
 
-        //draw card damage about P/T box if needed
+        //draw card damage above P/T box if needed
         if (card.getDamage() > 0) {
             g.drawOutlinedText(">" + card.getDamage() + "<", font, Color.RED, Color.WHITE, x, y - h + padding, w, h, false, HAlignment.CENTER, true);
         }
