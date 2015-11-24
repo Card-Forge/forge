@@ -765,9 +765,12 @@ public class AiAttackController {
         // totals and other considerations
         // some bad "magic numbers" here, TODO replace with nice descriptive
         // variable names
+        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+        
         if (ratioDiff > 0 && doAttritionalAttack) {
             this.aiAggression = 5; // attack at all costs
-        } else if (ratioDiff >= 1 && this.attackers.size() > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0)) {
+        } else if ((ratioDiff >= 1 && this.attackers.size() > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0))
+        		|| (aic.getProperty(AiProps.PLAY_AGGRO).equals("true")) && humanLifeToDamageRatio > 1) {
             this.aiAggression = 4; // attack expecting to trade or damage player.
         } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
             this.aiAggression = 3; // attack expecting to make good trades or damage player.

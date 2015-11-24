@@ -64,6 +64,9 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         qc.setDifficulty(QuestEventDifficulty.fromString(sectionMeta.get("Difficulty")));
         qc.setDescription(sectionMeta.get("Description"));
         qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon"));
+        if (sectionMeta.contains("Profile")) {
+        	qc.setProfile(sectionMeta.get("Profile"));
+        }
 
         // Deck
         qc.setEventDeck(DeckSerializer.fromSections(contents));

@@ -56,7 +56,7 @@ public final class GamePlayerUtil {
         String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
         player.setRotateProfileEachGame(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL));
         if (lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
-            lastProfileChosen = AiProfileUtil.getRandomProfile();
+            lastProfileChosen = "Default";
             System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", lastProfileChosen, player.getName()));
         }
         player.setAiProfile(lastProfileChosen);

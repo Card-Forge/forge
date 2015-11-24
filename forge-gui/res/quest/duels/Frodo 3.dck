@@ -6,6 +6,7 @@ Difficulty=hard
 Description=WRG Zoo deck
 Icon=Frodo.jpg
 Deck Type=constructed
+Profile=Reckless
 [main]
 2 Plateau
 2 Taiga

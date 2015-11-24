@@ -6,6 +6,7 @@ Difficulty=hard
 Description=Mono brown affinity deck with Affinity for artifacts and Modular cards
 Icon=Dino.jpg
 Deck Type=constructed
+Profile=Reckless
 [main]
 1 Mox Emerald
 1 Mycosynth Golem

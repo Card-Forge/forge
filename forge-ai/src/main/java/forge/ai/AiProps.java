@@ -33,7 +33,8 @@ public enum AiProps { /** */
     MOVE_EQUIPMENT_TO_BETTER_CREATURES ("from_useless_only"),
     PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS ("true"),
     PREDICT_SPELLS_FOR_MAIN2 ("true"), /** */
-    RESERVE_MANA_FOR_MAIN2_CHANCE ("0"); /** */
+    RESERVE_MANA_FOR_MAIN2_CHANCE ("0"), /** */
+    PLAY_AGGRO ("false"); /** */
 
     private final String strDefaultVal;
 

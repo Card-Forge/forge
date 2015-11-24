@@ -18,6 +18,7 @@
 package forge.quest;
 
 import com.google.common.base.Function;
+
 import forge.deck.Deck;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
@@ -44,6 +45,7 @@ public abstract class QuestEvent implements IHasIcon {
     private String name = "Noname";
     private String cardReward = null;
     private List<InventoryItem> cardRewardList = null;
+    private String profile = "Default";
 
     
     public static final Function<QuestEvent, String> FN_GET_NAME = new Function<QuestEvent, String>() {
@@ -80,6 +82,14 @@ public abstract class QuestEvent implements IHasIcon {
 
     public final String getName() {
         return this.name;
+    }
+
+    public final String getProfile() {
+        return this.profile;
+    }
+    
+    public void setProfile(final String profi) {
+        this.profile = profi;
     }
 
     public void setName(final String name0) {

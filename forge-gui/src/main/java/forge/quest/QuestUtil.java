@@ -18,9 +18,11 @@
 package forge.quest;
 
 import com.google.common.collect.ImmutableMap;
+
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
+import forge.ai.LobbyPlayerAi;
 import forge.assets.FSkinProp;
 import forge.card.CardDb.SetPreference;
 import forge.card.CardEdition;
@@ -45,6 +47,7 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.ArrayList;
@@ -559,6 +562,10 @@ public class QuestUtil {
 
         final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
         starter.add(aiStart.setPlayer(aiPlayer));
+        if (!"".equals(event.getProfile())) {
+        	((LobbyPlayerAi) aiPlayer).setAiProfile(event.getProfile());
+        	System.out.println("AI Profile was set to: " + event.getProfile());
+        }
 
         final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
         for (final RegisteredPlayer rp : starter) {
