@@ -57,10 +57,12 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
             cards = CardLists.filterControlledBy(cards, pl);
         }
 
+        int numberRemoved = 0;
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounterTypes")) {
             	Set<CounterType> types = tgtCard.getCounters().keySet();
             	for(CounterType ct : types) {
+            		numberRemoved += tgtCard.getCounters(ct);
             		tgtCard.subtractCounter(ct, tgtCard.getCounters(ct));
             	}
                 //tgtCard.getCounters().clear();
@@ -71,6 +73,9 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
             }
 
             tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
+        }
+        if (sa.hasParam("RememberAmount")) {
+            sa.getHostCard().setChosenNumber(numberRemoved);
         }
     }
 }

@@ -14725,6 +14725,7 @@ forge-gui/res/cardsfolder/t/thespians_stage.txt -text
 forge-gui/res/cardsfolder/t/thick_skinned_goblin.txt -text
 forge-gui/res/cardsfolder/t/thicket_basilisk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thicket_elemental.txt -text
+forge-gui/res/cardsfolder/t/thief_of_blood.txt -text
 forge-gui/res/cardsfolder/t/thief_of_hope.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thieves_auction.txt -text
 forge-gui/res/cardsfolder/t/thieves_fortune.txt -text
