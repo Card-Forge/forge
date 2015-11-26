@@ -107,6 +107,14 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return this.parts.get(DeckSection.Main);
     }
 
+    public PaperCard getCommander() {
+        final CardPool cp = get(DeckSection.Commander);
+        if (cp != null && !cp.isEmpty()) {
+            return cp.get(0);
+        }
+        return null;
+    }
+
     // may return nulls
     public CardPool get(DeckSection deckSection) {
         return this.parts.get(deckSection);

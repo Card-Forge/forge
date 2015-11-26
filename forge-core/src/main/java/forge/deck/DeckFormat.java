@@ -33,7 +33,6 @@ import com.google.common.collect.ImmutableSet;
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardType;
-import forge.card.ColorSet;
 import forge.card.ICardFace;
 import forge.deck.generation.DeckGenPool;
 import forge.deck.generation.DeckGeneratorBase.FilterCMC;
@@ -179,25 +178,25 @@ public enum DeckFormat {
         }
 
         if (hasCommander()) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
-            final CardPool cmd = deck.get(DeckSection.Commander);
-            if (cmd == null || cmd.isEmpty()) {
+            final PaperCard commander = deck.getCommander();
+            if (commander == null) {
                 return "is missing a commander";
             }
-            if (!isLegalCommander(cmd.get(0).getRules())) {
+            if (!isLegalCommander(commander.getRules())) {
                 return "has an illegal commander";
             }
 
-            final ColorSet cmdCI = cmd.get(0).getRules().getColorIdentity();
+            final byte cmdCI = commander.getRules().getColorIdentity().getColor();
             final List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
 
             for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
-                if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor())) {
+                if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
                     erroneousCI.add(cp.getKey());
                 }
             }
             if (deck.has(DeckSection.Sideboard)) {
                 for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
-                    if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor())) {
+                    if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
                         erroneousCI.add(cp.getKey());
                     }
                 }
@@ -365,6 +364,25 @@ public enum DeckFormat {
             @Override
             public boolean apply(PaperCard card) {
                 return isLegalCard(card);
+            }
+        };
+    }
+
+    public Predicate<PaperCard> isLegalCommanderPredicate() {
+        return new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard card) {
+                return isLegalCommander(card.getRules());
+            }
+        };
+    }
+
+    public Predicate<PaperCard> isLegalCardForCommanderPredicate(PaperCard commander) {
+        final byte cmdCI = commander.getRules().getColorIdentity().getColor(); 
+        return new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard card) {
+                return card.getRules().getColorIdentity().hasNoColorsExcept(cmdCI);
             }
         };
     }

@@ -1,13 +1,16 @@
 package forge.deck;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
+
 import forge.Forge;
 import forge.Graphics;
+import forge.Forge.KeyInputAdapter;
 import forge.assets.*;
 import forge.card.CardDb;
 import forge.card.CardEdition;
@@ -129,14 +132,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             cardFilter = cardFilter0;
         }
 
-        private ItemPool<PaperCard> applyCardFilter(ItemPool<PaperCard> cardPool) {
-            if (cardFilter == null) {
-                return cardPool;
+        private ItemPool<PaperCard> applyCardFilter(ItemPool<PaperCard> cardPool, Predicate<PaperCard> additionalFilter) {
+            Predicate<PaperCard> filter = cardFilter;
+            if (filter == null) {
+                filter = additionalFilter;
+                if (filter == null) {
+                    return cardPool;
+                }
+            }
+            else if (additionalFilter != null) {
+                filter = Predicates.and(filter, additionalFilter);
             }
 
             ItemPool<PaperCard> filteredPool = new ItemPool<PaperCard>(PaperCard.class);
             for (Entry<PaperCard, Integer> entry : cardPool) {
-                if (cardFilter.apply(entry.getKey())) {
+                if (filter.apply(entry.getKey())) {
                     filteredPool.add(entry.getKey(), entry.getValue());
                 }
             }
@@ -498,7 +508,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected void save(final Callback<Boolean> callback) {
         if (StringUtils.isEmpty(deck.getName())) {
-            FOptionPane.showInputDialog("Enter name for new deck", new Callback<String>() {
+            PaperCard commander = deck.getCommander();
+            String initialInput = commander == null ? "" : commander.getName(); //use commander name as default deck name
+            FOptionPane.showInputDialog("Enter name for new deck", initialInput, new Callback<String>() {
                 @Override
                 public void run(String result) {
                     if (StringUtils.isEmpty(result)) { return; }
@@ -542,6 +554,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     }
         });
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        switch (keyCode) {
+        case Keys.BACK:
+            return true; //suppress Back button so it's not bumped while editing deck
+        case Keys.S: //save deck on Ctrl+S
+            if (KeyInputAdapter.isCtrlKeyDown()) {
+                save(null);
+                return true;
+            }
+            break;
+        }
+        return super.keyDown(keyCode);
     }
 
     @Override
@@ -849,6 +876,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public void refresh() {
+            Predicate<PaperCard> additionalFilter = null;
             final EditorType editorType = parentScreen.getEditorType();
             switch (editorType) {
             case Archenemy:
@@ -869,12 +897,26 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case PlanarConquest:
                 cardManager.setPool(ConquestUtil.getAvailablePool(parentScreen.getDeck()));
                 break;
-            default:
-                if (cardManager.getWantUnique()) {
-                    cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class)), true);
+            case Commander:
+            case TinyLeaders:
+                final PaperCard commander = parentScreen.getDeck().getCommander();
+                if (commander == null) {
+                    //if no commander set for deck, only show valid commanders
+                    additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
+                    cardManager.setCaption("Commanders");
                 }
                 else {
-                    cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class)), true);
+                    //if a commander has been set, only show cards that match its color identity
+                    additionalFilter = DeckFormat.Commander.isLegalCardForCommanderPredicate(commander);
+                    cardManager.setCaption("Cards");
+                }
+                //fall through to below
+            default:
+                if (cardManager.getWantUnique()) {
+                    cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class), additionalFilter), true);
+                }
+                else {
+                    cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), additionalFilter), true);
                 }
                 break;
             }
@@ -882,52 +924,65 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void onCardActivated(PaperCard card) {
+            if (needsCommander()) {
+                setCommander(card); //handle special case of setting commander
+                return;
+            }
             if (!cardManager.isInfinite()) {
                 removeCard(card);
             }
             parentScreen.getMainDeckPage().addCard(card);
         }
 
+        private boolean needsCommander() {
+            return parentScreen.getCommanderPage() != null && parentScreen.getDeck().getCommander() == null;
+        }
+
+        private void setCommander(PaperCard card) {
+            if (!cardManager.isInfinite()) {
+                removeCard(card);
+            }
+            CardPool newPool = new CardPool();
+            newPool.add(card);
+            parentScreen.getCommanderPage().setCards(newPool);
+            refresh(); //refresh so cards shown that match commander's color identity
+        }
+
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            addItem(menu, "Add", "to " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    if (result == null || result <= 0) { return; }
-
-                    if (!cardManager.isInfinite()) {
-                        removeCard(card, result);
-                    }
-                    parentScreen.getMainDeckPage().addCard(card, result);
-                }
-            });
-            if (parentScreen.getSideboardPage() != null) {
-                addItem(menu, "Add", "to Sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+            if (!needsCommander()) {
+                addItem(menu, "Add", "to " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
-
+    
                         if (!cardManager.isInfinite()) {
                             removeCard(card, result);
                         }
-                        parentScreen.getSideboardPage().addCard(card, result);
+                        parentScreen.getMainDeckPage().addCard(card, result);
                     }
                 });
+                if (parentScreen.getSideboardPage() != null) {
+                    addItem(menu, "Add", "to Sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                        @Override
+                        public void run(Integer result) {
+                            if (result == null || result <= 0) { return; }
+    
+                            if (!cardManager.isInfinite()) {
+                                removeCard(card, result);
+                            }
+                            parentScreen.getSideboardPage().addCard(card, result);
+                        }
+                    });
+                }
             }
             if (parentScreen.getCommanderPage() != null) {
-                if (card.getRules().getType().isLegendary() && card.getRules().getType().isCreature() && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
+                if (DeckFormat.Commander.isLegalCommander(card.getRules()) && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
                     addItem(menu, "Set", "as Commander", parentScreen.getCommanderPage().getIcon(), true, true, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
-
-                            if (!cardManager.isInfinite()) {
-                                removeCard(card);
-                            }
-                            CardPool newPool = new CardPool();
-                            newPool.add(card);
-                            parentScreen.getCommanderPage().setCards(newPool);
-                            parentScreen.setSelectedPage(parentScreen.getCommanderPage());
+                            setCommander(card);
                         }
                     });
                 }
@@ -1190,6 +1245,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         if (result == null || result <= 0) { return; }
 
                         removeCard(card, result);
+                        parentScreen.getCatalogPage().refresh(); //refresh so commander options shown again
+                        parentScreen.setSelectedPage(parentScreen.getCatalogPage());
                     }
                 });
                 break;
@@ -1253,7 +1310,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             CardPool newPool = new CardPool();
                             newPool.add(card, result);
                             parentScreen.getCommanderPage().setCards(newPool);
-                            parentScreen.setSelectedPage(parentScreen.getCommanderPage());
+                            parentScreen.getCatalogPage().refresh(); //ensure available cards updated based on color identity
                         }
                     });
                 }
