@@ -114,7 +114,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             decks = DeckProxy.getAllCommanderDecks(DeckFormat.Commander.isLegalDeckPredicate());
             break;
         case TinyLeaders:
-            decks = DeckProxy.getAllTinyLeadersDecks(); //already applies isLegal check for TinyLeaders
+            decks = DeckProxy.getAllTinyLeadersDecks(DeckFormat.TinyLeaders.isLegalDeckPredicate());
             break;
         case Archenemy:
             decks = DeckProxy.getAllSchemeDecks(DeckFormat.Archenemy.isLegalDeckPredicate());

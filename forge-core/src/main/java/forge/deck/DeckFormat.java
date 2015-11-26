@@ -344,6 +344,22 @@ public enum DeckFormat {
         };
     }
 
+    public Predicate<Deck> hasLegalCardsPredicate() {
+        return new Predicate<Deck>() {
+            @Override
+            public boolean apply(Deck deck) {
+                if (cardPoolFilter != null) {
+                    for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
+                        if (!cardPoolFilter.apply(cp.getKey().getRules())) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+        };
+    }
+
     public Predicate<PaperCard> isLegalCardPredicate() {
         return new Predicate<PaperCard>() {
             @Override

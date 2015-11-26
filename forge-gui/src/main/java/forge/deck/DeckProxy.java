@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.StaticData;
@@ -351,8 +352,17 @@ public class DeckProxy implements InventoryItem {
     }
 
     public static Iterable<DeckProxy> getAllTinyLeadersDecks() {
+        return getAllTinyLeadersDecks(null);
+    }
+    public static Iterable<DeckProxy> getAllTinyLeadersDecks(Predicate<Deck> filter) {
         final List<DeckProxy> result = new ArrayList<DeckProxy>();
-        addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getCommander(), DeckFormat.TinyLeaders.isLegalDeckPredicate());
+        if (filter == null) {
+            filter = DeckFormat.TinyLeaders.hasLegalCardsPredicate();
+        }
+        else {
+            filter = Predicates.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(), filter);
+        }
+        addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getCommander(), filter);
         return result;
     }
 
