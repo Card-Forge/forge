@@ -719,14 +719,18 @@ public class AdvancedSearch {
     }
 
     private static abstract class StringEvaluator<T extends InventoryItem> extends FilterEvaluator<T, String> {
+        private String initialInput = "";
+
         public StringEvaluator() {
         }
 
         @Override
         protected List<String> getValues(FilterOption option, FilterOperator operator) {
             String message = option.name + " " + operator.caption + " ?";
-            String value = SOptionPane.showInputDialog("", message);
+            String value = SOptionPane.showInputDialog("", message, null, initialInput);
             if (value == null) { return null; }
+
+            initialInput = value; //store value as initial input for next time
 
             List<String> values = new ArrayList<String>();
             values.add(value);
