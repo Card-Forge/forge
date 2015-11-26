@@ -2,6 +2,8 @@ package forge.itemmanager.filters;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 
 import forge.UiCommand;
@@ -26,6 +28,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 
 public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -171,6 +174,15 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
 
         private boolean show() {
             optionPane = new FOptionPane(null, "Advanced Search", null, scroller, ImmutableList.of("OK", "Cancel"), 0);
+            optionPane.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentShown(ComponentEvent e) {
+                    //automatically edit first filter if search is empty
+                    if (model.isEmpty()) {
+                        model.editFilterControl(Iterables.getFirst(model.getControls(), null), onFilterChange);
+                    }
+                }
+            });
             scroller.revalidate();
             scroller.repaint();
             optionPane.setVisible(true);

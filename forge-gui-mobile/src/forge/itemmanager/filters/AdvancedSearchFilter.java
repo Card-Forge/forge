@@ -2,6 +2,7 @@ package forge.itemmanager.filters;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
@@ -179,6 +180,16 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             Filter filter = new Filter();
             model.addFilterControl(filter);
             scroller.add(filter);
+        }
+
+        @Override
+        public void onActivate() {
+            super.onActivate();
+
+            //automatically edit first filter if search is empty
+            if (model.isEmpty()) {
+                model.editFilterControl(Iterables.getFirst(model.getControls(), null), onFilterChange);
+            }
         }
 
         @Override

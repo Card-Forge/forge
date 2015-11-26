@@ -1063,16 +1063,17 @@ public class AdvancedSearch {
                                 control.setFilter(filter);
                                 if (filter != null) {
                                     control.getBtnFilter().setText(GuiBase.getInterface().encodeSymbols(filter.toString(), false));
+
+                                    if (filter.getOption() == FilterOption.CARD_KEYWORDS) {
+                                        //the first time the user selects keywords, preload keywords for all cards
+                                        Runnable preloadTask = Keyword.getPreloadTask();
+                                        if (preloadTask != null) {
+                                            GuiBase.getInterface().runBackgroundTask("Loading keywords...", preloadTask);
+                                        }
+                                    }
                                 }
                                 else {
                                     control.getBtnFilter().setText(EMPTY_FILTER_TEXT);
-                                }
-                                if (filter.getOption() == FilterOption.CARD_KEYWORDS) {
-                                    //the first time the user selects keywords, preload keywords for all cards
-                                    Runnable preloadTask = Keyword.getPreloadTask();
-                                    if (preloadTask != null) {
-                                        GuiBase.getInterface().runBackgroundTask("Loading keywords...", preloadTask);
-                                    }
                                 }
                                 if (onChange != null) {
                                     onChange.run();
