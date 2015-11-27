@@ -970,7 +970,7 @@ public class AiAttackController {
             canBeKilledByOne = true;
             isWorthLessThanAllKillers = false;
             hasCombatEffect = false;
-        } else if (ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
+        } else if ((canKillAllDangerous || !canBeKilled) && ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
             canKillAllDangerous = false;
             canBeKilled = true;
         } 
