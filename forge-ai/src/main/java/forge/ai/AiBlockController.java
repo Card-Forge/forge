@@ -736,7 +736,7 @@ public class AiBlockController {
         List<Card> chumpBlockers;
 
         diff = (ai.getLife() * 2) - 5; // This is the minimal gain for an unnecessary trade
-        if (diff > 0 && ((PlayerControllerAi) ai.getController()).getAi().getProperty(AiProps.PLAY_AGGRO).equals("true")) {
+        if (ai.getController().isAI() && diff > 0 && ((PlayerControllerAi) ai.getController()).getAi().getProperty(AiProps.PLAY_AGGRO).equals("true")) {
         	diff = 0;
         }
 
