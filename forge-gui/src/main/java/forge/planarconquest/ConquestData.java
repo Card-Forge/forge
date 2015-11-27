@@ -28,11 +28,9 @@ import forge.properties.ForgeConstants;
 import forge.util.ItemPool;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.base.Function;
@@ -55,8 +53,9 @@ public final class ConquestData {
     private int difficulty;
     private ConquestPlane startingPlane, currentPlane;
     private int currentRegionIndex;
-    private EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
-    private ISkinImage planeswalkerToken = PlaneswalkerAchievements.getTrophyImage("Jace, the Mind Sculptor");
+    private PaperCard planeswalker;
+    private ISkinImage planeswalkerToken;
+    private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
 
     private final HashSet<PaperCard> collection = new HashSet<PaperCard>();
     private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
@@ -66,33 +65,14 @@ public final class ConquestData {
     public ConquestData() { //needed for XML serialization
     }
 
-    public ConquestData(String name0, int difficulty0, ConquestPlane startingPlane0, PaperCard startingCommander0) {
+    public ConquestData(String name0, int difficulty0, ConquestPlane startingPlane0, PaperCard planeswalker0) {
         name = name0;
         difficulty = difficulty0;
         startingPlane = startingPlane0;
         currentPlane = startingPlane0;
-        addCommander(startingCommander0);
-    }
-
-    public List<PaperCard> addCommander(PaperCard card) {
-        ConquestCommander commander = new ConquestCommander(card, currentPlane.getCardPool(), false);
-        getCurrentPlaneData().getCommanders().add(commander);
-        decks.put(commander.getDeck().getName(), commander.getDeck());
-
-        List<PaperCard> newCards = new ArrayList<PaperCard>();
-        for (Entry<PaperCard, Integer> entry : commander.getDeck().getMain()) {
-            addCard(entry.getKey(), newCards);
-        }
-        addCard(card, newCards);
-        return newCards;
-    }
-
-    private void addCard(PaperCard pc, List<PaperCard> newCards) {
-        if (pc.getRules().getType().isBasicLand()) { return; } //ignore basic lands
-
-        if (collection.add(pc)) {
-            newCards.add(pc);
-        }
+        planeswalker = planeswalker0;
+        planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
+        collection.add(planeswalker);
     }
 
     public String getName() {

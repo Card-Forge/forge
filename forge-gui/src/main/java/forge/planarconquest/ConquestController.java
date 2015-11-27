@@ -18,7 +18,6 @@
 package forge.planarconquest;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
@@ -85,30 +84,6 @@ public class ConquestController {
         if (model != null) {
             model.saveData();
         }
-    }
-
-    public void unlockCommander() {
-        ConquestPlaneData planeData = model.getCurrentPlaneData();
-        List<PaperCard> options = new ArrayList<PaperCard>();
-        for (PaperCard pc : model.getCurrentPlane().getCommanders()) {
-            if (planeData.getWinsAgainst(pc) > 0 && !planeData.hasCommander(pc)) {
-                options.add(pc); //only add commanders that you've beaten and don't already have on your roster
-            }
-        }
-
-        if (options.isEmpty()) {
-            SOptionPane.showMessageDialog("No defeated foes are available to join your cause");
-            return;
-        }
-
-        Collections.sort(options);
-
-        PaperCard commander = SGuiChoose.oneOrNone("Select a defeated foe to join your cause", options);
-        if (commander == null) { return; }
-
-        List<PaperCard> newCards = model.addCommander(commander);
-        BoosterUtils.sort(newCards);
-        SGuiChoose.reveal(commander.getName() + " brought along " + Lang.nounWithAmount(newCards.size(), "new card"), newCards);
     }
 
     /*private void playGame(final ConquestCommander commander, final int opponentIndex, final boolean isHumanDefending, final IVCommandCenter commandCenter) {

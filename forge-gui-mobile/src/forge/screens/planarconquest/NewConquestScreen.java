@@ -33,8 +33,8 @@ public class NewConquestScreen extends FScreen {
     private final FLabel lblStartingPlane = add(new FLabel.Builder().text("Starting plane:").build());
     private final FComboBox<ConquestPlane> cbxStartingPlane = add(new FComboBox<ConquestPlane>(ConquestPlane.values()));
 
-    private final FLabel lblStartingCommander = add(new FLabel.Builder().text("Starting commander:").build());
-    private final FChoiceList<PaperCard> lstCommanders = add(new FChoiceList<PaperCard>(cbxStartingPlane.getSelectedItem().getCommanders()));
+    private final FLabel lblPlaneswalker = add(new FLabel.Builder().text("Planeswalker:").build());
+    private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(ConquestUtil.getAllPlaneswalkers()));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
             .font(FSkinFont.get(22)).text("Embark!").icon(FSkinImage.QUEST_ZEP).command(new FEventHandler() {
@@ -52,16 +52,6 @@ public class NewConquestScreen extends FScreen {
 
     public NewConquestScreen() {
         super(null, NewGameMenu.getMenu());
-
-        cbxStartingPlane.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lstCommanders.setListData(cbxStartingPlane.getSelectedItem().getCommanders());
-                if (lstCommanders.getCount() > 0) {
-                    lstCommanders.setSelectedIndex(0);
-                }
-            }
-        });
     }
  
     public int getSelectedDifficulty() {
@@ -93,10 +83,10 @@ public class NewConquestScreen extends FScreen {
         x = PADDING;
         y += h + gapY;
 
-        lblStartingCommander.setBounds(x, y, w, h);
+        lblPlaneswalker.setBounds(x, y, w, h);
         y += h;
-        lstCommanders.setBounds(x, y, w, height - EMBARK_BTN_HEIGHT - 2 * PADDING - y);
-        y += lstCommanders.getHeight() + PADDING;
+        lstPlaneswalkers.setBounds(x, y, w, height - EMBARK_BTN_HEIGHT - 2 * PADDING - y);
+        y += lstPlaneswalkers.getHeight() + PADDING;
 
         btnEmbark.setBounds(x, y, w, EMBARK_BTN_HEIGHT);
     }
@@ -115,7 +105,7 @@ public class NewConquestScreen extends FScreen {
                     @Override
                     public void run() {
                         ConquestController qc = FModel.getConquest();
-                        qc.load(new ConquestData(conquestName, getSelectedDifficulty(), cbxStartingPlane.getSelectedItem(), lstCommanders.getSelectedItem()));
+                        qc.load(new ConquestData(conquestName, getSelectedDifficulty(), cbxStartingPlane.getSelectedItem(), lstPlaneswalkers.getSelectedItem()));
                         qc.save();
 
                         // Save in preferences.

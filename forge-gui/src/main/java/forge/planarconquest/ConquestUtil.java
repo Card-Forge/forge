@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
@@ -125,5 +128,14 @@ public class ConquestUtil {
             }
         }
         return pool;
+    }
+
+    public static Iterable<PaperCard> getAllPlaneswalkers() {
+        return Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard card) {
+                return card.getRules().getType().isPlaneswalker();
+            }
+        });
     }
 }
