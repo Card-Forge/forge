@@ -28,6 +28,7 @@ import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
 import forge.screens.home.LoadGameMenu;
 import forge.screens.home.NewGameMenu.NewGameScreen;
+import forge.screens.planarconquest.ConquestMenu.LaunchReason;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -174,6 +175,7 @@ public class LoadConquestScreen extends LaunchScreen {
         FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST,
                 lstConquests.getSelectedConquest().getName() + ".dat");
         FModel.getConquestPreferences().save();
+        ConquestMenu.launchPlanarConquest(LaunchReason.LoadConquest);
     }
 
     private void renameConquest(final ConquestData quest) {

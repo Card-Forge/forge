@@ -112,7 +112,7 @@ public class NewConquestScreen extends FScreen {
                         FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquestName + ".dat");
                         FModel.getConquestPreferences().save();
 
-                        ConquestMenu.launchPlanarConquest(LaunchReason.NewConquest); //launch quest mode for new quest
+                        ConquestMenu.launchPlanarConquest(LaunchReason.NewConquest);
                     }
                 });
             }

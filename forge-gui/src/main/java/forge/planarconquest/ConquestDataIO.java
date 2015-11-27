@@ -39,23 +39,6 @@ import forge.util.IgnoringXStream;
 import forge.util.ItemPool;
 
 public class ConquestDataIO {
-    public static boolean TEST_MODE = true;
-    private static ConquestData createTestData() {
-        /*ConquestData temp = new ConquestData("My Conquest", 0,
-                ConquestPlane.Alara,
-                ConquestPlane.Alara.getCardPool().getCard("Rafiq of the Many"));*/
-        /*ConquestData temp = new ConquestData("My Conquest", 0,
-                ConquestPlane.Kamigawa,
-                ConquestPlane.Kamigawa.getCardPool().getCard("Meloku the Clouded Mirror"));*/
-        /*ConquestData temp = new ConquestData("My Conquest", 0,
-                ConquestPlane.Mirrodin,
-                ConquestPlane.Mirrodin.getCardPool().getCard("Glissa Sunseeker"));*/
-        ConquestData temp = new ConquestData("My Conquest", 0,
-                ConquestPlane.Ravnica,
-                ConquestPlane.Ravnica.getCardPool().getCard("Savra, Queen of the Golgari"));
-        return temp;
-    }
-
     static {
         //ensure save directory exists if this class is used
         FileUtil.ensureDirectoryExists(ForgeConstants.CONQUEST_SAVE_DIR);
@@ -72,10 +55,6 @@ public class ConquestDataIO {
     }
 
     public static ConquestData loadData(final File xmlSaveFile) {
-        if (TEST_MODE) {
-            return createTestData();
-        }
-
         try {
             ConquestData data = null;
 
