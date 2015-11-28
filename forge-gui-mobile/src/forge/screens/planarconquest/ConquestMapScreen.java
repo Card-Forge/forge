@@ -19,40 +19,21 @@ import forge.planarconquest.ConquestPlane.Region;
 import forge.screens.FScreen;
 import forge.toolbox.FList;
 import forge.toolbox.FList.ListItemRenderer;
+import forge.toolbox.FScrollPane;
 import forge.util.collect.FCollectionView;
 
 public class ConquestMapScreen extends FScreen {
+    private static final int GRID_ROWS = 3;
+    private static final int GRID_COLS = 3;
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.6f);
 
-    private final FList<Region> lstRegions;
+    private final PlaneGrid planeGrid;
     private ConquestData model;
 
     public ConquestMapScreen() {
         super("", ConquestMenu.getMenu());
 
-        lstRegions = add(new FList<Region>() {
-            @Override
-            protected void drawBackground(Graphics g) {
-                //draw no background
-            }
-            @Override
-            public void drawOverlay(Graphics g) {
-                //draw no overlay
-            }
-            @Override
-            protected FSkinColor getItemFillColor(int index) {
-                return null;
-            }
-            @Override
-            protected boolean drawLineSeparators() {
-                return false;
-            }
-            @Override
-            protected float getPadding() {
-                return 0;
-            }
-        });
-        lstRegions.setListItemRenderer(new PlaneRenderer());
+        planeGrid = add(new PlaneGrid());
     }
     
     @Override
@@ -62,31 +43,22 @@ public class ConquestMapScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        lstRegions.setBounds(0, startY, width, height - startY);
+        planeGrid.setBounds(0, startY, width, height - startY);
     }
 
     public void update() {
         model = FModel.getConquest().getModel();
         setHeaderCaption(model.getCurrentPlane().getName());
 
-        FCollectionView<Region> regions = model.getCurrentPlane().getRegions();
-        lstRegions.clear();
-        for (int i = regions.size() - 1; i >= 0; i--) {
-            lstRegions.addItem(regions.get(i));
-        }
-        lstRegions.revalidate();
-        lstRegions.scrollToBottom(); //start at bottom and move up
+        planeGrid.revalidate();
+        planeGrid.scrollToBottom(); //start at bottom and move up
     }
 
-    private class PlaneRenderer extends ListItemRenderer<ConquestPlane.Region> {
-        @Override
-        public float getItemHeight() {
-            return ConquestMapScreen.this.getWidth() / CardRenderer.CARD_ART_RATIO;
-        }
+    private class PlaneGrid extends FScrollPane {
 
         @Override
-        public boolean tap(Integer index, Region region, float x, float y, int count) {
-            float colWidth = getWidth() / cols;
+        public boolean tap(float x, float y, int count) {
+            /*float colWidth = getWidth() / cols;
             float rowHeight = getItemHeight() / rows;
             int row = rows - (int)(y / rowHeight) - 1;
             int col = (int)(x / colWidth);
@@ -99,126 +71,93 @@ public class ConquestMapScreen extends FScreen {
             if (position > model.getProgress()) {
                 return false;
             }
-            model.setPlaneswalkerPosition(position);
+            model.setPlaneswalkerPosition(position);*/
             return true;
         }
 
         @Override
-        public void drawValue(Graphics g, Integer index, Region region,
-                FSkinFont font, FSkinColor foreColor, FSkinColor backColor,
-                boolean pressed, float x, float y, float w, float h) {
+        public void draw(Graphics g) {
+            float w = getWidth();
+            float h = getHeight();
+            float regionHeight = w / CardRenderer.CARD_ART_RATIO;
+            float colWidth = w / GRID_COLS;
+            float rowHeight = regionHeight / GRID_ROWS;
 
-            //draw background art
-            FImage art = (FImage)region.getArt();
-            if (art != null) {
-                g.drawImage(art, x, y, w, h);
+            g.startClip(0, 0, w, h);
+
+            float x = 0;
+            float y = -getScrollTop();
+
+            //draw top portal row
+            if (y + rowHeight > 0) {
+                g.fillRect(Color.MAGENTA, 0, y, w, rowHeight);
             }
-            else { //draw fallback background color if needed
-                List<DetailColors> colors = CardDetailUtil.getBorderColors(region.getColorSet());
-                DetailColors dc = colors.get(0);
-                Color color1 = FSkinColor.fromRGB(dc.r, dc.g, dc.b);
-                Color color2 = null;
-                if (colors.size() > 1) {
-                    dc = colors.get(1);
-                    color2 = FSkinColor.fromRGB(dc.r, dc.g, dc.b);
+            y += rowHeight;
+
+            FCollectionView<Region> regions = model.getCurrentPlane().getRegions();
+            for (int i = regions.size() - 1; i >= 0; i--) {
+                if (y + regionHeight <= 0) {
+                    y += regionHeight;
+                    continue;
                 }
-                if (color2 == null) {
-                    g.fillRect(color1, x, y, w, h);
+                if (y > h) { break; }
+
+                //draw background art
+                Region region = regions.get(i);
+                FImage art = (FImage)region.getArt();
+                if (art != null) {
+                    g.drawImage(art, x, y, w, regionHeight);
                 }
-                else {
-                    g.fillGradientRect(color1, color2, false, x, y, w, h);
+                else { //draw fallback background color if needed
+                    List<DetailColors> colors = CardDetailUtil.getBorderColors(region.getColorSet());
+                    DetailColors dc = colors.get(0);
+                    Color color1 = FSkinColor.fromRGB(dc.r, dc.g, dc.b);
+                    Color color2 = null;
+                    if (colors.size() > 1) {
+                        dc = colors.get(1);
+                        color2 = FSkinColor.fromRGB(dc.r, dc.g, dc.b);
+                    }
+                    if (color2 == null) {
+                        g.fillRect(color1, x, y, w, regionHeight);
+                    }
+                    else {
+                        g.fillGradientRect(color1, color2, false, x, y, w, regionHeight);
+                    }
                 }
-            }
-
-            int progress = model.getProgress();
-            int regionCount = model.getCurrentPlane().getRegions().size();
-            FCollectionView<ConquestOpponent> opponents = region.getOpponents();
-            int regionIndex = regionCount - index - 1;
-            int startIndex = regionIndex * opponents.size();
-
-            //draw path with opponents
-            float x0, y0;
-            float colWidth = w / cols;
-            float rowHeight = h / rows;
-            float iconSize = Math.min(colWidth, rowHeight) * 0.33f;
-            float iconBackdropRadius = iconSize * 0.75f;
-            float iconOffsetX = (colWidth - iconSize) / 2;
-            float iconOffsetY = (rowHeight - iconSize) / 2;
-            float lineThickness = iconSize / 4;
-
-            float prevX;
-            float prevY = y + h;
-            if (regionIndex % 2 == 0) {
-                prevX = x + colWidth / 2;
-            }
-            else {
-                prevX = x + w - colWidth / 2;
-            }
-
-            //draw line path
-            for (int i = 0; i < opponents.size(); i++) {
-                GridPosition pos = new GridPosition(startIndex, i);
-                x0 = x + colWidth * pos.col + colWidth / 2;
-                y0 = y + rowHeight * pos.row + rowHeight / 2;
-                if (i > 0 || startIndex > 0) { //extend path from previous region if any
-                    g.drawLine(lineThickness, Color.WHITE, x0, y0, prevX, prevY);
+                
+                //draw row lines
+                float y0 = y;
+                for (int r = 0; r < GRID_ROWS; r++) {
+                    g.drawLine(1, Color.BLACK, 0, y0, w, y0);
+                    y0 += rowHeight;
                 }
-                prevX = x0;
-                prevY = y0;
+
+                y += regionHeight;
             }
 
-            //extend path to next region if not topmost region
-            if (index > 0) {
-                g.drawLine(lineThickness, Color.WHITE, prevX, prevY, prevX, y);
+            //draw bottom portal row
+            if (y <= h) {
+                g.fillRect(Color.MAGENTA, 0, y, w, rowHeight);
+                g.drawLine(1, Color.BLACK, 0, y, w, y);
             }
 
-            //draw icons for stops along path for opponents
-            for (int i = 0; i < opponents.size(); i++) {
-                GridPosition pos = new GridPosition(startIndex, i);
-                x0 = x + colWidth * pos.col + iconOffsetX;
-                y0 = y + rowHeight * pos.row + iconOffsetY;
-                g.fillCircle(Color.BLACK, x0 + iconSize / 2, y0 + iconSize / 2, iconBackdropRadius);
-                g.drawImage((FImage)opponents.get(i).getMapIcon(), x0, y0, iconSize, iconSize);
+            //draw column lines
+            float x0 = x + colWidth;
+            for (int c = 1; c < GRID_COLS; c++) {
+                g.drawLine(1, Color.BLACK, x0, 0, x0, h);
+                x0 += colWidth;
             }
 
-            //draw fog of war overlay if region not yet unlocked
-            if (startIndex > progress) {
-                g.fillRect(FOG_OF_WAR_COLOR, x, y, w, h);
-            }
-            else {
-                //draw planeswalker token above stop
-                int planeswalkerPosition = model.getPlaneswalkerPosition() - startIndex;
-                if (planeswalkerPosition >= 0 && planeswalkerPosition < opponents.size()) {
-                    GridPosition pos = new GridPosition(startIndex, planeswalkerPosition);
-                    x0 = x + colWidth * pos.col + iconOffsetX;
-                    y0 = y + rowHeight * pos.row + iconOffsetY;
-                    FImage token = (FImage)model.getPlaneswalkerToken();
-                    float tokenWidth = iconSize * 2f;
-                    float tokenHeight = tokenWidth * token.getHeight() / token.getWidth();
-                    g.drawImage(token, x0 + (iconSize - tokenWidth) / 2, y0 - tokenHeight, tokenWidth, tokenHeight);
-                }
-            }
+            g.endClip();
         }
-    }
 
-    //path through region should look like this:
-    // 11 12 13 14 15
-    // 10 09 08 07 06
-    // 01 02 03 04 05
-    private static final int rows = 3;
-    private static final int cols = 5;
-
-    private static class GridPosition {
-        public final int row, col;
-        public GridPosition(int startIndex, int i) {
-            int totalRow = (startIndex + i) / cols;
-            row = rows - totalRow % rows - 1;
-            if (totalRow % 2 == 0) {
-                col = i % cols;
-            }
-            else {
-                col = cols - (i % cols) - 1;
-            }
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            float regionHeight = visibleWidth / CardRenderer.CARD_ART_RATIO;
+            float rowHeight = regionHeight / GRID_ROWS;
+            float height = model.getCurrentPlane().getRegions().size() * regionHeight;
+            height += 2 * rowHeight; //account for portal row at top and bottom
+            return new ScrollBounds(visibleWidth, height);
         }
     }
 }
