@@ -18290,6 +18290,9 @@ forge-gui/src/main/java/forge/planarconquest/ConquestController.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestData.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestDataIO.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestDeckMap.java -text
+forge-gui/src/main/java/forge/planarconquest/ConquestEvent.java -text
+forge-gui/src/main/java/forge/planarconquest/ConquestEventRecord.java -text
+forge-gui/src/main/java/forge/planarconquest/ConquestLocation.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestOpponent.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlane.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlaneData.java -text

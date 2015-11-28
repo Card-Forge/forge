@@ -7,25 +7,22 @@ import com.badlogic.gdx.graphics.Color;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
-import forge.planarconquest.ConquestOpponent;
-import forge.planarconquest.ConquestPlane;
+import forge.planarconquest.ConquestEventRecord;
+import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane.Region;
+import forge.planarconquest.ConquestPlaneData;
 import forge.screens.FScreen;
-import forge.toolbox.FList;
-import forge.toolbox.FList.ListItemRenderer;
 import forge.toolbox.FScrollPane;
 import forge.util.collect.FCollectionView;
 
 public class ConquestMapScreen extends FScreen {
-    private static final int GRID_ROWS = 3;
-    private static final int GRID_COLS = 3;
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.6f);
+    private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.2f);
 
     private final PlaneGrid planeGrid;
     private ConquestData model;
@@ -80,8 +77,12 @@ public class ConquestMapScreen extends FScreen {
             float w = getWidth();
             float h = getHeight();
             float regionHeight = w / CardRenderer.CARD_ART_RATIO;
-            float colWidth = w / GRID_COLS;
-            float rowHeight = regionHeight / GRID_ROWS;
+            int cols = Region.COLS_PER_REGION;
+            int rows = Region.ROWS_PER_REGION;
+            float colWidth = w / cols;
+            float rowHeight = regionHeight / rows;
+            ConquestPlaneData planeData = model.getCurrentPlaneData();
+            ConquestLocation currentLocation = model.getCurrentLocation();
 
             g.startClip(0, 0, w, h);
 
@@ -124,10 +125,36 @@ public class ConquestMapScreen extends FScreen {
                         g.fillGradientRect(color1, color2, false, x, y, w, regionHeight);
                     }
                 }
-                
+
+                //draw event icon and overlay based on event record for each event in the region
+                for (int r = 0; r < rows; r++) {
+                    for (int c = 0; c < cols; c++) {
+                        ConquestEventRecord record = planeData.getRecord(i, r, c);
+                        if (record == null || record.getWins() == 0) {
+                            //draw fog of war by default if area hasn't been conquered
+                            Color color = FOG_OF_WAR_COLOR;
+
+                            //if any bordering grid square has been conquered, instead show unconquered color
+                            for (ConquestLocation loc : currentLocation.getNeighbors(i, r, c)) {
+                                if (loc.getRegion() == null) {
+                                    color = UNCONQUERED_COLOR;
+                                    break;
+                                }
+                                record = planeData.getRecord(loc.getRegionIndex(), loc.getRow(), loc.getCol());
+                                if (record != null && record.getWins() > 0) {
+                                    color = UNCONQUERED_COLOR;
+                                    break;
+                                }
+                            }
+
+                            g.fillRect(color, x + c * colWidth, y + r * rowHeight, colWidth, rowHeight);
+                        }
+                    }
+                }
+
                 //draw row lines
                 float y0 = y;
-                for (int r = 0; r < GRID_ROWS; r++) {
+                for (int r = 0; r < rows; r++) {
                     g.drawLine(1, Color.BLACK, 0, y0, w, y0);
                     y0 += rowHeight;
                 }
@@ -143,7 +170,7 @@ public class ConquestMapScreen extends FScreen {
 
             //draw column lines
             float x0 = x + colWidth;
-            for (int c = 1; c < GRID_COLS; c++) {
+            for (int c = 1; c < cols; c++) {
                 g.drawLine(1, Color.BLACK, x0, 0, x0, h);
                 x0 += colWidth;
             }
@@ -154,7 +181,7 @@ public class ConquestMapScreen extends FScreen {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float regionHeight = visibleWidth / CardRenderer.CARD_ART_RATIO;
-            float rowHeight = regionHeight / GRID_ROWS;
+            float rowHeight = regionHeight / Region.ROWS_PER_REGION;
             float height = model.getCurrentPlane().getRegions().size() * regionHeight;
             height += 2 * rowHeight; //account for portal row at top and bottom
             return new ScrollBounds(visibleWidth, height);

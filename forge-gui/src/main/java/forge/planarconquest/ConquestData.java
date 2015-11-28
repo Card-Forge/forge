@@ -23,7 +23,6 @@ import forge.deck.Deck;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.planarconquest.ConquestPlane.Region;
 import forge.properties.ForgeConstants;
 import forge.util.ItemPool;
 
@@ -51,10 +50,10 @@ public final class ConquestData {
     private int progress = 100;
     private int planewalkerPosition = 0;
     private int difficulty;
-    private ConquestPlane startingPlane, currentPlane;
-    private int currentRegionIndex;
+    private ConquestPlane startingPlane;
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
+    private final ConquestLocation currentLocation = new ConquestLocation();
     private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
 
     private final HashSet<PaperCard> collection = new HashSet<PaperCard>();
@@ -69,7 +68,7 @@ public final class ConquestData {
         name = name0;
         difficulty = difficulty0;
         startingPlane = startingPlane0;
-        currentPlane = startingPlane0;
+        currentLocation.travelToPlane(startingPlane);
         planeswalker = planeswalker0;
         planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
         collection.add(planeswalker);
@@ -103,42 +102,21 @@ public final class ConquestData {
     }
 
     public ConquestPlane getCurrentPlane() {
-        return currentPlane;
+        return currentLocation.getPlane();
+    }
+
+    public ConquestLocation getCurrentLocation() {
+        return currentLocation;
     }
 
     public ConquestPlaneData getCurrentPlaneData() {
+        ConquestPlane currentPlane = getCurrentPlane();
         ConquestPlaneData planeData = planeDataMap.get(currentPlane);
         if (planeData == null) {
             planeData = new ConquestPlaneData(currentPlane);
             planeDataMap.put(currentPlane, planeData);
         }
         return planeData;
-    }
-
-    public Region getCurrentRegion() {
-        return currentPlane.getRegions().get(currentRegionIndex);
-    }
-    public boolean setCurrentRegion(Region region) {
-        int index = currentPlane.getRegions().indexOf(region);
-        if (index != -1 && currentRegionIndex != index) {
-            currentRegionIndex = index;
-            return true;
-        }
-        return false;
-    }
-    public void incrementRegion(int dir) {
-        if (dir > 0) {
-            currentRegionIndex++;
-            if (currentRegionIndex >= currentPlane.getRegions().size()) {
-                currentRegionIndex = 0;
-            }
-        }
-        else {
-            currentRegionIndex--;
-            if (currentRegionIndex < 0) {
-                currentRegionIndex = currentPlane.getRegions().size() - 1;
-            }
-        }
     }
 
     public HashSet<PaperCard> getCollection() {

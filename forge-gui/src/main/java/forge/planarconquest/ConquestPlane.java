@@ -272,7 +272,8 @@ public enum ConquestPlane {
     }
 
     public static class Region {
-        public static final int OPPONENTS_PER_REGION = 15;
+        public static final int ROWS_PER_REGION = 3;
+        public static final int COLS_PER_REGION = 3;
 
         private final String name;
         private final String artCardName;
@@ -327,7 +328,7 @@ public enum ConquestPlane {
 
         //each region should have 15 opponents include one boss
         private void generateOpponents() {
-            int opponentsBeforeBoss = OPPONENTS_PER_REGION; //TODO: Reduce by 1 when boss added below
+            int opponentsBeforeBoss = ROWS_PER_REGION * COLS_PER_REGION; //TODO: Reduce by 1 when boss added below
             HashSet<PaperCard> cards = new HashSet<PaperCard>(commanders);
             if (cards.size() < opponentsBeforeBoss) {
                 //if not enough commanders, add normal creatures as non-commander opponents
