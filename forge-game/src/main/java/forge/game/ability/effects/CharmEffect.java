@@ -104,8 +104,8 @@ public class CharmEffect extends SpellAbilityEffect {
             saDeepest.setSubAbility(clone);
             clone.setActivatingPlayer(saDeepest.getActivatingPlayer());
 
-            clone.setTargets(sub.getTargets()); // do not forget what was targeted by the subability
-            // also set targets for subabilities so they are not forgotten
+            // do not forget what was targeted by the subability
+            clone.setTargets(sub.getTargets()); 
             SpellAbility ssa = sub;
             SpellAbility ssaClone = clone;
             while ((ssa = ssa.getSubAbility()) != null) {
