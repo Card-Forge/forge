@@ -3,8 +3,10 @@ package forge.screens.planarconquest;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
+import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinImage;
@@ -53,6 +55,7 @@ public class ConquestMapScreen extends FScreen {
     }
 
     private class PlaneGrid extends FScrollPane {
+        private MoveAnimation activeMoveAnimation;
 
         @Override
         public boolean tap(float x, float y, int count) {
@@ -92,6 +95,7 @@ public class ConquestMapScreen extends FScreen {
             g.startClip(0, 0, w, h);
 
             Color color;
+            float x0, y0;
             float x = 0;
             float y = -getScrollTop();
             float colLineStartY = 0;
@@ -164,7 +168,7 @@ public class ConquestMapScreen extends FScreen {
                 }
 
                 //draw row lines
-                float y0 = y;
+                y0 = y;
                 for (int r = 0; r < rows; r++) {
                     g.drawLine(1, Color.BLACK, 0, y0, w, y0);
                     y0 += rowHeight;
@@ -181,13 +185,20 @@ public class ConquestMapScreen extends FScreen {
             }
 
             //draw column lines
-            float x0 = x + colWidth;
+            x0 = x + colWidth;
             for (int c = 1; c < cols; c++) {
                 g.drawLine(1, Color.BLACK, x0, colLineStartY, x0, colLineEndY);
                 x0 += colWidth;
             }
 
-            //draw planeswalker avatar
+            //draw planeswalker token
+            FImage token = (FImage)model.getPlaneswalkerToken();
+            float tokenHeight = rowHeight * 0.85f;
+            float tokenWidth = tokenHeight * token.getWidth() / token.getHeight();
+            Vector2 pos = activeMoveAnimation == null ? getPosition(currentLocation) : activeMoveAnimation.pos;
+            x0 = pos.x - tokenWidth / 2;
+            y0 = pos.y - tokenHeight / 2 - getScrollTop();
+            g.drawImage(token, x0, y0, tokenWidth, tokenHeight);
 
             g.endClip();
         }
@@ -199,6 +210,46 @@ public class ConquestMapScreen extends FScreen {
             float height = model.getCurrentPlane().getRegions().size() * regionHeight;
             height += 2 * rowHeight; //account for portal row at top and bottom
             return new ScrollBounds(visibleWidth, height);
+        }
+
+        private Vector2 getPosition(ConquestLocation loc) {
+            float w = getWidth();
+            float h = getScrollHeight();
+            float regionHeight = w / CardRenderer.CARD_ART_RATIO;
+            float colWidth = w / Region.COLS_PER_REGION;
+            float rowHeight = regionHeight / Region.ROWS_PER_REGION;
+
+            float x = loc.getCol() * colWidth + colWidth / 2;
+            float y;
+            if (loc.getRegionIndex() == -1) {
+                y = h - rowHeight / 2;
+            }
+            else {
+                y = h - (loc.getRegionIndex() * regionHeight + loc.getRow() * rowHeight + rowHeight / 2);
+            }
+
+            return new Vector2(x, y);
+        }
+
+        private class MoveAnimation extends ForgeAnimation {
+            private final List<ConquestLocation> path;
+            private final Vector2 pos;
+            private int pathIndex;
+
+            private MoveAnimation(List<ConquestLocation> path0) {
+                path = path0;
+                pos = getPosition(path.get(0));
+            }
+
+            @Override
+            protected boolean advance(float dt) {
+                return false;
+            }
+
+            @Override
+            protected void onEnd(boolean endingAll) {
+                activeMoveAnimation = null;
+            }
         }
     }
 }
