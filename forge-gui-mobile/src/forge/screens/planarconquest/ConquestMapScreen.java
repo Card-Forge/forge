@@ -59,9 +59,14 @@ public class ConquestMapScreen extends FScreen {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            ConquestLocation loc = getLocation(x, y);
-            if (loc.isTraversable()) {
-                model.setCurrentLocation(loc);
+            if (activeMoveAnimation == null) {
+                //start move animation if a path can be found to tapped location
+                ConquestLocation loc = getLocation(x, y);
+                List<ConquestLocation> path = model.getPath(loc);
+                if (path != null) {
+                    activeMoveAnimation = new MoveAnimation(path);
+                    activeMoveAnimation.start();
+                }
             }
             return true;
         }

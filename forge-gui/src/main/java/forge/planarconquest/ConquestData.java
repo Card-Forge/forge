@@ -28,9 +28,11 @@ import forge.properties.ForgeConstants;
 import forge.util.ItemPool;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.base.Function;
@@ -222,4 +224,62 @@ public final class ConquestData {
             return iValue == null ? "" : iValue.toString();
         }
     };
+
+    public List<ConquestLocation> getPath(ConquestLocation destLoc) {
+        //if destination isn't traversable, there's no path to reach it
+        if (!destLoc.isTraversable()) { return null; }
+
+        List<ConquestLocation> path = new ArrayList<ConquestLocation>();
+        path.add(currentLocation); //start path with current location
+        
+        
+        
+        return path;
+    }
+
+    private class PathFinder {
+        private final HashSet<Node> closed = new HashSet<Node>();
+        private final HashSet<Node> open = new HashSet<Node>();
+        private final Node[][] map;
+        private final ConquestLocation destLoc;
+
+        private PathFinder(ConquestLocation destLoc0) {
+            destLoc = destLoc0;
+
+            ConquestPlane plane = getCurrentPlane();
+            int xMax = Region.COLS_PER_REGION;
+            int yMax = plane.getRegions().size() * Region.ROWS_PER_REGION + 2;
+            map = new Node[xMax][yMax];
+            for (int x = 0; x < xMax; x++) {
+                for (int y = 0; y < yMax; y++) {
+                    map[x][y] = new Node(plane, x, y);
+                }
+            }
+        }
+
+        private class Node {
+            private final ConquestLocation loc;
+            private boolean blocked;
+
+            public Node(ConquestPlane plane, int x, int y) {
+                int row;
+                int col = x;
+                int rowIndex = y - 1;
+                int regionCount = plane.getRegions().size();
+                int regionIndex = rowIndex / Region.ROWS_PER_REGION;
+                if (rowIndex < 0) {
+                    regionIndex = -1;
+                    row = 0;
+                }
+                else if (regionIndex >= regionCount) {
+                    regionIndex = regionCount;
+                    row = 0;
+                }
+                else {
+                    row = rowIndex % Region.ROWS_PER_REGION;
+                }
+                loc = new ConquestLocation(plane, regionIndex, row, col);
+            }
+        }
+    }
 }
