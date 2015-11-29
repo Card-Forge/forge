@@ -116,14 +116,8 @@ public enum FSkinImage implements FImage {
     TROPHY_CASE_TOP  (FSkinProp.IMG_TROPHY_CASE_TOP, SourceFile.TROPHIES),
     TROPHY_SHELF     (FSkinProp.IMG_TROPHY_SHELF, SourceFile.TROPHIES),
 
-    //Planar Conquest Tiles
-    HEXAGON_TILE    (FSkinProp.IMG_HEXAGON_TILE, SourceFile.PLANAR_CONQUEST),
-    COLORLESS_TILE  (FSkinProp.IMG_COLORLESS_TILE, SourceFile.PLANAR_CONQUEST),
-    WHITE_TILE      (FSkinProp.IMG_WHITE_TILE, SourceFile.PLANAR_CONQUEST),
-    BLUE_TILE       (FSkinProp.IMG_BLUE_TILE, SourceFile.PLANAR_CONQUEST),
-    BLACK_TILE      (FSkinProp.IMG_BLACK_TILE, SourceFile.PLANAR_CONQUEST),
-    RED_TILE        (FSkinProp.IMG_RED_TILE, SourceFile.PLANAR_CONQUEST),
-    GREEN_TILE      (FSkinProp.IMG_GREEN_TILE, SourceFile.PLANAR_CONQUEST),
+    //Planar Conquest Images
+    PLANAR_PORTAL (FSkinProp.IMG_PLANAR_PORTAL, SourceFile.PLANAR_CONQUEST),
 
     //Quest Icons
     QUEST_ZEP         (FSkinProp.ICO_QUEST_ZEP, SourceFile.ICONS),

@@ -14,6 +14,13 @@ public class ConquestLocation {
     public ConquestLocation() {
     }
 
+    private ConquestLocation(ConquestPlane plane0, int regionIndex0, int row0, int col0) {
+        plane = plane0;
+        regionIndex = regionIndex0;
+        row = row0;
+        col = col0;
+    }
+
     public ConquestPlane getPlane() {
         return plane;
     }
@@ -52,13 +59,43 @@ public class ConquestLocation {
         return getNeighbors(regionIndex, row, col);
     }
     public List<ConquestLocation> getNeighbors(int regionIndex0, int row0, int col0) {
+        int regionCount = plane.getRegions().size();
         List<ConquestLocation> locations = new ArrayList<ConquestLocation>();
+
+        //add location above
+        if (row0 < Region.ROWS_PER_REGION - 1) {
+            locations.add(new ConquestLocation(plane, regionIndex0, row0 + 1, col0));
+        }
+        else if (regionIndex0 < regionCount - 1) {
+            locations.add(new ConquestLocation(plane, regionIndex0 + 1, 0, col0));
+        }
+        else if (regionIndex0 == regionCount - 1 && col0 == (Region.COLS_PER_REGION - 1) / 2) {
+            //top portal only available from center column of topmost row
+            locations.add(new ConquestLocation(plane, regionCount, 0, col0));
+        }
+
+        //add location below
         if (row0 > 0) {
-            
+            locations.add(new ConquestLocation(plane, regionIndex0, row0 - 1, col0));
         }
         else if (regionIndex0 > 0) {
-            
+            locations.add(new ConquestLocation(plane, regionIndex0 - 1, Region.ROWS_PER_REGION - 1, col0));
         }
+        else if (regionIndex0 == 0 && col0 == (Region.COLS_PER_REGION - 1) / 2) {
+            //bottom portal only available from center column of bottommost row
+            locations.add(new ConquestLocation(plane, -1, 0, col0));
+        }
+
+        //add locations left and right
+        if (regionIndex0 >= 0 && regionIndex0 < regionCount) { //not options in portal row
+            if (col0 > 0) {
+                locations.add(new ConquestLocation(plane, regionIndex0, row0, col0 - 1));
+            }
+            if (col0 < Region.COLS_PER_REGION - 1) {
+                locations.add(new ConquestLocation(plane, regionIndex0, row0, col0 + 1));
+            }
+        }
+
         return locations;
     }
 }

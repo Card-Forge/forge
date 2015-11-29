@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.Color;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
-import forge.planarconquest.ConquestEventRecord;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
@@ -86,17 +86,31 @@ public class ConquestMapScreen extends FScreen {
 
             g.startClip(0, 0, w, h);
 
+            Color color;
             float x = 0;
             float y = -getScrollTop();
+            float colLineStartY = 0;
+            float colLineEndY = h;
+            FCollectionView<Region> regions = model.getCurrentPlane().getRegions();
+            int regionCount = regions.size();
 
             //draw top portal row
             if (y + rowHeight > 0) {
-                g.fillRect(Color.MAGENTA, 0, y, w, rowHeight);
+                g.drawImage(FSkinImage.PLANAR_PORTAL, 0, y, w, rowHeight);
+                if (planeData.getBossResult() == 0) { //draw overlay if boss hasn't been beaten yet
+                    if (planeData.getEventResult(regionCount - 1, rows - 1, (cols - 1) / 2) > 0) {
+                        color = UNCONQUERED_COLOR;
+                    }
+                    else {
+                        color = FOG_OF_WAR_COLOR;
+                    }
+                    g.fillRect(color, 0, y, w, rowHeight);
+                }
+                colLineStartY = y + rowHeight;
             }
             y += rowHeight;
 
-            FCollectionView<Region> regions = model.getCurrentPlane().getRegions();
-            for (int i = regions.size() - 1; i >= 0; i--) {
+            for (int i = regionCount - 1; i >= 0; i--) {
                 if (y + regionHeight <= 0) {
                     y += regionHeight;
                     continue;
@@ -129,25 +143,19 @@ public class ConquestMapScreen extends FScreen {
                 //draw event icon and overlay based on event record for each event in the region
                 for (int r = 0; r < rows; r++) {
                     for (int c = 0; c < cols; c++) {
-                        ConquestEventRecord record = planeData.getRecord(i, r, c);
-                        if (record == null || record.getWins() == 0) {
+                        if (planeData.getEventResult(i, r, c) == 0) {
                             //draw fog of war by default if area hasn't been conquered
-                            Color color = FOG_OF_WAR_COLOR;
+                            color = FOG_OF_WAR_COLOR;
 
                             //if any bordering grid square has been conquered, instead show unconquered color
                             for (ConquestLocation loc : currentLocation.getNeighbors(i, r, c)) {
-                                if (loc.getRegion() == null) {
-                                    color = UNCONQUERED_COLOR;
-                                    break;
-                                }
-                                record = planeData.getRecord(loc.getRegionIndex(), loc.getRow(), loc.getCol());
-                                if (record != null && record.getWins() > 0) {
+                                if (planeData.getEventResult(loc.getRegionIndex(), loc.getRow(), loc.getCol()) > 0) {
                                     color = UNCONQUERED_COLOR;
                                     break;
                                 }
                             }
 
-                            g.fillRect(color, x + c * colWidth, y + r * rowHeight, colWidth, rowHeight);
+                            g.fillRect(color, x + c * colWidth, y + (rows - r - 1) * rowHeight, colWidth, rowHeight);
                         }
                     }
                 }
@@ -164,14 +172,15 @@ public class ConquestMapScreen extends FScreen {
 
             //draw bottom portal row
             if (y <= h) {
-                g.fillRect(Color.MAGENTA, 0, y, w, rowHeight);
+                g.drawImage(FSkinImage.PLANAR_PORTAL, 0, y, w, rowHeight);
                 g.drawLine(1, Color.BLACK, 0, y, w, y);
+                colLineEndY = y;
             }
 
             //draw column lines
             float x0 = x + colWidth;
             for (int c = 1; c < cols; c++) {
-                g.drawLine(1, Color.BLACK, x0, 0, x0, h);
+                g.drawLine(1, Color.BLACK, x0, colLineStartY, x0, colLineEndY);
                 x0 += colWidth;
             }
 

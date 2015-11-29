@@ -7,7 +7,8 @@ import forge.planarconquest.ConquestPlane.Region;
 
 public class ConquestPlaneData {
     private final ConquestPlane plane;
-    private final ConquestEventRecord[][][] records;
+    private final int[][][] eventResults;
+    private int bossResult;
 
     private int wins, losses;
     private int winStreakBest = 0;
@@ -15,11 +16,21 @@ public class ConquestPlaneData {
 
     public ConquestPlaneData(ConquestPlane plane0) {
         plane = plane0;
-        records = new ConquestEventRecord[plane.getRegions().size()][Region.ROWS_PER_REGION][Region.COLS_PER_REGION];
+        eventResults = new int[plane.getRegions().size()][Region.ROWS_PER_REGION][Region.COLS_PER_REGION];
     }
 
-    public ConquestEventRecord getRecord(int regionIndex, int row, int col) {
-        return records[regionIndex][row][col];
+    public int getEventResult(int regionIndex, int row, int col) {
+        if (regionIndex == -1) {
+            return 1; //bottom portal is always conquered
+        }
+        if (regionIndex == plane.getRegions().size()) {
+            return bossResult; 
+        }
+        return eventResults[regionIndex][row][col];
+    }
+
+    public int getBossResult() {
+        return bossResult;
     }
 
     public void addWin(ConquestCommander opponent) {
