@@ -49,7 +49,7 @@ public class PumpAi extends PumpAiBase {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
-        final boolean isFight = sa.getParam("AILogic").equals("Fight") || sa.getParam("AILogic").equals("PowerDmg");
+        final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
 
         if (!ComputerUtilCost.checkLifeCost(ai, cost, sa.getHostCard(), 4, null)) {
             return false;
@@ -213,7 +213,7 @@ public class PumpAi extends PumpAiBase {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
-        final boolean isFight = sa.getParam("AILogic").equals("Fight") || sa.getParam("AILogic").equals("PowerDmg");
+        final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
         
         immediately |= ComputerUtil.playImmediately(ai, sa);
 
