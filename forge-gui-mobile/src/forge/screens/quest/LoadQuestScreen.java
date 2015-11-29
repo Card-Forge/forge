@@ -246,6 +246,7 @@ public class LoadQuestScreen extends LaunchScreen {
                 new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat.bak").delete();
 
                 lstQuests.removeQuest(quest);
+                updateEnabledButtons();
             }
         });
     }

@@ -243,6 +243,7 @@ public class LoadConquestScreen extends LaunchScreen {
                 new File(ForgeConstants.CONQUEST_SAVE_DIR, quest.getName() + ".dat").delete();
 
                 lstConquests.removeConquest(quest);
+                updateEnabledButtons();
             }
         });
     }
