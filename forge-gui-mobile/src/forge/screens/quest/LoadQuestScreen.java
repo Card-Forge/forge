@@ -85,7 +85,7 @@ public class LoadQuestScreen extends LaunchScreen {
     public void onActivate() {
         lblOldQuests.setText("Loading Existing Quests...");
         lstQuests.clear();
-        btnStart.setEnabled(false);
+        updateEnabledButtons();
         revalidate();
 
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -133,13 +133,20 @@ public class LoadQuestScreen extends LaunchScreen {
                     public void run() {
                         lblOldQuests.setText("Old quest data? Put into \""
                                 + ForgeConstants.QUEST_SAVE_DIR + "\" and restart Forge.");
-                        btnStart.setEnabled(true);
+                        updateEnabledButtons();
                         revalidate();
                         lstQuests.scrollIntoView(lstQuests.selectedIndex);
                     }
                 });
             }
         });
+    }
+
+    private void updateEnabledButtons() {
+        boolean enabled = lstQuests.getSelectedQuest() != null;
+        btnStart.setEnabled(enabled);
+        btnRenameQuest.setEnabled(enabled);
+        btnDeleteQuest.setEnabled(enabled);
     }
 
     @Override

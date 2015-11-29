@@ -84,7 +84,7 @@ public class LoadConquestScreen extends LaunchScreen {
     public void onActivate() {
         lblOldConquests.setText("Loading Existing Conquests...");
         lstConquests.clear();
-        btnStart.setEnabled(false);
+        updateEnabledButtons();
         revalidate();
 
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -132,13 +132,20 @@ public class LoadConquestScreen extends LaunchScreen {
                     public void run() {
                         lblOldConquests.setText("Old conquest data? Put into \""
                                 + ForgeConstants.CONQUEST_SAVE_DIR + "\" and restart Forge.");
-                        btnStart.setEnabled(true);
+                        updateEnabledButtons();
                         revalidate();
                         lstConquests.scrollIntoView(lstConquests.selectedIndex);
                     }
                 });
             }
         });
+    }
+
+    private void updateEnabledButtons() {
+        boolean enabled = lstConquests.getSelectedConquest() != null;
+        btnStart.setEnabled(enabled);
+        btnRenameConquest.setEnabled(enabled);
+        btnDeleteConquest.setEnabled(enabled);
     }
 
     @Override
