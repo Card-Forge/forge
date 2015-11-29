@@ -212,6 +212,7 @@ public class PumpAi extends PumpAiBase {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
+        final boolean isFight = sa.getParam("AILogic").equals("Fight") || sa.getParam("AILogic").equals("PowerDmg");
         
         immediately |= ComputerUtil.playImmediately(ai, sa);
 
@@ -221,7 +222,8 @@ public class PumpAi extends PumpAiBase {
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
                 && !sa.hasParam("UntilYourNextTurn")
-                && !"Snapcaster".equals(sa.getParam("AILogic"))) {
+                && !"Snapcaster".equals(sa.getParam("AILogic"))
+                && !isFight) {
             return false;
         }
 
@@ -247,7 +249,7 @@ public class PumpAi extends PumpAiBase {
                     return false;
                 }
             }
-            if (sa.getParam("AILogic").equals("Fight") || sa.getParam("AILogic").equals("PowerDmg")) {
+            if (isFight) {
                 return FightAi.canFightAi(ai, sa, attack, defense);
             }
         }
