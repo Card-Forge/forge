@@ -14,6 +14,7 @@ import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestLocation;
+import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.screens.FScreen;
@@ -81,6 +82,10 @@ public class ConquestMapScreen extends FScreen {
             int rows = Region.ROWS_PER_REGION;
             float colWidth = w / cols;
             float rowHeight = regionHeight / rows;
+
+            ConquestPlane plane = model.getCurrentPlane();
+            FCollectionView<Region> regions = plane.getRegions();
+            int regionCount = regions.size();
             ConquestPlaneData planeData = model.getCurrentPlaneData();
             ConquestLocation currentLocation = model.getCurrentLocation();
 
@@ -91,8 +96,6 @@ public class ConquestMapScreen extends FScreen {
             float y = -getScrollTop();
             float colLineStartY = 0;
             float colLineEndY = h;
-            FCollectionView<Region> regions = model.getCurrentPlane().getRegions();
-            int regionCount = regions.size();
 
             //draw top portal row
             if (y + rowHeight > 0) {
@@ -148,7 +151,7 @@ public class ConquestMapScreen extends FScreen {
                             color = FOG_OF_WAR_COLOR;
 
                             //if any bordering grid square has been conquered, instead show unconquered color
-                            for (ConquestLocation loc : currentLocation.getNeighbors(i, r, c)) {
+                            for (ConquestLocation loc : ConquestLocation.getNeighbors(plane, i, r, c)) {
                                 if (planeData.getEventResult(loc.getRegionIndex(), loc.getRow(), loc.getCol()) > 0) {
                                     color = UNCONQUERED_COLOR;
                                     break;
@@ -183,6 +186,8 @@ public class ConquestMapScreen extends FScreen {
                 g.drawLine(1, Color.BLACK, x0, colLineStartY, x0, colLineEndY);
                 x0 += colWidth;
             }
+
+            //draw planeswalker avatar
 
             g.endClip();
         }
