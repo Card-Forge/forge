@@ -49,6 +49,7 @@ public class PumpAi extends PumpAiBase {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
+        final boolean isFight = sa.getParam("AILogic").equals("Fight") || sa.getParam("AILogic").equals("PowerDmg");
 
         if (!ComputerUtilCost.checkLifeCost(ai, cost, sa.getHostCard(), 4, null)) {
             return false;
@@ -114,7 +115,7 @@ public class PumpAi extends PumpAiBase {
             if (!sa.isCurse() && !SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
-        } else if (!game.getStack().isEmpty() && !sa.isCurse()) {
+        } else if (!game.getStack().isEmpty() && !sa.isCurse() && !isFight) {
             return ComputerUtilCard.canPumpAgainstRemoval(ai, sa);
         }
 
