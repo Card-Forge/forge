@@ -98,7 +98,7 @@ public class ConquestMapScreen extends FScreen {
             if (y + rowHeight > 0) {
                 g.drawImage(FSkinImage.PLANAR_PORTAL, 0, y, w, rowHeight);
                 if (planeData.getBossResult() == 0) { //draw overlay if boss hasn't been beaten yet
-                    if (planeData.getEventResult(regionCount - 1, rows - 1, (cols - 1) / 2) > 0) {
+                    if (planeData.getEventResult(regionCount - 1, rows - 1, Region.PORTAL_COL) > 0) {
                         color = UNCONQUERED_COLOR;
                     }
                     else {

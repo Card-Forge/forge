@@ -46,13 +46,10 @@ public class ConquestLocation {
 
     public void travelToPlane(ConquestPlane plane0) {
         if (plane == plane0) { return; }
-        if (plane == null /*|| plane0 follows plane in travel order */) {
-            regionIndex = -1; //start on bottom portal row
-        }
-        else {
-            regionIndex = plane.getRegions().size(); //start on top portal row
-        }
         plane = plane0;
+        regionIndex = -1; //start on bottom portal row
+        row = 0;
+        col = Region.PORTAL_COL;
     }
 
     public List<ConquestLocation> getNeighbors() {
@@ -69,8 +66,7 @@ public class ConquestLocation {
         else if (regionIndex0 < regionCount - 1) {
             locations.add(new ConquestLocation(plane, regionIndex0 + 1, 0, col0));
         }
-        else if (regionIndex0 == regionCount - 1 && col0 == (Region.COLS_PER_REGION - 1) / 2) {
-            //top portal only available from center column of topmost row
+        else if (regionIndex0 == regionCount - 1 && col0 == Region.PORTAL_COL) {
             locations.add(new ConquestLocation(plane, regionCount, 0, col0));
         }
 
@@ -81,8 +77,7 @@ public class ConquestLocation {
         else if (regionIndex0 > 0) {
             locations.add(new ConquestLocation(plane, regionIndex0 - 1, Region.ROWS_PER_REGION - 1, col0));
         }
-        else if (regionIndex0 == 0 && col0 == (Region.COLS_PER_REGION - 1) / 2) {
-            //bottom portal only available from center column of bottommost row
+        else if (regionIndex0 == 0 && col0 == Region.PORTAL_COL) {
             locations.add(new ConquestLocation(plane, -1, 0, col0));
         }
 

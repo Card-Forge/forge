@@ -274,6 +274,7 @@ public enum ConquestPlane {
     public static class Region {
         public static final int ROWS_PER_REGION = 3;
         public static final int COLS_PER_REGION = 3;
+        public static final int PORTAL_COL = (COLS_PER_REGION - 1) / 2;
 
         private final String name;
         private final String artCardName;

@@ -85,6 +85,7 @@ public class LoadQuestScreen extends LaunchScreen {
     public void onActivate() {
         lblOldQuests.setText("Loading Existing Quests...");
         lstQuests.clear();
+        btnStart.setEnabled(false);
         revalidate();
 
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -131,7 +132,8 @@ public class LoadQuestScreen extends LaunchScreen {
                     @Override
                     public void run() {
                         lblOldQuests.setText("Old quest data? Put into \""
-                                + ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/') + "\" and restart Forge.");
+                                + ForgeConstants.QUEST_SAVE_DIR + "\" and restart Forge.");
+                        btnStart.setEnabled(true);
                         revalidate();
                         lstQuests.scrollIntoView(lstQuests.selectedIndex);
                     }
@@ -174,8 +176,10 @@ public class LoadQuestScreen extends LaunchScreen {
 
     /** Changes between quest data files. */
     private void changeQuest() {
-        FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST,
-                lstQuests.getSelectedQuest().getName() + ".dat");
+        QuestData quest = lstQuests.getSelectedQuest();
+        if (quest == null) { return; }
+
+        FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, quest.getName() + ".dat");
         FModel.getQuestPreferences().save();
         QuestMenu.launchQuestMode(LaunchReason.LoadQuest);
     }

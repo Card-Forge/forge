@@ -84,6 +84,7 @@ public class LoadConquestScreen extends LaunchScreen {
     public void onActivate() {
         lblOldConquests.setText("Loading Existing Conquests...");
         lstConquests.clear();
+        btnStart.setEnabled(false);
         revalidate();
 
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -130,7 +131,8 @@ public class LoadConquestScreen extends LaunchScreen {
                     @Override
                     public void run() {
                         lblOldConquests.setText("Old conquest data? Put into \""
-                                + ForgeConstants.CONQUEST_SAVE_DIR.replace('\\', '/') + "\" and restart Forge.");
+                                + ForgeConstants.CONQUEST_SAVE_DIR + "\" and restart Forge.");
+                        btnStart.setEnabled(true);
                         revalidate();
                         lstConquests.scrollIntoView(lstConquests.selectedIndex);
                     }
@@ -172,8 +174,10 @@ public class LoadConquestScreen extends LaunchScreen {
     }
 
     private void changeConquest() {
-        FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST,
-                lstConquests.getSelectedConquest().getName() + ".dat");
+        ConquestData conquest = lstConquests.getSelectedConquest();
+        if (conquest == null) { return; }
+
+        FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquest.getName() + ".dat");
         FModel.getConquestPreferences().save();
         ConquestMenu.launchPlanarConquest(LaunchReason.LoadConquest);
     }
