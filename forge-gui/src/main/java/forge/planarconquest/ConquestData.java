@@ -23,6 +23,7 @@ import forge.deck.Deck;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.planarconquest.ConquestPlane.Region;
 import forge.properties.ForgeConstants;
 import forge.util.ItemPool;
 
@@ -48,12 +49,11 @@ public final class ConquestData {
     private int winStreakBest = 0;
     private int winStreakCurrent = 0;
     private int progress = 100;
-    private int planewalkerPosition = 0;
     private int difficulty;
     private ConquestPlane startingPlane;
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
-    private final ConquestLocation currentLocation = new ConquestLocation();
+    private ConquestLocation currentLocation;
     private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
 
     private final HashSet<PaperCard> collection = new HashSet<PaperCard>();
@@ -68,7 +68,7 @@ public final class ConquestData {
         name = name0;
         difficulty = difficulty0;
         startingPlane = startingPlane0;
-        currentLocation.travelToPlane(startingPlane);
+        currentLocation = new ConquestLocation(startingPlane, -1, 0, Region.PORTAL_COL);
         planeswalker = planeswalker0;
         planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
         collection.add(planeswalker);
@@ -86,13 +86,6 @@ public final class ConquestData {
         return progress;
     }
 
-    public int getPlaneswalkerPosition() {
-        return planewalkerPosition;
-    }
-    public void setPlaneswalkerPosition(int planewalkerPosition0) {
-        planewalkerPosition = planewalkerPosition0;
-    }
-
     public ISkinImage getPlaneswalkerToken() {
         return planeswalkerToken;
     }
@@ -107,6 +100,9 @@ public final class ConquestData {
 
     public ConquestLocation getCurrentLocation() {
         return currentLocation;
+    }
+    public void setCurrentLocation(ConquestLocation currentLocation0) {
+        currentLocation = currentLocation0;
     }
 
     public ConquestPlaneData getCurrentPlaneData() {

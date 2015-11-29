@@ -14,7 +14,7 @@ public class ConquestLocation {
     public ConquestLocation() {
     }
 
-    private ConquestLocation(ConquestPlane plane0, int regionIndex0, int row0, int col0) {
+    public ConquestLocation(ConquestPlane plane0, int regionIndex0, int row0, int col0) {
         plane = plane0;
         regionIndex = regionIndex0;
         row = row0;
@@ -44,12 +44,11 @@ public class ConquestLocation {
         return col;
     }
 
-    public void travelToPlane(ConquestPlane plane0) {
-        if (plane == plane0) { return; }
-        plane = plane0;
-        regionIndex = -1; //start on bottom portal row
-        row = 0;
-        col = Region.PORTAL_COL;
+    public boolean isTraversable() {
+        if (regionIndex == -1 || regionIndex == plane.getRegions().size()) {
+            return col == Region.PORTAL_COL;
+        }
+        return true;
     }
 
     public List<ConquestLocation> getNeighbors() {

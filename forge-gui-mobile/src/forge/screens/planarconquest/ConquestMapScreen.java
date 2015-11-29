@@ -59,20 +59,10 @@ public class ConquestMapScreen extends FScreen {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            /*float colWidth = getWidth() / cols;
-            float rowHeight = getItemHeight() / rows;
-            int row = rows - (int)(y / rowHeight) - 1;
-            int col = (int)(x / colWidth);
-            int regionIndex = model.getCurrentPlane().getRegions().size() - index - 1;
-            if ((regionIndex + row) % 2 == 1) {
-                col = cols - col - 1;
+            ConquestLocation loc = getLocation(x, y);
+            if (loc.isTraversable()) {
+                model.setCurrentLocation(loc);
             }
-            int startIndex = regionIndex * rows * cols;
-            int position = startIndex + row * cols + col;
-            if (position > model.getProgress()) {
-                return false;
-            }
-            model.setPlaneswalkerPosition(position);*/
             return true;
         }
 
@@ -212,6 +202,43 @@ public class ConquestMapScreen extends FScreen {
             return new ScrollBounds(visibleWidth, height);
         }
 
+        private ConquestLocation getLocation(float x, float y) {
+            y += getScrollTop();
+
+            float w = getWidth();
+            float h = getScrollHeight();
+            float regionHeight = w / CardRenderer.CARD_ART_RATIO;
+            float colWidth = w / Region.COLS_PER_REGION;
+            float rowHeight = regionHeight / Region.ROWS_PER_REGION;
+
+            int row;
+            int rowIndex = (int)((h - y) / rowHeight) - 1; //flip axis since locations go bottom to top
+            ConquestPlane plane = model.getCurrentPlane();
+            int regionCount = plane.getRegions().size();
+            int regionIndex = rowIndex / Region.ROWS_PER_REGION;
+            if (rowIndex < 0) {
+                regionIndex = -1;
+                row = 0;
+            }
+            else if (regionIndex >= regionCount) {
+                regionIndex = regionCount;
+                row = 0;
+            }
+            else {
+                row = rowIndex % Region.ROWS_PER_REGION;
+            }
+
+            int col = (int)(x / colWidth);
+            if (col < 0) {
+                col = 0;
+            }
+            else if (col > Region.COLS_PER_REGION - 1) {
+                col = Region.COLS_PER_REGION - 1;
+            }
+
+            return new ConquestLocation(plane, regionIndex, row, col);
+        }
+
         private Vector2 getPosition(ConquestLocation loc) {
             float w = getWidth();
             float h = getScrollHeight();
@@ -225,7 +252,7 @@ public class ConquestMapScreen extends FScreen {
                 y = h - rowHeight / 2;
             }
             else {
-                y = h - (loc.getRegionIndex() * regionHeight + loc.getRow() * rowHeight + rowHeight / 2);
+                y = h - (loc.getRegionIndex() * regionHeight + loc.getRow() * rowHeight + 3 * rowHeight / 2);
             }
 
             return new Vector2(x, y);
