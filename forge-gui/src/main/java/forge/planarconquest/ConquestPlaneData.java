@@ -19,6 +19,9 @@ public class ConquestPlaneData {
         eventResults = new int[plane.getRegions().size()][Region.ROWS_PER_REGION][Region.COLS_PER_REGION];
     }
 
+    public int getEventResult(ConquestLocation loc) {
+        return getEventResult(loc.getRegionIndex(), loc.getRow(), loc.getCol());
+    }
     public int getEventResult(int regionIndex, int row, int col) {
         if (regionIndex == -1) {
             return 1; //bottom portal is always conquered

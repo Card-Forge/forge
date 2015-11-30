@@ -151,7 +151,7 @@ public class ConquestMapScreen extends FScreen {
 
                             //if any bordering grid square has been conquered, instead show unconquered color
                             for (ConquestLocation loc : ConquestLocation.getNeighbors(plane, i, r, c)) {
-                                if (planeData.getEventResult(loc.getRegionIndex(), loc.getRow(), loc.getCol()) > 0) {
+                                if (planeData.getEventResult(loc) > 0) {
                                     color = UNCONQUERED_COLOR;
                                     break;
                                 }
@@ -264,22 +264,39 @@ public class ConquestMapScreen extends FScreen {
         }
 
         private class MoveAnimation extends ForgeAnimation {
+            private static final float DURATION_PER_SEGMENT = 0.5f;
+
             private final List<ConquestLocation> path;
-            private final Vector2 pos;
-            private int pathIndex;
+            private final float duration;
+            private Vector2 pos;
+            private float progress;
 
             private MoveAnimation(List<ConquestLocation> path0) {
                 path = path0;
                 pos = getPosition(path.get(0));
+                duration = (path.size() - 1) * DURATION_PER_SEGMENT;
             }
 
             @Override
             protected boolean advance(float dt) {
-                return false;
+                progress += dt;
+                if (progress >= duration) {
+                    //we've reached our destination, so stop animation
+                    pos = getPosition(path.get(path.size() - 1));
+                    return false;
+                }
+
+                int currentSegment = (int)(progress / DURATION_PER_SEGMENT);
+                float r = (progress - currentSegment * DURATION_PER_SEGMENT) / DURATION_PER_SEGMENT;
+                Vector2 p1 = getPosition(path.get(currentSegment));
+                Vector2 p2 = getPosition(path.get(currentSegment + 1));
+                pos = new Vector2((1.0f - r) * p1.x + r * p2.x, (1.0f - r) * p1.y + r * p2.y);
+                return true;
             }
 
             @Override
             protected void onEnd(boolean endingAll) {
+                model.setCurrentLocation(path.get(path.size() - 1));
                 activeMoveAnimation = null;
             }
         }

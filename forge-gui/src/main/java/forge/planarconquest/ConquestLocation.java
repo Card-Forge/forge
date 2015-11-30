@@ -10,6 +10,7 @@ public class ConquestLocation {
     private int regionIndex;
     private int row;
     private int col;
+    private List<ConquestLocation> neighbors;
 
     public ConquestLocation() {
     }
@@ -52,7 +53,10 @@ public class ConquestLocation {
     }
 
     public List<ConquestLocation> getNeighbors() {
-        return getNeighbors(plane, regionIndex, row, col);
+        if (neighbors == null) { //cache neighbors for performance
+            neighbors = getNeighbors(plane, regionIndex, row, col);
+        }
+        return neighbors;
     }
 
     public static List<ConquestLocation> getNeighbors(ConquestPlane plane0, int regionIndex0, int row0, int col0) {

@@ -29,6 +29,7 @@ import forge.util.ItemPool;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -226,26 +227,16 @@ public final class ConquestData {
     };
 
     public List<ConquestLocation> getPath(ConquestLocation destLoc) {
-        //if destination isn't traversable, there's no path to reach it
-        if (!destLoc.isTraversable()) { return null; }
-
-        List<ConquestLocation> path = new ArrayList<ConquestLocation>();
-        path.add(currentLocation); //start path with current location
-        
-        
-        
-        return path;
+        PathFinder pathFinder = new PathFinder();
+        return pathFinder.findPath(destLoc);
     }
 
     private class PathFinder {
-        private final HashSet<Node> closed = new HashSet<Node>();
-        private final HashSet<Node> open = new HashSet<Node>();
+        private final HashSet<Node> closedSet = new HashSet<Node>();
+        private final HashSet<Node> openSet = new HashSet<Node>();
         private final Node[][] map;
-        private final ConquestLocation destLoc;
 
-        private PathFinder(ConquestLocation destLoc0) {
-            destLoc = destLoc0;
-
+        private PathFinder() {
             ConquestPlane plane = getCurrentPlane();
             int xMax = Region.COLS_PER_REGION;
             int yMax = plane.getRegions().size() * Region.ROWS_PER_REGION + 2;
@@ -257,11 +248,104 @@ public final class ConquestData {
             }
         }
 
-        private class Node {
-            private final ConquestLocation loc;
-            private boolean blocked;
+        public List<ConquestLocation> findPath(ConquestLocation destLoc) {
+            Node goal = getNode(destLoc);
+            if (goal.isBlocked()) { return null; } //if goal is blocked, there's no path to reach it
 
-            public Node(ConquestPlane plane, int x, int y) {
+            Node start = getNode(getCurrentLocation());
+            openSet.add(start);
+            start.g_score = 0;
+            start.f_score = start.g_score + distance(start, goal);
+
+            Node current;
+            while (!openSet.isEmpty()) {
+                //find node in open set with lowest f_score
+                current = null;
+                for (Node node : openSet) {
+                    if (current == null || node.f_score < current.f_score) {
+                        current = node;
+                    }
+                }
+
+                //if we've reach goal, reconstruct path and return it
+                if (current == goal) {
+                    List<ConquestLocation> path = new ArrayList<ConquestLocation>();
+                    while (current != null) {
+                        path.add(current.loc);
+                        current = current.came_from;
+                    }
+                    Collections.reverse(path); //reverse path so it begins with start location
+                    return path;
+                }
+
+                //move that node from open set to closed set
+                openSet.remove(current);
+                closedSet.add(current);
+
+                //check neighbors for path
+                checkNeighbor(current, goal, current.x - 1, current.y);
+                checkNeighbor(current, goal, current.x + 1, current.y);
+                checkNeighbor(current, goal, current.x, current.y - 1);
+                checkNeighbor(current, goal, current.x, current.y + 1);
+            }
+            return null;
+        }
+
+        private void checkNeighbor(Node current, Node goal, int x, int y) {
+            if (x < 0 || x >= map.length) { return; }
+            Node[] column = map[x];
+            if (y < 0 || y >= column.length) { return; }
+            Node neighbor = column[y];
+            if (neighbor.isBlocked()) { return; }
+            if (closedSet.contains(neighbor)) { return; }
+
+            int g_score = current.g_score + 1;
+            if (!openSet.contains(neighbor)) {
+                openSet.add(neighbor);
+            }
+            else if (g_score >= neighbor.g_score) {
+                return; //not a better path
+            }
+
+            //this path is the best, so record it
+            neighbor.came_from = current;
+            neighbor.g_score = g_score;
+            neighbor.f_score = neighbor.g_score + distance(neighbor, goal);
+        }
+
+        private int distance(Node from, Node to) {
+            return Math.abs(from.x - to.x) + Math.abs(from.y - to.y);
+        }
+
+        private Node getNode(ConquestLocation loc) {
+            int x = loc.getCol();
+            int y;
+            int regionCount = loc.getPlane().getRegions().size();
+            int regionIndex = loc.getRegionIndex();
+            if (regionIndex == -1) {
+                y = 0;
+            }
+            else if (regionIndex == regionCount) {
+                y = map[x].length - 1;
+            }
+            else {
+                y = regionIndex * Region.ROWS_PER_REGION + loc.getRow() + 1;
+            }
+            return map[x][y];
+        }
+
+        private class Node {
+            private final int x, y;
+            private final ConquestLocation loc;
+            private int g_score = Integer.MAX_VALUE;
+            private int f_score = Integer.MAX_VALUE;
+            private Node came_from;
+            private Boolean blocked = null;
+
+            public Node(ConquestPlane plane, int x0, int y0) {
+                x = x0;
+                y = y0;
+
                 int row;
                 int col = x;
                 int rowIndex = y - 1;
@@ -279,6 +363,29 @@ public final class ConquestData {
                     row = rowIndex % Region.ROWS_PER_REGION;
                 }
                 loc = new ConquestLocation(plane, regionIndex, row, col);
+            }
+
+            public boolean isBlocked() {
+                if (blocked == null) { //determine if node is blocked one time
+                    blocked = false; //assume not blocked by default
+                    if (!loc.isTraversable()) {
+                        blocked = true;
+                    }
+                    else {
+                        //if location isn't conquered or bordering a conquered location, there's no path to reach it
+                        ConquestPlaneData planeData = getCurrentPlaneData();
+                        if (planeData.getEventResult(loc) == 0) {
+                            blocked = true;
+                            for (ConquestLocation neighbor : loc.getNeighbors()) {
+                                if (planeData.getEventResult(neighbor) > 0) {
+                                    blocked = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                return blocked;
             }
         }
     }
