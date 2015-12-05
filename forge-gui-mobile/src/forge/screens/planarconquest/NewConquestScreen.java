@@ -132,8 +132,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
     }
 
     private static class SelectStartingPlaneStep extends WizardStep<NewConquestScreenModel> {
-        private static final ConquestPlane[] planes = ConquestPlane.values();
-        private int selectedIndex;
+        private final ConquestPlaneSelector planeSelector = add(new ConquestPlaneSelector());
 
         protected SelectStartingPlaneStep() {
             super("Select Starting Plane");
@@ -141,21 +140,27 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
 
         @Override
         protected void doLayout(float width, float height) {
+            planeSelector.setBounds(0, 0, width, height);
         }
 
         @Override
         protected void reset() {
-            selectedIndex = 0;
+            planeSelector.reset();
         }
 
         @Override
         protected void onActivate(NewConquestScreenModel model) {
+            planeSelector.activate();
         }
 
         @Override
         protected boolean updateModelAndAdvance(NewConquestScreenModel model) {
-            model.startingPlane = planes[selectedIndex];
-            return model.startingPlane != null;
+            model.startingPlane = planeSelector.getSelectedPlane();
+            if (model.startingPlane != null) {
+                planeSelector.deactivate();
+                return true;
+            }
+            return false;
         }
     }
 

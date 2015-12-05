@@ -93,7 +93,7 @@ public class MatchController extends AbstractGuiGame {
                 avatar = new FTextureRegionImage(FSkin.getAvatars().get(p.getAvatarIndex()));
             }
             else { //handle lobby players with art from cards
-                avatar = CardRenderer.getCardArt(p.getAvatarCardImageKey(), false);
+                avatar = CardRenderer.getCardArt(p.getAvatarCardImageKey(), false, false);
             }
         }
         return avatar;

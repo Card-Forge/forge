@@ -81,12 +81,14 @@ public class CardRenderer {
 
     //extract card art from the given card
     public static FImageComplex getCardArt(IPaperCard pc) {
-        return getCardArt(ImageKeys.getImageKey(pc, false), pc.getRules().getSplitType() == CardSplitType.Split);
+        CardType type = pc.getRules().getType();
+        return getCardArt(ImageKeys.getImageKey(pc, false), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon());
     }
     public static FImageComplex getCardArt(CardView card) {
-        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard());
+        CardTypeView type = card.getCurrentState().getType();
+        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon());
     }
-    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard) {
+    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
             Texture image = ImageCache.getImage(imageKey, true);
@@ -102,6 +104,16 @@ public class CardRenderer {
                         x = w * 33f / 250f;
                         y = 0; //delay adjusting y and h until drawn
                         w *= 106f / 250f;
+                    }
+                    else if (isHorizontalCard) { //allow rotated image for horizontal cards
+                        if (h > w) { //rotate image if its not the correct orientation
+                            w = h;
+                            h = image.getWidth();
+                        }
+                        x = w * 40f / 430f;
+                        y = h * 40f / 300f;
+                        w *= 349f / 430f;
+                        h *= 156f / 300f;
                     }
                     else {
                         x = w * 0.1f;

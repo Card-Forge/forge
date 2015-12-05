@@ -19,6 +19,16 @@ public abstract class ForgeAnimation {
         }
     }
 
+    public void stop() {
+        if (!activeAnimations.contains(this)) { return; } //prevent stopping the same animation multiple times
+
+        activeAnimations.remove(this);
+        onEnd(false);
+        if (activeAnimations.isEmpty()) { //when all animations have stopped, turn continuous rendering back off
+            Forge.stopContinuousRendering();
+        }
+    }
+
     public static void advanceAll() {
         if (activeAnimations.isEmpty()) { return; }
 

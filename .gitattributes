@@ -1335,6 +1335,7 @@ forge-gui-mobile/src/forge/screens/online/OnlineMenu.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestDeckEditor.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMapScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMenu.java -text
+forge-gui-mobile/src/forge/screens/planarconquest/ConquestPlaneSelector.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestPrefsScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/LoadConquestScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/NewConquestScreen.java -text
@@ -1385,6 +1386,7 @@ forge-gui-mobile/src/forge/toolbox/FScrollPane.java -text
 forge-gui-mobile/src/forge/toolbox/FSpinner.java -text
 forge-gui-mobile/src/forge/toolbox/FTextArea.java -text
 forge-gui-mobile/src/forge/toolbox/FTextField.java -text
+forge-gui-mobile/src/forge/toolbox/FTimer.java -text
 forge-gui-mobile/src/forge/toolbox/FToggleSwitch.java -text
 forge-gui-mobile/src/forge/toolbox/GuiChoose.java -text
 forge-gui-mobile/src/forge/toolbox/GuiDialog.java -text
