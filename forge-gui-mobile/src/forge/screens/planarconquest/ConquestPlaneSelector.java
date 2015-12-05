@@ -53,8 +53,12 @@ public class ConquestPlaneSelector extends FDisplayObject {
         float h = getHeight();
 
         if (currentArt != null) {
-            float artHeight = w * currentArt.getHeight() / currentArt.getWidth();
-            g.drawImage(currentArt, 0, (h - artHeight) / 2, w, artHeight);
+            float artHeight = h * 0.5f;
+            float artWidth = artHeight * currentArt.getWidth() / currentArt.getHeight();
+            float y = (h - artHeight) / 2;
+            g.startClip(0, y, w, artHeight);
+            g.drawImage(currentArt, (w - artWidth) / 2, y, artWidth, artHeight);
+            g.endClip();
         }
     }
 }
