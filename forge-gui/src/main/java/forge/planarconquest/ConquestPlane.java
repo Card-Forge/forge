@@ -17,7 +17,6 @@
  */
 package forge.planarconquest;
 
-import java.util.HashSet;
 import com.google.common.base.Predicate;
 import forge.GuiBase;
 import forge.assets.ISkinImage;
@@ -29,7 +28,6 @@ import forge.card.MagicColor;
 import forge.deck.generation.DeckGenPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.util.Aggregates;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -237,10 +235,6 @@ public enum ConquestPlane {
                 }
             }
         }
-        for (Region region : regions) {
-            region.generateOpponents();
-        }
-        commanders.sort(); //sort main commanders list for the sake of UI
     }
 
     public String getName() {
@@ -281,7 +275,6 @@ public enum ConquestPlane {
         private final ColorSet colorSet;
         private final Predicate<PaperCard> pred;
         private final DeckGenPool cardPool = new DeckGenPool();
-        private final FCollection<ConquestOpponent> opponents = new FCollection<ConquestOpponent>();
         private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
         private ISkinImage art;
@@ -321,40 +314,6 @@ public enum ConquestPlane {
 
         public DeckGenPool getCardPool() {
             return cardPool;
-        }
-
-        public FCollectionView<ConquestOpponent> getOpponents() {
-            return opponents;
-        }
-
-        //each region should have 15 opponents include one boss
-        private void generateOpponents() {
-            int opponentsBeforeBoss = ROWS_PER_REGION * COLS_PER_REGION; //TODO: Reduce by 1 when boss added below
-            HashSet<PaperCard> cards = new HashSet<PaperCard>(commanders);
-            if (cards.size() < opponentsBeforeBoss) {
-                //if not enough commanders, add normal creatures as non-commander opponents
-                Iterable<PaperCard> creatures = cardPool.getAllCards(new Predicate<PaperCard>() {
-                    @Override
-                    public boolean apply(PaperCard card) {
-                        return card.getRules().getType().isCreature();
-                    }
-                });
-                while (cards.size() < opponentsBeforeBoss) {
-                    PaperCard card = Aggregates.random(creatures);
-                    if (!cards.contains(card)) {
-                        cards.add(card);
-                    }
-                }
-            }
-            else {
-                while (cards.size() > opponentsBeforeBoss) {
-                    cards.remove(Aggregates.random(cards));
-                }
-            }
-            for (PaperCard card : cards) {
-                opponents.add(new ConquestOpponent(card, this));
-            }
-            //TODO: Determine boss
         }
 
         public String toString() {
