@@ -183,6 +183,7 @@ public enum ConquestPlane {
     private final FCollection<Region> regions;
     private final FCollection<String> bannedCards = new FCollection<String>();
     private final DeckGenPool cardPool = new DeckGenPool();
+    private final FCollection<PaperCard> planeCards = new FCollection<PaperCard>();
     private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
     private ConquestPlane(String name0, String[] setCodes0, Region[] regions0) {
@@ -237,6 +238,23 @@ public enum ConquestPlane {
         }
     }
 
+    static {
+        for (PaperCard pc : FModel.getMagicDb().getVariantCards().getAllCards()) {
+            CardType type = pc.getRules().getType();
+            if (type.isPlane()) {
+                for (String subtype : type.getSubtypes()) {
+                    try {
+                        ConquestPlane plane = ConquestPlane.valueOf(subtype);
+                        if (plane != null) {
+                            plane.planeCards.add(pc);
+                        }
+                    }
+                    catch (Exception ex) {} //suppress exception
+                }
+            }
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -270,8 +288,7 @@ public enum ConquestPlane {
         public static final int COLS_PER_REGION = 3;
         public static final int PORTAL_COL = (COLS_PER_REGION - 1) / 2;
 
-        private final String name;
-        private final String artCardName;
+        private final String name, artCardName;
         private final ColorSet colorSet;
         private final Predicate<PaperCard> pred;
         private final DeckGenPool cardPool = new DeckGenPool();
