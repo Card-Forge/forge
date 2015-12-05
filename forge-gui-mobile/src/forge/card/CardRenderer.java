@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.assets.FImageComplex;
+import forge.assets.FRotatedImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -106,14 +107,24 @@ public class CardRenderer {
                         w *= 106f / 250f;
                     }
                     else if (isHorizontalCard) { //allow rotated image for horizontal cards
-                        if (h > w) { //rotate image if its not the correct orientation
-                            w = h;
-                            h = image.getWidth();
+                        float artX = 40f, artY = 40f;
+                        float artW = 350f, artH = 156f;
+                        float srcW = 430f, srcH = 300f;
+                        if (w > h) {
+                            x = w * 40f / 430f;
+                            y = h * 40f / srcH;
+                            w *= artW / srcW;
+                            h *= artH / srcH;
                         }
-                        x = w * 40f / 430f;
-                        y = h * 40f / 300f;
-                        w *= 349f / 430f;
-                        h *= 156f / 300f;
+                        else { //rotate art clockwise if its not the correct orientation
+                            x = w * artY / srcH;
+                            y = h * (srcW - artW - artX) / srcW;
+                            w *= artH / srcH;
+                            h *= artW / srcW;
+                            cardArt = new FRotatedImage(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h), true);
+                            cardArtCache.put(imageKey, cardArt);
+                            return cardArt;
+                        }
                     }
                     else {
                         x = w * 0.1f;

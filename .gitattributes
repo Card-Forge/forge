@@ -1220,6 +1220,7 @@ forge-gui-mobile/src/forge/assets/FBufferedImage.java -text
 forge-gui-mobile/src/forge/assets/FDelayLoadImage.java -text
 forge-gui-mobile/src/forge/assets/FImage.java -text
 forge-gui-mobile/src/forge/assets/FImageComplex.java -text
+forge-gui-mobile/src/forge/assets/FRotatedImage.java -text
 forge-gui-mobile/src/forge/assets/FSkin.java -text
 forge-gui-mobile/src/forge/assets/FSkinBorder.java -text
 forge-gui-mobile/src/forge/assets/FSkinColor.java -text
