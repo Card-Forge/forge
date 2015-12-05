@@ -69,6 +69,9 @@ public class ConquestMenu extends FPopupMenu {
                     else {
                         mapScreen.update();
                         Forge.openScreen(mapScreen);
+                        if (reason == LaunchReason.NewConquest) {
+                            LoadGameScreen.PlanarConquest.setAsBackScreen(true);
+                        }
                     }
                 }
             });

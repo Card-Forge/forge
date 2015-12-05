@@ -1285,6 +1285,7 @@ forge-gui-mobile/src/forge/menu/FTooltip.java -text
 forge-gui-mobile/src/forge/screens/FScreen.java -text
 forge-gui-mobile/src/forge/screens/LaunchScreen.java -text
 forge-gui-mobile/src/forge/screens/LoadingOverlay.java -text
+forge-gui-mobile/src/forge/screens/MultiStepWizardScreen.java -text
 forge-gui-mobile/src/forge/screens/SplashScreen.java -text
 forge-gui-mobile/src/forge/screens/TabPageScreen.java -text
 forge-gui-mobile/src/forge/screens/achievements/AchievementsScreen.java -text
@@ -1336,6 +1337,7 @@ forge-gui-mobile/src/forge/screens/planarconquest/ConquestMenu.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestPrefsScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/LoadConquestScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/NewConquestScreen.java -text
+forge-gui-mobile/src/forge/screens/planarconquest/NewConquestScreenModel.java -text
 forge-gui-mobile/src/forge/screens/quest/LoadQuestScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/NewQuestScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestBazaarScreen.java -text

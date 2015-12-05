@@ -88,7 +88,7 @@ public class DraftingProcessScreen extends FDeckEditor {
         getEditorType().getController().load("", name);
         DeckPreferences.setDraftDeck(name);
 
-        LoadGameScreen.BoosterDraft.setAsBackScreen(); //set load draft screen to be opened when user done editing deck
+        LoadGameScreen.BoosterDraft.setAsBackScreen(false); //set load draft screen to be opened when user done editing deck
 
         //show header for main deck and sideboard when finished drafting
         deckHeader.setVisible(true);

@@ -51,9 +51,9 @@ public class OnlineMenu extends FPopupMenu {
             Forge.openScreen(screen);
         }
 
-        public void setAsBackScreen() {
+        public void setAsBackScreen(boolean replace) {
             initializeScreen();
-            Forge.setBackScreen(screen);
+            Forge.setBackScreen(screen, replace);
         }
 
         public FScreen getScreen() {

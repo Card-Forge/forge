@@ -191,12 +191,9 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                         challengesScreen.update();
                         tournamentsScreen.update();
                         decksScreen.refreshDecks();
-                        if (reason == LaunchReason.NewQuest) {
-                            Forge.back();
-                        }
                         Forge.openScreen(duelsScreen);
                         if (reason == LaunchReason.NewQuest) {
-                            LoadGameScreen.QuestMode.setAsBackScreen();
+                            LoadGameScreen.QuestMode.setAsBackScreen(true);
                         }
                     }
                 }

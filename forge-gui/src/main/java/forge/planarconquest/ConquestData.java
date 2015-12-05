@@ -51,8 +51,6 @@ public final class ConquestData {
     private int wins, losses;
     private int winStreakBest = 0;
     private int winStreakCurrent = 0;
-    private int progress = 100;
-    private int difficulty;
     private ConquestPlane startingPlane;
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
@@ -67,9 +65,8 @@ public final class ConquestData {
     public ConquestData() { //needed for XML serialization
     }
 
-    public ConquestData(String name0, int difficulty0, ConquestPlane startingPlane0, PaperCard planeswalker0) {
+    public ConquestData(String name0, PaperCard planeswalker0, ConquestPlane startingPlane0, PaperCard startingCommander0) {
         name = name0;
-        difficulty = difficulty0;
         startingPlane = startingPlane0;
         currentLocation = new ConquestLocation(startingPlane, -1, 0, Region.PORTAL_COL);
         planeswalker = planeswalker0;
@@ -79,14 +76,6 @@ public final class ConquestData {
 
     public String getName() {
         return name;
-    }
-
-    public int getDifficulty() {
-        return difficulty;
-    }
-
-    public int getProgress() {
-        return progress;
     }
 
     public ISkinImage getPlaneswalkerToken() {
