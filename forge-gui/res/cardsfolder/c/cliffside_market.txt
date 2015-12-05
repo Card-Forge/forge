@@ -1,0 +1,12 @@
+Name:Cliffside Market
+ManaCost:no cost
+Types:Plane Mercadia
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigLife | OptionalDecider$ You | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, you may exchange life totals with target player.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLife | TriggerZones$ Command | Secondary$ True | OptionalDecider$ You | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, you may exchange life totals with target player.
+SVar:TrigLife:AB$ ExchangeLife | Cost$ 0 | Optional$ True | ValidTgts$ Player | TgtPrompt$ Select target player to exchange life totals with
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, exchange control of two target permanents that share a card type.
+SVar:RolledChaos:AB$ ExchangeControl | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent card | TargetsWithSharedTypes$ Creature,Artifact,Enchantment,Planeswalker,Land | TargetUnique$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cliffside_market.jpg
+Oracle:When you planeswalk to Cliffside Market or at the beginning of your upkeep, you may exchange life totals with target player.\nWhenever you roll {C}, exchange control of two target permanents that share a card type.

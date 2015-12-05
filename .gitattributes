@@ -3619,6 +3619,7 @@ forge-gui/res/cardsfolder/c/clickslither.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cliff_threader.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cliffrunner_behemoth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cliffside_lookout.txt -text
+forge-gui/res/cardsfolder/c/cliffside_market.txt -text
 forge-gui/res/cardsfolder/c/clifftop_retreat.txt -text
 forge-gui/res/cardsfolder/c/clinging_anemones.txt -text
 forge-gui/res/cardsfolder/c/clinging_darkness.txt svneol=native#text/plain

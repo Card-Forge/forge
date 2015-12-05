@@ -18,8 +18,10 @@
 package forge.planarconquest;
 
 import com.google.common.base.Predicate;
+
 import forge.GuiBase;
 import forge.assets.ISkinImage;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardType;
@@ -35,6 +37,8 @@ import forge.util.collect.FCollectionView;
 public enum ConquestPlane {
     Alara("Alara", new String[] {
             "ALA", "CON", "ARB"
+    }, new String[] {
+            "Bant", "Grixis", "Jund", "Naya"
     }, new Region[] {
             new Region("Bant", "Bant Panorama", MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE),
             new Region("Esper", "Esper Panorama", MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK),
@@ -44,13 +48,17 @@ public enum ConquestPlane {
     }),
     Dominaria("Dominaria", new String[] {
             "ICE", "ALL", "CSP",
+            "MIR", "VIS", "WTH",
             "USG", "ULG", "UDS",
             "INV", "PLS", "APC",
             "ODY", "TOR", "JUD",
             "ONS", "LGN", "SCG",
             "TSP", "PLC", "FUT"
+    }, new String[] {
+            "Academy at Tolaria West", "Isle of Vesuva", "Krosa", "Llanowar", "Otaria", "Shiv", "Talon Gates"
     }, new Region[] {
             new Region("Ice Age", "Dark Depths", inSet("ICE", "ALL", "CSP")),
+            new Region("Mirage", "Teferi's Isle", inSet("MIR", "VIS", "WTH")),
             new Region("Urza's Saga", "Tolarian Academy", inSet("USG", "ULG", "UDS")),
             new Region("Invasion", "Legacy Weapon", inSet("INV", "PLS", "APC")),
             new Region("Odyssey", "Cabal Coffers", inSet("ODY", "TOR", "JUD")),
@@ -59,6 +67,8 @@ public enum ConquestPlane {
     }),
     Innistrad("Innistrad", new String[] {
             "ISD", "DKA", "AVR"
+    }, new String[] {
+            "Gavony", "Kessig", "Nephalia"
     }, new Region[] {
             new Region("Moorland", "Moorland Haunt", MagicColor.WHITE | MagicColor.BLUE),
             new Region("Nephalia", "Nephalia Drownyard", MagicColor.BLUE | MagicColor.BLACK),
@@ -66,17 +76,10 @@ public enum ConquestPlane {
             new Region("Kessig", "Kessig Wolf Run", MagicColor.RED | MagicColor.GREEN),
             new Region("Gavony", "Gavony Township", MagicColor.GREEN | MagicColor.WHITE),
     }),
-    Jamuraa("Jamuraa", new String[] {
-            "MIR", "VIS", "WTH"
-    }, new Region[] {
-            new Region("Karoo", "Karoo", MagicColor.WHITE),
-            new Region("Coral Atoll", "Coral Atoll", MagicColor.BLUE),
-            new Region("Everglades", "Everglades", MagicColor.BLACK),
-            new Region("Dormant Volcano", "Dormant Volcano", MagicColor.RED),
-            new Region("Jungle Basin", "Jungle Basin", MagicColor.GREEN),
-    }),
     Kamigawa("Kamigawa", new String[] {
             "CHK", "BOK", "SOK"
+    }, new String[] {
+            "Minamo", "Orochi Colony", "Sokenzan", "Takenuma"
     }, new Region[] {
             new Region("Towabara", "Eiganjo Castle", MagicColor.WHITE),
             new Region("Minamo Academy", "Minamo, School at Water's Edge", MagicColor.BLUE),
@@ -86,6 +89,8 @@ public enum ConquestPlane {
     }),
     LorwynShadowmoor("Lorwyn-Shadowmoor", new String[] {
             "LRW", "MOR", "SHM", "EVE"
+    }, new String[] {
+            "Goldmeadow", "The Great Forest", "Velis Vel", "Raven's Run", 
     }, new Region[] {
             new Region("Ancient Amphitheater", "Ancient Amphitheater", MagicColor.RED | MagicColor.WHITE),
             new Region("Auntie's Hovel", "Auntie's Hovel", MagicColor.BLACK | MagicColor.RED),
@@ -98,6 +103,8 @@ public enum ConquestPlane {
     }),
     Mercadia("Mercadia", new String[] {
             "MMQ", "NEM", "PCY"
+    }, new String[] {
+            "Cliffside Market"
     }, new Region[] {
             new Region("Fountain of Cho", "Fountain of Cho", MagicColor.WHITE),
             new Region("Saprazzan Cove", "Saprazzan Cove", MagicColor.BLUE),
@@ -107,6 +114,8 @@ public enum ConquestPlane {
     }),
     Mirrodin("Mirrodin", new String[] {
             "MRD", "DST", "5DN", "SOM", "MBS", "NPH"
+    }, new String[] {
+            "Panopticon", "Quicksilver Sea", "Furnace Layer", "Norn's Dominion"
     }, new Region[] {
             new Region("Panopticon", "Darksteel Citadel", MagicColor.COLORLESS),
             new Region("Taj-Nar", "Ancient Den", MagicColor.WHITE),
@@ -118,6 +127,8 @@ public enum ConquestPlane {
     }),
     Rath("Rath", new String[] {
             "TMP", "STH", "EXO"
+    }, new String[] {
+            "Stronghold Furnace"
     }, new Region[] {
             new Region("Caldera Lake", "Caldera Lake", MagicColor.BLUE | MagicColor.RED),
             new Region("Cinder Marsh", "Cinder Marsh", MagicColor.BLACK | MagicColor.RED),
@@ -132,6 +143,8 @@ public enum ConquestPlane {
     }),
     Ravnica("Ravnica", new String[] {
             "RAV", "GPT", "DIS", "RTR", "GTC", "DGM"
+    }, new String[] {
+            "Agyrem", "Grand Ossuary", "Izzet Steam Maze", "Orzhova", "Prahv", "Selesnya Loft Gardens", "Undercity Reaches"
     }, new Region[] {
             new Region("Azorius Chancery", "Azorius Chancery", MagicColor.WHITE | MagicColor.BLUE),
             new Region("Boros Garrison", "Boros Garrison", MagicColor.RED | MagicColor.WHITE),
@@ -146,6 +159,8 @@ public enum ConquestPlane {
     }),
     Shandalar("Shandalar", new String[] {
             "2ED", "3ED", "4ED", "ARN", "ATQ", "LEG", "DRK"
+    }, new String[] {
+            "Eloren Wilds", "Onakke Catacomb"
     }, new Region[] {
             new Region("Core", "Black Lotus", inSet("2ED", "3ED", "4ED")),
             new Region("Arabian Nights", "Library of Alexandria", inSet("ARN")),
@@ -155,6 +170,8 @@ public enum ConquestPlane {
     }),
     Tarkir("Tarkir", new String[] {
             "KTK", "FRF", "DTK"
+    }, new String[] {
+            "Kharasha Foothills"
     }, new Region[] {
             new Region("Abzan Houses", "Sandsteppe Citadel", MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN),
             new Region("Jeskai Way", "Mystic Monastery", MagicColor.BLUE | MagicColor.RED | MagicColor.WHITE),
@@ -164,16 +181,22 @@ public enum ConquestPlane {
     }),
     Theros("Theros", new String[] {
             "THS", "BNG", "JOU"
+    }, new String[] {
+            "Lethe Lake"
     }, new Region[] {
             new Region("", "", inSet("THS", "BNG", "JOU"))
     }),
     Ulgrotha("Ulgrotha", new String[] {
             "HML"
+    }, new String[] {
+            "The Dark Barony"
     }, new Region[] {
             new Region("", "", inSet("HML"))
     }),
     Zendikar("Zendikar", new String[] {
-            "ZEN", "WWK", "ROE"
+            "ZEN", "WWK", "ROE", "BFZ"
+    }, new String[] {
+            "Akoum", "Hedron Fields of Agadeem", "Murasa", "Tazeem"
     }, new Region[] {
             new Region("", "", inSet("ZEN", "WWK", "ROE"))
     });
@@ -186,10 +209,10 @@ public enum ConquestPlane {
     private final FCollection<PaperCard> planeCards = new FCollection<PaperCard>();
     private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
-    private ConquestPlane(String name0, String[] setCodes0, Region[] regions0) {
-        this(name0, setCodes0, regions0, null);
+    private ConquestPlane(String name0, String[] setCodes0, String[] planeCards0, Region[] regions0) {
+        this(name0, setCodes0, planeCards0, regions0, null);
     }
-    private ConquestPlane(String name0, String[] setCodes0, Region[] regions0, String[] bannedCards0) {
+    private ConquestPlane(String name0, String[] setCodes0, String[] planeCards0, Region[] regions0, String[] bannedCards0) {
         name = name0;
         regions = new FCollection<Region>(regions0);
         if (bannedCards0 != null) {
@@ -236,22 +259,15 @@ public enum ConquestPlane {
                 }
             }
         }
-    }
 
-    static {
-        for (PaperCard pc : FModel.getMagicDb().getVariantCards().getAllCards()) {
-            CardType type = pc.getRules().getType();
-            if (type.isPlane()) {
-                for (String subtype : type.getSubtypes()) {
-                    try {
-                        ConquestPlane plane = ConquestPlane.valueOf(subtype);
-                        if (plane != null) {
-                            plane.planeCards.add(pc);
-                        }
-                    }
-                    catch (Exception ex) {} //suppress exception
-                }
+        CardDb variantCards = FModel.getMagicDb().getVariantCards();
+        for (String planeCard : planeCards0) {
+            PaperCard pc = variantCards.getCard(planeCard);
+            if (pc == null) {
+                System.out.println("\"" + planeCard + "\" does not correspond to a valid Plane card");
+                continue;
             }
+            planeCards.add(pc);
         }
     }
 
