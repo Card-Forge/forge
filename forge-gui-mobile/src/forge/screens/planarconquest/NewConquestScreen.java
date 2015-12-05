@@ -1,6 +1,12 @@
 package forge.screens.planarconquest;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Vector2;
+
 import forge.FThreads;
+import forge.achievement.PlaneswalkerAchievements;
+import forge.assets.FImage;
+import forge.card.CardZoom;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestController;
@@ -13,6 +19,7 @@ import forge.screens.MultiStepWizardScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.planarconquest.ConquestMenu.LaunchReason;
 import forge.toolbox.FChoiceList;
+import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.util.ThreadUtil;
 
@@ -68,10 +75,22 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
     }
 
     private static class SelectPlaneswalkerStep extends WizardStep<NewConquestScreenModel> {
+        private final TokenDisplay tokenDisplay = add(new TokenDisplay());
         private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(ConquestUtil.getAllPlaneswalkers()) {
             @Override
             protected void onItemActivate(Integer index, PaperCard value) {
                 advance();
+            }
+
+            @Override
+            protected void onSelectionChange() {
+                PaperCard planeswalker = getSelectedItem();
+                if (planeswalker != null) {
+                    tokenDisplay.setIcon((FImage)PlaneswalkerAchievements.getTrophyImage(planeswalker.getName()));
+                }
+                else {
+                    tokenDisplay.setIcon(null);
+                }
             }
         });
 
@@ -81,7 +100,12 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
 
         @Override
         protected void doLayout(float width, float height) {
-            lstPlaneswalkers.setBounds(PADDING, PADDING, width - 2 * PADDING, height - 2 * PADDING);
+            float x = PADDING;
+            float y = PADDING;
+            float w = width - 2 * PADDING;
+            tokenDisplay.setBounds(x, y, w, height * 0.5f);
+            y += tokenDisplay.getHeight() + PADDING;
+            lstPlaneswalkers.setBounds(x, y, w, height - y - PADDING);
         }
 
         @Override
@@ -99,6 +123,45 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         protected boolean updateModelAndAdvance(NewConquestScreenModel model) {
             model.planeswalker = lstPlaneswalkers.getSelectedItem();
             return model.planeswalker != null;
+        }
+
+        private class TokenDisplay extends FLabel {
+            protected TokenDisplay() {
+                super(new FLabel.Builder().iconScaleFactor(1).insets(new Vector2(0, 0))
+                        .iconInBackground(true).align(HAlignment.CENTER));
+            }
+
+            @Override
+            public boolean tap(float x, float y, int count) {
+                return zoom();
+            }
+            @Override
+            public boolean longPress(float x, float y) {
+                return zoom();
+            }
+            private boolean zoom() {
+                int index = lstPlaneswalkers.getSelectedIndex();
+                if (index == -1) { return false; }
+                CardZoom.show(lstPlaneswalkers.extractListData(), index, lstPlaneswalkers);
+                return true;
+            }
+
+            @Override
+            public boolean fling(float velocityX, float velocityY) {
+                if (Math.abs(velocityX) > Math.abs(velocityY)) {
+                    int selectedIndex = lstPlaneswalkers.getSelectedIndex();
+                    if (velocityX > 0) {
+                        if (selectedIndex > 0) {
+                            lstPlaneswalkers.setSelectedIndex(selectedIndex - 1);
+                        }
+                    }
+                    else if (selectedIndex < lstPlaneswalkers.getCount() - 1) {
+                        lstPlaneswalkers.setSelectedIndex(selectedIndex + 1);
+                    }
+                    return true;
+                }
+                return false;
+            }
         }
     }
 
