@@ -29,6 +29,7 @@ import forge.util.ItemPool;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -52,9 +53,10 @@ public final class ConquestData {
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
     private ConquestLocation currentLocation;
-    private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
 
+    private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
     private final HashSet<PaperCard> collection = new HashSet<PaperCard>();
+    private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
     private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
     private final ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<InventoryItem>(InventoryItem.class);
     private final HashSet<PaperCard> newCards = new HashSet<PaperCard>();
@@ -68,7 +70,14 @@ public final class ConquestData {
         currentLocation = new ConquestLocation(startingPlane, -1, 0, Region.PORTAL_COL);
         planeswalker = planeswalker0;
         planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
-        collection.add(planeswalker);
+        addCardToCollection(planeswalker);
+
+        //generate deck for starting commander and add all cards to collection
+        ConquestCommander commander = new ConquestCommander(startingCommander0, startingPlane.getCardPool(), false);
+        commanders.add(commander);
+        addCardToCollection(startingCommander0);
+        addCardsToCollection(commander.getDeck().getMain().toFlatList());
+        decks.put(commander.getDeck().getName(), commander.getDeck());
     }
 
     public String getName() {
@@ -113,6 +122,15 @@ public final class ConquestData {
 
     public HashSet<PaperCard> getCollection() {
         return collection;
+    }
+
+    public void addCardToCollection(PaperCard card) {
+        collection.add(card);
+        newCards.add(card);
+    }
+    public void addCardsToCollection(Collection<PaperCard> cards) {
+        collection.addAll(cards);
+        newCards.addAll(cards);
     }
 
     public ConquestDeckMap getDeckStorage() {

@@ -8,6 +8,10 @@ public class ConquestCommander {
     private final PaperCard card;
     private final Deck deck;
 
+    public ConquestCommander(PaperCard card0) {
+        card = card0;
+        deck = new Deck(card0.getName());
+    }
     public ConquestCommander(PaperCard card0, DeckGenPool cardPool0, boolean forAi) {
         card = card0;
         deck = ConquestUtil.generateDeck(card0, cardPool0, forAi);

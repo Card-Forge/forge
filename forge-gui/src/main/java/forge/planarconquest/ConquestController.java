@@ -439,8 +439,7 @@ public class ConquestController {
             }
         }
 
-        model.getCollection().addAll(rewards);
-        model.getNewCards().addAll(rewards);
+        model.addCardsToCollection(rewards);
 
         String message = messagePrefix;
         if (messageSuffix != null) {
@@ -514,8 +513,7 @@ public class ConquestController {
         }
 
         BoosterUtils.sort(rewards);
-        model.getCollection().addAll(rewards);
-        model.getNewCards().addAll(rewards);
+        model.addCardsToCollection(rewards);
         view.showCards("Booster contained " + count + " new card" + (count != 1 ? "s" : ""), rewards);
     }
 
@@ -532,8 +530,7 @@ public class ConquestController {
 
         BoosterUtils.sort(cards);
         PaperCard card = SGuiChoose.one("Choose a card from your opponent's deck", cards);
-        model.getCollection().add(card);
-        model.getNewCards().add(card);
+        model.addCardToCollection(card);
         return true;
     }
 
