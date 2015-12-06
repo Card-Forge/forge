@@ -27,7 +27,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
         @Override
         protected void tick() {
             FCollectionView<PaperCard> planeCards = getSelectedPlane().getPlaneCards();
-            if (++artIndex == planeCards.size()) {
+            if (++artIndex >= planeCards.size()) {
                 artIndex = 0;
             }
             currentArt = CardRenderer.getCardArt(planeCards.get(artIndex));
@@ -53,10 +53,37 @@ public class ConquestPlaneSelector extends FDisplayObject {
     }
 
     public void reset() {
-        selectedIndex = 0;
+        setSelectedIndex(0);
+        timer.stop();
+    }
+
+    private void setSelectedIndex(int selectedIndex0) {
+        selectedIndex = selectedIndex0;
         artIndex = 0;
         currentArt = CardRenderer.getCardArt(getSelectedPlane().getPlaneCards().get(artIndex));
-        timer.stop();
+        timer.restart();
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY) {
+        if (Math.abs(velocityX) > Math.abs(velocityY)) {
+            if (velocityX > 0) {
+                if (selectedIndex > 0) {
+                    setSelectedIndex(selectedIndex - 1);
+                }
+                else {
+                    setSelectedIndex(planes.length - 1);
+                }
+            }
+            else if (selectedIndex < planes.length - 1) {
+                setSelectedIndex(selectedIndex + 1);
+            }
+            else {
+                setSelectedIndex(0);
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override

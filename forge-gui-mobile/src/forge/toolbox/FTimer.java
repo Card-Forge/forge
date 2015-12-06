@@ -20,6 +20,10 @@ public abstract class FTimer extends ForgeAnimation {
         return true;
     }
 
+    public void restart() {
+        elapsed = 0; //assume this only called if already started
+    }
+
     protected abstract void tick();
 
     @Override
