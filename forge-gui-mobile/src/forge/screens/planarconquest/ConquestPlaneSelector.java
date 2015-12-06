@@ -1,10 +1,12 @@
 package forge.screens.planarconquest;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.card.CardRenderer;
@@ -16,6 +18,7 @@ import forge.toolbox.FTimer;
 import forge.util.collect.FCollectionView;
 
 public class ConquestPlaneSelector extends FDisplayObject {
+    private static final FSkinFont PLANE_NAME_FONT = FSkinFont.get(30);
     private static final Color BACK_COLOR = FSkinColor.fromRGB(1, 2, 2);
     private static final float MONITOR_TOP_MULTIPLIER = 15f / 315f;
     private static final float MONITOR_BOTTOM_MULTIPLIER = 23f / 315f;
@@ -123,5 +126,10 @@ public class ConquestPlaneSelector extends FDisplayObject {
 
         //draw monitor so plane art remains within it
         g.drawImage(monitor, monitorLeft, monitorTop, monitorWidth, monitorHeight);
+
+        //draw plane name
+        float monitorBottom = monitorTop + monitorHeight;
+        ConquestPlane plane = getSelectedPlane();
+        g.drawText(plane.getName(), PLANE_NAME_FONT, Color.WHITE, monitorLeft, monitorBottom, monitorWidth, h - monitorBottom, false, HAlignment.CENTER, true);
     }
 }
