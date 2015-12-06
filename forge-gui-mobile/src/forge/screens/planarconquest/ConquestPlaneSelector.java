@@ -56,6 +56,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
         selectedIndex = 0;
         artIndex = 0;
         currentArt = CardRenderer.getCardArt(getSelectedPlane().getPlaneCards().get(artIndex));
+        timer.stop();
     }
 
     @Override

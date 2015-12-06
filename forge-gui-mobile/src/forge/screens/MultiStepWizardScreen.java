@@ -66,6 +66,9 @@ public abstract class MultiStepWizardScreen<T> extends FScreen {
                 return;
             }
         }
+        else {
+            currentStep.reset(); //reset current step before going back
+        }
 
         setCurrentStep(newIndex);
     }
