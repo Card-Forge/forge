@@ -70,13 +70,13 @@ public final class ConquestData {
         currentLocation = new ConquestLocation(startingPlane, -1, 0, Region.PORTAL_COL);
         planeswalker = planeswalker0;
         planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
-        addCardToCollection(planeswalker);
+        unlockCard(planeswalker);
 
         //generate deck for starting commander and add all cards to collection
         ConquestCommander commander = new ConquestCommander(startingCommander0, startingPlane.getCardPool(), false);
         commanders.add(commander);
-        addCardToCollection(startingCommander0);
-        addCardsToCollection(commander.getDeck().getMain().toFlatList());
+        unlockCard(startingCommander0);
+        unlockCards(commander.getDeck().getMain().toFlatList());
         decks.put(commander.getDeck().getName(), commander.getDeck());
     }
 
@@ -120,17 +120,29 @@ public final class ConquestData {
         return getOrCreatePlaneData(getCurrentPlane());
     }
 
-    public HashSet<PaperCard> getCollection() {
+    public Iterable<PaperCard> getCollection() {
         return collection;
     }
 
-    public void addCardToCollection(PaperCard card) {
+    public boolean hasUnlockedCard(PaperCard card) {
+        return collection.contains(card);
+    }
+
+    public void unlockCard(PaperCard card) {
         collection.add(card);
         newCards.add(card);
     }
-    public void addCardsToCollection(Collection<PaperCard> cards) {
+    public void unlockCards(Collection<PaperCard> cards) {
         collection.addAll(cards);
         newCards.addAll(cards);
+    }
+
+    public int getUnlockedCount() {
+        return collection.size();
+    }
+
+    public Iterable<ConquestCommander> getCommanders() {
+        return commanders;
     }
 
     public ConquestDeckMap getDeckStorage() {

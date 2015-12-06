@@ -16,6 +16,7 @@ import forge.game.card.CardView;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.model.FModel;
+import forge.planarconquest.ConquestCommander;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
@@ -125,6 +126,9 @@ public class CardZoom extends FOverlay {
         }
         if (item instanceof IPaperCard) {
             return CardView.getCardForUi((IPaperCard)item);
+        }
+        if (item instanceof ConquestCommander) {
+            return CardView.getCardForUi(((ConquestCommander)item).getCard());
         }
         if (item instanceof InventoryItem) {
             InventoryItem ii = (InventoryItem)item;

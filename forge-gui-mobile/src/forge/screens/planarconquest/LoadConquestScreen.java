@@ -298,7 +298,7 @@ public class LoadConquestScreen extends LaunchScreen {
                     float iconSize = h + Utils.scale(1);
                     float iconOffset = SettingsScreen.SETTING_PADDING - Utils.scale(2);
 
-                    String cards = String.valueOf(value.getCollection().size());
+                    String cards = String.valueOf(value.getUnlockedCount());
                     font = FSkinFont.get(12);
                     float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;
                     g.drawText(value.getPlaneswalker().getName() + " - " + value.getCurrentPlane().getName(), font, SettingsScreen.DESC_COLOR, x, y, w - cardsWidth, h, false, HAlignment.LEFT, false);

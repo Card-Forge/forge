@@ -1259,10 +1259,11 @@ forge-gui-mobile/src/forge/itemmanager/filters/CardPowerFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardSearchFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardToughnessFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardTypeFilter.java -text
+forge-gui-mobile/src/forge/itemmanager/filters/ColorFilter.java -text
+forge-gui-mobile/src/forge/itemmanager/filters/ComboBoxFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckColorFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckFolderFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckFormatFilter.java -text
-forge-gui-mobile/src/forge/itemmanager/filters/DeckSearchFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckStatTypeFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/FormatFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/ItemFilter.java -text
@@ -1333,6 +1334,7 @@ forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
 forge-gui-mobile/src/forge/screens/online/OnlineChatScreen.java -text
 forge-gui-mobile/src/forge/screens/online/OnlineLobbyScreen.java -text
 forge-gui-mobile/src/forge/screens/online/OnlineMenu.java -text
+forge-gui-mobile/src/forge/screens/planarconquest/ConquestCommandersScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestDeckEditor.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMapScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMenu.java -text
@@ -18298,11 +18300,11 @@ forge-gui/src/main/java/forge/planarconquest/ConquestData.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestDataIO.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestDeckMap.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestEvent.java -text
-forge-gui/src/main/java/forge/planarconquest/ConquestEventResult.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestLocation.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlane.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlaneData.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPreferences.java -text
+forge-gui/src/main/java/forge/planarconquest/ConquestRecord.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestUtil.java -text
 forge-gui/src/main/java/forge/player/GamePlayerUtil.java -text
 forge-gui/src/main/java/forge/player/HumanCostDecision.java -text

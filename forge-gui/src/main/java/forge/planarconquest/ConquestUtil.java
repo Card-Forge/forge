@@ -94,7 +94,10 @@ public class ConquestUtil {
     }
 
     public static CardPool getAvailablePool(Deck deck) {
-        HashSet<PaperCard> availableCards = new HashSet<PaperCard>(FModel.getConquest().getModel().getCollection());
+        HashSet<PaperCard> availableCards = new HashSet<PaperCard>();
+        for (PaperCard pc : FModel.getConquest().getModel().getCollection()) {
+            availableCards.add(pc);
+        }
 
         //remove all cards in main deck
         for (Entry<PaperCard, Integer> e : deck.getMain()) {

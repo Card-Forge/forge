@@ -357,6 +357,10 @@ public enum ConquestPlane {
             return cardPool;
         }
 
+        public FCollectionView<PaperCard> getCommanders() {
+            return commanders;
+        }
+
         public String toString() {
             return name;
         }

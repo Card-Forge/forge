@@ -1,17 +1,16 @@
 package forge.planarconquest;
 
-import java.util.HashSet;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPlane.Region;
 
 public class ConquestPlaneData {
     private final ConquestPlane plane;
-    private final ConquestEventResult[] eventResults;
+    private final ConquestRecord[] eventResults;
 
     public ConquestPlaneData(ConquestPlane plane0) {
         plane = plane0;
-        eventResults = new ConquestEventResult[plane.getEventCount()];
+        eventResults = new ConquestRecord[plane.getEventCount()];
     }
 
     public boolean hasConqueredBoss() {
@@ -30,16 +29,16 @@ public class ConquestPlaneData {
         return hasConquered(regionIndex * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + row * Region.COLS_PER_REGION + col);
     }
     private boolean hasConquered(int index) {
-        ConquestEventResult result = eventResults[index];
+        ConquestRecord result = eventResults[index];
         return result != null && result.getWins() > 0;
     }
 
-    private ConquestEventResult getOrCreateResult(ConquestEvent event) {
+    private ConquestRecord getOrCreateResult(ConquestEvent event) {
         ConquestLocation loc = event.getLocation();
         int index = loc.getRegionIndex() * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + loc.getRow() * Region.COLS_PER_REGION + loc.getCol();
-        ConquestEventResult result = eventResults[index];
+        ConquestRecord result = eventResults[index];
         if (result == null) {
-            result = new ConquestEventResult();
+            result = new ConquestRecord();
             eventResults[index] = result;
         }
         return result;
@@ -65,9 +64,9 @@ public class ConquestPlaneData {
 
     public int getUnlockedCount() {
         int count = 0;
-        HashSet<PaperCard> collection = FModel.getConquest().getModel().getCollection();
+        ConquestData model = FModel.getConquest().getModel();
         for (PaperCard pc : plane.getCardPool().getAllCards()) {
-            if (collection.contains(pc)) {
+            if (model.hasUnlockedCard(pc)) {
                 count++;
             }
         }

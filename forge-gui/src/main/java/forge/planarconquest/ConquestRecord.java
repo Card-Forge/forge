@@ -1,6 +1,6 @@
 package forge.planarconquest;
 
-public class ConquestEventResult {
+public class ConquestRecord {
     private int wins, losses;
 
     public int getWins() {

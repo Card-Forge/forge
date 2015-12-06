@@ -42,6 +42,8 @@ public enum ItemManagerConfig {
             null, null, 4, 0),
     QUEST_DECK_EDITOR(SColumnUtil.getQuestDeckEditorDefaultColumns(), false, false, false,
             GroupDef.DEFAULT, ColumnDef.CMC, 4, 1),
+    CONQUEST_COMMANDERS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
+            null, null, 3, 0),
     CONQUEST_COLLECTION(SColumnUtil.getConquestCollectionDefaultColumns(), false, false, false,
             null, null, 4, 0),
     CONQUEST_DECK_EDITOR(SColumnUtil.getConquestDeckEditorDefaultColumns(), false, false, false,

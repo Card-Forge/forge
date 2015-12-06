@@ -23,12 +23,19 @@ import forge.toolbox.FEvent.FEventHandler;
 public class ConquestMenu extends FPopupMenu {
     private static final ConquestMenu conquestMenu = new ConquestMenu();
     private static final ConquestMapScreen mapScreen = new ConquestMapScreen();
+    private static final ConquestCommandersScreen commandersScreen = new ConquestCommandersScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
 
     private static final FMenuItem mapItem = new FMenuItem("Planar Map", FSkinImage.QUEST_MAP, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(mapScreen);
+        }
+    });
+    private static final FMenuItem commandersItem = new FMenuItem("Commanders", FSkinImage.DECKLIST, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(commandersScreen);
         }
     });
     private static final FMenuItem prefsItem = new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
@@ -91,6 +98,7 @@ public class ConquestMenu extends FPopupMenu {
     protected void buildMenu() {
         FScreen currentScreen = Forge.getCurrentScreen();
         addItem(mapItem); mapItem.setSelected(currentScreen == mapScreen);
+        addItem(commandersItem); mapItem.setSelected(currentScreen == commandersScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
 }

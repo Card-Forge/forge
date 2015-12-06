@@ -283,7 +283,7 @@ public class ConquestController {
         List<PaperCard> mythics = new ArrayList<PaperCard>();
         int newCardCount = 0;
         for (PaperCard c : cardPool) {
-            if ((pred == null || pred.apply(c.getRules())) && !model.getCollection().contains(c)) {
+            if ((pred == null || pred.apply(c.getRules())) && !model.hasUnlockedCard(c)) {
                 switch (c.getRarity()) {
                 case Common:
                     commons.add(c);
@@ -439,7 +439,7 @@ public class ConquestController {
             }
         }
 
-        model.addCardsToCollection(rewards);
+        model.unlockCards(rewards);
 
         String message = messagePrefix;
         if (messageSuffix != null) {
@@ -513,7 +513,7 @@ public class ConquestController {
         }
 
         BoosterUtils.sort(rewards);
-        model.addCardsToCollection(rewards);
+        model.unlockCards(rewards);
         view.showCards("Booster contained " + count + " new card" + (count != 1 ? "s" : ""), rewards);
     }
 
@@ -521,7 +521,7 @@ public class ConquestController {
         List<PaperCard> cards = new ArrayList<PaperCard>();
         for (Entry<PaperCard, Integer> entry : gameRunner.event.getOpponentDeck().getMain()) {
             PaperCard c = entry.getKey();
-            if (!c.getRules().getType().isBasicLand() && !getModel().getCollection().contains(c)) {
+            if (!c.getRules().getType().isBasicLand() && !getModel().hasUnlockedCard(c)) {
                 cards.add(c);
             }
         }
@@ -530,7 +530,7 @@ public class ConquestController {
 
         BoosterUtils.sort(cards);
         PaperCard card = SGuiChoose.one("Choose a card from your opponent's deck", cards);
-        model.addCardToCollection(card);
+        model.unlockCard(card);
         return true;
     }
 
@@ -548,7 +548,7 @@ public class ConquestController {
         }
 
         private void add(PaperCard c) {
-            if (!model.getCollection().contains(c)) {
+            if (!model.hasUnlockedCard(c)) {
                 newCount++;
             }
             cards.add(c);
@@ -564,7 +564,7 @@ public class ConquestController {
                 int index = Aggregates.randomInt(0, cards.size() - 1);
                 c = cards.get(index);
 
-                if (!model.getCollection().contains(c)) {
+                if (!model.hasUnlockedCard(c)) {
                     newCount--;
                     cards.remove(c);
                     rewards.add(c);

@@ -15,7 +15,6 @@ import forge.game.IHasGameType;
 import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.DeckColorFilter;
 import forge.itemmanager.filters.DeckFormatFilter;
-import forge.itemmanager.filters.DeckSearchFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
@@ -70,7 +69,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
     @Override
     protected TextSearchFilter<DeckProxy> createSearchFilter() {
-        return new DeckSearchFilter(this);
+        return new TextSearchFilter<DeckProxy>(this);
     }
 
     @Override
