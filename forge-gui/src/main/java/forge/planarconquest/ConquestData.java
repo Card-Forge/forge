@@ -116,6 +116,10 @@ public final class ConquestData {
         
     }
 
+    public float getProgress() {
+        return 0;
+    }
+
     // SERIALIZATION - related things
     // This must be called by XML-serializer via reflection
     public Object readResolve() {

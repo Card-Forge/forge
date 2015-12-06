@@ -22,10 +22,7 @@ public class ConquestPrefsScreen extends FScreen {
     private static final float PADDING = Utils.scale(5);
 
     private enum PrefsGroup {
-        WINS_TO_UNLOCK,
-        VARIANT_FREQUENCY,
-        BOOSTER,
-        ACTIONS
+        BOOSTER
     }
 
     private FScrollPane scroller = add(new FScrollPane() {
@@ -51,17 +48,6 @@ public class ConquestPrefsScreen extends FScreen {
     public ConquestPrefsScreen() {
         super("Conquest Preferences", ConquestMenu.getMenu());
 
-        scroller.add(new PrefsHeader("Wins to Unlock", FSkinImage.LOCK, PrefsGroup.WINS_TO_UNLOCK));
-        scroller.add(new PrefsOption("Wins to unlock commander 2", CQPref.WINS_TO_UNLOCK_COMMANDER_2, PrefsGroup.WINS_TO_UNLOCK));
-        scroller.add(new PrefsOption("Wins to unlock commander 3", CQPref.WINS_TO_UNLOCK_COMMANDER_3, PrefsGroup.WINS_TO_UNLOCK));
-        scroller.add(new PrefsOption("Wins to unlock commander 4", CQPref.WINS_TO_UNLOCK_COMMANDER_4, PrefsGroup.WINS_TO_UNLOCK));
-        scroller.add(new PrefsOption("Wins to unlock planar portal", CQPref.WINS_TO_UNLOCK_PORTAL, PrefsGroup.WINS_TO_UNLOCK));
-
-        scroller.add(new PrefsHeader("Variant Frequency", FSkinImage.PLANESWALKER, PrefsGroup.VARIANT_FREQUENCY));
-        scroller.add(new PrefsOption("Commander Game (%)", CQPref.PERCENT_COMMANDER, PrefsGroup.VARIANT_FREQUENCY));
-        scroller.add(new PrefsOption("Planechase Game (%)", CQPref.PERCENT_PLANECHASE, PrefsGroup.VARIANT_FREQUENCY));
-        scroller.add(new PrefsOption("Commander & Planechase Game (%)", CQPref.PERCENT_DOUBLE_VARIANT, PrefsGroup.VARIANT_FREQUENCY));
-
         scroller.add(new PrefsHeader("Booster Packs", FSkinImage.PACK, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Commons", CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Uncommons", CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
@@ -70,11 +56,6 @@ public class ConquestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Uncommon Reroll Duplicate (%)", CQPref.BOOSTER_UNCOMMON_REROLL, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Rare Reroll Duplicate (%)", CQPref.BOOSTER_RARE_REROLL, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Mythic Reroll Duplicate (%)", CQPref.BOOSTER_MYTHIC_REROLL, PrefsGroup.BOOSTER));
-
-        scroller.add(new PrefsHeader("Actions", FSkinImage.ALPHASTRIKE, PrefsGroup.ACTIONS));
-        scroller.add(new PrefsOption("Defend - Bonus Life", CQPref.DEFEND_BONUS_LIFE, PrefsGroup.ACTIONS));
-        scroller.add(new PrefsOption("Recruit - Bonus Card Odds (%)", CQPref.RECRUIT_BONUS_CARD_ODDS, PrefsGroup.ACTIONS));
-        scroller.add(new PrefsOption("Study - Bonus Card Odds (%)", CQPref.STUDY_BONUS_CARD_ODDS, PrefsGroup.ACTIONS));
     }
 
     @Override
@@ -138,11 +119,8 @@ public class ConquestPrefsScreen extends FScreen {
                     if (validationError != null) {
                         String prefType;
                         switch (group) {
-                        case WINS_TO_UNLOCK:
-                            prefType = "Wins to Unlock";
-                            break;
-                        case VARIANT_FREQUENCY:
-                            prefType = "Variant Frequency";
+                        case BOOSTER:
+                            prefType = "Booster Packs";
                             break;
                         default:
                             prefType = "";

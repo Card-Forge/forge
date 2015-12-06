@@ -286,11 +286,11 @@ public class LoadConquestScreen extends LaunchScreen {
                     String name = value.getName();
                     h = font.getMultiLineBounds(name).height + SettingsScreen.SETTING_PADDING;
 
-                    String winRatio = value.getWins() + "W / " + value.getLosses() + "L";
-                    float winRatioWidth = font.getBounds(winRatio).width + SettingsScreen.SETTING_PADDING;
+                    String progress = Math.round(value.getProgress() * 100) + "%";
+                    float winRatioWidth = font.getBounds(progress).width + SettingsScreen.SETTING_PADDING;
 
                     g.drawText(name, font, foreColor, x, y, w - winRatioWidth, h, false, HAlignment.LEFT, false);
-                    g.drawText(winRatio, font, foreColor, x, y, w, h, false, HAlignment.RIGHT, false);
+                    g.drawText(progress, font, foreColor, x, y, w, h, false, HAlignment.RIGHT, false);
 
                     h += SettingsScreen.SETTING_PADDING;
                     y += h;
