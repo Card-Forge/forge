@@ -115,6 +115,11 @@ public class ConquestCommandersScreen extends FScreen {
         }
 
         @Override
+        protected boolean allowSortChange() {
+            return false;
+        }
+
+        @Override
         public ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler) {
             return new ItemRenderer() {
                 @Override
@@ -150,7 +155,7 @@ public class ConquestCommandersScreen extends FScreen {
                     //draw name and color on first line
                     x += cardArtWidth;
                     float imageSize = CardRenderer.MANA_SYMBOL_SIZE;
-                    ColorSet cardColor = card.getRules().getColor();
+                    ColorSet cardColor = card.getRules().getColorIdentity();
                     float availableWidth = w - cardArtWidth - CardFaceSymbols.getWidth(cardColor, imageSize) - FList.PADDING;
                     g.drawText(card.getName(), font, foreColor, x, y, availableWidth, imageSize, false, HAlignment.LEFT, true);
                     CardFaceSymbols.drawColorSet(g, cardColor, x + availableWidth + FList.PADDING, y, imageSize);

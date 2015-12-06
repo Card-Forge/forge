@@ -27,6 +27,8 @@ import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.planarconquest.ConquestCommander;
+import forge.planarconquest.ConquestPlane;
 import forge.quest.QuestWorld;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
@@ -276,6 +278,52 @@ public class AdvancedSearch {
             @Override
             protected Integer getItemValue(DeckProxy input) {
                 return Math.min(input.getSideSize(), 0);
+            }
+        }),
+        COMMANDER_NAME("Name", ConquestCommander.class, FilterOperator.STRING_OPS, new StringEvaluator<ConquestCommander>() {
+            @Override
+            protected String getItemValue(ConquestCommander input) {
+                return input.getName();
+            }
+        }),
+        COMMANDER_ORIGIN("Origin", ConquestCommander.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<ConquestCommander, ConquestPlane>(Arrays.asList(ConquestPlane.values())) {
+            @Override
+            protected ConquestPlane getItemValue(ConquestCommander input) {
+                return input.getOriginPlane();
+            }
+        }),
+        COMMANDER_COLOR("Color", ConquestCommander.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<ConquestCommander>() {
+            @Override
+            protected MagicColor.Color getItemValue(ConquestCommander input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<MagicColor.Color> getItemValues(ConquestCommander input) {
+                return input.getCard().getRules().getColorIdentity().toEnumSet();
+            }
+        }),
+        COMMANDER_COLOR_COUNT("Color Count", ConquestCommander.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<ConquestCommander>(0, 5) {
+            @Override
+            protected Integer getItemValue(ConquestCommander input) {
+                return input.getCard().getRules().getColorIdentity().countColors();
+            }
+        }),
+        COMMANDER_DECK_AVERAGE_CMC("Deck Average CMC", ConquestCommander.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<ConquestCommander>(0, 20) {
+            @Override
+            protected Integer getItemValue(ConquestCommander input) {
+                return DeckProxy.getAverageCMC(input.getDeck());
+            }
+        }),
+        COMMANDER_DECK_CONTENTS("Deck Contents", ConquestCommander.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<ConquestCommander>() {
+            @Override
+            protected Map<String, Integer> getItemValue(ConquestCommander input) {
+                return input.getDeck().getMain().toNameLookup();
+            }
+        }),
+        COMMANDER_DECK_SIZE("Deck Size", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(40, 250) {
+            @Override
+            protected Integer getItemValue(DeckProxy input) {
+                return input.getMainSize();
             }
         });
 

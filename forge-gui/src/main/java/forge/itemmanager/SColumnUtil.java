@@ -186,6 +186,17 @@ public final class SColumnUtil {
         return columns;
     }
 
+    public static Map<ColumnDef, ItemColumnConfig> getConquestCommandersDefaultColumns() {
+        List<ColumnDef> colDefs = new ArrayList<ColumnDef>();
+        colDefs.add(ColumnDef.NAME);
+        colDefs.add(ColumnDef.COLOR);
+
+        Map<ColumnDef, ItemColumnConfig> columns = getColumns(colDefs);
+        columns.get(ColumnDef.NAME).setSortPriority(1);
+        columns.get(ColumnDef.COLOR).setSortPriority(2);
+        return columns;
+    }
+
     public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder) {
         List<ColumnDef> colDefs = new ArrayList<ColumnDef>();
         colDefs.add(ColumnDef.DECK_FAVORITE);
