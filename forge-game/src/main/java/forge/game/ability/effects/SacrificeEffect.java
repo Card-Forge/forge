@@ -91,9 +91,17 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 }
                 else {
                     boolean isOptional = sa.hasParam("Optional");
-                    choosenToSacrifice = destroy ? 
-                        p.getController().choosePermanentsToDestroy(sa, isOptional ? 0 : amount, amount, validTargets, msg) :
-                        p.getController().choosePermanentsToSacrifice(sa, isOptional ? 0 : amount, amount, validTargets, msg);
+                    boolean isStrict = sa.hasParam("StrictAmount");
+                    int minTargets = isOptional ? 0 : amount;
+                    boolean notEnoughTargets = isStrict && validTargets.size() < minTargets;
+                    
+                    if (!notEnoughTargets) {
+                        choosenToSacrifice = destroy ? 
+                            p.getController().choosePermanentsToDestroy(sa, minTargets, amount, validTargets, msg) :
+                            p.getController().choosePermanentsToSacrifice(sa, minTargets, amount, validTargets, msg);
+                    } else {
+                        choosenToSacrifice = CardCollection.EMPTY;
+                    }
                 }
 
                 for (Card sac : choosenToSacrifice) {
