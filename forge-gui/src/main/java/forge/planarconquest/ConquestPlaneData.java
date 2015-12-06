@@ -7,62 +7,60 @@ import forge.planarconquest.ConquestPlane.Region;
 
 public class ConquestPlaneData {
     private final ConquestPlane plane;
-    private final int[][][] eventResults;
-    private int bossResult;
-
-    private int wins, losses;
-    private int winStreakBest = 0;
-    private int winStreakCurrent = 0;
+    private final ConquestEventResult[] eventResults;
 
     public ConquestPlaneData(ConquestPlane plane0) {
         plane = plane0;
-        eventResults = new int[plane.getRegions().size()][Region.ROWS_PER_REGION][Region.COLS_PER_REGION];
+        eventResults = new ConquestEventResult[plane.getEventCount()];
     }
 
-    public int getEventResult(ConquestLocation loc) {
-        return getEventResult(loc.getRegionIndex(), loc.getRow(), loc.getCol());
+    public boolean hasConqueredBoss() {
+        return hasConquered(eventResults.length - 1);
     }
-    public int getEventResult(int regionIndex, int row, int col) {
+    public boolean hasConquered(ConquestLocation loc) {
+        return hasConquered(loc.getRegionIndex(), loc.getRow(), loc.getCol());
+    }
+    public boolean hasConquered(int regionIndex, int row, int col) {
         if (regionIndex == -1) {
-            return 1; //bottom portal is always conquered
+            return true; //bottom portal is always conquered
         }
         if (regionIndex == plane.getRegions().size()) {
-            return bossResult; 
+            return hasConqueredBoss();
         }
-        return eventResults[regionIndex][row][col];
+        return hasConquered(regionIndex * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + row * Region.COLS_PER_REGION + col);
+    }
+    private boolean hasConquered(int index) {
+        ConquestEventResult result = eventResults[index];
+        return result != null && result.getWins() > 0;
     }
 
-    public int getBossResult() {
-        return bossResult;
-    }
-
-    public void addWin(ConquestCommander opponent) {
-        wins++;
-        winStreakCurrent++;
-        if (winStreakCurrent > winStreakBest) {
-            winStreakBest = winStreakCurrent;
+    private ConquestEventResult getOrCreateResult(ConquestEvent event) {
+        ConquestLocation loc = event.getLocation();
+        int index = loc.getRegionIndex() * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + loc.getRow() * Region.COLS_PER_REGION + loc.getCol();
+        ConquestEventResult result = eventResults[index];
+        if (result == null) {
+            result = new ConquestEventResult();
+            eventResults[index] = result;
         }
+        return result;
     }
 
-    public void addLoss(ConquestCommander opponent) {
-        losses++;
-        winStreakCurrent = 0;
+    public void addWin(ConquestEvent event) {
+        getOrCreateResult(event).addWin();
     }
 
-    public int getWins() {
-        return wins;
+    public void addLoss(ConquestEvent event) {
+        getOrCreateResult(event).addLoss();
     }
 
-    public int getLosses() {
-        return losses;
-    }
-
-    public int getWinStreakBest() {
-        return winStreakBest;
-    }
-
-    public int getWinStreakCurrent() {
-        return winStreakCurrent;
+    public int getConqueredCount() {
+        int conquered = 0;
+        for (int i = 0; i < eventResults.length; i++) {
+            if (hasConquered(i)) {
+                conquered++;
+            }
+        }
+        return conquered;
     }
 
     public int getUnlockedCount() {

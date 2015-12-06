@@ -6,8 +6,13 @@ import forge.deck.Deck;
 import forge.game.GameType;
 
 public abstract class ConquestEvent {
+    private ConquestLocation location;
     private String opponentName;
     private Deck opponentDeck;
+
+    public ConquestLocation getLocation() {
+        return location;
+    }
 
     public String getOpponentName() {
         return opponentName;

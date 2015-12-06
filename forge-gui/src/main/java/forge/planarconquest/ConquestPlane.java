@@ -299,6 +299,10 @@ public enum ConquestPlane {
         return planeCards;
     }
 
+    public int getEventCount() {
+        return regions.size() * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + 1; //+1 for boss
+    }
+
     public String toString() {
         return name;
     }

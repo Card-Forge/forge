@@ -99,8 +99,8 @@ public class ConquestMapScreen extends FScreen {
             //draw top portal row
             if (y + rowHeight > 0) {
                 g.drawImage(FSkinImage.PLANAR_PORTAL, 0, y, w, rowHeight);
-                if (planeData.getBossResult() == 0) { //draw overlay if boss hasn't been beaten yet
-                    if (planeData.getEventResult(regionCount - 1, rows - 1, Region.PORTAL_COL) > 0) {
+                if (!planeData.hasConqueredBoss()) { //draw overlay if boss hasn't been beaten yet
+                    if (planeData.hasConquered(regionCount - 1, rows - 1, Region.PORTAL_COL)) {
                         color = UNCONQUERED_COLOR;
                     }
                     else {
@@ -145,13 +145,13 @@ public class ConquestMapScreen extends FScreen {
                 //draw event icon and overlay based on event record for each event in the region
                 for (int r = 0; r < rows; r++) {
                     for (int c = 0; c < cols; c++) {
-                        if (planeData.getEventResult(i, r, c) == 0) {
+                        if (!planeData.hasConquered(i, r, c)) {
                             //draw fog of war by default if area hasn't been conquered
                             color = FOG_OF_WAR_COLOR;
 
                             //if any bordering grid square has been conquered, instead show unconquered color
                             for (ConquestLocation loc : ConquestLocation.getNeighbors(plane, i, r, c)) {
-                                if (planeData.getEventResult(loc) > 0) {
+                                if (planeData.hasConquered(loc)) {
                                     color = UNCONQUERED_COLOR;
                                     break;
                                 }

@@ -266,6 +266,9 @@ public class ConquestController {
         if (game.isMatchWonBy(humanPlayer)) {
             model.addWin(gameRunner.event);
         }
+        else {
+            model.addLoss(gameRunner.event);
+        }
 
         FModel.getConquest().save();
         FModel.getConquestPreferences().save();

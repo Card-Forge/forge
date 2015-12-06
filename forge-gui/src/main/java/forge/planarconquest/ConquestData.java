@@ -94,14 +94,17 @@ public final class ConquestData {
         currentLocation = currentLocation0;
     }
 
-    public ConquestPlaneData getCurrentPlaneData() {
-        ConquestPlane currentPlane = getCurrentPlane();
-        ConquestPlaneData planeData = planeDataMap.get(currentPlane);
+    private ConquestPlaneData getOrCreatePlaneData(ConquestPlane plane) {
+        ConquestPlaneData planeData = planeDataMap.get(plane);
         if (planeData == null) {
-            planeData = new ConquestPlaneData(currentPlane);
-            planeDataMap.put(currentPlane, planeData);
+            planeData = new ConquestPlaneData(plane);
+            planeDataMap.put(plane, planeData);
         }
         return planeData;
+    }
+
+    public ConquestPlaneData getCurrentPlaneData() {
+        return getOrCreatePlaneData(getCurrentPlane());
     }
 
     public HashSet<PaperCard> getCollection() {
@@ -113,11 +116,26 @@ public final class ConquestData {
     }
 
     public void addWin(ConquestEvent event) {
-        
+        getOrCreatePlaneData(event.getLocation().getPlane()).addWin(event);
     }
 
-    public float getProgress() {
-        return 0;
+    public void addLoss(ConquestEvent event) {
+        getOrCreatePlaneData(event.getLocation().getPlane()).addLoss(event);
+    }
+
+    public String getProgress() {
+        int conquered = 0;
+        int total = 0;
+
+        for (ConquestPlane plane : ConquestPlane.values()) {
+            ConquestPlaneData planeData = planeDataMap.get(plane);
+            if (planeData != null) {
+                conquered += planeData.getConqueredCount();
+            }
+            total += plane.getEventCount();
+        }
+
+        return Math.round(100f * (float)conquered / (float)total) + "%";
     }
 
     // SERIALIZATION - related things
@@ -336,10 +354,10 @@ public final class ConquestData {
                     else {
                         //if location isn't conquered or bordering a conquered location, there's no path to reach it
                         ConquestPlaneData planeData = getCurrentPlaneData();
-                        if (planeData.getEventResult(loc) == 0) {
+                        if (!planeData.hasConquered(loc)) {
                             blocked = true;
                             for (ConquestLocation neighbor : loc.getNeighbors()) {
-                                if (planeData.getEventResult(neighbor) > 0) {
+                                if (planeData.hasConquered(neighbor)) {
                                     blocked = false;
                                     break;
                                 }
