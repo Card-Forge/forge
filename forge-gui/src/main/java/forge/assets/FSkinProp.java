@@ -244,6 +244,7 @@ public enum FSkinProp {
 
     //planar conquest images
     IMG_PLANAR_PORTAL     (new int[] {0, 0, 293, 75}, PropType.PLANAR_CONQUEST),
+    IMG_PLANE_MONITOR     (new int[] {0, 75, 443, 315}, PropType.PLANAR_CONQUEST),
 
     //button images
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),
