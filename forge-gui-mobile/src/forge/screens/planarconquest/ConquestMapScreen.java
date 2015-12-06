@@ -14,6 +14,7 @@ import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
+import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
@@ -47,8 +48,9 @@ public class ConquestMapScreen extends FScreen {
     }
 
     public void update() {
-        model = FModel.getConquest().getModel();
-        setHeaderCaption(model.getCurrentPlane().getName());
+        ConquestController conquest = FModel.getConquest();
+        model = conquest.getModel();
+        setHeaderCaption(conquest.getName() + "\nPlane - " + model.getCurrentPlane().getName());
 
         planeGrid.revalidate();
         planeGrid.scrollToBottom(); //start at bottom and move up
