@@ -29,15 +29,6 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
     public static enum CQPref {
         CURRENT_CONQUEST("DEFAULT"),
 
-        WINS_TO_UNLOCK_COMMANDER_2("5"),
-        WINS_TO_UNLOCK_COMMANDER_3("10"),
-        WINS_TO_UNLOCK_COMMANDER_4("20"),
-        WINS_TO_UNLOCK_PORTAL("25"),
-
-        PERCENT_COMMANDER("25"),
-        PERCENT_PLANECHASE("25"),
-        PERCENT_DOUBLE_VARIANT("25"),
-
         BOOSTER_COMMONS("11"),
         BOOSTER_UNCOMMONS("3"),
         BOOSTER_RARES("1"),
@@ -45,11 +36,7 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         BOOSTER_COMMON_REROLL("10"),
         BOOSTER_UNCOMMON_REROLL("25"),
         BOOSTER_RARE_REROLL("50"),
-        BOOSTER_MYTHIC_REROLL("100"),
-
-        RECRUIT_BONUS_CARD_ODDS("25"),
-        STUDY_BONUS_CARD_ODDS("25"),
-        DEFEND_BONUS_LIFE("5");
+        BOOSTER_MYTHIC_REROLL("100");
 
         private final String strDefaultVal;
 
@@ -141,21 +128,6 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
 
     public String validatePreference(CQPref qpref, int val) {
         switch (qpref) {
-        case PERCENT_COMMANDER:
-            if (val + getPrefInt(CQPref.PERCENT_PLANECHASE) + getPrefInt(CQPref.PERCENT_DOUBLE_VARIANT) > 100) {
-                return "Variant Frequency values must add up to 100 or less.";
-            }
-            break;
-        case PERCENT_PLANECHASE:
-            if (val + getPrefInt(CQPref.PERCENT_COMMANDER) + getPrefInt(CQPref.PERCENT_DOUBLE_VARIANT) > 100) {
-                return "Variant Frequency values must add up to 100 or less.";
-            }
-            break;
-        case PERCENT_DOUBLE_VARIANT:
-            if (val + getPrefInt(CQPref.PERCENT_COMMANDER) + getPrefInt(CQPref.PERCENT_PLANECHASE) > 100) {
-                return "Variant Frequency values must add up to 100 or less.";
-            }
-            break;
         case BOOSTER_COMMONS:
             if (val + getPrefInt(CQPref.BOOSTER_UNCOMMONS) + getPrefInt(CQPref.BOOSTER_RARES) > 15) {
                 return "Booster packs must have maximum 15 cards.";
@@ -182,17 +154,6 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         case BOOSTER_MYTHIC_REROLL:
             if (val > 100) {
                 return "Booster reroll chance must be between 0% and 100%.";
-            }
-            break;
-        case RECRUIT_BONUS_CARD_ODDS:
-        case STUDY_BONUS_CARD_ODDS:
-            if (val > 100) {
-                return "Bonus card odds must be between 0% and 50%.";
-            }
-            break;
-        case DEFEND_BONUS_LIFE:
-            if (val > 10) {
-                return "Bonus life must be between 0 and 10.";
             }
             break;
         default:

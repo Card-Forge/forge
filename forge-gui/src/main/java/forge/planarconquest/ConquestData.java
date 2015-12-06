@@ -48,9 +48,6 @@ public final class ConquestData {
     private int versionNumber = ConquestData.CURRENT_VERSION_NUMBER;
 
     private String name;
-    private int wins, losses;
-    private int winStreakBest = 0;
-    private int winStreakCurrent = 0;
     private ConquestPlane startingPlane;
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
@@ -115,36 +112,8 @@ public final class ConquestData {
         return new ConquestDeckMap(decks);
     }
 
-    public void addWin(ConquestCommander opponent) {
-        wins++;
-        winStreakCurrent++;
-        getCurrentPlaneData().addWin(opponent);
-
-        if (winStreakCurrent > winStreakBest) {
-            winStreakBest = winStreakCurrent;
-        }
-    }
-
-    public void addLoss(ConquestCommander opponent) {
-        losses++;
-        winStreakCurrent = 0;
-        getCurrentPlaneData().addLoss(opponent);
-    }
-
-    public int getWins() {
-        return wins;
-    }
-
-    public int getLosses() {
-        return losses;
-    }
-
-    public int getWinStreakBest() {
-        return winStreakBest;
-    }
-
-    public int getWinStreakCurrent() {
-        return winStreakCurrent;
+    public void addWin(ConquestEvent event) {
+        
     }
 
     // SERIALIZATION - related things

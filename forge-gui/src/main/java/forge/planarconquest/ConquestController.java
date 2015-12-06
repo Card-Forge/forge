@@ -102,17 +102,11 @@ public class ConquestController {
         private final Lock lock = new Lock();
 
         public final ConquestCommander commander;
-        public final ConquestCommander opponent;
-        public final boolean isHumanDefending;
-        private final IVCommandCenter commandCenter;
-        @SuppressWarnings("unused")
-        private boolean wonGame;
+        public final ConquestEvent event;
 
-        private GameRunner(final ConquestCommander commander0, final int opponentIndex, final boolean isHumanDefending0, final IVCommandCenter commandCenter0) {
+        private GameRunner(final ConquestCommander commander0, final ConquestEvent event0) {
             commander = commander0;
-            opponent = null; //model.getCurrentPlaneData().getOpponent(opponentIndex);
-            isHumanDefending = isHumanDefending0;
-            commandCenter = commandCenter0;
+            event = event0;
         }
 
         public final void invokeAndWait() {
@@ -120,7 +114,7 @@ public class ConquestController {
             FThreads.invokeInEdtLater(new Runnable() {
                 @Override
                 public void run() {
-                    commandCenter.startGame(GameRunner.this);
+                    //commandCenter.startGame(GameRunner.this);
                 }
             });
             try {
@@ -134,31 +128,13 @@ public class ConquestController {
         }
 
         public void finishStartingGame() {
-            ConquestPreferences prefs = FModel.getConquestPreferences();
-
             //determine game variants
             Set<GameType> variants = new HashSet<GameType>();
-            int rng = Aggregates.randomInt(1, 100);
-            int commanderThreshold = prefs.getPrefInt(CQPref.PERCENT_COMMANDER);
-            int planechaseThreshold = commanderThreshold + prefs.getPrefInt(CQPref.PERCENT_PLANECHASE);
-            int doubleVariantThreshold = planechaseThreshold + prefs.getPrefInt(CQPref.PERCENT_DOUBLE_VARIANT);
-            if (rng <= commanderThreshold) {
-                variants.add(GameType.Commander);
-            }
-            else if (rng <= planechaseThreshold) {
-                variants.add(GameType.Planechase);
-            }
-            else if (rng <= doubleVariantThreshold) {
-                variants.add(GameType.Commander);
-                variants.add(GameType.Planechase);
-            }
+            event.addVariants(variants);
 
             final RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
-            final RegisteredPlayer aiStart = new RegisteredPlayer(opponent.getDeck());
+            final RegisteredPlayer aiStart = new RegisteredPlayer(event.getOpponentDeck());
 
-            if (isHumanDefending) { //give human a small life bonus if defending
-                humanStart.setStartingLife(humanStart.getStartingLife() + prefs.getPrefInt(CQPref.DEFEND_BONUS_LIFE));
-            }
             if (variants.contains(GameType.Commander)) { //add 10 starting life for both players if playing a Commander game
                 humanStart.setStartingLife(humanStart.getStartingLife() + 10);
                 aiStart.setStartingLife(aiStart.getStartingLife() + 10);
@@ -171,7 +147,7 @@ public class ConquestController {
             }
 
             String humanPlayerName = commander.getPlayerName();
-            String aiPlayerName = opponent.getPlayerName();
+            String aiPlayerName = event.getOpponentName();
             if (humanPlayerName.equals(aiPlayerName)) {
                 aiPlayerName += " (AI)"; //ensure player names are distinct
             }
@@ -182,7 +158,7 @@ public class ConquestController {
             starter.add(humanStart.setPlayer(humanPlayer));
 
             final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);
-            aiPlayer.setAvatarCardImageKey(ImageKeys.getImageKey(opponent.getCard(), false));
+            aiPlayer.setAvatarCardImageKey(event.getAvatarImageKey());
             starter.add(aiStart.setPlayer(aiPlayer));
 
             final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
@@ -265,8 +241,6 @@ public class ConquestController {
             view.showRewards(new Runnable() {
                 @Override
                 public void run() {
-                    awardWinStreakBonus(view);
-
                     final List<String> options = ImmutableList.of("Booster", "Card");
                     if (SOptionPane.showOptionDialog("Choose one \u2014\n\n" +
                             "\u2022 Open a random booster pack\n" +
@@ -290,53 +264,13 @@ public class ConquestController {
 
     public void onGameFinished(final GameView game) {
         if (game.isMatchWonBy(humanPlayer)) {
-            model.addWin(gameRunner.opponent);
-            gameRunner.wonGame = true;
-        }
-        else {
-            model.addLoss(gameRunner.opponent);
+            model.addWin(gameRunner.event);
         }
 
         FModel.getConquest().save();
         FModel.getConquestPreferences().save();
 
         gameRunner.finish();
-    }
-
-    private void awardWinStreakBonus(final IWinLoseView<? extends IButton> view) {
-        int currentStreak = model.getCurrentPlaneData().getWinStreakCurrent() + 1;
-        int mod = currentStreak % 10;
-        int count = (currentStreak - 1) / 10 + 1; //so on 13th win you get 2 commons, etc.
-
-        CardRarity rarity = null;
-        String typeWon = "";
-
-        switch (mod) {
-            case 3:
-                rarity = CardRarity.Common;
-                count = 1;
-                typeWon = "common";
-                break;
-            case 5:
-                rarity = CardRarity.Uncommon;
-                count = 1;
-                typeWon = "uncommon";
-                break;
-            case 7:
-                rarity = CardRarity.Rare;
-                count = 1;
-                typeWon = "rare";
-                break;
-            case 0: //0 is multiple of 10 win
-                rarity = CardRarity.MythicRare;
-                count = 1;
-                typeWon = "mythic rare";
-                break;
-            default:
-                return;
-        }
-
-        awardNewCards(model.getCurrentPlane().getCardPool().getAllCards(), currentStreak + " game win streak - unlocked", typeWon, rarity, view, null, count);
     }
 
     private boolean awardNewCards(Iterable<PaperCard> cardPool, String messagePrefix, String messageSuffix, CardRarity rarity, final IWinLoseView<? extends IButton> view, Predicate<CardRules> pred, int count) {
@@ -584,7 +518,7 @@ public class ConquestController {
 
     private boolean awardOpponentsCard(IWinLoseView<? extends IButton> view) {
         List<PaperCard> cards = new ArrayList<PaperCard>();
-        for (Entry<PaperCard, Integer> entry : gameRunner.opponent.getDeck().getMain()) {
+        for (Entry<PaperCard, Integer> entry : gameRunner.event.getOpponentDeck().getMain()) {
             PaperCard c = entry.getKey();
             if (!c.getRules().getType().isBasicLand() && !getModel().getCollection().contains(c)) {
                 cards.add(c);
