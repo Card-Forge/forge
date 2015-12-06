@@ -75,6 +75,10 @@ public final class ConquestData {
         return name;
     }
 
+    public PaperCard getPlaneswalker() {
+        return planeswalker;
+    }
+
     public ISkinImage getPlaneswalkerToken() {
         return planeswalkerToken;
     }
