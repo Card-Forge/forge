@@ -15,6 +15,7 @@ import forge.planarconquest.ConquestPlane;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTimer;
+import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
 public class ConquestPlaneSelector extends FDisplayObject {
@@ -23,6 +24,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
     private static final float MONITOR_TOP_MULTIPLIER = 15f / 315f;
     private static final float MONITOR_BOTTOM_MULTIPLIER = 23f / 315f;
     private static final float MONITOR_LEFT_MULTIPLIER = 19f / 443f;
+    private static final float ARROW_THICKNESS = Utils.scale(3);
 
     private static final ConquestPlane[] planes = ConquestPlane.values();
 
@@ -128,8 +130,25 @@ public class ConquestPlaneSelector extends FDisplayObject {
         g.drawImage(monitor, monitorLeft, monitorTop, monitorWidth, monitorHeight);
 
         //draw plane name
+        float arrowOffsetLeft = monitorLeft * 2.5f;
+        float arrowSize = PLANE_NAME_FONT.getCapHeight();
+        float textLeft = arrowSize + 1.5f * arrowOffsetLeft;
         float monitorBottom = monitorTop + monitorHeight;
         ConquestPlane plane = getSelectedPlane();
-        g.drawText(plane.getName(), PLANE_NAME_FONT, Color.WHITE, monitorLeft, monitorBottom, monitorWidth, h - monitorBottom, false, HAlignment.CENTER, true);
+        g.drawText(plane.getName(), PLANE_NAME_FONT, Color.WHITE, textLeft, monitorBottom, w - 2 * textLeft, h - monitorBottom, false, HAlignment.CENTER, true);
+
+        //draw left/right arrows
+        float yMid = monitorBottom + (h - monitorBottom) / 2;
+        float offsetX = arrowSize / 4;
+        float offsetY = arrowSize / 2;
+        float midOffsetX = arrowSize * 0.4f;
+
+        float xMid = arrowOffsetLeft + midOffsetX;
+        g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid + offsetX, yMid - offsetY, xMid - offsetX, yMid + 1);
+        g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid - offsetX, yMid - 1, xMid + offsetX, yMid + offsetY);
+
+        xMid = w - arrowOffsetLeft - midOffsetX;
+        g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid - offsetX, yMid - offsetY, xMid + offsetX, yMid + 1);
+        g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid + offsetX, yMid - 1, xMid - offsetX, yMid + offsetY);
     }
 }
