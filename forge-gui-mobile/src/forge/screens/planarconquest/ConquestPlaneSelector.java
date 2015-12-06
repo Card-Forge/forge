@@ -11,6 +11,7 @@ import forge.card.CardRenderer;
 import forge.item.PaperCard;
 import forge.planarconquest.ConquestPlane;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FTimer;
 import forge.util.collect.FCollectionView;
 
@@ -70,26 +71,29 @@ public class ConquestPlaneSelector extends FDisplayObject {
 
         //determine monitor position
         FImage monitor = FSkinImage.PLANE_MONITOR;
-        float monitorHeight = w * monitor.getHeight() / monitor.getWidth();
-        float monitorTop = (h - monitorHeight) / 2;
+        float monitorLeft = FOptionPane.PADDING / 2;
+        float monitorWidth = w - 2 * monitorLeft;
+        float monitorHeight = monitorWidth * monitor.getHeight() / monitor.getWidth();
+        float monitorLeftOffset = monitorWidth * MONITOR_LEFT_MULTIPLIER;
+        float monitorTopOffset = monitorHeight * MONITOR_TOP_MULTIPLIER;
+        float monitorBottomOffset = monitorHeight * MONITOR_BOTTOM_MULTIPLIER;
+        float monitorTop = monitorLeft + monitorLeftOffset - monitorTopOffset;
 
         //draw plane art inside monitor
         if (currentArt != null) {
-            float monitorTopOffset = monitorHeight * MONITOR_TOP_MULTIPLIER;
-            float monitorBottomOffset = monitorHeight * MONITOR_BOTTOM_MULTIPLIER;
-            float x = w * MONITOR_LEFT_MULTIPLIER;
-            float y = monitorTop + monitorTopOffset;
-            float artWidth = w - 2 * x;
-            float artHeight = monitorHeight - monitorTopOffset - monitorBottomOffset;
+            float x = monitorLeft + monitorLeftOffset - 1; //-1 to account for rounding error
+            float y = monitorTop + monitorTopOffset - 1;
+            float artWidth = monitorWidth - 2 * monitorLeftOffset + 2;
+            float artHeight = monitorHeight - monitorTopOffset - monitorBottomOffset + 2;
 
             //scale up art to fill height of monitor while retain aspect ratio
             float fullArtWidth = artHeight * currentArt.getWidth() / currentArt.getHeight();
             g.startClip(x, y, artWidth, artHeight);
-            g.drawImage(currentArt, x + (w - fullArtWidth) / 2, y, fullArtWidth, artHeight);
+            g.drawImage(currentArt, x + (monitorWidth - fullArtWidth) / 2, y, fullArtWidth, artHeight);
             g.endClip();
         }
 
         //draw monitor so plane art remains within it
-        g.drawImage(monitor, 0, monitorTop, w, monitorHeight);
+        g.drawImage(monitor, monitorLeft, monitorTop, monitorWidth, monitorHeight);
     }
 }
