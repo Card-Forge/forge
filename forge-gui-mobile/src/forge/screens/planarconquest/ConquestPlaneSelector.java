@@ -2,6 +2,7 @@ package forge.screens.planarconquest;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Rectangle;
 
 import forge.Graphics;
 import forge.assets.FImage;
@@ -40,6 +41,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
     };
     private int selectedIndex, artIndex;
     private FImage currentArt;
+    private Rectangle leftArrowBounds, rightArrowBounds;
 
     public ConquestPlaneSelector() {
         reset();
@@ -69,23 +71,34 @@ public class ConquestPlaneSelector extends FDisplayObject {
         timer.restart();
     }
 
+    private void incrementSelectedIndex(int dir) {
+        int newIndex = selectedIndex + dir;
+        if (newIndex < 0) {
+            newIndex = planes.length - 1;
+        }
+        else if (newIndex >= planes.length) {
+            newIndex = 0;
+        }
+        setSelectedIndex(newIndex);
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        if (leftArrowBounds.contains(x, y)) {
+            incrementSelectedIndex(-1);
+            return true;
+        }
+        if (rightArrowBounds.contains(x, y)) {
+            incrementSelectedIndex(1);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean fling(float velocityX, float velocityY) {
         if (Math.abs(velocityX) > Math.abs(velocityY)) {
-            if (velocityX > 0) {
-                if (selectedIndex > 0) {
-                    setSelectedIndex(selectedIndex - 1);
-                }
-                else {
-                    setSelectedIndex(planes.length - 1);
-                }
-            }
-            else if (selectedIndex < planes.length - 1) {
-                setSelectedIndex(selectedIndex + 1);
-            }
-            else {
-                setSelectedIndex(0);
-            }
+            incrementSelectedIndex(velocityX > 0 ? -1 : 1);
             return true;
         }
         return false;
@@ -134,11 +147,12 @@ public class ConquestPlaneSelector extends FDisplayObject {
         float arrowSize = PLANE_NAME_FONT.getCapHeight();
         float textLeft = arrowSize + 1.5f * arrowOffsetLeft;
         float monitorBottom = monitorTop + monitorHeight;
+        float remainingHeight = h - monitorBottom;
         ConquestPlane plane = getSelectedPlane();
-        g.drawText(plane.getName(), PLANE_NAME_FONT, Color.WHITE, textLeft, monitorBottom, w - 2 * textLeft, h - monitorBottom, false, HAlignment.CENTER, true);
+        g.drawText(plane.getName(), PLANE_NAME_FONT, Color.WHITE, textLeft, monitorBottom, w - 2 * textLeft, remainingHeight, false, HAlignment.CENTER, true);
 
         //draw left/right arrows
-        float yMid = monitorBottom + (h - monitorBottom) / 2;
+        float yMid = monitorBottom + remainingHeight / 2;
         float offsetX = arrowSize / 4;
         float offsetY = arrowSize / 2;
         float midOffsetX = arrowSize * 0.4f;
@@ -146,9 +160,11 @@ public class ConquestPlaneSelector extends FDisplayObject {
         float xMid = arrowOffsetLeft + midOffsetX;
         g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid + offsetX, yMid - offsetY, xMid - offsetX, yMid + 1);
         g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid - offsetX, yMid - 1, xMid + offsetX, yMid + offsetY);
+        leftArrowBounds = new Rectangle(0, monitorBottom, textLeft + arrowSize, remainingHeight);
 
         xMid = w - arrowOffsetLeft - midOffsetX;
         g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid - offsetX, yMid - offsetY, xMid + offsetX, yMid + 1);
         g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid + offsetX, yMid - 1, xMid - offsetX, yMid + offsetY);
+        rightArrowBounds = new Rectangle(w - leftArrowBounds.width, monitorBottom, leftArrowBounds.width, remainingHeight);
     }
 }
