@@ -130,7 +130,7 @@ public final class ConquestData {
         if (collection == null) {
             collection = new ConquestCollection();
         }
-        manager.setPool(collection);
+        manager.setPool(collection, true);
     }
 
     public Iterable<PaperCard> getUnlockedCards() {
@@ -433,6 +433,7 @@ public final class ConquestData {
     private class ConquestCollection extends ItemPool<PaperCard> {
         private ConquestCollection() {
             super(PaperCard.class);
+            setAllowZero(true);
 
             //initialize to contain all available cards, with unlocked
             //having a count of 1 and the rest having a count of 0

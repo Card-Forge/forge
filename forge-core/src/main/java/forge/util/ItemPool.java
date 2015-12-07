@@ -90,18 +90,22 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return result;
     }
 
-    protected ItemPool(final Map<T, Integer> inMap, final Class<T> cls) {
-        items = inMap;
+    protected ItemPool(final Map<T, Integer> items0, final Class<T> cls) {
+        if (items0 != null) {
+            items = items0;
+        }
+        else {
+            items = new HashMap<T, Integer>(); //prevent items being null
+        }
         myClass = cls;
     }
 
     // Data members
-    /** The items. */
     protected final Map<T, Integer> items;
 
-    /** The my class. */
-    private final Class<T> myClass; // class does not keep this in runtime by
-                                    // itself
+    private final Class<T> myClass; //class does not keep this in runtime by itself
+
+    private boolean allowZero; //whether to allow items with 0 count to remain in pool
 
     @Override
     public final Iterator<Entry<T, Integer>> iterator() {
@@ -109,14 +113,11 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public final boolean contains(final T item) {
-        if (items == null) {
-            return false;
-        }
         return items.containsKey(item);
     }
 
     public final int count(final T item) {
-        if (items == null || item == null) {
+        if (item == null) {
             return 0;
         }
         final Integer boxed = items.get(item);
@@ -133,15 +134,13 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     
     public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
         int result = 0;
-        if (items != null) {
-            final boolean isSameClass = cls == myClass;
-            for (final Entry<T, Integer> kv : this) {
-                final T key = kv.getKey();
-                @SuppressWarnings("unchecked")
-                final U castKey = isSameClass || cls.isInstance(key) ? (U)key : null;
-                if (null == condition || castKey != null && condition.apply(castKey))
-                    result += kv.getValue();
-            }
+        final boolean isSameClass = cls == myClass;
+        for (final Entry<T, Integer> kv : this) {
+            final T key = kv.getKey();
+            @SuppressWarnings("unchecked")
+            final U castKey = isSameClass || cls.isInstance(key) ? (U)key : null;
+            if (null == condition || castKey != null && condition.apply(castKey))
+                result += kv.getValue();
         }
         return result;
     }
@@ -151,7 +150,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public final boolean isEmpty() {
-        return (items == null) || items.isEmpty();
+        return items.isEmpty();
     }
 
     public final List<T> toFlatList() {
@@ -176,6 +175,13 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return myClass;
     }
 
+    public boolean allowZero() {
+        return allowZero;
+    }
+    public void setAllowZero(boolean allowZero0) {
+        allowZero = allowZero0;
+    }
+
     public ItemPool<T> getView() {
         return new ItemPool<T>(Collections.unmodifiableMap(items), getMyClass());
     }
@@ -185,14 +191,21 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public void add(final T item, final int amount) {
-        if (item == null || amount <= 0) {
-            return;
+        if (item == null) { return; }
+
+        if (amount <= 0) {
+            if (allowZero) {
+                if (!items.containsKey(item)) {
+                    items.put(item, 0);
+                }
+            }
+            else { return; }
         }
-        items.put(item, Integer.valueOf(count(item) + amount));
+        items.put(item, count(item) + amount);
     }
 
-    public void addAllFlat(final Iterable<T> items) {
-        for (T item : items) {
+    public void addAllFlat(final Iterable<T> itms) {
+        for (T item : itms) {
             add(item);
         }
     }
@@ -204,8 +217,8 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     @SuppressWarnings("unchecked")
-    public <U extends InventoryItem> void addAllOfTypeFlat(final Iterable<U> items) {
-        for (U item : items) {
+    public <U extends InventoryItem> void addAllOfTypeFlat(final Iterable<U> itms) {
+        for (U item : itms) {
             if (myClass.isInstance(item)) {
                 add((T) item);
             }
@@ -214,10 +227,9 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
 
     @SuppressWarnings("unchecked")
     public <U extends InventoryItem> void addAllOfType(final Iterable<Entry<U, Integer>> map) {
-        Class<T> myClass = this.getMyClass();
-        for (final Entry<U, Integer> e : map) {
+        for (Entry<U, Integer> e : map) {
             if (myClass.isInstance(e.getKey())) {
-                this.add((T) e.getKey(), e.getValue());
+                add((T) e.getKey(), e.getValue());
             }
         }
     }
@@ -228,12 +240,18 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
 
     public boolean remove(final T item, final int amount) {
         final int count = count(item);
-        if ((count == 0) || (amount <= 0)) {
+        if (count == 0 || amount <= 0) {
             return false;
         }
         if (count <= amount) {
-            items.remove(item);
-        } else {
+            if (allowZero) {
+                items.put(item, 0);
+            }
+            else {
+                items.remove(item);
+            }
+        }
+        else {
             items.put(item, count - amount);
         }
         return true;

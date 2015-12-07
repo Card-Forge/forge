@@ -29,16 +29,7 @@ import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;
 
-/**
- * <p>
- * ItemManagerModel class.
- * </p>
- *
- * @param <T>
- *            the generic type
- * @author Forge
- * @version $Id: ItemManagerModel.java 19857 2013-02-24 08:49:52Z Max mtg $
- */
+
 public final class ItemManagerModel<T extends InventoryItem> {
     private static final int maxSortDepth = 3;
 
@@ -46,102 +37,71 @@ public final class ItemManagerModel<T extends InventoryItem> {
     private boolean infiniteSupply;
     private final CascadeManager cascadeManager = new CascadeManager();
 
-    /**
-     * Instantiates a new list view model
-     *
-     * @param ItemManager0
-     * @param genericType0
-     */
     public ItemManagerModel(final Class<T> genericType0) {
-        this.data = new ItemPool<T>(genericType0);
+        data = new ItemPool<T>(genericType0);
     }
 
-    /**
-     * Clears all data in the model.
-     */
     public void clear() {
-        this.data.clear();
+        data.clear();
     }
 
     // same thing as above, it was copied to provide sorting (needed by table
     // views in deck editors)
-    /** The items ordered. */
     private final transient List<Entry<T, Integer>> itemsOrdered = new ArrayList<Map.Entry<T, Integer>>();
 
-    /** Whether list is in sync. */
     protected transient boolean isListInSync = false;
 
     public List<Entry<T, Integer>> getOrderedList() {
-        if (!this.isListInSync) {
-            this.rebuildOrderedList();
+        if (!isListInSync) {
+            rebuildOrderedList();
         }
-        return this.itemsOrdered;
+        return itemsOrdered;
     }
 
     private void rebuildOrderedList() {
-        this.itemsOrdered.clear();
-        if (this.data != null) {
-            for (final Entry<T, Integer> e : this.data) {
-                this.itemsOrdered.add(e);
+        itemsOrdered.clear();
+        if (data != null) {
+            for (final Entry<T, Integer> e : data) {
+                itemsOrdered.add(e);
             }
         }
-        this.isListInSync = true;
+        isListInSync = true;
     }
 
     public int countDistinct() {
-        return this.data.countDistinct();
+        return data.countDistinct();
     }
 
-    /**
-     * Gets all items in the model.
-     *
-     * @return ItemPoolView<T>
-     */
     public ItemPool<T> getItems() {
-        return this.data.getView();
+        return data.getView();
     }
 
-    /**
-     * Removes a item from the model.
-     *
-     * @param item0 &emsp; {@link forge.Item} object
-     */
     public void removeItem(final T item0, final int qty) {
         if (isInfinite()) { return; }
 
-        final boolean wasThere = this.data.count(item0) > 0;
+        final boolean wasThere = data.count(item0) > 0;
         if (wasThere) {
-            this.data.remove(item0, qty);
+            data.remove(item0, qty);
             isListInSync = false;
         }
     }
 
     public void replaceAll(final T item0, final T replacement0) {
-        final int count = this.data.count(item0);
+        final int count = data.count(item0);
         if (count > 0) {
-            this.data.removeAll(item0);
-            this.data.add(replacement0, count);
+            data.removeAll(item0);
+            data.add(replacement0, count);
             isListInSync = false;
         }
     }
 
-    /**
-     * Adds a item to the model.
-     *
-     * @param item0 &emsp; {@link forge.Item} object.
-     */
     public void addItem(final T item0, final int qty) {
-        this.data.add(item0, qty);
+        data.add(item0, qty);
         isListInSync = false;
     }
 
-    /**
-     * Adds multiple copies of multiple items to the model.
-     *
-     * @param items0 &emsp; {@link java.lang.Iterable}<Entry<T, Integer>>
-     */
     public void addItems(final Iterable<Entry<T, Integer>> items0) {
-        this.data.addAll(items0);
+        data.addAll(items0);
         isListInSync = false;
     }
 
@@ -150,29 +110,31 @@ public final class ItemManagerModel<T extends InventoryItem> {
      * items in the table have a limited number of copies.
      */
     public void setInfinite(final boolean infinite) {
-        this.infiniteSupply = infinite;
+        infiniteSupply = infinite;
     }
 
     public boolean isInfinite() {
         return infiniteSupply;
     }
 
+    public boolean allowZero() {
+        return data.allowZero();
+    }
+    public void setAllowZero(boolean allowZero0) {
+        data.setAllowZero(allowZero0);
+    }
+
     public CascadeManager getCascadeManager() {
         return cascadeManager;
     }
 
-    /**
-     * Resort.
-     */
     public void refreshSort() {
-        if (this.getOrderedList().isEmpty()) { return; }
+        if (getOrderedList().isEmpty()) { return; }
 
-        Collections.sort(this.getOrderedList(), new MyComparator());
+        Collections.sort(getOrderedList(), new MyComparator());
     }
 
-    /**
-     * Manages sorting orders for multiple depths of sorting.
-     */
+    //Manages sorting orders for multiple depths of sorting
     public final class CascadeManager {
         private final List<ItemColumn> colsToSort = new ArrayList<ItemColumn>(3);
         private Sorter sorter = null;
@@ -181,20 +143,21 @@ public final class ItemManagerModel<T extends InventoryItem> {
         // If column is first in the cascade, inverts direction of sort.
         // Otherwise, sorts in ascending direction.
         public void add(final ItemColumn col0, final boolean forSetup) {
-            this.sorter = null;
+            sorter = null;
 
             if (forSetup) { //just add column unmodified if setting up sort columns
-                this.colsToSort.add(0, col0);
-            } else {
+                colsToSort.add(0, col0);
+            }
+            else {
                 if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) { //if column already at top level, just invert
                     col0.getConfig().setSortPriority(1);
                     col0.getConfig().setSortState(col0.getConfig().getSortState() == SortState.ASC ? SortState.DESC : SortState.ASC);
                 }
                 else { //otherwise move column to top level and move others down
-                    this.colsToSort.remove(col0);
+                    colsToSort.remove(col0);
                     col0.getConfig().setSortPriority(1);
                     col0.getConfig().setSortState(col0.getConfig().getDefaultSortState());
-                    this.colsToSort.add(0, col0);
+                    colsToSort.add(0, col0);
                 }
 
                 //decrement sort priority on remaining columns
@@ -208,28 +171,28 @@ public final class ItemManagerModel<T extends InventoryItem> {
             }
 
             //unset and remove boundary columns.
-            if (this.colsToSort.size() > maxSortDepth) {
-                this.colsToSort.get(maxSortDepth).getConfig().setSortPriority(0);
-                this.colsToSort.remove(maxSortDepth);
+            if (colsToSort.size() > maxSortDepth) {
+                colsToSort.get(maxSortDepth).getConfig().setSortPriority(0);
+                colsToSort.remove(maxSortDepth);
             }
         }
 
         public Sorter getSorter() {
-            if (this.sorter == null) {
-                this.sorter = createSorter();
+            if (sorter == null) {
+                sorter = createSorter();
             }
-            return this.sorter;
+            return sorter;
         }
 
         public void reset() {
-            this.colsToSort.clear();
-            this.sorter = null;
+            colsToSort.clear();
+            sorter = null;
         }
 
         private Sorter createSorter() {
             final List<ItemPoolSorter<InventoryItem>> oneColSorters = new ArrayList<ItemPoolSorter<InventoryItem>>(maxSortDepth);
 
-            for (final ItemColumn col : this.colsToSort) {
+            for (final ItemColumn col : colsToSort) {
                 oneColSorters.add(new ItemPoolSorter<InventoryItem>(
                         col.getFnSort(),
                         col.getConfig().getSortState().equals(SortState.ASC) ? true : false));
@@ -242,30 +205,18 @@ public final class ItemManagerModel<T extends InventoryItem> {
             private final List<ItemPoolSorter<InventoryItem>> sorters;
             private final int cntFields;
 
-            /**
-             *
-             * Sorter Constructor.
-             *
-             * @param sorters0
-             *            a List<TableSorter<InventoryItem>>
-             */
             public Sorter(final List<ItemPoolSorter<InventoryItem>> sorters0) {
-                this.sorters = sorters0;
-                this.cntFields = sorters0.size();
+                sorters = sorters0;
+                cntFields = sorters0.size();
             }
 
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-             */
             @Override
             public final int compare(final Entry<InventoryItem, Integer> arg0, final Entry<InventoryItem, Integer> arg1) {
                 int lastCompare = 0;
                 int iField = -1;
-                while ((++iField < this.cntFields) && (lastCompare == 0)) { // reverse
+                while ((++iField < cntFields) && (lastCompare == 0)) { // reverse
                                                                             // iteration
-                    final ItemPoolSorter<InventoryItem> sorter = this.sorters.get(iField);
+                    final ItemPoolSorter<InventoryItem> sorter = sorters.get(iField);
                     if (sorter == null) {
                         break;
                     }
@@ -277,13 +228,10 @@ public final class ItemManagerModel<T extends InventoryItem> {
     }
 
     private final class MyComparator implements Comparator<Entry<T, Integer>> {
-        /* (non-Javadoc)
-         * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-         */
         @SuppressWarnings("unchecked")
         @Override
         public int compare(final Entry<T, Integer> o1, final Entry<T, Integer> o2) {
             return cascadeManager.getSorter().compare((Entry<InventoryItem, Integer>)o1, (Entry<InventoryItem, Integer>)o2);
         }
     }
-} // ItemManagerModel
+}

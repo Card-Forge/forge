@@ -406,8 +406,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         setPool(pool0, false);
     }
     public void setPool(final ItemPool<T> pool0, boolean infinite) {
-        model.clear();
         pool = pool0;
+        model.clear();
+        model.setAllowZero(pool.allowZero());
         model.addItems(pool);
         model.setInfinite(infinite);
         updateView(true, null);

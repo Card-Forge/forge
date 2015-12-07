@@ -23,6 +23,7 @@ import java.util.Map;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class ItemView<T extends InventoryItem> {
+    protected static final float UNOWNED_ALPHA_COMPOSITE = 0.35f;
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_TEXT);
 
     protected final ItemManager<T> itemManager;

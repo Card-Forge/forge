@@ -366,8 +366,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 group = otherItems;
             }
 
-            for (int i = 0; i < qty; i++) {
-                group.add(new ItemInfo(item, group));
+            if (qty > 0) {
+                for (int i = 0; i < qty; i++) {
+                    group.add(new ItemInfo(item, group, false));
+                }
+            }
+            else { //add single item for unowned item
+                group.add(new ItemInfo(item, group, true));
             }
         }
 
@@ -907,13 +912,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private class ItemInfo extends FDisplayObject implements Entry<InventoryItem, Integer> {
         private final T item;
         private final Group group;
+        private final boolean unowned;
         private int index;
         private CardStackPosition pos;
         private boolean selected;
 
-        private ItemInfo(T item0, Group group0) {
+        private ItemInfo(T item0, Group group0, boolean unowned0) {
             item = item0;
             group = group0;
+            unowned = unowned0;
         }
 
         @Override
@@ -938,6 +945,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public void draw(Graphics g) {
+            if (unowned) {
+                g.setAlphaComposite(UNOWNED_ALPHA_COMPOSITE);
+            }
+
             final float x = getLeft() - group.getScrollLeft();
             final float y = getTop() - group.getTop() - getScrollValue();
             final float w = getWidth();
@@ -960,6 +971,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     g.fillRect(Color.BLACK, x, y, w, h);
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, HAlignment.CENTER, false);
                 }
+            }
+
+            if (unowned) {
+                g.resetAlphaComposite();
             }
         }
     }
