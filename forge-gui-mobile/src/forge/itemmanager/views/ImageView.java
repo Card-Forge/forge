@@ -945,18 +945,24 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public void draw(Graphics g) {
-            if (unowned) {
-                g.setAlphaComposite(UNOWNED_ALPHA_COMPOSITE);
-            }
-
             final float x = getLeft() - group.getScrollLeft();
             final float y = getTop() - group.getTop() - getScrollValue();
             final float w = getWidth();
             final float h = getHeight();
 
             if (selected) {
-                g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
-                        w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+                if (unowned) { //use drawRect for unowned to prevent green showing through card
+                    g.drawRect(SEL_BORDER_SIZE, Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
+                            w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+                }
+                else {
+                    g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
+                            w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+                }
+            }
+
+            if (unowned) {
+                g.setAlphaComposite(UNOWNED_ALPHA_COMPOSITE);
             }
 
             if (item instanceof PaperCard) {
