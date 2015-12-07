@@ -385,79 +385,27 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         helper.fill(currentView.getScroller());
     }
 
-    /**
-     * 
-     * getGenericType.
-     * 
-     * @return generic type of items
-     */
     public Class<T> getGenericType() {
         return genericType;
     }
 
-    /**
-     * 
-     * getCaption.
-     * 
-     * @return caption to display before ratio
-     */
     public String getCaption() {
         return searchFilter.getCaption();
     }
-
-    /**
-     * 
-     * setCaption.
-     * 
-     * @param caption - caption to display before ratio
-     */
     public void setCaption(String caption0) {
         searchFilter.setCaption(caption0);
     }
 
-    /**
-     * 
-     * Gets the item pool.
-     * 
-     * @return ItemPoolView
-     */
     public ItemPool<T> getPool() {
         return pool;
     }
-
-    /**
-     * 
-     * Sets the item pool.
-     * 
-     * @param items
-     */
     public void setPool(final Iterable<T> items) {
         setPool(ItemPool.createFrom(items, genericType), false);
     }
-
-    /**
-     * 
-     * Sets the item pool.
-     * 
-     * @param poolView
-     * @param infinite
-     */
-    public void setPool(final ItemPool<T> poolView, boolean infinite) {
-        setPoolImpl(ItemPool.createFrom(poolView, genericType), infinite);
-    }
-
     public void setPool(final ItemPool<T> pool0) {
-        setPoolImpl(pool0, false);
+        setPool(pool0, false);
     }
-
-    /**
-     * 
-     * Sets the item pool.
-     * 
-     * @param pool0
-     * @param infinite
-     */
-    private void setPoolImpl(final ItemPool<T> pool0, boolean infinite) {
+    public void setPool(final ItemPool<T> pool0, boolean infinite) {
         model.clear();
         pool = pool0;
         model.addItems(pool);
@@ -469,52 +417,22 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return currentView;
     }
 
-    /**
-     * 
-     * getItemCount.
-     * 
-     * @return int
-     */
     public int getItemCount() {
         return currentView.getCount();
     }
 
-    /**
-     * 
-     * getSelectionCount.
-     * 
-     * @return int
-     */
     public int getSelectionCount() {
         return currentView.getSelectionCount();
     }
 
-    /**
-     * 
-     * getSelectedItem.
-     * 
-     * @return T
-     */
     public T getSelectedItem() {
         return currentView.getSelectedItem();
     }
 
-    /**
-     * 
-     * getSelectedItems.
-     * 
-     * @return Iterable<T>
-     */
     public Collection<T> getSelectedItems() {
         return currentView.getSelectedItems();
     }
 
-    /**
-     * 
-     * getSelectedItems.
-     * 
-     * @return ItemPool<T>
-     */
     public ItemPool<T> getSelectedItemPool() {
         ItemPool<T> selectedItemPool = new ItemPool<T>(genericType);
         for (T item : getSelectedItems()) {
@@ -523,32 +441,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return selectedItemPool;
     }
 
-    /**
-     * 
-     * setSelectedItem.
-     * 
-     * @param item - Item to select
-     */
     public boolean setSelectedItem(T item) {
     	return currentView.setSelectedItem(item);
     }
 
-    /**
-     * 
-     * setSelectedItems.
-     * 
-     * @param items - Items to select
-     */
     public boolean setSelectedItems(Iterable<T> items) {
         return currentView.setSelectedItems(items);
     }
 
-    /**
-     * 
-     * stringToItem.
-     * 
-     * @param str - String to get item corresponding to
-     */
     public T stringToItem(String str) {
         for (Entry<T, Integer> itemEntry : pool) {
             if (itemEntry.getKey().toString().equals(str)) {
@@ -558,12 +458,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return null;
     }
 
-    /**
-     * 
-     * setSelectedString.
-     * 
-     * @param str - String to select
-     */
     public boolean setSelectedString(String str) {
         T item = stringToItem(str);
         if (item != null) {
@@ -572,12 +466,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return false;
     }
 
-    /**
-     * 
-     * setSelectedStrings.
-     * 
-     * @param strings - Strings to select
-     */
     public boolean setSelectedStrings(Iterable<String> strings) {
         List<T> items = new ArrayList<T>();
         for (String str : strings) {
@@ -589,12 +477,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return setSelectedItems(items);
     }
 
-    /**
-     * 
-     * selectItemEntrys.
-     * 
-     * @param itemEntrys - Item entrys to select
-     */
     public boolean selectItemEntrys(Iterable<Entry<T, Integer>> itemEntrys) {
         List<T> items = new ArrayList<T>();
         for (Entry<T, Integer> itemEntry : itemEntrys) {
@@ -603,51 +485,22 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return setSelectedItems(items);
     }
 
-    /**
-     * 
-     * selectAll.
-     * 
-     */
     public void selectAll() {
         currentView.selectAll();
     }
 
-    /**
-     * 
-     * getSelectedItem.
-     * 
-     * @return T
-     */
     public int getSelectedIndex() {
         return currentView.getSelectedIndex();
     }
 
-    /**
-     * 
-     * getSelectedItems.
-     * 
-     * @return Iterable<Integer>
-     */
     public Iterable<Integer> getSelectedIndices() {
         return currentView.getSelectedIndices();
     }
 
-    /**
-     * 
-     * setSelectedIndex.
-     * 
-     * @param index - Index to select
-     */
     public void setSelectedIndex(int index) {
         currentView.setSelectedIndex(index);
     }
 
-    /**
-     * 
-     * setSelectedIndices.
-     * 
-     * @param indices - Indices to select
-     */
     public void setSelectedIndices(Integer[] indices) {
         currentView.setSelectedIndices(Arrays.asList(indices));
     }
@@ -655,13 +508,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         currentView.setSelectedIndices(indices);
     }
 
-    /**
-     * 
-     * addItem.
-     * 
-     * @param item
-     * @param qty
-     */
     public void addItem(final T item, int qty) {
         pool.add(item, qty);
         if (isUnfiltered()) {
@@ -672,12 +518,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         updateView(false, items);
     }
 
-    /**
-     * 
-     * addItems.
-     * 
-     * @param itemsToAdd
-     */
     public void addItems(Iterable<Entry<T, Integer>> itemsToAdd) {
         pool.addAll(itemsToAdd);
         if (isUnfiltered()) {
@@ -691,25 +531,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         updateView(false, items);
     }
 
-    /**
-     * 
-     * setItems.
-     * 
-     * @param items
-     */
     public void setItems(Iterable<Entry<T, Integer>> items) {
         pool.clear();
         model.clear();
         addItems(items);
     }
 
-    /**
-     * 
-     * removeItem.
-     * 
-     * @param item
-     * @param qty
-     */
     public void removeItem(final T item, int qty) {
         final Iterable<T> itemsToSelect = currentView == listView ? getSelectedItems() : null;
 
@@ -720,12 +547,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         updateView(false, itemsToSelect);
     }
 
-    /**
-     * 
-     * removeItems.
-     * 
-     * @param itemsToRemove
-     */
     public void removeItems(Iterable<Map.Entry<T, Integer>> itemsToRemove) {
         final Iterable<T> itemsToSelect = currentView == listView ? getSelectedItems() : null;
 
@@ -738,11 +559,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         updateView(false, itemsToSelect);
     }
 
-    /**
-     * 
-     * removeAllItems.
-     * 
-     */
     public void removeAllItems() {
         pool.clear();
         model.clear();
@@ -763,30 +579,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         updateView(false, itemsToSelect);
     }
 
-    /**
-     * 
-     * scrollSelectionIntoView.
-     * 
-     */
     public void scrollSelectionIntoView() {
         currentView.scrollSelectionIntoView();
     }
 
-    /**
-     * 
-     * getItemCount.
-     * 
-     * @param item
-     */
     public int getItemCount(final T item) {
         return model.isInfinite() ? Integer.MAX_VALUE : pool.count(item);
     }
 
-    /**
-     * Gets all filtered items in the model.
-     * 
-     * @return ItemPoolView<T>
-     */
     public ItemPool<T> getFilteredItems() {
         return model.getItems();
     }
@@ -904,31 +704,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return true;
     }
 
-    /**
-     * 
-     * isUnfiltered.
-     * 
-     */
     private boolean isUnfiltered() {
         return filterPredicate == null;
     }
 
-    /**
-     * 
-     * getHideFilters.
-     * 
-     * @return true if filters are hidden, false otherwise
-     */
     public boolean getHideFilters() {
         return hideFilters;
     }
 
-    /**
-     * 
-     * setHideFilters.
-     * 
-     * @param hideFilters0 - if true, hide the filters, otherwise show them
-     */
     public void setHideFilters(boolean hideFilters0) {
         if (hideFilters == hideFilters0) { return; }
         hideFilters = hideFilters0;
@@ -955,19 +738,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
     }
 
-    /**
-     * Refresh displayed items
-     */
+    //Refresh displayed items
     public void refresh() {
         updateView(true, getSelectedItems());
     }
 
-    /**
-     * 
-     * updateView.
-     * 
-     * @param bForceFilter
-     */
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
         final boolean useFilter = (forceFilter && (filterPredicate != null)) || !isUnfiltered();
 
@@ -996,32 +771,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         searchFilter.setRatio("(" + filteredCount + " / " + totalCount + ")");
     }
 
-    /**
-     * 
-     * isIncrementalSearchActive.
-     * 
-     * @return true if an incremental search is currently active
-     */
     public boolean isIncrementalSearchActive() {
         return currentView.isIncrementalSearchActive();
     }
 
-    /**
-     * 
-     * getWantUnique.
-     * 
-     * @return true if the editor is in "unique item names only" mode.
-     */
     public boolean getWantUnique() {
         return wantUnique;
     }
 
-    /**
-     * 
-     * setWantUnique.
-     * 
-     * @param unique - if true, the editor will be set to the "unique item names only" mode.
-     */
     public void setWantUnique(boolean unique) {
         wantUnique = unique;
     }
@@ -1032,12 +789,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
     }
 
-    /**
-     * 
-     * isInfinite.
-     * 
-     * @return whether item manager's pool of items is in infinite supply
-     */
+    //whether item manager's pool of items is in infinite supply
     public boolean isInfinite() {
         return model.isInfinite();
     }
