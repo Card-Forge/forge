@@ -761,14 +761,20 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         currentView.refresh(itemsToSelect, getSelectedIndex(), forceFilter ? 0 : currentView.getScrollValue());
 
         //update ratio of # in filtered pool / # in total pool
+        ItemPool<T> filteredItems = getFilteredItems();
+        int filteredCount = filteredItems.countAll();
+
         int totalCount;
-        int filteredCount = getFilteredItems().countAll();
-        if (useFilter) {
+        if (isInfinite()) { //use count distinct if pool is infinite to account for zeros and save performance
+            totalCount = filteredItems.countDistinct();
+        }
+        else if (useFilter) {
             totalCount = pool.countAll();
         }
         else {
             totalCount = filteredCount;
         }
+
         searchFilter.setRatio("(" + filteredCount + " / " + totalCount + ")");
     }
 

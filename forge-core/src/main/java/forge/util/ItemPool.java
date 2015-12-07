@@ -125,24 +125,33 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public final int countAll() {
-        return countAll(null, myClass); 
+        int count = 0;
+        for (Entry<T, Integer> e : this) {
+            count += e.getValue();
+        }
+        return count;
     }
 
     public final int countAll(Predicate<T> condition) {
-        return countAll(condition, myClass); 
-    }
-    
-    public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
-        int result = 0;
-        final boolean isSameClass = cls == myClass;
-        for (final Entry<T, Integer> kv : this) {
-            final T key = kv.getKey();
-            @SuppressWarnings("unchecked")
-            final U castKey = isSameClass || cls.isInstance(key) ? (U)key : null;
-            if (null == condition || castKey != null && condition.apply(castKey))
-                result += kv.getValue();
+        int count = 0;
+        for (Entry<T, Integer> e : this) {
+            if (condition.apply(e.getKey())) {
+                count += e.getValue();
+            }
         }
-        return result;
+        return count;
+    }
+
+    @SuppressWarnings("unchecked")
+    public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
+        int count = 0;
+        for (Entry<T, Integer> e : this) {
+            T item = e.getKey();
+            if (cls.isInstance(item) && condition.apply((U)item)) {
+                count += e.getValue();
+            }
+        }
+        return count;
     }
 
     public final int countDistinct() {
