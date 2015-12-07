@@ -95,7 +95,7 @@ public class ConquestUtil {
 
     public static CardPool getAvailablePool(Deck deck) {
         HashSet<PaperCard> availableCards = new HashSet<PaperCard>();
-        for (PaperCard pc : FModel.getConquest().getModel().getCollection()) {
+        for (PaperCard pc : FModel.getConquest().getModel().getUnlockedCards()) {
             availableCards.add(pc);
         }
 

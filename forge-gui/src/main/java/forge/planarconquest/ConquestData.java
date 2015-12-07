@@ -22,6 +22,10 @@ import forge.assets.ISkinImage;
 import forge.deck.Deck;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.itemmanager.ColumnDef;
+import forge.itemmanager.IItemManager;
+import forge.itemmanager.ItemColumn;
+import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.properties.ForgeConstants;
@@ -29,12 +33,12 @@ import forge.util.ItemPool;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Function;
@@ -54,8 +58,10 @@ public final class ConquestData {
     private ISkinImage planeswalkerToken;
     private ConquestLocation currentLocation;
 
+    private transient ConquestCollection collection; //don't serialize this
+
     private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
-    private final HashSet<PaperCard> collection = new HashSet<PaperCard>();
+    private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
     private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
     private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
     private final ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<InventoryItem>(InventoryItem.class);
@@ -120,25 +126,37 @@ public final class ConquestData {
         return getOrCreatePlaneData(getCurrentPlane());
     }
 
-    public Iterable<PaperCard> getCollection() {
-        return collection;
+    public void populateCollectionManager(IItemManager<PaperCard> manager) {
+        if (collection == null) {
+            collection = new ConquestCollection();
+        }
+        manager.setPool(collection, true);
+    }
+
+    public Iterable<PaperCard> getUnlockedCards() {
+        return unlockedCards;
     }
 
     public boolean hasUnlockedCard(PaperCard card) {
-        return collection.contains(card);
+        return unlockedCards.contains(card);
     }
 
     public void unlockCard(PaperCard card) {
-        collection.add(card);
-        newCards.add(card);
+        if (unlockedCards.add(card)) {
+            newCards.add(card);
+            if (collection != null) {
+                collection.add(card);
+            }
+        }
     }
-    public void unlockCards(Collection<PaperCard> cards) {
-        collection.addAll(cards);
-        newCards.addAll(cards);
+    public void unlockCards(Iterable<PaperCard> cards) {
+        for (PaperCard card : cards) {
+            unlockCard(card);
+        }
     }
 
     public int getUnlockedCount() {
-        return collection.size();
+        return unlockedCards.size();
     }
 
     public Iterable<ConquestCommander> getCommanders() {
@@ -211,34 +229,41 @@ public final class ConquestData {
         return newCards;
     }
 
-    public final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare =
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare =
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             return newCards.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
         }
     };
-    public final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet =
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet =
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             return newCards.contains(from.getKey()) ? "NEW" : "";
         }
     };
-    public final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = decksUsingMyCards.count(from.getKey());
             return iValue == null ? Integer.valueOf(0) : iValue;
         }
     };
-    public final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             final Integer iValue = decksUsingMyCards.count(from.getKey());
             return iValue == null ? "" : iValue.toString();
         }
     };
+
+    public Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
+        Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
+        ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, fnNewCompare, fnNewGet);
+        ItemColumn.addColOverride(config, colOverrides, ColumnDef.DECKS, fnDeckCompare, fnDeckGet);
+        return colOverrides;
+    }
 
     public List<ConquestLocation> getPath(ConquestLocation destLoc) {
         PathFinder pathFinder = new PathFinder();
@@ -400,6 +425,21 @@ public final class ConquestData {
                     }
                 }
                 return blocked;
+            }
+        }
+    }
+
+    @SuppressWarnings("serial")
+    private class ConquestCollection extends ItemPool<PaperCard> {
+        private ConquestCollection() {
+            super(PaperCard.class);
+
+            //initialize to contain all available cards, with unlocked
+            //having a count of 1 and the rest having a count of 0
+            for (ConquestPlane plane : ConquestPlane.values()) {
+                for (PaperCard card : plane.getCardPool().getAllCards()) {
+                    items.put(card, hasUnlockedCard(card) ? 1 : 0);
+                }
             }
         }
     }

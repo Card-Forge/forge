@@ -24,6 +24,7 @@ public class ConquestMenu extends FPopupMenu {
     private static final ConquestMenu conquestMenu = new ConquestMenu();
     private static final ConquestMapScreen mapScreen = new ConquestMapScreen();
     private static final ConquestCommandersScreen commandersScreen = new ConquestCommandersScreen();
+    private static final ConquestCollectionScreen collectionScreen = new ConquestCollectionScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
 
     private static final FMenuItem mapItem = new FMenuItem("Planar Map", FSkinImage.QUEST_MAP, new FEventHandler() {
@@ -36,6 +37,12 @@ public class ConquestMenu extends FPopupMenu {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(commandersScreen);
+        }
+    });
+    private static final FMenuItem collectionItem = new FMenuItem("Collection", FSkinImage.QUEST_BOX, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(collectionScreen);
         }
     });
     private static final FMenuItem prefsItem = new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
@@ -99,6 +106,7 @@ public class ConquestMenu extends FPopupMenu {
         FScreen currentScreen = Forge.getCurrentScreen();
         addItem(mapItem); mapItem.setSelected(currentScreen == mapScreen);
         addItem(commandersItem); commandersItem.setSelected(currentScreen == commandersScreen);
+        addItem(collectionItem); collectionItem.setSelected(currentScreen == collectionScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
 }

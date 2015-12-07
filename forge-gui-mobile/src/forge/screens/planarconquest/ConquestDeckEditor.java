@@ -1,6 +1,5 @@
 package forge.screens.planarconquest;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import forge.deck.DeckProxy;
@@ -11,7 +10,6 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
-import forge.planarconquest.ConquestData;
 
 public class ConquestDeckEditor extends FDeckEditor {
     public ConquestDeckEditor(ConquestCommander commander) {
@@ -36,10 +34,6 @@ public class ConquestDeckEditor extends FDeckEditor {
 
     @Override
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
-        ConquestData model = FModel.getConquest().getModel();
-        Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
-        ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, model.fnNewCompare, model.fnNewGet);
-        ItemColumn.addColOverride(config, colOverrides, ColumnDef.DECKS, model.fnDeckCompare, model.fnDeckGet);
-        return colOverrides;
+        return FModel.getConquest().getModel().getColOverrides(config);
     }
 }
