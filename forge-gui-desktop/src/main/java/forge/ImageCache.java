@@ -93,7 +93,7 @@ public class ImageCache {
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(InventoryItem ii, int width, int height) {
-        return scaleImage(ImageKeys.getImageKey(ii, false), width, height, true);
+        return scaleImage(ii.getImageKey(false), width, height, true);
     }
 
     /**

@@ -1,5 +1,6 @@
 package forge.item;
 
+import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -61,4 +62,9 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override public String getItemType() { return "Token"; }
 
     @Override public boolean isToken() { return true; }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return ImageKeys.TOKEN_PREFIX + imageFileName;
+    }
 }

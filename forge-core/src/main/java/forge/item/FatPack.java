@@ -26,6 +26,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
@@ -144,5 +145,10 @@ public class FatPack extends BoxedProduct {
             }
             return s.toString();
         }
+    }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return ImageKeys.FATPACK_PREFIX + getEdition();
     }    
 }

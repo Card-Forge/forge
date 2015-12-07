@@ -85,6 +85,11 @@ public class ConquestCommander implements InventoryItem {
     }
 
     @Override
+    public String getImageKey(boolean altState) {
+        return card.getImageKey(altState);
+    }
+
+    @Override
     public String toString() {
         return card.getName();
     }

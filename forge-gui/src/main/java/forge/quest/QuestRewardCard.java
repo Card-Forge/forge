@@ -116,4 +116,8 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
         return filters;
     }
 
+    @Override
+    public String getImageKey(boolean altState) {
+        return null;
+    }
 }

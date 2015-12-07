@@ -85,7 +85,7 @@ public final class CardPicturePanel extends JPanel {
 
         if (displayed instanceof InventoryItem) {
             final InventoryItem item = (InventoryItem) displayed;
-            return ImageCache.getOriginalImage(ImageKeys.getImageKey(item, false), true);
+            return ImageCache.getOriginalImage(item.getImageKey(false), true);
         } else if (displayed instanceof CardStateView) {
             return FImageUtil.getImage((CardStateView)displayed);
         }

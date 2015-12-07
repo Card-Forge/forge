@@ -265,7 +265,7 @@ public class CardFactory {
         c.setRarity(cp.getRarity());
 
         // Would like to move this away from in-game entities
-        String originalPicture = ImageKeys.getImageKey(cp, false);
+        String originalPicture = cp.getImageKey(false);
         //System.out.println(c.getName() + " -> " + originalPicture);
         c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
@@ -273,11 +273,11 @@ public class CardFactory {
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
                 c.setState(CardStateName.Flipped, false);
-                c.setImageKey(ImageKeys.getImageKey(cp, true));
+                c.setImageKey(cp.getImageKey(true));
             }
             else if (c.isDoubleFaced() && cp instanceof PaperCard) {
                 c.setState(CardStateName.Transformed, false);
-                c.setImageKey(ImageKeys.getImageKey(cp, true));
+                c.setImageKey(cp.getImageKey(true));
             }
             else if (c.isSplitCard()) {
                 c.setState(CardStateName.LeftSplit, false);

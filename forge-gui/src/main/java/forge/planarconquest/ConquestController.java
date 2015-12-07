@@ -28,7 +28,6 @@ import com.google.common.collect.ImmutableList;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.ImageKeys;
 import forge.LobbyPlayer;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -154,7 +153,7 @@ public class ConquestController {
 
             final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
             humanPlayer = new LobbyPlayerHuman(humanPlayerName);
-            humanPlayer.setAvatarCardImageKey(ImageKeys.getImageKey(commander.getCard(), false));
+            humanPlayer.setAvatarCardImageKey(commander.getCard().getImageKey(false));
             starter.add(humanStart.setPlayer(humanPlayer));
 
             final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);

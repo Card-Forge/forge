@@ -26,6 +26,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.util.TextUtil;
@@ -127,5 +128,10 @@ public class BoosterBox extends BoxedProduct {
             }
             return s.toString();
         }
-    }    
+    }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return ImageKeys.BOOSTERBOX_PREFIX + getEdition();
+    }
 }

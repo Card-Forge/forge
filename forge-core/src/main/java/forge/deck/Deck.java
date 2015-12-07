@@ -18,6 +18,7 @@
 package forge.deck;
 
 import com.google.common.base.Function;
+
 import forge.StaticData;
 import forge.card.CardDb.SetPreference;
 import forge.card.CardEdition;
@@ -245,5 +246,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
         }
         return true;
+    }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return null;
     }
 }

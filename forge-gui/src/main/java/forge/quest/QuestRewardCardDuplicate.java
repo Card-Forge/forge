@@ -70,4 +70,9 @@ public class QuestRewardCardDuplicate implements IQuestRewardCard {
         }
         return null;
     }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return null;
+    }
 }

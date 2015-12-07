@@ -19,6 +19,7 @@ package forge.item;
 
 import com.google.common.base.Function;
 
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
@@ -32,10 +33,7 @@ import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Map;
 
-/**
- * TODO: Write javadoc for this type.
- * 
- */
+
 public class PreconDeck implements InventoryItemFromSet {
     private final Deck deck;
     private final String set;
@@ -44,21 +42,11 @@ public class PreconDeck implements InventoryItemFromSet {
     
     // private final SellRules recommendedDeals;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getName()
-     */
     @Override
     public String getName() {
         return this.deck.getName();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItem#getType()
-     */
     @Override
     public String getItemType() {
         return "Prebuilt Deck";
@@ -92,21 +80,11 @@ public class PreconDeck implements InventoryItemFromSet {
         return imageFilename;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getSet()
-     */
     @Override
     public String getEdition() {
         return this.set;
     }
 
-    /**
-     * Gets the description.
-     *
-     * @return the description
-     */
     public final String getDescription() {
         return this.description;
     }
@@ -151,6 +129,11 @@ public class PreconDeck implements InventoryItemFromSet {
         public Deck apply(PreconDeck arg1) {
             return arg1.getDeck();
         }
-    };      
+    };
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return ImageKeys.PRECON_PREFIX + imageFilename;
+    }      
     
 }

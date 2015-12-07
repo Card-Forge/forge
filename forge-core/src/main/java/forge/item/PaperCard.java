@@ -25,6 +25,7 @@ import com.google.common.base.Function;
 
 import forge.ImageKeys;
 import forge.StaticData;
+import forge.card.CardDb;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 
@@ -53,22 +54,22 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
 
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
     @Override
     public String getEdition() {
-        return this.edition;
+        return edition;
     }
 
     @Override
     public int getArtIndex() {
-        return this.artIndex;
+        return artIndex;
     }
 
     @Override
     public boolean isFoil() {
-        return this.foil;
+        return foil;
     }
 
     @Override
@@ -78,12 +79,12 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
 
     @Override
     public CardRules getRules() {
-        return this.rules;
+        return rules;
     }
 
     @Override
     public CardRarity getRarity() {
-        return this.rarity;
+        return rarity;
     }
 
 //    @Override
@@ -143,18 +144,18 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         if (obj == null) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
 
         final PaperCard other = (PaperCard) obj;
-        if (!this.name.equals(other.name)) {
+        if (!name.equals(other.name)) {
             return false;
         }
-        if (!this.edition.equals(other.edition)) {
+        if (!edition.equals(other.edition)) {
             return false;
         }
-        if ((other.foil != this.foil) || (other.artIndex != this.artIndex)) {
+        if ((other.foil != foil) || (other.artIndex != artIndex)) {
             return false;
         }
 
@@ -168,8 +169,8 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
      */
     @Override
     public int hashCode() {
-        final int code = (this.name.hashCode() * 11) + (this.edition.hashCode() * 59) + (this.artIndex * 2);
-        if (this.foil) {
+        final int code = (name.hashCode() * 11) + (edition.hashCode() * 59) + (artIndex * 2);
+        if (foil) {
             return code + 1;
         }
         return code;
@@ -182,7 +183,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
      */
     @Override
     public String toString() {
-        return this.name;
+        return name;
         // cannot still decide, if this "name|set" format is needed anymore
         // return String.format("%s|%s", name, cardSet);
     }
@@ -194,12 +195,12 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
      */
     @Override
     public int compareTo(final IPaperCard o) {
-        final int nameCmp = this.getName().compareToIgnoreCase(o.getName());
+        final int nameCmp = getName().compareToIgnoreCase(o.getName());
         if (0 != nameCmp) {
             return nameCmp;
         }
         // TODO compare sets properly
-        int setDiff = this.edition.compareTo(o.getEdition());
+        int setDiff = edition.compareTo(o.getEdition());
         if ( 0 != setDiff )
             return setDiff;
         
@@ -214,7 +215,16 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         if (pc == null) {
             throw new IOException(String.format("Card %s not found", name));
         }
-        this.rules = pc.getRules();
-        this.rarity = pc.getRarity();
+        rules = pc.getRules();
+        rarity = pc.getRarity();
+    }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        String imageKey = ImageKeys.CARD_PREFIX + name + CardDb.NameSetSeparator + edition + CardDb.NameSetSeparator + artIndex;
+        if (altState) {
+            imageKey += ImageKeys.BACKFACE_POSTFIX;
+        }
+        return imageKey;
     }
 }

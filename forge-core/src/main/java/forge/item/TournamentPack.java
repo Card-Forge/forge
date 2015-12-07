@@ -18,6 +18,8 @@
 package forge.item;
 
 import com.google.common.base.Function;
+
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
@@ -56,5 +58,10 @@ public class TournamentPack extends SealedProduct {
     @Override
     public final Object clone() {
         return new TournamentPack(name, contents);
+    }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return ImageKeys.TOURNAMENTPACK_PREFIX + getEdition();
     }
 }

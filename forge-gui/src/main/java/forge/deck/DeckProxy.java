@@ -615,4 +615,9 @@ public class DeckProxy implements InventoryItem {
             return cs != null && BinaryUtil.bitCount(cs.getColor()) > 1;
         }
     };
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return null;
+    }
 }

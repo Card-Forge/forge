@@ -23,12 +23,7 @@ import forge.util.IHasName;
  * Interface to define a player's inventory may hold. Should include
  * CardPrinted, Booster, Pets, Plants... etc
  */
-public interface InventoryItem extends IHasName
-{
-    /**
-     * Return type as a string.
-     * 
-     * @return the type
-     */
+public interface InventoryItem extends IHasName {
     String getItemType();
+    String getImageKey(boolean altState);
 }

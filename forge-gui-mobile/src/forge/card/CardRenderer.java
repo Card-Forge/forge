@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Graphics;
-import forge.ImageKeys;
 import forge.assets.FImageComplex;
 import forge.assets.FRotatedImage;
 import forge.assets.FSkinColor;
@@ -83,7 +82,7 @@ public class CardRenderer {
     //extract card art from the given card
     public static FImageComplex getCardArt(IPaperCard pc) {
         CardType type = pc.getRules().getType();
-        return getCardArt(ImageKeys.getImageKey(pc, false), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon());
+        return getCardArt(pc.getImageKey(false), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon());
     }
     public static FImageComplex getCardArt(CardView card) {
         CardTypeView type = card.getCurrentState().getType();

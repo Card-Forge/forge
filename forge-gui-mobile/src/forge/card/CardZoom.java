@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Rectangle;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.ImageKeys;
 import forge.assets.FSkinImage;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -132,7 +131,7 @@ public class CardZoom extends FOverlay {
         }
         if (item instanceof InventoryItem) {
             InventoryItem ii = (InventoryItem)item;
-            return new CardView(-1, null, ii.getName(), null, ImageKeys.getImageKey(ii, false));
+            return new CardView(-1, null, ii.getName(), null, ii.getImageKey(false));
         }
         return new CardView(-1, null, item.toString());
     }

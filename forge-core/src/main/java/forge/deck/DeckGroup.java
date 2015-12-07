@@ -156,4 +156,9 @@ public class DeckGroup extends DeckBase {
     public boolean isEmpty() {
         return humanDeck == null || humanDeck.isEmpty();
     }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return null;
+    }
 }

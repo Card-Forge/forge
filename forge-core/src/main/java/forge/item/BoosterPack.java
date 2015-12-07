@@ -20,10 +20,13 @@ package forge.item;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
+
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.BoosterSlots;
 import forge.card.CardEdition;
 import forge.util.MyRandom;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 public class BoosterPack extends SealedProduct {
@@ -105,5 +108,16 @@ public class BoosterPack extends SealedProduct {
     @Override
     public final int hashCode() {
         return hash;
+    }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        String edition = getEdition();
+        if (SealedProduct.specialSets.contains(edition) || edition.equals("?")) {
+            return "b:" + getName().substring(0, getName().indexOf(getItemType()) - 1);
+        }
+        int cntPics = StaticData.instance().getEditions().get(edition).getCntBoosterPictures();
+        String suffix = (1 >= cntPics) ? "" : ("_" + artIndex);
+        return ImageKeys.BOOSTER_PREFIX + edition + suffix;
     }
 }

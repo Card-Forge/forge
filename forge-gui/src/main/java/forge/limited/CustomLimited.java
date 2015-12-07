@@ -179,4 +179,9 @@ public class CustomLimited extends DeckBase {
     public boolean isEmpty() {
         return cardPool.isEmpty();
     }
+
+    @Override
+    public String getImageKey(boolean altState) {
+        return null;
+    }
 }
