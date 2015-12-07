@@ -91,8 +91,8 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     protected ItemPool(final Map<T, Integer> inMap, final Class<T> cls) {
-        this.items = inMap;
-        this.myClass = cls;
+        items = inMap;
+        myClass = cls;
     }
 
     // Data members
@@ -105,21 +105,21 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
 
     @Override
     public final Iterator<Entry<T, Integer>> iterator() {
-        return this.items.entrySet().iterator();
+        return items.entrySet().iterator();
     }
 
     public final boolean contains(final T item) {
-        if (this.items == null) {
+        if (items == null) {
             return false;
         }
-        return this.items.containsKey(item);
+        return items.containsKey(item);
     }
 
     public final int count(final T item) {
-        if (this.items == null || item == null) {
+        if (items == null || item == null) {
             return 0;
         }
-        final Integer boxed = this.items.get(item);
+        final Integer boxed = items.get(item);
         return boxed == null ? 0 : boxed.intValue();
     }
 
@@ -133,7 +133,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     
     public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
         int result = 0;
-        if (this.items != null) {
+        if (items != null) {
             final boolean isSameClass = cls == myClass;
             for (final Entry<T, Integer> kv : this) {
                 final T key = kv.getKey();
@@ -147,11 +147,11 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public final int countDistinct() {
-        return this.items.size();
+        return items.size();
     }
 
     public final boolean isEmpty() {
-        return (this.items == null) || this.items.isEmpty();
+        return (items == null) || items.isEmpty();
     }
 
     public final List<T> toFlatList() {
@@ -173,35 +173,47 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public Class<T> getMyClass() {
-        return this.myClass;
+        return myClass;
     }
 
     public ItemPool<T> getView() {
-        return new ItemPool<T>(Collections.unmodifiableMap(this.items), this.getMyClass());
+        return new ItemPool<T>(Collections.unmodifiableMap(items), getMyClass());
     }
 
     public void add(final T item) {
-        this.add(item, 1);
+        add(item, 1);
     }
 
     public void add(final T item, final int amount) {
         if (item == null || amount <= 0) {
             return;
         }
-        this.items.put(item, Integer.valueOf(this.count(item) + amount));
+        items.put(item, Integer.valueOf(count(item) + amount));
+    }
+
+    public void addAllFlat(final Iterable<T> items) {
+        for (T item : items) {
+            add(item);
+        }
+    }
+
+    public void addAll(final Iterable<Entry<T, Integer>> map) {
+        for (Entry<T, Integer> e : map) {
+            add(e.getKey(), e.getValue());
+        }
     }
 
     @SuppressWarnings("unchecked")
-    public <U extends InventoryItem> void addAllFlat(final Iterable<U> items) {
-        for (final U cr : items) {
-            if (this.getMyClass().isInstance(cr)) {
-                this.add((T) cr);
+    public <U extends InventoryItem> void addAllOfTypeFlat(final Iterable<U> items) {
+        for (U item : items) {
+            if (myClass.isInstance(item)) {
+                add((T) item);
             }
         }
     }
 
     @SuppressWarnings("unchecked")
-    public <U extends InventoryItem> void addAll(final Iterable<Entry<U, Integer>> map) {
+    public <U extends InventoryItem> void addAllOfType(final Iterable<Entry<U, Integer>> map) {
         Class<T> myClass = this.getMyClass();
         for (final Entry<U, Integer> e : map) {
             if (myClass.isInstance(e.getKey())) {
@@ -211,41 +223,41 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public boolean remove(final T item) {
-        return this.remove(item, 1);
+        return remove(item, 1);
     }
 
     public boolean remove(final T item, final int amount) {
-        final int count = this.count(item);
+        final int count = count(item);
         if ((count == 0) || (amount <= 0)) {
             return false;
         }
         if (count <= amount) {
-            this.items.remove(item);
+            items.remove(item);
         } else {
-            this.items.put(item, count - amount);
+            items.put(item, count - amount);
         }
         return true;
     }
 
     public boolean removeAll(final T item) {
-        return this.items.remove(item) != null;
+        return items.remove(item) != null;
     }
 
     public void removeAll(final Iterable<Entry<T, Integer>> map) {
         for (final Entry<T, Integer> e : map) {
-            this.remove(e.getKey(), e.getValue());
+            remove(e.getKey(), e.getValue());
         }
         // need not set out-of-sync: either remove did set, or nothing was removed
     }
 
     public void removeAllFlat(final Iterable<T> flat) {
         for (final T e : flat) {
-            this.remove(e);
+            remove(e);
         }
         // need not set out-of-sync: either remove did set, or nothing was removed
     }
 
     public void clear() {
-        this.items.clear();
+        items.clear();
     }
 }

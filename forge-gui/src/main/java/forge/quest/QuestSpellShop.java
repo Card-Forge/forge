@@ -207,7 +207,7 @@ public class QuestSpellShop {
                     assert booster != null;
                     final List<PaperCard> newCards = booster.getCards();
 
-                    itemsToAdd.addAllFlat(newCards);
+                    itemsToAdd.addAllOfTypeFlat(newCards);
 
                     if (booster instanceof BoxedProduct && FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV)) {
 
@@ -242,7 +242,7 @@ public class QuestSpellShop {
                 for (int i = 0; i < qty; i++) {
                     FModel.getQuest().getCards().buyPreconDeck(deck, value);
 
-                    itemsToAdd.addAll(deck.getDeck().getMain());
+                    itemsToAdd.addAllOfType(deck.getDeck().getMain());
                 }
 
                 boolean one = (qty == 1);

@@ -239,7 +239,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
             itemManager.setup(ItemManagerConfig.QUEST_INVENTORY, colOverrides);
 
             final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
-            ownedItems.addAll(FModel.getQuest().getCards().getCardpool().getView());
+            ownedItems.addAllOfType(FModel.getQuest().getCards().getCardpool().getView());
             itemManager.setPool(ownedItems);
         }
 

@@ -560,7 +560,7 @@ public final class QuestUtilCards {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
-        this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack.FN_FROM_SET), count));
+        this.qa.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack.FN_FROM_SET), count));
     }
 
     /**
@@ -575,7 +575,7 @@ public final class QuestUtilCards {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
-        this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
+        this.qa.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
     }
 
     private void generateBoosterBoxesInShop(final int count) {
@@ -610,7 +610,7 @@ public final class QuestUtilCards {
             output.add(BoosterBox.FN_FROM_SET.apply(e));
         }
 
-        this.qa.getShopList().addAllFlat(output);
+        this.qa.getShopList().addAllOfTypeFlat(output);
 
     }
 
@@ -628,7 +628,7 @@ public final class QuestUtilCards {
                 meetRequirements.add(deck);
             }
         }
-        this.qa.getShopList().addAllFlat(Aggregates.random(meetRequirements, count));
+        this.qa.getShopList().addAllOfTypeFlat(Aggregates.random(meetRequirements, count));
     }
 
     @SuppressWarnings("unchecked")
@@ -698,7 +698,7 @@ public final class QuestUtilCards {
         UnOpenedProduct unopened = qc.getFormat() == null ?  new UnOpenedProduct(tpl) : new UnOpenedProduct(tpl, qc.getFormat().getFilterPrinted());
 
         for (int i = 0; i < totalPacks; i++) {
-            this.qa.getShopList().addAllFlat(unopened.get());
+            this.qa.getShopList().addAllOfTypeFlat(unopened.get());
         }
 
         this.generateBoostersInShop(totalPacks);
@@ -711,7 +711,7 @@ public final class QuestUtilCards {
             numberSnowLands = 0;
         }
         // Spell shop no longer sells basic lands (we use "Add Basic Lands" instead)
-        this.qa.getShopList().addAll(QuestUtilCards.generateBasicLands(/*10*/0, numberSnowLands, qc.getFormat()));
+        this.qa.getShopList().addAllOfType(QuestUtilCards.generateBasicLands(/*10*/0, numberSnowLands, qc.getFormat()));
     }
 
     /**

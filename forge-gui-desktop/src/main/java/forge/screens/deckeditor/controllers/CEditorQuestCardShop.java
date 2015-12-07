@@ -250,7 +250,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.cardsForSale = this.questData.getCards().getShopList();
 
         final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
-        ownedItems.addAll(this.questData.getCards().getCardpool().getView());
+        ownedItems.addAllOfType(this.questData.getCards().getCardpool().getView());
 
         this.getCatalogManager().setPool(cardsForSale);
         this.getDeckManager().setPool(ownedItems);

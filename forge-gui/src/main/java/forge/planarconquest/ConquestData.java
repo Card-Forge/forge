@@ -130,7 +130,7 @@ public final class ConquestData {
         if (collection == null) {
             collection = new ConquestCollection();
         }
-        manager.setPool(collection, true);
+        manager.setPool(collection);
     }
 
     public Iterable<PaperCard> getUnlockedCards() {
