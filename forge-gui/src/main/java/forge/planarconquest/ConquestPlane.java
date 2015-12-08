@@ -24,7 +24,7 @@ import forge.assets.ISkinImage;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
-import forge.card.CardType;
+import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.generation.DeckGenPool;
@@ -226,14 +226,14 @@ public enum ConquestPlane {
                     if (!bannedCards.contains(card.name)) {
                         PaperCard pc = FModel.getMagicDb().getCommonCards().getCard(card.name, setCode);
                         if (pc != null) {
-                            CardType type = pc.getRules().getType();
-                            boolean isCommander = type.isLegendary() && type.isCreature();
+                            CardRules rules = pc.getRules();
+                            boolean isCommander = pc.getRules().canBeCommander();
                             cardPool.add(pc);
                             if (isCommander) {
                                 commanders.add(pc);
                             }
                             int count = 0;
-                            if (!type.isBasicLand()) { //add all basic lands to all regions below
+                            if (!rules.getType().isBasicLand()) { //add all basic lands to all regions below
                                 for (Region region : regions) {
                                     if (region.pred.apply(pc)) {
                                         region.cardPool.add(pc);

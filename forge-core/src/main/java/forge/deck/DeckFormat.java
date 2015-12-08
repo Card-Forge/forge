@@ -328,10 +328,7 @@ public enum DeckFormat {
         if (cardPoolFilter != null && !cardPoolFilter.apply(rules)) {
             return false;
         }
-        if (rules.getType().isLegendary() && rules.getType().isCreature()) {
-            return true;
-        }
-        return rules.getOracleText().contains("can be your commander");
+        return rules.canBeCommander();
     }
 
     public Predicate<Deck> isLegalDeckPredicate() {

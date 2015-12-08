@@ -187,6 +187,14 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
+    public boolean canBeCommander() {
+        CardType type = mainPart.getType();
+        if (type.isLegendary() && type.isCreature()) {
+            return true;
+        }
+        return mainPart.getOracleText().contains("can be your commander");
+    }
+
 //    public Set<String> getSets() { return this.setsPrinted.keySet(); }
 //    public CardInSet getEditionInfo(final String setCode) {
 //        final CardInSet result = this.setsPrinted.get(setCode);
