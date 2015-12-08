@@ -52,10 +52,6 @@ public class ConquestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Commons", CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Uncommons", CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Rares", CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Common Reroll Duplicate (%)", CQPref.BOOSTER_COMMON_REROLL, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Uncommon Reroll Duplicate (%)", CQPref.BOOSTER_UNCOMMON_REROLL, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Rare Reroll Duplicate (%)", CQPref.BOOSTER_RARE_REROLL, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Mythic Reroll Duplicate (%)", CQPref.BOOSTER_MYTHIC_REROLL, PrefsGroup.BOOSTER));
     }
 
     @Override

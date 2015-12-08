@@ -20,17 +20,12 @@ package forge.planarconquest;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
 
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
-import forge.card.CardRarity;
-import forge.card.CardRules;
+import forge.assets.FSkinProp;
 import forge.card.CardType;
 import forge.deck.Deck;
 import forge.game.GameRules;
@@ -48,9 +43,6 @@ import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.BoosterUtils;
 import forge.util.Aggregates;
-import forge.util.Lang;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 public class ConquestController {
@@ -218,20 +210,6 @@ public class ConquestController {
         }
     }
 
-    /*private boolean recruit(ConquestCommander commander) {
-        boolean bonusCard = Aggregates.randomInt(1, 100) <= FModel.getConquestPreferences().getPrefInt(CQPref.RECRUIT_BONUS_CARD_ODDS);
-        return awardNewCards(model.getCurrentPlane().getCardPool().getAllCards(),
-                commander.getName() + " recruited", "new creature", null, null,
-                CardRulesPredicates.Presets.IS_CREATURE, bonusCard ? 2 : 1);
-    }
-
-    private boolean study(ConquestCommander commander) {
-        boolean bonusCard = Aggregates.randomInt(1, 100) <= FModel.getConquestPreferences().getPrefInt(CQPref.STUDY_BONUS_CARD_ODDS);
-        return awardNewCards(model.getCurrentPlane().getCardPool().getAllCards(),
-                commander.getName() + " unlocked", "new spell", null, null,
-                CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, bonusCard ? 2 : 1);
-    }*/
-
     public void showGameRewards(final GameView game, final IWinLoseView<? extends IButton> view) {
         if (game.isMatchWonBy(humanPlayer)) {
             view.getBtnQuit().setText("Great!");
@@ -240,19 +218,7 @@ public class ConquestController {
             view.showRewards(new Runnable() {
                 @Override
                 public void run() {
-                    final List<String> options = ImmutableList.of("Booster", "Card");
-                    if (SOptionPane.showOptionDialog("Choose one \u2014\n\n" +
-                            "\u2022 Open a random booster pack\n" +
-                            "\u2022 Choose a card from your opponent's deck",
-                            "Spoils of Victory", null, options) == 0) {
-                        awardBooster(view);
-                    }
-                    else {
-                        if (!awardOpponentsCard(view)) {
-                            SOptionPane.showMessageDialog("Opponent had no new cards, so you can open a random booster pack instead.");
-                            awardBooster(view);
-                        }
-                    }
+                    awardBooster(view);
                 }
             });
         }
@@ -275,193 +241,15 @@ public class ConquestController {
         gameRunner.finish();
     }
 
-    private boolean awardNewCards(Iterable<PaperCard> cardPool, String messagePrefix, String messageSuffix, CardRarity rarity, final IWinLoseView<? extends IButton> view, Predicate<CardRules> pred, int count) {
-        List<PaperCard> commons = new ArrayList<PaperCard>();
-        List<PaperCard> uncommons = new ArrayList<PaperCard>();
-        List<PaperCard> rares = new ArrayList<PaperCard>();
-        List<PaperCard> mythics = new ArrayList<PaperCard>();
-        int newCardCount = 0;
-        for (PaperCard c : cardPool) {
-            if ((pred == null || pred.apply(c.getRules())) && !model.hasUnlockedCard(c)) {
-                switch (c.getRarity()) {
-                case Common:
-                    commons.add(c);
-                    break;
-                case Uncommon:
-                    uncommons.add(c);
-                    break;
-                case Rare:
-                    rares.add(c);
-                    break;
-                case MythicRare:
-                    mythics.add(c);
-                    break;
-                default:
-                    break;
-                }
-            }
-        }
-
-        newCardCount = commons.size() + uncommons.size() + rares.size() + mythics.size();
-        if (newCardCount == 0) {
-            return false;
-        }
-
-        List<PaperCard> rewardPool = null;
-        if (rarity != null) {
-            switch (rarity) {
-            case Common:
-                rewardPool = commons;
-                if (rewardPool.isEmpty()) {
-                    rewardPool = uncommons;
-                    messageSuffix = messageSuffix.replace("common", "uncommon");
-                    if (rewardPool.isEmpty()) {
-                        rewardPool = rares;
-                        messageSuffix = messageSuffix.replace("uncommon", "rare");
-                        if (rewardPool.isEmpty()) {
-                            rewardPool = mythics;
-                            messageSuffix = messageSuffix.replace("rare", "mythic rare");
-                        }
-                    }
-                }
-                break;
-            case Uncommon:
-                rewardPool = uncommons;
-                if (rewardPool.isEmpty()) {
-                    rewardPool = commons;
-                    messageSuffix = messageSuffix.replace("uncommon", "common");
-                    if (rewardPool.isEmpty()) {
-                        rewardPool = rares;
-                        messageSuffix = messageSuffix.replace("common", "rare");
-                        if (rewardPool.isEmpty()) {
-                            rewardPool = mythics;
-                            messageSuffix = messageSuffix.replace("rare", "mythic rare");
-                        }
-                    }
-                }
-                break;
-            case Rare:
-                rewardPool = rares;
-                if (rewardPool.isEmpty()) {
-                    rewardPool = uncommons;
-                    messageSuffix = messageSuffix.replace("rare", "uncommon");
-                    if (rewardPool.isEmpty()) {
-                        rewardPool = commons;
-                        messageSuffix = messageSuffix.replace("uncommon", "common");
-                        if (rewardPool.isEmpty()) {
-                            rewardPool = mythics;
-                            messageSuffix = messageSuffix.replace("common", "mythic rare");
-                        }
-                    }
-                }
-                break;
-            case MythicRare:
-                rewardPool = mythics;
-                if (rewardPool.isEmpty()) {
-                    rewardPool = rares;
-                    messageSuffix = messageSuffix.replace("mythic rare", "rare");
-                    if (rewardPool.isEmpty()) {
-                        rewardPool = uncommons;
-                        messageSuffix = messageSuffix.replace("rare", "uncommon");
-                        if (rewardPool.isEmpty()) {
-                            rewardPool = commons;
-                            messageSuffix = messageSuffix.replace("uncommon", "common");
-                        }
-                    }
-                }
-                break;
-            default:
-                return false;
-            }
-            newCardCount = rewardPool.size();
-        }
-        List<PaperCard> rewards = new ArrayList<PaperCard>();
-        for (int i = 0; i < count; i++) {
-            //determine which rarity card to get based on pack ratios if no rarity passed in
-            if (rarity == null) {
-                int value = Aggregates.randomInt(1, 15);
-                if (value <= 8) { //reward common about 50% of the time
-                    rewardPool = commons;
-                    if (rewardPool.isEmpty()) {
-                        rewardPool = uncommons;
-                        if (rewardPool.isEmpty()) {
-                            rewardPool = rares;
-                            if (rewardPool.isEmpty()) {
-                                rewardPool = mythics;
-                            }
-                        }
-                    }
-                }
-                else if (value <= 12) { //reward uncommon about 25% of the time
-                    rewardPool = uncommons;
-                    if (rewardPool.isEmpty()) {
-                        rewardPool = commons;
-                        if (rewardPool.isEmpty()) {
-                            rewardPool = rares;
-                            if (rewardPool.isEmpty()) {
-                                rewardPool = mythics;
-                            }
-                        }
-                    }
-                }
-                else if (value <= 14) { //reward rare about 12.5% of the time
-                    rewardPool = rares;
-                    if (rewardPool.isEmpty()) {
-                        rewardPool = uncommons;
-                        if (rewardPool.isEmpty()) {
-                            rewardPool = commons;
-                            if (rewardPool.isEmpty()) {
-                                rewardPool = mythics;
-                            }
-                        }
-                    }
-                }
-                else { //reward mythic about 6.75% of the time
-                    rewardPool = mythics;
-                    if (rewardPool.isEmpty()) {
-                        rewardPool = rares;
-                        if (rewardPool.isEmpty()) {
-                            rewardPool = uncommons;
-                            if (rewardPool.isEmpty()) {
-                                rewardPool = commons;
-                            }
-                        }
-                    }
-                }
-            }
-
-            int index = Aggregates.randomInt(0, rewardPool.size() - 1);
-            rewards.add(rewardPool.remove(index));
-
-            if (--newCardCount == 0) {
-                break; //break out if no new cards remain
-            }
-        }
-
-        model.unlockCards(rewards);
-
-        String message = messagePrefix;
-        if (messageSuffix != null) {
-            message += " " + Lang.nounWithAmount(rewards.size(), messageSuffix);
-        }
-        if (view == null) {
-            SGuiChoose.reveal(message, rewards);
-        }
-        else {
-            view.showCards(message, rewards);
-        }
-        return true;
-    }
-
     private void awardBooster(final IWinLoseView<? extends IButton> view) {
         Iterable<PaperCard> cardPool = model.getCurrentPlane().getCardPool().getAllCards();
 
         ConquestPreferences prefs = FModel.getConquestPreferences();
 
-        BoosterPool commons = new BoosterPool(prefs.getPrefInt(CQPref.BOOSTER_COMMON_REROLL));
-        BoosterPool uncommons = new BoosterPool(prefs.getPrefInt(CQPref.BOOSTER_UNCOMMON_REROLL));
-        BoosterPool rares = new BoosterPool(prefs.getPrefInt(CQPref.BOOSTER_RARE_REROLL));
-        BoosterPool mythics = new BoosterPool(prefs.getPrefInt(CQPref.BOOSTER_MYTHIC_REROLL));
+        BoosterPool commons = new BoosterPool();
+        BoosterPool uncommons = new BoosterPool();
+        BoosterPool rares = new BoosterPool();
+        BoosterPool mythics = new BoosterPool();
 
         for (PaperCard c : cardPool) {
             switch (c.getRarity()) {
@@ -472,6 +260,7 @@ public class ConquestController {
                 uncommons.add(c);
                 break;
             case Rare:
+            case Special: //lump special cards in with rares for simplicity
                 rares.add(c);
                 break;
             case MythicRare:
@@ -484,8 +273,8 @@ public class ConquestController {
 
         List<PaperCard> rewards = new ArrayList<PaperCard>();
         int boostersPerMythic = prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
-        int count = prefs.getPrefInt(CQPref.BOOSTER_RARES);
-        for (int i = 0; i < count; i++) {
+        int raresPerBooster = prefs.getPrefInt(CQPref.BOOSTER_RARES);
+        for (int i = 0; i < raresPerBooster; i++) {
             if (mythics.isEmpty() || Aggregates.randomInt(1, boostersPerMythic) > 1) {
                 rares.rewardCard(rewards);
             }
@@ -494,86 +283,97 @@ public class ConquestController {
             }
         }
 
-        count = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
-        for (int i = 0; i < count; i++) {
+        int uncommonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
+        for (int i = 0; i < uncommonsPerBooster; i++) {
             uncommons.rewardCard(rewards);
         }
 
-        count = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
-        for (int i = 0; i < count; i++) {
+        int commonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
+        for (int i = 0; i < commonsPerBooster; i++) {
             commons.rewardCard(rewards);
         }
 
-        count = rewards.size();
-        if (count == 0) {
-            //if no new cards in booster, pretend it contained a random card
-            awardNewCards(cardPool, "Booster contained ", "new card", null, view, null, 1);
-            return;
-        }
+        //calculate odds of each rarity
+        float commonOdds = commons.getOdds(commonsPerBooster);
+        float uncommonOdds = uncommons.getOdds(uncommonsPerBooster);
+        float rareOdds = rares.getOdds(raresPerBooster);
+        float mythicOdds = mythics.getOdds(raresPerBooster / boostersPerMythic);
 
-        BoosterUtils.sort(rewards);
-        model.unlockCards(rewards);
-        view.showCards("Booster contained " + count + " new card" + (count != 1 ? "s" : ""), rewards);
-    }
+        //determine value of each rarity based on the base value of a common
+        int commonValue = prefs.getPrefInt(CQPref.CARD_BASE_VALUE);
+        int uncommonValue = Math.round(commonValue / (uncommonOdds / commonOdds));
+        int rareValue = Math.round(commonValue / (rareOdds / commonOdds));
+        int mythicValue = mythics.isEmpty() ? 0 : Math.round(commonValue / (mythicOdds / commonOdds));
 
-    private boolean awardOpponentsCard(IWinLoseView<? extends IButton> view) {
-        List<PaperCard> cards = new ArrayList<PaperCard>();
-        for (Entry<PaperCard, Integer> entry : gameRunner.event.getOpponentDeck().getMain()) {
-            PaperCard c = entry.getKey();
-            if (!c.getRules().getType().isBasicLand() && !getModel().hasUnlockedCard(c)) {
-                cards.add(c);
+        //remove any already unlocked cards from booster, calculating credit to reward instead
+        int credits = 0;
+        int count = rewards.size();
+        for (int i = 0; i < count; i++) {
+            PaperCard card = rewards.get(i);
+            if (model.hasUnlockedCard(card)) {
+                rewards.remove(i);
+                i--;
+                count--;
+                switch (card.getRarity()) {
+                case Common:
+                    credits += commonValue;
+                    break;
+                case Uncommon:
+                    credits += uncommonValue;
+                    break;
+                case Rare:
+                case Special:
+                    credits += rareValue;
+                    break;
+                case MythicRare:
+                    credits += mythicValue;
+                    break;
+                default:
+                    break;
+                }
             }
         }
 
-        if (cards.isEmpty()) { return false; }
-
-        BoosterUtils.sort(cards);
-        PaperCard card = SGuiChoose.one("Choose a card from your opponent's deck", cards);
-        model.unlockCard(card);
-        return true;
+        if (count > 0) {
+            BoosterUtils.sort(rewards);
+            view.showCards("Booster contained " + count + " new card" + (count != 1 ? "s" : ""), rewards);
+            if (credits > 0) {
+                view.showMessage("Remaining cards exchanged for " + credits + " credits.", "Received Credits", FSkinProp.ICO_QUEST_COIN);
+                model.rewardCredits(credits);
+            }
+            model.unlockCards(rewards);
+        }
+        else {
+            view.showMessage("Booster contained no cards, so it has been exchanged for " + credits + " credits.", "Received Credits", FSkinProp.ICO_QUEST_COIN);
+            model.rewardCredits(credits);
+        }
     }
 
     private class BoosterPool {
-        private final int rerollChance;
-        private int newCount = 0;
         private final List<PaperCard> cards = new ArrayList<PaperCard>();
 
-        private BoosterPool(int rerollChance0) {
-            rerollChance = rerollChance0;
+        private BoosterPool() {
         }
 
         private boolean isEmpty() {
             return cards.isEmpty();
         }
 
+        public float getOdds(float perBoosterCount) {
+            int count = cards.size();
+            if (count == 0) { return 0; }
+            return (float)perBoosterCount / (float)count;
+        }
+
         private void add(PaperCard c) {
-            if (!model.hasUnlockedCard(c)) {
-                newCount++;
-            }
             cards.add(c);
         }
 
         private void rewardCard(List<PaperCard> rewards) {
-            if (newCount == 0) {
-                return;
-            }
-
-            PaperCard c;
-            while (true) {
-                int index = Aggregates.randomInt(0, cards.size() - 1);
-                c = cards.get(index);
-
-                if (!model.hasUnlockedCard(c)) {
-                    newCount--;
-                    cards.remove(c);
-                    rewards.add(c);
-                    return; //return if new
-                }
-
-                if (Aggregates.randomInt(1, 100) > rerollChance) {
-                    return; //return if reroll chance fails
-                }
-            }
+            int index = Aggregates.randomInt(0, cards.size() - 1);
+            PaperCard c = cards.get(index);
+            cards.remove(index);
+            rewards.add(c);
         }
     }
 }

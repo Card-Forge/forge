@@ -33,10 +33,8 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         BOOSTER_UNCOMMONS("3"),
         BOOSTER_RARES("1"),
         BOOSTERS_PER_MYTHIC("8"),
-        BOOSTER_COMMON_REROLL("10"),
-        BOOSTER_UNCOMMON_REROLL("25"),
-        BOOSTER_RARE_REROLL("50"),
-        BOOSTER_MYTHIC_REROLL("100");
+
+        CARD_BASE_VALUE("100");
 
         private final String strDefaultVal;
 
@@ -47,9 +45,6 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         public String getDefault() {
             return this.strDefaultVal;
         }
-    }
-
-    public static enum DifficultyPrefs {
     }
 
     public ConquestPreferences() {
@@ -73,59 +68,6 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         return key.getDefault();
     }
 
-    public String getPref(DifficultyPrefs pref, int difficultyIndex) {
-        String newCQPref = pref.toString();
-
-        switch (difficultyIndex) {
-        case 0:
-            newCQPref += "_EASY";
-            break;
-        case 1:
-            newCQPref += "_MEDIUM";
-            break;
-        case 2:
-            newCQPref += "_HARD";
-            break;
-        case 3:
-            newCQPref += "_EXPERT";
-            break;
-        default:
-            try {
-                throw new Exception();
-            } catch (final Exception e1) {
-                System.err.println("Difficulty index out of bounds: " + difficultyIndex);
-                e1.printStackTrace();
-            }
-        }
-
-        return getPref(CQPref.valueOf(newCQPref));
-    }
-
-    public int getPrefInt(DifficultyPrefs pref, int difficultyIndex) {
-        return Integer.parseInt(this.getPref(pref, difficultyIndex));
-    }
-
-    public static String getDifficulty(int difficultyIndex) {
-        String s;
-        switch (difficultyIndex) {
-        case 1:
-            s = "EASY";
-            break;
-        case 2:
-            s = "MEDIUM";
-            break;
-        case 3:
-            s = "HARD";
-            break;
-        case 4:
-            s = "EXPERT";
-            break;
-        default:
-            s = "UNKNOWN";
-        }
-        return s;
-    }
-
     public String validatePreference(CQPref qpref, int val) {
         switch (qpref) {
         case BOOSTER_COMMONS:
@@ -146,14 +88,6 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         case BOOSTERS_PER_MYTHIC:
             if (val + getPrefInt(CQPref.BOOSTER_COMMONS) + getPrefInt(CQPref.BOOSTER_UNCOMMONS) > 15) {
                 return "Booster packs must have maximum 15 cards.";
-            }
-            break;
-        case BOOSTER_COMMON_REROLL:
-        case BOOSTER_UNCOMMON_REROLL:
-        case BOOSTER_RARE_REROLL:
-        case BOOSTER_MYTHIC_REROLL:
-            if (val > 100) {
-                return "Booster reroll chance must be between 0% and 100%.";
             }
             break;
         default:

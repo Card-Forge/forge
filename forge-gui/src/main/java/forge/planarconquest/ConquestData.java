@@ -179,6 +179,16 @@ public final class ConquestData {
     public int getCredits() {
         return credits;
     }
+    public void rewardCredits(int credits0) {
+        credits += credits0;
+    }
+    public boolean deductCredits(int credits0) {
+        if (credits >= credits0) {
+            credits -= credits0;
+            return true;
+        }
+        return false;
+    }
 
     public String getProgress() {
         int conquered = 0;
