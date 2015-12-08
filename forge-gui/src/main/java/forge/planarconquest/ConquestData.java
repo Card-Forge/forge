@@ -57,6 +57,7 @@ public final class ConquestData {
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
     private ConquestLocation currentLocation;
+    private int credits;
 
     private transient ConquestCollection collection; //don't serialize this
 
@@ -173,6 +174,10 @@ public final class ConquestData {
 
     public void addLoss(ConquestEvent event) {
         getOrCreatePlaneData(event.getLocation().getPlane()).addLoss(event);
+    }
+
+    public int getCredits() {
+        return credits;
     }
 
     public String getProgress() {
