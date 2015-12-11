@@ -959,10 +959,11 @@ public class ComputerUtilMana {
      * @return ManaCost
      */
     static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
+    	Card card = sa.getHostCard();
         ZoneType castFromBackup = null;
         if (test && sa.isSpell()) {
-            castFromBackup = sa.getHostCard().getCastFrom();
-            sa.getHostCard().setCastFrom(sa.getHostCard().getZone().getZoneType());
+            castFromBackup = card.getCastFrom();
+            sa.getHostCard().setCastFrom(card.getZone().getZoneType());
         }
 
         Cost payCosts = sa.getPayCosts();
@@ -976,9 +977,8 @@ public class ComputerUtilMana {
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
         ManaCostAdjustment.adjust(cost, sa, null, test);
 
-        final Card card = sa.getHostCard();
         // Tack xMana Payments into mana here if X is a set value
-        if ((sa.getPayCosts() != null) && (cost.getXcounter() > 0 || extraMana > 0)) {
+        if (sa.getPayCosts() != null && (cost.getXcounter() > 0 || extraMana > 0)) {
             int manaToAdd = 0;
             if (test && extraMana > 0) {
                 final int multiplicator = Math.max(cost.getXcounter(), 1);
@@ -1002,6 +1002,14 @@ public class ComputerUtilMana {
 
             if (!test) {
                 card.setXManaCostPaid(manaToAdd / cost.getXcounter());
+            }
+        }
+        
+        int timesMultikicked = card.getKickerMagnitude();
+        if (timesMultikicked > 0 && sa.hasParam("Announce") && sa.getParam("Announce").startsWith("Multikicker")) {
+            ManaCost mkCost = sa.getMultiKickerManaCost();
+            for (int i = 0; i < timesMultikicked; i++) {
+            	cost.addManaCost(mkCost);
             }
         }
 

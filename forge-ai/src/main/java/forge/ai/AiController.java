@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 
+
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -710,6 +711,21 @@ public class AiController {
                 }
                 if (targets.isEmpty()) {
                     return AiPlayDecision.AnotherTime;
+                }
+            }
+            
+            if (sa.hasParam("Announce") && sa.getParam("Announce").startsWith("Multikicker")) {
+            	//String announce = sa.getParam("Announce");
+                ManaCost mkCost = sa.getMultiKickerManaCost();
+                ManaCost mCost = sa.getPayCosts().getTotalMana();
+                for (int i = 0; i < 10; i++) {
+                	mCost = ManaCost.combine(mCost, mkCost);
+                	ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
+                	if (!ComputerUtilMana.canPayManaCost(mcbp, sa, player)) {
+                		card.setKickerMagnitude(i);
+                		break;
+                	}
+                	card.setKickerMagnitude(i+1);
                 }
             }
             
