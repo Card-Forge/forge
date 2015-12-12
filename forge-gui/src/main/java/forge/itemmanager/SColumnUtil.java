@@ -171,6 +171,13 @@ public final class SColumnUtil {
         return columns;
     }
 
+    public static Map<ColumnDef, ItemColumnConfig> getConquestAEtherDefaultColumns() {
+        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(null, false, false, false, false, false);
+        columns.get(ColumnDef.NAME).setSortPriority(1);
+        columns.get(ColumnDef.COLOR).setSortPriority(2);
+        return columns;
+    }
+
     public static Map<ColumnDef, ItemColumnConfig> getConquestCollectionDefaultColumns() {
         Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(null, false, false, false, true, true);
         columns.get(ColumnDef.NEW).setSortPriority(1);

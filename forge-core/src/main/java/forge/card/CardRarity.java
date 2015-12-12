@@ -28,6 +28,10 @@ public enum CardRarity {
     Special("S", "Special"), // Timeshifted
     Unknown("?", "Unknown"); // In development
 
+    public static final CardRarity[] FILTER_OPTIONS = new CardRarity[] {
+        Common, Uncommon, Rare, MythicRare, Special
+    };
+
     private final String shortName, longName;
 
     private CardRarity(final String shortName0, final String longName0) {
@@ -39,7 +43,7 @@ public enum CardRarity {
     public String toString() {
         return shortName;
     }
-    
+
     public static CardRarity smartValueOf(String input) {
         for (CardRarity r : CardRarity.values()) {
             if (r.name().equalsIgnoreCase(input) || r.shortName.equalsIgnoreCase(input) || r.longName.equalsIgnoreCase(input)) {

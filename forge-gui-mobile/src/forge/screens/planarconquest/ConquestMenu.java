@@ -22,15 +22,22 @@ import forge.toolbox.FEvent.FEventHandler;
 
 public class ConquestMenu extends FPopupMenu {
     private static final ConquestMenu conquestMenu = new ConquestMenu();
-    private static final ConquestMapScreen mapScreen = new ConquestMapScreen();
+    private static final ConquestMultiverseScreen multiverseScreen = new ConquestMultiverseScreen();
+    private static final ConquestAEtherScreen aetherScreen = new ConquestAEtherScreen();
     private static final ConquestCommandersScreen commandersScreen = new ConquestCommandersScreen();
     private static final ConquestCollectionScreen collectionScreen = new ConquestCollectionScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
 
-    private static final FMenuItem mapItem = new FMenuItem("Planar Map", FSkinImage.QUEST_MAP, new FEventHandler() {
+    private static final FMenuItem multiverseItem = new FMenuItem("The Multiverse", FSkinImage.QUEST_MAP, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(mapScreen);
+            Forge.openScreen(multiverseScreen);
+        }
+    });
+    private static final FMenuItem aetherItem = new FMenuItem("The AEther", FSkinImage.FLASHBACK, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(aetherScreen);
         }
     });
     private static final FMenuItem commandersItem = new FMenuItem("Commanders", FSkinImage.PLANESWALKER, new FEventHandler() {
@@ -78,11 +85,11 @@ public class ConquestMenu extends FPopupMenu {
                     FModel.getConquest().load(ConquestDataIO.loadData(data));
                     ((DeckController<Deck>)EditorType.PlanarConquest.getController()).setRootFolder(FModel.getConquest().getDecks());
                     if (reason == LaunchReason.StartPlanarConquest) {
-                        Forge.openScreen(mapScreen);
+                        Forge.openScreen(multiverseScreen);
                     }
                     else {
-                        mapScreen.update();
-                        Forge.openScreen(mapScreen);
+                        multiverseScreen.update();
+                        Forge.openScreen(multiverseScreen);
                         if (reason == LaunchReason.NewConquest) {
                             LoadGameScreen.PlanarConquest.setAsBackScreen(true);
                         }
@@ -104,7 +111,8 @@ public class ConquestMenu extends FPopupMenu {
     @Override
     protected void buildMenu() {
         FScreen currentScreen = Forge.getCurrentScreen();
-        addItem(mapItem); mapItem.setSelected(currentScreen == mapScreen);
+        addItem(multiverseItem); multiverseItem.setSelected(currentScreen == multiverseScreen);
+        addItem(aetherItem); aetherItem.setSelected(currentScreen == aetherScreen);
         addItem(commandersItem); commandersItem.setSelected(currentScreen == commandersScreen);
         addItem(collectionItem); collectionItem.setSelected(currentScreen == collectionScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);

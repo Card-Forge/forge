@@ -24,14 +24,14 @@ import forge.screens.FScreen;
 import forge.toolbox.FScrollPane;
 import forge.util.collect.FCollectionView;
 
-public class ConquestMapScreen extends FScreen {
+public class ConquestMultiverseScreen extends FScreen {
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.6f);
     private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.2f);
 
     private final PlaneGrid planeGrid;
     private ConquestData model;
 
-    public ConquestMapScreen() {
+    public ConquestMultiverseScreen() {
         super("", ConquestMenu.getMenu());
 
         planeGrid = add(new PlaneGrid());

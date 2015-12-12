@@ -176,7 +176,7 @@ public class AdvancedSearch {
                 return input.getRules().getManaCost().toString();
             }
         }),
-        CARD_RARITY("Rarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardRarity>(Arrays.asList(CardRarity.values()), CardRarity.FN_GET_LONG_NAME, CardRarity.FN_GET_LONG_NAME) {
+        CARD_RARITY("Rarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardRarity>(Arrays.asList(CardRarity.FILTER_OPTIONS), CardRarity.FN_GET_LONG_NAME, CardRarity.FN_GET_LONG_NAME) {
             @Override
             protected CardRarity getItemValue(PaperCard input) {
                 return input.getRarity();
