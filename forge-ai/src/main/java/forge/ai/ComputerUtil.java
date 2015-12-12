@@ -1430,7 +1430,7 @@ public class ComputerUtil {
         final Zone zone = source.getZone();
         final Game game = source.getGame();
 
-        if (sa.isTrigger() || zone == null) {
+        if (sa.isTrigger() || zone == null || sa.isCopied()) {
             return true;
         }
 
