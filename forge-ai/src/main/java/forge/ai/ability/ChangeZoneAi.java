@@ -945,7 +945,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // Only care about combatants during combat
         if (game.getPhaseHandler().inCombat() && origin.equals(ZoneType.Battlefield)) {
-            list = CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
+        	CardCollection newList = CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
+        	if (!newList.isEmpty() || !sa.isTrigger()) {
+        		list = newList;
+        	}
         }
 
         if (list.isEmpty()) {
