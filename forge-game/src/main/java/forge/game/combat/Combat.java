@@ -779,7 +779,7 @@ public class Combat {
     public final CardCollection getUnblockedAttackers() {
         CardCollection unblocked = new CardCollection();
         for (AttackingBand ab : attackedByBands.values()) {
-            if (Boolean.TRUE.equals(ab.isBlocked())) {
+            if (Boolean.FALSE.equals(ab.isBlocked())) {
                 unblocked.addAll(ab.getAttackers());
             }
         }
