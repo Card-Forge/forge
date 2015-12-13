@@ -61,9 +61,9 @@ public class NewGameMenu extends FPopupMenu {
             Forge.openScreen(screen);
         }
 
-        public void setAsBackScreen() {
+        public void setAsBackScreen(boolean replace) {
             initializeScreen();
-            Forge.setBackScreen(screen);
+            Forge.setBackScreen(screen, replace);
         }
     }
 
@@ -98,7 +98,7 @@ public class NewGameMenu extends FPopupMenu {
     }
 
     private NewGameMenu() {
-        NewGameScreen.PlanarConquest.item.setVisible(false);
+        //NewGameScreen.PlanarConquest.item.setVisible(false);
     }
 
     @Override
