@@ -22,6 +22,7 @@ public class ConquestPrefsScreen extends FScreen {
     private static final float PADDING = Utils.scale(5);
 
     private enum PrefsGroup {
+        AETHER,
         BOOSTER
     }
 
@@ -48,10 +49,15 @@ public class ConquestPrefsScreen extends FScreen {
     public ConquestPrefsScreen() {
         super("Conquest Preferences", ConquestMenu.getMenu());
 
+        scroller.add(new PrefsHeader("AEther Shards", FSkinImage.QUEST_COIN, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Base Card Value", CQPref.AETHER_BASE_VALUE, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption("Markup Percentage", CQPref.AETHER_MARKUP, PrefsGroup.AETHER));
+
         scroller.add(new PrefsHeader("Booster Packs", FSkinImage.PACK, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Commons", CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Uncommons", CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Rares", CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption("Boosters per Mythic", CQPref.BOOSTERS_PER_MYTHIC, PrefsGroup.BOOSTER));
     }
 
     @Override
