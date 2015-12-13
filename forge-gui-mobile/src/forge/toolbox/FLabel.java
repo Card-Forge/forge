@@ -313,8 +313,12 @@ public class FLabel extends FDisplayObject implements IButton {
             x += Utils.scale(1);
             y += Utils.scale(1);
         }
+        drawContent(g, x, y, w, h);
+    }
 
+    protected void drawContent(Graphics g, float x, float y, float w, float h) {
         if (icon != null) {
+            float textY = y;
             float iconWidth = icon.getWidth();
             float iconHeight = icon.getHeight();
             float aspectRatio = iconWidth / iconHeight;
@@ -367,14 +371,9 @@ public class FLabel extends FDisplayObject implements IButton {
             g.drawImage(icon, x, y, iconWidth, iconHeight);
 
             if (!text.isEmpty()) {
-                y = insets.y;
-                if (pressed) {
-                    y++;
-                }
                 x += iconOffset;
                 w -= iconOffset;
-
-                drawText(g, x, y, w, h, HAlignment.LEFT);
+                drawText(g, x, textY, w, h, HAlignment.LEFT);
             }
         }
         else if (!text.isEmpty()) {
