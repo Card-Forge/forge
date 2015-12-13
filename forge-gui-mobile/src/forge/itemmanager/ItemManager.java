@@ -765,7 +765,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         int filteredCount = filteredItems.countAll();
 
         int totalCount;
-        if (isInfinite()) { //use count distinct if pool is infinite to account for zeros and save performance
+        if (pool.allowZero() && isInfinite()) { //use count distinct if pool is infinite to account for zeros and save performance
             totalCount = filteredItems.countDistinct();
         }
         else if (useFilter) {
