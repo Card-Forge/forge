@@ -55,8 +55,13 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private void calculateShardCost() {
-        shardCost = 100;
-        btnPull.setText(String.valueOf(shardCost));
+        shardCost = FModel.getConquest().calculateShardCost(lstAEther.getFilteredItems(), lstAEther.getPool().countDistinct());
+        btnPull.setEnabled(shardCost > 0);
+        btnPull.setText(shardCost > 0 ? String.valueOf(shardCost) : "---");
+    }
+
+    private void pullFromTheAEther() {
+        
     }
 
     @Override
@@ -93,6 +98,7 @@ public class ConquestAEtherScreen extends FScreen {
                     .icon(FSkinImage.QUEST_COIN).iconScaleFactor(1f).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
+                    pullFromTheAEther();
                 }
             }));
         }

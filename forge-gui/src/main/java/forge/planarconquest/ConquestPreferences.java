@@ -34,7 +34,8 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         BOOSTER_RARES("1"),
         BOOSTERS_PER_MYTHIC("8"),
 
-        CARD_BASE_VALUE("100");
+        CARD_BASE_VALUE("100"),
+        AETHER_MARKUP("50");
 
         private final String strDefaultVal;
 

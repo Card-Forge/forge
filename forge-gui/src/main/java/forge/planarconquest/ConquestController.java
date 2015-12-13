@@ -20,6 +20,7 @@ package forge.planarconquest;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import forge.FThreads;
@@ -37,12 +38,14 @@ import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.model.FModel;
+import forge.planarconquest.ConquestPlane.AwardPool;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.BoosterUtils;
 import forge.util.Aggregates;
+import forge.util.ItemPool;
 import forge.util.storage.IStorage;
 
 public class ConquestController {
@@ -242,68 +245,29 @@ public class ConquestController {
     }
 
     private void awardBooster(final IWinLoseView<? extends IButton> view) {
-        Iterable<PaperCard> cardPool = model.getCurrentPlane().getCardPool().getAllCards();
-
+        AwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
         ConquestPreferences prefs = FModel.getConquestPreferences();
-
-        BoosterPool commons = new BoosterPool();
-        BoosterPool uncommons = new BoosterPool();
-        BoosterPool rares = new BoosterPool();
-        BoosterPool mythics = new BoosterPool();
-
-        for (PaperCard c : cardPool) {
-            switch (c.getRarity()) {
-            case Common:
-                commons.add(c);
-                break;
-            case Uncommon:
-                uncommons.add(c);
-                break;
-            case Rare:
-            case Special: //lump special cards in with rares for simplicity
-                rares.add(c);
-                break;
-            case MythicRare:
-                mythics.add(c);
-                break;
-            default:
-                break;
-            }
-        }
-
         List<PaperCard> rewards = new ArrayList<PaperCard>();
         int boostersPerMythic = prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
         int raresPerBooster = prefs.getPrefInt(CQPref.BOOSTER_RARES);
         for (int i = 0; i < raresPerBooster; i++) {
-            if (mythics.isEmpty() || Aggregates.randomInt(1, boostersPerMythic) > 1) {
-                rares.rewardCard(rewards);
+            if (pool.getMythics().isEmpty() || Aggregates.randomInt(1, boostersPerMythic) > 1) {
+                pool.getRares().rewardCard(rewards);
             }
             else {
-                mythics.rewardCard(rewards);
+                pool.getMythics().rewardCard(rewards);
             }
         }
 
         int uncommonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
         for (int i = 0; i < uncommonsPerBooster; i++) {
-            uncommons.rewardCard(rewards);
+            pool.getUncommons().rewardCard(rewards);
         }
 
         int commonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
         for (int i = 0; i < commonsPerBooster; i++) {
-            commons.rewardCard(rewards);
+            pool.getCommons().rewardCard(rewards);
         }
-
-        //calculate odds of each rarity
-        float commonOdds = commons.getOdds(commonsPerBooster);
-        float uncommonOdds = uncommons.getOdds(uncommonsPerBooster);
-        float rareOdds = rares.getOdds(raresPerBooster);
-        float mythicOdds = mythics.getOdds(raresPerBooster / boostersPerMythic);
-
-        //determine value of each rarity based on the base value of a common
-        int commonValue = prefs.getPrefInt(CQPref.CARD_BASE_VALUE);
-        int uncommonValue = Math.round(commonValue / (uncommonOdds / commonOdds));
-        int rareValue = Math.round(commonValue / (rareOdds / commonOdds));
-        int mythicValue = mythics.isEmpty() ? 0 : Math.round(commonValue / (mythicOdds / commonOdds));
 
         //remove any already unlocked cards from booster, calculating credit to reward instead
         int shards = 0;
@@ -314,23 +278,7 @@ public class ConquestController {
                 rewards.remove(i);
                 i--;
                 count--;
-                switch (card.getRarity()) {
-                case Common:
-                    shards += commonValue;
-                    break;
-                case Uncommon:
-                    shards += uncommonValue;
-                    break;
-                case Rare:
-                case Special:
-                    shards += rareValue;
-                    break;
-                case MythicRare:
-                    shards += mythicValue;
-                    break;
-                default:
-                    break;
-                }
+                shards += pool.getShardValue(card);
             }
         }
 
@@ -349,31 +297,21 @@ public class ConquestController {
         }
     }
 
-    private class BoosterPool {
-        private final List<PaperCard> cards = new ArrayList<PaperCard>();
+    public int calculateShardCost(ItemPool<PaperCard> filteredCards, int unfilteredCount) {
+        if (filteredCards.isEmpty()) { return 0; }
 
-        private BoosterPool() {
-        }
+        AwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
 
-        private boolean isEmpty() {
-            return cards.isEmpty();
+        //determine average value of filtered cards
+        int totalValue = 0;
+        for (Entry<PaperCard, Integer> entry : filteredCards) {
+            totalValue += pool.getShardValue(entry.getKey());
         }
+        float averageValue = totalValue / filteredCards.countDistinct();
+        float multiplier = 1f + (float)FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_MARKUP) / 100f;
 
-        public float getOdds(float perBoosterCount) {
-            int count = cards.size();
-            if (count == 0) { return 0; }
-            return (float)perBoosterCount / (float)count;
-        }
+        //TODO: Increase multiplier based on average percentage of cards filtered out for each rarity
 
-        private void add(PaperCard c) {
-            cards.add(c);
-        }
-
-        private void rewardCard(List<PaperCard> rewards) {
-            int index = Aggregates.randomInt(0, cards.size() - 1);
-            PaperCard c = cards.get(index);
-            cards.remove(index);
-            rewards.add(c);
-        }
+        return Math.round(averageValue * multiplier);
     }
 }
