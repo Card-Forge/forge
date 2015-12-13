@@ -300,7 +300,7 @@ public enum ConquestPlane {
     }
 
     public int getEventCount() {
-        return regions.size() * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + 1; //+1 for boss
+        return regions.size() * Region.ROWS_PER_REGION * Region.COLS_PER_REGION;
     }
 
     public String toString() {
@@ -310,7 +310,7 @@ public enum ConquestPlane {
     public static class Region {
         public static final int ROWS_PER_REGION = 3;
         public static final int COLS_PER_REGION = 3;
-        public static final int PORTAL_COL = (COLS_PER_REGION - 1) / 2;
+        public static final int START_COL = (COLS_PER_REGION - 1) / 2;
 
         private final String name, artCardName;
         private final ColorSet colorSet;

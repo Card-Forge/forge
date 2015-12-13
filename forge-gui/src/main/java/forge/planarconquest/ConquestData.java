@@ -57,7 +57,7 @@ public final class ConquestData {
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
     private ConquestLocation currentLocation;
-    private int credits;
+    private int aetherShards;
 
     private transient ConquestCollection collection; //don't serialize this
 
@@ -74,7 +74,7 @@ public final class ConquestData {
     public ConquestData(String name0, PaperCard planeswalker0, ConquestPlane startingPlane0, PaperCard startingCommander0) {
         name = name0;
         startingPlane = startingPlane0;
-        currentLocation = new ConquestLocation(startingPlane, -1, 0, Region.PORTAL_COL);
+        currentLocation = new ConquestLocation(startingPlane, 0, 0, Region.START_COL);
         planeswalker = planeswalker0;
         planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
         unlockCard(planeswalker);
@@ -176,15 +176,15 @@ public final class ConquestData {
         getOrCreatePlaneData(event.getLocation().getPlane()).addLoss(event);
     }
 
-    public int getCredits() {
-        return credits;
+    public int getAEtherShards() {
+        return aetherShards;
     }
-    public void rewardCredits(int credits0) {
-        credits += credits0;
+    public void rewardAEtherShards(int aetherShards0) {
+        aetherShards += aetherShards0;
     }
-    public boolean deductCredits(int credits0) {
-        if (credits >= credits0) {
-            credits -= credits0;
+    public boolean spendAEtherShards(int aetherShards0) {
+        if (aetherShards >= aetherShards0) {
+            aetherShards -= aetherShards0;
             return true;
         }
         return false;
@@ -293,7 +293,7 @@ public final class ConquestData {
         private PathFinder() {
             ConquestPlane plane = getCurrentPlane();
             int xMax = Region.COLS_PER_REGION;
-            int yMax = plane.getRegions().size() * Region.ROWS_PER_REGION + 2;
+            int yMax = plane.getRegions().size() * Region.ROWS_PER_REGION;
             map = new Node[xMax][yMax];
             for (int x = 0; x < xMax; x++) {
                 for (int y = 0; y < yMax; y++) {
@@ -373,18 +373,7 @@ public final class ConquestData {
 
         private Node getNode(ConquestLocation loc) {
             int x = loc.getCol();
-            int y;
-            int regionCount = loc.getPlane().getRegions().size();
-            int regionIndex = loc.getRegionIndex();
-            if (regionIndex == -1) {
-                y = 0;
-            }
-            else if (regionIndex == regionCount) {
-                y = map[x].length - 1;
-            }
-            else {
-                y = regionIndex * Region.ROWS_PER_REGION + loc.getRow() + 1;
-            }
+            int y = loc.getRegionIndex() * Region.ROWS_PER_REGION + loc.getRow();
             return map[x][y];
         }
 
@@ -400,41 +389,25 @@ public final class ConquestData {
                 x = x0;
                 y = y0;
 
-                int row;
+                int regionIndex = y / Region.ROWS_PER_REGION;
                 int col = x;
-                int rowIndex = y - 1;
-                int regionCount = plane.getRegions().size();
-                int regionIndex = rowIndex / Region.ROWS_PER_REGION;
-                if (rowIndex < 0) {
-                    regionIndex = -1;
-                    row = 0;
-                }
-                else if (regionIndex >= regionCount) {
-                    regionIndex = regionCount;
-                    row = 0;
-                }
-                else {
-                    row = rowIndex % Region.ROWS_PER_REGION;
-                }
+                int row = y % Region.ROWS_PER_REGION;
                 loc = new ConquestLocation(plane, regionIndex, row, col);
             }
 
             public boolean isBlocked() {
                 if (blocked == null) { //determine if node is blocked one time
-                    blocked = false; //assume not blocked by default
-                    if (!loc.isTraversable()) {
-                        blocked = true;
+                    ConquestPlaneData planeData = getCurrentPlaneData();
+                    if (planeData.hasConquered(loc)) {
+                        blocked = false;
                     }
                     else {
                         //if location isn't conquered or bordering a conquered location, there's no path to reach it
-                        ConquestPlaneData planeData = getCurrentPlaneData();
-                        if (!planeData.hasConquered(loc)) {
-                            blocked = true;
-                            for (ConquestLocation neighbor : loc.getNeighbors()) {
-                                if (planeData.hasConquered(neighbor)) {
-                                    blocked = false;
-                                    break;
-                                }
+                        blocked = true;
+                        for (ConquestLocation neighbor : loc.getNeighbors()) {
+                            if (planeData.hasConquered(neighbor)) {
+                                blocked = false;
+                                break;
                             }
                         }
                     }

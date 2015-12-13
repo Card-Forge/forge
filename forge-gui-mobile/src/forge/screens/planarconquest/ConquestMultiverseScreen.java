@@ -9,7 +9,6 @@ import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
@@ -98,22 +97,6 @@ public class ConquestMultiverseScreen extends FScreen {
             float colLineStartY = 0;
             float colLineEndY = h;
 
-            //draw top portal row
-            if (y + rowHeight > 0) {
-                g.drawImage(FSkinImage.PLANAR_PORTAL, 0, y, w, rowHeight);
-                if (!planeData.hasConqueredBoss()) { //draw overlay if boss hasn't been beaten yet
-                    if (planeData.hasConquered(regionCount - 1, rows - 1, Region.PORTAL_COL)) {
-                        color = UNCONQUERED_COLOR;
-                    }
-                    else {
-                        color = FOG_OF_WAR_COLOR;
-                    }
-                    g.fillRect(color, 0, y, w, rowHeight);
-                }
-                colLineStartY = y + rowHeight;
-            }
-            y += rowHeight;
-
             for (int i = regionCount - 1; i >= 0; i--) {
                 if (y + regionHeight <= 0) {
                     y += regionHeight;
@@ -152,10 +135,15 @@ public class ConquestMultiverseScreen extends FScreen {
                             color = FOG_OF_WAR_COLOR;
 
                             //if any bordering grid square has been conquered, instead show unconquered color
-                            for (ConquestLocation loc : ConquestLocation.getNeighbors(plane, i, r, c)) {
-                                if (planeData.hasConquered(loc)) {
-                                    color = UNCONQUERED_COLOR;
-                                    break;
+                            if (i == 0 && r == 0 && c == Region.START_COL) {
+                                color = UNCONQUERED_COLOR; //show unconquered color for starting square of plane
+                            }
+                            else {
+                                for (ConquestLocation loc : ConquestLocation.getNeighbors(plane, i, r, c)) {
+                                    if (planeData.hasConquered(loc)) {
+                                        color = UNCONQUERED_COLOR;
+                                        break;
+                                    }
                                 }
                             }
 
@@ -172,13 +160,6 @@ public class ConquestMultiverseScreen extends FScreen {
                 }
 
                 y += regionHeight;
-            }
-
-            //draw bottom portal row
-            if (y <= h) {
-                g.drawImage(FSkinImage.PLANAR_PORTAL, 0, y, w, rowHeight);
-                g.drawLine(1, Color.BLACK, 0, y, w, y);
-                colLineEndY = y;
             }
 
             //draw column lines
@@ -203,9 +184,7 @@ public class ConquestMultiverseScreen extends FScreen {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float regionHeight = visibleWidth / CardRenderer.CARD_ART_RATIO;
-            float rowHeight = regionHeight / Region.ROWS_PER_REGION;
             float height = model.getCurrentPlane().getRegions().size() * regionHeight;
-            height += 2 * rowHeight; //account for portal row at top and bottom
             return new ScrollBounds(visibleWidth, height);
         }
 
@@ -218,22 +197,10 @@ public class ConquestMultiverseScreen extends FScreen {
             float colWidth = w / Region.COLS_PER_REGION;
             float rowHeight = regionHeight / Region.ROWS_PER_REGION;
 
-            int row;
-            int rowIndex = (int)((h - y) / rowHeight) - 1; //flip axis since locations go bottom to top
+            int rowIndex = (int)((h - y) / rowHeight); //flip axis since locations go bottom to top
             ConquestPlane plane = model.getCurrentPlane();
-            int regionCount = plane.getRegions().size();
             int regionIndex = rowIndex / Region.ROWS_PER_REGION;
-            if (rowIndex < 0) {
-                regionIndex = -1;
-                row = 0;
-            }
-            else if (regionIndex >= regionCount) {
-                regionIndex = regionCount;
-                row = 0;
-            }
-            else {
-                row = rowIndex % Region.ROWS_PER_REGION;
-            }
+            int row = rowIndex % Region.ROWS_PER_REGION;
 
             int col = (int)(x / colWidth);
             if (col < 0) {
@@ -254,13 +221,7 @@ public class ConquestMultiverseScreen extends FScreen {
             float rowHeight = regionHeight / Region.ROWS_PER_REGION;
 
             float x = loc.getCol() * colWidth + colWidth / 2;
-            float y;
-            if (loc.getRegionIndex() == -1) {
-                y = h - rowHeight / 2;
-            }
-            else {
-                y = h - (loc.getRegionIndex() * regionHeight + loc.getRow() * rowHeight + 3 * rowHeight / 2);
-            }
+            float y = h - (loc.getRegionIndex() * regionHeight + loc.getRow() * rowHeight + rowHeight / 2);
 
             return new Vector2(x, y);
         }

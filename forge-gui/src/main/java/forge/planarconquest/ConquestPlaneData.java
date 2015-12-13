@@ -13,19 +13,10 @@ public class ConquestPlaneData {
         eventResults = new ConquestRecord[plane.getEventCount()];
     }
 
-    public boolean hasConqueredBoss() {
-        return hasConquered(eventResults.length - 1);
-    }
     public boolean hasConquered(ConquestLocation loc) {
         return hasConquered(loc.getRegionIndex(), loc.getRow(), loc.getCol());
     }
     public boolean hasConquered(int regionIndex, int row, int col) {
-        if (regionIndex == -1) {
-            return true; //bottom portal is always conquered
-        }
-        if (regionIndex == plane.getRegions().size()) {
-            return hasConqueredBoss();
-        }
         return hasConquered(regionIndex * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + row * Region.COLS_PER_REGION + col);
     }
     private boolean hasConquered(int index) {

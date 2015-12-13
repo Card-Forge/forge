@@ -306,7 +306,7 @@ public class ConquestController {
         int mythicValue = mythics.isEmpty() ? 0 : Math.round(commonValue / (mythicOdds / commonOdds));
 
         //remove any already unlocked cards from booster, calculating credit to reward instead
-        int credits = 0;
+        int shards = 0;
         int count = rewards.size();
         for (int i = 0; i < count; i++) {
             PaperCard card = rewards.get(i);
@@ -316,17 +316,17 @@ public class ConquestController {
                 count--;
                 switch (card.getRarity()) {
                 case Common:
-                    credits += commonValue;
+                    shards += commonValue;
                     break;
                 case Uncommon:
-                    credits += uncommonValue;
+                    shards += uncommonValue;
                     break;
                 case Rare:
                 case Special:
-                    credits += rareValue;
+                    shards += rareValue;
                     break;
                 case MythicRare:
-                    credits += mythicValue;
+                    shards += mythicValue;
                     break;
                 default:
                     break;
@@ -337,15 +337,15 @@ public class ConquestController {
         if (count > 0) {
             BoosterUtils.sort(rewards);
             view.showCards("Booster contained " + count + " new card" + (count != 1 ? "s" : ""), rewards);
-            if (credits > 0) {
-                view.showMessage("Remaining cards exchanged for " + credits + " credits.", "Received Credits", FSkinProp.ICO_QUEST_COIN);
-                model.rewardCredits(credits);
+            if (shards > 0) {
+                view.showMessage("Remaining cards exchanged for " + shards + " AEther shards.", "Received Credits", FSkinProp.ICO_QUEST_COIN);
+                model.rewardAEtherShards(shards);
             }
             model.unlockCards(rewards);
         }
         else {
-            view.showMessage("Booster contained no cards, so it has been exchanged for " + credits + " credits.", "Received Credits", FSkinProp.ICO_QUEST_COIN);
-            model.rewardCredits(credits);
+            view.showMessage("Booster contained no cards, so it has been exchanged for " + shards + " AEther shards.", "Received Credits", FSkinProp.ICO_QUEST_COIN);
+            model.rewardAEtherShards(shards);
         }
     }
 

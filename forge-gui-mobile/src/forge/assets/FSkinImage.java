@@ -117,7 +117,6 @@ public enum FSkinImage implements FImage {
     TROPHY_SHELF     (FSkinProp.IMG_TROPHY_SHELF, SourceFile.TROPHIES),
 
     //Planar Conquest Images
-    PLANAR_PORTAL (FSkinProp.IMG_PLANAR_PORTAL, SourceFile.PLANAR_CONQUEST),
     PLANE_MONITOR (FSkinProp.IMG_PLANE_MONITOR, SourceFile.PLANAR_CONQUEST),
 
     //Quest Icons

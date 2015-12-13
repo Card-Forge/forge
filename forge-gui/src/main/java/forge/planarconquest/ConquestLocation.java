@@ -45,13 +45,6 @@ public class ConquestLocation {
         return col;
     }
 
-    public boolean isTraversable() {
-        if (regionIndex == -1 || regionIndex == plane.getRegions().size()) {
-            return col == Region.PORTAL_COL;
-        }
-        return true;
-    }
-
     public List<ConquestLocation> getNeighbors() {
         if (neighbors == null) { //cache neighbors for performance
             neighbors = getNeighbors(plane, regionIndex, row, col);
@@ -70,9 +63,6 @@ public class ConquestLocation {
         else if (regionIndex0 < regionCount - 1) {
             locations.add(new ConquestLocation(plane0, regionIndex0 + 1, 0, col0));
         }
-        else if (regionIndex0 == regionCount - 1 && col0 == Region.PORTAL_COL) {
-            locations.add(new ConquestLocation(plane0, regionCount, 0, col0));
-        }
 
         //add location below
         if (row0 > 0) {
@@ -81,18 +71,15 @@ public class ConquestLocation {
         else if (regionIndex0 > 0) {
             locations.add(new ConquestLocation(plane0, regionIndex0 - 1, Region.ROWS_PER_REGION - 1, col0));
         }
-        else if (regionIndex0 == 0 && col0 == Region.PORTAL_COL) {
-            locations.add(new ConquestLocation(plane0, -1, 0, col0));
+
+        //add location to left
+        if (col0 > 0) {
+            locations.add(new ConquestLocation(plane0, regionIndex0, row0, col0 - 1));
         }
 
-        //add locations left and right
-        if (regionIndex0 >= 0 && regionIndex0 < regionCount) { //not options in portal row
-            if (col0 > 0) {
-                locations.add(new ConquestLocation(plane0, regionIndex0, row0, col0 - 1));
-            }
-            if (col0 < Region.COLS_PER_REGION - 1) {
-                locations.add(new ConquestLocation(plane0, regionIndex0, row0, col0 + 1));
-            }
+        //add location to right
+        if (col0 < Region.COLS_PER_REGION - 1) {
+            locations.add(new ConquestLocation(plane0, regionIndex0, row0, col0 + 1));
         }
 
         return locations;

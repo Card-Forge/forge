@@ -299,15 +299,15 @@ public class LoadConquestScreen extends LaunchScreen {
                     float iconOffset = SettingsScreen.SETTING_PADDING - Utils.scale(2);
 
                     String cards = String.valueOf(value.getUnlockedCount());
-                    String credits = String.valueOf(value.getCredits());
+                    String shards = String.valueOf(value.getAEtherShards());
                     font = FSkinFont.get(12);
                     float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;
-                    float creditsWidth = font.getBounds(credits).width + iconSize + SettingsScreen.SETTING_PADDING;
-                    g.drawText(value.getPlaneswalker().getName() + " - " + value.getCurrentPlane().getName(), font, SettingsScreen.DESC_COLOR, x, y, w - creditsWidth - cardsWidth, h, false, HAlignment.LEFT, false);
-                    g.drawImage(FSkinImage.HAND, x + w - creditsWidth - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
-                    g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - creditsWidth - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
-                    g.drawImage(FSkinImage.QUEST_COINSTACK, x + w - creditsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
-                    g.drawText(credits, font, SettingsScreen.DESC_COLOR, x + w - creditsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
+                    float shardsWidth = font.getBounds(shards).width + iconSize + SettingsScreen.SETTING_PADDING;
+                    g.drawText(value.getPlaneswalker().getName() + " - " + value.getCurrentPlane().getName(), font, SettingsScreen.DESC_COLOR, x, y, w - shardsWidth - cardsWidth, h, false, HAlignment.LEFT, false);
+                    g.drawImage(FSkinImage.HAND, x + w - shardsWidth - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
+                    g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - shardsWidth - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
+                    g.drawImage(FSkinImage.QUEST_COINSTACK, x + w - shardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
+                    g.drawText(shards, font, SettingsScreen.DESC_COLOR, x + w - shardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
                 }
             });
         }
