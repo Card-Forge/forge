@@ -20,6 +20,8 @@ import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.menu.FMagnifyView;
 import forge.model.FModel;
+import forge.planarconquest.ConquestReward;
+import forge.screens.planarconquest.ConquestRewardDialog;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -232,6 +234,11 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     @Override
     public void showCards(String title, List<PaperCard> cards) {
         SGuiChoose.reveal(title, cards);
+    }
+
+    @Override
+    public void showConquestRewards(String title, List<ConquestReward> rewards) {
+        ConquestRewardDialog.show(title, rewards);
     }
 
     @Override

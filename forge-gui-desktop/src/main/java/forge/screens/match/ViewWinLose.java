@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -25,6 +26,7 @@ import forge.gui.SOverlayUtils;
 import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.planarconquest.ConquestReward;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
@@ -281,6 +283,19 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         else {
             getPnlCustom().add(cv, CONSTRAINTS_CARDS);
         }
+    }
+
+    @Override
+    public void showConquestRewards(String title, List<ConquestReward> rewards) {
+        //TODO: Make this nicer, for now just re-use showCards
+        List<PaperCard> cards = new ArrayList<PaperCard>();
+        for (int i = rewards.size() - 1; i >= 0; i--) { //loop backwards so mythics/rares go back to appearing first
+            ConquestReward reward = rewards.get(i);
+            if (!reward.isDuplicate()) {
+                cards.add(reward.getCard());
+            }
+        }
+        showCards(title, cards);
     }
 
     @Override

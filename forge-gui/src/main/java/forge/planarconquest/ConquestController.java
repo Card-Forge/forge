@@ -26,7 +26,6 @@ import java.util.Set;
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
-import forge.assets.FSkinProp;
 import forge.card.CardType;
 import forge.deck.Deck;
 import forge.game.GameRules;
@@ -269,32 +268,27 @@ public class ConquestController {
             pool.getCommons().rewardCard(rewards);
         }
 
+        BoosterUtils.sort(rewards);
+
         //remove any already unlocked cards from booster, calculating credit to reward instead
+        //also build list of all rewards including replacement shards for each duplicate card
+        //build this list in reverse order so commons appear first
         int shards = 0;
-        int count = rewards.size();
-        for (int i = 0; i < count; i++) {
+        List<ConquestReward> allRewards = new ArrayList<ConquestReward>();
+        for (int i = rewards.size() - 1; i >= 0; i--) {
+            int replacementShards = 0;
             PaperCard card = rewards.get(i);
             if (model.hasUnlockedCard(card)) {
                 rewards.remove(i);
-                i--;
-                count--;
-                shards += pool.getShardValue(card);
+                replacementShards = pool.getShardValue(card);
+                shards += replacementShards;
             }
+            allRewards.add(new ConquestReward(card, replacementShards));
         }
 
-        if (count > 0) {
-            BoosterUtils.sort(rewards);
-            view.showCards("Booster contained " + count + " new card" + (count != 1 ? "s" : ""), rewards);
-            if (shards > 0) {
-                view.showMessage("Remaining cards exchanged for " + shards + " AEther shards.", "Received Credits", FSkinProp.ICO_QUEST_COIN);
-                model.rewardAEtherShards(shards);
-            }
-            model.unlockCards(rewards);
-        }
-        else {
-            view.showMessage("Booster contained no cards, so it has been exchanged for " + shards + " AEther shards.", "Received Credits", FSkinProp.ICO_QUEST_COIN);
-            model.rewardAEtherShards(shards);
-        }
+        view.showConquestRewards("Booster Awarded", allRewards);
+        model.unlockCards(rewards);
+        model.rewardAEtherShards(shards);
     }
 
     public int calculateShardCost(ItemPool<PaperCard> filteredCards, int unfilteredCount) {

@@ -21,6 +21,7 @@ import forge.screens.FScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Aggregates;
 import forge.util.Utils;
 
 public class ConquestAEtherScreen extends FScreen {
@@ -66,7 +67,14 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private void pullFromTheAEther() {
-        
+        ConquestData model = FModel.getConquest().getModel();
+        PaperCard card = Aggregates.random(lstAEther.getFilteredItems()).getKey();
+        lstAEther.removeItem(card, 1);
+
+        ConquestRewardDialog.show("Card pull from the AEther", card);
+
+        model.spendAEtherShards(shardCost);
+        model.unlockCard(card);
     }
 
     @Override

@@ -1343,6 +1343,7 @@ forge-gui-mobile/src/forge/screens/planarconquest/ConquestMenu.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMultiverseScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestPlaneSelector.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestPrefsScreen.java -text
+forge-gui-mobile/src/forge/screens/planarconquest/ConquestRewardDialog.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/LoadConquestScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/NewConquestScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/NewConquestScreenModel.java -text
@@ -18309,6 +18310,7 @@ forge-gui/src/main/java/forge/planarconquest/ConquestPlane.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlaneData.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPreferences.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestRecord.java -text
+forge-gui/src/main/java/forge/planarconquest/ConquestReward.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestUtil.java -text
 forge-gui/src/main/java/forge/player/GamePlayerUtil.java -text
 forge-gui/src/main/java/forge/player/HumanCostDecision.java -text
