@@ -27,6 +27,10 @@ public class ConquestAEtherScreen extends FScreen {
     private static final float PULL_BTN_HEIGHT = 1.2f * Utils.AVG_FINGER_HEIGHT;
 
     private final AEtherManager lstAEther = add(new AEtherManager());
+    private final FLabel lblTip = add(new FLabel.Builder()
+        .text("Filter above list then press below button\nto unlock a random card from the filtered list.")
+        .textColor(FLabel.INLINE_LABEL_COLOR)
+        .align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
     private final FLabel btnPull = add(new PullButton());
 
     private int shardCost;
@@ -67,10 +71,13 @@ public class ConquestAEtherScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float x = ItemFilter.PADDING;
-        float w = width - 2 * x;
-        lstAEther.setBounds(x, startY, w, height - startY - PULL_BTN_HEIGHT - 2 * ItemFilter.PADDING);
-        btnPull.setBounds(x, height - PULL_BTN_HEIGHT - ItemFilter.PADDING, w, PULL_BTN_HEIGHT);
+        float padding = ItemFilter.PADDING;
+        float x = padding;
+        float w = width - 2 * padding;
+        float tipLabelHeight = lblTip.getAutoSizeBounds().height;
+        lstAEther.setBounds(x, startY, w, height - startY - PULL_BTN_HEIGHT - tipLabelHeight - 4 * padding);
+        lblTip.setBounds(x, height - PULL_BTN_HEIGHT - tipLabelHeight - 2 * padding, width, tipLabelHeight);
+        btnPull.setBounds(x, height - PULL_BTN_HEIGHT - padding, w, PULL_BTN_HEIGHT);
     }
 
     private class AEtherManager extends CardManager {
