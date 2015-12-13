@@ -61,6 +61,10 @@ public class ConquestAEtherScreen extends FScreen {
 
     private void calculateShardCost() {
         shardCost = FModel.getConquest().calculateShardCost(lstAEther.getFilteredItems(), lstAEther.getPool().countDistinct());
+        updatePullButton();
+    }
+
+    private void updatePullButton() {
         int availableShards = FModel.getConquest().getModel().getAEtherShards();
         btnPull.setEnabled(shardCost > 0 && shardCost <= availableShards);
         btnPull.setText((shardCost > 0 ? String.valueOf(shardCost) : "---") + " / " + String.valueOf(availableShards));
@@ -71,10 +75,11 @@ public class ConquestAEtherScreen extends FScreen {
         PaperCard card = Aggregates.random(lstAEther.getFilteredItems()).getKey();
         lstAEther.removeItem(card, 1);
 
-        ConquestRewardDialog.show("Card pull from the AEther", card);
+        ConquestRewardDialog.show("Card pulled from the AEther", card);
 
         model.spendAEtherShards(shardCost);
         model.unlockCard(card);
+        updatePullButton();
     }
 
     @Override

@@ -256,6 +256,10 @@ public abstract class FDialog extends FOverlay {
         }
     }
 
+    protected void onRevealFinished() {
+        //provide ability to handle when first reveal finished
+    }
+
     private RevealAnimation activeRevealAnimation;
 
     private class RevealAnimation extends ForgeAnimation {
@@ -292,7 +296,10 @@ public abstract class FDialog extends FOverlay {
         @Override
         protected void onEnd(boolean endingAll) {
             activeRevealAnimation = null;
-            finishedFirstReveal = true;
+            if (!finishedFirstReveal) {
+                finishedFirstReveal = true;
+                onRevealFinished();
+            }
         }
     }
 }

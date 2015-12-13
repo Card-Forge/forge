@@ -2,16 +2,18 @@ package forge.screens.planarconquest;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardRenderer;
+import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.item.PaperCard;
 import forge.planarconquest.ConquestReward;
+import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -20,6 +22,8 @@ import forge.toolbox.FScrollPane;
 import forge.util.Utils;
 
 public class ConquestRewardDialog extends FScrollPane {
+    private static final float PADDING = Utils.scale(5);
+
     public static void show(String title, PaperCard card) {
         List<ConquestReward> rewards = new ArrayList<ConquestReward>(1);
         rewards.add(new ConquestReward(card, 0));
@@ -62,8 +66,34 @@ public class ConquestRewardDialog extends FScrollPane {
 
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        float y = 0;
-        return new ScrollBounds(visibleWidth, y);
+        float x = PADDING;
+        float y = PADDING;
+        float cardWidth = (visibleWidth - (columnCount + 1) * PADDING) / columnCount;
+        float cardHeight = cardWidth * FCardPanel.ASPECT_RATIO;
+
+        //ensure card height doesn't exceed max allowed height
+        float maxHeight = visibleHeight - 2 * PADDING;
+        if (cardHeight > maxHeight) {
+            cardHeight = maxHeight;
+            float newCardWidth = cardHeight / FCardPanel.ASPECT_RATIO;
+            x += (cardWidth - newCardWidth) * columnCount / 2;
+            cardWidth = newCardWidth;
+        }
+
+        float startX = x;
+        int cardCount = cardRevealers.size();
+        cardRevealers.get(0).setBounds(x, y, cardWidth, cardHeight);
+        for (int i = 1; i < cardCount; i++) {
+            if (i % columnCount == 0) {
+                x = startX;
+                y += cardHeight + PADDING;
+            }
+            else {
+                x += cardWidth + PADDING;
+            }
+            cardRevealers.get(i).setBounds(x, y, cardWidth, cardHeight);
+        }
+        return new ScrollBounds(visibleWidth, y + cardHeight + PADDING);
     }
 
     @Override
@@ -126,25 +156,41 @@ public class ConquestRewardDialog extends FScrollPane {
     private class RevealDialog extends FDialog {
         private RevealDialog(String title) {
             super(title, 2);
+
+            add(ConquestRewardDialog.this);
+
             initButton(0, "OK", new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     hide();
                 }
             });
-            setButtonEnabled(0, false); //disable OK button
             initButton(1, "Skip", new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     animation.skip();
                 }
             });
+
+            //disable both buttons initially
+            setButtonEnabled(0, false);
+            setButtonEnabled(1, false);
         }
 
         @Override
         protected float layoutAndGetHeight(float width, float maxHeight) {
             ConquestRewardDialog.this.setBounds(0, 0, width, maxHeight);
             return maxHeight;
+        }
+
+        @Override
+        public boolean fling(float velocityX, float velocityY) {
+            return false; //disable ability to hide dialog since it's animated
+        }
+
+        protected void onRevealFinished() {
+            animation.start(); //start animation when dialog finished opening
+            setButtonEnabled(1, true); //enable Skip button
         }
     }
 
@@ -202,7 +248,7 @@ public class ConquestRewardDialog extends FScrollPane {
         }
     }
 
-    private static class CardRevealer extends FLabel {
+    private class CardRevealer extends FLabel {
         private static final float DUPLICATE_ALPHA_COMPOSITE = 0.35f;
 
         private final ConquestReward reward;
@@ -217,6 +263,21 @@ public class ConquestRewardDialog extends FScrollPane {
                 setIcon(FSkinImage.QUEST_COIN);
                 setAlignment(HAlignment.CENTER);
             }
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            int index = 0;
+            List<PaperCard> cards = new ArrayList<PaperCard>();
+            for (int i = 0; i < cardRevealers.size(); i++) {
+                CardRevealer revealer = cardRevealers.get(i);
+                if (revealer == this) {
+                    index = i;
+                }
+                cards.add(revealer.reward.getCard());
+            }
+            CardZoom.show(cards, index, null);
+            return true;
         }
 
         @Override
