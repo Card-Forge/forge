@@ -711,6 +711,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellRemovedFromStack(si.getSpellAbility(true)));
     }
 
+    public final void remove(final Card c) {
+        for (SpellAbilityStackInstance si : stack) {
+            if (c.equals(si.getSourceCard()) && si.isSpell()) {
+                remove(si);
+            }
+        }
+    }
+
     public void fizzleTriggersOnStackTargeting(Card c, TriggerType t) {
         for (SpellAbilityStackInstance si : stack) {
             SpellAbility sa = si.getSpellAbility(false);
