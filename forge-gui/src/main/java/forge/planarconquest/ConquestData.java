@@ -28,6 +28,7 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPlane.Region;
+import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.util.ItemPool;
 
@@ -73,6 +74,7 @@ public final class ConquestData {
 
     public ConquestData(String name0, PaperCard planeswalker0, ConquestPlane startingPlane0, PaperCard startingCommander0) {
         name = name0;
+        aetherShards = FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_START_SHARDS);
         startingPlane = startingPlane0;
         currentLocation = new ConquestLocation(startingPlane, 0, 0, Region.START_COL);
         planeswalker = planeswalker0;

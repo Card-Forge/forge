@@ -435,7 +435,7 @@ public enum ConquestPlane {
             float mythicOdds = mythics.getOdds((float)raresPerBooster / (float)prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC));
 
             //determine value of each rarity based on the base value of a common
-            commonValue = prefs.getPrefInt(CQPref.CARD_BASE_VALUE);
+            commonValue = prefs.getPrefInt(CQPref.AETHER_BASE_VALUE);
             uncommonValue = Math.round(commonValue / (uncommonOdds / commonOdds));
             rareValue = Math.round(commonValue / (rareOdds / commonOdds));
             mythicValue = mythics.isEmpty() ? 0 : Math.round(commonValue / (mythicOdds / commonOdds));

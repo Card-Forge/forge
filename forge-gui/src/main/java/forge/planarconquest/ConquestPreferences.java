@@ -29,13 +29,14 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
     public static enum CQPref {
         CURRENT_CONQUEST("DEFAULT"),
 
+        AETHER_BASE_VALUE("100"),
+        AETHER_MARKUP("50"),
+        AETHER_START_SHARDS("1000"),
+
         BOOSTER_COMMONS("11"),
         BOOSTER_UNCOMMONS("3"),
         BOOSTER_RARES("1"),
-        BOOSTERS_PER_MYTHIC("8"),
-
-        CARD_BASE_VALUE("100"),
-        AETHER_MARKUP("50");
+        BOOSTERS_PER_MYTHIC("8");
 
         private final String strDefaultVal;
 
