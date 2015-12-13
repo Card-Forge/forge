@@ -11,7 +11,16 @@ import forge.toolbox.FEvent.FEventHandler;
 public abstract class ComboBoxFilter<T extends InventoryItem, V> extends ItemFilter<T> {
     protected V filterValue;
     private boolean preventHandling = false;
-    private FComboBox<Object> comboBox = new FComboBox<Object>();
+    private FComboBox<Object> comboBox = new FComboBox<Object>() {
+        @SuppressWarnings("unchecked")
+        @Override
+        protected String getDisplayText(Object item) {
+            if (item instanceof String) {
+                return (String)item;
+            }
+            return ComboBoxFilter.this.getDisplayText((V)item);
+        }
+    };
 
     protected ComboBoxFilter(String allText, Iterable<V> values, ItemManager<? super T> itemManager0) {
         this(allText, itemManager0);
@@ -50,6 +59,10 @@ public abstract class ComboBoxFilter<T extends InventoryItem, V> extends ItemFil
                 }
             }
         });
+    }
+
+    protected String getDisplayText(V value) {
+        return value.toString();
     }
 
     @Override

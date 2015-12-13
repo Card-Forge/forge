@@ -43,7 +43,11 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
             setSelectedItem(items.get(0)); //select first item by default
         }
     }
-    
+
+    protected String getDisplayText(T item) {
+        return item.toString();
+    }
+
     public String getLabel() {
         return label;
     }
@@ -52,7 +56,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         if (label.equals(label0)) { return; }
         label = label0;
         if (selectedItem != null) {
-            super.setText(label + selectedItem.toString());
+            super.setText(label + getDisplayText(selectedItem));
         }
         else {
             super.setText(label);
@@ -134,7 +138,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         if (item != null) {
             if (items.contains(item)) {
                 selectedItem = item;
-                super.setText(label + item.toString());
+                super.setText(label + getDisplayText(item));
             }
             else { return; }
         }
@@ -151,7 +155,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     @Override
     public void setText(String text0) {
         for (T item : items) {
-            if (item.toString().equals(text0)) {
+            if (getDisplayText(item).equals(text0)) {
                 setSelectedItem(item);
                 return;
             }
@@ -190,7 +194,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         //use widest item width to determine auto-size width
         float maxTextWidth = 0;
         for (T item : items) {
-            float width = font.getBounds(item.toString()).width;
+            float width = font.getBounds(getDisplayText(item)).width;
             if (width > maxTextWidth) {
                 maxTextWidth = width;
             }
@@ -234,7 +238,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         @Override
         protected void buildMenu() {
             for (final T item : FComboBox.this.items) {
-                FMenuItem menuItem = new FMenuItem(item.toString(), new FEventHandler() {
+                FMenuItem menuItem = new FMenuItem(getDisplayText(item), new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         if (dropDownItemTap != null) {

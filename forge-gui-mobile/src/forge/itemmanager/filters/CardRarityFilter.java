@@ -9,7 +9,6 @@ import forge.itemmanager.ItemManager;
 public class CardRarityFilter extends ComboBoxFilter<PaperCard, CardRarity> {
     public CardRarityFilter(ItemManager<? super PaperCard> itemManager0) {
         super("Any Rarity", CardRarity.FILTER_OPTIONS, itemManager0);
-        comboBox.setFnDisplayText(CardRarity.FN_GET_LONG_NAME);
     }
 
     @Override
@@ -17,6 +16,11 @@ public class CardRarityFilter extends ComboBoxFilter<PaperCard, CardRarity> {
         CardRarityFilter copy = new CardRarityFilter(itemManager);
         copy.filterValue = filterValue;
         return copy;
+    }
+
+    @Override
+    protected String getDisplayText(CardRarity value) {
+        return CardRarity.FN_GET_LONG_NAME.apply(value);
     }
 
     @Override
