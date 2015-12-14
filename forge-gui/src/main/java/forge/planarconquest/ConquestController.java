@@ -37,6 +37,7 @@ import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.model.FModel;
+import forge.planarconquest.ConquestEvent.IConquestEventLauncher;
 import forge.planarconquest.ConquestPlane.AwardPool;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.player.GamePlayerUtil;
@@ -79,25 +80,25 @@ public class ConquestController {
         }
     }
 
-    /*private void playGame(final ConquestCommander commander, final int opponentIndex, final boolean isHumanDefending, final IVCommandCenter commandCenter) {
-        gameRunner = new GameRunner(commander, opponentIndex, isHumanDefending, commandCenter);
-        gameRunner.invokeAndWait();
+    public void launchEvent(final IConquestEventLauncher launcher0, final ConquestCommander commander0, final ConquestEvent event0) {
+        if (gameRunner != null) { return; } //prevent running multiple games at once
 
-        //after game finished
-        if (gameRunner.wonGame) {
-        }
+        gameRunner = new GameRunner(launcher0, commander0, event0);
+        gameRunner.invokeAndWait();
         gameRunner = null;
-    }*/
+    }
 
     public class GameRunner {
         private class Lock {
         }
         private final Lock lock = new Lock();
 
-        public final ConquestCommander commander;
-        public final ConquestEvent event;
+        private final IConquestEventLauncher launcher;
+        private final ConquestCommander commander;
+        private final ConquestEvent event;
 
-        private GameRunner(final ConquestCommander commander0, final ConquestEvent event0) {
+        private GameRunner(final IConquestEventLauncher launcher0, final ConquestCommander commander0, final ConquestEvent event0) {
+            launcher = launcher0;
             commander = commander0;
             event = event0;
         }
@@ -107,7 +108,7 @@ public class ConquestController {
             FThreads.invokeInEdtLater(new Runnable() {
                 @Override
                 public void run() {
-                    //commandCenter.startGame(GameRunner.this);
+                    launcher.startGame(GameRunner.this);
                 }
             });
             try {

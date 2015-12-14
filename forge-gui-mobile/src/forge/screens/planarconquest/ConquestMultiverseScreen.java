@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.collect.Iterables;
 
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
@@ -13,17 +14,23 @@ import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
+import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestController;
+import forge.planarconquest.ConquestController.GameRunner;
 import forge.planarconquest.ConquestData;
+import forge.planarconquest.ConquestEvent;
+import forge.planarconquest.ConquestEvent.IConquestEventLauncher;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.toolbox.FScrollPane;
+import forge.util.ThreadUtil;
 import forge.util.collect.FCollectionView;
 
-public class ConquestMultiverseScreen extends FScreen {
+public class ConquestMultiverseScreen extends FScreen implements IConquestEventLauncher {
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.6f);
     private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.2f);
 
@@ -55,6 +62,27 @@ public class ConquestMultiverseScreen extends FScreen {
         planeGrid.scrollToBottom(); //start at bottom and move up
     }
 
+    private void launchEvent() {
+        final ConquestCommander commander = Iterables.getFirst(model.getCommanders(), null);
+        final ConquestEvent event = model.getCurrentLocation().getEvent();
+        ThreadUtil.invokeInGameThread(new Runnable() {
+            @Override
+            public void run() {
+                FModel.getConquest().launchEvent(ConquestMultiverseScreen.this, commander, event);
+            }
+        });
+    }
+
+    @Override
+    public void startGame(final GameRunner gameRunner) {
+        LoadingOverlay.show("Loading new game...", new Runnable() {
+            @Override
+            public void run() {
+                gameRunner.finishStartingGame();
+            }
+        });
+    }
+
     private class PlaneGrid extends FScrollPane {
         private MoveAnimation activeMoveAnimation;
 
@@ -63,10 +91,15 @@ public class ConquestMultiverseScreen extends FScreen {
             if (activeMoveAnimation == null) {
                 //start move animation if a path can be found to tapped location
                 ConquestLocation loc = getLocation(x, y);
-                List<ConquestLocation> path = model.getPath(loc);
-                if (path != null) {
-                    activeMoveAnimation = new MoveAnimation(path);
-                    activeMoveAnimation.start();
+                if (model.getCurrentLocation().equals(loc)) {
+                    launchEvent();
+                }
+                else {
+                    List<ConquestLocation> path = model.getPath(loc);
+                    if (path != null) {
+                        activeMoveAnimation = new MoveAnimation(path);
+                        activeMoveAnimation.start();
+                    }
                 }
             }
             return true;
@@ -261,6 +294,7 @@ public class ConquestMultiverseScreen extends FScreen {
             protected void onEnd(boolean endingAll) {
                 model.setCurrentLocation(path.get(path.size() - 1));
                 activeMoveAnimation = null;
+                launchEvent();
             }
         }
     }

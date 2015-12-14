@@ -2,8 +2,13 @@ package forge.planarconquest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import forge.deck.Deck;
+import forge.game.GameType;
+import forge.item.PaperCard;
 import forge.planarconquest.ConquestPlane.Region;
+import forge.util.Aggregates;
 
 public class ConquestLocation {
     private ConquestPlane plane;
@@ -83,5 +88,41 @@ public class ConquestLocation {
         }
 
         return locations;
+    }
+
+    public boolean equals(Object obj) {
+        if (obj == null) { return false; }
+        try {
+            ConquestLocation loc = (ConquestLocation)obj;
+            return loc.plane == plane && loc.regionIndex == regionIndex &&
+                    loc.row == row && loc.col == col;
+        }
+        catch (Exception e) { return false; }
+    }
+
+    public ConquestEvent getEvent() {
+        //TODO: Make this pull from predefined events
+        return new ConquestEvent(this) {
+            private final PaperCard commander = Aggregates.random(getRegion().getCommanders());
+
+            @Override
+            protected Deck buildOpponentDeck() {
+                return ConquestUtil.generateDeck(commander, getRegion().getCardPool(), true);
+            }
+
+            @Override
+            public String getOpponentName() {
+                return commander.getName();
+            }
+
+            @Override
+            public String getAvatarImageKey() {
+                return commander.getImageKey(false);
+            }
+
+            @Override
+            public void addVariants(Set<GameType> variants) {
+            }
+        };
     }
 }
