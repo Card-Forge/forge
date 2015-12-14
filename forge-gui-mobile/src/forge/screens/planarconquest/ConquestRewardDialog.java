@@ -200,9 +200,9 @@ public class ConquestRewardDialog extends FScrollPane {
     }
 
     private class CardRevealAnimation extends ForgeAnimation {
-        private static final float DURATION_PER_CARD = 1f;
+        private static final float DURATION_PER_CARD = 0.7f;
 
-        private float progress = -0.5f; //delay start of animation by a half second
+        private float progress = -0.25f; //delay start of animation slightly
         private int currentIndex;
 
         private CardRevealAnimation() {
@@ -225,7 +225,8 @@ public class ConquestRewardDialog extends FScrollPane {
                 }
                 //ensure current card in view
                 if (getScrollHeight() > getHeight() && index < cardCount) {
-                    scrollIntoView(cardRevealers.get(index), PADDING);
+                    CardRevealer currentCard = cardRevealers.get(index);
+                    scrollIntoView(currentCard, currentCard.getHeight() / 2 + PADDING); //show half of the card below
                 }
             }
 
@@ -247,6 +248,7 @@ public class ConquestRewardDialog extends FScrollPane {
             }
             currentIndex = cardCount;
             animation.stop();
+            scrollToBottom();
         }
 
         @Override
@@ -281,15 +283,17 @@ public class ConquestRewardDialog extends FScrollPane {
 
         @Override
         public boolean longPress(float x, float y) {
-            int index = 0;
+            int index = -1;
             List<PaperCard> cards = new ArrayList<PaperCard>();
-            for (int i = 0; i < cardRevealers.size(); i++) {
+            for (int i = 0; i < animation.currentIndex; i++) {
                 CardRevealer revealer = cardRevealers.get(i);
                 if (revealer == this) {
                     index = i;
                 }
                 cards.add(revealer.reward.getCard());
             }
+            if (index == -1) { return false; } //don't show zoom for unrevealed cards
+
             CardZoom.show(cards, index, null);
             return true;
         }
