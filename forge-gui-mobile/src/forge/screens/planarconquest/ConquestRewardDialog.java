@@ -2,12 +2,16 @@ package forge.screens.planarconquest;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
+import forge.ImageKeys;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.ImageCache;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
@@ -188,6 +192,7 @@ public class ConquestRewardDialog extends FScrollPane {
             return false; //disable ability to hide dialog since it's animated
         }
 
+        @Override
         protected void onRevealFinished() {
             animation.start(); //start animation when dialog finished opening
             setButtonEnabled(1, true); //enable Skip button
@@ -195,9 +200,9 @@ public class ConquestRewardDialog extends FScrollPane {
     }
 
     private class CardRevealAnimation extends ForgeAnimation {
-        private static final float DURATION_PER_CARD = 0.5f;
+        private static final float DURATION_PER_CARD = 1f;
 
-        private float progress;
+        private float progress = -0.5f; //delay start of animation by a half second
         private int currentIndex;
 
         private CardRevealAnimation() {
@@ -206,6 +211,7 @@ public class ConquestRewardDialog extends FScrollPane {
         @Override
         protected boolean advance(float dt) {
             progress += dt;
+            if (progress <= 0) { return true; }
 
             int index = (int)(progress / DURATION_PER_CARD);
             int cardCount = cardRevealers.size();
@@ -285,13 +291,24 @@ public class ConquestRewardDialog extends FScrollPane {
             float w = getWidth();
             float h = getHeight();
 
-            if (reward.isDuplicate()) {
-                g.setAlphaComposite(DUPLICATE_ALPHA_COMPOSITE);
+            if (progress > 0.9999f) { //account for floating point error
+                if (reward.isDuplicate()) {
+                    g.setAlphaComposite(DUPLICATE_ALPHA_COMPOSITE);
+                }
+                CardRenderer.drawCard(g, reward.getCard(), 0, 0, w, h, CardStackPosition.Top);
+                if (reward.isDuplicate()) {
+                    g.resetAlphaComposite();
+                    drawContent(g, 0, 0, w, h);
+                }
             }
-            CardRenderer.drawCard(g, reward.getCard(), 0, 0, w, h, CardStackPosition.Top);
-            if (reward.isDuplicate()) {
-                g.resetAlphaComposite();
-                drawContent(g, 0, 0, w, h);
+            else if (progress >= 0.5f) {
+                CardRenderer.drawCard(g, reward.getCard(), 0, 0, w, h, CardStackPosition.Top);
+            }
+            else {
+                Texture cardBack = ImageCache.getImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true);
+                if (cardBack != null) {
+                    g.drawImage(cardBack, 0, 0, w, h);
+                }
             }
         }
     }
