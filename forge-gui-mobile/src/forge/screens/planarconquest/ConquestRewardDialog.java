@@ -223,6 +223,10 @@ public class ConquestRewardDialog extends FScrollPane {
                 for (int i = currentIndex; i < index; i++) {
                     cardRevealers.get(i).progress = 1;
                 }
+                //ensure current card in view
+                if (getScrollHeight() > getHeight() && index < cardCount) {
+                    scrollIntoView(cardRevealers.get(index), PADDING);
+                }
             }
 
             currentIndex = index;
@@ -237,10 +241,11 @@ public class ConquestRewardDialog extends FScrollPane {
 
         //skip remainder of animation
         private void skip() {
-            currentIndex = cardRevealers.size();
-            for (int i = currentIndex; i < currentIndex; i++) {
+            int cardCount = cardRevealers.size();
+            for (int i = currentIndex; i < cardCount; i++) {
                 cardRevealers.get(i).progress = 1;
             }
+            currentIndex = cardCount;
             animation.stop();
         }
 
@@ -256,18 +261,21 @@ public class ConquestRewardDialog extends FScrollPane {
 
     private class CardRevealer extends FLabel {
         private static final float DUPLICATE_ALPHA_COMPOSITE = 0.35f;
+        private static final float FLIP_DURATION = 0.85f;
+        private static final float FADE_DUPLICATE_DURATION = 0.1f; //give a brief interlude before the next flip
 
         private final ConquestReward reward;
         private float progress;
 
         private CardRevealer(ConquestReward reward0) {
-            super(new FLabel.Builder().iconScaleFactor(1f));
+            super(new FLabel.Builder().iconScaleWithFont(true).iconScaleFactor(1));
 
             reward = reward0;
             if (reward.isDuplicate()) {
                 setFont(FSkinFont.get(20));
                 setIcon(FSkinImage.QUEST_COIN);
                 setAlignment(HAlignment.CENTER);
+                setText(String.valueOf(reward.getReplacementShards()));
             }
         }
 
@@ -291,23 +299,35 @@ public class ConquestRewardDialog extends FScrollPane {
             float w = getWidth();
             float h = getHeight();
 
-            if (progress > 0.9999f) { //account for floating point error
+            if (progress >= FLIP_DURATION) {
+                float fadeProgress = (progress - FLIP_DURATION) / FADE_DUPLICATE_DURATION;
                 if (reward.isDuplicate()) {
-                    g.setAlphaComposite(DUPLICATE_ALPHA_COMPOSITE);
+                    float alphaComposite = DUPLICATE_ALPHA_COMPOSITE;
+                    if (fadeProgress < 1) {
+                        alphaComposite += (1 - fadeProgress) * (1 - DUPLICATE_ALPHA_COMPOSITE);
+                    }
+                    g.setAlphaComposite(alphaComposite);
                 }
                 CardRenderer.drawCard(g, reward.getCard(), 0, 0, w, h, CardStackPosition.Top);
                 if (reward.isDuplicate()) {
                     g.resetAlphaComposite();
-                    drawContent(g, 0, 0, w, h);
+                    if (fadeProgress >= 1) {
+                        drawContent(g, 0, 0, w, h);
+                    }
                 }
             }
-            else if (progress >= 0.5f) {
-                CardRenderer.drawCard(g, reward.getCard(), 0, 0, w, h, CardStackPosition.Top);
-            }
             else {
-                Texture cardBack = ImageCache.getImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true);
-                if (cardBack != null) {
-                    g.drawImage(cardBack, 0, 0, w, h);
+                float halfDuration = FLIP_DURATION / 2;
+                if (progress >= halfDuration) {
+                    float flipWidth = w * (progress - halfDuration) / halfDuration;
+                    CardRenderer.drawCard(g, reward.getCard(), (w - flipWidth) / 2, 0, flipWidth, h, CardStackPosition.Top);
+                }
+                else {
+                    Texture cardBack = ImageCache.getImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true);
+                    if (cardBack != null) {
+                        float flipWidth = w * (halfDuration - progress) / halfDuration;
+                        g.drawImage(cardBack, (w - flipWidth) / 2, 0, flipWidth, h);
+                    }
                 }
             }
         }

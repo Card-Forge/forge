@@ -28,13 +28,14 @@ public class FLabel extends FDisplayObject implements IButton {
         private HAlignment bldAlignment       = HAlignment.LEFT;
         private Vector2    bldInsets          = new Vector2(DEFAULT_INSETS, DEFAULT_INSETS);
 
-        private boolean bldSelectable       = false;
-        private boolean bldSelected         = false;
-        private boolean bldOpaque           = false;
-        private boolean bldIconInBackground = false;
-        private boolean bldIconScaleAuto    = true;
-        private boolean bldEnabled          = true;
-        private boolean bldParseSymbols     = true;
+        private boolean bldSelectable        = false;
+        private boolean bldSelected          = false;
+        private boolean bldOpaque            = false;
+        private boolean bldIconInBackground  = false;
+        private boolean bldIconScaleWithFont = false;
+        private boolean bldIconScaleAuto     = true;
+        private boolean bldEnabled           = true;
+        private boolean bldParseSymbols      = true;
 
         private String bldText;
         private FImage bldIcon;
@@ -60,6 +61,7 @@ public class FLabel extends FDisplayObject implements IButton {
         public Builder alphaComposite(final float a0) { this.bldAlphaComposite = a0; return this; }
         public Builder enabled(final boolean b0) { this.bldEnabled = b0; return this; }
         public Builder iconScaleAuto(final boolean b0) { this.bldIconScaleAuto = b0; return this; }
+        public Builder iconScaleWithFont(final boolean b0) { this.bldIconScaleWithFont = b0; return this; }
         public Builder iconScaleFactor(final float f0) { this.bldIconScaleFactor = f0; return this; }
         public Builder iconInBackground(final boolean b0) { this.bldIconInBackground = b0; return this; }
         public Builder iconInBackground() { iconInBackground(true); return this; }
@@ -103,7 +105,7 @@ public class FLabel extends FDisplayObject implements IButton {
     private float alphaComposite;
     private HAlignment alignment;
     private Vector2 insets;
-    private boolean selectable, selected, opaque, iconInBackground, iconScaleAuto, pressed;
+    private boolean selectable, selected, opaque, iconInBackground, iconScaleAuto, iconScaleWithFont, pressed;
 
     private String text;
     private FImage icon;
@@ -123,6 +125,7 @@ public class FLabel extends FDisplayObject implements IButton {
         opaque = b0.bldOpaque;
         iconInBackground = b0.bldIconInBackground;
         iconScaleAuto = b0.bldIconScaleAuto;
+        iconScaleWithFont = b0.bldIconScaleWithFont;
         text = b0.bldText != null ? b0.bldText : "";
         icon = b0.bldIcon;
         textColor = b0.bldTextColor;
@@ -323,7 +326,11 @@ public class FLabel extends FDisplayObject implements IButton {
             float iconHeight = icon.getHeight();
             float aspectRatio = iconWidth / iconHeight;
 
-            if (iconInBackground || iconScaleAuto) {
+            if (iconScaleWithFont) {
+                iconHeight = font.getLineHeight() * iconScaleFactor;
+                iconWidth = iconHeight * aspectRatio;
+            }
+            else if (iconInBackground || iconScaleAuto) {
                 iconHeight = h * iconScaleFactor;
                 iconWidth = iconHeight * aspectRatio;
             }

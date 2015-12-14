@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -90,6 +91,8 @@ public abstract class FOverlay extends FContainer {
 
     @Override
     public void setVisible(boolean visible0) {
+        FThreads.assertExecutedByEdt(true); //prevent showing or hiding overlays from background thread
+
         if (this.isVisible() == visible0) { return; }
 
         //ensure task to hide temporary overlay cancelled and run if another overlay becomes shown or hidden

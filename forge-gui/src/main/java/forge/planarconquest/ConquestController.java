@@ -275,7 +275,7 @@ public class ConquestController {
         //also build list of all rewards including replacement shards for each duplicate card
         //build this list in reverse order so commons appear first
         int shards = 0;
-        List<ConquestReward> allRewards = new ArrayList<ConquestReward>();
+        final List<ConquestReward> allRewards = new ArrayList<ConquestReward>();
         for (int i = rewards.size() - 1; i >= 0; i--) {
             int replacementShards = 0;
             PaperCard card = rewards.get(i);
@@ -287,7 +287,12 @@ public class ConquestController {
             allRewards.add(new ConquestReward(card, replacementShards));
         }
 
-        view.showConquestRewards("Booster Awarded", allRewards);
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                view.showConquestRewards("Booster Awarded", allRewards);
+            }
+        });
         model.unlockCards(rewards);
         model.rewardAEtherShards(shards);
     }
