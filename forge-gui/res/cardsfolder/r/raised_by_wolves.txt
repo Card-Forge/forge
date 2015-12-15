@@ -7,5 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ g 2 2 wolf bng | TokenOwner$ You | TokenAmount$ 2
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each Wolf you control.
 SVar:X:Count$Valid Card.Wolf+YouCtrl
+SVar:BuffedBy:Wolf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raised_by_wolves.jpg
 Oracle:Enchant creature\nWhen Raised by Wolves enters the battlefield, put two 2/2 green Wolf creature tokens onto the battlefield.\nEnchanted creature gets +1/+1 for each Wolf you control.

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Arjun 2
+Title=Arjun
+Difficulty=medium
+Description=UR card draw deck with Chasm Skulker and Niv-Mizzet, the Firemind
+Icon=Arjun.jpg
+Deck Type=constructed
+[main]
+7 Island
+1 Mountain
+4 Scalding Tarn
+2 Polluted Delta
+1 Steam Vents
+4 Sulfur Falls
+4 Volcanic Island
+1 Swiftwater Cliffs
+2 Arjun, the Shifting Flame
+2 Whirlpool Drake
+2 Whirlpool Rider
+2 Teferi's Puzzle Box
+4 Desperate Ravings
+1 Noggle Ransacker
+1 Jhessian Thief
+4 Accumulated Knowledge
+1 Timetwister
+1 Dragon Mage
+1 Memory Jar
+1 Time Spiral
+1 Wheel of Fate
+1 Wheel of Fortune
+1 Brainstorm
+2 Obsessive Search
+4 Chasm Skulker
+2 Jace's Erasure
+2 Niv-Mizzet, the Firemind
+1 Sphinx's Tutelage
+[sideboard]
