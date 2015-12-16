@@ -214,6 +214,9 @@ public class DrawAi extends SpellAbilityAi {
             }
             xPaid = true;
         }
+        if (num.equals("X") && sa.getSVar(num).equals("Count$Converge")) {
+            numCards = ComputerUtilMana.getConvergeCount(sa, ai);
+        }
         //if (n)
 
         // TODO: if xPaid and one of the below reasons would fail, instead of
