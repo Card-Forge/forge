@@ -3875,6 +3875,7 @@ forge-gui/res/cardsfolder/c/coralhelm_guide.txt -text
 forge-gui/res/cardsfolder/c/core_prowler.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/coretapper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cornered_market.txt -text
+forge-gui/res/cardsfolder/c/corpse_augur.txt -text
 forge-gui/res/cardsfolder/c/corpse_blockade.txt -text
 forge-gui/res/cardsfolder/c/corpse_connoisseur.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/corpse_cur.txt svneol=native#text/plain
