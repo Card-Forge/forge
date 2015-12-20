@@ -47,7 +47,9 @@ public enum ConquestPlane {
     }, new String[] {
             "Bant", "Grixis", "Jund", "Naya"
     }, new String[] {
-            
+            "Unstable Obelisk", "Baleful Strix", "Shardless Agent", "Etherium-Horn Sorcerer",
+            "Patron of the Valiant", "Sublime Archangel", "Naya Soulbeast", "Stalwart Aven",
+            "Pharika's Disciple"
     }, new Region[] {
             new Region("Bant", "Bant Panorama", MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE),
             new Region("Esper", "Esper Panorama", MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK),
@@ -66,7 +68,8 @@ public enum ConquestPlane {
     }, new String[] {
             "Academy at Tolaria West", "Isle of Vesuva", "Krosa", "Llanowar", "Otaria", "Shiv", "Talon Gates"
     }, new String[] {
-            
+            "Crown of Empires", "Scepter of Empires", "Throne of Empires", "Roc Egg", "Brindle Boar",
+            "Armored Cancrix"
     }, new Region[] {
             new Region("Ice Age", "Dark Depths", inSet("ICE", "ALL", "CSP")),
             new Region("Mirage", "Teferi's Isle", inSet("MIR", "VIS", "WTH")),
@@ -81,7 +84,8 @@ public enum ConquestPlane {
     }, new String[] {
             "Gavony", "Kessig", "Nephalia"
     }, new String[] {
-            
+            "Profane Memento", "Strionic Resonator", "Guardian Seraph", "Seraph of the Sword",
+            "Soul of Innistrad", "Ajani's Pridemate"
     }, new Region[] {
             new Region("Moorland", "Moorland Haunt", MagicColor.WHITE | MagicColor.BLUE),
             new Region("Nephalia", "Nephalia Drownyard", MagicColor.BLUE | MagicColor.BLACK),
@@ -94,7 +98,7 @@ public enum ConquestPlane {
     }, new String[] {
             "Minamo", "Orochi Colony", "Sokenzan", "Takenuma"
     }, new String[] {
-            
+            "Champion's Helm", "Haunted Plate Mail", "Sai of the Shinobi"
     }, new Region[] {
             new Region("Towabara", "Eiganjo Castle", MagicColor.WHITE),
             new Region("Minamo Academy", "Minamo, School at Water's Edge", MagicColor.BLUE),
@@ -107,7 +111,7 @@ public enum ConquestPlane {
     }, new String[] {
             "Goldmeadow", "The Great Forest", "Velis Vel", "Raven's Run", 
     }, new String[] {
-            
+            "Throwing Knife"
     }, new Region[] {
             new Region("Ancient Amphitheater", "Ancient Amphitheater", MagicColor.RED | MagicColor.WHITE),
             new Region("Auntie's Hovel", "Auntie's Hovel", MagicColor.BLACK | MagicColor.RED),
@@ -136,7 +140,10 @@ public enum ConquestPlane {
     }, new String[] {
             "Panopticon", "Quicksilver Sea", "Furnace Layer", "Norn's Dominion"
     }, new String[] {
-            
+            "Crystal Ball", "Vial of Poison", "Avarice Amulet", "Masterwork of Ingenuity", "Scytheclaw",
+            "Soul of New Phyrexia", "Adaptive Automaton", "Bonded Construct", "Chief of the Foundry",
+            "Guardian Automaton", "Hangarback Walker", "Scuttling Doom Engine", "Steel Overseer",
+            "Chronomaton", "Ramroller", "Augury Owl", "Healer of the Pride"
     }, new Region[] {
             new Region("Panopticon", "Darksteel Citadel", MagicColor.COLORLESS),
             new Region("Taj-Nar", "Ancient Den", MagicColor.WHITE),
@@ -169,7 +176,8 @@ public enum ConquestPlane {
     }, new String[] {
             "Agyrem", "Grand Ossuary", "Izzet Steam Maze", "Orzhova", "Prahv", "Selesnya Loft Gardens", "Undercity Reaches"
     }, new String[] {
-            
+            "Druidic Satchel", "Gem of Becoming", "Obelisk of Urd", "Will-Forged Golem", "Seraph of the Masses",
+            "Avatar of Slaughter", "Basandra, Battle Seraph", "Soul of Ravnica", "Duskhunter Bat"
     }, new Region[] {
             new Region("Azorius Chancery", "Azorius Chancery", MagicColor.WHITE | MagicColor.BLUE),
             new Region("Boros Garrison", "Boros Garrison", MagicColor.RED | MagicColor.WHITE),
@@ -183,24 +191,28 @@ public enum ConquestPlane {
             new Region("Simic Growth Chamber", "Simic Growth Chamber", MagicColor.GREEN | MagicColor.BLUE)
     }),
     Shandalar("Shandalar", new String[] {
-            "2ED", "3ED", "4ED", "ARN", "ATQ", "LEG", "DRK"
+            "2ED", "3ED", "4ED", "ARN", "ATQ", "LEG", "DRK", "FEM"
     }, new String[] {
             "Eloren Wilds", "Onakke Catacomb"
     }, new String[] {
-            
+            "Acorn Catapult", "Tyrant's Machine", "Brittle Effigy", "Kird Chieftain", "Soul of Shandalar",
+            "Ring of Evos Isle", "Ring of Kalonia", "Ring of Thune", "Ring of Valkas", "Ring of Xathrid",
+            "Kalonian Behemoth", "Kalonian Tusker", "Roaring Primadox", "Thragtusk",
+            "Warden of Evos Isle", "Initiates of the Ebon Hand", "Deathgaze Cockatrice"
     }, new Region[] {
             new Region("Core", "Black Lotus", inSet("2ED", "3ED", "4ED")),
             new Region("Arabian Nights", "Library of Alexandria", inSet("ARN")),
             new Region("Antiquities", "Mishra's Workshop", inSet("ATQ")),
             new Region("Legends", "Karakas", inSet("LEG")),
-            new Region("The Dark", "City of Shadows", inSet("DRK"))
+            new Region("The Dark", "City of Shadows", inSet("DRK")),
+            new Region("Fallen Empires", "Ruins of Trokair", inSet("FEM"))
     }),
     Tarkir("Tarkir", new String[] {
             "KTK", "FRF", "DTK"
     }, new String[] {
             "Kharasha Foothills"
     }, new String[] {
-            
+            "Ringwarden Owl", "Aven Battle Priest"
     }, new Region[] {
             new Region("Abzan Houses", "Sandsteppe Citadel", MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN),
             new Region("Jeskai Way", "Mystic Monastery", MagicColor.BLUE | MagicColor.RED | MagicColor.WHITE),
@@ -213,7 +225,8 @@ public enum ConquestPlane {
     }, new String[] {
             "Lethe Lake"
     }, new String[] {
-            
+            "Gorgon Flail", "Helm of the Gods", "Sigil of Valor", "Aegis Angel", "Soul of Theros",
+            "Enlightened Ascetic", "Ajani's Chosen", "Herald of the Pantheon"
     }, new Region[] {
             new Region("", "", inSet("THS", "BNG", "JOU"))
     }),
@@ -222,7 +235,7 @@ public enum ConquestPlane {
     }, new String[] {
             "The Dark Barony"
     }, new String[] {
-            
+            "Elixir of Immortality"
     }, new Region[] {
             new Region("", "", inSet("HML"))
     }),
@@ -231,7 +244,7 @@ public enum ConquestPlane {
     }, new String[] {
             "Akoum", "Hedron Fields of Agadeem", "Murasa", "Tazeem"
     }, new String[] {
-            
+            "Perilous Vault", "Archangel of Thune", "Soul of Zendikar"
     }, new Region[] {
             new Region("", "", inSet("ZEN", "WWK", "ROE"))
     });
@@ -245,10 +258,10 @@ public enum ConquestPlane {
     private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
     private AwardPool awardPool;
 
-    private ConquestPlane(String name0, String[] setCodes0, String[] planeCards0, String[] otherCards0, Region[] regions0) {
-        this(name0, setCodes0, planeCards0, otherCards0, regions0, null);
+    private ConquestPlane(String name0, String[] setCodes0, String[] planeCards0, String[] additionalCards0, Region[] regions0) {
+        this(name0, setCodes0, planeCards0, additionalCards0, regions0, null);
     }
-    private ConquestPlane(String name0, String[] setCodes0, String[] planeCards0, String[] otherCards0, Region[] regions0, String[] bannedCards0) {
+    private ConquestPlane(String name0, String[] setCodes0, String[] planeCards0, String[] additionalCards0, Region[] regions0, String[] bannedCards0) {
         name = name0;
         regions = new FCollection<Region>(regions0);
         if (bannedCards0 != null) {
@@ -262,14 +275,18 @@ public enum ConquestPlane {
                 editions.add(edition);
                 for (CardInSet card : edition.getCards()) {
                     if (!bannedCards.contains(card.name)) {
-                        addCard(commonCards.getCard(card.name, setCode));
+                        if (!addCard(commonCards.getCard(card.name, setCode))) {
+                            System.out.println("\"" + card.name + "\" is not a valid card in " + setCode);
+                        }
                     }
                 }
             }
         }
 
-        for (String cardName : otherCards0) {
-            addCard(commonCards.getCard(cardName));
+        for (String cardName : additionalCards0) {
+            if (!addCard(commonCards.getCard(cardName))) {
+                System.out.println("\"" + cardName + "\" is not a valid card");
+            }
         }
 
         CardDb variantCards = FModel.getMagicDb().getVariantCards();
@@ -283,8 +300,10 @@ public enum ConquestPlane {
         }
     }
 
-    private void addCard(PaperCard pc) {
-        if (pc == null) { return; }
+    private boolean addCard(PaperCard pc) {
+        if (pc == null) {
+            return false;
+        }
 
         CardRules rules = pc.getRules();
         boolean isCommander = pc.getRules().canBeCommander();
@@ -314,6 +333,7 @@ public enum ConquestPlane {
                 }
             }
         }
+        return true;
     }
 
     public String getName() {
