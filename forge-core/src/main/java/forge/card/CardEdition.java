@@ -364,6 +364,13 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
         };
 
+        public final Comparator<PaperCard> CARD_EDITION_COMPARATOR = new Comparator<PaperCard>() {
+            @Override
+            public int compare(PaperCard c1, PaperCard c2) {
+                return Collection.this.get(c1.getEdition()).compareTo(Collection.this.get(c2.getEdition()));
+            }
+        };
+
         public IItemReader<SealedProduct.Template> getBoosterGenerator() {
             // TODO Auto-generated method stub
             return new StorageReaderBase<SealedProduct.Template>(null) {

@@ -18,7 +18,9 @@
 package forge.planarconquest;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.base.Predicate;
 
@@ -534,5 +536,15 @@ public enum ConquestPlane {
                 rewards.add(c);
             }
         }
+    }
+
+    public static Set<ConquestPlane> getAllPlanesOfCard(PaperCard card) {
+        EnumSet<ConquestPlane> planes = EnumSet.noneOf(ConquestPlane.class);
+        for (ConquestPlane plane : values()) {
+            if (plane.cardPool.contains(card)) {
+                planes.add(plane);
+            }
+        }
+        return planes;
     }
 }

@@ -74,6 +74,16 @@ public class AdvancedSearch {
                 return FModel.getFormats().getAllFormatsOfCard(input);
             }
         }),
+        CARD_PLANE("Plane", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestPlane>(ImmutableList.copyOf(ConquestPlane.values())) {
+            @Override
+            protected ConquestPlane getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<ConquestPlane> getItemValues(PaperCard input) {
+                return ConquestPlane.getAllPlanesOfCard(input);
+            }
+        }),
         CARD_QUEST_WORLD("Quest World", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
             @Override
             protected QuestWorld getItemValue(PaperCard input) {
@@ -180,6 +190,16 @@ public class AdvancedSearch {
             @Override
             protected CardRarity getItemValue(PaperCard input) {
                 return input.getRarity();
+            }
+        }),
+        CARD_FIRST_PRINTING("First Printing", PaperCard.class, FilterOperator.BOOLEAN_OPS, new BooleanEvaluator<PaperCard>() {
+            @Override
+            protected Boolean getItemValue(PaperCard input) {
+                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(input.getName());
+                if (cards.size() <= 1) { return true; }
+
+                Collections.sort(cards, FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
+                return cards.get(0) == input;
             }
         }),
         DECK_NAME("Name", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
