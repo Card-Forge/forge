@@ -204,18 +204,20 @@ public class DrawAi extends SpellAbilityAi {
 
         boolean xPaid = false;
         final String num = sa.getParam("NumCards");
-        if ((num != null) && num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            if (sa instanceof AbilitySub && !source.getSVar("PayX").equals("")) {
-                numCards = Integer.parseInt(source.getSVar("PayX"));
-            } else {
-                numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(numCards));
+        if (num != null && num.equals("X")) {
+            if (source.getSVar(num).equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                if (sa instanceof AbilitySub && !source.getSVar("PayX").equals("")) {
+                    numCards = Integer.parseInt(source.getSVar("PayX"));
+                } else {
+                    numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                    source.setSVar("PayX", Integer.toString(numCards));
+                }
+                xPaid = true;
             }
-            xPaid = true;
-        }
-        if (num.equals("X") && sa.getSVar(num).equals("Count$Converge")) {
-            numCards = ComputerUtilMana.getConvergeCount(sa, ai);
+            if (sa.getSVar(num).equals("Count$Converge")) {
+                numCards = ComputerUtilMana.getConvergeCount(sa, ai);
+            }
         }
         //if (n)
 
