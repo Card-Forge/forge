@@ -49,7 +49,16 @@ public enum ConquestPlane {
     }, new String[] {
             "Unstable Obelisk", "Baleful Strix", "Shardless Agent", "Etherium-Horn Sorcerer",
             "Patron of the Valiant", "Sublime Archangel", "Naya Soulbeast", "Stalwart Aven",
-            "Pharika's Disciple"
+            "Pharika's Disciple", "Acolyte of the Inferno", "Citadel Castellan", "Ajani's Mantra",
+            "Consul's Lieutenant", "Firefiend Elemental", "Goblin Glory Chaser", "Honored Hierarch",
+            "Knight of the Pilgrim's Road", "Outland Colossus", "Relic Seeker", "Rhox Maulers",
+            "Scab-Clan Berserker", "Topan Freeblade", "Undercity Troll", "Valeron Wardens",
+            "War Oracle", "Derevi, Empyrial Tactician", "Kaalia of the Vast", "Bloodspore Thrinax",
+            "Cathedral of War", "Duskmantle Prowler", "Duty-Bound Dead", "Knight of Glory", "Knight of Infamy",
+            "Nefarox, Overlord of Grixis", "Servant of Nefarox", "Celestial Flare", "Viscera Seer",
+            "Meren of Clan Nel Toth", "Jazal Goldmane", "Jhessian Thief", "Maelstrom Wanderer",
+            "Onyx Mage", "Preyseizer Dragon", "Thromok the Insatiable", "Restore", "Rhox Faithmender",
+            "Rhox Pikemaster", "Roon of the Hidden Realm", "Scourge of Nel Toth"
     }, new Region[] {
             new Region("Bant", "Bant Panorama", MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE),
             new Region("Esper", "Esper Panorama", MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK),
@@ -69,7 +78,11 @@ public enum ConquestPlane {
             "Academy at Tolaria West", "Isle of Vesuva", "Krosa", "Llanowar", "Otaria", "Shiv", "Talon Gates"
     }, new String[] {
             "Crown of Empires", "Scepter of Empires", "Throne of Empires", "Roc Egg", "Brindle Boar",
-            "Armored Cancrix"
+            "Armored Cancrix", "Academy Raider", "Alaborn Cavalier", "Prossh, Skyraider of Kher",
+            "Balance of Power", "Beetleback Chief", "Crimson Mage", "Cruel Edict", "Dakmor Lancer",
+            "Famine", "Firewing Phoenix", "Flesh to Dust", "Flusterstorm", "Freyalise, Llanowar's Fury",
+            "Gaea's Revenge", "Ice Cage", "Liliana, Heretical Healer", "Mwonvuli Beast Tracker",
+            "Teferi, Temporal Archmage", "Titania, Protector of Argoth"
     }, new Region[] {
             new Region("Ice Age", "Dark Depths", inSet("ICE", "ALL", "CSP")),
             new Region("Mirage", "Teferi's Isle", inSet("MIR", "VIS", "WTH")),
@@ -85,7 +98,13 @@ public enum ConquestPlane {
             "Gavony", "Kessig", "Nephalia"
     }, new String[] {
             "Profane Memento", "Strionic Resonator", "Guardian Seraph", "Seraph of the Sword",
-            "Soul of Innistrad", "Ajani's Pridemate"
+            "Soul of Innistrad", "Ajani's Pridemate", "Jeleva, Nephalia's Scourge", "Blood Bairn",
+            "Blood Host", "Call of the Full Moon", "Captivating Vampire", "Child of Night",
+            "Jeleva, Nephalia's Scourge", "Vampire Nocturnus", "Crusader of Odric", "Odric, Master Tactician",
+            "Curse of Chaos", "Curse of Inertia", "Curse of Predation", "Curse of Shallow Graves",
+            "Curse of the Forsaken", "Deathreap Ritual", "Malicious Affliction", "Predator's Howl",
+            "Geist of the Moors", "Ghoulcaller Gisa", "Hushwing Gryff", "Possessed Skaab", "Predator's Howl",
+            "Sign in Blood", "Stitcher Geralf"
     }, new Region[] {
             new Region("Moorland", "Moorland Haunt", MagicColor.WHITE | MagicColor.BLUE),
             new Region("Nephalia", "Nephalia Drownyard", MagicColor.BLUE | MagicColor.BLACK),
@@ -98,7 +117,9 @@ public enum ConquestPlane {
     }, new String[] {
             "Minamo", "Orochi Colony", "Sokenzan", "Takenuma"
     }, new String[] {
-            "Champion's Helm", "Haunted Plate Mail", "Sai of the Shinobi"
+            "Champion's Helm", "Haunted Plate Mail", "Sai of the Shinobi", "Kaseto, Orochi Archmage",
+            "Gahiji, Honored One", "Kurkesh, Onakke Ancient", "Sakashima's Student", "Silent-Blade Oni",
+            "Vela the Night-Clad"
     }, new Region[] {
             new Region("Towabara", "Eiganjo Castle", MagicColor.WHITE),
             new Region("Minamo Academy", "Minamo, School at Water's Edge", MagicColor.BLUE),
@@ -111,7 +132,11 @@ public enum ConquestPlane {
     }, new String[] {
             "Goldmeadow", "The Great Forest", "Velis Vel", "Raven's Run", 
     }, new String[] {
-            "Throwing Knife"
+            "Throwing Knife", "Awakener Druid", "Boonweaver Giant", "Cruel Sadist", "Dungrove Elder",
+            "Great Oak Guardian", "Dwynen's Elite", "Dwynen, Gilt-Leaf Daen", "Eyeblight Assassin",
+            "Eyeblight Massacre", "Flamekin Village", "Fleshpulper Giant", "Gilt-Leaf Winnower",
+            "Gnarlroot Trapper", "Harbinger of the Tides", "Marath, Will of the Wild", "Shaman of the Pack",
+            "Thornbow Archer"
     }, new Region[] {
             new Region("Ancient Amphitheater", "Ancient Amphitheater", MagicColor.RED | MagicColor.WHITE),
             new Region("Auntie's Hovel", "Auntie's Hovel", MagicColor.BLACK | MagicColor.RED),
@@ -143,7 +168,14 @@ public enum ConquestPlane {
             "Crystal Ball", "Vial of Poison", "Avarice Amulet", "Masterwork of Ingenuity", "Scytheclaw",
             "Soul of New Phyrexia", "Adaptive Automaton", "Bonded Construct", "Chief of the Foundry",
             "Guardian Automaton", "Hangarback Walker", "Scuttling Doom Engine", "Steel Overseer",
-            "Chronomaton", "Ramroller", "Augury Owl", "Healer of the Pride"
+            "Chronomaton", "Ramroller", "Augury Owl", "Healer of the Pride", "Aeronaut Tinkerer",
+            "Aspiring Aeronaut", "Foundry of the Consuls", "Ghirapur Gearcrafter", "Pia and Kiran Nalaar",
+            "Thopter Engineer", "Thopter Spy Network", "Whirler Rogue", "Ajani, Caller of the Pride",
+            "Blastfire Bolt", "Buried Ruin", "Chief Engineer", "Artificer's Hex", "Artificer's Epiphany",
+            "Feldon of the Third Path", "Flamewright", "Muzzio, Visionary Architect", "Reclusive Artificer",
+            "Sydri, Galvanic Genius", "Darksteel Mutation", "Ensoul Artifact", "Ezuri, Claw of Progress",
+            "Ghirapur AEther Grid", "Hoarding Dragon", "Manic Vandal", "Molten Birth", "Phylactery Lich",
+            "Preordain", "Scrap Mastery", "Scrapyard Mongrel", "Smelt"
     }, new Region[] {
             new Region("Panopticon", "Darksteel Citadel", MagicColor.COLORLESS),
             new Region("Taj-Nar", "Ancient Den", MagicColor.WHITE),
@@ -158,7 +190,11 @@ public enum ConquestPlane {
     }, new String[] {
             "Stronghold Furnace"
     }, new String[] {
-            
+            "Battle Sliver", "Belligerent Sliver", "Blur Sliver", "Bonescythe Sliver", "Constricting Sliver",
+            "Diffusion Sliver", "Galerider Sliver", "Groundshaker Sliver", "Hive Stirrings", "Leeching Sliver",
+            "Manaweft Sliver", "Megantic Sliver", "Predatory Sliver", "Sentinel Sliver", "Sliver Construct",
+            "Sliver Hive", "Sliver Hivelord", "Steelform Sliver", "Striking Sliver", "Syphon Sliver",
+            "Thorncaster Sliver", "Venom Sliver"
     }, new Region[] {
             new Region("Caldera Lake", "Caldera Lake", MagicColor.BLUE | MagicColor.RED),
             new Region("Cinder Marsh", "Cinder Marsh", MagicColor.BLACK | MagicColor.RED),
@@ -177,7 +213,17 @@ public enum ConquestPlane {
             "Agyrem", "Grand Ossuary", "Izzet Steam Maze", "Orzhova", "Prahv", "Selesnya Loft Gardens", "Undercity Reaches"
     }, new String[] {
             "Druidic Satchel", "Gem of Becoming", "Obelisk of Urd", "Will-Forged Golem", "Seraph of the Masses",
-            "Avatar of Slaughter", "Basandra, Battle Seraph", "Soul of Ravnica", "Duskhunter Bat"
+            "Avatar of Slaughter", "Basandra, Battle Seraph", "Soul of Ravnica", "Duskhunter Bat",
+            "Shattergang Brothers", "Blood Ogre", "Bloodlord of Vaasgoth", "Bloodrage Vampire", "Carnage Wurm",
+            "Furyborn Hellkite", "Gorehorn Minotaurs", "Lurking Crocodile", "Stormblood Berserker",
+            "Vampire Outcasts", "Bounding Krasis", "Conclave Naturalists", "Covenant of Blood",
+            "Crowd's Favor", "Endless Obedience", "Ephemeral Shields", "Feral Incarnation", "Living Totem",
+            "Meditation Puzzle", "Return to the Ranks", "Stain the Mind", "Stoke the Flames", "Triplicate Spirits",
+            "Unmake the Graves", "Deadbridge Shaman", "Extract from Darkness", "Mizzium Meddler", "Mizzix of the Izmagnus",
+            "Karlov of the Ghost Council", "Mazirek, Kraul Death Priest", "Fungal Sprouting", "Ghave, Guru of Spores",
+            "Jade Mage", "Sporemound", "Jace, the Living Guildpact", "Krenko's Command", "Krenko's Enforcer", "Krenko, Mob Boss",
+            "Leyline of Anticipation", "Leyline of Punishment", "Leyline of Sanctity", "Leyline of Vitality", "Mantle of Webs",
+            "Nightsnare", "Shattergang Brothers", "Yeva's Forcemage", "Yeva, Nature's Herald"
     }, new Region[] {
             new Region("Azorius Chancery", "Azorius Chancery", MagicColor.WHITE | MagicColor.BLUE),
             new Region("Boros Garrison", "Boros Garrison", MagicColor.RED | MagicColor.WHITE),
@@ -197,8 +243,14 @@ public enum ConquestPlane {
     }, new String[] {
             "Acorn Catapult", "Tyrant's Machine", "Brittle Effigy", "Kird Chieftain", "Soul of Shandalar",
             "Ring of Evos Isle", "Ring of Kalonia", "Ring of Thune", "Ring of Valkas", "Ring of Xathrid",
-            "Kalonian Behemoth", "Kalonian Tusker", "Roaring Primadox", "Thragtusk",
-            "Warden of Evos Isle", "Initiates of the Ebon Hand", "Deathgaze Cockatrice"
+            "Kalonian Behemoth", "Kalonian Tusker", "Kalonian Hydra", "Kalonian Twingrove", "Roaring Primadox",
+            "Thragtusk", "Warden of Evos Isle", "Initiates of the Ebon Hand", "Deathgaze Cockatrice",
+            "Acolyte of Xathrid", "Xathrid Demon", "Xathrid Gorgon", "Xathrid Necromancer", "Xathrid Slyblade",
+            "Riku of the Two Reflections", "Downpour", "Talrand's Invocation", "Talrand, Sky Summoner",
+            "Encrust", "Faith's Reward", "Garruk, Apex Predator", "Garruk, Primal Hunter", "Griffin Rider",
+            "Hunter's Insight", "In Garruk's Wake", "Jalira, Master Polymorphist", "Kothophed, Soul Hoarder",
+            "Magmatic Force", "Master of the Pearl Trident", "Polymorphist's Jest", "Scroll Thief",
+            "Sentinel Spider", "The Chain Veil", "Yisan, the Wanderer Bard"
     }, new Region[] {
             new Region("Core", "Black Lotus", inSet("2ED", "3ED", "4ED")),
             new Region("Arabian Nights", "Library of Alexandria", inSet("ARN")),
@@ -212,7 +264,7 @@ public enum ConquestPlane {
     }, new String[] {
             "Kharasha Foothills"
     }, new String[] {
-            "Ringwarden Owl", "Aven Battle Priest"
+            "Ringwarden Owl", "Aven Battle Priest", "Abbot of Keral Keep", "Mage-Ring Bully"
     }, new Region[] {
             new Region("Abzan Houses", "Sandsteppe Citadel", MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN),
             new Region("Jeskai Way", "Mystic Monastery", MagicColor.BLUE | MagicColor.RED | MagicColor.WHITE),
@@ -226,7 +278,13 @@ public enum ConquestPlane {
             "Lethe Lake"
     }, new String[] {
             "Gorgon Flail", "Helm of the Gods", "Sigil of Valor", "Aegis Angel", "Soul of Theros",
-            "Enlightened Ascetic", "Ajani's Chosen", "Herald of the Pantheon"
+            "Enlightened Ascetic", "Ajani's Chosen", "Herald of the Pantheon", "Ajani Steadfast",
+            "Ajani's Sunstriker", "Akroan Jailer", "Akroan Sergeant", "Anchor to the AEther",
+            "Blood-Cursed Knight", "Daxos the Returned", "Daxos's Torment", "Kalemne, Disciple of Iroas",
+            "Gideon's Avenger", "Gideon's Lawkeeper", "Gideon's Phalanx", "Grasp of the Hieromancer",
+            "Kytheon's Irregulars", "Kytheon's Tactics", "Kytheon, Hero of Akros", "Hixus, Prison Warden",
+            "Iroas's Champion", "Kalemne's Captain", "Magmatic Insight", "Oath of the Ancient Wood",
+            "Prickleboar", "Shadows of the Past", "Starfield of Nyx", "Suppression Bonds", "Valor in Akros"
     }, new Region[] {
             new Region("", "", inSet("THS", "BNG", "JOU"))
     }),
@@ -244,7 +302,12 @@ public enum ConquestPlane {
     }, new String[] {
             "Akoum", "Hedron Fields of Agadeem", "Murasa", "Tazeem"
     }, new String[] {
-            "Perilous Vault", "Archangel of Thune", "Soul of Zendikar"
+            "Perilous Vault", "Archangel of Thune", "Soul of Zendikar", "Boundless Realms", "Malakir Cullblade",
+            "Nissa's Expedition", "Dismiss into Dream", "Elemental Bond", "Elvish Archdruid", "Elvish Mystic",
+            "Nahiri, the Lithomancer", "Felidar Umbra", "Indrik Umbra", "Into the Wilds", "Joraga Invocation",
+            "Mind Control", "Nissa's Pilgrimage", "Nissa's Revelation", "Nissa, Vastwood Seer", "Nissa, Worldwaker",
+            "Ob Nixilis of the Black Oath", "Ob Nixilis, Unshackled", "Sword of the Animist", "Vastwood Hydra",
+            "Wild Instincts", "Woodborn Behemoth", "Zendikar Incarnate", "Zendikar's Roil"
     }, new Region[] {
             new Region("", "", inSet("ZEN", "WWK", "ROE"))
     });
