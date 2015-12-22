@@ -246,11 +246,11 @@ public enum ConquestPlane {
             "Kalonian Behemoth", "Kalonian Tusker", "Kalonian Hydra", "Kalonian Twingrove", "Roaring Primadox",
             "Thragtusk", "Warden of Evos Isle", "Initiates of the Ebon Hand", "Deathgaze Cockatrice",
             "Acolyte of Xathrid", "Xathrid Demon", "Xathrid Gorgon", "Xathrid Necromancer", "Xathrid Slyblade",
-            "Riku of the Two Reflections", "Downpour", "Talrand's Invocation", "Talrand, Sky Summoner",
-            "Encrust", "Faith's Reward", "Garruk, Apex Predator", "Garruk, Primal Hunter", "Griffin Rider",
+            "Downpour", "Talrand's Invocation", "Talrand, Sky Summoner", "Encrust", "Sentinel Spider",
+            "Faith's Reward", "Garruk, Apex Predator", "Garruk, Primal Hunter", "Griffin Rider",
             "Hunter's Insight", "In Garruk's Wake", "Jalira, Master Polymorphist", "Kothophed, Soul Hoarder",
             "Magmatic Force", "Master of the Pearl Trident", "Polymorphist's Jest", "Scroll Thief",
-            "Sentinel Spider", "The Chain Veil", "Yisan, the Wanderer Bard"
+            "The Chain Veil", "Yisan, the Wanderer Bard"
     }, new Region[] {
             new Region("Core", "Black Lotus", inSet("2ED", "3ED", "4ED")),
             new Region("Arabian Nights", "Library of Alexandria", inSet("ARN")),
@@ -338,18 +338,14 @@ public enum ConquestPlane {
                 editions.add(edition);
                 for (CardInSet card : edition.getCards()) {
                     if (!bannedCards.contains(card.name)) {
-                        if (!addCard(commonCards.getCard(card.name, setCode))) {
-                            System.out.println("\"" + card.name + "\" is not a valid card in " + setCode);
-                        }
+                        addCard(commonCards.getCard(card.name, setCode));
                     }
                 }
             }
         }
 
         for (String cardName : additionalCards0) {
-            if (!addCard(commonCards.getCard(cardName))) {
-                System.out.println("\"" + cardName + "\" is not a valid card");
-            }
+            addCard(commonCards.getCard(cardName));
         }
 
         CardDb variantCards = FModel.getMagicDb().getVariantCards();
@@ -363,10 +359,8 @@ public enum ConquestPlane {
         }
     }
 
-    private boolean addCard(PaperCard pc) {
-        if (pc == null) {
-            return false;
-        }
+    private void addCard(PaperCard pc) {
+        if (pc == null) { return; }
 
         CardRules rules = pc.getRules();
         boolean isCommander = pc.getRules().canBeCommander();
@@ -396,7 +390,6 @@ public enum ConquestPlane {
                 }
             }
         }
-        return true;
     }
 
     public String getName() {
