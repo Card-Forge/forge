@@ -18,6 +18,7 @@
 package forge.planarconquest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -357,6 +358,9 @@ public enum ConquestPlane {
             }
             planeCards.add(pc);
         }
+
+        //sort commanders by name
+        Collections.sort(commanders);
     }
 
     private void addCard(PaperCard pc) {
