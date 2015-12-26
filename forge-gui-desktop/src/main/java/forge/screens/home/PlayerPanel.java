@@ -315,7 +315,8 @@ public class PlayerPanel extends FPanel {
     };
 
     private void updateVariantControlsVisibility() {
-        final boolean isCommanderApplied = mayEdit && (lobby.hasVariant(GameType.Commander) || lobby.hasVariant(GameType.TinyLeaders));
+        final boolean isTinyLeaders = lobby.hasVariant(GameType.TinyLeaders);
+        final boolean isCommanderApplied = mayEdit && (lobby.hasVariant(GameType.Commander) || isTinyLeaders);
         final boolean isPlanechaseApplied = mayEdit && lobby.hasVariant(GameType.Planechase);
         final boolean isVanguardApplied = mayEdit && lobby.hasVariant(GameType.Vanguard);
         final boolean isArchenemyApplied = mayEdit && lobby.hasVariant(GameType.Archenemy);
@@ -325,7 +326,8 @@ public class PlayerPanel extends FPanel {
 
         deckLabel.setVisible(isDeckBuildingAllowed);
         deckBtn.setVisible(isDeckBuildingAllowed);
-        cmdDeckSelectorBtn.setVisible(isCommanderApplied);
+        cmdDeckSelectorBtn.setVisible(isCommanderApplied);            
+        cmdDeckEditor.setText(isTinyLeaders ? "TL Deck Editor" : "Commander Deck Editor");
         cmdDeckEditor.setVisible(isCommanderApplied);
         cmdLabel.setVisible(isCommanderApplied);
 
@@ -420,6 +422,10 @@ public class PlayerPanel extends FPanel {
 
     public void setDeckSelectorButtonText(final String text) {
         deckBtn.setText(text);
+    }
+
+    public void setCommanderDeckSelectorButtonText(final String text) {
+        cmdDeckSelectorBtn.setText(text);
     }
 
     public void focusOnAvatar() {

@@ -459,6 +459,7 @@ public class VLobby implements ILobbyView {
         // Full deck selection
         selectMainDeck(playerIndex);
         selectCommanderDeck(playerIndex);
+        selectTinyLeadersDeck(playerIndex);
 
         // Deck section selection
         selectSchemeDeck(playerIndex);
@@ -472,8 +473,15 @@ public class VLobby implements ILobbyView {
             return;
         }
         final FDeckChooser mainChooser = getDeckChooser(playerIndex);
-        VLobby.this.onDeckClicked(playerIndex, mainChooser.getSelectedDeckType(), mainChooser.getDeck(), mainChooser.getLstDecks().getSelectedItems());
-        getDeckChooser(playerIndex).saveState();
+        final DeckType type = mainChooser.getSelectedDeckType();
+        final Deck deck = mainChooser.getDeck();
+        final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
+        if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
+            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
+            playerPanels.get(playerIndex).setDeckSelectorButtonText(text);
+            fireDeckChangeListener(playerIndex, deck);
+        }
+        mainChooser.saveState();
     }
 
     private void selectSchemeDeck(final int playerIndex) {
@@ -508,32 +516,19 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectCommanderDeck(final int playerIndex) {
-        if (playerIndex >= activePlayersNum || !hasVariant(GameType.Commander)) {
-            return;
-        }
-
-        final Object selected = getCommanderDeckLists().get(playerIndex).getSelectedValue();
-        Deck deck = null;
-        if (selected instanceof String) {
-            if (selected.equals("Random")) {
-                deck = RandomDeckGenerator.getRandomUserDeck(lobby, playerPanels.get(playerIndex).isAi());
-            }
-        } else if (selected instanceof Deck) {
-            deck = (Deck) selected;
-        }
-        if (deck == null) { //Can be null if player deselects the list selection or chose Generate
-            deck = DeckgenUtil.generateCommanderDeck(isPlayerAI(playerIndex), GameType.Commander);
-        }
-        fireDeckChangeListener(playerIndex, deck);
-        getDeckChooser(playerIndex).saveState();
+        selectCommanderOrTinyLeadersDeck(playerIndex, GameType.Commander, getCommanderDeckLists());
     }
 
     private void selectTinyLeadersDeck(final int playerIndex) {
-        if (playerIndex >= activePlayersNum || !hasVariant(GameType.TinyLeaders)) {
+        selectCommanderOrTinyLeadersDeck(playerIndex, GameType.TinyLeaders, getTinyLeadersDeckLists());
+    }
+
+    private void selectCommanderOrTinyLeadersDeck(final int playerIndex, final GameType gameType, final List<FList<Object>> deckLists) {
+        if (playerIndex >= activePlayersNum || !hasVariant(gameType)) {
             return;
         }
 
-        final Object selected = getTinyLeadersDeckLists().get(playerIndex).getSelectedValue();
+        final Object selected = deckLists.get(playerIndex).getSelectedValue();
         Deck deck = null;
         if (selected instanceof String) {
             if (selected.equals("Random")) {
@@ -543,8 +538,9 @@ public class VLobby implements ILobbyView {
             deck = (Deck) selected;
         }
         if (deck == null) { //Can be null if player deselects the list selection or chose Generate
-            deck = DeckgenUtil.generateCommanderDeck(isPlayerAI(playerIndex), GameType.TinyLeaders);
+            deck = DeckgenUtil.generateCommanderDeck(isPlayerAI(playerIndex), gameType);
         }
+        playerPanels.get(playerIndex).setCommanderDeckSelectorButtonText(deck.getName());
         fireDeckChangeListener(playerIndex, deck);
         getDeckChooser(playerIndex).saveState();
     }
@@ -622,14 +618,6 @@ public class VLobby implements ILobbyView {
         avatarOnce.add(vanguardAvatar);
         fireDeckSectionChangeListener(playerIndex, DeckSection.Avatar, avatarOnce);
         getDeckChooser(playerIndex).saveState();
-    }
-
-    protected void onDeckClicked(final int iPlayer, final DeckType type, final Deck deck, final Collection<DeckProxy> selectedDecks) {
-        if (iPlayer < activePlayersNum && lobby.mayEdit(iPlayer)) {
-            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
-            playerPanels.get(iPlayer).setDeckSelectorButtonText(text);
-            fireDeckChangeListener(iPlayer, deck);
-        }
     }
 
     /** Populates the deck panel with the focused player's deck choices. */
