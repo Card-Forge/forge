@@ -91,6 +91,16 @@ public class ImageCache {
     /**
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
+     * Same as getImage() but returns null if the image is not available, instead of a default image.
+     */
+    public static BufferedImage getImageNoDefault(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
+        final String key = card.getCurrentState().getImageKey(viewers);
+        return scaleImage(key, width, height, false);
+    }
+
+    /**
+     * retrieve an image from the cache.  returns null if the image is not found in the cache
+     * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(InventoryItem ii, int width, int height) {
         return scaleImage(ii.getImageKey(false), width, height, true);
@@ -127,7 +137,7 @@ public class ImageCache {
         if(altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey.substring(2)), altState, true);
+            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey), altState, true);
             if (StringUtils.isBlank(imageKey)) { 
                 return _defaultImage;
             }
@@ -137,12 +147,10 @@ public class ImageCache {
         BufferedImage original = getImage(imageKey);
 
         // No image file exists for the given key so optionally associate with
-        // a default "not available" image and add to cache for given key.
-        if (original == null) {
-            if (useDefaultIfNotFound) { 
-                original = _defaultImage;
-                _CACHE.put(imageKey, _defaultImage);
-            }
+        // a default "not available" image, however do not add it to the cache,
+        // as otherwise it's problematic to update if the real image gets fetched.
+        if (original == null && useDefaultIfNotFound) { 
+            original = _defaultImage;
         }
 
         return original;
@@ -164,6 +172,18 @@ public class ImageCache {
         
         BufferedImage original = getOriginalImage(key, useDefaultImage);
         if (original == null) { return null; }
+
+        if (original == _defaultImage) {
+            // Don't put the default image in the cache under the key for the card.
+            // Instead, cache it under its own key, to avoid duplication of the
+            // default image and to remove the need to invalidate the cache when
+            // an image gets downloaded.
+            resizedKey = String.format("__DEFAULT__#%dx%d", width, height);
+            final BufferedImage cachedDefault = _CACHE.getIfPresent(resizedKey);
+            if (null != cachedDefault) {
+                return cachedDefault;
+            }
+        }
         
         // Calculate the scale required to best fit the image into the requested
         // (width x height) dimensions whilst retaining aspect ratio.

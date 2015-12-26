@@ -34,7 +34,8 @@ import java.util.List;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
-import forge.ImageCache;
+import forge.CachedCardImage;
+import forge.FThreads;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
@@ -88,6 +89,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
+    private CachedCardImage cachedImage;
 
     public CardPanel(final CMatchUI matchUI, final CardView card0) {
         this.matchUI = matchUI;
@@ -156,12 +158,32 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void updateImage() {
-        final BufferedImage image = card == null ? null : ImageCache.getImage(card, matchUI.getLocalPlayers(), imagePanel.getWidth(), imagePanel.getHeight());
-        setImage(image);
+        FThreads.assertExecutedByEdt(true);
+
+        if (card == null)  {
+            cachedImage = null;
+            setImage((BufferedImage)null);
+            return;
+        }
+
+        cachedImage = new CachedCardImage(card, matchUI.getLocalPlayers(), imagePanel.getWidth(), imagePanel.getHeight()) {
+            @Override
+            public void onImageFetched() {
+                if (cachedImage != null)
+                    setImage(cachedImage.getImage());
+            }
+        };
+        setImage(cachedImage.getImage());
     }
 
     private void setImage(final BufferedImage srcImage) {
+        if (imagePanel == null) {
+            return;
+        }
         synchronized (imagePanel) {
+            if (imagePanel.getSrcImage() == srcImage) {
+                return;
+            }
             imagePanel.setImage(srcImage);
             repaint();
             for (final CardPanel cardPanel : imageLoadListeners) {

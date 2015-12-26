@@ -78,7 +78,7 @@ public final class FImageUtil {
         boolean altState = key.endsWith(ImageKeys.BACKFACE_POSTFIX);
         String imageKey = key;
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
-            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(key.substring(2)), altState, true);
+            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(key), altState, true);
         }
         if(altState) {
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());

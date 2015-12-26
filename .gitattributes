@@ -787,8 +787,10 @@ forge-gui-desktop/src/main/config/forge.sh -text
 forge-gui-desktop/src/main/config/forge_checks.xml -text
 forge-gui-desktop/src/main/config/support/dmg-license.py -text
 forge-gui-desktop/src/main/config/support/template.applescript -text
+forge-gui-desktop/src/main/java/forge/CachedCardImage.java -text
 forge-gui-desktop/src/main/java/forge/GuiDesktop.java -text
 forge-gui-desktop/src/main/java/forge/ImageCache.java -text
+forge-gui-desktop/src/main/java/forge/ImageFetcher.java -text
 forge-gui-desktop/src/main/java/forge/ImageLoader.java -text
 forge-gui-desktop/src/main/java/forge/Singletons.java -text
 forge-gui-desktop/src/main/java/forge/control/FControl.java -text

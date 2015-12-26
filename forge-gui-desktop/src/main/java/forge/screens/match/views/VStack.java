@@ -35,7 +35,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.ImageCache;
+import forge.CachedCardImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardStateName;
@@ -160,6 +160,7 @@ public class VStack implements IVDoc<CStack> {
         public static final int CARD_HEIGHT = 70;//Math.round((float)CARD_WIDTH * CardPanel.ASPECT_RATIO);
 
         private final StackItemView item;
+        private final CachedCardImage cachedImage;
 
         public StackItemView getItem() {
             return item;
@@ -232,6 +233,13 @@ public class VStack implements IVDoc<CStack> {
             final DetailColors color = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(curState, true); // otherwise doesn't work correctly for face down Morphs
             setBackground(new Color(color.r, color.g, color.b));
             setForeground(FSkin.getHighContrastColor(getBackground()));
+            
+            this.cachedImage = new CachedCardImage(item.getSourceCard(), controller.getMatchUI().getLocalPlayers(), CARD_WIDTH, CARD_HEIGHT) {
+                @Override
+                public void onImageFetched() {
+                    repaint();
+                }
+            };
         }
 
         @Override
@@ -241,7 +249,7 @@ public class VStack implements IVDoc<CStack> {
             final Graphics2D g2d = (Graphics2D) g;
 
             //draw image for source card
-            final BufferedImage img = ImageCache.getImage(item.getSourceCard(), controller.getMatchUI().getLocalPlayers(), CARD_WIDTH, CARD_HEIGHT);
+            final BufferedImage img = cachedImage.getImage();
             if (img != null) {
                 g2d.drawImage(img, null, PADDING, PADDING);
             }

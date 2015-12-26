@@ -122,7 +122,7 @@ public class ImageCache {
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         }
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey.substring(2)), altState, true);
+            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey)), altState, true);
             if (StringUtils.isBlank(imageKey)) { 
                 return defaultImage;
             }
