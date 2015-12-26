@@ -128,7 +128,7 @@ public final class ImageKeys {
             }
         }
 
-        System.out.println("File not found, no image created: " + key);
+        // System.out.println("File not found, no image created: " + key);
 
         return null;
     }
