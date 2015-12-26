@@ -51,21 +51,27 @@ public class ManaEffect extends SpellAbilityEffect {
                     String[] colorsNeeded = express.isEmpty() ? null : express.split(" ");
                     if (!abMana.isAnyMana()) {
                         colorOptions = ColorSet.fromNames(colorsProduced);
-					} else {
-						colorOptions = ColorSet.fromNames(MagicColor.Constant.ONLY_COLORS);
-					}
+                    } else {
+                        colorOptions = ColorSet.fromNames(MagicColor.Constant.ONLY_COLORS);
+                    }
                     final ColorSet fullOptions = colorOptions;
                     for (int nMana = 1; nMana <= amount; nMana++) {
                         String choice = "";
                         if (colorsNeeded != null && colorsNeeded.length >= nMana) {	// select from express choices if possible
-							colorOptions = ColorSet
-									.fromMask(fullOptions.getColor() & MagicColor.fromName(colorsNeeded[nMana - 1]));
+                            colorOptions = ColorSet
+                                    .fromMask(fullOptions.getColor() & MagicColor.fromName(colorsNeeded[nMana - 1]));
                         }
-                        byte chosenColor = activator.getController().chooseColor("Select Mana to Produce", sa, colorOptions);
-                        if (chosenColor == 0)
-                            throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + activator + " color mana choice is empty for " + card.getName());
-
-                        choice = MagicColor.toShortString(chosenColor);
+                        if (colorOptions.isColorless() && colorsProduced.length > 0) {
+                            // If we just need generic mana, no reason to ask the controller for a choice,
+                            // just use the first possible color.
+                            choice = colorsProduced[0];
+                        } else {
+                            byte chosenColor = activator.getController().chooseColor("Select Mana to Produce", sa, colorOptions);
+                            if (chosenColor == 0)
+                                throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + activator + " color mana choice is empty for " + card.getName());
+                            choice = MagicColor.toShortString(chosenColor);
+                        }
+                        
                         if (nMana != 1) {
                             choiceString.append(" ");
                         }
