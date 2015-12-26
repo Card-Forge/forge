@@ -18,6 +18,7 @@
 package forge.util;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import javax.xml.transform.OutputKeys;
@@ -32,13 +33,6 @@ import java.io.StringWriter;
 
 
 public class XmlUtil {
-
-    /**
-     * Node to string.
-     *
-     * @param node the node
-     * @return the string
-     */
     public static String nodeToString(final Node node) {
         final StringWriter sw = new StringWriter();
         try {
@@ -61,5 +55,46 @@ public class XmlUtil {
         DOMSource source = new DOMSource(document);
         StreamResult result = new StreamResult(new File(filename));
         t.transform(source, result);
+    }
+
+    public static int getIntAttribute(Element el, String name) {
+        String value = el.getAttribute(name);
+        if (value.length() > 0) {
+            try {
+                return Integer.parseInt(value);
+            }
+            catch (Exception ex) {}
+        }
+        return 0;
+    }
+
+    public static long getLongAttribute(final Element el, final String name) {
+        final String value = el.getAttribute(name);
+        if (value.length() > 0) {
+            try {
+                return Long.parseLong(value);
+            }
+            catch (final Exception ex) {}
+        }
+        return 0;
+    }
+
+    public static String getStringAttribute(Element el, String name) {
+        String value = el.getAttribute(name);
+        if (value.length() > 0) {
+            return value;
+        }
+        return null;
+    }
+
+    public static boolean getBooleanAttribute(Element el, String name) {
+        String value = el.getAttribute(name);
+        if (value.length() > 0) {
+            try {
+                return Boolean.parseBoolean(value);
+            }
+            catch (Exception ex) {}
+        }
+        return false;
     }
 }

@@ -118,7 +118,7 @@ public class DeckPreferences {
                 final DeckPreferences prefs = new DeckPreferences();
                 final Element el = (Element)cards.item(i);
                 allPrefs.put(el.getAttribute("key"), prefs);
-                prefs.starCount = Integer.parseInt(el.getAttribute("stars"));
+                prefs.starCount = XmlUtil.getIntAttribute(el, "stars");
             }
         }
         catch (FileNotFoundException e) {

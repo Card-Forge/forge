@@ -73,17 +73,10 @@ public final class FileUtil {
         return f.exists() && f.isDirectory() && f.list().length > 0;
     }
 
-    /**
-     * <p>
-     * ensureDirectoryExists.
-     * </p>
-     * 
-     * @param dir
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
     public static boolean ensureDirectoryExists(final String path) {
-        File dir = new File(path);
+        return ensureDirectoryExists(new File(path));
+    }
+    public static boolean ensureDirectoryExists(final File dir) {
         return (dir.exists() && dir.isDirectory()) || dir.mkdirs();
     }
 

@@ -45,8 +45,8 @@ public class CardPreferences {
                 final Element el = (Element)cards.item(i);
                 final CardPreferences prefs = new CardPreferences(el.getAttribute("name"));
                 allPrefs.put(prefs.cardName, prefs);
-                prefs.setStarCount(getIntAttribute(el, "stars"));
-                prefs.setPreferredArt(getStringAttribute(el, "art"));
+                prefs.setStarCount(XmlUtil.getIntAttribute(el, "stars"));
+                prefs.setPreferredArt(XmlUtil.getStringAttribute(el, "art"));
             }
         }
         catch (FileNotFoundException e) {
@@ -55,25 +55,6 @@ public class CardPreferences {
         catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static int getIntAttribute(Element el, String name) {
-        String value = el.getAttribute(name);
-        if (value.length() > 0) {
-            try {
-                return Integer.parseInt(value);
-            }
-            catch (Exception ex) {}
-        }
-        return 0;
-    }
-
-    private static String getStringAttribute(Element el, String name) {
-        String value = el.getAttribute(name);
-        if (value.length() > 0) {
-            return value;
-        }
-        return null;
     }
 
     public static void save() {

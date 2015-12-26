@@ -4,6 +4,7 @@ import org.w3c.dom.Element;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.util.XmlUtil;
 
 public abstract class StreakAchievement extends Achievement {
     private int current;
@@ -53,6 +54,6 @@ public abstract class StreakAchievement extends Achievement {
     @Override
     public void loadFromXml(final Element el) {
         super.loadFromXml(el);
-        current = getIntAttribute(el, "current");
+        current = XmlUtil.getIntAttribute(el, "current");
     }
 }

@@ -14,6 +14,7 @@ import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.properties.ForgeConstants;
 import forge.util.Lang;
+import forge.util.XmlUtil;
 
 public abstract class Achievement {
     private final String key, displayName, sharedDesc, commonDesc, uncommonDesc, rareDesc, mythicDesc;
@@ -222,35 +223,14 @@ public abstract class Achievement {
     }
 
     public void loadFromXml(final Element el) {
-        best = getIntAttribute(el, "best");
-        timestamp = getLongAttribute(el, "time");
+        best = XmlUtil.getIntAttribute(el, "best");
+        timestamp = XmlUtil.getLongAttribute(el, "time");
         best = performConversion(best, timestamp);
     }
 
     //give derived classes a chance to perform a conversion if needed
     protected int performConversion(final int value, final long timestamp) {
         return value;
-    }
-
-    protected int getIntAttribute(final Element el, final String name) {
-        final String value = el.getAttribute(name);
-        if (value.length() > 0) {
-            try {
-                return Integer.parseInt(value);
-            }
-            catch (final Exception ex) {}
-        }
-        return 0;
-    }
-    protected long getLongAttribute(final Element el, final String name) {
-        final String value = el.getAttribute(name);
-        if (value.length() > 0) {
-            try {
-                return Long.parseLong(value);
-            }
-            catch (final Exception ex) {}
-        }
-        return 0;
     }
 
     protected abstract String getNoun();
