@@ -334,6 +334,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.setPreferredSize(new Dimension(maxRowWidth - this.cardSpacingX, y - this.cardSpacingY));
         this.revalidate();
         positionAllCards(lastTemplate);
+        repaint();
     }
 
     // Position all card panels
@@ -641,7 +642,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         boolean needLayoutRefresh = !newPanels.isEmpty();
         for (final CardView card : modelCopy) {
-            if (updateCard(card, true)) {
+            if (doUpdateCard(card, true)) {
                 needLayoutRefresh = true;
             }
         }
@@ -661,6 +662,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     public boolean updateCard(final CardView card, boolean fromRefresh) {
+        FThreads.assertExecutedByEdt(true);
+        boolean result = doUpdateCard(card, fromRefresh);
+        repaint();
+        return result;
+    }
+
+    private boolean doUpdateCard(final CardView card, boolean fromRefresh) {
         final CardPanel toPanel = getCardPanel(card.getId());
         if (toPanel == null) { return false; }
 
