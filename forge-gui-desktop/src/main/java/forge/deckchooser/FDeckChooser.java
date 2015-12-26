@@ -114,11 +114,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     public DeckManager getLstDecks() { return lstDecks; }
 
-    private void updateCustom() {
+    private void updateDecks(final Iterable<DeckProxy> decks, final ItemManagerConfig config) {
         lstDecks.setAllowMultipleSelections(false);
 
-        lstDecks.setPool(DeckProxy.getAllConstructedDecks());
-        lstDecks.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+        lstDecks.setPool(decks);
+        lstDecks.setup(config);
 
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new UiCommand() {
@@ -129,6 +129,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         });
 
         lstDecks.setSelectedIndex(0);
+    }
+
+    private void updateCustom() {
+        updateDecks(DeckProxy.getAllConstructedDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
     }
 
     private void updateColors() {
@@ -150,90 +154,26 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateThemes() {
-        lstDecks.setAllowMultipleSelections(false);
-
-        lstDecks.setPool(DeckProxy.getAllThemeDecks());
-        lstDecks.setup(ItemManagerConfig.STRING_ONLY);
-
-        btnRandom.setText("Random Deck");
-        btnRandom.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                DeckgenUtil.randomSelect(lstDecks);
-            }
-        });
-
-        lstDecks.setSelectedIndex(0);
+        updateDecks(DeckProxy.getAllThemeDecks(), ItemManagerConfig.STRING_ONLY);
     }
 
     private void updatePrecons() {
-        lstDecks.setAllowMultipleSelections(false);
-
-        lstDecks.setPool(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
-        lstDecks.setup(ItemManagerConfig.PRECON_DECKS);
-
-        btnRandom.setText("Random Deck");
-        btnRandom.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                DeckgenUtil.randomSelect(lstDecks);
-            }
-        });
-
-        lstDecks.setSelectedIndex(0);
+        updateDecks(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()), ItemManagerConfig.PRECON_DECKS);
     }
 
     private void updateQuestEvents() {
-        lstDecks.setAllowMultipleSelections(false);
-
-        lstDecks.setPool(DeckProxy.getAllQuestEventAndChallenges());
-        lstDecks.setup(ItemManagerConfig.QUEST_EVENT_DECKS);
-
-        btnRandom.setText("Random Deck");
-        btnRandom.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                DeckgenUtil.randomSelect(lstDecks);
-            }
-        });
-
-        lstDecks.setSelectedIndex(0);
+        updateDecks(DeckProxy.getAllQuestEventAndChallenges(), ItemManagerConfig.QUEST_EVENT_DECKS);
     }
 
     private void updateRandom() {
-        lstDecks.setAllowMultipleSelections(false);
-
-        lstDecks.setPool(RandomDeckGenerator.getRandomDecks(lstDecks, isAi));
-        lstDecks.setup(ItemManagerConfig.STRING_ONLY);
-
-        btnViewDeck.setVisible(false);
-        btnRandom.setText("Random Deck");
-        btnRandom.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                DeckgenUtil.randomSelect(lstDecks);
-            }
-        });
+        updateDecks(RandomDeckGenerator.getRandomDecks(lstDecks, isAi), ItemManagerConfig.STRING_ONLY);
     }
 
     private void updateNetDecks() {
         if (netDeckCategory != null) {
             decksComboBox.setText(netDeckCategory.getDeckType());
         }
-        lstDecks.setAllowMultipleSelections(false);
-
-        lstDecks.setPool(DeckProxy.getNetDecks(netDeckCategory));
-        lstDecks.setup(ItemManagerConfig.NET_DECKS);
-
-        btnRandom.setText("Random Deck");
-        btnRandom.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                DeckgenUtil.randomSelect(lstDecks);
-            }
-        });
-
-        lstDecks.setSelectedIndex(0);
+        updateDecks(DeckProxy.getNetDecks(netDeckCategory), ItemManagerConfig.NET_DECKS);
     }
 
     public Deck getDeck() {
