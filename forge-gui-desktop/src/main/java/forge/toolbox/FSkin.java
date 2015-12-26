@@ -27,6 +27,7 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.OperatingSystem;
 import forge.view.FView;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -38,8 +39,10 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -1449,6 +1452,7 @@ public class FSkin {
                 setTabbedPaneLookAndFeel();
                 setButtonLookAndFeel();
                 setToolTipLookAndFeel();
+                setTextEditLookAndFeel();
             }
             onInit = false;
         }
@@ -1556,6 +1560,20 @@ public class FSkin {
             UIManager.put("ToolTip.background", BACK_COLOR);
             UIManager.put("ToolTip.foreground", FORE_COLOR);
             UIManager.put("ToolTip.border", LINE_BORDER);
+        }
+
+        private void setTextEditLookAndFeel() {
+            // Set up correct Mac keyboard shortcuts for text editing - to use the Command key
+            // rather than Control, which is what we get by default.
+            if (OperatingSystem.isMac()) {
+                for (String key : new String[] {"TextField.focusInputMap", "TextArea.focusInputMap"})  {
+                    InputMap im = (InputMap) UIManager.get(key);
+                    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.META_DOWN_MASK), DefaultEditorKit.copyAction);
+                    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.META_DOWN_MASK), DefaultEditorKit.pasteAction);
+                    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.META_DOWN_MASK), DefaultEditorKit.cutAction);
+                    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.META_DOWN_MASK), DefaultEditorKit.selectAllAction);
+                }
+            }
         }
 
         private static Font getDefaultFont(final String component) {
