@@ -533,7 +533,7 @@ public class VLobby implements ILobbyView {
             return;
         }
 
-        final Object selected = getCommanderDeckLists().get(playerIndex).getSelectedValue();
+        final Object selected = getTinyLeadersDeckLists().get(playerIndex).getSelectedValue();
         Deck deck = null;
         if (selected instanceof String) {
             if (selected.equals("Random")) {

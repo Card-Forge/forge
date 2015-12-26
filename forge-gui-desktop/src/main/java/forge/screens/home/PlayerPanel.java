@@ -492,9 +492,15 @@ public class PlayerPanel extends FPanel {
         cmdDeckEditor.setCommand(new UiCommand() {
             @Override
             public void run() {
-                lobby.setCurrentGameMode(lobby.hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders : GameType.Commander);
-                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
-                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
+                if (lobby.hasVariant(GameType.TinyLeaders)) {
+                    lobby.setCurrentGameMode(GameType.TinyLeaders);
+                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_TINY_LEADERS);
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), true));
+                } else {
+                    lobby.setCurrentGameMode(GameType.Commander);
+                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), false));
+                }
             }
         });
 

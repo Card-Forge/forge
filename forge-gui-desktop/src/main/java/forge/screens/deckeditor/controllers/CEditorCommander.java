@@ -66,8 +66,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      * all cards are available.
      */
     @SuppressWarnings("serial")
-    public CEditorCommander(final CDetailPicture cDetailPicture) {
-        super(FScreen.DECK_EDITOR_COMMANDER, cDetailPicture);
+    public CEditorCommander(final CDetailPicture cDetailPicture, boolean tinyLeaders) {
+        super(tinyLeaders ? FScreen.DECK_EDITOR_TINY_LEADERS : FScreen.DECK_EDITOR_COMMANDER, cDetailPicture);
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
@@ -89,7 +89,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
                 return new Deck();
             }
         };
-        this.controller = new DeckController<Deck>(FModel.getDecks().getCommander(), this, newCreator);
+        this.controller = new DeckController<Deck>(tinyLeaders ? FModel.getDecks().getTinyLeaders() :FModel.getDecks().getCommander(), this, newCreator);
 
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override

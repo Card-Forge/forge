@@ -25,99 +25,43 @@ public class CLobby {
         this.view = view;
     }
 
+    private void addDecks(final Iterable<DeckProxy> commanderDecks, FList<Object> deckList, String... initialItems) {
+        Vector<Object> listData = new Vector<Object>();
+        for (String item : initialItems) {
+            listData.add(item);
+        }
+        listData.add("Generate");
+        if (!Iterables.isEmpty(commanderDecks)) {
+            listData.add("Random");
+            for (DeckProxy comDeck : commanderDecks) {
+                listData.add(comDeck.getDeck());
+            }
+        }
+        Object val = deckList.getSelectedValue();
+        deckList.setListData(listData);
+        if (null != val) {
+            deckList.setSelectedValue(val, true);
+        }
+        if (-1 == deckList.getSelectedIndex()) {
+            deckList.setSelectedIndex(0);
+        }
+    }
+    
     public void update() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override public final void run() {
                 final Iterable<DeckProxy> commanderDecks = DeckProxy.getAllCommanderDecks();
                 final Iterable<DeckProxy> tinyLeadersDecks = DeckProxy.getAllTinyLeadersDecks();
-                final Iterable<DeckProxy> planarDecks = DeckProxy.getAllPlanarDecks();
                 final Iterable<DeckProxy> schemeDecks = DeckProxy.getAllSchemeDecks();
-                FList<Object> deckList;
-                Vector<Object> listData;
-                Object val;
+                final Iterable<DeckProxy> planarDecks = DeckProxy.getAllPlanarDecks();
 
                 for (int i = 0; i < VLobby.MAX_PLAYERS; i++) {
-                    // Commander: reinit deck list and restore last selections (if any)
-                    deckList = view.getCommanderDeckLists().get(i);
-                    listData = new Vector<Object>();
-                    listData.add("Generate");
-                    if (!Iterables.isEmpty(commanderDecks)) {
-                        listData.add("Random");
-                        for (DeckProxy comDeck : commanderDecks) {
-                            listData.add(comDeck.getDeck());
-                        }
-                    }
-                    val = deckList.getSelectedValue();
-                    deckList.setListData(listData);
-                    if (null != val) {
-                        deckList.setSelectedValue(val, true);
-                    }
-                    if (-1 == deckList.getSelectedIndex()) {
-                        deckList.setSelectedIndex(0);
-                    } // End Commander
-
-                    // Tiny Leaders: reinit deck list and restore last selections (if any)
-                    deckList = view.getTinyLeadersDeckLists().get(i);
-                    listData = new Vector<Object>();
-                    listData.add("Generate");
-                    if (!Iterables.isEmpty(tinyLeadersDecks)) {
-                        listData.add("Random");
-                        for (DeckProxy tlDeck : tinyLeadersDecks) {
-                            listData.add(tlDeck.getDeck());
-                        }
-                    }
-                    val = deckList.getSelectedValue();
-                    deckList.setListData(listData);
-                    if (null != val) {
-                        deckList.setSelectedValue(val, true);
-                    }
-                    if (-1 == deckList.getSelectedIndex()) {
-                        deckList.setSelectedIndex(0);
-                    } // Tiny Leaders
-
-                    // Archenemy: reinit deck list and restore last selections (if any)
-                    deckList = view.getSchemeDeckLists().get(i);
-                    listData = new Vector<Object>();
-                    listData.add("Use deck's scheme section (random if unavailable)");
-                    listData.add("Generate");
-                    if (!Iterables.isEmpty(schemeDecks)) {
-                        listData.add("Random");
-                        for (DeckProxy schemeDeck : schemeDecks) {
-                            listData.add(schemeDeck.getDeck());
-                        }
-                    }
-                    val = deckList.getSelectedValue();
-                    deckList.setListData(listData);
-                    if (null != val) {
-                        deckList.setSelectedValue(val, true);
-                    }
-                    if (-1 == deckList.getSelectedIndex()) {
-                        deckList.setSelectedIndex(0);
-                    } // End Archenemy
-
-                    // Planechase: reinit deck lists and restore last selections (if any)
-                    deckList = view.getPlanarDeckLists().get(i);
-                    listData = new Vector<Object>();
-
-                    listData.add("Use deck's planes section (random if unavailable)");
-                    listData.add("Generate");
-                    if (!Iterables.isEmpty(planarDecks)) {
-                        listData.add("Random");
-                        for (DeckProxy planarDeck : planarDecks) {
-                            listData.add(planarDeck.getDeck());
-                        }
-                    }
-
-                    val = deckList.getSelectedValue();
-                    deckList.setListData(listData);
-                    if (null != val) {
-                        deckList.setSelectedValue(val, true);
-                    }
-
-                    if (-1 == deckList.getSelectedIndex()) {
-                        deckList.setSelectedIndex(0);
-                    } // End Planechase
-
+                    addDecks(commanderDecks, view.getCommanderDeckLists().get(i));
+                    addDecks(tinyLeadersDecks, view.getTinyLeadersDeckLists().get(i));
+                    addDecks(schemeDecks, view.getSchemeDeckLists().get(i),
+                            "Use deck's scheme section (random if unavailable)");
+                    addDecks(planarDecks, view.getPlanarDeckLists().get(i),
+                            "Use deck's planes section (random if unavailable)");
                     view.updateVanguardList(i);
                 }
 

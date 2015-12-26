@@ -167,7 +167,7 @@ public enum CCurrentDeck implements ICDoc {
 
             } catch (final Exception ex) {
                 //BugReporter.reportException(ex);
-                throw new RuntimeException("Error importing deck." + ex);
+                throw new RuntimeException("Error importing deck.", ex);
             }
         }
     }

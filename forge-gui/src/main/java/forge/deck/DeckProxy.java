@@ -366,7 +366,7 @@ public class DeckProxy implements InventoryItem {
         else {
             filter = Predicates.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(), filter);
         }
-        addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getCommander(), filter);
+        addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getTinyLeaders(), filter);
         return result;
     }
 
