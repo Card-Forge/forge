@@ -9,8 +9,11 @@ import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.util.Aggregates;
+import forge.util.XmlReader;
+import forge.util.XmlWriter;
+import forge.util.XmlWriter.IXmlWritable;
 
-public class ConquestLocation {
+public class ConquestLocation implements IXmlWritable {
     private ConquestPlane plane;
     private int regionIndex;
     private int row;
@@ -18,6 +21,13 @@ public class ConquestLocation {
     private List<ConquestLocation> neighbors;
 
     public ConquestLocation() {
+    }
+
+    public ConquestLocation(XmlReader xml) {
+        plane = xml.read("plane", plane, ConquestPlane.class);
+        regionIndex = xml.read("regionIndex", regionIndex);
+        row = xml.read("row", row);
+        col = xml.read("col", col);
     }
 
     public ConquestLocation(ConquestPlane plane0, int regionIndex0, int row0, int col0) {
@@ -124,5 +134,13 @@ public class ConquestLocation {
             public void addVariants(Set<GameType> variants) {
             }
         };
+    }
+
+    @Override
+    public void saveToXml(XmlWriter xml) {
+        xml.write("plane", plane);
+        xml.write("regionIndex", regionIndex);
+        xml.write("row", row);
+        xml.write("col", col);
     }
 }

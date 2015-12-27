@@ -1,6 +1,9 @@
 package forge.planarconquest;
 
-public class ConquestRecord {
+import forge.util.XmlWriter;
+import forge.util.XmlWriter.IXmlWritable;
+
+public class ConquestRecord implements IXmlWritable {
     private int wins, losses, level;
 
     public int getWins() {
@@ -25,5 +28,12 @@ public class ConquestRecord {
 
     public void levelUp() {
         level++;
+    }
+
+    @Override
+    public void saveToXml(XmlWriter xml) {
+        xml.write("wins", wins);
+        xml.write("losses", losses);
+        xml.write("level", level);
     }
 }

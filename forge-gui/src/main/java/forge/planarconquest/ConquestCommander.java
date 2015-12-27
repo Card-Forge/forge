@@ -5,8 +5,10 @@ import forge.deck.generation.DeckGenPool;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.planarconquest.ConquestPlane.Region;
+import forge.util.XmlWriter;
+import forge.util.XmlWriter.IXmlWritable;
 
-public class ConquestCommander implements InventoryItem {
+public class ConquestCommander implements InventoryItem, IXmlWritable {
     private final PaperCard card;
     private final Deck deck;
     private final ConquestRecord record;
@@ -92,5 +94,11 @@ public class ConquestCommander implements InventoryItem {
     @Override
     public String toString() {
         return card.getName();
+    }
+
+    @Override
+    public void saveToXml(XmlWriter xml) {
+        xml.write("card", card);
+        xml.write("record", record);
     }
 }

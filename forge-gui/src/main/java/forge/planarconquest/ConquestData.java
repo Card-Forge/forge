@@ -30,7 +30,10 @@ import forge.model.FModel;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
+import forge.util.FileUtil;
 import forge.util.ItemPool;
+import forge.util.XmlReader;
+import forge.util.XmlWriter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -45,23 +48,17 @@ import java.util.Map.Entry;
 import com.google.common.base.Function;
 
 public final class ConquestData {
-    /** Holds the latest version of the Conquest Data. */
-    public static final int CURRENT_VERSION_NUMBER = 0;
-
-    // This field places the version number into QD instance,
-    // but only when the object is created through the constructor
-    // DO NOT RENAME THIS FIELD
-    private int versionNumber = ConquestData.CURRENT_VERSION_NUMBER;
+    private static final String XML_FILE = "data.xml";
 
     private String name;
-    private ConquestPlane startingPlane;
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
     private ConquestLocation currentLocation;
     private int aetherShards;
+    private ConquestCollection collection;
 
-    private transient ConquestCollection collection; //don't serialize this
-
+    private final File directory;
+    private final String xmlFilename;
     private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
     private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
     private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
@@ -69,24 +66,42 @@ public final class ConquestData {
     private final ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<InventoryItem>(InventoryItem.class);
     private final HashSet<PaperCard> newCards = new HashSet<PaperCard>();
 
-    public ConquestData() { //needed for XML serialization
-    }
-
     public ConquestData(String name0, PaperCard planeswalker0, ConquestPlane startingPlane0, PaperCard startingCommander0) {
         name = name0;
+        directory = new File(ForgeConstants.CONQUEST_SAVE_DIR, name);
+        xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
         aetherShards = FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_START_SHARDS);
-        startingPlane = startingPlane0;
-        currentLocation = new ConquestLocation(startingPlane, 0, 0, Region.START_COL);
+        currentLocation = new ConquestLocation(startingPlane0, 0, 0, Region.START_COL);
         planeswalker = planeswalker0;
         planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
         unlockCard(planeswalker);
 
         //generate deck for starting commander and add all cards to collection
-        ConquestCommander commander = new ConquestCommander(startingCommander0, startingPlane.getCardPool(), false);
+        ConquestCommander commander = new ConquestCommander(startingCommander0, startingPlane0.getCardPool(), false);
         commanders.add(commander);
         unlockCard(startingCommander0);
         unlockCards(commander.getDeck().getMain().toFlatList());
         decks.put(commander.getDeck().getName(), commander.getDeck());
+    }
+
+    public ConquestData(File directory0) {
+        name = directory0.getName();
+        directory = directory0;
+        xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
+
+        try {
+            XmlReader xml = new XmlReader(xmlFilename);
+            planeswalker = xml.read("planeswalker", planeswalker);
+            aetherShards = xml.read("aetherShards", aetherShards);
+            currentLocation = xml.read("currentLocation", currentLocation, ConquestLocation.class);
+            /*xml.read("unlockedCards", unlockedCards);
+            xml.read("newCards", newCards);
+            xml.read("commanders", commanders);
+            xml.read("planeDataMap", planeDataMap);*/
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {
@@ -99,10 +114,6 @@ public final class ConquestData {
 
     public ISkinImage getPlaneswalkerToken() {
         return planeswalkerToken;
-    }
-
-    public ConquestPlane getStartingPlane() {
-        return startingPlane;
     }
 
     public ConquestPlane getCurrentPlane() {
@@ -207,30 +218,28 @@ public final class ConquestData {
         return Math.round(100f * (float)conquered / (float)total) + "%";
     }
 
-    // SERIALIZATION - related things
-    // This must be called by XML-serializer via reflection
-    public Object readResolve() {
-        return this;
-    }
-
     public void saveData() {
-        ConquestDataIO.saveData(this);
-    }
+        FileUtil.ensureDirectoryExists(directory);
 
-    public int getVersionNumber() {
-        return versionNumber;
-    }
-    public void setVersionNumber(final int versionNumber0) {
-        versionNumber = versionNumber0;
+        try {
+            XmlWriter xml = new XmlWriter(xmlFilename, "data");
+            xml.write("planeswalker", planeswalker);
+            xml.write("aetherShards", aetherShards);
+            xml.write("currentLocation", currentLocation);
+            xml.write("unlockedCards", unlockedCards);
+            xml.write("newCards", newCards);
+            xml.write("commanders", commanders);
+            xml.write("planeDataMap", planeDataMap);
+            xml.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void rename(final String newName) {
-        File newpath = new File(ForgeConstants.CONQUEST_SAVE_DIR, newName + ".dat");
-        File oldpath = new File(ForgeConstants.CONQUEST_SAVE_DIR, name + ".dat");
-        oldpath.renameTo(newpath);
-
         name = newName;
-        saveData();
+        directory.renameTo(new File(ForgeConstants.CONQUEST_SAVE_DIR, name));
     }
 
     public void updateDecksForEachCard() {

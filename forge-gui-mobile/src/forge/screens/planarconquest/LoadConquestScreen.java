@@ -1,7 +1,6 @@
 package forge.screens.planarconquest;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,7 +20,6 @@ import forge.assets.FSkinImage;
 import forge.model.FModel;
 import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestData;
-import forge.planarconquest.ConquestDataIO;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
@@ -93,17 +91,11 @@ public class LoadConquestScreen extends LaunchScreen {
                 final File dirConquests = new File(ForgeConstants.CONQUEST_SAVE_DIR);
                 final ConquestController qc = FModel.getConquest();
 
-                // Iterate over files and load quest data for each.
-                FilenameFilter takeDatFiles = new FilenameFilter() {
-                    @Override
-                    public boolean accept(final File dir, final String name) {
-                        return name.endsWith(".dat");
-                    }
-                };
-                File[] arrFiles = dirConquests.listFiles(takeDatFiles);
                 Map<String, ConquestData> arrConquests = new HashMap<String, ConquestData>();
-                for (File f : arrFiles) {
-                    arrConquests.put(f.getName(), ConquestDataIO.loadData(f));
+                for (File f : dirConquests.listFiles()) {
+                    if (f.isDirectory()) {
+                        arrConquests.put(f.getName(), new ConquestData(f));
+                    }
                 }
 
                 // Populate list with available quest data.

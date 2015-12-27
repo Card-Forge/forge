@@ -18306,7 +18306,6 @@ forge-gui/src/main/java/forge/net/server/package-info.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestCommander.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestController.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestData.java -text
-forge-gui/src/main/java/forge/planarconquest/ConquestDataIO.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestDeckMap.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestEvent.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestLocation.java -text
@@ -18403,7 +18402,9 @@ forge-gui/src/main/java/forge/util/OperatingSystem.java -text
 forge-gui/src/main/java/forge/util/RestartUtil.java -text
 forge-gui/src/main/java/forge/util/WaitCallback.java -text
 forge-gui/src/main/java/forge/util/WaitRunnable.java -text
+forge-gui/src/main/java/forge/util/XmlReader.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
+forge-gui/src/main/java/forge/util/XmlWriter.java -text
 forge-gui/src/main/java/forge/util/gui/SGuiChoose.java -text
 forge-gui/src/main/java/forge/util/gui/SOptionPane.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text

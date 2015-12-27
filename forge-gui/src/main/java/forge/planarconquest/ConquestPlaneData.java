@@ -3,8 +3,10 @@ package forge.planarconquest;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPlane.Region;
+import forge.util.XmlWriter;
+import forge.util.XmlWriter.IXmlWritable;
 
-public class ConquestPlaneData {
+public class ConquestPlaneData implements IXmlWritable {
     private final ConquestPlane plane;
     private final ConquestRecord[] eventResults;
 
@@ -62,5 +64,15 @@ public class ConquestPlaneData {
             }
         }
         return count;
+    }
+
+    @Override
+    public void saveToXml(XmlWriter xml) {
+        xml.write("plane", plane);
+        xml.startElement("eventResults");
+        for (int i = 0; i < eventResults.length; i++) {
+            xml.write(String.valueOf(i), eventResults[i]);
+        }
+        xml.endElement();
     }
 }
