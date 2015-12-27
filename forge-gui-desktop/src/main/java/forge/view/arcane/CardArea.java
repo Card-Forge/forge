@@ -24,9 +24,12 @@ import forge.view.arcane.util.CardPanelMouseListener;
 
 import javax.swing.*;
 
+import com.google.common.collect.Lists;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
+import java.util.List;
 
 /**
  * <p>
@@ -64,34 +67,17 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final CardPanel getCardPanel(final int x, final int y) {
-        if (this.isVertical) {
-            for (int i = this.getCardPanels().size() - 1; i >= 0; i--) {
-                final CardPanel panel = this.getCardPanels().get(i);
-                final int panelX = panel == this.getMouseDragPanel() ? this.mouseDragStartX : panel.getCardX();
-                final int panelY = panel == this.getMouseDragPanel() ? this.mouseDragStartY : panel.getCardY();
-                final int panelWidth = panel.getCardWidth();
-                final int panelHeight = panel.getCardHeight();
-                if ((x > panelX) && (x < (panelX + panelWidth)) && (y > panelY) && (y < (panelY + panelHeight))) {
-                    if (!panel.isDisplayEnabled()) {
-                        return null;
-                    }
-                    return panel;
+        final List<CardPanel> panels = isVertical ? Lists.reverse(getCardPanels()) : getCardPanels();
+        for (final CardPanel panel : panels) {
+            final int panelX = panel == this.getMouseDragPanel() ? this.mouseDragStartX : panel.getCardX();
+            final int panelY = panel == this.getMouseDragPanel() ? this.mouseDragStartY : panel.getCardY();
+            final int panelWidth = panel.getCardWidth();
+            final int panelHeight = panel.getCardHeight();
+            if ((x > panelX) && (x < (panelX + panelWidth)) && (y > panelY) && (y < (panelY + panelHeight))) {
+                if (!panel.isDisplayEnabled()) {
+                    return null;
                 }
-            }
-        }
-        else {
-            for (int i = 0, n = this.getCardPanels().size(); i < n; i++) {
-                final CardPanel panel = this.getCardPanels().get(i);
-                final int panelX = panel == this.getMouseDragPanel() ? this.mouseDragStartX : panel.getCardX();
-                final int panelY = panel == this.getMouseDragPanel() ? this.mouseDragStartY : panel.getCardY();
-                final int panelWidth = panel.getCardWidth();
-                final int panelHeight = panel.getCardHeight();
-                if ((x > panelX) && (x < (panelX + panelWidth)) && (y > panelY) && (y < (panelY + panelHeight))) {
-                    if (!panel.isDisplayEnabled()) {
-                        return null;
-                    }
-                    return panel;
-                }
+                return panel;
             }
         }
         return null;
