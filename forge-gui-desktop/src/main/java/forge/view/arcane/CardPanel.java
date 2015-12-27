@@ -554,6 +554,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         updateText();
         updatePTOverlay();
         updateImage();
+        repaint();
     }
 
     @Override
