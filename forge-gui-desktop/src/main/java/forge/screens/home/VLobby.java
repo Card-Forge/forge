@@ -22,6 +22,7 @@ import javax.swing.event.ListSelectionListener;
 import net.miginfocom.swing.MigLayout;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.AIOption;
@@ -173,7 +174,7 @@ public class VLobby implements ILobbyView {
 
         populateVanguardLists();
         for (int i = 0; i < MAX_PLAYERS; i++) {
-            buildDeckPanel(i);
+            buildDeckPanels(i);
         }
         constructedFrame.add(decksFrame, "w 50%-5px, growy, pushy");
         constructedFrame.setOpaque(false);
@@ -328,10 +329,7 @@ public class VLobby implements ILobbyView {
     /** Builds the actual deck panel layouts for each player.
      * These are added to a list which can be referenced to populate the deck panel appropriately. */
     @SuppressWarnings("serial")
-    private void buildDeckPanel(final int playerIndex) {
-        final String sectionConstraints = "insets 0, gap 0, wrap";
-        final String labelConstraints = "gaptop 10px, gapbottom 5px, growx, pushx";
-
+    private void buildDeckPanels(final int playerIndex) {
         // Main deck
         final FDeckChooser mainChooser = new FDeckChooser(null, false);
         mainChooser.getLstDecks().setSelectCommand(new UiCommand() {
@@ -343,116 +341,66 @@ public class VLobby implements ILobbyView {
         deckChoosers.add(mainChooser);
 
         // Scheme deck list
-        final FPanel schemeDeckPanel = new FPanel();
-        schemeDeckPanel.setBorderToggle(false);
-        schemeDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        schemeDeckPanel.add(new FLabel.Builder().text("Select Scheme deck:")
-                .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
-                .build(), labelConstraints);
-        final FList<Object> schemeDeckList = new FList<Object>();
-        schemeDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        schemeDeckList.addListSelectionListener(new ListSelectionListener() {
+        buildDeckPanel("Scheme Deck", playerIndex, schemeDeckLists, schemeDeckPanels, new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectSchemeDeck(playerIndex);
             }
         });
 
-        final FScrollPane scrSchemes = new FScrollPane(schemeDeckList, true,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        schemeDeckPanel.add(scrSchemes, "grow, push");
-        schemeDeckLists.add(schemeDeckList);
-        schemeDeckPanels.add(schemeDeckPanel);
-
         // Commander deck list
-        final FPanel commanderDeckPanel = new FPanel();
-        commanderDeckPanel.setBorderToggle(false);
-        commanderDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        commanderDeckPanel.add(new FLabel.Builder().text("Select Commander Deck")
-                .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
-                .build(), labelConstraints);
-        final FList<Object> commanderDeckList = new FList<Object>();
-        commanderDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        commanderDeckList.addListSelectionListener(new ListSelectionListener() {
+        buildDeckPanel("Commander Deck", playerIndex, commanderDeckLists, commanderDeckPanels, new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectCommanderDeck(playerIndex);
             }
         });
 
-        final FScrollPane scrCommander = new FScrollPane(commanderDeckList, true,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        commanderDeckPanel.add(scrCommander, "grow, push");
-        commanderDeckLists.add(commanderDeckList);
-        commanderDeckPanels.add(commanderDeckPanel);
         
         // Tiny Leaders deck list
-        final FPanel tinyLeadersDeckPanel = new FPanel();
-        tinyLeadersDeckPanel.setBorderToggle(false);
-        tinyLeadersDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        tinyLeadersDeckPanel.add(new FLabel.Builder().text("Select Tiny Leaders Deck")
-                .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
-                .build(), labelConstraints);
-        final FList<Object> tinyLeadersDeckList = new FList<Object>();
-        tinyLeadersDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tinyLeadersDeckList.addListSelectionListener(new ListSelectionListener() {
+        buildDeckPanel("Tiny Leaders Deck", playerIndex, tinyLeadersDeckLists, tinyLeadersDeckPanels, new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
-                selectTinyLeadersDeck(playerIndex);
+                selectCommanderDeck(playerIndex);
             }
         });
 
-        final FScrollPane scrTinyLeaders = new FScrollPane(tinyLeadersDeckList, true,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        tinyLeadersDeckPanel.add(scrTinyLeaders, "grow, push");
-        tinyLeadersDeckLists.add(tinyLeadersDeckList);
-        tinyLeadersDeckPanels.add(tinyLeadersDeckPanel);
-
         // Planar deck list
-        final FPanel planarDeckPanel = new FPanel();
-        planarDeckPanel.setBorderToggle(false);
-        planarDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        planarDeckPanel.add(new FLabel.Builder().text("Select Planar Deck")
-                .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
-                .build(), labelConstraints);
-        final FList<Object> planarDeckList = new FList<Object>();
-        planarDeckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        planarDeckList.addListSelectionListener(new ListSelectionListener() {
+        buildDeckPanel("Planar Deck", playerIndex, planarDeckLists, planarDeckPanels, new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectPlanarDeck(playerIndex);
             }
         });
-
-        final FScrollPane scrPlanes = new FScrollPane(planarDeckList, true,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        planarDeckPanel.add(scrPlanes, "grow, push");
-        planarDeckLists.add(planarDeckList);
-        planarDeckPanels.add(planarDeckPanel);
-
+        
         // Vanguard avatar list
-        final FPanel vgdDeckPanel = new FPanel();
-        vgdDeckPanel.setBorderToggle(false);
-
-        final FList<Object> vgdAvatarList = new FList<Object>();
-        vgdAvatarList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
-        vgdAvatarList.setSelectedIndex(0);
-        vgdAvatarList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        vgdAvatarList.addListSelectionListener(new ListSelectionListener() {
+        buildDeckPanel("Vanguard Avatar", playerIndex, vgdAvatarLists, vgdPanels, new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
                 selectVanguardAvatar(playerIndex);
             }
         });
-
-        final FScrollPane scrAvatars = new FScrollPane(vgdAvatarList, true,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        Iterables.getLast(vgdAvatarLists).setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
+        Iterables.getLast(vgdAvatarLists).setSelectedIndex(0);
         final CardDetailPanel vgdDetail = new CardDetailPanel();
         vgdAvatarDetails.add(vgdDetail);
+        Iterables.getLast(vgdPanels).add(vgdDetail, "h 200px, pushx, growx, hidemode 3");
+    }
 
-        vgdDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        vgdDeckPanel.add(new FLabel.Builder().text("Select Vanguard Avatar")
+    private void buildDeckPanel(final String formatName, final int playerIndex,
+            final List<FList<Object>> deckLists, final List<FPanel> deckPanels,
+            final ListSelectionListener selectionListener) {
+        final FPanel deckPanel = new FPanel();
+        deckPanel.setBorderToggle(false);
+        deckPanel.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        deckPanel.add(new FLabel.Builder().text("Select " + formatName)
                 .fontStyle(Font.BOLD).fontSize(14).fontAlign(SwingConstants.CENTER)
-                .build(), labelConstraints);
-        vgdDeckPanel.add(scrAvatars, "grow, push");
-        vgdDeckPanel.add(vgdDetail, "h 200px, pushx, growx, hidemode 3");
-        vgdAvatarLists.add(vgdAvatarList);
-        vgdPanels.add(vgdDeckPanel);
+                .build(), "gaptop 10px, gapbottom 5px, growx, pushx");
+        final FList<Object> deckList = new FList<Object>();
+        deckList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        deckList.addListSelectionListener(selectionListener);
+
+        final FScrollPane scrollPane = new FScrollPane(deckList, true,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        deckPanel.add(scrollPane, "grow, push");
+
+        deckLists.add(deckList);
+        deckPanels.add(deckPanel);
     }
 
     private void selectDeck(final int playerIndex) {
