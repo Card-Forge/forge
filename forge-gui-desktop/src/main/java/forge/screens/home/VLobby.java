@@ -358,7 +358,7 @@ public class VLobby implements ILobbyView {
         // Tiny Leaders deck list
         buildDeckPanel("Tiny Leaders Deck", playerIndex, tinyLeadersDeckLists, tinyLeadersDeckPanels, new ListSelectionListener() {
             @Override public final void valueChanged(final ListSelectionEvent e) {
-                selectCommanderDeck(playerIndex);
+                selectTinyLeadersDeck(playerIndex);
             }
         });
 
