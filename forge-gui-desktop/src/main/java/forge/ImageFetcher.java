@@ -12,29 +12,51 @@ import java.util.concurrent.Executors;
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.game.card.CardView;
 import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
+import forge.util.FileUtil;
 import forge.util.ImageUtil;
 
 public class ImageFetcher {
     private static final ExecutorService threadPool = Executors.newCachedThreadPool();
     private static HashMap<String, HashSet<CachedCardImage>> currentFetches = new HashMap<>();
+    private static HashMap<String, String> tokenImages;
 
     public static void fetchImage(CardView card, final String imageKey, CachedCardImage cachedImage) {
         FThreads.assertExecutedByEdt(true);
 
         final String prefix = imageKey.substring(0, 2);
-        if (!prefix.equals(ImageKeys.CARD_PREFIX)) {
-            return;
-        }
-        PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
-        if (paperCard == null) {
+        String[] result = null;
+        if (prefix.equals(ImageKeys.CARD_PREFIX)) {
+            PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (paperCard == null) {
+                System.err.println("Paper card not found for: " + imageKey);
+                return;
+            }
+            boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+            result = ImageUtil.getDownloadUrlAndDestination(ForgeConstants.CACHE_CARD_PICS_DIR, paperCard, backFace);
+        } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
+            if (tokenImages == null) {
+                tokenImages = new HashMap<>();
+                for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(ForgeConstants.IMAGE_LIST_TOKENS_FILE)) {
+                    tokenImages.put(nameUrlPair.getLeft(), nameUrlPair.getRight());
+                }
+            }
+            String filename = imageKey.substring(2) + ".jpg";
+            String url = tokenImages.get(filename);
+            if (url == null) {
+                System.err.println("Token " + imageKey + " not found in: " + ForgeConstants.IMAGE_LIST_TOKENS_FILE);
+                return;
+            }
+            result = new String[] { url, new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename).getAbsolutePath() };
+        } else {
+            System.err.println("Cannot fetch image for: " + imageKey);
             return;
         }
 
-        boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-        String[] result = ImageUtil.getDownloadUrlAndDestination(ForgeConstants.CACHE_CARD_PICS_DIR, paperCard, backFace);
         if (result == null) {
             return;
         }
@@ -84,4 +106,4 @@ public class ImageFetcher {
             }
         });
     }
-}
+ }
