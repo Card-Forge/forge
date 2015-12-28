@@ -208,8 +208,8 @@ public class GuiDesktop implements IGuiBase {
     public File getSaveFile(final File defaultFile) {
         final JFileChooser fc = new JFileChooser();
         fc.setSelectedFile(defaultFile);
-        fc.showSaveDialog(null);
-        return fc.getSelectedFile();
+        int result = fc.showSaveDialog(null);
+        return result == JFileChooser.APPROVE_OPTION ? fc.getSelectedFile() : null;
     }
 
     @Override
