@@ -2,7 +2,7 @@
 Code=LRW
 Date=2007-10-12
 Name=Lorwyn
-Code2=LRW
+Code2=LW
 Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
