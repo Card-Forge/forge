@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Emperor Palpatine 2
+Title=Emperor Palpatine
+Difficulty=medium
+Description=WU Willbreaker deck
+Icon=Emperor Palpatine.jpg
+Deck Type=constructed
+[main]
+3 Nimbus Maze
+2 Glacial Fortress
+4 Tundra
+4 Flooded Strand
+4 Island|ORI
+4 Plains|ORI
+2 Hallowed Fountain
+1 Celestial Colonnade
+1 Blinding Souleater
+1 Deepwater Hypnotist
+1 Errant Doomsayers
+1 Gideon's Lawkeeper
+1 Goldmeadow Harrier
+1 Heliod's Emissary
+1 Kor Line-Slinger
+1 Master of Diversion
+3 Minister of Impediments
+2 Niblis of the Urn
+2 Sentinel of the Eternal Watch
+1 Sidar Jabari
+1 Stormscape Apprentice
+4 Willbreaker
+1 Curse of Inertia
+2 Flood
+1 Ghostly Prison
+1 Prison Term
+1 Web of Inertia
+1 Tamiyo, the Moon Sage
+2 Disenchant
+2 Divination
+1 Force Spike
+1 Rebuff the Wicked
+1 Rethink
+1 Spell Snare
+[sideboard]
