@@ -22,10 +22,10 @@ import forge.util.ImageUtil;
 
 public class ImageFetcher {
     private static final ExecutorService threadPool = Executors.newCachedThreadPool();
-    private static HashMap<String, HashSet<CachedCardImage>> currentFetches = new HashMap<>();
+    private static HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private static HashMap<String, String> tokenImages;
 
-    public static void fetchImage(CardView card, final String imageKey, CachedCardImage cachedImage) {
+    public static void fetchImage(CardView card, final String imageKey, Callback cachedImage) {
         FThreads.assertExecutedByEdt(true);
 
         final String prefix = imageKey.substring(0, 2);
@@ -86,7 +86,7 @@ public class ImageFetcher {
 
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.
-        HashSet<CachedCardImage> observers = currentFetches.get(destPath);
+        HashSet<Callback> observers = currentFetches.get(destPath);
         if (observers != null) {
             // Already in the queue, simply add the new observer.
             observers.add(cachedImage);
@@ -101,7 +101,7 @@ public class ImageFetcher {
             public void run() {
                 FThreads.assertExecutedByEdt(true);
 
-                for (CachedCardImage o : currentFetches.get(destPath)) {
+                for (Callback o : currentFetches.get(destPath)) {
                     o.onImageFetched();
                 }
                 currentFetches.remove(destPath);
@@ -129,5 +129,9 @@ public class ImageFetcher {
                 }
             }
         });
+    }
+    
+    public static interface Callback {
+        public void onImageFetched();
     }
  }

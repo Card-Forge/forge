@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 
-public abstract class CachedCardImage {
+public abstract class CachedCardImage implements ImageFetcher.Callback {
     final CardView card;
     final Iterable<PlayerView> viewers;
     final int width;

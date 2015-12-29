@@ -24,6 +24,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import forge.ImageCache;
+import forge.ImageFetcher;
 import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
@@ -39,7 +40,7 @@ import forge.toolbox.imaging.FImageUtil;
  * @version $Id: CardPicturePanel.java 25265 2014-03-27 02:18:47Z drdev $
  *
  */
-public final class CardPicturePanel extends JPanel {
+public final class CardPicturePanel extends JPanel implements ImageFetcher.Callback {
     /** Constant <code>serialVersionUID=-3160874016387273383L</code>. */
     private static final long serialVersionUID = -3160874016387273383L;
 
@@ -57,7 +58,7 @@ public final class CardPicturePanel extends JPanel {
     }
 
     public void setItem(final InventoryItem item) {
-        setImage(item ,true);
+        setImage(item, true);
     }
 
     public void setCard(final CardStateView c) {
@@ -87,9 +88,20 @@ public final class CardPicturePanel extends JPanel {
             final InventoryItem item = (InventoryItem) displayed;
             return ImageCache.getOriginalImage(item.getImageKey(false), true);
         } else if (displayed instanceof CardStateView) {
+            CardStateView card = (CardStateView) displayed;
+            BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), false);
+            if (image == null) {
+                ImageFetcher.fetchImage(card.getCard(), card.getImageKey(), this);
+            }
             return FImageUtil.getImage((CardStateView)displayed);
         }
         return null;
+    }
+
+    @Override
+    public void onImageFetched() {
+        setImage(displayed, mayView);
+        repaint();
     }
 
     private static AutoSizeImageMode getAutoSizeImageMode() {
@@ -99,5 +111,4 @@ public final class CardPicturePanel extends JPanel {
     private static boolean isUIScaleLarger() {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
     }
-
 }
