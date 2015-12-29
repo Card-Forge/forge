@@ -38,12 +38,11 @@ public class ImageFetcher {
                 return;
             }
             final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-            final String filename = ImageUtil.getImageKey(paperCard, backFace, false);
-            final StaticData data = StaticData.instance();
-            final String editionCode2 = data.getEditions().getCode2ByCode(paperCard.getEdition());
-            destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + editionCode2 + "/" + filename + ".jpg");
+            final String filename = ImageUtil.getImageKey(paperCard, backFace, true);
+            destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + filename + ".jpg");
 
             // First, try to fetch from magiccards.info, if we have the collector's number to generate a URL.
+            final StaticData data = StaticData.instance();
             final int cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(), paperCard.getEdition());
             if (cardNum != -1)  {
                 String suffix = "";
