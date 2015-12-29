@@ -2,6 +2,7 @@
 Code=FVR
 Date=2010-08-27
 Name=From the Vault: Relics
+MciCode=fvr
 Type=From_the_Vault
 Alias=V10
 

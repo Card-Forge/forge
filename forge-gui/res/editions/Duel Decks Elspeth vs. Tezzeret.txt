@@ -2,6 +2,7 @@
 Code=DDF
 Date=2010-09-03
 Name=Duel Decks: Elspeth vs. Tezzeret
+MciCode=ddf
 Type=Duel_Decks
 
 [cards]

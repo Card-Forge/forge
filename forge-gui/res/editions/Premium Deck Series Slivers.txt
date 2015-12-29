@@ -2,6 +2,7 @@
 Code=PDS
 Date=2009-11-20
 Name=Premium Deck Series: Slivers
+MciCode=pds
 Type=Premium_Deck_Series
 Alias=H09
 

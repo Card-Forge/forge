@@ -3,6 +3,7 @@ Code=PTK
 Date=1999-05
 Name=Portal Three Kingdoms
 Code2=P3
+MciCode=p3k
 Type=Starter
 Border=White
 BoosterCovers=1

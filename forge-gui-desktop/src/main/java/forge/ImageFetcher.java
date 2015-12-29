@@ -25,7 +25,7 @@ public class ImageFetcher {
     private static HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private static HashMap<String, String> tokenImages;
 
-    public static void fetchImage(CardView card, final String imageKey, Callback cachedImage) {
+    public static void fetchImage(final CardView card, final String imageKey, final Callback callback) {
         FThreads.assertExecutedByEdt(true);
 
         final String prefix = imageKey.substring(0, 2);
@@ -50,7 +50,8 @@ public class ImageFetcher {
                 if (paperCard.getRules().getOtherPart() != null) {
                     suffix = (backFace ? "b" : "a");
                 }
-                urlToDownload = String.format("http://magiccards.info/scans/en/%s/%d%s.jpg", editionCode2.toLowerCase(), cardNum, suffix);
+                final String editionMciCode = data.getEditions().getMciCodeByCode(paperCard.getEdition());
+                urlToDownload = String.format("http://magiccards.info/scans/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix);
             } else {
                 // Fall back to using Forge's LQ card downloaded from Wizards' website. This currently only works for older cards.
                 String[] result = ImageUtil.getDownloadUrlAndDestination(ForgeConstants.CACHE_CARD_PICS_DIR, paperCard, backFace);
@@ -89,12 +90,12 @@ public class ImageFetcher {
         HashSet<Callback> observers = currentFetches.get(destPath);
         if (observers != null) {
             // Already in the queue, simply add the new observer.
-            observers.add(cachedImage);
+            observers.add(callback);
             return;
         }
 
         observers = new HashSet<>();
-        observers.add(cachedImage);
+        observers.add(callback);
         currentFetches.put(destPath, observers);
 
         final Runnable notifyObservers = new Runnable() {
@@ -125,7 +126,7 @@ public class ImageFetcher {
                     System.out.println("Saved image to " + destPath);
                     SwingUtilities.invokeLater(notifyObservers);
                 } catch (IOException e) {
-                    System.err.println("Failed to download card image: " + e.getMessage());
+                    System.err.println("Failed to download card [" + imageKey + "] image: " + e.getMessage());
                 }
             }
         });

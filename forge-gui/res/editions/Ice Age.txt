@@ -3,6 +3,7 @@ Code=ICE
 Date=1995-06-01
 Name=Ice Age
 Code2=IA
+MciCode=ia
 Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare

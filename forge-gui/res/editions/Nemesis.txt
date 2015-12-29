@@ -4,6 +4,7 @@ Date=2000-02-14
 Name=Nemesis
 Code2=NE
 Alias=NEM
+MciCode=ne
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

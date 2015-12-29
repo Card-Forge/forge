@@ -3,6 +3,7 @@ Code=PC2
 Date=2012-06-01
 Name=Planechase 2012 Edition
 Code2=PC2
+MciCode=pc2
 Type=Other
 
 [cards]

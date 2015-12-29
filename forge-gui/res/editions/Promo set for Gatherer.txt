@@ -4,6 +4,7 @@ Date=1996-02
 Name=Promo set for Gatherer
 Alias=PRO
 Code2=MBP
+MciCode=mbp
 Type=Other
 
 [cards]

@@ -1,5 +1,6 @@
 [metadata]
 Code=CM1
+MciCode=cma
 Date=2012-11-02
 Name=Commander's Arsenal
 

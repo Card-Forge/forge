@@ -4,6 +4,7 @@ Date=2009-09-04
 Name=Planechase
 Alias=PCH
 Code2=HOP
+MciCode=pch
 Type=Other
 
 [cards]

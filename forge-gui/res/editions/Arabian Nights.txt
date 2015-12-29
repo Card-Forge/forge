@@ -3,6 +3,7 @@ Code=ARN
 Date=1993-12-21
 Name=Arabian Nights
 Code2=AN
+MciCode=an
 Type=Expansion
 BoosterCovers=1
 Booster=6 Common, 2 UncommonRare

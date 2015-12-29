@@ -107,11 +107,12 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "??", "???", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "???", "??", "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
 
     private Date date;
-    private String code2;
     private String code;
+    private String code2;
+    private String mciCode;
     private Type   type;
     private String name;
     private String alias = null;
@@ -134,19 +135,21 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * Instantiates a new card set.
      *
      * @param date indicates order of set release date
+     * @param code the MTG 3-letter set code
      * @param code2 the 2 (usually) letter code used for image filenames/URLs distributed by the HQ pics team that
      *   use Magic Workstation-type edition codes. Older sets only had 2-letter codes, and some of the 3-letter
      *   codes they use now aren't the same as the official list of 3-letter codes.  When Forge downloads set-pics,
      *   it uses the 3-letter codes for the folder no matter the age of the set.
-     * @param code the MTG 3-letter set code
+     * @param mciCode the code used by magiccards.info website.
      * @param type the set type
      * @param name the name of the set
      * @param cards the cards in the set
      */
-    private CardEdition(String date, String code2, String code, Type type, String name, FoilType foil, CardInSet[] cards) {
+    private CardEdition(String date, String code, String code2, String mciCode, Type type, String name, FoilType foil, CardInSet[] cards) {
         this(cards);
-        this.code2 = code2;
         this.code  = code;
+        this.code2 = code2;
+        this.mciCode = mciCode;
         this.type  = type;
         this.name  = name;
         this.date = parseDate(date);
@@ -164,8 +167,9 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
 
     public Date getDate()  { return date;  }
-    public String getCode2() { return code2; }
     public String getCode()  { return code;  }
+    public String getCode2() { return code2; }
+    public String getMciCode() { return mciCode; }
     public Type   getType()  { return type;  }
     public String getName()  { return name;  }
     public String getAlias() { return alias; }
@@ -277,6 +281,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             if (res.code2 == null) {
                 res.code2 = res.code;
             }
+            res.mciCode = section.get("MciCode");
+            if (res.mciCode == null) {
+                res.mciCode = res.code2.toLowerCase();
+            }
 
             res.boosterArts = section.getInt("BoosterCovers", 1);
             String boosterDesc = section.get("Booster");
@@ -379,6 +387,12 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         public String getCode2ByCode(final String code) {
             final CardEdition set = this.get(code);
             return set == null ? "" : set.getCode2();
+        }
+
+        // used by image generating code
+        public String getMciCodeByCode(final String code) {
+            final CardEdition set = this.get(code);
+            return set == null ? "" : set.getMciCode();
         }
 
         public final Function<String, CardEdition> FN_EDITION_BY_CODE = new Function<String, CardEdition>() {

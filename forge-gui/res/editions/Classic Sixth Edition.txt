@@ -3,6 +3,7 @@ Code=6ED
 Date=1999-04-28
 Name=Classic Sixth Edition
 Code2=6E
+MciCode=6e
 Type=Core
 Border=White
 BoosterCovers=1

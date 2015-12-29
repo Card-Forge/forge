@@ -4,6 +4,7 @@ Date=1999-07
 Name=Starter 1999
 Border=White
 Code2=ST
+MciCode=st
 Type=Starter
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False

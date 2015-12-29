@@ -2,6 +2,7 @@
 Code=FVL
 Date=2011-08-26
 Name=From the Vault: Legends
+MciCode=fvl
 Type=From_the_Vault
 Alias=V11
 

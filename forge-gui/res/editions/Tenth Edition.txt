@@ -3,6 +3,7 @@ Code=10E
 Date=2007-07-14
 Name=Tenth Edition
 Code2=10E
+MciCode=10e
 Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
