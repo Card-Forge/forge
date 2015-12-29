@@ -129,8 +129,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 colorCanUse |= color;
             }
         }
-        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.COLORLESS, player.getManaPool())) {
-            colorCanUse |= ManaAtom.COLORLESS;
+        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.GENERIC, player.getManaPool())) {
+            colorCanUse |= ManaAtom.GENERIC;
         }
         if (colorCanUse == 0) { // no mana cost or something 
             return abilities;
@@ -183,8 +183,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) { colorCanUse |= color; }
             if (manaCost.needsColor(color, player.getManaPool()))           { colorNeeded |= color; }
         }
-        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.COLORLESS, player.getManaPool())) {
-            colorCanUse |= ManaAtom.COLORLESS;
+        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.GENERIC, player.getManaPool())) {
+            colorCanUse |= ManaAtom.GENERIC;
         }
 
         if (colorCanUse == 0) { // no mana cost or something 
@@ -293,7 +293,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     private static boolean abilityProducesManaColor(final SpellAbility am, AbilityManaPart m, final byte neededColor) {
-        if (0 != (neededColor & ManaAtom.COLORLESS)) {
+        if (0 != (neededColor & ManaAtom.GENERIC)) {
             return true;
         }
 

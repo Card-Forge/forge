@@ -114,13 +114,14 @@ public class Cost {
         return manapart == null ? ManaCost.ZERO : manapart.getManaToPay();
     }
 
-    private Cost(int colorlessmana) {
-        costParts.add(new CostPartMana(ManaCost.get(colorlessmana), null));
+    private Cost(int genericMana) {
+        costParts.add(new CostPartMana(ManaCost.get(genericMana), null));
     }
 
     // Parsing Strings
 
     public Cost(ManaCost cost, final boolean bAbility) {
+        this.isAbility = bAbility;
         costParts.add(new CostPartMana(cost, null));
     }
 

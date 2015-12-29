@@ -348,7 +348,7 @@ public class ComputerUtilMana {
 
             Collection<SpellAbility> saList = null;
             if (hasConverge && 
-            		(toPay == ManaCostShard.COLORLESS || toPay == ManaCostShard.X)) {
+            		(toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X)) {
             	final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
             	for (final byte b : ColorSet.fromMask(unpaidColors)) {	// try and pay other colors for converge
             		final ManaCostShard shard = ManaCostShard.valueOf(b);
@@ -358,7 +358,7 @@ public class ComputerUtilMana {
             			break;
             		}
             	}
-            	if (saList == null || saList.isEmpty()) {	// failed to converge, revert to paying colorless
+            	if (saList == null || saList.isEmpty()) {	// failed to converge, revert to paying generic
             		saList = sourcesForShards.get(toPay);
             		hasConverge = false;
             	}
@@ -666,7 +666,7 @@ public class ComputerUtilMana {
         }
         else if (m.isAnyMana()) {
             byte colorChoice = 0;
-            if (toPay.isOr2Colorless())
+            if (toPay.isOr2Generic())
                 colorChoice = toPay.getColorMask();
             else {
                 for (byte c : MagicColor.WUBRG) {
@@ -775,7 +775,7 @@ public class ComputerUtilMana {
         // * Pay 2/C with matching colors
         // * pay hybrids
         // * pay phyrexian, keep mana for colorless
-        // * pay colorless
+        // * pay generic
         return cost.getShardToPayByPriority(cost.getDistinctShards(), ColorSet.ALL_COLORS.getColor());
     }
 
@@ -786,10 +786,10 @@ public class ComputerUtilMana {
             byte mask = MagicColor.fromName(manaPart);
 
             // make mana mandatory for AI
-            if (!cost.needsColor(mask, ai.getManaPool()) && cost.getColorlessManaAmount() > 0) {
+            if (!cost.needsColor(mask, ai.getManaPool()) && cost.getGenericManaAmount() > 0) {
                 ManaCostShard shard = ManaCostShard.valueOf(mask);
                 cost.increaseShard(shard, 1);
-                cost.decreaseColorlessMana(1);
+                cost.decreaseGenericMana(1);
             }
         }
     }
@@ -909,8 +909,8 @@ public class ComputerUtilMana {
             final ManaCostBeingPaid cost) {
         ListMultimap<ManaCostShard, SpellAbility> res = ArrayListMultimap.create();
 
-        if (cost.getColorlessManaAmount() > 0 && manaAbilityMap.containsKey(ManaAtom.COLORLESS)) {
-            res.putAll(ManaCostShard.COLORLESS, manaAbilityMap.get(ManaAtom.COLORLESS));
+        if (cost.getGenericManaAmount() > 0 && manaAbilityMap.containsKey(ManaAtom.GENERIC)) {
+            res.putAll(ManaCostShard.GENERIC, manaAbilityMap.get(ManaAtom.GENERIC));
         }
 
         // loop over cost parts
@@ -923,16 +923,16 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (shard.isOr2Colorless()) {
+            if (shard.isOr2Generic()) {
                 Integer colorKey = (int) shard.getColorMask();
                 if (manaAbilityMap.containsKey(colorKey))
                     res.putAll(shard, manaAbilityMap.get(colorKey));
-                if (manaAbilityMap.containsKey(ManaAtom.COLORLESS))
-                    res.putAll(shard, manaAbilityMap.get(ManaAtom.COLORLESS));
+                if (manaAbilityMap.containsKey(ManaAtom.GENERIC))
+                    res.putAll(shard, manaAbilityMap.get(ManaAtom.GENERIC));
                 continue;
             }
             
-            if (shard == ManaCostShard.COLORLESS) {
+            if (shard == ManaCostShard.GENERIC) {
                 continue;
             }
 
@@ -1176,7 +1176,7 @@ public class ComputerUtilMana {
                     }
                 }
 
-                manaMap.get(ManaAtom.COLORLESS).add(manaMap.get(ManaAtom.COLORLESS).size(), m); // add to colorless source list
+                manaMap.get(ManaAtom.GENERIC).add(manaMap.get(ManaAtom.GENERIC).size(), m); // add to generic source list
                 AbilityManaPart mp = m.getManaPart();
 
                 // setup produce mana replacement effects
@@ -1314,7 +1314,7 @@ public class ComputerUtilMana {
             convoked = null;
         }
         for (int i = 0; i < list.size() && i < cost.getGenericCost(); i++) {
-            convoke.put(list.get(i), ManaCostShard.COLORLESS);
+            convoke.put(list.get(i), ManaCostShard.GENERIC);
         }
         return convoke;
     }

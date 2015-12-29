@@ -60,7 +60,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
                 colors = ColorSet.fromMask(colors.getColor() & remainingCost.getUnpaidColors());
             }
             if (!colors.isMulticolor()) {
-                // Since the convoke mana logic can use colored mana as colorless if needed,
+                // Since the convoke mana logic can use colored mana as generic if needed,
                 // there is no need to prompt the user when convoking with a mono-color creature.
                 chosenColor = colors.getColor();
             }

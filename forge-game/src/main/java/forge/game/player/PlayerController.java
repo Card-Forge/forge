@@ -152,7 +152,7 @@ public abstract class PlayerController {
     public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max);
 
     public abstract void playMiracle(SpellAbility miracle, Card card);
-    public abstract CardCollectionView chooseCardsToDelve(int colorLessAmount, CardCollection grave);
+    public abstract CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave);
     public abstract CardCollectionView chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid);
     public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String param, SpellAbility sa);
     public abstract List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand);

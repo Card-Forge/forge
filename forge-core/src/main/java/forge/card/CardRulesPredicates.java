@@ -394,7 +394,7 @@ public final class CardRulesPredicates {
 
     public static class LeafNumber implements Predicate<CardRules> {
         public enum CardField {
-            CMC, COLORLESS_COST, POWER, TOUGHNESS
+            CMC, GENERIC_COST, POWER, TOUGHNESS
         }
 
         private final LeafNumber.CardField field;
@@ -413,7 +413,7 @@ public final class CardRulesPredicates {
             switch (this.field) {
             case CMC:
                 return this.op(card.getManaCost().getCMC(), this.operand);
-            case COLORLESS_COST:
+            case GENERIC_COST:
                 return this.op(card.getManaCost().getGenericCost(), this.operand);
             case POWER:
                 value = card.getIntPower();

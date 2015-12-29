@@ -168,7 +168,7 @@ public class DeckProxy implements InventoryItem {
                         else {
                             for (final ManaCostShard shard : rules.getManaCost()) {
                                 //track phyrexian and hybrid costs separately as they won't always affect color
-                                if (shard.isPhyrexian() || shard.isOr2Colorless() || !shard.isMonoColor()) {
+                                if (shard.isPhyrexian() || shard.isOr2Generic() || !shard.isMonoColor()) {
                                     if (nonReqColors == null) {
                                         nonReqColors = new HashSet<Byte>();
                                     }

@@ -82,7 +82,7 @@ public enum FSkinProp {
     IMG_MANA_PHRYX_B   (new int[] {320, 360, 40, 40}, PropType.IMAGE),
     IMG_MANA_SNOW      (new int[] {320, 160, 40, 40}, PropType.IMAGE),
 
-    //colorless mana images
+    //generic mana images
     IMG_MANA_0   (new int[] {640, 200, 20, 20}, PropType.IMAGE),
     IMG_MANA_1   (new int[] {660, 200, 20, 20}, PropType.IMAGE),
     IMG_MANA_2   (new int[] {640, 220, 20, 20}, PropType.IMAGE),

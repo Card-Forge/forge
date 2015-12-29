@@ -56,7 +56,7 @@ public class ColorSetRenderer extends ItemCellRenderer {
         final int offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding0 - elemtWidth) / (cntGlyphs - 1) : elemtWidth + elemtGap;
         final int dx = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
 
-        // Display colorless mana before colored mana
+        // Display generic mana before colored mana
         if (cntGlyphs == 0) {
             CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, x, y);
             x += dx;

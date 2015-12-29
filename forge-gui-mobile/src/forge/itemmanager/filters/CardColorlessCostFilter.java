@@ -21,12 +21,12 @@ public class CardColorlessCostFilter extends ValueRangeFilter<PaperCard> {
 
     @Override
     protected String getCaption() {
-        return "Colorless Cost";
+        return "Generic Cost";
     }
 
     @Override
     protected Predicate<PaperCard> buildPredicate() {
-        Predicate<CardRules> predicate = getCardRulesFieldPredicate(CardRulesPredicates.LeafNumber.CardField.COLORLESS_COST);
+        Predicate<CardRules> predicate = getCardRulesFieldPredicate(CardRulesPredicates.LeafNumber.CardField.GENERIC_COST);
         if (predicate == null) {
             return Predicates.alwaysTrue();
         }

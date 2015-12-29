@@ -48,7 +48,6 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
 
     private Float compareWeight = null;
 
-    /** The Constant empty. */
     public static final ManaCost NO_COST = new ManaCost(-1);
     public static final ManaCost ZERO = new ManaCost(0);
     public static final ManaCost ONE = new ManaCost(1);
@@ -56,15 +55,15 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
     public static final ManaCost THREE = new ManaCost(3);
     public static final ManaCost FOUR = new ManaCost(4);
 
-    public static ManaCost get(int cntColorless) {
-        switch (cntColorless) {
+    public static ManaCost get(int cntGeneric) {
+        switch (cntGeneric) {
             case 0: return ZERO;
             case 1: return ONE;
             case 2: return TWO;
             case 3: return THREE;
             case 4: return FOUR;
         }
-        return cntColorless > 0 ? new ManaCost(cntColorless) : NO_COST;
+        return cntGeneric > 0 ? new ManaCost(cntGeneric) : NO_COST;
     }
 
     // pass mana cost parser here
@@ -91,11 +90,11 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         this.hasNoCost = false;
         while (parser.hasNext()) {
             final ManaCostShard shard = parser.next();
-            if (shard != null && shard != ManaCostShard.COLORLESS) {
+            if (shard != null && shard != ManaCostShard.GENERIC) {
                 shardsTemp.add(shard);
             } // null is OK - that was generic mana
         }
-        this.genericCost = parser.getTotalColorlessCost(); // collect generic mana
+        this.genericCost = parser.getTotalGenericCost(); // collect generic mana
         // here
         sealClass(shardsTemp);
     }
@@ -149,7 +148,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
     }
 
     public int getShardCount(ManaCostShard which) {
-        if (which == ManaCostShard.COLORLESS) {
+        if (which == ManaCostShard.GENERIC) {
             return genericCost;
         }
 

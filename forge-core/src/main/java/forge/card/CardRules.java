@@ -427,19 +427,19 @@ public final class CardRules implements ICardCharacteristics {
          */
         private static class ManaCostParser implements IParserManaCost {
             private final StringTokenizer st;
-            private int colorlessCost;
+            private int genericCost;
 
             public ManaCostParser(final String cost) {
                 st = new StringTokenizer(cost, " ");
-                this.colorlessCost = 0;
+                this.genericCost = 0;
             }
 
             @Override
-            public final int getTotalColorlessCost() {
+            public final int getTotalGenericCost() {
                 if (this.hasNext()) {
-                    throw new RuntimeException("Colorless cost should be obtained after iteration is complete");
+                    throw new RuntimeException("Generic cost should be obtained after iteration is complete");
                 }
-                return this.colorlessCost;
+                return this.genericCost;
             }
 
             /*
@@ -463,7 +463,7 @@ public final class CardRules implements ICardCharacteristics {
                 // System.out.println(unparsed);
                 try {
                     int iVal = Integer.parseInt(unparsed);
-                    this.colorlessCost += iVal;
+                    this.genericCost += iVal;
                     return null;
                 }
                 catch (NumberFormatException nex) { }

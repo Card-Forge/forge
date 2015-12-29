@@ -701,8 +701,8 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public CardCollectionView chooseCardsToDelve(final int colorLessAmount, final CardCollection grave) {
-        final int cardsInGrave = Math.min(colorLessAmount, grave.size());
+    public CardCollectionView chooseCardsToDelve(final int genericAmount, final CardCollection grave) {
+        final int cardsInGrave = Math.min(genericAmount, grave.size());
         if (cardsInGrave == 0) {
             return CardCollection.EMPTY;
         }
@@ -1437,7 +1437,7 @@ public class PlayerControllerHuman
         } else {
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override public final void run() {
-                    getGui().message("Cannot pass priority at this time.");
+                    //getGui().message("Cannot pass priority at this time.");
                 }
             });
         }

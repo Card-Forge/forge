@@ -45,15 +45,16 @@ public enum ManaCostShard {
     GU(ManaAtom.GREEN | ManaAtom.BLUE, "G/U", "GU"),
 
     /* Or 2 colorless */
-    W2(ManaAtom.WHITE | ManaAtom.OR_2_COLORLESS, "2/W", "2W"),
-    U2(ManaAtom.BLUE | ManaAtom.OR_2_COLORLESS, "2/U", "2U"),
-    B2(ManaAtom.BLACK | ManaAtom.OR_2_COLORLESS, "2/B", "2B"),
-    R2(ManaAtom.RED | ManaAtom.OR_2_COLORLESS, "2/R", "2R"),
-    G2(ManaAtom.GREEN | ManaAtom.OR_2_COLORLESS, "2/G", "2G"),
+    W2(ManaAtom.WHITE | ManaAtom.OR_2_GENERIC, "2/W", "2W"),
+    U2(ManaAtom.BLUE | ManaAtom.OR_2_GENERIC, "2/U", "2U"),
+    B2(ManaAtom.BLACK | ManaAtom.OR_2_GENERIC, "2/B", "2B"),
+    R2(ManaAtom.RED | ManaAtom.OR_2_GENERIC, "2/R", "2R"),
+    G2(ManaAtom.GREEN | ManaAtom.OR_2_GENERIC, "2/G", "2G"),
 
     // Snow and colorless
     S(ManaAtom.IS_SNOW, "S"),
-    COLORLESS(ManaAtom.COLORLESS, "1"),
+    GENERIC(ManaAtom.GENERIC, "1"),
+    COLORLESS(ManaAtom.COLORLESS, "C"),
 
     /* Phyrexian */
     PW(ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "P/W", "PW"),
@@ -112,7 +113,7 @@ public enum ManaCostShard {
         if (0 != (this.shard & ManaAtom.IS_X)) {
             return 0;
         }
-        if (0 != (this.shard & ManaAtom.OR_2_COLORLESS)) {
+        if (0 != (this.shard & ManaAtom.OR_2_GENERIC)) {
             return 2;
         }
         return 1;
@@ -130,7 +131,7 @@ public enum ManaCostShard {
         if (0 != (this.shard & ManaAtom.IS_X)) {
             return 0.0001f;
         }
-        float cost = 0 != (this.shard & ManaAtom.OR_2_COLORLESS) ? 2 : 1;
+        float cost = 0 != (this.shard & ManaAtom.OR_2_GENERIC) ? 2 : 1;
         // yes, these numbers are magic, slightly-magic
         if (0 != (this.shard & ManaAtom.WHITE)) {
             cost += 0.0005f;
@@ -170,7 +171,7 @@ public enum ManaCostShard {
      * @return the card mana cost shard
      */
     public static ManaCostShard valueOf(final int atoms) {
-        if ( atoms == 0 ) return ManaCostShard.COLORLESS;
+        if ( atoms == 0 ) return ManaCostShard.GENERIC;
         for (final ManaCostShard element : ManaCostShard.values()) {
             if (element.shard == atoms) {
                 return element;
@@ -194,17 +195,18 @@ public enum ManaCostShard {
                 case 'P': atoms |= ManaAtom.OR_2_LIFE;      break;
                 case 'S': atoms |= ManaAtom.IS_SNOW;        break;
                 case 'X': atoms |= ManaAtom.IS_X;           break;
-                case '2': atoms |= ManaAtom.OR_2_COLORLESS; break;
+                case 'C': atoms |= ManaAtom.COLORLESS;      break;
+                case '2': atoms |= ManaAtom.OR_2_GENERIC;   break;
                 default:
                     if (c <= '9' && c >= '0') {
-                        atoms |= ManaAtom.COLORLESS;
+                        atoms |= ManaAtom.GENERIC;
                     }
                     break;
             }
         }
         // for cases when unparsed equals '2' or unparsed is like '12' or '20'
-        if (atoms == ManaAtom.OR_2_COLORLESS || atoms == (ManaAtom.OR_2_COLORLESS | ManaAtom.COLORLESS)) {
-            atoms = ManaAtom.COLORLESS;
+        if (atoms == ManaAtom.OR_2_GENERIC || atoms == (ManaAtom.OR_2_GENERIC | ManaAtom.GENERIC)) {
+            atoms = ManaAtom.GENERIC;
         }
         return ManaCostShard.valueOf(atoms);
     }
@@ -282,11 +284,11 @@ public enum ManaCostShard {
         return BinaryUtil.bitCount(this.shard & COLORS_SUPERPOSITION) == 1;
     }
 
-    public boolean isOr2Colorless() {
-        return (this.shard & ManaAtom.OR_2_COLORLESS) != 0;
+    public boolean isOr2Generic() {
+        return (this.shard & ManaAtom.OR_2_GENERIC) != 0;
     }
 
     public boolean canBePaidWithManaOfColor(byte colorCode) {
-        return this.isOr2Colorless() || (COLORS_SUPERPOSITION & this.shard) == 0 || (colorCode & this.shard) > 0;
+        return this.isOr2Generic() || (COLORS_SUPERPOSITION & this.shard) == 0 || (colorCode & this.shard) > 0;
     }
 }

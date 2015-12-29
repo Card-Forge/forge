@@ -62,7 +62,7 @@ public class RunTest {
         this.check("24", !manaCost.isPaid());
         manaCost.payMana(MagicColor.Constant.BLUE);
         this.check("25", !manaCost.isPaid());
-        manaCost.payMana(MagicColor.Constant.COLORLESS);
+        manaCost.payMana(MagicColor.Constant.GENERIC);
         this.check("26", !manaCost.isPaid());
         manaCost.payMana(MagicColor.Constant.GREEN);
         this.check("27", !manaCost.isPaid());

@@ -255,7 +255,7 @@ public final class GameActionUtil {
                 final SpellAbility newSA = sa.copy();
                 newSA.setBasicSpell(false);
                 ManaCostBeingPaid newCost = new ManaCostBeingPaid(source.getManaCost());
-                newCost.increaseColorlessMana(2);
+                newCost.increaseGenericMana(2);
                 final Cost actualcost = new Cost(newCost.toManaCost(), false);
                 newSA.setPayCosts(actualcost);
                 SpellAbilityRestriction sar = new SpellAbilityRestriction();

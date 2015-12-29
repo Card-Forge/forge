@@ -80,16 +80,16 @@ public class ManaCostBeingPaid {
             if (!mch.hasNext()) { return false; }
 
             nextShard = mch.next();
-            if (nextShard == ManaCostShard.COLORLESS) {
-                return this.hasNext(); // skip colorless
+            if (nextShard == ManaCostShard.GENERIC) {
+                return this.hasNext(); // skip generic
             }
             remainingShards = unpaidShards.get(nextShard).totalCount;
             return true;
         }
 
         @Override
-        public int getTotalColorlessCost() {
-            ShardCount c = unpaidShards.get(ManaCostShard.COLORLESS);
+        public int getTotalGenericCost() {
+            ShardCount c = unpaidShards.get(ManaCostShard.GENERIC);
             return c == null ? 0 : c.totalCount;
         }
     }
@@ -107,7 +107,7 @@ public class ManaCostBeingPaid {
     }
 
     // holds Mana_Part objects
-    // ManaPartColor is stored before ManaPartColorless
+    // ManaPartColor is stored before ManaPartGeneric
     private final Map<ManaCostShard, ShardCount> unpaidShards = new HashMap<ManaCostShard, ShardCount>();
     private Map<String, Integer> xManaCostPaidByColor;
     private final String sourceRestriction;
@@ -145,7 +145,7 @@ public class ManaCostBeingPaid {
                 increaseShard(shard, 1, false);
             }
         }
-        increaseColorlessMana(manaCost.getGenericCost());
+        increaseGenericMana(manaCost.getGenericCost());
     }
 
     public Map<String, Integer> getXManaCostPaidByColor() {
@@ -190,10 +190,10 @@ public class ManaCostBeingPaid {
     // Easier for split costs
     public final boolean needsColor(final byte colorMask, final ManaPool pool) {
         for (ManaCostShard shard : unpaidShards.keySet()) {
-            if (shard == ManaCostShard.COLORLESS) {
+            if (shard == ManaCostShard.GENERIC) {
                 continue;
             }
-            if (shard.isOr2Colorless()) {
+            if (shard.isOr2Generic()) {
                 if ((shard.getColorMask() & colorMask) != 0) {
                     return true;
                 }
@@ -234,7 +234,7 @@ public class ManaCostBeingPaid {
 
         ManaCostShard shard;
         if (StringUtils.isEmpty(xColor)) {
-            shard = ManaCostShard.COLORLESS;
+            shard = ManaCostShard.GENERIC;
         }
         else {
             shard = ManaCostShard.valueOf(MagicColor.fromName(xColor)); 
@@ -242,8 +242,8 @@ public class ManaCostBeingPaid {
         increaseShard(shard, xCost, true);
     }
 
-    public final void increaseColorlessMana(final int toAdd) {
-        increaseShard(ManaCostShard.COLORLESS, toAdd, false);
+    public final void increaseGenericMana(final int toAdd) {
+        increaseShard(ManaCostShard.GENERIC, toAdd, false);
     }
     public final void increaseShard(final ManaCostShard shard, final int toAdd) {
         increaseShard(shard, toAdd, false);
@@ -262,8 +262,8 @@ public class ManaCostBeingPaid {
         sc.totalCount += toAdd;
     }
 
-    public final void decreaseColorlessMana(final int manaToSubtract) {
-        decreaseShard(ManaCostShard.COLORLESS, manaToSubtract);
+    public final void decreaseGenericMana(final int manaToSubtract) {
+        decreaseShard(ManaCostShard.GENERIC, manaToSubtract);
     }
 
     public final void decreaseShard(final ManaCostShard shard, final int manaToSubtract) {
@@ -289,8 +289,8 @@ public class ManaCostBeingPaid {
         }
     }
 
-    public final int getColorlessManaAmount() {
-        ShardCount sc = unpaidShards.get(ManaCostShard.COLORLESS);
+    public final int getGenericManaAmount() {
+        ShardCount sc = unpaidShards.get(ManaCostShard.GENERIC);
         if (sc != null) {
             return sc.totalCount;
         }
@@ -402,8 +402,8 @@ public class ManaCostBeingPaid {
         }
 
         decreaseShard(chosenShard, 1);
-        if (chosenShard.isOr2Colorless() && ( 0 == (chosenShard.getColorMask() & possibleUses) )) {
-            this.increaseColorlessMana(1);
+        if (chosenShard.isOr2Generic() && ( 0 == (chosenShard.getColorMask() & possibleUses) )) {
+            this.increaseGenericMana(1);
         }
 
         this.sunburstMap |= colorMask;
@@ -411,12 +411,12 @@ public class ManaCostBeingPaid {
     }
 
     private static int getPayPriority(final ManaCostShard bill, final byte paymentColor) {
-        if (bill == ManaCostShard.COLORLESS) {
+        if (bill == ManaCostShard.GENERIC) {
             return 0;
         }
 
         if (bill.isMonoColor()) {
-            if (bill.isOr2Colorless()) {
+            if (bill.isOr2Generic()) {
                 return !ColorSet.fromMask(bill.getColorMask() & paymentColor).isColorless() ? 9 : 4;
             }
             if (!bill.isPhyrexian()) {
@@ -445,7 +445,7 @@ public class ManaCostBeingPaid {
                 increaseShard(shard, 1, false);
             }
         }
-        increaseColorlessMana(extra.getGenericCost());
+        increaseGenericMana(extra.getGenericCost());
     }
 
     public final void subtractManaCost(final ManaCost subThisManaCost) {
@@ -457,10 +457,10 @@ public class ManaCostBeingPaid {
                 decreaseShard(shard, 1);
             }
             else {
-                decreaseColorlessMana(1);
+                decreaseGenericMana(1);
             }
         }
-        decreaseColorlessMana(subThisManaCost.getGenericCost());
+        decreaseGenericMana(subThisManaCost.getGenericCost());
     }
 
     /**
@@ -480,12 +480,12 @@ public class ManaCostBeingPaid {
             }
         }
 
-        int nGeneric = getColorlessManaAmount();
+        int nGeneric = getGenericManaAmount();
         if (nGeneric > 0) {
             if (nGeneric <= 20) {
                 sb.append("{" + nGeneric + "}");
             }
-            else { //if no mana symbol exists for colorless amount, use combination of symbols for each digit
+            else { //if no mana symbol exists for generic amount, use combination of symbols for each digit
                 String genericStr = String.valueOf(nGeneric);
                 for (int i = 0; i < genericStr.length(); i++) {
                     sb.append("{" + genericStr.charAt(i) + "}");
@@ -497,7 +497,7 @@ public class ManaCostBeingPaid {
         List<ManaCostShard> shards = new ArrayList<ManaCostShard>(unpaidShards.keySet());
         Collections.sort(shards);
         for (ManaCostShard shard : shards) {
-            if (shard == ManaCostShard.COLORLESS) {
+            if (shard == ManaCostShard.GENERIC) {
                 continue;
             }
             
@@ -554,15 +554,8 @@ public class ManaCostBeingPaid {
         return result;
     }
 
-    /**
-     * <p>
-     * removeColorlessMana.
-     * </p>
-     * 
-     * @since 1.0.15
-     */
-    public final void removeColorlessMana() {
-        unpaidShards.remove(ManaCostShard.COLORLESS);
+    public final void removeGenericMana() {
+        unpaidShards.remove(ManaCostShard.GENERIC);
     }
 
     public String getSourceRestriction() {

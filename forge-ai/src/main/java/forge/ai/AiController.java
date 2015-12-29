@@ -1297,9 +1297,9 @@ public class AiController {
         return null;
     }     
 
-    public CardCollection chooseCardsToDelve(int colorlessCost, CardCollection grave) {
+    public CardCollection chooseCardsToDelve(int genericCost, CardCollection grave) {
         CardCollection toExile = new CardCollection();
-        int numToExile = Math.min(grave.size(), colorlessCost);
+        int numToExile = Math.min(grave.size(), genericCost);
         
         for (int i = 0; i < numToExile; i++) {
             Card chosen = null;

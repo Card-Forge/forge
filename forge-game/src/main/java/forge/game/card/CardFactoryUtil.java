@@ -438,7 +438,7 @@ public class CardFactoryUtil {
         final StringBuilder sb = new StringBuilder();
 
         if (Character.isDigit(tokenized[0].charAt(0))) {
-            // cost starts with "colorless" number cost
+            // cost starts with "generic" number cost
             int cost = Integer.parseInt(tokenized[0]);
             cost = multiplier * cost;
             tokenized[0] = "" + cost;

@@ -407,7 +407,8 @@ public final class CardUtil {
                     colors.add(col);
                 }
             }
-            if (maxChoices == 6 && producedColors.contains("1")) {
+            // TODO Sol Remove production of "1" Generic Mana
+            if (maxChoices == 6 && (producedColors.contains("1") || producedColors.contains("C"))) {
                 colors.add(MagicColor.Constant.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
@@ -461,7 +462,8 @@ public final class CardUtil {
             }
         }
 
-        if (maxChoices == 6 && ab.canProduce("1")) {
+        // TODO Sol Remove production of "1" Generic Mana
+        if (maxChoices == 6 && (ab.canProduce("1") || ab.canProduce("C"))) {
             colors.add(MagicColor.Constant.COLORLESS);
         }
 

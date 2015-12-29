@@ -273,7 +273,7 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public CardCollectionView chooseCardsToDelve(int colorLessAmount, CardCollection grave) {
+	public CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave) {
 		return CardCollection.EMPTY;
 	}
 

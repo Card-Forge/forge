@@ -55,6 +55,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("X", FSkin.getImage(FSkinProp.IMG_MANA_X, manaImageSize, manaImageSize));
         MANA_IMAGES.put("Y", FSkin.getImage(FSkinProp.IMG_MANA_Y, manaImageSize, manaImageSize));
         MANA_IMAGES.put("Z", FSkin.getImage(FSkinProp.IMG_MANA_Z, manaImageSize, manaImageSize));
+        MANA_IMAGES.put("C", FSkin.getImage(FSkinProp.IMG_MANA_COLORLESS, manaImageSize, manaImageSize));
 
         MANA_IMAGES.put("B",  FSkin.getImage(FSkinProp.IMG_MANA_B, manaImageSize, manaImageSize));
         MANA_IMAGES.put("BG", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_BG, manaImageSize, manaImageSize));

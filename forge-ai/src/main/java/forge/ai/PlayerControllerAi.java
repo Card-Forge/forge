@@ -320,8 +320,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView chooseCardsToDelve(int colorlessCost, CardCollection grave) {
-        return getAi().chooseCardsToDelve(colorlessCost, grave);
+    public CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave) {
+        return getAi().chooseCardsToDelve(genericAmount, grave);
     }
 
     @Override

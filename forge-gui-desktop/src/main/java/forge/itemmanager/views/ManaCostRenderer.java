@@ -116,7 +116,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
             }
         }
 
-        // Display colorless mana before colored mana
+        // Display generic mana before colored mana
         if (hasGeneric) {
             final String sGeneric = Integer.toString(genericManaCost);
             CardFaceSymbols.drawSymbol(sGeneric, g, x, y);

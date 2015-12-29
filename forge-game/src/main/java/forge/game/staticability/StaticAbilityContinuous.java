@@ -521,6 +521,7 @@ public final class StaticAbilityContinuous {
                             sb.append(generic);
                         }
                         for (ManaCostShard s : affectedCard.getManaCost()) {
+                            // TODO Sol Investigate, this loop feels wrong
                             ColorSet cs = ColorSet.fromMask(s.getColorMask());
                             if(cs.isColorless()) continue;
                             sb.append(' ');

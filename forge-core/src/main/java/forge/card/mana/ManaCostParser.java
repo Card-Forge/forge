@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 public class ManaCostParser implements IParserManaCost {
     private final String[] cost;
     private int nextToken;
-    private int colorlessCost;
+    private int genericCost;
 
     /**
      * Parse the given cost and output formatted cost string
@@ -32,20 +32,20 @@ public class ManaCostParser implements IParserManaCost {
         this.cost = cost.split(" ");
         // System.out.println(cost);
         this.nextToken = 0;
-        this.colorlessCost = 0;
+        this.genericCost = 0;
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.CardManaCost.ManaParser#getTotalColorlessCost()
+     * @see forge.card.CardManaCost.ManaParser#getTotalGenericCost()
      */
     @Override
-    public final int getTotalColorlessCost() {
+    public final int getTotalGenericCost() {
         if (this.hasNext()) {
-            throw new RuntimeException("Colorless cost should be obtained after iteration is complete");
+            throw new RuntimeException("Generic cost should be obtained after iteration is complete");
         }
-        return this.colorlessCost;
+        return this.genericCost;
     }
 
     /*
@@ -68,7 +68,7 @@ public class ManaCostParser implements IParserManaCost {
         final String unparsed = this.cost[this.nextToken++];
         // System.out.println(unparsed);
         if (StringUtils.isNumeric(unparsed)) {
-            this.colorlessCost += Integer.parseInt(unparsed);
+            this.genericCost += Integer.parseInt(unparsed);
             return null;
         }
 

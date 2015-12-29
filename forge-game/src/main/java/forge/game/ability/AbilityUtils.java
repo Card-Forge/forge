@@ -1285,7 +1285,7 @@ public class AbilityUtils {
                 int xPaid = triggeredCard.getXManaCostPaid() * xCount;
                 ManaCostBeingPaid toPay = new ManaCostBeingPaid(triggeredCard.getManaCost());
                 toPay.decreaseShard(ManaCostShard.X, xCount);
-                toPay.increaseColorlessMana(xPaid);
+                toPay.increaseGenericMana(xPaid);
                 cost = new Cost(toPay.toManaCost(), true);
             }
         }
@@ -1305,7 +1305,7 @@ public class AbilityUtils {
                 return;
             }
             ManaCostBeingPaid newCost = new ManaCostBeingPaid(rememberedCard.getManaCost());
-            newCost.decreaseColorlessMana(2);
+            newCost.decreaseGenericMana(2);
             cost = new Cost(newCost.toManaCost(), true);
         }
         else if (!StringUtils.isBlank(sa.getSVar(unlessCost)) || !StringUtils.isBlank(source.getSVar(unlessCost))) {

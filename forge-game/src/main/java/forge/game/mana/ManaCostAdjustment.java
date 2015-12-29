@@ -94,9 +94,9 @@ public class ManaCostAdjustment {
                 sa.getHostCard().clearDelved();
                 final Player pc = sa.getActivatingPlayer();
                 final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
-                final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.COLORLESS), mutableGrave);
+                final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.GENERIC), mutableGrave);
                 for (final Card c : toExile) {
-                    cost.decreaseColorlessMana(1);
+                    cost.decreaseGenericMana(1);
                     if (cardsToDelveOut != null) {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
@@ -328,15 +328,15 @@ public class ManaCostAdjustment {
         }
 
         if (!params.containsKey("Color")) {
-            manaCost.increaseColorlessMana(value);
+            manaCost.increaseGenericMana(value);
             if (manaCost.toString().equals("{0}") && params.containsKey("MinMana")) {
-                manaCost.increaseColorlessMana(Integer.valueOf(params.get("MinMana")));
+                manaCost.increaseGenericMana(Integer.valueOf(params.get("MinMana")));
             }
         } else {
             final String color = params.get("Color");
             for (final String cost : color.split(" ")) {
                 if (StringUtils.isNumeric(cost)) {
-                    manaCost.increaseColorlessMana(Integer.parseInt(cost) * value);
+                    manaCost.increaseGenericMana(Integer.parseInt(cost) * value);
                 } else {
                     manaCost.increaseShard(ManaCostShard.parseNonGeneric(cost), value);
                 }
@@ -463,13 +463,13 @@ public class ManaCostAdjustment {
 
             final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana);
             if (maxReduction > 0) {
-                manaCost.decreaseColorlessMana(Math.min(value, maxReduction));
+                manaCost.decreaseGenericMana(Math.min(value, maxReduction));
             }
         } else {
             final String color = params.get("Color");
             for (final String cost : color.split(" ")) {
                 if (StringUtils.isNumeric(cost)) {
-                    manaCost.decreaseColorlessMana(Integer.parseInt(cost) * value);
+                    manaCost.decreaseGenericMana(Integer.parseInt(cost) * value);
                 } else {
                     manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
                 }
