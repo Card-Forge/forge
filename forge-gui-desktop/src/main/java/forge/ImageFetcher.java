@@ -39,18 +39,18 @@ public class ImageFetcher {
             }
             final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
             final String filename = ImageUtil.getImageKey(paperCard, backFace, false);
-            destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
-            
-            // First, try to fetch from magiccards.info, if we have the collector's number to generate a URL.
             final StaticData data = StaticData.instance();
+            final String editionCode2 = data.getEditions().getCode2ByCode(paperCard.getEdition());
+            destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + editionCode2 + "/" + filename + ".jpg");
+
+            // First, try to fetch from magiccards.info, if we have the collector's number to generate a URL.
             final int cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(), paperCard.getEdition());
             if (cardNum != -1)  {
-                final String setCode = data.getEditions().getCode2ByCode(paperCard.getEdition()).toLowerCase();
                 String suffix = "";
                 if (paperCard.getRules().getOtherPart() != null) {
                     suffix = (backFace ? "b" : "a");
                 }
-                urlToDownload = String.format("http://magiccards.info/scans/en/%s/%d%s.jpg", setCode, cardNum, suffix);
+                urlToDownload = String.format("http://magiccards.info/scans/en/%s/%d%s.jpg", editionCode2.toLowerCase(), cardNum, suffix);
             } else {
                 // Fall back to using Forge's LQ card downloaded from Wizards' website. This currently only works for older cards.
                 String[] result = ImageUtil.getDownloadUrlAndDestination(ForgeConstants.CACHE_CARD_PICS_DIR, paperCard, backFace);
@@ -75,6 +75,11 @@ public class ImageFetcher {
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
         } else {
             System.err.println("Cannot fetch image for: " + imageKey);
+            return;
+        }
+        if (destFile.exists()) {
+            // TODO: Figure out why this codepath gets reached. Ideally, fetchImage() wouldn't
+            // be called if we already have the image.
             return;
         }
         final String destPath = destFile.getAbsolutePath();
@@ -117,7 +122,7 @@ public class ImageFetcher {
                     ImageIO.write(image, "jpg", destFile);
                     // Now, rename it to the correct name.
                     destFile.renameTo(new File(destPath));
-                    System.out.println("Saved image to " + destFile);
+                    System.out.println("Saved image to " + destPath);
                     SwingUtilities.invokeLater(notifyObservers);
                 } catch (IOException e) {
                     System.err.println("Failed to download card image: " + e.getMessage());
