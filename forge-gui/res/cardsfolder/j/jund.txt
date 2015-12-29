@@ -10,7 +10,7 @@ SVar:JundSacX:Count$Valid Creature.YouCtrl+Other
 SVar:JundCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:JundRememberedX:Count$RememberedSize/Times.5
 SVar:JundCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ JundRememberedX | References$ JundRememberedX | SubAbility$ JundCleanup
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, put two 1/1 red Goblin creature tokens onto the battlefield.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, put two 1/1 red Goblin creature tokens onto the battlefield.
 SVar:RolledChaos:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenPower$ 1 | TokenName$ Goblin | TokenToughness$ 1 | TokenColors$ Red | TokenTypes$ Creature,Goblin | TokenOwner$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund.jpg
-Oracle:Whenever a player casts a black, red, or green creature spell, it gains devour 5. (As the creature enters the battlefield, its controller may sacrifice any number of creatures. The creature enters the battlefield with five times that many +1/+1 counters on it.)\nWhenever you roll {C}, put two 1/1 red Goblin creature tokens onto the battlefield.
+Oracle:Whenever a player casts a black, red, or green creature spell, it gains devour 5. (As the creature enters the battlefield, its controller may sacrifice any number of creatures. The creature enters the battlefield with five times that many +1/+1 counters on it.)\nWhenever you roll {CHAOS}, put two 1/1 red Goblin creature tokens onto the battlefield.

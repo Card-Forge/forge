@@ -10,10 +10,10 @@ T:Mode$ ChangesZone | ValidCard$ Creature.nonWhite | Origin$ Battlefield | Desti
 SVar:TrigDelay2:AB$ Effect | Cost$ 0 | Name$ Agyrem Effect For non-White Creatures | Triggers$ TrigEOT2 | SVars$ AgyremReturn2,AgyremCleanup | RememberObjects$ TriggeredCard | Duration$ Permanent
 SVar:TrigEOT2:Mode$ Phase | Phase$ End of Turn | Execute$ AgyremReturn2 | TriggerDescription$ Return creature to its owner's hand at the beginning of the next end step.
 SVar:AgyremReturn2:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ AgyremCleanup
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, creatures can't attack you until a player planeswalks.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, creatures can't attack you until a player planeswalks.
 SVar:RolledChaos:AB$ Effect | Cost$ 0 | Name$ Agyrem Effect - Can't Attack | StaticAbilities$ STCantAttack | Triggers$ TrigPlaneswalk | SVars$ AgyremCleanup | Duration$ Permanent
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you until a player planeswalks.
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedFrom | Execute$ AgyremCleanup | Static$ True
 SVar:AIRollPlanarDieParams:Mode$ Always
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agyrem.jpg
-Oracle:Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step.\nWhenever a nonwhite creature dies, return it to its owner's hand at the beginning of the next end step.\nWhenever you roll {C}, creatures can't attack you until a player planeswalks.
+Oracle:Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step.\nWhenever a nonwhite creature dies, return it to its owner's hand at the beginning of the next end step.\nWhenever you roll {CHAOS}, creatures can't attack you until a player planeswalks.

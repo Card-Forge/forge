@@ -42,6 +42,7 @@ public final class MagicColor {
                 case "b": return MagicColor.BLACK;
                 case "r": return MagicColor.RED;
                 case "g": return MagicColor.GREEN;
+                case "c": return MagicColor.COLORLESS;
             }
         } else {
             switch (s) {
@@ -50,6 +51,7 @@ public final class MagicColor {
                 case Constant.BLACK: return MagicColor.BLACK;
                 case Constant.RED: return MagicColor.RED;
                 case Constant.GREEN: return MagicColor.GREEN;
+                case Constant.COLORLESS: return MagicColor.COLORLESS;
             }
         }
         return 0; // colorless
@@ -159,7 +161,7 @@ public final class MagicColor {
         BLACK(Constant.BLACK, MagicColor.BLACK, "{B}"),
         RED(Constant.RED, MagicColor.RED, "{R}"),
         GREEN(Constant.GREEN, MagicColor.GREEN, "{G}"),
-        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "{X}");
+        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "{C}");
 
         private final String name, symbol;
         private final byte colormask;

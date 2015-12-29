@@ -4,8 +4,8 @@ Types:Plane Xerex
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players have no maximum hand size.
 T:Mode$ PlanarDice | TriggerZones$ Command | Execute$ RolledDie | TriggerDescription$ Whenever you roll the planar die, draw a card.
 SVar:RolledDie:AB$ Draw | Cost$ 0 | NumCards$ 1
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, reveal the top card of your planar deck. You may put it on the bottom of your planar deck.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, reveal the top card of your planar deck. You may put it on the bottom of your planar deck.
 SVar:RolledChaos:AB$ Dig | Cost$ 0 | DigNum$ 1 | ChangeNum$ 1 | Reveal$ True | SourceZone$ PlanarDeck | DestinationZone$ PlanarDeck | DestinationZone2$ PlanarDeck | LibraryPosition$ -1 | LibraryPosition2$ 0 | ChangeValid$ Plane | Optional$ True
 SVar:AIRollPlanarDieParams:Mode$ Always
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stairs_to_infinity.jpg
-Oracle:Players have no maximum hand size.\nWhenever you roll the planar die, draw a card.\nWhenever you roll {C}, reveal the top card of your planar deck. You may put it on the bottom of your planar deck.
+Oracle:Players have no maximum hand size.\nWhenever you roll the planar die, draw a card.\nWhenever you roll {CHAOS}, reveal the top card of your planar deck. You may put it on the bottom of your planar deck.

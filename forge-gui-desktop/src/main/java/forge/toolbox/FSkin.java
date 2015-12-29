@@ -1242,6 +1242,7 @@ public class FSkin {
         addEncodingSymbol("B", FSkinProp.IMG_MANA_B);
         addEncodingSymbol("R", FSkinProp.IMG_MANA_R);
         addEncodingSymbol("G", FSkinProp.IMG_MANA_G);
+        addEncodingSymbol("C", FSkinProp.IMG_MANA_COLORLESS);
         addEncodingSymbol("W/U", FSkinProp.IMG_MANA_HYBRID_WU);
         addEncodingSymbol("U/B", FSkinProp.IMG_MANA_HYBRID_UB);
         addEncodingSymbol("B/R", FSkinProp.IMG_MANA_HYBRID_BR);
@@ -1268,7 +1269,7 @@ public class FSkin {
         addEncodingSymbol("X", FSkinProp.IMG_MANA_X);
         addEncodingSymbol("Y", FSkinProp.IMG_MANA_Y);
         addEncodingSymbol("Z", FSkinProp.IMG_MANA_Z);
-        addEncodingSymbol("C", FSkinProp.IMG_CHAOS);
+        addEncodingSymbol("CHAOS", FSkinProp.IMG_CHAOS);
         addEncodingSymbol("Q", FSkinProp.IMG_UNTAP);
         addEncodingSymbol("S", FSkinProp.IMG_MANA_SNOW);
         addEncodingSymbol("T", FSkinProp.IMG_TAP);

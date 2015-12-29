@@ -3,8 +3,8 @@ ManaCost:no cost
 Types:Plane Dominaria
 S:Mode$ Continuous | Affected$ Creature | EffectZone$ Command | AddAbility$ LlanowarAb | Description$ All creatures have "{T}: Add {G}{G} to your mana pool.".
 SVar:LlanowarAb:AB$ Mana | Cost$ T | Amount$ 2 | Produced$ G | SpellDescription$ Add {G}{G} to your mana pool.
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, untap all creatures you control.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, untap all creatures you control.
 SVar:RolledChaos:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
-Oracle:All creatures have "{T}: Add {G}{G} to your mana pool."\nWhenever you roll {C}, untap all creatures you control.
+Oracle:All creatures have "{T}: Add {G}{G} to your mana pool."\nWhenever you roll {CHAOS}, untap all creatures you control.

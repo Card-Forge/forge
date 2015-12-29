@@ -10,9 +10,9 @@ SVar:DBStoreSVar:DB$ StoreSVar | SVar$ CheckThisTurnAttacked | Type$ Number | Ex
 T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ DBReset | Static$ True
 T:Mode$ Phase | Phase$ Cleanup | Execute$ DBReset | Static$ True
 SVar:DBReset:DB$ StoreSVar | SVar$ CheckThisTurnAttacked | Type$ Number | Expression$ 0
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, you gain life equal to the number of cards in your hand.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you gain life equal to the number of cards in your hand.
 SVar:RolledChaos:AB$ GainLife | Cost$ 0 | LifeAmount$ PrahvX | References$ PrahvX | Defined$ You
 SVar:PrahvX:Count$InYourHand
 SVar:AIRollPlanarDieParams:Mode$ Always | CardsInHandGE$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prahv.jpg
-Oracle:If you cast a spell this turn, you can't attack with creatures.\nIf you attacked with creatures this turn, you can't cast spells.\nWhenever you roll {C}, you gain life equal to the number of cards in your hand.
+Oracle:If you cast a spell this turn, you can't attack with creatures.\nIf you attacked with creatures this turn, you can't cast spells.\nWhenever you roll {CHAOS}, you gain life equal to the number of cards in your hand.

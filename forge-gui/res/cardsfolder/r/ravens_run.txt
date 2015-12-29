@@ -2,11 +2,11 @@ Name:Raven's Run
 ManaCost:no cost
 Types:Plane Shadowmoor
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Wither | Description$ All Creatures have Wither (They deal damage to creatures in the form of -1/-1 counters.)
-T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos1 | TriggerDescription$ Whenever you roll {C}, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
+T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos1 | TriggerDescription$ Whenever you roll {CHAOS}, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
 SVar:RolledChaos1:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | CounterType$ M1M1 | CounterNum$ 1 | RememberTargets$ True | SubAbility$ RolledChaos2
 SVar:RolledChaos2:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | CounterType$ M1M1 | CounterNum$ 2 | RememberTargets$ True | SubAbility$ RolledChaos3
 SVar:RolledChaos3:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | CounterType$ M1M1 | CounterNum$ 3 | SubAbility$ RolledChaosCleanup
 SVar:RolledChaosCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://downloads.cardforge.link/images/cards/HOP/Raven's Run.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | OppHasCreatureInPlay$ True
-Oracle:All creatures have wither. (They deal damage to creatures in the form of -1/-1 counters.)\nWhenever you roll {C}, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
+Oracle:All creatures have wither. (They deal damage to creatures in the form of -1/-1 counters.)\nWhenever you roll {CHAOS}, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.

@@ -6,8 +6,8 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ FluesSacrifice | Tri
 SVar:FluesSacrifice:AB$ Sacrifice | Cost$ 0 | Optional$ True | SacValid$ Creature | Amount$ 1 | RememberSacrificed$ True | SubAbility$ FluesDig
 SVar:FluesDig:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, you may put a creature card from your hand onto the battlefield.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you may put a creature card from your hand onto the battlefield.
 SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature | ChangeNum$ 1 | Origin$ Hand | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_aether_flues.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
-Oracle:When you planeswalk to The AEther Flues or at the beginning of your upkeep, you may sacrifice a creature. If you do, reveal cards from the top of your library until you reveal a creature card, put that card onto the battlefield, then shuffle all other cards revealed this way into your library.\nWhenever you roll {C}, you may put a creature card from your hand onto the battlefield.
+Oracle:When you planeswalk to The AEther Flues or at the beginning of your upkeep, you may sacrifice a creature. If you do, reveal cards from the top of your library until you reveal a creature card, put that card onto the battlefield, then shuffle all other cards revealed this way into your library.\nWhenever you roll {CHAOS}, you may put a creature card from your hand onto the battlefield.

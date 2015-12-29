@@ -6,8 +6,8 @@ R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card | ValidTarget$ Cr
 SVar:DmgTwice:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ Y | References$ Y
 SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ Y | References$ Y
 SVar:Y:ReplaceCount$DamageAmount/Twice
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, CARDNAME deals 1 damage to target creature or player.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, CARDNAME deals 1 damage to target creature or player.
 SVar:RolledChaos:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_furnace.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
-Oracle:If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.\nWhenever you roll {C}, Stronghold Furnace deals 1 damage to target creature or player.
+Oracle:If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.\nWhenever you roll {CHAOS}, Stronghold Furnace deals 1 damage to target creature or player.
