@@ -7,321 +7,321 @@ Alias=CMD
 Type=Other
 
 [cards]
-C AEthersnipe
-U Acidic Slime
-R Acorn Catapult
-U Afterlife
-U Akoum Refuge
-R Akroma's Vengeance
-R Akroma, Angel of Fury
-R Alliance of Arms
-R Angel of Despair
-R Angelic Arbiter
-U Anger
-M Animar, Soul of Elements
-C Aquastrand Spider
-R Arbiter of Knollridge
-R Archangel of Strife
-C Armillary Sphere
-U Artisan of Kozilek
-R Attrition
-U Aura Shards
-R Austere Command
-R Avatar of Fury
-R Avatar of Slaughter
-R Avatar of Woe
-R Awakening Zone
-C Azorius Chancery
-U Azorius Guildmage
-U Baloth Woodcrasher
-C Barren Moor
-R Basandra, Battle Seraph
-U Bathe in Light
-U Bestial Menace
-R Bladewing the Risen
-C Bojuka Bog
-C Boros Garrison
-U Boros Guildmage
-C Boros Signet
-C Brainstorm
-U Brawn
-U Breath of Darigaaz
-R Brion Stoutarm
-U Buried Alive
-R Butcher of Malakir
-R Call the Skybreaker
-R Celestial Force
-R Chain Reaction
-R Champion's Helm
-R Chaos Warp
-C Chartooth Cougar
-R Chorus of the Conclave
-R Chromeshell Crab
-U Cleansing Beam
-U Cobra Trap
-R Collective Voyage
-C Colossal Might
-M Comet Storm
-C Command Tower
-C Congregate
-R Conundrum Sphinx
-U Court Hussar
-R Crescendo of War
-C Cultivate
-M Damia, Sage of Stone
-R Dark Hatchling
-C Darksteel Ingot
-C Deadly Recluse
-U Deadwood Treefolk
-U Death Mutation
-U Death by Dragons
-C Desecrator Hag
-U Diabolic Tutor
-C Dimir Aqueduct
-C Dimir Signet
-R Disaster Radius
-R Dominus of Fealty
-C Doom Blade
-U Dragon Whelp
-R Dread Cacodemon
-U Dreadship Reef
-R Dreamborn Muse
-U Dreamstone Hedron
-U Duergar Hedge-Mage
-R Earthquake
-R Edric, Spymaster of Trest
-U Electrolyze
-U Elvish Aberration
-U Eternal Witness
-C Evincar's Justice
-C Evolving Wilds
-U Explosive Vegetation
-R Extractor Demon
-U Fact or Fiction
-R Fallen Angel
-R False Prophet
-C Faultgrinder
-U Fellwar Stone
-C Fertilid
-C Fierce Empath
-U Fire // Ice
-U Firespout
-C Fists of Ironwood
-U Flametongue Kavu
-U Fleshbag Marauder
-R Flusterstorm
-U Fog Bank
-C Footbottom Feast
-L Forest
-L Forest
-L Forest
-L Forest
-C Forgotten Cave
-U Fungal Reaches
-U Furnace Whelp
-M Garruk Wildspeaker
-M Ghave, Guru of Spores
-U Ghostly Prison
-U Goblin Cadets
-U Golgari Guildmage
-C Golgari Rot Farm
-C Golgari Signet
-U Gomazoa
-R Grave Pact
-C Gravedigger
-C Gruul Signet
-C Gruul Turf
-U Guard Gomazoa
-U Gwyllion Hedge-Mage
-U Harmonize
-R Hex
-R Homeward Path
-R Hornet Queen
-R Hour of Reckoning
-R Howling Mine
-C Hull Breach
-U Hunting Pack
-R Hydra Omnivore
-R Insurrection
-R Intet, the Dreamer
-C Invigorate
-L Island
-L Island
-L Island
-L Island
-C Izzet Boilerworks
-C Izzet Chronarch
-C Izzet Signet
-U Jotun Grunt
-C Journey to Nowhere
-U Jwar Isle Refuge
-M Kaalia of the Vast
-M Karador, Ghost Chieftain
-U Kazandu Refuge
-C Kodama's Reach
-C Krosan Tusker
-C Lash Out
-R Lhurgoyf
-U Lightkeeper of Emeria
-U Lightning Greaves
-R Living Death
-C Lonely Sandbar
-R Magmatic Force
-R Magus of the Vineyard
-M Malfegor
-R Mana-Charged Dragon
-R Martyr's Bond
-R Master Warcraft
-R Memory Erosion
-R Minds Aglow
-U Molten Slagheap
-C Monk Realist
-U Mortify
-R Mortivore
-U Mother of Runes
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-C Mulldrifter
-C Murmurs from Beyond
-U Nantuko Husk
-U Necrogenesis
-U Nemesis Trap
-U Nezumi Graverobber
-R Nin, the Pain Artist
-U Nucklavee
-R Numot, the Devastator
-R Oblation
-C Oblivion Ring
-R Oblivion Stone
-U Oni of Wild Places
-C Orim's Thunder
-R Oros, the Avenger
-C Orzhov Basilica
-U Orzhov Guildmage
-C Orzhov Signet
-U Path to Exile
-R Patron of the Nezumi
-C Penumbra Spider
-U Perilous Research
-L Plains
-L Plains
-L Plains
-L Plains
-U Plumeveil
-U Pollen Lullaby
-U Prison Term
-U Propaganda
-R Prophetic Bolt
-C Prophetic Prism
-U Punishing Fire
-U Pyrohemia
-C Rakdos Carnarium
-C Rakdos Signet
-U Rapacious One
-C Ray of Command
-U Razorjaw Oni
-R Reins of Power
-R Reiver Demon
-C Relic Crush
-C Repulse
-U Return to Dust
-R Riddlekeeper
-U Righteous Cause
-M Riku of Two Reflections
-U Rise from the Grave
-M Ruhan of the Fomori
-R Ruination
-C Rupture Spire
-C Sakura-Tribe Elder
-U Savage Twister
-U Scattering Stroke
-R Scavenging Ooze
-R Scythe Specter
-C Secluded Steppe
-C Selesnya Evangel
-U Selesnya Guildmage
-C Selesnya Sanctuary
-C Selesnya Signet
-U Serra Angel
-R Sewer Nemesis
-R Shared Trauma
-U Shattered Angel
-U Shriekmaw
-U Sigil Captain
-C Sign in Blood
-C Simic Growth Chamber
-C Simic Signet
-R Simic Sky Swallower
-R Skullbriar, the Walking Grave
-U Skullclamp
-U Skyscribing
-C Slipstream Eel
-U Sol Ring
-R Solemn Simulacrum
-U Soul Snare
-R Spawnwrithe
-U Spell Crumple
-U Spike Feeder
-U Spitebellows
-U Spurnmage Advocate
-U Squallmonger
-U Stitch Together
-R Storm Herd
-R Stranglehold
-U Sulfurous Blast
-U Svogthos, the Restless Tomb
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-R Symbiotic Wurm
-U Syphon Flesh
-C Syphon Mind
-R Szadek, Lord of Secrets
-M Tariel, Reckoner of Souls
-U Temple of the False God
-R Teneb, the Harvester
-C Terminate
-C Terramorphic Expanse
-M The Mimeoplasm
-R Trade Secrets
-C Tranquil Thicket
-R Trench Gorger
-U Tribute to the Wild
-R Triskelavus
-R Troll Ascetic
-C Unnerve
-C Valley Rannet
-U Vampire Nighthawk
-U Vedalken Plotter
-U Vengeful Rebirth
-U Veteran Explorer
-R Vish Kal, Blood Arbiter
-C Vision Skeins
-U Vivid Crag
-U Vivid Creek
-U Vivid Grove
-U Vivid Marsh
-U Vivid Meadow
-R Voice of All
-R Vorosh, the Hunter
-U Vow of Duty
-U Vow of Flight
-U Vow of Lightning
-U Vow of Malice
-U Vow of Wildness
-R Vulturous Zombie
-U Wall of Denial
-U Wall of Omens
-C Whirlpool Whelm
-R Wild Ricochet
-R Windborn Muse
-U Windfall
-U Wonder
-C Wrecking Ball
-M Wrexial, the Risen Deep
-C Yavimaya Elder
-M Zedruu the Greathearted
-U Zoetic Cavern
+39 C AEthersnipe
+140 U Acidic Slime
+241 R Acorn Catapult
+2 U Afterlife
+264 U Akoum Refuge
+3 R Akroma's Vengeance
+108 R Akroma, Angel of Fury
+4 R Alliance of Arms
+180 R Angel of Despair
+5 R Angelic Arbiter
+109 U Anger
+181 M Animar, Soul of Elements
+141 C Aquastrand Spider
+6 R Arbiter of Knollridge
+7 R Archangel of Strife
+242 C Armillary Sphere
+1 U Artisan of Kozilek
+72 R Attrition
+182 U Aura Shards
+8 R Austere Command
+110 R Avatar of Fury
+111 R Avatar of Slaughter
+73 R Avatar of Woe
+142 R Awakening Zone
+265 C Azorius Chancery
+183 U Azorius Guildmage
+143 U Baloth Woodcrasher
+266 C Barren Moor
+184 R Basandra, Battle Seraph
+9 U Bathe in Light
+144 U Bestial Menace
+185 R Bladewing the Risen
+267 C Bojuka Bog
+268 C Boros Garrison
+186 U Boros Guildmage
+243 C Boros Signet
+40 C Brainstorm
+145 U Brawn
+112 U Breath of Darigaaz
+187 R Brion Stoutarm
+74 U Buried Alive
+75 R Butcher of Malakir
+188 R Call the Skybreaker
+10 R Celestial Force
+113 R Chain Reaction
+244 R Champion's Helm
+114 R Chaos Warp
+115 C Chartooth Cougar
+189 R Chorus of the Conclave
+41 R Chromeshell Crab
+116 U Cleansing Beam
+146 U Cobra Trap
+147 R Collective Voyage
+190 C Colossal Might
+117 M Comet Storm
+269 C Command Tower
+11 C Congregate
+42 R Conundrum Sphinx
+43 U Court Hussar
+12 R Crescendo of War
+148 C Cultivate
+191 M Damia, Sage of Stone
+76 R Dark Hatchling
+245 C Darksteel Ingot
+149 C Deadly Recluse
+150 U Deadwood Treefolk
+192 U Death Mutation
+118 U Death by Dragons
+193 C Desecrator Hag
+77 U Diabolic Tutor
+270 C Dimir Aqueduct
+246 C Dimir Signet
+119 R Disaster Radius
+194 R Dominus of Fealty
+78 C Doom Blade
+120 U Dragon Whelp
+79 R Dread Cacodemon
+271 U Dreadship Reef
+44 R Dreamborn Muse
+247 U Dreamstone Hedron
+195 U Duergar Hedge-Mage
+121 R Earthquake
+196 R Edric, Spymaster of Trest
+197 U Electrolyze
+151 U Elvish Aberration
+152 U Eternal Witness
+80 C Evincar's Justice
+272 C Evolving Wilds
+153 U Explosive Vegetation
+81 R Extractor Demon
+45 U Fact or Fiction
+82 R Fallen Angel
+13 R False Prophet
+122 C Faultgrinder
+248 U Fellwar Stone
+154 C Fertilid
+155 C Fierce Empath
+198 U Fire // Ice
+199 U Firespout
+156 C Fists of Ironwood
+123 U Flametongue Kavu
+83 U Fleshbag Marauder
+46 R Flusterstorm
+47 U Fog Bank
+84 C Footbottom Feast
+316 L Forest
+316 L Forest
+316 L Forest
+316 L Forest
+273 C Forgotten Cave
+274 U Fungal Reaches
+124 U Furnace Whelp
+157 M Garruk Wildspeaker
+200 M Ghave, Guru of Spores
+14 U Ghostly Prison
+125 U Goblin Cadets
+201 U Golgari Guildmage
+275 C Golgari Rot Farm
+249 C Golgari Signet
+48 U Gomazoa
+85 R Grave Pact
+86 C Gravedigger
+250 C Gruul Signet
+276 C Gruul Turf
+49 U Guard Gomazoa
+202 U Gwyllion Hedge-Mage
+158 U Harmonize
+87 R Hex
+277 R Homeward Path
+159 R Hornet Queen
+15 R Hour of Reckoning
+251 R Howling Mine
+203 C Hull Breach
+160 U Hunting Pack
+161 R Hydra Omnivore
+126 R Insurrection
+204 R Intet, the Dreamer
+162 C Invigorate
+304 L Island
+304 L Island
+304 L Island
+304 L Island
+278 C Izzet Boilerworks
+205 C Izzet Chronarch
+252 C Izzet Signet
+16 U Jotun Grunt
+17 C Journey to Nowhere
+279 U Jwar Isle Refuge
+206 M Kaalia of the Vast
+207 M Karador, Ghost Chieftain
+280 U Kazandu Refuge
+163 C Kodama's Reach
+164 C Krosan Tusker
+127 C Lash Out
+165 R Lhurgoyf
+18 U Lightkeeper of Emeria
+253 U Lightning Greaves
+88 R Living Death
+281 C Lonely Sandbar
+128 R Magmatic Force
+166 R Magus of the Vineyard
+208 M Malfegor
+129 R Mana-Charged Dragon
+19 R Martyr's Bond
+209 R Master Warcraft
+50 R Memory Erosion
+51 R Minds Aglow
+282 U Molten Slagheap
+20 C Monk Realist
+211 U Mortify
+89 R Mortivore
+21 U Mother of Runes
+311 L Mountain
+311 L Mountain
+311 L Mountain
+311 L Mountain
+52 C Mulldrifter
+53 C Murmurs from Beyond
+90 U Nantuko Husk
+212 U Necrogenesis
+91 U Nemesis Trap
+92 U Nezumi Graverobber
+213 R Nin, the Pain Artist
+214 U Nucklavee
+215 R Numot, the Devastator
+22 R Oblation
+23 C Oblivion Ring
+254 R Oblivion Stone
+130 U Oni of Wild Places
+24 C Orim's Thunder
+216 R Oros, the Avenger
+283 C Orzhov Basilica
+217 U Orzhov Guildmage
+255 C Orzhov Signet
+25 U Path to Exile
+93 R Patron of the Nezumi
+167 C Penumbra Spider
+54 U Perilous Research
+300 L Plains
+300 L Plains
+300 L Plains
+300 L Plains
+218 U Plumeveil
+26 U Pollen Lullaby
+27 U Prison Term
+55 U Propaganda
+219 R Prophetic Bolt
+256 C Prophetic Prism
+131 U Punishing Fire
+132 U Pyrohemia
+284 C Rakdos Carnarium
+257 C Rakdos Signet
+133 U Rapacious One
+56 C Ray of Command
+94 U Razorjaw Oni
+57 R Reins of Power
+95 R Reiver Demon
+168 C Relic Crush
+58 C Repulse
+28 U Return to Dust
+59 R Riddlekeeper
+29 U Righteous Cause
+220 M Riku of Two Reflections
+96 U Rise from the Grave
+221 M Ruhan of the Fomori
+134 R Ruination
+285 C Rupture Spire
+169 C Sakura-Tribe Elder
+222 U Savage Twister
+60 U Scattering Stroke
+170 R Scavenging Ooze
+97 R Scythe Specter
+286 C Secluded Steppe
+223 C Selesnya Evangel
+224 U Selesnya Guildmage
+287 C Selesnya Sanctuary
+258 C Selesnya Signet
+30 U Serra Angel
+98 R Sewer Nemesis
+99 R Shared Trauma
+31 U Shattered Angel
+100 U Shriekmaw
+225 U Sigil Captain
+101 C Sign in Blood
+288 C Simic Growth Chamber
+259 C Simic Signet
+226 R Simic Sky Swallower
+227 R Skullbriar, the Walking Grave
+260 U Skullclamp
+61 U Skyscribing
+62 C Slipstream Eel
+261 U Sol Ring
+262 R Solemn Simulacrum
+32 U Soul Snare
+171 R Spawnwrithe
+63 U Spell Crumple
+172 U Spike Feeder
+135 U Spitebellows
+33 U Spurnmage Advocate
+173 U Squallmonger
+102 U Stitch Together
+34 R Storm Herd
+136 R Stranglehold
+137 U Sulfurous Blast
+289 U Svogthos, the Restless Tomb
+309 L Swamp
+309 L Swamp
+309 L Swamp
+309 L Swamp
+174 R Symbiotic Wurm
+103 U Syphon Flesh
+104 C Syphon Mind
+228 R Szadek, Lord of Secrets
+229 M Tariel, Reckoner of Souls
+290 U Temple of the False God
+230 R Teneb, the Harvester
+231 C Terminate
+291 C Terramorphic Expanse
+210 M The Mimeoplasm
+64 R Trade Secrets
+292 C Tranquil Thicket
+65 R Trench Gorger
+175 U Tribute to the Wild
+263 R Triskelavus
+176 R Troll Ascetic
+105 C Unnerve
+232 C Valley Rannet
+106 U Vampire Nighthawk
+66 U Vedalken Plotter
+233 U Vengeful Rebirth
+177 U Veteran Explorer
+234 R Vish Kal, Blood Arbiter
+67 C Vision Skeins
+293 U Vivid Crag
+294 U Vivid Creek
+295 U Vivid Grove
+296 U Vivid Marsh
+297 U Vivid Meadow
+35 R Voice of All
+235 R Vorosh, the Hunter
+36 U Vow of Duty
+68 U Vow of Flight
+138 U Vow of Lightning
+107 U Vow of Malice
+178 U Vow of Wildness
+236 R Vulturous Zombie
+237 U Wall of Denial
+37 U Wall of Omens
+69 C Whirlpool Whelm
+139 R Wild Ricochet
+38 R Windborn Muse
+70 U Windfall
+71 U Wonder
+238 C Wrecking Ball
+239 M Wrexial, the Risen Deep
+179 C Yavimaya Elder
+240 M Zedruu the Greathearted
+298 U Zoetic Cavern

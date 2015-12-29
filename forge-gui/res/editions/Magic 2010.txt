@@ -8,252 +8,252 @@ BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 [cards]
-U Acidic Slime
-C Acolyte of Xathrid
-U Act of Treason
-U Air Elemental
-M Ajani Goldmane
-U Alluring Siren
-U Angel's Feather
-C Angel's Mercy
-R Ant Queen
-U Armored Ascension
-C Assassinate
-U Awakener Druid
-R Ball Lightning
-M Baneslayer Angel
-C Berserkers of Blood Ridge
-R Birds of Paradise
-U Black Knight
-C Blinding Mage
-U Bog Wraith
-M Bogardan Hellkite
-C Borderland Ranger
-C Bountiful Harvest
-C Bramble Creeper
-C Burning Inquiry
-C Burst of Speed
-C Cancel
-C Canyon Minotaur
-R Capricious Efreet
-R Captain of the Watch
-U Celestial Purge
-R Cemetery Reaper
-C Centaur Courser
-M Chandra Nalaar
-C Child of Night
-R Clone
-R Coat of Arms
-U Consume Spirit
-C Convincing Mirage
-C Coral Merfolk
-C Craw Wurm
-U Cudgel Troll
-M Darksteel Colossus
-C Deadly Recluse
-U Deathmark
-U Demon's Horn
-U Diabolic Tutor
-C Disentomb
-C Disorient
-C Divination
-C Divine Verdict
-R Djinn of Wishes
-C Doom Blade
-U Dragon Whelp
-U Dragon's Claw
-R Dragonskull Summit
-C Dread Warlock
-R Drowned Catacomb
-C Drudge Skeletons
-C Duress
-R Earthquake
-U Elite Vanguard
-R Elvish Archdruid
-R Elvish Piper
-C Elvish Visionary
-C Emerald Oryx
-U Enormous Baloth
-C Entangling Vines
-C Essence Scatter
-C Excommunicate
-U Fabricate
-C Fiery Hellhound
-U Fireball
-C Firebreathing
-U Flashfreeze
-C Fog
-L Forest
-L Forest
-L Forest
-L Forest
-R Gargoyle Castle
-M Garruk Wildspeaker
-C Giant Growth
-C Giant Spider
-R Glacial Fortress
-C Glorious Charge
-U Goblin Artillery
-R Goblin Chieftain
-C Goblin Piker
-U Gorgon Flail
-C Gravedigger
-R Great Sable Stag
-C Griffin Sentinel
-R Guardian Seraph
-U Harm's Way
-R Haunting Echoes
-R Hive Mind
-C Holy Strength
-R Honor of the Pure
-C Horned Turtle
-U Howl of the Night Pack
-U Howling Banshee
-R Howling Mine
-R Hypnotic Specter
-C Ice Cage
-U Ignite Disorder
-C Illusionary Servant
-R Indestructibility
-U Inferno Elemental
-L Island
-L Island
-L Island
-L Island
-M Jace Beleren
-C Jackal Familiar
-C Jump
-R Kalonian Behemoth
-C Kelinore Bat
-C Kindled Fury
-U Kraken's Eye
-C Lava Axe
-U Levitation
-C Lifelink
-C Lightning Bolt
-C Lightning Elemental
-R Lightwielder Paladin
-M Liliana Vess
-C Llanowar Elves
-C Looming Shade
-R Lurking Predators
-R Magebane Armor
-R Magma Phoenix
-R Manabarbs
-M Master of the Wild Hunt
-U Megrim
-C Merfolk Looter
-R Merfolk Sovereign
-R Mesa Enchantress
-R Might of Oaks
-U Mind Control
-C Mind Rot
-R Mind Shatter
-R Mind Spring
-R Mirror of Fate
-C Mist Leopard
-U Mold Adder
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-C Naturalize
-U Nature's Spiral
-C Negate
-R Nightmare
-C Oakenform
-R Open the Vaults
-U Ornithopter
-U Overrun
-C Pacifism
-C Palace Guard
-C Panic Attack
-U Phantom Warrior
-R Pithing Needle
-L Plains
-L Plains
-L Plains
-L Plains
-R Planar Cleansing
-M Platinum Angel
-R Polymorph
-C Ponder
-U Prized Unicorn
-U Prodigal Pyromancer
-M Protean Hydra
-U Pyroclasm
-C Raging Goblin
-C Rampant Growth
-C Razorfoot Griffin
-C Regenerate
-U Relentless Rats
-U Rhox Pikemaster
-U Righteousness
-U Rise from the Grave
-U Rod of Ruin
-R Rootbound Crag
-R Royal Assassin
-C Runeclaw Bear
-C Safe Passage
-C Sage Owl
-R Sanguine Bond
-C Seismic Strike
-C Serpent of the Endless Sea
-U Serra Angel
-C Shatter
-R Shivan Dragon
-C Siege Mastodon
-R Siege-Gang Commander
-C Sign in Blood
-R Silence
-C Silvercoat Lion
-U Sleep
-C Snapping Drake
-C Solemn Offering
-C Soul Bleed
-C Soul Warden
-C Sparkmage Apprentice
-U Spellbook
-M Sphinx Ambassador
-C Stampeding Rhino
-U Stone Giant
-C Stormfront Pegasus
-R Sunpetal Grove
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-U Telepathy
-U Tempest of Light
-C Tendrils of Corruption
-C Terramorphic Expanse
-M Time Warp
-C Tome Scour
-R Traumatize
-C Trumpet Blast
-R Twincast
-U Undead Slayer
-R Underworld Dreams
-C Unholy Strength
-C Unsummon
-C Vampire Aristocrat
-M Vampire Nocturnus
-C Veteran Armorsmith
-C Veteran Swordsmith
-C Viashino Spearhunter
-U Wall of Bone
-C Wall of Faith
-U Wall of Fire
-U Wall of Frost
-R Warp World
-C Warpath Ghoul
-C Weakness
-U Whispersilk Cloak
-U White Knight
-C Wind Drake
-U Windstorm
-U Wurm's Tooth
-M Xathrid Demon
-C Yawning Fissure
-C Zephyr Sprite
-C Zombie Goliath
+165 U Acidic Slime
+83 C Acolyte of Xathrid
+124 U Act of Treason
+42 U Air Elemental
+1 M Ajani Goldmane
+43 U Alluring Siren
+206 U Angel's Feather
+2 C Angel's Mercy
+166 R Ant Queen
+3 U Armored Ascension
+84 C Assassinate
+167 U Awakener Druid
+125 R Ball Lightning
+4 M Baneslayer Angel
+126 C Berserkers of Blood Ridge
+168 R Birds of Paradise
+85 U Black Knight
+5 C Blinding Mage
+86 U Bog Wraith
+127 M Bogardan Hellkite
+169 C Borderland Ranger
+170 C Bountiful Harvest
+171 C Bramble Creeper
+128 C Burning Inquiry
+129 C Burst of Speed
+44 C Cancel
+130 C Canyon Minotaur
+131 R Capricious Efreet
+6 R Captain of the Watch
+7 U Celestial Purge
+87 R Cemetery Reaper
+172 C Centaur Courser
+132 M Chandra Nalaar
+88 C Child of Night
+45 R Clone
+207 R Coat of Arms
+89 U Consume Spirit
+46 C Convincing Mirage
+47 C Coral Merfolk
+173 C Craw Wurm
+174 U Cudgel Troll
+208 M Darksteel Colossus
+175 C Deadly Recluse
+90 U Deathmark
+209 U Demon's Horn
+91 U Diabolic Tutor
+92 C Disentomb
+48 C Disorient
+49 C Divination
+8 C Divine Verdict
+50 R Djinn of Wishes
+93 C Doom Blade
+133 U Dragon Whelp
+210 U Dragon's Claw
+223 R Dragonskull Summit
+94 C Dread Warlock
+224 R Drowned Catacomb
+95 C Drudge Skeletons
+96 C Duress
+134 R Earthquake
+9 U Elite Vanguard
+176 R Elvish Archdruid
+177 R Elvish Piper
+178 C Elvish Visionary
+179 C Emerald Oryx
+180 U Enormous Baloth
+181 C Entangling Vines
+51 C Essence Scatter
+10 C Excommunicate
+52 U Fabricate
+135 C Fiery Hellhound
+136 U Fireball
+137 C Firebreathing
+53 U Flashfreeze
+182 C Fog
+246 L Forest
+246 L Forest
+246 L Forest
+246 L Forest
+225 R Gargoyle Castle
+183 M Garruk Wildspeaker
+184 C Giant Growth
+185 C Giant Spider
+226 R Glacial Fortress
+11 C Glorious Charge
+138 U Goblin Artillery
+139 R Goblin Chieftain
+140 C Goblin Piker
+211 U Gorgon Flail
+97 C Gravedigger
+186 R Great Sable Stag
+12 C Griffin Sentinel
+13 R Guardian Seraph
+14 U Harm's Way
+98 R Haunting Echoes
+54 R Hive Mind
+15 C Holy Strength
+16 R Honor of the Pure
+55 C Horned Turtle
+187 U Howl of the Night Pack
+99 U Howling Banshee
+212 R Howling Mine
+100 R Hypnotic Specter
+56 C Ice Cage
+141 U Ignite Disorder
+57 C Illusionary Servant
+17 R Indestructibility
+142 U Inferno Elemental
+237 L Island
+237 L Island
+237 L Island
+237 L Island
+58 M Jace Beleren
+143 C Jackal Familiar
+59 C Jump
+188 R Kalonian Behemoth
+101 C Kelinore Bat
+144 C Kindled Fury
+213 U Kraken's Eye
+145 C Lava Axe
+60 U Levitation
+18 C Lifelink
+146 C Lightning Bolt
+147 C Lightning Elemental
+19 R Lightwielder Paladin
+102 M Liliana Vess
+189 C Llanowar Elves
+103 C Looming Shade
+190 R Lurking Predators
+214 R Magebane Armor
+148 R Magma Phoenix
+149 R Manabarbs
+191 M Master of the Wild Hunt
+104 U Megrim
+61 C Merfolk Looter
+62 R Merfolk Sovereign
+20 R Mesa Enchantress
+192 R Might of Oaks
+63 U Mind Control
+105 C Mind Rot
+106 R Mind Shatter
+64 R Mind Spring
+215 R Mirror of Fate
+193 C Mist Leopard
+194 U Mold Adder
+242 L Mountain
+242 L Mountain
+242 L Mountain
+242 L Mountain
+195 C Naturalize
+196 U Nature's Spiral
+65 C Negate
+107 R Nightmare
+197 C Oakenform
+21 R Open the Vaults
+216 U Ornithopter
+198 U Overrun
+22 C Pacifism
+23 C Palace Guard
+150 C Panic Attack
+66 U Phantom Warrior
+217 R Pithing Needle
+233 L Plains
+233 L Plains
+233 L Plains
+233 L Plains
+24 R Planar Cleansing
+218 M Platinum Angel
+67 R Polymorph
+68 C Ponder
+199 U Prized Unicorn
+151 U Prodigal Pyromancer
+200 M Protean Hydra
+152 U Pyroclasm
+153 C Raging Goblin
+201 C Rampant Growth
+25 C Razorfoot Griffin
+202 C Regenerate
+108 U Relentless Rats
+26 U Rhox Pikemaster
+27 U Righteousness
+109 U Rise from the Grave
+219 U Rod of Ruin
+227 R Rootbound Crag
+110 R Royal Assassin
+203 C Runeclaw Bear
+28 C Safe Passage
+69 C Sage Owl
+111 R Sanguine Bond
+154 C Seismic Strike
+70 C Serpent of the Endless Sea
+29 U Serra Angel
+155 C Shatter
+156 R Shivan Dragon
+30 C Siege Mastodon
+157 R Siege-Gang Commander
+112 C Sign in Blood
+31 R Silence
+32 C Silvercoat Lion
+71 U Sleep
+72 C Snapping Drake
+33 C Solemn Offering
+113 C Soul Bleed
+34 C Soul Warden
+158 C Sparkmage Apprentice
+220 U Spellbook
+73 M Sphinx Ambassador
+204 C Stampeding Rhino
+159 U Stone Giant
+35 C Stormfront Pegasus
+228 R Sunpetal Grove
+241 L Swamp
+241 L Swamp
+241 L Swamp
+241 L Swamp
+74 U Telepathy
+36 U Tempest of Light
+114 C Tendrils of Corruption
+229 C Terramorphic Expanse
+75 M Time Warp
+76 C Tome Scour
+77 R Traumatize
+160 C Trumpet Blast
+78 R Twincast
+37 U Undead Slayer
+115 R Underworld Dreams
+116 C Unholy Strength
+79 C Unsummon
+117 C Vampire Aristocrat
+118 M Vampire Nocturnus
+38 C Veteran Armorsmith
+39 C Veteran Swordsmith
+161 C Viashino Spearhunter
+119 U Wall of Bone
+40 C Wall of Faith
+162 U Wall of Fire
+80 U Wall of Frost
+163 R Warp World
+120 C Warpath Ghoul
+121 C Weakness
+221 U Whispersilk Cloak
+41 U White Knight
+81 C Wind Drake
+205 U Windstorm
+222 U Wurm's Tooth
+122 M Xathrid Demon
+164 C Yawning Fissure
+82 C Zephyr Sprite
+123 C Zombie Goliath

@@ -8,251 +8,251 @@ BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 [cards]
-U Affa Guard Hound
-U Akoum Boulderfoot
-M All Is Dust
-C Ancient Stirrings
-R Angelheart Vial
-U Arrogant Bloodlord
-U Artisan of Kozilek
-C Aura Finesse
-C Aura Gnarlid
-R Awakening Zone
-C Bala Ged Scorpion
-R Baneful Omen
-C Battle Rampart
-C Battle-Rattle Shaman
-R Bear Umbra
-U Beastbreaker of Bala Ged
-C Bloodrite Invoker
-C Bloodthrone Vampire
-U Boar Umbra
-U Bramblesnap
-U Brimstone Mage
-C Brood Birthing
-U Broodwarden
-C Cadaver Imp
-C Caravan Escort
-M Cast Through Time
-C Champion's Drake
-R Conquering Manticore
-R Consume the Meek
-R Consuming Vapors
-C Contaminated Ground
-R Coralhelm Commander
-U Corpsehatch
-U Crab Umbra
-U Curse of Wizardry
-C Daggerback Basilisk
-C Dawnglare Invoker
-C Death Cultist
-R Deathless Angel
-C Demonic Appetite
-C Demystify
-C Deprive
-R Devastating Summons
-R Disaster Radius
-C Distortion Strike
-U Domestication
-R Dormant Gomazoa
-U Drake Umbra
-R Drana, Kalastria Bloodchief
-C Dread Drone
-U Dreamstone Hedron
-R Echo Mage
-C Eel Umbra
-C Eland Umbra
-R Eldrazi Conscription
-R Eldrazi Temple
-U Emerge Unscathed
-C Emrakul's Hatcher
-M Emrakul, the Aeons Torn
-U Enatu Golem
-U Enclave Cryptologist
-U Escaped Null
-C Essence Feed
-C Evolving Wilds
-U Explosive Revelation
-C Fissure Vent
-C Flame Slash
-C Fleeting Distraction
-L Forest
-L Forest
-L Forest
-L Forest
-U Forked Bolt
-C Frostwind Invoker
-R Gelatinous Genesis
-M Gideon Jura
-R Gigantomancer
-C Gloomhunter
-C Glory Seeker
-C Goblin Arsonist
-C Goblin Tunneler
-R Gravitational Shift
-U Gravity Well
-C Grotag Siege-Runner
-C Growth Spasm
-C Guard Duty
-U Guard Gomazoa
-R Guul Draz Assassin
-U Hada Spy Patrol
-C Halimar Wavewatch
-C Hand of Emrakul
-C Harmless Assault
-C Haze Frog
-C Heat Ray
-R Hedron Matrix
-R Hedron-Field Purists
-M Hellcarver Demon
-R Hellion Eruption
-C Hyena Umbra
-C Ikiral Outrider
-C Induce Despair
-U Inquisition of Kozilek
-U Irresistible Prey
-L Island
-L Island
-L Island
-L Island
-R It That Betrays
-U Jaddi Lifestrider
-U Joraga Treespeaker
-C Jwari Scuttler
-U Kabira Vindicator
-M Kargan Dragonlord
-R Kazandu Tuskcaller
-R Keening Stone
-M Khalni Hydra
-C Kiln Fiend
-C Knight of Cliffhaven
-C Kor Line-Slinger
-R Kor Spiritdancer
-C Kozilek's Predator
-M Kozilek, Butcher of Truth
-C Lagac Lizard
-C Last Kiss
-C Lavafume Invoker
-C Lay Bare
-C Leaf Arrow
-M Lighthouse Chronologist
-R Lightmine Field
-M Linvala, Keeper of Silence
-C Living Destiny
-C Lone Missionary
-R Lord of Shatterskull Pass
-U Luminous Wake
-U Lust for War
-R Magmaw
-C Makindi Griffin
-U Mammoth Umbra
-C Merfolk Observer
-U Merfolk Skyscout
-C Might of the Masses
-C Mnemonic Wall
-R Momentous Fall
-R Mortician Beetle
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-R Mul Daya Channelers
-C Narcolepsy
-C Naturalize
-R Near-Death Experience
-C Nema Siltlurker
-C Nest Invader
-C Nighthaze
-U Nirkana Cutthroat
-M Nirkana Revenant
-R Nomads' Assembly
-U Not of This World
-C Null Champion
-C Ogre Sentry
-U Ogre's Cleaver
-C Ondu Giant
-U Oust
-C Overgrown Battlement
-U Pathrazer of Ulamog
-U Pawn of Ulamog
-U Pelakka Wurm
-U Pennon Blade
-C Perish the Thought
-R Pestilence Demon
-U Phantasmal Abomination
-L Plains
-L Plains
-L Plains
-L Plains
-U Prey's Vengeance
-C Prophetic Prism
-C Puncturing Light
-R Rage Nimbus
-C Raid Bombardment
-U Rapacious One
-U Reality Spasm
-R Realms Uncharted
-R Recurring Insight
-C Regress
-C Reinforced Bulwark
-R Renegade Doppelganger
-R Repay in Kind
-C Repel the Darkness
-U Runed Servitor
-M Sarkhan the Mad
-C Sea Gate Oracle
-C See Beyond
-C Shared Discovery
-C Shrivel
-U Skeletal Wurm
-U Skittering Invasion
-C Skywatcher Adept
-C Smite
-C Snake Umbra
-C Soul's Attendant
-U Soulbound Guardians
-U Soulsurge Elemental
-C Spawning Breath
-R Spawnsire of Ulamog
-R Sphinx of Magosi
-R Sphinx-Bone Wand
-C Spider Umbra
-R Splinter Twin
-C Sporecap Spider
-C Staggershock
-C Stalwart Shield-Bearers
-C Stomper Cub
-R Student of Warfare
-U Suffer the Past
-R Surrakar Spellblade
-U Surreal Memoir
-U Survival Cache
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-R Tajuru Preserver
-R Thought Gorger
-U Time of Heroes
-C Totem-Guide Hartebeest
-R Training Grounds
-U Traitorous Instinct
-M Transcendent Master
-R Tuktuk the Explorer
-C Ulamog's Crusher
-M Ulamog, the Infinite Gyre
-R Umbra Mystic
-U Unified Will
-U Valakut Fireboar
-C Vendetta
-C Venerated Teacher
-M Vengevine
-C Vent Sentinel
-U Virulent Swipe
-U Wall of Omens
-U Warmonger's Chariot
-C Wildheart Invoker
-R World at War
-C Wrap in Flames
-C Zof Shade
-C Zulaport Enforcer
+14 U Affa Guard Hound
+134 U Akoum Boulderfoot
+1 M All Is Dust
+174 C Ancient Stirrings
+215 R Angelheart Vial
+94 U Arrogant Bloodlord
+2 U Artisan of Kozilek
+54 C Aura Finesse
+175 C Aura Gnarlid
+176 R Awakening Zone
+95 C Bala Ged Scorpion
+96 R Baneful Omen
+135 C Battle Rampart
+136 C Battle-Rattle Shaman
+177 R Bear Umbra
+178 U Beastbreaker of Bala Ged
+97 C Bloodrite Invoker
+98 C Bloodthrone Vampire
+179 U Boar Umbra
+180 U Bramblesnap
+137 U Brimstone Mage
+138 C Brood Birthing
+181 U Broodwarden
+99 C Cadaver Imp
+15 C Caravan Escort
+55 M Cast Through Time
+56 C Champion's Drake
+139 R Conquering Manticore
+100 R Consume the Meek
+101 R Consuming Vapors
+102 C Contaminated Ground
+57 R Coralhelm Commander
+103 U Corpsehatch
+58 U Crab Umbra
+104 U Curse of Wizardry
+182 C Daggerback Basilisk
+16 C Dawnglare Invoker
+105 C Death Cultist
+17 R Deathless Angel
+106 C Demonic Appetite
+18 C Demystify
+59 C Deprive
+140 R Devastating Summons
+141 R Disaster Radius
+60 C Distortion Strike
+61 U Domestication
+62 R Dormant Gomazoa
+63 U Drake Umbra
+107 R Drana, Kalastria Bloodchief
+108 C Dread Drone
+216 U Dreamstone Hedron
+64 R Echo Mage
+65 C Eel Umbra
+19 C Eland Umbra
+3 R Eldrazi Conscription
+227 R Eldrazi Temple
+20 U Emerge Unscathed
+142 C Emrakul's Hatcher
+4 M Emrakul, the Aeons Torn
+217 U Enatu Golem
+66 U Enclave Cryptologist
+109 U Escaped Null
+110 C Essence Feed
+228 C Evolving Wilds
+143 U Explosive Revelation
+144 C Fissure Vent
+145 C Flame Slash
+67 C Fleeting Distraction
+248 L Forest
+248 L Forest
+248 L Forest
+248 L Forest
+146 U Forked Bolt
+68 C Frostwind Invoker
+183 R Gelatinous Genesis
+21 M Gideon Jura
+184 R Gigantomancer
+111 C Gloomhunter
+22 C Glory Seeker
+147 C Goblin Arsonist
+148 C Goblin Tunneler
+69 R Gravitational Shift
+185 U Gravity Well
+149 C Grotag Siege-Runner
+186 C Growth Spasm
+23 C Guard Duty
+70 U Guard Gomazoa
+112 R Guul Draz Assassin
+71 U Hada Spy Patrol
+72 C Halimar Wavewatch
+5 C Hand of Emrakul
+24 C Harmless Assault
+187 C Haze Frog
+150 C Heat Ray
+218 R Hedron Matrix
+25 R Hedron-Field Purists
+113 M Hellcarver Demon
+151 R Hellion Eruption
+26 C Hyena Umbra
+27 C Ikiral Outrider
+114 C Induce Despair
+115 U Inquisition of Kozilek
+188 U Irresistible Prey
+235 L Island
+235 L Island
+235 L Island
+235 L Island
+7 R It That Betrays
+189 U Jaddi Lifestrider
+190 U Joraga Treespeaker
+73 C Jwari Scuttler
+28 U Kabira Vindicator
+152 M Kargan Dragonlord
+191 R Kazandu Tuskcaller
+219 R Keening Stone
+192 M Khalni Hydra
+153 C Kiln Fiend
+29 C Knight of Cliffhaven
+30 C Kor Line-Slinger
+31 R Kor Spiritdancer
+193 C Kozilek's Predator
+6 M Kozilek, Butcher of Truth
+154 C Lagac Lizard
+116 C Last Kiss
+155 C Lavafume Invoker
+74 C Lay Bare
+194 C Leaf Arrow
+75 M Lighthouse Chronologist
+32 R Lightmine Field
+33 M Linvala, Keeper of Silence
+195 C Living Destiny
+34 C Lone Missionary
+156 R Lord of Shatterskull Pass
+35 U Luminous Wake
+157 U Lust for War
+158 R Magmaw
+36 C Makindi Griffin
+37 U Mammoth Umbra
+76 C Merfolk Observer
+77 U Merfolk Skyscout
+196 C Might of the Masses
+78 C Mnemonic Wall
+197 R Momentous Fall
+117 R Mortician Beetle
+243 L Mountain
+243 L Mountain
+243 L Mountain
+243 L Mountain
+198 R Mul Daya Channelers
+79 C Narcolepsy
+199 C Naturalize
+38 R Near-Death Experience
+200 C Nema Siltlurker
+201 C Nest Invader
+118 C Nighthaze
+119 U Nirkana Cutthroat
+120 M Nirkana Revenant
+39 R Nomads' Assembly
+8 U Not of This World
+121 C Null Champion
+159 C Ogre Sentry
+220 U Ogre's Cleaver
+202 C Ondu Giant
+40 U Oust
+203 C Overgrown Battlement
+9 U Pathrazer of Ulamog
+122 U Pawn of Ulamog
+204 U Pelakka Wurm
+221 U Pennon Blade
+123 C Perish the Thought
+124 R Pestilence Demon
+80 U Phantasmal Abomination
+230 L Plains
+230 L Plains
+230 L Plains
+230 L Plains
+205 U Prey's Vengeance
+222 C Prophetic Prism
+41 C Puncturing Light
+160 R Rage Nimbus
+161 C Raid Bombardment
+162 U Rapacious One
+81 U Reality Spasm
+206 R Realms Uncharted
+82 R Recurring Insight
+83 C Regress
+223 C Reinforced Bulwark
+84 R Renegade Doppelganger
+125 R Repay in Kind
+42 C Repel the Darkness
+224 U Runed Servitor
+214 M Sarkhan the Mad
+85 C Sea Gate Oracle
+86 C See Beyond
+87 C Shared Discovery
+126 C Shrivel
+127 U Skeletal Wurm
+10 U Skittering Invasion
+88 C Skywatcher Adept
+43 C Smite
+207 C Snake Umbra
+44 C Soul's Attendant
+45 U Soulbound Guardians
+163 U Soulsurge Elemental
+164 C Spawning Breath
+11 R Spawnsire of Ulamog
+89 R Sphinx of Magosi
+225 R Sphinx-Bone Wand
+208 C Spider Umbra
+165 R Splinter Twin
+209 C Sporecap Spider
+166 C Staggershock
+46 C Stalwart Shield-Bearers
+210 C Stomper Cub
+47 R Student of Warfare
+128 U Suffer the Past
+90 R Surrakar Spellblade
+167 U Surreal Memoir
+48 U Survival Cache
+240 L Swamp
+240 L Swamp
+240 L Swamp
+240 L Swamp
+211 R Tajuru Preserver
+129 R Thought Gorger
+49 U Time of Heroes
+50 C Totem-Guide Hartebeest
+91 R Training Grounds
+168 U Traitorous Instinct
+51 M Transcendent Master
+169 R Tuktuk the Explorer
+13 C Ulamog's Crusher
+12 M Ulamog, the Infinite Gyre
+52 R Umbra Mystic
+92 U Unified Will
+170 U Valakut Fireboar
+130 C Vendetta
+93 C Venerated Teacher
+212 M Vengevine
+171 C Vent Sentinel
+131 U Virulent Swipe
+53 U Wall of Omens
+226 U Warmonger's Chariot
+213 C Wildheart Invoker
+172 R World at War
+173 C Wrap in Flames
+132 C Zof Shade
+133 C Zulaport Enforcer

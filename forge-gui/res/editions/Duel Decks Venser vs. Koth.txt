@@ -5,80 +5,80 @@ Name=Duel Decks: Venser vs. Koth
 Type=Duel_Decks
 
 [cards]
-U AEther Membrane
-U Angelic Shield
-U Anger
-C Armillary Sphere
-C Augury Owl
-C Azorius Chancery
-R Bloodfire Colossus
-U Bloodfire Kavu
-U Cache Raiders
-C Chartooth Cougar
-R Clone
-U Coral Fighters
-C Cosi's Ravager
-U Cryptic Annelid
-C Downhill Charge
-U Earth Servant
-C Fiery Hellhound
-U Flood Plain
-R Galepowder Mage
-U Geyser Glider
-U Greater Stone Spirit
-L Island
-L Island
-L Island
-U Jaws of Stone
-C Jedit's Dragoons
-R Journeyer's Kite
-C Kor Cartographer
-M Koth of the Hammer
-R Lithophage
-U Minamo Sightbender
-U Mistmeadow Witch
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-C Neurok Invisimancer
-U New Benalia
-U Oblivion Ring
-C Overrule
-U Path to Exile
-C Pilgrim's Eye
-L Plains
-L Plains
-L Plains
-C Plated Geopede
-C Preordain
-C Primal Plasma
-C Pygmy Pyrosaur
-C Revoke Existence
-C Safe Passage
-U Sawtooth Loon
-C Scroll Thief
-C Searing Blaze
-C Seismic Strike
-U Sejiri Refuge
-C Sigil of Sleep
-U Sky Spirit
-U Slith Strider
-C Soaring Seacliff
-R Sphinx of Uthuun
-C Spire Barrage
-C Steel of the Godhead
-U Stone Giant
-R Sunblast Angel
-R Torchling
-U Vanish into Memory
-M Venser, the Sojourner
-R Volley of Boulders
-U Vulshok Battlegear
-C Vulshok Berserker
-U Vulshok Morningstar
-C Vulshok Sorcerer
-U Wall of Denial
-C Wayfarer's Bauble
-C Whitemane Lion
-R Windreaver
+48 U AEther Membrane
+27 U Angelic Shield
+51 U Anger
+64 C Armillary Sphere
+3 C Augury Owl
+33 C Azorius Chancery
+62 R Bloodfire Colossus
+54 U Bloodfire Kavu
+18 U Cache Raiders
+59 C Chartooth Cougar
+14 R Clone
+4 U Coral Fighters
+52 C Cosi's Ravager
+15 U Cryptic Annelid
+69 C Downhill Charge
+60 U Earth Servant
+49 C Fiery Hellhound
+34 U Flood Plain
+12 R Galepowder Mage
+56 U Geyser Glider
+61 U Greater Stone Spirit
+41 L Island
+41 L Island
+41 L Island
+72 U Jaws of Stone
+20 C Jedit's Dragoons
+65 R Journeyer's Kite
+13 C Kor Cartographer
+44 M Koth of the Hammer
+57 R Lithophage
+5 U Minamo Sightbender
+6 U Mistmeadow Witch
+74 L Mountain
+74 L Mountain
+74 L Mountain
+74 L Mountain
+8 C Neurok Invisimancer
+35 U New Benalia
+28 U Oblivion Ring
+32 C Overrule
+23 U Path to Exile
+47 C Pilgrim's Eye
+40 L Plains
+40 L Plains
+40 L Plains
+45 C Plated Geopede
+24 C Preordain
+16 C Primal Plasma
+46 C Pygmy Pyrosaur
+26 C Revoke Existence
+29 C Safe Passage
+17 U Sawtooth Loon
+7 C Scroll Thief
+67 C Searing Blaze
+70 C Seismic Strike
+36 U Sejiri Refuge
+25 C Sigil of Sleep
+10 U Sky Spirit
+9 U Slith Strider
+37 C Soaring Seacliff
+22 R Sphinx of Uthuun
+71 C Spire Barrage
+30 C Steel of the Godhead
+55 U Stone Giant
+21 R Sunblast Angel
+58 R Torchling
+31 U Vanish into Memory
+1 M Venser, the Sojourner
+73 R Volley of Boulders
+68 U Vulshok Battlegear
+53 C Vulshok Berserker
+66 U Vulshok Morningstar
+50 C Vulshok Sorcerer
+11 U Wall of Denial
+63 C Wayfarer's Bauble
+2 C Whitemane Lion
+19 R Windreaver

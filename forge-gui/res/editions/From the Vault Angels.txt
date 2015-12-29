@@ -5,18 +5,18 @@ Name=From the Vault: Angels
 Type=From_the_Vault
 
 [cards]
-M Akroma, Angel of Fury
-M Akroma, Angel of Wrath
-M Archangel of Strife
-M Aurelia, the Warleader
-M Avacyn, Angel of Hope
-M Baneslayer Angel
-M Entreat the Angels
-M Exalted Angel
-M Iona, Shield of Emeria
-M Iridescent Angel
-M Jenara, Asura of War
-M Lightning Angel
-M Platinum Angel
-M Serra Angel
-M Tariel, Reckoner of Souls
+1 M Akroma, Angel of Fury
+2 M Akroma, Angel of Wrath
+3 M Archangel of Strife
+4 M Aurelia, the Warleader
+5 M Avacyn, Angel of Hope
+6 M Baneslayer Angel
+7 M Entreat the Angels
+8 M Exalted Angel
+9 M Iona, Shield of Emeria
+10 M Iridescent Angel
+11 M Jenara, Asura of War
+12 M Lightning Angel
+13 M Platinum Angel
+14 M Serra Angel
+15 M Tariel, Reckoner of Souls

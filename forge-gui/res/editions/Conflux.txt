@@ -9,148 +9,148 @@ BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
 
 [cards]
-C Absorb Vis
-U Aerie Mystics
-U Ancient Ziggurat
-M Apocalypse Hydra
-C Armillary Sphere
-C Asha's Favor
-C Aven Squire
-C Aven Trailblazer
-R Banefire
-C Beacon Behemoth
-R Blood Tyrant
-R Bloodhall Ooze
-C Bone Saw
-C Brackwater Elemental
-C Canyon Minotaur
-U Celestial Purge
-R Charnelhoard Wurm
-M Child of Alara
-R Cliffrunner Behemoth
-M Conflux
-C Constricting Tendrils
-U Controlled Instincts
-U Corrupted Roots
-U Countersquall
-C Court Homunculus
-U Cumber Stone
-R Cylian Sunsinger
-C Dark Temper
-C Darklit Gargoyle
-C Drag Down
-U Dragonsoul Knight
-U Dreadwing
-U Elder Mastery
-C Ember Weaver
-C Esper Cormorants
-U Esperzoa
-M Ethersworn Adjudicator
-R Exotic Orchard
-C Exploding Borders
-R Extractor Demon
-C Faerie Mechanist
-C Fiery Fall
-U Filigree Fracture
-U Fleshformer
-R Font of Mythos
-C Frontline Sage
-U Fusion Elemental
-R Giltspire Avenger
-C Gleam of Resistance
-U Gluttonous Slime
-C Goblin Outlander
-R Goblin Razerunners
-C Grixis Illusionist
-U Grixis Slavedriver
-R Gwafa Hazid, Profiteer
-U Hellkite Hatchling
-U Hellspark Elemental
-U Ignite Disorder
-C Infectious Horror
-R Inkwell Leviathan
-U Jhessian Balmgiver
-C Kaleidostone
-R Kederekt Parasite
-R Knight of the Reliquary
-U Knotvine Mystic
-C Kranioceros
-C Lapse of Certainty
-M Maelstrom Archangel
-R Magister Sphinx
-M Malfegor
-C Mana Cylix
-U Manaforce Mace
-C Maniacal Rage
-R Mark of Asylum
-R Martial Coup
-R Master Transmuter
-C Matca Rioters
-R Meglonoth
-C Might of Alara
-M Mirror-Sigil Sergeant
-C Molten Frame
-U Nacatl Hunt-Pride
-C Nacatl Outlander
-C Nacatl Savage
-M Nicol Bolas, Planeswalker
-R Noble Hierarch
-R Nyxathid
-R Obelisk of Alara
-R Paleoloth
-U Paragon of the Amesha
-C Parasitic Strix
-U Path to Exile
-C Pestilent Kathari
-M Progenitus
-C Quenchable Fire
-R Rakka Mar
-U Reliquary Tower
-C Rhox Bodyguard
-C Rhox Meditant
-C Rotting Rats
-C Rupture Spire
-U Sacellum Archers
-C Salvage Slasher
-U Scarland Thrinax
-C Scattershot Archer
-R Scepter of Dominance
-R Scepter of Fugue
-R Scepter of Insight
-U Scornful AEther-Lich
-C Sedraxis Alchemist
-U Shambling Remains
-U Shard Convergence
-R Sigil of the Empty Throne
-U Skyward Eye Prophets
-U Sludge Strider
-R Soul's Majesty
-R Sphinx Summoner
-U Spore Burst
-C Suicidal Charge
-C Sylvan Bounty
-R Telemin Performance
-M Thornling
-C Toxic Iguanar
-C Traumatic Visions
-C Tukatongue Thallid
-U Unstable Frontier
-C Unsummon
-U Vagrant Plowbeasts
-C Valeron Outlander
-C Valiant Guard
-C Vectis Agents
-C Vedalken Outlander
-U Viashino Slaughtermaster
-U View from Above
-U Voices from the Void
-U Volcanic Fallout
-R Voracious Dragon
-R Wall of Reverence
-C Wandering Goblins
-C Wild Leotau
-R Worldheart Phoenix
-C Worldly Counsel
-C Wretched Banquet
-C Yoke of the Damned
-C Zombie Outlander
+40 C Absorb Vis
+1 U Aerie Mystics
+141 U Ancient Ziggurat
+98 M Apocalypse Hydra
+134 C Armillary Sphere
+2 C Asha's Favor
+3 C Aven Squire
+4 C Aven Trailblazer
+58 R Banefire
+78 C Beacon Behemoth
+99 R Blood Tyrant
+59 R Bloodhall Ooze
+135 C Bone Saw
+21 C Brackwater Elemental
+60 C Canyon Minotaur
+5 U Celestial Purge
+100 R Charnelhoard Wurm
+101 M Child of Alara
+79 R Cliffrunner Behemoth
+102 M Conflux
+22 C Constricting Tendrils
+23 U Controlled Instincts
+41 U Corrupted Roots
+103 U Countersquall
+6 C Court Homunculus
+24 U Cumber Stone
+80 R Cylian Sunsinger
+61 C Dark Temper
+7 C Darklit Gargoyle
+42 C Drag Down
+62 U Dragonsoul Knight
+43 U Dreadwing
+104 U Elder Mastery
+81 C Ember Weaver
+105 C Esper Cormorants
+25 U Esperzoa
+26 M Ethersworn Adjudicator
+142 R Exotic Orchard
+106 C Exploding Borders
+44 R Extractor Demon
+27 C Faerie Mechanist
+63 C Fiery Fall
+82 U Filigree Fracture
+45 U Fleshformer
+136 R Font of Mythos
+28 C Frontline Sage
+107 U Fusion Elemental
+108 R Giltspire Avenger
+8 C Gleam of Resistance
+83 U Gluttonous Slime
+109 C Goblin Outlander
+64 R Goblin Razerunners
+29 C Grixis Illusionist
+46 U Grixis Slavedriver
+110 R Gwafa Hazid, Profiteer
+111 U Hellkite Hatchling
+65 U Hellspark Elemental
+66 U Ignite Disorder
+47 C Infectious Horror
+30 R Inkwell Leviathan
+112 U Jhessian Balmgiver
+137 C Kaleidostone
+48 R Kederekt Parasite
+113 R Knight of the Reliquary
+114 U Knotvine Mystic
+67 C Kranioceros
+9 C Lapse of Certainty
+115 M Maelstrom Archangel
+116 R Magister Sphinx
+117 M Malfegor
+138 C Mana Cylix
+139 U Manaforce Mace
+68 C Maniacal Rage
+10 R Mark of Asylum
+11 R Martial Coup
+31 R Master Transmuter
+84 C Matca Rioters
+118 R Meglonoth
+85 C Might of Alara
+12 M Mirror-Sigil Sergeant
+69 C Molten Frame
+13 U Nacatl Hunt-Pride
+119 C Nacatl Outlander
+86 C Nacatl Savage
+120 M Nicol Bolas, Planeswalker
+87 R Noble Hierarch
+49 R Nyxathid
+140 R Obelisk of Alara
+88 R Paleoloth
+14 U Paragon of the Amesha
+32 C Parasitic Strix
+15 U Path to Exile
+50 C Pestilent Kathari
+121 M Progenitus
+70 C Quenchable Fire
+71 R Rakka Mar
+143 U Reliquary Tower
+122 C Rhox Bodyguard
+16 C Rhox Meditant
+51 C Rotting Rats
+144 C Rupture Spire
+89 U Sacellum Archers
+52 C Salvage Slasher
+123 U Scarland Thrinax
+90 C Scattershot Archer
+17 R Scepter of Dominance
+53 R Scepter of Fugue
+33 R Scepter of Insight
+34 U Scornful AEther-Lich
+54 C Sedraxis Alchemist
+124 U Shambling Remains
+91 U Shard Convergence
+18 R Sigil of the Empty Throne
+125 U Skyward Eye Prophets
+126 U Sludge Strider
+92 R Soul's Majesty
+127 R Sphinx Summoner
+93 U Spore Burst
+128 C Suicidal Charge
+94 C Sylvan Bounty
+35 R Telemin Performance
+95 M Thornling
+72 C Toxic Iguanar
+36 C Traumatic Visions
+96 C Tukatongue Thallid
+145 U Unstable Frontier
+37 C Unsummon
+129 U Vagrant Plowbeasts
+130 C Valeron Outlander
+19 C Valiant Guard
+131 C Vectis Agents
+132 C Vedalken Outlander
+73 U Viashino Slaughtermaster
+38 U View from Above
+55 U Voices from the Void
+74 U Volcanic Fallout
+75 R Voracious Dragon
+20 R Wall of Reverence
+76 C Wandering Goblins
+97 C Wild Leotau
+77 R Worldheart Phoenix
+39 C Worldly Counsel
+56 C Wretched Banquet
+57 C Yoke of the Damned
+133 C Zombie Outlander

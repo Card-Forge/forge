@@ -10,146 +10,146 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-C About Face
-U Angel's Trumpet
-C Angelic Curator
-R Anthroplasm
-R Archivist
-C Aura Flux
-U Avalanche Riders
-R Beast of Burden
-R Blessed Reversal
-U Bloated Toad
-U Bone Shredder
-C Bouncing Beebles
-R Brink of Madness
-C Burst of Energy
-C Cessation
-C Cloud of Faeries
-R Crawlspace
-C Crop Rotation
-R Damping Engine
-U Darkwatch Elves
-C Defender of Chaos
-C Defender of Law
-R Defense Grid
-R Defense of the Heart
-R Delusions of Mediocrity
-R Deranged Hermit
-C Devout Harpist
-U Engineered Plague
-C Erase
-R Eviscerator
-C Expendable Troops
-U Faerie Conclave
-R Fleeting Image
-C Fog of Gnats
-U Forbidding Watchtower
-C Frantic Search
-U Gang of Elk
-U Ghitu Encampment
-U Ghitu Fire-Eater
-C Ghitu Slinger
-U Ghitu War Cry
-C Giant Cockroach
-C Goblin Medics
-R Goblin Welder
-C Granite Grip
-R Grim Monolith
-U Harmonic Convergence
-R Hidden Gibbons
-U Hope and Glory
-R Impending Disaster
-C Intervene
-R Iron Maiden
-C Iron Will
-U Jhoira's Toolbox
-R Karmic Guide
-U King Crab
-U Knighthood
-U Last-Ditch Effort
-C Lava Axe
-U Levitation
-U Lone Wolf
-R Lurking Skirge
-U Martyr's Cause
-R Memory Jar
-R Might of Oaks
-C Miscalculation
-R Molten Hydra
-U Mother of Runes
-C Multani's Acolyte
-U Multani's Presence
-R Multani, Maro-Sorcerer
-R No Mercy
-R Opal Avenger
-C Opal Champion
-U Opportunity
-C Ostracize
-R Palinchron
-C Parch
-U Peace and Quiet
-C Phyrexian Broodlings
-C Phyrexian Debaser
-U Phyrexian Defiler
-C Phyrexian Denouncer
-R Phyrexian Plaguelord
-U Phyrexian Reclamation
-C Plague Beetle
-R Planar Collapse
-R Purify
-C Pygmy Pyrosaur
-R Pyromancy
-R Quicksilver Amulet
-U Rack and Ruin
-U Radiant's Dragoons
-C Radiant's Judgment
-R Radiant, Archangel
-C Rancor
-U Rank and File
-U Raven Familiar
-U Rebuild
-C Repopulate
-R Ring of Gix
-R Rivalry
-R Scrapheap
-R Second Chance
-R Shivan Phoenix
-C Sick and Tired
-C Silk Net
-C Simian Grunts
-C Sleeper's Guile
-C Slow Motion
-C Sluggishness
-C Snap
-U Spawning Pool
-R Subversion
-U Sustainer of the Realm
-C Swat
-U Tethered Skirge
-C Thornwind Faeries
-R Thran Lens
-U Thran War Machine
-R Thran Weaponry
-U Ticking Gnomes
-U Tinker
-C Tragic Poet
-U Treacherous Link
-C Treefolk Mystic
-U Treetop Village
-C Unearth
-R Urza's Blueprints
-C Viashino Bey
-U Viashino Cutthroat
-U Viashino Heretic
-C Viashino Sandscout
-C Vigilant Drake
-U Walking Sponge
-C Weatherseed Elf
-C Weatherseed Faeries
-R Weatherseed Treefolk
-R Wheel of Torture
-U Wing Snare
-C Yavimaya Granger
-C Yavimaya Scion
-C Yavimaya Wurm
+73 C About Face
+121 U Angel's Trumpet
+1 C Angelic Curator
+25 R Anthroplasm
+26 R Archivist
+27 C Aura Flux
+74 U Avalanche Riders
+122 R Beast of Burden
+2 R Blessed Reversal
+97 U Bloated Toad
+49 U Bone Shredder
+28 C Bouncing Beebles
+50 R Brink of Madness
+3 C Burst of Energy
+4 C Cessation
+29 C Cloud of Faeries
+123 R Crawlspace
+98 C Crop Rotation
+124 R Damping Engine
+99 U Darkwatch Elves
+75 C Defender of Chaos
+5 C Defender of Law
+125 R Defense Grid
+100 R Defense of the Heart
+30 R Delusions of Mediocrity
+101 R Deranged Hermit
+6 C Devout Harpist
+51 U Engineered Plague
+7 C Erase
+52 R Eviscerator
+8 C Expendable Troops
+139 U Faerie Conclave
+31 R Fleeting Image
+53 C Fog of Gnats
+140 U Forbidding Watchtower
+32 C Frantic Search
+102 U Gang of Elk
+141 U Ghitu Encampment
+76 U Ghitu Fire-Eater
+77 C Ghitu Slinger
+78 U Ghitu War Cry
+54 C Giant Cockroach
+79 C Goblin Medics
+80 R Goblin Welder
+81 C Granite Grip
+126 R Grim Monolith
+103 U Harmonic Convergence
+104 R Hidden Gibbons
+9 U Hope and Glory
+82 R Impending Disaster
+33 C Intervene
+127 R Iron Maiden
+10 C Iron Will
+128 U Jhoira's Toolbox
+11 R Karmic Guide
+34 U King Crab
+12 U Knighthood
+83 U Last-Ditch Effort
+84 C Lava Axe
+35 U Levitation
+105 U Lone Wolf
+55 R Lurking Skirge
+13 U Martyr's Cause
+129 R Memory Jar
+106 R Might of Oaks
+36 C Miscalculation
+85 R Molten Hydra
+14 U Mother of Runes
+108 C Multani's Acolyte
+109 U Multani's Presence
+107 R Multani, Maro-Sorcerer
+56 R No Mercy
+15 R Opal Avenger
+16 C Opal Champion
+37 U Opportunity
+57 C Ostracize
+38 R Palinchron
+86 C Parch
+17 U Peace and Quiet
+58 C Phyrexian Broodlings
+59 C Phyrexian Debaser
+60 U Phyrexian Defiler
+61 C Phyrexian Denouncer
+62 R Phyrexian Plaguelord
+63 U Phyrexian Reclamation
+64 C Plague Beetle
+18 R Planar Collapse
+19 R Purify
+87 C Pygmy Pyrosaur
+88 R Pyromancy
+130 R Quicksilver Amulet
+89 U Rack and Ruin
+21 U Radiant's Dragoons
+22 C Radiant's Judgment
+20 R Radiant, Archangel
+110 C Rancor
+65 U Rank and File
+39 U Raven Familiar
+40 U Rebuild
+111 C Repopulate
+131 R Ring of Gix
+90 R Rivalry
+132 R Scrapheap
+41 R Second Chance
+91 R Shivan Phoenix
+66 C Sick and Tired
+112 C Silk Net
+113 C Simian Grunts
+67 C Sleeper's Guile
+42 C Slow Motion
+92 C Sluggishness
+43 C Snap
+142 U Spawning Pool
+68 R Subversion
+23 U Sustainer of the Realm
+69 C Swat
+70 U Tethered Skirge
+44 C Thornwind Faeries
+133 R Thran Lens
+134 U Thran War Machine
+135 R Thran Weaponry
+136 U Ticking Gnomes
+45 U Tinker
+24 C Tragic Poet
+71 U Treacherous Link
+114 C Treefolk Mystic
+143 U Treetop Village
+72 C Unearth
+137 R Urza's Blueprints
+93 C Viashino Bey
+94 U Viashino Cutthroat
+95 U Viashino Heretic
+96 C Viashino Sandscout
+46 C Vigilant Drake
+47 U Walking Sponge
+115 C Weatherseed Elf
+48 C Weatherseed Faeries
+116 R Weatherseed Treefolk
+138 R Wheel of Torture
+117 U Wing Snare
+118 C Yavimaya Granger
+119 C Yavimaya Scion
+120 C Yavimaya Wurm

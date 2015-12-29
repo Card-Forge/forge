@@ -5,84 +5,84 @@ Name=Duel Decks: Speed vs. Cunning
 Type=Duel_Decks
 
 [cards]
-M Zurgo Helmsmasher
-U Frenzied Goblin
-C Infantry Veteran
-C Leonin Snarecaster
-C Dregscape Zombie
-C Goblin Deathraiders
-U Hellraiser Goblin
-U Fleshbag Marauder
-U Goblin Warchief
-R Hell's Thunder
-C Kathari Bomber
-U Shambling Remains
-U Mardu Heart-Piercer
-U Beetleback Chief
-R Krenko, Mob Boss
-R Ogre Battledriver
-U Flame-Kin Zealot
-U Scourge Devil
-U Oni of Wild Places
-C Reckless Abandon
-C Shock
-C Bone Splinters
-U Arc Trail
-U Goblin Bombardment
-C Krenko's Command
-C Act of Treason
-U Dauntless Onslaught
-C Orcish Cannonade
-C Fiery Fall
-R Fury of the Horde
-R Banefire
-C Evolving Wilds
-U Ghitu Encampment
-U Nomad Outpost
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Plains
-L Plains
-L Plains
-L Plains
-L Swamp
-L Swamp
-L Swamp
-M Arcanis the Omnipotent
-U Faerie Impostor
-C Coral Trickster
-C Fathom Seer
-U Jeskai Elder
-U Willbender
-C Sparkmage Apprentice
-C Lone Missionary
-C Master Decoy
-C Echo Tracer
-C Kor Hookmaster
-U Stonecloaker
-C Aquamorph Entity
-C Hussar Patrol
-R Lightning Angel
-C Faerie Invaders
-R Thousand Winds
-R Sphinx of Uthuun
-C Fleeting Distraction
-C Stave Off
-C Swift Justice
-C Impulse
-C Mana Leak
-U Lightning Helix
-R Hold the Line
-U Inferno Trap
-R Steam Augury
-C Traumatic Visions
-C Whiplash Trap
-U Arrow Volley Trap
-C Repeal
-U Mystic Monastery
-C Terramorphic Expanse
-L Island
-L Island
-L Island
+1 M Zurgo Helmsmasher
+2 U Frenzied Goblin
+3 C Infantry Veteran
+4 C Leonin Snarecaster
+5 C Dregscape Zombie
+6 C Goblin Deathraiders
+7 U Hellraiser Goblin
+8 U Fleshbag Marauder
+9 U Goblin Warchief
+10 R Hell's Thunder
+11 C Kathari Bomber
+12 U Shambling Remains
+13 U Mardu Heart-Piercer
+14 U Beetleback Chief
+15 R Krenko, Mob Boss
+16 R Ogre Battledriver
+17 U Flame-Kin Zealot
+18 U Scourge Devil
+19 U Oni of Wild Places
+20 C Reckless Abandon
+21 C Shock
+22 C Bone Splinters
+23 U Arc Trail
+24 U Goblin Bombardment
+25 C Krenko's Command
+26 C Act of Treason
+27 U Dauntless Onslaught
+28 C Orcish Cannonade
+29 C Fiery Fall
+30 R Fury of the Horde
+31 R Banefire
+32 C Evolving Wilds
+33 U Ghitu Encampment
+34 U Nomad Outpost
+78 L Mountain
+78 L Mountain
+78 L Mountain
+78 L Mountain
+81 L Plains
+81 L Plains
+81 L Plains
+81 L Plains
+40 L Swamp
+40 L Swamp
+40 L Swamp
+42 M Arcanis the Omnipotent
+43 U Faerie Impostor
+44 C Coral Trickster
+45 C Fathom Seer
+46 U Jeskai Elder
+47 U Willbender
+48 C Sparkmage Apprentice
+49 C Lone Missionary
+50 C Master Decoy
+51 C Echo Tracer
+52 C Kor Hookmaster
+53 U Stonecloaker
+54 C Aquamorph Entity
+55 C Hussar Patrol
+56 R Lightning Angel
+57 C Faerie Invaders
+58 R Thousand Winds
+59 R Sphinx of Uthuun
+60 C Fleeting Distraction
+61 C Stave Off
+62 C Swift Justice
+63 C Impulse
+64 C Mana Leak
+65 U Lightning Helix
+66 R Hold the Line
+67 U Inferno Trap
+68 R Steam Augury
+69 C Traumatic Visions
+70 C Whiplash Trap
+71 U Arrow Volley Trap
+72 C Repeal
+73 U Mystic Monastery
+74 C Terramorphic Expanse
+75 L Island
+75 L Island
+75 L Island

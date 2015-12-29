@@ -8,277 +8,277 @@ BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 [cards]
-R Abrupt Decay
-C Aerial Predation
-M Angel of Serenity
-C Annihilating Fire
-U Aquus Steed
-R Archon of the Triumvirate
-U Archweaver
-M Armada Wurm
-C Armory Guard
-U Arrest
-R Ash Zealot
-U Assassin's Strike
-C Auger Spree
-C Avenging Arrow
-C Axebane Guardian
-C Axebane Stag
-R Azor's Elocutors
-C Azorius Arrester
-U Azorius Charm
-C Azorius Guildgate
-U Azorius Justiciar
-U Azorius Keyrune
-C Batterhorn
-U Bazaar Krovod
-C Bellows Lizard
-U Blistercoil Weird
-R Blood Crypt
-U Bloodfray Giant
-U Blustersquall
-U Brushstrider
-U Call of the Conclave
-C Cancel
-R Carnival Hellsteed
-C Catacomb Slug
-C Centaur Healer
-C Centaur's Herald
-R Chaos Imps
-C Chemister's Trick
-C Chorus of Might
-R Chromatic Lantern
-C Chronic Flooding
-U Civic Saber
-C Cobblebrute
-U Codex Shredder
-R Collective Blessing
-C Common Bond
-C Concordia Pegasus
-R Conjured Currency
-R Corpsejack Menace
-R Counterflux
-C Coursers' Accord
-C Cremate
-C Crosstown Courier
-R Cryptborn Horror
-R Cyclonic Rift
-C Daggerdrome Imp
-U Dark Revenant
-C Dead Reveler
-R Deadbridge Goliath
-R Death's Presence
-R Deathrite Shaman
-R Desecration Demon
-C Destroy the Evidence
-R Detention Sphere
-C Deviant Glee
-C Dispel
-C Doorkeeper
-C Downsize
-C Drainpipe Vermin
-C Dramatic Rescue
-R Dreadbore
-U Dreg Mangler
-C Drudge Beetle
-C Druid's Deliverance
-U Dryad Militant
-C Dynacharge
-C Electrickery
-M Epic Experiment
-C Essence Backlash
-C Ethereal Armor
-C Explosive Impact
-C Eyes in the Skies
-U Faerie Impostor
-U Fall of the Gavel
-U Fencing Ace
-R Firemind's Foresight
-L Forest
-L Forest
-L Forest
-L Forest
-L Forest
-C Frostburn Weird
-C Gatecreeper Vine
-C Giant Growth
-U Gobbling Ooze
-C Goblin Electromancer
-U Goblin Rally
-U Golgari Charm
-U Golgari Decoy
-C Golgari Guildgate
-U Golgari Keyrune
-C Golgari Longlegs
-C Gore-House Chainwalker
-R Grave Betrayal
-C Grim Roustabout
-C Grisly Salvage
-R Grove of the Guardian
-R Growing Ranks
-R Guild Feud
-U Guttersnipe
-R Hallowed Fountain
-R Havoc Festival
-U Hellhole Flailer
-U Heroes' Reunion
-C Horncaller's Chant
-U Hover Barrier
-C Hussar Patrol
-R Hypersonic Dragon
-C Inaction Injunction
-C Inspiration
-L Island
-L Island
-L Island
-L Island
-L Island
-C Isperia's Skywatch
-M Isperia, Supreme Judge
-U Izzet Charm
-C Izzet Guildgate
-U Izzet Keyrune
-U Izzet Staticaster
-M Jace, Architect of Thought
-R Jarad's Orders
-M Jarad, Golgari Lich Lord
-U Judge's Familiar
-C Keening Apparition
-C Knightly Valor
-U Korozda Guildmage
-C Korozda Monitor
-C Launch Party
-C Lobber Crew
-R Lotleth Troll
-R Loxodon Smiter
-U Lyev Skyknight
-R Mana Bloom
-R Martial Law
-R Mercurial Chemister
-C Mind Rot
-U Minotaur Aggressor
-R Mizzium Mortars
-C Mizzium Skin
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-M Necropolis Regent
-U New Prahv Guildmage
-M Niv-Mizzet, Dracogenius
-U Nivix Guildmage
-R Nivmagus Elemental
-U Oak Street Innkeeper
-C Ogre Jailbreaker
-R Overgrown Tomb
-R Pack Rat
-R Palisade Giant
-C Paralyzing Grasp
-C Perilous Shadow
-U Phantom General
-R Pithing Needle
-L Plains
-L Plains
-L Plains
-L Plains
-L Plains
-R Precinct Captain
-U Psychic Spiral
-C Pursuit of Flight
-U Pyroconvergence
-U Racecourse Fury
-U Rakdos Cackler
-U Rakdos Charm
-C Rakdos Guildgate
-U Rakdos Keyrune
-U Rakdos Ragemutt
-U Rakdos Ringleader
-C Rakdos Shred-Freak
-M Rakdos's Return
-M Rakdos, Lord of Riots
-R Rest in Peace
-R Righteous Authority
-U Risen Sanctuary
-U Rites of Reaping
-U Rix Maadi Guildmage
-U Rogue's Passage
-C Rootborn Defenses
-C Rubbleback Rhino
-C Runewing
-U Savage Surge
-C Search Warrant
-R Search the City
-U Security Blockade
-U Seek the Horizon
-U Selesnya Charm
-C Selesnya Guildgate
-U Selesnya Keyrune
-C Selesnya Sentry
-C Seller of Songbirds
-C Sewer Shambler
-U Shrieking Affliction
-C Skull Rend
-U Skyline Predator
-U Skymark Roc
-R Slaughter Games
-U Slime Molding
-U Slitherhead
-C Sluiceway Scorpion
-U Slum Reaper
-U Soul Tithe
-U Soulsworn Spirit
-C Spawn of Rix Maadi
-U Sphere of Safety
-R Sphinx of the Chimes
-M Sphinx's Revelation
-C Splatter Thug
-C Stab Wound
-C Stealer of Secrets
-R Steam Vents
-C Stonefare Crocodile
-U Street Spasm
-U Street Sweeper
-C Sundering Growth
-C Sunspire Griffin
-R Supreme Verdict
-C Survey the Wreckage
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-C Swift Justice
-U Syncopate
-U Tablet of the Guilds
-U Tavern Swindler
-U Teleportal
-R Temple Garden
-C Tenement Crasher
-C Terrus Wurm
-U Thoughtflare
-U Thrill-Kill Assassin
-C Tower Drake
-C Towering Indrik
-C Trained Caracal
-C Traitorous Instinct
-C Transguild Promenade
-U Treasured Find
-C Trestle Troll
-C Trostani's Judgment
-M Trostani, Selesnya's Voice
-U Ultimate Price
-R Underworld Connections
-C Urban Burgeoning
-M Utvara Hellkite
-U Vandalblast
-C Vassal Soul
-C Viashino Racketeer
-U Vitu-Ghazi Guildmage
-C Voidwielder
-R Volatile Rig
-M Vraska the Unseen
-R Wayfaring Temple
-R Wild Beastmaster
-M Worldspine Wurm
-U Zanikev Locust
+141 R Abrupt Decay
+113 C Aerial Predation
+1 M Angel of Serenity
+85 C Annihilating Fire
+29 U Aquus Steed
+142 R Archon of the Triumvirate
+114 U Archweaver
+143 M Armada Wurm
+2 C Armory Guard
+3 U Arrest
+86 R Ash Zealot
+57 U Assassin's Strike
+144 C Auger Spree
+4 C Avenging Arrow
+115 C Axebane Guardian
+116 C Axebane Stag
+210 R Azor's Elocutors
+5 C Azorius Arrester
+145 U Azorius Charm
+237 C Azorius Guildgate
+6 U Azorius Justiciar
+225 U Azorius Keyrune
+87 C Batterhorn
+7 U Bazaar Krovod
+88 C Bellows Lizard
+211 U Blistercoil Weird
+238 R Blood Crypt
+89 U Bloodfray Giant
+30 U Blustersquall
+117 U Brushstrider
+146 U Call of the Conclave
+31 C Cancel
+147 R Carnival Hellsteed
+58 C Catacomb Slug
+148 C Centaur Healer
+118 C Centaur's Herald
+90 R Chaos Imps
+149 C Chemister's Trick
+119 C Chorus of Might
+226 R Chromatic Lantern
+32 C Chronic Flooding
+227 U Civic Saber
+91 C Cobblebrute
+228 U Codex Shredder
+150 R Collective Blessing
+151 C Common Bond
+8 C Concordia Pegasus
+33 R Conjured Currency
+152 R Corpsejack Menace
+153 R Counterflux
+154 C Coursers' Accord
+59 C Cremate
+34 C Crosstown Courier
+212 R Cryptborn Horror
+35 R Cyclonic Rift
+60 C Daggerdrome Imp
+61 U Dark Revenant
+62 C Dead Reveler
+120 R Deadbridge Goliath
+121 R Death's Presence
+213 R Deathrite Shaman
+63 R Desecration Demon
+64 C Destroy the Evidence
+155 R Detention Sphere
+65 C Deviant Glee
+36 C Dispel
+37 C Doorkeeper
+38 C Downsize
+66 C Drainpipe Vermin
+156 C Dramatic Rescue
+157 R Dreadbore
+158 U Dreg Mangler
+122 C Drudge Beetle
+123 C Druid's Deliverance
+214 U Dryad Militant
+92 C Dynacharge
+93 C Electrickery
+159 M Epic Experiment
+160 C Essence Backlash
+9 C Ethereal Armor
+94 C Explosive Impact
+10 C Eyes in the Skies
+39 U Faerie Impostor
+161 U Fall of the Gavel
+11 U Fencing Ace
+162 R Firemind's Foresight
+270 L Forest
+270 L Forest
+270 L Forest
+270 L Forest
+270 L Forest
+215 C Frostburn Weird
+124 C Gatecreeper Vine
+125 C Giant Growth
+126 U Gobbling Ooze
+163 C Goblin Electromancer
+95 U Goblin Rally
+164 U Golgari Charm
+127 U Golgari Decoy
+239 C Golgari Guildgate
+229 U Golgari Keyrune
+216 C Golgari Longlegs
+96 C Gore-House Chainwalker
+67 R Grave Betrayal
+68 C Grim Roustabout
+165 C Grisly Salvage
+240 R Grove of the Guardian
+217 R Growing Ranks
+97 R Guild Feud
+98 U Guttersnipe
+241 R Hallowed Fountain
+166 R Havoc Festival
+167 U Hellhole Flailer
+168 U Heroes' Reunion
+128 C Horncaller's Chant
+40 U Hover Barrier
+169 C Hussar Patrol
+170 R Hypersonic Dragon
+41 C Inaction Injunction
+42 C Inspiration
+255 L Island
+255 L Island
+255 L Island
+255 L Island
+255 L Island
+43 C Isperia's Skywatch
+171 M Isperia, Supreme Judge
+172 U Izzet Charm
+242 C Izzet Guildgate
+230 U Izzet Keyrune
+173 U Izzet Staticaster
+44 M Jace, Architect of Thought
+175 R Jarad's Orders
+174 M Jarad, Golgari Lich Lord
+218 U Judge's Familiar
+12 C Keening Apparition
+13 C Knightly Valor
+176 U Korozda Guildmage
+129 C Korozda Monitor
+69 C Launch Party
+99 C Lobber Crew
+177 R Lotleth Troll
+178 R Loxodon Smiter
+179 U Lyev Skyknight
+130 R Mana Bloom
+14 R Martial Law
+180 R Mercurial Chemister
+70 C Mind Rot
+100 U Minotaur Aggressor
+101 R Mizzium Mortars
+45 C Mizzium Skin
+268 L Mountain
+268 L Mountain
+268 L Mountain
+268 L Mountain
+268 L Mountain
+71 M Necropolis Regent
+181 U New Prahv Guildmage
+183 M Niv-Mizzet, Dracogenius
+182 U Nivix Guildmage
+219 R Nivmagus Elemental
+131 U Oak Street Innkeeper
+72 C Ogre Jailbreaker
+243 R Overgrown Tomb
+73 R Pack Rat
+15 R Palisade Giant
+46 C Paralyzing Grasp
+74 C Perilous Shadow
+16 U Phantom General
+231 R Pithing Needle
+254 L Plains
+254 L Plains
+254 L Plains
+254 L Plains
+254 L Plains
+17 R Precinct Captain
+47 U Psychic Spiral
+102 C Pursuit of Flight
+103 U Pyroconvergence
+104 U Racecourse Fury
+220 U Rakdos Cackler
+184 U Rakdos Charm
+244 C Rakdos Guildgate
+232 U Rakdos Keyrune
+185 U Rakdos Ragemutt
+186 U Rakdos Ringleader
+221 C Rakdos Shred-Freak
+188 M Rakdos's Return
+187 M Rakdos, Lord of Riots
+18 R Rest in Peace
+189 R Righteous Authority
+190 U Risen Sanctuary
+191 U Rites of Reaping
+192 U Rix Maadi Guildmage
+245 U Rogue's Passage
+19 C Rootborn Defenses
+132 C Rubbleback Rhino
+48 C Runewing
+133 U Savage Surge
+193 C Search Warrant
+49 R Search the City
+20 U Security Blockade
+134 U Seek the Horizon
+194 U Selesnya Charm
+246 C Selesnya Guildgate
+233 U Selesnya Keyrune
+21 C Selesnya Sentry
+22 C Seller of Songbirds
+75 C Sewer Shambler
+76 U Shrieking Affliction
+195 C Skull Rend
+50 U Skyline Predator
+196 U Skymark Roc
+197 R Slaughter Games
+135 U Slime Molding
+222 U Slitherhead
+198 C Sluiceway Scorpion
+77 U Slum Reaper
+23 U Soul Tithe
+51 U Soulsworn Spirit
+199 C Spawn of Rix Maadi
+24 U Sphere of Safety
+52 R Sphinx of the Chimes
+200 M Sphinx's Revelation
+105 C Splatter Thug
+78 C Stab Wound
+53 C Stealer of Secrets
+247 R Steam Vents
+136 C Stonefare Crocodile
+106 U Street Spasm
+234 U Street Sweeper
+223 C Sundering Growth
+25 C Sunspire Griffin
+201 R Supreme Verdict
+107 C Survey the Wreckage
+264 L Swamp
+264 L Swamp
+264 L Swamp
+264 L Swamp
+264 L Swamp
+26 C Swift Justice
+54 U Syncopate
+235 U Tablet of the Guilds
+79 U Tavern Swindler
+202 U Teleportal
+248 R Temple Garden
+108 C Tenement Crasher
+80 C Terrus Wurm
+203 U Thoughtflare
+81 U Thrill-Kill Assassin
+55 C Tower Drake
+137 C Towering Indrik
+27 C Trained Caracal
+109 C Traitorous Instinct
+249 C Transguild Promenade
+204 U Treasured Find
+205 C Trestle Troll
+28 C Trostani's Judgment
+206 M Trostani, Selesnya's Voice
+82 U Ultimate Price
+83 R Underworld Connections
+138 C Urban Burgeoning
+110 M Utvara Hellkite
+111 U Vandalblast
+224 C Vassal Soul
+112 C Viashino Racketeer
+207 U Vitu-Ghazi Guildmage
+56 C Voidwielder
+236 R Volatile Rig
+208 M Vraska the Unseen
+209 R Wayfaring Temple
+139 R Wild Beastmaster
+140 M Worldspine Wurm
+84 U Zanikev Locust

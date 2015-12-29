@@ -6,44 +6,44 @@ Type=Premium_Deck_Series
 Alias=H09
 
 [cards]
-U Acidic Sliver
-C Amoeboid Changeling
-U Ancient Ziggurat
-C Aphetto Dredging
-U Armor Sliver
-U Barbed Sliver
-R Brood Sliver
-C Clot Sliver
-R Coat of Arms
-U Crystalline Sliver
-C Distant Melody
-L Forest
-C Frenzy Sliver
-R Fungus Sliver
-U Fury Sliver
-C Gemhide Sliver
-C Heart Sliver
-U Heartstone
-U Hibernation Sliver
-C Homing Sliver
-L Island
-C Metallic Sliver
-U Might Sliver
-L Mountain
-C Muscle Sliver
-U Necrotic Sliver
-L Plains
-C Quick Sliver
-R Rootbound Crag
-C Rupture Spire
-M Sliver Overlord
-U Spectral Sliver
-U Spined Sliver
-L Swamp
-C Terramorphic Expanse
-U Victual Sliver
-C Virulent Sliver
-U Vivid Creek
-U Vivid Grove
-R Wild Pair
-C Winged Sliver
+13 U Acidic Sliver
+3 C Amoeboid Changeling
+31 U Ancient Ziggurat
+28 C Aphetto Dredging
+16 U Armor Sliver
+18 U Barbed Sliver
+22 R Brood Sliver
+5 C Clot Sliver
+29 R Coat of Arms
+11 U Crystalline Sliver
+27 C Distant Melody
+41 L Forest
+6 C Frenzy Sliver
+21 R Fungus Sliver
+25 U Fury Sliver
+8 C Gemhide Sliver
+7 C Heart Sliver
+26 U Heartstone
+12 U Hibernation Sliver
+19 C Homing Sliver
+38 L Island
+1 C Metallic Sliver
+23 U Might Sliver
+40 L Mountain
+9 C Muscle Sliver
+20 U Necrotic Sliver
+37 L Plains
+10 C Quick Sliver
+32 R Rootbound Crag
+33 C Rupture Spire
+24 M Sliver Overlord
+17 U Spectral Sliver
+14 U Spined Sliver
+39 L Swamp
+34 C Terramorphic Expanse
+15 U Victual Sliver
+2 C Virulent Sliver
+35 U Vivid Creek
+36 U Vivid Grove
+30 R Wild Pair
+4 C Winged Sliver

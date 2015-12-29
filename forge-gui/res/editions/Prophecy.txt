@@ -10,146 +10,146 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-U Abolish
-C Agent of Shauku
-C Alexi's Cloak
-R Alexi, Zephyr Mage
-C Aura Fracture
-R Avatar of Fury
-R Avatar of Hope
-R Avatar of Might
-R Avatar of Will
-R Avatar of Woe
-U Barbed Field
-R Blessed Wind
-R Bog Elemental
-C Bog Glider
-C Branded Brawlers
-U Brutal Suppression
-C Calming Verse
-R Celestial Convergence
-U Chilling Apparition
-U Chimeric Idol
-U Citadel of Pain
-C Coastal Hornclaw
-R Coffin Puppets
-R Copper-Leaf Angel
-U Darba
-C Death Charmer
-R Denying Wind
-C Despoil
-C Devastate
-C Diving Griffin
-R Dual Nature
-R Elephant Resurgence
-U Endbringer's Revel
-U Entangler
-U Excavation
-C Excise
-C Fault Riders
-C Fen Stalker
-R Fickle Efreet
-U Flameshot
-C Flay
-U Flowering Field
-U Foil
-R Forgotten Harvest
-U Glittering Lion
-C Glittering Lynx
-C Greel's Caress
-R Greel, Mind Raker
-C Gulf Squid
-C Hazy Homunculus
-R Heightened Awareness
-U Hollow Warrior
-R Infernal Genesis
-C Inflame
-R Jeweled Spirit
-C Jolrael's Favor
-R Jolrael, Empress of Beasts
-U Keldon Arsonist
-R Keldon Battlewagon
-C Keldon Berserker
-R Keldon Firebombers
-C Latulla's Orders
-R Latulla, Keldon Overseer
-U Lesser Gargadon
-U Living Terrain
-R Mageta the Lion
-C Mageta's Boon
-U Mana Vapors
-C Marsh Boa
-R Mercenary Informer
-C Mine Bearer
-U Mirror Strike
-R Mungha Wurm
-U Nakaya Shade
-U Noxious Field
-U Outbreak
-R Overburden
-C Panic Attack
-U Pit Raptor
-C Plague Fiend
-R Plague Wind
-R Psychic Theft
-C Pygmy Razorback
-U Quicksilver Wall
-R Rebel Informer
-C Rethink
-U Reveille Squad
-U Rhystic Cave
-C Rhystic Circle
-C Rhystic Deluge
-C Rhystic Lightning
-U Rhystic Scrying
-C Rhystic Shield
-C Rhystic Study
-U Rhystic Syphon
-R Rhystic Tutor
-C Rib Cage Spider
-C Ribbon Snake
-C Ridgeline Rager
-U Root Cage
-R Samite Sanctuary
-U Scoria Cat
-R Search for Survivors
-R Searing Wind
-R Sheltering Prayers
-U Shield Dancer
-R Shrouded Serpent
-C Silt Crawler
-U Snag
-C Soul Charmer
-C Soul Strings
-U Spiketail Drake
-C Spiketail Hatchling
-U Spitting Spider
-C Spore Frog
-C Spur Grappler
-R Squirrel Wrangler
-C Steal Strength
-C Stormwatch Eagle
-U Sunken Field
-U Sword Dancer
-R Task Mage Assembly
-C Thresher Beast
-C Thrive
-C Trenching Steed
-C Troubled Healer
-R Troublesome Spirit
-U Verdant Field
-R Veteran Brawlers
-C Vintara Elephant
-U Vintara Snapper
-R Vitalizing Wind
-U Wall of Vipers
-R Well of Discovery
-U Well of Life
-U Whip Sergeant
-C Whipstitched Zombie
-C Wild Might
-U Windscouter
-U Wing Storm
-R Wintermoon Mesa
-C Withdraw
-C Zerapa Minotaur
+1 U Abolish
+55 C Agent of Shauku
+29 C Alexi's Cloak
+28 R Alexi, Zephyr Mage
+2 C Aura Fracture
+82 R Avatar of Fury
+3 R Avatar of Hope
+109 R Avatar of Might
+30 R Avatar of Will
+56 R Avatar of Woe
+83 U Barbed Field
+4 R Blessed Wind
+57 R Bog Elemental
+58 C Bog Glider
+84 C Branded Brawlers
+85 U Brutal Suppression
+110 C Calming Verse
+5 R Celestial Convergence
+59 U Chilling Apparition
+136 U Chimeric Idol
+86 U Citadel of Pain
+31 C Coastal Hornclaw
+60 R Coffin Puppets
+137 R Copper-Leaf Angel
+111 U Darba
+61 C Death Charmer
+32 R Denying Wind
+62 C Despoil
+87 C Devastate
+6 C Diving Griffin
+112 R Dual Nature
+113 R Elephant Resurgence
+63 U Endbringer's Revel
+7 U Entangler
+33 U Excavation
+8 C Excise
+88 C Fault Riders
+64 C Fen Stalker
+89 R Fickle Efreet
+90 U Flameshot
+65 C Flay
+9 U Flowering Field
+34 U Foil
+114 R Forgotten Harvest
+10 U Glittering Lion
+11 C Glittering Lynx
+67 C Greel's Caress
+66 R Greel, Mind Raker
+35 C Gulf Squid
+36 C Hazy Homunculus
+37 R Heightened Awareness
+138 U Hollow Warrior
+68 R Infernal Genesis
+91 C Inflame
+12 R Jeweled Spirit
+116 C Jolrael's Favor
+115 R Jolrael, Empress of Beasts
+92 U Keldon Arsonist
+139 R Keldon Battlewagon
+93 C Keldon Berserker
+94 R Keldon Firebombers
+96 C Latulla's Orders
+95 R Latulla, Keldon Overseer
+97 U Lesser Gargadon
+117 U Living Terrain
+13 R Mageta the Lion
+14 C Mageta's Boon
+38 U Mana Vapors
+118 C Marsh Boa
+15 R Mercenary Informer
+16 C Mine Bearer
+17 U Mirror Strike
+119 R Mungha Wurm
+69 U Nakaya Shade
+70 U Noxious Field
+71 U Outbreak
+39 R Overburden
+98 C Panic Attack
+72 U Pit Raptor
+73 C Plague Fiend
+74 R Plague Wind
+40 R Psychic Theft
+120 C Pygmy Razorback
+41 U Quicksilver Wall
+75 R Rebel Informer
+42 C Rethink
+18 U Reveille Squad
+142 U Rhystic Cave
+19 C Rhystic Circle
+43 C Rhystic Deluge
+99 C Rhystic Lightning
+44 U Rhystic Scrying
+20 C Rhystic Shield
+45 C Rhystic Study
+76 U Rhystic Syphon
+77 R Rhystic Tutor
+121 C Rib Cage Spider
+46 C Ribbon Snake
+100 C Ridgeline Rager
+122 U Root Cage
+21 R Samite Sanctuary
+101 U Scoria Cat
+102 R Search for Survivors
+103 R Searing Wind
+22 R Sheltering Prayers
+23 U Shield Dancer
+47 R Shrouded Serpent
+123 C Silt Crawler
+124 U Snag
+24 C Soul Charmer
+78 C Soul Strings
+48 U Spiketail Drake
+49 C Spiketail Hatchling
+125 U Spitting Spider
+126 C Spore Frog
+104 C Spur Grappler
+127 R Squirrel Wrangler
+79 C Steal Strength
+50 C Stormwatch Eagle
+51 U Sunken Field
+25 U Sword Dancer
+105 R Task Mage Assembly
+128 C Thresher Beast
+129 C Thrive
+26 C Trenching Steed
+27 C Troubled Healer
+52 R Troublesome Spirit
+130 U Verdant Field
+106 R Veteran Brawlers
+131 C Vintara Elephant
+132 U Vintara Snapper
+133 R Vitalizing Wind
+80 U Wall of Vipers
+140 R Well of Discovery
+141 U Well of Life
+107 U Whip Sergeant
+81 C Whipstitched Zombie
+134 C Wild Might
+53 U Windscouter
+135 U Wing Storm
+143 R Wintermoon Mesa
+54 C Withdraw
+108 C Zerapa Minotaur

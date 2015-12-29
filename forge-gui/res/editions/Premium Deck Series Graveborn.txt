@@ -5,33 +5,33 @@ Name=Premium Deck Series: Graveborn
 Type=Premium_Deck_Series
 
 [cards]
-U Animate Dead
-R Avatar of Woe
-R Blazing Archon
-U Buried Alive
-U Cabal Therapy
-R Crosis, the Purger
-U Crystal Vein
-U Diabolic Servitude
-U Dread Return
-C Duress
-U Ebon Stronghold
-R Entomb
-C Exhume
-C Faceless Butcher
-U Hidden Horror
-R Inkwell Leviathan
-C Last Rites
-C Polluted Mire
-C Putrid Imp
-U Reanimate
-U Sickening Dreams
-M Sphinx of the Steel Wind
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-R Terastodon
-C Twisted Abomination
-R Verdant Force
-U Zombie Infestation
+16 U Animate Dead
+6 R Avatar of Woe
+11 R Blazing Archon
+20 U Buried Alive
+12 U Cabal Therapy
+5 R Crosis, the Purger
+24 U Crystal Vein
+22 U Diabolic Servitude
+23 U Dread Return
+13 C Duress
+25 U Ebon Stronghold
+14 R Entomb
+17 C Exhume
+3 C Faceless Butcher
+2 U Hidden Horror
+10 R Inkwell Leviathan
+21 C Last Rites
+26 C Polluted Mire
+1 C Putrid Imp
+15 U Reanimate
+18 U Sickening Dreams
+9 M Sphinx of the Steel Wind
+28 L Swamp
+28 L Swamp
+28 L Swamp
+28 L Swamp
+7 R Terastodon
+4 C Twisted Abomination
+8 R Verdant Force
+19 U Zombie Infestation

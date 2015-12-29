@@ -9,183 +9,183 @@ BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
 
 [cards]
-C Aerie Ouphes
-R Altar Golem
-C Antler Skulkin
-R Archon of Justice
-R Ashling, the Extinguisher
-R Balefire Liege
-C Ballynock Trapper
-C Banishing Knack
-C Battlegate Mimic
-U Batwing Brume
-C Beckon Apparition
-U Belligerent Hatchling
-U Bloodied Ghost
-R Bloom Tender
-U Cache Raiders
-R Call the Skybreaker
-U Canker Abomination
-U Cankerous Thirst
-R Cascade Bluffs
-U Cauldron Haze
-C Cenn's Enlistment
-U Chaotic Backlash
-C Cinder Pyromancer
-C Clout of the Dominus
-R Cold-Eyed Selkie
-R Crackleburr
-U Crag Puca
-U Creakwood Ghoul
-R Creakwood Liege
-U Crumbling Ashes
-R Deathbringer Liege
-R Deity of Scars
-C Desecrator Hag
-R Divinity of Pride
-R Dominus of Fealty
-R Doomgape
-C Double Cleave
-C Drain the Well
-U Dream Fracture
-C Dream Thief
-C Duergar Assailant
-U Duergar Cave-Guard
-U Duergar Hedge-Mage
-U Duergar Mine-Captain
-U Duskdale Wurm
-C Edge of the Divinity
-R Endless Horizons
-U Endure
-R Evershrike
-R Fable of Wolf and Owl
-C Fang Skulkin
-C Favor of the Overbeing
-R Fetid Heath
-R Fiery Bombardment
-R Figure of Destiny
-C Fire at Will
-C Flame Jab
-U Flickerwisp
-R Flooded Grove
-C Gift of the Deity
-U Gilder Bairn
-R Glamerdye
-R Glen Elendra Archmage
-C Grazing Kelpie
-U Groundling Pouncer
-U Gwyllion Hedge-Mage
-U Hag Hedge-Mage
-R Hallowed Burial
-C Harvest Gwyllion
-U Hatchet Bully
-R Hateflayer
-U Hearthfire Hobgoblin
-C Heartlash Cinder
-R Helix Pinnacle
-C Hobgoblin Dragoon
-C Hoof Skulkin
-C Hotheaded Giant
-U Idle Thoughts
-U Impelled Giant
-U Indigo Faerie
-C Inside Out
-R Inundate
-U Invert the Skies
-C Jawbone Skulkin
-C Kithkin Spellduster
-C Kithkin Zealot
-R Leering Emblem
-R Light from Within
-U Lingering Tormentor
-U Loyal Gyrfalcon
-U Marshdrinker Giant
-C Merrow Bonegnawer
-C Merrow Levitator
-R Mindwrack Liege
-R Mirror Sheen
-C Monstrify
-U Moonhold
-R Murkfiend Liege
-R Necroskitter
-R Needle Specter
-C Nettle Sentinel
-R Nightmare Incursion
-C Nightsky Mimic
-C Nip Gwyllion
-R Nobilis of War
-C Noggle Bandit
-C Noggle Bridgebreaker
-U Noggle Hedge-Mage
-U Noggle Ransacker
-U Noxious Hatchling
-U Nucklavee
-C Odious Trow
-C Oona's Grace
-U Outrage Shaman
-R Overbeing of Myth
-U Patrol Signaler
-U Phosphorescent Feast
-R Primalcrux
-C Puncture Blast
-R Pyrrhic Revival
-U Quillspike
-C Raven's Crime
-U Razorfin Abolisher
-C Recumbent Bliss
-R Regal Force
-R Rekindled Flame
-C Rendclaw Trow
-U Restless Apparition
-R Rise of the Hobgoblins
-C Riverfall Mimic
-R Rugged Prairie
-R Sanity Grinding
-R Sapling of Colfenor
-U Savage Conception
-R Scarecrone
-C Scourge of the Nobilis
-U Selkie Hedge-Mage
-C Shell Skulkin
-C Shorecrasher Mimic
-U Shrewd Hatchling
-C Slippery Bogle
-C Smoldering Butcher
-C Snakeform
-U Soot Imp
-C Soul Reap
-U Soul Snuffers
-R Spirit of the Hearth
-U Spitemare
-R Spitting Image
-R Springjack Pasture
-U Springjack Shepherd
-U Stalker Hag
-R Stigma Lasher
-R Stillmoon Cavalier
-C Stream Hopper
-U Sturdy Hatchling
-U Suture Spirit
-U Swirling Spriggan
-U Syphon Life
-C Talara's Bane
-R Talara's Battalion
-U Talonrend
-R Thunderblust
-C Tilling Treefolk
-C Trapjaw Kelpie
-R Twilight Mire
-U Twinblade Slasher
-R Umbra Stalker
-C Unmake
-U Unnerving Assault
-U Unwilling Recruit
-U Voracious Hatchling
-R Wake Thrasher
-R Ward of Bones
-R Waves of Aggression
-C Wickerbough Elder
-C Wilderness Hypnotist
-U Wistful Selkie
-C Woodlurker Mimic
-R Worm Harvest
+65 C Aerie Ouphes
+166 R Altar Golem
+167 C Antler Skulkin
+1 R Archon of Justice
+33 R Ashling, the Extinguisher
+132 R Balefire Liege
+2 C Ballynock Trapper
+17 C Banishing Knack
+133 C Battlegate Mimic
+81 U Batwing Brume
+82 C Beckon Apparition
+134 U Belligerent Hatchling
+83 U Bloodied Ghost
+66 R Bloom Tender
+18 U Cache Raiders
+98 R Call the Skybreaker
+115 U Canker Abomination
+116 U Cankerous Thirst
+175 R Cascade Bluffs
+84 U Cauldron Haze
+3 C Cenn's Enlistment
+49 U Chaotic Backlash
+50 C Cinder Pyromancer
+99 C Clout of the Dominus
+149 R Cold-Eyed Selkie
+100 R Crackleburr
+101 U Crag Puca
+34 U Creakwood Ghoul
+117 R Creakwood Liege
+35 U Crumbling Ashes
+85 R Deathbringer Liege
+118 R Deity of Scars
+119 C Desecrator Hag
+86 R Divinity of Pride
+102 R Dominus of Fealty
+120 R Doomgape
+135 C Double Cleave
+121 C Drain the Well
+19 U Dream Fracture
+20 C Dream Thief
+136 C Duergar Assailant
+51 U Duergar Cave-Guard
+137 U Duergar Hedge-Mage
+138 U Duergar Mine-Captain
+67 U Duskdale Wurm
+87 C Edge of the Divinity
+4 R Endless Horizons
+5 U Endure
+88 R Evershrike
+150 R Fable of Wolf and Owl
+168 C Fang Skulkin
+151 C Favor of the Overbeing
+176 R Fetid Heath
+52 R Fiery Bombardment
+139 R Figure of Destiny
+140 C Fire at Will
+53 C Flame Jab
+6 U Flickerwisp
+177 R Flooded Grove
+122 C Gift of the Deity
+152 U Gilder Bairn
+21 R Glamerdye
+22 R Glen Elendra Archmage
+153 C Grazing Kelpie
+154 U Groundling Pouncer
+89 U Gwyllion Hedge-Mage
+123 U Hag Hedge-Mage
+7 R Hallowed Burial
+90 C Harvest Gwyllion
+54 U Hatchet Bully
+55 R Hateflayer
+141 U Hearthfire Hobgoblin
+56 C Heartlash Cinder
+68 R Helix Pinnacle
+142 C Hobgoblin Dragoon
+169 C Hoof Skulkin
+57 C Hotheaded Giant
+23 U Idle Thoughts
+58 U Impelled Giant
+24 U Indigo Faerie
+103 C Inside Out
+25 R Inundate
+155 U Invert the Skies
+170 C Jawbone Skulkin
+8 C Kithkin Spellduster
+9 C Kithkin Zealot
+171 R Leering Emblem
+10 R Light from Within
+36 U Lingering Tormentor
+11 U Loyal Gyrfalcon
+69 U Marshdrinker Giant
+37 C Merrow Bonegnawer
+26 C Merrow Levitator
+104 R Mindwrack Liege
+105 R Mirror Sheen
+70 C Monstrify
+143 U Moonhold
+156 R Murkfiend Liege
+38 R Necroskitter
+39 R Needle Specter
+71 C Nettle Sentinel
+40 R Nightmare Incursion
+91 C Nightsky Mimic
+92 C Nip Gwyllion
+144 R Nobilis of War
+106 C Noggle Bandit
+107 C Noggle Bridgebreaker
+108 U Noggle Hedge-Mage
+109 U Noggle Ransacker
+124 U Noxious Hatchling
+110 U Nucklavee
+125 C Odious Trow
+27 C Oona's Grace
+59 U Outrage Shaman
+157 R Overbeing of Myth
+12 U Patrol Signaler
+72 U Phosphorescent Feast
+73 R Primalcrux
+60 C Puncture Blast
+93 R Pyrrhic Revival
+126 U Quillspike
+41 C Raven's Crime
+28 U Razorfin Abolisher
+13 C Recumbent Bliss
+74 R Regal Force
+61 R Rekindled Flame
+127 C Rendclaw Trow
+94 U Restless Apparition
+145 R Rise of the Hobgoblins
+111 C Riverfall Mimic
+178 R Rugged Prairie
+29 R Sanity Grinding
+128 R Sapling of Colfenor
+75 U Savage Conception
+172 R Scarecrone
+146 C Scourge of the Nobilis
+158 U Selkie Hedge-Mage
+173 C Shell Skulkin
+159 C Shorecrasher Mimic
+112 U Shrewd Hatchling
+160 C Slippery Bogle
+42 C Smoldering Butcher
+161 C Snakeform
+43 U Soot Imp
+44 C Soul Reap
+45 U Soul Snuffers
+14 R Spirit of the Hearth
+147 U Spitemare
+162 R Spitting Image
+179 R Springjack Pasture
+15 U Springjack Shepherd
+129 U Stalker Hag
+62 R Stigma Lasher
+95 R Stillmoon Cavalier
+113 C Stream Hopper
+163 U Sturdy Hatchling
+16 U Suture Spirit
+76 U Swirling Spriggan
+46 U Syphon Life
+47 C Talara's Bane
+77 R Talara's Battalion
+30 U Talonrend
+63 R Thunderblust
+78 C Tilling Treefolk
+164 C Trapjaw Kelpie
+180 R Twilight Mire
+79 U Twinblade Slasher
+48 R Umbra Stalker
+96 C Unmake
+114 U Unnerving Assault
+64 U Unwilling Recruit
+97 U Voracious Hatchling
+31 R Wake Thrasher
+174 R Ward of Bones
+148 R Waves of Aggression
+80 C Wickerbough Elder
+32 C Wilderness Hypnotist
+165 U Wistful Selkie
+130 C Woodlurker Mimic
+131 R Worm Harvest

@@ -8,148 +8,148 @@ BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
 
 [cards]
-U Anathemancer
-C Architects of Will
-U Ardent Plea
-C Arsenal Thresher
-R Aven Mimeomancer
-C Bant Sojourners
-C Bant Sureblade
-U Behemoth Sledge
-U Bituminous Blast
-R Blitz Hellion
-U Bloodbraid Elf
-C Brainbite
-C Breath of Malfegor
-C Captured Sunlight
-C Cerodon Yearling
-R Cloven Casting
-C Colossal Might
-C Crystallization
-R Dauntless Escort
-C Deadshot Minotaur
-R Deathbringer Thoctar
-M Defiler of Souls
-C Demonic Dread
-U Demonspine Whip
-C Deny Reality
-U Double Negative
-U Dragon Appeasement
-M Dragon Broodmother
-U Drastic Revelation
-R Enigma Sphinx
-U Enlisted Wurm
-C Esper Sojourners
-C Esper Stormblade
-C Ethercaste Knight
-C Etherium Abomination
-C Ethersworn Shieldmage
-U Etherwrought Page
-C Fieldmist Borderpost
-R Fight to the Death
-R Filigree Angel
-R Finest Hour
-C Firewild Borderpost
-U Flurry of Wings
-U Giant Ambush Beetle
-C Glassdust Hulk
-R Glory of Warfare
-U Gloryscale Viashino
-C Godtracker of Jund
-C Gorger Wurm
-C Grixis Grimblade
-C Grixis Sojourners
-C Grizzled Leotau
-R Identity Crisis
-C Igneous Pouncer
-U Illusory Demon
-U Intimidation Bolt
-M Jenara, Asura of War
-C Jhessian Zombies
-C Jund Hackblade
-C Jund Sojourners
-M Karrthus, Tyrant of Jund
-C Kathari Bomber
-U Kathari Remnant
-R Knight of New Alara
-R Knotvine Paladin
-R Lavalanche
-C Leonin Armorguard
-R Lich Lord of Unx
-R Lightning Reaver
-M Lord of Extinction
-U Lorescale Coatl
-R Madrush Cyclops
-M Maelstrom Nexus
-R Maelstrom Pulse
-U Mage Slayer
-C Magefire Wings
-U Marisi's Twinclaws
-U Marrow Chomper
-U Mask of Riddles
-R Mayael's Aria
-R Meddling Mage
-U Messenger Falcons
-U Mind Funeral
-C Mistvein Borderpost
-C Monstrous Carabid
-U Morbid Bloom
-R Mycoid Shepherd
-C Naya Hushblade
-C Naya Sojourners
-R Necromancer's Covenant
-R Nemesis of Reason
-U Nulltread Gargantuan
-C Offering to Asha
-C Pale Recluse
-R Predatory Advantage
-C Putrid Leech
-C Qasali Pridemage
-U Reborn Hope
-R Retaliator Griffin
-C Rhox Brute
-R Sages of the Anima
-C Sanctum Plowbeast
-C Sangrite Backlash
-U Sanity Gnawers
-M Sen Triplets
-C Sewn-Eye Drake
-U Shield of the Righteous
-U Sigil Captain
-C Sigil of the Nayan Gods
-C Sigiled Behemoth
-C Singe-Mind Ogre
-U Skyclaw Thrash
-U Slave of Bolas
-C Soul Manipulation
-R Soulquake
-R Sovereigns of Lost Alara
-R Spellbound Dragon
-R Spellbreaker Behemoth
-M Sphinx of the Steel Wind
-C Stormcaller's Boon
-U Stun Sniper
-U Tainted Sigil
-C Talon Trooper
-C Terminate
-U Thopter Foundry
-R Thought Hemorrhage
-M Thraximundar
-R Time Sieve
-C Trace of Abundance
-U Unbender Tine
-R Unscythe, Killer of Kings
-M Uril, the Miststalker
-C Valley Rannet
-C Vectis Dominator
-C Vedalken Ghoul
-R Vedalken Heretic
-C Veinfire Borderpost
-U Vengeful Rebirth
-C Violent Outburst
-U Vithian Renegades
-U Wall of Denial
-R Wargate
-C Wildfield Borderpost
-C Winged Coatl
-U Zealous Persecution
+33 U Anathemancer
+17 C Architects of Will
+1 U Ardent Plea
+131 C Arsenal Thresher
+2 R Aven Mimeomancer
+125 C Bant Sojourners
+143 C Bant Sureblade
+65 U Behemoth Sledge
+34 U Bituminous Blast
+49 R Blitz Hellion
+50 U Bloodbraid Elf
+18 C Brainbite
+35 C Breath of Malfegor
+66 C Captured Sunlight
+96 C Cerodon Yearling
+86 R Cloven Casting
+51 C Colossal Might
+144 C Crystallization
+67 R Dauntless Escort
+52 C Deadshot Minotaur
+36 R Deathbringer Thoctar
+37 M Defiler of Souls
+38 C Demonic Dread
+39 U Demonspine Whip
+19 C Deny Reality
+87 U Double Negative
+115 U Dragon Appeasement
+53 M Dragon Broodmother
+111 U Drastic Revelation
+106 R Enigma Sphinx
+68 U Enlisted Wurm
+107 C Esper Sojourners
+132 C Esper Stormblade
+3 C Ethercaste Knight
+20 C Etherium Abomination
+4 C Ethersworn Shieldmage
+108 U Etherwrought Page
+5 C Fieldmist Borderpost
+97 R Fight to the Death
+6 R Filigree Angel
+126 R Finest Hour
+54 C Firewild Borderpost
+127 U Flurry of Wings
+137 U Giant Ambush Beetle
+7 C Glassdust Hulk
+98 R Glory of Warfare
+120 U Gloryscale Viashino
+55 C Godtracker of Jund
+56 C Gorger Wurm
+134 C Grixis Grimblade
+112 C Grixis Sojourners
+69 C Grizzled Leotau
+81 R Identity Crisis
+40 C Igneous Pouncer
+21 U Illusory Demon
+99 U Intimidation Bolt
+128 M Jenara, Asura of War
+22 C Jhessian Zombies
+138 C Jund Hackblade
+116 C Jund Sojourners
+117 M Karrthus, Tyrant of Jund
+41 C Kathari Bomber
+23 U Kathari Remnant
+70 R Knight of New Alara
+71 R Knotvine Paladin
+118 R Lavalanche
+72 C Leonin Armorguard
+24 R Lich Lord of Unx
+42 R Lightning Reaver
+91 M Lord of Extinction
+101 U Lorescale Coatl
+119 R Madrush Cyclops
+130 M Maelstrom Nexus
+92 R Maelstrom Pulse
+57 U Mage Slayer
+88 C Magefire Wings
+140 U Marisi's Twinclaws
+93 U Marrow Chomper
+25 U Mask of Riddles
+121 R Mayael's Aria
+8 R Meddling Mage
+145 U Messenger Falcons
+26 U Mind Funeral
+27 C Mistvein Borderpost
+43 C Monstrous Carabid
+94 U Morbid Bloom
+73 R Mycoid Shepherd
+141 C Naya Hushblade
+122 C Naya Sojourners
+82 R Necromancer's Covenant
+28 R Nemesis of Reason
+102 U Nulltread Gargantuan
+9 C Offering to Asha
+74 C Pale Recluse
+58 R Predatory Advantage
+95 C Putrid Leech
+75 C Qasali Pridemage
+76 U Reborn Hope
+123 R Retaliator Griffin
+59 C Rhox Brute
+103 R Sages of the Anima
+10 C Sanctum Plowbeast
+139 C Sangrite Backlash
+44 U Sanity Gnawers
+109 M Sen Triplets
+135 C Sewn-Eye Drake
+11 U Shield of the Righteous
+77 U Sigil Captain
+78 C Sigil of the Nayan Gods
+79 C Sigiled Behemoth
+45 C Singe-Mind Ogre
+89 U Skyclaw Thrash
+136 U Slave of Bolas
+29 C Soul Manipulation
+30 R Soulquake
+12 R Sovereigns of Lost Alara
+90 R Spellbound Dragon
+60 R Spellbreaker Behemoth
+110 M Sphinx of the Steel Wind
+13 C Stormcaller's Boon
+100 U Stun Sniper
+83 U Tainted Sigil
+14 C Talon Trooper
+46 C Terminate
+133 U Thopter Foundry
+47 R Thought Hemorrhage
+113 M Thraximundar
+31 R Time Sieve
+142 C Trace of Abundance
+15 U Unbender Tine
+114 R Unscythe, Killer of Kings
+124 M Uril, the Miststalker
+61 C Valley Rannet
+84 C Vectis Dominator
+32 C Vedalken Ghoul
+104 R Vedalken Heretic
+48 C Veinfire Borderpost
+62 U Vengeful Rebirth
+63 C Violent Outburst
+64 U Vithian Renegades
+16 U Wall of Denial
+129 R Wargate
+80 C Wildfield Borderpost
+105 C Winged Coatl
+85 U Zealous Persecution

@@ -5,84 +5,84 @@ Name=Duel Decks: Knights vs. Dragons
 Type=Duel_Decks
 
 [cards]
-U Alaborn Cavalier
-C Armillary Sphere
-C Benalish Lancer
-U Bloodmark Mentor
-M Bogardan Hellkite
-C Bogardan Rager
-U Breath of Darigaaz
-U Captive Flame
-C Caravan Escort
-C Cinder Wall
-C Claws of Valakut
-U Cone of Flame
-C Dragon Fodder
-U Dragon Whelp
-U Dragon's Claw
-U Dragonspeaker Shaman
-C Edge of Autumn
-C Fiery Fall
-C Fire-Belly Changeling
-L Forest
-L Forest
-L Forest
-L Forest
-C Ghostfire
-U Grasslands
-U Griffin Guide
-U Harm's Way
-U Henge Guardian
-U Heroes' Reunion
-U Jaws of Stone
-U Juniper Order Ranger
-U Kabira Vindicator
-R Kilnmouth Dragon
-R Kinsbaile Cavalier
-R Knight Exemplar
-C Knight of Cliffhaven
-U Knight of Meadowgrain
-M Knight of the Reliquary
-R Knight of the White Orchid
-R Knotvine Paladin
-U Leonin Skyhunter
-C Lionheart Maverick
-R Loxodon Warhammer
-C Mighty Leap
-R Mordant Dragon
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-C Mudbutton Torchrunner
-C Oblivion Ring
-U Paladin of Prahv
-L Plains
-L Plains
-L Plains
-L Plains
-C Plover Knights
-U Punishing Fire
-U Reciprocate
-U Reprisal
-C Seething Song
-C Seismic Strike
-C Sejiri Steppe
-C Selesnya Sanctuary
-U Shiv's Embrace
-R Shivan Hellkite
-C Sigil Blessing
-U Silver Knight
-C Skirk Prospector
-C Skyhunter Patrol
-C Spidersilk Armor
-C Spitting Earth
-C Steward of Valeron
-U Temporary Insanity
-U Test of Faith
-R Thunder Dragon
-U Treetop Village
-R Voracious Dragon
-U White Knight
-U Wilt-Leaf Cavaliers
-U Zhalfirin Commander
+18 U Alaborn Cavalier
+62 C Armillary Sphere
+12 C Benalish Lancer
+50 U Bloodmark Mentor
+47 M Bogardan Hellkite
+57 C Bogardan Rager
+64 U Breath of Darigaaz
+68 U Captive Flame
+2 C Caravan Escort
+48 C Cinder Wall
+72 C Claws of Valakut
+75 U Cone of Flame
+65 C Dragon Fodder
+54 U Dragon Whelp
+63 U Dragon's Claw
+53 U Dragonspeaker Shaman
+25 C Edge of Autumn
+76 C Fiery Fall
+51 C Fire-Belly Changeling
+44 L Forest
+44 L Forest
+44 L Forest
+44 L Forest
+69 C Ghostfire
+35 U Grasslands
+33 U Griffin Guide
+23 U Harm's Way
+55 U Henge Guardian
+29 U Heroes' Reunion
+77 U Jaws of Stone
+21 U Juniper Order Ranger
+16 U Kabira Vindicator
+59 R Kilnmouth Dragon
+17 R Kinsbaile Cavalier
+14 R Knight Exemplar
+4 C Knight of Cliffhaven
+5 U Knight of Meadowgrain
+1 M Knight of the Reliquary
+6 R Knight of the White Orchid
+10 R Knotvine Paladin
+7 U Leonin Skyhunter
+3 C Lionheart Maverick
+31 R Loxodon Warhammer
+26 C Mighty Leap
+58 R Mordant Dragon
+78 L Mountain
+78 L Mountain
+78 L Mountain
+78 L Mountain
+52 C Mudbutton Torchrunner
+34 C Oblivion Ring
+22 U Paladin of Prahv
+42 L Plains
+42 L Plains
+42 L Plains
+42 L Plains
+20 C Plover Knights
+66 U Punishing Fire
+24 U Reciprocate
+27 U Reprisal
+70 C Seething Song
+71 C Seismic Strike
+36 C Sejiri Steppe
+37 C Selesnya Sanctuary
+74 U Shiv's Embrace
+60 R Shivan Hellkite
+30 C Sigil Blessing
+8 U Silver Knight
+49 C Skirk Prospector
+19 C Skyhunter Patrol
+32 C Spidersilk Armor
+67 C Spitting Earth
+11 C Steward of Valeron
+73 U Temporary Insanity
+28 U Test of Faith
+61 R Thunder Dragon
+38 U Treetop Village
+56 R Voracious Dragon
+9 U White Knight
+15 U Wilt-Leaf Cavaliers
+13 U Zhalfirin Commander

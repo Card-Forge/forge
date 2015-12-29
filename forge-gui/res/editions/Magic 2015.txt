@@ -8,287 +8,287 @@ BoosterCovers=5
 Booster=10 Common:!fromSheet("M15 Sample Cards"), 3 Uncommon:!fromSheet("M15 Sample Cards"), 1 RareMythic:!fromSheet("M15 Sample Cards"), 1 BasicLand
 
 [cards]
-M Ajani Steadfast
-U Ajani's Pridemate
-R Avacyn, Guardian Angel
-U Battle Mastery
-U Boonweaver Giant
-U Congregate
-U Constricting Sliver
-U Dauntless River Marshal
-U Devouring Light
-C Divine Favor
-C Ephemeral Shields
-U First Response
-U Geist of the Moors
-C Heliod's Pilgrim
-R Hushwing Gryff
-C Kinsbaile Skirmisher
-C Marked by Honor
-R Mass Calcify
-C Meditation Puzzle
-C Midnight Guard
-C Oppressive Rays
-C Oreskos Swiftclaw
-U Paragon of New Dawns
-C Pillar of Light
-R Preeminent Captain
-C Raise the Alarm
-C Razorfoot Griffin
-R Resolute Archangel
-R Return to the Ranks
-C Sanctified Charge
-C Selfless Cathar
-U Seraph of the Masses
-C Solemn Offering
-M Soul of Theros
-C Soulmender
-R Spectra Ward
-R Spirit Bonds
-C Sungrace Pegasus
-C Tireless Missionaries
-C Triplicate Spirits
-U Wall of Essence
-U Warden of the Beyond
-C Aeronaut Tinkerer
-R AEtherspouts
-C Amphin Pathmage
-R Chasm Skulker
-R Chief Engineer
-C Chronostutter
-C Coral Barrier
-U Diffusion Sliver
-U Dissipate
-C Divination
-C Encrust
-U Ensoul Artifact
-C Frost Lynx
-C Fugitive Wizard
-C Glacial Crasher
-C Hydrosurge
-U Illusory Angel
-U Into the Void
-C Invisibility
-M Jace, the Living Guildpact
-U Jace's Ingenuity
-R Jalira, Master Polymorphist
-U Jorubai Murk Lurker
-U Kapsho Kitefins
-R Master of Predicaments
-R Mercurial Pretender
-U Military Intelligence
-C Mind Sculpt
-C Negate
-C Nimbus of the Isles
-U Paragon of Gathering Mists
-C Peel from Reality
-R Polymorphist's Jest
-U Quickling
-C Research Assistant
-M Soul of Ravnica
-C Statute of Denial
-R Stormtide Leviathan
-U Turn to Frog
-C Void Snare
-U Wall of Frost
-C Welkin Tern
-C Accursed Spirit
-C Black Cat
-U Blood Host
-C Carrion Crow
-U Caustic Tar
-C Child of Night
-C Covenant of Blood
-C Crippling Blight
-R Cruel Sadist
-U Endless Obedience
-C Eternal Thirst
-U Feast on the Fallen
-C Festergloom
-C Flesh to Dust
-U Gravedigger
-R In Garruk's Wake
-R Indulgent Tormentor
-U Leeching Sliver
-M Liliana Vess
-C Mind Rot
-C Necrobite
-U Necrogen Scudder
-C Necromancer's Assistant
-R Necromancer's Stockpile
-U Nightfire Giant
-R Ob Nixilis, Unshackled
-U Paragon of Open Graves
-C Rotfeaster Maggot
-C Shadowcloak Vampire
-C Sign in Blood
-M Soul of Innistrad
-U Stab Wound
-R Stain the Mind
-C Typhoid Rats
-U Ulcerate
-C Unmake the Graves
-U Wall of Limbs
-R Waste Not
-C Witch's Familiar
-U Xathrid Slyblade
-C Zof Shade
-U Act on Impulse
-R Aggressive Mining
-U Altac Bloodseeker
-U Belligerent Sliver
-C Blastfire Bolt
-C Borderland Marauder
-U Brood Keeper
-R Burning Anger
-M Chandra, Pyromaster
-U Circle of Flame
-C Clear a Path
-U Cone of Flame
-C Crowd's Favor
-R Crucible of Fire
-C Forge Devil
-C Foundry Street Denizen
-U Frenzied Goblin
-C Generator Servant
-R Goblin Kaboomist
-R Goblin Rabblemaster
-C Goblin Roughrider
-C Hammerhand
-U Heat Ray
-R Hoarding Dragon
-C Inferno Fist
-U Kird Chieftain
-C Krenko's Enforcer
-R Kurkesh, Onakke Ancient
-C Lava Axe
-C Lightning Strike
-U Might Makes Right
-C Miner's Bane
-U Paragon of Fierce Defiance
-C Rummaging Goblin
-C Scrapyard Mongrel
-U Shrapnel Blast
-R Siege Dragon
-M Soul of Shandalar
-U Stoke the Flames
-C Thundering Giant
-C Torch Fiend
-C Wall of Fire
-U Ancient Silverback
-U Back to Nature
-C Carnivorous Moss-Beast
-C Charging Rhino
-R Chord of Calling
-C Elvish Mystic
-U Feral Incarnation
-U Gather Courage
-R Genesis Hydra
-R Hornet Nest
-R Hornet Queen
-C Hunt the Weak
-C Hunter's Ambush
-C Invasive Species
-R Kalonian Twingrove
-R Life's Legacy
-C Living Totem
-C Naturalize
-C Netcaster Spider
-M Nissa, Worldwaker
-U Nissa's Expedition
-U Overwhelm
-U Paragon of Eternal Wilds
-R Phytotitan
-C Plummet
-C Ranger's Guile
-U Reclamation Sage
-U Restock
-U Roaring Primadox
-C Runeclaw Bear
-C Satyr Wayfinder
-C Shaman of Spring
-C Siege Wurm
-M Soul of Zendikar
-U Sunblade Elf
-C Titanic Growth
-C Undergrowth Scavenger
-U Venom Sliver
-C Verdant Haven
-C Vineweft
-U Wall of Mulch
-R Yisan, the Wanderer Bard
-M Garruk, Apex Predator
-M Sliver Hivelord
-R Avarice Amulet
-U Brawler's Plate
-C Bronze Sable
-M The Chain Veil
-U Gargoyle Sentinel
-R Grindclock
-R Haunted Plate Mail
-U Hot Soup
-U Juggernaut
-U Meteorite
-R Obelisk of Urd
-C Ornithopter
-M Perilous Vault
-R Phyrexian Revoker
-U Profane Memento
-U Rogue's Gloves
-U Sacred Armory
-R Scuttling Doom Engine
-R Shield of the Avatar
-M Soul of New Phyrexia
-U Staff of the Death Magus
-U Staff of the Flame Magus
-U Staff of the Mind Magus
-U Staff of the Sun Magus
-U Staff of the Wild Magus
-U Tormod's Crypt
-C Tyrant's Machine
-C Will-Forged Golem
-R Battlefield Forge
-R Caves of Koilos
-U Darksteel Citadel
-C Evolving Wilds
-R Llanowar Wastes
-C Radiant Fountain
-R Shivan Reef
-R Sliver Hive
-R Urborg, Tomb of Yawgmoth
-R Yavimaya Coast
-L Plains
-L Plains
-L Plains
-L Plains
-L Island
-L Island
-L Island
-L Island
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Forest
-L Forest
-L Forest
-L Forest
-R Aegis Angel
-C Divine Verdict
-C Inspired Charge
-U Serra Angel
-C Cancel
-R Mahamoti Djinn
-R Nightmare
-U Sengir Vampire
-C Walking Corpse
-U Furnace Whelp
-C Seismic Strike
-R Shivan Dragon
-C Centaur Courser
-U Garruk's Packleader
-R Terra Stomper
+1 M Ajani Steadfast
+2 U Ajani's Pridemate
+3 R Avacyn, Guardian Angel
+4 U Battle Mastery
+5 U Boonweaver Giant
+6 U Congregate
+7 U Constricting Sliver
+8 U Dauntless River Marshal
+9 U Devouring Light
+10 C Divine Favor
+11 C Ephemeral Shields
+12 U First Response
+13 U Geist of the Moors
+14 C Heliod's Pilgrim
+15 R Hushwing Gryff
+16 C Kinsbaile Skirmisher
+17 C Marked by Honor
+18 R Mass Calcify
+19 C Meditation Puzzle
+20 C Midnight Guard
+21 C Oppressive Rays
+22 C Oreskos Swiftclaw
+23 U Paragon of New Dawns
+24 C Pillar of Light
+25 R Preeminent Captain
+26 C Raise the Alarm
+27 C Razorfoot Griffin
+28 R Resolute Archangel
+29 R Return to the Ranks
+30 C Sanctified Charge
+31 C Selfless Cathar
+32 U Seraph of the Masses
+33 C Solemn Offering
+34 M Soul of Theros
+35 C Soulmender
+36 R Spectra Ward
+37 R Spirit Bonds
+38 C Sungrace Pegasus
+39 C Tireless Missionaries
+40 C Triplicate Spirits
+41 U Wall of Essence
+42 U Warden of the Beyond
+43 C Aeronaut Tinkerer
+44 R AEtherspouts
+45 C Amphin Pathmage
+46 R Chasm Skulker
+47 R Chief Engineer
+48 C Chronostutter
+49 C Coral Barrier
+50 U Diffusion Sliver
+51 U Dissipate
+52 C Divination
+53 C Encrust
+54 U Ensoul Artifact
+55 C Frost Lynx
+56 C Fugitive Wizard
+57 C Glacial Crasher
+58 C Hydrosurge
+59 U Illusory Angel
+60 U Into the Void
+61 C Invisibility
+62 M Jace, the Living Guildpact
+63 U Jace's Ingenuity
+64 R Jalira, Master Polymorphist
+65 U Jorubai Murk Lurker
+66 U Kapsho Kitefins
+67 R Master of Predicaments
+68 R Mercurial Pretender
+69 U Military Intelligence
+70 C Mind Sculpt
+71 C Negate
+72 C Nimbus of the Isles
+73 U Paragon of Gathering Mists
+74 C Peel from Reality
+75 R Polymorphist's Jest
+76 U Quickling
+77 C Research Assistant
+78 M Soul of Ravnica
+79 C Statute of Denial
+80 R Stormtide Leviathan
+81 U Turn to Frog
+82 C Void Snare
+83 U Wall of Frost
+84 C Welkin Tern
+85 C Accursed Spirit
+86 C Black Cat
+87 U Blood Host
+88 C Carrion Crow
+89 U Caustic Tar
+90 C Child of Night
+91 C Covenant of Blood
+92 C Crippling Blight
+93 R Cruel Sadist
+94 U Endless Obedience
+95 C Eternal Thirst
+96 U Feast on the Fallen
+97 C Festergloom
+98 C Flesh to Dust
+99 U Gravedigger
+100 R In Garruk's Wake
+101 R Indulgent Tormentor
+102 U Leeching Sliver
+103 M Liliana Vess
+104 C Mind Rot
+105 C Necrobite
+106 U Necrogen Scudder
+107 C Necromancer's Assistant
+108 R Necromancer's Stockpile
+109 U Nightfire Giant
+110 R Ob Nixilis, Unshackled
+111 U Paragon of Open Graves
+112 C Rotfeaster Maggot
+113 C Shadowcloak Vampire
+114 C Sign in Blood
+115 M Soul of Innistrad
+116 U Stab Wound
+117 R Stain the Mind
+118 C Typhoid Rats
+119 U Ulcerate
+120 C Unmake the Graves
+121 U Wall of Limbs
+122 R Waste Not
+123 C Witch's Familiar
+124 U Xathrid Slyblade
+125 C Zof Shade
+126 U Act on Impulse
+127 R Aggressive Mining
+128 U Altac Bloodseeker
+129 U Belligerent Sliver
+130 C Blastfire Bolt
+131 C Borderland Marauder
+132 U Brood Keeper
+133 R Burning Anger
+134 M Chandra, Pyromaster
+135 U Circle of Flame
+136 C Clear a Path
+137 U Cone of Flame
+138 C Crowd's Favor
+139 R Crucible of Fire
+140 C Forge Devil
+141 C Foundry Street Denizen
+142 U Frenzied Goblin
+143 C Generator Servant
+144 R Goblin Kaboomist
+145 R Goblin Rabblemaster
+146 C Goblin Roughrider
+147 C Hammerhand
+148 U Heat Ray
+149 R Hoarding Dragon
+150 C Inferno Fist
+151 U Kird Chieftain
+152 C Krenko's Enforcer
+153 R Kurkesh, Onakke Ancient
+154 C Lava Axe
+155 C Lightning Strike
+156 U Might Makes Right
+157 C Miner's Bane
+158 U Paragon of Fierce Defiance
+159 C Rummaging Goblin
+160 C Scrapyard Mongrel
+161 U Shrapnel Blast
+162 R Siege Dragon
+163 M Soul of Shandalar
+164 U Stoke the Flames
+165 C Thundering Giant
+166 C Torch Fiend
+167 C Wall of Fire
+168 U Ancient Silverback
+169 U Back to Nature
+170 C Carnivorous Moss-Beast
+171 C Charging Rhino
+172 R Chord of Calling
+173 C Elvish Mystic
+174 U Feral Incarnation
+175 U Gather Courage
+176 R Genesis Hydra
+177 R Hornet Nest
+178 R Hornet Queen
+179 C Hunt the Weak
+180 C Hunter's Ambush
+181 C Invasive Species
+182 R Kalonian Twingrove
+183 R Life's Legacy
+184 C Living Totem
+185 C Naturalize
+186 C Netcaster Spider
+187 M Nissa, Worldwaker
+188 U Nissa's Expedition
+189 U Overwhelm
+190 U Paragon of Eternal Wilds
+191 R Phytotitan
+192 C Plummet
+193 C Ranger's Guile
+194 U Reclamation Sage
+195 U Restock
+196 U Roaring Primadox
+197 C Runeclaw Bear
+198 C Satyr Wayfinder
+199 C Shaman of Spring
+200 C Siege Wurm
+201 M Soul of Zendikar
+202 U Sunblade Elf
+203 C Titanic Growth
+204 C Undergrowth Scavenger
+205 U Venom Sliver
+206 C Verdant Haven
+207 C Vineweft
+208 U Wall of Mulch
+209 R Yisan, the Wanderer Bard
+210 M Garruk, Apex Predator
+211 M Sliver Hivelord
+212 R Avarice Amulet
+213 U Brawler's Plate
+214 C Bronze Sable
+215 M The Chain Veil
+216 U Gargoyle Sentinel
+217 R Grindclock
+218 R Haunted Plate Mail
+219 U Hot Soup
+220 U Juggernaut
+221 U Meteorite
+222 R Obelisk of Urd
+223 C Ornithopter
+224 M Perilous Vault
+225 R Phyrexian Revoker
+226 U Profane Memento
+227 U Rogue's Gloves
+228 U Sacred Armory
+229 R Scuttling Doom Engine
+230 R Shield of the Avatar
+231 M Soul of New Phyrexia
+232 U Staff of the Death Magus
+233 U Staff of the Flame Magus
+234 U Staff of the Mind Magus
+235 U Staff of the Sun Magus
+236 U Staff of the Wild Magus
+237 U Tormod's Crypt
+238 C Tyrant's Machine
+239 C Will-Forged Golem
+240 R Battlefield Forge
+241 R Caves of Koilos
+242 U Darksteel Citadel
+243 C Evolving Wilds
+244 R Llanowar Wastes
+245 C Radiant Fountain
+246 R Shivan Reef
+247 R Sliver Hive
+248 R Urborg, Tomb of Yawgmoth
+249 R Yavimaya Coast
+251 L Plains
+251 L Plains
+251 L Plains
+251 L Plains
+255 L Island
+255 L Island
+255 L Island
+255 L Island
+258 L Swamp
+258 L Swamp
+258 L Swamp
+258 L Swamp
+263 L Mountain
+263 L Mountain
+263 L Mountain
+263 L Mountain
+266 L Forest
+266 L Forest
+266 L Forest
+266 L Forest
+270 R Aegis Angel
+271 C Divine Verdict
+272 C Inspired Charge
+273 U Serra Angel
+274 C Cancel
+275 R Mahamoti Djinn
+276 R Nightmare
+277 U Sengir Vampire
+278 C Walking Corpse
+279 U Furnace Whelp
+280 C Seismic Strike
+281 R Shivan Dragon
+282 C Centaur Courser
+283 U Garruk's Packleader
+284 R Terra Stomper

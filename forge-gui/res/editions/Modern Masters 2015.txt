@@ -8,252 +8,252 @@ Booster=11 Common, 3 Uncommon, 1 RareMythic
 FoilChanceInBooster=100
 
 [cards]
-R All Is Dust
-U Artisan of Kozilek
-M Emrakul, the Aeons Torn
-M Karn Liberated
-M Kozilek, Butcher of Truth
-M Ulamog, the Infinite Gyre
-C Ulamog's Crusher
-C Apostle's Blessing
-C Arrest
-R Battlegrace Angel
-U Celestial Purge
-C Conclave Phalanx
-C Court Homunculus
-R Daybreak Coronet
-U Dispatch
-M Elesh Norn, Grand Cenobite
-C Fortify
-U Hikari, Twilight Guardian
-R Indomitable Archangel
-M Iona, Shield of Emeria
-C Kami of Ancient Law
-U Kor Duelist
-R Leyline of Sanctity
-C Mighty Leap
-R Mirran Crusader
-R Mirror Entity
-C Moonlit Strider
-U Myrsmith
-U Oblivion Ring
-C Otherworldly Journey
-C Raise the Alarm
-C Skyhunter Skirmisher
-U Spectral Procession
-C Sunlance
-C Sunspear Shikari
-U Taj-Nar Swordsmith
-C Terashi's Grasp
-C Waxmane Baku
-C AEthersnipe
-U Air Servant
-R Argent Sphinx
-C Cloud Elemental
-R Cryptic Command
-C Faerie Mechanist
-U Flashfreeze
-R Guile
-C Helium Squirter
-R Hurkyl's Recall
-R Inexorable Tide
-C Mana Leak
-U Mulldrifter
-C Narcolepsy
-U Novijen Sages
-U Qumulox
-U Remand
-C Repeal
-C Somber Hoverguard
-C Steady Progress
-C Stoic Rebuttal
-R Surrakar Spellblade
-C Telling Time
-M Tezzeret the Seeker
-U Tezzeret's Gambit
-C Thoughtcast
-C Thrummingbird
-C Vapor Snag
-M Vendilion Clique
-C Vigean Graftmage
-U Water Servant
-C Wings of Velis Vel
-M Bitterblossom
-C Bloodthrone Vampire
-C Bone Splinters
-U Daggerclaw Imp
-M Dark Confidant
-C Death Denied
-U Deathmark
-U Devouring Greed
-U Dismember
-C Dread Drone
-C Duskhunter Bat
-R Endrek Sahr, Master Breeder
-C Ghostly Changeling
-C Grim Affliction
-C Instill Infection
-R Midnight Banshee
-C Nameless Inversion
-R Necroskitter
-C Plagued Rusalka
-R Profane Command
-R Puppeteer Clique
-U Reassembling Skeleton
-U Scavenger Drake
-C Scuttling Death
-C Shrivel
-C Sickle Ripper
-C Sign in Blood
-U Spread the Sickness
-R Surgical Extraction
-C Thief of Hope
-C Vampire Lacerator
-U Vampire Outcasts
-C Waking Nightmare
-R Banefire
-C Blades of Velis Vel
-C Blood Ogre
-U Bloodshot Trainee
-C Brute Force
-C Burst Lightning
-U Combust
-M Comet Storm
-C Dragonsoul Knight
-C Fiery Fall
-C Goblin Fireslinger
-C Goblin War Paint
-C Gorehorn Minotaurs
-C Gut Shot
-R Hellkite Charger
-U Incandescent Soulstoke
-C Inner-Flame Igniter
-M Kiki-Jiki, Mirror Breaker
-U Lightning Bolt
-U Skarrgan Firebird
-C Smash to Smithereens
-C Smokebraider
-C Soulbright Flamekin
-R Spikeshot Elder
-U Spitebellows
-R Splinter Twin
-U Stormblood Berserker
-R Thunderblust
-C Tribal Flames
-C Viashino Slaughtermaster
-R Wildfire
-U Worldheart Phoenix
-C Wrap in Flames
-U Algae Gharial
-R All Suns' Dawn
-R Ant Queen
-C Aquastrand Spider
-U Bestial Menace
-C Commune with Nature
-U Cytoplast Root-Kin
-C Gnarlid Pack
-U Karplusan Strider
-C Kavu Primarch
-C Kozilek's Predator
-C Matca Rioters
-U Mutagenic Growth
-C Nest Invader
-R Noble Hierarch
-U Overwhelm
-R Overwhelming Stampede
-U Pelakka Wurm
-C Plummet
-M Primeval Titan
-C Rampant Growth
-U Root-Kin Ally
-C Scatter the Seeds
-C Scion of the Wild
-R Scute Mob
-C Simic Initiate
-C Sundering Vitae
-C Sylvan Bounty
-M Tarmogoyf
-C Thrive
-C Tukatongue Thallid
-C Vines of Vastwood
-R Wolfbriar Elemental
-U Agony Warp
-R Apocalypse Hydra
-U Boros Swiftblade
-U Drooling Groodion
-U Electrolyze
-U Ethercaste Knight
-R Ghost Council of Orzhova
-U Glassdust Hulk
-R Horde of Notions
-U Lorescale Coatl
-R Mystic Snake
-U Necrogenesis
-R Niv-Mizzet, the Firemind
-U Pillory of the Sleepless
-U Plaxcaster Frogling
-U Savage Twister
-R Shadowmage Infiltrator
-U Sigil Blessing
-U Vengeful Rebirth
-U Wrecking Ball
-U Ashenmoor Gouger
-R Creakwood Liege
-U Dimir Guildmage
-R Fulminator Mage
-U Hearthfire Hobgoblin
-R Nobilis of War
-U Restless Apparition
-U Selesnya Guildmage
-U Shrewd Hatchling
-R Swans of Bryn Argoll
-R Wilt-Leaf Liege
-C Alloy Myr
-C Blinding Souleater
-C Cathodion
-R Chimeric Mass
-C Copper Carapace
-U Cranial Plating
-U Culling Dais
-U Darksteel Axe
-R Etched Champion
-R Etched Monstrosity
-U Etched Oracle
-U Everflowing Chalice
-U Expedition Map
-C Flayer Husk
-C Frogmite
-C Glint Hawk Idol
-C Gust-Skimmer
-C Kitesail
-R Lodestone Golem
-R Lodestone Myr
-R Long-Forgotten Gohei
-U Mortarpod
-M Mox Opal
-C Myr Enforcer
-R Precursor Golem
-C Runed Servitor
-C Rusted Relic
-C Sickleslicer
-C Skyreach Manta
-R Spellskite
-C Sphere of the Suns
-R Sunforger
-U Tumble Magnet
-C Wayfarer's Bauble
-U Azorius Chancery
-R Blinkmoth Nexus
-U Boros Garrison
-C Darksteel Citadel
-U Dimir Aqueduct
-U Eldrazi Temple
-C Evolving Wilds
-R Eye of Ugin
-U Golgari Rot Farm
-U Gruul Turf
-U Izzet Boilerworks
-U Orzhov Basilica
-U Rakdos Carnarium
-U Selesnya Sanctuary
-U Simic Growth Chamber
+1 R All Is Dust
+2 U Artisan of Kozilek
+3 M Emrakul, the Aeons Torn
+4 M Karn Liberated
+5 M Kozilek, Butcher of Truth
+6 M Ulamog, the Infinite Gyre
+7 C Ulamog's Crusher
+8 C Apostle's Blessing
+9 C Arrest
+10 R Battlegrace Angel
+11 U Celestial Purge
+12 C Conclave Phalanx
+13 C Court Homunculus
+14 R Daybreak Coronet
+15 U Dispatch
+16 M Elesh Norn, Grand Cenobite
+17 C Fortify
+18 U Hikari, Twilight Guardian
+19 R Indomitable Archangel
+20 M Iona, Shield of Emeria
+21 C Kami of Ancient Law
+22 U Kor Duelist
+23 R Leyline of Sanctity
+24 C Mighty Leap
+25 R Mirran Crusader
+26 R Mirror Entity
+27 C Moonlit Strider
+28 U Myrsmith
+29 U Oblivion Ring
+30 C Otherworldly Journey
+31 C Raise the Alarm
+32 C Skyhunter Skirmisher
+33 U Spectral Procession
+34 C Sunlance
+35 C Sunspear Shikari
+36 U Taj-Nar Swordsmith
+37 C Terashi's Grasp
+38 C Waxmane Baku
+39 C AEthersnipe
+40 U Air Servant
+41 R Argent Sphinx
+42 C Cloud Elemental
+43 R Cryptic Command
+44 C Faerie Mechanist
+45 U Flashfreeze
+46 R Guile
+47 C Helium Squirter
+48 R Hurkyl's Recall
+49 R Inexorable Tide
+50 C Mana Leak
+51 U Mulldrifter
+52 C Narcolepsy
+53 U Novijen Sages
+54 U Qumulox
+55 U Remand
+56 C Repeal
+57 C Somber Hoverguard
+58 C Steady Progress
+59 C Stoic Rebuttal
+60 R Surrakar Spellblade
+61 C Telling Time
+62 M Tezzeret the Seeker
+63 U Tezzeret's Gambit
+64 C Thoughtcast
+65 C Thrummingbird
+66 C Vapor Snag
+67 M Vendilion Clique
+68 C Vigean Graftmage
+69 U Water Servant
+70 C Wings of Velis Vel
+71 M Bitterblossom
+72 C Bloodthrone Vampire
+73 C Bone Splinters
+74 U Daggerclaw Imp
+75 M Dark Confidant
+76 C Death Denied
+77 U Deathmark
+78 U Devouring Greed
+79 U Dismember
+80 C Dread Drone
+81 C Duskhunter Bat
+82 R Endrek Sahr, Master Breeder
+83 C Ghostly Changeling
+84 C Grim Affliction
+85 C Instill Infection
+86 R Midnight Banshee
+87 C Nameless Inversion
+88 R Necroskitter
+89 C Plagued Rusalka
+90 R Profane Command
+91 R Puppeteer Clique
+92 U Reassembling Skeleton
+93 U Scavenger Drake
+94 C Scuttling Death
+95 C Shrivel
+96 C Sickle Ripper
+97 C Sign in Blood
+98 U Spread the Sickness
+99 R Surgical Extraction
+100 C Thief of Hope
+101 C Vampire Lacerator
+102 U Vampire Outcasts
+103 C Waking Nightmare
+104 R Banefire
+105 C Blades of Velis Vel
+106 C Blood Ogre
+107 U Bloodshot Trainee
+108 C Brute Force
+109 C Burst Lightning
+110 U Combust
+111 M Comet Storm
+112 C Dragonsoul Knight
+113 C Fiery Fall
+114 C Goblin Fireslinger
+115 C Goblin War Paint
+116 C Gorehorn Minotaurs
+117 C Gut Shot
+118 R Hellkite Charger
+119 U Incandescent Soulstoke
+120 C Inner-Flame Igniter
+121 M Kiki-Jiki, Mirror Breaker
+122 U Lightning Bolt
+123 U Skarrgan Firebird
+124 C Smash to Smithereens
+125 C Smokebraider
+126 C Soulbright Flamekin
+127 R Spikeshot Elder
+128 U Spitebellows
+129 R Splinter Twin
+130 U Stormblood Berserker
+131 R Thunderblust
+132 C Tribal Flames
+133 C Viashino Slaughtermaster
+134 R Wildfire
+135 U Worldheart Phoenix
+136 C Wrap in Flames
+137 U Algae Gharial
+138 R All Suns' Dawn
+139 R Ant Queen
+140 C Aquastrand Spider
+141 U Bestial Menace
+142 C Commune with Nature
+143 U Cytoplast Root-Kin
+144 C Gnarlid Pack
+145 U Karplusan Strider
+146 C Kavu Primarch
+147 C Kozilek's Predator
+148 C Matca Rioters
+149 U Mutagenic Growth
+150 C Nest Invader
+151 R Noble Hierarch
+152 U Overwhelm
+153 R Overwhelming Stampede
+154 U Pelakka Wurm
+155 C Plummet
+156 M Primeval Titan
+157 C Rampant Growth
+158 U Root-Kin Ally
+159 C Scatter the Seeds
+160 C Scion of the Wild
+161 R Scute Mob
+162 C Simic Initiate
+163 C Sundering Vitae
+164 C Sylvan Bounty
+165 M Tarmogoyf
+166 C Thrive
+167 C Tukatongue Thallid
+168 C Vines of Vastwood
+169 R Wolfbriar Elemental
+170 U Agony Warp
+171 R Apocalypse Hydra
+172 U Boros Swiftblade
+173 U Drooling Groodion
+174 U Electrolyze
+175 U Ethercaste Knight
+176 R Ghost Council of Orzhova
+177 U Glassdust Hulk
+178 R Horde of Notions
+179 U Lorescale Coatl
+180 R Mystic Snake
+181 U Necrogenesis
+182 R Niv-Mizzet, the Firemind
+183 U Pillory of the Sleepless
+184 U Plaxcaster Frogling
+185 U Savage Twister
+186 R Shadowmage Infiltrator
+187 U Sigil Blessing
+188 U Vengeful Rebirth
+189 U Wrecking Ball
+190 U Ashenmoor Gouger
+191 R Creakwood Liege
+192 U Dimir Guildmage
+193 R Fulminator Mage
+194 U Hearthfire Hobgoblin
+195 R Nobilis of War
+196 U Restless Apparition
+197 U Selesnya Guildmage
+198 U Shrewd Hatchling
+199 R Swans of Bryn Argoll
+200 R Wilt-Leaf Liege
+201 C Alloy Myr
+202 C Blinding Souleater
+203 C Cathodion
+204 R Chimeric Mass
+205 C Copper Carapace
+206 U Cranial Plating
+207 U Culling Dais
+208 U Darksteel Axe
+209 R Etched Champion
+210 R Etched Monstrosity
+211 U Etched Oracle
+212 U Everflowing Chalice
+213 U Expedition Map
+214 C Flayer Husk
+215 C Frogmite
+216 C Glint Hawk Idol
+217 C Gust-Skimmer
+218 C Kitesail
+219 R Lodestone Golem
+220 R Lodestone Myr
+221 R Long-Forgotten Gohei
+222 U Mortarpod
+223 M Mox Opal
+224 C Myr Enforcer
+225 R Precursor Golem
+226 C Runed Servitor
+227 C Rusted Relic
+228 C Sickleslicer
+229 C Skyreach Manta
+230 R Spellskite
+231 C Sphere of the Suns
+232 R Sunforger
+233 U Tumble Magnet
+234 C Wayfarer's Bauble
+235 U Azorius Chancery
+236 R Blinkmoth Nexus
+237 U Boros Garrison
+238 C Darksteel Citadel
+239 U Dimir Aqueduct
+240 U Eldrazi Temple
+241 C Evolving Wilds
+242 R Eye of Ugin
+243 U Golgari Rot Farm
+244 U Gruul Turf
+245 U Izzet Boilerworks
+246 U Orzhov Basilica
+247 U Rakdos Carnarium
+248 U Selesnya Sanctuary
+249 U Simic Growth Chamber

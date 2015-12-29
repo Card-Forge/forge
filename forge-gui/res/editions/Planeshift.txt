@@ -10,149 +10,149 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-U Allied Strategies
-U Alpha Kavu
-C Amphibious Kavu
-R Ancient Spider
-C Arctic Merfolk
-C Aura Blast
-C Aurora Griffin
-C Bog Down
-C Caldera Kavu
-C Cavern Harpy
-R Cloud Cover
-C Confound
-U Crosis's Catacombs
-U Crosis's Charm
-U Darigaaz's Caldera
-U Darigaaz's Charm
-C Daring Leap
-R Dark Suspicions
-R Deadapult
-C Death Bomb
-R Destructive Flow
-R Diabolic Intent
-C Disciple of Kangee
-R Dominaria's Judgment
-R Doomsday Specter
-R Draco
-R Dralnu's Crusade
-R Dralnu's Pet
-U Dromar's Cavern
-U Dromar's Charm
-R Eladamri's Call
-U Ertai's Trickery
-R Ertai, the Corrupted
-R Ertai, the Corrupted
-C Escape Routes
-U Exotic Disease
-C Falling Timber
-U Flametongue Kavu
-U Fleetfoot Panther
-R Forsaken City
-R Gaea's Herald
-C Gaea's Might
-U Gainsay
-C Gerrard's Command
-R Goblin Game
-U Guard Dogs
-C Heroic Defiance
-C Hobble
-C Honorable Scout
-C Horned Kavu
-C Hull Breach
-C Hunting Drake
-U Implode
-C Insolence
-C Kavu Recluse
-C Keldon Mantle
-R Keldon Twilight
-U Lashknife Barrier
-C Lava Zombie
-R Lord of the Undead
-C Maggot Carrier
-C Magma Burst
-R Magnigoth Treefolk
-C Malicious Advice
-U Mana Cylix
-R March of Souls
-U Marsh Crocodile
-R Meddling Mage
-R Meteor Crater
-C Mire Kavu
-U Mirrorwood Treefolk
-U Mogg Jailer
-R Mogg Sentry
-C Morgue Toad
-U Multani's Harmony
-R Natural Emergence
-R Nemata, Grove Guardian
-U Nightscape Battlemage
-C Nightscape Familiar
-U Noxious Vapors
-R Orim's Chant
-C Phyrexian Bloodstock
-R Phyrexian Scuta
-R Phyrexian Tyranny
-R Planar Overlay
-R Planeswalker's Favor
-R Planeswalker's Fury
-R Planeswalker's Mirth
-R Planeswalker's Mischief
-R Planeswalker's Scorn
-C Pollen Remedy
-C Primal Growth
-C Pygmy Kavu
-R Questing Phelddagrif
-R Quirion Dryad
-C Quirion Explorer
-R Radiant Kavu
-U Razing Snidd
-U Rith's Charm
-U Rith's Grove
-C Root Greevil
-C Rushing River
-R Samite Elder
-C Samite Pilgrim
-U Sawtooth Loon
-C Sea Snidd
-U Shifting Sky
-R Shivan Wurm
-C Shriek of Dread
-C Silver Drake
-C Singe
-C Sinister Strength
-C Sisay's Ingenuity
-R Skyship Weatherlight
-R Skyship Weatherlight
-U Skyshroud Blessing
-U Slay
-C Sleeping Potion
-C Slingshot Goblin
-U Sparkcaster
-U Star Compass
-C Steel Leaf Paladin
-C Stone Kavu
-U Stormscape Battlemage
-C Stormscape Familiar
-U Strafe
-U Stratadon
-R Sunken Hope
-U Sunscape Battlemage
-C Sunscape Familiar
-U Surprise Deployment
-R Tahngarth, Talruum Hero
-R Tahngarth, Talruum Hero
-U Terminal Moraine
-C Terminate
-U Thornscape Battlemage
-C Thornscape Familiar
-U Thunderscape Battlemage
-C Thunderscape Familiar
-U Treva's Charm
-U Treva's Ruins
-R Urza's Guilt
-U Voice of All
-C Volcano Imp
-U Warped Devotion
-R Waterspout Elemental
+20 U Allied Strategies
+77 U Alpha Kavu
+78 C Amphibious Kavu
+96 R Ancient Spider
+21 C Arctic Merfolk
+1 C Aura Blast
+2 C Aurora Griffin
+39 C Bog Down
+58 C Caldera Kavu
+97 C Cavern Harpy
+98 R Cloud Cover
+22 C Confound
+136 U Crosis's Catacombs
+99 U Crosis's Charm
+137 U Darigaaz's Caldera
+100 U Darigaaz's Charm
+101 C Daring Leap
+40 R Dark Suspicions
+59 R Deadapult
+41 C Death Bomb
+102 R Destructive Flow
+42 R Diabolic Intent
+3 C Disciple of Kangee
+4 R Dominaria's Judgment
+103 R Doomsday Specter
+131 R Draco
+104 R Dralnu's Crusade
+23 R Dralnu's Pet
+138 U Dromar's Cavern
+105 U Dromar's Charm
+106 R Eladamri's Call
+24 U Ertai's Trickery
+107 R Ertai, the Corrupted
+107 R Ertai, the Corrupted
+25 C Escape Routes
+43 U Exotic Disease
+79 C Falling Timber
+60 U Flametongue Kavu
+108 U Fleetfoot Panther
+139 R Forsaken City
+80 R Gaea's Herald
+81 C Gaea's Might
+26 U Gainsay
+109 C Gerrard's Command
+61 R Goblin Game
+5 U Guard Dogs
+6 C Heroic Defiance
+7 C Hobble
+8 C Honorable Scout
+110 C Horned Kavu
+111 C Hull Breach
+27 C Hunting Drake
+62 U Implode
+63 C Insolence
+64 C Kavu Recluse
+65 C Keldon Mantle
+112 R Keldon Twilight
+9 U Lashknife Barrier
+113 C Lava Zombie
+44 R Lord of the Undead
+45 C Maggot Carrier
+66 C Magma Burst
+82 R Magnigoth Treefolk
+114 C Malicious Advice
+132 U Mana Cylix
+10 R March of Souls
+115 U Marsh Crocodile
+116 R Meddling Mage
+140 R Meteor Crater
+67 C Mire Kavu
+83 U Mirrorwood Treefolk
+68 U Mogg Jailer
+69 R Mogg Sentry
+46 C Morgue Toad
+84 U Multani's Harmony
+117 R Natural Emergence
+85 R Nemata, Grove Guardian
+47 U Nightscape Battlemage
+48 C Nightscape Familiar
+49 U Noxious Vapors
+11 R Orim's Chant
+50 C Phyrexian Bloodstock
+51 R Phyrexian Scuta
+118 R Phyrexian Tyranny
+28 R Planar Overlay
+86 R Planeswalker's Favor
+70 R Planeswalker's Fury
+12 R Planeswalker's Mirth
+29 R Planeswalker's Mischief
+52 R Planeswalker's Scorn
+13 C Pollen Remedy
+87 C Primal Growth
+88 C Pygmy Kavu
+119 R Questing Phelddagrif
+89 R Quirion Dryad
+90 C Quirion Explorer
+120 R Radiant Kavu
+121 U Razing Snidd
+122 U Rith's Charm
+141 U Rith's Grove
+91 C Root Greevil
+30 C Rushing River
+14 R Samite Elder
+15 C Samite Pilgrim
+123 U Sawtooth Loon
+31 C Sea Snidd
+32 U Shifting Sky
+124 R Shivan Wurm
+53 C Shriek of Dread
+125 C Silver Drake
+71 C Singe
+54 C Sinister Strength
+33 C Sisay's Ingenuity
+133 R Skyship Weatherlight
+133 R Skyship Weatherlight
+92 U Skyshroud Blessing
+55 U Slay
+34 C Sleeping Potion
+72 C Slingshot Goblin
+126 U Sparkcaster
+134 U Star Compass
+127 C Steel Leaf Paladin
+93 C Stone Kavu
+35 U Stormscape Battlemage
+36 C Stormscape Familiar
+73 U Strafe
+135 U Stratadon
+37 R Sunken Hope
+16 U Sunscape Battlemage
+17 C Sunscape Familiar
+18 U Surprise Deployment
+74 R Tahngarth, Talruum Hero
+74 R Tahngarth, Talruum Hero
+142 U Terminal Moraine
+128 C Terminate
+94 U Thornscape Battlemage
+95 C Thornscape Familiar
+75 U Thunderscape Battlemage
+76 C Thunderscape Familiar
+129 U Treva's Charm
+143 U Treva's Ruins
+130 R Urza's Guilt
+19 U Voice of All
+56 C Volcano Imp
+57 U Warped Devotion
+38 R Waterspout Elemental

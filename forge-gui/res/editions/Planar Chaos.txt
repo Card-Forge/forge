@@ -8,168 +8,168 @@ BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
 
 [cards]
-U AEther Membrane
-R Aeon Chronicler
-R Akroma, Angel of Fury
-U Ana Battlemage
-C Aquamorph Entity
-U Auramancer's Guise
-C Aven Riftwatcher
-C Battering Sliver
-R Benalish Commander
-U Big Game Hunter
-C Blightspeaker
-U Blood Knight
-R Body Double
-C Bog Serpent
-R Boom // Bust
-R Braids, Conjurer Adept
-C Brain Gorgers
-C Brute Force
-U Calciderm
-U Cautery Sliver
-R Chronozoa
-U Circle of Affliction
-C Citanul Woodreaders
-C Cradle to Grave
-R Crovax, Ascendant Hero
-R Damnation
-U Darkheart Sliver
-C Dash Hopes
-C Dawn Charm
-C Dead // Gone
-C Deadly Grub
-U Deadwood Treefolk
-R Detritivore
-R Dichotomancy
-U Dismal Failure
-U Dormant Sliver
-C Dreamscape Artist
-U Dunerider Outlaw
-C Dust Corona
-R Dust Elemental
-U Enslave
-C Erratic Mutation
-C Essence Warden
-C Evolution Charm
-R Extirpate
-C Fa'adiyah Seer
-R Fatal Frenzy
-C Firefright Mage
-U Frenetic Sliver
-U Frozen AEther
-R Fungal Behemoth
-C Fury Charm
-R Gaea's Anthem
-C Ghost Tactician
-C Giant Dustwasp
-C Gossamer Phantasm
-R Groundbreaker
-U Hammerheim Deadeye
-U Harmonize
-C Healing Leaves
-U Hedge Troll
-R Heroes Remembered
-U Hunting Wilds
-R Imp's Mischief
-R Intet, the Dreamer
-R Jedit Ojanen of Efrava
-U Jodah's Avenger
-U Kavu Predator
-U Keen Sense
-C Keldon Marauders
-U Kor Dirge
-U Lavacore Elemental
-R Life and Limb
-R Magus of the Arena
-R Magus of the Bazaar
-R Magus of the Coffers
-R Magus of the Library
-R Magus of the Tabernacle
-U Malach of the Dawn
-C Mana Tithe
-U Mantle of Leadership
-C Melancholy
-C Merfolk Thaumaturgist
-R Mesa Enchantress
-C Midnight Charm
-C Mire Boa
-R Mirri the Cursed
-R Molten Firebird
-U Muck Drubb
-U Mycologist
-U Necrotic Sliver
-C Needlepeak Spider
-R Null Profusion
-R Numot, the Devastator
-R Oros, the Avenger
-U Ovinize
-C Pallid Mycoderm
-U Phantasmagorian
-C Piracy Charm
-U Pongify
-R Porphyry Nodes
-C Poultice Sliver
-U Pouncing Wurm
-C Primal Plasma
-C Prodigal Pyromancer
-U Psychotrope Thallid
-U Pyrohemia
-R Radha, Heir to Keld
-C Rathi Trapper
-C Reality Acid
-U Rebuff the Wicked
-U Reckless Wurm
-C Reflex Sliver
-R Retether
-C Revered Dead
-C Ridged Kusite
-U Riftmarked Knight
-U Riptide Pilferer
-R Roiling Horror
-U Rough // Tumble
-U Saltblast
-C Saltfield Recluse
-C Seal of Primordium
-R Serendib Sorcerer
-R Serra Sphinx
-U Serra's Boon
-C Shade of Trokair
-C Shaper Parasite
-U Shivan Meteor
-R Shivan Wumpus
-U Shrouded Lore
-C Simian Spirit Guide
-C Sinew Sliver
-C Skirk Shaman
-U Sophic Centaur
-R Spellshift
-C Spitting Sliver
-C Stingscourger
-U Stonecloaker
-U Stormfront Riders
-U Sulfur Elemental
-C Sunlance
-C Synchronous Sliver
-R Temporal Extortion
-R Teneb, the Harvester
-U Tidewalker
-R Timbermare
-U Timebender
-U Timecrafting
-R Torchling
-U Treacherous Urge
-C Uktabi Drake
-R Urborg, Tomb of Yawgmoth
-C Utopia Vow
-C Vampiric Link
-C Veiling Oddity
-U Venarian Glimmer
-C Vitaspore Thallid
-R Voidstone Gargoyle
-R Volcano Hellion
-R Vorosh, the Hunter
-U Waning Wurm
-C Whitemane Lion
-R Wild Pair
-C Wistful Thinking
+93 U AEther Membrane
+32 R Aeon Chronicler
+94 R Akroma, Angel of Fury
+124 U Ana Battlemage
+33 C Aquamorph Entity
+34 U Auramancer's Guise
+1 C Aven Riftwatcher
+95 C Battering Sliver
+2 R Benalish Commander
+63 U Big Game Hunter
+64 C Blightspeaker
+115 U Blood Knight
+35 R Body Double
+84 C Bog Serpent
+112 R Boom // Bust
+36 R Braids, Conjurer Adept
+65 C Brain Gorgers
+116 C Brute Force
+23 U Calciderm
+154 U Cautery Sliver
+37 R Chronozoa
+66 U Circle of Affliction
+125 C Citanul Woodreaders
+67 C Cradle to Grave
+3 R Crovax, Ascendant Hero
+85 R Damnation
+155 U Darkheart Sliver
+68 C Dash Hopes
+4 C Dawn Charm
+113 C Dead // Gone
+69 C Deadly Grub
+126 U Deadwood Treefolk
+96 R Detritivore
+38 R Dichotomancy
+39 U Dismal Failure
+156 U Dormant Sliver
+40 C Dreamscape Artist
+86 U Dunerider Outlaw
+97 C Dust Corona
+5 R Dust Elemental
+70 U Enslave
+41 C Erratic Mutation
+145 C Essence Warden
+127 C Evolution Charm
+71 R Extirpate
+146 C Fa'adiyah Seer
+98 R Fatal Frenzy
+99 C Firefright Mage
+157 U Frenetic Sliver
+54 U Frozen AEther
+128 R Fungal Behemoth
+100 C Fury Charm
+147 R Gaea's Anthem
+6 C Ghost Tactician
+129 C Giant Dustwasp
+55 C Gossamer Phantasm
+148 R Groundbreaker
+101 U Hammerheim Deadeye
+149 U Harmonize
+150 C Healing Leaves
+151 U Hedge Troll
+7 R Heroes Remembered
+130 U Hunting Wilds
+72 R Imp's Mischief
+158 R Intet, the Dreamer
+131 R Jedit Ojanen of Efrava
+42 U Jodah's Avenger
+132 U Kavu Predator
+152 U Keen Sense
+102 C Keldon Marauders
+87 U Kor Dirge
+103 U Lavacore Elemental
+133 R Life and Limb
+104 R Magus of the Arena
+43 R Magus of the Bazaar
+73 R Magus of the Coffers
+134 R Magus of the Library
+8 R Magus of the Tabernacle
+24 U Malach of the Dawn
+25 C Mana Tithe
+9 U Mantle of Leadership
+88 C Melancholy
+56 C Merfolk Thaumaturgist
+26 R Mesa Enchantress
+74 C Midnight Charm
+135 C Mire Boa
+75 R Mirri the Cursed
+117 R Molten Firebird
+76 U Muck Drubb
+27 U Mycologist
+159 U Necrotic Sliver
+105 C Needlepeak Spider
+89 R Null Profusion
+160 R Numot, the Devastator
+161 R Oros, the Avenger
+57 U Ovinize
+10 C Pallid Mycoderm
+77 U Phantasmagorian
+58 C Piracy Charm
+44 U Pongify
+28 R Porphyry Nodes
+11 C Poultice Sliver
+136 U Pouncing Wurm
+59 C Primal Plasma
+118 C Prodigal Pyromancer
+137 U Psychotrope Thallid
+119 U Pyrohemia
+162 R Radha, Heir to Keld
+90 C Rathi Trapper
+45 C Reality Acid
+12 U Rebuff the Wicked
+120 U Reckless Wurm
+138 C Reflex Sliver
+13 R Retether
+29 C Revered Dead
+78 C Ridged Kusite
+14 U Riftmarked Knight
+60 U Riptide Pilferer
+79 R Roiling Horror
+114 U Rough // Tumble
+15 U Saltblast
+16 C Saltfield Recluse
+153 C Seal of Primordium
+61 R Serendib Sorcerer
+62 R Serra Sphinx
+17 U Serra's Boon
+18 C Shade of Trokair
+46 C Shaper Parasite
+106 U Shivan Meteor
+121 R Shivan Wumpus
+91 U Shrouded Lore
+122 C Simian Spirit Guide
+30 C Sinew Sliver
+123 C Skirk Shaman
+139 U Sophic Centaur
+47 R Spellshift
+80 C Spitting Sliver
+107 C Stingscourger
+19 U Stonecloaker
+20 U Stormfront Riders
+108 U Sulfur Elemental
+31 C Sunlance
+48 C Synchronous Sliver
+81 R Temporal Extortion
+163 R Teneb, the Harvester
+49 U Tidewalker
+140 R Timbermare
+50 U Timebender
+109 U Timecrafting
+110 R Torchling
+82 U Treacherous Urge
+141 C Uktabi Drake
+165 R Urborg, Tomb of Yawgmoth
+142 C Utopia Vow
+92 C Vampiric Link
+51 C Veiling Oddity
+52 U Venarian Glimmer
+143 C Vitaspore Thallid
+21 R Voidstone Gargoyle
+111 R Volcano Hellion
+164 R Vorosh, the Hunter
+83 U Waning Wurm
+22 C Whitemane Lion
+144 R Wild Pair
+53 C Wistful Thinking

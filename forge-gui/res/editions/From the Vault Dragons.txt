@@ -5,18 +5,18 @@ Name=From the Vault: Dragons
 Type=From_the_Vault
 
 [cards]
-R Bladewing the Risen
-R Bogardan Hellkite
-R Draco
-R Dragon Whelp
-R Dragonstorm
-R Ebon Dragon
-R Form of the Dragon
-R Hellkite Overlord
-R Kokusho, the Evening Star
-R Nicol Bolas
-R Niv-Mizzet, the Firemind
-R Rith, the Awakener
-R Shivan Dragon
-R Thunder Dragon
-R Two-Headed Dragon
+1 R Bladewing the Risen
+2 R Bogardan Hellkite
+3 R Draco
+4 R Dragon Whelp
+5 R Dragonstorm
+6 R Ebon Dragon
+7 R Form of the Dragon
+8 R Hellkite Overlord
+9 R Kokusho, the Evening Star
+10 R Nicol Bolas
+11 R Niv-Mizzet, the Firemind
+12 R Rith, the Awakener
+13 R Shivan Dragon
+14 R Thunder Dragon
+15 R Two-Headed Dragon

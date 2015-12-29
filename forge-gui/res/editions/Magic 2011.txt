@@ -8,252 +8,252 @@ BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 [cards]
-C AEther Adept
-U Acidic Slime
-C Act of Treason
-U Air Servant
-M Ajani Goldmane
-C Ajani's Mantra
-U Ajani's Pridemate
-U Alluring Siren
-R Ancient Hellkite
-U Angel's Feather
-R Angelic Arbiter
-C Arc Runner
-U Armored Ascension
-C Armored Cancrix
-C Assassinate
-C Assault Griffin
-C Augury Owl
-U Autumn's Veil
-U Awakener Druid
-C Azure Drake
-U Back to Nature
-M Baneslayer Angel
-C Barony Vampire
-C Berserkers of Blood Ridge
-R Birds of Paradise
-U Black Knight
-C Blinding Mage
-C Blood Tithe
-C Bloodcrazed Goblin
-C Bloodthrone Vampire
-C Bog Raiders
-C Brindle Boar
-R Brittle Effigy
-U Call to Mind
-C Cancel
-C Canyon Minotaur
-R Captivating Vampire
-U Celestial Purge
-M Chandra Nalaar
-C Chandra's Outrage
-U Chandra's Spitfire
-C Child of Night
-R Clone
-C Cloud Crusader
-C Cloud Elemental
-U Combust
-U Condemn
-R Conundrum Sphinx
-U Corrupt
-U Crystal Ball
-U Cudgel Troll
-C Cultivate
-R Cyclops Gladiator
-R Dark Tutelage
-R Day of Judgment
-U Deathmark
-C Demolish
-M Demon of Death's Gate
-U Demon's Horn
-R Destructive Force
-U Diabolic Tutor
-C Diminish
-C Disentomb
-C Doom Blade
-U Dragon's Claw
-R Dragonskull Summit
-R Drowned Catacomb
-C Dryad's Favor
-C Duress
-U Duskdale Wurm
-U Earth Servant
-U Elite Vanguard
-U Elixir of Immortality
-R Elvish Archdruid
-U Ember Hauler
-C Excommunicate
-R Fauna Shaman
-C Fiery Hellhound
-U Fire Servant
-U Fireball
-U Flashfreeze
-C Fling
-C Fog
-C Foresee
-L Forest
-L Forest
-L Forest
-L Forest
-M Frost Titan
-M Gaea's Revenge
-U Gargoyle Sentinel
-M Garruk Wildspeaker
-C Garruk's Companion
-U Garruk's Packleader
-C Giant Growth
-C Giant Spider
-R Glacial Fortress
-C Goblin Balloon Brigade
-R Goblin Chieftain
-C Goblin Piker
-C Goblin Tunneler
-C Goldenglow Moth
-M Grave Titan
-C Gravedigger
-C Greater Basilisk
-C Harbor Serpent
-R Haunting Echoes
-R Hoarding Dragon
-C Holy Strength
-R Honor of the Pure
-C Hornet Sting
-U Howling Banshee
-C Hunters' Feast
-C Ice Cage
-C Incite
-C Infantry Veteran
-M Inferno Titan
-C Inspired Charge
-L Island
-L Island
-L Island
-L Island
-M Jace Beleren
-C Jace's Erasure
-U Jace's Ingenuity
-R Jinxed Idol
-U Juggernaut
-R Knight Exemplar
-U Kraken's Eye
-C Lava Axe
-R Leyline of Anticipation
-R Leyline of Punishment
-R Leyline of Sanctity
-R Leyline of Vitality
-R Leyline of the Void
-C Lightning Bolt
-M Liliana Vess
-U Liliana's Caress
-C Liliana's Specter
-C Llanowar Elves
-R Magma Phoenix
-C Mana Leak
-C Manic Vandal
-C Maritime Guard
-R Mass Polymorph
-R Merfolk Sovereign
-C Merfolk Spy
-C Mighty Leap
-U Mind Control
-C Mind Rot
-R Mitotic Slime
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-R Mystifying Maze
-R Nantuko Shade
-C Naturalize
-U Nature's Spiral
-R Necrotic Plague
-C Negate
-C Nether Horror
-C Nightwing Shade
-R Obstinate Baloth
-U Ornithopter
-R Overwhelming Stampede
-C Pacifism
-C Palace Guard
-C Phantom Beast
-R Phylactery Lich
-L Plains
-L Plains
-L Plains
-L Plains
-M Platinum Angel
-C Plummet
-C Preordain
-C Primal Cocoon
-M Primeval Titan
-U Prized Unicorn
-U Prodigal Pyromancer
-R Protean Hydra
-C Pyretic Ritual
-U Pyroclasm
-C Quag Sickness
-U Reassembling Skeleton
-R Redirect
-U Relentless Rats
-R Reverberate
-U Rise from the Grave
-U Roc Egg
-R Rootbound Crag
-C Rotting Legion
-R Royal Assassin
-C Runeclaw Bear
-C Sacred Wolf
-C Safe Passage
-C Scroll Thief
-U Serra Angel
-R Serra Ascendant
-U Shiv's Embrace
-C Siege Mastodon
-C Sign in Blood
-R Silence
-C Silvercoat Lion
-U Sleep
-C Solemn Offering
-U Sorcerer's Strongbox
-C Spined Wurm
-C Squadron Hawk
-C Stabbing Pain
-R Steel Overseer
-U Stone Golem
-C Stormfront Pegasus
-R Stormtide Leviathan
-M Sun Titan
-R Sunpetal Grove
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-R Sword of Vengeance
-C Sylvan Ranger
-R Temple Bell
-C Terramorphic Expanse
-C Thunder Strike
-M Time Reversal
-C Tireless Missionaries
-C Tome Scour
-R Traumatize
-R Triskelion
-C Unholy Strength
-C Unsummon
-R Vengeful Archon
-C Viscera Seer
-C Volcanic Strength
-U Voltaic Key
-C Vulshok Berserker
-U Wall of Frost
-C Wall of Vines
-U War Priest of Thune
-U Warlord's Axe
-U Water Servant
-U Whispersilk Cloak
-U White Knight
-R Wild Evocation
-C Wild Griffin
-U Wurm's Tooth
-C Yavimaya Wurm
+41 C AEther Adept
+161 U Acidic Slime
+121 C Act of Treason
+42 U Air Servant
+1 M Ajani Goldmane
+2 C Ajani's Mantra
+3 U Ajani's Pridemate
+43 U Alluring Siren
+122 R Ancient Hellkite
+201 U Angel's Feather
+4 R Angelic Arbiter
+123 C Arc Runner
+5 U Armored Ascension
+44 C Armored Cancrix
+81 C Assassinate
+6 C Assault Griffin
+45 C Augury Owl
+162 U Autumn's Veil
+163 U Awakener Druid
+46 C Azure Drake
+164 U Back to Nature
+7 M Baneslayer Angel
+82 C Barony Vampire
+124 C Berserkers of Blood Ridge
+165 R Birds of Paradise
+83 U Black Knight
+8 C Blinding Mage
+84 C Blood Tithe
+125 C Bloodcrazed Goblin
+85 C Bloodthrone Vampire
+86 C Bog Raiders
+166 C Brindle Boar
+202 R Brittle Effigy
+47 U Call to Mind
+48 C Cancel
+126 C Canyon Minotaur
+87 R Captivating Vampire
+9 U Celestial Purge
+127 M Chandra Nalaar
+128 C Chandra's Outrage
+129 U Chandra's Spitfire
+88 C Child of Night
+49 R Clone
+10 C Cloud Crusader
+50 C Cloud Elemental
+130 U Combust
+11 U Condemn
+51 R Conundrum Sphinx
+89 U Corrupt
+203 U Crystal Ball
+167 U Cudgel Troll
+168 C Cultivate
+131 R Cyclops Gladiator
+90 R Dark Tutelage
+12 R Day of Judgment
+91 U Deathmark
+132 C Demolish
+92 M Demon of Death's Gate
+204 U Demon's Horn
+133 R Destructive Force
+93 U Diabolic Tutor
+52 C Diminish
+94 C Disentomb
+95 C Doom Blade
+205 U Dragon's Claw
+223 R Dragonskull Summit
+224 R Drowned Catacomb
+169 C Dryad's Favor
+96 C Duress
+170 U Duskdale Wurm
+134 U Earth Servant
+13 U Elite Vanguard
+206 U Elixir of Immortality
+171 R Elvish Archdruid
+135 U Ember Hauler
+14 C Excommunicate
+172 R Fauna Shaman
+136 C Fiery Hellhound
+137 U Fire Servant
+138 U Fireball
+53 U Flashfreeze
+139 C Fling
+173 C Fog
+54 C Foresee
+248 L Forest
+248 L Forest
+248 L Forest
+248 L Forest
+55 M Frost Titan
+174 M Gaea's Revenge
+207 U Gargoyle Sentinel
+175 M Garruk Wildspeaker
+176 C Garruk's Companion
+177 U Garruk's Packleader
+178 C Giant Growth
+179 C Giant Spider
+225 R Glacial Fortress
+140 C Goblin Balloon Brigade
+141 R Goblin Chieftain
+142 C Goblin Piker
+143 C Goblin Tunneler
+15 C Goldenglow Moth
+97 M Grave Titan
+98 C Gravedigger
+180 C Greater Basilisk
+56 C Harbor Serpent
+99 R Haunting Echoes
+144 R Hoarding Dragon
+16 C Holy Strength
+17 R Honor of the Pure
+181 C Hornet Sting
+100 U Howling Banshee
+182 C Hunters' Feast
+57 C Ice Cage
+145 C Incite
+18 C Infantry Veteran
+146 M Inferno Titan
+19 C Inspired Charge
+237 L Island
+237 L Island
+237 L Island
+237 L Island
+58 M Jace Beleren
+59 C Jace's Erasure
+60 U Jace's Ingenuity
+208 R Jinxed Idol
+209 U Juggernaut
+20 R Knight Exemplar
+210 U Kraken's Eye
+147 C Lava Axe
+61 R Leyline of Anticipation
+148 R Leyline of Punishment
+21 R Leyline of Sanctity
+183 R Leyline of Vitality
+101 R Leyline of the Void
+149 C Lightning Bolt
+102 M Liliana Vess
+103 U Liliana's Caress
+104 C Liliana's Specter
+184 C Llanowar Elves
+150 R Magma Phoenix
+62 C Mana Leak
+151 C Manic Vandal
+63 C Maritime Guard
+64 R Mass Polymorph
+65 R Merfolk Sovereign
+66 C Merfolk Spy
+22 C Mighty Leap
+67 U Mind Control
+105 C Mind Rot
+185 R Mitotic Slime
+245 L Mountain
+245 L Mountain
+245 L Mountain
+245 L Mountain
+226 R Mystifying Maze
+106 R Nantuko Shade
+186 C Naturalize
+187 U Nature's Spiral
+107 R Necrotic Plague
+68 C Negate
+108 C Nether Horror
+109 C Nightwing Shade
+188 R Obstinate Baloth
+211 U Ornithopter
+189 R Overwhelming Stampede
+23 C Pacifism
+24 C Palace Guard
+69 C Phantom Beast
+110 R Phylactery Lich
+231 L Plains
+231 L Plains
+231 L Plains
+231 L Plains
+212 M Platinum Angel
+190 C Plummet
+70 C Preordain
+191 C Primal Cocoon
+192 M Primeval Titan
+193 U Prized Unicorn
+152 U Prodigal Pyromancer
+194 R Protean Hydra
+153 C Pyretic Ritual
+154 U Pyroclasm
+111 C Quag Sickness
+112 U Reassembling Skeleton
+71 R Redirect
+113 U Relentless Rats
+155 R Reverberate
+114 U Rise from the Grave
+25 U Roc Egg
+227 R Rootbound Crag
+115 C Rotting Legion
+116 R Royal Assassin
+195 C Runeclaw Bear
+196 C Sacred Wolf
+26 C Safe Passage
+72 C Scroll Thief
+27 U Serra Angel
+28 R Serra Ascendant
+156 U Shiv's Embrace
+29 C Siege Mastodon
+117 C Sign in Blood
+30 R Silence
+31 C Silvercoat Lion
+73 U Sleep
+32 C Solemn Offering
+213 U Sorcerer's Strongbox
+197 C Spined Wurm
+33 C Squadron Hawk
+118 C Stabbing Pain
+214 R Steel Overseer
+215 U Stone Golem
+34 C Stormfront Pegasus
+74 R Stormtide Leviathan
+35 M Sun Titan
+228 R Sunpetal Grove
+241 L Swamp
+241 L Swamp
+241 L Swamp
+241 L Swamp
+216 R Sword of Vengeance
+198 C Sylvan Ranger
+217 R Temple Bell
+229 C Terramorphic Expanse
+157 C Thunder Strike
+75 M Time Reversal
+36 C Tireless Missionaries
+76 C Tome Scour
+77 R Traumatize
+218 R Triskelion
+119 C Unholy Strength
+78 C Unsummon
+37 R Vengeful Archon
+120 C Viscera Seer
+158 C Volcanic Strength
+219 U Voltaic Key
+159 C Vulshok Berserker
+79 U Wall of Frost
+199 C Wall of Vines
+38 U War Priest of Thune
+220 U Warlord's Axe
+80 U Water Servant
+221 U Whispersilk Cloak
+39 U White Knight
+160 R Wild Evocation
+40 C Wild Griffin
+222 U Wurm's Tooth
+200 C Yavimaya Wurm

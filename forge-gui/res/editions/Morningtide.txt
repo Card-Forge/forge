@@ -8,153 +8,153 @@ BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
 
 [cards]
-C Ambassador Oak
-R Auntie's Snitch
-C Ballyrush Banneret
-R Battletide Alchemist
-R Bitterblossom
-C Blightsoil Druid
-R Boldwyr Heavyweights
-U Boldwyr Intimidator
-R Borderland Behemoth
-C Bosk Banneret
-U Bramblewood Paragon
-C Brighthearth Banneret
-C Burrenton Bombardier
-C Burrenton Shield-Bearers
-U Cenn's Tactician
-R Chameleon Colossus
-C Changeling Sentinel
-U Cloak and Dagger
-C Coordinated Barrage
-R Countryside Crusher
-R Cream of the Crop
-U Daily Regimen
-R Declaration of Naught
-C Deglamer
-C Dewdrop Spy
-C Disperse
-C Distant Melody
-U Diviner's Wand
-R Door of Destinies
-C Earthbrawn
-R Earwig Squad
-C Elvish Warrior
-C Everbark Shaman
-C Fencer Clique
-R Fendeep Summoner
-C Fertilid
-C Festercreep
-R Feudkiller's Verdict
-C Final-Sting Faerie
-C Fire Juggler
-C Floodchaser
-C Forfend
-C Frogtosser Banneret
-C Game-Trail Changeling
-R Gilt-Leaf Archdruid
-U Graceful Reprieve
-R Greatbow Doyen
-R Grimoire Thief
-U Heritage Druid
-C Hostile Realm
-U Hunting Triad
-R Idyllic Tutor
-R Indomitable Ancients
-C Ink Dissolver
-U Inspired Sprite
-C Kindled Fury
-R Kinsbaile Borderguard
-R Kinsbaile Cavalier
-C Kithkin Zephyrnaut
-R Knowledge Exploitation
-C Latchkey Faerie
-R Leaf-Crowned Elder
-R Lightning Crafter
-C Luminescent Rain
-C Lunk Errant
-C Lys Alana Bowmaster
-R Maralen of the Mornsong
-U Meadowboon
-C Merrow Witsniper
-R Mind Shatter
-R Mind Spring
-C Moonglove Changeling
-C Morsel Theft
-C Mosquito Guard
-C Mothdust Changeling
-C Mudbutton Clanger
-R Murmuring Bosk
-R Mutavault
-C Negate
-U Nevermaker
-U Nightshade Schemers
-U Noggin Whack
-R Notorious Throng
-U Obsidian Battle-Axe
-U Offalsnout
-U Oona's Blackguard
-U Orchard Warden
-C Order of the Golden Cricket
-C Pack's Disdain
-R Preeminent Captain
-C Prickly Boggart
-R Primal Beyond
-C Pulling Teeth
-U Pyroclast Consul
-U Rage Forger
-R Reach of Branches
-U Recross the Paths
-U Redeem the Lost
-C Reins of the Vinesteed
-U Release the Ants
-U Research the Deep
-R Reveillark
-U Revive the Fallen
-R Rhys the Exiled
-U Rivals' Duel
-C Roar of the Crowd
-R Rustic Clachan
-U Sage of Fables
-U Sage's Dousing
-R Scapeshift
-R Scarblade Elite
-C Seething Pathblazer
-R Sensation Gorger
-C Shard Volley
-R Shared Animosity
-C Shinewend
-R Sigil Tracer
-R Slithermuse
-U Spitebellows
-C Squeaking Pie Grubfellows
-R Stenchskipper
-C Stingmoggie
-U Stinkdrinker Bandit
-U Stomping Slabs
-R Stonehewer Giant
-C Stonybrook Banneret
-C Stonybrook Schoolmaster
-C Stream of Unconsciousness
-C Sunflare Shaman
-R Supreme Exemplar
-U Swell of Courage
-R Taurean Mauler
-U Thieves' Fortune
-U Thornbite Staff
-R Titan's Revenge
-R Unstoppable Ash
-R Vendilion Clique
-R Vengeful Firebrand
-U Veteran's Armaments
-C Violet Pall
-U Walker of the Grove
-U Wandering Graybeard
-C War-Spike Changeling
-U Warren Weirding
-U Waterspout Weavers
-C Weed-Pruner Poplar
-C Weight of Conscience
-R Weirding Shaman
-C Winnower Patrol
-U Wolf-Skull Shaman
+113 C Ambassador Oak
+57 R Auntie's Snitch
+1 C Ballyrush Banneret
+2 R Battletide Alchemist
+58 R Bitterblossom
+59 C Blightsoil Druid
+85 R Boldwyr Heavyweights
+86 U Boldwyr Intimidator
+87 R Borderland Behemoth
+114 C Bosk Banneret
+115 U Bramblewood Paragon
+88 C Brighthearth Banneret
+3 C Burrenton Bombardier
+4 C Burrenton Shield-Bearers
+5 U Cenn's Tactician
+116 R Chameleon Colossus
+6 C Changeling Sentinel
+141 U Cloak and Dagger
+7 C Coordinated Barrage
+89 R Countryside Crusher
+117 R Cream of the Crop
+8 U Daily Regimen
+29 R Declaration of Naught
+118 C Deglamer
+30 C Dewdrop Spy
+31 C Disperse
+32 C Distant Melody
+142 U Diviner's Wand
+143 R Door of Destinies
+119 C Earthbrawn
+60 R Earwig Squad
+120 C Elvish Warrior
+121 C Everbark Shaman
+33 C Fencer Clique
+61 R Fendeep Summoner
+122 C Fertilid
+62 C Festercreep
+9 R Feudkiller's Verdict
+63 C Final-Sting Faerie
+90 C Fire Juggler
+34 C Floodchaser
+10 C Forfend
+64 C Frogtosser Banneret
+123 C Game-Trail Changeling
+124 R Gilt-Leaf Archdruid
+11 U Graceful Reprieve
+125 R Greatbow Doyen
+35 R Grimoire Thief
+126 U Heritage Druid
+91 C Hostile Realm
+127 U Hunting Triad
+12 R Idyllic Tutor
+13 R Indomitable Ancients
+36 C Ink Dissolver
+37 U Inspired Sprite
+92 C Kindled Fury
+14 R Kinsbaile Borderguard
+15 R Kinsbaile Cavalier
+16 C Kithkin Zephyrnaut
+38 R Knowledge Exploitation
+39 C Latchkey Faerie
+128 R Leaf-Crowned Elder
+93 R Lightning Crafter
+129 C Luminescent Rain
+94 C Lunk Errant
+130 C Lys Alana Bowmaster
+65 R Maralen of the Mornsong
+17 U Meadowboon
+40 C Merrow Witsniper
+66 R Mind Shatter
+41 R Mind Spring
+67 C Moonglove Changeling
+68 C Morsel Theft
+18 C Mosquito Guard
+42 C Mothdust Changeling
+95 C Mudbutton Clanger
+147 R Murmuring Bosk
+148 R Mutavault
+43 C Negate
+44 U Nevermaker
+69 U Nightshade Schemers
+70 U Noggin Whack
+45 R Notorious Throng
+144 U Obsidian Battle-Axe
+71 U Offalsnout
+72 U Oona's Blackguard
+131 U Orchard Warden
+19 C Order of the Golden Cricket
+73 C Pack's Disdain
+20 R Preeminent Captain
+74 C Prickly Boggart
+149 R Primal Beyond
+75 C Pulling Teeth
+96 U Pyroclast Consul
+97 U Rage Forger
+132 R Reach of Branches
+133 U Recross the Paths
+21 U Redeem the Lost
+134 C Reins of the Vinesteed
+98 U Release the Ants
+46 U Research the Deep
+22 R Reveillark
+76 U Revive the Fallen
+135 R Rhys the Exiled
+99 U Rivals' Duel
+100 C Roar of the Crowd
+150 R Rustic Clachan
+47 U Sage of Fables
+48 U Sage's Dousing
+136 R Scapeshift
+77 R Scarblade Elite
+101 C Seething Pathblazer
+102 R Sensation Gorger
+103 C Shard Volley
+104 R Shared Animosity
+23 C Shinewend
+49 R Sigil Tracer
+50 R Slithermuse
+105 U Spitebellows
+78 C Squeaking Pie Grubfellows
+79 R Stenchskipper
+106 C Stingmoggie
+80 U Stinkdrinker Bandit
+107 U Stomping Slabs
+24 R Stonehewer Giant
+51 C Stonybrook Banneret
+25 C Stonybrook Schoolmaster
+52 C Stream of Unconsciousness
+108 C Sunflare Shaman
+53 R Supreme Exemplar
+26 U Swell of Courage
+109 R Taurean Mauler
+54 U Thieves' Fortune
+145 U Thornbite Staff
+110 R Titan's Revenge
+137 R Unstoppable Ash
+55 R Vendilion Clique
+111 R Vengeful Firebrand
+146 U Veteran's Armaments
+81 C Violet Pall
+138 U Walker of the Grove
+27 U Wandering Graybeard
+112 C War-Spike Changeling
+82 U Warren Weirding
+56 U Waterspout Weavers
+83 C Weed-Pruner Poplar
+28 C Weight of Conscience
+84 R Weirding Shaman
+139 C Winnower Patrol
+140 U Wolf-Skull Shaman

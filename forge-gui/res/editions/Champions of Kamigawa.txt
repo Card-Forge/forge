@@ -9,310 +9,310 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
 
 [cards]
-C Akki Avalanchers
-U Akki Coalflinger
-R Akki Lavarunner
-C Akki Rockspeaker
-U Akki Underminer
-C Ashen-Skin Zubera
-U Aura of Dominion
-R Azami, Lady of Scrolls
-R Azusa, Lost but Seeking
-C Battle-Mad Ronin
-C Befoul
-R Ben-Ben, Akki Hermit
-C Blessed Breath
-U Blind with Anger
-U Blood Rites
-U Blood Speaker
-U Bloodthirsty Ogre
-R Boseiju, Who Shelters All
-U Brothers Yamazaki
-U Brothers Yamazaki
-C Brutal Deceiver
-R Budoka Gardener
-C Burr Grafter
-U Bushi Tenderfoot
-C Cage of Hands
-C Call to Glory
-C Callous Deceiver
-U Candles' Glow
-U Cleanfall
-U Cloudcrest Lake
-C Commune with Nature
-C Consuming Vortex
-C Counsel of the Soratami
-R Cranial Extraction
-C Cruel Deceiver
-C Crushing Pain
-C Cursed Ronin
-U Cut the Tethers
-U Dampen Thought
-U Dance of Shadows
-C Deathcurse Ogre
-C Desperate Ritual
-C Devoted Retainer
-C Devouring Greed
-C Devouring Rage
-C Distress
-R Dosan the Falling Leaf
-C Dripping-Tongue Zubera
-U Earthshaker
-U Eerie Procession
-R Eiganjo Castle
-R Eight-and-a-Half-Tails
-C Ember-Fist Zubera
-C Ethereal Haze
-C Eye of Nowhere
-U Feast of Worms
-C Feral Deceiver
-C Field of Reality
-C Floating-Dream Zubera
-R Forbidden Orchard
-L Forest
-L Forest
-L Forest
-L Forest
-C Frostwielder
-U Gale Force
-R General's Kabuto
-U Ghostly Prison
-C Gibbering Kami
-R Gifts Ungiven
-C Glacial Ray
-R Glimpse of Nature
-R Godo, Bandit Warlord
-U Graceful Adept
-U Guardian of Solitude
-U Gutwrencher Oni
-R Hair-Strung Koto
-R Hall of the Bandit Lord
-U Hana Kami
-U Hanabi Blast
-U Hankyu
-C Harsh Deceiver
-R He Who Hungers
-R Heartbeat of Spring
-C Hearth Kami
-U Hideous Laughter
-R Hikari, Twilight Guardian
-U Hinder
-C Hisoka's Defiance
-C Hisoka's Guard
-R Hisoka, Minamo Sensei
-R Hold the Line
-U Honden of Cleansing Fire
-U Honden of Infinite Rage
-U Honden of Life's Web
-U Honden of Night's Reach
-U Honden of Seeing Winds
-U Honor-Worn Shaku
-U Horizon Seed
-R Horobi, Death's Wail
-C Humble Budoka
-C Hundred-Talon Kami
-R Imi Statue
-R Iname, Death Aspect
-R Iname, Life Aspect
-C Indomitable Will
-U Initiate of Blood
-U Innocence Kami
-R Isamaru, Hound of Konda
-L Island
-L Island
-L Island
-L Island
-U Jade Idol
-R Journeyer's Kite
-C Joyous Respite
-R Jugan, the Rising Star
-C Jukai Messenger
-R Junkyo Bell
-R Jushi Apprentice
-C Kabuto Moth
-C Kami of Ancient Law
-C Kami of Fire's Roar
-U Kami of Lunacy
-U Kami of Old Stone
-C Kami of Twisted Reflection
-C Kami of the Hunt
-C Kami of the Painted Road
-U Kami of the Palace Fields
-C Kami of the Waning Moon
-U Kashi-Tribe Reaver
-C Kashi-Tribe Warriors
-R Keiga, the Tide Star
-R Kiki-Jiki, Mirror Breaker
-R Kiku, Night's Flower
-C Kitsune Blademaster
-C Kitsune Diviner
-C Kitsune Healer
-R Kitsune Mystic
-C Kitsune Riftwalker
-R Kodama of the North Tree
-R Kodama of the South Tree
-C Kodama's Might
-C Kodama's Reach
-R Kokusho, the Evening Star
-R Konda's Banner
-U Konda's Hatamoto
-R Konda, Lord of Eiganjo
-U Kumano's Pupils
-R Kumano, Master Yamabushi
-R Kuro, Pitlord
-R Kusari-Gama
-C Lantern Kami
-U Lantern-Lit Graveyard
-C Lava Spike
-C Lifted by Clouds
-R Long-Forgotten Gohei
-U Lure
-U Mana Seism
-R Marrow-Gnawer
-R Masako the Humorless
-C Matsu-Tribe Decoy
-R Meloku the Clouded Mirror
-C Midnight Covenant
-R Minamo, School at Water's Edge
-R Mindblaze
-R Moonring Mirror
-C Moss Kami
-C Mothrider Samurai
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-R Myojin of Cleansing Fire
-R Myojin of Infinite Rage
-R Myojin of Life's Web
-R Myojin of Night's Reach
-R Myojin of Seeing Winds
-C Mystic Restraints
-U Nagao, Bound by Honor
-R Nature's Will
-U Nezumi Bone-Reader
-C Nezumi Cutthroat
-U Nezumi Graverobber
-C Nezumi Ronin
-R Nezumi Shortfang
-R Night Dealings
-R Night of Souls' Betrayal
-U Nine-Ringed Bo
-U No-Dachi
-U Numai Outcast
-R Oathkeeper, Takeno's Daisho
-R Okina, Temple to the Grandfathers
-U Oni Possession
-U Orbweaver Kumo
-C Order of the Sacred Bell
-U Ore Gorger
-U Orochi Eggwatcher
-R Orochi Hatchery
-C Orochi Leafcaller
-C Orochi Ranger
-C Orochi Sustainer
-U Otherworldly Journey
-U Pain Kami
-U Painwracker Oni
-R Part the Veil
-C Peer Through Depths
-U Petals of Insight
-U Pinecrest Ridge
-C Pious Kitsune
-L Plains
-L Plains
-L Plains
-L Plains
-C Psychic Puppetry
-C Pull Under
-C Quiet Purity
-C Rag Dealer
-C Ragged Veins
-C Reach Through Mists
-U Reciprocate
-U Reito Lantern
-C Rend Flesh
-C Rend Spirit
-R Reverse the Sands
-R Reweave
-C River Kaijin
-C Ronin Houndmaster
-U Rootrunner
-R Ryusei, the Falling Star
-U Sachi, Daughter of Seshiro
-C Sakura-Tribe Elder
-U Samurai Enforcers
-U Samurai of the Pale Curtain
-C Scuttling Death
-R Seizan, Perverter of Truth
-R Sensei Golden-Tail
-U Sensei's Divining Top
-C Serpent Skin
-R Seshiro the Anointed
-R Shell of the Last Kappa
-R Shimatsu the Bloodcloaked
-R Shinka, the Bloodsoaked Keep
-R Shisato, Whispering Hunter
-R Shizo, Death's Storehouse
-U Sideswipe
-C Sift Through Sands
-C Silent-Chant Zubera
-U Sire of the Storm
-U Soilshaper
-C Sokenzan Bruiser
-C Soratami Cloudskater
-C Soratami Mirror-Guard
-U Soratami Mirror-Mage
-C Soratami Rainshaper
-U Soratami Savant
-U Soratami Seer
-U Sosuke, Son of Seshiro
-C Soul of Magma
-R Soulblast
-C Soulless Revival
-U Squelch
-C Stone Rain
-U Strange Inversion
-U Strength of Cedars
-U Struggle for Sanity
-U Student of Elements
-U Swallowing Plague
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-R Swirl the Mists
-R Takeno, Samurai General
-R Tatsumasa, the Dragon's Fang
-C Teller of Tales
-U Tenza, Godo's Maul
-C Terashi's Cry
-R The Unspeakable
-U Thief of Hope
-C Thoughtbind
-U Thousand-legged Kami
-R Through the Breach
-R Tide of War
-R Time Stop
-U Time of Need
-U Tranquil Garden
-R Uba Mask
-C Uncontrollable Anger
-C Unearthly Blizzard
-C Unnatural Speed
-R Untaidake, the Cloud Keeper
-R Uyo, Silent Prophet
-R Vassal's Duty
-C Venerable Kumo
-C Vigilance
-C Villainous Ogre
-C Vine Kami
-C Waking Nightmare
-C Wandering Ones
-U Waterveil Cavern
-C Wear Away
-C Wicked Akuba
-C Yamabushi's Flame
-C Yamabushi's Storm
-R Yosei, the Morning Star
-R Zo-Zu the Punisher
+151 C Akki Avalanchers
+152 U Akki Coalflinger
+153 R Akki Lavarunner
+154 C Akki Rockspeaker
+155 U Akki Underminer
+101 C Ashen-Skin Zubera
+51 U Aura of Dominion
+52 R Azami, Lady of Scrolls
+201 R Azusa, Lost but Seeking
+156 C Battle-Mad Ronin
+102 C Befoul
+157 R Ben-Ben, Akki Hermit
+1 C Blessed Breath
+158 U Blind with Anger
+159 U Blood Rites
+103 U Blood Speaker
+104 U Bloodthirsty Ogre
+273 R Boseiju, Who Shelters All
+160 U Brothers Yamazaki
+160 U Brothers Yamazaki
+161 C Brutal Deceiver
+202 R Budoka Gardener
+203 C Burr Grafter
+2 U Bushi Tenderfoot
+3 C Cage of Hands
+4 C Call to Glory
+53 C Callous Deceiver
+5 U Candles' Glow
+6 U Cleanfall
+274 U Cloudcrest Lake
+204 C Commune with Nature
+54 C Consuming Vortex
+55 C Counsel of the Soratami
+105 R Cranial Extraction
+106 C Cruel Deceiver
+162 C Crushing Pain
+107 C Cursed Ronin
+56 U Cut the Tethers
+57 U Dampen Thought
+108 U Dance of Shadows
+109 C Deathcurse Ogre
+163 C Desperate Ritual
+7 C Devoted Retainer
+110 C Devouring Greed
+164 C Devouring Rage
+111 C Distress
+205 R Dosan the Falling Leaf
+206 C Dripping-Tongue Zubera
+165 U Earthshaker
+58 U Eerie Procession
+275 R Eiganjo Castle
+8 R Eight-and-a-Half-Tails
+166 C Ember-Fist Zubera
+9 C Ethereal Haze
+59 C Eye of Nowhere
+207 U Feast of Worms
+208 C Feral Deceiver
+60 C Field of Reality
+61 C Floating-Dream Zubera
+276 R Forbidden Orchard
+303 L Forest
+303 L Forest
+303 L Forest
+303 L Forest
+167 C Frostwielder
+209 U Gale Force
+251 R General's Kabuto
+10 U Ghostly Prison
+112 C Gibbering Kami
+62 R Gifts Ungiven
+168 C Glacial Ray
+210 R Glimpse of Nature
+169 R Godo, Bandit Warlord
+63 U Graceful Adept
+64 U Guardian of Solitude
+113 U Gutwrencher Oni
+252 R Hair-Strung Koto
+277 R Hall of the Bandit Lord
+211 U Hana Kami
+170 U Hanabi Blast
+253 U Hankyu
+11 C Harsh Deceiver
+114 R He Who Hungers
+212 R Heartbeat of Spring
+171 C Hearth Kami
+115 U Hideous Laughter
+12 R Hikari, Twilight Guardian
+65 U Hinder
+67 C Hisoka's Defiance
+68 C Hisoka's Guard
+66 R Hisoka, Minamo Sensei
+13 R Hold the Line
+14 U Honden of Cleansing Fire
+172 U Honden of Infinite Rage
+213 U Honden of Life's Web
+116 U Honden of Night's Reach
+69 U Honden of Seeing Winds
+254 U Honor-Worn Shaku
+15 U Horizon Seed
+117 R Horobi, Death's Wail
+214 C Humble Budoka
+16 C Hundred-Talon Kami
+255 R Imi Statue
+118 R Iname, Death Aspect
+215 R Iname, Life Aspect
+17 C Indomitable Will
+173 U Initiate of Blood
+18 U Innocence Kami
+19 R Isamaru, Hound of Konda
+291 L Island
+291 L Island
+291 L Island
+291 L Island
+256 U Jade Idol
+257 R Journeyer's Kite
+216 C Joyous Respite
+217 R Jugan, the Rising Star
+218 C Jukai Messenger
+258 R Junkyo Bell
+70 R Jushi Apprentice
+20 C Kabuto Moth
+21 C Kami of Ancient Law
+174 C Kami of Fire's Roar
+119 U Kami of Lunacy
+22 U Kami of Old Stone
+71 C Kami of Twisted Reflection
+219 C Kami of the Hunt
+23 C Kami of the Painted Road
+24 U Kami of the Palace Fields
+120 C Kami of the Waning Moon
+220 U Kashi-Tribe Reaver
+221 C Kashi-Tribe Warriors
+72 R Keiga, the Tide Star
+175 R Kiki-Jiki, Mirror Breaker
+121 R Kiku, Night's Flower
+25 C Kitsune Blademaster
+26 C Kitsune Diviner
+27 C Kitsune Healer
+28 R Kitsune Mystic
+29 C Kitsune Riftwalker
+222 R Kodama of the North Tree
+223 R Kodama of the South Tree
+224 C Kodama's Might
+225 C Kodama's Reach
+122 R Kokusho, the Evening Star
+259 R Konda's Banner
+31 U Konda's Hatamoto
+30 R Konda, Lord of Eiganjo
+177 U Kumano's Pupils
+176 R Kumano, Master Yamabushi
+123 R Kuro, Pitlord
+260 R Kusari-Gama
+32 C Lantern Kami
+278 U Lantern-Lit Graveyard
+178 C Lava Spike
+73 C Lifted by Clouds
+261 R Long-Forgotten Gohei
+226 U Lure
+179 U Mana Seism
+124 R Marrow-Gnawer
+33 R Masako the Humorless
+227 C Matsu-Tribe Decoy
+74 R Meloku the Clouded Mirror
+125 C Midnight Covenant
+279 R Minamo, School at Water's Edge
+180 R Mindblaze
+262 R Moonring Mirror
+228 C Moss Kami
+34 C Mothrider Samurai
+299 L Mountain
+299 L Mountain
+299 L Mountain
+299 L Mountain
+35 R Myojin of Cleansing Fire
+181 R Myojin of Infinite Rage
+229 R Myojin of Life's Web
+126 R Myojin of Night's Reach
+75 R Myojin of Seeing Winds
+76 C Mystic Restraints
+36 U Nagao, Bound by Honor
+230 R Nature's Will
+127 U Nezumi Bone-Reader
+128 C Nezumi Cutthroat
+129 U Nezumi Graverobber
+130 C Nezumi Ronin
+131 R Nezumi Shortfang
+132 R Night Dealings
+133 R Night of Souls' Betrayal
+263 U Nine-Ringed Bo
+264 U No-Dachi
+134 U Numai Outcast
+265 R Oathkeeper, Takeno's Daisho
+280 R Okina, Temple to the Grandfathers
+135 U Oni Possession
+231 U Orbweaver Kumo
+232 C Order of the Sacred Bell
+182 U Ore Gorger
+233 U Orochi Eggwatcher
+266 R Orochi Hatchery
+234 C Orochi Leafcaller
+235 C Orochi Ranger
+236 C Orochi Sustainer
+37 U Otherworldly Journey
+183 U Pain Kami
+136 U Painwracker Oni
+77 R Part the Veil
+78 C Peer Through Depths
+79 U Petals of Insight
+281 U Pinecrest Ridge
+38 C Pious Kitsune
+287 L Plains
+287 L Plains
+287 L Plains
+287 L Plains
+80 C Psychic Puppetry
+137 C Pull Under
+39 C Quiet Purity
+138 C Rag Dealer
+139 C Ragged Veins
+81 C Reach Through Mists
+40 U Reciprocate
+267 U Reito Lantern
+140 C Rend Flesh
+141 C Rend Spirit
+41 R Reverse the Sands
+82 R Reweave
+83 C River Kaijin
+184 C Ronin Houndmaster
+237 U Rootrunner
+185 R Ryusei, the Falling Star
+238 U Sachi, Daughter of Seshiro
+239 C Sakura-Tribe Elder
+42 U Samurai Enforcers
+43 U Samurai of the Pale Curtain
+142 C Scuttling Death
+143 R Seizan, Perverter of Truth
+44 R Sensei Golden-Tail
+268 U Sensei's Divining Top
+240 C Serpent Skin
+241 R Seshiro the Anointed
+269 R Shell of the Last Kappa
+186 R Shimatsu the Bloodcloaked
+282 R Shinka, the Bloodsoaked Keep
+242 R Shisato, Whispering Hunter
+283 R Shizo, Death's Storehouse
+187 U Sideswipe
+84 C Sift Through Sands
+45 C Silent-Chant Zubera
+85 U Sire of the Storm
+243 U Soilshaper
+188 C Sokenzan Bruiser
+86 C Soratami Cloudskater
+87 C Soratami Mirror-Guard
+88 U Soratami Mirror-Mage
+89 C Soratami Rainshaper
+90 U Soratami Savant
+91 U Soratami Seer
+244 U Sosuke, Son of Seshiro
+189 C Soul of Magma
+190 R Soulblast
+144 C Soulless Revival
+92 U Squelch
+191 C Stone Rain
+192 U Strange Inversion
+245 U Strength of Cedars
+145 U Struggle for Sanity
+93 U Student of Elements
+146 U Swallowing Plague
+295 L Swamp
+295 L Swamp
+295 L Swamp
+295 L Swamp
+94 R Swirl the Mists
+46 R Takeno, Samurai General
+270 R Tatsumasa, the Dragon's Fang
+95 C Teller of Tales
+271 U Tenza, Godo's Maul
+47 C Terashi's Cry
+98 R The Unspeakable
+147 U Thief of Hope
+96 C Thoughtbind
+246 U Thousand-legged Kami
+193 R Through the Breach
+194 R Tide of War
+97 R Time Stop
+247 U Time of Need
+284 U Tranquil Garden
+272 R Uba Mask
+195 C Uncontrollable Anger
+196 C Unearthly Blizzard
+197 C Unnatural Speed
+285 R Untaidake, the Cloud Keeper
+99 R Uyo, Silent Prophet
+48 R Vassal's Duty
+248 C Venerable Kumo
+49 C Vigilance
+148 C Villainous Ogre
+249 C Vine Kami
+149 C Waking Nightmare
+100 C Wandering Ones
+286 U Waterveil Cavern
+250 C Wear Away
+150 C Wicked Akuba
+198 C Yamabushi's Flame
+199 C Yamabushi's Storm
+50 R Yosei, the Morning Star
+200 R Zo-Zu the Punisher

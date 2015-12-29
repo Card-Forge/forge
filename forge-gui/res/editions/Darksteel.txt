@@ -9,168 +9,168 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
 
 [cards]
-R AEther Snap
-U AEther Vial
-R Ageless Entity
-U Angel's Feather
-C Arcane Spyglass
-C Arcbound Bruiser
-U Arcbound Crusher
-U Arcbound Fiend
-C Arcbound Hybrid
-U Arcbound Lancer
-R Arcbound Overseer
-R Arcbound Ravager
-R Arcbound Reclaimer
-U Arcbound Slith
-C Arcbound Stinger
-C Arcbound Worker
-C Auriok Glaivemaster
-U Auriok Siege Sled
-C Barbed Lightning
-R Blinkmoth Nexus
-C Burden of Greed
-U Carry Away
-U Chimeric Egg
-C Chittering Rats
-R Chromescale Drake
-U Coretapper
-C Crazed Goblin
-U Darksteel Brute
-C Darksteel Citadel
-R Darksteel Colossus
-R Darksteel Forge
-U Darksteel Gargoyle
-C Darksteel Ingot
-C Darksteel Pendant
-R Darksteel Reactor
-R Death Cloud
-U Death-Mask Duplicant
-U Demon's Horn
-U Dismantle
-U Dragon's Claw
-C Drill-Skimmer
-C Drooling Ogre
-C Dross Golem
-R Eater of Days
-C Echoing Calm
-C Echoing Courage
-C Echoing Decay
-C Echoing Ruin
-C Echoing Truth
-U Emissary of Despair
-U Emissary of Hope
-C Essence Drain
-R Fangren Firstborn
-U Fireball
-R Flamebreak
-R Furnace Dragon
-R Gemini Engine
-U Genesis Chamber
-U Geth's Grimoire
-U Goblin Archaeologist
-R Greater Harvester
-C Grimclaw Bats
-C Hallow
-R Heartseeker
-U Hoverguard Observer
-C Hunger of the Nim
-U Infested Roothold
-C Inflame
-U Juggernaut
-U Karstoderm
-U Kraken's Eye
-C Krark-Clan Stoker
-R Last Word
-U Leonin Battlemage
-C Leonin Bola
-R Leonin Shikari
-R Lich's Tomb
-C Loxodon Mystic
-C Machinate
-C Magnetic Flux
-R Memnarch
-R Mephitic Ooze
-C Metal Fatigue
-U Mirrodin's Core
-U Murderous Spoils
-R Mycosynth Lattice
-C Myr Landshaper
-R Myr Matrix
-C Myr Moonvessel
-U Nemesis Mask
-C Neurok Prodigy
-U Neurok Transmuter
-U Nim Abomination
-C Nourish
-C Oxidda Golem
-U Oxidize
-R Panoptic Mirror
-R Pristine Angel
-U Psychic Overload
-C Pteron Ghost
-R Pulse of the Dross
-R Pulse of the Fields
-R Pulse of the Forge
-R Pulse of the Grid
-R Pulse of the Tangle
-U Purge
-C Quicksilver Behemoth
-C Razor Golem
-C Reap and Sow
-R Rebuking Ceremony
-R Reshape
-R Retract
-C Ritual of Restoration
-R Roaring Slagwurm
-R Savage Beating
-C Scavenging Scarab
-U Screams from Within
-U Scrounge
-U Second Sight
-R Serum Powder
-R Shield of Kaldra
-R Shriveling Rot
-R Shunt
-U Skullclamp
-R Slobad, Goblin Tinkerer
-R Soulscour
-U Spawning Pit
-U Specter's Shroud
-R Spellbinder
-U Spincrusher
-C Spire Golem
-U Stand Together
-R Steelshaper Apprentice
-U Stir the Pride
-R Sundering Titan
-U Surestrike Trident
-R Sword of Fire and Ice
-R Sword of Light and Shadow
-R Synod Artificer
-U Talon of Pain
-C Tangle Golem
-C Tangle Spider
-U Tanglewalker
-U Tears of Rage
-C Tel-Jilad Outrider
-C Tel-Jilad Wolf
-U Test of Faith
-R Thought Dissector
-U Thunderstaff
-R Trinisphere
-R Turn the Tables
-C Unforge
-C Ur-Golem's Eye
-C Vedalken Engineer
-C Vex
-C Viridian Acolyte
-R Viridian Zealot
-U Voltaic Construct
-C Vulshok Morningstar
-U Vulshok War Boar
-R Wand of the Elements
-R Well of Lost Dreams
-C Whispersilk Cloak
-U Wirefly Hive
-U Wurm's Tooth
+37 R AEther Snap
+91 U AEther Vial
+73 R Ageless Entity
+92 U Angel's Feather
+93 C Arcane Spyglass
+94 C Arcbound Bruiser
+95 U Arcbound Crusher
+96 U Arcbound Fiend
+97 C Arcbound Hybrid
+98 U Arcbound Lancer
+99 R Arcbound Overseer
+100 R Arcbound Ravager
+101 R Arcbound Reclaimer
+102 U Arcbound Slith
+103 C Arcbound Stinger
+104 C Arcbound Worker
+1 C Auriok Glaivemaster
+105 U Auriok Siege Sled
+55 C Barbed Lightning
+163 R Blinkmoth Nexus
+38 C Burden of Greed
+19 U Carry Away
+106 U Chimeric Egg
+39 C Chittering Rats
+20 R Chromescale Drake
+107 U Coretapper
+56 C Crazed Goblin
+108 U Darksteel Brute
+164 C Darksteel Citadel
+109 R Darksteel Colossus
+110 R Darksteel Forge
+111 U Darksteel Gargoyle
+112 C Darksteel Ingot
+113 C Darksteel Pendant
+114 R Darksteel Reactor
+40 R Death Cloud
+115 U Death-Mask Duplicant
+116 U Demon's Horn
+57 U Dismantle
+117 U Dragon's Claw
+118 C Drill-Skimmer
+58 C Drooling Ogre
+119 C Dross Golem
+120 R Eater of Days
+2 C Echoing Calm
+74 C Echoing Courage
+41 C Echoing Decay
+59 C Echoing Ruin
+21 C Echoing Truth
+42 U Emissary of Despair
+3 U Emissary of Hope
+43 C Essence Drain
+75 R Fangren Firstborn
+60 U Fireball
+61 R Flamebreak
+62 R Furnace Dragon
+121 R Gemini Engine
+122 U Genesis Chamber
+123 U Geth's Grimoire
+63 U Goblin Archaeologist
+44 R Greater Harvester
+45 C Grimclaw Bats
+4 C Hallow
+124 R Heartseeker
+22 U Hoverguard Observer
+46 C Hunger of the Nim
+76 U Infested Roothold
+64 C Inflame
+125 U Juggernaut
+77 U Karstoderm
+126 U Kraken's Eye
+65 C Krark-Clan Stoker
+23 R Last Word
+5 U Leonin Battlemage
+127 C Leonin Bola
+6 R Leonin Shikari
+128 R Lich's Tomb
+7 C Loxodon Mystic
+24 C Machinate
+25 C Magnetic Flux
+129 R Memnarch
+47 R Mephitic Ooze
+8 C Metal Fatigue
+165 U Mirrodin's Core
+48 U Murderous Spoils
+130 R Mycosynth Lattice
+131 C Myr Landshaper
+132 R Myr Matrix
+133 C Myr Moonvessel
+134 U Nemesis Mask
+26 C Neurok Prodigy
+27 U Neurok Transmuter
+49 U Nim Abomination
+78 C Nourish
+135 C Oxidda Golem
+79 U Oxidize
+136 R Panoptic Mirror
+9 R Pristine Angel
+28 U Psychic Overload
+10 C Pteron Ghost
+50 R Pulse of the Dross
+11 R Pulse of the Fields
+66 R Pulse of the Forge
+29 R Pulse of the Grid
+80 R Pulse of the Tangle
+12 U Purge
+30 C Quicksilver Behemoth
+137 C Razor Golem
+81 C Reap and Sow
+82 R Rebuking Ceremony
+31 R Reshape
+32 R Retract
+13 C Ritual of Restoration
+83 R Roaring Slagwurm
+67 R Savage Beating
+51 C Scavenging Scarab
+52 U Screams from Within
+53 U Scrounge
+33 U Second Sight
+138 R Serum Powder
+139 R Shield of Kaldra
+54 R Shriveling Rot
+68 R Shunt
+140 U Skullclamp
+69 R Slobad, Goblin Tinkerer
+14 R Soulscour
+141 U Spawning Pit
+142 U Specter's Shroud
+143 R Spellbinder
+144 U Spincrusher
+145 C Spire Golem
+84 U Stand Together
+15 R Steelshaper Apprentice
+16 U Stir the Pride
+146 R Sundering Titan
+147 U Surestrike Trident
+148 R Sword of Fire and Ice
+149 R Sword of Light and Shadow
+34 R Synod Artificer
+150 U Talon of Pain
+151 C Tangle Golem
+85 C Tangle Spider
+86 U Tanglewalker
+70 U Tears of Rage
+87 C Tel-Jilad Outrider
+88 C Tel-Jilad Wolf
+17 U Test of Faith
+152 R Thought Dissector
+153 U Thunderstaff
+154 R Trinisphere
+18 R Turn the Tables
+71 C Unforge
+155 C Ur-Golem's Eye
+35 C Vedalken Engineer
+36 C Vex
+89 C Viridian Acolyte
+90 R Viridian Zealot
+156 U Voltaic Construct
+157 C Vulshok Morningstar
+72 U Vulshok War Boar
+158 R Wand of the Elements
+159 R Well of Lost Dreams
+160 C Whispersilk Cloak
+161 U Wirefly Hive
+162 U Wurm's Tooth

@@ -10,360 +10,360 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 FoilAlwaysInCommonSlot=False
 
 [cards]
-U Abyssal Specter
-U Air Elemental
-R Aladdin's Ring
-U Ambition's Cost
-C Anaba Shaman
-U Angel of Mercy
-C Angelic Page
-R Archivist
-U Ardent Militia
-R Avatar of Hope
-C Aven Cloudchaser
-C Aven Fisher
-C Aven Flock
-R Balance of Power
-C Balduvian Barbarians
-R Beast of Burden
-R Birds of Paradise
-U Blanchwood Armor
-U Blaze
-R Blessed Reversal
-R Blinding Angel
-R Blood Moon
-R Bloodshot Cyclops
-C Bog Imp
-U Bog Wraith
-U Boil
-C Boomerang
-R Brass Herald
-R Bribery
-R Call of the Wild
-C Canopy Spider
-C Canyon Wildcat
-U Carrion Wall
-C Catalog
-U Chastise
-U Choke
-C Cinder Wall
-U Circle of Protection: Black
-U Circle of Protection: Blue
-U Circle of Protection: Green
-U Circle of Protection: Red
-U Circle of Protection: White
-R City of Brass
-C Coastal Hornclaw
-R Coastal Piracy
-U Coastal Tower
-R Coat of Arms
-C Coercion
-R Collective Unconscious
-U Concentrate
-U Confiscate
-C Coral Eel
-R Cowardice
-C Craw Wurm
-U Creeping Mold
-C Crossbow Infantry
-U Crystal Rod
-U Curiosity
-R Daring Apprentice
-C Dark Banishing
-R Death Pit Offering
-R Death Pits of Rath
-U Deathgazer
-C Deepwood Ghoul
-R Defense Grid
-R Deflection
-C Dehydration
-U Demolish
-C Demystify
-U Diabolic Tutor
-R Dingus Egg
-R Disrupting Scepter
-R Distorting Lens
-C Diving Griffin
-C Drudge Skeletons
-C Dusk Imp
-U Dwarven Demolition Team
+117 U Abyssal Specter
+59 U Air Elemental
+291 R Aladdin's Ring
+118 U Ambition's Cost
+175 C Anaba Shaman
+1 U Angel of Mercy
+2 C Angelic Page
+60 R Archivist
+3 U Ardent Militia
+4 R Avatar of Hope
+5 C Aven Cloudchaser
+61 C Aven Fisher
+6 C Aven Flock
+62 R Balance of Power
+176 C Balduvian Barbarians
+292 R Beast of Burden
+233 R Birds of Paradise
+234 U Blanchwood Armor
+177 U Blaze
+7 R Blessed Reversal
+8 R Blinding Angel
+178 R Blood Moon
+179 R Bloodshot Cyclops
+119 C Bog Imp
+120 U Bog Wraith
+180 U Boil
+63 C Boomerang
+293 R Brass Herald
+64 R Bribery
+235 R Call of the Wild
+236 C Canopy Spider
+181 C Canyon Wildcat
+121 U Carrion Wall
+65 C Catalog
+9 U Chastise
+237 U Choke
+182 C Cinder Wall
+10 U Circle of Protection: Black
+11 U Circle of Protection: Blue
+12 U Circle of Protection: Green
+13 U Circle of Protection: Red
+14 U Circle of Protection: White
+322 R City of Brass
+66 C Coastal Hornclaw
+67 R Coastal Piracy
+323 U Coastal Tower
+294 R Coat of Arms
+122 C Coercion
+238 R Collective Unconscious
+68 U Concentrate
+69 U Confiscate
+70 C Coral Eel
+71 R Cowardice
+239 C Craw Wurm
+240 U Creeping Mold
+15 C Crossbow Infantry
+295 U Crystal Rod
+72 U Curiosity
+73 R Daring Apprentice
+123 C Dark Banishing
+124 R Death Pit Offering
+125 R Death Pits of Rath
+126 U Deathgazer
+127 C Deepwood Ghoul
+296 R Defense Grid
+74 R Deflection
+75 C Dehydration
+183 U Demolish
+16 C Demystify
+128 U Diabolic Tutor
+297 R Dingus Egg
+298 R Disrupting Scepter
+299 R Distorting Lens
+17 C Diving Griffin
+129 C Drudge Skeletons
+130 C Dusk Imp
+184 U Dwarven Demolition Team
 C Eager Cadet
-R Eastern Paladin
-U Elfhame Palace
-R Elite Archers
-U Elite Javelineer
-R Elvish Champion
-U Elvish Lyrist
-C Elvish Pioneer
-R Elvish Piper
-U Elvish Scrapper
-R Emperor Crocodile
+131 R Eastern Paladin
+324 U Elfhame Palace
+18 R Elite Archers
+19 U Elite Javelineer
+241 R Elvish Champion
+242 U Elvish Lyrist
+243 C Elvish Pioneer
+244 R Elvish Piper
+245 U Elvish Scrapper
+246 R Emperor Crocodile
 U Enormous Baloth
-U Enrage
-R Ensnaring Bridge
-R Evacuation
-U Execute
-R Fallen Angel
-C Fear
-U Fecundity
-C Fertile Ground
-U Fighting Drake
-C Flash Counter
-U Flashfires
-R Fleeting Image
-C Flight
-R Flying Carpet
-U Fodder Cannon
-U Foratog
-L Forest
-L Forest
-L Forest
-L Forest
-C Fugitive Wizard
-R Fungusaur
-R Furnace of Rath
-U Fyndhorn Elder
-R Gaea's Herald
-C Giant Badger
-C Giant Cockroach
-C Giant Growth
+185 U Enrage
+300 R Ensnaring Bridge
+76 R Evacuation
+132 U Execute
+133 R Fallen Angel
+134 C Fear
+247 U Fecundity
+248 C Fertile Ground
+77 U Fighting Drake
+78 C Flash Counter
+186 U Flashfires
+79 R Fleeting Image
+80 C Flight
+301 R Flying Carpet
+302 U Fodder Cannon
+249 U Foratog
+347 L Forest
+347 L Forest
+347 L Forest
+347 L Forest
+81 C Fugitive Wizard
+250 R Fungusaur
+187 R Furnace of Rath
+251 U Fyndhorn Elder
+252 R Gaea's Herald
+253 C Giant Badger
+135 C Giant Cockroach
+254 C Giant Growth
 C Giant Octopus
-C Giant Spider
-R Glorious Anthem
-C Glory Seeker
-U Gluttonous Zombie
-C Goblin Chariot
-U Goblin Glider
-R Goblin King
-C Goblin Raider
-R Grave Pact
-C Gravedigger
-C Grizzly Bears
-U Guerrilla Tactics
-R Hammer of Bogardan
-C Healing Salve
-U Hibernation
-C Hill Giant
-C Holy Day
-C Holy Strength
-C Honor Guard
-C Horned Troll
-C Horned Turtle
-R Howling Mine
-U Hulking Cyclops
-U Hunted Wumpus
-C Index
-R Inferno
-C Inspiration
-R Intrepid Hero
-R Intruder Alarm
-U Invisibility
-U Iron Star
-L Island
-L Island
-L Island
-L Island
-U Ivory Cup
-R Ivory Mask
-R Jayemdae Tome
-U Karma
-R Larceny
-C Lava Axe
-R Lava Hounds
-U Lesser Gargadon
-R Lhurgoyf
-U Lightning Blast
-C Lightning Elemental
-U Living Terrain
-U Llanowar Behemoth
-C Lone Wolf
-C Looming Shade
-R Lord of the Undead
-U Lure
-C Maggot Carrier
-R Mahamoti Djinn
-R Mana Clash
-C Mana Leak
-R Maro
-C Master Decoy
-R Master Healer
-U Megrim
-U Merchant Scroll
-C Merchant of Secrets
-R Might of Oaks
-R Millstone
-R Mind Bend
-C Mind Rot
-U Mind Slash
-U Mind Sludge
-R Mogg Sentry
-C Monstrous Growth
-C Moss Monster
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-R Murderous Betrayal
-C Nantuko Disciple
-R Natural Affinity
-C Naturalize
-C Nausea
-U Nekrataal
-R Nightmare
-R Noble Purpose
-C Norwood Ranger
-R Obliterate
-U Ogre Taskmaster
-R Okk
-R Oracle's Attendants
-U Orcish Artillery
-C Orcish Spy
-C Pacifism
-C Panic Attack
-U Patagia Golem
-U Peach Garden Oath
-R Persecute
-U Phantom Warrior
-R Phyrexian Arena
-R Phyrexian Colossus
-U Phyrexian Hulk
-R Phyrexian Plaguelord
-C Plague Beetle
-R Plague Wind
-L Plains
-L Plains
-L Plains
-L Plains
-R Planar Portal
-R Plow Under
-R Primeval Force
-U Primeval Shambler
-U Puppeteer
-U Pyroclasm
-U Pyrotechnics
-C Raging Goblin
-U Rain of Blades
-C Raise Dead
-C Rampant Growth
-C Ravenous Rats
-C Razorfoot Griffin
-C Redeem
-C Reflexes
-C Regeneration
-R Relentless Assault
-C Remove Soul
-U Revive
-U Rewind
-R Rhox
-C Ridgeline Rager
-U Rod of Ruin
-R Rolling Stones
-R Royal Assassin
-R Rukh Egg
-C Rushwood Dryad
-C Sabretooth Tiger
-R Sacred Ground
-C Sacred Nectar
-C Sage Owl
-R Sage of Lat-Nam
-U Salt Marsh
-C Samite Healer
-U Sanctimony
-R Savannah Lions
-C Scathe Zombies
+255 C Giant Spider
+20 R Glorious Anthem
+21 C Glory Seeker
+136 U Gluttonous Zombie
+188 C Goblin Chariot
+189 U Goblin Glider
+190 R Goblin King
+191 C Goblin Raider
+137 R Grave Pact
+138 C Gravedigger
+256 C Grizzly Bears
+192 U Guerrilla Tactics
+193 R Hammer of Bogardan
+22 C Healing Salve
+82 U Hibernation
+194 C Hill Giant
+23 C Holy Day
+24 C Holy Strength
+25 C Honor Guard
+257 C Horned Troll
+83 C Horned Turtle
+303 R Howling Mine
+195 U Hulking Cyclops
+258 U Hunted Wumpus
+84 C Index
+196 R Inferno
+85 C Inspiration
+26 R Intrepid Hero
+86 R Intruder Alarm
+87 U Invisibility
+304 U Iron Star
+335 L Island
+335 L Island
+335 L Island
+335 L Island
+305 U Ivory Cup
+27 R Ivory Mask
+306 R Jayemdae Tome
+28 U Karma
+139 R Larceny
+197 C Lava Axe
+198 R Lava Hounds
+199 U Lesser Gargadon
+259 R Lhurgoyf
+200 U Lightning Blast
+201 C Lightning Elemental
+260 U Living Terrain
+261 U Llanowar Behemoth
+262 C Lone Wolf
+140 C Looming Shade
+141 R Lord of the Undead
+263 U Lure
+142 C Maggot Carrier
+88 R Mahamoti Djinn
+202 R Mana Clash
+89 C Mana Leak
+264 R Maro
+29 C Master Decoy
+30 R Master Healer
+143 U Megrim
+91 U Merchant Scroll
+90 C Merchant of Secrets
+265 R Might of Oaks
+307 R Millstone
+92 R Mind Bend
+144 C Mind Rot
+145 U Mind Slash
+146 U Mind Sludge
+203 R Mogg Sentry
+266 C Monstrous Growth
+267 C Moss Monster
+345 L Mountain
+345 L Mountain
+345 L Mountain
+345 L Mountain
+147 R Murderous Betrayal
+268 C Nantuko Disciple
+269 R Natural Affinity
+270 C Naturalize
+148 C Nausea
+149 U Nekrataal
+150 R Nightmare
+31 R Noble Purpose
+271 C Norwood Ranger
+204 R Obliterate
+205 U Ogre Taskmaster
+206 R Okk
+32 R Oracle's Attendants
+207 U Orcish Artillery
+208 C Orcish Spy
+33 C Pacifism
+209 C Panic Attack
+308 U Patagia Golem
+34 U Peach Garden Oath
+151 R Persecute
+93 U Phantom Warrior
+152 R Phyrexian Arena
+309 R Phyrexian Colossus
+310 U Phyrexian Hulk
+153 R Phyrexian Plaguelord
+154 C Plague Beetle
+155 R Plague Wind
+331 L Plains
+331 L Plains
+331 L Plains
+331 L Plains
+311 R Planar Portal
+272 R Plow Under
+273 R Primeval Force
+156 U Primeval Shambler
+94 U Puppeteer
+210 U Pyroclasm
+211 U Pyrotechnics
+212 C Raging Goblin
+35 U Rain of Blades
+157 C Raise Dead
+274 C Rampant Growth
+158 C Ravenous Rats
+36 C Razorfoot Griffin
+37 C Redeem
+213 C Reflexes
+275 C Regeneration
+214 R Relentless Assault
+95 C Remove Soul
+276 U Revive
+96 U Rewind
+277 R Rhox
+215 C Ridgeline Rager
+312 U Rod of Ruin
+38 R Rolling Stones
+159 R Royal Assassin
+216 R Rukh Egg
+278 C Rushwood Dryad
+217 C Sabretooth Tiger
+39 R Sacred Ground
+40 C Sacred Nectar
+98 C Sage Owl
+97 R Sage of Lat-Nam
+325 U Salt Marsh
+41 C Samite Healer
+42 U Sanctimony
+43 R Savannah Lions
+160 C Scathe Zombies
 C Sea Eagle
-C Sea Monster
-R Searing Wind
-U Seasoned Marshal
-R Seismic Assault
-C Serpent Warrior
-R Serra Angel
-U Sever Soul
-C Severed Legion
-C Shatter
-R Shifting Sky
-R Shivan Dragon
-U Shivan Oasis
-C Shock
-C Shock Troops
+99 C Sea Monster
+218 R Searing Wind
+44 U Seasoned Marshal
+219 R Seismic Assault
+161 C Serpent Warrior
+45 R Serra Angel
+162 U Sever Soul
+163 C Severed Legion
+220 C Shatter
+100 R Shifting Sky
+221 R Shivan Dragon
+326 U Shivan Oasis
+222 C Shock
+223 C Shock Troops
 U Silverback Ape
-C Sizzle
-R Skull of Orm
-U Slay
-C Sneaky Homunculus
-C Solidarity
-U Soul Feast
-U Spellbook
-U Spiketail Hatchling
-C Spined Wurm
-C Spineless Thug
-U Spirit Link
-U Spitting Spider
-U Spreading Algae
-C Standing Troops
-U Star Compass
-U Staunch Defenders
-U Steal Artifact
-C Stone Rain
-C Storm Crow
-R Story Circle
-U Stream of Life
-U Sudden Impact
-C Suntail Hawk
-R Sunweb
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-U Swarm of Rats
-U Sword Dancer
-R Teferi's Puzzle Box
-U Telepathy
-R Temporal Adept
-R Thieves' Auction
-U Thieving Magpie
-R Thorn Elemental
-U Throne of Bone
-R Tidal Kraken
-R Trade Routes
-C Trained Armodon
-U Treasure Trove
-C Tremor
-C Tundra Wolves
-C Twiddle
-R Two-Headed Dragon
-R Underworld Dreams
-C Unholy Strength
-C Unsummon
-U Urborg Volcano
-R Urza's Armor
-U Urza's Mine
-U Urza's Power Plant
-U Urza's Tower
-R Vampiric Spirit
-C Venerable Monk
+224 C Sizzle
+313 R Skull of Orm
+164 U Slay
+101 C Sneaky Homunculus
+46 C Solidarity
+165 U Soul Feast
+314 U Spellbook
+102 U Spiketail Hatchling
+279 C Spined Wurm
+166 C Spineless Thug
+47 U Spirit Link
+280 U Spitting Spider
+281 U Spreading Algae
+48 C Standing Troops
+315 U Star Compass
+49 U Staunch Defenders
+103 U Steal Artifact
+225 C Stone Rain
+104 C Storm Crow
+50 R Story Circle
+282 U Stream of Life
+226 U Sudden Impact
+51 C Suntail Hawk
+52 R Sunweb
+340 L Swamp
+340 L Swamp
+340 L Swamp
+340 L Swamp
+167 U Swarm of Rats
+53 U Sword Dancer
+316 R Teferi's Puzzle Box
+105 U Telepathy
+106 R Temporal Adept
+227 R Thieves' Auction
+107 U Thieving Magpie
+283 R Thorn Elemental
+317 U Throne of Bone
+108 R Tidal Kraken
+109 R Trade Routes
+284 C Trained Armodon
+110 U Treasure Trove
+228 C Tremor
+54 C Tundra Wolves
+111 C Twiddle
+229 R Two-Headed Dragon
+168 R Underworld Dreams
+169 C Unholy Strength
+112 C Unsummon
+327 U Urborg Volcano
+318 R Urza's Armor
+328 U Urza's Mine
+329 U Urza's Power Plant
+330 U Urza's Tower
+170 R Vampiric Spirit
+55 C Venerable Monk
 U Vengeance
-R Verduran Enchantress
-R Vernal Bloom
-R Vexing Arcanix
-U Viashino Sandstalker
-C Vicious Hunger
-C Vine Trellis
+285 R Verduran Enchantress
+286 R Vernal Bloom
+319 R Vexing Arcanix
+230 U Viashino Sandstalker
+171 C Vicious Hunger
+287 C Vine Trellis
 R Vizzerdrix
-C Volcanic Hammer
-U Wall of Air
-U Wall of Spears
-U Wall of Stone
-U Wall of Swords
-R Warped Devotion
-R Western Paladin
-C Wind Drake
-U Wing Snare
-C Wood Elves
-U Wooden Sphere
-R Worship
-R Wrath of God
-U Wrath of Marit Lage
-U Yavimaya Enchantress
-U Zombify
-R Zur's Weirding
+231 C Volcanic Hammer
+113 U Wall of Air
+320 U Wall of Spears
+232 U Wall of Stone
+56 U Wall of Swords
+172 R Warped Devotion
+173 R Western Paladin
+114 C Wind Drake
+288 U Wing Snare
+289 C Wood Elves
+321 U Wooden Sphere
+57 R Worship
+58 R Wrath of God
+115 U Wrath of Marit Lage
+290 U Yavimaya Enchantress
+174 U Zombify
+116 R Zur's Weirding

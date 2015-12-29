@@ -5,93 +5,93 @@ Name=Duel Decks: Izzet vs. Golgari
 Type=Duel_Decks
 
 [cards]
-C Barren Moor
-U Boneyard Wurm
-C Brain Weevil
-C Brainstorm
-C Call to Heel
-U Dakmor Salvage
-U Dissipate
-R Djinn Illuminatus
-R Doomgape
-U Dreg Mangler
-C Elves of Deep Shadow
-U Eternal Witness
-C Feast or Famine
-U Fire // Ice
-C Force Spike
-L Forest
-L Forest
-L Forest
-L Forest
-C Forgotten Cave
-R Galvanoth
-U Gelectrode
-U Ghoul's Feast
-R Gleancrawler
-C Goblin Electromancer
-U Golgari Germination
-R Golgari Grave-Troll
-C Golgari Rot Farm
-C Golgari Rotwurm
-C Golgari Signet
-U Golgari Thug
-C Greater Mossdog
-U Grim Flowering
-R Invoke the Firemind
-L Island
-L Island
-L Island
-L Island
-U Isochron Scepter
-C Izzet Boilerworks
-U Izzet Charm
-C Izzet Chronarch
-U Izzet Guildmage
-C Izzet Signet
-M Jarad, Golgari Lich Lord
-C Kiln Fiend
-U Korozda Guildmage
-U Life // Death
-R Life from the Loam
-C Lonely Sandbar
-C Magma Spray
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-U Nightmare Void
-M Niv-Mizzet, the Firemind
-U Nivix, Aerie of the Firemind
-C Ogre Savant
-U Overwhelming Intellect
-U Plagued Rusalka
-R Prophetic Bolt
-U Putrefy
-C Putrid Leech
-C Pyromatics
-C Quicksilver Dagger
-C Ravenous Rats
-U Reassembling Skeleton
-U Reminisce
-U Sadistic Hypnotist
-C Shambling Shell
-U Shrewd Hatchling
-R Sphinx-Bone Wand
-C Steamcore Weird
-U Stingerfling Spider
-C Stinkweed Imp
-U Street Spasm
-U Svogthos, the Restless Tomb
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-U Thunderheads
-C Train of Thought
-C Tranquil Thicket
-R Twilight's Call
-U Vacuumelt
-U Vigor Mortis
-C Wee Dragonauts
-C Yoke of the Damned
+78 C Barren Moor
+51 U Boneyard Wurm
+58 C Brain Weevil
+13 C Brainstorm
+18 C Call to Heel
+79 U Dakmor Salvage
+25 U Dissipate
+12 R Djinn Illuminatus
+65 R Doomgape
+56 U Dreg Mangler
+47 C Elves of Deep Shadow
+55 U Eternal Witness
+72 C Feast or Famine
+32 U Fire // Ice
+14 C Force Spike
+89 L Forest
+89 L Forest
+89 L Forest
+89 L Forest
+33 C Forgotten Cave
+10 R Galvanoth
+5 U Gelectrode
+67 U Ghoul's Feast
+64 R Gleancrawler
+3 C Goblin Electromancer
+70 U Golgari Germination
+60 R Golgari Grave-Troll
+80 C Golgari Rot Farm
+63 C Golgari Rotwurm
+66 C Golgari Signet
+48 U Golgari Thug
+59 C Greater Mossdog
+75 U Grim Flowering
+31 R Invoke the Firemind
+38 L Island
+38 L Island
+38 L Island
+38 L Island
+16 U Isochron Scepter
+34 C Izzet Boilerworks
+21 U Izzet Charm
+11 C Izzet Chronarch
+4 U Izzet Guildmage
+17 C Izzet Signet
+45 M Jarad, Golgari Lich Lord
+2 C Kiln Fiend
+52 U Korozda Guildmage
+77 U Life // Death
+69 R Life from the Loam
+35 C Lonely Sandbar
+15 C Magma Spray
+42 L Mountain
+42 L Mountain
+42 L Mountain
+42 L Mountain
+73 U Nightmare Void
+1 M Niv-Mizzet, the Firemind
+36 U Nivix, Aerie of the Firemind
+9 C Ogre Savant
+28 U Overwhelming Intellect
+46 U Plagued Rusalka
+27 R Prophetic Bolt
+71 U Putrefy
+53 C Putrid Leech
+20 C Pyromatics
+26 C Quicksilver Dagger
+49 C Ravenous Rats
+50 U Reassembling Skeleton
+22 U Reminisce
+62 U Sadistic Hypnotist
+57 C Shambling Shell
+8 U Shrewd Hatchling
+29 R Sphinx-Bone Wand
+7 C Steamcore Weird
+61 U Stingerfling Spider
+54 C Stinkweed Imp
+30 U Street Spasm
+81 U Svogthos, the Restless Tomb
+85 L Swamp
+85 L Swamp
+85 L Swamp
+85 L Swamp
+23 U Thunderheads
+19 C Train of Thought
+82 C Tranquil Thicket
+76 R Twilight's Call
+24 U Vacuumelt
+74 U Vigor Mortis
+6 C Wee Dragonauts
+68 C Yoke of the Damned

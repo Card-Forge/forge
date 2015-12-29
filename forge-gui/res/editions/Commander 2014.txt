@@ -6,340 +6,340 @@ Code2=C14
 Type=Other
 
 [cards]
-R Angel of the Dire Hour
-R Angelic Field Marshal
-R Benevolent Offering
-R Comeuppance
-R Containment Priest
-R Deploy to the Front
-R Fell the Mighty
-R Hallowed Spiritkeeper
-M Jazal Goldmane
-M Nahiri, the Lithomancer
-R AEther Gale
-R Breaching Leviathan
-R Domineering Will
-R Dulcet Sirens
-R Intellectual Offering
-R Reef Worm
-M Stitcher Geralf
-R Stormsurge Kraken
-M Teferi, Temporal Archmage
-R Well of Ideas
-R Demon of Wailing Agonies
-R Flesh Carver
-M Ghoulcaller Gisa
-R Infernal Offering
-R Malicious Affliction
-R Necromantic Selection
-M Ob Nixilis of the Black Oath
-R Overseer of the Damned
-R Raving Dead
-R Spoils of Blood
-R Wake the Dead
-R Bitter Feud
-M Daretti, Scrap Savant
-R Dualcaster Mage
-M Feldon of the Third Path
-R Impact Resonance
-R Incite Rebellion
-R Scrap Mastery
-R Tyrant's Familiar
-R Volcanic Offering
-R Warmonger Hellkite
-R Creeperhulk
-M Freyalise, Llanowar's Fury
-R Grave Sifter
-R Lifeblood Hydra
-R Siege Behemoth
-R Song of the Dryads
-R Sylvan Offering
-R Thunderfoot Baloth
-M Titania, Protector of Argoth
-R Wave of Vitriol
-R Wolfcaller's Howl
-U Assault Suit
-C Commander's Sphere
-R Crown of Doom
-U Loreseeker's Stone
-R Masterwork of Ingenuity
-U Unstable Obelisk
-U Arcane Lighthouse
-R Flamekin Village
-U Myriad Landscape
-U Artisan of Kozilek
-R Adarkar Valkyrie
-U Afterlife
-R Armistice
-U Brave the Elements
-R Cathars' Crusade
-U Celestial Crusader
-U Condemn
-R Decree of Justice
-U Flickerwisp
-R Geist-Honored Monk
-U Gift of Estates
-R Grand Abolisher
-R Kemba, Kha Regent
-C Kor Sanctifiers
-R Marshal's Anthem
-R Martial Coup
-R Mentor of the Meek
-U Midnight Haunting
-R Mobilization
-R Nomads' Assembly
-R Oblation
-R Requiem Angel
-U Return to Dust
-R Sacred Mesa
-M Serra Avatar
-R Silverblade Paladin
-U Skyhunter Skirmisher
-U Spectral Procession
-M Sun Titan
-R Sunblast Angel
-R True Conviction
-R Twilight Shepherd
-R White Sun's Zenith
-C Whitemane Lion
-U Wing Shards
-U Azure Mage
-U Brine Elemental
-R Cackling Counterpart
-U Call to Mind
-C Compulsive Research
-U Concentrate
-R Cyclonic Rift
-R Deep-Sea Kraken
-U Dismiss
-R Distorting Wake
-C Exclude
-C Fathom Seer
-U Fog Bank
-U Fool's Demise
-M Frost Titan
-R Hoverguard Sweepers
-R Infinite Reflection
-C Into the Roil
-R Ixidron
-M Lorthos, the Tidemaker
-C Mulldrifter
-R Phyrexian Ingester
-U Pongify
-U Riptide Survivor
-R Rite of Replication
-C Rush of Knowledge
-C Sea Gate Oracle
-C Shaper Parasite
-R Sphinx of Jwar Isle
-R Sphinx of Magosi
-R Sphinx of Uthuun
-R Stroke of Genius
-U Turn to Frog
-U Willbender
-M Abyssal Persecutor
-R AEther Snap
-U Annihilate
-R Bad Moon
-R Black Sun's Zenith
-R Bloodgift Demon
-R Butcher of Malakir
-R Crypt Ghast
-R Disciple of Bolas
-R Drana, Kalastria Bloodchief
-U Dread Return
-R Dregs of Sorrow
-U Evernight Shade
-M Grave Titan
-C Gray Merchant of Asphodel
-R Liliana's Reaver
-R Magus of the Coffers
-U Morkrut Banshee
-R Mutilate
-R Nantuko Shade
-U Nekrataal
-R Pestilence Demon
-U Phyrexian Gargantua
-R Pontiff of Blight
-R Profane Command
-R Promise of Power
-C Read the Bones
-M Reaper from the Abyss
-U Shriekmaw
-C Sign in Blood
-U Skeletal Scrying
-R Skirsdag High Priest
-R Sudden Spoiling
-C Syphon Mind
-C Tendrils of Corruption
-C Tragic Slip
-U Vampire Hexmage
-U Victimize
-M Xathrid Demon
-U Beetleback Chief
-R Blasphemous Act
-M Bogardan Hellkite
-R Chaos Warp
-C Faithless Looting
-U Flametongue Kavu
-R Goblin Welder
-R Hoard-Smelter Dragon
-C Ingot Chewer
-R Magmaquake
-U Spitebellows
-R Starstorm
-R Tuktuk the Explorer
-U Whipflare
-R Word of Seizing
-R Beastmaster Ascension
-R Collective Unconscious
-U Desert Twister
-U Drove of Elves
-R Elvish Archdruid
-C Elvish Mystic
-C Elvish Skysweeper
-C Elvish Visionary
-C Essence Warden
-R Ezuri, Renegade Leader
-C Farhaven Elf
-R Fresh Meat
-U Grim Flowering
-C Harrow
-U Hunting Triad
-R Immaculate Magistrate
-U Imperious Perfect
-R Joraga Warcaller
-C Llanowar Elves
-C Lys Alana Huntmaster
-R Masked Admirers
-U Overrun
-R Overwhelming Stampede
-M Praetor's Counsel
-C Priest of Titania
-R Primordial Sage
-M Rampaging Baloths
-U Reclamation Sage
-R Silklash Spider
-R Soul of the Harvest
-C Sylvan Ranger
-R Sylvan Safekeeper
-R Terastodon
-C Thornweald Archer
-C Timberwatch Elf
-U Titania's Chosen
-R Tornado Elemental
-C Wellwisher
-R Whirlwind
-R Wolfbriar Elemental
-C Wood Elves
-R Wren's Run Packmaster
-R Argentum Armor
-R Bonehoard
-R Bosh, Iron Golem
-U Bottle Gnomes
-U Burnished Hart
-R Caged Sun
-U Cathodion
-U Charcoal Diamond
-U Dreamstone Hedron
-R Emerald Medallion
-R Epochrasite
-U Everflowing Chalice
-U Fire Diamond
-C Ichor Wellspring
-R Jalum Tome
-R Jet Medallion
-R Junk Diver
-R Lashwrithe
-U Liquimetal Coating
-R Loxodon Warhammer
-U Marble Diamond
-U Mask of Memory
-U Mind Stone
-R Moonsilver Spear
-U Moss Diamond
-C Mycosynth Wellspring
-R Myr Battlesphere
-U Myr Retriever
-C Myr Sire
-R Nevinyrral's Disk
-U Palladium Myr
-C Panic Spellbomb
-R Pearl Medallion
-R Pentavus
-C Pilgrim's Eye
-R Predator, Flagship
-C Pristine Talisman
-R Ruby Medallion
-R Sapphire Medallion
-R Seer's Sundial
-U Skullclamp
-U Sky Diamond
-U Sol Ring
-R Solemn Simulacrum
-R Spine of Ish Sah
-R Steel Hellkite
-R Strata Scythe
-U Swiftfoot Boots
-R Sword of Vengeance
-U Thran Dynamo
-U Tormod's Crypt
-R Trading Post
-U Ur-Golem's Eye
-C Wayfarer's Bauble
-U Worn Powerstone
-M Wurmcoil Engine
-C Barren Moor
-C Bojuka Bog
-U Buried Ruin
-U Coral Atoll
-R Crypt of Agadeem
-U Crystal Vein
-U Darksteel Citadel
-U Dormant Volcano
-C Drifting Meadow
-R Emeria, the Sky Ruin
-U Everglades
-C Evolving Wilds
-C Forgotten Cave
-R Gargoyle Castle
-U Ghost Quarter
-C Great Furnace
-C Haunted Fengraf
-U Havenwood Battleground
-U Jungle Basin
-U Karoo
-C Lonely Sandbar
-R Oran-Rief, the Vastwood
-U Phyrexia's Core
-C Polluted Mire
-U Reliquary Tower
-C Remote Isle
-C Secluded Steppe
-C Slippery Karst
-C Smoldering Crater
-U Tectonic Edge
-U Temple of the False God
-C Terramorphic Expanse
-C Tranquil Thicket
-U Zoetic Cavern
-L Plains
-L Plains
-L Plains
-L Plains
-L Island
-L Island
-L Island
-L Island
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Forest
-L Forest
-L Forest
-L Forest
+1 R Angel of the Dire Hour
+2 R Angelic Field Marshal
+3 R Benevolent Offering
+4 R Comeuppance
+5 R Containment Priest
+6 R Deploy to the Front
+7 R Fell the Mighty
+8 R Hallowed Spiritkeeper
+9 M Jazal Goldmane
+10 M Nahiri, the Lithomancer
+11 R AEther Gale
+12 R Breaching Leviathan
+13 R Domineering Will
+14 R Dulcet Sirens
+15 R Intellectual Offering
+16 R Reef Worm
+17 M Stitcher Geralf
+18 R Stormsurge Kraken
+19 M Teferi, Temporal Archmage
+20 R Well of Ideas
+21 R Demon of Wailing Agonies
+22 R Flesh Carver
+23 M Ghoulcaller Gisa
+24 R Infernal Offering
+25 R Malicious Affliction
+26 R Necromantic Selection
+27 M Ob Nixilis of the Black Oath
+28 R Overseer of the Damned
+29 R Raving Dead
+30 R Spoils of Blood
+31 R Wake the Dead
+32 R Bitter Feud
+33 M Daretti, Scrap Savant
+34 R Dualcaster Mage
+35 M Feldon of the Third Path
+36 R Impact Resonance
+37 R Incite Rebellion
+38 R Scrap Mastery
+39 R Tyrant's Familiar
+40 R Volcanic Offering
+41 R Warmonger Hellkite
+42 R Creeperhulk
+43 M Freyalise, Llanowar's Fury
+44 R Grave Sifter
+45 R Lifeblood Hydra
+46 R Siege Behemoth
+47 R Song of the Dryads
+48 R Sylvan Offering
+49 R Thunderfoot Baloth
+50 M Titania, Protector of Argoth
+51 R Wave of Vitriol
+52 R Wolfcaller's Howl
+53 U Assault Suit
+54 C Commander's Sphere
+55 R Crown of Doom
+56 U Loreseeker's Stone
+57 R Masterwork of Ingenuity
+58 U Unstable Obelisk
+59 U Arcane Lighthouse
+60 R Flamekin Village
+61 U Myriad Landscape
+62 U Artisan of Kozilek
+63 R Adarkar Valkyrie
+64 U Afterlife
+65 R Armistice
+66 U Brave the Elements
+67 R Cathars' Crusade
+68 U Celestial Crusader
+69 U Condemn
+70 R Decree of Justice
+71 U Flickerwisp
+72 R Geist-Honored Monk
+73 U Gift of Estates
+74 R Grand Abolisher
+75 R Kemba, Kha Regent
+76 C Kor Sanctifiers
+77 R Marshal's Anthem
+78 R Martial Coup
+79 R Mentor of the Meek
+80 U Midnight Haunting
+81 R Mobilization
+82 R Nomads' Assembly
+83 R Oblation
+84 R Requiem Angel
+85 U Return to Dust
+86 R Sacred Mesa
+87 M Serra Avatar
+88 R Silverblade Paladin
+89 U Skyhunter Skirmisher
+90 U Spectral Procession
+91 M Sun Titan
+92 R Sunblast Angel
+93 R True Conviction
+94 R Twilight Shepherd
+95 R White Sun's Zenith
+96 C Whitemane Lion
+97 U Wing Shards
+98 U Azure Mage
+99 U Brine Elemental
+100 R Cackling Counterpart
+101 U Call to Mind
+102 C Compulsive Research
+103 U Concentrate
+104 R Cyclonic Rift
+105 R Deep-Sea Kraken
+106 U Dismiss
+107 R Distorting Wake
+108 C Exclude
+109 C Fathom Seer
+110 U Fog Bank
+111 U Fool's Demise
+112 M Frost Titan
+113 R Hoverguard Sweepers
+114 R Infinite Reflection
+115 C Into the Roil
+116 R Ixidron
+117 M Lorthos, the Tidemaker
+118 C Mulldrifter
+119 R Phyrexian Ingester
+120 U Pongify
+121 U Riptide Survivor
+122 R Rite of Replication
+123 C Rush of Knowledge
+124 C Sea Gate Oracle
+125 C Shaper Parasite
+126 R Sphinx of Jwar Isle
+127 R Sphinx of Magosi
+128 R Sphinx of Uthuun
+129 R Stroke of Genius
+130 U Turn to Frog
+131 U Willbender
+132 M Abyssal Persecutor
+133 R AEther Snap
+134 U Annihilate
+135 R Bad Moon
+136 R Black Sun's Zenith
+137 R Bloodgift Demon
+138 R Butcher of Malakir
+139 R Crypt Ghast
+140 R Disciple of Bolas
+141 R Drana, Kalastria Bloodchief
+142 U Dread Return
+143 R Dregs of Sorrow
+144 U Evernight Shade
+145 M Grave Titan
+146 C Gray Merchant of Asphodel
+147 R Liliana's Reaver
+148 R Magus of the Coffers
+149 U Morkrut Banshee
+150 R Mutilate
+151 R Nantuko Shade
+152 U Nekrataal
+153 R Pestilence Demon
+154 U Phyrexian Gargantua
+155 R Pontiff of Blight
+156 R Profane Command
+157 R Promise of Power
+158 C Read the Bones
+159 M Reaper from the Abyss
+160 U Shriekmaw
+161 C Sign in Blood
+162 U Skeletal Scrying
+163 R Skirsdag High Priest
+164 R Sudden Spoiling
+165 C Syphon Mind
+166 C Tendrils of Corruption
+167 C Tragic Slip
+168 U Vampire Hexmage
+169 U Victimize
+170 M Xathrid Demon
+171 U Beetleback Chief
+172 R Blasphemous Act
+173 M Bogardan Hellkite
+174 R Chaos Warp
+175 C Faithless Looting
+176 U Flametongue Kavu
+177 R Goblin Welder
+178 R Hoard-Smelter Dragon
+179 C Ingot Chewer
+180 R Magmaquake
+181 U Spitebellows
+182 R Starstorm
+183 R Tuktuk the Explorer
+184 U Whipflare
+185 R Word of Seizing
+186 R Beastmaster Ascension
+187 R Collective Unconscious
+188 U Desert Twister
+189 U Drove of Elves
+190 R Elvish Archdruid
+191 C Elvish Mystic
+192 C Elvish Skysweeper
+193 C Elvish Visionary
+194 C Essence Warden
+195 R Ezuri, Renegade Leader
+196 C Farhaven Elf
+197 R Fresh Meat
+198 U Grim Flowering
+199 C Harrow
+200 U Hunting Triad
+201 R Immaculate Magistrate
+202 U Imperious Perfect
+203 R Joraga Warcaller
+204 C Llanowar Elves
+205 C Lys Alana Huntmaster
+206 R Masked Admirers
+207 U Overrun
+208 R Overwhelming Stampede
+209 M Praetor's Counsel
+210 C Priest of Titania
+211 R Primordial Sage
+212 M Rampaging Baloths
+213 U Reclamation Sage
+214 R Silklash Spider
+215 R Soul of the Harvest
+216 C Sylvan Ranger
+217 R Sylvan Safekeeper
+218 R Terastodon
+219 C Thornweald Archer
+220 C Timberwatch Elf
+221 U Titania's Chosen
+222 R Tornado Elemental
+223 C Wellwisher
+224 R Whirlwind
+225 R Wolfbriar Elemental
+226 C Wood Elves
+227 R Wren's Run Packmaster
+228 R Argentum Armor
+229 R Bonehoard
+230 R Bosh, Iron Golem
+231 U Bottle Gnomes
+232 U Burnished Hart
+233 R Caged Sun
+234 U Cathodion
+235 U Charcoal Diamond
+236 U Dreamstone Hedron
+237 R Emerald Medallion
+238 R Epochrasite
+239 U Everflowing Chalice
+240 U Fire Diamond
+241 C Ichor Wellspring
+242 R Jalum Tome
+243 R Jet Medallion
+244 R Junk Diver
+245 R Lashwrithe
+246 U Liquimetal Coating
+247 R Loxodon Warhammer
+248 U Marble Diamond
+249 U Mask of Memory
+250 U Mind Stone
+251 R Moonsilver Spear
+252 U Moss Diamond
+253 C Mycosynth Wellspring
+254 R Myr Battlesphere
+255 U Myr Retriever
+256 C Myr Sire
+257 R Nevinyrral's Disk
+258 U Palladium Myr
+259 C Panic Spellbomb
+260 R Pearl Medallion
+261 R Pentavus
+262 C Pilgrim's Eye
+263 R Predator, Flagship
+264 C Pristine Talisman
+265 R Ruby Medallion
+266 R Sapphire Medallion
+267 R Seer's Sundial
+268 U Skullclamp
+269 U Sky Diamond
+270 U Sol Ring
+271 R Solemn Simulacrum
+272 R Spine of Ish Sah
+273 R Steel Hellkite
+274 R Strata Scythe
+275 U Swiftfoot Boots
+276 R Sword of Vengeance
+277 U Thran Dynamo
+278 U Tormod's Crypt
+279 R Trading Post
+280 U Ur-Golem's Eye
+281 C Wayfarer's Bauble
+282 U Worn Powerstone
+283 M Wurmcoil Engine
+284 C Barren Moor
+285 C Bojuka Bog
+286 U Buried Ruin
+287 U Coral Atoll
+288 R Crypt of Agadeem
+289 U Crystal Vein
+290 U Darksteel Citadel
+291 U Dormant Volcano
+292 C Drifting Meadow
+293 R Emeria, the Sky Ruin
+294 U Everglades
+295 C Evolving Wilds
+296 C Forgotten Cave
+297 R Gargoyle Castle
+298 U Ghost Quarter
+299 C Great Furnace
+300 C Haunted Fengraf
+301 U Havenwood Battleground
+302 U Jungle Basin
+303 U Karoo
+304 C Lonely Sandbar
+305 R Oran-Rief, the Vastwood
+306 U Phyrexia's Core
+307 C Polluted Mire
+308 U Reliquary Tower
+309 C Remote Isle
+310 C Secluded Steppe
+311 C Slippery Karst
+312 C Smoldering Crater
+313 U Tectonic Edge
+314 U Temple of the False God
+315 C Terramorphic Expanse
+316 C Tranquil Thicket
+317 U Zoetic Cavern
+318 L Plains
+318 L Plains
+318 L Plains
+318 L Plains
+323 L Island
+323 L Island
+323 L Island
+323 L Island
+327 L Swamp
+327 L Swamp
+327 L Swamp
+327 L Swamp
+331 L Mountain
+331 L Mountain
+331 L Mountain
+331 L Mountain
+337 L Forest
+337 L Forest
+337 L Forest
+337 L Forest

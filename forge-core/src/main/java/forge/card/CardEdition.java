@@ -81,11 +81,27 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     public static class CardInSet {
         public final CardRarity rarity;
+        public final int collectorNumber;
         public final String name;
 
-        public CardInSet(final String name, final CardRarity rarity) {
-            this.rarity = rarity;
+        public CardInSet(final String name, final int collectorNumber, final CardRarity rarity) {
             this.name = name;
+            this.collectorNumber = collectorNumber;
+            this.rarity = rarity;
+        }
+ 
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            if (collectorNumber != -1) {
+                sb.append(collectorNumber);
+                sb.append(' ');
+            }
+            if (rarity != CardRarity.Unknown) {
+                sb.append(rarity);
+                sb.append(' ');
+            }
+            sb.append(name);
+            return sb.toString();
         }
     }
 
@@ -235,11 +251,19 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 if (StringUtils.isBlank(line))
                     continue;
 
+                // Optional collector number at the start.
+                String[] split = line.split(" ", 2);
+                int collectorNumber = -1;
+                if (split.length >= 2 && StringUtils.isNumeric(split[0])) {
+                    collectorNumber = Integer.parseInt(split[0]);
+                    line = split[1];
+                }
+
                 // You may omit rarity for early development
                 CardRarity r = CardRarity.smartValueOf(line.substring(0, 1));
                 boolean hadRarity = r != CardRarity.Unknown && line.charAt(1) == ' ';
                 String cardName = hadRarity ? line.substring(2) : line;
-                CardInSet cis = new CardInSet(cardName, r);
+                CardInSet cis = new CardInSet(cardName, collectorNumber, r);
                 processedCards.add(cis);
             }
 

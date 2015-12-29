@@ -8,272 +8,272 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand TPR
 FoilChanceInBooster=100
 
 [cards]
-M Cataclysm
-M Cursed Scroll
-M Dream Halls
-M Grindstone
-M Humility
-M Living Death
-M Mox Diamond
-M Oath of Druids
-M Recurring Nightmare
-M Shard Phoenix
-M Sliver Queen
-M Starke of Rath
-M Survival of the Fittest
-M Time Warp
-M Volrath's Stronghold
-R Aluren
-R City of Traitors
-R Coat of Arms
-R Coffin Queen
-R Commander Greven il-Vec
-R Corpse Dance
-R Crovax the Cursed
-R Death Pits of Rath
-R Dracoplasm
-R Ephemeron
-R Erratic Portal
-R Exalted Dragon
-R Fanning the Flames
-R Field of Souls
-R Flame Wave
-R Forbid
-R Gerrard's Battle Cry
-R Heartwood Giant
-R Intuition
-R Jinxed Idol
-R Kezzerdrix
-R Krakilin
-R Legacy's Allure
-R Magmasaur
-R Manabond
-R Mawcor
-R Meditate
-R Mindless Automaton
-R Mirri, Cat Warrior
-R Mogg Infestation
-R Necrologia
-R Ogre Shaman
-R Orim, Samite Healer
-R Paladin en-Vec
-R Pandemonium
-R Rathi Dragon
-R Recycle
-R Selenia, Dark Angel
-R Shaman en-Kor
-R Silver Wyvern
-R Soltari Guerrillas
-R Spike Hatcher
-R Spirit Mirror
-R Spitting Hydra
-R Stronghold Assassin
-R Thopter Squadron
-R Tradewind Rider
-R Verdant Force
-R Vhati il-Dal
-R Volrath's Laboratory
-R Wasteland
-R Winds of Rath
-R Wood Sage
-U Acidic Sliver
-U Angelic Protector
-U Avenging Angel
-U Caldera Lake
-U Cannibalize
-U Capsize
-U Carnassid
-U Cinder Marsh
-U Counterspell
-U Crashing Boars
-U Crystalline Sliver
-U Curiosity
-U Dauthi Marauder
-U Dauthi Slayer
-U Dauthi Warlord
-U Deadshot
-U Dismiss
-U Dream Prowler
-U Emmessi Tome
-U Evincar's Justice
-U Fighting Drake
-U Flowstone Mauler
-U Flowstone Wyvern
-U Fugue
-U Gallantry
-U Goblin Bombardment
-U Hermit Druid
-U Hibernation Sliver
-U Killer Whale
-U Kor Chant
-U Legerdemain
-U Lotus Petal
-U Lowland Basilisk
-U Mage il-Vec
-U Maze of Shadows
-U Mogg Hollows
-U Mogg Maniac
-U Needle Storm
-U Overrun
-U Pacifism
-U Pegasus Stampede
-U Phyrexian Hulk
-U Pine Barrens
-U Reanimate
-U Renegade Warlord
-U Repentance
-U Revenant
-U Rolling Thunder
-U Rootbreaker Wurm
-U Rootwater Depths
-U Rootwater Hunter
-U Sabertooth Wyvern
-U Salt Flats
-U Sarcomancy
-U Scabland
-U Screeching Harpy
-U Searing Touch
-U Shadowstorm
-U Skyshroud Forest
-U Skyshroud Vampire
-U Soltari Champion
-U Soltari Monk
-U Soltari Priest
-U Spellshock
-U Spike Breeder
-U Spike Feeder
-U Spined Sliver
-U Stalking Stones
-U Thalakos Drifters
-U Thalakos Lowlands
-U Tranquility
-U Vec Townships
-U Verdant Touch
-U Victual Sliver
-U Volrath's Curse
-U Wall of Blossoms
-U Wall of Essence
-U Wall of Souls
-U Warrior en-Kor
-U Wind Dancer
-C Aftershock
-C Anarchist
-C Angelic Blessing
-C Anoint
-C Armor Sliver
-C Armored Pegasus
-C Bandage
-C Barbed Sliver
-C Bottle Gnomes
-C Canopy Spider
-C Canyon Wildcat
-C Carnophage
-C Charging Paladin
-C Clot Sliver
-C Coercion
-C Coiled Tinviper
-C Conviction
-C Craven Giant
-C Cursed Flesh
-C Dark Banishing
-C Dark Ritual
-C Dauthi Horror
-C Dauthi Jackal
-C Death Stroke
-C Death's Duet
-C Diabolic Edict
-C Disenchant
-C Dungeon Shade
-C Elven Rite
-C Elvish Fury
-C Endangered Armodon
-C Flowstone Blade
-C Furnace Brood
-C Gaseous Form
-C Gravedigger
-C Hammerhead Shark
-C Harrow
-C Heartwood Dryad
-C Horned Sliver
-C Horned Turtle
-C Kindle
-C Lab Rats
-C Lightning Blast
-C Lowland Giant
-C Mana Leak
-C Maniacal Rage
-C Master Decoy
-C Merfolk Looter
-C Metallic Sliver
-C Mnemonic Sliver
-C Mogg Conscripts
-C Mogg Fanatic
-C Mogg Flunkies
-C Mounted Archers
-C Mulch
-C Muscle Sliver
-C Nomads en-Kor
-C Patchwork Gnomes
-C Provoke
-C Rampant Growth
-C Rats of Rath
-C Reality Anchor
-C Rootwalla
-C Sandstone Warrior
-C Scrivener
-C Sea Monster
-C Seething Anger
-C Serpent Warrior
-C Shackles
-C Shadow Rift
-C Shatter
-C Sift
-C Skyshaper
-C Skyshroud Elf
-C Skyshroud Troll
-C Smite
-C Soltari Lancer
-C Soltari Trooper
-C Spell Blast
-C Spike Colony
-C Spinal Graft
-C Spined Wurm
-C Spirit en-Kor
-C Standing Troops
-C Staunch Defenders
-C Stun
-C Telethopter
-C Thalakos Scout
-C Thalakos Seer
-C Thrull Surgeon
-C Time Ebb
-C Trained Armodon
-C Twitch
-C Vampire Hounds
-C Verdigris
-C Wall of Diffusion
-C Wayward Soul
-C Whispers of the Muse
-C Wind Drake
-C Winged Sliver
-C Youthful Knight
-L Forest
-L Forest
-L Forest
-L Forest
-L Island
-L Island
-L Island
-L Island
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Plains
-L Plains
-L Plains
-L Plains
-L Swamp
-L Swamp
-L Swamp
-L Swamp
+8 M Cataclysm
+220 M Cursed Scroll
+46 M Dream Halls
+223 M Grindstone
+16 M Humility
+109 M Living Death
+228 M Mox Diamond
+184 M Oath of Druids
+113 M Recurring Nightmare
+158 M Shard Phoenix
+211 M Sliver Queen
+162 M Starke of Rath
+199 M Survival of the Fittest
+74 M Time Warp
+248 M Volrath's Stronghold
+165 R Aluren
+237 R City of Traitors
+218 R Coat of Arms
+87 R Coffin Queen
+88 R Commander Greven il-Vec
+89 R Corpse Dance
+90 R Crovax the Cursed
+99 R Death Pits of Rath
+208 R Dracoplasm
+48 R Ephemeron
+222 R Erratic Portal
+12 R Exalted Dragon
+130 R Fanning the Flames
+13 R Field of Souls
+131 R Flame Wave
+50 R Forbid
+15 R Gerrard's Battle Cry
+174 R Heartwood Giant
+54 R Intuition
+224 R Jinxed Idol
+107 R Kezzerdrix
+177 R Krakilin
+56 R Legacy's Allure
+141 R Magmasaur
+179 R Manabond
+59 R Mawcor
+60 R Meditate
+227 R Mindless Automaton
+180 R Mirri, Cat Warrior
+146 R Mogg Infestation
+110 R Necrologia
+148 R Ogre Shaman
+21 R Orim, Samite Healer
+23 R Paladin en-Vec
+149 R Pandemonium
+150 R Rathi Dragon
+189 R Recycle
+210 R Selenia, Dark Angel
+27 R Shaman en-Kor
+68 R Silver Wyvern
+212 R Soltari Guerrillas
+197 R Spike Hatcher
+35 R Spirit Mirror
+161 R Spitting Hydra
+120 R Stronghold Assassin
+233 R Thopter Squadron
+75 R Tradewind Rider
+202 R Verdant Force
+214 R Vhati il-Dal
+234 R Volrath's Laboratory
+249 R Wasteland
+40 R Winds of Rath
+216 R Wood Sage
+206 U Acidic Sliver
+2 U Angelic Protector
+6 U Avenging Angel
+235 U Caldera Lake
+83 U Cannibalize
+42 U Capsize
+167 U Carnassid
+236 U Cinder Marsh
+43 U Counterspell
+168 U Crashing Boars
+207 U Crystalline Sliver
+44 U Curiosity
+96 U Dauthi Marauder
+97 U Dauthi Slayer
+98 U Dauthi Warlord
+129 U Deadshot
+45 U Dismiss
+47 U Dream Prowler
+221 U Emmessi Tome
+104 U Evincar's Justice
+49 U Fighting Drake
+133 U Flowstone Mauler
+134 U Flowstone Wyvern
+105 U Fugue
+14 U Gallantry
+136 U Goblin Bombardment
+175 U Hermit Druid
+209 U Hibernation Sliver
+55 U Killer Whale
+17 U Kor Chant
+57 U Legerdemain
+225 U Lotus Petal
+178 U Lowland Basilisk
+140 U Mage il-Vec
+238 U Maze of Shadows
+239 U Mogg Hollows
+147 U Mogg Maniac
+183 U Needle Storm
+185 U Overrun
+22 U Pacifism
+24 U Pegasus Stampede
+230 U Phyrexian Hulk
+240 U Pine Barrens
+112 U Reanimate
+151 U Renegade Warlord
+25 U Repentance
+114 U Revenant
+152 U Rolling Thunder
+190 U Rootbreaker Wurm
+241 U Rootwater Depths
+63 U Rootwater Hunter
+153 U Sabertooth Wyvern
+242 U Salt Flats
+115 U Sarcomancy
+243 U Scabland
+116 U Screeching Harpy
+155 U Searing Touch
+157 U Shadowstorm
+244 U Skyshroud Forest
+118 U Skyshroud Vampire
+29 U Soltari Champion
+31 U Soltari Monk
+32 U Soltari Priest
+160 U Spellshock
+194 U Spike Breeder
+196 U Spike Feeder
+213 U Spined Sliver
+245 U Stalking Stones
+70 U Thalakos Drifters
+246 U Thalakos Lowlands
+201 U Tranquility
+247 U Vec Townships
+203 U Verdant Touch
+215 U Victual Sliver
+77 U Volrath's Curse
+205 U Wall of Blossoms
+38 U Wall of Essence
+123 U Wall of Souls
+39 U Warrior en-Kor
+80 U Wind Dancer
+124 C Aftershock
+125 C Anarchist
+1 C Angelic Blessing
+3 C Anoint
+4 C Armor Sliver
+5 C Armored Pegasus
+7 C Bandage
+126 C Barbed Sliver
+217 C Bottle Gnomes
+166 C Canopy Spider
+127 C Canyon Wildcat
+84 C Carnophage
+9 C Charging Paladin
+85 C Clot Sliver
+86 C Coercion
+219 C Coiled Tinviper
+10 C Conviction
+128 C Craven Giant
+91 C Cursed Flesh
+92 C Dark Banishing
+93 C Dark Ritual
+94 C Dauthi Horror
+95 C Dauthi Jackal
+100 C Death Stroke
+101 C Death's Duet
+102 C Diabolic Edict
+11 C Disenchant
+103 C Dungeon Shade
+169 C Elven Rite
+170 C Elvish Fury
+171 C Endangered Armodon
+132 C Flowstone Blade
+135 C Furnace Brood
+51 C Gaseous Form
+106 C Gravedigger
+52 C Hammerhead Shark
+172 C Harrow
+173 C Heartwood Dryad
+176 C Horned Sliver
+53 C Horned Turtle
+137 C Kindle
+108 C Lab Rats
+138 C Lightning Blast
+139 C Lowland Giant
+58 C Mana Leak
+142 C Maniacal Rage
+18 C Master Decoy
+61 C Merfolk Looter
+226 C Metallic Sliver
+62 C Mnemonic Sliver
+143 C Mogg Conscripts
+144 C Mogg Fanatic
+145 C Mogg Flunkies
+19 C Mounted Archers
+181 C Mulch
+182 C Muscle Sliver
+20 C Nomads en-Kor
+229 C Patchwork Gnomes
+186 C Provoke
+187 C Rampant Growth
+111 C Rats of Rath
+188 C Reality Anchor
+191 C Rootwalla
+154 C Sandstone Warrior
+64 C Scrivener
+65 C Sea Monster
+156 C Seething Anger
+117 C Serpent Warrior
+26 C Shackles
+66 C Shadow Rift
+159 C Shatter
+67 C Sift
+231 C Skyshaper
+192 C Skyshroud Elf
+193 C Skyshroud Troll
+28 C Smite
+30 C Soltari Lancer
+33 C Soltari Trooper
+69 C Spell Blast
+195 C Spike Colony
+119 C Spinal Graft
+198 C Spined Wurm
+34 C Spirit en-Kor
+36 C Standing Troops
+37 C Staunch Defenders
+163 C Stun
+232 C Telethopter
+71 C Thalakos Scout
+72 C Thalakos Seer
+121 C Thrull Surgeon
+73 C Time Ebb
+200 C Trained Armodon
+76 C Twitch
+122 C Vampire Hounds
+204 C Verdigris
+164 C Wall of Diffusion
+78 C Wayward Soul
+79 C Whispers of the Muse
+81 C Wind Drake
+82 C Winged Sliver
+41 C Youthful Knight
+268 L Forest
+268 L Forest
+268 L Forest
+268 L Forest
+254 L Island
+254 L Island
+254 L Island
+254 L Island
+264 L Mountain
+264 L Mountain
+264 L Mountain
+264 L Mountain
+250 L Plains
+250 L Plains
+250 L Plains
+250 L Plains
+258 L Swamp
+258 L Swamp
+258 L Swamp
+258 L Swamp

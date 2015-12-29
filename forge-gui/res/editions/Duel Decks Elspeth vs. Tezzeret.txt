@@ -5,82 +5,82 @@ Name=Duel Decks: Elspeth vs. Tezzeret
 Type=Duel_Decks
 
 [cards]
-C AEther Spellbomb
-U Abolish
-R Angel of Salvation
-C Arcbound Worker
-U Argivian Restoration
-U Assembly-Worker
-C Blinding Beam
-C Burrenton Bombardier
-R Catapult Master
-U Celestial Crusader
-C Clockwork Condor
-U Clockwork Hydra
-C Conclave Equenaut
-U Conclave Phalanx
-U Contagion Clasp
-R Crusade
-C Darksteel Citadel
-U Daru Encampment
-C Echoing Truth
-U Elite Vanguard
-U Elixir of Immortality
-M Elspeth, Knight-Errant
-U Energy Chamber
-U Esperzoa
-U Everflowing Chalice
-C Faerie Mechanist
-U Foil
-C Frogmite
-C Glory Seeker
-C Goldmeadow Harrier
-C Infantry Veteran
-L Island
-L Island
-L Island
-L Island
-C Journey to Nowhere
-U Juggernaut
-C Kabira Crossroads
-C Kemba's Skyguard
-U Kor Aeronaut
-C Kor Hookmaster
-C Kor Skyfisher
-R Loyal Sentry
-R Master of Etherium
-C Mighty Leap
-U Mishra's Factory
-C Moonglove Extract
-C Mosquito Guard
-R Pentavus
-L Plains
-L Plains
-L Plains
-L Plains
-U Qumulox
-C Raise the Alarm
-C Razor Barrier
-R Razormane Masticore
-U Runed Servitor
-R Rustic Clachan
-U Saltblast
-U Seasoned Marshal
-C Seat of the Synod
-U Serrated Biskelion
-C Silver Myr
-U Stalking Stones
-R Steel Overseer
-C Steel Wall
-U Stormfront Riders
-C Sunlance
-U Swell of Courage
-U Swords to Plowshares
-U Synod Centurion
-C Temple Acolyte
-M Tezzeret the Seeker
-U Thirst for Knowledge
-C Thoughtcast
-C Trinket Mage
-U Trip Noose
-R Triskelion
+61 C AEther Spellbomb
+29 U Abolish
+20 R Angel of Salvation
+40 C Arcbound Worker
+69 U Argivian Restoration
+45 U Assembly-Worker
+28 C Blinding Beam
+11 C Burrenton Bombardier
+18 R Catapult Master
+14 U Celestial Crusader
+50 C Clockwork Condor
+55 U Clockwork Hydra
+19 C Conclave Equenaut
+16 U Conclave Phalanx
+63 U Contagion Clasp
+27 R Crusade
+72 C Darksteel Citadel
+32 U Daru Encampment
+66 C Echoing Truth
+2 U Elite Vanguard
+62 U Elixir of Immortality
+1 M Elspeth, Knight-Errant
+64 U Energy Chamber
+47 U Esperzoa
+60 U Everflowing Chalice
+54 C Faerie Mechanist
+70 U Foil
+51 C Frogmite
+7 C Glory Seeker
+3 C Goldmeadow Harrier
+4 C Infantry Veteran
+76 L Island
+76 L Island
+76 L Island
+76 L Island
+23 C Journey to Nowhere
+52 U Juggernaut
+33 C Kabira Crossroads
+13 C Kemba's Skyguard
+10 U Kor Aeronaut
+12 C Kor Hookmaster
+8 C Kor Skyfisher
+5 R Loyal Sentry
+48 R Master of Etherium
+24 C Mighty Leap
+73 U Mishra's Factory
+67 C Moonglove Extract
+6 C Mosquito Guard
+58 R Pentavus
+37 L Plains
+37 L Plains
+37 L Plains
+37 L Plains
+59 U Qumulox
+25 C Raise the Alarm
+26 C Razor Barrier
+56 R Razormane Masticore
+42 U Runed Servitor
+34 R Rustic Clachan
+30 U Saltblast
+15 U Seasoned Marshal
+74 C Seat of the Synod
+46 U Serrated Biskelion
+43 C Silver Myr
+75 U Stalking Stones
+44 R Steel Overseer
+41 C Steel Wall
+17 U Stormfront Riders
+21 C Sunlance
+31 U Swell of Courage
+22 U Swords to Plowshares
+53 U Synod Centurion
+9 C Temple Acolyte
+39 M Tezzeret the Seeker
+68 U Thirst for Knowledge
+71 C Thoughtcast
+49 C Trinket Mage
+65 U Trip Noose
+57 R Triskelion

@@ -5,69 +5,69 @@ Name=Duel Decks: Garruk vs. Liliana
 Type=Duel_Decks
 
 [cards]
-U Albino Troll
-R Bad Moon
-C Basking Rootwalla
+3 U Albino Troll
+48 R Bad Moon
+2 C Basking Rootwalla
 C Beast
 C Beast
-U Beast Attack
-C Blastoderm
-U Corrupt
-C Deathgreeter
-C Drudge Skeletons
+23 U Beast Attack
+7 C Blastoderm
+57 U Corrupt
+33 C Deathgreeter
+36 C Drudge Skeletons
 C Elephant
-U Elephant Guide
-U Enslave
-C Faerie Macabre
-U Fleshbag Marauder
-L Forest
-L Forest
-L Forest
-L Forest
-M Garruk Wildspeaker
-U Genju of the Cedars
-U Genju of the Fens
-U Ghost-Lit Stalker
-C Giant Growth
-U Harmonize
-C Hideous End
-U Howling Banshee
-C Ichor Slick
-U Indrik Stomphowler
-C Invigorate
-U Keening Banshee
-C Krosan Tusker
-C Lignify
-M Liliana Vess
-R Mutilate
-C Nature's Lore
-U Overrun
-C Phyrexian Rager
-R Plated Slagwurm
-C Polluted Mire
-C Rancor
-R Ravenous Baloth
-C Ravenous Rats
-U Rise from the Grave
-R Rude Awakening
-C Serrated Arrows
-C Sign in Blood
-R Skeletal Vampire
-C Slippery Karst
-C Snuff Out
-U Stampeding Wildebeests
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-C Tendrils of Corruption
-U Treetop Village
-C Twisted Abomination
-C Urborg Syphon-Mage
-C Vampire Bats
-C Vicious Hunger
-C Vine Trellis
-U Wall of Bone
-C Wild Mongrel
-U Windstorm
-C Wirewood Savage
+18 U Elephant Guide
+58 U Enslave
+42 C Faerie Macabre
+38 U Fleshbag Marauder
+29 L Forest
+29 L Forest
+29 L Forest
+29 L Forest
+1 M Garruk Wildspeaker
+13 U Genju of the Cedars
+47 U Genju of the Fens
+34 U Ghost-Lit Stalker
+14 C Giant Growth
+21 U Harmonize
+52 C Hideous End
+43 U Howling Banshee
+51 C Ichor Slick
+10 U Indrik Stomphowler
+19 C Invigorate
+44 U Keening Banshee
+11 C Krosan Tusker
+16 C Lignify
+32 M Liliana Vess
+55 R Mutilate
+17 C Nature's Lore
+24 U Overrun
+39 C Phyrexian Rager
+12 R Plated Slagwurm
+59 C Polluted Mire
+15 C Rancor
+8 R Ravenous Baloth
+37 C Ravenous Rats
+56 U Rise from the Grave
+22 R Rude Awakening
+20 C Serrated Arrows
+49 C Sign in Blood
+46 R Skeletal Vampire
+26 C Slippery Karst
+53 C Snuff Out
+9 U Stampeding Wildebeests
+61 L Swamp
+61 L Swamp
+61 L Swamp
+61 L Swamp
+54 C Tendrils of Corruption
+27 U Treetop Village
+45 C Twisted Abomination
+40 C Urborg Syphon-Mage
+35 C Vampire Bats
+50 C Vicious Hunger
+4 C Vine Trellis
+41 U Wall of Bone
+5 C Wild Mongrel
+25 U Windstorm
+6 C Wirewood Savage

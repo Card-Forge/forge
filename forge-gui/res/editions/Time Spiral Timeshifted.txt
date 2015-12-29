@@ -6,124 +6,124 @@ Code2=TSB
 Type=Other
 
 [cards]
-S Akroma, Angel of Wrath
-S Arena
-S Assault // Battery
-S Auratog
-S Avalanche Riders
-S Avatar of Woe
-S Avoid Fate
-S Bad Moon
-S Browbeat
-S Call of the Herd
-S Celestial Dawn
-S Claws of Gix
-S Coalition Victory
-S Cockatrice
-S Consecrate Land
-S Conspiracy
-S Craw Giant
-S Dandan
-S Darkness
-S Dauthi Slayer
-S Defiant Vanguard
-S Desert
-S Desolation Giant
-S Disenchant
-S Disintegrate
-S Dodecapod
-S Dragon Whelp
-S Dragonstorm
-S Enduring Renewal
-S Eron the Relentless
-S Essence Sliver
-S Evil Eye of Orms-by-Gore
-S Faceless Butcher
-S Feldon's Cane
-S Fiery Justice
-S Fiery Temper
-S Fire Whip
-S Flying Men
-S Funeral Charm
-S Gaea's Blessing
-S Gaea's Liege
-S Gemstone Mine
-S Ghost Ship
-S Giant Oyster
-S Goblin Snowman
-S Grinning Totem
-S Hail Storm
-S Honorable Passage
-S Hunting Moa
-S Icatian Javelineers
-S Jasmine Boreal
-S Jolrael, Empress of Beasts
-S Kobold Taskmaster
-S Krosan Cloudscraper
-S Leviathan
-S Lightning Angel
-S Lord of Atlantis
-S Merfolk Assassin
-S Merieke Ri Berit
-S Mindless Automaton
-S Mirari
-S Mistform Ultimus
-S Moorish Cavalry
-S Mystic Enforcer
-S Mystic Snake
-S Nicol Bolas
-S Orcish Librarian
-S Orgg
-S Ovinomancer
-S Pandemonium
-S Pendelhaven
-S Pirate Ship
-S Prodigal Sorcerer
-S Psionic Blast
-S Resurrection
-S Sacred Mesa
-S Safe Haven
-S Scragnoth
-S Sengir Autocrat
-S Serrated Arrows
-S Shadow Guildmage
-S Shadowmage Infiltrator
-S Sindbad
-S Sol'kanar the Swamp King
-S Soltari Priest
-S Soul Collector
-S Spike Feeder
-S Spined Sliver
-S Spitting Slug
-S Squire
-S Stormbind
-S Stormscape Familiar
-S Stupor
-S Suq'Ata Lancer
-S Swamp Mosquito
-S Teferi's Moat
-S Thallid
-S The Rack
-S Thornscape Battlemage
-S Tormod's Crypt
-S Tribal Flames
-S Twisted Abomination
-S Uncle Istvan
-S Undead Warchief
-S Undertaker
-S Unstable Mutation
-S Uthden Troll
-S Valor
-S Verdeloth the Ancient
-S Vhati il-Dal
-S Void
-S Voidmage Prodigy
-S Wall of Roots
-S War Barge
-S Whirling Dervish
-S Whispers of the Muse
-S Wildfire Emissary
-S Willbender
-S Witch Hunter
-S Withered Wretch
-S Zhalfirin Commander
+1 S Akroma, Angel of Wrath
+117 S Arena
+106 S Assault // Battery
+2 S Auratog
+55 S Avalanche Riders
+37 S Avatar of Woe
+73 S Avoid Fate
+38 S Bad Moon
+56 S Browbeat
+74 S Call of the Herd
+3 S Celestial Dawn
+107 S Claws of Gix
+91 S Coalition Victory
+75 S Cockatrice
+4 S Consecrate Land
+39 S Conspiracy
+76 S Craw Giant
+19 S Dandan
+40 S Darkness
+41 S Dauthi Slayer
+5 S Defiant Vanguard
+118 S Desert
+57 S Desolation Giant
+6 S Disenchant
+58 S Disintegrate
+108 S Dodecapod
+59 S Dragon Whelp
+60 S Dragonstorm
+7 S Enduring Renewal
+61 S Eron the Relentless
+8 S Essence Sliver
+42 S Evil Eye of Orms-by-Gore
+43 S Faceless Butcher
+109 S Feldon's Cane
+92 S Fiery Justice
+62 S Fiery Temper
+63 S Fire Whip
+20 S Flying Men
+44 S Funeral Charm
+77 S Gaea's Blessing
+78 S Gaea's Liege
+119 S Gemstone Mine
+21 S Ghost Ship
+22 S Giant Oyster
+64 S Goblin Snowman
+110 S Grinning Totem
+79 S Hail Storm
+9 S Honorable Passage
+80 S Hunting Moa
+10 S Icatian Javelineers
+93 S Jasmine Boreal
+81 S Jolrael, Empress of Beasts
+65 S Kobold Taskmaster
+82 S Krosan Cloudscraper
+23 S Leviathan
+94 S Lightning Angel
+24 S Lord of Atlantis
+25 S Merfolk Assassin
+95 S Merieke Ri Berit
+111 S Mindless Automaton
+112 S Mirari
+26 S Mistform Ultimus
+11 S Moorish Cavalry
+96 S Mystic Enforcer
+97 S Mystic Snake
+98 S Nicol Bolas
+66 S Orcish Librarian
+67 S Orgg
+27 S Ovinomancer
+68 S Pandemonium
+120 S Pendelhaven
+28 S Pirate Ship
+29 S Prodigal Sorcerer
+30 S Psionic Blast
+12 S Resurrection
+13 S Sacred Mesa
+121 S Safe Haven
+83 S Scragnoth
+45 S Sengir Autocrat
+114 S Serrated Arrows
+46 S Shadow Guildmage
+99 S Shadowmage Infiltrator
+31 S Sindbad
+100 S Sol'kanar the Swamp King
+14 S Soltari Priest
+47 S Soul Collector
+84 S Spike Feeder
+101 S Spined Sliver
+85 S Spitting Slug
+15 S Squire
+102 S Stormbind
+32 S Stormscape Familiar
+48 S Stupor
+69 S Suq'Ata Lancer
+49 S Swamp Mosquito
+103 S Teferi's Moat
+86 S Thallid
+113 S The Rack
+87 S Thornscape Battlemage
+115 S Tormod's Crypt
+70 S Tribal Flames
+50 S Twisted Abomination
+51 S Uncle Istvan
+52 S Undead Warchief
+53 S Undertaker
+33 S Unstable Mutation
+71 S Uthden Troll
+16 S Valor
+88 S Verdeloth the Ancient
+104 S Vhati il-Dal
+105 S Void
+34 S Voidmage Prodigy
+89 S Wall of Roots
+116 S War Barge
+90 S Whirling Dervish
+35 S Whispers of the Muse
+72 S Wildfire Emissary
+36 S Willbender
+17 S Witch Hunter
+54 S Withered Wretch
+18 S Zhalfirin Commander

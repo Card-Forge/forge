@@ -7,217 +7,217 @@ Code2=HOP
 Type=Other
 
 [cards]
-C Academy at Tolaria West
-C Agyrem
-R Akroma's Vengeance
-C Ancient Den
-C Arc Lightning
-U Arcbound Crusher
-U Arcbound Slith
-C Arsenal Thresher
-R Ascendant Evincar
-U Assault // Battery
-R Balefire Liege
-C Bant
-C Battlegate Mimic
-R Beacon of Unrest
-C Beast Hunt
-U Beseech the Queen
-U Blaze
-C Bogardan Firefiend
-C Bogardan Rager
-C Boros Garrison
-U Boros Guildmage
-C Boros Signet
-U Boros Swiftblade
-R Bosh, Iron Golem
-C Branching Bolt
-U Briarhorn
-R Broodstar
-U Browbeat
-U Bull Cerodon
-U Cabal Coffers
-C Cadaverous Knight
-U Captain's Maneuver
+1 C Academy at Tolaria West
+3 C Agyrem
+1 R Akroma's Vengeance
+130 C Ancient Den
+46 C Arc Lightning
+105 U Arcbound Crusher
+106 U Arcbound Slith
+96 C Arsenal Thresher
+17 R Ascendant Evincar
+103 U Assault // Battery
+97 R Balefire Liege
+4 C Bant
+98 C Battlegate Mimic
+18 R Beacon of Unrest
+68 C Beast Hunt
+19 U Beseech the Queen
+47 U Blaze
+48 C Bogardan Firefiend
+49 C Bogardan Rager
+131 C Boros Garrison
+99 U Boros Guildmage
+107 C Boros Signet
+82 U Boros Swiftblade
+108 R Bosh, Iron Golem
+83 C Branching Bolt
+69 U Briarhorn
+8 R Broodstar
+50 U Browbeat
+84 U Bull Cerodon
+132 U Cabal Coffers
+20 C Cadaverous Knight
+85 U Captain's Maneuver
 S Celestine Reef
-C Cerodon Yearling
-U Cinder Elemental
-C Cliffside Market
-U Cone of Flame
-C Congregate
-U Consume Spirit
-C Copper Myr
-U Corpse Harvester
-C Cranial Plating
-C Cruel Revival
-C Dark Ritual
-R Darksteel Forge
-R Death Baron
-R Door to Nothingness
-C Double Cleave
-C Dregscape Zombie
-U Duergar Hedge-Mage
-C Eloren Wilds
-U Etched Oracle
-U Explosive Vegetation
-U Fabricate
-C Feeding Grounds
-C Fertile Ground
-C Fertilid
-C Festering Goblin
-C Fields of Summer
-U Fires of Yavimaya
-U Flamekin Harbinger
-U Flametongue Kavu
-L Forest
-L Forest
-L Forest
-L Forest
-L Forest
-R Forgotten Ancient
-R Furnace of Rath
-C Glimmervoid Basin
-R Glory of Warfare
-U Goblin Offensive
-C Gold Myr
-C Goldmeadow
-R Grave Pact
-C Gravedigger
-C Great Furnace
-C Grixis
-C Gruul Turf
-U Hearthfire Hobgoblin
-R Helldozer
-C Hideous End
+86 C Cerodon Yearling
+51 U Cinder Elemental
+5 C Cliffside Market
+52 U Cone of Flame
+2 C Congregate
+21 U Consume Spirit
+109 C Copper Myr
+22 U Corpse Harvester
+110 C Cranial Plating
+23 C Cruel Revival
+24 C Dark Ritual
+111 R Darksteel Forge
+25 R Death Baron
+112 R Door to Nothingness
+100 C Double Cleave
+26 C Dregscape Zombie
+101 U Duergar Hedge-Mage
+7 C Eloren Wilds
+113 U Etched Oracle
+70 U Explosive Vegetation
+9 U Fabricate
+9 C Feeding Grounds
+71 C Fertile Ground
+72 C Fertilid
+27 C Festering Goblin
+10 C Fields of Summer
+87 U Fires of Yavimaya
+53 U Flamekin Harbinger
+54 U Flametongue Kavu
+165 L Forest
+165 L Forest
+165 L Forest
+165 L Forest
+165 L Forest
+73 R Forgotten Ancient
+55 R Furnace of Rath
+12 C Glimmervoid Basin
+88 R Glory of Warfare
+56 U Goblin Offensive
+114 C Gold Myr
+13 C Goldmeadow
+28 R Grave Pact
+29 C Gravedigger
+133 C Great Furnace
+15 C Grixis
+134 C Gruul Turf
+102 U Hearthfire Hobgoblin
+30 R Helldozer
+31 C Hideous End
 S Horizon Boughs
-C Hull Breach
-C Immersturm
-U Incremental Blight
-C Innocent Blood
-R Insurrection
-C Iron Myr
-L Island
-L Island
-L Island
-L Island
-C Isle of Vesuva
-R Ivy Elemental
-C Izzet Steam Maze
-C Keep Watch
-U Keldon Champion
-C Kor Sanctifiers
-C Krosa
-C Leaden Myr
-U Leechridden Swamp
-C Lethe Lake
-U Lightning Helix
-R Living Hive
-C Llanowar
-R Lodestone Myr
-R Loxodon Warhammer
-U Mage Slayer
-U Mask of Memory
-R Master of Etherium
-R Menacing Ogre
-C Minamo
+89 C Hull Breach
+17 C Immersturm
+32 U Incremental Blight
+33 C Innocent Blood
+57 R Insurrection
+115 C Iron Myr
+148 L Island
+148 L Island
+148 L Island
+148 L Island
+18 C Isle of Vesuva
+74 R Ivy Elemental
+19 C Izzet Steam Maze
+10 C Keep Watch
+58 U Keldon Champion
+3 C Kor Sanctifiers
+20 C Krosa
+116 C Leaden Myr
+135 U Leechridden Swamp
+21 C Lethe Lake
+90 U Lightning Helix
+75 R Living Hive
+22 C Llanowar
+117 R Lodestone Myr
+118 R Loxodon Warhammer
+91 U Mage Slayer
+119 U Mask of Memory
+11 R Master of Etherium
+59 R Menacing Ogre
+24 C Minamo
 S Mirrored Depths
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-C Murasa
-C Myr Enforcer
-C Naar Isle
-C Naya
-R Nefashu
-U Noxious Ghoul
-U Nuisance Engine
-C Oblivion Ring
-U Order // Chaos
-C Orim's Thunder
-C Otaria
-C Panopticon
-C Pentad Prism
-R Pentavus
-R Phyrexian Arena
-C Phyrexian Ghoul
-L Plains
-L Plains
-L Plains
-L Plains
-L Plains
-C Pools of Becoming
-U Prison Term
-R Profane Command
-U Pyrotechnics
-U Qumulox
-C Rampant Growth
-C Raven's Run
-R Razia, Boros Archangel
-C Reckless Charge
-R Relentless Assault
-C Relic of Progenitus
-U Rockslide Elemental
-C Rolling Thunder
-R Rorix Bladewing
-C Rotting Rats
-R Rumbling Slum
-C Sanctum of Serra
-C Sarcomite Myr
-U Savage Twister
-C Sea of Sand
-C Search for Tomorrow
-C Seat of the Synod
-U Serum Tank
-C Shepherd of Rot
-C Shiv
-U Shivan Oasis
-C Silver Myr
-C Silverglade Elemental
-U Skeleton Shard
-C Skybreen
-U Sludge Strider
-C Smokebraider
-C Sokenzan
-C Soul Warden
-U Soulless One
-C Stronghold Furnace
-U Sunhome, Fortress of the Legion
-C Suntouched Myr
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-C Syphon Mind
-C Syphon Soul
-R Taurean Mauler
-S Tazeem
+159 L Mountain
+159 L Mountain
+159 L Mountain
+159 L Mountain
+159 L Mountain
+159 L Mountain
+159 L Mountain
+159 L Mountain
+159 L Mountain
+25 C Murasa
+120 C Myr Enforcer
+26 C Naar Isle
+27 C Naya
+34 R Nefashu
+35 U Noxious Ghoul
+121 U Nuisance Engine
+4 C Oblivion Ring
+104 U Order // Chaos
+5 C Orim's Thunder
+28 C Otaria
+29 C Panopticon
+122 C Pentad Prism
+123 R Pentavus
+36 R Phyrexian Arena
+37 C Phyrexian Ghoul
+145 L Plains
+145 L Plains
+145 L Plains
+145 L Plains
+145 L Plains
+30 C Pools of Becoming
+6 U Prison Term
+38 R Profane Command
+60 U Pyrotechnics
+12 U Qumulox
+76 C Rampant Growth
+31 C Raven's Run
+92 R Razia, Boros Archangel
+61 C Reckless Charge
+62 R Relentless Assault
+124 C Relic of Progenitus
+63 U Rockslide Elemental
+64 C Rolling Thunder
+65 R Rorix Bladewing
+39 C Rotting Rats
+93 R Rumbling Slum
+32 C Sanctum of Serra
+13 C Sarcomite Myr
+94 U Savage Twister
+33 C Sea of Sand
+77 C Search for Tomorrow
+136 C Seat of the Synod
+125 U Serum Tank
+40 C Shepherd of Rot
+34 C Shiv
+137 U Shivan Oasis
+126 C Silver Myr
+78 C Silverglade Elemental
+127 U Skeleton Shard
+35 C Skybreen
+95 U Sludge Strider
+66 C Smokebraider
+36 C Sokenzan
+7 C Soul Warden
+41 U Soulless One
+37 C Stronghold Furnace
+138 U Sunhome, Fortress of the Legion
+128 C Suntouched Myr
+153 L Swamp
+153 L Swamp
+153 L Swamp
+153 L Swamp
+153 L Swamp
+42 C Syphon Mind
+43 C Syphon Soul
+67 R Taurean Mauler
+41 S Tazeem
 S Tember City
-C Terramorphic Expanse
-C The AEther Flues
-C The Dark Barony
-C The Eon Fog
-C The Fourth Sphere
-C The Great Forest
-C The Hippodrome
-C The Maelstrom
-U Thirst for Knowledge
-R Tornado Elemental
-C Tree of Tales
-U Tribal Unity
-C Turri Island
-U Undead Warchief
-C Undercity Reaches
-C Vault of Whispers
-C Vedalken Engineer
-C Velis Vel
-R Verdant Force
-C Whiplash Trap
-U Withered Wretch
-C Wizard Replica
+139 C Terramorphic Expanse
+2 C The AEther Flues
+6 C The Dark Barony
+8 C The Eon Fog
+11 C The Fourth Sphere
+14 C The Great Forest
+16 C The Hippodrome
+23 C The Maelstrom
+14 U Thirst for Knowledge
+79 R Tornado Elemental
+140 C Tree of Tales
+80 U Tribal Unity
+38 C Turri Island
+44 U Undead Warchief
+39 C Undercity Reaches
+141 C Vault of Whispers
+15 C Vedalken Engineer
+40 C Velis Vel
+81 R Verdant Force
+16 C Whiplash Trap
+45 U Withered Wretch
+129 C Wizard Replica

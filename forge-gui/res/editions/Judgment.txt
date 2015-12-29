@@ -10,146 +10,146 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-U Ancestor's Chosen
-U Anger
-C Anurid Barkripper
-R Anurid Brushhopper
-U Anurid Swarmsnapper
-C Arcane Teachings
-C Aven Fogbringer
-U Aven Warcraft
-R Balthor the Defiled
-C Barbarian Bully
-U Battle Screech
-C Battlefield Scrounger
-C Battlewise Aven
-C Benevolent Bodyguard
-C Book Burning
-C Border Patrol
-U Brawn
-R Breaking Point
-U Browbeat
-R Burning Wish
-U Cabal Therapy
-C Cabal Trainee
-C Cagemail
-C Canopy Claws
-C Centaur Rootcaster
-R Cephalid Constable
-U Cephalid Inkshrouder
-U Chastise
-R Commander Eesha
-R Crush of Wurms
-R Cunning Wish
-R Death Wish
-C Defy Gravity
-R Dwarven Bloodboiler
-U Dwarven Driller
-C Dwarven Scorcher
-C Earsplitting Rats
-U Elephant Guide
-C Ember Shot
-C Envelop
-R Epic Struggle
-R Erhnam Djinn
-U Exoskeletal Armor
-U Filth
-U Firecat Blitz
-C Flaring Pain
-U Flash of Insight
-R Fledgling Dragon
-C Folk Medicine
-U Forcemage Advocate
-C Funeral Pyre
-R Genesis
-C Giant Warthog
-R Glory
-R Golden Wish
-C Goretusk Firebeast
-U Grave Consequences
-C Grip of Amnesia
-U Grizzly Fate
-C Guided Strike
-R Guiltfeeder
-C Hapless Researcher
-C Harvester Druid
-R Hunting Grounds
-U Infectious Rage
-C Ironshell Beetle
-R Jeska, Warrior Adept
-C Keep Watch
-U Krosan Reclamation
-U Krosan Verge
-C Krosan Wayfarer
-U Laquatus's Disdain
-C Lava Dart
-C Lead Astray
-C Liberated Dwarf
-R Lightning Surge
-R Living Wish
-C Lost in Thought
-R Masked Gorgon
-C Mental Note
-R Mirari's Wake
-C Mirror Wall
-R Mist of Stagnation
-R Morality Shift
-U Nantuko Monastery
-C Nantuko Tracer
-R Nomad Mythmaker
-C Nullmage Advocate
-U Phantom Centaur
-U Phantom Flock
-R Phantom Nantuko
-R Phantom Nishoba
-C Phantom Nomad
-C Phantom Tiger
-U Planar Chaos
-C Prismatic Strands
-R Pulsemage Advocate
-U Quiet Speculation
-C Rats' Feast
-C Ray of Revelation
-U Riftstone Portal
-R Scalpelexis
-R Seedtime
-R Selfless Exorcist
-U Serene Sunset
-R Shaman's Trance
-C Shieldmage Advocate
-R Silver Seraph
-R Solitary Confinement
-U Soulcatchers' Aerie
-U Soulgorger Orgg
-C Spellgorger Barbarian
-R Spelljack
-U Spirit Cairn
-U Spurnmage Advocate
-U Stitch Together
-C Sudden Strength
-C Suntail Hawk
-R Sutured Ghoul
-U Swelter
-C Swirling Sandstorm
-R Sylvan Safekeeper
-R Telekinetic Bonds
-R Test of Endurance
-R Thriss, Nantuko Primus
-C Toxic Stench
-C Trained Pronghorn
-U Treacherous Vampire
-C Treacherous Werewolf
-U Tunneler Wurm
-U Unquestioned Authority
-U Valor
-C Venomous Vines
-C Vigilant Sentry
-U Web of Inertia
-U Wonder
-R Worldgorger Dragon
-R Wormfang Behemoth
-U Wormfang Crab
-C Wormfang Drake
-R Wormfang Manta
-C Wormfang Newt
-U Wormfang Turtle
+1 U Ancestor's Chosen
+77 U Anger
+104 C Anurid Barkripper
+137 R Anurid Brushhopper
+105 U Anurid Swarmsnapper
+78 C Arcane Teachings
+34 C Aven Fogbringer
+2 U Aven Warcraft
+61 R Balthor the Defiled
+79 C Barbarian Bully
+3 U Battle Screech
+106 C Battlefield Scrounger
+4 C Battlewise Aven
+5 C Benevolent Bodyguard
+80 C Book Burning
+6 C Border Patrol
+107 U Brawn
+81 R Breaking Point
+82 U Browbeat
+83 R Burning Wish
+62 U Cabal Therapy
+63 C Cabal Trainee
+7 C Cagemail
+108 C Canopy Claws
+109 C Centaur Rootcaster
+35 R Cephalid Constable
+36 U Cephalid Inkshrouder
+8 U Chastise
+9 R Commander Eesha
+110 R Crush of Wurms
+37 R Cunning Wish
+64 R Death Wish
+38 C Defy Gravity
+84 R Dwarven Bloodboiler
+85 U Dwarven Driller
+86 C Dwarven Scorcher
+65 C Earsplitting Rats
+111 U Elephant Guide
+87 C Ember Shot
+39 C Envelop
+112 R Epic Struggle
+113 R Erhnam Djinn
+114 U Exoskeletal Armor
+66 U Filth
+88 U Firecat Blitz
+89 C Flaring Pain
+40 U Flash of Insight
+90 R Fledgling Dragon
+115 C Folk Medicine
+116 U Forcemage Advocate
+10 C Funeral Pyre
+117 R Genesis
+118 C Giant Warthog
+11 R Glory
+12 R Golden Wish
+91 C Goretusk Firebeast
+67 U Grave Consequences
+41 C Grip of Amnesia
+119 U Grizzly Fate
+13 C Guided Strike
+68 R Guiltfeeder
+42 C Hapless Researcher
+120 C Harvester Druid
+138 R Hunting Grounds
+92 U Infectious Rage
+121 C Ironshell Beetle
+93 R Jeska, Warrior Adept
+43 C Keep Watch
+122 U Krosan Reclamation
+141 U Krosan Verge
+123 C Krosan Wayfarer
+44 U Laquatus's Disdain
+94 C Lava Dart
+14 C Lead Astray
+95 C Liberated Dwarf
+96 R Lightning Surge
+124 R Living Wish
+45 C Lost in Thought
+69 R Masked Gorgon
+46 C Mental Note
+139 R Mirari's Wake
+47 C Mirror Wall
+48 R Mist of Stagnation
+70 R Morality Shift
+142 U Nantuko Monastery
+125 C Nantuko Tracer
+15 R Nomad Mythmaker
+126 C Nullmage Advocate
+127 U Phantom Centaur
+16 U Phantom Flock
+128 R Phantom Nantuko
+140 R Phantom Nishoba
+17 C Phantom Nomad
+129 C Phantom Tiger
+97 U Planar Chaos
+18 C Prismatic Strands
+19 R Pulsemage Advocate
+49 U Quiet Speculation
+71 C Rats' Feast
+20 C Ray of Revelation
+143 U Riftstone Portal
+50 R Scalpelexis
+130 R Seedtime
+21 R Selfless Exorcist
+131 U Serene Sunset
+98 R Shaman's Trance
+22 C Shieldmage Advocate
+23 R Silver Seraph
+24 R Solitary Confinement
+25 U Soulcatchers' Aerie
+99 U Soulgorger Orgg
+100 C Spellgorger Barbarian
+51 R Spelljack
+26 U Spirit Cairn
+27 U Spurnmage Advocate
+72 U Stitch Together
+132 C Sudden Strength
+28 C Suntail Hawk
+73 R Sutured Ghoul
+101 U Swelter
+102 C Swirling Sandstorm
+133 R Sylvan Safekeeper
+52 R Telekinetic Bonds
+29 R Test of Endurance
+134 R Thriss, Nantuko Primus
+74 C Toxic Stench
+30 C Trained Pronghorn
+75 U Treacherous Vampire
+76 C Treacherous Werewolf
+135 U Tunneler Wurm
+31 U Unquestioned Authority
+32 U Valor
+136 C Venomous Vines
+33 C Vigilant Sentry
+53 U Web of Inertia
+54 U Wonder
+103 R Worldgorger Dragon
+55 R Wormfang Behemoth
+56 U Wormfang Crab
+57 C Wormfang Drake
+58 R Wormfang Manta
+59 C Wormfang Newt
+60 U Wormfang Turtle

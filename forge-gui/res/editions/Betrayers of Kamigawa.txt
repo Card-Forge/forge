@@ -9,168 +9,168 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
 
 [cards]
-C Akki Blizzard-Herder
-U Akki Raider
-U Ashen Monstrosity
-U Aura Barbs
-R Baku Altar
-C Bile Urchin
-C Blademane Baku
-R Blazing Shoal
-C Blessing of Leeches
-U Blinding Powder
-U Body of Jukai
-U Budoka Pupil
-C Call for Blood
-U Callow Jushi
-C Child of Thorns
-R Chisei, Heart of Oceans
-R Clash of Realities
-C Crack the Earth
-C Crawling Filth
-U Cunning Bandit
-R Day of Destiny
-R Disrupting Shoal
-U Empty-Shrine Kannushi
-R Enshrined Memories
-U Eradicate
-U Faithful Squire
-R Final Judgment
-C First Volley
-U Flames of the Blood Hand
-C Floodbringer
-U Forked-Branch Garami
-C Frost Ogre
-C Frostling
-R Fumiko the Lowblood
-U Genju of the Cedars
-U Genju of the Falls
-U Genju of the Fens
-U Genju of the Fields
-R Genju of the Realm
-U Genju of the Spires
-C Gnarled Mass
-C Goblin Cohort
-U Gods' Eye, Gate to the Reikai
-R Goryo's Vengeance
-C Harbinger of Spring
-C Heart of Light
-R Heartless Hidetsugu
-U Heed the Mists
-R Hero's Demise
-R Higure, the Still Wind
-U Hired Muscle
-R Hokori, Dust Drinker
-C Horobi's Whisper
-C Hundred-Talon Strike
-R In the Web of War
-U Indebted Samurai
-R Ink-Eyes, Servant of Oni
-C Ire of Kaminari
-R Isao, Enlightened Bushi
-R Ishi-Ishi, Akki Crackshot
-R Iwamori of the Open Fist
-U Jetting Glasskite
-U Kaijin of the Vanishing Touch
-C Kami of False Hope
-C Kami of Tattered Shoji
-U Kami of the Honored Dead
-R Kentaro, the Smiling Cat
-R Kira, Great Glass-Spinner
-U Kitsune Palliator
-R Kodama of the Center Tree
-C Kumano's Blessing
-R Kyoki, Sanity's Eclipse
-R Lifegift
-U Lifespinner
-U Loam Dweller
-R Mannichi, the Fevered Dream
-U Mark of Sakiko
-U Mark of the Oni
-C Matsu-Tribe Sniper
-C Mending Hands
-U Minamo Sightbender
-C Minamo's Meddling
-R Mirror Gallery
-C Mistblade Shinobi
-C Moonlit Strider
-R Neko-Te
-U Nezumi Shadow-Watcher
-C Ninja of the Deep Hours
-R Nourishing Shoal
-U Ogre Marauder
-U Ogre Recluse
-C Okiba-Gang Shinobi
-R Opal-Eye, Konda's Yojimbo
-R Orb of Dreams
-R Ornate Kanzashi
-U Overblaze
-R Oyobi, Who Split the Heavens
-R Patron of the Akki
-R Patron of the Kitsune
-R Patron of the Moon
-R Patron of the Nezumi
-R Patron of the Orochi
-C Petalmane Baku
-C Phantom Wings
-C Psychic Spear
-U Pus Kami
-U Quash
-C Quillmane Baku
-R Reduce to Dreams
-C Ribbons of the Reikai
-C Roar of Jukai
-U Ronin Cliffrider
-U Ronin Warclub
-R Sakiko, Mother of Summer
-C Sakura-Tribe Springcaller
-C Scaled Hulk
-U Scour
-U Scourge of Numai
-C Shimmering Glasskite
-R Shining Shoal
-C Shinka Gatekeeper
-R Shirei, Shizo's Caretaker
-R Shizuko, Caller of Autumn
-U Shuko
-U Shuriken
-R Sickening Shoal
-C Silverstorm Samurai
-C Skullmane Baku
-C Skullsnatcher
-R Slumbering Tora
-U Soratami Mindsweeper
-U Sosuke's Summons
-U Sowing Salt
-U Splinter
-C Split-Tail Miko
-C Stir the Grave
-U Stream of Consciousness
-R Sway of the Stars
-C Takeno's Cavalry
-C Takenuma Bleeder
-U Tallowisp
-C Teardrop Kami
-R Tendo Ice Bridge
-C Terashi's Grasp
-U Terashi's Verdict
-R That Which Was Taken
-R Threads of Disloyalty
-U Three Tragedies
-U Throat Slitter
-C Toils of Night and Day
-R Tomorrow, Azami's Familiar
-C Torrent of Stone
-R Toshiro Umezawa
-C Traproot Kami
-R Twist Allegiance
-R Umezawa's Jitte
-U Unchecked Growth
-C Uproot
-C Veil of Secrecy
-C Vital Surge
-U Walker of Secret Ways
-U Ward of Piety
-C Waxmane Baku
-R Yomiji, Who Bars the Way
-R Yukora, the Prisoner
+91 C Akki Blizzard-Herder
+92 U Akki Raider
+93 U Ashen Monstrosity
+94 U Aura Barbs
+152 R Baku Altar
+61 C Bile Urchin
+95 C Blademane Baku
+96 R Blazing Shoal
+62 C Blessing of Leeches
+153 U Blinding Powder
+121 U Body of Jukai
+122 U Budoka Pupil
+63 C Call for Blood
+31 U Callow Jushi
+123 C Child of Thorns
+32 R Chisei, Heart of Oceans
+97 R Clash of Realities
+98 C Crack the Earth
+64 C Crawling Filth
+99 U Cunning Bandit
+1 R Day of Destiny
+33 R Disrupting Shoal
+2 U Empty-Shrine Kannushi
+124 R Enshrined Memories
+65 U Eradicate
+3 U Faithful Squire
+4 R Final Judgment
+100 C First Volley
+101 U Flames of the Blood Hand
+34 C Floodbringer
+125 U Forked-Branch Garami
+102 C Frost Ogre
+103 C Frostling
+104 R Fumiko the Lowblood
+126 U Genju of the Cedars
+35 U Genju of the Falls
+66 U Genju of the Fens
+5 U Genju of the Fields
+151 R Genju of the Realm
+105 U Genju of the Spires
+127 C Gnarled Mass
+106 C Goblin Cohort
+164 U Gods' Eye, Gate to the Reikai
+67 R Goryo's Vengeance
+128 C Harbinger of Spring
+6 C Heart of Light
+107 R Heartless Hidetsugu
+36 U Heed the Mists
+68 R Hero's Demise
+37 R Higure, the Still Wind
+69 U Hired Muscle
+7 R Hokori, Dust Drinker
+70 C Horobi's Whisper
+8 C Hundred-Talon Strike
+108 R In the Web of War
+9 U Indebted Samurai
+71 R Ink-Eyes, Servant of Oni
+109 C Ire of Kaminari
+129 R Isao, Enlightened Bushi
+110 R Ishi-Ishi, Akki Crackshot
+130 R Iwamori of the Open Fist
+38 U Jetting Glasskite
+39 U Kaijin of the Vanishing Touch
+10 C Kami of False Hope
+11 C Kami of Tattered Shoji
+12 U Kami of the Honored Dead
+13 R Kentaro, the Smiling Cat
+40 R Kira, Great Glass-Spinner
+14 U Kitsune Palliator
+131 R Kodama of the Center Tree
+111 C Kumano's Blessing
+72 R Kyoki, Sanity's Eclipse
+132 R Lifegift
+133 U Lifespinner
+134 U Loam Dweller
+112 R Mannichi, the Fevered Dream
+135 U Mark of Sakiko
+73 U Mark of the Oni
+136 C Matsu-Tribe Sniper
+15 C Mending Hands
+41 U Minamo Sightbender
+42 C Minamo's Meddling
+154 R Mirror Gallery
+43 C Mistblade Shinobi
+16 C Moonlit Strider
+155 R Neko-Te
+74 U Nezumi Shadow-Watcher
+44 C Ninja of the Deep Hours
+137 R Nourishing Shoal
+75 U Ogre Marauder
+113 U Ogre Recluse
+76 C Okiba-Gang Shinobi
+17 R Opal-Eye, Konda's Yojimbo
+156 R Orb of Dreams
+157 R Ornate Kanzashi
+114 U Overblaze
+18 R Oyobi, Who Split the Heavens
+115 R Patron of the Akki
+19 R Patron of the Kitsune
+45 R Patron of the Moon
+77 R Patron of the Nezumi
+138 R Patron of the Orochi
+139 C Petalmane Baku
+46 C Phantom Wings
+78 C Psychic Spear
+79 U Pus Kami
+47 U Quash
+48 C Quillmane Baku
+49 R Reduce to Dreams
+50 C Ribbons of the Reikai
+140 C Roar of Jukai
+116 U Ronin Cliffrider
+158 U Ronin Warclub
+141 R Sakiko, Mother of Summer
+142 C Sakura-Tribe Springcaller
+143 C Scaled Hulk
+20 U Scour
+80 U Scourge of Numai
+51 C Shimmering Glasskite
+21 R Shining Shoal
+117 C Shinka Gatekeeper
+81 R Shirei, Shizo's Caretaker
+144 R Shizuko, Caller of Autumn
+159 U Shuko
+160 U Shuriken
+82 R Sickening Shoal
+22 C Silverstorm Samurai
+83 C Skullmane Baku
+84 C Skullsnatcher
+161 R Slumbering Tora
+52 U Soratami Mindsweeper
+145 U Sosuke's Summons
+118 U Sowing Salt
+146 U Splinter
+23 C Split-Tail Miko
+85 C Stir the Grave
+53 U Stream of Consciousness
+54 R Sway of the Stars
+24 C Takeno's Cavalry
+86 C Takenuma Bleeder
+25 U Tallowisp
+55 C Teardrop Kami
+165 R Tendo Ice Bridge
+26 C Terashi's Grasp
+27 U Terashi's Verdict
+162 R That Which Was Taken
+56 R Threads of Disloyalty
+87 U Three Tragedies
+88 U Throat Slitter
+57 C Toils of Night and Day
+58 R Tomorrow, Azami's Familiar
+119 C Torrent of Stone
+89 R Toshiro Umezawa
+147 C Traproot Kami
+120 R Twist Allegiance
+163 R Umezawa's Jitte
+148 U Unchecked Growth
+149 C Uproot
+59 C Veil of Secrecy
+150 C Vital Surge
+60 U Walker of Secret Ways
+28 U Ward of Piety
+29 C Waxmane Baku
+30 R Yomiji, Who Bars the Way
+90 R Yukora, the Prisoner

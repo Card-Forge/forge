@@ -9,328 +9,328 @@ Booster=11 Common, 3 Uncommon, 1 RareMythic, 0 Special
 FoilChanceInBooster=100
 
 [cards]
-S Ancestral Recall
-S Time Walk
-S Timetwister
-S Black Lotus
-S Mox Emerald
-S Mox Jet
-S Mox Pearl
-S Mox Ruby
-S Mox Sapphire
-C Afterlife
-U Akroma's Blessing
-M Armageddon
-U Astral Slide
-M Balance
-C Battle Screech
-C Benalish Trapper
-C Benevolent Bodyguard
-U Breath of Life
-C Brilliant Halo
-R Council's Judgment
-R Crescendo of War
-R Decree of Justice
-C Deftblade Elite
-U Devout Witness
-U Empyrial Armor
-R Eternal Dragon
-C Exile
-R Gerrard's Battle Cry
-C Gilded Light
-C Gustcloak Harrier
-R Jareth, Leonine Titan
-R Karmic Guide
-R Kongming, "Sleeping Dragon"
-C Mistmoon Griffin
-U Mystic Zealot
-C Noble Templar
-R Parallax Wave
-C Phantom Nomad
-U Pianna, Nomad Captain
-U Radiant, Archangel
-C Radiant's Judgment
-C Renewed Faith
-C Seal of Cleansing
-C Shelter
-U Sidar Jabari
-C Soltari Emissary
-C Soltari Trooper
-R Spirit Cairn
-R Spirit Mirror
-U Stoic Champion
-U Swords to Plowshares
-C Teroh's Faithful
-R Winds of Rath
-R Zhalfirin Crusader
-R Academy Elite
-C Aquamoeba
-U Brain Freeze
-C Brainstorm
-C Choking Tethers
-C Circular Logic
-U Cloud Djinn
-U Cloud of Faeries
-R Control Magic
-C Counterspell
-C Deep Analysis
-R Ephemeron
-U Fact or Fiction
-R Flusterstorm
-R Force of Will
-C Frantic Search
-R Future Sight
-U Gush
-U High Tide
-M Jace, the Mind Sculptor
-C Keeneye Aven
-C Killer Whale
-C Krovikan Sorcerer
-M Mana Drain
-C Man-o'-War
-R Mind's Desire
-M Morphling
-M Muzzio, Visionary Architect
-C Obsessive Search
-C Ophidian
-C Owl Familiar
-R Palinchron
-R Plea for Power
-U Power Sink
-C Repel
-C Rescind
-C Scrivener
-R Sea Drake
-U Serendib Efreet
-C Skywing Aven
-R Stroke of Genius
-C Temporal Fissure
-U Thalakos Drifters
-R Tradewind Rider
-U Turnabout
-M Upheaval
-R Volrath's Shapeshifter
-U Waterfront Bouncer
-C Addle
-U Animate Dead
-R Baleful Force
-U Cabal Ritual
-C Carnophage
-C Chainer's Edict
-C Choking Sands
-R Crovax the Cursed
-R Cruel Bargain
-U Dark Hatchling
-C Dark Ritual
-C Dauthi Mercenary
-C Death's-Head Buzzard
-M Demonic Tutor
-R Drakestown Forgotten
-C Expunge
-C Fallen Askari
-U Famine
-C Fledgling Djinn
-U Hymn to Tourach
-R Ichorid
-U Kezzerdrix
-R Laquatus's Champion
-R Living Death
-U Lurking Evil
-C Mesmeric Fiend
-R Nature's Ruin
-R Necropotence
-C Nightscape Familiar
-C Paralyze
-U Phyrexian Defiler
-C Predatory Nightstalker
-C Putrid Imp
-U Reanimate
-R Recurring Nightmare
-R Reign of the Pit
-U Sarcomancy
-C Skirge Familiar
-C Spinal Graft
-U Tendrils of Agony
-C Tyrant's Choice
-C Urborg Uprising
-R Vampiric Tutor
-R Visara the Dreadful
-M Yawgmoth's Bargain
-M Yawgmoth's Will
-C Aftershock
-C Beetleback Chief
-R Burning of Xinye
-R Burning Wish
-C Chain Lightning
-R Chaos Warp
-C Chartooth Cougar
-R Clickslither
-R Crater Hellion
-C Falter
-U Fireblast
-U Flametongue Kavu
-U Flowstone Hellion
-R Gamble
-C Giant Strength
-C Goblin Commando
-C Goblin General
-U Goblin Goon
-R Goblin Lackey
-C Goblin Matron
-C Goblin Patrol
-R Goblin Piledriver
-U Goblin Ringleader
-U Goblin Settler
-U Goblin Warchief
-C Hulking Goblin
-U Kaervek's Torch
-C Kindle
-R Lightning Dragon
-U Lightning Rift
-C Orcish Lumberjack
-U Pillaging Horde
-C Reckless Charge
-U Rites of Initiation
-R Rorix Bladewing
-M Scourge of the Throne
-C Skirk Drill Sergeant
-C Skirk Prospector
-C Solar Blast
-C Spark Spray
-R Starstorm
-R Sulfuric Vortex
-C Wall of Diffusion
-M Wheel of Fortune
-R Worldgorger Dragon
-C Armor of Thorns
-C Arrogant Wurm
-C Basking Rootwalla
-R Berserk
-U Blastoderm
-C Brindle Shoat
-M Channel
-C Claws of Wirewood
-R Deranged Hermit
-U Desert Twister
-U Dreampod Druid
-C Elephant Guide
-C Elvish Aberration
-U Erhnam Djinn
-M Eureka
-M Fastbond
-C Fyndhorn Elves
-U Gaea's Embrace
-R Genesis
-C Giant Mantis
-R Gigapede
-U Grizzly Fate
-R Hermit Druid
-C Jungle Wurm
-C Krosan Tusker
-C Krosan Vorine
-C Nature's Lore
-R Norwood Priestess
-U Nostalgic Dreams
-M Oath of Druids
-U Penumbra Wurm
-C Provoke
-R Realm Seekers
-R Regrowth
-U Roar of the Wurm
-R Rofellos, Llanowar Emissary
-R Saproling Burst
-R Silvos, Rogue Elemental
-C Simian Grunts
-C Sudden Strength
-R Survival of the Fittest
-R Sylvan Library
-U Symbiotic Wurm
-C Tangle
-C Tribute to the Wild
-C Wild Mongrel
-U Yavimaya Elder
-U AEther Mutation
-U Armadillo Cloak
-R Baleful Strix
-R Basandra, Battle Seraph
-U Blazing Specter
-R Brago, King Eternal
-M Dack Fayden
-R Dack's Duplicate
-U Death Grasp
-U Deathreap Ritual
-R Edric, Spymaster of Trest
-U Fires of Yavimaya
-U Goblin Trenches
-R Grenzo, Dungeon Warden
-R Magister of Worth
-M Marchesa, the Black Rose
-U Prophetic Bolt
-U Psychatog
-U Reviving Vapors
-R Selvala, Explorer Returned
-R Shivan Wurm
-R Spiritmonger
-R Ankh of Mishra
-U Chimeric Idol
-M City in a Bottle
-M Coercive Portal
-R Cursed Scroll
-R Flowstone Sculpture
-U Ivory Tower
-R Karn, Silver Golem
-M Lion's Eye Diamond
-M Mana Crypt
-C Mana Prism
-R Mana Vault
-R Masticore
-M Memory Jar
-R Nevinyrral's Disk
-R Null Rod
-R Predator, Flagship
-R Ring of Gix
-M Skullclamp
-R Smokestack
-M Sol Ring
-R Sphere of Resistance
-U Su-Chi
-U Thopter Squadron
-M Time Vault
-U Triangle of War
-R Ancient Tomb
-U Bad River
-R Badlands
-C Barren Moor
-R Bayou
-M Bazaar of Baghdad
-U Caldera Lake
-U Flood Plain
-C Forgotten Cave
-R Grand Coliseum
-U Grasslands
-R Keldon Necropolis
-R Kjeldoran Outpost
-R Lake of the Dead
-M Library of Alexandria
-C Lonely Sandbar
-M Mishra's Workshop
-U Mountain Valley
-U Pine Barrens
-R Plateau
-U Rocky Tar Pit
-U Salt Flats
-R Savannah
-U Scabland
-R Scrubland
-C Secluded Steppe
-U Skyshroud Forest
-R Strip Mine
-R Taiga
-R Thawing Glaciers
-M Tolarian Academy
-C Tranquil Thicket
-R Tropical Island
-R Tundra
-R Underground Sea
-R Volcanic Island
-R Yavimaya Hollow
+1 S Ancestral Recall
+2 S Time Walk
+3 S Timetwister
+4 S Black Lotus
+5 S Mox Emerald
+6 S Mox Jet
+7 S Mox Pearl
+8 S Mox Ruby
+9 S Mox Sapphire
+10 C Afterlife
+11 U Akroma's Blessing
+12 M Armageddon
+13 U Astral Slide
+14 M Balance
+15 C Battle Screech
+16 C Benalish Trapper
+17 C Benevolent Bodyguard
+18 U Breath of Life
+19 C Brilliant Halo
+20 R Council's Judgment
+21 R Crescendo of War
+22 R Decree of Justice
+23 C Deftblade Elite
+24 U Devout Witness
+25 U Empyrial Armor
+26 R Eternal Dragon
+27 C Exile
+28 R Gerrard's Battle Cry
+29 C Gilded Light
+30 C Gustcloak Harrier
+31 R Jareth, Leonine Titan
+32 R Karmic Guide
+33 R Kongming, "Sleeping Dragon"
+34 C Mistmoon Griffin
+35 U Mystic Zealot
+36 C Noble Templar
+37 R Parallax Wave
+38 C Phantom Nomad
+39 U Pianna, Nomad Captain
+40 U Radiant, Archangel
+41 C Radiant's Judgment
+42 C Renewed Faith
+43 C Seal of Cleansing
+44 C Shelter
+45 U Sidar Jabari
+46 C Soltari Emissary
+47 C Soltari Trooper
+48 R Spirit Cairn
+49 R Spirit Mirror
+50 U Stoic Champion
+51 U Swords to Plowshares
+52 C Teroh's Faithful
+53 R Winds of Rath
+54 R Zhalfirin Crusader
+55 R Academy Elite
+56 C Aquamoeba
+57 U Brain Freeze
+58 C Brainstorm
+59 C Choking Tethers
+60 C Circular Logic
+61 U Cloud Djinn
+62 U Cloud of Faeries
+63 R Control Magic
+64 C Counterspell
+65 C Deep Analysis
+66 R Ephemeron
+67 U Fact or Fiction
+68 R Flusterstorm
+69 R Force of Will
+70 C Frantic Search
+71 R Future Sight
+72 U Gush
+73 U High Tide
+74 M Jace, the Mind Sculptor
+75 C Keeneye Aven
+76 C Killer Whale
+77 C Krovikan Sorcerer
+78 M Mana Drain
+79 C Man-o'-War
+80 R Mind's Desire
+81 M Morphling
+82 M Muzzio, Visionary Architect
+83 C Obsessive Search
+84 C Ophidian
+85 C Owl Familiar
+86 R Palinchron
+87 R Plea for Power
+88 U Power Sink
+89 C Repel
+90 C Rescind
+91 C Scrivener
+92 R Sea Drake
+93 U Serendib Efreet
+94 C Skywing Aven
+95 R Stroke of Genius
+96 C Temporal Fissure
+97 U Thalakos Drifters
+98 R Tradewind Rider
+99 U Turnabout
+100 M Upheaval
+101 R Volrath's Shapeshifter
+102 U Waterfront Bouncer
+103 C Addle
+104 U Animate Dead
+105 R Baleful Force
+106 U Cabal Ritual
+107 C Carnophage
+108 C Chainer's Edict
+109 C Choking Sands
+110 R Crovax the Cursed
+111 R Cruel Bargain
+112 U Dark Hatchling
+113 C Dark Ritual
+114 C Dauthi Mercenary
+115 C Death's-Head Buzzard
+116 M Demonic Tutor
+117 R Drakestown Forgotten
+118 C Expunge
+119 C Fallen Askari
+120 U Famine
+121 C Fledgling Djinn
+122 U Hymn to Tourach
+123 R Ichorid
+124 U Kezzerdrix
+125 R Laquatus's Champion
+126 R Living Death
+127 U Lurking Evil
+128 C Mesmeric Fiend
+129 R Nature's Ruin
+130 R Necropotence
+131 C Nightscape Familiar
+132 C Paralyze
+133 U Phyrexian Defiler
+134 C Predatory Nightstalker
+135 C Putrid Imp
+136 U Reanimate
+137 R Recurring Nightmare
+138 R Reign of the Pit
+139 U Sarcomancy
+140 C Skirge Familiar
+141 C Spinal Graft
+142 U Tendrils of Agony
+143 C Tyrant's Choice
+144 C Urborg Uprising
+145 R Vampiric Tutor
+146 R Visara the Dreadful
+147 M Yawgmoth's Bargain
+148 M Yawgmoth's Will
+149 C Aftershock
+150 C Beetleback Chief
+151 R Burning of Xinye
+152 R Burning Wish
+153 C Chain Lightning
+154 R Chaos Warp
+155 C Chartooth Cougar
+156 R Clickslither
+157 R Crater Hellion
+158 C Falter
+159 U Fireblast
+160 U Flametongue Kavu
+161 U Flowstone Hellion
+162 R Gamble
+163 C Giant Strength
+164 C Goblin Commando
+165 C Goblin General
+166 U Goblin Goon
+167 R Goblin Lackey
+168 C Goblin Matron
+169 C Goblin Patrol
+170 R Goblin Piledriver
+171 U Goblin Ringleader
+172 U Goblin Settler
+173 U Goblin Warchief
+174 C Hulking Goblin
+175 U Kaervek's Torch
+176 C Kindle
+177 R Lightning Dragon
+178 U Lightning Rift
+179 C Orcish Lumberjack
+180 U Pillaging Horde
+181 C Reckless Charge
+182 U Rites of Initiation
+183 R Rorix Bladewing
+184 M Scourge of the Throne
+185 C Skirk Drill Sergeant
+186 C Skirk Prospector
+187 C Solar Blast
+188 C Spark Spray
+189 R Starstorm
+190 R Sulfuric Vortex
+191 C Wall of Diffusion
+192 M Wheel of Fortune
+193 R Worldgorger Dragon
+194 C Armor of Thorns
+195 C Arrogant Wurm
+196 C Basking Rootwalla
+197 R Berserk
+198 U Blastoderm
+199 C Brindle Shoat
+200 M Channel
+201 C Claws of Wirewood
+202 R Deranged Hermit
+203 U Desert Twister
+204 U Dreampod Druid
+205 C Elephant Guide
+206 C Elvish Aberration
+207 U Erhnam Djinn
+208 M Eureka
+209 M Fastbond
+210 C Fyndhorn Elves
+211 U Gaea's Embrace
+212 R Genesis
+213 C Giant Mantis
+214 R Gigapede
+215 U Grizzly Fate
+216 R Hermit Druid
+217 C Jungle Wurm
+218 C Krosan Tusker
+219 C Krosan Vorine
+220 C Nature's Lore
+221 R Norwood Priestess
+222 U Nostalgic Dreams
+223 M Oath of Druids
+224 U Penumbra Wurm
+225 C Provoke
+226 R Realm Seekers
+227 R Regrowth
+228 U Roar of the Wurm
+229 R Rofellos, Llanowar Emissary
+230 R Saproling Burst
+231 R Silvos, Rogue Elemental
+232 C Simian Grunts
+233 C Sudden Strength
+234 R Survival of the Fittest
+235 R Sylvan Library
+236 U Symbiotic Wurm
+237 C Tangle
+238 C Tribute to the Wild
+239 C Wild Mongrel
+240 U Yavimaya Elder
+241 U AEther Mutation
+242 U Armadillo Cloak
+243 R Baleful Strix
+244 R Basandra, Battle Seraph
+245 U Blazing Specter
+246 R Brago, King Eternal
+247 M Dack Fayden
+248 R Dack's Duplicate
+249 U Death Grasp
+250 U Deathreap Ritual
+251 R Edric, Spymaster of Trest
+252 U Fires of Yavimaya
+253 U Goblin Trenches
+254 R Grenzo, Dungeon Warden
+255 R Magister of Worth
+256 M Marchesa, the Black Rose
+257 U Prophetic Bolt
+258 U Psychatog
+259 U Reviving Vapors
+260 R Selvala, Explorer Returned
+261 R Shivan Wurm
+262 R Spiritmonger
+263 R Ankh of Mishra
+264 U Chimeric Idol
+265 M City in a Bottle
+266 M Coercive Portal
+267 R Cursed Scroll
+268 R Flowstone Sculpture
+269 U Ivory Tower
+270 R Karn, Silver Golem
+271 M Lion's Eye Diamond
+272 M Mana Crypt
+273 C Mana Prism
+274 R Mana Vault
+275 R Masticore
+276 M Memory Jar
+277 R Nevinyrral's Disk
+278 R Null Rod
+279 R Predator, Flagship
+280 R Ring of Gix
+281 M Skullclamp
+282 R Smokestack
+283 M Sol Ring
+284 R Sphere of Resistance
+285 U Su-Chi
+286 U Thopter Squadron
+287 M Time Vault
+288 U Triangle of War
+289 R Ancient Tomb
+290 U Bad River
+291 R Badlands
+292 C Barren Moor
+293 R Bayou
+294 M Bazaar of Baghdad
+295 U Caldera Lake
+296 U Flood Plain
+297 C Forgotten Cave
+298 R Grand Coliseum
+299 U Grasslands
+300 R Keldon Necropolis
+301 R Kjeldoran Outpost
+302 R Lake of the Dead
+303 M Library of Alexandria
+304 C Lonely Sandbar
+305 M Mishra's Workshop
+306 U Mountain Valley
+307 U Pine Barrens
+308 R Plateau
+309 U Rocky Tar Pit
+310 U Salt Flats
+311 R Savannah
+312 U Scabland
+313 R Scrubland
+314 C Secluded Steppe
+315 U Skyshroud Forest
+316 R Strip Mine
+317 R Taiga
+318 R Thawing Glaciers
+319 M Tolarian Academy
+320 C Tranquil Thicket
+321 R Tropical Island
+322 R Tundra
+323 R Underground Sea
+324 R Volcanic Island
+325 R Yavimaya Hollow

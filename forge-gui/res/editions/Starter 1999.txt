@@ -9,176 +9,176 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-R Abyssal Horror
-U Air Elemental
-R Alluring Scent
-R Ancient Craving
-U Angel of Light
-U Angel of Mercy
-C Angelic Blessing
-R Archangel
-U Ardent Militia
-R Armageddon
-C Barbtooth Wurm
-U Bargain
-R Blinding Light
-C Bog Imp
-C Bog Raiders
-U Bog Wraith
-C Border Guard
-U Breath of Life
-U Bull Hippo
-R Champion Lancer
-U Charging Paladin
-C Chorus of Woe
-U Cinder Storm
-U Coercion
-C Coral Eel
-U Counterspell
-U Dakmor Ghoul
-R Dakmor Lancer
-U Dakmor Plague
-C Dakmor Scorpion
-R Dakmor Sorceress
-U Dark Offering
-R Denizen of the Deep
-R Devastation
-C Devoted Hero
-C Devout Monk
-R Dread Reaper
-C Durkwood Boars
-C Eager Cadet
-U Earth Elemental
-U Exhaustion
-C Extinguish
-U Eye Spy
-U False Peace
-C Feral Shadow
-U Fire Elemental
-R Fire Tempest
-C Foot Soldiers
-L Forest
-L Forest
-L Forest
-L Forest
-R Gerrard's Wisdom
-C Giant Octopus
-C Goblin Cavaliers
-C Goblin Chariot
-U Goblin Commando
-U Goblin General
-U Goblin Glider
-R Goblin Hero
-U Goblin Lore
-C Goblin Mountaineer
-U Goblin Settler
-C Gorilla Warrior
-U Gravedigger
-R Grim Tutor
-C Grizzly Bears
-C Hand of Death
-C Hollow Dogs
-U Howling Fury
-C Hulking Goblin
-U Hulking Ogre
-C Ingenious Thief
-L Island
-L Island
-L Island
-L Island
-U Jagged Lightning
-C Knight Errant
-R Last Chance
-C Lava Axe
-C Lone Wolf
-R Loyal Sentry
-U Lynx
-U Man-o'-War
-C Merfolk of the Pearl Trident
-C Mind Rot
-R Mons's Goblin Raiders
-C Monstrous Growth
-U Moon Sprite
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-C Muck Rats
-U Natural Spring
-R Nature's Cloak
-C Nature's Lore
-C Norwood Archers
-C Norwood Ranger
-C Ogre Warrior
-U Owl Familiar
-C Path of Peace
-R Phantom Warrior
-R Piracy
-L Plains
-L Plains
-L Plains
-L Plains
-U Pride of Lions
-R Psychic Transfer
-C Raging Goblin
-C Raise Dead
-R Ransack
-U Ravenous Rats
-U Relearn
-R Relentless Assault
-C Remove Soul
-U Renewing Touch
-U Righteous Charge
-R Righteous Fury
-C Royal Falcon
-U Royal Trooper
-C Sacred Nectar
-C Scathe Zombies
-C Scorching Spear
-C Sea Eagle
-C Serpent Warrior
-U Shrieking Specter
-U Silverback Ape
-C Sleight of Hand
-C Snapping Drake
-U Soul Feast
-C Southern Elephant
-U Spitting Earth
-C Squall
-C Steadfastness
-C Stone Rain
-C Storm Crow
-U Stream of Acid
-R Summer Bloom
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-R Sylvan Basilisk
-R Sylvan Yeti
-R Thorn Elemental
-R Thunder Dragon
-U Tidings
-C Time Ebb
-R Time Warp
-C Touch of Brilliance
-R Trained Orgg
-C Tremor
-U Undo
-U Untamed Wilds
-C Venerable Monk
-U Vengeance
-U Veteran Cavalier
-R Vizzerdrix
-R Volcanic Dragon
-C Volcanic Hammer
-U Water Elemental
-U Whiptail Wurm
-R Whirlwind
-R Wicked Pact
-C Wild Griffin
-U Wild Ox
-C Willow Elf
-C Wind Drake
-U Wind Sail
-U Wood Elves
+63 R Abyssal Horror
+32 U Air Elemental
+124 R Alluring Scent
+64 R Ancient Craving
+1 U Angel of Light
+2 U Angel of Mercy
+3 C Angelic Blessing
+4 R Archangel
+5 U Ardent Militia
+6 R Armageddon
+125 C Barbtooth Wurm
+7 U Bargain
+8 R Blinding Light
+65 C Bog Imp
+66 C Bog Raiders
+67 U Bog Wraith
+9 C Border Guard
+10 U Breath of Life
+126 U Bull Hippo
+11 R Champion Lancer
+12 U Charging Paladin
+68 C Chorus of Woe
+93 U Cinder Storm
+69 U Coercion
+33 C Coral Eel
+34 U Counterspell
+70 U Dakmor Ghoul
+71 R Dakmor Lancer
+72 U Dakmor Plague
+73 C Dakmor Scorpion
+74 R Dakmor Sorceress
+75 U Dark Offering
+35 R Denizen of the Deep
+94 R Devastation
+13 C Devoted Hero
+14 C Devout Monk
+76 R Dread Reaper
+127 C Durkwood Boars
+15 C Eager Cadet
+95 U Earth Elemental
+36 U Exhaustion
+37 C Extinguish
+38 U Eye Spy
+16 U False Peace
+77 C Feral Shadow
+96 U Fire Elemental
+97 R Fire Tempest
+17 C Foot Soldiers
+171 L Forest
+171 L Forest
+171 L Forest
+171 L Forest
+18 R Gerrard's Wisdom
+39 C Giant Octopus
+98 C Goblin Cavaliers
+99 C Goblin Chariot
+100 U Goblin Commando
+101 U Goblin General
+102 U Goblin Glider
+103 R Goblin Hero
+104 U Goblin Lore
+105 C Goblin Mountaineer
+106 U Goblin Settler
+128 C Gorilla Warrior
+78 U Gravedigger
+79 R Grim Tutor
+129 C Grizzly Bears
+80 C Hand of Death
+81 C Hollow Dogs
+82 U Howling Fury
+107 C Hulking Goblin
+108 U Hulking Ogre
+40 C Ingenious Thief
+158 L Island
+158 L Island
+158 L Island
+158 L Island
+109 U Jagged Lightning
+19 C Knight Errant
+110 R Last Chance
+111 C Lava Axe
+130 C Lone Wolf
+20 R Loyal Sentry
+131 U Lynx
+41 U Man-o'-War
+42 C Merfolk of the Pearl Trident
+83 C Mind Rot
+112 R Mons's Goblin Raiders
+132 C Monstrous Growth
+133 U Moon Sprite
+167 L Mountain
+167 L Mountain
+167 L Mountain
+167 L Mountain
+84 C Muck Rats
+134 U Natural Spring
+135 R Nature's Cloak
+136 C Nature's Lore
+137 C Norwood Archers
+138 C Norwood Ranger
+113 C Ogre Warrior
+43 U Owl Familiar
+21 C Path of Peace
+44 R Phantom Warrior
+45 R Piracy
+156 L Plains
+156 L Plains
+156 L Plains
+156 L Plains
+139 U Pride of Lions
+46 R Psychic Transfer
+114 C Raging Goblin
+85 C Raise Dead
+47 R Ransack
+86 U Ravenous Rats
+48 U Relearn
+115 R Relentless Assault
+49 C Remove Soul
+140 U Renewing Touch
+22 U Righteous Charge
+23 R Righteous Fury
+24 C Royal Falcon
+25 U Royal Trooper
+26 C Sacred Nectar
+87 C Scathe Zombies
+116 C Scorching Spear
+50 C Sea Eagle
+88 C Serpent Warrior
+89 U Shrieking Specter
+141 U Silverback Ape
+51 C Sleight of Hand
+52 C Snapping Drake
+90 U Soul Feast
+142 C Southern Elephant
+117 U Spitting Earth
+143 C Squall
+27 C Steadfastness
+118 C Stone Rain
+53 C Storm Crow
+91 U Stream of Acid
+144 R Summer Bloom
+163 L Swamp
+163 L Swamp
+163 L Swamp
+163 L Swamp
+145 R Sylvan Basilisk
+146 R Sylvan Yeti
+147 R Thorn Elemental
+119 R Thunder Dragon
+54 U Tidings
+55 C Time Ebb
+56 R Time Warp
+57 C Touch of Brilliance
+120 R Trained Orgg
+121 C Tremor
+58 U Undo
+148 U Untamed Wilds
+28 C Venerable Monk
+29 U Vengeance
+30 U Veteran Cavalier
+59 R Vizzerdrix
+122 R Volcanic Dragon
+123 C Volcanic Hammer
+60 U Water Elemental
+149 U Whiptail Wurm
+150 R Whirlwind
+92 R Wicked Pact
+31 C Wild Griffin
+151 U Wild Ox
+152 C Willow Elf
+61 C Wind Drake
+62 U Wind Sail
+153 U Wood Elves

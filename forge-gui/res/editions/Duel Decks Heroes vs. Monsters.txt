@@ -6,84 +6,84 @@ Name=Duel Decks: Heroes vs. Monsters
 Type=Duel_Decks
 
 [cards]
-R Anax and Cymede
-C Armory Guard
-C Auramancer
-U Battle Mastery
-U Beast Within
-C Blood Ogre
-C Bonds of Faith
-C Boros Guildgate
-C Cavalry Pegasus
-U Condemn
-R Conquering Manticore
-R Crater Hellion
-U Crowned Ceratok
-U Daily Regimen
-C Dawnstrike Paladin
-C Deadly Recluse
-U Destructive Revelry
-R Deus of Calamity
-U Dragon Blood
-U Fencing Ace
-R Figure of Destiny
-U Fires of Yavimaya
-L Forest
-L Forest
-L Forest
-L Forest
-C Freewind Equenaut
-C Ghor-Clan Savage
-C Gorehorn Minotaurs
-U Griffin Guide
-U Gustcloak Sentinel
-R Kamahl, Pit Fighter
-U Kavu Predator
-U Kazandu Refuge
-C Krosan Tusker
-U Llanowar Reborn
-U Magma Jet
-U Miraculous Recovery
-C Moment of Heroism
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-U New Benalia
-R Nobilis of War
-C Orcish Lumberjack
-U Ordeal of Purphoros
-C Pay No Heed
-L Plains
-L Plains
-L Plains
-L Plains
-M Polukranos, World Eater
-C Prey Upon
-U Pyroclasm
-U Pyrokinesis
-U Regrowth
-U Righteousness
-C Satyr Hedonist
-C Shower of Sparks
-U Skarrg, the Rage Pits
-R Skarrgan Firebird
-U Skarrgan Skybreaker
-C Smite the Monstrous
-C Somberwald Vigilante
-C Stand Firm
-U Stun Sniper
-M Sun Titan
-C Terrifying Presence
-C Thraben Valiant
-R Troll Ascetic
-U Truefire Paladin
-U Undying Rage
-C Valley Rannet
-C Volt Charge
-R Winds of Rath
-C Zhur-Taa Druid
+11 R Anax and Cymede
+12 C Armory Guard
+9 C Auramancer
+27 U Battle Mastery
+69 U Beast Within
+49 C Blood Ogre
+24 C Bonds of Faith
+33 C Boros Guildgate
+4 C Cavalry Pegasus
+17 U Condemn
+55 R Conquering Manticore
+56 R Crater Hellion
+51 U Crowned Ceratok
+18 U Daily Regimen
+14 C Dawnstrike Paladin
+45 C Deadly Recluse
+66 U Destructive Revelry
+54 R Deus of Calamity
+67 U Dragon Blood
+5 U Fencing Ace
+3 R Figure of Destiny
+70 U Fires of Yavimaya
+81 L Forest
+81 L Forest
+81 L Forest
+81 L Forest
+10 C Freewind Equenaut
+53 C Ghor-Clan Savage
+52 C Gorehorn Minotaurs
+28 U Griffin Guide
+13 U Gustcloak Sentinel
+16 R Kamahl, Pit Fighter
+46 U Kavu Predator
+71 U Kazandu Refuge
+59 C Krosan Tusker
+72 U Llanowar Reborn
+22 U Magma Jet
+30 U Miraculous Recovery
+25 C Moment of Heroism
+35 L Mountain
+35 L Mountain
+35 L Mountain
+35 L Mountain
+35 L Mountain
+35 L Mountain
+35 L Mountain
+35 L Mountain
+34 U New Benalia
+15 R Nobilis of War
+44 C Orcish Lumberjack
+23 U Ordeal of Purphoros
+19 C Pay No Heed
+42 L Plains
+42 L Plains
+42 L Plains
+42 L Plains
+43 M Polukranos, World Eater
+62 C Prey Upon
+63 U Pyroclasm
+32 U Pyrokinesis
+64 U Regrowth
+20 U Righteousness
+47 C Satyr Hedonist
+61 C Shower of Sparks
+73 U Skarrg, the Rage Pits
+57 R Skarrgan Firebird
+60 U Skarrgan Skybreaker
+29 C Smite the Monstrous
+2 C Somberwald Vigilante
+21 C Stand Firm
+7 U Stun Sniper
+1 M Sun Titan
+65 C Terrifying Presence
+6 C Thraben Valiant
+50 R Troll Ascetic
+8 U Truefire Paladin
+26 U Undying Rage
+58 C Valley Rannet
+68 C Volt Charge
+31 R Winds of Rath
+48 C Zhur-Taa Druid

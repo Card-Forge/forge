@@ -6,37 +6,37 @@ Code2=PD2
 Type=Premium_Deck_Series
 
 [cards]
-R Ball Lightning
-U Barbarian Ring
-U Boggart Ram-Gang
-U Browbeat
-C Chain Lightning
-C Cinder Pyromancer
-R Figure of Destiny
-U Fire Servant
-U Fireball
-C Fireblast
-U Flames of the Blood Hand
-U Ghitu Encampment
-R Grim Lavamancer
-R Hammer of Bogardan
-U Hellspark Elemental
-U Jackal Pup
-R Jaya Ballard, Task Mage
-U Keldon Champion
-C Keldon Marauders
-C Lightning Bolt
-U Mogg Fanatic
-C Mogg Flunkies
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-U Pillage
-U Price of Progress
-R Reverberate
-U Spark Elemental
-U Sudden Impact
-C Teetering Peaks
-C Thunderbolt
-C Vulshok Sorcerer
+12 R Ball Lightning
+28 U Barbarian Ring
+13 U Boggart Ram-Gang
+21 U Browbeat
+16 C Chain Lightning
+9 C Cinder Pyromancer
+5 R Figure of Destiny
+15 U Fire Servant
+27 U Fireball
+26 C Fireblast
+22 U Flames of the Blood Hand
+29 U Ghitu Encampment
+1 R Grim Lavamancer
+23 R Hammer of Bogardan
+6 U Hellspark Elemental
+2 U Jackal Pup
+10 R Jaya Ballard, Task Mage
+14 U Keldon Champion
+7 C Keldon Marauders
+17 C Lightning Bolt
+3 U Mogg Fanatic
+8 C Mogg Flunkies
+32 L Mountain
+32 L Mountain
+32 L Mountain
+32 L Mountain
+24 U Pillage
+18 U Price of Progress
+20 R Reverberate
+4 U Spark Elemental
+25 U Sudden Impact
+30 C Teetering Peaks
+19 C Thunderbolt
+11 C Vulshok Sorcerer

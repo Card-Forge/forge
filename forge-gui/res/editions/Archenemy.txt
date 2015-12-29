@@ -6,203 +6,203 @@ Code2=ARC
 Type=Other
 
 [cards]
-C A Display of My Dark Power
-C AEther Spellbomb
-C Agony Warp
-C All Shall Smolder in My Wake
-C All in Good Time
-C Approach My Molten Realm
-C Architects of Will
-C Armadillo Cloak
-U Artisan of Kozilek
-R Avatar of Discord
-R Avatar of Woe
-C Azorius Signet
-C Barren Moor
-C Battering Craghorn
-U Batwing Brume
-R Beacon of Unrest
-C Behold the Power of Destruction
-U Bituminous Blast
-C Bog Witch
-C Branching Bolt
-U Breath of Darigaaz
-R Cemetery Reaper
-R Chameleon Colossus
-C Chandra's Outrage
-C Choose Your Champion
-C Colossal Might
-U Corpse Connoisseur
-C Dance, Pathetic Marionette
-C Dimir Signet
-C Dragon Breath
-C Dragon Fodder
-U Dragon Whelp
-U Dragonspeaker Shaman
-U Dreamstone Hedron
-C Dregscape Zombie
+8 C A Display of My Dark Power
+102 C AEther Spellbomb
+76 C Agony Warp
+2 C All Shall Smolder in My Wake
+1 C All in Good Time
+3 C Approach My Molten Realm
+77 C Architects of Will
+78 C Armadillo Cloak
+123 U Artisan of Kozilek
+79 R Avatar of Discord
+9 R Avatar of Woe
+103 C Azorius Signet
+124 C Barren Moor
+30 C Battering Craghorn
+80 U Batwing Brume
+10 R Beacon of Unrest
+4 C Behold the Power of Destruction
+81 U Bituminous Blast
+11 C Bog Witch
+82 C Branching Bolt
+31 U Breath of Darigaaz
+12 R Cemetery Reaper
+52 R Chameleon Colossus
+32 C Chandra's Outrage
+5 C Choose Your Champion
+83 C Colossal Might
+13 U Corpse Connoisseur
+6 C Dance, Pathetic Marionette
+104 C Dimir Signet
+33 C Dragon Breath
+34 C Dragon Fodder
+35 U Dragon Whelp
+36 U Dragonspeaker Shaman
+105 U Dreamstone Hedron
+14 C Dregscape Zombie
 S Drench the Soil in Their Blood
-R Duplicant
-C Embrace My Diabolical Vision
-C Ethersworn Shieldmage
-U Everflowing Chalice
-C Every Hope Shall Vanish
-C Every Last Vestige Shall Rot
-C Evil Comes to Fruition
-R Extractor Demon
-C Feed the Machine
-R Feral Hydra
-C Fertilid
-C Festering Goblin
-C Fieldmist Borderpost
-C Fierce Empath
-U Fireball
-U Fires of Yavimaya
-R Flameblast Dragon
-C Fog
-L Forest
-L Forest
-L Forest
-R Forgotten Ancient
-U Furnace Whelp
-C Gathan Raiders
-C Gleeful Sabotage
-U Graypelt Refuge
-C Gruul Signet
-U Harmonize
-R Hellkite Charger
-U Heroes' Reunion
-U Hunting Moa
-C I Bask in Your Silent Awe
-C I Call on the Ancient Magics
-C I Delight in Your Convulsions
-C I Know All, I See All
-C Ignite the Cloneforge!
-R Imperial Hellkite
+106 R Duplicant
+9 C Embrace My Diabolical Vision
+84 C Ethersworn Shieldmage
+107 U Everflowing Chalice
+10 C Every Hope Shall Vanish
+11 C Every Last Vestige Shall Rot
+12 C Evil Comes to Fruition
+15 R Extractor Demon
+14 C Feed the Machine
+53 R Feral Hydra
+54 C Fertilid
+16 C Festering Goblin
+85 C Fieldmist Borderpost
+55 C Fierce Empath
+37 U Fireball
+86 U Fires of Yavimaya
+38 R Flameblast Dragon
+56 C Fog
+149 L Forest
+149 L Forest
+149 L Forest
+57 R Forgotten Ancient
+39 U Furnace Whelp
+40 C Gathan Raiders
+58 C Gleeful Sabotage
+125 U Graypelt Refuge
+108 C Gruul Signet
+59 U Harmonize
+41 R Hellkite Charger
+87 U Heroes' Reunion
+60 U Hunting Moa
+15 C I Bask in Your Silent Awe
+16 C I Call on the Ancient Magics
+17 C I Delight in Your Convulsions
+18 C I Know All, I See All
+19 C Ignite the Cloneforge!
+42 R Imperial Hellkite
 S Imprison This Insolent Wretch
-U Incremental Blight
-C Infectious Horror
-U Inferno Trap
-U Infest
-C Into the Earthen Maw
-C Introductions Are in Order
-L Island
-L Island
-L Island
-U Juggernaut
-R Kaervek the Merciless
-R Kamahl, Fist of Krosa
-U Kazandu Refuge
-C Khalni Garden
-R Kilnmouth Dragon
-C Know Naught but Fire
-C Krosan Tusker
-U Krosan Verge
-C Leaf Gilder
-R Leonin Abunas
-U Lightning Greaves
-U Llanowar Reborn
-R Lodestone Golem
-C Look Skyward and Despair
-R Magister Sphinx
-U Makeshift Mannequin
-R March of the Machines
-R Master Transmuter
-C May Civilization Collapse
-R Memnarch
-U Metallurgeon
-C Mistvein Borderpost
-R Molimo, Maro-Sorcerer
-C Mortal Flesh Is Weak
-R Mosswort Bridge
-L Mountain
-L Mountain
-L Mountain
-C My Crushing Masterstroke
-C My Genius Knows No Bounds
-C My Undead Horde Awakens
-C My Wish Is Your Command
-U Nantuko Monastery
-C Nature Demands an Offering
-C Nature Shields Its Own
-C Nothing Can Stop Me Now
-C Obelisk of Esper
-C Oblivion Ring
-C Only Blood Ends Your Nightmares
-C Pale Recluse
-U Path to Exile
+17 U Incremental Blight
+18 C Infectious Horror
+43 U Inferno Trap
+19 U Infest
+20 C Into the Earthen Maw
+21 C Introductions Are in Order
+141 L Island
+141 L Island
+141 L Island
+109 U Juggernaut
+88 R Kaervek the Merciless
+61 R Kamahl, Fist of Krosa
+126 U Kazandu Refuge
+127 C Khalni Garden
+44 R Kilnmouth Dragon
+23 C Know Naught but Fire
+62 C Krosan Tusker
+128 U Krosan Verge
+63 C Leaf Gilder
+1 R Leonin Abunas
+110 U Lightning Greaves
+129 U Llanowar Reborn
+111 R Lodestone Golem
+24 C Look Skyward and Despair
+89 R Magister Sphinx
+20 U Makeshift Mannequin
+6 R March of the Machines
+7 R Master Transmuter
+25 C May Civilization Collapse
+112 R Memnarch
+2 U Metallurgeon
+90 C Mistvein Borderpost
+64 R Molimo, Maro-Sorcerer
+26 C Mortal Flesh Is Weak
+130 R Mosswort Bridge
+146 L Mountain
+146 L Mountain
+146 L Mountain
+27 C My Crushing Masterstroke
+28 C My Genius Knows No Bounds
+29 C My Undead Horde Awakens
+30 C My Wish Is Your Command
+131 U Nantuko Monastery
+31 C Nature Demands an Offering
+32 C Nature Shields Its Own
+33 C Nothing Can Stop Me Now
+113 C Obelisk of Esper
+3 C Oblivion Ring
+34 C Only Blood Ends Your Nightmares
+91 C Pale Recluse
+4 U Path to Exile
 S Perhaps You've Met My Cohort
-L Plains
-L Plains
+137 L Plains
+137 L Plains
 S Plots That Span Centuries
-C Plummet
-R Primal Command
-C Rakdos Carnarium
-U Rakdos Guildmage
-C Rakdos Signet
-C Rancor
-C Realms Befitting My Majesty
-U Reanimate
-U Reassembling Skeleton
-C Roots of All Evil
-C Rotted Ones, Lay Siege
-R Ryusei, the Falling Star
-C Sakura-Tribe Elder
-C Sanctum Gargoyle
-U Savage Twister
-R Scion of Darkness
-C Secluded Steppe
-C Seething Song
-U Selesnya Guildmage
-C Shinen of Life's Roar
-U Shriekmaw
-C Sign in Blood
-C Skirk Commando
-C Skirk Marauder
-U Skullcage
-U Sorcerer's Strongbox
-C Spider Umbra
-U Spin into Myth
-U Sun Droplet
-R Sundering Titan
-C Surrender Your Thoughts
-L Swamp
-L Swamp
-L Swamp
-U Synod Centurion
-U Synod Sanctum
-R Taurean Mauler
-C Terminate
-C Terramorphic Expanse
-C The Dead Shall Serve
-C The Fate of the Flammable
-C The Iron Guardian Stirs
-C The Pieces Are Coming Together
-C The Very Soil Shall Shake
-R Thelonite Hermit
-U Thran Dynamo
-U Thunderstaff
-C Tooth, Claw, and Tail
-U Torrent of Souls
-C Tranquil Thicket
-C Twisted Abomination
-R Two-Headed Dragon
-U Unbender Tine
-C Unmake
-C Urborg Syphon-Mage
-R Vampiric Dragon
-R Verdeloth the Ancient
-U Vitu-Ghazi, the City-Tree
-U Volcanic Fallout
-C Wall of Roots
-U Watchwolf
-U Wax // Wane
-C Which of You Burns Brightest?
-C Wickerbough Elder
-U Yavimaya Dryad
-C Your Fate Is Thrice Sealed
+65 C Plummet
+66 R Primal Command
+132 C Rakdos Carnarium
+92 U Rakdos Guildmage
+114 C Rakdos Signet
+67 C Rancor
+36 C Realms Befitting My Majesty
+21 U Reanimate
+22 U Reassembling Skeleton
+37 C Roots of All Evil
+38 C Rotted Ones, Lay Siege
+45 R Ryusei, the Falling Star
+68 C Sakura-Tribe Elder
+5 C Sanctum Gargoyle
+93 U Savage Twister
+23 R Scion of Darkness
+133 C Secluded Steppe
+46 C Seething Song
+94 U Selesnya Guildmage
+69 C Shinen of Life's Roar
+24 U Shriekmaw
+25 C Sign in Blood
+47 C Skirk Commando
+48 C Skirk Marauder
+115 U Skullcage
+116 U Sorcerer's Strongbox
+70 C Spider Umbra
+8 U Spin into Myth
+117 U Sun Droplet
+118 R Sundering Titan
+39 C Surrender Your Thoughts
+143 L Swamp
+143 L Swamp
+143 L Swamp
+119 U Synod Centurion
+120 U Synod Sanctum
+49 R Taurean Mauler
+95 C Terminate
+134 C Terramorphic Expanse
+7 C The Dead Shall Serve
+13 C The Fate of the Flammable
+22 C The Iron Guardian Stirs
+35 C The Pieces Are Coming Together
+41 C The Very Soil Shall Shake
+71 R Thelonite Hermit
+121 U Thran Dynamo
+122 U Thunderstaff
+40 C Tooth, Claw, and Tail
+96 U Torrent of Souls
+135 C Tranquil Thicket
+26 C Twisted Abomination
+50 R Two-Headed Dragon
+97 U Unbender Tine
+98 C Unmake
+27 C Urborg Syphon-Mage
+99 R Vampiric Dragon
+72 R Verdeloth the Ancient
+136 U Vitu-Ghazi, the City-Tree
+51 U Volcanic Fallout
+73 C Wall of Roots
+100 U Watchwolf
+101 U Wax // Wane
+42 C Which of You Burns Brightest?
+74 C Wickerbough Elder
+75 U Yavimaya Dryad
+43 C Your Fate Is Thrice Sealed
 S Your Inescapable Doom
-C Your Puny Minds Cannot Fathom
-C Your Will Is Not Your Own
-U Zombie Infestation
-U Zombify
+44 C Your Puny Minds Cannot Fathom
+45 C Your Will Is Not Your Own
+28 U Zombie Infestation
+29 U Zombify

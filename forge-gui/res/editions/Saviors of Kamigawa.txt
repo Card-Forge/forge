@@ -9,168 +9,168 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
 
 [cards]
-U AEther Shockwave
-R Adamaro, First to Desire
-C Akki Drillmaster
-C Akki Underling
-R Akuta, Born of Ash
-C Araba Mothrider
-R Arashi, the Sky Asunder
-R Ashes of the Fallen
-R Ayumi, the Last Visitor
-C Barrel Down Sokenzan
-R Blood Clock
-R Bounteous Kirin
-U Briarknit Kami
-U Burning-Eye Zubera
-U Captive Flame
-R Celestial Kirin
-U Charge Across the Araba
-R Choice of Damnations
-R Cloudhoof Kirin
-C Cowed by Wisdom
-C Curtain of Light
-C Cut the Earthly Bond
-C Death Denied
-C Death of a Thousand Stings
-C Deathknell Kami
-C Deathmask Nezumi
-U Dense Canopy
-U Descendant of Kiyomaro
-U Descendant of Masumaro
-C Descendant of Soramaro
-C Dosan's Oldest Chant
-C Dreamcatcher
-U Ebony Owl Netsuke
-U Eiganjo Free-Riders
-C Elder Pine of Jukai
-R Endless Swarm
-R Enduring Ideal
-R Erayo, Soratami Ascendant
-R Eternal Dominion
-U Evermind
-U Exile into Darkness
-U Feral Lightning
-C Fiddlehead Kami
-U Footsteps of the Goryo
-C Freed from the Real
-U Gaze of Adamaro
-U Ghost-Lit Nourisher
-U Ghost-Lit Raider
-U Ghost-Lit Redeemer
-U Ghost-Lit Stalker
-U Ghost-Lit Warder
-C Glitterfang
-C Gnat Miser
-U Godo's Irregulars
-U Hail of Arrows
-U Hand of Cruelty
-U Hand of Honor
-U Haru-Onna
-R Hidetsugu's Second Rite
-R Homura, Human Ascendant
-C Ideas Unbound
-R Iizuka the Ruthless
-R Iname as One
-R Infernal Kirin
-C Inner Calm, Outer Strength
-C Inner Fire
-U Inner-Chamber Guard
-C Into the Fray
-U Ivory Crane Netsuke
-R Jiwari, the Earth Aflame
-C Kagemaro's Clutch
-R Kagemaro, First to Suffer
-R Kaho, Minamo Historian
-C Kami of Empty Graves
-R Kami of the Crescent Moon
-U Kami of the Tended Garden
-U Kashi-Tribe Elite
-R Kataki, War's Wage
-U Kemuri-Onna
-U Kiku's Shadow
-U Kiri-Onna
-C Kitsune Bonesetter
-C Kitsune Dawnblade
-C Kitsune Loreweaver
-R Kiyomaro, First to Stand
-R Kuon, Ogre Ascendant
-C Kuro's Taken
-U Locust Miser
-R Maga, Traitor to Mortals
-U Manriki-Gusari
-R Masumaro, First to Live
-C Matsu-Tribe Birdstalker
-U Measure of Wickedness
-R Meishin, the Mind Cage
-R Michiko Konda, Truth Seeker
-R Mikokoro, Center of the Sea
-C Minamo Scrollkeeper
-R Miren, the Moaning Well
-U Molting Skin
-C Moonbow Illusionist
-C Moonwing Moth
-C Murmurs from Beyond
-R Neverending Torment
-C Nightsoil Kami
-U Nikko-Onna
-U O-Naginata
-C Oboro Breezecaller
-U Oboro Envoy
-R Oboro, Palace in the Clouds
-C Okina Nightwatch
-R One with Nothing
-U Oni of Wild Places
-C Oppressive Will
-U Overwhelming Intellect
-R Pain's Reward
-C Path of Anger's Flame
-R Pithing Needle
-C Plow Through Reito
-U Presence of the Wise
-R Promise of Bunrei
-C Promised Kannushi
-R Pure Intentions
-R Rally the Horde
-C Raving Oni-Slave
-U Razorjaw Oni
-R Reki, the History of Kamigawa
-C Rending Vines
-R Reverence
-C Ronin Cavekeeper
-R Rune-Tail, Kitsune Ascendant
-U Rushing-Tide Zubera
-R Sakashima the Impostor
-C Sakura-Tribe Scout
-R Sasaya, Orochi Ascendant
-R Scroll of Origins
-U Secretkeeper
-R Seed the Land
-U Seek the Horizon
-R Sekki, Seasons' Guide
-U Shape Stealer
-U Shifting Borders
-C Shinen of Fear's Chill
-C Shinen of Flight's Wings
-C Shinen of Fury's Fire
-C Shinen of Life's Roar
-C Shinen of Stars' Light
-C Sink into Takenuma
-U Skull Collector
-R Skyfire Kirin
-U Sokenzan Renegade
-C Sokenzan Spellblade
-R Soramaro, First to Dream
-U Soratami Cloud Chariot
-C Spiraling Embers
-C Spiritual Visit
-U Stampeding Serow
-U Sunder from Within
-R Thoughts of Ruin
-R Tomb of Urami
-C Torii Watchward
-U Trusted Advisor
-R Twincast
-R Undying Flames
-R Wine of Blood and Iron
-U Yuki-Onna
+1 U AEther Shockwave
+91 R Adamaro, First to Desire
+92 C Akki Drillmaster
+93 C Akki Underling
+61 R Akuta, Born of Ash
+2 C Araba Mothrider
+121 R Arashi, the Sky Asunder
+152 R Ashes of the Fallen
+122 R Ayumi, the Last Visitor
+94 C Barrel Down Sokenzan
+153 R Blood Clock
+123 R Bounteous Kirin
+124 U Briarknit Kami
+95 U Burning-Eye Zubera
+96 U Captive Flame
+3 R Celestial Kirin
+4 U Charge Across the Araba
+62 R Choice of Damnations
+31 R Cloudhoof Kirin
+5 C Cowed by Wisdom
+6 C Curtain of Light
+32 C Cut the Earthly Bond
+63 C Death Denied
+64 C Death of a Thousand Stings
+65 C Deathknell Kami
+66 C Deathmask Nezumi
+125 U Dense Canopy
+7 U Descendant of Kiyomaro
+126 U Descendant of Masumaro
+33 C Descendant of Soramaro
+127 C Dosan's Oldest Chant
+34 C Dreamcatcher
+154 U Ebony Owl Netsuke
+8 U Eiganjo Free-Riders
+128 C Elder Pine of Jukai
+129 R Endless Swarm
+9 R Enduring Ideal
+35 R Erayo, Soratami Ascendant
+36 R Eternal Dominion
+37 U Evermind
+67 U Exile into Darkness
+97 U Feral Lightning
+130 C Fiddlehead Kami
+68 U Footsteps of the Goryo
+38 C Freed from the Real
+98 U Gaze of Adamaro
+131 U Ghost-Lit Nourisher
+99 U Ghost-Lit Raider
+10 U Ghost-Lit Redeemer
+69 U Ghost-Lit Stalker
+39 U Ghost-Lit Warder
+100 C Glitterfang
+70 C Gnat Miser
+101 U Godo's Irregulars
+11 U Hail of Arrows
+71 U Hand of Cruelty
+12 U Hand of Honor
+132 U Haru-Onna
+102 R Hidetsugu's Second Rite
+103 R Homura, Human Ascendant
+40 C Ideas Unbound
+104 R Iizuka the Ruthless
+151 R Iname as One
+72 R Infernal Kirin
+133 C Inner Calm, Outer Strength
+105 C Inner Fire
+13 U Inner-Chamber Guard
+106 C Into the Fray
+155 U Ivory Crane Netsuke
+107 R Jiwari, the Earth Aflame
+74 C Kagemaro's Clutch
+73 R Kagemaro, First to Suffer
+41 R Kaho, Minamo Historian
+75 C Kami of Empty Graves
+42 R Kami of the Crescent Moon
+134 U Kami of the Tended Garden
+135 U Kashi-Tribe Elite
+14 R Kataki, War's Wage
+76 U Kemuri-Onna
+77 U Kiku's Shadow
+43 U Kiri-Onna
+15 C Kitsune Bonesetter
+16 C Kitsune Dawnblade
+17 C Kitsune Loreweaver
+18 R Kiyomaro, First to Stand
+78 R Kuon, Ogre Ascendant
+79 C Kuro's Taken
+80 U Locust Miser
+81 R Maga, Traitor to Mortals
+156 U Manriki-Gusari
+136 R Masumaro, First to Live
+137 C Matsu-Tribe Birdstalker
+82 U Measure of Wickedness
+44 R Meishin, the Mind Cage
+19 R Michiko Konda, Truth Seeker
+162 R Mikokoro, Center of the Sea
+45 C Minamo Scrollkeeper
+163 R Miren, the Moaning Well
+138 U Molting Skin
+46 C Moonbow Illusionist
+20 C Moonwing Moth
+47 C Murmurs from Beyond
+83 R Neverending Torment
+139 C Nightsoil Kami
+21 U Nikko-Onna
+157 U O-Naginata
+48 C Oboro Breezecaller
+49 U Oboro Envoy
+164 R Oboro, Palace in the Clouds
+140 C Okina Nightwatch
+84 R One with Nothing
+108 U Oni of Wild Places
+50 C Oppressive Will
+51 U Overwhelming Intellect
+85 R Pain's Reward
+109 C Path of Anger's Flame
+158 R Pithing Needle
+22 C Plow Through Reito
+23 U Presence of the Wise
+24 R Promise of Bunrei
+141 C Promised Kannushi
+25 R Pure Intentions
+110 R Rally the Horde
+86 C Raving Oni-Slave
+87 U Razorjaw Oni
+142 R Reki, the History of Kamigawa
+143 C Rending Vines
+26 R Reverence
+111 C Ronin Cavekeeper
+27 R Rune-Tail, Kitsune Ascendant
+52 U Rushing-Tide Zubera
+53 R Sakashima the Impostor
+144 C Sakura-Tribe Scout
+145 R Sasaya, Orochi Ascendant
+159 R Scroll of Origins
+54 U Secretkeeper
+146 R Seed the Land
+147 U Seek the Horizon
+148 R Sekki, Seasons' Guide
+55 U Shape Stealer
+56 U Shifting Borders
+88 C Shinen of Fear's Chill
+57 C Shinen of Flight's Wings
+112 C Shinen of Fury's Fire
+149 C Shinen of Life's Roar
+28 C Shinen of Stars' Light
+89 C Sink into Takenuma
+90 U Skull Collector
+113 R Skyfire Kirin
+114 U Sokenzan Renegade
+115 C Sokenzan Spellblade
+58 R Soramaro, First to Dream
+160 U Soratami Cloud Chariot
+116 C Spiraling Embers
+29 C Spiritual Visit
+150 U Stampeding Serow
+117 U Sunder from Within
+118 R Thoughts of Ruin
+165 R Tomb of Urami
+30 C Torii Watchward
+59 U Trusted Advisor
+60 R Twincast
+119 R Undying Flames
+161 R Wine of Blood and Iron
+120 U Yuki-Onna

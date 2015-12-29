@@ -5,83 +5,83 @@ Name=Duel Decks: Ajani vs. Nicol Bolas
 Type=Duel_Decks
 
 [cards]
-R Ageless Entity
-C Agonizing Demise
-M Ajani Vengeant
-C Ajani's Mantra
-U Ajani's Pridemate
-U Behemoth Sledge
-R Blazing Specter
-C Brackwater Elemental
-U Briarhorn
-C Canyon Wildcat
-U Countersquall
-R Cruel Ultimatum
-U Crumbling Necropolis
-U Deep Analysis
-R Dimir Cutpurse
-U Elder Mastery
-C Essence Warden
-C Evolving Wilds
-U Fire-Field Ogre
-R Firemane Angel
-U Fleetfoot Panther
-L Forest
-L Forest
-U Graypelt Refuge
-C Grazing Gladehart
-U Griffin Guide
-U Grixis Charm
-U Hellfire Mongrel
-U Icy Manipulator
-C Igneous Pouncer
-L Island
-U Jade Mage
-C Jhessian Zombies
-U Jungle Shrine
-U Kazandu Refuge
-U Kird Ape
-U Lead the Stampede
-U Lightning Helix
-U Loam Lion
-R Loxodon Hierarch
-U Marisi's Twinclaws
-C Morgue Toad
-U Moroii
-L Mountain
-L Mountain
-U Nacatl Hunt-Pride
-U Naya Charm
-M Nicol Bolas, Planeswalker
-C Nightscape Familiar
-C Obelisk of Grixis
-C Ogre Savant
-U Pain // Suffering
-L Plains
-U Pride of Lions
-R Profane Command
-C Qasali Pridemage
-C Recoil
-C Recumbent Bliss
-U Rise // Fall
-C Rupture Spire
-U Sapseep Forest
-R Searing Meditation
-U Shriekmaw
-U Slave of Bolas
-U Slavering Nulls
-U Spite // Malice
-U Spitemare
-C Steamcore Weird
-C Surveilling Sprite
-L Swamp
-L Swamp
-C Sylvan Bounty
-C Sylvan Ranger
-C Terramorphic Expanse
-R Titanic Ultimatum
-R Undermine
-C Vapor Snag
-U Vitu-Ghazi, the City-Tree
-C Wild Nacatl
-U Woolly Thoctar
+18 R Ageless Entity
+66 C Agonizing Demise
+1 M Ajani Vengeant
+22 C Ajani's Mantra
+9 U Ajani's Pridemate
+28 U Behemoth Sledge
+52 R Blazing Specter
+46 C Brackwater Elemental
+14 U Briarhorn
+6 C Canyon Wildcat
+59 U Countersquall
+69 R Cruel Ultimatum
+74 U Crumbling Necropolis
+65 U Deep Analysis
+49 R Dimir Cutpurse
+68 U Elder Mastery
+3 C Essence Warden
+32 C Evolving Wilds
+53 U Fire-Field Ogre
+21 R Firemane Angel
+12 U Fleetfoot Panther
+38 L Forest
+38 L Forest
+33 U Graypelt Refuge
+11 C Grazing Gladehart
+25 U Griffin Guide
+63 U Grixis Charm
+48 U Hellfire Mongrel
+64 U Icy Manipulator
+57 C Igneous Pouncer
+79 L Island
+7 U Jade Mage
+56 C Jhessian Zombies
+34 U Jungle Shrine
+35 U Kazandu Refuge
+2 U Kird Ape
+24 U Lead the Stampede
+23 U Lightning Helix
+5 U Loam Lion
+15 R Loxodon Hierarch
+17 U Marisi's Twinclaws
+47 C Morgue Toad
+51 U Moroii
+41 L Mountain
+41 L Mountain
+20 U Nacatl Hunt-Pride
+29 U Naya Charm
+42 M Nicol Bolas, Planeswalker
+44 C Nightscape Familiar
+60 C Obelisk of Grixis
+55 C Ogre Savant
+72 U Pain // Suffering
+40 L Plains
+19 U Pride of Lions
+70 R Profane Command
+10 C Qasali Pridemage
+61 C Recoil
+26 C Recumbent Bliss
+73 U Rise // Fall
+75 C Rupture Spire
+36 U Sapseep Forest
+27 R Searing Meditation
+54 U Shriekmaw
+67 U Slave of Bolas
+45 U Slavering Nulls
+71 U Spite // Malice
+16 U Spitemare
+50 C Steamcore Weird
+43 C Surveilling Sprite
+78 L Swamp
+78 L Swamp
+30 C Sylvan Bounty
+8 C Sylvan Ranger
+76 C Terramorphic Expanse
+31 R Titanic Ultimatum
+62 R Undermine
+58 C Vapor Snag
+37 U Vitu-Ghazi, the City-Tree
+4 C Wild Nacatl
+13 U Woolly Thoctar

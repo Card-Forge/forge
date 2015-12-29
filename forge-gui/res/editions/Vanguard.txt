@@ -7,119 +7,119 @@ Type=Other
 Foil=NotSupported
 
 [cards]
-S Akroma, Angel of Wrath Avatar
-S Arcanis, the Omnipotent Avatar
-S Arcbound Overseer Avatar
-S Ashling the Pilgrim Avatar
-S Ashling, the Extinguisher Avatar
+33 S Akroma, Angel of Wrath Avatar
+70 S Arcanis, the Omnipotent Avatar
+42 S Arcbound Overseer Avatar
+73 S Ashling the Pilgrim Avatar
+81 S Ashling, the Extinguisher Avatar
 S Ashnod
 S Barrin
-S Birds of Paradise Avatar
-S Birds of Paradise Avatar
-S Bosh, Iron Golem Avatar
-S Braids, Conjurer Adept Avatar
-S Chronatog Avatar
+8 S Birds of Paradise Avatar
+8 S Birds of Paradise Avatar
+39 S Bosh, Iron Golem Avatar
+66 S Braids, Conjurer Adept Avatar
+59 S Chronatog Avatar
 S Crovax
-S Dakkon Blackblade Avatar
-S Dauntless Escort Avatar
-S Diamond Faerie Avatar
-S Eight-and-a-Half-Tails Avatar
+72 S Dakkon Blackblade Avatar
+94 S Dauntless Escort Avatar
+63 S Diamond Faerie Avatar
+45 S Eight-and-a-Half-Tails Avatar
 S Eladamri
-S Eladamri, Lord of Leaves Avatar
-S Elvish Champion Avatar
-S Enigma Sphinx Avatar
-S Erhnam Djinn Avatar
-S Erhnam Djinn Avatar
+88 S Eladamri, Lord of Leaves Avatar
+37 S Elvish Champion Avatar
+95 S Enigma Sphinx Avatar
+27 S Erhnam Djinn Avatar
+27 S Erhnam Djinn Avatar
 S Ertai
-S Etched Oracle Avatar
-S Fallen Angel Avatar
-S Figure of Destiny Avatar
-S Flametongue Kavu Avatar
-S Frenetic Efreet Avatar
+44 S Etched Oracle Avatar
+9 S Fallen Angel Avatar
+82 S Figure of Destiny Avatar
+14 S Flametongue Kavu Avatar
+53 S Frenetic Efreet Avatar
 S Gerrard
 S Gix
-S Goblin Warchief Avatar
-S Goblin Warchief Avatar
+6 S Goblin Warchief Avatar
+6 S Goblin Warchief Avatar
 S Greven il-Vec
-S Grinning Demon Avatar
-S Grinning Demon Avatar
-S Haakon, Stromgald Scourge Avatar
+30 S Grinning Demon Avatar
+30 S Grinning Demon Avatar
+62 S Haakon, Stromgald Scourge Avatar
 S Hanna
-S Heartwood Storyteller Avatar
-S Hell's Caretaker Avatar
-S Hermit Druid Avatar
-S Higure, the Still Wind Avatar
-S Ink-Eyes, Servant of Oni Avatar
-S Jaya Ballard Avatar
-S Jhoira of the Ghitu Avatar
+68 S Heartwood Storyteller Avatar
+51 S Hell's Caretaker Avatar
+93 S Hermit Druid Avatar
+47 S Higure, the Still Wind Avatar
+48 S Ink-Eyes, Servant of Oni Avatar
+64 S Jaya Ballard Avatar
+69 S Jhoira of the Ghitu Avatar
 S Karn
-S Karona, False God Avatar
-S Kresh the Bloodbraided Avatar
-S Loxodon Hierarch Avatar
+34 S Karona, False God Avatar
+87 S Kresh the Bloodbraided Avatar
+54 S Loxodon Hierarch Avatar
 S Lyna
-S Lyzolda, the Blood Witch Avatar
-S Maelstrom Archangel Avatar
-S Malfegor Avatar
-S Maralen of the Mornsong Avatar
+60 S Lyzolda, the Blood Witch Avatar
+91 S Maelstrom Archangel Avatar
+90 S Malfegor Avatar
+78 S Maralen of the Mornsong Avatar
 S Maraxus
-S Maro Avatar
-S Master of the Wild Hunt Avatar
-S Mayael the Anima Avatar
+52 S Maro Avatar
+96 S Master of the Wild Hunt Avatar
+86 S Mayael the Anima Avatar
 S Mirri
-S Mirri the Cursed Avatar
-S Mirror Entity Avatar
+67 S Mirri the Cursed Avatar
+74 S Mirror Entity Avatar
 S Mishra
-S Momir Vig, Simic Visionary Avatar
-S Morinfen Avatar
+61 S Momir Vig, Simic Visionary Avatar
+76 S Morinfen Avatar
 S Multani
-S Murderous Redcap Avatar
-S Necropotence Avatar
-S Nekrataal Avatar
-S Oni of Wild Places Avatar
+80 S Murderous Redcap Avatar
+83 S Necropotence Avatar
+58 S Nekrataal Avatar
+50 S Oni of Wild Places Avatar
 S Oracle
-S Orcish Squatters Avatar
+84 S Orcish Squatters Avatar
 S Orim
-S Peacekeeper Avatar
-S Phage the Untouchable Avatar
-S Platinum Angel Avatar
-S Platinum Angel Avatar
-S Prodigal Sorcerer Avatar
-S Prodigal Sorcerer Avatar
-S Raksha Golden Cub Avatar
-S Reaper King Avatar
-S Rith, the Awakener Avatar
-S Rith, the Awakener Avatar
+75 S Peacekeeper Avatar
+31 S Phage the Untouchable Avatar
+108 S Platinum Angel Avatar
+108 S Platinum Angel Avatar
+18 S Prodigal Sorcerer Avatar
+18 S Prodigal Sorcerer Avatar
+43 S Raksha Golden Cub Avatar
+79 S Reaper King Avatar
+85 S Rith, the Awakener Avatar
+85 S Rith, the Awakener Avatar
 S Rofellos
-S Royal Assassin Avatar
-S Royal Assassin Avatar
-S Rumbling Slum Avatar
-S Sakashima the Impostor Avatar
+105 S Royal Assassin Avatar
+105 S Royal Assassin Avatar
+56 S Rumbling Slum Avatar
+49 S Sakashima the Impostor Avatar
 S Selenia
 S Serra
-S Serra Angel Avatar
-S Serra Angel Avatar
-S Seshiro the Anointed Avatar
+1 S Serra Angel Avatar
+1 S Serra Angel Avatar
+46 S Seshiro the Anointed Avatar
 S Sidar Kondo
 S Sisay
-S Sisters of Stone Death Avatar
-S Sliver Queen Avatar
+55 S Sisters of Stone Death Avatar
+92 S Sliver Queen Avatar
 S Sliver Queen, Brood Mother
 S Squee
-S Squee, Goblin Nabob Avatar
-S Stalking Tiger Avatar
+71 S Squee, Goblin Nabob Avatar
+7 S Stalking Tiger Avatar
 S Starke
-S Stonehewer Giant Avatar
-S Stuffy Doll Avatar
+77 S Stonehewer Giant Avatar
+65 S Stuffy Doll Avatar
 S Tahngarth
 S Takara
 S Tawnos
-S Teysa, Orzhov Scion Avatar
+57 S Teysa, Orzhov Scion Avatar
 S Titania
-S Tradewind Rider Avatar
-S Tradewind Rider Avatar
-S Two-Headed Giant of Foriys Avatar
+104 S Tradewind Rider Avatar
+104 S Tradewind Rider Avatar
+36 S Two-Headed Giant of Foriys Avatar
 S Urza
-S Vampire Nocturnus Avatar
-S Viridian Zealot Avatar
+97 S Vampire Nocturnus Avatar
+41 S Viridian Zealot Avatar
 S Volrath
 S Xantcha

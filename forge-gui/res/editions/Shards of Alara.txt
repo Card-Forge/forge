@@ -8,252 +8,252 @@ BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 [cards]
-R Ad Nauseam
-C Agony Warp
-M Ajani Vengeant
-C Akrasan Squire
-U Algae Gharial
-U Angel's Herald
-U Angelic Benediction
-C Angelsong
-U Arcane Sanctum
-R Archdemon of Unx
-C Banewasp Affliction
-U Bant Battlemage
-U Bant Charm
-C Bant Panorama
-R Battlegrace Angel
-U Behemoth's Herald
-C Blightning
-C Blister Beetle
-U Blood Cultist
-C Bloodpyre Elemental
-C Bloodthorn Taunter
-C Bone Splinters
-C Branching Bolt
-R Brilliant Ultimatum
-R Broodmate Dragon
-U Bull Cerodon
-R Caldera Hellion
-C Call to Heel
-C Cancel
-C Carrion Thrash
-C Cathartic Adept
-C Cavern Thoctar
-R Clarion Ultimatum
-C Cloudheath Drake
-C Coma Veil
-U Corpse Connoisseur
-C Courier's Capsule
-C Court Archers
-R Covenant of Minds
-R Cradle of Vitality
-R Crucible of Fire
-R Cruel Ultimatum
-U Crumbling Necropolis
-R Cunning Lethemancer
-C Cylian Elf
-U Dawnray Archer
-R Death Baron
-C Deathgreeter
-C Deft Duelist
-U Demon's Herald
-C Dispeller's Capsule
-C Dragon Fodder
-U Dragon's Herald
-C Dreg Reaver
-C Dregscape Zombie
-C Druid of the Anima
-U Drumhunter
-M Elspeth, Knight-Errant
-C Elvish Visionary
-M Empyrial Archangel
-U Esper Battlemage
-U Esper Charm
-C Esper Panorama
-U Etherium Astrolabe
-C Etherium Sculptor
-R Ethersworn Canonist
-C Excommunicate
-C Executioner's Capsule
-U Exuberant Firestoker
-U Fatestitcher
-R Feral Hydra
-U Filigree Sages
-U Fire-Field Ogre
-R Flameblast Dragon
-U Fleshbag Marauder
-L Forest
-L Forest
-L Forest
-L Forest
-R Gather Specimens
-C Gift of the Gargantuan
-C Glaze Fiend
-R Goblin Assault
-C Goblin Deathraiders
-C Goblin Mountaineer
-M Godsire
-C Godtoucher
-U Grixis Battlemage
-U Grixis Charm
-C Grixis Panorama
-C Guardians of Akrasa
-C Gustrider Exuberant
-R Hell's Thunder
-M Hellkite Overlord
-C Hindering Light
-C Hissing Iguanar
-R Immortal Coil
-C Incurable Ogre
-U Infest
-R Invincible Hymn
-L Island
-L Island
-L Island
-L Island
-U Jhessian Infiltrator
-C Jhessian Lookout
-U Jund Battlemage
-U Jund Charm
-C Jund Panorama
-U Jungle Shrine
-C Jungle Weaver
-C Kathari Screecher
-C Kederekt Creeper
-R Kederekt Leviathan
-R Keeper of Progenitus
-U Kiss of the Amesha
-C Knight of the Skyward Eye
-R Knight of the White Orchid
-R Knight-Captain of Eos
-M Kresh the Bloodbraided
-M Lich's Mirror
-C Lightning Talons
-C Lush Growth
-C Magma Spray
-R Manaplasm
-C Marble Chalice
-R Master of Etherium
-M Mayael the Anima
-R Memory Erosion
-U Metallurgeon
-U Mighty Emergence
-R Mindlock Orb
-R Minion Reflector
-C Mosstodon
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-R Mycoloth
-C Naturalize
-U Naya Battlemage
-U Naya Charm
-C Naya Panorama
-U Necrogenesis
-C Obelisk of Bant
-C Obelisk of Esper
-C Obelisk of Grixis
-C Obelisk of Jund
-C Obelisk of Naya
-C Oblivion Ring
-C Onyx Goblet
-R Ooze Garden
-C Outrider of Jhess
-L Plains
-L Plains
-L Plains
-L Plains
-R Predator Dragon
-M Prince of Thralls
-U Protomatter Powder
-R Punish Ignorance
-U Puppet Conjurer
-U Qasali Ambusher
-R Quietus Spike
-M Rafiq of the Many
-C Rakeclaw Gargantuan
-R Ranger of Eos
-R Realm Razer
-C Relic of Progenitus
-C Resounding Roar
-C Resounding Scream
-C Resounding Silence
-C Resounding Thunder
-C Resounding Wave
-U Rhox Charger
-U Rhox War Monk
-C Ridge Rannet
-C Rip-Clan Crasher
-U Rockcaster Platoon
-U Rockslide Elemental
-R Sacellum Godspeaker
-R Salvage Titan
-C Sanctum Gargoyle
-U Sangrite Surge
-M Sarkhan Vol
-C Savage Hunger
-U Savage Lands
-U Scavenger Drake
-U Scourge Devil
-R Scourglass
-U Seaside Citadel
-R Sedraxis Specter
-M Sedris, the Traitor King
-C Shadowfeed
-R Sharding Sphinx
-M Sharuum the Hegemon
-C Shore Snapper
-C Sighted-Caste Sorcerer
-C Sigil Blessing
-R Sigil of Distinction
-U Sigiled Paladin
-C Skeletal Kathari
-U Skeletonize
-R Skill Borrower
-R Skullmulcher
-C Soul's Fire
-C Soul's Grace
-C Soul's Might
-R Spearbreaker Behemoth
-C Spell Snip
-M Sphinx Sovereign
-U Sphinx's Herald
-U Sprouting Thrinax
-C Steelclad Serpent
-C Steward of Valeron
-R Stoic Angel
-U Sunseed Nurturer
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-U Swerve
-R Tar Fiend
-M Tezzeret the Seeker
-C Thorn-Thrash Viashino
-U Thoughtcutter Agent
-U Thunder-Thrash Elder
-U Tidehollow Sculler
-C Tidehollow Strix
-R Titanic Ultimatum
-U Topan Ascetic
-C Tortoise Formation
-U Tower Gargoyle
-C Undead Leotau
-C Vectis Silencers
-R Vein Drinker
-C Viashino Skeleton
-R Vicious Shadows
-R Violent Ultimatum
-C Viscera Dragger
-C Vithian Stinger
-C Volcanic Submersion
-C Waveskimmer Aven
-C Welkin Guide
-R Where Ancients Tread
-C Wild Nacatl
-C Windwright Mage
-U Woolly Thoctar
-C Yoked Plowbeast
+63 R Ad Nauseam
+153 C Agony Warp
+154 M Ajani Vengeant
+1 C Akrasan Squire
+123 U Algae Gharial
+2 U Angel's Herald
+3 U Angelic Benediction
+4 C Angelsong
+220 U Arcane Sanctum
+64 R Archdemon of Unx
+65 C Banewasp Affliction
+5 U Bant Battlemage
+155 U Bant Charm
+221 C Bant Panorama
+6 R Battlegrace Angel
+124 U Behemoth's Herald
+156 C Blightning
+66 C Blister Beetle
+157 U Blood Cultist
+93 C Bloodpyre Elemental
+94 C Bloodthorn Taunter
+67 C Bone Splinters
+158 C Branching Bolt
+159 R Brilliant Ultimatum
+160 R Broodmate Dragon
+161 U Bull Cerodon
+95 R Caldera Hellion
+32 C Call to Heel
+33 C Cancel
+162 C Carrion Thrash
+34 C Cathartic Adept
+125 C Cavern Thoctar
+163 R Clarion Ultimatum
+35 C Cloudheath Drake
+36 C Coma Veil
+68 U Corpse Connoisseur
+37 C Courier's Capsule
+126 C Court Archers
+38 R Covenant of Minds
+7 R Cradle of Vitality
+96 R Crucible of Fire
+164 R Cruel Ultimatum
+222 U Crumbling Necropolis
+69 R Cunning Lethemancer
+127 C Cylian Elf
+39 U Dawnray Archer
+70 R Death Baron
+71 C Deathgreeter
+165 C Deft Duelist
+72 U Demon's Herald
+8 C Dispeller's Capsule
+97 C Dragon Fodder
+98 U Dragon's Herald
+73 C Dreg Reaver
+74 C Dregscape Zombie
+128 C Druid of the Anima
+129 U Drumhunter
+9 M Elspeth, Knight-Errant
+130 C Elvish Visionary
+166 M Empyrial Archangel
+40 U Esper Battlemage
+167 U Esper Charm
+223 C Esper Panorama
+41 U Etherium Astrolabe
+42 C Etherium Sculptor
+10 R Ethersworn Canonist
+11 C Excommunicate
+75 C Executioner's Capsule
+99 U Exuberant Firestoker
+43 U Fatestitcher
+131 R Feral Hydra
+44 U Filigree Sages
+168 U Fire-Field Ogre
+100 R Flameblast Dragon
+76 U Fleshbag Marauder
+246 L Forest
+246 L Forest
+246 L Forest
+246 L Forest
+45 R Gather Specimens
+132 C Gift of the Gargantuan
+77 C Glaze Fiend
+101 R Goblin Assault
+169 C Goblin Deathraiders
+102 C Goblin Mountaineer
+170 M Godsire
+133 C Godtoucher
+78 U Grixis Battlemage
+171 U Grixis Charm
+224 C Grixis Panorama
+12 C Guardians of Akrasa
+13 C Gustrider Exuberant
+103 R Hell's Thunder
+172 M Hellkite Overlord
+173 C Hindering Light
+104 C Hissing Iguanar
+79 R Immortal Coil
+105 C Incurable Ogre
+80 U Infest
+14 R Invincible Hymn
+235 L Island
+235 L Island
+235 L Island
+235 L Island
+174 U Jhessian Infiltrator
+46 C Jhessian Lookout
+106 U Jund Battlemage
+175 U Jund Charm
+225 C Jund Panorama
+226 U Jungle Shrine
+134 C Jungle Weaver
+47 C Kathari Screecher
+176 C Kederekt Creeper
+48 R Kederekt Leviathan
+135 R Keeper of Progenitus
+177 U Kiss of the Amesha
+15 C Knight of the Skyward Eye
+16 R Knight of the White Orchid
+17 R Knight-Captain of Eos
+178 M Kresh the Bloodbraided
+210 M Lich's Mirror
+107 C Lightning Talons
+136 C Lush Growth
+108 C Magma Spray
+138 R Manaplasm
+18 C Marble Chalice
+49 R Master of Etherium
+179 M Mayael the Anima
+50 R Memory Erosion
+19 U Metallurgeon
+137 U Mighty Emergence
+51 R Mindlock Orb
+211 R Minion Reflector
+139 C Mosstodon
+244 L Mountain
+244 L Mountain
+244 L Mountain
+244 L Mountain
+140 R Mycoloth
+141 C Naturalize
+142 U Naya Battlemage
+180 U Naya Charm
+227 C Naya Panorama
+181 U Necrogenesis
+212 C Obelisk of Bant
+213 C Obelisk of Esper
+214 C Obelisk of Grixis
+215 C Obelisk of Jund
+216 C Obelisk of Naya
+20 C Oblivion Ring
+81 C Onyx Goblet
+143 R Ooze Garden
+52 C Outrider of Jhess
+232 L Plains
+232 L Plains
+232 L Plains
+232 L Plains
+109 R Predator Dragon
+182 M Prince of Thralls
+53 U Protomatter Powder
+183 R Punish Ignorance
+82 U Puppet Conjurer
+184 U Qasali Ambusher
+217 R Quietus Spike
+185 M Rafiq of the Many
+186 C Rakeclaw Gargantuan
+21 R Ranger of Eos
+187 R Realm Razer
+218 C Relic of Progenitus
+144 C Resounding Roar
+83 C Resounding Scream
+22 C Resounding Silence
+110 C Resounding Thunder
+54 C Resounding Wave
+145 U Rhox Charger
+188 U Rhox War Monk
+111 C Ridge Rannet
+189 C Rip-Clan Crasher
+23 U Rockcaster Platoon
+112 U Rockslide Elemental
+146 R Sacellum Godspeaker
+84 R Salvage Titan
+24 C Sanctum Gargoyle
+190 U Sangrite Surge
+191 M Sarkhan Vol
+147 C Savage Hunger
+228 U Savage Lands
+85 U Scavenger Drake
+113 U Scourge Devil
+25 R Scourglass
+229 U Seaside Citadel
+192 R Sedraxis Specter
+193 M Sedris, the Traitor King
+86 C Shadowfeed
+55 R Sharding Sphinx
+194 M Sharuum the Hegemon
+87 C Shore Snapper
+26 C Sighted-Caste Sorcerer
+195 C Sigil Blessing
+219 R Sigil of Distinction
+27 U Sigiled Paladin
+88 C Skeletal Kathari
+114 U Skeletonize
+56 R Skill Borrower
+148 R Skullmulcher
+115 C Soul's Fire
+28 C Soul's Grace
+149 C Soul's Might
+150 R Spearbreaker Behemoth
+57 C Spell Snip
+196 M Sphinx Sovereign
+58 U Sphinx's Herald
+197 U Sprouting Thrinax
+59 C Steelclad Serpent
+198 C Steward of Valeron
+199 R Stoic Angel
+29 U Sunseed Nurturer
+238 L Swamp
+238 L Swamp
+238 L Swamp
+238 L Swamp
+200 U Swerve
+89 R Tar Fiend
+60 M Tezzeret the Seeker
+116 C Thorn-Thrash Viashino
+201 U Thoughtcutter Agent
+117 U Thunder-Thrash Elder
+202 U Tidehollow Sculler
+203 C Tidehollow Strix
+204 R Titanic Ultimatum
+151 U Topan Ascetic
+61 C Tortoise Formation
+205 U Tower Gargoyle
+90 C Undead Leotau
+62 C Vectis Silencers
+91 R Vein Drinker
+118 C Viashino Skeleton
+119 R Vicious Shadows
+206 R Violent Ultimatum
+92 C Viscera Dragger
+120 C Vithian Stinger
+121 C Volcanic Submersion
+207 C Waveskimmer Aven
+30 C Welkin Guide
+122 R Where Ancients Tread
+152 C Wild Nacatl
+208 C Windwright Mage
+209 U Woolly Thoctar
+31 C Yoked Plowbeast

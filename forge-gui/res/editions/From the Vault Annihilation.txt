@@ -5,18 +5,18 @@ Name=From the Vault: Annihilation
 Type=From_the_Vault
 
 [cards]
-M Armageddon
-M Burning of Xinye
-M Cataclysm
-M Child of Alara
-M Decree of Annihilation
-M Firespout
-M Fracturing Gust
-M Living Death
-M Martial Coup
-M Rolling Earthquake
-M Smokestack
-M Terminus
-M Upheaval
-M Virtue's Ruin
-M Wrath of God
+1 M Armageddon
+2 M Burning of Xinye
+3 M Cataclysm
+4 M Child of Alara
+5 M Decree of Annihilation
+6 M Firespout
+7 M Fracturing Gust
+8 M Living Death
+9 M Martial Coup
+10 M Rolling Earthquake
+11 M Smokestack
+12 M Terminus
+13 M Upheaval
+14 M Virtue's Ruin
+15 M Wrath of God

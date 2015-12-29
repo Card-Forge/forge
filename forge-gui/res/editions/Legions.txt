@@ -10,148 +10,148 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-U Akroma's Devoted
-R Akroma, Angel of Wrath
-U Aphetto Exterminator
-C Aven Envoy
-C Aven Redeemer
-U Aven Warhawk
-R Bane of the Living
-R Beacon of Destiny
-C Berserk Murlodont
-U Blade Sliver
-C Blood Celebrant
-C Bloodstoke Howler
-U Branchsnap Lorian
-U Brontotherium
-R Brood Sliver
-R Caller of the Claw
-U Canopy Crawler
-R Celestial Gatekeeper
-C Cephalid Pathmage
-R Chromeshell Crab
-R Clickslither
-U Cloudreach Cavalry
-U Corpse Harvester
-C Covert Operative
-C Crested Craghorn
-U Crookclaw Elder
-C Crypt Sliver
-U Dark Supplicant
-U Daru Mender
-C Daru Sanctifier
-C Daru Stinger
-U Deathmark Prelate
-R Defender of the Order
-C Defiant Elf
-C Deftblade Elite
-R Dermoplasm
-R Dreamborn Muse
-R Drinker of Sorrow
-C Dripping Dead
-U Earthblighter
-C Echo Tracer
-R Elvish Soultiller
-C Embalmed Brawler
-U Enormous Baloth
-R Essence Sliver
-R Feral Throwback
-C Flamewave Invoker
-U Frenetic Raptor
-C Fugitive Wizard
-C Gempalm Avenger
-U Gempalm Incinerator
-C Gempalm Polluter
-U Gempalm Sorcerer
-U Gempalm Strider
-R Ghastly Remains
-C Glintwing Invoker
-C Glowering Rogon
-R Glowrider
-U Goblin Assassin
-U Goblin Clearcutter
-U Goblin Dynamo
-C Goblin Firebug
-R Goblin Goon
-C Goblin Grappler
-C Goblin Lookout
-C Goblin Turncoat
-R Graveborn Muse
-R Havoc Demon
-R Hollow Specter
-C Hundroog
-C Hunter Sliver
-R Imperial Hellkite
-C Infernal Caretaker
-C Keeneye Aven
-R Keeper of the Nine Gales
-R Kilnmouth Dragon
-R Krosan Cloudscraper
-C Krosan Vorine
-R Lavaborn Muse
-U Liege of the Axe
-C Lowland Tracker
-C Macetail Hystrodon
-R Magma Sliver
-U Master of the Veil
-C Merchant of Secrets
-C Mistform Seaswift
-C Mistform Sliver
-R Mistform Ultimus
-U Mistform Wakecaster
-C Nantuko Vigilante
-C Needleshot Gourna
-U Noxious Ghoul
-C Patron of the Wild
-R Phage the Untouchable
-R Planar Guide
-C Plated Sliver
-R Primal Whisperer
-U Primoc Escapee
-C Quick Sliver
-U Ridgetop Raptor
-R Riptide Director
-R Riptide Mangler
-R Rockshard Elemental
-U Root Sliver
-R Scion of Darkness
-R Seedborn Muse
-C Shaleskin Plower
-U Shifting Sliver
-C Skinthinner
-R Skirk Alarmist
-U Skirk Drill Sergeant
-C Skirk Marauder
-C Skirk Outrider
-C Smokespew Invoker
-C Sootfeather Flock
-U Spectral Sliver
-C Starlight Invoker
-U Stoic Champion
-C Stonewood Invoker
-R Sunstrike Legionnaire
-U Swooping Talon
-R Synapse Sliver
-C Timberwatch Elf
-U Totem Speaker
-R Toxin Sliver
-R Tribal Forcemage
-R Unstable Hulk
-R Vexing Beetle
-C Vile Deacon
-C Voidmage Apprentice
-U Wall of Deceit
-C Wall of Hope
-U Warbreak Trumpeter
-U Ward Sliver
-U Warped Researcher
-R Weaver of Lies
-C Whipgrass Entangler
-U White Knight
-U Willbender
-R Windborn Muse
-C Wingbeat Warrior
-U Wirewood Channeler
-U Wirewood Hivemaster
-U Withered Wretch
-U Zombie Brute
+2 U Akroma's Devoted
+1 R Akroma, Angel of Wrath
+59 U Aphetto Exterminator
+30 C Aven Envoy
+3 C Aven Redeemer
+4 U Aven Warhawk
+60 R Bane of the Living
+5 R Beacon of Destiny
+117 C Berserk Murlodont
+88 U Blade Sliver
+61 C Blood Celebrant
+89 C Bloodstoke Howler
+118 U Branchsnap Lorian
+119 U Brontotherium
+120 R Brood Sliver
+121 R Caller of the Claw
+122 U Canopy Crawler
+6 R Celestial Gatekeeper
+31 C Cephalid Pathmage
+32 R Chromeshell Crab
+90 R Clickslither
+7 U Cloudreach Cavalry
+62 U Corpse Harvester
+33 C Covert Operative
+91 C Crested Craghorn
+34 U Crookclaw Elder
+63 C Crypt Sliver
+64 U Dark Supplicant
+8 U Daru Mender
+9 C Daru Sanctifier
+10 C Daru Stinger
+65 U Deathmark Prelate
+11 R Defender of the Order
+123 C Defiant Elf
+12 C Deftblade Elite
+35 R Dermoplasm
+36 R Dreamborn Muse
+66 R Drinker of Sorrow
+67 C Dripping Dead
+68 U Earthblighter
+37 C Echo Tracer
+124 R Elvish Soultiller
+69 C Embalmed Brawler
+125 U Enormous Baloth
+13 R Essence Sliver
+126 R Feral Throwback
+92 C Flamewave Invoker
+93 U Frenetic Raptor
+38 C Fugitive Wizard
+14 C Gempalm Avenger
+94 U Gempalm Incinerator
+70 C Gempalm Polluter
+39 U Gempalm Sorcerer
+127 U Gempalm Strider
+71 R Ghastly Remains
+40 C Glintwing Invoker
+128 C Glowering Rogon
+15 R Glowrider
+95 U Goblin Assassin
+96 U Goblin Clearcutter
+97 U Goblin Dynamo
+98 C Goblin Firebug
+99 R Goblin Goon
+100 C Goblin Grappler
+101 C Goblin Lookout
+72 C Goblin Turncoat
+73 R Graveborn Muse
+74 R Havoc Demon
+75 R Hollow Specter
+129 C Hundroog
+102 C Hunter Sliver
+103 R Imperial Hellkite
+76 C Infernal Caretaker
+41 C Keeneye Aven
+42 R Keeper of the Nine Gales
+104 R Kilnmouth Dragon
+130 R Krosan Cloudscraper
+131 C Krosan Vorine
+105 R Lavaborn Muse
+16 U Liege of the Axe
+17 C Lowland Tracker
+106 C Macetail Hystrodon
+107 R Magma Sliver
+43 U Master of the Veil
+44 C Merchant of Secrets
+45 C Mistform Seaswift
+46 C Mistform Sliver
+47 R Mistform Ultimus
+48 U Mistform Wakecaster
+132 C Nantuko Vigilante
+133 C Needleshot Gourna
+77 U Noxious Ghoul
+134 C Patron of the Wild
+78 R Phage the Untouchable
+18 R Planar Guide
+19 C Plated Sliver
+135 R Primal Whisperer
+49 U Primoc Escapee
+136 C Quick Sliver
+108 U Ridgetop Raptor
+50 R Riptide Director
+51 R Riptide Mangler
+109 R Rockshard Elemental
+137 U Root Sliver
+79 R Scion of Darkness
+138 R Seedborn Muse
+110 C Shaleskin Plower
+52 U Shifting Sliver
+80 C Skinthinner
+111 R Skirk Alarmist
+112 U Skirk Drill Sergeant
+113 C Skirk Marauder
+114 C Skirk Outrider
+81 C Smokespew Invoker
+82 C Sootfeather Flock
+83 U Spectral Sliver
+20 C Starlight Invoker
+21 U Stoic Champion
+139 C Stonewood Invoker
+22 R Sunstrike Legionnaire
+23 U Swooping Talon
+53 R Synapse Sliver
+140 C Timberwatch Elf
+141 U Totem Speaker
+84 R Toxin Sliver
+142 R Tribal Forcemage
+115 R Unstable Hulk
+143 R Vexing Beetle
+85 C Vile Deacon
+54 C Voidmage Apprentice
+55 U Wall of Deceit
+24 C Wall of Hope
+116 U Warbreak Trumpeter
+25 U Ward Sliver
+56 U Warped Researcher
+57 R Weaver of Lies
+26 C Whipgrass Entangler
+27 U White Knight
+58 U Willbender
+28 R Windborn Muse
+29 C Wingbeat Warrior
+144 U Wirewood Channeler
+145 U Wirewood Hivemaster
+86 U Withered Wretch
+87 U Zombie Brute

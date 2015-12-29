@@ -10,353 +10,353 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-C AEther Burst
-C Abandoned Outpost
-C Aboshan's Desire
-R Aboshan, Cephalid Emperor
-C Acceptable Losses
-R Aegis of Honor
-C Afflict
-R Amugaba
-C Anarchist
-R Ancestral Tribute
-C Angelic Wall
-U Animal Boneyard
-R Ashen Firebeast
-R Atogatog
-U Aura Graft
-C Auramancer
-U Aven Archer
-C Aven Cloudchaser
-C Aven Fisher
-C Aven Flock
-R Aven Shrine
-U Aven Smokeweaver
-C Aven Windreader
-R Balancing Act
-U Balshan Beguiler
-U Balshan Griffin
-U Bamboozle
-C Barbarian Lunatic
-U Barbarian Ring
-U Bash to Bits
-U Battle Strain
-R Battle of Wits
-R Bearscape
-U Beast Attack
-U Beloved Chaplain
-C Blazing Salvo
-U Blessed Orator
-R Bloodcurdler
-C Bog Wreckage
-R Bomb Squad
-R Braids, Cabal Minion
-U Buried Alive
-R Burning Sands
-C Cabal Inquisitor
-R Cabal Patriarch
-U Cabal Pit
-R Cabal Shrine
-R Call of the Herd
-R Cantivore
-C Careful Study
-C Cartographer
-R Catalyst Stone
-U Caustic Tar
-C Cease-Fire
-U Centaur Garden
-U Cephalid Broker
-U Cephalid Coliseum
-C Cephalid Looter
-R Cephalid Retainer
-C Cephalid Scout
-R Cephalid Shrine
-C Chainflinger
-U Chamber of Manipulation
-R Chance Encounter
-R Charmed Pendant
-C Chatter of the Squirrel
-U Childhood Horror
-R Chlorophant
-C Coffin Purge
-R Cognivore
-U Concentrate
-C Confessor
-U Crashing Centaur
-C Crypt Creeper
-R Crystal Quarry
-R Cultural Exchange
-R Cursed Monstrosity
-R Darkwater Catacombs
-U Darkwater Egg
-R Decaying Soil
-R Decimate
-U Decompose
-C Dedicated Martyr
-U Deep Reconnaissance
-R Delaying Shield
-U Deluge
-C Dematerialize
-U Demolish
-C Demoralize
-R Deserted Temple
-R Devoted Caretaker
-U Diabolic Tutor
-C Diligent Farmhand
-C Dirty Wererat
-R Divert
-R Divine Sacrament
-R Dogged Hunter
-C Dreamwinder
-C Druid Lyrist
-U Druid's Call
-C Dusk Imp
-C Dwarven Grunt
-U Dwarven Recruiter
-R Dwarven Shrine
-U Dwarven Strike Force
-R Earnest Fellowship
-C Earth Rift
-C Elephant Ambush
-C Ember Beast
-C Embolden
-U Engulfing Flames
-R Entomb
-R Epicenter
-C Escape Artist
-U Execute
-R Extract
-U Face of Fear
-U Famished Ghoul
-U Fervent Denial
-C Filthy Cur
-C Firebolt
-C Flame Burst
-C Fledgling Imp
-L Forest
-L Forest
-L Forest
-L Forest
-U Frenetic Ogre
-C Frightcrawler
-U Gallantry
-C Ghastly Demise
-U Gorilla Titan
-R Graceful Antelope
-C Gravedigger
-R Gravestorm
-R Ground Seal
-C Halberdier
-C Hallowed Healer
-R Haunting Echoes
-R Hint of Insanity
-R Holistic Wisdom
-U Howling Gale
-C Immobilizing Ink
-R Impulsive Maneuvers
-U Infected Vermin
-C Innocent Blood
-R Iridescent Angel
-L Island
-L Island
-L Island
-L Island
-R Ivy Elemental
-R Junk Golem
-C Kamahl's Desire
-R Kamahl, Pit Fighter
-R Karmic Justice
-C Kirtar's Desire
-R Kirtar's Wrath
-C Krosan Archer
-C Krosan Avenger
-R Krosan Beast
-U Laquatus's Creativity
-C Last Rites
-U Lava Blister
-C Leaf Dancer
-R Lieutenant Kirtar
-C Life Burst
-U Limestone Golem
-U Liquid Fire
-U Lithatog
-U Luminous Guardian
-C Mad Dog
-U Magma Vein
-R Magnivore
-U Malevolent Awakening
-R Master Apothecary
-U Metamorphic Wurm
-U Millikin
-C Mind Burst
-R Mindslicer
-R Mine Layer
-U Minotaur Explorer
-R Mirari
-R Molten Influence
-C Moment's Peace
-C Morbid Hunger
-C Morgue Theft
-R Mortivore
-U Mossfire Egg
-R Mossfire Valley
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-R Mudhole
-C Muscle Burst
-R Mystic Crusader
-R Mystic Enforcer
-U Mystic Penitent
-C Mystic Visionary
-C Mystic Zealot
-C Nantuko Disciple
-U Nantuko Elder
-R Nantuko Mentor
-R Nantuko Shrine
-R Need for Speed
-R Nefarious Lich
-R New Frontiers
-U Nimble Mongoose
-U Nomad Decoy
-U Nomad Stadium
-R Nut Collector
-R Obstinate Familiar
-R Otarian Juggernaut
-C Overeager Apprentice
-U Overrun
-U Painbringer
-C Pardic Firecat
-R Pardic Miner
-C Pardic Swordsmith
-U Patchwork Gnomes
-C Patriarch's Desire
-C Patrol Hound
-R Patron Wizard
-R Pedantic Learning
-C Peek
-R Persuasion
-R Petrified Field
-U Phantatog
-C Phantom Whelp
-R Pianna, Nomad Captain
-C Pilgrim of Justice
-C Pilgrim of Virtue
-U Piper's Melody
-L Plains
-L Plains
-L Plains
-L Plains
-U Predict
-U Price of Glory
-C Primal Frenzy
-C Psionic Gift
-U Psychatog
-U Pulsating Illusion
-U Puppeteer
-C Rabid Elephant
-C Ravaged Highlands
-C Ray of Distortion
-C Reckless Charge
-U Recoup
-C Refresh
-C Repel
-R Repentant Vampire
-U Resilient Wanderer
-C Rites of Initiation
-C Rites of Refusal
-C Rites of Spring
-U Roar of the Wurm
-U Rotting Giant
-C Sacred Rites
-U Sadistic Hypnotist
-U Sandstone Deadfall
-U Sarcatog
-R Savage Firecat
-C Scorching Missile
-U Screams of the Damned
-C Scrivener
-C Seafloor Debris
-C Second Thoughts
-R Seize the Day
-C Seton's Desire
-R Seton, Krosan Protector
-U Shadowblood Egg
-R Shadowblood Ridge
-R Shadowmage Infiltrator
-C Shelter
-R Shifty Doppelganger
-U Shower of Coals
-C Simplify
-U Skeletal Scrying
-U Skull Fracture
-U Skycloud Egg
-R Skycloud Expanse
-U Skyshooter
-U Soulcatcher
-U Spark Mage
-R Spellbane Centaur
-U Sphere of Duty
-U Sphere of Grace
-U Sphere of Law
-U Sphere of Reason
-U Sphere of Truth
-U Spiritualize
-C Springing Tiger
-R Squirrel Mob
-U Squirrel Nest
-R Stalking Bloodsucker
-U Standstill
-U Steam Vines
-U Steamclaw
-U Still Life
-R Stone-Tongue Basilisk
-U Sungrass Egg
-R Sungrass Prairie
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-U Sylvan Might
-C Syncopate
-R Tainted Pact
-R Tarnished Citadel
-U Tattoo Ward
-R Terravore
-U Testament of Faith
-U Thaumatog
-C Thermal Blast
-U Think Tank
-R Thought Devourer
-U Thought Eater
-C Thought Nibbler
-C Timberland Ruins
-R Time Stretch
-C Tireless Tribe
-R Tombfire
-C Touch of Invisibility
-R Traumatize
-R Traveling Plague
-U Treetop Sentinel
-C Tremble
-U Twigwalker
-R Unifying Theory
-R Upheaval
-R Vampiric Dragon
-R Verdant Succession
-U Vivify
-U Volcanic Spray
-R Volley of Boulders
-R Wayward Angel
-C Werebear
-U Whipkeeper
-C Whispering Shade
-C Wild Mongrel
-C Woodland Druid
-C Words of Wisdom
-C Zombie Assassin
-C Zombie Cannibal
-U Zombie Infestation
-U Zombify
-R Zoologist
+60 C AEther Burst
+312 C Abandoned Outpost
+59 C Aboshan's Desire
+58 R Aboshan, Cephalid Emperor
+172 C Acceptable Losses
+1 R Aegis of Honor
+115 C Afflict
+61 R Amugaba
+173 C Anarchist
+2 R Ancestral Tribute
+3 C Angelic Wall
+4 U Animal Boneyard
+174 R Ashen Firebeast
+286 R Atogatog
+62 U Aura Graft
+5 C Auramancer
+6 U Aven Archer
+7 C Aven Cloudchaser
+63 C Aven Fisher
+8 C Aven Flock
+9 R Aven Shrine
+64 U Aven Smokeweaver
+65 C Aven Windreader
+10 R Balancing Act
+66 U Balshan Beguiler
+67 U Balshan Griffin
+68 U Bamboozle
+175 C Barbarian Lunatic
+313 U Barbarian Ring
+176 U Bash to Bits
+177 U Battle Strain
+69 R Battle of Wits
+229 R Bearscape
+230 U Beast Attack
+11 U Beloved Chaplain
+178 C Blazing Salvo
+12 U Blessed Orator
+116 R Bloodcurdler
+314 C Bog Wreckage
+179 R Bomb Squad
+117 R Braids, Cabal Minion
+118 U Buried Alive
+180 R Burning Sands
+119 C Cabal Inquisitor
+120 R Cabal Patriarch
+315 U Cabal Pit
+121 R Cabal Shrine
+231 R Call of the Herd
+13 R Cantivore
+70 C Careful Study
+232 C Cartographer
+297 R Catalyst Stone
+122 U Caustic Tar
+14 C Cease-Fire
+316 U Centaur Garden
+71 U Cephalid Broker
+317 U Cephalid Coliseum
+72 C Cephalid Looter
+73 R Cephalid Retainer
+74 C Cephalid Scout
+75 R Cephalid Shrine
+181 C Chainflinger
+76 U Chamber of Manipulation
+182 R Chance Encounter
+298 R Charmed Pendant
+233 C Chatter of the Squirrel
+123 U Childhood Horror
+234 R Chlorophant
+124 C Coffin Purge
+77 R Cognivore
+78 U Concentrate
+15 C Confessor
+235 U Crashing Centaur
+125 C Crypt Creeper
+318 R Crystal Quarry
+79 R Cultural Exchange
+126 R Cursed Monstrosity
+319 R Darkwater Catacombs
+299 U Darkwater Egg
+127 R Decaying Soil
+287 R Decimate
+128 U Decompose
+16 C Dedicated Martyr
+236 U Deep Reconnaissance
+17 R Delaying Shield
+80 U Deluge
+81 C Dematerialize
+183 U Demolish
+184 C Demoralize
+320 R Deserted Temple
+18 R Devoted Caretaker
+129 U Diabolic Tutor
+237 C Diligent Farmhand
+130 C Dirty Wererat
+82 R Divert
+19 R Divine Sacrament
+20 R Dogged Hunter
+83 C Dreamwinder
+238 C Druid Lyrist
+239 U Druid's Call
+131 C Dusk Imp
+185 C Dwarven Grunt
+186 U Dwarven Recruiter
+187 R Dwarven Shrine
+188 U Dwarven Strike Force
+21 R Earnest Fellowship
+189 C Earth Rift
+240 C Elephant Ambush
+190 C Ember Beast
+22 C Embolden
+191 U Engulfing Flames
+132 R Entomb
+192 R Epicenter
+84 C Escape Artist
+133 U Execute
+85 R Extract
+134 U Face of Fear
+135 U Famished Ghoul
+86 U Fervent Denial
+136 C Filthy Cur
+193 C Firebolt
+194 C Flame Burst
+137 C Fledgling Imp
+350 L Forest
+350 L Forest
+350 L Forest
+350 L Forest
+195 U Frenetic Ogre
+138 C Frightcrawler
+23 U Gallantry
+139 C Ghastly Demise
+241 U Gorilla Titan
+24 R Graceful Antelope
+140 C Gravedigger
+141 R Gravestorm
+242 R Ground Seal
+196 C Halberdier
+25 C Hallowed Healer
+142 R Haunting Echoes
+143 R Hint of Insanity
+243 R Holistic Wisdom
+244 U Howling Gale
+87 C Immobilizing Ink
+197 R Impulsive Maneuvers
+144 U Infected Vermin
+145 C Innocent Blood
+288 R Iridescent Angel
+337 L Island
+337 L Island
+337 L Island
+337 L Island
+245 R Ivy Elemental
+300 R Junk Golem
+199 C Kamahl's Desire
+198 R Kamahl, Pit Fighter
+26 R Karmic Justice
+27 C Kirtar's Desire
+28 R Kirtar's Wrath
+246 C Krosan Archer
+247 C Krosan Avenger
+248 R Krosan Beast
+88 U Laquatus's Creativity
+146 C Last Rites
+200 U Lava Blister
+249 C Leaf Dancer
+29 R Lieutenant Kirtar
+30 C Life Burst
+301 U Limestone Golem
+201 U Liquid Fire
+289 U Lithatog
+31 U Luminous Guardian
+202 C Mad Dog
+203 U Magma Vein
+204 R Magnivore
+147 U Malevolent Awakening
+32 R Master Apothecary
+250 U Metamorphic Wurm
+302 U Millikin
+148 C Mind Burst
+149 R Mindslicer
+205 R Mine Layer
+206 U Minotaur Explorer
+303 R Mirari
+207 R Molten Influence
+251 C Moment's Peace
+150 C Morbid Hunger
+151 C Morgue Theft
+152 R Mortivore
+304 U Mossfire Egg
+321 R Mossfire Valley
+346 L Mountain
+346 L Mountain
+346 L Mountain
+346 L Mountain
+208 R Mudhole
+252 C Muscle Burst
+33 R Mystic Crusader
+290 R Mystic Enforcer
+34 U Mystic Penitent
+35 C Mystic Visionary
+36 C Mystic Zealot
+253 C Nantuko Disciple
+254 U Nantuko Elder
+255 R Nantuko Mentor
+256 R Nantuko Shrine
+209 R Need for Speed
+153 R Nefarious Lich
+257 R New Frontiers
+258 U Nimble Mongoose
+37 U Nomad Decoy
+322 U Nomad Stadium
+259 R Nut Collector
+210 R Obstinate Familiar
+305 R Otarian Juggernaut
+154 C Overeager Apprentice
+260 U Overrun
+155 U Painbringer
+211 C Pardic Firecat
+212 R Pardic Miner
+213 C Pardic Swordsmith
+306 U Patchwork Gnomes
+156 C Patriarch's Desire
+38 C Patrol Hound
+89 R Patron Wizard
+90 R Pedantic Learning
+91 C Peek
+92 R Persuasion
+323 R Petrified Field
+291 U Phantatog
+93 C Phantom Whelp
+39 R Pianna, Nomad Captain
+40 C Pilgrim of Justice
+41 C Pilgrim of Virtue
+261 U Piper's Melody
+331 L Plains
+331 L Plains
+331 L Plains
+331 L Plains
+94 U Predict
+214 U Price of Glory
+262 C Primal Frenzy
+95 C Psionic Gift
+292 U Psychatog
+96 U Pulsating Illusion
+97 U Puppeteer
+263 C Rabid Elephant
+324 C Ravaged Highlands
+42 C Ray of Distortion
+215 C Reckless Charge
+216 U Recoup
+264 C Refresh
+98 C Repel
+157 R Repentant Vampire
+43 U Resilient Wanderer
+217 C Rites of Initiation
+99 C Rites of Refusal
+265 C Rites of Spring
+266 U Roar of the Wurm
+158 U Rotting Giant
+44 C Sacred Rites
+159 U Sadistic Hypnotist
+307 U Sandstone Deadfall
+293 U Sarcatog
+218 R Savage Firecat
+219 C Scorching Missile
+160 U Screams of the Damned
+100 C Scrivener
+325 C Seafloor Debris
+45 C Second Thoughts
+220 R Seize the Day
+268 C Seton's Desire
+267 R Seton, Krosan Protector
+308 U Shadowblood Egg
+326 R Shadowblood Ridge
+294 R Shadowmage Infiltrator
+46 C Shelter
+101 R Shifty Doppelganger
+221 U Shower of Coals
+269 C Simplify
+161 U Skeletal Scrying
+162 U Skull Fracture
+309 U Skycloud Egg
+327 R Skycloud Expanse
+270 U Skyshooter
+47 U Soulcatcher
+222 U Spark Mage
+271 R Spellbane Centaur
+48 U Sphere of Duty
+49 U Sphere of Grace
+50 U Sphere of Law
+51 U Sphere of Reason
+52 U Sphere of Truth
+53 U Spiritualize
+272 C Springing Tiger
+273 R Squirrel Mob
+274 U Squirrel Nest
+163 R Stalking Bloodsucker
+102 U Standstill
+223 U Steam Vines
+310 U Steamclaw
+275 U Still Life
+276 R Stone-Tongue Basilisk
+311 U Sungrass Egg
+328 R Sungrass Prairie
+340 L Swamp
+340 L Swamp
+340 L Swamp
+340 L Swamp
+277 U Sylvan Might
+103 C Syncopate
+164 R Tainted Pact
+329 R Tarnished Citadel
+54 U Tattoo Ward
+278 R Terravore
+55 U Testament of Faith
+295 U Thaumatog
+224 C Thermal Blast
+104 U Think Tank
+105 R Thought Devourer
+106 U Thought Eater
+107 C Thought Nibbler
+330 C Timberland Ruins
+108 R Time Stretch
+56 C Tireless Tribe
+165 R Tombfire
+109 C Touch of Invisibility
+110 R Traumatize
+166 R Traveling Plague
+111 U Treetop Sentinel
+225 C Tremble
+279 U Twigwalker
+112 R Unifying Theory
+113 R Upheaval
+296 R Vampiric Dragon
+280 R Verdant Succession
+281 U Vivify
+226 U Volcanic Spray
+227 R Volley of Boulders
+57 R Wayward Angel
+282 C Werebear
+228 U Whipkeeper
+167 C Whispering Shade
+283 C Wild Mongrel
+284 C Woodland Druid
+114 C Words of Wisdom
+168 C Zombie Assassin
+169 C Zombie Cannibal
+170 U Zombie Infestation
+171 U Zombify
+285 R Zoologist

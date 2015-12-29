@@ -8,304 +8,304 @@ BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 
 [cards]
-C AEthertow
-U Advice from the Fae
-C Aphotic Wisps
-C Apothecary Initiate
-U Armored Ascension
-C Ashenmoor Cohort
-U Ashenmoor Gouger
-R Ashenmoor Liege
-R Augury Adept
-C Ballynock Cohort
-C Barkshell Blessing
-C Barrenton Cragtreads
-C Barrenton Medic
-U Beseech the Queen
-U Biting Tether
-C Blazethorn Scarecrow
-C Blight Sickle
-C Blistering Dieflyn
-U Bloodmark Mentor
-C Bloodshed Fever
-U Blowfly Infestation
-R Boartusk Liege
-C Boggart Arsonists
-U Boggart Ram-Gang
-R Boon Reflection
-C Briarberry Cohort
-C Burn Trail
-R Cauldron of Souls
-R Cemetery Puca
-C Cerulean Wisps
-C Chainbreaker
-C Cinderbones
-C Cinderhaze Wretch
-C Consign to Dream
-U Corrosive Mentor
-U Corrupt
-R Counterbore
-C Crabapple Cohort
-R Cragganwick Cremator
-C Crimson Wisps
-U Crowd of Cinders
-C Cultbrand Cinder
-C Curse of Chains
-U Cursecatcher
-U Dawnglow Infusion
-R Deep-Slumber Titan
-U Deepchannel Mentor
-R Demigod of Revenge
-R Deus of Calamity
-C Devoted Druid
-R Din of the Fireherd
-R Dire Undercurrents
-C Disturbing Plot
-R Dramatic Entrance
-U Dream Salvage
-U Drove of Elves
-C Drowner Initiate
-R Dusk Urchins
-R Elemental Mastery
-C Elsewhere Flask
-C Elvish Hexhunter
-C Ember Gale
-C Emberstrike Duo
-R Enchanted Evening
-R Everlasting Torment
-C Faerie Macabre
-U Faerie Swarm
-C Farhaven Elf
-C Fate Transfer
-R Fire-Lit Thicket
-U Firespout
-C Fists of the Demigod
-U Flame Javelin
-U Flourishing Defenses
-U Flow of Ideas
-L Forest
-L Forest
-L Forest
-L Forest
-U Fossil Find
-C Foxfire Oak
-R Fracturing Gust
-R Fulminator Mage
-R Furystoke Giant
-R Ghastlord of Fugue
-C Ghastly Discovery
-C Giantbaiting
-U Glamer Spinners
-C Gleeful Sabotage
-R Glen Elendra Liege
-C Gloomlance
-U Gloomwidow
-C Gloomwidow's Feast
-U Gnarled Effigy
-R Godhead of Awe
-C Goldenglow Moth
-C Gravelgill Axeshark
-C Gravelgill Duo
-R Graven Cairns
-R Greater Auramancy
-U Grief Tyrant
-R Grim Poppet
-U Guttural Response
-U Heap Doll
-R Heartmender
-C Helm of the Ghastlord
-R Hollowborn Barghest
-U Hollowsage
-U Horde of Boggarts
-U Howl of the Night Pack
-C Hungry Spriggan
-U Illuminated Folio
-R Impromptu Raid
-U Incremental Blight
-C Inescapable Brute
-U Inkfathom Infiltrator
-U Inkfathom Witch
-C Inquisitor's Snare
-C Intimidator Initiate
-L Island
-L Island
-L Island
-L Island
-R Isleback Spawn
-U Jaws of Stone
-C Juvenile Gloomwidow
-C Kinscaer Harpoonist
-U Kitchen Finks
-U Kithkin Rabble
-C Kithkin Shielddare
-R Knacksaw Clique
-R Knollspine Dragon
-R Knollspine Invocation
-U Kulrath Knight
-C Last Breath
-U Leech Bonder
-U Leechridden Swamp
-C Loamdragger Giant
-C Loch Korrigan
-U Lockjaw Snapper
-U Lurebound Scarecrow
-U Madblind Mountain
-R Mana Reflection
-C Manaforge Cinder
-C Manamorphose
-R Mass Calcify
-C Medicine Runner
-R Memory Plunder
-C Memory Sluice
-U Mercy Killing
-U Merrow Grimeblotter
-C Merrow Wavebreakers
-R Midnight Banshee
-C Mine Excavation
-R Mirrorweave
-U Mistmeadow Skulk
-U Mistmeadow Witch
-U Mistveil Plains
-U Moonring Island
-C Morselhoarder
-R Mossbridge Troll
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-C Mudbrawler Cohort
-C Mudbrawler Raiders
-U Murderous Redcap
-R Mystic Gate
-C Niveous Wisps
-C Nurturer Initiate
-C Old Ghastbark
-C Oona's Gatewarden
-R Oona, Queen of the Fae
-R Oracle of Nectars
-R Order of Whiteclay
-R Oversoul of Dusk
-R Painter's Servant
-U Pale Wayfarer
-C Parapet Watchers
-C Pili-Pala
-R Plague of Vermin
-L Plains
-L Plains
-L Plains
-L Plains
-U Plumeveil
-C Poison the Well
-R Polluted Bonds
-C Power of Fire
-C Presence of Gond
-R Prismatic Omen
-C Prismwake Merrow
-U Prison Term
-R Puca's Mischief
-C Puncture Bolt
-R Puppeteer Clique
-U Puresight Merrow
-C Put Away
-U Pyre Charger
-R Rage Reflection
-U Raking Canopy
-C Rattleblaze Scarecrow
-C Raven's Run Dragoon
-R Reaper King
-R Reflecting Pool
-U Reknit
-U Repel Intruders
-U Resplendent Mentor
-U Revelsong Horn
-R Rhys the Redeemed
-C Rite of Consumption
-R River Kelpie
-U River's Grasp
-R Rosheen Meanderer
-U Roughshod Mentor
-C Rune-Cervin Rider
-R Runed Halo
-C Runes of the Deus
-C Rustrazor Butcher
-C Safehold Duo
-C Safehold Elite
-C Safehold Sentry
-C Safewright Quest
-U Sapseep Forest
-R Savor the Moment
-C Scar
-C Scarscale Ritual
-C Scrapbasket
-C Scuttlemutt
-C Scuzzback Marauders
-C Scuzzback Scrapper
-U Seedcradle Witch
-C Shield of the Oversoul
-C Sickle Ripper
-C Silkbind Faerie
-C Sinking Feeling
-U Slinking Giant
-C Smash to Smithereens
-C Smolder Initiate
-C Somnomancer
-C Sootstoke Kindler
-C Sootwalkers
-R Spawnwrithe
-U Spectral Procession
-C Spell Syphon
-U Spiteflame Witch
-R Spiteful Visions
-C Splitting Headache
-C Steel of the Godhead
-C Strip Bare
-R Sunken Ruins
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-R Swans of Bryn Argoll
-R Sygg, River Cutthroat
-U Tatterkite
-C Tattermunge Duo
-U Tattermunge Maniac
-U Tattermunge Witch
-C Thistledown Duo
-R Thistledown Liege
-C Thornwatch Scarecrow
-R Thought Reflection
-U Thoughtweft Gambit
-C Toil to Renown
-C Torpor Dust
-U Torrent of Souls
-C Torture
-U Tower Above
-C Traitor's Roar
-U Trip Noose
-C Turn to Mist
-R Twilight Shepherd
-R Tyrannize
-U Umbral Mantle
-R Valleymaker
-R Vexing Shusher
-C Viridescent Wisps
-C Wanderbrine Rootcutters
-U Wasp Lancer
-C Watchwing Scarecrow
-R Wheel of Sun and Moon
-C Whimwader
-U Wicker Warcrawler
-U Wild Swing
-C Wildslayer Elves
-U Wilt-Leaf Cavaliers
-R Wilt-Leaf Liege
-R Windbrisk Raptor
-C Wingrattle Scarecrow
-R Witherscale Wurm
-C Woeleecher
-R Wooded Bastion
-R Woodfall Primus
-R Worldpurge
-R Wort, the Raidmother
-R Wound Reflection
-C Zealous Guardian
+136 C AEthertow
+28 U Advice from the Fae
+55 C Aphotic Wisps
+1 C Apothecary Initiate
+2 U Armored Ascension
+56 C Ashenmoor Cohort
+180 U Ashenmoor Gouger
+181 R Ashenmoor Liege
+137 R Augury Adept
+3 C Ballynock Cohort
+224 C Barkshell Blessing
+138 C Barrenton Cragtreads
+4 C Barrenton Medic
+57 U Beseech the Queen
+29 U Biting Tether
+246 C Blazethorn Scarecrow
+247 C Blight Sickle
+82 C Blistering Dieflyn
+83 U Bloodmark Mentor
+84 C Bloodshed Fever
+58 U Blowfly Infestation
+202 R Boartusk Liege
+85 C Boggart Arsonists
+203 U Boggart Ram-Gang
+5 R Boon Reflection
+30 C Briarberry Cohort
+86 C Burn Trail
+248 R Cauldron of Souls
+158 R Cemetery Puca
+31 C Cerulean Wisps
+249 C Chainbreaker
+59 C Cinderbones
+60 C Cinderhaze Wretch
+32 C Consign to Dream
+61 U Corrosive Mentor
+62 U Corrupt
+33 R Counterbore
+109 C Crabapple Cohort
+87 R Cragganwick Cremator
+88 C Crimson Wisps
+63 U Crowd of Cinders
+182 C Cultbrand Cinder
+139 C Curse of Chains
+34 U Cursecatcher
+225 U Dawnglow Infusion
+89 R Deep-Slumber Titan
+35 U Deepchannel Mentor
+183 R Demigod of Revenge
+204 R Deus of Calamity
+110 C Devoted Druid
+184 R Din of the Fireherd
+159 R Dire Undercurrents
+64 C Disturbing Plot
+111 R Dramatic Entrance
+160 U Dream Salvage
+112 U Drove of Elves
+36 C Drowner Initiate
+65 R Dusk Urchins
+90 R Elemental Mastery
+250 C Elsewhere Flask
+226 C Elvish Hexhunter
+91 C Ember Gale
+185 C Emberstrike Duo
+140 R Enchanted Evening
+186 R Everlasting Torment
+66 C Faerie Macabre
+37 U Faerie Swarm
+113 C Farhaven Elf
+161 C Fate Transfer
+271 R Fire-Lit Thicket
+205 U Firespout
+187 C Fists of the Demigod
+92 U Flame Javelin
+114 U Flourishing Defenses
+38 U Flow of Ideas
+298 L Forest
+298 L Forest
+298 L Forest
+298 L Forest
+206 U Fossil Find
+115 C Foxfire Oak
+227 R Fracturing Gust
+188 R Fulminator Mage
+93 R Furystoke Giant
+162 R Ghastlord of Fugue
+39 C Ghastly Discovery
+207 C Giantbaiting
+141 U Glamer Spinners
+116 C Gleeful Sabotage
+163 R Glen Elendra Liege
+67 C Gloomlance
+117 U Gloomwidow
+118 C Gloomwidow's Feast
+251 U Gnarled Effigy
+142 R Godhead of Awe
+6 C Goldenglow Moth
+164 C Gravelgill Axeshark
+165 C Gravelgill Duo
+272 R Graven Cairns
+7 R Greater Auramancy
+189 U Grief Tyrant
+252 R Grim Poppet
+208 U Guttural Response
+253 U Heap Doll
+228 R Heartmender
+166 C Helm of the Ghastlord
+68 R Hollowborn Barghest
+69 U Hollowsage
+94 U Horde of Boggarts
+119 U Howl of the Night Pack
+120 C Hungry Spriggan
+254 U Illuminated Folio
+209 R Impromptu Raid
+70 U Incremental Blight
+95 C Inescapable Brute
+167 U Inkfathom Infiltrator
+168 U Inkfathom Witch
+8 C Inquisitor's Snare
+96 C Intimidator Initiate
+288 L Island
+288 L Island
+288 L Island
+288 L Island
+40 R Isleback Spawn
+97 U Jaws of Stone
+121 C Juvenile Gloomwidow
+41 C Kinscaer Harpoonist
+229 U Kitchen Finks
+9 U Kithkin Rabble
+10 C Kithkin Shielddare
+42 R Knacksaw Clique
+98 R Knollspine Dragon
+99 R Knollspine Invocation
+190 U Kulrath Knight
+11 C Last Breath
+43 U Leech Bonder
+273 U Leechridden Swamp
+210 C Loamdragger Giant
+71 C Loch Korrigan
+255 U Lockjaw Snapper
+256 U Lurebound Scarecrow
+274 U Madblind Mountain
+122 R Mana Reflection
+191 C Manaforge Cinder
+211 C Manamorphose
+12 R Mass Calcify
+230 C Medicine Runner
+169 R Memory Plunder
+170 C Memory Sluice
+231 U Mercy Killing
+171 U Merrow Grimeblotter
+44 C Merrow Wavebreakers
+72 R Midnight Banshee
+13 C Mine Excavation
+143 R Mirrorweave
+14 U Mistmeadow Skulk
+144 U Mistmeadow Witch
+275 U Mistveil Plains
+276 U Moonring Island
+212 C Morselhoarder
+123 R Mossbridge Troll
+295 L Mountain
+295 L Mountain
+295 L Mountain
+295 L Mountain
+100 C Mudbrawler Cohort
+213 C Mudbrawler Raiders
+192 U Murderous Redcap
+277 R Mystic Gate
+15 C Niveous Wisps
+124 C Nurturer Initiate
+232 C Old Ghastbark
+173 C Oona's Gatewarden
+172 R Oona, Queen of the Fae
+233 R Oracle of Nectars
+16 R Order of Whiteclay
+234 R Oversoul of Dusk
+257 R Painter's Servant
+17 U Pale Wayfarer
+45 C Parapet Watchers
+258 C Pili-Pala
+73 R Plague of Vermin
+285 L Plains
+285 L Plains
+285 L Plains
+285 L Plains
+145 U Plumeveil
+193 C Poison the Well
+74 R Polluted Bonds
+101 C Power of Fire
+125 C Presence of Gond
+126 R Prismatic Omen
+46 C Prismwake Merrow
+18 U Prison Term
+47 R Puca's Mischief
+102 C Puncture Bolt
+75 R Puppeteer Clique
+146 U Puresight Merrow
+48 C Put Away
+103 U Pyre Charger
+104 R Rage Reflection
+127 U Raking Canopy
+259 C Rattleblaze Scarecrow
+235 C Raven's Run Dragoon
+260 R Reaper King
+278 R Reflecting Pool
+236 U Reknit
+147 U Repel Intruders
+19 U Resplendent Mentor
+261 U Revelsong Horn
+237 R Rhys the Redeemed
+76 C Rite of Consumption
+49 R River Kelpie
+174 U River's Grasp
+214 R Rosheen Meanderer
+128 U Roughshod Mentor
+20 C Rune-Cervin Rider
+21 R Runed Halo
+215 C Runes of the Deus
+105 C Rustrazor Butcher
+238 C Safehold Duo
+239 C Safehold Elite
+22 C Safehold Sentry
+240 C Safewright Quest
+279 U Sapseep Forest
+50 R Savor the Moment
+194 C Scar
+175 C Scarscale Ritual
+262 C Scrapbasket
+263 C Scuttlemutt
+216 C Scuzzback Marauders
+217 C Scuzzback Scrapper
+241 U Seedcradle Witch
+242 C Shield of the Oversoul
+77 C Sickle Ripper
+148 C Silkbind Faerie
+51 C Sinking Feeling
+106 U Slinking Giant
+107 C Smash to Smithereens
+78 C Smolder Initiate
+149 C Somnomancer
+195 C Sootstoke Kindler
+196 C Sootwalkers
+129 R Spawnwrithe
+23 U Spectral Procession
+52 C Spell Syphon
+197 U Spiteflame Witch
+198 R Spiteful Visions
+79 C Splitting Headache
+150 C Steel of the Godhead
+24 C Strip Bare
+280 R Sunken Ruins
+293 L Swamp
+293 L Swamp
+293 L Swamp
+293 L Swamp
+151 R Swans of Bryn Argoll
+176 R Sygg, River Cutthroat
+264 U Tatterkite
+218 C Tattermunge Duo
+219 U Tattermunge Maniac
+220 U Tattermunge Witch
+152 C Thistledown Duo
+153 R Thistledown Liege
+265 C Thornwatch Scarecrow
+53 R Thought Reflection
+154 U Thoughtweft Gambit
+130 C Toil to Renown
+177 C Torpor Dust
+199 U Torrent of Souls
+80 C Torture
+131 U Tower Above
+200 C Traitor's Roar
+266 U Trip Noose
+155 C Turn to Mist
+25 R Twilight Shepherd
+201 R Tyrannize
+267 U Umbral Mantle
+221 R Valleymaker
+222 R Vexing Shusher
+132 C Viridescent Wisps
+178 C Wanderbrine Rootcutters
+179 U Wasp Lancer
+268 C Watchwing Scarecrow
+243 R Wheel of Sun and Moon
+54 C Whimwader
+269 U Wicker Warcrawler
+108 U Wild Swing
+133 C Wildslayer Elves
+244 U Wilt-Leaf Cavaliers
+245 R Wilt-Leaf Liege
+26 R Windbrisk Raptor
+270 C Wingrattle Scarecrow
+134 R Witherscale Wurm
+27 C Woeleecher
+281 R Wooded Bastion
+135 R Woodfall Primus
+156 R Worldpurge
+223 R Wort, the Raidmother
+81 R Wound Reflection
+157 C Zealous Guardian

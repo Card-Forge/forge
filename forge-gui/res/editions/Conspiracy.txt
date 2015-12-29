@@ -8,213 +8,213 @@ BoosterCovers=3
 Booster=10 Common:!fromSheet("CNS Draft Matters"), 3 Uncommon:!fromSheet("CNS Draft Matters"), 1 RareMythic:!fromSheet("CNS Draft Matters"), 1 fromSheet("CNS Draft Matters")
 
 [cards]
-U Advantageous Proclamation
-R Backup Plan
-C Brago's Favor
-U Double Stroke
-C Immediate Action
-U Iterative Analysis
-C Muzzio's Preparations
-U Power Play
-U Secret Summoning
-C Secrets of Paradise
-C Sentinel Dispatch
-U Unexpected Potential
-R Worldknit
-C Brago's Representative
-U Council Guardian
-R Council's Judgment
-R Custodi Soulbinders
-C Custodi Squire
-C Rousing of Souls
-R Academy Elite
-C Marchesa's Emissary
-U Marchesa's Infiltrator
-M Muzzio, Visionary Architect
-R Plea for Power
-U Split Decision
-U Bite of the Black Rose
-R Drakestown Forgotten
-C Grudge Keeper
-R Reign of the Pit
-C Tyrant's Choice
-C Enraged Revolutionary
-C Grenzo's Cutthroat
-R Grenzo's Rebuttal
-R Ignition Team
-M Scourge of the Throne
-U Treasonous Ogre
-U Predator's Howl
-R Realm Seekers
-U Selvala's Charge
-C Selvala's Enforcer
-R Brago, King Eternal
-M Dack Fayden
-R Dack's Duplicate
-U Deathreap Ritual
-U Extract from Darkness
-U Flamewright
-R Grenzo, Dungeon Warden
-R Magister of Worth
-M Marchesa, the Black Rose
-U Marchesa's Smuggler
-R Selvala, Explorer Returned
-U Woodvine Elemental
-R AEther Searcher
-U Agent of Acquisitions
-R Canal Dredger
-M Coercive Portal
-R Cogwork Grinder
-C Cogwork Librarian
-C Cogwork Spy
-U Cogwork Tracker
-R Deal Broker
-R Lore Seeker
-C Lurking Automaton
-C Whispergear Sneak
-R Paliano, the High City
-C Ajani's Sunstriker
-C Apex Hawks
-C Courier Hawk
-C Doomed Traveler
-U Glimmerpoint Stag
-C Guardian Zendikon
-U Intangible Virtue
-C Kor Chant
-C Moment of Heroism
-C Noble Templar
-C Pillarfield Ox
-C Pride Guardian
-M Pristine Angel
-R Reya Dawnbringer
-R Rout
-C Silverchase Fox
-U Soulcatcher
-C Stave Off
-U Swords to Plowshares
-U Unquestioned Authority
-C Valor Made Real
-U Vow of Duty
-U Wakestone Gargoyle
-C AEther Tradewinds
-U Air Servant
-C Brainstorm
-U Breakthrough
-C Compulsive Research
-C Crookclaw Transmuter
-C Dream Fracture
-C Enclave Elite
-U Fact or Fiction
-U Favorable Winds
-C Grixis Illusionist
-U Jetting Glasskite
-C Minamo Scrollkeeper
-R Misdirection
-C Plated Seastrider
-C Reckless Scholar
-C Screaming Seahawk
-C Shoreline Ranger
-C Stasis Cell
-R Stifle
-C Traveler's Cloak
-C Turn the Tide
-U Wind Dancer
-C Altar's Reap
-C Assassinate
-R Ill-Gotten Gains
-C Infectious Horror
-C Liliana's Specter
-R Magus of the Mirror
-U Morkrut Banshee
-C Necromantic Thirst
-M Phage the Untouchable
-U Plagued Rusalka
-C Quag Vampires
-U Reckless Spite
-U Skeletal Scrying
-U Smallpox
-C Stronghold Discipline
-C Syphon Soul
-C Tragic Slip
-C Twisted Abomination
-C Typhoid Rats
-C Unhallowed Pact
-U Vampire Hexmage
-U Victimize
-C Wakedancer
-C Zombie Goliath
-U Barbed Shocker
-U Boldwyr Intimidator
-C Brimstone Volley
-C Chartooth Cougar
-C Cinder Wall
-U Deathforge Shaman
-U Flaring Flame-Kin
-C Flowstone Blade
-R Heartless Hidetsugu
-U Heckling Fiends
-C Lizard Warrior
-C Mana Geyser
-C Orcish Cannonade
-C Pitchburn Devils
-C Power of Fire
-C Skitter of Lizards
-R Sulfuric Vortex
-C Torch Fiend
-C Trumpet Blast
-U Uncontrollable Anger
-C Vent Sentinel
-U Volcanic Fallout
-C Wrap in Flames
-C Charging Rhino
-C Copperhorn Scout
-C Echoing Courage
-U Elephant Guide
-C Elvish Aberration
-R Exploration
-U Gamekeeper
-C Gnarlid Pack
-C Howling Wolf
-C Hunger of the Howlpack
-M Hydra Omnivore
-U Lead the Stampede
-C Nature's Claim
-U Pelakka Wurm
-C Plummet
-C Provoke
-U Relic Crush
-C Respite
-C Sakura-Tribe Elder
-C Scaled Wurm
-C Sporecap Spider
-U Squirrel Nest
-R Terastodon
-R Wolfbriar Elemental
-C Wrap in Vigor
-R Basandra, Battle Seraph
-R Decimate
-R Dimir Doppelganger
-R Edric, Spymaster of Trest
-U Fires of Yavimaya
-M Mirari's Wake
-U Mortify
-M Pernicious Deed
-U Sky Spirit
-R Spiritmonger
-U Spontaneous Combustion
-U Wood Sage
-R Altar of Dementia
-R Deathrender
-U Explorer's Scope
-U Fireshrieker
-U Galvanic Juggernaut
-U Peace Strider
-U Reito Lantern
-U Runed Servitor
-R Silent Arbiter
-U Spectral Searchlight
-R Vedalken Orrery
-U Warmonger's Chariot
-U Mirrodin's Core
-U Quicksand
-R Reflecting Pool
+1 U Advantageous Proclamation
+2 R Backup Plan
+3 C Brago's Favor
+4 U Double Stroke
+5 C Immediate Action
+6 U Iterative Analysis
+7 C Muzzio's Preparations
+8 U Power Play
+9 U Secret Summoning
+10 C Secrets of Paradise
+11 C Sentinel Dispatch
+12 U Unexpected Potential
+13 R Worldknit
+14 C Brago's Representative
+15 U Council Guardian
+16 R Council's Judgment
+17 R Custodi Soulbinders
+18 C Custodi Squire
+19 C Rousing of Souls
+20 R Academy Elite
+21 C Marchesa's Emissary
+22 U Marchesa's Infiltrator
+23 M Muzzio, Visionary Architect
+24 R Plea for Power
+25 U Split Decision
+26 U Bite of the Black Rose
+27 R Drakestown Forgotten
+28 C Grudge Keeper
+29 R Reign of the Pit
+30 C Tyrant's Choice
+31 C Enraged Revolutionary
+32 C Grenzo's Cutthroat
+33 R Grenzo's Rebuttal
+34 R Ignition Team
+35 M Scourge of the Throne
+36 U Treasonous Ogre
+37 U Predator's Howl
+38 R Realm Seekers
+39 U Selvala's Charge
+40 C Selvala's Enforcer
+41 R Brago, King Eternal
+42 M Dack Fayden
+43 R Dack's Duplicate
+44 U Deathreap Ritual
+45 U Extract from Darkness
+46 U Flamewright
+47 R Grenzo, Dungeon Warden
+48 R Magister of Worth
+49 M Marchesa, the Black Rose
+50 U Marchesa's Smuggler
+51 R Selvala, Explorer Returned
+52 U Woodvine Elemental
+53 R AEther Searcher
+54 U Agent of Acquisitions
+55 R Canal Dredger
+56 M Coercive Portal
+57 R Cogwork Grinder
+58 C Cogwork Librarian
+59 C Cogwork Spy
+60 U Cogwork Tracker
+61 R Deal Broker
+62 R Lore Seeker
+63 C Lurking Automaton
+64 C Whispergear Sneak
+65 R Paliano, the High City
+66 C Ajani's Sunstriker
+67 C Apex Hawks
+68 C Courier Hawk
+69 C Doomed Traveler
+70 U Glimmerpoint Stag
+71 C Guardian Zendikon
+72 U Intangible Virtue
+73 C Kor Chant
+74 C Moment of Heroism
+75 C Noble Templar
+76 C Pillarfield Ox
+77 C Pride Guardian
+78 M Pristine Angel
+79 R Reya Dawnbringer
+80 R Rout
+81 C Silverchase Fox
+82 U Soulcatcher
+83 C Stave Off
+84 U Swords to Plowshares
+85 U Unquestioned Authority
+86 C Valor Made Real
+87 U Vow of Duty
+88 U Wakestone Gargoyle
+89 C AEther Tradewinds
+90 U Air Servant
+91 C Brainstorm
+92 U Breakthrough
+93 C Compulsive Research
+94 C Crookclaw Transmuter
+95 C Dream Fracture
+96 C Enclave Elite
+97 U Fact or Fiction
+98 U Favorable Winds
+99 C Grixis Illusionist
+100 U Jetting Glasskite
+101 C Minamo Scrollkeeper
+102 R Misdirection
+103 C Plated Seastrider
+104 C Reckless Scholar
+105 C Screaming Seahawk
+106 C Shoreline Ranger
+107 C Stasis Cell
+108 R Stifle
+109 C Traveler's Cloak
+110 C Turn the Tide
+111 U Wind Dancer
+112 C Altar's Reap
+113 C Assassinate
+114 R Ill-Gotten Gains
+115 C Infectious Horror
+116 C Liliana's Specter
+117 R Magus of the Mirror
+118 U Morkrut Banshee
+119 C Necromantic Thirst
+120 M Phage the Untouchable
+121 U Plagued Rusalka
+122 C Quag Vampires
+123 U Reckless Spite
+124 U Skeletal Scrying
+125 U Smallpox
+126 C Stronghold Discipline
+127 C Syphon Soul
+128 C Tragic Slip
+129 C Twisted Abomination
+130 C Typhoid Rats
+131 C Unhallowed Pact
+132 U Vampire Hexmage
+133 U Victimize
+134 C Wakedancer
+135 C Zombie Goliath
+136 U Barbed Shocker
+137 U Boldwyr Intimidator
+138 C Brimstone Volley
+139 C Chartooth Cougar
+140 C Cinder Wall
+141 U Deathforge Shaman
+142 U Flaring Flame-Kin
+143 C Flowstone Blade
+144 R Heartless Hidetsugu
+145 U Heckling Fiends
+146 C Lizard Warrior
+147 C Mana Geyser
+148 C Orcish Cannonade
+149 C Pitchburn Devils
+150 C Power of Fire
+151 C Skitter of Lizards
+152 R Sulfuric Vortex
+153 C Torch Fiend
+154 C Trumpet Blast
+155 U Uncontrollable Anger
+156 C Vent Sentinel
+157 U Volcanic Fallout
+158 C Wrap in Flames
+159 C Charging Rhino
+160 C Copperhorn Scout
+161 C Echoing Courage
+162 U Elephant Guide
+163 C Elvish Aberration
+164 R Exploration
+165 U Gamekeeper
+166 C Gnarlid Pack
+167 C Howling Wolf
+168 C Hunger of the Howlpack
+169 M Hydra Omnivore
+170 U Lead the Stampede
+171 C Nature's Claim
+172 U Pelakka Wurm
+173 C Plummet
+174 C Provoke
+175 U Relic Crush
+176 C Respite
+177 C Sakura-Tribe Elder
+178 C Scaled Wurm
+179 C Sporecap Spider
+180 U Squirrel Nest
+181 R Terastodon
+182 R Wolfbriar Elemental
+183 C Wrap in Vigor
+184 R Basandra, Battle Seraph
+185 R Decimate
+186 R Dimir Doppelganger
+187 R Edric, Spymaster of Trest
+188 U Fires of Yavimaya
+189 M Mirari's Wake
+190 U Mortify
+191 M Pernicious Deed
+192 U Sky Spirit
+193 R Spiritmonger
+194 U Spontaneous Combustion
+195 U Wood Sage
+196 R Altar of Dementia
+197 R Deathrender
+198 U Explorer's Scope
+199 U Fireshrieker
+200 U Galvanic Juggernaut
+201 U Peace Strider
+202 U Reito Lantern
+203 U Runed Servitor
+204 R Silent Arbiter
+205 U Spectral Searchlight
+206 R Vedalken Orrery
+207 U Warmonger's Chariot
+208 U Mirrodin's Core
+209 U Quicksand
+210 R Reflecting Pool

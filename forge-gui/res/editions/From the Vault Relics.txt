@@ -6,18 +6,18 @@ Type=From_the_Vault
 Alias=V10
 
 [cards]
-M AEther Vial
-M Black Vise
-M Isochron Scepter
-M Ivory Tower
-M Jester's Cap
-M Karn, Silver Golem
-M Masticore
-M Memory Jar
-M Mirari
-M Mox Diamond
-M Nevinyrral's Disk
-M Sol Ring
-M Sundering Titan
-M Sword of Body and Mind
-M Zuran Orb
+1 M AEther Vial
+2 M Black Vise
+3 M Isochron Scepter
+4 M Ivory Tower
+5 M Jester's Cap
+6 M Karn, Silver Golem
+7 M Masticore
+8 M Memory Jar
+9 M Mirari
+10 M Mox Diamond
+11 M Nevinyrral's Disk
+12 M Sol Ring
+13 M Sundering Titan
+14 M Sword of Body and Mind
+15 M Zuran Orb

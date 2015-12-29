@@ -10,146 +10,146 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-U AEther Mutation
-C Ana Disciple
-U Ana Sanctuary
-R Anavolver
-C Angelfire Crusader
-R Battlefield Forge
-R Bloodfire Colossus
-C Bloodfire Dwarf
-C Bloodfire Infusion
-U Bloodfire Kavu
-C Bog Gnarr
-U Brass Herald
-U Captain's Maneuver
-R Caves of Koilos
-C Ceta Disciple
-U Ceta Sanctuary
-R Cetavolver
-U Coalition Flag
-C Coalition Honor Guard
-C Coastal Drake
-C Consume Strength
-R Cromat
-C Dead Ringers
-R Death Grasp
-U Death Mutation
-C Dega Disciple
-U Dega Sanctuary
-R Degavolver
-R Desolation Angel
-R Desolation Giant
-U Diversionary Tactics
-C Divine Light
-U Dodecapod
-U Dragon Arch
-C Dwarven Landslide
-U Dwarven Patrol
-U Ebony Treefolk
-U Emblazoned Golem
-U Enlistment Officer
-U Evasive Action
-R False Dawn
-R Fervent Charge
-U Fire // Ice
-U Flowstone Charger
-U Foul Presence
-R Fungal Shambler
-U Gaea's Balance
-C Gaea's Skyfolk
-R Gerrard Capashen
-U Gerrard's Verdict
-C Glade Gnarr
-C Goblin Legionnaire
-U Goblin Ringleader
-R Goblin Trenches
-U Grave Defiler
-R Guided Passage
-U Haunted Angel
-C Helionaut
-R Ice Cave
-U Illuminate
-U Illusion // Reality
-C Index
-C Jaded Response
-C Jilt
-U Jungle Barrier
-C Kavu Glider
-U Kavu Howler
-R Kavu Mauler
-C Last Caress
-R Last Stand
-C Lay of the Land
-R Legacy Weapon
-U Life // Death
-R Lightning Angel
-C Living Airship
-C Llanowar Dead
-R Llanowar Wastes
-C Manacles of Decay
-U Martyrs' Tomb
-R Mask of Intolerance
-C Mind Extraction
-U Minotaur Illusionist
-C Minotaur Tactician
-C Mournful Zombie
-R Mystic Snake
-C Necra Disciple
-U Necra Sanctuary
-R Necravolver
-U Night // Day
-U Order // Chaos
-C Orim's Thunder
-R Overgrown Estate
-C Penumbra Bobcat
-U Penumbra Kavu
-R Penumbra Wurm
-R Pernicious Deed
-R Phyrexian Arena
-U Phyrexian Gargantua
-C Phyrexian Rager
-R Planar Despair
-R Powerstone Minefield
-R Prophetic Bolt
-C Putrid Warrior
-C Quagmire Druid
-C Quicksilver Dagger
-C Raka Disciple
-U Raka Sanctuary
-R Rakavolver
-C Razorfin Hunter
-C Reef Shaman
-C Savage Gorilla
-C Shield of Duty and Reason
-C Shimmering Mirage
-R Shivan Reef
-C Smash
-C Soul Link
-R Spectral Lynx
-R Spiritmonger
-C Squee's Embrace
-U Squee's Revenge
-C Standard Bearer
-C Strength of Night
-R Suffocating Blast
-U Suppress
-U Sylvan Messenger
-R Symbiotic Deployment
-C Tahngarth's Glare
-C Temporal Spring
-U Tidal Courier
-C Tranquil Path
-C Tundra Kavu
-R Unnatural Selection
-C Urborg Elf
-C Urborg Uprising
-R Vindicate
-U Vodalian Mystic
-U Whirlpool Drake
-C Whirlpool Rider
-R Whirlpool Warrior
-R Wild Research
-R Yavimaya Coast
-R Yavimaya's Embrace
-C Zombie Boa
+91 U AEther Mutation
+73 C Ana Disciple
+74 U Ana Sanctuary
+75 R Anavolver
+1 C Angelfire Crusader
+139 R Battlefield Forge
+55 R Bloodfire Colossus
+56 C Bloodfire Dwarf
+57 C Bloodfire Infusion
+58 U Bloodfire Kavu
+76 C Bog Gnarr
+133 U Brass Herald
+92 U Captain's Maneuver
+140 R Caves of Koilos
+19 C Ceta Disciple
+20 U Ceta Sanctuary
+21 R Cetavolver
+2 U Coalition Flag
+3 C Coalition Honor Guard
+22 C Coastal Drake
+93 C Consume Strength
+94 R Cromat
+37 C Dead Ringers
+95 R Death Grasp
+96 U Death Mutation
+4 C Dega Disciple
+5 U Dega Sanctuary
+6 R Degavolver
+38 R Desolation Angel
+59 R Desolation Giant
+7 U Diversionary Tactics
+8 C Divine Light
+134 U Dodecapod
+135 U Dragon Arch
+60 C Dwarven Landslide
+61 U Dwarven Patrol
+97 U Ebony Treefolk
+136 U Emblazoned Golem
+9 U Enlistment Officer
+23 U Evasive Action
+10 R False Dawn
+98 R Fervent Charge
+128 U Fire // Ice
+99 U Flowstone Charger
+39 U Foul Presence
+100 R Fungal Shambler
+77 U Gaea's Balance
+101 C Gaea's Skyfolk
+11 R Gerrard Capashen
+102 U Gerrard's Verdict
+78 C Glade Gnarr
+103 C Goblin Legionnaire
+62 U Goblin Ringleader
+104 R Goblin Trenches
+40 U Grave Defiler
+105 R Guided Passage
+12 U Haunted Angel
+13 C Helionaut
+24 R Ice Cave
+63 U Illuminate
+129 U Illusion // Reality
+25 C Index
+26 C Jaded Response
+27 C Jilt
+106 U Jungle Barrier
+64 C Kavu Glider
+79 U Kavu Howler
+80 R Kavu Mauler
+41 C Last Caress
+107 R Last Stand
+81 C Lay of the Land
+137 R Legacy Weapon
+130 U Life // Death
+108 R Lightning Angel
+28 C Living Airship
+109 C Llanowar Dead
+141 R Llanowar Wastes
+14 C Manacles of Decay
+110 U Martyrs' Tomb
+138 R Mask of Intolerance
+42 C Mind Extraction
+111 U Minotaur Illusionist
+65 C Minotaur Tactician
+43 C Mournful Zombie
+112 R Mystic Snake
+44 C Necra Disciple
+45 U Necra Sanctuary
+46 R Necravolver
+131 U Night // Day
+132 U Order // Chaos
+15 C Orim's Thunder
+113 R Overgrown Estate
+82 C Penumbra Bobcat
+83 U Penumbra Kavu
+84 R Penumbra Wurm
+114 R Pernicious Deed
+47 R Phyrexian Arena
+48 U Phyrexian Gargantua
+49 C Phyrexian Rager
+50 R Planar Despair
+115 R Powerstone Minefield
+116 R Prophetic Bolt
+117 C Putrid Warrior
+51 C Quagmire Druid
+118 C Quicksilver Dagger
+66 C Raka Disciple
+67 U Raka Sanctuary
+68 R Rakavolver
+119 C Razorfin Hunter
+29 C Reef Shaman
+85 C Savage Gorilla
+16 C Shield of Duty and Reason
+30 C Shimmering Mirage
+142 R Shivan Reef
+69 C Smash
+120 C Soul Link
+17 R Spectral Lynx
+121 R Spiritmonger
+122 C Squee's Embrace
+123 U Squee's Revenge
+18 C Standard Bearer
+86 C Strength of Night
+124 R Suffocating Blast
+52 U Suppress
+87 U Sylvan Messenger
+88 R Symbiotic Deployment
+70 C Tahngarth's Glare
+125 C Temporal Spring
+31 U Tidal Courier
+89 C Tranquil Path
+71 C Tundra Kavu
+32 R Unnatural Selection
+90 C Urborg Elf
+53 C Urborg Uprising
+126 R Vindicate
+33 U Vodalian Mystic
+34 U Whirlpool Drake
+35 C Whirlpool Rider
+36 R Whirlpool Warrior
+72 R Wild Research
+143 R Yavimaya Coast
+127 R Yavimaya's Embrace
+54 C Zombie Boa

@@ -7,168 +7,168 @@ BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand THS
 
 [cards]
-R Aegis of the Gods
-C Ajani's Presence
-C Akroan Mastiff
-C Armament of Nyx
-U Banishing Light
-R Dawnbringer Charioteers
-R Deicide
-R Dictate of Heliod
-C Eagle of the Watch
-U Eidolon of Rhetoric
-C Font of Vigor
-M Godsend
-C Harvestguard Alseids
-C Lagonna-Band Trailblazer
-R Launch the Fleet
-U Leonin Iconoclast
-C Mortal Obstinacy
-U Nyx-Fleece Ram
-C Oppressive Rays
-C Oreskos Swiftclaw
-U Phalanx Formation
-U Quarry Colossus
-U Reprisal
-U Sightless Brawler
-R Skybind
-U Skyspear Cavalry
-C Stonewise Fortifier
-C Supply-Line Cranes
-U Tethmos High Priest
-C Aerial Formation
-R Battlefield Thaumaturge
-C Cloaked Siren
-C Countermand
-U Crystalline Nautilus
-U Dakra Mystic
-R Daring Thief
-R Dictate of Kruphix
-C Font of Fortunes
-C Godhunter Octopus
-U Hour of Need
-C Hubris
-R Hypnotic Siren
-U Interpret the Signs
-U Kiora's Dismissal
-C Pin to the Earth
-R Polymorphous Rush
-U Pull from the Deep
-U Riptide Chimera
-C Rise of Eagles
-M Sage of Hours
-R Scourge of Fleets
-C Sigiled Starfish
-C Thassa's Devourer
-U Thassa's Ire
-U Triton Cavalry
-C Triton Shorestalker
-C War-Wing Siren
-U Whitewater Naiads
-U Agent of Erebos
-C Aspect of Gorgon
-C Bloodcrazed Hoplite
-U Brain Maggot
-C Cast into Darkness
-C Cruel Feeding
-R Dictate of Erebos
-R Doomwake Giant
-C Dreadbringer Lampads
-R Extinguish All Hope
-C Feast of Dreams
-U Felhide Petrifier
-C Font of Return
-U Gnarled Scarhide
-C Grim Guardian
-R King Macar, the Gold-Cursed
-R Master of the Feast
-U Nightmarish End
-C Nyx Infusion
-C Pharika's Chosen
-C Returned Reveler
-U Ritual of the Returned
-C Rotted Hulk
-R Silence the Believers
-U Spiteful Blow
-U Squelching Leeches
-U Thoughtrender Lamia
-U Tormented Thoughts
-M Worst Fears
-U Akroan Line Breaker
-R Bearer of the Heavens
-C Bladetusk Boar
-U Blinding Flare
-U Cyclops of Eternal Fury
-R Dictate of the Twin Gods
-R Eidolon of the Great Revel
-C Flamespeaker's Will
-C Flurry of Horns
-C Font of Ire
-U Forgeborn Oreads
-C Gluttonous Cyclops
-R Harness by Force
-U Knowledge and Power
-C Lightning Diadem
-C Magma Spray
-U Mogis's Warhound
-C Pensive Minotaur
-M Prophetic Flamespeaker
-U Riddle of Lightning
-U Rollick of Abandon
-C Rouse the Mob
-C Satyr Hoplite
-C Sigiled Skink
-R Spawn of Thraxes
-U Spite of Mogis
-C Starfall
-R Twinflame
-U Wildfire Cerberus
-U Bassara Tower Archer
-U Colossal Heroics
-U Consign to Dust
-C Desecration Plague
-R Dictate of Karametra
-R Eidolon of Blossoms
-C Font of Fertility
-C Golden Hind
-U Goldenhide Ox
-R Heroes' Bane
-C Humbler of Mortals
-R Hydra Broodmaster
-C Kruphix's Insight
-C Market Festival
-C Nature's Panoply
-U Nessian Game Warden
-C Oakheart Dryads
-C Pheres-Band Thunderhoof
-R Pheres-Band Warchief
-C Ravenous Leucrocota
-C Renowned Weaver
-U Reviving Melody
-C Satyr Grovedancer
-R Setessan Tactics
-U Solidarity of Heroes
-U Spirespine
-U Strength from the Fallen
-U Swarmborn Giant
-M Ajani, Mentor of Heroes
-M Athreos, God of Passage
-U Desperate Stand
-U Disciple of Deceit
-U Fleetfeather Cockatrice
-M Iroas, God of Victory
-M Keranos, God of Storms
-M Kruphix, God of Horizons
-U Nyx Weaver
-M Pharika, God of Affliction
-R Revel of the Fallen God
-U Stormchaser Chimera
-U Underworld Coinsmith
-U Armory of Iroas
-U Chariot of Victory
-U Deserter's Quarters
-U Gold-Forged Sentinel
-R Hall of Triumph
-R Mana Confluence
-R Temple of Epiphany
-R Temple of Malady
+1 R Aegis of the Gods
+2 C Ajani's Presence
+3 C Akroan Mastiff
+4 C Armament of Nyx
+5 U Banishing Light
+6 R Dawnbringer Charioteers
+7 R Deicide
+8 R Dictate of Heliod
+9 C Eagle of the Watch
+10 U Eidolon of Rhetoric
+11 C Font of Vigor
+12 M Godsend
+13 C Harvestguard Alseids
+14 C Lagonna-Band Trailblazer
+15 R Launch the Fleet
+16 U Leonin Iconoclast
+17 C Mortal Obstinacy
+18 U Nyx-Fleece Ram
+19 C Oppressive Rays
+20 C Oreskos Swiftclaw
+21 U Phalanx Formation
+22 U Quarry Colossus
+23 U Reprisal
+24 U Sightless Brawler
+25 R Skybind
+26 U Skyspear Cavalry
+27 C Stonewise Fortifier
+28 C Supply-Line Cranes
+29 U Tethmos High Priest
+30 C Aerial Formation
+31 R Battlefield Thaumaturge
+32 C Cloaked Siren
+33 C Countermand
+34 U Crystalline Nautilus
+35 U Dakra Mystic
+36 R Daring Thief
+37 R Dictate of Kruphix
+38 C Font of Fortunes
+39 C Godhunter Octopus
+40 U Hour of Need
+41 C Hubris
+42 R Hypnotic Siren
+43 U Interpret the Signs
+44 U Kiora's Dismissal
+45 C Pin to the Earth
+46 R Polymorphous Rush
+47 U Pull from the Deep
+48 U Riptide Chimera
+49 C Rise of Eagles
+50 M Sage of Hours
+51 R Scourge of Fleets
+52 C Sigiled Starfish
+53 C Thassa's Devourer
+54 U Thassa's Ire
+55 U Triton Cavalry
+56 C Triton Shorestalker
+57 C War-Wing Siren
+58 U Whitewater Naiads
+59 U Agent of Erebos
+60 C Aspect of Gorgon
+61 C Bloodcrazed Hoplite
+62 U Brain Maggot
+63 C Cast into Darkness
+64 C Cruel Feeding
+65 R Dictate of Erebos
+66 R Doomwake Giant
+67 C Dreadbringer Lampads
+68 R Extinguish All Hope
+69 C Feast of Dreams
+70 U Felhide Petrifier
+71 C Font of Return
+72 U Gnarled Scarhide
+73 C Grim Guardian
+74 R King Macar, the Gold-Cursed
+75 R Master of the Feast
+76 U Nightmarish End
+77 C Nyx Infusion
+78 C Pharika's Chosen
+79 C Returned Reveler
+80 U Ritual of the Returned
+81 C Rotted Hulk
+82 R Silence the Believers
+83 U Spiteful Blow
+84 U Squelching Leeches
+85 U Thoughtrender Lamia
+86 U Tormented Thoughts
+87 M Worst Fears
+88 U Akroan Line Breaker
+89 R Bearer of the Heavens
+90 C Bladetusk Boar
+91 U Blinding Flare
+92 U Cyclops of Eternal Fury
+93 R Dictate of the Twin Gods
+94 R Eidolon of the Great Revel
+95 C Flamespeaker's Will
+96 C Flurry of Horns
+97 C Font of Ire
+98 U Forgeborn Oreads
+99 C Gluttonous Cyclops
+100 R Harness by Force
+101 U Knowledge and Power
+102 C Lightning Diadem
+103 C Magma Spray
+104 U Mogis's Warhound
+105 C Pensive Minotaur
+106 M Prophetic Flamespeaker
+107 U Riddle of Lightning
+108 U Rollick of Abandon
+109 C Rouse the Mob
+110 C Satyr Hoplite
+111 C Sigiled Skink
+112 R Spawn of Thraxes
+113 U Spite of Mogis
+114 C Starfall
+115 R Twinflame
+116 U Wildfire Cerberus
+117 U Bassara Tower Archer
+118 U Colossal Heroics
+119 U Consign to Dust
+120 C Desecration Plague
+121 R Dictate of Karametra
+122 R Eidolon of Blossoms
+123 C Font of Fertility
+124 C Golden Hind
+125 U Goldenhide Ox
+126 R Heroes' Bane
+127 C Humbler of Mortals
+128 R Hydra Broodmaster
+129 C Kruphix's Insight
+130 C Market Festival
+131 C Nature's Panoply
+132 U Nessian Game Warden
+133 C Oakheart Dryads
+134 C Pheres-Band Thunderhoof
+135 R Pheres-Band Warchief
+136 C Ravenous Leucrocota
+137 C Renowned Weaver
+138 U Reviving Melody
+139 C Satyr Grovedancer
+140 R Setessan Tactics
+141 U Solidarity of Heroes
+142 U Spirespine
+143 U Strength from the Fallen
+144 U Swarmborn Giant
+145 M Ajani, Mentor of Heroes
+146 M Athreos, God of Passage
+147 U Desperate Stand
+148 U Disciple of Deceit
+149 U Fleetfeather Cockatrice
+150 M Iroas, God of Victory
+151 M Keranos, God of Storms
+152 M Kruphix, God of Horizons
+153 U Nyx Weaver
+154 M Pharika, God of Affliction
+155 R Revel of the Fallen God
+156 U Stormchaser Chimera
+157 U Underworld Coinsmith
+158 U Armory of Iroas
+159 U Chariot of Victory
+160 U Deserter's Quarters
+161 U Gold-Forged Sentinel
+162 R Hall of Triumph
+163 R Mana Confluence
+164 R Temple of Epiphany
+165 R Temple of Malady

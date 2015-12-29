@@ -6,23 +6,23 @@ Name=From the Vault: Twenty
 Type=From_the_Vault
 
 [cards]
-M Dark Ritual
-M Swords to Plowshares
-M Hymn to Tourach
-M Fyndhorn Elves
-M Impulse
-M Wall of Blossoms
-M Thran Dynamo
-M Tangle Wire
-M Fact or Fiction
-M Chainer's Edict
-M Akroma's Vengeance
-M Gilded Lotus
-M Ink-Eyes, Servant of Oni
-M Char
-M Venser, Shaper Savant
-M Chameleon Colossus
-M Cruel Ultimatum
-M Jace, the Mind Sculptor
-M Green Sun's Zenith
-M Kessig Wolf Run
+1 M Dark Ritual
+2 M Swords to Plowshares
+3 M Hymn to Tourach
+4 M Fyndhorn Elves
+5 M Impulse
+6 M Wall of Blossoms
+7 M Thran Dynamo
+8 M Tangle Wire
+9 M Fact or Fiction
+10 M Chainer's Edict
+11 M Akroma's Vengeance
+12 M Gilded Lotus
+13 M Ink-Eyes, Servant of Oni
+14 M Char
+15 M Venser, Shaper Savant
+16 M Chameleon Colossus
+17 M Cruel Ultimatum
+18 M Jace, the Mind Sculptor
+19 M Green Sun's Zenith
+20 M Kessig Wolf Run

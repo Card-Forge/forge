@@ -6,345 +6,345 @@ Code2=C15
 Type=Other
 
 [cards]
-R Bastion Protector
-R Dawnbreak Reclaimer
-R Grasp of Fate
-U Herald of the Host
-R Kalemne's Captain
-U Oreskos Explorer
-R Righteous Confluence
-R Shielded by Faith
-R AEthersnatch
-U Broodbirth Viper
-R Gigantoplasm
-U Illusory Ambusher
-U Mirror Match
-R Mystic Confluence
-R Synthetic Destiny
-U Banshee of the Dread Choir
-U Corpse Augur
-R Daxos's Torment
-R Deadly Tempest
-R Dread Summons
-R Scourge of Nel Toth
-U Thief of Blood
-R Wretched Confluence
-R Awaken the Sky Tyrant
-R Dream Pillager
-R Fiery Confluence
-R Magus of the Wheel
-U Meteor Blast
-R Mizzix's Mastery
-U Rite of the Raging Storm
-U Warchief Giant
-R Arachnogenesis
-R Bloodspore Thrinax
-U Caller of the Pack
-R Centaur Vinecrasher
-R Ezuri's Predation
-U Great Oak Guardian
-R Pathbreaker Ibex
-U Skullwinder
-R Verdant Confluence
-M Anya, Merciless Angel
-M Arjun, the Shifting Flame
-M Daxos the Returned
-M Ezuri, Claw of Progress
-M Kalemne, Disciple of Iroas
-M Karlov of the Ghost Council
-M Kaseto, Orochi Archmage
-M Mazirek, Kraul Death Priest
-M Meren of Clan Nel Toth
-M Mizzix of the Izmagnus
-R Blade of Selves
-U Sandstone Oracle
-R Scytheclaw
-R Seal of the Guildpact
-C Thought Vessel
-R Command Beacon
-R Ajani's Chosen
-M Angel of Serenity
-R Arbiter of Knollridge
-U Aura of Silence
-U Banishing Light
-C Cage of Hands
-R Celestial Ancient
-R Celestial Archon
-U Crib Swap
-U Dawn to Dusk
-C Dawnglare Invoker
-R Dictate of Heliod
-C Faith's Fetters
-U Ghostblade Eidolon
-R Jareth, Leonine Titan
-R Karmic Justice
-C Kor Sanctifiers
-R Marshal's Anthem
-R Mesa Enchantress
-U Monk Idealist
-R Open the Vaults
-C Orim's Thunder
-C Seal of Cleansing
-R Sigil of the Empty Throne
-R Silent Sentinel
-M Sun Titan
-R Victory's Herald
-U Vow of Duty
-U AEtherize
-R Bident of Thassa
-R Blatant Thievery
-R Blue Sun's Zenith
-U Blustersquall
-C Brainstorm
-R Day of the Dragons
-U Dominate
-C Echoing Truth
-U Fact or Fiction
-R Jace's Archivist
-R Lone Revenant
-U Mulldrifter
-U Mystic Retrieval
-C Ninja of the Deep Hours
-U Plaxmanta
-C Preordain
-U Rapid Hybridization
-R Reins of Power
-C Repeal
-R Rite of Replication
-U Sleep
-R Stolen Goods
-R Stroke of Genius
-R Talrand, Sky Summoner
-R Thought Reflection
-U Windfall
-C Altar's Reap
-U Ambition's Cost
-R Ancient Craving
-U Barter in Blood
-R Black Market
-C Blood Bairn
-R Butcher of Malakir
-M Champion of Stray Souls
-U Diabolic Servitude
-R Doomwake Giant
-C Dreadbringer Lampads
-R Eater of Hope
-R Extractor Demon
-U Fallen Ideal
-R Fate Unraveler
-R Gild
-C Grave Peril
-R Nighthowler
-R Phyrexian Arena
-R Phyrexian Plaguelord
-C Phyrexian Rager
-U Phyrexian Reclamation
-U Rise from the Grave
-C Seal of Doom
-R Sever the Bloodline
-U Shriekmaw
-R Underworld Connections
-U Victimize
-U Vow of Malice
-U Act of Aggression
-R Borderland Behemoth
-U Breath of Darigaaz
-R Chain Reaction
-R Charmbreaker Devils
-M Comet Storm
-U Curse of the Nightly Hunt
-R Desolation Giant
-U Desperate Ravings
-R Disaster Radius
-R Dragon Mage
-R Earthquake
-C Faithless Looting
-C Fall of the Hammer
-R Fumiko the Lowblood
-R Hamletback Goliath
-R Hammerfist Giant
-R Hostility
-R Hunted Dragon
-M Inferno Titan
-R Magma Giant
-R Magmaquake
-R Mizzium Mortars
-C Stinkdrinker Daredevil
-U Stoneshock Giant
-R Sunrise Sovereign
-R Taurean Mauler
-U Thundercloud Shaman
-R Urza's Rage
-U Vandalblast
-R Warstorm Surge
-R Word of Seizing
-U Acidic Slime
-R Arbor Colossus
-R Bane of Progress
-R Beastmaster Ascension
-R Caller of the Claw
-R Chameleon Colossus
-R Cloudthresher
-U Cobra Trap
-U Desert Twister
-C Elvish Visionary
-U Eternal Witness
-U Experiment One
-R Forgotten Ancient
-U Indrik Stomphowler
-R Kessig Cagebreakers
-C Kodama's Reach
-U Krosan Grip
-R Loaming Shaman
-C Mulch
-R Mycoloth
-U Noble Quarry
-R Ohran Viper
-U Overrun
-R Overwhelming Stampede
-U Patagia Viper
-C Primal Growth
-C Rampant Growth
-C Sakura-Tribe Elder
-C Satyr Wayfinder
-U Spider Spawning
-U Stingerfling Spider
-R Terastodon
-R Thelonite Hermit
-U Tribute to the Wild
-R Verdant Force
-C Viridian Emissary
-U Viridian Shaman
-R Viridian Zealot
-U Wall of Blossoms
-C Wood Elves
-C Coiling Oracle
-R Counterflux
-R Death Grasp
-M Epic Experiment
-R Etherium-Horn Sorcerer
-R Firemind's Foresight
-M Gisela, Blade of Goldnight
-C Goblin Electromancer
-U Golgari Charm
-C Grisly Salvage
-M Jarad, Golgari Lich Lord
-U Korozda Guildmage
-U Lorescale Coatl
-R Lotleth Troll
-R Melek, Izzet Paragon
-R Mystic Snake
-R Necromancer's Covenant
-M Prime Speaker Zegana
-R Prophetic Bolt
-U Putrefy
-R Steam Augury
-R Teysa, Envoy of Ghosts
-R Treasury Thrull
-U Trygon Predator
-U Underworld Coinsmith
-R Vulturous Zombie
-R Biomantic Mastery
-R Call the Skybreaker
-R Cold-Eyed Selkie
-C Snakeform
-U Wistful Selkie
-U Basalt Monolith
-R Bonehoard
-C Boros Cluestone
-C Boros Signet
-U Burnished Hart
-U Coldsteel Heart
-U Crystal Chimes
-U Darksteel Ingot
-U Dreamstone Hedron
-M Eldrazi Monument
-U Fellwar Stone
-C Golgari Signet
-C Izzet Signet
-U Lightning Greaves
-R Loxodon Warhammer
-U Mind Stone
-R Orochi Hatchery
-C Orzhov Cluestone
-C Orzhov Signet
-R Psychosis Crawler
-R Seer's Sundial
-U Simic Keyrune
-C Simic Signet
-U Skullclamp
-U Sol Ring
-R Solemn Simulacrum
-R Staff of Nin
-U Swiftfoot Boots
-R Sword of Vengeance
-R Urza's Incubator
-C Wayfarer's Bauble
-U Worn Powerstone
-R Ancient Amphitheater
-C Barren Moor
-U Blasted Landscape
-C Boros Garrison
-C Boros Guildgate
-C Command Tower
-C Drifting Meadow
-C Evolving Wilds
-C Forgotten Cave
-U Ghost Quarter
-C Golgari Guildgate
-C Golgari Rot Farm
-R Grim Backwoods
-R High Market
-C Izzet Boilerworks
-C Izzet Guildgate
-C Jungle Hollow
-U Llanowar Reborn
-R Mosswort Bridge
-U New Benalia
-U Novijen, Heart of Progress
-R Oran-Rief, the Vastwood
-C Orzhov Basilica
-C Orzhov Guildgate
-C Polluted Mire
-U Reliquary Tower
-U Rogue's Passage
-C Scoured Barrens
-C Secluded Steppe
-C Simic Growth Chamber
-C Simic Guildgate
-C Slippery Karst
-C Smoldering Crater
-R Spinerock Knoll
-C Swiftwater Cliffs
-U Tainted Field
-U Tainted Wood
-U Temple of the False God
-C Terramorphic Expanse
-C Thornwood Falls
-U Vivid Crag
-U Vivid Creek
-U Vivid Grove
-U Vivid Marsh
-U Vivid Meadow
-C Wind-Scarred Crag
-U Zoetic Cavern
-L Plains
-L Plains
-L Plains
-L Plains
-L Island
-L Island
-L Island
-L Island
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Forest
-L Forest
-L Forest
-L Forest
+1 R Bastion Protector
+2 R Dawnbreak Reclaimer
+3 R Grasp of Fate
+4 U Herald of the Host
+5 R Kalemne's Captain
+6 U Oreskos Explorer
+7 R Righteous Confluence
+8 R Shielded by Faith
+9 R AEthersnatch
+10 U Broodbirth Viper
+11 R Gigantoplasm
+12 U Illusory Ambusher
+13 U Mirror Match
+14 R Mystic Confluence
+15 R Synthetic Destiny
+16 U Banshee of the Dread Choir
+17 U Corpse Augur
+18 R Daxos's Torment
+19 R Deadly Tempest
+20 R Dread Summons
+21 R Scourge of Nel Toth
+22 U Thief of Blood
+23 R Wretched Confluence
+24 R Awaken the Sky Tyrant
+25 R Dream Pillager
+26 R Fiery Confluence
+27 R Magus of the Wheel
+28 U Meteor Blast
+29 R Mizzix's Mastery
+30 U Rite of the Raging Storm
+31 U Warchief Giant
+32 R Arachnogenesis
+33 R Bloodspore Thrinax
+34 U Caller of the Pack
+35 R Centaur Vinecrasher
+36 R Ezuri's Predation
+37 U Great Oak Guardian
+38 R Pathbreaker Ibex
+39 U Skullwinder
+40 R Verdant Confluence
+41 M Anya, Merciless Angel
+42 M Arjun, the Shifting Flame
+43 M Daxos the Returned
+44 M Ezuri, Claw of Progress
+45 M Kalemne, Disciple of Iroas
+46 M Karlov of the Ghost Council
+47 M Kaseto, Orochi Archmage
+48 M Mazirek, Kraul Death Priest
+49 M Meren of Clan Nel Toth
+50 M Mizzix of the Izmagnus
+51 R Blade of Selves
+52 U Sandstone Oracle
+53 R Scytheclaw
+54 R Seal of the Guildpact
+55 C Thought Vessel
+56 R Command Beacon
+57 R Ajani's Chosen
+58 M Angel of Serenity
+59 R Arbiter of Knollridge
+60 U Aura of Silence
+61 U Banishing Light
+62 C Cage of Hands
+63 R Celestial Ancient
+64 R Celestial Archon
+65 U Crib Swap
+66 U Dawn to Dusk
+67 C Dawnglare Invoker
+68 R Dictate of Heliod
+69 C Faith's Fetters
+70 U Ghostblade Eidolon
+71 R Jareth, Leonine Titan
+72 R Karmic Justice
+73 C Kor Sanctifiers
+74 R Marshal's Anthem
+75 R Mesa Enchantress
+76 U Monk Idealist
+77 R Open the Vaults
+78 C Orim's Thunder
+79 C Seal of Cleansing
+80 R Sigil of the Empty Throne
+81 R Silent Sentinel
+82 M Sun Titan
+83 R Victory's Herald
+84 U Vow of Duty
+85 U AEtherize
+86 R Bident of Thassa
+87 R Blatant Thievery
+88 R Blue Sun's Zenith
+89 U Blustersquall
+90 C Brainstorm
+91 R Day of the Dragons
+92 U Dominate
+93 C Echoing Truth
+94 U Fact or Fiction
+95 R Jace's Archivist
+96 R Lone Revenant
+97 U Mulldrifter
+98 U Mystic Retrieval
+99 C Ninja of the Deep Hours
+100 U Plaxmanta
+101 C Preordain
+102 U Rapid Hybridization
+103 R Reins of Power
+104 C Repeal
+105 R Rite of Replication
+106 U Sleep
+107 R Stolen Goods
+108 R Stroke of Genius
+109 R Talrand, Sky Summoner
+110 R Thought Reflection
+111 U Windfall
+112 C Altar's Reap
+113 U Ambition's Cost
+114 R Ancient Craving
+115 U Barter in Blood
+116 R Black Market
+117 C Blood Bairn
+118 R Butcher of Malakir
+119 M Champion of Stray Souls
+120 U Diabolic Servitude
+121 R Doomwake Giant
+122 C Dreadbringer Lampads
+123 R Eater of Hope
+124 R Extractor Demon
+125 U Fallen Ideal
+126 R Fate Unraveler
+127 R Gild
+128 C Grave Peril
+129 R Nighthowler
+130 R Phyrexian Arena
+131 R Phyrexian Plaguelord
+132 C Phyrexian Rager
+133 U Phyrexian Reclamation
+134 U Rise from the Grave
+135 C Seal of Doom
+136 R Sever the Bloodline
+137 U Shriekmaw
+138 R Underworld Connections
+139 U Victimize
+140 U Vow of Malice
+141 U Act of Aggression
+142 R Borderland Behemoth
+143 U Breath of Darigaaz
+144 R Chain Reaction
+145 R Charmbreaker Devils
+146 M Comet Storm
+147 U Curse of the Nightly Hunt
+148 R Desolation Giant
+149 U Desperate Ravings
+150 R Disaster Radius
+151 R Dragon Mage
+152 R Earthquake
+153 C Faithless Looting
+154 C Fall of the Hammer
+155 R Fumiko the Lowblood
+156 R Hamletback Goliath
+157 R Hammerfist Giant
+158 R Hostility
+159 R Hunted Dragon
+160 M Inferno Titan
+161 R Magma Giant
+162 R Magmaquake
+163 R Mizzium Mortars
+164 C Stinkdrinker Daredevil
+165 U Stoneshock Giant
+166 R Sunrise Sovereign
+167 R Taurean Mauler
+168 U Thundercloud Shaman
+169 R Urza's Rage
+170 U Vandalblast
+171 R Warstorm Surge
+172 R Word of Seizing
+173 U Acidic Slime
+174 R Arbor Colossus
+175 R Bane of Progress
+176 R Beastmaster Ascension
+177 R Caller of the Claw
+178 R Chameleon Colossus
+179 R Cloudthresher
+180 U Cobra Trap
+181 U Desert Twister
+182 C Elvish Visionary
+183 U Eternal Witness
+184 U Experiment One
+185 R Forgotten Ancient
+186 U Indrik Stomphowler
+187 R Kessig Cagebreakers
+188 C Kodama's Reach
+189 U Krosan Grip
+190 R Loaming Shaman
+191 C Mulch
+192 R Mycoloth
+193 U Noble Quarry
+194 R Ohran Viper
+195 U Overrun
+196 R Overwhelming Stampede
+197 U Patagia Viper
+198 C Primal Growth
+199 C Rampant Growth
+200 C Sakura-Tribe Elder
+201 C Satyr Wayfinder
+202 U Spider Spawning
+203 U Stingerfling Spider
+204 R Terastodon
+205 R Thelonite Hermit
+206 U Tribute to the Wild
+207 R Verdant Force
+208 C Viridian Emissary
+209 U Viridian Shaman
+210 R Viridian Zealot
+211 U Wall of Blossoms
+212 C Wood Elves
+213 C Coiling Oracle
+214 R Counterflux
+215 R Death Grasp
+216 M Epic Experiment
+217 R Etherium-Horn Sorcerer
+218 R Firemind's Foresight
+219 M Gisela, Blade of Goldnight
+220 C Goblin Electromancer
+221 U Golgari Charm
+222 C Grisly Salvage
+223 M Jarad, Golgari Lich Lord
+224 U Korozda Guildmage
+225 U Lorescale Coatl
+226 R Lotleth Troll
+227 R Melek, Izzet Paragon
+228 R Mystic Snake
+229 R Necromancer's Covenant
+230 M Prime Speaker Zegana
+231 R Prophetic Bolt
+232 U Putrefy
+233 R Steam Augury
+234 R Teysa, Envoy of Ghosts
+235 R Treasury Thrull
+236 U Trygon Predator
+237 U Underworld Coinsmith
+238 R Vulturous Zombie
+239 R Biomantic Mastery
+240 R Call the Skybreaker
+241 R Cold-Eyed Selkie
+242 C Snakeform
+243 U Wistful Selkie
+244 U Basalt Monolith
+245 R Bonehoard
+246 C Boros Cluestone
+247 C Boros Signet
+248 U Burnished Hart
+249 U Coldsteel Heart
+250 U Crystal Chimes
+251 U Darksteel Ingot
+252 U Dreamstone Hedron
+253 M Eldrazi Monument
+254 U Fellwar Stone
+255 C Golgari Signet
+256 C Izzet Signet
+257 U Lightning Greaves
+258 R Loxodon Warhammer
+259 U Mind Stone
+260 R Orochi Hatchery
+261 C Orzhov Cluestone
+262 C Orzhov Signet
+263 R Psychosis Crawler
+264 R Seer's Sundial
+265 U Simic Keyrune
+266 C Simic Signet
+267 U Skullclamp
+268 U Sol Ring
+269 R Solemn Simulacrum
+270 R Staff of Nin
+271 U Swiftfoot Boots
+272 R Sword of Vengeance
+273 R Urza's Incubator
+274 C Wayfarer's Bauble
+275 U Worn Powerstone
+276 R Ancient Amphitheater
+277 C Barren Moor
+278 U Blasted Landscape
+279 C Boros Garrison
+280 C Boros Guildgate
+281 C Command Tower
+282 C Drifting Meadow
+283 C Evolving Wilds
+284 C Forgotten Cave
+285 U Ghost Quarter
+286 C Golgari Guildgate
+287 C Golgari Rot Farm
+288 R Grim Backwoods
+289 R High Market
+290 C Izzet Boilerworks
+291 C Izzet Guildgate
+292 C Jungle Hollow
+293 U Llanowar Reborn
+294 R Mosswort Bridge
+295 U New Benalia
+296 U Novijen, Heart of Progress
+297 R Oran-Rief, the Vastwood
+298 C Orzhov Basilica
+299 C Orzhov Guildgate
+300 C Polluted Mire
+301 U Reliquary Tower
+302 U Rogue's Passage
+303 C Scoured Barrens
+304 C Secluded Steppe
+305 C Simic Growth Chamber
+306 C Simic Guildgate
+307 C Slippery Karst
+308 C Smoldering Crater
+309 R Spinerock Knoll
+310 C Swiftwater Cliffs
+311 U Tainted Field
+312 U Tainted Wood
+313 U Temple of the False God
+314 C Terramorphic Expanse
+315 C Thornwood Falls
+316 U Vivid Crag
+317 U Vivid Creek
+318 U Vivid Grove
+319 U Vivid Marsh
+320 U Vivid Meadow
+321 C Wind-Scarred Crag
+322 U Zoetic Cavern
+323 L Plains
+323 L Plains
+323 L Plains
+323 L Plains
+329 L Island
+329 L Island
+329 L Island
+329 L Island
+332 L Swamp
+332 L Swamp
+332 L Swamp
+332 L Swamp
+335 L Mountain
+335 L Mountain
+335 L Mountain
+335 L Mountain
+340 L Forest
+340 L Forest
+340 L Forest
+340 L Forest

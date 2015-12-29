@@ -10,353 +10,353 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-R AEther Rift
-R Absorb
-U Addle
-C Aggressive Urge
-C Agonizing Demise
-R Alabaster Leech
-U Alloy Golem
-C Ancient Kavu
-C Ancient Spring
-R Andradite Leech
-U Angel of Mercy
-U Angelic Shield
-U Annihilate
-U Archaeological Dig
-C Ardent Soldier
-C Armadillo Cloak
-R Armored Guardian
-R Artifact Mutation
-U Assault // Battery
-R Atalya, Samite Master
-R Aura Mutation
-U Aura Shards
-U Backlash
-R Barrin's Spite
-C Barrin's Unmaking
-U Benalish Emissary
-U Benalish Heralds
-C Benalish Lancer
-C Benalish Trapper
-R Bend or Break
-R Bind
-R Blazing Specter
-R Blind Seer
-U Blinding Light
-U Bloodstone Cameo
-R Blurred Mongoose
-C Bog Initiate
-R Breaking Wave
-U Breath of Darigaaz
-R Callous Giant
-U Canopy Surge
-C Capashen Unicorn
-R Captain Sisay
-U Cauldron Dance
-U Chaotic Strike
-U Charging Troll
-U Chromatic Sphere
-U Cinder Shade
-R Coalition Victory
-U Coastal Tower
-R Collapsing Borders
-R Collective Restraint
-U Cremate
-C Crimson Acolyte
-U Crosis's Attendant
-R Crosis, the Purger
-C Crown of Flames
-R Crusading Knight
-R Crypt Angel
-R Crystal Spray
-C Cursed Flesh
-U Darigaaz's Attendant
-R Darigaaz, the Igniter
-R Death or Glory
-U Defiling Tears
-R Desperate Research
-R Devouring Strossus
-C Dismantling Blow
-U Disrupt
-R Distorting Wake
-R Divine Presence
-R Do or Die
-U Drake-Skull Cameo
-C Dream Thrush
-U Dredge
-U Dromar's Attendant
-R Dromar, the Banisher
-R Dueling Grounds
-C Duskwalker
-U Elfhame Palace
-U Elfhame Sanctuary
-R Elvish Champion
-R Empress Galina
-U Essence Leak
-C Exclude
-C Exotic Curse
-C Explosive Growth
-U Fact or Fiction
-C Faerie Squadron
-C Fertile Ground
-R Fight or Flight
-U Firebrand Ranger
-U Fires of Yavimaya
-C Firescreamer
-L Forest
-L Forest
-L Forest
-L Forest
-C Frenzied Tilling
-C Galina's Knight
-C Geothermal Crevice
-R Ghitu Fire
-C Glimmering Angel
-R Global Ruin
-U Goblin Spy
-U Goham Djinn
-U Halam Djinn
-R Hanna, Ship's Navigator
-C Harrow
-R Harsh Judgment
-U Hate Weaver
-U Heroes' Reunion
-C Holy Day
-C Hooded Kavu
-U Horned Cheetah
-U Hunting Kavu
-C Hypnotic Cloud
-C Irrigation Ditch
-L Island
-L Island
-L Island
-L Island
-R Jade Leech
-R Juntu Stakes
-R Kangee, Aerie Keeper
-C Kavu Aggressor
-U Kavu Chameleon
-C Kavu Climber
-R Kavu Lair
-R Kavu Monarch
-U Kavu Runner
-C Kavu Scout
-R Kavu Titan
-R Keldon Necropolis
-U Liberate
-U Lightning Dart
-C Llanowar Cavalry
-C Llanowar Elite
-C Llanowar Knight
-C Llanowar Vanguard
-R Loafing Giant
-U Lobotomy
-R Lotus Guardian
-R Mages' Contest
-R Mana Maze
-C Maniacal Rage
-U Manipulate Fate
-R Marauding Knight
-R Metathran Aerostat
-U Metathran Transport
-C Metathran Zombie
-R Meteor Storm
-U Might Weaver
-R Molimo, Maro-Sorcerer
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-C Mourning
-C Nightscape Apprentice
-R Nightscape Master
-R Noble Panther
-C Nomadic Elf
-R Obliterate
-C Obsidian Acolyte
-C Opt
-U Ordered Migration
-C Orim's Touch
-R Overabundance
-C Overload
-U Pain // Suffering
-C Phantasmal Terrain
-R Phyrexian Altar
-C Phyrexian Battleflies
-R Phyrexian Delver
-R Phyrexian Infiltrator
-R Phyrexian Lens
-C Phyrexian Reaper
-C Phyrexian Slayer
-C Pincer Spider
-U Plague Spitter
-C Plague Spores
-L Plains
-L Plains
-L Plains
-L Plains
-R Planar Portal
-U Pledge of Loyalty
-C Pouncing Kavu
-U Power Armor
-C Prison Barricade
-C Probe
-C Prohibit
-C Protective Sphere
-R Psychic Battle
-U Pulse of Llanowar
-R Pure Reflection
-R Pyre Zombie
-C Quirion Elves
-C Quirion Sentinel
-C Quirion Trailblazer
-U Rage Weaver
-R Raging Kavu
-U Rainbow Crow
-C Rampant Elephant
-C Ravenous Rats
-C Razorfoot Griffin
-R Reckless Assault
-U Reckless Spite
-C Recoil
-C Recover
-C Repulse
-R Restock
-C Restrain
-C Reviving Dose
-U Reviving Vapors
-U Rewards of Diversity
-R Reya Dawnbringer
-U Riptide Crab
-U Rith's Attendant
-R Rith, the Awakener
-C Rogue Kavu
-U Rooting Kavu
-R Rout
-R Ruby Leech
-U Ruham Djinn
-R Sabertooth Nishoba
-U Salt Marsh
-U Samite Archer
-U Samite Ministration
-R Sapphire Leech
-R Saproling Infestation
-R Saproling Symbiosis
-C Savage Offensive
-C Scarred Puma
-C Scavenged Weaponry
-C Scorching Lava
-U Scouting Trek
-U Searing Rays
-U Seashell Cameo
-U Seer's Vision
-C Serpentine Kavu
-C Shackles
-C Shimmering Wings
-U Shivan Emissary
-U Shivan Harvest
-U Shivan Oasis
-C Shivan Zombie
-C Shoreline Raider
-U Simoon
-U Skittish Kavu
-R Skizzik
-U Sky Weaver
-U Sleeper's Robe
-C Slimy Kavu
-U Slinking Serpent
-U Smoldering Tar
-C Soul Burn
-U Sparring Golem
-R Spinal Embrace
-U Spirit Weaver
-R Spirit of Resistance
-U Spite // Malice
-R Spreading Plague
-R Stalking Assassin
-U Stand // Deliver
-R Stand or Fall
-U Sterling Grove
-C Stormscape Apprentice
-R Stormscape Master
-C Strength of Unity
-C Stun
-U Sulam Djinn
-C Sulfur Vent
-C Sunscape Apprentice
-R Sunscape Master
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-U Sway of Illusion
-C Tainted Well
-U Tangle
-R Tectonic Instability
-U Teferi's Care
-R Teferi's Moat
-R Teferi's Response
-R Tek
-R Temporal Distortion
-R Thicket Elemental
-C Thornscape Apprentice
-R Thornscape Master
-C Thunderscape Apprentice
-R Thunderscape Master
-C Tidal Visionary
-U Tigereye Cameo
-C Tinder Farm
-U Tolarian Emissary
-C Tower Drake
-C Tranquility
-C Traveler's Cloak
-U Treefolk Healer
-U Trench Wurm
-U Treva's Attendant
-R Treva, the Renewer
-C Tribal Flames
-U Troll-Horn Cameo
-R Tsabo Tavoc
-R Tsabo's Assassin
-R Tsabo's Decree
-R Tsabo's Web
-C Turf Wound
-R Twilight's Call
-R Undermine
-U Urborg Drake
-U Urborg Emissary
-C Urborg Phantom
-U Urborg Shambler
-C Urborg Skeleton
-U Urborg Volcano
-R Urza's Filter
-R Urza's Rage
-R Utopia Tree
-R Verdeloth the Ancient
-U Verduran Emissary
-C Viashino Grappler
-U Vicious Kavu
-C Vigorous Charge
-R Vile Consumption
-U Vodalian Hypnotist
-C Vodalian Merchant
-C Vodalian Serpent
-C Vodalian Zombie
-R Void
-U Voracious Cobra
-U Wallop
-C Wandering Stream
-U Wash Out
-U Wax // Wane
-U Wayfaring Giant
-R Well-Laid Plans
-C Whip Silk
-C Wings of Hope
-R Winnow
-C Worldly Counsel
-C Yavimaya Barbarian
-U Yavimaya Kavu
-R Yawgmoth's Agenda
-U Zanam Djinn
-C Zap
+227 R AEther Rift
+226 R Absorb
+91 U Addle
+181 C Aggressive Urge
+92 C Agonizing Demise
+1 R Alabaster Leech
+297 U Alloy Golem
+136 C Ancient Kavu
+319 C Ancient Spring
+93 R Andradite Leech
+2 U Angel of Mercy
+228 U Angelic Shield
+94 U Annihilate
+320 U Archaeological Dig
+3 C Ardent Soldier
+229 C Armadillo Cloak
+230 R Armored Guardian
+231 R Artifact Mutation
+295 U Assault // Battery
+4 R Atalya, Samite Master
+232 R Aura Mutation
+233 U Aura Shards
+234 U Backlash
+235 R Barrin's Spite
+46 C Barrin's Unmaking
+5 U Benalish Emissary
+6 U Benalish Heralds
+7 C Benalish Lancer
+8 C Benalish Trapper
+137 R Bend or Break
+182 R Bind
+236 R Blazing Specter
+47 R Blind Seer
+9 U Blinding Light
+298 U Bloodstone Cameo
+183 R Blurred Mongoose
+95 C Bog Initiate
+48 R Breaking Wave
+138 U Breath of Darigaaz
+139 R Callous Giant
+184 U Canopy Surge
+10 C Capashen Unicorn
+237 R Captain Sisay
+238 U Cauldron Dance
+140 U Chaotic Strike
+239 U Charging Troll
+299 U Chromatic Sphere
+240 U Cinder Shade
+241 R Coalition Victory
+321 U Coastal Tower
+141 R Collapsing Borders
+49 R Collective Restraint
+96 U Cremate
+11 C Crimson Acolyte
+300 U Crosis's Attendant
+242 R Crosis, the Purger
+142 C Crown of Flames
+12 R Crusading Knight
+97 R Crypt Angel
+50 R Crystal Spray
+98 C Cursed Flesh
+301 U Darigaaz's Attendant
+243 R Darigaaz, the Igniter
+13 R Death or Glory
+99 U Defiling Tears
+100 R Desperate Research
+101 R Devouring Strossus
+14 C Dismantling Blow
+51 U Disrupt
+52 R Distorting Wake
+15 R Divine Presence
+102 R Do or Die
+302 U Drake-Skull Cameo
+53 C Dream Thrush
+103 U Dredge
+303 U Dromar's Attendant
+244 R Dromar, the Banisher
+245 R Dueling Grounds
+104 C Duskwalker
+322 U Elfhame Palace
+185 U Elfhame Sanctuary
+186 R Elvish Champion
+54 R Empress Galina
+55 U Essence Leak
+56 C Exclude
+105 C Exotic Curse
+187 C Explosive Growth
+57 U Fact or Fiction
+58 C Faerie Squadron
+188 C Fertile Ground
+16 R Fight or Flight
+143 U Firebrand Ranger
+246 U Fires of Yavimaya
+106 C Firescreamer
+347 L Forest
+347 L Forest
+347 L Forest
+347 L Forest
+247 C Frenzied Tilling
+248 C Galina's Knight
+323 C Geothermal Crevice
+144 R Ghitu Fire
+17 C Glimmering Angel
+18 R Global Ruin
+145 U Goblin Spy
+107 U Goham Djinn
+146 U Halam Djinn
+249 R Hanna, Ship's Navigator
+189 C Harrow
+19 R Harsh Judgment
+108 U Hate Weaver
+250 U Heroes' Reunion
+20 C Holy Day
+147 C Hooded Kavu
+251 U Horned Cheetah
+252 U Hunting Kavu
+109 C Hypnotic Cloud
+324 C Irrigation Ditch
+338 L Island
+338 L Island
+338 L Island
+338 L Island
+190 R Jade Leech
+304 R Juntu Stakes
+253 R Kangee, Aerie Keeper
+148 C Kavu Aggressor
+191 U Kavu Chameleon
+192 C Kavu Climber
+193 R Kavu Lair
+149 R Kavu Monarch
+150 U Kavu Runner
+151 C Kavu Scout
+194 R Kavu Titan
+325 R Keldon Necropolis
+21 U Liberate
+152 U Lightning Dart
+195 C Llanowar Cavalry
+196 C Llanowar Elite
+254 C Llanowar Knight
+197 C Llanowar Vanguard
+153 R Loafing Giant
+255 U Lobotomy
+305 R Lotus Guardian
+154 R Mages' Contest
+59 R Mana Maze
+155 C Maniacal Rage
+60 U Manipulate Fate
+110 R Marauding Knight
+61 R Metathran Aerostat
+62 U Metathran Transport
+63 C Metathran Zombie
+256 R Meteor Storm
+198 U Might Weaver
+199 R Molimo, Maro-Sorcerer
+343 L Mountain
+343 L Mountain
+343 L Mountain
+343 L Mountain
+111 C Mourning
+112 C Nightscape Apprentice
+113 R Nightscape Master
+257 R Noble Panther
+200 C Nomadic Elf
+156 R Obliterate
+22 C Obsidian Acolyte
+64 C Opt
+258 U Ordered Migration
+23 C Orim's Touch
+259 R Overabundance
+157 C Overload
+294 U Pain // Suffering
+65 C Phantasmal Terrain
+306 R Phyrexian Altar
+114 C Phyrexian Battleflies
+115 R Phyrexian Delver
+116 R Phyrexian Infiltrator
+307 R Phyrexian Lens
+117 C Phyrexian Reaper
+118 C Phyrexian Slayer
+201 C Pincer Spider
+119 U Plague Spitter
+260 C Plague Spores
+333 L Plains
+333 L Plains
+333 L Plains
+333 L Plains
+308 R Planar Portal
+24 U Pledge of Loyalty
+158 C Pouncing Kavu
+309 U Power Armor
+25 C Prison Barricade
+66 C Probe
+67 C Prohibit
+26 C Protective Sphere
+68 R Psychic Battle
+202 U Pulse of Llanowar
+27 R Pure Reflection
+261 R Pyre Zombie
+203 C Quirion Elves
+204 C Quirion Sentinel
+205 C Quirion Trailblazer
+159 U Rage Weaver
+262 R Raging Kavu
+69 U Rainbow Crow
+28 C Rampant Elephant
+120 C Ravenous Rats
+29 C Razorfoot Griffin
+263 R Reckless Assault
+121 U Reckless Spite
+264 C Recoil
+122 C Recover
+70 C Repulse
+206 R Restock
+30 C Restrain
+31 C Reviving Dose
+265 U Reviving Vapors
+32 U Rewards of Diversity
+33 R Reya Dawnbringer
+266 U Riptide Crab
+310 U Rith's Attendant
+267 R Rith, the Awakener
+160 C Rogue Kavu
+207 U Rooting Kavu
+34 R Rout
+161 R Ruby Leech
+35 U Ruham Djinn
+268 R Sabertooth Nishoba
+326 U Salt Marsh
+269 U Samite Archer
+36 U Samite Ministration
+71 R Sapphire Leech
+208 R Saproling Infestation
+209 R Saproling Symbiosis
+162 C Savage Offensive
+163 C Scarred Puma
+123 C Scavenged Weaponry
+164 C Scorching Lava
+210 U Scouting Trek
+165 U Searing Rays
+311 U Seashell Cameo
+270 U Seer's Vision
+211 C Serpentine Kavu
+37 C Shackles
+72 C Shimmering Wings
+166 U Shivan Emissary
+167 U Shivan Harvest
+327 U Shivan Oasis
+271 C Shivan Zombie
+73 C Shoreline Raider
+272 U Simoon
+168 U Skittish Kavu
+169 R Skizzik
+74 U Sky Weaver
+273 U Sleeper's Robe
+170 C Slimy Kavu
+274 U Slinking Serpent
+275 U Smoldering Tar
+124 C Soul Burn
+312 U Sparring Golem
+276 R Spinal Embrace
+39 U Spirit Weaver
+38 R Spirit of Resistance
+293 U Spite // Malice
+125 R Spreading Plague
+277 R Stalking Assassin
+292 U Stand // Deliver
+171 R Stand or Fall
+278 U Sterling Grove
+75 C Stormscape Apprentice
+76 R Stormscape Master
+40 C Strength of Unity
+172 C Stun
+212 U Sulam Djinn
+328 C Sulfur Vent
+41 C Sunscape Apprentice
+42 R Sunscape Master
+342 L Swamp
+342 L Swamp
+342 L Swamp
+342 L Swamp
+77 U Sway of Illusion
+126 C Tainted Well
+213 U Tangle
+173 R Tectonic Instability
+43 U Teferi's Care
+279 R Teferi's Moat
+78 R Teferi's Response
+313 R Tek
+79 R Temporal Distortion
+214 R Thicket Elemental
+215 C Thornscape Apprentice
+216 R Thornscape Master
+174 C Thunderscape Apprentice
+175 R Thunderscape Master
+80 C Tidal Visionary
+314 U Tigereye Cameo
+329 C Tinder Farm
+81 U Tolarian Emissary
+82 C Tower Drake
+217 C Tranquility
+83 C Traveler's Cloak
+218 U Treefolk Healer
+127 U Trench Wurm
+315 U Treva's Attendant
+280 R Treva, the Renewer
+176 C Tribal Flames
+316 U Troll-Horn Cameo
+281 R Tsabo Tavoc
+128 R Tsabo's Assassin
+129 R Tsabo's Decree
+317 R Tsabo's Web
+177 C Turf Wound
+130 R Twilight's Call
+282 R Undermine
+283 U Urborg Drake
+131 U Urborg Emissary
+132 C Urborg Phantom
+133 U Urborg Shambler
+134 C Urborg Skeleton
+330 U Urborg Volcano
+318 R Urza's Filter
+178 R Urza's Rage
+219 R Utopia Tree
+220 R Verdeloth the Ancient
+221 U Verduran Emissary
+179 C Viashino Grappler
+284 U Vicious Kavu
+222 C Vigorous Charge
+285 R Vile Consumption
+84 U Vodalian Hypnotist
+85 C Vodalian Merchant
+86 C Vodalian Serpent
+286 C Vodalian Zombie
+287 R Void
+288 U Voracious Cobra
+223 U Wallop
+224 C Wandering Stream
+87 U Wash Out
+296 U Wax // Wane
+44 U Wayfaring Giant
+88 R Well-Laid Plans
+225 C Whip Silk
+289 C Wings of Hope
+45 R Winnow
+89 C Worldly Counsel
+290 C Yavimaya Barbarian
+291 U Yavimaya Kavu
+135 R Yawgmoth's Agenda
+90 U Zanam Djinn
+180 C Zap

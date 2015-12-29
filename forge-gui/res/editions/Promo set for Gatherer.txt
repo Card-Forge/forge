@@ -7,30 +7,30 @@ Code2=MBP
 Type=Other
 
 [cards]
-S Arena
+1 S Arena
 R Avatar of Hope
 R Beast of Burden
 R Dirtcowl Wurm
 R False Prophet
 R Feral Throwback
 R Fungal Shambler
-S Giant Badger
+8 S Giant Badger
 R Glory
 R Helm of Kaldra
 R Laquatus's Champion
 R Lightning Dragon
-S Mana Crypt
+6 S Mana Crypt
 R Monstrous Hound
-S Nalathni Dragon
+3 S Nalathni Dragon
 R Overtaker
 R Questing Phelddagrif
 R Raging Kavu
 R Rathi Assassin
 R Revenant
 R Ryusei, the Falling Star
-S Sewers of Estark
+2 S Sewers of Estark
  Shield of Kaldra
 R Silent Specter
 R Soul Collector
 R Sword of Kaldra
-S Windseeker Centaur
+7 S Windseeker Centaur

@@ -5,91 +5,91 @@ Name=Duel Decks: Jace vs. Vraska
 Type=Duel_Decks
 
 [cards]
-M Jace, Architect of Thought
-U Chronomaton
-U Jace's Phantasm
-C Phantasmal Bear
-U AEther Figment
-C Crosstown Courier
-C Dream Stalker
-C Krovikan Mist
-U Merfolk Wayfinder
-C Sea Gate Oracle
-C Stealer of Secrets
-C AEther Adept
-C Archaeomancer
-U Phantasmal Dragon
-R Body Double
-C Leyline Phantom
-R Aeon Chronicler
-U Riftwing Cloudskate
-R Jace's Mindseeker
-C Errant Ephemeron
-C Thought Scour
-U Agoraphobia
-C Into the Roil
-C Memory Lapse
-C Prohibit
-U Remand
-C Claustrophobia
-C Griptide
-C Ray of Command
-U Control Magic
-U Summoner's Bane
-U Jace's Ingenuity
-R Future Sight
-R Spelltwine
-U Dread Statuary
-C Halimar Depths
-L Island
-L Island
-L Island
-L Island
-L Island
-M Vraska the Unseen
-C Pulse Tracker
-C Shadow Alley Denizen
-U Tavern Swindler
-U Wight of Precinct Six
-C Death-Hood Cobra
-C Gatecreeper Vine
-U River Boa
-R Vinelasher Kudzu
-C Putrid Leech
-C Sadistic Augermage
-C Slate Street Ruffian
-C Oran-Rief Recluse
-R Spawnwrithe
-C Stonefare Crocodile
-R Ohran Viper
-U Corpse Traders
-C Festerhide Boar
-C Mold Shambler
-C Highway Robber
-U Nekrataal
-R Reaper of the Wilds
-U Acidic Slime
-U Drooling Groodion
-C Tragic Slip
-C Hypnotic Cloud
-U Night's Whisper
-U Marsh Casualties
-U Treasured Find
-C Last Kiss
-C Stab Wound
-R Underworld Connections
-C Consume Strength
-C Grisly Spectacle
-C Golgari Guildgate
-U Rogue's Passage
-U Tainted Wood
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-L Forest
-L Forest
-L Forest
-L Forest
-L Forest
+1 M Jace, Architect of Thought
+2 U Chronomaton
+3 U Jace's Phantasm
+4 C Phantasmal Bear
+5 U AEther Figment
+6 C Crosstown Courier
+7 C Dream Stalker
+8 C Krovikan Mist
+9 U Merfolk Wayfinder
+10 C Sea Gate Oracle
+11 C Stealer of Secrets
+12 C AEther Adept
+13 C Archaeomancer
+14 U Phantasmal Dragon
+15 R Body Double
+16 C Leyline Phantom
+17 R Aeon Chronicler
+18 U Riftwing Cloudskate
+19 R Jace's Mindseeker
+20 C Errant Ephemeron
+21 C Thought Scour
+22 U Agoraphobia
+23 C Into the Roil
+24 C Memory Lapse
+25 C Prohibit
+26 U Remand
+27 C Claustrophobia
+28 C Griptide
+29 C Ray of Command
+30 U Control Magic
+31 U Summoner's Bane
+32 U Jace's Ingenuity
+33 R Future Sight
+34 R Spelltwine
+35 U Dread Statuary
+36 C Halimar Depths
+38 L Island
+38 L Island
+38 L Island
+38 L Island
+38 L Island
+42 M Vraska the Unseen
+43 C Pulse Tracker
+44 C Shadow Alley Denizen
+45 U Tavern Swindler
+46 U Wight of Precinct Six
+47 C Death-Hood Cobra
+48 C Gatecreeper Vine
+49 U River Boa
+50 R Vinelasher Kudzu
+51 C Putrid Leech
+52 C Sadistic Augermage
+53 C Slate Street Ruffian
+54 C Oran-Rief Recluse
+55 R Spawnwrithe
+56 C Stonefare Crocodile
+57 R Ohran Viper
+58 U Corpse Traders
+59 C Festerhide Boar
+60 C Mold Shambler
+61 C Highway Robber
+62 U Nekrataal
+63 R Reaper of the Wilds
+64 U Acidic Slime
+65 U Drooling Groodion
+66 C Tragic Slip
+67 C Hypnotic Cloud
+68 U Night's Whisper
+69 U Marsh Casualties
+70 U Treasured Find
+71 C Last Kiss
+72 C Stab Wound
+73 R Underworld Connections
+74 C Consume Strength
+75 C Grisly Spectacle
+76 C Golgari Guildgate
+77 U Rogue's Passage
+78 U Tainted Wood
+83 L Swamp
+83 L Swamp
+83 L Swamp
+83 L Swamp
+83 L Swamp
+84 L Forest
+84 L Forest
+84 L Forest
+84 L Forest
+84 L Forest

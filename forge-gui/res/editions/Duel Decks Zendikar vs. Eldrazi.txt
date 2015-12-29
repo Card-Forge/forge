@@ -6,78 +6,78 @@ Code2=DDP
 Type=Duel_Decks
 
 [cards]
-M Oblivion Sower
-U Artisan of Kozilek
-R It That Betrays
-C Ulamog's Crusher
-C Bloodrite Invoker
-C Bloodthrone Vampire
-R Butcher of Malakir
-C Cadaver Imp
-C Consume the Meek
-U Corpsehatch
-C Dominator Drone
-C Heartstabber Mosquito
-C Induce Despair
-U Marsh Casualties
-U Pawn of Ulamog
-C Read the Bones
-U Smother
-U Vampire Nighthawk
-C Emrakul's Hatcher
-C Forked Bolt
-C Hellion Eruption
-R Magmaw
-C Torch Slinger
-U Forerunner of Slaughter
-U Mind Stone
-U Runed Servitor
-U Akoum Refuge
-U Eldrazi Temple
-U Rocky Tar Pit
-L Swamp
-L Swamp
-L Swamp
-L Mountain
-L Mountain
-L Mountain
-M Avenger of Zendikar
-U Affa Guard Hound
-C Caravan Escort
-U Kabira Vindicator
-C Knight of Cliffhaven
-C Makindi Griffin
-U Oust
-C Repel the Darkness
-C Sheer Drop
-U Beastbreaker of Bala Ged
-C Daggerback Basilisk
-U Frontier Guide
-U Graypelt Hunter
-C Grazing Gladehart
-C Groundswell
-C Harrow
-C Joraga Bard
-C Khalni Heart Expedition
-C Ondu Giant
-R Primal Command
-U Retreat to Kazandu
-R Scute Mob
-U Tajuru Archer
-C Territorial Baloth
-U Turntimber Basilisk
-C Wildheart Invoker
-R Veteran Warleader
-C Explorer's Scope
-R Seer's Sundial
-C Stonework Puma
-C Evolving Wilds
-U Graypelt Refuge
-R Stirring Wildwood
-C Turntimber Grove
-L Plains
-L Plains
-L Plains
-L Forest
-L Forest
-L Forest
+41 M Oblivion Sower
+42 U Artisan of Kozilek
+43 R It That Betrays
+44 C Ulamog's Crusher
+45 C Bloodrite Invoker
+46 C Bloodthrone Vampire
+47 R Butcher of Malakir
+48 C Cadaver Imp
+49 C Consume the Meek
+50 U Corpsehatch
+51 C Dominator Drone
+52 C Heartstabber Mosquito
+53 C Induce Despair
+54 U Marsh Casualties
+55 U Pawn of Ulamog
+56 C Read the Bones
+57 U Smother
+58 U Vampire Nighthawk
+59 C Emrakul's Hatcher
+60 C Forked Bolt
+61 C Hellion Eruption
+62 R Magmaw
+63 C Torch Slinger
+64 U Forerunner of Slaughter
+65 U Mind Stone
+66 U Runed Servitor
+67 U Akoum Refuge
+68 U Eldrazi Temple
+69 U Rocky Tar Pit
+71 L Swamp
+71 L Swamp
+71 L Swamp
+74 L Mountain
+74 L Mountain
+74 L Mountain
+1 M Avenger of Zendikar
+2 U Affa Guard Hound
+3 C Caravan Escort
+4 U Kabira Vindicator
+5 C Knight of Cliffhaven
+6 C Makindi Griffin
+7 U Oust
+8 C Repel the Darkness
+9 C Sheer Drop
+10 U Beastbreaker of Bala Ged
+11 C Daggerback Basilisk
+12 U Frontier Guide
+13 U Graypelt Hunter
+14 C Grazing Gladehart
+15 C Groundswell
+16 C Harrow
+17 C Joraga Bard
+18 C Khalni Heart Expedition
+19 C Ondu Giant
+20 R Primal Command
+21 U Retreat to Kazandu
+22 R Scute Mob
+23 U Tajuru Archer
+24 C Territorial Baloth
+25 U Turntimber Basilisk
+26 C Wildheart Invoker
+27 R Veteran Warleader
+28 C Explorer's Scope
+29 R Seer's Sundial
+30 C Stonework Puma
+31 C Evolving Wilds
+32 U Graypelt Refuge
+33 R Stirring Wildwood
+34 C Turntimber Grove
+35 L Plains
+35 L Plains
+35 L Plains
+38 L Forest
+38 L Forest
+38 L Forest
