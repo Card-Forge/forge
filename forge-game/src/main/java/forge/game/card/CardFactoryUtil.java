@@ -174,7 +174,7 @@ public class CardFactoryUtil {
     }
 
     public static AbilityStatic abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
-        final Cost cost = new Cost(manaCost, false);
+        final Cost cost = new Cost(manaCost, true);
 
         final AbilityStatic manifestUp = new AbilityStatic(sourceCard, cost, null) {
 
