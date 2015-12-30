@@ -28,6 +28,10 @@ public class ImageFetcher {
     public static void fetchImage(final CardView card, final String imageKey, final Callback callback) {
         FThreads.assertExecutedByEdt(true);
 
+        // Fake card (like the ante prompt) trying to be "fetched"
+        if (imageKey.length() < 2)
+            return;
+
         final String prefix = imageKey.substring(0, 2);
         final File destFile;
         final String urlToDownload;
