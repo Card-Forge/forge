@@ -791,9 +791,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
 
+            // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
+            boolean shouldReveal = (i == 0);
             Card c = null;
             if (sa.hasParam("AtRandom")) {
-                if (delayedReveal != null) {
+                if (shouldReveal && delayedReveal != null) {
                     decider.getController().reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
                 }
                 c = Aggregates.random(fetchList);
@@ -806,7 +808,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (changeNum > 1) { //indicate progress if multiple cards being chosen
                     title += " (" + (i + 1) + " / " + changeNum + ")";
                 }
-                c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, delayedReveal, title, !sa.hasParam("Mandatory"), decider);
+                c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, shouldReveal ? delayedReveal : null, title, !sa.hasParam("Mandatory"), decider);
             }
 
             if (c == null) {
