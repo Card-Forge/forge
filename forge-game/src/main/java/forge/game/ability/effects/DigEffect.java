@@ -193,6 +193,10 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     }
                     else {
+                        // If all the cards are valid choices, no need for a separate reveal dialog to the chooser.
+                        if (p == chooser) {
+                            delayedReveal = null;
+                        }
                         valid = top;
                         andOrCards = new CardCollection();
                     }
@@ -234,7 +238,6 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     }
                     else {
-                        int j = 0;
                         String prompt;
 
                         if (sa.hasParam("PrimaryPrompt")) {
@@ -252,11 +255,13 @@ public class DigEffect extends SpellAbilityEffect {
                         }
 
                         movedCards = new CardCollection();
-                        while (j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
+                        for (int i = 0; i < destZone1ChangeNum || (anyNumber && i < numToDig); i++) {
                             // let user get choice
                             Card chosen = null;
                             if (!valid.isEmpty()) {
-                                chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, anyNumber || optional, p);
+                                // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
+                                boolean shouldReveal = (i == 0);
+                                chosen = chooser.getController().chooseSingleEntityForEffect(valid, shouldReveal ? delayedReveal : null, sa, prompt, anyNumber || optional, p);
                             }
                             else {
                                 chooser.getController().notifyOfValue(sa, null, "No valid cards");
@@ -277,7 +282,6 @@ public class DigEffect extends SpellAbilityEffect {
                                     valid.removeAll((Collection<?>)andOrCards);
                                 }
                             }
-                            j++;
                         }
 
                         if (!changeValid.isEmpty()) {
