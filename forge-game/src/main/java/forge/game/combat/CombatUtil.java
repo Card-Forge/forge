@@ -694,9 +694,9 @@ public class CombatUtil {
 
         // Creatures that aren't allowed to block unless certain restrictions are met.
         for (final Card blocker : blockers) {
-            if (blocker.hasKeyword("CARDNAME can't attack or block alone.") && blockers.size() < 2) {
+            if (blockers.size() < 2 && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
                 return String.format("%s can't block alone.", blocker);
-            } else if (blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.") && blockers.size() < 3) {
+            } else if (blockers.size() < 3 && blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
                 return String.format("%s can't block unless at least two other creatures block.", blocker);
             } else if (blocker.hasKeyword("CARDNAME can't block unless a creature with greater power also blocks.")) {
                 boolean found = false;

@@ -602,29 +602,25 @@ public class PhaseHandler implements java.io.Serializable {
                 reachedSteadyState = true;
                 List<Card> remainingBlockers = CardLists.filterControlledBy(combat.getAllBlockers(), p);
                 for (Card c : remainingBlockers) {
-                    int minBlockers = Integer.MIN_VALUE;
-                    if (c.hasKeyword("CARDNAME can't attack or block alone.")) {
-                        minBlockers = 2;
-                    } else if (c.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
-                        minBlockers = 3;
-                    }
-                    if (remainingBlockers.size() < minBlockers) {
-                        combat.undoBlockingAssignment(c);
-                        reachedSteadyState = false;
+                    boolean removeBlocker = false;
+                    if (remainingBlockers.size() < 2 && c.hasKeyword("CARDNAME can't attack or block alone.")) {
+                        removeBlocker = true;
+                    } else if (remainingBlockers.size() < 3 && c.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
+                        removeBlocker = true;
                     } else if (c.hasKeyword("CARDNAME can't block unless a creature with greater power also blocks.")) {
-                        boolean found = false;
+                        removeBlocker = true;
                         int power = c.getNetPower();
                         // Note: This is O(n^2), but there shouldn't generally be many creatures with the above keyword.
                         for (Card c2 : remainingBlockers) {
                             if (c2.getNetPower() > power) {
-                                found = true;
+                                removeBlocker = false;
                                 break;
                             }
                         }
-                        if (!found) {
-                            combat.undoBlockingAssignment(c);
-                            reachedSteadyState = false;
-                        }
+                    }
+                    if (removeBlocker) {
+                        combat.undoBlockingAssignment(c);
+                        reachedSteadyState = false;
                     }
                 }
             } while (!reachedSteadyState);
