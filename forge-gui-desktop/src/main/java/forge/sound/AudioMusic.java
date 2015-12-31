@@ -57,7 +57,7 @@ public class AudioMusic implements IAudioMusic {
                         valid = false;
                     }
                 }
-            }).start();
+            }, "Audio Music").start();
         }
         catch (Exception e) {
             e.printStackTrace();
