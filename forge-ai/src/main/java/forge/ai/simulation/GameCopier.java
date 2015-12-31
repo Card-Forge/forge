@@ -226,7 +226,7 @@ public class GameCopier {
                 if (c.isManifested()) {
                     newCard.setManifested(true);
                     // TODO: Should be able to copy other abilities...
-                    if (isCreature) {
+                    if (isCreature && ! newCard.getManaCost().isNoCost()) {
                         newCard.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(newCard, newCard.getManaCost()));
                     }
                 }
