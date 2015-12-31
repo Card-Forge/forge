@@ -61,7 +61,8 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 } else {
                     String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : "Choose a number";
                     if (anyNumber) {
-                        chosen = p.getController().announceRequirements(sa, title, true);
+                        Integer value = p.getController().announceRequirements(sa, title, true);
+                        chosen = (value == null ? 0 : value);
                     } else {
                         chosen = p.getController().chooseNumber(sa, title, min, max);
                     }
