@@ -65,6 +65,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.MagicStack;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.trackable.Tracker;
@@ -412,13 +413,14 @@ public class Game {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
-        else {
-            CardCollection cards = new CardCollection();
-            for (final Player p : getPlayers()) {
-                cards.addAll(p.getZone(zone).getCards());
+        CardCollection cards = new CardCollection();
+        for (final Player p : getPlayers()) {
+            PlayerZone playerZone = p.getZone(zone);
+            if (playerZone != null) {
+                cards.addAll(playerZone.getCards());
             }
-            return cards;
         }
+        return cards;
     }
 
     public CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {

@@ -217,6 +217,10 @@ public class GameSimulator {
                     // top of the loop to ensure state effects are evaluated after the
                     // last resolved effect
                     game.getAction().checkStateEffects(false, allAffectedCards);
+                    // TODO: Why do we need to do this twice? Without it, testDarkDepthsCopy()
+                    // fails. And it seems to also affect the real game (i.e. copying depths won't
+                    // immediately trigger the Dark Depths effect until next game phase.)
+                    game.getAction().checkStateEffects(false, allAffectedCards);
                     // Add any triggers as a result of resolving the effect.
                     game.getStack().addAllTriggeredAbilitiesToStack();
                     // Continue until stack is empty.

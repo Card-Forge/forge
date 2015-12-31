@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.collect.Iterables;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -32,7 +33,18 @@ public class LegendaryRuleAi extends SpellAbilityAi {
         } else {
             // AI decision making - should AI compare damage and debuffs?
         }
-        
+
+        // TODO: Can this be made more generic somehow?
+        if (firstOption.getName().equals("Dark Depths")) {
+            Card best = firstOption;
+            for (Card c : options) {
+                if (c.getCounters(CounterType.ICE) < best.getCounters(CounterType.ICE)) {
+                    best = c;
+                }
+            }
+            return best;
+        }
+
         return firstOption;
     }
 

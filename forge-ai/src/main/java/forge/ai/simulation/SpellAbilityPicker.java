@@ -39,7 +39,8 @@ public class SpellAbilityPicker {
             printOutput = true;
         }
         print("---- choose ability  (phase = " +  game.getPhaseHandler().getPhase() + ")");
-        
+        long startTime = System.currentTimeMillis();
+
         List<SpellAbility> candidateSAs = new ArrayList<>();
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
@@ -87,7 +88,8 @@ public class SpellAbilityPicker {
             bestSa = null;
         }
 
-        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue);
+        long execTime = System.currentTimeMillis() - startTime;
+        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue.summonSickValue + " TIME: " + execTime);
         this.bestScore = bestSaValue;
         return bestSa;
     }

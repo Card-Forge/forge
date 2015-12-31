@@ -19,6 +19,7 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -30,7 +31,7 @@ import forge.model.FModel;
 
 public class GameSimulatorTest extends TestCase {
     private static boolean initialized = false;
-    
+
     private Game initAndCreateGame() {
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
@@ -61,6 +62,20 @@ public class GameSimulatorTest extends TestCase {
         }
         return null;
     }
+    
+    private String gameStateToString(Game game) {
+        StringBuilder sb = new StringBuilder();
+        for (ZoneType zone : ZoneType.values()) {
+            CardCollectionView cards = game.getCardsIn(zone);
+            if (!cards.isEmpty()) {
+                sb.append("Zone ").append(zone.name()).append(":\n");
+                for (Card c : game.getCardsIn(zone)) {
+                    sb.append("  ").append(c).append("\n");
+                }
+            }
+        }
+        return sb.toString();
+    }
 
     private SpellAbility findSAWithPrefix(Card c, String prefix) {
         return findSAWithPrefix(c.getSpellAbilities(), prefix);
@@ -89,7 +104,6 @@ public class GameSimulatorTest extends TestCase {
     private Card addCard(String name, Player p) {
         return addCardToZone(name, p, ZoneType.Battlefield);
     }
-    
 
     public void testActivateAbilityTriggers() {
         Game game = initAndCreateGame();
@@ -490,5 +504,31 @@ public class GameSimulatorTest extends TestCase {
         Game copy = copier.makeCopy();
         Card bearCopy = findCardWithName(copy, bearCardName);
         assertEquals(3, bearCopy.getNetToughness());
+    }
+
+    public void testDarkDepthsCopy() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard("Swamp", p);
+        addCard("Swamp", p);
+        Card depths = addCard("Dark Depths", p);
+        depths.addCounter(CounterType.ICE, 10, false);
+        Card thespian = addCard("Thespian's Stage", p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        assertTrue(depths.hasCounters());
+        
+        SpellAbility sa = findSAWithPrefix(thespian, "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
+        assertNotNull(sa);
+        sa.getTargets().add(depths);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(sa);
+        Game simGame = sim.getSimulatedGameState();
+
+        String strSimGame = gameStateToString(simGame);
+        assertNull(strSimGame, findCardWithName(simGame, "Dark Depths"));
+        assertNull(strSimGame, findCardWithName(simGame, "Thespian's Stage"));
+        assertNotNull(strSimGame, findCardWithName(simGame, "Marit Lage"));
     }
 }
