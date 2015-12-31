@@ -690,17 +690,19 @@ public class CombatUtil {
                     }
                 }
             }
+        }
 
-            // Creatures that aren't allowed to block unless certain restrictions are met.
-            if (blocker.hasKeyword("CARDNAME can't attack or block alone.") && defendersArmy.size() < 2) {
+        // Creatures that aren't allowed to block unless certain restrictions are met.
+        for (final Card blocker : blockers) {
+            if (blocker.hasKeyword("CARDNAME can't attack or block alone.") && blockers.size() < 2) {
                 return String.format("%s can't block alone.", blocker);
-            } else if (blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.") && defendersArmy.size() < 3) {
+            } else if (blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.") && blockers.size() < 3) {
                 return String.format("%s can't block unless at least two other creatures block.", blocker);
             } else if (blocker.hasKeyword("CARDNAME can't block unless a creature with greater power also blocks.")) {
                 boolean found = false;
                 int power = blocker.getNetPower();
                 // Note: This is O(n^2), but there shouldn't generally be many creatures with the above keyword.
-                for (Card blocker2 : defendersArmy) {
+                for (Card blocker2 : blockers) {
                     if (blocker2.getNetPower() > power) {
                         found = true;
                         break;
