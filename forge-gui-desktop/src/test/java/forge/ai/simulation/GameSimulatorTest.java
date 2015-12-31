@@ -390,7 +390,33 @@ public class GameSimulatorTest extends TestCase {
         Card manifestedCreatureCopy = findCardWithName(copy, "");
         assertNull(findSAWithPrefix(manifestedCreatureCopy, "Unmanifest"));
     }
-    
+
+    public void testManifest3() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard("Plains", p);
+        addCard("Plains", p);
+        Card soulSummons = addCardToZone("Soul Summons", p, ZoneType.Hand);
+        addCardToZone("Dryad Arbor", p, ZoneType.Library);
+        
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
+        
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(manifestSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card manifestedCreature = findCardWithName(simGame, "");
+        assertNotNull(manifestedCreature);
+        assertNull(findSAWithPrefix(manifestedCreature, "Unmanifest"));
+
+        GameCopier copier = new GameCopier(simGame);
+        Game copy = copier.makeCopy();
+        Card manifestedCreatureCopy = findCardWithName(copy, "");
+        assertNull(findSAWithPrefix(manifestedCreatureCopy, "Unmanifest"));
+    }
+
     public void testTypeOfPermanentChanging() {
         String sarkhanCardName = "Sarkhan, the Dragonspeaker";
         Game game = initAndCreateGame();

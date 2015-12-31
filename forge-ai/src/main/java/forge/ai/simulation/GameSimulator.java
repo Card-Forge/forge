@@ -54,7 +54,7 @@ public class GameSimulator {
             eval.getScoreForGameState(origGame, origAiPlayer);
             // Print debug info.
             printDiff(origLines, simLines);
-            throw new RuntimeException("Game copy error");
+            throw new RuntimeException("Game copy error. See diff output above for details.");
         }
         eval.setDebugging(false);
 
