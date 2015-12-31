@@ -594,12 +594,40 @@ public class PhaseHandler implements java.io.Serializable {
                 }
             }
 
-            List<Card> remainingBlockers = CardLists.filterControlledBy(combat.getAllBlockers(), p);
-            for (Card c : remainingBlockers) {
-                if (remainingBlockers.size() < 2 && c.hasKeyword("CARDNAME can't attack or block alone.")) {
-                    combat.undoBlockingAssignment(c);
+            // We may need to do multiple iterations removing blockers, since removing one may invalidate
+            // others. The loop below is structured so that if no blockers were removed, no extra passes
+            // are needed.
+            boolean reachedSteadyState;
+            do {
+                reachedSteadyState = true;
+                List<Card> remainingBlockers = CardLists.filterControlledBy(combat.getAllBlockers(), p);
+                for (Card c : remainingBlockers) {
+                    int minBlockers = Integer.MIN_VALUE;
+                    if (c.hasKeyword("CARDNAME can't attack or block alone.")) {
+                        minBlockers = 2;
+                    } else if (c.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
+                        minBlockers = 3;
+                    }
+                    if (remainingBlockers.size() < minBlockers) {
+                        combat.undoBlockingAssignment(c);
+                        reachedSteadyState = false;
+                    } else if (c.hasKeyword("CARDNAME can't block unless a creature with greater power also blocks.")) {
+                        boolean found = false;
+                        int power = c.getNetPower();
+                        // Note: This is O(n^2), but there shouldn't generally be many creatures with the above keyword.
+                        for (Card c2 : remainingBlockers) {
+                            if (c2.getNetPower() > power) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            combat.undoBlockingAssignment(c);
+                            reachedSteadyState = false;
+                        }
+                    }
                 }
-            }
+            } while (!reachedSteadyState);
 
             // Player is done declaring blockers - redraw UI at this point
 

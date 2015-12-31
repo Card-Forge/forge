@@ -10434,6 +10434,7 @@ forge-gui/res/cardsfolder/o/ojutais_summons.txt -text
 forge-gui/res/cardsfolder/o/okiba_gang_shinobi.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/okina_nightwatch.txt -text
 forge-gui/res/cardsfolder/o/okina_temple_to_the_grandfathers.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/okk.txt -text
 forge-gui/res/cardsfolder/o/old_ghastbark.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/old_man_of_the_sea.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/olivia_voldaren.txt -text
@@ -10527,6 +10528,7 @@ forge-gui/res/cardsfolder/o/orcish_bloodpainter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orcish_cannonade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orcish_cannoneers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orcish_captain.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/orcish_conscripts.txt -text
 forge-gui/res/cardsfolder/o/orcish_farmer.txt -text
 forge-gui/res/cardsfolder/o/orcish_healer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/orcish_librarian.txt -text
