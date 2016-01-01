@@ -24,6 +24,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -180,23 +181,51 @@ public class GameCopier {
             // TODO: Verify that the above relationships are preserved bi-directionally or not.
         }
     }
-
-    private void addCard(Game newGame, ZoneType zone, Card c) {
-        Player owner = playerMap.get(c.getOwner());
-        Card newCard = null;
+    
+    private static final boolean USE_FROM_PAPER_CARD = true;
+    private Card createCardCopy(Game newGame, Player newOwner, Card c) {
         if (c.isToken()) {
             String tokenStr = new CardFactory.TokenInfo(c).toString();
             // TODO: Use a version of the API that doesn't return a list (i.e. these shouldn't be affected
             // by doubling season, etc).
-            newCard = CardFactory.makeToken(CardFactory.TokenInfo.fromString(tokenStr), owner).get(0);
-        } else {
-            newCard = Card.fromPaperCard(c.getPaperCard(), owner);
-            // TODO: The above is very expensive and accounts for the vast majority of GameCopier execution time.
-            // The issue is that it requires parsing the original card from scratch from the paper card. We should
-            // improve the copier to accurately copy the card from its actual state, so that the paper card shouldn't
-            // be needed. Then, we can construct the card via:
-            //  newCard = new Card(newGame.nextCardId(), newGame);
+            return CardFactory.makeToken(CardFactory.TokenInfo.fromString(tokenStr), newOwner).get(0);
         }
+
+        if (USE_FROM_PAPER_CARD) {
+            return Card.fromPaperCard(c.getPaperCard(), newOwner);
+        }
+
+        // TODO: The above is very expensive and accounts for the vast majority of GameCopier execution time.
+        // The issue is that it requires parsing the original card from scratch from the paper card. We should
+        // improve the copier to accurately copy the card from its actual state, so that the paper card shouldn't
+        // be needed. Once the below code accurately copies the card, remove the USE_FROM_PAPER_CARD code path.
+        Card newCard = new Card(newGame.nextCardId(), c.getPaperCard(), newGame);
+        newCard.setOwner(newOwner);
+        newCard.setName(c.getName());
+        for (String type : c.getType()) {
+            newCard.addType(type);
+        }
+        for (SpellAbility sa : c.getSpellAbilities()) {
+            SpellAbility saCopy;
+
+            if (sa instanceof AbilityActivated) {
+                saCopy = ((AbilityActivated)sa).getCopy();
+            } else {
+                saCopy = sa.copy();
+            }
+            if (saCopy != null) {
+                saCopy.setHostCard(newCard);
+                newCard.addSpellAbility(saCopy);
+            } else {
+                System.err.println(sa.toString());
+            }
+        }
+        return newCard;
+    }
+
+    private void addCard(Game newGame, ZoneType zone, Card c) {
+        final Player owner = playerMap.get(c.getOwner());
+        final Card newCard = createCardCopy(newGame, owner, c);
         cardMap.put(c, newCard);
 
         Player zoneOwner = owner;
