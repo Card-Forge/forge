@@ -1206,6 +1206,12 @@ public class CardFactoryUtil {
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
             final Card topCard = cc.getCardsIn(ZoneType.Library).getFirst();
+            return doXMath(topCard == null ? 0 : topCard.getCMC(), m, c);
+        }
+        
+        //Count$TopOfLibraryEachFaceCMC - this version accounts for each of the two split card faces individually
+        if (sq[0].contains("TopOfLibraryEachFaceCMC")) {
+            final Card topCard = cc.getCardsIn(ZoneType.Library).getFirst();
 
             if (topCard == null) {
                 return 0;
