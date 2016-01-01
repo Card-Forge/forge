@@ -47,6 +47,7 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.card.Card.SplitCMCMode;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -1205,7 +1206,21 @@ public class CardFactoryUtil {
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
             final Card topCard = cc.getCardsIn(ZoneType.Library).getFirst();
-            return doXMath(topCard == null ? 0 : topCard.getCMC(), m, c);
+
+            if (topCard == null) {
+                return 0;
+            }
+
+            if (topCard.isSplitCard()) {
+                // encode two CMC values so they can be processed individually
+                // TODO: devise a better mechanism for this?
+                int cmcLeft = doXMath(topCard.getCMC(SplitCMCMode.LeftSplitCMC), m, c);
+                int cmcRight = doXMath(topCard.getCMC(SplitCMCMode.RightSplitCMC), m, c);
+                int dualCMC = cmcLeft + Card.SPLIT_CMC_ENCODE_MAGIC_NUMBER * cmcRight;
+                return dualCMC;
+            }
+
+            return doXMath(topCard.getCMC(), m, c);
         }
 
         // Count$EnchantedControllerCreatures

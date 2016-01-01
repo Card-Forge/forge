@@ -238,6 +238,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         RightSplitCMC
     }
 
+    public static int SPLIT_CMC_ENCODE_MAGIC_NUMBER = 10000000;
+
     /**
      * Instantiates a new card not associated to any paper card.
      * @param id0 the unique id of the new card.
@@ -4844,6 +4846,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("power") || property.startsWith("toughness")
                 || property.startsWith("cmc") || property.startsWith("totalPT")) {
             int x;
+            int x2 = -1; // used for the special case when counting TopOfLibraryCMC for a split card and then testing against it
             int y = 0;
             int y2 = -1; // alternative value for the second split face of a split card
             String rhs = "";
@@ -4870,15 +4873,26 @@ public class Card extends GameEntity implements Comparable<Card> {
                 x = Integer.parseInt(rhs);
             } catch (final NumberFormatException e) {
                 x = CardFactoryUtil.xCount(source, source.getSVar(rhs));
+
+                // TODO: find a better solution for handling Count$TopOfLibraryCMC for split cards
+                // (currently two CMCs are encoded in one big integer value)
+                if (property.startsWith("cmc") && x > SPLIT_CMC_ENCODE_MAGIC_NUMBER) {
+                    x2 = Math.round(x / SPLIT_CMC_ENCODE_MAGIC_NUMBER);
+                    x -= x2 * SPLIT_CMC_ENCODE_MAGIC_NUMBER;
+                }
             }
 
             if (y2 == -1) {
                 if (!Expressions.compare(y, property, x)) {
-                    return false;
+                    if (x2 == -1 || !Expressions.compare(y, property, x2)) {
+                        return false;
+                    }
                 }
             } else {
                 if (!Expressions.compare(y, property, x) && !Expressions.compare(y2, property, x)) {
-                    return false;
+                    if (x2 == -1 || (!Expressions.compare(y, property, x2) && !Expressions.compare(y2, property, x2))) {
+                        return false;
+                    }
                 }
             }
         }
