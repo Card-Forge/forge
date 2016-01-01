@@ -191,6 +191,11 @@ public class GameCopier {
             newCard = CardFactory.makeToken(CardFactory.TokenInfo.fromString(tokenStr), owner).get(0);
         } else {
             newCard = Card.fromPaperCard(c.getPaperCard(), owner);
+            // TODO: The above is very expensive and accounts for the vast majority of GameCopier execution time.
+            // The issue is that it requires parsing the original card from scratch from the paper card. We should
+            // improve the copier to accurately copy the card from its actual state, so that the paper card shouldn't
+            // be needed. Then, we can construct the card via:
+            //  newCard = new Card(newGame.nextCardId(), newGame);
         }
         cardMap.put(c, newCard);
 
