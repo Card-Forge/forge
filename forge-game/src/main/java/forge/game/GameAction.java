@@ -726,6 +726,7 @@ public class GameAction {
         }
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        System.err.println("RunAlways");
         game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
         if (runEvents && !affectedCards.isEmpty()) {
@@ -884,6 +885,12 @@ public class GameAction {
             return;
         }
         game.getTriggerHandler().resetActiveTriggers();
+        // Resetting triggers may result in needing to check static abilities again. For example,
+        // if the legendary rule was invoked on a Thespian's Stage that just copied Dark Depths, the
+        // trigger reset above will activate the copy's Always trigger, which needs to be triggered at
+        // this point.
+        checkStaticAbilities(false, affectedCards);
+
         if (!refreeze) {
             game.getStack().unfreezeStack();
         }
