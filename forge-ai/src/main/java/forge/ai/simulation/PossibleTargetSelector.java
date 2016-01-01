@@ -40,15 +40,17 @@ public class PossibleTargetSelector {
         // Divide up counters, since AI is expected to do this. For now,
         // divided evenly with left-overs going to the first target.
         if (sa.hasParam("DividedAsYouChoose")) {
-            final String amountStr = sa.getParam("CounterNum");
-            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
             final int targetCount = sa.getTargets().getTargetCards().size();
-            final int amountPerCard = amount / sa.getTargets().getTargetCards().size();
-            int amountLeftOver = amount - (amountPerCard * targetCount);
-            final TargetRestrictions tgtRes = sa.getTargetRestrictions();
-            for (GameObject target : sa.getTargets().getTargets()) {
-                tgtRes.addDividedAllocation(target, amountPerCard + amountLeftOver);
-                amountLeftOver = 0;
+            if (targetCount > 0) {
+                final String amountStr = sa.getParam("CounterNum");
+                final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+                final int amountPerCard = amount / targetCount;
+                int amountLeftOver = amount - (amountPerCard * targetCount);
+                final TargetRestrictions tgtRes = sa.getTargetRestrictions();
+                for (GameObject target : sa.getTargets().getTargets()) {
+                    tgtRes.addDividedAllocation(target, amountPerCard + amountLeftOver);
+                    amountLeftOver = 0;
+                }
             }
         }
 
