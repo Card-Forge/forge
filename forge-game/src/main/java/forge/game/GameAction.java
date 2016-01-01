@@ -726,7 +726,6 @@ public class GameAction {
         }
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        System.err.println("RunAlways");
         game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
         if (runEvents && !affectedCards.isEmpty()) {
