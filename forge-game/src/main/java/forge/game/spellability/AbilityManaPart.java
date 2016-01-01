@@ -483,15 +483,19 @@ public class AbilityManaPart implements java.io.Serializable {
             return true;
         }
 
-        if (this.getOrigProduced().contains("Chosen") && sourceCard != null ) {
-            if (this.getSourceCard().hasChosenColor() && MagicColor.toShortString(this.getSourceCard().getChosenColor()).contains(s)) {
+        String origProduced = getOrigProduced();
+        if (origProduced.contains("Chosen") && sourceCard != null ) {
+            if (getSourceCard().hasChosenColor() && MagicColor.toShortString(getSourceCard().getChosenColor()).contains(s)) {
                 return true;
             }
         }
-        if (sa != null) {
-            return applyManaReplacement(sa, this.getOrigProduced()).contains(s);
+        if (isComboMana()) {
+            return getComboColors().contains(s);
         }
-        return this.getOrigProduced().contains(s);
+        if (sa != null) {
+            return applyManaReplacement(sa, origProduced).contains(s);
+        }
+        return origProduced.contains(s);
     }
 
     /**
@@ -540,44 +544,30 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return the color available in combination mana
      */
     public String getComboColors() {
-        String retVal = "";
-        if (this.getOrigProduced().contains("Combo")) {
-            retVal = this.getOrigProduced().replace("Combo ", "");
-            if (retVal.contains("Any")) {
-                retVal = "W U B R G";
-            }
-            if(retVal.contains("ColorIdentity")) {
-                retVal = "";
-                Card cmdr = this.getSourceCard().getController().getCommander();
-                if(cmdr == null)
-                {
-                    return retVal;
-                }
-                ColorSet CID = cmdr.getRules().getColorIdentity();
-                if(CID.hasWhite())
-                {
-                    retVal += "W ";
-                }
-                if(CID.hasBlue())
-                {
-                    retVal += "U ";
-                }
-                if(CID.hasBlack())
-                {
-                    retVal += "B ";
-                }
-                if(CID.hasRed())
-                {
-                    retVal += "R ";
-                }
-                if(CID.hasGreen())
-                {
-                    retVal += "G ";
-                }
-                retVal = retVal.substring(0,retVal.length()-1);
-            }
+        String origProduced = getOrigProduced();
+        if (!origProduced.contains("Combo")) {
+            return "";
         }
-        return retVal;
+        if (origProduced.contains("Any")) {
+            return "W U B R G";
+        }
+        if (!origProduced.contains("ColorIdentity")) {
+            return origProduced.replace("Combo ", "");
+        }
+        // ColorIdentity
+        Card cmdr = getSourceCard().getController().getCommander();
+        if (cmdr == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        ColorSet identity = cmdr.getRules().getColorIdentity();
+        if (identity.hasWhite()) { sb.append("W "); }
+        if (identity.hasBlue())  { sb.append("U "); }
+        if (identity.hasBlack()) { sb.append("B "); }
+        if (identity.hasRed())   { sb.append("R "); }
+        if (identity.hasGreen()) { sb.append("R "); }
+        // TODO: Add support for {C}.
+        return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
     }
 
     public Card getSourceCard() {

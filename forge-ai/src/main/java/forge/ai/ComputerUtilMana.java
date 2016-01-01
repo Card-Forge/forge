@@ -1125,7 +1125,7 @@ public class ComputerUtilMana {
         sortedManaSources.addAll(sortedManaSources.size(), otherManaSources);
 
         if (DEBUG_MANA_PAYMENT) {
-            System.out.println("DEBUG_MANA_PAYMENT: manaAbilityMap = " + sortedManaSources);
+            System.out.println("DEBUG_MANA_PAYMENT: sortedManaSources = " + sortedManaSources);
         }
         return sortedManaSources;
     } // getAvailableMana()
