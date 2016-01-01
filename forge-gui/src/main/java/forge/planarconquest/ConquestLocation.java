@@ -14,27 +14,30 @@ import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
 
 public class ConquestLocation implements IXmlWritable {
-    private ConquestPlane plane;
-    private int regionIndex;
-    private int row;
-    private int col;
+    private final ConquestPlane plane;
+    private final int regionIndex, row, col;
+
     private List<ConquestLocation> neighbors;
-
-    public ConquestLocation() {
-    }
-
-    public ConquestLocation(XmlReader xml) {
-        plane = xml.read("plane", plane, ConquestPlane.class);
-        regionIndex = xml.read("regionIndex", regionIndex);
-        row = xml.read("row", row);
-        col = xml.read("col", col);
-    }
 
     public ConquestLocation(ConquestPlane plane0, int regionIndex0, int row0, int col0) {
         plane = plane0;
         regionIndex = regionIndex0;
         row = row0;
         col = col0;
+    }
+
+    public ConquestLocation(XmlReader xml) {
+        plane = xml.read("plane", ConquestPlane.class);
+        regionIndex = xml.read("regionIndex", 0);
+        row = xml.read("row", 0);
+        col = xml.read("col", 0);
+    }
+    @Override
+    public void saveToXml(XmlWriter xml) {
+        xml.write("plane", plane);
+        xml.write("regionIndex", regionIndex);
+        xml.write("row", row);
+        xml.write("col", col);
     }
 
     public ConquestPlane getPlane() {
@@ -134,13 +137,5 @@ public class ConquestLocation implements IXmlWritable {
             public void addVariants(Set<GameType> variants) {
             }
         };
-    }
-
-    @Override
-    public void saveToXml(XmlWriter xml) {
-        xml.write("plane", plane);
-        xml.write("regionIndex", regionIndex);
-        xml.write("row", row);
-        xml.write("col", col);
     }
 }

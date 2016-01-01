@@ -19,6 +19,7 @@ package forge.planarconquest;
 
 import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.ISkinImage;
+import forge.card.CardDb;
 import forge.deck.Deck;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -91,13 +92,14 @@ public final class ConquestData {
 
         try {
             XmlReader xml = new XmlReader(xmlFilename);
-            planeswalker = xml.read("planeswalker", planeswalker);
+            CardDb cardDb = FModel.getMagicDb().getCommonCards();
+            planeswalker = xml.read("planeswalker", planeswalker, cardDb);
             aetherShards = xml.read("aetherShards", aetherShards);
             currentLocation = xml.read("currentLocation", currentLocation, ConquestLocation.class);
-            /*xml.read("unlockedCards", unlockedCards);
-            xml.read("newCards", newCards);
-            xml.read("commanders", commanders);
-            xml.read("planeDataMap", planeDataMap);*/
+            xml.read("unlockedCards", unlockedCards, cardDb);
+            xml.read("newCards", newCards, cardDb);
+            xml.read("commanders", commanders, ConquestCommander.class);
+            xml.read("planeDataMap", planeDataMap, ConquestPlane.class, ConquestPlaneData.class);
         }
         catch (Exception e) {
             e.printStackTrace();

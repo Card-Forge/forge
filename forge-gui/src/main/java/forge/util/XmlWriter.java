@@ -7,6 +7,7 @@ import java.util.Stack;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -81,6 +82,13 @@ public class XmlWriter {
         startElement(key);
         for (IXmlWritable item : value) {
             write("item", item);
+        }
+        endElement();
+    }
+    public void write(String key, IXmlWritable[] value) {
+        startElement(key);
+        for (int i = 0; i < value.length; i++) {
+            write(String.valueOf(i), value[i]);
         }
         endElement();
     }
