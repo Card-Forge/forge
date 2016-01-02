@@ -37,12 +37,6 @@ public class XmlReader {
         }
         return defaultValue;
     }
-    public <E extends Enum<E>> E read(String key, Class<E> enumType) {
-        if (currentElement.hasAttribute(key)) {
-            return Enum.valueOf(enumType, currentElement.getAttribute(key));
-        }
-        return null;
-    }
     public int read(String key, int defaultValue) {
         if (currentElement.hasAttribute(key)) {
             return Integer.parseInt(currentElement.getAttribute(key));
@@ -61,26 +55,26 @@ public class XmlReader {
         }
         return defaultValue;
     }
-    public PaperCard read(String key, PaperCard defaultValue, CardDb cardDb) {
+    public PaperCard read(String key, CardDb cardDb) {
         paperCardBuilder.setup(this, cardDb);
-        return read(key, defaultValue, paperCardBuilder);
+        return parseChildElements(key, paperCardBuilder);
     }
     public <T extends Collection<PaperCard>> void read(String key, T collectionToLoad, CardDb cardDb) {
         paperCardBuilder.setup(this, cardDb);
-        read(key, collectionToLoad, null, paperCardBuilder);
+        parseChildElements(key, collectionToLoad, null, paperCardBuilder);
     }
     public <T extends Collection<PaperCard>> T read(String key, Class<T> collectionType, CardDb cardDb) {
         paperCardBuilder.setup(this, cardDb);
-        return read(key, null, collectionType, paperCardBuilder);
+        return parseChildElements(key, null, collectionType, paperCardBuilder);
     }
-    public <T extends IXmlWritable> T read(String key, T defaultValue, Class<T> type) {
-        return read(key, defaultValue, new GenericBuilder<T>(type));
+    public <T extends IXmlWritable> T read(String key, Class<T> type) {
+        return parseChildElements(key, new GenericBuilder<T>(type));
     }
     public <V extends IXmlWritable, T extends Collection<V>> void read(String key, T collectionToLoad, Class<V> elementType) {
-        read(key, collectionToLoad, null, new GenericBuilder<V>(elementType));
+        parseChildElements(key, collectionToLoad, null, new GenericBuilder<V>(elementType));
     }
     public <V extends IXmlWritable, T extends Collection<V>> T read(String key, Class<T> collectionType, Class<V> elementType) {
-        return read(key, null, collectionType, new GenericBuilder<V>(elementType));
+        return parseChildElements(key, null, collectionType, new GenericBuilder<V>(elementType));
     }
     public <V extends IXmlWritable> void read(final String key, final V[] array, final Class<V> elementType) {
         parseChildElements(key, new Evaluator<Void>() {
@@ -135,16 +129,28 @@ public class XmlReader {
 
     /* Private helper methods */
 
-    private <T> T read(String key, T defaultValue, final Evaluator<T> builder) {
-        T result = parseChildElements(key, builder);
-        if (result == null) {
-            result = defaultValue;
+    private <T> T parseChildElements(String findKey, Evaluator<T> handler) {
+        Element parentElement = currentElement;
+        NodeList childNodes = currentElement.getChildNodes();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node node = childNodes.item(i);
+            if (node instanceof Element) {
+                Element element = (Element)node;
+                if (findKey == null || element.getTagName().equals(findKey)) {
+                    currentElement = (Element)node;
+                    T result = handler.evaluate();
+                    currentElement = parentElement;
+                    if (findKey != null) {
+                        return result;
+                    }
+                }
+            }
         }
-        return result;
+        return null;
     }
 
-    private <V, T extends Collection<V>> T read(String key, final T collectionToLoad, final Class<T> collectionType, final Evaluator<V> builder) {
-        return read(key, collectionToLoad, new Evaluator<T>() {
+    private <V, T extends Collection<V>> T parseChildElements(String key, final T collectionToLoad, final Class<T> collectionType, final Evaluator<V> builder) {
+        T result = parseChildElements(key, new Evaluator<T>() {
             @Override
             public T evaluate() {
                 final T result;
@@ -173,26 +179,10 @@ public class XmlReader {
                 return result;
             }
         });
-    }
-
-    private <T> T parseChildElements(String findKey, Evaluator<T> handler) {
-        Element parentElement = currentElement;
-        NodeList childNodes = currentElement.getChildNodes();
-        for (int i = 0; i < childNodes.getLength(); i++) {
-            Node node = childNodes.item(i);
-            if (node instanceof Element) {
-                Element element = (Element)node;
-                if (findKey == null || element.getTagName().equals(findKey)) {
-                    currentElement = (Element)node;
-                    T result = handler.evaluate();
-                    currentElement = parentElement;
-                    if (findKey != null) {
-                        return result;
-                    }
-                }
-            }
+        if (result == null) {
+            result = collectionToLoad;
         }
-        return null;
+        return result;
     }
 
     private static final PaperCardBuilder paperCardBuilder = new PaperCardBuilder();

@@ -4,16 +4,19 @@ import forge.deck.Deck;
 import forge.deck.generation.DeckGenPool;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.planarconquest.ConquestPlane.Region;
+import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
 
 public class ConquestCommander implements InventoryItem, IXmlWritable {
     private final PaperCard card;
-    private final Deck deck;
     private final ConquestRecord record;
     private final ConquestPlane originPlane;
     private final String originRegionName;
+
+    private Deck deck;
 
     public ConquestCommander(PaperCard card0) {
         this(card0, new Deck(card0.getName()));
@@ -22,9 +25,12 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         this(card0, ConquestUtil.generateDeck(card0, cardPool0, forAi));
     }
     private ConquestCommander(PaperCard card0, Deck deck0) {
+        this(card0, deck0, new ConquestRecord());
+    }
+    private ConquestCommander(PaperCard card0, Deck deck0, ConquestRecord record0) {
         card = card0;
         deck = deck0;
-        record = new ConquestRecord();
+        record = record0;
 
         //determine origin of commander
         ConquestPlane originPlane0 = null;
@@ -43,6 +49,15 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         }
         originPlane = originPlane0;
         originRegionName = originRegionName0;
+    }
+
+    public ConquestCommander(XmlReader xml) {
+        this(xml.read("card", FModel.getMagicDb().getCommonCards()), null, xml.read("record", ConquestRecord.class));
+    }
+    @Override
+    public void saveToXml(XmlWriter xml) {
+        xml.write("card", card);
+        xml.write("record", record);
     }
 
     public String getName() {
@@ -66,6 +81,12 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
     }
 
     public Deck getDeck() {
+        if (deck == null) { //if deck not yet initialized, attempt to load deck file
+            deck = FModel.getConquest().getDecks().get(card.getName());
+            if (deck == null) {
+                deck = new Deck(card.getName());
+            }
+        }
         return deck;
     }
 
@@ -94,11 +115,5 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
     @Override
     public String toString() {
         return card.getName();
-    }
-
-    @Override
-    public void saveToXml(XmlWriter xml) {
-        xml.write("card", card);
-        xml.write("record", record);
     }
 }

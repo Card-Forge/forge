@@ -27,7 +27,7 @@ public class ConquestLocation implements IXmlWritable {
     }
 
     public ConquestLocation(XmlReader xml) {
-        plane = xml.read("plane", ConquestPlane.class);
+        plane = xml.read("plane", ConquestPlane.Alara);
         regionIndex = xml.read("regionIndex", 0);
         row = xml.read("row", 0);
         col = xml.read("col", 0);

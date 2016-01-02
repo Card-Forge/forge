@@ -93,9 +93,9 @@ public final class ConquestData {
         try {
             XmlReader xml = new XmlReader(xmlFilename);
             CardDb cardDb = FModel.getMagicDb().getCommonCards();
-            planeswalker = xml.read("planeswalker", planeswalker, cardDb);
+            planeswalker = xml.read("planeswalker", cardDb);
             aetherShards = xml.read("aetherShards", aetherShards);
-            currentLocation = xml.read("currentLocation", currentLocation, ConquestLocation.class);
+            currentLocation = xml.read("currentLocation", ConquestLocation.class);
             xml.read("unlockedCards", unlockedCards, cardDb);
             xml.read("newCards", newCards, cardDb);
             xml.read("commanders", commanders, ConquestCommander.class);

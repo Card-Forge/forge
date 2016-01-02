@@ -17,7 +17,7 @@ public class ConquestPlaneData implements IXmlWritable {
     }
 
     public ConquestPlaneData(XmlReader xml) {
-        plane = xml.read("plane", ConquestPlane.class);
+        plane = xml.read("plane", ConquestPlane.Alara);
         eventResults = new ConquestRecord[plane.getEventCount()];
         xml.read("eventResults", eventResults, ConquestRecord.class);
     }
