@@ -73,9 +73,8 @@ public final class ConquestData {
         xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
         aetherShards = FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_START_SHARDS);
         currentLocation = new ConquestLocation(startingPlane0, 0, 0, Region.START_COL);
-        planeswalker = planeswalker0;
-        planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
-        unlockCard(planeswalker);
+        setPlaneswalker(planeswalker0);
+        unlockCard(planeswalker0);
 
         //generate deck for starting commander and add all cards to collection
         ConquestCommander commander = new ConquestCommander(startingCommander0, startingPlane0.getCardPool(), false);
@@ -93,7 +92,7 @@ public final class ConquestData {
         try {
             XmlReader xml = new XmlReader(xmlFilename);
             CardDb cardDb = FModel.getMagicDb().getCommonCards();
-            planeswalker = xml.read("planeswalker", cardDb);
+            setPlaneswalker(xml.read("planeswalker", cardDb));
             aetherShards = xml.read("aetherShards", aetherShards);
             currentLocation = xml.read("currentLocation", ConquestLocation.class);
             xml.read("unlockedCards", unlockedCards, cardDb);
@@ -112,6 +111,10 @@ public final class ConquestData {
 
     public PaperCard getPlaneswalker() {
         return planeswalker;
+    }
+    public void setPlaneswalker(PaperCard planeswalker0) {
+        planeswalker = planeswalker0;
+        planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
     }
 
     public ISkinImage getPlaneswalkerToken() {

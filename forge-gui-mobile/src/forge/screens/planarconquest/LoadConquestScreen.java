@@ -176,7 +176,7 @@ public class LoadConquestScreen extends LaunchScreen {
         ConquestData conquest = lstConquests.getSelectedConquest();
         if (conquest == null) { return; }
 
-        FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquest.getName() + ".dat");
+        FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquest.getName());
         FModel.getConquestPreferences().save();
         ConquestMenu.launchPlanarConquest(LaunchReason.LoadConquest);
     }
