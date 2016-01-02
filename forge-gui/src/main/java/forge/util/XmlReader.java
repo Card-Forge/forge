@@ -85,7 +85,7 @@ public class XmlReader {
                     @Override
                     public Void evaluate() {
                         try {
-                            Integer arrayIndex = Integer.valueOf(currentElement.getTagName());
+                            Integer arrayIndex = Integer.valueOf(currentElement.getTagName().substring(1)); //trim "i" prefix
                             if (arrayIndex >= 0 && arrayIndex < array.length) {
                                 V value = builder.evaluate();
                                 if (value != null) {

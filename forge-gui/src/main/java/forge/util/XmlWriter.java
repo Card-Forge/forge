@@ -88,7 +88,7 @@ public class XmlWriter {
     public void write(String key, IXmlWritable[] value) {
         startElement(key);
         for (int i = 0; i < value.length; i++) {
-            write(String.valueOf(i), value[i]);
+            write("i" + i, value[i]); //must prefix with "i" since numbers are invalid XML tag names
         }
         endElement();
     }
