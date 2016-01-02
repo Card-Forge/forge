@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -20,6 +21,7 @@ import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.util.collect.FCollectionView;
@@ -87,6 +89,9 @@ public abstract class GameState {
             aiCardTexts.put(zone, "");
             humanCardTexts.put(zone, "");
             for (Card card : game.getCardsIn(zone)) {
+                if (card instanceof DetachedCardEffect) {
+                    continue;
+                }
                 addCard(zone, card.getOwner() == ai ? aiCardTexts : humanCardTexts, card);
             }
         }
@@ -101,6 +106,9 @@ public abstract class GameState {
             newText.append("t:" + new CardFactory.TokenInfo(c).toString());
         } else {
             newText.append(c.getPaperCard().getName());
+        }
+        if (c.isCommander()) {
+            newText.append("|IsCommander:True");
         }
         if (zoneType == ZoneType.Battlefield) {
             if (c.isTapped()) {
@@ -207,13 +215,14 @@ public abstract class GameState {
 
     private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
-        for(Entry<ZoneType, String> kv : cardTexts.entrySet()) {
+        for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
             String value = kv.getValue();
             playerCards.put(kv.getKey(), processCardsForZone(value.isEmpty() ? new String[0] : value.split(";"), p));
         }
 
         if (life >= 0) p.setLife(life, null);
         for (Entry<ZoneType, CardCollectionView> kv : playerCards.entrySet()) {
+            PlayerZone zone = p.getZone(kv.getKey());
             if (kv.getKey() == ZoneType.Battlefield) {
                 List<Card> cards = new ArrayList<Card>();
                 for (final Card c : kv.getValue()) {
@@ -221,7 +230,7 @@ public abstract class GameState {
                         cards.add(c);
                     }
                 }
-                p.getZone(kv.getKey()).setCards(cards);
+                zone.setCards(cards);
                 for (final Card c : kv.getValue()) {
                     if (c.isToken()) {
                         continue;
@@ -234,7 +243,7 @@ public abstract class GameState {
                     c.setSickness(sickness);
                 }
             } else {
-                p.getZone(kv.getKey()).setCards(kv.getValue());
+                zone.setCards(kv.getValue());
             }
         }
     }
@@ -282,6 +291,11 @@ public abstract class GameState {
                     c.setSickness(true);
                 } else if (info.equalsIgnoreCase("FaceDown:True")) {
                     c.setState(CardStateName.FaceDown, true);
+                } else if (info.equalsIgnoreCase("IsCommander:True")) {
+                    // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
+                    c.setCommander(true);
+                    player.setCommander(c);
+                    player.getZone(ZoneType.Command).add(Player.createCommanderEffect(player.getGame(), c));
                 }
             }
 
