@@ -565,7 +565,7 @@ public class AbilityManaPart implements java.io.Serializable {
         if (identity.hasBlue())  { sb.append("U "); }
         if (identity.hasBlack()) { sb.append("B "); }
         if (identity.hasRed())   { sb.append("R "); }
-        if (identity.hasGreen()) { sb.append("R "); }
+        if (identity.hasGreen()) { sb.append("G "); }
         // TODO: Add support for {C}.
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
     }
