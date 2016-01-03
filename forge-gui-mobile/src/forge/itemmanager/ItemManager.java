@@ -408,7 +408,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void setPool(final ItemPool<T> pool0, boolean infinite) {
         pool = pool0;
         model.clear();
-        model.setAllowZero(pool.allowZero());
         model.addItems(pool);
         model.setInfinite(infinite);
         updateView(true, null);
@@ -763,17 +762,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         //update ratio of # in filtered pool / # in total pool
         ItemPool<T> filteredItems = getFilteredItems();
         int filteredCount = filteredItems.countAll();
-
-        int totalCount;
-        if (pool.allowZero() && isInfinite()) { //use count distinct if pool is infinite to account for zeros and save performance
-            totalCount = filteredItems.countDistinct();
-        }
-        else if (useFilter) {
-            totalCount = pool.countAll();
-        }
-        else {
-            totalCount = filteredCount;
-        }
+        int totalCount = useFilter ? pool.countAll() : filteredCount;
 
         searchFilter.setRatio("(" + filteredCount + " / " + totalCount + ")");
     }

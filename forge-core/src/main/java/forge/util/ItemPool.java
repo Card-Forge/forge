@@ -105,8 +105,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
 
     private final Class<T> myClass; //class does not keep this in runtime by itself
 
-    private boolean allowZero; //whether to allow items with 0 count to remain in pool
-
     @Override
     public final Iterator<Entry<T, Integer>> iterator() {
         return items.entrySet().iterator();
@@ -184,13 +182,6 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return myClass;
     }
 
-    public boolean allowZero() {
-        return allowZero;
-    }
-    public void setAllowZero(boolean allowZero0) {
-        allowZero = allowZero0;
-    }
-
     public ItemPool<T> getView() {
         return new ItemPool<T>(Collections.unmodifiableMap(items), getMyClass());
     }
@@ -200,16 +191,8 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public void add(final T item, final int amount) {
-        if (item == null) { return; }
+        if (item == null || amount <= 0) { return; }
 
-        if (amount <= 0) {
-            if (allowZero) {
-                if (!items.containsKey(item)) {
-                    items.put(item, 0);
-                }
-            }
-            else { return; }
-        }
         items.put(item, count(item) + amount);
     }
 
@@ -253,12 +236,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
             return false;
         }
         if (count <= amount) {
-            if (allowZero) {
-                items.put(item, 0);
-            }
-            else {
-                items.remove(item);
-            }
+            items.remove(item);
         }
         else {
             items.put(item, count - amount);

@@ -2,6 +2,7 @@ package forge.screens.planarconquest;
 
 import com.google.common.base.Predicate;
 
+import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager;
@@ -33,7 +34,9 @@ public class ConquestCollectionScreen extends FScreen {
     }
 
     public void refreshCards() {
-        FModel.getConquest().getModel().populateCollectionManager(lstCollection);
+        CardPool pool = new CardPool();
+        pool.add(FModel.getConquest().getModel().getUnlockedCards());
+        lstCollection.setPool(pool, true);
     }
 
     @Override

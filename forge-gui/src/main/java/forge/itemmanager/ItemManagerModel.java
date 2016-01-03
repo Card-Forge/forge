@@ -117,13 +117,6 @@ public final class ItemManagerModel<T extends InventoryItem> {
         return infiniteSupply;
     }
 
-    public boolean allowZero() {
-        return data.allowZero();
-    }
-    public void setAllowZero(boolean allowZero0) {
-        data.setAllowZero(allowZero0);
-    }
-
     public CascadeManager getCascadeManager() {
         return cascadeManager;
     }

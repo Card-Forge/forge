@@ -23,7 +23,6 @@ import forge.card.CardDb;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
-import forge.itemmanager.IItemManager;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
@@ -31,7 +30,6 @@ import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
-import forge.util.ItemPool;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 
@@ -55,7 +53,6 @@ public final class ConquestData {
     private ISkinImage planeswalkerToken;
     private ConquestLocation currentLocation;
     private int aetherShards;
-    private ConquestCollection collection;
 
     private final File directory;
     private final String xmlFilename;
@@ -145,13 +142,6 @@ public final class ConquestData {
         return getOrCreatePlaneData(getCurrentPlane());
     }
 
-    public void populateCollectionManager(IItemManager<PaperCard> manager) {
-        if (collection == null) {
-            collection = new ConquestCollection();
-        }
-        manager.setPool(collection, true);
-    }
-
     public Iterable<PaperCard> getUnlockedCards() {
         return unlockedCards;
     }
@@ -163,9 +153,6 @@ public final class ConquestData {
     public void unlockCard(PaperCard card) {
         if (unlockedCards.add(card)) {
             newCards.add(card);
-            if (collection != null) {
-                collection.add(card);
-            }
         }
     }
     public void unlockCards(Iterable<PaperCard> cards) {
@@ -401,22 +388,6 @@ public final class ConquestData {
                     }
                 }
                 return blocked;
-            }
-        }
-    }
-
-    @SuppressWarnings("serial")
-    private class ConquestCollection extends ItemPool<PaperCard> {
-        private ConquestCollection() {
-            super(PaperCard.class);
-            setAllowZero(true);
-
-            //initialize to contain all available cards, with unlocked
-            //having a count of 1 and the rest having a count of 0
-            for (ConquestPlane plane : ConquestPlane.values()) {
-                for (PaperCard card : plane.getCardPool().getAllCards()) {
-                    items.put(card, hasUnlockedCard(card) ? 1 : 0);
-                }
             }
         }
     }

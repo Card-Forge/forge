@@ -239,10 +239,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                 @Override
                 public void drawValue(Graphics g, Integer index, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                    boolean unowned = (value.getValue() == 0); //fade out item if item isn't owned
-                    if (unowned) {
-                        g.setAlphaComposite(UNOWNED_ALPHA_COMPOSITE);
-                    }
                     if (maxSelections > 1) {
                         if (pressed) { //if multi-select mode, draw SEL_COLOR when pressed
                             g.fillRect(SEL_COLOR, x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
@@ -255,9 +251,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         w -= padding;
                     }
                     renderer.drawValue(g, value, font, foreColor, backColor, pressed, x + 1, y, w - 2, h); //x + 1 and w - 2 to account for left and right borders
-                    if (unowned) {
-                        g.resetAlphaComposite();
-                    }
                 }
             });
             setFont(FSkinFont.get(14));
