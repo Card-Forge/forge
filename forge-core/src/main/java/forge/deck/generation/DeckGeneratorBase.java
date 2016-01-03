@@ -28,6 +28,7 @@ import forge.deck.CardPool;
 import forge.deck.DeckFormat;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.DebugTrace;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
 
@@ -45,6 +46,7 @@ import java.util.Map.Entry;
  * @version $Id: Generate2ColorDeck.java 14959 2012-03-28 14:03:43Z Chris H. $
  */
 public abstract class DeckGeneratorBase {
+    protected final DebugTrace trace = new DebugTrace();
     protected final Random r = MyRandom.getRandom();
     protected final Map<String, Integer> cardCounts = new HashMap<String, Integer>();
     protected int maxDuplicates = 4;
@@ -60,8 +62,6 @@ public abstract class DeckGeneratorBase {
     protected float getCreatPercentage() { return 0.34f; }
     protected float getSpellPercentage() { return 0.22f; }
 
-    StringBuilder tmpDeck = new StringBuilder();
-
     public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0) {
         pool = format0.getCardPool(pool0);
         format = format0;
@@ -75,23 +75,23 @@ public abstract class DeckGeneratorBase {
     }
 
     protected void addCreaturesAndSpells(int size, List<ImmutablePair<FilterCMC, Integer>> cmcLevels, boolean forAi) {
-        tmpDeck.append("Building deck of ").append(size).append("cards\n");
+        trace.append("Building deck of ").append(size).append("cards\n");
         
         final Iterable<PaperCard> cards = selectCardsOfMatchingColorForPlayer(forAi);
         // build subsets based on type
 
         final Iterable<PaperCard> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES));
         final int creatCnt = (int) Math.ceil(getCreatPercentage() * size);
-        tmpDeck.append("Creatures to add:").append(creatCnt).append("\n");
+        trace.append("Creatures to add:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels);
 
         Predicate<PaperCard> preSpells = Predicates.compose(CardRulesPredicates.Presets.IS_NONCREATURE_SPELL_FOR_GENERATOR, PaperCard.FN_GET_RULES);
         final Iterable<PaperCard> spells = Iterables.filter(cards, preSpells);
         final int spellCnt = (int) Math.ceil(getSpellPercentage() * size);
-        tmpDeck.append("Spells to add:").append(spellCnt).append("\n");
+        trace.append("Spells to add:").append(spellCnt).append("\n");
         addCmcAdjusted(spells, spellCnt, cmcLevels);
         
-        tmpDeck.append(String.format("Current deck size: %d... should be %f%n", tDeck.countAll(), size * (getCreatPercentage() + getSpellPercentage())));
+        trace.append(String.format("Current deck size: %d... should be %f%n", tDeck.countAll(), size * (getCreatPercentage() + getSpellPercentage())));
     }
 
     public CardPool getDeck(final int size, final boolean forAi) {
@@ -124,7 +124,7 @@ public abstract class DeckGeneratorBase {
                     if (srcLen == 0) { return false; }
                 }
             }
-            tmpDeck.append(String.format("(%d) %s [%s]%n", cp.getRules().getManaCost().getCMC(), cp.getName(), cp.getRules().getManaCost()));
+            trace.append(String.format("(%d) %s [%s]%n", cp.getRules().getManaCost().getCMC(), cp.getName(), cp.getRules().getManaCost()));
         }
         return true;
     }
@@ -148,7 +148,7 @@ public abstract class DeckGeneratorBase {
 
             final int n = cardCounts.get(s);
             cardCounts.put(s, n + 1);
-            tmpDeck.append(s + "\n");
+            trace.append(s + "\n");
             res++;
         }
         return res;
@@ -160,7 +160,7 @@ public abstract class DeckGeneratorBase {
     }
 
     protected void addBasicLand(int cnt, String edition) {
-        tmpDeck.append(cnt).append(" basic lands remain").append("\n");
+        trace.append(cnt).append(" basic lands remain").append("\n");
         
         // attempt to optimize basic land counts according to colors of picked cards
         final Map<String, Integer> clrCnts = countLands(tDeck);
@@ -168,10 +168,10 @@ public abstract class DeckGeneratorBase {
         float totalColor = 0;
         for (Entry<String, Integer> c : clrCnts.entrySet()) {
             totalColor += c.getValue();
-            tmpDeck.append(c.getKey()).append(":").append(c.getValue()).append("\n");
+            trace.append(c.getKey()).append(":").append(c.getValue()).append("\n");
         }
 
-        tmpDeck.append("totalColor:").append(totalColor).append("\n");
+        trace.append("totalColor:").append(totalColor).append("\n");
 
         int landsLeft = cnt;
         for (Entry<String, Integer> c : clrCnts.entrySet()) {
@@ -179,7 +179,7 @@ public abstract class DeckGeneratorBase {
 
             // calculate number of lands for each color
             final int nLand = Math.min(landsLeft, Math.round(cnt * c.getValue() / totalColor));
-            tmpDeck.append("nLand-").append(basicLandName).append(":").append(nLand).append("\n");
+            trace.append("nLand-").append(basicLandName).append(":").append(nLand).append("\n");
 
             // just to prevent a null exception by the deck size fixing code
             cardCounts.put(basicLandName, nLand);
@@ -217,7 +217,7 @@ public abstract class DeckGeneratorBase {
                 tDeck.removeAllFlat(toRemove);
 
                 for (PaperCard c : toRemove) {
-                    tmpDeck.append("Removed:").append(c.getName()).append("\n");
+                    trace.append("Removed:").append(c.getName()).append("\n");
                 }
                 actualSize = tDeck.countAll();
             }
@@ -240,7 +240,7 @@ public abstract class DeckGeneratorBase {
             int cmcCountForPool = (int) Math.ceil(pair.getRight().intValue() * desiredOverTotal);
             
             int addOfThisCmc = Math.round(pair.getRight().intValue() * requestedOverTotal);
-            tmpDeck.append(String.format("Adding %d cards for cmc range from a pool with %d cards:%n", addOfThisCmc, cmcCountForPool));
+            trace.append(String.format("Adding %d cards for cmc range from a pool with %d cards:%n", addOfThisCmc, cmcCountForPool));
 
             final List<PaperCard> curved = Aggregates.random(matchingCards, cmcCountForPool);
             final List<PaperCard> curvedRandomized = Lists.newArrayList();
@@ -408,7 +408,6 @@ public abstract class DeckGeneratorBase {
      * @return dual land names
      */
     protected List<String> getInverseDualLandList() {
-
         final List<String> dLands = new ArrayList<String>();
 
         for (Entry<Integer, String[]> dual : dualLands.entrySet()) {
@@ -418,7 +417,6 @@ public abstract class DeckGeneratorBase {
                 }
             }
         }
-
         return dLands;
     }    
 }

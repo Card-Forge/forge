@@ -86,7 +86,7 @@ public class DeckGenerator2Color extends DeckGeneratorBase {
         // Add lands
         int numLands = Math.round(size * getLandsPercentage());
         adjustDeckSize(size - numLands);
-        tmpDeck.append(String.format("Adjusted deck size to: %d, should add %d land(s)%n", size - numLands, numLands));
+        trace.append(String.format("Adjusted deck size to: %d, should add %d land(s)%n", size - numLands, numLands));
 
         // Add dual lands
         List<String> duals = getDualLandList();
@@ -98,10 +98,7 @@ public class DeckGenerator2Color extends DeckGeneratorBase {
         numLands -= dblsAdded;
 
         addBasicLand(numLands);
-        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
-        
-        //System.out.println(tmpDeck.toString());
-        
+        trace.append("DeckSize:").append(tDeck.countAll()).append("\n");
         return tDeck;
     }
 }

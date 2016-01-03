@@ -62,7 +62,7 @@ public class ConquestUtil {
         }
 
         gen.setSingleton(true);
-        CardPool cards = gen.getDeck(60, forAi);
+        CardPool cards = gen.getDeck(40, forAi);
 
         Deck deck = new Deck(commander.getName());
         deck.setDirectory("generated/conquest");

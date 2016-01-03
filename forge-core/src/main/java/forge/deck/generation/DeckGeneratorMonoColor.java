@@ -74,13 +74,13 @@ public class DeckGeneratorMonoColor extends DeckGeneratorBase {
         // Add lands
         int numLands = (int) (getLandsPercentage() * size);
 
-        tmpDeck.append("numLands:").append(numLands).append("\n");
+        trace.append("numLands:").append(numLands).append("\n");
 
         addBasicLand(numLands);
-        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
+        trace.append("DeckSize:").append(tDeck.countAll()).append("\n");
 
         adjustDeckSize(size);
-        tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
+        trace.append("DeckSize:").append(tDeck.countAll()).append("\n");
 
         return tDeck;
     }
