@@ -3102,7 +3102,6 @@ forge-gui/res/cardsfolder/b/burn_at_the_stake.txt -text
 forge-gui/res/cardsfolder/b/burn_away.txt -text
 forge-gui/res/cardsfolder/b/burn_the_impure.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/burn_trail.txt -text
-forge-gui/res/cardsfolder/b/burning-tree_emissary.txt -text
 forge-gui/res/cardsfolder/b/burning_anger.txt -text
 forge-gui/res/cardsfolder/b/burning_cloak.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/burning_earth.txt -text
@@ -3115,6 +3114,7 @@ forge-gui/res/cardsfolder/b/burning_palm_efreet.txt -text
 forge-gui/res/cardsfolder/b/burning_sands.txt -text
 forge-gui/res/cardsfolder/b/burning_shield_askari.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/burning_tree_bloodscale.txt -text
+forge-gui/res/cardsfolder/b/burning_tree_emissary.txt -text
 forge-gui/res/cardsfolder/b/burning_tree_shaman.txt -text
 forge-gui/res/cardsfolder/b/burning_vengeance.txt -text
 forge-gui/res/cardsfolder/b/burning_wish.txt -text
