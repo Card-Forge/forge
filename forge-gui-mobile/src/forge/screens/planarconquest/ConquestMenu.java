@@ -82,7 +82,7 @@ public class ConquestMenu extends FPopupMenu {
                 @Override
                 @SuppressWarnings("unchecked")
                 public void run() {
-                    FModel.getConquest().load(new ConquestData(data));
+                    FModel.getConquest().setModel(new ConquestData(data));
                     ((DeckController<Deck>)EditorType.PlanarConquest.getController()).setRootFolder(FModel.getConquest().getDecks());
                     if (reason == LaunchReason.StartPlanarConquest) {
                         Forge.openScreen(multiverseScreen);

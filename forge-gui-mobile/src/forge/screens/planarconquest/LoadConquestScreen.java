@@ -114,10 +114,10 @@ public class LoadConquestScreen extends LaunchScreen {
                     }
 
                     // Drop into AllZone.
-                    qc.load(lstConquests.getSelectedConquest());
+                    qc.setModel(lstConquests.getSelectedConquest());
                 }
                 else {
-                    qc.load(null);
+                    qc.setModel(null);
                 }
                 Gdx.app.postRunnable(new Runnable() {
                     @Override

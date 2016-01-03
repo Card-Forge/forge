@@ -65,13 +65,12 @@ public class ConquestController {
     public ConquestData getModel() {
         return model;
     }
-
-    public IStorage<Deck> getDecks() {
-        return decks;
-    }
-
-    public void load(final ConquestData model0) {
+    public void setModel(final ConquestData model0) {
         model = model0;
+        if (model == null) {
+            decks = null;
+            return;
+        }
 
         File decksDir = new File(model.getDirectory(), "decks");
         FileUtil.ensureDirectoryExists(decksDir);
@@ -79,10 +78,8 @@ public class ConquestController {
         decks = new StorageImmediatelySerialized<Deck>(model.getName() + " decks", storage);
     }
 
-    public void save() {
-        if (model != null) {
-            model.saveData();
-        }
+    public IStorage<Deck> getDecks() {
+        return decks;
     }
 
     public void launchEvent(final IConquestEventLauncher launcher0, final ConquestCommander commander0, final ConquestEvent event0) {
@@ -243,7 +240,7 @@ public class ConquestController {
             model.addLoss(gameRunner.event);
         }
 
-        FModel.getConquest().save();
+        model.saveData();
         FModel.getConquestPreferences().save();
 
         gameRunner.finish();

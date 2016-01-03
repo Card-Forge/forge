@@ -20,7 +20,6 @@ package forge.planarconquest;
 import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.ISkinImage;
 import forge.card.CardDb;
-import forge.deck.Deck;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
@@ -63,7 +62,6 @@ public final class ConquestData {
     private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
     private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
     private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
-    private final ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<InventoryItem>(InventoryItem.class);
     private final HashSet<PaperCard> newCards = new HashSet<PaperCard>();
 
     public ConquestData(String name0, PaperCard planeswalker0, ConquestPlane startingPlane0, PaperCard startingCommander0) {
@@ -245,15 +243,6 @@ public final class ConquestData {
         directory.renameTo(new File(ForgeConstants.CONQUEST_SAVE_DIR, name));
     }
 
-    public void updateDecksForEachCard() {
-        decksUsingMyCards.clear();
-        for (final Deck deck : FModel.getConquest().getDecks()) {
-            for (final Entry<PaperCard, Integer> e : deck.getMain()) {
-                decksUsingMyCards.add(e.getKey());
-            }
-        }
-    }
-
     public HashSet<PaperCard> getNewCards() {
         return newCards;
     }
@@ -272,25 +261,10 @@ public final class ConquestData {
             return newCards.contains(from.getKey()) ? "NEW" : "";
         }
     };
-    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-        @Override
-        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            final Integer iValue = decksUsingMyCards.count(from.getKey());
-            return iValue == null ? Integer.valueOf(0) : iValue;
-        }
-    };
-    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-        @Override
-        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            final Integer iValue = decksUsingMyCards.count(from.getKey());
-            return iValue == null ? "" : iValue.toString();
-        }
-    };
 
     public Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
         Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
         ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, fnNewCompare, fnNewGet);
-        ItemColumn.addColOverride(config, colOverrides, ColumnDef.DECKS, fnDeckCompare, fnDeckGet);
         return colOverrides;
     }
 

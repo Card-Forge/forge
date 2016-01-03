@@ -61,9 +61,9 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
                     @Override
                     public void run() {
                         ConquestController qc = FModel.getConquest();
-                        qc.load(new ConquestData(conquestName, model.planeswalker, model.startingPlane, model.startingCommander));
+                        qc.setModel(new ConquestData(conquestName, model.planeswalker, model.startingPlane, model.startingCommander));
                         qc.getDecks().add(Iterables.getFirst(qc.getModel().getCommanders(), null).getDeck()); //ensure starting deck is saved
-                        qc.save();
+                        qc.getModel().saveData();
 
                         // Save in preferences.
                         FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquestName + ".dat");

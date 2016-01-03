@@ -27,12 +27,6 @@ public class ConquestDeckEditor extends FDeckEditor {
     }
 
     @Override
-    public void onActivate() {
-        super.onActivate();
-        FModel.getConquest().getModel().updateDecksForEachCard();
-    }
-
-    @Override
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
         return FModel.getConquest().getModel().getColOverrides(config);
     }
