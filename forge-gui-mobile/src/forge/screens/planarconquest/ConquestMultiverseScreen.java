@@ -15,7 +15,6 @@ import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
-import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestController.GameRunner;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestEvent;
@@ -54,9 +53,8 @@ public class ConquestMultiverseScreen extends FScreen implements IConquestEventL
     }
 
     public void update() {
-        ConquestController conquest = FModel.getConquest();
-        model = conquest.getModel();
-        setHeaderCaption(conquest.getName() + "\nPlane - " + model.getCurrentPlane().getName());
+        model = FModel.getConquest().getModel();
+        setHeaderCaption(model.getName() + "\nPlane - " + model.getCurrentPlane().getName());
 
         planeGrid.revalidate();
         planeGrid.scrollToBottom(); //start at bottom and move up

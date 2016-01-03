@@ -63,7 +63,6 @@ public final class ConquestData {
     private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
     private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
     private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
-    private final HashMap<String, Deck> decks = new HashMap<String, Deck>();
     private final ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<InventoryItem>(InventoryItem.class);
     private final HashSet<PaperCard> newCards = new HashSet<PaperCard>();
 
@@ -81,7 +80,6 @@ public final class ConquestData {
         commanders.add(commander);
         unlockCard(startingCommander0);
         unlockCards(commander.getDeck().getMain().toFlatList());
-        decks.put(commander.getDeck().getName(), commander.getDeck());
     }
 
     public ConquestData(File directory0) {
@@ -107,6 +105,10 @@ public final class ConquestData {
 
     public String getName() {
         return name;
+    }
+
+    public File getDirectory() {
+        return directory;
     }
 
     public PaperCard getPlaneswalker() {
@@ -180,10 +182,6 @@ public final class ConquestData {
 
     public Iterable<ConquestCommander> getCommanders() {
         return commanders;
-    }
-
-    public ConquestDeckMap getDeckStorage() {
-        return new ConquestDeckMap(decks);
     }
 
     public void addWin(ConquestEvent event) {

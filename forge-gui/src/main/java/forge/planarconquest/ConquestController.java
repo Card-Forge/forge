@@ -17,6 +17,7 @@
  */
 package forge.planarconquest;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +29,7 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.card.CardType;
 import forge.deck.Deck;
+import forge.deck.io.DeckStorage;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.GameView;
@@ -42,23 +44,22 @@ import forge.planarconquest.ConquestPlane.AwardPool;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.BoosterUtils;
 import forge.util.Aggregates;
+import forge.util.FileUtil;
 import forge.util.ItemPool;
 import forge.util.storage.IStorage;
+import forge.util.storage.StorageImmediatelySerialized;
 
 public class ConquestController {
     private ConquestData model;
-    private transient IStorage<Deck> decks;
-    private transient GameRunner gameRunner;
+    private IStorage<Deck> decks;
+    private GameRunner gameRunner;
     private LobbyPlayerHuman humanPlayer;
 
     public ConquestController() {
-    }
-
-    public String getName() {
-        return model == null ? null : model.getName();
     }
 
     public ConquestData getModel() {
@@ -71,7 +72,11 @@ public class ConquestController {
 
     public void load(final ConquestData model0) {
         model = model0;
-        decks = model == null ? null : model.getDeckStorage();
+
+        File decksDir = new File(model.getDirectory(), "decks");
+        FileUtil.ensureDirectoryExists(decksDir);
+        DeckStorage storage = new DeckStorage(decksDir, ForgeConstants.CONQUEST_SAVE_DIR);
+        decks = new StorageImmediatelySerialized<Deck>(model.getName() + " decks", storage);
     }
 
     public void save() {

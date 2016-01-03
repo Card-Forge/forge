@@ -14,7 +14,6 @@ import forge.itemmanager.filters.CardRarityFilter;
 import forge.itemmanager.filters.CardTypeFilter;
 import forge.itemmanager.filters.ItemFilter;
 import forge.model.FModel;
-import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
 import forge.screens.FScreen;
@@ -44,11 +43,10 @@ public class ConquestAEtherScreen extends FScreen {
 
     @Override
     public void onActivate() {
-        ConquestController conquest = FModel.getConquest();
-        ConquestData model = conquest.getModel();
+        ConquestData model = FModel.getConquest().getModel();
         ConquestPlane plane = model.getCurrentPlane();
 
-        setHeaderCaption(conquest.getName() + "\nPlane - " + plane.getName());
+        setHeaderCaption(model.getName() + "\nPlane - " + plane.getName());
 
         CardPool pool = new CardPool();
         for (PaperCard card : plane.getCardPool().getAllCards()) {

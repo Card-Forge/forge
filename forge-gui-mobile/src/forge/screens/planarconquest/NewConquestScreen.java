@@ -1,5 +1,7 @@
 package forge.screens.planarconquest;
 
+import com.google.common.collect.Iterables;
+
 import forge.FThreads;
 import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.FImage;
@@ -60,6 +62,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
                     public void run() {
                         ConquestController qc = FModel.getConquest();
                         qc.load(new ConquestData(conquestName, model.planeswalker, model.startingPlane, model.startingCommander));
+                        qc.getDecks().add(Iterables.getFirst(qc.getModel().getCommanders(), null).getDeck()); //ensure starting deck is saved
                         qc.save();
 
                         // Save in preferences.

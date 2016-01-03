@@ -28,7 +28,7 @@ public class ConquestCollectionScreen extends FScreen {
 
     @Override
     public void onActivate() {
-        setHeaderCaption(FModel.getConquest().getName());
+        setHeaderCaption(FModel.getConquest().getModel().getName());
         refreshCards();
     }
 

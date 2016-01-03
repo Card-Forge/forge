@@ -58,7 +58,7 @@ public class ConquestCommandersScreen extends FScreen {
 
     @Override
     public void onActivate() {
-        setHeaderCaption(FModel.getConquest().getName());
+        setHeaderCaption(FModel.getConquest().getModel().getName());
 
         if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
