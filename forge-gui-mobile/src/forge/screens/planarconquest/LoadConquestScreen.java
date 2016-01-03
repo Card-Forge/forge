@@ -33,6 +33,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FList;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.util.gui.SOptionPane;
@@ -98,14 +99,14 @@ public class LoadConquestScreen extends LaunchScreen {
                     }
                 }
 
-                // Populate list with available quest data.
+                // Populate list with available conquest data.
                 lstConquests.setConquests(new ArrayList<ConquestData>(arrConquests.values()));
 
                 // If there are quests available, force select.
                 if (arrConquests.size() > 0) {
                     final String questname = FModel.getConquestPreferences().getPref(CQPref.CURRENT_CONQUEST);
 
-                    // Attempt to select previous quest.
+                    // Attempt to select previous conquest.
                     if (arrConquests.get(questname) != null) {
                         lstConquests.setSelectedConquest(arrConquests.get(questname));
                     }
@@ -181,14 +182,14 @@ public class LoadConquestScreen extends LaunchScreen {
         ConquestMenu.launchPlanarConquest(LaunchReason.LoadConquest);
     }
 
-    private void renameConquest(final ConquestData quest) {
-        if (quest == null) { return; }
+    private void renameConquest(final ConquestData conquest) {
+        if (conquest == null) { return; }
 
         ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
                 String questName;
-                String oldConquestName = quest.getName();
+                String oldConquestName = conquest.getName();
                 while (true) {
                     questName = SOptionPane.showInputDialog("Enter new name for conquest:", "Rename Conquest", null, oldConquestName);
                     if (questName == null) { return; }
@@ -209,32 +210,32 @@ public class LoadConquestScreen extends LaunchScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog("A conquest already exists with that name. Please pick another quest name.");
+                        SOptionPane.showMessageDialog("A conquest already exists with that name. Please pick another conquest name.");
                         continue;
                     }
                     break;
                 }
 
-                quest.rename(questName);
+                conquest.rename(questName);
             }
         });
     }
 
-    private void deleteConquest(final ConquestData quest) {
-        if (quest == null) { return; }
+    private void deleteConquest(final ConquestData conquest) {
+        if (conquest == null) { return; }
 
         ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
                 if (!SOptionPane.showConfirmDialog(
-                        "Are you sure you want to delete '" + quest.getName() + "'?",
+                        "Are you sure you want to delete '" + conquest.getName() + "'?",
                         "Delete Conquest", "Delete", "Cancel")) {
                     return;
                 }
 
-                new File(ForgeConstants.CONQUEST_SAVE_DIR, quest.getName() + ".dat").delete();
+                FileUtil.deleteDirectory(conquest.getDirectory());
 
-                lstConquests.removeConquest(quest);
+                lstConquests.removeConquest(conquest);
                 updateEnabledButtons();
             }
         });
