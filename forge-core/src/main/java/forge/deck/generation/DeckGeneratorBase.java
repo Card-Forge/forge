@@ -98,58 +98,56 @@ public abstract class DeckGeneratorBase {
         return null; // all but theme deck do override this method
     }
 
-    protected boolean addSome(int cnt, List<PaperCard> source) {
+    protected int addSome(int cnt, List<PaperCard> source) {
         int srcLen = source.size();
-        if (srcLen == 0) { return false; }
+        if (srcLen == 0) { return 0; }
 
-        for (int i = 0; i < cnt; i++) {
-            PaperCard cp;
-            int lc = 0;
-            do {
-                cp = source.get(r.nextInt(srcLen));
-                lc++;
-            } while (cardCounts.get(cp.getName()) > maxDuplicates - 1 && lc <= 100);
+        int res = 0;
+        while (res < cnt) {
+            PaperCard cp = source.get(r.nextInt(srcLen));
+            int newCount = cardCounts.get(cp.getName()) + 1;
 
-            if (lc > 100) {
-                return false;
+            //add card to deck if not already maxed out on card
+            if (newCount <= maxDuplicates) {
+                tDeck.add(pool.getCard(cp.getName(), cp.getEdition()));
+                cardCounts.put(cp.getName(), newCount);
+                trace.append(String.format("(%d) %s [%s]%n", cp.getRules().getManaCost().getCMC(), cp.getName(), cp.getRules().getManaCost()));
+                res++;
             }
 
-            tDeck.add(pool.getCard(cp.getName(), cp.getEdition()));
-
-            final int n = cardCounts.get(cp.getName());
-            cardCounts.put(cp.getName(), n + 1);
-            if (n + 1 == maxDuplicates) {
-                if (source.remove(cp)) {
-                    srcLen--;
-                    if (srcLen == 0) { return false; }
-                }
+            //remove card from source if now maxed out on card
+            if (newCount >= maxDuplicates) {
+                source.remove(cp);
+                srcLen--;
+                if (srcLen == 0) { break; }
             }
-            trace.append(String.format("(%d) %s [%s]%n", cp.getRules().getManaCost().getCMC(), cp.getName(), cp.getRules().getManaCost()));
         }
-        return true;
+        return res;
     }
 
     protected int addSomeStr(int cnt, List<String> source) {
+        int srcLen = source.size();
+        if (srcLen == 0) { return 0; }
+
         int res = 0;
-        for (int i = 0; i < cnt; i++) {
-            String s;
-            int lc = 0;
-            do {
-                s = source.get(r.nextInt(source.size()));
-                lc++;
-            } while ((cardCounts.get(s) >= maxDuplicates) && (lc <= 50));
-            // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
+        while (res < cnt) {
+            String s = source.get(r.nextInt(srcLen));
+            int newCount = cardCounts.get(s) + 1;
 
-            if (lc > 50) {
-            	break;
+            //add card to deck if not already maxed out on card
+            if (newCount <= maxDuplicates) {
+                tDeck.add(pool.getCard(s));
+                cardCounts.put(s, newCount);
+                trace.append(s + "\n");
+                res++;
             }
-            
-            tDeck.add(pool.getCard(s));
 
-            final int n = cardCounts.get(s);
-            cardCounts.put(s, n + 1);
-            trace.append(s + "\n");
-            res++;
+            //remove card from source if now maxed out on card
+            if (newCount >= maxDuplicates) {
+                source.remove(s);
+                srcLen--;
+                if (srcLen == 0) { break; }
+            }
         }
         return res;
     }
@@ -253,7 +251,6 @@ public abstract class DeckGeneratorBase {
     }
 
     protected Iterable<PaperCard> selectCardsOfMatchingColorForPlayer(boolean forAi) {
-
         // start with all cards
         // remove cards that generated decks don't like
         Predicate<CardRules> canPlay = forAi ? AI_CAN_PLAY : HUMAN_CAN_PLAY;
