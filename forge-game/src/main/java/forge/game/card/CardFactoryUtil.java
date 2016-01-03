@@ -2170,6 +2170,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Awaken")) {
                 card.addSpellAbility(makeAwakenSpell(card, keyword));
             }
+            else if (keyword.startsWith("Surge")) {
+                card.addSpellAbility(makeSurgeSpell(card, keyword));
+            }
             else if (keyword.startsWith("Monstrosity")) {
                 final String[] k = keyword.split(":");
                 final String magnitude = k[0].substring(12);
@@ -3165,6 +3168,32 @@ public class CardFactoryUtil {
         awakenSpell.setBasicSpell(false);
         awakenSpell.setPayCosts(awakenCost);
         return awakenSpell;
+    }
+
+    /**
+     * make Surge keyword
+     * @param card
+     * @param surgeKeyword
+     * @return
+     */
+    private static SpellAbility makeSurgeSpell(final Card card, final String surgeKeyword) {
+        final String[] k = surgeKeyword.split(":");
+        final Cost surgeCost = new Cost(k[1], false);
+        card.removeIntrinsicKeyword(surgeKeyword);
+        final SpellAbility surgeSpell = card.getFirstSpellAbility().copy();
+
+        surgeSpell.setPayCosts(surgeCost);
+        surgeSpell.setBasicSpell(false);
+        surgeSpell.addOptionalCost(OptionalCost.Surge);
+
+        final SpellAbilityRestriction restriction = new SpellAbilityRestriction();
+        restriction.setVariables(card.getFirstSpellAbility().getRestrictions());
+        restriction.setSurge(true);
+        surgeSpell.setRestrictions(restriction);
+        String desc = "Surge " + surgeCost.toSimpleString() + " (You may cast this spell for its "
+                + "surge cost if you or a teammate has cast another spell this turn.)";
+        surgeSpell.setDescription(desc);
+        return surgeSpell;
     }
 
     /**

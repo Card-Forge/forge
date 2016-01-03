@@ -95,7 +95,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
             if (value.equals("Kicked 2")) {
                 this.kicked2 = true;
-            }            
+            }
+            if (value.equals("Surge")) {
+                this.surgeCostPaid = true;
+            }
             if (value.equals("AllTargetsLegal")) {
                 this.setAllTargetsLegal(true);
             }
@@ -223,6 +226,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
         if (this.kicked2 && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
         if (this.altCostPaid && !sa.isOptionalCostPaid(OptionalCost.AltCost)) return false;
+        if (this.surgeCostPaid && !sa.isSurged()) return false;
 
         if (this.optionalCostPaid && this.optionalBoolean && !sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
         if (this.optionalCostPaid && !this.optionalBoolean && sa.isOptionalCostPaid(OptionalCost.Generic)) return false;

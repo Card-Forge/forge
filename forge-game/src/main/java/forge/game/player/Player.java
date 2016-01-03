@@ -1867,6 +1867,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return blood;
     }
 
+    public final boolean hasSurge() {
+        FCollection<Player> list = getAllies();
+        list.add(this);
+        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), list).isEmpty();
+    }
+
     public final boolean hasProwl(final String type) {
         if (prowl.contains("AllCreatureTypes")) {
             return true;

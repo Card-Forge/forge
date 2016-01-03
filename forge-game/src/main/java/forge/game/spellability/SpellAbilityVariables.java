@@ -70,6 +70,7 @@ public class SpellAbilityVariables {
         this.cardsInHand = sav.getCardsInHand();
         this.chosenColors = sav.getColorToCheck();
         this.threshold = sav.isThreshold();
+        this.surge = sav.isSurge();
         this.metalcraft = sav.isThreshold();
         this.hellbent = sav.isHellbent();
         this.allTargetsLegal = sav.isAllTargetsLegal();
@@ -152,6 +153,9 @@ public class SpellAbilityVariables {
 
     /** The hellbent. */
     private boolean hellbent = false;
+
+    /** The surge. */
+    private boolean surge = false;
 
     private boolean allTargetsLegal = false;
 
@@ -486,6 +490,18 @@ public class SpellAbilityVariables {
         this.metalcraft = bMetalcraft;
     }
 
+    /**
+     * <p>
+     * Setter for the field <code>surge</code>.
+     * </p>
+     * 
+     * @param bSurge
+     *            a boolean.
+     */
+    public final void setSurge(final boolean bSurge) {
+        this.surge = bSurge;
+    }
+
     /** Optional Costs */
     protected boolean kicked = false;
     protected boolean kicked1 = false; // http://magiccards.info/query?q=o%3A%22kicker%22+not+o%3A%22multikicker%22+o%3A%22and%2For+{%22
@@ -494,6 +510,7 @@ public class SpellAbilityVariables {
     protected boolean optionalCostPaid = false; // Undergrowth other Pseudo-kickers
     protected boolean optionalBoolean = true; // Just in case you need to check if something wasn't kicked, etc
     protected boolean dragonPresence = false;
+    protected boolean surgeCostPaid = false;
 
     /**
      * @return the allTargetsLegal
@@ -707,6 +724,15 @@ public class SpellAbilityVariables {
      */
     public final boolean isHellbent() {
         return this.hellbent;
+    }
+
+    /**
+     * Checks if is surge.
+     * 
+     * @return the surge
+     */
+    public final boolean isSurge() {
+        return this.surge;
     }
 
     public String getShareAllColors() {

@@ -9,7 +9,8 @@ public enum OptionalCost {
     Buyback,
     Entwine,
     Kicker1,
-    Kicker2, 
+    Kicker2,
+    Surge,
     AltCost, // used by prowl
     Generic, // used by "Dragon Presence" and pseudo-kicker cards
 }

@@ -417,6 +417,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isOptionalCostPaid(OptionalCost.Kicker1) || isOptionalCostPaid(OptionalCost.Kicker2);
     }
 
+    public boolean isSurged() {
+        return isOptionalCostPaid(OptionalCost.Surge);
+    }
+
     public boolean isOptionalCostPaid(OptionalCost cost) {
         SpellAbility saRoot = getRootAbility();
         return saRoot.optionalCosts.contains(cost);

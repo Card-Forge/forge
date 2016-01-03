@@ -332,6 +332,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
+        if (this.isSurge()) {
+            if (!activator.hasSurge()) {
+                return false;
+            }
+        }
         if (this.getProwlTypes() != null && !this.getProwlTypes().isEmpty()) {
             // only true if the activating player has damaged the opponent with
             // one of the specified types
