@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ExecutorService;
@@ -33,8 +34,8 @@ public class ImageFetcher {
             return;
 
         final String prefix = imageKey.substring(0, 2);
-        final File destFile;
-        final String urlToDownload;
+        final ArrayList<String> downloadUrls = new ArrayList<>();
+        File destFile = null;
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
             PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
             if (paperCard == null) {
@@ -54,14 +55,13 @@ public class ImageFetcher {
                     suffix = (backFace ? "b" : "a");
                 }
                 final String editionMciCode = data.getEditions().getMciCodeByCode(paperCard.getEdition());
-                urlToDownload = String.format("http://magiccards.info/scans/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix);
-            } else {
-                // Fall back to using Forge's LQ card downloaded from Wizards' website. This currently only works for older cards.
-                String[] result = ImageUtil.getDownloadUrlAndDestination(ForgeConstants.CACHE_CARD_PICS_DIR, paperCard, backFace);
-                if (result == null) {
-                    return;
-                }
-                urlToDownload = result[0];
+                downloadUrls.add(String.format("http://magiccards.info/scans/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix));
+            }
+
+            // Otherwise, try the LQ image URL.
+            final String[] fallbackUrlParts = ImageUtil.getDownloadUrlAndDestination(ForgeConstants.CACHE_CARD_PICS_DIR, paperCard, backFace);
+            if (fallbackUrlParts != null) {
+                downloadUrls.add(fallbackUrlParts[0]);
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             if (tokenImages == null) {
@@ -71,16 +71,20 @@ public class ImageFetcher {
                 }
             }
             final String filename = imageKey.substring(2) + ".jpg";
-            urlToDownload = tokenImages.get(filename);
-            if (urlToDownload == null) {
+            final String tokenUrl = tokenImages.get(filename);
+            if (tokenUrl == null) {
                 System.err.println("Token " + imageKey + " not found in: " + ForgeConstants.IMAGE_LIST_TOKENS_FILE);
                 return;
             }
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
-        } else {
-            System.err.println("Cannot fetch image for: " + imageKey);
+            downloadUrls.add(tokenUrl);
+        }
+
+        if (downloadUrls.isEmpty()) {
+            System.err.println("No download URLs for: " + imageKey);
             return;
         }
+
         if (destFile.exists()) {
             // TODO: Figure out why this codepath gets reached. Ideally, fetchImage() wouldn't
             // be called if we already have the image.
@@ -111,31 +115,48 @@ public class ImageFetcher {
                 currentFetches.remove(destPath);
             }
         };
-
-        threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    System.out.println("Attempting to fetch: " + urlToDownload);
-                    URL url = new URL(urlToDownload);
-                    BufferedImage image = ImageIO.read(url.openStream());
-                    // First, save to a temporary file so that nothing tries to read
-                    // a partial download.
-                    File destFile = new File(destPath + ".tmp");
-                    destFile.mkdirs();
-                    ImageIO.write(image, "jpg", destFile);
-                    // Now, rename it to the correct name.
-                    destFile.renameTo(new File(destPath));
-                    System.out.println("Saved image to " + destPath);
-                    SwingUtilities.invokeLater(notifyObservers);
-                } catch (IOException e) {
-                    System.err.println("Failed to download card [" + imageKey + "] image: " + e.getMessage());
-                }
-            }
-        });
+        threadPool.submit(new DownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
     }
     
     public static interface Callback {
         public void onImageFetched();
+    }
+    
+    private static class DownloadTask implements Runnable {
+        private final String[] downloadUrls;
+        private final String destPath;
+        private final Runnable notifyObservers;
+
+        public DownloadTask(String[] downloadUrls, String destPath, Runnable notifyObservers) {
+            this.downloadUrls = downloadUrls;
+            this.destPath = destPath;
+            this.notifyObservers = notifyObservers;
+        }
+        
+        private void doFetch(String urlToDownload) throws IOException {
+            URL url = new URL(urlToDownload);
+            System.out.println("Attempting to fetch: " + url);
+            BufferedImage image = ImageIO.read(url.openStream());
+            // First, save to a temporary file so that nothing tries to read
+            // a partial download.
+            File destFile = new File(destPath + ".tmp");
+            destFile.mkdirs();
+            ImageIO.write(image, "jpg", destFile);
+            // Now, rename it to the correct name.
+            destFile.renameTo(new File(destPath));
+            System.out.println("Saved image to " + destPath);
+            SwingUtilities.invokeLater(notifyObservers);
+        }
+
+        public void run() {
+            for (String urlToDownload : downloadUrls) {
+                try {
+                    doFetch(urlToDownload);
+                    break;
+                } catch (IOException e) {
+                    System.out.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
+                }
+            }
+        }
     }
  }
