@@ -10,4 +10,5 @@ public interface IDeckGenPool {
     PaperCard getCard(String name, String edition, int artIndex);
     Iterable<PaperCard> getAllCards();
     Iterable<PaperCard> getAllCards(Predicate<PaperCard> filter);
+    boolean contains(String name);
 }

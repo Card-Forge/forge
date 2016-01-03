@@ -468,6 +468,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
+    public boolean contains(String name) {
+        return allCardsByName.containsKey(name);
+    }
+
+    @Override
     public Iterator<PaperCard> iterator() {
         return this.roAllCards.iterator();
     }

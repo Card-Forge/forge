@@ -46,7 +46,12 @@ public class DeckGenPool implements IDeckGenPool {
     }
 
     public boolean contains(PaperCard card) {
-        return cards.containsKey(card.getName());
+        return contains(card.getName());
+    }
+
+    @Override
+    public boolean contains(String name) {
+        return cards.containsKey(name);
     }
 
     @Override

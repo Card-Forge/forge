@@ -153,9 +153,8 @@ public abstract class DeckGeneratorBase {
         }
         return res;
     }
-    
-    protected void addBasicLand(int cnt)
-    {
+
+    protected void addBasicLand(int cnt) {
     	addBasicLand(cnt, null);
     }
 
@@ -269,32 +268,32 @@ public abstract class DeckGeneratorBase {
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {
         // attempt to optimize basic land counts according
         // to color representation
-
         Map<String, Integer> res = new TreeMap<String, Integer>();
         // count each card color using mana costs
         // TODO: count hybrid mana differently?
         for (Entry<PaperCard, Integer> cpe : outList) {
-
             int profile = cpe.getKey().getRules().getManaCost().getColorProfile();
 
             if ((profile & MagicColor.WHITE) != 0) {
                 increment(res, MagicColor.Constant.BASIC_LANDS.get(0), cpe.getValue());
-            } else if ((profile & MagicColor.BLUE) != 0) {
+            }
+            else if ((profile & MagicColor.BLUE) != 0) {
                 increment(res, MagicColor.Constant.BASIC_LANDS.get(1), cpe.getValue());
-            } else if ((profile & MagicColor.BLACK) != 0) {
+            }
+            else if ((profile & MagicColor.BLACK) != 0) {
                 increment(res, MagicColor.Constant.BASIC_LANDS.get(2), cpe.getValue());
-            } else if ((profile & MagicColor.RED) != 0) {
+            }
+            else if ((profile & MagicColor.RED) != 0) {
                 increment(res, MagicColor.Constant.BASIC_LANDS.get(3), cpe.getValue());
-            } else if ((profile & MagicColor.GREEN) != 0) {
+            }
+            else if ((profile & MagicColor.GREEN) != 0) {
                 increment(res, MagicColor.Constant.BASIC_LANDS.get(4), cpe.getValue());
             }
-
         }
         return res;
     }
 
-    protected static void increment(Map<String, Integer> map, String key, int delta)
-    {
+    protected static void increment(Map<String, Integer> map, String key, int delta) {
         final Integer boxed = map.get(key);
         map.put(key, boxed == null ? delta : boxed.intValue() + delta);
     }
@@ -377,22 +376,21 @@ public abstract class DeckGeneratorBase {
      * @return dual land names
      */
     protected List<String> getDualLandList() {
-
         final List<String> dLands = new ArrayList<String>();
 
         if (colors.countColors() > 3) {
-            dLands.add("Rupture Spire");
-            dLands.add("Undiscovered Paradise");
+            addCardNameToList("Rupture Spire", dLands);
+            addCardNameToList("Undiscovered Paradise", dLands);
         }
 
         if (colors.countColors() > 2) {
-            dLands.add("Evolving Wilds");
-            dLands.add("Terramorphic Expanse");
+            addCardNameToList("Evolving Wilds", dLands);
+            addCardNameToList("Terramorphic Expanse", dLands);
         }
         for (Entry<Integer, String[]> dual : dualLands.entrySet()) {
             if (colors.hasAllColors(dual.getKey())) {
                 for (String s : dual.getValue()) {
-                    dLands.add(s);
+                    addCardNameToList(s, dLands);
                 }
             }
         }
@@ -413,10 +411,16 @@ public abstract class DeckGeneratorBase {
         for (Entry<Integer, String[]> dual : dualLands.entrySet()) {
             if (!colors.hasAllColors(dual.getKey())) {
                 for (String s : dual.getValue()) {
-                    dLands.add(s);
+                    addCardNameToList(s, dLands);
                 }
             }
         }
         return dLands;
-    }    
+    }
+
+    private void addCardNameToList(String cardName, List<String> cardNameList) {
+        if (pool.contains(cardName)) { //avoid adding card if it's not in pool
+            cardNameList.add(cardName);
+        }
+    }
 }
