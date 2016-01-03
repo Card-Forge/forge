@@ -238,99 +238,6 @@ public abstract class Animation {
      * @param speed
      *            a int.
      */
-    public static void moveCardToField(final int startX, final int startY, final int startWidth, final int endX,
-            final int endY, final int endWidth, final CardPanel animationPanel, final CardPanel placeholder,
-            final JLayeredPane layeredPane, final int speed) {
-        Animation.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
-                final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
-                final float a = 2f;
-                final float sqrta = (float) Math.sqrt(1 / a);
-
-                animationPanel.setCardBounds(startX, startY, startWidth, startHeight);
-                animationPanel.setAnimationPanel(true);
-                Container parent = animationPanel.getParent();
-                if (parent != layeredPane) {
-                    layeredPane.add(animationPanel);
-                    layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER.intValue());
-                }
-
-                new Animation(700) {
-                    @Override
-                    protected void update(float percentage) {
-                        if (placeholder != null && !placeholder.isShowing()) {
-                            cancel();
-                            return;
-                        }
-                        int currentX = startX + Math.round((endX - startX + endWidth / 2f) * percentage);
-                        int currentY = startY + Math.round((endY - startY + endHeight / 2f) * percentage);
-                        int currentWidth, currentHeight;
-                        int midWidth = Math.max(200, endWidth * 2);
-                        int midHeight = Math.round(midWidth * CardPanel.ASPECT_RATIO);
-                        if (percentage <= 0.5f) {
-                            percentage = percentage * 2;
-                            float pp = sqrta * (1 - percentage);
-                            percentage = 1 - a * pp * pp;
-                            currentWidth = startWidth + Math.round((midWidth - startWidth) * percentage);
-                            currentHeight = startHeight + Math.round((midHeight - startHeight) * percentage);
-                        } else {
-                            percentage = (percentage - 0.5f) * 2;
-                            float pp = sqrta * percentage;
-                            percentage = a * pp * pp;
-                            currentWidth = midWidth + Math.round((endWidth - midWidth) * percentage);
-                            currentHeight = midHeight + Math.round((endHeight - midHeight) * percentage);
-                        }
-                        currentX -= Math.round(currentWidth / 2.0);
-                        currentY -= Math.round(currentHeight / 2.0);
-                        animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
-                    }
-
-                    @Override
-                    protected void onEnd() {
-                        EventQueue.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (placeholder != null) {
-                                    placeholder.setDisplayEnabled(true);
-                                    placeholder.setImage(animationPanel);
-                                }
-                                animationPanel.setVisible(false);
-                                animationPanel.repaint();
-                                layeredPane.remove(animationPanel);
-                            }
-                        });
-                    }
-                }.run();
-            }
-        });
-    }
-
-    /**
-     * Animate a {@link CardPanel} moving.
-     * 
-     * @param startX
-     *            a int.
-     * @param startY
-     *            a int.
-     * @param startWidth
-     *            a int.
-     * @param endX
-     *            a int.
-     * @param endY
-     *            a int.
-     * @param endWidth
-     *            a int.
-     * @param animationPanel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param placeholder
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param layeredPane
-     *            a {@link javax.swing.JLayeredPane} object.
-     * @param speed
-     *            a int.
-     */
     public static void moveCard(final int startX, final int startY, final int startWidth, final int endX,
             final int endY, final int endWidth, final CardPanel animationPanel, final CardPanel placeholder,
             final JLayeredPane layeredPane, final int speed) {
@@ -365,7 +272,6 @@ public abstract class Animation {
                             public void run() {
                                 if (placeholder != null) {
                                     placeholder.setDisplayEnabled(true);
-                                    // placeholder.setImage(animationPanel);
                                     placeholder.setCard(placeholder.getCard());
                                 }
                                 animationPanel.setVisible(false);

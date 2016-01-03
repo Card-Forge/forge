@@ -84,7 +84,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private OutlinedLabel ptText;
     private OutlinedLabel damageText;
     private OutlinedLabel cardIdText;
-    private final List<CardPanel> imageLoadListeners = new ArrayList<CardPanel>(2);
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
@@ -162,50 +161,27 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         if (card == null)  {
             cachedImage = null;
-            setImage((BufferedImage)null);
+            setImage(null);
             return;
         }
 
         cachedImage = new CachedCardImage(card, matchUI.getLocalPlayers(), imagePanel.getWidth(), imagePanel.getHeight()) {
             @Override
             public void onImageFetched() {
-                if (cachedImage != null)
+                if (cachedImage != null) {
                     setImage(cachedImage.getImage());
+                }
             }
         };
         setImage(cachedImage.getImage());
     }
 
     private void setImage(final BufferedImage srcImage) {
-        if (imagePanel == null) {
+        if (imagePanel == null || imagePanel.getSrcImage() == srcImage) {
             return;
         }
-        synchronized (imagePanel) {
-            if (imagePanel.getSrcImage() == srcImage) {
-                return;
-            }
-            imagePanel.setImage(srcImage);
-            repaint();
-            for (final CardPanel cardPanel : imageLoadListeners) {
-                cardPanel.setImage(srcImage);
-                cardPanel.repaint();
-            }
-            imageLoadListeners.clear();
-        }
-        doLayout();
-    }
-
-    public final void setImage(final CardPanel panel) {
-        if (panel == this) {
-            throw new IllegalArgumentException("Can't pass 'this' as argument to CardPanel#setImage");
-        }
-        synchronized (panel.imagePanel) {
-            if (panel.imagePanel.hasImage()) {
-                setImage(panel.imagePanel.getSrcImage());
-            } else {
-                panel.imageLoadListeners.add(this);
-            }
-        }
+        imagePanel.setImage(srcImage);
+        repaint();
     }
 
     public final boolean isDisplayEnabled() {
