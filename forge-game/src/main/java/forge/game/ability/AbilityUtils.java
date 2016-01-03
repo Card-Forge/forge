@@ -1459,6 +1459,14 @@ public class AbilityUtils {
 
                     return sum;
                 }
+                //Count$HasNumChosenColors.<DefinedCards related to spellability>
+                if (sq[0].contains("HasNumChosenColors")) {
+                    int sum = 0;
+                    for (Card card : AbilityUtils.getDefinedCards(sa.getHostCard(), sq[1], sa)) {
+                        sum += CardUtil.getColors(card).getSharedColors(ColorSet.fromNames(c.getChosenColors())).countColors();
+                    }
+                    return sum;
+                }
                 if (sq[0].startsWith("TriggerRememberAmount")) {
                     final SpellAbility root = sa.getRootAbility();
                     int count = 0;

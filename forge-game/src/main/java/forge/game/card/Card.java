@@ -3649,10 +3649,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(MagicColor.fromName(source.getChosenColor())))
                 return false;
 
-        } else if (property.equals("AllChosenColors")) {
-            if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAllColors(ColorSet.fromNames(source.getChosenColors()).getColor()))
-                return false;
-
         } else if (property.equals("AnyChosenColor")) {
             if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor()))
                 return false;

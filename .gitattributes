@@ -12649,6 +12649,7 @@ forge-gui/res/cardsfolder/s/seal_of_fire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/seal_of_primordium.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/seal_of_removal.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/seal_of_strength.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/seal_of_the_guildpact.txt -text
 forge-gui/res/cardsfolder/s/sealed_fate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sealock_monster.txt -text
 forge-gui/res/cardsfolder/s/seance.txt -text
