@@ -5060,6 +5060,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (property.equals("pseudokicked")) {
                 if (isOptionalCostPaid(OptionalCost.Generic)) return false;
             }
+        } else if (property.startsWith("surged")) {
+            if (!isOptionalCostPaid(OptionalCost.Surge)) {
+                return false;
+            }
         } else if (property.startsWith("evoked")) {
             if (!isEvoked()) {
                 return false;
