@@ -771,6 +771,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private final String name;
         private boolean isCollapsed;
         private float scrollWidth;
+        private int count;
 
         public Group(String name0) {
             name = name0;
@@ -778,6 +779,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         public void add(ItemInfo item) {
             items.add(item);
+            if (!item.unowned) {
+                count++;
+            }
         }
 
         @Override
@@ -793,7 +797,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 //draw group name and horizontal line
                 float x = GROUP_HEADER_GLYPH_WIDTH + PADDING + 1;
                 float y = 0;
-                String caption = name + " (" + items.size() + ")";
+                String caption;
+                if (itemManager.getPool().allowZero() && itemManager.isInfinite()) {
+                    caption = name + " (" + count + " / " + items.size() + ")"; //show ratio of owned / total when zero allowed
+                }
+                else {
+                    caption = name + " (" + count + ")";
+                }
                 g.drawText(caption, GROUP_HEADER_FONT, GROUP_HEADER_FORE_COLOR, x, y, getWidth(), GROUP_HEADER_HEIGHT, false, HAlignment.LEFT, true);
                 x += GROUP_HEADER_FONT.getBounds(caption).width + PADDING;
                 y += GROUP_HEADER_HEIGHT / 2;
