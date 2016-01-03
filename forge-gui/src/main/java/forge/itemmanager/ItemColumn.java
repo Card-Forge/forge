@@ -38,10 +38,10 @@ public class ItemColumn {
             Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
             Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
         if (fnSort0 == null) {
-            throw new NullPointerException("A sort function hasn't been set for Column " + this);
+            throw new NullPointerException("A sort function hasn't been set for column " + config0.getLongName());
         }
         if (fnDisplay0 == null) {
-            throw new NullPointerException("A display function hasn't been set for Column " + this);
+            throw new NullPointerException("A display function hasn't been set for column " + config0.getLongName());
         }
 
         config = config0;

@@ -179,14 +179,14 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getConquestCollectionDefaultColumns() {
-        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(null, false, false, false, true, true);
+        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(null, false, false, false, true, false);
         columns.get(ColumnDef.NEW).setSortPriority(1);
         columns.get(ColumnDef.NAME).setSortPriority(2);
         return columns;
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getConquestDeckEditorDefaultColumns() {
-        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.DECK_QUANTITY, false, false, false, true, true);
+        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.DECK_QUANTITY, false, false, false, true, false);
         columns.get(ColumnDef.CMC).setSortPriority(1);
         columns.get(ColumnDef.TYPE).setSortPriority(2);
         columns.get(ColumnDef.NAME).setSortPriority(3);

@@ -70,7 +70,7 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
     public void save(final Deck unit) {
         DeckSerializer.writeDeck(unit, this.makeFileFor(unit));
     }
-    
+
     @Override
     public void erase(final Deck unit) {
         this.makeFileFor(unit).delete();
