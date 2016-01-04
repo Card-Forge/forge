@@ -74,7 +74,12 @@ public final class ConquestData {
         ConquestCommander commander = new ConquestCommander(startingCommander0, startingPlane0.getCardPool(), false);
         commanders.add(commander);
         unlockCard(startingCommander0);
-        unlockCards(commander.getDeck().getMain().toFlatList());
+        for (Entry<PaperCard, Integer> entry : commander.getDeck().getMain()) {
+            PaperCard card = entry.getKey();
+            if (!card.getRules().getType().isBasicLand()) { //ignore basic lands
+                unlockCard(card);
+            }
+        }
     }
 
     public ConquestData(File directory0) {
@@ -151,8 +156,6 @@ public final class ConquestData {
     }
 
     public void unlockCard(PaperCard card) {
-        if (card.getRules().getType().isBasicLand()) { return; } //ignore basic lands
-
         if (unlockedCards.add(card)) {
             newCards.add(card);
         }
