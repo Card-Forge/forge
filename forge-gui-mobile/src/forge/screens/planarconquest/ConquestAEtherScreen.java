@@ -77,6 +77,8 @@ public class ConquestAEtherScreen extends FScreen {
 
         model.spendAEtherShards(shardCost);
         model.unlockCard(card);
+        model.saveData();
+
         updatePullButton();
     }
 
