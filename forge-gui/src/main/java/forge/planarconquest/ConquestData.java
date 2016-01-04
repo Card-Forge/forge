@@ -61,14 +61,14 @@ public final class ConquestData {
     private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
     private final HashSet<PaperCard> newCards = new HashSet<PaperCard>();
 
-    public ConquestData(String name0, PaperCard planeswalker0, ConquestPlane startingPlane0, PaperCard startingCommander0) {
+    public ConquestData(String name0, ConquestPlane startingPlane0, PaperCard startingPlaneswalker0, PaperCard startingCommander0) {
         name = name0;
         directory = new File(ForgeConstants.CONQUEST_SAVE_DIR, name);
         xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
         aetherShards = FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_START_SHARDS);
         currentLocation = new ConquestLocation(startingPlane0, 0, 0, Region.START_COL);
-        setPlaneswalker(planeswalker0);
-        unlockCard(planeswalker0);
+        setPlaneswalker(startingPlaneswalker0);
+        unlockCard(startingPlaneswalker0);
 
         //generate deck for starting commander and add all cards to collection
         ConquestCommander commander = new ConquestCommander(startingCommander0, startingPlane0.getCardPool(), false);

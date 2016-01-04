@@ -30,8 +30,8 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
     @SuppressWarnings("unchecked")
     public NewConquestScreen() {
         super(null, NewGameMenu.getMenu(), new WizardStep[] {
-            new SelectPlaneswalkerStep(),
             new SelectStartingPlaneStep(),
+            new SelectStartingPlaneswalkerStep(),
             new SelectStartingCommanderStep()
         }, new NewConquestScreenModel());
     }
@@ -61,7 +61,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
                     @Override
                     public void run() {
                         ConquestController qc = FModel.getConquest();
-                        qc.setModel(new ConquestData(conquestName, model.planeswalker, model.startingPlane, model.startingCommander));
+                        qc.setModel(new ConquestData(conquestName, model.startingPlane, model.startingPlaneswalker, model.startingCommander));
                         qc.getDecks().add(Iterables.getFirst(qc.getModel().getCommanders(), null).getDeck()); //ensure starting deck is saved
                         qc.getModel().saveData();
 
@@ -76,7 +76,40 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         });
     }
 
-    private static class SelectPlaneswalkerStep extends WizardStep<NewConquestScreenModel> {
+    private static class SelectStartingPlaneStep extends WizardStep<NewConquestScreenModel> {
+        private final ConquestPlaneSelector planeSelector = add(new ConquestPlaneSelector());
+
+        protected SelectStartingPlaneStep() {
+            super("Select Starting Plane");
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
+            planeSelector.setBounds(0, 0, width, height);
+        }
+
+        @Override
+        protected void reset() {
+            planeSelector.reset();
+        }
+
+        @Override
+        protected void onActivate(NewConquestScreenModel model) {
+            planeSelector.activate();
+        }
+
+        @Override
+        protected boolean updateModelAndAdvance(NewConquestScreenModel model) {
+            model.startingPlane = planeSelector.getSelectedPlane();
+            if (model.startingPlane != null) {
+                planeSelector.deactivate();
+                return true;
+            }
+            return false;
+        }
+    }
+
+    private static class SelectStartingPlaneswalkerStep extends WizardStep<NewConquestScreenModel> {
         private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(ConquestUtil.getAllPlaneswalkers()) {
             @Override
             protected void onItemActivate(Integer index, PaperCard value) {
@@ -91,8 +124,8 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         });
         private final CardListPreview tokenDisplay = add(new CardListPreview(lstPlaneswalkers));
 
-        protected SelectPlaneswalkerStep() {
-            super("Select Planeswalker");
+        protected SelectStartingPlaneswalkerStep() {
+            super("Select Starting Planeswalker");
         }
 
         @Override
@@ -129,41 +162,8 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
 
         @Override
         protected boolean updateModelAndAdvance(NewConquestScreenModel model) {
-            model.planeswalker = lstPlaneswalkers.getSelectedItem();
-            return model.planeswalker != null;
-        }
-    }
-
-    private static class SelectStartingPlaneStep extends WizardStep<NewConquestScreenModel> {
-        private final ConquestPlaneSelector planeSelector = add(new ConquestPlaneSelector());
-
-        protected SelectStartingPlaneStep() {
-            super("Select Starting Plane");
-        }
-
-        @Override
-        protected void doLayout(float width, float height) {
-            planeSelector.setBounds(0, 0, width, height);
-        }
-
-        @Override
-        protected void reset() {
-            planeSelector.reset();
-        }
-
-        @Override
-        protected void onActivate(NewConquestScreenModel model) {
-            planeSelector.activate();
-        }
-
-        @Override
-        protected boolean updateModelAndAdvance(NewConquestScreenModel model) {
-            model.startingPlane = planeSelector.getSelectedPlane();
-            if (model.startingPlane != null) {
-                planeSelector.deactivate();
-                return true;
-            }
-            return false;
+            model.startingPlaneswalker = lstPlaneswalkers.getSelectedItem();
+            return model.startingPlaneswalker != null;
         }
     }
 
