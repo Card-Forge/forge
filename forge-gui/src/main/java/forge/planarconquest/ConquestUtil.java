@@ -120,16 +120,9 @@ public class ConquestUtil {
             availableCards.removeAll(invalidCards);
         }
 
-        //create pool from available cards and allowed basic lands
+        //create pool from available cards
         CardPool pool = new CardPool();
         pool.addAllFlat(availableCards);
-
-        String setCode = FModel.getConquest().getModel().getCurrentPlane().getEditions().get(0).getCode();
-        for (int i = 0; i < MagicColor.WUBRG.length; i++) {
-            if (colorIdentity.hasAnyColor(MagicColor.WUBRG[i])) {
-                pool.add(MagicColor.Constant.BASIC_LANDS.get(i), setCode, 50);
-            }
-        }
         return pool;
     }
 
