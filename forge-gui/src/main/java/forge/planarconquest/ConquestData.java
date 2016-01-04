@@ -151,6 +151,8 @@ public final class ConquestData {
     }
 
     public void unlockCard(PaperCard card) {
+        if (card.getRules().getType().isBasicLand()) { return; } //ignore basic lands
+
         if (unlockedCards.add(card)) {
             newCards.add(card);
         }

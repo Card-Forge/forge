@@ -37,9 +37,18 @@ import java.util.List;
  * @version $Id: Generate2ColorDeck.java 19765 2013-02-20 03:01:37Z myk $
  */
 public class DeckGeneratorMonoColor extends DeckGeneratorBase {
-    @Override protected final float getLandsPercentage() { return 0.39f; }
-    @Override protected final float getCreatPercentage() { return 0.36f; }
-    @Override protected final float getSpellPercentage() { return 0.25f; }
+    @Override
+    protected final float getLandPercentage() {
+        return 0.4f;
+    }
+    @Override
+    protected final float getCreaturePercentage() {
+        return 0.35f;
+    }
+    @Override
+    protected final float getSpellPercentage() {
+        return 0.25f;
+    }
 
     @SuppressWarnings("unchecked")
     final List<ImmutablePair<FilterCMC, Integer>> cmcLevels = Lists.newArrayList(
@@ -72,7 +81,7 @@ public class DeckGeneratorMonoColor extends DeckGeneratorBase {
         addCreaturesAndSpells(size, cmcLevels, forAi);
 
         // Add lands
-        int numLands = (int) (getLandsPercentage() * size);
+        int numLands = Math.round(size * getLandPercentage());
 
         trace.append("numLands:").append(numLands).append("\n");
 

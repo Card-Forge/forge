@@ -38,9 +38,18 @@ import java.util.List;
  * @version $Id$
  */
 public class DeckGenerator2Color extends DeckGeneratorBase {
-    @Override protected final float getLandsPercentage() { return 0.39f; }
-    @Override protected final float getCreatPercentage() { return 0.36f; }
-    @Override protected final float getSpellPercentage() { return 0.25f; }
+    @Override
+    protected final float getLandPercentage() {
+        return 0.42f;
+    }
+    @Override
+    protected final float getCreaturePercentage() {
+        return 0.34f;
+    }
+    @Override
+    protected final float getSpellPercentage() {
+        return 0.24f;
+    }
 
     @SuppressWarnings("unchecked")
     final List<ImmutablePair<FilterCMC, Integer>> cmcLevels = Lists.newArrayList(
@@ -78,13 +87,12 @@ public class DeckGenerator2Color extends DeckGeneratorBase {
         }
     }
 
-
     @Override
     public final CardPool getDeck(final int size, final boolean forAi) {
         addCreaturesAndSpells(size, cmcLevels, forAi);
 
         // Add lands
-        int numLands = Math.round(size * getLandsPercentage());
+        int numLands = Math.round(size * getLandPercentage());
         adjustDeckSize(size - numLands);
         trace.append(String.format("Adjusted deck size to: %d, should add %d land(s)%n", size - numLands, numLands));
 

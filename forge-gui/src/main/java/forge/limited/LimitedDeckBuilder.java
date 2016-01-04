@@ -38,7 +38,19 @@ import forge.util.MyRandom;
 /**
  * Limited format deck.
  */
-public class LimitedDeckBuilder extends DeckGeneratorBase{
+public class LimitedDeckBuilder extends DeckGeneratorBase {
+    @Override
+    protected final float getLandPercentage() {
+        return 0.44f;
+    }
+    @Override
+    protected final float getCreaturePercentage() {
+        return 0.33f;
+    }
+    @Override
+    protected final float getSpellPercentage() {
+        return 0.23f;
+    }
 
     private final int numSpellsNeeded = 22;
     private int landsNeeded = 18;

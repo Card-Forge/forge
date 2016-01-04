@@ -57,10 +57,9 @@ public abstract class DeckGeneratorBase {
     protected final IDeckGenPool pool;
     protected final DeckFormat format;
 
-    // 2-colored deck generator has its own constants. The rest works fine with these ones
-    protected float getLandsPercentage() { return 0.44f; }
-    protected float getCreatPercentage() { return 0.34f; }
-    protected float getSpellPercentage() { return 0.22f; }
+    protected abstract float getLandPercentage();
+    protected abstract float getCreaturePercentage();
+    protected abstract float getSpellPercentage();
 
     public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0) {
         pool = format0.getCardPool(pool0);
@@ -81,7 +80,7 @@ public abstract class DeckGeneratorBase {
         // build subsets based on type
 
         final Iterable<PaperCard> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES));
-        final int creatCnt = (int) Math.ceil(getCreatPercentage() * size);
+        final int creatCnt = (int) Math.ceil(getCreaturePercentage() * size);
         trace.append("Creatures to add:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels);
 
@@ -91,7 +90,7 @@ public abstract class DeckGeneratorBase {
         trace.append("Spells to add:").append(spellCnt).append("\n");
         addCmcAdjusted(spells, spellCnt, cmcLevels);
         
-        trace.append(String.format("Current deck size: %d... should be %f%n", tDeck.countAll(), size * (getCreatPercentage() + getSpellPercentage())));
+        trace.append(String.format("Current deck size: %d... should be %f%n", tDeck.countAll(), size * (getCreaturePercentage() + getSpellPercentage())));
     }
 
     public CardPool getDeck(final int size, final boolean forAi) {

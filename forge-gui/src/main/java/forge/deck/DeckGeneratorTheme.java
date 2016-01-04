@@ -38,6 +38,19 @@ import java.util.Random;
  * @version $Id: ThemeDeckGenerator.java 25022 2014-03-02 14:19:50Z teferi $
  */
 public class DeckGeneratorTheme extends DeckGeneratorBase {
+    @Override
+    protected final float getLandPercentage() {
+        return 0.44f;
+    }
+    @Override
+    protected final float getCreaturePercentage() {
+        return 0.33f;
+    }
+    @Override
+    protected final float getSpellPercentage() {
+        return 0.23f;
+    }
+
     private int basicLandPercentage = 0;
     private String basicLandSet = null;
     private boolean testing = false;
