@@ -42,8 +42,6 @@ public class ConquestCommandersScreen extends FScreen {
         .textColor(FLabel.INLINE_LABEL_COLOR)
         .align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
 
-    private boolean needRefreshOnActivate = true;
-
     public ConquestCommandersScreen() {
         super("", ConquestMenu.getMenu());
 
@@ -59,11 +57,7 @@ public class ConquestCommandersScreen extends FScreen {
     @Override
     public void onActivate() {
         setHeaderCaption(FModel.getConquest().getModel().getName());
-
-        if (needRefreshOnActivate) {
-            needRefreshOnActivate = false;
-            refreshCommanders();
-        }
+        refreshCommanders();
     }
 
     public void refreshCommanders() {
@@ -75,7 +69,6 @@ public class ConquestCommandersScreen extends FScreen {
         final ConquestCommander commander = lstCommanders.getSelectedItem();
         if (commander == null) { return; }
 
-        needRefreshOnActivate = true;
         Forge.openScreen(new ConquestDeckEditor(commander));
     }
 
