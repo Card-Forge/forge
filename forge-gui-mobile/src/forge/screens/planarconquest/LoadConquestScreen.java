@@ -288,7 +288,7 @@ public class LoadConquestScreen extends LaunchScreen {
                     h += SettingsScreen.SETTING_PADDING;
                     y += h;
                     h = totalHeight - h + SettingsScreen.getInsets(w);
-                    float iconSize = h + Utils.scale(1);
+                    float iconSize = h + Utils.scale(2);
                     float iconOffset = SettingsScreen.SETTING_PADDING - Utils.scale(2);
 
                     String cards = String.valueOf(value.getUnlockedCount());
