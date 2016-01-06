@@ -28,13 +28,13 @@ public class ConquestMenu extends FPopupMenu {
     private static final ConquestCollectionScreen collectionScreen = new ConquestCollectionScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
 
-    private static final FMenuItem multiverseItem = new FMenuItem("The Multiverse", FSkinImage.QUEST_MAP, new FEventHandler() {
+    private static final FMenuItem multiverseItem = new FMenuItem("The Multiverse", FSkinImage.MULTIVERSE, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(multiverseScreen);
         }
     });
-    private static final FMenuItem aetherItem = new FMenuItem("The AEther", FSkinImage.FLASHBACK, new FEventHandler() {
+    private static final FMenuItem aetherItem = new FMenuItem("The AEther", FSkinImage.AETHER_SHARD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(aetherScreen);
