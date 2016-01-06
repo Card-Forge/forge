@@ -49,7 +49,7 @@ public class ConquestPrefsScreen extends FScreen {
     public ConquestPrefsScreen() {
         super("Conquest Preferences", ConquestMenu.getMenu());
 
-        scroller.add(new PrefsHeader("AEther Shards", FSkinImage.QUEST_COIN, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsHeader("AEther Shards", FSkinImage.AETHER_SHARD, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Base Card Value", CQPref.AETHER_BASE_VALUE, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Markup Percentage", CQPref.AETHER_MARKUP, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Starting Shards", CQPref.AETHER_START_SHARDS, PrefsGroup.AETHER));

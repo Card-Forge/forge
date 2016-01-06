@@ -116,7 +116,7 @@ public class ConquestAEtherScreen extends FScreen {
     private class PullButton extends FLabel {
         protected PullButton() {
             super(new FLabel.ButtonBuilder().font(FSkinFont.forHeight(PULL_BTN_HEIGHT * 0.45f))
-                    .icon(FSkinImage.QUEST_COIN).iconScaleFactor(1f).command(new FEventHandler() {
+                    .icon(FSkinImage.AETHER_SHARD).iconScaleFactor(1f).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     pullFromTheAEther();

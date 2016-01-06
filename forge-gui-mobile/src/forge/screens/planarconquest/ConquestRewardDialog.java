@@ -275,7 +275,7 @@ public class ConquestRewardDialog extends FScrollPane {
             reward = reward0;
             if (reward.isDuplicate()) {
                 setFont(FSkinFont.get(20));
-                setIcon(FSkinImage.QUEST_COIN);
+                setIcon(FSkinImage.AETHER_SHARD);
                 setAlignment(HAlignment.CENTER);
                 setText(String.valueOf(reward.getReplacementShards()));
             }

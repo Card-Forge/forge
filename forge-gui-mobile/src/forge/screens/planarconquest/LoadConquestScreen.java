@@ -299,7 +299,7 @@ public class LoadConquestScreen extends LaunchScreen {
                     g.drawText(value.getPlaneswalker().getName() + " - " + value.getCurrentPlane().getName(), font, SettingsScreen.DESC_COLOR, x, y, w - shardsWidth - cardsWidth, h, false, HAlignment.LEFT, false);
                     g.drawImage(FSkinImage.HAND, x + w - shardsWidth - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
                     g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - shardsWidth - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
-                    g.drawImage(FSkinImage.QUEST_COINSTACK, x + w - shardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
+                    g.drawImage(FSkinImage.AETHER_SHARD, x + w - shardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
                     g.drawText(shards, font, SettingsScreen.DESC_COLOR, x + w - shardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
                 }
             });

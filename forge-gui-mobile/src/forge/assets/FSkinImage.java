@@ -118,6 +118,7 @@ public enum FSkinImage implements FImage {
 
     //Planar Conquest Images
     PLANE_MONITOR (FSkinProp.IMG_PLANE_MONITOR, SourceFile.PLANAR_CONQUEST),
+    AETHER_SHARD  (FSkinProp.IMG_AETHER_SHARD, SourceFile.PLANAR_CONQUEST),
 
     //Quest Icons
     QUEST_ZEP         (FSkinProp.ICO_QUEST_ZEP, SourceFile.ICONS),
