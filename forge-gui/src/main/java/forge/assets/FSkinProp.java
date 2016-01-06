@@ -246,6 +246,7 @@ public enum FSkinProp {
     IMG_PLANE_MONITOR     (new int[] {0, 0, 443, 315}, PropType.PLANAR_CONQUEST),
     IMG_AETHER_SHARD      (new int[] {0, 315, 120, 120}, PropType.PLANAR_CONQUEST),
     IMG_MULTIVERSE        (new int[] {125, 320, 110, 110}, PropType.PLANAR_CONQUEST),
+    IMG_SPELLBOOK         (new int[] {240, 315, 120, 120}, PropType.PLANAR_CONQUEST),
 
     //button images
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),

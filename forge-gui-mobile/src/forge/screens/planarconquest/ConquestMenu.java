@@ -46,7 +46,7 @@ public class ConquestMenu extends FPopupMenu {
             Forge.openScreen(commandersScreen);
         }
     });
-    private static final FMenuItem collectionItem = new FMenuItem("Collection", FSkinImage.QUEST_BOX, new FEventHandler() {
+    private static final FMenuItem collectionItem = new FMenuItem("Collection", FSkinImage.SPELLBOOK, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(collectionScreen);

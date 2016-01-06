@@ -200,7 +200,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             };
         case PlanarConquest:
             return new DeckEditorPage[] {
-                    new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, "Collection", FSkinImage.QUEST_BOX),
+                    new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, "Collection", FSkinImage.SPELLBOOK),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, "Deck", FSkinImage.DECKLIST)
             };
         }
