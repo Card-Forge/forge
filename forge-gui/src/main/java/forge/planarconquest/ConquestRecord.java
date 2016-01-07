@@ -5,7 +5,7 @@ import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
 
 public class ConquestRecord implements IXmlWritable {
-    private int wins, losses, level;
+    private int wins, losses, tier;
 
     public ConquestRecord() {
     }
@@ -13,13 +13,13 @@ public class ConquestRecord implements IXmlWritable {
     public ConquestRecord(XmlReader xml) {
         wins = xml.read("wins", 0);
         losses = xml.read("losses", 0);
-        level = xml.read("level", 0);
+        tier = xml.read("tier", 0);
     }
     @Override
     public void saveToXml(XmlWriter xml) {
         xml.write("wins", wins);
         xml.write("losses", losses);
-        xml.write("level", level);
+        xml.write("tier", tier);
     }
 
     public int getWins() {
@@ -30,19 +30,18 @@ public class ConquestRecord implements IXmlWritable {
         return losses;
     }
 
-    public int getLevel() {
-        return level;
+    public int getTier() {
+        return tier;
     }
 
-    public void addWin() {
+    public void addWin(int tier0) {
         wins++;
+        if (tier0 > tier) {
+            tier = tier0;
+        }
     }
 
     public void addLoss() {
         losses++;
-    }
-
-    public void levelUp() {
-        level++;
     }
 }

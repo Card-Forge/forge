@@ -8,14 +8,20 @@ import forge.planarconquest.ConquestController.GameRunner;
 
 public abstract class ConquestEvent {
     private final ConquestLocation location;
+    private final int tier;
     private Deck opponentDeck;
 
-    public ConquestEvent(ConquestLocation location0) {
+    public ConquestEvent(ConquestLocation location0, int tier0) {
         location = location0;
+        tier = tier0;
     }
 
     public ConquestLocation getLocation() {
         return location;
+    }
+
+    public int getTier() {
+        return tier;
     }
 
     public Deck getOpponentDeck() {

@@ -38,6 +38,13 @@ public class ConquestPlaneData implements IXmlWritable {
         return result != null && result.getWins() > 0;
     }
 
+    public ConquestRecord getEventRecord(ConquestLocation loc) {
+        return getEventRecord(loc.getRegionIndex(), loc.getRow(), loc.getCol());
+    }
+    public ConquestRecord getEventRecord(int regionIndex, int row, int col) {
+        return eventResults[regionIndex * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + row * Region.COLS_PER_REGION + col];
+    }
+
     private ConquestRecord getOrCreateResult(ConquestEvent event) {
         ConquestLocation loc = event.getLocation();
         int index = loc.getRegionIndex() * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + loc.getRow() * Region.COLS_PER_REGION + loc.getCol();
@@ -50,7 +57,7 @@ public class ConquestPlaneData implements IXmlWritable {
     }
 
     public void addWin(ConquestEvent event) {
-        getOrCreateResult(event).addWin();
+        getOrCreateResult(event).addWin(event.getTier());
     }
 
     public void addLoss(ConquestEvent event) {

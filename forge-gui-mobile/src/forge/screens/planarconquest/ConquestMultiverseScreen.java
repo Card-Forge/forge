@@ -10,6 +10,7 @@ import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
@@ -23,6 +24,7 @@ import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
+import forge.planarconquest.ConquestRecord;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FScrollPane;
@@ -112,6 +114,8 @@ public class ConquestMultiverseScreen extends FScreen implements IConquestEventL
             int rows = Region.ROWS_PER_REGION;
             float colWidth = w / cols;
             float rowHeight = regionHeight / rows;
+            float eventIconSize = Math.min(colWidth, rowHeight) / 3;
+            float eventIconOffset = Math.round(eventIconSize * 0.1f);
 
             ConquestPlane plane = model.getCurrentPlane();
             FCollectionView<Region> regions = plane.getRegions();
@@ -161,7 +165,31 @@ public class ConquestMultiverseScreen extends FScreen implements IConquestEventL
                 //draw event icon and overlay based on event record for each event in the region
                 for (int r = 0; r < rows; r++) {
                     for (int c = 0; c < cols; c++) {
-                        if (!planeData.hasConquered(i, r, c)) {
+                        x0 = x + c * colWidth;
+                        y0 = y + (rows - r - 1) * rowHeight;
+
+                        ConquestRecord eventRecord = planeData.getEventRecord(i, r, c);
+                        if (eventRecord != null && eventRecord.getWins() > 0) {
+                            //draw badge in upper-right corner of conquered squares
+                            FSkinImage badge;
+                            switch (eventRecord.getTier()) {
+                            case 1:
+                                badge = FSkinImage.PW_BADGE_COMMON;
+                                break;
+                            case 2:
+                                badge = FSkinImage.PW_BADGE_UNCOMMON;
+                                break;
+                            case 3:
+                                badge = FSkinImage.PW_BADGE_RARE;
+                                break;
+                            default:
+                                badge = FSkinImage.PW_BADGE_MYTHIC;
+                                break;
+                            }
+                            //shift slightly right to account for transparent edge of icon
+                            g.drawImage(badge, Math.round(x0 + colWidth - eventIconOffset - eventIconSize * 0.9f), Math.round(y0 + eventIconOffset), eventIconSize, eventIconSize);
+                        }
+                        else {
                             //draw fog of war by default if area hasn't been conquered
                             color = FOG_OF_WAR_COLOR;
 
@@ -178,7 +206,7 @@ public class ConquestMultiverseScreen extends FScreen implements IConquestEventL
                                 }
                             }
 
-                            g.fillRect(color, x + c * colWidth, y + (rows - r - 1) * rowHeight, colWidth, rowHeight);
+                            g.fillRect(color, x0, y0, colWidth, rowHeight);
                         }
                     }
                 }
