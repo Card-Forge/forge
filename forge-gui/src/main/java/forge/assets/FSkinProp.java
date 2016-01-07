@@ -247,6 +247,10 @@ public enum FSkinProp {
     IMG_AETHER_SHARD      (new int[] {0, 315, 120, 120}, PropType.PLANAR_CONQUEST),
     IMG_MULTIVERSE        (new int[] {125, 320, 110, 110}, PropType.PLANAR_CONQUEST),
     IMG_SPELLBOOK         (new int[] {240, 315, 120, 120}, PropType.PLANAR_CONQUEST),
+    IMG_PW_BADGE_COMMON   (new int[] {443, 0, 110, 110}, PropType.PLANAR_CONQUEST),
+    IMG_PW_BADGE_UNCOMMON (new int[] {443, 110, 110, 110}, PropType.PLANAR_CONQUEST),
+    IMG_PW_BADGE_RARE     (new int[] {443, 220, 110, 110}, PropType.PLANAR_CONQUEST),
+    IMG_PW_BADGE_MYTHIC   (new int[] {443, 330, 110, 110}, PropType.PLANAR_CONQUEST),
 
     //button images
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),
