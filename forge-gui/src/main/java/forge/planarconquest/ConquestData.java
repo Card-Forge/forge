@@ -132,6 +132,7 @@ public final class ConquestData {
     }
     public void setCurrentLocation(ConquestLocation currentLocation0) {
         currentLocation = currentLocation0;
+        getCurrentPlaneData().setLocation(currentLocation0);
     }
 
     private ConquestPlaneData getOrCreatePlaneData(ConquestPlane plane) {

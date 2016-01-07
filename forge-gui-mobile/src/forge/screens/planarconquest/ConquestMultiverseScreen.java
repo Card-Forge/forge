@@ -319,6 +319,7 @@ public class ConquestMultiverseScreen extends FScreen implements IConquestEventL
             @Override
             protected void onEnd(boolean endingAll) {
                 model.setCurrentLocation(path.get(path.size() - 1));
+                model.saveData(); //save new location
                 activeMoveAnimation = null;
                 launchEvent();
             }

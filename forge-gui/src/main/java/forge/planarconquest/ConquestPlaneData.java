@@ -8,22 +8,22 @@ import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
 
 public class ConquestPlaneData implements IXmlWritable {
-    private final ConquestPlane plane;
     private final ConquestRecord[] eventResults;
+    private ConquestLocation location;
 
     public ConquestPlaneData(ConquestPlane plane0) {
-        plane = plane0;
-        eventResults = new ConquestRecord[plane.getEventCount()];
+        location = new ConquestLocation(plane0, 0, 0, 0);
+        eventResults = new ConquestRecord[plane0.getEventCount()];
     }
 
     public ConquestPlaneData(XmlReader xml) {
-        plane = xml.read("plane", ConquestPlane.Alara);
-        eventResults = new ConquestRecord[plane.getEventCount()];
+        location = xml.read("location", ConquestLocation.class);
+        eventResults = new ConquestRecord[location.getPlane().getEventCount()];
         xml.read("eventResults", eventResults, ConquestRecord.class);
     }
     @Override
     public void saveToXml(XmlWriter xml) {
-        xml.write("plane", plane);
+        xml.write("location", location);
         xml.write("eventResults", eventResults);
     }
 
@@ -56,6 +56,13 @@ public class ConquestPlaneData implements IXmlWritable {
         return result;
     }
 
+    public ConquestLocation getLocation() {
+        return location;
+    }
+    public void setLocation(ConquestLocation location0) {
+        location = location0;
+    }
+
     public void addWin(ConquestEvent event) {
         getOrCreateResult(event).addWin(event.getTier());
     }
@@ -77,7 +84,7 @@ public class ConquestPlaneData implements IXmlWritable {
     public int getUnlockedCount() {
         int count = 0;
         ConquestData model = FModel.getConquest().getModel();
-        for (PaperCard pc : plane.getCardPool().getAllCards()) {
+        for (PaperCard pc : location.getPlane().getCardPool().getAllCards()) {
             if (model.hasUnlockedCard(pc)) {
                 count++;
             }
