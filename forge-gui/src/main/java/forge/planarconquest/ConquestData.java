@@ -52,6 +52,7 @@ public final class ConquestData {
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
     private ConquestLocation currentLocation;
+    private int selectedCommanderIndex;
     private int aetherShards;
 
     private final File directory;
@@ -93,6 +94,7 @@ public final class ConquestData {
             setPlaneswalker(xml.read("planeswalker", cardDb));
             aetherShards = xml.read("aetherShards", aetherShards);
             currentLocation = xml.read("currentLocation", ConquestLocation.class);
+            selectedCommanderIndex = xml.read("selectedCommanderIndex", selectedCommanderIndex);
             xml.read("unlockedCards", unlockedCards, cardDb);
             xml.read("newCards", newCards, cardDb);
             xml.read("commanders", commanders, ConquestCommander.class);
@@ -146,6 +148,13 @@ public final class ConquestData {
 
     public ConquestPlaneData getCurrentPlaneData() {
         return getOrCreatePlaneData(getCurrentPlane());
+    }
+
+    public ConquestCommander getSelectedCommander() {
+        return commanders.get(selectedCommanderIndex);
+    }
+    public void setSelectedCommanderIndex(int index0) {
+        selectedCommanderIndex = index0;
     }
 
     public Iterable<PaperCard> getUnlockedCards() {
@@ -220,6 +229,7 @@ public final class ConquestData {
             xml.write("planeswalker", planeswalker);
             xml.write("aetherShards", aetherShards);
             xml.write("currentLocation", currentLocation);
+            xml.write("selectedCommanderIndex", selectedCommanderIndex);
             xml.write("unlockedCards", unlockedCards);
             xml.write("newCards", newCards);
             xml.write("commanders", commanders);

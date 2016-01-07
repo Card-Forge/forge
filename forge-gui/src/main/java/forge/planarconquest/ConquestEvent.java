@@ -33,6 +33,7 @@ public abstract class ConquestEvent {
 
     protected abstract Deck buildOpponentDeck();
     public abstract void addVariants(Set<GameType> variants);
+    public abstract String getEventName();
     public abstract String getOpponentName();
     public abstract String getAvatarImageKey();
 

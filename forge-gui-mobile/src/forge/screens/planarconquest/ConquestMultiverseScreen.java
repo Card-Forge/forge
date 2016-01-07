@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.google.common.collect.Iterables;
-
+import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
@@ -15,23 +14,17 @@ import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
-import forge.planarconquest.ConquestCommander;
-import forge.planarconquest.ConquestController.GameRunner;
 import forge.planarconquest.ConquestData;
-import forge.planarconquest.ConquestEvent;
-import forge.planarconquest.ConquestEvent.IConquestEventLauncher;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.planarconquest.ConquestRecord;
 import forge.screens.FScreen;
-import forge.screens.LoadingOverlay;
 import forge.toolbox.FScrollPane;
-import forge.util.ThreadUtil;
 import forge.util.collect.FCollectionView;
 
-public class ConquestMultiverseScreen extends FScreen implements IConquestEventLauncher {
+public class ConquestMultiverseScreen extends FScreen {
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.75f);
     private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.1f);
 
@@ -63,24 +56,7 @@ public class ConquestMultiverseScreen extends FScreen implements IConquestEventL
     }
 
     private void launchEvent() {
-        final ConquestCommander commander = Iterables.getFirst(model.getCommanders(), null);
-        final ConquestEvent event = model.getCurrentLocation().getEvent();
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                FModel.getConquest().launchEvent(ConquestMultiverseScreen.this, commander, event);
-            }
-        });
-    }
-
-    @Override
-    public void startGame(final GameRunner gameRunner) {
-        LoadingOverlay.show("Loading new game...", new Runnable() {
-            @Override
-            public void run() {
-                gameRunner.finishStartingGame();
-            }
-        });
+        Forge.openScreen(new ConquestEventScreen(model.getCurrentLocation().getEvent()));
     }
 
     private class PlaneGrid extends FScrollPane {

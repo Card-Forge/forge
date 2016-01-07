@@ -124,6 +124,11 @@ public class ConquestLocation implements IXmlWritable {
             }
 
             @Override
+            public String getEventName() {
+                return commander.getName();
+            }
+
+            @Override
             public String getOpponentName() {
                 return commander.getName();
             }
