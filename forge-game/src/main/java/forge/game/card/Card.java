@@ -3575,6 +3575,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public boolean hasProperty(final String property, final Player sourceController, final Card source) {
         final Game game = getGame();
         final Combat combat = game.getCombat();
+        final Card lki = getGame().getChangeZoneLKIInfo(this);
+        final Player controller = lki != null ? lki.getController() :  getController();
+
         // by name can also have color names, so needs to happen before colors.
         if (property.startsWith("named")) {
             if (!getName().equals(property.substring(5))) {
@@ -3662,19 +3665,20 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
-            if (!getController().equals(sourceController)) {
+            if (!controller.equals(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("YouDontCtrl")) {
-            if (getController().equals(sourceController)) {
+            if (controller.equals(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("OppCtrl")) {
-            if (!getController().getOpponents().contains(sourceController)) {
+            if (!controller.getOpponents().contains(sourceController)) {
                 return false;
             }
+            new Exception().printStackTrace();
         } else if (property.startsWith("ChosenCtrl")) {
-            if (!getController().equals(source.getChosenPlayer())) {
+            if (!controller.equals(source.getChosenPlayer())) {
                 return false;
             }
         } else if (property.startsWith("DefenderCtrl")) {
@@ -3685,11 +3689,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (!source.hasRemembered()) {
                     return false;
                 }
-                if (getGame().getCombat().getDefendingPlayerRelatedTo((Card) source.getFirstRemembered()) != getController()) {
+                if (getGame().getCombat().getDefendingPlayerRelatedTo((Card) source.getFirstRemembered()) != controller) {
                     return false;
                 }
             } else {
-                if (getGame().getCombat().getDefendingPlayerRelatedTo(source) != getController()) {
+                if (getGame().getCombat().getDefendingPlayerRelatedTo(source) != controller) {
                     return false;
                 }
             }
@@ -3697,13 +3701,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!game.getPhaseHandler().inCombat()) {
                 return false;
             }
-            if (!getGame().getCombat().isPlayerAttacked(getController())) {
+            if (!getGame().getCombat().isPlayerAttacked(controller)) {
                 return false;
             }
         } else if (property.startsWith("EnchantedPlayerCtrl")) {
             final Object o = source.getEnchanting();
             if (o instanceof Player) {
-                if (!getController().equals(o)) {
+                if (!controller.equals(o)) {
                     return false;
                 }
             } else { // source not enchanting a player
@@ -3712,14 +3716,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("EnchantedControllerCtrl")) {
             final Object o = source.getEnchanting();
             if (o instanceof Card) {
-                if (!getController().equals(((Card) o).getController())) {
+                if (!controller.equals(((Card) o).getController())) {
                     return false;
                 }
             } else { // source not enchanting a card
                 return false;
             }
         } else if (property.startsWith("RememberedPlayer")) {
-            Player p = property.endsWith("Ctrl") ? getController() : getOwner();
+            Player p = property.endsWith("Ctrl") ? controller : getOwner();
             if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);
                 for (final Object o : newCard.getRemembered()) {
@@ -3741,12 +3745,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("nonRememberedPlayerCtrl")) {
             if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);
-                if (newCard.isRemembered(getController())) {
+                if (newCard.isRemembered(controller)) {
                     return false;
                 }
             }
 
-            if (source.isRemembered(getController())) {
+            if (source.isRemembered(controller)) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
@@ -3754,7 +3758,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
                     for (final Player p : saTargeting.getTargets().getTargetPlayers()) {
-                        if (!getController().equals(p)) {
+                        if (!controller.equals(p)) {
                             return false;
                         }
                     }
@@ -3766,23 +3770,23 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(source, "Targeted", sa);
                 for (final Card c : cards) {
                     final Player p = c.getController();
-                    if (!getController().equals(p)) {
+                    if (!controller.equals(p)) {
                         return false;
                     }
                 }
                 for (final SpellAbility s : sas) {
                     final Player p = s.getHostCard().getController();
-                    if (!getController().equals(p)) {
+                    if (!controller.equals(p)) {
                         return false;
                     }
                 }
             }
         } else if (property.startsWith("ActivePlayerCtrl")) {
-            if (!game.getPhaseHandler().isPlayerTurn(getController())) {
+            if (!game.getPhaseHandler().isPlayerTurn(controller)) {
                 return false;
             }
         } else if (property.startsWith("NonActivePlayerCtrl")) {
-            if (game.getPhaseHandler().isPlayerTurn(getController())) {
+            if (game.getPhaseHandler().isPlayerTurn(controller)) {
                 return false;
             }
         } else if (property.startsWith("YouOwn")) {
@@ -3815,24 +3819,24 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("ControlledBy")) {
             final String valid = property.substring(13);
-            if (!getController().isValid(valid, sourceController, source)) {
+            if (!controller.isValid(valid, sourceController, source)) {
                 return false;
             }
         } else if (property.startsWith("OwnerDoesntControl")) {
-            if (getOwner().equals(getController())) {
+            if (getOwner().equals(controller)) {
                 return false;
             }
         } else if (property.startsWith("ControllerControls")) {
             final String type = property.substring(18);
             if (type.startsWith("AtLeastAsMany")) {
                 String realType = type.split("AtLeastAsMany")[1];
-                CardCollectionView cards = CardLists.getType(getController().getCardsIn(ZoneType.Battlefield), realType);
+                CardCollectionView cards = CardLists.getType(controller.getCardsIn(ZoneType.Battlefield), realType);
                 CardCollectionView yours = CardLists.getType(sourceController.getCardsIn(ZoneType.Battlefield), realType);
                 if (cards.size() < yours.size()) {
                     return false;
                 }
             } else {
-                final CardCollectionView cards = getController().getCardsIn(ZoneType.Battlefield);
+                final CardCollectionView cards = controller.getCardsIn(ZoneType.Battlefield);
                 if (CardLists.getType(cards, type).isEmpty()) {
                     return false;
                 }
@@ -4514,7 +4518,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else {
                 p = sourceController;
             }
-            if (p == null || !getController().equals(game.getNextPlayerAfter(p, direction))) {
+            if (p == null || !controller.equals(game.getNextPlayerAfter(p, direction))) {
                 return false;
             }
         } else if (property.startsWith("sharesTypeWith")) {
@@ -4635,11 +4639,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (!source.getDamageHistory().getThisTurnCombatDamaged().contains(getController())) {
+            if (!source.getDamageHistory().getThisTurnCombatDamaged().contains(controller)) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (!source.getDamageHistory().getThisTurnDamaged().contains(getController())) {
+            if (!source.getDamageHistory().getThisTurnDamaged().contains(controller)) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
@@ -4671,7 +4675,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("attackedLastTurn")) {
-            return getDamageHistory().getCreatureAttackedLastTurnOf(getController());
+            return getDamageHistory().getCreatureAttackedLastTurnOf(controller);
         } else if (property.startsWith("blockedThisTurn")) {
             if (!getDamageHistory().getCreatureBlockedThisTurn()) {
                 return false;
@@ -4685,7 +4689,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("notAttackedLastTurn")) {
-            return !getDamageHistory().getCreatureAttackedLastTurnOf(getController());
+            return !getDamageHistory().getCreatureAttackedLastTurnOf(controller);
         } else if (property.startsWith("notBlockedThisTurn")) {
             if (getDamageHistory().getCreatureBlockedThisTurn()) {
                 return false;
