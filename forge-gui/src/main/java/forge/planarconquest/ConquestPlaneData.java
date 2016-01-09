@@ -2,24 +2,25 @@ package forge.planarconquest;
 
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.planarconquest.ConquestEvent.ConquestEventRecord;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
 
 public class ConquestPlaneData implements IXmlWritable {
-    private final ConquestRecord[] eventResults;
+    private final ConquestEventRecord[] eventResults;
     private ConquestLocation location;
 
     public ConquestPlaneData(ConquestPlane plane0) {
         location = new ConquestLocation(plane0, 0, 0, 0);
-        eventResults = new ConquestRecord[plane0.getEventCount()];
+        eventResults = new ConquestEventRecord[plane0.getEventCount()];
     }
 
     public ConquestPlaneData(XmlReader xml) {
         location = xml.read("location", ConquestLocation.class);
-        eventResults = new ConquestRecord[location.getPlane().getEventCount()];
-        xml.read("eventResults", eventResults, ConquestRecord.class);
+        eventResults = new ConquestEventRecord[location.getPlane().getEventCount()];
+        xml.read("eventResults", eventResults, ConquestEventRecord.class);
     }
     @Override
     public void saveToXml(XmlWriter xml) {
@@ -34,23 +35,23 @@ public class ConquestPlaneData implements IXmlWritable {
         return hasConquered(regionIndex * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + row * Region.COLS_PER_REGION + col);
     }
     private boolean hasConquered(int index) {
-        ConquestRecord result = eventResults[index];
-        return result != null && result.getWins() > 0;
+        ConquestEventRecord result = eventResults[index];
+        return result != null && result.hasConquered();
     }
 
-    public ConquestRecord getEventRecord(ConquestLocation loc) {
+    public ConquestEventRecord getEventRecord(ConquestLocation loc) {
         return getEventRecord(loc.getRegionIndex(), loc.getRow(), loc.getCol());
     }
-    public ConquestRecord getEventRecord(int regionIndex, int row, int col) {
+    public ConquestEventRecord getEventRecord(int regionIndex, int row, int col) {
         return eventResults[regionIndex * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + row * Region.COLS_PER_REGION + col];
     }
 
-    private ConquestRecord getOrCreateResult(ConquestEvent event) {
+    private ConquestEventRecord getOrCreateResult(ConquestEvent event) {
         ConquestLocation loc = event.getLocation();
         int index = loc.getRegionIndex() * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + loc.getRow() * Region.COLS_PER_REGION + loc.getCol();
-        ConquestRecord result = eventResults[index];
+        ConquestEventRecord result = eventResults[index];
         if (result == null) {
-            result = new ConquestRecord();
+            result = new ConquestEventRecord();
             eventResults[index] = result;
         }
         return result;
@@ -68,7 +69,7 @@ public class ConquestPlaneData implements IXmlWritable {
     }
 
     public void addLoss(ConquestEvent event) {
-        getOrCreateResult(event).addLoss();
+        getOrCreateResult(event).addLoss(event.getTier());
     }
 
     public int getConqueredCount() {

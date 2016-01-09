@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
@@ -15,11 +16,11 @@ import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
+import forge.planarconquest.ConquestEvent.ConquestEventRecord;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
-import forge.planarconquest.ConquestRecord;
 import forge.screens.FScreen;
 import forge.toolbox.FScrollPane;
 import forge.util.collect.FCollectionView;
@@ -144,18 +145,18 @@ public class ConquestMultiverseScreen extends FScreen {
                         x0 = x + c * colWidth;
                         y0 = y + (rows - r - 1) * rowHeight;
 
-                        ConquestRecord eventRecord = planeData.getEventRecord(i, r, c);
-                        if (eventRecord != null && eventRecord.getWins() > 0) {
+                        ConquestEventRecord eventRecord = planeData.getEventRecord(i, r, c);
+                        if (eventRecord != null && eventRecord.hasConquered()) {
                             //draw badge in upper-right corner of conquered squares
                             FSkinImage badge;
-                            switch (eventRecord.getTier()) {
-                            case 1:
+                            switch (eventRecord.getHighestConqueredTier()) {
+                            case 0:
                                 badge = FSkinImage.PW_BADGE_COMMON;
                                 break;
-                            case 2:
+                            case 1:
                                 badge = FSkinImage.PW_BADGE_UNCOMMON;
                                 break;
-                            case 3:
+                            case 2:
                                 badge = FSkinImage.PW_BADGE_RARE;
                                 break;
                             default:

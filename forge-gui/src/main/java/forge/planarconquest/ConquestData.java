@@ -186,10 +186,12 @@ public final class ConquestData {
 
     public void addWin(ConquestEvent event) {
         getOrCreatePlaneData(event.getLocation().getPlane()).addWin(event);
+        getSelectedCommander().getRecord().addWin();
     }
 
     public void addLoss(ConquestEvent event) {
         getOrCreatePlaneData(event.getLocation().getPlane()).addLoss(event);
+        getSelectedCommander().getRecord().addLoss();
     }
 
     public int getAEtherShards() {
