@@ -87,6 +87,7 @@ public final class ForgeConstants {
     public static final String MATCH_BG_FILE          = "bg_match.jpg";
     public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
     public static final String SPACE_BG_FILE          = "bg_space.png";
+    public static final String CHAOS_WHEEL_IMG_FILE   = "bg_chaos_wheel.png";
     public static final String DRAFT_DECK_IMG_FILE    = "bg_draft_deck.png";
 
     // data tree roots

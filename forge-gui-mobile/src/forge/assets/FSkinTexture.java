@@ -10,7 +10,8 @@ import forge.properties.ForgeConstants;
 public enum FSkinTexture implements FImage {
     BG_TEXTURE(ForgeConstants.TEXTURE_BG_FILE, true),
     BG_MATCH(ForgeConstants.MATCH_BG_FILE, false),
-    BG_SPACE(ForgeConstants.SPACE_BG_FILE, false);
+    BG_SPACE(ForgeConstants.SPACE_BG_FILE, false),
+    BG_CHAOS_WHEEL(ForgeConstants.CHAOS_WHEEL_IMG_FILE, false);
 
     private final String filename;
     private final boolean repeat;
@@ -73,5 +74,9 @@ public enum FSkinTexture implements FImage {
         else {
             g.drawImage(texture, x, y, w, h);
         }
+    }
+
+    public void drawRotated(Graphics g, float x, float y, float w, float h, float rotation) {
+        g.drawRotatedImage(texture, x, y, w, h, getWidth() / 2, getHeight() / 2, rotation);
     }
 }

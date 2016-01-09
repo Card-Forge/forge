@@ -1339,6 +1339,7 @@ forge-gui-mobile/src/forge/screens/online/OnlineChatScreen.java -text
 forge-gui-mobile/src/forge/screens/online/OnlineLobbyScreen.java -text
 forge-gui-mobile/src/forge/screens/online/OnlineMenu.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestAEtherScreen.java -text
+forge-gui-mobile/src/forge/screens/planarconquest/ConquestChaosWheel.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestCollectionScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestCommandersScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestDeckEditor.java -text
@@ -17973,6 +17974,7 @@ forge-gui/res/skins/dark_ascension/bg_splash.png -text
 forge-gui/res/skins/dark_ascension/bg_texture.jpg -text
 forge-gui/res/skins/dark_ascension/font1.ttf -text
 forge-gui/res/skins/dark_ascension/sprite_icons.png -text
+forge-gui/res/skins/default/bg_chaos_wheel.png -text
 forge-gui/res/skins/default/bg_draft_deck.png -text
 forge-gui/res/skins/default/bg_match.jpg -text
 forge-gui/res/skins/default/bg_space.png -text
