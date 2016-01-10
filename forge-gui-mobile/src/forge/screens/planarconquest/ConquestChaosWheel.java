@@ -6,7 +6,7 @@ import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
-import forge.planarconquest.ConquestEvent.ConquestEventReward;
+import forge.planarconquest.ConquestEvent.ChaosWheelOutcome;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.util.Aggregates;
@@ -15,15 +15,15 @@ import forge.util.PhysicsObject;
 import forge.util.ThreadUtil;
 
 public class ConquestChaosWheel extends FOverlay {
-    public static void spin(Callback<ConquestEventReward> callback0) {
+    public static void spin(Callback<ChaosWheelOutcome> callback0) {
         ConquestChaosWheel wheel = new ConquestChaosWheel(callback0);
         wheel.show();
     }
 
     private final WheelSpinAnimation animation = new WheelSpinAnimation();
-    private final Callback<ConquestEventReward> callback;
+    private final Callback<ChaosWheelOutcome> callback;
 
-    private ConquestChaosWheel(Callback<ConquestEventReward> callback0) {
+    private ConquestChaosWheel(Callback<ChaosWheelOutcome> callback0) {
         callback = callback0;
     }
 
@@ -85,7 +85,7 @@ public class ConquestChaosWheel extends FOverlay {
                 @Override
                 public void run() {
                     hide();
-                    callback.run(ConquestEventReward.getReward(getWheelRotation()));
+                    callback.run(ChaosWheelOutcome.getWheelOutcome(getWheelRotation()));
                 }
             });
         }

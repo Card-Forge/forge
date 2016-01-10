@@ -28,26 +28,28 @@ import forge.util.Utils;
 public class ConquestRewardDialog extends FScrollPane {
     private static final float PADDING = Utils.scale(5);
 
-    public static void show(String title, PaperCard card) {
+    public static void show(String title, PaperCard card, Runnable callback0) {
         List<ConquestReward> rewards = new ArrayList<ConquestReward>(1);
         rewards.add(new ConquestReward(card, 0));
-        show(title, rewards);
+        show(title, rewards, callback0);
     }
-    public static void show(String title, Iterable<ConquestReward> rewards) {
-        ConquestRewardDialog revealer = new ConquestRewardDialog(title, rewards);
+    public static void show(String title, Iterable<ConquestReward> rewards, Runnable callback0) {
+        ConquestRewardDialog revealer = new ConquestRewardDialog(title, rewards, callback0);
         revealer.dialog.show();
     }
 
     private final RevealDialog dialog;
     private final List<CardRevealer> cardRevealers = new ArrayList<CardRevealer>();
     private final CardRevealAnimation animation;
+    private final Runnable callback;
 
     private int columnCount;
     private float totalZoomAmount;
     private CardRevealer focalCard;
 
-    private ConquestRewardDialog(String title, Iterable<ConquestReward> rewards) {
+    private ConquestRewardDialog(String title, Iterable<ConquestReward> rewards, Runnable callback0) {
         dialog = new RevealDialog(title);
+        callback = callback0;
 
         for (ConquestReward reward : rewards) {
             cardRevealers.add(this.add(new CardRevealer(reward)));
@@ -167,6 +169,9 @@ public class ConquestRewardDialog extends FScrollPane {
                 @Override
                 public void handleEvent(FEvent e) {
                     hide();
+                    if (callback != null) {
+                        callback.run();
+                    }
                 }
             });
             initButton(1, "Skip", new FEventHandler() {

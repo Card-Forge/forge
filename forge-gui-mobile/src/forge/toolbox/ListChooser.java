@@ -142,7 +142,7 @@ public class ListChooser<T> extends FContainer {
 
         updateHeight();
 
-        optionPane = new FOptionPane(null, title, null, this, options, 0, new Callback<Integer>() {
+        optionPane = new FOptionPane(null, null, title, null, this, options, 0, new Callback<Integer>() {
             @Override
             public void run(Integer result) {
                 called = false;

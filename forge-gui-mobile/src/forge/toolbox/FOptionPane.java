@@ -58,6 +58,10 @@ public class FOptionPane extends FDialog {
         showOptionDialog(message, title, icon, ImmutableList.of("OK"), 0, null);
     }
 
+    public static void showMessageDialog(final String message, FSkinFont messageFont, final String title, final FImage icon) {
+        showOptionDialog(message, messageFont, title, icon, ImmutableList.of("OK"), 0, null);
+    }
+
     public static void showMessageDialog(final String message, final String title, final FImage icon, final Callback<Integer> callback) {
         showOptionDialog(message, title, icon, ImmutableList.of("OK"), 0, callback);
     }
@@ -91,9 +95,13 @@ public class FOptionPane extends FDialog {
     public static void showOptionDialog(final String message, final String title, final FImage icon, final List<String> options, final Callback<Integer> callback) {
         showOptionDialog(message, title, icon, options, 0, callback);
     }
-
+    
     public static void showOptionDialog(final String message, final String title, final FImage icon, final List<String> options, final int defaultOption, final Callback<Integer> callback) {
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption, callback);
+        showOptionDialog(message, null, title, icon, options, defaultOption, callback);
+    }
+
+    public static void showOptionDialog(final String message, final FSkinFont messageFont, final String title, final FImage icon, final List<String> options, final int defaultOption, final Callback<Integer> callback) {
+        final FOptionPane optionPane = new FOptionPane(message, messageFont, title, icon, null, options, defaultOption, callback);
         optionPane.show();
     }
 
@@ -143,7 +151,7 @@ public class FOptionPane extends FDialog {
             icon = null;
         }
 
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, cardDisplay, options, defaultOption, callback);
+        final FOptionPane optionPane = new FOptionPane(message, null, title, icon, cardDisplay, options, defaultOption, callback);
         optionPane.show();
     }
 
@@ -181,7 +189,7 @@ public class FOptionPane extends FDialog {
         container.add(inputField);
         container.setHeight(inputField.getHeight() + padTop + PADDING);
 
-        final FOptionPane optionPane = new FOptionPane(message, title, null, container, ImmutableList.of("OK", "Cancel"), 0, new Callback<Integer>() {
+        final FOptionPane optionPane = new FOptionPane(message, null, title, null, container, ImmutableList.of("OK", "Cancel"), 0, new Callback<Integer>() {
             @SuppressWarnings("unchecked")
             @Override
             public void run(final Integer result) {
@@ -224,7 +232,7 @@ public class FOptionPane extends FDialog {
     private final int defaultOption;
     private final boolean centerIcon;
 
-    public FOptionPane(final String message, final String title, final FImage icon, final FDisplayObject displayObj0, final List<String> options, final int defaultOption0, final Callback<Integer> callback0) {
+    public FOptionPane(final String message, final FSkinFont messageFont, final String title, final FImage icon, final FDisplayObject displayObj0, final List<String> options, final int defaultOption0, final Callback<Integer> callback0) {
         super(title, options.size());
 
         if (icon != null) {
@@ -241,7 +249,7 @@ public class FOptionPane extends FDialog {
 
         if (message != null) {
             prompt = add(new FTextArea(true, message));
-            prompt.setFont(FSkinFont.get(12));
+            prompt.setFont(messageFont != null ? messageFont : FSkinFont.get(12));
             if (centerIcon || centerPrompt()) {
                 prompt.setAlignment(HAlignment.CENTER);
             }

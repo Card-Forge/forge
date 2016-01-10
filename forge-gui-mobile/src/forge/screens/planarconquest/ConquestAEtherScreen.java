@@ -73,7 +73,7 @@ public class ConquestAEtherScreen extends FScreen {
         PaperCard card = Aggregates.random(lstAEther.getFilteredItems()).getKey();
         lstAEther.removeItem(card, 1);
 
-        ConquestRewardDialog.show("Card pulled from the AEther", card);
+        ConquestRewardDialog.show("Card pulled from the AEther", card, null);
 
         model.spendAEtherShards(shardCost);
         model.unlockCard(card);

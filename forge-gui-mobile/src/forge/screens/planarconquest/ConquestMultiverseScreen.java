@@ -11,21 +11,24 @@ import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
+import forge.planarconquest.ConquestEvent.ChaosWheelOutcome;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
 import forge.planarconquest.ConquestEvent;
-import forge.planarconquest.ConquestEvent.ConquestEventReward;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
+import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.planarconquest.ConquestPlaneData;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 import forge.util.Utils;
@@ -83,12 +86,93 @@ public class ConquestMultiverseScreen extends FScreen {
     }
 
     private void spinChaosWheel() {
-        ConquestChaosWheel.spin(new Callback<ConquestEventReward>() {
+        ConquestChaosWheel.spin(new Callback<ChaosWheelOutcome>() {
             @Override
-            public void run(ConquestEventReward reward) {
-                System.out.println(reward);
+            public void run(ChaosWheelOutcome outcome) {
+                switch (outcome) {
+                case BOOSTER:
+                    awardBooster(false);
+                    break;
+                case DOUBLE_BOOSTER:
+                    awardBooster(true);
+                    break;
+                case SHARDS:
+                    awardShards(FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_WHEEL_SHARDS), false);
+                    break;
+                case DOUBLE_SHARDS:
+                    awardShards(2 * FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_WHEEL_SHARDS), false);
+                    break;
+                case PLANESWALK:
+                    awardPlaneswalkCharge();
+                    break;
+                case CHAOS:
+                    triggerChaosTravel();
+                    break;
+                }
             }
         });
+    }
+
+    private void awardBooster(final boolean bonusBooster) {
+        final int shardsBefore = model.getAEtherShards();
+        ConquestRewardDialog.show("Received Booster Pack" + (bonusBooster ? "\n(1 of 2)" : ""),
+                FModel.getConquest().awardBooster(), new Runnable() {
+            @Override
+            public void run() {
+                final Runnable alertShardsFromDuplicates = new Runnable() {
+                    @Override
+                    public void run() {
+                        final int shardsReceived = model.getAEtherShards() - shardsBefore;
+                        if (shardsReceived > 0) {
+                            awardShards(shardsReceived, true);
+                        }
+                    }
+                };
+                if (bonusBooster) {
+                    ConquestRewardDialog.show("Received Booster Pack\n(2 of 2)", FModel.getConquest().awardBooster(), alertShardsFromDuplicates);
+                }
+                else {
+                    alertShardsFromDuplicates.run();
+                }
+            }
+        });
+    }
+
+    private static final FImage SHARD_IMAGE = new FImage() {
+        final float size = Forge.getScreenWidth() * 0.6f;
+        @Override
+        public float getWidth() {
+            return size;
+        }
+        @Override
+        public float getHeight() {
+            return size;
+        }
+        @Override
+        public void draw(Graphics g, float x, float y, float w, float h) {
+            FSkinImage.AETHER_SHARD.draw(g, x, y, w, h);
+        }
+    };
+
+    private void awardShards(int shards, boolean fromDuplicateCards) {
+        String message = "Received AEther Shards";
+        if (fromDuplicateCards) {
+            message += " for Duplicate Cards";
+        }
+        else { //if from duplicate cards, shards already added to model
+            model.rewardAEtherShards(shards);
+        }
+        FOptionPane.showMessageDialog(String.valueOf(shards), FSkinFont.get(32), message, SHARD_IMAGE);
+    }
+
+    private void awardPlaneswalkCharge() {
+        //TODO
+        FOptionPane.showMessageDialog(null, "Received Planeswalk Charge");
+    }
+
+    private void triggerChaosTravel() {
+        //TODO
+        FOptionPane.showMessageDialog(null, "Chaos Travel");
     }
 
     private class PlaneGrid extends FScrollPane {

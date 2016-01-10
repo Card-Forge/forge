@@ -32,7 +32,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
 
         setHeight(FOptionPane.getMaxDisplayObjHeight());
 
-        optionPane = new FOptionPane(null, title, null, this,
+        optionPane = new FOptionPane(null, null, title, null, this,
                 isOptional ? ImmutableList.of("OK", "Cancel") : ImmutableList.of("OK"), 0, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
