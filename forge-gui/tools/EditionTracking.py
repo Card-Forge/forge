@@ -17,6 +17,7 @@ def initializeEditions():
 	for root, dirnames, filenames in os.walk(editionsDir):
 		for fileName in fnmatch.filter(filenames, '*.txt'):
 			#print "Parsing...", fileName
+			hasSetNumbers = None
 			with open(os.path.join(root, fileName)) as currentEdition:
 				# Check all names for this card
 				metadata = True
@@ -42,7 +43,10 @@ def initializeEditions():
 
 					else:
 						if line:
-							card = line.split(" ", 1)[1].replace("AE","Ae").rstrip()
+							if hasSetNumbers is None:
+								hasSetNumbers = line.split(" ", 1)[0].isdigit()
+
+							card = line.split(" ", 2 if hasSetNumbers else 1)[-1].replace("AE","Ae").rstrip()
 							if card not in mtgDataCards:
 								#print card
 								mtgDataCards[card] = [setcode]
@@ -308,8 +312,8 @@ if __name__ == '__main__':
 						output.write( "PT:" + orc.get('power') + '/' + orc.get('toughness') + '\n')
 					if 'loyalty' in orc:
 						output.write('Loyalty:' + orc.get('loyalty'))
-				except:
-					print "some issue?"
+				except Exception as e:
+					print "some issue?", str(e)
 
 				# Blah
 
