@@ -3676,7 +3676,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!controller.getOpponents().contains(sourceController)) {
                 return false;
             }
-            //new Exception().printStackTrace();
         } else if (property.startsWith("ChosenCtrl")) {
             if (!controller.equals(source.getChosenPlayer())) {
                 return false;
