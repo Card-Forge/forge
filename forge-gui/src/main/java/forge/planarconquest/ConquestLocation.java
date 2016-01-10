@@ -63,6 +63,10 @@ public class ConquestLocation implements IXmlWritable {
         return col;
     }
 
+    public boolean isAt(int regionIndex0, int row0, int col0) {
+        return regionIndex == regionIndex0 && row == row0 && col == col0;
+    }
+
     public List<ConquestLocation> getNeighbors() {
         if (neighbors == null) { //cache neighbors for performance
             neighbors = getNeighbors(plane, regionIndex, row, col);

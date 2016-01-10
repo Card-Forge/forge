@@ -88,6 +88,19 @@ public class Utils {
         return result;
     }
 
+    public static Vector2 getArbitaryPoint(float x1, float y1, float x2, float y2, float percentage) {
+        Vector2 result = new Vector2();
+        result.x = x1 * (1 - percentage) + x2 * percentage;
+        result.y = y1 * (1 - percentage) + y2 * percentage;
+        return result;
+    }
+
+    public static Rectangle getTransitionPosition(Rectangle start, Rectangle end, float percentage) {
+        Vector2 topLeft = getArbitaryPoint(start.x, start.y, end.x, end.y, percentage);
+        Vector2 bottomRight = getArbitaryPoint(start.x + start.width, start.y + start.height, end.x + end.width, end.y + end.height, percentage);
+        return new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+    }
+
     //get rectangle defining the interestion between two other rectangles
     public static Rectangle getIntersection(Rectangle r1, Rectangle r2) {
         float left = Math.max(r1.x, r2.x);

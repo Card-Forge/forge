@@ -3,6 +3,7 @@ package forge.screens.planarconquest;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
@@ -23,8 +24,11 @@ import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.screens.FScreen;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
+import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
 public class ConquestMultiverseScreen extends FScreen {
@@ -63,33 +67,57 @@ public class ConquestMultiverseScreen extends FScreen {
             @Override
             public void run(ConquestEvent event) {
                 if (event.wasConquered()) {
-                    //spin Chaos Wheel if event was conquered
-                    ConquestChaosWheel.spin();
+                    ConquestLocation loc = event.getLocation();
+                    ConquestEventRecord record = model.getCurrentPlaneData().getEventRecord(loc);
+                    if (record.getWins(event.getTier()) == 1 && record.getHighestConqueredTier() == event.getTier()) {
+                        //if first time conquering event at the selected tier, show animation of new badge being positioned on location
+                        planeGrid.animateBadgeIntoPosition(loc);
+                    }
+                    else {
+                        //just spin Chaos Wheel immediately if event tier was previously conquered
+                        spinChaosWheel();
+                    }
                 }
             }
         }));
     }
 
+    private void spinChaosWheel() {
+        ConquestChaosWheel.spin();
+    }
+
     private class PlaneGrid extends FScrollPane {
         private MoveAnimation activeMoveAnimation;
+        private BadgeAnimation activeBadgeAnimation;
+
+        @Override
+        public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
+            //prevent user touch actions while an animation is in progress
+            if (activeMoveAnimation == null && activeBadgeAnimation == null) {
+                super.buildTouchListeners(screenX, screenY, listeners);
+            }
+        }
 
         @Override
         public boolean tap(float x, float y, int count) {
-            if (activeMoveAnimation == null) {
-                //start move animation if a path can be found to tapped location
-                ConquestLocation loc = getLocation(x, y);
-                if (model.getCurrentLocation().equals(loc)) {
-                    launchEvent();
-                }
-                else {
-                    List<ConquestLocation> path = model.getPath(loc);
-                    if (path != null) {
-                        activeMoveAnimation = new MoveAnimation(path);
-                        activeMoveAnimation.start();
-                    }
+            //start move animation if a path can be found to tapped location
+            ConquestLocation loc = getLocation(x, y);
+            if (model.getCurrentLocation().equals(loc)) {
+                launchEvent();
+            }
+            else {
+                List<ConquestLocation> path = model.getPath(loc);
+                if (path != null) {
+                    activeMoveAnimation = new MoveAnimation(path);
+                    activeMoveAnimation.start();
                 }
             }
             return true;
+        }
+
+        private void animateBadgeIntoPosition(ConquestLocation loc) {
+            activeBadgeAnimation = new BadgeAnimation(loc);
+            activeBadgeAnimation.start();
         }
 
         @Override
@@ -174,7 +202,15 @@ public class ConquestMultiverseScreen extends FScreen {
                                 break;
                             }
                             //shift slightly right to account for transparent edge of icon
-                            g.drawImage(badge, Math.round(x0 + colWidth - eventIconOffset - eventIconSize * 0.9f), Math.round(y0 + eventIconOffset), eventIconSize, eventIconSize);
+                            x0 = Math.round(x0 + colWidth - eventIconOffset - eventIconSize * 0.9f);
+                            y0 = Math.round(y0 + eventIconOffset);
+                            if (activeBadgeAnimation != null && activeBadgeAnimation.location.isAt(i, r, c)) {
+                                //draw animated badge instead if animation is active
+                                activeBadgeAnimation.drawBadge(g, badge, x0, y0, eventIconSize, eventIconSize);
+                            }
+                            else {
+                                g.drawImage(badge, x0, y0, eventIconSize, eventIconSize);
+                            }
                         }
                         else {
                             //draw fog of war by default if area hasn't been conquered
@@ -309,6 +345,40 @@ public class ConquestMultiverseScreen extends FScreen {
                 model.saveData(); //save new location
                 activeMoveAnimation = null;
                 launchEvent();
+            }
+        }
+
+        private class BadgeAnimation extends ForgeAnimation {
+            private static final float DURATION = 1.5f;
+
+            private final ConquestLocation location;
+            private float progress;
+
+            private BadgeAnimation(ConquestLocation location0) {
+                location = location0;
+            }
+
+            private void drawBadge(Graphics g, FSkinImage badge, float x, float y, float w, float h) {
+                float gridWidth = PlaneGrid.this.getWidth();
+                float startWidth = gridWidth * 0.75f;
+                float startHeight = startWidth * h / w;
+                Rectangle start = new Rectangle((gridWidth - startWidth) / 2, (PlaneGrid.this.getHeight() - startHeight) / 2, startWidth, startHeight);
+                Rectangle end = new Rectangle(x, y, w, h);
+                Rectangle pos = Utils.getTransitionPosition(start, end, progress / DURATION);
+
+                g.drawImage(badge, pos.x, pos.y, pos.width, pos.height);
+            }
+
+            @Override
+            protected boolean advance(float dt) {
+                progress += dt;
+                return progress < DURATION;
+            }
+
+            @Override
+            protected void onEnd(boolean endingAll) {
+                activeBadgeAnimation = null;
+                spinChaosWheel(); //spin Chaos Wheel after badge positioned
             }
         }
     }
