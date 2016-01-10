@@ -2,8 +2,8 @@ Name:Cloudpost
 ManaCost:no cost
 Types:Land Locus
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ X | References$ X | SpellDescription$ Add {1} to your mana pool for each Locus on the battlefield.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | References$ X | SpellDescription$ Add {C} to your mana pool for each Locus on the battlefield.
 SVar:X:Count$Valid Locus
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudpost.jpg
-Oracle:Cloudpost enters the battlefield tapped.\n{T}: Add {1} to your mana pool for each Locus on the battlefield.
+Oracle:Cloudpost enters the battlefield tapped.\n{T}: Add {C} to your mana pool for each Locus on the battlefield.

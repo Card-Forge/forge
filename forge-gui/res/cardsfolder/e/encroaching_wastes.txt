@@ -1,7 +1,7 @@
 Name:Encroaching Wastes
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | Cost$ 4 T Sac<1/CARDNAME> | SpellDescription$ Destroy target nonbasic land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/encroaching_wastes.jpg
-Oracle:{T}: Add {1} to your mana pool.\n{4}, {T}, Sacrifice Encroaching Wastes: Destroy target nonbasic land.
+Oracle:{T}: Add {C} to your mana pool.\n{4}, {T}, Sacrifice Encroaching Wastes: Destroy target nonbasic land.

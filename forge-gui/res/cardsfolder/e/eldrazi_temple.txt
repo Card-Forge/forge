@@ -1,8 +1,8 @@
 Name:Eldrazi Temple
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | RestrictValid$ Card.Eldrazi+Colorless,Activated.Eldrazi+Colorless | SpellDescription$ Add {2} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Card.Eldrazi+Colorless,Activated.Eldrazi+Colorless | SpellDescription$ Add {C}{C} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_temple.jpg
-Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {2} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+Oracle:{T}: Add {C} to your mana pool.\n{T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.

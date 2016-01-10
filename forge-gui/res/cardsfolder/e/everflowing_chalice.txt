@@ -4,9 +4,9 @@ Types:Artifact
 K:Multikicker 2
 K:ETBReplacement:Other:Multikicked
 SVar:Multikicked:DB$ PutCounter | Defined$ Self | CounterType$ Charge | CounterNum$ XKicked | SpellDescription$ Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
-A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ X | References$ X | SpellDescription$ Add {1} to your mana pool for each charge counter on CARDNAME.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | References$ X | SpellDescription$ Add {C} to your mana pool for each charge counter on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 SVar:XKicked:Count$TimesKicked
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/everflowing_chalice.jpg
-Oracle:Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nEverflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.\n{T}: Add {1} to your mana pool for each charge counter on Everflowing Chalice.
+Oracle:Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nEverflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.\n{T}: Add {C} to your mana pool for each charge counter on Everflowing Chalice.

@@ -1,8 +1,8 @@
 Name:Ashnod's Altar
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ Sac<1/Creature>  | Produced$ 1 | Amount$ 2 | SpellDescription$ Add {2} to your mana pool.
+A:AB$ Mana | Cost$ Sac<1/Creature>  | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C} to your mana pool.
 SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashnods_altar.jpg
-Oracle:Sacrifice a creature: Add {2} to your mana pool.
+Oracle:Sacrifice a creature: Add {C}{C} to your mana pool.

@@ -1,7 +1,7 @@
 Name:Balduvian Trading Post
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ 1 R | SpellDescription$ Add {1}{R} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C R | SpellDescription$ Add {C}{R} to your mana pool.
 A:AB$ DealDamage | Cost$ 1 T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking creature.
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice an untapped Mountain instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
 SVar:PayBeforeETB:AB$ Sacrifice | Cost$ 0 | SacValid$ Mountain.untapped | Defined$ You | RememberSacrificed$ True | SubAbility$ MoveToGraveyard
@@ -11,4 +11,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_trading_post.jpg
-Oracle:If Balduvian Trading Post would enter the battlefield, sacrifice an untapped Mountain instead. If you do, put Balduvian Trading Post onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {1}{R} to your mana pool.\n{1}, {T}: Balduvian Trading Post deals 1 damage to target attacking creature.
+Oracle:If Balduvian Trading Post would enter the battlefield, sacrifice an untapped Mountain instead. If you do, put Balduvian Trading Post onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {C}{R} to your mana pool.\n{1}, {T}: Balduvian Trading Post deals 1 damage to target attacking creature.

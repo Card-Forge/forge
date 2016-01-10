@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 K:CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 4 | AILogic$ EOT | SpellDescription$ Untap CARDNAME.
-A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add {3} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C} to your mana pool.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_monolith.jpg
-Oracle:Grim Monolith doesn't untap during your untap step.\n{T}: Add {3} to your mana pool.\n{4}: Untap Grim Monolith.
+Oracle:Grim Monolith doesn't untap during your untap step.\n{T}: Add {C}{C}{C} to your mana pool.\n{4}: Untap Grim Monolith.

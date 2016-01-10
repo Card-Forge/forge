@@ -2,6 +2,6 @@ Name:Boreal Druid
 ManaCost:G
 Types:Snow Creature Elf Druid
 PT:1/1
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121193.jpg
-Oracle:{T}: Add {1} to your mana pool.
+Oracle:{T}: Add {C} to your mana pool.

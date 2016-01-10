@@ -6,7 +6,7 @@ SVar:ManaBlue:DB$Mana | Produced$ U | Amount$ B | SubAbility$ ManaBlack | Refere
 SVar:ManaBlack:DB$Mana | Produced$ B | Amount$ C | SubAbility$ ManaRed | References$ C
 SVar:ManaRed:DB$Mana | Produced$ R | Amount$ D | SubAbility$ ManaGreen | References$ D
 SVar:ManaGreen:DB$Mana | Produced$ G | Amount$ E | SubAbility$ ManaColorless | References$ E
-SVar:ManaColorless:DB$Mana | Produced$ 1 | Amount$ F | References$ F
+SVar:ManaColorless:DB$Mana | Produced$ C | Amount$ F | References$ F
 SVar:A:Count$ManaPool:white
 SVar:B:Count$ManaPool:blue
 SVar:C:Count$ManaPool:black

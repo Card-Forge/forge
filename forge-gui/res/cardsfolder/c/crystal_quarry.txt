@@ -1,8 +1,8 @@
 Name:Crystal Quarry
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Mana | Cost$ 5 T | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G} to your mana pool.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_quarry.jpg
-Oracle:{T}: Add {1} to your mana pool.\n{5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
+Oracle:{T}: Add {C} to your mana pool.\n{5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.

@@ -2,7 +2,7 @@ Name:Apprentice Wizard
 ManaCost:1 U U
 Types:Creature Human Wizard
 PT:0/1
-A:AB$ Mana | Cost$ U T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add {3} to your mana pool.
+A:AB$ Mana | Cost$ U T | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C} to your mana pool.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_wizard.jpg
-Oracle:{U}, {T}: Add {3} to your mana pool.
+Oracle:{U}, {T}: Add {C}{C}{C} to your mana pool.
