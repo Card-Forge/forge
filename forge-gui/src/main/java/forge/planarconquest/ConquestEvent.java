@@ -122,4 +122,26 @@ public abstract class ConquestEvent {
             return -1;
         }
     }
+
+    public enum ConquestEventReward {
+        BOOSTER,
+        DOUBLE_BOOSTER,
+        SHARDS,
+        DOUBLE_SHARDS,
+        PLANESWALK,
+        CHAOS;
+
+        private static final ConquestEventReward[] wheelSpots = new ConquestEventReward[] {
+            CHAOS, BOOSTER, SHARDS, DOUBLE_BOOSTER, PLANESWALK, BOOSTER, DOUBLE_SHARDS, BOOSTER
+        };
+        private static final float ANGLE_PER_SPOT = 360f / wheelSpots.length;
+
+        public static ConquestEventReward getReward(float wheelRotation) {
+            if (wheelRotation < 0) {
+                wheelRotation += 360f;
+            }
+            int spot = (int)(wheelRotation / ANGLE_PER_SPOT);
+            return wheelSpots[spot];
+        }
+    }
 }

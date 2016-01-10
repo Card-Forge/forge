@@ -19,6 +19,7 @@ import forge.model.FModel;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
 import forge.planarconquest.ConquestEvent;
+import forge.planarconquest.ConquestEvent.ConquestEventReward;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
@@ -82,7 +83,12 @@ public class ConquestMultiverseScreen extends FScreen {
     }
 
     private void spinChaosWheel() {
-        ConquestChaosWheel.spin();
+        ConquestChaosWheel.spin(new Callback<ConquestEventReward>() {
+            @Override
+            public void run(ConquestEventReward reward) {
+                System.out.println(reward);
+            }
+        });
     }
 
     private class PlaneGrid extends FScrollPane {
@@ -403,7 +409,9 @@ public class ConquestMultiverseScreen extends FScreen {
             @Override
             protected void onEnd(boolean endingAll) {
                 activeBadgeAnimation = null;
-                spinChaosWheel(); //spin Chaos Wheel after badge positioned
+                if (!endingAll) {
+                    spinChaosWheel(); //spin Chaos Wheel after badge positioned
+                }
             }
         }
     }

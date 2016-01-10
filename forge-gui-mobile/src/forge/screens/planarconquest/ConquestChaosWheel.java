@@ -6,21 +6,25 @@ import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
+import forge.planarconquest.ConquestEvent.ConquestEventReward;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.util.Aggregates;
+import forge.util.Callback;
 import forge.util.PhysicsObject;
 import forge.util.ThreadUtil;
 
 public class ConquestChaosWheel extends FOverlay {
-    public static void spin() {
-        ConquestChaosWheel wheel = new ConquestChaosWheel();
+    public static void spin(Callback<ConquestEventReward> callback0) {
+        ConquestChaosWheel wheel = new ConquestChaosWheel(callback0);
         wheel.show();
     }
 
     private final WheelSpinAnimation animation = new WheelSpinAnimation();
+    private final Callback<ConquestEventReward> callback;
 
-    private ConquestChaosWheel() {
+    private ConquestChaosWheel(Callback<ConquestEventReward> callback0) {
+        callback = callback0;
     }
 
     @Override
@@ -81,8 +85,14 @@ public class ConquestChaosWheel extends FOverlay {
                 @Override
                 public void run() {
                     hide();
+                    callback.run(ConquestEventReward.getReward(getWheelRotation()));
                 }
             });
         }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        return true; //suppress key pressing while this overlay is open
     }
 }
