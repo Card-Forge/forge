@@ -53,6 +53,7 @@ public class ConquestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Base Card Value", CQPref.AETHER_BASE_VALUE, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Markup Percentage", CQPref.AETHER_MARKUP, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Starting Shards", CQPref.AETHER_START_SHARDS, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption("Chaos Wheel Shard Value", CQPref.AETHER_WHEEL_SHARDS, PrefsGroup.AETHER));
 
         scroller.add(new PrefsHeader("Booster Packs", FSkinImage.PACK, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Commons", CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));

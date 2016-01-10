@@ -39,7 +39,6 @@ import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.model.FModel;
-import forge.planarconquest.ConquestEvent.IConquestEventLauncher;
 import forge.planarconquest.ConquestPlane.AwardPool;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.player.GamePlayerUtil;
@@ -56,7 +55,7 @@ import forge.util.storage.StorageImmediatelySerialized;
 public class ConquestController {
     private ConquestData model;
     private IStorage<Deck> decks;
-    private GameRunner gameRunner;
+    private ConquestEvent activeEvent;
     private LobbyPlayerHuman humanPlayer;
 
     public ConquestController() {
@@ -82,171 +81,116 @@ public class ConquestController {
         return decks;
     }
 
-    public void launchEvent(final IConquestEventLauncher launcher0, final ConquestCommander commander0, final ConquestEvent event0) {
-        if (gameRunner != null) { return; } //prevent running multiple games at once
+    public void launchEvent(ConquestCommander commander, ConquestEvent event) {
+        if (activeEvent != null) { return; }
 
-        gameRunner = new GameRunner(launcher0, commander0, event0);
-        gameRunner.invokeAndWait();
-        gameRunner = null;
+        //determine game variants
+        Set<GameType> variants = new HashSet<GameType>();
+        event.addVariants(variants);
+
+        final RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
+        final RegisteredPlayer aiStart = new RegisteredPlayer(event.getOpponentDeck());
+
+        if (variants.contains(GameType.Commander)) { //add 10 starting life for both players if playing a Commander game
+            humanStart.setStartingLife(humanStart.getStartingLife() + 10);
+            aiStart.setStartingLife(aiStart.getStartingLife() + 10);
+            humanStart.assignCommander();
+            aiStart.assignCommander();
+        }
+        if (variants.contains(GameType.Planechase)) { //generate planar decks if planechase variant being applied
+            humanStart.setPlanes(generatePlanarPool());
+            aiStart.setPlanes(generatePlanarPool());
+        }
+
+        String humanPlayerName = commander.getPlayerName();
+        String aiPlayerName = event.getOpponentName();
+        if (humanPlayerName.equals(aiPlayerName)) {
+            aiPlayerName += " (AI)"; //ensure player names are distinct
+        }
+
+        final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
+        humanPlayer = new LobbyPlayerHuman(humanPlayerName);
+        humanPlayer.setAvatarCardImageKey(commander.getCard().getImageKey(false));
+        starter.add(humanStart.setPlayer(humanPlayer));
+
+        final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);
+        aiPlayer.setAvatarCardImageKey(event.getAvatarImageKey());
+        starter.add(aiStart.setPlayer(aiPlayer));
+
+        final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
+        for (final RegisteredPlayer rp : starter) {
+            rp.setRandomFoil(useRandomFoil);
+        }
+        final GameRules rules = new GameRules(GameType.PlanarConquest);
+        rules.setGamesPerMatch(1); //only play one game at a time
+        rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
+        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+        FThreads.invokeInEdtNowOrLater(new Runnable(){
+            @Override
+            public void run() {
+                hostedMatch.startMatch(rules, null, starter, humanStart, GuiBase.getInterface().getNewGuiGame());
+            }
+        });
+        activeEvent = event;
     }
 
-    public class GameRunner {
-        private class Lock {
-        }
-        private final Lock lock = new Lock();
+    private List<PaperCard> generatePlanarPool() {
+        String planeName = model.getCurrentPlane().getName();
+        List<PaperCard> pool = new ArrayList<PaperCard>();
+        List<PaperCard> otherPlanes = new ArrayList<PaperCard>();
+        List<PaperCard> phenomenons = new ArrayList<PaperCard>();
 
-        private final IConquestEventLauncher launcher;
-        private final ConquestCommander commander;
-        private final ConquestEvent event;
-
-        private GameRunner(final IConquestEventLauncher launcher0, final ConquestCommander commander0, final ConquestEvent event0) {
-            launcher = launcher0;
-            commander = commander0;
-            event = event0;
-        }
-
-        public final void invokeAndWait() {
-            FThreads.assertExecutedByEdt(false); //not supported if on UI thread
-            FThreads.invokeInEdtLater(new Runnable() {
-                @Override
-                public void run() {
-                    launcher.startGame(GameRunner.this);
+        for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
+            CardType type = c.getRules().getType();
+            if (type.isPlane()) {
+                if (type.hasSubtype(planeName)) {
+                    pool.add(c); //always include card in pool if it matches the current plane
                 }
-            });
-            try {
-                synchronized(lock) {
-                    lock.wait();
+                else {
+                    otherPlanes.add(c);
                 }
             }
-            catch (InterruptedException e) {
-                e.printStackTrace();
+            else if (type.isPhenomenon()) {
+                phenomenons.add(c);
             }
         }
 
-        public void finishStartingGame() {
-            //determine game variants
-            Set<GameType> variants = new HashSet<GameType>();
-            event.addVariants(variants);
-
-            final RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
-            final RegisteredPlayer aiStart = new RegisteredPlayer(event.getOpponentDeck());
-
-            if (variants.contains(GameType.Commander)) { //add 10 starting life for both players if playing a Commander game
-                humanStart.setStartingLife(humanStart.getStartingLife() + 10);
-                aiStart.setStartingLife(aiStart.getStartingLife() + 10);
-                humanStart.assignCommander();
-                aiStart.assignCommander();
-            }
-            if (variants.contains(GameType.Planechase)) { //generate planar decks if planechase variant being applied
-                humanStart.setPlanes(generatePlanarPool());
-                aiStart.setPlanes(generatePlanarPool());
-            }
-
-            String humanPlayerName = commander.getPlayerName();
-            String aiPlayerName = event.getOpponentName();
-            if (humanPlayerName.equals(aiPlayerName)) {
-                aiPlayerName += " (AI)"; //ensure player names are distinct
-            }
-
-            final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-            humanPlayer = new LobbyPlayerHuman(humanPlayerName);
-            humanPlayer.setAvatarCardImageKey(commander.getCard().getImageKey(false));
-            starter.add(humanStart.setPlayer(humanPlayer));
-
-            final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);
-            aiPlayer.setAvatarCardImageKey(event.getAvatarImageKey());
-            starter.add(aiStart.setPlayer(aiPlayer));
-
-            final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
-            for (final RegisteredPlayer rp : starter) {
-                rp.setRandomFoil(useRandomFoil);
-            }
-            final GameRules rules = new GameRules(GameType.PlanarConquest);
-            rules.setGamesPerMatch(1); //only play one game at a time
-            rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
-            rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
-            final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-            FThreads.invokeInEdtNowOrLater(new Runnable(){
-                @Override
-                public void run() {
-                    hostedMatch.startMatch(rules, null, starter, humanStart, GuiBase.getInterface().getNewGuiGame());
-                }
-            });
+        //add between 0 and 2 phenomenons (where 2 is the most supported)
+        int numPhenomenons = Aggregates.randomInt(0, 2);
+        for (int i = 0; i < numPhenomenons; i++) {
+            pool.add(Aggregates.removeRandom(phenomenons));
         }
 
-        private void finish() {
-            synchronized(lock) { //release game lock once game finished
-                lock.notify();
-            }
+        //add enough additional plane cards to reach a minimum 10 card deck
+        while (pool.size() < 10) {
+            pool.add(Aggregates.removeRandom(otherPlanes));
         }
-
-        private List<PaperCard> generatePlanarPool() {
-            String planeName = model.getCurrentPlane().getName();
-            List<PaperCard> pool = new ArrayList<PaperCard>();
-            List<PaperCard> otherPlanes = new ArrayList<PaperCard>();
-            List<PaperCard> phenomenons = new ArrayList<PaperCard>();
-
-            for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
-                CardType type = c.getRules().getType();
-                if (type.isPlane()) {
-                    if (type.hasSubtype(planeName)) {
-                        pool.add(c); //always include card in pool if it matches the current plane
-                    }
-                    else {
-                        otherPlanes.add(c);
-                    }
-                }
-                else if (type.isPhenomenon()) {
-                    phenomenons.add(c);
-                }
-            }
-
-            //add between 0 and 2 phenomenons (where 2 is the most supported)
-            int numPhenomenons = Aggregates.randomInt(0, 2);
-            for (int i = 0; i < numPhenomenons; i++) {
-                pool.add(Aggregates.removeRandom(phenomenons));
-            }
-
-            //add enough additional plane cards to reach a minimum 10 card deck
-            while (pool.size() < 10) {
-                pool.add(Aggregates.removeRandom(otherPlanes));
-            }
-            return pool;
-        }
+        return pool;
     }
 
-    public void showGameRewards(final GameView game, final IWinLoseView<? extends IButton> view) {
+    public void showGameOutcome(final GameView game, final IWinLoseView<? extends IButton> view) {
         if (game.isMatchWonBy(humanPlayer)) {
+            view.getBtnRestart().setVisible(false);
             view.getBtnQuit().setText("Great!");
-
-            //give controller a chance to run remaining logic on a separate thread
-            view.showRewards(new Runnable() {
-                @Override
-                public void run() {
-                    awardBooster(view);
-                }
-            });
+            model.addWin(activeEvent);
         }
         else {
-            view.getBtnQuit().setText("OK");
-        }
-    }
-
-    public void onGameFinished(final GameView game) {
-        if (game.isMatchWonBy(humanPlayer)) {
-            model.addWin(gameRunner.event);
-        }
-        else {
-            model.addLoss(gameRunner.event);
+            view.getBtnRestart().setVisible(true);
+            view.getBtnRestart().setText("Retry");
+            view.getBtnQuit().setText("Quit");
+            model.addLoss(activeEvent);
         }
 
         model.saveData();
         FModel.getConquestPreferences().save();
-
-        gameRunner.finish();
     }
 
-    private void awardBooster(final IWinLoseView<? extends IButton> view) {
+    public void finishEvent() {
+        activeEvent = null;
+    }
+
+    public List<ConquestReward> awardBooster() {
         AwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
         ConquestPreferences prefs = FModel.getConquestPreferences();
         List<PaperCard> rewards = new ArrayList<PaperCard>();
@@ -289,14 +233,9 @@ public class ConquestController {
             allRewards.add(new ConquestReward(card, replacementShards));
         }
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                view.showConquestRewards("Booster Awarded", allRewards);
-            }
-        });
         model.unlockCards(rewards);
         model.rewardAEtherShards(shards);
+        return allRewards;
     }
 
     public int calculateShardCost(ItemPool<PaperCard> filteredCards, int unfilteredCount) {

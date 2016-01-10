@@ -28,12 +28,12 @@ public class ConquestWinLose extends ControlWinLose {
 
     @Override
     public final void showRewards() {
-        FModel.getConquest().showGameRewards(lastGame, getView());
+        FModel.getConquest().showGameOutcome(lastGame, getView());
     }
 
     @Override
     public final void actionOnQuit() {
+        FModel.getConquest().finishEvent();
         super.actionOnQuit();
-        FModel.getConquest().onGameFinished(lastGame);
     }
 }

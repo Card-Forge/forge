@@ -4,7 +4,6 @@ import java.util.Set;
 
 import forge.deck.Deck;
 import forge.game.GameType;
-import forge.planarconquest.ConquestController.GameRunner;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
@@ -39,10 +38,6 @@ public abstract class ConquestEvent {
     public abstract String getEventName();
     public abstract String getOpponentName();
     public abstract String getAvatarImageKey();
-
-    public static interface IConquestEventLauncher {
-        void startGame(GameRunner gameRunner);
-    }
 
     public static class ConquestEventRecord implements IXmlWritable {
         private final ConquestRecord[] tiers = new ConquestRecord[4];
