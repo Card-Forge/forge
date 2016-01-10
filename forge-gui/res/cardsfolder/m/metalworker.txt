@@ -2,11 +2,11 @@ Name:Metalworker
 ManaCost:3
 Types:Artifact Creature Construct
 PT:1/2
-A:AB$ Reveal | Cost$ T | RevealValid$ Card.Artifact+YouCtrl | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBMetalWorkerMana | SpellDescription$ Reveal any number of artifact cards in your hand. Add {2} to your mana pool for each card revealed this way.
-SVar:DBMetalWorkerMana:DB$ Mana | Produced$ 1 | Amount$ MetalWorkerX | References$ X | SubAbility$ DBMetalWorkerCleanup
+A:AB$ Reveal | Cost$ T | RevealValid$ Card.Artifact+YouCtrl | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBMetalWorkerMana | SpellDescription$ Reveal any number of artifact cards in your hand. Add {C}{C} to your mana pool for each card revealed this way.
+SVar:DBMetalWorkerMana:DB$ Mana | Produced$ C | Amount$ MetalWorkerX | References$ X | SubAbility$ DBMetalWorkerCleanup
 SVar:DBMetalWorkerCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MetalWorkerX:Remembered$Amount.Twice
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metalworker.jpg
-Oracle:{T}: Reveal any number of artifact cards in your hand. Add {2} to your mana pool for each card revealed this way.
+Oracle:{T}: Reveal any number of artifact cards in your hand. Add {C}{C} to your mana pool for each card revealed this way.

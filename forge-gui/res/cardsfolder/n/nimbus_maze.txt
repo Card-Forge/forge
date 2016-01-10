@@ -1,8 +1,8 @@
 Name:Nimbus Maze
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | IsPresent$ Island.YouCtrl | SpellDescription$ Add {W} to your mana pool. Activate this ability only if you control an Island.
 A:AB$ Mana | Cost$ T | Produced$ U | IsPresent$ Plains.YouCtrl | SpellDescription$ Add {U} to your mana pool. Activate this ability only if you control a Plains.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nimbus_maze.jpg
-Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {W} to your mana pool. Activate this ability only if you control an Island.\n{T}: Add {U} to your mana pool. Activate this ability only if you control a Plains.
+Oracle:{T}: Add {C} to your mana pool.\n{T}: Add {W} to your mana pool. Activate this ability only if you control an Island.\n{T}: Add {U} to your mana pool. Activate this ability only if you control a Plains.

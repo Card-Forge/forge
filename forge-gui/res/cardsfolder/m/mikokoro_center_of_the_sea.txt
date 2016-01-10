@@ -1,7 +1,7 @@
 Name:Mikokoro, Center of the Sea
 ManaCost:no cost
 Types:Legendary Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | Defined$ Each | SpellDescription$ Each player draws a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mikokoro_center_of_the_sea.jpg
-Oracle:{T}: Add {1} to your mana pool.\n{2}, {T}: Each player draws a card.
+Oracle:{T}: Add {C} to your mana pool.\n{2}, {T}: Each player draws a card.

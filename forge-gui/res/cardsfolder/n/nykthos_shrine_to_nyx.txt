@@ -1,10 +1,10 @@
 Name:Nykthos, Shrine to Nyx
 ManaCost:no cost
 Types:Legendary Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ ChooseColor | Cost$ 2 T | SubAbility$ DBMana | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
 SVar:DBMana:DB$ Mana | Produced$ Chosen | Amount$ X | References$ X
 SVar:X:Count$Devotion.Chosen
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nykthos_shrine_to_nyx.jpg
-Oracle:{T}: Add {1} to your mana pool.\n{2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+Oracle:{T}: Add {C} to your mana pool.\n{2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)

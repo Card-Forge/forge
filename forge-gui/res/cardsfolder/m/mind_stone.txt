@@ -1,7 +1,7 @@
 Name:Mind Stone
 ManaCost:2
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_stone.jpg
-Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}, Sacrifice Mind Stone: Draw a card.
+Oracle:{T}: Add {C} to your mana pool.\n{1}, {T}, Sacrifice Mind Stone: Draw a card.

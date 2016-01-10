@@ -2,10 +2,10 @@ Name:Orcish Squatters Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-1/-1
-T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your precombat main phase, add {X} to your mana pool, where X is the number of lands target opponent controls.
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your precombat main phase, add an amount of {C} to your mana pool equal to the number of lands target opponent controls.
 SVar:TrigGetMana:AB$ Pump | Cost$ 0 | ValidTgts$ Player | RememberObjects$ Targeted | SubAbility$ DBMana
-SVar:DBMana:DB$ Mana | Produced$ 1 | Amount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBMana:DB$ Mana | Produced$ C | Amount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.RememberedPlayerCtrl
 SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Orcish Squatters Avatar.full.jpg
-Oracle:Hand -1, life -1\nAt the beginning of your precombat main phase, add {X} to your mana pool, where X is the number of lands target opponent controls.
+Oracle:Hand -1, life -1\nAt the beginning of your precombat main phase, add an amount of {C} to your mana pool equal to the number of lands target opponent controls.

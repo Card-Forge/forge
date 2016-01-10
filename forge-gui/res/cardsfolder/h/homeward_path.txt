@@ -1,8 +1,8 @@
 Name:Homeward Path
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ RepeatEach | Cost$ T | RepeatPlayers$ Player | AILogic$ GainControlOwns | RepeatSubAbility$ DBGainControl | SpellDescription$ Each player gains control of all creatures he or she owns.
 SVar:DBGainControl:DB$ GainControl | AllValid$ Creature.RememberedPlayerOwn | NewController$ Player.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homeward_path.jpg
-Oracle:{T}: Add {1} to your mana pool.\n{T}: Each player gains control of all creatures he or she owns.
+Oracle:{T}: Add {C} to your mana pool.\n{T}: Each player gains control of all creatures he or she owns.
