@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
+import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
@@ -23,21 +24,22 @@ public class ConquestChaosWheel extends FOverlay {
 
         super.setVisible(visible0);
 
-        if (visible0) { //delay spin animation briefly
-            ThreadUtil.delay(250, new Runnable() {
-                @Override
-                public void run() {
-                    animation.start();
-                }
-            });
+        if (visible0) {
+            animation.start();
         }
     }
 
     @Override
     public void drawOverlay(Graphics g) {
-        float padding = FOptionPane.PADDING;
-        float wheelSize = getWidth() - 2 * padding;
-        FSkinTexture.BG_CHAOS_WHEEL.drawRotated(g, padding, (getHeight() - wheelSize) / 2, wheelSize, wheelSize, animation.getWheelRotation());
+        //draw wheel
+        float x = FOptionPane.PADDING;
+        float wheelSize = getWidth() - 2 * x;
+        float y = (getHeight() - wheelSize) / 2;
+        FSkinTexture.BG_CHAOS_WHEEL.drawRotated(g, x, y, wheelSize, wheelSize, animation.getWheelRotation());
+
+        //draw spoke at top using Planeswalker icon
+        float spokeSize = wheelSize * 0.15f;
+        FSkinImage.PW_BADGE_UNCOMMON.draw(g, x + (wheelSize - spokeSize) / 2, y - spokeSize * 0.75f, spokeSize, spokeSize);
     }
 
     @Override
@@ -49,13 +51,13 @@ public class ConquestChaosWheel extends FOverlay {
 
         private WheelSpinAnimation() {
             float initialPosition = Aggregates.randomInt(1, 8) * 45f - 22.5f; //-22.5f because wheel image slightly rotated initially
-            float initialVelocity = Aggregates.randomInt(50, 100);
+            float initialVelocity = Aggregates.randomInt(360, 720);
             float acceleration = Aggregates.randomInt(50, 100) * -1f;
             rotationManager = new PhysicsObject(new Vector2(initialPosition, 0), new Vector2(initialVelocity, 0), new Vector2(acceleration, 0), false);
         }
 
         private float getWheelRotation() {
-            return rotationManager.getPosition().x;
+            return -rotationManager.getPosition().x; //use negative so wheel rotates clockwise
         }
 
         @Override
