@@ -1,7 +1,7 @@
 Name:Skittering Invasion
 ManaCost:7
 Types:Tribal Sorcery Eldrazi
-A:SP$ Token | Cost$ 7 | TokenAmount$ 5 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana | TokenAltImages$ c_0_1_eldrazi_spawn2,c_0_1_eldrazi_spawn3 | SpellDescription$ Put five 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
-SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:SP$ Token | Cost$ 7 | TokenAmount$ 5 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana | TokenAltImages$ c_0_1_eldrazi_spawn2,c_0_1_eldrazi_spawn3 | SpellDescription$ Put five 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_invasion.jpg
-Oracle:Put five 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
+Oracle:Put five 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."

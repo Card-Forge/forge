@@ -1,7 +1,7 @@
 Name:Urza's Tower
 ManaCost:no cost
 Types:Land Urza's Tower
-A:AB$ Mana | Cost$ T | Produced$ 1 | Bonus$ UrzaLands | BonusProduced$ 2 | SpellDescription$ Add {1} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {3} to your mana pool instead.
+A:AB$ Mana | Cost$ T | Produced$ C | Bonus$ UrzaLands | BonusProduced$ 2 | SpellDescription$ Add {C} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} to your mana pool instead.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_tower.jpg
-Oracle:{T}: Add {1} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {3} to your mana pool instead.
+Oracle:{T}: Add {C} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} to your mana pool instead.

@@ -1,8 +1,8 @@
 Name:Tomb of the Spirit Dragon
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ GainLife | Cost$ 2 T | LifeAmount$ X | References$ X | SpellDescription$ You gain 1 life for each colorless creature you control.
 SVar:X:Count$Valid Creature.Colorless+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tomb_of_the_spirit_dragon.jpg
-Oracle:{T}: Add {1} to your mana pool.\n{2}, {T}: You gain 1 life for each colorless creature you control.
+Oracle:{T}: Add {C} to your mana pool.\n{2}, {T}: You gain 1 life for each colorless creature you control.

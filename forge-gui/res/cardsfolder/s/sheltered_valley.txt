@@ -4,10 +4,10 @@ Types:Land
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ SacBeforeETB | Description$ If CARDNAME would enter the battlefield, instead sacrifice each other permanent named Sheltered Valley you control, then put CARDNAME onto the battlefield.
 SVar:SacBeforeETB:DB$ SacrificeAll | ValidCards$ Permanent.YouCtrl+namedSheltered Valley | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Land.YouCtrl | PresentCompare$ LE3 | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:NeedsToPlayVar:OnlyOne EQ0
 SVar:OnlyOne:Count$Valid Permanent.YouCtrl+namedSheltered Valley
 SVar:Picture:http://wizards.com/global/images/magic/general/sheltered_valley.jpg
-Oracle:If Sheltered Valley would enter the battlefield, instead sacrifice each other permanent named Sheltered Valley you control, then put Sheltered Valley onto the battlefield.\nAt the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.\n{T}: Add {1} to your mana pool.
+Oracle:If Sheltered Valley would enter the battlefield, instead sacrifice each other permanent named Sheltered Valley you control, then put Sheltered Valley onto the battlefield.\nAt the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.\n{T}: Add {C} to your mana pool.
