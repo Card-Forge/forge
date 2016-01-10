@@ -113,7 +113,7 @@ public class ConquestLocation implements IXmlWritable {
         catch (Exception e) { return false; }
     }
 
-    public ConquestEvent getEvent() {
+    public ConquestEvent createEvent() {
         //TODO: Make this pull from predefined events
         return new ConquestEvent(this, 0) {
             private final PaperCard commander = Aggregates.random(getRegion().getCommanders());

@@ -187,6 +187,7 @@ public final class ConquestData {
     public void addWin(ConquestEvent event) {
         getOrCreatePlaneData(event.getLocation().getPlane()).addWin(event);
         getSelectedCommander().getRecord().addWin();
+        event.setConquered(true);
     }
 
     public void addLoss(ConquestEvent event) {

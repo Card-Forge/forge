@@ -13,9 +13,14 @@ import forge.util.PhysicsObject;
 import forge.util.ThreadUtil;
 
 public class ConquestChaosWheel extends FOverlay {
+    public static void spin() {
+        ConquestChaosWheel wheel = new ConquestChaosWheel();
+        wheel.show();
+    }
+
     private final WheelSpinAnimation animation = new WheelSpinAnimation();
 
-    public ConquestChaosWheel() {
+    private ConquestChaosWheel() {
     }
 
     @Override

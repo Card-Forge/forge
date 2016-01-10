@@ -12,6 +12,7 @@ public abstract class ConquestEvent {
     private final ConquestLocation location;
     private final int tier;
     private Deck opponentDeck;
+    private boolean conquered;
 
     public ConquestEvent(ConquestLocation location0, int tier0) {
         location = location0;
@@ -31,6 +32,13 @@ public abstract class ConquestEvent {
             opponentDeck = buildOpponentDeck();
         }
         return opponentDeck;
+    }
+
+    public boolean wasConquered() {
+        return conquered;
+    }
+    public void setConquered(boolean conquered0) {
+        conquered = conquered0;
     }
 
     protected abstract Deck buildOpponentDeck();

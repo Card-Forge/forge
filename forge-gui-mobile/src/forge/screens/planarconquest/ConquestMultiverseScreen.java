@@ -17,12 +17,14 @@ import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
+import forge.planarconquest.ConquestEvent;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.screens.FScreen;
 import forge.toolbox.FScrollPane;
+import forge.util.Callback;
 import forge.util.collect.FCollectionView;
 
 public class ConquestMultiverseScreen extends FScreen {
@@ -57,7 +59,15 @@ public class ConquestMultiverseScreen extends FScreen {
     }
 
     private void launchEvent() {
-        Forge.openScreen(new ConquestEventScreen(model.getCurrentLocation().getEvent()));
+        Forge.openScreen(new ConquestEventScreen(model.getCurrentLocation().createEvent(), new Callback<ConquestEvent>() {
+            @Override
+            public void run(ConquestEvent event) {
+                if (event.wasConquered()) {
+                    //spin Chaos Wheel if event was conquered
+                    ConquestChaosWheel.spin();
+                }
+            }
+        }));
     }
 
     private class PlaneGrid extends FScrollPane {
