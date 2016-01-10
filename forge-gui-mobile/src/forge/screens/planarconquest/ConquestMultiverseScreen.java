@@ -25,7 +25,6 @@ import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPlaneData;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 import forge.util.Utils;
@@ -71,7 +70,7 @@ public class ConquestMultiverseScreen extends FScreen {
                     ConquestEventRecord record = model.getCurrentPlaneData().getEventRecord(loc);
                     if (record.getWins(event.getTier()) == 1 && record.getHighestConqueredTier() == event.getTier()) {
                         //if first time conquering event at the selected tier, show animation of new badge being positioned on location
-                        planeGrid.animateBadgeIntoPosition(loc);
+                        planeGrid.animateBadgeIntoPosition(loc, event.getTier());
                     }
                     else {
                         //just spin Chaos Wheel immediately if event tier was previously conquered
@@ -115,8 +114,8 @@ public class ConquestMultiverseScreen extends FScreen {
             return true;
         }
 
-        private void animateBadgeIntoPosition(ConquestLocation loc) {
-            activeBadgeAnimation = new BadgeAnimation(loc);
+        private void animateBadgeIntoPosition(ConquestLocation loc, int tier) {
+            activeBadgeAnimation = new BadgeAnimation(loc, tier);
             activeBadgeAnimation.start();
         }
 
@@ -186,30 +185,28 @@ public class ConquestMultiverseScreen extends FScreen {
                         ConquestEventRecord eventRecord = planeData.getEventRecord(i, r, c);
                         if (eventRecord != null && eventRecord.hasConquered()) {
                             //draw badge in upper-right corner of conquered squares
-                            FSkinImage badge;
-                            switch (eventRecord.getHighestConqueredTier()) {
-                            case 0:
-                                badge = FSkinImage.PW_BADGE_COMMON;
-                                break;
-                            case 1:
-                                badge = FSkinImage.PW_BADGE_UNCOMMON;
-                                break;
-                            case 2:
-                                badge = FSkinImage.PW_BADGE_RARE;
-                                break;
-                            default:
-                                badge = FSkinImage.PW_BADGE_MYTHIC;
-                                break;
-                            }
                             //shift slightly right to account for transparent edge of icon
                             x0 = Math.round(x0 + colWidth - eventIconOffset - eventIconSize * 0.9f);
                             y0 = Math.round(y0 + eventIconOffset);
+
+                            int tier = eventRecord.getHighestConqueredTier();
                             if (activeBadgeAnimation != null && activeBadgeAnimation.location.isAt(i, r, c)) {
-                                //draw animated badge instead if animation is active
-                                activeBadgeAnimation.drawBadge(g, badge, x0, y0, eventIconSize, eventIconSize);
+                                activeBadgeAnimation.end.set(x0, y0, eventIconSize, eventIconSize);
+                                tier--; //show previous tier while animation active
                             }
-                            else {
-                                g.drawImage(badge, x0, y0, eventIconSize, eventIconSize);
+                            switch (tier) {
+                            case 0:
+                                FSkinImage.PW_BADGE_COMMON.draw(g, x0, y0, eventIconSize, eventIconSize);
+                                break;
+                            case 1:
+                                FSkinImage.PW_BADGE_UNCOMMON.draw(g, x0, y0, eventIconSize, eventIconSize);
+                                break;
+                            case 2:
+                                FSkinImage.PW_BADGE_RARE.draw(g, x0, y0, eventIconSize, eventIconSize);
+                                break;
+                            case 3:
+                                FSkinImage.PW_BADGE_MYTHIC.draw(g, x0, y0, eventIconSize, eventIconSize);
+                                break;
                             }
                         }
                         else {
@@ -259,6 +256,11 @@ public class ConquestMultiverseScreen extends FScreen {
             x0 = pos.x - tokenWidth / 2;
             y0 = pos.y - tokenHeight / 2 - getScrollTop();
             g.drawImage(token, x0, y0, tokenWidth, tokenHeight);
+
+            //draw badge animation on top of everything else
+            if (activeBadgeAnimation != null) {
+                activeBadgeAnimation.drawBadge(g);
+            }
 
             g.endClip();
         }
@@ -349,30 +351,53 @@ public class ConquestMultiverseScreen extends FScreen {
         }
 
         private class BadgeAnimation extends ForgeAnimation {
-            private static final float DURATION = 1.5f;
+            private static final float DURATION = 0.75f;
 
             private final ConquestLocation location;
-            private float progress;
+            private final FSkinImage badge;
+            private final Rectangle start, end;
+            private float progress = -0.5f; //delay animation by a half second
 
-            private BadgeAnimation(ConquestLocation location0) {
+            private BadgeAnimation(ConquestLocation location0, int tier) {
                 location = location0;
+
+                switch (tier) {
+                case 0:
+                    badge = FSkinImage.PW_BADGE_COMMON;
+                    break;
+                case 1:
+                    badge = FSkinImage.PW_BADGE_UNCOMMON;
+                    break;
+                case 2:
+                    badge = FSkinImage.PW_BADGE_RARE;
+                    break;
+                default:
+                    badge = FSkinImage.PW_BADGE_MYTHIC;
+                    break;
+                }
+
+                float gridWidth = PlaneGrid.this.getWidth();
+                float startSize = gridWidth * 0.75f;
+                start = new Rectangle((gridWidth - startSize) / 2, (PlaneGrid.this.getHeight() - startSize) / 2, startSize, startSize);
+                end = new Rectangle();
             }
 
-            private void drawBadge(Graphics g, FSkinImage badge, float x, float y, float w, float h) {
-                float gridWidth = PlaneGrid.this.getWidth();
-                float startWidth = gridWidth * 0.75f;
-                float startHeight = startWidth * h / w;
-                Rectangle start = new Rectangle((gridWidth - startWidth) / 2, (PlaneGrid.this.getHeight() - startHeight) / 2, startWidth, startHeight);
-                Rectangle end = new Rectangle(x, y, w, h);
-                Rectangle pos = Utils.getTransitionPosition(start, end, progress / DURATION);
-
+            private void drawBadge(Graphics g) {
+                float percentage = progress / DURATION;
+                if (percentage < 0) {
+                    percentage = 0;
+                }
+                else if (percentage > 1) {
+                    percentage = 1;
+                }
+                Rectangle pos = Utils.getTransitionPosition(start, end, percentage);
                 g.drawImage(badge, pos.x, pos.y, pos.width, pos.height);
             }
 
             @Override
             protected boolean advance(float dt) {
                 progress += dt;
-                return progress < DURATION;
+                return progress < DURATION + 0.5f; //delay ending animation for a half second
             }
 
             @Override

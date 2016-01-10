@@ -7,6 +7,8 @@ import java.util.Set;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.planarconquest.ConquestEvent.ConquestEventRecord;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.util.Aggregates;
 import forge.util.XmlReader;
@@ -119,7 +121,8 @@ public class ConquestLocation implements IXmlWritable {
 
     public ConquestEvent createEvent() {
         //TODO: Make this pull from predefined events
-        return new ConquestEvent(this, 0) {
+        ConquestEventRecord record = FModel.getConquest().getModel().getCurrentPlaneData().getEventRecord(this);
+        return new ConquestEvent(this, record == null ? 0 : Math.min(record.getHighestConqueredTier() + 1, 3)) {
             private final PaperCard commander = Aggregates.random(getRegion().getCommanders());
 
             @Override
