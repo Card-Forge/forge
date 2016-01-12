@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
@@ -141,8 +143,8 @@ public class ConquestLocation implements IXmlWritable {
             }
 
             @Override
-            public String getAvatarImageKey() {
-                return commander.getImageKey(false);
+            public void setOpponentAvatar(LobbyPlayer aiPlayer, IGuiGame gui) {
+                aiPlayer.setAvatarCardImageKey(commander.getImageKey(false));
             }
 
             @Override

@@ -8,6 +8,7 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.GameView;
 import forge.interfaces.IButton;
+import forge.interfaces.IGuiGame;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPreferences.CQPref;
@@ -69,8 +70,8 @@ public class ConquestChaosBattle extends ConquestEvent {
     }
 
     @Override
-    public String getAvatarImageKey() {
-        return duel.getIconImageKey();
+    public void setOpponentAvatar(LobbyPlayer aiPlayer, IGuiGame gui) {
+        gui.setPlayerAvatar(aiPlayer, duel);
     }
 
     @Override

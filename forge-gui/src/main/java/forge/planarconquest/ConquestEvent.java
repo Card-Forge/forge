@@ -7,6 +7,7 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.GameView;
 import forge.interfaces.IButton;
+import forge.interfaces.IGuiGame;
 import forge.interfaces.IWinLoseView;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
@@ -71,7 +72,7 @@ public abstract class ConquestEvent {
     public abstract void addVariants(Set<GameType> variants);
     public abstract String getEventName();
     public abstract String getOpponentName();
-    public abstract String getAvatarImageKey();
+    public abstract void setOpponentAvatar(LobbyPlayer aiPlayer, IGuiGame gui);
 
     public static class ConquestEventRecord implements IXmlWritable {
         private final ConquestRecord[] tiers = new ConquestRecord[4];

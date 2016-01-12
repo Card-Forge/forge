@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
@@ -173,10 +174,15 @@ public class ConquestMultiverseScreen extends FScreen {
     }
 
     private void launchChaosBattle() {
-        LoadingOverlay.show("Chaos approaching...", new Runnable() {
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                FModel.getConquest().launchEvent(new ConquestChaosBattle());
+                LoadingOverlay.show("Chaos approaching...", new Runnable() {
+                    @Override
+                    public void run() {
+                        FModel.getConquest().launchEvent(new ConquestChaosBattle());
+                    }
+                });
             }
         });
     }

@@ -35,6 +35,7 @@ import forge.game.GameType;
 import forge.game.GameView;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
+import forge.interfaces.IGuiGame;
 import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.match.HostedMatch;
@@ -114,8 +115,9 @@ public class ConquestController {
         humanPlayer.setAvatarCardImageKey(commander.getCard().getImageKey(false));
         starter.add(humanStart.setPlayer(humanPlayer));
 
+        final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);
-        aiPlayer.setAvatarCardImageKey(event.getAvatarImageKey());
+        event.setOpponentAvatar(aiPlayer, gui);
         starter.add(aiStart.setPlayer(aiPlayer));
 
         final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
@@ -130,7 +132,7 @@ public class ConquestController {
         FThreads.invokeInEdtNowOrLater(new Runnable(){
             @Override
             public void run() {
-                hostedMatch.startMatch(rules, null, starter, humanStart, GuiBase.getInterface().getNewGuiGame());
+                hostedMatch.startMatch(rules, null, starter, humanStart, gui);
             }
         });
         activeEvent = event;
