@@ -46,7 +46,7 @@ public enum ConquestPlane {
     Alara("Alara", new String[] {
             "ALA", "CON", "ARB"
     }, new String[] {
-            "Bant", "Grixis", "Jund", "Naya"
+            "Bant", "Grixis", "Jund", "Naya", "The Maelstrom"
     }, new String[] {
             "Unstable Obelisk", "Baleful Strix", "Shardless Agent", "Etherium-Horn Sorcerer",
             "Patron of the Valiant", "Sublime Archangel", "Naya Soulbeast", "Stalwart Aven",
@@ -65,7 +65,8 @@ public enum ConquestPlane {
             new Region("Esper", "Esper Panorama", MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK),
             new Region("Grixis", "Grixis Panorama", MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED),
             new Region("Jund", "Jund Panorama", MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN),
-            new Region("Naya", "Naya Panorama", MagicColor.RED | MagicColor.GREEN | MagicColor.WHITE)
+            new Region("Naya", "Naya Panorama", MagicColor.RED | MagicColor.GREEN | MagicColor.WHITE),
+            new Region("Maelstrom", "Rupture Spire", MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN)
     }),
     Dominaria("Dominaria", new String[] {
             "ICE", "ALL", "CSP",

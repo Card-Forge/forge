@@ -245,6 +245,7 @@ public final class ConquestData {
             xml.write("aetherShards", aetherShards);
             xml.write("currentLocation", currentLocation);
             xml.write("selectedCommanderIndex", selectedCommanderIndex);
+            xml.write("chaosBattleRecord", chaosBattleRecord);
             xml.write("unlockedCards", unlockedCards);
             xml.write("newCards", newCards);
             xml.write("commanders", commanders);
