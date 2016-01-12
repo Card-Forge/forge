@@ -32,6 +32,7 @@ public class AltWinAchievements extends AchievementCollection {
         add("Door to Nothingness", "The Door", "And behind door #2 is...");
         add("Epic Struggle", "The Army", "Let's just trample them into the ground already!");
         add("Felidar Sovereign", "The Cat's Life", "Just wait for his other eight lives!");
+        add("Hedron Alignment", "The Alignment", "The hedrons are right!");
         add("Helix Pinnacle", "The Tower", "The view from the top is great!");
         add("Hellkite Tyrant", "The Hoard", "You made your bed of treasure, now lie in it!");
         add("Laboratory Maniac", "The Insanity", "No more questions? I'm omniscient now!");

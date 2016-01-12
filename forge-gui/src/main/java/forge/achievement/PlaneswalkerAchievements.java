@@ -35,6 +35,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Ashiok, Nightmare Weaver", "Ashiok's Identity", "I subscribe to the theory of blank slate!");
         add("Chandra Ablaze", "Chandra's Bargain", "I feel like I've seen those before...");
         add("Chandra Nalaar", "Chandra's Rage", "Feel the power of my wrath!");
+        add("Chandra, Flamecaller", "Chandra's Sea of Flames", "You didn't activate this for 0 just to get the achievement, did you?");
         add("Chandra, Pyromaster", "Chandra's Vengeance", "Please file in triplicate!");
         add("Chandra, Roaring Flame", "Chandra's Roar", "The opponent continues to burn...");
         add("Chandra, the Firebrand", "Chandra's Hex", "When burning five is just not enough.");
@@ -73,6 +74,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Nicol Bolas, Planeswalker", "Bolas's Ultimatum", "Whatever you do, don't call him \"Nicol\"!");
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
         add("Nissa, Sage Animist", "Nissa's Wake-Up Call", "Wake up! Time to work!");
+        add("Nissa, Voice of Zendikar", "Nissa's Bounty", "It's harvest time!");
         add("Nissa, Worldwaker", "Nissa's Awakening", "The whole country is here!");
         add("Ob Nixilis of the Black Oath", "Nixilis's Black Oath", "We all have to bring sacrifices sometimes.");
         add("Ob Nixilis Reignited", "Ob Nixilis's Torment", "I'll give you dreams from beyond the underworld!");
