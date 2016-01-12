@@ -47,11 +47,14 @@ public class QuestEventDuelManager {
     public QuestEventDuelManager(final File dir) {
         allDuels = new StorageBase<QuestEventDuel>("Quest duels", new QuestDuelReader(dir));
         assembleDuelDifficultyLists();
-    } // End assembleAllEvents()
+    }
 
-    /** @return List<QuestEventDuel> */
     public Iterable<QuestEventDuel> getAllDuels() {
         return allDuels;
+    }
+
+    public Iterable<QuestEventDuel> getDuels(QuestEventDifficulty difficulty) {
+        return sortedDuels.get(difficulty);
     }
 
     // define fallback orders if there aren't enough opponents defined for a particular difficultly level

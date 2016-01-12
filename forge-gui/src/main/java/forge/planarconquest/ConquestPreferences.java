@@ -37,7 +37,11 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         BOOSTER_COMMONS("11"),
         BOOSTER_UNCOMMONS("3"),
         BOOSTER_RARES("1"),
-        BOOSTERS_PER_MYTHIC("8");
+        BOOSTERS_PER_MYTHIC("8"),
+
+        CHAOS_BATTLE_WINS_MEDIUMAI("2"),
+        CHAOS_BATTLE_WINS_HARDAI("5"),
+        CHAOS_BATTLE_WINS_EXPERTAI("10");
 
         private final String strDefaultVal;
 

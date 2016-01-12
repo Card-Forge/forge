@@ -81,13 +81,14 @@ public class ConquestController {
         return decks;
     }
 
-    public void launchEvent(ConquestCommander commander, ConquestEvent event) {
+    public void launchEvent(ConquestEvent event) {
         if (activeEvent != null) { return; }
 
         //determine game variants
         Set<GameType> variants = new HashSet<GameType>();
         event.addVariants(variants);
 
+        final ConquestCommander commander = model.getSelectedCommander(); 
         final RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
         final RegisteredPlayer aiStart = new RegisteredPlayer(event.getOpponentDeck());
 
@@ -122,7 +123,7 @@ public class ConquestController {
             rp.setRandomFoil(useRandomFoil);
         }
         final GameRules rules = new GameRules(GameType.PlanarConquest);
-        rules.setGamesPerMatch(1); //only play one game at a time
+        rules.setGamesPerMatch(event.gamesPerMatch());
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
@@ -170,23 +171,13 @@ public class ConquestController {
     }
 
     public void showGameOutcome(final GameView game, final IWinLoseView<? extends IButton> view) {
-        if (game.isMatchWonBy(humanPlayer)) {
-            view.getBtnRestart().setVisible(false);
-            view.getBtnQuit().setText("Great!");
-            model.addWin(activeEvent);
-        }
-        else {
-            view.getBtnRestart().setVisible(true);
-            view.getBtnRestart().setText("Retry");
-            view.getBtnQuit().setText("Quit");
-            model.addLoss(activeEvent);
-        }
-
-        model.saveData();
-        FModel.getConquestPreferences().save();
+        activeEvent.showGameOutcome(model, game, humanPlayer, view);
     }
 
-    public void finishEvent() {
+    public void finishEvent(final IWinLoseView<? extends IButton> view) {
+        if (activeEvent == null) { return; }
+
+        activeEvent.onFinished(model, view);
         activeEvent = null;
     }
 

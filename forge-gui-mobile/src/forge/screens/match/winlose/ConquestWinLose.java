@@ -33,7 +33,7 @@ public class ConquestWinLose extends ControlWinLose {
 
     @Override
     public final void actionOnQuit() {
-        FModel.getConquest().finishEvent();
+        FModel.getConquest().finishEvent(getView());
         super.actionOnQuit();
     }
 }

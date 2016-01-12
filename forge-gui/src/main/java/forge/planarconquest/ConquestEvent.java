@@ -2,8 +2,12 @@ package forge.planarconquest;
 
 import java.util.Set;
 
+import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.game.GameView;
+import forge.interfaces.IButton;
+import forge.interfaces.IWinLoseView;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
@@ -39,6 +43,28 @@ public abstract class ConquestEvent {
     }
     public void setConquered(boolean conquered0) {
         conquered = conquered0;
+    }
+
+    public int gamesPerMatch() {
+        return 1; //events are one game by default
+    }
+
+    public void showGameOutcome(final ConquestData model, final GameView game, final LobbyPlayer humanPlayer, final IWinLoseView<? extends IButton> view) {
+        if (game.isMatchWonBy(humanPlayer)) {
+            view.getBtnRestart().setVisible(false);
+            view.getBtnQuit().setText("Great!");
+            model.addWin(this);
+        }
+        else {
+            view.getBtnRestart().setVisible(true);
+            view.getBtnRestart().setText("Retry");
+            view.getBtnQuit().setText("Quit");
+            model.addLoss(this);
+        }
+        model.saveData();
+    }
+
+    public void onFinished(final ConquestData model, final IWinLoseView<? extends IButton> view) {
     }
 
     protected abstract Deck buildOpponentDeck();

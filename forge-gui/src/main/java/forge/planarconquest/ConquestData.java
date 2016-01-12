@@ -57,6 +57,7 @@ public final class ConquestData {
 
     private final File directory;
     private final String xmlFilename;
+    private final ConquestRecord chaosBattleRecord;
     private final EnumMap<ConquestPlane, ConquestPlaneData> planeDataMap = new EnumMap<ConquestPlane, ConquestPlaneData>(ConquestPlane.class);
     private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
     private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
@@ -81,6 +82,7 @@ public final class ConquestData {
                 unlockCard(card);
             }
         }
+        chaosBattleRecord = new ConquestRecord();
     }
 
     public ConquestData(File directory0) {
@@ -88,6 +90,7 @@ public final class ConquestData {
         directory = directory0;
         xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
 
+        ConquestRecord chaosBattleRecord0 = null;
         try {
             XmlReader xml = new XmlReader(xmlFilename);
             CardDb cardDb = FModel.getMagicDb().getCommonCards();
@@ -95,6 +98,7 @@ public final class ConquestData {
             aetherShards = xml.read("aetherShards", aetherShards);
             currentLocation = xml.read("currentLocation", ConquestLocation.class);
             selectedCommanderIndex = xml.read("selectedCommanderIndex", selectedCommanderIndex);
+            chaosBattleRecord0 = xml.read("chaosBattleRecord", ConquestRecord.class);
             xml.read("unlockedCards", unlockedCards, cardDb);
             xml.read("newCards", newCards, cardDb);
             xml.read("commanders", commanders, ConquestCommander.class);
@@ -103,6 +107,10 @@ public final class ConquestData {
         catch (Exception e) {
             e.printStackTrace();
         }
+        if (chaosBattleRecord0 == null) {
+            chaosBattleRecord0 = new ConquestRecord();
+        }
+        chaosBattleRecord = chaosBattleRecord0;
     }
 
     public String getName() {
@@ -222,6 +230,10 @@ public final class ConquestData {
         }
 
         return Math.round(100f * (float)conquered / (float)total) + "%";
+    }
+
+    public ConquestRecord getChaosBattleRecord() {
+        return chaosBattleRecord;
     }
 
     public void saveData() {

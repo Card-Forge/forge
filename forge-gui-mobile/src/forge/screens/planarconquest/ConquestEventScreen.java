@@ -43,7 +43,7 @@ public class ConquestEventScreen extends LaunchScreen {
         LoadingOverlay.show("Starting battle...", new Runnable() {
             @Override
             public void run() {
-                FModel.getConquest().launchEvent(FModel.getConquest().getModel().getSelectedCommander(), event);
+                FModel.getConquest().launchEvent(event);
             }
         });
     }

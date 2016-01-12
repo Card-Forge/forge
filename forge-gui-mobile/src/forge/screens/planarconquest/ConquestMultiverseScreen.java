@@ -20,6 +20,7 @@ import forge.model.FModel;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestEvent.ChaosWheelOutcome;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
+import forge.planarconquest.ConquestChaosBattle;
 import forge.planarconquest.ConquestEvent;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
@@ -27,6 +28,7 @@ import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.planarconquest.ConquestPlaneData;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
@@ -106,7 +108,7 @@ public class ConquestMultiverseScreen extends FScreen {
                     awardPlaneswalkCharge();
                     break;
                 case CHAOS:
-                    triggerChaosTravel();
+                    launchChaosBattle();
                     break;
                 }
             }
@@ -170,9 +172,13 @@ public class ConquestMultiverseScreen extends FScreen {
         FOptionPane.showMessageDialog(null, "Received Planeswalk Charge");
     }
 
-    private void triggerChaosTravel() {
-        //TODO
-        FOptionPane.showMessageDialog(null, "Chaos Travel");
+    private void launchChaosBattle() {
+        LoadingOverlay.show("Chaos approaching...", new Runnable() {
+            @Override
+            public void run() {
+                FModel.getConquest().launchEvent(new ConquestChaosBattle());
+            }
+        });
     }
 
     private class PlaneGrid extends FScrollPane {
