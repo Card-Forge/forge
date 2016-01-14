@@ -348,8 +348,8 @@ public class ManaPool implements Iterable<Mana> {
     
     // Conversion matrix ORs byte values to make mana more payable
     // Restrictive matrix ANDs byte values to make mana less payable
-    private final byte[] colorConversionMatrix = new byte[MagicColor.WUBRG.length + 1];
-    private final byte[] colorRestrictionMatrix = new byte[MagicColor.WUBRG.length + 1];
+    private final byte[] colorConversionMatrix = new byte[MagicColor.WUBRGC.length];
+    private final byte[] colorRestrictionMatrix = new byte[MagicColor.WUBRGC.length];
     private static final byte[] identityMatrix = { MagicColor.WHITE, MagicColor.BLUE, MagicColor.BLACK, MagicColor.RED, MagicColor.GREEN, 0 };
 
     public void adjustColorReplacement(byte originalColor, byte replacementColor, boolean additive) {
@@ -391,6 +391,11 @@ public class ManaPool implements Iterable<Mana> {
                 return true;
             }
         }
+
+        if (((color & (byte) MagicColor.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte) MagicColor.COLORLESS)) {
+            return true;
+        }
+
         return shard.canBePaidWithManaOfColor((byte)0);
     }
 

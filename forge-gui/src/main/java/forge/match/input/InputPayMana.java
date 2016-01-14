@@ -124,7 +124,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         byte colorCanUse = 0;
-        for (final byte color : MagicColor.WUBRG) {
+        for (final byte color : MagicColor.WUBRGC) {
             if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) {
                 colorCanUse |= color;
             }
@@ -179,7 +179,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         byte colorCanUse = 0;
         byte colorNeeded = 0;
 
-        for (final byte color : MagicColor.WUBRG) {
+        for (final byte color : MagicColor.WUBRGC) {
             if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) { colorCanUse |= color; }
             if (manaCost.needsColor(color, player.getManaPool()))           { colorNeeded |= color; }
         }

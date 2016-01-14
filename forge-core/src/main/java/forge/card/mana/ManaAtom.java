@@ -4,8 +4,6 @@ import forge.card.MagicColor;
 
 /** A bitmask to represent any mana symbol as an integer. */
 public abstract class ManaAtom {
-    public static final int GENERIC = 1 << 6;
-
     /** The Constant WHITE. */
     public static final int WHITE = MagicColor.WHITE; 
 
@@ -21,6 +19,9 @@ public abstract class ManaAtom {
     /** The Constant GREEN. */
     public static final int GREEN = MagicColor.GREEN;
 
+    public static final int COLORLESS = MagicColor.COLORLESS;
+    public static final int GENERIC = 1 << 6;
+
     /** The Constant IS_X. */
     public static final int IS_X = 1 << 8;
 
@@ -32,6 +33,4 @@ public abstract class ManaAtom {
 
     /** The Constant IS_SNOW. */
     public static final int IS_SNOW = 1 << 11;
-
-    public static final int COLORLESS = 1 << 12;
 }
