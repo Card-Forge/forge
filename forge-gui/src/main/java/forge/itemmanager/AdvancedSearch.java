@@ -84,6 +84,16 @@ public class AdvancedSearch {
                 return ConquestPlane.getAllPlanesOfCard(input);
             }
         }),
+        CARD_REGION("Region", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestPlane.Region>(ConquestPlane.getAllRegions()) {
+            @Override
+            protected ConquestPlane.Region getItemValue(PaperCard input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<ConquestPlane.Region> getItemValues(PaperCard input) {
+                return ConquestPlane.getAllRegionsOfCard(input);
+            }
+        }),
         CARD_QUEST_WORLD("Quest World", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
             @Override
             protected QuestWorld getItemValue(PaperCard input) {

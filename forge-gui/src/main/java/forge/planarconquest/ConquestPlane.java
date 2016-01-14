@@ -20,6 +20,7 @@ package forge.planarconquest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -355,6 +356,10 @@ public enum ConquestPlane {
             bannedCards.addAll(bannedCards0);
         }
 
+        for (Region region : regions) {
+            region.plane = this;
+        }
+
         CardDb commonCards = FModel.getMagicDb().getCommonCards();
         for (String setCode : setCodes0) {
             CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
@@ -466,6 +471,7 @@ public enum ConquestPlane {
         private final DeckGenPool cardPool = new DeckGenPool();
         private final FCollection<PaperCard> commanders = new FCollection<PaperCard>();
 
+        private ConquestPlane plane;
         private ISkinImage art;
 
         private Region(String name0, String artCardName0, final int colorMask) {
@@ -509,8 +515,12 @@ public enum ConquestPlane {
             return commanders;
         }
 
+        public ConquestPlane getPlane() {
+            return plane;
+        }
+
         public String toString() {
-            return name;
+            return plane.name + " - " + name;
         }
     }
 
@@ -649,5 +659,29 @@ public enum ConquestPlane {
             }
         }
         return planes;
+    }
+
+    public static Set<Region> getAllRegionsOfCard(PaperCard card) {
+        Set<Region> regions = new HashSet<Region>();
+        for (ConquestPlane plane : values()) {
+            if (plane.cardPool.contains(card)) {
+                for (Region region : plane.getRegions()) {
+                    if (region.cardPool.contains(card)) {
+                        regions.add(region);
+                    }
+                }
+            }
+        }
+        return regions;
+    }
+
+    public static List<Region> getAllRegions() {
+        List<Region> regions = new ArrayList<Region>();
+        for (ConquestPlane plane : values()) {
+            for (Region region : plane.getRegions()) {
+                regions.add(region);
+            }
+        }
+        return regions;
     }
 }
