@@ -140,14 +140,14 @@ public enum ConquestPlane {
             "Gnarlroot Trapper", "Harbinger of the Tides", "Marath, Will of the Wild", "Shaman of the Pack",
             "Thornbow Archer"
     }, new Region[] {
-            new Region("Ancient Amphitheater", "Ancient Amphitheater", MagicColor.RED | MagicColor.WHITE),
-            new Region("Auntie's Hovel", "Auntie's Hovel", MagicColor.BLACK | MagicColor.RED),
-            new Region("Gilt-Leaf Palace", "Gilt-Leaf Palace", MagicColor.BLACK | MagicColor.GREEN),
-            new Region("Murmuring Bosk", "Murmuring Bosk", MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN),
-            new Region("Primal Beyond", "Primal Beyond", ColorSet.ALL_COLORS.getColor()),
-            new Region("Rustic Clachan", "Rustic Clachan", MagicColor.GREEN | MagicColor.WHITE),
-            new Region("Secluded Glen", "Secluded Glen", MagicColor.BLUE | MagicColor.BLACK),
             new Region("Wanderwine Hub", "Wanderwine Hub", MagicColor.WHITE | MagicColor.BLUE),
+            new Region("Secluded Glen", "Secluded Glen", MagicColor.BLUE | MagicColor.BLACK),
+            new Region("Auntie's Hovel", "Auntie's Hovel", MagicColor.BLACK | MagicColor.RED),
+            new Region("Rustic Clachan", "Rustic Clachan", MagicColor.GREEN | MagicColor.WHITE),
+            new Region("Gilt-Leaf Palace", "Gilt-Leaf Palace", MagicColor.BLACK | MagicColor.GREEN),
+            new Region("Ancient Amphitheater", "Ancient Amphitheater", MagicColor.RED | MagicColor.WHITE),
+            new Region("Murmuring Bosk", "Murmuring Bosk", MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN),
+            new Region("Primal Beyond", "Primal Beyond", ColorSet.ALL_COLORS.getColor())
     }),
     Mercadia("Mercadia", new String[] {
             "MMQ", "NEM", "PCY"
@@ -288,7 +288,11 @@ public enum ConquestPlane {
             "Iroas's Champion", "Kalemne's Captain", "Magmatic Insight", "Oath of the Ancient Wood",
             "Prickleboar", "Shadows of the Past", "Starfield of Nyx", "Suppression Bonds", "Valor in Akros"
     }, new Region[] {
-            new Region("", "", inSet("THS", "BNG", "JOU"))
+            new Region("Oreskos", "Temple of Plenty", MagicColor.WHITE),
+            new Region("Meletis", "Temple of Enlightenment", MagicColor.BLUE),
+            new Region("Asphodel", "Temple of Silence", MagicColor.BLACK),
+            new Region("Akros", "Temple of Malice", MagicColor.RED),
+            new Region("Setessa", "Temple of Mystery", MagicColor.GREEN),
     }),
     Ulgrotha("Ulgrotha", new String[] {
             "HML"
