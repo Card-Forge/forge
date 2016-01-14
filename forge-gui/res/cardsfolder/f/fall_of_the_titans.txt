@@ -1,0 +1,8 @@
+Name:Fall of the Titans
+ManaCost:X X R
+Types:Sorcery
+K:Surge:X R
+A:SP$ DealDamage | Cost$ X X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TargetMin$ 0 | TargetMax$ 2 | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
+SVar:X:Count$xPaid
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fall_of_the_titans.jpg
+Oracle:Surge {X}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nFall of the Titans deals X damage to each of up to two target creatures and/or players

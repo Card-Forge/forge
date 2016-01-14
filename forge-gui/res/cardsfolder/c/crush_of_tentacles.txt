@@ -1,0 +1,9 @@
+Name:Crush of Tentacles
+ManaCost:4 U U
+Types:Sorcery
+K:Surge:3 U U
+A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nonland permanents to their owners' hands. If CARDNAME' surge cost was paid, put an 8/8 blue Octopus token onto the battlefield. | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Octopus | TokenTypes$ Creature,Octopus | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 8 | TokenToughness$ 8 | Condition$ Surge
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crush_of_tentacles.jpg
+Oracle:Surge {3}{U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nReturn all nonland permanents to their owner's hands. If Crush of Tentacles' surge cost was paid, put an 8/8 blue Octopus token onto the battlefield.

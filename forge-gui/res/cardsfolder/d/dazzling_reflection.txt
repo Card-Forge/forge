@@ -1,0 +1,12 @@
+Name:Dazzling Reflection
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ You gain life equal to target creature's power.
+SVar:DBGainLife:DB$GainLife | Cost$ 0 | Defined$ You | SubAbility$ DBEffect | LifeAmount$ X
+SVar:X:Targeted$CardPower
+SVar:DBEffect:DB$ Effect | Name$ Dazzling Reflection Effect | ReplacementEffects$ Dazzle | ImprintCards$ Targeted | Triggers$ OutOfSight | SVars$ ExileEffect
+SVar:Dazzle:Event$ DamageDone | ValidSource$ Card.IsImprinted | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the targeted creature would deal damage this turn, prevent that damage.
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsImprinted | Execute$ ExileEffect | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dazzling_reflection.jpg
+Oracle:You gain life equal to target creature's power. The next time that creature would deal damage this turn, prevent that damage.

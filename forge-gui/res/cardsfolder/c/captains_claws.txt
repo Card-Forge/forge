@@ -1,0 +1,10 @@
+Name:Captain's Claws
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddSVar$ AE | Description$ Equipped creature gets +1/+0.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigToken | TriggerDescription$ Whenever equipped creature attacks, put a 1/1 white Kor Ally creature token onto the battlefield tapped and attacking.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Kor Ally | TokenTypes$ Creature,Kor,Ally | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenTapped$ True | TokenAttacking$ True | TokenImage$ w 1 1 kor ally
+K:Equip 1
+SVar:AE:SVar:HasAttackEffect:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/captains_claws.jpg
+Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature attacks, put a 1/1 white Kor Ally creature token onto the battlefield tapped and attacking.\nEquip {1}

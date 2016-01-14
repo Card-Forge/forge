@@ -1,0 +1,16 @@
+Name:Chandra, Flamecaller
+ManaCost:4 R R
+Types:Planeswalker Chandra
+Loyalty:4
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenImage$ r 3 1 elemental OGW | TokenKeywords$ Haste | RememberTokens$ True | SubAbility$ DelTrig | TokenSVars$ ChandraEOT | SpellDescription$ Put two 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ Exile | RememberObjects$ Remembered | TriggerDescription$ Exile the tokens at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
+SVar:Exile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+SVar:ChandraEOT:SVar:EndOfTurnLeavePlay:True 
+A:AB$ Discard | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ You | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard all the cards in your hand, then draw that many cards plus one.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | Defined$ You | SubAbility$ DBCleanup | SpellDescription$ Draw that many cards | References$ Y
+SVar:Y:Remembered$Amount.Plus.1
+A:AB$ DamageAll | Cost$ SubCounter<X/LOYALTY> | NumDmg$ ChosenX | References$ X | ValidCards$ Creature | Planeswalker$ True | Ultimate$ True | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals X damage to each creature.
+SVar:X:XChoice 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_flamecaller.jpg
+Oracle:[+1] Put two 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.\n[0] Discard all the cards in your hand, then draw that many cards plus one.\n[-X] Chandra, Flamecaller deals X damage to each creature.

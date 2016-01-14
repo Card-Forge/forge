@@ -1,0 +1,13 @@
+Name:Kozilek, the Great Distortion
+ManaCost:8 C C
+Types:Legendary Creature Eldrazi
+PT:12/12
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw  | CheckSVar$ Y | SVarCompare$ LT7 | TriggerDescription$ When you cast CARDNAME, if you have fewer than seven cards in hand, draw cards equal to the difference.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ Difference | References$ Y,Difference
+SVar:Y:Count$InYourHand
+SVar:Difference:Number$7/Minus.Y
+K:Menace
+A:AB$ Counter | Announce$ X | Cost$ Discard<1/Card.cmcEQX/card with converted mana cost X> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell with converted mana cost X.
+SVar:X:Targeted$CardManaCost 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kozilek_the_great_distortion.jpg
+Oracle:When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.\nMenace\nDiscard a card with converted mana cost X: Counter target spell with converted mana cost X.

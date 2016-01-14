@@ -1,0 +1,9 @@
+Name:Flaying Tendrils
+ManaCost:1 B B
+Types:Sorcery
+K:Devoid
+A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBEffect | SpellDescription$ All creatures get -2/-2 until end of turn. If a creature would die this turn, exile it instead.
+SVar:DBEffect:DB$ Effect | Name$ Flaying Tendrils Effect | StaticAbilities$ KWPump | SpellDescription$ If a creature would die this turn, exile it instead.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ If CARDNAME would be put into a graveyard, exile it instead. | Description$ If a creature would die this turn, exile it instead.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flaying_tendrils.jpg
+Oracle:Devoid (This card has no color.)\nAll creatures get -2/-2 until end of turn. If a creature would die this turn, exile it instead.

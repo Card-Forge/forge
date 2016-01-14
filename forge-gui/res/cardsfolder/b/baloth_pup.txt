@@ -1,0 +1,8 @@
+Name:Baloth Pup
+ManaCost:1 G
+Types:Creature Beast
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | CheckSVar$ X | SVarCompare$ EQ1 | Description$ CARDNAME has trample as long as it has a +1/+1 counter on it.
+SVar:X:Count$Valid Card.Self+counters_GE1_P1P1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/baloth_pup.jpg
+Oracle:Baloth Pup has trample as long as it has a +1/+1 counter on it.

@@ -1,0 +1,10 @@
+Name:Goblin Dark-Dwellers
+ManaCost:3 R R
+Types:Creature Goblin
+PT:4/4
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, you may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | TgtZone$ Graveyard | ValidTgts$ Instant.YouCtrl+cmcLE3,Sorcery.YouCtrl+cmcLE3 | TgtPrompt$ Choose target instant or sorcery card with converted mana cost 3 or less from your graveyard |KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | PumpZone$ Graveyard | SubAbility$ TrigPlay
+SVar:TrigPlay:DB$ Play | Defined$ Targeted | WithoutManaCost$ True | Optional$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_dark_dwellers.jpg
+Oracle:Menace\nWhen Goblin Dark-Dwellers enters the battlefield, you may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead.

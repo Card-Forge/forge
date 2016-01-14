@@ -1,0 +1,13 @@
+Name:Linvala, the Preserver
+ManaCost:4 W W
+Types:Legendary Creature Angel
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigGainLife | LifeTotal$ You | LifeAmount$ LTX | References$ X | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent has more life than you, you gain 5 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigToken | IsPresent$ Creature.OppCtrl | PresentCompare$ GTY | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent controls more creatures than you, put a 3/3 white Angel creature token with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ w 3 3 angel
+SVar:X:PlayerCountOpponents$HighestLifeTotal
+SVar:Y:Count$Valid Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/linvala_the_preserver.jpg
+Oracle:Flying\nWhen Linvala, the Preserver enters the battlefield, if an opponent has more life than you, you gain 5 life.\nWhen Linvala enters the battlefield, if an opponent controls more creatures than you, put a 3/3 white Angel creature token with flying onto the battlefield.
