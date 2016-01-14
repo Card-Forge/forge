@@ -1,0 +1,7 @@
+Name:Zulaport Chainmage
+ManaCost:3 B
+Types:Creature Human Shaman Ally
+PT:4/2
+A:AB$ LoseLife | Cost$ T tapXType<1/Ally> | LifeAmount$ 2 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent loses 2 life.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zulaport_chainmage.jpg
+Oracle:Cohort - {T}, Tap an untapped Ally you control: Target opponent loses 2 life.

@@ -1,0 +1,7 @@
+Name:Oblivion Strike
+ManaCost:3 B
+Types:Sorcery
+K:Devoid
+A:SP$ ChangeZone | Cost$ 3 B | ValidTgts$ Creature Enchantment | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oblivion_strike.jpg
+Oracle:Devoid (This card has no color.)\nExile target creature.

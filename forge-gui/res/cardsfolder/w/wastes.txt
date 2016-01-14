@@ -1,0 +1,6 @@
+Name:Wastes
+ManaCost:no cost
+Types:Basic Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wastes.jpg
+Oracle:({T}: Add {C} to your mana pool.)

@@ -1,0 +1,9 @@
+Name:Pyromancer's Assault
+ManaCost:3 R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerDescription$ Whenever you cast your second spell each turn, CARDNAME deals 2 damage to target creature of player.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0| ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
+SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+SVar:BuffedBy:Card
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromancers_assault.jpg
+Oracle:Whenever you cast your second spell each turn, Pyromancer's Assault deals 2 damage to target creature of player.

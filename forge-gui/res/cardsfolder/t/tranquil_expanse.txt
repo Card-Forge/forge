@@ -1,0 +1,8 @@
+Name:Tranquil Expanse
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_expanse.jpg
+Oracle:Tranquil Expanse enters the battlefield tapped.\n{T}: Add {G} or {W} to your mana pool.

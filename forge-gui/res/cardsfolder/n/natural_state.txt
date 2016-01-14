@@ -1,0 +1,6 @@
+Name:Natural State
+ManaCost:G
+Types:Instant
+A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact.cmcLE3,Enchantment.cmcLE3 | TgtPrompt$ Select target artifact or enchantment with converted mana cost 3 or less | SpellDescription$ Destroy target artifact or enchantment with converted mana cost 3 or less.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_state.jpg
+Oracle:Destroy target artifact or enchantment with converted mana cost 3 or less.

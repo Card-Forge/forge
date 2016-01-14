@@ -1,0 +1,11 @@
+Name:Seed Guardian
+ManaCost:2 G G
+Types:Creature Elemental
+PT:3/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put an X/X green Elemental creature token onto the battlefield, where X is the number of creature cards in your graveyard.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ TriggeredCardController | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | References$ X
+SVar:X:Count$TypeInYourYard.Creature
+SVar:SacMe:1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seed_guardian.jpg
+Oracle:Reach\nWhen Seed Guardian dies, put an X/X green Elemental creature token onto the battlefield, where X is the number of creature cards in your graveyard.

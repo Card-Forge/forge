@@ -1,0 +1,9 @@
+Name:Needle Spires
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
+A:AB$ Animate | Cost$ 2 R W | Defined$ Self | Power$ 2 | Toughness$ 1 | Types$ Creature,Elemental | Colors$ Red,White | Keywords$ Double Strike | SpellDescription$ CARDNAME becomes a 2/1 red and white Elemental creature with double strike until end of turn. It's still a land.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/needle_spires.jpg
+Oracle:Needle Spires enters the battlefield tapped.\n{T}: Add {R} or {W} to your mana pool.\n{2}{R}{W}: Needle Spires becomes a 2/1 red and white Elemental creature with double strike until end of turn. It's still a land.

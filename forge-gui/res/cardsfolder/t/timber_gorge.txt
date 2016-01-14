@@ -1,0 +1,8 @@
+Name:Timber Gorge
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/timber_gorge.jpg
+Oracle:Timber Gorge enters the battlefield tapped.\n{T}: Add {R} or {G} to your mana pool.

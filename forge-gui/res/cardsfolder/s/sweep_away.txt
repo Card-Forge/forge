@@ -1,0 +1,12 @@
+Name:Sweep Away
+ManaCost:2 U
+Types:Instant
+A:SP$ Pump | Cost$ 2 U | ValidTgts$ Creature | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Return target creature to its owner's hand. If that creature is attacking, you may put it on top of its owner's library instead.
+SVar:DBDefaultAction:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose
+SVar:DBChoose:DB$ GenericChoice | Cost$ 0 | Choices$ DBTopLibChoice,DBHandChoice | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBTopLibChoice:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Return target creature to its owner's hand.
+SVar:DBHandChoice:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | SpellDescription$ If that creature is attacking, you may put it on top of its owner's library instead.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.IsRemembered+attacking
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sweep_away.jpg
+Oracle:Return target creature to its owner's hand. If that creature is attacking, you may put it on top of its owner's library instead.
