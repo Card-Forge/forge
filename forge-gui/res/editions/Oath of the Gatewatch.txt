@@ -191,7 +191,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand BFZ
 180 U Tranquil Expanse 
 181 C Unknown Shores 
 182 R Wandering Fumarole 
-183 L Wastes 
-183 L Wastes 
-184 L Wastes 
-184 L Wastes 
+183 C Wastes 
+183 C Wastes 
+184 C Wastes 
+184 C Wastes 
