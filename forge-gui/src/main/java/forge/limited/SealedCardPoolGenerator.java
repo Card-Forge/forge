@@ -401,6 +401,7 @@ public class SealedCardPoolGenerator {
             if (sets.length >= 2 && !sets[0].equals(sets[1])) {
                 setCombos.add(String.format("4 %s, 2 %s", sets[0], sets[1]));
                 setCombos.add(String.format("3 %s, 3 %s", sets[0], sets[1]));
+                setCombos.add(String.format("2 %s, 4 %s", sets[0], sets[1]));
             }
             if (sets.length >= 3 && !sets[0].equals(sets[2])) {
                 setCombos.add(String.format("3 %s, 3 %s", sets[0], sets[2]));
