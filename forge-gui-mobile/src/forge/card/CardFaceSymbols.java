@@ -40,6 +40,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("Y", FSkinImage.MANA_Y);
         MANA_IMAGES.put("Z", FSkinImage.MANA_Z);
 
+        MANA_IMAGES.put("C", FSkinImage.MANA_COLORLESS);
         MANA_IMAGES.put("B", FSkinImage.MANA_B);
         MANA_IMAGES.put("BG", FSkinImage.MANA_HYBRID_BG);
         MANA_IMAGES.put("BR", FSkinImage.MANA_HYBRID_BR);
@@ -140,7 +141,7 @@ public class CardFaceSymbols {
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize) {
         if (colorSet.isColorless()) {
-            CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, x, y, imageSize, imageSize);
+            CardFaceSymbols.drawSymbol(ManaCostShard.COLORLESS.getImageKey(), g, x, y, imageSize, imageSize);
             return;
         }
 

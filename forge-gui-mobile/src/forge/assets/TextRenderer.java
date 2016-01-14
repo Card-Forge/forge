@@ -19,6 +19,7 @@ import forge.properties.ForgePreferences.FPref;
 public class TextRenderer {
     private static final Map<String, FSkinImage> symbolLookup = new HashMap<String, FSkinImage>();
     static {
+        symbolLookup.put("C", FSkinImage.MANA_COLORLESS);
         symbolLookup.put("W", FSkinImage.MANA_W);
         symbolLookup.put("U", FSkinImage.MANA_U);
         symbolLookup.put("B", FSkinImage.MANA_B);
@@ -50,7 +51,7 @@ public class TextRenderer {
         symbolLookup.put("X", FSkinImage.MANA_X);
         symbolLookup.put("Y", FSkinImage.MANA_Y);
         symbolLookup.put("Z", FSkinImage.MANA_Z);
-        symbolLookup.put("C", FSkinImage.CHAOS);
+        symbolLookup.put("CHAOS", FSkinImage.CHAOS);
         symbolLookup.put("Q", FSkinImage.UNTAP);
         symbolLookup.put("S", FSkinImage.MANA_SNOW);
         symbolLookup.put("T", FSkinImage.TAP);

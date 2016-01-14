@@ -278,8 +278,11 @@ public class CardImageRenderer {
             case "Mountain":
                 image = FSkinImage.MANA_R;
                 break;
-            default:
+            case "Forest":
                 image = FSkinImage.MANA_G;
+                break;
+            default:
+                image = FSkinImage.MANA_COLORLESS;
                 break;
             }
             float iconSize = h * 0.75f;
