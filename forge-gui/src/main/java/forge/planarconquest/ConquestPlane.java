@@ -50,15 +50,13 @@ public enum ConquestPlane {
     }, new String[] {
             "Unstable Obelisk", "Baleful Strix", "Shardless Agent", "Etherium-Horn Sorcerer",
             "Patron of the Valiant", "Sublime Archangel", "Naya Soulbeast", "Stalwart Aven",
-            "Pharika's Disciple", "Acolyte of the Inferno", "Citadel Castellan", "Ajani's Mantra",
-            "Consul's Lieutenant", "Firefiend Elemental", "Goblin Glory Chaser", "Honored Hierarch",
-            "Knight of the Pilgrim's Road", "Outland Colossus", "Relic Seeker", "Rhox Maulers",
-            "Scab-Clan Berserker", "Topan Freeblade", "Undercity Troll", "Valeron Wardens",
-            "War Oracle", "Derevi, Empyrial Tactician", "Kaalia of the Vast", "Bloodspore Thrinax",
-            "Cathedral of War", "Duskmantle Prowler", "Duty-Bound Dead", "Knight of Glory", "Knight of Infamy",
-            "Nefarox, Overlord of Grixis", "Servant of Nefarox", "Celestial Flare", "Viscera Seer",
+            "Citadel Castellan", "Ajani's Mantra", "Topan Freeblade", "Valeron Wardens",
+            "Honored Hierarch", "Knight of the Pilgrim's Road", "Relic Seeker", "War Oracle",
+            "Derevi, Empyrial Tactician", "Kaalia of the Vast", "Bloodspore Thrinax",
+            "Duskmantle Prowler", "Duty-Bound Dead", "Knight of Glory", "Knight of Infamy",
+            "Nefarox, Overlord of Grixis", "Servant of Nefarox", "Cathedral of War",
             "Meren of Clan Nel Toth", "Jazal Goldmane", "Jhessian Thief", "Maelstrom Wanderer",
-            "Onyx Mage", "Preyseizer Dragon", "Thromok the Insatiable", "Restore", "Rhox Faithmender",
+            "Preyseizer Dragon", "Thromok the Insatiable", "Restore", "Rhox Faithmender",
             "Rhox Pikemaster", "Roon of the Hidden Realm", "Scourge of Nel Toth"
     }, new Region[] {
             new Region("Bant", "Bant Panorama", MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE),
@@ -66,7 +64,7 @@ public enum ConquestPlane {
             new Region("Grixis", "Grixis Panorama", MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED),
             new Region("Jund", "Jund Panorama", MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN),
             new Region("Naya", "Naya Panorama", MagicColor.RED | MagicColor.GREEN | MagicColor.WHITE),
-            new Region("Maelstrom", "Rupture Spire", MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN)
+            new Region("Maelstrom", "Rupture Spire", ColorSet.ALL_COLORS.getColor())
     }),
     Dominaria("Dominaria", new String[] {
             "ICE", "ALL", "CSP",
@@ -84,7 +82,7 @@ public enum ConquestPlane {
             "Balance of Power", "Beetleback Chief", "Crimson Mage", "Cruel Edict", "Dakmor Lancer",
             "Famine", "Firewing Phoenix", "Flesh to Dust", "Flusterstorm", "Freyalise, Llanowar's Fury",
             "Gaea's Revenge", "Ice Cage", "Liliana, Heretical Healer", "Mwonvuli Beast Tracker",
-            "Teferi, Temporal Archmage", "Titania, Protector of Argoth"
+            "Teferi, Temporal Archmage", "Titania, Protector of Argoth", "Onyx Mage"
     }, new Region[] {
             new Region("Ice Age", "Dark Depths", inSet("ICE", "ALL", "CSP")),
             new Region("Mirage", "Teferi's Isle", inSet("MIR", "VIS", "WTH")),
@@ -114,6 +112,15 @@ public enum ConquestPlane {
             new Region("Kessig", "Kessig Wolf Run", MagicColor.RED | MagicColor.GREEN),
             new Region("Gavony", "Gavony Township", MagicColor.GREEN | MagicColor.WHITE),
     }),
+    Kaladesh("Kaladesh", new String[] {
+            
+    }, new String[] {
+            "Immersturm" //TODO: Replace with proper plane when one created
+    }, new String[] {
+            "Consul's Lieutenant"
+    }, new Region[] {
+            new Region("", "", ColorSet.ALL_COLORS.getColor())
+    }),
     Kamigawa("Kamigawa", new String[] {
             "CHK", "BOK", "SOK"
     }, new String[] {
@@ -138,7 +145,7 @@ public enum ConquestPlane {
             "Great Oak Guardian", "Dwynen's Elite", "Dwynen, Gilt-Leaf Daen", "Eyeblight Assassin",
             "Eyeblight Massacre", "Flamekin Village", "Fleshpulper Giant", "Gilt-Leaf Winnower",
             "Gnarlroot Trapper", "Harbinger of the Tides", "Marath, Will of the Wild", "Shaman of the Pack",
-            "Thornbow Archer"
+            "Thornbow Archer", "Outland Colossus"
     }, new Region[] {
             new Region("Wanderwine Hub", "Wanderwine Hub", MagicColor.WHITE | MagicColor.BLUE),
             new Region("Secluded Glen", "Secluded Glen", MagicColor.BLUE | MagicColor.BLACK),
@@ -225,7 +232,8 @@ public enum ConquestPlane {
             "Karlov of the Ghost Council", "Mazirek, Kraul Death Priest", "Fungal Sprouting", "Ghave, Guru of Spores",
             "Jade Mage", "Sporemound", "Jace, the Living Guildpact", "Krenko's Command", "Krenko's Enforcer", "Krenko, Mob Boss",
             "Leyline of Anticipation", "Leyline of Punishment", "Leyline of Sanctity", "Leyline of Vitality", "Mantle of Webs",
-            "Nightsnare", "Shattergang Brothers", "Yeva's Forcemage", "Yeva, Nature's Herald"
+            "Nightsnare", "Shattergang Brothers", "Yeva's Forcemage", "Yeva, Nature's Herald", "Rhox Maulers",
+            "Goblin Glory Chaser", "Scab-Clan Berserker", "Undercity Troll"
     }, new Region[] {
             new Region("Azorius Chancery", "Azorius Chancery", MagicColor.WHITE | MagicColor.BLUE),
             new Region("Boros Garrison", "Boros Garrison", MagicColor.RED | MagicColor.WHITE),
@@ -237,6 +245,15 @@ public enum ConquestPlane {
             new Region("Rakdos Carnarium", "Rakdos Carnarium", MagicColor.BLACK | MagicColor.RED),
             new Region("Selesnya Sanctuary", "Selesnya Sanctuary", MagicColor.GREEN | MagicColor.WHITE),
             new Region("Simic Growth Chamber", "Simic Growth Chamber", MagicColor.GREEN | MagicColor.BLUE)
+    }),
+    Regatha("Regatha", new String[] {
+            
+    }, new String[] {
+            "Mount Keralia"
+    }, new String[] {
+            "Firefiend Elemental", "Acolyte of the Inferno"
+    }, new Region[] {
+            new Region("", "", ColorSet.ALL_COLORS.getColor())
     }),
     Shandalar("Shandalar", new String[] {
             "2ED", "3ED", "4ED", "ARN", "ATQ", "LEG", "DRK", "FEM"
@@ -286,7 +303,8 @@ public enum ConquestPlane {
             "Gideon's Avenger", "Gideon's Lawkeeper", "Gideon's Phalanx", "Grasp of the Hieromancer",
             "Kytheon's Irregulars", "Kytheon's Tactics", "Kytheon, Hero of Akros", "Hixus, Prison Warden",
             "Iroas's Champion", "Kalemne's Captain", "Magmatic Insight", "Oath of the Ancient Wood",
-            "Prickleboar", "Shadows of the Past", "Starfield of Nyx", "Suppression Bonds", "Valor in Akros"
+            "Prickleboar", "Shadows of the Past", "Starfield of Nyx", "Suppression Bonds", "Valor in Akros",
+            "Pharika's Disciple", "Celestial Flare"
     }, new Region[] {
             new Region("Oreskos", "Temple of Plenty", MagicColor.WHITE),
             new Region("Meletis", "Temple of Enlightenment", MagicColor.BLUE),
@@ -299,7 +317,7 @@ public enum ConquestPlane {
     }, new String[] {
             "The Dark Barony"
     }, new String[] {
-            "Elixir of Immortality"
+            "Elixir of Immortality", "Viscera Seer"
     }, new Region[] {
             new Region("", "", inSet("HML"))
     }),
