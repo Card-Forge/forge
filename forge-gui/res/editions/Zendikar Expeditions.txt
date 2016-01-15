@@ -31,3 +31,23 @@ Type=Other
 23 M Verdant Catacombs
 24 M Arid Mesa
 25 M Misty Rainforest
+26 M Mystic Gate
+27 M Sunken Ruins
+28 M Graven Cairns
+29 M Fire-Lit Thicket
+30 M Wooded Bastion
+31 M Fetid Heath
+32 M Cascade Bluffs
+33 M Twilight Mire
+34 M Rugged Prairie
+35 M Flooded Grove
+36 M Ancient Tomb
+37 M Dust Bowl
+38 M Eye of Ugin
+39 M Forbidden Orchard
+40 M Horizon Canopy
+41 M Kor Haven
+42 M Mana Confluence
+43 M Strip Mine
+44 M Tectonic Edge
+45 M Wasteland
