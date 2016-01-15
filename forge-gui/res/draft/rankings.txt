@@ -1,4 +1,193 @@
 //Rank|Name|Rarity|Set
+#1|Sphinx of the Final Word|M|OGW
+#2|Nissa, Voice of Zendikar|M|OGW
+#3|Chandra, Flamecaller|M|OGW
+#4|Kozilek's Return|M|OGW
+#5|Linvala, the Preserver|M|OGW
+#6|Kozilek, the Great Distortion|M|OGW
+#7|Inverter of Truth|M|OGW
+#8|Crush of Tentacles|M|OGW
+#9|World Breaker|M|OGW
+#10|Reality Smasher|R|OGW
+#11|Mirrorpool|M|OGW
+#12|Jori En, Ruin Diver|R|OGW
+#13|Captain's Claws|R|OGW
+#14|General Tazri|M|OGW
+#15|Eldrazi Displacer|R|OGW
+#16|Endbringer|R|OGW
+#17|Dimensional Infiltrator|R|OGW
+#18|Mina and Denn, Wildborn|R|OGW
+#19|Thought-Knot Seer|R|OGW
+#20|Fall of the Titans|R|OGW
+#21|Deceiver of Form|R|OGW
+#22|Kalitas, Traitor of Ghet|M|OGW
+#23|Bearer of Silence|R|OGW
+#24|Deepfathom Skulker|R|OGW
+#25|Goblin Dark-Dwellers|R|OGW
+#26|Munda's Vanguard|R|OGW
+#27|Stoneforge Masterwork|R|OGW
+#28|Sifter of Skulls|R|OGW
+#29|Dread Defiler|R|OGW
+#30|Ayli, Eternal Pilgrim|R|OGW
+#31|Gladehart Cavalry|R|OGW
+#32|Needle Spires|R|OGW
+#33|Ruins of Oran-Rief|R|OGW
+#34|Wandering Fumarole|R|OGW
+#35|Remorseless Punishment|R|OGW
+#36|Eldrazi Obligator|R|OGW
+#37|Sylvan Advocate|R|OGW
+#38|Drana's Chosen|R|OGW
+#39|Grasp of Darkness|U|OGW
+#40|Sea Gate Wreckage|R|OGW
+#41|Eldrazi Mimic|R|OGW
+#42|Immolating Glare|U|OGW
+#43|Baloth Null|U|OGW
+#44|Oath of Chandra|R|OGW
+#45|Hissing Quagmire|R|OGW
+#46|Vile Redeemer|R|OGW
+#47|Tyrant of Valakut|R|OGW
+#48|Stone Haven Outfitter|R|OGW
+#49|Prophet of Distortion|U|OGW
+#50|Oath of Gideon|R|OGW
+#51|Thought Harvester|U|OGW
+#52|Embodiment of Fury|U|OGW
+#53|Stormchaser Mage|U|OGW
+#54|Matter Reshaper|R|OGW
+#55|Oath of Nissa|R|OGW
+#56|Relief Captain|U|OGW
+#57|Grip of the Roil|U|OGW
+#58|Seed Guardian|U|OGW
+#59|Mindmelter|U|OGW
+#60|Oblivion Strike|C|OGW
+#61|Reflector Mage|U|OGW
+#62|Cyclone Sire|U|OGW
+#63|Wall of Resurgence|U|OGW
+#64|Corrupted Crossroads|R|OGW
+#65|Flayer Drone|U|OGW
+#66|Allied Reinforcements|U|OGW
+#67|Warping Wail|U|OGW
+#68|Malakir Soothsayer|U|OGW
+#69|Cliffhaven Vampire|U|OGW
+#70|Spatial Contortion|U|OGW
+#71|Overwhelming Denial|R|OGW
+#72|Flaying Tendrils|U|OGW
+#73|Havoc Sower|U|OGW
+#74|Walker of the Wastes|U|OGW
+#75|Reckless Bushwhacker|U|OGW
+#76|Birthing Hulk|U|OGW
+#77|Roiling Waters|U|OGW
+#78|Embodiment of Insight|U|OGW
+#79|Essence Depleter|U|OGW
+#80|Blinding Drone|C|OGW
+#81|Cultivator Drone|C|OGW
+#82|Devour in Flames|U|OGW
+#83|Null Caller|U|OGW
+#84|Sweep Away|C|OGW
+#85|Isolation Zone|C|OGW
+#86|Reality Hemorrhage|C|OGW
+#87|Gift of Tusks|U|OGW
+#88|Crumbling Vestige|C|OGW
+#89|Jwar Isle Avenger|C|OGW
+#90|Chitinous Cloak|U|OGW
+#91|Reaver Drone|U|OGW
+#92|Oath of Jace|R|OGW
+#93|Wastes|C|OGW
+#94|Holdout Settlement|C|OGW
+#95|Void Shatter|U|OGW
+#96|Visions of Brutality|U|OGW
+#97|Tar Snare|C|OGW
+#98|Goblin Freerunner|C|OGW
+#99|Unknown Shores|C|OGW
+#100|Scion Summoner|C|OGW
+#101|Weapons Trainer|U|OGW
+#102|Void Grafter|U|OGW
+#103|Harvester Troll|U|OGW
+#104|Meandering River|U|OGW
+#105|Joraga Auxiliary|U|OGW
+#106|Gravity Negator|C|OGW
+#107|Ondu War Cleric|C|OGW
+#108|Baloth Pup|U|OGW
+#109|Boulder Salvo|C|OGW
+#110|Slaughter Drone|C|OGW
+#111|Immobilizer Eldrazi|U|OGW
+#112|Submerged Boneyard|U|OGW
+#113|Ruin in Their Wake|U|OGW
+#114|Kozilek's Translator|C|OGW
+#115|Umara Entangler|C|OGW
+#116|Containment Membrane|C|OGW
+#117|Steppe Glider|U|OGW
+#118|Zada's Commando|C|OGW
+#119|Press into Service|U|OGW
+#120|Warden of Geometries|C|OGW
+#121|Kor Sky Climber|C|OGW
+#122|Kozilek's Shrieker|C|OGW
+#123|Vampire Envoy|C|OGW
+#124|Kozilek's Pathfinder|C|OGW
+#125|Sky Scourer|C|OGW
+#126|Maw of Kozilek|C|OGW
+#127|Nissa's Judgment|U|OGW
+#128|Kor Scythemaster|C|OGW
+#129|Slip Through Space|C|OGW
+#130|Seer's Lantern|C|OGW
+#131|Comparative Analysis|C|OGW
+#132|Witness the End|C|OGW
+#133|Cinder Hellion|C|OGW
+#134|Zulaport Chainmage|C|OGW
+#135|Expedition Raptor|C|OGW
+#136|Unnatural Endurance|C|OGW
+#137|Stalking Drone|C|OGW
+#138|Make a Stand|U|OGW
+#139|Eldrazi Aggressor|C|OGW
+#140|Tajuru Pathwarden|C|OGW
+#141|Hedron Crawler|C|OGW
+#142|Makindi Aeronaut|C|OGW
+#143|Affa Protector|C|OGW
+#144|Akoum Flameseeker|C|OGW
+#145|Netcaster Spider|C|OGW
+#146|Searing Light|C|OGW
+#147|Timber Gorge|U|OGW
+#148|Abstruse Interference|C|OGW
+#149|Unity of Purpose|U|OGW
+#150|Kazuul's Toll Collector|U|OGW
+#151|Loam Larva|C|OGW
+#152|Sparkmage's Gambit|C|OGW
+#153|Spawnbinder Mage|C|OGW
+#154|Relentless Hunter|U|OGW
+#155|Shoulder to Shoulder|C|OGW
+#156|Brute Strength|C|OGW
+#157|Saddleback Lagac|C|OGW
+#158|Ancient Crab|C|OGW
+#159|Negate|C|OGW
+#160|Lead by Example|C|OGW
+#161|Expedite|C|OGW
+#162|Elemental Uprising|C|OGW
+#163|Pulse of Murasa|C|OGW
+#164|Stoneforge Acolyte|U|OGW
+#165|Vines of the Recluse|C|OGW
+#166|Bone Saw|C|OGW
+#167|Consuming Sinkhole|C|OGW
+#168|Corpse Churn|C|OGW
+#169|Untamed Hunger|C|OGW
+#170|Mighty Leap|C|OGW
+#171|Dazzling Reflection|C|OGW
+#172|Canopy Gorger|C|OGW
+#173|Pyromancer's Assault|U|OGW
+#174|Tears of Valakut|U|OGW
+#175|Natural State|C|OGW
+#176|Tranquil Expanse|U|OGW
+#177|Strider Harness|U|OGW
+#178|Iona's Blessing|U|OGW
+#179|Hedron Alignment|R|OGW
+#180|Call the Gatewatch|R|OGW
+#181|Bonds of Mortality|U|OGW
+#182|Zendikar Resurgent|R|OGW
+#183|Cinder Barrens|U|OGW
+#184|Island|L|OGW
+#185|Swamp|L|OGW
+#186|Mountain|L|OGW
+#187|Forest|L|OGW
+#188|Plains|L|OGW
+//Rank|Name|Rarity|Set
 #1|Quarantine Field|M|BFZ
 #2|Ulamog, the Ceaseless Hunger|M|BFZ
 #3|Omnath, Locus of Rage|M|BFZ
