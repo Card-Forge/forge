@@ -215,7 +215,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
             }
         }
 
-
         if (params.containsKey("IsPresent")) {
             final String sIsPresent = params.get("IsPresent");
             String presentCompare = "GE1";
@@ -244,10 +243,10 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     
             int right = 1;
             final String rightString = presentCompare.substring(2);
-            if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar("X"));
-            } else {
-                right = Integer.parseInt(presentCompare.substring(2));
+            try {
+                right = Integer.parseInt(rightString);
+            } catch (final NumberFormatException nfe) {
+                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
             }
             final int left = list.size();
     
@@ -285,10 +284,10 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     
             int right = 1;
             final String rightString = presentCompare.substring(2);
-            if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar("X"));
-            } else {
-                right = Integer.parseInt(presentCompare.substring(2));
+            try {
+                right = Integer.parseInt(rightString);
+            } catch (final NumberFormatException nfe) {
+                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
             }
             final int left = list.size();
     
