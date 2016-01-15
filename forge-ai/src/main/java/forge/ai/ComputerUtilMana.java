@@ -1097,7 +1097,7 @@ public class ComputerUtilMana {
             } else if (producesAnyColor) {
                 anyColorManaSources.add(card);
             } else if (usableManaAbilities == 1) {
-                if (manaAbilities.get(0).getManaPart().mana().equals("1")) {
+                if (manaAbilities.get(0).getManaPart().mana().equals("1") || manaAbilities.get(0).getManaPart().mana().equals("C")) {
                     colorlessManaSources.add(card);
                 } else {
                     oneManaSources.add(card);
@@ -1214,6 +1214,9 @@ public class ComputerUtilMana {
                 }
                 if (mp.canProduce("G", m) || reflectedColors.contains(MagicColor.Constant.GREEN)) {
                     manaMap.get(ManaAtom.GREEN).add(manaMap.get(ManaAtom.GREEN).size(), m);
+                }
+                if (mp.canProduce("C", m) || reflectedColors.contains(MagicColor.Constant.COLORLESS)) {
+                    manaMap.get(ManaAtom.COLORLESS).add(manaMap.get(ManaAtom.COLORLESS).size(), m);
                 }
                 if (mp.isSnow()) {
                     manaMap.get(ManaAtom.IS_SNOW).add(manaMap.get(ManaAtom.IS_SNOW).size(), m);
