@@ -989,3 +989,25 @@ Scalding Tarn|EXP
 Verdant Catacombs|EXP
 Arid Mesa|EXP
 Misty Rainforest|EXP
+
+[EXP Lands 2]
+Mystic Gate|EXP
+Sunken Ruins|EXP
+Graven Cairns|EXP
+Fire-Lit Thicket|EXP
+Wooded Bastion|EXP
+Fetid Heath|EXP
+Cascade Bluffs|EXP
+Twilight Mire|EXP
+Rugged Prairie|EXP
+Flooded Grove|EXP
+Ancient Tomb|EXP
+Dust Bowl|EXP
+Eye of Ugin|EXP
+Forbidden Orchard|EXP
+Horizon Canopy|EXP
+Kor Haven|EXP
+Mana Confluence|EXP
+Strip Mine|EXP
+Tectonic Edge|EXP
+Wasteland|EXP
