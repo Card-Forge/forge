@@ -1097,8 +1097,7 @@ public class ComputerUtilMana {
             } else if (producesAnyColor) {
                 anyColorManaSources.add(card);
             } else if (usableManaAbilities == 1) {
-                // FIXME: do we still need to test against "1" for colorless mana or are shards like that always identified as "C" by now?
-                if (manaAbilities.get(0).getManaPart().mana().equals("C") || manaAbilities.get(0).getManaPart().mana().equals("1")) {
+                if (manaAbilities.get(0).getManaPart().mana().equals("C")) {
                     colorlessManaSources.add(card);
                 } else {
                     oneManaSources.add(card);
