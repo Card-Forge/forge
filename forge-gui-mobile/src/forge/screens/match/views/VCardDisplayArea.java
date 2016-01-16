@@ -345,7 +345,12 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                     public void run() {
                         if (!selectCard(false)) {
                             //if no cards in stack can be selected, just show zoom/details for card
-                            showZoom();
+                            FThreads.invokeInEdtLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showZoom();
+                                }
+                            });
                         }
                     }
                 });
