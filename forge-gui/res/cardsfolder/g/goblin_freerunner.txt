@@ -1,7 +1,7 @@
 Name:Goblin Freerunner
 ManaCost:3 R
 Types:Creature Goblin Warrior Ally
-PT:3/3
+PT:3/2
 K:Surge:1 R
 K:Menace
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_freerunner.jpg
