@@ -157,6 +157,9 @@ public class SFilterUtil {
         if (buttonMap.get(StatTypes.GREEN).isSelected()) {
             colors0 |= MagicColor.GREEN;
         }
+        if (buttonMap.get(StatTypes.COLORLESS).isSelected()) {
+            colors0 |= MagicColor.COLORLESS;
+        }
 
         final byte colors = colors0;
         final boolean wantColorless = buttonMap.get(StatTypes.COLORLESS).isSelected();
