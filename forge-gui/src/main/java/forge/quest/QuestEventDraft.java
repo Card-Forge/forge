@@ -983,14 +983,27 @@ public class QuestEventDraft {
             throw new IllegalStateException(allowedSets + " does not contain a large set for quest draft generation.");
         }
 
+
         if (allowedSets.containsAll(sets)) {
             CardEdition set0 = allowedSets.get(0);
             CardEdition set1 = allowedSets.get(1);
             if (allowedSets.size() == 2) {
-                if (set0.isLargeSet()) {
-                    possibleCombinations.add(String.format("%s/%s/%s", set0.getCode(), set0.getCode(), set1.getCode()));
-                } else {
-                    possibleCombinations.add(String.format("%s/%s/%s", set0.getCode(), set1.getCode(), set1.getCode()));
+                final boolean draftOrder2016 = set0.getDate().after(FModel.getMagicDb().getEditions().get("BFZ").getDate()) || 
+                        set1.getDate().after(FModel.getMagicDb().getEditions().get("BFZ").getDate());
+;
+                if (draftOrder2016) {
+                    if (set0.isLargeSet()) {
+                        possibleCombinations.add(String.format("%s/%s/%s", set1.getCode(), set1.getCode(), set0.getCode()));
+                    } else {
+                        possibleCombinations.add(String.format("%s/%s/%s", set0.getCode(), set0.getCode(), set1.getCode()));
+                    }
+                }
+                else {
+                    if (set0.isLargeSet()) {
+                        possibleCombinations.add(String.format("%s/%s/%s", set0.getCode(), set0.getCode(), set1.getCode()));
+                    } else {
+                        possibleCombinations.add(String.format("%s/%s/%s", set0.getCode(), set1.getCode(), set1.getCode()));
+                    }
                 }
             }
             if (allowedSets.size() == 3) {
