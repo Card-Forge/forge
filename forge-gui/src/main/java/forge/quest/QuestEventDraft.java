@@ -983,7 +983,6 @@ public class QuestEventDraft {
             throw new IllegalStateException(allowedSets + " does not contain a large set for quest draft generation.");
         }
 
-
         if (allowedSets.containsAll(sets)) {
             CardEdition set0 = allowedSets.get(0);
             CardEdition set1 = allowedSets.get(1);
