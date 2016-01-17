@@ -22,7 +22,7 @@ public class LoadGameMenu extends FPopupMenu {
         BoosterDraft("Booster Draft", FSkinImage.HAND, LoadDraftScreen.class),
         SealedDeck("Sealed Deck", FSkinImage.PACK, LoadSealedScreen.class),
         QuestMode("Quest Mode", FSkinImage.QUEST_ZEP, LoadQuestScreen.class),
-        PlanarConquest("Planar Conquest", FSkinImage.QUEST_MAP, LoadConquestScreen.class),
+        PlanarConquest("Planar Conquest", FSkinImage.MULTIVERSE, LoadConquestScreen.class),
         Gauntlet("Gauntlet", FSkinImage.ALPHASTRIKE, LoadGauntletScreen.class);
  
         private final FMenuItem item;
