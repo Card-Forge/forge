@@ -105,30 +105,7 @@ public class ComputerUtilMana {
             for (SpellAbility ability : card.getSpellAbilities()) {
                 ability.setActivatingPlayer(card.getController());
                 if (ability.isManaAbility()) {
-                    if (ability.getManaPart() == null) {
-                        score++; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
-                    }
-                    else {
-                        String mana = ability.getManaPart().mana();
-                        if (!mana.equals("Any")) {
-                            score += mana.length();
-                        }
-                        else {
-                            score += 6;
-                        }
-                    }
-                    //increase score if any part of ability's cost is not reusable or renewable (such as paying life)
-                    for (CostPart costPart : ability.getPayCosts().getCostParts()) {
-                        if (!costPart.isReusable()) {
-                            score += 3;
-                        }
-                        if (!costPart.isRenewable()) {
-                            score += 3;
-                        }
-                    }
-                    if (!ability.isUndoable()) {
-                        score += 50; //only use non-undoable mana abilities as a last resort
-                    }
+                    score += ability.calculateScoreForManaAbility(ability);
                 }
                 else if (!ability.isTrigger() && ability.isPossible()) {
                     score += 13; //add 13 for any non-mana activated abilities
@@ -189,18 +166,19 @@ public class ComputerUtilMana {
                     int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
 
                     if (preOrder == 0) {
+                        // Mana abilities on the same card
                         String shardMana = shard.toString().replaceAll("\\{", "").replaceAll("\\}", "");
 
-                        if (ability1.getManaPart().mana().contains(shardMana)
-                                && !ability2.getManaPart().mana().contains(shardMana)) {
+                        boolean payWithAb1 = ability1.getManaPart().mana().contains(shardMana);
+                        boolean payWithAb2 = ability2.getManaPart().mana().contains(shardMana);
+
+                        if (payWithAb1 && !payWithAb2) {
                             return -1;
-                        }
-                        if (ability2.getManaPart().mana().contains(shardMana)
-                                && !ability1.getManaPart().mana().contains(shardMana)) {
+                        } else if (payWithAb2 && !payWithAb1) {
                             return 1;
                         }
 
-                        return 0;
+                        return ability1.compareTo(ability2);
                     }
                     else {
                         return preOrder;
@@ -941,7 +919,7 @@ public class ComputerUtilMana {
                 if (ai.getManaPool().canPayForShardWithColor(shard, colorint.byteValue())) {
                     for (SpellAbility sa : manaAbilityMap.get(colorint)) {
                         if (!res.get(shard).contains(sa)) {
-                            res.get(shard).add(res.get(shard).size(), sa);
+                            res.get(shard).add(sa);
                         }
                     }
                 }
@@ -1176,7 +1154,7 @@ public class ComputerUtilMana {
                     }
                 }
 
-                manaMap.get(ManaAtom.GENERIC).add(manaMap.get(ManaAtom.GENERIC).size(), m); // add to generic source list
+                manaMap.get(ManaAtom.GENERIC).add(m); // add to generic source list
                 AbilityManaPart mp = m.getManaPart();
 
                 // setup produce mana replacement effects
@@ -1201,25 +1179,25 @@ public class ComputerUtilMana {
                 Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                 // find possible colors
                 if (mp.canProduce("W", m) || reflectedColors.contains(MagicColor.Constant.WHITE)) {
-                    manaMap.get(ManaAtom.WHITE).add(manaMap.get(ManaAtom.WHITE).size(), m);
+                    manaMap.get(ManaAtom.WHITE).add(m);
                 }
                 if (mp.canProduce("U", m) || reflectedColors.contains(MagicColor.Constant.BLUE)) {
-                    manaMap.get(ManaAtom.BLUE).add(manaMap.get(ManaAtom.BLUE).size(), m);
+                    manaMap.get(ManaAtom.BLUE).add(m);
                 }
                 if (mp.canProduce("B", m) || reflectedColors.contains(MagicColor.Constant.BLACK)) {
-                    manaMap.get(ManaAtom.BLACK).add(manaMap.get(ManaAtom.BLACK).size(), m);
+                    manaMap.get(ManaAtom.BLACK).add(m);
                 }
                 if (mp.canProduce("R", m) || reflectedColors.contains(MagicColor.Constant.RED)) {
-                    manaMap.get(ManaAtom.RED).add(manaMap.get(ManaAtom.RED).size(), m);
+                    manaMap.get(ManaAtom.RED).add(m);
                 }
                 if (mp.canProduce("G", m) || reflectedColors.contains(MagicColor.Constant.GREEN)) {
-                    manaMap.get(ManaAtom.GREEN).add(manaMap.get(ManaAtom.GREEN).size(), m);
+                    manaMap.get(ManaAtom.GREEN).add(m);
                 }
                 if (mp.canProduce("C", m) || reflectedColors.contains(MagicColor.Constant.COLORLESS)) {
-                    manaMap.get(ManaAtom.COLORLESS).add(manaMap.get(ManaAtom.COLORLESS).size(), m);
+                    manaMap.get(ManaAtom.COLORLESS).add(m);
                 }
                 if (mp.isSnow()) {
-                    manaMap.get(ManaAtom.IS_SNOW).add(manaMap.get(ManaAtom.IS_SNOW).size(), m);
+                    manaMap.get(ManaAtom.IS_SNOW).add(m);
                 }
                 if (DEBUG_MANA_PAYMENT) {
                     System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor manaMap  = " + manaMap);

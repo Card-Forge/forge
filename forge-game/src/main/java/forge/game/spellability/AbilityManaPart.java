@@ -479,7 +479,8 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a boolean.
      */
     public final boolean canProduce(final String s, final SpellAbility sa) {
-        if (isAnyMana()) {
+        // Any mana never means Colorless?
+        if (isAnyMana() && !s.equals("C")) {
             return true;
         }
 
@@ -630,6 +631,7 @@ public class AbilityManaPart implements java.io.Serializable {
         // Replace any type
         for (String part : manaReplace.split(" & ")) {
             final String[] v = splitter.split(part, 2);
+            // TODO Colorless mana replacement is probably different now?
             if (v[0].equals("Colorless")) {
                 repMap.put("[0-9][0-9]?", v.length > 1 ? v[1].trim() : "");
             } else {

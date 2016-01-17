@@ -32,6 +32,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
@@ -54,7 +55,7 @@ import java.util.*;
  * @author Forge
  * @version $Id$
  */
-public abstract class SpellAbility extends CardTraitBase implements ISpellAbility, IIdentifiable {
+public abstract class SpellAbility extends CardTraitBase implements ISpellAbility, IIdentifiable, Comparable<SpellAbility> {
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
 
@@ -1307,5 +1308,52 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         view.updateCanPlay(this);
         view.updatePromptIfOnlyPossibleAbility(this);
         return view;
+    }
+
+    @Override
+    public int compareTo(SpellAbility ab) {
+        if (this.isManaAbility() && ab.isManaAbility()){
+            return calculateScoreForManaAbility(this) - calculateScoreForManaAbility(ab);
+        }
+
+        return 0;
+    }
+
+    public static int calculateScoreForManaAbility(SpellAbility ability) {
+        int score = 0;
+        if (ability.getManaPart() == null) {
+            score++; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
+        }
+        else {
+            String mana = ability.getManaPart().mana();
+            if (!mana.equals("Any")) {
+                score += mana.length();
+            }
+            else {
+                score += 6;
+            }
+        }
+
+        //increase score if any part of ability's cost is not reusable or renewable (such as paying life)
+        for (CostPart costPart : ability.getPayCosts().getCostParts()) {
+            if (!costPart.isReusable()) {
+                score += 3;
+            }
+            if (!costPart.isRenewable()) {
+                score += 3;
+            }
+            // Increase score by 1 for each costpart in general
+            score++;
+        }
+
+        if (!ability.isUndoable()) {
+            score += 50; //only use non-undoable mana abilities as a last resort
+        }
+        if (ability.getSubAbility() != null) {
+            // If the primary ability has a sub, it's probably "more expensive"
+            score += 2;
+        }
+
+        return score;
     }
 }
