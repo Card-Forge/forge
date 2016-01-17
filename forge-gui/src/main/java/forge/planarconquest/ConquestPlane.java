@@ -323,7 +323,7 @@ public enum ConquestPlane {
             new Region("", "", inSet("HML"))
     }),
     Zendikar("Zendikar", new String[] {
-            "ZEN", "WWK", "ROE", "BFZ"
+            "ZEN", "WWK", "ROE", "BFZ", "OGW"
     }, new String[] {
             "Akoum", "Hedron Fields of Agadeem", "Murasa", "Tazeem"
     }, new String[] {
@@ -334,7 +334,12 @@ public enum ConquestPlane {
             "Ob Nixilis of the Black Oath", "Ob Nixilis, Unshackled", "Sword of the Animist", "Vastwood Hydra",
             "Wild Instincts", "Woodborn Behemoth", "Zendikar Incarnate", "Zendikar's Roil"
     }, new Region[] {
-            new Region("", "", inSet("ZEN", "WWK", "ROE"))
+            new Region("Kazandu", "Kazandu Refuge", MagicColor.RED | MagicColor.GREEN),
+            new Region("Graypelt", "Graypelt Refuge", MagicColor.GREEN | MagicColor.WHITE),
+            new Region("Sejiri", "Sejiri Refuge", MagicColor.WHITE | MagicColor.BLUE),
+            new Region("Jwar Isle", "Jwar Isle Refuge", MagicColor.BLUE | MagicColor.BLACK),
+            new Region("Akoum", "Akoum Refuge", MagicColor.BLACK | MagicColor.RED),
+            new Region("Blind Eternities", "Eldrazi Temple", MagicColor.COLORLESS)
     });
 
     private final String name;
