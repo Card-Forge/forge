@@ -104,7 +104,7 @@ public class AdvancedSearch {
                 return QuestWorld.getAllQuestWorldsOfCard(input);
             }
         }),
-        CARD_COLOR("Color", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<PaperCard>() {
+        CARD_COLOR("Color", PaperCard.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<PaperCard>() {
             @Override
             protected MagicColor.Color getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -114,7 +114,7 @@ public class AdvancedSearch {
                 return input.getRules().getColor().toEnumSet();
             }
         }),
-        CARD_COLOR_IDENTITY("Color Identity", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<PaperCard>() {
+        CARD_COLOR_IDENTITY("Color Identity", PaperCard.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<PaperCard>() {
             @Override
             protected MagicColor.Color getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -130,7 +130,7 @@ public class AdvancedSearch {
                 return input.getRules().getColor().countColors();
             }
         }),
-        CARD_TYPE("Type", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getCombinedSuperAndCoreTypes()) {
+        CARD_TYPE("Type", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getCombinedSuperAndCoreTypes()) {
             @Override
             protected String getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -148,7 +148,7 @@ public class AdvancedSearch {
                 return types;
             }
         }),
-        CARD_SUB_TYPE("Subtype", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getSortedSubTypes()) {
+        CARD_SUB_TYPE("Subtype", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getSortedSubTypes()) {
             @Override
             protected String getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -250,7 +250,7 @@ public class AdvancedSearch {
                 return QuestWorld.getAllQuestWorldsOfDeck(input.getDeck());
             }
         }),
-        DECK_COLOR("Color", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<DeckProxy>() {
+        DECK_COLOR("Color", DeckProxy.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<DeckProxy>() {
             @Override
             protected MagicColor.Color getItemValue(DeckProxy input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -260,7 +260,7 @@ public class AdvancedSearch {
                 return input.getColor().toEnumSet();
             }
         }),
-        DECK_COLOR_IDENTITY("Color Identity", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<DeckProxy>() {
+        DECK_COLOR_IDENTITY("Color Identity", DeckProxy.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<DeckProxy>() {
             @Override
             protected MagicColor.Color getItemValue(DeckProxy input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -322,7 +322,7 @@ public class AdvancedSearch {
                 return input.getOriginPlane();
             }
         }),
-        COMMANDER_COLOR("Color", ConquestCommander.class, FilterOperator.MULTI_LIST_OPS, new ColorEvaluator<ConquestCommander>() {
+        COMMANDER_COLOR("Color", ConquestCommander.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<ConquestCommander>() {
             @Override
             protected MagicColor.Color getItemValue(ConquestCommander input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -535,6 +535,17 @@ public class AdvancedSearch {
                 }
                 return false;
             }
+            @Override
+            public boolean apply(Set<Object> inputs, List<Object> values) {
+                if (inputs != null) {
+                    for (Object value : values) {
+                        if (inputs.contains(value)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
         }),
         CONTAINS_ANY("contains any of", "%1$s contains %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
             @Override
@@ -652,6 +663,9 @@ public class AdvancedSearch {
             IS_ANY
         };
         public static final FilterOperator[] MULTI_LIST_OPS = new FilterOperator[] {
+            IS_ANY
+        };
+        public static final FilterOperator[] COMBINATION_OPS = new FilterOperator[] {
             IS_EXACTLY, CONTAINS_ANY, CONTAINS_ALL
         };
         public static final FilterOperator[] COLLECTION_OPS = new FilterOperator[] {
@@ -705,7 +719,7 @@ public class AdvancedSearch {
 
             final OperatorEvaluator<V> evaluator = (OperatorEvaluator<V>)operator.evaluator;
             Predicate<T> predicate;
-            if (option.operatorOptions == FilterOperator.MULTI_LIST_OPS || option.operatorOptions == FilterOperator.COLLECTION_OPS) {
+            if (option.operatorOptions == FilterOperator.MULTI_LIST_OPS || option.operatorOptions == FilterOperator.COMBINATION_OPS || option.operatorOptions == FilterOperator.COLLECTION_OPS) {
                 predicate = new Predicate<T>() {
                     @Override
                     public boolean apply(T input) {
@@ -840,9 +854,6 @@ public class AdvancedSearch {
         @Override
         protected List<V> getValues(FilterOption option, FilterOperator operator) {
             int max = choices.size();
-            if (operator == FilterOperator.IS_EXACTLY && option.operatorOptions == FilterOperator.SINGLE_LIST_OPS) {
-                max = 1;
-            }
             String message = option.name + " " + operator.caption + " ?";
             return SGuiChoose.getChoices(message, 0, max, choices, null, toLongString);
         }
