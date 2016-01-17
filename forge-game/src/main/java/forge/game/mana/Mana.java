@@ -125,7 +125,7 @@ public class Mana {
     }
 
     public boolean isColorless() {
-        return color == 0;
+        return color == MagicColor.COLORLESS;
     }
 
 }
