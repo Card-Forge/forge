@@ -25,9 +25,11 @@ import forge.planarconquest.ConquestChaosBattle;
 import forge.planarconquest.ConquestEvent;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
+import forge.planarconquest.ConquestPlane.AwardPool;
 import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.planarconquest.ConquestPlaneData;
+import forge.planarconquest.ConquestReward;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FDisplayObject;
@@ -43,16 +45,26 @@ public class ConquestMultiverseScreen extends FScreen {
 
     private final PlaneGrid planeGrid;
     private ConquestData model;
+    private ConquestChaosBattle chaosBattle;
 
     public ConquestMultiverseScreen() {
         super("", ConquestMenu.getMenu());
 
         planeGrid = add(new PlaneGrid());
     }
-    
+
     @Override
     public void onActivate() {
-        update();
+        if (chaosBattle == null) {
+            update();
+        }
+        else if (chaosBattle.isFinished()) {
+            //when returning to this screen from launched chaos battle, award boosters if it was conquered
+            if (chaosBattle.wasConquered()) {
+                awardBoosters(chaosBattle.getAwardPool(), 3);
+            }
+            chaosBattle = null;
+        }
     }
 
     @Override
@@ -61,7 +73,10 @@ public class ConquestMultiverseScreen extends FScreen {
     }
 
     public void update() {
-        model = FModel.getConquest().getModel();
+        ConquestData model0 = FModel.getConquest().getModel();
+        if (model == model0) { return; }
+
+        model = model0;
         setHeaderCaption(model.getName() + "\nPlane - " + model.getCurrentPlane().getName());
 
         planeGrid.revalidate();
@@ -94,10 +109,10 @@ public class ConquestMultiverseScreen extends FScreen {
             public void run(ChaosWheelOutcome outcome) {
                 switch (outcome) {
                 case BOOSTER:
-                    awardBooster(false);
+                    awardBoosters(model.getCurrentPlane().getAwardPool(), 1);
                     break;
                 case DOUBLE_BOOSTER:
-                    awardBooster(true);
+                    awardBoosters(model.getCurrentPlane().getAwardPool(), 2);
                     break;
                 case SHARDS:
                     awardShards(FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_WHEEL_SHARDS), false);
@@ -116,29 +131,43 @@ public class ConquestMultiverseScreen extends FScreen {
         });
     }
 
-    private void awardBooster(final boolean bonusBooster) {
-        final int shardsBefore = model.getAEtherShards();
-        ConquestRewardDialog.show("Received Booster Pack" + (bonusBooster ? "\n(1 of 2)" : ""),
-                FModel.getConquest().awardBooster(), new Runnable() {
-            @Override
-            public void run() {
-                final Runnable alertShardsFromDuplicates = new Runnable() {
-                    @Override
-                    public void run() {
-                        final int shardsReceived = model.getAEtherShards() - shardsBefore;
-                        if (shardsReceived > 0) {
-                            awardShards(shardsReceived, true);
-                        }
-                    }
-                };
-                if (bonusBooster) {
-                    ConquestRewardDialog.show("Received Booster Pack\n(2 of 2)", FModel.getConquest().awardBooster(), alertShardsFromDuplicates);
+    private void awardBoosters(AwardPool pool, int totalCount) {
+        AwardBoosterHelper helper = new AwardBoosterHelper(pool, totalCount);
+        helper.run();
+    }
+
+    private class AwardBoosterHelper implements Runnable {
+        private final AwardPool pool;
+        private final int totalCount;
+        private final int shardsBefore;
+        private int number;
+
+        private AwardBoosterHelper(AwardPool pool0, int totalCount0) {
+            pool = pool0;
+            number = 1;
+            totalCount = totalCount0;
+            shardsBefore = model.getAEtherShards();
+        }
+
+        @Override
+        public void run() {
+            if (number > totalCount) {
+                //show total shards received from all boosters once all boosters shown
+                final int shardsReceived = model.getAEtherShards() - shardsBefore;
+                if (shardsReceived > 0) {
+                    awardShards(shardsReceived, true);
                 }
-                else {
-                    alertShardsFromDuplicates.run();
-                }
+                return;
             }
-        });
+
+            String title = "Received Booster Pack";
+            if (totalCount > 1) {
+                title += String.format("\n(%d of %d)", number, totalCount);
+            }
+            number++;
+            List<ConquestReward> rewards = FModel.getConquest().awardBooster(pool);
+            ConquestRewardDialog.show(title, rewards, this);
+        }
     }
 
     private static final FImage SHARD_IMAGE = new FImage() {
@@ -180,7 +209,8 @@ public class ConquestMultiverseScreen extends FScreen {
                 LoadingOverlay.show("Chaos approaching...", new Runnable() {
                     @Override
                     public void run() {
-                        FModel.getConquest().launchEvent(new ConquestChaosBattle());
+                        chaosBattle = new ConquestChaosBattle();
+                        FModel.getConquest().launchEvent(chaosBattle);
                     }
                 });
             }

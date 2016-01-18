@@ -23,7 +23,9 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
+import forge.card.CardDb;
 import forge.card.CardEdition;
+import forge.card.CardEdition.CardInSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.IPaperCard;
@@ -42,10 +44,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 
-/**
- * TODO: Write javadoc for this type.
- * 
- */
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
     // contains allowed sets, when empty allows all sets
@@ -61,18 +59,8 @@ public class GameFormat implements Comparable<GameFormat> {
     protected final transient Predicate<PaperCard> filterRules;
     protected final transient Predicate<PaperCard> filterPrinted;
 
-    private final int index; 
-    
-    /**
-     * Instantiates a new game format.
-     * 
-     * @param fName
-     *            the f name
-     * @param sets
-     *            the sets
-     * @param bannedCards
-     *            the banned cards
-     */
+    private final int index;
+
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
         this(fName, sets, bannedCards, null, 0);
     }
@@ -110,63 +98,49 @@ public class GameFormat implements Comparable<GameFormat> {
         return Predicates.and(banNames, StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes_ro));
     }
 
-    /**
-     * Gets the name.
-     * 
-     * @return the name
-     */
     public String getName() {
         return this.name;
     }
 
-    /**
-     * Gets the set list (for GameFormatQuest).
-     * 
-     * @return list of allowed set codes
-     */
     public List<String> getAllowedSetCodes() {
         return this.allowedSetCodes_ro;
     }
 
-    /**
-     * Gets the banned cards (for GameFormatQuest).
-     * 
-     * @return list of banned card names
-     */
     public List<String> getBannedCardNames() {
         return this.bannedCardNames_ro;
     }
 
     public List<String> getRestrictedCards() {
-        // TODO Auto-generated method stub
         return restrictedCardNames_ro;
     }
 
-    /**
-     * Gets the filter rules.
-     * 
-     * @return the filter rules
-     */
+    public List<PaperCard> getAllCards() {
+        List<PaperCard> cards = new ArrayList<PaperCard>();
+        CardDb commonCards = StaticData.instance().getCommonCards();
+        for (String setCode : allowedSetCodes_ro) {
+            CardEdition edition = StaticData.instance().getEditions().get(setCode);
+            if (edition != null) {
+                for (CardInSet card : edition.getCards()) {
+                    if (!bannedCardNames_ro.contains(card.name)) {
+                        PaperCard pc = commonCards.getCard(card.name, setCode);
+                        if (pc != null) {
+                            cards.add(pc);
+                        }
+                    }
+                }
+            }
+        }
+        return cards;
+    }
+
     public Predicate<PaperCard> getFilterRules() {
         return this.filterRules;
     }
 
-    /**
-     * Gets the filter printed.
-     * 
-     * @return the filter printed
-     */
     public Predicate<PaperCard> getFilterPrinted() {
         return this.filterPrinted;
     }
 
-    /**
-     * Checks if is sets the legal.
-     * 
-     * @param setCode
-     *            the set code
-     * @return true, if is sets the legal
-     */
     public boolean isSetLegal(final String setCode) {
         return this.allowedSetCodes_ro.isEmpty() || this.allowedSetCodes_ro.contains(setCode);
     }
@@ -191,11 +165,6 @@ public class GameFormat implements Comparable<GameFormat> {
         return isPoolLegal(deck.getAllCardsInASinglePool());
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return this.name;
@@ -208,10 +177,6 @@ public class GameFormat implements Comparable<GameFormat> {
         }
     };
 
-    /* (non-Javadoc)
-     * just used for ordering -- comparing the name is sufficient
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
     @Override
     public int compareTo(GameFormat other) {
         if (null == other) {
@@ -224,9 +189,6 @@ public class GameFormat implements Comparable<GameFormat> {
         return index;
     }
 
-    /**
-     * Instantiates a new format utils.
-     */
     public static class Reader extends StorageReaderFileSections<GameFormat> {
         List<GameFormat> naturallyOrdered = new ArrayList<GameFormat>();
         
@@ -324,8 +286,7 @@ public class GameFormat implements Comparable<GameFormat> {
             return result;
         }
     }
-    
-    // declared here because
+
     public final Predicate<CardEdition> editionLegalPredicate = new Predicate<CardEdition>() {
         @Override
         public boolean apply(final CardEdition subject) {

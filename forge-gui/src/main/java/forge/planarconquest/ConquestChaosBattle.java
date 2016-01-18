@@ -11,6 +11,7 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
+import forge.planarconquest.ConquestPlane.AwardPool;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestEventDifficulty;
@@ -22,6 +23,8 @@ import forge.util.Aggregates;
 public class ConquestChaosBattle extends ConquestEvent {
     private final QuestWorld world;
     private final QuestEventDuel duel;
+    private AwardPool awardPool;
+    private boolean finished;
 
     public ConquestChaosBattle() {
         super(null, 0);
@@ -86,6 +89,7 @@ public class ConquestChaosBattle extends ConquestEvent {
             if (game.isMatchWonBy(humanPlayer)) {
                 view.getBtnQuit().setText("Great!");
                 model.getChaosBattleRecord().addWin();
+                setConquered(true);
             }
             else {
                 view.getBtnQuit().setText("OK");
@@ -107,5 +111,17 @@ public class ConquestChaosBattle extends ConquestEvent {
             model.getChaosBattleRecord().addLoss();
             model.saveData();
         }
+        finished = true;
+    }
+
+    public AwardPool getAwardPool() {
+        if (awardPool == null) { //delay initializing until needed
+            awardPool = new AwardPool(world.getAllCards());
+        }
+        return awardPool;
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 }

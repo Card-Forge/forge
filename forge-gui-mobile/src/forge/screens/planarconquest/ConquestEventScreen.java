@@ -27,6 +27,7 @@ public class ConquestEventScreen extends LaunchScreen {
             //when returning to this screen from launched event, close it immediately and call callback
             Forge.back();
             callback.run(event);
+            launchedEvent = false;
         }
     }
 

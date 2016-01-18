@@ -78,29 +78,26 @@ public class QuestWorld implements Comparable<QuestWorld>{
         return dir == null ? null : dir + "/challenges";
     }
 
-    /**
-     * The quest world format if specified.
-     * @return GameFormatQuest, the format
-     */
     public GameFormatQuest getFormat() {
         return format;
     }
 
-    /**
-     * <p>
-     * toString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
+    public List<PaperCard> getAllCards() {
+        GameFormat format0 = format;
+        if (format0 == null) {
+            format0 = FModel.getQuest().getMainFormat();
+        }
+        if (format0 != null) {
+            return format0.getAllCards();
+        }
+        return FModel.getMagicDb().getCommonCards().getAllCards();
+    }
+
     @Override
     public final String toString() {
         return this.getName();
     }
 
-    /**
-     * FN_GET_NAME for reader.
-     */
     public static final Function<QuestWorld, String> FN_GET_NAME = new Function<QuestWorld, String>() {
 
         @Override

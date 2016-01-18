@@ -545,18 +545,16 @@ public enum ConquestPlane {
 
     public AwardPool getAwardPool() {
         if (awardPool == null) { //delay initializing until needed
-            awardPool = new AwardPool();
+            awardPool = new AwardPool(cardPool.getAllCards());
         }
         return awardPool;
     }
 
-    public class AwardPool {
+    public static class AwardPool {
         private final BoosterPool commons, uncommons, rares, mythics;
         private final int commonValue, uncommonValue, rareValue, mythicValue;
 
-        private AwardPool() {
-            Iterable<PaperCard> cards = cardPool.getAllCards();
-
+        public AwardPool(Iterable<PaperCard> cards) {
             ConquestPreferences prefs = FModel.getConquestPreferences();
 
             commons = new BoosterPool();
