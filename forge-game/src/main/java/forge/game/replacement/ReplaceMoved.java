@@ -35,6 +35,12 @@ public class ReplaceMoved extends ReplacementEffect {
                 return false;
             }
         }
+
+        if (this.getMapParams().containsKey("ValidLKI")) {
+            if (!matchesValid(runParams.get("CardLKI"), this.getMapParams().get("ValidLKI").split(","), this.getHostCard())) {
+                return false;
+            }
+        }
         
         boolean matchedZone = false;
         if (this.getMapParams().containsKey("Origin")) {

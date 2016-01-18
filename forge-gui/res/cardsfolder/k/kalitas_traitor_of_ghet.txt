@@ -3,8 +3,8 @@ ManaCost:2 B B
 Types:Legendary Creature Vampire Warrior
 PT:3/4
 K:Lifelink
-R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+OppCtrl | ReplaceWith$ Exile | Description$ If a nontoken creature an opponent controls would die, instead exile that card and put a 2/2 black Zombie creature token onto the battlefield.
-SVar:Exile:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | Defined$ ReplacedCard
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.nonToken+OppCtrl | ReplaceWith$ Exile | Description$ If a nontoken creature an opponent controls would die, instead exile that card and put a 2/2 black Zombie creature token onto the battlefield.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | Defined$ ReplacedCard
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenImage$ b 2 2 zombie OGW
 A:AB$ PutCounter | Cost$ 2 B Sac<1/Vampire.Other;Zombie.Other/another Vampire or Zombie> | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalitas_traitor_of_ghet.jpg
