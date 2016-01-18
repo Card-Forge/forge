@@ -7766,6 +7766,7 @@ forge-gui/res/cardsfolder/i/immaculate_magistrate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/immediate_action.txt -text
 forge-gui/res/cardsfolder/i/immersturm.txt -text
 forge-gui/res/cardsfolder/i/immerwolf.txt -text
+forge-gui/res/cardsfolder/i/immobilizer_eldrazi.txt -text
 forge-gui/res/cardsfolder/i/immobilizing_ink.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/immolating_glare.txt -text
 forge-gui/res/cardsfolder/i/immolating_souleater.txt svneol=native#text/plain

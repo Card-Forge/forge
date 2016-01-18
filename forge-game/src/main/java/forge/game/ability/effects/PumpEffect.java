@@ -36,9 +36,11 @@ public class PumpEffect extends SpellAbilityEffect {
         final Game game = sa.getActivatingPlayer().getGame();
         final List<String> kws = new ArrayList<String>();
 
+        boolean redrawPT = false;
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
                 applyTo.addHiddenExtrinsicKeyword(kw);
+                redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
             } else {
                 kws.add(kw);
                 if (kw.equals("Suspend") && !applyTo.hasSuspend()) {
@@ -52,6 +54,7 @@ public class PumpEffect extends SpellAbilityEffect {
         applyTo.addTempPowerBoost(a);
         applyTo.addTempToughnessBoost(d);
         applyTo.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+        if (redrawPT)           {     applyTo.updatePowerToughnessView();     }
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT

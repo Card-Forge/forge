@@ -2838,6 +2838,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.getView().updateToughness(this);
     }
 
+    public final void updatePowerToughnessView() {
+        currentState.getView().updatePower(this);
+        currentState.getView().updateToughness(this);
+    }
+
     public final boolean isUntapped() {
         return !tapped;
     }
@@ -4840,6 +4845,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("unequalPT")) {
             if (getNetPower() == getNetToughness()) {
+                return false;
+            }
+        } else if (property.equals("powerGTtoughness")) {
+            if (getNetPower() <= getNetToughness()) {
+                return false;
+            }
+        } else if (property.equals("powerLTtoughness")) {
+            if (getNetPower() >= getNetToughness()) {
                 return false;
             }
         } else if (property.startsWith("power") || property.startsWith("toughness")
