@@ -226,7 +226,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             if (saPaidFor.getHostCard() != null && saPaidFor.getHostCard().hasSVar("ManaNeededToAvoidNegativeEffect")) {
                 String[] negEffects = saPaidFor.getHostCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
                 for (String negColor : negEffects) {
-                    byte col = MagicColor.fromName(negColor);
+                    byte col = ManaAtom.fromName(negColor);
                     colorCanUse |= col;
                 }
             }
@@ -328,7 +328,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (am.getApi() == ApiType.ManaReflected) {
             final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am);
             for (final String color : reflectableColors) {
-                if (0 != (neededColor & MagicColor.fromName(color))) {
+                if (0 != (neededColor & ManaAtom.fromName(color))) {
                     return true;
                 }
             }
@@ -336,7 +336,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         else {
             String colorsProduced = m.isComboMana() ? m.getComboColors() : m.getOrigProduced();
             for (final String color : colorsProduced.split(" ")) {
-                if (0 != (neededColor & MagicColor.fromName(color))) {
+                if (0 != (neededColor & ManaAtom.fromName(color))) {
                     return true;
                 }
             }

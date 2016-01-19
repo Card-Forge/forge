@@ -11,6 +11,7 @@ public abstract class ManaAtom {
     public static final int GREEN = MagicColor.GREEN;
     public static final int COLORLESS = 1 << 5;
 
+    public static final byte[] MANACOLORS = new byte[] { WHITE, BLUE, BLACK, RED, GREEN };
     public static final byte[] MANATYPES = new byte[] { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS };
 
     public static final int GENERIC = 1 << 6;
@@ -20,4 +21,38 @@ public abstract class ManaAtom {
     public static final int OR_2_GENERIC = 1 << 9;
     public static final int OR_2_LIFE = 1 << 10;
     public static final int IS_SNOW = 1 << 11;
+
+    public static byte fromName(final char c) {
+        switch (Character.toLowerCase(c)) {
+            case 'w': return WHITE;
+            case 'u': return BLUE;
+            case 'b': return BLACK;
+            case 'r': return RED;
+            case 'g': return GREEN;
+            case 'c': return COLORLESS;
+        }
+        return 0; // unknown means 'generic'
+    }
+
+    public static byte fromName(String s) {
+        if (s == null) {
+            return 0;
+        }
+        if (s.length() == 2) { //if name is two characters, check for combination of two colors
+            return (byte)(fromName(s.charAt(0)) | fromName(s.charAt(1)));
+        } else if (s.length() == 1) {
+            return (byte) fromName(s.charAt(0));
+        }
+        s = s.toLowerCase();
+
+        switch (s) {
+            case MagicColor.Constant.WHITE: return WHITE;
+            case MagicColor.Constant.BLUE: return BLUE;
+            case MagicColor.Constant.BLACK: return BLACK;
+            case MagicColor.Constant.RED: return RED;
+            case MagicColor.Constant.GREEN: return GREEN;
+            case MagicColor.Constant.COLORLESS: return COLORLESS;
+        }
+        return 0; // generic
+    }
 }

@@ -27,6 +27,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import forge.card.mana.ManaAtom;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -927,7 +928,7 @@ public class CardFactoryUtil {
             if (color.equals("All")) {
                 return cc.getManaPool().totalMana();
             }
-            return cc.getManaPool().getAmountOfColor(MagicColor.fromName(color));
+            return cc.getManaPool().getAmountOfColor(ManaAtom.fromName(color));
         }
 
         // count valid cards in any specified zone/s
@@ -1259,7 +1260,7 @@ public class CardFactoryUtil {
             }
 
             int colorOcurrencices = 0;
-            byte colorCode = MagicColor.fromName(colorName);
+            byte colorCode = ManaAtom.fromName(colorName);
             for (Card c0 : cards) {
                 for (ManaCostShard sh : c0.getManaCost()){
                     if ((sh.getColorMask() & colorCode) != 0) 
@@ -1271,8 +1272,8 @@ public class CardFactoryUtil {
         // Count$DevotionDual.<color name>.<color name>
         if (sq[0].contains("DevotionDual")) {
             int colorOcurrencices = 0;
-            byte color1 = MagicColor.fromName(sq[1]);
-            byte color2 = MagicColor.fromName(sq[2]);
+            byte color1 = ManaAtom.fromName(sq[1]);
+            byte color2 = ManaAtom.fromName(sq[2]);
             for (Card c0 : cc.getCardsIn(ZoneType.Battlefield)) {
                 for (ManaCostShard sh : c0.getManaCost()) {
                     if ((sh.getColorMask() & (color1 | color2)) != 0) {

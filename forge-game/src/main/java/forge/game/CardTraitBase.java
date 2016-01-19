@@ -1,6 +1,7 @@
 package forge.game;
 
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -327,14 +328,14 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         }
     
         if (params.containsKey("ManaSpent")) {
-            byte spent = MagicColor.fromName(params.get("ManaSpent"));
+            byte spent = ManaAtom.fromName(params.get("ManaSpent"));
             if ( 0 == (this.getHostCard().getColorsPaid() & spent)) {
                 return false;
             }
         }
 
         if (params.containsKey("ManaNotSpent")) {
-            byte spent = MagicColor.fromName(params.get("ManaNotSpent"));
+            byte spent = ManaAtom.fromName(params.get("ManaNotSpent"));
             if ( 0 != (this.getHostCard().getColorsPaid() & spent)) {
                 return false;
             }

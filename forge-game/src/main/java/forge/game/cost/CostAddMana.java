@@ -84,13 +84,14 @@ public class CostAddMana extends CostPart {
                     manaProduced.add(new Mana((byte)ManaAtom.COLORLESS, source, null));
                 }
             } else {
-                // Todo use mana not color
-                byte attemptedMana = MagicColor.fromName(type);
+                byte attemptedMana = ManaAtom.fromName(type);
+                // Commander rules removed mana generation to avoid colorless abusese
+                /*
                 if (cid != null) {
                     if (!cid.hasAnyColor(attemptedMana)) {
                         attemptedMana = (byte)ManaAtom.COLORLESS;
                     }
-                }
+                }*/
                 manaProduced.add(new Mana(attemptedMana, source, null));
             }
         }

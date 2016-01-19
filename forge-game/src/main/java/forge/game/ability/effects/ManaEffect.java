@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -59,7 +60,7 @@ public class ManaEffect extends SpellAbilityEffect {
                         String choice = "";
                         if (colorsNeeded != null && colorsNeeded.length >= nMana) {	// select from express choices if possible
                             colorOptions = ColorSet
-                                    .fromMask(fullOptions.getColor() & MagicColor.fromName(colorsNeeded[nMana - 1]));
+                                    .fromMask(fullOptions.getColor() & ManaAtom.fromName(colorsNeeded[nMana - 1]));
                         }
                         if (colorOptions.isColorless() && colorsProduced.length > 0) {
                             // If we just need generic mana, no reason to ask the controller for a choice,

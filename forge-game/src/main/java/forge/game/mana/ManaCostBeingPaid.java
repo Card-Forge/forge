@@ -238,7 +238,7 @@ public class ManaCostBeingPaid {
             shard = ManaCostShard.GENERIC;
         }
         else {
-            shard = ManaCostShard.valueOf(MagicColor.fromName(xColor)); 
+            shard = ManaCostShard.valueOf(ManaAtom.fromName(xColor));
         }
         increaseShard(shard, xCost, true);
     }
@@ -308,7 +308,7 @@ public class ManaCostBeingPaid {
      * @return a boolean.
      */
     public final boolean ai_payMana(final String mana, final ManaPool pool) {
-        final byte colorMask = MagicColor.fromName(mana) == MagicColor.COLORLESS ? (byte)ManaAtom.COLORLESS : MagicColor.fromName(mana);
+        final byte colorMask = ManaAtom.fromName(mana);
         if (!this.isAnyPartPayableWith(colorMask, pool)) {
             //System.out.println("ManaCost : addMana() error, mana not needed - " + mana);
             return false;

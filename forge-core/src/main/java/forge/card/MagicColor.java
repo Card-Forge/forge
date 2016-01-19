@@ -71,6 +71,7 @@ public final class MagicColor {
         return 0; // unknown means 'colorless'
     }
 
+    // This probably should be in ManaAtom since it cares about Mana, not Color.
     public static String toShortString(final String color) {
         if (color.equalsIgnoreCase(Constant.SNOW)) {
             return "S";

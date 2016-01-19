@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
@@ -1313,7 +1314,7 @@ public class AbilityUtils {
             int xCost = calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa);
             //Check for XColor
             ManaCostBeingPaid toPay = new ManaCostBeingPaid(ManaCost.ZERO);
-            byte xColor = MagicColor.fromName(sa.hasParam("UnlessXColor") ? sa.getParam("UnlessXColor") : "1");
+            byte xColor = ManaAtom.fromName(sa.hasParam("UnlessXColor") ? sa.getParam("UnlessXColor") : "1");
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
             cost = new Cost(toPay.toManaCost(), true);
         }
@@ -1521,11 +1522,11 @@ public class AbilityUtils {
                     convertByte = ColorSet.ALL_COLORS.getColor();
                 } else {
                     for (final String convertColor : convertTo.split(",")) {
-                        convertByte |= MagicColor.fromName(convertColor);
+                        convertByte |= ManaAtom.fromName(convertColor);
                     }
                 }
                 // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
-                p.getManaPool().adjustColorReplacement(MagicColor.fromName(c), convertByte, additive);
+                p.getManaPool().adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
             }
         }
     }

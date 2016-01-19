@@ -689,7 +689,7 @@ public class ComputerUtilMana {
 
         if (m.isComboMana()) {
             for (String s : m.getComboColors().split(" ")) {
-                if ("Any".equals(s) || ai.getManaPool().canPayForShardWithColor(toPay, MagicColor.fromName(s)))
+                if ("Any".equals(s) || ai.getManaPool().canPayForShardWithColor(toPay, ManaAtom.fromName(s)))
                     return true;
             }
             return false;
@@ -761,7 +761,7 @@ public class ComputerUtilMana {
         // Make mana needed to avoid negative effect a mandatory cost for the AI
         for (String manaPart : card.getSVar("ManaNeededToAvoidNegativeEffect").split(",")) {
             // convert long color strings to short color strings
-            byte mask = MagicColor.fromName(manaPart);
+            byte mask = ManaAtom.fromName(manaPart);
 
             // make mana mandatory for AI
             if (!cost.needsColor(mask, ai.getManaPool()) && cost.getGenericManaAmount() > 0) {
@@ -799,7 +799,7 @@ public class ComputerUtilMana {
                 if (!abMana.getExpressChoice().isEmpty()) {
                     choice = abMana.getExpressChoice();
                     abMana.clearExpressChoice();
-                    byte colorMask = MagicColor.fromName(choice);
+                    byte colorMask = ManaAtom.fromName(choice);
                     if (abMana.canProduce(choice, manaAb) && testCost.isAnyPartPayableWith(colorMask, ai.getManaPool())) {
                         choiceString.append(choice);
                         payMultipleMana(testCost, choice, ai);
@@ -810,7 +810,7 @@ public class ComputerUtilMana {
                 if (!testCost.isPaid()) {
                     // Loop over combo colors
                     for (String color : comboColors) {
-                        if (testCost.isAnyPartPayableWith(MagicColor.fromName(color), ai.getManaPool())) {
+                        if (testCost.isAnyPartPayableWith(ManaAtom.fromName(color), ai.getManaPool())) {
                             payMultipleMana(testCost, color, ai);
                             if (nMana != 1) {
                                 choiceString.append(" ");
