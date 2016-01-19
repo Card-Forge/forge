@@ -18,6 +18,7 @@
 package forge.game.mana;
 
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.game.card.Card;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
@@ -125,7 +126,7 @@ public class Mana {
     }
 
     public boolean isColorless() {
-        return color == MagicColor.COLORLESS;
+        return color == (byte)ManaAtom.COLORLESS;
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.card.mana.ManaAtom;
 import forge.game.card.CounterType;
 
 import org.apache.commons.lang3.StringUtils;
@@ -362,7 +363,7 @@ public class PlayerView extends GameEntityView {
     }
     void updateMana(Player p) {
         Map<Byte, Integer> mana = new HashMap<Byte, Integer>();
-        for (byte b : MagicColor.WUBRGC) {
+        for (byte b : ManaAtom.MANATYPES) {
             mana.put(b, p.getManaPool().getAmountOfColor(b));
         }
         set(TrackableProperty.Mana, mana);

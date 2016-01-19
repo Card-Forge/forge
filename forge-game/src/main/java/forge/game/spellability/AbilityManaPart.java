@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import forge.card.mana.ManaAtom;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
@@ -144,15 +145,21 @@ public class AbilityManaPart implements java.io.Serializable {
         for (final String c : afterReplace.split(" ")) {
             if (StringUtils.isNumeric(c)) {
                 for (int i = Integer.parseInt(c); i > 0; i--) {
-                    this.lastManaProduced.add(new Mana(MagicColor.COLORLESS, source, this));
+                    this.lastManaProduced.add(new Mana((byte) ManaAtom.COLORLESS, source, this));
                 }
             } else {
                 byte attemptedMana = MagicColor.fromName(c);
+                if (attemptedMana == 0) {
+                    attemptedMana = (byte)ManaAtom.COLORLESS;
+                }
+				// Commander has removed rule #4 (mana generation restriction) due to Colorless mana mattering
+				/*
                 if (CID != null) {
                     if (!CID.hasAnyColor(attemptedMana)) {
-                        attemptedMana = MagicColor.COLORLESS;
+                        attemptedMana = (byte)ManaAtom.COLORLESS;
                     }
                 }
+				*/
 
                 this.lastManaProduced.add(new Mana(attemptedMana, source, this));
             }

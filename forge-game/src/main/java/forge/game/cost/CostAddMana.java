@@ -20,6 +20,7 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.card.mana.ManaAtom;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
@@ -80,13 +81,14 @@ public class CostAddMana extends CostPart {
         for (int n = 0; n < decision.c; n++) {
             if (StringUtils.isNumeric(type)) {
                 for (int i = Integer.parseInt(type); i > 0; i--) {
-                    manaProduced.add(new Mana(MagicColor.COLORLESS, source, null));
+                    manaProduced.add(new Mana((byte)ManaAtom.COLORLESS, source, null));
                 }
             } else {
+                // Todo use mana not color
                 byte attemptedMana = MagicColor.fromName(type);
                 if (cid != null) {
                     if (!cid.hasAnyColor(attemptedMana)) {
-                        attemptedMana = MagicColor.COLORLESS;
+                        attemptedMana = (byte)ManaAtom.COLORLESS;
                     }
                 }
                 manaProduced.add(new Mana(attemptedMana, source, null));

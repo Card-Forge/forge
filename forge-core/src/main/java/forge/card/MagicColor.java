@@ -15,7 +15,9 @@ public final class MagicColor {
     public static final byte BLACK     = 1 << 2;
     public static final byte RED       = 1 << 3;
     public static final byte GREEN     = 1 << 4;
-    public static final byte COLORLESS = 1 << 5;
+    // Colorless values for MagicColor needs to be the absence of any color
+    // Any comparison between colorless cards and colorless mana need to be adjusted appropriately.
+    public static final byte COLORLESS = 0;
 
     public static final int NUMBER_OR_COLORS = 5;
 

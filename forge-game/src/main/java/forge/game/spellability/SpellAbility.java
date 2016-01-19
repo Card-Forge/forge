@@ -1328,9 +1328,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             String mana = ability.getManaPart().mana();
             if (!mana.equals("Any")) {
                 score += mana.length();
+                if (!ability.getManaPart().canProduce("C")) {
+                    // Producing colorless should produce a slightly lower score
+                    score += 1;
+                }
             }
             else {
-                score += 6;
+                score += 7;
             }
         }
 

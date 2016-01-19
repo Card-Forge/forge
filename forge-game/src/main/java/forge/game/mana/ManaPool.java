@@ -24,6 +24,7 @@ import com.google.common.collect.Multimap;
 import forge.GameCommand;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
@@ -128,7 +129,7 @@ public class ManaPool implements Iterable<Mana> {
             }
         }
         if (convertToColorless) {
-            keys.remove(Byte.valueOf(MagicColor.COLORLESS));
+            keys.remove(Byte.valueOf((byte)ManaAtom.COLORLESS));
         }
 
         for (Byte b : keys) {
@@ -142,7 +143,7 @@ public class ManaPool implements Iterable<Mana> {
                 }
                 cm.removeAll(pMana);
                 if (convertToColorless) {
-                    convertManaColor(b, MagicColor.COLORLESS);
+                    convertManaColor(b, (byte)ManaAtom.COLORLESS);
                     cm.addAll(pMana);
                 }
                 else {
@@ -153,7 +154,7 @@ public class ManaPool implements Iterable<Mana> {
             }
             else {
                 if (convertToColorless) {
-                    convertManaColor(b, MagicColor.COLORLESS);
+                    convertManaColor(b, (byte)ManaAtom.COLORLESS);
                 }
                 else {
                     cleared.addAll(cm);
@@ -348,9 +349,9 @@ public class ManaPool implements Iterable<Mana> {
     
     // Conversion matrix ORs byte values to make mana more payable
     // Restrictive matrix ANDs byte values to make mana less payable
-    private final byte[] colorConversionMatrix = new byte[MagicColor.WUBRGC.length];
-    private final byte[] colorRestrictionMatrix = new byte[MagicColor.WUBRGC.length];
-    private static final byte[] identityMatrix = { MagicColor.WHITE, MagicColor.BLUE, MagicColor.BLACK, MagicColor.RED, MagicColor.GREEN, 0 };
+    private final byte[] colorConversionMatrix = new byte[ManaAtom.MANATYPES.length];
+    private final byte[] colorRestrictionMatrix = new byte[ManaAtom.MANATYPES.length];
+    private static final byte[] identityMatrix = { ManaAtom.WHITE, ManaAtom.BLUE, ManaAtom.BLACK, ManaAtom.RED, ManaAtom.GREEN, ManaAtom.COLORLESS };
 
     public void adjustColorReplacement(byte originalColor, byte replacementColor, boolean additive) {
         // Fix the index without hardcodes
@@ -392,7 +393,7 @@ public class ManaPool implements Iterable<Mana> {
             }
         }
 
-        if (((color & (byte) MagicColor.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte) MagicColor.COLORLESS)) {
+        if (((color & (byte) ManaAtom.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte) (byte)ManaAtom.COLORLESS)) {
             return true;
         }
 

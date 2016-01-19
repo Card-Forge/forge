@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import forge.card.mana.ManaAtom;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -43,12 +44,12 @@ public class PlayerDetailsPanel extends JPanel {
     public PlayerDetailsPanel(final PlayerView player0) {
         player = player0;
 
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_W,         "White mana (%s)"),     MagicColor.WHITE));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_U,         "Blue mana (%s)"),      MagicColor.BLUE));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_B,         "Black mana (%s)"),     MagicColor.BLACK));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_R,         "Red mana (%s)"),       MagicColor.RED));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_G,         "Green mana (%s)"),     MagicColor.GREEN));
-        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_COLORLESS, "Colorless mana (%s)"), MagicColor.COLORLESS));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_W,         "White mana (%s)"),     (byte)ManaAtom.WHITE));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_U,         "Blue mana (%s)"),      (byte)ManaAtom.BLUE));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_B,         "Black mana (%s)"),     (byte)ManaAtom.BLACK));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_R,         "Red mana (%s)"),       (byte)ManaAtom.RED));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_G,         "Green mana (%s)"),     (byte)ManaAtom.GREEN));
+        manaLabels.add(Pair.of(new DetailLabel(FSkinProp.IMG_MANA_COLORLESS, "Colorless mana (%s)"), (byte)ManaAtom.COLORLESS));
 
         setOpaque(false);
         setLayout(new MigLayout("insets 0, gap 0, wrap"));
