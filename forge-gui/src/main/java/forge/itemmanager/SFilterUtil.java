@@ -157,9 +157,6 @@ public class SFilterUtil {
         if (buttonMap.get(StatTypes.GREEN).isSelected()) {
             colors0 |= MagicColor.GREEN;
         }
-        if (buttonMap.get(StatTypes.COLORLESS).isSelected()) {
-            colors0 |= MagicColor.COLORLESS;
-        }
 
         final byte colors = colors0;
         final boolean wantColorless = buttonMap.get(StatTypes.COLORLESS).isSelected();
@@ -195,7 +192,7 @@ public class SFilterUtil {
                         if (useColorIdentity && !allColorsFilteredOut) {
                             result = result && (color.hasAnyColor(colors) || (wantColorless && color.isColorless()));
                         } else {
-                            result = result && rules.canCastWithAvailable(colors);
+                            result = result && (color.isColorless() || rules.canCastWithAvailable(colors));
                         }
                     }
                 }
