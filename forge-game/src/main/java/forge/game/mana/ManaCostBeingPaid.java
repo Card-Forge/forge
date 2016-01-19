@@ -23,6 +23,7 @@ import com.google.common.collect.Iterables;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.IParserManaCost;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 
@@ -307,7 +308,7 @@ public class ManaCostBeingPaid {
      * @return a boolean.
      */
     public final boolean ai_payMana(final String mana, final ManaPool pool) {
-        final byte colorMask = MagicColor.fromName(mana);
+        final byte colorMask = MagicColor.fromName(mana) == MagicColor.COLORLESS ? (byte)ManaAtom.COLORLESS : MagicColor.fromName(mana);
         if (!this.isAnyPartPayableWith(colorMask, pool)) {
             //System.out.println("ManaCost : addMana() error, mana not needed - " + mana);
             return false;
