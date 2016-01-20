@@ -704,6 +704,12 @@ public class QuestEventDraft {
 
         public String getName() {
             if (edition != null) {
+                // Kamigawa block name is different from the first edition name.
+                // TODO: in the future, either get rid of this hard-coded list somehow or add any possible future exceptions here.
+                if (edition.getName().equals("Champions of Kamigawa")) {
+                    return "Kamigawa";
+                }
+
                 return edition.getName();
             }
             return block.getName();
