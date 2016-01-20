@@ -3,8 +3,7 @@ ManaCost:2 R
 Types:Instant
 K:Devoid
 A:SP$ DamageAll | Cost$ 2 R | NumDmg$ 2 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 2 damage to each creature.
-T:Mode$ SpellCast | ValidCard$ Creature.Eldrazi+cmcGE7 | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Whenever you cast an Eldrazi creature spell with converted mana cost 7 or greater, you may exile CARDNAME from your graveyard. If you do, CARDNAME deals 5 damage to each creature.
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | Defined$ Self | SubAbility$ DBDamageAll
-SVar:DBDamageAll:DB$ DamageAll | Cost$ 0 | ValidCards$ Creature | NumDmg$ 5 | ValidDescription$ each creature.
+T:Mode$ SpellCast | ValidCard$ Creature.Eldrazi+cmcGE7 | TriggerZones$ Graveyard | Execute$ DBDamageAll | TriggerDescription$ Whenever you cast an Eldrazi creature spell with converted mana cost 7 or greater, you may exile CARDNAME from your graveyard. If you do, CARDNAME deals 5 damage to each creature.
+SVar:DBDamageAll:AB$ DamageAll | Cost$ ExileFromGrave<1/Card.Self> | ValidCards$ Creature | NumDmg$ 5 | ValidDescription$ each creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kozileks_return.jpg
 Oracle:Devoid (This card has no color.)\nKozilek's Return deals 2 damage to each creature.\nWhenever you cast an Eldrazi creature spell with converted mana cost 7 or greater, you may exile Kozilek's Return from your graveyard. If you do, Kozilek's Return deals 5 damage to each creature.
