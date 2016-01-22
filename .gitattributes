@@ -11858,6 +11858,7 @@ forge-gui/res/cardsfolder/r/reef_shaman.txt -text
 forge-gui/res/cardsfolder/r/reef_worm.txt -text
 forge-gui/res/cardsfolder/r/reflecting_mirror.txt -text
 forge-gui/res/cardsfolder/r/reflecting_pool.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/reflector_mage.txt -text
 forge-gui/res/cardsfolder/r/reflex_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/reflexes.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/refocus.txt -text
