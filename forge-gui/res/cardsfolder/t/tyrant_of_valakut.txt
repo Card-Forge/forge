@@ -1,7 +1,7 @@
 Name:Tyrant of Valakut
 ManaCost:5 R R
 Types:Creature Dragon
-PT:5/3
+PT:5/4
 K:Surge:3 R R
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+surged | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, if its surge cost was paid, it deals 3 damage to target creature or player.
