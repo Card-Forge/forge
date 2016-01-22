@@ -455,56 +455,62 @@ public class CountersPutAi extends SpellAbilityAi {
             list = CardLists.getTargetableCards(player.getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
 
-            if (list.isEmpty() && mandatory) {
-                // If there isn't any prefered cards to target, gotta choose
-                // non-preferred ones
-                list = CardLists.getTargetableCards(player.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
-                list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
-                preferred = false;
-            }
-            // Not mandatory, or the the list was regenerated and is still
-            // empty,
-            // so return false since there are no targets
-            if (list.isEmpty()) {
-                return false;
-            }
+            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
+                if (mandatory) {
+                    // When things are mandatory, gotta handle a little differently
+                    if ((list.isEmpty() || !preferred) && sa.getTargets().getNumTargeted() >= abTgt.getMinTargets(sa.getHostCard(), sa)) {
+                        return true;
+                    }
 
-            Card choice = null;
-
-            // Choose targets here:
-            if (isCurse) {
-                if (preferred) {
-                    choice = CountersAi.chooseCursedTarget(list, type, amount);
-                }
-
-                else {
-                    if (type.equals("M1M1")) {
-                        choice = ComputerUtilCard.getWorstCreatureAI(list);
-                    } else {
-                        choice = Aggregates.random(list);
+                    if (list.isEmpty() && preferred) {
+                        // If it's required to choose targets and the list is empty, get a new list
+                        list = CardLists.getTargetableCards(player.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
+                        list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+                        preferred = false;
                     }
                 }
-            }
-            else {
-                list = ComputerUtil.getSafeTargets(ai, sa, list);
-                if (preferred) {
-                    choice = CountersAi.chooseBoonTarget(list, type);
+
+                if (list.isEmpty()) {
+                    // Not mandatory, or the the list was regenerated and is still empty,
+                    // so return whether or not we found enough targets
+                    return sa.getTargets().getNumTargeted() >= abTgt.getMinTargets(sa.getHostCard(), sa);
                 }
-                else {
-                    if (type.equals("P1P1")) {
-                        choice = ComputerUtilCard.getWorstCreatureAI(list);
+
+                Card choice = null;
+
+                // Choose targets here:
+                if (isCurse) {
+                    if (preferred) {
+                        choice = CountersAi.chooseCursedTarget(list, type, amount);
                     } else {
-                        choice = Aggregates.random(list);
+                        if (type.equals("M1M1")) {
+                            choice = ComputerUtilCard.getWorstCreatureAI(list);
+                        } else {
+                            choice = Aggregates.random(list);
+                        }
+                    }
+                } else {
+                    if (preferred) {
+                        list = ComputerUtil.getSafeTargets(ai, sa, list);
+                        choice = CountersAi.chooseBoonTarget(list, type);
+                    } else {
+                        if (type.equals("P1P1")) {
+                            choice = ComputerUtilCard.getWorstCreatureAI(list);
+                        } else {
+                            choice = Aggregates.random(list);
+                        }
+                    }
+                    if (choice != null && divided) {
+                        abTgt.addDividedAllocation(choice, amount);
                     }
                 }
-                if (choice !=  null && divided) {
-                    abTgt.addDividedAllocation(choice, amount);
-                }
-            }
 
-            // TODO - I think choice can be null here. Is that ok for
-            // addTarget()?
-            sa.getTargets().add(choice);
+                if (choice != null) {
+                    sa.getTargets().add(choice);
+                    list.remove(choice);
+                }
+
+            }
         }
         return true;
     }
