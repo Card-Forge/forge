@@ -17571,6 +17571,7 @@ forge-gui/res/quest/precons/Call[!!-~]of[!!-~]Blood.dck -text
 forge-gui/res/quest/precons/Carnival[!!-~]of[!!-~]Blood.dck -text
 forge-gui/res/quest/precons/Cho-Manno's[!!-~]Resolve.dck -text
 forge-gui/res/quest/precons/Code[!!-~]of[!!-~]the[!!-~]Orzhov.dck -text
+forge-gui/res/quest/precons/Concerted[!!-~]Effort.dck -text
 forge-gui/res/quest/precons/Conquering[!!-~]Hordes.dck -text
 forge-gui/res/quest/precons/Critical[!!-~]Mass.dck -text
 forge-gui/res/quest/precons/Cruel[!!-~]Plots.dck -text
@@ -17592,6 +17593,7 @@ forge-gui/res/quest/precons/Decay.dck -text
 forge-gui/res/quest/precons/Deep[!!-~]Freeze.dck -text
 forge-gui/res/quest/precons/Demonic[!!-~]Deals.dck -text
 forge-gui/res/quest/precons/Depths[!!-~]of[!!-~]Power.dck -text
+forge-gui/res/quest/precons/Desperate[!!-~]Stand.dck -text
 forge-gui/res/quest/precons/Devotion[!!-~]to[!!-~]Darkness.dck -text
 forge-gui/res/quest/precons/Devouring[!!-~]Skies.dck -text
 forge-gui/res/quest/precons/Dimir[!!-~]Dementia.dck -text
@@ -17743,6 +17745,7 @@ forge-gui/res/quest/precons/Stampede.dck -text
 forge-gui/res/quest/precons/Stampeding[!!-~]Hordes.dck -text
 forge-gui/res/quest/precons/Sunburst.dck -text
 forge-gui/res/quest/precons/Superabundance.dck -text
+forge-gui/res/quest/precons/Surge[!!-~]of[!!-~]Resistance.dck -text
 forge-gui/res/quest/precons/Surprise[!!-~]Attack.dck -text
 forge-gui/res/quest/precons/Suspended[!!-~]Sentence.dck -text
 forge-gui/res/quest/precons/Swarm[!!-~]and[!!-~]Slam.dck -text
@@ -17762,11 +17765,13 @@ forge-gui/res/quest/precons/Transference.dck -text
 forge-gui/res/quest/precons/Trounce-O-Matic.dck -text
 forge-gui/res/quest/precons/Truth[!!-~]Seekers.dck -text
 forge-gui/res/quest/precons/Turnabout.dck -text
+forge-gui/res/quest/precons/Twisted[!!-~]Reality.dck -text
 forge-gui/res/quest/precons/Ultimate[!!-~]Sacrifice.dck -text
 forge-gui/res/quest/precons/Unflinching[!!-~]Assault.dck -text
 forge-gui/res/quest/precons/Unnatural[!!-~]Schemes.dck -text
 forge-gui/res/quest/precons/Unstable[!!-~]Terrain.dck -text
 forge-gui/res/quest/precons/Vampire[!!-~]Onslaught.dck -text
+forge-gui/res/quest/precons/Vicious[!!-~]Cycle.dck -text
 forge-gui/res/quest/precons/Voracious[!!-~]Rage.dck -text
 forge-gui/res/quest/precons/War[!!-~]of[!!-~]Attrition.dck -text
 forge-gui/res/quest/precons/Warrior's[!!-~]Code.dck -text
