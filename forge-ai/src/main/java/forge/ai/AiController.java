@@ -999,12 +999,17 @@ public class AiController {
 
         // Abilities without api may also use this routine, However they should provide a unique mode value
         if (api == null) {
-            if (mode != null) switch (mode) {
-                // case BraidOfFire: return true;
-                // case Ripple: return true;
+            if (sa instanceof SpellPermanent) {
+                Card card = sa.getHostCard();
+                if (card.isCreature()) {
+                    api = ApiType.PermanentCreature;
+                } else {
+                    api = ApiType.PermanentNoncreature;
+                }
+            } else {
+                String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).", mode);
+                throw new IllegalArgumentException(exMsg);
             }
-            String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).", mode);
-            throw new IllegalArgumentException(exMsg);
         }
         return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
     }
