@@ -88,9 +88,14 @@ public abstract class CountersAi {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card chooseBoonTarget(final CardCollectionView list, final String type) {
-        Card choice;
+        Card choice = null;
         if (type.equals("P1P1")) {
             choice = ComputerUtilCard.getBestCreatureAI(list);
+
+            if (choice == null) {
+                // We'd only get here if list isn't empty, maybe we're trying to animate a land?
+                choice = ComputerUtilCard.getBestLandToAnimate(list);
+            }
         } else if (type.equals("DIVINITY")) {
             final CardCollection boon = CardLists.filter(list, new Predicate<Card>() {
                 @Override

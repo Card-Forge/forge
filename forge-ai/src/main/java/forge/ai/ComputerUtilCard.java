@@ -716,6 +716,25 @@ public class ComputerUtilCard {
         return worstLand;
     } // end getWorstLand
 
+    public static Card getBestLandToAnimate(final Iterable<Card> lands) {
+        Card land = null;
+        int maxScore = 0;
+        // first, check for tapped, basic lands
+        for (Card tmp : lands) {
+            // TODO Improve this by choosing basic lands that I have plenty of mana in
+            int score = tmp.isTapped() ? 0 : 2;
+            score += tmp.isBasicLand() ? 2 : 0;
+            score -= tmp.isCreature() ? 4 : 0;
+            score -= 5 * tmp.getEnchantedBy(false).size();
+
+            if (score >= maxScore) {
+                land = tmp;
+                maxScore = score;
+            }
+        }
+        return land;
+    } // end getBestLandToAnimate
+
     public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
         @Override
         public boolean apply(Deck d) {

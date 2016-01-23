@@ -482,6 +482,9 @@ public class CountersPutAi extends SpellAbilityAi {
                 if (isCurse) {
                     if (preferred) {
                         choice = CountersAi.chooseCursedTarget(list, type, amount);
+                        if (choice == null && mandatory) {
+                            choice = Aggregates.random(list);
+                        }
                     } else {
                         if (type.equals("M1M1")) {
                             choice = ComputerUtilCard.getWorstCreatureAI(list);
@@ -493,6 +496,9 @@ public class CountersPutAi extends SpellAbilityAi {
                     if (preferred) {
                         list = ComputerUtil.getSafeTargets(ai, sa, list);
                         choice = CountersAi.chooseBoonTarget(list, type);
+                        if (choice == null && mandatory) {
+                            choice = Aggregates.random(list);
+                        }
                     } else {
                         if (type.equals("P1P1")) {
                             choice = ComputerUtilCard.getWorstCreatureAI(list);
@@ -508,6 +514,9 @@ public class CountersPutAi extends SpellAbilityAi {
                 if (choice != null) {
                     sa.getTargets().add(choice);
                     list.remove(choice);
+                } else {
+                    // Didn't want to choose anything?
+                    list.clear();
                 }
 
             }
