@@ -25,9 +25,14 @@ public class ImageFetcher {
     private static final ExecutorService threadPool = Executors.newCachedThreadPool();
     private static HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private static HashMap<String, String> tokenImages;
+    // Temporarily disabling downloader until a defaulted OFF checkbox is added to preferences
+    private static boolean FETCH = false;
 
     public static void fetchImage(final CardView card, final String imageKey, final Callback callback) {
         FThreads.assertExecutedByEdt(true);
+
+        if (!FETCH)
+            return;
 
         // Fake card (like the ante prompt) trying to be "fetched"
         if (imageKey.length() < 2)
