@@ -198,7 +198,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
 
         pnlPrefs.add(cbImageFetcher, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enables live fetching for missing card images from an online resource."), regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enables live fetching of missing card images from an online resource."), regularConstraints);
 
         pnlPrefs.add(cbDisplayFoil, regularConstraints);
         pnlPrefs.add(new NoteLabel("Displays foil cards with the visual foil overlay effect."), regularConstraints);
