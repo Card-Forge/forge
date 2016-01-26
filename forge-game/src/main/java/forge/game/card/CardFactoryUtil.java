@@ -1463,7 +1463,7 @@ public class CardFactoryUtil {
             final String[] workingCopy = l[0].split("_");
             final String validFilter = workingCopy[1];
 
-            CardCollection res;
+            List<Card> res = new ArrayList<>();
             if (workingCopy[0].contains("This")) {
                 res = CardUtil.getThisTurnCast(validFilter, c);
             }

@@ -24,6 +24,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -189,6 +190,11 @@ public class CardLists {
     public static CardCollection getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
         return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));
     }
+
+    public static List<Card> getValidCardsAsList(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
+        return CardLists.filterAsList(cardList, CardPredicates.restriction(restrictions, sourceController, source));
+    }
+
     public static int getValidCardCount(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
         return CardLists.count(cardList, CardPredicates.restriction(restrictions, sourceController, source));
     }
@@ -196,6 +202,11 @@ public class CardLists {
     public static CardCollection getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
         return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
     }
+
+    public static List<Card> getValidCardsAsList(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
+        return CardLists.filterAsList(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
+    }
+
     public static int getValidCardCount(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
         return CardLists.count(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
     }
@@ -252,6 +263,25 @@ public class CardLists {
 
     public static CardCollection filter(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
         return new CardCollection(Iterables.filter(Iterables.filter(cardList, f1), f2));
+    }
+
+    /**
+     * Create a new list of cards by applying a filter to this one.
+     * (this version of filter returns an ArrayList which may contain duplicate elements, used
+     * by methods that count spells cast this turn/last turn through their card object representations)
+     * 
+     * @param filt
+     *            determines which cards are present in the resulting list
+     * 
+     * @return an ArrayList subset of this CardCollection whose items meet the filtering
+     *         criteria; may be empty, but never null.
+     */
+    public static List<Card> filterAsList(Iterable<Card> cardList, Predicate<Card> filt) {
+        return Lists.newArrayList(Iterables.filter(cardList, filt));
+    }
+
+    public static List<Card> filterAsList(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
+        return Lists.newArrayList((Iterables.filter(Iterables.filter(cardList, f1), f2)));
     }
 
     public static int count(Iterable<Card> cardList, Predicate<Card> filt) {

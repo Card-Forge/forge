@@ -221,22 +221,22 @@ public final class CardUtil {
         return res;
     }
 
-    public static CardCollection getThisTurnCast(final String valid, final Card src) {
-        CardCollection res = new CardCollection();
+    public static List<Card> getThisTurnCast(final String valid, final Card src) {
+        List<Card> res = new ArrayList<Card>();
         final Game game = src.getGame();
         res.addAll(game.getStack().getSpellsCastThisTurn());
 
-        res = CardLists.getValidCards(res, valid, src.getController(), src);
+        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
 
         return res;
     }
 
-    public static CardCollection getLastTurnCast(final String valid, final Card src) {
-        CardCollection res = new CardCollection();
+    public static List<Card> getLastTurnCast(final String valid, final Card src) {
+        List<Card> res = new ArrayList<Card>();
         final Game game = src.getGame();
         res.addAll(game.getStack().getSpellsCastLastTurn());
 
-        res = CardLists.getValidCards(res, valid, src.getController(), src);
+        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
 
         return res;
     }
