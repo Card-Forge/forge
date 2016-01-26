@@ -17,7 +17,9 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.game.card.CardView;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 import forge.util.ImageUtil;
 
@@ -25,13 +27,12 @@ public class ImageFetcher {
     private static final ExecutorService threadPool = Executors.newCachedThreadPool();
     private static HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private static HashMap<String, String> tokenImages;
-    // Temporarily disabling downloader until a defaulted OFF checkbox is added to preferences
-    private static boolean FETCH = false;
+    private static boolean FETCH = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
 
     public static void fetchImage(final CardView card, final String imageKey, final Callback callback) {
         FThreads.assertExecutedByEdt(true);
 
-        if (!FETCH)
+        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER))
             return;
 
         // Fake card (like the ante prompt) trying to be "fetched"

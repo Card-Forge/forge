@@ -64,6 +64,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox("Workshop Syntax Checker");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
+    private final JCheckBox cbImageFetcher = new OptionsCheckBox("Automatically Download Missing Card Art");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones Use Original Card Art");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbLargeCardViewers = new OptionsCheckBox("Use Large Card Viewers");
@@ -195,6 +196,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
+
+        pnlPrefs.add(cbImageFetcher, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enables live fetching for missing card images from an online resource."), regularConstraints);
 
         pnlPrefs.add(cbDisplayFoil, regularConstraints);
         pnlPrefs.add(new NoteLabel("Displays foil cards with the visual foil overlay effect."), regularConstraints);
@@ -451,6 +455,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableAICheats() {
         return cbEnableAICheats;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbImageFetcher() {
+        return cbImageFetcher;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

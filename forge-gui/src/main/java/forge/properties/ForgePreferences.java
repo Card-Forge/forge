@@ -45,6 +45,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_OVERLAY_CARD_POWER ("true"),
         UI_OVERLAY_CARD_MANA_COST ("true"),
         UI_OVERLAY_CARD_ID ("true"),
+        UI_ENABLE_ONLINE_IMAGE_FETCHER ("false"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
