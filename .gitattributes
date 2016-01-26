@@ -12323,6 +12323,7 @@ forge-gui/res/cardsfolder/r/rugged_prairie.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ruham_djinn.txt -text
 forge-gui/res/cardsfolder/r/ruhan_of_the_fomori.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ruin_ghost.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/ruin_in_their_wake.txt -text
 forge-gui/res/cardsfolder/r/ruin_processor.txt -text
 forge-gui/res/cardsfolder/r/ruination.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ruination_guide.txt -text
