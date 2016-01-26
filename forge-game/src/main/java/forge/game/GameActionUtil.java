@@ -519,13 +519,40 @@ public final class GameActionUtil {
                 && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Tower")));
     }
 
-    public static String generatedMana(final SpellAbility sa) {
+    public static int amountOfManaGenerated(final SpellAbility sa, boolean multiply) {
         // Calculate generated mana here for stack description and resolving
 
         int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
+        AbilityManaPart abMana = sa.getManaPart();
 
+        if (sa.hasParam("Bonus")) {
+            // For mana abilities that get a bonus
+            // Bonus currently MULTIPLIES the base amount. Base Amounts should
+            // ALWAYS be Base
+            int bonus = 0;
+            if (sa.getParam("Bonus").equals("UrzaLands")) {
+                if (hasUrzaLands(sa.getActivatingPlayer())) {
+                    bonus = Integer.parseInt(sa.getParam("BonusProduced"));
+                }
+            }
+
+            amount += bonus;
+        }
+
+        if (!multiply || abMana.isAnyMana() || abMana.isComboMana() || abMana.isSpecialMana()) {
+            return amount;
+        } else {
+            // For cards that produce like {C}{R} vs cards that produce {R}{R}.
+            return abMana.mana().split(" ").length * amount;
+        }
+    }
+
+
+    public static String generatedMana(final SpellAbility sa) {
+        int amount = amountOfManaGenerated(sa, false);
         AbilityManaPart abMana = sa.getManaPart();
         String baseMana;
+
         if (abMana.isComboMana()) {
             baseMana = abMana.getExpressChoice();
             if (baseMana.isEmpty()) {
@@ -542,20 +569,6 @@ public final class GameActionUtil {
             baseMana = abMana.getExpressChoice();
         } else {
             baseMana = abMana.mana();
-        }
-
-        if (sa.hasParam("Bonus")) {
-            // For mana abilities that get a bonus
-            // Bonus currently MULTIPLIES the base amount. Base Amounts should
-            // ALWAYS be Base
-            int bonus = 0;
-            if (sa.getParam("Bonus").equals("UrzaLands")) {
-                if (hasUrzaLands(sa.getActivatingPlayer())) {
-                    bonus = Integer.parseInt(sa.getParam("BonusProduced"));
-                }
-            }
-
-            amount += bonus;
         }
 
         if (sa.getSubAbility() != null) {

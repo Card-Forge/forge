@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import forge.game.GameActionUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.FThreads;
@@ -200,6 +201,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         boolean guessAbilityWithRequiredColors = true;
+        int amountOfMana = -1;
         for (SpellAbility ma : card.getManaAbilities()) {
             ma.setActivatingPlayer(player);
 
@@ -208,6 +210,16 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             if (!abilityProducesManaColor(ma, m, colorCanUse))              { continue; }
             if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())    { continue; }
             if (!m.meetsManaRestrictions(saPaidFor))                        { continue; }
+
+            // If Mana Abilities produce differing amounts of mana, let the player choose
+            int maAmount = GameActionUtil.amountOfManaGenerated(ma, true);
+            if (amountOfMana == -1) {
+                amountOfMana = maAmount;
+            } else {
+                if (amountOfMana != maAmount) {
+                    guessAbilityWithRequiredColors = false;
+                }
+            }
 
             abilities.add(ma);
 
