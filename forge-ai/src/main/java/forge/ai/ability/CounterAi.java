@@ -104,6 +104,14 @@ public class CounterAi extends SpellAbilityAi {
 
         // But really it should be more picky about how it counters things
 
+        if (sa.hasParam("AILogic")) {
+            String logic = sa.getParam("AILogic");
+            if ("Never".equals(logic)) {
+                return false;
+            }
+        }
+
+
 
         return toReturn;
     }
