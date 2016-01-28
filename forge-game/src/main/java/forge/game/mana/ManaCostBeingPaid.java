@@ -413,12 +413,13 @@ public class ManaCostBeingPaid {
 
     private static int getPayPriority(final ManaCostShard bill, final byte paymentColor) {
         if (bill == ManaCostShard.GENERIC) {
-            return 0;
+            return 2;
         }
 
         if (bill.isMonoColor()) {
             if (bill.isOr2Generic()) {
-                return !ColorSet.fromMask(bill.getColorMask() & paymentColor).isColorless() ? 9 : 4;
+                // The generic portion of a 2/Colored mana, should be lower priority than generic mana
+                return !ColorSet.fromMask(bill.getColorMask() & paymentColor).isColorless() ? 9 : 1;
             }
             if (!bill.isPhyrexian()) {
                 return 10;
