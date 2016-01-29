@@ -6885,6 +6885,7 @@ forge-gui/res/cardsfolder/g/grapeshot_catapult.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/grappler_spider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/grappling_hook.txt -text
 forge-gui/res/cardsfolder/g/grasp_of_darkness.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/grasp_of_fate.txt -text
 forge-gui/res/cardsfolder/g/grasp_of_phantoms.txt -text
 forge-gui/res/cardsfolder/g/grasp_of_the_hieromancer.txt -text
 forge-gui/res/cardsfolder/g/grassland_crusader.txt svneol=native#text/plain
