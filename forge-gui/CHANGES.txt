@@ -1,105 +1,60 @@
-Forge Beta: 11-05-2015 ver 1.5.47
+Forge Beta: 01-28-2016 ver 1.5.48
 
 
-15165 cards in total.
+15393 cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-- New Commander 2015 cards -
-We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+- New Oath of the Gatewatch and Commander 2015 cards -
+The latest sets are now available in Forge! Hold tight while we sort out any missing card or product images. There's a few cards that have yet to be implemented; see below for that list.
 
 
-- Quest Draft Tournament Fixes -
-Draft tournaments have gone through a round of bug fixes and improvements. Many bugs have been fixed and extra
-safeguards have been put in place. More sets have been made available to the draft generator to increase variety.
-Previously broken drafts that crashed Forge should also now work, allowing you to continue your tournament.
-
-
-- Keyboard shortcuts for Auto Yield -
-There are two new keyboard shortcuts now that can be used to quickly set up an
-auto-yield for the current ability on stack without having to use the mouse.
-By default the shortcuts are:
-- "Y" enables auto-yield and, if applicable, enables "Always Yes" (if the trigger
-is optional).
-- "N" enables auto-yield and, if applicable, enables "Always No" (if the trigger
-is optional).
-The shortcuts can be changed in the Preferences under Game Settings in the main
-Forge menu.
-
-
-- Network play (BETA) -
-This version of Forge includes a preliminary version of peer-to-peer (P2P)
-network support. If one player hosts, other players can connect to that
-player's machine by filling out the corresponding IP address and port number
-(default 36743), provided the lobby contains one or more open player slots.
-Do not expect network support to work reliably yet, any bug reports or other
-comments are welcome!
+- Live Card Image Fetcher -
+Forge can now automatically download missing card art while you play. This is disabled by default, so head on over to the Preferences section to try it out!
 
 
 ---------
 New cards
 ---------
 
-Desolation
+Cliffside Market
+Okk
+Orcish Conscripts
 
 
--------------------------------
-New Commander 2015 branch cards
--------------------------------
+----------------------------
+Missing Commander 2015 Cards
+----------------------------
 
-Kalemne's Captain
-Kaseto, Orochi Archmage
-Mazirek, Kraul Death Priest
-Scytheclaw
+Dawnbreak Reclaimer
+Ezuri's Predation
+Grasp of Fate
+Mirror Match
+Mizzix's Mastery
+Synthetic Destiny
+
+
+-----------------------------------
+Missing Oath of the Gatewatch Cards
+-----------------------------------
+
+Remorseless Punishment
 
 
 ------------
 Known Issues
 ------------
 
-- Battle for Zendikar -
-Forge now includes many of the new Battle for Zendikar cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- Magic Origins -
-Forge now includes many of the new Magic Origins cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- Dragon Presence cards from DTK -
-Work has started on the Dragon Presence cards. These cards should typically work on their own merits, but a few corner cases dealing with copying/cloning may not work as expected. As these cases are fairly limited, it was decided to add these cards for people to be able to use.
-
-- Dragons of Tarkir -
-Forge now includes many of the new Dragons of Tarkir cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- Fate Reforged cards -
-Forge now includes many of the new Fate Reforged cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- Commander 2014 cards -
-Forge now includes many of the new Commander 2014 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- New Khans of Tarkir cards -
-Forge now includes many of the new Khans of Tarkir cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- Continued Work on Conspiracy -
-Conspiracy is one of the strangest sets that have been released in some time. Currently, we have a few of the "Draft matters" cards scripted, although you'll find that they won't quite be available to you (unless you add them manually into a draft deck). Hopefully we'll get the appropriate functionality in so we can start including them in boosters and allowing you to add Conspiracy type cards straight to your deck the way you do every other variant card. We'll make sure to point out when all of these kinks have worked themselves out.
+- Oath of the Gatewatch and Commander 2015 -
+Forge now includes many new cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 - The Mac OS application version -
 We can now package Forge as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
 
 The Mac OS X app version apparently requires the Mavericks OS and is not compatible with earlier OS X versions. People with earlier OS X versions should use the Windows and Linux version and launch forge on their Mac by double clicking on the included "forge.command" file.
-
-- Magic 2015 cards -
-It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- Conspiracy cards -
-Forge now includes many of the new Conspiracy cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- Commander 2013 cards -
-It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- Born of the Gods cards -
-It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 There is a known issue with Kodama of the Center Tree: its Soulshift X ability used to crash Forge, and until a proper fix can be implemented, a temporary fix was introduced which prevents the crash but makes the Soulshift X ability work incorrectly in certain cases (in particular, it doesn't work correctly with mass removal, and it may have issues when Kodama of the Center Tree is controlled by someone else other than its owner). In the basic cases (such as Kodama of the Center Tree being destroyed in combat or with a direct damage spell) should work correctly. Hopefully one of the developers will be able to implement a better and proper fix for this card soon.
 
@@ -129,15 +84,12 @@ excessum
 Gos
 KrazyTheFox
 Marek14
-Max mtg
-Nekoatl
-Nordos
+Myrd
 Sloth
 Sol
 Swordshine
+tjtillman
 tojammot
-Xitax
-Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
