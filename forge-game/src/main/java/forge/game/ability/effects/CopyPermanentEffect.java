@@ -16,6 +16,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
+import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -209,6 +210,24 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         }
                         game.getCombat().addAttacker(copyInPlay, defender);
                         game.fireEvent(new GameEventCombatChanged());
+                    }
+
+                    if (sa.hasParam("CopyBlocking") && game.getPhaseHandler().inCombat() && copyInPlay.isCreature()) {
+                        final Combat combat = game.getPhaseHandler().getCombat();
+                        final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(hostCard, sa.getParam("CopyBlocking"), sa), null);
+                        if (attacker != null) {
+                            final boolean wasBlocked = combat.isBlocked(attacker);
+                            combat.addBlocker(attacker, copyInPlay);
+                            combat.orderAttackersForDamageAssignment(copyInPlay);
+
+                            // Add it to damage assignment order
+                            if (!wasBlocked) {
+                                combat.setBlocked(attacker, true);
+                                combat.addBlockerToDamageAssignmentOrder(attacker, copyInPlay);
+                            }
+
+                            game.fireEvent(new GameEventCombatChanged());
+                        }
                     }
 
                     if (sa.hasParam("AttachedTo")) {

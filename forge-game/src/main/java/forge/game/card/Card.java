@@ -4952,6 +4952,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (property.equals("attacking"))    return combat.isAttacking(this);
             if (property.equals("attackingLKI")) return combat.isLKIAttacking(this);
             if (property.equals("attackingYou")) return combat.isAttacking(this, sourceController);
+            if (property.equals("attackingYouOrYourPW"))  {
+                Player defender = combat.getDefenderPlayerByAttacker(this);
+                if (!sourceController.equals(defender)) {
+                    return false;
+                }
+            }
         } else if (property.startsWith("notattacking")) {
             return null == combat || !combat.isAttacking(this);
         } else if (property.equals("attackedThisCombat")) {

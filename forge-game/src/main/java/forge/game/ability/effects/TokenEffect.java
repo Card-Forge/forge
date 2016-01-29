@@ -325,10 +325,7 @@ public class TokenEffect extends SpellAbilityEffect {
                             if (!wasBlocked) {
                                 combat.setBlocked(attacker, true);
                                 combat.addBlockerToDamageAssignmentOrder(attacker, c);
-                                game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, new Builder<String, Object>().put("Attacker", attacker).put("Blockers", Collections.singleton(c)).put("NumBlockers", 1).build(), true);
                             }
-                            game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, new Builder<String, Object>().put("Attacker", attacker).put("Blocker", c).build(), true);
-
                             combatChanged = true;
                         }
                     }

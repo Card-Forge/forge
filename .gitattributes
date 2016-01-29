@@ -9701,6 +9701,7 @@ forge-gui/res/cardsfolder/m/mirror_entity_avatar.txt -text
 forge-gui/res/cardsfolder/m/mirror_gallery.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mirror_golem.txt -text
 forge-gui/res/cardsfolder/m/mirror_mad_phantasm.txt -text
+forge-gui/res/cardsfolder/m/mirror_match.txt -text
 forge-gui/res/cardsfolder/m/mirror_mockery.txt -text
 forge-gui/res/cardsfolder/m/mirror_of_fate.txt -text
 forge-gui/res/cardsfolder/m/mirror_sheen.txt -text
