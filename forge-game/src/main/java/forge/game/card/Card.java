@@ -493,7 +493,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             boolean result = setState(preFaceDownState, true);
             if (result) {
-                getGame().getTriggerHandler().registerActiveTrigger(this, false);
                 // Run replacement effects
                 HashMap<String, Object> repParams = new HashMap<>();
                 repParams.put("Event", "TurnFaceUp");
@@ -501,6 +500,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 getGame().getReplacementHandler().run(repParams);
 
                 // Run triggers
+                getGame().getTriggerHandler().registerActiveTrigger(this, false);
                 final Map<String, Object> runParams = new TreeMap<>();
                 runParams.put("Card", this);
                 getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams, false);
