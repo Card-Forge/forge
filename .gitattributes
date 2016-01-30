@@ -14564,6 +14564,7 @@ forge-gui/res/cardsfolder/s/syndicate_enforcer.txt -text
 forge-gui/res/cardsfolder/s/synod_artificer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/synod_centurion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/synod_sanctum.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/synthetic_destiny.txt -text
 forge-gui/res/cardsfolder/s/syphon_flesh.txt -text
 forge-gui/res/cardsfolder/s/syphon_life.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/syphon_mind.txt -text
