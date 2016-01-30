@@ -78,6 +78,10 @@ public class FightEffect extends SpellAbilityEffect {
         if (sa.hasParam("Defined")) {
             List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             // Allow both fighters to come from defined list if first fighter not already found
+            if (sa.hasParam("ExtraDefined")) {
+                defined.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ExtraDefined"), sa));
+            }
+
             if (!defined.isEmpty()) {
                 if (defined.size() > 1 && fighter1 == null) {
                     fighter1 = defined.get(0);

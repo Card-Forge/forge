@@ -5642,6 +5642,7 @@ forge-gui/res/cardsfolder/e/ezuri_claw_of_progress.txt -text
 forge-gui/res/cardsfolder/e/ezuri_renegade_leader.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/ezuris_archers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/ezuris_brigade.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/e/ezuris_predation.txt -text
 forge-gui/res/cardsfolder/f/faadiyah_seer.txt -text
 forge-gui/res/cardsfolder/f/fable_of_wolf_and_owl.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fabled_hero.txt -text
