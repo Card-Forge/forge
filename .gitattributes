@@ -1263,7 +1263,6 @@ forge-gui-mobile/src/forge/itemmanager/filters/CardRarityFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardSearchFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardToughnessFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardTypeFilter.java -text
-forge-gui-mobile/src/forge/itemmanager/filters/ColorFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/ComboBoxFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckColorFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckFolderFilter.java -text

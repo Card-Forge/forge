@@ -19,10 +19,11 @@ import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.SFilterUtil;
+import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.itemmanager.filters.AdvancedSearchFilter;
-import forge.itemmanager.filters.ColorFilter;
 import forge.itemmanager.filters.ComboBoxFilter;
 import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.filters.StatTypeFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
@@ -176,7 +177,7 @@ public class ConquestCommandersScreen extends FScreen {
         }
     }
 
-    private static class CommanderColorFilter extends ColorFilter<ConquestCommander> {
+    private static class CommanderColorFilter extends StatTypeFilter<ConquestCommander> {
         public CommanderColorFilter(ItemManager<? super ConquestCommander> itemManager0) {
             super(itemManager0);
         }
@@ -184,6 +185,17 @@ public class ConquestCommandersScreen extends FScreen {
         @Override
         public ItemFilter<ConquestCommander> createCopy() {
             return new CommanderColorFilter(itemManager);
+        }
+
+        @Override
+        protected void buildWidget(Widget widget) {
+            addToggleButton(widget, StatTypes.WHITE);
+            addToggleButton(widget, StatTypes.BLUE);
+            addToggleButton(widget, StatTypes.BLACK);
+            addToggleButton(widget, StatTypes.RED);
+            addToggleButton(widget, StatTypes.GREEN);
+            addToggleButton(widget, StatTypes.COLORLESS);
+            addToggleButton(widget, StatTypes.MULTICOLOR);
         }
 
         @Override
