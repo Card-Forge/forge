@@ -1,0 +1,7 @@
+Name:Panopticon|Art:Darksteel Citadel|Colors:C
+Name:Taj-Nar|Art:Ancient Den|Colors:W
+Name:Lumengrid|Art:Seat of the Synod|Colors:U
+Name:Ish Sah|Art:Vault of Whispers|Colors:B
+Name:Kuldotha|Art:Great Furnace|Colors:R
+Name:Tel-Jilad|Art:Tree of Tales|Colors:G
+Name:Glimmervoid|Art:Glimmervoid|Colors:WUBRG

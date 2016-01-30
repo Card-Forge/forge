@@ -1,0 +1,6 @@
+Name:The Beginning|Art:Black Lotus|Sets:2ED,3ED,4ED
+Name:Arabian Nights|Art:Library of Alexandria|Sets:ARN
+Name:Antiquities|Art:Mishra's Workshop|Sets:ATQ
+Name:Legends|Art:Karakas|Sets:LEG
+Name:The Dark|Art:City of Shadows|Sets:DRK
+Name:Fallen Empires|Art:Ruins of Trokair|Sets:FEM

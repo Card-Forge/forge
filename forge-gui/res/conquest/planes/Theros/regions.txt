@@ -1,0 +1,5 @@
+Name:Oreskos|Art:Temple of Plenty|Colors:W
+Name:Meletis|Art:Temple of Enlightenment|Colors:U
+Name:Asphodel|Art:Temple of Silence|Colors:B
+Name:Akros|Art:Temple of Malice|Colors:R
+Name:Setessa|Art:Temple of Mystery|Colors:G

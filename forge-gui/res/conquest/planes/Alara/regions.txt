@@ -1,0 +1,6 @@
+Name:Bant|Art:Bant Panorama|Colors:GWU
+Name:Esper|Art:Esper Panorama|Colors:WUB
+Name:Grixis|Art:Grixis Panorama|Colors:UBR
+Name:Jund|Art:Jund Panorama|Colors:BRG
+Name:Naya|Art:Naya Panorama|Colors:RGW
+Name:The Maelstrom|Art:Rupture Spire|Colors:WUBRG

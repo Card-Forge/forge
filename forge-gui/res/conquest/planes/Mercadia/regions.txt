@@ -1,0 +1,5 @@
+Name:Fountain of Cho|Art:Fountain of Cho|Colors:W
+Name:Saprazzan Cove|Art:Saprazzan Cove|Colors:U
+Name:Subterranean Hangar|Art:Subterranean Hangar|Colors:B
+Name:Mercadian Bazaar|Art:Mercadian Bazaar|Colors:R
+Name:Rushwood Grove|Art:Rushwood Grove|Colors:G

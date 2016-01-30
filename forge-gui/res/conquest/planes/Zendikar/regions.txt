@@ -1,0 +1,6 @@
+Name:Kazandu|Art:Kazandu Refuge|Colors:RG
+Name:Graypelt|Art:Graypelt Refuge|Colors:GW
+Name:Sejiri|Art:Sejiri Refuge|Colors:WU
+Name:Jwar Isle|Art:Jwar Isle Refuge|Colors:UB
+Name:Akoum|Art:Akoum Refuge|Colors:BR
+Name:Blind Eternities|Art:Eldrazi Temple|Colors:C

@@ -1,0 +1,8 @@
+Name:Wanderwine Hub|Art:Wanderwine Hub|Colors:WU
+Name:Secluded Glen|Art:Secluded Glen|Colors:UB
+Name:Auntie's Hovel|Art:Auntie's Hovel|Colors:BR
+Name:Rustic Clachan|Art:Rustic Clachan|Colors:GW
+Name:Gilt-Leaf Palace|Art:Gilt-Leaf Palace|Colors:BG
+Name:Ancient Amphitheater|Art:Ancient Amphitheater|Colors:RW
+Name:Murmuring Bosk|Art:Murmuring Bosk|Colors:WBG
+Name:Primal Beyond|Art:Primal Beyond|Colors:WUBRG
