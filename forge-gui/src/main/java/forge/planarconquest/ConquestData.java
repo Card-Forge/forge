@@ -144,7 +144,7 @@ public final class ConquestData {
     }
 
     private ConquestPlaneData getOrCreatePlaneData(ConquestPlane plane) {
-        ConquestPlaneData planeData = planeDataMap.get(plane);
+        ConquestPlaneData planeData = planeDataMap.get(plane.getName());
         if (planeData == null) {
             planeData = new ConquestPlaneData(plane);
             planeDataMap.put(plane.getName(), planeData);
