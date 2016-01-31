@@ -40,7 +40,7 @@ import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
 public class ConquestMultiverseScreen extends FScreen {
-    private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.75f);
+    private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.6f);
     private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.1f);
 
     private final PlaneGrid planeGrid;
