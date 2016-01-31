@@ -1,0 +1,6 @@
+Name:Boggart Shamans|Deck:Boggart-BR-LOR-Shaman.dck|Variant:None|Avatar:Mad Auntie|Desc:Boggart deck featuring shamans.
+Name:Boggart Rogue Prowl|Deck:Boggart-LOR-RogueProwl.dck|Variant:None|Avatar:Squeaking Pie Sneak|Desc:Boggart deck featuring roques with prowl.
+Name:Boggart RDW|Deck:Boggart-RDW.dck|Variant:None|Avatar:Tattermunge Maniac|Desc:Red deck wins style deck featuring Boggarts.
+Name:Boggartish Deus|Deck:Boggart-RG-Boggartish Deus.dck|Variant:None|Avatar:Deus of Calamity|Desc:Boggart deck built around Deus of Calamity.
+Name:Shadowmoor Boggarts|Deck:Boggart-RG-SHM.dck|Variant:None|Avatar:Boggart Ram-Gang|Desc:Boggart deck featuring Shadowmoor cards.
+Name:Name6|Deck6:Deck.dck|Variant:Commander|Avatar:Avatar6|Desc:

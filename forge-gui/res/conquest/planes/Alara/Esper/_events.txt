@@ -1,0 +1,9 @@
+Name:Esper Artifacts|Deck:Esper Artifacts.dck|Variant:None|Avatar:Master Transmuter|Desc:
+Name:Esper Filler|Deck:Esper Filler.dck|Variant:None|Avatar:Esperzoa|Desc:
+Name:Esper Rares|Deck:Esper Rares.dck|Variant:None|Avatar:Sharuum the Hegemon|Desc:
+Name:Esper Sphinxes|Deck:Esper Sphinxes.dck|Variant:None|Avatar:Sphinx of the Steel Wind|Desc:
+Name:Esper Top Cards|Deck:Esper Top Cards.dck|Variant:None|Avatar:Meddling Mage|Desc:
+Name:Sen Triplets|Deck:Sen Triplets.dck|Variant:Commander|Avatar:Sen Triplets|Desc:
+Name:Sharuum the Hegemon|Deck:Sharuum the Hegemon.dck|Variant:Commander|Avatar:Sharuum the Hegemon|Desc:
+Name:Enigma Sphinx Vanguard|Deck:Enigma Sphinx Vanguard.dck|Variant:Vanguard|Avatar:Enigma Sphinx|Desc:
+Name:Tezzeret|Deck:Tezzeret.dck|Variant:Planeswalker|Avatar:Tezzeret the Seeker|Desc:

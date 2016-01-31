@@ -1,0 +1,9 @@
+Name:Maelstrom's Gold|Deck:Maelstrom's Gold.dck|Variant:None|Avatar:Knight of New Alara|Desc:
+Name:Maelstrom Five Color|Deck:Maelstrom Five Color.dck|Variant:None|Avatar:Maelstrom Archangel|Desc:
+Name:Heralds and Lords|Deck:Heralds and Lords.dck|Variant:None|Avatar:Prince of Thralls|Desc:
+Name:Five Color Walkers|Deck:Five Color Walkers.dck|Variant:None|Avatar:Nicol Bolas, Planeswalker|Desc:
+Name:Five Color Cascade|Deck:Five Color Cascade.dck|Variant:None|Avatar:Bloodbraid Elf|Desc:
+Name:Domains of Alara|Deck:Domains of Alara.dck|Variant:None|Avatar:Knight of the Reliquary|Desc:
+Name:Maelstrom Wanderer|Deck:Maelstrom Wanderer.dck|Variant:Commander|Avatar:Maelstrom Wanderer|Desc:
+Name:Child of Alara|Deck:Child of Alara.dck|Variant:Commander|Avatar:Child of Alara|Desc:
+Name:Birds of Paradise Vanguard|Deck:Birds of Paradise Vanguard.dck|Variant:Vanguard|Avatar:Birds of Paradise|Desc:
