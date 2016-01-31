@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.GuiBase;
@@ -15,8 +14,8 @@ import forge.deck.generation.DeckGenPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionReader;
 import forge.util.collect.FCollectionView;
-import forge.util.storage.StorageReaderFile;
 
 public class ConquestRegion {
     private final ConquestPlane plane;
@@ -75,23 +74,16 @@ public class ConquestRegion {
         return plane.getName() + " - " + name;
     }
 
-    public static final Function<ConquestRegion, String> FN_GET_NAME = new Function<ConquestRegion, String>() {
-        @Override
-        public String apply(ConquestRegion region) {
-            return region.getName();
-        }
-    };
-
-    public static class Reader extends StorageReaderFile<ConquestRegion> {
+    public static class Reader extends FCollectionReader<ConquestRegion> {
         private final ConquestPlane plane;
 
         public Reader(ConquestPlane plane0) {
-            super(plane0.getDirectory() + "regions.txt", ConquestRegion.FN_GET_NAME);
+            super(plane0.getDirectory() + "regions.txt");
             plane = plane0;
         }
 
         @Override
-        protected ConquestRegion read(String line, int index) {
+        protected ConquestRegion read(String line) {
             String name = null;
             String artCardName = null;
             ColorSet colorSet = ColorSet.ALL_COLORS;

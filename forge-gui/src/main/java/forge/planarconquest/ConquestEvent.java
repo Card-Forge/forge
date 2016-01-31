@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.EnumSet;
 import java.util.Set;
 
-import com.google.common.base.Function;
-
 import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
@@ -18,7 +16,7 @@ import forge.util.Aggregates;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
-import forge.util.storage.StorageReaderFile;
+import forge.util.collect.FCollectionReader;
 
 public class ConquestEvent {
     private final ConquestRegion region;
@@ -89,23 +87,16 @@ public class ConquestEvent {
         return new ConquestEventBattle(location0, tier0);
     }
 
-    public static final Function<ConquestEvent, String> FN_GET_NAME = new Function<ConquestEvent, String>() {
-        @Override
-        public String apply(ConquestEvent event) {
-            return event.getName();
-        }
-    };
-
-    public static class Reader extends StorageReaderFile<ConquestEvent> {
+    public static class Reader extends FCollectionReader<ConquestEvent> {
         private final ConquestRegion region;
 
         public Reader(ConquestRegion region0) {
-            super(region0.getPlane().getDirectory() + region0.getName() + ForgeConstants.PATH_SEPARATOR + "_events.txt", ConquestEvent.FN_GET_NAME);
+            super(region0.getPlane().getDirectory() + region0.getName() + ForgeConstants.PATH_SEPARATOR + "_events.txt");
             region = region0;
         }
 
         @Override
-        protected ConquestEvent read(String line, int i) {
+        protected ConquestEvent read(String line) {
             String name = null;
             String deck = null;
             Set<GameType> variants = EnumSet.noneOf(GameType.class);

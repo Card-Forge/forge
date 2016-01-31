@@ -93,6 +93,16 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
     }
 
     /**
+     * Create an {@link FCollection} from an {@link FCollectionReader}.
+     *
+     * @param reader
+     *            a reader used to populate collection
+     */
+    public FCollection(final FCollectionReader<T> reader) {
+        reader.readAll(this);
+    }
+
+    /**
      * Check whether an {@link Iterable} contains any iterable, silently
      * returning {@code false} when {@code null} is passed as an argument.
      *

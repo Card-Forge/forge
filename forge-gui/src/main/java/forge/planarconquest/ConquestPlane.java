@@ -36,8 +36,6 @@ import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.storage.IStorage;
-import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderFile;
 
 
@@ -148,7 +146,7 @@ public class ConquestPlane {
         if (regions != null) { return; }
 
         //load regions
-        regions = new FCollection<ConquestRegion>(new StorageBase<ConquestRegion>("Conquest regions", new ConquestRegion.Reader(this)));
+        regions = new FCollection<ConquestRegion>(new ConquestRegion.Reader(this));
 
         //load events
         int eventIndex = 0;
@@ -156,7 +154,7 @@ public class ConquestPlane {
         int regionEndIndex = eventsPerRegion;
         events = new ConquestEvent[regions.size() * eventsPerRegion];
         for (ConquestRegion region : regions) {
-            IStorage<ConquestEvent> regionEvents = new StorageBase<ConquestEvent>(region.getName() + " events", new ConquestEvent.Reader(region));
+            FCollection<ConquestEvent> regionEvents = new FCollection<ConquestEvent>(new ConquestEvent.Reader(region));
             for (ConquestEvent event : regionEvents) {
                 events[eventIndex++] = event;
                 if (eventIndex == regionEndIndex) {
