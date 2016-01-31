@@ -159,6 +159,7 @@ public class ConquestMultiverseScreen extends FScreen {
                 if (shardsReceived > 0) {
                     awardShards(shardsReceived, true);
                 }
+                model.saveData(); //save data once all cards and shard awarded
                 return;
             }
 
@@ -190,11 +191,12 @@ public class ConquestMultiverseScreen extends FScreen {
 
     private void awardShards(int shards, boolean fromDuplicateCards) {
         String message = "Received AEther Shards";
-        if (fromDuplicateCards) {
+        if (fromDuplicateCards) { //if from duplicate cards, shards already added to model
             message += " for Duplicate Cards";
         }
-        else { //if from duplicate cards, shards already added to model
+        else {
             model.rewardAEtherShards(shards);
+            model.saveData();
         }
         FOptionPane.showMessageDialog(String.valueOf(shards), FSkinFont.get(32), message, SHARD_IMAGE);
     }
