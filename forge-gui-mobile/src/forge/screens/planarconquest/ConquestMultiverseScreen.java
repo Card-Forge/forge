@@ -80,7 +80,7 @@ public class ConquestMultiverseScreen extends FScreen {
         setHeaderCaption(model.getName() + "\nPlane - " + model.getCurrentPlane().getName());
 
         planeGrid.revalidate();
-        planeGrid.scrollToBottom(); //start at bottom and move up
+        planeGrid.scrollPlaneswalkerIntoView();
     }
 
     private void launchEvent() {
@@ -442,6 +442,15 @@ public class ConquestMultiverseScreen extends FScreen {
             return new Vector2(x, y);
         }
 
+        private void scrollPlaneswalkerIntoView() {
+            float w = getWidth();
+            float regionHeight = w / CardRenderer.CARD_ART_RATIO;
+            float rowHeight = regionHeight / ConquestRegion.ROWS_PER_REGION;
+
+            Vector2 pos = activeMoveAnimation == null ? getPosition(model.getCurrentLocation()) : activeMoveAnimation.pos;
+            scrollIntoView(pos.x, pos.y - getScrollTop(), 0, 0, rowHeight / 2);
+        }
+
         private class MoveAnimation extends ForgeAnimation {
             private static final float DURATION_PER_SEGMENT = 0.5f;
 
@@ -462,6 +471,7 @@ public class ConquestMultiverseScreen extends FScreen {
                 if (progress >= duration) {
                     //we've reached our destination, so stop animation
                     pos = getPosition(path.get(path.size() - 1));
+                    scrollPlaneswalkerIntoView();
                     return false;
                 }
 
@@ -470,6 +480,7 @@ public class ConquestMultiverseScreen extends FScreen {
                 Vector2 p1 = getPosition(path.get(currentSegment));
                 Vector2 p2 = getPosition(path.get(currentSegment + 1));
                 pos = new Vector2((1.0f - r) * p1.x + r * p2.x, (1.0f - r) * p1.y + r * p2.y);
+                scrollPlaneswalkerIntoView();
                 return true;
             }
 
