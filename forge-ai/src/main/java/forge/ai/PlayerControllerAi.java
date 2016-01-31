@@ -642,7 +642,7 @@ public class PlayerControllerAi extends PlayerController {
                     threats = combat.getAttackersBlockedBy(toSave);
                 }
             }
-            if (threats != null) {
+            if (threats != null && !threats.isEmpty()) {
                 ComputerUtilCard.sortByEvaluateCreature(threats);
                 String s = ProtectAi.toProtectFrom(threats.get(0), sa);
                 if (s != null) {
