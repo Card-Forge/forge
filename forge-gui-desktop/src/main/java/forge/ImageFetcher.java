@@ -27,7 +27,6 @@ public class ImageFetcher {
     private static final ExecutorService threadPool = Executors.newCachedThreadPool();
     private static HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private static HashMap<String, String> tokenImages;
-    private static boolean FETCH = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
 
     public static void fetchImage(final CardView card, final String imageKey, final Callback callback) {
         FThreads.assertExecutedByEdt(true);

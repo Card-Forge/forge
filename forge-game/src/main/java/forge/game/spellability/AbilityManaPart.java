@@ -133,11 +133,11 @@ public class AbilityManaPart implements java.io.Serializable {
         if (player.getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return;
         }
-        ColorSet CID = null;
+        /*ColorSet CID = null;
 
         if (player.getGame().getRules().hasCommander()) {
             CID = player.getCommander().getRules().getColorIdentity();
-        }
+        }*/
         //clear lastProduced
         this.lastManaProduced.clear();
 

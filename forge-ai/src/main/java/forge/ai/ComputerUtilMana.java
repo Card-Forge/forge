@@ -21,7 +21,6 @@ import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.mana.Mana;
@@ -105,7 +104,7 @@ public class ComputerUtilMana {
             for (SpellAbility ability : card.getSpellAbilities()) {
                 ability.setActivatingPlayer(card.getController());
                 if (ability.isManaAbility()) {
-                    score += ability.calculateScoreForManaAbility(ability);
+                    score += ability.calculateScoreForManaAbility();
                 }
                 else if (!ability.isTrigger() && ability.isPossible()) {
                     score += 13; //add 13 for any non-mana activated abilities

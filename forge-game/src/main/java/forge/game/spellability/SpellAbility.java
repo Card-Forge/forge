@@ -1313,22 +1313,21 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     public int compareTo(SpellAbility ab) {
         if (this.isManaAbility() && ab.isManaAbility()){
-            return calculateScoreForManaAbility(this) - calculateScoreForManaAbility(ab);
+            return this.calculateScoreForManaAbility() - ab.calculateScoreForManaAbility();
         }
-
         return 0;
     }
 
-    public static int calculateScoreForManaAbility(SpellAbility ability) {
+    public int calculateScoreForManaAbility() {
         int score = 0;
-        if (ability.getManaPart() == null) {
+        if (manaPart == null) {
             score++; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
         }
         else {
-            String mana = ability.getManaPart().mana();
+            String mana = manaPart.mana();
             if (!mana.equals("Any")) {
                 score += mana.length();
-                if (!ability.getManaPart().canProduce("C")) {
+                if (!manaPart.canProduce("C")) {
                     // Producing colorless should produce a slightly lower score
                     score += 1;
                 }
@@ -1339,7 +1338,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
 
         //increase score if any part of ability's cost is not reusable or renewable (such as paying life)
-        for (CostPart costPart : ability.getPayCosts().getCostParts()) {
+        for (CostPart costPart : payCosts.getCostParts()) {
             if (!costPart.isReusable()) {
                 score += 3;
             }
@@ -1350,10 +1349,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             score++;
         }
 
-        if (!ability.isUndoable()) {
+        if (!this.isUndoable()) {
             score += 50; //only use non-undoable mana abilities as a last resort
         }
-        if (ability.getSubAbility() != null) {
+        if (subAbility != null) {
             // If the primary ability has a sub, it's probably "more expensive"
             score += 2;
         }

@@ -19,7 +19,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Function;
 
 import forge.assets.FSkinProp;
-import forge.card.MagicColor;
 import forge.game.player.PlayerView;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;

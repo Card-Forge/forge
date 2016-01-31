@@ -993,7 +993,6 @@ public class AiController {
         return discardList;
     }
 
-    @SuppressWarnings("incomplete-switch")
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         ApiType api = sa.getApi();
 

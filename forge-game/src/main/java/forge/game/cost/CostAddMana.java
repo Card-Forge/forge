@@ -23,8 +23,6 @@ import java.util.List;
 import forge.card.mana.ManaAtom;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
@@ -72,10 +70,10 @@ public class CostAddMana extends CostPart {
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility sa) {
         Card source = sa.getHostCard();
         
-        ColorSet cid = null;
+        /*ColorSet cid = null;
         if (ai.getGame().getRules().hasCommander()) {
             cid = ai.getCommander().getRules().getColorIdentity();
-        }
+        }*/
         List<Mana> manaProduced = new ArrayList<Mana>();
         final String type = this.getType();
         for (int n = 0; n < decision.c; n++) {

@@ -1,6 +1,5 @@
 package forge.game;
 
-import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
