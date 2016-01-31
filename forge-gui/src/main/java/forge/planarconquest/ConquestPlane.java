@@ -27,7 +27,6 @@ import com.google.common.base.Function;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
-import forge.card.CardRules;
 import forge.deck.generation.DeckGenPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -136,15 +135,10 @@ public class ConquestPlane {
     private void addCard(PaperCard pc) {
         if (pc == null) { return; }
 
-        CardRules rules = pc.getRules();
-        if (rules.getType().isBasicLand()) { return; } //ignore basic lands
-
         cardPool.add(pc);
-
-        if (rules.canBeCommander()) {
+        if (pc.getRules().canBeCommander()) {
             commanders.add(pc);
         }
-
         ConquestRegion.addCard(pc, regions);
     }
 
