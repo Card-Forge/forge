@@ -17,7 +17,7 @@ public class ConquestEventScreen extends LaunchScreen {
     private final ConquestLocation location;
     private final Callback<ConquestBattle> callback;
     private ConquestBattle battle;
-    private int tier = 1; //TODO: Support picking tier
+    private int tier = 0; //TODO: Support picking tier
 
     public ConquestEventScreen(ConquestEvent event0, ConquestLocation location0, Callback<ConquestBattle> callback0) {
         super(event0.getName());
