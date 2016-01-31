@@ -89,7 +89,7 @@ public enum DeckFormat {
             cmcLevels.add(ImmutablePair.of(new FilterCMC(3, 3), 3));
         }
     },
-    PlanarConquest ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 1),
+    PlanarConquest ( Range.between(40, Integer.MAX_VALUE), Range.is(0), 1),
     Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase     ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Archenemy      ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4);

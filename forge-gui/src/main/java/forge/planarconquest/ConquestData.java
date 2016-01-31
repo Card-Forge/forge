@@ -66,7 +66,7 @@ public final class ConquestData {
         directory = new File(ForgeConstants.CONQUEST_SAVE_DIR, name);
         xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
         aetherShards = FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_START_SHARDS);
-        currentLocation = new ConquestLocation(startingPlane0, 0, 0, ConquestRegion.START_COL);
+        currentLocation = new ConquestLocation(startingPlane0, 0, 0, 0);
         setPlaneswalker(startingPlaneswalker0);
         unlockCard(startingPlaneswalker0);
 
@@ -190,13 +190,13 @@ public final class ConquestData {
         return commanders;
     }
 
-    public void addWin(ConquestEvent event) {
+    public void addWin(ConquestBattle event) {
         getOrCreatePlaneData(event.getLocation().getPlane()).addWin(event);
         getSelectedCommander().getRecord().addWin();
         event.setConquered(true);
     }
 
-    public void addLoss(ConquestEvent event) {
+    public void addLoss(ConquestBattle event) {
         getOrCreatePlaneData(event.getLocation().getPlane()).addLoss(event);
         getSelectedCommander().getRecord().addLoss();
     }
@@ -297,8 +297,8 @@ public final class ConquestData {
 
         private PathFinder() {
             ConquestPlane plane = getCurrentPlane();
-            int xMax = ConquestRegion.COLS_PER_REGION;
-            int yMax = plane.getRegions().size() * ConquestRegion.ROWS_PER_REGION;
+            int xMax = plane.getCols();
+            int yMax = plane.getRegions().size() * plane.getRowsPerRegion();
             map = new Node[xMax][yMax];
             for (int x = 0; x < xMax; x++) {
                 for (int y = 0; y < yMax; y++) {
@@ -378,7 +378,7 @@ public final class ConquestData {
 
         private Node getNode(ConquestLocation loc) {
             int x = loc.getCol();
-            int y = loc.getRegionIndex() * ConquestRegion.ROWS_PER_REGION + loc.getRow();
+            int y = loc.getRegionIndex() * loc.getPlane().getRowsPerRegion() + loc.getRow();
             return map[x][y];
         }
 
@@ -394,9 +394,9 @@ public final class ConquestData {
                 x = x0;
                 y = y0;
 
-                int regionIndex = y / ConquestRegion.ROWS_PER_REGION;
+                int regionIndex = y / plane.getRowsPerRegion();
                 int col = x;
-                int row = y % ConquestRegion.ROWS_PER_REGION;
+                int row = y % plane.getRowsPerRegion();
                 loc = new ConquestLocation(plane, regionIndex, row, col);
             }
 

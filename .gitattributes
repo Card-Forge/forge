@@ -18718,6 +18718,7 @@ forge-gui/src/main/java/forge/net/server/RemoteClient.java -text
 forge-gui/src/main/java/forge/net/server/ServerGameLobby.java -text
 forge-gui/src/main/java/forge/net/server/package-info.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestAwardPool.java -text
+forge-gui/src/main/java/forge/planarconquest/ConquestBattle.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestChaosBattle.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestCommander.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestController.java -text

@@ -34,7 +34,7 @@ import java.util.TreeMap;
  *            the generic type
  */
 public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
-    private final File file;
+    protected final File file;
 
     /**
      * Instantiates a new storage reader file.

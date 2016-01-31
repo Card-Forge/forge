@@ -14,13 +14,11 @@ import forge.card.ColorSet;
 import forge.deck.generation.DeckGenPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.util.storage.StorageReaderFile;
 
 public class ConquestRegion {
-    public static final int ROWS_PER_REGION = 3;
-    public static final int COLS_PER_REGION = 3;
-    public static final int START_COL = (COLS_PER_REGION - 1) / 2;
-
     private final ConquestPlane plane;
     private final String name, artCardName;
     private final ColorSet colorSet;
@@ -58,6 +56,19 @@ public class ConquestRegion {
 
     public DeckGenPool getCardPool() {
         return cardPool;
+    }
+
+    public FCollectionView<PaperCard> getCommanders() {
+        FCollection<PaperCard> commanders = new FCollection<PaperCard>();
+        for (PaperCard commander : plane.getCommanders()) {
+            if (cardPool.contains(commander)) {
+                commanders.add(commander);
+            }
+        }
+        if (commanders.isEmpty()) {
+            return plane.getCommanders(); //return all commanders for plane if none found in this region
+        }
+        return commanders;
     }
 
     public String toString() {

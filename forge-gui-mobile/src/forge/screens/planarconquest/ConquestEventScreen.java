@@ -2,7 +2,9 @@ package forge.screens.planarconquest;
 
 import forge.Forge;
 import forge.model.FModel;
+import forge.planarconquest.ConquestBattle;
 import forge.planarconquest.ConquestEvent;
+import forge.planarconquest.ConquestLocation;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FOptionPane;
@@ -12,23 +14,26 @@ public class ConquestEventScreen extends LaunchScreen {
     protected static final float PADDING = FOptionPane.PADDING;
 
     private final ConquestEvent event;
-    private final Callback<ConquestEvent> callback;
-    private boolean launchedEvent;
+    private final ConquestLocation location;
+    private final Callback<ConquestBattle> callback;
+    private ConquestBattle battle;
+    private int tier = 1; //TODO: Support picking tier
 
-    public ConquestEventScreen(ConquestEvent event0, Callback<ConquestEvent> callback0) {
-        super(event0.getEventName());
+    public ConquestEventScreen(ConquestEvent event0, ConquestLocation location0, Callback<ConquestBattle> callback0) {
+        super(event0.getName());
         event = event0;
+        location = location0;
         callback = callback0;
     }
 
     @Override
     public void onActivate() {
-        if (launchedEvent) {
-            //when returning to this screen from launched event, close it immediately and call callback
-            Forge.back();
-            callback.run(event);
-            launchedEvent = false;
-        }
+        if (battle == null) { return; }
+
+        //when returning to this screen from launched event, close it immediately and call callback
+        Forge.back();
+        callback.run(battle);
+        battle = null;
     }
 
     @Override
@@ -38,13 +43,13 @@ public class ConquestEventScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
-        if (launchedEvent) { return; } //avoid launching event more than once
-        launchedEvent = true;
+        if (battle != null) { return; } //avoid starting battle more than once
+        battle = event.createBattle(location, tier);
 
         LoadingOverlay.show("Starting battle...", new Runnable() {
             @Override
             public void run() {
-                FModel.getConquest().launchEvent(event);
+                FModel.getConquest().startBattle(battle);
             }
         });
     }

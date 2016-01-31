@@ -18,6 +18,7 @@
 package forge.planarconquest;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,12 +29,14 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
 import forge.deck.generation.DeckGenPool;
+import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderFile;
 
@@ -41,15 +44,37 @@ import forge.util.storage.StorageReaderFile;
 public class ConquestPlane {
     private final String name;
     private final String directory;
+    private final String description;
+    private final int rowsPerRegion;
+    private final int cols;
+
     private FCollection<ConquestRegion> regions;
     private DeckGenPool cardPool;
     private FCollection<PaperCard> planeCards;
     private FCollection<PaperCard> commanders;
     private ConquestAwardPool awardPool;
+    private ConquestEvent[] events;
 
-    private ConquestPlane(String name0) {
+    private ConquestPlane(String name0, String description0, int regionSize0) {
         name = name0;
         directory = ForgeConstants.CONQUEST_PLANES_DIR + name + ForgeConstants.PATH_SEPARATOR;
+        description = description0;
+
+        switch (regionSize0) {
+        case 9:
+            rowsPerRegion = 3;
+            cols = 3;
+            break;
+        case 6:
+            rowsPerRegion = 2;
+            cols = 3;
+            break;
+        default:
+            System.out.println(regionSize0 + " is not a valid region size");
+            rowsPerRegion = 3; //fallback to max region size
+            cols = 3;
+            break;
+        }
     }
 
     public String getName() {
@@ -60,14 +85,35 @@ public class ConquestPlane {
         return directory;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public FCollectionView<ConquestRegion> getRegions() {
         ensureRegionsLoaded();
         return regions;
     }
 
+    public ConquestEvent getEvent(ConquestLocation loc) {
+        ensureRegionsLoaded();
+        return events[loc.getEventIndex()];
+    }
+
     public int getEventCount() {
         ensureRegionsLoaded();
-        return regions.size() * ConquestRegion.ROWS_PER_REGION * ConquestRegion.COLS_PER_REGION;
+        return regions.size() * rowsPerRegion * cols;
+    }
+
+    public int getRowsPerRegion() {
+        return rowsPerRegion;
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public int getEventIndex(int regionIndex, int row, int col) {
+        return regionIndex * rowsPerRegion * cols + col * rowsPerRegion + row;
     }
 
     public DeckGenPool getCardPool() {
@@ -101,9 +147,30 @@ public class ConquestPlane {
     private void ensureRegionsLoaded() {
         if (regions != null) { return; }
 
+        //load regions
         regions = new FCollection<ConquestRegion>(new StorageBase<ConquestRegion>("Conquest regions", new ConquestRegion.Reader(this)));
 
-        //must initialize card pool when regions loaded
+        //load events
+        int eventIndex = 0;
+        int eventsPerRegion = rowsPerRegion * cols;
+        int regionEndIndex = eventsPerRegion;
+        events = new ConquestEvent[regions.size() * eventsPerRegion];
+        for (ConquestRegion region : regions) {
+            IStorage<ConquestEvent> regionEvents = new StorageBase<ConquestEvent>(region.getName() + " events", new ConquestEvent.Reader(region));
+            for (ConquestEvent event : regionEvents) {
+                events[eventIndex++] = event;
+                if (eventIndex == regionEndIndex) {
+                    break;
+                }
+            }
+            //if not enough events defined, create random events for remaining
+            while (eventIndex < regionEndIndex) {
+                events[eventIndex++] = new ConquestEvent(region, region.getName() + " - Random " + ((eventIndex % eventsPerRegion) + 1), null, null, EnumSet.noneOf(GameType.class), null);
+            }
+            regionEndIndex += eventsPerRegion;
+        }
+
+        //load card pool
         cardPool = new DeckGenPool();
         commanders = new FCollection<PaperCard>();
 
@@ -167,7 +234,33 @@ public class ConquestPlane {
 
         @Override
         protected ConquestPlane read(String line, int i) {
-            return new ConquestPlane(line);
+            String name = null;
+            int regionSize = 0;
+            String description = null;
+
+            String[] pieces = line.trim().split("\\|");
+            for (String piece : pieces) {
+                String[] kv = piece.split(":", 2);
+                String key = kv[0].trim().toLowerCase();
+                String value = kv[1].trim();
+                switch(key) {
+                case "name":
+                    name = value;
+                    break;
+                case "regionsize":
+                    try {
+                        regionSize = Integer.parseInt(value);
+                    }
+                    catch (Exception ex) {
+                        System.out.println(value + " is not a valid region size");
+                    }
+                    break;
+                case "desc":
+                    description = value;
+                    break;
+                }
+            }
+            return new ConquestPlane(name, description, regionSize);
         }
     }
 

@@ -1,5 +1,5 @@
-Alara
-Innistrad
-Lorwyn-Shadowmoor
-Ravnica
-Theros
+Name:Alara|RegionSize:9|Desc:
+Name:Innistrad|RegionSize:6|Desc:
+Name:Lorwyn-Shadowmoor|RegionSize:6|Desc:
+Name:Ravnica|RegionSize:9|Desc:
+Name:Theros|RegionSize:6|Desc:

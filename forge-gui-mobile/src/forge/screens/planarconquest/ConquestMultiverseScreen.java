@@ -20,10 +20,10 @@ import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
 import forge.planarconquest.ConquestAwardPool;
 import forge.planarconquest.ConquestData;
+import forge.planarconquest.ConquestBattle;
+import forge.planarconquest.ConquestChaosBattle;
 import forge.planarconquest.ConquestEvent.ChaosWheelOutcome;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
-import forge.planarconquest.ConquestChaosBattle;
-import forge.planarconquest.ConquestEvent;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPreferences.CQPref;
@@ -84,15 +84,16 @@ public class ConquestMultiverseScreen extends FScreen {
     }
 
     private void launchEvent() {
-        Forge.openScreen(new ConquestEventScreen(model.getCurrentLocation().createEvent(), new Callback<ConquestEvent>() {
+        ConquestLocation loc = model.getCurrentLocation();
+        Forge.openScreen(new ConquestEventScreen(loc.getEvent(), loc, new Callback<ConquestBattle>() {
             @Override
-            public void run(ConquestEvent event) {
-                if (event.wasConquered()) {
-                    ConquestLocation loc = event.getLocation();
+            public void run(ConquestBattle battle) {
+                if (battle.wasConquered()) {
+                    ConquestLocation loc = battle.getLocation();
                     ConquestEventRecord record = model.getCurrentPlaneData().getEventRecord(loc);
-                    if (record.getWins(event.getTier()) == 1 && record.getHighestConqueredTier() == event.getTier()) {
+                    if (record.getWins(battle.getTier()) == 1 && record.getHighestConqueredTier() == battle.getTier()) {
                         //if first time conquering event at the selected tier, show animation of new badge being positioned on location
-                        planeGrid.animateBadgeIntoPosition(loc, event.getTier());
+                        planeGrid.animateBadgeIntoPosition(loc, battle.getTier());
                     }
                     else {
                         //just spin Chaos Wheel immediately if event tier was previously conquered
@@ -210,7 +211,7 @@ public class ConquestMultiverseScreen extends FScreen {
                     @Override
                     public void run() {
                         chaosBattle = new ConquestChaosBattle();
-                        FModel.getConquest().launchEvent(chaosBattle);
+                        FModel.getConquest().startBattle(chaosBattle);
                     }
                 });
             }
@@ -253,17 +254,18 @@ public class ConquestMultiverseScreen extends FScreen {
 
         @Override
         public void draw(Graphics g) {
+            ConquestPlane plane = model.getCurrentPlane();
+
             float w = getWidth();
             float h = getHeight();
             float regionHeight = w / CardRenderer.CARD_ART_RATIO;
-            int cols = ConquestRegion.COLS_PER_REGION;
-            int rows = ConquestRegion.ROWS_PER_REGION;
+            int cols = plane.getCols();
+            int rows = plane.getRowsPerRegion();
             float colWidth = w / cols;
             float rowHeight = regionHeight / rows;
             float eventIconSize = Math.min(colWidth, rowHeight) / 3;
             float eventIconOffset = Math.round(eventIconSize * 0.1f);
 
-            ConquestPlane plane = model.getCurrentPlane();
             FCollectionView<ConquestRegion> regions = plane.getRegions();
             int regionCount = regions.size();
             ConquestPlaneData planeData = model.getCurrentPlaneData();
@@ -346,7 +348,7 @@ public class ConquestMultiverseScreen extends FScreen {
                             color = FOG_OF_WAR_COLOR;
 
                             //if any bordering grid square has been conquered, instead show unconquered color
-                            if (i == 0 && r == 0 && c == ConquestRegion.START_COL) {
+                            if (i == 0 && r == 0 && c == 0) {
                                 color = UNCONQUERED_COLOR; //show unconquered color for starting square of plane
                             }
                             else {
@@ -407,23 +409,26 @@ public class ConquestMultiverseScreen extends FScreen {
         private ConquestLocation getLocation(float x, float y) {
             y += getScrollTop();
 
+            ConquestPlane plane = model.getCurrentPlane();
+            int rowsPerRegion = plane.getRowsPerRegion();
+            int cols = plane.getCols();
+
             float w = getWidth();
             float h = getScrollHeight();
             float regionHeight = w / CardRenderer.CARD_ART_RATIO;
-            float colWidth = w / ConquestRegion.COLS_PER_REGION;
-            float rowHeight = regionHeight / ConquestRegion.ROWS_PER_REGION;
+            float colWidth = w / cols;
+            float rowHeight = regionHeight / rowsPerRegion;
 
             int rowIndex = (int)((h - y) / rowHeight); //flip axis since locations go bottom to top
-            ConquestPlane plane = model.getCurrentPlane();
-            int regionIndex = rowIndex / ConquestRegion.ROWS_PER_REGION;
-            int row = rowIndex % ConquestRegion.ROWS_PER_REGION;
+            int regionIndex = rowIndex / rowsPerRegion;
+            int row = rowIndex % rowsPerRegion;
 
             int col = (int)(x / colWidth);
             if (col < 0) {
                 col = 0;
             }
-            else if (col > ConquestRegion.COLS_PER_REGION - 1) {
-                col = ConquestRegion.COLS_PER_REGION - 1;
+            else if (col > cols - 1) {
+                col = cols - 1;
             }
 
             return new ConquestLocation(plane, regionIndex, row, col);
@@ -433,8 +438,8 @@ public class ConquestMultiverseScreen extends FScreen {
             float w = getWidth();
             float h = getScrollHeight();
             float regionHeight = w / CardRenderer.CARD_ART_RATIO;
-            float colWidth = w / ConquestRegion.COLS_PER_REGION;
-            float rowHeight = regionHeight / ConquestRegion.ROWS_PER_REGION;
+            float colWidth = w / loc.getPlane().getCols();
+            float rowHeight = regionHeight / loc.getPlane().getRowsPerRegion();
 
             float x = loc.getCol() * colWidth + colWidth / 2;
             float y = h - (loc.getRegionIndex() * regionHeight + loc.getRow() * rowHeight + rowHeight / 2);
@@ -445,7 +450,7 @@ public class ConquestMultiverseScreen extends FScreen {
         private void scrollPlaneswalkerIntoView() {
             float w = getWidth();
             float regionHeight = w / CardRenderer.CARD_ART_RATIO;
-            float rowHeight = regionHeight / ConquestRegion.ROWS_PER_REGION;
+            float rowHeight = regionHeight / model.getCurrentPlane().getRowsPerRegion();
 
             Vector2 pos = activeMoveAnimation == null ? getPosition(model.getCurrentLocation()) : activeMoveAnimation.pos;
             scrollIntoView(pos.x, pos.y - getScrollTop(), 0, 0, rowHeight / 2);

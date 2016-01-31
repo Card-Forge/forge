@@ -19,7 +19,6 @@ package forge.planarconquest;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -55,7 +54,7 @@ import forge.util.storage.StorageImmediatelySerialized;
 public class ConquestController {
     private ConquestData model;
     private IStorage<Deck> decks;
-    private ConquestEvent activeEvent;
+    private ConquestBattle activeBattle;
     private LobbyPlayerHuman humanPlayer;
 
     public ConquestController() {
@@ -81,16 +80,14 @@ public class ConquestController {
         return decks;
     }
 
-    public void launchEvent(ConquestEvent event) {
-        if (activeEvent != null) { return; }
+    public void startBattle(ConquestBattle battle) {
+        if (activeBattle != null) { return; }
 
-        //determine game variants
-        Set<GameType> variants = new HashSet<GameType>();
-        event.addVariants(variants);
+        Set<GameType> variants = battle.getVariants();
 
         final ConquestCommander commander = model.getSelectedCommander(); 
         final RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
-        final RegisteredPlayer aiStart = new RegisteredPlayer(event.getOpponentDeck());
+        final RegisteredPlayer aiStart = new RegisteredPlayer(battle.getOpponentDeck());
 
         if (variants.contains(GameType.Commander)) { //add 10 starting life for both players if playing a Commander game
             humanStart.setStartingLife(humanStart.getStartingLife() + 10);
@@ -104,7 +101,7 @@ public class ConquestController {
         }
 
         String humanPlayerName = commander.getPlayerName();
-        String aiPlayerName = event.getOpponentName();
+        String aiPlayerName = battle.getOpponentName();
         if (humanPlayerName.equals(aiPlayerName)) {
             aiPlayerName += " (AI)"; //ensure player names are distinct
         }
@@ -116,7 +113,7 @@ public class ConquestController {
 
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(aiPlayerName, -1);
-        event.setOpponentAvatar(aiPlayer, gui);
+        battle.setOpponentAvatar(aiPlayer, gui);
         starter.add(aiStart.setPlayer(aiPlayer));
 
         final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
@@ -124,7 +121,7 @@ public class ConquestController {
             rp.setRandomFoil(useRandomFoil);
         }
         final GameRules rules = new GameRules(GameType.PlanarConquest);
-        rules.setGamesPerMatch(event.gamesPerMatch());
+        rules.setGamesPerMatch(battle.gamesPerMatch());
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
@@ -134,7 +131,7 @@ public class ConquestController {
                 hostedMatch.startMatch(rules, null, starter, humanStart, gui);
             }
         });
-        activeEvent = event;
+        activeBattle = battle;
     }
 
     private List<PaperCard> generatePlanarPool() {
@@ -172,14 +169,14 @@ public class ConquestController {
     }
 
     public void showGameOutcome(final GameView game, final IWinLoseView<? extends IButton> view) {
-        activeEvent.showGameOutcome(model, game, humanPlayer, view);
+        activeBattle.showGameOutcome(model, game, humanPlayer, view);
     }
 
     public void finishEvent(final IWinLoseView<? extends IButton> view) {
-        if (activeEvent == null) { return; }
+        if (activeBattle == null) { return; }
 
-        activeEvent.onFinished(model, view);
-        activeEvent = null;
+        activeBattle.onFinished(model, view);
+        activeBattle = null;
     }
 
     public List<ConquestReward> awardBooster(ConquestAwardPool pool) {

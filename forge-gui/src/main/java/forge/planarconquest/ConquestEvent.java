@@ -1,78 +1,195 @@
 package forge.planarconquest;
 
+import java.io.File;
+import java.util.EnumSet;
 import java.util.Set;
+
+import com.google.common.base.Function;
 
 import forge.LobbyPlayer;
 import forge.deck.Deck;
+import forge.deck.io.DeckSerializer;
 import forge.game.GameType;
-import forge.game.GameView;
-import forge.interfaces.IButton;
 import forge.interfaces.IGuiGame;
-import forge.interfaces.IWinLoseView;
+import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.properties.ForgeConstants;
+import forge.util.Aggregates;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
+import forge.util.storage.StorageReaderFile;
 
-public abstract class ConquestEvent {
-    private final ConquestLocation location;
-    private final int tier;
-    private Deck opponentDeck;
-    private boolean conquered;
+public class ConquestEvent {
+    private final ConquestRegion region;
+    private final String name;
+    private final String description;
+    private final String deckPath;
+    private final Set<GameType> variants;
+    private final String avatar;
+    private PaperCard avatarCard;
+    private Deck deck;
 
-    public ConquestEvent(ConquestLocation location0, int tier0) {
-        location = location0;
-        tier = tier0;
+    public ConquestEvent(ConquestRegion region0, String name0, String description0, String deckPath0, Set<GameType> variants0, String avatar0) {
+        region = region0;
+        name = name0;
+        description = description0;
+        deckPath = deckPath0;
+        variants = variants0;
+        avatar = avatar0;
     }
 
-    public ConquestLocation getLocation() {
-        return location;
+    public String getName() {
+        return name;
     }
 
-    public int getTier() {
-        return tier;
+    public String getDescription() {
+        return description;
     }
 
-    public Deck getOpponentDeck() {
-        if (opponentDeck == null) {
-            opponentDeck = buildOpponentDeck();
+    public Deck getDeck() {
+        if (deck == null) {
+            File deckFile = new File(deckPath);
+            if (deckFile.exists()) {
+                deck = DeckSerializer.fromFile(deckFile);
+            }
+            if (deck == null || deck.isEmpty()) {
+                //if deck can't be loaded, generate it randomly
+                PaperCard commander = getAvatarCard();
+                if (commander == null) {
+                    commander = Aggregates.random(region.getCommanders());
+                }
+                deck = ConquestUtil.generateDeck(commander, region.getCardPool(), true);
+            }
         }
-        return opponentDeck;
+        return deck;
     }
 
-    public boolean wasConquered() {
-        return conquered;
-    }
-    public void setConquered(boolean conquered0) {
-        conquered = conquered0;
+    public Set<GameType> getVariants() {
+        return variants;
     }
 
-    public int gamesPerMatch() {
-        return 1; //events are one game by default
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void showGameOutcome(final ConquestData model, final GameView game, final LobbyPlayer humanPlayer, final IWinLoseView<? extends IButton> view) {
-        if (game.isMatchWonBy(humanPlayer)) {
-            view.getBtnRestart().setVisible(false);
-            view.getBtnQuit().setText("Great!");
-            model.addWin(this);
+    public PaperCard getAvatarCard() {
+        if (avatarCard == null) {
+            //attempt to load card from plane's card pool
+            avatarCard = region.getPlane().getCardPool().getCard(avatar);
+            if (avatarCard == null) {
+                //if not in plane's card pool, load from all cards instead
+                avatarCard = FModel.getMagicDb().getCommonCards().getCard(avatar);
+            }
         }
-        else {
-            view.getBtnRestart().setVisible(true);
-            view.getBtnRestart().setText("Retry");
-            view.getBtnQuit().setText("Quit");
-            model.addLoss(this);
+        return avatarCard;
+    }
+
+    public ConquestBattle createBattle(ConquestLocation location0, int tier0) {
+        return new ConquestEventBattle(location0, tier0);
+    }
+
+    public static final Function<ConquestEvent, String> FN_GET_NAME = new Function<ConquestEvent, String>() {
+        @Override
+        public String apply(ConquestEvent event) {
+            return event.getName();
         }
-        model.saveData();
+    };
+
+    public static class Reader extends StorageReaderFile<ConquestEvent> {
+        private final ConquestRegion region;
+
+        public Reader(ConquestRegion region0) {
+            super(region0.getPlane().getDirectory() + region0.getName() + ForgeConstants.PATH_SEPARATOR + "_events.txt", ConquestEvent.FN_GET_NAME);
+            region = region0;
+        }
+
+        @Override
+        protected ConquestEvent read(String line, int i) {
+            String name = null;
+            String deck = null;
+            Set<GameType> variants = EnumSet.noneOf(GameType.class);
+            String avatar = null;
+            String description = null;
+
+            String[] pieces = line.trim().split("\\|");
+            for (String piece : pieces) {
+                String[] kv = piece.split(":", 2);
+                String key = kv[0].trim().toLowerCase();
+                String value = kv[1].trim();
+                switch(key) {
+                case "name":
+                    name = value;
+                    break;
+                case "deck":
+                    deck = value;
+                    break;
+                case "variant":
+                    if (!value.equalsIgnoreCase("none")) {
+                        for (String variantName : value.split(",")) {
+                            try {
+                                variants.add(GameType.valueOf(variantName));
+                            }
+                            catch (Exception ex) {
+                                System.out.println(variantName + " is not a valid variant");
+                            }
+                        }
+                    }
+                    break;
+                case "avatar":
+                    avatar = value;
+                    break;
+                case "desc":
+                    description = value;
+                    break;
+                }
+            }
+            if (deck == null) {
+                deck = name + ".dck"; //assume deck file has same name if not specified
+            }
+            deck = file.getParent() + ForgeConstants.PATH_SEPARATOR + deck;
+            return new ConquestEvent(region, name, description, deck, variants, avatar);
+        }
     }
 
-    public void onFinished(final ConquestData model, final IWinLoseView<? extends IButton> view) {
-    }
+    public class ConquestEventBattle extends ConquestBattle {
+        private ConquestEventBattle(ConquestLocation location0, int tier0) {
+            super(location0, tier0);
+        }
 
-    protected abstract Deck buildOpponentDeck();
-    public abstract void addVariants(Set<GameType> variants);
-    public abstract String getEventName();
-    public abstract String getOpponentName();
-    public abstract void setOpponentAvatar(LobbyPlayer aiPlayer, IGuiGame gui);
+        @Override
+        protected Deck buildOpponentDeck() {
+            return ConquestEvent.this.getDeck();
+        }
+
+        @Override
+        public String getEventName() {
+            return ConquestEvent.this.getName();
+        }
+
+        @Override
+        public String getOpponentName() {
+            return ConquestEvent.this.getAvatar();
+        }
+
+        @Override
+        public void setOpponentAvatar(LobbyPlayer aiPlayer, IGuiGame gui) {
+            PaperCard avatarCard = ConquestEvent.this.getAvatarCard();
+            if (avatarCard != null) {
+                aiPlayer.setAvatarCardImageKey(avatarCard.getImageKey(false));
+            }
+        }
+
+        @Override
+        public Set<GameType> getVariants() {
+            return ConquestEvent.this.getVariants();
+        }
+
+        @Override
+        public int gamesPerMatch() {
+            return 1; //event battles are single game
+        }
+    }
 
     public static class ConquestEventRecord implements IXmlWritable {
         private final ConquestRecord[] tiers = new ConquestRecord[4];

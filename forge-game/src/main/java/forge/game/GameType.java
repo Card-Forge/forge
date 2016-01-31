@@ -21,6 +21,7 @@ public enum GameType {
     Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game."),
     Commander       (DeckFormat.Commander, false, false, false, "Commander", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors."),
     TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "Tiny Leaders", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors. Each card must have CMC less than 4."),
+    Planeswalker    (DeckFormat.PlanarConquest, false, false, true, "Planeswalker", "Each player has a Planeswalker card which can be cast at any time."),
     Planechase      (DeckFormat.Planechase, false, false, true, "Planechase", "Plane cards apply global effects. The Plane card changes when a player rolls \"Planeswalk\" on the planar die."),
     Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy", "One player is the Archenemy and fights the other players by playing Scheme cards."),
     ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble", "All players are Archenemies and can play Scheme cards."),

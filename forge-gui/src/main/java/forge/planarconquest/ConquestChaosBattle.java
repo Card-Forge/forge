@@ -1,6 +1,7 @@
 package forge.planarconquest;
 
 import java.io.File;
+import java.util.EnumSet;
 import java.util.Set;
 
 import forge.LobbyPlayer;
@@ -19,7 +20,7 @@ import forge.quest.QuestEventDuelManager;
 import forge.quest.QuestWorld;
 import forge.util.Aggregates;
 
-public class ConquestChaosBattle extends ConquestEvent {
+public class ConquestChaosBattle extends ConquestBattle {
     private final QuestWorld world;
     private final QuestEventDuel duel;
     private ConquestAwardPool awardPool;
@@ -58,22 +59,23 @@ public class ConquestChaosBattle extends ConquestEvent {
     }
 
     @Override
-    public void addVariants(Set<GameType> variants) {
-    }
-
-    @Override
     public String getEventName() {
         return duel.getTitle();
     }
 
     @Override
     public String getOpponentName() {
-        return duel.getTitle();
+        return duel.getName();
     }
 
     @Override
     public void setOpponentAvatar(LobbyPlayer aiPlayer, IGuiGame gui) {
         gui.setPlayerAvatar(aiPlayer, duel);
+    }
+
+    @Override
+    public Set<GameType> getVariants() {
+        return EnumSet.noneOf(GameType.class);
     }
 
     @Override

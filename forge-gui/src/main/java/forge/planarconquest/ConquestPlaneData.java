@@ -28,30 +28,29 @@ public class ConquestPlaneData implements IXmlWritable {
     }
 
     public boolean hasConquered(ConquestLocation loc) {
-        return hasConquered(loc.getRegionIndex(), loc.getRow(), loc.getCol());
+        return hasConquered(loc.getEventIndex());
     }
     public boolean hasConquered(int regionIndex, int row, int col) {
-        return hasConquered(regionIndex * ConquestRegion.ROWS_PER_REGION * ConquestRegion.COLS_PER_REGION + row * ConquestRegion.COLS_PER_REGION + col);
+        return hasConquered(location.getPlane().getEventIndex(regionIndex, row, col));
     }
-    private boolean hasConquered(int index) {
-        ConquestEventRecord result = eventResults[index];
+    private boolean hasConquered(int eventIndex) {
+        ConquestEventRecord result = eventResults[eventIndex];
         return result != null && result.hasConquered();
     }
 
     public ConquestEventRecord getEventRecord(ConquestLocation loc) {
-        return getEventRecord(loc.getRegionIndex(), loc.getRow(), loc.getCol());
+        return eventResults[loc.getEventIndex()];
     }
     public ConquestEventRecord getEventRecord(int regionIndex, int row, int col) {
-        return eventResults[regionIndex * ConquestRegion.ROWS_PER_REGION * ConquestRegion.COLS_PER_REGION + row * ConquestRegion.COLS_PER_REGION + col];
+        return eventResults[location.getPlane().getEventIndex(regionIndex, row, col)];
     }
 
-    private ConquestEventRecord getOrCreateResult(ConquestEvent event) {
-        ConquestLocation loc = event.getLocation();
-        int index = loc.getRegionIndex() * ConquestRegion.ROWS_PER_REGION * ConquestRegion.COLS_PER_REGION + loc.getRow() * ConquestRegion.COLS_PER_REGION + loc.getCol();
-        ConquestEventRecord result = eventResults[index];
+    private ConquestEventRecord getOrCreateResult(ConquestBattle event) {
+        int eventIndex = event.getLocation().getEventIndex();
+        ConquestEventRecord result = eventResults[eventIndex];
         if (result == null) {
             result = new ConquestEventRecord();
-            eventResults[index] = result;
+            eventResults[eventIndex] = result;
         }
         return result;
     }
@@ -63,11 +62,11 @@ public class ConquestPlaneData implements IXmlWritable {
         location = location0;
     }
 
-    public void addWin(ConquestEvent event) {
+    public void addWin(ConquestBattle event) {
         getOrCreateResult(event).addWin(event.getTier());
     }
 
-    public void addLoss(ConquestEvent event) {
+    public void addLoss(ConquestBattle event) {
         getOrCreateResult(event).addLoss(event.getTier());
     }
 
