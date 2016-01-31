@@ -70,6 +70,7 @@ public class ConquestMultiverseScreen extends FScreen {
     @Override
     protected void doLayout(float startY, float width, float height) {
         planeGrid.setBounds(0, startY, width, height - startY);
+        planeGrid.scrollPlaneswalkerIntoView();
     }
 
     public void update() {
