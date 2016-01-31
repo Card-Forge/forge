@@ -3,6 +3,7 @@ package forge.util;
 import java.io.File;
 import java.util.Collection;
 import java.util.EnumMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -91,6 +92,30 @@ public class XmlReader {
                                 if (value != null) {
                                     array[arrayIndex] = value;
                                 }
+                            }
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                });
+            }
+        });
+    }
+    public <V extends IXmlWritable> void read(final String key, final Map<String, V> enumMap, final Class<V> valueType) {
+        parseChildElements(key, new Evaluator<Void>() {
+            @Override
+            public Void evaluate() {
+                final GenericBuilder<V> builder = new GenericBuilder<V>(valueType);
+                return parseChildElements(null, new Evaluator<Void>() {
+                    @Override
+                    public Void evaluate() {
+                        try {
+                            String key = currentElement.getTagName();
+                            V value = builder.evaluate();
+                            if (value != null) {
+                                enumMap.put(key, value);
                             }
                         }
                         catch (Exception e) {

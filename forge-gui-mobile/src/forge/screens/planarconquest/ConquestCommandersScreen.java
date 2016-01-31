@@ -213,7 +213,7 @@ public class ConquestCommandersScreen extends FScreen {
 
     private static class CommanderOriginFilter extends ComboBoxFilter<ConquestCommander, ConquestPlane> {
         public CommanderOriginFilter(ItemManager<? super ConquestCommander> itemManager0) {
-            super("All Planes", ConquestPlane.values(), itemManager0);
+            super("All Planes", FModel.getPlanes(), itemManager0);
         }
 
         @Override

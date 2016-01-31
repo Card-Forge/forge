@@ -3,7 +3,6 @@ package forge.planarconquest;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
-import forge.planarconquest.ConquestPlane.Region;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
@@ -32,7 +31,7 @@ public class ConquestPlaneData implements IXmlWritable {
         return hasConquered(loc.getRegionIndex(), loc.getRow(), loc.getCol());
     }
     public boolean hasConquered(int regionIndex, int row, int col) {
-        return hasConquered(regionIndex * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + row * Region.COLS_PER_REGION + col);
+        return hasConquered(regionIndex * ConquestRegion.ROWS_PER_REGION * ConquestRegion.COLS_PER_REGION + row * ConquestRegion.COLS_PER_REGION + col);
     }
     private boolean hasConquered(int index) {
         ConquestEventRecord result = eventResults[index];
@@ -43,12 +42,12 @@ public class ConquestPlaneData implements IXmlWritable {
         return getEventRecord(loc.getRegionIndex(), loc.getRow(), loc.getCol());
     }
     public ConquestEventRecord getEventRecord(int regionIndex, int row, int col) {
-        return eventResults[regionIndex * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + row * Region.COLS_PER_REGION + col];
+        return eventResults[regionIndex * ConquestRegion.ROWS_PER_REGION * ConquestRegion.COLS_PER_REGION + row * ConquestRegion.COLS_PER_REGION + col];
     }
 
     private ConquestEventRecord getOrCreateResult(ConquestEvent event) {
         ConquestLocation loc = event.getLocation();
-        int index = loc.getRegionIndex() * Region.ROWS_PER_REGION * Region.COLS_PER_REGION + loc.getRow() * Region.COLS_PER_REGION + loc.getCol();
+        int index = loc.getRegionIndex() * ConquestRegion.ROWS_PER_REGION * ConquestRegion.COLS_PER_REGION + loc.getRow() * ConquestRegion.COLS_PER_REGION + loc.getCol();
         ConquestEventRecord result = eventResults[index];
         if (result == null) {
             result = new ConquestEventRecord();

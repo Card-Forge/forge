@@ -5,7 +5,6 @@ import forge.deck.generation.DeckGenPool;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.planarconquest.ConquestPlane.Region;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
 import forge.util.XmlWriter.IXmlWritable;
@@ -35,11 +34,11 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         //determine origin of commander
         ConquestPlane originPlane0 = null;
         String originRegionName0 = null;
-        for (ConquestPlane plane : ConquestPlane.values()) {
+        for (ConquestPlane plane : FModel.getPlanes()) {
             if (plane.getCommanders().contains(card)) {
                 originPlane0 = plane;
-                for (Region region : plane.getRegions()) {
-                    if (region.getCommanders().contains(card)) {
+                for (ConquestRegion region : plane.getRegions()) {
+                    if (region.getCardPool().contains(card)) {
                         originRegionName0 = region.getName();
                         break;
                     }

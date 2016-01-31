@@ -73,6 +73,9 @@ public final class ForgeConstants {
     public static final String DEFAULT_CHALLENGES_DIR = QUEST_DIR + "challenges";
     public static final String THEMES_DIR             = QUEST_DIR + "themes";
 
+    private static final String CONQUEST_DIR       = RES_DIR + "conquest" + PATH_SEPARATOR;
+    public static final String CONQUEST_PLANES_DIR = CONQUEST_DIR + "planes" + PATH_SEPARATOR;
+
     public static final String SKINS_DIR         = RES_DIR + "skins" + PATH_SEPARATOR;
     public static final String DEFAULT_SKINS_DIR = SKINS_DIR + "default" + PATH_SEPARATOR;
     //don't associate these skin files with a directory since skin directory will be determined later

@@ -1,8 +1,11 @@
 package forge.screens.planarconquest;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
+import com.google.common.collect.ImmutableList;
 
 import forge.Graphics;
 import forge.assets.FImage;
@@ -12,6 +15,7 @@ import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.card.CardRenderer;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.planarconquest.ConquestPlane;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
@@ -27,7 +31,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
     private static final float MONITOR_LEFT_MULTIPLIER = 19f / 443f;
     private static final float ARROW_THICKNESS = Utils.scale(3);
 
-    private static final ConquestPlane[] planes = ConquestPlane.values();
+    private static final List<ConquestPlane> planes = ImmutableList.copyOf(FModel.getPlanes());
 
     private final FTimer timer = new FTimer(2.5f) {
         @Override
@@ -48,7 +52,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
     }
 
     public ConquestPlane getSelectedPlane() {
-        return planes[selectedIndex];
+        return planes.get(selectedIndex);
     }
 
     public void activate() {
@@ -74,9 +78,9 @@ public class ConquestPlaneSelector extends FDisplayObject {
     private void incrementSelectedIndex(int dir) {
         int newIndex = selectedIndex + dir;
         if (newIndex < 0) {
-            newIndex = planes.length - 1;
+            newIndex = planes.size() - 1;
         }
-        else if (newIndex >= planes.length) {
+        else if (newIndex >= planes.size()) {
             newIndex = 0;
         }
         setSelectedIndex(newIndex);

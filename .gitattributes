@@ -18561,6 +18561,7 @@ forge-gui/src/main/java/forge/net/server/NetGuiGame.java -text
 forge-gui/src/main/java/forge/net/server/RemoteClient.java -text
 forge-gui/src/main/java/forge/net/server/ServerGameLobby.java -text
 forge-gui/src/main/java/forge/net/server/package-info.java -text
+forge-gui/src/main/java/forge/planarconquest/ConquestAwardPool.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestChaosBattle.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestCommander.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestController.java -text
@@ -18572,6 +18573,7 @@ forge-gui/src/main/java/forge/planarconquest/ConquestPlane.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPlaneData.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestPreferences.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestRecord.java -text
+forge-gui/src/main/java/forge/planarconquest/ConquestRegion.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestReward.java -text
 forge-gui/src/main/java/forge/planarconquest/ConquestUtil.java -text
 forge-gui/src/main/java/forge/player/GamePlayerUtil.java -text

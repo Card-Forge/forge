@@ -35,6 +35,7 @@ import forge.interfaces.IProgressBar;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.GauntletMini;
 import forge.planarconquest.ConquestController;
+import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPreferences;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
@@ -83,6 +84,7 @@ public final class FModel {
 
     private static IStorage<CardBlock> blocks;
     private static IStorage<CardBlock> fantasyBlocks;
+    private static IStorage<ConquestPlane> planes;
     private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
 
@@ -155,6 +157,7 @@ public final class FModel {
         questPreferences = new QuestPreferences();
         conquestPreferences = new ConquestPreferences();
         fantasyBlocks = new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
+        planes = new StorageBase<>("Conquest planes", new ConquestPlane.Reader(ForgeConstants.CONQUEST_PLANES_DIR + "planes.txt"));
         worlds = new StorageBase<>("Quest worlds", new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt"));
 
         loadDynamicGamedata();
@@ -299,6 +302,10 @@ public final class FModel {
 
     public static CardCollections getDecks() {
         return decks;
+    }
+
+    public static IStorage<ConquestPlane> getPlanes() {
+        return planes;
     }
 
     public static IStorage<QuestWorld> getWorlds() {

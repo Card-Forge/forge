@@ -12,7 +12,6 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestData;
-import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.planarconquest.ConquestUtil;
 import forge.screens.LoadingOverlay;
@@ -168,7 +167,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
     }
 
     private static class SelectStartingCommanderStep extends WizardStep<NewConquestScreenModel> {
-        private final FChoiceList<PaperCard> lstCommanders = add(new FChoiceList<PaperCard>(ConquestPlane.Alara.getCommanders()) {
+        private final FChoiceList<PaperCard> lstCommanders = add(new FChoiceList<PaperCard>(FModel.getPlanes().iterator().next().getCommanders()) {
             @Override
             protected void onItemActivate(Integer index, PaperCard value) {
                 advance();

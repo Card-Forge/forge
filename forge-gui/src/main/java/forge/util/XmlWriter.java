@@ -2,6 +2,7 @@ package forge.util;
 
 import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
 
@@ -89,6 +90,13 @@ public class XmlWriter {
         startElement(key);
         for (int i = 0; i < value.length; i++) {
             write("i" + i, value[i]); //must prefix with "i" since numbers are invalid XML tag names
+        }
+        endElement();
+    }
+    public void write(String key, Map<String, ? extends IXmlWritable> value) {
+        startElement(key);
+        for (Entry<String, ? extends IXmlWritable> entry : value.entrySet()) {
+            write(entry.getKey(), entry.getValue());
         }
         endElement();
     }

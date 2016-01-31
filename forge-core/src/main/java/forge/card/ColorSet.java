@@ -77,6 +77,14 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         return fromMask(mask);
     }
 
+    public static ColorSet fromNames(final char[] colors) {
+        byte mask = 0;
+        for (final char s : colors) {
+            mask |= MagicColor.fromName(s);
+        }
+        return fromMask(mask);
+    }
+
     public static ColorSet fromManaCost(final ManaCost mana) {
         return fromMask(mana.getColorProfile());
     }

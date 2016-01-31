@@ -99,7 +99,6 @@ public class QuestWorld implements Comparable<QuestWorld>{
     }
 
     public static final Function<QuestWorld, String> FN_GET_NAME = new Function<QuestWorld, String>() {
-
         @Override
         public String apply(QuestWorld arg1) {
             return arg1.getName();

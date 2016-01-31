@@ -40,7 +40,6 @@ import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.model.FModel;
-import forge.planarconquest.ConquestPlane.AwardPool;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
@@ -183,7 +182,7 @@ public class ConquestController {
         activeEvent = null;
     }
 
-    public List<ConquestReward> awardBooster(AwardPool pool) {
+    public List<ConquestReward> awardBooster(ConquestAwardPool pool) {
         ConquestPreferences prefs = FModel.getConquestPreferences();
         List<PaperCard> rewards = new ArrayList<PaperCard>();
         int boostersPerMythic = prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
@@ -233,7 +232,7 @@ public class ConquestController {
     public int calculateShardCost(ItemPool<PaperCard> filteredCards, int unfilteredCount) {
         if (filteredCards.isEmpty()) { return 0; }
 
-        AwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
+        ConquestAwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
 
         //determine average value of filtered cards
         int totalValue = 0;

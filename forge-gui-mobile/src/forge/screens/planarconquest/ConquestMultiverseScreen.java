@@ -18,6 +18,7 @@ import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.model.FModel;
+import forge.planarconquest.ConquestAwardPool;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestEvent.ChaosWheelOutcome;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
@@ -25,11 +26,10 @@ import forge.planarconquest.ConquestChaosBattle;
 import forge.planarconquest.ConquestEvent;
 import forge.planarconquest.ConquestLocation;
 import forge.planarconquest.ConquestPlane;
-import forge.planarconquest.ConquestPlane.AwardPool;
-import forge.planarconquest.ConquestPlane.Region;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.planarconquest.ConquestPlaneData;
 import forge.planarconquest.ConquestReward;
+import forge.planarconquest.ConquestRegion;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FDisplayObject;
@@ -131,18 +131,18 @@ public class ConquestMultiverseScreen extends FScreen {
         });
     }
 
-    private void awardBoosters(AwardPool pool, int totalCount) {
+    private void awardBoosters(ConquestAwardPool pool, int totalCount) {
         AwardBoosterHelper helper = new AwardBoosterHelper(pool, totalCount);
         helper.run();
     }
 
     private class AwardBoosterHelper implements Runnable {
-        private final AwardPool pool;
+        private final ConquestAwardPool pool;
         private final int totalCount;
         private final int shardsBefore;
         private int number;
 
-        private AwardBoosterHelper(AwardPool pool0, int totalCount0) {
+        private AwardBoosterHelper(ConquestAwardPool pool0, int totalCount0) {
             pool = pool0;
             number = 1;
             totalCount = totalCount0;
@@ -256,15 +256,15 @@ public class ConquestMultiverseScreen extends FScreen {
             float w = getWidth();
             float h = getHeight();
             float regionHeight = w / CardRenderer.CARD_ART_RATIO;
-            int cols = Region.COLS_PER_REGION;
-            int rows = Region.ROWS_PER_REGION;
+            int cols = ConquestRegion.COLS_PER_REGION;
+            int rows = ConquestRegion.ROWS_PER_REGION;
             float colWidth = w / cols;
             float rowHeight = regionHeight / rows;
             float eventIconSize = Math.min(colWidth, rowHeight) / 3;
             float eventIconOffset = Math.round(eventIconSize * 0.1f);
 
             ConquestPlane plane = model.getCurrentPlane();
-            FCollectionView<Region> regions = plane.getRegions();
+            FCollectionView<ConquestRegion> regions = plane.getRegions();
             int regionCount = regions.size();
             ConquestPlaneData planeData = model.getCurrentPlaneData();
             ConquestLocation currentLocation = model.getCurrentLocation();
@@ -286,7 +286,7 @@ public class ConquestMultiverseScreen extends FScreen {
                 if (y > h) { break; }
 
                 //draw background art
-                Region region = regions.get(i);
+                ConquestRegion region = regions.get(i);
                 FImage art = (FImage)region.getArt();
                 if (art != null) {
                     g.drawImage(art, x, y, w, regionHeight);
@@ -346,7 +346,7 @@ public class ConquestMultiverseScreen extends FScreen {
                             color = FOG_OF_WAR_COLOR;
 
                             //if any bordering grid square has been conquered, instead show unconquered color
-                            if (i == 0 && r == 0 && c == Region.START_COL) {
+                            if (i == 0 && r == 0 && c == ConquestRegion.START_COL) {
                                 color = UNCONQUERED_COLOR; //show unconquered color for starting square of plane
                             }
                             else {
@@ -410,20 +410,20 @@ public class ConquestMultiverseScreen extends FScreen {
             float w = getWidth();
             float h = getScrollHeight();
             float regionHeight = w / CardRenderer.CARD_ART_RATIO;
-            float colWidth = w / Region.COLS_PER_REGION;
-            float rowHeight = regionHeight / Region.ROWS_PER_REGION;
+            float colWidth = w / ConquestRegion.COLS_PER_REGION;
+            float rowHeight = regionHeight / ConquestRegion.ROWS_PER_REGION;
 
             int rowIndex = (int)((h - y) / rowHeight); //flip axis since locations go bottom to top
             ConquestPlane plane = model.getCurrentPlane();
-            int regionIndex = rowIndex / Region.ROWS_PER_REGION;
-            int row = rowIndex % Region.ROWS_PER_REGION;
+            int regionIndex = rowIndex / ConquestRegion.ROWS_PER_REGION;
+            int row = rowIndex % ConquestRegion.ROWS_PER_REGION;
 
             int col = (int)(x / colWidth);
             if (col < 0) {
                 col = 0;
             }
-            else if (col > Region.COLS_PER_REGION - 1) {
-                col = Region.COLS_PER_REGION - 1;
+            else if (col > ConquestRegion.COLS_PER_REGION - 1) {
+                col = ConquestRegion.COLS_PER_REGION - 1;
             }
 
             return new ConquestLocation(plane, regionIndex, row, col);
@@ -433,8 +433,8 @@ public class ConquestMultiverseScreen extends FScreen {
             float w = getWidth();
             float h = getScrollHeight();
             float regionHeight = w / CardRenderer.CARD_ART_RATIO;
-            float colWidth = w / Region.COLS_PER_REGION;
-            float rowHeight = regionHeight / Region.ROWS_PER_REGION;
+            float colWidth = w / ConquestRegion.COLS_PER_REGION;
+            float rowHeight = regionHeight / ConquestRegion.ROWS_PER_REGION;
 
             float x = loc.getCol() * colWidth + colWidth / 2;
             float y = h - (loc.getRegionIndex() * regionHeight + loc.getRow() * rowHeight + rowHeight / 2);

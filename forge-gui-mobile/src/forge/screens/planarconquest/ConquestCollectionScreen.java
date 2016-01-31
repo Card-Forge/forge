@@ -62,7 +62,7 @@ public class ConquestCollectionScreen extends FScreen {
 
     private static class CardOriginFilter extends ComboBoxFilter<PaperCard, ConquestPlane> {
         public CardOriginFilter(ItemManager<? super PaperCard> itemManager0) {
-            super("All Planes", ConquestPlane.values(), itemManager0);
+            super("All Planes", FModel.getPlanes(), itemManager0);
         }
 
         @Override

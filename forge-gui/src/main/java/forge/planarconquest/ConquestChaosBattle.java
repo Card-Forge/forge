@@ -11,7 +11,6 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
-import forge.planarconquest.ConquestPlane.AwardPool;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestEventDifficulty;
@@ -23,7 +22,7 @@ import forge.util.Aggregates;
 public class ConquestChaosBattle extends ConquestEvent {
     private final QuestWorld world;
     private final QuestEventDuel duel;
-    private AwardPool awardPool;
+    private ConquestAwardPool awardPool;
     private boolean finished;
 
     public ConquestChaosBattle() {
@@ -114,9 +113,9 @@ public class ConquestChaosBattle extends ConquestEvent {
         finished = true;
     }
 
-    public AwardPool getAwardPool() {
+    public ConquestAwardPool getAwardPool() {
         if (awardPool == null) { //delay initializing until needed
-            awardPool = new AwardPool(world.getAllCards());
+            awardPool = new ConquestAwardPool(world.getAllCards());
         }
         return awardPool;
     }

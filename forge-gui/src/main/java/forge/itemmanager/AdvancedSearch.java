@@ -29,6 +29,7 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestPlane;
+import forge.planarconquest.ConquestRegion;
 import forge.quest.QuestWorld;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
@@ -74,7 +75,7 @@ public class AdvancedSearch {
                 return FModel.getFormats().getAllFormatsOfCard(input);
             }
         }),
-        CARD_PLANE("Plane", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestPlane>(ImmutableList.copyOf(ConquestPlane.values())) {
+        CARD_PLANE("Plane", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestPlane>(ImmutableList.copyOf(FModel.getPlanes())) {
             @Override
             protected ConquestPlane getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -84,14 +85,14 @@ public class AdvancedSearch {
                 return ConquestPlane.getAllPlanesOfCard(input);
             }
         }),
-        CARD_REGION("Region", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestPlane.Region>(ConquestPlane.getAllRegions()) {
+        CARD_REGION("Region", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestRegion>(ConquestRegion.getAllRegions()) {
             @Override
-            protected ConquestPlane.Region getItemValue(PaperCard input) {
+            protected ConquestRegion getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
             }
             @Override
-            protected Set<ConquestPlane.Region> getItemValues(PaperCard input) {
-                return ConquestPlane.getAllRegionsOfCard(input);
+            protected Set<ConquestRegion> getItemValues(PaperCard input) {
+                return ConquestRegion.getAllRegionsOfCard(input);
             }
         }),
         CARD_QUEST_WORLD("Quest World", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
@@ -316,7 +317,7 @@ public class AdvancedSearch {
                 return input.getName();
             }
         }),
-        COMMANDER_ORIGIN("Origin", ConquestCommander.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<ConquestCommander, ConquestPlane>(Arrays.asList(ConquestPlane.values())) {
+        COMMANDER_ORIGIN("Origin", ConquestCommander.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<ConquestCommander, ConquestPlane>(ImmutableList.copyOf(FModel.getPlanes())) {
             @Override
             protected ConquestPlane getItemValue(ConquestCommander input) {
                 return input.getOriginPlane();

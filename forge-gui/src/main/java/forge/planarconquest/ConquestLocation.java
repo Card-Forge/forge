@@ -11,7 +11,6 @@ import forge.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
-import forge.planarconquest.ConquestPlane.Region;
 import forge.util.Aggregates;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
@@ -31,14 +30,14 @@ public class ConquestLocation implements IXmlWritable {
     }
 
     public ConquestLocation(XmlReader xml) {
-        plane = xml.read("plane", ConquestPlane.Alara);
+        plane = FModel.getPlanes().get(xml.read("plane", "Alara"));
         regionIndex = xml.read("regionIndex", 0);
         row = xml.read("row", 0);
         col = xml.read("col", 0);
     }
     @Override
     public void saveToXml(XmlWriter xml) {
-        xml.write("plane", plane);
+        xml.write("plane", plane.getName());
         xml.write("regionIndex", regionIndex);
         xml.write("row", row);
         xml.write("col", col);
@@ -48,7 +47,7 @@ public class ConquestLocation implements IXmlWritable {
         return plane;
     }
 
-    public Region getRegion() {
+    public ConquestRegion getRegion() {
         if (regionIndex == -1 || regionIndex == plane.getRegions().size()) {
             return null; //indicates we're on portal row
         }
@@ -83,7 +82,7 @@ public class ConquestLocation implements IXmlWritable {
         List<ConquestLocation> locations = new ArrayList<ConquestLocation>();
 
         //add location above
-        if (row0 < Region.ROWS_PER_REGION - 1) {
+        if (row0 < ConquestRegion.ROWS_PER_REGION - 1) {
             locations.add(new ConquestLocation(plane0, regionIndex0, row0 + 1, col0));
         }
         else if (regionIndex0 < regionCount - 1) {
@@ -95,7 +94,7 @@ public class ConquestLocation implements IXmlWritable {
             locations.add(new ConquestLocation(plane0, regionIndex0, row0 - 1, col0));
         }
         else if (regionIndex0 > 0) {
-            locations.add(new ConquestLocation(plane0, regionIndex0 - 1, Region.ROWS_PER_REGION - 1, col0));
+            locations.add(new ConquestLocation(plane0, regionIndex0 - 1, ConquestRegion.ROWS_PER_REGION - 1, col0));
         }
 
         //add location to left
@@ -104,7 +103,7 @@ public class ConquestLocation implements IXmlWritable {
         }
 
         //add location to right
-        if (col0 < Region.COLS_PER_REGION - 1) {
+        if (col0 < ConquestRegion.COLS_PER_REGION - 1) {
             locations.add(new ConquestLocation(plane0, regionIndex0, row0, col0 + 1));
         }
 
@@ -125,7 +124,7 @@ public class ConquestLocation implements IXmlWritable {
         //TODO: Make this pull from predefined events
         ConquestEventRecord record = FModel.getConquest().getModel().getCurrentPlaneData().getEventRecord(this);
         return new ConquestEvent(this, record == null ? 0 : Math.min(record.getHighestConqueredTier() + 1, 3)) {
-            private final PaperCard commander = Aggregates.random(getRegion().getCommanders());
+            private final PaperCard commander = Aggregates.random(plane.getCommanders());
 
             @Override
             protected Deck buildOpponentDeck() {
