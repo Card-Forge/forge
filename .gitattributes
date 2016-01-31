@@ -263,6 +263,7 @@ forge-core/src/main/java/forge/util/TextUtil.java -text
 forge-core/src/main/java/forge/util/ThreadUtil.java -text
 forge-core/src/main/java/forge/util/Visitor.java -text
 forge-core/src/main/java/forge/util/collect/FCollection.java -text
+forge-core/src/main/java/forge/util/collect/FCollectionReader.java -text
 forge-core/src/main/java/forge/util/collect/FCollectionView.java -text
 forge-core/src/main/java/forge/util/maps/EnumMapOfLists.java -text
 forge-core/src/main/java/forge/util/maps/EnumMapToAmount.java -text
