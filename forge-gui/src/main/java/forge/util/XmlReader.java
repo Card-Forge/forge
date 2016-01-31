@@ -103,7 +103,7 @@ public class XmlReader {
             }
         });
     }
-    public <V extends IXmlWritable> void read(final String key, final Map<String, V> enumMap, final Class<V> valueType) {
+    public <V extends IXmlWritable> void read(final String key, final Map<String, V> map, final Class<V> valueType) {
         parseChildElements(key, new Evaluator<Void>() {
             @Override
             public Void evaluate() {
@@ -115,7 +115,7 @@ public class XmlReader {
                             String key = currentElement.getTagName();
                             V value = builder.evaluate();
                             if (value != null) {
-                                enumMap.put(key, value);
+                                map.put(key, value);
                             }
                         }
                         catch (Exception e) {
