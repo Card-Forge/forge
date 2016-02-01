@@ -704,14 +704,26 @@ public class QuestEventDraft {
 
         public String getName() {
             if (edition != null) {
-                // Kamigawa block name is different from the first edition name.
-                // TODO: in the future, either get rid of this hard-coded list somehow or add any possible future exceptions here.
-                if (edition.getName().equals("Champions of Kamigawa")) {
-                    return "Kamigawa";
+                String blockName = "";
+                if (block == null) {
+                    
+                    // try to determine the block name for this edition if it exists
+                    // to avoid situations where the block name would be different from the first set name
+                    // (e.g. Urza vs. Urza's Saga, Masques vs. Mercadian Masques etc.).
+                    for (CardBlock cb : FModel.getBlocks()) {
+                        if (cb.getSets().contains(edition)) {
+                            blockName = cb.getName();
+                        }
+                    }
+                }
+
+                if (!blockName.isEmpty() && blockName != edition.getName()) {
+                    return blockName;
                 }
 
                 return edition.getName();
             }
+
             return block.getName();
         }
 
