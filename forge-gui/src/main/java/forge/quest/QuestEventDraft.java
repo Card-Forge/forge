@@ -713,6 +713,7 @@ public class QuestEventDraft {
                     for (CardBlock cb : FModel.getBlocks()) {
                         if (cb.getSets().contains(edition)) {
                             blockName = cb.getName();
+                            break;
                         }
                     }
                 }
