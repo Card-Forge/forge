@@ -1,6 +1,6 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Experiments in Magic|Deck:Experiments in Magic.dck|Variant:None|Avatar:Laboratory Maniac|Desc:
+Name:Wake the Dead|Deck:Wake the Dead.dck|Variant:None|Avatar:Unbreathing Horde|Desc:
+Name:Dark Powers at Work|Deck:Dark Powers at Work.dck|Variant:None|Demonlord of Ashmouth:Avatar3|Desc:
+Name:Grimgrin's Shambling Friends|Deck:Grimgrin's Shambling Friends.dck|Variant:Commander|Avatar:Grimgrin, Corpse-Born|Desc:
+Name:Blood Bonds|Deck:Blood Bonds.dck|Variant:Vanguard|Avatar:Vampire Nocturnus|Desc:
+Name:Nothing Without Sacrifice|Deck:Nothing Without Sacrifice.dck|Variant:Planeswalker|Avatar:Liliana of the Veil|Desc:

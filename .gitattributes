@@ -16904,6 +16904,12 @@ forge-gui/res/conquest/planes/Dominaria/sets.txt -text
 forge-gui/res/conquest/planes/Innistrad/Gavony/_events.txt -text
 forge-gui/res/conquest/planes/Innistrad/Kessig/_events.txt -text
 forge-gui/res/conquest/planes/Innistrad/Moorland/_events.txt -text
+forge-gui/res/conquest/planes/Innistrad/Nephalia/Blood[!!-~]Bonds.dck -text
+forge-gui/res/conquest/planes/Innistrad/Nephalia/Dark[!!-~]Powers[!!-~]at[!!-~]Work.dck -text
+forge-gui/res/conquest/planes/Innistrad/Nephalia/Experiments[!!-~]in[!!-~]Magic.dck -text
+forge-gui/res/conquest/planes/Innistrad/Nephalia/Grimgrins[!!-~]Shambling[!!-~]Friends.dck -text
+forge-gui/res/conquest/planes/Innistrad/Nephalia/Nothing[!!-~]Without[!!-~]Sacrifice.dck -text
+forge-gui/res/conquest/planes/Innistrad/Nephalia/Wake[!!-~]the[!!-~]Dead.dck -text
 forge-gui/res/conquest/planes/Innistrad/Nephalia/_events.txt -text
 forge-gui/res/conquest/planes/Innistrad/Stensia/_events.txt -text
 forge-gui/res/conquest/planes/Innistrad/cards.txt -text
