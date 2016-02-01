@@ -119,11 +119,11 @@ public class TargetSelection {
                 //this handles "target opponent" cards, along with any other cards that can only target a single non-card game entity
                 //note that we don't handle auto-targeting cards this way since it's possible that the result will be undesirable
                 List<GameEntity> nonCardTargets = tgt.getAllCandidates(this.ability, true, true);
-                if (nonCardTargets.size() == 1) {
+                if (nonCardTargets.size() == 1 && minTargets != 0) {
                     return ability.getTargets().add(nonCardTargets.get(0));
                 }
             }
-            else if (validTargets.size() == 1 && ability.isTrigger() && !tgt.canTgtPlayer()) {
+            else if (validTargets.size() == 1 && ability.isTrigger() && minTargets != 0 && !tgt.canTgtPlayer()) {
                 //if only one valid target card for triggered ability, auto-target that card
                 //only do this for triggered abilities to prevent auto-targeting when user chooses
                 //to play a spell or activat an ability
