@@ -456,7 +456,7 @@ public class ConquestMultiverseScreen extends FScreen {
             float rowHeight = regionHeight / model.getCurrentPlane().getRowsPerRegion();
 
             Vector2 pos = activeMoveAnimation == null ? getPosition(model.getCurrentLocation()) : activeMoveAnimation.pos;
-            scrollIntoView(pos.x, pos.y - getScrollTop(), 0, 0, rowHeight / 2);
+            scrollIntoView(pos.x, pos.y - getScrollTop(), 0, 0, rowHeight * 1.5f); //use rowHeight * 1.5f margin so an extra row is kept visible above and below your current location
         }
 
         private class MoveAnimation extends ForgeAnimation {
