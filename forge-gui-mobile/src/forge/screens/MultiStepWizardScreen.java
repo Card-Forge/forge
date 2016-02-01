@@ -73,9 +73,9 @@ public abstract class MultiStepWizardScreen<T> extends FScreen {
         setCurrentStep(newIndex);
     }
 
-    private void setCurrentStep(int index) {
+    private boolean setCurrentStep(int index) {
         if (currentStep != null) {
-            if (currentStep.index == index) { return; }
+            if (currentStep.index == index) { return false; }
 
             currentStep.setVisible(false);
             if (currentStep.index == steps.length - 1) {
@@ -95,6 +95,7 @@ public abstract class MultiStepWizardScreen<T> extends FScreen {
         if (Forge.getCurrentScreen() == this) {
             currentStep.onActivate(model);
         }
+        return true;
     }
 
     @Override
@@ -103,7 +104,9 @@ public abstract class MultiStepWizardScreen<T> extends FScreen {
         for (WizardStep<T> step : steps) {
             step.reset();
         }
-        setCurrentStep(0);
+        if (!setCurrentStep(0)) {
+            currentStep.onActivate(model); //ensure first step activated even if already selected
+        }
     }
 
     protected abstract void finish();
