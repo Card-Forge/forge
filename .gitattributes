@@ -17050,6 +17050,7 @@ forge-gui/res/conquest/planes/Zendikar/plane_cards.txt -text
 forge-gui/res/conquest/planes/Zendikar/regions.txt -text
 forge-gui/res/conquest/planes/Zendikar/sets.txt -text
 forge-gui/res/conquest/planes/planes.txt -text
+forge-gui/res/cube/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]2016.dck -text
 forge-gui/res/defaults/editor.xml svneol=native#text/xml
 forge-gui/res/defaults/gauntlet/LOCKED_DotP[!!-~]Preconstructed.dat -text
 forge-gui/res/defaults/gauntlet/LOCKED_Swimming[!!-~]With[!!-~]Sharks.dat -text
@@ -17058,7 +17059,10 @@ forge-gui/res/defaults/match.xml svneol=native#text/xml
 forge-gui/res/defaults/no_card.jpg -text
 forge-gui/res/defaults/window.xml -text
 forge-gui/res/defaults/workshop.xml -text
+forge-gui/res/draft/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]2016.draft -text
+forge-gui/res/draft/cube_drafting_rankings.txt -text
 forge-gui/res/draft/cube_juzamjedi.draft -text
+forge-gui/res/draft/cube_mtgo_rankings.txt -text
 forge-gui/res/draft/cube_skiera.draft -text
 forge-gui/res/draft/rankings.txt -text
 forge-gui/res/editions/Alara[!!-~]Reborn.txt -text
