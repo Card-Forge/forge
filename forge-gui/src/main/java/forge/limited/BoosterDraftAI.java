@@ -78,7 +78,7 @@ public class BoosterDraftAI {
         final ColorSet currentChoice = deckCols.getChosenColors();
         final boolean canAddMoreColors = deckCols.canChoseMoreColors();
 
-        final List<Pair<PaperCard, Double>> rankedCards = rankCards(chooseFrom);
+        final List<Pair<PaperCard, Double>> rankedCards = rankCards(chooseFrom, bd.CUSTOM_RANKINGS_FILE[0]);
 
         for (final Pair<PaperCard, Double> p : rankedCards) {
             double valueBoost = 0;
@@ -135,14 +135,23 @@ public class BoosterDraftAI {
      *            List of cards
      * @return map of rankings
      */
-    private static List<Pair<PaperCard, Double>> rankCards(final Iterable<PaperCard> chooseFrom) {
+    private static List<Pair<PaperCard, Double>> rankCards(final Iterable<PaperCard> chooseFrom, String customRankings) {
         final List<Pair<PaperCard, Double>> rankedCards = new ArrayList<Pair<PaperCard,Double>>();
         for (final PaperCard card : chooseFrom) {
             Double rank;
             if (MagicColor.Constant.BASIC_LANDS.contains(card.getName())) {
                 rank = RANK_UNPICKABLE;
             } else {
-                rank = DraftRankCache.getRanking(card.getName(), card.getEdition());
+                if (customRankings != null) {
+                    rank = DraftRankCache.getCustomRanking(customRankings, card.getName());
+                    if (rank == null) {
+                        // try the default draft rankings if there's no entry in the custom rankings file
+                        rank = DraftRankCache.getRanking(card.getName(), card.getEdition());
+                    }
+                } else {
+                    rank = DraftRankCache.getRanking(card.getName(), card.getEdition());
+                }
+
                 if (rank == null) {
                     System.out.println("Draft Rankings - Card Not Found: " + card.getName());
                     rank = RANK_UNPICKABLE;

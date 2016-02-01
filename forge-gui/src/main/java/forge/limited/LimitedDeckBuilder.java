@@ -727,7 +727,19 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     protected List<Pair<Double, PaperCard>> rankCards(final Iterable<PaperCard> cards) {
         final List<Pair<Double, PaperCard>> ranked = new ArrayList<Pair<Double, PaperCard>>();
         for (final PaperCard card : cards) {
-            final Double rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
+            Double rkg;
+            String customRankings = IBoosterDraft.CUSTOM_RANKINGS_FILE[0];
+
+            if (customRankings != null) {
+                rkg = DraftRankCache.getCustomRanking(customRankings, card.getName());
+                if (rkg == null) {
+                    // try the default rankings if custom rankings contain no entry
+                    rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
+                }
+            } else {
+                rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
+            }
+
             if (rkg != null) {
                 ranked.add(Pair.of(rkg, card));
             } else {

@@ -69,6 +69,9 @@ public class CustomLimited extends DeckBase {
 
     private boolean singleton; 
 
+    /** Name of the file containing custom card rankings. */
+    private String customRankingsFile = "";
+
 
     /*
      * (non-Javadoc)
@@ -110,6 +113,7 @@ public class CustomLimited extends DeckBase {
         cd.landSetCode = data.get("LandSetCode");
         cd.numPacks = data.getInt("NumPacks");
         cd.singleton = data.getBoolean("Singleton");
+        cd.customRankingsFile = data.get("CustomRankings");
         final Deck deckCube = cubes.get(data.get("DeckFile"));
         cd.cardPool = deckCube == null ? ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class) : deckCube.getMain();
 
@@ -173,6 +177,10 @@ public class CustomLimited extends DeckBase {
 
     public boolean isSingleton() {
         return singleton;
+    }
+
+    public String getCustomRankingsFileName() {
+        return customRankingsFile;
     }
 
     @Override

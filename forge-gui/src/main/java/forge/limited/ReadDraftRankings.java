@@ -30,6 +30,11 @@ public class ReadDraftRankings {
         this.draftRankings = this.readFile(FileUtil.readFile(ForgeConstants.DRAFT_RANKINGS_FILE));
     } // setup()
 
+    public ReadDraftRankings(String customFile) {
+        this.setSizes = new HashMap<String, Integer>();
+        this.draftRankings = this.readFile(FileUtil.readFile(ForgeConstants.DRAFT_DIR + customFile));
+    }
+
     /**
      * <p>
      * readFile.
@@ -99,5 +104,9 @@ public class ReadDraftRankings {
             rank = (double) draftRankings.get(edition).get(safeName) / (double) setSizes.get(edition);
         }
         return rank;
+    }
+
+    public Double getCustomRanking(String cardName) {
+        return getRanking(cardName, "CUSTOM");
     }
 }

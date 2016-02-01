@@ -73,6 +73,7 @@ public class BoosterDraft implements IBoosterDraft {
                 this.product.add(s);
             }
             IBoosterDraft.LAND_SET_CODE[0] = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions());
+            IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = null;
             break;
 
         case Block: // Draft from cards by block or set
@@ -128,6 +129,7 @@ public class BoosterDraft implements IBoosterDraft {
             }
 
             IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
+            IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = null;
             break;
 
         case Custom:
@@ -160,6 +162,7 @@ public class BoosterDraft implements IBoosterDraft {
         }
 
         IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
+        IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = null;
 
         draft.pack = draft.get8BoosterPack();
         return draft;
@@ -196,6 +199,7 @@ public class BoosterDraft implements IBoosterDraft {
         }
 
         IBoosterDraft.LAND_SET_CODE[0] = FModel.getMagicDb().getEditions().get(draft.getLandSetCode());
+        IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = draft.getCustomRankingsFileName();
     }
 
     /** Looks for draft files, reads them, returns a list. */

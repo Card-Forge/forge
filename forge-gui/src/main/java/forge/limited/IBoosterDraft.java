@@ -71,6 +71,8 @@ public interface IBoosterDraft {
     /** Constant <code>LandSetCode="{}"</code>. */
     CardEdition[] LAND_SET_CODE = { null };
 
+    String[] CUSTOM_RANKINGS_FILE = { null };
+
     boolean isPileDraft();
 
 }
