@@ -8,6 +8,9 @@ Forge Beta: 01-28-2016 ver 1.5.48
 Release Notes
 -------------
 
+- Custom Card Rankings for Cube Drafts -
+Custom booster draft definitions can now specify a custom text file for rankings that is to be used with that particular cube. This allows to specify different priorities for AI picks for each custom cube. See the file "res/draft/MTGO Vintage Cube 2016.draft" for an example of a definition of a draft with custom rankings and see the files "draft/cube_drafting_rankings.txt" and "draft/cube_mtgo_rankings.txt" for examples of custom ranking definitions (these definitions were taken from Bestiaire draft ranking lists - "Cube Drafting" and "Cube MTGO", respectively). If a given card is not listed in the custom rankings file, then the main rankings file (rankings.txt) is scanned as a fallback mechanism.
+
 - New Oath of the Gatewatch and Commander 2015 cards -
 The latest sets are now available in Forge! Hold tight while we sort out any missing card or product images. There's a few cards that have yet to be implemented; see below for that list.
 
