@@ -1,6 +1,8 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Jeskai Prowess|Deck:Jeskai Prowess.dck|Variant:None|Avatar:Jeskai Student|Desc:
+Name:Jeskai Rebound|Deck:Jeskai Rebound.dck|Variant:None|Avatar:Cunning Breezedancer|Desc:
+Name:Jeskai Morph|Deck:Jeskai Morph.dck|Variant:None|Avatar:Jeskai Infiltrator|Desc:
+Name:Narset, Enlightened Master|Deck:Narset, Enlightened Master.dck|Variant:Commander|Avatar:Narset, Enlightened Master|Desc:
+Name:Ojutai, Soul of Winter|Deck:Ojutai, Soul of Winter.dck|Variant:Commander|Ojutai, Soul of Winter:Avatar4|Desc:
+Name:Shu Yun, the Silent Tempest|Deck:Shu Yun, the Silent Tempest.dck|Variant:Commander|Avatar:Shu Yun, the Silent Tempest|Desc:
+Name:Dragonlord Ojutai|Deck:Dragonlord Ojutai.dck|Variant:Commander|Avatar:Dragonlord Ojutai|Desc:
+Name:Narset Transcendant|Deck:Narset Transcendant.dck|Variant:Planeswalker|Avatar:Narset Transcendant|Desc:
