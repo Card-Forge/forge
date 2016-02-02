@@ -740,7 +740,7 @@ public class QuestEventDraft {
 
         if (quest.getFormat() != null) {
 
-            List<String> allowedSetCodes = quest.getFormat().getAllowedSetCodes();
+            final List<String> allowedSetCodes = quest.getFormat().getAllowedSetCodes();
 
             if (!allowedSetCodes.isEmpty()) {
                 for (final String setCode : allowedSetCodes) {
