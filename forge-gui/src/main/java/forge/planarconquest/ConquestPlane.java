@@ -43,6 +43,7 @@ public class ConquestPlane {
     private final String name;
     private final String directory;
     private final String description;
+    private final boolean unreachable;
     private final int rowsPerRegion;
     private final int cols;
 
@@ -53,10 +54,11 @@ public class ConquestPlane {
     private ConquestAwardPool awardPool;
     private ConquestEvent[] events;
 
-    private ConquestPlane(String name0, String description0, int regionSize0) {
+    private ConquestPlane(String name0, String description0, int regionSize0, boolean unreachable0) {
         name = name0;
         directory = ForgeConstants.CONQUEST_PLANES_DIR + name + ForgeConstants.PATH_SEPARATOR;
         description = description0;
+        unreachable = unreachable0;
 
         switch (regionSize0) {
         case 9:
@@ -85,6 +87,10 @@ public class ConquestPlane {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isUnreachable() {
+        return unreachable;
     }
 
     public FCollectionView<ConquestRegion> getRegions() {
@@ -235,6 +241,7 @@ public class ConquestPlane {
             String name = null;
             int regionSize = 0;
             String description = null;
+            boolean unreachable = false;
 
             String[] pieces = line.trim().split("\\|");
             for (String piece : pieces) {
@@ -253,12 +260,15 @@ public class ConquestPlane {
                         System.out.println(value + " is not a valid region size");
                     }
                     break;
+                case "unreachable":
+                    unreachable = true;
+                    break;
                 case "desc":
                     description = value;
                     break;
                 }
             }
-            return new ConquestPlane(name, description, regionSize);
+            return new ConquestPlane(name, description, regionSize, unreachable);
         }
     }
 
