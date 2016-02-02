@@ -740,10 +740,17 @@ public class QuestEventDraft {
 
         if (quest.getFormat() != null) {
 
-            final List<String> allowedSetCodes = quest.getFormat().getAllowedSetCodes();
+            List<String> allowedSetCodes = quest.getFormat().getAllowedSetCodes();
 
-            for (final String setCode : allowedSetCodes) {
-                allowedQuestSets.add(FModel.getMagicDb().getEditions().get(setCode));
+            if (!allowedSetCodes.isEmpty()) {
+                for (final String setCode : allowedSetCodes) {
+                    allowedQuestSets.add(FModel.getMagicDb().getEditions().get(setCode));
+                }
+            } else {
+                // Vintage or Legacy or another format that allows all sets
+                for (CardEdition ce : FModel.getMagicDb().getEditions()) {
+                    allowedQuestSets.add(ce);
+                }
             }
 
         }
