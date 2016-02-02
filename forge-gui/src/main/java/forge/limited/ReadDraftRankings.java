@@ -94,7 +94,7 @@ public class ReadDraftRankings {
         Double rank = null;
 
         if (draftRankings.containsKey(edition)) {
-            String safeName = cardName.replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
+            String safeName = cardName.replaceAll("-", " ").replaceAll("[^A-Za-z ]", "").replaceAll("  ", " ");
 
             // If a card has no ranking, don't try to look it up --BBU
             if (draftRankings.get(edition).get(safeName) == null) {
