@@ -443,262 +443,262 @@
 #253|Plains|L|BFZ
 #254|Swamp|L|BFZ
 //Rank|Name|Rarity|Set
-#1|Archangel of Tithes|M|ORI
-#2|Woodland Bellower|M|ORI
-#3|Avaricious Dragon|M|ORI
-#4|Erebos's Titan|M|ORI
-#5|Disciple of the Ring|M|ORI
-#6|Pyromancer's Goggles|M|ORI
-#7|Demonic Pact|M|ORI
-#8|Day's Undoing|M|ORI
-#9|Starfield of Nyx|M|ORI
-#10|Pia and Kiran Nalaar|R|ORI
-#11|Alhammarret's Archive|M|ORI
-#12|Hangarback Walker|R|ORI
-#13|Languish|R|ORI
-#14|Soulblade Djinn|R|ORI
-#15|Kothophed, Soul Hoarder|R|ORI
-#16|Kytheon's Irregulars|R|ORI
-#17|Dwynen, Gilt-Leaf Daen|R|ORI
-#18|Hixus, Prison Warden|R|ORI
-#19|Managorger Hydra|R|ORI
-#20|Outland Colossus|R|ORI
-#21|Gilt-Leaf Winnower|R|ORI
-#22|Priest of the Blood Rite|R|ORI
-#23|Exquisite Firecraft|R|ORI
-#24|Graveblade Marauder|R|ORI
-#25|Scab-Clan Berserker|R|ORI
-#26|Sword of the Animist|R|ORI
-#27|Thopter Spy Network|R|ORI
-#28|Embermaw Hellion|R|ORI
-#29|Chandra's Ignition|R|ORI
-#30|Gaea's Revenge|R|ORI
-#31|Alhammarret, High Arbiter|R|ORI
-#32|Goblin Piledriver|R|ORI
-#33|Knight of the White Orchid|R|ORI
-#34|Harbinger of the Tides|R|ORI
-#35|Mage-Ring Responder|R|ORI
-#36|Tragic Arrogance|R|ORI
-#37|Abbot of Keral Keep|R|ORI
+#1|Hangarback Walker|R|ORI
+#2|Liliana, Heretical Healer|M|ORI
+#3|Nissa, Vastwood Seer|M|ORI
+#4|Pia and Kiran Nalaar|R|ORI
+#5|Kytheon, Hero of Akros|M|ORI
+#6|Jace, Vryn's Prodigy|M|ORI
+#7|Chandra, Fire of Kaladesh|M|ORI
+#8|Languish|R|ORI
+#9|Archangel of Tithes|M|ORI
+#10|Kytheon's Irregulars|R|ORI
+#11|Outland Colossus|R|ORI
+#12|Managorger Hydra|R|ORI
+#13|Woodland Bellower|M|ORI
+#14|Priest of the Blood Rite|R|ORI
+#15|Gilt-Leaf Winnower|R|ORI
+#16|Sword of the Animist|R|ORI
+#17|Hixus, Prison Warden|R|ORI
+#18|Kothophed, Soul Hoarder|R|ORI
+#19|Avaricious Dragon|M|ORI
+#20|Thopter Spy Network|R|ORI
+#21|Embermaw Hellion|R|ORI
+#22|Exquisite Firecraft|R|ORI
+#23|Soulblade Djinn|R|ORI
+#24|Chandra's Ignition|R|ORI
+#25|Dwynen, Gilt-Leaf Daen|R|ORI
+#26|Erebos's Titan|M|ORI
+#27|Tragic Arrogance|R|ORI
+#28|Mage-Ring Responder|R|ORI
+#29|Gaea's Revenge|R|ORI
+#30|Graveblade Marauder|R|ORI
+#31|Scab-Clan Berserker|R|ORI
+#32|Disciple of the Ring|M|ORI
+#33|Harbinger of the Tides|R|ORI
+#34|Knight of the White Orchid|R|ORI
+#35|Abbot of Keral Keep|R|ORI
+#36|Whirler Rogue|U|ORI
+#37|Sentinel of the Eternal Watch|U|ORI
 #38|Gideon's Phalanx|R|ORI
-#39|Willbreaker|R|ORI
-#40|Sentinel of the Eternal Watch|U|ORI
-#41|Sigil of the Empty Throne|R|ORI
-#42|Whirler Rogue|U|ORI
-#43|War Oracle|U|ORI
-#44|Honored Hierarch|R|ORI
+#39|Relic Seeker|R|ORI
+#40|Willbreaker|R|ORI
+#41|Alhammarret, High Arbiter|R|ORI
+#42|Molten Vortex|R|ORI
+#43|Demonic Pact|M|ORI
+#44|Skysnare Spider|U|ORI
 #45|Consul's Lieutenant|U|ORI
-#46|Relic Seeker|R|ORI
-#47|Skysnare Spider|U|ORI
-#48|Swift Reckoning|U|ORI
-#49|Molten Vortex|R|ORI
-#50|Patron of the Valiant|U|ORI
-#51|Vryn Wingmare|R|ORI
-#52|Thopter Engineer|U|ORI
-#53|The Great Aurora|M|ORI
-#54|Knightly Valor|U|ORI
-#55|Ravaging Blaze|U|ORI
-#56|Mizzium Meddler|R|ORI
-#57|Acolyte of the Inferno|U|ORI
-#58|Flameshadow Conjuring|R|ORI
-#59|Dark Petition|R|ORI
-#60|Jhessian Thief|U|ORI
-#61|Evolutionary Leap|R|ORI
-#62|Herald of the Pantheon|R|ORI
-#63|Cruel Revival|U|ORI
-#64|Blessed Spirits|U|ORI
-#65|Thunderclap Wyvern|U|ORI
-#66|Undercity Troll|U|ORI
-#67|Despoiler of Souls|R|ORI
-#68|Citadel Castellan|U|ORI
-#69|Tower Geist|U|ORI
-#70|Nissa's Revelation|R|ORI
-#71|Valeron Wardens|U|ORI
-#72|Talent of the Telepath|R|ORI
+#46|Patron of the Valiant|U|ORI
+#47|War Oracle|U|ORI
+#48|Sigil of the Empty Throne|R|ORI
+#49|Thopter Engineer|U|ORI
+#50|Undercity Troll|U|ORI
+#51|Flameshadow Conjuring|R|ORI
+#52|Ravaging Blaze|U|ORI
+#53|Acolyte of the Inferno|U|ORI
+#54|Topan Freeblade|C|ORI
+#55|Swift Reckoning|U|ORI
+#56|Jhessian Thief|U|ORI
+#57|Somberwald Alpha|U|ORI
+#58|Fiery Impulse|C|ORI
+#59|Displacement Wave|R|ORI
+#60|Cruel Revival|U|ORI
+#61|Starfield of Nyx|M|ORI
+#62|Goblin Piledriver|R|ORI
+#63|Mizzium Meddler|R|ORI
+#64|Knightly Valor|U|ORI
+#65|Blessed Spirits|U|ORI
+#66|Seismic Elemental|U|ORI
+#67|Evolutionary Leap|R|ORI
+#68|Vryn Wingmare|R|ORI
+#69|Citadel Castellan|U|ORI
+#70|Valeron Wardens|U|ORI
+#71|Reave Soul|C|ORI
+#72|Ghirapur Gearcrafter|C|ORI
 #73|Sigiled Starfish|U|ORI
-#74|Somberwald Alpha|U|ORI
-#75|Anointer of Champions|U|ORI
-#76|Shaman of the Pack|U|ORI
-#77|Seismic Elemental|U|ORI
+#74|Honored Hierarch|R|ORI
+#75|Leaf Gilder|C|ORI
+#76|Chief of the Foundry|U|ORI
+#77|Pyromancer's Goggles|M|ORI
 #78|Suppression Bonds|C|ORI
-#79|Dwynen's Elite|U|ORI
+#79|Rhox Maulers|C|ORI
 #80|Fleshbag Marauder|U|ORI
-#81|Anchor to the AEther|U|ORI
-#82|Displacement Wave|R|ORI
-#83|Eyeblight Massacre|U|ORI
-#84|Fiery Impulse|C|ORI
-#85|Conclave Naturalists|U|ORI
-#86|Animist's Awakening|R|ORI
-#87|Skyraker Giant|U|ORI
-#88|Topan Freeblade|C|ORI
-#89|Reave Soul|C|ORI
-#90|Ghirapur Gearcrafter|C|ORI
-#91|Blightcaster|U|ORI
-#92|Iroas's Champion|U|ORI
-#93|Blood-Cursed Knight|U|ORI
-#94|Enthralling Victor|U|ORI
-#95|Lightning Javelin|C|ORI
-#96|Stalwart Aven|C|ORI
-#97|Leaf Gilder|C|ORI
-#98|Unholy Hunger|C|ORI
-#99|Skaab Goliath|U|ORI
-#100|Totem-Guide Hartebeest|U|ORI
-#101|Shivan Reef|R|ORI
-#102|Celestial Flare|C|ORI
-#103|Turn to Frog|U|ORI
-#104|Helm of the Gods|R|ORI
-#105|Akroan Sergeant|C|ORI
-#106|Goblin Glory Chaser|U|ORI
-#107|Claustrophobia|C|ORI
-#108|Chief of the Foundry|U|ORI
-#109|Joraga Invocation|U|ORI
-#110|Fiery Conclusion|U|ORI
-#111|Caves of Koilos|R|ORI
-#112|Bounding Krasis|U|ORI
-#113|Rhox Maulers|C|ORI
-#114|Foundry of the Consuls|U|ORI
-#115|Malakir Cullblade|U|ORI
-#116|Zendikar Incarnate|U|ORI
-#117|Llanowar Wastes|R|ORI
-#118|Zendikar's Roil|U|ORI
-#119|Separatist Voidmage|C|ORI
-#120|Orbs of Warding|R|ORI
-#121|Knight of the Pilgrim's Road|C|ORI
-#122|Elvish Visionary|C|ORI
-#123|Boggart Brute|C|ORI
-#124|Sylvan Messenger|U|ORI
-#125|Sphinx's Tutelage|U|ORI
-#126|Battlefield Forge|R|ORI
-#127|Aspiring Aeronaut|C|ORI
-#128|Revenant|U|ORI
-#129|Pharika's Disciple|C|ORI
-#130|Shadows of the Past|U|ORI
-#131|Necromantic Summons|U|ORI
-#132|Gnarlroot Trapper|U|ORI
-#133|Wild Instincts|C|ORI
-#134|Timberpack Wolf|C|ORI
-#135|Llanowar Empath|C|ORI
-#136|Deadbridge Shaman|C|ORI
-#137|Dragon Fodder|C|ORI
-#138|Charging Griffin|C|ORI
-#139|Cleric of the Forward Order|C|ORI
-#140|Reclusive Artificer|U|ORI
-#141|Fetid Imp|C|ORI
-#142|Yeva's Forcemage|C|ORI
-#143|Yavimaya Coast|R|ORI
-#144|Blazing Hellhound|U|ORI
-#145|Eyeblight Assassin|C|ORI
-#146|Scrapskin Drake|C|ORI
-#147|Ringwarden Owl|C|ORI
-#148|Throwing Knife|U|ORI
-#149|Weight of the Underworld|C|ORI
-#150|Rogue's Passage|U|ORI
-#151|Possessed Skaab|U|ORI
-#152|Read the Bones|C|ORI
-#153|Firefiend Elemental|C|ORI
-#154|Clash of Wills|U|ORI
-#155|Undead Servant|C|ORI
-#156|Jace's Sanctum|R|ORI
-#157|Angel's Tomb|U|ORI
-#158|Shambling Ghoul|C|ORI
-#159|Ampryn Tactician|C|ORI
-#160|Sigil of Valor|U|ORI
-#161|Nantuko Husk|C|ORI
-#162|Hydrolash|U|ORI
-#163|Disperse|C|ORI
-#164|Mage-Ring Bully|C|ORI
-#165|Subterranean Scout|C|ORI
-#166|Grasp of the Hieromancer|C|ORI
-#167|Hallowed Moonlight|R|ORI
-#168|Consecrated by Blood|U|ORI
-#169|Call of the Full Moon|U|ORI
-#170|Evolving Wilds|C|ORI
-#171|Orchard Spirit|C|ORI
-#172|Titan's Strength|C|ORI
-#173|Auramancer|C|ORI
-#174|Titanic Growth|C|ORI
-#175|Hitchclaw Recluse|C|ORI
-#176|Watercourser|C|ORI
-#177|Prickleboar|C|ORI
-#178|Ramroller|U|ORI
-#179|Faerie Miscreant|C|ORI
-#180|Meteorite|U|ORI
-#181|Infinite Obliteration|R|ORI
-#182|Enshrouding Mist|C|ORI
-#183|Chandra's Fury|C|ORI
-#184|War Horn|U|ORI
-#185|Chandra, Fire of Kaladesh|M|ORI
-#186|Jace, Vryn's Prodigy|M|ORI
-#187|Kytheon, Hero of Akros|M|ORI
-#188|Liliana, Heretical Healer|M|ORI
-#189|Nissa, Vastwood Seer|M|ORI
-#190|Send to Sleep|C|ORI
-#191|Act of Treason|C|ORI
-#192|Thornbow Archer|C|ORI
-#193|Vastwood Gorger|C|ORI
-#194|Mighty Leap|C|ORI
-#195|Infectious Bloodlust|C|ORI
-#196|Kytheon's Tactics|C|ORI
-#197|Akroan Jailer|C|ORI
-#198|Nissa's Pilgrimage|C|ORI
-#199|Stratus Walk|C|ORI
-#200|Infernal Scarring|C|ORI
-#201|Brawler's Plate|U|ORI
-#202|Calculated Dismissal|C|ORI
-#203|Rabid Bloodsucker|C|ORI
+#81|Eyeblight Massacre|U|ORI
+#82|Dwynen's Elite|U|ORI
+#83|Enthralling Victor|U|ORI
+#84|Akroan Sergeant|C|ORI
+#85|Tower Geist|U|ORI
+#86|Conclave Naturalists|U|ORI
+#87|Separatist Voidmage|C|ORI
+#88|Stalwart Aven|C|ORI
+#89|Anointer of Champions|U|ORI
+#90|Unholy Hunger|C|ORI
+#91|Thunderclap Wyvern|U|ORI
+#92|Despoiler of Souls|R|ORI
+#93|Herald of the Pantheon|R|ORI
+#94|Boggart Brute|C|ORI
+#95|Throwing Knife|U|ORI
+#96|Goblin Glory Chaser|U|ORI
+#97|Anchor to the AEther|U|ORI
+#98|Lightning Javelin|C|ORI
+#99|Skyraker Giant|U|ORI
+#100|Call of the Full Moon|U|ORI
+#101|Skaab Goliath|U|ORI
+#102|Wild Instincts|C|ORI
+#103|Timberpack Wolf|C|ORI
+#104|Claustrophobia|C|ORI
+#105|Deadbridge Shaman|C|ORI
+#106|Fiery Conclusion|U|ORI
+#107|Nantuko Husk|C|ORI
+#108|Cleric of the Forward Order|C|ORI
+#109|Fetid Imp|C|ORI
+#110|Elvish Visionary|C|ORI
+#111|Iroas's Champion|U|ORI
+#112|Shaman of the Pack|U|ORI
+#113|Pharika's Disciple|C|ORI
+#114|Runed Servitor|U|ORI
+#115|Knight of the Pilgrim's Road|C|ORI
+#116|Blightcaster|U|ORI
+#117|Celestial Flare|C|ORI
+#118|Shambling Ghoul|C|ORI
+#119|Blazing Hellhound|U|ORI
+#120|Dragon Fodder|C|ORI
+#121|Eyeblight Assassin|C|ORI
+#122|Mage-Ring Bully|C|ORI
+#123|Totem-Guide Hartebeest|U|ORI
+#124|Foundry of the Consuls|U|ORI
+#125|Ramroller|U|ORI
+#126|Turn to Frog|U|ORI
+#127|Sphinx's Tutelage|U|ORI
+#128|Aspiring Aeronaut|C|ORI
+#129|Scrapskin Drake|C|ORI
+#130|Subterranean Scout|C|ORI
+#131|Malakir Cullblade|U|ORI
+#132|Yeva's Forcemage|C|ORI
+#133|Blood-Cursed Knight|U|ORI
+#134|Zendikar Incarnate|U|ORI
+#135|Charging Griffin|C|ORI
+#136|Bonded Construct|C|ORI
+#137|Joraga Invocation|U|ORI
+#138|Rogue's Passage|U|ORI
+#139|Orchard Spirit|C|ORI
+#140|Llanowar Empath|C|ORI
+#141|Watercourser|C|ORI
+#142|Dark Petition|R|ORI
+#143|Day's Undoing|M|ORI
+#144|Disperse|C|ORI
+#145|Weight of the Underworld|C|ORI
+#146|Shadows of the Past|U|ORI
+#147|Grasp of the Hieromancer|C|ORI
+#148|Titanic Growth|C|ORI
+#149|Clash of Wills|U|ORI
+#150|Faerie Miscreant|C|ORI
+#151|Bounding Krasis|U|ORI
+#152|Angel's Tomb|U|ORI
+#153|Act of Treason|C|ORI
+#154|War Horn|U|ORI
+#155|Gold-Forged Sentinel|U|ORI
+#156|Evolving Wilds|C|ORI
+#157|Gnarlroot Trapper|U|ORI
+#158|Thornbow Archer|C|ORI
+#159|Guardian Automaton|C|ORI
+#160|Titan's Strength|C|ORI
+#161|Sylvan Messenger|U|ORI
+#162|Firefiend Elemental|C|ORI
+#163|Meteorite|U|ORI
+#164|Battlefield Forge|R|ORI
+#165|Infectious Bloodlust|C|ORI
+#166|Sigil of Valor|U|ORI
+#167|Llanowar Wastes|R|ORI
+#168|Necromantic Summons|U|ORI
+#169|Alchemist's Vial|C|ORI
+#170|Read the Bones|C|ORI
+#171|Akroan Jailer|C|ORI
+#172|Guardians of Meletis|C|ORI
+#173|Reclusive Artificer|U|ORI
+#174|Ringwarden Owl|C|ORI
+#175|Veteran's Sidearm|C|ORI
+#176|Prickleboar|C|ORI
+#177|Revenant|U|ORI
+#178|Shivan Reef|R|ORI
+#179|Send to Sleep|C|ORI
+#180|Consecrated by Blood|U|ORI
+#181|Chandra's Fury|C|ORI
+#182|Ampryn Tactician|C|ORI
+#183|Undead Servant|C|ORI
+#184|Hitchclaw Recluse|C|ORI
+#185|Zendikar's Roil|U|ORI
+#186|Auramancer|C|ORI
+#187|Possessed Skaab|U|ORI
+#188|Mighty Leap|C|ORI
+#189|Enshrouding Mist|C|ORI
+#190|Talent of the Telepath|R|ORI
+#191|Might of the Masses|C|ORI
+#192|Returned Centaur|C|ORI
+#193|Infernal Scarring|C|ORI
+#194|Caustic Caterpillar|C|ORI
+#195|Vastwood Gorger|C|ORI
+#196|Screeching Skaab|C|ORI
+#197|Maritime Guard|C|ORI
+#198|Hydrolash|U|ORI
+#199|Caves of Koilos|R|ORI
+#200|Stratus Walk|C|ORI
+#201|Yavimaya Coast|R|ORI
+#202|Brawler's Plate|U|ORI
+#203|Artificer's Epiphany|C|ORI
 #204|Touch of Moonglove|C|ORI
-#205|Returned Centaur|C|ORI
-#206|Heavy Infantry|C|ORI
-#207|Might of the Masses|C|ORI
-#208|Murder Investigation|U|ORI
-#209|Elemental Bond|U|ORI
-#210|Cobblebrute|C|ORI
-#211|Artificer's Epiphany|C|ORI
-#212|Aven Battle Priest|C|ORI
-#213|Valor in Akros|U|ORI
-#214|Gold-Forged Sentinel|U|ORI
-#215|Enlightened Ascetic|C|ORI
-#216|Macabre Waltz|C|ORI
-#217|Negate|C|ORI
-#218|Screeching Skaab|C|ORI
-#219|Volcanic Rambler|C|ORI
-#220|Caustic Caterpillar|C|ORI
-#221|Dark Dabbling|C|ORI
-#222|Bone to Ash|C|ORI
-#223|Aerial Volley|C|ORI
-#224|Magmatic Insight|U|ORI
-#225|Maritime Guard|C|ORI
-#226|Deep-Sea Terror|C|ORI
-#227|Nivix Barrier|C|ORI
-#228|Smash to Smithereens|C|ORI
-#229|Mantle of Webs|C|ORI
-#230|Yoked Ox|C|ORI
-#231|Gather the Pack|U|ORI
-#232|Healing Hands|C|ORI
-#233|Bellows Lizard|C|ORI
-#234|Catacomb Slug|C|ORI
-#235|Dreadwaters|C|ORI
-#236|Nightsnare|C|ORI
-#237|Reclaim|C|ORI
-#238|Runed Servitor|U|ORI
-#239|Vine Snare|C|ORI
-#240|Guardian Automaton|C|ORI
-#241|Ghirapur AEther Grid|U|ORI
-#242|Demolish|C|ORI
-#243|Bonded Construct|C|ORI
-#244|Psychic Rebuttal|U|ORI
-#245|Veteran's Sidearm|C|ORI
-#246|Alchemist's Vial|C|ORI
-#247|Tormented Thoughts|U|ORI
-#248|Tainted Remedy|R|ORI
-#249|Guardians of Meletis|C|ORI
-#250|Prism Ring|U|ORI
-#251|Jayemdae Tome|U|ORI
-#252|Mage-Ring Network|U|ORI
-#253|Forest|L|ORI
+#205|Nissa's Revelation|R|ORI
+#206|Aerial Volley|C|ORI
+#207|Cobblebrute|C|ORI
+#208|Alhammarret's Archive|M|ORI
+#209|Magmatic Insight|U|ORI
+#210|Nissa's Pilgrimage|C|ORI
+#211|Gather the Pack|U|ORI
+#212|Kytheon's Tactics|C|ORI
+#213|Calculated Dismissal|C|ORI
+#214|Animist's Awakening|R|ORI
+#215|Macabre Waltz|C|ORI
+#216|Negate|C|ORI
+#217|Murder Investigation|U|ORI
+#218|Rabid Bloodsucker|C|ORI
+#219|Bone to Ash|C|ORI
+#220|Enlightened Ascetic|C|ORI
+#221|Orbs of Warding|R|ORI
+#222|Nivix Barrier|C|ORI
+#223|Deep-Sea Terror|C|ORI
+#224|Jace's Sanctum|R|ORI
+#225|Smash to Smithereens|C|ORI
+#226|Volcanic Rambler|C|ORI
+#227|Heavy Infantry|C|ORI
+#228|Yoked Ox|C|ORI
+#229|Helm of the Gods|R|ORI
+#230|Valor in Akros|U|ORI
+#231|Psychic Rebuttal|U|ORI
+#232|Bellows Lizard|C|ORI
+#233|The Great Aurora|M|ORI
+#234|Ghirapur AEther Grid|U|ORI
+#235|Elemental Bond|U|ORI
+#236|Mantle of Webs|C|ORI
+#237|Aven Battle Priest|C|ORI
+#238|Dark Dabbling|C|ORI
+#239|Infinite Obliteration|R|ORI
+#240|Hallowed Moonlight|R|ORI
+#241|Catacomb Slug|C|ORI
+#242|Tormented Thoughts|U|ORI
+#243|Mage-Ring Network|U|ORI
+#244|Dreadwaters|C|ORI
+#245|Tainted Remedy|R|ORI
+#246|Nightsnare|C|ORI
+#247|Vine Snare|C|ORI
+#248|Reclaim|C|ORI
+#249|Jayemdae Tome|U|ORI
+#250|Healing Hands|C|ORI
+#251|Prism Ring|U|ORI
+#252|Demolish|C|ORI
+#253|Island|L|ORI
 #254|Mountain|L|ORI
-#255|Island|L|ORI
-#256|Swamp|L|ORI
+#255|Swamp|L|ORI
+#256|Forest|L|ORI
 #257|Plains|L|ORI
 //Rank|Name|Rarity|Set
 #1|Karn Liberated|M|MM2

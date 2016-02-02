@@ -18882,6 +18882,7 @@ forge-gui/src/main/resources/proxy-template.ftl -text
 forge-gui/src/site/apt/index.apt -text
 forge-gui/tools/EditionTracking.py -text
 forge-gui/tools/PerSetTracking.py svneol=native#text/x-python
+forge-gui/tools/RankingScraper.py -text
 forge-gui/tools/assignSetInfo.py svneol=native#text/x-python
 forge-gui/tools/cardTemplateScript.py svneol=native#text/x-python
 forge-gui/tools/deckAiCompat.py -text
