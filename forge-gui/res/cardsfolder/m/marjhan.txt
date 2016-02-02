@@ -1,6 +1,6 @@
 Name:Marjhan
 ManaCost:5 U U
-Types:Creature Leviathan
+Types:Creature Serpent
 PT:8/8
 K:CARDNAME doesn't untap during your untap step.
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.

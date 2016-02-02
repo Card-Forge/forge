@@ -1,6 +1,6 @@
 Name:Shadow Rider
 ManaCost:2 B B
-Types:Creature Zombie Knight
+Types:Creature Knight
 PT:3/3
 K:Flanking
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_rider.jpg
