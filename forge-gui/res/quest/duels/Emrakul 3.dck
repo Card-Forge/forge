@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Emrakul 3
+Title=Emrakul
+Difficulty=hard
+Description=Colorless Eldrazi deck
+Icon=Emrakul.jpg
+Deck Type=constructed
+[main]
+4 All Is Dust
+1 Bane of Bala Ged
+4 Conduit of Ruin
+4 Eldrazi Mimic
+4 Eldrazi Temple
+1 Emrakul, the Aeons Torn
+4 Eye of Ugin
+1 Kozilek's Channeler
+1 Kozilek, Butcher of Truth
+1 Kozilek, the Great Distortion
+4 Matter Reshaper
+4 Oblivion Sower
+4 Reality Smasher
+2 Shrine of the Forsaken Gods
+4 Thought-Knot Seer
+1 Ulamog, the Ceaseless Hunger
+1 Ulamog, the Infinite Gyre
+4 Cloudpost
+4 Glimmerpost
+1 Sol Ring
+4 Radiant Fountain
+2 Tomb of the Spirit Dragon
+[sideboard]
