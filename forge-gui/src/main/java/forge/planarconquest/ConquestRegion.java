@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 import forge.GuiBase;
 import forge.assets.ISkinImage;
@@ -87,7 +88,7 @@ public class ConquestRegion {
             String name = null;
             String artCardName = null;
             ColorSet colorSet = ColorSet.ALL_COLORS;
-            Predicate<PaperCard> pred = null;
+            Predicate<PaperCard> pred = Predicates.alwaysTrue();
 
             String[] pieces = line.trim().split("\\|");
             for (String piece : pieces) {
