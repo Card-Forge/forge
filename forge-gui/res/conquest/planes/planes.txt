@@ -10,6 +10,6 @@ Name:Rath|RegionSize:6|Unreachable:True|Desc:
 Name:Regatha|RegionSize:6|Unreachable:True|Desc:
 Name:Shandalar|RegionSize:9|Unreachable:True|Desc:
 Name:Tarkir|RegionSize:9|Desc:
-Name:Theros|RegionSize:6|Desc:
+Name:Theros|RegionSize:9|Desc:
 Name:Ulgrotha|RegionSize:6|Unreachable:True|Desc:
 Name:Zendikar|RegionSize:9|Unreachable:True|Desc:
