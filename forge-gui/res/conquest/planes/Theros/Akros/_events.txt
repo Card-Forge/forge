@@ -1,6 +1,8 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Red Devotion|Deck:MonoRDev.dck|Variant:None|Avatar:Firedriker Satyr|Desc:
+Name:Akroan Soldiers|Deck:WRSoldiers.dck|Variant:None|Avatar:Akroan Hoplite|Desc:
+Name:Brimaz|Deck:Brimaz.dck|Variant:Commander|Avatar:Brimaz, King of Oreskos|Desc:
+Name:Anax and Cymede|Deck:AnaxCymede.dck|Variant:Commander|Avatar:Anax and Cymede|Desc:
+Name:Iroas|Deck:Iroas.dck|Variant:Commander|Avatar:Iroas, God of Victory|Desc:
+Name:Mogis|Deck:Mogis.dck|Variant:Commander|Avatar:Mogis, God of Slaughter|Desc:
+Name:Kalemne|Deck:Kalemne.dck|Variant:Commander|Avatar:Kalemne, Disciple of Iroas|Desc:
+Name:Elspeth|Deck:ElspethPW.dck|Variant:Planeswalker|Avatar:Elspeth, Sun's Champion|Desc:

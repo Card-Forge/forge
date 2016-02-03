@@ -1,6 +1,8 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Anthousa|Deck:Anthousa.dck|Variant:Commander|Avatar:Anthousa, Setessan Hero|Desc:
+Name:Karametra|Deck:Karametra.dck|Variant:Commander|Avatar:Karametra, God of Harvests|Desc:
+Name:Pharika|Deck:Pharika.dck|Variant:Commander|Avatar:Pharika, God of Affliction|Desc:
+Name:Wild Monsters|Deck:WildMonsters.dck|Variant:None|Avatar:Fleecemane Lion|Desc:
+Name:Green Devotion|Deck:MonoGDev.dck|Variant:None|Avatar:Courser of Kruphix|Desc:
+Name:Constellation|Deck:BGConstellation.dck|Variant:None|Avatar:Doomwake Giant|Desc:
+Name:Face the Hydra|Deck:Hydra.dck|Variant:None|Avatar:Polukranos, World Eater|Desc:
+Name:Xenagos|Deck:XenagosPW.dck|Variant:Planeswalker|Avatar:Xenagos, the Reveler|Desc:

@@ -1,5 +1,5 @@
-Name:Oreskos|Art:Temple of Plenty|Colors:W
-Name:Meletis|Art:Temple of Enlightenment|Colors:U
-Name:Asphodel|Art:Temple of Silence|Colors:B
-Name:Akros|Art:Temple of Malice|Colors:R
-Name:Setessa|Art:Temple of Mystery|Colors:G
+Name:Nyx|Art:Nykthos, Shrine to Nyx|Colors:WURBG
+Name:Meletis|Art:Temple of Enlightenment|Colors:UW
+Name:The Underworld|Art:Temple of Silence|Colors:WB
+Name:Akros|Art:Temple of Triumph|Colors:RW
+Name:Setessa|Art:Temple of Plenty|Colors:GW
