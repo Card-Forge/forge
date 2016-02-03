@@ -17023,12 +17023,14 @@ forge-gui/res/conquest/planes/Tarkir/Abzan[!!-~]Houses/Anafenza,[!!-~]the[!!-~]F
 forge-gui/res/conquest/planes/Tarkir/Abzan[!!-~]Houses/Daghatar[!!-~]the[!!-~]Adamant.dck -text
 forge-gui/res/conquest/planes/Tarkir/Abzan[!!-~]Houses/Dragonlord[!!-~]Dromoka.dck -text
 forge-gui/res/conquest/planes/Tarkir/Abzan[!!-~]Houses/Dromoka,[!!-~]the[!!-~]Eternal.dck -text
+forge-gui/res/conquest/planes/Tarkir/Abzan[!!-~]Houses/Figure[!!-~]of[!!-~]Destiny.dck -text
 forge-gui/res/conquest/planes/Tarkir/Abzan[!!-~]Houses/Sorin,[!!-~]Solemn[!!-~]Visitor.dck -text
 forge-gui/res/conquest/planes/Tarkir/Abzan[!!-~]Houses/_events.txt -text
 forge-gui/res/conquest/planes/Tarkir/Jeskai[!!-~]Way/Dragonlord[!!-~]Ojutai.dck -text
 forge-gui/res/conquest/planes/Tarkir/Jeskai[!!-~]Way/Jeskai[!!-~]Morph.dck -text
 forge-gui/res/conquest/planes/Tarkir/Jeskai[!!-~]Way/Jeskai[!!-~]Prowess.dck -text
 forge-gui/res/conquest/planes/Tarkir/Jeskai[!!-~]Way/Jeskai[!!-~]Rebound.dck -text
+forge-gui/res/conquest/planes/Tarkir/Jeskai[!!-~]Way/Jhoira[!!-~]of[!!-~]the[!!-~]Ghitu.dck -text
 forge-gui/res/conquest/planes/Tarkir/Jeskai[!!-~]Way/Narset[!!-~]Transcendant.dck -text
 forge-gui/res/conquest/planes/Tarkir/Jeskai[!!-~]Way/Narset,[!!-~]Enlightened[!!-~]Master.dck -text
 forge-gui/res/conquest/planes/Tarkir/Jeskai[!!-~]Way/Ojutai,[!!-~]Soul[!!-~]of[!!-~]Winter.dck -text
@@ -17040,10 +17042,12 @@ forge-gui/res/conquest/planes/Tarkir/Mardu[!!-~]Horde/Kolaghan,[!!-~]the[!!-~]St
 forge-gui/res/conquest/planes/Tarkir/Mardu[!!-~]Horde/Mardu[!!-~]Dash.dck -text
 forge-gui/res/conquest/planes/Tarkir/Mardu[!!-~]Horde/Mardu[!!-~]Raid.dck -text
 forge-gui/res/conquest/planes/Tarkir/Mardu[!!-~]Horde/Sarkhan,[!!-~]the[!!-~]Dragonspeaker.dck -text
+forge-gui/res/conquest/planes/Tarkir/Mardu[!!-~]Horde/Tahngarth.dck -text
 forge-gui/res/conquest/planes/Tarkir/Mardu[!!-~]Horde/Zurgo[!!-~]Bellstriker.dck -text
 forge-gui/res/conquest/planes/Tarkir/Mardu[!!-~]Horde/Zurgo[!!-~]Helmsmasher.dck -text
 forge-gui/res/conquest/planes/Tarkir/Mardu[!!-~]Horde/_events.txt -text
 forge-gui/res/conquest/planes/Tarkir/Sultai[!!-~]Brood/Dragonlord[!!-~]Silumgar.dck -text
+forge-gui/res/conquest/planes/Tarkir/Sultai[!!-~]Brood/Fallen[!!-~]Angel.dck -text
 forge-gui/res/conquest/planes/Tarkir/Sultai[!!-~]Brood/Sidisi,[!!-~]Brood[!!-~]Tyrant.dck -text
 forge-gui/res/conquest/planes/Tarkir/Sultai[!!-~]Brood/Sidisi,[!!-~]Undread[!!-~]Vizier.dck -text
 forge-gui/res/conquest/planes/Tarkir/Sultai[!!-~]Brood/Silumgar,[!!-~]the[!!-~]Drifting[!!-~]Death.dck -text
@@ -17054,6 +17058,7 @@ forge-gui/res/conquest/planes/Tarkir/Sultai[!!-~]Brood/Ugin,[!!-~]the[!!-~]Spiri
 forge-gui/res/conquest/planes/Tarkir/Sultai[!!-~]Brood/_events.txt -text
 forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/Atarka,[!!-~]World[!!-~]Render.dck -text
 forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/Dragonlord[!!-~]Atarka.dck -text
+forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/Heartwood[!!-~]Storyteller.dck -text
 forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/Sarkhan[!!-~]Unbroken.dck -text
 forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/Surrak[!!-~]Dragonclaw.dck -text
 forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/Surrak,[!!-~]the[!!-~]Hunt[!!-~]Caller.dck -text
