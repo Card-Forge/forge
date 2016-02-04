@@ -63,7 +63,7 @@ public class  DamageAllAi extends SpellAbilityAi {
 
         // TODO: if damage is dependant on mana paid, maybe have X be human's max life
         // Don't kill yourself
-        if (validP.contains("Each") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
+        if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
             return false;
         }
 
@@ -73,7 +73,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         // if we can kill human, do it
-        if ((validP.contains("Each") || validP.contains("EachOpponent"))
+        if ((validP.equals("Player") || validP.contains("Opponent"))
                 && (opp.getLife() <= ComputerUtilCombat.predictDamageTo(opp, dmg, source, false))) {
             return true;
         }
@@ -134,12 +134,12 @@ public class  DamageAllAi extends SpellAbilityAi {
             computerList.clear();
         }
         // Don't get yourself killed
-        if (validP.contains("Each") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
+        if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
             return false;
         }
 
         // if we can kill human, do it
-        if ((validP.contains("Each") || validP.contains("EachOpponent") || validP.contains("Targeted"))
+        if ((validP.equals("Player") || validP.equals("Opponent") || validP.contains("Targeted"))
                 && (enemy.getLife() <= ComputerUtilCombat.predictDamageTo(enemy, dmg, source, false))) {
             return true;
         }
@@ -156,16 +156,14 @@ public class  DamageAllAi extends SpellAbilityAi {
      * <p>
      * getKillableCreatures.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param player
      *            a {@link forge.game.player.Player} object.
      * @param dmg
      *            a int.
-     * @return a {@link forge.CardList} object.
+     * @return a {@link forge.game.card.CardCollection} object.
      */
     private CardCollection getKillableCreatures(final SpellAbility sa, final Player player, final int dmg) {
         final Card source = sa.getHostCard();
@@ -223,12 +221,12 @@ public class  DamageAllAi extends SpellAbilityAi {
             return true;
         }
         // Don't get yourself killed
-        if (validP.contains("Each") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
+        if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
             return false;
         }
 
         // if we can kill human, do it
-        if ((validP.contains("Each") || validP.contains("EachOpponent") || validP.contains("Targeted"))
+        if ((validP.equals("Player") || validP.contains("Opponent") || validP.contains("Targeted"))
                 && (enemy.getLife() <= ComputerUtilCombat.predictDamageTo(enemy, dmg, source, false))) {
             return true;
         }

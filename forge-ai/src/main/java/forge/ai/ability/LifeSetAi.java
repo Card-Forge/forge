@@ -77,7 +77,7 @@ public class LifeSetAi extends SpellAbilityAi {
                 }
             }
         } else {
-            if (sa.hasParam("Each") && sa.getParam("Defined").equals("Each")) {
+            if (sa.getParam("Defined").equals("Player")) {
                 if (amount == 0) {
                     return false;
                 } else if (myLife > amount) { // will decrease computer's

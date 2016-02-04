@@ -1,7 +1,7 @@
 Name:Barter in Blood
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 2 B B | Amount$ 2 | SacValid$ Creature | Defined$ Each | SpellDescription$ Each player sacrifices two creatures.
+A:SP$ Sacrifice | Cost$ 2 B B | Amount$ 2 | SacValid$ Creature | Defined$ Player | SpellDescription$ Each player sacrifices two creatures.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barter_in_blood.jpg
 Oracle:Each player sacrifices two creatures.

@@ -111,7 +111,7 @@ public class SacrificeAi extends SpellAbilityAi {
         final String valid = sa.getParam("SacValid");
         if (defined == null) {
             // Self Sacrifice.
-        } else if (defined.equals("Each") || (defined.equals("Opponent") && !sa.isTrigger())) {
+        } else if (defined.equals("Player") || (defined.equals("Opponent") && !sa.isTrigger())) {
             // If Sacrifice hits both players:
             // Only cast it if Human has the full amount of valid
             // Only cast it if AI doesn't have the full amount of Valid

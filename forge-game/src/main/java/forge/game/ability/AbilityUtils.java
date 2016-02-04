@@ -684,7 +684,7 @@ public class AbilityUtils {
      *            a card type
      * @param sa
      *            a SpellAbility
-     * @return a {@link forge.CardList} object.
+     * @return a {@link forge.game.CardCollectionView} object.
      */
     public static CardCollectionView filterListByType(final CardCollectionView list, String type, final SpellAbility sa) {
         if (type == null) {
@@ -1098,9 +1098,6 @@ public class AbilityUtils {
         else if (defined.equals("You")) {
             players.add(sa.getActivatingPlayer());
         }
-        else if (defined.equals("Each")) {
-            players.addAll(game.getPlayersInTurnOrder());
-        }
         else if (defined.equals("Opponent")) {
             players.add(sa.getActivatingPlayer().getOpponent());
         }
@@ -1415,7 +1412,7 @@ public class AbilityUtils {
      * @param s
      *            a {@link java.lang.String} object.
      * @param ctb
-     *            a {@link forge.SpellAbility} object.
+     *            a {@link forge.game.CardTraitBase} object.
      * @return a int.
      */
     public static int xCount(final Card c, final String s, final CardTraitBase ctb) {
