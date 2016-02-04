@@ -16903,6 +16903,12 @@ forge-gui/res/conquest/planes/Dominaria/regions.txt -text
 forge-gui/res/conquest/planes/Dominaria/sets.txt -text
 forge-gui/res/conquest/planes/Innistrad/Gavony/_events.txt -text
 forge-gui/res/conquest/planes/Innistrad/Kessig/_events.txt -text
+forge-gui/res/conquest/planes/Innistrad/Moorland/Heavenly[!!-~]Host.dck -text
+forge-gui/res/conquest/planes/Innistrad/Moorland/Knowedge[!!-~]is[!!-~]Power.dck -text
+forge-gui/res/conquest/planes/Innistrad/Moorland/Oppressive[!!-~]Faith.dck -text
+forge-gui/res/conquest/planes/Innistrad/Moorland/Strength[!!-~]in[!!-~]Numbers.dck -text
+forge-gui/res/conquest/planes/Innistrad/Moorland/The[!!-~]Ghost[!!-~]with[!!-~]the[!!-~]Most.dck -text
+forge-gui/res/conquest/planes/Innistrad/Moorland/Who[!!-~]Ya[!!-~]Gonna[!!-~]Call.dck -text
 forge-gui/res/conquest/planes/Innistrad/Moorland/_events.txt -text
 forge-gui/res/conquest/planes/Innistrad/Nephalia/Blood[!!-~]Bonds.dck -text
 forge-gui/res/conquest/planes/Innistrad/Nephalia/Dark[!!-~]Powers[!!-~]at[!!-~]Work.dck -text
