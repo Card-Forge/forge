@@ -1,6 +1,6 @@
 Name:Temple Bell
 ManaCost:3
 Types:Artifact
-A:AB$ Draw | Cost$ T | NumCards$ 1 | Defined$ Each | SpellDescription$ Each player draws a card.
+A:AB$ Draw | Cost$ T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player draws a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_bell.jpg
 Oracle:{T}: Each player draws a card.

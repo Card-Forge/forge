@@ -5,7 +5,7 @@ A:SP$ RepeatEach | Cost$ 2 U B | RepeatPlayers$ Player | RepeatSubAbility$ Madne
 SVar:MadnessDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ MadnessSaveAmount
 SVar:MadnessSaveAmount:DB$ StoreSVar | SVar$ MaxDiscard | Type$ CountSVar | Expression$ NumDiscard | ConditionCheckSVar$ NumDiscard | ConditionSVarCompare$ GTMaxDiscard | SubAbility$ MadnessCleanUp
 SVar:MadnessCleanUp:DB$ Cleanup | ClearRemembered$ True
-SVar:MadnessDraw:DB$ Draw | Defined$ Each | NumCards$ MaxDiscard | SubAbility$ MadnessReset
+SVar:MadnessDraw:DB$ Draw | Defined$ Player | NumCards$ MaxDiscard | SubAbility$ MadnessReset
 SVar:MadnessReset:DB$ StoreSVar | SVar$ MaxDiscard | Type$ Number | Expression$ 0 | SubAbility$ Cipher
 SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
 SVar:IsEncoded:Number$0
