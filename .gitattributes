@@ -17081,6 +17081,7 @@ forge-gui/res/conquest/planes/Theros/Akros/WRSoldiers.dck -text
 forge-gui/res/conquest/planes/Theros/Akros/_events.txt -text
 forge-gui/res/conquest/planes/Theros/Meletis/Daxos.dck -text
 forge-gui/res/conquest/planes/Theros/Meletis/Ephara.dck -text
+forge-gui/res/conquest/planes/Theros/Meletis/Keranos.dck -text
 forge-gui/res/conquest/planes/Theros/Meletis/KioraPW.dck -text
 forge-gui/res/conquest/planes/Theros/Meletis/MonoUDev.dck -text
 forge-gui/res/conquest/planes/Theros/Meletis/UWControl.dck -text
@@ -17091,7 +17092,9 @@ forge-gui/res/conquest/planes/Theros/Nyx/Heliod.dck -text
 forge-gui/res/conquest/planes/Theros/Nyx/Nylea.dck -text
 forge-gui/res/conquest/planes/Theros/Nyx/Purphoros.dck -text
 forge-gui/res/conquest/planes/Theros/Nyx/Thassa.dck -text
+forge-gui/res/conquest/planes/Theros/Nyx/XenagosPW.dck -text
 forge-gui/res/conquest/planes/Theros/Nyx/_events.txt -text
+forge-gui/res/conquest/planes/Theros/Setessa/AjaniPW.dck -text
 forge-gui/res/conquest/planes/Theros/Setessa/Anthousa.dck -text
 forge-gui/res/conquest/planes/Theros/Setessa/BGConstellation.dck -text
 forge-gui/res/conquest/planes/Theros/Setessa/Hydra.dck -text

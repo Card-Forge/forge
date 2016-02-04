@@ -1,6 +1,6 @@
-Name:Black Devotion|Deck:MonoBDev.dck|Variant:None|Avatar:Gray Merchant of Asphodel|Desc:
-Name:UB Control|Deck:UBControl.dck|Variant:None|Avatar:Thoughseize|Desc:
-Name:Athreos|Deck:Athreos.dck|Variant:Commander|Avatar:Athreos, God of Passage|Desc:
+Name:Control your Nightmares|Deck:UBControl.dck|Variant:None|Avatar:Thoughseize|Desc:
 Name:Tymaret|Deck:Tymaret.dck|Variant:Commander|Avatar:Tymaret, the Murder King|Desc:
-Name:Daxos Returned|Deck:DaxosReturned.dck|Variant:Commander|Avatar:Daxos the Returned|Desc:
+Name:Death Devotion|Deck:MonoBDev.dck|Variant:None|Avatar:Gray Merchant of Asphodel|Desc:
+Name:Athreos|Deck:Athreos.dck|Variant:Commander|Avatar:Athreos, God of Passage|Desc:
+Name:Daxos the Returned|Deck:DaxosReturned.dck|Variant:Commander|Avatar:Daxos the Returned|Desc:
 Name:Ashiok|Deck:AshiokPW.dck|Variant:Planeswalker|Avatar:Ashiok, Nightmare Weaver|Desc:
