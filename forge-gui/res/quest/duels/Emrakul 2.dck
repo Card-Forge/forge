@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Emrakul 2
+Title=Emrakul
+Difficulty=medium
+Description=Colorless Eldrazi deck
+Icon=Emrakul.jpg
+Deck Type=constructed
+[main]
+18 Wastes
+4 Eldrazi Temple
+2 Eye of Ugin
+2 Pristine Talisman
+4 Eldrazi Mimic
+4 Endless One
+4 Matter Reshaper
+4 Pilgrim's Eye
+2 Thought-Knot Seer
+2 Warden of Geometries
+2 Reality Smasher
+4 Walker of the Wastes
+2 Oblivion Sower
+2 Eldrazi Devastator
+2 Bane of Bala Ged
+2 Ulamog's Crusher
+[sideboard]
