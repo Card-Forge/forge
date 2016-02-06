@@ -238,7 +238,7 @@ public final class CardBlock implements Comparable<CardBlock> {
          */
         @Override
         protected CardBlock read(String line, int i) {
-            final String[] sParts = TextUtil.splitWithParenthesis(line.trim(), ',', 3);
+            final String[] sParts = TextUtil.splitWithParenthesis(line, ',', 3);
             String name = sParts[0];
 
             String[] numbers = sParts[1].trim().split("/");

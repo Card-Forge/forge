@@ -90,11 +90,19 @@ public class ConquestRegion {
             ColorSet colorSet = ColorSet.ALL_COLORS;
             Predicate<PaperCard> pred = Predicates.alwaysTrue();
 
-            String[] pieces = line.trim().split("\\|");
+            String key, value;
+            String[] pieces = line.split("\\|");
             for (String piece : pieces) {
-                String[] kv = piece.split(":", 2);
-                String key = kv[0].trim().toLowerCase();
-                String value = kv[1].trim();
+                int idx = piece.indexOf(':');
+                if (idx != -1) {
+                    key = piece.substring(0, idx).trim().toLowerCase();
+                    value = piece.substring(idx + 1).trim();
+                }
+                else {
+                    alertInvalidLine(line, "Invalid plane definition.");
+                    key = piece.trim().toLowerCase();
+                    value = "";
+                }
                 switch(key) {
                 case "name":
                     name = value;
@@ -128,6 +136,9 @@ public class ConquestRegion {
                             return false;
                         }
                     };
+                    break;
+                default:
+                    alertInvalidLine(line, "Invalid region definition.");
                     break;
                 }
             }

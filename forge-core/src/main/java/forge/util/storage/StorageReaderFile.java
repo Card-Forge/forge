@@ -36,22 +36,10 @@ import java.util.TreeMap;
 public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
     protected final File file;
 
-    /**
-     * Instantiates a new storage reader file.
-     *
-     * @param pathname the pathname
-     * @param keySelector0 the key selector0
-     */
     public StorageReaderFile(final String pathname, final Function<? super T, String> keySelector0) {
         this(new File(pathname), keySelector0);
     }
 
-    /**
-     * Instantiates a new storage reader file.
-     *
-     * @param file0 the file0
-     * @param keySelector0 the key selector0
-     */
     public StorageReaderFile(final File file0, final Function<? super T, String> keySelector0) {
         super(keySelector0);
         file = file0;
@@ -62,23 +50,24 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
         return file.getPath();
     }
 
-    /* (non-Javadoc)
-     * @see forge.util.IItemReader#readAll()
-     */
     @Override
     public Map<String, T> readAll() {
         final Map<String, T> result = new TreeMap<String, T>();
 
         int idx = 0;
-        for (final String s : FileUtil.readFile(file)) {
-            if (!lineContainsObject(s)) {
+        for (String line : FileUtil.readFile(file)) {
+            line = line.trim();
+            if (line.isEmpty()) {
+                continue; //ignore blank or whitespace lines
+            }  
+
+            if (!lineContainsObject(line)) {
                 continue;
             }
 
-            final T item = read(s, idx);
-            if (null == item) {
-                final String msg = "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
-                throw new RuntimeException(msg);
+            T item = read(line, idx);
+            if (item == null) {
+                continue;
             }
 
             idx++;
@@ -92,31 +81,20 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
         return result;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * 
-     * @param line
-     *            the line
-     * @return the t
-     */
     protected abstract T read(String line, int idx);
 
-    /**
-     * Line contains object.
-     * 
-     * @param line
-     *            the line
-     * @return true, if successful
-     */
     protected boolean lineContainsObject(final String line) {
         return !StringUtils.isBlank(line) && !line.trim().startsWith("#");
     }
 
-    /* (non-Javadoc)
-     * @see forge.util.IItemReader#getItemKey(java.lang.Object)
-     */
     @Override
     public String getItemKey(final T item) {
         return keySelector.apply(item);
+    }
+
+    protected void alertInvalidLine(String line, String message) {
+        System.err.println(message);
+        System.err.println(line);
+        System.err.println(file.getPath());
     }
 }

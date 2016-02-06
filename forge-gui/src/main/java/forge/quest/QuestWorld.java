@@ -18,7 +18,6 @@
 package forge.quest;
 
 import com.google.common.base.Function;
-
 import forge.deck.Deck;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
@@ -131,28 +130,41 @@ public class QuestWorld implements Comparable<QuestWorld>{
             final List<String> sets = new ArrayList<String>();
             final List<String> bannedCards = new ArrayList<String>(); // if both empty, no format
 
-            // This is what you need to use here =>
-            // FileSection.parse(line, ":", "|");
-            
-            final String[] sParts = line.trim().split("\\|");
-
-            for (final String sPart : sParts) {
-                
-                final String[] kv = sPart.split(":", 2);
-                final String key = kv[0].toLowerCase();
-                if ("name".equals(key)) {
-                    useName = kv[1];
-                } else if ("dir".equals(key)) {
-                    useDir = kv[1];
-                } else if ("sets".equals(key)) {
-                    sets.addAll(Arrays.asList(kv[1].split(", ")));
-                } else if ("banned".equals(key)) {
-                    bannedCards.addAll(Arrays.asList(kv[1].split("; ")));
+            String key, value;
+            String[] pieces = line.split("\\|");
+            for (String piece : pieces) {
+                int idx = piece.indexOf(':');
+                if (idx != -1) {
+                    key = piece.substring(0, idx).trim().toLowerCase();
+                    value = piece.substring(idx + 1).trim();
+                }
+                else {
+                    alertInvalidLine(line, "Invalid plane definition.");
+                    key = piece.trim().toLowerCase();
+                    value = "";
+                }
+                switch(key) {
+                case "name":
+                    useName = value;
+                    break;
+                case "dir":
+                    useDir = value;
+                    break;
+                case "sets":
+                    sets.addAll(Arrays.asList(value.split(", ")));
+                    break;
+                case "banned":
+                    bannedCards.addAll(Arrays.asList(value.split("; ")));
+                    break;
+                default:
+                    alertInvalidLine(line, "Invalid quest world definition.");
+                    break;
                 }
             }
 
             if (useName == null) {
-                throw new RuntimeException("A Quest World  must have a name! Check worlds.txt file");
+                alertInvalidLine(line, "Quest world must have a name.");
+                return null;
             }
 
             if (!sets.isEmpty() || !bannedCards.isEmpty()) {

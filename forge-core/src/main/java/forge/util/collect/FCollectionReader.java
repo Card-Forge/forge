@@ -12,12 +12,23 @@ public abstract class FCollectionReader<T> {
     }
 
     void readAll(FCollection<T> collection) {
-        for (final String line : FileUtil.readFile(file)) {
-            final T item = read(line);
+        for (String line : FileUtil.readFile(file)) {
+            line = line.trim();
+            if (line.isEmpty()) {
+                continue; //ignore blank or whitespace lines
+            }
+
+            T item = read(line);
             if (item != null) {
                 collection.add(item);
             }
         }
+    }
+
+    protected void alertInvalidLine(String line, String message) {
+        System.err.println(message);
+        System.err.println(line);
+        System.err.println(file.getPath());
     }
 
     protected abstract T read(String line);
