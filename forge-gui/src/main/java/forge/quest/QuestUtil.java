@@ -564,7 +564,7 @@ public class QuestUtil {
         starter.add(aiStart.setPlayer(aiPlayer));
         if (!"".equals(event.getProfile())) {
         	((LobbyPlayerAi) aiPlayer).setAiProfile(event.getProfile());
-        	System.out.println("AI Profile was set to: " + event.getProfile());
+        	System.out.println("[Quest Mode] AI Profile was set to: " + event.getProfile());
         }
 
         final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
