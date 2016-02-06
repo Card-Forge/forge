@@ -20,11 +20,10 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
 import forge.assets.FSkin;
-import forge.assets.FSkinImage;
 import forge.assets.FSkinProp;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
-import forge.card.CardRenderer;
+import forge.card.CardAvatarImage;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
@@ -94,10 +93,7 @@ public class MatchController extends AbstractGuiGame {
                 avatar = new FTextureRegionImage(FSkin.getAvatars().get(p.getAvatarIndex()));
             }
             else { //handle lobby players with art from cards
-                avatar = CardRenderer.getCardArt(p.getAvatarCardImageKey(), false, false);
-                if (avatar == null) { //use unknown avatar image if card image doesn't exist
-                    avatar = FSkinImage.UNKNOWN;
-                }
+                avatar = new CardAvatarImage(p.getAvatarCardImageKey());
             }
         }
         return avatar;

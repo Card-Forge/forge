@@ -16,6 +16,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
+import forge.card.CardAvatarImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
@@ -599,8 +600,8 @@ public class ConquestMultiverseScreen extends FScreen {
 
         private void update() {
             event = model.getCurrentLocation().getEvent();
-            playerAvatar.card = model.getSelectedCommander().getCard();
-            opponentAvatar.card = event.getAvatarCard();
+            playerAvatar.setCard(model.getSelectedCommander().getCard());
+            opponentAvatar.setCard(event.getAvatarCard());
         }
 
         @Override
@@ -655,21 +656,23 @@ public class ConquestMultiverseScreen extends FScreen {
         private class AvatarDisplay extends FDisplayObject {
             private final boolean forOpponent;
             private PaperCard card;
+            private CardAvatarImage image;
 
             private AvatarDisplay(boolean forOpponent0) {
                 forOpponent = forOpponent0;
             }
 
+            public void setCard(PaperCard card0) {
+                if (card == card0) { return; }
+                card = card0;
+                image = new CardAvatarImage(card);
+            }
+
             @Override
             public void draw(Graphics g) {
-                if (card == null) { return; }
-
-                FImage image = CardRenderer.getCardArt(card);
-                if (image == null) { return; }
-
-                float w = getWidth();
-                float h = getHeight();
-                g.drawImage(image, 0, 0, w, h);
+                if (image != null) {
+                    image.draw(g, 0, 0, getWidth(), getHeight());
+                }
             }
 
             @Override
