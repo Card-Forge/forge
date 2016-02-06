@@ -24,7 +24,6 @@ public class ConquestChaosBattle extends ConquestBattle {
     private final QuestWorld world;
     private final QuestEventDuel duel;
     private ConquestAwardPool awardPool;
-    private boolean finished;
 
     public ConquestChaosBattle() {
         super(null, 0);
@@ -112,7 +111,7 @@ public class ConquestChaosBattle extends ConquestBattle {
             model.getChaosBattleRecord().addLoss();
             model.saveData();
         }
-        finished = true;
+        super.onFinished(model, view);
     }
 
     public ConquestAwardPool getAwardPool() {
@@ -120,9 +119,5 @@ public class ConquestChaosBattle extends ConquestBattle {
             awardPool = new ConquestAwardPool(world.getAllCards());
         }
         return awardPool;
-    }
-
-    public boolean isFinished() {
-        return finished;
     }
 }

@@ -1343,7 +1343,6 @@ forge-gui-mobile/src/forge/screens/planarconquest/ConquestChaosWheel.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestCollectionScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestCommandersScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestDeckEditor.java -text
-forge-gui-mobile/src/forge/screens/planarconquest/ConquestEventScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMenu.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMultiverseScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestPlaneSelector.java -text

@@ -3,6 +3,7 @@ package forge.screens.planarconquest;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -14,14 +15,18 @@ import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.FSkinTexture;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
+import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestAwardPool;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestBattle;
 import forge.planarconquest.ConquestChaosBattle;
+import forge.planarconquest.ConquestEvent;
 import forge.planarconquest.ConquestEvent.ChaosWheelOutcome;
 import forge.planarconquest.ConquestEvent.ConquestEventRecord;
 import forge.planarconquest.ConquestLocation;
@@ -32,7 +37,11 @@ import forge.planarconquest.ConquestReward;
 import forge.planarconquest.ConquestRegion;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.toolbox.FButton;
+import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
@@ -42,34 +51,54 @@ import forge.util.collect.FCollectionView;
 public class ConquestMultiverseScreen extends FScreen {
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.6f);
     private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.1f);
+    private static final float BATTLE_BAR_HEIGHT = Utils.AVG_FINGER_HEIGHT * 2;
+    private static final FSkinFont BATTLE_BAR_NAME_FONT = FSkinFont.get(14);
 
     private final PlaneGrid planeGrid;
+    private final BattleBar battleBar;
     private ConquestData model;
-    private ConquestChaosBattle chaosBattle;
+    private ConquestBattle activeBattle;
 
     public ConquestMultiverseScreen() {
         super("", ConquestMenu.getMenu());
 
         planeGrid = add(new PlaneGrid());
+        battleBar = add(new BattleBar());
     }
 
     @Override
     public void onActivate() {
-        if (chaosBattle == null) {
+        if (activeBattle == null) {
             update();
         }
-        else if (chaosBattle.isFinished()) {
-            //when returning to this screen from launched chaos battle, award boosters if it was conquered
-            if (chaosBattle.wasConquered()) {
-                awardBoosters(chaosBattle.getAwardPool(), 3);
+        else if (activeBattle.isFinished()) {
+            //when returning to this screen from launched battle, award prizes if it was conquered
+            if (activeBattle.wasConquered()) {
+                if (activeBattle instanceof ConquestChaosBattle) {
+                    ConquestChaosBattle chaosBattle = (ConquestChaosBattle)activeBattle;
+                    awardBoosters(chaosBattle.getAwardPool(), 3);
+                }
+                else {
+                    ConquestLocation loc = activeBattle.getLocation();
+                    ConquestEventRecord record = model.getCurrentPlaneData().getEventRecord(loc);
+                    if (record.getWins(activeBattle.getTier()) == 1 && record.getHighestConqueredTier() == activeBattle.getTier()) {
+                        //if first time conquering event at the selected tier, show animation of new badge being positioned on location
+                        planeGrid.animateBadgeIntoPosition(loc, activeBattle.getTier());
+                    }
+                    else {
+                        //just spin Chaos Wheel immediately if event tier was previously conquered
+                        spinChaosWheel();
+                    }
+                }
             }
-            chaosBattle = null;
+            activeBattle = null;
         }
     }
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        planeGrid.setBounds(0, startY, width, height - startY);
+        battleBar.setBounds(0, height - BATTLE_BAR_HEIGHT, width, BATTLE_BAR_HEIGHT);
+        planeGrid.setBounds(0, startY, width, height - BATTLE_BAR_HEIGHT - startY);
         planeGrid.scrollPlaneswalkerIntoView();
     }
 
@@ -82,27 +111,8 @@ public class ConquestMultiverseScreen extends FScreen {
 
         planeGrid.revalidate();
         planeGrid.scrollPlaneswalkerIntoView();
-    }
 
-    private void launchEvent() {
-        ConquestLocation loc = model.getCurrentLocation();
-        Forge.openScreen(new ConquestEventScreen(loc.getEvent(), loc, new Callback<ConquestBattle>() {
-            @Override
-            public void run(ConquestBattle battle) {
-                if (battle.wasConquered()) {
-                    ConquestLocation loc = battle.getLocation();
-                    ConquestEventRecord record = model.getCurrentPlaneData().getEventRecord(loc);
-                    if (record.getWins(battle.getTier()) == 1 && record.getHighestConqueredTier() == battle.getTier()) {
-                        //if first time conquering event at the selected tier, show animation of new badge being positioned on location
-                        planeGrid.animateBadgeIntoPosition(loc, battle.getTier());
-                    }
-                    else {
-                        //just spin Chaos Wheel immediately if event tier was previously conquered
-                        spinChaosWheel();
-                    }
-                }
-            }
-        }));
+        battleBar.update();
     }
 
     private void spinChaosWheel() {
@@ -206,6 +216,17 @@ public class ConquestMultiverseScreen extends FScreen {
         FOptionPane.showMessageDialog(null, "Received Planeswalk Charge");
     }
 
+    private void launchEvent() {
+        LoadingOverlay.show("Starting battle...", new Runnable() {
+            @Override
+            public void run() {
+                ConquestLocation loc = model.getCurrentLocation();
+                activeBattle = loc.getEvent().createBattle(loc, 1);
+                FModel.getConquest().startBattle(activeBattle);
+            }
+        });
+    }
+
     private void launchChaosBattle() {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
@@ -213,8 +234,8 @@ public class ConquestMultiverseScreen extends FScreen {
                 LoadingOverlay.show("Chaos approaching...", new Runnable() {
                     @Override
                     public void run() {
-                        chaosBattle = new ConquestChaosBattle();
-                        FModel.getConquest().startBattle(chaosBattle);
+                        activeBattle = new ConquestChaosBattle();
+                        FModel.getConquest().startBattle(activeBattle);
                     }
                 });
             }
@@ -237,10 +258,7 @@ public class ConquestMultiverseScreen extends FScreen {
         public boolean tap(float x, float y, int count) {
             //start move animation if a path can be found to tapped location
             ConquestLocation loc = getLocation(x, y);
-            if (model.getCurrentLocation().equals(loc)) {
-                launchEvent();
-            }
-            else {
+            if (!model.getCurrentLocation().equals(loc)) {
                 List<ConquestLocation> path = model.getPath(loc);
                 if (path != null) {
                     activeMoveAnimation = new MoveAnimation(path);
@@ -497,7 +515,8 @@ public class ConquestMultiverseScreen extends FScreen {
                 model.setCurrentLocation(path.get(path.size() - 1));
                 model.saveData(); //save new location
                 activeMoveAnimation = null;
-                launchEvent();
+
+                battleBar.update();
             }
         }
 
@@ -557,6 +576,113 @@ public class ConquestMultiverseScreen extends FScreen {
                 if (!endingAll) {
                     spinChaosWheel(); //spin Chaos Wheel after badge positioned
                 }
+            }
+        }
+    }
+
+    private class BattleBar extends FContainer {
+        private final AvatarDisplay playerAvatar, opponentAvatar;
+        private final FButton btnBattle;
+        private ConquestEvent event;
+
+        private BattleBar() {
+            playerAvatar = add(new AvatarDisplay(false));
+            opponentAvatar = add(new AvatarDisplay(true));
+            btnBattle = add(new FButton("Battle", new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    launchEvent();
+                }
+            }));
+            btnBattle.setFont(FSkinFont.get(20));
+        }
+
+        private void update() {
+            event = model.getCurrentLocation().getEvent();
+            playerAvatar.card = model.getSelectedCommander().getCard();
+            opponentAvatar.card = event.getAvatarCard();
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
+            float padding = Utils.scale(3f);
+            float labelHeight = BATTLE_BAR_NAME_FONT.getLineHeight() * 1.1f;
+            float avatarSize = height - labelHeight - 2 * padding;
+
+            playerAvatar.setBounds(padding, height - avatarSize - padding, avatarSize, avatarSize);
+            opponentAvatar.setBounds(width - avatarSize - padding, padding, avatarSize, avatarSize);
+
+            float buttonWidth = width - 2 * avatarSize - 4 * padding;
+            float buttonHeight = height - 2 * labelHeight - 4 * padding;
+            btnBattle.setBounds((width - buttonWidth) / 2, (height - buttonHeight) / 2, buttonWidth, buttonHeight);
+        }
+
+        @Override
+        protected void drawBackground(Graphics g) {
+            float w = getWidth();
+            float h = getHeight();
+
+            g.startClip(0, 0, w, h);
+
+            FImage background = FSkinTexture.BG_SPACE;
+            float backgroundHeight = w * background.getHeight() / background.getWidth();
+            g.drawImage(background, 0, h - backgroundHeight, w, backgroundHeight);
+
+            g.endClip();
+        }
+
+        @Override
+        protected void drawOverlay(Graphics g) {
+            float w = getWidth();
+            float h = getHeight();
+
+            //draw top border
+            g.drawLine(1, Color.BLACK, 0, 0, w, 0);
+
+            //draw labels above and below avatars
+            float padding = playerAvatar.getLeft();
+            float labelWidth = opponentAvatar.getLeft() - 2 * padding;
+            float labelHeight = playerAvatar.getTop();
+
+            if (playerAvatar.card != null) {
+                g.drawText(playerAvatar.card.getName(), BATTLE_BAR_NAME_FONT, Color.WHITE, padding, 0, labelWidth, labelHeight, false, HAlignment.LEFT, true);
+            }
+            if (opponentAvatar.card != null) {
+                g.drawText(opponentAvatar.card.getName(), BATTLE_BAR_NAME_FONT, Color.WHITE, w - labelWidth - padding, h - labelHeight, labelWidth, labelHeight, false, HAlignment.RIGHT, true);
+            }
+        }
+
+        private class AvatarDisplay extends FDisplayObject {
+            private final boolean forOpponent;
+            private PaperCard card;
+
+            private AvatarDisplay(boolean forOpponent0) {
+                forOpponent = forOpponent0;
+            }
+
+            @Override
+            public void draw(Graphics g) {
+                if (card == null) { return; }
+
+                FImage image = CardRenderer.getCardArt(card);
+                if (image == null) { return; }
+
+                float w = getWidth();
+                float h = getHeight();
+                g.drawImage(image, 0, 0, w, h);
+            }
+
+            @Override
+            public boolean tap(float x, float y, int count) {
+                return true;
+            }
+
+            @Override
+            public boolean longPress(float x, float y) {
+                if (card != null) {
+                    CardZoom.show(card);
+                }
+                return true;
             }
         }
     }

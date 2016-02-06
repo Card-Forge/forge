@@ -78,7 +78,7 @@ public class BoosterDraftAI {
         final ColorSet currentChoice = deckCols.getChosenColors();
         final boolean canAddMoreColors = deckCols.canChoseMoreColors();
 
-        final List<Pair<PaperCard, Double>> rankedCards = rankCards(chooseFrom, bd.CUSTOM_RANKINGS_FILE[0]);
+        final List<Pair<PaperCard, Double>> rankedCards = rankCards(chooseFrom, IBoosterDraft.CUSTOM_RANKINGS_FILE[0]);
 
         for (final Pair<PaperCard, Double> p : rankedCards) {
             double valueBoost = 0;

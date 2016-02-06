@@ -15,6 +15,7 @@ public abstract class ConquestBattle {
     private final int tier;
     private Deck opponentDeck;
     private boolean conquered;
+    private boolean finished;
 
     protected ConquestBattle(ConquestLocation location0, int tier0) {
         location = location0;
@@ -59,6 +60,11 @@ public abstract class ConquestBattle {
     }
 
     public void onFinished(final ConquestData model, final IWinLoseView<? extends IButton> view) {
+        finished = true;
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 
     protected abstract Deck buildOpponentDeck();
