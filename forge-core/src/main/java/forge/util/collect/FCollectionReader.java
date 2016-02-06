@@ -29,6 +29,7 @@ public abstract class FCollectionReader<T> {
         System.err.println(message);
         System.err.println(line);
         System.err.println(file.getPath());
+        System.err.println();
     }
 
     protected abstract T read(String line);

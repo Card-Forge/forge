@@ -99,7 +99,7 @@ public class ConquestRegion {
                     value = piece.substring(idx + 1).trim();
                 }
                 else {
-                    alertInvalidLine(line, "Invalid plane definition.");
+                    alertInvalidLine(line, "Invalid region definition.");
                     key = piece.trim().toLowerCase();
                     value = "";
                 }

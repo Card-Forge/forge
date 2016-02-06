@@ -96,5 +96,6 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
         System.err.println(message);
         System.err.println(line);
         System.err.println(file.getPath());
+        System.err.println();
     }
 }
