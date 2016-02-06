@@ -243,17 +243,17 @@ public class ConquestMultiverseScreen extends FScreen {
         });
     }
 
+    @Override
+    public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
+        //prevent user touch actions while an animation is in progress
+        if (planeGrid.activeMoveAnimation == null && planeGrid.activeBadgeAnimation == null) {
+            super.buildTouchListeners(screenX, screenY, listeners);
+        }
+    }
+
     private class PlaneGrid extends FScrollPane {
         private MoveAnimation activeMoveAnimation;
         private BadgeAnimation activeBadgeAnimation;
-
-        @Override
-        public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
-            //prevent user touch actions while an animation is in progress
-            if (activeMoveAnimation == null && activeBadgeAnimation == null) {
-                super.buildTouchListeners(screenX, screenY, listeners);
-            }
-        }
 
         @Override
         public boolean tap(float x, float y, int count) {
