@@ -63,6 +63,12 @@ public final class GamePlayerUtil {
         String profile = "";
         if (profileOverride.isEmpty()) {
             String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
+            if (!AiProfileUtil.getProfilesDisplayList().contains(lastProfileChosen)) {
+                System.out.println("[AI Preferences] Unknown profile " + lastProfileChosen + " was requested, resetting to default.");
+                lastProfileChosen = "Default";
+                FModel.getPreferences().setPref(FPref.UI_CURRENT_AI_PROFILE, "Default");
+                FModel.getPreferences().save();
+            }
             player.setRotateProfileEachGame(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL));
             if (lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
                 lastProfileChosen = AiProfileUtil.getRandomProfile();
