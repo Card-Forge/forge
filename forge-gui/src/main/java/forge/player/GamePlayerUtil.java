@@ -60,18 +60,23 @@ public final class GamePlayerUtil {
         final LobbyPlayerAi player = new LobbyPlayerAi(name, options);
 
         // TODO: implement specific AI profiles for quest mode.
+        String profile = "";
         if (profileOverride.isEmpty()) {
             String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
             player.setRotateProfileEachGame(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL));
             if (lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
                 lastProfileChosen = AiProfileUtil.getRandomProfile();
             }
-            player.setAiProfile(lastProfileChosen);
             System.out.println(String.format("[AI Preferences] AI profile %s was chosen for the lobby player %s.", lastProfileChosen, player.getName()));
+            profile = lastProfileChosen;
         } else {
-            player.setAiProfile(profileOverride);
             System.out.println(String.format("[Override] AI profile %s was chosen for the lobby player %s.", profileOverride, player.getName()));
+            profile = profileOverride;
         }
+
+        assert (!profile.isEmpty());
+        
+        player.setAiProfile(profile);
         player.setAvatarIndex(avatarIndex);
         return player;
     }
