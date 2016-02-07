@@ -125,6 +125,7 @@ public enum FSkinImage implements FImage {
     PW_BADGE_UNCOMMON (FSkinProp.IMG_PW_BADGE_UNCOMMON, SourceFile.PLANAR_CONQUEST),
     PW_BADGE_RARE     (FSkinProp.IMG_PW_BADGE_RARE, SourceFile.PLANAR_CONQUEST),
     PW_BADGE_MYTHIC   (FSkinProp.IMG_PW_BADGE_MYTHIC, SourceFile.PLANAR_CONQUEST),
+    PLANE_BANNER      (FSkinProp.IMG_PLANE_BANNER, SourceFile.PLANAR_CONQUEST),
 
     //Quest Icons
     QUEST_ZEP         (FSkinProp.ICO_QUEST_ZEP, SourceFile.ICONS),

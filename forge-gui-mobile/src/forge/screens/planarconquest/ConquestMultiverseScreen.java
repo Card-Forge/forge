@@ -16,6 +16,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
+import forge.assets.TextRenderer;
 import forge.card.CardAvatarImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
@@ -52,10 +53,13 @@ import forge.util.collect.FCollectionView;
 public class ConquestMultiverseScreen extends FScreen {
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.65f);
     private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.1f);
+    private static final FSkinFont LOCATION_BAR_FONT = FSkinFont.get(16);
+    private static final FSkinFont BATTLE_BAR_FONT = FSkinFont.get(14);
     private static final float BATTLE_BAR_HEIGHT = Utils.AVG_FINGER_HEIGHT * 2;
-    private static final FSkinFont BATTLE_BAR_NAME_FONT = FSkinFont.get(14);
+    private static final float PADDING = Utils.scale(3f);
 
     private final PlaneGrid planeGrid;
+    private final LocationBar locationBar;
     private final BattleBar battleBar;
     private ConquestData model;
     private ConquestBattle activeBattle;
@@ -64,6 +68,7 @@ public class ConquestMultiverseScreen extends FScreen {
         super("", ConquestMenu.getMenu());
 
         planeGrid = add(new PlaneGrid());
+        locationBar = add(new LocationBar());
         battleBar = add(new BattleBar());
     }
 
@@ -98,8 +103,10 @@ public class ConquestMultiverseScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
+        float locationBarHeight = LOCATION_BAR_FONT.getLineHeight() * 1.4f;
         battleBar.setBounds(0, height - BATTLE_BAR_HEIGHT, width, BATTLE_BAR_HEIGHT);
-        planeGrid.setBounds(0, startY, width, height - BATTLE_BAR_HEIGHT - startY);
+        locationBar.setBounds(0, height - BATTLE_BAR_HEIGHT - locationBarHeight, width, locationBarHeight);
+        planeGrid.setBounds(0, startY, width, height - BATTLE_BAR_HEIGHT - locationBarHeight - startY);
         planeGrid.scrollPlaneswalkerIntoView();
     }
 
@@ -113,6 +120,7 @@ public class ConquestMultiverseScreen extends FScreen {
         planeGrid.revalidate();
         planeGrid.scrollPlaneswalkerIntoView();
 
+        locationBar.update();
         battleBar.update();
     }
 
@@ -517,6 +525,7 @@ public class ConquestMultiverseScreen extends FScreen {
                 model.saveData(); //save new location
                 activeMoveAnimation = null;
 
+                locationBar.update();
                 battleBar.update();
             }
         }
@@ -581,6 +590,47 @@ public class ConquestMultiverseScreen extends FScreen {
         }
     }
 
+    @Override
+    protected void drawBackground(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
+
+        g.startClip(0, locationBar.getTop(), w, h - locationBar.getTop());
+
+        FImage background = FSkinTexture.BG_SPACE;
+        float backgroundHeight = w * background.getHeight() / background.getWidth();
+        g.drawImage(background, 0, h - backgroundHeight, w, backgroundHeight);
+
+        g.endClip();
+    }
+ 
+    private class LocationBar extends FDisplayObject {
+        private final TextRenderer textRenderer = new TextRenderer();
+        private String text;
+
+        private void update() {
+            ConquestRegion region = model.getCurrentLocation().getRegion();
+            text = region.toString();
+            text += " " + region.getColorSet().toSymbolString();
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            float w = getWidth();
+            float h = getHeight();
+
+            //draw background
+            g.drawImage(FSkinImage.PLANE_BANNER, 0, 0, w, h);
+
+            //draw text
+            textRenderer.drawText(g, text, LOCATION_BAR_FONT, Color.BLACK, 0, 0, w, h, 0, h, false, HAlignment.CENTER, true);
+
+            //draw top and bottom borders
+            g.drawLine(1, Color.BLACK, 0, 0, w, 0);
+            g.drawLine(1, Color.BLACK, 0, h, w, h);
+        }
+    }
+
     private class BattleBar extends FContainer {
         private final AvatarDisplay playerAvatar, opponentAvatar;
         private final FButton btnBattle;
@@ -606,50 +656,27 @@ public class ConquestMultiverseScreen extends FScreen {
 
         @Override
         protected void doLayout(float width, float height) {
-            float padding = Utils.scale(3f);
-            float labelHeight = BATTLE_BAR_NAME_FONT.getLineHeight() * 1.1f;
-            float avatarSize = height - labelHeight - 2 * padding;
+            float labelHeight = BATTLE_BAR_FONT.getLineHeight() * 1.1f;
+            float avatarSize = height - labelHeight - 2 * PADDING;
 
-            playerAvatar.setBounds(padding, height - avatarSize - padding, avatarSize, avatarSize);
-            opponentAvatar.setBounds(width - avatarSize - padding, padding, avatarSize, avatarSize);
+            playerAvatar.setBounds(PADDING, height - avatarSize - PADDING, avatarSize, avatarSize);
+            opponentAvatar.setBounds(width - avatarSize - PADDING, PADDING, avatarSize, avatarSize);
 
-            float buttonWidth = width - 2 * avatarSize - 4 * padding;
-            float buttonHeight = height - 2 * labelHeight - 4 * padding;
+            float buttonWidth = width - 2 * avatarSize - 4 * PADDING;
+            float buttonHeight = height - 2 * labelHeight - 4 * PADDING;
             btnBattle.setBounds((width - buttonWidth) / 2, (height - buttonHeight) / 2, buttonWidth, buttonHeight);
         }
 
         @Override
-        protected void drawBackground(Graphics g) {
-            float w = getWidth();
-            float h = getHeight();
-
-            g.startClip(0, 0, w, h);
-
-            FImage background = FSkinTexture.BG_SPACE;
-            float backgroundHeight = w * background.getHeight() / background.getWidth();
-            g.drawImage(background, 0, h - backgroundHeight, w, backgroundHeight);
-
-            g.endClip();
-        }
-
-        @Override
         protected void drawOverlay(Graphics g) {
-            float w = getWidth();
-            float h = getHeight();
-
-            //draw top border
-            g.drawLine(1, Color.BLACK, 0, 0, w, 0);
-
-            //draw labels above and below avatars
-            float padding = playerAvatar.getLeft();
-            float labelWidth = opponentAvatar.getLeft() - 2 * padding;
+            float labelWidth = opponentAvatar.getLeft() - 2 * PADDING;
             float labelHeight = playerAvatar.getTop();
 
             if (playerAvatar.card != null) {
-                g.drawText(playerAvatar.card.getName(), BATTLE_BAR_NAME_FONT, Color.WHITE, padding, 0, labelWidth, labelHeight, false, HAlignment.LEFT, true);
+                g.drawText(playerAvatar.card.getName(), BATTLE_BAR_FONT, Color.WHITE, PADDING, 0, labelWidth, labelHeight, false, HAlignment.LEFT, true);
             }
             if (opponentAvatar.card != null) {
-                g.drawText(opponentAvatar.card.getName(), BATTLE_BAR_NAME_FONT, Color.WHITE, w - labelWidth - padding, h - labelHeight, labelWidth, labelHeight, false, HAlignment.RIGHT, true);
+                g.drawText(opponentAvatar.card.getName(), BATTLE_BAR_FONT, Color.WHITE, getWidth() - labelWidth - PADDING, getHeight() - labelHeight, labelWidth, labelHeight, false, HAlignment.RIGHT, true);
             }
         }
 
