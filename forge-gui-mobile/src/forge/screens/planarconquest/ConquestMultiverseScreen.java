@@ -18,8 +18,10 @@ import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.card.CardAvatarImage;
 import forge.card.CardDetailUtil;
+import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
+import forge.card.ColorSet;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -42,6 +44,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
+import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
@@ -52,10 +55,14 @@ import forge.util.collect.FCollectionView;
 public class ConquestMultiverseScreen extends FScreen {
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.65f);
     private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.1f);
-    private static final FSkinFont LOCATION_BAR_FONT = FSkinFont.get(16);
-    private static final FSkinFont BATTLE_BAR_FONT = FSkinFont.get(14);
+    private static final Color LOCATION_BAR_COLOR = FSkinColor.alphaColor(Color.WHITE, 0.15f);
+    private static final Color LOCATION_BAR_TEXT_COLOR = FSkinColor.fromRGB(200, 207, 208);
+    private static final FSkinFont PLANE_NAME_FONT = FSkinFont.get(16);
+    private static final FSkinFont EVENT_NAME_FONT = FSkinFont.get(14);
+    private static final FSkinFont AVATAR_NAME_FONT = FSkinFont.get(14);
     private static final float BATTLE_BAR_HEIGHT = Utils.AVG_FINGER_HEIGHT * 2;
-    private static final float PADDING = Utils.scale(3f);
+    private static final float PADDING = FList.PADDING;
+    private static final float LOCATION_BAR_HEIGHT = CardRenderer.getCardListItemHeight(false);
 
     private final PlaneGrid planeGrid;
     private final LocationBar locationBar;
@@ -102,10 +109,9 @@ public class ConquestMultiverseScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float locationBarHeight = LOCATION_BAR_FONT.getLineHeight() * 1.4f;
         battleBar.setBounds(0, height - BATTLE_BAR_HEIGHT, width, BATTLE_BAR_HEIGHT);
-        locationBar.setBounds(0, height - BATTLE_BAR_HEIGHT - locationBarHeight, width, locationBarHeight);
-        planeGrid.setBounds(0, startY, width, height - BATTLE_BAR_HEIGHT - locationBarHeight - startY);
+        locationBar.setBounds(0, height - BATTLE_BAR_HEIGHT - LOCATION_BAR_HEIGHT, width, LOCATION_BAR_HEIGHT);
+        planeGrid.setBounds(0, startY, width, height - BATTLE_BAR_HEIGHT - LOCATION_BAR_HEIGHT - startY);
         planeGrid.scrollPlaneswalkerIntoView();
     }
 
@@ -608,13 +614,38 @@ public class ConquestMultiverseScreen extends FScreen {
             float h = getHeight();
 
             //draw background
-            g.drawImage(FSkinImage.PLANE_BANNER, 0, 0, w, h);
+            g.fillRect(LOCATION_BAR_COLOR, 0, 0, w, h);
 
-            //draw text
+            //draw plane name, region name, and region colors
+            ConquestLocation loc = model.getCurrentLocation();
+            ConquestRegion region = loc.getRegion();
+            ColorSet regionColors = region.getColorSet();
+            float x = PADDING;
+            float y = PADDING;
+            float symbolSize = CardRenderer.MANA_SYMBOL_SIZE;
+            float availableNameWidth = w - CardFaceSymbols.getWidth(regionColors, symbolSize) - 3 * PADDING;
+            g.drawText(region.toString(), PLANE_NAME_FONT, LOCATION_BAR_TEXT_COLOR, x, y, availableNameWidth, symbolSize, false, HAlignment.LEFT, true);
+            x += availableNameWidth + PADDING;
+            CardFaceSymbols.drawColorSet(g, regionColors, x, y, symbolSize);
+
+            //draw event name and record
+            int wins, losses;
+            ConquestEvent event = loc.getEvent();
+            ConquestEventRecord record = model.getCurrentPlaneData().getEventRecord(loc);
+            if (record == null) {
+                wins = 0;
+                losses = 0;
+            }
+            else {
+                wins = record.getTotalWins();
+                losses = record.getTotalLosses();
+            }
+            x = PADDING;
+            y += symbolSize;
+            g.drawText(event.getName() + " (" + wins + "W / " + losses + "L)", EVENT_NAME_FONT, LOCATION_BAR_TEXT_COLOR, x, y, w - 2 * PADDING, h - y, false, HAlignment.CENTER, true);
 
             //draw top and bottom borders
             g.drawLine(1, Color.BLACK, 0, 0, w, 0);
-            g.drawLine(1, Color.BLACK, 0, h, w, h);
         }
     }
 
@@ -643,7 +674,7 @@ public class ConquestMultiverseScreen extends FScreen {
 
         @Override
         protected void doLayout(float width, float height) {
-            float labelHeight = BATTLE_BAR_FONT.getLineHeight() * 1.1f;
+            float labelHeight = AVATAR_NAME_FONT.getLineHeight() * 1.1f;
             float avatarSize = height - labelHeight - 2 * PADDING;
 
             playerAvatar.setBounds(PADDING, height - avatarSize - PADDING, avatarSize, avatarSize);
@@ -660,10 +691,10 @@ public class ConquestMultiverseScreen extends FScreen {
             float labelHeight = playerAvatar.getTop();
 
             if (playerAvatar.card != null) {
-                g.drawText(playerAvatar.card.getName(), BATTLE_BAR_FONT, Color.WHITE, PADDING, 0, labelWidth, labelHeight, false, HAlignment.LEFT, true);
+                g.drawText(playerAvatar.card.getName(), AVATAR_NAME_FONT, Color.WHITE, PADDING, 0, labelWidth, labelHeight, false, HAlignment.LEFT, true);
             }
             if (opponentAvatar.card != null) {
-                g.drawText(opponentAvatar.card.getName(), BATTLE_BAR_FONT, Color.WHITE, getWidth() - labelWidth - PADDING, getHeight() - labelHeight, labelWidth, labelHeight, false, HAlignment.RIGHT, true);
+                g.drawText(opponentAvatar.card.getName(), AVATAR_NAME_FONT, Color.WHITE, getWidth() - labelWidth - PADDING, getHeight() - labelHeight, labelWidth, labelHeight, false, HAlignment.RIGHT, true);
             }
         }
 

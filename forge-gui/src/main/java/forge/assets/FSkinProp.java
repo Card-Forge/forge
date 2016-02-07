@@ -251,7 +251,6 @@ public enum FSkinProp {
     IMG_PW_BADGE_UNCOMMON (new int[] {443, 110, 110, 110}, PropType.PLANAR_CONQUEST),
     IMG_PW_BADGE_RARE     (new int[] {443, 220, 110, 110}, PropType.PLANAR_CONQUEST),
     IMG_PW_BADGE_MYTHIC   (new int[] {443, 330, 110, 110}, PropType.PLANAR_CONQUEST),
-    IMG_PLANE_BANNER      (new int[] {0, 440, 226, 74}, PropType.PLANAR_CONQUEST),
 
     //button images
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),
