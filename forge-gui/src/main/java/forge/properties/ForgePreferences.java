@@ -70,7 +70,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ENABLE_SOUNDS ("true"),
         UI_ENABLE_MUSIC ("true"),
         UI_ALT_SOUND_SYSTEM ("false"),
-        UI_CURRENT_AI_PROFILE (AiProfileUtil.AI_PROFILE_RANDOM_MATCH),
+        UI_CURRENT_AI_PROFILE ("Default"),
         UI_CLONE_MODE_SOURCE ("false"),
         UI_MATCH_IMAGE_VISIBLE ("true"),
         UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
