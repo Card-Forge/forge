@@ -234,7 +234,7 @@ public class ConquestMultiverseScreen extends FScreen {
             @Override
             public void run() {
                 ConquestLocation loc = model.getCurrentLocation();
-                activeBattle = loc.getEvent().createBattle(loc, 1);
+                activeBattle = loc.getEvent().createBattle(loc, 0);
                 FModel.getConquest().startBattle(activeBattle);
             }
         });
