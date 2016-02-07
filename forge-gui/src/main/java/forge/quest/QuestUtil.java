@@ -560,12 +560,8 @@ public class QuestUtil {
         final List<RegisteredPlayer> starter = new ArrayList<>();
         starter.add(humanStart.setPlayer(GamePlayerUtil.getQuestPlayer()));
 
-        final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
+        final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent(), event.getProfile());
         starter.add(aiStart.setPlayer(aiPlayer));
-        if (!"".equals(event.getProfile())) {
-        	((LobbyPlayerAi) aiPlayer).setAiProfile(event.getProfile());
-        	System.out.println("[Quest Mode] AI Profile was set to: " + event.getProfile());
-        }
 
         final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
         for (final RegisteredPlayer rp : starter) {

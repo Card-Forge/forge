@@ -46,20 +46,32 @@ public final class GamePlayerUtil {
         final int avatarCount = GuiBase.getInterface().getAvatarCount();
         return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount));
     }
+    public final static LobbyPlayer createAiPlayer(final String name, final String profileOverride) {
+        final int avatarCount = GuiBase.getInterface().getAvatarCount();
+        return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount), null, profileOverride);
+    }
     public final static LobbyPlayer createAiPlayer(final String name, final int avatarIndex) {
-        return createAiPlayer(name, avatarIndex, null);
+        return createAiPlayer(name, avatarIndex, null, "");
     }
     public final static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final Set<AIOption> options) {
+        return createAiPlayer(name, avatarIndex, options, "");
+    }
+    public final static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final Set<AIOption> options, final String profileOverride) {
         final LobbyPlayerAi player = new LobbyPlayerAi(name, options);
 
         // TODO: implement specific AI profiles for quest mode.
-        String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
-        player.setRotateProfileEachGame(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL));
-        if (lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
-            lastProfileChosen = AiProfileUtil.getRandomProfile();
-            //System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", lastProfileChosen, player.getName()));
+        if (profileOverride.isEmpty()) {
+            String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
+            player.setRotateProfileEachGame(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL));
+            if (lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
+                lastProfileChosen = AiProfileUtil.getRandomProfile();
+            }
+            player.setAiProfile(lastProfileChosen);
+            System.out.println(String.format("[AI Preferences] AI profile %s was chosen for the lobby player %s.", lastProfileChosen, player.getName()));
+        } else {
+            player.setAiProfile(profileOverride);
+            System.out.println(String.format("[Override] AI profile %s was chosen for the lobby player %s.", profileOverride, player.getName()));
         }
-        player.setAiProfile(lastProfileChosen);
         player.setAvatarIndex(avatarIndex);
         return player;
     }
