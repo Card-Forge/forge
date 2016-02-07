@@ -141,7 +141,7 @@ public class CardFaceSymbols {
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize) {
         if (colorSet.isColorless()) {
-            CardFaceSymbols.drawSymbol(ManaCostShard.COLORLESS.getImageKey(), g, x, y, imageSize, imageSize);
+            g.drawImage(FSkinImage.MANA_COLORLESS, x, y, imageSize, imageSize);
             return;
         }
 
