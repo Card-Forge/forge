@@ -1,5 +1,5 @@
 Name:Anax and Cymede|Deck:AnaxCymede.dck|Variant:Commander|Avatar:Anax and Cymede|Desc:
-Name:Devotion to Fight|Deck:MonoRDev.dck|Variant:None|Avatar:Firedriker Satyr|Desc:
+Name:Devotion to Fight|Deck:MonoRDev.dck|Variant:None|Avatar:Firedrinker Satyr|Desc:
 Name:Brimaz|Deck:Brimaz.dck|Variant:Commander|Avatar:Brimaz, King of Oreskos|Desc:
 Name:Akroan Soldiers|Deck:WRSoldiers.dck|Variant:None|Avatar:Akroan Hoplite|Desc:
 Name:Iroas|Deck:Iroas.dck|Variant:Commander|Avatar:Iroas, God of Victory|Desc:
