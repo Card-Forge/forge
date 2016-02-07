@@ -43,8 +43,8 @@ public class AiProfileUtil {
     private static String AI_PROFILE_DIR;
     private static final String AI_PROFILE_EXT = ".ai";
 
-    public static final String AI_PROFILE_RANDOM_MATCH = "* Random (Match) *";
-    public static final String AI_PROFILE_RANDOM_DUEL = "* Random (Duel) *";
+    public static final String AI_PROFILE_RANDOM_MATCH = "Random (Every Match)";
+    public static final String AI_PROFILE_RANDOM_DUEL = "Random (Every Game)";
 
     /** Builds an AI profile file name with full relative 
      * path based on the profile name. 
