@@ -46,7 +46,7 @@ public class ConquestAEtherScreen extends FScreen {
         ConquestData model = FModel.getConquest().getModel();
         ConquestPlane plane = model.getCurrentPlane();
 
-        setHeaderCaption(model.getName() + "\nPlane - " + plane.getName());
+        setHeaderCaption(model.getName());
 
         CardPool pool = new CardPool();
         for (PaperCard card : plane.getCardPool().getAllCards()) {

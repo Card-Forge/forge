@@ -50,7 +50,7 @@ import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
 public class ConquestMultiverseScreen extends FScreen {
-    private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.6f);
+    private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.65f);
     private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.1f);
     private static final float BATTLE_BAR_HEIGHT = Utils.AVG_FINGER_HEIGHT * 2;
     private static final FSkinFont BATTLE_BAR_NAME_FONT = FSkinFont.get(14);
@@ -108,7 +108,7 @@ public class ConquestMultiverseScreen extends FScreen {
         if (model == model0) { return; }
 
         model = model0;
-        setHeaderCaption(model.getName() + "\nPlane - " + model.getCurrentPlane().getName());
+        setHeaderCaption(model.getName());
 
         planeGrid.revalidate();
         planeGrid.scrollPlaneswalkerIntoView();
