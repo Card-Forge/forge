@@ -56,16 +56,9 @@ public class ColorSetRenderer extends ItemCellRenderer {
         final int offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding0 - elemtWidth) / (cntGlyphs - 1) : elemtWidth + elemtGap;
         final int dx = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
 
-        // Display generic mana before colored mana
-        if (cntGlyphs == 0) {
-            CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, x, y);
+        for (final ManaCostShard s : cs.getOrderedShards()) {
+            CardFaceSymbols.drawSymbol(s.getImageKey(), g, x, y);
             x += dx;
         }
-
-        if (cs.hasWhite()) { CardFaceSymbols.drawSymbol(ManaCostShard.WHITE.getImageKey(), g, x, y); x += dx; }
-        if (cs.hasBlue()) { CardFaceSymbols.drawSymbol(ManaCostShard.BLUE.getImageKey(), g, x, y); x += dx; }
-        if (cs.hasBlack()) { CardFaceSymbols.drawSymbol(ManaCostShard.BLACK.getImageKey(), g, x, y); x += dx; }
-        if (cs.hasRed()) { CardFaceSymbols.drawSymbol(ManaCostShard.RED.getImageKey(), g, x, y); x += dx; }
-        if (cs.hasGreen()) { CardFaceSymbols.drawSymbol(ManaCostShard.GREEN.getImageKey(), g, x, y); x += dx; }
     }
 }

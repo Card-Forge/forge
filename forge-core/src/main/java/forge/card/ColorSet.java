@@ -24,6 +24,7 @@ import com.google.common.collect.UnmodifiableIterator;
 
 import forge.card.MagicColor.Color;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.util.BinaryUtil;
 
 /**
@@ -356,5 +357,70 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
 
             return MagicColor.WUBRG[currentBit];
         }
+    }
+
+    //Get array of mana cost shards for color set in the proper order
+    public ManaCostShard[] getOrderedShards() {
+        return shardOrderLookup[myColor];
+    }
+
+    private static final ManaCostShard[][] shardOrderLookup = new ManaCostShard[ALL_COLORS_MASK + 1][];
+    static {
+        byte COLORLESS = MagicColor.COLORLESS;
+        byte WHITE = MagicColor.WHITE;
+        byte BLUE = MagicColor.BLUE;
+        byte BLACK = MagicColor.BLACK;
+        byte RED = MagicColor.RED;
+        byte GREEN = MagicColor.GREEN;
+        ManaCostShard C = ManaCostShard.COLORLESS;
+        ManaCostShard W = ManaCostShard.WHITE;
+        ManaCostShard U = ManaCostShard.BLUE;
+        ManaCostShard B = ManaCostShard.BLACK;
+        ManaCostShard R = ManaCostShard.RED;
+        ManaCostShard G = ManaCostShard.GREEN;
+
+        //colorless
+        shardOrderLookup[COLORLESS] = new ManaCostShard[] { C };
+
+        //mono-color
+        shardOrderLookup[WHITE] = new ManaCostShard[] { W };
+        shardOrderLookup[BLUE] = new ManaCostShard[] { U };
+        shardOrderLookup[BLACK] = new ManaCostShard[] { B };
+        shardOrderLookup[RED] = new ManaCostShard[] { R };
+        shardOrderLookup[GREEN] = new ManaCostShard[] { G };
+
+        //two-color
+        shardOrderLookup[WHITE | BLUE] = new ManaCostShard[] { W, U };
+        shardOrderLookup[WHITE | BLACK] = new ManaCostShard[] { W, B };
+        shardOrderLookup[BLUE | BLACK] = new ManaCostShard[] { U, B };
+        shardOrderLookup[BLUE | RED] = new ManaCostShard[] { U, R };
+        shardOrderLookup[BLACK | RED] = new ManaCostShard[] { B, R };
+        shardOrderLookup[BLACK | GREEN] = new ManaCostShard[] { B, G };
+        shardOrderLookup[RED | GREEN] = new ManaCostShard[] { R, G };
+        shardOrderLookup[RED | WHITE] = new ManaCostShard[] { R, W };
+        shardOrderLookup[GREEN | WHITE] = new ManaCostShard[] { G, W };
+        shardOrderLookup[GREEN | BLUE] = new ManaCostShard[] { G, U };
+
+        //three-color
+        shardOrderLookup[WHITE | BLUE | BLACK] = new ManaCostShard[] { W, U, B };
+        shardOrderLookup[WHITE | BLACK | RED] = new ManaCostShard[] { W, B, R };
+        shardOrderLookup[BLUE | BLACK | RED] = new ManaCostShard[] { U, B, R };
+        shardOrderLookup[BLUE | RED | GREEN] = new ManaCostShard[] { U, R, G };
+        shardOrderLookup[BLACK | RED | GREEN] = new ManaCostShard[] { B, R, G };
+        shardOrderLookup[BLACK | GREEN | WHITE] = new ManaCostShard[] { B, G, W };
+        shardOrderLookup[RED | GREEN | WHITE] = new ManaCostShard[] { R, G, W };
+        shardOrderLookup[RED | WHITE | BLUE] = new ManaCostShard[] { R, W, U };
+        shardOrderLookup[GREEN | WHITE | BLUE] = new ManaCostShard[] { G, W, U };
+        shardOrderLookup[GREEN | BLUE | BLACK] = new ManaCostShard[] { G, U, B };
+
+        //four-color
+        shardOrderLookup[WHITE | BLUE | BLACK | RED] = new ManaCostShard[] { W, U, B, R };
+        shardOrderLookup[BLUE | BLACK | RED | GREEN] = new ManaCostShard[] { U, B, R, G };
+        shardOrderLookup[BLACK | RED | GREEN | WHITE] = new ManaCostShard[] { B, R, G, W };
+        shardOrderLookup[RED | GREEN | WHITE | BLUE] = new ManaCostShard[] { R, G, W, U };
+        shardOrderLookup[GREEN | WHITE | BLUE | BLACK] = new ManaCostShard[] { G, W, U, B };
+
+        //five-color
+        shardOrderLookup[ALL_COLORS_MASK] = new ManaCostShard[] { W, U, B, R, G };
     }
 }

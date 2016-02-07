@@ -140,30 +140,11 @@ public class CardFaceSymbols {
     }
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize) {
-        if (colorSet.isColorless()) {
-            g.drawImage(FSkinImage.MANA_COLORLESS, x, y, imageSize, imageSize);
-            return;
-        }
-
         final float dx = imageSize;
-        if (colorSet.hasWhite()) {
-            g.drawImage(FSkinImage.MANA_W, x, y, imageSize, imageSize);
+
+        for (final ManaCostShard s : colorSet.getOrderedShards()) {
+            drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
             x += dx;
-        }
-        if (colorSet.hasBlue()) {
-            g.drawImage(FSkinImage.MANA_U, x, y, imageSize, imageSize);
-            x += dx;
-        }
-        if (colorSet.hasBlack()) {
-            g.drawImage(FSkinImage.MANA_B, x, y, imageSize, imageSize);
-            x += dx;
-        }
-        if (colorSet.hasRed()) {
-            g.drawImage(FSkinImage.MANA_R, x, y, imageSize, imageSize);
-            x += dx;
-        }
-        if (colorSet.hasGreen()) {
-            g.drawImage(FSkinImage.MANA_G, x, y, imageSize, imageSize);
         }
     }
 
