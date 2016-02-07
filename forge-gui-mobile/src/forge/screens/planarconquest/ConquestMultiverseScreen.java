@@ -2,6 +2,8 @@ package forge.screens.planarconquest;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
@@ -616,7 +618,7 @@ public class ConquestMultiverseScreen extends FScreen {
             //draw background
             g.fillRect(LOCATION_BAR_COLOR, 0, 0, w, h);
 
-            //draw plane name, region name, and region colors
+            //draw plane name, region name, and region colors on first line
             ConquestLocation loc = model.getCurrentLocation();
             ConquestRegion region = loc.getRegion();
             ColorSet regionColors = region.getColorSet();
@@ -628,21 +630,15 @@ public class ConquestMultiverseScreen extends FScreen {
             x += availableNameWidth + PADDING;
             CardFaceSymbols.drawColorSet(g, regionColors, x, y, symbolSize);
 
-            //draw event name and record
-            int wins, losses;
+            //draw event details on second line
             ConquestEvent event = loc.getEvent();
-            ConquestEventRecord record = model.getCurrentPlaneData().getEventRecord(loc);
-            if (record == null) {
-                wins = 0;
-                losses = 0;
-            }
-            else {
-                wins = record.getTotalWins();
-                losses = record.getTotalLosses();
+            String details = event.getName();
+            if (!event.getVariants().isEmpty()) {
+                details += " (" + StringUtils.join(event.getVariants(), ", ") + ")";
             }
             x = PADDING;
             y += symbolSize;
-            g.drawText(event.getName() + " (" + wins + "W / " + losses + "L)", EVENT_NAME_FONT, LOCATION_BAR_TEXT_COLOR, x, y, w - 2 * PADDING, h - y, false, HAlignment.CENTER, true);
+            g.drawText(details, EVENT_NAME_FONT, LOCATION_BAR_TEXT_COLOR, x, y, w - 2 * PADDING, h - y, false, HAlignment.CENTER, true);
 
             //draw top and bottom borders
             g.drawLine(1, Color.BLACK, 0, 0, w, 0);
@@ -722,6 +718,14 @@ public class ConquestMultiverseScreen extends FScreen {
 
             @Override
             public boolean tap(float x, float y, int count) {
+                if (card != null) {
+                    if (forOpponent) {
+                        CardZoom.show(card);
+                    }
+                    else {
+                        //TODO: Allow picking a different commander
+                    }
+                }
                 return true;
             }
 
