@@ -65,12 +65,9 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
 
     public String getPlayerName() {
         String name = card.getName();
-        int idx = name.indexOf(' ');
-        if (idx != -1) {
+        int idx = name.indexOf(',');
+        if (idx != -1) { //trim everything after the comma
             name = name.substring(0, idx);
-        }
-        if (name.endsWith(",") || name.endsWith("-")) {
-            name = name.substring(0, name.length() - 1).trim();
         }
         return name;
     }

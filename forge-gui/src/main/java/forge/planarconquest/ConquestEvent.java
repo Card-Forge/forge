@@ -83,6 +83,15 @@ public class ConquestEvent {
         return avatarCard;
     }
 
+    public String getOpponentName() {
+        String name = avatar;
+        int idx = name.indexOf(',');
+        if (idx != -1) { //trim everything after the comma
+            name = name.substring(0, idx);
+        }
+        return name;
+    }
+
     public ConquestBattle createBattle(ConquestLocation location0, int tier0) {
         return new ConquestEventBattle(location0, tier0);
     }
@@ -171,7 +180,7 @@ public class ConquestEvent {
 
         @Override
         public String getOpponentName() {
-            return ConquestEvent.this.getAvatar();
+            return ConquestEvent.this.getOpponentName();
         }
 
         @Override
