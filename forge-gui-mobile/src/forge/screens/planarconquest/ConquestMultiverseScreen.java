@@ -16,7 +16,6 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
-import forge.assets.TextRenderer;
 import forge.card.CardAvatarImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardRenderer;
@@ -120,7 +119,6 @@ public class ConquestMultiverseScreen extends FScreen {
         planeGrid.revalidate();
         planeGrid.scrollPlaneswalkerIntoView();
 
-        locationBar.update();
         battleBar.update();
     }
 
@@ -525,7 +523,6 @@ public class ConquestMultiverseScreen extends FScreen {
                 model.saveData(); //save new location
                 activeMoveAnimation = null;
 
-                locationBar.update();
                 battleBar.update();
             }
         }
@@ -605,15 +602,6 @@ public class ConquestMultiverseScreen extends FScreen {
     }
  
     private class LocationBar extends FDisplayObject {
-        private final TextRenderer textRenderer = new TextRenderer();
-        private String text;
-
-        private void update() {
-            ConquestRegion region = model.getCurrentLocation().getRegion();
-            text = region.toString();
-            text += " " + region.getColorSet().toSymbolString();
-        }
-
         @Override
         public void draw(Graphics g) {
             float w = getWidth();
@@ -623,7 +611,6 @@ public class ConquestMultiverseScreen extends FScreen {
             g.drawImage(FSkinImage.PLANE_BANNER, 0, 0, w, h);
 
             //draw text
-            textRenderer.drawText(g, text, LOCATION_BAR_FONT, Color.BLACK, 0, 0, w, h, 0, h, false, HAlignment.CENTER, true);
 
             //draw top and bottom borders
             g.drawLine(1, Color.BLACK, 0, 0, w, 0);
