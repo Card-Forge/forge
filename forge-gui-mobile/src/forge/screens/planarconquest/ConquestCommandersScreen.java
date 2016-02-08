@@ -48,6 +48,8 @@ public class ConquestCommandersScreen extends FScreen {
     private final FButton btnViewDeck = add(new FButton("View Deck"));
     private final FButton btnEditDeck = add(new FButton("Edit Deck"));
 
+    private boolean preventRefreshOnActivate;
+
     public ConquestCommandersScreen() {
         super("Select Commander", ConquestMenu.getMenu());
 
@@ -63,6 +65,7 @@ public class ConquestCommandersScreen extends FScreen {
             public void handleEvent(FEvent e) {
                 final ConquestCommander commander = lstCommanders.getSelectedItem();
                 if (commander != null) {
+                    preventRefreshOnActivate = true;
                     FDeckViewer.show(commander.getDeck());
                 }
             }
@@ -72,6 +75,7 @@ public class ConquestCommandersScreen extends FScreen {
             public void handleEvent(FEvent e) {
                 final ConquestCommander commander = lstCommanders.getSelectedItem();
                 if (commander != null) {
+                    preventRefreshOnActivate = true; //refresh not needed since deck changes won't affect commander display
                     Forge.openScreen(new ConquestDeckEditor(commander));
                 }
             }
@@ -80,7 +84,12 @@ public class ConquestCommandersScreen extends FScreen {
 
     @Override
     public void onActivate() {
-        refreshCommanders();
+        if (preventRefreshOnActivate) {
+            preventRefreshOnActivate = false;
+        }
+        else {
+            refreshCommanders();
+        }
     }
 
     @Override
