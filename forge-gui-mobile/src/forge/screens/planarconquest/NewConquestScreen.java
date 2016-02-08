@@ -109,7 +109,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
     }
 
     private static class SelectStartingPlaneswalkerStep extends WizardStep<NewConquestScreenModel> {
-        private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(ConquestUtil.getAllPlaneswalkers()) {
+        private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(ConquestUtil.getStartingPlaneswalkerOptions()) {
             @Override
             protected void onItemActivate(Integer index, PaperCard value) {
                 advance();

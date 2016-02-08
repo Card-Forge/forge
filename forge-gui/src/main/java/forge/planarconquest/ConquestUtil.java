@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -125,11 +126,12 @@ public class ConquestUtil {
         return pool;
     }
 
-    public static Iterable<PaperCard> getAllPlaneswalkers() {
+    public static Iterable<PaperCard> getStartingPlaneswalkerOptions() {
         return Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard card) {
-                return card.getRules().getType().isPlaneswalker();
+                CardRules rules = card.getRules();
+                return rules.getType().isPlaneswalker() && !rules.canBeCommander(); //don't allow picking a commander as a starting planeswalker
             }
         });
     }
