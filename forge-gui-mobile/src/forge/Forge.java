@@ -184,8 +184,9 @@ public class Forge implements ApplicationListener {
 
     //set screen that will be gone to on pressing Back before going to current Back screen
     public static void setBackScreen(final FScreen screen0, boolean replace) {
+        screens.remove(screen0); //remove screen from previous position in navigation history
         int index = screens.size() - 1;
-        if (index > 0 && screens.get(index) != screen0) {
+        if (index > 0) {
             screens.add(index, screen0);
             if (replace) { //remove previous back screen if replacing back screen
                 screens.remove(index - 1);
