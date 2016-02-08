@@ -242,11 +242,16 @@ public class LoadQuestScreen extends LaunchScreen {
                     return;
                 }
 
-                new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat").delete();
-                new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat.bak").delete();
-
-                lstQuests.removeQuest(quest);
-                updateEnabledButtons();
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat").delete();
+                        new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat.bak").delete();
+        
+                        lstQuests.removeQuest(quest);
+                        updateEnabledButtons();
+                    }
+                });
             }
         });
     }

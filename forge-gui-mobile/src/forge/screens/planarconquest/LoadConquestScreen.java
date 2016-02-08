@@ -233,10 +233,15 @@ public class LoadConquestScreen extends LaunchScreen {
                     return;
                 }
 
-                FileUtil.deleteDirectory(conquest.getDirectory());
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        FileUtil.deleteDirectory(conquest.getDirectory());
 
-                lstConquests.removeConquest(conquest);
-                updateEnabledButtons();
+                        lstConquests.removeConquest(conquest);
+                        updateEnabledButtons();
+                    }
+                });
             }
         });
     }
