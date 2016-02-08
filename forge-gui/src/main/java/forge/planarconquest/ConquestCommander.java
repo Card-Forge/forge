@@ -1,6 +1,11 @@
 package forge.planarconquest;
 
+import com.google.common.base.Predicate;
+
+import forge.card.CardRules;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.deck.generation.DeckGenPool;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -16,8 +21,20 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
 
     private Deck deck;
 
-    public ConquestCommander(PaperCard card0, Deck deck0) {
-        this(card0, deck0, null);
+    public ConquestCommander(PaperCard card0) {
+        this(card0, null, null);
+    }
+    public ConquestCommander(PaperCard card0, ConquestPlane startingPlane) {
+        this(card0, ConquestUtil.generateDeck(card0, new DeckGenPool(startingPlane.getCardPool().getAllCards(new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard pc) {
+                CardRules rules = pc.getRules();
+                if (rules.canBeCommander() || rules.getType().isPlaneswalker()) {
+                    return false; //prevent including additional commanders or planeswalkers in starting deck
+                }
+                return true;
+            }
+        })), false), null);
     }
     private ConquestCommander(PaperCard card0, Deck deck0, ConquestRecord record0) {
         card = card0;
@@ -83,6 +100,8 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         deck = FModel.getConquest().getDecks().get(card.getName());
         if (deck == null) {
             deck = new Deck(card.getName());
+            deck.getOrCreate(DeckSection.Commander).add(card);
+            FModel.getConquest().getDecks().add(deck);
         }
     }
 

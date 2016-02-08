@@ -20,9 +20,6 @@ package forge.planarconquest;
 import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.ISkinImage;
 import forge.card.CardDb;
-import forge.card.CardRules;
-import forge.deck.Deck;
-import forge.deck.generation.DeckGenPool;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
@@ -45,7 +42,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 public final class ConquestData {
     private static final String XML_FILE = "data.xml";
@@ -180,25 +176,15 @@ public final class ConquestData {
 
             //add card to available commanders if eligible
             if (card.getRules().canBeCommander()) {
-                Deck deck;
+                ConquestCommander commander;
                 if (commanders.isEmpty()) { //generate deck for starting commander
-                    DeckGenPool pool = new DeckGenPool(getCurrentPlane().getCardPool().getAllCards(new Predicate<PaperCard>() {
-                        @Override
-                        public boolean apply(PaperCard pc) {
-                            CardRules rules = pc.getRules();
-                            if (rules.canBeCommander() || rules.getType().isPlaneswalker()) {
-                                return false; //prevent including additional commanders or planeswalkers in starting deck
-                            }
-                            return true;
-                        }
-                    }));
-                    deck = ConquestUtil.generateDeck(card, pool, false);
+                    commander = new ConquestCommander(card, getCurrentPlane());
                     selectedCommanderIndex = 0;
                 }
-                else { //create blank deck for subsequent commanders
-                    deck = new Deck(card.getName());
+                else {
+                    commander = new ConquestCommander(card);
                 }
-                commanders.add(new ConquestCommander(card, deck));
+                commanders.add(commander);
             }
         }
     }
