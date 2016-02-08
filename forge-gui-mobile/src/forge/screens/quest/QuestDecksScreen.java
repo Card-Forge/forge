@@ -164,16 +164,16 @@ public class QuestDecksScreen extends FScreen {
         lblInfo.setBounds(x, y, w, lblInfo.getAutoSizeBounds().height);
         y += lblInfo.getHeight();
 
-        float buttonWidth = (w - FDeckChooser.PADDING) / 2;
+        float buttonWidth = (w - PADDING) / 2;
         float buttonHeight = FTextField.getDefaultHeight();
         float listHeight = height - 2 * buttonHeight - y - 3 * PADDING;
 
         lstDecks.setBounds(x, y, w, listHeight);
         y += listHeight + PADDING;
         btnNewDeck.setBounds(x, y, buttonWidth, buttonHeight);
-        btnEditDeck.setBounds(x + buttonWidth + FDeckChooser.PADDING, y, buttonWidth, buttonHeight);
+        btnEditDeck.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
         y += buttonHeight + PADDING;
         btnViewDeck.setBounds(x, y, buttonWidth, buttonHeight);
-        btnRandom.setBounds(x + buttonWidth + FDeckChooser.PADDING, y, buttonWidth, buttonHeight);
+        btnRandom.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
     }
 }

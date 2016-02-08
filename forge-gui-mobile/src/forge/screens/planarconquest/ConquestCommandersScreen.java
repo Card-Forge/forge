@@ -27,21 +27,37 @@ import forge.itemmanager.filters.StatTypeFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
+import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestRecord;
 import forge.screens.FScreen;
+import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
-import forge.toolbox.FLabel;
 import forge.toolbox.FList;
+import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList.CompactModeHandler;
 
 public class ConquestCommandersScreen extends FScreen {
+    private static final float PADDING = FDeckChooser.PADDING;
+
     private final CommanderManager lstCommanders = add(new CommanderManager());
-    private final FLabel lblTip = add(new FLabel.Builder()
-        .text("Double-tap to edit deck (Long-press to view)")
-        .textColor(FLabel.INLINE_LABEL_COLOR)
-        .align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
+    private final FButton btnViewDeck = add(new FButton("View Deck"));
+    private final FButton btnEditDeck = add(new FButton("Edit Deck"));
+
+    private final FEventHandler onCommanderSelectionChanged = new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            final ConquestCommander commander = lstCommanders.getSelectedItem();
+            if (commander != null) {
+                ConquestData model = FModel.getConquest().getModel();
+                if (model.getSelectedCommander() != commander) {
+                    model.setSelectedCommander(commander);
+                    model.saveData();
+                }
+            }
+        }
+    };
 
     public ConquestCommandersScreen() {
         super("", ConquestMenu.getMenu());
@@ -50,7 +66,25 @@ public class ConquestCommandersScreen extends FScreen {
         lstCommanders.setItemActivateHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                editSelectedDeck();
+                Forge.back();
+            }
+        });
+        btnViewDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                final ConquestCommander commander = lstCommanders.getSelectedItem();
+                if (commander != null) {
+                    FDeckViewer.show(commander.getDeck());
+                }
+            }
+        });
+        btnEditDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                final ConquestCommander commander = lstCommanders.getSelectedItem();
+                if (commander != null) {
+                    Forge.openScreen(new ConquestDeckEditor(commander));
+                }
             }
         });
     }
@@ -62,28 +96,38 @@ public class ConquestCommandersScreen extends FScreen {
     }
 
     public void refreshCommanders() {
-        lstCommanders.setPool(FModel.getConquest().getModel().getCommanders());
+        lstCommanders.setSelectionChangedHandler(null); //set to null temporarily
+
+        ConquestData model = FModel.getConquest().getModel();
+        lstCommanders.setPool(model.getCommanders());
         lstCommanders.setup(ItemManagerConfig.CONQUEST_COMMANDERS);
-    }
 
-    private void editSelectedDeck() {
-        final ConquestCommander commander = lstCommanders.getSelectedItem();
-        if (commander == null) { return; }
+        ConquestCommander commander = model.getSelectedCommander();
+        if (commander != null) {
+            lstCommanders.setSelectedItem(commander);
+        }
+        else {
+            lstCommanders.setSelectedIndex(0);
+            onCommanderSelectionChanged.handleEvent(null); //update selected command
+        }
 
-        Forge.openScreen(new ConquestDeckEditor(commander));
+        lstCommanders.setSelectionChangedHandler(onCommanderSelectionChanged);
     }
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float x = ItemFilter.PADDING;
+        float x = PADDING;
         float y = startY;
-        float w = width - 2 * x;
-        float labelHeight = lblTip.getAutoSizeBounds().height;
-        float listHeight = height - labelHeight - y - 2 * FDeckChooser.PADDING;
+        float w = width - 2 * PADDING;
+
+        float buttonWidth = (w - PADDING) / 2;
+        float buttonHeight = FTextField.getDefaultHeight();
+        float listHeight = height - buttonHeight - y - 2 * PADDING;
 
         lstCommanders.setBounds(x, y, w, listHeight);
-        y += listHeight + FDeckChooser.PADDING;
-        lblTip.setBounds(x, y, w, labelHeight);
+        y += listHeight + PADDING;
+        btnViewDeck.setBounds(x, y, buttonWidth, buttonHeight);
+        btnEditDeck.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
     }
 
     private static class CommanderManager extends ItemManager<ConquestCommander> {

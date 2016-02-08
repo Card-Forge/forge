@@ -108,6 +108,10 @@ public class ConquestMenu extends FPopupMenu {
         }
     }
 
+    public static void selectCommander() {
+        Forge.openScreen(commandersScreen);
+    }
+
     @Override
     protected void buildMenu() {
         FScreen currentScreen = Forge.getCurrentScreen();

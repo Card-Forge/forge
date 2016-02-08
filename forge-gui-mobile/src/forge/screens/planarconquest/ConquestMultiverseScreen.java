@@ -723,7 +723,7 @@ public class ConquestMultiverseScreen extends FScreen {
                         CardZoom.show(card);
                     }
                     else {
-                        //TODO: Allow picking a different commander
+                        ConquestMenu.selectCommander();
                     }
                 }
                 return true;

@@ -159,8 +159,8 @@ public final class ConquestData {
     public ConquestCommander getSelectedCommander() {
         return commanders.get(selectedCommanderIndex);
     }
-    public void setSelectedCommanderIndex(int index0) {
-        selectedCommanderIndex = index0;
+    public void setSelectedCommander(ConquestCommander commander) {
+        selectedCommanderIndex = commanders.indexOf(commander);
     }
 
     public Iterable<PaperCard> getUnlockedCards() {
