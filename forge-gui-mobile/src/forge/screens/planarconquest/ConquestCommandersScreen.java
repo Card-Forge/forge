@@ -13,6 +13,7 @@ import forge.assets.FSkinFont;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.ColorSet;
+import forge.deck.DeckFormat;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckViewer;
 import forge.item.PaperCard;
@@ -34,9 +35,11 @@ import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FList;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList.CompactModeHandler;
+import forge.util.Callback;
 
 public class ConquestCommandersScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;
@@ -45,22 +48,8 @@ public class ConquestCommandersScreen extends FScreen {
     private final FButton btnViewDeck = add(new FButton("View Deck"));
     private final FButton btnEditDeck = add(new FButton("Edit Deck"));
 
-    private final FEventHandler onCommanderSelectionChanged = new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            final ConquestCommander commander = lstCommanders.getSelectedItem();
-            if (commander != null) {
-                ConquestData model = FModel.getConquest().getModel();
-                if (model.getSelectedCommander() != commander) {
-                    model.setSelectedCommander(commander);
-                    model.saveData();
-                }
-            }
-        }
-    };
-
     public ConquestCommandersScreen() {
-        super("", ConquestMenu.getMenu());
+        super("Select Commander", ConquestMenu.getMenu());
 
         lstCommanders.setup(ItemManagerConfig.CONQUEST_COMMANDERS);
         lstCommanders.setItemActivateHandler(new FEventHandler() {
@@ -91,13 +80,40 @@ public class ConquestCommandersScreen extends FScreen {
 
     @Override
     public void onActivate() {
-        setHeaderCaption(FModel.getConquest().getModel().getName());
         refreshCommanders();
     }
 
-    public void refreshCommanders() {
-        lstCommanders.setSelectionChangedHandler(null); //set to null temporarily
+    @Override
+    public void onClose(final Callback<Boolean> canCloseCallback) {
+        if (canCloseCallback == null) { return; }
 
+        final ConquestCommander commander = lstCommanders.getSelectedItem();
+        if (commander == null) {
+            canCloseCallback.run(true); //shouldn't happen, but don't block closing screen if no commanders
+            return;
+        }
+
+        String problem = DeckFormat.PlanarConquest.getDeckConformanceProblem(commander.getDeck());
+        if (problem != null) {
+            //prevent selecting a commander with an invalid deck
+            FOptionPane.showMessageDialog("Can't select " + commander.getName() + "\nDeck " + problem, "Invalid Deck", FOptionPane.INFORMATION_ICON, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    canCloseCallback.run(false);
+                }
+            });
+            return;
+        }
+
+        ConquestData model = FModel.getConquest().getModel();
+        if (model.getSelectedCommander() != commander) {
+            model.setSelectedCommander(commander);
+            model.saveData();
+        }
+        canCloseCallback.run(true);
+    }
+
+    public void refreshCommanders() {
         ConquestData model = FModel.getConquest().getModel();
         lstCommanders.setPool(model.getCommanders());
         lstCommanders.setup(ItemManagerConfig.CONQUEST_COMMANDERS);
@@ -108,10 +124,7 @@ public class ConquestCommandersScreen extends FScreen {
         }
         else {
             lstCommanders.setSelectedIndex(0);
-            onCommanderSelectionChanged.handleEvent(null); //update selected command
         }
-
-        lstCommanders.setSelectionChangedHandler(onCommanderSelectionChanged);
     }
 
     @Override

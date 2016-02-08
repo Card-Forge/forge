@@ -74,12 +74,16 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
 
     public Deck getDeck() {
         if (deck == null) { //if deck not yet initialized, attempt to load deck file
-            deck = FModel.getConquest().getDecks().get(card.getName());
-            if (deck == null) {
-                deck = new Deck(card.getName());
-            }
+            reloadDeck();
         }
         return deck;
+    }
+
+    public void reloadDeck() {
+        deck = FModel.getConquest().getDecks().get(card.getName());
+        if (deck == null) {
+            deck = new Deck(card.getName());
+        }
     }
 
     public ConquestRecord getRecord() {
