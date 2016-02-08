@@ -117,7 +117,7 @@ public class ConquestCommandersScreen extends FScreen {
     @Override
     protected void doLayout(float startY, float width, float height) {
         float x = PADDING;
-        float y = startY;
+        float y = startY + PADDING - ItemFilter.PADDING;
         float w = width - 2 * PADDING;
 
         float buttonWidth = (w - PADDING) / 2;
