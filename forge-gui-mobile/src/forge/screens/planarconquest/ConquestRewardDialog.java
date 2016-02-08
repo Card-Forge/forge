@@ -286,8 +286,7 @@ public class ConquestRewardDialog extends FScrollPane {
             }
         }
 
-        @Override
-        public boolean longPress(float x, float y) {
+        private boolean showCardZoom() {
             int index = -1;
             List<PaperCard> cards = new ArrayList<PaperCard>();
             for (int i = 0; i < animation.currentIndex; i++) {
@@ -301,6 +300,16 @@ public class ConquestRewardDialog extends FScrollPane {
 
             CardZoom.show(cards, index, null);
             return true;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            return showCardZoom();
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            return showCardZoom();
         }
 
         @Override
