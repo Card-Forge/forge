@@ -65,7 +65,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
                         qc.getModel().saveData();
 
                         // Save in preferences.
-                        FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquestName + ".dat");
+                        FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquestName);
                         FModel.getConquestPreferences().save();
 
                         ConquestMenu.launchPlanarConquest(LaunchReason.NewConquest);
