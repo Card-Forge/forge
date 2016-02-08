@@ -1,7 +1,6 @@
 package forge.planarconquest;
 
 import forge.deck.Deck;
-import forge.deck.generation.DeckGenPool;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -17,11 +16,8 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
 
     private Deck deck;
 
-    public ConquestCommander(PaperCard card0) {
-        this(card0, new Deck(card0.getName()), null);
-    }
-    public ConquestCommander(PaperCard card0, DeckGenPool cardPool0, boolean forAi) {
-        this(card0, ConquestUtil.generateDeck(card0, cardPool0, forAi), null);
+    public ConquestCommander(PaperCard card0, Deck deck0) {
+        this(card0, deck0, null);
     }
     private ConquestCommander(PaperCard card0, Deck deck0, ConquestRecord record0) {
         card = card0;

@@ -17,7 +17,6 @@
  */
 package forge.properties;
 
-import forge.ai.AiProfileUtil;
 import forge.game.GameLogEntryType;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {

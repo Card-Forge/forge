@@ -20,6 +20,9 @@ package forge.planarconquest;
 import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.ISkinImage;
 import forge.card.CardDb;
+import forge.card.CardRules;
+import forge.deck.Deck;
+import forge.deck.generation.DeckGenPool;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
@@ -42,6 +45,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 public final class ConquestData {
     private static final String XML_FILE = "data.xml";
@@ -68,12 +72,11 @@ public final class ConquestData {
         aetherShards = FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_START_SHARDS);
         currentLocation = new ConquestLocation(startingPlane0, 0, 0, 0);
         setPlaneswalker(startingPlaneswalker0);
-        unlockCard(startingPlaneswalker0);
 
-        //generate deck for starting commander and add all cards to collection
-        ConquestCommander commander = new ConquestCommander(startingCommander0, startingPlane0.getCardPool(), false);
-        commanders.add(commander);
+        //unlock starting commander, starting planeswalker, and all cards in generated deck
         unlockCard(startingCommander0);
+        unlockCard(startingPlaneswalker0);
+        ConquestCommander commander = getSelectedCommander();
         for (Entry<PaperCard, Integer> entry : commander.getDeck().getMain()) {
             PaperCard card = entry.getKey();
             if (!card.getRules().getType().isBasicLand()) { //ignore basic lands
@@ -174,6 +177,29 @@ public final class ConquestData {
     public void unlockCard(PaperCard card) {
         if (unlockedCards.add(card)) {
             newCards.add(card);
+
+            //add card to available commanders if eligible
+            if (card.getRules().canBeCommander()) {
+                Deck deck;
+                if (commanders.isEmpty()) { //generate deck for starting commander
+                    DeckGenPool pool = new DeckGenPool(getCurrentPlane().getCardPool().getAllCards(new Predicate<PaperCard>() {
+                        @Override
+                        public boolean apply(PaperCard pc) {
+                            CardRules rules = pc.getRules();
+                            if (rules.canBeCommander() || rules.getType().isPlaneswalker()) {
+                                return false; //prevent including additional commanders or planeswalkers in starting deck
+                            }
+                            return true;
+                        }
+                    }));
+                    deck = ConquestUtil.generateDeck(card, pool, false);
+                    selectedCommanderIndex = 0;
+                }
+                else { //create blank deck for subsequent commanders
+                    deck = new Deck(card.getName());
+                }
+                commanders.add(new ConquestCommander(card, deck));
+            }
         }
     }
     public void unlockCards(Iterable<PaperCard> cards) {

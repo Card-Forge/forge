@@ -22,7 +22,6 @@ import com.google.common.collect.ImmutableMap;
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
-import forge.ai.LobbyPlayerAi;
 import forge.assets.FSkinProp;
 import forge.card.CardDb.SetPreference;
 import forge.card.CardEdition;
