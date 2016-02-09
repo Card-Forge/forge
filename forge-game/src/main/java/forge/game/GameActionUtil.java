@@ -523,7 +523,7 @@ public final class GameActionUtil {
         // Calculate generated mana here for stack description and resolving
 
         int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
-        AbilityManaPart abMana = sa.getManaPart();
+        AbilityManaPart abMana = sa.getManaPartRecursive();
 
         if (sa.hasParam("Bonus")) {
             // For mana abilities that get a bonus
