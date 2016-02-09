@@ -1,9 +1,11 @@
 package forge.ai.ability;
 
 import forge.ai.SpellAbilityAi;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -16,6 +18,10 @@ public class UntapAllAi extends SpellAbilityAi {
 
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
+        	if (ApiType.AddPhase == abSub.getApi() 
+        			&& source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_END)) {
+        		return false;
+        	}
             String valid = "";
             CardCollectionView list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
             if (sa.hasParam("ValidCards")) {
