@@ -52,9 +52,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * <p>
      * changeHiddenOriginStackDescription.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
@@ -171,7 +169,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         } else if (origin.equals("Hand")) {
             sb.append(chooserNames);
             if (!chooserNames.equals(fetcherNames)) {
-                sb.append(" looks at " + fetcherNames + "'s hand and ");
+                sb.append(" looks at ").append(fetcherNames).append("'s hand and ");
                 sb.append(destination.equals("Exile") ? "exiles " : "puts ");
                 sb.append(num).append(" of those ").append(type).append(" card(s)");
             } else {
@@ -218,9 +216,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * <p>
      * changeKnownOriginStackDescription.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
@@ -338,8 +334,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * </p>
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      */
 
     @Override
@@ -424,7 +418,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             final String prompt = String.format("Do you want to move %s from %s to %s?", tgtC, origin, destination);
-            if (optional && false == player.getController().confirmAction(sa, null, prompt) )
+            if (optional && !player.getController().confirmAction(sa, null, prompt) )
                 continue;
 
             final Zone originZone = game.getZoneOf(tgtC);
@@ -569,9 +563,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * <p>
      * changeHiddenOriginResolve.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
@@ -774,15 +766,24 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             if (sa.hasParam("ShareLandType")) {
-                for (final Card card : chosenCards) {
-
+                if (chosenCards.size() == 0) {
+                    // If no cards have been chosen yet, the first card must have a land type
                     fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
-                            return  c.sharesLandTypeWith(card);
+                            return  c.hasALandType();
                         }
-
                     });
+                } else {
+                    for (final Card card : chosenCards) {
+                        fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
+                            @Override
+                            public boolean apply(final Card c) {
+                                return  c.sharesLandTypeWith(card);
+                            }
+
+                        });
+                    }
                 }
             }
             if (totalcmc != null) {

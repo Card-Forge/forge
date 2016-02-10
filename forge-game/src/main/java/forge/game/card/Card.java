@@ -5351,6 +5351,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         return false;
     }
 
+    public final boolean hasALandType() {
+        for (final String type : getType().getSubtypes()) {
+            if (forge.card.CardType.isALandType(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public final boolean isUsedToPay() {
         return usedToPayCost;
     }
