@@ -47,7 +47,7 @@ public abstract class SpellAbilityEffect {
     /**
      * Returns this effect description with needed prelude and epilogue.
      * @param params
-     * @param commonSpell
+     * @param sa
      * @return
      */
     public final String getStackDescriptionWithSubs(final Map<String, String> params, final SpellAbility sa) {
@@ -89,6 +89,12 @@ public abstract class SpellAbilityEffect {
             String svar = sa.getParam("Announce");
             int amount = CardFactoryUtil.xCount(sa.getHostCard(), sa.getSVar(svar));
             sb.append(String.format(" (%s=%d)", svar, amount));
+        } else{
+            if (sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null &&
+                    sa.getPayCosts().getCostMana().getAmountOfX() > 0) {
+                int amount = CardFactoryUtil.xCount(sa.getHostCard(), sa.getSVar("X"));
+                sb.append(String.format(" (%s=%d)", "X", amount));
+            }
         }
 
         return sb.toString();
