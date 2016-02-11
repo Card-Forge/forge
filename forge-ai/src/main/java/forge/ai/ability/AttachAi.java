@@ -1047,16 +1047,20 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
 
-        CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
-
-        // TODO If Attaching without casting, don't need to actually target.
-        // I believe this is the only case where mandatory will be true, so just
-        // check that when starting that work
-        // But we shouldn't attach to things with Protection
-        if (!mandatory) {
-            list = CardLists.getTargetableCards(list, sa);
+        CardCollection list = null;
+        if (tgt == null) {
+            list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
         } else {
-            list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
+            list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
+            // TODO If Attaching without casting, don't need to actually target.
+            // I believe this is the only case where mandatory will be true, so just
+            // check that when starting that work
+            // But we shouldn't attach to things with Protection
+            if (!mandatory) {
+                list = CardLists.getTargetableCards(list, sa);
+            } else {
+                list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
+            }
         }
 
         if (list.isEmpty()) {
