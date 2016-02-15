@@ -141,7 +141,9 @@ public class ImageFetcher {
         private void doFetch(String urlToDownload) throws IOException {
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
-            BufferedImage image = ImageIO.read(url.openStream());
+            java.net.URLConnection c = url.openConnection();
+            c.setRequestProperty("User-Agent", "");
+            BufferedImage image = ImageIO.read(c.getInputStream());
             // First, save to a temporary file so that nothing tries to read
             // a partial download.
             File destFile = new File(destPath + ".tmp");
