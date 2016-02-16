@@ -871,6 +871,11 @@ public class AiController {
             if (source.isEquipment() && noCreatures) {
                 p -= 9;
             }
+            // use Surge and Prowl costs when able to
+            if (sa.isSurged() || 
+            		(sa.getRestrictions().getProwlTypes() != null && !sa.getRestrictions().getProwlTypes().isEmpty())) {
+                p += 9;
+            }
             // move snap-casted spells to front
             if (source.isInZone(ZoneType.Graveyard) && source.hasKeyword("May be played")) {
                 p += 50;
