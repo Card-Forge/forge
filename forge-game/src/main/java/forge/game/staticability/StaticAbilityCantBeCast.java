@@ -102,6 +102,10 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
+        if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
+            return false;
+        }
+
         if (params.containsKey("Activator") && (activator != null)
                 && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard)) {
             return false;
