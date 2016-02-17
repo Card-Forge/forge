@@ -1981,7 +1981,7 @@
 #37|Acidic Sliver|U|TPR
 #38|Paladin en Vec|R|TPR
 #39|Lightning Blast|C|TPR
-#40|Coffn Queen|R|TPR
+#40|Coffin Queen|R|TPR
 #41|Fanning the Flames|R|TPR
 #42|Wayward Soul|C|TPR
 #43|Dauthi Marauder|U|TPR
