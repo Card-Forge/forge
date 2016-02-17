@@ -167,7 +167,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      * @return an array of five integers containing the amount of color shards in the card's mana cost in WUBRG order 
      */
     public int[] getColorShardCounts() {
-        int[] counts = new int[5]; // in WUBRG order
+        int[] counts = new int[6]; // in WUBRGC order
 
         for (int i = 0; i < stringValue.length(); i++) {
             char symbol = stringValue.charAt(i);
@@ -177,7 +177,8 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
                 case 'B':
                 case 'R':
                 case 'G':
-                    counts[MagicColor.getIndexOfFirstColor(MagicColor.fromName(symbol))]++;
+                case 'C':
+                    counts[ManaAtom.getIndexOfFirstManaType(ManaAtom.fromName(symbol))]++;
                     break;
             }
             
@@ -313,8 +314,8 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
 
     /**
      * TODO: Write javadoc for this method.
-     * @param manaCost
-     * @param manaCost2
+     * @param a
+     * @param b
      * @return
      */
     public static ManaCost combine(ManaCost a, ManaCost b) {

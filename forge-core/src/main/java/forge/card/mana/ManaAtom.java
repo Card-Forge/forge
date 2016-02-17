@@ -55,4 +55,13 @@ public abstract class ManaAtom {
         }
         return 0; // generic
     }
+
+    public static int getIndexOfFirstManaType(final byte color){
+        for (int i = 0; i < MANATYPES.length; i++) {
+            if ((color & MANATYPES[i]) != 0) {
+                return i;
+            }
+        }
+        return -1; // colorless
+    }
 }

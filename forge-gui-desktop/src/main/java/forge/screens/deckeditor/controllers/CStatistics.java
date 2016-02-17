@@ -106,6 +106,7 @@ public enum CStatistics implements ICDoc {
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblBlackShard(), "Shards:", shardCount[2], totShards);
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblRedShard(), "Shards:", shardCount[3], totShards);
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblGreenShard(), "Shards:", shardCount[4], totShards);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblColorlessShard(), "Shards:", shardCount[5], totShards);
 
         int tmc = 0;
         for (final Entry<PaperCard, Integer> e : deck) {
@@ -130,10 +131,10 @@ public enum CStatistics implements ICDoc {
     }
 
     public static int[] calculateShards(final ItemPool<PaperCard> deck) {
-        final int[] counts = new int[5]; // in WUBRG order
+        final int[] counts = new int[6]; // in WUBRGC order
         for (final PaperCard c : deck.toFlatList()) {
             final int[] cShards = c.getRules().getManaCost().getColorShardCounts();
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 6; i++) {
                 counts[i] += cShards[i];
             }
         }

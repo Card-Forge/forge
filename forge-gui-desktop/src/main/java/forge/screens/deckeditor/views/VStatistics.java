@@ -62,6 +62,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
     private final FLabel lblBlackShard = buildLabel(StatTypes.BLACK, true);
     private final FLabel lblRedShard = buildLabel(StatTypes.RED, false);
     private final FLabel lblGreenShard = buildLabel(StatTypes.GREEN, false);
+    private final FLabel lblColorlessShard = buildLabel(StatTypes.COLORLESS, false);
 
     // Card type labels
     private final FLabel lblArtifact = buildLabel(StatTypes.ARTIFACT, true);
@@ -169,6 +170,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
         pnlStats.add(lblBlackShard, constraints);
         pnlStats.add(lblRedShard, constraints);
         pnlStats.add(lblGreenShard, constraints);
+        pnlStats.add(lblColorlessShard, constraints);
     }
 
     //========== Overridden methods
@@ -249,6 +251,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
     public FLabel getLblRedShard() { return lblRedShard; }
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblWhiteShard() { return lblWhiteShard; }
+    public FLabel getLblColorlessShard() { return lblColorlessShard; }
 
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblArtifact() { return lblArtifact; }
