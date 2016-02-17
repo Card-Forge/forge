@@ -573,6 +573,23 @@ public class Game {
     }
 
     public void onPlayerLost(Player p) {
+        // Rule 800.4 Losing a Multiplayer game
+        CardCollectionView cards = this.getCardsInGame();
+
+        for(Card c : cards) {
+            if (c.getOwner().equals(p)) {
+                c.ceaseToExist();
+            } else {
+                c.removeTempController(p);
+                if (c.getController().equals(p)) {
+                    this.getAction().exile(c);
+                }
+            }
+        }
+
+        // Remove leftover items from
+        this.getStack().removeInstancesControlledBy(p);
+
         ingamePlayers.remove(p);
 
         final Map<String, Object> runParams = new TreeMap<String, Object>();

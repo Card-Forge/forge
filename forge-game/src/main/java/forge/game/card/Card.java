@@ -2201,6 +2201,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
+    public final void removeTempController(final Player player) {
+        // Remove each key that yields this player
+        for(Entry<Long,Player> kv : tempControllers.entrySet()) {
+            if (kv.getValue().equals(player)) {
+                tempControllers.remove(kv.getKey());
+            }
+        }
+    }
+
     public final void clearTempControllers() {
         if (tempControllers.isEmpty()) { return; }
         tempControllers.clear();
@@ -3436,9 +3445,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             // Just remove it's zone, so we don't run through the exile stuff
             // This allows auras on phased out tokens to just phase out permanently
-            getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            getZone().remove(this);
-            getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+            this.ceaseToExist();
         }
 
         if (!phasedOut) {
@@ -6709,5 +6716,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (Entry<Long, CardColor> entry : changedCardColors.entrySet()) {
             this.changedCardColors.put(entry.getKey(), entry.getValue());
         }
+    }
+
+    public void ceaseToExist() {
+        getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        getZone().remove(this);
+        getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 }
