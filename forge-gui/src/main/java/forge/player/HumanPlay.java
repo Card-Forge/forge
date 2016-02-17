@@ -133,7 +133,7 @@ public class HumanPlay {
 
     /**
      * choose optional additional costs. For HUMAN only
-     * @param activator
+     * @param p
      * 
      * @param original
      *            the original sa
@@ -208,8 +208,6 @@ public class HumanPlay {
      * 
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param skipTargeting
-     *            a boolean.
      */
     public final static void playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa) {
         playSpellAbilityNoStack(controller, player, sa, false);
@@ -251,15 +249,9 @@ public class HumanPlay {
      * <p>
      * payCostDuringAbilityResolve.
      * </p>
-     * 
-     * @param ability
-     *            a {@link forge.game.spellability.SpellAbility} object.
+     *
      * @param cost
      *            a {@link forge.game.cost.Cost} object.
-     * @param paid
-     *            a {@link forge.UiCommand} object.
-     * @param unpaid
-     *            a {@link forge.UiCommand} object.
      * @param sourceAbility TODO
      */
     public static boolean payCostDuringAbilityResolve(final PlayerControllerHuman controller, final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt) {
@@ -343,7 +335,7 @@ public class HumanPlay {
                     part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostAddMana) {
-                if (!p.getController().confirmPayment(part, "Do you want to add " + ((CostAddMana) part).toString() + " to your mana pool?" + orString)) {
+                if (!p.getController().confirmPayment(part, "Do you want to add " + part.toString() + " to your mana pool?" + orString)) {
                     return false;
                 }
                 PaymentDecision pd = part.accept(hcd);
@@ -451,7 +443,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                list = CardLists.getValidCards(list, ((CostRemoveAnyCounter) part).getType().split(";"), p, source);
+                list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
                 while (amount > 0) {
                     final CounterType counterType;
                     list = CardLists.filter(list, new Predicate<Card>() {
@@ -764,12 +756,19 @@ public class HumanPlay {
             ManaCostAdjustment.adjust(toPay, ability, cardsToDelve, false);
         }
 
+        Card offering = null;
+
         InputPayMana inpPayment;
-        if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
-            System.out.println("Sacrifice input for Offering cancelled");
-            return false;
+        if (ability.isOffering()) {
+            if (ability.getSacrificedAsOffering() == null) {
+                System.out.println("Sacrifice input for Offering cancelled");
+                return false;
+            } else {
+                offering = ability.getSacrificedAsOffering();
+            }
         }
         if (!toPay.isPaid()) {
+            // Input is somehow clearing out the offering card?
             inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator);
             inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
@@ -783,12 +782,16 @@ public class HumanPlay {
         }
 
         // Handle convoke and offerings
-        if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
-            System.out.println("Finishing up Offering");
-            final Card offering = ability.getSacrificedAsOffering();
-            offering.setUsedToPay(false);
-            activator.getGame().getAction().sacrifice(offering, ability);
-            ability.resetSacrificedAsOffering();
+        if (ability.isOffering()) {
+            if (ability.getSacrificedAsOffering() == null && offering != null) {
+                ability.setSacrificedAsOffering(offering);
+            }
+            if (ability.getSacrificedAsOffering() != null) {
+                System.out.println("Finishing up Offering");
+                offering.setUsedToPay(false);
+                activator.getGame().getAction().sacrifice(offering, ability);
+                ability.resetSacrificedAsOffering();
+            }
         }
         if (ability.getTappedForConvoke() != null) {
             for (final Card c : ability.getTappedForConvoke()) {
