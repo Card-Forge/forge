@@ -46,7 +46,7 @@ def initializeEditions():
 							if hasSetNumbers is None:
 								hasSetNumbers = line.split(" ", 1)[0].isdigit()
 
-							card = line.split(" ", 2 if hasSetNumbers else 1)[-1].replace("AE","Ae").rstrip()
+							card = line.split(" ", 2 if hasSetNumbers else 1)[-1].rstrip()
 							if card not in mtgDataCards:
 								#print card
 								mtgDataCards[card] = [setcode]
@@ -72,11 +72,18 @@ def initializeOracleText():
 		with open(allJson) as f:
 			oracleDict = json.loads(f.read())
 
+
+	aes = [k for k in oracleDict.keys() if u'\xc6' in k or u'\xf6' in k]
+	print "Normalizing %s names" % len(aes)
+	for ae in aes:
+		data = oracleDict.pop(ae)
+		oracleDict[normalizeOracle(ae)] = data
+
 	print "Found Oracle text for ", len(oracleDict)
 	return oracleDict
 
 def normalizeOracle(oracle):
-	return oracle.replace(u'\u2014', '-').replace(u'\u2018', "'").replace(u'\u201c', '"').replace(u'\u201d', '"').replace(u'\u2022', '-')
+	return oracle.replace(u'\u2014', '-').replace(u'\u2018', "'").replace(u'\u201c', '"').replace(u'\u201d', '"').replace(u'\u2022', '-').replace(u'\xc6', 'AE').replace(u'\xf6', 'o')
 
 
 def initializeForgeCards():
@@ -95,7 +102,7 @@ def initializeForgeCards():
 							name += ' // '
 
 						if not name or split:
-							name += line[5:].replace("AE","Ae").rstrip()
+							name += line[5:].rstrip()
 						
 					elif line.startswith("AlternateMode") and 'Split' in line:
 						split = True
@@ -355,3 +362,4 @@ if __name__ == '__main__':
 	releaseOutput.close()
 
 	print ("Done!")
+	raw_input("Press Enter to continue...")
