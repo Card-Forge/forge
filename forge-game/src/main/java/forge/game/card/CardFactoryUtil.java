@@ -182,7 +182,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                if (sourceCard.turnFaceUp(true)) {
+                if (sourceCard.turnFaceUp(true, true)) {
                     String sb = this.getActivatingPlayer() + " has unmanifested " + sourceCard.getName();
                     sourceCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                     sourceCard.getGame().fireEvent(new GameEventCardStatsChanged(sourceCard));

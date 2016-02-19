@@ -123,8 +123,6 @@ public class VLog implements IVDoc<CLog> {
      * Called whenever there are new log entries to be displayed.
      * <p>
      * This is an Observer update method.
-     * <p>
-     * @param model contains list of log entries.
      */
     public void updateConsole() {
         final GameView model = controller.getMatchUI().getGameView();

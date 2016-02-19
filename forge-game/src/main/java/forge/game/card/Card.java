@@ -478,10 +478,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
 	public boolean turnFaceUp() {
-		return turnFaceUp(false);
+		return turnFaceUp(false, true);
 	}
 
-    public boolean turnFaceUp(boolean manifestPaid) {
+    public boolean turnFaceUp(boolean manifestPaid, boolean runTriggers) {
         if (currentStateName == CardStateName.FaceDown) {
             if (manifestPaid && this.isManifested() && !this.getRules().getType().isCreature()) {
                 // If we've manifested a non-creature and we're demanifesting disallow it
@@ -492,7 +492,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             boolean result = setState(preFaceDownState, true);
-            if (result) {
+            if (result && runTriggers) {
                 // Run replacement effects
                 HashMap<String, Object> repParams = new HashMap<>();
                 repParams.put("Event", "TurnFaceUp");

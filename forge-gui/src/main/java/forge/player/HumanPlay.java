@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.spellability.Spell;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -88,13 +89,20 @@ public class HumanPlay {
             return;
         }
 
-        sa.setActivatingPlayer(p);
-        final Card source = sa.getHostCard();
-        source.setSplitStateToPlayAbility(sa);
+        boolean castFaceDown = sa instanceof Spell && ((Spell)sa).isCastFaceDown();
 
+        sa.setActivatingPlayer(p);
+        Card source = sa.getHostCard();
+        boolean flippedToCast = sa instanceof Spell && source.isFaceDown();
+
+        source.setSplitStateToPlayAbility(sa);
         sa = chooseOptionalAdditionalCosts(p, sa);
         if (sa == null) {
             return;
+        }
+
+        if (flippedToCast && !castFaceDown) {
+            source.turnFaceUp(false, false);
         }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
@@ -121,13 +129,22 @@ public class HumanPlay {
             CostPayment payment = new CostPayment(abCost, sa);
 
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa, payment);
-            req.playAbility(true, false, false);
+            if (!req.playAbility(true, false, false)) {
+                if (flippedToCast && !castFaceDown) {
+                    source.turnFaceDown(true);
+                }
+            }
         } else if (payManaCostIfNeeded(controller, p, sa)) {
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setHostCard(p.getGame().getAction().moveToStack(source));
             }
 
             p.getGame().getStack().add(sa);
+        } else {
+            // Failed to pay costs, revert to original state
+            if (flippedToCast && !castFaceDown) {
+                source.turnFaceDown(true);
+            }
         }
     }
 
