@@ -43,8 +43,7 @@ def initializeEditions():
 
 					else:
 						if line:
-							if hasSetNumbers is None:
-								hasSetNumbers = line.split(" ", 1)[0].isdigit()
+							hasSetNumbers = line.split(" ", 1)[0].isdigit()
 
 							card = line.split(" ", 2 if hasSetNumbers else 1)[-1].rstrip()
 							if card not in mtgDataCards:
