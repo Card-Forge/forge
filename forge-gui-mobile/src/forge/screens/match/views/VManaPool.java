@@ -12,6 +12,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.game.player.PlayerView;
 import forge.player.GamePlayerUtil;
 import forge.screens.match.MatchController;
@@ -28,7 +29,7 @@ public class VManaPool extends VDisplayArea {
     public VManaPool(PlayerView player0) {
         player = player0;
 
-        addManaLabel(FSkinImage.MANA_COLORLESS, MagicColor.COLORLESS);
+        addManaLabel(FSkinImage.MANA_COLORLESS, (byte)ManaAtom.COLORLESS);
         addManaLabel(FSkinImage.MANA_W, MagicColor.WHITE);
         addManaLabel(FSkinImage.MANA_U, MagicColor.BLUE);
         addManaLabel(FSkinImage.MANA_B, MagicColor.BLACK);
