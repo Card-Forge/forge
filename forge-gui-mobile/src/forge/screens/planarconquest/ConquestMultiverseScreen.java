@@ -57,8 +57,8 @@ import forge.util.collect.FCollectionView;
 public class ConquestMultiverseScreen extends FScreen {
     private static final Color FOG_OF_WAR_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.65f);
     private static final Color UNCONQUERED_COLOR = FSkinColor.alphaColor(Color.BLACK, 0.1f);
-    private static final Color LOCATION_BAR_COLOR = FSkinColor.alphaColor(Color.WHITE, 0.15f);
-    private static final Color LOCATION_BAR_TEXT_COLOR = FSkinColor.fromRGB(200, 207, 208);
+    public static final Color LOCATION_BAR_COLOR = FSkinColor.alphaColor(Color.WHITE, 0.15f);
+    public static final Color LOCATION_BAR_TEXT_COLOR = FSkinColor.fromRGB(200, 207, 208);
     private static final FSkinFont PLANE_NAME_FONT = FSkinFont.get(16);
     private static final FSkinFont EVENT_NAME_FONT = FSkinFont.get(14);
     private static final FSkinFont AVATAR_NAME_FONT = FSkinFont.get(14);

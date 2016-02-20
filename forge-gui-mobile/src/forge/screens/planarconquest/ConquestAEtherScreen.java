@@ -1,37 +1,44 @@
 package forge.screens.planarconquest;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
-import forge.assets.FImage;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.item.PaperCard;
-import forge.itemmanager.filters.ItemFilter;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
+import forge.planarconquest.ConquestUtil;
+import forge.planarconquest.ConquestUtil.FilterOption;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
+import forge.toolbox.GuiChoose;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Aggregates;
+import forge.util.Callback;
 import forge.util.Utils;
 
 public class ConquestAEtherScreen extends FScreen {
-    private static final Color FILTER_BUTTON_COLOR = FSkinColor.alphaColor(Color.WHITE, 0.15f);
+    private static final Color FILTER_BUTTON_COLOR = ConquestMultiverseScreen.LOCATION_BAR_COLOR;
+    private static final FSkinColor FILTER_BUTTON_TEXT_COLOR = FSkinColor.getStandardColor(ConquestMultiverseScreen.LOCATION_BAR_TEXT_COLOR);
     private static final FSkinColor FILTER_BUTTON_PRESSED_COLOR = FSkinColor.getStandardColor(FSkinColor.alphaColor(Color.WHITE, 0.1f));
     private static final float PADDING = Utils.scale(5f);
 
@@ -39,33 +46,12 @@ public class ConquestAEtherScreen extends FScreen {
     private final Set<PaperCard> pool = new HashSet<PaperCard>();
     private final Set<PaperCard> filteredPool = new HashSet<PaperCard>();
 
-    private final FLabel btnColorFilter = add(new FilterButton(FSkinImage.MULTI, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            
-        }
-    }));
-    private final FLabel btnTypeFilter = add(new FilterButton(FSkinImage.CREATURE, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            
-        }
-    }));
-    private final FLabel btnRarityFilter = add(new FilterButton(FSkinImage.PW_BADGE_COMMON, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            
-        }
-    }));
-    private final FLabel btnCMCFilter = add(new FilterButton(FSkinImage.MANA_X, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            
-        }
-    }));
+    private final FilterButton btnColorFilter = add(new FilterButton("Color", ConquestUtil.COLOR_FILTERS));
+    private final FilterButton btnTypeFilter = add(new FilterButton("Type", ConquestUtil.TYPE_FILTERS));
+    private final FilterButton btnRarityFilter = add(new FilterButton("Rarity", ConquestUtil.RARITY_FILTERS));
+    private final FilterButton btnCMCFilter = add(new FilterButton("CMC", ConquestUtil.CMC_FILTERS));
 
     private PullAnimation activePullAnimation;
-    private ItemFilter<PaperCard> editFilter;
     private int shardCost;
 
     public ConquestAEtherScreen() {
@@ -89,9 +75,16 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private void updateFilteredPool() {
+        Predicate<PaperCard> predicate = btnColorFilter.buildFilterPredicate(null);
+        predicate = btnTypeFilter.buildFilterPredicate(predicate);
+        predicate = btnRarityFilter.buildFilterPredicate(predicate);
+        predicate = btnCMCFilter.buildFilterPredicate(predicate);
+
         filteredPool.clear();
         for (PaperCard card : pool) {
-            filteredPool.add(card);
+            if (predicate == null || predicate.apply(card)) {
+                filteredPool.add(card);
+            }
         }
         updateShardCost();
     }
@@ -102,6 +95,8 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private void pullFromTheAEther() {
+        if (filteredPool.isEmpty()) { return; }
+
         ConquestData model = FModel.getConquest().getModel();
         PaperCard card = Aggregates.random(filteredPool);
         pool.remove(card);
@@ -150,12 +145,17 @@ public class ConquestAEtherScreen extends FScreen {
             if (activePullAnimation != null) {
                 activePullAnimation.drawCard(g);
             }
-            else if (editFilter == null) {
+            else {
+                
             }
         }
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (y < btnColorFilter.getBottom() + PADDING || y > btnCMCFilter.getTop() - PADDING) {
+                return false; //ignore taps inline with buttons
+            }
+
             if (activePullAnimation != null) {
                 if (activePullAnimation.finished) {
                     activePullAnimation = null;
@@ -163,15 +163,17 @@ public class ConquestAEtherScreen extends FScreen {
                 }
                 return false;
             }
-            if (editFilter == null) {
-                pullFromTheAEther();
-                return true;
-            }
-            return false;
+
+            pullFromTheAEther();
+            return true;
         }
 
         @Override
         public boolean longPress(float x, float y) {
+            if (y < btnColorFilter.getBottom() + PADDING || y > btnCMCFilter.getTop() - PADDING) {
+                return false; //ignore long press inline with buttons
+            }
+
             if (activePullAnimation != null && activePullAnimation.finished) {
                 CardZoom.show(activePullAnimation.card);
                 return true;
@@ -226,9 +228,54 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private class FilterButton extends FLabel {
-        private FilterButton(FImage icon, FEventHandler command) {
-            super(new FLabel.Builder().icon(icon).iconInBackground().pressedColor(FILTER_BUTTON_PRESSED_COLOR)
-                    .command(command).alphaComposite(1f).align(HAlignment.CENTER));
+        private final String caption;
+        private final List<FilterOption> options;
+        private FilterOption selectedOption;
+
+        private FilterButton(String caption0, FilterOption[] options0) {
+            super(new FLabel.Builder().iconInBackground().pressedColor(FILTER_BUTTON_PRESSED_COLOR)
+                    .textColor(FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(HAlignment.CENTER));
+            caption = caption0;
+            options = ImmutableList.copyOf(options0);
+            setSelectedOption(options.get(0));
+            setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    GuiChoose.getChoices("Select " + caption + " Filter", 0, 1, options, selectedOption, null, new Callback<List<FilterOption>>() {
+                        @Override
+                        public void run(List<FilterOption> result) {
+                            if (!result.isEmpty()) {
+                                setSelectedOption(result.get(0));
+                                updateFilteredPool();
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        private void setSelectedOption(FilterOption selectedOption0) {
+            if (selectedOption == selectedOption0) { return; }
+            selectedOption = selectedOption0;
+
+            if (selectedOption == FilterOption.NONE) {
+                setIcon(null);
+                setText("Filter\n" + caption);
+            }
+            else {
+                setIcon(FSkin.getImages().get(selectedOption.skinProp));
+                setText("");
+            }
+        }
+
+        private Predicate<PaperCard> buildFilterPredicate(Predicate<PaperCard> predicate) {
+            if (selectedOption != FilterOption.NONE) {
+                if (predicate == null) {
+                    return selectedOption.predicate;
+                }
+                return Predicates.and(predicate, selectedOption.predicate);
+            }
+            return predicate;
         }
 
         @Override
