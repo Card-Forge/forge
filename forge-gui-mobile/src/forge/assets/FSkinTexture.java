@@ -79,4 +79,8 @@ public enum FSkinTexture implements FImage {
     public void drawRotated(Graphics g, float x, float y, float w, float h, float rotation) {
         g.drawRotatedImage(texture, x, y, w, h, x + w / 2, y + h / 2, rotation);
     }
+
+    public void drawFlipped(Graphics g, float x, float y, float w, float h) {
+        g.drawFlippedImage(texture, x, y, w, h);
+    }
 }

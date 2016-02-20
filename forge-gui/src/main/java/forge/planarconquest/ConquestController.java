@@ -20,7 +20,6 @@ package forge.planarconquest;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import forge.FThreads;
@@ -47,7 +46,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.BoosterUtils;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
-import forge.util.ItemPool;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
 
@@ -226,17 +224,17 @@ public class ConquestController {
         return allRewards;
     }
 
-    public int calculateShardCost(ItemPool<PaperCard> filteredCards, int unfilteredCount) {
+    public int calculateShardCost(Set<PaperCard> filteredCards, int unfilteredCount) {
         if (filteredCards.isEmpty()) { return 0; }
 
         ConquestAwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
 
         //determine average value of filtered cards
         int totalValue = 0;
-        for (Entry<PaperCard, Integer> entry : filteredCards) {
-            totalValue += pool.getShardValue(entry.getKey());
+        for (PaperCard card : filteredCards) {
+            totalValue += pool.getShardValue(card);
         }
-        float averageValue = totalValue / filteredCards.countDistinct();
+        float averageValue = totalValue / filteredCards.size();
         float multiplier = 1f + (float)FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_MARKUP) / 100f;
 
         //TODO: Increase multiplier based on average percentage of cards filtered out for each rarity
