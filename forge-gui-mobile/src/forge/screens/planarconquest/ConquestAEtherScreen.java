@@ -5,17 +5,24 @@ import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Rectangle;
 
 import forge.Graphics;
+import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
+import forge.card.CardRenderer;
+import forge.card.CardZoom;
+import forge.card.CardRenderer.CardStackPosition;
 import forge.item.PaperCard;
+import forge.itemmanager.filters.ItemFilter;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
 import forge.screens.FScreen;
+import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -57,6 +64,8 @@ public class ConquestAEtherScreen extends FScreen {
         }
     }));
 
+    private PullAnimation activePullAnimation;
+    private ItemFilter<PaperCard> editFilter;
     private int shardCost;
 
     public ConquestAEtherScreen() {
@@ -98,7 +107,8 @@ public class ConquestAEtherScreen extends FScreen {
         pool.remove(card);
         filteredPool.remove(card);
 
-        ConquestRewardDialog.show("Card pulled from the AEther", card, null);
+        activePullAnimation = new PullAnimation(card);
+        activePullAnimation.start();
 
         model.spendAEtherShards(shardCost);
         model.unlockCard(card);
@@ -136,6 +146,82 @@ public class ConquestAEtherScreen extends FScreen {
             g.startClip(0, 0, w, h / 2); //prevent upper image extending beyond halfway point of screen
             background.drawFlipped(g, 0, 0, w, backgroundHeight);
             g.endClip();
+
+            if (activePullAnimation != null) {
+                activePullAnimation.drawCard(g);
+            }
+            else if (editFilter == null) {
+            }
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (activePullAnimation != null) {
+                if (activePullAnimation.finished) {
+                    activePullAnimation = null;
+                    return true;
+                }
+                return false;
+            }
+            if (editFilter == null) {
+                pullFromTheAEther();
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            if (activePullAnimation != null && activePullAnimation.finished) {
+                CardZoom.show(activePullAnimation.card);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    private class PullAnimation extends ForgeAnimation {
+        private static final float DURATION = 0.6f;
+
+        private final PaperCard card;
+        private final Rectangle start, end;
+        private float progress = 0;
+        private boolean finished;
+
+        private PullAnimation(PaperCard card0) {
+            card = card0;
+
+            float displayWidth = display.getWidth();
+            float displayHeight = display.getHeight();
+            float startHeight = displayHeight * 0.05f;
+            float startWidth = startHeight / FCardPanel.ASPECT_RATIO;
+            float endHeight = displayHeight - 2 * btnColorFilter.getHeight() - 4 * PADDING;
+            float endWidth = endHeight / FCardPanel.ASPECT_RATIO;
+            start = new Rectangle((displayWidth - startWidth) / 2, (displayHeight - startHeight) / 2, startWidth, startHeight);
+            end = new Rectangle((displayWidth - endWidth) / 2, (displayHeight - endHeight) / 2, endWidth, endHeight);
+        }
+
+        private void drawCard(Graphics g) {
+            float percentage = progress / DURATION;
+            if (percentage < 0) {
+                percentage = 0;
+            }
+            else if (percentage > 1) {
+                percentage = 1;
+            }
+            Rectangle pos = Utils.getTransitionPosition(start, end, percentage);
+            CardRenderer.drawCard(g, card, pos.x, pos.y, pos.width, pos.height, CardStackPosition.Top);
+        }
+
+        @Override
+        protected boolean advance(float dt) {
+            progress += dt;
+            return progress < DURATION;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            finished = true;
         }
     }
 
