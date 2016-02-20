@@ -60,7 +60,7 @@ public class CostReturn extends CostPartWithList {
         if (this.payCostFromSource()) {
             sb.append(this.getType());
         } else {
-            final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
+            final String desc = this.getDescriptiveType();
             if (i != null) {
                 sb.append(Cost.convertIntAndTypeToWords(i, desc));
                 if (i > 1) {

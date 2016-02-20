@@ -731,7 +731,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
             final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, validCards);
             inp.setCancelAllowed(true);
-            inp.setMessage("Return %d " + cost.getType() + " " + cost.getType() + " card(s) to hand");
+            inp.setMessage("Return %d " + cost.getDescriptiveType() + " card(s) to hand");
             inp.showAndWait();
             if (inp.hasCancelled()) {
                 return null;
