@@ -7,6 +7,7 @@ Name:Lorwyn-Shadowmoor|RegionSize:6|Desc:
 Name:Mercadia|RegionSize:6|Unreachable:True|Desc:
 Name:Mirrodin|RegionSize:9|Unreachable:True|Desc:
 Name:Rath|RegionSize:6|Unreachable:True|Desc:
+Name:Ravnica|RegionSize:9|Desc:
 Name:Regatha|RegionSize:6|Unreachable:True|Desc:
 Name:Shandalar|RegionSize:9|Unreachable:True|Desc:
 Name:Tarkir|RegionSize:9|Desc:
