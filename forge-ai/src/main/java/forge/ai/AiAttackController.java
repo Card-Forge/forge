@@ -199,6 +199,10 @@ public class AiAttackController {
         if ((attacker.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true)) <= 0) {
             return false;
         }
+        
+        if ("TRUE".equals(attacker.getSVar("HasAttackEffect"))) {
+        	return true;
+        }
 
         final Player opp = this.defendingOpponent;
         if (ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, true) > 0) {
@@ -918,7 +922,8 @@ public class AiAttackController {
         }
         boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
-        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE");
+        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") 
+        		|| "Blocked".equals(attacker.getSVar("HasAttackEffect"));
         if (!hasCombatEffect) {
             for (String keyword : attacker.getKeywords()) {
                 if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink")) {

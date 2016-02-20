@@ -1762,6 +1762,10 @@ public class ComputerUtilCombat {
             	}
             }
         }
+        
+        if (attacker.getName().equals("Elven Warhounds")) {
+        	return true;
+        }
 
         int flankingMagnitude = 0;
         if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
