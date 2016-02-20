@@ -1,6 +1,8 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Boros Battalion|Deck:Boros Battalion.dck|Variant:None|Avatar:Firemane Avenger|Desc:
+Name:Boros Radiance|Deck:Boros Radiance.dck|Variant:None|Avatar:Wojek Embermage|Desc:
+Name:Agrus Kos, Wojek Veteran|Deck:Agrus Kos, Wojek Veteran.dck|Variant:Commander|Avatar:Agrus Kos, Wojek Veteran|Desc:
+Name:Aurelia, the Warleader|Deck:Aurelia, the Warleader.dck|Variant:Commander|Avatar:Aurelia, the Warleader|Desc:
+Name:Krenko, Mob Boss|Deck:Krenko, Mob Boss.dck|Variant:Commander|Avatar:Krenko, Mob Boss|Desc:
+Name:Tajic, Blade of the Legion|Deck:Tajic, Blade of the Legion.dck|Variant:Commander|Avatar:Tajic, Blade of the Legion|Desc:
+Name:Serra Angel|Deck:Serra Angel.dck|Variant:Vanguard|Avatar:Serra Angel|Desc:
+Name:Gideon, Champion of Justice|Deck:Gideon, Champion of Justice.dck|Variant:Planeswalker|Avatar:Gideon, Champion of Justice|Desc:

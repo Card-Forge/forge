@@ -1,6 +1,8 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Azorious Detain|Deck:Azorious Detain.dck|Variant:None|Avatar:Archon of the Triumvirate|Desc:
+Name:Azorious Forecast|Deck:Azorious Forecast.dck|Variant:None|Avatar:Pride of the Clouds|Desc:
+Name:Grand Arbiter Augustin IV|Deck:Grand Arbiter Augustin IV.dck|Variant:Commander|Avatar:Grand Arbiter Augustin IV|Desc:
+Name:Isperia the Inscrutable|Deck:Isperia the Inscrutable.dck|Variant:Commander|Avatar:Isperia the Inscrutable|Desc:
+Name:Isperia, Supreme Judge|Deck:Isperia, Supreme Judge.dck|Variant:Commander|Avatar:Isperia, Supreme Judge|Desc:
+Name:Lavinia of the Tenth|Deck:Lavinia of the Tenth.dck|Variant:Commander|Avatar:Lavinia of the Tenth|Desc:
+Name:Arcanis the Omnipotent|Deck:Arcanis the Omnipotent.dck|Variant:Vanguard|Avatar:Arcanis the Omnipotent|Desc:
+Name:Jace, Architect of Thought|Deck:Jace, Architect of Thought.dck|Variant:Planeswalker|Avatar:Jace, Architect of Thought|Desc:

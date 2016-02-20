@@ -1,6 +1,9 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Izzet Overload|Deck:Izzet Overload.dck|Variant:None|Avatar:Teleportal|Desc:
+Name:Izzet Replicate|Deck:Izzet Replicate.dck|Variant:None|Avatar:Djinn Illuminatus|Desc:
+Name:Melek, Izzet Paragon|Deck:Melek, Izzet Paragon.dck|Variant:Commander|Avatar:Melek, Izzet Paragon|Desc:
+Name:Niv-Mizzet, Dracogenius|Deck:Niv-Mizzet, Dracogenius.dck|Variant:Commander|Avatar:Niv-Mizzet, Dracogenius|Desc:
+Name:Mizzix of the Izmagus|Deck:Mizzix of the Izmagus.dck|Variant:Commander|Avatar:Mizzix of the Izmagus|Desc:
+Name:Niv-Mizzet, the Firemind|Deck:Niv-Mizzet, the Firemind.dck|Variant:Commander|Avatar:Niv-Mizzet, the Firemind|Desc:
+Name:Tibor and Lumia|Deck:Tibor and Lumia.dck|Variant:Commander|Avatar:Tibor and Lumia|Desc:
+Name:Jhoira of the Ghitu|Deck:Jhoira of the Ghitu.dck|Variant:Vanguard|Avatar:Jhoira of the Ghitu|Desc:
+Name:Ral Zarek|Deck:Ral Zarek.dck|Variant:Planeswalker|Avatar:Ral Zarek|Desc:

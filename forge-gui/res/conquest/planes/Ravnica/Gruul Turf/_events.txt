@@ -1,6 +1,8 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Gruul Bloodrush|Deck:Gruul Bloodrush.dck|Variant:None|Avatar:Rubblehulk|Desc:
+Name:Gruul Bloodthirst|Deck:Gruul Bloodthirst.dck|Variant:None|Avatar:Furyborn Hellkite|Desc:
+Name:Borborygmos|Deck:Borborygmos.dck|Variant:Commander|Avatar:Borborygmos|Desc:
+Name:Borboygmos Enraged|Deck:Borboygmos Enraged.dck|Variant:Commander|Avatar:Borboygmos Enraged|Desc:
+Name:Ruric Thar, the Unbowed|Deck:Ruric Thar, the Unbowed.dck|Variant:Commander|Avatar:Ruric Thar, the Unbowed|Desc:
+Name:Ulasht, the Hate Seed|Deck:Ulasht, the Hate Seed.dck|Variant:Commander|Avatar:Ulasht, the Hate Seed|Desc:
+Name:Rumbling Slum|Deck:Rumbling Slum.dck|Variant:Vanguard|Avatar:Rumbling Slum|Desc:
+Name:Domri Rade|Deck:Domri Rade.dck|Variant:Planeswalker|Avatar:Domri Rade|Desc:
