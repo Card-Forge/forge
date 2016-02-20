@@ -1595,6 +1595,20 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         sb.append(keywordsToText(getUnhiddenKeywords(state)));
 
+        // Process replacement effects first so that ETB tabbed can be printed here.
+        // The rest will be printed later.
+        StringBuilder replacementEffects = new StringBuilder();
+        for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
+            if (!replacementEffect.isSecondary()) {
+                String text = replacementEffect.toString();
+                if (text.equals("CARDNAME enters the battlefield tapped.")) {
+                    sb.append(text).append("\r\n");
+                } else {
+                    replacementEffects.append(text).append("\r\n");
+                }
+            }
+        }
+        
         // Give spellText line breaks for easier reading
         sb.append("\r\n");
         sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
@@ -1608,11 +1622,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Replacement effects
-        for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
-            if (!replacementEffect.isSecondary()) {
-                sb.append(replacementEffect.toString()).append("\r\n");
-            }
-        }
+        sb.append(replacementEffects);
 
         // static abilities
         for (final StaticAbility stAb : state.getStaticAbilities()) {
