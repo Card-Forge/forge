@@ -232,10 +232,14 @@ public class ConquestUtil {
 
         @Override
         public boolean apply(PaperCard card) {
+            //use color identity for lands and color for other cards
+            CardRules cardRules = card.getRules();
+            ColorSet cardColor = cardRules.getType().isLand() ? cardRules.getColorIdentity() : cardRules.getColor();
+
             if (color == MagicColor.COLORLESS) {
-                return card.getRules().getColor().isColorless();
+                return cardColor.isColorless();
             }
-            return card.getRules().getColor().hasAllColors(color);
+            return cardColor.hasAllColors(color);
         }
     }
 
