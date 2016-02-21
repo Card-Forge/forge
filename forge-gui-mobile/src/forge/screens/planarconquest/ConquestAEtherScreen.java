@@ -42,6 +42,7 @@ public class ConquestAEtherScreen extends FScreen {
     private static final Color FILTER_BUTTON_COLOR = ConquestMultiverseScreen.LOCATION_BAR_COLOR;
     private static final FSkinColor FILTER_BUTTON_TEXT_COLOR = FSkinColor.getStandardColor(ConquestMultiverseScreen.LOCATION_BAR_TEXT_COLOR);
     private static final FSkinColor FILTER_BUTTON_PRESSED_COLOR = FSkinColor.getStandardColor(FSkinColor.alphaColor(Color.WHITE, 0.1f));
+    private static final FSkinFont LABEL_FONT = FSkinFont.get(16);
     private static final FSkinFont MESSAGE_FONT = FSkinFont.get(14);
     private static final float PADDING = Utils.scale(5f);
 
@@ -53,6 +54,8 @@ public class ConquestAEtherScreen extends FScreen {
     private final FilterButton btnTypeFilter = add(new FilterButton("Type", ConquestUtil.TYPE_FILTERS));
     private final FilterButton btnRarityFilter = add(new FilterButton("Rarity", ConquestUtil.RARITY_FILTERS));
     private final FilterButton btnCMCFilter = add(new FilterButton("CMC", ConquestUtil.CMC_FILTERS));
+
+    private final FLabel lblShards = add(new FLabel.Builder().font(LABEL_FONT).align(HAlignment.CENTER).parseSymbols().build());
 
     private PullAnimation activePullAnimation;
     private int shardCost;
@@ -75,6 +78,7 @@ public class ConquestAEtherScreen extends FScreen {
             }
         }
         updateFilteredPool();
+        updateAvailableShards();
     }
 
     private void updateFilteredPool() {
@@ -90,6 +94,11 @@ public class ConquestAEtherScreen extends FScreen {
             }
         }
         updateShardCost();
+    }
+
+    private void updateAvailableShards() {
+        int availableShards = FModel.getConquest().getModel().getAEtherShards();
+        lblShards.setText("Shards: {AE}" + availableShards);
     }
 
     private void updateShardCost() {
@@ -116,6 +125,7 @@ public class ConquestAEtherScreen extends FScreen {
         model.saveData();
 
         updateShardCost();
+        updateAvailableShards();
     }
 
     @Override
@@ -127,6 +137,10 @@ public class ConquestAEtherScreen extends FScreen {
         btnTypeFilter.setBounds(width - buttonSize - PADDING, startY + PADDING, buttonSize, buttonSize);
         btnRarityFilter.setBounds(PADDING, height - buttonSize - PADDING, buttonSize, buttonSize);
         btnCMCFilter.setBounds(width - buttonSize - PADDING, height - buttonSize - PADDING, buttonSize, buttonSize);
+
+        float x = btnRarityFilter.getRight() + PADDING;
+        float labelWidth = btnCMCFilter.getLeft() - PADDING - x;
+        lblShards.setBounds(x, btnRarityFilter.getTop(), labelWidth, btnRarityFilter.getHeight());
     }
 
     private class AEtherDisplay extends FDisplayObject {
