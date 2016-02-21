@@ -1,12 +1,14 @@
 Forge Beta: 01-28-2016 ver 1.5.48
 
 
-15393 cards in total.
+15398 cards in total.
 
 
 -------------
 Release Notes
 -------------
+
+- Many bug fixes! There are far too many to list, but most of them came from you reporting them. Thanks!
 
 - Deck colors now shown in correct order -
 Two, three, and four color decks will now display their color symbols in the correct order
@@ -15,40 +17,21 @@ For example, instead of displaying {W}{G} for a green-white deck, it will displa
 - Custom Card Rankings for Cube Drafts -
 Custom booster draft definitions can now specify a custom text file for rankings that is to be used with that particular cube. This allows to specify different priorities for AI picks for each custom cube. See the file "res/draft/MTGO Vintage Cube 2016.draft" for an example of a definition of a draft with custom rankings and see the files "draft/cube_drafting_rankings.txt" and "draft/cube_mtgo_rankings.txt" for examples of custom ranking definitions (these definitions were taken from Bestiaire draft ranking lists - "Cube Drafting" and "Cube MTGO", respectively). If a given card is not listed in the custom rankings file, then the main rankings file (rankings.txt) is scanned as a fallback mechanism.
 
-- New Oath of the Gatewatch and Commander 2015 cards -
-The latest sets are now available in Forge! Hold tight while we sort out any missing card or product images. There's a few cards that have yet to be implemented; see below for that list.
-
-
 - Live Card Image Fetcher -
-Forge can now automatically download missing card art while you play. This is disabled by default, so head on over to the Preferences section to try it out!
+Forge can now automatically download missing card art while you play. This is disabled by default, so head on over to the Preferences section to try it out! Some hiccups with the Live Fetcher have been resolved, hopefully it's working more robustly this release.
 
+
+- New Quest Opponents. As of the time of this writing, there are 5 new quest opponents.
 
 ---------
 New cards
 ---------
 
-Cliffside Market
-Okk
-Orcish Conscripts
-
-
-----------------------------
-Missing Commander 2015 Cards
-----------------------------
-
-Dawnbreak Reclaimer
 Ezuri's Predation
 Grasp of Fate
 Mirror Match
 Mizzix's Mastery
 Synthetic Destiny
-
-
------------------------------------
-Missing Oath of the Gatewatch Cards
------------------------------------
-
-Remorseless Punishment
 
 
 ------------
@@ -57,11 +40,6 @@ Known Issues
 
 - Oath of the Gatewatch and Commander 2015 -
 Forge now includes many new cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-- The Mac OS application version -
-We can now package Forge as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
-
-The Mac OS X app version apparently requires the Mavericks OS and is not compatible with earlier OS X versions. People with earlier OS X versions should use the Windows and Linux version and launch forge on their Mac by double clicking on the included "forge.command" file.
 
 There is a known issue with Kodama of the Center Tree: its Soulshift X ability used to crash Forge, and until a proper fix can be implemented, a temporary fix was introduced which prevents the crash but makes the Soulshift X ability work incorrectly in certain cases (in particular, it doesn't work correctly with mass removal, and it may have issues when Kodama of the Center Tree is controlled by someone else other than its owner). In the basic cases (such as Kodama of the Center Tree being destroyed in combat or with a direct damage spell) should work correctly. Hopefully one of the developers will be able to implement a better and proper fix for this card soon.
 
@@ -74,11 +52,23 @@ Some time was spent turning the static ETB triggers into the proper ETB replacem
 A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there is one remaining issue that we hope will be addressed in the near future:
 Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
 
+----------------------------
+Forge Archive Instructions
+----------------------------
+
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove useful. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
 The archive format used for the Forge distribution is ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to extract/decompress these ".tar.bz2" archives. We recommend that you extract/decompress the Forge archive into a new and unused folder.
 
 Some people use the Windows application 7zip. This utility can be found at http://www.7-zip.org/download.html. Mac users can double click on the archive and the application Archive Utility will launch and extract the archive. Mac users do not need to download a separate utility.
+
+Once the Forge archive has been decompressed you should then be able to launch Forge by using the included launcher. Launching Forge by double clicking on the forge jar file in the past caused a java heap space error. Forge's memory requirements have increased over time and the launchers increase the java heap space available to Forge. Currently you can launch Forge by double clicking on the forge jar file without a java heap space error but this is likely to change as we add in more sounds, icons, etc.
+
+(Unfortunately, until our Release Manager who owns a Mac is back, the Mac application of Forge can not be distributed. Hopefully it'll be back sooner rather than later.)
+- The Mac OS application version -
+We can now package Forge as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
+
+The Mac OS X app version apparently requires the Mavericks OS and is not compatible with earlier OS X versions. People with earlier OS X versions should use the Windows and Linux version and launch forge on their Mac by double clicking on the included "forge.command" file.
 
 
 ----------------------------
@@ -93,6 +83,7 @@ KrazyTheFox
 Marek14
 Myrd
 Sloth
+slyfox7777777
 Sol
 Swordshine
 tjtillman
