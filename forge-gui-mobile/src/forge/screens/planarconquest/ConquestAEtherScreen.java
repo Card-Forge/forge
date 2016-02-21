@@ -15,6 +15,7 @@ import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
@@ -40,6 +41,7 @@ public class ConquestAEtherScreen extends FScreen {
     private static final Color FILTER_BUTTON_COLOR = ConquestMultiverseScreen.LOCATION_BAR_COLOR;
     private static final FSkinColor FILTER_BUTTON_TEXT_COLOR = FSkinColor.getStandardColor(ConquestMultiverseScreen.LOCATION_BAR_TEXT_COLOR);
     private static final FSkinColor FILTER_BUTTON_PRESSED_COLOR = FSkinColor.getStandardColor(FSkinColor.alphaColor(Color.WHITE, 0.1f));
+    private static final FSkinFont MESSAGE_FONT = FSkinFont.get(12);
     private static final float PADDING = Utils.scale(5f);
 
     private final AEtherDisplay display = add(new AEtherDisplay());
@@ -91,13 +93,14 @@ public class ConquestAEtherScreen extends FScreen {
 
     private void updateShardCost() {
         shardCost = FModel.getConquest().calculateShardCost(filteredPool, pool.size());
-        int availableShards = FModel.getConquest().getModel().getAEtherShards();
     }
 
     private void pullFromTheAEther() {
         if (filteredPool.isEmpty()) { return; }
 
         ConquestData model = FModel.getConquest().getModel();
+        if (model.getAEtherShards() < shardCost) { return; }
+
         PaperCard card = Aggregates.random(filteredPool);
         pool.remove(card);
         filteredPool.remove(card);
@@ -144,10 +147,10 @@ public class ConquestAEtherScreen extends FScreen {
 
             if (activePullAnimation != null) {
                 activePullAnimation.drawCard(g);
+                return;
             }
-            else {
-                
-            }
+
+            g.drawText("Tap anywhere to pull from the AEther", MESSAGE_FONT, Color.WHITE, 0, 0, w, h, false, HAlignment.CENTER, true);
         }
 
         @Override
