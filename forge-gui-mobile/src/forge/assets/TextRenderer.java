@@ -55,6 +55,14 @@ public class TextRenderer {
         symbolLookup.put("Q", FSkinImage.UNTAP);
         symbolLookup.put("S", FSkinImage.MANA_SNOW);
         symbolLookup.put("T", FSkinImage.TAP);
+        symbolLookup.put("AE", FSkinImage.AETHER_SHARD);
+    }
+
+    public static String startColor(Color color) {
+        return "<clr " + Color.rgba8888(color) + ">";
+    }
+    public static String endColor() {
+        return "</clr>";
     }
 
     private final boolean parseReminderText;
@@ -103,8 +111,11 @@ public class TextRenderer {
         String text = "";
         int inSymbolCount = 0;
         int consecutiveSymbols = 0;
+        int inKeywordCount = 0;
         boolean atReminderTextEnd = false;
         int inReminderTextCount = 0;
+        Color colorOverride = null;
+
         for (int i = 0; i < fullText.length(); i++) {
             atReminderTextEnd = false;
             ch = fullText.charAt(i);
@@ -118,7 +129,7 @@ public class TextRenderer {
                 }
                 lineWidths.add(x + pieceWidth);
                 if (!text.isEmpty()) {
-                    addPiece(new TextPiece(text, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
+                    addPiece(new TextPiece(text, colorOverride, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
                     pieceWidth = 0;
                     text = "";
                     consecutiveSymbols = 0;
@@ -139,7 +150,7 @@ public class TextRenderer {
                 continue; //skip new line character
             case '{':
                 if (inSymbolCount == 0 && !text.isEmpty()) { //add current text if just entering symbol
-                    addPiece(new TextPiece(text, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
+                    addPiece(new TextPiece(text, colorOverride,inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
                     x += pieceWidth;
                     pieceWidth = 0;
                     text = "";
@@ -209,6 +220,69 @@ public class TextRenderer {
                     }
                 }
                 break;
+            case '<':
+                if (inSymbolCount > 0) {
+                    inSymbolCount = 0;
+                    text = "{" + text; //if not a symbol, render as text
+                    if (lastSpaceIdx >= 0) {
+                        lastSpaceIdx++;
+                    }
+                }
+                if (inKeywordCount == 0 && !text.isEmpty()) { //add current text if starting a keyword
+                    addPiece(new TextPiece(text, colorOverride,false), lineNum, x, y, pieceWidth, lineHeight);
+                    x += pieceWidth;
+                    pieceWidth = 0;
+                    text = "";
+                    lastSpaceIdx = -1;
+                    consecutiveSymbols = 0;
+                }
+                inKeywordCount++;
+                break;
+            case '>':
+                if (inSymbolCount > 0) {
+                    inSymbolCount = 0;
+                    text = "{" + text; //if not a symbol, render as text
+                    if (lastSpaceIdx >= 0) {
+                        lastSpaceIdx++;
+                    }
+                }
+                if (inKeywordCount > 0) {
+                    inKeywordCount--;
+                    if (inKeywordCount == 0 && !text.isEmpty()) {
+                        String keyword, value;
+                        text = text.substring(1); //trim leading '<'
+                        if (text.startsWith("/")) {
+                            keyword = text.substring(1);
+                            value = null;
+                        }
+                        else {
+                            int idx = text.indexOf(' ');
+                            if (idx != -1) {
+                                keyword = text.substring(0, idx);
+                                value = text.substring(idx + 1);
+                            }
+                            else {
+                                keyword = text;
+                                value = null;
+                            }
+                        }
+                        boolean validKeyword = true;
+                        switch (keyword) {
+                        case "clr":
+                            colorOverride = value != null ? new Color(Integer.parseInt(value)) : null;
+                            break;
+                        default:
+                            validKeyword = false;
+                            break;
+                        }
+                        if (validKeyword) {
+                            text = "";
+                            lastSpaceIdx = -1;
+                            continue; //skip '>' character
+                        }
+                    }
+                }
+                break;
             case '(':
                 if (inSymbolCount > 0) {
                     inSymbolCount = 0;
@@ -219,7 +293,7 @@ public class TextRenderer {
                 }
                 if (parseReminderText) {
                     if (inReminderTextCount == 0 && !text.isEmpty()) { //add current text if just entering reminder text
-                        addPiece(new TextPiece(text, false), lineNum, x, y, pieceWidth, lineHeight);
+                        addPiece(new TextPiece(text, colorOverride,false), lineNum, x, y, pieceWidth, lineHeight);
                         x += pieceWidth;
                         pieceWidth = 0;
                         text = "";
@@ -245,18 +319,20 @@ public class TextRenderer {
                 }
                 break;
             case ' ':
-                if (inSymbolCount > 0) {
-                    inSymbolCount = 0;
-                    text = "{" + text; //if not a symbol, render as text
+                if (inKeywordCount == 0) {
+                    if (inSymbolCount > 0) {
+                        inSymbolCount = 0;
+                        text = "{" + text; //if not a symbol, render as text
+                    }
+                    lastSpaceIdx = text.length();
                 }
-                lastSpaceIdx = text.length();
                 break;
             }
             if (hideReminderText && (inReminderTextCount > 0 || atReminderTextEnd)) {
                 continue;
             }
             text += ch;
-            if (inSymbolCount == 0) {
+            if (inSymbolCount == 0 && inKeywordCount == 0) {
                 pieceWidth = font.getBounds(text).width;
                 if (x + pieceWidth > width) { //wrap or shrink if needed
                     if (wrap && (lastSpaceIdx >= 0 || consecutiveSymbols > 0)) {
@@ -277,7 +353,7 @@ public class TextRenderer {
                             String currentLineText = text.substring(0, lastSpaceIdx);
                             if (!currentLineText.isEmpty()) {
                                 pieceWidth = font.getBounds(currentLineText).width;
-                                addPiece(new TextPiece(currentLineText, inReminderTextCount > 0 || atReminderTextEnd), lineNum, x, y, pieceWidth, lineHeight);
+                                addPiece(new TextPiece(currentLineText, colorOverride,inReminderTextCount > 0 || atReminderTextEnd), lineNum, x, y, pieceWidth, lineHeight);
                                 consecutiveSymbols = 0;
                             }
                             else {
@@ -325,7 +401,7 @@ public class TextRenderer {
                                         textPiece.w = font.getBounds(textPiece.text).width;
                                     }
                                     else {
-                                        TextPiece splitPiece = new TextPiece(textPiece.text.substring(index + 1), textPiece.inReminderText);
+                                        TextPiece splitPiece = new TextPiece(textPiece.text.substring(index + 1), textPiece.colorOverride, textPiece.inReminderText);
                                         textPiece.text = textPiece.text.substring(0, index);
                                         textPiece.w = font.getBounds(textPiece.text).width;
                                         splitPiece.x = textPiece.x + textPiece.w;
@@ -369,7 +445,7 @@ public class TextRenderer {
                     }
                 }
                 if (atReminderTextEnd && !text.isEmpty()) { //ensure final piece of reminder text added right away
-                    addPiece(new TextPiece(text, true), lineNum, x, y, pieceWidth, lineHeight);
+                    addPiece(new TextPiece(text, colorOverride, true), lineNum, x, y, pieceWidth, lineHeight);
                     x += pieceWidth;
                     pieceWidth = 0;
                     text = "";
@@ -381,7 +457,7 @@ public class TextRenderer {
 
         lineWidths.add(x + pieceWidth);
         if (!text.isEmpty()) {
-            addPiece(new TextPiece(text, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
+            addPiece(new TextPiece(text, colorOverride, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
             consecutiveSymbols = 0;
         }
     }
@@ -488,10 +564,11 @@ public class TextRenderer {
     }
 
     private abstract class Piece {
+        protected static final float ALPHA_COMPOSITE = 0.5f;
+
+        protected final boolean inReminderText;
         protected float x, y, w, h;
         protected int lineNum;
-        protected final boolean inReminderText;
-        protected static final float ALPHA_COMPOSITE = 0.5f;
 
         protected Piece(boolean inReminderText0) {
             inReminderText = inReminderText0;
@@ -502,15 +579,23 @@ public class TextRenderer {
 
     private class TextPiece extends Piece {
         private String text;
+        private Color colorOverride;
 
-        private TextPiece(String text0, boolean inReminderText0) {
+        private TextPiece(String text0, Color colorOverride0, boolean inReminderText0) {
             super(inReminderText0);
             text = text0;
+            colorOverride = colorOverride0;
         }
 
         @Override
         public void draw(Graphics g, Color color, float offsetX, float offsetY) {
-            g.drawText(text, font, inReminderText ? FSkinColor.alphaColor(color, ALPHA_COMPOSITE) : color, x + offsetX, y + offsetY, w, h, false, HAlignment.LEFT, false);
+            if (colorOverride != null) {
+                color = colorOverride;
+            }
+            else if (inReminderText) {
+                color = FSkinColor.alphaColor(color, ALPHA_COMPOSITE);
+            }
+            g.drawText(text, font, color, x + offsetX, y + offsetY, w, h, false, HAlignment.LEFT, false);
         }
     }
 

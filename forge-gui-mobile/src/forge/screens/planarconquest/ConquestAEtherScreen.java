@@ -17,6 +17,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
+import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
@@ -41,7 +42,7 @@ public class ConquestAEtherScreen extends FScreen {
     private static final Color FILTER_BUTTON_COLOR = ConquestMultiverseScreen.LOCATION_BAR_COLOR;
     private static final FSkinColor FILTER_BUTTON_TEXT_COLOR = FSkinColor.getStandardColor(ConquestMultiverseScreen.LOCATION_BAR_TEXT_COLOR);
     private static final FSkinColor FILTER_BUTTON_PRESSED_COLOR = FSkinColor.getStandardColor(FSkinColor.alphaColor(Color.WHITE, 0.1f));
-    private static final FSkinFont MESSAGE_FONT = FSkinFont.get(12);
+    private static final FSkinFont MESSAGE_FONT = FSkinFont.get(14);
     private static final float PADDING = Utils.scale(5f);
 
     private final AEtherDisplay display = add(new AEtherDisplay());
@@ -93,6 +94,7 @@ public class ConquestAEtherScreen extends FScreen {
 
     private void updateShardCost() {
         shardCost = FModel.getConquest().calculateShardCost(filteredPool, pool.size());
+        display.updateMessage();
     }
 
     private void pullFromTheAEther() {
@@ -127,6 +129,34 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private class AEtherDisplay extends FDisplayObject {
+        private final TextRenderer textRenderer = new TextRenderer();
+        private String message;
+
+        private void updateMessage() {
+            message = "Tap to pull from the AEther\n{AE}";
+
+            if (shardCost == 0) {
+                message += "--";
+            }
+            else if (FModel.getConquest().getModel().getAEtherShards() < shardCost) {
+                message += TextRenderer.startColor(Color.RED) + shardCost + TextRenderer.endColor();
+            }
+            else {
+                message += shardCost;
+            }
+
+            message += " (";
+
+            if (filteredPool.isEmpty()) {
+                message += TextRenderer.startColor(Color.RED) + "0" + TextRenderer.endColor();
+            }
+            else {
+                message += filteredPool.size();
+            }
+
+            message += " / " + pool.size() + ")";
+        }
+
         @Override
         public void draw(Graphics g) {
             float w = getWidth();
@@ -147,10 +177,10 @@ public class ConquestAEtherScreen extends FScreen {
 
             if (activePullAnimation != null) {
                 activePullAnimation.drawCard(g);
-                return;
             }
-
-            g.drawText("Tap anywhere to pull from the AEther", MESSAGE_FONT, Color.WHITE, 0, 0, w, h, false, HAlignment.CENTER, true);
+            else {
+                textRenderer.drawText(g, message, MESSAGE_FONT, Color.WHITE, 0, 0, w, h, 0, h, false, HAlignment.CENTER, true);
+            }
         }
 
         @Override
