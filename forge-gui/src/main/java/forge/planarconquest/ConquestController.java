@@ -39,7 +39,7 @@ import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPreferences.CQPref;
-import forge.planarconquest.ConquestUtil.FilterOption;
+import forge.planarconquest.ConquestUtil.AEtherFilter;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgeConstants;
@@ -225,7 +225,7 @@ public class ConquestController {
         return allRewards;
     }
 
-    public int calculateShardCost(Set<PaperCard> filteredCards, int unfilteredCount, FilterOption colorFilter, FilterOption typeFilter, FilterOption cmcFilter) {
+    public int calculateShardCost(Set<PaperCard> filteredCards, int unfilteredCount, AEtherFilter colorFilter, AEtherFilter typeFilter, AEtherFilter cmcFilter) {
         if (filteredCards.isEmpty()) { return 0; }
 
         ConquestAwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
@@ -241,13 +241,13 @@ public class ConquestController {
         float multiplier = 1f + (float)prefs.getPrefInt(CQPref.AETHER_MARKUP) / 100f;
 
         //increase multipliers based on applied filters
-        if (colorFilter != FilterOption.NONE) {
+        if (colorFilter != AEtherFilter.NONE) {
             multiplier += (float)prefs.getPrefInt(CQPref.AETHER_COLOR_FILTER_MARKUP) / 100f;
         }
-        if (typeFilter != FilterOption.NONE) {
+        if (typeFilter != AEtherFilter.NONE) {
             multiplier += (float)prefs.getPrefInt(CQPref.AETHER_TYPE_FILTER_MARKUP) / 100f;
         }
-        if (cmcFilter != FilterOption.NONE) {
+        if (cmcFilter != AEtherFilter.NONE) {
             multiplier += (float)prefs.getPrefInt(CQPref.AETHER_CMC_FILTER_MARKUP) / 100f;
         }
 

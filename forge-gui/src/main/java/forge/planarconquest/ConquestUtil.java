@@ -10,6 +10,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.assets.FSkinProp;
+import forge.assets.IHasSkinProp;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType;
@@ -142,7 +143,7 @@ public class ConquestUtil {
         });
     }
 
-    public static enum FilterOption {
+    public static enum AEtherFilter implements IHasSkinProp {
         NONE  (null, null, "(None)"),
 
         WHITE     (FSkinProp.IMG_MANA_W, new ColorFilter(MagicColor.WHITE), "White"),
@@ -153,8 +154,8 @@ public class ConquestUtil {
         COLORLESS (FSkinProp.IMG_MANA_COLORLESS, new ColorFilter(MagicColor.COLORLESS), "Colorless"),
 
         CREATURE             (FSkinProp.IMG_CREATURE, new TypeFilter(EnumSet.of(CoreType.Creature)), "Creature"),
-        ARTIFACT_ENCHANTMENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker)), "Artifact/Enchantment/Planeswalker"),
-        INSTANT_SORCERY      (FSkinProp.IMG_SORCERY, new TypeFilter(EnumSet.of(CoreType.Instant, CoreType.Sorcery)), "Instant/Sorcery"),
+        ARTIFACT_ENCHANTMENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker)), "Artifact, Enchantment, or Planeswalker"),
+        INSTANT_SORCERY      (FSkinProp.IMG_SORCERY, new TypeFilter(EnumSet.of(CoreType.Instant, CoreType.Sorcery)), "Instant or Sorcery"),
         LAND                 (FSkinProp.IMG_LAND, new TypeFilter(EnumSet.of(CoreType.Land)), "Land"),
 
         COMMON   (FSkinProp.IMG_PW_BADGE_COMMON, new RarityFilter(CardRarity.Common), "Common"),
@@ -171,10 +172,15 @@ public class ConquestUtil {
         public final Predicate<PaperCard> predicate;
         public final String caption;
 
-        private FilterOption(final FSkinProp skinProp0, final Predicate<PaperCard> predicate0, final String caption0) {
+        private AEtherFilter(final FSkinProp skinProp0, final Predicate<PaperCard> predicate0, final String caption0) {
             skinProp = skinProp0;
             predicate = predicate0;
             caption = caption0;
+        }
+
+        @Override
+        public FSkinProp getSkinProp() {
+            return skinProp;
         }
 
         @Override
@@ -183,35 +189,35 @@ public class ConquestUtil {
         }
     }
 
-    public static final FilterOption[] COLOR_FILTERS = new FilterOption[] {
-        FilterOption.NONE,
-        FilterOption.WHITE,
-        FilterOption.BLUE,
-        FilterOption.BLACK,
-        FilterOption.RED,
-        FilterOption.GREEN,
-        FilterOption.COLORLESS };
+    public static final AEtherFilter[] COLOR_FILTERS = new AEtherFilter[] {
+        AEtherFilter.NONE,
+        AEtherFilter.WHITE,
+        AEtherFilter.BLUE,
+        AEtherFilter.BLACK,
+        AEtherFilter.RED,
+        AEtherFilter.GREEN,
+        AEtherFilter.COLORLESS };
 
-    public static final FilterOption[] TYPE_FILTERS = new FilterOption[] {
-        FilterOption.NONE,
-        FilterOption.CREATURE,
-        FilterOption.ARTIFACT_ENCHANTMENT,
-        FilterOption.INSTANT_SORCERY,
-        FilterOption.LAND };
+    public static final AEtherFilter[] TYPE_FILTERS = new AEtherFilter[] {
+        AEtherFilter.NONE,
+        AEtherFilter.CREATURE,
+        AEtherFilter.ARTIFACT_ENCHANTMENT,
+        AEtherFilter.INSTANT_SORCERY,
+        AEtherFilter.LAND };
 
-    public static final FilterOption[] RARITY_FILTERS = new FilterOption[] {
-        FilterOption.NONE,
-        FilterOption.COMMON,
-        FilterOption.UNCOMMON,
-        FilterOption.RARE,
-        FilterOption.MYTHIC };
+    public static final AEtherFilter[] RARITY_FILTERS = new AEtherFilter[] {
+        AEtherFilter.NONE,
+        AEtherFilter.COMMON,
+        AEtherFilter.UNCOMMON,
+        AEtherFilter.RARE,
+        AEtherFilter.MYTHIC };
 
-    public static final FilterOption[] CMC_FILTERS = new FilterOption[] {
-        FilterOption.NONE,
-        FilterOption.CMC_LOW,
-        FilterOption.CMC_LOW_MID,
-        FilterOption.CMC_MID_HIGH,
-        FilterOption.CMC_HIGH };
+    public static final AEtherFilter[] CMC_FILTERS = new AEtherFilter[] {
+        AEtherFilter.NONE,
+        AEtherFilter.CMC_LOW,
+        AEtherFilter.CMC_LOW_MID,
+        AEtherFilter.CMC_MID_HIGH,
+        AEtherFilter.CMC_HIGH };
 
     private static class ColorFilter implements Predicate<PaperCard> {
         private final byte color;

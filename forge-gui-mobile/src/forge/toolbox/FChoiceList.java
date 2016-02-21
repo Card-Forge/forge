@@ -7,8 +7,11 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinProp;
+import forge.assets.IHasSkinProp;
 import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
@@ -74,6 +77,9 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         }
         else if (item instanceof Integer || item == FilterOperator.EQUALS) { //allow numeric operators to be selected horizontally
             renderer = new NumberRenderer();
+        }
+        else if (item instanceof IHasSkinProp) {
+            renderer = new IHasSkinPropRenderer();
         }
         else {
             renderer = new DefaultItemRenderer();
@@ -509,6 +515,23 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             x += VAvatar.WIDTH;
             w -= VAvatar.WIDTH;
             g.drawText(player.getName() + " (" + player.getLife() + ")", font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+        }
+    }
+    protected class IHasSkinPropRenderer extends DefaultItemRenderer {
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            FSkinProp skinProp = ((IHasSkinProp)value).getSkinProp();
+            if (skinProp != null) {
+                float iconSize = h * 0.8f;
+                float offset = (h - iconSize) / 2;
+
+                g.drawImage(FSkin.getImages().get(skinProp), x + offset - 1, y + offset, iconSize, iconSize);
+
+                float dx = iconSize + PADDING + 2 * offset - 1;
+                x += dx;
+                w -= dx;
+            }
+            super.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
         }
     }
 

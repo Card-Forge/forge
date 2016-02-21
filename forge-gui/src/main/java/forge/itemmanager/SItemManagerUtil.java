@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import com.google.common.base.Predicate;
 
 import forge.assets.FSkinProp;
+import forge.assets.IHasSkinProp;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.DeckProxy;
@@ -27,7 +28,7 @@ import forge.util.ComparableOp;
  */
 public final class SItemManagerUtil {
     /** An enum to encapsulate metadata for the stats/filter objects. */
-    public static enum StatTypes {
+    public static enum StatTypes implements IHasSkinProp {
         WHITE      (FSkinProp.IMG_MANA_W,         CardRulesPredicates.Presets.IS_WHITE, "White cards"),
         BLUE       (FSkinProp.IMG_MANA_U,         CardRulesPredicates.Presets.IS_BLUE, "Blue cards"),
         BLACK      (FSkinProp.IMG_MANA_B,         CardRulesPredicates.Presets.IS_BLACK, "Black cards"),
@@ -69,6 +70,11 @@ public final class SItemManagerUtil {
             skinProp = skinProp0;
             predicate = predicate0;
             label = label0;
+        }
+
+        @Override
+        public FSkinProp getSkinProp() {
+            return skinProp;
         }
     }
 

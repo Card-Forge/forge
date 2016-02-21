@@ -26,7 +26,7 @@ import forge.model.FModel;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestUtil;
-import forge.planarconquest.ConquestUtil.FilterOption;
+import forge.planarconquest.ConquestUtil.AEtherFilter;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
@@ -263,10 +263,10 @@ public class ConquestAEtherScreen extends FScreen {
 
     private class FilterButton extends FLabel {
         private final String caption;
-        private final List<FilterOption> options;
-        private FilterOption selectedOption;
+        private final List<AEtherFilter> options;
+        private AEtherFilter selectedOption;
 
-        private FilterButton(String caption0, FilterOption[] options0) {
+        private FilterButton(String caption0, AEtherFilter[] options0) {
             super(new FLabel.Builder().iconInBackground().pressedColor(FILTER_BUTTON_PRESSED_COLOR)
                     .textColor(FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(HAlignment.CENTER));
             caption = caption0;
@@ -275,9 +275,9 @@ public class ConquestAEtherScreen extends FScreen {
             setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    GuiChoose.getChoices("Select " + caption + " Filter", 0, 1, options, selectedOption, null, new Callback<List<FilterOption>>() {
+                    GuiChoose.getChoices("Select " + caption + " Filter", 0, 1, options, selectedOption, null, new Callback<List<AEtherFilter>>() {
                         @Override
-                        public void run(List<FilterOption> result) {
+                        public void run(List<AEtherFilter> result) {
                             if (!result.isEmpty()) {
                                 setSelectedOption(result.get(0));
                                 updateFilteredPool();
@@ -288,11 +288,11 @@ public class ConquestAEtherScreen extends FScreen {
             });
         }
 
-        private void setSelectedOption(FilterOption selectedOption0) {
+        private void setSelectedOption(AEtherFilter selectedOption0) {
             if (selectedOption == selectedOption0) { return; }
             selectedOption = selectedOption0;
 
-            if (selectedOption == FilterOption.NONE) {
+            if (selectedOption == AEtherFilter.NONE) {
                 setIcon(null);
                 setText("Filter\n" + caption);
             }
@@ -303,7 +303,7 @@ public class ConquestAEtherScreen extends FScreen {
         }
 
         private Predicate<PaperCard> buildFilterPredicate(Predicate<PaperCard> predicate) {
-            if (selectedOption != FilterOption.NONE) {
+            if (selectedOption != AEtherFilter.NONE) {
                 if (predicate == null) {
                     return selectedOption.predicate;
                 }

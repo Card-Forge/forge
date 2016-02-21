@@ -18752,6 +18752,7 @@ forge-gui/src/main/java/forge/achievement/TotalGameWins.java -text
 forge-gui/src/main/java/forge/achievement/TotalMatchWins.java -text
 forge-gui/src/main/java/forge/achievement/VariantWins.java -text
 forge-gui/src/main/java/forge/assets/FSkinProp.java -text
+forge-gui/src/main/java/forge/assets/IHasSkinProp.java -text
 forge-gui/src/main/java/forge/assets/ISkinImage.java -text
 forge-gui/src/main/java/forge/card/CardDetailUtil.java -text
 forge-gui/src/main/java/forge/card/CardPreferences.java -text
