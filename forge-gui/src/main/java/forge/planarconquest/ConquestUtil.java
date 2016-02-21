@@ -1,6 +1,7 @@
 package forge.planarconquest;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
@@ -11,6 +12,7 @@ import com.google.common.collect.Iterables;
 import forge.assets.FSkinProp;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardType;
 import forge.card.CardType.CoreType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -143,33 +145,27 @@ public class ConquestUtil {
     public static enum FilterOption {
         NONE  (null, null, "(None)"),
 
-        COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, new ColorFilter(MagicColor.COLORLESS), "Colorless"),
-        WHITE      (FSkinProp.IMG_MANA_W, new ColorFilter(MagicColor.WHITE), "White"),
-        BLUE       (FSkinProp.IMG_MANA_U, new ColorFilter(MagicColor.BLUE), "Blue"),
-        BLACK      (FSkinProp.IMG_MANA_B, new ColorFilter(MagicColor.BLACK), "Black"),
-        RED        (FSkinProp.IMG_MANA_R, new ColorFilter(MagicColor.RED), "Red"),
-        GREEN      (FSkinProp.IMG_MANA_G, new ColorFilter(MagicColor.GREEN), "Green"),
+        WHITE     (FSkinProp.IMG_MANA_W, new ColorFilter(MagicColor.WHITE), "White"),
+        BLUE      (FSkinProp.IMG_MANA_U, new ColorFilter(MagicColor.BLUE), "Blue"),
+        BLACK     (FSkinProp.IMG_MANA_B, new ColorFilter(MagicColor.BLACK), "Black"),
+        RED       (FSkinProp.IMG_MANA_R, new ColorFilter(MagicColor.RED), "Red"),
+        GREEN     (FSkinProp.IMG_MANA_G, new ColorFilter(MagicColor.GREEN), "Green"),
+        COLORLESS (FSkinProp.IMG_MANA_COLORLESS, new ColorFilter(MagicColor.COLORLESS), "Colorless"),
 
-        LAND         (FSkinProp.IMG_LAND, new TypeFilter(CoreType.Land), "Land"),
-        ARTIFACT     (FSkinProp.IMG_ARTIFACT, new TypeFilter(CoreType.Artifact), "Artifact"),
-        CREATURE     (FSkinProp.IMG_CREATURE, new TypeFilter(CoreType.Creature), "Creature"),
-        ENCHANTMENT  (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(CoreType.Enchantment), "Enchantment"),
-        PLANESWALKER (FSkinProp.IMG_PLANESWALKER, new TypeFilter(CoreType.Planeswalker), "Planeswalker"),
-        INSTANT      (FSkinProp.IMG_INSTANT, new TypeFilter(CoreType.Instant), "Instant"),
-        SORCERY      (FSkinProp.IMG_SORCERY, new TypeFilter(CoreType.Sorcery), "Sorcery"),
+        CREATURE             (FSkinProp.IMG_CREATURE, new TypeFilter(EnumSet.of(CoreType.Creature)), "Creature"),
+        ARTIFACT_ENCHANTMENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker)), "Artifact/Enchantment/Planeswalker"),
+        INSTANT_SORCERY      (FSkinProp.IMG_SORCERY, new TypeFilter(EnumSet.of(CoreType.Instant, CoreType.Sorcery)), "Instant/Sorcery"),
+        LAND                 (FSkinProp.IMG_LAND, new TypeFilter(EnumSet.of(CoreType.Land)), "Land"),
 
         COMMON   (FSkinProp.IMG_PW_BADGE_COMMON, new RarityFilter(CardRarity.Common), "Common"),
         UNCOMMON (FSkinProp.IMG_PW_BADGE_UNCOMMON, new RarityFilter(CardRarity.Uncommon), "Uncommon"),
         RARE     (FSkinProp.IMG_PW_BADGE_RARE, new RarityFilter(CardRarity.Rare), "Rare"),
         MYTHIC   (FSkinProp.IMG_PW_BADGE_MYTHIC, new RarityFilter(CardRarity.MythicRare), "Mythic Rare"),
 
-        CMC_0 (FSkinProp.IMG_MANA_0, new CMCFilter(0, false), "CMC 0"),
-        CMC_1 (FSkinProp.IMG_MANA_1, new CMCFilter(1, false), "CMC 1"),
-        CMC_2 (FSkinProp.IMG_MANA_2, new CMCFilter(2, false), "CMC 2"),
-        CMC_3 (FSkinProp.IMG_MANA_3, new CMCFilter(3, false), "CMC 3"),
-        CMC_4 (FSkinProp.IMG_MANA_4, new CMCFilter(4, false), "CMC 4"),
-        CMC_5 (FSkinProp.IMG_MANA_5, new CMCFilter(5, false), "CMC 5"),
-        CMC_6 (FSkinProp.IMG_MANA_6, new CMCFilter(6, true), "CMC 6+");
+        CMC_LOW      (FSkinProp.IMG_CMC_LOW, new CMCFilter(0, 3), "CMC 0-3"),
+        CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, new CMCFilter(2, 5), "CMC 2-5"),
+        CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, new CMCFilter(4, 7), "CMC 4-7"),
+        CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, new CMCFilter(6, -1), "CMC 6+");
 
         public final FSkinProp skinProp;
         public final Predicate<PaperCard> predicate;
@@ -189,22 +185,19 @@ public class ConquestUtil {
 
     public static final FilterOption[] COLOR_FILTERS = new FilterOption[] {
         FilterOption.NONE,
-        FilterOption.COLORLESS,
         FilterOption.WHITE,
         FilterOption.BLUE,
         FilterOption.BLACK,
         FilterOption.RED,
-        FilterOption.GREEN };
+        FilterOption.GREEN,
+        FilterOption.COLORLESS };
 
     public static final FilterOption[] TYPE_FILTERS = new FilterOption[] {
         FilterOption.NONE,
-        FilterOption.LAND,
-        FilterOption.ARTIFACT,
         FilterOption.CREATURE,
-        FilterOption.ENCHANTMENT,
-        FilterOption.PLANESWALKER,
-        FilterOption.INSTANT,
-        FilterOption.SORCERY };
+        FilterOption.ARTIFACT_ENCHANTMENT,
+        FilterOption.INSTANT_SORCERY,
+        FilterOption.LAND };
 
     public static final FilterOption[] RARITY_FILTERS = new FilterOption[] {
         FilterOption.NONE,
@@ -215,13 +208,10 @@ public class ConquestUtil {
 
     public static final FilterOption[] CMC_FILTERS = new FilterOption[] {
         FilterOption.NONE,
-        FilterOption.CMC_0,
-        FilterOption.CMC_1,
-        FilterOption.CMC_2,
-        FilterOption.CMC_3,
-        FilterOption.CMC_4,
-        FilterOption.CMC_5,
-        FilterOption.CMC_6 };
+        FilterOption.CMC_LOW,
+        FilterOption.CMC_LOW_MID,
+        FilterOption.CMC_MID_HIGH,
+        FilterOption.CMC_HIGH };
 
     private static class ColorFilter implements Predicate<PaperCard> {
         private final byte color;
@@ -244,15 +234,21 @@ public class ConquestUtil {
     }
 
     private static class TypeFilter implements Predicate<PaperCard> {
-        private final CoreType type;
+        private final EnumSet<CoreType> types;
 
-        private TypeFilter(CoreType type0) {
-            type = type0;
+        private TypeFilter(EnumSet<CoreType> types0) {
+            types = types0;
         }
 
         @Override
         public boolean apply(PaperCard card) {
-            return card.getRules().getType().hasType(type);
+            CardType cardType = card.getRules().getType();
+            for (CoreType type : types) {
+                if (cardType.hasType(type)) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
@@ -273,20 +269,19 @@ public class ConquestUtil {
     }
 
     private static class CMCFilter implements Predicate<PaperCard> {
-        private final int cmc;
-        private final boolean allowGreater;
+        private final int cmcMin, cmcMax;
 
-        private CMCFilter(int cmc0, boolean allowGreater0) {
-            cmc = cmc0;
-            allowGreater = allowGreater0;
+        private CMCFilter(int cmcMin0, int cmcMax0) {
+            cmcMin = cmcMin0;
+            cmcMax = cmcMax0;
         }
 
         @Override
         public boolean apply(PaperCard card) {
             int cardCmc = card.getRules().getManaCost().getCMC();
-            if (cardCmc == cmc) { return true; }
-            if (allowGreater && cardCmc > cmc) { return true; }
-            return false;
+            if (cardCmc < cmcMin) { return false; }
+            if (cmcMax != -1 && cardCmc > cmcMax) { return false; }
+            return true;
         }
     }
 }

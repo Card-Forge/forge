@@ -108,6 +108,12 @@ public enum FSkinProp {
     IMG_MANA_Y   (new int[] {640, 420, 20, 20}, PropType.IMAGE),
     IMG_MANA_Z   (new int[] {660, 420, 20, 20}, PropType.IMAGE),
 
+    //combination images for CMC ranges
+    IMG_CMC_LOW      (new int[] {640, 200, 40, 40}, PropType.IMAGE),
+    IMG_CMC_LOW_MID  (new int[] {640, 220, 40, 40}, PropType.IMAGE),
+    IMG_CMC_MID_HIGH (new int[] {640, 240, 40, 40}, PropType.IMAGE),
+    IMG_CMC_HIGH     (new int[] {640, 260, 40, 40}, PropType.IMAGE),
+
     //gameplay images
     IMG_TAP             (new int[] {640, 440, 20, 20}, PropType.IMAGE),
     IMG_UNTAP           (new int[] {660, 440, 20, 20}, PropType.IMAGE),

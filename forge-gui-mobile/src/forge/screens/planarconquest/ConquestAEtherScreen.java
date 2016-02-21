@@ -93,7 +93,8 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private void updateShardCost() {
-        shardCost = FModel.getConquest().calculateShardCost(filteredPool, pool.size());
+        shardCost = FModel.getConquest().calculateShardCost(filteredPool, pool.size(),
+                btnColorFilter.selectedOption, btnTypeFilter.selectedOption, btnCMCFilter.selectedOption);
         display.updateMessage();
     }
 

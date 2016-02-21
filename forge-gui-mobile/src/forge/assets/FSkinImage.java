@@ -77,6 +77,12 @@ public enum FSkinImage implements FImage {
     MANA_Y         (FSkinProp.IMG_MANA_Y, SourceFile.ICONS),
     MANA_Z         (FSkinProp.IMG_MANA_Z, SourceFile.ICONS),
 
+    //CMC ranges
+    CMC_LOW      (FSkinProp.IMG_CMC_LOW, SourceFile.ICONS),
+    CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, SourceFile.ICONS),
+    CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, SourceFile.ICONS),
+    CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, SourceFile.ICONS),
+
     //Gameplay
     TAP             (FSkinProp.IMG_TAP, SourceFile.ICONS),
     UNTAP           (FSkinProp.IMG_UNTAP, SourceFile.ICONS),

@@ -39,6 +39,7 @@ import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPreferences.CQPref;
+import forge.planarconquest.ConquestUtil.FilterOption;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgeConstants;
@@ -224,7 +225,7 @@ public class ConquestController {
         return allRewards;
     }
 
-    public int calculateShardCost(Set<PaperCard> filteredCards, int unfilteredCount) {
+    public int calculateShardCost(Set<PaperCard> filteredCards, int unfilteredCount, FilterOption colorFilter, FilterOption typeFilter, FilterOption cmcFilter) {
         if (filteredCards.isEmpty()) { return 0; }
 
         ConquestAwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
@@ -234,10 +235,21 @@ public class ConquestController {
         for (PaperCard card : filteredCards) {
             totalValue += pool.getShardValue(card);
         }
-        float averageValue = totalValue / filteredCards.size();
-        float multiplier = 1f + (float)FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_MARKUP) / 100f;
 
-        //TODO: Increase multiplier based on average percentage of cards filtered out for each rarity
+        ConquestPreferences prefs = FModel.getConquestPreferences();
+        float averageValue = totalValue / filteredCards.size();
+        float multiplier = 1f + (float)prefs.getPrefInt(CQPref.AETHER_MARKUP) / 100f;
+
+        //increase multipliers based on applied filters
+        if (colorFilter != FilterOption.NONE) {
+            multiplier += (float)prefs.getPrefInt(CQPref.AETHER_COLOR_FILTER_MARKUP) / 100f;
+        }
+        if (typeFilter != FilterOption.NONE) {
+            multiplier += (float)prefs.getPrefInt(CQPref.AETHER_TYPE_FILTER_MARKUP) / 100f;
+        }
+        if (cmcFilter != FilterOption.NONE) {
+            multiplier += (float)prefs.getPrefInt(CQPref.AETHER_CMC_FILTER_MARKUP) / 100f;
+        }
 
         return Math.round(averageValue * multiplier);
     }

@@ -31,6 +31,9 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
 
         AETHER_BASE_VALUE("100"),
         AETHER_MARKUP("50"),
+        AETHER_COLOR_FILTER_MARKUP("25"),
+        AETHER_TYPE_FILTER_MARKUP("25"),
+        AETHER_CMC_FILTER_MARKUP("25"),
         AETHER_START_SHARDS("3000"),
         AETHER_WHEEL_SHARDS("1000"),
 

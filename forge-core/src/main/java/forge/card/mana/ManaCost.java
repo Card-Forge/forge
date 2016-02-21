@@ -17,8 +17,6 @@
  */
 package forge.card.mana;
 
-import forge.card.MagicColor;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
