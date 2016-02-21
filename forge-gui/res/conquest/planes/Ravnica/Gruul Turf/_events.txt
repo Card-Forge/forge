@@ -1,5 +1,6 @@
 Name:Gruul Bloodrush|Deck:Gruul Bloodrush.dck|Variant:None|Avatar:Rubblehulk|Desc:
 Name:Gruul Bloodthirst|Deck:Gruul Bloodthirst.dck|Variant:None|Avatar:Furyborn Hellkite|Desc:
+Name:Nephilim of Ravnica|Deck:Nephilim of Ravnica.dck|Variant:None|Avatar:Ink-Treader Nephilim|Desc:
 Name:Borborygmos|Deck:Borborygmos.dck|Variant:Commander|Avatar:Borborygmos|Desc:
 Name:Borboygmos Enraged|Deck:Borboygmos Enraged.dck|Variant:Commander|Avatar:Borboygmos Enraged|Desc:
 Name:Ruric Thar, the Unbowed|Deck:Ruric Thar, the Unbowed.dck|Variant:Commander|Avatar:Ruric Thar, the Unbowed|Desc:

@@ -16994,6 +16994,7 @@ forge-gui/res/conquest/planes/Rath/plane_cards.txt -text
 forge-gui/res/conquest/planes/Rath/regions.txt -text
 forge-gui/res/conquest/planes/Rath/sets.txt -text
 forge-gui/res/conquest/planes/Ravnica/Azorius[!!-~]Chancery/Arcanis[!!-~]the[!!-~]Omnipotent.dck -text
+forge-gui/res/conquest/planes/Ravnica/Azorius[!!-~]Chancery/Azor's[!!-~]Elocutors.dck -text
 forge-gui/res/conquest/planes/Ravnica/Azorius[!!-~]Chancery/Azorious[!!-~]Detain.dck -text
 forge-gui/res/conquest/planes/Ravnica/Azorius[!!-~]Chancery/Azorious[!!-~]Forecast.dck -text
 forge-gui/res/conquest/planes/Ravnica/Azorius[!!-~]Chancery/Grand[!!-~]Arbiter[!!-~]Augustin[!!-~]IV.dck -text
@@ -17006,13 +17007,16 @@ forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/Agrus[!!-~]Kos,[!!-~]W
 forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/Aurelia,[!!-~]the[!!-~]Warleader.dck -text
 forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/Boros[!!-~]Battalion.dck -text
 forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/Boros[!!-~]Radiance.dck -text
+forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/Coin[!!-~]Flip.dck -text
 forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/Gideon,[!!-~]Champion[!!-~]of[!!-~]Justice.dck -text
 forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/Krenko,[!!-~]Mob[!!-~]Boss.dck -text
 forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/Serra[!!-~]Angel.dck -text
 forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/Tajic,[!!-~]Blade[!!-~]of[!!-~]the[!!-~]Legion.dck -text
 forge-gui/res/conquest/planes/Ravnica/Boros[!!-~]Garrison/_events.txt -text
 forge-gui/res/conquest/planes/Ravnica/Dimir[!!-~]Aqueduct/Circu,[!!-~]Dimir[!!-~]Lobotomist.dck -text
+forge-gui/res/conquest/planes/Ravnica/Dimir[!!-~]Aqueduct/Defender[!!-~]Mill.dck -text
 forge-gui/res/conquest/planes/Ravnica/Dimir[!!-~]Aqueduct/Dimir[!!-~]Cipher.dck -text
+forge-gui/res/conquest/planes/Ravnica/Dimir[!!-~]Aqueduct/Dimir[!!-~]Mill.dck -text
 forge-gui/res/conquest/planes/Ravnica/Dimir[!!-~]Aqueduct/Dimir[!!-~]Transmute.dck -text
 forge-gui/res/conquest/planes/Ravnica/Dimir[!!-~]Aqueduct/Lazav,[!!-~]Dimir[!!-~]Mastermind.dck -text
 forge-gui/res/conquest/planes/Ravnica/Dimir[!!-~]Aqueduct/Mirko[!!-~]Vosk,[!!-~]Mind[!!-~]Drinker.dck -text
@@ -17033,6 +17037,7 @@ forge-gui/res/conquest/planes/Ravnica/Gruul[!!-~]Turf/Borboygmos[!!-~]Enraged.dc
 forge-gui/res/conquest/planes/Ravnica/Gruul[!!-~]Turf/Domri[!!-~]Rade.dck -text
 forge-gui/res/conquest/planes/Ravnica/Gruul[!!-~]Turf/Gruul[!!-~]Bloodrush.dck -text
 forge-gui/res/conquest/planes/Ravnica/Gruul[!!-~]Turf/Gruul[!!-~]Bloodthirst.dck -text
+forge-gui/res/conquest/planes/Ravnica/Gruul[!!-~]Turf/Nephilim[!!-~]of[!!-~]Ravnica.dck -text
 forge-gui/res/conquest/planes/Ravnica/Gruul[!!-~]Turf/Rumbling[!!-~]Slum.dck -text
 forge-gui/res/conquest/planes/Ravnica/Gruul[!!-~]Turf/Ruric[!!-~]Thar,[!!-~]the[!!-~]Unbowed.dck -text
 forge-gui/res/conquest/planes/Ravnica/Gruul[!!-~]Turf/Ulasht,[!!-~]the[!!-~]Hate[!!-~]Seed.dck -text
@@ -17059,6 +17064,7 @@ forge-gui/res/conquest/planes/Ravnica/Orzhov[!!-~]Basilica/_events.txt -text
 forge-gui/res/conquest/planes/Ravnica/Rakdos[!!-~]Carnarium/Exava,[!!-~]Rakdos[!!-~]Blood[!!-~]Witch.dck -text
 forge-gui/res/conquest/planes/Ravnica/Rakdos[!!-~]Carnarium/Lyzolda,[!!-~]the[!!-~]Blood[!!-~]Witch[!!-~]Vanguard.dck -text
 forge-gui/res/conquest/planes/Ravnica/Rakdos[!!-~]Carnarium/Lyzolda,[!!-~]the[!!-~]Blood[!!-~]Witch.dck -text
+forge-gui/res/conquest/planes/Ravnica/Rakdos[!!-~]Carnarium/Rakdos[!!-~]Destruction.dck -text
 forge-gui/res/conquest/planes/Ravnica/Rakdos[!!-~]Carnarium/Rakdos[!!-~]Hellbent.dck -text
 forge-gui/res/conquest/planes/Ravnica/Rakdos[!!-~]Carnarium/Rakdos[!!-~]Unleash.dck -text
 forge-gui/res/conquest/planes/Ravnica/Rakdos[!!-~]Carnarium/Rakdos[!!-~]the[!!-~]Defiler.dck -text
@@ -17067,6 +17073,7 @@ forge-gui/res/conquest/planes/Ravnica/Rakdos[!!-~]Carnarium/Shattergang[!!-~]Bro
 forge-gui/res/conquest/planes/Ravnica/Rakdos[!!-~]Carnarium/_events.txt -text
 forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/Chorus[!!-~]of[!!-~]the[!!-~]Conclave.dck -text
 forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/Emmara[!!-~]Tandris.dck -text
+forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/Gatherer[!!-~]of[!!-~]Graces[!!-~]Voltron.dck -text
 forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/Loxodon[!!-~]Hierarch.dck -text
 forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/Selesnya[!!-~]Convoke.dck -text
 forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/Selesnya[!!-~]Populate.dck -text
@@ -17074,6 +17081,7 @@ forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/Tolsimir[!!-~]Wolf
 forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/Trostani,[!!-~]Selesnyas[!!-~]Voice.dck -text
 forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/Yeva,[!!-~]Natures[!!-~]Herald.dck -text
 forge-gui/res/conquest/planes/Ravnica/Selesnya[!!-~]Sanctuary/_events.txt -text
+forge-gui/res/conquest/planes/Ravnica/Simic[!!-~]Growth[!!-~]Chamber/Biovisionary.dck -text
 forge-gui/res/conquest/planes/Ravnica/Simic[!!-~]Growth[!!-~]Chamber/Experiment[!!-~]Kraj.dck -text
 forge-gui/res/conquest/planes/Ravnica/Simic[!!-~]Growth[!!-~]Chamber/Jace,[!!-~]the[!!-~]Living[!!-~]Guildpact.dck -text
 forge-gui/res/conquest/planes/Ravnica/Simic[!!-~]Growth[!!-~]Chamber/Momir[!!-~]Vig,[!!-~]Simic[!!-~]Visionary.dck -text
