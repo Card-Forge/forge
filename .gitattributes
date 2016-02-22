@@ -1347,6 +1347,7 @@ forge-gui-mobile/src/forge/screens/planarconquest/ConquestDeckEditor.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMenu.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestMultiverseScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestPlaneSelector.java -text
+forge-gui-mobile/src/forge/screens/planarconquest/ConquestPlaneswalkScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestPrefsScreen.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/ConquestRewardDialog.java -text
 forge-gui-mobile/src/forge/screens/planarconquest/LoadConquestScreen.java -text

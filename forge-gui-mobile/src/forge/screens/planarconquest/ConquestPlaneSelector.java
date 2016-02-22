@@ -61,6 +61,9 @@ public class ConquestPlaneSelector extends FDisplayObject {
     public ConquestPlane getSelectedPlane() {
         return planes.get(selectedIndex);
     }
+    public void setSelectedPlane(ConquestPlane plane0) {
+        setSelectedIndex(planes.indexOf(plane0));
+    }
 
     public void activate() {
         timer.start();

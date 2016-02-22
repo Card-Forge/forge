@@ -26,6 +26,7 @@ public class ConquestMenu extends FPopupMenu {
     private static final ConquestAEtherScreen aetherScreen = new ConquestAEtherScreen();
     private static final ConquestCommandersScreen commandersScreen = new ConquestCommandersScreen();
     private static final ConquestCollectionScreen collectionScreen = new ConquestCollectionScreen();
+    private static final ConquestPlaneswalkScreen planeswalkScreen = new ConquestPlaneswalkScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
 
     private static final FMenuItem multiverseItem = new FMenuItem("The Multiverse", FSkinImage.MULTIVERSE, new FEventHandler() {
@@ -50,6 +51,12 @@ public class ConquestMenu extends FPopupMenu {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(collectionScreen);
+        }
+    });
+    private static final FMenuItem planeswalkItem = new FMenuItem("Planeswalk", FSkinImage.PW_BADGE_COMMON, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(planeswalkScreen);
         }
     });
     private static final FMenuItem prefsItem = new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
@@ -119,6 +126,7 @@ public class ConquestMenu extends FPopupMenu {
         addItem(aetherItem); aetherItem.setSelected(currentScreen == aetherScreen);
         addItem(commandersItem); commandersItem.setSelected(currentScreen == commandersScreen);
         addItem(collectionItem); collectionItem.setSelected(currentScreen == collectionScreen);
+        addItem(planeswalkItem); planeswalkItem.setSelected(currentScreen == planeswalkScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
 }
