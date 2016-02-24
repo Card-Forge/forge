@@ -5370,7 +5370,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final boolean hasALandType() {
         for (final String type : getType().getSubtypes()) {
-            if (forge.card.CardType.isALandType(type)) {
+            if (forge.card.CardType.isALandType(type) || forge.card.CardType.isABasicLandType(type)) {
                 return true;
             }
         }
