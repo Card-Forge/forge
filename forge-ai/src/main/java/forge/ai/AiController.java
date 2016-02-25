@@ -876,6 +876,11 @@ public class AiController {
             		(sa.getRestrictions().getProwlTypes() != null && !sa.getRestrictions().getProwlTypes().isEmpty())) {
                 p += 9;
             }
+            // 1. increase chance of using Surge effects
+            // 2. non-surged versions are usually inefficient
+            if (sa.getHostCard().getOracleText().contains("surge cost") && !sa.isSurged()) {
+                p -= 9;
+            }
             // move snap-casted spells to front
             if (source.isInZone(ZoneType.Graveyard) && source.hasKeyword("May be played")) {
                 p += 50;
