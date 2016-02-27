@@ -29,27 +29,21 @@ public class ShuffleAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return shuffleTargetAI(/*sa, false, false*/);
+        return shuffleTargetAI(sa);
     }
 
-
-    private boolean shuffleTargetAI(/*final SpellAbility sa, final boolean primarySA, final boolean mandatory*/) {
-        return false;
-
-
-
+    private boolean shuffleTargetAI(final SpellAbility sa) {
+        /*
+         *  Shuffle at the end of some other effect where we'd usually shuffle
+         *  inside that effect, but can't for some reason.
+         */
+        return sa.getParent() != null;
     } // shuffleTargetAI()
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        if (!shuffleTargetAI(/*sa, false, mandatory*/)) {
-            return false;
-        }
-
-        return true;
-    }
-    
-
+        return shuffleTargetAI(sa);
+    }  
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
