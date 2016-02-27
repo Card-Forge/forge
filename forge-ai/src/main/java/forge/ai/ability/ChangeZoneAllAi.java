@@ -1,9 +1,12 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -58,9 +61,9 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         
         // Ugin AI: always try to sweep before considering +1 
         if (source.getName().equals("Ugin, the Spirit Dragon")) {
-            //TODO: somehow link with DamageDealAi for cases where a single enemy creature can be removed by +1 and check cases where +1 = win
             final int loyalty = source.getCounters(CounterType.LOYALTY);
             int x = -1, best = 0;
+            Card single = null;
             for (int i = 0; i < loyalty; i++) {
                 source.setSVar("ChosenX", "Number$" + i);
                 final CardCollectionView oppType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
@@ -69,9 +72,40 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 if (net > best) {
                     x = i;
                     best = net;
+                    if (oppType.size() == 1) {
+                        single = oppType.getFirst();
+                    } else {
+                        single = null;
+                    }
                 }
             }
-            if (x == -1) {
+            // check if +1 would be sufficient
+            if (single != null) {
+                SpellAbility ugin_burn = null;
+                for (final SpellAbility s : source.getSpellAbilities()) {
+                    if (s.getApi() == ApiType.DealDamage) {
+                        ugin_burn = s;
+                        break;
+                    }
+                }
+                if (ugin_burn != null) {
+                    // basic logic copied from DamageDealAi::dealDamageChooseTgtC
+                    if (ugin_burn.canTarget(single)) {
+                        final boolean can_kill = single.getSVar("Targeting").equals("Dies")
+                                || (ComputerUtilCombat.getEnoughDamageToKill(single, 3, source, false, false) <= 3)
+                                        && !ComputerUtil.canRegenerate(ai, single)
+                                        && !(single.getSVar("SacMe").length() > 0);
+                        if (can_kill) {
+                            return false;
+                        }
+                    }
+                    // simple check to burn player instead of exiling planeswalker
+                    if (single.isPlaneswalker() && single.getCurrentLoyalty() <= 3) {
+                        return false;
+                    }
+                }
+            }
+             if (x == -1) {
                 return false;
             }
             source.setSVar("ChosenX", "Number$" + x);
