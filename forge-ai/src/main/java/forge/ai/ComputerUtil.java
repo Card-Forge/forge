@@ -984,14 +984,8 @@ public class ComputerUtil {
         if (abCost == null) {
             return false;
         }
-        if (abCost.hasTapCost()) {
-            for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-                if (c.hasSVar("AITapDown")) {
-                    if (source.isValid(c.getSVar("AITapDown"), c.getController(), c)) {
-                        return true;
-                    }
-                }
-            }
+        if (abCost.hasTapCost() && source.hasSVar("AITapDown")) {
+        	return true;
         } else if (sa.hasParam("Planeswalker") && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
         	for (final CostPart part : abCost.getCostParts()) {
         		if (part instanceof CostPutCounter) {

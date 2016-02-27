@@ -4,7 +4,8 @@ Types:Creature Boar Beast
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each untapped permanent your opponents control.
 SVar:X:Count$Valid Permanent.untapped+OppCtrl
-SVar:AITapDown:Permanent.OppCtrl
+S:Mode$ Continuous | Affected$ Permanent.OppCtrl | AddSVar$ AITap
+SVar:AITap:SVar:AITapDown:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copperhoof_vorrac.jpg
 Oracle:Copperhoof Vorrac gets +1/+1 for each untapped permanent your opponents control.
