@@ -44,6 +44,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     @Override
     public void showMessage() {
+        // Display targeting card in cardDetailPane in case it's not obviously visible.
+        getController().getGui().setCard(CardView.get(sa.getHostCard()));
         final StringBuilder sb = new StringBuilder();
         sb.append("Targeted:\n");
         for (final Entry<GameEntity, Integer> o : targetDepth.entrySet()) {
