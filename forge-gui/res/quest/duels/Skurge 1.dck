@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Skurge 1
+Title=Skurge
+Difficulty=easy
+Description=Mono B sacrifice deck
+Icon=Gold Skurge.jpg
+Deck Type=constructed
+[main]
+23 Swamp|ALA
+2 Shambling Goblin
+3 Ashen-Skin Zubera
+2 Nether Traitor
+2 Black Cat
+4 Butcher Ghoul
+2 Carrier Thrall
+2 Perilous Myr
+2 Zulaport Cutthroat
+4 Sultai Emissary
+4 Merciless Executioner
+4 Fleshbag Marauder
+4 Death's Duet
+1 Disturbed Burial
+1 Onyx Goblet
+[sideboard]

@@ -7,5 +7,6 @@ A:AB$ ChooseType | Cost$ 1 | Type$ Creature | AILogic$ MostProminentComputerCont
 SVar:DBAnimate:DB$ Animate | Defined$ Enchanted | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
 SVar:NonStackingAttachEffect:True
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_mask.jpg
 Oracle:Enchant creature\n{1}: Enchanted creature becomes the creature type of your choice until end of turn.

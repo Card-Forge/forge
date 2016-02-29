@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Inspector Gadget 2
+Title=Inspector Gadget
+Difficulty=medium
+Description=WG deck with Hero of Iroas, Spellwild Ouphe, Elderwood Scion and auras
+Icon=Inspector Gadget.jpg
+Deck Type=constructed
+[main]
+4 Savannah
+4 Windswept Heath
+2 Sunpetal Grove
+2 Plains|M11
+2 Forest|M11
+2 Blossoming Sands
+2 Graypelt Refuge
+4 Razorverge Thicket
+4 Spellwild Ouphe
+4 Elderwood Scion
+4 Hero of Iroas
+1 Ancestral Mask
+1 Angelic Destiny
+1 Asha's Favor
+1 Battle Mastery
+1 Bear Umbra
+1 Boar Umbra
+1 Gaea's Embrace
+1 Holy Mantle
+1 Iona's Blessing
+1 Pentarch Ward
+2 Sage's Reverie
+1 Serra's Embrace
+1 Snake Umbra
+1 Unquestioned Authority
+3 Commune with the Gods
+4 Pacifism
+4 Journey to Nowhere
+[sideboard]
