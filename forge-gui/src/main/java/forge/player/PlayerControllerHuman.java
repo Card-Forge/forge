@@ -851,10 +851,11 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public CardCollectionView getCardsToMulligan(final boolean isCommander, final Player firstPlayer) {
-        final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, firstPlayer, isCommander);
+    public CardCollectionView getCardsToMulligan(final Player firstPlayer) {
+        // Partial Paris is gone, so it being commander doesn't really matter anymore...
+        final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, firstPlayer);
         inp.showAndWait();
-        return inp.isKeepHand() ? null : isCommander ? inp.getSelectedCards() : player.getCardsIn(ZoneType.Hand);
+        return inp.isKeepHand() ? null : player.getCardsIn(ZoneType.Hand);
     }
 
     @Override

@@ -1571,7 +1571,7 @@ public class GameAction {
                 if (hasKept[i]) continue;
 
                 Player p = whoCanMulligan.get(i);
-                CardCollectionView toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(isCommander, firstPlayer) : null;
+                CardCollectionView toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(firstPlayer) : null;
 
                 if (game.isGameOver()) { // conceded on mulligan prompt
                     return;

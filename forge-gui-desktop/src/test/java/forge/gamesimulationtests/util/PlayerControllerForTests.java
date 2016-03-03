@@ -308,7 +308,7 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public CardCollectionView getCardsToMulligan(boolean isCommander, Player firstPlayer) {
+	public CardCollectionView getCardsToMulligan(Player firstPlayer) {
 		return null;
 	}
 

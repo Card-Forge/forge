@@ -166,7 +166,7 @@ public abstract class PlayerController {
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes);
     public abstract Pair<CounterType,String> chooseAndRemoveOrPutCounter(Card cardWithCounter);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
-    public abstract CardCollectionView getCardsToMulligan(boolean isCommander, Player firstPlayer);
+    public abstract CardCollectionView getCardsToMulligan(Player firstPlayer);
 
     public abstract void declareAttackers(Player attacker, Combat combat);
     public abstract void declareBlockers(Player defender, Combat combat);

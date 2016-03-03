@@ -1477,6 +1477,7 @@ public class ComputerUtil {
     }
     
     public static CardCollection getPartialParisCandidates(Player ai) {
+        // Commander no longer uses partial paris.
         final CardCollection candidates = new CardCollection();
         final CardCollectionView handList = ai.getCardsIn(ZoneType.Hand);
         

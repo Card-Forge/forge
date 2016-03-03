@@ -369,17 +369,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView getCardsToMulligan(boolean isCommander, Player firstPlayer)  {
+    public CardCollectionView getCardsToMulligan(Player firstPlayer)  {
         if (!ComputerUtil.wantMulligan(player)) {
             return null;
         }
 
-        if (!isCommander) {
-            return player.getCardsIn(ZoneType.Hand);
-        }
-        else {
-            return ComputerUtil.getPartialParisCandidates(player);
-        }
+        return player.getCardsIn(ZoneType.Hand);
     }
 
     @Override

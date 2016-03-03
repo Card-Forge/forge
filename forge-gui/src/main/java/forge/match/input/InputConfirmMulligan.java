@@ -44,16 +44,14 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     private static final long serialVersionUID = -8112954303001155622L;
 
     boolean keepHand = false;
-    final boolean isCommander;
 
     private final CardCollection selected = new CardCollection();
     private final Player player;
     private final Player startingPlayer;
 
-    public InputConfirmMulligan(final PlayerControllerHuman controller, final Player humanPlayer, final Player startsGame, final boolean commander) {
+    public InputConfirmMulligan(final PlayerControllerHuman controller, final Player humanPlayer, final Player startsGame) {
         super(controller);
         player = humanPlayer;
-        isCommander = commander;
         startingPlayer = startsGame;
     }
 
@@ -71,14 +69,8 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
             sb.append(player).append(", you are going ").append(Lang.getOrdinal(game.getPosition(player, startingPlayer))).append(".\n\n");
         }
 
-        if (isCommander) {
-            getController().getGui().updateButtons(getOwner(), "Keep", "Exile", true, false, true);
-            sb.append("Will you keep your hand or choose some cards to exile those and draw one less card?");
-        }
-        else {
-            getController().getGui().updateButtons(getOwner(), "Keep", "Mulligan", true, true, true);
-            sb.append("Do you want to keep your hand?");
-        }
+        getController().getGui().updateButtons(getOwner(), "Keep", "Mulligan", true, true, true);
+        sb.append("Do you want to keep your hand?");
 
         showMessage(sb.toString());
     }
@@ -103,12 +95,6 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     }
 
     private void done() {
-        if (isCommander) {
-            // Clear the "selected" icon after clicking the done button
-            for (final Card c : this.selected) {
-                getController().getGui().setUsedToPay(c.getView(), false);
-            }
-        }
         stop();
     }
 
@@ -118,7 +104,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     protected boolean onCardSelected(final Card c0, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
         final boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
         final boolean isSerumPowder = c0.getName().equals("Serum Powder");
-        final boolean isLegalChoice = fromHand && (isCommander || isSerumPowder);
+        final boolean isLegalChoice = fromHand && (isSerumPowder);
         if (!isLegalChoice || cardSelectLocked) {
             return false;
         }
@@ -139,17 +125,6 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
             return true;
         }
 
-        if (isCommander) { // allow to choose cards for partial paris
-            if (selected.contains(c0)) {
-                getController().getGui().setUsedToPay(c0.getView(), false);
-                selected.remove(c0);
-            }
-            else {
-                getController().getGui().setUsedToPay(c0.getView(), true);
-                selected.add(c0);
-            }
-            getController().getGui().updateButtons(getOwner(), "Keep", "Exile", true, !selected.isEmpty(), true);
-        }
         return true;
     }
 
