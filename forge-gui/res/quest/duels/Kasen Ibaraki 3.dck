@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Kasen Ibaraki 3
+Title=Kasen Ibaraki
+Difficulty=hard
+Description=WBG Siege Rhino deck
+Icon=Kasen Ibaraki.jpg
+Deck Type=constructed
+[main]
+3 Blossoming Sands
+1 Forest
+3 Godless Shrine
+3 Jungle Hollow
+3 Overgrown Tomb
+1 Plains
+2 Sandsteppe Citadel
+3 Scoured Barrens
+1 Swamp
+3 Temple Garden
+2 Anafenza, the Foremost
+3 Birds of Paradise
+2 Brimaz, King of Oreskos
+2 Brutal Hordechief
+1 Chameleon Colossus
+2 Courser of Kruphix
+1 Fleecemane Lion
+2 Phyrexian Obliterator
+4 Siege Rhino
+3 Sylvan Caryatid
+1 Wingmate Roc
+1 Elspeth, Sun's Champion
+1 Sorin, Lord of Innistrad
+1 Disenchant
+3 Mortify
+3 Path to Exile
+3 Putrefy
+1 Ultimate Price
+1 Night's Whisper
+[sideboard]
