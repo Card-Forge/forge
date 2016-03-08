@@ -3328,9 +3328,8 @@ public class CardFactoryUtil {
             if (n != -1) {
                 // Set Madness Replacement effects
                 String repeffstr = "Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | " +
-                		"ReplaceWith$ DiscardMadness | Secondary$ True | Description$ If you would" +
-                		" discard this card, you discard it, but may exile it instead of putting it" +
-                		" into your graveyard";
+                		"ReplaceWith$ DiscardMadness | Secondary$ True | Description$ If you" +
+                		" discard this card, discard it into exile.";
                 ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
                 card.addReplacementEffect(re);
                 String sVarMadness = "DB$ Discard | Defined$ ReplacedPlayer" +

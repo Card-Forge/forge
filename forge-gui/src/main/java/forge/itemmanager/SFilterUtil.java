@@ -183,7 +183,7 @@ public class SFilterUtil {
                         if (useColorIdentity && !allColorsFilteredOut) {
                             result = color.hasAnyColor(colors) || (wantColorless && color.isColorless());
                         } else {
-                            result = rules.canCastWithAvailable(colors);
+                            result = (wantColorless && color.isColorless()) || rules.canCastWithAvailable(colors);
                         }
                     }
                 } else {
