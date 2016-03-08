@@ -126,18 +126,16 @@ public class Match {
             for (RegisteredPlayer p : players) {
                 if (p.getPlayer().equals(winner)) {
                     victories[i]++;
-                    break; // can't have 2 winners per game
+                    if (victories[i] >= rules.getGamesToWinMatch()) {
+                        return true;
+                    }
                 }
                 i++;
             }
         }
 
-        for (int score : victories) {
-            if (score >= rules.getGamesToWinMatch()) {
-                return true;
-            }
-        }
-        return gamesPlayed.size() >= rules.getGamesPerMatch();
+        // Games are first to X wins, not first to X wins or Y total games played
+        return false;
     }
 
     public int getGamesWonBy(LobbyPlayer questPlayer) {
