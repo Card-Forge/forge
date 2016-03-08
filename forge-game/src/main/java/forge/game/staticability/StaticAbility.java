@@ -465,6 +465,7 @@ public class StaticAbility extends CardTraitBase {
             if (condition.equals("Threshold") && !controller.hasThreshold()) return false;
             if (condition.equals("Hellbent") && !controller.hasHellbent()) return false;
             if (condition.equals("Metalcraft") && !controller.hasMetalcraft()) return false;
+            if (condition.equals("Delirium") && !controller.hasDelirium()) return false;
 
             if (condition.equals("PlayerTurn")) {
                 if (!controller.getGame().getPhaseHandler().isPlayerTurn(controller)) {

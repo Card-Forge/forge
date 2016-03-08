@@ -1290,6 +1290,9 @@ public class CardFactoryUtil {
         if (sq[0].contains("Metalcraft")) {
             return doXMath(Integer.parseInt(sq[cc.hasMetalcraft() ? 1 : 2]), m, c);
         }
+        if (sq[0].contains("Delirium")) {
+            return doXMath(Integer.parseInt(sq[cc.hasDelirium() ? 1 : 2]), m, c);
+        }
         if (sq[0].contains("FatefulHour")) {
             return doXMath(Integer.parseInt(sq[cc.getLife() <= 5 ? 1 : 2]), m, c);
         }

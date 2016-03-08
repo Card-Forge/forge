@@ -84,6 +84,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Metalcraft")) {
                 this.setMetalcraft(true);
             }
+            if (value.equals("Delirium")) {
+                this.setDelirium(true);
+            }
             if (value.equals("Hellbent")) {
                 this.setHellbent(true);
             }
@@ -221,6 +224,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isHellbent() && !activator.hasHellbent()) return false;
         if (this.isThreshold() && !activator.hasThreshold()) return false;
         if (this.isMetalcraft() && !activator.hasMetalcraft()) return false;
+        if (this.isDelirium() && !activator.hasDelirium()) return false;
         
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;

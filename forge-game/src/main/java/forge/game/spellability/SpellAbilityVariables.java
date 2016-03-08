@@ -71,7 +71,8 @@ public class SpellAbilityVariables {
         this.chosenColors = sav.getColorToCheck();
         this.threshold = sav.isThreshold();
         this.surge = sav.isSurge();
-        this.metalcraft = sav.isThreshold();
+        this.metalcraft = sav.isMetalcraft();
+        this.delirium = sav.isDelirium();
         this.hellbent = sav.isHellbent();
         this.allTargetsLegal = sav.isAllTargetsLegal();
         this.shareAllColors = sav.getShareAllColors();
@@ -145,13 +146,10 @@ public class SpellAbilityVariables {
     /** The n cards in hand. */
     private int cardsInHand = -1;
 
-    /** The threshold. */
+    // Conditional States for Cards
     private boolean threshold = false;
-
-    /** The metalcraft. */
     private boolean metalcraft = false;
-
-    /** The hellbent. */
+    private boolean delirium = false;
     private boolean hellbent = false;
 
     /** The surge. */
@@ -453,42 +451,18 @@ public class SpellAbilityVariables {
         this.setCardsInHand(cards);
     }
 
-    // specific named conditions
-    /**
-     * <p>
-     * Setter for the field <code>hellbent</code>.
-     * </p>
-     * 
-     * @param bHellbent
-     *            a boolean.
-     */
+
     public final void setHellbent(final boolean bHellbent) {
         this.hellbent = bHellbent;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>threshold</code>.
-     * </p>
-     * 
-     * @param bThreshold
-     *            a boolean.
-     */
     public final void setThreshold(final boolean bThreshold) {
         this.threshold = bThreshold;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>metalcraft</code>.
-     * </p>
-     * 
-     * @param bMetalcraft
-     *            a boolean.
-     */
-    public final void setMetalcraft(final boolean bMetalcraft) {
-        this.metalcraft = bMetalcraft;
-    }
+    public final void setMetalcraft(final boolean bMetalcraft) {  this.metalcraft = bMetalcraft;  }
+
+    public void setDelirium(boolean delirium) {  this.delirium = delirium; }
 
     /**
      * <p>
@@ -699,32 +673,13 @@ public class SpellAbilityVariables {
         return this.gameLimitToCheck;
     }
 
-    /**
-     * Checks if is threshold.
-     * 
-     * @return the threshold
-     */
-    public final boolean isThreshold() {
-        return this.threshold;
-    }
+    public final boolean isThreshold() {    return this.threshold;  }
 
-    /**
-     * Checks if is metalcraft.
-     * 
-     * @return the metalcraft
-     */
-    public final boolean isMetalcraft() {
-        return this.metalcraft;
-    }
+    public final boolean isMetalcraft() {   return this.metalcraft; }
 
-    /**
-     * Checks if is hellbent.
-     * 
-     * @return the hellbent
-     */
-    public final boolean isHellbent() {
-        return this.hellbent;
-    }
+    public final boolean isDelirium() {     return this.delirium;  }
+
+    public final boolean isHellbent() {     return this.hellbent;  }
 
     /**
      * Checks if is surge.
@@ -1004,9 +959,6 @@ public class SpellAbilityVariables {
         return enchantedControllerOnly;
     }
 
-    /**
-     * @param opponentOnly the opponentOnly to set
-     */
     public void setEnchantedControllerOnly(boolean enchantedControllerOnly) {
         this.enchantedControllerOnly = enchantedControllerOnly;
     }

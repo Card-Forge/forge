@@ -176,6 +176,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         final Game game = hostController.getGame();
         
         if ("True".equalsIgnoreCase(params.get("Metalcraft")) && !hostController.hasMetalcraft()) return false;
+        if ("True".equalsIgnoreCase(params.get("Delirium")) && !hostController.hasDelirium()) return false;
         if ("True".equalsIgnoreCase(params.get("Threshold")) && !hostController.hasThreshold()) return false;
         if ("True".equalsIgnoreCase(params.get("Hellbent")) && !hostController.hasHellbent()) return false;
         if ("True".equalsIgnoreCase(params.get("Bloodthirst")) && !hostController.hasBloodthirst()) return false;

@@ -77,6 +77,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (value.equals("Metalcraft")) {
                 this.setMetalcraft(true);
             }
+            if (value.equals("Delirium")) {
+                this.setDelirium(true);
+            }
             if (value.equals("Hellbent")) {
                 this.setHellbent(true);
             }
@@ -329,6 +332,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
         if (this.isMetalcraft()) {
             if (!activator.hasMetalcraft()) {
+                return false;
+            }
+        }
+        if (this.isDelirium()) {
+            if (!activator.hasDelirium()) {
                 return false;
             }
         }

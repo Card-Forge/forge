@@ -1834,6 +1834,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return getZone(ZoneType.Hand).isEmpty();
     }
 
+    public final boolean hasDelirium() {
+        return CardFactoryUtil.getCardTypesFromList(getCardsIn(ZoneType.Graveyard)) >= 4;
+    }
+
     public final boolean hasLandfall() {
         final CardCollectionView list = getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
         return Iterables.any(list, CardPredicates.Presets.LANDS);
