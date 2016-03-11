@@ -133,12 +133,15 @@ public class ConquestUtil {
         return pool;
     }
 
-    public static Iterable<PaperCard> getStartingPlaneswalkerOptions() {
+    public static Iterable<PaperCard> getStartingPlaneswalkerOptions(PaperCard startingCommander) {
+        final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         return Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard card) {
                 CardRules rules = card.getRules();
-                return rules.getType().isPlaneswalker() && !rules.canBeCommander(); //don't allow picking a commander as a starting planeswalker
+                return rules.getType().isPlaneswalker() &&
+                        !rules.canBeCommander() && //don't allow picking a commander as a starting planeswalker
+                        rules.getColorIdentity().hasNoColorsExcept(colorIdentity);
             }
         });
     }

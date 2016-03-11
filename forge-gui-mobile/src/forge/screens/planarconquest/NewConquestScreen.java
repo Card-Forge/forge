@@ -30,8 +30,8 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
     public NewConquestScreen() {
         super(null, NewGameMenu.getMenu(), new WizardStep[] {
             new SelectStartingPlaneStep(),
-            new SelectStartingPlaneswalkerStep(),
-            new SelectStartingCommanderStep()
+            new SelectStartingCommanderStep(),
+            new SelectStartingPlaneswalkerStep()
         }, new NewConquestScreenModel());
     }
 
@@ -108,64 +108,6 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         }
     }
 
-    private static class SelectStartingPlaneswalkerStep extends WizardStep<NewConquestScreenModel> {
-        private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(ConquestUtil.getStartingPlaneswalkerOptions()) {
-            @Override
-            protected void onItemActivate(Integer index, PaperCard value) {
-                advance();
-            }
-
-            @Override
-            protected void onSelectionChange() {
-                if (tokenDisplay == null) { return; }
-                updatePreview();
-            }
-        });
-        private final CardListPreview tokenDisplay = add(new CardListPreview(lstPlaneswalkers));
-
-        protected SelectStartingPlaneswalkerStep() {
-            super("Select Starting Planeswalker");
-        }
-
-        @Override
-        protected void doLayout(float width, float height) {
-            float x = PADDING;
-            float y = PADDING;
-            float w = width - 2 * PADDING;
-            tokenDisplay.setBounds(x, y, w, height * CARD_PREVIEW_RATIO);
-            y += tokenDisplay.getHeight() + PADDING;
-            lstPlaneswalkers.setBounds(x, y, w, height - y - PADDING);
-        }
-
-        @Override
-        protected void reset() {
-            if (lstPlaneswalkers.getCount() > 0) {
-                lstPlaneswalkers.setSelectedIndex(0);
-            }
-        }
-
-        private void updatePreview() {
-            PaperCard planeswalker = lstPlaneswalkers.getSelectedItem();
-            if (planeswalker != null) {
-                tokenDisplay.setIcon((FImage)PlaneswalkerAchievements.getTrophyImage(planeswalker.getName()));
-            }
-            else {
-                tokenDisplay.setIcon(null);
-            }
-        }
-
-        @Override
-        protected void onActivate(NewConquestScreenModel model) {
-            updatePreview();
-        }
-
-        @Override
-        protected boolean updateModelAndAdvance(NewConquestScreenModel model) {
-            model.startingPlaneswalker = lstPlaneswalkers.getSelectedItem();
-            return model.startingPlaneswalker != null;
-        }
-    }
-
     private static class SelectStartingCommanderStep extends WizardStep<NewConquestScreenModel> {
         private final FChoiceList<PaperCard> lstCommanders = add(new FChoiceList<PaperCard>(FModel.getPlanes().iterator().next().getCommanders()) {
             @Override
@@ -222,6 +164,65 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         protected boolean updateModelAndAdvance(NewConquestScreenModel model) {
             model.startingCommander = lstCommanders.getSelectedItem();
             return model.startingCommander != null;
+        }
+    }
+
+    private static class SelectStartingPlaneswalkerStep extends WizardStep<NewConquestScreenModel> {
+        private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(FModel.getPlanes().iterator().next().getCommanders()) { //just use commanders as temporary list
+            @Override
+            protected void onItemActivate(Integer index, PaperCard value) {
+                advance();
+            }
+
+            @Override
+            protected void onSelectionChange() {
+                if (tokenDisplay == null) { return; }
+                updatePreview();
+            }
+        });
+        private final CardListPreview tokenDisplay = add(new CardListPreview(lstPlaneswalkers));
+
+        protected SelectStartingPlaneswalkerStep() {
+            super("Select Starting Planeswalker");
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
+            float x = PADDING;
+            float y = PADDING;
+            float w = width - 2 * PADDING;
+            tokenDisplay.setBounds(x, y, w, height * CARD_PREVIEW_RATIO);
+            y += tokenDisplay.getHeight() + PADDING;
+            lstPlaneswalkers.setBounds(x, y, w, height - y - PADDING);
+        }
+
+        @Override
+        protected void reset() {
+            if (lstPlaneswalkers.getCount() > 0) {
+                lstPlaneswalkers.setSelectedIndex(0);
+            }
+        }
+
+        private void updatePreview() {
+            PaperCard planeswalker = lstPlaneswalkers.getSelectedItem();
+            if (planeswalker != null) {
+                tokenDisplay.setIcon((FImage)PlaneswalkerAchievements.getTrophyImage(planeswalker.getName()));
+            }
+            else {
+                tokenDisplay.setIcon(null);
+            }
+        }
+
+        @Override
+        protected void onActivate(NewConquestScreenModel model) {
+            lstPlaneswalkers.setListData(ConquestUtil.getStartingPlaneswalkerOptions(model.startingCommander));
+            reset();
+        }
+
+        @Override
+        protected boolean updateModelAndAdvance(NewConquestScreenModel model) {
+            model.startingPlaneswalker = lstPlaneswalkers.getSelectedItem();
+            return model.startingPlaneswalker != null;
         }
     }
 }
