@@ -15,7 +15,7 @@ public class ConquestPlaneswalkScreen extends FScreen {
     public void onActivate() {
         ConquestData model = FModel.getConquest().getModel();
         setHeaderCaption(model.getName());
-        planeSelector.setSelectedPlane(model.getCurrentPlane());
+        planeSelector.setCurrentPlane(model.getCurrentPlane());
         planeSelector.activate();
     }
 

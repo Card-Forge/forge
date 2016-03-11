@@ -51,6 +51,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
         }
     };
     private int selectedIndex, artIndex;
+    private int currentPlaneIndex = -1;
     private FImage currentArt;
     private Rectangle leftArrowBounds, rightArrowBounds;
 
@@ -63,6 +64,11 @@ public class ConquestPlaneSelector extends FDisplayObject {
     }
     public void setSelectedPlane(ConquestPlane plane0) {
         setSelectedIndex(planes.indexOf(plane0));
+    }
+
+    public void setCurrentPlane(ConquestPlane plane0) {
+        currentPlaneIndex = planes.indexOf(plane0);
+        setSelectedIndex((currentPlaneIndex + 1) % planes.size());
     }
 
     public void activate() {
@@ -79,6 +85,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
     }
 
     private void setSelectedIndex(int selectedIndex0) {
+        if (currentPlaneIndex == selectedIndex0) { return; } //can't select current plane
         selectedIndex = selectedIndex0;
         artIndex = 0;
         currentArt = CardRenderer.getCardArt(getSelectedPlane().getPlaneCards().get(artIndex));
@@ -87,11 +94,20 @@ public class ConquestPlaneSelector extends FDisplayObject {
 
     private void incrementSelectedIndex(int dir) {
         int newIndex = selectedIndex + dir;
+        if (newIndex == currentPlaneIndex && currentPlaneIndex != -1) {
+            newIndex += dir; //skip hidden current plane
+        }
         if (newIndex < 0) {
             newIndex = planes.size() - 1;
+            if (newIndex == currentPlaneIndex) {
+                newIndex--;
+            }
         }
         else if (newIndex >= planes.size()) {
             newIndex = 0;
+            if (newIndex == currentPlaneIndex) {
+                newIndex++;
+            }
         }
         setSelectedIndex(newIndex);
     }
