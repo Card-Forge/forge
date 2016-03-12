@@ -6491,7 +6491,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         else {
-            requestedCMC = getManaCost().getCMC() + xPaid;
+            if (currentStateName == CardStateName.Transformed) {
+                // Except in the cases were we clone the back-side of a DFC.
+                requestedCMC = getState(CardStateName.Original).getManaCost().getCMC();
+            } else {
+                requestedCMC = getManaCost().getCMC() + xPaid;
+            }
         }
         return requestedCMC;
     }
