@@ -252,6 +252,7 @@ Aura
 Curse
 Shrine
 [ArtifactTypes]
+Clue
 Contraption
 Equipment
 Fortification
