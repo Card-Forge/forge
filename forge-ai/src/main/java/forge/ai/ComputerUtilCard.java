@@ -842,6 +842,7 @@ public class ComputerUtilCard {
         final Player opp = ai.getOpponent();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
+        final PhaseType phaseType = ph.getPhase();
 
         final int costRemoval = sa.getHostCard().getCMC();
         final int costTarget = c.getCMC();
@@ -851,7 +852,7 @@ public class ComputerUtilCard {
         }
         
         //Check for cards that profit from spells - for example Prowess or Threshold
-        if (game.getPhaseHandler().getPhase().equals(PhaseType.MAIN1) && ComputerUtil.castSpellInMain1(ai, sa)) {
+        if (phaseType == PhaseType.MAIN1 && ComputerUtil.castSpellInMain1(ai, sa)) {
             return true;
         }
         
@@ -929,7 +930,7 @@ public class ComputerUtilCard {
             if (sa.getTargetRestrictions().canTgtPlayer()) {
                 valueBurn /= 2;     //preserve option to burn to the face
             }
-            if (valueBurn >= 0.8 && ph.getPhase().isBefore(PhaseType.COMBAT_END)) {
+            if (valueBurn >= 0.8 && phaseType.isBefore(PhaseType.COMBAT_END)) {
             	return true;
             }
         }
@@ -972,10 +973,11 @@ public class ComputerUtilCard {
         		threat += 1.0f * ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true) / ai.getLife();
         		//TODO:add threat from triggers and other abilities (ie. Master of Cruelties)
         	}
-        	if (ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+        	if (ph.isPlayerTurn(ai) && phaseType.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
         		threat *= 0.1f;
         	}
-        	if (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+        	if (!ph.isPlayerTurn(ai) && 
+        			(phaseType.isBefore(PhaseType.COMBAT_BEGIN) || phaseType.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
         		threat *= 0.1f;
         	}
         } else if (c.isPlaneswalker()) {
