@@ -451,8 +451,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
                         tgtC.setTapped(true);
                     }
-                    if (sa.hasParam("Transformed") && tgtC.isDoubleFaced()) {
-                        tgtC.changeCardState("Transform", null);
+                    if (sa.hasParam("Transformed")) {
+                        if (tgtC.isDoubleFaced()) {
+                            tgtC.changeCardState("Transform", null);
+                        } else {
+                            // If it can't Transform, don't change zones.
+                            continue;
+                        }
                     }
                     if (sa.hasParam("WithCounters")) {
                         String[] parse = sa.getParam("WithCounters").split("_");
