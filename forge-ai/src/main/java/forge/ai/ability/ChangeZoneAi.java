@@ -972,7 +972,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         if (destination.equals(ZoneType.Exile)) {
                             // If Exiling things, don't give bonus to Tokens
                             choice = ComputerUtilCard.getBestCreatureAI(list);
-                        } else {
+                        } else if (origin.equals(ZoneType.Graveyard)) {
+                        	choice = mostExpensive;
+                        	// Karmic Guide can chain another creature
+                    		for (Card c : list) {
+                    			if ("Karmic Guide".equals(c.getName())) {
+                    				choice = c;
+                    				break;
+                    			}
+                    		}
+                    	} else {
                             choice = ComputerUtilCard.getBestCreatureToBounceAI(list);
                         }
                     } else {
