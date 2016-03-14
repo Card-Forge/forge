@@ -68,6 +68,7 @@ public final class ConquestData {
         xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
         aetherShards = FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_START_SHARDS);
         currentLocation = new ConquestLocation(startingPlane0, 0, 0, 0);
+        unlockPlane(startingPlane0);
         setPlaneswalker(startingPlaneswalker0);
 
         //unlock starting commander, starting planeswalker, and all cards in generated deck
