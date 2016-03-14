@@ -359,7 +359,8 @@ public class ComputerUtil {
             }
             
             // try everything when about to die
-            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) 
+            if ("Reality Smasher".equals(activate.getName()) ||
+                    game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) 
             		&& ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
             	if (!typeList.isEmpty()) {
             		return ComputerUtilCard.getWorstAI(typeList);
