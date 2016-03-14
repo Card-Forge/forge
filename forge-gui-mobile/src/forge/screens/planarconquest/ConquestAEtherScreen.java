@@ -39,10 +39,10 @@ import forge.util.Callback;
 import forge.util.Utils;
 
 public class ConquestAEtherScreen extends FScreen {
-    private static final Color FILTER_BUTTON_COLOR = ConquestMultiverseScreen.LOCATION_BAR_COLOR;
-    private static final FSkinColor FILTER_BUTTON_TEXT_COLOR = FSkinColor.getStandardColor(ConquestMultiverseScreen.LOCATION_BAR_TEXT_COLOR);
-    private static final FSkinColor FILTER_BUTTON_PRESSED_COLOR = FSkinColor.getStandardColor(FSkinColor.alphaColor(Color.WHITE, 0.1f));
-    private static final FSkinFont LABEL_FONT = FSkinFont.get(16);
+    public static final Color FILTER_BUTTON_COLOR = ConquestMultiverseScreen.LOCATION_BAR_COLOR;
+    public static final FSkinColor FILTER_BUTTON_TEXT_COLOR = FSkinColor.getStandardColor(ConquestMultiverseScreen.LOCATION_BAR_TEXT_COLOR);
+    public static final FSkinColor FILTER_BUTTON_PRESSED_COLOR = FSkinColor.getStandardColor(FSkinColor.alphaColor(Color.WHITE, 0.1f));
+    public static final FSkinFont LABEL_FONT = FSkinFont.get(16);
     private static final FSkinFont MESSAGE_FONT = FSkinFont.get(14);
     private static final float PADDING = Utils.scale(5f);
 

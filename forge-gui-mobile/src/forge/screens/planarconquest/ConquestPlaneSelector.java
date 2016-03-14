@@ -90,6 +90,10 @@ public class ConquestPlaneSelector extends FDisplayObject {
         artIndex = 0;
         currentArt = CardRenderer.getCardArt(getSelectedPlane().getPlaneCards().get(artIndex));
         timer.restart();
+        onSelectionChange();
+    }
+
+    protected void onSelectionChange() {
     }
 
     private void incrementSelectedIndex(int dir) {

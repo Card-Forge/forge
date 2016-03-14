@@ -56,6 +56,7 @@ public class TextRenderer {
         symbolLookup.put("S", FSkinImage.MANA_SNOW);
         symbolLookup.put("T", FSkinImage.TAP);
         symbolLookup.put("AE", FSkinImage.AETHER_SHARD);
+        symbolLookup.put("PW", FSkinImage.PW_BADGE_COMMON);
     }
 
     public static String startColor(Color color) {

@@ -97,6 +97,8 @@ public class ConquestMultiverseScreen extends FScreen {
                     ConquestEventRecord record = model.getCurrentPlaneData().getEventRecord(loc);
                     if (record.getWins(activeBattle.getTier()) == 1 && record.getHighestConqueredTier() == activeBattle.getTier()) {
                         //if first time conquering event at the selected tier, show animation of new badge being positioned on location
+                        model.rewardPlaneswalkEmblems(FModel.getConquestPreferences().getPrefInt(CQPref.PLANESWALK_CONQUER_EMBLEMS));
+                        model.saveData();
                         planeGrid.animateBadgeIntoPosition(loc, activeBattle.getTier());
                     }
                     else {
@@ -148,7 +150,7 @@ public class ConquestMultiverseScreen extends FScreen {
                     awardShards(2 * FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_WHEEL_SHARDS), false);
                     break;
                 case PLANESWALK:
-                    awardPlaneswalkCharge();
+                    awardBonusPlaneswalkEmblems(FModel.getConquestPreferences().getPrefInt(CQPref.PLANESWALK_WHEEL_EMBLEMS));
                     break;
                 case CHAOS:
                     launchChaosBattle();
@@ -226,9 +228,27 @@ public class ConquestMultiverseScreen extends FScreen {
         FOptionPane.showMessageDialog(String.valueOf(shards), FSkinFont.get(32), message, SHARD_IMAGE);
     }
 
-    private void awardPlaneswalkCharge() {
-        //TODO
-        FOptionPane.showMessageDialog(null, "Received Planeswalk Charge");
+    private static final FImage EMBLEM_IMAGE = new FImage() {
+        final float size = Forge.getScreenWidth() * 0.6f;
+        @Override
+        public float getWidth() {
+            return size;
+        }
+        @Override
+        public float getHeight() {
+            return size;
+        }
+        @Override
+        public void draw(Graphics g, float x, float y, float w, float h) {
+            FSkinImage.PW_BADGE_COMMON.draw(g, x, y, w, h);
+        }
+    };
+
+    private void awardBonusPlaneswalkEmblems(int emblems) {
+        String message = "Received Bonus Planeswalk Emblems";
+        model.rewardPlaneswalkEmblems(emblems);
+        model.saveData();
+        FOptionPane.showMessageDialog(String.valueOf(emblems), FSkinFont.get(32), message, EMBLEM_IMAGE);
     }
 
     private void launchEvent() {

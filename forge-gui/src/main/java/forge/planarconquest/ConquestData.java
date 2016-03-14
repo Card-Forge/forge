@@ -52,6 +52,7 @@ public final class ConquestData {
     private ConquestLocation currentLocation;
     private int selectedCommanderIndex;
     private int aetherShards;
+    private int planeswalkEmblems;
 
     private final File directory;
     private final String xmlFilename;
@@ -93,6 +94,7 @@ public final class ConquestData {
             CardDb cardDb = FModel.getMagicDb().getCommonCards();
             setPlaneswalker(xml.read("planeswalker", cardDb));
             aetherShards = xml.read("aetherShards", aetherShards);
+            planeswalkEmblems = xml.read("planeswalkEmblems", planeswalkEmblems);
             currentLocation = xml.read("currentLocation", ConquestLocation.class);
             selectedCommanderIndex = xml.read("selectedCommanderIndex", selectedCommanderIndex);
             chaosBattleRecord0 = xml.read("chaosBattleRecord", ConquestRecord.class);
@@ -142,17 +144,32 @@ public final class ConquestData {
         getCurrentPlaneData().setLocation(currentLocation0);
     }
 
-    private ConquestPlaneData getOrCreatePlaneData(ConquestPlane plane) {
-        ConquestPlaneData planeData = planeDataMap.get(plane.getName());
-        if (planeData == null) {
-            planeData = new ConquestPlaneData(plane);
-            planeDataMap.put(plane.getName(), planeData);
-        }
-        return planeData;
+    private ConquestPlaneData getPlaneData(ConquestPlane plane) {
+        return planeDataMap.get(plane.getName());
+    }
+    public ConquestPlaneData getCurrentPlaneData() {
+        return getPlaneData(getCurrentPlane());
     }
 
-    public ConquestPlaneData getCurrentPlaneData() {
-        return getOrCreatePlaneData(getCurrentPlane());
+    public boolean isPlaneUnlocked(ConquestPlane plane) {
+        return planeDataMap.containsKey(plane.getName());
+    }
+
+    public int getUnlockedPlaneCount() {
+        return planeDataMap.size();
+    }
+
+    public void unlockPlane(ConquestPlane plane) {
+        if (isPlaneUnlocked(plane)) { return; }
+
+        planeDataMap.put(plane.getName(), new ConquestPlaneData(plane));
+    }
+
+    public void planeswalkTo(ConquestPlane plane) {
+        ConquestPlaneData planeData = getPlaneData(plane);
+        if (planeData == null) { return; }
+
+        setCurrentLocation(planeData.getLocation());
     }
 
     public ConquestCommander getSelectedCommander() {
@@ -203,25 +220,45 @@ public final class ConquestData {
     }
 
     public void addWin(ConquestBattle event) {
-        getOrCreatePlaneData(event.getLocation().getPlane()).addWin(event);
+        ConquestPlaneData planeData = getPlaneData(event.getLocation().getPlane());
+        if (planeData == null) { return; }
+
+        planeData.addWin(event);
         getSelectedCommander().getRecord().addWin();
         event.setConquered(true);
     }
 
     public void addLoss(ConquestBattle event) {
-        getOrCreatePlaneData(event.getLocation().getPlane()).addLoss(event);
+        ConquestPlaneData planeData = getPlaneData(event.getLocation().getPlane());
+        if (planeData == null) { return; }
+
+        planeData.addLoss(event);
         getSelectedCommander().getRecord().addLoss();
     }
 
     public int getAEtherShards() {
         return aetherShards;
     }
-    public void rewardAEtherShards(int aetherShards0) {
-        aetherShards += aetherShards0;
+    public void rewardAEtherShards(int shards) {
+        aetherShards += shards;
     }
-    public boolean spendAEtherShards(int aetherShards0) {
-        if (aetherShards >= aetherShards0) {
-            aetherShards -= aetherShards0;
+    public boolean spendAEtherShards(int shards) {
+        if (aetherShards >= shards) {
+            aetherShards -= shards;
+            return true;
+        }
+        return false;
+    }
+
+    public int getPlaneswalkEmblems() {
+        return planeswalkEmblems;
+    }
+    public void rewardPlaneswalkEmblems(int emblems) {
+        planeswalkEmblems += emblems;
+    }
+    public boolean spendPlaneswalkEmblems(int emblems) {
+        if (planeswalkEmblems >= emblems) {
+            planeswalkEmblems -= emblems;
             return true;
         }
         return false;

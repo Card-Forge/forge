@@ -42,6 +42,11 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         BOOSTER_RARES("1"),
         BOOSTERS_PER_MYTHIC("8"),
 
+        PLANESWALK_CONQUER_EMBLEMS("1"),
+        PLANESWALK_WHEEL_EMBLEMS("5"),
+        PLANESWALK_FIRST_UNLOCK("5"),
+        PLANESWALK_UNLOCK_INCREASE("5"),
+
         CHAOS_BATTLE_WINS_MEDIUMAI("2"),
         CHAOS_BATTLE_WINS_HARDAI("5"),
         CHAOS_BATTLE_WINS_EXPERTAI("10");

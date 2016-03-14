@@ -23,7 +23,9 @@ public class ConquestPrefsScreen extends FScreen {
 
     private enum PrefsGroup {
         AETHER,
-        BOOSTER
+        BOOSTER,
+        PLANESWALK,
+        CHAOS
     }
 
     private FScrollPane scroller = add(new FScrollPane() {
@@ -63,6 +65,17 @@ public class ConquestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Uncommons", CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Rares", CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Boosters per Mythic", CQPref.BOOSTERS_PER_MYTHIC, PrefsGroup.BOOSTER));
+
+        scroller.add(new PrefsHeader("Planeswalk Emblems", FSkinImage.PW_BADGE_COMMON, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption("Base Conquer Reward", CQPref.PLANESWALK_CONQUER_EMBLEMS, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption("Chaos Wheel Bonus", CQPref.PLANESWALK_WHEEL_EMBLEMS, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption("First Plane Unlock Cost", CQPref.PLANESWALK_FIRST_UNLOCK, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption("Cost Increase Per Unlock", CQPref.PLANESWALK_UNLOCK_INCREASE, PrefsGroup.PLANESWALK));
+
+        scroller.add(new PrefsHeader("Chaos Battles", FSkinImage.CHAOS, PrefsGroup.CHAOS));
+        scroller.add(new PrefsOption("Wins For Medium AI", CQPref.CHAOS_BATTLE_WINS_MEDIUMAI, PrefsGroup.CHAOS));
+        scroller.add(new PrefsOption("Wins For Hard AI", CQPref.CHAOS_BATTLE_WINS_HARDAI, PrefsGroup.CHAOS));
+        scroller.add(new PrefsOption("Wins For Expert AI", CQPref.CHAOS_BATTLE_WINS_EXPERTAI, PrefsGroup.CHAOS));
     }
 
     @Override
