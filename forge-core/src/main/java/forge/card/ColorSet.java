@@ -45,8 +45,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
 
     private static final ColorSet[] cache = new ColorSet[32];
 
-    private static final byte ALL_COLORS_MASK = MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN;
-    public static final ColorSet ALL_COLORS = fromMask(ALL_COLORS_MASK);
+    public static final ColorSet ALL_COLORS = fromMask(MagicColor.ALL_COLORS);
     private static final ColorSet NO_COLORS = fromMask(MagicColor.COLORLESS);
 
     private ColorSet(final byte mask) {
@@ -55,7 +54,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     }
 
     public static ColorSet fromMask(final int mask) {
-        final int mask32 = mask & ALL_COLORS_MASK;
+        final int mask32 = mask & MagicColor.ALL_COLORS;
         if (cache[mask32] == null) {
             cache[mask32] = new ColorSet((byte) mask32);
         }
@@ -259,7 +258,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
 
     public ColorSet inverse() {
         byte mask = this.myColor;
-        mask ^= ALL_COLORS_MASK;
+        mask ^= MagicColor.ALL_COLORS;
         return fromMask(mask);
     }
 
@@ -364,7 +363,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         return shardOrderLookup[myColor];
     }
 
-    private static final ManaCostShard[][] shardOrderLookup = new ManaCostShard[ALL_COLORS_MASK + 1][];
+    private static final ManaCostShard[][] shardOrderLookup = new ManaCostShard[MagicColor.ALL_COLORS + 1][];
     static {
         byte COLORLESS = MagicColor.COLORLESS;
         byte WHITE = MagicColor.WHITE;
@@ -421,6 +420,6 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         shardOrderLookup[GREEN | WHITE | BLUE | BLACK] = new ManaCostShard[] { G, W, U, B };
 
         //five-color
-        shardOrderLookup[ALL_COLORS_MASK] = new ManaCostShard[] { W, U, B, R, G };
+        shardOrderLookup[WHITE | BLUE | BLACK | RED | GREEN] = new ManaCostShard[] { W, U, B, R, G };
     }
 }

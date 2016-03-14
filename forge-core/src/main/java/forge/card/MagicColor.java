@@ -19,6 +19,8 @@ public final class MagicColor {
     // Any comparison between colorless cards and colorless mana need to be adjusted appropriately.
     public static final byte COLORLESS = 0;
 
+    public static final byte ALL_COLORS = WHITE | BLUE | BLACK | RED | GREEN;
+
     public static final int NUMBER_OR_COLORS = 5;
 
     public static final byte[] WUBRG  = new byte[] { WHITE, BLUE, BLACK, RED, GREEN };

@@ -119,7 +119,7 @@ public class InputPayManaSimple extends InputPayMana {
      */
     @Override
     protected String getMessage() {
-        final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + this.manaCost.toString());
+        final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + this.manaCost.toString(false, player.getManaPool()));
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
             msg.append(this.phyLifeToLose);

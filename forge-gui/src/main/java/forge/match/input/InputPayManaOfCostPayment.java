@@ -42,7 +42,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
 
     @Override
     protected String getMessage() { 
-        final String displayMana = manaCost.toString(false);
+        final String displayMana = manaCost.toString(false, player.getManaPool());
 
         final StringBuilder msg = new StringBuilder();
         if (messagePrefix != null) {

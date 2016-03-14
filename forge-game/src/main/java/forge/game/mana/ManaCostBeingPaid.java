@@ -472,7 +472,7 @@ public class ManaCostBeingPaid {
      *            the add x
      * @return the string
      */
-    public final String toString(final boolean addX) {
+    public final String toString(final boolean addX, final ManaPool pool) {
         // Boolean addX used to add Xs into the returned value
         final StringBuilder sb = new StringBuilder();
 
@@ -483,6 +483,19 @@ public class ManaCostBeingPaid {
         }
 
         int nGeneric = getGenericManaAmount();
+        List<ManaCostShard> shards = new ArrayList<ManaCostShard>(unpaidShards.keySet());
+
+        if (pool != null) { //replace shards with generic mana if they can be paid with any color mana
+            for (int i = 0; i < shards.size(); i++) {
+                ManaCostShard shard = shards.get(i);
+                if (shard != ManaCostShard.GENERIC && pool.getPossibleColorUses(shard.getColorMask()) == MagicColor.ALL_COLORS) {
+                    nGeneric += unpaidShards.get(shard).totalCount;
+                    shards.remove(i);
+                    i--;
+                }
+            }
+        }
+
         if (nGeneric > 0) {
             if (nGeneric <= 20) {
                 sb.append("{" + nGeneric + "}");
@@ -496,7 +509,6 @@ public class ManaCostBeingPaid {
         }
 
         // Sort the keys to get a deterministic ordering.
-        List<ManaCostShard> shards = new ArrayList<ManaCostShard>(unpaidShards.keySet());
         Collections.sort(shards);
         for (ManaCostShard shard : shards) {
             if (shard == ManaCostShard.GENERIC) {
@@ -510,13 +522,13 @@ public class ManaCostBeingPaid {
             }
         }
 
-        return sb.length() == 0 ? "0"  : sb.toString();
+        return sb.length() == 0 ? "0" : sb.toString();
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return this.toString(true);
+        return this.toString(true, null);
     }
 
     /**
