@@ -120,10 +120,7 @@ public class ConquestMultiverseScreen extends FScreen {
     }
 
     public void update() {
-        ConquestData model0 = FModel.getConquest().getModel();
-        if (model == model0) { return; }
-
-        model = model0;
+        model = FModel.getConquest().getModel();
         setHeaderCaption(model.getName());
 
         planeGrid.revalidate();
@@ -726,7 +723,7 @@ public class ConquestMultiverseScreen extends FScreen {
             public void setCard(PaperCard card0) {
                 if (card == card0) { return; }
                 card = card0;
-                image = new CardAvatarImage(card);
+                image = card != null ? new CardAvatarImage(card) : null;
             }
 
             @Override
