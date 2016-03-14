@@ -10,7 +10,6 @@ import forge.item.PaperCard;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 
@@ -25,11 +24,11 @@ public class RegisteredPlayer {
     private int startingLife = 20;
     private int startingHand = 7;
     private Iterable<IPaperCard> cardsOnBattlefield = null;
-    private final List<IPaperCard> cardsInCommand = new ArrayList<IPaperCard>();
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
     private Iterable<PaperCard> conspiracies = null;
     private PaperCard commander = null;
+    private PaperCard vanguardAvatar = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
     
     public RegisteredPlayer(Deck deck0) {
@@ -56,50 +55,17 @@ public class RegisteredPlayer {
         this.cardsOnBattlefield = cardsOnTable;
     }
 
-    /**
-     * @return the startingHand
-     */
     public int getStartingHand() {
         return startingHand;
     }
-
-    /**
-     * @param startingHand0 the startingHand to set
-     */
     public void setStartingHand(int startingHand0) {
         this.startingHand = startingHand0;
     }
 
-    /**
-     * @return the cardsInCommand
-     */
-    public Iterable<? extends IPaperCard> getCardsInCommand() {
-        return cardsInCommand == null ? EmptyList : cardsInCommand;
-    }
-
-    /**
-     * @param function the cardsInCommand to set
-     */
-    public void addCardsInCommand(Iterable<? extends IPaperCard> function) {
-        for (IPaperCard pc : function) {
-            this.cardsInCommand.add(pc);
-        }
-    }
-
-    public void addCardsInCommand(IPaperCard pc) {
-        this.cardsInCommand.add(pc);
-    }
-    
-    /**
-     * @return the schemes
-     */
     public Iterable<? extends IPaperCard> getSchemes() {
         return schemes == null ? EmptyList : schemes;
     }
 
-    /**
-     * @return the planes
-     */
     public Iterable<PaperCard> getPlanes() {
         return planes == null ? EmptyList : planes;
     }
@@ -111,8 +77,9 @@ public class RegisteredPlayer {
         return conspiracies == null ? EmptyList : conspiracies;
     }
     public void assignConspiracies() {
-        if (currentDeck.has(DeckSection.Conspiracy))
+        if (currentDeck.has(DeckSection.Conspiracy)) {
             conspiracies = currentDeck.get(DeckSection.Conspiracy).toFlatList();
+        }
     }
 
     public int getTeamNumber() {
@@ -156,11 +123,7 @@ public class RegisteredPlayer {
     	if (appliedVariants.contains(GameType.Planechase)) {
             start.planes = planes;
     	}
-    	if (vanguardAvatar != null) {
-            start.setStartingLife(start.getStartingLife() + vanguardAvatar.getRules().getLife());
-            start.setStartingHand(start.getStartingHand() + vanguardAvatar.getRules().getHand());
-            start.addCardsInCommand(vanguardAvatar);
-    	}
+    	start.setVanguardAvatar(vanguardAvatar);
     	return start;
     }
 
@@ -171,6 +134,21 @@ public class RegisteredPlayer {
     public RegisteredPlayer setPlayer(LobbyPlayer player0) {
         this.player = player0;
         return this;
+    }
+
+    public IPaperCard getVanguardAvatar() {
+        return vanguardAvatar;
+    }
+    public void assignVanguardAvatar() {
+        CardPool section = currentDeck.get(DeckSection.Avatar);
+        setVanguardAvatar(section == null ? null : section.get(0));
+    }
+    private void setVanguardAvatar(PaperCard vanguardAvatar0) {
+        vanguardAvatar = vanguardAvatar0;
+        if (vanguardAvatar == null) { return; }
+
+        setStartingLife(getStartingLife() + vanguardAvatar.getRules().getLife());
+        setStartingHand(getStartingHand() + vanguardAvatar.getRules().getHand());
     }
 
     public IPaperCard getCommander() {

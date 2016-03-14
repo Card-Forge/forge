@@ -2689,9 +2689,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         PlayerZone com = getZone(ZoneType.Command);
-        // Mainly for avatar, but might find something else here
-        for (final IPaperCard cp : registeredPlayer.getCardsInCommand()) {
-            com.add(Card.fromPaperCard(cp, this));
+
+        // Vanguard
+        if (registeredPlayer.getVanguardAvatar() != null) {
+            com.add(Card.fromPaperCard(registeredPlayer.getVanguardAvatar(), this));
         }
     
         // Schemes
@@ -2727,6 +2728,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             com.add(createCommanderEffect(game, cmd));
         }
 
+        // Conspiracies
         for (IPaperCard cp : registeredPlayer.getConspiracies()) {
             Card conspire = Card.fromPaperCard(cp, this);
             if (conspire.hasKeyword("Hidden agenda")) {

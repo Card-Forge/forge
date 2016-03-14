@@ -26,7 +26,9 @@ import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.card.CardType;
+import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.deck.io.DeckStorage;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -94,9 +96,17 @@ public class ConquestController {
             humanStart.assignCommander();
             aiStart.assignCommander();
         }
+        if (variants.contains(GameType.Vanguard)) { //add opponent vanguard to player deck
+            CardPool avatarPool = humanStart.getDeck().getOrCreate(DeckSection.Avatar);
+            avatarPool.clear();
+            avatarPool.add(aiStart.getDeck().getOrCreate(DeckSection.Avatar).get(0));
+            humanStart.assignVanguardAvatar();
+            aiStart.assignVanguardAvatar();
+        }
         if (variants.contains(GameType.Planechase)) { //generate planar decks if planechase variant being applied
-            humanStart.setPlanes(generatePlanarPool());
-            aiStart.setPlanes(generatePlanarPool());
+            List<PaperCard> planes = generatePlanarPool();
+            humanStart.setPlanes(planes);
+            aiStart.setPlanes(planes);
         }
 
         String humanPlayerName = commander.getPlayerName();
