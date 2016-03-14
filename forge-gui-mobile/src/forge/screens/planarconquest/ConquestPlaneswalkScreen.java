@@ -1,10 +1,12 @@
 package forge.screens.planarconquest;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;
+import forge.assets.TextRenderer;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
@@ -44,8 +46,8 @@ public class ConquestPlaneswalkScreen extends FScreen {
     protected void doLayout(float startY, float width, float height) {
         planeSelector.setBounds(0, startY, width, height - startY);
 
-        float buttonWidth = width / 2;
-        float buttonHeight = btnPlaneswalk.getFont().getCapHeight() * 2;
+        float buttonWidth = width * 0.6f;
+        float buttonHeight = btnPlaneswalk.getFont().getCapHeight() * 2.5f;
         btnPlaneswalk.setBounds((width - buttonWidth) / 2, height - buttonHeight - PADDING, buttonWidth, buttonHeight);
     }
 
@@ -83,7 +85,17 @@ public class ConquestPlaneswalkScreen extends FScreen {
             else {
                 ConquestPreferences prefs = FModel.getConquestPreferences();
                 unlockCost = prefs.getPrefInt(CQPref.PLANESWALK_FIRST_UNLOCK) + prefs.getPrefInt(CQPref.PLANESWALK_UNLOCK_INCREASE) * (model.getUnlockedPlaneCount() - 1);
-                setText("Unlock {PW}" + unlockCost);
+
+                int emblems = model.getPlaneswalkEmblems();
+                String message = "Unlock {PW}";
+                if (emblems < unlockCost) {
+                    message += TextRenderer.startColor(Color.RED) + emblems + TextRenderer.endColor();
+                }
+                else {
+                    message += emblems;
+                }
+                message += "/" + unlockCost;
+                setText(message);
             }
         }
 
