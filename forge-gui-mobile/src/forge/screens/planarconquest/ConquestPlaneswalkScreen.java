@@ -70,6 +70,7 @@ public class ConquestPlaneswalkScreen extends FScreen {
                     else if (model.spendPlaneswalkEmblems(unlockCost)) {
                         model.unlockPlane(selectedPlane);
                         model.saveData();
+                        updateCaption();
                     }
                 }
             });
