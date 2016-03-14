@@ -2720,8 +2720,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Commander
+        Card cmd = null;
         if (registeredPlayer.getCommander() != null) {
-            Card cmd = Card.fromPaperCard(registeredPlayer.getCommander(), this);
+            cmd = Card.fromPaperCard(registeredPlayer.getCommander(), this);
+        }
+        else if (registeredPlayer.getPlaneswalker() != null) { // Planeswalker
+            cmd = Card.fromPaperCard(registeredPlayer.getPlaneswalker(), this);
+        }
+        if (cmd != null) {
             cmd.setCommander(true);
             com.add(cmd);
             setCommander(cmd);
@@ -2756,7 +2762,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             r = ReplacementHandler.parseReplacement("Event$ Moved | Destination$ Graveyard,Exile,Hand,Library | ValidCard$ Card.IsCommander+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement | Description$ If a commander would be exiled or put into hand, graveyard, or library from anywhere, that player may put it into the command zone instead.", eff, true);
         }
         eff.addReplacementEffect(r);
-        eff.addStaticAbility("Mode$ Continuous | EffectZone$ Command | AddKeyword$ May be played | Affected$ Card.YouOwn+IsCommander | AffectedZone$ Command");
+        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | AddKeyword$ May be played | Affected$ Card.YouOwn+IsCommander | AffectedZone$ Command";
+        if (game.getRules().hasAppliedVariant(GameType.Planeswalker)) { //support paying for Planeswalker with any color mana
+            mayBePlayedAbility += " | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME";
+        }
+        eff.addStaticAbility(mayBePlayedAbility);
         eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | References$ CommanderCostRaise | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | EffectZone$ All | AffectedZone$ Command,Stack");
         return eff;
     }

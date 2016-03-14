@@ -11,6 +11,7 @@ import forge.game.GameView;
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IWinLoseView;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
@@ -65,6 +66,11 @@ public class ConquestChaosBattle extends ConquestBattle {
     @Override
     public String getOpponentName() {
         return duel.getName();
+    }
+
+    @Override
+    public PaperCard getPlaneswalker() {
+        return null;
     }
 
     @Override

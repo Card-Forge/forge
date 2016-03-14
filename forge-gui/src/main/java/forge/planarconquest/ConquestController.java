@@ -84,8 +84,7 @@ public class ConquestController {
     public void startBattle(ConquestBattle battle) {
         if (activeBattle != null) { return; }
 
-        Set<GameType> variants = battle.getVariants();
-
+        final Set<GameType> variants = battle.getVariants();
         final ConquestCommander commander = model.getSelectedCommander(); 
         final RegisteredPlayer humanStart = new RegisteredPlayer(commander.getDeck());
         final RegisteredPlayer aiStart = new RegisteredPlayer(battle.getOpponentDeck());
@@ -102,6 +101,10 @@ public class ConquestController {
             avatarPool.add(aiStart.getDeck().getOrCreate(DeckSection.Avatar).get(0));
             humanStart.assignVanguardAvatar();
             aiStart.assignVanguardAvatar();
+        }
+        if (variants.contains(GameType.Planeswalker)) { //account for Planeswalker format
+            humanStart.setPlaneswalker(model.getPlaneswalker());
+            aiStart.setPlaneswalker(battle.getPlaneswalker());
         }
         if (variants.contains(GameType.Planechase)) { //generate planar decks if planechase variant being applied
             List<PaperCard> planes = generatePlanarPool();
@@ -137,7 +140,7 @@ public class ConquestController {
         FThreads.invokeInEdtNowOrLater(new Runnable(){
             @Override
             public void run() {
-                hostedMatch.startMatch(rules, null, starter, humanStart, gui);
+                hostedMatch.startMatch(rules, variants, starter, humanStart, gui);
             }
         });
         activeBattle = battle;

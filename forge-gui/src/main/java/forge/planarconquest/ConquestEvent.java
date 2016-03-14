@@ -184,6 +184,15 @@ public class ConquestEvent {
         }
 
         @Override
+        public PaperCard getPlaneswalker() {
+            PaperCard avatarCard = ConquestEvent.this.getAvatarCard();
+            if (avatarCard != null && avatarCard.getRules().getType().isPlaneswalker()) {
+                return avatarCard;
+            }
+            return null;
+        }
+
+        @Override
         public void setOpponentAvatar(LobbyPlayer aiPlayer, IGuiGame gui) {
             PaperCard avatarCard = ConquestEvent.this.getAvatarCard();
             if (avatarCard != null) {

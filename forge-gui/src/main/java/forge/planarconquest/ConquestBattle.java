@@ -9,6 +9,7 @@ import forge.game.GameView;
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IWinLoseView;
+import forge.item.PaperCard;
 
 public abstract class ConquestBattle {
     private final ConquestLocation location;
@@ -71,6 +72,7 @@ public abstract class ConquestBattle {
 
     public abstract String getEventName();
     public abstract String getOpponentName();
+    public abstract PaperCard getPlaneswalker();
     public abstract void setOpponentAvatar(LobbyPlayer aiPlayer, IGuiGame gui);
     public abstract Set<GameType> getVariants();
     public abstract int gamesPerMatch();

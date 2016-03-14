@@ -29,7 +29,9 @@ public class RegisteredPlayer {
     private Iterable<PaperCard> conspiracies = null;
     private PaperCard commander = null;
     private PaperCard vanguardAvatar = null;
+    private PaperCard planeswalker = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
+    private boolean randomFoil = false;
     
     public RegisteredPlayer(Deck deck0) {
         originalDeck = deck0;
@@ -136,7 +138,15 @@ public class RegisteredPlayer {
         return this;
     }
 
-    public IPaperCard getVanguardAvatar() {
+    public PaperCard getCommander() {
+        return commander;
+    }
+    public void assignCommander() {
+        CardPool section = currentDeck.get(DeckSection.Commander);
+        commander = section == null ? null : section.get(0);
+    }
+
+    public PaperCard getVanguardAvatar() {
         return vanguardAvatar;
     }
     public void assignVanguardAvatar() {
@@ -151,24 +161,24 @@ public class RegisteredPlayer {
         setStartingHand(getStartingHand() + vanguardAvatar.getRules().getHand());
     }
 
-    public IPaperCard getCommander() {
-        return commander;
+    public PaperCard getPlaneswalker() {
+        return planeswalker;
     }
-    public void assignCommander() {
-        CardPool section = currentDeck.get(DeckSection.Commander);
-        commander = section == null ? null : section.get(0);
+    public void setPlaneswalker(PaperCard planeswalker0) {
+        planeswalker = planeswalker0;
+        if (planeswalker != null) {
+            currentDeck.getMain().remove(planeswalker); //ensure planeswalker removed from main deck
+        }
     }
 
     public void restoreDeck() {
         currentDeck = (Deck) originalDeck.copyTo(originalDeck.getName());
     }
 
-    private boolean randomFoil = false;
-    public void setRandomFoil(boolean useRandomFoil) {
-        this.randomFoil = useRandomFoil;
-    }
-
     public boolean useRandomFoil() {
         return randomFoil;
+    }
+    public void setRandomFoil(boolean useRandomFoil) {
+        randomFoil = useRandomFoil;
     }
 }
