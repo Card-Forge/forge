@@ -2,6 +2,7 @@ package forge.card;
 
 import forge.Graphics;
 import forge.assets.FImage;
+import forge.assets.ImageCache;
 import forge.item.PaperCard;
 
 public class CardAvatarImage implements FImage {
@@ -17,10 +18,7 @@ public class CardAvatarImage implements FImage {
 
     @Override
     public float getWidth() {
-        if (image != null) {
-            return image.getHeight(); //image will be drawn at its height
-        }
-        return 0;
+        return getHeight(); //image will be drawn at its height
     }
 
     @Override
@@ -28,7 +26,7 @@ public class CardAvatarImage implements FImage {
         if (image != null) {
             return image.getHeight();
         }
-        return 0;
+        return ImageCache.defaultImage.getHeight() * CardRenderer.CARD_ART_HEIGHT_PERCENTAGE;
     }
 
     @Override

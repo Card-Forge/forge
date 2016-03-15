@@ -78,6 +78,7 @@ public class CardRenderer {
 
     private static final Map<String, FImageComplex> cardArtCache = new HashMap<String, FImageComplex>();
     public static final float CARD_ART_RATIO = 1.302f;
+    public static final float CARD_ART_HEIGHT_PERCENTAGE = 0.43f;
 
     //extract card art from the given card
     public static FImageComplex getCardArt(IPaperCard pc) {
@@ -129,7 +130,7 @@ public class CardRenderer {
                         x = w * 0.1f;
                         y = h * 0.11f;
                         w -= 2 * x;
-                        h *= 0.43f;
+                        h *= CARD_ART_HEIGHT_PERCENTAGE;
                         float ratioRatio = w / h / CARD_ART_RATIO;
                         if (ratioRatio > 1) { //if too wide, shrink width
                             float dw = w * (ratioRatio - 1);

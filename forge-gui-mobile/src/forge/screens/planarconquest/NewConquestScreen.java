@@ -5,8 +5,7 @@ import com.google.common.collect.Iterables;
 import forge.FThreads;
 import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.FImage;
-import forge.assets.FTextureImage;
-import forge.assets.ImageCache;
+import forge.card.CardImage;
 import forge.card.CardListPreview;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -147,7 +146,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         private void updatePreview() {
             PaperCard card = lstCommanders.getSelectedItem();
             if (card != null) {
-                cardDisplay.setIcon(new FTextureImage(ImageCache.getImage(card)));
+                cardDisplay.setIcon(new CardImage(card));
             }
             else {
                 cardDisplay.setIcon(null);

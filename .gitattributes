@@ -1238,6 +1238,7 @@ forge-gui-mobile/src/forge/assets/ImageLoader.java -text
 forge-gui-mobile/src/forge/assets/TextRenderer.java -text
 forge-gui-mobile/src/forge/card/CardAvatarImage.java -text
 forge-gui-mobile/src/forge/card/CardFaceSymbols.java -text
+forge-gui-mobile/src/forge/card/CardImage.java -text
 forge-gui-mobile/src/forge/card/CardImageRenderer.java -text
 forge-gui-mobile/src/forge/card/CardListPreview.java -text
 forge-gui-mobile/src/forge/card/CardRenderer.java -text
