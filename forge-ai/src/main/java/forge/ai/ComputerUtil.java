@@ -359,7 +359,7 @@ public class ComputerUtil {
             }
             
             // try everything when about to die
-            if ("Reality Smasher".equals(activate.getName()) ||
+            if (activate != null && "Reality Smasher".equals(activate.getName()) ||
                     game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) 
             		&& ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
             	if (!typeList.isEmpty()) {
