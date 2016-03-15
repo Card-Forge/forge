@@ -96,7 +96,6 @@ public class LoadGameMenu extends FPopupMenu {
     }
 
     private LoadGameMenu() {
-        //LoadGameScreen.PlanarConquest.item.setVisible(false);
     }
 
     @Override

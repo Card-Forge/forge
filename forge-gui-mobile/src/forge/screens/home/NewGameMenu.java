@@ -98,7 +98,6 @@ public class NewGameMenu extends FPopupMenu {
     }
 
     private NewGameMenu() {
-        //NewGameScreen.PlanarConquest.item.setVisible(false);
     }
 
     @Override
