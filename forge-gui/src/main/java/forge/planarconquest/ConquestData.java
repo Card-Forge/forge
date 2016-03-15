@@ -113,6 +113,28 @@ public final class ConquestData {
         chaosBattleRecord = chaosBattleRecord0;
     }
 
+    public void saveData() {
+        FileUtil.ensureDirectoryExists(directory);
+
+        try {
+            XmlWriter xml = new XmlWriter(xmlFilename, "data");
+            xml.write("planeswalker", planeswalker);
+            xml.write("aetherShards", aetherShards);
+            xml.write("planeswalkEmblems", planeswalkEmblems);
+            xml.write("currentLocation", currentLocation);
+            xml.write("selectedCommanderIndex", selectedCommanderIndex);
+            xml.write("chaosBattleRecord", chaosBattleRecord);
+            xml.write("unlockedCards", unlockedCards);
+            xml.write("newCards", newCards);
+            xml.write("commanders", commanders);
+            xml.write("planeDataMap", planeDataMap);
+            xml.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -282,27 +304,6 @@ public final class ConquestData {
 
     public ConquestRecord getChaosBattleRecord() {
         return chaosBattleRecord;
-    }
-
-    public void saveData() {
-        FileUtil.ensureDirectoryExists(directory);
-
-        try {
-            XmlWriter xml = new XmlWriter(xmlFilename, "data");
-            xml.write("planeswalker", planeswalker);
-            xml.write("aetherShards", aetherShards);
-            xml.write("currentLocation", currentLocation);
-            xml.write("selectedCommanderIndex", selectedCommanderIndex);
-            xml.write("chaosBattleRecord", chaosBattleRecord);
-            xml.write("unlockedCards", unlockedCards);
-            xml.write("newCards", newCards);
-            xml.write("commanders", commanders);
-            xml.write("planeDataMap", planeDataMap);
-            xml.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void rename(final String newName) {
