@@ -311,26 +311,26 @@ public final class ConquestData {
         directory.renameTo(new File(ForgeConstants.CONQUEST_SAVE_DIR, name));
     }
 
-    public HashSet<PaperCard> getNewCards() {
-        return newCards;
+    public void resetNewCards() {
+        newCards.clear();
     }
 
-    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare =
+    private static final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare =
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return newCards.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+            return FModel.getConquest().getModel().newCards.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
         }
     };
-    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet =
+    private static final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet =
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            return newCards.contains(from.getKey()) ? "NEW" : "";
+            return FModel.getConquest().getModel().newCards.contains(from.getKey()) ? "NEW" : "";
         }
     };
 
-    public Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
+    public static Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
         Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
         ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, fnNewCompare, fnNewGet);
         return colOverrides;

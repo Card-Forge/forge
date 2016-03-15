@@ -57,6 +57,7 @@ public abstract class ConquestBattle {
             view.getBtnQuit().setText("Quit");
             model.addLoss(this);
         }
+        model.resetNewCards(); //reset new cards after finishing a game
         model.saveData();
     }
 

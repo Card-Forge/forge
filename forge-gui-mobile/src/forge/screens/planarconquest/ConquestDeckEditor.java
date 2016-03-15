@@ -10,6 +10,7 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
+import forge.planarconquest.ConquestData;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 
@@ -37,6 +38,6 @@ public class ConquestDeckEditor extends FDeckEditor {
 
     @Override
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
-        return FModel.getConquest().getModel().getColOverrides(config);
+        return ConquestData.getColOverrides(config);
     }
 }

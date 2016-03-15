@@ -22,9 +22,8 @@ public class ConquestCollectionScreen extends FScreen {
     public ConquestCollectionScreen() {
         super("", ConquestMenu.getMenu());
 
-        ConquestData model = FModel.getConquest().getModel();
         ItemManagerConfig config = ItemManagerConfig.CONQUEST_COLLECTION;
-        lstCollection.setup(config, model.getColOverrides(config));
+        lstCollection.setup(config, ConquestData.getColOverrides(config));
     }
 
     @Override
