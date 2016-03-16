@@ -484,7 +484,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final Card source = sa.getHostCard();
         curResolvingCard = source;
         
-        boolean thisHasFizzled = hasFizzled(sa, source, false);
+        boolean thisHasFizzled = hasFizzled(sa, source, null);
         
         if (thisHasFizzled) { // Fizzle
             if (sa.hasParam("Bestow")) {
@@ -626,14 +626,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
-    private final boolean hasFizzled(final SpellAbility sa, final Card source, final boolean parentFizzled) {
+    private final boolean hasFizzled(final SpellAbility sa, final Card source, final Boolean parentFizzled) {
         // Check if the spellability is a trigger that was invalidated with fizzleTriggersOnStackTargeting
         if (sa.getSVar("TriggerFizzled").equals("True")) {
             return true;
         }
 
         // Can't fizzle unless there are some targets
-        boolean fizzle = false;
+        Boolean fizzle = null;
         boolean rememberTgt = sa.getRootAbility().hasParam("RememberOriginalTargets");
 
         TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -643,7 +643,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
             else {
                 // Some targets were chosen, fizzling for this subability is now possible
-                fizzle = true;
+                //fizzle = true;
                 // With multi-targets, as long as one target is still legal,
                 // we'll try to go through as much as possible
                 final TargetChoices choices = sa.getTargets();
@@ -667,15 +667,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     // Remove targets
                     if (invalidTarget) {
                         choices.remove(o);
+                    } else {
+                        fizzle = false;
                     }
-
-                    fizzle &= invalidTarget;
 
                     if (sa.hasParam("CantFizzle")) {
                         // Gilded Drake cannot be countered by rules if the
                         // targeted card is not valid
                         fizzle = false;
                     }
+                }
+                if (fizzle == null) {
+                    fizzle = true;
                 }
             }
         }
@@ -688,12 +691,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sa.getSubAbility() == null) {
-            if (fizzle && rememberTgt) {
+            if (fizzle != null && fizzle && rememberTgt) {
                 source.clearRemembered();
             }
-            return fizzle;
+            return fizzle == null ? false : fizzle.booleanValue();
         }
-        return hasFizzled(sa.getSubAbility(), source, fizzle) && fizzle;
+        return hasFizzled(sa.getSubAbility(), source, fizzle) && (fizzle == null || fizzle.booleanValue());
     }
 
     public final SpellAbilityStackInstance peek() {
