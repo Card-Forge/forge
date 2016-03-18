@@ -714,16 +714,17 @@ public class ConquestMultiverseScreen extends FScreen {
         private class AvatarDisplay extends FDisplayObject {
             private final boolean forOpponent;
             private PaperCard card;
-            private CardAvatarImage image;
+            private FImage image;
 
             private AvatarDisplay(boolean forOpponent0) {
                 forOpponent = forOpponent0;
+                image = FSkinImage.UNKNOWN;
             }
 
             public void setCard(PaperCard card0) {
                 if (card == card0) { return; }
                 card = card0;
-                image = card != null ? new CardAvatarImage(card) : null;
+                image = card != null ? new CardAvatarImage(card) : FSkinImage.UNKNOWN;
             }
 
             @Override

@@ -47,9 +47,11 @@ public class ConquestEvent {
 
     public Deck getDeck() {
         if (deck == null) {
-            File deckFile = new File(deckPath);
-            if (deckFile.exists()) {
-                deck = DeckSerializer.fromFile(deckFile);
+            if (deckPath != null) {
+                File deckFile = new File(deckPath);
+                if (deckFile.exists()) {
+                    deck = DeckSerializer.fromFile(deckFile);
+                }
             }
             if (deck == null || deck.isEmpty()) {
                 //if deck can't be loaded, generate it randomly
@@ -72,7 +74,7 @@ public class ConquestEvent {
     }
 
     public PaperCard getAvatarCard() {
-        if (avatarCard == null) {
+        if (avatarCard == null && avatar != null) {
             //attempt to load card from plane's card pool
             avatarCard = region.getPlane().getCardPool().getCard(avatar);
             if (avatarCard == null) {
@@ -84,6 +86,9 @@ public class ConquestEvent {
     }
 
     public String getOpponentName() {
+        if (avatar == null) {
+            return name;
+        }
         String name = avatar;
         int idx = name.indexOf(',');
         if (idx != -1) { //trim everything after the comma
