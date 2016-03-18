@@ -232,6 +232,14 @@ public class FSkinColor {
         return new Color(r, g, b, 1f);
     }
 
+    public static Color[] tintColors(Color source, Color[] tints, float alpha) {
+        Color[] tintedColors = new Color[tints.length];
+        for (int i = 0; i < tints.length; i++) {
+            tintedColors[i] = tintColor(source, tints[i], alpha);
+        }
+        return tintedColors;
+    }
+
     public static Color fromRGB(int r, int g, int b) {
         return new Color((float)r / 255f, (float)g / 255f, (float)b / 255f, 1f);
     }

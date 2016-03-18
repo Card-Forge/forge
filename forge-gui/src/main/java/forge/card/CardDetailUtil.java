@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Sets;
 
+import forge.card.mana.ManaCostShard;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
@@ -87,68 +88,29 @@ public class CardDetailUtil {
         }
         else {
             final int colorCount = cardColors.countColors();
-            if (colorCount > 2 || (colorCount > 1 && !supportMultiple)) {
+            if (colorCount > 3 || (colorCount > 1 && !supportMultiple)) {
                 borderColors.add(DetailColors.MULTICOLOR);
             }
-            else if (cardColors.hasWhite()) {
-                if (colorCount == 1) {
-                    borderColors.add(DetailColors.WHITE);
+            else { //for 3 colors or fewer, return all colors in shard order
+                for (ManaCostShard shard : cardColors.getOrderedShards()) {
+                    switch (shard.getColorMask()) {
+                    case MagicColor.WHITE:
+                        borderColors.add(DetailColors.WHITE);
+                        break;
+                    case MagicColor.BLUE:
+                        borderColors.add(DetailColors.BLUE);
+                        break;
+                    case MagicColor.BLACK:
+                        borderColors.add(DetailColors.BLACK);
+                        break;
+                    case MagicColor.RED:
+                        borderColors.add(DetailColors.RED);
+                        break;
+                    case MagicColor.GREEN:
+                        borderColors.add(DetailColors.GREEN);
+                        break;
+                    }
                 }
-                else if (cardColors.hasBlue()) {
-                    borderColors.add(DetailColors.WHITE);
-                    borderColors.add(DetailColors.BLUE);
-                }
-                else if (cardColors.hasBlack()) {
-                    borderColors.add(DetailColors.WHITE);
-                    borderColors.add(DetailColors.BLACK);
-                }
-                else if (cardColors.hasRed()) {
-                    borderColors.add(DetailColors.RED);
-                    borderColors.add(DetailColors.WHITE);
-                }
-                else if (cardColors.hasGreen()) {
-                    borderColors.add(DetailColors.GREEN);
-                    borderColors.add(DetailColors.WHITE);
-                }
-            }
-            else if (cardColors.hasBlue()) {
-                if (colorCount == 1) {
-                    borderColors.add(DetailColors.BLUE);
-                }
-                else if (cardColors.hasBlack()) {
-                    borderColors.add(DetailColors.BLUE);
-                    borderColors.add(DetailColors.BLACK);
-                }
-                else if (cardColors.hasRed()) {
-                    borderColors.add(DetailColors.BLUE);
-                    borderColors.add(DetailColors.RED);
-                }
-                else if (cardColors.hasGreen()) {
-                    borderColors.add(DetailColors.GREEN);
-                    borderColors.add(DetailColors.BLUE);
-                }
-            }
-            else if (cardColors.hasBlack()) {
-                if (colorCount == 1) {
-                    borderColors.add(DetailColors.BLACK);
-                }
-                else if (cardColors.hasRed()) {
-                    borderColors.add(DetailColors.BLACK);
-                    borderColors.add(DetailColors.RED);
-                }
-                else if (cardColors.hasGreen()) {
-                    borderColors.add(DetailColors.BLACK);
-                    borderColors.add(DetailColors.GREEN);
-                }
-            }
-            else if (cardColors.hasRed()) { //if we got this far, must be mono-red or red-green
-                borderColors.add(DetailColors.RED);
-                if (cardColors.hasGreen()) {
-                    borderColors.add(DetailColors.GREEN);
-                }
-            }
-            else if (cardColors.hasGreen()) { //if we got this far, must be mono-green
-                borderColors.add(DetailColors.GREEN);
             }
         }
 

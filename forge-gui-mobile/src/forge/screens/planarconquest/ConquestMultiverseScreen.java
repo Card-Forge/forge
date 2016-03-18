@@ -21,6 +21,7 @@ import forge.assets.FSkinTexture;
 import forge.card.CardAvatarImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardFaceSymbols;
+import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.ColorSet;
@@ -343,24 +344,12 @@ public class ConquestMultiverseScreen extends FScreen {
                 //draw background art
                 ConquestRegion region = regions.get(i);
                 FImage art = (FImage)region.getArt();
-                if (art != null) {
+                if (art != null && art != CardImageRenderer.forgeArt) {
                     g.drawImage(art, x, y, w, regionHeight);
                 }
                 else { //draw fallback background color if needed
-                    List<DetailColors> colors = CardDetailUtil.getBorderColors(region.getColorSet());
-                    DetailColors dc = colors.get(0);
-                    Color color1 = FSkinColor.fromRGB(dc.r, dc.g, dc.b);
-                    Color color2 = null;
-                    if (colors.size() > 1) {
-                        dc = colors.get(1);
-                        color2 = FSkinColor.fromRGB(dc.r, dc.g, dc.b);
-                    }
-                    if (color2 == null) {
-                        g.fillRect(color1, x, y, w, regionHeight);
-                    }
-                    else {
-                        g.fillGradientRect(color1, color2, false, x, y, w, regionHeight);
-                    }
+                    List<DetailColors> backColors = CardDetailUtil.getBorderColors(region.getColorSet());
+                    CardImageRenderer.fillColorBackground(g, backColors, x, y, w, regionHeight);
                 }
 
                 //draw event icon and overlay based on event record for each event in the region
