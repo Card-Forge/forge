@@ -6,4 +6,4 @@ Name:Ojutai, Soul of Winter|Deck:Ojutai, Soul of Winter.dck|Variant:Commander|Av
 Name:Shu Yun, the Silent Tempest|Deck:Shu Yun, the Silent Tempest.dck|Variant:Commander|Avatar:Shu Yun, the Silent Tempest|Desc:
 Name:Dragonlord Ojutai|Deck:Dragonlord Ojutai.dck|Variant:Commander|Avatar:Dragonlord Ojutai|Desc:
 Name:Jhoira of the Ghitu|Deck:Jhoira of the Ghitu.dck|Variant:Vanguard|Avatar:Jhoira of the Ghitu|Desc:
-Name:Narset Transcendant|Deck:Narset Transcendant.dck|Variant:Planeswalker|Avatar:Narset Transcendant|Desc:
+Name:Narset Transcendent|Deck:Narset Transcendent.dck|Variant:Planeswalker|Avatar:Narset Transcendent|Desc:
