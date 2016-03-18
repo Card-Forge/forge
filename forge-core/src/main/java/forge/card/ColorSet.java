@@ -402,15 +402,15 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
 
         //three-color
         shardOrderLookup[WHITE | BLUE | BLACK] = new ManaCostShard[] { W, U, B };
-        shardOrderLookup[WHITE | BLACK | RED] = new ManaCostShard[] { W, B, R };
+        shardOrderLookup[WHITE | BLACK | GREEN] = new ManaCostShard[] { W, B, G };
         shardOrderLookup[BLUE | BLACK | RED] = new ManaCostShard[] { U, B, R };
-        shardOrderLookup[BLUE | RED | GREEN] = new ManaCostShard[] { U, R, G };
+        shardOrderLookup[BLUE | RED | WHITE] = new ManaCostShard[] { U, R, W };
         shardOrderLookup[BLACK | RED | GREEN] = new ManaCostShard[] { B, R, G };
-        shardOrderLookup[BLACK | GREEN | WHITE] = new ManaCostShard[] { B, G, W };
+        shardOrderLookup[BLACK | GREEN | BLUE] = new ManaCostShard[] { B, G, U };
         shardOrderLookup[RED | GREEN | WHITE] = new ManaCostShard[] { R, G, W };
-        shardOrderLookup[RED | WHITE | BLUE] = new ManaCostShard[] { R, W, U };
+        shardOrderLookup[RED | WHITE | BLACK] = new ManaCostShard[] { R, W, B };
         shardOrderLookup[GREEN | WHITE | BLUE] = new ManaCostShard[] { G, W, U };
-        shardOrderLookup[GREEN | BLUE | BLACK] = new ManaCostShard[] { G, U, B };
+        shardOrderLookup[GREEN | BLUE | RED] = new ManaCostShard[] { G, U, R };
 
         //four-color
         shardOrderLookup[WHITE | BLUE | BLACK | RED] = new ManaCostShard[] { W, U, B, R };
