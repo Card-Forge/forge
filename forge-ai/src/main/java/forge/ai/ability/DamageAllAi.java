@@ -7,6 +7,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -21,27 +22,63 @@ public class  DamageAllAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        final Random r = MyRandom.getRandom();
-        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
 
-        String validP = "";
-
+        // prevent run-away activations - first time will always return true
+        final Random r = MyRandom.getRandom();
+        if (r.nextFloat() > Math.pow(.9, sa.getActivationsThisTurn())) {
+            return false;
+        }
+        // abCost stuff that should probably be centralized...
+        final Cost abCost = sa.getPayCosts();
+        if (abCost != null) {
+            // AI currently disabled for some costs
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+                return false;
+            }
+        }
+        // wait until stack is empty (prevents duplicate kills)
+        if (!ai.getGame().getStack().isEmpty()) {
+            return false;
+        }
+        
+        int x = -1;
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$Converge")) {
         	dmg = ComputerUtilMana.getConvergeCount(sa, ai);
         }
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(dmg));
+            x = ComputerUtilMana.determineLeftoverMana(sa, ai);
         }
-
-        if (sa.hasParam("ValidPlayers")) {
-            validP = sa.getParam("ValidPlayers");
+        if (damage.equals("ChosenX")) {
+            x = source.getCounters(CounterType.LOYALTY);
         }
+        if (x == -1) {
+            return evaluateDamageAll(ai, sa, source, dmg) > 0;
+        } else {
+            int best = -1, best_x = -1;
+            for (int i = 0; i < x; i++) {
+                final int value = evaluateDamageAll(ai, sa, source, i);
+                if (value > best) {
+                    best = value;
+                    best_x = i;
+                }
+            }
+            if (best_x > 0) {
+                if (sa.getSVar(damage).equals("Count$xPaid")) {
+                    source.setSVar("PayX", Integer.toString(best_x));
+                }
+                if (damage.equals("ChosenX")) {
+                    source.setSVar("ChosenX", "Number$" + best_x);
+                }
+                return true;
+            }
+            return false;
+        }
+    }
 
+    private int evaluateDamageAll(Player ai, SpellAbility sa, final Card source, int dmg) {
         Player opp = ai.getOpponent();
         final CardCollection humanList = getKillableCreatures(sa, opp, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
@@ -53,34 +90,17 @@ public class  DamageAllAi extends SpellAbilityAi {
             computerList.clear();
         }
 
-        // abCost stuff that should probably be centralized...
-        if (abCost != null) {
-            // AI currently disabled for some costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
-                return false;
-            }
-        }
-
+        final String validP = sa.hasParam("ValidPlayers") ? sa.getParam("ValidPlayers") : "";
         // TODO: if damage is dependant on mana paid, maybe have X be human's max life
         // Don't kill yourself
         if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
-            return false;
-        }
-
-        // prevent run-away activations - first time will always return true
-        if (r.nextFloat() > Math.pow(.9, sa.getActivationsThisTurn())) {
-            return false;
+            return -1;
         }
 
         // if we can kill human, do it
         if ((validP.equals("Player") || validP.contains("Opponent"))
                 && (opp.getLife() <= ComputerUtilCombat.predictDamageTo(opp, dmg, source, false))) {
-            return true;
-        }
-
-        // wait until stack is empty (prevents duplicate kills)
-        if (!ai.getGame().getStack().isEmpty()) {
-            return false;
+            return 1;
         }
 
         int minGain = 200; // The minimum gain in destroyed creatures
@@ -95,13 +115,8 @@ public class  DamageAllAi extends SpellAbilityAi {
         	minGain = 126; // prepare for attack
         }
 
-        // evaluate both lists and pass only if human creatures are more valuable
-        if ((ComputerUtilCard.evaluateCreatureList(computerList) + minGain) >= ComputerUtilCard
-                .evaluateCreatureList(humanList)) {
-            return false;
-        }
-
-        return true;
+        return ComputerUtilCard.evaluateCreatureList(humanList) - ComputerUtilCard.evaluateCreatureList(computerList)
+                - minGain;
     }
 
     @Override

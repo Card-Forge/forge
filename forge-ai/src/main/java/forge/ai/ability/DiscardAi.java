@@ -45,6 +45,11 @@ public class DiscardAi extends SpellAbilityAi {
             }
 
         }
+        
+        if ("Chandra, Flamecaller".equals(source.getName())) {
+            final int hand = ai.getCardsIn(ZoneType.Hand).size();
+            return MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand));
+        }
 
         final boolean humanHasHand = ai.getOpponent().getCardsIn(ZoneType.Hand).size() > 0;
 

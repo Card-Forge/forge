@@ -12,6 +12,6 @@ SVar:DBDraw:DB$ Draw | NumCards$ Y | Defined$ You | SubAbility$ DBCleanup | Spel
 SVar:Y:Remembered$Amount.Plus.1
 A:AB$ DamageAll | Cost$ SubCounter<X/LOYALTY> | NumDmg$ ChosenX | References$ X | ValidCards$ Creature | Planeswalker$ True | Ultimate$ True | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals X damage to each creature.
 SVar:X:XChoice 
-SVar:PlayMain1:TRUE
+SVar:PlayMain1:ALWAYS
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_flamecaller.jpg
 Oracle:[+1] Put two 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.\n[0] Discard all the cards in your hand, then draw that many cards plus one.\n[-X] Chandra, Flamecaller deals X damage to each creature.
