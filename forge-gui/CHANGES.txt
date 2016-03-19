@@ -1,4 +1,4 @@
-Forge Beta: 02-23-2016 ver 1.5.49
+Forge Beta: 03-18-2016 ver 1.5.50
 
 
 15398 cards in total.
@@ -8,31 +8,11 @@ Forge Beta: 02-23-2016 ver 1.5.49
 Release Notes
 -------------
 
-- Many bug fixes! There are far too many to list, but most of them came from you reporting them. Thanks!
+- This is a smaller release, but a bunch of work has started for Shadows over Innistrad coming up. Our master scripters are already going crazy getting the spoilers put together. 
 
-- Deck colors now shown in correct order -
-Two, three, and four color decks will now display their color symbols in the correct order
-For example, instead of displaying {W}{G} for a green-white deck, it will display {G}{W}
+- Many bug fixes and AI improvements! Most of them came from you reporting them. Thanks!
 
-- Custom Card Rankings for Cube Drafts -
-Custom booster draft definitions can now specify a custom text file for rankings that is to be used with that particular cube. This allows to specify different priorities for AI picks for each custom cube. See the file "res/draft/MTGO Vintage Cube 2016.draft" for an example of a definition of a draft with custom rankings and see the files "draft/cube_drafting_rankings.txt" and "draft/cube_mtgo_rankings.txt" for examples of custom ranking definitions (these definitions were taken from Bestiaire draft ranking lists - "Cube Drafting" and "Cube MTGO", respectively). If a given card is not listed in the custom rankings file, then the main rankings file (rankings.txt) is scanned as a fallback mechanism.
-
-- Live Card Image Fetcher -
-Forge can now automatically download missing card art while you play. This is disabled by default, so head on over to the Preferences section to try it out! Some hiccups with the Live Fetcher have been resolved, hopefully it's working more robustly this release.
-
-
-- New Quest Opponents. As of the time of this writing, there are 5 new quest opponents.
-
----------
-New cards
----------
-
-Ezuri's Predation
-Grasp of Fate
-Mirror Match
-Mizzix's Mastery
-Synthetic Destiny
-
+- If you haven't checked it out yet, Planar Conquest made it's first appearance on the Android platform. It's looking pretty solid so far. So kudos to all the development work (both coding-wise and to the Plane builders)
 
 ------------
 Known Issues
