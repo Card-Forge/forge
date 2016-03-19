@@ -2,7 +2,7 @@ package forge.planarconquest;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import forge.card.CardRarity;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPreferences.CQPref;
@@ -10,7 +10,6 @@ import forge.util.Aggregates;
 
 public class ConquestAwardPool {
     private final BoosterPool commons, uncommons, rares, mythics;
-    private final int commonValue, uncommonValue, rareValue, mythicValue;
 
     public ConquestAwardPool(Iterable<PaperCard> cards) {
         ConquestPreferences prefs = FModel.getConquestPreferences();
@@ -47,24 +46,24 @@ public class ConquestAwardPool {
         float rareOdds = rares.getOdds(raresPerBooster);
         float mythicOdds = mythics.getOdds((float)raresPerBooster / (float)prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC));
 
-        //determine value of each rarity based on the base value of a common
-        commonValue = prefs.getPrefInt(CQPref.AETHER_BASE_VALUE);
-        uncommonValue = Math.round(commonValue / (uncommonOdds / commonOdds));
-        rareValue = Math.round(commonValue / (rareOdds / commonOdds));
-        mythicValue = mythics.isEmpty() ? 0 : Math.round(commonValue / (mythicOdds / commonOdds));
+        //determine multipliers for each rarity based on ratio of odds
+        commons.multiplier = 1;
+        uncommons.multiplier = commonOdds / uncommonOdds;
+        rares.multiplier = commonOdds / rareOdds;
+        mythics.multiplier = mythics.isEmpty() ? 0 : commonOdds / mythicOdds;
     }
 
-    public int getShardValue(PaperCard card) {
-        switch (card.getRarity()) {
+    public int getShardValue(CardRarity rarity, int baseValue) {
+        switch (rarity) {
         case Common:
-            return commonValue;
+            return baseValue;
         case Uncommon:
-            return uncommonValue;
+            return Math.round(baseValue * uncommons.multiplier);
         case Rare:
         case Special:
-            return rareValue;
+            return Math.round(baseValue * rares.multiplier);
         case MythicRare:
-            return mythicValue;
+            return Math.round(baseValue * mythics.multiplier);
         default:
             return 0;
         }
@@ -85,6 +84,7 @@ public class ConquestAwardPool {
 
     public class BoosterPool {
         private final List<PaperCard> cards = new ArrayList<PaperCard>();
+        private float multiplier;
 
         private BoosterPool() {
         }

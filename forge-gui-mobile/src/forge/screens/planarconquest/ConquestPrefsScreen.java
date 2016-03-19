@@ -52,11 +52,10 @@ public class ConquestPrefsScreen extends FScreen {
         super("Conquest Preferences", ConquestMenu.getMenu());
 
         scroller.add(new PrefsHeader("AEther Shards", FSkinImage.AETHER_SHARD, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption("Base Card Value", CQPref.AETHER_BASE_VALUE, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Markup Percentage", CQPref.AETHER_MARKUP, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Color Filter Markup", CQPref.AETHER_COLOR_FILTER_MARKUP, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("Type Filter Markup", CQPref.AETHER_TYPE_FILTER_MARKUP, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption("CMC Filter Markup", CQPref.AETHER_CMC_FILTER_MARKUP, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption("Base Duplicate Value", CQPref.AETHER_BASE_DUPLICATE_VALUE, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption("Base Exile Value", CQPref.AETHER_BASE_EXILE_VALUE, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption("Base Retrieve Cost", CQPref.AETHER_BASE_RETRIEVE_COST, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption("Base Pull Cost", CQPref.AETHER_BASE_PULL_COST, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Starting Shards", CQPref.AETHER_START_SHARDS, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Chaos Wheel Shard Value", CQPref.AETHER_WHEEL_SHARDS, PrefsGroup.AETHER));
 

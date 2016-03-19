@@ -333,6 +333,10 @@ public class FLabel extends FDisplayObject implements IButton {
             else if (iconInBackground || iconScaleAuto) {
                 iconHeight = h * iconScaleFactor;
                 iconWidth = iconHeight * aspectRatio;
+                if (iconWidth > w && iconInBackground) { //ensure background icon stays with label bounds
+                    iconWidth = w;
+                    iconHeight = iconWidth / aspectRatio;
+                }
             }
 
             float iconOffset = iconWidth + insets.x + getExtraGapBetweenIconAndText();

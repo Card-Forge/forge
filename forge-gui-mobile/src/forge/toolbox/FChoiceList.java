@@ -518,6 +518,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         }
     }
     protected class IHasSkinPropRenderer extends DefaultItemRenderer {
+        private final TextRenderer textRenderer = new TextRenderer(true);
+
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             FSkinProp skinProp = ((IHasSkinProp)value).getSkinProp();
@@ -531,7 +533,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
                 x += dx;
                 w -= dx;
             }
-            super.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
+            textRenderer.drawText(g, value.toString(), font, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
         }
     }
 

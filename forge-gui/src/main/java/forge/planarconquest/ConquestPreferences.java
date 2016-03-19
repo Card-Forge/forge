@@ -29,11 +29,10 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
     public static enum CQPref {
         CURRENT_CONQUEST("DEFAULT"),
 
-        AETHER_BASE_VALUE("100"),
-        AETHER_MARKUP("40"),
-        AETHER_COLOR_FILTER_MARKUP("20"),
-        AETHER_TYPE_FILTER_MARKUP("20"),
-        AETHER_CMC_FILTER_MARKUP("20"),
+        AETHER_BASE_DUPLICATE_VALUE("100"),
+        AETHER_BASE_EXILE_VALUE("75"),
+        AETHER_BASE_RETRIEVE_COST("150"),
+        AETHER_BASE_PULL_COST("200"),
         AETHER_START_SHARDS("3000"),
         AETHER_WHEEL_SHARDS("1000"),
 

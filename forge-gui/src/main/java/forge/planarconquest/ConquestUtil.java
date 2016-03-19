@@ -15,6 +15,7 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType;
 import forge.card.CardType.CoreType;
+import forge.card.mana.ManaCostShard;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
@@ -147,19 +148,39 @@ public class ConquestUtil {
     }
 
     public static enum AEtherFilter implements IHasSkinProp {
-        NONE  (null, null, "(None)"),
+        W (null, new ColorFilter(MagicColor.WHITE), "Playable in {W}"),
+        U (null, new ColorFilter(MagicColor.BLUE), "Playable in {U}"),
+        B (null, new ColorFilter(MagicColor.BLACK), "Playable in {B}"),
+        R (null, new ColorFilter(MagicColor.RED), "Playable in {R}"),
+        G (null, new ColorFilter(MagicColor.GREEN), "Playable in {G}"),
 
-        WHITE     (FSkinProp.IMG_MANA_W, new ColorFilter(MagicColor.WHITE), "White"),
-        BLUE      (FSkinProp.IMG_MANA_U, new ColorFilter(MagicColor.BLUE), "Blue"),
-        BLACK     (FSkinProp.IMG_MANA_B, new ColorFilter(MagicColor.BLACK), "Black"),
-        RED       (FSkinProp.IMG_MANA_R, new ColorFilter(MagicColor.RED), "Red"),
-        GREEN     (FSkinProp.IMG_MANA_G, new ColorFilter(MagicColor.GREEN), "Green"),
-        COLORLESS (FSkinProp.IMG_MANA_COLORLESS, new ColorFilter(MagicColor.COLORLESS), "Colorless"),
+        WU (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE), "Playable in {W}{U}"),
+        WB (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK), "Playable in {W}{B}"),
+        UB (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK), "Playable in {U}{B}"),
+        UR (null, new ColorFilter(MagicColor.BLUE | MagicColor.RED), "Playable in {U}{R}"),
+        BR (null, new ColorFilter(MagicColor.BLACK | MagicColor.RED), "Playable in {B}{R}"),
+        BG (null, new ColorFilter(MagicColor.BLACK | MagicColor.GREEN), "Playable in {B}{G}"),
+        RG (null, new ColorFilter(MagicColor.RED | MagicColor.GREEN), "Playable in {R}{G}"),
+        RW (null, new ColorFilter(MagicColor.RED | MagicColor.WHITE), "Playable in {R}{W}"),
+        GW (null, new ColorFilter(MagicColor.GREEN | MagicColor.WHITE), "Playable in {G}{W}"),
+        GU (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE), "Playable in {G}{U}"),
 
-        CREATURE             (FSkinProp.IMG_CREATURE, new TypeFilter(EnumSet.of(CoreType.Creature)), "Creature"),
-        ARTIFACT_ENCHANTMENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker)), "Artifact, Enchantment, or Planeswalker"),
-        INSTANT_SORCERY      (FSkinProp.IMG_SORCERY, new TypeFilter(EnumSet.of(CoreType.Instant, CoreType.Sorcery)), "Instant or Sorcery"),
-        LAND                 (FSkinProp.IMG_LAND, new TypeFilter(EnumSet.of(CoreType.Land)), "Land"),
+        WUB (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK), "Playable in {W}{U}{B}"),
+        WBG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN), "Playable in {W}{B}{G}"),
+        UBR (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED), "Playable in {U}{B}{R}"),
+        URW (null, new ColorFilter(MagicColor.BLUE | MagicColor.RED | MagicColor.WHITE), "Playable in {U}{R}{W}"),
+        BRG (null, new ColorFilter(MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN), "Playable in {B}{R}{G}"),
+        BGU (null, new ColorFilter(MagicColor.BLACK | MagicColor.GREEN | MagicColor.BLUE), "Playable in {B}{G}{U}"),
+        RGW (null, new ColorFilter(MagicColor.RED | MagicColor.GREEN | MagicColor.WHITE), "Playable in {R}{G}{W}"),
+        RWB (null, new ColorFilter(MagicColor.RED | MagicColor.WHITE | MagicColor.BLACK), "Playable in {R}{W}{B}"),
+        GWU (null, new ColorFilter(MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE), "Playable in {G}{W}{U}"),
+        GUR (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE | MagicColor.RED), "Playable in {G}{U}{R}"),
+
+        WUBRG     (null, new ColorFilter(MagicColor.ALL_COLORS), "Playable in {W}{U}{B}{R}{G}"),
+
+        CREATURE              (FSkinProp.IMG_CREATURE, new TypeFilter(EnumSet.of(CoreType.Creature)), "Creature"),
+        NONCREATURE_PERMANENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker, CoreType.Land)), "Noncreature Permanent"),
+        INSTANT_SORCERY       (FSkinProp.IMG_SORCERY, new TypeFilter(EnumSet.of(CoreType.Instant, CoreType.Sorcery)), "Instant or Sorcery"),
 
         COMMON   (FSkinProp.IMG_PW_BADGE_COMMON, new RarityFilter(CardRarity.Common), "Common"),
         UNCOMMON (FSkinProp.IMG_PW_BADGE_UNCOMMON, new RarityFilter(CardRarity.Uncommon), "Uncommon"),
@@ -186,59 +207,103 @@ public class ConquestUtil {
             return skinProp;
         }
 
+        public ColorSet getColor() {
+            if (predicate instanceof ColorFilter) {
+                return ((ColorFilter)predicate).color;
+            }
+            return null;
+        }
+
+        public EnumSet<CoreType> getTypes() {
+            if (predicate instanceof ColorFilter) {
+                return ((TypeFilter)predicate).types;
+            }
+            return null;
+        }
+
+        public CardRarity getRarity() {
+            if (predicate instanceof RarityFilter) {
+                return ((RarityFilter)predicate).rarity;
+            }
+            return null;
+        }
+
         @Override
         public String toString() {
             return caption;
         }
     }
 
+    public static AEtherFilter getColorFilter(ColorSet color) {
+        String name = "";
+        for (ManaCostShard s : color.getOrderedShards()) {
+            name += s.toString();
+        }
+        name = name.replaceAll("[{}]", ""); //remove all brackets
+        try {
+            return AEtherFilter.valueOf(name);
+        }
+        catch (Exception e) {
+            System.err.println("No color filter with name " + name);
+            return AEtherFilter.WUBRG; //return 5-color filter as fallback
+        }
+    }
+
     public static final AEtherFilter[] COLOR_FILTERS = new AEtherFilter[] {
-        AEtherFilter.NONE,
-        AEtherFilter.WHITE,
-        AEtherFilter.BLUE,
-        AEtherFilter.BLACK,
-        AEtherFilter.RED,
-        AEtherFilter.GREEN,
-        AEtherFilter.COLORLESS };
+        AEtherFilter.W,
+        AEtherFilter.U,
+        AEtherFilter.B,
+        AEtherFilter.R,
+        AEtherFilter.G,
+        AEtherFilter.WU,
+        AEtherFilter.WB,
+        AEtherFilter.UB,
+        AEtherFilter.UR,
+        AEtherFilter.BR,
+        AEtherFilter.BG,
+        AEtherFilter.RG,
+        AEtherFilter.RW,
+        AEtherFilter.GW,
+        AEtherFilter.GU,
+        AEtherFilter.WUB,
+        AEtherFilter.WBG,
+        AEtherFilter.UBR,
+        AEtherFilter.URW,
+        AEtherFilter.BRG,
+        AEtherFilter.BGU,
+        AEtherFilter.RGW,
+        AEtherFilter.RWB,
+        AEtherFilter.GWU,
+        AEtherFilter.GUR,
+        AEtherFilter.WUBRG };
 
     public static final AEtherFilter[] TYPE_FILTERS = new AEtherFilter[] {
-        AEtherFilter.NONE,
         AEtherFilter.CREATURE,
-        AEtherFilter.ARTIFACT_ENCHANTMENT,
-        AEtherFilter.INSTANT_SORCERY,
-        AEtherFilter.LAND };
+        AEtherFilter.NONCREATURE_PERMANENT,
+        AEtherFilter.INSTANT_SORCERY };
 
     public static final AEtherFilter[] RARITY_FILTERS = new AEtherFilter[] {
-        AEtherFilter.NONE,
         AEtherFilter.COMMON,
         AEtherFilter.UNCOMMON,
         AEtherFilter.RARE,
         AEtherFilter.MYTHIC };
 
     public static final AEtherFilter[] CMC_FILTERS = new AEtherFilter[] {
-        AEtherFilter.NONE,
         AEtherFilter.CMC_LOW,
         AEtherFilter.CMC_LOW_MID,
         AEtherFilter.CMC_MID_HIGH,
         AEtherFilter.CMC_HIGH };
 
     private static class ColorFilter implements Predicate<PaperCard> {
-        private final byte color;
+        private final ColorSet color;
 
-        private ColorFilter(byte color0) {
-            color = color0;
+        private ColorFilter(int colorMask0) {
+            color = ColorSet.fromMask(colorMask0);
         }
 
         @Override
         public boolean apply(PaperCard card) {
-            //use color identity for lands and color for other cards
-            CardRules cardRules = card.getRules();
-            ColorSet cardColor = cardRules.getType().isLand() ? cardRules.getColorIdentity() : cardRules.getColor();
-
-            if (color == MagicColor.COLORLESS) {
-                return cardColor.isColorless();
-            }
-            return cardColor.hasAllColors(color);
+            return card.getRules().getColorIdentity().hasNoColorsExcept(color);
         }
     }
 

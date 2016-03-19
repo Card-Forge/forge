@@ -41,7 +41,6 @@ import forge.item.PaperCard;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPreferences.CQPref;
-import forge.planarconquest.ConquestUtil.AEtherFilter;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgeConstants;
@@ -221,13 +220,14 @@ public class ConquestController {
         //also build list of all rewards including replacement shards for each duplicate card
         //build this list in reverse order so commons appear first
         int shards = 0;
+        int baseDuplicateValue = prefs.getPrefInt(CQPref.AETHER_BASE_DUPLICATE_VALUE);
         final List<ConquestReward> allRewards = new ArrayList<ConquestReward>();
         for (int i = rewards.size() - 1; i >= 0; i--) {
             int replacementShards = 0;
             PaperCard card = rewards.get(i);
             if (model.hasUnlockedCard(card)) {
                 rewards.remove(i);
-                replacementShards = pool.getShardValue(card);
+                replacementShards = pool.getShardValue(card.getRarity(), baseDuplicateValue);
                 shards += replacementShards;
             }
             allRewards.add(new ConquestReward(card, replacementShards));
@@ -236,34 +236,5 @@ public class ConquestController {
         model.unlockCards(rewards);
         model.rewardAEtherShards(shards);
         return allRewards;
-    }
-
-    public int calculateShardCost(Set<PaperCard> filteredCards, int unfilteredCount, AEtherFilter colorFilter, AEtherFilter typeFilter, AEtherFilter cmcFilter) {
-        if (filteredCards.isEmpty()) { return 0; }
-
-        ConquestAwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
-
-        //determine average value of filtered cards
-        int totalValue = 0;
-        for (PaperCard card : filteredCards) {
-            totalValue += pool.getShardValue(card);
-        }
-
-        ConquestPreferences prefs = FModel.getConquestPreferences();
-        float averageValue = totalValue / filteredCards.size();
-        float multiplier = 1f + (float)prefs.getPrefInt(CQPref.AETHER_MARKUP) / 100f;
-
-        //increase multipliers based on applied filters
-        if (colorFilter != AEtherFilter.NONE) {
-            multiplier += (float)prefs.getPrefInt(CQPref.AETHER_COLOR_FILTER_MARKUP) / 100f;
-        }
-        if (typeFilter != AEtherFilter.NONE) {
-            multiplier += (float)prefs.getPrefInt(CQPref.AETHER_TYPE_FILTER_MARKUP) / 100f;
-        }
-        if (cmcFilter != AEtherFilter.NONE) {
-            multiplier += (float)prefs.getPrefInt(CQPref.AETHER_CMC_FILTER_MARKUP) / 100f;
-        }
-
-        return Math.round(averageValue * multiplier);
     }
 }

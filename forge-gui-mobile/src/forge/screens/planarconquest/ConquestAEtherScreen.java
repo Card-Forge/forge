@@ -16,15 +16,21 @@ import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinProp;
 import forge.assets.FSkinTexture;
 import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
+import forge.card.ColorSet;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.ColorSetImage;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.planarconquest.ConquestAwardPool;
+import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
+import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.planarconquest.ConquestUtil;
 import forge.planarconquest.ConquestUtil.AEtherFilter;
 import forge.screens.FScreen;
@@ -59,6 +65,7 @@ public class ConquestAEtherScreen extends FScreen {
 
     private PullAnimation activePullAnimation;
     private int shardCost;
+    private ConquestCommander commander;
 
     public ConquestAEtherScreen() {
         super("", ConquestMenu.getMenu());
@@ -71,6 +78,12 @@ public class ConquestAEtherScreen extends FScreen {
 
         setHeaderCaption(model.getName());
 
+        ConquestCommander commander0 = model.getSelectedCommander();
+        if (commander != commander0) {
+            commander = commander0;
+            resetFilters(); //reset filters if commander changed since the last time this screen was opened
+        }
+
         pool.clear();
         for (PaperCard card : plane.getCardPool().getAllCards()) {
             if (!model.hasUnlockedCard(card)) {
@@ -79,6 +92,13 @@ public class ConquestAEtherScreen extends FScreen {
         }
         updateFilteredPool();
         updateAvailableShards();
+    }
+
+    private void resetFilters() {
+        btnColorFilter.setSelectedOption(ConquestUtil.getColorFilter(commander.getCard().getRules().getColorIdentity()));
+        btnTypeFilter.setSelectedOption(AEtherFilter.CREATURE);
+        btnRarityFilter.setSelectedOption(AEtherFilter.COMMON);
+        btnCMCFilter.setSelectedOption(AEtherFilter.CMC_LOW_MID);
     }
 
     private void updateFilteredPool() {
@@ -102,8 +122,13 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private void updateShardCost() {
-        shardCost = FModel.getConquest().calculateShardCost(filteredPool, pool.size(),
-                btnColorFilter.selectedOption, btnTypeFilter.selectedOption, btnCMCFilter.selectedOption);
+        ConquestAwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
+        if (filteredPool.isEmpty()) {
+            shardCost = 0;
+        }
+        else {
+            shardCost = pool.getShardValue(btnRarityFilter.selectedOption.getRarity(), FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_BASE_PULL_COST));
+        }
         display.updateMessage();
     }
 
@@ -306,24 +331,27 @@ public class ConquestAEtherScreen extends FScreen {
             if (selectedOption == selectedOption0) { return; }
             selectedOption = selectedOption0;
 
-            if (selectedOption == AEtherFilter.NONE) {
-                setIcon(null);
-                setText("Filter\n" + caption);
+            FSkinProp skinProp = selectedOption.skinProp;
+            if (skinProp != null) {
+                setIcon(FSkin.getImages().get(skinProp));
             }
             else {
-                setIcon(FSkin.getImages().get(selectedOption.skinProp));
-                setText("");
+                ColorSet color = selectedOption.getColor();
+                if (color != null) {
+                    setIcon(new ColorSetImage(color));
+                }
+                else {
+                    System.out.println("No icon for filter " + selectedOption.name());
+                    setIcon(null);
+                }
             }
         }
 
         private Predicate<PaperCard> buildFilterPredicate(Predicate<PaperCard> predicate) {
-            if (selectedOption != AEtherFilter.NONE) {
-                if (predicate == null) {
-                    return selectedOption.predicate;
-                }
-                return Predicates.and(predicate, selectedOption.predicate);
+            if (predicate == null) {
+                return selectedOption.predicate;
             }
-            return predicate;
+            return Predicates.and(predicate, selectedOption.predicate);
         }
 
         @Override
