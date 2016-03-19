@@ -86,7 +86,7 @@ public class ConquestAEtherScreen extends FScreen {
 
         pool.clear();
         for (PaperCard card : plane.getCardPool().getAllCards()) {
-            if (!model.hasUnlockedCard(card)) {
+            if (!model.hasUnlockedCard(card) && !card.getRules().getType().isBasicLand()) { //don't allow pulling basic lands
                 pool.add(card);
             }
         }
