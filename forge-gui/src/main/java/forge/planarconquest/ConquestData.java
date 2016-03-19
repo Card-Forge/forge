@@ -155,6 +155,17 @@ public final class ConquestData {
         return planeswalkerToken;
     }
 
+    public Iterable<PaperCard> getSortedPlaneswalkers() {
+        List<PaperCard> planeswalkers = new ArrayList<PaperCard>();
+        for (PaperCard card : unlockedCards) {
+            if (card.getRules().getType().isPlaneswalker()) {
+                planeswalkers.add(card);
+            }
+        }
+        Collections.sort(planeswalkers);
+        return planeswalkers;
+    }
+
     public ConquestPlane getCurrentPlane() {
         return currentLocation.getPlane();
     }

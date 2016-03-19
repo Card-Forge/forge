@@ -122,7 +122,7 @@ public class ConquestCommandersScreen extends FScreen {
         canCloseCallback.run(true);
     }
 
-    public void refreshCommanders() {
+    private void refreshCommanders() {
         ConquestData model = FModel.getConquest().getModel();
         lstCommanders.setPool(model.getCommanders());
         lstCommanders.setup(ItemManagerConfig.CONQUEST_COMMANDERS);

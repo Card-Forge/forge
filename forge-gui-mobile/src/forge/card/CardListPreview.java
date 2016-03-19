@@ -8,6 +8,8 @@ import forge.toolbox.FChoiceList;
 import forge.toolbox.FLabel;
 
 public class CardListPreview extends FLabel {
+    public static final float CARD_PREVIEW_RATIO = 0.5f;
+
     private final FChoiceList<PaperCard> list;
 
     public CardListPreview(FChoiceList<PaperCard> list0) {

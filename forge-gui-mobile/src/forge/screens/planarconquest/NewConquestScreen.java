@@ -23,7 +23,6 @@ import forge.util.ThreadUtil;
 
 public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenModel> {
     private static final float PADDING = FOptionPane.PADDING;
-    private static final float CARD_PREVIEW_RATIO = 0.5f;
 
     @SuppressWarnings("unchecked")
     public NewConquestScreen() {
@@ -131,7 +130,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
             float x = PADDING;
             float y = PADDING;
             float w = width - 2 * PADDING;
-            cardDisplay.setBounds(x, y, w, height * CARD_PREVIEW_RATIO);
+            cardDisplay.setBounds(x, y, w, height * CardListPreview.CARD_PREVIEW_RATIO);
             y += cardDisplay.getHeight() + PADDING;
             lstCommanders.setBounds(x, y, w, height - y - PADDING);
         }
@@ -190,7 +189,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
             float x = PADDING;
             float y = PADDING;
             float w = width - 2 * PADDING;
-            tokenDisplay.setBounds(x, y, w, height * CARD_PREVIEW_RATIO);
+            tokenDisplay.setBounds(x, y, w, height * CardListPreview.CARD_PREVIEW_RATIO);
             y += tokenDisplay.getHeight() + PADDING;
             lstPlaneswalkers.setBounds(x, y, w, height - y - PADDING);
         }

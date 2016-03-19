@@ -25,6 +25,7 @@ public class ConquestMenu extends FPopupMenu {
     private static final ConquestMultiverseScreen multiverseScreen = new ConquestMultiverseScreen();
     private static final ConquestAEtherScreen aetherScreen = new ConquestAEtherScreen();
     private static final ConquestCommandersScreen commandersScreen = new ConquestCommandersScreen();
+    private static final ConquestPlaneswalkersScreen planeswalkersScreen = new ConquestPlaneswalkersScreen();
     private static final ConquestCollectionScreen collectionScreen = new ConquestCollectionScreen();
     private static final ConquestPlaneswalkScreen planeswalkScreen = new ConquestPlaneswalkScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
@@ -45,6 +46,12 @@ public class ConquestMenu extends FPopupMenu {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(commandersScreen);
+        }
+    });
+    private static final FMenuItem planeswalkersItem = new FMenuItem("Planeswalkers", FSkinImage.PLANESWALKER, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(planeswalkersScreen);
         }
     });
     private static final FMenuItem collectionItem = new FMenuItem("Collection", FSkinImage.SPELLBOOK, new FEventHandler() {
@@ -125,6 +132,7 @@ public class ConquestMenu extends FPopupMenu {
         addItem(multiverseItem); multiverseItem.setSelected(currentScreen == multiverseScreen);
         addItem(aetherItem); aetherItem.setSelected(currentScreen == aetherScreen);
         addItem(commandersItem); commandersItem.setSelected(currentScreen == commandersScreen);
+        addItem(planeswalkersItem); planeswalkersItem.setSelected(currentScreen == planeswalkersScreen);
         addItem(collectionItem); collectionItem.setSelected(currentScreen == collectionScreen);
         addItem(planeswalkItem); planeswalkItem.setSelected(currentScreen == planeswalkScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
