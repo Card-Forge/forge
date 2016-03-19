@@ -48,7 +48,7 @@ public class FDeckViewer extends FScreen {
                     break;
                 case Commander:
                     captionPrefix = "Commander";
-                    icon = FSkinImage.PLANESWALKER;
+                    icon = FSkinImage.COMMANDER;
                     break;
                 case Avatar:
                     captionPrefix = "Avatar";

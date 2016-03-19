@@ -237,6 +237,7 @@ public enum FSkinProp {
     IMG_PLANESWALKER    (new int[] {200, 720, 40, 40}, PropType.IMAGE),
     IMG_PACK            (new int[] {80, 760, 40, 40}, PropType.IMAGE),
     IMG_SORCERY         (new int[] {160, 720, 40, 40}, PropType.IMAGE),
+    IMG_COMMANDER       (new int[] {120, 760, 40, 40}, PropType.IMAGE),
 
     //achievement trophies and shelf
     IMG_COMMON_TROPHY     (new int[] {0, 0, 135, 185}, PropType.TROPHY),

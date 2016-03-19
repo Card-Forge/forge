@@ -42,7 +42,7 @@ public class ConquestMenu extends FPopupMenu {
             Forge.openScreen(aetherScreen);
         }
     });
-    private static final FMenuItem commandersItem = new FMenuItem("Commanders", FSkinImage.PLANESWALKER, new FEventHandler() {
+    private static final FMenuItem commandersItem = new FMenuItem("Commanders", FSkinImage.COMMANDER, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(commandersScreen);

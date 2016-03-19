@@ -1084,7 +1084,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Commander:
                 captionPrefix = "Commander";
                 cardManager.setCaption("Commander");
-                icon = FSkinImage.PLANESWALKER;
+                icon = FSkinImage.COMMANDER;
                 break;
             case Avatar:
                 captionPrefix = "Avatar";
