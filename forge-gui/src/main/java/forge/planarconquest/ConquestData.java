@@ -254,6 +254,24 @@ public final class ConquestData {
     }
 
     public boolean exileCard(PaperCard card, int value) {
+        if (planeswalker == card) {
+            SOptionPane.showMessageDialog("Current planeswalker cannot be exiled.", "Exile Card", SOptionPane.INFORMATION_ICON);
+            return false;
+        }
+        String commandersUsingCard = "";
+        for (ConquestCommander commander : commanders) {
+            if (commander.getCard() == card && !commander.getDeck().getMain().isEmpty()) {
+                SOptionPane.showMessageDialog("Cannot exile a commander with a defined deck.", "Exile Card", SOptionPane.INFORMATION_ICON);
+                return false;
+            }
+            if (commander.getDeck().getMain().contains(card)) {
+                commandersUsingCard += "\n" + commander.getName();
+            }
+        }
+        if (!commandersUsingCard.isEmpty()) {
+            SOptionPane.showMessageDialog("Card is in use by the following commanders and cannot be exiled:\n" + commandersUsingCard, "Exile Card", SOptionPane.INFORMATION_ICON);
+            return false;
+        }
         if (SOptionPane.showConfirmDialog("Exile the following card to receive {AE}" + value + "?\n\n" + card.getName(), "Exile Card", "OK", "Cancel")) {
             if (exiledCards.add(card)) {
                 rewardAEtherShards(value);
