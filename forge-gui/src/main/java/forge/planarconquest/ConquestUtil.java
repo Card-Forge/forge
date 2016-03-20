@@ -105,8 +105,14 @@ public class ConquestUtil {
 
     public static CardPool getAvailablePool(Deck deck) {
         HashSet<PaperCard> availableCards = new HashSet<PaperCard>();
-        for (PaperCard pc : FModel.getConquest().getModel().getUnlockedCards()) {
+        ConquestData model = FModel.getConquest().getModel();
+        for (PaperCard pc : model.getUnlockedCards()) {
             availableCards.add(pc);
+        }
+
+        //remove all exiled cards
+        for (PaperCard pc : model.getExiledCards()) {
+            availableCards.remove(pc);
         }
 
         //remove all cards in main deck

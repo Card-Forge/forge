@@ -253,6 +253,10 @@ public final class ConquestData {
         return exiledCards.contains(card);
     }
 
+    public Iterable<PaperCard> getExiledCards() {
+        return exiledCards;
+    }
+
     public boolean exileCard(PaperCard card, int value) {
         if (planeswalker == card) {
             SOptionPane.showMessageDialog("Current planeswalker cannot be exiled.", "Exile Card", SOptionPane.INFORMATION_ICON);
