@@ -162,7 +162,7 @@ public final class ConquestData {
     public Iterable<PaperCard> getSortedPlaneswalkers() {
         List<PaperCard> planeswalkers = new ArrayList<PaperCard>();
         for (PaperCard card : unlockedCards) {
-            if (card.getRules().getType().isPlaneswalker()) {
+            if (card.getRules().getType().isPlaneswalker() && !isInExile(card)) {
                 planeswalkers.add(card);
             }
         }
@@ -263,10 +263,14 @@ public final class ConquestData {
             return false;
         }
         String commandersUsingCard = "";
+        ConquestCommander commanderBeingExiled = null;
         for (ConquestCommander commander : commanders) {
-            if (commander.getCard() == card && !commander.getDeck().getMain().isEmpty()) {
-                SOptionPane.showMessageDialog("Cannot exile a commander with a defined deck.", "Exile Card", SOptionPane.INFORMATION_ICON);
-                return false;
+            if (commander.getCard() == card) {
+                if (!commander.getDeck().getMain().isEmpty()) {
+                    SOptionPane.showMessageDialog("Cannot exile a commander with a defined deck.", "Exile Card", SOptionPane.INFORMATION_ICON);
+                    return false;
+                }
+                commanderBeingExiled = commander; //cache commander to make it easier to remove later
             }
             if (commander.getDeck().getMain().contains(card)) {
                 commandersUsingCard += "\n" + commander.getName();
@@ -278,6 +282,9 @@ public final class ConquestData {
         }
         if (SOptionPane.showConfirmDialog("Exile the following card to receive {AE}" + value + "?\n\n" + card.getName(), "Exile Card", "OK", "Cancel")) {
             if (exiledCards.add(card)) {
+                if (commanderBeingExiled != null) {
+                    commanders.remove(commanderBeingExiled);
+                }
                 rewardAEtherShards(value);
                 saveData();
                 return true;
@@ -289,7 +296,11 @@ public final class ConquestData {
     public boolean retrieveCardFromExile(PaperCard card, int cost) {
         if (SOptionPane.showConfirmDialog("Spend {AE}" + cost + " to retrieve the following card from exile?\n\n" + card.getName(), "Retrieve Card", "OK", "Cancel")) {
             if (exiledCards.remove(card)) {
+                if (card.getRules().canBeCommander()) { //add back commander for card if needed
+                    commanders.add(new ConquestCommander(card));
+                }
                 spendAEtherShards(cost);
+                saveData();
                 return true;
             }
         }
