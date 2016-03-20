@@ -220,14 +220,13 @@ public class ConquestController {
         //also build list of all rewards including replacement shards for each duplicate card
         //build this list in reverse order so commons appear first
         int shards = 0;
-        int baseDuplicateValue = prefs.getPrefInt(CQPref.AETHER_BASE_DUPLICATE_VALUE);
         final List<ConquestReward> allRewards = new ArrayList<ConquestReward>();
         for (int i = rewards.size() - 1; i >= 0; i--) {
             int replacementShards = 0;
             PaperCard card = rewards.get(i);
             if (model.hasUnlockedCard(card)) {
                 rewards.remove(i);
-                replacementShards = pool.getShardValue(card.getRarity(), baseDuplicateValue);
+                replacementShards = ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_DUPLICATE_VALUE);
                 shards += replacementShards;
             }
             allRewards.add(new ConquestReward(card, replacementShards));

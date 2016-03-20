@@ -28,7 +28,6 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.ColorSetImage;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.planarconquest.ConquestAwardPool;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestData;
 import forge.planarconquest.ConquestPlane;
@@ -124,12 +123,11 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private void updateShardCost() {
-        ConquestAwardPool pool = FModel.getConquest().getModel().getCurrentPlane().getAwardPool();
         if (filteredPool.isEmpty()) {
             shardCost = 0;
         }
         else {
-            shardCost = pool.getShardValue(btnRarityFilter.selectedOption.getRarity(0), FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_BASE_PULL_COST));
+            shardCost = ConquestUtil.getShardValue(btnRarityFilter.selectedOption.getRarity(), CQPref.AETHER_BASE_PULL_COST);
         }
         display.updateMessage();
     }
@@ -143,7 +141,7 @@ public class ConquestAEtherScreen extends FScreen {
         //determine final pool to pull from based on rarity odds
         Iterable<PaperCard> rewardPool;
         boolean lowerRarity = true;
-        CardRarity minRarity = btnRarityFilter.selectedOption.getRarity(0);
+        CardRarity minRarity = btnRarityFilter.selectedOption.getRarity();
         CardRarity rarity = btnRarityFilter.selectedOption.getRarity(Math.random());
         while (true) {
             final CardRarity allowedRarity = rarity;

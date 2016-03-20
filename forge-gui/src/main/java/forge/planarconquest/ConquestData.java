@@ -31,6 +31,7 @@ import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
+import forge.util.gui.SOptionPane;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -61,6 +62,7 @@ public final class ConquestData {
     private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
     private final List<ConquestCommander> commanders = new ArrayList<ConquestCommander>();
     private final HashSet<PaperCard> newCards = new HashSet<PaperCard>();
+    private final HashSet<PaperCard> exiledCards = new HashSet<PaperCard>();
 
     public ConquestData(String name0, ConquestPlane startingPlane0, PaperCard startingPlaneswalker0, PaperCard startingCommander0) {
         name = name0;
@@ -101,6 +103,7 @@ public final class ConquestData {
             chaosBattleRecord0 = xml.read("chaosBattleRecord", ConquestRecord.class);
             xml.read("unlockedCards", unlockedCards, cardDb);
             xml.read("newCards", newCards, cardDb);
+            xml.read("exiledCards", exiledCards, cardDb);
             xml.read("commanders", commanders, ConquestCommander.class);
             xml.read("planeDataMap", planeDataMap, ConquestPlaneData.class);
         }
@@ -126,6 +129,7 @@ public final class ConquestData {
             xml.write("chaosBattleRecord", chaosBattleRecord);
             xml.write("unlockedCards", unlockedCards);
             xml.write("newCards", newCards);
+            xml.write("exiledCards", exiledCards);
             xml.write("commanders", commanders);
             xml.write("planeDataMap", planeDataMap);
             xml.close();
@@ -243,6 +247,31 @@ public final class ConquestData {
         for (PaperCard card : cards) {
             unlockCard(card);
         }
+    }
+
+    public boolean isInExile(PaperCard card) {
+        return exiledCards.contains(card);
+    }
+
+    public boolean exileCard(PaperCard card, int value) {
+        if (SOptionPane.showConfirmDialog("Exile the following card to receive {AE}" + value + "?\n\n" + card.getName(), "Exile Card", "OK", "Cancel")) {
+            if (exiledCards.add(card)) {
+                rewardAEtherShards(value);
+                saveData();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean retrieveCardFromExile(PaperCard card, int cost) {
+        if (SOptionPane.showConfirmDialog("Spend {AE}" + cost + " to retrieve the following card from exile?\n\n" + card.getName(), "Retrieve Card", "OK", "Cancel")) {
+            if (exiledCards.remove(card)) {
+                spendAEtherShards(cost);
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getUnlockedCount() {

@@ -149,6 +149,27 @@ public class ConquestUtil {
         });
     }
 
+    public static int getShardValue(PaperCard card, CQPref baseValuePref) {
+        return getShardValue(card.getRarity(), baseValuePref);
+    }
+    public static int getShardValue(CardRarity rarity, CQPref baseValuePref) {
+        ConquestPreferences prefs = FModel.getConquestPreferences();
+        int baseValue = prefs.getPrefInt(baseValuePref);
+        switch (rarity) {
+        case Common:
+            return baseValue;
+        case Uncommon:
+            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_UNCOMMON_MULTIPLIER));
+        case Rare:
+        case Special:
+            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_RARE_MULTIPLIER));
+        case MythicRare:
+            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_MYTHIC_MULTIPLIER));
+        default:
+            return 0;
+        }
+    }
+
     public static enum AEtherFilter implements IHasSkinProp {
         W (null, new ColorFilter(MagicColor.WHITE), "Playable in {W}"),
         U (null, new ColorFilter(MagicColor.BLUE), "Playable in {U}"),
@@ -220,6 +241,9 @@ public class ConquestUtil {
             return null;
         }
 
+        public CardRarity getRarity() {
+            return getRarity(0);
+        }
         public CardRarity getRarity(double randomSeed) {
             if (predicate instanceof RarityFilter) {
                 float total = 0;

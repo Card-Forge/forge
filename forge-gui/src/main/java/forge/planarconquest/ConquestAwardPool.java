@@ -2,10 +2,7 @@ package forge.planarconquest;
 
 import java.util.ArrayList;
 import java.util.List;
-import forge.card.CardRarity;
 import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.util.Aggregates;
 
 public class ConquestAwardPool {
@@ -35,23 +32,6 @@ public class ConquestAwardPool {
             default:
                 break;
             }
-        }
-    }
-
-    public int getShardValue(CardRarity rarity, int baseValue) {
-        ConquestPreferences prefs = FModel.getConquestPreferences();
-        switch (rarity) {
-        case Common:
-            return baseValue;
-        case Uncommon:
-            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_UNCOMMON_MULTIPLIER));
-        case Rare:
-        case Special:
-            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_RARE_MULTIPLIER));
-        case MythicRare:
-            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_MYTHIC_MULTIPLIER));
-        default:
-            return 0;
         }
     }
 
