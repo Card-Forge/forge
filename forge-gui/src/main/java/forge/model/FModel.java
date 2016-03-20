@@ -37,6 +37,7 @@ import forge.limited.GauntletMini;
 import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPreferences;
+import forge.planarconquest.ConquestUtil;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -178,6 +179,7 @@ public final class FModel {
         CardPreferences.load();
         DeckPreferences.load();
         ItemManagerConfig.load();
+        ConquestUtil.updateRarityFilterOdds();
 
         achievements = new HashMap<>();
         achievements.put(GameType.Constructed, new ConstructedAchievements());

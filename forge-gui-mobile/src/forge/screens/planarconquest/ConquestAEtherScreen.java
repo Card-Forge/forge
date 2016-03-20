@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
@@ -19,6 +20,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinProp;
 import forge.assets.FSkinTexture;
 import forge.assets.TextRenderer;
+import forge.card.CardRarity;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.ColorSet;
@@ -127,7 +129,7 @@ public class ConquestAEtherScreen extends FScreen {
             shardCost = 0;
         }
         else {
-            shardCost = pool.getShardValue(btnRarityFilter.selectedOption.getRarity(), FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_BASE_PULL_COST));
+            shardCost = pool.getShardValue(btnRarityFilter.selectedOption.getRarity(0), FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_BASE_PULL_COST));
         }
         display.updateMessage();
     }
@@ -138,7 +140,50 @@ public class ConquestAEtherScreen extends FScreen {
         ConquestData model = FModel.getConquest().getModel();
         if (model.getAEtherShards() < shardCost) { return; }
 
-        PaperCard card = Aggregates.random(filteredPool);
+        //determine final pool to pull from based on rarity odds
+        Iterable<PaperCard> rewardPool;
+        boolean lowerRarity = true;
+        CardRarity minRarity = btnRarityFilter.selectedOption.getRarity(0);
+        CardRarity rarity = btnRarityFilter.selectedOption.getRarity(Math.random());
+        while (true) {
+            final CardRarity allowedRarity = rarity;
+            rewardPool = Iterables.filter(filteredPool, new Predicate<PaperCard>() {
+                @Override
+                public boolean apply(PaperCard card) {
+                    if (allowedRarity == card.getRarity()) { return true; }
+                    if (allowedRarity == CardRarity.Rare && card.getRarity() == CardRarity.Special) { return true; }
+                    return false;
+                }
+            });
+            if (Iterables.isEmpty(rewardPool)) { //if pool is empty, must reduce rarity and try again
+                if (rarity == minRarity) {
+                    if (lowerRarity) { lowerRarity = false; } //switch to increasing rarity if min rarity empty
+                    else { break; } //shouldn't happen, but prevent infinite loop
+                }
+                switch (rarity) {
+                case MythicRare:
+                    rarity = lowerRarity ? CardRarity.Rare : CardRarity.Common;
+                    continue;
+                case Rare:
+                    rarity = lowerRarity ? CardRarity.Uncommon : CardRarity.MythicRare;
+                    continue;
+                case Uncommon:
+                    rarity = lowerRarity ? CardRarity.Common : CardRarity.Rare;
+                    continue;
+                case Common:
+                    if (lowerRarity) { break; } //shouldn't happen
+                    rarity = CardRarity.Uncommon;
+                    continue;
+                default:
+                    break;
+                }
+            }
+            break;
+        }
+
+        PaperCard card = Aggregates.random(rewardPool);
+        if (card == null) { return; } //shouldn't happen, but prevent crash if it does
+
         pool.remove(card);
         filteredPool.remove(card);
 
@@ -331,7 +376,7 @@ public class ConquestAEtherScreen extends FScreen {
             if (selectedOption == selectedOption0) { return; }
             selectedOption = selectedOption0;
 
-            FSkinProp skinProp = selectedOption.skinProp;
+            FSkinProp skinProp = selectedOption.getSkinProp();
             if (skinProp != null) {
                 setIcon(FSkin.getImages().get(skinProp));
             }
@@ -349,9 +394,9 @@ public class ConquestAEtherScreen extends FScreen {
 
         private Predicate<PaperCard> buildFilterPredicate(Predicate<PaperCard> predicate) {
             if (predicate == null) {
-                return selectedOption.predicate;
+                return selectedOption.getPredicate();
             }
-            return Predicates.and(predicate, selectedOption.predicate);
+            return Predicates.and(predicate, selectedOption.getPredicate());
         }
 
         @Override

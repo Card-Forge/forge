@@ -66,7 +66,7 @@ public abstract class PreferencesStore<T extends Enum<T>> {
     protected abstract T valueOf(String name);
     protected abstract String getPrefDefault(T key);
 
-    public final void save() {
+    public void save() {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(filename));

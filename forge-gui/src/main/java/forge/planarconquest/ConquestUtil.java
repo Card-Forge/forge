@@ -1,6 +1,7 @@
 package forge.planarconquest;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +31,7 @@ import forge.deck.generation.DeckGeneratorMonoColor;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
 import forge.util.FileUtil;
@@ -182,19 +184,19 @@ public class ConquestUtil {
         NONCREATURE_PERMANENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker, CoreType.Land)), "Noncreature Permanent"),
         INSTANT_SORCERY       (FSkinProp.IMG_SORCERY, new TypeFilter(EnumSet.of(CoreType.Instant, CoreType.Sorcery)), "Instant or Sorcery"),
 
-        COMMON   (FSkinProp.IMG_PW_BADGE_COMMON, new RarityFilter(CardRarity.Common), "Common"),
-        UNCOMMON (FSkinProp.IMG_PW_BADGE_UNCOMMON, new RarityFilter(CardRarity.Uncommon), "Uncommon"),
-        RARE     (FSkinProp.IMG_PW_BADGE_RARE, new RarityFilter(CardRarity.Rare), "Rare"),
-        MYTHIC   (FSkinProp.IMG_PW_BADGE_MYTHIC, new RarityFilter(CardRarity.MythicRare), "Mythic Rare"),
+        COMMON   (FSkinProp.IMG_PW_BADGE_COMMON, new RarityFilter(EnumSet.of(CardRarity.Common, CardRarity.Uncommon, CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare)), "Common"),
+        UNCOMMON (FSkinProp.IMG_PW_BADGE_UNCOMMON, new RarityFilter(EnumSet.of(CardRarity.Uncommon, CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare)), "Uncommon"),
+        RARE     (FSkinProp.IMG_PW_BADGE_RARE, new RarityFilter(EnumSet.of(CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare)), "Rare"),
+        MYTHIC   (FSkinProp.IMG_PW_BADGE_MYTHIC, new RarityFilter(EnumSet.of(CardRarity.MythicRare)), "Mythic Rare (100%)"),
 
         CMC_LOW      (FSkinProp.IMG_CMC_LOW, new CMCFilter(0, 3), "CMC 0-3"),
         CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, new CMCFilter(2, 5), "CMC 2-5"),
         CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, new CMCFilter(4, 7), "CMC 4-7"),
         CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, new CMCFilter(6, -1), "CMC 6+");
 
-        public final FSkinProp skinProp;
-        public final Predicate<PaperCard> predicate;
-        public final String caption;
+        private final FSkinProp skinProp;
+        private final Predicate<PaperCard> predicate;
+        private String caption;
 
         private AEtherFilter(final FSkinProp skinProp0, final Predicate<PaperCard> predicate0, final String caption0) {
             skinProp = skinProp0;
@@ -207,6 +209,10 @@ public class ConquestUtil {
             return skinProp;
         }
 
+        public Predicate<PaperCard> getPredicate() {
+            return predicate;
+        }
+
         public ColorSet getColor() {
             if (predicate instanceof ColorFilter) {
                 return ((ColorFilter)predicate).color;
@@ -214,16 +220,19 @@ public class ConquestUtil {
             return null;
         }
 
-        public EnumSet<CoreType> getTypes() {
-            if (predicate instanceof ColorFilter) {
-                return ((TypeFilter)predicate).types;
-            }
-            return null;
-        }
-
-        public CardRarity getRarity() {
+        public CardRarity getRarity(double randomSeed) {
             if (predicate instanceof RarityFilter) {
-                return ((RarityFilter)predicate).rarity;
+                float total = 0;
+                CardRarity rarity = null;
+                EnumMap<CardRarity, Double> rarityOdds = ((RarityFilter)predicate).rarityOdds;
+                for (Entry<CardRarity, Double> entry : rarityOdds.entrySet()) {
+                    rarity = entry.getKey();
+                    total += entry.getValue();
+                    if (randomSeed < total) {
+                        return rarity;
+                    }
+                }
+                return rarity;
             }
             return null;
         }
@@ -246,6 +255,25 @@ public class ConquestUtil {
         catch (Exception e) {
             System.err.println("No color filter with name " + name);
             return AEtherFilter.WUBRG; //return 5-color filter as fallback
+        }
+    }
+
+    public static void updateRarityFilterOdds() {
+        ConquestPreferences prefs = FModel.getConquestPreferences();
+
+        EnumMap<CardRarity, Double> odds = new EnumMap<CardRarity, Double>(CardRarity.class);
+        double commonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
+        double uncommonPerBooster = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
+        double raresPerBooster = prefs.getPrefInt(CQPref.BOOSTER_RARES);
+        double mythicsPerBooster = raresPerBooster / (double)prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
+
+        odds.put(CardRarity.Common, 1d);
+        odds.put(CardRarity.Uncommon, uncommonPerBooster / commonsPerBooster);
+        odds.put(CardRarity.Rare, raresPerBooster / commonsPerBooster);
+        odds.put(CardRarity.MythicRare, mythicsPerBooster / commonsPerBooster);
+
+        for (AEtherFilter filter : RARITY_FILTERS) {
+            filter.caption = ((RarityFilter)filter.predicate).updateOdds(odds);
         }
     }
 
@@ -327,18 +355,47 @@ public class ConquestUtil {
     }
 
     private static class RarityFilter implements Predicate<PaperCard> {
-        private final CardRarity rarity;
+        private final EnumMap<CardRarity, Double> rarityOdds;
 
-        private RarityFilter(CardRarity rarity0) {
-            rarity = rarity0;
+        private RarityFilter(EnumSet<CardRarity> rarities0) {
+            rarityOdds = new EnumMap<CardRarity, Double>(CardRarity.class);
+            for (CardRarity rarity : rarities0) {
+                rarityOdds.put(rarity, 0d); //values will be set later
+            }
+        }
+
+        private String updateOdds(EnumMap<CardRarity, Double> oddsLookup) {
+            double baseOdds = 0;
+            double remainingOdds = 1;
+            CardRarity baseRarity = null;
+            String caption = "";
+
+            for (CardRarity rarity : rarityOdds.keySet()) {
+                Double odds = oddsLookup.get(rarity);
+                if (odds == null) { continue; } //skip Special rarity
+
+                if (baseRarity == null) {
+                    baseRarity = rarity;
+                    baseOdds = odds;
+                }
+                else {
+                    odds /= baseOdds;
+                    remainingOdds -= odds;
+                    caption += ", " + rarity.getLongName() + " (" + (Math.round(1000 * odds) / 10) + "%)"; //round to nearest single decimal point
+                    rarityOdds.put(rarity, odds);
+                }
+            }
+
+            //prepend base rarity and odds
+            caption = baseRarity.getLongName() + " (" + (Math.round(1000 * remainingOdds) / 10) + "%)" + caption;
+            rarityOdds.put(baseRarity, remainingOdds);
+
+            return caption;
         }
 
         @Override
         public boolean apply(PaperCard card) {
-            CardRarity cardRarity = card.getRarity();
-            if (cardRarity == rarity) { return true; }
-            if (cardRarity == CardRarity.Special && rarity == CardRarity.Rare) { return true; } //treat specials as rares
-            return false;
+            return rarityOdds.containsKey(card.getRarity());
         }
     }
 

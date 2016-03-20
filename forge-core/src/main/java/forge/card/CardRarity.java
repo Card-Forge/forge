@@ -44,6 +44,10 @@ public enum CardRarity {
         return shortName;
     }
 
+    public String getLongName() {
+        return longName;
+    }
+
     public static CardRarity smartValueOf(String input) {
         for (CardRarity r : CardRarity.values()) {
             if (r.name().equalsIgnoreCase(input) || r.shortName.equalsIgnoreCase(input) || r.longName.equalsIgnoreCase(input)) {

@@ -1243,6 +1243,7 @@ forge-gui-mobile/src/forge/card/CardImageRenderer.java -text
 forge-gui-mobile/src/forge/card/CardListPreview.java -text
 forge-gui-mobile/src/forge/card/CardRenderer.java -text
 forge-gui-mobile/src/forge/card/CardZoom.java -text
+forge-gui-mobile/src/forge/card/ColorSetImage.java -text
 forge-gui-mobile/src/forge/card/GameEntityPicker.java -text
 forge-gui-mobile/src/forge/deck/AddBasicLandsDialog.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text

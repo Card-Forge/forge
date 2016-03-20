@@ -12,8 +12,6 @@ public class ConquestAwardPool {
     private final BoosterPool commons, uncommons, rares, mythics;
 
     public ConquestAwardPool(Iterable<PaperCard> cards) {
-        ConquestPreferences prefs = FModel.getConquestPreferences();
-
         commons = new BoosterPool();
         uncommons = new BoosterPool();
         rares = new BoosterPool();
@@ -38,32 +36,20 @@ public class ConquestAwardPool {
                 break;
             }
         }
-
-        //calculate odds of each rarity
-        float commonOdds = commons.getOdds(prefs.getPrefInt(CQPref.BOOSTER_COMMONS));
-        float uncommonOdds = uncommons.getOdds(prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS));
-        int raresPerBooster = prefs.getPrefInt(CQPref.BOOSTER_RARES);
-        float rareOdds = rares.getOdds(raresPerBooster);
-        float mythicOdds = mythics.getOdds((float)raresPerBooster / (float)prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC));
-
-        //determine multipliers for each rarity based on ratio of odds
-        commons.multiplier = 1;
-        uncommons.multiplier = commonOdds / uncommonOdds;
-        rares.multiplier = commonOdds / rareOdds;
-        mythics.multiplier = mythics.isEmpty() ? 0 : commonOdds / mythicOdds;
     }
 
     public int getShardValue(CardRarity rarity, int baseValue) {
+        ConquestPreferences prefs = FModel.getConquestPreferences();
         switch (rarity) {
         case Common:
             return baseValue;
         case Uncommon:
-            return Math.round(baseValue * uncommons.multiplier);
+            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_UNCOMMON_MULTIPLIER));
         case Rare:
         case Special:
-            return Math.round(baseValue * rares.multiplier);
+            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_RARE_MULTIPLIER));
         case MythicRare:
-            return Math.round(baseValue * mythics.multiplier);
+            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_MYTHIC_MULTIPLIER));
         default:
             return 0;
         }
@@ -84,19 +70,12 @@ public class ConquestAwardPool {
 
     public class BoosterPool {
         private final List<PaperCard> cards = new ArrayList<PaperCard>();
-        private float multiplier;
 
         private BoosterPool() {
         }
 
         public boolean isEmpty() {
             return cards.isEmpty();
-        }
-
-        private float getOdds(float perBoosterCount) {
-            int count = cards.size();
-            if (count == 0) { return 0; }
-            return (float)perBoosterCount / (float)count;
         }
 
         private void add(PaperCard c) {

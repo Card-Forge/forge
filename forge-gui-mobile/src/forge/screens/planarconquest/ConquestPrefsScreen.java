@@ -56,6 +56,9 @@ public class ConquestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Base Exile Value", CQPref.AETHER_BASE_EXILE_VALUE, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Base Retrieve Cost", CQPref.AETHER_BASE_RETRIEVE_COST, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Base Pull Cost", CQPref.AETHER_BASE_PULL_COST, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption("Uncommon Multiplier", CQPref.AETHER_UNCOMMON_MULTIPLIER, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption("Rare Multiplier", CQPref.AETHER_RARE_MULTIPLIER, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption("Mythic Multiplier", CQPref.AETHER_MYTHIC_MULTIPLIER, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Starting Shards", CQPref.AETHER_START_SHARDS, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Chaos Wheel Shard Value", CQPref.AETHER_WHEEL_SHARDS, PrefsGroup.AETHER));
 

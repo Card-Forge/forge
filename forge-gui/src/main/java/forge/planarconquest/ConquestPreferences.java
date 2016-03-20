@@ -19,6 +19,7 @@ package forge.planarconquest;
 
 import forge.properties.ForgeConstants;
 import forge.properties.PreferencesStore;
+
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
@@ -33,6 +34,9 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         AETHER_BASE_EXILE_VALUE("75"),
         AETHER_BASE_RETRIEVE_COST("150"),
         AETHER_BASE_PULL_COST("200"),
+        AETHER_UNCOMMON_MULTIPLIER("3"),
+        AETHER_RARE_MULTIPLIER("10"),
+        AETHER_MYTHIC_MULTIPLIER("25"),
         AETHER_START_SHARDS("3000"),
         AETHER_WHEEL_SHARDS("1000"),
 
@@ -63,6 +67,12 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
 
     public ConquestPreferences() {
         super(ForgeConstants.CONQUEST_PREFS_FILE, CQPref.class);
+    }
+
+    @Override
+    public void save() {
+        super.save();
+        ConquestUtil.updateRarityFilterOdds();
     }
 
     protected CQPref[] getEnumValues() {
