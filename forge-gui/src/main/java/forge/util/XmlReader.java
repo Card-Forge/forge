@@ -20,9 +20,9 @@ import forge.util.XmlWriter.IXmlWritable;
 public class XmlReader {
     private Element currentElement;
 
-    public XmlReader(File file0) throws Exception {
+    public XmlReader(String filename0) throws Exception {
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        final Document document = builder.parse(file0);
+        final Document document = builder.parse(new File(filename0));
         currentElement = (Element)document.getFirstChild();
     }
 

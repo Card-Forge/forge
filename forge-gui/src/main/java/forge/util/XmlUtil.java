@@ -47,16 +47,13 @@ public class XmlUtil {
         return sw.toString();
     }
 
-    public static void saveDocument(final Document document, final String filename) throws TransformerException {
-        saveDocument(document, new File(filename));
-    }
-    public static void saveDocument(final Document document, final File file) throws TransformerException {
+    public static void saveDocument(final Document document, String filename) throws TransformerException {
         Transformer t = TransformerFactory.newInstance().newTransformer();
         t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
         t.setOutputProperty(OutputKeys.INDENT, "yes");
         t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
         DOMSource source = new DOMSource(document);
-        StreamResult result = new StreamResult(file);
+        StreamResult result = new StreamResult(new File(filename));
         t.transform(source, result);
     }
 

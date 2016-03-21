@@ -45,7 +45,7 @@ import java.util.Map.Entry;
 import com.google.common.base.Function;
 
 public final class ConquestData {
-    private static final String XML_FILENAME = "data.xml";
+    private static final String XML_FILE = "data.xml";
 
     private String name;
     private PaperCard planeswalker;
@@ -55,7 +55,8 @@ public final class ConquestData {
     private int aetherShards;
     private int planeswalkEmblems;
 
-    private final File directory, xmlFile;
+    private final File directory;
+    private final String xmlFilename;
     private final ConquestRecord chaosBattleRecord;
     private final Map<String, ConquestPlaneData> planeDataMap = new HashMap<String, ConquestPlaneData>();
     private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
@@ -66,7 +67,7 @@ public final class ConquestData {
     public ConquestData(String name0, ConquestPlane startingPlane0, PaperCard startingPlaneswalker0, PaperCard startingCommander0) {
         name = name0;
         directory = new File(ForgeConstants.CONQUEST_SAVE_DIR, name);
-        xmlFile = new File(directory, XML_FILENAME);
+        xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
         aetherShards = FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_START_SHARDS);
         currentLocation = new ConquestLocation(startingPlane0, 0, 0, 0);
         unlockPlane(startingPlane0);
@@ -88,11 +89,11 @@ public final class ConquestData {
     public ConquestData(File directory0) {
         name = directory0.getName();
         directory = directory0;
-        xmlFile = new File(directory, XML_FILENAME);
+        xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
 
         ConquestRecord chaosBattleRecord0 = null;
         try {
-            XmlReader xml = new XmlReader(xmlFile);
+            XmlReader xml = new XmlReader(xmlFilename);
             CardDb cardDb = FModel.getMagicDb().getCommonCards();
             setPlaneswalker(xml.read("planeswalker", cardDb));
             aetherShards = xml.read("aetherShards", aetherShards);
@@ -119,7 +120,7 @@ public final class ConquestData {
         FileUtil.ensureDirectoryExists(directory);
 
         try {
-            XmlWriter xml = new XmlWriter(xmlFile, "data");
+            XmlWriter xml = new XmlWriter(xmlFilename, "data");
             xml.write("planeswalker", planeswalker);
             xml.write("aetherShards", aetherShards);
             xml.write("planeswalkEmblems", planeswalkEmblems);
