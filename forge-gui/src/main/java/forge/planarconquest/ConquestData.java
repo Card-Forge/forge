@@ -66,7 +66,7 @@ public final class ConquestData {
 
     public ConquestData(String name0, ConquestPlane startingPlane0, PaperCard startingPlaneswalker0, PaperCard startingCommander0) {
         name = name0;
-        directory = new File(ForgeConstants.CONQUEST_SAVE_DIR, name);
+        directory = new File(ForgeConstants.CONQUEST_SAVE_DIR, name.replace(' ', '_')); //prevent issue on Android where data won't save if directory name contains spaces
         xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
         aetherShards = FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_START_SHARDS);
         currentLocation = new ConquestLocation(startingPlane0, 0, 0, 0);
@@ -87,7 +87,7 @@ public final class ConquestData {
     }
 
     public ConquestData(File directory0) {
-        name = directory0.getName();
+        name = directory0.getName().replace('_', ' '); //restore spaces in name
         directory = directory0;
         xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
 
