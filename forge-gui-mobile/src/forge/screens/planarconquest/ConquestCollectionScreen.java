@@ -38,6 +38,7 @@ import forge.toolbox.FList.CompactModeHandler;
 
 public class ConquestCollectionScreen extends FScreen {
     private static final float EXILED_ALPHA_COMPOSITE = 0.4f;
+    private static final float EXILE_ICON_ALPHA_COMPOSITE = 0.7f;
 
     private final FLabel lblShards = add(new FLabel.Builder().font(ConquestAEtherScreen.LABEL_FONT).parseSymbols().build());
     private final FLabel lblInfo = add(new FLabel.Builder().font(FSkinFont.get(11)).build());
@@ -172,7 +173,7 @@ public class ConquestCollectionScreen extends FScreen {
                     }
                     CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), isInfinite() ? 0 : value.getValue(), getItemSuffix(value), x, y, w, h, compactModeHandler.isCompactMode());
                     if (exiled) {
-                        g.resetAlphaComposite();
+                        g.setAlphaComposite(EXILE_ICON_ALPHA_COMPOSITE);
 
                         //also draw exile icon on top of card art
                         float artX = x - FList.PADDING;
@@ -181,6 +182,8 @@ public class ConquestCollectionScreen extends FScreen {
                         float cardArtWidth = cardArtHeight * CardRenderer.CARD_ART_RATIO;
                         float iconSize = cardArtHeight / 2;
                         g.drawImage(FSkinImage.EXILE, artX + (cardArtWidth - iconSize) / 2, artY + (cardArtHeight - iconSize) / 2, iconSize, iconSize);
+
+                        g.resetAlphaComposite();
                     }
                 }
 
