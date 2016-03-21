@@ -1,5 +1,6 @@
 package forge.util;
 
+import java.io.File;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -16,17 +17,17 @@ import forge.item.PaperCard;
 
 public class XmlWriter {
     private final Document document;
-    private final String filename;
+    private final File file;
     private final Stack<Element> parentElements = new Stack<Element>();
 
     private Element currentElement;
 
-    public XmlWriter(String filename0, String rootName0) throws Exception {
+    public XmlWriter(File file0, String rootName0) throws Exception {
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         document = builder.newDocument();
         currentElement = document.createElement(rootName0);
         document.appendChild(currentElement);
-        filename = filename0;
+        file = file0;
     }
 
     public void startElement(String name0) {
@@ -109,7 +110,7 @@ public class XmlWriter {
     }
 
     public void close() throws Exception {
-        XmlUtil.saveDocument(document, filename);
+        XmlUtil.saveDocument(document, file);
     }
 
     public interface IXmlWritable {
