@@ -179,6 +179,8 @@ public class LoadConquestScreen extends LaunchScreen {
 
         FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquest.getName());
         FModel.getConquestPreferences().save();
+
+        FModel.getConquest().setModel(conquest);
         ConquestMenu.launchPlanarConquest(LaunchReason.LoadConquest);
     }
 
