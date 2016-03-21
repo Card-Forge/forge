@@ -20,6 +20,7 @@ import forge.assets.FSkinImage;
 import forge.model.FModel;
 import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestData;
+import forge.planarconquest.ConquestPreferences;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
@@ -95,7 +96,8 @@ public class LoadConquestScreen extends LaunchScreen {
                 Map<String, ConquestData> arrConquests = new HashMap<String, ConquestData>();
                 for (File f : dirConquests.listFiles()) {
                     if (f.isDirectory()) {
-                        arrConquests.put(f.getName(), new ConquestData(f));
+                        ConquestData data = new ConquestData(f);
+                        arrConquests.put(data.getName(), data);
                     }
                 }
 
@@ -107,8 +109,9 @@ public class LoadConquestScreen extends LaunchScreen {
                     final String questname = FModel.getConquestPreferences().getPref(CQPref.CURRENT_CONQUEST);
 
                     // Attempt to select previous conquest.
-                    if (arrConquests.get(questname) != null) {
-                        lstConquests.setSelectedConquest(arrConquests.get(questname));
+                    ConquestData currentConquest = arrConquests.get(questname);
+                    if (currentConquest != null) {
+                        lstConquests.setSelectedConquest(currentConquest);
                     }
                     else {
                         lstConquests.setSelectedIndex(0);
@@ -216,6 +219,13 @@ public class LoadConquestScreen extends LaunchScreen {
                         continue;
                     }
                     break;
+                }
+
+                //ensure prefs updated if current conquest is renamed
+                ConquestPreferences prefs = FModel.getConquestPreferences();
+                if (conquest.getName().equals(prefs.getPref(CQPref.CURRENT_CONQUEST))) {
+                    prefs.setPref(CQPref.CURRENT_CONQUEST, questName);
+                    prefs.save();
                 }
 
                 conquest.rename(questName);

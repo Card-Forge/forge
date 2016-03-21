@@ -47,7 +47,8 @@ import com.google.common.base.Function;
 public final class ConquestData {
     private static final String XML_FILE = "data.xml";
 
-    private String name;
+    private File directory;
+    private String name, xmlFilename;
     private PaperCard planeswalker;
     private ISkinImage planeswalkerToken;
     private ConquestLocation currentLocation;
@@ -55,8 +56,6 @@ public final class ConquestData {
     private int aetherShards;
     private int planeswalkEmblems;
 
-    private final File directory;
-    private final String xmlFilename;
     private final ConquestRecord chaosBattleRecord;
     private final Map<String, ConquestPlaneData> planeDataMap = new HashMap<String, ConquestPlaneData>();
     private final HashSet<PaperCard> unlockedCards = new HashSet<PaperCard>();
@@ -387,7 +386,10 @@ public final class ConquestData {
 
     public void rename(final String newName) {
         name = newName;
-        directory.renameTo(new File(ForgeConstants.CONQUEST_SAVE_DIR, name));
+        File directory0 = new File(ForgeConstants.CONQUEST_SAVE_DIR, name.replace(' ', '_'));
+        directory.renameTo(directory0);
+        directory = directory0;
+        xmlFilename = directory.getPath() + ForgeConstants.PATH_SEPARATOR + XML_FILE;
     }
 
     public void resetNewCards() {
