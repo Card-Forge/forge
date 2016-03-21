@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Predator 3
+Title=Predator
+Difficulty=hard
+Description=BRG Sliver deck
+Icon=Predator.jpg
+Deck Type=constructed
+[main]
+4 Cavern of Souls
+3 Karplusan Forest
+3 Llanowar Wastes
+3 Savage Lands
+4 Sliver Hive
+3 Sulfurous Springs
+1 Tendo Ice Bridge
+1 Firewake Sliver
+4 Frenzy Sliver
+1 Ghostflame Sliver
+4 Leeching Sliver
+3 Manaweft Sliver
+1 Predatory Sliver
+1 Skeletal Changeling
+4 Spined Sliver
+1 Spinneret Sliver
+4 Striking Sliver
+4 Syphon Sliver
+1 Thorncaster Sliver
+4 Two-Headed Sliver
+1 Vampiric Sliver
+1 Venom Sliver
+4 Virulent Sliver
+[sideboard]
