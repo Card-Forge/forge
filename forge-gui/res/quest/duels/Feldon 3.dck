@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Feldon 3
+Title=Feldon
+Difficulty=hard
+Description=WUBR Feldon of the Third Path deck
+Icon=Feldon.jpg
+Deck Type=constructed
+[main]
+1 Tundra
+4 Badlands
+1 Volcanic Island
+1 Scrubland
+4 Plateau
+4 Arid Mesa
+4 Bloodstained Mire
+1 Mox Jet
+1 Mox Ruby
+1 Mox Sapphire
+1 Mox Pearl
+1 Sol Ring
+4 Imperial Recruiter
+4 Feldon of the Third Path
+4 Buried Alive
+4 Karmic Guide
+1 Thraximundar
+1 Garza Zol, Plague Queen
+1 Chromatic Lantern
+4 Lightning Bolt
+3 Lightning Helix
+4 Swords to Plowshares
+2 Gerrard's Verdict
+2 Crackling Doom
+2 Night's Whisper
+[sideboard]
