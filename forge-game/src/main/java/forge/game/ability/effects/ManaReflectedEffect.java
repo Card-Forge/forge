@@ -44,9 +44,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
      * </p>
      * 
      * @param sa
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @param colors
      *            a {@link java.util.ArrayList} object.
      * @param player
@@ -57,14 +55,14 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
         // Calculate generated mana here for stack description and resolving
         final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
 
-        String baseMana = "";
+        String baseMana;
 
         if (colors.size() == 0) {
             return "0";
         } else if (colors.size() == 1) {
             baseMana = MagicColor.toShortString(colors.iterator().next());
         } else {
-            baseMana = MagicColor.toShortString(player.getController().chooseColor("Select Mana to Produce", sa, ColorSet.fromNames(colors)));
+            baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless("Select Mana to Produce", sa.getHostCard(), ColorSet.fromNames(colors)));
         }
 
         final StringBuilder sb = new StringBuilder();
