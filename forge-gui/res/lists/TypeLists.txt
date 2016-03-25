@@ -135,6 +135,7 @@ Merfolk
 Metathran
 Minion
 Minotaur
+Mole
 Monger
 Mongoose
 Monk
