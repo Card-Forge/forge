@@ -1,5 +1,6 @@
 package forge.quest;
 
+import com.google.common.collect.Lists;
 import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -12,6 +13,9 @@ import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
+import forge.tournament.system.TournamentBracket;
+import forge.tournament.system.TournamentPairing;
+import forge.tournament.system.TournamentPlayer;
 import forge.util.storage.IStorage;
 
 import java.util.ArrayList;
@@ -19,6 +23,7 @@ import java.util.List;
 
 public class QuestDraftUtils {
     private static final List<DraftMatchup> matchups = new ArrayList<>();
+    public static boolean TOURNAMENT_TOGGLE = false;
 
     public static boolean matchInProgress = false;
     private static boolean waitForUserInput = false;
@@ -42,11 +47,11 @@ public class QuestDraftUtils {
     }
 
     public static String getDeckLegality() {
-        final String message = GameType.QuestDraft.getDeckFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
-        if (message != null && FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            return message;
+        if (!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            return null;
         }
-        return null;
+
+        return GameType.QuestDraft.getDeckFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
     }
 
     private static int getPreviousMatchup(final int position) {
@@ -81,11 +86,35 @@ public class QuestDraftUtils {
         return -1;
     }
 
+    public static void startNextMatchInTournament(final IGuiGame gui) {
+        final QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
+        TournamentBracket bracket = draft.getBracket();
+
+        TournamentPairing pairing = bracket.getNextPairing();
+        if (pairing == null) {
+            if (bracket.isTournamentOver()) {
+                // Somehow tournament didn't end on its own?
+            } else {
+                 // Generate next round and regrab the next pairing
+                bracket.generateActivePairings();
+                pairing = bracket.getNextPairing();
+            }
+        }
+
+        updateFromTournament(gui);
+    }
+
     public static void startNextMatch(final IGuiGame gui) {
+        if (TOURNAMENT_TOGGLE) {
+            startNextMatchInTournament(gui);
+            return;
+        }
+
         if (!matchups.isEmpty()) {
             return;
         }
 
+        // If matchups isn't empty I don't get here. Right?
         matchups.clear();
 
         final QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
@@ -130,29 +159,19 @@ public class QuestDraftUtils {
 
         //If no previous matches need doing, start the next round as normal
         if (!foundMatchups) {
+            // Fall through to avoid repetition
             switch (currentSet) {
                 case 7:
                     addMatchup(0, 1, draft);
-                    addMatchup(2, 3, draft);
-                    addMatchup(4, 5, draft);
-                    addMatchup(6, 7, draft);
-                    break;
                 case 8:
                     addMatchup(2, 3, draft);
-                    addMatchup(4, 5, draft);
-                    addMatchup(6, 7, draft);
-                    break;
                 case 9:
                     addMatchup(4, 5, draft);
-                    addMatchup(6, 7, draft);
-                    break;
                 case 10:
                     addMatchup(6, 7, draft);
                     break;
                 case 11:
                     addMatchup(8, 9, draft);
-                    addMatchup(10, 11, draft);
-                    break;
                 case 12:
                     addMatchup(10, 11, draft);
                     break;
@@ -205,7 +224,22 @@ public class QuestDraftUtils {
         matchups.add(matchup);
     }
 
+    private static GameRules createQuestDraftRuleset() {
+        final GameRules rules = new GameRules(GameType.QuestDraft);
+        rules.setPlayForAnte(false);
+        rules.setMatchAnteRarity(false);
+        rules.setGamesPerMatch(3);
+        rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
+        return rules;
+    }
+
     public static void update(final IGuiGame gui) {
+        if (TOURNAMENT_TOGGLE) {
+            updateFromTournament(gui);
+            return;
+        }
+
         if (matchups.isEmpty()) {
             return;
         }
@@ -226,15 +260,69 @@ public class QuestDraftUtils {
             waitForUserInput = false;
         }
 
-        final GameRules rules = new GameRules(GameType.QuestDraft);
-        rules.setPlayForAnte(false);
-        rules.setMatchAnteRarity(false);
-        rules.setGamesPerMatch(3);
-        rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
-        rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
+        GameRules rules = createQuestDraftRuleset();
 
         final HostedMatch newMatch = GuiBase.getInterface().hostMatch();
         newMatch.startMatch(rules, null, nextMatch.matchStarter, nextMatch.humanPlayer, GuiBase.getInterface().getNewGuiGame());
+    }
+
+    private static List<RegisteredPlayer> registerTournamentPlayers(TournamentPairing pairing, QuestEventDraft draft, DeckGroup decks) {
+        List<RegisteredPlayer> registered = Lists.newArrayList();
+        for (TournamentPlayer pl : pairing.getPairedPlayers()) {
+            if (pl.getIndex() == -1) {
+                registered.add(new RegisteredPlayer(decks.getHumanDeck()).setPlayer(pl.getPlayer()));
+            } else {
+                registered.add(new RegisteredPlayer(decks.getAiDecks().get(pl.getIndex())).setPlayer(pl.getPlayer()));
+            }
+        }
+        return registered;
+    }
+
+    private static void updateFromTournament(final IGuiGame gui) {
+        // If Human involved launch into a UI, if not show a "Simulating" screen. And simulate the game off-thread
+        if (waitForUserInput || matchInProgress || gui == null) {
+            return;
+        }
+
+        gui.enableOverlay();
+        final QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
+        if (draft == null) {
+            return;
+        }
+
+        TournamentBracket bracket = draft.getBracket();
+        TournamentPairing pairing = bracket.getNextPairing();
+
+        if (pairing == null) {
+            // bracket.isTournamentOver()
+
+            gui.disableOverlay();
+            return;
+        }
+
+        matchInProgress = true;
+        final DeckGroup decks = FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME);
+
+        boolean waitForUserInput = pairing.hasPlayer(GamePlayerUtil.getGuiPlayer());
+        GameRules rules = createQuestDraftRuleset();
+
+        List<RegisteredPlayer> registered = registerTournamentPlayers(pairing, draft, decks);
+        RegisteredPlayer registeredHuman = null;
+
+        if (waitForUserInput) {
+            final HostedMatch newMatch = GuiBase.getInterface().hostMatch();
+            for(RegisteredPlayer rp : registered) {
+                if (rp.getPlayer().equals(GamePlayerUtil.getGuiPlayer())) {
+                    registeredHuman = rp;
+                }
+            }
+            newMatch.startMatch(rules, null, registered, registeredHuman, GuiBase.getInterface().getNewGuiGame());
+        } else {
+            // TODO Show a "Simulating Dialog" and simulate off-thread. Temporary replication of code for now
+            gui.disableOverlay();
+            final HostedMatch newMatch = GuiBase.getInterface().hostMatch();
+            newMatch.startMatch(rules, null, registered, registeredHuman, GuiBase.getInterface().getNewGuiGame());
+        }
     }
 
     public static void continueMatches(final IGuiGame gui) {
@@ -246,6 +334,11 @@ public class QuestDraftUtils {
         matchInProgress = false;
         waitForUserInput = false;
         matchups.clear();
+        if (TOURNAMENT_TOGGLE) {
+            final QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
+            TournamentBracket bracket = draft.getBracket();
+            bracket.endTournament();
+        }
     }
 
     private static final class DraftMatchup {

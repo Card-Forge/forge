@@ -1,5 +1,6 @@
 package forge.screens.home.quest;
 
+import com.beust.jcommander.internal.Lists;
 import com.google.common.collect.ImmutableList;
 import forge.GuiBase;
 import forge.Singletons;
@@ -36,6 +37,9 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.JXButtonPanel;
+import forge.tournament.system.TournamentBracket;
+import forge.tournament.system.TournamentPairing;
+import forge.tournament.system.TournamentPlayer;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -438,12 +442,16 @@ public enum CSubmenuQuestDraft implements ICDoc {
     }
 
     private void updateTournamentActive() {
-
-        final VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
-
         if (FModel.getQuest().getAchievements().getCurrentDraft() == null) {
             return;
         }
+
+        if (QuestDraftUtils.TOURNAMENT_TOGGLE) {
+            updateTournamentActiveForBracket();
+            return;
+        }
+
+        final VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
 
         for (int i = 0; i < 15; i++) {
 
@@ -491,6 +499,82 @@ public enum CSubmenuQuestDraft implements ICDoc {
             view.getBtnLeaveTournament().setText("Collect Prizes");
         }
 
+    }
+
+    private void updateTournamentBoxLabel(String playerID, int iconID, int box, boolean first) {
+        final VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
+
+        SkinImage icon = FSkin.getAvatars().get(iconID);
+
+        if (icon == null) {
+            icon = FSkin.getAvatars().get(0);
+        }
+
+        if (first) {
+            view.getLblsMatchups()[box].setPlayerOne(playerID, icon);
+        } else {
+            view.getLblsMatchups()[box].setPlayerTwo(playerID, icon);
+        }
+    }
+
+    private void updateTournamentActiveForBracket() {
+        final VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
+
+        QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
+        TournamentBracket bracket = draft.getBracket();
+
+        if (bracket == null) {
+            return;
+        }
+
+        // Combine finished pairings with active round pairings
+        List<TournamentPairing> allPairings = Lists.newArrayList();
+        allPairings.addAll(bracket.getCompletedPairings());
+        allPairings.addAll(bracket.getActivePairings());
+
+        int count = 0;
+        int playerCount = 0;
+        int lastWinner = 0;
+        for(TournamentPairing tp : allPairings) {
+            boolean first = true;
+            String playerID = "Undetermined";
+            int iconID = 0;
+            for(TournamentPlayer player : tp.getPairedPlayers()) {
+                if (player.getIndex() == -1) {
+                    playerID = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
+                    if (FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",").length > 0) {
+                        iconID = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]);
+                    }
+                }
+                else{
+                    playerID = player.getPlayer().getName();
+                    iconID = player.getIndex();
+                }
+                updateTournamentBoxLabel(playerID, iconID, count, first);
+
+                if (tp.getWinner() != null && tp.getWinner().equals(player)) {
+                    // Temporarily fill in winner box
+                    lastWinner = playerCount;
+                    updateTournamentBoxLabel(player.getPlayer().getName(), player.getIndex(), playerCount/4 + 4, count%2 == 0);
+                }
+                first = false;
+                playerCount++;
+            }
+            count++;
+        }
+        if (!bracket.isTournamentOver()) {
+            for (int i = lastWinner/2+9 ; i < 15; i++) {
+                String playerID = "Undetermined";
+                int iconID = GuiBase.getInterface().getAvatarCount() - 1;
+                updateTournamentBoxLabel(playerID, iconID,  i / 2, i%2 == 0);
+            }
+        }
+
+        if (draft.playerHasMatchesLeft()) {
+            view.getBtnLeaveTournament().setText("Leave Tournament");
+        } else {
+            view.getBtnLeaveTournament().setText("Collect Prizes");
+        }
     }
 
     public void setCompletedDraft(final DeckGroup finishedDraft) {
@@ -587,7 +671,6 @@ public enum CSubmenuQuestDraft implements ICDoc {
 
         gui = GuiBase.getInterface().getNewGuiGame();
         QuestDraftUtils.startNextMatch(gui);
-
     }
 
 }

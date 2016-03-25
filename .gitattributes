@@ -19076,6 +19076,16 @@ forge-gui/src/main/java/forge/sound/MusicPlaylist.java -text
 forge-gui/src/main/java/forge/sound/NoSoundClip.java -text
 forge-gui/src/main/java/forge/sound/SoundEffectType.java -text
 forge-gui/src/main/java/forge/sound/SoundSystem.java -text
+forge-gui/src/main/java/forge/tournament/TournamentData.java -text
+forge-gui/src/main/java/forge/tournament/TournamentIO.java -text
+forge-gui/src/main/java/forge/tournament/TournamentUtil.java -text
+forge-gui/src/main/java/forge/tournament/TournamentWinLoseController.java -text
+forge-gui/src/main/java/forge/tournament/system/AbstractTournament.java -text
+forge-gui/src/main/java/forge/tournament/system/TournamentBracket.java -text
+forge-gui/src/main/java/forge/tournament/system/TournamentPairing.java -text
+forge-gui/src/main/java/forge/tournament/system/TournamentPlayer.java -text
+forge-gui/src/main/java/forge/tournament/system/TournamentRoundRobin.java -text
+forge-gui/src/main/java/forge/tournament/system/TournamentSwiss.java -text
 forge-gui/src/main/java/forge/util/Callback.java -text
 forge-gui/src/main/java/forge/util/Evaluator.java -text
 forge-gui/src/main/java/forge/util/GuiDisplayUtil.java -text

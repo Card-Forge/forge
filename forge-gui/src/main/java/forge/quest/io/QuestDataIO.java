@@ -198,6 +198,10 @@ public class QuestDataIO {
             QuestDataIO.setFinalField(QuestData.class, "matchLength", newData, 3);
         }
 
+        if (saveVersion < 11) {
+            // Migrate DraftTournaments to use new Tournament class
+        }
+
         final QuestAssets qS = newData.getAssets();
         final QuestAchievements qA = newData.getAchievements();
 
@@ -499,7 +503,6 @@ public class QuestDataIO {
             QuestEventDraftContainer drafts = (QuestEventDraftContainer) source;
 
             for (QuestEventDraft draft : drafts) {
-
                 writer.startNode("draft");
 
                 writer.startNode("title");
@@ -533,6 +536,11 @@ public class QuestDataIO {
                     writer.endNode();
                 }
                 writer.endNode();
+
+                // TODO Save bracket instead of standings
+                //writer.startNode("bracket");
+                //draft.getBracket().exportToXML(writer);
+                //writer.endNode();
 
                 writer.startNode("aiNames");
                 i = 0;
@@ -575,13 +583,13 @@ public class QuestDataIO {
             while (reader.hasMoreChildren()) {
 
                 reader.moveDown();
-
+                // TODO Add Tournament
                 String draftName = null;
                 String boosterConfiguration = null;
                 int entryFee = 1500;
                 int age = 15;
                 String block = null;
-                String[] standings = new String[15];
+                String[] standings = null;
                 String[] aiNames = new String[7];
                 int[] aiIcons = new int[7];
                 boolean started = false;
@@ -604,12 +612,17 @@ public class QuestDataIO {
                             block = reader.getValue();
                             break;
                         case "standings":
+                            // TODO Leaving for older quest datas, but will convert immediately to bracket
+                            standings = new String[15];
                             int i = 0;
                             while (reader.hasMoreChildren()) {
                                 reader.moveDown();
                                 standings[i++] = reader.getValue();
                                 reader.moveUp();
                             }
+                            break;
+                        case "bracket":
+                            // TODO For newer quest datas, that store brackets
                             break;
                         case "aiNames":
                             int ii = 0;
@@ -643,7 +656,11 @@ public class QuestDataIO {
                 draft.setBoosterConfiguration(boosterConfiguration);
                 draft.setEntryFee(entryFee);
                 draft.setBlock(block);
+                // TODO Stop setting standings once Bracket is loading from IO
                 draft.setStandings(standings);
+                if (standings != null) {
+                    draft.setBracket(QuestEventDraft.createBracketFromStandings(standings, aiNames, aiIcons));
+                }
                 draft.setAINames(aiNames);
                 draft.setAIIcons(aiIcons);
                 draft.setStarted(started);

@@ -33,6 +33,9 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
+import forge.tournament.system.TournamentBracket;
+import forge.tournament.system.TournamentPairing;
+import forge.tournament.system.TournamentPlayer;
 import forge.util.NameGenerator;
 import forge.util.storage.IStorage;
 
@@ -79,6 +82,8 @@ public class QuestEventDraft {
     public static final String UNDETERMINED = "quest_draft_undetermined_place";
     public static final String HUMAN = "quest_draft_human_place";
     public static final String DECK_NAME = "Tournament Deck";
+    public static final int TOTAL_ROUNDS = 3;
+    public static final int PLAYERS_IN_PAIRING = 2;
 
     private static transient final ReadPriceList PRICE_LIST_READER = new ReadPriceList();
     private static transient final Map<String, Integer> MAP_PRICES = PRICE_LIST_READER.getPriceList();
@@ -90,6 +95,8 @@ public class QuestEventDraft {
     private int entryFee = 0;
 
     private String[] standings = new String[15];
+    private TournamentBracket bracket;
+
     private String[] aiNames = new String[7];
 
     private int[] aiIcons = new int[7];
@@ -169,6 +176,10 @@ public class QuestEventDraft {
         age--;
     }
 
+    public TournamentBracket getBracket() { return bracket; }
+
+    public void setBracket(TournamentBracket brckt) { bracket = brckt; }
+
     public void saveToRegularDraft() {
         final String tournamentName = FModel.getQuest().getName() + " Tournament Deck " + new SimpleDateFormat("EEE d MMM yyyy HH-mm-ss").format(new Date());
         final DeckGroup original = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME);
@@ -208,6 +219,18 @@ public class QuestEventDraft {
 
     public void setWinner(final String playerName) {
 
+        if (QuestDraftUtils.TOURNAMENT_TOGGLE) {
+            TournamentPairing pairing = bracket.getNextPairing();
+            for(TournamentPlayer player : pairing.getPairedPlayers()) {
+                if (player.getPlayer().getName().equals(playerName)) {
+                    pairing.setWinner(player);
+                    bracket.reportMatchCompletion(pairing);
+                    break;
+                }
+            }
+            // Since this updates the brackets that we're still pseudo-using let it fall through
+        }
+
         boolean isHumanPlayer = true;
 
         for (final String name : aiNames) {
@@ -245,37 +268,7 @@ public class QuestEventDraft {
 
         }
 
-        switch (playerIndex) {
-        case 0:
-        case 1:
-            standings[8] = standings[playerIndex];
-            break;
-        case 2:
-        case 3:
-            standings[9] = standings[playerIndex];
-            break;
-        case 4:
-        case 5:
-            standings[10] = standings[playerIndex];
-            break;
-        case 6:
-        case 7:
-            standings[11] = standings[playerIndex];
-            break;
-        case 8:
-        case 9:
-            standings[12] = standings[playerIndex];
-            break;
-        case 10:
-        case 11:
-            standings[13] = standings[playerIndex];
-            break;
-        case 12:
-        case 13:
-            standings[14] = standings[playerIndex];
-            break;
-        }
-
+        standings[playerIndex/2+8] = standings[playerIndex];
     }
 
     /**
@@ -529,6 +522,10 @@ public class QuestEventDraft {
 
     public boolean playerHasMatchesLeft() {
 
+        if (QuestDraftUtils.TOURNAMENT_TOGGLE) {
+            return !bracket.isTournamentOver() && bracket.isPlayerRemaining(-1);
+        }
+
         int playerIndex = -1;
         for (int i = standings.length - 1; i >= 0; i--) {
             if (standings[i].equals(HUMAN)) {
@@ -581,6 +578,13 @@ public class QuestEventDraft {
     }
 
     public int getPlayerPlacement() {
+        // "1st Place" and "2nd Place" are accurate
+        // "3rd Place" is the two remaining players who won in the first round
+        // "4th Place" is anyone who lost in the first round
+
+        if (QuestDraftUtils.TOURNAMENT_TOGGLE) {
+            return 5 - bracket.getFurthestRound(-1);
+        }
 
         int playerIndex = -1;
         for (int i = standings.length - 1; i >= 0; i--) {
@@ -896,6 +900,7 @@ public class QuestEventDraft {
 
         Collections.shuffle(players);
 
+        // Initialize tournament
         for (int i = 0; i < players.size(); i++) {
             event.standings[i] = players.get(i);
         }
@@ -929,6 +934,8 @@ public class QuestEventDraft {
             usedIcons.add(icon);
 
         }
+
+        event.bracket = createBracketFromStandings(event.standings, event.aiNames, event.aiIcons);
 
         return event;
 
@@ -1040,4 +1047,49 @@ public class QuestEventDraft {
 
     }
 
+    public static TournamentBracket createBracketFromStandings(String[] standings, String[] aiNames, int[] aiIcons) {
+        TournamentBracket bracket = new TournamentBracket(TOTAL_ROUNDS, PLAYERS_IN_PAIRING);
+        bracket.setContinualPairing(false);
+
+        int roundParticipants = (int)(Math.pow(PLAYERS_IN_PAIRING, TOTAL_ROUNDS));
+        int i;
+
+        // Initialize Players
+        for(i = 0; i < roundParticipants; i++) {
+            if (standings[i].equals(HUMAN)) {
+                bracket.addTournamentPlayer(GamePlayerUtil.getGuiPlayer());
+            } else {
+                int idx = Integer.valueOf(standings[i]) - 1;
+                bracket.addTournamentPlayer(GamePlayerUtil.createAiPlayer(aiNames[idx], aiIcons[idx]), idx);
+            }
+        }
+
+        bracket.setInitialized(true);
+        bracket.generateActivePairings();
+        while(i < 14) {
+            TournamentPairing pairing = bracket.getNextPairing();
+            if (pairing == null) {
+                // No pairings available. Generate next round and continue
+                bracket.generateActivePairings();
+                pairing = bracket.getNextPairing();
+                // Pairing really shouldn't be null at this point
+            }
+            if (standings[i].equals(UNDETERMINED)) {
+                // Bracket now up to date!
+                break;
+            } else {
+                int idx = standings[i].equals(HUMAN) ? -1 : Integer.valueOf(standings[i]) - 1;
+                pairing.setWinnerByIndex(idx);
+                bracket.reportMatchCompletion(pairing);
+            }
+            i += 1;
+        }
+
+        if (i == 14) {
+            // Tournament has ended! Do I have to do anything?
+            System.out.println("Tournament done...");
+        }
+
+        return bracket;
+    }
 }

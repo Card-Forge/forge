@@ -70,6 +70,7 @@ public class QuestDraftWinLose extends ControlWinLose {
             final String winner = lastGame.getWinningPlayerName();
             quest.getAchievements().getCurrentDraft().setWinner(winner);
             quest.save();
+            VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
         }
 
         if (!gameHadHumanPlayer) {

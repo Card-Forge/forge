@@ -284,7 +284,14 @@ public class QuestAchievements {
             FModel.getQuest().getDraftDecks().delete(QuestEventDraft.DECK_NAME);
             return null;
         }
-        return drafts.get(currentDraft);
+
+        try {
+            return drafts.get(currentDraft);
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            return null;
+        }
+
     }
 
     public int getCurrentDraftIndex() {
