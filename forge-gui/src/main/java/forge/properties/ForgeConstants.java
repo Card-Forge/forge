@@ -142,6 +142,7 @@ public final class ForgeConstants {
     public static final FileLocation WORKSHOP_LAYOUT_FILE    = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "workshop.xml");
     public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.xml");
     public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "gauntlet" + PATH_SEPARATOR);
+    public static final FileLocation TOURNAMENT_DIR          = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "tournament" + PATH_SEPARATOR);
 
     // data that is only in the cached dir
     private static final String PICS_DIR                     = CACHE_DIR + "pics" + PATH_SEPARATOR;

@@ -45,6 +45,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
+import forge.tournament.TournamentData;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
@@ -76,6 +77,7 @@ public final class FModel {
     private static Map<GameType, AchievementCollection> achievements;
 
     // Someone should take care of 2 gauntlets here
+    private static TournamentData tournamentData;
     private static GauntletData gauntletData;
     private static GauntletMini gauntlet;
 
@@ -321,4 +323,8 @@ public final class FModel {
     public static IStorage<CardBlock> getFantasyBlocks() {
         return fantasyBlocks;
     }
+
+    public static TournamentData getTournamentData() { return tournamentData; }
+
+    public static void setTournamentData(TournamentData tournamentData) { FModel.tournamentData = tournamentData;  }
 }

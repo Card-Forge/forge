@@ -13,6 +13,7 @@ public enum GameType {
     Draft           (DeckFormat.Limited, true, true, true, "Draft", ""),
     Winston         (DeckFormat.Limited, true, true, true, "Winston", ""),
     Gauntlet        (DeckFormat.Constructed, false, true, true, "Gauntlet", ""),
+    Tournament      (DeckFormat.Constructed, false, true, true, "Tournament", ""),
     Quest           (DeckFormat.QuestDeck, true, true, false, "Quest", ""),
     QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft", ""),
     PlanarConquest  (DeckFormat.PlanarConquest, true, false, false, "Planar Conquest", ""),
