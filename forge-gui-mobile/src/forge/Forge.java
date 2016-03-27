@@ -235,6 +235,9 @@ public class Forge implements ApplicationListener {
     }
 
     public static void openScreen(final FScreen screen0) {
+        openScreen(screen0, false);
+    }
+    public static void openScreen(final FScreen screen0, final boolean replaceBackScreen) {
         if (currentScreen == screen0) { return; }
 
         if (currentScreen == null) {
@@ -247,7 +250,12 @@ public class Forge implements ApplicationListener {
             @Override
             public void run(Boolean result) {
                 if (result) {
-                    screens.push(screen0);
+                    if (replaceBackScreen && !screens.isEmpty()) {
+                        screens.pop();
+                    }
+                    if (screens.peek() != screen0) { //prevent screen being its own back screen
+                        screens.push(screen0);
+                    }
                     setCurrentScreen(screen0);
                 }
             }

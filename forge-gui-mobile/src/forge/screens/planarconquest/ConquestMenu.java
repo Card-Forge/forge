@@ -27,45 +27,51 @@ public class ConquestMenu extends FPopupMenu {
     private static final FMenuItem multiverseItem = new FMenuItem("The Multiverse", FSkinImage.MULTIVERSE, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(multiverseScreen);
+            setCurrentScreen(multiverseScreen);
         }
     });
     private static final FMenuItem aetherItem = new FMenuItem("The AEther", FSkinImage.AETHER_SHARD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(aetherScreen);
+            setCurrentScreen(aetherScreen);
         }
     });
     private static final FMenuItem commandersItem = new FMenuItem("Commanders", FSkinImage.COMMANDER, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(commandersScreen);
+            setCurrentScreen(commandersScreen);
         }
     });
     private static final FMenuItem planeswalkersItem = new FMenuItem("Planeswalkers", FSkinImage.PLANESWALKER, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(planeswalkersScreen);
+            setCurrentScreen(planeswalkersScreen);
         }
     });
     private static final FMenuItem collectionItem = new FMenuItem("Collection", FSkinImage.SPELLBOOK, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(collectionScreen);
+            setCurrentScreen(collectionScreen);
         }
     });
     private static final FMenuItem planeswalkItem = new FMenuItem("Planeswalk", FSkinImage.PW_BADGE_COMMON, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(planeswalkScreen);
+            setCurrentScreen(planeswalkScreen);
         }
     });
     private static final FMenuItem prefsItem = new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(prefsScreen);
+            setCurrentScreen(prefsScreen);
         }
     });
+
+    private static void setCurrentScreen(FScreen screen0) {
+        //make it so pressing Back from any screen besides Multiverse screen always goes to Multiverse screen
+        //and make it so Multiverse screen always goes back to screen that launched Planar Conquest
+        Forge.openScreen(screen0, Forge.getCurrentScreen() != multiverseScreen);
+    }
 
     public static ConquestMenu getMenu() {
         return conquestMenu;
