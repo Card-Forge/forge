@@ -87,7 +87,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Sarkhan, the Dragonspeaker", "Sarkhan's Voices", "Huh? What are you saying?)");
         add("Sarkhan Unbroken", "Sarkhan's Dragonstorm", "Skies full of dragons! Oh, what a glorious day!");
         add("Sorin Markov", "Sorin's Hypnosis", "You're getting sleepy... very sleepy...");
-        add("Sorin, Grim Nemesis", "Sorin's Vampire Army", "Taste the might of my blood relatives");
+        add("Sorin, Grim Nemesis", "Sorin's Vampire Army", "Taste the might of my blood relatives!");
         add("Sorin, Lord of Innistrad", "Sorin's Recruitment", "My favorite game is Shogi!");
         add("Sorin, Solemn Visitor", "Sorin's Abyss", "Don't get so close to the edge!");
         add("Tamiyo, the Moon Sage", "Tamiyo's Recycling", "Wash, rinse, repeat!");
