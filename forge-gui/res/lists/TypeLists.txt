@@ -259,6 +259,7 @@ Equipment
 Fortification
 [WalkerTypes]
 Ajani
+Arlinn
 Ashiok
 Bolas
 Chandra
