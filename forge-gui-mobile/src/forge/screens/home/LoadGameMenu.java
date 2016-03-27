@@ -34,8 +34,7 @@ public class LoadGameMenu extends FPopupMenu {
             item = new FMenuItem(caption0, icon0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    Forge.back(); //remove current screen from chain
-                    open();
+                    open(true); //remove current screen from chain
                     setPreferredScreen(LoadGameScreen.this);
                 }
             });
@@ -55,8 +54,11 @@ public class LoadGameMenu extends FPopupMenu {
         }
 
         public void open() {
+            open(false);
+        }
+        private void open(boolean replaceBackScreen) {
             initializeScreen();
-            Forge.openScreen(screen);
+            Forge.openScreen(screen, replaceBackScreen);
         }
 
         public void setAsBackScreen(boolean replace) {
