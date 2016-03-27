@@ -42,43 +42,43 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final FMenuItem duelsItem = new FMenuItem("Duels", FSkinImage.QUEST_GEAR, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(duelsScreen);
+            setCurrentScreen(duelsScreen);
         }
     });
     private static final FMenuItem challengesItem = new FMenuItem("Challenges", FSkinImage.QUEST_HEART, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(challengesScreen);
+            setCurrentScreen(challengesScreen);
         }
     });
     private static final FMenuItem tournamentsItem = new FMenuItem("Tournaments", FSkinImage.PACK, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(tournamentsScreen);
+            setCurrentScreen(tournamentsScreen);
         }
     });
     private static final FMenuItem decksItem = new FMenuItem("Quest Decks", FSkinImage.DECKLIST, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(decksScreen);
+            setCurrentScreen(decksScreen);
         }
     });
     private static final FMenuItem spellShopItem = new FMenuItem("Spell Shop", FSkinImage.QUEST_BOOK, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(spellShopScreen);
+            setCurrentScreen(spellShopScreen);
         }
     });
     private static final FMenuItem bazaarItem = new FMenuItem("Bazaar", FSkinImage.QUEST_BOTTLES, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(bazaarScreen);
+            setCurrentScreen(bazaarScreen);
         }
     });
     private static final FMenuItem statsItem = new FMenuItem("Statistics", FSkinImage.MULTI, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(statsScreen);
+            setCurrentScreen(statsScreen);
         }
     });
     private static final FMenuItem unlockSetsItem = new FMenuItem("Unlock Sets", FSkinImage.QUEST_MAP, new FEventHandler() {
@@ -118,9 +118,15 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final FMenuItem prefsItem = new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            Forge.openScreen(prefsScreen);
+            setCurrentScreen(prefsScreen);
         }
     });
+
+    private static void setCurrentScreen(FScreen screen0) {
+        //make it so pressing Back from any screen besides Duels screen always goes to Duels screen
+        //and make it so Duels screen always goes back to screen that launched Quest mode
+        Forge.openScreen(screen0, Forge.getCurrentScreen() != duelsScreen);
+    }
 
     private static void updateCurrentQuestScreen() {
         if (duelsItem.isSelected()) {
