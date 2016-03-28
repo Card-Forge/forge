@@ -308,7 +308,7 @@ public class LoadConquestScreen extends LaunchScreen {
                     float iconSize = h + Utils.scale(2);
                     float iconOffset = SettingsScreen.SETTING_PADDING - Utils.scale(2);
 
-                    String cards = String.valueOf(value.getUnlockedCount());
+                    String cards = String.valueOf(value.getUnlockedCardCount());
                     String shards = String.valueOf(value.getAEtherShards());
                     font = FSkinFont.get(12);
                     float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;

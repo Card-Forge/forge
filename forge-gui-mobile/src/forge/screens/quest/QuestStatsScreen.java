@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import java.util.List;
 
+import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.interfaces.IButton;
@@ -41,24 +42,12 @@ public class QuestStatsScreen extends FScreen {
             return new ScrollBounds(visibleWidth, y);
         }
     });
-    private final FLabel lblWins = scroller.add(new FLabel.Builder()
-        .icon(FSkinImage.QUEST_PLUS)
-        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
-    private final FLabel lblLosses = scroller.add(new FLabel.Builder()
-        .icon(FSkinImage.QUEST_MINUS)
-        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
-    private final FLabel lblCredits = scroller.add(new FLabel.Builder()
-        .icon(FSkinImage.QUEST_COINSTACK)
-        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
-    private final FLabel lblWinStreak = scroller.add(new FLabel.Builder()
-        .icon(FSkinImage.QUEST_PLUSPLUS)
-        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
-    private final FLabel lblLife = scroller.add(new FLabel.Builder()
-        .icon(FSkinImage.QUEST_LIFE)
-        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
-    private final FLabel lblWorld = scroller.add(new FLabel.Builder()
-        .icon(FSkinImage.QUEST_MAP)
-        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
+    private final FLabel lblWins = scroller.add(new StatLabel(FSkinImage.QUEST_PLUS));
+    private final FLabel lblLosses = scroller.add(new StatLabel(FSkinImage.QUEST_MINUS));
+    private final FLabel lblCredits = scroller.add(new StatLabel(FSkinImage.QUEST_COINSTACK));
+    private final FLabel lblWinStreak = scroller.add(new StatLabel(FSkinImage.QUEST_PLUSPLUS));
+    private final FLabel lblLife = scroller.add(new StatLabel(FSkinImage.QUEST_LIFE));
+    private final FLabel lblWorld = scroller.add(new StatLabel(FSkinImage.QUEST_MAP));
     private final FComboBox<String> cbxPet = scroller.add(new FComboBox<String>());
     private final FComboBox<String> cbxMatchLength  = new FComboBox<String>();
     private final FCheckBox cbPlant = scroller.add(new FCheckBox("Summon Plant"));
@@ -156,5 +145,11 @@ public class QuestStatsScreen extends FScreen {
     @Override
     protected void doLayout(float startY, float width, float height) {
         scroller.setBounds(0, startY, width, height - startY);
+    }
+
+    private static class StatLabel extends FLabel {
+        private StatLabel(FImage icon0) {
+            super(new FLabel.Builder().icon(icon0).font(FSkinFont.get(16)).iconScaleFactor(1));
+        }
     }
 }

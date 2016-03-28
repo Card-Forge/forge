@@ -312,7 +312,7 @@ public final class ConquestData {
         return false;
     }
 
-    public int getUnlockedCount() {
+    public int getUnlockedCardCount() {
         return unlockedCards.size();
     }
 
@@ -382,6 +382,95 @@ public final class ConquestData {
 
     public ConquestRecord getChaosBattleRecord() {
         return chaosBattleRecord;
+    }
+
+    public void updateStatLabels(IVConquestStats view, ConquestPlane plane) {
+        int wins = 0;
+        int losses = 0;
+        int conqueredCount = 0;
+        int totalEventCount = 0;
+        int unlockedCardCount = 0;
+        int totalCardCount = 0;
+        int commanderCount = 0;
+        int totalCommanderCount = 0;
+        int planeswalkerCount = 0;
+        int totalPlaneswalkerCount = 0;
+
+        if (plane != null) {
+            ConquestPlaneData planeData = planeDataMap.get(plane.getName());
+            if (planeData != null) {
+                wins = planeData.getTotalWins();
+                losses = planeData.getTotalLosses();
+                conqueredCount = planeData.getConqueredCount();
+            }
+
+            for (ConquestCommander commander : commanders) {
+                if (plane.getCommanders().contains(commander.getCard())) {
+                    commanderCount++;
+                }
+            }
+
+            totalEventCount = plane.getEventCount();
+            totalCardCount = plane.getCardPool().size();
+            totalCommanderCount = plane.getCommanders().size();
+
+            for (PaperCard card : plane.getCardPool().getAllCards()) {
+                boolean unlocked = hasUnlockedCard(card);
+                if (unlocked) {
+                    unlockedCardCount++;
+                }
+                if (card.getRules().getType().isPlaneswalker()) {
+                    if (unlocked) {
+                        planeswalkerCount++;
+                    }
+                    totalPlaneswalkerCount++;
+                }
+            }
+        }
+        else {
+            for (ConquestPlane p : FModel.getPlanes()) {
+                ConquestPlaneData planeData = planeDataMap.get(p.getName());
+                if (planeData != null) {
+                    wins += planeData.getTotalWins();
+                    losses += planeData.getTotalLosses();
+                    conqueredCount += planeData.getConqueredCount();
+                }
+
+                totalEventCount += p.getEventCount();
+                totalCardCount += p.getCardPool().size();
+                totalCommanderCount += p.getCommanders().size();
+
+                for (PaperCard card : p.getCardPool().getAllCards()) {
+                    boolean unlocked = hasUnlockedCard(card);
+                    if (unlocked) {
+                        unlockedCardCount++;
+                    }
+                    if (card.getRules().getType().isPlaneswalker()) {
+                        if (unlocked) {
+                            planeswalkerCount++;
+                        }
+                        totalPlaneswalkerCount++;
+                    }
+                }
+            }
+            commanderCount = commanders.size();
+        }
+
+        view.getLblAEtherShards().setText("AEther Shards: " + aetherShards);
+        view.getLblPlaneswalkEmblems().setText("Planeswalk Emblems: " + planeswalkEmblems);
+        view.getLblTotalWins().setText("Total Wins: " + wins);
+        view.getLblTotalLosses().setText("Total Losses: " + losses);
+        view.getLblConqueredEvents().setText("Conquered Events: " + formatRatio(conqueredCount, totalEventCount));
+        view.getLblUnlockedCards().setText("Unlocked Cards: " + formatRatio(unlockedCardCount, totalCardCount));
+        view.getLblCommanders().setText("Commanders: " + formatRatio(commanderCount, totalCommanderCount));
+        view.getLblPlaneswalkers().setText("Planeswalkers: " + formatRatio(planeswalkerCount, totalPlaneswalkerCount));
+    }
+
+    private String formatRatio(int numerator, int denominator) {
+        if (denominator == 0) {
+            return "0 / 0 (0%)";
+        }
+        return numerator + " / " + denominator + " (" + Math.round(100f * (float)numerator / (float)denominator) + "%)";
     }
 
     public void rename(final String newName) {

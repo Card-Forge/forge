@@ -80,7 +80,29 @@ public class ConquestPlaneData implements IXmlWritable {
         return conquered;
     }
 
-    public int getUnlockedCount() {
+    public int getTotalWins() {
+        int wins = 0;
+        for (int i = 0; i < eventResults.length; i++) {
+            ConquestEventRecord result = eventResults[i];
+            if (result != null) {
+                wins += result.getTotalWins();
+            }
+        }
+        return wins;
+    }
+
+    public int getTotalLosses() {
+        int losses = 0;
+        for (int i = 0; i < eventResults.length; i++) {
+            ConquestEventRecord result = eventResults[i];
+            if (result != null) {
+                losses += result.getTotalLosses();
+            }
+        }
+        return losses;
+    }
+
+    public int getUnlockedCardCount() {
         int count = 0;
         ConquestData model = FModel.getConquest().getModel();
         for (PaperCard pc : location.getPlane().getCardPool().getAllCards()) {
