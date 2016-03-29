@@ -631,8 +631,8 @@ public class CardFactoryUtil {
      * parseMath.
      * </p>
      * 
-     * @param l
-     *            an array of {@link java.lang.String} objects.
+     * @param expression
+     *            a {@link java.lang.String} object.
      * @return an array of {@link java.lang.String} objects.
      */
     public static String extractOperators(final String expression) {
@@ -645,7 +645,7 @@ public class CardFactoryUtil {
      * Parse player targeted X variables.
      * </p>
      * 
-     * @param players
+     * @param objects
      *            a {@link java.util.ArrayList} object.
      * @param s
      *            a {@link java.lang.String} object.
@@ -1487,6 +1487,14 @@ public class CardFactoryUtil {
             return doXMath(Integer.parseInt(sq[2]), m, c);
         }
 
+        // Count$Madness.<True>.<False>
+        if (sq[0].startsWith("Madness")) {
+            if (c.isMadness()) {
+                return doXMath(StringUtils.isNumeric(sq[1]) ? Integer.parseInt(sq[1]) : xCount(c, c.getSVar(sq[1])), m, c);
+            }
+            return doXMath(StringUtils.isNumeric(sq[2]) ? Integer.parseInt(sq[2]) : xCount(c, c.getSVar(sq[2])), m, c);
+        }
+
         if (sq[0].equals("YourTurns")) {
             return doXMath(cc.getTurn(), m, c);
         }
@@ -1792,7 +1800,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param paidList
-     *            a {@link forge.CardList} object.
+     *            a {@link forge.game.card.CardCollectionView} object.
      * @param string
      *            a {@link java.lang.String} object.
      * @param source
@@ -1851,7 +1859,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a {@link Iterable<Card>} object.
      * @return a boolean.
      */
     public static byte getMostProminentColors(final Iterable<Card> list) {
@@ -1889,7 +1897,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a {@link forge.game.card.CardCollection} object.
      * @return a List.
      */
     public static int[] SortColorsFromList(final CardCollection list) {
@@ -1916,7 +1924,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a {@link forge.game.card.CardCollectionView} object.
      * @return a boolean.
      */
     public static byte getMostProminentColorsFromList(final CardCollectionView list, final List<String> restrictedToColors) {
@@ -1959,7 +1967,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a {@link forge.game.card.CardCollection} object.
      * @return an int.
      */
     public static int getMostProminentCreatureTypeSize(final CardCollection list) {
@@ -1998,7 +2006,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param kw
-     *            a {@link forge.CardList} object.
+     *            a  String arry.
      * @return a List<String>.
      */
     public static List<String> sharedKeywords(final String[] kw, final String[] restrictions,
@@ -3022,7 +3030,8 @@ public class CardFactoryUtil {
     /**
      * TODO: Write javadoc for this method.
      * @param card
-     * @param abilities
+     * @param altCost
+     * @param sa
      * @return 
      */
     private static SpellAbility makeAltCostAbility(final Card card, final String altCost, final SpellAbility sa) {
