@@ -506,6 +506,25 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
+                    if (sa.hasParam("AttachedToPlayer")) {
+                        FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AttachedToPlayer"), sa);
+                        if (!list.isEmpty()) {
+                            Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a player to attach to.");
+                            if (tgtC.isAura()) {
+                                if (tgtC.isEnchanting()) {
+                                    // If this Card is already Enchanting something, need
+                                    // to unenchant it, then clear out the commands
+                                    final GameEntity oldEnchanted = tgtC.getEnchanting();
+                                    tgtC.removeEnchanting(oldEnchanted);
+                                }
+                                tgtC.enchantEntity(attachedTo);
+                            }
+                        }
+                        else { // When it should enter the battlefield attached to an illegal player it fails
+                            continue;
+                        }
+                    }
+
                     // Auras without Candidates stay in their current
                     // location
                     if (tgtC.isAura()) {
@@ -865,6 +884,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
                     } 
                     c.setController(newController, game.getNextTimestamp());
+                }
+
+                if (sa.hasParam("Transformed")) {
+                    if (c.isDoubleFaced()) {
+                        c.changeCardState("Transform", null);
+                    } else {
+                        // If it can't Transform, don't change zones.
+                        continue;
+                    }
                 }
 
                 if (sa.hasParam("AttachedTo")) {
