@@ -218,6 +218,9 @@ public enum GroupDef {
     }
 
     private static Integer getColorGroup(ColorSet color) {
+        if (color == null) {
+            return -1;
+        }
         if (color.isColorless()) {
             return 6;
         }
