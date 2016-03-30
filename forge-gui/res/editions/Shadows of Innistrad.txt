@@ -1,0 +1,308 @@
+[metadata]
+Code=SOI
+Date=2016-04-08
+Name=Shadows of Innistrad
+Code2=SOI
+Type=Expansion
+MciCode=soi
+BoosterCovers=5
+Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand
+
+[cards]
+1 R Always Watching
+2 R Angel of Deliverance
+3 C Angelic Purge
+4 C Apothecary Geist
+5 M Archangel Avacyn
+6 U Avacynian Missionaries
+7 U Bound by Moonsilver
+8 R Bygone Bishop
+9 C Cathar's Companion
+10 C Chaplain's Blessing
+11 C Dauntless Cathar
+12 R Declaration in Stone
+13 M Descend upon the Sinful
+14 C Devilthorn Fox
+15 R Drogskol Cavalry
+16 R Eerie Interlude
+17 C Emissary of the Sleepless
+18 C Ethereal Guidance
+19 C Expose Evil
+20 U Gryff's Boon
+21 R Hanweir Militia Captain
+22 U Hope Against Hope
+23 U Humble the Brute
+24 C Inquisitor's Ox
+25 C Inspiring Captain
+26 C Militant Inquisitor
+27 C Moorland Drifter
+28 U Nahiri's Machinations
+29 U Nearheath Chaplain
+30 U Not Forgotten
+31 R Odric, Lunarch Marshal
+32 U Open the Armory
+33 U Paranoid Parish-Blade
+34 U Pious Evangel
+35 C Puncturing Light
+36 U Reaper of Flight Moonsilver
+37 U Silverstrike
+38 U Spectral Shepherd
+39 C Stern Constable
+40 C Strength of Arms
+41 C Survive the Night
+42 U Tenacity
+43 R Thalia's Lieutenant
+44 C Thraben Inspector
+45 U Topplegeist
+46 U Town Gossipmonger
+47 C Unruly Mob
+48 C Vessel of Ephemera
+49 U Aberrant Researcher
+50 U Broken Concentration
+51 C Catalog
+52 U Compelling Deterrence
+53 R Confirm Suspicions
+54 U Daring Sleuth
+55 C Deny Existence
+56 C Drownyard Explorers
+57 U Drunau Corpse Trawler
+58 R Engulf the Shore
+59 R Epiphany at the Drownyard
+60 U Erdwal Illuminator
+61 U Essence Flux
+62 U Fleeting Memories
+63 R Forgotten Creation
+64 C Furtive Homunculus
+65 M Geralf's Masterpiece
+66 C Ghostly Wings
+67 C Gone Missing
+68 U Invasive Surgery
+69 M Jace, Unraveler of Secrets
+70 C Jace's Scrutiny
+71 C Just the Wind
+72 C Lamplighter of Selhoff
+73 U Manic Scribe
+74 C Nagging Thoughts
+75 R Nephalia Moondrakes
+76 C Niblis of Dusk
+77 U Ongoing Investigation
+78 C Pieces of the Puzzle
+79 U Pore Over the Pages
+80 C Press for Answers
+81 R Rattlechains
+82 U Reckless Scholar
+83 U Rise from the Tides
+84 C Seagraf Skaab
+85 C Silburlind Snapper
+86 C Silent Observer
+87 C Sleep Paralysis
+88 M Startled Awake
+89 C Stitched Mangler
+90 U Stitchwing Skaab
+91 C Stormrider Spirit
+92 R Thing in the Ice
+93 U Trail of Evidence
+94 U Uninvited Geist
+95 C Vessel of Paramnesia
+96 R Welcome to the Fold
+97 U Accursed Witch
+98 C Alms of the Vein
+99 R Asylum Visitor
+100 U Behind the Scenes
+101 M Behold the Beyond
+102 U Biting Rain
+103 U Call the Bloodline
+104 U Creeping Dread
+105 C Crow of Dark Tidings
+106 C Dead Weight
+107 R Diregraf Colossus
+108 R Elusive Tormentor
+109 R Ever After
+110 C Farbog Revenant
+111 R From Under the Floorboards
+112 C Ghoulcaller's Accomplice
+113 U Ghoulsteed
+114 U Gisa's Bidding
+115 C Grotesque Mutation
+116 U Heir of Falkenrath
+117 C Hound of the Farbogs
+118 U Indulgent Aristocrat
+119 U Kindly Stranger
+120 U Liliana's Indignation
+121 C Macabre Waltz
+122 R Markov Dreadknight
+123 C Merciless Resolve
+124 M Mindwrack Demon
+125 U Morkrut Necropod
+126 C Murderous Compulsion
+127 U Olivia's Bloodsworn
+128 U Pale Rider of Trostad
+129 U Pick the Brain
+130 C Rancid Rats
+131 M Relentless Dead
+132 C Rottenheart Ghoul
+133 C Sanitarium Skeleton
+134 C Shamble Back
+135 U Sinister Concoction
+136 C Stallion of Ashmouth
+137 C Stromkirk Mentor
+138 C Throttle
+139 R To the Slaughter
+140 U Tooth Collector
+141 R Triskaidekaphobia
+142 C Twins of Maurer Estate
+143 C Vampire Noble
+144 C Vessel of Malignity
+145 R Avacyn's Judgment
+146 C Bloodmad Vampire
+147 U Breakneck Rider
+148 R Burn from Within
+149 C Convicted Killer
+150 U Dance with Devils
+151 R Devils' Playground
+152 U Dissension in the Ranks
+153 C Dual Shot
+154 C Ember-Eye Wolf
+155 R Falkenrath Gorger
+156 C Fiery Temper
+157 R Flameblade Angel
+158 C Gatstaf Arsonists
+159 R Geier Reach Bandit
+160 U Geistblast
+161 U Gibbering Fiend
+162 M Goldnight Castigator
+163 R Harness the Storm
+164 C Howlpack Wolf
+165 C Hulking Devil
+166 U Incorrigible Youths
+167 U Inner Struggle
+168 C Insolent Neonate
+169 U Kessig Forgemaster
+170 U Lightning Axe
+171 U Mad Prophet
+172 C Magmatic Chasm
+173 U Malevolent Whispers
+174 C Pyre Hound
+175 U Ravenous Bloodseeker
+176 C Reduce to Ashes
+177 C Rush of Adrenaline
+178 C Sanguinary Mage
+179 R Scourge Wolf
+180 C Senseless Rage
+181 R Sin Prodder
+182 U Skin Invasion
+183 U Spiteful Motives
+184 U Stensia Masquerade
+185 C Structural Distortion
+186 C Tormenting Voice
+187 U Ulrich's Kindred
+188 C Uncaged Fury
+189 C Vessel of Volatility
+190 U Village Messenger
+191 C Voldaren Duelist
+192 M Wolf of Devil's Breach
+193 C Aim High
+194 U Autumnal Gloom
+195 U Briarbridge Patrol
+196 C Byway Courier
+197 C Clip Wings
+198 C Confront the Unknown
+199 U Crawling Sensation
+200 R Cryptolith Rite
+201 U Cult of the Waxing Moon
+202 R Deathcap Cultivator
+203 U Duskwatch Recruiter
+204 C Equestrian Skill
+205 C Fork in the Road
+206 U Gloomwidow
+207 U Graf Mole
+208 U Groundskeeper
+209 U Hermit of the Natterknolls
+210 C Hinterland Logger
+211 U Howlpack Resurgence
+212 R Inexorable Blob
+213 C Intrepid Provisioner
+214 C Kessig Dire Swine
+215 U Lambholt Pacifist
+216 C Loam Dryad
+217 C Might Beyond Reason
+218 C Moldgraf Scavenger
+219 U Moonlight Hunt
+220 U Obsessive Skinner
+221 U Pack Guardian
+222 C Quilled Wolf
+223 C Rabid Bite
+224 C Root Out
+225 R Sage of Ancient Lore
+226 M Seasons Past
+227 R Second Harvest
+228 R Silverfur Partisan
+229 C Solitary Hunter
+230 R Soul Swallower
+231 C Stoic Builder
+232 C Thornhide Wolves
+233 R Tireless Tracker
+234 R Traverse the Ulvenwald
+235 M Ulvenwald Hydra
+236 U Ulvenwald Mysteries
+237 C Vessel of Nascency
+238 U Veteran Cathar
+239 C Watcher in the Web
+240 U Weirding Wood
+241 R Altered Ego
+242 R Anguished Unmaking
+243 M Arlinn Kord
+244 R Fevered Visions
+245 M The Gitrog Monster
+246 R Invocation of Saint Traft
+247 M Nahiri, the Harbinger
+248 M Olivia, Mobilized for War
+249 R Prized Amalgam
+250 M Sigarda, Heron's Grace
+251 M Sorin, Grim Nemesis
+252 R Brain in a Jar
+253 R Corrupted Grafstone
+254 U Epitaph Golem
+255 C Explosive Apparatus
+256 U Harvest Hand
+257 U Haunted Cloak
+258 U Magnifying Glass
+259 U Murderer's Axe
+260 U Neglected Heirloom
+261 U Runaway Carriage
+262 C Shard of Broken Glass
+263 U Skeleton Key
+264 R Slayer's Plate
+265 R Tamiyo's Journal
+266 U Thraben Gargoyle
+267 C True-Faith Censer
+268 C Wicker Witch
+269 U Wild-Field Scarecrow
+270 R Choked Estuary
+271 R Drownyard Temple
+272 R Foreboding Ruins
+273 U Forsaken Sanctuary
+274 R Fortified Village
+275 U Foul Orchard
+276 R Game Trail
+277 U Highland Lake
+278 R Port Town
+279 U Stone Quarry
+280 C Warped Landscape
+281 R Westvale Abbey
+282 U Woodland Stream
+283 L Plains
+284 L Plains
+285 L Plains
+286 L Island
+287 L Island
+288 L Island
+289 L Swamp
+290 L Swamp
+291 L Swamp
+292 L Mountain
+293 L Mountain
+294 L Mountain
+295 L Forest
+296 L Forest
+297 L Forest
