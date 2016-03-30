@@ -1,0 +1,28 @@
+Name:Archangel Avacyn
+ManaCost:3 W W
+Types:Legendary Creature Angel
+PT:4/4
+K:Flash
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control gain indestructible until end of turn.
+SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Indestructible
+T:Mode$ ChangesZone | ValidCard$ Creature.nonAngel+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDelayTransform | TriggerZones$ Battlefield | TriggerDescription$ When a non-Angel creature you control dies, transform CARDNAME at the beginning of the next upkeep.
+SVar:TrigDelayTransform:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | Execute$ TrigTransform | TriggerDescription$ CARDNAME - Transform it at the beginning of the next end step.
+SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/archangel_avacyn.jpg
+AlternateMode:DoubleFaced
+Oracle:Flash\nFlying, vigilance\nWhen Archangel Avacyn enters the battlefield, creatures you control gain indestructible until end of turn.\nWhen a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
+
+ALTERNATE
+
+Name:Avacyn, the Purifier
+ManaCost:no cost
+Colors:red
+Types:Legendary Creature Angel
+PT:6/5
+K:Flying
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ Whenever this creature transforms into CARDNAME, it deals 3 damage to each other creature and each opponent.
+SVar:TrigDamageAll:AB$ DamageAll | Cost$ 0 | NumDmg$ 3 | ValidCards$ Creature.Other | ValidPlayers$ Player.Opponent | ValidDescription$ each other creature and each opponent.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyn_the_purifier.jpg
+Oracle:Flying\nWhen this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.

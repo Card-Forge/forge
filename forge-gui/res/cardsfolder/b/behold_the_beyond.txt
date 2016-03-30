@@ -1,0 +1,8 @@
+Name:Behold the Beyond
+ManaCost:5 B B
+Types:Sorcery
+A:SP$ Discard | Cost$ 5 B B | Mode$ Hand | SubAbility$ DBSearch | SpellDescription$ Discard your hand. Search your library for three cards and put those cards into your hand. Then shuffle your library.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Mandatory$ True | ChangeType$ Card | ChangeNum$ 3
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/behold_the_beyond.jpg
+Oracle:Discard your hand. Search your library for three cards and put those cards into your hand. Then shuffle your library.

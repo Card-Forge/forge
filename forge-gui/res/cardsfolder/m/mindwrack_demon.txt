@@ -1,0 +1,13 @@
+Name:Mindwrack Demon
+ManaCost:2 B B
+Types:Creature Demon
+PT:4/5
+K:Flying
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top four cards of your library into your graveyard.
+SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 4 | Defined$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Delirium — At the beginning of your upkeep, you lose 4 life unless there are four or more card types among cards in your graveyard.
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+SVar:X:Count$Delirium.0.4
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mindwrack_demon.jpg
+Oracle:Flying, trample\nWhen Mindwrack Demon enters the battlefield, put the top four cards of your library into your graveyard.\nDelirium — At the beginning of your upkeep, you lose 4 life unless there are four or more card types among cards in your graveyard.
