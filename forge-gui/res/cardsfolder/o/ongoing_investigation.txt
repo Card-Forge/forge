@@ -1,0 +1,11 @@
+Name:Ongoing Investigation
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ CombatDamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, investigate.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw
+A:AB$ Token | Cost$ 1 G ExileFromGrave&lt;1/Creature&gt; | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | SpellDescription$ Put a 1/1 white Human Soldier creature token onto the battlefield.
+SVar:ABDraw:AB$ Draw | Cost$ 2 Sac&lt;1/CARDNAME&gt; | NumCards$ 1 | SpellDescription$ Draw a card. 
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ongoing_investigation.jpg
+Oracle:Whenever one or more creatures you control deal combat damage to a player, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")\n{1}{G}, Exile a creature card from your graveyard: Investigate. You gain 2 life. 
+

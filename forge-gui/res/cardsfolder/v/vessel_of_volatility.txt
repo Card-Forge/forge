@@ -1,0 +1,7 @@
+Name:Vessel of Volatility
+ManaCost:1 R
+Types:Enchantment
+A:AB$ Mana | Cost$ 1 R Sac&lt;1/CARDNAME&gt; | Produced$ R | Amount$ 4 |SpellDescription$ Add {R}{R}{R}{R} to your mana pool.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_volatility.jpg
+Oracle:{1}{R}, Sacrifice Vessel of Volatility: Add {R}{R}{R}{R} to your mana pool.
+

@@ -10224,8 +10224,10 @@ forge-gui/res/cardsfolder/n/nacatl_savage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nacre_talisman.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nafs_asp.txt -text
 forge-gui/res/cardsfolder/n/nagao_bound_by_honor.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/n/nagging_thoughts.txt -text
 forge-gui/res/cardsfolder/n/nahiri_the_harbinger.txt -text
 forge-gui/res/cardsfolder/n/nahiri_the_lithomancer.txt -text
+forge-gui/res/cardsfolder/n/nahiris_machinations.txt -text
 forge-gui/res/cardsfolder/n/nakaya_shade.txt -text
 forge-gui/res/cardsfolder/n/naked_singularity.txt -text
 forge-gui/res/cardsfolder/n/nalathni_dragon.txt -text
@@ -10291,6 +10293,7 @@ forge-gui/res/cardsfolder/n/naya_panorama.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/naya_sojourners.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/naya_soulbeast.txt -text
 forge-gui/res/cardsfolder/n/near_death_experience.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/n/nearheath_chaplain.txt -text
 forge-gui/res/cardsfolder/n/nearheath_pilgrim.txt -text
 forge-gui/res/cardsfolder/n/nearheath_stalker.txt -text
 forge-gui/res/cardsfolder/n/nebuchadnezzar.txt svneol=native#text/plain
@@ -10355,6 +10358,7 @@ forge-gui/res/cardsfolder/n/nemesis_of_reason.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nemesis_trap.txt -text
 forge-gui/res/cardsfolder/n/nephalia.txt -text
 forge-gui/res/cardsfolder/n/nephalia_drownyard.txt -text
+forge-gui/res/cardsfolder/n/nephalia_moondrakes.txt -text
 forge-gui/res/cardsfolder/n/nephalia_seakite.txt -text
 forge-gui/res/cardsfolder/n/nephalia_smuggler.txt -text
 forge-gui/res/cardsfolder/n/nessian_asp.txt -text
@@ -10404,6 +10408,7 @@ forge-gui/res/cardsfolder/n/nezumi_ronin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nezumi_shadow_watcher.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nezumi_shortfang_stabwhisker_the_odious.txt -text
 forge-gui/res/cardsfolder/n/niall_silvain.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/n/niblis_of_dusk.txt -text
 forge-gui/res/cardsfolder/n/niblis_of_the_breath.txt -text
 forge-gui/res/cardsfolder/n/niblis_of_the_mist.txt -text
 forge-gui/res/cardsfolder/n/niblis_of_the_urn.txt -text
@@ -10530,6 +10535,7 @@ forge-gui/res/cardsfolder/n/norwood_riders.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/norwood_warrior.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nostalgic_dreams.txt -text
 forge-gui/res/cardsfolder/n/nosy_goblin.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/n/not_forgotten.txt -text
 forge-gui/res/cardsfolder/n/not_of_this_world.txt -text
 forge-gui/res/cardsfolder/n/nothing_can_stop_me_now.txt -text
 forge-gui/res/cardsfolder/n/notion_thief.txt -text
@@ -10628,6 +10634,7 @@ forge-gui/res/cardsfolder/o/oboro_palace_in_the_clouds.txt svneol=native#text/pl
 forge-gui/res/cardsfolder/o/obscuring_aether.txt -text
 forge-gui/res/cardsfolder/o/observant_alseid.txt -text
 forge-gui/res/cardsfolder/o/obsessive_search.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/obsessive_skinner.txt -text
 forge-gui/res/cardsfolder/o/obsianus_golem.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/obsidian_acolyte.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/obsidian_battle_axe.txt -text
@@ -10641,6 +10648,7 @@ forge-gui/res/cardsfolder/o/ocular_halo.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/oculus.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/odds_ends.txt -text
 forge-gui/res/cardsfolder/o/odious_trow.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/odric_lunarch_marshal.txt -text
 forge-gui/res/cardsfolder/o/odric_master_tactician.txt -text
 forge-gui/res/cardsfolder/o/odunos_river_trawler.txt -text
 forge-gui/res/cardsfolder/o/odylic_wraith.txt svneol=native#text/plain
@@ -10681,7 +10689,9 @@ forge-gui/res/cardsfolder/o/okina_temple_to_the_grandfathers.txt svneol=native#t
 forge-gui/res/cardsfolder/o/okk.txt -text
 forge-gui/res/cardsfolder/o/old_ghastbark.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/old_man_of_the_sea.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/olivia_mobilized_for_war.txt -text
 forge-gui/res/cardsfolder/o/olivia_voldaren.txt -text
+forge-gui/res/cardsfolder/o/olivias_bloodsworn.txt -text
 forge-gui/res/cardsfolder/o/oloro_ageless_ascetic.txt -text
 forge-gui/res/cardsfolder/o/omega_myr.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/omen.txt svneol=native#text/plain
@@ -10704,6 +10714,7 @@ forge-gui/res/cardsfolder/o/one_eyed_scarecrow.txt -text
 forge-gui/res/cardsfolder/o/one_thousand_lashes.txt -text
 forge-gui/res/cardsfolder/o/one_with_nature.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/one_with_nothing.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/ongoing_investigation.txt -text
 forge-gui/res/cardsfolder/o/oni_of_wild_places.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/oni_of_wild_places_avatar.txt -text
 forge-gui/res/cardsfolder/o/oni_possession.txt svneol=native#text/plain
@@ -10735,6 +10746,7 @@ forge-gui/res/cardsfolder/o/opalescence.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/opaline_bracers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/opaline_sliver.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/o/opaline_unicorn.txt -text
+forge-gui/res/cardsfolder/o/open_the_armory.txt -text
 forge-gui/res/cardsfolder/o/open_the_vaults.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/ophidian.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/ophidian_eye.txt svneol=native#text/plain
@@ -10894,6 +10906,7 @@ forge-gui/res/cardsfolder/o/oxidda_scrapmelter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/oxidize.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/oyobi_who_split_the_heavens.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pacifism.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/pack_guardian.txt -text
 forge-gui/res/cardsfolder/p/pack_hunt.txt -text
 forge-gui/res/cardsfolder/p/pack_rat.txt -text
 forge-gui/res/cardsfolder/p/packs_disdain.txt svneol=native#text/plain
@@ -10919,6 +10932,7 @@ forge-gui/res/cardsfolder/p/paladin_of_prahv.txt -text
 forge-gui/res/cardsfolder/p/pale_bears.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pale_moon.txt -text
 forge-gui/res/cardsfolder/p/pale_recluse.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/pale_rider_of_trostad.txt -text
 forge-gui/res/cardsfolder/p/pale_wayfarer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/paleoloth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/palinchron.txt svneol=native#text/plain
@@ -10962,6 +10976,7 @@ forge-gui/res/cardsfolder/p/parallel_thoughts.txt -text
 forge-gui/res/cardsfolder/p/paralyze.txt -text
 forge-gui/res/cardsfolder/p/paralyzing_grasp.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/paranoid_delusions.txt -text
+forge-gui/res/cardsfolder/p/paranoid_parish-blade.txt -text
 forge-gui/res/cardsfolder/p/parapet.txt -text
 forge-gui/res/cardsfolder/p/parapet_watchers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/paraselene.txt -text
@@ -11204,6 +11219,7 @@ forge-gui/res/cardsfolder/p/phytohydra.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/phytotitan.txt -text
 forge-gui/res/cardsfolder/p/pia_and_kiran_nalaar.txt -text
 forge-gui/res/cardsfolder/p/pianna_nomad_captain.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/pick_the_brain.txt -text
 forge-gui/res/cardsfolder/p/pieces_of_the_puzzle.txt -text
 forge-gui/res/cardsfolder/p/pierce_strider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/piety.txt svneol=native#text/plain
@@ -11345,6 +11361,7 @@ forge-gui/res/cardsfolder/p/porcelain_legionnaire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pore_over_the_pages.txt -text
 forge-gui/res/cardsfolder/p/porphyry_nodes.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/port_inspector.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/port_town.txt -text
 forge-gui/res/cardsfolder/p/portcullis.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/portent.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/portent_of_betrayal.txt -text
@@ -11406,6 +11423,7 @@ forge-gui/res/cardsfolder/p/prescient_chimera.txt -text
 forge-gui/res/cardsfolder/p/presence_of_gond.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/presence_of_the_master.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/presence_of_the_wise.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/press_for_answers.txt -text
 forge-gui/res/cardsfolder/p/press_into_service.txt -text
 forge-gui/res/cardsfolder/p/press_the_advantage.txt -text
 forge-gui/res/cardsfolder/p/pressure_point.txt -text
@@ -11476,6 +11494,7 @@ forge-gui/res/cardsfolder/p/pristine_skywise.txt -text
 forge-gui/res/cardsfolder/p/pristine_talisman.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/private_research.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/p/privileged_position.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/prized_amalgam.txt -text
 forge-gui/res/cardsfolder/p/prized_elephant.txt -text
 forge-gui/res/cardsfolder/p/prized_unicorn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/probe.txt -text svneol=unset#text/plain
@@ -11620,6 +11639,7 @@ forge-gui/res/cardsfolder/p/pygmy_razorback.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pygmy_troll.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pyknite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pyre_charger.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/pyre_hound.txt -text
 forge-gui/res/cardsfolder/p/pyre_zombie.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pyreheart_wolf.txt -text
 forge-gui/res/cardsfolder/p/pyretic_ritual.txt svneol=native#text/plain
@@ -11694,6 +11714,7 @@ forge-gui/res/cardsfolder/q/quietus_spike.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quill_slinger_boggart.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quilled_slagwurm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quilled_sliver.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/q/quilled_wolf.txt -text
 forge-gui/res/cardsfolder/q/quillmane_baku.txt -text
 forge-gui/res/cardsfolder/q/quillspike.txt -text
 forge-gui/res/cardsfolder/q/quirion_druid.txt svneol=native#text/plain
@@ -11705,6 +11726,7 @@ forge-gui/res/cardsfolder/q/quirion_sentinel.txt -text
 forge-gui/res/cardsfolder/q/quirion_trailblazer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/qumulox.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rabble_rouser.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/rabid_bite.txt -text
 forge-gui/res/cardsfolder/r/rabid_bloodsucker.txt -text
 forge-gui/res/cardsfolder/r/rabid_elephant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rabid_rats.txt svneol=native#text/plain
@@ -11823,6 +11845,7 @@ forge-gui/res/cardsfolder/r/rampart_crawler.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ramroller.txt -text
 forge-gui/res/cardsfolder/r/ramses_overdark.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rancid_earth.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/r/rancid_rats.txt -text
 forge-gui/res/cardsfolder/r/rancor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ranger_en_vec.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ranger_of_eos.txt svneol=native#text/plain
@@ -11849,6 +11872,7 @@ forge-gui/res/cardsfolder/r/raths_edge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rats_feast.txt -text
 forge-gui/res/cardsfolder/r/rats_of_rath.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rattleblaze_scarecrow.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/rattlechains.txt -text
 forge-gui/res/cardsfolder/r/rattleclaw_mystic.txt -text
 forge-gui/res/cardsfolder/r/ravaged_highlands.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ravages_of_war.txt svneol=native#text/plain
@@ -11860,6 +11884,7 @@ forge-gui/res/cardsfolder/r/raven_guild_initiate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/raven_guild_master.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ravenous_baboons.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ravenous_baloth.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/ravenous_bloodseeker.txt -text
 forge-gui/res/cardsfolder/r/ravenous_demon_archdemon_of_greed.txt -text
 forge-gui/res/cardsfolder/r/ravenous_leucrocota.txt -text
 forge-gui/res/cardsfolder/r/ravenous_rats.txt svneol=native#text/plain
@@ -11928,6 +11953,7 @@ forge-gui/res/cardsfolder/r/reap_what_is_sown.txt -text
 forge-gui/res/cardsfolder/r/reaper_from_the_abyss.txt -text
 forge-gui/res/cardsfolder/r/reaper_king.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/reaper_king_avatar.txt -text
+forge-gui/res/cardsfolder/r/reaper_of_flight_moonsilver.txt -text
 forge-gui/res/cardsfolder/r/reaper_of_sheoldred.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/reaper_of_the_wilds.txt -text
 forge-gui/res/cardsfolder/r/reaping_the_graves.txt svneol=native#text/plain
@@ -11990,6 +12016,7 @@ forge-gui/res/cardsfolder/r/redeem.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/redeem_the_lost.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/redirect.txt -text
 forge-gui/res/cardsfolder/r/reduce_in_stature.txt -text
+forge-gui/res/cardsfolder/r/reduce_to_ashes.txt -text
 forge-gui/res/cardsfolder/r/reduce_to_dreams.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/redwood_treefolk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/reef_pirates.txt svneol=native#text/plain
@@ -12030,6 +12057,7 @@ forge-gui/res/cardsfolder/r/reknit.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/relearn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/release_the_ants.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/relentless_assault.txt -text
+forge-gui/res/cardsfolder/r/relentless_dead.txt -text
 forge-gui/res/cardsfolder/r/relentless_hunter.txt -text
 forge-gui/res/cardsfolder/r/relentless_rats.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/relentless_skaabs.txt -text
@@ -12281,6 +12309,7 @@ forge-gui/res/cardsfolder/r/riptide_shapeshifter.txt -text svneol=unset#text/pla
 forge-gui/res/cardsfolder/r/riptide_survivor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rise_fall.txt -text
 forge-gui/res/cardsfolder/r/rise_from_the_grave.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/rise_from_the_tides.txt -text
 forge-gui/res/cardsfolder/r/rise_of_eagles.txt -text
 forge-gui/res/cardsfolder/r/rise_of_the_dark_realms.txt -text
 forge-gui/res/cardsfolder/r/rise_of_the_hobgoblins.txt svneol=native#text/plain
@@ -12396,6 +12425,7 @@ forge-gui/res/cardsfolder/r/root_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/root_greevil.txt -text
 forge-gui/res/cardsfolder/r/root_kin_ally.txt -text
 forge-gui/res/cardsfolder/r/root_maze.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/root_out.txt -text
 forge-gui/res/cardsfolder/r/root_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/root_spider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rootborn_defenses.txt -text
@@ -12429,6 +12459,7 @@ forge-gui/res/cardsfolder/r/rotlung_reanimator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rotted_hulk.txt -text
 forge-gui/res/cardsfolder/r/rotted_hystrix.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rotted_ones_lay_siege.txt -text
+forge-gui/res/cardsfolder/r/rottenheart_ghoul.txt -text
 forge-gui/res/cardsfolder/r/rotting_fensnake.txt -text
 forge-gui/res/cardsfolder/r/rotting_giant.txt -text
 forge-gui/res/cardsfolder/r/rotting_legion.txt svneol=native#text/plain
@@ -12480,6 +12511,7 @@ forge-gui/res/cardsfolder/r/rumbling_slum_avatar.txt -text
 forge-gui/res/cardsfolder/r/rummaging_goblin.txt -text
 forge-gui/res/cardsfolder/r/rummaging_wizard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/run_wild.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/runaway_carriage.txt -text
 forge-gui/res/cardsfolder/r/rune_cervin_rider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rune_of_protection_artifacts.txt -text
 forge-gui/res/cardsfolder/r/rune_of_protection_black.txt -text
@@ -12507,6 +12539,7 @@ forge-gui/res/cardsfolder/r/runners_bane.txt -text
 forge-gui/res/cardsfolder/r/rupture.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rupture_spire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ruric_thar_the_unbowed.txt -text
+forge-gui/res/cardsfolder/r/rush_of_adrenaline.txt -text
 forge-gui/res/cardsfolder/r/rush_of_battle.txt -text
 forge-gui/res/cardsfolder/r/rush_of_blood.txt -text
 forge-gui/res/cardsfolder/r/rush_of_ice.txt -text
@@ -12663,9 +12696,11 @@ forge-gui/res/cardsfolder/s/sangrite_surge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sangromancer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sangrophage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sanguimancy.txt -text
+forge-gui/res/cardsfolder/s/sanguinary_mage.txt -text
 forge-gui/res/cardsfolder/s/sanguine_bond.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sanguine_guard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sanguine_praetor.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/sanitarium_skeleton.txt -text
 forge-gui/res/cardsfolder/s/sanity_gnawers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sanity_grinding.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sapling_of_colfenor.txt svneol=native#text/plain
@@ -12831,6 +12866,7 @@ forge-gui/res/cardsfolder/s/scourge_of_the_nobilis.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scourge_of_the_throne.txt -text
 forge-gui/res/cardsfolder/s/scourge_of_valkas.txt -text
 forge-gui/res/cardsfolder/s/scourge_servant.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/scourge_wolf.txt -text
 forge-gui/res/cardsfolder/s/scourgemark.txt -text
 forge-gui/res/cardsfolder/s/scourglass.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scouring_sands.txt -text
@@ -12906,6 +12942,7 @@ forge-gui/res/cardsfolder/s/seachrome_coast.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/seacoast_drake.txt -text
 forge-gui/res/cardsfolder/s/seafarers_quay.txt -text
 forge-gui/res/cardsfolder/s/seafloor_debris.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/seagraf_skaab.txt -text
 forge-gui/res/cardsfolder/s/seahunter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/seal_of_cleansing.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/seal_of_doom.txt svneol=native#text/plain
@@ -12945,6 +12982,7 @@ forge-gui/res/cardsfolder/s/secluded_glen.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/secluded_steppe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/second_chance.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/second_guess.txt -text
+forge-gui/res/cardsfolder/s/second_harvest.txt -text
 forge-gui/res/cardsfolder/s/second_sight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/second_sunrise.txt -text
 forge-gui/res/cardsfolder/s/second_thoughts.txt svneol=native#text/plain
@@ -13042,6 +13080,7 @@ forge-gui/res/cardsfolder/s/sengir_vampire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sensation_gorger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sensei_golden_tail.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/senseis_divining_top.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/senseless_rage.txt -text
 forge-gui/res/cardsfolder/s/sensor_splicer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sensory_deprivation.txt -text
 forge-gui/res/cardsfolder/s/sentinel.txt -text
@@ -13159,6 +13198,7 @@ forge-gui/res/cardsfolder/s/shaman_of_spring.txt -text
 forge-gui/res/cardsfolder/s/shaman_of_the_great_hunt.txt -text
 forge-gui/res/cardsfolder/s/shaman_of_the_pack.txt -text
 forge-gui/res/cardsfolder/s/shamanic_revelation.txt -text
+forge-gui/res/cardsfolder/s/shamble_back.txt -text
 forge-gui/res/cardsfolder/s/shambleshark.txt -text
 forge-gui/res/cardsfolder/s/shambling_attendants.txt -text
 forge-gui/res/cardsfolder/s/shambling_ghoul.txt -text
@@ -13179,6 +13219,7 @@ forge-gui/res/cardsfolder/s/shapesharer.txt -text
 forge-gui/res/cardsfolder/s/shapeshifter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shapeshifters_marrow.txt -text
 forge-gui/res/cardsfolder/s/shard_convergence.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/shard_of_broken_glass.txt -text
 forge-gui/res/cardsfolder/s/shard_phoenix.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shard_volley.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sharding_sphinx.txt svneol=native#text/plain
@@ -13371,6 +13412,7 @@ forge-gui/res/cardsfolder/s/siegecraft.txt -text
 forge-gui/res/cardsfolder/s/sift.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sift_through_sands.txt -text
 forge-gui/res/cardsfolder/s/sifter_of_skulls.txt -text
+forge-gui/res/cardsfolder/s/sigarda_herons_grace.txt -text
 forge-gui/res/cardsfolder/s/sigarda_host_of_herons.txt -text
 forge-gui/res/cardsfolder/s/sight_beyond_sight.txt -text
 forge-gui/res/cardsfolder/s/sight_of_the_scalelords.txt -text
@@ -13393,6 +13435,7 @@ forge-gui/res/cardsfolder/s/sigiled_starfish.txt -text
 forge-gui/res/cardsfolder/s/sign_in_blood.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/signal_pest.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/signal_the_clans.txt -text
+forge-gui/res/cardsfolder/s/silburlind_snapper.txt -text
 forge-gui/res/cardsfolder/s/silence.txt -text
 forge-gui/res/cardsfolder/s/silence_the_believers.txt -text
 forge-gui/res/cardsfolder/s/silent_arbiter.txt svneol=native#text/plain
@@ -13402,6 +13445,7 @@ forge-gui/res/cardsfolder/s/silent_attendant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silent_blade_oni.txt -text
 forge-gui/res/cardsfolder/s/silent_chant_zubera.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silent_departure.txt -text
+forge-gui/res/cardsfolder/s/silent_observer.txt -text
 forge-gui/res/cardsfolder/s/silent_sentinel.txt -text
 forge-gui/res/cardsfolder/s/silent_skimmer.txt -text
 forge-gui/res/cardsfolder/s/silent_specter.txt svneol=native#text/plain
@@ -13435,12 +13479,14 @@ forge-gui/res/cardsfolder/s/silverblade_paladin.txt -text
 forge-gui/res/cardsfolder/s/silverchase_fox.txt -text
 forge-gui/res/cardsfolder/s/silverclaw_griffin.txt -text
 forge-gui/res/cardsfolder/s/silvercoat_lion.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/silverfur_partisan.txt -text
 forge-gui/res/cardsfolder/s/silvergill_adept.txt -text
 forge-gui/res/cardsfolder/s/silvergill_douser.txt -text
 forge-gui/res/cardsfolder/s/silverglade_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silverglade_pathfinder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silverskin_armor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silverstorm_samurai.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/silverstrike.txt -text
 forge-gui/res/cardsfolder/s/silvos_rogue_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sima_yi_wei_field_marshal.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/simian_brawler.txt -text
@@ -13469,6 +13515,7 @@ forge-gui/res/cardsfolder/s/singe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/singe_mind_ogre.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/singing_bell_strike.txt -text
 forge-gui/res/cardsfolder/s/singing_tree.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/sinister_concoction.txt -text
 forge-gui/res/cardsfolder/s/sinister_possession.txt -text
 forge-gui/res/cardsfolder/s/sinister_strength.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/sink_into_takenuma.txt -text
@@ -13512,6 +13559,7 @@ forge-gui/res/cardsfolder/s/skeletal_scrying.txt -text
 forge-gui/res/cardsfolder/s/skeletal_snake.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skeletal_vampire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skeletal_wurm.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/skeleton_key.txt -text
 forge-gui/res/cardsfolder/s/skeleton_scavengers.txt -text
 forge-gui/res/cardsfolder/s/skeleton_shard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skeleton_ship.txt svneol=native#text/plain
@@ -13647,8 +13695,10 @@ forge-gui/res/cardsfolder/s/slave_of_bolas.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/slavering_nulls.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/slay.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/slayer_of_the_wicked.txt -text
+forge-gui/res/cardsfolder/s/slayers_plate.txt -text
 forge-gui/res/cardsfolder/s/slayers_stronghold.txt -text
 forge-gui/res/cardsfolder/s/sleep.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/sleep_paralysis.txt -text
 forge-gui/res/cardsfolder/s/sleeper_agent.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sleepers_guile.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sleepers_robe.txt svneol=native#text/plain
@@ -13831,6 +13881,7 @@ forge-gui/res/cardsfolder/s/soraya_the_falconer.txt -text
 forge-gui/res/cardsfolder/s/sorcerers_strongbox.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sorceress_queen.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sorcerous_sight.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/sorin_grim_nemesis.txt -text
 forge-gui/res/cardsfolder/s/sorin_lord_of_innistrad.txt -text
 forge-gui/res/cardsfolder/s/sorin_markov.txt -text
 forge-gui/res/cardsfolder/s/sorin_solemn_visitor.txt -text
@@ -13876,6 +13927,7 @@ forge-gui/res/cardsfolder/s/soul_spike.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_stair_expedition.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_strings.txt -text
 forge-gui/res/cardsfolder/s/soul_summons.txt -text
+forge-gui/res/cardsfolder/s/soul_swallower.txt -text
 forge-gui/res/cardsfolder/s/soul_tithe.txt -text
 forge-gui/res/cardsfolder/s/soul_warden.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soulblade_djinn.txt -text
@@ -13956,6 +14008,7 @@ forge-gui/res/cardsfolder/s/spectral_prison.txt -text
 forge-gui/res/cardsfolder/s/spectral_procession.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spectral_rider.txt -text
 forge-gui/res/cardsfolder/s/spectral_searchlight.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/spectral_shepherd.txt -text
 forge-gui/res/cardsfolder/s/spectral_shield.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spectral_shift.txt -text
 forge-gui/res/cardsfolder/s/spectral_sliver.txt svneol=native#text/plain
@@ -14094,6 +14147,7 @@ forge-gui/res/cardsfolder/s/spitebellows.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spiteflame_witch.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spiteful_blow.txt -text
 forge-gui/res/cardsfolder/s/spiteful_bully.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/spiteful_motives.txt -text
 forge-gui/res/cardsfolder/s/spiteful_returned.txt -text
 forge-gui/res/cardsfolder/s/spiteful_shadows.txt -text
 forge-gui/res/cardsfolder/s/spiteful_visions.txt svneol=native#text/plain
@@ -14203,6 +14257,7 @@ forge-gui/res/cardsfolder/s/stalking_tiger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stalking_tiger_avatar.txt -text
 forge-gui/res/cardsfolder/s/stalking_vengeance.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stalking_yeti.txt -text
+forge-gui/res/cardsfolder/s/stallion_of_ashmouth.txt -text
 forge-gui/res/cardsfolder/s/stalwart_aven.txt -text
 forge-gui/res/cardsfolder/s/stalwart_shield_bearers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stamina.txt -text
@@ -14277,9 +14332,11 @@ forge-gui/res/cardsfolder/s/stench_of_decay.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stench_of_evil.txt -text
 forge-gui/res/cardsfolder/s/stenchskipper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stensia_bloodhall.txt -text
+forge-gui/res/cardsfolder/s/stensia_masquerade.txt -text
 forge-gui/res/cardsfolder/s/steppe_glider.txt -text
 forge-gui/res/cardsfolder/s/steppe_lynx.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sterling_grove.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/stern_constable.txt -text
 forge-gui/res/cardsfolder/s/stern_judge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stern_marshal.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stern_mentor.txt -text
@@ -14303,9 +14360,12 @@ forge-gui/res/cardsfolder/s/stirring_wildwood.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stitch_in_time.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stitch_together.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stitched_drake.txt -text
+forge-gui/res/cardsfolder/s/stitched_mangler.txt -text
 forge-gui/res/cardsfolder/s/stitcher_geralf.txt -text
 forge-gui/res/cardsfolder/s/stitchers_apprentice.txt -text
+forge-gui/res/cardsfolder/s/stitchwing_skaab.txt -text
 forge-gui/res/cardsfolder/s/stoic_angel.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/stoic_builder.txt -text
 forge-gui/res/cardsfolder/s/stoic_champion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stoic_ephemera.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stoic_rebuttal.txt svneol=native#text/plain
@@ -14378,6 +14438,7 @@ forge-gui/res/cardsfolder/s/stormcrag_elemental.txt -text
 forge-gui/res/cardsfolder/s/stormfront_pegasus.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stormfront_riders.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stormrider_rig.txt -text
+forge-gui/res/cardsfolder/s/stormrider_spirit.txt -text
 forge-gui/res/cardsfolder/s/stormscale_anarch.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stormscape_apprentice.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stormscape_battlemage.txt -text
@@ -14416,6 +14477,7 @@ forge-gui/res/cardsfolder/s/street_wraith.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/streetbreaker_wurm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/strength_from_the_fallen.txt -text
 forge-gui/res/cardsfolder/s/strength_in_numbers.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/strength_of_arms.txt -text
 forge-gui/res/cardsfolder/s/strength_of_cedars.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/strength_of_isolation.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/strength_of_lunacy.txt svneol=native#text/plain
@@ -14433,6 +14495,7 @@ forge-gui/res/cardsfolder/s/stromgald_cabal.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stromgald_crusader.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stromgald_spy.txt -text
 forge-gui/res/cardsfolder/s/stromkirk_captain.txt -text
+forge-gui/res/cardsfolder/s/stromkirk_mentor.txt -text
 forge-gui/res/cardsfolder/s/stromkirk_noble.txt -text
 forge-gui/res/cardsfolder/s/stromkirk_patrol.txt -text
 forge-gui/res/cardsfolder/s/strongarm_monk.txt -text
@@ -14449,6 +14512,7 @@ forge-gui/res/cardsfolder/s/stronghold_rats.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stronghold_taskmaster.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stronghold_zeppelin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/structural_collapse.txt -text
+forge-gui/res/cardsfolder/s/structural_distortion.txt -text
 forge-gui/res/cardsfolder/s/struggle_for_sanity.txt -text
 forge-gui/res/cardsfolder/s/stubborn_denial.txt -text
 forge-gui/res/cardsfolder/s/student_of_elements_tobita_master_of_winds.txt -text
@@ -14606,6 +14670,7 @@ forge-gui/res/cardsfolder/s/survey_the_wreckage.txt -text
 forge-gui/res/cardsfolder/s/surveyors_scope.txt -text
 forge-gui/res/cardsfolder/s/survival_cache.txt -text
 forge-gui/res/cardsfolder/s/survival_of_the_fittest.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/survive_the_night.txt -text
 forge-gui/res/cardsfolder/s/survivor_of_the_unseen.txt -text
 forge-gui/res/cardsfolder/s/suspension_field.txt -text
 forge-gui/res/cardsfolder/s/sustainer_of_the_realm.txt svneol=native#text/plain
@@ -14774,6 +14839,7 @@ forge-gui/res/cardsfolder/t/talruum_piper.txt -text
 forge-gui/res/cardsfolder/t/talus_paladin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tamanoa.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tamiyo_the_moon_sage.txt -text
+forge-gui/res/cardsfolder/t/tamiyos_journal.txt -text
 forge-gui/res/cardsfolder/t/tandem_lookout.txt -text
 forge-gui/res/cardsfolder/t/tandem_tactics.txt -text
 forge-gui/res/cardsfolder/t/tangle.txt -text
@@ -14926,6 +14992,7 @@ forge-gui/res/cardsfolder/t/temur_runemark.txt -text
 forge-gui/res/cardsfolder/t/temur_sabertooth.txt -text
 forge-gui/res/cardsfolder/t/temur_war_shaman.txt -text
 forge-gui/res/cardsfolder/t/tenacious_dead.txt -text
+forge-gui/res/cardsfolder/t/tenacity.txt -text
 forge-gui/res/cardsfolder/t/tendo_ice_bridge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tendrils_of_agony.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tendrils_of_corruption.txt svneol=native#text/plain
@@ -14982,6 +15049,7 @@ forge-gui/res/cardsfolder/t/thalakos_scout.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thalakos_seer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thalakos_sentry.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thalia_guardian_of_thraben.txt -text
+forge-gui/res/cardsfolder/t/thalias_lieutenant.txt -text
 forge-gui/res/cardsfolder/t/thallid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thallid_devourer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thallid_germinator.txt svneol=native#text/plain
@@ -15005,6 +15073,7 @@ forge-gui/res/cardsfolder/t/the_dead_shall_serve.txt -text
 forge-gui/res/cardsfolder/t/the_eon_fog.txt -text
 forge-gui/res/cardsfolder/t/the_fallen.txt -text
 forge-gui/res/cardsfolder/t/the_fourth_sphere.txt -text
+forge-gui/res/cardsfolder/t/the_gitrog_monster.txt -text
 forge-gui/res/cardsfolder/t/the_great_aurora.txt -text
 forge-gui/res/cardsfolder/t/the_great_forest.txt -text
 forge-gui/res/cardsfolder/t/the_hippodrome.txt -text
@@ -15062,6 +15131,7 @@ forge-gui/res/cardsfolder/t/thorn_thrash_viashino.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thornbite_staff.txt -text
 forge-gui/res/cardsfolder/t/thornbow_archer.txt -text
 forge-gui/res/cardsfolder/t/thorncaster_sliver.txt -text
+forge-gui/res/cardsfolder/t/thornhide_wolves.txt -text
 forge-gui/res/cardsfolder/t/thornling.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thornscape_apprentice.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thornscape_battlemage.txt -text
@@ -15104,6 +15174,7 @@ forge-gui/res/cardsfolder/t/thousand_winds.txt -text
 forge-gui/res/cardsfolder/t/thousand_year_elixir.txt -text
 forge-gui/res/cardsfolder/t/thraben_doomsayer.txt -text
 forge-gui/res/cardsfolder/t/thraben_heretic.txt -text
+forge-gui/res/cardsfolder/t/thraben_inspector.txt -text
 forge-gui/res/cardsfolder/t/thraben_purebloods.txt -text
 forge-gui/res/cardsfolder/t/thraben_sentry_thraben_militia.txt -text
 forge-gui/res/cardsfolder/t/thraben_valiant.txt -text
@@ -15252,6 +15323,7 @@ forge-gui/res/cardsfolder/t/tinder_wall.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tine_shrike.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tinker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tireless_missionaries.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/tireless_tracker.txt -text
 forge-gui/res/cardsfolder/t/tireless_tribe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/titan_forge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/titan_of_eternal_fire.txt -text
@@ -15272,6 +15344,7 @@ forge-gui/res/cardsfolder/t/tithe_drinker.txt -text
 forge-gui/res/cardsfolder/t/tivadar_of_thorn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tivadars_crusade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/to_arms.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/to_the_slaughter.txt -text
 forge-gui/res/cardsfolder/t/tobias_andrion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/toil_to_renown.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/toil_trouble.txt -text
@@ -15298,11 +15371,13 @@ forge-gui/res/cardsfolder/t/tonic_peddler.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tooth_and_claw.txt -text
 forge-gui/res/cardsfolder/t/tooth_and_nail.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tooth_claw_and_tail.txt -text
+forge-gui/res/cardsfolder/t/tooth_collector.txt -text
 forge-gui/res/cardsfolder/t/tooth_of_chiss_goria.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tooth_of_ramos.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/topan_ascetic.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/topan_freeblade.txt -text
 forge-gui/res/cardsfolder/t/topple.txt -text
+forge-gui/res/cardsfolder/t/topplegeist.txt -text
 forge-gui/res/cardsfolder/t/tor_giant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tor_wauki.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/torch_drake.txt svneol=native#text/plain
@@ -15385,6 +15460,7 @@ forge-gui/res/cardsfolder/t/trading_post.txt -text
 forge-gui/res/cardsfolder/t/tragic_arrogance.txt -text
 forge-gui/res/cardsfolder/t/tragic_poet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tragic_slip.txt -text
+forge-gui/res/cardsfolder/t/trail_of_evidence.txt -text
 forge-gui/res/cardsfolder/t/trail_of_mystery.txt -text
 forge-gui/res/cardsfolder/t/trail_of_the_mage_rings.txt -text
 forge-gui/res/cardsfolder/t/trailblazer.txt svneol=native#text/plain
@@ -15436,6 +15512,7 @@ forge-gui/res/cardsfolder/t/travelers_amulet.txt -text
 forge-gui/res/cardsfolder/t/travelers_cloak.txt -text
 forge-gui/res/cardsfolder/t/traveling_philosopher.txt -text
 forge-gui/res/cardsfolder/t/traveling_plague.txt -text
+forge-gui/res/cardsfolder/t/traverse_the_ulvenwald.txt -text
 forge-gui/res/cardsfolder/t/treacherous_link.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/treacherous_pit_dweller.txt -text
 forge-gui/res/cardsfolder/t/treacherous_urge.txt svneol=native#text/plain
@@ -15505,6 +15582,7 @@ forge-gui/res/cardsfolder/t/trinket_mage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/trip_noose.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/trip_wire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/triplicate_spirits.txt -text
+forge-gui/res/cardsfolder/t/triskaidekaphobia.txt -text
 forge-gui/res/cardsfolder/t/triskelavus.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/triskelion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/triton_cavalry.txt -text
@@ -15531,6 +15609,7 @@ forge-gui/res/cardsfolder/t/trostanis_summoner.txt -text
 forge-gui/res/cardsfolder/t/troubled_healer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/troublesome_spirit.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/truce.txt -text
+forge-gui/res/cardsfolder/t/true-faith_censer.txt -text
 forge-gui/res/cardsfolder/t/true_believer.txt -text
 forge-gui/res/cardsfolder/t/true_conviction.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/true_name_nemesis.txt -text
@@ -15592,6 +15671,7 @@ forge-gui/res/cardsfolder/t/twinblade_slasher.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/twincast.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/twinflame.txt -text
 forge-gui/res/cardsfolder/t/twinning_glass.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/t/twins_of_maurer_estate.txt -text
 forge-gui/res/cardsfolder/t/twinstrike.txt -text
 forge-gui/res/cardsfolder/t/twist_allegiance.txt -text
 forge-gui/res/cardsfolder/t/twisted_abomination.txt svneol=native#text/plain
@@ -15634,8 +15714,11 @@ forge-gui/res/cardsfolder/u/ulamogs_nullifier.txt -text
 forge-gui/res/cardsfolder/u/ulamogs_reclaimer.txt -text
 forge-gui/res/cardsfolder/u/ulasht_the_hate_seed.txt -text
 forge-gui/res/cardsfolder/u/ulcerate.txt -text
+forge-gui/res/cardsfolder/u/ulrichs_kindred.txt -text
 forge-gui/res/cardsfolder/u/ultimate_price.txt -text
 forge-gui/res/cardsfolder/u/ulvenwald_bear.txt -text
+forge-gui/res/cardsfolder/u/ulvenwald_hydra.txt -text
+forge-gui/res/cardsfolder/u/ulvenwald_mysteries.txt -text
 forge-gui/res/cardsfolder/u/ulvenwald_mystics_ulvenwald_primordials.txt -text
 forge-gui/res/cardsfolder/u/ulvenwald_tracker.txt -text
 forge-gui/res/cardsfolder/u/umara_entangler.txt -text
@@ -15650,6 +15733,7 @@ forge-gui/res/cardsfolder/u/unblinking_bleb.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/unbreathing_horde.txt -text
 forge-gui/res/cardsfolder/u/unburden.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/unburial_rites.txt -text
+forge-gui/res/cardsfolder/u/uncaged_fury.txt -text
 forge-gui/res/cardsfolder/u/uncanny_speed.txt -text
 forge-gui/res/cardsfolder/u/unchecked_growth.txt -text
 forge-gui/res/cardsfolder/u/uncle_istvan.txt svneol=native#text/plain
@@ -15828,6 +15912,7 @@ forge-gui/res/cardsfolder/v/vampire_hounds.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vampire_interloper.txt -text
 forge-gui/res/cardsfolder/v/vampire_lacerator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vampire_nighthawk.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/v/vampire_noble.txt -text
 forge-gui/res/cardsfolder/v/vampire_nocturnus.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vampire_nocturnus_avatar.txt -text
 forge-gui/res/cardsfolder/v/vampire_outcasts.txt svneol=native#text/plain
@@ -15958,6 +16043,11 @@ forge-gui/res/cardsfolder/v/vertigo.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vertigo_spawn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vesper_ghoul.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vessel_of_endless_rest.txt -text
+forge-gui/res/cardsfolder/v/vessel_of_ephemera.txt -text
+forge-gui/res/cardsfolder/v/vessel_of_malignity.txt -text
+forge-gui/res/cardsfolder/v/vessel_of_nascency.txt -text
+forge-gui/res/cardsfolder/v/vessel_of_paramnesia.txt -text
+forge-gui/res/cardsfolder/v/vessel_of_volatility.txt -text
 forge-gui/res/cardsfolder/v/vestige_of_emrakul.txt -text
 forge-gui/res/cardsfolder/v/vesuva.txt -text
 forge-gui/res/cardsfolder/v/vesuvan_doppelganger.txt svneol=native#text/plain
@@ -15966,6 +16056,7 @@ forge-gui/res/cardsfolder/v/veteran_armorer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/veteran_armorsmith.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/veteran_bodyguard.txt -text
 forge-gui/res/cardsfolder/v/veteran_brawlers.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/v/veteran_cathar.txt -text
 forge-gui/res/cardsfolder/v/veteran_cavalier.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/veteran_explorer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/veteran_of_the_depths.txt svneol=native#text/plain
@@ -16171,6 +16262,7 @@ forge-gui/res/cardsfolder/v/volcanic_vision.txt -text
 forge-gui/res/cardsfolder/v/volcanic_wind.txt -text
 forge-gui/res/cardsfolder/v/volcano_hellion.txt -text
 forge-gui/res/cardsfolder/v/volcano_imp.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/v/voldaren_duelist.txt -text
 forge-gui/res/cardsfolder/v/volition_reins.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volley_of_boulders.txt -text
 forge-gui/res/cardsfolder/v/volrath.txt -text
@@ -16463,6 +16555,8 @@ forge-gui/res/cardsfolder/w/weight_of_spires.txt -text
 forge-gui/res/cardsfolder/w/weight_of_the_underworld.txt -text
 forge-gui/res/cardsfolder/w/weird_harvest.txt -text
 forge-gui/res/cardsfolder/w/weirding_shaman.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/w/weirding_wood.txt -text
+forge-gui/res/cardsfolder/w/welcome_to_the_fold.txt -text
 forge-gui/res/cardsfolder/w/welding_jar.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/welkin_guide.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/welkin_hawk.txt svneol=native#text/plain
@@ -16478,6 +16572,7 @@ forge-gui/res/cardsfolder/w/wellspring.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wellwisher.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/werebear.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/western_paladin.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/w/westvale_abbey.txt -text
 forge-gui/res/cardsfolder/w/wetland_sambar.txt -text
 forge-gui/res/cardsfolder/w/whalebone_glider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wheel_and_deal.txt svneol=native#text/plain
@@ -16538,11 +16633,13 @@ forge-gui/res/cardsfolder/w/wicked_akuba.txt -text
 forge-gui/res/cardsfolder/w/wicked_pact.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wicked_reward.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wicker_warcrawler.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/w/wicker_witch.txt -text
 forge-gui/res/cardsfolder/w/wickerbough_elder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/widespread_panic.txt -text
 forge-gui/res/cardsfolder/w/wielding_the_green_dragon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wight_of_precinct_six.txt -text
 forge-gui/res/cardsfolder/w/wiitigo.txt -text
+forge-gui/res/cardsfolder/w/wild-field_scarecrow.txt -text
 forge-gui/res/cardsfolder/w/wild_aesthir.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wild_beastmaster.txt -text
 forge-gui/res/cardsfolder/w/wild_cantor.txt svneol=native#text/plain
@@ -16698,6 +16795,7 @@ forge-gui/res/cardsfolder/w/wojek_apothecary.txt -text
 forge-gui/res/cardsfolder/w/wojek_embermage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wojek_halberdiers.txt -text
 forge-gui/res/cardsfolder/w/wojek_siren.txt -text
+forge-gui/res/cardsfolder/w/wolf_of_devils_breach.txt -text
 forge-gui/res/cardsfolder/w/wolf_pack.txt -text
 forge-gui/res/cardsfolder/w/wolf_skull_shaman.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wolfbitten_captive_krallenhorde_killer.txt -text

@@ -1,0 +1,10 @@
+Name:Pyre Hound
+ManaCost:3 R
+Types:Creature Elemental Hound
+PT:2/3
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a +1/+1 counter on CARDNAME.
+SVar:BuffedBy:Instant,Sorcery
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_hound.jpg
+Oracle:Trample\nWhenever you cast an instant or sorcery spell, put a +1/+1 counter on Pyre Hound.
+

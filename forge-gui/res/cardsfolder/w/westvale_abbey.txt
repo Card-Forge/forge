@@ -1,0 +1,25 @@
+Name:Westvale Abbey
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Token | Cost$ 5 T PayLife&lt;1&gt; | TokenAmount$ 1 | TokenName$ Human Cleric | TokenTypes$ Creature,Human,Cleric | TokenOwner$ You | TokenColors$ White,Black | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white and black Human Cleric creature token onto the battlefield.
+A:AB$SetState | Cost$ 5 T Sac&lt;5/Creature&gt; | Defined$ Self | Mode$ Transform | SubAbility$ DBUntap | SpellDescription$ Transform CARDNAME, then untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Self
+SVar:Picture:http://www.wizards.com/global/images/magic/general/westvale_abbey.jpg
+AlternateMode:DoubleFaced
+Oracle:{T}: Add {C} to your mana pool.\n{5}, {T}, Pay 1 life: Put a 1/1 white and black Human Cleric creature token onto the battlefield.\n{5}, {T}, Sacrifice five creatures: Transform Westvale Abbey, then untap it.
+
+ALTERNATE
+
+Name:Ormendahl, Profane Prince
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Demon
+PT:9/7
+K:Flying
+K:Lifelink
+K:Indestructible
+K:Haste
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ormendahl_profane_prince.jpg
+Oracle:Flying, lifelink, indestructible, haste
+

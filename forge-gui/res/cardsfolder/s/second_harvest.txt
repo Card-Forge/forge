@@ -1,0 +1,9 @@
+Name:Second Harvest
+ManaCost:2 G G
+Types:Instant
+A:SP$ RepeatEach | Cost$ 2 G G | RepeatSubAbility$ DBClone | RepeatCards$ Permanent.token+YouCtrl | AILogic$ CloneAllTokens | SpellDescription$ For each token you control, put a token onto the battlefield that's a copy of that permanent.
+SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/second_harvest.jpg
+Oracle:For each token you control, put a token onto the battlefield that's a copy of that permanent.
+

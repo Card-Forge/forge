@@ -1,0 +1,8 @@
+Name:Sanitarium Skeleton
+ManaCost:B
+Types:Creature Skeleton
+PT:1/2
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sanitarium_skeleton.jpg
+Oracle:{2}{B}: Return Sanitarium Skeleton from your graveyard to your hand.
+

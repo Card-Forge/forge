@@ -1,0 +1,9 @@
+Name:Shamble Back
+ManaCost:B
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield. You gain 2 life.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie SOI | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$GainLife | LifeAmount$ 2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shamble_back.jpg
+Oracle:Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield. You gain 2 life.
+

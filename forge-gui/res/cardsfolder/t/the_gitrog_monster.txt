@@ -1,0 +1,13 @@
+Name:The Gitrog Monster
+ManaCost:3 B G
+Types:Legendary Creature Frog Horror
+PT:6/6
+K:Deathtouch
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacUnless | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you sacrifice a land.
+SVar:TrigSacUnless:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ Sac&lt;1/Land&gt; | UnlessPayer$ You 
+S:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land on each of your turns. 
+T:Mode$ ChangesZone | ValidCard$ Land.YouOwn | OncePerEffect$ True | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever one or more land cards are put into your graveyard from anywhere, draw a card. 
+SVar:TrigDraw:DB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/the_gitrog_monster.jpg
+Oracle:Deathtouch\nAt the beginning of your upkeep, sacrifice The Gitrog Monster unless you sacrifice a land.\nYou may play an additional land on each of your turns.\nWhenever one or more land cards are put into your graveyard from anywhere, draw a card. 
+

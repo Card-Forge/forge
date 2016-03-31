@@ -1,0 +1,9 @@
+Name:Stoic Builder
+ManaCost:2 G
+Types:Creature Human
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target land card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Land.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_builder.jpg
+Oracle:When Stoic Builder enters the battlefield, you may return target land card from your graveyard to your hand.
+

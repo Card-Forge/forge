@@ -1,0 +1,9 @@
+Name:Odric, Lunarch Marshal
+ManaCost:3 W
+Types:Legendary Creature Human Soldier
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of each combat, creatures you control gain first strike until end of turn if a creature you control has first strike. The same is true for flying, deathtouch, double strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance.
+SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ First Strike &amp; Flying &amp; Deathtouch &amp; Double Strike &amp; Haste &amp; Hexproof &amp; Indestructible &amp; Lifelink &amp; Menace &amp; Reach &amp; Skulk &amp; Trample &amp; Vigilance | SharedKeywordsZone$ Battlefield | SharedRestrictions$ Creature.YouCtrl 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/odric_lunarch_marshal.jpg
+Oracle:At the beginning of each combat, creatures you control gain first strike until end of turn if a creature you control has first strike. The same is true for flying, deathtouch, double strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance.
+

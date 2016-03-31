@@ -1,0 +1,10 @@
+Name:Sigarda, Heron's Grace
+ManaCost:3 G W
+Types:Legendary Creature Angel
+PT:4/5
+K:Flying
+S:Mode$ Continuous | Affected$ You,Human.YouCtrl | AddKeyword$ Hexproof | Description$ You and Humans you control have hexproof.
+A:AB$ Token | Cost$ 2 ExileFromGrave&lt;1/Card&gt; | TokenAmount$ 1 | TokenName$ Human Soldier | TokenTypes$ Creature,Human,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Human Soldier creature token onto the battlefield.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sigarda_herons_grace.jpg
+Oracle:Flying\nYou and Humans you control have hexproof.\n{2}, Exile a card from your graveyard: Put a 1/1 white Human Soldier creature token onto the battlefield.
+
