@@ -1,4 +1,292 @@
 //Rank|Name|Rarity|Set
+#1|Sorin, Grim Nemesis|M|SOI
+#2|Archangel Avacyn|M|SOI
+#3|Nahiri, the Harbinger|M|SOI
+#4|Arlinn Kord|M|SOI
+#5|Jace, Unraveler of Secrets|M|SOI
+#6|Descend upon the Sinful|M|SOI
+#7|Sigarda, Heron's Grace|M|SOI
+#8|Olivia, Mobilized for War|M|SOI
+#9|The Gitrog Monster|M|SOI
+#10|Wolf of Devil's Breach|M|SOI
+#11|Sin Prodder|R|SOI
+#12|Relentless Dead|M|SOI
+#13|Mindwrack Demon|M|SOI
+#14|From Under the Floorboards|R|SOI
+#15|Goldnight Castigator|M|SOI
+#16|Ulvenwald Hydra|M|SOI
+#17|Burn from Within|R|SOI
+#18|Geralf's Masterpiece|M|SOI
+#19|Tireless Tracker|R|SOI
+#20|Markov Dreadknight|R|SOI
+#21|Always Watching|R|SOI
+#22|Silverfur Partisan|R|SOI
+#23|Avacyn's Judgment|R|SOI
+#24|Flameblade Angel|R|SOI
+#25|Diregraf Colossus|R|SOI
+#26|Slayer's Plate|R|SOI
+#27|Declaration in Stone|R|SOI
+#28|Odric, Lunarch Marshal|R|SOI
+#29|Thalia's Lieutenant|R|SOI
+#30|Bygone Bishop|R|SOI
+#31|Elusive Tormentor|R|SOI
+#32|Westvale Abbey|R|SOI
+#33|Soul Swallower|R|SOI
+#34|Anguished Unmaking|R|SOI
+#35|Geier Reach Bandit|R|SOI
+#36|Hanweir Militia Captain|R|SOI
+#37|Asylum Visitor|R|SOI
+#38|Thing in the Ice|R|SOI
+#39|Inexorable Blob|R|SOI
+#40|Startled Awake|M|SOI
+#41|Sage of Ancient Lore|R|SOI
+#42|Ever After|R|SOI
+#43|Invocation of Saint Traft|R|SOI
+#44|Drogskol Cavalry|R|SOI
+#45|Devils' Playground|R|SOI
+#46|Rattlechains|R|SOI
+#47|To the Slaughter|R|SOI
+#48|Scourge Wolf|R|SOI
+#49|Nephalia Moondrakes|R|SOI
+#50|Falkenrath Gorger|R|SOI
+#51|Heir of Falkenrath|U|SOI
+#52|Forgotten Creation|R|SOI
+#53|Angel of Deliverance|R|SOI
+#54|Deathcap Cultivator|R|SOI
+#55|Prized Amalgam|R|SOI
+#56|Tamiyo's Journal|R|SOI
+#57|Welcome to the Fold|R|SOI
+#58|Seasons Past|M|SOI
+#59|Duskwatch Recruiter|U|SOI
+#60|Lightning Axe|U|SOI
+#61|Engulf the Shore|R|SOI
+#62|Altered Ego|R|SOI
+#63|Pack Guardian|U|SOI
+#64|Nearheath Chaplain|U|SOI
+#65|Hermit of the Natterknolls|U|SOI
+#66|Lambholt Pacifist|U|SOI
+#67|Breakneck Rider|U|SOI
+#68|Bound by Moonsilver|U|SOI
+#69|Uninvited Geist|U|SOI
+#70|Kindly Stranger|U|SOI
+#71|Fiery Temper|C|SOI
+#72|Incorrigible Youths|U|SOI
+#73|Kessig Forgemaster|U|SOI
+#74|Accursed Witch|U|SOI
+#75|Gisa's Bidding|U|SOI
+#76|Call the Bloodline|U|SOI
+#77|Pious Evangel|U|SOI
+#78|Silverstrike|U|SOI
+#79|Olivia's Bloodsworn|U|SOI
+#80|Aberrant Researcher|U|SOI
+#81|Tooth Collector|U|SOI
+#82|Avacynian Missionaries|U|SOI
+#83|Obsessive Skinner|U|SOI
+#84|Pale Rider of Trostad|U|SOI
+#85|Skin Invasion|U|SOI
+#86|Sinister Concoction|U|SOI
+#87|Topplegeist|U|SOI
+#88|Ravenous Bloodseeker|U|SOI
+#89|Murderous Compulsion|C|SOI
+#90|Stitchwing Skaab|U|SOI
+#91|Veteran Cathar|U|SOI
+#92|Village Messenger|U|SOI
+#93|Stensia Masquerade|U|SOI
+#94|Reaper of Flight Moonsilver|U|SOI
+#95|Reckless Scholar|U|SOI
+#96|Gryff's Boon|U|SOI
+#97|Erdwal Illuminator|U|SOI
+#98|Briarbridge Patrol|U|SOI
+#99|Mad Prophet|U|SOI
+#100|Dead Weight|C|SOI
+#101|Harvest Hand|U|SOI
+#102|Biting Rain|U|SOI
+#103|Cult of the Waxing Moon|U|SOI
+#104|Inner Struggle|U|SOI
+#105|Gibbering Fiend|U|SOI
+#106|Ulrich's Kindred|U|SOI
+#107|Humble the Brute|U|SOI
+#108|Daring Sleuth|U|SOI
+#109|Spectral Shepherd|U|SOI
+#110|Paranoid Parish-Blade|U|SOI
+#111|Cryptolith Rite|R|SOI
+#112|Neglected Heirloom|U|SOI
+#113|Dauntless Cathar|C|SOI
+#114|Indulgent Aristocrat|U|SOI
+#115|Dance with Devils|U|SOI
+#116|Angelic Purge|C|SOI
+#117|Hinterland Logger|C|SOI
+#118|Wild-Field Scarecrow|U|SOI
+#119|Graf Mole|U|SOI
+#120|Ghoulsteed|U|SOI
+#121|Town Gossipmonger|U|SOI
+#122|Howlpack Resurgence|U|SOI
+#123|Malevolent Whispers|U|SOI
+#124|Drunau Corpse Trawler|U|SOI
+#125|Ghoulcaller's Accomplice|C|SOI
+#126|Throttle|C|SOI
+#127|Autumnal Gloom|U|SOI
+#128|Ulvenwald Mysteries|U|SOI
+#129|Puncturing Light|C|SOI
+#130|Solitary Hunter|C|SOI
+#131|Geistblast|U|SOI
+#132|Bloodmad Vampire|C|SOI
+#133|Thraben Gargoyle|U|SOI
+#134|Gloomwidow|U|SOI
+#135|Epiphany at the Drownyard|R|SOI
+#136|Rancid Rats|C|SOI
+#137|Tenacity|U|SOI
+#138|Eerie Interlude|R|SOI
+#139|Confirm Suspicions|R|SOI
+#140|Triskaidekaphobia|R|SOI
+#141|Compelling Deterrence|U|SOI
+#142|Foreboding Ruins|R|SOI
+#143|Byway Courier|C|SOI
+#144|Stitched Mangler|C|SOI
+#145|Quilled Wolf|C|SOI
+#146|Nahiri's Machinations|U|SOI
+#147|Dissension in the Ranks|U|SOI
+#148|Moonlight Hunt|U|SOI
+#149|Twins of Maurer Estate|C|SOI
+#150|Choked Estuary|R|SOI
+#151|Corrupted Grafstone|R|SOI
+#152|Crow of Dark Tidings|C|SOI
+#153|Traverse the Ulvenwald|R|SOI
+#154|Reduce to Ashes|C|SOI
+#155|Convicted Killer|C|SOI
+#156|Voldaren Duelist|C|SOI
+#157|Game Trail|R|SOI
+#158|Skeleton Key|U|SOI
+#159|Spiteful Motives|U|SOI
+#160|Fortified Village|R|SOI
+#161|Rabid Bite|C|SOI
+#162|Sanguinary Mage|C|SOI
+#163|Niblis of Dusk|C|SOI
+#164|Port Town|R|SOI
+#165|Gatstaf Arsonists|C|SOI
+#166|Moorland Drifter|C|SOI
+#167|Murderer's Axe|U|SOI
+#168|Haunted Cloak|U|SOI
+#169|Morkrut Necropod|U|SOI
+#170|Rise from the Tides|U|SOI
+#171|Behold the Beyond|M|SOI
+#172|Thraben Inspector|C|SOI
+#173|Farbog Revenant|C|SOI
+#174|Insolent Neonate|C|SOI
+#175|Inspiring Captain|C|SOI
+#176|Sleep Paralysis|C|SOI
+#177|Apothecary Geist|C|SOI
+#178|Howlpack Wolf|C|SOI
+#179|Ember-Eye Wolf|C|SOI
+#180|Unruly Mob|C|SOI
+#181|Stormrider Spirit|C|SOI
+#182|Pyre Hound|C|SOI
+#183|Just the Wind|C|SOI
+#184|Pore Over the Pages|U|SOI
+#185|Emissary of the Sleepless|C|SOI
+#186|Ongoing Investigation|U|SOI
+#187|Hope Against Hope|U|SOI
+#188|Moldgraf Scavenger|C|SOI
+#189|Manic Scribe|U|SOI
+#190|Intrepid Provisioner|C|SOI
+#191|Second Harvest|R|SOI
+#192|Explosive Apparatus|C|SOI
+#193|Vessel of Ephemera|C|SOI
+#194|Drownyard Explorers|C|SOI
+#195|Furtive Homunculus|C|SOI
+#196|Militant Inquisitor|C|SOI
+#197|Stromkirk Mentor|C|SOI
+#198|Warped Landscape|C|SOI
+#199|Tormenting Voice|C|SOI
+#200|Behind the Scenes|U|SOI
+#201|True-Faith Censer|C|SOI
+#202|Devilthorn Fox|C|SOI
+#203|Silent Observer|C|SOI
+#204|Weirding Wood|U|SOI
+#205|Stoic Builder|C|SOI
+#206|Groundskeeper|U|SOI
+#207|Sanitarium Skeleton|C|SOI
+#208|Crawling Sensation|U|SOI
+#209|Cathar's Companion|C|SOI
+#210|Watcher in the Web|C|SOI
+#211|Not Forgotten|U|SOI
+#212|Grotesque Mutation|C|SOI
+#213|Uncaged Fury|C|SOI
+#214|Vampire Noble|C|SOI
+#215|Expose Evil|C|SOI
+#216|Senseless Rage|C|SOI
+#217|Essence Flux|U|SOI
+#218|Stern Constable|C|SOI
+#219|Inquisitor's Ox|C|SOI
+#220|Stallion of Ashmouth|C|SOI
+#221|Liliana's Indignation|U|SOI
+#222|Macabre Waltz|C|SOI
+#223|Rottenheart Ghoul|C|SOI
+#224|Broken Concentration|U|SOI
+#225|Kessig Dire Swine|C|SOI
+#226|Thornhide Wolves|C|SOI
+#227|Strength of Arms|C|SOI
+#228|Seagraf Skaab|C|SOI
+#229|Hound of the Farbogs|C|SOI
+#230|Wicker Witch|C|SOI
+#231|Lamplighter of Selhoff|C|SOI
+#232|Aim High|C|SOI
+#233|Drownyard Temple|R|SOI
+#234|Alms of the Vein|C|SOI
+#235|Fleeting Memories|U|SOI
+#236|Creeping Dread|U|SOI
+#237|Press for Answers|C|SOI
+#238|Vessel of Nascency|C|SOI
+#239|Gone Missing|C|SOI
+#240|Catalog|C|SOI
+#241|Loam Dryad|C|SOI
+#242|Trail of Evidence|U|SOI
+#243|Magnifying Glass|U|SOI
+#244|Confront the Unknown|C|SOI
+#245|Dual Shot|C|SOI
+#246|Clip Wings|C|SOI
+#247|Deny Existence|C|SOI
+#248|Might Beyond Reason|C|SOI
+#249|Ghostly Wings|C|SOI
+#250|Equestrian Skill|C|SOI
+#251|Forsaken Sanctuary|U|SOI
+#252|Pick the Brain|U|SOI
+#253|Shamble Back|C|SOI
+#254|Fork in the Road|C|SOI
+#255|Nagging Thoughts|C|SOI
+#256|Vessel of Malignity|C|SOI
+#257|Merciless Resolve|C|SOI
+#258|Foul Orchard|U|SOI
+#259|Epitaph Golem|U|SOI
+#260|Jace's Scrutiny|C|SOI
+#261|Rush of Adrenaline|C|SOI
+#262|Survive the Night|C|SOI
+#263|Runaway Carriage|U|SOI
+#264|Invasive Surgery|U|SOI
+#265|Silburlind Snapper|C|SOI
+#266|Highland Lake|U|SOI
+#267|Brain in a Jar|R|SOI
+#268|Vessel of Paramnesia|C|SOI
+#269|Fevered Visions|R|SOI
+#270|Hulking Devil|C|SOI
+#271|Pieces of the Puzzle|C|SOI
+#272|Woodland Stream|U|SOI
+#273|Root Out|C|SOI
+#274|Ethereal Guidance|C|SOI
+#275|Open the Armory|U|SOI
+#276|Shard of Broken Glass|C|SOI
+#277|Stone Quarry|U|SOI
+#278|Harness the Storm|R|SOI
+#279|Magmatic Chasm|C|SOI
+#280|Structural Distortion|C|SOI
+#281|Vessel of Volatility|C|SOI
+#282|Chaplain's Blessing|C|SOI
+#283|Forest|L|SOI
+#284|Swamp|L|SOI
+#285|Island|L|SOI
+#286|Mountain|L|SOI
+#287|Plains|L|SOI
+//Rank|Name|Rarity|Set
 #1|Prairie Stream|M|EXP
 #1|Sunken Hollow|M|EXP
 #1|Smoldering Marsh|M|EXP
