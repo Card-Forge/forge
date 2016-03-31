@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Vampire Knight
 PT:3/3
 K:Flying
-A:AB$ PutCounter | Cost$ 2 B&#160; Discard&lt;1/Card&gt; | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on CARDNAME.
+A:AB$ PutCounter | Cost$ 2 B&#160; Discard<1/Card> | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markov_dreadknight.jpg
 Oracle:Flying\n{2}{B}, Discard a card: Put two +1/+1 counters on Markov Dreadknight.
 

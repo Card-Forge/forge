@@ -2,7 +2,7 @@ Name:Town Gossipmonger
 ManaCost:W
 Types:Creature Human
 PT:1/1
-A:AB$SetState | Cost$ T tapXType&lt;1/Creature&gt; | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+A:AB$SetState | Cost$ T tapXType<1/Creature> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/town_gossipmonger.jpg
 AlternateMode:DoubleFaced
 Oracle:{T}, Tap an untapped creature you control: Transform Town Gossipmonger.

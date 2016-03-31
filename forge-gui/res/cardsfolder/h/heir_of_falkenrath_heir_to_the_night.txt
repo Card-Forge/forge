@@ -2,7 +2,7 @@ Name:Heir of Falkenrath
 ManaCost:1 B
 Types:Creature Vampire
 PT:2/1
-A:AB$SetState | Cost$ Discard&lt;1/Card&gt; | Defined$ Self | Mode$ Transform | ActivationLimit$ 1 | SpellDescription$ Transform CARDNAME. Activate this ability only once each turn.
+A:AB$SetState | Cost$ Discard<1/Card> | Defined$ Self | Mode$ Transform | ActivationLimit$ 1 | SpellDescription$ Transform CARDNAME. Activate this ability only once each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heir_of_falkenrath.jpg
 AlternateMode:DoubleFaced
 Oracle:Discard a card: Transform Heir of Falkenrath. Activate this ability only once each turn.

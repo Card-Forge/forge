@@ -5,7 +5,7 @@ PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, you gain 1 life.
 T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, you gain 1 life. 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 
-A:AB$SetState | Cost$ 2 T&#160; Sac&lt;1/Permanent.Other/another permanent&gt; | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME. 
+A:AB$SetState | Cost$ 2 T&#160; Sac<1/Permanent.Other/another permanent> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME. 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pious_evangel.jpg
 AlternateMode:DoubleFaced
 Oracle:Whenever Pious Evangel or another creature enters the battlefield under your control, you gain 1 life.\n{2},{T}, Sacrifice another permanent: Transform Pious Evangel.

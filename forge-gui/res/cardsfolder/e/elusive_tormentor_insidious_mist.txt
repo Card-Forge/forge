@@ -2,7 +2,7 @@ Name:Elusive Tormentor
 ManaCost:2 B B
 Types:Creature Vampire Wizard
 PT:4/4
-A:AB$SetState | Cost$ 1 Discard&lt;1/Card&gt; | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+A:AB$SetState | Cost$ 1 Discard<1/Card> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elusive_tormentor.jpg
 AlternateMode:DoubleFaced
 Oracle:{1}, Discard a card: Transform Elusive Tormentor.
