@@ -5,7 +5,7 @@ Text:As CARDNAME enters the battlefield, you may reveal a Mountain or Forest car
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
 K:ETBReplacement:Other:DBTap
-SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Mountain;Forest/Mountain or Forest> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
+SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Mountain,Forest/Mountain or Forest> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/game_trail.jpg
 Oracle:As Game Trail enters the battlefield, you may reveal a Mountain or Forest card from your hand. If you don't, Game Trail enters the battlefield tapped.\n{T}: Add {R} or {G} to your mana pool.
 
