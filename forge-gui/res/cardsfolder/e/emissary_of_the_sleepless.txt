@@ -1,0 +1,11 @@
+Name:Emissary of the Sleepless
+ManaCost:4 W
+Types:Creature Spirit
+PT:2/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if a creature died this turn, put a 1/1 white Spirit creature token with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ w 1 1 spirit SOI
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emissary_of_the_sleepless.jpg
+Oracle:Flying\nWhen Emissary of the Sleepless enters the battlefield, if a creature died this turn, put a 1/1 white Spirit creature token with flying onto the battlefield.
+

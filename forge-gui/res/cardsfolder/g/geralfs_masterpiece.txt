@@ -1,0 +1,14 @@
+Name:Geralf's Masterpiece
+ManaCost:3 U U
+Types:Creature Zombie Horror
+PT:7/7
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets -1/-1 for each card in your hand.
+A:AB$ ChangeZone | Cost$3 U Discard&lt;3/Card&gt; | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+SVar:X:Count$InYourHand/Negative
+SVar:NeedsToPlayVar:Y LE6
+SVar:Y:Count$CardsInYourHand
+SVar:DiscardMe:1 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/geralfs_masterpiece.jpg
+Oracle:Flying\nGeralf's Masterpiece gets -1/-1 for each card in your hand.\n{3}{U}, Discard three cards: Return Geralf's Materpiece from your graveyard to the battlefield tapped.
+

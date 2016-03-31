@@ -1,0 +1,11 @@
+Name:Moonlight Hunt
+ManaCost:1 G
+Types:Instant
+A:SP$ DealDamage | Cost$ 1 G | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ 0 | SubAbility$ MoonlightDamage | SpellDescription$ Choose target creature you don't control. Each creature you control that's a Wolf or a Werewolf deals damage equal to its power to that creature.
+SVar:MoonlightDamage:DB$ RepeatEach | RepeatSubAbility$ WolfStrike | UseImprinted$ True | RepeatCards$ Creature.Wolf+YouCtrl,Creature.Werewolf+YouCtrl | StackDescription$ None 
+SVar:WolfStrike:DB$ DealDamage | DamageSource$ Imprinted | NumDmg$ X | References$ X | Defined$ ParentTarget | StackDescription$ None 
+SVar:X:Imprinted$CardPower 
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlight_hunt.jpg
+Oracle:Choose target creature you don't control. Each creature you control that's a Wolf or a Werewolf deals damage equal to its power to that creature.
+

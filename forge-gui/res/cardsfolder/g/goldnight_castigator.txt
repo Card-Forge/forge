@@ -1,0 +1,16 @@
+Name:Goldnight Castigator
+ManaCost:2 R R
+Types:Creature Angel
+PT:4/9
+K:Flying
+K:Haste
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ You | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to you, it deals double that damage to you instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ You | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to you, it deals double that damage to you instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Self | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to CARDNAME, it deals double that damage to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Self | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to CARDNAME, it deals double that damage to CARDNAME instead.
+SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:X:ReplaceCount$DamageAmount/Twice 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goldnight_castigator.jpg
+Oracle:Flying, haste\nIf a source would deal damage to you, it deals double that damage to you instead.\nIf a source would deal damage to Goldnight Castigator, it deals double that damage to Goldnight Castigator instead.
+

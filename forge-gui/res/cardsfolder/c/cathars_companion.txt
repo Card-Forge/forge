@@ -1,0 +1,9 @@
+Name:Cathar's Companion
+ManaCost:2 W
+Types:Creature Hound
+PT:3/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cathars_companion.jpg
+Oracle:Whenever you cast a noncreature spell, Cathar's Companion gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+

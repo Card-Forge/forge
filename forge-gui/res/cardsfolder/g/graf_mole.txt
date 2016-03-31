@@ -1,0 +1,10 @@
+Name:Graf Mole
+ManaCost:2 G
+Types:Creature Mole Beast
+PT:2/4
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you sacrifice a Clue, you gain 3 life.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 3
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/graf_mole.jpg
+Oracle:Whenever you sacrifice a Clue, you gain 3 life.
+
