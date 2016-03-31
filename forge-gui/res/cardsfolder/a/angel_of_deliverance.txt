@@ -2,6 +2,7 @@ Name:Angel of Deliverance
 ManaCost:6 W W
 Types:Creature Angel
 PT:6/6
+K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigChange | Delirium$ True | TriggerZones$ Battlefield | TriggerDescription$ Delirium - Whenever CARDNAME deals damage, if there are four or more card types among cards in your graveyard, exile target creature an opponent controls.
 SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Exile
 SVar:HasCombatEffect:TRUE
