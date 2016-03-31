@@ -931,7 +931,8 @@ public class CombatUtil {
             return false;
         }
 
-        if (attacker.hasKeyword("Skulk") && attacker.getNetPower() < blocker.getNetPower()) {
+        if ((attacker.hasKeyword("Creatures with power greater than CARDNAME's power can't block it.") || attacker.hasKeyword("Skulk"))
+            && attacker.getNetPower() < blocker.getNetPower()) {
             return false;
         }
 
