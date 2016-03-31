@@ -2,7 +2,7 @@ Name:Inexorable Blob
 ManaCost:2 G
 Types:Creature Ooze
 PT:3/3
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Condition$ Delirium | TriggerDescription$ Delirium - Whenever CARDNAME attacks, if there are four or more card types among cards in your graveyard, put a 3/3 green Ooze creature token onto the battlefield tapped and attacking.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Delirium$ True | TriggerDescription$ Delirium - Whenever CARDNAME attacks, if there are four or more card types among cards in your graveyard, put a 3/3 green Ooze creature token onto the battlefield tapped and attacking.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenTapped$ True | TokenAttacking$ True
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inexorable_blob.jpg

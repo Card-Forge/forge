@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Human Rogue
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -1/-1 until end of turn.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Condition$ Delirium | Execute$ TripPumpOpp | TriggerZones$ Battlefield | TriggerDescription$ Delirium - At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, target creature that player controls gets -1/-1 until end of turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Delirium$ True | Execute$ TripPumpOpp | TriggerZones$ Battlefield | TriggerDescription$ Delirium - At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, target creature that player controls gets -1/-1 until end of turn.
 
 SVar:TrigPump:AB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:TripPumpOpp:AB$ Pump | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Select target creature an opponent controls. | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
