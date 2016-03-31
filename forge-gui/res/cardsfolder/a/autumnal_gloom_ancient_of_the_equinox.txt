@@ -1,0 +1,22 @@
+Name:Autumnal Gloom
+ManaCost:2 G
+Types:Enchantment
+A:AB$ Mill | Cost$ B | Defined$ You | NumCards$ 1 | SpellDescription$ Put the top card of your library into your graveyard.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Condition$ Delirium | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Delirium - At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
+SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/autumnal_gloom.jpg
+AlternateMode:DoubleFaced
+Oracle:{B}: Put the top card of your library into your graveyard.\nDelirium - At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
+
+ALTERNATE
+
+Name:Ancient of the Equinox
+ManaCost:no cost
+Colors:green
+Types:Creature Treefolk
+PT:4/4
+K:Trample
+K:Hexproof
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_of_the_equinox.jpg
+Oracle:Trample, hexproof
+

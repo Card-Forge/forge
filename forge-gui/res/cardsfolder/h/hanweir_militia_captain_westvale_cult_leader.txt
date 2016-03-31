@@ -1,0 +1,25 @@
+Name:Hanweir Militia Captain
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | IsPresent$ Creature.YouCtrl | PresentCompare$ GE4 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if you control four or more creatures, transform CARDNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_militia_captain.jpg
+AlternateMode:DoubleFaced
+Oracle:At the beginning of your upkeep, if you control four or more creatures, transform Hanweir Militia Captain.
+
+ALTERNATE
+
+Name:Westvale Cult Leader
+ManaCost:no cost
+Colors:white
+Types:Creature Human Cleric
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, put a 1/1 white and black Human Cleric creature token onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenName$ Human Cleric | TokenColors$ White,Black | TokenTypes$ Creature,Human,Cleric | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ 1 
+SVar:BuffedBy:Creature 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/westvale_cult_leader.jpg
+Oracle:Westvale Cult Leader's power and toughness are each equal to the number of creatures you control.\nAt the beginning of your end step, put a 1/1 white and black Human Cleric creature token onto the battlefield.
+
