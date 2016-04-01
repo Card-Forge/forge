@@ -1,7 +1,7 @@
 Name:Gibbering Fiend
 ManaCost:1 R
 Types:Creature Devil
-PT:0/3
+PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg1 | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each opponent.
 SVar:TrigDmg1:AB$ DealDamage | Cost$ 0 | NumDmg$ 1 | Defined$ Player.Opponent 
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Delirium$ True | Execute$ TrigDmg2 | TriggerZones$ Battlefield | TriggerDescription$ Delirium - At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, CARDNAME deals 1 damage to that player.
