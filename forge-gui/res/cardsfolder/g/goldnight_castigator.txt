@@ -6,8 +6,8 @@ K:Flying
 K:Haste
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ You | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to you, it deals double that damage to you instead.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ You | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to you, it deals double that damage to you instead.
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Self | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to CARDNAME, it deals double that damage to CARDNAME instead.
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Self | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to CARDNAME, it deals double that damage to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Card.Self | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to CARDNAME, it deals double that damage to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Card.Self | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to CARDNAME, it deals double that damage to CARDNAME instead.
 SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice 
