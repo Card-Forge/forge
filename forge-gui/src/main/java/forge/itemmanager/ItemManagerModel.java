@@ -77,11 +77,13 @@ public final class ItemManagerModel<T extends InventoryItem> {
     }
 
     public void removeItem(final T item0, final int qty) {
-        if (isInfinite()) { return; }
-
-        final boolean wasThere = data.count(item0) > 0;
-        if (wasThere) {
-            data.remove(item0, qty);
+        if (data.count(item0) > 0) {
+            if (isInfinite()) {
+                data.removeAll(item0);
+            }
+            else {
+                data.remove(item0, qty);
+            }
             isListInSync = false;
         }
     }

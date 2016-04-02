@@ -8,6 +8,7 @@ import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FContainer;
@@ -21,9 +22,9 @@ import forge.util.Utils;
 public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     public static boolean COMPACT_TABS = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_TABS);
 
+    protected final TabHeader<T> tabHeader;
     protected final TabPage<T>[] tabPages;
     private TabPage<T> selectedPage;
-    protected final TabHeader<T> tabHeader;
 
     @SuppressWarnings("unchecked")
     public TabPageScreen(TabPage<T>... tabPages0) {
@@ -34,13 +35,23 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         this(new TabHeader<T>(tabPages0, showBackButton));
     }
 
-    @SuppressWarnings("unchecked")
     public TabPageScreen(TabHeader<T> tabHeader0) {
         super(tabHeader0);
-        tabHeader = tabHeader0; //cache reference to tab header with proper type
-
-        int index = 0;
+        tabHeader = tabHeader0;
         tabPages = tabHeader.tabPages;
+        initialize();
+    }
+
+    public TabPageScreen(String headerCaption, FPopupMenu menu, TabPage<T>[] tabPages0) {
+        super(headerCaption, menu);
+        tabHeader = add(new TabHeader<T>(tabPages0, false));
+        tabPages = tabHeader.tabPages;
+        initialize();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initialize() {
+        int index = 0;
         for (TabPage<T> tabPage : tabPages) {
             tabPage.index = index++;
             tabPage.parentScreen = (T)this;
@@ -73,6 +84,10 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         return Forge.getCurrentScreen() == this;
     }
 
+    protected boolean showCompactTabs() {
+        return COMPACT_TABS || getHeader() != tabHeader; //always show compact tabs if not in primary header
+    }
+
     @Override
     public void onActivate() {
         if (selectedPage != null) {
@@ -89,6 +104,11 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
+        if (getHeader() != tabHeader) { //show tabs at bottom if not in main header
+            float tabHeight = tabHeader.getPreferredHeight();
+            tabHeader.setBounds(0, height - tabHeight, width, tabHeight);
+            height -= tabHeight;
+        }
         height -= startY;
         for (TabPage<T> tabPage : tabPages) {
             tabPage.setBounds(0, startY, width, height);
@@ -173,7 +193,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         public float getPreferredHeight() {
-            return COMPACT_TABS ? COMPACT_HEIGHT : HEIGHT;
+            return tabPages[0].parentScreen.showCompactTabs() ? COMPACT_HEIGHT : HEIGHT;
         }
 
         @Override
@@ -216,7 +236,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                     }
                 }
                 else {
-                    btnBack.setIconScaleAuto(COMPACT_TABS);
+                    btnBack.setIconScaleAuto(tabPages[0].parentScreen.showCompactTabs());
                     btnBack.setSize(BACK_BUTTON_WIDTH, height);
                     x += BACK_BUTTON_WIDTH;
                 }
@@ -328,7 +348,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 w -= 2 * padding;
 
                 //draw caption and icon
-                if (COMPACT_TABS && !isLandscapeMode) {
+                if (parentScreen.showCompactTabs() && !isLandscapeMode) {
                     h -= 2 * padding;
                     if (icon == null) {
                         g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, padding, w, h, false, HAlignment.CENTER, true);
