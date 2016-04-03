@@ -3,8 +3,8 @@ ManaCost:3 B B
 Types:Sorcery
 K:Madness:X B B
 A:SP$ Token | Cost$ 3 B B | TokenImage$ B 2 2 Zombie SOI | TokenAmount$ Y | References$ X,Y | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black | TokenTapped$ True | SubAbility$ DBGainLife | SpellDescription$ Put X 2/2 black Zombie creature tokens onto the battlefield tapped and you gain X life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ Y | References$ Y
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | References$ Y
 SVar:X:Count$xPaid
 SVar:Y:Count$Madness.X.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/from_under_the_floorboards.jpg
-Oracle:Madness XBB (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nPut three 2/2 black Zombie creature tokens onto the battlefield tapped and you gain 3 life. If From Under the Floorboards madness cost was paid, instead put X of those tokens onto the battlefield tapped and you gain X life.
+Oracle:Madness {X}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nPut three 2/2 black Zombie creature tokens onto the battlefield tapped and you gain 3 life. If From Under the Floorboards madness cost was paid, instead put X of those tokens onto the battlefield tapped and you gain X life.

@@ -5,6 +5,7 @@ PT:4/4
 A:AB$SetState | Cost$ 1 Discard<1/Card> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elusive_tormentor.jpg
 AlternateMode:DoubleFaced
+SVar:RemAIDeck:True
 Oracle:{1}, Discard a card: Transform Elusive Tormentor.
 
 ALTERNATE

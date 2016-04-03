@@ -6,6 +6,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.Self+equ
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacynian_missionaries.jpg
 AlternateMode:DoubleFaced
+SVar:EquipMe:Once
 Oracle:At the beginning of your end step, if Avacynian Missionaries is equipped, transform it.
 
 ALTERNATE

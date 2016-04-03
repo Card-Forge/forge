@@ -3,5 +3,5 @@ ManaCost:1 B
 Types:Enchantment
 A:AB$ Token | Cost$ 1 Discard<1/Card> | ActivationLimit$ 1 | TokenAmount$ 1 | TokenName$ Vampire Knight | TokenTypes$ Creature,Vampire,Knight | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Lifelink | SpellDescription$ Put a 1/1 black Vampire Knight creature token onto the battlefield. Activate this ability only once each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_the_bloodline.jpg
-Oracle:{1} Discard a card: Put a 1/1 black Vampire Knight creature token with lifelink onto the battlefield. Activate this ability only once each turn.
+Oracle:{1}, Discard a card: Put a 1/1 black Vampire Knight creature token with lifelink onto the battlefield. Activate this ability only once each turn.
 
