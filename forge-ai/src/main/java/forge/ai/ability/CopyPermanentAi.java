@@ -65,7 +65,12 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     final Map<String, String> vars = c.getSVars();
                     return !vars.containsKey("RemAIDeck");
                 }
-            }); 
+            });
+            //Nothing to target
+            if (list.isEmpty()) {
+            	return false;
+            }
+            
             // target loop
             while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (list.isEmpty()) {
