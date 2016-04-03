@@ -22,7 +22,7 @@ public class StoreSVarAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        //Tree of Redemption
+        //
 
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
@@ -68,9 +68,11 @@ public class StoreSVarAi extends SpellAbilityAi {
             }
             return false;
         }
-        else if (ComputerUtil.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetToughness()
+        else if ("Tree of Redemption".equals(source.getName())) {
+        	if (ComputerUtil.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetToughness()
                 || (ai.getLife() > 5 && !ComputerUtilCombat.lifeInSeriousDanger(ai, ai.getGame().getCombat()))) {
-            return false;
+        		return false;
+        	}
         }
 
         return true;
