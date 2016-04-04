@@ -2215,6 +2215,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn++;
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Player", this);
+        runParams.put("Num", investigatedThisTurn);
         game.getTriggerHandler().runTrigger(TriggerType.Investigated, runParams,false);
     }
     public final void resetInvestigatedThisTurn() {
