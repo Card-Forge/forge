@@ -4513,6 +4513,7 @@ forge-gui/res/cardsfolder/d/deceiver_of_form.txt -text
 forge-gui/res/cardsfolder/d/deception.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/decimate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/decimator_web.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/declaration_in_stone.txt -text
 forge-gui/res/cardsfolder/d/declaration_of_naught.txt -text
 forge-gui/res/cardsfolder/d/decompose.txt -text
 forge-gui/res/cardsfolder/d/decomposition.txt -text
