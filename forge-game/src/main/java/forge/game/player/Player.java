@@ -88,6 +88,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<Card, Integer> assignedDamage = new HashMap<Card, Integer>();
     private int spellsCastThisTurn = 0;
     private int landsPlayedThisTurn = 0;
+    private int investigatedThisTurn = 0;
     private int lifeLostThisTurn = 0;
     private int lifeLostLastTurn = 0;
     private int lifeGainedThisTurn = 0;
@@ -2207,6 +2208,19 @@ public class Player extends GameEntity implements Comparable<Player> {
         landsPlayedThisTurn = 0;
     }
 
+    public final int getInvestigateNumThisTurn() {
+        return investigatedThisTurn;
+    }
+    public final void addInvestigatedThisTurn() {
+        investigatedThisTurn++;
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Player", this);
+        game.getTriggerHandler().runTrigger(TriggerType.Investigated, runParams,false);
+    }
+    public final void resetInvestigatedThisTurn() {
+        investigatedThisTurn = 0;
+    }
+
     public final int getSpellsCastThisTurn() {
         return spellsCastThisTurn;
     }
@@ -2403,6 +2417,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setActivateLoyaltyAbilityThisTurn(false);
         setTappedLandForManaThisTurn(false);
         resetLandsPlayedThisTurn();
+        resetInvestigatedThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
     }

@@ -343,7 +343,9 @@ public class TokenEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-
+                if (tokenName.equals("Clue")) { // investigate trigger
+                    controller.addInvestigatedThisTurn();
+                }
                 if (combatChanged) {
                     game.updateCombatForView();
                     game.fireEvent(new GameEventCombatChanged());

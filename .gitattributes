@@ -687,6 +687,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerExploited.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerFight.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerFlippedCoin.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerHandler.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerInvestigated.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerLandPlayed.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerLifeGained.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerLifeLost.java svneol=native#text/plain
@@ -5521,6 +5522,7 @@ forge-gui/res/cardsfolder/e/equipoise.txt -text
 forge-gui/res/cardsfolder/e/eradicate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/erase.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/erayo_soratami_ascendant_erayos_essence.txt -text
+forge-gui/res/cardsfolder/e/erdwal_illuminator.txt -text
 forge-gui/res/cardsfolder/e/erdwal_ripper.txt -text
 forge-gui/res/cardsfolder/e/erebos_god_of_the_dead.txt -text
 forge-gui/res/cardsfolder/e/ereboss_emissary.txt -text
