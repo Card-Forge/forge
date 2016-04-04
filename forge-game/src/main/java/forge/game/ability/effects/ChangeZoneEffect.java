@@ -789,6 +789,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
                 }
             }
+            if (sa.hasParam("DifferentCMC")) {
+                for (Card c: chosenCards) {
+                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.hasCMC(c.getCMC())));
+                }
+            }
             if (sa.hasParam("ShareLandType")) {
                 if (chosenCards.size() == 0) {
                     // If no cards have been chosen yet, the first card must have a land type
