@@ -432,7 +432,7 @@ public class ManaCostAdjustment {
                 return;
             }
             boolean targetValid = false;
-            for (Card target : sa.getTargets().getTargetCards()) {
+            for (GameObject target : sa.getTargets().getTargets()) {
                 if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
                     targetValid = true;
                 }

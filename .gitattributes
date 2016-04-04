@@ -1496,6 +1496,7 @@ forge-gui/res/cardsfolder/a/accorders_shield.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/accumulated_knowledge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/accursed_centaur.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/accursed_spirit.txt -text
+forge-gui/res/cardsfolder/a/accursed_witch_infectious_curse.txt -text
 forge-gui/res/cardsfolder/a/acid_rain.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/acid_spewer_dragon.txt -text
 forge-gui/res/cardsfolder/a/acid_web_spider.txt svneol=native#text/plain

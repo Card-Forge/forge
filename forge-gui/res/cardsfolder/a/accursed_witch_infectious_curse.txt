@@ -1,0 +1,26 @@
+Name:Accursed Witch
+ManaCost:3 B
+Types:Creature Human Shaman
+PT:4/2
+S:Mode$ ReduceCost | ValidTarget$ Card.Self | Activator$ Player.Opponent | Type$ Spell | Amount$ 1 | Description$ Spells your opponents cast that target CARDNAME cost {1} less to cast.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control attached to target opponent.
+SVar:TrigChoose:AB$ Pump | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Choose a opponent | IsCurse$ True | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | AttachedToPlayer$ ParentTarget | Transformed$ True | GainControl$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/accursed_witch.jpg
+AlternateMode:DoubleFaced
+Oracle:Spells your opponents cast that target Accursed Witch cost 1 less to cast.\nWhen Accursed Witch dies, return it to the battlefield transformed under your control attached to target opponent.
+
+ALTERNATE
+
+Name:Infectious Curse
+ManaCost:no cost
+Colors:black
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Player | AILogic$ Curse
+S:Mode$ ReduceCost | ValidTarget$ Player.EnchantedBy | Activator$ You | Type$ Spell | Amount$ 1 | Description$ Spells you cast that target enchanted player cost {1} less to cast.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of enchanted player's upkeep, that player loses one life and you gain one life.
+SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_curse.jpg
+Oracle:Spells you cast that target enchanted player cost {1} less to cast.\nAt the beginning of enchanted player's upkeep, that player loses one life and you gain one life.
