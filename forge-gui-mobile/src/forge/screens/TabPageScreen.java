@@ -45,6 +45,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     public TabPageScreen(String headerCaption, FPopupMenu menu, TabPage<T>[] tabPages0) {
         super(headerCaption, menu);
         tabHeader = add(new TabHeader<T>(tabPages0, false));
+        tabHeader.showBottomBorder = false;
         tabPages = tabHeader.tabPages;
         initialize();
     }
@@ -125,6 +126,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         private final FLabel btnBack;
         private boolean isScrollable;
         private FDisplayObject finalVisibleTab;
+        private boolean showBottomBorder = true;
 
         private final FScrollPane scroller = add(new FScrollPane() {
             @Override
@@ -220,8 +222,10 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             }
 
             //draw bottom border for header
-            float y = getHeight() - LINE_THICKNESS / 2;
-            g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, getWidth(), y);
+            if (showBottomBorder) {
+                float y = getHeight() - LINE_THICKNESS / 2;
+                g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, getWidth(), y);
+            }
         }
 
         @Override
