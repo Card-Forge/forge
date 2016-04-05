@@ -120,7 +120,12 @@ public abstract class ItemView<T extends InventoryItem> {
     protected abstract void onRefresh();
     protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final float scrollValueToRestore) {
         if (itemsToSelect == null) {
-            setSelectedIndex(0, false); //select first item if no items to select
+            if (maxSelections <= 1 || minSelections > 0) {
+                setSelectedIndex(0, false); //select first item if no items to select
+            }
+            else { //if in multi-select mode, clear selection instead
+                setSelectedIndex(-1, false);
+            }
             setScrollValue(0); //ensure scrolled to top
         }
         else {
@@ -188,6 +193,13 @@ public abstract class ItemView<T extends InventoryItem> {
         if (maxSelections == 0) { return; }
 
         if (index < 0) {
+            if (index == -1 && minSelections == 0) { //allow passing -1 to clear selection if no selection allowed
+                if (getSelectionCount() > 0) {
+                    onSetSelectedIndices(new ArrayList<Integer>());
+                    onSelectionChange();
+                }
+                return;
+            }
             index = 0;
         }
         else if (index >= count) {

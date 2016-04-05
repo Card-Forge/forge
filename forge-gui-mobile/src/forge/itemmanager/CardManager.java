@@ -39,6 +39,10 @@ public class CardManager extends ItemManager<PaperCard> {
         return createAdvancedSearchFilter(this);
     }
 
+    protected void onCardLongPress(int index, Entry<PaperCard, Integer> value, float x, float y) {
+        CardZoom.show(model.getOrderedList(), index, CardManager.this);
+    }
+
     /* Static overrides shared with SpellShopManager*/
 
     public static void addDefaultFilters(final ItemManager<? super PaperCard> itemManager) {
@@ -75,7 +79,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
             @Override
             public boolean longPress(Integer index, Entry<PaperCard, Integer> value, float x, float y) {
-                CardZoom.show(model.getOrderedList(), index, CardManager.this);
+                onCardLongPress(index, value, x, y);
                 return true;
             }
         };

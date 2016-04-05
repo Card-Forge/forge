@@ -12,7 +12,6 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.card.CardRenderer;
-import forge.card.CardZoom;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.AdvancedSearchFilter;
@@ -101,11 +100,8 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
 
             @Override
             public boolean longPress(Integer index, Entry<InventoryItem, Integer> value, float x, float y) {
-                if (value.getKey() instanceof PaperCard) {
-                    CardZoom.show(model.getOrderedList(), index, SpellShopManager.this);
-                    return true;
-                }
-                return false;
+                toggleMultiSelectMode(index);
+                return true;
             }
         };
     }

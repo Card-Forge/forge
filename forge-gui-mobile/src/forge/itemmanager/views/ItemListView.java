@@ -222,11 +222,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         prevTapIndex = index;
                         return true; //don't activate if renderer handles tap
                     }
-                    if (count == 1) {
-                        itemManager.showMenu(false);
-                    }
-                    else if (count == 2 && index == prevTapIndex) {
-                        itemManager.activateSelectedItems();
+                    if (maxSelections <= 1) {
+                        if (count == 1) {
+                            itemManager.showMenu(false);
+                        }
+                        else if (count == 2 && index == prevTapIndex) {
+                            itemManager.activateSelectedItems();
+                        }
                     }
                     prevTapIndex = index;
                     return true;

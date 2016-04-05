@@ -65,6 +65,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final List<ItemFilter<? extends T>> filters = new ArrayList<ItemFilter<? extends T>>();
     private boolean hideFilters = false;
     private boolean wantUnique = false;
+    private boolean multiSelectMode = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
     private ContextMenu contextMenu;
@@ -783,6 +784,23 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         for (ItemView<T> view : views) {
             view.setSelectionSupport(minSelections0, maxSelections0);
         }
+    }
+
+    public boolean getMultiSelectMode() {
+        return multiSelectMode;
+    }
+    public void toggleMultiSelectMode(int indexToSelect) {
+        multiSelectMode = !multiSelectMode;
+        if (multiSelectMode) {
+            setSelectionSupport(0, Integer.MAX_VALUE);
+        }
+        else {
+            setSelectionSupport(0, 1);
+        }
+        if (isContextMenuOpen()) {
+            contextMenu.hide(); //ensure context menu hidden
+        }
+        setSelectedIndex(indexToSelect);
     }
 
     //whether item manager's pool of items is in infinite supply

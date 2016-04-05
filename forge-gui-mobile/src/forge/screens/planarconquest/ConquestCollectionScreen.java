@@ -1,5 +1,7 @@
 package forge.screens.planarconquest;
 
+import java.util.Map.Entry;
+
 import com.google.common.base.Predicate;
 
 import forge.FThreads;
@@ -192,6 +194,13 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                 addFilter(new CardColorFilter(this));
                 addFilter(new CardOriginFilter(this));
                 addFilter(new CardTypeFilter(this));
+            }
+
+            @Override
+            protected void onCardLongPress(int index, Entry<PaperCard, Integer> value, float x, float y) {
+                toggleMultiSelectMode(index);
+                boolean multiSelectMode = getMultiSelectMode();
+                
             }
         }
 
