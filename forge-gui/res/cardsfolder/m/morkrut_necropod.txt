@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ 
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice another creature or land.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature.Other,Land.Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morkrut_necropod.jpg
-Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Morkut Necropod attacks or blocks, sacrifice another creature or land. 
-
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Morkrut Necropod attacks or blocks, sacrifice another creature or land.

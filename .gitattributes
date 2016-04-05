@@ -3915,7 +3915,7 @@ forge-gui/res/cardsfolder/c/convalescence.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/convalescent_care.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conversion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conversion_chamber.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/c/convicted_killer.txt -text
+forge-gui/res/cardsfolder/c/convicted_killer_branded_howler.txt -text
 forge-gui/res/cardsfolder/c/conviction.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/convincing_mirage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/convolute.txt svneol=native#text/plain
@@ -16603,7 +16603,7 @@ forge-gui/res/cardsfolder/w/wellspring.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wellwisher.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/werebear.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/western_paladin.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/w/westvale_abbey.txt -text
+forge-gui/res/cardsfolder/w/westvale_abbey_ormendahl_profane_prince.txt -text
 forge-gui/res/cardsfolder/w/wetland_sambar.txt -text
 forge-gui/res/cardsfolder/w/whalebone_glider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wheel_and_deal.txt svneol=native#text/plain

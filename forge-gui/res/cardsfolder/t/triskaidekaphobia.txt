@@ -9,5 +9,4 @@ SVar:DBLoseGame2:DB$ LosesGame | Cost$ 0 | Defined$ Player.LifeEquals_13 | SubAb
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triskaidekaphobia.jpg
-Oracle:At the beginning of your upkeep, choose one -\n&#8226; Each player with exactly 13 life loses the game, then each player gains 1 life.\n&#8226; Each player with exactly 13 life loses the game, then each player loses 1 life.
-
+Oracle:At the beginning of your upkeep, choose one —\n• Each player with exactly 13 life loses the game, then each player gains 1 life.\n• Each player with exactly 13 life loses the game, then each player loses 1 life.

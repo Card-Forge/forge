@@ -9,4 +9,3 @@ SVar:PlayMain1:Always
 SVar:BuffedBy:Creature.Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/olivias_bloodsworn.jpg
 Oracle:Flying\nOlivia's Bloodsworn can't block.\n{R}: Target Vampire gains haste until end of turn.
-

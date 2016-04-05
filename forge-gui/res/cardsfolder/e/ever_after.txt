@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Graveyard | Destination$ Battlefield | 
 SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Zombie | Colors$ Black | Permanent$ True | SubAbility$ DBPut
 SVar:DBPut:DB$ChangeZone | Origin$ Stack | Destination$ Library | LibraryPosition$ -1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ever_after.jpg
-Oracle:Return up to two target creature cards from your graveyard onto the battlefield. Each of those creatures is a black Zombie in addition to its other colors and types. Put Ever After on the bottom of its owner's library.
-
+Oracle:Return up to two target creature cards from your graveyard to the battlefield. Each of those creatures is a black Zombie in addition to its other colors and types. Put Ever After on the bottom of its owner's library.

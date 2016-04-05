@@ -7,5 +7,4 @@ A:AB$ Scry | Cost$ 3 T SubCounter<X/CHARGE> | ScryNum$ X | References$ X |SpellD
 SVar:X:XChoice
 SVar:Y:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_in_a_jar.jpg
-Oracle:{1} , {T} : Put a charge counter on Brain in a Jar, then you may cast an instant or sorcery card with converted mana cost equal to the number of charge counters on Brain in a Jar from your hand without paying its mana cost.\n {3} , {T} : Remove X charge counters from Brain in a Jar: Scry X.
-
+Oracle:{1}, {T}: Put a charge counter on Brain in a Jar, then you may cast an instant or sorcery card with converted mana cost equal to the number of charge counters on Brain in a Jar from your hand without paying its mana cost.\n{3}, {T}, Remove X charge counters from Brain in a Jar: Scry X.

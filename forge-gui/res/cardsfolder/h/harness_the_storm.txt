@@ -6,4 +6,4 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | TgtZone$ Graveyard | ValidTgts$ Instant.YouCt
 SVar:TrigPlay:DB$ Play | Defined$ Targeted | Optional$ True
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harness_the_storm.jpg
-Oracle:Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard. (you still pay its costs.)
+Oracle:Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard. (You still pay its costs.)
