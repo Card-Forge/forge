@@ -416,6 +416,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
             CardStateName destState = oldState == CardStateName.Transformed ? CardStateName.Original : CardStateName.Transformed;
+
+            if (this.isInPlay() && !this.getState(destState).getType().isPermanent()) {
+                return false;
+            }
+
             return changeToState(destState);
 
         } else if (mode.equals("Flip") && isFlipCard()) {
