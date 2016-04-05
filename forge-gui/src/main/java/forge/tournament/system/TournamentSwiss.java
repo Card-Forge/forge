@@ -2,6 +2,7 @@ package forge.tournament.system;
 
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class TournamentSwiss extends AbstractTournament {
 
     public TournamentSwiss(int ttlRnds, List<TournamentPlayer> allPlayers) {

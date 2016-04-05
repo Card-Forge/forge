@@ -2,6 +2,7 @@ package forge.tournament.system;
 
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class TournamentRoundRobin extends AbstractTournament {
     // Round Robin tournaments where you play everyone in your group/pod. Declare winner or break to top X
     public TournamentRoundRobin(int ttlRnds, List<TournamentPlayer> allPlayers) {

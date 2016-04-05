@@ -1,6 +1,7 @@
 package forge.tournament.system;
 
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+
 import forge.LobbyPlayer;
 import forge.player.GamePlayerUtil;
 import forge.util.MyRandom;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public abstract class AbstractTournament implements Serializable {
     protected int activeRound;
     protected int totalRounds;

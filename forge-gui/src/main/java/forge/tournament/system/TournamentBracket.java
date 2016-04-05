@@ -3,6 +3,7 @@ package forge.tournament.system;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class TournamentBracket extends AbstractTournament {
     // Bracket implies single elimination. For non-single elimination, use Swiss or RoundRobin
     public TournamentBracket(int ttlRnds, int pairingAmount) {
