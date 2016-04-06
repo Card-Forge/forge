@@ -56,8 +56,7 @@ public class TokenAi extends SpellAbilityAi {
      * <p>
      * Constructor for AbilityFactory_Token.
      * </p>
-     * 
-     * @param af
+     *
      *            a {@link forge.game.ability.AbilityFactory} object.
      */
     private void readParameters(final SpellAbility mapParams) {
@@ -71,7 +70,7 @@ public class TokenAi extends SpellAbilityAi {
         }
 
 
-        this.tokenAmount = mapParams.getParam("TokenAmount");
+        this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
         this.tokenPower = mapParams.getParam("TokenPower");
         this.tokenToughness = mapParams.getParam("TokenToughness");
         this.tokenName = mapParams.getParam("TokenName");
@@ -325,7 +324,7 @@ public class TokenAi extends SpellAbilityAi {
         final Card host = sa.getHostCard();
 
         String[] tokenKeywords = sa.hasParam("TokenKeywords") ? sa.getParam("TokenKeywords").split("<>") : new String[0];
-        String tokenAmount = sa.getParam("TokenAmount");
+        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
         String tokenPower = sa.getParam("TokenPower");
         String tokenToughness = sa.getParam("TokenToughness");
         String tokenName = sa.getParam("TokenName");

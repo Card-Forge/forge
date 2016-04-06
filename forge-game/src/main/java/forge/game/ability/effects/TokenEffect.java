@@ -116,7 +116,7 @@ public class TokenEffect extends SpellAbilityEffect {
             this.tokenStaticAbilities = null;
         }
         this.tokenBlocking = mapParams.getParam("TokenBlocking");
-        this.tokenAmount = mapParams.getParam("TokenAmount");
+        this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
         this.tokenPower = mapParams.getParam("TokenPower");
         this.tokenToughness = mapParams.getParam("TokenToughness");
         this.tokenName = mapParams.getParam("TokenName");
