@@ -248,6 +248,14 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         }
 
         @Override
+        public boolean fling(float velocityX, float velocityY) {
+            if (itemManager.getMultiSelectMode()) {
+                return false; //prevent changing tabs while in multi-select mode
+            }
+            return super.fling(velocityX, velocityY);
+        }
+
+        @Override
         protected void doLayout(float width, float height) {
             float y = Utils.scale(2); //move credits label down a couple pixels so it looks better
             float halfWidth = width / 2;
