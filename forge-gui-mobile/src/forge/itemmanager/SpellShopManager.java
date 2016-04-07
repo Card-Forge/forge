@@ -21,7 +21,7 @@ import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 
 
-public final class SpellShopManager extends ItemManager<InventoryItem> {
+public class SpellShopManager extends ItemManager<InventoryItem> {
     private final Function<Entry<? extends InventoryItem, Integer>, Object> fnGetPrice;
 
     public SpellShopManager(boolean isShop0) {

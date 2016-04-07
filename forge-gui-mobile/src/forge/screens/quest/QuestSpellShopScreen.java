@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
@@ -12,15 +13,18 @@ import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.SpellShopManager;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
+import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
 import forge.quest.QuestSpellShop;
+import forge.quest.QuestUtil;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
@@ -30,20 +34,41 @@ import forge.toolbox.GuiChoose;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.ItemPool;
-import forge.util.ThreadUtil;
 import forge.util.Utils;
 
 public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     private final SpellShopPage spellShopPage;
     private final InventoryPage inventoryPage;
+    private final FLabel btnBuySellMultiple = add(new FLabel.ButtonBuilder().font(FSkinFont.get(16)).parseSymbols().build());
 
-    @SuppressWarnings("unchecked")
     public QuestSpellShopScreen() {
-        super(new SpellShopPage(), new InventoryPage());
+        super("", QuestMenu.getMenu(), new SpellShopBasePage[] { new SpellShopPage(), new InventoryPage() });
         spellShopPage = ((SpellShopPage)tabPages[0]);
         inventoryPage = ((InventoryPage)tabPages[1]);
-        spellShopPage.parentScreen = this;
-        inventoryPage.parentScreen = this;
+
+        btnBuySellMultiple.setVisible(false); //hide unless in multi-select mode
+        btnBuySellMultiple.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FThreads.invokeInBackgroundThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (getSelectedPage() == spellShopPage) {
+                            spellShopPage.activateItems(spellShopPage.itemManager.getSelectedItemPool());
+                        }
+                        else {
+                            inventoryPage.activateItems(inventoryPage.itemManager.getSelectedItemPool());
+                        }
+                        FThreads.invokeInEdtLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateCreditsLabel();
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -63,6 +88,9 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     }
 
     public void update() {
+        QuestUtil.updateQuestView(QuestMenu.getMenu());
+        setHeaderCaption(FModel.getQuest().getName() + " - Spell Shop\n(" + FModel.getQuest().getRank() + ")");
+
         QuestSpellShop.updateDecksForEachCard();
         double multiplier = QuestSpellShop.updateMultiplier();
         spellShopPage.refresh();
@@ -87,14 +115,70 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         inventoryPage.lblCredits.setText(credits);
     }
 
+    private void updateBuySellButtonCaption() {
+        String action;
+        ItemPool<InventoryItem> items;
+        long total;
+        if (getSelectedPage() == spellShopPage) {
+            action = "Buy";
+            items = spellShopPage.itemManager.getSelectedItemPool();
+            total = QuestSpellShop.getTotalBuyCost(items);
+        }
+        else {
+            action = "Sell";
+            items = inventoryPage.itemManager.getSelectedItemPool();
+            total = QuestSpellShop.getTotalSellValue(items);
+        }
+
+        int count = items.countAll();
+        String caption = action;
+        if (count > 0) {
+            if (count > 1) {
+                String itemType = "card";
+                for (Entry<InventoryItem, Integer> item : items) {
+                    if (!(item.getKey() instanceof PaperCard)) {
+                        itemType = "item";
+                        break;
+                    }
+                }
+                caption += " " + count + " " + itemType + "s";
+            }
+            caption += " for {CR} " + total;
+        }
+
+        btnBuySellMultiple.setText(caption);
+        btnBuySellMultiple.setEnabled(count > 0);
+    }
+
+    @Override
+    protected void doLayout(float startY, float width, float height) {
+        super.doLayout(startY, width, height);
+
+        float padding = ItemFilter.PADDING;
+        float buttonHeight = tabHeader.getHeight() - 2 * padding;
+        btnBuySellMultiple.setBounds(padding, height - buttonHeight - padding, width - 2 * padding, buttonHeight);
+    }
+
     private static abstract class SpellShopBasePage extends TabPage<QuestSpellShopScreen> {
         protected final SpellShopManager itemManager;
-        protected QuestSpellShopScreen parentScreen;
         protected FLabel lblCredits = new FLabel.Builder().icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).font(FSkinFont.get(16)).build();
 
         protected SpellShopBasePage(String caption0, FImage icon0, boolean isShop0) {
             super(caption0, icon0);
-            itemManager = add(new SpellShopManager(isShop0));
+            itemManager = add(new SpellShopManager(isShop0) {
+                @Override
+                public void toggleMultiSelectMode(int indexToSelect) {
+                    super.toggleMultiSelectMode(indexToSelect);
+
+                    //hide tabs and show Buy/Sell button while in multi-select mode
+                    boolean multiSelectMode = getMultiSelectMode();
+                    if (multiSelectMode) {
+                        parentScreen.updateBuySellButtonCaption();
+                    }
+                    parentScreen.btnBuySellMultiple.setVisible(multiSelectMode);
+                    parentScreen.tabHeader.setVisible(!multiSelectMode);
+                }
+            });
             itemManager.setItemActivateHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -109,6 +193,14 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                             activateSelectedItem();
                         }
                     }));
+                }
+            });
+            itemManager.setSelectionChangedHandler(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    if (itemManager.getMultiSelectMode()) {
+                        parentScreen.updateBuySellButtonCaption();
+                    }
                 }
             });
             add(lblCredits);
@@ -130,8 +222,8 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                 public void run(final Integer result) {
                     if (result == null || result <= 0) { return; }
 
-                    //invoke in game thread so other dialogs can be shown properly
-                    ThreadUtil.invokeInGameThread(new Runnable() {
+                    //invoke in background thread so other dialogs can be shown properly
+                    FThreads.invokeInBackgroundThread(new Runnable() {
                         @Override
                         public void run() {
                             ItemPool<InventoryItem> items = new ItemPool<InventoryItem>(InventoryItem.class);
@@ -185,7 +277,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void activateItems(ItemPool<InventoryItem> items) {
-            QuestSpellShop.buy(items, itemManager, ((InventoryPage)parentScreen.tabPages[1]).itemManager, true);
+            QuestSpellShop.buy(items, itemManager, parentScreen.inventoryPage.itemManager, true);
         }
 
         @Override
@@ -210,11 +302,11 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                 .command(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                //invoke in game thread so other dialogs can be shown properly
-                ThreadUtil.invokeInGameThread(new Runnable() {
+                //invoke in background thread so other dialogs can be shown properly
+                FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
-                        QuestSpellShop.sellExtras(((SpellShopPage)parentScreen.tabPages[0]).itemManager, itemManager);
+                        QuestSpellShop.sellExtras(parentScreen.spellShopPage.itemManager, itemManager);
                         FThreads.invokeInEdtLater(new Runnable() {
                             @Override
                             public void run() {
@@ -245,7 +337,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void activateItems(ItemPool<InventoryItem> items) {
-            QuestSpellShop.sell(items, ((SpellShopPage)parentScreen.tabPages[0]).itemManager, itemManager, true);
+            QuestSpellShop.sell(items, parentScreen.spellShopPage.itemManager, itemManager, true);
         }
 
         @Override

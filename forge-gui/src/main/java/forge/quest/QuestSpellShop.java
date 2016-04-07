@@ -140,6 +140,17 @@ public class QuestSpellShop {
         }
     };
 
+    public static long getTotalBuyCost(Iterable<Entry<InventoryItem, Integer>> items) {
+        long totalCost = 0;
+        for (Entry<InventoryItem, Integer> itemEntry : items) {
+            final InventoryItem item = itemEntry.getKey();
+            if (item instanceof PaperCard || item instanceof SealedProduct || item instanceof PreconDeck) {
+                totalCost += itemEntry.getValue() * getCardValue(item);
+            }
+        }
+        return totalCost;
+    }
+
     public static void buy(Iterable<Entry<InventoryItem, Integer>> items, IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager, boolean confirmPurchase) {
         long totalCost = 0;
         ItemPool<InventoryItem> itemsToBuy = new ItemPool<>(InventoryItem.class);
@@ -148,7 +159,7 @@ public class QuestSpellShop {
             if (item instanceof PaperCard || item instanceof SealedProduct || item instanceof PreconDeck) {
                 final int qty = itemEntry.getValue();
                 itemsToBuy.add(item, qty);
-                totalCost += qty * QuestSpellShop.getCardValue(item);
+                totalCost += qty * getCardValue(item);
             }
         }
         if (itemsToBuy.isEmpty()) { return; }
@@ -258,15 +269,28 @@ public class QuestSpellShop {
         inventoryManager.addItems(itemsToAdd);
     }
 
+    public static long getTotalSellValue(Iterable<Entry<InventoryItem, Integer>> items) {
+        long totalValue = 0;
+        int sellPriceLimit = FModel.getQuest().getCards().getSellPriceLimit();
+        for (Entry<InventoryItem, Integer> itemEntry : items) {
+            final InventoryItem item = itemEntry.getKey();
+            if (item instanceof PaperCard) {
+                totalValue += itemEntry.getValue() * Math.min((int) (multiplier * getCardValue(item)), sellPriceLimit);
+            }
+        }
+        return totalValue;
+    }
+
     public static void sell(Iterable<Entry<InventoryItem, Integer>> items, IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager, boolean confirmSale) {
         long totalReceived = 0;
+        int sellPriceLimit = FModel.getQuest().getCards().getSellPriceLimit();
         ItemPool<InventoryItem> itemsToSell = new ItemPool<>(InventoryItem.class);
         for (Entry<InventoryItem, Integer> itemEntry : items) {
             final InventoryItem item = itemEntry.getKey();
             if (item instanceof PaperCard) {
                 final int qty = itemEntry.getValue();
                 itemsToSell.add(item, qty);
-                totalReceived += qty * Math.min((int) (multiplier * getCardValue(item)), FModel.getQuest().getCards().getSellPriceLimit());
+                totalReceived += qty * Math.min((int) (multiplier * getCardValue(item)), sellPriceLimit);
             }
         }
         if (itemsToSell.isEmpty()) { return; }

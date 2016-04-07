@@ -36,15 +36,15 @@ import forge.toolbox.FEvent.FEventHandler;
 public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionScreen> {
     private final FLabel lblShards = add(new FLabel.Builder().font(ConquestAEtherScreen.LABEL_FONT).parseSymbols().build());
     private final FLabel lblInfo = add(new FLabel.Builder().font(FSkinFont.get(11)).build());
-    private final FLabel btnExileMultiple = add(new FLabel.ButtonBuilder().font(ConquestAEtherScreen.LABEL_FONT).parseSymbols().build());
+    private final FLabel btnExileRetrieveMultiple = add(new FLabel.ButtonBuilder().font(ConquestAEtherScreen.LABEL_FONT).parseSymbols().build());
 
     public ConquestCollectionScreen() {
         super("", ConquestMenu.getMenu(), new CollectionTab[] {
             new CollectionTab("Collection", FSkinImage.SPELLBOOK),
             new CollectionTab("Exile", FSkinImage.EXILE)
         });
-        btnExileMultiple.setVisible(false); //hide unless in multi-select mode
-        btnExileMultiple.setCommand(new FEventHandler() {
+        btnExileRetrieveMultiple.setVisible(false); //hide unless in multi-select mode
+        btnExileRetrieveMultiple.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 final ConquestData model = FModel.getConquest().getModel();
@@ -135,7 +135,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
         getExileTab().updateCaption();
     }
 
-    private void updateExileButtonCaption() {
+    private void updateExileRetrieveButtonCaption() {
         String action;
         CQPref baseValuePref;
         Collection<PaperCard> cards;
@@ -163,8 +163,8 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
             caption += " for {AE}" + total;
         }
 
-        btnExileMultiple.setText(caption);
-        btnExileMultiple.setEnabled(count > 0);
+        btnExileRetrieveMultiple.setText(caption);
+        btnExileRetrieveMultiple.setEnabled(count > 0);
     }
 
     private CollectionTab getCollectionTab() {
@@ -190,7 +190,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
         super.doLayout(y, width, height);
 
         float buttonHeight = tabHeader.getHeight() - 2 * ItemFilter.PADDING;
-        btnExileMultiple.setBounds(x, height - buttonHeight - ItemFilter.PADDING, w, buttonHeight);
+        btnExileRetrieveMultiple.setBounds(x, height - buttonHeight - ItemFilter.PADDING, w, buttonHeight);
     }
 
     private static class CollectionTab extends TabPage<ConquestCollectionScreen> {
@@ -286,7 +286,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                     @Override
                     public void handleEvent(FEvent e) {
                         if (getMultiSelectMode()) {
-                            parentScreen.updateExileButtonCaption();
+                            parentScreen.updateExileRetrieveButtonCaption();
                         }
                     }
                 });
@@ -306,9 +306,9 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                 //hide tabs and show Exile/Retrieve button while in multi-select mode
                 boolean multiSelectMode = getMultiSelectMode();
                 if (multiSelectMode) {
-                    parentScreen.updateExileButtonCaption();
+                    parentScreen.updateExileRetrieveButtonCaption();
                 }
-                parentScreen.btnExileMultiple.setVisible(multiSelectMode);
+                parentScreen.btnExileRetrieveMultiple.setVisible(multiSelectMode);
                 parentScreen.tabHeader.setVisible(!multiSelectMode);
             }
         }

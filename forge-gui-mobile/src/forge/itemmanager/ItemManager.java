@@ -436,8 +436,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public ItemPool<T> getSelectedItemPool() {
         ItemPool<T> selectedItemPool = new ItemPool<T>(genericType);
-        for (T item : getSelectedItems()) {
-            selectedItemPool.add(item, getItemCount(item));
+        if (currentView == listView) {
+            for (T item : getSelectedItems()) {
+                selectedItemPool.add(item, getItemCount(item));
+            }
+        }
+        else { //just add all flat for image view
+            selectedItemPool.addAllFlat(getSelectedItems());
         }
         return selectedItemPool;
     }
