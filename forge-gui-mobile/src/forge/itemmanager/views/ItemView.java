@@ -120,17 +120,21 @@ public abstract class ItemView<T extends InventoryItem> {
     protected abstract void onRefresh();
     protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final float scrollValueToRestore) {
         if (itemsToSelect == null) {
-            if (maxSelections <= 1 || minSelections > 0) {
-                setSelectedIndex(0, false); //select first item if no items to select
-            }
-            else { //if in multi-select mode, clear selection instead
+            if (itemManager.getMultiSelectMode()) { //if in multi-select mode, clear selection
                 setSelectedIndex(-1, false);
+            }
+            else { //otherwise select first item if no items to select
+                setSelectedIndex(0, false);
             }
             setScrollValue(0); //ensure scrolled to top
         }
         else {
             if (!setSelectedItems(itemsToSelect)) {
                 setSelectedIndex(backupIndexToSelect);
+
+                if (itemManager.getMultiSelectMode()) { //in multi-select mode, clear selection after scrolling into view
+                    setSelectedIndex(-1, false);
+                }
             }
         }
     }
@@ -245,8 +249,7 @@ public abstract class ItemView<T extends InventoryItem> {
     }
 
     protected void onSelectionChange() {
-        final int index = getSelectedIndex();
-        if (index != -1) {
+        if (getSelectedIndex() != -1 || itemManager.getMultiSelectMode()) {
             if (itemManager.getSelectionChangedHandler() != null) {
                 itemManager.getSelectionChangedHandler().handleEvent(new FEvent(itemManager, FEventType.CHANGE));
             }

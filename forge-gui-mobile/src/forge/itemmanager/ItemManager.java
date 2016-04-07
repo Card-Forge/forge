@@ -532,6 +532,16 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         updateView(false, items);
     }
 
+    public void addItemsFlat(Iterable<T> itemsToAdd) {
+        pool.addAllFlat(itemsToAdd);
+        if (isUnfiltered()) {
+            for (T item : itemsToAdd) {
+                model.addItem(item, 1);
+            }
+        }
+        updateView(false, itemsToAdd);
+    }
+
     public void setItems(Iterable<Entry<T, Integer>> items) {
         pool.clear();
         model.clear();
@@ -555,6 +565,18 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             pool.remove(item.getKey(), item.getValue());
             if (isUnfiltered()) {
                 model.removeItem(item.getKey(), item.getValue());
+            }
+        }
+        updateView(false, itemsToSelect);
+    }
+
+    public void removeItemsFlat(Iterable<T> itemsToRemove) {
+        final Iterable<T> itemsToSelect = currentView == listView ? getSelectedItems() : null;
+
+        pool.removeAllFlat(itemsToRemove);
+        if (isUnfiltered()) {
+            for (T item : itemsToRemove) {
+                model.removeItem(item, 1);
             }
         }
         updateView(false, itemsToSelect);

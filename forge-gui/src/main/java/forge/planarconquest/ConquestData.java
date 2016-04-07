@@ -35,6 +35,7 @@ import forge.util.gui.SOptionPane;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -256,34 +257,51 @@ public final class ConquestData {
         return exiledCards;
     }
 
-    public boolean exileCard(PaperCard card, int value) {
-        final String title = "Exile Card";
-        if (planeswalker == card) {
-            SOptionPane.showMessageDialog("Current planeswalker cannot be exiled.", title, SOptionPane.INFORMATION_ICON);
-            return false;
-        }
-        String commandersUsingCard = "";
-        ConquestCommander commanderBeingExiled = null;
-        for (ConquestCommander commander : commanders) {
-            if (commander.getCard() == card) {
-                if (!commander.getDeck().getMain().isEmpty()) {
-                    SOptionPane.showMessageDialog("Cannot exile a commander with a defined deck.", title, SOptionPane.INFORMATION_ICON);
-                    return false;
+    public boolean exileCards(Collection<PaperCard> cards, int value) {
+        int count = cards.size();
+        if (count == 0) { return false; }
+
+        String title = count == 1 ? "Exile Card" : "Exile " + count + " Cards";
+        String cardStr = (count == 1 ? "card" : "cards");
+
+        List<ConquestCommander> commandersBeingExiled = null;
+
+        String message = "Exile the following " + cardStr + " to receive {AE}" + value + "?\n";
+        for (PaperCard card : cards) {
+            if (planeswalker == card) {
+                SOptionPane.showMessageDialog("Current planeswalker cannot be exiled.", title, SOptionPane.INFORMATION_ICON);
+                return false;
+            }
+
+            String commandersUsingCard = "";
+            for (ConquestCommander commander : commanders) {
+                if (commander.getCard() == card) {
+                    if (!commander.getDeck().getMain().isEmpty()) {
+                        SOptionPane.showMessageDialog("Cannot exile a commander with a defined deck.", title, SOptionPane.INFORMATION_ICON);
+                        return false;
+                    }
+                    if (commandersBeingExiled == null) {
+                        commandersBeingExiled = new ArrayList<ConquestCommander>();
+                    }
+                    commandersBeingExiled.add(commander); //cache commander to make it easier to remove later
                 }
-                commanderBeingExiled = commander; //cache commander to make it easier to remove later
+                if (commander.getDeck().getMain().contains(card)) {
+                    commandersUsingCard += "\n" + commander.getName();
+                }
             }
-            if (commander.getDeck().getMain().contains(card)) {
-                commandersUsingCard += "\n" + commander.getName();
+
+            if (!commandersUsingCard.isEmpty()) {
+                SOptionPane.showMessageDialog(card.getName() + " is in use by the following commanders and cannot be exiled:\n" + commandersUsingCard, title, SOptionPane.INFORMATION_ICON);
+                return false;
             }
+
+            message += "\n" + card.getName();
         }
-        if (!commandersUsingCard.isEmpty()) {
-            SOptionPane.showMessageDialog("Card is in use by the following commanders and cannot be exiled:\n" + commandersUsingCard, title, SOptionPane.INFORMATION_ICON);
-            return false;
-        }
-        if (SOptionPane.showConfirmDialog("Exile the following card to receive {AE}" + value + "?\n\n" + card.getName(), title, "OK", "Cancel")) {
-            if (exiledCards.add(card)) {
-                if (commanderBeingExiled != null) {
-                    commanders.remove(commanderBeingExiled);
+
+        if (SOptionPane.showConfirmDialog(message, title, "OK", "Cancel")) {
+            if (exiledCards.addAll(cards)) {
+                if (commandersBeingExiled != null) {
+                    commanders.removeAll(commandersBeingExiled);
                 }
                 rewardAEtherShards(value);
                 saveData();
@@ -293,16 +311,27 @@ public final class ConquestData {
         return false;
     }
 
-    public boolean retrieveCardFromExile(PaperCard card, int cost) {
-        final String title = "Retrieve Card";
+    public boolean retrieveCardsFromExile(Collection<PaperCard> cards, int cost) {
+        int count = cards.size();
+        if (count == 0) { return false; }
+
+        String title = count == 1 ? "Retrieve Card" : "Retrieve " + count + " Cards";
+        String cardStr = (count == 1 ? "card" : "cards");
         if (aetherShards < cost) {
-            SOptionPane.showMessageDialog("Not enough shards to retrieve card.", title, SOptionPane.INFORMATION_ICON);
+            SOptionPane.showMessageDialog("Not enough shards to retrieve " + cardStr + ".", title, SOptionPane.INFORMATION_ICON);
             return false;
         }
-        if (SOptionPane.showConfirmDialog("Spend {AE}" + cost + " to retrieve the following card from exile?\n\n" + card.getName(), title, "OK", "Cancel")) {
-            if (exiledCards.remove(card)) {
-                if (card.getRules().canBeCommander()) { //add back commander for card if needed
-                    commanders.add(new ConquestCommander(card));
+
+        String message = "Spend {AE}" + cost + " to retrieve the following " + cardStr + " from exile?\n";
+        for (PaperCard card : cards) {
+            message += "\n" + card.getName();
+        }
+        if (SOptionPane.showConfirmDialog(message, title, "OK", "Cancel")) {
+            if (exiledCards.removeAll(cards)) {
+                for (PaperCard card : cards) {
+                    if (card.getRules().canBeCommander()) { //add back commander for card if needed
+                        commanders.add(new ConquestCommander(card));
+                    }
                 }
                 spendAEtherShards(cost);
                 saveData();
