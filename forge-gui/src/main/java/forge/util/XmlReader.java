@@ -225,7 +225,11 @@ public class XmlReader {
             String name = xml.read("name", "");
             String setCode = xml.read("set", "");
             int artIndex = xml.read("art", 0);
-            return cardDb.getCard(name, setCode, artIndex);
+            PaperCard card = cardDb.getCard(name, setCode, artIndex);
+            if (card == null) { //if can't find card within given set, try just using name
+                card = cardDb.getCard(name);
+            }
+            return card;
         }
     }
 
