@@ -9596,7 +9596,7 @@
 #30|Rathi Trapper|SC|PLC
 #31|Magus of the Arena|R|PLC
 #32|Null Profusion|SR|PLC
-#33|Dead  Gone|C|PLC
+#33|Dead Gone|C|PLC
 #34|Jodah's Avenger|U|PLC
 #35|Stonecloaker|U|PLC
 #36|Blood Knight|SU|PLC
@@ -10470,7 +10470,7 @@
 #56|Momir Vig, Simic Visionary|R|DIS
 #57|Azorius First Wing|C|DIS
 #58|Demon's Jester|C|DIS
-#59|Rise  Fall|U|DIS
+#59|Rise Fall|U|DIS
 #60|Kindle the Carnage|U|DIS
 #61|Helium Squirter|C|DIS
 #62|Silkwing Scout|C|DIS
@@ -12973,7 +12973,7 @@
 #9|Mischievous Quanar|R|SCG
 #10|Krosan Warchief|U|SCG
 #11|Ambush Commander|R|SCG
-#12|Dawn  Elemental|R|SCG
+#12|Dawn Elemental|R|SCG
 #13|Form of the Dragon|R|SCG
 #14|Siege Gang Commander|R|SCG
 #15|Undead Warchief|U|SCG
@@ -13060,7 +13060,7 @@
 #96|Gilded Light|U|SCG
 #97|Guilty Conscience|C|SCG
 #98|Bonethorn Valesk|C|SCG
-#99|Dimensional  Breach|R|SCG
+#99|Dimensional Breach|R|SCG
 #100|Treetop Scout|C|SCG
 #101|Reaping the Graves|C|SCG
 #102|Skulltap|C|SCG
@@ -13074,7 +13074,7 @@
 #110|Wipe Clean|C|SCG
 #111|Sliver Overlord|R|SCG
 #112|Final Punishment|R|SCG
-#113|Dragon  Scales|C|SCG
+#113|Dragon Scales|C|SCG
 #114|Goblin War Strike|C|SCG
 #115|Dispersal Shield|C|SCG
 #116|Metamorphose|U|SCG
@@ -13102,7 +13102,7 @@
 #138|Parallel Thoughts|R|SCG
 #139|Ark of Blight|U|SCG
 #140|Reward the Faithful|U|SCG
-#141|Force  Bubble|R|SCG
+#141|Force Bubble|R|SCG
 #142|Grip of Chaos|R|SCG
 #143|Upwelling|R|SCG
 //Rank|Name|Rarity|Set
