@@ -157,6 +157,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean manifested = false;
 
     private long bestowTimestamp = -1;
+    private long transformedTimestamp = 0;
     private boolean suspendCast = false;
     private boolean suspend = false;
     private boolean tributed = false;
@@ -292,10 +293,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             HashMap<String, Object> runParams = new HashMap<>();
             runParams.put("Transformer", this);
             getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
+            this.incrementTransformedTimestamp();
         }
 
         return true;
     }
+
+    public long getTransformedTimestamp() {  return transformedTimestamp; }
+    public void incrementTransformedTimestamp() {  this.transformedTimestamp++;  }
 
     public CardState getCurrentState() {
         return currentState;

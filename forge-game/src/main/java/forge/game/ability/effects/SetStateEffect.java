@@ -49,6 +49,16 @@ public class SetStateEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            if ("Transform".equals(sa.getParam("Mode")) && tgt.equals(host)) {
+                // If want to Transform, and host is trying to transform self, skip if not in alignment
+                boolean skip = tgt.getTransformedTimestamp() != Long.parseLong(sa.getSVar("StoredTransform"));
+                // Clear SVar from SA so it doesn't get reused accidentally
+                sa.getSVars().remove("StoredTransform");
+                if (skip) {
+                    continue;
+                }
+            }
+
             boolean hasTransformed = tgt.changeCardState(sa.getParam("Mode"), sa.getParam("NewState"));
             if ( hasTransformed ) {
                 game.fireEvent(new GameEventCardStatsChanged(tgt));

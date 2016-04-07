@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -72,6 +73,10 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         if (mapParams.containsKey("Execute")) {
             SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(mapParams.get("Execute")), sa.getHostCard());
             overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
+            // Set Transform timestamp when the delayed trigger is created
+            if (ApiType.SetState == overridingSA.getApi()) {
+                overridingSA.setSVar("StoredTransform", String.valueOf(sa.getHostCard().getTransformedTimestamp()));
+            }
             delTrig.setOverridingAbility(overridingSA);
         }
         final TriggerHandler trigHandler  = sa.getActivatingPlayer().getGame().getTriggerHandler();

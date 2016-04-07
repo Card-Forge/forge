@@ -18,13 +18,16 @@
 package forge.game.spellability;
 
 import forge.game.IIdentifiable;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -127,10 +130,22 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         // Store SVars and Clear
         for (final String store : Card.getStorableSVars()) {
             final String value = source.getSVar(store);
-            if (!value.isEmpty()) {
+            if (!StringUtils.isEmpty(value)) {
                 storedSVars.put(store, value);
                 source.setSVar(store, "");
             }
+        }
+        // We probably should be storing SA svars too right?
+        for (final String store : sa.getSVars()) {
+            final String value = source.getSVar(store);
+            if (!StringUtils.isEmpty(value)) {
+                storedSVars.put(store, value);
+            }
+        }
+
+        if (ApiType.SetState == sa.getApi() && !storedSVars.containsKey("StoredTransform")) {
+            // Record current state of Transformation if the ability might change state
+            storedSVars.put("StoredTransform", String.valueOf(source.getTransformedTimestamp()));
         }
 
         //store zones to open and players to open them for at the time the SpellAbility first goes on the stack based on the selected targets
@@ -186,10 +201,20 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
             // Add SVars back in
             final Card source = ability.getHostCard();
+            for (final String store : Card.getStorableSVars()) {
+                final String value = storedSVars.get(store);
+                if (!StringUtils.isEmpty(value)) {
+                    source.setSVar(store, value);
+                    storedSVars.remove(store);
+                }
+            }
+
+            final SpellAbility sa = ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability;
             for (final String store : storedSVars.keySet()) {
                 final String value = storedSVars.get(store);
-                if (!value.isEmpty()) {
-                    source.setSVar(store, value);
+
+                if (!StringUtils.isEmpty(value)) {
+                    sa.setSVar(store, value);
                 }
             }
         }
