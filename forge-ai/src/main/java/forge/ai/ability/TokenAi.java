@@ -250,7 +250,7 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
         
-        if (this.tokenAmount.equals("X") || this.tokenPower.equals("X") || this.tokenToughness.equals("X")) {
+        if (this.tokenAmount.equals("X") || (this.tokenPower != null && this.tokenPower.equals("X")) || (this.tokenToughness != null && this.tokenToughness.equals("X"))) {
             int x = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
             if (source.getSVar("X").equals("Count$Converge")) {
             	x = ComputerUtilMana.getConvergeCount(sa, ai);
