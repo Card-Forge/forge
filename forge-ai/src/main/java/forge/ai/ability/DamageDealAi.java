@@ -11,6 +11,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -69,6 +70,21 @@ public class DamageDealAi extends DamageAiBase {
             // This dummy ability will just deal 0 damage, but holds the logic for the AI for Master of Wild Hunt
             List<Card> wolves = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.Wolf+untapped+YouCtrl+Other", ai, source);
             dmg = Aggregates.sum(wolves, CardPredicates.Accessors.fnGetNetPower);
+        }
+        
+        if (source.getName().equals("Sorin, Grim Nemesis")) {
+            int loyalty = source.getCounters(CounterType.LOYALTY);
+            for (; loyalty > 0; loyalty--) {
+                if (this.damageTargetAI(ai, sa, loyalty, false)) {
+                    dmg = ComputerUtilCombat.getEnoughDamageToKill(sa.getTargetCard(), loyalty, source, false, false);
+                    if (dmg > loyalty) {
+                        continue;   // in case the calculation gets messed up somewhere
+                    }
+                    source.setSVar("ChosenX", "Number$" + dmg);
+                    return true;
+                }
+            }
+            return false;
         }
 
         if (dmg <= 0) {
