@@ -75,7 +75,7 @@ public class SimulateMatch {
         for(String deck : params.get("d")) {
             Deck d = deckFromCommandLineParameter(deck, type);
             if (d == null) {
-                System.out.println("One of decks could not be loaded, match cannot start");
+                System.out.println(String.format("Could not load deck - %s, match cannot start", deck));
                 return;
             }
             if (i > 1) {
