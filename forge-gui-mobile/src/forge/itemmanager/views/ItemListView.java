@@ -249,10 +249,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                             g.fillRect(SEL_COLOR, x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
                         }
                         //draw checkbox, with it checked based on whether item is selected
-                        float checkBoxSize = h / 2;
+                        float checkBoxSize = h * 0.4f;
                         float padding = checkBoxSize / 2;
                         w -= checkBoxSize + padding;
-                        FCheckBox.drawCheckBox(g, selectedIndices.contains(index), x + w, y + padding, checkBoxSize, checkBoxSize);
+                        FCheckBox.drawCheckBox(g, selectedIndices.contains(index), x + w, y + (h - checkBoxSize) / 2, checkBoxSize, checkBoxSize);
                         w -= padding;
                     }
                     renderer.drawValue(g, value, font, foreColor, backColor, pressed, x + 1, y, w - 2, h); //x + 1 and w - 2 to account for left and right borders
