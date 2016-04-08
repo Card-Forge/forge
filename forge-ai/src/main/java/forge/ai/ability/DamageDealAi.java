@@ -77,7 +77,7 @@ public class DamageDealAi extends DamageAiBase {
             for (; loyalty > 0; loyalty--) {
                 if (this.damageTargetAI(ai, sa, loyalty, false)) {
                     dmg = ComputerUtilCombat.getEnoughDamageToKill(sa.getTargetCard(), loyalty, source, false, false);
-                    if (dmg > loyalty) {
+                    if (dmg > loyalty || dmg < 1) {
                         continue;   // in case the calculation gets messed up somewhere
                     }
                     source.setSVar("ChosenX", "Number$" + dmg);
