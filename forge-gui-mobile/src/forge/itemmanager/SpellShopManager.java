@@ -106,6 +106,16 @@ public class SpellShopManager extends ItemManager<InventoryItem> {
                 toggleMultiSelectMode(index);
                 return true;
             }
+
+            @Override
+            public boolean allowPressEffect(FList<Entry<InventoryItem, Integer>> list, float x, float y) {
+                Entry<InventoryItem, Integer> value = list.getItemAtPoint(x, y);
+                if (value != null && value.getKey() instanceof PaperCard) {
+                    //only allow press effect for cards if right of card art
+                    return x > CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode()) * CardRenderer.CARD_ART_RATIO;
+                }
+                return true;
+            }
         };
     }
 }

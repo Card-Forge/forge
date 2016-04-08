@@ -49,6 +49,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
+import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
@@ -317,6 +318,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public abstract class ItemRenderer {
         public abstract float getItemHeight();
+        public abstract boolean allowPressEffect(FList<Entry<T, Integer>> list, float x, float y);
         public abstract boolean tap(Integer index, Entry<T, Integer> value, float x, float y, int count);
         public abstract boolean longPress(Integer index, Entry<T, Integer> value, float x, float y);
         public abstract void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h);

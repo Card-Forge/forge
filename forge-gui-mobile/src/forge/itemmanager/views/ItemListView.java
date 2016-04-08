@@ -34,6 +34,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FList;
 
 import com.badlogic.gdx.math.Rectangle;
+
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -263,6 +264,14 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         @Override
         protected void drawBackground(Graphics g) {
             //draw no background by default
+        }
+
+        @Override
+        public boolean press(float x, float y) {
+            if (renderer.allowPressEffect(this, x, y)) {
+                return super.press(x, y);
+            }
+            return true;
         }
 
         @Override

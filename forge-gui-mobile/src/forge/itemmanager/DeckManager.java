@@ -26,7 +26,6 @@ import java.util.Map.Entry;
 
 /** 
  * ItemManager for decks
- *
  */
 public final class DeckManager extends ItemManager<DeckProxy> implements IHasGameType {
     private final GameType gameType;
@@ -164,6 +163,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 x += availableFormatWidth + CardRenderer.SET_BOX_MARGIN;
                 y -= CardRenderer.SET_BOX_MARGIN;
                 CardRenderer.drawSetLabel(g, font, set, deck.getHighestRarity(), x, y, setWidth, lineHeight + 2 * CardRenderer.SET_BOX_MARGIN);
+            }
+
+            @Override
+            public boolean allowPressEffect(FList<Entry<DeckProxy, Integer>> list, float x, float y) {
+                return true;
             }
         };
     }

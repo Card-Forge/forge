@@ -239,6 +239,12 @@ public class ConquestCommandersScreen extends FScreen {
                     y -= CardRenderer.SET_BOX_MARGIN;
                     CardRenderer.drawSetLabel(g, font, set, card.getRarity(), x, y, setWidth, lineHeight + 2 * CardRenderer.SET_BOX_MARGIN);
                 }
+
+                @Override
+                public boolean allowPressEffect(FList<Entry<ConquestCommander, Integer>> list, float x, float y) {
+                    //only allow press effect if right of card art
+                    return x > CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode()) * CardRenderer.CARD_ART_RATIO;
+                }
             };
         }
     }

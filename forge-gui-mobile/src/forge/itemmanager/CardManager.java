@@ -14,6 +14,7 @@ import forge.itemmanager.filters.CardFormatFilter;
 import forge.itemmanager.filters.CardSearchFilter;
 import forge.itemmanager.filters.CardTypeFilter;
 import forge.itemmanager.filters.TextSearchFilter;
+import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 
 /** 
@@ -84,6 +85,12 @@ public class CardManager extends ItemManager<PaperCard> {
                 }
                 onCardLongPress(index, value, x, y);
                 return true;
+            }
+
+            @Override
+            public boolean allowPressEffect(FList<Entry<PaperCard, Integer>> list, float x, float y) {
+                //only allow press effect if right of card art
+                return x > CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode()) * CardRenderer.CARD_ART_RATIO;
             }
         };
     }
