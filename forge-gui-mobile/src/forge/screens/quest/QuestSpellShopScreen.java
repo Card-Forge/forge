@@ -50,14 +50,23 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         btnBuySellMultiple.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                final SpellShopManager itemManager = ((SpellShopBasePage)getSelectedPage()).itemManager;
+                final ItemPool<InventoryItem> items = itemManager.getSelectedItemPool();
+
+                if (items.isEmpty()) {
+                    //toggle off multi-select mode if no items selected
+                    itemManager.toggleMultiSelectMode(-1);
+                    return;
+                }
+
                 FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
                         if (getSelectedPage() == spellShopPage) {
-                            spellShopPage.activateItems(spellShopPage.itemManager.getSelectedItemPool());
+                            spellShopPage.activateItems(items);
                         }
                         else {
-                            inventoryPage.activateItems(inventoryPage.itemManager.getSelectedItemPool());
+                            inventoryPage.activateItems(items);
                         }
                         FThreads.invokeInEdtLater(new Runnable() {
                             @Override
@@ -116,23 +125,25 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     }
 
     private void updateBuySellButtonCaption() {
-        String action;
+        String caption;
         ItemPool<InventoryItem> items;
         long total;
         if (getSelectedPage() == spellShopPage) {
-            action = "Buy";
+            caption = "Buy";
             items = spellShopPage.itemManager.getSelectedItemPool();
             total = QuestSpellShop.getTotalBuyCost(items);
         }
         else {
-            action = "Sell";
+            caption = "Sell";
             items = inventoryPage.itemManager.getSelectedItemPool();
             total = QuestSpellShop.getTotalSellValue(items);
         }
 
         int count = items.countAll();
-        String caption = action;
-        if (count > 0) {
+        if (count == 0) {
+            caption = "Cancel";
+        }
+        else {
             if (count > 1) {
                 String itemType = "card";
                 for (Entry<InventoryItem, Integer> item : items) {
@@ -145,9 +156,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
             }
             caption += " for {CR} " + total;
         }
-
         btnBuySellMultiple.setText(caption);
-        btnBuySellMultiple.setEnabled(count > 0);
     }
 
     @Override

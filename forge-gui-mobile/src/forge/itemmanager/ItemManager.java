@@ -827,7 +827,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         if (isContextMenuOpen()) {
             contextMenu.hide(); //ensure context menu hidden
         }
-        setSelectedIndex(indexToSelect);
+        if (indexToSelect != -1) {
+            setSelectedIndex(indexToSelect);
+        }
     }
 
     //whether item manager's pool of items is in infinite supply
