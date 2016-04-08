@@ -100,6 +100,9 @@ public class SpellShopManager extends ItemManager<InventoryItem> {
 
             @Override
             public boolean longPress(Integer index, Entry<InventoryItem, Integer> value, float x, float y) {
+                if (value.getKey() instanceof PaperCard && CardRenderer.cardListItemTap(model.getOrderedList(), index, SpellShopManager.this, x, y, 1, compactModeHandler.isCompactMode())) {
+                    return true; //avoid calling toggleMultiSelectMode if user long presses on card art
+                }
                 toggleMultiSelectMode(index);
                 return true;
             }

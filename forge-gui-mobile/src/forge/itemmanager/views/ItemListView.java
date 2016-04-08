@@ -200,36 +200,38 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                 @Override
                 public boolean tap(Integer index, Entry<T, Integer> value, float x, float y, int count) {
-                    if (maxSelections > 1) {
-                        if (selectedIndices.contains(index)) {
-                            //allow removing selection if it won't fall below min
-                            //or if max selected (since you need to be able to deselect an item before selecting a new item)
-                            if (selectedIndices.size() > minSelections || selectedIndices.size() == maxSelections) {
-                                selectedIndices.remove(index);
+                    if (maxSelections > 1) { //if multi-select
+                        //don't toggle checkbox if renderer handles tap
+                        if (!renderer.tap(index, value, x, y, count)) {
+                            if (selectedIndices.contains(index)) {
+                                //allow removing selection if it won't fall below min
+                                //or if max selected (since you need to be able to deselect an item before selecting a new item)
+                                if (selectedIndices.size() > minSelections || selectedIndices.size() == maxSelections) {
+                                    selectedIndices.remove(index);
+                                    onSelectionChange();
+                                }
+                            }
+                            else if (selectedIndices.size() < maxSelections) {
+                                selectedIndices.add(index);
+                                Collections.sort(selectedIndices); //ensure selected indices are sorted
                                 onSelectionChange();
                             }
                         }
-                        else if (selectedIndices.size() < maxSelections) {
-                            selectedIndices.add(index);
-                            Collections.sort(selectedIndices); //ensure selected indices are sorted
-                            onSelectionChange();
-                        }
                     }
-                    else {
+                    else { //if single-select
                         setSelectedIndex(index);
-                    }
-                    if (renderer.tap(index, value, x, y, count)) {
-                        prevTapIndex = index;
-                        return true; //don't activate if renderer handles tap
-                    }
-                    if (maxSelections <= 1) {
-                        if (count == 1) {
-                            itemManager.showMenu(false);
-                        }
-                        else if (count == 2 && index == prevTapIndex) {
-                            itemManager.activateSelectedItems();
+
+                        //don't activate if renderer handles tap
+                        if (!renderer.tap(index, value, x, y, count)) {
+                            if (count == 1) {
+                                itemManager.showMenu(false);
+                            }
+                            else if (count == 2 && index == prevTapIndex) {
+                                itemManager.activateSelectedItems();
+                            }
                         }
                     }
+
                     prevTapIndex = index;
                     return true;
                 }

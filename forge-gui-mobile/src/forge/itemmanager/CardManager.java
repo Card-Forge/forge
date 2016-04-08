@@ -79,6 +79,9 @@ public class CardManager extends ItemManager<PaperCard> {
 
             @Override
             public boolean longPress(Integer index, Entry<PaperCard, Integer> value, float x, float y) {
+                if (CardRenderer.cardListItemTap(model.getOrderedList(), index, CardManager.this, x, y, 1, compactModeHandler.isCompactMode())) {
+                    return true; //avoid calling onCardLongPress if user long presses on card art
+                }
                 onCardLongPress(index, value, x, y);
                 return true;
             }
