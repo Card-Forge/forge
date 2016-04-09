@@ -2762,6 +2762,23 @@ public class CardFactoryUtil {
             }
         }
 
+        // Prowess
+        final int prowess = card.getAmountOfKeyword("Prowess");
+        card.removeIntrinsicKeyword("Prowess");
+        final StringBuilder trigProwess = new StringBuilder(
+                "Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | "
+                        + "Execute$ ProwessPump | TriggerZones$ Battlefield | TriggerDescription$ "
+                        + "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 "
+                        + "until end of turn.)");
+
+        final String abStringProwess = "DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1";
+        card.getCurrentState().setSVar("ProwessPump", abStringProwess);
+        final Trigger prowessTrigger = TriggerHandler.parseTrigger(trigProwess.toString(), card, true);
+        for (int i = 0; i < prowess; i++) {
+            card.getCurrentState().addTrigger(prowessTrigger);
+            card.getCurrentState().setSVar("BuffedBy", "Card.nonCreature+nonLand"); // for the AI
+        } // Prowess
+
         // AddCost
         if (card.hasSVar("FullCost")) {
             final SpellAbility sa1 = card.getFirstSpellAbility();
@@ -3589,21 +3606,7 @@ public class CardFactoryUtil {
             final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
             card.addTrigger(cascadeTrigger);
         } // Dethrone
-        final int prowess = card.getAmountOfKeyword("Prowess");
-        card.removeIntrinsicKeyword("Prowess");
-        final StringBuilder trigProwess = new StringBuilder(
-                "Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | "
-                + "Execute$ ProwessPump | TriggerZones$ Battlefield | TriggerDescription$ "
-                + "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 "
-                + "until end of turn.)");
 
-        final String abStringProwess = "DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1";
-        card.setSVar("ProwessPump", abStringProwess);
-        final Trigger prowessTrigger = TriggerHandler.parseTrigger(trigProwess.toString(), card, true);
-        for (int i = 0; i < prowess; i++) {
-            card.addTrigger(prowessTrigger);
-            card.setSVar("BuffedBy", "Card.nonCreature+nonLand"); // for the AI
-        } // Prowess
         final int exploit = card.getAmountOfKeyword("Exploit");
         card.removeIntrinsicKeyword("Exploit");
         final StringBuilder trigExploit = new StringBuilder(
