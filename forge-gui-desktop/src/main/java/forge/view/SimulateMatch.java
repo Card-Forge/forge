@@ -13,6 +13,7 @@ import forge.game.Game;
 import forge.game.GameLogEntry;
 import forge.game.GameRules;
 import forge.game.GameType;
+import forge.game.GameLogEntryType;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.model.FModel;
@@ -55,13 +56,19 @@ public class SimulateMatch {
             }
         }
 
-        //final Map<String, List<String>> params = new HashMap<>();
-
         int nGames = 1;
         if (params.containsKey("n")) {
             // Number of games should only be a single string
             nGames = Integer.parseInt(params.get("n").get(0));
         }
+
+        int matchSize = 0;
+        if (params.containsKey("m")) {
+            // Match size ("best of X games")
+            matchSize = Integer.parseInt(params.get("m").get(0));
+        }
+
+        boolean outputGamelog = !params.containsKey("q");
 
         GameType type = GameType.Constructed;
         if (params.containsKey("f")) {
@@ -102,28 +109,45 @@ public class SimulateMatch {
         GameRules rules = new GameRules(type);
         rules.setAppliedVariants(EnumSet.of(type));
 
-        Match mc = new Match(rules, pp, "Test");
-        for (int iGame = 0; iGame < nGames; iGame++) {
-            simulateSingleMatch(mc, iGame);
+        if (matchSize != 0) {
+            rules.setGamesPerMatch(matchSize);
         }
+        Match mc = new Match(rules, pp, "Test");
+
+        if (matchSize != 0) {
+            int iGame = 0;
+            while(!mc.isMatchOver()) {
+                // play games until the match ends
+                simulateSingleMatch(mc, iGame, outputGamelog);
+                iGame++;
+            }
+        } else {
+            for (int iGame = 0; iGame < nGames; iGame++) {
+                simulateSingleMatch(mc, iGame, outputGamelog);
+            }
+        }
+
         System.out.flush();
     }
 
     private static void argumentHelp() {
-        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -n [N] -f [F]");
+        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -n [N] -m [M] -f [F] -q");
         System.out.println("\tsim - stands for simulation mode");
         System.out.println("\tdeck1 (or deck2,...,X) - constructed deck name or filename (has to be quoted when contains multiple words)");
         System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
-        System.out.println("\tN - number of games, defaults to 1");
+        System.out.println("\tN - number of games, defaults to 1 (Ignores match setting)");
+        System.out.println("\tM - Play full match of X games, typically 1,3,5 games. (Optional, overrides N)");
         System.out.println("\tF - format of games, defaults to constructed");
+        System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
 
     /**
      * TODO: Write javadoc for this method.
      * @param mc
      * @param iGame
+     * @param outputGamelog
      */
-    private static void simulateSingleMatch(Match mc, int iGame) {
+    private static void simulateSingleMatch(Match mc, int iGame, boolean outputGamelog) {
         StopWatch sw = new StopWatch();
         sw.start();
 
@@ -132,11 +156,16 @@ public class SimulateMatch {
         mc.startGame(g1);
         sw.stop();
 
-        List<GameLogEntry> log = g1.getGameLog().getLogEntries(null);
+        List<GameLogEntry> log;
+        if (outputGamelog) {
+            log = g1.getGameLog().getLogEntries(null);
+        } else {
+            log = g1.getGameLog().getLogEntries(GameLogEntryType.MATCH_RESULTS);
+        }
         Collections.reverse(log);
-
-        for(GameLogEntry l : log)
+        for(GameLogEntry l : log) {
             System.out.println(l);
+        }
 
         System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName()));
     }
