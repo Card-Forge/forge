@@ -365,8 +365,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
-            int canBlockNum = 1 + card.getAmountOfKeyword("CARDNAME can block an additional creature.") +
-                    card.getAmountOfKeyword("CARDNAME can block an additional ninety-nine creatures.") * 99;
+            int canBlockNum = 1 + CombatUtil.numberOfAdditionalCreaturesCanBlock(card);
             int possibleBlockNum = 0;
             for (Card attacker : game.getCombat().getAttackers()) {
                 if (CombatUtil.canBlock(attacker, card)) {

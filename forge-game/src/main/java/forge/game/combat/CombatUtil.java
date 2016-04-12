@@ -436,13 +436,18 @@ public class CombatUtil {
     }
 
     public static boolean canBlockMoreCreatures(final Card blocker, final CardCollectionView blockedBy) {
-        // TODO(sol) expand this for the additional blocking keyword
         if (blockedBy.isEmpty() || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
             return true;
         }
-        int canBlockMore = blocker.getAmountOfKeyword("CARDNAME can block an additional creature.")
-                + blocker.getAmountOfKeyword("CARDNAME can block an additional ninety-nine creatures.") * 99;
+        int canBlockMore = numberOfAdditionalCreaturesCanBlock(blocker);
         return canBlockMore >= blockedBy.size();
+    }
+
+    public static int numberOfAdditionalCreaturesCanBlock(final Card blocker) {
+        // If Wizards makes a few more of these, we should really just make a generic version
+        return blocker.getAmountOfKeyword("CARDNAME can block an additional creature.") +
+                blocker.getAmountOfKeyword("CARDNAME can block an additional ninety-nine creatures.") * 99 +
+                blocker.getAmountOfKeyword("CARDNAME can block an additional seven creatures each combat.") * 7;
     }
 
     // can the attacker be blocked at all?
