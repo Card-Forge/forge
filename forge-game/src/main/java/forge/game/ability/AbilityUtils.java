@@ -684,7 +684,7 @@ public class AbilityUtils {
      *            a card type
      * @param sa
      *            a SpellAbility
-     * @return a {@link forge.game.CardCollectionView} object.
+     * @return a {@link forge.game.card.CardCollectionView} object.
      */
     public static CardCollectionView filterListByType(final CardCollectionView list, String type, final SpellAbility sa) {
         if (type == null) {
@@ -1099,6 +1099,7 @@ public class AbilityUtils {
             players.add(sa.getActivatingPlayer());
         }
         else if (defined.equals("Opponent")) {
+            //players.addAll(sa.getActivatingPlayer().getOpponents());
             players.add(sa.getActivatingPlayer().getOpponent());
         }
         else {

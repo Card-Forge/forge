@@ -217,7 +217,13 @@ public class PlayEffect extends SpellAbilityEffect {
             if (noManaCost) {
                 tgtSA = tgtSA.copyWithNoManaCost();
             } else if (sa.hasParam("PlayMadness")) {
-                final Cost abCost = new Cost(sa.getParam("PlayMadness"), false);
+                Cost abCost;
+                if ("ManaCost".equals(sa.getParam("PlayMadness"))) {
+                    abCost = new Cost(source.getManaCost(), false);
+                } else {
+                    abCost = new Cost(sa.getParam("PlayMadness"), false);
+                }
+
                 tgtSA = tgtSA.copyWithDefinedCost(abCost);
                 tgtSA.getHostCard().setMadness(true);
             }

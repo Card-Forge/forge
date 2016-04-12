@@ -1294,7 +1294,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(keyword.replace(":", " ")).append("\r\n");
             } else if (keyword.startsWith("Madness")) {
                 String[] parts = keyword.split(":");
-                sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
+                // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
+                if (parts.length < 2) {
+                    sbLong.append(parts[0]).append(" ").append(this.getManaCost()).append("\r\n");
+                } else {
+                    sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
+                }
             } else if (keyword.startsWith("Devour")) {
                 final String[] parts = keyword.split(":");
                 final String extra = parts.length > 2 ? parts[2] : "";
