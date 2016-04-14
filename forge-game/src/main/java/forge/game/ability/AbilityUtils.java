@@ -72,6 +72,8 @@ public class AbilityUtils {
 
         if (defined.equals("Self")) {
             c = hostCard;
+        } else if (defined.equals("CorrectedSelf")) {
+            c = game.getCardState(hostCard);
         }
         else if (defined.equals("OriginalHost")) {
             c = sa.getRootAbility().getOriginalHost();
