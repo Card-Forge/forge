@@ -104,7 +104,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         activatingPlayer = sa.getActivatingPlayer();
 
         // Payment info
-        paidHash = ability.getPaidHash();
+        paidHash = new HashMap<>(ability.getPaidHash());
         ability.resetPaidHash();
         splicedCards = sa.getSplicedCards();
 
@@ -191,7 +191,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
             // Set Cost specific things here
             ability.resetPaidHash();
-            ability.setPaidHash(paidHash);
+            ability.setPaidHash(new HashMap<String, CardCollection>(paidHash));
             ability.setSplicedCards(splicedCards);
             ability.getHostCard().setXManaCostPaid(xManaPaid);
 
