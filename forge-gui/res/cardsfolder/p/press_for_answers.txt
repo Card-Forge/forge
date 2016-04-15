@@ -1,6 +1,6 @@
 Name:Press for Answers
 ManaCost:1 U
-Types:Instant
+Types:Sorcery
 A:SP$ Tap | Cost$ 1 U | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step. Investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 | TokenAbilities$ ABDraw
