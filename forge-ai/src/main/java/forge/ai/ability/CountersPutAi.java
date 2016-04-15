@@ -436,6 +436,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("CounterNum");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+        int left = amount;
         
         if (abTgt == null) {
             // No target. So must be defined
@@ -454,6 +455,8 @@ public class CountersPutAi extends SpellAbilityAi {
         } else {
             list = CardLists.getTargetableCards(player.getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+
+            int totalTargets = list.size();
 
             while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (mandatory) {
@@ -507,7 +510,13 @@ public class CountersPutAi extends SpellAbilityAi {
                         }
                     }
                     if (choice != null && divided) {
-                        abTgt.addDividedAllocation(choice, amount);
+                        int alloc = Math.max(amount / totalTargets, 1);
+                        if (sa.getTargets().getNumTargeted() == Math.min(totalTargets, abTgt.getMaxTargets(sa.getHostCard(), sa)) - 1) {
+                            abTgt.addDividedAllocation(choice, left);
+                        } else {
+                            abTgt.addDividedAllocation(choice, alloc);
+                            left -= alloc;
+                        }
                     }
                 }
 
