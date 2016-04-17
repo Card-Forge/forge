@@ -23,6 +23,7 @@ import android.webkit.MimeTypeMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
@@ -213,13 +214,18 @@ public class Main extends AndroidApplication {
         }
 
         @Override
-        public void preventSystemSleep(boolean preventSleep) {
-            if (preventSleep) {
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-            else {
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
+        public void preventSystemSleep(final boolean preventSleep) {
+            FThreads.invokeInEdtNowOrLater(new Runnable() { //must set window flags from EDT thread
+                @Override
+                public void run() {
+                    if (preventSleep) {
+                        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                    }
+                    else {
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                    }
+                }
+            });
         }
     }
 }
