@@ -31,26 +31,54 @@ public class ConquestChaosBattle extends ConquestBattle {
 
         //use a random quest event duel for Chaos battle
         //using Chaos battle record to determine difficulty
-        QuestEventDifficulty difficulty;
+        QuestEventDifficulty prefferedDifficulty;
         ConquestPreferences prefs = FModel.getConquestPreferences();
         int chaosBattleWins = FModel.getConquest().getModel().getChaosBattleRecord().getWins();
         if (chaosBattleWins < prefs.getPrefInt(CQPref.CHAOS_BATTLE_WINS_MEDIUMAI)) {
-            difficulty = QuestEventDifficulty.EASY;
+            prefferedDifficulty = QuestEventDifficulty.EASY;
         }
         else if (chaosBattleWins < prefs.getPrefInt(CQPref.CHAOS_BATTLE_WINS_HARDAI)) {
-            difficulty = QuestEventDifficulty.MEDIUM;
+            prefferedDifficulty = QuestEventDifficulty.MEDIUM;
         }
         else if (chaosBattleWins < prefs.getPrefInt(CQPref.CHAOS_BATTLE_WINS_EXPERTAI)) {
-            difficulty = QuestEventDifficulty.HARD;
+            prefferedDifficulty = QuestEventDifficulty.HARD;
         }
         else {
-            difficulty = QuestEventDifficulty.EXPERT;
+            prefferedDifficulty = QuestEventDifficulty.EXPERT;
         }
 
-        world = Aggregates.random(FModel.getWorlds());
-        String path = world == null || world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getDuelsDir();
-        QuestEventDuelManager duelManager = new QuestEventDuelManager(new File(path));
-        duel = Aggregates.random(duelManager.getDuels(difficulty));
+        QuestWorld world0 = null;
+        QuestEventDuel duel0 = null;
+
+        //loop until we find a duel
+        do {
+            world0 = Aggregates.random(FModel.getWorlds());
+            String path = world0 == null || world0.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world0.getDuelsDir();
+            QuestEventDuelManager duelManager = new QuestEventDuelManager(new File(path));
+            QuestEventDifficulty difficulty = prefferedDifficulty;
+            duel0 = Aggregates.random(duelManager.getDuels(difficulty));
+
+            //if can't find duel at preferred difficulty, try lower difficulty
+            while (duel0 == null && difficulty != QuestEventDifficulty.EASY) {
+                switch (difficulty) {
+                case EXPERT:
+                    difficulty = QuestEventDifficulty.HARD;
+                    break;
+                case HARD:
+                    difficulty = QuestEventDifficulty.MEDIUM;
+                    break;
+                case MEDIUM:
+                    difficulty = QuestEventDifficulty.EASY;
+                    break;
+                default:
+                    continue;
+                }
+                duel0 = Aggregates.random(duelManager.getDuels(difficulty));
+            }
+        } while (duel0 == null);
+
+        world = world0;
+        duel = duel0;
     }
 
     @Override
