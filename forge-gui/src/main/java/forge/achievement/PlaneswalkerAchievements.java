@@ -32,7 +32,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Ajani Vengeant", "Ajani's Tantrum", "Look Ma! No lands!");
         add("Ajani, Caller of the Pride", "Ajani's Menagerie", "You're a crazy cat lady now!");
         add("Ajani, Mentor of Heroes", "Ajani's Vitality", "Do sta let!");
-        add("Arlinn Kord", "Arlinn's Hunt", "Fair fight? What fair fight?");
+        add("Arlinn, Embraced by the Moon", "Arlinn's Hunt", "Fair fight? What fair fight?");
         add("Ashiok, Nightmare Weaver", "Ashiok's Identity", "I subscribe to the theory of blank slate!");
         add("Chandra Ablaze", "Chandra's Bargain", "I feel like I've seen those before...");
         add("Chandra Nalaar", "Chandra's Rage", "Feel the power of my wrath!");
