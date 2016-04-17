@@ -159,6 +159,13 @@ public class Match {
         return getGamesWonBy(questPlayer) >= rules.getGamesToWinMatch();
     }
 
+    public RegisteredPlayer getWinner() {
+        if (this.isMatchOver()) {
+            return gamesPlayedRo.get(gamesPlayedRo.size()-1).getWinningPlayer().getRegisteredPlayer();
+        }
+        return null;
+    }
+
     public List<RegisteredPlayer> getPlayers() {
         return players;
     }

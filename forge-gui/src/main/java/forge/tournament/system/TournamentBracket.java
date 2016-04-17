@@ -12,6 +12,11 @@ public class TournamentBracket extends AbstractTournament {
         // Don't initialize the tournament if no players are available
     }
 
+    public TournamentBracket(List<TournamentPlayer> allPlayers, int pairingAmount) {
+        super((int)(Math.ceil(Math.log(allPlayers.size())/Math.log(2))), allPlayers);
+        this.playersInPairing = pairingAmount;
+    }
+
     public TournamentBracket(int ttlRnds, List<TournamentPlayer> allPlayers) {
         super(ttlRnds, allPlayers);
         initializeTournament();
@@ -26,42 +31,58 @@ public class TournamentBracket extends AbstractTournament {
     @Override
     public void generateActivePairings() {
         activeRound++;
+
+        int numByes = 0;
+        if (activeRound == 1) {
+            // Determine how many first round byes there should be.
+            int fullBracketSize = (int)(Math.pow(2, Math.ceil(Math.log(this.remainingPlayers.size())/Math.log(2))));
+            numByes = fullBracketSize - this.remainingPlayers.size();
+        }
+
+        // The first X remaining players will receive the required first round Byes
+        // Since this is a bracket, this should "even" the bracket out.
+        // Preferably our brackets will always have 2^X amount of players
         List<TournamentPlayer> pair = new ArrayList<>();
         int count = 0;
         for (TournamentPlayer tp : this.remainingPlayers) {
             pair.add(tp);
             count++;
-            if (count == this.playersInPairing) {
+            if (count == this.playersInPairing || numByes > 0) {
                 count = 0;
-                activePairings.add(new TournamentPairing(activeRound, pair));
+                TournamentPairing pairing = new TournamentPairing(activeRound, pair);
+                if (numByes > 0) {
+                    numByes--;
+                    pairing.setBye(true);
+                }
+
+                activePairings.add(pairing);
                 pair = new ArrayList<>();
             }
-        }
-
-        if (count >= 1) {
-            // Leftover players. Really shouldn't happen in a Bracket.
-            TournamentPairing pairing = new TournamentPairing(activeRound, pair);
-            if (count == 1) {
-                pairing.setBye(true);
-            }
-            activePairings.add(pairing);
         }
     }
 
     @Override
-    public void reportMatchCompletion(TournamentPairing pairing) {
+    public boolean reportMatchCompletion(TournamentPairing pairing) {
+        // Returns whether there are more matches left in this round
         finishMatch(pairing);
 
-        for (TournamentPlayer tp : pairing.getPairedPlayers()) {
-            if (!tp.equals(pairing.getWinner())) {
-                remainingPlayers.remove(tp);
-                tp.setActive(false);
+        if (!pairing.isBye()) {
+            for (TournamentPlayer tp : pairing.getPairedPlayers()) {
+                if (!tp.equals(pairing.getWinner())) {
+                    tp.addLoss();
+                    remainingPlayers.remove(tp);
+                    tp.setActive(false);
+                } else {
+                    tp.addWin();
+                }
             }
         }
 
         if (activePairings.isEmpty()) {
             completeRound();
+            return false;
         }
+        return true;
     }
 
     @Override

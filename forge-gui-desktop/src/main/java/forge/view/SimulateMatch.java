@@ -3,7 +3,10 @@ package forge.view;
 import java.io.File;
 import java.util.*;
 
+import forge.LobbyPlayer;
+import forge.deck.DeckGroup;
 import forge.properties.ForgeConstants;
+import forge.tournament.system.*;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.commons.lang3.time.StopWatch;
@@ -76,6 +79,19 @@ public class SimulateMatch {
             type = GameType.valueOf(WordUtils.capitalize(params.get("f").get(0)));
         }
 
+        GameRules rules = new GameRules(type);
+        rules.setAppliedVariants(EnumSet.of(type));
+
+        if (matchSize != 0) {
+            rules.setGamesPerMatch(matchSize);
+        }
+
+        if (params.containsKey("t")) {
+            simulateTournament(params, rules, outputGamelog);
+            System.out.flush();
+            return;
+        }
+
         List<RegisteredPlayer> pp = new ArrayList<RegisteredPlayer>();
         StringBuilder sb = new StringBuilder();
 
@@ -103,16 +119,11 @@ public class SimulateMatch {
             pp.add(rp);
             i++;
         }
+
         sb.append(" - ").append(Lang.nounWithNumeral(nGames, "game")).append(" of ").append(type);
 
         System.out.println(sb.toString());
 
-        GameRules rules = new GameRules(type);
-        rules.setAppliedVariants(EnumSet.of(type));
-
-        if (matchSize != 0) {
-            rules.setGamesPerMatch(matchSize);
-        }
         Match mc = new Match(rules, pp, "Test");
 
         if (matchSize != 0) {
@@ -132,22 +143,18 @@ public class SimulateMatch {
     }
 
     private static void argumentHelp() {
-        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -n [N] -m [M] -f [F] -q");
+        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -n [N] -m [M] -t [T] -p [P] -f [F] -q");
         System.out.println("\tsim - stands for simulation mode");
         System.out.println("\tdeck1 (or deck2,...,X) - constructed deck name or filename (has to be quoted when contains multiple words)");
         System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
         System.out.println("\tN - number of games, defaults to 1 (Ignores match setting)");
         System.out.println("\tM - Play full match of X games, typically 1,3,5 games. (Optional, overrides N)");
+        System.out.println("\tT - Type of tournament to run with all provided decks (Bracket, RoundRobin, Swiss)");
+        System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param mc
-     * @param iGame
-     * @param outputGamelog
-     */
     private static void simulateSingleMatch(Match mc, int iGame, boolean outputGamelog) {
         StopWatch sw = new StopWatch();
         sw.start();
@@ -169,6 +176,101 @@ public class SimulateMatch {
         }
 
         System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName()));
+    }
+
+    private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog) {
+        String tournament = params.get("t").get(0);
+        AbstractTournament tourney = null;
+        int matchPlayers = params.containsKey("p") ? Integer.parseInt(params.get("p").get(0)) : 2;
+
+        DeckGroup deckGroup = new DeckGroup("SimulatedTournament");
+        List<TournamentPlayer> players = new ArrayList<>();
+        int numPlayers = 0;
+        for(String deck : params.get("d")) {
+            Deck d = deckFromCommandLineParameter(deck, rules.getGameType());
+            if (d == null) {
+                System.out.println(String.format("Could not load deck - %s, match cannot start", deck));
+                return;
+            }
+
+            deckGroup.addAiDeck(d);
+            players.add(new TournamentPlayer(GamePlayerUtil.createAiPlayer(d.getName(), 0), numPlayers));
+            numPlayers++;
+        }
+
+        if ("bracket".equalsIgnoreCase(tournament)) {
+            tourney = new TournamentBracket(players, matchPlayers);
+        } else if ("roundrobin".equalsIgnoreCase(tournament)) {
+            tourney = new TournamentRoundRobin(players, matchPlayers);
+        } else if ("swiss".equalsIgnoreCase(tournament)) {
+            //tourney = new TournamentSwiss()
+        }
+        if (tourney == null) {
+            System.out.println("Failed to initialize tournament, bailing out");
+            return;
+        }
+
+        tourney.initializeTournament();
+
+        String lastWinner = "";
+        int curRound = 0;
+        while(!tourney.isTournamentOver()) {
+            if (tourney.getActiveRound() != curRound) {
+                if (curRound != 0) {
+                    System.out.println(String.format("End Round - %d", curRound));
+                }
+                curRound = tourney.getActiveRound();
+                System.out.println("");
+                System.out.println(String.format("Round %d Pairings:", curRound));
+
+                for(TournamentPairing pairing : tourney.getActivePairings()) {
+                    StringBuilder sb = new StringBuilder();
+                    for(TournamentPlayer tp : pairing.getPairedPlayers()) {
+                        sb.append(tp.getPlayer().getName()).append(" ");
+                    }
+                    System.out.println(sb.toString());
+                }
+                System.out.println("");
+            }
+
+            TournamentPairing pairing = tourney.getNextPairing();
+            List<RegisteredPlayer> regPlayers = AbstractTournament.registerTournamentPlayers(pairing, deckGroup);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Round ").append(tourney.getActiveRound()).append(" -");
+            for(TournamentPlayer tp : pairing.getPairedPlayers()) {
+                sb.append(" ").append(tp.getPlayer().getName());
+            }
+            if (pairing.isBye()) {
+                sb.append(" - BYE");
+            }
+
+            System.out.println(sb.toString());
+
+            if (!pairing.isBye()) {
+                Match mc = new Match(rules, regPlayers, "TourneyMatch");
+
+                int iGame = 0;
+                while (!mc.isMatchOver()) {
+                    // play games until the match ends
+                    simulateSingleMatch(mc, iGame, outputGamelog);
+                    iGame++;
+                }
+                LobbyPlayer winner = mc.getWinner().getPlayer();
+                for (TournamentPlayer tp : pairing.getPairedPlayers()) {
+                    if (winner.equals(tp.getPlayer())) {
+                        pairing.setWinner(tp);
+                        lastWinner = winner.getName();
+                        System.out.println(String.format("Match Winner - %s!", lastWinner));
+                        System.out.println("");
+                        break;
+                    }
+                }
+            }
+
+            tourney.reportMatchCompletion(pairing);
+        }
+        tourney.outputTournamentResults();
     }
 
     public static Match simulateOffthreadGame(List<Deck> decks, GameType format, int games) {

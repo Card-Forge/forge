@@ -29,6 +29,10 @@ public class TournamentPlayer {
         this.player = player;
     }
 
+    public void addLoss() { losses++; }
+    public void addWin() { wins++; }
+    public void addTie() { ties++; }
+
     public int getWins() {
         return wins;
     }

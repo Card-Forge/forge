@@ -64,7 +64,7 @@ public class DeckGroup extends DeckBase {
     /**
      * Sets the human deck.
      *
-     * @param humanDeck the new human deck
+     * @param humanDeck0 the new human deck
      */
     public final void setHumanDeck(final Deck humanDeck0) {
         humanDeck = humanDeck0;

@@ -5,8 +5,10 @@ import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
+import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.GameType;
+import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiGame;
 import forge.match.HostedMatch;
@@ -24,6 +26,7 @@ import java.util.List;
 public class QuestDraftUtils {
     private static final List<DraftMatchup> matchups = new ArrayList<>();
     public static boolean TOURNAMENT_TOGGLE = false;
+    public static boolean AI_BACKGROUND = false;
 
     public static boolean matchInProgress = false;
     private static boolean waitForUserInput = false;
@@ -304,9 +307,9 @@ public class QuestDraftUtils {
         final DeckGroup decks = FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME);
 
         boolean waitForUserInput = pairing.hasPlayer(GamePlayerUtil.getGuiPlayer());
-        GameRules rules = createQuestDraftRuleset();
+        final GameRules rules = createQuestDraftRuleset();
 
-        List<RegisteredPlayer> registered = registerTournamentPlayers(pairing, draft, decks);
+        final List<RegisteredPlayer> registered = TournamentBracket.registerTournamentPlayers(pairing, decks);
         RegisteredPlayer registeredHuman = null;
 
         if (waitForUserInput) {
@@ -320,8 +323,37 @@ public class QuestDraftUtils {
         } else {
             // TODO Show a "Simulating Dialog" and simulate off-thread. Temporary replication of code for now
             gui.disableOverlay();
-            final HostedMatch newMatch = GuiBase.getInterface().hostMatch();
-            newMatch.startMatch(rules, null, registered, registeredHuman, GuiBase.getInterface().getNewGuiGame());
+            if (AI_BACKGROUND) {
+                System.out.println("Spawning a thread to simulate the match");
+                // Show Dialog popup
+
+                /*
+                FThreads.invokeInBackgroundThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Match mc = new Match(rules, registered, "Simulated Match");
+                        Game gm = mc.createGame();
+                        mc.startGame(gm);
+                    }
+                });*/
+
+                Match mc = new Match(rules, registered, "Simulated Match");
+                String winner = null;
+                while (!mc.isMatchOver()) {
+                    Game gm = mc.createGame();
+                    mc.startGame(gm);
+                    // Update dialog with winner
+                }
+
+                RegisteredPlayer regPlayer = mc.getWinner();
+                //draft.setWinner(regPlayer.getPlayer().getName());
+                //FModel.getQuest().save();
+                gui.finishGame();
+            } else {
+                final HostedMatch newMatch = GuiBase.getInterface().hostMatch();
+                newMatch.startMatch(rules, null, registered, registeredHuman, GuiBase.getInterface().getNewGuiGame());
+            }
+
         }
     }
 

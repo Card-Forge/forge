@@ -1,14 +1,18 @@
 package forge.tournament.system;
 
+import com.google.common.collect.Lists;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import forge.LobbyPlayer;
+import forge.deck.DeckGroup;
+import forge.game.player.RegisteredPlayer;
 import forge.player.GamePlayerUtil;
 import forge.util.MyRandom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -52,6 +56,8 @@ public abstract class AbstractTournament implements Serializable {
         return activePairings.get(0);
     }
 
+    public int getActiveRound() { return activeRound; }
+
     public boolean isContinualPairing() {   return continualPairing;    }
 
     public void setContinualPairing(boolean continualPairing) { this.continualPairing = continualPairing;   }
@@ -74,7 +80,7 @@ public abstract class AbstractTournament implements Serializable {
     }
 
     abstract public void generateActivePairings();
-    abstract public void reportMatchCompletion(TournamentPairing pairing);
+    abstract public boolean reportMatchCompletion(TournamentPairing pairing);
     abstract public boolean completeRound();
 
     public void finishMatch(TournamentPairing pairing) {
@@ -86,6 +92,32 @@ public abstract class AbstractTournament implements Serializable {
 
     public boolean isTournamentOver() {
         return (initialized && activeRound == totalRounds && activePairings.isEmpty());
+    }
+
+    public void outputTournamentResults() {
+        Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
+            @Override
+            public int compare(TournamentPlayer o1, TournamentPlayer o2) {
+                return o2.getWins()*3 + o2.getTies() - o1.getWins()*3 + o1.getTies();
+            }
+        });
+        System.out.println("Name\t\tWins\tLosses\tTies");
+        for(TournamentPlayer tp : allPlayers) {
+            System.out.println(String.format("%s\t\t%d\t%d\t%d", tp.getPlayer().getName(), tp.getWins(),
+                    tp.getLosses(), tp.getTies()));
+        }
+    }
+
+    public static List<RegisteredPlayer> registerTournamentPlayers(TournamentPairing pairing, DeckGroup decks) {
+        List<RegisteredPlayer> registered = Lists.newArrayList();
+        for (TournamentPlayer pl : pairing.getPairedPlayers()) {
+            if (pl.getIndex() == -1) {
+                registered.add(new RegisteredPlayer(decks.getHumanDeck()).setPlayer(pl.getPlayer()));
+            } else {
+                registered.add(new RegisteredPlayer(decks.getAiDecks().get(pl.getIndex())).setPlayer(pl.getPlayer()));
+            }
+        }
+        return registered;
     }
 
     public void addTournamentPlayer(LobbyPlayer pl) {
