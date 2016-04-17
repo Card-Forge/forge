@@ -96,8 +96,7 @@ public class Main {
 
         @Override
         public void preventSystemSleep(boolean preventSleep) {
-            int k = 1;
-            k++;
+            
         }
     }
 }

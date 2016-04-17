@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import forge.player.GamePlayerUtil;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -30,7 +29,6 @@ public class TournamentRoundRobin extends AbstractTournament {
     public void generateActivePairings() {
         int numPlayers = this.remainingPlayers.size();
         List<TournamentPlayer> pair = new ArrayList<>();
-        int count = 0;
 
         List<TournamentPlayer> roundPairings = Lists.newArrayList(this.remainingPlayers);
         if (numPlayers % 2 == 1) {

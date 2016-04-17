@@ -1,6 +1,7 @@
 package forge.quest;
 
 import com.google.common.collect.Lists;
+
 import forge.GuiBase;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -269,6 +270,7 @@ public class QuestDraftUtils {
         newMatch.startMatch(rules, null, nextMatch.matchStarter, nextMatch.humanPlayer, GuiBase.getInterface().getNewGuiGame());
     }
 
+    @SuppressWarnings("unused")
     private static List<RegisteredPlayer> registerTournamentPlayers(TournamentPairing pairing, QuestEventDraft draft, DeckGroup decks) {
         List<RegisteredPlayer> registered = Lists.newArrayList();
         for (TournamentPlayer pl : pairing.getPairedPlayers()) {
@@ -281,6 +283,7 @@ public class QuestDraftUtils {
         return registered;
     }
 
+    @SuppressWarnings("unused")
     private static void updateFromTournament(final IGuiGame gui) {
         // If Human involved launch into a UI, if not show a "Simulating" screen. And simulate the game off-thread
         if (waitForUserInput || matchInProgress || gui == null) {
