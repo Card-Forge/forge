@@ -12,6 +12,7 @@ import forge.Forge;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
+import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import forge.util.Utils;
 
@@ -96,7 +97,7 @@ public class Main {
 
         @Override
         public void preventSystemSleep(boolean preventSleep) {
-            
+            OperatingSystem.preventSystemSleep(preventSleep);
         }
     }
 }

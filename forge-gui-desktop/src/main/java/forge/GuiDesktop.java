@@ -49,6 +49,7 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.util.BuildInfo;
 import forge.util.Callback;
 import forge.util.FileUtil;
+import forge.util.OperatingSystem;
 
 public class GuiDesktop implements IGuiBase {
     @Override
@@ -286,6 +287,6 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void preventSystemSleep(boolean preventSleep) {
-        
+        OperatingSystem.preventSystemSleep(preventSleep);
     }
 }
