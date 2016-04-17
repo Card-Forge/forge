@@ -290,4 +290,9 @@ public class GuiMobile implements IGuiBase {
     public String encodeSymbols(String str, boolean formatReminderText) {
         return str; //not needed for mobile
     }
+
+    @Override
+    public void preventSystemSleep(boolean preventSleep) {
+        Forge.getDeviceAdapter().preventSystemSleep(preventSleep);
+    }
 }

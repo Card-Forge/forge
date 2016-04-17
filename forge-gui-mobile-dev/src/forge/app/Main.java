@@ -93,5 +93,11 @@ public class Main {
                 FileUtil.deleteFile(switchOrientationFile);
             }
         }
+
+        @Override
+        public void preventSystemSleep(boolean preventSleep) {
+            int k = 1;
+            k++;
+        }
     }
 }

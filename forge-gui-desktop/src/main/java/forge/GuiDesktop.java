@@ -283,4 +283,9 @@ public class GuiDesktop implements IGuiBase {
     public String encodeSymbols(String str, boolean formatReminderText) {
         return FSkin.encodeSymbols(str, formatReminderText);
     }
+
+    @Override
+    public void preventSystemSleep(boolean preventSleep) {
+        
+    }
 }

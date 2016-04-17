@@ -76,6 +76,11 @@ public class Main extends IOSApplication.Delegate {
         }
 
         @Override
+        public void preventSystemSleep(boolean preventSleep) {
+            // TODO implement this
+        }
+
+        @Override
         public boolean isTablet() {
             return Gdx.graphics.getWidth() > Gdx.graphics.getHeight();
         }

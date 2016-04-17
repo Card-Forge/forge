@@ -53,4 +53,5 @@ public interface IGuiBase {
     HostedMatch hostMatch();
     void runBackgroundTask(String message, Runnable task);
     String encodeSymbols(String str, boolean formatReminderText);
+    void preventSystemSleep(boolean preventSleep);
 }

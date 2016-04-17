@@ -227,6 +227,7 @@ public abstract class GuiDownloadService implements Runnable {
 
     @Override
     public void run() {
+        GuiBase.getInterface().preventSystemSleep(true); //prevent system from going into sleep mode while downloading
 
         Proxy p = getProxy();
 
@@ -294,8 +295,9 @@ public abstract class GuiDownloadService implements Runnable {
             }
 
             update(++iCard, fileDest);
-
         }
+
+        GuiBase.getInterface().preventSystemSleep(false);
     }
 
     protected Proxy getProxy() {

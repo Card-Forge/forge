@@ -7,6 +7,7 @@ public interface IDeviceAdapter {
     String getDownloadsDir();
     boolean openFile(String filename);
     void setLandscapeMode(boolean landscapeMode);
+    void preventSystemSleep(boolean preventSleep);
     void restart();
     void exit();
 }

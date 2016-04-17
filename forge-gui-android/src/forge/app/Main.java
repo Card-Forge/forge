@@ -17,6 +17,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 
 import com.badlogic.gdx.Gdx;
@@ -208,6 +209,16 @@ public class Main extends AndroidApplication {
             }
             else {
                 FileUtil.deleteFile(switchOrientationFile);
+            }
+        }
+
+        @Override
+        public void preventSystemSleep(boolean preventSleep) {
+            if (preventSleep) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+            else {
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         }
     }

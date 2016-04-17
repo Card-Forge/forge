@@ -19,6 +19,7 @@ import com.esotericsoftware.minlog.Log;
 import com.google.common.io.Files;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.interfaces.IProgressBar;
 import forge.util.FileUtil;
 
@@ -73,6 +74,8 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
         //if assets.zip downloaded successfully, unzip into destination folder
         try {
+            GuiBase.getInterface().preventSystemSleep(true); //prevent system from going into sleep mode while unzipping
+
             if (deleteFolder != null) {
                 final File deleteDir = new File(deleteFolder);
                 if (deleteDir.exists()) {
@@ -132,9 +135,14 @@ public class GuiDownloadZipService extends GuiDownloadService {
         catch (final Exception e) {
             e.printStackTrace();
         }
+        finally {
+            GuiBase.getInterface().preventSystemSleep(false);
+        }
     }
 
     public String download(final String filename) {
+        GuiBase.getInterface().preventSystemSleep(true); //prevent system from going into sleep mode while downloading
+
         progressBar.reset();
         progressBar.setPercentMode(true);
         progressBar.setDescription("Downloading " + desc);
@@ -194,8 +202,11 @@ public class GuiDownloadZipService extends GuiDownloadService {
         }
         catch (final Exception ex) {
             Log.error("Downloading " + desc, "Error downloading " + desc, ex);
+            return null;
         }
-        return null;
+        finally {
+            GuiBase.getInterface().preventSystemSleep(false);
+        }
     }
 
     protected void copyInputStream(final InputStream in, final String outPath) throws IOException{
