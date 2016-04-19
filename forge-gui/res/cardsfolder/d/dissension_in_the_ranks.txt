@@ -1,7 +1,7 @@
 Name:Dissension in the Ranks
-ManaCost:4 R R
+ManaCost:3 R R
 Types:Instant
-A:SP$ Fight | Cost$ 4 R R | ValidTgts$ Creature.blocking | TgtPrompt$ Select blocking target creature | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Target blocking creature fights another target blocking creature.
+A:SP$ Fight | Cost$ 3 R R | ValidTgts$ Creature.blocking | TgtPrompt$ Select blocking target creature | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Target blocking creature fights another target blocking creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dissension_in_the_ranks.jpg
 Oracle:Target blocking creature fights another target blocking creature.
 
