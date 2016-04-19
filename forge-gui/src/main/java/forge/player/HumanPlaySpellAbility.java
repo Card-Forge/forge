@@ -79,6 +79,10 @@ public class HumanPlaySpellAbility {
                 || (option != null && option.isIgnoreManaCostColor())));
         final boolean playerManaConversion = human.hasManaConversion()
                 && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
+
+        // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
+        game.getStack().freezeStack();
+
         if (ability instanceof Spell && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
             fromState = c.getCurrentStateName();
@@ -94,9 +98,6 @@ public class HumanPlaySpellAbility {
         }
 
         ability.resetPaidHash();
-
-        // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
-        game.getStack().freezeStack();
 
         if (manaConversion) {
             AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_MANA_CONVERSION);
@@ -212,6 +213,7 @@ public class HumanPlaySpellAbility {
         ability.resetOnceResolved();
         payment.refundPayment();
         game.getStack().clearFrozen();
+        game.getTriggerHandler().clearWaitingTriggers();
     }
 
     private boolean announceValuesLikeX() {
