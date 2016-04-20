@@ -1,6 +1,7 @@
 package forge.view;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.*;
 
 import forge.LobbyPlayer;
@@ -92,32 +93,35 @@ public class SimulateMatch {
             return;
         }
 
-        List<RegisteredPlayer> pp = new ArrayList<RegisteredPlayer>();
+        List<RegisteredPlayer> pp = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
 
         int i = 1;
-        for(String deck : params.get("d")) {
-            Deck d = deckFromCommandLineParameter(deck, type);
-            if (d == null) {
-                System.out.println(String.format("Could not load deck - %s, match cannot start", deck));
-                return;
-            }
-            if (i > 1) {
-                sb.append(" vs ");
-            }
-            String name = String.format("Ai(%s)-%s", i, d.getName());
-            sb.append(name);
 
-            RegisteredPlayer rp = null;
+        if (params.containsKey("d")) {
+            for(String deck : params.get("d")) {
+                Deck d = deckFromCommandLineParameter(deck, type);
+                if (d == null) {
+                    System.out.println(String.format("Could not load deck - %s, match cannot start", deck));
+                    return;
+                }
+                if (i > 1) {
+                    sb.append(" vs ");
+                }
+                String name = String.format("Ai(%s)-%s", i, d.getName());
+                sb.append(name);
 
-            if (type.equals(GameType.Commander)) {
-                rp = RegisteredPlayer.forCommander(d);
-            } else {
-                rp = new RegisteredPlayer(d);
+                RegisteredPlayer rp;
+
+                if (type.equals(GameType.Commander)) {
+                    rp = RegisteredPlayer.forCommander(d);
+                } else {
+                    rp = new RegisteredPlayer(d);
+                }
+                rp.setPlayer(GamePlayerUtil.createAiPlayer(name, i - 1));
+                pp.add(rp);
+                i++;
             }
-            rp.setPlayer(GamePlayerUtil.createAiPlayer(name, i - 1));
-            pp.add(rp);
-            i++;
         }
 
         sb.append(" - ").append(Lang.nounWithNumeral(nGames, "game")).append(" of ").append(type);
@@ -143,10 +147,11 @@ public class SimulateMatch {
     }
 
     private static void argumentHelp() {
-        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -n [N] -m [M] -t [T] -p [P] -f [F] -q");
+        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -q");
         System.out.println("\tsim - stands for simulation mode");
         System.out.println("\tdeck1 (or deck2,...,X) - constructed deck name or filename (has to be quoted when contains multiple words)");
         System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
+        System.out.println("\tD - absolute directory to load decks from");
         System.out.println("\tN - number of games, defaults to 1 (Ignores match setting)");
         System.out.println("\tM - Play full match of X games, typically 1,3,5 games. (Optional, overrides N)");
         System.out.println("\tT - Type of tournament to run with all provided decks (Bracket, RoundRobin, Swiss)");
@@ -186,16 +191,48 @@ public class SimulateMatch {
         DeckGroup deckGroup = new DeckGroup("SimulatedTournament");
         List<TournamentPlayer> players = new ArrayList<>();
         int numPlayers = 0;
-        for(String deck : params.get("d")) {
-            Deck d = deckFromCommandLineParameter(deck, rules.getGameType());
-            if (d == null) {
-                System.out.println(String.format("Could not load deck - %s, match cannot start", deck));
-                return;
+        if (params.containsKey("d")) {
+            for(String deck : params.get("d")) {
+                Deck d = deckFromCommandLineParameter(deck, rules.getGameType());
+                if (d == null) {
+                    System.out.println(String.format("Could not load deck - %s, match cannot start", deck));
+                    return;
+                }
+
+                deckGroup.addAiDeck(d);
+                players.add(new TournamentPlayer(GamePlayerUtil.createAiPlayer(d.getName(), 0), numPlayers));
+                numPlayers++;
+            }
+        }
+
+        if (params.containsKey("D")) {
+            // Direc
+            String foldName = params.get("D").get(0);
+            File folder = new File(foldName);
+            if (!folder.isDirectory()) {
+                System.out.println("Directory not found - " + foldName);
+            } else {
+                for(File deck : folder.listFiles(new FilenameFilter() {
+                    @Override
+                    public boolean accept(File dir, String name) {
+                        return name.endsWith(".dck");
+                    }
+                })) {
+                    Deck d = DeckSerializer.fromFile(deck);
+                    if (d == null) {
+                        System.out.println(String.format("Could not load deck - %s, match cannot start", deck.getName()));
+                        return;
+                    }
+                    deckGroup.addAiDeck(d);
+                    players.add(new TournamentPlayer(GamePlayerUtil.createAiPlayer(d.getName(), 0), numPlayers));
+                    numPlayers++;
+                }
             }
 
-            deckGroup.addAiDeck(d);
-            players.add(new TournamentPlayer(GamePlayerUtil.createAiPlayer(d.getName(), 0), numPlayers));
-            numPlayers++;
+        }
+
+        if (numPlayers == 0) {
+            System.out.println("No decks/Players found. Please try again.");
         }
 
         if ("bracket".equalsIgnoreCase(tournament)) {
@@ -203,7 +240,7 @@ public class SimulateMatch {
         } else if ("roundrobin".equalsIgnoreCase(tournament)) {
             tourney = new TournamentRoundRobin(players, matchPlayers);
         } else if ("swiss".equalsIgnoreCase(tournament)) {
-            //tourney = new TournamentSwiss()
+            tourney = new TournamentSwiss(players, matchPlayers);
         }
         if (tourney == null) {
             System.out.println("Failed to initialize tournament, bailing out");
@@ -226,6 +263,7 @@ public class SimulateMatch {
                 for(TournamentPairing pairing : tourney.getActivePairings()) {
                     StringBuilder sb = new StringBuilder();
                     for(TournamentPlayer tp : pairing.getPairedPlayers()) {
+                        // Post Record
                         sb.append(tp.getPlayer().getName()).append(" ");
                     }
                     System.out.println(sb.toString());
@@ -253,8 +291,14 @@ public class SimulateMatch {
                 int iGame = 0;
                 while (!mc.isMatchOver()) {
                     // play games until the match ends
-                    simulateSingleMatch(mc, iGame, outputGamelog);
-                    iGame++;
+                    try{
+                        simulateSingleMatch(mc, iGame, outputGamelog);
+                        iGame++;
+                    } catch(Exception e) {
+                        System.out.println("Game threw exception. Abandoning game and continuing...");
+                        continue;
+                    }
+
                 }
                 LobbyPlayer winner = mc.getWinner().getPlayer();
                 for (TournamentPlayer tp : pairing.getPairedPlayers()) {

@@ -1,7 +1,7 @@
 Name:Needlebite Trap
 ManaCost:5 B B
 Types:Instant Trap
-SVar:AltCost:Cost$ B | CheckSVar$ OppLifeGained | Description$ If an opponent gained life this turn, you may pay {B} rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ B | CheckSVar$ OppLifeGained | References$ OppLifeGained | Description$ If an opponent gained life this turn, you may pay {B} rather than pay CARDNAME's mana cost.
 SVar:OppLifeGained:PlayerCountOpponents$LifeGainedThisTurn
 A:SP$ LoseLife | Cost$ 5 B B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 5 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 5 life and you gain 5 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5

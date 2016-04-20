@@ -274,7 +274,7 @@ public class ManaCostBeingPaid {
 
         ShardCount sc = unpaidShards.get(shard);
         if (sc == null) {
-            System.out.println("Tried to substract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
+            //System.out.println("Tried to substract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
             return;
         }
         if (manaToSubtract >= sc.totalCount) {

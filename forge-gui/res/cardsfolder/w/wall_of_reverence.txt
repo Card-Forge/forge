@@ -6,7 +6,7 @@ K:Defender
 K:Flying
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step, you may gain life equal to the power of target creature you control.
 SVar:TrigDig:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ HighestPower | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_reverence.jpg
 Oracle:Defender, flying\nAt the beginning of your end step, you may gain life equal to the power of target creature you control.

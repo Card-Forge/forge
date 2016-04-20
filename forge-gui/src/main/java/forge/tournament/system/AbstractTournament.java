@@ -22,8 +22,8 @@ public abstract class AbstractTournament implements Serializable {
     protected int playersInPairing = 2;
     protected boolean initialized = false;
     protected boolean continualPairing = true;
-    protected final List<TournamentPlayer> allPlayers = new ArrayList<TournamentPlayer>();
-    protected transient final List<TournamentPlayer> remainingPlayers = new ArrayList<TournamentPlayer>();
+    protected final List<TournamentPlayer> allPlayers = new ArrayList<>();
+    protected transient final List<TournamentPlayer> remainingPlayers = new ArrayList<>();
     protected final List<TournamentPairing> completedPairings = new ArrayList<>();
     protected final List<TournamentPairing> activePairings = new ArrayList<>();
 
@@ -81,7 +81,18 @@ public abstract class AbstractTournament implements Serializable {
 
     abstract public void generateActivePairings();
     abstract public boolean reportMatchCompletion(TournamentPairing pairing);
-    abstract public boolean completeRound();
+
+    public boolean completeRound() {
+        if (activeRound < totalRounds) {
+            if (continualPairing) {
+                generateActivePairings();
+            }
+            return true;
+        } else {
+            endTournament();
+            return false;
+        }
+    }
 
     public void finishMatch(TournamentPairing pairing) {
         activePairings.remove(pairing);
@@ -94,13 +105,33 @@ public abstract class AbstractTournament implements Serializable {
         return (initialized && activeRound == totalRounds && activePairings.isEmpty());
     }
 
+    public void sortAllPlayers(String sortType) {
+        if (sortType.equals("score")) {
+            Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
+                @Override
+                public int compare(TournamentPlayer o1, TournamentPlayer o2) {
+                    return o2.getScore() - o1.getScore();
+                }
+            });
+        } else if (sortType.equals("index")) {
+            Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
+                @Override
+                public int compare(TournamentPlayer o1, TournamentPlayer o2) {
+                    return o2.getIndex() - o1.getIndex();
+                }
+            });
+        } else if (sortType.equals("swiss")) {
+            Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
+                @Override
+                public int compare(TournamentPlayer o1, TournamentPlayer o2) {
+                    return o2.getSwissScore() - o1.getSwissScore();
+                }
+            });
+        }
+    }
+
     public void outputTournamentResults() {
-        Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
-            @Override
-            public int compare(TournamentPlayer o1, TournamentPlayer o2) {
-                return o2.getWins()*3 + o2.getTies() - o1.getWins()*3 + o1.getTies();
-            }
-        });
+        sortAllPlayers("score");
         System.out.println("Name\t\tWins\tLosses\tTies");
         for(TournamentPlayer tp : allPlayers) {
             System.out.println(String.format("%s\t\t%d\t%d\t%d", tp.getPlayer().getName(), tp.getWins(),

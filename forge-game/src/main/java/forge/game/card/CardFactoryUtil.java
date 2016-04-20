@@ -496,7 +496,7 @@ public class CardFactoryUtil {
         }
 
         String result = sb.toString();
-        System.out.println("result: " + result);
+        //System.out.println("result: " + result);
         result = result.trim();
         return result;
     }

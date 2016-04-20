@@ -3,7 +3,7 @@ ManaCost:1 GU GU
 Types:Creature Merfolk Rogue
 PT:1/1
 K:Islandwalk
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw that many cards.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | References$ X | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw that many cards.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_eyed_selkie.jpg

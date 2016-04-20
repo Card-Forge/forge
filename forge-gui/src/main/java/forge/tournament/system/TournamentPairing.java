@@ -5,13 +5,15 @@ import forge.LobbyPlayer;
 import forge.game.GameOutcome;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TournamentPairing {
     private int round;
     private boolean bye = false;
-    private final List<TournamentPlayer> pairedPlayers = new ArrayList<TournamentPlayer>();
-    private final List<GameOutcome> outcomes = new ArrayList<GameOutcome>();
+    private final List<TournamentPlayer> pairedPlayers = new ArrayList<>();
+    private final List<GameOutcome> outcomes = new ArrayList<>();
     private TournamentPlayer winner;
 
     public TournamentPairing(int rnd, List<TournamentPlayer> plyrs) {
