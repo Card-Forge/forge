@@ -24,7 +24,7 @@ public class TriggerPhaseOut extends Trigger {
                     return false;
                 }
             } else if (!phaser.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard())) {
+                    this.getHostCard(), null)) {
                 return false;
             }
         }

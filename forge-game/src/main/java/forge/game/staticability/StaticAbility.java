@@ -502,7 +502,7 @@ public class StaticAbility extends CardTraitBase {
                 return false;
             }
             final Card topCard = controller.getCardsIn(ZoneType.Library).get(0);
-            if (!topCard.isValid(this.mapParams.get("TopCardOfLibraryIs").split(","), controller, this.hostCard)) {
+            if (!topCard.isValid(this.mapParams.get("TopCardOfLibraryIs").split(","), controller, this.hostCard, null)) {
                 return false;
             }
         }
@@ -580,7 +580,7 @@ public class StaticAbility extends CardTraitBase {
     }
 
     /**
-     * @param c the ignoreEffectCards to set
+     * @param cards the ignoreEffectCards to set
      */
     public void setIgnoreEffectCards(final CardCollectionView cards) {
         ignoreEffectCards = cards;

@@ -72,7 +72,7 @@ public class SacrificeAi extends SpellAbilityAi {
             final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
             List<Card> list =
-                    CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard());
+                    CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
             for (Card c : list) {
                 if (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) > 3) {
                 	return false;
@@ -126,7 +126,7 @@ public class SacrificeAi extends SpellAbilityAi {
             }
 
             List<Card> humanList =
-                    CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard());
+                    CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
             // Since all of the cards have remAIDeck:True, I enabled 1 for 1
             // (or X for X) trades for special decks
@@ -135,7 +135,7 @@ public class SacrificeAi extends SpellAbilityAi {
             }
         } else if (defined.equals("You")) {
             List<Card> computerList =
-                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard());
+                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
             for (Card c : computerList) {
                 if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return true;

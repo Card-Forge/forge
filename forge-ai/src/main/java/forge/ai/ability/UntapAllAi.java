@@ -27,7 +27,7 @@ public class UntapAllAi extends SpellAbilityAi {
             if (sa.hasParam("ValidCards")) {
                 valid = sa.getParam("ValidCards");
             }
-            list = CardLists.getValidCards(list, valid.split(","), source.getController(), source);
+            list = CardLists.getValidCards(list, valid.split(","), source.getController(), source, sa);
             return !list.isEmpty();
         }
         return false;

@@ -211,7 +211,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
             });
 
-            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source, sa);
 
             if (list.size() < abTgt.getMinTargets(source, sa)) {
                 return false;
@@ -365,7 +365,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
         if (abTgt != null) {
             CardCollection list =
-                    CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), abTgt.getValidTgts(), source.getController(), source);
+                    CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), abTgt.getValidTgts(), source.getController(), source, sa);
 
             if (list.size() == 0) {
                 return false;
@@ -454,7 +454,7 @@ public class CountersPutAi extends SpellAbilityAi {
             }
         } else {
             list = CardLists.getTargetableCards(player.getCardsIn(ZoneType.Battlefield), sa);
-            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source, sa);
 
             int totalTargets = list.size();
 
@@ -468,7 +468,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     if (list.isEmpty() && preferred) {
                         // If it's required to choose targets and the list is empty, get a new list
                         list = CardLists.getTargetableCards(player.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
-                        list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+                        list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source, sa);
                         preferred = false;
                     }
                 }

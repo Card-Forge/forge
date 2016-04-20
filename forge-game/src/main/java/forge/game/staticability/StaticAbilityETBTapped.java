@@ -40,7 +40,7 @@ public class StaticAbilityETBTapped {
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 

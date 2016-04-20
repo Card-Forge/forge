@@ -109,8 +109,6 @@ public class UntapAi extends SpellAbilityAi {
      * 
      * @param tgt
      *            a {@link forge.game.spellability.TargetRestrictions} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -127,7 +125,7 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
 
         if (list.isEmpty()) {
             return false;
@@ -137,7 +135,7 @@ public class UntapAi extends SpellAbilityAi {
         // filter out enchantments and planeswalkers, their tapped state doesn't
         // matter.
         final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
-        untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source);
+        untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source, sa);
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card choice = null;
@@ -198,9 +196,7 @@ public class UntapAi extends SpellAbilityAi {
      * <p>
      * untapUnpreferredTargeting.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -211,13 +207,14 @@ public class UntapAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = CardLists.getValidCards(sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), source.getController(), source);
+        CardCollection list = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield),
+                tgt.getValidTgts(), source.getController(), source, sa);
         list = CardLists.getTargetableCards(list, sa);
 
         // filter by enchantments and planeswalkers, their tapped state doesn't
         // matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
-        CardCollection tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source);
+        CardCollection tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source, sa);
 
         if (untapTargetList(source, tgt, sa, mandatory, tapList)) {
             return true;

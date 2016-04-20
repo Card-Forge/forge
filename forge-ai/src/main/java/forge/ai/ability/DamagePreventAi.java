@@ -102,7 +102,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             }
             final List<Card> threatenedTargets = new ArrayList<Card>();
             // filter AIs battlefield by what I can target
-            List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, hostCard);
+            List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, hostCard, sa);
             targetables = CardLists.getTargetableCards(targetables, sa);
 
             for (final Card c : targetables) {
@@ -129,7 +129,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             } else {
                 // filter AIs battlefield by what I can target
                 CardCollectionView targetables = ai.getCardsIn(ZoneType.Battlefield);
-                targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
+                targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard, sa);
                 targetables = CardLists.getTargetableCards(targetables, sa);
 
                 if (targetables.isEmpty()) {
@@ -171,9 +171,7 @@ public class DamagePreventAi extends SpellAbilityAi {
      * <p>
      * preventDamageMandatoryTarget.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -186,7 +184,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         // filter AIs battlefield by what I can target
         final Game game = ai.getGame();
         CardCollectionView targetables = game.getCardsIn(ZoneType.Battlefield);
-        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getHostCard());
+        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getHostCard(), sa);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
         Card target = null;
 

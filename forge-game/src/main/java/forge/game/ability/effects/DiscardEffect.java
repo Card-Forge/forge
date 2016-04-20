@@ -210,7 +210,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
                     }
 
-                    List<Card> dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source);
+                    List<Card> dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source, sa);
                     dPChHand = CardLists.filter(dPChHand, Presets.NON_TOKEN);
                     // Reveal cards that will be discarded?
                     for (final Card c : dPChHand) {
@@ -230,7 +230,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     }
                     final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
                     String[] dValid = valid.split(",");
-                    CardCollection validCards = CardLists.getValidCards(dPHand, dValid, source.getController(), source);
+                    CardCollection validCards = CardLists.getValidCards(dPHand, dValid, source.getController(), source, sa);
 
                     Player chooser = p;
                     if (mode.equals("RevealYouChoose")) {
@@ -267,6 +267,5 @@ public class DiscardEffect extends SpellAbilityEffect {
                 source.addRemembered(c);
             }
         }
-
     } // discardResolve()
 }

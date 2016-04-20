@@ -134,7 +134,8 @@ public class CostPutCounter extends CostPartWithList {
             }
         } else {
             // 3 Cards have Put a -1/-1 Counter on a Creature you control.
-            final List<Card> typeList = CardLists.getValidCards(activator.getGame().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
+            final List<Card> typeList = CardLists.getValidCards(activator.getGame().getCardsIn(ZoneType.Battlefield),
+                    this.getType().split(";"), activator, source, ability);
 
             if (typeList.size() == 0) {
                 return false;

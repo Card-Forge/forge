@@ -64,7 +64,7 @@ public class TriggerAttacks extends Trigger {
         if (this.mapParams.containsKey("Attacked")) {
             GameEntity attacked = (GameEntity) runParams2.get("Attacked");
             if (!attacked.isValid(this.mapParams.get("Attacked").split(",")
-                    , this.getHostCard().getController(), this.getHostCard())) {
+                    , this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }

@@ -151,7 +151,6 @@ public final class CardUtil {
      * @param from  zone coming from
      * @param valid a isValid expression
      * @param src   a Card object
-     * @param checkLatestState  a boolean, true if the latest state of the card as it left the original zone needs to be checked
      * @return a CardCollection that matches the given criteria
      */
     public static CardCollection getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
@@ -190,7 +189,6 @@ public final class CardUtil {
      * @param from  zone coming from
      * @param valid a isValid expression
      * @param src   a Card object
-     * @param checkLatestState  a boolean, true if the latest state of the card as it left the original zone needs to be checked
      * @return a CardCollection that matches the given criteria
      */
     public static CardCollection getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
@@ -307,7 +305,7 @@ public final class CardUtil {
                 continue;
             
             for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
-                if (!res.contains(c) && c.isValid(valid, source.getController(), source) && !c.equals(origin)) {
+                if (!res.contains(c) && c.isValid(valid, source.getController(), source, null) && !c.equals(origin)) {
                     res.add(c);
                 }
             }
@@ -479,7 +477,7 @@ public final class CardUtil {
         final List<ZoneType> zone = tgt.getZone();
 
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
-        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getHostCard());
+        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getHostCard(), ability);
         List<Card> choices = CardLists.getTargetableCards(validCards, ability);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack

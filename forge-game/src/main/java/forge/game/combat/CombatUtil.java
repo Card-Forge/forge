@@ -157,7 +157,6 @@ public class CombatUtil {
      * </p>
      * <p>
      * This method doesn't check effects related to other creatures attacking
-     * (but see {@link CombatUtil}.{@link #canAttack(Card, GameEntity, Combat)}.
      * </p>
      * <p>
      * Note that a creature affected by any attacking restrictions may never be
@@ -234,8 +233,6 @@ public class CombatUtil {
      * 
      * @param attacker
      *            a {@link forge.game.card.Card} object.
-     * @param bLast
-     *            a boolean.
      */
     public static boolean checkPropagandaEffects(final Game game, final Card attacker, final Combat combat) {
         final Cost attackCost = getAttackCost(game, attacker,  combat.getDefenderByAttacker(attacker));
@@ -342,7 +339,6 @@ public class CombatUtil {
      * @param combat
      *            a {@link Combat}.
      * @return a {@link Map}.
-     * @see #getRequirementsPerDefender(Card, FCollectionView, Combat, int)
      */
     public static AttackConstraints getAllRequirements(final Combat combat) {
         return new AttackConstraints(combat);
@@ -577,7 +573,7 @@ public class CombatUtil {
         final String valid = StringUtils.join(walkTypes, ",");
         final CardCollectionView defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
         for (final Card c : defendingLands) {
-            if (c.isValid(valid.split(","), defendingPlayer, attacker)) {
+            if (c.isValid(valid.split(","), defendingPlayer, attacker, null)) {
                 return true;
             }
         }
@@ -946,7 +942,7 @@ public class CombatUtil {
             final String parse = attacker.getKeywords().get(keywordPosition).toString();
             final String[] k = parse.split(" ", 2);
             final String[] restrictions = k[1].split(",");
-            if (blocker.isValid(restrictions, attacker.getController(), attacker)) {
+            if (blocker.isValid(restrictions, attacker.getController(), attacker, null)) {
             	//Dragon Hunter check
             	if (!k[1].contains("withoutReach") || !attacker.getType().hasCreatureType("Dragon")
             			|| !blocker.hasKeyword("CARDNAME can block Dragons as though it had reach.")) {
@@ -967,7 +963,7 @@ public class CombatUtil {
                 final String[] parse0 = parse.split(":");
                 final String[] k = parse0[0].split(" ", 2);
                 final String[] restrictions = k[1].split(",");
-                if (attacker.isValid(restrictions, blocker.getController(), blocker)) {
+                if (attacker.isValid(restrictions, blocker.getController(), blocker, null)) {
                     return false;
                 }
             }

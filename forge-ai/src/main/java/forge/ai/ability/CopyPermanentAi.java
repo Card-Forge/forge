@@ -57,7 +57,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
         if (abTgt != null) {
             sa.resetTargets();
 
-            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(abTgt.getZone()), abTgt.getValidTgts(), source.getController(), source);
+            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(abTgt.getZone()),
+                    abTgt.getValidTgts(), source.getController(), source, sa);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override

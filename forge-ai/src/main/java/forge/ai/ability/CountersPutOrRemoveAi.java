@@ -51,7 +51,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
         List<ZoneType> zones = ZoneType.listValueOf(sa.getParamOrDefault("TgtZones", "Battlefield"));
         List<Card> validCards = CardLists.getValidCards(ai.getGame().getCardsIn(zones),
-                tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
+                tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
         if (validCards.isEmpty()) {
             return false;

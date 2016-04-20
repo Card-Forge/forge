@@ -63,7 +63,7 @@ public class PlayAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
-            cards = CardLists.getValidCards(ai.getGame().getCardsIn(zone), tgt.getValidTgts(), ai, source);
+            cards = CardLists.getValidCards(ai.getGame().getCardsIn(zone), tgt.getValidTgts(), ai, source, sa);
             if (cards.isEmpty()) {
                 return false;
             }
@@ -85,8 +85,6 @@ public class PlayAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
      *            a boolean.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      *
      * @return a boolean.
      */

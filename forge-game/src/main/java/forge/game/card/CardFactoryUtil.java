@@ -524,7 +524,7 @@ public class CardFactoryUtil {
             // Reconfirm the Validity of a TgtValid, or if the Creature is still
             // a Creature
             if (tgt.doesTarget()
-                    && !target.isValid(tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getHostCard())) {
+                    && !target.isValid(tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getHostCard(), ability)) {
                 return false;
             }
 
@@ -731,7 +731,7 @@ public class CardFactoryUtil {
             int totPlayer = 0;
             String property = sq[0].substring(11);
             for (Player p : players) {
-                if (p.hasProperty(property, source.getController(), source)) {
+                if (p.hasProperty(property, source.getController(), source, null)) {
                     totPlayer++;
                 }
             }
@@ -765,7 +765,7 @@ public class CardFactoryUtil {
             final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
             String restrictions = l[0].replace(lparts[0] + " ", "");
             final String[] rest = restrictions.split(",");
-            CardCollection cards = CardLists.getValidCards(game.getCardsIn(vZone), rest, player, source);
+            CardCollection cards = CardLists.getValidCards(game.getCardsIn(vZone), rest, player, source, null);
             return doXMath(cards.size(), m, source);
         }
 
@@ -773,7 +773,7 @@ public class CardFactoryUtil {
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
             final String[] rest = restrictions.split(",");
-            CardCollection cardsonbattlefield = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, source);
+            CardCollection cardsonbattlefield = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, source, null);
             return doXMath(cardsonbattlefield.size(), m, source);
         }
 
@@ -940,7 +940,7 @@ public class CardFactoryUtil {
                 ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
                 : game.getCardsIn(ZoneType.Battlefield);
 
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c);
+            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
             return doXMath(cards.size(), m, c);
         }
 
@@ -951,7 +951,7 @@ public class CardFactoryUtil {
         if (l[0].startsWith("GreatestPower_")) {
             final String restriction = l[0].substring(14);
             final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c);
+            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
             int highest = 0;
             for (final Card crd : list) {
                 if (crd.getNetPower() > highest) {
@@ -964,7 +964,7 @@ public class CardFactoryUtil {
         if (l[0].startsWith("GreatestToughness_")) {
             final String restriction = l[0].substring(18);
             final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c);
+            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
             int highest = 0;
             for (final Card crd : list) {
                 if (crd.getNetToughness() > highest) {
@@ -977,7 +977,7 @@ public class CardFactoryUtil {
         if (l[0].startsWith("HighestCMC_")) {
             final String restriction = l[0].substring(11);
             final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c);
+            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
             int highest = 0;
             for (final Card crd : list) {
                 if (crd.isSplitCard()) {
@@ -1001,7 +1001,7 @@ public class CardFactoryUtil {
             final List<String> crdname = new ArrayList<String>();
             final String restriction = l[0].substring(19);
             final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c);
+            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
             for (final Card card : list) {
                 if (!crdname.contains(card.getName())) {
                     crdname.add(card.getName());
@@ -1030,7 +1030,7 @@ public class CardFactoryUtil {
             final CounterType counterType = CounterType.valueOf(components[1]);
             String restrictions = components[2];
             final String[] rest = restrictions.split(",");
-            CardCollection candidates = CardLists.getValidCards(game.getCardsInGame(), rest, cc, c);
+            CardCollection candidates = CardLists.getValidCards(game.getCardsInGame(), rest, cc, c, null);
 
             int added = 0;
             for (final Card counterSource : candidates) {
@@ -1318,7 +1318,7 @@ public class CardFactoryUtil {
 
         if (sq[0].startsWith("Devoured")) {
             final String validDevoured = l[0].split(" ")[1];
-            CardCollection cl = CardLists.getValidCards(c.getDevoured(), validDevoured.split(","), cc, c);
+            CardCollection cl = CardLists.getValidCards(c.getDevoured(), validDevoured.split(","), cc, c, null);
             return doXMath(cl.size(), m, c);
         }
 
@@ -1336,7 +1336,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("SumPower")) {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
-            CardCollection filteredCards = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c);
+            CardCollection filteredCards = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
             return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), m, c);
         }
         // Count$CardManaCost
@@ -1359,7 +1359,7 @@ public class CardFactoryUtil {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
             CardCollectionView cardsonbattlefield = game.getCardsIn(ZoneType.Battlefield);
-            CardCollection filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cc, c);
+            CardCollection filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cc, c, null);
             return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
         }
 
@@ -1391,7 +1391,7 @@ public class CardFactoryUtil {
             final CounterType cType = CounterType.getType(restrictions[1]);
             final String[] validFilter = restrictions[2].split(",");
             CardCollectionView validCards = game.getCardsIn(ZoneType.Battlefield);
-            validCards = CardLists.getValidCards(validCards, validFilter, cc, c);
+            validCards = CardLists.getValidCards(validCards, validFilter, cc, c, null);
             int cCount = 0;
             for (final Card card : validCards) {
                 cCount += card.getCounters(cType);
@@ -2018,7 +2018,7 @@ public class CardFactoryUtil {
         final List<String> protectionkw = new ArrayList<String>();
         final List<String> allkw = new ArrayList<String>();
         
-        cardlist = CardLists.getValidCards(cardlist, restrictions, p, host);
+        cardlist = CardLists.getValidCards(cardlist, restrictions, p, host, null);
         for (Card c : cardlist) {
             for (String k : c.getKeywords()) {
                 if (k.endsWith("walk")) {

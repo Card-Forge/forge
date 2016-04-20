@@ -205,7 +205,7 @@ public class ManaCostAdjustment {
      *            a StaticAbility
      * @param sa
      *            the SpellAbility
-     * @param originalCost
+     * @param manaCost
      *            a ManaCost
      */
     private  static void applyRaiseCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
@@ -217,12 +217,12 @@ public class ManaCostAdjustment {
 
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, sa)) {
             return;
         }
 
         if (params.containsKey("Activator") && ((activator == null)
-                || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard))) {
+                || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard, sa))) {
             return;
         }
 
@@ -286,7 +286,7 @@ public class ManaCostAdjustment {
             }
             boolean targetValid = false;
             for (GameObject target : sa.getTargets().getTargets()) {
-                if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
+                if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard, sa)) {
                     targetValid = true;
                 }
             }
@@ -302,7 +302,7 @@ public class ManaCostAdjustment {
             boolean targetValid = false;
             for (SpellAbility target : sa.getTargets().getTargetSpells()) {
                 Card targetCard = target.getHostCard();
-                if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard)) {
+                if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard, sa)) {
                     targetValid = true;
                 }
             }
@@ -351,7 +351,7 @@ public class ManaCostAdjustment {
      *            a StaticAbility
      * @param sa
      *            the SpellAbility
-     * @param originalCost
+     * @param manaCost
      *            a ManaCost
      */
     private static void applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
@@ -367,11 +367,11 @@ public class ManaCostAdjustment {
 
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, sa)) {
             return;
         }
         if (params.containsKey("Activator") && ((activator == null)
-                || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard))) {
+                || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard, sa))) {
             return;
         }
         if (params.containsKey("Type")) {
@@ -433,7 +433,7 @@ public class ManaCostAdjustment {
             }
             boolean targetValid = false;
             for (GameObject target : sa.getTargets().getTargets()) {
-                if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard)) {
+                if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard, sa)) {
                     targetValid = true;
                 }
             }

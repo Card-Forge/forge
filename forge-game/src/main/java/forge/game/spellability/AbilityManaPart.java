@@ -77,12 +77,6 @@ public class AbilityManaPart implements java.io.Serializable {
      * 
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
-     * @param parse
-     *            a {@link java.lang.String} object.
-     * @param produced
-     *            a {@link java.lang.String} object.
-     * @param num
-     *            a int.
      */
     public AbilityManaPart(final Card sourceCard, final Map<String, String> params) {
         this.sourceCard = sourceCard;
@@ -103,7 +97,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * produceMana.
      * </p>
-     * @param ability
+     * @param sa
      */
     public final void produceMana(SpellAbility sa) {
         this.produceMana(this.getOrigProduced(), this.getSourceCard().getController(), sa);
@@ -197,7 +191,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         Card source = saBeingPaid.getHostCard();
         if (source == null) return false;
-        return source.isValid(cannotCounterSpell, sourceCard.getController(), sourceCard);
+        return source.isValid(cannotCounterSpell, sourceCard.getController(), sourceCard, null);
     }
 
     /**
@@ -224,7 +218,6 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * getKeywords.
      * </p>
-     * @param saBeingPaid
      * 
      * @return a {@link java.lang.String} object.
      */
@@ -250,7 +243,7 @@ public class AbilityManaPart implements java.io.Serializable {
     public void createETBCounters(Card c) {
         String[] parse = this.addsCounters.split("_");
         // Convert random SVars if there are other cards with this effect
-        if (c.isValid(parse[0], c.getController(), c)) {
+        if (c.isValid(parse[0], c.getController(), c, null)) {
             String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + parse[1]
                     + " | ETB$ True | CounterNum$ " + parse[2] + " | SubAbility$ ManaDBETBCounters";
             String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
@@ -341,7 +334,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
 
             if (sa.getHostCard() != null) {
-                if (sa.getHostCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard())) {
+                if (sa.getHostCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
                     return true;
                 }
             }

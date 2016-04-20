@@ -274,17 +274,17 @@ public class AbilityUtils {
             }
             else if (defined.startsWith("Valid ")) {
                 String validDefined = defined.substring("Valid ".length());
-                list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard);
+                list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard, sa);
             }
             else if (defined.startsWith("ValidAll ")) {
                 String validDefined = defined.substring("ValidAll ".length());
-                list = CardLists.getValidCards(game.getCardsInGame(), validDefined.split(","), hostCard.getController(), hostCard);
+                list = CardLists.getValidCards(game.getCardsInGame(), validDefined.split(","), hostCard.getController(), hostCard, sa);
             }
             else if (defined.startsWith("Valid")) {
                 String[] s = defined.split(" ");
                 String zone = s[0].substring("Valid".length());
                 String validDefined = s[1];
-                list = CardLists.getValidCards(game.getCardsIn(ZoneType.smartValueOf(zone)), validDefined.split(","), hostCard.getController(), hostCard);
+                list = CardLists.getValidCards(game.getCardsIn(ZoneType.smartValueOf(zone)), validDefined.split(","), hostCard.getController(), hostCard, sa);
             }
             else {
                 return cards;
@@ -432,7 +432,7 @@ public class AbilityUtils {
             else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (p.hasProperty(defined, ((SpellAbility)ability).getActivatingPlayer(), ability.getHostCard())) {
+                    if (p.hasProperty(defined, ((SpellAbility)ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility)ability)) {
                         players.add(p);
                     }
                 }
@@ -785,7 +785,7 @@ public class AbilityUtils {
         	String var = sa.getParam("AbilityCount");
         	valid = valid.replace(var, Integer.toString(calculateAmount(source, var, sa)));
         }
-        return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source);
+        return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source, sa);
     }
 
     /**
@@ -1106,7 +1106,7 @@ public class AbilityUtils {
         }
         else {
             for (Player p : game.getPlayersInTurnOrder()) {
-                if (p.isValid(defined, sa.getActivatingPlayer(), sa.getHostCard())) {
+                if (p.isValid(defined, sa.getActivatingPlayer(), sa.getHostCard(), null)) {
                     players.add(p);
                 }
             }

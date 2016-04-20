@@ -91,7 +91,7 @@ public class CostReturn extends CostPartWithList {
             boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
             
             CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
+            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source, ability);
 
             final Integer amount = this.convertAmount();
             if (!needsAnnoucement && amount != null && typeList.size() < amount) {

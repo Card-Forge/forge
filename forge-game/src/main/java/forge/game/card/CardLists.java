@@ -44,12 +44,10 @@ public class CardLists {
      * <p>
      * filterToughness.
      * </p>
-     * 
-     * @param in
-     *            a {@link forge.CardList} object.
+     *
      * @param atLeastToughness
      *            a int.
-     * @return a {@link forge.CardList} object.
+     * @return a CardCollection
      */
     public static CardCollection filterToughness(final Iterable<Card> in, final int atLeastToughness) {
         return CardLists.filter(in, new Predicate<Card>() {
@@ -103,7 +101,6 @@ public class CardLists {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      */
     public static void sortByCmcDesc(final List<Card> list) {
         Collections.sort(list, CmcComparatorInv);
@@ -115,7 +112,6 @@ public class CardLists {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      */
     public static void sortByToughnessAsc(final List<Card> list) {
         Collections.sort(list, ToughnessComparator);
@@ -127,7 +123,6 @@ public class CardLists {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      */
     public static void sortByPowerAsc(final List<Card> list) {
         Collections.sort(list, PowerComparator);
@@ -140,7 +135,6 @@ public class CardLists {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      */
     public static void sortByPowerDesc(final List<Card> list) {
         Collections.sort(list, Collections.reverseOrder(PowerComparator));
@@ -187,28 +181,28 @@ public class CardLists {
         return CardLists.filter(cardList, CardPredicates.isControlledByAnyOf(player));
     }
 
-    public static CardCollection getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
-        return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));
+    public static CardCollection getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source, SpellAbility spellAbility) {
+        return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source, spellAbility));
     }
 
     public static List<Card> getValidCardsAsList(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
-        return CardLists.filterAsList(cardList, CardPredicates.restriction(restrictions, sourceController, source));
+        return CardLists.filterAsList(cardList, CardPredicates.restriction(restrictions, sourceController, source, null));
     }
 
     public static int getValidCardCount(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
-        return CardLists.count(cardList, CardPredicates.restriction(restrictions, sourceController, source));
+        return CardLists.count(cardList, CardPredicates.restriction(restrictions, sourceController, source, null));
     }
 
     public static CardCollection getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
-        return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
+        return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, null));
     }
 
     public static List<Card> getValidCardsAsList(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
-        return CardLists.filterAsList(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
+        return CardLists.filterAsList(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, null));
     }
 
     public static int getValidCardCount(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
-        return CardLists.count(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
+        return CardLists.count(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, null));
     }
 
     public static CardCollection getTargetableCards(Iterable<Card> cardList, SpellAbility source) {

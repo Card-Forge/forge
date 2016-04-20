@@ -29,12 +29,11 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      * tapTargetList.
      * </p>
      * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param tapList
-     *            a {@link forge.CardList} object.
+     *            a CardCollection object.
      * @param mandatory
      *            a boolean.
      * @return a boolean.
@@ -105,8 +104,6 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      *            a {@link forge.game.card.Card} object.
      * @param tgt
      *            a {@link forge.game.spellability.TargetRestrictions} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -117,7 +114,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         final Player opp = ai.getOpponent();
         final Game game = ai.getGame();
         CardCollection tapList = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
-        tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
+        tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source, sa);
         tapList = CardLists.getTargetableCards(tapList, sa);
         tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.filter(tapList, new Predicate<Card>() {
@@ -139,7 +136,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         //use broader approach when the cost is a positive thing
         if (tapList.isEmpty() && ComputerUtil.activateForCost(sa, ai)) { 
     		tapList = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
-            tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
+            tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source, sa);
             tapList = CardLists.getTargetableCards(tapList, sa);
     		tapList = CardLists.filter(tapList, new Predicate<Card>() {
                 @Override
@@ -252,9 +249,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      * <p>
      * tapUnpreferredTargeting.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -266,7 +261,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = ai.getGame();
 
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), source.getController(), source);
+        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), source.getController(), source, sa);
         list = CardLists.getTargetableCards(list, sa);
         
         // try to tap anything controlled by the computer
@@ -281,7 +276,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
 
         // filter by enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
-        tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source);
+        tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source, sa);
 
         if (tapTargetList(ai, sa, tapList, mandatory)) {
             return true;

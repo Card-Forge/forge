@@ -59,7 +59,7 @@ public class CostDraw extends CostPart {
         List<Player> res = new ArrayList<Player>();
         String type = this.getType();
         for (Player p : payer.getGame().getPlayers()) {
-            if (p.isValid(type, payer, source) && p.canDraw()) {
+            if (p.isValid(type, payer, source, null) && p.canDraw()) {
                 res.add(p);
             }
         }

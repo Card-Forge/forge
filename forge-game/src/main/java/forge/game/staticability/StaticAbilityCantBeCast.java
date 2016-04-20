@@ -47,12 +47,12 @@ public class StaticAbilityCantBeCast {
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
         if (params.containsKey("Caster") && (activator != null)
-                && !activator.isValid(params.get("Caster"), hostCard.getController(), hostCard)) {
+                && !activator.isValid(params.get("Caster"), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
@@ -98,7 +98,7 @@ public class StaticAbilityCantBeCast {
         final Player activator = spellAbility.getActivatingPlayer();
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
@@ -107,7 +107,7 @@ public class StaticAbilityCantBeCast {
         }
 
         if (params.containsKey("Activator") && (activator != null)
-                && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard)) {
+                && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard, spellAbility)) {
             return false;
         }
 
@@ -138,12 +138,12 @@ public class StaticAbilityCantBeCast {
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
-                && (card == null || !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard))) {
+                && (card == null || !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null))) {
             return false;
         }
 
         if (params.containsKey("Player") && (player != null)
-                && !player.isValid(params.get("Player"), hostCard.getController(), hostCard)) {
+                && !player.isValid(params.get("Player"), hostCard.getController(), hostCard, null)) {
             return false;
         }
 

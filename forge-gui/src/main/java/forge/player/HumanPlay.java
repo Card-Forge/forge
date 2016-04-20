@@ -322,7 +322,7 @@ public class HumanPlay {
                 List<Player> res = new ArrayList<Player>();
                 String type = part.getType();
                 for (Player player : p.getGame().getPlayers()) {
-                    if (player.isValid(type, p, source) && player.canDraw()) {
+                    if (player.isValid(type, p, source, sourceAbility) && player.canDraw()) {
                         res.add(player);
                     }
                 }
@@ -412,7 +412,7 @@ public class HumanPlay {
                 }
                 else {
                     CardCollectionView list = p.getGame().getCardsIn(ZoneType.Battlefield);
-                    list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
+                    list = CardLists.getValidCards(list, part.getType().split(";"), p, source, sourceAbility);
                     if (list.isEmpty()) { return false; }
                     if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?")) {
                         return false;
@@ -460,7 +460,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
+                list = CardLists.getValidCards(list, part.getType().split(";"), p, source, sourceAbility);
                 while (amount > 0) {
                     final CounterType counterType;
                     list = CardLists.filter(list, new Predicate<Card>() {
@@ -510,7 +510,7 @@ public class HumanPlay {
                 else {
                     CostExile costExile = (CostExile) part;
                     ZoneType from = costExile.getFrom();
-                    List<Card> list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source);
+                    List<Card> list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
                     final int nNeeded = getAmountFromPart(costPart, source, sourceAbility);
                     if (list.size() < nNeeded) {
                         return false;
@@ -549,7 +549,7 @@ public class HumanPlay {
                 else {
                     listView = p.getCardsIn(from);
                 }
-                CardCollection list = CardLists.getValidCards(listView, part.getType().split(";"), p, source);
+                CardCollection list = CardLists.getValidCards(listView, part.getType().split(";"), p, source, sourceAbility);
 
                 if (sameZone) { // Jotun Grunt
                     FCollectionView<Player> players = p.getGame().getPlayers();

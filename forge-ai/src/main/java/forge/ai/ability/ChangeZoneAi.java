@@ -42,8 +42,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * </p>
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      * 
      * @return a boolean.
      */
@@ -81,8 +79,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * </p>
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      * 
      * @return a boolean.
      */
@@ -109,8 +105,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
      *            a boolean.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      * 
      * @return a boolean.
      */
@@ -144,9 +138,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * <p>
      * changeHiddenOriginCanPlayAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
@@ -349,9 +341,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * <p>
      * changeHiddenOriginPlayDrawbackAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
@@ -379,9 +369,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * <p>
      * changeHiddenTriggerAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -465,7 +453,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @param ai
      * 
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a List<Card> object.
      * @return a {@link forge.game.card.Card} object.
      */
     private static Card basicManaFixing(final Player ai, final List<Card> list) { // Search for a Basic Land
@@ -560,9 +548,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * <p>
      * changeKnownOriginCanPlayAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
@@ -689,9 +675,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * <p>
      * changeKnownOriginPlayDrawbackAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
@@ -708,9 +692,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * <p>
      * changeKnownPreferredTarget.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -735,7 +717,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         sa.resetTargets();
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, source);
+        CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, source, sa);
         list = CardLists.getTargetableCards(list, sa);
         if (sa.hasParam("AITgts")) {
             list = CardLists.getValidCards(list, sa.getParam("AITgts"), ai, source);
@@ -753,7 +735,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 @Override
                 public boolean apply(final Card c) {
                     for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                        if (card.isValid(sa.getParam("AttachedTo"), ai, c)) {
+                        if (card.isValid(sa.getParam("AttachedTo"), ai, c, sa)) {
                             return true;
                         }
                     }
@@ -1114,7 +1096,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
+        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source, sa);
 
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {
@@ -1203,9 +1185,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * <p>
      * changeKnownOriginTriggerAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory

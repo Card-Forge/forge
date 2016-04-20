@@ -31,7 +31,7 @@ public class CounterEffect extends SpellAbilityEffect {
                     continue;
                 }
                 if (sa.hasParam("AllValid")) {
-                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard())) {
+                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                         continue;
                     }
                 }
@@ -76,7 +76,7 @@ public class CounterEffect extends SpellAbilityEffect {
                     continue;
                 }
                 if (sa.hasParam("AllValid")) {
-                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard())) {
+                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                         continue;
                     }
                 }
@@ -145,7 +145,6 @@ public class CounterEffect extends SpellAbilityEffect {
      * @param si
      *            a {@link forge.game.spellability.SpellAbilityStackInstance}
      *            object.
-     * @param sa
      */
     private static void removeFromStack(final SpellAbility tgtSA,
             final SpellAbility srcSA, final SpellAbilityStackInstance si) {

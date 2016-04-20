@@ -55,7 +55,7 @@ public class TriggerDamageDone extends Trigger {
 
         if (this.mapParams.containsKey("ValidSource")) {
             if (!src.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),
-                    this.getHostCard())) {
+                    this.getHostCard(), null)) {
                 return false;
             }
         }

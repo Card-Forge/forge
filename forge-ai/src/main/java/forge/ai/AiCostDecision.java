@@ -173,7 +173,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         List<SpellAbility> chosen = new ArrayList<SpellAbility>();
         for (SpellAbilityStackInstance si :source.getGame().getStack()) {
             SpellAbility sp = si.getSpellAbility(true).getRootAbility();
-            if (si.getSourceCard().isValid(cost.getType().split(";"), source.getController(), source)) {
+            if (si.getSourceCard().isValid(cost.getType().split(";"), source.getController(), source, sp)) {
                 chosen.add(sp);
             }
         }
@@ -189,7 +189,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Exile), cost.getType().split(";"), player, source);
+        CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Exile), cost.getType().split(";"), player, source, ability);
 
         if (typeList.size() < c) {
             return null;
@@ -230,7 +230,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source);
+        final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
 
         if (typeList.size() < c) {
             return null;
@@ -329,7 +329,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        list = CardLists.getValidCards(list, cost.getType().split(";"), player, source);
+        list = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
 
         if (cost.isSameZone()) {
             // Jotun Grunt
@@ -356,7 +356,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source);
         }
 
-        final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source);
+        final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield),
+                cost.getType().split(";"), player, source, ability);
 
         Card card;
         if (cost.getType().equals("Creature.YouCtrl")) {
@@ -382,7 +383,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 CardCollectionView typeList =
-                        CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ability.getActivatingPlayer(), ability.getHostCard());
+                        CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
+                                ability.getActivatingPlayer(), ability.getHostCard(), ability);
                 typeList = CardLists.filter(typeList, Presets.UNTAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
@@ -467,7 +469,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
             
-        hand = CardLists.getValidCards(hand, type.split(";"), player, source);
+        hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
         Integer c = cost.convertAmount();
         if (c == null) {
             final String sVar = ability.getSVar(cost.getAmount());
@@ -488,7 +490,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         final int c = AbilityUtils.calculateAmount(source, amount, ability);
         final String type = cost.getType();
 
-        CardCollectionView typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source);
+        CardCollectionView typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source, ability);
         CardCollectionView hperms = CardLists.filter(typeList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
@@ -539,7 +541,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             if (type.equals("OriginalHost")) {
                 typeList = new CardCollection(ability.getOriginalHost());
             } else {
-                typeList = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source);
+                typeList = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source, ability);
             }
             for (Card card : typeList) {
                 if (card.getCounters(cost.counter) >= c) {
@@ -564,7 +566,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, ability.getHostCard());
+                CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield),
+                        cost.getType().split(";"), player, ability.getHostCard(), ability);
                 if (!cost.canUntapSource) {
                     typeList.remove(source);
                 }

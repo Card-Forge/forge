@@ -284,7 +284,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         } else if ("AttackedPlayerWithMostLife".equals(condition)) {
             GameEntity attacked = (GameEntity) runParams.get("Attacked");
             if (attacked == null || !attacked.isValid("Player.withMostLife",
-                    this.getHostCard().getController(), this.getHostCard())) {
+                    this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }

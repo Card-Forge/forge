@@ -107,7 +107,7 @@ public class PhasesAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source), sa);
+        list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa), sa);
 
         return false;
     }

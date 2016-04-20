@@ -88,7 +88,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
         CardCollectionView validCards = activator.getCardsIn(ZoneType.Battlefield);
-        validCards = CardLists.getValidCards(validCards, this.getType().split(";"), activator, source);
+        validCards = CardLists.getValidCards(validCards, this.getType().split(";"), activator, source, ability);
         validCards = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

@@ -361,7 +361,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (this.getIsPresent() != null) {
             CardCollectionView list = game.getCardsIn(this.getPresentZone());
 
-            list = CardLists.getValidCards(list, this.getIsPresent().split(","), activator, c);
+            list = CardLists.getValidCards(list, this.getIsPresent().split(","), activator, c, sa);
 
             int right = 1;
             final String rightString = this.getPresentCompare().substring(2);

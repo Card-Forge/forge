@@ -103,7 +103,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     // Need to temporarily set the Owner so the Game is set
                     possibleCard.setOwner(sa.getActivatingPlayer());
 
-                    if (possibleCard.isValid(valid, source.getController(), source)) {
+                    if (possibleCard.isValid(valid, source.getController(), source, sa)) {
                         choice.add(possibleCard);
                         copysource.remove(cp);
                         ncopied -= 1;

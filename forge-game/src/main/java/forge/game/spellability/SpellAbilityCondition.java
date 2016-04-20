@@ -321,7 +321,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 list = game.getCardsIn(ZoneType.Battlefield);
             }
 
-            list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard());
+            list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
             int right;
             final String rightString = this.getPresentCompare().substring(2);
@@ -382,7 +382,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             boolean result = false;
     
             for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets().getTargets()) {
-                if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), sa.getHostCard())) {
+                if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     result = true;
                     break;
                 }

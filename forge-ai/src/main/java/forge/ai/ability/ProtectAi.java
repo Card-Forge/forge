@@ -99,10 +99,7 @@ public class ProtectAi extends SpellAbilityAi {
      * <p>
      * getProtectCreatures.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @return a {@link forge.CardList} object.
+     *
      */
     public static CardCollection getProtectCreatures(final Player ai, final SpellAbility sa) {
         final List<String> gains = ProtectEffect.getProtectionList(sa);
@@ -252,7 +249,7 @@ public class ProtectAi extends SpellAbilityAi {
         sa.resetTargets();
         CardCollection list = getProtectCreatures(ai, sa);
 
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
@@ -306,7 +303,7 @@ public class ProtectAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
+        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();

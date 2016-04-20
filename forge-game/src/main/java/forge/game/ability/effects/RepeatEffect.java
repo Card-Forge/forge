@@ -59,10 +59,8 @@ public class RepeatEffect extends SpellAbilityEffect {
      * <p>
      * checkRepeatConditions.
      * </p>
-     * 
-     * @param AF
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @param SA
+     *
+     * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private static boolean checkRepeatConditions(final SpellAbility sa) {
@@ -85,7 +83,7 @@ public class RepeatEffect extends SpellAbilityEffect {
             else {
                 list = game.getCardsIn(ZoneType.Battlefield);
             }
-            list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getHostCard());
+            list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
             int right;
             final String rightString = repeatCompare.substring(2);

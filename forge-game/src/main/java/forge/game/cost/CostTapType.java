@@ -121,7 +121,7 @@ public class CostTapType extends CostPartWithList {
             type = type.replace("+withTotalPowerGE" + totalP, "");
         }
 
-        CardCollection typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), type.split(";"), activator, source);
+        CardCollection typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), type.split(";"), activator, source, ability);
 
         if (!canTapSource) {
             typeList.remove(source);

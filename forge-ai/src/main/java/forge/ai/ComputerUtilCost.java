@@ -108,7 +108,7 @@ public class ComputerUtilCost {
                 if (type.equals("CARDNAME") && source.getAbilityText().contains("Bloodrush")) {
                     continue;
                 }
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Hand), type.split(","), source.getController(), source);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Hand), type.split(","), source.getController(), source, null);
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
@@ -217,7 +217,7 @@ public class ComputerUtilCost {
                     continue;
                 }
     
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, null);
                 if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
                     return false;
                 }
@@ -257,7 +257,7 @@ public class ComputerUtilCost {
                     continue;
                 }
     
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, null);
                 if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
                     return false;
                 }
@@ -321,8 +321,7 @@ public class ComputerUtilCost {
      * 
      * @param hostCard
      *            a {@link forge.game.card.Card} object.
-     * @param costString
-     *            a {@link java.lang.String} object.
+     * @param cost
      * @return a boolean.
      */
     public static boolean shouldPayCost(final Player ai, final Card hostCard, final Cost cost) {
@@ -368,7 +367,7 @@ public class ComputerUtilCost {
                 final String snem = c.getSVar("AI_SpellsNeedExtraMana");
                 if (!StringUtils.isBlank(snem)) {
                     String[] parts = TextUtil.split(snem, ' ');
-                    boolean meetsRestriction = parts.length == 1 || player.isValid(parts[1], c.getController(), c);
+                    boolean meetsRestriction = parts.length == 1 || player.isValid(parts[1], c.getController(), c, sa);
                     if(!meetsRestriction)
                         continue;
 

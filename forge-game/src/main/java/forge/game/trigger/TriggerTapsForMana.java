@@ -63,14 +63,14 @@ public class TriggerTapsForMana extends Trigger {
         if (this.mapParams.containsKey("ValidCard")) {
             final Card tapper = (Card) runParams2.get("Card");
             if (!tapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard())) {
+                    this.getHostCard(), null)) {
                 return false;
             }
         }
 
         if (this.mapParams.containsKey("Player")) {
             final Player player = (Player) runParams2.get("Player");
-            if (!player.isValid(this.mapParams.get("Player").split(","), this.getHostCard().getController(), this.getHostCard())) {
+            if (!player.isValid(this.mapParams.get("Player").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }
@@ -79,7 +79,7 @@ public class TriggerTapsForMana extends Trigger {
             final SpellAbility sa = (SpellAbility) runParams2.get("AbilityMana");
             if (sa == null) return false;
             final Player activator = sa.getActivatingPlayer();
-            if (!activator.isValid(this.mapParams.get("Activator").split(","), this.getHostCard().getController(), this.getHostCard())) {
+            if (!activator.isValid(this.mapParams.get("Activator").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }

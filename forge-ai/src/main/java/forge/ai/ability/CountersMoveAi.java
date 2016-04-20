@@ -79,12 +79,12 @@ public class CountersMoveAi extends SpellAbilityAi {
         } else { // targeted
             final Player player = sa.isCurse() ? ai.getOpponent() : ai;
             CardCollectionView list = CardLists.getTargetableCards(player.getCardsIn(ZoneType.Battlefield), sa);
-            list = CardLists.getValidCards(list, abTgt.getValidTgts(), host.getController(), host);
+            list = CardLists.getValidCards(list, abTgt.getValidTgts(), host.getController(), host, sa);
             if (list.isEmpty() && mandatory) {
                 // If there isn't any prefered cards to target, gotta choose
                 // non-preferred ones
                 list = CardLists.getTargetableCards(player.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
-                list = CardLists.getValidCards(list, abTgt.getValidTgts(), host.getController(), host);
+                list = CardLists.getValidCards(list, abTgt.getValidTgts(), host.getController(), host, sa);
                 preferred = false;
             }
             // Not mandatory, or the the list was regenerated and is still

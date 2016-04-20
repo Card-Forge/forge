@@ -50,12 +50,12 @@ public class StaticAbilityPreventDamage {
         int restDamage = damage;
 
         if (params.containsKey("Source")
-                && !source.isValid(params.get("Source").split(","), hostCard.getController(), hostCard)) {
+                && !source.isValid(params.get("Source").split(","), hostCard.getController(), hostCard, null)) {
             return restDamage;
         }
 
         if (params.containsKey("Target")
-                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard)) {
+                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard, null)) {
             return restDamage;
         }
 

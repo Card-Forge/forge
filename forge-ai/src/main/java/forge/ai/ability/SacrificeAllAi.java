@@ -38,9 +38,9 @@ public class SacrificeAllAi extends SpellAbilityAi {
         }
 
         CardCollection humanlist =
-                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source, sa);
         CardCollection computerlist =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source, sa);
 
         if (abCost != null) {
             // AI currently disabled for some costs

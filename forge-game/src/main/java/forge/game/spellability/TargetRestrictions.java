@@ -113,9 +113,7 @@ public class TargetRestrictions {
      * <p>
      * Constructor for Target.
      * </p>
-     * 
-     * @param src
-     *            a {@link forge.game.card.Card} object.
+     *
      * @param prompt
      *            a {@link java.lang.String} object.
      * @param valid
@@ -475,7 +473,7 @@ public class TargetRestrictions {
             return true;
         } else {
             for (final Card c : game.getCardsIn(this.tgtZone)) {
-                if (!c.isValid(this.validTgts, srcCard.getController(), srcCard)) {
+                if (!c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)) {
                     continue;
                 }
                 if (isTargeted && !sa.canTarget(c)) {
@@ -552,7 +550,7 @@ public class TargetRestrictions {
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
         if (this.tgtZone.contains(ZoneType.Stack)) {
             for (final Card c : game.getStackZone().getCards()) {
-                if (c.isValid(this.validTgts, srcCard.getController(), srcCard) 
+                if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
                         && (!isTargeted || sa.canTarget(c)) 
                         && !sa.getTargets().isTargeting(c)) {
                     candidates.add(c);
@@ -560,7 +558,7 @@ public class TargetRestrictions {
             }
         } else {
             for (final Card c : game.getCardsIn(this.tgtZone)) {
-                if (c.isValid(this.validTgts, srcCard.getController(), srcCard) 
+                if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
                         && (!isTargeted || sa.canTarget(c)) 
                         && !sa.getTargets().isTargeting(c)) {
                     candidates.add(c);

@@ -76,14 +76,15 @@ public class AnimateAi extends SpellAbilityAi {
                 num = (num == null) ? "1" : num;
                 final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
                 CardCollection list =
-                        CardLists.getValidCards(aiPlayer.getCardsIn(ZoneType.Battlefield), valid.split(","), aiPlayer.getOpponent(), topStack.getHostCard());
+                        CardLists.getValidCards(aiPlayer.getCardsIn(ZoneType.Battlefield), valid.split(","),
+                                aiPlayer.getOpponent(), topStack.getHostCard(), topStack);
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
                 ComputerUtilCard.sortByEvaluateCreature(list);
                 if (!list.isEmpty() && list.size() == nToSac && ComputerUtilCost.canPayCost(sa, aiPlayer)) {
                     Card animatedCopy = CardFactory.copyCard(source, true);
                     becomeAnimated(animatedCopy, source.hasSickness(), sa);
                     list.add(animatedCopy);
-                    list = CardLists.getValidCards(list, valid.split(","), aiPlayer.getOpponent(), topStack.getHostCard());
+                    list = CardLists.getValidCards(list, valid.split(","), aiPlayer.getOpponent(), topStack.getHostCard(), topStack);
                     list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
                     if (ComputerUtilCard.evaluateCreature(animatedCopy) < ComputerUtilCard.evaluateCreature(list.get(0))
                             && list.contains(animatedCopy)) {
@@ -98,7 +99,7 @@ public class AnimateAi extends SpellAbilityAi {
             if (ph.getPlayerTurn().isOpponentOf(aiPlayer) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) { 
                 return false;
             }
-            List<Card> list = CardLists.getValidCards(aiPlayer.getCreaturesInPlay(), tgt.getValidTgts(), aiPlayer, source);
+            List<Card> list = CardLists.getValidCards(aiPlayer.getCreaturesInPlay(), tgt.getValidTgts(), aiPlayer, source, sa);
             for (Card c : list) {
                 if (ComputerUtilCard.doesCreatureAttackAI(aiPlayer, c)) {
                     sa.getTargets().add(c);
@@ -237,7 +238,7 @@ public class AnimateAi extends SpellAbilityAi {
         	final TargetRestrictions tgt = sa.getTargetRestrictions();
             final Card animateSource = sa.getHostCard();
             CardCollectionView list = aiPlayer.getGame().getCardsIn(tgt.getZone());
-            list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), animateSource);
+            list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), animateSource, sa);
             CardCollection prefList = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), animateSource);
             if (!prefList.isEmpty()){
 	        	CardLists.shuffle(prefList);

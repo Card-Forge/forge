@@ -28,7 +28,7 @@ public class RegenerateAllEffect extends SpellAbilityEffect {
         }
 
         CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
+        list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard, sa);
 
         for (final Card c : list) {
             final GameCommand untilEOT = new GameCommand() {

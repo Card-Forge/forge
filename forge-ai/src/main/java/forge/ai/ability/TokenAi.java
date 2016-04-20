@@ -181,7 +181,7 @@ public class TokenAi extends SpellAbilityAi {
                 } else {
                 	//Flash Foliage
         	        CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
-        	        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+        	        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
         	        list = CardLists.getTargetableCards(list, sa);
         	        CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
         	            @Override
@@ -233,14 +233,14 @@ public class TokenAi extends SpellAbilityAi {
             num = (num == null) ? "1" : num;
             final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
             CardCollection list =
-                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), opp, topStack.getHostCard());
+                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), opp, topStack.getHostCard(), sa);
             list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
             if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) { //only care about saving single creature for now
                 ComputerUtilCard.sortByEvaluateCreature(list);
                 Card token = spawnToken(ai, sa);
                 if (token != null) {
                     list.add(token);
-                    list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard());
+                    list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard(), sa);
                     list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
                     if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
                             && list.contains(token)) {

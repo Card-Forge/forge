@@ -32,7 +32,7 @@ public class DamagePreventAllEffect extends SpellAbilityEffect {
 
         if (!players.equals("")) {
             for (final Player p : game.getPlayers()) {
-                if (p.isValid(players, source.getController(), source)) {
+                if (p.isValid(players, source.getController(), source, sa)) {
                     p.addPreventNextDamage(numDam);
                 }
             }

@@ -50,7 +50,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
         }
 
         CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
+        list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard, sa);
         list = CardLists.filter(list, CardPredicates.isController(ai));
 
         if (list.size() == 0) {

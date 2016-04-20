@@ -81,7 +81,7 @@ public class AttachAi extends SpellAbilityAi {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
             final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
             final TargetRestrictions exile_tgt = effectExile.getTargetRestrictions();
-            final CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), exile_tgt.getValidTgts(), ai, source);
+            final CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), exile_tgt.getValidTgts(), ai, source, effectExile);
             final CardCollection targets = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -283,9 +283,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach to player ai preferences.
-     * 
-     * @param af
-     *            the af
+     *
      * @param sa
      *            the sa
      * @param mandatory
@@ -695,8 +693,6 @@ public class AttachAi extends SpellAbilityAi {
      *            the sa
      * @param mandatory
      *            the mandatory
-     * @param af
-     *            the af
      * 
      * @return true, if successful
      */
@@ -766,9 +762,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach preference.
-     * 
-     * @param af
-     *            the af
+     *
      * @param sa
      *            the sa
      * @param sa
@@ -1051,7 +1045,7 @@ public class AttachAi extends SpellAbilityAi {
         if (tgt == null) {
             list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
         } else {
-            list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
+            list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
             // TODO If Attaching without casting, don't need to actually target.
             // I believe this is the only case where mandatory will be true, so just
             // check that when starting that work
@@ -1370,7 +1364,7 @@ public class AttachAi extends SpellAbilityAi {
     /**
      * Checks if it is useful to execute the attach action given the current context.
      * 
-     * @param card
+     * @param c
      *            the card
      * @param sa SpellAbility
      * @return true, if the action is useful (beneficial) in the current minimal context (Card vs. Attach SpellAbility) 

@@ -167,7 +167,7 @@ public class DamageDealAi extends DamageAiBase {
         }
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
-        List<Card> hPlay = CardLists.getValidCards(pl.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source);
+        List<Card> hPlay = CardLists.getValidCards(pl.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source, sa);
 
         final List<GameObject> objects = Lists.newArrayList(sa.getTargets().getTargets());
         if (sa.hasParam("TargetUnique")) {

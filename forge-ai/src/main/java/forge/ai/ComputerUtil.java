@@ -278,7 +278,7 @@ public class ComputerUtil {
         if (activate != null) {
             final String[] prefValid = activate.getSVar("AIPreference").split("\\$");
             if (prefValid[0].equals(pref)) {
-                final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate);
+                final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
                 if (prefList.size() != 0) {
                     CardLists.shuffle(prefList);
                     return prefList.get(0);
@@ -371,7 +371,7 @@ public class ComputerUtil {
     }
 
     public static CardCollection chooseSacrificeType(final Player ai, final String type, final Card source, final Card target, final int amount) {
-        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source);
+        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
         if (ai.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             typeList = CardLists.getNotType(typeList, "Creature");
         }
@@ -404,7 +404,7 @@ public class ComputerUtil {
 
     public static CardCollection chooseExileFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
             final Card target, final int amount) {
-        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate);
+        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, null);
         
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             typeList.remove(target); // don't exile the card we're pumping
@@ -425,7 +425,7 @@ public class ComputerUtil {
 
     public static CardCollection choosePutToLibraryFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
             final Card target, final int amount) {
-        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate);
+        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, null);
         
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             typeList.remove(target); // don't move the card we're pumping
@@ -450,7 +450,7 @@ public class ComputerUtil {
 
     public static CardCollection chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount) {
         CardCollection typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate);
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, null);
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
@@ -475,7 +475,7 @@ public class ComputerUtil {
 
     public static CardCollection chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount) {
         CardCollection typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate);
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, null);
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.TAPPED);
@@ -500,7 +500,7 @@ public class ComputerUtil {
 
     public static CardCollection chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount) {
         final CardCollection typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate);
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, null);
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             // don't bounce the card we're pumping
             typeList.remove(target);
@@ -661,7 +661,7 @@ public class ComputerUtil {
 
                     final TargetRestrictions tgt = sa.getTargetRestrictions();
                     if (tgt != null) {
-                        if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard()).contains(card)) {
+                        if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
                             return true;
                         }
                     } else if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
@@ -699,7 +699,7 @@ public class ComputerUtil {
                         }
                         final TargetRestrictions tgt = sa.getTargetRestrictions();
                         if (tgt != null) {
-                            if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard()).contains(card)) {
+                            if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), null).contains(card)) {
                                 prevented += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
                             }
 
@@ -768,7 +768,7 @@ public class ComputerUtil {
             if (buffedcard.hasSVar("BuffedBy")) {
                 final String buffedby = buffedcard.getSVar("BuffedBy");
                 final String[] bffdby = buffedby.split(",");
-                if (card.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                if (card.isValid(bffdby, buffedcard.getController(), buffedcard, sa)) {
                     return true;
                 }
             }
@@ -797,7 +797,7 @@ public class ComputerUtil {
             if (buffedcard.hasSVar("AntiBuffedBy")) {
                 final String buffedby = buffedcard.getSVar("AntiBuffedBy");
                 final String[] bffdby = buffedby.split(",");
-                if (card.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                if (card.isValid(bffdby, buffedcard.getController(), buffedcard, sa)) {
                     return true;
                 }
             }
@@ -884,7 +884,7 @@ public class ComputerUtil {
                 // not castable for at least one other turn.
                 return true;
             } else if (landsInPlay.size() > 5 && discard.getCMC() <= 1
-                    && !discard.hasProperty("hasXCost", ai, null)) {
+                    && !discard.hasProperty("hasXCost", ai, null, null)) {
                 // Probably don't need small stuff now.
                 return true;
             }
@@ -929,7 +929,7 @@ public class ComputerUtil {
             if (buffedCard.hasSVar("BuffedBy")) {
                 final String buffedby = buffedCard.getSVar("BuffedBy");
                 final String[] bffdby = buffedby.split(",");
-                if (source.isValid(bffdby, buffedCard.getController(), buffedCard)) {
+                if (source.isValid(bffdby, buffedCard.getController(), buffedCard, sa)) {
                     return true;
                 }
             }
@@ -949,7 +949,7 @@ public class ComputerUtil {
             if (buffedcard.hasSVar("AntiBuffedBy")) {
                 final String buffedby = buffedcard.getSVar("AntiBuffedBy");
                 final String[] bffdby = buffedby.split(",");
-                if (source.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                if (source.isValid(bffdby, buffedcard.getController(), buffedcard, sa)) {
                     return true;
                 }
             }
@@ -1008,7 +1008,7 @@ public class ComputerUtil {
                 }
     
                 final CardCollection typeList =
-                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source);
+                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, sa);
                 for (Card c : typeList) {
                     if (c.getSVar("SacMe").equals("6")) {
                         return true;
@@ -1150,7 +1150,7 @@ public class ComputerUtil {
                 objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
             } else if (topStack.hasParam("ValidCards")) {
                 CardCollectionView battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
-                objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source);
+                objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source, topStack);
             } else {
             	return threatened;
             }
@@ -1797,13 +1797,13 @@ public class ComputerUtil {
                 continue;
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!card.isValid(trigParams.get("ValidCard"), source.getController(), source)) {
+                if (!card.isValid(trigParams.get("ValidCard"), source.getController(), source, sa)) {
                     continue;
                 }
             }
             
             if (trigParams.containsKey("ValidActivatingPlayer")) {
-                if (!player.isValid(trigParams.get("ValidActivatingPlayer"), source.getController(), source)) {
+                if (!player.isValid(trigParams.get("ValidActivatingPlayer"), source.getController(), source, sa)) {
                     continue;
                 }
             }
@@ -1869,7 +1869,7 @@ public class ComputerUtil {
                 continue;
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!permanent.isValid(trigParams.get("ValidCard"), source.getController(), source)) {
+                if (!permanent.isValid(trigParams.get("ValidCard"), source.getController(), source, null)) {
                     continue;
                 }
             }

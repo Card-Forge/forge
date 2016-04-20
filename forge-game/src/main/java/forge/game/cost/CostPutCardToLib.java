@@ -128,7 +128,7 @@ public class CostPutCardToLib extends CostPartWithList {
             typeList = activator.getCardsIn(getFrom());
         }
 
-        typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source);
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
         
         if (typeList.size() < i) {
             return false;

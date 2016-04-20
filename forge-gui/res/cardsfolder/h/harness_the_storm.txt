@@ -1,7 +1,7 @@
 Name:Harness the Storm
 ManaCost:2 R
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromHand,Sorcery.wasCastFromHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard. (you still pay its costs.)
+T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromHand,Sorcery.wasCastFromHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard. (You still pay its costs.)
 SVar:TrigPump:AB$ Pump | Cost$ 0 | TgtZone$ Graveyard | ValidTgts$ Instant.YouCtrl+sharesNameWith TriggeredCard,Sorcery.YouCtrl+sharesNameWith TriggeredCard | TgtPrompt$ Choose target instant or sorcery from your graveyard | PumpZone$ Graveyard | SubAbility$ TrigPlay
 SVar:TrigPlay:DB$ Play | Defined$ Targeted | Optional$ True
 SVar:NonStackingEffect:True

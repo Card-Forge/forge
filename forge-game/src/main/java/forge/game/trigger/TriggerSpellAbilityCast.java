@@ -132,7 +132,7 @@ public class TriggerSpellAbilityCast extends Trigger {
             while (sa != null && !validTgtFound) {
                 for (final Card tgt : sa.getTargets().getTargetCards()) {
                     if (tgt.isValid(this.mapParams.get("TargetsValid").split(","), this.getHostCard()
-                            .getController(), this.getHostCard())) {
+                            .getController(), this.getHostCard(), null)) {
                         validTgtFound = true;
                         break;
                     }

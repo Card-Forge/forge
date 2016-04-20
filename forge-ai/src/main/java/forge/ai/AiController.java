@@ -375,7 +375,7 @@ public class AiController {
             public boolean apply(final Card c) {
                 if (!c.getSVar("NeedsToPlay").isEmpty()) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
-                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay.split(","), c.getController(), c);
+                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay.split(","), c.getController(), c, null);
                     if (list.isEmpty()) {
                         return false;
                     }
@@ -697,7 +697,7 @@ public class AiController {
                 SpellAbility effectExile = AbilityFactory.getAbility(card.getSVar("TrigExile"), card);
                 final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
                 final TargetRestrictions tgt = effectExile.getTargetRestrictions();
-                final CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), player, card);
+                final CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), player, card, effectExile);
                 CardCollection targets = CardLists.getTargetableCards(list, sa);
                 if (sa.getHostCard().getName().equals("Suspension Field")) {
                     //existing "exile until leaves" enchantments only target opponent's permanents
@@ -794,7 +794,7 @@ public class AiController {
             final String needsToPlay = card.getSVar("NeedsToPlay");
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
-            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card);
+            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, null);
             if (list.isEmpty()) {
                 return AiPlayDecision.MissingNeededCards;
             }
@@ -917,7 +917,7 @@ public class AiController {
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
         CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
         if ((uTypes != null) && (sa != null)) {
-            hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getHostCard());
+            hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getHostCard(), sa);
         }
         return getCardsToDiscard(numDiscard, numDiscard, hand, sa);
     }
@@ -1356,7 +1356,6 @@ public class AiController {
      * Ai should run.
      *
      * @param sa the sa
-     * @param ai 
      * @return true, if successful
      */
     public final boolean aiShouldRun(final ReplacementEffect effect, final SpellAbility sa) {

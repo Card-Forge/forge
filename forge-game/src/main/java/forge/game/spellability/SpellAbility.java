@@ -212,6 +212,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         manaPart = manaPart0;
     }
 
+    public final String getSvarWithFallback(final String name) {
+        String var = sVars.get(name);
+        if (var == null) {
+            var = hostCard.getSVar(name);
+        }
+        return var;
+    }
+
     public final String getSVar(final String name) {
         String var = sVars.get(name);
         if (var == null) {
@@ -397,7 +405,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         paidLists.get(str).add(c);
     }
     public void resetPaidHash() {
-        paidLists = new HashMap<String, CardCollection>();
+        paidLists.clear();
     }
 
     public Iterable<OptionalCost> getOptionalCosts() {
@@ -727,7 +735,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             String[] validTgt = tr.getValidTgts();
-            if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, getActivatingPlayer(), getHostCard())) {
+            if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, getActivatingPlayer(), getHostCard(), this)) {
                return false;
             }
         }
@@ -1098,7 +1106,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean canTargetSpellAbility(final SpellAbility topSA) {
         final TargetRestrictions tgt = getTargetRestrictions();
 
-        if (hasParam("TargetType") && !topSA.isValid(getParam("TargetType").split(","), getActivatingPlayer(), getHostCard())) {
+        if (hasParam("TargetType") && !topSA.isValid(getParam("TargetType").split(","), getActivatingPlayer(), getHostCard(), this)) {
             return false;
         }
 
@@ -1115,7 +1123,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             boolean result = false;
 
             for (final GameObject o : matchTgt.getTargets()) {
-                if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard())) {
+                if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
                     result = true;
                     break;
                 }
@@ -1131,7 +1139,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                             continue;
                         }
                         for (final GameObject o : matchTgt.getTargets()) {
-                            if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard())) {
+                            if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
                                 result = true;
                                 break;
                             }
@@ -1161,12 +1169,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
 
-        return topSA.getHostCard().isValid(tgt.getValidTgts(), getActivatingPlayer(), getHostCard());
+        return topSA.getHostCard().isValid(tgt.getValidTgts(), getActivatingPlayer(), getHostCard(), this);
     }
 
     // Takes one argument like Permanent.Blue+withFlying
     @Override
-    public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
+    public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
 
@@ -1193,7 +1201,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             final String excR = incR[1];
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
-                if (!hasProperty(exR[j], sourceController, source)) {
+                if (!hasProperty(exR[j], sourceController, source, spellAbility)) {
                     return false;
                 }
             }
@@ -1203,7 +1211,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // Takes arguments like Blue or withFlying
     @Override
-    public boolean hasProperty(final String property, final Player sourceController, final Card source) {
+    public boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
         return true;
     }
 

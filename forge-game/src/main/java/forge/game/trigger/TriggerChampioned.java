@@ -55,13 +55,13 @@ public class TriggerChampioned extends Trigger {
 
         if (this.mapParams.containsKey("ValidCard")) {
             if (!championed.isValid(this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard().getController(), this.getHostCard())) {
+                    this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }
         if (this.mapParams.containsKey("ValidSource")) {
             if (!source.isValid(this.mapParams.get("ValidSource").split(","),
-                    this.getHostCard().getController(), this.getHostCard())) {
+                    this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
         }

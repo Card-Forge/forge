@@ -151,7 +151,7 @@ public class Untap extends Phase {
                 if (!Untap.canUntap(c)) {
                     return false;
                 }
-                if (c.isValid(restrict, player, null)) {
+                if (c.isValid(restrict, player, null, null)) {
                     return false;
                 }
                 return true;
@@ -175,7 +175,7 @@ public class Untap extends Phase {
 
         CardCollection restrictUntapped = new CardCollection();
         CardCollection cardList = CardLists.filter(untapList, tappedCanUntap);
-        cardList = CardLists.getValidCards(cardList, restrict, player, null);
+        cardList = CardLists.getValidCards(cardList, restrict, player, null, null);
 
         while (!cardList.isEmpty()) {
             Map<String, Integer> remaining = new HashMap<String, Integer>(restrictUntap);
@@ -189,7 +189,7 @@ public class Untap extends Phase {
                     "Select a card to untap\r\n(Selected:" + restrictUntapped + ")\r\n" + "Remaining cards that can untap: " + remaining);
             if (chosen != null) {
                 for (Entry<String, Integer> rest : restrictUntap.entrySet()) {
-                    if (chosen.isValid(rest.getKey(), player, null)) {
+                    if (chosen.isValid(rest.getKey(), player, null, null)) {
                         restrictUntap.put(rest.getKey(), rest.getValue().intValue() - 1);
                     }
                 }

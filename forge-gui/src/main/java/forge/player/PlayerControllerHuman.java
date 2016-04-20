@@ -1352,7 +1352,7 @@ public class PlayerControllerHuman
         while (true) {
             final PaperCard cp = chooseSinglePaperCard(sa, message, cpp, sa.getHostCard().getName());
             final Card instanceForPlayer = Card.fromPaperCard(cp, player); // the Card instance for test needs a game to be tested
-            if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard())) {
+            if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
                 return cp.getName();
             }
         }

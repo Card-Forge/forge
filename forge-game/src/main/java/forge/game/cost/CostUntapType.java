@@ -74,7 +74,7 @@ public class CostUntapType extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
 
-        CardCollection typeList = CardLists.getValidCards(activator.getGame().getCardsIn(ZoneType.Battlefield), getType().split(";"), activator, source);
+        CardCollection typeList = CardLists.getValidCards(activator.getGame().getCardsIn(ZoneType.Battlefield), getType().split(";"), activator, source, ability);
 
         if (!canUntapSource) {
             typeList.remove(source);

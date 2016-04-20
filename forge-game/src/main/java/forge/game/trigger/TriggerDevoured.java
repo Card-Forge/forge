@@ -52,7 +52,7 @@ public class TriggerDevoured extends Trigger {
         final Card sac = (Card) runParams2.get("Devoured");
         if (this.mapParams.containsKey("ValidDevoured")) {
             if (!sac.isValid(this.mapParams.get("ValidDevoured").split(","), this.getHostCard().getController(),
-                    this.getHostCard())) {
+                    this.getHostCard(), null)) {
                 return false;
             }
         }

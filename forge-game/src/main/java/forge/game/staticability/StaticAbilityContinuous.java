@@ -339,7 +339,7 @@ public final class StaticAbilityContinuous {
             }
 
             CardCollectionView cardsIGainedAbilitiesFrom = game.getCardsIn(validZones);
-            cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard);
+            cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard, null);
 
             if (cardsIGainedAbilitiesFrom.size() > 0) {
                 addFullAbs = new ArrayList<SpellAbility>();
@@ -671,7 +671,7 @@ public final class StaticAbilityContinuous {
         final String[] strngs = params.get("Affected").split(",");
 
         for (Player p : controller.getGame().getPlayersInTurnOrder()) {
-            if (p.isValid(strngs, controller, hostCard)) {
+            if (p.isValid(strngs, controller, hostCard, null)) {
                 players.add(p);
             }
         }
@@ -712,7 +712,7 @@ public final class StaticAbilityContinuous {
         }
 
         if (params.containsKey("Affected")) {
-            affectedCards = CardLists.getValidCards(affectedCards, params.get("Affected").split(","), controller, hostCard);
+            affectedCards = CardLists.getValidCards(affectedCards, params.get("Affected").split(","), controller, hostCard, null);
         }
         affectedCards.removeAll((List<?>) stAb.getIgnoreEffectCards());
         return affectedCards;

@@ -73,7 +73,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      */
     public static void sortByEvaluateCreature(final CardCollection list) {
         Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
@@ -86,7 +85,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestArtifactAI(final List<Card> list) {
@@ -119,7 +117,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @param spell
      *            a {@link forge.game.card.Card} object.
      * @param targeted
@@ -148,7 +145,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestLandAI(final Iterable<Card> list) {
@@ -199,8 +195,7 @@ public class ComputerUtilCard {
      * getCheapestPermanentAI.
      * </p>
      * 
-     * @param list
-     *            a {@link forge.CardList} object.
+     * @param all
      * @param spell
      *            a {@link forge.game.card.Card} object.
      * @param targeted
@@ -240,7 +235,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestAI(final Iterable<Card> list) {
@@ -274,7 +268,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstCreatureAI(final Iterable<Card> list) {
@@ -288,7 +281,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestCreatureToBounceAI(final CardCollectionView list) {
@@ -314,7 +306,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstAI(final Iterable<Card> list) {
@@ -327,7 +318,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @param biasEnch
      *            a boolean.
      * @param biasLand
@@ -586,7 +576,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @return a {@link java.lang.String} object.
      */
     public static String getMostProminentCreatureType(final CardCollectionView list) {
@@ -630,7 +619,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param list
-     *            a {@link forge.CardList} object.
      * @return a {@link java.lang.String} object.
      */
     public static String getMostProminentColor(final Iterable<Card> list) {
@@ -690,7 +678,6 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param lands
-     *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstLand(final List<Card> lands) {
@@ -1310,7 +1297,7 @@ public class ComputerUtilCard {
                     continue;
                 }
                 final String valid = params.get("Affected");
-                if (!vCard.isValid(valid, c.getController(), c)) {
+                if (!vCard.isValid(valid, c.getController(), c, null)) {
                     continue;
                 }
                 if (params.containsKey("AddPower")) {
@@ -1359,7 +1346,7 @@ public class ComputerUtilCard {
             return false;
         }
 
-        CardCollection targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard());
+        CardCollection targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
         targetables = CardLists.getTargetableCards(targetables, sa);
         targetables = ComputerUtil.getSafeTargets(ai, sa, targetables);
         for (final Card c : targetables) {

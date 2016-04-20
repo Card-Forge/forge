@@ -49,12 +49,12 @@ public class StaticAbilityCantAttackBlock {
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
         if (params.containsKey("Target")
-                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard)) {
+                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
@@ -63,14 +63,14 @@ public class StaticAbilityCantAttackBlock {
         if (params.containsKey("UnlessDefenderControls")) {
             String type = params.get("UnlessDefenderControls");
             CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
-            if (Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard))) {
+            if (Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, null))) {
                 return false;
             }
         }
         if (params.containsKey("IfDefenderControls")) {
             String type = params.get("IfDefenderControls");
             CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
-            if (!Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard))) {
+            if (!Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, null))) {
                 return false;
             }
         }
@@ -81,7 +81,7 @@ public class StaticAbilityCantAttackBlock {
         }
         if (params.containsKey("UnlessDefender")) {
         	final String type = params.get("UnlessDefender");
-        	if (defender.hasProperty(type, hostCard.getController(), hostCard)) {
+        	if (defender.hasProperty(type, hostCard.getController(), hostCard, null)) {
         		return false;
         	}
         }
@@ -103,12 +103,12 @@ public class StaticAbilityCantAttackBlock {
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return null;
         }
 
         if (params.containsKey("Target")
-                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard)) {
+                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard, null)) {
             return null;
         }
         String costString = params.get("Cost");
@@ -139,12 +139,12 @@ public class StaticAbilityCantAttackBlock {
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
-                && !blocker.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !blocker.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return null;
         }
         
         if (params.containsKey("Attacker") && attacker != null
-                && !attacker.isValid(params.get("Attacker").split(","), hostCard.getController(), hostCard)) {
+                && !attacker.isValid(params.get("Attacker").split(","), hostCard.getController(), hostCard, null)) {
             return null;
         }
         String costString = params.get("Cost");

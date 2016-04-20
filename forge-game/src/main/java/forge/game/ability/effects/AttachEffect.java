@@ -84,8 +84,6 @@ public class AttachEffect extends SpellAbilityEffect {
      *            the card
      * @param o
      *            the o
-     * @param af
-     *            the af
      */
     public static void handleAttachment(final Card card, final Object o, final SpellAbility sa) {
 
@@ -126,8 +124,6 @@ public class AttachEffect extends SpellAbilityEffect {
      *            the card
      * @param tgt
      *            the tgt
-     * @param gainControl
-     *            the gain control
      */
     public static void handleAura(final Card card, final GameEntity tgt) {
         if (card.isEnchanting()) {
@@ -196,7 +192,7 @@ public class AttachEffect extends SpellAbilityEffect {
             final FCollection<Player> players = new FCollection<Player>();
 
             for (Player player : game.getPlayers()) {
-                if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source)) {
+                if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source, null)) {
                     players.add(player);
                 }
             }
@@ -208,7 +204,7 @@ public class AttachEffect extends SpellAbilityEffect {
         }
         else {
             CardCollectionView list = game.getCardsIn(tgt.getZone());
-            list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source);
+            list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source, aura);
             if (list.isEmpty()) {
                 return false;
             }

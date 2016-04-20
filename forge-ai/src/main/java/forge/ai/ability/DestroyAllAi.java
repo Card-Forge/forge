@@ -35,8 +35,10 @@ public class DestroyAllAi extends SpellAbilityAi {
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
         }
-        CardCollection humanlist = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        CardCollection computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        CardCollection humanlist = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield),
+                valid.split(","), source.getController(), source, sa);
+        CardCollection computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
+                source.getController(), source, sa);
         
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -94,8 +96,10 @@ public class DestroyAllAi extends SpellAbilityAi {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        CardCollection humanlist = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        CardCollection computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        CardCollection humanlist = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield),
+                valid.split(","), source.getController(), source, sa);
+        CardCollection computerlist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
+                source.getController(), source, sa);
         if (sa.usesTargeting()) {
             sa.resetTargets();
             sa.getTargets().add(ai.getOpponent());

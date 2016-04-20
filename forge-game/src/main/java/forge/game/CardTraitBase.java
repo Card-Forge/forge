@@ -132,7 +132,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     public static boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
         if (o instanceof GameEntity) {
             final GameEntity c = (GameEntity) o;
-            return c.isValid(valids, srcCard.getController(), srcCard);
+            return c.isValid(valids, srcCard.getController(), srcCard, null);
         }
 
         return false;
@@ -240,7 +240,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                 }
             }
     
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
+            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
     
             int right = 1;
             final String rightString = presentCompare.substring(2);
@@ -281,7 +281,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                 }
             }
     
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
+            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
     
             int right = 1;
             final String rightString = presentCompare.substring(2);

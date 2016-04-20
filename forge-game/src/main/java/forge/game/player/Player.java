@@ -1123,7 +1123,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 if (kw.startsWith("Protection:")) { // uses isValid
                     final String characteristic = kw.split(":")[1];
                     final String[] characteristics = characteristic.split(",");
-                    if (source.isValid(characteristics, this, null)) {
+                    if (source.isValid(characteristics, this, null, null)) {
                         return true;
                     }
                 }
@@ -1917,7 +1917,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
+    public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
         final String[] incR = restriction.split("\\.", 2);
 
         if (incR[0].equals("Opponent")) {
@@ -1948,7 +1948,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions
             // are ...
             for (int j = 0; j < exR.length; j++) {
-                if (!hasProperty(exR[j], sourceController, source)) {
+                if (!hasProperty(exR[j], sourceController, source, spellAbility)) {
                     return false;
                 }
             }
@@ -1957,7 +1957,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public final boolean hasProperty(final String property, final Player sourceController, final Card source) {
+    public final boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
         if (property.equals("You")) {
             if (!equals(sourceController)) {
                 return false;

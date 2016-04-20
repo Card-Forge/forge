@@ -60,7 +60,7 @@ public class TriggerDealtCombatDamageOnce extends Trigger {
         if (this.mapParams.containsKey("ValidTarget")) {
             boolean valid = false;
             for (GameEntity c : tgt) {
-                if (c.isValid(this.mapParams.get("ValidTarget").split(","), this.getHostCard().getController(),this.getHostCard())) {
+                if (c.isValid(this.mapParams.get("ValidTarget").split(","), this.getHostCard().getController(),this.getHostCard(), null)) {
                     valid = true;
                 }
             }

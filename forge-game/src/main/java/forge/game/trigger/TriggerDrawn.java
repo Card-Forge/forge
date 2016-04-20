@@ -54,7 +54,7 @@ public class TriggerDrawn extends Trigger {
 
         if (this.mapParams.containsKey("ValidCard")) {
             if (!draw.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard())) {
+                    this.getHostCard(), null)) {
                 return false;
             }
         }

@@ -87,7 +87,7 @@ public class CostSacrifice extends CostPartWithList {
             boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
 
             CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
+            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source, ability);
             final Integer amount = this.convertAmount();
 
             if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {

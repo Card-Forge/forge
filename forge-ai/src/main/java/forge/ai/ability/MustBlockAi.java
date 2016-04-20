@@ -62,7 +62,7 @@ public class MustBlockAi extends SpellAbilityAi {
         if (abTgt != null) {
             List<Card> list = CardLists.filter(ai.getOpponent().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
             list = CardLists.getTargetableCards(list, sa);
-            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source, sa);
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {

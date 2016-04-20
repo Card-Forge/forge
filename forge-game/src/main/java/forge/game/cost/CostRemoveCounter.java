@@ -136,7 +136,7 @@ public class CostRemoveCounter extends CostPartWithList {
             if (type.equals("OriginalHost")) {
                 typeList = Lists.newArrayList(ability.getOriginalHost());
             } else {
-                typeList = CardLists.getValidCards(activator.getCardsIn(this.zone), type.split(";"), activator, source);
+                typeList = CardLists.getValidCards(activator.getCardsIn(this.zone), type.split(";"), activator, source, ability);
             }
             if (amount != null) {
                 if (this.getTypeDescription().equals("among creatures you control")) {

@@ -69,8 +69,6 @@ public class ComputerUtilCombat {
      * 
      * @param attacker
      *            a {@link forge.game.card.Card} object.
-     * @param def
-     *            the defending {@link GameEntity}.
      * @return a boolean.
      */
     public static boolean canAttackNextTurn(final Card attacker) {
@@ -89,7 +87,7 @@ public class ComputerUtilCombat {
      * 
      * @param atacker
      *            a {@link forge.game.card.Card} object.
-     * @param def
+     * @param defender
      *            the defending {@link GameEntity}.
      * @return a boolean.
      */
@@ -206,8 +204,6 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.card.Card} object.
      * @param attacked
      *            a {@link forge.game.player.Player} object.
-     * @param combat
-     *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
     public static int poisonIfUnblocked(final Card attacker, final Player attacked) {
@@ -233,7 +229,6 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attackers
-     *            a {@link forge.CardList} object.
      * @param attacked
      *            a {@link forge.game.player.Player} object.
      * @return a int.
@@ -253,7 +248,6 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attackers
-     *            a {@link forge.CardList} object.
      * @param attacked
      *            a {@link forge.game.player.Player} object.
      * @return a int.
@@ -474,7 +468,6 @@ public class ComputerUtilCombat {
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param defenders
-     *            a {@link forge.CardList} object.
      * @return a int.
      */
     public static int totalDamageOfBlockers(final Card attacker, final List<Card> defenders) {
@@ -589,7 +582,6 @@ public class ComputerUtilCombat {
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param defenders
-     *            a {@link forge.CardList} object.
      * @return a int.
      */
     public static int totalShieldDamage(final Card attacker, final List<Card> defenders) {
@@ -612,7 +604,7 @@ public class ComputerUtilCombat {
      * 
      * @param attacker
      *            a {@link forge.game.card.Card} object.
-     * @param defender
+     * @param blocker
      *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
@@ -886,7 +878,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 final String valid = params.get("Affected").replace("blocking", "Creature");
-                if (!blocker.isValid(valid, card.getController(), card)) {
+                if (!blocker.isValid(valid, card.getController(), card, null)) {
                     continue;
                 }
                 if (params.containsKey("AddPower")) {
@@ -1223,7 +1215,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 final String valid = params.get("Affected").replace("attacking", "Creature");
-                if (!attacker.isValid(valid, card.getController(), card)) {
+                if (!attacker.isValid(valid, card.getController(), card, null)) {
                     continue;
                 }
                 if (params.containsKey("AddPower")) {
@@ -1267,9 +1259,9 @@ public class ComputerUtilCombat {
                 list.add(attacker);
             }
             if (abilityParams.containsKey("ValidCards")) {
-                if (attacker.isValid(abilityParams.get("ValidCards").split(","), source.getController(), source)
+                if (attacker.isValid(abilityParams.get("ValidCards").split(","), source.getController(), source, null)
                         || attacker.isValid(abilityParams.get("ValidCards").replace("attacking+", "").split(","),
-                                source.getController(), source)) {
+                                source.getController(), source, null)) {
                     list.add(attacker);
                 }
             }
@@ -1396,7 +1388,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 final String valid = params.get("Affected").replace("attacking", "Creature");
-                if (!attacker.isValid(valid, card.getController(), card)) {
+                if (!attacker.isValid(valid, card.getController(), card, null)) {
                     continue;
                 }
                 if (params.containsKey("AddToughness")) {
@@ -1459,9 +1451,9 @@ public class ComputerUtilCombat {
                 list.add(attacker);
             }
             if (abilityParams.containsKey("ValidCards")) {
-                if (attacker.isValid(abilityParams.get("ValidCards").split(","), source.getController(), source)
+                if (attacker.isValid(abilityParams.get("ValidCards").split(","), source.getController(), source, null)
                         || attacker.isValid(abilityParams.get("ValidCards").replace("attacking+", "").split(","),
-                                source.getController(), source)) {
+                                source.getController(), source, null)) {
                     list.add(attacker);
                 }
             }
@@ -1966,7 +1958,6 @@ public class ComputerUtilCombat {
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param block
-     *            a {@link forge.CardList} object.
      * @param dmgCanDeal
      *            a int.
      * @param defender 
@@ -2169,11 +2160,11 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 if (params.containsKey("ValidSource")
-                        && !source.isValid(params.get("ValidSource"), ca.getController(), ca)) {
+                        && !source.isValid(params.get("ValidSource"), ca.getController(), ca, null)) {
                     continue;
                 }
                 if (params.containsKey("ValidTarget")
-                        && !target.isValid(params.get("ValidTarget"), ca.getController(), ca)) {
+                        && !target.isValid(params.get("ValidTarget"), ca.getController(), ca, null)) {
                     continue;
                 }
                 if (params.containsKey("IsCombat")) {

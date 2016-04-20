@@ -42,7 +42,7 @@ public class DigUntilAi extends SpellAbilityAi {
         } else {
             if (sa.hasParam("Valid")) {
                 final String valid = sa.getParam("Valid");
-                if (CardLists.getValidCards(ai.getCardsIn(ZoneType.Library), valid.split(","), source.getController(), source).isEmpty()) {
+                if (CardLists.getValidCards(ai.getCardsIn(ZoneType.Library), valid.split(","), source.getController(), source, sa).isEmpty()) {
                     return false;
                 }
             }

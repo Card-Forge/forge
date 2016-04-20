@@ -59,13 +59,13 @@ public class TriggerSacrificed extends Trigger {
         }
         if (this.mapParams.containsKey("ValidCard")) {
             if (!sac.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard())) {
+                    this.getHostCard(), null)) {
                 return false;
             }
         }
         if (this.mapParams.containsKey("ValidSourceController")) {
         	if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(this.mapParams.get("ValidSourceController"),
-        			this.getHostCard().getController(), this.getHostCard())) {
+        			this.getHostCard().getController(), this.getHostCard(), null)) {
         		return false;
         	}
         }

@@ -246,7 +246,7 @@ public class DestroyAi extends SpellAbilityAi {
             sa.resetTargets();
 
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
-            list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+            list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
 
             if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 return false;

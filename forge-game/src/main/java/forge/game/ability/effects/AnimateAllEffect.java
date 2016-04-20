@@ -142,7 +142,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
 
-        list = CardLists.getValidCards(list, valid.split(","), host.getController(), host);
+        list = CardLists.getValidCards(list, valid.split(","), host.getController(), host, sa);
 
         for (final Card c : list) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,

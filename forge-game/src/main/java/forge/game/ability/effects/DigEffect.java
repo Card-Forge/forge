@@ -182,9 +182,9 @@ public class DigEffect extends SpellAbilityEffect {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
-                        valid = CardLists.getValidCards(top, changeValid.split(","), host.getController(), host);
+                        valid = CardLists.getValidCards(top, changeValid.split(","), host.getController(), host, sa);
                         if (!andOrValid.equals("")) {
-                            andOrCards = CardLists.getValidCards(top, andOrValid.split(","), host.getController(), host);
+                            andOrCards = CardLists.getValidCards(top, andOrValid.split(","), host.getController(), host, sa);
                             andOrCards.removeAll((Collection<?>)valid);
                             valid.addAll(andOrCards);
                         }
@@ -275,10 +275,10 @@ public class DigEffect extends SpellAbilityEffect {
                             valid.remove(chosen);
                             if (!andOrValid.equals("")) {
                                 andOrCards.remove(chosen);
-                                if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
+                                if (!chosen.isValid(andOrValid.split(","), host.getController(), host, sa)) {
                                     valid = new CardCollection(andOrCards);
                                 }
-                                else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
+                                else if (!chosen.isValid(changeValid.split(","), host.getController(), host, sa)) {
                                     valid.removeAll((Collection<?>)andOrCards);
                                 }
                             }

@@ -240,7 +240,7 @@ public class PumpAi extends PumpAiBase {
         CardCollection list;
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("HighestPower")) {
-                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source);
+                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source, sa);
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
                 if (!list.isEmpty()) {
@@ -274,7 +274,7 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source, sa);
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
             // attack/block
@@ -359,7 +359,7 @@ public class PumpAi extends PumpAiBase {
         final Game game = ai.getGame();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = ai.getOpponent();
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
+        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
         list = CardLists.getTargetableCards(list, sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {

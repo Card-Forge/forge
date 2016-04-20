@@ -62,17 +62,17 @@ public class StaticAbilityCantTarget {
         }
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
         if (params.containsKey("ValidSource")
-                && !source.isValid(params.get("ValidSource").split(","), hostCard.getController(), hostCard)) {
+                && !source.isValid(params.get("ValidSource").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
         if (params.containsKey("Activator") && (activator != null)
-                && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard)) {
+                && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard, spellAbility)) {
             return false;
         }
 

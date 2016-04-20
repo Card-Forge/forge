@@ -107,9 +107,7 @@ public class DebuffAi extends SpellAbilityAi {
      * <p>
      * debuffTgtAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param kws
@@ -127,7 +125,7 @@ public class DebuffAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
         CardCollection list = getCurseCreatures(ai, sa, kws == null ? Lists.<String>newArrayList() : kws);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
         // several uses here:
         // 1. make human creatures lose evasion when they are attacking
@@ -170,14 +168,12 @@ public class DebuffAi extends SpellAbilityAi {
      * <p>
      * getCurseCreatures.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param kws
      *            a {@link java.util.ArrayList} object.
-     * @return a {@link forge.CardList} object.
+     * @return a CardCollection.
      */
     private CardCollection getCurseCreatures(final Player ai, final SpellAbility sa, final List<String> kws) {
         final Player opp = ai.getOpponent();
@@ -198,9 +194,7 @@ public class DebuffAi extends SpellAbilityAi {
      * <p>
      * debuffMandatoryTarget.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -209,7 +203,8 @@ public class DebuffAi extends SpellAbilityAi {
      */
     private boolean debuffMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
+        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(),
+                sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();

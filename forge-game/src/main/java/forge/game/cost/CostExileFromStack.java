@@ -85,7 +85,7 @@ public class CostExileFromStack extends CostPart {
 
         CardCollectionView list = activator.getCardsIn(ZoneType.Stack);
 
-        list = CardLists.getValidCards(list, type.split(";"), activator, source);
+        list = CardLists.getValidCards(list, type.split(";"), activator, source, ability);
 
         final Integer amount = this.convertAmount();
         if ((amount != null) && (list.size() < amount)) {

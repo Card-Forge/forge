@@ -31,7 +31,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
         sa.resetTargets();
 
         List<Card> list =
-                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard());
+                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -46,7 +46,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
             object2 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
         } else if (tgt.getMinTargets(sa.getHostCard(), sa) > 1) {
             CardCollectionView list2 = ai.getCardsIn(ZoneType.Battlefield);
-            list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getHostCard());
+            list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getHostCard(), sa);
             object2 = ComputerUtilCard.getWorstAI(list2);
             sa.getTargets().add(object2);
         }
@@ -69,7 +69,8 @@ public class ControlExchangeAi extends SpellAbilityAi {
             }
         } else {
             if (mandatory) {
-                CardCollection list2 = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), aiPlayer, sa.getHostCard());
+                CardCollection list2 = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield),
+                        tgt.getValidTgts(), aiPlayer, sa.getHostCard(), sa);
                 while (!list2.isEmpty()) {
                     Card best = ComputerUtilCard.getBestAI(list2);
                     if (sa.canTarget(best)) {

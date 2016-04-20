@@ -43,7 +43,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             List<Card> filteredCards = null;
             if (leaveZone != null) {
                 filteredCards = CardLists.filter(p.getCardsIn(leaveZone),
-                        CardPredicates.restriction(leaveRestriction.split(","), p, sa.getHostCard()));
+                        CardPredicates.restriction(leaveRestriction.split(","), p, sa.getHostCard(), null));
                 newLibrary.addAll(filteredCards);
             }
             playerLibraries.put(p, newLibrary);

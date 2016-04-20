@@ -124,7 +124,7 @@ public class CostDiscard extends CostPartWithList {
                 }
                 if (!type.equals("Random") && !type.contains("X")) {
                     // Knollspine Invocation fails to activate without the above conditional
-                    handList = CardLists.getValidCards(handList, type.split(";"), activator, source);
+                    handList = CardLists.getValidCards(handList, type.split(";"), activator, source, ability);
                 }
                 if (sameName) {
                     for (Card c : handList) {

@@ -52,7 +52,7 @@ public class TriggerEvolved extends Trigger {
         final Card sac = (Card) runParams2.get("Card");
         if (this.mapParams.containsKey("ValidCard")) {
             if (!sac.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard())) {
+                    this.getHostCard(), null)) {
                 return false;
             }
         }

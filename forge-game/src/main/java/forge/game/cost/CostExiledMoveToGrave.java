@@ -70,7 +70,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
 
         CardCollectionView typeList = activator.getGame().getCardsIn(ZoneType.Exile);
 
-        typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source);
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
         return typeList.size() >= i;
     }
 

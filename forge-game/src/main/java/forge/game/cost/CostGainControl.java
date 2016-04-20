@@ -70,7 +70,7 @@ public class CostGainControl extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
         CardCollectionView typeList = activator.getGame().getCardsIn(ZoneType.Battlefield);
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
+        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source, ability);
 
         Integer amount = this.convertAmount();
         if (amount == null) {
