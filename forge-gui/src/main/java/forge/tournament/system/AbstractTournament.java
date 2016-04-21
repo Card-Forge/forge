@@ -133,10 +133,10 @@ public abstract class AbstractTournament implements Serializable {
 
     public void outputTournamentResults() {
         sortAllPlayers("score");
-        System.out.println("Name\t\tWins\tLosses\tTies");
+        System.out.println("Name\t\tScore\tW(By)\tL\tT");
         for(TournamentPlayer tp : allPlayers) {
-            System.out.println(String.format("%s\t\t%d\t%d\t%d", tp.getPlayer().getName(), tp.getWins(),
-                    tp.getLosses(), tp.getTies()));
+            System.out.println(String.format("%s\t\t%d\t\t%d(%d)\t%d\t%d", tp.getPlayer().getName(), tp.getScore(),
+                    tp.getWins(), tp.getByes(), tp.getLosses(), tp.getTies()));
         }
     }
 

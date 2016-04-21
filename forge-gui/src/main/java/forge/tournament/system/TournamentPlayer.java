@@ -66,6 +66,10 @@ public class TournamentPlayer {
 
     public int getSwissScore() { return (wins+byes)*30+ties*10+byes; }
 
+    public String getNameAndScore() {
+        return String.format("%s[%d]", getPlayer().getName(), getScore());
+    }
+
     public int getWins() {
         return wins;
     }

@@ -84,7 +84,7 @@ public class CostReveal extends CostPartWithList {
                 // not enough cards in hand to pay
                 return false;
             }
-            System.out.println("revealcost - " + amount + type + handList);
+            //System.out.println("revealcost - " + amount + type + handList);
         }
 
         return true;

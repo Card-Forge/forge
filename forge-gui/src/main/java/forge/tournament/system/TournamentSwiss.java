@@ -24,10 +24,6 @@ public class TournamentSwiss extends AbstractTournament {
 
     @Override
     public void generateActivePairings() {
-        // Randomize players, then sort by scores
-        Collections.shuffle(allPlayers);
-        sortAllPlayers("swiss");
-
         // Group by Score
         // all the X-0s play each other
         // all the X-1s play each other, etc
@@ -38,6 +34,10 @@ public class TournamentSwiss extends AbstractTournament {
         boolean pairing = true;
         TournamentPlayer byePlayer = null;
         activeRound++;
+
+        // Randomize players, then sort by scores
+        Collections.shuffle(allPlayers);
+        sortAllPlayers("swiss");
 
         if (allPlayers.size() % 2 == 1) {
             int i = allPlayers.size() - 1;
@@ -55,14 +55,19 @@ public class TournamentSwiss extends AbstractTournament {
 
         List<TournamentPlayer> groupPlayers = Lists.newArrayList(allPlayers);
         groupPlayers.remove(byePlayer);
+
+        TournamentPairing byePair = new TournamentPairing(activeRound, Lists.<TournamentPlayer>newArrayList(byePlayer));
+        byePair.setBye(true);
+        activePairings.add(byePair);
+
         if (groupPlayers.isEmpty()) {
             return;
         }
 
-        int score = groupPlayers.get(frontOfGroup).getSwissScore();
+        int score = groupPlayers.get(frontOfGroup).getScore();
         while(pairing) {
             for(backOfGroup = frontOfGroup+1; backOfGroup < groupPlayers.size(); backOfGroup++) {
-                if (allPlayers.get(backOfGroup).getSwissScore() < score) {
+                if (allPlayers.get(backOfGroup).getScore() < score) {
                     break;
                 }
             }
@@ -175,7 +180,7 @@ public class TournamentSwiss extends AbstractTournament {
         }
 
         if (!pair.isEmpty())
-            unpairable.add(players.get(0));
+            unpairable.addAll(pair);
 
         return unpairable;
     }
@@ -191,9 +196,7 @@ public class TournamentSwiss extends AbstractTournament {
 
         for (TournamentPlayer tp : pairing.getPairedPlayers()) {
             if (pairing.isBye()) {
-                if (!tp.getPlayer().getName().equals("BYE")) {
-                    tp.addBye();
-                }
+                tp.addBye();
             } else {
                 oppIndexes.add(tp.getIndex());
                 if (!tp.equals(pairing.getWinner())) {

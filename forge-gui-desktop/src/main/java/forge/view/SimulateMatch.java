@@ -263,12 +263,7 @@ public class SimulateMatch {
                 System.out.println(String.format("Round %d Pairings:", curRound));
 
                 for(TournamentPairing pairing : tourney.getActivePairings()) {
-                    StringBuilder sb = new StringBuilder();
-                    for(TournamentPlayer tp : pairing.getPairedPlayers()) {
-                        // Post Record
-                        sb.append(tp.getPlayer().getName()).append(" ");
-                    }
-                    System.out.println(sb.toString());
+                    System.out.println(pairing.outputHeader());
                 }
                 System.out.println("");
             }
@@ -277,19 +272,14 @@ public class SimulateMatch {
             List<RegisteredPlayer> regPlayers = AbstractTournament.registerTournamentPlayers(pairing, deckGroup);
 
             StringBuilder sb = new StringBuilder();
-            sb.append("Round ").append(tourney.getActiveRound()).append(" -");
-            for(TournamentPlayer tp : pairing.getPairedPlayers()) {
-                sb.append(" ").append(tp.getPlayer().getName());
-            }
-            if (pairing.isBye()) {
-                sb.append(" - BYE");
-            }
-
+            sb.append("Round ").append(tourney.getActiveRound()).append(" - ");
+            sb.append(pairing.outputHeader());
             System.out.println(sb.toString());
 
             if (!pairing.isBye()) {
                 Match mc = new Match(rules, regPlayers, "TourneyMatch");
 
+                int exceptions = 0;
                 int iGame = 0;
                 while (!mc.isMatchOver()) {
                     // play games until the match ends
@@ -297,9 +287,14 @@ public class SimulateMatch {
                         simulateSingleMatch(mc, iGame, outputGamelog);
                         iGame++;
                     } catch(Exception e) {
+                        exceptions++;
                         System.out.println(e.toString());
-                        System.out.println("Game threw exception. Abandoning game and continuing...");
-                        continue;
+                        if (exceptions > 5) {
+                            System.out.println("Exceeded number of exceptions thrown. Abandoning match...");
+                            break;
+                        } else {
+                            System.out.println("Game threw exception. Abandoning game and continuing...");
+                        }
                     }
 
                 }

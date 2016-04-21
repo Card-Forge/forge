@@ -56,6 +56,23 @@ public class TournamentPairing {
         return false;
     }
 
+    public String outputHeader() {
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for(TournamentPlayer tp : getPairedPlayers()) {
+            // Post Record
+            if (!first) {
+                sb.append("vs ");
+            }
+            first = false;
+            sb.append(tp.getNameAndScore()).append(" ");
+        }
+        if (isBye()) {
+            sb.append("BYE");
+        }
+        return sb.toString();
+    }
+
     public void exportToXML(HierarchicalStreamWriter writer) {
 
     }
