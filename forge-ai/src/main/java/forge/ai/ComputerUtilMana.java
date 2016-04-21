@@ -631,7 +631,7 @@ public class ComputerUtilMana {
             getComboManaChoice(ai, saPayment, sa, cost);
         }
         else if (saPayment.getApi() == ApiType.ManaReflected) {
-            System.out.println("Evaluate reflected mana of: " + saPayment.getHostCard());
+            //System.out.println("Evaluate reflected mana of: " + saPayment.getHostCard());
             Set<String> reflected = CardUtil.getReflectableManaColors(saPayment);
 
             for (byte c : MagicColor.WUBRG) {

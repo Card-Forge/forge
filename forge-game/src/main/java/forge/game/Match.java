@@ -76,8 +76,7 @@ public class Match {
     }
 
     public Game createGame() {
-        Game game = new Game(players, rules, this);
-        return game;
+        return new Game(players, rules, this);
     }
 
     public void startGame(final Game game) {
@@ -98,6 +97,8 @@ public class Match {
         if (rules.useAnte()) {
             executeAnte(game);
         }
+
+        game.clearCaches();
 
         // will pull UI dialog, when the UI is listening
         game.fireEvent(new GameEventGameFinished());

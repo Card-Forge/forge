@@ -32,4 +32,8 @@ public class GameEntityCache<Entity extends IIdentifiable, View extends Trackabl
         addToList(views, list);
         return list;
     }
+
+    public void clear() {
+        entityCache.clear();
+    }
 }

@@ -251,6 +251,8 @@ public class SimulateMatch {
 
         String lastWinner = "";
         int curRound = 0;
+        System.out.println(String.format("Starting a %s tournament with %d players over %d rounds", tournament,
+                numPlayers, tourney.getTotalRounds()));
         while(!tourney.isTournamentOver()) {
             if (tourney.getActiveRound() != curRound) {
                 if (curRound != 0) {
@@ -295,6 +297,7 @@ public class SimulateMatch {
                         simulateSingleMatch(mc, iGame, outputGamelog);
                         iGame++;
                     } catch(Exception e) {
+                        System.out.println(e.toString());
                         System.out.println("Game threw exception. Abandoning game and continuing...");
                         continue;
                     }

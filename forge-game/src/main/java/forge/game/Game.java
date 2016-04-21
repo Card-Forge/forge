@@ -768,4 +768,10 @@ public class Game {
         }
         return rarities;
     }
+
+    public void clearCaches() {
+        spabCache.clear();
+        cardCache.clear();
+        playerCache.clear();
+    }
 }

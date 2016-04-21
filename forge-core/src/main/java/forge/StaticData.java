@@ -26,6 +26,7 @@ import java.util.TreeMap;
 public class StaticData {
     private final CardDb commonCards;
     private final CardDb variantCards;
+    private final CardDb allCards;
     private final CardEdition.Collection editions;
     private final IStorage<SealedProduct.Template> boosters;
     private final IStorage<SealedProduct.Template> specialBoosters;
@@ -42,6 +43,7 @@ public class StaticData {
 
         final Map<String, CardRules> regularCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         final Map<String, CardRules> variantsCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        final Map<String, CardRules> fullCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
 
         for (CardRules card : reader.loadCards()) {
             if (null == card) continue;
@@ -53,14 +55,17 @@ public class StaticData {
             else {
                 regularCards.put(cardName, card);
             }
+            fullCards.put(cardName, card);
         }
 
         commonCards = new CardDb(regularCards, editions);
         variantCards = new CardDb(variantsCards, editions);
+        allCards = new CardDb(fullCards, editions);
 
         //muse initialize after establish field values for the sake of card image logic
         commonCards.initialize(false, false);
         variantCards.initialize(false, false);
+        allCards.initialize( false, false);
 
         this.boosters = new StorageBase<>("Boosters", editions.getBoosterGenerator());
         this.specialBoosters = new StorageBase<>("Special boosters", new SealedProduct.Template.Reader(new File(blockDataFolder, "boosters-special.txt")));
@@ -125,5 +130,9 @@ public class StaticData {
     public CardDb getVariantCards() {
         return variantCards;
     }
+
+    public CardDb getAllCards() {
+         return allCards;
+     }
 
 }

@@ -57,6 +57,7 @@ public abstract class AbstractTournament implements Serializable {
     }
 
     public int getActiveRound() { return activeRound; }
+    public int getTotalRounds() { return totalRounds; }
 
     public boolean isContinualPairing() {   return continualPairing;    }
 
