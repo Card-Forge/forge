@@ -54,11 +54,14 @@ public class TournamentSwiss extends AbstractTournament {
         List<TournamentPlayer> leftoverPlayers = new ArrayList<>();
 
         List<TournamentPlayer> groupPlayers = Lists.newArrayList(allPlayers);
-        groupPlayers.remove(byePlayer);
 
-        TournamentPairing byePair = new TournamentPairing(activeRound, Lists.<TournamentPlayer>newArrayList(byePlayer));
-        byePair.setBye(true);
-        activePairings.add(byePair);
+        if (byePlayer != null) {
+            groupPlayers.remove(byePlayer);
+
+            TournamentPairing byePair = new TournamentPairing(activeRound, Lists.<TournamentPlayer>newArrayList(byePlayer));
+            byePair.setBye(true);
+            activePairings.add(byePair);
+        }
 
         if (groupPlayers.isEmpty()) {
             return;
