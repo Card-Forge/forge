@@ -782,6 +782,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
+        fetchList.sort();
+
         CardCollection chosenCards = new CardCollection();
         for (int i = 0; i < changeNum && destination != null; i++) {
             if (sa.hasParam("DifferentNames")) {

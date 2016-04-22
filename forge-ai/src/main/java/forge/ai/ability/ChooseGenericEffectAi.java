@@ -1,7 +1,11 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
+import forge.game.card.Card;
+import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -38,6 +42,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
     @Override
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
+        Card host = sa.getHostCard();
         final String logic = sa.getParam("AILogic");
         if ("Random".equals(logic)) {
             return Aggregates.random(spells);
@@ -68,6 +73,55 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                     return sp;
                 }
             }
+        } else if ("Fatespinner".equals(logic)) {
+            SpellAbility skipDraw = null, skipMain = null, skipCombat = null;
+            for (final SpellAbility sp : spells) {
+                if (sp.getDescription().equals("FatespinnerSkipDraw")) {
+                    skipDraw = sp;
+                } else if (sp.getDescription().equals("FatespinnerSkipDraw")) {
+                    skipMain = sp;
+                } else {
+                    skipCombat = sp;
+                }
+            }
+            // FatespinnerSkipDraw,FatespinnerSkipMain,FatespinnerSkipCombat
+            if (player.hasKeyword("Skip your draw step.")) {
+                return skipDraw;
+            }
+            if (player.hasKeyword("Skip your next combat phase.")) {
+                return skipCombat;
+            }
+
+            // TODO If combat is poor, Skip Combat
+            // Todo if hand is empty or mostly empty, skip main phase
+            // Todo if hand has gas, skip draw
+            return Aggregates.random(spells);
+
+        } else if ("SinProdder".equals(logic)) {
+            SpellAbility allow = null, deny = null;
+            for (final SpellAbility sp : spells) {
+                if (sp.getDescription().equals("Allow")) {
+                    allow = sp;
+                } else {
+                    deny = sp;
+                }
+            }
+
+            Card imprinted = host.getImprintedCards().getFirst();
+            int dmg = imprinted.getCMC();
+            if (dmg == 0) {
+                // If CMC = 0, mill it!
+                return deny;
+            } else if (dmg + 3 > player.getLife()) {
+                // if low on life, do nothing.
+                return allow;
+            } else if (player.getLife() - dmg > 15) {
+                // TODO Check "danger" level of card
+                // If lots of life, and card might be dangerous? Mill it!
+                return deny;
+            }
+            // if unsure, random?
+            return Aggregates.random(spells);
         }
         return spells.get(0);   // return first choice if no logic found
     }
