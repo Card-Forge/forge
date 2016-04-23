@@ -6,8 +6,9 @@ K:Flying
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, each player loses 1 life. Put a +1/+1 counter on CARDNAME for each 1 life lost this way.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Player | LifeAmount$ 1 | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 2
+SVar:DBPutCounter:DB$PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ AFLifeLost
 T:Mode$ LosesGame | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player loses the game, put five +1/+1 counters on CARDNAME.
 SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 5
+SVar:AFLifeLost:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_tyrant.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, each player loses 1 life. Put a +1/+1 counter on Blood Tyrant for each 1 life lost this way.\nWhenever a player loses the game, put five +1/+1 counters on Blood Tyrant.
