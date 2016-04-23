@@ -811,17 +811,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             // if it's blink or bounce, try to save my about to die stuff
-            if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile)
-                    && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered")))))
-                    && (tgt.getMinTargets(sa.getHostCard(), sa) <= 1)) {
-
+            final boolean blink = (destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger
+                    || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
+            if ((destination.equals(ZoneType.Hand) || blink) && (tgt.getMinTargets(sa.getHostCard(), sa) <= 1)) {
+                // save my about to die stuff
                 Card tobounce = canBouncePermanent(ai, sa, list);
                 if (tobounce != null) {
                     sa.getTargets().add(tobounce);
                     return true;
                 }
-                
-                // bounce opponents stuff
+                // bounce opponent's stuff
                 list = CardLists.filterControlledBy(list, ai.getOpponents());
                 if (!CardLists.getNotType(list, "Land").isEmpty()) {
 	                // When bouncing opponents stuff other than lands, don't bounce cards with CMC 0
@@ -835,7 +834,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
 	                                return false;
 	                            }
 	                        }
-	                        return c.isToken() || c.getCMC() > 0;
+	                        if (blink) {
+	                            return c.isToken();
+	                        } else {
+	                            return c.isToken() || c.getCMC() > 0;
+	                        }
 	                    }
 	                });
                 }

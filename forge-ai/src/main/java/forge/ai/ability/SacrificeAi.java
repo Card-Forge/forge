@@ -113,7 +113,7 @@ public class SacrificeAi extends SpellAbilityAi {
             // Self Sacrifice.
         } else if (defined.equals("Player")
                 || ((defined.equals("Player.Opponent") || defined.equals("Opponent")) && !sa.isTrigger())) {
-            // is either "Defined$ Player.Opponent" and "Defined$ Opponent" obsolete?
+            // is either "Defined$ Player.Opponent" or "Defined$ Opponent" obsolete?
             
             // If Sacrifice hits both players:
             // Only cast it if Human has the full amount of valid
