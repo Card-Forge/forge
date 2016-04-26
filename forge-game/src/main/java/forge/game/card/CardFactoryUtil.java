@@ -2334,13 +2334,14 @@ public class CardFactoryUtil {
                 StringBuilder subAb = new StringBuilder();
                 subAb.append("DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
 
-                String returnChampion = "DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield";
+                String returnChampion = "DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ ChampionCleanup";
                 final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig.toString(), card, true);
                 final Trigger parsedTrigReturn = TriggerHandler.parseTrigger(trigReturn.toString(), card, true);
                 card.addTrigger(parsedTrigger);
                 card.addTrigger(parsedTrigReturn);
                 card.setSVar("ChampionAbility", ab.toString());
                 card.setSVar("ChampionReturn", returnChampion);
+                card.setSVar("ChampionCleanup", "DB$ Cleanup | ClearRemembered$ True");
                 card.setSVar("ChampionSacrifice", subAb.toString());
             }
             else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
