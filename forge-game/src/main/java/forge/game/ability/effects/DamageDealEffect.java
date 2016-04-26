@@ -71,7 +71,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
         final boolean noPrevention = sa.hasParam("NoPrevention");
-        final boolean combatDmg = sa.hasParam("CombatDamage");
+        final boolean combatDmg = "true".equalsIgnoreCase(sa.getParamOrDefault("CombatDamage", "false"));
         final boolean removeDamage = sa.hasParam("Remove");
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
