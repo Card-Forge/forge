@@ -1,0 +1,8 @@
+Name:Pyromancer's Goggles
+ManaCost:5
+Types:Legendary Artifact
+A:AB$ Mana | Cost$ T | Produced$ R | TriggersWhenSpent$ TrigCopy | SpellDescription$ Add {R} to your mana pool. When that mana is spent to cast a red instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant.Red,Sorcery.Red | ValidActivatingPlayer$ You | OneOff$ True | Execute$ TrigCopyMain | TriggerDescription$ When that mana is spent to cast a red instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+SVar:TrigCopyMain:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | SubAbility$ DBCleanup
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromancers_goggles.jpg
+Oracle:{T}: Add {R} to your mana pool. When that mana is spent to cast a red instant or sorcery spell, copy that spell and you may choose new targets for the copy.

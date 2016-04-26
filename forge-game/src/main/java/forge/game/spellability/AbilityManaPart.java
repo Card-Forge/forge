@@ -25,6 +25,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import forge.card.mana.ManaAtom;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
@@ -59,6 +61,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private final String addsKeyowrdsType;
     private final String addsKeywordsUntil;
     private final String addsCounters;
+    private final String triggersWhenSpent;
     private final boolean persistentMana;
     private String manaReplaceType;
 
@@ -88,6 +91,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsKeyowrdsType = params.get("AddsKeywordsType");
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
+        this.triggersWhenSpent = params.get("TriggersWhenSpent");
         this.persistentMana = (null == params.get("PersistentMana")) ? false :
             "True".equalsIgnoreCase(params.get("PersistentMana"));
         this.manaReplaceType = params.containsKey("ManaReplaceType") ? params.get("ManaReplaceType") : "";
@@ -266,6 +270,19 @@ public class AbilityManaPart implements java.io.Serializable {
 
             c.addReplacementEffect(re);
         }
+    }
+
+    public boolean getTriggersWhenSpent() {
+        return this.triggersWhenSpent != null;
+    }
+
+    public void addTriggersWhenSpent(SpellAbility saBeingPaid, Card card) {
+        if (this.triggersWhenSpent == null)
+            return;
+
+        TriggerHandler handler = card.getGame().getTriggerHandler();
+        Trigger trig = TriggerHandler.parseTrigger(sourceCard.getSVar(this.triggersWhenSpent), sourceCard, false);
+        handler.registerOneTrigger(trig);
     }
 
     /**

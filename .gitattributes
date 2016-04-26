@@ -11678,6 +11678,7 @@ forge-gui/res/cardsfolder/p/pyrokinesis.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pyromancer_ascension.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/p/pyromancers_assault.txt -text
 forge-gui/res/cardsfolder/p/pyromancers_gauntlet.txt -text
+forge-gui/res/cardsfolder/p/pyromancers_goggles.txt -text
 forge-gui/res/cardsfolder/p/pyromancers_swath.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pyromancy.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pyromania.txt svneol=native#text/plain

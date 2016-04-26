@@ -194,7 +194,7 @@ public class ManaPool implements Iterable<Mana> {
 
         paidAbs.add(saPayment); // assumes some part on the mana produced by the ability will get used
         for (final Mana mana : abManaPart.getLastManaProduced()) {
-            if (tryPayCostWithMana(saPaidFor, manaCost, mana)) {
+            if (tryPayCostWithMana(saPaidFor, manaCost, mana, false)) {
                 saPaidFor.getPayingMana().add(0, mana);
             }
         }
@@ -218,19 +218,25 @@ public class ManaPool implements Iterable<Mana> {
             break;
         }
 
-        if (manaFound != null && tryPayCostWithMana(saPaidFor, manaCost, manaFound)) {
+        if (manaFound != null && tryPayCostWithMana(saPaidFor, manaCost, manaFound, false)) {
             saPaidFor.getPayingMana().add(0, manaFound);
             return true;
         }
         return false;
     }
 
-    public boolean tryPayCostWithMana(final SpellAbility sa, ManaCostBeingPaid manaCost, final Mana mana) {
+    public boolean tryPayCostWithMana(final SpellAbility sa, ManaCostBeingPaid manaCost, final Mana mana, boolean test) {
         if (!manaCost.isNeeded(mana, this)) {
             return false;
         }
         manaCost.payMana(mana, this);
         removeMana(mana);
+
+        if (test) {
+            // If just testing, should I be running special mana bonuses?
+            return true;
+        }
+
         if (mana.addsNoCounterMagic(sa) && sa.getHostCard() != null) {
             sa.getHostCard().setCanCounter(false);
         }
@@ -266,6 +272,9 @@ public class ManaPool implements Iterable<Mana> {
             }
             if (mana.addsCounters(sa)) {
                 mana.getManaAbility().createETBCounters(sa.getHostCard());
+            }
+            if (mana.triggersWhenSpent()) {
+                mana.getManaAbility().addTriggersWhenSpent(sa, sa.getHostCard());
             }
         }
         return true;

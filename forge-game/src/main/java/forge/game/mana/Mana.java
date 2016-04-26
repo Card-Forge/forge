@@ -113,6 +113,10 @@ public class Mana {
         return this.manaAbility.getKeywords();
     }
 
+    public final boolean triggersWhenSpent() {
+        return this.manaAbility != null && manaAbility.getTriggersWhenSpent();
+    }
+
     public final byte getColor() {
         return this.color;
     }

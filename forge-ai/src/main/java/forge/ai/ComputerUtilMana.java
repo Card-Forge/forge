@@ -229,7 +229,7 @@ public class ComputerUtilMana {
                 // get a mana of this type from floating, bail if none available
                 final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), (byte) -1);
                 if (mana != null) {
-                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
+                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana, false)) {
                         manaSpentToPay.add(0, mana);
                     }
                 }
@@ -502,7 +502,7 @@ public class ComputerUtilMana {
                 // get a mana of this type from floating, bail if none available
                 final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1);
                 if (mana != null) {
-                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
+                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana, test)) {
                         manaSpentToPay.add(0, mana);
                     }
                 }

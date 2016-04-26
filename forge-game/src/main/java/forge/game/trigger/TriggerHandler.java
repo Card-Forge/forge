@@ -241,6 +241,14 @@ public class TriggerHandler {
         }
     }
 
+    public final boolean registerOneTrigger(final Trigger t) {
+        if (isTriggerActive(t)) {
+            activeTriggers.add(t);
+            return true;
+        }
+        return false;
+    }
+
     public final void runTrigger(final TriggerType mode, final Map<String, Object> runParams, boolean holdTrigger) {
         if (suppressedModes.contains(mode)) {
             return;
