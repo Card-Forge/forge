@@ -3,8 +3,9 @@ ManaCost:2
 Types:Artifact
 A:AB$ PutCounter | Cost$ 1 T | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBCast | SpellDescription$ Put a charge counter on Brain in a Jar, then you may cast an instant or sorcery card with converted mana cost equal to the number of charge counters on Brain in a Jar from your hand without paying its mana cost.
 SVar:DBCast:DB$ Play | ValidZone$ Hand | Valid$ Instant.YouOwn+cmcEQY,Sorcery.YouOwn+cmcEQY | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1
-A:AB$ Scry | Cost$ 3 T SubCounter<X/CHARGE> | ScryNum$ X | References$ X |SpellDescription$ Scry X.
+A:AB$ Scry | Cost$ 3 T SubCounter<X/CHARGE> | ScryNum$ Z | References$ X,Z |SpellDescription$ Scry X.
 SVar:X:XChoice
+SVar:Z:SVar$CostCountersRemoved
 SVar:Y:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_in_a_jar.jpg
 Oracle:{1}, {T}: Put a charge counter on Brain in a Jar, then you may cast an instant or sorcery card with converted mana cost equal to the number of charge counters on Brain in a Jar from your hand without paying its mana cost.\n{3}, {T}, Remove X charge counters from Brain in a Jar: Scry X.
