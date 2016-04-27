@@ -3,8 +3,8 @@ ManaCost:1 W U
 Types:Creature Human Wizard
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature an opponent controls to its owner's hand. That creature's owner can't cast spells with the same name as that creature until your next turn.
-SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered,RememberedOwner | StaticAbilities$ CantCast | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | RememberLKI$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedLKI,RememberedOwner | StaticAbilities$ CantCast | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
 SVar:CantCast:Mode$ CantBeCast | ValidCard$ Card.nonLand+sharesNameWith Remembered | Caster$ Player.IsRemembered | EffectZone$ Command | Description$ That creature's owner can't cast spells with the same name as that creature until your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE

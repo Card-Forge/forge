@@ -168,8 +168,13 @@ public class AbilityUtils {
                     cards.add(game.getCardState((Card) o));
                 }
             }
-        }
-        else if (defined.equals("DirectRemembered")) {
+        } else if (defined.equals("RememberedLKI")) {
+            for (final Object o : hostCard.getRemembered()) {
+                if (o instanceof Card) {
+                    cards.add((Card) o);
+                }
+            }
+        } else if (defined.equals("DirectRemembered")) {
             if (!hostCard.hasRemembered()) {
                 final Card newCard = game.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
@@ -184,33 +189,28 @@ public class AbilityUtils {
                     cards.add((Card) o);
                 }
             }
-        }
-        else if (defined.equals("DelayTriggerRemembered")) {
+        } else if (defined.equals("DelayTriggerRemembered")) {
             if (sa.getRootAbility().isTrigger()) {
-               for (Object o : sa.getRootAbility().getTriggerRemembered()) {
-                   if (o instanceof Card) {
-                       cards.add(game.getCardState((Card) o));
-                   }
-               }
+                for (Object o : sa.getRootAbility().getTriggerRemembered()) {
+                    if (o instanceof Card) {
+                        cards.add(game.getCardState((Card) o));
+                    }
+                }
             }
-        }
-        else if (defined.equals("FirstRemembered")) {
+        } else if (defined.equals("FirstRemembered")) {
             Object o = Iterables.getFirst(hostCard.getRemembered(), null);
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
-        }
-        else if (defined.equals("Clones")) {
+        } else if (defined.equals("Clones")) {
             for (final Card clone : hostCard.getClones()) {
                 cards.add(game.getCardState(clone));
             }
-        }
-        else if (defined.equals("Imprinted")) {
+        } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprintedCards()) {
                 cards.add(game.getCardState(imprint));
             }
-        }
-        else if (defined.startsWith("ThisTurnEntered")) {
+        } else if (defined.startsWith("ThisTurnEntered")) {
             final String[] workingCopy = defined.split("_");
             ZoneType destination, origin;
             String validFilter;
@@ -226,67 +226,51 @@ public class AbilityUtils {
             for (final Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard)) {
                 cards.add(game.getCardState(cl));
             }
-        }
-        else if (defined.equals("ChosenCard")) {
+        } else if (defined.equals("ChosenCard")) {
             for (final Card chosen : hostCard.getChosenCards()) {
                 cards.add(game.getCardState(chosen));
             }
-        }
-        else if (defined.startsWith("CardUID_")) {
+        } else if (defined.startsWith("CardUID_")) {
             String idString = defined.substring(8);
             for (final Card cardByID : game.getCardsInGame()) {
                 if (cardByID.getId() == Integer.valueOf(idString)) {
                     cards.add(game.getCardState(cardByID));
                 }
             }
-        }
-        else {
+        } else {
             CardCollection list = null;
             if (defined.startsWith("SacrificedCards")) {
                 list = sa.getRootAbility().getPaidList("SacrificedCards");
-            }
-            else if (defined.startsWith("Sacrificed")) {
+            } else if (defined.startsWith("Sacrificed")) {
                 list = sa.getRootAbility().getPaidList("Sacrificed");
-            }
-            else if (defined.startsWith("DiscardedCards")) {
+            } else if (defined.startsWith("DiscardedCards")) {
                 list = sa.getRootAbility().getPaidList("DiscardedCards");
-            }
-            else if (defined.startsWith("Discarded")) {
+            } else if (defined.startsWith("Discarded")) {
                 list = sa.getRootAbility().getPaidList("Discarded");
-            }
-            else if (defined.startsWith("ExiledCards")) {
+            } else if (defined.startsWith("ExiledCards")) {
                 list = sa.getRootAbility().getPaidList("ExiledCards");
-            }
-            else if (defined.startsWith("Exiled")) {
+            } else if (defined.startsWith("Exiled")) {
                 list = sa.getRootAbility().getPaidList("Exiled");
-            }
-            else if (defined.startsWith("TappedCards")) {
+            } else if (defined.startsWith("TappedCards")) {
                 list = sa.getRootAbility().getPaidList("TappedCards");
-            }
-            else if (defined.startsWith("Tapped")) {
+            } else if (defined.startsWith("Tapped")) {
                 list = sa.getRootAbility().getPaidList("Tapped");
-            }
-            else if (defined.startsWith("UntappedCards")) {
+            } else if (defined.startsWith("UntappedCards")) {
                 list = sa.getRootAbility().getPaidList("UntappedCards");
-            }
-            else if (defined.startsWith("Untapped")) {
+            } else if (defined.startsWith("Untapped")) {
                 list = sa.getRootAbility().getPaidList("Untapped");
-            }
-            else if (defined.startsWith("Valid ")) {
+            } else if (defined.startsWith("Valid ")) {
                 String validDefined = defined.substring("Valid ".length());
                 list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard, sa);
-            }
-            else if (defined.startsWith("ValidAll ")) {
+            } else if (defined.startsWith("ValidAll ")) {
                 String validDefined = defined.substring("ValidAll ".length());
                 list = CardLists.getValidCards(game.getCardsInGame(), validDefined.split(","), hostCard.getController(), hostCard, sa);
-            }
-            else if (defined.startsWith("Valid")) {
+            } else if (defined.startsWith("Valid")) {
                 String[] s = defined.split(" ");
                 String zone = s[0].substring("Valid".length());
                 String validDefined = s[1];
                 list = CardLists.getValidCards(game.getCardsIn(ZoneType.smartValueOf(zone)), validDefined.split(","), hostCard.getController(), hostCard, sa);
-            }
-            else {
+            } else {
                 return cards;
             }
 
