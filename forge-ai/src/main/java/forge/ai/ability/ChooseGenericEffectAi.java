@@ -78,7 +78,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             for (final SpellAbility sp : spells) {
                 if (sp.getDescription().equals("FatespinnerSkipDraw")) {
                     skipDraw = sp;
-                } else if (sp.getDescription().equals("FatespinnerSkipDraw")) {
+                } else if (sp.getDescription().equals("FatespinnerSkipMain")) {
                     skipMain = sp;
                 } else {
                     skipCombat = sp;
