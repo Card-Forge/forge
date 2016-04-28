@@ -1,9 +1,9 @@
 Name:Declaration in Stone
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberLKI$ True | SubAbility$ DBExile | SpellDescription$ Exile target creature and all other creatures its controller controls with the same name as that creature. That player investigates for each nontoken creature exiled this way.
+A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberLKI$ True | SubAbility$ DBExile | SpellDescription$ Exile target creature and all other creatures its controller controls with the same name as that creature. That player investigates for each nontoken creature exiled this way. | StackDescription$ SpellDescription
 SVar:DBExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | Defined$ RememberedController | ChangeType$ Remembered.Creature+sameName | Shuffle$ True | RememberChanged$ True | SubAbility$ DBRepeat
-SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBInvestigate | MaxRepeat$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBInvestigate | MaxRepeat$ X | References$ X | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBInvestigate:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 | TokenTypes$ Artifact,Clue | TokenOwner$ RememberedController | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
