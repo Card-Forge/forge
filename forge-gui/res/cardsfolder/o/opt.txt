@@ -5,4 +5,4 @@ A:SP$ Scry | Cost$ U | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opt.jpg
-Oracle:Look at the top card of your library. You may put that card on the bottom of your library.\nDraw a card.
+Oracle:Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\nDraw a card.
