@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberLKI$ True | SubAbility$ DBExile | SpellDescription$ Exile target creature and all other creatures its controller controls with the same name as that creature. That player investigates for each nontoken creature exiled this way. | StackDescription$ SpellDescription
 SVar:DBExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | Defined$ RememberedController | ChangeType$ Remembered.Creature+sameName | Shuffle$ True | RememberChanged$ True | SubAbility$ DBInvestigate
-SVar:DBInvestigate:DB$ Token | TokenAmount$ X | TokenName$ Clue | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 | TokenTypes$ Artifact,Clue | TokenOwner$ RememberedController | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw
+SVar:DBInvestigate:DB$ Token | TokenAmount$ X | TokenName$ Clue | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 | TokenTypes$ Artifact,Clue | TokenOwner$ RememberedController | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | SubAbility$ DBCleanup
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonToken
