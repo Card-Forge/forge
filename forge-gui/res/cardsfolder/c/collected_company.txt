@@ -1,6 +1,6 @@
 Name:Collected Company
 ManaCost:3 G
 Types:Instant
-A:SP$ Dig | Cost$ 3 G | DigNum$ 6 | ChangeNum$ 2 | Optional$ True | Reveal$ False | ChangeValid$ Creature.cmcLE3 | DestinationZone$ Battlefield | SpellDescription$ Look at the top six cards of your library. Put up to two creature cards with converted mana cost 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in any order.
+A:SP$ Dig | Cost$ 3 G | DigNum$ 6 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Creature.cmcLE3 | DestinationZone$ Battlefield | SpellDescription$ Look at the top six cards of your library. Put up to two creature cards with converted mana cost 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in any order.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/collected_company.jpg
 Oracle:Look at the top six cards of your library. Put up to two creature cards with converted mana cost 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in any order.
