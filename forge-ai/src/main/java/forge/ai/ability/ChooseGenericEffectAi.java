@@ -125,10 +125,11 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
             
             // milling against Tamiyo is pointless
-            if (owner.isCardInCommand("Tamiyo, the Moon Sage emblem"))) {
+            if (owner.isCardInCommand("Tamiyo, the Moon Sage emblem")) {
             	return allow;
             }
             
+            // milling a land against Gitrog result in card draw
             if (imprinted.isLand() && owner.isCardInPlay("The Gitrog Monster")) {
             	// try to mill owner
             	if (owner.getCardsIn(ZoneType.Library).size() < 5) {
