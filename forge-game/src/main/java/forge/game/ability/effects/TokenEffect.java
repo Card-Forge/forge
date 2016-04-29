@@ -144,8 +144,11 @@ public class TokenEffect extends SpellAbilityEffect {
 
         final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
-        sb.append("Put (").append(finalAmount).append(") ").append(finalPower).append("/").append(finalToughness);
-        sb.append(" ").append(substitutedName).append(" token");
+        sb.append("Put (").append(finalAmount).append(") ");
+        if (Arrays.asList(this.tokenTypes).contains("Creature")) {
+            sb.append(finalPower).append("/").append(finalToughness).append(" ");
+        }
+        sb.append(substitutedName).append(" token");
         if (finalAmount != 1) {
             sb.append("s");
         }
