@@ -1,0 +1,34 @@
+[metadata]
+Code=UGF
+Date=2015-01-23
+Name=Ugin's Fate
+MciCode=ugin
+Type=Other
+
+[cards]
+1 M Ugin, the Spirit Dragon
+19 R Mastery of the Unseen
+24 C Smite the Monstrous
+26 C Soul Summons
+30 U Watcher of the Roost
+36 R Jeskai Infiltrator
+46 U Reality Shift
+48 C Mystic of the Hidden Way
+59 C Write into Being
+68 C Debilitating Injury
+73 R Grim Haruspex
+85 C Sultai Emissary
+88 U Ruthless Ripper
+96 C Ainok Tracker
+97 U Arc Lightning
+98 C Fierce Invocation
+113 R Jeering Instigator
+123 U Arashin War Beast
+129 C Formless Nurturing
+131 C Dragonscale Boon
+146 R Wildcall
+161 U Hewed Stone Retainers
+164 U Ugin's Construct
+216 R Altar of the Brood
+217 U Briber's Purse
+220 R Ghostfire Blade

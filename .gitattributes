@@ -17702,6 +17702,7 @@ forge-gui/res/editions/Theros.txt -text
 forge-gui/res/editions/Time[!!-~]Spiral[!!-~]Timeshifted.txt -text
 forge-gui/res/editions/Time[!!-~]Spiral.txt -text
 forge-gui/res/editions/Torment.txt -text
+forge-gui/res/editions/Ugin's[!!-~]Fate.txt -text svneol=unset#text/plain
 forge-gui/res/editions/Unlimited[!!-~]Edition.txt -text
 forge-gui/res/editions/Urza's[!!-~]Destiny.txt -text
 forge-gui/res/editions/Urza's[!!-~]Legacy.txt -text
