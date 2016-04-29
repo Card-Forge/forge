@@ -1,7 +1,7 @@
 Name:Confront the Unknown
 ManaCost:G
 Types:Instant
-A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 | TokenAbilities$ ABDraw | SubAbility$ DBPump | SpellDescription$ Investigate, then target creature gets +1/+1 until end of turn for each Clue you control. (To investigate, put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
+A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 | TokenAbilities$ ABDraw | SubAbility$ DBPump | SpellDescription$ Investigate, then target creature gets +1/+1 until end of turn for each Clue you control. (To investigate, put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.") | StackDescription$ Investigate.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$Valid Clue.YouCtrl 
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
