@@ -109,6 +109,46 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
             Card imprinted = host.getImprintedCards().getFirst();
             int dmg = imprinted.getCMC();
+            Player owner = imprinted.getOwner();
+            
+            //useless cards in hand
+            if (imprinted.getName().equals("Bridge from Below") ||
+            		imprinted.getName().equals("Haakon, Stromgald Scourge")) {
+            	return allow;
+            }
+                        
+            //bad cards when are thrown from the library to the graveyard, but Yixlid can prevent that
+            if (!player.getGame().isCardInPlay("Yixlid Jailer") && (
+            		imprinted.getName().equals("Gaea's Blessing") ||
+            		imprinted.getName().equals("Narcomoeba"))) {
+            	return allow;
+            }
+            
+            // milling against Tamiyo is pointless
+            if (owner.isCardInCommand("Tamiyo, the Moon Sage emblem"))) {
+            	return allow;
+            }
+            
+            if (imprinted.isLand() && owner.isCardInPlay("The Gitrog Monster")) {
+            	// try to mill owner
+            	if (owner.getCardsIn(ZoneType.Library).size() < 5) {
+            		return deny;
+            	}
+            	return allow;
+            }
+            
+            // milling a creature against Sidisi result in more creatures
+            if (imprinted.isCreature() && owner.isCardInPlay("Sidisi, Brood Tyrant")) {
+            	return allow;
+            }
+
+            //if Iona does prevent from casting, allow it to draw 
+            for (final Card io : player.getCardsIn(ZoneType.Battlefield, "Iona, Shield of Emeria")) {
+            	if (CardUtil.getColors(imprinted).hasAnyColor((MagicColor.fromName(io.getChosenColor())))) {
+                	return allow;
+            	}
+            }
+            
             if (dmg == 0) {
                 // If CMC = 0, mill it!
                 return deny;
