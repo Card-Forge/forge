@@ -3,12 +3,15 @@ package forge.ai.ability;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
+import forge.card.MagicColor;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
 
@@ -145,7 +148,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
             //if Iona does prevent from casting, allow it to draw 
             for (final Card io : player.getCardsIn(ZoneType.Battlefield, "Iona, Shield of Emeria")) {
-            	if (CardUtil.getColors(imprinted).hasAnyColor((MagicColor.fromName(io.getChosenColor())))) {
+            	if (CardUtil.getColors(imprinted).hasAnyColor(MagicColor.fromName(io.getChosenColor()))) {
                 	return allow;
             	}
             }
