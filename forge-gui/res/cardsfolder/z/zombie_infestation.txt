@@ -1,7 +1,7 @@
 Name:Zombie Infestation
 ManaCost:1 B
 Types:Enchantment
-A:AB$ Token | Cost$ Discard<2/Card> | TokenImage$ B 2 2 Zombie | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield.
+A:AB$ Token | Cost$ Discard<2/Card> | TokenImage$ b 2 2 zombie | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_infestation.jpg
 Oracle:Discard two cards: Put a 2/2 black Zombie creature token onto the battlefield.

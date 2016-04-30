@@ -4,7 +4,7 @@ Types:Legendary Creature Spirit
 PT:3/6
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, put a 3/3 white Spirit creature token with flying onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 3 3 Spirit | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Flying
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ w 3 3 spirit | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Flying
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oyobi_who_split_the_heavens.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, put a 3/3 white Spirit creature token with flying onto the battlefield.

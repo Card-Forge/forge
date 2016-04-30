@@ -1,7 +1,7 @@
 Name:Cenn's Enlistment
 ManaCost:3 W
 Types:Sorcery
-A:SP$ Token | Cost$ 3 W | TokenImage$ W 1 1 Kithkin Soldier SHM | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield.
-A:SP$ Token | Cost$ 3 W Discard<1/Land> | CostDesc$ Retrace | TokenImage$ W 1 1 Kithkin Soldier | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | ActivationZone$ Graveyard | NonBasicSpell$ True | SpellDescription$ (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
+A:SP$ Token | Cost$ 3 W | TokenImage$ w 1 1 kithkin soldier SHM | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield.
+A:SP$ Token | Cost$ 3 W Discard<1/Land> | CostDesc$ Retrace | TokenImage$ w 1 1 kithkin soldier | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | ActivationZone$ Graveyard | NonBasicSpell$ True | SpellDescription$ (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cenns_enlistment.jpg
 Oracle:Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

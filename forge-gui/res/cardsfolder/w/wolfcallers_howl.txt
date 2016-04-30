@@ -2,7 +2,7 @@ Name:Wolfcaller's Howl
 ManaCost:3 G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the number of your opponents with four or more cards in hand.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ G 2 2 Wolf C14 | TokenAmount$ X | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Green | References$ X
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ g 2 2 wolf C14 | TokenAmount$ X | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Green | References$ X
 SVar:X:PlayerCountOpponents$HasPropertyWithCardsInHandAtLeast4
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfcallers_howl.jpg

@@ -6,7 +6,7 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SubAbility$ ChooseCT | SpellDe
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature
 K:etbCounter:CHARGE:X
 SVar:X:Count$xPaid
-A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ ChosenType | TokenTypes$ Creature,ChosenType | TokenOwner$ You | TokenColors$ ChosenColor | TokenPower$ Y | TokenToughness$ Y | References$ Y | TokenImage$ C X X Riptide Replicator | SpellDescription$ Put an X/X creature token of the chosen color and type onto the battlefield, where X is the number of charge counters on CARDNAME.
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ ChosenType | TokenTypes$ Creature,ChosenType | TokenOwner$ You | TokenColors$ ChosenColor | TokenPower$ Y | TokenToughness$ Y | References$ Y | TokenImage$ c x x riptide replicator | SpellDescription$ Put an X/X creature token of the chosen color and type onto the battlefield, where X is the number of charge counters on CARDNAME.
 SVar:Y:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_replicator.jpg

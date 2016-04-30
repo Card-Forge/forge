@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Tribal Instant Shapeshifter
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | IsCurse$ True | SubAbility$ DBToken | SpellDescription$ Exile target creature. Its controller puts a 1/1 colorless Shapeshifter creature token with changeling onto the battlefield.
-SVar:DBToken:DB$ Token | TokenImage$ C 1 1 Shapeshifter | TokenColors$ Colorless | TokenAmount$ 1 | TokenName$ Shapeshifter | TokenTypes$ Creature,Shapeshifter | TokenPower$ 1 | TokenToughness$ 1 | TokenStaticAbilities$ Changeling | TokenOwner$ TargetedController
+SVar:DBToken:DB$ Token | TokenImage$ c 1 1 shapeshifter | TokenColors$ Colorless | TokenAmount$ 1 | TokenName$ Shapeshifter | TokenTypes$ Creature,Shapeshifter | TokenPower$ 1 | TokenToughness$ 1 | TokenStaticAbilities$ Changeling | TokenOwner$ TargetedController
 SVar:Changeling:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nExile target creature. Its controller puts a 1/1 colorless Shapeshifter creature token with changeling onto the battlefield.

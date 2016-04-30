@@ -1,7 +1,7 @@
 Name:Gelatinous Genesis
 ManaCost:X X G
 Types:Sorcery
-A:SP$ Token | Cost$ X X G | TokenImage$ G X X Ooze ROE | TokenAmount$ X | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | References$ X | SpellDescription$ Put X X/X green Ooze creature tokens onto the battlefield.
+A:SP$ Token | Cost$ X X G | TokenImage$ g x x ooze ROE | TokenAmount$ X | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | References$ X | SpellDescription$ Put X X/X green Ooze creature tokens onto the battlefield.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gelatinous_genesis.jpg
 Oracle:Put X X/X green Ooze creature tokens onto the battlefield.

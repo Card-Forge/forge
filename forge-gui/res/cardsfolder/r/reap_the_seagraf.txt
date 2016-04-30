@@ -2,6 +2,6 @@ Name:Reap the Seagraf
 ManaCost:2 B
 Types:Sorcery
 K:Flashback 4 U
-A:SP$ Token | Cost$ 2 B | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ B 2 2 Zombie ISD |  TokenAltImages$ b_2_2_zombie2_ISD,b_2_2_zombie3_ISD | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield.
+A:SP$ Token | Cost$ 2 B | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie ISD |  TokenAltImages$ b_2_2_zombie2_ISD,b_2_2_zombie3_ISD | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_the_seagraf.jpg
 Oracle:Put a 2/2 black Zombie creature token onto the battlefield.\nFlashback {4}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

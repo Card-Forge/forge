@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Vampire
 PT:3/3
 K:Flying
-A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Vampire | TokenColors$ Black | TokenImage$ B 2 2 Vampire | TokenTypes$ Creature,Vampire | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Put a 2/2 black Vampire creature token with flying onto the battlefield.
+A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Vampire | TokenColors$ Black | TokenImage$ b 2 2 vampire | TokenTypes$ Creature,Vampire | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Put a 2/2 black Vampire creature token with flying onto the battlefield.
 A:AB$SetState | Cost$ B | Defined$ Self | CheckSVar$ X | SVarCompare$ GE5 | Mode$ Transform | References$ X | SpellDescription$ Transform CARDNAME.Activate this ability only if you control five or more Vampires.
 SVar:X:Count$Valid Card.Vampire+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodline_keeper.jpg
@@ -19,6 +19,6 @@ Types:Creature Vampire
 PT:5/5
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Vampire creatures you control get +2/+2.
-A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Vampire | TokenColors$ Black | TokenImage$ B 2 2 Vampire | TokenTypes$ Creature,Vampire | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Put a 2/2 black Vampire creature token with flying onto the battlefield.
+A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Vampire | TokenColors$ Black | TokenImage$ b 2 2 vampire | TokenTypes$ Creature,Vampire | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Put a 2/2 black Vampire creature token with flying onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_lineage.jpg
 Oracle:Flying\nOther Vampire creatures you control get +2/+2.\n{T}: Put a 2/2 black Vampire creature token with flying onto the battlefield.

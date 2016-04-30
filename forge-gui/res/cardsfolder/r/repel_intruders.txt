@@ -1,7 +1,7 @@
 Name:Repel Intruders
 ManaCost:3 WU
 Types:Instant
-A:SP$ Token | Cost$ 3 WU | TokenImage$ W 1 1 Kithkin Soldier SHM | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | ConditionManaSpent$ W | SubAbility$ UPaid | SpellDescription$ Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield if {W} was spent to cast CARDNAME. Counter up to one target creature spell if {U} was spent to cast CARDNAME. (Do both if {W}{U} was spent.)
+A:SP$ Token | Cost$ 3 WU | TokenImage$ w 1 1 kithkin soldier SHM | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | ConditionManaSpent$ W | SubAbility$ UPaid | SpellDescription$ Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield if {W} was spent to cast CARDNAME. Counter up to one target creature spell if {U} was spent to cast CARDNAME. (Do both if {W}{U} was spent.)
 SVar:UPaid:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | ConditionManaSpent$ U
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repel_intruders.jpg

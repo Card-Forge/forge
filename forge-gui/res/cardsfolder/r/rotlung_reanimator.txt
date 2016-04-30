@@ -4,6 +4,6 @@ Types:Creature Zombie Cleric
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Cleric.Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black | TokenOwner$ You | TokenAmount$ 1
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ b 2 2 zombie | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black | TokenOwner$ You | TokenAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotlung_reanimator.jpg
 Oracle:Whenever Rotlung Reanimator or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.

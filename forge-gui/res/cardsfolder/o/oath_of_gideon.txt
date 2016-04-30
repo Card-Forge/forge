@@ -2,7 +2,7 @@ Name:Oath of Gideon
 ManaCost:2 W
 Types:Legendary Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 1/1 white Kor Ally creature tokens onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 1 1 Kor Ally | TokenName$ Kor Ally | TokenColors$ White | TokenTypes$ Creature,Kor,Ally | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ 2
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ w 1 1 kor ally | TokenName$ Kor Ally | TokenColors$ White | TokenTypes$ Creature,Kor,Ally | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ 2
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Planeswalker.YouCtrl | ReplaceWith$ AddExtraCounter | Description$ Each planeswalker you control enters the battlefield with an additional loyalty counter on it.
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ LOYALTY | CounterNum$ 1 | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard

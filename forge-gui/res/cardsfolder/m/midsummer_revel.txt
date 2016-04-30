@@ -2,7 +2,7 @@ Name:Midsummer Revel
 ManaCost:3 G G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
-A:AB$ Token | Cost$ G Sac<1/CARDNAME> | TokenImage$ G 3 3 Beast | TokenAmount$ X | References$ X | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put X 3/3 green Beast creature tokens onto the battlefield.
+A:AB$ Token | Cost$ G Sac<1/CARDNAME> | TokenImage$ g 3 3 beast | TokenAmount$ X | References$ X | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put X 3/3 green Beast creature tokens onto the battlefield.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
 SVar:RemAIDeck:True
 SVar:X:Count$CardCounters.VERSE

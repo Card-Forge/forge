@@ -1,6 +1,6 @@
 Name:Allied Reinforcements
 ManaCost:3 W
 Types:Sorcery
-A:SP$ Token | Cost$ 3 W | TokenImage$ W 2 2 Knight Ally | TokenAmount$ 2 | TokenName$ Knight Ally | TokenTypes$ Creature,Knight,Ally | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put two 2/2 white Knight Ally creature tokens onto the battlefield.
+A:SP$ Token | Cost$ 3 W | TokenImage$ w 2 2 knight ally | TokenAmount$ 2 | TokenName$ Knight Ally | TokenTypes$ Creature,Knight,Ally | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put two 2/2 white Knight Ally creature tokens onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/allied_reinforcements.jpg
 Oracle:Put two 2/2 white Knight Ally creature tokens onto the battlefield.

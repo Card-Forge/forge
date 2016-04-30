@@ -5,6 +5,6 @@ PT:2/2
 K:Flying
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put four 1/1 green Insect creature tokens with flying and deathtouch onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Insect | TokenImage$ G 1 1 Insect M15 | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying<>Deathtouch
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Insect | TokenImage$ g 1 1 insect M15 | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying<>Deathtouch
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_queen.jpg
 Oracle:Flying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen Hornet Queen enters the battlefield, put four 1/1 green Insect creature tokens with flying and deathtouch onto the battlefield.

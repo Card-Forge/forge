@@ -4,7 +4,7 @@ Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | Description$ As CARDNAME enters the battlefield, pay any amount of life.
 SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ ChosenX | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield
-A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Minion | TokenTypes$ Creature,Minion | TokenOwner$ You | TokenColors$ Black | TokenPower$ LifePaidOnETB | TokenToughness$ LifePaidOnETB | TokenImage$ B X X Minion | SpellDescription$ Put an X/X black Minion creature token onto the battlefield, where X is the life paid as Phyrexian Processor entered the battlefield.
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Minion | TokenTypes$ Creature,Minion | TokenOwner$ You | TokenColors$ Black | TokenPower$ LifePaidOnETB | TokenToughness$ LifePaidOnETB | TokenImage$ b x x minion | SpellDescription$ Put an X/X black Minion creature token onto the battlefield, where X is the life paid as Phyrexian Processor entered the battlefield.
 SVar:X:XChoice
 SVar:LifePaidOnETB:Number$0
 SVar:RemAIDeck:True

@@ -1,7 +1,7 @@
 Name:Ooze Flux
 ManaCost:3 G
 Types:Enchantment
-A:AB$ Token | Announce$ X | Cost$ XCantBe0 1 G SubCounter<X/P1P1/Creature/among creatures you control> | TokenAmount$ 1 | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenImage$ G X X Ooze | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | SpellDescription$ Put an X/X green Ooze creature token onto the battlefield, where X is the number of +1/+1 counters removed this way.
+A:AB$ Token | Announce$ X | Cost$ XCantBe0 1 G SubCounter<X/P1P1/Creature/among creatures you control> | TokenAmount$ 1 | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenImage$ g x x ooze | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | SpellDescription$ Put an X/X green Ooze creature token onto the battlefield, where X is the number of +1/+1 counters removed this way.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ooze_flux.jpg

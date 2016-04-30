@@ -14,5 +14,5 @@ ALTERNATE
 Name:Call
 ManaCost:4 W U
 Types:Sorcery
-A:SP$ Token | Cost$ 4 W U | TokenImage$ W 1 1 Bird | TokenAmount$ 4 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put four 1/1 white Bird creature tokens with flying onto the battlefield.
+A:SP$ Token | Cost$ 4 W U | TokenImage$ w 1 1 bird | TokenAmount$ 4 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put four 1/1 white Bird creature tokens with flying onto the battlefield.
 Oracle:Put four 1/1 white Bird creature tokens with flying onto the battlefield.\nFuse (You may cast one or both halves of this card from your hand.)

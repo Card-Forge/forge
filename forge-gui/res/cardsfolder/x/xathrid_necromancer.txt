@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Human+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another Human creature you control dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Human creature you control dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ B 2 2 Zombie M14 | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1 | TokenTapped$ True
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ b 2 2 zombie M14 | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1 | TokenTapped$ True
 DeckHints:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xathrid_necromancer.jpg
 Oracle:Whenever Xathrid Necromancer or another Human creature you control dies, put a 2/2 black Zombie creature token onto the battlefield tapped.

@@ -5,6 +5,6 @@ PT:4/3
 K:Deathtouch
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards a card and you put a 2/2 black Zombie creature token onto the battlefield tapped.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ MakeToken
-SVar:MakeToken:DB$ Token | TokenImage$ B 2 2 Zombie M14 | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1 | TokenTapped$ True
+SVar:MakeToken:DB$ Token | TokenImage$ b 2 2 zombie M14 | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1 | TokenTapped$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_reaver.jpg
 Oracle:Deathtouch\nWhenever Liliana's Reaver deals combat damage to a player, that player discards a card and you put a 2/2 black Zombie creature token onto the battlefield tapped.

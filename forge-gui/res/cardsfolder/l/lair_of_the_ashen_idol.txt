@@ -7,7 +7,7 @@ SVar:IdolWalk:DB$ Planeswalk | ConditionCheckSVar$ IdolX | ConditionSVarCompare$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:IdolX:Remembered$Amount
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, any number of target players each put a 2/2 black Zombie creature token onto the battlefield.
-SVar:RolledChaos:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player to receive zombie token | TargetMin$ 0 | TargetMax$ MaxTgt | References$ MaxTgt | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ Targeted | TokenAmount$ 1 | TokenImage$ B 2 2 Zombie ISD | TokenAltImages$ b_2_2_zombie2_ISD,b_2_2_zombie3_ISD
+SVar:RolledChaos:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player to receive zombie token | TargetMin$ 0 | TargetMax$ MaxTgt | References$ MaxTgt | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ Targeted | TokenAmount$ 1 | TokenImage$ b 2 2 zombie ISD | TokenAltImages$ b_2_2_zombie2_ISD,b_2_2_zombie3_ISD
 SVar:MaxTgt:PlayerCountPlayers$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lair_of_the_ashen_idol.jpg
 Oracle:At the beginning of your upkeep, sacrifice a creature. If you can't, planeswalk.\nWhenever you roll {CHAOS}, any number of target players each put a 2/2 black Zombie creature token onto the battlefield.

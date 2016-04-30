@@ -2,7 +2,7 @@ Name:Havengul Runebinder
 ManaCost:2 U U
 Types:Creature Human Wizard
 PT:2/2
-A:AB$ Token | Cost$ 2 U T ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ B 2 2 Zombie ISD |  TokenAltImages$ b_2_2_zombie2_ISD,b_2_2_zombie3_ISD | SubAbility$ DBCounters | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield, then put a +1/+1 counter on each Zombie creature you control.
+A:AB$ Token | Cost$ 2 U T ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie ISD |  TokenAltImages$ b_2_2_zombie2_ISD,b_2_2_zombie3_ISD | SubAbility$ DBCounters | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield, then put a +1/+1 counter on each Zombie creature you control.
 SVar:DBCounters:DB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.Zombie+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havengul_runebinder.jpg
 Oracle:{2}{U}, {T}, Exile a creature card from your graveyard: Put a 2/2 black Zombie creature token onto the battlefield, then put a +1/+1 counter on each Zombie creature you control.

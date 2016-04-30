@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Merfolk Wizard
 PT:2/2
 T:Mode$ Countered | ValidCause$ Card.YouCtrl | ValidCard$ Card | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a spell or ability you control counters a spell, you may put a 1/1 blue Merfolk creature token onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ U 1 1 Merfolk | TokenAmount$ 1 | TokenName$ Merfolk | TokenTypes$ Creature,Merfolk | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ u 1 1 merfolk | TokenAmount$ 1 | TokenName$ Merfolk | TokenTypes$ Creature,Merfolk | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1
 A:AB$ Counter | Cost$ tapXType<7/Merfolk> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lullmage_mentor.jpg
 Oracle:Whenever a spell or ability you control counters a spell, you may put a 1/1 blue Merfolk creature token onto the battlefield.\nTap seven untapped Merfolk you control: Counter target spell.

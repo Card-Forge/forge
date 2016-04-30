@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Legendary Creature Cat Cleric
 PT:2/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put a 2/2 white Cat creature token onto the battlefield for each Equipment attached to CARDNAME.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 2 2 Cat | TokenName$ Cat | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenTypes$ Creature,Cat | TokenAmount$ X | TokenOwner$ You | References$ X
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ w 2 2 cat | TokenName$ Cat | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenTypes$ Creature,Cat | TokenAmount$ X | TokenOwner$ You | References$ X
 SVar:X:Count$Valid Equipment.Attached
 SVar:EquipMe:Multiple
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kemba_kha_regent.jpg

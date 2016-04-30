@@ -2,7 +2,7 @@ Name:Endless Ranks of the Dead
 ManaCost:2 B B
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put X 2/2 black zombie creature tokens onto the battlefield, where X is half the number of the zombies you control, rounded down.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ B 2 2 Zombie ISD | TokenAltImages$ b_2_2_zombie2_ISD,b_2_2_zombie3_ISD | TokenAmount$ X | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black | References$ X
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ b 2 2 zombie ISD | TokenAltImages$ b_2_2_zombie2_ISD,b_2_2_zombie3_ISD | TokenAmount$ X | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black | References$ X
 SVar:X:Count$Valid Creature.Zombie+YouCtrl/HalfDown
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_ranks_of_the_dead.jpg

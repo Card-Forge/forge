@@ -4,6 +4,6 @@ Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ AttackersDeclared | Execute$ TrigToken | TriggerZones$ Battlefield | AttackedTarget$ Player.EnchantedBy | OptionalDecider$ TriggeredAttackingPlayer | TriggerDescription$ Whenever a player attacks enchanted player with one or more creatures, that attacking player may put a 2/2 black Zombie creature token onto the battlefield tapped.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenOwner$ TriggeredAttackingPlayer | TokenTapped$ True | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenAmount$ 1
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenOwner$ TriggeredAttackingPlayer | TokenTapped$ True | TokenImage$ b 2 2 zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_shallow_graves.jpg
 Oracle:Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may put a 2/2 black Zombie creature token onto the battlefield tapped.

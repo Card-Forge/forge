@@ -1,6 +1,6 @@
 Name:Midnight Haunting
 ManaCost:2 W
 Types:Instant
-A:SP$ Token | Cost$ 2 W | TokenImage$ W 1 1 Spirit ISD | TokenAmount$ 2 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+A:SP$ Token | Cost$ 2 W | TokenImage$ w 1 1 spirit ISD | TokenAmount$ 2 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_haunting.jpg
 Oracle:Put two 1/1 white Spirit creature tokens with flying onto the battlefield.

@@ -5,6 +5,6 @@ PT:6/6
 K:Flying
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, target opponent puts three 2/2 white Knight creature tokens with first strike onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Knight | TokenImage$ W 2 2 Knight First Strike | TokenTypes$ Creature,Knight | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ First Strike
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Knight | TokenImage$ w 2 2 knight first strike | TokenTypes$ Creature,Knight | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_dragon.jpg
 Oracle:Flying, haste\nWhen Hunted Dragon enters the battlefield, target opponent puts three 2/2 white Knight creature tokens with first strike onto the battlefield.

@@ -4,7 +4,7 @@ Types:Plane Phyrexia
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ FourthSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a nonblack creature.
 SVar:FourthSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.nonBlack
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, put a 2/2 black zombie token onto the battlefield.
-SVar:RolledChaos:AB$ Token | Cost$ 0 | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1
+SVar:RolledChaos:AB$ Token | Cost$ 0 | TokenImage$ b 2 2 zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_fourth_sphere.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:At the beginning of your upkeep, sacrifice a nonblack creature.\nWhenever you roll {CHAOS}, put a 2/2 black Zombie creature token onto the battlefield.

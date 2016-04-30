@@ -1,7 +1,7 @@
 Name:Pegasus Refuge
 ManaCost:3 W
 Types:Enchantment
-A:AB$ Token | Cost$ 2 Discard<1/Card> | TokenImage$ W 1 1 Pegasus Flying | TokenAmount$ 1 | TokenName$ Pegasus | TokenTypes$ Creature,Pegasus | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put a 1/1 white Pegasus creature token with flying onto the battlefield.
+A:AB$ Token | Cost$ 2 Discard<1/Card> | TokenImage$ w 1 1 pegasus flying | TokenAmount$ 1 | TokenName$ Pegasus | TokenTypes$ Creature,Pegasus | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put a 1/1 white Pegasus creature token with flying onto the battlefield.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pegasus_refuge.jpg
 Oracle:{2}, Discard a card: Put a 1/1 white Pegasus creature token with flying onto the battlefield.

@@ -2,7 +2,7 @@ Name:Empty the Pits
 ManaCost:X X B B B B
 Types:Instant
 K:Delve
-A:SP$ Token | Cost$ X X B B B B | TokenImage$ B 2 2 Zombie KTK | TokenAmount$ X | References$ X | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black |  TokenTapped$ True | SpellDescription$ Put X 2/2 black Zombie creature tokens onto the battlefield tapped.
+A:SP$ Token | Cost$ X X B B B B | TokenImage$ b 2 2 zombie KTK | TokenAmount$ X | References$ X | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black |  TokenTapped$ True | SpellDescription$ Put X 2/2 black Zombie creature tokens onto the battlefield tapped.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_pits.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nPut X 2/2 black Zombie creature tokens onto the battlefield tapped.

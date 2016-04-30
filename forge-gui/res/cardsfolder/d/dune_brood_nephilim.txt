@@ -3,7 +3,7 @@ ManaCost:B R G W
 Types:Creature Nephilim
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a 1/1 colorless Sand creature token onto the battlefield for each land you control.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ C 1 1 Sand | TokenName$ Sand | TokenColors$ Colorless | TokenTypes$ Creature,Sand | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ X | References$ X
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ c 1 1 sand | TokenName$ Sand | TokenColors$ Colorless | TokenTypes$ Creature,Sand | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ X | References$ X
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dune_brood_nephilim.jpg
 Oracle:Whenever Dune-Brood Nephilim deals combat damage to a player, put a 1/1 colorless Sand creature token onto the battlefield for each land you control.

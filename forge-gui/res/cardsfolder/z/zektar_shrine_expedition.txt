@@ -1,7 +1,7 @@
 Name:Zektar Shrine Expedition
 ManaCost:1 R
 Types:Enchantment
-A:AB$ Token | Cost$ SubCounter<3/QUEST> Sac<1/CARDNAME> | TokenAmount$ 1 | TokenImage$ R 7 1 Elemental | TokenName$ Elemental | TokenColors$ Red | TokenTypes$ Creature,Elemental | TokenPower$ 7 | TokenToughness$ 1 | TokenKeywords$ Haste<>Trample | TokenSVars$ ZektarEOT | RememberTokens$ True | SubAbility$ DelTrig | TokenOwner$ You | TokenAmount$ 1 | SpellDescription$ Put a 7/1 red Elemental creature token with trample and haste onto the battlefield. Exile it at the beginning of the next end step.
+A:AB$ Token | Cost$ SubCounter<3/QUEST> Sac<1/CARDNAME> | TokenAmount$ 1 | TokenImage$ r 7 1 elemental | TokenName$ Elemental | TokenColors$ Red | TokenTypes$ Creature,Elemental | TokenPower$ 7 | TokenToughness$ 1 | TokenKeywords$ Haste<>Trample | TokenSVars$ ZektarEOT | RememberTokens$ True | SubAbility$ DelTrig | TokenOwner$ You | TokenAmount$ 1 | SpellDescription$ Put a 7/1 red Elemental creature token with trample and haste onto the battlefield. Exile it at the beginning of the next end step.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ CARDNAME - Exile the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

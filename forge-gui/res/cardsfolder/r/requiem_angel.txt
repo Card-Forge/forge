@@ -4,6 +4,6 @@ Types:Creature Angel
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonSpirit+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another non-Spirit creature you control dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ W 1 1 Spirit ISD | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ w 1 1 spirit ISD | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/requiem_angel.jpg
 Oracle:Flying\nWhenever another non-Spirit creature you control dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
