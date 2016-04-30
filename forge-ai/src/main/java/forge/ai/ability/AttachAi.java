@@ -873,7 +873,20 @@ public class AttachAi extends SpellAbilityAi {
             	if (!betterList.isEmpty()) {
             		return ComputerUtilCard.getBestAI(betterList);
             	}
-                return ComputerUtilCard.getBestAI(magnetList);
+
+            	// Magnet List should not be attached when they are useless
+            	betterList = CardLists.filter(magnetList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return !isUselessCreature(ai, c);
+                    }
+                });
+
+            	if (!betterList.isEmpty()) {
+            		return ComputerUtilCard.getBestAI(betterList);
+            	}
+
+                //return ComputerUtilCard.getBestAI(magnetList);
             }
         }
 
@@ -970,13 +983,24 @@ public class AttachAi extends SpellAbilityAi {
         // Don't pump cards that will die.
         prefList = ComputerUtil.getSafeTargets(ai, sa, prefList);
 
-        if (attachSource.isAura() && !attachSource.getName().equals("Daybreak Coronet")) {
-            // TODO For Auras like Rancor, that aren't as likely to lead to
-            // card disadvantage, this check should be skipped
+        if (attachSource.isAura()) {
+        	if (!attachSource.getName().equals("Daybreak Coronet")) {
+	            // TODO For Auras like Rancor, that aren't as likely to lead to
+	            // card disadvantage, this check should be skipped
+	            prefList = CardLists.filter(prefList, new Predicate<Card>() {
+	                @Override
+	                public boolean apply(final Card c) {
+	                    return !c.isEnchanted() || c.hasKeyword("Hexproof");
+	                }
+	            });
+        	}
+
+        	// should not attach Auras to creatures that does leave the play
+        	// TODO also should not attach Auras to creatures cast with Dash
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return !c.isEnchanted() || c.hasKeyword("Hexproof");
+                    return !c.hasSVar("EndOfTurnLeavePlay");
                 }
             });
         }
