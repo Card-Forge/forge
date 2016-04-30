@@ -41,8 +41,12 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         if (amount != 1) {
             sb.append("s");
         }
-        sb.append(" from ");
-        sb.append(source).append(" to ").append(tgtCards.get(0));
+        sb.append(" from ").append(source).append(" to ");
+        try{
+            sb.append(tgtCards.get(0));
+        } catch(final IndexOutOfBoundsException exception) {
+            System.out.println(String.format("Somehow this is missing targets? %s", source.toString()));
+        }
 
         sb.append(".");
         return sb.toString();
