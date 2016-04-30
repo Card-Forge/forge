@@ -774,6 +774,7 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         game.getTriggerHandler().clearThisTurnDelayedTrigger();
+        game.getTriggerHandler().resetTurnTriggerState();
 
         Player next = getNextActivePlayer();
 

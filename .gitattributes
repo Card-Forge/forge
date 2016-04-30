@@ -4046,6 +4046,7 @@ forge-gui/res/cardsfolder/c/craven_knight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/craw_giant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/craw_wurm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/crawling_filth.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/crawling_sensation.txt -text
 forge-gui/res/cardsfolder/c/crawlspace.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/crazed_armodon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/crazed_firecat.txt -text

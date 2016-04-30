@@ -336,6 +336,15 @@ public class TriggerHandler {
         waitingTriggers.clear();
     }
 
+    public void resetTurnTriggerState()    {
+        for(final Trigger t : activeTriggers) {
+            t.resetTurnState();
+        }
+        for (final Trigger t : delayedTriggers) {
+            t.resetTurnState();
+        }
+    }
+
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerType mode, 
             final Map<String, Object> runParams, final List<Trigger> delayedTriggersWorkingCopy ) {
 
@@ -555,6 +564,8 @@ public class TriggerHandler {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         regtrig.setTriggeredSA(wrapperAbility);
+
+        regtrig.triggerRun();
 
         if (triggerParams.containsKey("OneOff")) {
             if (regtrig.getHostCard().isImmutable()) {

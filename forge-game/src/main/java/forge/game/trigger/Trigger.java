@@ -29,10 +29,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -79,6 +76,10 @@ public abstract class Trigger extends TriggerReplacementBase {
     private HashMap<String, Object> storedTriggeredObjects = null;
     
     private List<Object> triggerRemembered = new ArrayList<Object>();
+
+    // number of times this trigger was activated this this turn
+    // used to handle once-per-turn triggers like Crawling Sensation
+    private int numberTurnActivations = 0;
 
     /**
      * <p>
@@ -448,4 +449,19 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     //public String getImportantStackObjects(SpellAbility sa) { return ""; };
     abstract public String getImportantStackObjects(SpellAbility sa);
+
+    public int getActivationsThisTurn() {
+        return this.numberTurnActivations;
+    }
+
+    public void triggerRun()
+    {
+        this.numberTurnActivations++;
+    }
+
+    // Resets the state stored each turn for per-turn and per-instance restriction
+    public void resetTurnState()
+    {
+        this.numberTurnActivations = 0;
+    }
 }

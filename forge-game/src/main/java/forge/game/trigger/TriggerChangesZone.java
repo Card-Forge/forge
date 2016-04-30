@@ -141,6 +141,11 @@ public class TriggerChangesZone extends Trigger {
             return si == null || si.attemptOncePerEffectTrigger(this.getHostCard());
         }
 
+        /* this trigger can only be activated once per turn, verify it hasn't already run */
+        if (this.mapParams.containsKey("ActivationLimit")) {
+            return this.getActivationsThisTurn() < Integer.parseInt(this.mapParams.get("ActivationLimit"));
+        }
+
         return true;
     }
 
