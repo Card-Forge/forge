@@ -1,7 +1,7 @@
 Name:Devils' Playground
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Token | Cost$ 4 R R | TokenAmount$ 4 | TokenName$ Devil | TokenTypes$ Creature,Devil | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenTriggers$ DiesTrigger | TokenSVars$ DevilTrigDamage | SpellDescription$ Put two 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to target creature or player."
+A:SP$ Token | Cost$ 4 R R | TokenAmount$ 4 | TokenName$ Devil | TokenTypes$ Creature,Devil | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenTriggers$ DiesTrigger | TokenSVars$ DevilTrigDamage | SpellDescription$ Put four 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to target creature or player."
 SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DevilTrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, it deals 1 damage to target creature or player.
 SVar:DevilTrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devils_playground.jpg
