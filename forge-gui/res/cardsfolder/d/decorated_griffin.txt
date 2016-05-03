@@ -3,6 +3,6 @@ ManaCost:4 W
 Types:Creature Griffin
 PT:2/3
 K:Flying
-A:AB$ PreventDamage | Cost$ 1 W | Defined$ You | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to you this turn.
+A:AB$ PreventDamage | Cost$ 1 W | Defined$ You | Amount$ 1 | CombatDamage$ True | SpellDescription$ Prevent the next 1 combat damage that would be dealt to you this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decorated_griffin.jpg
 Oracle:Flying\n{1}{W}: Prevent the next 1 combat damage that would be dealt to you this turn.
