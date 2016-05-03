@@ -761,6 +761,6 @@ public class Game {
     public void clearCaches() {
         spabCache.clear();
         cardCache.clear();
-        playerCache.clear();
+        //playerCache.clear();
     }
 }
