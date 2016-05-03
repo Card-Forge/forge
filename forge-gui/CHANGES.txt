@@ -1,4 +1,4 @@
-Forge Beta: 04-13-2016 ver 1.5.52
+Forge Beta: 05-02-2016 ver 1.5.52
 
 
 1???? cards in total.
@@ -10,7 +10,6 @@ Release Notes
 
 - Shadows over Innistrad -
 This release includes many fixes for the Shadows over Innistrad set.
-
 
 - Download without Sleep -
 Made it so computers should no longer enter sleep mode while downloading stuff from within Forge.
