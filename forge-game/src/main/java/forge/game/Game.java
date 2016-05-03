@@ -17,16 +17,7 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -46,6 +37,7 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.event.Event;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
@@ -64,16 +56,12 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.MagicStack;
-import forge.game.zone.PlayerZone;
-import forge.game.zone.Zone;
-import forge.game.zone.ZoneType;
+import forge.game.zone.*;
 import forge.trackable.Tracker;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.Visitor;
-import java.util.HashMap;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -91,6 +79,7 @@ public class Game {
     public final Untap untap;
     public final Upkeep upkeep;
     public final MagicStack stack;
+    public final CostPaymentStack costPaymentStack = new CostPaymentStack();
     private final PhaseHandler phaseHandler;
     private final StaticEffects staticEffects = new StaticEffects();
     private final TriggerHandler triggerHandler = new TriggerHandler(this);

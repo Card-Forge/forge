@@ -20,11 +20,15 @@ package forge.game.trigger;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.cost.CostPayment;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.util.Expressions;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -35,6 +39,10 @@ import java.util.Map;
  * @version $Id$
  */
 public class TriggerChangesZone extends Trigger {
+
+    // stores the costs when this trigger has already been run (to prevent multiple card draw triggers for single
+    // discard event of multiple cards on the Gitrog Moster for instance)
+    private Set<Integer> processedCostEffects = new HashSet<Integer>();
 
     /**
      * <p>
@@ -131,14 +139,33 @@ public class TriggerChangesZone extends Trigger {
 
         if (this.mapParams.containsKey("OncePerEffect")) {
             // A "once per effect" trigger will only trigger once regardless of how many things the effect caused
-            // to change zones. The SpellAbilityStackInstance keeps track of which host cards with "OncePerEffect"
-            // triggers already fired as a result of that effect.
-            //
-            // TODO This isn't quite ideal, since it really should be keeping track of the SpellAbility of the host
-            // card, rather than keeping track of the host card itself - but it's good enough for now - since there are
-            // no cards with multiple different OncePerEffect triggers.
-            SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams2.get("SpellAbilityStackInstance");
-            return si == null || si.attemptOncePerEffectTrigger(this.getHostCard());
+            // to change zones.
+
+            // check if this is triggered by a cost payment & only fire if it isn't a duplicate trigger
+            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams2.get("IndividualCostPaymentInstance");
+            if (currentPayment != null) {  // only if there is an active cost
+
+                // each cost in a payment can trigger the effect for example Sinsiter Concoction has five costs:
+                // {B}, Pay one life, Mill a card, Discard a Card, and sacrifice Sinister Concoction
+                // If you mill a land and discard a land, The Gitrog Moster should trigger twice since each of these
+                // costs is an independent action
+                // however, due to forge implementation multiple triggers may be created for a single cost. For example,
+                // Zombie Infestation has a cost of "Discard two cards".  If you discard two lands, The Gitrog Moster
+                // should only trigger once because discarding two lands is a single action.
+                return this.processedCostEffects.add(currentPayment.getId());
+            }
+            // otherwise use the stack ability
+            else {
+                // The SpellAbilityStackInstance keeps track of which host cards with "OncePerEffect"
+                // triggers already fired as a result of that effect.
+                // TODO This isn't quite ideal, since it really should be keeping track of the SpellAbility of the host
+                // card, rather than keeping track of the host card itself - but it's good enough for now - since there
+                // are no cards with multiple different OncePerEffect triggers.
+                SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams2.get("SpellAbilityStackInstance");
+
+                // si == null means the stack is empty
+                return si == null || si.attemptOncePerEffectTrigger(this.getHostCard());
+            }
         }
 
         /* this trigger can only be activated once per turn, verify it hasn't already run */
@@ -160,5 +187,12 @@ public class TriggerChangesZone extends Trigger {
         StringBuilder sb = new StringBuilder();
         sb.append("Zone Changer: ").append(sa.getTriggeringObject("Card"));
         return sb.toString();
+    }
+
+    @Override
+    // Resets the state stored each turn for per-instance restriction
+    public void resetTurnState() {
+        super.resetTurnState();
+        this.processedCostEffects.clear();
     }
 }

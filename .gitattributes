@@ -519,6 +519,7 @@ forge-game/src/main/java/forge/game/cost/CostUnattach.java -text
 forge-game/src/main/java/forge/game/cost/CostUntap.java -text
 forge-game/src/main/java/forge/game/cost/CostUntapType.java -text
 forge-game/src/main/java/forge/game/cost/ICostVisitor.java -text
+forge-game/src/main/java/forge/game/cost/IndividualCostPaymentInstance.java -text
 forge-game/src/main/java/forge/game/cost/PaymentDecision.java -text
 forge-game/src/main/java/forge/game/cost/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/event/Event.java -text
@@ -719,6 +720,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerVote.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerWaiting.java -text
 forge-game/src/main/java/forge/game/trigger/WrappedAbility.java -text
 forge-game/src/main/java/forge/game/trigger/package-info.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/zone/CostPaymentStack.java -text
 forge-game/src/main/java/forge/game/zone/MagicStack.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/zone/PlayerZone.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/zone/PlayerZoneBattlefield.java svneol=native#text/plain
