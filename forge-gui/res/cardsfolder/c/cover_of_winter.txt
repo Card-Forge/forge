@@ -1,0 +1,9 @@
+Name:Cover of Winter
+ManaCost:2 W
+Types:Snow Enchantment
+K:Cumulative upkeep:S
+S:Mode$ PreventDamage | Target$ You,Creature.YouCtrl | Source$ Creature | CombatDamage$ True | Amount$ X | References$ X
+A:AB$ PutCounter | Cost$ S | CounterType$ AGE | CounterNum$ 1 | SpellDescription$ Put a age counter on CARDNAME.
+SVar:X:Count$CardCounters.AGE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_winter.jpg
+Oracle:Cumulative upkeep {S} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it. {S} can be paid with one mana from a snow permanent.)\nIf a creature would deal combat damage to you and/or one or more creatures you control, prevent X of that damage, where X is the number of age counters on Cover of Winter.\n{S}: Put an age counter on Cover of Winter.

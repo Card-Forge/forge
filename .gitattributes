@@ -4007,6 +4007,7 @@ forge-gui/res/cardsfolder/c/courtly_provocateur.txt -text
 forge-gui/res/cardsfolder/c/covenant_of_blood.txt -text
 forge-gui/res/cardsfolder/c/covenant_of_minds.txt -text
 forge-gui/res/cardsfolder/c/cover_of_darkness.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/cover_of_winter.txt -text
 forge-gui/res/cardsfolder/c/covert_operative.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/covetous_dragon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cowardice.txt svneol=native#text/plain
