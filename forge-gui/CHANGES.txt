@@ -9,7 +9,8 @@ Release Notes
 -------------
 
 - Shadows over Innistrad -
-This release includes the recently released Shadows over Innistrad set. There's still a few bugs left, so bear with us until the next release or so while we fix them. In the meantime, enjoy the rest of the set!
+This release includes many fixes for the Shadows over Innistrad set.
+
 
 - Download without Sleep -
 Made it so computers should no longer enter sleep mode while downloading stuff from within Forge.
