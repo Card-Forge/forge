@@ -58,8 +58,11 @@ public class ChooseCardAi extends SpellAbilityAi {
                 if (choices.size() < 2) {
                     return false;
                 }
-            } else if (logic.equals("Clone")) {
-                choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
+            } else if (logic.equals("Clone") || logic.equals("Vesuva")) {
+                final String filter = logic.equals("Clone") ? "Permanent.YouDontCtrl,Permanent.nonLegendary" :
+                        "Permanent.YouDontCtrl+notnamedVesuva,Permanent.nonLegendary+notnamedVesuva";
+
+                choices = CardLists.getValidCards(choices, filter, host.getController(), host);
                 if (choices.isEmpty()) {
                     return false;
                 }
@@ -148,11 +151,17 @@ public class ChooseCardAi extends SpellAbilityAi {
                 options = CardLists.filter(options, Presets.UNTAPPED);
             }
             choice = ComputerUtilCard.getBestCreatureAI(options);
-        } else if (logic.equals("Clone")) {
-            if (!CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host).isEmpty()) {
-                options = CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
+        } else if (logic.equals("Clone") || logic.equals("Vesuva")) {
+            final String filter = logic.equals("Clone") ? "Permanent.YouDontCtrl,Permanent.nonLegendary" :
+                    "Permanent.YouDontCtrl+notnamedVesuva,Permanent.nonLegendary+notnamedVesuva";
+
+            if (!CardLists.getValidCards(options, filter, host.getController(), host).isEmpty()) {
+                options = CardLists.getValidCards(options, filter, host.getController(), host);
             }
             choice = ComputerUtilCard.getBestAI(options);
+            if (logic.equals("Vesuva") && "Vesuva".equals(choice.getName())) {
+                choice = null;
+            }
         } else if ("RandomNonLand".equals(logic)) {
             options = CardLists.getValidCards(options, "Card.nonLand", host.getController(), host);
             choice = Aggregates.random(options);

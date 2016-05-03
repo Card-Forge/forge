@@ -4,7 +4,6 @@ Types:Land
 K:ETBReplacement:Copy:ChooseLand:Optional
 SVar:ChooseLand:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Land.Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield tapped as a copy of any land on the battlefield.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | IntoPlayTapped$ True
-SVar:NeedsToPlayVar:Y GE1
-SVar:Y:Count$Valid Land
+SVar:NeedsToPlay:Land.YouDontCtrl+notnamedVesuva,Land.YouCtrl+nonLegendary+notnamedVesuva
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vesuva.jpg
 Oracle:You may have Vesuva enter the battlefield tapped as a copy of any land on the battlefield.
