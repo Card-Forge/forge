@@ -6,5 +6,6 @@ S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Des
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Islands you control.
 SVar:X:Count$Valid Island.YouCtrl
 SVar:BuffedBy:Island
+SVar:NeedsToPlayVar:X GE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serpent_of_the_endless_sea.jpg
 Oracle:Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.\nSerpent of the Endless Sea can't attack unless defending player controls an Island.

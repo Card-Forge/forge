@@ -6,5 +6,6 @@ K:Flying
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Swamps you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp
+SVar:NeedsToPlayVar:X GE4
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83186.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nNightmare's power and toughness are each equal to the number of Swamps you control.

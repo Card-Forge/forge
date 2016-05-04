@@ -7,5 +7,6 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 A:AB$ Draw | Cost$ 4 Return<1/Land> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:X GE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soramaro_first_to_dream.jpg
 Oracle:Flying\nSoramaro, First to Dream's power and toughness are each equal to the number of cards in your hand.\n{4}, Return a land you control to its owner's hand: Draw a card.

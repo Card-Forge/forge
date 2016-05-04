@@ -8,6 +8,7 @@ SVar:X:Count$Valid Land.YouCtrl
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land | ChangeNum$ 1 | ShuffleNonMandatory$ True 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a land card, put it onto the battlefield tapped, then shuffle your library.
 SVar:BuffedBy:Land
+SVar:NeedsToPlayVar:X GE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_hydra.jpg
 Oracle:Reach\nUlvenwald Hydra's power and toughness are each equal to the number of lands you control.\nWhen Ulvenwald Hydra enters the battlefield, you may search your library for a land card, put it onto the battlefield tapped, then shuffle your library.
 

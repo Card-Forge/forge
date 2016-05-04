@@ -6,5 +6,6 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 A:AB$ Pump | Cost$ 1 R G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush - | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ X | NumDef$ X | References$ X | SpellDescription$ Target attacking creature gets +X/+X until end of turn, where X is the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 SVar:BuffedBy:Land
+SVar:NeedsToPlayVar:X GE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rubblehulk.jpg
 Oracle:Rubblehulk's power and toughness are each equal to the number of lands you control.\nBloodrush - {1}{R}{G}, Discard Rubblehulk: Target attacking creature gets +X/+X until end of turn, where X is the number of lands you control.

@@ -8,7 +8,8 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 
 T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
-SVar:RemAIDeck:True 
+SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:X GE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_ancient_lore.jpg
 AlternateMode:DoubleFaced
 Oracle:Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.\nWhen Sage of Ancient Lore enters the battlefield, draw a card.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Sage of Ancient Lore.

@@ -7,5 +7,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | CheckSVar$ X 
 T:Mode$ DamageDone | ValidSource$ Card.Self | CheckSVar$ X | SVarCompare$ GE7 | TriggerZones$ Battlefield | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME deals damage, if you have seven or more cards in hand, you gain 7 life.
 SVar:TrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 7
 SVar:X:Count$InYourHand
+SVar:NeedsToPlayVar:X GE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiyomaro_first_to_stand.jpg
 Oracle:Kiyomaro, First to Stand's power and toughness are each equal to the number of cards in your hand.\nAs long as you have four or more cards in hand, Kiyomaro has vigilance.\nWhenever Kiyomaro deals damage, if you have seven or more cards in hand, you gain 7 life.

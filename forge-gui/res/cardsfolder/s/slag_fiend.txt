@@ -5,5 +5,6 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifact cards in all graveyards.
 SVar:X:Count$TypeInAllYards.Artifact
 SVar:RemRandomDeck:True
+SVar:NeedsToPlayVar:X GE1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slag_fiend.jpg
 Oracle:Slag Fiend's power and toughness are each equal to the number of artifact cards in all graveyards.

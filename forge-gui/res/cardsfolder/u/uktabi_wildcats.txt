@@ -6,5 +6,6 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Forest.YouCtrl
 A:AB$ Regenerate | Cost$ G Sac<1/Forest> | SpellDescription$ Regenerate CARDNAME.
 SVar:BuffedBy:Forest
+SVar:NeedsToPlayVar:X GE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_wildcats.jpg
 Oracle:Uktabi Wildcats's power and toughness are each equal to the number of Forests you control.\n{G}, Sacrifice a Forest: Regenerate Uktabi Wildcats.

@@ -5,6 +5,7 @@ PT:*/*
 K:Defender
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of snow lands you control.
 SVar:X:Count$Valid Land.Snow+YouCtrl
+SVar:NeedsToPlayVar:X GE2
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drift_of_the_dead.jpg
 Oracle:Defender (This creature can't attack.)\nDrift of the Dead's power and toughness are each equal to the number of snow lands you control.
