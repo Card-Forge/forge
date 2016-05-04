@@ -7,6 +7,8 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChoose:AB$ Pump | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Choose a opponent | IsCurse$ True | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | AttachedToPlayer$ ParentTarget | Transformed$ True | GainControl$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accursed_witch.jpg
+SVar:SacMe:4
+SVar:MustAttack:True
 AlternateMode:DoubleFaced
 Oracle:Spells your opponents cast that target Accursed Witch cost 1 less to cast.\nWhen Accursed Witch dies, return it to the battlefield transformed under your control attached to target opponent.
 
