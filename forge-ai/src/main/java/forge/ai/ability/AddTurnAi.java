@@ -57,6 +57,8 @@ public class AddTurnAi extends SpellAbilityAi {
                 } else {
                     return false;
                 }
+            } else {
+                return false;
             }
         } else {
             final List<Player> tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
