@@ -173,10 +173,16 @@ public class DestroyAi extends SpellAbilityAi {
                         }
                     }
                     if ("Pongify".equals(logic)) {
-                        Card token = TokenAi.spawnToken(ai.getOpponent(), sa.getSubAbility());
-                        if (source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) ||    //prevent surprise combatant
-                                ComputerUtilCard.evaluateCreature(choice) < 1.5 * ComputerUtilCard.evaluateCreature(token)) {
-                            return false;
+                        final Card token = TokenAi.spawnToken(ai.getOpponent(), sa.getSubAbility());
+                        if (token == null) {
+                            return true;    // becomes Terminate
+                        } else {
+                            if (source.getGame().getPhaseHandler().getPhase()
+                                    .isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) || // prevent surprise combatant
+                                    ComputerUtilCard.evaluateCreature(choice) < 1.5
+                                            * ComputerUtilCard.evaluateCreature(token)) {
+                                return false;
+                            }
                         }
                     }
                 }

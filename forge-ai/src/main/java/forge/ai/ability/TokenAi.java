@@ -11,6 +11,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -22,11 +23,13 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
@@ -114,7 +117,7 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
-        boolean sacOnStack = false; //check if a negative sacrifice effect is on stack
+        boolean sacOnStack = false; // check if a negative sacrifice effect is on stack
         if (!game.getStack().isEmpty()) {
             SpellAbility topStack = game.getStack().peekAbility();
             if (topStack.getApi() == ApiType.Sacrifice) {
@@ -122,20 +125,26 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
         
-        boolean pwAbility = sa.getRestrictions().isPwAbility();
-        if (pwAbility) {
-            // Planeswalker token ability with loyalty costs should be played in Main1 or it might
-            // never be used due to other positive abilities. AI is kept from spamming them by the
-            // loyalty cost of each usage. Zero/loyalty gain token abilities can be evaluated as
-            // per normal.
-            boolean hasCost = false;
+        // Planeswalker-related flags
+        boolean pwMinus = false;
+        boolean pwPlus = false;
+        if (sa.getRestrictions().isPwAbility()) {
+            /*
+             * Planeswalker token ability with loyalty costs should be played in Main1 or it might
+             * never be used due to other positive abilities. AI is kept from spamming them by the
+             * loyalty cost of each usage. Zero/loyalty gain token abilities can be evaluated as
+             * per normal.
+             */
             for (CostPart c : sa.getPayCosts().getCostParts()) {
                 if (c instanceof CostRemoveCounter) {
-                    hasCost = true;
+                    pwMinus = true;
+                    break;
+                }
+                if (c instanceof CostPutCounter && c.convertAmount() > 0) {
+                    pwPlus = true;
                     break;
                 }
             }
-            pwAbility = hasCost;
         }
         
         PhaseHandler ph = game.getPhaseHandler();
@@ -150,13 +159,13 @@ public class TokenAi extends SpellAbilityAi {
                     buff = true;
                 }
             }
-            if (!buff && !sacOnStack && !pwAbility) {
+            if (!buff && !sacOnStack && !pwMinus) {
                 return false;
             }
         }
         if ((ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn")
-                && !SpellAbilityAi.isSorcerySpeed(sa) && !haste && !sacOnStack && !pwAbility) {
+                && !SpellAbilityAi.isSorcerySpeed(sa) && !haste && !sacOnStack && !pwMinus) {
             return false;
         }
         if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || game.getPhaseHandler().isPlayerTurn(opp))
@@ -224,32 +233,6 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
-        //interrupt sacrifice effect
-        if (sacOnStack) {
-            final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
-            SpellAbility topStack = game.getStack().peekAbility();
-            final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
-            String num = sa.getParam("Amount");
-            num = (num == null) ? "1" : num;
-            final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
-            CardCollection list =
-                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), opp, topStack.getHostCard(), sa);
-            list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
-            if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) { //only care about saving single creature for now
-                ComputerUtilCard.sortByEvaluateCreature(list);
-                Card token = spawnToken(ai, sa);
-                if (token != null) {
-                    list.add(token);
-                    list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard(), sa);
-                    list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
-                    if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
-                            && list.contains(token)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        
         if (this.tokenAmount.equals("X") || (this.tokenPower != null && this.tokenPower.equals("X")) || (this.tokenToughness != null && this.tokenToughness.equals("X"))) {
             int x = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
             if (source.getSVar("X").equals("Count$Converge")) {
@@ -264,7 +247,40 @@ public class TokenAi extends SpellAbilityAi {
                 return false;
             }
         }
-
+        
+        final Card token = spawnToken(ai, sa);
+        if (token == null) {
+            final AbilitySub sub = sa.getSubAbility();
+            if (pwPlus || (sub != null && SpellApiToAi.Converter.get(sub.getApi()).chkAIDrawback(sub, ai))) {
+                return true; // planeswalker plus ability or sub-ability is useful
+            } else {
+                return false;   // no token created
+            }
+        }
+        
+        // interrupt sacrifice effect
+        if (sacOnStack) {
+            final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
+            SpellAbility topStack = game.getStack().peekAbility();
+            final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
+            String num = sa.getParam("Amount");
+            num = (num == null) ? "1" : num;
+            final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
+            CardCollection list =
+                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), opp, topStack.getHostCard(), sa);
+            list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+            if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) { // only care about saving single creature for now
+                ComputerUtilCard.sortByEvaluateCreature(list);
+                list.add(token);
+                list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard(), sa);
+                list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+                if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
+                        && list.contains(token)) {
+                    return true;
+                }
+            }
+        }
+        
         if (SpellAbilityAi.playReusable(ai, sa)) {
             return true;
         }
@@ -318,13 +334,12 @@ public class TokenAi extends SpellAbilityAi {
      * Create the token as a Card object.
      * @param ai owner of the new token
      * @param sa Token SpellAbility
-     * @return token creature
+     * @return token creature created by ability
      */
     public static Card spawnToken(Player ai, SpellAbility sa) {
         final Card host = sa.getHostCard();
 
         String[] tokenKeywords = sa.hasParam("TokenKeywords") ? sa.getParam("TokenKeywords").split("<>") : new String[0];
-        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
         String tokenPower = sa.getParam("TokenPower");
         String tokenToughness = sa.getParam("TokenToughness");
         String tokenName = sa.getParam("TokenName");
@@ -376,10 +391,6 @@ public class TokenAi extends SpellAbilityAi {
 
         final int finalPower = AbilityUtils.calculateAmount(host, tokenPower, sa);
         final int finalToughness = AbilityUtils.calculateAmount(host, tokenToughness, sa);
-        final int finalAmount = AbilityUtils.calculateAmount(host, tokenAmount, sa);
-        if (finalAmount < 1) {
-            return null;
-        }
 
         final String[] substitutedTypes = Arrays.copyOf(tokenTypes, tokenTypes.length);
         for (int i = 0; i < substitutedTypes.length; i++) {
@@ -391,14 +402,16 @@ public class TokenAi extends SpellAbilityAi {
         final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
         final CardFactory.TokenInfo tokenInfo = new CardFactory.TokenInfo(substitutedName, imageName,
                 cost, substitutedTypes, tokenKeywords, finalPower, finalToughness);
-        final List<Card> tokens = CardFactory.makeToken(tokenInfo, ai);
+        List<Card> tokens = CardFactory.makeToken(tokenInfo, ai);
+        if (tokens.isEmpty()) {
+            return null;
+        }
+        final Card c = tokens.get(0);
         
         // Grant rule changes
         if (tokenHiddenKeywords != null) {
             for (final String s : tokenHiddenKeywords) {
-                for (final Card c : tokens) {
-                    c.addHiddenExtrinsicKeyword(s);
-                }
+                c.addHiddenExtrinsicKeyword(s);
             }
         }
 
@@ -406,28 +419,21 @@ public class TokenAi extends SpellAbilityAi {
         if (tokenAbilities != null) {
             for (final String s : tokenAbilities) {
                 final String actualAbility = host.getSVar(s);
-                for (final Card c : tokens) {
-                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
-                    c.addSpellAbility(grantedAbility);
-                    // added ability to intrinsic list so copies and clones work
-                    c.getCurrentState().addUnparsedAbility(actualAbility);
-                }
+                final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
+                c.addSpellAbility(grantedAbility);
+                // added ability to intrinsic list so copies and clones work
+                c.getCurrentState().addUnparsedAbility(actualAbility);
             }
         }
 
         // Grant triggers
         if (tokenTriggers != null) {
-
             for (final String s : tokenTriggers) {
                 final String actualTrigger = host.getSVar(s);
-
-                for (final Card c : tokens) {
-
-                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
-                    final String ability = host.getSVar(parsedTrigger.getMapParams().get("Execute"));
-                    parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
-                    c.addTrigger(parsedTrigger);
-                }
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
+                final String ability = host.getSVar(parsedTrigger.getMapParams().get("Execute"));
+                parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
+                c.addTrigger(parsedTrigger);
             }
         }
 
@@ -441,9 +447,7 @@ public class TokenAi extends SpellAbilityAi {
                     name = actualSVar.split(":")[0];
                     actualSVar = actualSVar.split(":")[1];
                 }
-                for (final Card c : tokens) {
-                    c.setSVar(name, actualSVar);
-                }
+                c.setSVar(name, actualSVar);
             }
         }
 
@@ -451,12 +455,18 @@ public class TokenAi extends SpellAbilityAi {
         if (tokenStaticAbilities != null) {
             for (final String s : tokenStaticAbilities) {
                 final String actualAbility = host.getSVar(s);
-                for (final Card c : tokens) {
-                    c.addStaticAbilityString(actualAbility);
-                    c.addStaticAbility(actualAbility);
-                }
+                c.addStaticAbilityString(actualAbility);
+                c.addStaticAbility(actualAbility);
             }
         }
-        return tokens.get(0);
+        
+        // Apply static abilities and prune dead tokens
+        final Game game = ai.getGame();
+        ComputerUtilCard.applyStaticContPT(game, c, null);
+        if (c.getNetToughness() < 1) {
+            return null;
+        } else {
+            return c;
+        }
     }
 }
