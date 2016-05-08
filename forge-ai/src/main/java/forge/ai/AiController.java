@@ -55,6 +55,7 @@ import forge.game.ability.SpellApiBased;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -1198,10 +1199,11 @@ public class AiController {
                  *  5. needs to be updated to ensure that the net toughness is
                  *  still positive after static effects.
                  */
-                ComputerUtilCard.applyStaticContPT(game, card, null);
-                if (card.getNetToughness() <= 0 && !card.hasStartOfKeyword("etbCounter") && mana.countX() == 0
-                        && !card.hasETBTrigger(false) && !card.hasETBReplacement()
-                        && !card.hasSVar("NoZeroToughnessAI")) {
+                final Card creature = CardFactory.copyCard(card, true);
+                ComputerUtilCard.applyStaticContPT(game, creature, null);
+                if (creature.getNetToughness() <= 0 && !creature.hasStartOfKeyword("etbCounter") && mana.countX() == 0
+                        && !creature.hasETBTrigger(false) && !creature.hasETBReplacement()
+                        && !creature.hasSVar("NoZeroToughnessAI")) {
                     return AiPlayDecision.WouldBecomeZeroToughnessCreature;
                 }
             }
