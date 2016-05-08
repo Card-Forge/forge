@@ -1178,11 +1178,32 @@ public class AiController {
                 }
             }
 
-            if (card.isCreature() && card.getNetToughness() <= 0 && !card.hasStartOfKeyword("etbCounter")
-                    && mana.countX() == 0 && !card.hasETBTrigger(false)
-                    && !card.hasETBReplacement()
-                    && !card.hasSVar("NoZeroToughnessAI")) {
-                return AiPlayDecision.WouldBecomeZeroToughnessCreature;
+            if (card.isCreature()) {
+                /*
+                 * Checks if the creature will have non-positive toughness
+                 * after applying static effects. Exceptions:
+                 *  1. has "etbCounter" keyword (eg. Endless One)
+                 *  2. paid non-zero for X cost
+                 *  3. has ETB trigger
+                 *  4. has ETB replacement
+                 *  5. has NoZeroToughnessAI svar (eg. Veteran Warleader)
+                 *  
+                 *  1. and 2. should probably be merged and applied on the
+                 *  card after checking for effects like Doubling Season for
+                 *  getNetToughness to see the true value.
+                 *  3. currently allows the AI to suicide creatures as long as
+                 *  it has an ETB. Maybe it should check if said ETB is
+                 *  actually worth it.
+                 *  Not sure what 4. is for.
+                 *  5. needs to be updated to ensure that the net toughness is
+                 *  still positive after static effects.
+                 */
+                ComputerUtilCard.applyStaticContPT(game, card, null);
+                if (card.getNetToughness() <= 0 && !card.hasStartOfKeyword("etbCounter") && mana.countX() == 0
+                        && !card.hasETBTrigger(false) && !card.hasETBReplacement()
+                        && !card.hasSVar("NoZeroToughnessAI")) {
+                    return AiPlayDecision.WouldBecomeZeroToughnessCreature;
+                }
             }
 
             if (!checkETBEffects(card, spell, null)) {
