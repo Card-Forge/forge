@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 PT:1/1
 K:Morph:W
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCurseNonSoldiers | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, prevent all combat damage non-Soldier creatures would deal this turn.
-SVar:TrigCurseNonSoldiers:Effect | Name$ Frontline Strategist Effect | StaticAbilities$ Curse
+SVar:TrigCurseNonSoldiers:DB$ Effect | Name$ Frontline Strategist Effect | StaticAbilities$ Curse
 SVar:Curse:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.nonSoldier | CombatDamage$ True | Description$ Prevent all combat damage non-Soldier creatures would deal this turn.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frontline_strategist.jpg
