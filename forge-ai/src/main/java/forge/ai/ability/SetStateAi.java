@@ -2,8 +2,9 @@ package forge.ai.ability;
 
 
 import forge.ai.SpellAbilityAi;
+import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
+import forge.game.card.CardState;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -12,12 +13,14 @@ public class SetStateAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // Prevent transform into legendary creature if copy already exists
         final Card source = sa.getHostCard();
-        if ("Westvale Abbey".equals(source.getName())) {
-            CardCollection list = aiPlayer.getCreaturesInPlay();
-            for (Card c : list) {
-                if (c.getName().equals("Ormendahl, Profane Prince")) {
-                    return false;
-                }
+        
+        // Check first if Legend Rule does still apply
+        if (!aiPlayer.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
+
+        	// check if the other side is legendary and if such Card already is in Play
+            final CardState other = source.getAlternateState();
+            if (other.getType().isLegendary() && aiPlayer.isCardInPlay(other.getName())) {
+            	return false;
             }
         }
         

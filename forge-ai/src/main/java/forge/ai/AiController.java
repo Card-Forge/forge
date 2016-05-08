@@ -1158,7 +1158,7 @@ public class AiController {
     
             // check on legendary
             if (card.getType().isLegendary() && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-                if (Iterables.any(player.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName()))) {
+                if (player.isCardInPlay(card.getName())) {
                     return AiPlayDecision.WouldDestroyLegend;
                 }
             }
