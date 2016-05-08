@@ -1,9 +1,11 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -37,6 +39,12 @@ public class TapAi extends TapAiBase {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
+        final Cost abCost = sa.getPayCosts();
+        if (abCost != null) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
+                return false;
+            }
+        }
 
         if (tgt == null) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);

@@ -4,4 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ ChangeZone | Cost$ 3 | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drownyard_temple.jpg
+SVar:SacMe:4
+SVar:DiscardMe:3
 Oracle:{T}: Add {C} to your mana pool.\n{3}: Return Drownyard Temple from your graveyard to the battlefield tapped.
