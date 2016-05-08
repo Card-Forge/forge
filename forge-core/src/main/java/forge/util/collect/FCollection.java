@@ -328,7 +328,7 @@ public class FCollection<T> implements List<T>, Set<T>, FCollectionView<T>, Clon
             return false;
         }
 
-        final List<T> list;
+        final List<? extends T> list;
         if (c instanceof List) {
             list = (List<T>) c;
         } else {
