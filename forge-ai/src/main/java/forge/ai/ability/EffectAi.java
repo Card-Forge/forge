@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
@@ -27,7 +28,7 @@ import java.util.Random;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= .6667;
@@ -89,6 +90,26 @@ public class EffectAi extends SpellAbilityAi {
                 		|| CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Planeswalker").isEmpty()) {
                     return false;
                 }
+                randomReturn = true;
+            } else if (logic.equals("NarsetRebound")) {
+            	// should be done in Main2, but it might broke for other cards
+            	//if (phase.getPhase().isBefore(PhaseType.MAIN2)) {
+                //    return false;
+                //}
+
+                // fetch Instant or Sorcery without Rebound and AI has reason to play this turn
+            	// only need count, not the list
+            	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return (c.isInstant() || c.isSorcery()) && !c.hasKeyword("Rebound") && ComputerUtil.hasReasonToPlayCardThisTurn(ai, c);
+                    }
+                });
+
+                if(count == 0) {
+                	return false;
+                }
+
                 randomReturn = true;
             } else if (logic.equals("Always")) {
                 randomReturn = true;

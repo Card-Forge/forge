@@ -5,12 +5,11 @@ Loyalty:6
 A:AB$ PeekAndReveal | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | AILogic$ Main2 | PeekAmount$ 1 | RevealValid$ Card.nonCreature+nonLand | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBChangeZone | SpellDescription$ Look at the top card of your library. If it's a noncreature, nonland card, you may reveal it and put it into your hand.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card.nonCreature+nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanupOne
 SVar:DBCleanupOne:DB$ Cleanup | ClearRemembered$ True
-A:AB$Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Name$ Narset Transcendent effect. | Triggers$ AddRebound | SVars$ AddReboundMain,DBCleanupTwo | SpellDescription$ When you cast your next instant or sorcery spell from your hand this turn, it gains rebound.
+A:AB$Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | AILogic$ NarsetRebound | Stackable$ False | Name$ Narset Transcendent effect. | Triggers$ AddRebound | SVars$ AddReboundMain,DBCleanupTwo | SpellDescription$ When you cast your next instant or sorcery spell from your hand this turn, it gains rebound.
 SVar:AddRebound:Mode$ SpellCast | ValidCard$ Instant.wasCastFromHand,Sorcery.wasCastFromHand | ValidActivatingPlayer$ You | OneOff$ True | Execute$ AddReboundMain | TriggerZones$ Command | TriggerDescription$ When you cast your next instant or sorcery spell from your hand this turn, it gains rebound.
 SVar:AddReboundMain:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard| KW$ Rebound | PumpZone$ Stack | SubAbility$ DBCleanupTwo
 SVar:DBCleanupTwo:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 A:AB$ Effect | Cost$ SubCounter<9/LOYALTY> | Name$ Narset Transcendent emblem | StaticAbilities$ STNarset | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Your opponents can't cast noncreature spells."
 SVar:STNarset:Mode$ CantBeCast | ValidCard$ Card.nonCreature | Caster$ Opponent | EffectZone$ Command | Description$ Your opponents can't cast noncreature spells.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narset_transcendent.jpg
-SVar:RemAIDeck:True
 Oracle:[+1] Look at the top card of your library. If it's a noncreature, nonland card, you may reveal it and put it into your hand.\n[-2] When you cast your next instant or sorcery spell from your hand this turn, it gains rebound.\n[-9] You get an emblem with "Your opponents can't cast noncreature spells."
