@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -15,6 +16,11 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 
+/**
+ * Base class for API-specific AI logic
+ * <p>
+ * The three main methods are canPlayAI(), chkAIDrawback and doTriggerAINoCost.
+ */
 public abstract class SpellAbilityAi {
 
     public final boolean canPlayAIWithSubs(final Player aiPlayer, final SpellAbility sa) {
@@ -25,8 +31,77 @@ public abstract class SpellAbilityAi {
         return subAb == null || chkDrawbackWithSubs(aiPlayer,  subAb);
     }
 
-    protected abstract boolean canPlayAI(final Player aiPlayer, final SpellAbility sa);
+    /**
+     * Handles the AI decision to play a "main" SpellAbility
+     */
+    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        final Cost cost = sa.getPayCosts();
 
+        if (source != null && !checkSpecificCardLogic(ai, sa, source.getName())) {
+            return false;
+        }
+        if (sa.hasParam("AILogic") && !checkAiLogic(ai, sa, sa.getParam("AILogic"))) {
+            return false;
+        }
+        if (cost != null && !willPayCosts(ai, sa, cost, source)) {
+            return false;
+        }
+        if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
+            return false;
+        }
+        return checkApiLogic(ai, sa);
+    }
+
+    /**
+     * Checks if the AI will play a SpellAbility from the specified card
+     */
+    protected boolean checkSpecificCardLogic(final Player ai, final SpellAbility sa, final String name) {
+        return true;
+    }
+
+    /**
+     * Checks if the AI will play a SpellAbility with the specified AiLogic
+     */
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        return true;
+    }
+
+    /**
+     * Checks if the AI is willing to pay for additional costs
+     * <p>
+     * Evaluated costs are: life, discard, sacrifice and counter-removal
+     */
+    protected boolean willPayCosts(final Player ai, final SpellAbility sa, final Cost cost, final Card source) {
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, null)) {
+            return false;
+        }
+        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source)) {
+            return false;
+        }
+        if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source)) {
+            return false;
+        }
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the AI will play a SpellAbility based on its phase restrictions
+     */
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        return true;
+    }
+    
+    /**
+     * The rest of the logic not covered by the canPlayAI template is defined here
+     */
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        return true;
+    }
+    
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtilCost.canPayCost(sa, aiPlayer) && !mandatory) {
             return false;
@@ -44,6 +119,9 @@ public abstract class SpellAbilityAi {
         return subAb == null || chkDrawbackWithSubs(aiPlayer,  subAb) || mandatory;
     }
 
+    /**
+     * Handles the AI decision to play a triggered SpellAbility
+     */
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if (canPlayAI(aiPlayer, sa)) {
             return true;
@@ -67,6 +145,9 @@ public abstract class SpellAbilityAi {
         return false;
     }
 
+    /**
+     * Handles the AI decision to play a sub-SpellAbility
+     */
     public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
         return true;
     }
