@@ -19,7 +19,7 @@ public class SetStateAi extends SpellAbilityAi {
 
         	// check if the other side is legendary and if such Card already is in Play
             final CardState other = source.getAlternateState();
-            if (other.getType().isLegendary() && aiPlayer.isCardInPlay(other.getName())) {
+            if (other != null && other.getType().isLegendary() && aiPlayer.isCardInPlay(other.getName())) {
             	return false;
             }
         }

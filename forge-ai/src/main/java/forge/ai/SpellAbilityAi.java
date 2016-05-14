@@ -64,7 +64,7 @@ public abstract class SpellAbilityAi {
      * Checks if the AI will play a SpellAbility with the specified AiLogic
      */
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        return true;
+        return !("Never".equals(aiLogic));
     }
 
     /**
@@ -204,8 +204,8 @@ public abstract class SpellAbilityAi {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param ai
-     * @param subAb
+     * @param aiPlayer
+     * @param ab
      * @return
      */
     public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {

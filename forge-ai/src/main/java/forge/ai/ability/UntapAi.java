@@ -20,12 +20,17 @@ import forge.game.zone.ZoneType;
 import java.util.List;
 
 public class UntapAi extends SpellAbilityAi {
-    @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Card source = sa.getHostCard();
-        final Cost cost = sa.getPayCosts();
+        if ("EOT".equals(sa.getParam("AILogic")) && (source.getGame().getPhaseHandler().getNextTurn() != ai
+                || !source.getGame().getPhaseHandler().getPhase().equals(PhaseType.END_OF_TURN))) {
+            return false;
+        }
 
+        return !("Never".equals(aiLogic));
+    }
+
+    protected boolean willPayCosts(final Player ai, final SpellAbility sa, final Cost cost, final Card source) {
         if (!ComputerUtilCost.checkAddM1M1CounterCost(cost, source)) {
             return false;
         }
@@ -34,17 +39,20 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
+        return true;
+    }
+
+    @Override
+    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final Card source = sa.getHostCard();
+
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-        	return false;
-        }
-        
-        if ("EOT".equals(sa.getParam("AILogic")) && (source.getGame().getPhaseHandler().getNextTurn() != ai 
-        		|| !source.getGame().getPhaseHandler().getPhase().equals(PhaseType.END_OF_TURN))) {
-        	return false;
+            return false;
         }
 
         if (tgt == null) {
-            final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (pDefined != null && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
                 return false;
             }
