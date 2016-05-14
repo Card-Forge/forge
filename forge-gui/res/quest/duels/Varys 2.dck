@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Varys 2
+Title=Varys
+Difficulty=medium
+Description=WUB Skulk Deck
+Icon=Varys.jpg
+Deck Type=constructed
+[main]
+1 Swamp|ISD
+1 Plains|ISD
+1 Island|ISD
+1 Scrubland
+1 Underground Sea
+1 Tundra
+2 Flooded Strand
+2 Polluted Delta
+2 Marsh Flats
+1 Sejiri Refuge
+1 Jwar Isle Refuge
+1 Glacial Fortress
+1 Drowned Catacomb
+1 Scoured Barrens
+1 Isolated Chapel
+1 Temple of Silence
+1 Temple of Deceit
+4 Arcane Sanctum
+4 Behind the Scenes
+1 Benevolent Unicorn
+1 Basilica Screecher
+1 Sungrace Pegasus
+4 Jhessian Thief
+4 Scroll Thief
+4 Shadowmage Infiltrator
+1 Bala Ged Scorpion
+1 Servant of Tymaret
+1 Abyssal Specter
+1 Zur the Enchanter
+1 King Macar, the Gold-Cursed
+1 Brave the Sands
+2 Meekstone
+1 Oust
+1 Condemn
+1 Chainer's Edict
+1 Go for the Throat
+1 Last Gasp
+1 Disenchant
+1 Mortify
+1 Turn Aside
+1 Esper Charm
+[sideboard]
