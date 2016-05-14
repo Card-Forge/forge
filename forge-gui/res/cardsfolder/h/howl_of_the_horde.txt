@@ -1,12 +1,11 @@
 Name:Howl of the Horde
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Effect | Cost$ 2 R | Name$ Howl of the Horde Effect 1 | Triggers$ TrigCopy | SVars$ TrigCopyMain,DBCleanup | SubAbility$ DBEffect | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy. Raid - If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.
+A:SP$ Effect | Cost$ 2 R | AILogic$ SpellCopy | Name$ Howl of the Horde Effect 1 | Triggers$ TrigCopy | SVars$ TrigCopyMain,DBCleanup | SubAbility$ DBEffect | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy. Raid - If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.
 SVar:DBEffect:DB$ Effect | Name$ Howl of the Horde Effect 2 | Triggers$ TrigCopy | SVars$ TrigCopyMain,DBCleanup | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ GE1 | References$ RaidTest
 SVar:RaidTest:Count$AttackersDeclared
 SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | OneOff$ True | Execute$ TrigCopyMain | TriggerZones$ Command | TriggerDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
 SVar:TrigCopyMain:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howl_of_the_horde.jpg
 Oracle:When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.\nRaid - If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.

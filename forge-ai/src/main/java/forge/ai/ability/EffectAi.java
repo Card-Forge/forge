@@ -28,7 +28,7 @@ import java.util.Random;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(final Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai,final SpellAbility sa) {
         final Game game = ai.getGame();
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= .6667;
@@ -91,6 +91,21 @@ public class EffectAi extends SpellAbilityAi {
                     return false;
                 }
                 randomReturn = true;
+            } else if (logic.equals("SpellCopy")) {
+            	// fetch Instant or Sorcery and AI has reason to play this turn
+            	// does not try to get itself
+            	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return (c.isInstant() || c.isSorcery()) && c != sa.getHostCard() && ComputerUtil.hasReasonToPlayCardThisTurn(ai, c);
+                    }
+                });
+
+                if(count == 0) {
+                	return false;
+                }
+
+                randomReturn = true;            	
             } else if (logic.equals("NarsetRebound")) {
             	// should be done in Main2, but it might broke for other cards
             	//if (phase.getPhase().isBefore(PhaseType.MAIN2)) {
