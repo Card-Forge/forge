@@ -1,13 +1,12 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.cost.Cost;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -18,72 +17,59 @@ import forge.game.zone.ZoneType;
 public class MillAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        if (aiLogic.equals("Main1")) {
+            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
+                    && !ComputerUtil.castSpellInMain1(ai, sa)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    @Override
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        if ("You".equals(sa.getParam("Defined")) && !SpellAbilityAi.isSorcerySpeed(sa)
+                && !ph.is(PhaseType.END_OF_TURN, ai.getOpponent())) {
+            return false;   // only self-mill at opponent EOT
+        }
+        return true;
+    }
+    
+    @Override
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        /*
+         * TODO:
+         * - logic in targetAI looks dodgy
+         * - decide whether to self-mill (eg. delirium, dredge, bad top card)
+         * - interrupt opponent's top card (eg. Brainstorm, good top card)
+         * - check for Laboratory Maniac effect (needs to check for actual
+         * effect due to possibility of "lose abilities" effect)
+         */
         final Card source = sa.getHostCard();
-        final Cost abCost = sa.getPayCosts();
-
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
-                return false;
-            }
-
-        }
-
-        if (!targetAI(ai, sa, false)) {
-            return false;
-        }
-
-        // prevent run-away activations - first time will always return true
         if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;   // prevents mill 0 infinite loop?
+        }
+        
+        if (("You".equals(sa.getParam("Defined")) || "Player".equals(sa.getParam("Defined")))
+                && ai.getCardsIn(ZoneType.Library).size() < 10) {
+            return false;   // prevent self and each player mill when library is small
+        }
+        
+        if (sa.getTargetRestrictions() != null && !targetAI(ai, sa, false)) {
             return false;
         }
 
-        if (ComputerUtil.playImmediately(ai, sa)) {
-            return true;
-        }
-
-        // Don't use mill abilities before main 2 if possible
-        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
-                && !ComputerUtil.castSpellInMain1(ai, sa)
-                && !"Main1".equals(sa.getParam("AILogic"))) {
-            return false;
-        }
-
-        // Don't tap creatures that may be able to block
-        if (ComputerUtil.waitForBlocking(sa)) {
-            return false;
-        }
-
-        if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z")) && source.getSVar("X").startsWith("Count$xPaid")) {
+        if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))
+                && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int cardsToDiscard =
-                    Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), ai.getOpponent().getCardsIn(ZoneType.Library).size());
+            final int cardsToDiscard = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai),
+                    ai.getOpponent().getCardsIn(ZoneType.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
             if (cardsToDiscard <= 0) {
                 return false;
             }
         }
-        
-        if (source.getName().equals("Tasigur, the Golden Fang")) {
-            if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai.getOpponent()) ||
-                    ai.getCardsIn(ZoneType.Library).size() < 10) {
-                return false;
-            }
-        }
-
         return true;
     }
 
