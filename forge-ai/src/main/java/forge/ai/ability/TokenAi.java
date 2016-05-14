@@ -8,7 +8,6 @@ import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
@@ -21,7 +20,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
@@ -83,57 +81,26 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Cost cost = sa.getPayCosts();
-        final Game game = ai.getGame();
-        readParameters(sa);
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        if (aiLogic.equals("Never")) {
             return false;
         }
-
-        if (sa.hasParam("AILogic")) {
-            if ("Never".equals(sa.getParam("AILogic"))) {
-                return false;
-            }
-        }
-        
-        Player opp = ai.getOpponent();
-        for (final String type : this.tokenTypes) {
-            if (type.equals("Legendary")) {
-                // Don't kill AIs Legendary tokens
-                if (ai.isCardInPlay(this.tokenName)) {
-                    return false;
-                }
-            }
-        }
-
-        boolean haste = false;
-        boolean oneShot = sa.getSubAbility() != null
-                && sa.getSubAbility().getApi() == ApiType.DelayedTrigger;
-        for (final String kw : this.tokenKeywords) {
-            if (kw.equals("Haste")) {
-                haste = true;
-            }
-        }
-
-        boolean sacOnStack = false; // check if a negative sacrifice effect is on stack
-        if (!game.getStack().isEmpty()) {
-            SpellAbility topStack = game.getStack().peekAbility();
-            if (topStack.getApi() == ApiType.Sacrifice) {
-                sacOnStack = true;
-            }
-        }
-        
+        return true;
+    }
+    
+    @Override
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        readParameters(sa); // remember to call this somewhere!
+        final Card source = sa.getHostCard();
         // Planeswalker-related flags
         boolean pwMinus = false;
         boolean pwPlus = false;
         if (sa.getRestrictions().isPwAbility()) {
             /*
-             * Planeswalker token ability with loyalty costs should be played in Main1 or it might
-             * never be used due to other positive abilities. AI is kept from spamming them by the
-             * loyalty cost of each usage. Zero/loyalty gain token abilities can be evaluated as
-             * per normal.
+             * Planeswalker token ability with loyalty costs should be played in
+             * Main1 or it might never be used due to other positive abilities.
+             * AI is kept from spamming them by the loyalty cost of each usage.
+             * Zero/loyalty gain token abilities can be evaluated as per normal.
              */
             for (CostPart c : sa.getPayCosts().getCostParts()) {
                 if (c instanceof CostRemoveCounter) {
@@ -146,12 +113,48 @@ public class TokenAi extends SpellAbilityAi {
                 }
             }
         }
+
+        final Card token = spawnToken(ai, sa);
+        if (token == null) {
+            final AbilitySub sub = sa.getSubAbility();
+            if (pwPlus || (sub != null && SpellApiToAi.Converter.get(sub.getApi()).chkAIDrawback(sub, ai))) {
+                return true; // planeswalker plus ability or sub-ability is
+                             // useful
+            } else {
+                return false; // no token created
+            }
+        }
+
+        // X-cost spells
+        if (this.tokenAmount.equals("X") || (this.tokenToughness != null && this.tokenToughness.equals("X"))) {
+            int x = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
+            if (source.getSVar("X").equals("Count$Converge")) {
+                x = ComputerUtilMana.getConvergeCount(sa, ai);
+            }
+            if (source.getSVar("X").equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                x = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                source.setSVar("PayX", Integer.toString(x));
+            }
+            if (x <= 0) {
+                return false; // 0 tokens or 0 toughness token(s)
+            }
+        }
+
+        if (canInterruptSacrifice(ai, sa, token)) {
+            return true;
+        }
         
-        PhaseHandler ph = game.getPhaseHandler();
+        boolean haste = false;
+        boolean oneShot = sa.getSubAbility() != null
+                && sa.getSubAbility().getApi() == ApiType.DelayedTrigger;
+        for (final String kw : this.tokenKeywords) {
+            if (kw.equals("Haste")) {
+                haste = true;
+            }
+        }
         // Don't generate tokens without haste before main 2 if possible
-        if (ph.getPhase().isBefore(PhaseType.MAIN2)
-                && ph.isPlayerTurn(ai) && !haste
-                && !sa.hasParam("ActivationPhases")
+        if (ph.getPhase().isBefore(PhaseType.MAIN2) && ph.isPlayerTurn(ai) && !haste && !sa.hasParam("ActivationPhases")
                 && !ComputerUtil.castSpellInMain1(ai, sa)) {
             boolean buff = false;
             for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -159,21 +162,42 @@ public class TokenAi extends SpellAbilityAi {
                     buff = true;
                 }
             }
-            if (!buff && !sacOnStack && !pwMinus) {
+            if (!buff && !pwMinus) {
                 return false;
             }
         }
         if ((ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
-                && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn")
-                && !SpellAbilityAi.isSorcerySpeed(sa) && !haste && !sacOnStack && !pwMinus) {
+                && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
+                && !haste && !pwMinus) {
             return false;
         }
-        if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || game.getPhaseHandler().isPlayerTurn(opp))
-                && oneShot && !sacOnStack) {
+        if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || !ph.isPlayerTurn(ai)) && oneShot) {
             return false;
+        }
+        return true;
+    }
+    
+    @Override
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        /*
+         * readParameters() is called in checkPhaseRestrictions
+         */
+        final Card source = sa.getHostCard();
+        final Game game = ai.getGame();
+        final Player opp = ai.getOpponent();
+
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;   // prevent infinite tokens?
         }
 
-        final Card source = sa.getHostCard();
+        // Don't kill AIs Legendary tokens
+        for (final String type : this.tokenTypes) {
+            if (type.equals("Legendary")) {
+                if (ai.isCardInPlay(this.tokenName)) {
+                    return false;
+                }
+            }
+        }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -214,84 +238,41 @@ public class TokenAi extends SpellAbilityAi {
                 }
             }
         }
-
-        if (cost != null) {
-            if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, null)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, cost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
-                return false;
-            }
-        }
-
-        if (this.tokenAmount.equals("X") || (this.tokenPower != null && this.tokenPower.equals("X")) || (this.tokenToughness != null && this.tokenToughness.equals("X"))) {
-            int x = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
-            if (source.getSVar("X").equals("Count$Converge")) {
-            	x = ComputerUtilMana.getConvergeCount(sa, ai);
-            }
-            if (source.getSVar("X").equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(x));
-            }
-            if (x <= 0) {
-                return false;
-            }
-        }
-        
-        final Card token = spawnToken(ai, sa);
-        if (token == null) {
-            final AbilitySub sub = sa.getSubAbility();
-            if (pwPlus || (sub != null && SpellApiToAi.Converter.get(sub.getApi()).chkAIDrawback(sub, ai))) {
-                return true; // planeswalker plus ability or sub-ability is useful
-            } else {
-                return false;   // no token created
-            }
-        }
-        
-        // interrupt sacrifice effect
-        if (sacOnStack) {
-            final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
-            SpellAbility topStack = game.getStack().peekAbility();
-            final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
-            String num = sa.getParam("Amount");
-            num = (num == null) ? "1" : num;
-            final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
-            CardCollection list =
-                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), opp, topStack.getHostCard(), sa);
-            list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
-            if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) { // only care about saving single creature for now
-                ComputerUtilCard.sortByEvaluateCreature(list);
-                list.add(token);
-                list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard(), sa);
-                list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
-                if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
-                        && list.contains(token)) {
-                    return true;
-                }
-            }
-        }
-        
-        if (SpellAbilityAi.playReusable(ai, sa)) {
-            return true;
-        }
-        if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            return true;
-        }
-        if (sa.isAbility()) {
-            return true;
-        }
-
         return MyRandom.getRandom().nextFloat() < .8;
+    }
+
+    /**
+     * Checks if the token(s) can save a creature from a sacrifice effect
+     */
+    private boolean canInterruptSacrifice(final Player ai, final SpellAbility sa, final Card token) {
+        final Game game = ai.getGame();
+        if (game.getStack().isEmpty()) {
+            return false;   // nothing to interrupt
+        }
+        final SpellAbility topStack = game.getStack().peekAbility();
+        if (topStack.getApi() != ApiType.Sacrifice) {
+            return false;   // not sacrifice effect
+        }
+        final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
+        final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
+        String num = sa.getParam("Amount");
+        num = (num == null) ? "1" : num;
+        final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
+        CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
+                ai.getOpponent(), topStack.getHostCard(), sa);
+        list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+        // only care about saving single creature for now
+        if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) {
+            ComputerUtilCard.sortByEvaluateCreature(list);
+            list.add(token);
+            list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard(), sa);
+            list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+            if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
+                    && list.contains(token)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
