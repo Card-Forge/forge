@@ -10,7 +10,6 @@ import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -22,7 +21,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -163,78 +161,50 @@ public class ProtectAi extends SpellAbilityAi {
     } // getProtectCreatures()
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card hostCard = sa.getHostCard();
-        final Game game = ai.getGame();
-        final PhaseHandler ph = game.getPhaseHandler();
-        // if there is no target and host card isn't in play, don't activate
-        if ((sa.getTargetRestrictions() == null) && !hostCard.isInPlay()) {
-            return false;
-        }
-
-        final Cost cost = sa.getPayCosts();
-
-        // temporarily disabled until better AI
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, hostCard, 4, null)) {
-            return false;
-        }
-
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, hostCard)) {
-            return false;
-        }
-
-        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, hostCard)) {
-            return false;
-        }
-
-        if (!ComputerUtilCost.checkRemoveCounterCost(cost, hostCard)) {
-            return false;
-        }
-
-        // Phase Restrictions
-        boolean notAiMain1 = !(ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1);
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        final boolean notAiMain1 = !(ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1);
         if (SpellAbilityAi.isSorcerySpeed(sa)) {
-            //only non-instants are Floating Shield, Midvast Protector, Sejiri Steppe
-            //sorceries can only give protection in order to create an unblockable attacker
+            // sorceries can only give protection in order to create an unblockable attacker
             if (notAiMain1) {
                 return false;
             }
         } else {
+            final Game game = ai.getGame();
             if (game.getStack().isEmpty()) {
-                //try to save attacker or blocker
+                // try to save attacker or blocker
                 if (ph.getPhase() != PhaseType.COMBAT_DECLARE_BLOCKERS) {
                     if (notAiMain1) {
                         return false;
                     }
                 }
             } else {
-                //prevent repeated protects
+                // prevent repeated protects
                 if (game.getStack().peekAbility().getApi() == ApiType.Protection) {
                     return false;
                 }
             }
         }
-
+        return true;
+    }
+    
+    @Override
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-
             if (cards.size() == 0) {
                 return false;
             }
-
             /*
-             * // when this happens we need to expand AI to consider if its ok
+             * when this happens we need to expand AI to consider if its ok
              * for everything? for (Card card : cards) { // TODO if AI doesn't
              * control Card and Pump is a Curse, than maybe use?
-             * 
              * }
              */
         } else {
             return protectTgtAI(ai, sa, false);
         }
-
         return false;
-    } // protectPlayAI()
+    }
 
     private boolean protectTgtAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Game game = ai.getGame();
