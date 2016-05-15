@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -11,7 +10,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -22,25 +20,10 @@ import java.util.List;
 public class RegenerateAllAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         boolean chance = false;
-        final Cost abCost = sa.getPayCosts();
         final Game game = ai.getGame();
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, hostCard)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, abCost, hostCard)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, hostCard, 4, null)) {
-                return false;
-            }
-        }
 
         // filter AIs battlefield by what I can target
         String valid = "";
@@ -59,7 +42,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
 
         int numSaved = 0;
         if (!game.getStack().isEmpty()) {
-            final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+            final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
 
             for (final Card c : list) {
                 if (objects.contains(c) && c.getShieldCount() == 0) {
