@@ -27,7 +27,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -56,32 +55,11 @@ public class RegenerateAi extends SpellAbilityAi {
     // **************************************************************
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card hostCard = sa.getHostCard();
-        final Cost abCost = sa.getPayCosts();
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
-
+        final Card hostCard = sa.getHostCard();
         boolean chance = false;
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, hostCard, 4, null)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, hostCard)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, abCost, hostCard)) {
-                return false;
-            }
-            
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, hostCard)) {
-                return false;
-            }
-        }
-
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
@@ -89,7 +67,7 @@ public class RegenerateAi extends SpellAbilityAi {
             final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
             if (!game.getStack().isEmpty()) {
-                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
 
                 for (final Card c : list) {
                     if (objects.contains(c)) {
@@ -115,7 +93,8 @@ public class RegenerateAi extends SpellAbilityAi {
         } else {
             sa.resetTargets();
             // filter AIs battlefield by what I can target
-            List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, hostCard, sa);
+            List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(),
+                    ai, hostCard, sa);
             targetables = CardLists.getTargetableCards(targetables, sa);
 
             if (targetables.size() == 0) {
@@ -125,7 +104,7 @@ public class RegenerateAi extends SpellAbilityAi {
             if (!game.getStack().isEmpty()) {
                 // check stack for something on the stack will kill anything i
                 // control
-                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
 
                 final List<Card> threatenedTargets = new ArrayList<Card>();
 
@@ -160,7 +139,7 @@ public class RegenerateAi extends SpellAbilityAi {
         }
 
         return chance;
-    } // regenerateCanPlayAI
+    }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
