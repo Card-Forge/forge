@@ -1331,7 +1331,7 @@ public class ComputerUtilCard {
      * @return
      */
     public static boolean canPumpAgainstRemoval(Player ai, SpellAbility sa) {
-        final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+        final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
         final CardCollection threatenedTargets = new CardCollection();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 

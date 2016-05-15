@@ -106,7 +106,7 @@ public class ProtectAi extends SpellAbilityAi {
         final PhaseHandler ph = game.getPhaseHandler();
         
         CardCollection list = ai.getCreaturesInPlay();
-        final List<GameObject> threatenedObjects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+        final List<GameObject> threatenedObjects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -163,26 +163,9 @@ public class ProtectAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final boolean notAiMain1 = !(ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1);
-        if (SpellAbilityAi.isSorcerySpeed(sa)) {
+        if (SpellAbilityAi.isSorcerySpeed(sa) && notAiMain1) {
             // sorceries can only give protection in order to create an unblockable attacker
-            if (notAiMain1) {
-                return false;
-            }
-        } else {
-            final Game game = ai.getGame();
-            if (game.getStack().isEmpty()) {
-                // try to save attacker or blocker
-                if (ph.getPhase() != PhaseType.COMBAT_DECLARE_BLOCKERS) {
-                    if (notAiMain1) {
-                        return false;
-                    }
-                }
-            } else {
-                // prevent repeated protects
-                if (game.getStack().peekAbility().getApi() == ApiType.Protection) {
-                    return false;
-                }
-            }
+            return false;
         }
         return true;
     }

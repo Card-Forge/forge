@@ -1100,8 +1100,26 @@ public class ComputerUtil {
         return damage;
     }
 
+    /**
+     * Overload of predictThreatenedObjects that evaluates the full stack
+     */
     public static List<GameObject> predictThreatenedObjects(final Player aiPlayer, final SpellAbility sa) {
-        final Game game = aiPlayer.getGame();
+        return predictThreatenedObjects(aiPlayer, sa, false);
+    }
+
+    /**
+     * Returns list of objects threatened by effects on the stack
+     * 
+     * @param ai
+     *            calling player
+     * @param sa
+     *            SpellAbility to exclude
+     * @param top
+     *            only evaluate the top of the stack for threatening effects
+     * @return list of threatened objects
+     */
+    public static List<GameObject> predictThreatenedObjects(final Player ai, final SpellAbility sa, boolean top) {
+        final Game game = ai.getGame();
         final List<GameObject> objects = new ArrayList<GameObject>();
         if (game.getStack().isEmpty()) {
             return objects;
@@ -1116,7 +1134,10 @@ public class ComputerUtil {
                 sub = sub.getSubAbility();
             }
             if (sa != spell && sa != sub) {
-                Iterables.addAll(objects, ComputerUtil.predictThreatenedObjects(aiPlayer, sa, spell));
+                Iterables.addAll(objects, ComputerUtil.predictThreatenedObjects(ai, sa, spell));
+            }
+            if (top) {
+                break;  // only evaluate top-stack
             }
         }        
     
