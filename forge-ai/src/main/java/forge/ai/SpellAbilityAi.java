@@ -15,6 +15,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.util.MyRandom;
 
 /**
  * Base class for API-specific AI logic
@@ -37,10 +38,6 @@ public abstract class SpellAbilityAi {
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Cost cost = sa.getPayCosts();
-
-        if (source != null && !checkSpecificCardLogic(ai, sa, source.getName())) {
-            return false;
-        }
         if (sa.hasParam("AILogic") && !checkAiLogic(ai, sa, sa.getParam("AILogic"))) {
             return false;
         }
@@ -51,13 +48,6 @@ public abstract class SpellAbilityAi {
             return false;
         }
         return checkApiLogic(ai, sa);
-    }
-
-    /**
-     * Checks if the AI will play a SpellAbility from the specified card
-     */
-    protected boolean checkSpecificCardLogic(final Player ai, final SpellAbility sa, final String name) {
-        return true;
     }
 
     /**
@@ -99,7 +89,10 @@ public abstract class SpellAbilityAi {
      * The rest of the logic not covered by the canPlayAI template is defined here
      */
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        return true;
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;   // prevent infinite loop
+        }
+        return MyRandom.getRandom().nextFloat() < .8f;   // random success
     }
     
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
