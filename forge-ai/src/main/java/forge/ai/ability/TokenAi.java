@@ -79,14 +79,6 @@ public class TokenAi extends SpellAbilityAi {
         this.tokenKeywords = keywords;
 
     }
-
-    @Override
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if (aiLogic.equals("Never")) {
-            return false;
-        }
-        return true;
-    }
     
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {

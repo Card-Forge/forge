@@ -23,33 +23,34 @@ import java.util.Random;
 
 public class FightAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        sa.resetTargets();
-        final Card source = sa.getHostCard();
-
-        CardCollectionView aiCreatures = ai.getCreaturesInPlay();
-        aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
-        aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
-
-        List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
-        humCreatures = CardLists.getTargetableCards(humCreatures, sa);
-
-        final Random r = MyRandom.getRandom();
-        if (r.nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
-            return false;
-        }
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if (sa.hasParam("FightWithToughness")) {
             // TODO: add ailogic
             return false;
         }
+        return super.checkAiLogic(ai, sa, aiLogic);
+    }
 
-        //assumes the triggered card belongs to the ai
+    @Override
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        sa.resetTargets();
+        final Card source = sa.getHostCard();
+        
+        // Get creature lists
+        CardCollectionView aiCreatures = ai.getCreaturesInPlay();
+        aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
+        aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
+        List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+        humCreatures = CardLists.getTargetableCards(humCreatures, sa);
+
+        // assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {
             Card fighter1 = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
             for (Card humanCreature : humCreatures) {
                 if (ComputerUtilCombat.getDamageToKill(humanCreature) <= fighter1.getNetPower()
                         && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(fighter1)) {
-                    // todo: check min/max targets; see if we picked the best matchup
+                    // todo: check min/max targets; see if we picked the best
+                    // matchup
                     sa.getTargets().add(humanCreature);
                     return true;
                 } else if (humanCreature.getSVar("Targeting").equals("Dies")) {
@@ -65,7 +66,8 @@ public class FightAi extends SpellAbilityAi {
                     for (Card aiCreature : aiCreatures) {
                         if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetPower()
                                 && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(aiCreature)) {
-                            // todo: check min/max targets; see if we picked the best matchup
+                            // todo: check min/max targets; see if we picked the
+                            // best matchup
                             sa.getTargets().add(humanCreature);
                             sa.getTargets().add(aiCreature);
                             return true;
@@ -84,13 +86,13 @@ public class FightAi extends SpellAbilityAi {
                 if (creature1.equals(creature2)) {
                     continue;
                 }
-                if (sa.hasParam("TargetsWithoutSameCreatureType")
-                        && creature1.sharesCreatureTypeWith(creature2)) {
+                if (sa.hasParam("TargetsWithoutSameCreatureType") && creature1.sharesCreatureTypeWith(creature2)) {
                     continue;
                 }
                 if (ComputerUtilCombat.getDamageToKill(creature1) <= creature2.getNetPower()
                         && creature1.getNetPower() >= ComputerUtilCombat.getDamageToKill(creature2)) {
-                    // todo: check min/max targets; see if we picked the best matchup
+                    // todo: check min/max targets; see if we picked the best
+                    // matchup
                     sa.getTargets().add(creature1);
                     sa.getTargets().add(creature2);
                     return true;
