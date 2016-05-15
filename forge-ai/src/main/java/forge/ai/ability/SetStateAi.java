@@ -25,7 +25,7 @@ public class SetStateAi extends SpellAbilityAi {
         }
         
         if (sa.getTargetRestrictions() == null && "Transform".equals(sa.getParam("Mode"))) {
-            return true;
+            return !source.hasKeyword("CARDNAME can't transform");
         }
         return false;
     }
