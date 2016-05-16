@@ -1412,20 +1412,6 @@ public class AttachAi extends SpellAbilityAi {
         return true;
     }
 
-    private static boolean isUselessCreature(Player ai, Card c) {
-        if (c == null) {
-            return true;
-        }
-
-        if (c.hasKeyword("CARDNAME can't attack or block.")
-                || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped())
-                || (c.getOwner() == ai && ai.getOpponents().contains(c.getController()))) {
-            return true;
-        }
-
-        return false;
-    }
-    
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;

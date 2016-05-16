@@ -239,4 +239,19 @@ public abstract class SpellAbilityAi {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleEntity is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }
+
+
+    protected static boolean isUselessCreature(Player ai, Card c) {
+        if (c == null) {
+            return true;
+        }
+
+        if (c.hasKeyword("CARDNAME can't attack or block.")
+                || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped())
+                || (c.getOwner() == ai && ai.getOpponents().contains(c.getController()))) {
+            return true;
+        }
+
+        return false;
+    }
 }

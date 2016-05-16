@@ -43,6 +43,15 @@ public class LegendaryRuleAi extends SpellAbilityAi {
                 }
             }
             return best;
+        } else if (firstOption.getCounters(CounterType.KI) > 0) {
+        	// Extra Rule for KI counter
+        	Card best = firstOption;
+            for (Card c : options) {
+                if (c.getCounters(CounterType.KI) > best.getCounters(CounterType.KI)) {
+                    best = c;
+                }
+            }
+            return best;
         }
 
         return firstOption;
