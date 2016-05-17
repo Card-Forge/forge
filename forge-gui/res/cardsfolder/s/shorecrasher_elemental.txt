@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:3/3
 K:Megamorph:4 U
 A:AB$ ChangeZone | Cost$ U | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | SpellDescription$ Exile CARDNAME, then return it to the battlefield face down under its owner's control.
-SVar:DBReturn:DB$ChangeZone | FaceDown$ True | Origin$ Exile | Destination$ Battlefield
+SVar:DBReturn:DB$ChangeZone | FaceDown$ True | Origin$ Exile | Destination$ Battlefield  | Defined$ CorrectedSelf
 A:AB$ Pump | Cost$ 1 | Subability$ ABChoice | SpellDescription$ CARDNAME gets +1/-1 or -1/+1 until end of turn.
 SVar:ABChoice:DB$ GenericChoice | Defined$ You | Cost$ 0 | Choices$ ABPump1,ABPump2
 SVar:ABPump1:DB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ +1/-1
