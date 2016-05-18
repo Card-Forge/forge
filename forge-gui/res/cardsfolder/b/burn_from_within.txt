@@ -1,6 +1,6 @@
 Name:Burn from Within
 ManaCost:X R
-Types:Instant
+Types:Sorcery
 A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | RememberDamaged$ True | SubAbility$ DBDebuff | SpellDescription$ CARDNAME deals X damage to target creature or player. If a creature is dealt damage this way, it loses indestructible until end of turn. If that creature would die this turn, exile it instead.
 SVar:DBDebuff:DB$ Debuff | Defined$ Remembered | Keywords$ Indestructible | SubAbility$ DBBurn
 SVar:DBBurn:DB$ Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ Remembered | SubAbility$ DBCleanup
