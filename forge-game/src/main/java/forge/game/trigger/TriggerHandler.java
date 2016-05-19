@@ -479,7 +479,11 @@ public class TriggerHandler {
             host = trigCard;
         }
         else {
-            host = game.getCardState(regtrig.getHostCard());
+        	// get CardState does not work for transformed cards
+        	// also its about LKI
+        	if (host.isInZone(ZoneType.Battlefield)) {
+        		host = game.getCardState(host);
+        	}
         }
 
         sa = regtrig.getOverridingAbility();
