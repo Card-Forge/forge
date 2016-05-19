@@ -140,8 +140,9 @@ public class GameAction {
             return c;
         }
 
-        if (zoneFrom != null && zoneTo != null && !zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Stack)
-                && !zoneFrom.is(ZoneType.Flashback) && !zoneTo.is(ZoneType.Flashback)) {
+        // LKI is only needed when something is moved from the battlefield.
+        // also it does messup with Blink Effects like Eldrazi Displacer
+        if (fromBattlefield && zoneTo != null && !zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Flashback)) {
             game.addChangeZoneLKIInfo(c);
         }
 
