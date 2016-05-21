@@ -691,7 +691,11 @@ public class CardView extends GameEntityView {
             currentStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
             currentStateView.updateToughness(c);
             currentStateView.updateLoyalty(c);
-            currentStateView.updateColors(c);
+
+            // update the color only while in Game
+            if (c.getGame() != null) {
+                currentStateView.updateColors(currentState);
+            }
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
 
@@ -706,7 +710,11 @@ public class CardView extends GameEntityView {
                 alternateStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
                 alternateStateView.updateToughness(c);
                 alternateStateView.updateLoyalty(c);
-                alternateStateView.updateColors(c);
+
+                // update the color only while in Game
+                if (c.getGame() != null) {
+                    alternateStateView.updateColors(alternateState);
+                }
             }
             alternateState.getView().updateKeywords(c, alternateState);
         }
@@ -801,7 +809,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Colors, c.determineColor());
         }
         void updateColors(CardState c) {
-            set(TrackableProperty.Colors, c.getColor());
+            set(TrackableProperty.Colors, ColorSet.fromMask(c.getColor()));
         }
 
         public String getImageKey() {
