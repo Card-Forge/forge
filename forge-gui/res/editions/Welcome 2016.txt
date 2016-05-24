@@ -1,0 +1,24 @@
+[metadata]
+Code=W16
+Date=2016-06-16
+Name=Welcome 2016
+MciCode=w16
+Type=Other
+
+[cards]
+1 R Aegis Angel
+2 C Marked by Honor
+3 U Serra Angel
+4 U Air Servant
+5 C Disperse
+6 R Sphinx of Magosi
+7 C Mind Rot
+8 R Nightmare
+9 U Sengir Vampire
+10 C Walking Corpse
+11 C Borderland Marauder
+12 U Cone of Flame
+13 R Shivan Dragon
+14 U Incremental Growth
+15 C Oakenform
+16 R Soul of the Harvest
