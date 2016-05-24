@@ -1,8 +1,8 @@
 Name:Mishra's Bauble
 ManaCost:0
 Types:Artifact
-A:AB$ Dig | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 1 | NoMove$ True | SubAbility$ DelTrigSlowtrip | SpellDescription$ Look at the top card of target player's library. Draw a card at the beginning of the next turn's upkeep.
-SVar:DelTrigSlowtrip:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
+A:AB$ Dig | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 1 | NoMove$ True | SubAbility$ DelTrigSlowtrip | SpellDescription$ Look at the top card of target player's library.
+SVar:DelTrigSlowtrip:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | StackDescription$ SpellDescription | SpellDescription$ Draw a card at the beginning of the next turn's upkeep.
 SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_bauble.jpg
