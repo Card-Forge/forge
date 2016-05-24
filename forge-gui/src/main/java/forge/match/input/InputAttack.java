@@ -54,12 +54,14 @@ public class InputAttack extends InputSyncronizedBase {
     private GameEntity currentDefender;
     private final Player playerAttacks;
     private AttackingBand activeBand = null;
+    private boolean potentialBanding;
 
     public InputAttack(PlayerControllerHuman controller, Player attacks0, Combat combat0) {
         super(controller);
         playerAttacks = attacks0;
         combat = combat0;
         defenders = combat.getDefenders();
+        potentialBanding = isBandingPossible();
     }
 
     @Override
@@ -161,7 +163,7 @@ public class InputAttack extends InputSyncronizedBase {
 
         if (combat.isAttacking(card, currentDefender)) {
             boolean validAction = true;
-            if (isBandingPossible()) {
+            if (potentialBanding) {
                 // Activate band by selecting/deselecting a band member
                 if (activeBand == null) {
                     activateBand(combat.getBandOfAttacker(card));
@@ -232,7 +234,7 @@ public class InputAttack extends InputSyncronizedBase {
     @Override
     public String getActivateAction(Card card) {
         if (combat.isAttacking(card, currentDefender)) {
-            if (isBandingPossible()) {
+            if (potentialBanding) {
                 return "activate band with card";
             }
             return "remove card from combat";
@@ -302,8 +304,9 @@ public class InputAttack extends InputSyncronizedBase {
     //only enable banding message and actions if a creature that can attack has banding
     private boolean isBandingPossible() {
         final CardCollectionView possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
-        for (final Card c : Iterables.filter(possibleAttackers, CardPredicates.hasKeyword("Banding"))) {
-            if (CombatUtil.canAttack(c, currentDefender)) {
+        for (final Card c : possibleAttackers) {
+            if ((c.hasKeyword("Banding") || c.hasStartOfKeyword("Bands with Other")) &&
+                    CombatUtil.canAttack(c, currentDefender)) {
                 return true;
             }
         }
@@ -312,7 +315,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void updateMessage() {
         String message = "Select creatures to attack " + currentDefender + " or select player/planeswalker you wish to attack.";
-        if (isBandingPossible()) {
+        if (potentialBanding) {
             message += " To attack as a band, select an attacking creature to activate its 'band' then select another to join it.";
         }
         showMessage(message);
