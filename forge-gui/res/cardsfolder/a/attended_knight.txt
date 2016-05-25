@@ -4,6 +4,6 @@ Types:Creature Human Knight
 PT:2/2
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | w 1 1 soldier M13
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 soldier M13
 SVar:Picture:http://www.wizards.com/global/images/magic/general/attended_knight.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhen Attended Knight enters the battlefield, put a 1/1 white Soldier creature token onto the battlefield.

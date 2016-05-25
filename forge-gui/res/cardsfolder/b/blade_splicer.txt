@@ -4,6 +4,6 @@ Types:Creature Human Artificer
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Golem+YouCtrl | AddKeyword$ First Strike | Description$ Golem creatures you control have first strike.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 3/3 colorless Golem artifact creature token onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 3 | c 3 3 golem NPH
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ c 3 3 golem NPH
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_splicer.jpg
 Oracle:When Blade Splicer enters the battlefield, put a 3/3 colorless Golem artifact creature token onto the battlefield.\nGolem creatures you control have first strike.
