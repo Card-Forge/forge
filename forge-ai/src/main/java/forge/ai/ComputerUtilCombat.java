@@ -473,12 +473,8 @@ public class ComputerUtilCombat {
     public static int totalDamageOfBlockers(final Card attacker, final List<Card> defenders) {
         int damage = 0;
 
-        if (attacker.isEquipped()) {
-            for (Card equipment : attacker.getEquippedBy(false)) {
-            	if (equipment.getName().equals("Godsend") && !defenders.isEmpty()) {
-            		defenders.remove(0);
-            	}
-            }
+        if (attacker.isEquippedBy("Godsend") && !defenders.isEmpty()) {
+            defenders.remove(0);
         }
 
         for (final Card defender : defenders) {
@@ -495,10 +491,8 @@ public class ComputerUtilCombat {
     public static int totalFirstStrikeDamageOfBlockers(final Card attacker, final List<Card> defenders) {
         int damage = 0;
         
-        for (Card equipment : attacker.getEquippedBy(false)) {
-            if (equipment.getName().equals("Godsend") && !defenders.isEmpty()) {
-                defenders.remove(0);
-            }
+        if (attacker.isEquippedBy("Godsend") && !defenders.isEmpty()) {
+            defenders.remove(0);
         }
 
         for (final Card defender : defenders) {
@@ -1527,12 +1521,8 @@ public class ComputerUtilCombat {
     // check whether the attacker will be destroyed by triggered abilities before First Strike damage
     public static boolean canDestroyAttackerBeforeFirstStrike(final Card attacker, final Card blocker, final Combat combat,
             final boolean withoutAbilities) {
-        if (blocker.isEquipped()) {
-            for (Card equipment : blocker.getEquippedBy(false)) {
-            	if (equipment.getName().equals("Godsend")) {
-            		return true;
-            	}
-            }
+        if (blocker.isEquippedBy("Godsend")) {
+           return true;
         }
         if (attacker.hasKeyword("Indestructible") || ComputerUtil.canRegenerate(attacker.getController(), attacker)) {
             return false;
@@ -1747,12 +1737,8 @@ public class ComputerUtilCombat {
 
     public static boolean canDestroyBlockerBeforeFirstStrike(final Card blocker, final Card attacker, final boolean withoutAbilities) {
 
-        if (attacker.isEquipped()) {
-            for (Card equipment : attacker.getEquippedBy(false)) {
-            	if (equipment.getName().equals("Godsend")) {
-            		return true;
-            	}
-            }
+    	if (attacker.isEquippedBy("Godsend")) {
+            return true;
         }
         
         if (attacker.getName().equals("Elven Warhounds")) {

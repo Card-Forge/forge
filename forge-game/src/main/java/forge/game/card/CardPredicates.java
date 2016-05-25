@@ -171,6 +171,24 @@ public final class CardPredicates {
         };
     } // getColor()
 
+    public static final Predicate<Card> isEquippedBy(final String name) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.isEquippedBy(name);
+            }
+        };
+    }
+
+    public static final Predicate<Card> isEnchantedBy(final String name) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.isEnchantedBy(name);
+            }
+        };
+    }
+
     public static final Predicate<Card> hasCMC(final int cmc) {
         return new Predicate<Card>() {
             @Override

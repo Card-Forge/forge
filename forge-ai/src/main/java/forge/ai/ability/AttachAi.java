@@ -664,17 +664,9 @@ public class AttachAi extends SpellAbilityAi {
 
         //some auras aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
-            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    for (Card aura : c.getEnchantedBy(false)) {
-                        if (aura.getName().equals(attachSource.getName())) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            });
+            prefList = CardLists.filter(prefList,
+                Predicates.not(CardPredicates.isEnchantedBy(attachSource.getName()))
+            );
         }
 
         c = ComputerUtilCard.getBestAI(prefList);
@@ -723,12 +715,8 @@ public class AttachAi extends SpellAbilityAi {
                     return false;
                 }
                 // don't equip creatures that don't gain anything
-                if (card.hasSVar("NonStackingAttachEffect")) {
-                    for (Card equipment : newTarget.getEquippedBy(false)) {
-                        if (equipment.getName().equals(card.getName())) {
-                            return false;
-                        }
-                    }
+                if (card.hasSVar("NonStackingAttachEffect") && newTarget.isEquippedBy(equipment.getName())) {
+                    return false;
                 }
             }
         }
@@ -958,26 +946,10 @@ public class AttachAi extends SpellAbilityAi {
 
         //some auras/equipments aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
-            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (c.isEquipped()) {
-                        for (Card equipment : c.getEquippedBy(false)) {
-                            if (equipment.getName().equals(attachSource.getName())) {
-                                return false;
-                            }
-                        }
-                    }
-                    if (c.isEnchanted()) {
-                        for (Card aura : c.getEnchantedBy(false)) {
-                            if (aura.getName().equals(attachSource.getName())) {
-                                return false;
-                            }
-                        }
-                    }
-                    return true;
-                }
-            });
+            prefList = CardLists.filter(prefList, Predicates.not(Predicates.or(
+                CardPredicates.isEquippedBy(attachSource.getName()),
+                CardPredicates.isEnchantedBy(attachSource.getName())
+            )));
         }
 
         // Don't pump cards that will die.

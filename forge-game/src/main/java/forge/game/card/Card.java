@@ -2281,6 +2281,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isEquippedBy(Card c) {
         return FCollection.hasElement(equippedBy, c);
     }
+    public final boolean isEquippedBy(final String cardName) {
+        for (final Card card : getEquippedBy(false)) {
+            if (card.getName().equals(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public final CardCollectionView getFortifiedBy(boolean allowModify) {
         return CardCollection.getView(fortifiedBy, allowModify);
@@ -3926,13 +3934,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("NameNotEnchantingEnchantedPlayer")) {
             Player enchantedPlayer = source.getEnchantingPlayer();
-            if (enchantedPlayer == null) {
+            if (enchantedPlayer == null || enchantedPlayer.isEnchantedBy(getName())) {
                 return false;
-            }
-            for (Card c : enchantedPlayer.getEnchantedBy(false)) {
-                if (getName().equals(c.getName())) {
-                    return false;
-                }
             }
         } else if (property.equals("NotAttachedTo")) {
             if (equipping == source || source.equals(enchanting) || fortifying == source) {
