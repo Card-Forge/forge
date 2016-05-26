@@ -2,6 +2,6 @@ Name:Spellskite
 ManaCost:2
 Types:Artifact Creature Horror
 PT:0/4
-A:AB$ ChangeTargets | Cost$ PU | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card | DefinedMagnet$ Self | ChangeSingleTarget$ True | SpellDescription$ Change a target of target spell or ability to Spellskite.
+A:AB$ ChangeTargets | Cost$ PU | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card | DefinedMagnet$ Self | ChangeSingleTarget$ True | SpellDescription$ Change a target of target spell or ability to CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellskite.jpg
 Oracle:{P/U}: Change a target of target spell or ability to Spellskite. ({P/U} can be paid with either {U} or 2 life.)
