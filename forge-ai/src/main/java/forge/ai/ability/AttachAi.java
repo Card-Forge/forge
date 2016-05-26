@@ -715,7 +715,7 @@ public class AttachAi extends SpellAbilityAi {
                     return false;
                 }
                 // don't equip creatures that don't gain anything
-                if (card.hasSVar("NonStackingAttachEffect") && newTarget.isEquippedBy(equipment.getName())) {
+                if (card.hasSVar("NonStackingAttachEffect") && newTarget.isEquippedBy(card.getName())) {
                     return false;
                 }
             }
