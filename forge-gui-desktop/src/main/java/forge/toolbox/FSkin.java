@@ -976,9 +976,9 @@ public class FSkin {
 
         if (formatReminderText) {
             //format reminder text in italics (or hide if preference set)
-            pattern = "\\((.+)\\)";
+            pattern = " \\((.+?)\\)";
             replacement = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT) ?
-                    "" : "<i>\\($1\\)</i>";
+                    "" : " <i>\\($1\\)</i>";
             str = str.replaceAll(pattern, replacement);
         }
 

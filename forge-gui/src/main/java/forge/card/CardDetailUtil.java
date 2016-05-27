@@ -422,12 +422,7 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("=Equipped by ");
-            for (final Iterator<CardView> it = card.getEquippedBy().iterator(); it.hasNext();) {
-                area.append(it.next());
-                if (it.hasNext()) {
-                    area.append(", ");
-                }
-            }
+            area.append(StringUtils.join(card.getEquippedBy(), ", "));
             area.append("=");
         }
 
@@ -451,12 +446,7 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("*Enchanted by ");
-            for (final Iterator<CardView> it = card.getEnchantedBy().iterator(); it.hasNext();) {
-                area.append(it.next());
-                if (it.hasNext()) {
-                    area.append(", ");
-                }
-            }
+            area.append(StringUtils.join(card.getEnchantedBy(), ", "));
             area.append("*");
         }
 
@@ -466,12 +456,7 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("+Controlling: ");
-            for (final Iterator<CardView> it = card.getGainControlTargets().iterator(); it.hasNext();) {
-                area.append(it.next());
-                if (it.hasNext()) {
-                    area.append(", ");
-                }
-            }
+            area.append(StringUtils.join(card.getGainControlTargets(), ", "));
             area.append("+");
         }
 
@@ -491,12 +476,7 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("Imprinting: ");
-            for (final Iterator<CardView> it = card.getImprintedCards().iterator(); it.hasNext();) {
-                area.append(it.next());
-                if (it.hasNext()) {
-                    area.append(", ");
-                }
-            }
+            area.append(StringUtils.join(card.getImprintedCards(), ", "));
         }
 
         // Haunt
@@ -505,12 +485,7 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("Haunted by: ");
-            for (final Iterator<CardView> it = card.getHauntedBy().iterator(); it.hasNext();) {
-                area.append(it.next());
-                if (it.hasNext()) {
-                    area.append(", ");
-                }
-            }
+            area.append(StringUtils.join(card.getHauntedBy(), ", "));
         }
         if (card.getHaunting() != null) {
             if (area.length() != 0) {
