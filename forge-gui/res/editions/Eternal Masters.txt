@@ -1,0 +1,260 @@
+[metadata]
+Name=Eternal Masters
+Code=EMA
+Date=2016-06-10
+MciCode=ema
+Type=Reprint
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 RareMythic
+FoilChanceInBooster=100
+
+[cards]
+1 C Aven Riftwatcher
+2 M Balance
+3 C Ballynock Cohort
+4 C Benevolent Bodyguard
+5 U Calciderm
+6 C Coalition Honor Guard
+7 R Eight-and-a-Half-Tails
+8 C Elite Vanguard
+9 R Enlightened Tutor
+10 U Faith’s Fetters
+11 U Field of Souls
+12 U Glimmerpoint Stag
+13 U Honden of Cleansing Fire
+14 C Humble
+15 U Intangible Virtue
+16 R Jareth, Leonine Titan
+17 R Karmic Guide
+18 C Kor Hookmaster
+19 U Mesa Enchantress
+20 C Mistral Charger
+21 C Monk Idealist
+22 R Mother of Runes
+23 C Pacifism
+24 C Raise the Alarm
+25 C Rally the Peasants
+26 C Seal of Cleansing
+27 C Second Thoughts
+28 U Serra Angel
+29 C Shelter
+30 U Soulcatcher
+31 C Squadron Hawk
+32 U Swords to Plowshares
+33 R Unexpectedly Absent
+34 U Wall of Omens
+35 U War Priest of Thune
+36 C Welkin Guide
+37 C Whitemane Lion
+38 R Wrath of God
+39 R Arcanis the Omnipotent
+40 U Brainstorm
+41 C Cephalid Sage
+42 R Control Magic
+43 C Counterspell
+44 U Daze
+45 C Deep Analysis
+46 R Diminishing Returns
+47 C Dream Twist
+48 U Fact or Fiction
+49 M Force of Will
+50 R Future Sight
+51 C Gaseous Form
+52 C Giant Tortoise
+53 C Glacial Wall
+54 U Honden of Seeing Winds
+55 U Hydroblast
+56 R Inkwell Leviathan
+57 M Jace, the Mind Sculptor
+58 U Jetting Glasskite
+59 C Man-o’-War
+60 C Memory Lapse
+61 U Merfolk Looter
+62 R Mystical Tutor
+63 C Oona’s Grace
+64 C Peregrine Drake
+65 C Phantom Monster
+66 U Phyrexian Ingester
+67 U Prodigal Sorcerer
+68 U Quiet Speculation
+69 C Screeching Skaab
+70 R Serendib Efreet
+71 C Shoreline Ranger
+72 C Silent Departure
+73 U Sprite Noble
+74 C Stupefying Touch
+75 C Tidal Wave
+76 C Warden of Evos Isle
+77 U Wonder
+78 U Animate Dead
+79 U Annihilate
+80 C Blightsoil Druid
+81 U Blood Artist
+82 R Braids, Cabal Minion
+83 U Cabal Therapy
+84 C Carrion Feeder
+85 C Deadbridge Shaman
+86 C Duress
+87 R Entomb
+88 C Eyeblight’s Ending
+89 C Gravedigger
+90 U Havoc Demon
+91 U Honden of Night’s Reach
+92 U Hymn to Tourach
+93 R Ichorid
+94 C Innocent Blood
+95 U Lys Alana Scarblade
+96 R Malicious Affliction
+97 C Nausea
+98 M Necropotence
+99 U Nekrataal
+100 C Night’s Whisper
+101 U Phyrexian Gargantua
+102 C Phyrexian Rager
+103 C Plague Witch
+104 C Prowling Pangolin
+105 U Sengir Autocrat
+106 R Sinkhole
+107 C Skulking Ghost
+108 R Toxic Deluge
+109 C Tragic Slip
+110 C Twisted Abomination
+111 C Urborg Uprising
+112 M Vampiric Tutor
+113 U Victimize
+114 R Visara the Dreadful
+115 C Wake of Vultures
+116 C Wakedancer
+117 C Avarax
+118 U Battle Squadron
+119 U Beetleback Chief
+120 C Borderland Marauder
+121 U Burning Vengeance
+122 C Carbonize
+123 U Chain Lightning
+124 R Crater Hellion
+125 C Desperate Ravings
+126 C Dragon Egg
+127 M Dualcaster Mage
+128 C Faithless Looting
+129 C Fervent Cathar
+130 C Firebolt
+131 U Flame Jab
+132 R Gamble
+133 U Ghitu Slinger
+134 U Honden of Infinite Rage
+135 U Keldon Champion
+136 C Keldon Marauders
+137 C Kird Ape
+138 C Mogg Fanatic
+139 C Mogg War Marshal
+140 C Orcish Oriflamme
+141 U Price of Progress
+142 U Pyroblast
+143 R Pyrokinesis
+144 C Reckless Charge
+145 R Rorix Bladewing
+146 C Seismic Stomp
+147 R Siege-Gang Commander
+148 M Sneak Attack
+149 C Stingscourger
+150 R Sulfuric Vortex
+151 U Tooth and Claw
+152 C Undying Rage
+153 C Wildfire Emissary
+154 M Worldgorger Dragon
+155 U Young Pyromancer
+156 C Abundant Growth
+157 U Ancestral Mask
+158 M Argothian Enchantress
+159 U Brawn
+160 U Centaur Chieftain
+161 C Civic Wayfinder
+162 C Commune with the Gods
+163 C Elephant Guide
+164 C Elvish Vanguard
+165 C Emperor Crocodile
+166 U Flinthoof Boar
+167 C Fog
+168 U Gaea’s Blessing
+169 R Green Sun’s Zenith
+170 U Harmonize
+171 R Heritage Druid
+172 U Honden of Life’s Web
+173 R Imperious Perfect
+174 U Invigorate
+175 C Llanowar Elves
+176 C Lys Alana Huntmaster
+177 M Natural Order
+178 C Nature’s Claim
+179 C Nimble Mongoose
+180 U Rancor
+181 R Regal Force
+182 U Roar of the Wurm
+183 C Roots
+184 C Seal of Strength
+185 C Sentinel Spider
+186 R Silvos, Rogue Elemental
+187 R Sylvan Library
+188 C Sylvan Might
+189 C Thornweald Archer
+190 U Timberwatch Elf
+191 C Werebear
+192 U Wirewood Symbiote
+193 C Xantid Swarm
+194 R Yavimaya Enchantress
+195 U Armadillo Cloak
+196 R Baleful Strix
+197 U Bloodbraid Elf
+198 R Brago, King Eternal
+199 M Dack Fayden
+200 U Extract from Darkness
+201 U Flame-Kin Zealot
+202 R Glare of Subdual
+203 R Goblin Trenches
+204 M Maelstrom Wanderer
+205 U Shaman of the Pack
+206 R Shardless Agent
+207 M Sphinx of the Steel Wind
+208 U Thunderclap Wyvern
+209 U Trygon Predator
+210 R Vindicate
+211 R Void
+212 U Wee Dragonauts
+213 U Zealous Persecution
+214 R Call the Skybreaker
+215 R Deathrite Shaman
+216 R Giant Solifuge
+217 U Torrent of Souls
+218 U Ashnod’s Altar
+219 M Chrome Mox
+220 R Duplicant
+221 U Emmessi Tome
+222 R Goblin Charbelcher
+223 R Isochron Scepter
+224 U Juggernaut
+225 M Mana Crypt
+226 U Millikin
+227 U Mindless Automaton
+228 R Nevinyrral’s Disk
+229 C Pilgrim’s Eye
+230 C Prismatic Lens
+231 U Relic of Progenitus
+232 U Sensei’s Divining Top
+233 R Ticking Gnomes
+234 U Winter Orb
+235 U Worn Powerstone
+236 C Bloodfell Caves
+237 C Blossoming Sands
+238 C Dismal Backwater
+239 C Jungle Hollow
+240 M Karakas
+241 R Maze of Ith
+242 U Mishra’s Factory
+243 C Rugged Highlands
+244 C Scoured Barrens
+245 C Swiftwater Cliffs
+246 C Thornwood Falls
+247 C Tranquil Cove
+248 R Wasteland
+249 C Wind-Scarred Crag
