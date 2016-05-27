@@ -319,6 +319,12 @@ public class CardFactory {
                 s.setIntrinsic(true);
             }
 
+            // ******************************************************************
+            // ************** Link to different CardFactories *******************
+            if (card.isPlaneswalker()) {
+                buildPlaneswalkerAbilities(card);
+            }
+
             if (state == CardStateName.LeftSplit || state == CardStateName.RightSplit) {
                 for (final SpellAbility sa : card.getSpellAbilities()) {
                     if (state == CardStateName.LeftSplit) {
@@ -340,11 +346,7 @@ public class CardFactory {
 
         // ******************************************************************
         // ************** Link to different CardFactories *******************
-
-        if (card.isPlaneswalker()) {
-            buildPlaneswalkerAbilities(card);
-        }
-        else if (card.isPlane()) {
+        if (card.isPlane()) {
             buildPlaneAbilities(card);
         }
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
