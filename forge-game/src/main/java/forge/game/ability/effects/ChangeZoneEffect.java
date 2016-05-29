@@ -25,7 +25,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.collect.FCollectionView;
+import forge.util.collect.*;
 import forge.util.Lang;
 import forge.util.MessageUtil;
 
@@ -442,10 +442,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition);
 
-                // for things like Gaea's Blessing
-                if (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
-                    tgtC.getOwner().shuffle(sa);
-                }
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
@@ -579,6 +575,24 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             if (imprint != null && !movedCard.getZone().equals(originZone)) {
                 hostCard.addImprintedCard(movedCard);
+            }
+        }
+
+        // for things like Gaea's Blessing
+        if (destination.equals(ZoneType.Library) && sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
+            FCollection<Player> pl = new FCollection<Player>();
+            // use defined controller. it does need to work even without Targets.
+            if (sa.hasParam("TargetsWithDefinedController")) {
+                pl.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("TargetsWithDefinedController"), sa));            		
+            } else {
+                for (final Card tgtC : tgtCards) {
+                    // FCollection already does use set.
+                    pl.add(tgtC.getOwner());
+                }
+            }
+
+            for (final Player p : pl) {
+                p.shuffle(sa);
             }
         }
     }
@@ -1074,7 +1088,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("Library")) {
                 game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
-                if (srcSA.hasParam("Shuffle")) {
+                if (srcSA.hasParam("Shuffle") && "True".equals(srcSA.getParam("Shuffle"))) {
                     tgtSA.getHostCard().getOwner().shuffle(srcSA);
                 }
             } else {
