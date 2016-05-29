@@ -18,7 +18,7 @@ FoilChanceInBooster=100
 7 R Eight-and-a-Half-Tails
 8 C Elite Vanguard
 9 R Enlightened Tutor
-10 U Faith’s Fetters
+10 U Faith's Fetters
 11 U Field of Souls
 12 U Glimmerpoint Stag
 13 U Honden of Cleansing Fire
@@ -67,11 +67,11 @@ FoilChanceInBooster=100
 56 R Inkwell Leviathan
 57 M Jace, the Mind Sculptor
 58 U Jetting Glasskite
-59 C Man-o’-War
+59 C Man-o'-War
 60 C Memory Lapse
 61 U Merfolk Looter
 62 R Mystical Tutor
-63 C Oona’s Grace
+63 C Oona's Grace
 64 C Peregrine Drake
 65 C Phantom Monster
 66 U Phyrexian Ingester
@@ -96,10 +96,10 @@ FoilChanceInBooster=100
 85 C Deadbridge Shaman
 86 C Duress
 87 R Entomb
-88 C Eyeblight’s Ending
+88 C Eyeblight's Ending
 89 C Gravedigger
 90 U Havoc Demon
-91 U Honden of Night’s Reach
+91 U Honden of Night's Reach
 92 U Hymn to Tourach
 93 R Ichorid
 94 C Innocent Blood
@@ -108,7 +108,7 @@ FoilChanceInBooster=100
 97 C Nausea
 98 M Necropotence
 99 U Nekrataal
-100 C Night’s Whisper
+100 C Night's Whisper
 101 U Phyrexian Gargantua
 102 C Phyrexian Rager
 103 C Plague Witch
@@ -176,17 +176,17 @@ FoilChanceInBooster=100
 165 C Emperor Crocodile
 166 U Flinthoof Boar
 167 C Fog
-168 U Gaea’s Blessing
-169 R Green Sun’s Zenith
+168 U Gaea's Blessing
+169 R Green Sun's Zenith
 170 U Harmonize
 171 R Heritage Druid
-172 U Honden of Life’s Web
+172 U Honden of Life's Web
 173 R Imperious Perfect
 174 U Invigorate
 175 C Llanowar Elves
 176 C Lys Alana Huntmaster
 177 M Natural Order
-178 C Nature’s Claim
+178 C Nature's Claim
 179 C Nimble Mongoose
 180 U Rancor
 181 R Regal Force
@@ -226,7 +226,7 @@ FoilChanceInBooster=100
 215 R Deathrite Shaman
 216 R Giant Solifuge
 217 U Torrent of Souls
-218 U Ashnod’s Altar
+218 U Ashnod's Altar
 219 M Chrome Mox
 220 R Duplicant
 221 U Emmessi Tome
@@ -236,11 +236,11 @@ FoilChanceInBooster=100
 225 M Mana Crypt
 226 U Millikin
 227 U Mindless Automaton
-228 R Nevinyrral’s Disk
-229 C Pilgrim’s Eye
+228 R Nevinyrral's Disk
+229 C Pilgrim's Eye
 230 C Prismatic Lens
 231 U Relic of Progenitus
-232 U Sensei’s Divining Top
+232 U Sensei's Divining Top
 233 R Ticking Gnomes
 234 U Winter Orb
 235 U Worn Powerstone
@@ -250,7 +250,7 @@ FoilChanceInBooster=100
 239 C Jungle Hollow
 240 M Karakas
 241 R Maze of Ith
-242 U Mishra’s Factory
+242 U Mishra's Factory
 243 C Rugged Highlands
 244 C Scoured Barrens
 245 C Swiftwater Cliffs
