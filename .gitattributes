@@ -17622,7 +17622,7 @@ forge-gui/res/editions/Duel[!!-~]Decks[!!-~]Speed[!!-~]vs.[!!-~]Cunning.txt -tex
 forge-gui/res/editions/Duel[!!-~]Decks[!!-~]Venser[!!-~]vs.[!!-~]Koth.txt -text
 forge-gui/res/editions/Duel[!!-~]Decks[!!-~]Zendikar[!!-~]vs.[!!-~]Eldrazi.txt -text
 forge-gui/res/editions/Eighth[!!-~]Edition.txt -text
-forge-gui/res/editions/Eternal[!!-~]Masters.txt -text svneol=unset#text/plain
+forge-gui/res/editions/Eternal[!!-~]Masters.txt -text
 forge-gui/res/editions/Eventide.txt -text
 forge-gui/res/editions/Exodus.txt -text
 forge-gui/res/editions/Fallen[!!-~]Empires.txt -text
@@ -17716,7 +17716,7 @@ forge-gui/res/editions/Vanguard.txt -text
 forge-gui/res/editions/Vintage[!!-~]Masters.txt -text
 forge-gui/res/editions/Visions.txt -text
 forge-gui/res/editions/Weatherlight.txt -text
-forge-gui/res/editions/Welcome[!!-~]2016.txt -text svneol=unset#text/plain
+forge-gui/res/editions/Welcome[!!-~]2016.txt -text
 forge-gui/res/editions/Worldwake.txt -text
 forge-gui/res/editions/Zendikar[!!-~]Expeditions.txt -text
 forge-gui/res/editions/Zendikar.txt -text
