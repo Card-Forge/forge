@@ -374,7 +374,8 @@ public class CardFactory {
     }
 
     private static void buildPlaneswalkerAbilities(Card card) {
-        if (card.getBaseLoyalty() > 0) {
+    	// etbCounter only for Original Card
+        if (card.getBaseLoyalty() > 0 && card.getCurrentStateName() == CardStateName.Original) {
             final String loyalty = Integer.toString(card.getBaseLoyalty());
             card.addIntrinsicKeyword("etbCounter:LOYALTY:" + loyalty + ":no Condition:no desc");
         }
