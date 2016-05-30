@@ -481,7 +481,7 @@ public class TriggerHandler {
         else {
         	// get CardState does not work for transformed cards
         	// also its about LKI
-        	if (host.isInZone(ZoneType.Battlefield)) {
+        	if (host.isInZone(ZoneType.Battlefield) || !host.isDoubleFaced()) {
         		host = game.getCardState(host);
         	}
         }
