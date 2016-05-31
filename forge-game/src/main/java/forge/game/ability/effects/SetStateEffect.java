@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.zone.ZoneType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
 
@@ -46,6 +47,11 @@ public class SetStateEffect extends SpellAbilityEffect {
 
         for (final Card tgt : tgtCards) {
             if (sa.usesTargeting() && !tgt.canBeTargetedBy(sa)) {
+                continue;
+            }
+
+            // Cards which are not on the battlefield should not be able to transform.
+            if (!tgt.isInZone(ZoneType.Battlefield)) {
                 continue;
             }
 
