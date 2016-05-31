@@ -2,7 +2,7 @@ Name:Scroll Rack
 ManaCost:2
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 1 T | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ XFetch | References$ XFetch | RememberChanged$ True | SubAbility$ DBDig | SpellDescription$ Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order. | StackDescription$ SpellDescription
-SVar:DBDig:DB$ Dig | DigNum$ X | References$ X | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | SubAbility$ DBReplace
+SVar:DBDig:DB$ Dig | DigNum$ X | References$ X | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | SubAbility$ DBReplace
 SVar:DBReplace:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Library | ChangeType$ Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:XFetch:Count$InYourHand
