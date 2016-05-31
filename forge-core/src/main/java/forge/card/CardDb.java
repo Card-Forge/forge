@@ -121,22 +121,20 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public void initialize(boolean logMissingPerEdition, boolean logMissingSummary) {
         Set<String> allMissingCards = new LinkedHashSet<String>();
         List<String> missingCards = new ArrayList<String>();
+        Map<String, Integer> artIds = new HashMap<String, Integer>();
+
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean isCoreExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION || e.getType() == CardEdition.Type.REPRINT; 
             if (logMissingPerEdition && isCoreExpSet) {
                 System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
             }
-            String lastCardName = null;
-            int artIdx = 1;
             for (CardEdition.CardInSet cis : e.getCards()) {
-                if (cis.name.equals(lastCardName)) {
-                    artIdx++;
+                int artIdx = 1;
+                if (artIds.containsKey(cis.name)) {
+                    artIdx = artIds.get(cis.name) + 1;
                 }
-                else {
-                    artIdx = 1;
-                    lastCardName = cis.name;
-                }
-                CardRules cr = rulesByName.get(lastCardName);
+                artIds.put(cis.name, artIdx);
+                CardRules cr = rulesByName.get(cis.name);
                 if (cr != null) {
                     addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
                 }
@@ -157,6 +155,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 allMissingCards.addAll(missingCards);
             }
             missingCards.clear();
+            artIds.clear();
         }
         
         if (logMissingSummary) {
