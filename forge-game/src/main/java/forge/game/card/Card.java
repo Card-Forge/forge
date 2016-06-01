@@ -3633,7 +3633,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("sameName")) {
-            if (getName().equals("") || !getName().equals(source.getName())) {
+            if (getName().equals("") || !sharesNameWith(source)) {
                 return false;
             }
         } else if (property.equals("NamedCard")) {
@@ -4375,35 +4375,35 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("sharesNameWith")) {
             if (property.equals("sharesNameWith")) {
-                if (!getName().equals(source.getName())) {
+                if (!sharesNameWith(source)) {
                     return false;
                 }
             } else {
                 final String restriction = property.split("sharesNameWith ")[1];
                 if (restriction.equals("YourGraveyard")) {
                     for (final Card card : sourceController.getCardsIn(ZoneType.Graveyard)) {
-                        if (getName().equals(card.getName())) {
+                        if (sharesNameWith(card)) {
                             return true;
                         }
                     }
                     return false;
                 } else if (restriction.equals(ZoneType.Graveyard.toString())) {
                     for (final Card card : game.getCardsIn(ZoneType.Graveyard)) {
-                        if (getName().equals(card.getName())) {
+                        if (sharesNameWith(card)) {
                             return true;
                         }
                     }
                     return false;
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
                     for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                        if (getName().equals(card.getName())) {
+                        if (sharesNameWith(card)) {
                             return true;
                         }
                     }
                     return false;
                 } else if (restriction.equals("ThisTurnCast")) {
                     for (final Card card : CardUtil.getThisTurnCast("Card", source)) {
-                        if (getName().equals(card.getName())) {
+                        if (sharesNameWith(card)) {
                             return true;
                         }
                     }
@@ -4412,7 +4412,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     for (final Object rem : source.getRemembered()) {
                         if (rem instanceof Card) {
                             final Card card = (Card) rem;
-                            if (getName().equals(card.getName())) {
+                            if (sharesNameWith(card)) {
                                 return true;
                             }
                         }
@@ -4420,7 +4420,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 } else if (restriction.equals("Imprinted")) {
                     for (final Card card : source.getImprintedCards()) {
-                        if (getName().equals(card.getName())) {
+                        if (sharesNameWith(card)) {
                             return true;
                         }
                     }
@@ -4447,7 +4447,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
                             Presets.NON_TOKEN);
                     for (final Card card : cards) {
-                        if (getName().equals(card.getName())) {
+                        if (sharesNameWith(card)) {
                             return true;
                         }
                     }
@@ -4457,7 +4457,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         System.out.println("Looking at TriggeredCard but no SA?");
                     } else {
                         Card triggeredCard = ((Card)spellAbility.getTriggeringObject("Card"));
-                        if (triggeredCard != null && getName().equals(triggeredCard.getName())) {
+                        if (triggeredCard != null && sharesNameWith(triggeredCard)) {
                             return true;
                         }
                     }
@@ -4466,7 +4466,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("doesNotShareNameWith")) {
             if (property.equals("doesNotShareNameWith")) {
-                if (getName().equals(source.getName())) {
+                if (sharesNameWith(source)) {
                     return false;
                 }
             } else {
@@ -4475,7 +4475,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     for (final Object rem : source.getRemembered()) {
                         if (rem instanceof Card) {
                             final Card card = (Card) rem;
-                            if (getName().equals(card.getName())) {
+                            if (sharesNameWith(card)) {
                                 return false;
                             }
                         }
@@ -5312,6 +5312,18 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isGreen() { return CardUtil.getColors(this).hasGreen(); }
     public final boolean isWhite() { return CardUtil.getColors(this).hasWhite(); }
     public final boolean isColorless() { return CardUtil.getColors(this).isColorless(); }
+
+    public final boolean sharesNameWith(final Card c1) {
+        boolean shares;
+        shares = getName().equals(c1.getName());
+
+        if (c1.isSplitCard()) {
+            shares |= c1.getName().equals(getState(CardStateName.LeftSplit).getName());
+            shares |= c1.getName().equals(getState(CardStateName.RightSplit).getName());
+    	}
+
+        return shares;
+    }
 
     public final boolean sharesColorWith(final Card c1) {
         boolean shares;
