@@ -802,12 +802,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         for (int i = 0; i < changeNum && destination != null; i++) {
             if (sa.hasParam("DifferentNames")) {
                 for (Card c : chosenCards) {
-                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
+                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesNameWith(c)));
                 }
             }
             if (sa.hasParam("DifferentCMC")) {
                 for (Card c: chosenCards) {
-                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.hasCMC(c.getCMC())));
+                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesCMCWith(c)));
                 }
             }
             if (sa.hasParam("ShareLandType")) {

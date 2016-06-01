@@ -5317,10 +5317,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         boolean shares;
         shares = getName().equals(c1.getName());
 
-        if (c1.isSplitCard()) {
+        if (isSplitCard() && c1.isSplitCard()) {
             shares |= c1.getName().equals(getState(CardStateName.LeftSplit).getName());
             shares |= c1.getName().equals(getState(CardStateName.RightSplit).getName());
-    	}
+        }
 
         return shares;
     }
@@ -5333,6 +5333,34 @@ public class Card extends GameEntity implements Comparable<Card> {
         shares |= (isRed() && c1.isRed());
         shares |= (isWhite() && c1.isWhite());
         return shares;
+    }
+
+    public final boolean sharesCMCWith(final Card c1) {
+        int x;
+        int x2 = -1;
+        int y = 0;
+        int y2 = -1;
+
+        if (isSplitCard() && getCurrentStateName() == CardStateName.Original) {
+            x = getState(CardStateName.LeftSplit).getManaCost().getCMC();
+            x2 = getState(CardStateName.RightSplit).getManaCost().getCMC();
+        } else {
+            x = getCMC();
+        }
+
+        if (c1.isSplitCard() && c1.getCurrentStateName() == CardStateName.Original) {
+            y = c1.getState(CardStateName.LeftSplit).getManaCost().getCMC();
+            y2 = c1.getState(CardStateName.RightSplit).getManaCost().getCMC();
+
+            if (isSplitCard() && getCurrentStateName() == CardStateName.Original) {
+                return x == y || x == y2 || x2 == y || x2 == y2;
+            } else {
+                return x == y || x == y2;
+            }
+        } else {
+            y = c1.getCMC();
+            return x == y || x2 == y;
+        }
     }
 
     public final boolean sharesCreatureTypeWith(final Card c1) {

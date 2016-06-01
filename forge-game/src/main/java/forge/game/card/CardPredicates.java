@@ -108,6 +108,24 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> sharesNameWith(final Card name) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.sharesNameWith(name);
+            }
+        };
+    }
+
+    public static final Predicate<Card> sharesCMCWith(final Card cmc) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.sharesCMCWith(cmc);
+            }
+        };
+    }
+
     public static final Predicate<Card> sharesColorWith(final Card color) {
         return new Predicate<Card>() {
             @Override
