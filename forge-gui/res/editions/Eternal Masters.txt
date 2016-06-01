@@ -202,7 +202,7 @@ FoilChanceInBooster=100
 191 C Werebear
 192 U Wirewood Symbiote
 193 R Xantid Swarm
-194 R Yavimaya Enchantress
+194 C Yavimaya Enchantress
 195 U Armadillo Cloak
 196 R Baleful Strix
 197 U Bloodbraid Elf
@@ -238,11 +238,11 @@ FoilChanceInBooster=100
 227 U Mindless Automaton
 228 R Nevinyrral's Disk
 229 C Pilgrim's Eye
-230 C Prismatic Lens
+230 U Prismatic Lens
 231 U Relic of Progenitus
-232 U Sensei's Divining Top
-233 R Ticking Gnomes
-234 U Winter Orb
+232 R Sensei's Divining Top
+233 U Ticking Gnomes
+234 R Winter Orb
 235 U Worn Powerstone
 236 C Bloodfell Caves
 237 C Blossoming Sands
