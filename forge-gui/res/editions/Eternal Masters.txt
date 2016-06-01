@@ -135,7 +135,7 @@ FoilChanceInBooster=100
 124 R Crater Hellion
 125 C Desperate Ravings
 126 C Dragon Egg
-127 M Dualcaster Mage
+127 R Dualcaster Mage
 128 C Faithless Looting
 129 C Fervent Cathar
 130 C Firebolt
@@ -201,7 +201,7 @@ FoilChanceInBooster=100
 190 U Timberwatch Elf
 191 C Werebear
 192 U Wirewood Symbiote
-193 C Xantid Swarm
+193 R Xantid Swarm
 194 R Yavimaya Enchantress
 195 U Armadillo Cloak
 196 R Baleful Strix
