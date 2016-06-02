@@ -18,6 +18,7 @@
 package forge.game.replacement;
 
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
 
@@ -53,7 +54,9 @@ public class ReplaceUntap extends ReplacementEffect {
             }
         }
         if (this.getMapParams().containsKey("UntapStep")) {
-            if (!this.getHostCard().getController().getGame().getPhaseHandler().is(PhaseType.UNTAP)) {
+            // all replace untap with untapStep does have "your untap step"
+            final Player player = this.getHostCard().getController();
+            if (!player.getGame().getPhaseHandler().is(PhaseType.UNTAP, player)) {
                 return false;
             }
         }
