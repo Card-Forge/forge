@@ -54,8 +54,15 @@ public class ReplaceUntap extends ReplacementEffect {
             }
         }
         if (this.getMapParams().containsKey("UntapStep")) {
+            final Object o = runParams.get("Affected");
+            //normally should not happen, but protect from possible crash.
+            if (!(o instanceof Card)) {
+                return false;
+            }
+
+            final Card card = (Card) o;
             // all replace untap with untapStep does have "your untap step"
-            final Player player = this.getHostCard().getController();
+            final Player player = card.getController();
             if (!player.getGame().getPhaseHandler().is(PhaseType.UNTAP, player)) {
                 return false;
             }
