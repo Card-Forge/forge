@@ -232,6 +232,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
+        if (!hasLegalTargeting(sp, source)) {
+            game.getGameLog().add(GameLogEntryType.STACK_ADD, source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription());
+            return;
+        }
+
         if (sp.isSpell()) {
             source.setController(activator, 0);
             final Spell spell = (Spell) sp;
@@ -625,6 +630,20 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
             game.getAction().moveToGraveyard(source);
         }
+    }
+
+    public final boolean hasLegalTargeting(final SpellAbility sa, final Card source) {
+        if (sa == null) {
+            return true;
+        }
+        TargetRestrictions tgt = sa.getTargetRestrictions();
+        if (tgt != null) {
+            int numTargets = sa.getTargets().getNumTargeted();
+            if (tgt.getMinTargets(source, sa) > numTargets || (tgt.getMaxTargets(source, sa) < numTargets)) {
+                return false;
+            }
+        }
+        return hasLegalTargeting(sa.getSubAbility(), source);
     }
 
     private final boolean hasFizzled(final SpellAbility sa, final Card source, final Boolean parentFizzled) {
