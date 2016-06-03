@@ -113,7 +113,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;
                 if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
                     if (max != -1) {
-                        counterAmount = max - tgtCard.getCounters(counterType);
+                        counterAmount = Math.max(Math.min(max - tgtCard.getCounters(counterType), counterAmount), 0);
                     }
                     if (sa.hasParam("Tribute")) {
                         String message = "Do you want to put " + tgtCard.getKeywordMagnitude("Tribute") + " +1/+1 counters on " + tgtCard + " ?";
