@@ -2345,6 +2345,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         Card oldTarget = null;
         if (isEquipping()) {
             oldTarget = equipping;
+            if (oldTarget.equals(c)) {
+                // If attempting to reattach to the same object, don't do anything.
+                return;
+            }
             unEquipCard(oldTarget);
         }
 
@@ -5930,6 +5934,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", damageIn);
         runParams.put("IsCombatDamage", isCombat);
+        if (!isCombat) {
+            runParams.put("SpellAbilityStackInstance", game.stack.peek());
+        }
         // Defending player at the time the damage was dealt
         runParams.put("DefendingPlayer", game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
         getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
