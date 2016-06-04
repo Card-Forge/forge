@@ -745,7 +745,7 @@ public class ComputerUtil {
         	return true;
         }
 
-        if (card.isCreature() && (ComputerUtil.hasACardGivingHaste(ai) || card.hasKeyword("Haste") || sa.isDash())) {
+        if (card.isCreature() && !card.hasKeyword("Defender") && (card.hasKeyword("Haste") || ComputerUtil.hasACardGivingHaste(ai) || sa.isDash())) {
             return true;
         }
         
@@ -1030,12 +1030,55 @@ public class ComputerUtil {
     public static boolean hasACardGivingHaste(final Player ai) {
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         
+        // Special for Anger
+        if (!ai.getGame().isCardInPlay("Yixlid Jailer")
+                && !ai.getCardsIn(ZoneType.Graveyard, "Anger").isEmpty()
+                && !CardLists.getType(all, "Mountain").isEmpty()) {
+            return true;
+        }
+
+        // Special for Odric
+        if (ai.isCardInPlay("Odric, Lunarch Marshal")
+                && !CardLists.getKeyword(all, "Haste").isEmpty()) {
+            return true;
+        }
+
+        // check for Continuous abilities that grant Haste
         for (final Card c : all) {
-            if (c.isEquipment()) {
-                for (StaticAbility stAb : c.getStaticAbilities()) {
-                    Map<String, String> params = stAb.getMapParams();
-                    if ("Continuous".equals(params.get("Mode")) && params.containsKey("AddKeyword")
-                            && params.get("AddKeyword").contains("Haste") && c.getEquipping() == null) {
+            for (StaticAbility stAb : c.getStaticAbilities()) {
+                Map<String, String> params = stAb.getMapParams();
+                if ("Continuous".equals(params.get("Mode")) && params.containsKey("AddKeyword")
+                        && params.get("AddKeyword").contains("Haste")) {
+                	
+                    if (c.isEquipment() && c.getEquipping() == null) {
+                        return true;
+                    }
+
+                    final String affected = params.get("Affected");
+                    if (affected.contains("Creature.YouCtrl")
+                    		|| affected.contains("Other+YouCtrl")) {
+                        return true;
+                    } else if (affected.contains("Creature.PairedWith") && !c.isPaired()) {
+                        return true;
+                    }
+                }
+            }
+
+            for (Trigger t : c.getTriggers()) {
+                Map<String, String> params = t.getMapParams(); 
+                if (!"ChangesZone".equals(params.get("Mode"))
+                		|| !"Battlefield".equals(params.get("Destination"))
+                		|| !params.containsKey("ValidCard")) {
+                    continue;
+                }
+
+                final String valid = params.get("ValidCard");
+                if (valid.contains("Creature.YouCtrl")
+                        || valid.contains("Other+YouCtrl") ) {
+
+                    final SpellAbility sa = t.getTriggeredSA();
+                    if (sa != null && sa.getApi() == ApiType.Pump && sa.hasParam("KW")
+                            && sa.getParam("KW").contains("Haste")) {
                         return true;
                     }
                 }
