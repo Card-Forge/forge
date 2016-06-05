@@ -1,11 +1,12 @@
 package forge.game.combat;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.common.collect.Lists;
 
@@ -21,12 +22,12 @@ public class CombatView extends TrackableObject {
 
     public CombatView(final Tracker tracker) {
         super(-1, tracker); //ID not needed
-        set(TrackableProperty.AttackersWithDefenders, new HashMap<CardView, GameEntityView>());
-        set(TrackableProperty.AttackersWithBlockers, new HashMap<CardView, FCollection<CardView>>());
-        set(TrackableProperty.BandsWithDefenders, new HashMap<FCollection<CardView>, GameEntityView>());
-        set(TrackableProperty.BandsWithBlockers, new HashMap<FCollection<CardView>, FCollection<CardView>>());
-        set(TrackableProperty.AttackersWithPlannedBlockers, new HashMap<CardView, FCollection<CardView>>());
-        set(TrackableProperty.BandsWithPlannedBlockers, new HashMap<FCollection<CardView>, FCollection<CardView>>());
+        set(TrackableProperty.AttackersWithDefenders, new ConcurrentHashMap<CardView, GameEntityView>());
+        set(TrackableProperty.AttackersWithBlockers, new ConcurrentHashMap<CardView, FCollection<CardView>>());
+        set(TrackableProperty.BandsWithDefenders, new ConcurrentHashMap<FCollection<CardView>, GameEntityView>());
+        set(TrackableProperty.BandsWithBlockers, new ConcurrentHashMap<FCollection<CardView>, FCollection<CardView>>());
+        set(TrackableProperty.AttackersWithPlannedBlockers, new ConcurrentHashMap<CardView, FCollection<CardView>>());
+        set(TrackableProperty.BandsWithPlannedBlockers, new ConcurrentHashMap<FCollection<CardView>, FCollection<CardView>>());
     }
     private Map<CardView, GameEntityView> getAttackersWithDefenders() {
         return get(TrackableProperty.AttackersWithDefenders);
