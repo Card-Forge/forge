@@ -365,7 +365,10 @@ public class GameAction {
                 // fizzle all "damage done" triggers for cards returning to battlefield from graveyard
                 game.getStack().fizzleTriggersOnStackTargeting(copied, TriggerType.DamageDone);
             }
-        } else if (zoneTo.is(ZoneType.Graveyard) || zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library)) {
+        } else if (zoneTo.is(ZoneType.Graveyard)
+        		|| zoneTo.is(ZoneType.Hand)
+        		|| zoneTo.is(ZoneType.Library)
+        		|| zoneTo.is(ZoneType.Exile)) {
             copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeywords()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
@@ -521,6 +524,7 @@ public class GameAction {
         final PlayerZone exile = owner.getZone(ZoneType.Exile);
 
         if (c.hasKeyword("If CARDNAME would be put into a graveyard, exile it instead.")) {
+            c.removeAllExtrinsicKeyword("If CARDNAME would be put into a graveyard, exile it instead.");
             return moveTo(exile, c);
         }
 
