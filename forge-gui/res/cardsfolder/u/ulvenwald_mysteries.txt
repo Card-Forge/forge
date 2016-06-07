@@ -2,7 +2,7 @@ Name:Ulvenwald Mysteries
 ManaCost:2 G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken1 | TriggerDescription$ Whenever a nontoken creature you control dies, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:TrigToken1:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw
+SVar:TrigToken1:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigToken2 | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, put a 1/1 white Human Soldier creature token onto the battlefield.
 SVar:TrigToken2:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Human Soldier | TokenTypes$ Creature,Human,Soldier| TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1

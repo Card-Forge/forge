@@ -2,8 +2,8 @@ Name:Ongoing Investigation
 ManaCost:1 U
 Types:Enchantment
 T:Mode$ CombatDamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, investigate.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw
-A:AB$ Token | Cost$ 1 G ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | SubAbility$ DBGainLife | SpellDescription$ Investigate. You gain 2 life. 
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 
+A:AB$ Token | Cost$ 1 G ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | SubAbility$ DBGainLife | SpellDescription$ Investigate. You gain 2 life. | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card. 
 SVar:PlayMain1:TRUE

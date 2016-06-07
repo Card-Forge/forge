@@ -4,6 +4,6 @@ Types:Creature Spirit Cleric
 PT:2/3
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Creature.cmcLE3 | ValidActivatingPlayer$ You | Execute$ DBToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with converted mana cost 3 or less, investigate.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Flying\nWhenever you cast a creature spell with converted mana cost 3 or less, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
