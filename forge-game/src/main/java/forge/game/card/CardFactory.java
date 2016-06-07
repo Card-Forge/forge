@@ -38,6 +38,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 
@@ -241,6 +242,16 @@ public class CardFactory {
             c.setXManaCostPaid(original.getXManaCostPaid());
             c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
             c.setKickerMagnitude(original.getKickerMagnitude());
+
+            // Rule 706.10 : Madness is copied
+            if (original.isInZone(ZoneType.Stack)) {
+                c.setMadness(original.isMadness());
+
+                final SpellAbilityStackInstance si = controller.getGame().getStack().getInstanceFromSpellAbility(sa);
+                if (si != null) {            	
+                    c.setXManaCostPaid(si.getXManaPaid());
+                }
+            }
 
             for (OptionalCost cost : original.getOptionalCostsPaid()) {
                 c.addOptionalCostPaid(cost);

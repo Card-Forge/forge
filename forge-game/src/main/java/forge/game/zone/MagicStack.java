@@ -59,6 +59,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.Ability;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
@@ -341,8 +342,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     }
 
                     // Replicate Trigger
-                    String effect = String.format("AB$ CopySpellAbility | Cost$ 0 | Defined$ SourceFirstSpell | Amount$ %d", magnitude);
-                    SpellAbility sa = AbilityFactory.getAbility(effect, source);
+                    String effect = String.format("DB$ CopySpellAbility | Cost$ 0 | Defined$ Parent | Amount$ %d", magnitude);
+                    AbilitySub sa = (AbilitySub) AbilityFactory.getAbility(effect, source);
+                    sa.setParent(sp);
                     sa.setDescription("Replicate - " + source);
                     sa.setTrigger(true);
                     sa.setCopied(true);

@@ -229,6 +229,10 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     public final Card getSourceCard() {
         return ability.getHostCard();
     }
+    
+    public final int getXManaPaid() {
+    	return xManaPaid;
+    }
 
     public final boolean isSpell() {
         return ability.isSpell();
