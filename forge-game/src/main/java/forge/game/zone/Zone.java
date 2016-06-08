@@ -91,13 +91,16 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         if (zoneType != ZoneType.Battlefield) {
             c.setTapped(false);
         }
-        c.setZone(this);
 
-        if (index == null) {
-            cardList.add(c);
-        }
-        else {
-            cardList.add(index.intValue(), c);
+        // Do not add Tokens to other zones than the battlefield.
+        if (zoneType == ZoneType.Battlefield || !c.isToken()) {
+            c.setZone(this);
+
+            if (index == null) {
+                cardList.add(c);
+            } else {
+                cardList.add(index.intValue(), c);
+            }
         }
         onChanged();
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
