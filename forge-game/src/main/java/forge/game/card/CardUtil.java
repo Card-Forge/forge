@@ -288,6 +288,8 @@ public final class CardUtil {
             newCopy.addImprintedCard(o);
         }
 
+        newCopy.setUnearthed(in.isUnearthed());
+
         newCopy.setChangedCardColors(in.getChangedCardColors());
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
         newCopy.setChangedCardTypes(in.getChangedCardTypes());

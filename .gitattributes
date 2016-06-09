@@ -9353,6 +9353,7 @@ forge-gui/res/cardsfolder/m/malakir_soothsayer.txt -text
 forge-gui/res/cardsfolder/m/malevolent_awakening.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/malevolent_whispers.txt -text
 forge-gui/res/cardsfolder/m/malfegor.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/m/malfegor_avatar.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/m/malicious_advice.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/malicious_affliction.txt -text
 forge-gui/res/cardsfolder/m/malicious_intent.txt -text

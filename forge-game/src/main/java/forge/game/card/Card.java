@@ -5151,6 +5151,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (isMonstrous()) {
                 return false;
             }
+        } else if (property.equals("IsUnearthed")) {
+            if (!isUnearthed()) {
+                return false;
+            }
         } else if (property.equals("IsRenowned")) {
             if (!isRenowned()) {
                 return false;

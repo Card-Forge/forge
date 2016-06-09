@@ -1,0 +1,10 @@
+Name:Malfegor Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+2/-2
+T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl+IsUnearthed | Origin$ Any | Destination$ Battlefield | TriggerZones$ Command | Execute$ TrigPump | TriggerDescription$ Whenever a creature enters the battlefield under your control, if it was unearthed, it gets +3/+0.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | NumAtt$ +3
+T:Mode$ ChangesZone | ValidCard$ Card.IsUnearthed | Origin$ Any | Destination$ Exile | TriggerZones$ Command | Execute$ TrigMove | TriggerDescription$ Whenever a creature you control is exiled, if it was uneathed, shuffle that card into its owner's library.
+SVar:TrigMove:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Library | Defined$ TriggeredCard | Shuffle$ True
+SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Malfegor Avatar.full.jpg
+Oracle:Hand +2, life -2\nWhenever a creature enters the battlefield under your control, if it was unearthed, it gets +3/+0.\nWhenever a creature you control is exiled, if it was uneathed, shuffle that card into its owner's library.
