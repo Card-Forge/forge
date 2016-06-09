@@ -6,8 +6,7 @@ A:SP$ RepeatEach | Cost$ 6 G G G | RepeatPlayers$ Player | RepeatSubAbility$ DBS
 SVar:DBStoreAmount:DB$ StoreSVar | SVar$ AuroraY | Type$ Count | Expression$ Valid Card.RememberedPlayerOwn | SubAbility$ DBStoreAmount2
 SVar:DBStoreAmount2:DB$ StoreSVar | SVar$ AuroraZ | Type$ Count | Expression$ ValidHand Card.RememberedPlayerOwn | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.RememberedPlayerOwn | Origin$ Hand,Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ AuroraX | References$ AuroraX | SubAbility$ DBCleanImprint
-SVar:DBCleanImprint:DB$ Cleanup | ClearImprinted$ True
+SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ AuroraX | References$ AuroraX
 SVar:AuroraX:SVar$AuroraY/Plus.AuroraZ
 SVar:AuroraY:Number$0
 SVar:AuroraZ:Number$0
