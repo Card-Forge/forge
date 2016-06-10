@@ -120,8 +120,15 @@ public class TokenEffect extends SpellAbilityEffect {
         this.tokenPower = mapParams.getParam("TokenPower");
         this.tokenToughness = mapParams.getParam("TokenToughness");
         this.tokenName = mapParams.getParam("TokenName");
-        this.tokenTypes = mapParams.getParam("TokenTypes").split(",");
-        this.tokenColors = mapParams.getParam("TokenColors").split(",");
+
+        String types = mapParams.getParam("TokenTypes");
+        types = AbilityUtils.applyAbilityTextChangeEffects(types, mapParams.getRootAbility());
+        this.tokenTypes = types.split(",");
+
+        String colors = mapParams.getParam("TokenColors");
+        colors = AbilityUtils.applyAbilityTextChangeEffects(colors, mapParams.getRootAbility());
+        this.tokenColors = colors.split(",");
+
         this.tokenKeywords = keywords;
         this.tokenImage = image;
         if (mapParams.hasParam("TokenOwner")) {
