@@ -957,7 +957,7 @@ public class AbilityUtils {
                 }
             }
         }
-        else if (defined.startsWith("OppNonTriggered")) {
+        else if (defined.startsWith("OppNon")) {
             players.addAll(sa.getActivatingPlayer().getOpponents());
             players.removeAll((Collection<?>)getDefinedPlayers(card, defined.substring(6), sa));
         }

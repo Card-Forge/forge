@@ -5857,6 +5857,7 @@ forge-gui/res/cardsfolder/f/feat_of_resistance.txt -text
 forge-gui/res/cardsfolder/f/fecundity.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/feebleness.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/feed_the_clan.txt -text
+forge-gui/res/cardsfolder/f/feed_the_machine.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/f/feed_the_pack.txt -text
 forge-gui/res/cardsfolder/f/feedback.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/feedback_bolt.txt svneol=native#text/plain
@@ -9569,6 +9570,7 @@ forge-gui/res/cardsfolder/m/maw_of_kozilek.txt -text
 forge-gui/res/cardsfolder/m/maw_of_the_mire.txt -text
 forge-gui/res/cardsfolder/m/maw_of_the_obzedat.txt -text
 forge-gui/res/cardsfolder/m/mawcor.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/may_civilization_collapse.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/m/mayael_the_anima.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mayael_the_anima_avatar.txt -text
 forge-gui/res/cardsfolder/m/mayaels_aria.txt svneol=native#text/plain
@@ -14699,6 +14701,7 @@ forge-gui/res/cardsfolder/s/surrakar_banisher.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/surrakar_marauder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/surrakar_spellblade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/surreal_memoir.txt -text
+forge-gui/res/cardsfolder/s/surrender_your_thoughts.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/surveilling_sprite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/survey_the_wreckage.txt -text
 forge-gui/res/cardsfolder/s/surveyors_scope.txt -text
@@ -15106,6 +15109,7 @@ forge-gui/res/cardsfolder/t/the_dark_barony.txt -text
 forge-gui/res/cardsfolder/t/the_dead_shall_serve.txt -text
 forge-gui/res/cardsfolder/t/the_eon_fog.txt -text
 forge-gui/res/cardsfolder/t/the_fallen.txt -text
+forge-gui/res/cardsfolder/t/the_fate_of_the_flammable.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/t/the_fourth_sphere.txt -text
 forge-gui/res/cardsfolder/t/the_gitrog_monster.txt -text
 forge-gui/res/cardsfolder/t/the_great_aurora.txt -text

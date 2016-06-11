@@ -70,7 +70,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 }
             }
             return spells.get(0);
-        } else if ("Khans".equals(logic) || "Dragons".equals(logic)) { // Fate Reforged sieges
+        } else if ("Khans".equals(logic) || "Dragons".equals(logic) || "Self".equals(logic) || "Others".equals(logic)) { // Fate Reforged sieges
             for (final SpellAbility sp : spells) {
                 if (sp.getDescription().equals(logic)) {
                     return sp;

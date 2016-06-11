@@ -1,0 +1,11 @@
+Name:Surrender Your Thoughts
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBChoose | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, target opponent chooses self or others. If that player chooses self, he or she discards four cards. if the player chooses others, each of your other opponents discards two cards.
+
+SVar:DBChoose:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ Self,Others | AILogic$ Others
+SVar:Self:DB$ Discard | Mode$ TgtChoose | Defined$ ParentTarget | NumCards$ 4 | SpellDescription$ Self
+SVar:Others:DB$ Discard | Mode$ TgtChoose | Defined$ OppNonParentTarget | NumCards$ 2 | SpellDescription$ Others
+
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/Surrender Your Thoughts.full.jpg
+Oracle:When you set this scheme in motion, target opponent chooses self or others. If that player chooses self, he or she discards four cards. if the player chooses others, each of your other opponents discards two cards.
