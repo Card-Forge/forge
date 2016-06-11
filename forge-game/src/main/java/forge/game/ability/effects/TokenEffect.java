@@ -45,6 +45,7 @@ public class TokenEffect extends SpellAbilityEffect {
 
     private String tokenOwner;
     private String[] tokenColors;
+    private String[] tokenOriginalColors;
     private String tokenImage;
     private String[] tokenAltImages;
     private String[] tokenAbilities;
@@ -58,17 +59,22 @@ public class TokenEffect extends SpellAbilityEffect {
     private String tokenToughness;
     private String tokenPower;
     private String[] tokenTypes;
+    private String[] tokenOriginalTypes;
     private String tokenName;
+    private String tokenOriginalName;
     private String[] tokenKeywords;
     private String[] tokenHiddenKeywords;
 
     private void readParameters(final SpellAbility mapParams) {
+    	final SpellAbility root = mapParams.getRootAbility();
         String image;
         String[] keywords;
 
         if (mapParams.hasParam("TokenKeywords")) {
             // TODO: Change this Split to a semicolon or something else
-            keywords = mapParams.getParam("TokenKeywords").split("<>");
+        	String tokenKeywords = mapParams.getParam("TokenKeywords");
+        	tokenKeywords = AbilityUtils.applyAbilityTextChangeEffects(tokenKeywords, root);
+            keywords = tokenKeywords.split("<>");
         } else {
             keywords = new String[0];
         }
@@ -119,14 +125,18 @@ public class TokenEffect extends SpellAbilityEffect {
         this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
         this.tokenPower = mapParams.getParam("TokenPower");
         this.tokenToughness = mapParams.getParam("TokenToughness");
-        this.tokenName = mapParams.getParam("TokenName");
+
+        this.tokenOriginalName = mapParams.getParam("TokenName");
+        this.tokenName = AbilityUtils.applyAbilityTextChangeEffects(this.tokenOriginalName, root);
 
         String types = mapParams.getParam("TokenTypes");
-        types = AbilityUtils.applyAbilityTextChangeEffects(types, mapParams.getRootAbility());
+        this.tokenOriginalTypes = types.split(",");
+        types = AbilityUtils.applyAbilityTextChangeEffects(types, root);
         this.tokenTypes = types.split(",");
 
         String colors = mapParams.getParam("TokenColors");
-        colors = AbilityUtils.applyAbilityTextChangeEffects(colors, mapParams.getRootAbility());
+        this.tokenOriginalColors = colors.split(",");
+        colors = AbilityUtils.applyAbilityTextChangeEffects(colors, root);
         this.tokenColors = colors.split(",");
 
         this.tokenKeywords = keywords;
@@ -173,10 +183,39 @@ public class TokenEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final SpellAbility root = sa.getRootAbility();
         readParameters(sa);
 
         String cost = "";
-        // Construct colors
+
+        // Construct original colors
+        String originalColorDesc = "";
+        for (final String col : this.tokenOriginalColors) {
+            if (col.equalsIgnoreCase("White")) {
+            	originalColorDesc += "W ";
+            } else if (col.equalsIgnoreCase("Blue")) {
+            	originalColorDesc += "U ";
+            } else if (col.equalsIgnoreCase("Black")) {
+            	originalColorDesc += "B ";
+            } else if (col.equalsIgnoreCase("Red")) {
+            	originalColorDesc += "R ";
+            } else if (col.equalsIgnoreCase("Green")) {
+            	originalColorDesc += "G ";
+            } else if (col.equalsIgnoreCase("Colorless")) {
+            	originalColorDesc = "C";
+            }
+        }
+
+        final List<String> imageNames = new ArrayList<String>(1);
+        if (this.tokenImage.equals("")) {
+            imageNames.add(PaperToken.makeTokenFileName(originalColorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenOriginalName));
+        } else {
+            imageNames.add(0, this.tokenImage);
+        }
+        if (this.tokenAltImages != null) {
+        	imageNames.addAll(Arrays.asList(this.tokenAltImages));
+        }
+
         final String[] substitutedColors = Arrays.copyOf(this.tokenColors, this.tokenColors.length);
         for (int i = 0; i < substitutedColors.length; i++) {
             if (substitutedColors[i].equals("ChosenColor")) {
@@ -200,17 +239,6 @@ public class TokenEffect extends SpellAbilityEffect {
                 colorDesc = "C";
             }
         }
-        
-        final List<String> imageNames = new ArrayList<String>(1);
-        if (this.tokenImage.equals("")) {
-            imageNames.add(PaperToken.makeTokenFileName(colorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenName));
-        } else {
-            imageNames.add(0, this.tokenImage);
-        }
-        if (this.tokenAltImages != null) {
-        	imageNames.addAll(Arrays.asList(this.tokenAltImages));
-        }
-
         for (final char c : colorDesc.toCharArray()) {
             cost += c + ' ';
         }
@@ -257,7 +285,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 // Grant abilities
                 if (this.tokenAbilities != null) {
                     for (final String s : this.tokenAbilities) {
-                        final String actualAbility = host.getSVar(s);
+                        final String actualAbility = AbilityUtils.getSVar(root, s);
                         for (final Card c : tokens) {
                             final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
                             c.addSpellAbility(grantedAbility);
@@ -271,12 +299,12 @@ public class TokenEffect extends SpellAbilityEffect {
                 if (this.tokenTriggers != null) {
 
                     for (final String s : this.tokenTriggers) {
-                        final String actualTrigger = host.getSVar(s);
+                        final String actualTrigger = AbilityUtils.getSVar(root, s);
 
                         for (final Card c : tokens) {
 
                             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
-                            final String ability = host.getSVar(parsedTrigger.getMapParams().get("Execute"));
+                            final String ability = AbilityUtils.getSVar(root, parsedTrigger.getMapParams().get("Execute"));
                             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
                             c.addTrigger(parsedTrigger);
                         }
@@ -286,7 +314,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 // Grant SVars
                 if (this.tokenSVars != null) {
                     for (final String s : this.tokenSVars) {
-                        String actualSVar = host.getSVar(s);
+                        String actualSVar = AbilityUtils.getSVar(root, s);
                         String name = s;
                         if (actualSVar.startsWith("SVar")) {
                             actualSVar = actualSVar.split("SVar:")[1];
@@ -302,7 +330,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 // Grant static abilities
                 if (this.tokenStaticAbilities != null) {
                     for (final String s : this.tokenStaticAbilities) {
-                        final String actualAbility = host.getSVar(s);
+                        final String actualAbility = AbilityUtils.getSVar(root, s);
                         for (final Card c : tokens) {
                             c.addStaticAbilityString(actualAbility);
                             c.addStaticAbility(actualAbility);
