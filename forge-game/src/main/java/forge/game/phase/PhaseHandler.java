@@ -419,7 +419,7 @@ public class PhaseHandler implements java.io.Serializable {
                     c.getDamageHistory().setNotAttackedSinceLastUpkeepOf(playerTurn);
                     c.getDamageHistory().setNotBlockedSinceLastUpkeepOf(playerTurn);
                     c.getDamageHistory().setNotBeenBlockedSinceLastUpkeepOf(playerTurn);
-                    if (playerTurn.equals(c.getController())) {
+                    if (playerTurn.equals(c.getController()) && c.getTurnInZone() < game.getPhaseHandler().getTurn()) {
                         c.setCameUnderControlSinceLastUpkeep(false);
                     }
                 }
