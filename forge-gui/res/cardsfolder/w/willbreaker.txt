@@ -2,7 +2,7 @@ Name:Willbreaker
 ManaCost:3 U U
 Types:Creature Human Wizard
 PT:2/3
-T:Mode$ BecomesTarget | ValidTarget$ Creature.OppCtrl | ValidSource$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever a creature an opponent controls becomes the target of a spell or ability you control, gain control of that creature for as long as you control CARDNAME.
+T:Mode$ BecomesTarget | ValidTarget$ Creature.OppCtrl+inZoneBattlefield | ValidSource$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever a creature an opponent controls becomes the target of a spell or ability you control, gain control of that creature for as long as you control CARDNAME.
 SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ TriggeredTarget | NewController$ You | LoseControl$ LeavesPlay,LoseControl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/willbreaker.jpg
 Oracle:Whenever a creature an opponent controls becomes the target of a spell or ability you control, gain control of that creature for as long as you control Willbreaker.
