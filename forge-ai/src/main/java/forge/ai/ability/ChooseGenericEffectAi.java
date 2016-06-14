@@ -70,12 +70,40 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 }
             }
             return spells.get(0);
-        } else if ("Khans".equals(logic) || "Dragons".equals(logic) || "Self".equals(logic) || "Others".equals(logic)) { // Fate Reforged sieges
+        } else if ("Khans".equals(logic) || "Dragons".equals(logic)) { // Fate Reforged sieges
             for (final SpellAbility sp : spells) {
                 if (sp.getDescription().equals(logic)) {
                     return sp;
                 }
             }
+        } else if ("SelfOthers".equals(logic)) {
+            SpellAbility self = null, others = null;
+            for (final SpellAbility sp : spells) {
+                if (sp.getDescription().equals("Self")) {
+                    self = sp;
+                } else {
+                    others = sp;
+                }
+            }
+            String hostname = host.getName();
+            if (hostname.equals("May Civilization Collapse")) {
+                if (player.getLandsInPlay().isEmpty()) {
+                    return self;
+                }
+            } else if (hostname.equals("Feed the Machine")) {
+                if (player.getCreaturesInPlay().isEmpty()) {
+                    return self;
+                }
+            } else if (hostname.equals("Surrender Your Thoughts")) {
+                if (player.getCardsIn(ZoneType.Hand).isEmpty()) {
+                    return self;
+                }
+            } else if (hostname.equals("The Fate of the Flammable")) {
+                if (!player.canLoseLife()) {
+                    return self;
+                }
+            }
+            return others;
         } else if ("Fatespinner".equals(logic)) {
             SpellAbility skipDraw = null, skipMain = null, skipCombat = null;
             for (final SpellAbility sp : spells) {

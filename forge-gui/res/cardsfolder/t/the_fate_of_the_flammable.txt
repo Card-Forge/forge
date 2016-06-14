@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBChoose | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, target opponent chooses self or others. If that player chooses self, this scheme deals 6 damage to him or her. if the player chooses others, this scheme deals 3 damage to each of your other opponents.
 
-SVar:DBChoose:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ Self,Others | AILogic$ Others
+SVar:DBChoose:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ Self,Others | AILogic$ SelfOthers
 SVar:Self:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ 6 | SpellDescription$ Self
 SVar:Others:DB$ DealDamage | Defined$ OppNonParentTarget | NumDmg$ 3 | SpellDescription$ Others
 
