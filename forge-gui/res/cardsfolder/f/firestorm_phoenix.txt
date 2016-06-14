@@ -1,0 +1,19 @@
+Name:Firestorm Phoenix
+ManaCost:4 R R
+Types:Creature Zombie
+PT:3/2
+K:Flying
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ ToHand | Description$ If CARDNAME would die, return CARDNAME to its owner's hand instead. Until that player's next turn, that player plays with that card revealed in his or her hand and can't play it.
+SVar:ToHand:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ ReplacedCard | SubAbility$ DBEffect
+
+SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ ReplacedCard | SVars$ ExileSelf | Duration$ UntilYourNextTurn | StaticAbilities$ CantBeCast,KWShow
+
+SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.IsRemembered | Caster$ You | Description$ You can't play remembered card.
+
+SVar:KWShow:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Hand | Affected$ Card.IsRemembered | AddHiddenKeyword$ Your opponent may look at this card. | Description$ Play with rembembered card revealed.
+
+SVar:ComeBack:Mode$ ChangesZone | Origin$ Hand | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileSelf | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ None
+SVar:ExileSelf:AB$ ChangeZone | Cost$ 0 | Origin$ Command | Destination$ Exile | Defined$ Self
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm_phoenix.jpg
+Oracle:If Firestorm Phoenix would die, return Firestorm Phoenix to its owner's hand instead. Until that player's next turn, that player plays with that card revealed in his or her hand and can't play it.

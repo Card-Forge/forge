@@ -6023,6 +6023,7 @@ forge-gui/res/cardsfolder/f/fireslinger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/firespout.txt -text
 forge-gui/res/cardsfolder/f/firestorm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/firestorm_hellkite.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/firestorm_phoenix.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/f/firewake_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/firewild_borderpost.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/firewing_phoenix.txt -text
