@@ -10179,6 +10179,7 @@ forge-gui/res/cardsfolder/m/muzzle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mwonvuli_acid_moss.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mwonvuli_beast_tracker.txt -text
 forge-gui/res/cardsfolder/m/mwonvuli_ooze.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/my_crushing_masterstroke.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/m/my_genius_knows_no_bounds.txt -text
 forge-gui/res/cardsfolder/m/my_undead_horde_awakens.txt -text
 forge-gui/res/cardsfolder/m/my_wish_is_your_command.txt -text
