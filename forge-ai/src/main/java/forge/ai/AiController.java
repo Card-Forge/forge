@@ -1383,6 +1383,10 @@ public class AiController {
      */
     public final boolean aiShouldRun(final ReplacementEffect effect, final SpellAbility sa) {
         Card hostCard = effect.getHostCard();
+        if (hostCard.hasAlternateState()) {
+            hostCard = game.getCardState(hostCard);
+    	}
+
         if (effect.getMapParams().containsKey("AICheckSVar")) {
             System.out.println("aiShouldRun?" + sa);
             final String svarToCheck = effect.getMapParams().get("AICheckSVar");
