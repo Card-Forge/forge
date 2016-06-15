@@ -14370,6 +14370,7 @@ forge-gui/res/cardsfolder/s/steeple_roc.txt -text
 forge-gui/res/cardsfolder/s/stench_of_decay.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stench_of_evil.txt -text
 forge-gui/res/cardsfolder/s/stenchskipper.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/stensia.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/stensia_bloodhall.txt -text
 forge-gui/res/cardsfolder/s/stensia_masquerade.txt -text
 forge-gui/res/cardsfolder/s/steppe_glider.txt -text
