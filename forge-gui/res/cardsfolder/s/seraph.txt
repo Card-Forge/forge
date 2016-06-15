@@ -1,0 +1,18 @@
+Name:Seraph
+ManaCost:6 W
+Types:Creature Angel
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Creature.DamagedBy | Origin$ Battlefield | Destination$ Graveyard | DelayedTrigger$ DelTrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, put that card onto the battlefield under your control at the beginning of the next end step. Sacrifice the creature when you lose control of CARDNAME.
+SVar:DelTrigReturn:Mode$ Phase | Phase$ End Of Turn | Execute$ DBReturn | TriggerDescription$ Return that card to the battlefield at the beginning of the next end step.
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True
+
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | Defined$ Card.Self | ForgetObjects$ TriggeredCard
+
+T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Sacrifice | TriggerDescription$ Sacrifice the creature when you lose control of CARDNAME.
+SVar:Sacrifice:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Card.IsRemembered | Controller$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seraph.jpg
+Oracle:Flying\nWhenever a creature dealt damage by Seraph this turn dies, put that card onto the battlefield under your control at the beginning of the next end step. Sacrifice the creature when you lose control of Seraph.

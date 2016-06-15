@@ -13130,6 +13130,7 @@ forge-gui/res/cardsfolder/s/sentry_of_the_underworld.txt -text
 forge-gui/res/cardsfolder/s/separatist_voidmage.txt -text
 forge-gui/res/cardsfolder/s/septic_rats.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sepulchral_primordial.txt -text
+forge-gui/res/cardsfolder/s/seraph.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/seraph_of_dawn.txt -text
 forge-gui/res/cardsfolder/s/seraph_of_the_masses.txt -text
 forge-gui/res/cardsfolder/s/seraph_of_the_sword.txt -text
