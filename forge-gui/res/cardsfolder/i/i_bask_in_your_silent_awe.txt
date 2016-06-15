@@ -1,0 +1,18 @@
+Name:I Bask in Your Silent Awe
+ManaCost:no cost
+Types:Ongoing Scheme
+
+S:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Opponent | NumLimitEachTurn$ 1 | Description$ Each opponent can't cast more than one spell each turn.
+
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ Abandon | TriggerZones$ Command | CheckSVar$ X | SVarCompare$ EQ0 | TriggerDescription$ At the beginning of your upkeep, if no opponent cast a spell since your last turn ended, abandon this scheme.
+
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | Execute$ DBCount | TriggerZones$ Command | Static$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ DBReset | TriggerZones$ Command | Static$ True
+
+SVar:DBCount:AB$ StoreSVar | Cost$ 0 | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1
+SVar:DBReset:AB$ StoreSVar | Cost$ 0 | SVar$ X | Type$ Number | Expression$ 0
+
+SVar:Abandon:AB$ Abandon | Cost$ 0
+SVar:X:Number$0
+SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/I Bask in Your Silent Awe.full.jpg
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nEach opponent can't cast more than one spell each turn.\nAt the beginning of your upkeep, if no opponent cast a spell since your last turn ended, abandon this scheme.

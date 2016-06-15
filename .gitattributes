@@ -7814,6 +7814,7 @@ forge-gui/res/cardsfolder/h/hypochondria.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hysterical_blindness.txt -text
 forge-gui/res/cardsfolder/h/hystrodon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hythonia_the_cruel.txt -text
+forge-gui/res/cardsfolder/i/i_bask_in_your_silent_awe.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/i/i_call_on_the_ancient_magics.txt -text
 forge-gui/res/cardsfolder/i/i_delight_in_your_convulsions.txt -text
 forge-gui/res/cardsfolder/i/i_know_all_i_see_all.txt -text
