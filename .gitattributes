@@ -2415,6 +2415,7 @@ forge-gui/res/cardsfolder/b/barbed_lightning.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/barbed_sextant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/barbed_shocker.txt -text
 forge-gui/res/cardsfolder/b/barbed_sliver.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/barbed_wire.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/b/barbtooth_wurm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bargain.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bargaining_table.txt svneol=native#text/plain

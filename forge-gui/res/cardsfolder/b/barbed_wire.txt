@@ -1,0 +1,13 @@
+Name:Barbed Wire
+ManaCost:3
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 1
+
+A:AB$ Effect | Cost$ 2 | ImprintCards$ Self | Triggers$ OutOfSight | SVars$ ExileSelf | StaticAbilities$ STPrevent | SpellDescription$ Prevent the next 1 damage that would be dealt by CARDNAME this turn. | StackDescription$ SpellDescription
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Amount$ 1 | Source$ Card.IsImprinted | Description$ Prevent the next 1 damage that would be dealt by CARDNAME this turn.
+SVar:OutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_wire.jpg
+Oracle:At the beginning of each player's upkeep, Barbed Wire deals 1 damage to that player.\n{2}: Prevent the next 1 damage that would be dealt by Barbed Wire this turn.
