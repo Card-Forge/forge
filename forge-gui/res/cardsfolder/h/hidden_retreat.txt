@@ -1,0 +1,11 @@
+Name:Hidden Retreat
+ManaCost:2 W
+Types:Enchantment
+# The target lists a second zone to a Card is returned instead of a SA
+A:AB$ Effect | Cost$ PutCardToLibFromHand<1/0/Card> | ValidTgts$ Instant,Sorcery | AILogic$ Prevent | Stackable$ False | TgtZone$ Stack,Battlefield | TgtPrompt$ Select target instant or sorcery spell to prevent damage from | StaticAbilities$ PreventDmg | Triggers$ TargetMoved | SVars$ ExileEffect | RememberObjects$ Targeted | SpellDescription$ Prevent all damage target instant or sorcery spell would deal this turn.
+SVar:PreventDmg:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.IsRemembered | AddHiddenKeyword$ Prevent all damage that would be dealt by CARDNAME. | Description$ Prevent all damage target instant or sorcery spell would deal this turn.
+SVar:TargetMoved:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_retreat.jpg
+Oracle:Put a card from your hand on top of your library: Prevent all damage that would be dealt by target instant or sorcery spell this turn.

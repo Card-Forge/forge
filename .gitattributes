@@ -7557,6 +7557,7 @@ forge-gui/res/cardsfolder/h/hidden_herd.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hidden_horror.txt -text
 forge-gui/res/cardsfolder/h/hidden_path.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hidden_predators.txt -text
+forge-gui/res/cardsfolder/h/hidden_retreat.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/h/hidden_spider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hidden_stag.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/h/hidden_strings.txt -text
