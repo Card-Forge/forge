@@ -15448,6 +15448,7 @@ forge-gui/res/cardsfolder/t/torpor_dust.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/torpor_orb.txt -text
 forge-gui/res/cardsfolder/t/torrent_elemental.txt -text
 forge-gui/res/cardsfolder/t/torrent_of_fire.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/torrent_of_lava.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/t/torrent_of_souls.txt -text
 forge-gui/res/cardsfolder/t/torrent_of_stone.txt -text
 forge-gui/res/cardsfolder/t/torsten_von_ursus.txt svneol=native#text/plain

@@ -1,0 +1,15 @@
+Name:Torrent of Lava
+ManaCost:X R R
+Types:Sorcery
+A:SP$ DamageAll | Cost$ X R | ValidCards$ Creature.withoutFlying | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying. | StackDescription$ SpellDescription
+SVar:X:Count$xPaid
+
+S:Mode$ Continuous | Affected$ Creature | AddAbility$ DbPrevent | AddSVar$ TOLOutOfSight & TOLSTPrevent & TOLExileSelf | EffectZone$ Stack | Description$ As long as Torrent of Lava is on the stack, each creature has "{T}: Prevent the next 1 damage that would be dealt to this creature by CARDNAME this turn."
+
+SVar:DbPrevent:AB$ Effect | Cost$ T | RememberObjects$ OriginalHost | ImprintCards$ Self | Triggers$ TOLOutOfSight | SVars$ TOLExileSelf | StaticAbilities$ TOLSTPrevent | SpellDescription$ Prevent the next 1 damage that would be dealt to this creature by Torrent of Lava this turn. | StackDescription$ SpellDescription
+SVar:TOLSTPrevent:Mode$ PreventDamage | EffectZone$ Command | Amount$ 1 | Target$ Card.IsImprinted | Source$ Card.IsRemembered | Description$ Prevent the next 1 damage that would be dealt to this creature by remembered Card this turn.
+SVar:TOLOutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ ExileSelf | Static$ True
+SVar:TOLExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/torrent_of_lava.jpg
+Oracle:Torrent of Lava deals X damage to each creature without flying.\nAs long as Torrent of Lava is on the stack, each creature has "{T}: Prevent the next 1 damage that would be dealt to this creature by Torrent of Lava this turn."
