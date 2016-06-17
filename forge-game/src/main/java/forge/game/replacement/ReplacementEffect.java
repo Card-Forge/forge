@@ -20,6 +20,7 @@ package forge.game.replacement;
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityApiBased;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.spellability.AbilitySub;
@@ -197,7 +198,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     @Override
     public String toString() {
         if (this.getMapParams().containsKey("Description") && !this.isSuppressed()) {
-            return this.getMapParams().get("Description");
+            return AbilityUtils.applyDescriptionTextChangeEffects(this.getMapParams().get("Description"), this);
         } else {
             return "";
         }

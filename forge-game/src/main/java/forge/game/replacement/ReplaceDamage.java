@@ -20,6 +20,7 @@ package forge.game.replacement;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.SpellAbility;
+import forge.game.ability.AbilityUtils;
 import forge.util.Expressions;
 
 import java.util.Map;
@@ -52,12 +53,16 @@ public class ReplaceDamage extends ReplacementEffect {
             return false;
         }
         if (getMapParams().containsKey("ValidSource")) {
-            if (!matchesValid(runParams.get("DamageSource"), getMapParams().get("ValidSource").split(","), getHostCard())) {
+        	String validSource = getMapParams().get("ValidSource");
+        	validSource = AbilityUtils.applyAbilityTextChangeEffects(validSource, this);        	
+            if (!matchesValid(runParams.get("DamageSource"), validSource.split(","), getHostCard())) {
                 return false;
             }
         }
         if (getMapParams().containsKey("ValidTarget")) {
-            if (!matchesValid(runParams.get("Affected"), getMapParams().get("ValidTarget").split(","), getHostCard())) {
+        	String validTarget = getMapParams().get("ValidTarget");
+        	validTarget = AbilityUtils.applyAbilityTextChangeEffects(validTarget, this);
+            if (!matchesValid(runParams.get("Affected"), validTarget.split(","), getHostCard())) {
                 return false;
             }
         }
