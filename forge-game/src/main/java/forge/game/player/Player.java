@@ -558,7 +558,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        if (hasProtectionFrom(source)) {
+        if (hasProtectionFrom(source, true)) {
             return 0;
         }
 
@@ -1118,6 +1118,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public boolean hasProtectionFrom(final Card source) {
+        return hasProtectionFrom(source, false);
+    }
+
+    public boolean hasProtectionFrom(final Card source, final boolean damageSource) {
         for (String kw : keywords) {
             if (kw.startsWith("Protection")) {
                 if (kw.startsWith("Protection:")) { // uses isValid
@@ -1128,21 +1132,23 @@ public class Player extends GameEntity implements Comparable<Player> {
                     }
                 }
                 else {
+                    final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
+
                     switch (kw) {
                     case "Protection from white":
-                        if (source.isWhite()) { return true; }
+                        if (source.isWhite() && !colorlessDamage) { return true; }
                         break;
                     case "Protection from blue":
-                        if (source.isBlue()) { return true; }
+                        if (source.isBlue() && !colorlessDamage) { return true; }
                         break;
                     case "Protection from black":
-                        if (source.isBlack()) { return true; }
+                        if (source.isBlack() && !colorlessDamage) { return true; }
                         break;
                     case "Protection from red":
-                        if (source.isRed()) { return true; }
+                        if (source.isRed() && !colorlessDamage) { return true; }
                         break;
                     case "Protection from green":
-                        if (source.isGreen()) { return true; }
+                        if (source.isGreen() && !colorlessDamage) { return true; }
                         break;
                     }
                 }

@@ -3683,25 +3683,41 @@ public class Card extends GameEntity implements Comparable<Card> {
         else if (property.contains("White") || property.contains("Blue") || property.contains("Black")
                 || property.contains("Red") || property.contains("Green")) {
             boolean mustHave = !property.startsWith("non");
-            int desiredColor = MagicColor.fromName(mustHave ? property : property.substring(3));
+            boolean withSource = property.endsWith("Source");
+            if (withSource && hasKeyword("Colorless Damage Source")) {
+                return false;
+            }
+
+            final String colorName = property.substring(mustHave ? 0 : 3, property.length() - (withSource ? 6 : 0));
+
+            int desiredColor = MagicColor.fromName(colorName);
             boolean hasColor = CardUtil.getColors(this).hasAnyColor(desiredColor);
             if (mustHave != hasColor)
                 return false;
 
         } else if (property.contains("Colorless")) { // ... Card is colorless
-            if (property.startsWith("non") == CardUtil.getColors(this).isColorless()) return false;
+            boolean non = property.startsWith("non");
+            boolean withSource = property.endsWith("Source");
+            if (non && withSource && hasKeyword("Colorless Damage Source")) {
+                return false;
+            }
+            if (non == CardUtil.getColors(this).isColorless()) return false;
 
         } else if (property.contains("MultiColor")) { // ... Card is multicolored
+            if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
             if (property.startsWith("non") == CardUtil.getColors(this).isMulticolor()) return false;
 
         } else if (property.contains("MonoColor")) { // ... Card is monocolored
+            if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
             if (property.startsWith("non") == CardUtil.getColors(this).isMonoColor()) return false;
 
-        } else if (property.equals("ChosenColor")) {
+        } else if (property.contains("ChosenColor")) {
+            if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
             if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(MagicColor.fromName(source.getChosenColor())))
                 return false;
 
-        } else if (property.equals("AnyChosenColor")) {
+        } else if (property.contains("AnyChosenColor")) {
+            if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
             if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor()))
                 return false;
 
@@ -5656,7 +5672,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         int restDamage = damageIn;
 
-        if (hasProtectionFrom(source)) {
+        if (hasProtectionFromDamage(source)) {
             return 0;
         }
 
@@ -6163,10 +6179,18 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     @Override
     public boolean hasProtectionFrom(final Card source) {
-        return hasProtectionFrom(source, false);
+        return hasProtectionFrom(source, false, false);
+    }
+
+    public boolean hasProtectionFromDamage(final Card source) {
+        return hasProtectionFrom(source, false, true);
     }
 
     public boolean hasProtectionFrom(final Card source, final boolean checkSBA) {
+        return hasProtectionFrom(source, checkSBA, false);
+    }
+
+    public boolean hasProtectionFrom(final Card source, final boolean checkSBA, final boolean damageSource) {
         if (source == null) {
             return false;
         }
@@ -6177,28 +6201,38 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         final List<String> keywords = getKeywords();
         if (keywords != null) {
+            final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
+
             for (final String kw : keywords) {
                 if (!kw.startsWith("Protection")) {
                     continue;
                 }
                 if (kw.equals("Protection from white")) {
-                    if (source.isWhite()) {
+                    if (source.isWhite() && !colorlessDamage) {
                         return true;
                     }
                 } else if (kw.equals("Protection from blue")) {
-                    if (source.isBlue()) {
+                    if (source.isBlue() && !colorlessDamage) {
                         return true;
                     }
                 } else if (kw.equals("Protection from black")) {
-                    if (source.isBlack()) {
+                    if (source.isBlack() && !colorlessDamage) {
                         return true;
                     }
                 } else if (kw.equals("Protection from red")) {
-                    if (source.isRed()) {
+                    if (source.isRed() && !colorlessDamage) {
                         return true;
                     }
                 } else if (kw.equals("Protection from green")) {
-                    if (source.isGreen()) {
+                    if (source.isGreen() && !colorlessDamage) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from monocolored")) {
+                    if (CardUtil.getColors(source).isMonoColor() && !colorlessDamage) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from multicolored")) {
+                    if (CardUtil.getColors(source).isMulticolor() && !colorlessDamage) {
                         return true;
                     }
                 } else if (kw.equals("Protection from creatures")) {
@@ -6217,7 +6251,18 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return true;
                 } else if (kw.startsWith("Protection:")) { // uses isValid; Protection:characteristic:desc:exception
                     final String[] kws = kw.split(":");
-                    final String characteristic = kws[1];
+                    String characteristic = kws[1];
+
+                    // if colorlessDamage then it does only check damage color..
+                    if (colorlessDamage) {
+                        if (characteristic.endsWith("White") || characteristic.endsWith("Blue") 
+                            || characteristic.endsWith("Black") || characteristic.endsWith("Red") 
+                            || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
+                            || characteristic.endsWith("ChosenColor")) {
+                            characteristic += "Source"; 
+                        }
+                    }
+
                     final String[] characteristics = characteristic.split(",");
                     final String exception = kws.length > 3 ? kws[3] : null; // check "This effect cannot remove sth"
                     if (source.isValid(characteristics, getController(), this, null)
