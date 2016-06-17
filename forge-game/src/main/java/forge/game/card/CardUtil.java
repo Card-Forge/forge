@@ -70,11 +70,16 @@ public final class CardUtil {
      * So Clerics maps to Cleric, Demons to Demon, etc.
      */
     public static final ImmutableBiMap<String, String> singularTypes = ImmutableBiMap.<String, String>builder()
-            .put("Clerics", "Cleric")
+    		.put("Beasts", "Beast")
+    		.put("Clerics", "Cleric")
             .put("Demons", "Demon")
             .put("Dragons", "Dragon")
+            .put("Elves", "Elf")
             .put("Goblins", "Goblin")
             .put("Gorgons", "Gorgon")
+            .put("Vampires", "Vampire")
+            .put("Werewolves", "Werewolf")
+            .put("Zombies", "Zombie")
             .build();
     /**
      * Map of singular type names to the corresponding plural form.
