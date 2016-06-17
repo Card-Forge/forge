@@ -2,9 +2,9 @@ Name:Lithomancer's Focus
 ManaCost:W
 Types:Instant
 A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBEffect | SpellDescription$ Target creature gets +2/+2 until end of turn. Prevent all damage that would be dealt to that creature this turn by colorless sources.
-SVar:DBEffect:DB$ Effect | Defined$ Targeted | Name$ Lithomancer's Focus Effect | StaticAbilities$ STPrevent | RememberObjects$ Targeted | Triggers$ OutOfSight | SVars$ ExileSelf
+SVar:DBEffect:DB$ Effect | Defined$ Targeted | StaticAbilities$ STPrevent | RememberObjects$ Targeted | Triggers$ OutOfSight | SVars$ ExileSelf
 SVar:OutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Card.Colorless | Target$ Card.IsRemembered | Description$ Prevent all damage that would be dealt to that creature this turn by colorless sources.
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Card.ColorlessSource | Target$ Card.IsRemembered | Description$ Prevent all damage that would be dealt to that creature this turn by colorless sources.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lithomancers_focus.jpg
 Oracle:Target creature gets +2/+2 until end of turn. Prevent all damage that would be dealt to that creature this turn by colorless sources.

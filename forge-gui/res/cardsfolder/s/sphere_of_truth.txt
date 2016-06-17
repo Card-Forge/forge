@@ -1,7 +1,7 @@
 Name:Sphere of Truth
 ManaCost:3 W
 Types:Enchantment
-S:Mode$ PreventDamage | Target$ You | Source$ Card.White | Amount$ 2 | Description$ If a white source would deal damage to you, prevent 2 of that damage.
+S:Mode$ PreventDamage | Target$ You | Source$ Card.WhiteSource | Amount$ 2 | Description$ If a white source would deal damage to you, prevent 2 of that damage.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_truth.jpg
 Oracle:If a white source would deal damage to you, prevent 2 of that damage.

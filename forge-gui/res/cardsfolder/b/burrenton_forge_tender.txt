@@ -3,9 +3,9 @@ ManaCost:W
 Types:Creature Kithkin Wizard
 PT:1/1
 K:Protection from red
-A:AB$ ChooseSource | Cost$ Sac<1/CARDNAME> | Choices$ Card.Red | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage a red source of your choice would deal this turn.
-SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
-SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | Prevent$ True | PreventionEffect$ True | Description$ Prevent all damage the chosen source would deal this turn.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChooseSource | Cost$ Sac<1/CARDNAME> | Choices$ Card.RedSource | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage a red source of your choice would deal this turn.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ ChosenCard | SVars$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered+RedSource | Prevent$ True | PreventionEffect$ True | Description$ Prevent all damage the chosen source would deal this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burrenton_forge_tender.jpg
 Oracle:Protection from red\nSacrifice Burrenton Forge-Tender: Prevent all damage a red source of your choice would deal this turn.

@@ -1,11 +1,11 @@
 Name:Circle of Protection: Shadow
 ManaCost:1 W
 Types:Enchantment
-A:AB$ ChooseCard | Cost$ 1 | Choices$ Creature.withShadow | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromCreature,ExileEffect | SpellDescription$ The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
-SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromCreature | RememberObjects$ Remembered | SVars$ RPreventNextFromCreature,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
-SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time a creature of your choice with shadow would deal damage to you, prevent that damage.
+A:AB$ ChooseCard | Cost$ 1 | Choices$ Creature.withShadow | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromCreature,ExileEffect | SpellDescription$ The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromCreature | RememberObjects$ ChosenCard | SVars$ RPreventNextFromCreature,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered+withShadow | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time a creature of your choice with shadow would deal damage to you, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_shadow.jpg

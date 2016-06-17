@@ -6586,6 +6586,7 @@ forge-gui/res/cardsfolder/g/ghostflame_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/ghostform.txt -text
 forge-gui/res/cardsfolder/g/ghosthelm_courier.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/ghostly_changeling.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/ghostly_flame.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/g/ghostly_flicker.txt -text
 forge-gui/res/cardsfolder/g/ghostly_possession.txt -text
 forge-gui/res/cardsfolder/g/ghostly_prison.txt svneol=native#text/plain

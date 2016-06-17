@@ -3,8 +3,8 @@ ManaCost:3 R R
 Types:Creature Hellion
 PT:4/5
 K:Trample
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Red+Other+YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1 | IsCombat$ False | Description$ If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Red+Other+YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1Combat | IsCombat$ True | Secondary$ True | Description$ If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RedSource+Other+YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1 | IsCombat$ False | Description$ If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RedSource+Other+YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1Combat | IsCombat$ True | Secondary$ True | Description$ If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
 SVar:DmgPlus1:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:DmgPlus1Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.1
