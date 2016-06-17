@@ -2,7 +2,7 @@ Name:Soldier of the Pantheon
 ManaCost:W
 Types:Creature Human Soldier
 PT:2/1
-K:Protection:Card.MultiColor:Protection from multicolored
+K:Protection from multicolored
 T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever an opponent casts a multicolored spell, you gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldier_of_the_pantheon.jpg

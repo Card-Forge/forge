@@ -2,6 +2,6 @@ Name:Shoreline Raider
 ManaCost:2 U
 Types:Creature Merfolk
 PT:2/2
-K:Protection:Kavu:Protection from Kavu
+K:Protection from Kavu
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shoreline_raider.jpg
 Oracle:Protection from Kavu

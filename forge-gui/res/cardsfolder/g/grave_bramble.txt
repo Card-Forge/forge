@@ -3,6 +3,6 @@ ManaCost:1 G G
 Types:Creature Plant
 PT:3/4
 K:Defender
-K:Protection:Zombie:Protection from Zombies
+K:Protection from Zombies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_bramble.jpg
 Oracle:Defender, protection from Zombies

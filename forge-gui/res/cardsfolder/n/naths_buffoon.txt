@@ -2,6 +2,6 @@ Name:Nath's Buffoon
 ManaCost:1 B
 Types:Creature Goblin Rogue
 PT:1/1
-K:Protection:Elf:Protection from Elves
+K:Protection from Elves
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naths_buffoon.jpg
 Oracle:Protection from Elves

@@ -2,6 +2,6 @@ Name:Midnight Duelist
 ManaCost:W
 Types:Creature Human Soldier
 PT:1/2
-K:Protection:Vampire:Protection from Vampires
+K:Protection from Vampires
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_duelist.jpg
 Oracle:Protection from Vampires

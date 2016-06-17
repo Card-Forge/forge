@@ -4,6 +4,8 @@ Types:Creature Human Soldier
 PT:2/2
 K:First Strike
 K:Vigilance
-K:Protection:Vampire,Werewolf,Zombie:Protection from Vampires, from Werewolves and from Zombies.
+K:Protection from Vampires
+K:Protection from Werewolves
+K:Protection from Zombies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_inquisitor.jpg
 Oracle:First strike, vigilance\nProtection from Vampires, from Werewolves and from Zombies

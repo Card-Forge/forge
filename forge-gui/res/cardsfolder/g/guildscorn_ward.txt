@@ -3,6 +3,6 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.MultiColor:Protection from multicolored | Description$ Enchanted creature has protection from multicolored.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection from multicolored | Description$ Enchanted creature has protection from multicolored.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guildscorn_ward.jpg
 Oracle:Enchant creature\nEnchanted creature has protection from multicolored.

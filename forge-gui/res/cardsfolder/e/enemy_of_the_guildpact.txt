@@ -2,6 +2,6 @@ Name:Enemy of the Guildpact
 ManaCost:4 B
 Types:Creature Spirit
 PT:4/2
-K:Protection:Card.MultiColor:Protection from multicolored
+K:Protection from multicolored
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enemy_of_the_guildpact.jpg
 Oracle:Protection from multicolored

@@ -2,7 +2,7 @@ Name:Riptide Biologist
 ManaCost:1 U
 Types:Creature Human Wizard
 PT:1/2
-K:Protection:Beast:Protection from Beasts
+K:Protection from Beasts
 K:Morph:2 U
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_biologist.jpg
 Oracle:Protection from Beasts\nMorph {2}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
