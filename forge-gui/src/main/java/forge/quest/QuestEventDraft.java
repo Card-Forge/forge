@@ -881,6 +881,10 @@ public class QuestEventDraft {
             }
         } else {
             final List<String> possibleSetCombinations = new ArrayList<>(getSetCombos(quest, format.block));
+            if (possibleSetCombinations.isEmpty()) {
+                System.err.println("Warning: no valid set combinations were detected when trying to generate a draft tournament for the format: " + format);
+                return null;
+            }
             Collections.shuffle(possibleSetCombinations);
             event.boosterConfiguration = possibleSetCombinations.get(0);
         }
@@ -1015,7 +1019,8 @@ public class QuestEventDraft {
             throw new IllegalStateException(allowedSets + " does not contain a large set for quest draft generation.");
         }
 
-        if (allowedSets.containsAll(sets)) {
+        // FIXME: Currently explicitly allow generation of draft tournaments with irregular (incomplete) blocks for the sake of custom quest worlds
+        if (allowedSets.containsAll(sets) || !quest.getWorld().getName().toLowerCase().equals("main world")) {
             CardEdition set0 = allowedSets.get(0);
             CardEdition set1 = allowedSets.get(1);
             if (allowedSets.size() == 2) {
