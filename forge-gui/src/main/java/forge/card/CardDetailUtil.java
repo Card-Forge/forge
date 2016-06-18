@@ -388,6 +388,16 @@ public class CardDetailUtil {
             area.append(")");
         }
 
+        // chosen cards
+        if (card.getChosenCards() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(chosen cards: ");
+            area.append(Lang.joinHomogenous(card.getChosenCards()));
+            area.append(")");
+        }
+
         // chosen player
         if (card.getChosenPlayer() != null) {
             if (area.length() != 0) {
