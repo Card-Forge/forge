@@ -255,6 +255,10 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
 
+    public FCollectionView<CardView> getChosenCards() {
+        return get(TrackableProperty.ChosenCards);
+    }
+
     public PlayerView getChosenPlayer() {
         return get(TrackableProperty.ChosenPlayer);
     }

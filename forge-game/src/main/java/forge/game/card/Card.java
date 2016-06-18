@@ -1164,7 +1164,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return CardCollection.getView(chosenCards);
     }
     public final void setChosenCards(final CardCollection cards) {
-        chosenCards = view.setCards(chosenCards, cards, TrackableProperty.ChosenColors);
+        chosenCards = view.setCards(chosenCards, cards, TrackableProperty.ChosenCards);
     }
     public boolean hasChosenCard() {
         return FCollection.hasElements(chosenCards);

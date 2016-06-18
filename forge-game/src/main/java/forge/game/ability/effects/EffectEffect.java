@@ -7,6 +7,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -193,6 +194,11 @@ public class EffectEffect extends SpellAbilityEffect {
         // Set Chosen Color(s)
         if (hostCard.hasChosenColor()) {
             eff.setChosenColors(Lists.newArrayList(hostCard.getChosenColors()));
+        }
+
+        // Set Chosen Cards
+        if (hostCard.hasChosenCard()) {
+            eff.setChosenCards(new CardCollection(hostCard.getChosenCards()));
         }
 
         // Set Chosen name

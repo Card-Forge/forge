@@ -33,6 +33,7 @@ public enum TrackableProperty {
     ShieldCount(TrackableTypes.IntegerType),
     ChosenType(TrackableTypes.StringType),
     ChosenColors(TrackableTypes.StringListType),
+    ChosenCards(TrackableTypes.CardViewCollectionType),
     ChosenPlayer(TrackableTypes.PlayerViewType),
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
     Remembered(TrackableTypes.StringType),
