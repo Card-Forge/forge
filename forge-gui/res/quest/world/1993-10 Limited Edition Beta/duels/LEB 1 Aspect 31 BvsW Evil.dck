@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 31 BvW Evil
+Title=Aspect of Evil
+Difficulty=easy
+Description=Created to destroy Dominiaria, demons can sometimes be bent to a more focused purpose.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Bad Moon|LEB
+4 Black Knight|LEB
+4 Demonic Hordes|LEB
+1 Demonic Tutor|LEB
+3 Evil Presence|LEB
+3 Howl from Beyond|LEB
+2 Kormus Bell|LEB
+2 Lord of the Pit|LEB
+4 Nightmare|LEB
+4 Sengir Vampire|LEB
+24 Swamp|LEB|3
+2 Throne of Bone|LEB
+3 Unholy Strength|LEB

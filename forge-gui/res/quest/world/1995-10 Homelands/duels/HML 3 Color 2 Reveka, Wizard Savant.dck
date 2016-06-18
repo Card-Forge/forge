@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=HML 3 Color: 2 Reveka, Wizard Savant
+Title=Reveka, Wizard Savant
+Difficulty=hard
+Description="It's nice to see a sister Dwarf in a position of such power, but why'd it have to be one of those seafaring muleheads?" -Halina, Dwarven Trader
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Ebony Rhino|HML
+24 Island|LEB|2
+2 Labyrinth Minotaur|HML|1
+2 Labyrinth Minotaur|HML|2
+2 Marjhan|HML
+2 Memory Lapse|HML|1
+2 Memory Lapse|HML|2
+1 Mystic Decree|HML
+4 Narwhal|HML
+4 Reveka, Wizard Savant|HML
+2 Roterothopter|HML
+4 Sea Sprite|HML
+4 Serrated Arrows|HML
+3 Wall of Kelp|HML

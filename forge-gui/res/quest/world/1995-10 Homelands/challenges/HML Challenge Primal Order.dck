@@ -1,0 +1,19 @@
+[quest]
+id=HML Challenge: Primal Order
+OpponentName=The Primal Order
+AILife=10
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:HML
+Credit Reward=120
+AIExtras=Primal Order
+HumanExtras=An-Havva Township|Aysen Abbey|Castle Sengir|Koskun Keep|Wizards' School
+[metadata]
+Name=HML Challenge: Primal Order
+Title=The Primal Order
+Difficulty=hard
+Description="It's strange, but I can feel it when the land is corrupted. I understand why the Autumn Willow is so protective." -Daria
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+60 Primal Order|HML

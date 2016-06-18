@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=ATQ 2 Gimmick: Demonic Archaeology
+Title=Demonic Archaeology
+Difficulty=medium
+Description=Fascinated by the lore of ancient struggles, the Archaeologist searches incessantly for remnants of an earlier, more powerful era.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Argivian Archaeologist|ATQ
+4 Jalum Tome|ATQ
+2 Mishra's War Machine|ATQ
+4 Onulet|ATQ
+4 Ornithopter|ATQ
+15 Plains|LEB|1
+1 Strip Mine|ATQ|3
+10 Swamp|LEB|1
+4 Tablet of Epityr|ATQ
+4 Triskelion|ATQ
+4 Urza's Chalice|ATQ
+4 Yawgmoth Demon|ATQ

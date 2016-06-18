@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=HML 2 Tribe: The Faeries
+Title=The Faeries
+Difficulty=medium
+Description="The Autumn Willow cannot be everywhere at once-that's what her grandchildren are for." -Gulsen, Abbey Matron
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Carapace|HML|2
+4 Faerie Noble|HML
+16 Forest|LEB|3
+8 Island|LEB|3
+2 Memory Lapse|HML|1
+2 Memory Lapse|HML|2
+4 Roots|HML
+4 Sea Sprite|HML
+4 Serrated Arrows|HML
+4 Shrink|HML|1
+2 Willow Faerie|HML|1
+2 Willow Faerie|HML|2
+4 Willow Priestess|HML

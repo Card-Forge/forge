@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=LEG 2 Lord: 4 Bartel Runeaxe
+Title=Bartel Runeaxe
+Difficulty=medium
+Description=Thundering down from Hammerheim, no foe could slow Bartel's charge.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Bartel Runeaxe|LEG
+4 Chain Lightning|LEG
+13 Forest|LEB|3
+4 Living Plane|LEG
+6 Mountain|LEB|1
+1 Pendelhaven|LEG
+4 Pyrotechnics|LEG
+4 Rabid Wombat|LEG
+6 Swamp|LEB|3
+4 Takklemaggot|LEG
+4 Untamed Wilds|LEG
+2 Vaevictis Asmadi|LEG
+4 Whirling Dervish|LEG

@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: The Town of Thorn
+Title=The Town of Thorn
+Difficulty=easy
+Description="With a great cry, the goblin host broke and ran as the first wave of knights penetrated its ranks." -Tivadar of Thorn, History of the Goblin Wars
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Brainwash|DRK
+4 Knights of Thorn|DRK
+4 Morale|DRK
+4 Pikemen|DRK
+28 Plains|LEB|1
+4 Runesword|DRK
+4 Squire|DRK
+4 Tivadar's Crusade|DRK
+2 Tower of Coireall|DRK
+2 War Barge|DRK

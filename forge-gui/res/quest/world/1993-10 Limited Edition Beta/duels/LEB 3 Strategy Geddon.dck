@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=LEB 3 Strategy: Geddon
+Title=Geddon
+Difficulty=hard
+Description="'O miserable of happy Is this the end // Of this new glorious world . . . ?'"-John Milton, Paradise Lost
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Ancestral Recall|LEB
+4 Armageddon|LEB
+1 Balance|LEB
+4 Birds of Paradise|LEB
+1 Black Lotus|LEB
+4 Black Vise|LEB
+3 Disenchant|LEB
+4 Elvish Archers|LEB
+1 Forest|LEB|2
+4 Llanowar Elves|LEB
+1 Mox Emerald|LEB
+1 Mox Pearl|LEB
+1 Mox Sapphire|LEB
+2 Plains|LEB|1
+4 Savannah|LEB
+4 Savannah Lions|LEB
+1 Sol Ring|LEB
+4 Swords to Plowshares|LEB
+1 Time Walk|LEB
+4 Tropical Island|LEB
+4 Tundra|LEB
+4 White Knight|LEB
+2 Winter Orb|LEB

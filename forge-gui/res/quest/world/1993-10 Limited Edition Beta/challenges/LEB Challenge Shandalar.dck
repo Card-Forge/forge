@@ -1,0 +1,27 @@
+[quest]
+id=LEB Challenge: Shandalar
+OpponentName=Kenan Sarmahl
+AILife=30
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Shandalar
+Title=Shandalar
+Difficulty=very hard
+Description="Hey, that's not fair!" -You, probably
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+4 Ancestral Recall|LEB
+4 Black Lotus|LEB
+4 Juggernaut|LEB
+4 Lightning Bolt|LEB
+4 Mox Ruby|LEB
+4 Mox Sapphire|LEB
+4 Sol Ring|LEB
+4 Time Walk|LEB
+4 Timetwister|LEB
+4 Volcanic Island|LEB

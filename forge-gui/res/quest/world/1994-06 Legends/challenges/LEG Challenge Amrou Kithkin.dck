@@ -1,0 +1,20 @@
+[quest]
+id=LEG Challenge: Amrou Kithkin
+OpponentName=The Kithkin
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEG
+Credit Reward=120
+AIExtras=Wall of Light
+HumanExtras=Evil Eye of Orms-by-Gore
+[metadata]
+Name=LEG Challenge: Amrou Kithkin
+Title=The Kithkin
+Difficulty=hard
+Description=Quick and agile, Amrou Kithkin can usually escape from even the most fearsome opponents.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+36 Amrou Kithkin|LEG
+24 Plains|LEB|2

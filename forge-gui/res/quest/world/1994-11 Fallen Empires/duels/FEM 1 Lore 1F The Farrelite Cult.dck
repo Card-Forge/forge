@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=FEM 1 Lore: 1F The Farrelite Cult
+Title=The Farrelite Cult
+Difficulty=easy
+Description="Trained to battle the followers of Tourach, the Order of Leitbur was not as successful in later conflicts with Orcish and Goblin raiders." -Sarpadian Empires, vol. I
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+4 Balm of Restoration|FEM
+4 Conch Horn|FEM
+4 Draconian Cylix|FEM
+4 Farrel's Mantle|FEM
+1 Farrel's Zealot|FEM|1
+2 Farrel's Zealot|FEM|2
+1 Farrel's Zealot|FEM|3
+4 Farrelite Priest|FEM
+4 Hand of Justice|FEM
+1 Order of Leitbur|FEM|1
+1 Order of Leitbur|FEM|2
+2 Order of Leitbur|FEM|3
+24 Plains|LEB|2

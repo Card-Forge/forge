@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=ICE 2 Color: 2UBR The Elementalists
+Title=The Elementalists
+Difficulty=medium
+Description="The Elementalists' talents could be useful if turned to other purposes." -Zur the Enchanter
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Agent of Stromgald|ALL|1
+2 Agent of Stromgald|ALL|2
+4 Balduvian Dead|ALL
+3 Diabolic Vision|ICE
+1 Flooded Woodlands|ICE
+4 Fumarole|ICE
+2 Island|ICE|1
+2 Island|ICE|2
+4 Krovikan Elementalist|ICE
+4 Krovikan Sorcerer|ICE
+2 Mountain|ICE|2
+2 Mountain|ICE|3
+2 Phantasmal Fiend|ALL|1
+2 Phantasmal Fiend|ALL|2
+4 Skeleton Ship|ICE
+4 Soul Burn|ICE
+4 Sulfurous Springs|ICE
+2 Swamp|ICE|1
+2 Swamp|ICE|2
+4 Swamp|ICE|3
+4 Underground River|ICE

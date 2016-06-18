@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Soldev: The Machinists
+Title=The Soldevi Machinists
+Difficulty=easy
+Description="Our underground archives grow daily, as our excavators and sages alike dig to uncover hidden wonders." -Arcum Dagsson, Soldevi Machinist
+
+Soldev is a semi-autonomous city located in the north of Kjeldor, built on the ruins of the old kingdom of Storgard.  Its people are expert machinists, who work tirelessly to unearth artifacts of a bygone era.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+1 Aegis of the Meek|ICE
+2 Aesthir Glider|ALL|1
+2 Aesthir Glider|ALL|2
+2 Diminishing Returns|ALL
+1 Elkin Bottle|ICE
+24 Island|ICE|1
+1 Lapis Lazuli Talisman|ICE
+1 Pentagram of the Ages|ICE
+1 Shield of the Ages|ICE
+1 Soldevi Digger|ALL
+4 Soldevi Golem|ICE
+4 Soldevi Machinist|ICE
+4 Soldevi Sage|ALL|2
+2 Soldevi Sentry|ALL|1
+2 Soldevi Sentry|ALL|2
+1 Staff of the Ages|ICE
+1 Urza's Bauble|ICE
+4 Walking Wall|ICE
+1 War Chariot|ICE
+1 Whalebone Glider|ICE

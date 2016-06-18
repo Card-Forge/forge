@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=ICE 3 Pro Tour: Ice Pick by Sean Fleischman
+Title=Ice Pick
+Difficulty=Hard
+Description=Sean Fleischman's Pro Tour 1996 deck.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Adarkar Wastes|ICE
+2 Blinking Spirit|ICE
+3 Counterspell|ICE
+3 Disenchant|ICE
+2 Force of Will|ALL
+3 Incinerate|ICE
+1 Island|ICE|1
+1 Island|ICE|2
+2 Island|ICE|3
+2 Ivory Gargoyle|ALL
+2 Jokulhaups|ICE
+2 Kjeldoran Outpost|ALL
+2 Mind Warp|ICE
+2 Mountain|ICE|1
+2 Mountain|ICE|2
+2 Mountain|ICE|3
+2 Plains|ICE|1
+2 Plains|ICE|2
+2 Plains|ICE|3
+3 Power Sink|ICE
+2 Pyroclasm|ICE
+2 Stone Rain|ICE
+3 Sulfurous Springs|ICE
+3 Swords to Plowshares|ICE
+3 Thawing Glaciers|ALL
+2 Underground River|ICE
+1 Zuran Orb|ICE

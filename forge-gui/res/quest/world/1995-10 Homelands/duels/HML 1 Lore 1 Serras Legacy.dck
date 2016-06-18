@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=HML 1 Lore: 1 Serra's Legacy
+Title=Serra's Legacy
+Difficulty=easy
+Description="Serra, like Feroz, is long since dead. But remember, Daria: her spirit shall survive so long as the Homelands do." -Taysir
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Abbey Gargoyles|HML
+2 Mesa Falcon|HML|1
+2 Mesa Falcon|HML|2
+24 Plains|LEB|2
+4 Prophecy|HML
+4 Rashka the Slayer|HML
+4 Serra Aviary|HML
+4 Serra Bestiary|HML
+4 Serra Inquisitors|HML
+4 Serra Paladin|HML
+4 Soraya the Falconer|HML

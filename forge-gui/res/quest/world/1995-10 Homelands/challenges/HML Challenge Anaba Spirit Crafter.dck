@@ -1,0 +1,19 @@
+[quest]
+id=HML Challenge: Anaba Spirit Crafter
+OpponentName=The Spirit Crafters
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:HML
+Credit Reward=120
+AIExtras=Didgeridoo
+[metadata]
+Name=HML Challenge: Anaba Spirit Crafter
+Title=The Spirit Crafters
+Difficulty=hard
+Description="The Spirit Crafters sing of all our people. They sing of those lost, of those found, and of those who are yet to be." -Onatah, Anaba Shaman
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+30 Anaba Spirit Crafter|HML
+30 Mountain|LEB|2

@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=ARN 1 Color: 2U Sindbad
+Title=Sindbad
+Difficulty=easy
+Description=Then the maiden bade him cast off his robes and cover his body with fishliver oil, that he might safely follow her into the sea.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Dandan|ARN
+4 Desert|ARN
+2 Fishliver Oil|ARN|2
+4 Flying Men|ARN
+4 Giant Tortoise|ARN|2
+20 Island|LEB|2
+2 Island Fish Jasconius|ARN
+2 Merchant Ship|ARN
+2 Oasis|ARN
+2 Old Man of the Sea|ARN
+4 Serendib Djinn|ARN
+4 Serendib Efreet|ARN
+2 Sindbad|ARN
+4 Unstable Mutation|ARN

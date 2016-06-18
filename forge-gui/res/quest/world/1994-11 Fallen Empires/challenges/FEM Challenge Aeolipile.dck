@@ -1,0 +1,19 @@
+[quest]
+id=FEM Challenge: Aeolipile
+OpponentName=The Poltergeist
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:FEM
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=FEM Challenge: Aeolipile
+Title=The Poltergeist
+Difficulty=medium
+Description="Although fragile, the aeolipile could be quite destructive." -Sarpadian Empires, vol. I
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+40 Aeolipile|FEM
+20 Mountain|LEB|3

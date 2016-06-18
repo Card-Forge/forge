@@ -1,0 +1,19 @@
+[quest]
+id=FEM Challenge: Thrull Champion
+OpponentName=The Champions
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:FEM
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=FEM Challenge: Thrull Champion
+Title=The Champions
+Difficulty=medium
+Description="Those idiots should never have bred thrulls for combat!" -Jherana Rure
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+30 Swamp|LEB|1
+30 Thrull Champion|FEM

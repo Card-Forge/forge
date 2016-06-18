@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=ICE 2 Tribe: The Walking Dead
+Title=The Walking Dead
+Difficulty=medium
+Description="I have seen the faces of my dead friends among that grim band, and I can bear no more." -Lucilde Fiksdotter, Leader of the Order of the White Shield.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Ashen Ghoul|ICE
+4 Balduvian Dead|ALL
+1 Casting of Bones|ALL|1
+1 Casting of Bones|ALL|2
+4 Dance of the Dead|ICE
+4 Dread Wight|ICE
+2 Feast or Famine|ALL|1
+2 Feast or Famine|ALL|2
+4 Gangrenous Zombies|ICE
+4 Legions of Lim-Dul|ICE
+4 Lim-Dul's Cohort|ICE
+2 Mountain|ICE|3
+18 Snow-Covered Swamp|ICE
+1 Stench of Decay|ALL|1
+1 Stench of Decay|ALL|2
+4 Sulfurous Springs|ICE

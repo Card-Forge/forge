@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 53 GvB Life
+Title=Aspect of Life
+Difficulty=easy
+Description=Whenever the Llanowar Elves gather the fruits of their forest, they leave one plant of each type untouched, considering that nature's portion.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Elvish Archers|LEB
+24 Forest|LEB|2
+2 Lifeforce|LEB
+4 Living Artifact|LEB
+2 Living Lands|LEB
+4 Llanowar Elves|LEB
+3 Regeneration|LEB
+4 Scryb Sprites|LEB
+4 Shanodin Dryads|LEB
+3 Stream of Life|LEB
+4 Verduran Enchantress|LEB
+2 Wooden Sphere|LEB

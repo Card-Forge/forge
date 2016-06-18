@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Aurochs
+OpponentName=The Aurochs Herd
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Heart of Yavimaya
+[metadata]
+Name=ICE Challenge: Aurochs
+Title=The Aurochs Herd
+Difficulty=medium
+Description="We could see the horizon blacken with the great beasts, but it was too late. The icefield offered no immediate safety, but luckily most of us reached a crevasse in which we could take cover." -Disa the Restless, journal entry
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+30 Snow-Covered Forest|ICE
+30 Aurochs|ICE

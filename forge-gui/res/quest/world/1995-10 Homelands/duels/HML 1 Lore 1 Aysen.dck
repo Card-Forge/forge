@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=HML 1 Lore: 1 Aysen
+Title=Aysen
+Difficulty=easy
+Description=Serra's gift to her people: a symbol of faith and hope.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Abbey Gargoyles|HML
+2 Abbey Matron|HML|1
+2 Abbey Matron|HML|2
+2 Aysen Bureaucrats|HML|1
+2 Aysen Bureaucrats|HML|2
+4 Aysen Crusader|HML
+2 Aysen Highway|HML
+2 Beast Walkers|HML
+4 Death Speakers|HML
+26 Plains|LEB|1
+2 Samite Alchemist|HML|1
+2 Samite Alchemist|HML|2
+2 Trade Caravan|HML|1
+2 Trade Caravan|HML|2
+2 Truce|HML

@@ -1,0 +1,20 @@
+[quest]
+id=LEB Challenge: Copycat
+OpponentName=Copycat
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Copycat
+Title=Copycat
+Difficulty=easy
+Description=The shapeshifter mimics with a twin's esteem and a mirror's cruelty.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+20 Clone|LEB
+20 Copy Artifact|LEB
+20 Island|LEB

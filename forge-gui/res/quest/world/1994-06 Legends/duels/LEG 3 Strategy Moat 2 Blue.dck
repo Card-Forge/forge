@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEG 3 Strategy: Moat: 2 Blue
+Title=Blue Skies
+Difficulty=hard
+Description=The purpose of any moat is to impede attack. Some are filled with water, some with thistles. Some are filled with things best left unseen.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Azure Drake|LEG
+4 Boomerang|LEG
+4 Divine Transformation|LEG
+2 Force Spike|LEG
+11 Island|LEB|2
+2 Land Tax|LEG
+4 Mana Drain|LEG
+4 Moat|LEG
+4 Osai Vultures|LEG
+13 Plains|LEB|1
+4 Thunder Spirit|LEG
+4 Zephyr Falcon|LEG

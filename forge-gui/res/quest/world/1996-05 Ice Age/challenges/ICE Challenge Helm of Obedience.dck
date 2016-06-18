@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Helm of Obedience
+OpponentName=The Helm
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=School of the Unseen|School of the Unseen|School of the Unseen|School of the Unseen
+[metadata]
+Name=ICE Challenge: Helm of Obedience
+Title=The Helm
+Difficulty=hard
+Description="Morality is doing what's right regardless of what you're told. Obedience is doing what is told regardless of what is right." -H. L. Mencken
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[main]
+40 Helm of Obedience|ALL
+20 School of the Unseen|All

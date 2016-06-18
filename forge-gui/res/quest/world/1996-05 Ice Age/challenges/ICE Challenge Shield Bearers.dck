@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Shield Bearers
+OpponentName=The Shield Bearers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Celestial Sword|Vibrating Sphere
+[metadata]
+Name=ICE Challenge: Shield Bearers
+Title=The Shield Bearers
+Difficulty=medium
+Description="You have almost completed your four years, my son. Soon you shall be a Skyknight." -Arna Kennerüd, Skyknight
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+40 Shield Bearer|ICE
+20 Plains|ICE|2

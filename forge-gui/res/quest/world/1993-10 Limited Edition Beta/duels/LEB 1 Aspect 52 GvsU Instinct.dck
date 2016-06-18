@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 52 GvU Instinct
+Title=Aspect of Instinct
+Difficulty=easy
+Description=Though many think of Wolves as solitary predators, they are actually extremely social animals. During a hunt they often call to each other, which can be quite unsettling for their prey.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Aspect of Wolf|LEB
+4 Birds of Paradise|LEB
+4 Craw Wurm|LEB
+24 Forest|LEB|3
+4 Giant Spider|LEB
+4 Grizzly Bears|LEB
+4 Timber Wolves|LEB
+3 Wanderlust|LEB
+4 War Mammoth|LEB
+3 Web|LEB
+2 Wooden Sphere|LEB

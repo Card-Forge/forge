@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=ICE 3 Color: 2U
+Title=The Color Blue
+Difficulty=Hard
+Description="What I want, I take." -Gustha Ebbasdotter, Kjeldoran royal mage
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+2 Benthic Explorers|ALL|1
+2 Benthic Explorers|ALL|2
+4 Binding Grasp|ICE
+4 Counterspell|ICE
+4 Illusionary Forces|ICE
+24 Island|ICE|1
+4 Power Sink|ICE
+4 Ray of Command|ICE
+4 Sea Spirit|ICE
+4 Sibilant Spirit|ICE
+4 Zuran Spellcaster|ICE

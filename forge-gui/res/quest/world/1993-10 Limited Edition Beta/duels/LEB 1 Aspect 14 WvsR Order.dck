@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 14 WvR Order
+Title=Aspect of Order
+Difficulty=easy
+Description=Benalia has a complex caste system that changes with the lunar year. No matter what the season, the only caste that cannot be attained by either heredity or money is that of the hero.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+3 Armageddon|LEB
+1 Balance|LEB
+4 Benalish Hero|LEB
+2 Conversion|LEB
+4 Icy Manipulator|LEB
+2 Ivory Cup|LEB
+4 Lance|LEB
+4 Personal Incarnation|LEB
+24 Plains|LEB|3
+4 Reverse Damage|LEB
+4 Righteousness|LEB
+4 Wrath of God|LEB

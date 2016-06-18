@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEG 3 Strategy: Universal Greed
+Title=Universal Greed
+Difficulty=hard
+Description="There is no calamity greater than lavish desires./ There is no greater guilt than discontentment./ And there is no greater disaster than greed." -Tao Tê Ching 46
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Darkness|LEG
+4 Divine Offering|LEG
+4 Greed|LEG
+4 Holy Day|LEG
+2 Land Tax|LEG
+4 Mirror Universe|LEG
+4 Moat|LEG
+11 Plains|LEB|3
+13 Swamp|LEB|3
+4 The Abyss|LEG
+2 The Tabernacle at Pendrell Vale|LEG
+4 Underworld Dreams|LEG

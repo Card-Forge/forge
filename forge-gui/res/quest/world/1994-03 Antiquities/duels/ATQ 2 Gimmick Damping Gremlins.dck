@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ATQ 2 Gimmick: Damping Gremlins
+Title=Damping Gremlins
+Difficulty=medium
+Description=Any black mage could coax a Thraxodemon to inhabit a magical device.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Artifact Possession|ATQ
+4 Colossus of Sardia|ATQ
+4 Damping Field|ATQ
+4 Haunting Wind|ATQ
+1 Mishra's Factory|ATQ|1
+1 Mishra's Factory|ATQ|2
+1 Mishra's Factory|ATQ|3
+1 Mishra's Factory|ATQ|4
+4 Phyrexian Gremlins|ATQ
+9 Plains|LEB|1
+1 Strip Mine|ATQ|2
+14 Swamp|LEB|1
+4 Tetravus|ATQ
+4 Wall of Spears|ATQ
+4 Yotian Soldier|ATQ

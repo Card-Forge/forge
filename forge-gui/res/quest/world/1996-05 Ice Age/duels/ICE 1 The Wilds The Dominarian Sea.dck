@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=ICE 1 The Wilds: The Dominarian Sea
+Title=The Dominarian Sea
+Difficulty=easy
+Description="It was big. Really, really, big. No, bigger than that. It was BIG!" -Arna Kennerud, skyknight
+
+The freezing Dominarian Sea is home to all manner of creatures.  Merfolk from distant Atlantis have come looking for their ancestral viscerid enemies, and larger things roam in the deep.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+2 Benthic Explorers|ALL|1
+2 Benthic Explorers|ALL|2
+2 Iceberg|ICE
+4 Mystic Remora|ICE
+2 Polar Kraken|ICE
+4 Sea Spirit|ICE
+4 Silver Erne|ICE
+24 Snow-Covered Island|ICE
+4 Spiny Starfish|ALL
+2 Storm Elemental|ALL
+2 Tidal Control|ALL
+2 Viscerid Armor|ALL|1
+2 Viscerid Armor|ALL|2
+3 Wind Spirit|ICE
+1 Wrath of Marit Lage|ICE

@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 13 WvB Good
+Title=Aspect of Good
+Difficulty=easy
+Description=Out of the blackness and stench of the engulfing swamp emerged a shimmering figure. Only the splattered armor and ichor-stained sword hinted at the unfathomable evil the knight had just laid waste.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+3 Blessing|LEB
+3 Death Ward|LEB
+3 Guardian Angel|LEB
+3 Holy Armor|LEB
+4 Holy Strength|LEB
+2 Ivory Cup|LEB
+2 Karma|LEB
+4 Northern Paladin|LEB
+24 Plains|LEB|1
+4 Resurrection|LEB
+4 Serra Angel|LEB
+4 White Knight|LEB

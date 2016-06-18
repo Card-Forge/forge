@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=FEM 3 Color: 2 Blue
+Title=Blue
+Difficulty=hard
+Description="You think you know everything there is to know about battle? You know Orc droppings Underwater combat is three dimensional. Those thrice-damned Vodalians don't attack in ranks; they attack in schools." -Ivra Jursdotter
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+2 Conch Horn|FEM
+4 Deep Spawn|FEM
+4 Elven Lyre|FEM
+2 Homarid Warrior|FEM|1
+1 Homarid Warrior|FEM|2
+1 Homarid Warrior|FEM|3
+24 Island|LEB|3
+1 Ring of Renewal|FEM
+4 River Merfolk|FEM
+4 Seasinger|FEM
+1 Tidal Influence|FEM
+1 Vodalian Mage|FEM|1
+1 Vodalian Mage|FEM|2
+2 Vodalian Mage|FEM|3
+1 Vodalian Soldiers|FEM|1
+1 Vodalian Soldiers|FEM|2
+1 Vodalian Soldiers|FEM|3
+1 Vodalian Soldiers|FEM|4

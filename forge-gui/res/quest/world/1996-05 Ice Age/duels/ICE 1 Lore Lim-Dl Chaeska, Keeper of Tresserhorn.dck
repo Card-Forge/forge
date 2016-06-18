@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Lim-Dul: Chaeska, Keeper of Tresserhorn
+Title=Chaeska
+Difficulty=easy
+Description="The guard will forever stand ready. For them, death is merely an inconvenience, not an ending." -Chaeska, Keeper of Tresserhorn
+
+Chaeska, Keeper of Tresserhorn, is the strongest of Lim-Dul's undead minions. He is a master of combat and skill of arms, a general over a waiting army of hundreds of undead warriors.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Ashen Ghoul|ICE
+2 Awesome Presence|ALL|2
+2 Casting of Bones|ALL|2
+3 Dance of the Dead|ICE
+4 Dread Wight|ICE
+2 Feast or Famine|ALL|1
+2 Feast or Famine|ALL|2
+2 Halls of Mist|ICE
+6 Island|ICE|2
+4 Keeper of Tresserhorn|ALL
+2 Lim-Dul's High Guard|ALL|1
+2 Lim-Dul's High Guard|ALL|2
+2 Lim-Dul's Vault|ALL
+2 Phantasmal Fiend|ALL|1
+2 Phantasmal Fiend|ALL|2
+1 Skeleton Ship|ICE
+14 Swamp|ICE|1
+4 Underground River|ICE

@@ -1,0 +1,19 @@
+[quest]
+id=LEB Challenge: Balance
+OpponentName=Eternal Balance
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Balance
+Title=Eternal Balance
+Difficulty=hard
+Description=Everything but.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+70 Balance|LEB
+30 Mox Pearl|LEB

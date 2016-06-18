@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: Lacjs
+Title=Lacjs
+Difficulty=medium
+Description=The stench of countless generations of unspeakable activities was enough to loosen both our footing and our stomachs.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Blood Moon|DRK
+4 Goblin Caves|DRK
+4 Goblin Digging Team|DRK
+4 Goblin Hero|DRK
+4 Goblin Rock Sled|DRK
+4 Goblin Shrine|DRK
+4 Goblin Wizard|DRK
+4 Goblins of the Flarg|DRK
+24 Mountain|LEB|3
+4 Orc General|DRK

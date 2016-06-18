@@ -1,0 +1,20 @@
+[quest]
+id=ICE Challenge: Varchild's War-Riders
+OpponentName=The War-Riders
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=
+HumanExtras=Vibrating Sphere
+[metadata]
+Name=ICE Challenge: Varchild's War-Riders
+Title=The War-Riders
+Difficulty=hard
+Description="What tries to crush our spirit only strengthens our resolve." -Lovisa Coldeyes, Balduvian chieftain
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+20 Mountain|ICE|2
+40 Varchild's War-Riders|ALL

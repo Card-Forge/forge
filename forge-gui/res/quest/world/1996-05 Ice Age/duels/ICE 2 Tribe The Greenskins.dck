@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=ICE 2 Tribe: The Greenskins
+Title=The Greenskins
+Difficulty=medium
+Description="One day you, too, shall drink the blood of your foes. It is something to look forward to." -Toothlicker Harj, Orcish Captain
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+2 Anarchy|ICE
+4 Battle Frenzy|ICE
+4 Goblin Mutant|ICE
+4 Goblin Ski Patrol|ICE
+4 Goblin Snowman|ICE
+4 Imposing Visage|ICE
+4 Orcish Cannoneers|ICE
+4 Orcish Farmer|ICE
+4 Orcish Squatters|ICE
+24 Snow-Covered Mountain|ICE
+2 Whirling Catapult|ALL

@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ARN 3 Strategy: Air Assault
+Title=Air Assault
+Difficulty=hard
+Description=Saffiyah clapped her hands and twenty flying men appeared at her side, each well trained in the art of combat.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Aladdin's Ring|ARN
+4 City of Brass|ARN
+4 Cuombajj Witches|ARN
+4 Dancing Scimitar|ARN
+4 Desert|ARN
+4 Flying Men|ARN
+8 Island|LEB|1
+1 Jandor's Ring|ARN
+4 Junun Efreet|ARN
+1 Library of Alexandria|ARN
+4 Old Man of the Sea|ARN
+4 Serendib Djinn|ARN
+4 Serendib Efreet|ARN
+8 Swamp|LEB|1
+4 Unstable Mutation|ARN

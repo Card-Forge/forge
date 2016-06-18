@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: Scarwood
+Title=Scarwood
+Difficulty=easy
+Description=String, weapons, wax, or jewels-it makes no difference. Leave nothing unguarded in Scarwood.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Carnivorous Plant|DRK
+16 Forest|LEB|2
+2 Hidden Path|DRK
+4 Land Leeches|DRK
+8 Mountain|LEB|3
+4 People of the Woods|DRK
+2 Savaen Elves|DRK
+4 Scarwood Bandits|DRK
+4 Scarwood Goblins|DRK
+4 Scarwood Hag|DRK
+4 Scavenger Folk|DRK
+4 Tracker|DRK

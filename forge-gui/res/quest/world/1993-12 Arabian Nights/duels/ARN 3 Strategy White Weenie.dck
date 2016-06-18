@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=ARN 3 Strategy: White Weenie
+Title=White Weenie
+Difficulty=hard
+Description=On the day of victory no one is tired. -Arab proverb
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Abu Ja'far|ARN
+2 Aladdin's Ring|ARN
+4 Army of Allah|ARN|2
+4 Camel|ARN
+4 Desert|ARN
+4 Elephant Graveyard|ARN
+1 Jandor's Ring|ARN
+4 Jihad|ARN
+4 King Suleiman|ARN
+1 Library of Alexandria|ARN
+4 Moorish Cavalry|ARN|2
+16 Plains|LEB|1
+4 Repentant Blacksmith|ARN
+4 War Elephant|ARN|2

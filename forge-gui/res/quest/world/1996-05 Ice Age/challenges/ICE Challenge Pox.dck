@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Pox
+OpponentName=The Pox
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=ICE Challenge: Pox
+Title=The Pox
+Difficulty=medium
+Description="A plague o' both your houses!" -Mercutio, Shakespeare's Romeo and Juliet
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+30 Pox|ICE
+30 Swamp|ICE|1

@@ -1,0 +1,20 @@
+[quest]
+id=ICE Challenge: Ray of Erasure
+OpponentName=Erasure
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Shield Sphere|Shield Sphere|Shield Sphere|Shield Sphere
+[metadata]
+Name=ICE Challenge: Ray of Erasure
+Title=Erasure
+Difficulty=hard
+Description="What is real can be unreal." -Gerda Aagesdotter,
+Archmage of the Unseen
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+100 Island|ICE|2
+300 Ray of Erasure|ICE

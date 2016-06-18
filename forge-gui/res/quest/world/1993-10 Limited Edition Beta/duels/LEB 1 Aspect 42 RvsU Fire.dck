@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 42 RvU Fire
+Title=Aspect of Fire
+Difficulty=easy
+Description=Fire Elementals are ruthless infernos, annihilating and consuming their foes in a frenzied holocaust. Crackling and blazing, they sear swift, terrible paths, leaving the land charred and scorched in their wake.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Dragon Whelp|LEB
+4 Fire Elemental|LEB
+4 Fireball|LEB
+4 Firebreathing|LEB
+2 Iron Star|LEB
+4 Lightning Bolt|LEB
+24 Mountain|LEB|3
+2 Red Elemental Blast|LEB
+4 Shivan Dragon|LEB
+4 Smoke|LEB
+4 Wall of Fire|LEB

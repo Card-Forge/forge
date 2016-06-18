@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=ICE 1 The Wilds: The Western Waste
+Title=The Western Waste
+Difficulty=easy
+Description="The creature we fought in the western waste was doubly dangerous: mortally wounded, it rebounded and attacked again." -Disa the Restless, journal entry
+
+Few explorers venture into the trackless wasteland west of civilization.  Even fewer return.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Abyssal Specter|ICE
+4 Dread Wight|ICE
+2 Dystopia|ALL
+4 Foul Familiar|ICE
+4 Gangrenous Zombies|ICE
+2 Gravebind|ICE
+4 Hoar Shade|ICE
+4 Howl from Beyond|ICE
+4 Hyalopterous Lemure|ICE
+2 Infernal Darkness|ICE
+24 Snow-Covered Swamp|ICE
+2 Withering Wisps|ICE

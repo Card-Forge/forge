@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Lim-Dul: The Order of Stromgald
+Title=The Order of Stromgald
+Difficulty=easy
+Description="Kjeldorans should rule supreme, and to the rest, death!" -Avram Garrisson, leader of the Knights of Stromgald
+
+On the surface, the Order of Stromgald appears to be a concerned party that fears the weakened will of Kjeldor's king, Darien. However, under the surface the Order has more malign roots. The Order was formed by former Kjeldoran knight Avram Garrison and the necromancer and archenemy of the people of Kjeld, Lim-Dul. The true intent of the Order of Stromgald is to assassinate Darien and weaken the political structure of Kjeld, hastening Lim-Dul's victory over the already assaulted nation.
+
+The Order of Stromgald took its name from the legendary Kjeldoran general Márton Stromgald.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Agent of Stromgald|ALL|1
+2 Agent of Stromgald|ALL|2
+4 Balduvian Dead|ALL
+3 Conquer|ICE
+2 Fear|ICE
+2 Glacial Crevasses|ICE
+3 Howl from Beyond|ICE
+4 Knight of Stromgald|ICE
+1 Lava Tubes|ICE
+3 Mind Whip|ICE
+4 Moor Fiend|ICE
+3 Seizures|ICE
+6 Snow-Covered Mountain|ICE
+2 Stromgald Cabal|ICE
+2 Stromgald Spy|ALL
+4 Sulfurous Springs|ICE
+13 Swamp|ICE|2

@@ -1,0 +1,19 @@
+[quest]
+id=ARN Challenge: The Ogres
+OpponentName=The Ogres
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ARN
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=ARN Challenge: The Ogres
+Title=The Ogres
+Difficulty=hard
+Description="Layers! Onions have layers. Ogres have layers. Onions have layers. You get it; we both have layers!" -Shrek
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+20 Forest|LEB|1
+40 Ghazban Ogre|ARN

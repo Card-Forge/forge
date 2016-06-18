@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=FEM 3 Color: 3 Black
+Title=Black
+Difficulty=hard
+Description="Tourach's power was such that his followers deified him after his death." -Sarpadian Empires, vol. II
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+2 Armor Thrull|FEM|1
+1 Armor Thrull|FEM|3
+1 Armor Thrull|FEM|4
+3 Breeding Pit|FEM
+4 Derelor|FEM
+1 Hymn to Tourach|FEM|1
+1 Hymn to Tourach|FEM|2
+1 Hymn to Tourach|FEM|3
+1 Hymn to Tourach|FEM|4
+1 Mindstab Thrull|FEM|1
+1 Mindstab Thrull|FEM|2
+2 Mindstab Thrull|FEM|3
+1 Necrite|FEM|1
+2 Necrite|FEM|2
+1 Necrite|FEM|3
+1 Order of the Ebon Hand|FEM|1
+1 Order of the Ebon Hand|FEM|2
+2 Order of the Ebon Hand|FEM|3
+1 Soul Exchange|FEM
+24 Swamp|LEB|3
+4 Thrull Champion|FEM

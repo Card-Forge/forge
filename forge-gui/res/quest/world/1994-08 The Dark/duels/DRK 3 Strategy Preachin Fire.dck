@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=DRK 3 Strategy: Preachin' Fire
+Title=Preachin' Fire
+Difficulty=hard
+Description="What do you have that I cannot obtain?" -Mairsil, the Pretender
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Book of Rass|DRK
+4 Brothers of Fire|DRK
+4 Diabolic Machine|DRK
+4 Dust to Dust|DRK
+4 Fellwar Stone|DRK
+4 Fissure|DRK
+13 Mountain|LEB|3
+12 Plains|LEB|2
+4 Preacher|DRK
+4 Sisters of the Flame|DRK
+2 Wand of Ith|DRK
+4 Witch Hunter|DRK

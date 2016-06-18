@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=LEB 3 Strategy: Tempo
+Title=Tempo
+Difficulty=hard
+Description="Why is it that great? It just gives you three mana."-Some scrub talking about Black Lotus
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Ancestral Recall|LEB
+1 Ankh of Mishra|LEB
+1 Black Lotus|LEB
+1 Control Magic|LEB
+1 Copy Artifact|LEB
+4 Counterspell|LEB
+1 Earthquake|LEB
+9 Island|LEB|3
+4 Juggernaut|LEB
+4 Lightning Bolt|LEB
+4 Lord of Atlantis|LEB
+1 Manabarbs|LEB
+5 Mountain|LEB|1
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+1 Orcish Artillery|LEB
+4 Power Sink|LEB
+2 Psionic Blast|LEB
+4 Psychic Venom|LEB
+1 Sol Ring|LEB
+1 Time Walk|LEB
+4 Unsummon|LEB
+4 Volcanic Island|LEB

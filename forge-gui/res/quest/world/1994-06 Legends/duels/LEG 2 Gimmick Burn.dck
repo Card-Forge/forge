@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEG 2 Gimmick: Burn
+Title=Burn
+Difficulty=medium
+Description="Hi ni ya Behold the man of flint, that's me Four lightnings zigzag from me, strike and return." -Navajo war chant
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Backfire|LEG
+4 Chain Lightning|LEG
+7 Island|LEB|1
+4 Jovial Evil|LEG
+7 Mountain|LEB|2
+4 Psychic Purge|LEG
+4 Pyrotechnics|LEG
+4 Relic Bind|LEG
+4 Storm World|LEG
+10 Swamp|LEB|1
+4 Takklemaggot|LEG
+4 Underworld Dreams|LEG

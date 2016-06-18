@@ -1,0 +1,22 @@
+[quest]
+id=FEM Challenge: Thallid
+OpponentName=The Thallids
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:FEM
+Credit Reward=120
+AIExtras=Fungal Bloom
+[metadata]
+Name=FEM Challenge: Thallid
+Title=The Thallids
+Difficulty=medium
+Description="Thallids could absorb energy from the forest itself. Even elves were at a disadvantage in fighting them." -Sarpadian Empires, vol. III
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+20 Forest|LEB|1
+10 Thallid|FEM|1
+10 Thallid|FEM|2
+10 Thallid|FEM|3
+10 Thallid|FEM|4

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: The School of the Unseen: Gerda Aagesdotter
+Title=Gerda Aagesdotter
+Difficulty=easy
+Description="Lat-Nam has bequeathed us its secrets. With them we shall attain true enlightenment." -Gerda Aagesdotter, Archmage of the Unseen
+
+The School of the Unseen is a college of wizardry located on the western edge of Terisiare.  Formerly known as the City of Shadows, the school was formed from the remnants of the College of Lat-Nam after it was destroyed in the Brothers' War.  An enormous glacial wall now separates the peninsula of Lat-Nam from the rest of Terisiare.
+
+The school was ruled by Archmage Eternal Jodah for thousands of years until a coup staged by Jodah's second-in-command Gerda Aagesdotter and Kjeldoran royal mage Gustha Ebasdotter has left Gerda in charge and Jodah in the hands of Lim-Dul, the necromancer.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+2 Awesome Presence|ALL|1
+2 Browse|ALL
+4 Glacial Wall|ICE
+4 Illusionary Forces|ICE
+4 Illusionary Wall|ICE
+2 Illusions of Grandeur|ICE
+24 Island|ICE|1
+1 Lat-Nam's Legacy|ALL|1
+1 Lat-Nam's Legacy|ALL|2
+2 Library of Lat-Nam|ALL
+2 Magus of the Unseen|ICE
+4 Phantasmal Mount|ICE
+2 Phantasmal Sphere|ALL
+2 Ray of Erasure|ICE
+1 Reality Twist|ICE
+2 Shyft|ICE
+1 Sol Grail|ALL

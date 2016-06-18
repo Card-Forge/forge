@@ -1,0 +1,19 @@
+[quest]
+id=DRK Challenge: Bog Rats
+OpponentName=The Rats
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:DRK
+Credit Reward=120
+AIExtras=Book of Rass
+[metadata]
+Name=DRK Challenge: Bog Rats
+Title=The Rats
+Difficulty=medium
+Description=Their stench was vile and strong enough, but not nearly as powerful as their hunger.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+40 Bog Rats|DRK
+20 Swamp|LEB|3

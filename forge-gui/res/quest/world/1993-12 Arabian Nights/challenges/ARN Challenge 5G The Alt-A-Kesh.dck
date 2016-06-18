@@ -1,0 +1,19 @@
+[quest]
+id=ARN Challenge: 5G The Alt-A-Kesh
+OpponentName=The Alt-A-Kesh
+AILife=30
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ARN
+Credit Reward=120
+AIExtras=Forest|Cyclone
+[metadata]
+Name=ARN Challenge: 5G The Alt-A-Kesh
+Title=The Alt-A-Kesh
+Difficulty=medium
+Description=This green djinn has summoned a cyclone of epic proportions that threatens to destroy the city of Mecca.  Can you reach the eye of the storm and defeat this foul creature?
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+30 Forest|LEA|1
+30 Forest|LEA|2

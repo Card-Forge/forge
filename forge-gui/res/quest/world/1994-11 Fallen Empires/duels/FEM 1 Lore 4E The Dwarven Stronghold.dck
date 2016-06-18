@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=FEM 1 Lore: 4E The Dwarven Stronghold
+Title=The Dwarven Stronghold
+Difficulty=easy
+Description="Although the Dwarves staunchly defended their walled city-states against the Orcs, their civilization was the first to fall, and its name was sadly lost." -Sarpadian Empires, vol. I
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+4 Balm of Restoration|FEM
+4 Conch Horn|FEM
+4 Dwarven Armorer|FEM
+4 Dwarven Lieutenant|FEM
+2 Dwarven Soldier|FEM|1
+1 Dwarven Soldier|FEM|2
+1 Dwarven Soldier|FEM|3
+32 Mountain|LEB|2
+4 Ring of Renewal|FEM

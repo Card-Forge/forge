@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Hecatomb
+OpponentName=The Tomb
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Hecatomb
+HumanExtras=Sheltered Valley
+[metadata]
+Name=ICE Challenge: Hecatomb
+Title=The Tomb
+Difficulty=hard
+Description="hek-uh-tohm". noun. (in ancient Greece and Rome) a public sacrifice of 100 oxen to the gods.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+60 Swamp|ICE|2

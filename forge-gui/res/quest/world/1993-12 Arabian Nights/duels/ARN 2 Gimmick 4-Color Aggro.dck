@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=ARN 2 Gimmick: 4-Color Aggro
+Title=4-Color Aggro
+Difficulty=hard
+Description=Sometimes those with the most sin cast the first stones.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Brass Man|ARN
+4 City of Brass|ARN
+4 Erg Raiders|ARN|2
+4 Flying Men|ARN
+6 Forest|LEB|1
+4 Ghazban Ogre|ARN
+5 Island|LEB|1
+4 Kird Ape|ARN
+4 Mountain|LEB|3
+4 Nafs Asp|ARN|2
+4 Stone-Throwing Devils|ARN|1
+5 Swamp|LEB|1
+4 Unstable Mutation|ARN
+4 Wyluli Wolf|ARN|2

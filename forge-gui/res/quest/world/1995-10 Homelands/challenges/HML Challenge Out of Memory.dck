@@ -1,0 +1,20 @@
+[quest]
+id=HML Challenge: Out of Memory
+OpponentName=The Forgotten
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:HML
+Credit Reward=120
+AIExtras=Feroz's Ban|Reveka, Wizard Savant
+[metadata]
+Name=HML Challenge: Out of Memory
+Title=The Forgotten
+Difficulty=medium
+Description="Um... oh... what was I saying?" -Reveka, Wizard Savant
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+24 Island|LEB|2
+18 Memory Lapse|HML|1
+18 Memory Lapse|HML|2

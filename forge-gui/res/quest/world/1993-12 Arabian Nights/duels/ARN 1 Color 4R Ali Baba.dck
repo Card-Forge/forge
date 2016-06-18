@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=ARN 1 Color: 4R Ali Baba
+Title=Ali Baba
+Difficulty=easy
+Description="When he reached the entrance of the cavern, he pronounced the words, 'Open, Sesame'" -The Arabian Nights, Junior Classics trans.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+2 Aladdin|ARN
+2 Aladdin's Lamp|ARN
+2 Aladdin's Ring|ARN
+2 Ali Baba|ARN
+2 Ali from Cairo|ARN
+4 Bird Maiden|ARN|2
+4 Desert|ARN
+4 Desert Nomads|ARN
+4 Hurr Jackal|ARN
+4 Kird Ape|ARN
+2 Magnetic Mountain|ARN
+4 Mijae Djinn|ARN
+20 Mountain|ARN
+4 Rukh Egg|ARN|2

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=ICE 1 The Wilds: The Forest of Fyndhorn
+Title=The Forest of Fyndhorn
+Difficulty=easy
+Description="Here in Fyndhorn, the goddess Freyalise is generous to her children." -Kolbjorn, Elder Druid of the Juniper Order
+
+Once the lush forest of Argoth, the frozen forest of Fyndhorn is home to many dangerous creatures.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+3 Arctic Foxes|ICE
+4 Aurochs|ICE
+4 Brushland|ICE
+3 Chub Toad|ICE
+2 Dire Wolves|ICE
+2 Fyndhorn Pollen|ICE
+3 Giant Growth|ICE
+3 Hipparion|ICE
+3 Johtull Wurm|ICE
+3 Kjeldoran Frostbeast|ICE
+1 Lhurgoyf|ICE
+2 Pygmy Allosaurus|ICE
+15 Snow-Covered Forest|ICE
+4 Snow-Covered Plains|ICE
+2 Stampede|ICE
+1 Veldt|ICE
+2 Wiitigo|ICE
+3 Woolly Mammoths|ICE

@@ -1,0 +1,18 @@
+[quest]
+id=ATQ Challenge: Armageddon Clock
+OpponentName=The Clock
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ATQ
+Credit Reward=120
+AIExtras=Armageddon Clock
+[metadata]
+Name=ATQ Challenge: Armageddon Clock
+Title=The Clock
+Difficulty=hard
+Description=Don't let the clock run out!
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[main]
+100 Armageddon Clock|ATQ

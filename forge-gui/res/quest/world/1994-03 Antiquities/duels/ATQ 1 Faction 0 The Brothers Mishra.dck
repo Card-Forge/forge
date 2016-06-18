@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=ATQ 1 Faction: 0 The Brothers: Mishra
+Title=Mishra
+Difficulty=easy
+Description=During the brothers' childhood, Tocasia took them to explore the sacred cave of Koilos. There, in the Hall of Tagsin, Mishra discovered the mysterious Weakstone.
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[Main]
+4 Cursed Rack|ATQ
+4 Dragon Engine|ATQ
+4 Grapeshot Catapult|ATQ
+1 Mishra's Factory|ATQ|1
+1 Mishra's Factory|ATQ|2
+1 Mishra's Factory|ATQ|3
+1 Mishra's Factory|ATQ|4
+4 Mishra's War Machine|ATQ
+4 Mishra's Workshop|ATQ
+11 Mountain|LEB|2
+4 Staff of Zegon|ATQ
+1 Strip Mine|ATQ|1
+4 Su-Chi|ATQ
+11 Swamp|LEB|1
+4 The Rack|ATQ
+1 Weakstone|ATQ

@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=ICE 2 Gimmick: Stone Rain
+Title=Stone Rain
+Difficulty=medium
+Description="May the forces that took Argoth beneath the waves never come among us again." -Arcum Dagsson, Soldevi Machinist
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+1 Avalanche|ICE
+4 Balduvian Horde|ALL
+4 Conquer|ICE
+1 Curse of Marit Lage|ICE
+4 Icy Manipulator|ICE
+24 Mountain|ICE|3
+2 Omen of Fire|ALL
+4 Orcish Squatters|ICE
+2 Phyrexian War Beast|ALL|1
+2 Phyrexian War Beast|ALL|2
+4 Pillage|ALL
+4 Pyroclasm|ICE
+4 Stone Rain|ICE

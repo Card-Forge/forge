@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=HML 1 Lore: 2 The Sea
+Title=The Sea
+Difficulty=easy
+Description="Zeki sails with a dead crew not out of villainy, but pragmatism." -Baron Sengir
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Coral Reef|HML
+2 Giant Albatross|HML|1
+2 Giant Albatross|HML|2
+28 Island|LEB|2
+4 Marjhan|HML
+4 Narwhal|HML
+2 Reef Pirates|HML|1
+2 Reef Pirates|HML|2
+4 Sea Sprite|HML
+4 Sea Troll|HML
+4 Wall of Kelp|HML

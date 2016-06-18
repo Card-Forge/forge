@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=ICE 2 Color: 5GWU The Storm Spirits
+Title=The Storm Spirits
+Difficulty=medium
+Description="Come to us, with your lightning. Come to us, with your thunder. Serve us with your strength, and smite our foes with your power." -Steinar Icefist, Balduvian shaman
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Adarkar Wastes|ICE
+4 Brushland|ICE
+4 Dire Wolves|ICE
+4 Elvish Healer|ICE
+2 Essence Filter|ICE
+3 Forest|ICE|1
+3 Forest|ICE|3
+1 Glaciers|ICE
+4 Hymn of Rebirth|ICE
+1 Island|ICE|1
+1 Island|ICE|3
+4 Juniper Order Advocate|ALL
+4 Kjeldoran Frostbeast|ICE
+4 Phelddagrif|ALL
+3 Plains|ICE|1
+2 Plains|ICE|2
+3 Plains|ICE|3
+1 Reclamation|ICE
+2 Spectral Shield|ICE
+4 Storm Spirit|ICE
+2 Word of Undoing|ICE

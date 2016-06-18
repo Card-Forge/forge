@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: Wormwood
+Title=Wormwood
+Difficulty=easy
+Description=Even the Goblins shun this haunted place, where the tree limbs twist in agony and the ground seems to scuttle under your feet.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Dark Heart of the Wood|DRK
+4 Elves of Deep Shadow|DRK
+16 Forest|LEB|1
+4 Gaea's Touch|DRK
+4 Lurker|DRK
+4 Marsh Viper|DRK
+4 Niall Silvain|DRK
+4 Spitting Slug|DRK
+8 Swamp|LEB|1
+4 Venom|DRK
+4 Wormwood Treefolk|DRK

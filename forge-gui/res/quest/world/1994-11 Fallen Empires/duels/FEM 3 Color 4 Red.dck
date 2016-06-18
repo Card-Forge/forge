@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=FEM 3 Color: 4 Red
+Title=Red
+Difficulty=hard
+Description=There is a legend among present-day Dwarves that the Dwarves of Sarpadia will one day return to defend Dwarvenkind against a deadly peril.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+1 Brassclaw Orcs|FEM|1
+1 Brassclaw Orcs|FEM|2
+1 Brassclaw Orcs|FEM|3
+1 Brassclaw Orcs|FEM|4
+2 Dwarven Armorer|FEM
+4 Dwarven Lieutenant|FEM
+2 Dwarven Soldier|FEM|1
+1 Dwarven Soldier|FEM|2
+1 Dwarven Soldier|FEM|3
+4 Elven Lyre|FEM
+1 Goblin War Drums|FEM|2
+1 Goblin War Drums|FEM|3
+24 Mountain|LEB|1
+4 Orcish Captain|FEM
+1 Orcish Veteran|FEM|1
+2 Orcish Veteran|FEM|2
+1 Orcish Veteran|FEM|4
+4 Orgg|FEM

@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=ARN 2 Gimmick: Eggs & Honey
+Title=Eggs & Honey
+Difficulty=medium
+Description="You can't make an omelette without breaking eggs" -Lieutenant General François de Charette, extenuating the number of deaths for which he was responsible
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Aladdin's Ring|ARN
+4 City of Brass|ARN
+4 Desert Nomads|ARN
+4 Desert Twister|ARN
+4 Drop of Honey|ARN
+4 Erhnam Djinn|ARN
+11 Forest|LEB|1
+4 Ifh-Biff Efreet|ARN
+4 Kird Ape|ARN
+4 Mijae Djinn|ARN
+11 Mountain|LEB|2
+4 Rukh Egg|ARN|2

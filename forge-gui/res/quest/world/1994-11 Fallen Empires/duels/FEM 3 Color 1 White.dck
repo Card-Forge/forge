@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=FEM 3 Color: 1 White
+Title=White
+Difficulty=hard
+Description="The Hand of Justice will come to cleanse the world if we are true." -Oliver Farrel
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+4 Farrel's Mantle|FEM
+1 Farrel's Zealot|FEM|1
+2 Farrel's Zealot|FEM|2
+1 Farrel's Zealot|FEM|3
+4 Hand of Justice|FEM
+1 Icatian Javelineers|FEM|1
+2 Icatian Javelineers|FEM|2
+1 Icatian Javelineers|FEM|3
+4 Icatian Phalanx|FEM
+4 Icatian Priest|FEM
+2 Icatian Town|FEM
+1 Order of Leitbur|FEM|1
+1 Order of Leitbur|FEM|2
+2 Order of Leitbur|FEM|3
+26 Plains|LEB|3

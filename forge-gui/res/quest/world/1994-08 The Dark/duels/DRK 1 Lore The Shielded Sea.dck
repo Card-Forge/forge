@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: The Shielded Sea
+Title=The Shielded Sea
+Difficulty=easy
+Description="A dash of cool water does wonders to clear a cluttered battlefield." -Vibekke Ragnild, Witches and War
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Dance of Many|DRK
+4 Electric Eel|DRK
+4 Erosion|DRK
+4 Giant Shark|DRK
+16 Island|LEB|3
+4 Leviathan|DRK
+4 Mana Clash|DRK
+8 Mountain|LEB|1
+4 Riptide|DRK
+4 Tangle Kelp|DRK
+4 Water Wurm|DRK

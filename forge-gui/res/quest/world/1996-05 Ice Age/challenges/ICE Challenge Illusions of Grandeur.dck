@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Illusions of Grandeur
+OpponentName=The Illusion
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=
+HumanExtras=Illusions of Grandeur|School of the Unseen|School of the Unseen|School of the Unseen|School of the Unseen
+[metadata]
+Name=ICE Challenge: Illusions of Grandeur
+Title=The Illusion
+Difficulty=hard
+Description="Sometimes people don't want to hear the truth because they don't want their illusions destroyed." -Friedrich Nietzsche
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+60 Illusions of Grandeur|ICE

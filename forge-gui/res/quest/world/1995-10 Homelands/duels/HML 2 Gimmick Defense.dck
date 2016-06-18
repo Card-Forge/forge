@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=HML 2 Gimmick: Defense
+Title=Defense
+Difficulty=medium
+Description="It keeps some out, yes. It also keeps others in!" -Grandmother Sengir
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Broken Visage|HML
+2 Cemetery Gate|HML|1
+2 Cemetery Gate|HML|2
+4 Coral Reef|HML
+4 Drudge Spell|HML
+2 Dry Spell|HML|1
+2 Dry Spell|HML|2
+4 Grandmother Sengir|HML
+21 Island|LEB|3
+4 Koskun Falls|HML
+2 Labyrinth Minotaur|HML|1
+2 Labyrinth Minotaur|HML|2
+4 Marjhan|HML
+4 Mystic Decree|HML
+4 Reveka, Wizard Savant|HML
+4 Sengir Autocrat|HML
+4 Serrated Arrows|HML
+19 Swamp|LEB|3
+2 Torture|HML|1
+2 Torture|HML|2
+4 Wall of Kelp|HML

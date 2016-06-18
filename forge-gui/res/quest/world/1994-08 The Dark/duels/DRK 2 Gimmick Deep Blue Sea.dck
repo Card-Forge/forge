@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=DRK 2 Gimmick: Deep Blue Sea
+Title=Deep Blue Sea
+Difficulty=medium
+Description="When one has witnessed the unspeakable, 'tis sometimes better to forget." -Vervamon the Elder
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Amnesia|DRK
+2 Barl's Cage|DRK
+2 Book of Rass|DRK
+4 Diabolic Machine|DRK
+4 Erosion|DRK
+4 Fellwar Stone|DRK
+4 Ghost Ship|DRK
+4 Giant Shark|DRK
+26 Island|LEB|2
+4 Leviathan|DRK
+2 Wand of Ith|DRK

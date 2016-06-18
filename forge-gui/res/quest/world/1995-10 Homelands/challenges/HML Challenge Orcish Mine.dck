@@ -1,0 +1,19 @@
+[quest]
+id=HML Challenge: Orcish Mine
+OpponentName=Orcish Mine
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:HML
+Credit Reward=120
+AIExtras=Feroz's Ban|Koskun Keep
+[metadata]
+Name=HML Challenge: Orcish Mine
+Title=Orcish Mine
+Difficulty=medium
+Description=
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+24 Mountain|LEB|3
+36 Orcish Mine|HML

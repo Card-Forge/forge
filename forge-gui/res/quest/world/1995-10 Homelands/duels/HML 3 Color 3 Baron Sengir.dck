@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=HML 3 Color: 3 Baron Sengir
+Title=Baron Sengir
+Difficulty=hard
+Description="Beast. Defiler. The source of all my pain." -Ihsan's Shade
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+2 Baron Sengir|HML
+4 Broken Visage|HML
+1 Drudge Spell|HML
+1 Dry Spell|HML|1
+1 Dry Spell|HML|2
+4 Ebony Rhino|HML
+2 Feast of the Unicorn|HML|1
+2 Feast of the Unicorn|HML|2
+2 Grandmother Sengir|HML
+2 Ihsan's Shade|HML
+1 Koskun Falls|HML
+2 Sengir Bats|HML|1
+2 Sengir Bats|HML|2
+4 Serrated Arrows|HML
+25 Swamp|LEB|1
+2 Torture|HML|1
+2 Torture|HML|2
+1 Veldrane of Sengir|HML

@@ -1,0 +1,20 @@
+[quest]
+id=LEB Challenge: Thievery
+OpponentName=The Thief
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Thievery
+Title=Thievery
+Difficulty=medium
+Description=Possession is nine-tenths of the law.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+24 Control Magic|LEB
+24 Island|LEB|1
+12 Steal Artifact|LEB

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=LEB 3 Strategy: Classic Control
+Title=Classic Control
+Difficulty=hard
+Description="Knowledge is power."-Sir Francis Bacon, Meditationes Sacrae
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Ancestral Recall|LEB
+1 Balance|LEB
+1 Black Lotus|LEB
+1 Braingeyser|LEB
+3 Control Magic|LEB
+1 Copy Artifact|LEB
+4 Counterspell|LEB
+1 Demonic Tutor|LEB
+4 Disenchant|LEB
+1 Disrupting Scepter|LEB
+1 Icy Manipulator|LEB
+6 Island|LEB|2
+1 Jayemdae Tome|LEB
+1 Mind Twist|LEB
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Sapphire|LEB
+6 Plains|LEB|1
+4 Scrubland|LEB
+4 Serra Angel|LEB
+1 Sol Ring|LEB
+4 Swords to Plowshares|LEB
+1 Time Walk|LEB
+4 Tundra|LEB
+4 Underground Sea|LEB
+2 Wrath of God|LEB

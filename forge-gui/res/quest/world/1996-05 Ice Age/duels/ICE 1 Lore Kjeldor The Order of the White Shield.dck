@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Kjeldor: The Order of the White Shield
+Title=The Order of the White Shield
+Difficulty=easy
+Description="Shall we turn away a worthy soul because his parents were peasants? I think not." -Lucilde Fiksdotter, leader of the Order of the White Shield
+
+The Order of the White shield, led by Lucilde Fiksdotter, is an elite cadre of Kjeldoran knights dedicated to fighting the forces of the necromancer Lim-Dul. Lucilde's words carried inspiration to all her knights in the long winter before Freyalise's thawing World Spell.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Brushland|ICE
+4 Elvish Ranger|ALL|2
+8 Forest|ICE|2
+4 Hymn of Rebirth|ICE
+4 Kelsinko Ranger|ICE
+4 Order of the Sacred Torch|ICE
+4 Order of the White Shield|ICE
+11 Plains|ICE|3
+2 Reclamation|ICE
+4 Snow Hound|ICE
+4 Swords to Plowshares|ICE
+4 Tarpan|ICE
+2 Trailblazer|ICE
+1 Veldt|ICE

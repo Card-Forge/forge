@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=HML 1 Lore: 3 The Dark Barony
+Title=The Dark Barony
+Difficulty=easy
+Description="Just the place for a picnic." -Murat, Death Speaker
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Broken Visage|HML
+2 Cemetery Gate|HML|1
+2 Cemetery Gate|HML|2
+4 Drudge Spell|HML
+2 Dry Spell|HML|1
+2 Dry Spell|HML|2
+4 Funeral March|HML
+4 Ghost Hounds|HML
+4 Greater Werewolf|HML
+4 Headstone|HML
+4 Koskun Falls|HML
+24 Swamp|LEB|2

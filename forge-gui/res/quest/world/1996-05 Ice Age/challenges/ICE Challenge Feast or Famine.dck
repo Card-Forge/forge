@@ -1,0 +1,20 @@
+[quest]
+id=ICE Challenge: Feast or Famine
+OpponentName=Feast or Famine
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Lake of the Dead|Lake of the Dead
+[metadata]
+Name=ICE Challenge: Feast or Famine
+Title=Feast or Famine
+Difficulty=hard
+Description="We are not yet free of Lim-Dul's terrors." -Halvor Arensson, Kjeldoran Priest
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+20 Feast or Famine|ALL|1
+20 Feast or Famine|ALL|2
+20 Swamp|ICE|2

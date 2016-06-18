@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=ICE 2 Tribe: Vermin
+Title=Vermin
+Difficulty=medium
+Description="The very earth seemed alive and made a sound like the writhing of the damned." -Lucilde Fiksdotter, Leader of the Order of the White Shield
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Deadly Insect|ALL|1
+2 Deadly Insect|ALL|2
+2 Flow of Maggots|ICE
+4 Forest|ICE|2
+4 Forest|ICE|3
+4 Giant Growth|ICE
+4 Giant Trap Door Spider|ICE
+2 Insidious Bookworms|ALL|1
+2 Insidious Bookworms|ALL|2
+4 Karplusan Forest|ICE
+4 Mole Worms|ICE
+4 Sulfurous Springs|ICE
+4 Swamp|ICE|2
+4 Swamp|ICE|3
+1 Swamp Mosquito|ALL|1
+1 Swamp Mosquito|ALL|2
+1 Thoughtleech|ICE
+4 Woolly Spider|ICE
+4 Yavimaya Ants|ALL
+3 Yavimaya Gnats|ICE

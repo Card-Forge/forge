@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: Touch of Death
+OpponentName=The Touch
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=Sheltered Valley|Sheltered Valley|Sheltered Valley|Sheltered Valley
+[metadata]
+Name=ICE Challenge: Touch of Death
+Title=The Touch
+Difficulty=hard
+Description="What was yours is mine. Your land, your people, and now your life." -Lim-Dul, the Necromancer
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+20 Swamp|ICE|3
+40 Touch of Death|ICE

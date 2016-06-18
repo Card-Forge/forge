@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ARN 3 Strategy: The Rock
+Title=The Rock
+Difficulty=hard
+Description="After these words the magician drew a ring off his finger, and put it on one of Aladdin's, saying: 'It is a talisman against all evil, so long as you obey me.'" -The Arabian Nights, Junior Classics trans.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Aladdin's Ring|ARN
+4 City of Brass|ARN
+4 Cuombajj Witches|ARN
+4 Dancing Scimitar|ARN
+4 Desert|ARN
+4 Desert Twister|ARN
+4 Erg Raiders|ARN|2
+4 Erhnam Djinn|ARN
+5 Forest|LEB|1
+4 Ifh-Biff Efreet|ARN
+1 Jandor's Ring|ARN
+4 Juzam Djinn|ARN
+4 Khabal Ghoul|ARN
+1 Library of Alexandria|ARN
+11 Swamp|LEB|1

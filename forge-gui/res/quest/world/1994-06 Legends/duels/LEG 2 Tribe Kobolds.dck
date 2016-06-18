@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=LEG 2 Tribe: Kobolds
+Title=Kobolds
+Difficulty=medium
+Description="Kobolds are harmless." -Bearand the Bold, epitaph
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Chain Lightning|LEG
+4 Crimson Kobolds|LEG
+4 Crookshank Kobolds|LEG
+4 Kobold Drill Sergeant|LEG
+4 Kobold Overlord|LEG
+4 Kobold Taskmaster|LEG
+4 Kobolds of Kher Keep|LEG
+14 Mountain|LEB|1
+4 Nether Void|LEG
+4 Rohgahh of Kher Keep|LEG
+10 Swamp|LEB|3

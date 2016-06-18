@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Soldev: The Heretics
+Title=The Soldevi Heretics
+Difficulty=easy
+Description="I implore you not to forget the horrors of the past. You would have us start the Brothers' War anew!" -Sorine Relicbane, Soldevi Heretic
+
+Sorine Relicbane was an outspoken Soldevi opponent of the research of ancient artifacts by Arcum Dagsson and his machinists. Thus, he was considered a heretic by his opponents. He voiced the opinion that Arcum was attempting to create a mechanical utopia without paying attention to the lessons the Brothers' War which caused the Ice Age.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Adarkar Wastes|ICE
+2 Arcane Denial|ALL|1
+2 Arcane Denial|ALL|2
+4 Disenchant|ICE
+2 Fylgja|ICE
+11 Island|ICE|1
+1 Land Cap|ICE
+8 Plains|ICE|3
+2 Soldevi Heretic|ALL|1
+2 Soldevi Heretic|ALL|2
+4 Soldevi Sage|ALL|1
+2 Storm Crow|ALL|1
+2 Storm Crow|ALL|2
+2 Suffocation|ALL
+2 Wild Aesthir|ALL|1
+2 Wild Aesthir|ALL|2
+2 Wind Spirit|ICE
+2 Wings of Aesthir|ICE
+4 Word of Undoing|ICE

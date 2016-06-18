@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=ICE 2 Color: 1WUB The Wandering Mages
+Title=The Wandering Mages
+Difficulty=medium
+Description="These sorcerers always seem to have another surprise up their sleeves." -Zur the Enchanter
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Adarkar Unicorn|ICE
+4 Adarkar Wastes|ICE
+2 Diabolic Vision|ICE
+1 Flooded Woodlands|ICE
+1 Glaciers|ICE
+3 Island|ICE|1
+2 Island|ICE|2
+3 Island|ICE|3
+4 Krovikan Sorcerer|ICE
+4 Merieke Ri Berit|ICE
+2 Phantasmal Fiend|ALL|1
+2 Phantasmal Fiend|ALL|2
+2 Plains|ICE|2
+2 Plains|ICE|3
+4 Skeleton Ship|ICE
+4 Spectral Shield|ICE
+2 Swamp|ICE|1
+2 Swamp|ICE|3
+4 Underground River|ICE
+4 Wandering Mage|ALL
+4 Word of Undoing|ICE

@@ -1,0 +1,19 @@
+[quest]
+id=HML Challenge: Stormy Skies
+OpponentName=Stormy Skies
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:HML
+Credit Reward=120
+AIExtras=AEther Storm|AEther Storm|AEther Storm|AEther Storm
+[metadata]
+Name=HML Challenge: Stormy Skies
+Title=Stormy Skies
+Difficulty=medium
+Description="I do love the rain... but this storm feels somehow wrong, Taysir." -Daria
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+20 Mountain|LEB|1
+40 Winter Sky|HML

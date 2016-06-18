@@ -1,0 +1,18 @@
+[quest]
+id=ARN Challenge: 2U The Saltrem Tor
+OpponentName=The Saltrem Tor
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ARN
+Credit Reward=120
+AIExtras=Serendib Djinn|Island of Wak-Wak
+[metadata]
+Name=ARN Challenge: 2U The Saltrem Tor
+Title=The Saltrem Tor
+Difficulty=medium
+Description=This blue djinn is terrorizing the Island of Wak-Wak, demanding human sacrifice.  It has summoned a formidable Serendib Djinn to fight its challengers.  Can you defeat these evil creatures and save the islanders?
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+60 Island of Wak-Wak|ARN

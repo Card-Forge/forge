@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=ATQ 3 Strategy: Tron
+Title=Tron
+Difficulty=hard
+Description=Artifact construction required immense resources.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Clay Statue|ATQ
+4 Clockwork Avian|ATQ
+4 Colossus of Sardia|ATQ
+4 Detonate|ATQ
+1 Mishra's Factory|ATQ|1
+1 Mishra's Factory|ATQ|2
+1 Mishra's Factory|ATQ|3
+1 Mishra's Factory|ATQ|4
+4 Mishra's Workshop|ATQ
+7 Mountain|LEB|2
+1 Strip Mine|ATQ|2
+4 Su-Chi|ATQ
+4 Tetravus|ATQ
+4 Triskelion|ATQ
+1 Urza's Mine|ATQ|1
+1 Urza's Mine|ATQ|2
+1 Urza's Mine|ATQ|3
+1 Urza's Mine|ATQ|4
+1 Urza's Power Plant|ATQ|1
+1 Urza's Power Plant|ATQ|2
+1 Urza's Power Plant|ATQ|3
+1 Urza's Power Plant|ATQ|4
+1 Urza's Tower|ATQ|1
+1 Urza's Tower|ATQ|2
+1 Urza's Tower|ATQ|3
+1 Urza's Tower|ATQ|4
+4 Yotian Soldier|ATQ

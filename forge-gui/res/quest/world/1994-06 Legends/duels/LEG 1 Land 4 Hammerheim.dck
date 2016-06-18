@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEG 1 Land: 4 Hammerheim
+Title=Hammerheim
+Difficulty=easy
+Description="'Tis distance lends enchantment to the view,/ And robes the mountain in its azure hue." -Thomas Campbell, "Pleasures of Hope"
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 AErathi Berserker|LEG
+4 Chain Lightning|LEG
+2 Crevasse|LEG
+4 Crimson Manticore|LEG
+4 Frost Giant|LEG
+4 Giant Strength|LEG
+4 Hammerheim|LEG
+4 Hyperion Blacksmith|LEG
+20 Mountain|LEB|3
+4 Mountain Yeti|LEG
+2 Red Mana Battery|LEG
+4 Storm World|LEG

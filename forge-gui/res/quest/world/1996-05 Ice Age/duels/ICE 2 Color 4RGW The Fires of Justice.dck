@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=ICE 2 Color: 4RGW The Fires of Justice
+Title=The Fires of Justice
+Difficulty=medium
+Description="The fire of justice burns like nothing else." -Lovisa Coldeyes, Balduvian Chieftain
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Brushland|ICE
+4 Centaur Archer|ICE
+4 Elvish Healer|ICE
+2 Essence Filter|ICE
+4 Fiery Justice|ICE
+2 Forest|ICE|1
+2 Forest|ICE|2
+4 Forest|ICE|3
+4 Giant Trap Door Spider|ICE
+2 Hymn of Rebirth|ICE
+4 Juniper Order Advocate|ALL
+4 Karplusan Forest|ICE
+4 Kjeldoran Frostbeast|ICE
+1 Monsoon|ICE
+2 Mountain|ICE|1
+2 Mountain|ICE|2
+2 Plains|ICE|1
+2 Plains|ICE|3
+1 Reclamation|ICE
+2 Shambling Strider|ICE
+2 Stormbind|ICE
+2 Tinder Wall|ICE

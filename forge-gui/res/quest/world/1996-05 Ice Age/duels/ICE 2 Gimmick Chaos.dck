@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=ICE 2 Gimmick: Chaos
+Title=Chaos
+Difficulty=easy
+Description="The shaman waved the staff, and the land itself went mad." -Disa the Restless, journal entry
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+2 Aggression|ICE
+2 Anarchy|ICE
+4 Balduvian Horde|ALL
+4 Chaos Lord|ICE
+4 Chaos Moon|ICE
+4 Game of Chaos|ICE
+24 Mountain|ICE|2
+2 Naked Singularity|ICE
+2 Panic|ICE
+4 Rogue Skycaptain|ALL
+4 Varchild's War-Riders|ALL
+4 Vertigo|ICE

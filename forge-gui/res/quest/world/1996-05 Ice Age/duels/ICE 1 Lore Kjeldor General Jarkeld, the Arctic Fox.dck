@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Kjeldor: General Jarkeld, the Arctic Fox
+Title=General Jarkeld
+Difficulty=easy
+Description="If you do it right, they'll never know what hit them." -General Jarkeld, the Arctic Fox
+
+General Jarkeld, known as the "Arctic Fox", is a military commander for Kjeldor.  He and his men were trained by the Fyndhorn Elves.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Arctic Foxes|ICE
+4 Hipparion|ICE
+4 Kjeldoran Phalanx|ICE
+4 Kjeldoran Warrior|ICE
+4 Lightning Blow|ICE
+4 Lost Order of Jarkeld|ICE
+1 Nacre Talisman|ICE
+24 Plains|ICE|3
+4 Rally|ICE
+4 Scars of the Veteran|ALL
+3 Snow Fortress|ICE

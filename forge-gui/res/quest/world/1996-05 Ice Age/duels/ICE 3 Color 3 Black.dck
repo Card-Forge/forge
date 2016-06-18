@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=ICE 3 Color: 3B
+Title=The Color Black
+Difficulty=Hard
+Description="Take their dead, and entomb them in the snow. Risen, they shall serve a new purpose." -Lim-Dul, the Necromancer
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Abyssal Specter|ICE
+4 Ashen Ghoul|ICE
+4 Dark Banishing|ICE
+4 Drift of the Dead|ICE
+2 Feast or Famine|ALL|1
+2 Feast or Famine|ALL|2
+4 Knight of Stromgald|ICE
+4 Krovikan Horror|ALL
+2 Lim-Dul's High Guard|ALL|1
+2 Lim-Dul's High Guard|ALL|2
+4 Minion of Tevesh Szat|ICE
+24 Swamp|ICE|3

@@ -1,0 +1,19 @@
+[quest]
+id=ICE Challenge: The Force
+OpponentName=The Force
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ICE,ALL
+Credit Reward=120
+AIExtras=
+HumanExtras=Thought Lash
+[metadata]
+Name=ICE Challenge: The Force
+Title=The Force
+Difficulty=very hard
+Description="Do. Or do not. There is no try." -Yoda, The Empire Strikes Back
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+60 Force of Will|ALL

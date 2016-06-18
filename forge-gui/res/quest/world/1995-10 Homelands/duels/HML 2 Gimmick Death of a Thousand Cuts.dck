@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=HML 2 Gimmick: Death of a Thousand Cuts
+Title=Death of a Thousand Cuts
+Difficulty=medium
+Description="Few master the powers of the earth as well as do the Shamans of the Minotaurs." -Baki, Wizard Attendant
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Ambush Party|HML|1
+2 Ambush Party|HML|2
+2 Anaba Bodyguard|HML|1
+2 Anaba Bodyguard|HML|2
+2 Anaba Shaman|HML|1
+2 Anaba Shaman|HML|2
+4 Dwarven Sea Clan|HML
+4 Ironclaw Curse|HML
+13 Island|LEB|1
+13 Mountain|LEB|2
+4 Narwhal|HML
+4 Reveka, Wizard Savant|HML
+4 Serrated Arrows|HML
+2 Wall of Kelp|HML

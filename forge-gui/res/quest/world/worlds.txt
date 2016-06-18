@@ -4,3 +4,11 @@ Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH|Banned:Chaos Orb; Falling 
 Name:Ravnica|Dir:ravnica|Sets:RAV, GPT, DIS, RTR, GTC, DGM|Banned:Chaos Orb; Falling Star
 Name:Zendikar|Dir:zendikar|Sets:ZEN, WWK, ROE|Banned:Chaos Orb; Falling Star
 Name:Mirrodin|Dir:mirrodin|Sets:MRD, DST, 5DN, SOM, MBS, NPH|Banned:Chaos Orb; Falling Star
+Name:1993-10 Limited Edition Beta|Dir:1993-10 Limited Edition Beta|Sets:LEB|Banned:Chaos Orb
+Name:1993-12 Arabian Nights|Dir:1993-12 Arabian Nights|Sets:ARN|Banned:City in a Bottle
+Name:1994-03 Antiquities|Dir:1994-03 Antiquities|Sets:ATQ|Banned:Golgothian Sylex
+Name:1994-06 Legends|Dir:1994-06 Legends|Sets:LEG|Banned:Arena of the Ancients; Falling Star; Karakas
+Name:1994-08 The Dark|Dir:1994-08 The Dark|Sets:DRK|Banned:Maze of Ith
+Name:1994-11 Fallen Empires|Dir:1994-11 Fallen Empires|Sets:FEM
+Name:1995-10 Homelands|Dir:1995-10 Homelands|Sets:HML|Banned:Apocalypse Chime
+Name:1996-05 Ice Age|Dir:1996-05 Ice Age|Sets:ICE, ALL

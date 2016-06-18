@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=LEG 3 Strategy: Hellish Contraptions
+Title=Hellish Contraptions
+Difficulty=hard
+Description="An immense river of oblivion is sweeping us away into a nameless abyss." -Ernest Renan, Souvenirs d'Enfance et de Jeunesse
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Bronze Horse|LEG
+4 Marble Priest|LEG
+2 Mirror Universe|LEG
+4 Relic Barrier|LEG
+4 Serpent Generator|LEG
+26 Swamp|LEB|3
+4 The Abyss|LEG
+4 Triassic Egg|LEG
+4 Underworld Dreams|LEG
+4 Walking Dead|LEG

@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=FEM 1 Lore: 5E Havenwood
+Title=Havenwood
+Difficulty=easy
+Description="As the climate cooled, many elves turned to thallid farming for food, while the hunters honed their skills on what little game remained." -Sarpadian Empires, vol. III
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Aeolipile|FEM
+4 Balm of Restoration|FEM
+4 Elven Lyre|FEM
+4 Elvish Farmer|FEM
+2 Elvish Hunter|FEM|1
+1 Elvish Hunter|FEM|2
+1 Elvish Hunter|FEM|3
+26 Forest|LEB|2
+1 Thallid|FEM|1
+1 Thallid|FEM|2
+1 Thallid|FEM|3
+1 Thallid|FEM|4
+4 Thelon's Chant|FEM
+4 Thelon's Curse|FEM
+2 Thelonite Monk|FEM

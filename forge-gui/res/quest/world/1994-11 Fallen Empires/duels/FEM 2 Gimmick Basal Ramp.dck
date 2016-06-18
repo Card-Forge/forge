@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=FEM 2 Gimmick: Basal Ramp
+Title=Basal Ramp
+Difficulty=medium
+Description="Although my later designs were much more sophisticated, Basal Thrulls were no less a success." -Endrek Sahr, "Thrulls"
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Basal Thrull|FEM|1
+1 Basal Thrull|FEM|2
+1 Basal Thrull|FEM|3
+1 Basal Thrull|FEM|4
+4 Conch Horn|FEM
+4 Deep Spawn|FEM
+4 Derelor|FEM
+4 Draconian Cylix|FEM
+1 Homarid Warrior|FEM|1
+1 Homarid Warrior|FEM|2
+2 Homarid Warrior|FEM|3
+12 Island|LEB|3
+16 Swamp|LEB|3
+4 Thrull Champion|FEM
+4 Thrull Retainer|FEM

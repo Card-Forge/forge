@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEG 1 Land: 2 Tolaria
+Title=Tolaria
+Difficulty=easy
+Description="Fairest Isle, all isles excelling,/ Seat of pleasures, and of loves . . ." -John Dryden
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+2 Blue Mana Battery|LEG
+4 Brine Hag|LEG
+4 Elder Spawn|LEG
+4 Invoke Prejudice|LEG
+20 Island|LEB|2
+4 Puppet Master|LEG
+4 Spectral Cloak|LEG
+4 Telekinesis|LEG
+4 Tolaria|LEG
+2 Undertow|LEG
+4 Wall of Wonder|LEG
+4 Zephyr Falcon|LEG

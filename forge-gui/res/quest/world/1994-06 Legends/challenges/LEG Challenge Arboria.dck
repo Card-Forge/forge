@@ -1,0 +1,18 @@
+[quest]
+id=LEG Challenge: Arboria
+OpponentName=Arboria
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEG
+Credit Reward=120
+AIExtras=Arboria
+[metadata]
+Name=LEG Challenge: Arboria
+Title=Arboria
+Difficulty=hard
+Description=A sense of peace and quiet washes over you.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+100 Arboria|LEB

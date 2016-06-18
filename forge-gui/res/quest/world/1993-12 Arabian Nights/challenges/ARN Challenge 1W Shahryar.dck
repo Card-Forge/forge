@@ -1,0 +1,19 @@
+[quest]
+id=ARN Challenge: 1W Shahryar
+OpponentName=Shahryar
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ARN
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=ARN Challenge: 1W Shahryar
+Title=Shahryar
+Difficulty=medium
+Description=The people of Baghdad suffer under the harsh laws of their ruler, Shahryar.  Can you overthrow this tyrant?
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+70 Eye for an Eye|ARN
+30 Plains|LEB|1

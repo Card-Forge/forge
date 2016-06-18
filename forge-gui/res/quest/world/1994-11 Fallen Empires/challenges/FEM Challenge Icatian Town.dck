@@ -1,0 +1,19 @@
+[quest]
+id=FEM Challenge: Icatian Town
+OpponentName=The Outpost of Montford
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:FEM
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=FEM Challenge: Icatian Town
+Title=The Outpost of Montford
+Difficulty=medium
+Description=The Outpost of Montford has sent its militia to deal with you.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+36 Plains|LEB|1
+24 Icatian Town|FEM

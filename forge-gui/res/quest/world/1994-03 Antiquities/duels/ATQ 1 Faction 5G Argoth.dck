@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=ATQ 1 Faction: 5G Argoth
+Title=Argoth
+Difficulty=medium
+Description=Haunting cries we hear in our dreams // As the forest dies, a death from // machines.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Argothian Pixies|ATQ
+4 Argothian Treefolk|ATQ
+4 Citanul Druid|ATQ
+4 Crumble|ATQ
+24 Forest|LEB|2
+4 Gaea's Avenger|ATQ
+4 Millstone|ATQ
+4 Powerleech|ATQ
+4 Shapeshifter|ATQ
+4 Titania's Song|ATQ

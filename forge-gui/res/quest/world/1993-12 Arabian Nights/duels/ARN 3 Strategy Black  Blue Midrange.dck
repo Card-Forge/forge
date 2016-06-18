@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=ARN 3 Strategy: Black & Blue Midrange
+Title=Black & Blue Midrange
+Difficulty=hard
+Description=Summoners of efreeti remember only the power of command, never the sting of regret.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Brass Man|ARN
+4 City of Brass|ARN
+4 Cuombajj Witches|ARN
+4 Dancing Scimitar|ARN
+4 Erg Raiders|ARN|2
+4 Hasran Ogress|ARN|1
+9 Island|LEB|1
+4 Juzam Djinn|ARN
+1 Library of Alexandria|ARN
+4 Old Man of the Sea|ARN
+4 Serendib Efreet|ARN
+10 Swamp|LEB|1
+4 Unstable Mutation|ARN

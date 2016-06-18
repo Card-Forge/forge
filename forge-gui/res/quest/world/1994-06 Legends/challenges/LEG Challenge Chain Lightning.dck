@@ -1,0 +1,19 @@
+[quest]
+id=LEG Challenge: Chain Lightning
+OpponentName=The Lightning
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEG
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEG Challenge: Chain Lightning
+Title=The Lightning
+Difficulty=very hard
+Description=Who said lightning never strikes twice?
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+40 Chain Lightning|LEG
+20 Mountain|LEB|2

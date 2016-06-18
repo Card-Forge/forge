@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 52 GvU Nature
+Title=Aspect of Nature
+Difficulty=easy
+Description=Moss-covered statues littered the area, a macabre monument to the basilisk's power.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Cockatrice|LEB
+3 Dingus Egg|LEB
+3 Fog|LEB
+4 Force of Nature|LEB
+24 Forest|LEB|1
+3 Hurricane|LEB
+4 Lure|LEB
+4 Thicket Basilisk|LEB
+3 Tranquility|LEB
+2 Tsunami|LEB
+4 Wall of Ice|LEB
+2 Wooden Sphere|LEB

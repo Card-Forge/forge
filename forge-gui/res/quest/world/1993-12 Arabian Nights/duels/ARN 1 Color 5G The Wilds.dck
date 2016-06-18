@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=ARN 1 Color: 5G The Wilds
+Title=The Wilds
+Difficulty=easy
+Description="When one wolf calls, others follow. Who wants to fight creatures that eat scorpions?" -Maimun al-Wyluli, Diary
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Brass Man|ARN
+4 Dancing Scimitar|ARN
+4 Desert|ARN
+4 Desert Twister|ARN
+2 Drop of Honey|ARN
+4 Erhnam Djinn|ARN
+20 Forest|LEB|2
+4 Ifh-Biff Efreet|ARN
+2 Jandor's Ring|ARN
+4 Nafs Asp|ARN|2
+4 Sandstorm|ARN
+4 Wyluli Wolf|ARN|2

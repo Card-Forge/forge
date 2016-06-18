@@ -1,0 +1,19 @@
+[quest]
+id=DRK Challenge: Ball Lightning
+OpponentName=A Thunderstorm
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:DRK
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=DRK Challenge: Ball Lightning
+Title=A Thunderstorm
+Difficulty=hard
+Description=A strange phenomenon.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+30 Mountain|LEB|2
+30 Ball Lightning|DRK

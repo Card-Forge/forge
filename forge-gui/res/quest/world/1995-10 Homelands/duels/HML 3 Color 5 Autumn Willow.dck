@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=HML 3 Color: 5 Autumn Willow
+Title=Autumn Willow
+Difficulty=hard
+Description="We must shake her limbs and rattle her brains." -Grandmother Sengir
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 An-Havva Constable|HML
+4 Ebony Rhino|HML
+4 Faerie Noble|HML
+24 Forest|LEB|2
+2 Hungry Mist|HML|1
+2 Hungry Mist|HML|2
+4 Roots|HML
+2 Roterothopter|HML
+4 Serrated Arrows|HML
+4 Spectral Bears|HML
+2 Willow Faerie|HML|1
+2 Willow Faerie|HML|2
+2 Willow Priestess|HML

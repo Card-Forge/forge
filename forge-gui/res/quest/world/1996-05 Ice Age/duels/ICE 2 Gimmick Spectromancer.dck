@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=ICE 2 Gimmick: Spectromancer
+Title=Spectromancer
+Difficulty=medium
+Description="These, of all spells, must have common components I can isolate and use." -Halvor Arenson, Kjeldoran Priest
+
+Spectromancy is the magical art that wards against the various colors of mana.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Adarkar Unicorn|ICE
+4 Adarkar Wastes|ICE
+4 Balduvian Shaman|ICE
+1 Black Scarab|ICE
+1 Blue Scarab|ICE
+1 Circle of Protection: Black|ICE
+1 Circle of Protection: Blue|ICE
+1 Circle of Protection: Green|ICE
+1 Circle of Protection: Red|ICE
+1 Circle of Protection: White|ICE
+1 Green Scarab|ICE
+8 Island|ICE|1
+1 Land Cap|ICE
+4 Mistfolk|ICE
+8 Plains|ICE|2
+4 Prismatic Ward|ICE
+1 Red Scarab|ICE
+4 Shyft|ICE
+1 Sol Grail|ALL
+4 Spectral Shield|ICE
+1 White Scarab|ICE
+4 Word of Undoing|ICE

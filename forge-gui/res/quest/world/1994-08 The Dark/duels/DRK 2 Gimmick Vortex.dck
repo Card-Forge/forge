@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=DRK 2 Gimmick: Vortex
+Title=Vortex
+Difficulty=medium
+Description=We asked Captain Soll what became of the Serafina, but all he said was, "Ships that go down shouldn't come back up."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Bog Imp|DRK
+4 Drowned|DRK
+4 Electric Eel|DRK
+4 Erosion|DRK
+16 Island|LEB|3
+4 Mana Vortex|DRK
+4 Merfolk Assassin|DRK
+4 Sunken City|DRK
+8 Swamp|LEB|3
+4 Tangle Kelp|DRK
+4 Water Wurm|DRK

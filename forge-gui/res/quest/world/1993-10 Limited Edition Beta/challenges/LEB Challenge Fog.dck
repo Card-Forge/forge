@@ -1,0 +1,19 @@
+[quest]
+id=LEB Challenge: Fog
+OpponentName=A Thick Fog
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:LEB
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=LEB Challenge: Fog
+Title=A Thick Fog
+Difficulty=easy
+Description="I fear no army or beast, but only the morning fog. Our assault can survive everything else." -Lord Hilneth
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+80 Fog|LEB
+20 Forest|LEB|1

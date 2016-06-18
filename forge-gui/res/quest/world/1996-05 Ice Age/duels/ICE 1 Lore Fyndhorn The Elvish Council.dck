@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Fyndhorn: The Elvish Council
+Title=The Elvish Council
+-Laina of the Elvish Council
+Difficulty=easy
+Description="Do we know what we're doing? Yes-the will of Freyalise."
+
+The Elvish Council rules over Kelsinko, the largest settlement in the forests of Fyndhorn. They worship the planeswalker Freyalise as a goddess. It was at Kelsinko that Laina provided Freyalise with the Ice Cauldron she needed to cast the World Spell.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+4 Elvish Bard|ALL
+2 Elvish Ranger|ALL|1
+2 Elvish Ranger|ALL|2
+4 Elvish Spirit Guide|ALL
+24 Forest|ICE|3
+2 Freyalise's Winds|ICE
+2 Fyndhorn Druid|ALL|1
+2 Fyndhorn Druid|ALL|2
+4 Fyndhorn Elder|ICE
+4 Fyndhorn Elves|ICE
+2 Gift of the Woods|ALL|1
+2 Gift of the Woods|ALL|2
+1 Kaysa|ALL
+1 Malachite Talisman|ICE
+2 Regeneration|ICE
+2 Trailblazer|ICE

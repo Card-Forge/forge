@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=ATQ 1 Faction: 4R The Third Path
+Title=The Third Path
+Difficulty=easy
+Description=The first line of defense against Urza and Mishra, the Artifact Blast achieved widespread fame until an unlucky mage discovered it was useless on the devices the brothers had already created.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Artifact Blast|ATQ
+4 Atog|ATQ
+4 Battering Ram|ATQ
+4 Colossus of Sardia|ATQ
+4 Detonate|ATQ
+1 Feldon's Cane|ATQ
+24 Mountain|LEB|3
+3 Obelisk of Undoing|ATQ
+4 Shatterstorm|ATQ
+4 Tetravus|ATQ
+4 Wall of Spears|ATQ

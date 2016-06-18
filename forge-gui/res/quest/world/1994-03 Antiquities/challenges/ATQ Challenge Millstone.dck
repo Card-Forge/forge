@@ -1,0 +1,31 @@
+[quest]
+id=ATQ Challenge: Millstone
+OpponentName=The Millstone
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ATQ
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=ATQ Challenge: Millstone
+Title=The Millstone
+Difficulty=hard
+Description=More than one mage was driven insane by the sound of the Millstone relentlessly grinding away.
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[main]
+2 Urza's Mine|ATQ|1
+2 Urza's Mine|ATQ|2
+2 Urza's Mine|ATQ|3
+2 Urza's Mine|ATQ|4
+2 Urza's Power Plant|ATQ|1
+2 Urza's Power Plant|ATQ|2
+2 Urza's Power Plant|ATQ|3
+2 Urza's Power Plant|ATQ|4
+2 Urza's Tower|ATQ|1
+2 Urza's Tower|ATQ|2
+2 Urza's Tower|ATQ|3
+2 Urza's Tower|ATQ|4
+36 Millstone|ATQ
+

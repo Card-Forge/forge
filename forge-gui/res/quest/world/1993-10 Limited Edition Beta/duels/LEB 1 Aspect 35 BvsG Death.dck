@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=LEB 1 Aspect: 35 BvG Death
+Title=Aspect of Death
+Difficulty=easy
+Description=The Wall of Bone is said to be an aspect of the Great Wall in Hel, where the bones of all sinners wait for Ragnarok, when Hela will call them forth for the final battle.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Animate Dead|LEB
+2 Deathgrip|LEB
+4 Drudge Skeletons|LEB
+3 Fear|LEB
+2 Lich|LEB
+3 Raise Dead|LEB
+4 Royal Assassin|LEB
+4 Soul Net|LEB
+24 Swamp|LEB|3
+4 Terror|LEB
+2 Throne of Bone|LEB
+4 Wall of Bone|LEB

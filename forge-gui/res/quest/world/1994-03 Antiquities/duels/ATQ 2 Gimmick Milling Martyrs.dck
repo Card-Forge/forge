@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ATQ 2 Gimmick: Milling Martyrs
+Title=Milling Martyrs
+Difficulty=medium
+Description=More than one mage was driven insane by the sound of the Millstone relentlessly grinding away.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Argivian Blacksmith|ATQ
+4 Artifact Ward|ATQ
+4 Clay Statue|ATQ
+4 Martyrs of Korlis|ATQ
+4 Millstone|ATQ
+1 Mishra's Factory|ATQ|1
+1 Mishra's Factory|ATQ|2
+1 Mishra's Factory|ATQ|3
+1 Mishra's Factory|ATQ|4
+4 Ornithopter|ATQ
+19 Plains|LEB|1
+1 Strip Mine|ATQ|4
+4 Wall of Spears|ATQ
+4 Weakstone|ATQ
+4 Yotian Soldier|ATQ

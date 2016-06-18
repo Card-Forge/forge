@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=HML 1 Lore: 3 Castle Sengir
+Title=Castle Sengir
+Difficulty=easy
+Description=Where hope has no champion, evil rules all.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+3 Baron Sengir|HML
+3 Black Carriage|HML
+2 Feast of the Unicorn|HML|1
+2 Feast of the Unicorn|HML|2
+3 Grandmother Sengir|HML
+3 Ihsan's Shade|HML
+3 Irini Sengir|HML
+4 Sengir Autocrat|HML
+2 Sengir Bats|HML|1
+2 Sengir Bats|HML|2
+26 Swamp|LEB|1
+2 Torture|HML|1
+2 Torture|HML|2
+3 Veldrane of Sengir|HML

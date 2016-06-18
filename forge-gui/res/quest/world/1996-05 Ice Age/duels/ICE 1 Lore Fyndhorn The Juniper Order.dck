@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Fyndhorn: The Juniper Order
+Title=The Juniper Order
+Difficulty=easy
+Description="In these troubled times, we alone carry the hope of reconciliation between Elf and Human." -Jaeuhl Carthalion, Juniper Order advocate
+
+The Juniper Order is an order of druids and knights who forsook the cities of Kjeldor to live in the forests of Fyndhorn. They worship the planeswalker Freyalise as a goddess, as do the elves of the Elvish Council who allied with the druids.
+
+The position of Elder Druid is filled each generation by a child born with a special birthmark. During the later days of the Ice Age they where led by the High Honored druid Kolbjorn. Later his daughter, Kaysa, took his place. Under Kaysa, the Order helped Fyndhorn refugees get to Yavimaya.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+4 Brushland|ICE
+4 Elvish Healer|ICE
+2 Essence Filter|ICE
+2 Fanatical Fever|ICE
+11 Forest|ICE|1
+1 Freyalise's Charm|ICE
+2 Fyndhorn Druid|ALL|1
+2 Fyndhorn Druid|ALL|2
+4 Juniper Order Advocate|ALL
+2 Juniper Order Druid|ICE
+1 Justice|ICE
+1 Kaysa|ALL
+4 Kelsinko Ranger|ICE
+2 Maddening Wind|ICE
+1 Nature's Chosen|ALL
+2 Nature's Lore|ICE
+8 Plains|ICE|1
+2 Ritual of Subdual|ICE
+1 Taste of Paradise|ALL|1
+1 Taste of Paradise|ALL|2
+2 Thermokarst|ICE
+1 Veldt|ICE

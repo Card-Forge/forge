@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=FEM 2 Gimmick: Taste the Rainbow
+Title=Taste the Rainbow
+Difficulty=medium
+Description=In the feudal days of Icatia, finding the Rainbow Vale was often the goal of Knights' quests.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Derelor|FEM
+4 Elvish Farmer|FEM
+1 Elvish Hunter|FEM|1
+1 Elvish Hunter|FEM|2
+1 Elvish Hunter|FEM|3
+2 Farrel's Mantle|FEM
+4 Forest|LEB|3
+1 Goblin War Drums|FEM|2
+1 Goblin War Drums|FEM|3
+1 Homarid Warrior|FEM|1
+1 Homarid Warrior|FEM|2
+1 Homarid Warrior|FEM|3
+4 Icatian Phalanx|FEM
+3 Icatian Town|FEM
+4 Island|LEB|3
+4 Mountain|LEB|1
+1 Orcish Veteran|FEM|1
+1 Orcish Veteran|FEM|2
+1 Orcish Veteran|FEM|3
+1 Orcish Veteran|FEM|4
+4 Plains|LEB|3
+4 Rainbow Vale|FEM
+4 Swamp|LEB|3
+4 Thrull Champion|FEM
+1 Vodalian Mage|FEM|1
+1 Vodalian Mage|FEM|2
+1 Vodalian Mage|FEM|3

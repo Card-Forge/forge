@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Kjeldor: Gustha Ebasdotter
+Title=Gustha Ebasdotter
+Difficulty=easy
+Description="My mind and spirit are one-a barrier not readily passed." -Gustha Ebbasdotter, Kjeldoran Royal Mage
+
+Gustha Ebbasdotter is the royal mage of Kjeldor.  By 2934 AR Kjeldor was weak and decentralised. Royal mage Gustha Ebbasdotter had to rely on willpower and charisma to keep the various factions of wizards in control (and even that failed at times, as the Zurans split off from the general order).
+
+Gustha is a cousin of Gerda Aagesdotter, Archmage of the School of the Unseen.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Binding Grasp|ICE
+4 Counterspell|ICE
+4 Enervate|ICE
+4 Force Void|ICE
+4 Infuse|ICE
+24 Island|ICE|1
+4 Sibilant Spirit|ICE
+4 Silver Erne|ICE
+4 Soul Barrier|ICE
+2 Storm Crow|ALL|1
+2 Storm Crow|ALL|2

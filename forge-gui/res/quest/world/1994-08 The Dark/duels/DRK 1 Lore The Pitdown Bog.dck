@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=DRK 1 Lore: The Pitdown Bog
+Title=The Pitdown Bog
+Difficulty=easy
+Description=Solitude drove the old hermit insane. Now he only keeps company with those he can catch.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Blood Moon|DRK
+4 Bog Imp|DRK
+4 Bog Rats|DRK
+4 Bone Flute|DRK
+4 Eater of the Dead|DRK
+4 Marsh Gas|DRK
+4 Marsh Goblins|DRK
+8 Mountain|LEB|3
+20 Swamp|LEB|2
+4 Uncle Istvan|DRK

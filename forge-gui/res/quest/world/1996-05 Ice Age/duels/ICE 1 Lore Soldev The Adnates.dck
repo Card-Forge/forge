@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=ICE 1 Lore: Soldev: The Adnates
+Title=The Soldevi Adnates
+Difficulty=easy
+Description="Rumors persist of dark deeds performed in the depths of Soldev. When will Dagsson heed the danger therein?" -Sorine Relicbane, Soldevi heretic
+
+Some things are best left buried.  Deep in the ice beneath Soldev, phyrexian machines stir.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+1 Hecatomb|ICE
+1 Helm of Obedience|ALL
+1 Icy Manipulator|ICE
+2 Insidious Bookworms|ALL|1
+2 Insidious Bookworms|ALL|2
+12 Island|ICE|1
+1 Onyx Talisman|ICE
+2 Phyrexian Boon|ALL|1
+2 Phyrexian Boon|ALL|2
+1 Phyrexian Portal|ALL
+2 Phyrexian War Beast|ALL|1
+2 Phyrexian War Beast|ALL|2
+3 Pit Trap|ICE
+3 Ritual of the Machine|ALL
+2 Soldevi Adnate|ALL|1
+2 Soldevi Adnate|ALL|2
+4 Soldevi Simulacrum|ICE
+2 Soldevi Steam Beast|ALL|1
+2 Soldevi Steam Beast|ALL|2
+12 Swamp|ICE|1
+1 Time Bomb|ICE
