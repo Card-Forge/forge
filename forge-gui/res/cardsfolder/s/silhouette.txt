@@ -1,0 +1,6 @@
+Name:Silhouette
+ManaCost:1 U
+Types:Instant
+A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ PreventAllDamageBy Spell.IsTargetingSource,Card.IsTargetingSource | StackDescription$ SpellDescription | SpellDescription$ Prevent all damage that would be dealt to target creature this turn by spells or abilities that target it.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silhouette.jpg
+Oracle:Prevent all damage that would be dealt to target creature this turn by spells or abilities that target it.

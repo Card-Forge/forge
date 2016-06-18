@@ -5716,9 +5716,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
             if (kw.startsWith("PreventAllDamageBy")) {
-                String valid = getKeywords().get(getKeywordPosition("PreventAllDamageBy"));
-                valid = valid.split(" ", 2)[1];
-                if (source.isValid(valid, getController(), this, null)) {
+                if (source.isValid(kw.split(" ", 2)[1].split(","), getController(), this, null)) {
                     return 0;
                 }
             }

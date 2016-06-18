@@ -13493,6 +13493,7 @@ forge-gui/res/cardsfolder/s/silent_skimmer.txt -text
 forge-gui/res/cardsfolder/s/silent_specter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silhana_ledgewalker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silhana_starfletcher.txt -text
+forge-gui/res/cardsfolder/s/silhouette.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/silk_net.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silkbind_faerie.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/silkenfist_fighter.txt svneol=native#text/plain
