@@ -2,8 +2,8 @@ Name:Circle of Protection: Shadow
 ManaCost:1 W
 Types:Enchantment
 A:AB$ ChooseCard | Cost$ 1 | Choices$ Creature.withShadow | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromCreature,ExileEffect | SpellDescription$ The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
-SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromCreature | RememberObjects$ ChosenCard | SVars$ RPreventNextFromCreature,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
-SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered+withShadow | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time a creature of your choice with shadow would deal damage to you, prevent that damage.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromCreature | SVars$ RPreventNextFromCreature,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.ChosenCard+withShadow | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time a creature of your choice with shadow would deal damage to you, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:NonStackingEffect:True
