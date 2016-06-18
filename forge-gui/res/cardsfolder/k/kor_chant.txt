@@ -1,0 +1,22 @@
+Name:Kor Chant
+ManaCost:2 W
+Types:Instant
+
+A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage from | SubAbility$ DBChooseSource | StackDescription$ SpellDescription | SpellDescription$ All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
+
+SVar:DBChooseSource:DB$ ChooseSource | Choices$ Card | SubAbility$ DBEffect
+
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X | References$ Combat,NonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,X | ImprintCards$ ParentTarget | RememberObjects$ ThisTargetedCard | SubAbility$ DBCleanup | ConditionDefined$ ParentTarget | ConditionPresent$ Card | ConditionCompare$ GE1
+
+SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ValidSource$ Card.ChosenCard | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
+SVar:SelflessNonCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ValidSource$ Card.ChosenCard | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | Description$ All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
+SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Remembered | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X
+SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Imprinted,Remembered | Execute$ ExileEffect | Static$ True
+
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:X:ReplaceCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_chant.jpg
+Oracle:All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.

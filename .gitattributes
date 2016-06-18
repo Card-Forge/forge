@@ -8677,6 +8677,8 @@ forge-gui/res/cardsfolder/k/kor_aeronaut.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kor_bladewhirl.txt -text
 forge-gui/res/cardsfolder/k/kor_cartographer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kor_castigator.txt -text
+forge-gui/res/cardsfolder/k/kor_chant.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/k/kor_dirge.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/k/kor_duelist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kor_entanglers.txt -text
 forge-gui/res/cardsfolder/k/kor_firewalker.txt svneol=native#text/plain
