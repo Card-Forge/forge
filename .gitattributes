@@ -2620,6 +2620,7 @@ forge-gui/res/cardsfolder/b/birthing_pod.txt -text
 forge-gui/res/cardsfolder/b/bite_of_the_black_rose.txt -text
 forge-gui/res/cardsfolder/b/biting_rain.txt -text
 forge-gui/res/cardsfolder/b/biting_tether.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/bitter_feud.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/b/bitter_ordeal.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bitter_revelation.txt -text
 forge-gui/res/cardsfolder/b/bitterblossom.txt svneol=native#text/plain

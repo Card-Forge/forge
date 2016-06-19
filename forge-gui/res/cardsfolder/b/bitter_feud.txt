@@ -1,0 +1,23 @@
+Name:Bitter Feud
+ManaCost:4 R
+Types:Enchantment
+K:ETBReplacement:Other:ChooseP
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | RememberChosen$ True | SubAbility$ ChoosePTwo | SpellDescription$ As CARDNAME enters the battlefield, choose two players.
+SVar:ChoosePTwo:DB$ ChoosePlayer | Defined$ You | Choices$ NonChosenPlayer | AILogic$ Curse
+
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RememberedPlayerCtrl | ValidTarget$ Permanent.ChosenCtrl,Player.Chosen | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RememberedPlayerCtrl | ValidTarget$ Permanent.ChosenCtrl,Player.Chosen | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.
+
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.ChosenCtrl | ValidTarget$ Permanent.RememberedPlayerCtrl,Player.Remembered | ReplaceWith$ DmgTwice | IsCombat$ False | Secondary$ True | Description$ If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.ChosenCtrl | ValidTarget$ Permanent.RememberedPlayerCtrl,Player.Remembered | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.
+
+SVar:DmgTwice:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgTwiceCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bitter_feud.jpg
+Oracle:As Bitter Feud enters the battlefield, choose two players.\nIf a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.
