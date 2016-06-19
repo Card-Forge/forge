@@ -1052,6 +1052,11 @@ public class AbilityUtils {
                 players.add(p);
             }
         }
+        else if (defined.equals("ChosenCardController")) {
+            for (final Card chosen : card.getChosenCards()) {
+                players.add(game.getCardState(chosen).getController());
+            }
+        }
         else if (defined.equals("SourceController")) {
             final Player p = sa.getHostCard().getController();
             if (!players.contains(p)) {
