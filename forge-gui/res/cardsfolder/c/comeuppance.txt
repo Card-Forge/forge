@@ -1,0 +1,14 @@
+Name:Comeuppance
+ManaCost:3 W
+Types:Instant
+A:SP$ Effect | Cost$ 3 W | ReplacementEffects$ RPrevent | SVars$ RPrevent,DamageCreature,DamageNonCreature,X | References$ RPrevent,DamageCreature,DamageNonCreature,X
+SVar:RPrevent:Event$ DamageDone | ValidSource$ Card.YouDontCtrl | ValidTarget$ You,Planeswalker.YouCtrl | ReplaceWith$ DamageCreature | PreventionEffect$ True | Description$ Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, CARDNAME deals that much damage to that creature. If damage from a noncreature source is prevented this way, CARDNAME deals that much damage to the source's controller.
+
+SVar:DamageCreature:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedSource | DamageSource$ EffectSource | NumDmg$ X | ConditionDefined$ ReplacedSource | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | SubAbility$ DamageNonCreature
+
+SVar:DamageNonCreature:DB$ DealDamage | Cost$ 0 | Defined$ ReplacedSourceController | DamageSource$ EffectSource | NumDmg$ X | ConditionDefined$ ReplacedSource | ConditionPresent$ Card.nonCreature | ConditionCompare$ GE1
+
+SVar:X:ReplaceCount$DamageAmount
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/comeuppance.jpg
+Oracle:Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, Comeuppance deals that much damage to that creature. If damage from a noncreature source is prevented this way, Comeuppance deals that much damage to the source's controller.

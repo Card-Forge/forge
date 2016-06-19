@@ -3817,6 +3817,7 @@ forge-gui/res/cardsfolder/c/coma_veil.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/combat_medic.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/combust.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/comet_storm.txt -text
+forge-gui/res/cardsfolder/c/comeuppance.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/c/command_beacon.txt -text
 forge-gui/res/cardsfolder/c/command_of_unsummoning.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/command_tower.txt -text
