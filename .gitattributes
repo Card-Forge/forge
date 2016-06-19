@@ -6083,6 +6083,7 @@ forge-gui/res/cardsfolder/f/flametongue_kavu_avatar.txt -text
 forge-gui/res/cardsfolder/f/flamewake_phoenix.txt -text
 forge-gui/res/cardsfolder/f/flamewave_invoker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/flamewright.txt -text
+forge-gui/res/cardsfolder/f/flaming_gambit.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/f/flaming_sword.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/flanking_troops.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/flare.txt svneol=native#text/plain
