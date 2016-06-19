@@ -8,6 +8,17 @@ Forge Beta: 05-02-2016 ver 1.5.52
 Release Notes
 -------------
 
+- New Quest Worlds -
+This release includes 8 new quest worlds based on the earlier 1990s Magic: the Gathering sets and blocks (from Limited Edition Beta to Ice Age). These worlds were designed and contributed by Xyx. The author recommends the following quest mode preferences for the best possible experience:
+* Difficulty: Medium
+* Fantasy Mode: No (This one's important!)
+* Starting World: The one you intend to play (they're sorted by the year and month in which they were printed.)
+* Allow duplicate cards: Yes
+* Allow unlock of additional editions: No
+Furthermore, you are encouraged to:
+* stay in your world. The worlds were designed to be self-contained. For the purest experience, do not travel to other worlds. With the exception of basic lands, no opponent or challenge contains or expects to face any cards from outside their world;
+* build Vintage legal decks. 60 cards, honoring the Restricted List. Forge will not enforce this but your quest opponents all play by these rules. What you are playing is much closer to Block Constructed than it is to Limited.
+
 - Shadows over Innistrad -
 This release includes many fixes for the Shadows over Innistrad set.
 
