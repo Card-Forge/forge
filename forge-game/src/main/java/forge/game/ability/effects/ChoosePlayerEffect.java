@@ -51,8 +51,12 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                 } else {
                     chosen = choices.isEmpty() ? null : p.getController().chooseSingleEntityForEffect(choices, sa, choiceDesc);
                 }
-                if( null != chosen )
+                if( null != chosen ) {
                     card.setChosenPlayer(chosen);
+                    if (sa.hasParam("RememberChosen")) {
+                        card.addRemembered(chosen);
+                    }
+                }
             }
         }
     }
