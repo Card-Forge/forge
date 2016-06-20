@@ -4406,6 +4406,7 @@ forge-gui/res/cardsfolder/d/dawn_charm.txt -text
 forge-gui/res/cardsfolder/d/dawn_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dawn_of_the_dead.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dawn_to_dusk.txt -text
+forge-gui/res/cardsfolder/d/dawnbreak_reclaimer.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/d/dawnbringer_charioteers.txt -text
 forge-gui/res/cardsfolder/d/dawnfluke.txt -text
 forge-gui/res/cardsfolder/d/dawnglare_invoker.txt svneol=native#text/plain

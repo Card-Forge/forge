@@ -1,0 +1,26 @@
+Name:Dawnbreak Reclaimer
+ManaCost:4 W W
+Types:Creature Angel
+PT:5/5
+K:Flying
+
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBChooseCard | TriggerDescription$ At the beginning of your end step, choose a creature card in an opponent's graveyard, then that player chooses a creature card in your graveyard. You may return those cards to the battlefield under their owners' control.
+
+SVar:DBChooseCard:AB$ ChooseCard | Cost$ 0 | Choices$ Creature.OppCtrl | ChoiceZone$ Graveyard | AILogic$ WorstCard | Mandatory$ True | Defined$ You | RememberChosen$ True | SubAbility$ DBChoosePlayer
+
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Choices$ Player.Opponent | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | AILogic$ LeastCreatures | SubAbility$ DBChoosePlayer2
+
+#needed to set ChosenPlayer to be ChosenCardController
+SVar:DBChoosePlayer2:DB$ ChoosePlayer | Choices$ ChosenCardController | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | AILogic$ LeastCreatures | SubAbility$ DBChooseCard2
+
+SVar:DBChooseCard2:DB$ ChooseCard | Choices$ Creature.YouCtrl | ChoiceZone$ Graveyard | Defined$ ChosenPlayer | AILogic$ WorstCard | Mandatory$ True | RememberChosen$ True | SubAbility$ DBReturn
+
+#Add AILogic for Optional
+SVar:DBReturn:DB$ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | Optional$ True | OptionQuestion$ Return TARGETS from graveyard to battlefield under their owners' control? | SubAbility$ DBCleanup
+
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearChosenPlayer$ True | ClearRemembered$ True
+
+SVar:X:Count$ValidGraveyard Card.Chosen
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnbreak_reclaimer.jpg
+Oracle:Flying\nAt the beginning of your end step, choose a creature card in an opponent's graveyard, then that player chooses a creature card in your graveyard. You may return those cards to the battlefield under their owners' control.

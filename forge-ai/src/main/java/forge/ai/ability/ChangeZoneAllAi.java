@@ -15,6 +15,7 @@ import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -226,6 +227,37 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
+     */
+    @Override
+    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        final Card source = sa.getHostCard();
+        final String hostName = source.getName();
+        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
+
+        if (hostName.equals("Dawnbreak Reclaimer")) {
+        	final CardCollectionView cards = AbilityUtils.filterListByType(ai.getGame().getCardsIn(origin), sa.getParam("ChangeType"), sa);
+
+        	// AI gets nothing
+        	final CardCollection aiCards = CardLists.filterControlledBy(cards, ai);        	
+        	if (aiCards.isEmpty())
+        		return false;
+
+        	// Human gets nothing
+        	final CardCollection humanCards = CardLists.filterControlledBy(cards, ai.getOpponents());
+        	if (humanCards.isEmpty())
+        		return true;
+
+        	// if AI creature is better than Human Creature
+        	if (ComputerUtilCard.evaluateCreatureList(aiCards) >= ComputerUtilCard
+                    .evaluateCreatureList(humanCards)) {
+                return true;
+            }
+        	return false;
+        }
+        return true;
+    }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
