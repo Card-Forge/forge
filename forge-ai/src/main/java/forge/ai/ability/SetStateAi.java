@@ -33,22 +33,25 @@ public class SetStateAi extends SpellAbilityAi {
                 }
 
                 final Card othercard = aiPlayer.getCardsIn(ZoneType.Battlefield, other.getName()).getFirst();
-                
+
                 // for legendary KI counter creatures
                 if (othercard.getCounters(CounterType.KI) >= source.getCounters(CounterType.KI)) {
-                	// if the other legendary is useless try to replace it
-                    if (!isUselessCreature(aiPlayer, othercard)) {                    	
+                    // if the other legendary is useless try to replace it
+                    if (!isUselessCreature(aiPlayer, othercard)) {
                         return false;
                     }
                 }
             }
         }
         
-        if (sa.getTargetRestrictions() == null && "Transform".equals(sa.getParam("Mode"))) {
-            return !source.hasKeyword("CARDNAME can't transform");
+        if (sa.getTargetRestrictions() != null) {
+            return false;
         }
-        if ("Flip".equals(sa.getParam("Mode"))) {
-        	return true;
+
+        if("Transform".equals(sa.getParam("Mode"))) {
+            return !source.hasKeyword("CARDNAME can't transform");
+        } else if ("Flip".equals(sa.getParam("Mode"))) {
+            return true;
         }
         return false;
     }
