@@ -15,6 +15,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +80,30 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
         cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
+
+        if (sa.hasParam("Optional")) {
+            final String targets = Lang.joinHomogenous(cards);
+            final String message;
+            if (sa.hasParam("OptionQuestion")) {
+            	message = sa.getParam("OptionQuestion").replace("TARGETS", targets); 
+            } else {
+            	final StringBuilder sb = new StringBuilder();
+
+            	sb.append("Move ");
+            	sb.append(targets);
+            	sb.append(" from ");
+            	sb.append(Lang.joinHomogenous(origin));
+            	sb.append(" to ");
+            	sb.append(destination);
+            	sb.append("?");
+
+            	message = sb.toString();
+            }
+
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
+                return;
+            }
+        }
 
         if (sa.hasParam("ForgetOtherRemembered")) {
             sa.getHostCard().clearRemembered();
