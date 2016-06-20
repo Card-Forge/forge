@@ -3,6 +3,31 @@ Forge Beta: 05-02-2016 ver 1.5.52
 
 1???? cards in total.
 
+Added cards
+[code]
+Barbed Wire
+Bitter Feud
+Comeuppance
+Cover of Winter
+Dawnbreak Reclaimer
+Feed the Machine
+Firestorm Phoenix
+Flaming Gambit
+Ghostly Flame
+Hidden Retreat
+I Bask in Your Silent Awe
+Kor Chant
+Kor Dirge
+Malfegor Avatar
+May Civilization Collapse
+My Crushing Masterstroke
+Seraph
+Silhouette
+Stensia
+Surrender Your Thoughts
+The Fate of the Flammable
+Torrent of Lava
+[/code]
 
 -------------
 Release Notes
