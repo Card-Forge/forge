@@ -1,11 +1,12 @@
 Name:Martyr's Cause
 ManaCost:2 W
 Types:Enchantment
-A:AB$ ChooseSource | Cost$ Sac<1/Creature> | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
-SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to prevent damage to | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Targeted | ImprintCards$ Remembered | SVars$ RPreventNextFromSource,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
-SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsImprinted | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the targeted creature or player, prevent that damage.
+A:AB$ ChooseSource | Cost$ Sac<1/Creature> | Choices$ Card | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to prevent damage to | Triggers$ OutOfSight | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Targeted | SVars$ RPreventNextFromSource,OutOfSight,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:OutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | Static$ True
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the targeted creature or player, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_cause.jpg
 Oracle:Sacrifice a creature: The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
