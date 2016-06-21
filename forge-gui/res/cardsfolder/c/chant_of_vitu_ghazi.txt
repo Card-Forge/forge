@@ -2,10 +2,9 @@ Name:Chant of Vitu-Ghazi
 ManaCost:6 W W
 Types:Instant
 K:Convoke
-A:SP$ Effect | Cost$ 6 W W | ReplacementEffects$ RepCombatDmg,RepNonCombatDmg | SVars$ GainLifeYou,X | RememberObjects$ You | SpellDescription$ Prevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
-SVar:RepCombatDmg:Event$ DamageDone | ValidSource$ Creature | ReplaceWith$ GainLifeYou | PreventionEffect$ True | IsCombat$ True | Description$ Prevent all combat damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
-SVar:RepNonCombatDmg:Event$ DamageDone | ValidSource$ Creature | ReplaceWith$ GainLifeYou | PreventionEffect$ True | IsCombat$ False | Description$ Prevent all noncombat damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
-SVar:GainLifeYou:AB$ GainLife | Cost$ 0 | Defined$ Remembered | LifeAmount$ X | References$ X
+A:SP$ Effect | Cost$ 6 W W | ReplacementEffects$ RepDmg | SVars$ GainLifeYou,RepDmg,X | SpellDescription$ Prevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
+SVar:RepDmg:Event$ DamageDone | ValidSource$ Creature | ReplaceWith$ GainLifeYou | PreventionEffect$ True | Description$ Prevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
+SVar:GainLifeYou:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chant_of_vitu_ghazi.jpg
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nPrevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
