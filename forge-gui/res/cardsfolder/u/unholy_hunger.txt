@@ -2,7 +2,7 @@ Name:Unholy Hunger
 ManaCost:3 B B
 Types:Instant
 A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. Spell mastery - If there are two or more instant and/or sorcery cards in your graveyard, gain 2 life.
-SVar:DBGainLife:DB$GainLife | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ Y | LifeAmount$ 2
+SVar:DBGainLife:DB$GainLife | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X | LifeAmount$ 2
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unholy_hunger.jpg
 Oracle:Destroy target creature.\nSpell mastery - If there are two or more instant and/or sorcery cards in your graveyard, gain 2 life.
