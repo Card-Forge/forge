@@ -1,0 +1,22 @@
+Name:Honorable Passage
+ManaCost:1 W
+Types:Instant
+
+A:SP$ ChooseSource | Cost$ 1 W | Choices$ Card | AILogic$ NeedsPrevention | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.
+
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to prevent damage to | ReplacementEffects$ RepDmg | SVars$ RepDmg,DealDamage,OutOfSight,ExileEffect,X,Y | RememberObjects$ Targeted | Triggers$ OutOfSight | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+
+SVar:OutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | Static$ True
+
+SVar:RepDmg:Event$ DamageDone | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ValidSource$ Card.ChosenCard | ReplaceWith$ DealDamage | PreventionEffect$ True | Description$ The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.
+
+SVar:DealDamage:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedSourceController | DamageSource$ EffectSource | NumDmg$ X | References$ X,Y | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | SubAbility$ ExileEffect
+
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+
+SVar:X:ReplaceCount$DamageAmount
+SVar:Y:ReplacedSource$Valid Card.RedSource
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/honorable_passage.jpg
+Oracle:The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.

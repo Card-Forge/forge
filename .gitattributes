@@ -7660,6 +7660,7 @@ forge-gui/res/cardsfolder/h/honor_guard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/honor_of_the_pure.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/honor_the_fallen.txt -text
 forge-gui/res/cardsfolder/h/honor_worn_shaku.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/honorable_passage.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/h/honorable_scout.txt -text
 forge-gui/res/cardsfolder/h/honored_hierarch.txt -text
 forge-gui/res/cardsfolder/h/honors_reward.txt -text
