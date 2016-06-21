@@ -3,6 +3,7 @@ package forge.ai;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.card.ColorSet;
@@ -306,6 +307,9 @@ public class ComputerUtilMana {
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable) {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
+
+        List<SpellAbility> paymentList = Lists.newArrayList();
+
         if (payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
             return true;	// paid all from floating mana
         }
@@ -358,6 +362,7 @@ public class ComputerUtilMana {
                 }
                 continue;
             }
+            paymentList.add(saPayment);
 
             setExpressColorChoice(sa, ai, cost, toPay, saPayment);
 
@@ -420,6 +425,7 @@ public class ComputerUtilMana {
         if (!cost.isPaid()) {
             refundMana(manaSpentToPay, ai, sa);
             if (test) {
+                resetPayment(paymentList);
                 return false;
             }
             else {
@@ -428,17 +434,27 @@ public class ComputerUtilMana {
             }
         }
 
-        if (test) {
-            refundMana(manaSpentToPay, ai, sa);
-        }
         // Note: manaSpentToPay shouldn't be cleared here, since it needs to remain
         // on the SpellAbility in order for effects that check mana spent cost to work.
 
         sa.getHostCard().setColorsPaid(cost.getColorsPaid());
         // if (sa instanceof Spell_Permanent) // should probably add this
         sa.getHostCard().setSunburstValue(cost.getSunburst());
+
+        if (test) {
+            refundMana(manaSpentToPay, ai, sa);
+            resetPayment(paymentList);
+        }
+
         return true;
     } // payManaCost()
+
+    private static void resetPayment(List<SpellAbility> payments) {
+        for(SpellAbility sa : payments) {
+            sa.getManaPart().clearExpressChoice();
+        }
+    }
+
 
 	/**
 	 * Creates a mapping between the required mana shards and the available spell abilities to pay for them
@@ -682,6 +698,8 @@ public class ComputerUtilMana {
                 }
             }
             else if (sourceCard.isTapped()) {
+                return false;
+            } else if (ma.getRestrictions() != null && ma.getRestrictions().isInstantSpeed()) {
                 return false;
             }
         }
@@ -1243,6 +1261,10 @@ public class ComputerUtilMana {
             // if there is a parent ability the AI can't use it
             final Cost cost = a.getPayCosts();
             if (!cost.hasNoManaCost() || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
+                continue;
+            }
+
+            if (a.getRestrictions() != null &&  a.getRestrictions().isInstantSpeed()) {
                 continue;
             }
 
