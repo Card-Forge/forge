@@ -1,9 +1,9 @@
-Forge Beta: 05-02-2016 ver 1.5.52
+Forge Beta: 05-02-2016 ver 1.5.53
 
 
-1???? cards in total.
+15686 cards in total.
 
-Added cards
+Added cards:
 [code]
 Barbed Wire
 Bitter Feud
@@ -54,9 +54,6 @@ Made it so computers should no longer enter sleep mode while downloading stuff f
 Known Issues
 ------------
 
-- Shadows over Innistrad -
-Forge now includes many new cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
 There is a known issue with Kodama of the Center Tree: its Soulshift X ability used to crash Forge, and until a proper fix can be implemented, a temporary fix was introduced which prevents the crash but makes the Soulshift X ability work incorrectly in certain cases (in particular, it doesn't work correctly with mass removal, and it may have issues when Kodama of the Center Tree is controlled by someone else other than its owner). In the basic cases (such as Kodama of the Center Tree being destroyed in combat or with a direct damage spell) should work correctly. Hopefully one of the developers will be able to implement a better and proper fix for this card soon.
 
 There is a known issue with the cost reduction for cards that have color-locked X in their mana cost (e.g. Drain Life, Soul Burn). Cost reduction will not apply correctly to these cards if the amount by which the cost is reduced is greater than the amount of colorless mana in the mana cost specified on the card (e.g. 1 for Drain Life, 2 for Soul Burn). Fixing this issue likely requires rewriting the way announced color-locked X is interpreted and paid (most likely it has to be represented with colorless mana shards but still locked to the colors required by the card).
@@ -105,11 +102,9 @@ Sol
 Swordshine
 tjtillman
 tojammot
+Xyx
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
-
-
-end
