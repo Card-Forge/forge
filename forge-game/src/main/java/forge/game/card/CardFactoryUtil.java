@@ -1399,6 +1399,10 @@ public class CardFactoryUtil {
             return doXMath(cCount, m, c);
         }
 
+        if (sq[0].contains("CardControllerTypes")) {
+            return doXMath(getCardTypesFromList(cc.getCardsIn(ZoneType.smartValueOf(sq[1]))), m, c);
+        }
+
         if (sq[0].contains("CardTypes")) {
             return doXMath(getCardTypesFromList(game.getCardsIn(ZoneType.smartValueOf(sq[1]))), m, c);
         }
