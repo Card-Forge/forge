@@ -1520,33 +1520,67 @@ public class ComputerUtil {
         return false;
     }
 
-    // Computer mulligans if there are no cards with converted mana cost of 0 in its hand
-    public static boolean wantMulligan(Player ai) {
-        final CardCollectionView handList = ai.getCardsIn(ZoneType.Hand);
+
+    public static int scoreHand(CardCollectionView handList, Player ai) {
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        
+
         // don't mulligan when already too low
         if (handList.size() < aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) {
-        	return false;
+            return handList.size();
         }
-        
+
         final CardCollectionView lands = CardLists.filter(handList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (c.getManaCost().getCMC() > 0 || c.hasSVar("NeedsToPlay") 
-                		|| (!c.getType().isLand() && !c.getType().isArtifact())) {
+                if (c.getManaCost().getCMC() > 0 || c.hasSVar("NeedsToPlay")
+                        || (!c.getType().isLand() && !c.getType().isArtifact())) {
                     return false;
                 }
                 return true;
             }
         });
-        
-        // mulligan when at the threshold, with a no land hand
-        if (handList.size() == aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD) && !lands.isEmpty()) {
-        	return false;
+
+        final int handSize = handList.size();
+        final int landSize = lands.size();
+        int score = handList.size();
+
+        if (handSize/2 == landSize || handSize/2 == landSize +1) {
+            score += 10;
         }
 
-        return lands.size() < 2 ;
+        final CardCollectionView castables = CardLists.filter(handList, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                if (c.getManaCost().getCMC() > 0 && c.getManaCost().getCMC() <= landSize) {
+                    return false;
+                }
+                return true;
+            }
+        });
+
+        score += castables.size() * 2;
+
+        // Improve score for perceived mana efficiency of the hand
+
+        // if at mulligan threshold, and we have any lands accept the hand
+        if (handSize == aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD) && landSize > 0) {
+            return score;
+        }
+        // otherwise, reject bad hands or return score
+        if ( landSize < 2 || landSize == handSize) {
+            // BAD Hands, 0 or 1 lands, or all lands
+            return 0;
+        } else if (handSize >= 7 && landSize >= handSize-1) {
+            // BAD Hands - Mana flooding
+            return 0;
+        }
+        return score;
+    }
+
+    // Computer mulligans if there are no cards with converted mana cost of 0 in its hand
+    public static boolean wantMulligan(Player ai) {
+        final CardCollectionView handList = ai.getCardsIn(ZoneType.Hand);
+        return scoreHand(handList, ai) > 0;
     }
     
     public static CardCollection getPartialParisCandidates(Player ai) {
