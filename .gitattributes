@@ -10587,6 +10587,7 @@ forge-gui/res/cardsfolder/n/nourish.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nourishing_shoal.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nova_chaser.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nova_cleric.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/n/nova_pentacle.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/n/novablast_wurm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/novijen_heart_of_progress.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/novijen_sages.txt -text

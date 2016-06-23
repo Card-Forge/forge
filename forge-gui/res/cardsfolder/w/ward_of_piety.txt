@@ -3,9 +3,9 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
-A:AB$ Effect | Cost$ 1 W | Name$ Redirection Ward | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to redirect the damage to | ReplacementEffects$ PietyCombat,PietyNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | References$ PietyCombat,PietyNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | Duration$ HostLeavesOrEOT | ImprintCards$ Enchanted | RememberObjects$ Targeted | SpellDescription$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
-SVar:PietyCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
-SVar:PietyNonCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | Description$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
+A:AB$ Effect | Cost$ 1 W | Name$ Redirection Ward | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to redirect the damage to | ReplacementEffects$ PietyCombat,PietyNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y,RCP,RCC | References$ PietyCombat,PietyNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y,RCP,RCC | Duration$ HostLeavesOrEOT | ImprintCards$ Enchanted | RememberObjects$ Targeted | SpellDescription$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
+SVar:PietyCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | IsCombat$ True | ReplaceWith$ CombatDmg  | CheckSVar$ RCP | Description$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
+SVar:PietyNonCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | CheckSVar$ RCP | Description$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
 SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Remembered | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ 1 | SubAbility$ RestDmgCombat | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
 SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ 1 | SubAbility$ RestDmg | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
 SVar:RestDmgCombat:DB$ DealDamage | Defined$ Imprinted | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X | SubAbility$ ExileEffect
@@ -14,6 +14,10 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Def
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:X:ReplaceCount$DamageAmount/Minus.1
 SVar:Y:ReplaceCount$DamageAmount
-SVar:RemAIDeck:TrueSVar:Rarity:Uncommon
+
+SVar:RCP:PlayerCountRemembered$Amount/Plus.RCC
+SVar:RCC:Count$Valid Creature.Remembered
+
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_of_piety.jpg
 Oracle:Enchant creature\n{1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.

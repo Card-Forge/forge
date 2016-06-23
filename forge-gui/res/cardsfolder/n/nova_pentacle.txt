@@ -1,0 +1,24 @@
+Name:Nova Pentacle
+ManaCost: 4
+Types:Artifact
+A:AB$ ChooseSource | Cost$ 3 T | Choices$ Card | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a black source of your choice would deal damage to you this turn, prevent that damage.
+
+SVar:DBEffect:DB$ Effect | TargetingPlayer$ Player.Opponent | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature the caster of this spell don't control | ReplacementEffects$ SelflessCombat,SelflessNonCombat | SVars$ SelflessCombat,SelflessNonCombat,ExileEffect,OutOfSight,X | RememberObjects$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+
+SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard | IsCombat$ True | ReplaceWith$ CombatDmg | IsPresent$ Creature.IsRemembered | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead.
+
+SVar:SelflessNonCombat:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | IsPresent$ Creature.IsRemembered | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead.
+
+SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Remembered | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X | SubAbility$ ExileEffect
+SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ X | SubAbility$ ExileEffect
+
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Remembered | Execute$ ExileEffect | Static$ True
+
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:X:ReplaceCount$DamageAmount
+
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nova_pentacle.jpg
+Oracle:{3}, {T}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead.
