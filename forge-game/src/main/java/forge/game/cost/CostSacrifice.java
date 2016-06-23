@@ -44,6 +44,9 @@ public class CostSacrifice extends CostPartWithList {
         super(amount, type, description);
     }
 
+    @Override
+    public int paymentOrder() { return 15; }
+
     /*
      * (non-Javadoc)
      * 

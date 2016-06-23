@@ -47,6 +47,9 @@ public class CostExileFromStack extends CostPart {
         super(amount, type, description);
     }
 
+    @Override
+    public int paymentOrder() { return 15; }
+
     /*
      * (non-Javadoc)
      * 

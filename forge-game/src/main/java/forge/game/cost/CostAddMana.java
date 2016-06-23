@@ -35,11 +35,12 @@ public class CostAddMana extends CostPart {
     /**
      * CostCostAddMana.
      * @param amount
-     * @param playerSelector
      */
     public CostAddMana(final String amount, final String type, final String description) {
         super(amount, type, description);
     }
+
+    public int paymentOrder() { return 5; }
 
     /*
      * (non-Javadoc)

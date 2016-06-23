@@ -29,6 +29,9 @@ public class CostDamage extends CostPart {
         this.setAmount(amount);
     }
 
+    @Override
+    public int paymentOrder() { return 8; }
+
     /*
      * (non-Javadoc)
      * 

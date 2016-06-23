@@ -37,6 +37,9 @@ public class CostUntapType extends CostPartWithList {
     }
 
     @Override
+    public int paymentOrder() { return 18; }
+
+    @Override
     public boolean isReusable() { return true; }
 
     @Override

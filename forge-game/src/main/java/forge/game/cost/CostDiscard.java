@@ -47,6 +47,8 @@ public class CostDiscard extends CostPartWithList {
         super(amount, type, description);
     }
 
+    public int paymentOrder() { return 10; }
+
     /*
      * (non-Javadoc)
      * 

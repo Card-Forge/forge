@@ -55,6 +55,9 @@ public class CostRemoveAnyCounter extends CostPartWithList {
         super(amount, type, description);
     }
 
+    @Override
+    public int paymentOrder() { return 8; }
+
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */

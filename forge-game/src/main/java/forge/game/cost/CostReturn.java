@@ -44,6 +44,9 @@ public class CostReturn extends CostPartWithList {
         super(amount, type, description);
     }
 
+    @Override
+    public int paymentOrder() { return 10; }
+
     /*
      * (non-Javadoc)
      * 

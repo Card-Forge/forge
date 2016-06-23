@@ -35,6 +35,9 @@ public class CostExiledMoveToGrave extends CostPartWithList {
     }
 
     @Override
+    public int paymentOrder() { return 15; }
+
+    @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         final Integer i = convertAmount();

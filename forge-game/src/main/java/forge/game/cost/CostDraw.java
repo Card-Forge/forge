@@ -37,6 +37,9 @@ public class CostDraw extends CostPart {
         super(amount, playerSelector, null);
     }
 
+    @Override
+    public int paymentOrder() { return 15; }
+
     /*
      * (non-Javadoc)
      * 

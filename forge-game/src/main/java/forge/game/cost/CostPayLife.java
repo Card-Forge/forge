@@ -38,6 +38,9 @@ public class CostPayLife extends CostPart {
         this.setAmount(amount);
     }
 
+    @Override
+    public int paymentOrder() { return 7; }
+
     /*
      * (non-Javadoc)
      * 

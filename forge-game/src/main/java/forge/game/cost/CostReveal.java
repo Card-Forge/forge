@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import com.google.common.base.Predicate;
+import forge.game.GameLogEntryType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -123,6 +124,10 @@ public class CostReveal extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         targetCard.getGame().getAction().reveal(new CardCollection(targetCard), ability.getActivatingPlayer());
+        StringBuilder sb = new StringBuilder();
+        sb.append(ability.getActivatingPlayer()).append(" reveals ").append(targetCard).append(" to pay a cost for ");
+        sb.append(ability);
+        targetCard.getGame().getGameLog().add(GameLogEntryType.INFORMATION, sb.toString());
         return targetCard;
     }
 

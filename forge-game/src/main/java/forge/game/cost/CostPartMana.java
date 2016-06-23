@@ -33,17 +33,13 @@ public class CostPartMana extends CostPart {
     private boolean isEnchantedCreatureCost = false;
     private final String restriction;
 
+    public int paymentOrder() { return shouldPayLast() ? 200 : 0; }
+
     public boolean shouldPayLast() {
         return isExiledCreatureCost;
     }
     /**
      * Instantiates a new cost mana.
-     * 
-     * @param mana
-     *            the mana
-     * @param amount
-     *            the amount
-     * @param xCantBe0 TODO
      */
     public CostPartMana(final ManaCost cost, String restriction) {
         this.cost = cost;

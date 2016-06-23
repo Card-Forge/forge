@@ -64,6 +64,9 @@ public class CostPutCardToLib extends CostPartWithList {
     }
 
     @Override
+    public int paymentOrder() { return 10; }
+
+    @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         final Integer i = convertAmount();

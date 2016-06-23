@@ -18,6 +18,8 @@
 package forge.game.cost;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -65,6 +67,22 @@ public class Cost {
      */
     public final List<CostPart> getCostParts() {
         return this.costParts;
+    }
+
+    public void sort() {
+        // Things that need to happen first should be 0-4 (Tap, PayMana)
+        // Things that happen that are generally undoable 5 (Pretty much everything)
+        // Things that are annoying to undo 6-10 (PayLife, GainControl)
+        // Things that are hard to undo 11+ (Zone Changing things)
+        // Things that are pretty much happen at the end (Untap) 16+
+        // Things that NEED to happen last 100+
+
+        Collections.sort(this.costParts, new Comparator<CostPart>() {
+            @Override
+            public int compare(CostPart o1, CostPart o2) {
+                return o1.paymentOrder() - o2.paymentOrder();
+            }
+        });
     }
     
     /**
@@ -409,8 +427,6 @@ public class Cost {
      * 
      * @param parse
      *            a {@link java.lang.String} object.
-     * @param subkey
-     *            a {@link java.lang.String} object.
      * @param numParse
      *            a int.
      * @return an array of {@link java.lang.String} objects.
@@ -742,6 +758,7 @@ public class Cost {
                 getCostParts().add(part);
             }
         }
+        this.sort();
         return this;
     }
 

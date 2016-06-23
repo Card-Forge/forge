@@ -31,6 +31,8 @@ public class CostTap extends CostPart {
      */
     public CostTap() {
     }
+
+    public int paymentOrder() { return -1; }
     
     @Override
     public boolean isUndoable() { return true; }

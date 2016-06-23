@@ -41,6 +41,9 @@ public class CostMill extends CostPartWithList {
         this.setAmount(amount);
     }
 
+    @Override
+    public int paymentOrder() { return 10; }
+
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
