@@ -194,7 +194,7 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     else {
                         // If all the cards are valid choices, no need for a separate reveal dialog to the chooser.
-                        if (p == chooser) {
+                        if (p == chooser && destZone1ChangeNum > 1) {
                             delayedReveal = null;
                         }
                         valid = top;
@@ -369,6 +369,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
     }
 
+    // TODO This should be somewhere else, maybe like CardUtil or something like that
     // returns a List<Card> that is a subset of list with cards that share a name
     // with a permanent on the battlefield
     private static CardCollection sharesNameWithCardOnBattlefield(final Game game, final List<Card> list) {
