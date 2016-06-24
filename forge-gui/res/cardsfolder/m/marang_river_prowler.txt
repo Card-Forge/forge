@@ -5,7 +5,7 @@ PT:2/1
 K:Unblockable
 K:CARDNAME can't block.
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | AddHiddenKeyword$ May be played | CheckSVar$ X | SVarCompare$ GE1 | Description$ You may cast CARDNAME from you graveyard as long as you control a black or green permanent.
-SVar:X:Count$Valid Permanent.Blue+YouCtrl,Permanent.Green+YouCtrl
+SVar:X:Count$Valid Permanent.Black+YouCtrl,Permanent.Green+YouCtrl
 SVar:SacMe:3
 SVar:DiscardMe:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marang_river_prowler.jpg
