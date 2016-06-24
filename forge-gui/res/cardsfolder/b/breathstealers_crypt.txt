@@ -3,7 +3,7 @@ ManaCost:2 U B
 Types:Enchantment
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ RevealedDraw | Description$ If a player would draw a card, instead he or she draws a card and reveals it. If it's a creature card, that player discards it unless he or she pays 3 life.
 SVar:RevealedDraw:AB$ Draw | Cost$ 0 | Defined$ ReplacedPlayer | NumCards$ 1 | SubAbility$ TrigReveal | RememberDrawn$ True
-SVar:TrigReveal:DB$ Reveal | Defined$ ReplacedPlayer | RevealValid$ Card.IsRemembered | SubAbility$ DBDiscard
+SVar:TrigReveal:DB$ Reveal | Defined$ ReplacedPlayer | RevealDefined$ Remembered | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ ReplacedPlayer | Mode$ Defined | DefinedCards$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | UnlessPayer$ ReplacedPlayer | UnlessCost$ PayLife<3> | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breathstealers_crypt.jpg
