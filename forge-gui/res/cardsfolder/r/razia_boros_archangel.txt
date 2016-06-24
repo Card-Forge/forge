@@ -1,0 +1,33 @@
+Name:Razia, Boros Archangel
+ManaCost:4 W W R R
+Types:Legendary Creature Angel
+PT:6/3
+K:Flying
+K:Vigilance
+K:Haste
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage from | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next 3 damage that would be dealt to target creature you control this turn is dealt to another target creature instead.
+
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ Combat,NonCombat | Triggers$ OutOfSight | SVars$ Combat,NonCombat,CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,DBSetVar,ExileEffect,ExileEffect2,OutOfSight,X,Y,MinDmg | References$ Combat,NonCombat,OutOfSight,CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,ExileEffect,ExileEffect2,X,Y,MinDmg | RememberObjects$ ParentTarget | ImprintCards$ ThisTargetedCard | ConditionDefined$ ParentTarget | ConditionPresent$ Card | ConditionCompare$ GE1
+
+SVar:Combat:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | IsPresent$ Creature.IsImprinted | References$ X | Description$ The next X damage that would be dealt to target creature you control this turn is dealt to another target creature instead.
+SVar:NonCombat:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | IsPresent$ Creature.IsImprinted | References$ X | Description$ The next X damage that would be dealt to target creature you control this turn is dealt to another target creature instead.
+
+SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Imprinted | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ MinDmg | SubAbility$ RestDmgCombat | ConditionCheckSVar$ MinDmg | ConditionSVarCompare$ GE1
+SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Imprinted | DamageSource$ ReplacedSource | NumDmg$ MinDmg | SubAbility$ RestDmg | ConditionCheckSVar$ MinDmg | ConditionSVarCompare$ GE1
+
+SVar:RestDmgCombat:DB$ DealDamage | Defined$ Remembered | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ Y | SubAbility$ DBSetVar | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
+SVar:RestDmg:DB$ DealDamage | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ Y | SubAbility$ DBSetVar | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
+
+SVar:DBSetVar:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Minus.MinDmg | SubAbility$ ExileEffect2
+SVar:ExileEffect2:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0
+
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted,Card.IsRemembered | Execute$ ExileEffect | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+
+SVar:X:Number$3
+SVar:Y:ReplaceCount$DamageAmount/Minus.X
+SVar:MinDmg:ReplaceCount$DamageAmount/LimitMax.X
+
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/razia_boros_archangel.jpg
+Oracle:Flying, vigilance, haste\n{T}: The next 3 damage that would be dealt to target creature you control this turn is dealt to another target creature instead.

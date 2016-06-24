@@ -11948,6 +11948,7 @@ forge-gui/res/cardsfolder/r/ray_of_erasure.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ray_of_revelation.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rayne_academy_chancellor.txt -text
 forge-gui/res/cardsfolder/r/raze.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/razia_boros_archangel.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/r/razias_purification.txt -text
 forge-gui/res/cardsfolder/r/razing_snidd.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/razor_barrier.txt svneol=native#text/plain
