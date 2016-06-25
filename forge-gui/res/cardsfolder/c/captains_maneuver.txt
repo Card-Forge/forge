@@ -1,0 +1,43 @@
+Name:Captain's Maneuver
+ManaCost:X R W
+Types:Instant
+
+# turn targeted creature or player into choosen
+A:SP$ ChoosePlayer | Announce$ X | Cost$ X R W | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | SubAbility$ DBChoosePlayer | Choices$ TargetedPlayer | Defined$ You | SubAbility$ DBChooseCreature | StackDescription$ SpellDescription | SpellDescription$ The next X damage that would be dealt to target creature or player this turn is dealt to another target creature or player instead.
+SVar:DBChooseCreature:DB$ ChooseCard | DefinedCards$ Targeted | Mandatory$ True | Defined$ You | SubAbility$ DBSetVarBefore
+
+SVar:DBSetVarBefore:DB$ StoreSVar | SVar$ Z | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
+
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player | TargetUnique$ True | TgtPrompt$ Select target creature or player to redirect the damage to | ReplacementEffects$ Combat,NonCombat | Triggers$ OutOfSight | SVars$ Combat,NonCombat,CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,DBSetVar,ExileEffect,ExileEffect2,OutOfSight,X,Y,Z,MinDmg,RC,RCP,RCC | References$ Combat,NonCombat,OutOfSight,CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,ExileEffect,ExileEffect2,X,Y,Z,MinDmg,RC,RCP,RCC | RememberObjects$ ThisTargetedCard,ThisTargetedPlayer | SubAbility$ DBCleanup
+
+SVar:Combat:Event$ DamageDone | ValidTarget$ Card.Creature+ChosenCard,Player.Chosen | IsCombat$ True | ReplaceWith$ CombatDmg | CheckSVar$ RC | Description$ The next Z damage that would be dealt to target creature or player this turn is dealt to another target creature or player instead.
+SVar:NonCombat:Event$ DamageDone | ValidTarget$ Card.Creature+ChosenCard,Player.Chosen | IsCombat$ False | ReplaceWith$ NonCombatDmg | CheckSVar$ RC | Secondary$ True | Description$ The next Z damage that would be dealt to target creature or player this turn is dealt to another target creature or player instead.
+
+SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Remembered | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ MinDmg | SubAbility$ RestDmgCombat | ConditionCheckSVar$ MinDmg | ConditionSVarCompare$ GE1
+SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ MinDmg | SubAbility$ RestDmg | ConditionCheckSVar$ MinDmg | ConditionSVarCompare$ GE1
+
+SVar:RestDmgCombat:DB$ DealDamage | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ Y | SubAbility$ DBSetVar | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
+SVar:RestDmg:DB$ DealDamage | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ Y | SubAbility$ DBSetVar | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
+
+SVar:DBSetVar:DB$ StoreSVar | SVar$ Z | Type$ CountSVar | Expression$ Z/Minus.MinDmg | SubAbility$ ExileEffect2
+SVar:ExileEffect2:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | ConditionCheckSVar$ Z | ConditionSVarCompare$ LE0
+
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.ChosenCard,Card.IsRemembered | Execute$ ExileEffect | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearChosenPlayer$ True
+
+SVar:RCC:Count$Valid Creature.IsRemembered
+SVar:RCP:PlayerCountRemembered$Amount
+SVar:RC:SVar$RCC/Plus.RCP
+
+SVar:X:Count$xPaid
+#X Will get overwritten by Announce
+
+SVar:Y:ReplaceCount$DamageAmount/Minus.Z
+SVar:Z:Number$0
+SVar:MinDmg:ReplaceCount$DamageAmount/LimitMax.Z
+
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/captains_maneuver.jpg
+Oracle:The next X damage that would be dealt to target creature or player this turn is dealt to another target creature or player instead.

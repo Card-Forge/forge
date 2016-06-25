@@ -3289,6 +3289,7 @@ forge-gui/res/cardsfolder/c/captain_of_the_watch.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/captain_sisay.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/captains_call.txt -text
 forge-gui/res/cardsfolder/c/captains_claws.txt -text
+forge-gui/res/cardsfolder/c/captains_maneuver.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/c/captivating_glance.txt -text
 forge-gui/res/cardsfolder/c/captivating_vampire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/captive_flame.txt svneol=native#text/plain
