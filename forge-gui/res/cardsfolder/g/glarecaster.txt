@@ -3,17 +3,18 @@ ManaCost:4 W W
 Types:Creature Bird Cleric
 PT:3/3
 K:Flying
-A:AB$ Effect | Cost$ 5 W | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to redirect damamge | ReplacementEffects$ SelfCombat,SelfNonCombat | Triggers$ OutOfSight | SVars$ MirrorwoodDmgCombat,MirrorwoodDmgnonCombat,MirrorwoodX,ExileEffect,X,Y | RememberObjects$ Targeted | ImprintCards$ Self | SpellDescription$ The next time damage would be dealt to CARDNAME and/or you this turn, that damage is dealt to target creature or player instead.
-SVar:SelfCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted,You | IsCombat$ True | ReplaceWith$ MirrorwoodDmgCombat | CheckSVar$ X | Description$ The next time damage would be dealt to this creature and/or you this turn, that damage is dealt to target creature or player instead.
-SVar:SelfNonCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted,You | IsCombat$ False | ReplaceWith$ MirrorwoodDmgnonCombat | Secondary$ True | CheckSVar$ X | Description$ The next time damage would be dealt to this creature and/or you this turn, that damage is dealt to target creature or player instead.
+A:AB$ Effect | Cost$ 5 W | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to redirect damamge | ReplacementEffects$ SelfCombat,SelfNonCombat | Triggers$ OutOfSight | SVars$ MirrorwoodDmgCombat,MirrorwoodDmgnonCombat,MirrorwoodX,ExileEffect,X,Y,Z | RememberObjects$ Targeted | ImprintCards$ Self | SpellDescription$ The next time damage would be dealt to CARDNAME and/or you this turn, that damage is dealt to target creature or player instead.
+SVar:SelfCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted,You | IsCombat$ True | ReplaceWith$ MirrorwoodDmgCombat | CheckSVar$ Z | Description$ The next time damage would be dealt to this creature and/or you this turn, that damage is dealt to target creature or player instead.
+SVar:SelfNonCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted,You | IsCombat$ False | ReplaceWith$ MirrorwoodDmgnonCombat | Secondary$ True | CheckSVar$ Z | Description$ The next time damage would be dealt to this creature and/or you this turn, that damage is dealt to target creature or player instead.
 SVar:MirrorwoodDmgCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ MirrorwoodX | References$ MirrorwoodX | SubAbility$ ExileEffect
 SVar:MirrorwoodDmgnonCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ False | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ MirrorwoodX | References$ MirrorwoodX | SubAbility$ ExileEffect
 SVar:MirrorwoodX:ReplaceCount$DamageAmount
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted,Card.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 
-SVar:X:PlayerCountRemembered$Amount/Plus.Y
-SVar:Y:Count$Valid Creature.Remembered
+SVar:X:PlayerCountRemembered$Amount
+SVar:Y:Count$Valid Creature.IsRemembered
+SVar:Z:SVar$X/Plus.Y
 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glarecaster.jpg
