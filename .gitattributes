@@ -14324,6 +14324,7 @@ forge-gui/res/cardsfolder/s/stampeding_serow.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stampeding_wildebeests.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stand_deliver.txt -text
 forge-gui/res/cardsfolder/s/stand_firm.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/stand_or_fall.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/stand_together.txt -text
 forge-gui/res/cardsfolder/s/standardize.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/standing_stones.txt svneol=native#text/plain
