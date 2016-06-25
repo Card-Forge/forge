@@ -802,6 +802,11 @@ public class AbilityUtils {
                 players.addAll(parent.getTargets().getTargetPlayers());
             }
         }
+        else if (defined.equals("ThisTargetedPlayer")) { // do not add parent targeted
+            if (sa != null && sa.getTargets() != null) {
+                Iterables.addAll(cards, sa.getTargets().getTargetPlayers());
+            }
+        }
         else if (defined.equals("TargetedController")) {
             final CardCollection list = getDefinedCards(card, "Targeted", sa);
             final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(card, "Targeted", sa);
