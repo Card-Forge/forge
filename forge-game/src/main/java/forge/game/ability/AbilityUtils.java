@@ -804,7 +804,7 @@ public class AbilityUtils {
         }
         else if (defined.equals("ThisTargetedPlayer")) { // do not add parent targeted
             if (sa != null && sa.getTargets() != null) {
-                Iterables.addAll(cards, sa.getTargets().getTargetPlayers());
+                Iterables.addAll(players, sa.getTargets().getTargetPlayers());
             }
         }
         else if (defined.equals("TargetedController")) {
