@@ -6623,6 +6623,7 @@ forge-gui/res/cardsfolder/g/giant_growth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/giant_harbinger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/giant_mantis.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/giant_octopus.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/giant_oyster.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/g/giant_scorpion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/giant_shark.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/giant_slug.txt -text
