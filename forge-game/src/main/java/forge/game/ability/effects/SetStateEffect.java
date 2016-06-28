@@ -39,6 +39,7 @@ public class SetStateEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
 
+        final String mode = sa.getParam("Mode");
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final List<Card> tgtCards = getTargetCards(sa);
@@ -51,11 +52,12 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             // Cards which are not on the battlefield should not be able to transform.
-            if (!tgt.isInZone(ZoneType.Battlefield)) {
+            // TurnFace should be allowed in other zones like Exil too
+            if (!"TurnFace".equals(mode) && !tgt.isInZone(ZoneType.Battlefield)) {
                 continue;
             }
 
-            if ("Transform".equals(sa.getParam("Mode")) && tgt.equals(host)) {
+            if ("Transform".equals(mode) && tgt.equals(host)) {
                 // If want to Transform, and host is trying to transform self, skip if not in alignment
                 boolean skip = tgt.getTransformedTimestamp() != Long.parseLong(sa.getSVar("StoredTransform"));
                 // Clear SVar from SA so it doesn't get reused accidentally
@@ -65,7 +67,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
             }
 
-            boolean hasTransformed = tgt.changeCardState(sa.getParam("Mode"), sa.getParam("NewState"));
+            boolean hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"));
             if ( hasTransformed ) {
                 game.fireEvent(new GameEventCardStatsChanged(tgt));
             }
