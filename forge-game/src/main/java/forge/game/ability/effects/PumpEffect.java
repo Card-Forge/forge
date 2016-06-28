@@ -67,9 +67,15 @@ public class PumpEffect extends SpellAbilityEffect {
                     applyTo.addTempToughnessBoost(-1 * d);
 
                     if (keywords.size() > 0) {
+                        boolean redrawPT = false;
+
                         for (String kw : keywords) {
+                            redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
                             if (kw.startsWith("HIDDEN")) {
                                 applyTo.removeHiddenExtrinsicKeyword(kw);
+                                if (redrawPT) {
+                                    applyTo.updatePowerToughnessView();
+                                }
                             }
                         }
                         applyTo.removeChangedCardKeywords(timestamp);
