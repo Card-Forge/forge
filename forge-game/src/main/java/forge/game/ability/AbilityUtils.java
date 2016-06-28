@@ -64,8 +64,10 @@ public class AbilityUtils {
     // everywhere.
     // Probably will move to One function solution sometime in the future
     public static CardCollection getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
-        final CardCollection cards = new CardCollection();
-        final String defined = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
+        CardCollection cards = new CardCollection();
+        String defined = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
+        final String[] incR = defined.split("\\.", 2);
+        defined = incR[0];
         final Game game = hostCard.getGame();
 
         Card c = null;
@@ -282,6 +284,12 @@ public class AbilityUtils {
         if (c != null) {
             cards.add(c);
         }
+
+        if (incR.length > 1 && !cards.isEmpty()) {
+            final String excR = "Card." + incR[1];
+            cards = CardLists.getValidCards(cards, excR.split(","), hostCard.getController(), hostCard, sa);
+        }
+
         return cards;
     }
 
@@ -765,6 +773,9 @@ public class AbilityUtils {
             if (!hasRememberedCard) {
                 return new CardCollection();
             }
+        }
+        else if (type.startsWith("Imprinted")) {
+            type = type.replace("Imprinted", "Card");
         }
         else if (type.equals("Card.AttachedBy")) {
             source = source.getEnchantingCard();
