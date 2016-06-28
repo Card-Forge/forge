@@ -348,6 +348,7 @@ public final class StaticAbilityContinuous {
                     for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa instanceof AbilityActivated) {
                             SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                            newSA.setOriginalHost(c);
                             newSA.setIntrinsic(false);
                             newSA.setTemporary(true);
                             CardFactoryUtil.correctAbilityChainSourceCard(newSA, hostCard);
