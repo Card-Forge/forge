@@ -135,6 +135,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> sharesControllerWith(final Card color) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.sharesControllerWith(color);
+            }
+        };
+    }
+
     public static final Predicate<Card> possibleBlockers(final Card attacker) {
         return new Predicate<Card>() {
             @Override
