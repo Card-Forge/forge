@@ -491,6 +491,21 @@ public class AbilityUtils {
         }
 
         final SpellAbility sa = (SpellAbility) ability;
+        if (calcX[0].startsWith("Modes")) {
+            int chosenModes = 0;
+            SpellAbility sub = sa;
+            while(sub != null) {
+                if (!sub.getSVar("CharmOrder").equals("")) {
+                    chosenModes++;
+                }
+                sub = sub.getSubAbility();
+            }
+            // Count Math
+            final String[] l = calcX[1].split("/");
+            final String m = CardFactoryUtil.extractOperators(calcX[1]);
+            return CardFactoryUtil.doXMath(chosenModes, m, card) * multiplier;
+        }
+
         // Player attribute counting
         if (calcX[0].startsWith("TargetedPlayer")) {
             final List<Player> players = new ArrayList<Player>();
