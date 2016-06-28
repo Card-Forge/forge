@@ -4197,6 +4197,16 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
             return false;
+        } else if (property.startsWith("SharesCMCWith")) {
+            if (property.equals("SharesCMCWith")) {
+                if (!sharesCMCWith(source)) {
+                    return false;
+                }
+            } else {
+                final String restriction = property.split("SharesCMCWith ")[1];
+                CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                return !CardLists.filter(list, CardPredicates.sharesCMCWith(this)).isEmpty();
+            }
         } else if (property.startsWith("SharesColorWith")) {
             if (property.equals("SharesColorWith")) {
                 if (!sharesColorWith(source)) {
@@ -4204,25 +4214,16 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else {
                 final String restriction = property.split("SharesColorWith ")[1];
+                if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
+                    CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                    return !CardLists.filter(list, CardPredicates.sharesColorWith(this)).isEmpty();
+                }
+
                 switch (restriction) {
                     case "TopCardOfLibrary":
                         final CardCollectionView cards = sourceController.getCardsIn(ZoneType.Library);
                         if (cards.isEmpty() || !sharesColorWith(cards.get(0))) {
                             return false;
-                        }
-                        break;
-                    case "Remembered":
-                        for (final Object obj : source.getRemembered()) {
-                            if (!(obj instanceof Card) || !sharesColorWith((Card) obj)) {
-                                return false;
-                            }
-                        }
-                        break;
-                    case "Imprinted":
-                        for (final Card card : source.getImprintedCards()) {
-                            if (!sharesColorWith(card)) {
-                                return false;
-                            }
                         }
                         break;
                     case "Equipped":
@@ -4401,50 +4402,16 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else {
                 final String restriction = property.split("sharesNameWith ")[1];
                 if (restriction.equals("YourGraveyard")) {
-                    for (final Card card : sourceController.getCardsIn(ZoneType.Graveyard)) {
-                        if (sharesNameWith(card)) {
-                            return true;
-                        }
-                    }
-                    return false;
+                    return !CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(this)).isEmpty();
                 } else if (restriction.equals(ZoneType.Graveyard.toString())) {
-                    for (final Card card : game.getCardsIn(ZoneType.Graveyard)) {
-                        if (sharesNameWith(card)) {
-                            return true;
-                        }
-                    }
-                    return false;
+                    return !CardLists.filter(game.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(this)).isEmpty();
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
-                    for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                        if (sharesNameWith(card)) {
-                            return true;
-                        }
-                    }
-                    return false;
+                    return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(this)).isEmpty();
                 } else if (restriction.equals("ThisTurnCast")) {
-                    for (final Card card : CardUtil.getThisTurnCast("Card", source)) {
-                        if (sharesNameWith(card)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                } else if (restriction.equals("Remembered")) {
-                    for (final Object rem : source.getRemembered()) {
-                        if (rem instanceof Card) {
-                            final Card card = (Card) rem;
-                            if (sharesNameWith(card)) {
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-                } else if (restriction.equals("Imprinted")) {
-                    for (final Card card : source.getImprintedCards()) {
-                        if (sharesNameWith(card)) {
-                            return true;
-                        }
-                    }
-                    return false;
+                    return !CardLists.filter(CardUtil.getThisTurnCast("Card", source), CardPredicates.sharesNameWith(this)).isEmpty();
+                } else if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
+                    CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                    return !CardLists.filter(list, CardPredicates.sharesNameWith(this)).isEmpty();
                 } else if (restriction.equals("MovedToGrave")) {
                     for (final SpellAbility sa : source.currentState.getNonManaAbilities()) {
                         final SpellAbility root = sa.getRootAbility();
@@ -4464,14 +4431,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     return false;
                 } else if (restriction.equals("NonToken")) {
-                    final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
-                            Presets.NON_TOKEN);
-                    for (final Card card : cards) {
-                        if (sharesNameWith(card)) {
-                            return true;
-                        }
-                    }
-                    return false;
+                    return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
+                            Presets.NON_TOKEN, CardPredicates.sharesNameWith(this)).isEmpty();
                 } else if (restriction.equals("TriggeredCard")) {
                     if (spellAbility == null) {
                         System.out.println("Looking at TriggeredCard but no SA?");
@@ -4491,15 +4452,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else {
                 final String restriction = property.split("doesNotShareNameWith ")[1];
-                if (restriction.equals("Remembered")) {
-                    for (final Object rem : source.getRemembered()) {
-                        if (rem instanceof Card) {
-                            final Card card = (Card) rem;
-                            if (sharesNameWith(card)) {
-                                return false;
-                            }
-                        }
-                    }
+                if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
+                    CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                    return CardLists.filter(list, CardPredicates.sharesNameWith(this)).isEmpty();
                 }
             }
         } else if (property.startsWith("sharesControllerWith")) {
@@ -4509,22 +4464,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else {
                 final String restriction = property.split("sharesControllerWith ")[1];
-                if (restriction.equals("Remembered")) {
-                    for (final Object rem : source.getRemembered()) {
-                        if (rem instanceof Card) {
-                            final Card card = (Card) rem;
-                            if (!sharesControllerWith(card)) {
-                                return false;
-                            }
-                        }
-                    }
-                } else if (restriction.equals("Imprinted")) {
-                    for (final Card card : source.getImprintedCards()) {
-                        if (!sharesControllerWith(card)) {
-                            return false;
-                        }
-                    }
-                }
+	            if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
+	                CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+	                return !CardLists.filter(list, CardPredicates.sharesControllerWith(this)).isEmpty();
+	            }
             }
         } else if (property.startsWith("sharesOwnerWith")) {
             if (property.equals("sharesOwnerWith")) {
@@ -5365,24 +5308,28 @@ public class Card extends GameEntity implements Comparable<Card> {
         int y = 0;
         int y2 = -1;
 
-        if (isSplitCard() && getCurrentStateName() == CardStateName.Original) {
-            x = getState(CardStateName.LeftSplit).getManaCost().getCMC();
-            x2 = getState(CardStateName.RightSplit).getManaCost().getCMC();
+        //need to get GameState for Discarded Cards
+        final Card host = game.getCardState(this);
+        final Card other = game.getCardState(c1);
+
+        if (host.isSplitCard() && host.getCurrentStateName() == CardStateName.Original) {
+            x = host.getState(CardStateName.LeftSplit).getManaCost().getCMC();
+            x2 = host.getState(CardStateName.RightSplit).getManaCost().getCMC();
         } else {
-            x = getCMC();
+            x = host.getCMC();
         }
 
-        if (c1.isSplitCard() && c1.getCurrentStateName() == CardStateName.Original) {
-            y = c1.getState(CardStateName.LeftSplit).getManaCost().getCMC();
-            y2 = c1.getState(CardStateName.RightSplit).getManaCost().getCMC();
+        if (other.isSplitCard() && other.getCurrentStateName() == CardStateName.Original) {
+            y = other.getState(CardStateName.LeftSplit).getManaCost().getCMC();
+            y2 = other.getState(CardStateName.RightSplit).getManaCost().getCMC();
 
-            if (isSplitCard() && getCurrentStateName() == CardStateName.Original) {
+            if (host.isSplitCard() && host.getCurrentStateName() == CardStateName.Original) {
                 return x == y || x == y2 || x2 == y || x2 == y2;
             } else {
                 return x == y || x == y2;
             }
         } else {
-            y = c1.getCMC();
+            y = other.getCMC();
             return x == y || x2 == y;
         }
     }
