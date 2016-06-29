@@ -5,7 +5,7 @@ PT:3/5
 K:Flying
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target creature or planeswalker for as long as you control CARDNAME.
-SVar:TrigChange:AB$ GainControl | Cost$ 0 | TgtPrompt$ Choose target creature or planeswalker | ValidTgts$ Creature,Planeswalker | LoseControl$ LeavesPlay, LoseControl | SpellDescription$ Gain control of target creature or planeswalker for as long as you control CARDNAME.
+SVar:TrigChange:AB$ GainControl | Cost$ 0 | TgtPrompt$ Choose target creature or planeswalker | ValidTgts$ Creature,Planeswalker | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of target creature or planeswalker for as long as you control CARDNAME.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonlord_silumgar.jpg
 Oracle:Flying, deathtouch\nWhen Dragonlord Silumgar enters the battlefield, gain control of target creature or planeswalker for as long as you control Dragonlord Silumgar.
