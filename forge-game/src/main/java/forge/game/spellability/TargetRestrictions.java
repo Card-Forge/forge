@@ -473,7 +473,7 @@ public class TargetRestrictions {
             return true;
         } else {
             for (final Card c : game.getCardsIn(this.tgtZone)) {
-                if (!c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)) {
+                if (!c.isValid(this.validTgts, sa.getActivatingPlayer(), srcCard, sa)) {
                     continue;
                 }
                 if (isTargeted && !sa.canTarget(c)) {
