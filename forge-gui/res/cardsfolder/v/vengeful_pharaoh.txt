@@ -3,7 +3,10 @@ ManaCost:2 B B B
 Types:Creature Zombie
 PT:5/4
 K:Deathtouch
-T:Mode$ CombatDamageDoneOnce | ValidTarget$ You,Planeswalker.YouCtrl | ValidSource$ Card | TriggerZones$ Graveyard | Execute$ TrigDestroy | TriggerDescription$ Whenever combat damage is dealt to you or a planeswalker you control, if CARDNAME is in your graveyard, destroy target attacking creature, then put CARDNAME on top of your library.
+T:Mode$ CombatDamageDoneOnce | ValidTarget$ You | ValidSource$ Card | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | Execute$ TrigDestroy | TriggerDescription$ Whenever combat damage is dealt to you or a planeswalker you control, if CARDNAME is in your graveyard, destroy target attacking creature, then put CARDNAME on top of your library.
+
+T:Mode$ DamageDone | ValidTarget$ Planeswalker.YouCtrl | ValidSource$ Card | TriggerZones$ Graveyard | IsPresent$ Card.Self | PresentZone$ Graveyard | Execute$ TrigDestroy | Secondary$ True | CombatDamage$ True | TriggerDescription$ Whenever combat damage is dealt to you or a planeswalker you control, if CARDNAME is in your graveyard, destroy target attacking creature, then put CARDNAME on top of your library.
+
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Library
 SVar:DiscardMe:4

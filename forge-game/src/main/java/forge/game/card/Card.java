@@ -3909,6 +3909,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (equals(source)) {
                 return false;
             }
+        } else if (property.startsWith("StrictlySelf")) {
+            if (!equals(source) || getTimestamp() != source.getTimestamp()) {
+                return false;
+            }
         } else if (property.startsWith("Self")) {
             if (!equals(source)) {
                 return false;

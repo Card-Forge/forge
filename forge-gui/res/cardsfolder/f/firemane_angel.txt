@@ -4,7 +4,8 @@ Types:Creature Angel
 PT:4/3
 K:Flying
 K:First Strike
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield,Graveyard | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard or on the battlefield, you may gain 1 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self | PresentZone$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard or on the battlefield, you may gain 1 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | OptionalDecider$ You | Secondary$ True | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard or on the battlefield, you may gain 1 life.
 A:AB$ ChangeZone | Cost$ 6 R R W W | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate this ability only during your upkeep.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firemane_angel.jpg

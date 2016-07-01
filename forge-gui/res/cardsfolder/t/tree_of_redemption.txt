@@ -3,9 +3,9 @@ ManaCost:3 G
 Types:Creature Plant
 PT:0/13
 K:Defender
-A:AB$ StoreSVar | Cost$ T | SVar$ OldToughness | Type$ Count | Expression$ CardToughness | SubAbility$ TreeRedemption | ConditionPresent$ Card.Self | SpellDescription$ Exchange your life total with CARDNAME's toughness. | StackDescription$ Exchange your life total with CARDNAME's toughness.
-SVar:TreeRedemption:DB$ Animate | Toughness$ X | References$ X | Permanent$ True | SubAbility$ SetLife | ConditionPresent$ Card.Self
-SVar:SetLife:DB$ SetLife | Defined$ You | LifeAmount$ OldToughness | References$ OldToughness | ConditionPresent$ Card.Self
+A:AB$ StoreSVar | Cost$ T | SVar$ OldToughness | Type$ Count | Expression$ CardToughness | SubAbility$ TreeRedemption | ConditionPresent$ Card.StrictlySelf | StackDescription$ SpellDescription | SpellDescription$ Exchange your life total with CARDNAME's toughness.
+SVar:TreeRedemption:DB$ Animate | Toughness$ X | References$ X | Permanent$ True | SubAbility$ SetLife | ConditionPresent$ Card.StrictlySelf
+SVar:SetLife:DB$ SetLife | Defined$ You | LifeAmount$ OldToughness | References$ OldToughness | ConditionPresent$ Card.StrictlySelf
 SVar:OldToughness:Number$13
 SVar:X:Count$YourLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_redemption.jpg
