@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.GameCommand;
 import forge.ImageKeys;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -109,10 +110,29 @@ public class EffectEffect extends SpellAbilityEffect {
         final Player controller = sa.hasParam("EffectOwner") ? ownerEff : sa.getActivatingPlayer();
         final Card eff = new Card(game.nextCardId(), game);
         eff.setName(name);
-        eff.addType("Effect"); // Or Emblem
+        // if name includes emplem then it should be one
+        eff.addType(name.endsWith("emblem") ? "Emblem" : "Effect");
+        // add Planeswalker types into Emblem for fun
+        if (name.endsWith("emblem") && hostCard.isPlaneswalker()) {
+            for (final String type : hostCard.getType().getSubtypes()) {
+                if (CardType.isAPlaneswalkerType(type)) {
+                    eff.addType(type);
+                }
+            }
+        }
         eff.setToken(true); // Set token to true, so when leaving play it gets nuked
         eff.setOwner(controller);
-        eff.setImageKey(sa.hasParam("Image") ? ImageKeys.getTokenKey(sa.getParam("Image")) : hostCard.getImageKey());
+
+        String image;
+        if (sa.hasParam("Image")) {
+            image = ImageKeys.getTokenKey(sa.getParam("Image"));
+        } else if (name.endsWith("emblem")) { // try to get the image from name
+            image = ImageKeys.getTokenKey(name.replace(",", "").replace(" ", "_").toLowerCase());
+        } else { // use host image
+            image = hostCard.getImageKey();
+        }
+
+        eff.setImageKey(image);
         eff.setColor(hostCard.determineColor().getColor());
         eff.setImmutable(true);
         eff.setEffectSource(hostCard);

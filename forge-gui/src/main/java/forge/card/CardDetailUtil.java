@@ -205,7 +205,7 @@ public class CardDetailUtil {
         String curColors = "";
 
         // do not show current colors for temp effect cards, emblems and the like
-        if (state.getType().hasSubtype("Effect")) {
+        if (state.getType().isEmblem() || state.getType().hasSubtype("Effect")) {
             return "";
         }
 

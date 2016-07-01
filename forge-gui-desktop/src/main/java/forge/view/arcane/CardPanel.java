@@ -253,7 +253,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             final CardStateView state = getCard().getCurrentState();
             final CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
             boolean colorIsSet = false;
-            if (state.getType().hasStringType("Effect")) {
+            if (state.getType().isEmblem() || state.getType().hasStringType("Effect")) {
                 // Effects are drawn with orange border
                 g2d.setColor(Color.ORANGE);
                 colorIsSet = true;

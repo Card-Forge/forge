@@ -81,7 +81,7 @@ public class AbilityUtils {
             c = sa.getRootAbility().getOriginalHost();
         }
         else if (defined.equals("EffectSource")) {
-            if (hostCard.getType().hasSubtype("Effect")) {
+            if (hostCard.isEmblem() || hostCard.getType().hasSubtype("Effect")) {
                 c = AbilityUtils.findEffectRoot(hostCard);
             }
         }
@@ -296,7 +296,7 @@ public class AbilityUtils {
     private static Card findEffectRoot(Card startCard) {
         Card cc = startCard.getEffectSource();
         if (cc != null) {
-            if (cc.getType().hasSubtype("Effect")) {
+            if (cc.isEmblem() || cc.getType().hasSubtype("Effect")) {
                 return findEffectRoot(cc);
             }
             return cc;
