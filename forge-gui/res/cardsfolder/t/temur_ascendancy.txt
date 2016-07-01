@@ -2,7 +2,7 @@ Name:Temur Ascendancy
 ManaCost:G U R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with power 4 or greater enters the battlefield under your control, you may draw a card.
-SVar:TrigDraw:AB$ Draw | Cost$ 0 | OptionalDecider$ You | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with power 4 or greater enters the battlefield under your control, you may draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temur_ascendancy.jpg
 Oracle:Creatures you control have haste.\nWhenever a creature with power 4 or greater enters the battlefield under your control, you may draw a card.

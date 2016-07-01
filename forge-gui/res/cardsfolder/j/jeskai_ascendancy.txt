@@ -2,13 +2,12 @@ Name:Jeskai Ascendancy
 ManaCost:U R W
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBDraw | TriggerDescription$ Whenever you cast a noncreature spell, you may draw a card. If you do, discard a card.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoot | OptionalDecider$ You | TriggerDescription$ Whenever you cast a noncreature spell, you may draw a card. If you do, discard a card.
 SVar:TrigPumpAll:DB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SubAbility$ TrigUntapAll
 SVar:TrigUntapAll:DB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | OptionalDecider$ You | RememberDrawn$ True | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+SVar:TrigLoot:AB$Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:BuffedBy:Card.nonCreature+nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_ascendancy.jpg
 Oracle:Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.\nWhenever you cast a noncreature spell, you may draw a card. If you do, discard a card.
+

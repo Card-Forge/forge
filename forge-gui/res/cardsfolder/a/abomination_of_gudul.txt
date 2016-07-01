@@ -4,10 +4,8 @@ Types:Creature Horror
 PT:3/4
 K:Flying
 K:Morph:2 B G U
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card. If you do, discard a card.
-SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard | OptionalDecider$ You | RememberDrawn$ True
-SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoot | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:AB$Draw | Cost$ 0 | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_kirin.jpg
 Oracle:Flying\nWhenever Abomination of Gudul deals combat damage to a player, you may draw a card. If you do, discard a card.\nMorph {2}{B}{G}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

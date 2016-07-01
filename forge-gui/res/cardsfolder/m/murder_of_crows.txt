@@ -3,10 +3,8 @@ ManaCost:3 U U
 Types:Creature Bird
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another creature dies, you may draw a card. If you do, discard a card.
-SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBDiscard | OptionalDecider$ You | RememberDrawn$ True
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever another creature dies, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:AB$Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murder_of_crows.jpg
 Oracle:Flying\nWhenever another creature dies, you may draw a card. If you do, discard a card.
