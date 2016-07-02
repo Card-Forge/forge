@@ -175,7 +175,7 @@ public abstract class GuiDownloadService implements Runnable {
         return tTime / Math.max(1, numNonzero);
     }
 
-    private void update(final int count, final File dest) {
+    private void update(final int count) {
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
@@ -213,7 +213,6 @@ public abstract class GuiDownloadService implements Runnable {
 
                 progressBar.setValue(count);
                 progressBar.setDescription(sb.toString());
-                System.out.println(count + "/" + files.size() + " - " + dest);
             }
         });
     }
@@ -231,53 +230,62 @@ public abstract class GuiDownloadService implements Runnable {
 
         Proxy p = getProxy();
 
+        boolean cardSkipped;
         int bufferLength;
-        int iCard = 0;
+        int count = 0;
+        int totalCount = files.size();
         byte[] buffer = new byte[1024];
 
         for (Entry<String, String> kv : files.entrySet()) {
             if (cancel) { break; }
 
+            count++;
+            cardSkipped = true; //assume skipped unless saved successfully
             String url = kv.getValue();
             final File fileDest = new File(kv.getKey());
-            final File base = fileDest.getParentFile();
+
+            System.out.println(count + "/" + totalCount + " - " + fileDest);
 
             FileOutputStream fos = null;
             try {
-                // test for folder existence
-                if (!base.exists() && !base.mkdir()) { // create folder if not found
-                    System.out.println("Can't create folder: " + base.getAbsolutePath());
+                final File base = fileDest.getParentFile();
+                if (FileUtil.ensureDirectoryExists(base)) { //ensure destination directory exists
+                    URL imageUrl = new URL(url);
+                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection(p);
+                    // don't allow redirections here -- they indicate 'file not found' on the server
+                    conn.setInstanceFollowRedirects(false);
+                    conn.connect();
+                    switch (conn.getResponseCode()) {
+                    case HttpURLConnection.HTTP_OK:
+                        fos = new FileOutputStream(fileDest);
+                        InputStream inputStream = conn.getInputStream();
+                        while ((bufferLength = inputStream.read(buffer)) > 0) {
+                            fos.write(buffer, 0, bufferLength);
+                        }
+                        cardSkipped = false;
+                        break;
+                    case HttpURLConnection.HTTP_NOT_FOUND:
+                        conn.disconnect();
+                        System.out.println("  File not found: " + url);
+                        break;
+                    default:
+                        conn.disconnect();
+                        System.out.println("  Connection failed for url: " + url);
+                        break;
+                    }
                 }
-
-                URL imageUrl = new URL(url);
-                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection(p);
-                // don't allow redirections here -- they indicate 'file not found' on the server
-                conn.setInstanceFollowRedirects(false);
-                conn.connect();
-
-                if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                    conn.disconnect();
-                    System.out.println(url);
-                    System.out.println("Skipped Download for: " + fileDest.getPath());
-                    update(++iCard, fileDest);
-                    skipped++;
-                    continue;
-                }
-
-                fos = new FileOutputStream(fileDest);
-                InputStream inputStream = conn.getInputStream();
-                while ((bufferLength = inputStream.read(buffer)) > 0) {
-                    fos.write(buffer, 0, bufferLength);
+                else {
+                    System.out.println("  Can't create folder: " + base.getAbsolutePath());
                 }
             }
             catch (final ConnectException ce) {
-                System.out.println("Connection refused for url: " + url);
+                System.out.println("  Connection refused for url: " + url);
             }
             catch (final MalformedURLException mURLe) {
-                System.out.println("Error - possibly missing URL for: " + fileDest.getName());
+                System.out.println("  Error - possibly missing URL for: " + fileDest.getName());
             }
             catch (final FileNotFoundException fnfe) {
-                String formatStr = "Error - the LQ picture %s could not be found on the server. [%s] - %s";
+                String formatStr = "  Error - the LQ picture %s could not be found on the server. [%s] - %s";
                 System.out.println(String.format(formatStr, fileDest.getName(), url, fnfe.getMessage()));
             }
             catch (final Exception ex) {
@@ -289,12 +297,15 @@ public abstract class GuiDownloadService implements Runnable {
                         fos.close();
                     }
                     catch (IOException e) {
-                        System.out.println("error closing output stream");
+                        System.out.println("  Error closing output stream");
                     }
                 }
             }
 
-            update(++iCard, fileDest);
+            update(count);
+            if (cardSkipped) {
+                skipped++;
+            }
         }
 
         GuiBase.getInterface().preventSystemSleep(false);
