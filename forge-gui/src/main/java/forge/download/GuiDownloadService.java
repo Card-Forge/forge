@@ -246,7 +246,7 @@ public abstract class GuiDownloadService implements Runnable {
             try {
                 // test for folder existence
                 if (!base.exists() && !base.mkdir()) { // create folder if not found
-                    System.out.println("Can't create folder" + base.getAbsolutePath());
+                    System.out.println("Can't create folder: " + base.getAbsolutePath());
                 }
 
                 URL imageUrl = new URL(url);
