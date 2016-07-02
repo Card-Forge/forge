@@ -260,6 +260,9 @@ public class GameAction {
                 position--;
             }
             zoneFrom.remove(c);
+            if (!zoneTo.is(ZoneType.Exile)) {
+                c.setExiledWith(null);
+            }
         }
 
         // "enter the battlefield as a copy" - apply code here

@@ -215,6 +215,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Player chosenPlayer;
     private Direction chosenDirection = null;
 
+    private Card exiledWith = null;
+
     private final List<GameCommand> leavePlayCommandList = new ArrayList<>();
     private final List<GameCommand> etbCommandList = new ArrayList<>();
     private final List<GameCommand> untapCommandList = new ArrayList<>();
@@ -1123,6 +1125,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setChosenNumber(final int i) {
         chosenNumber = i;
+    }
+
+    public final Card getExiledWith() {
+        return exiledWith;
+    }
+    public final void setExiledWith(final Card e) {
+        exiledWith = e;
     }
 
     // used for cards like Belbe's Portal, Conspiracy, Cover of Darkness, etc.
@@ -3915,6 +3924,23 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("Self")) {
             if (!equals(source)) {
+                return false;
+            }
+        } else if (property.startsWith("ExiledWithSource")) {
+            if (getExiledWith() == null) {
+                return false;
+            }
+
+            Card host = source;
+            //Static Abilites doesn't have spellAbility or OriginalHost
+            if (spellAbility != null) {
+                host = spellAbility.getOriginalHost();
+                if (host == null) {
+                    host = spellAbility.getHostCard();
+                }
+            }
+
+            if (!getExiledWith().equals(host)) {
                 return false;
             }
         } else if (property.startsWith("AttachedBy")) {

@@ -554,6 +554,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     movedCard.setTimestamp(ts);
                 } else {
+                    // might set before card is moved only for nontoken
+                    Card host = null;
+                    if (destination.equals(ZoneType.Exile) && !tgtC.isToken()) {
+                        host = sa.getOriginalHost();
+                        if (host == null) {
+                            host = sa.getHostCard();
+                        }
+                        tgtC.setExiledWith(host);
+                    }
                     movedCard = game.getAction().moveTo(destination, tgtC);
                     // If a card is Exiled from the stack, remove its spells from the stack
                     if (sa.hasParam("Fizzle")) {
@@ -562,6 +571,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             game.getStack().remove(tgtC);
                         }
                     }
+
+                    // might set after card is moved again if something has changed
+                    if (destination.equals(ZoneType.Exile) && !movedCard.isToken()) {
+                        movedCard.setExiledWith(host);
+                    }
+
                     if (sa.hasParam("ExileFaceDown")) {
                         movedCard.setState(CardStateName.FaceDown, true);
                     }
@@ -583,7 +598,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             FCollection<Player> pl = new FCollection<Player>();
             // use defined controller. it does need to work even without Targets.
             if (sa.hasParam("TargetsWithDefinedController")) {
-                pl.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("TargetsWithDefinedController"), sa));            		
+                pl.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("TargetsWithDefinedController"), sa));
             } else {
                 for (final Card tgtC : tgtCards) {
                     // FCollection already does use set.
@@ -1013,6 +1028,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             else if (destination.equals(ZoneType.Exile)) {
                 movedCard = game.getAction().exile(c);
+                if (!c.isToken()) {
+                    Card host = sa.getOriginalHost();
+                    if (host == null) {
+                        host = sa.getHostCard();
+                    }
+                    movedCard.setExiledWith(host);
+                }
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.setState(CardStateName.FaceDown, true);
                 }
