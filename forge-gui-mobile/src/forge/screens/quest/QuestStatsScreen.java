@@ -49,7 +49,7 @@ public class QuestStatsScreen extends FScreen {
     private final FLabel lblLife = scroller.add(new StatLabel(FSkinImage.QUEST_LIFE));
     private final FLabel lblWorld = scroller.add(new StatLabel(FSkinImage.QUEST_MAP));
     private final FComboBox<String> cbxPet = scroller.add(new FComboBox<String>());
-    private final FComboBox<String> cbxMatchLength  = new FComboBox<String>();
+    private final FComboBox<String> cbxMatchLength  = scroller.add(new FComboBox<String>());
     private final FCheckBox cbPlant = scroller.add(new FCheckBox("Summon Plant"));
     private final FLabel lblZep = scroller.add(new FLabel.Builder().text("Launch Zeppelin").icon(FSkinImage.QUEST_ZEP).font(FSkinFont.get(16)).opaque().build());
 
