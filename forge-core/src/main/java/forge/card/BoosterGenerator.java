@@ -71,6 +71,7 @@ public class BoosterGenerator {
         boolean foilAtEndOfPack = hasFoil && edition.getFoilAlwaysInCommonSlot();
         String foilSlot = !hasFoil ? null : foilAtEndOfPack ? BoosterSlots.COMMON : Aggregates.random(template.getSlots()).getKey();
         String extraFoilSheetKey = edition != null ? edition.getAdditionalSheetForFoils() : "";
+        boolean replaceCommon = edition != null && !template.getSlots().isEmpty() && MyRandom.getRandom().nextDouble() < edition.getChanceReplaceCommonWith();
 
         for(Pair<String, Integer> slot : template.getSlots()) {
             String slotType = slot.getLeft(); // add expansion symbol here?
@@ -83,6 +84,16 @@ public class BoosterGenerator {
             boolean foilInThisSlot = hasFoil && slotType.startsWith(foilSlot);
             if (foilInThisSlot)
                 numCards--;
+
+            if (replaceCommon && slotType.startsWith(BoosterSlots.COMMON)) {
+                numCards--;
+                String replaceKey = StaticData.instance().getEditions().contains(setCode) ?
+                        edition.getSlotReplaceCommonWith().trim() + " " + setCode : edition.getSlotReplaceCommonWith().trim();
+                PrintSheet replaceSheet = getPrintSheet(replaceKey);
+                result.addAll(replaceSheet.random(1, true));
+                sheetsUsed.add(replaceSheet);
+                replaceCommon = false;
+            }
 
             PrintSheet ps = getPrintSheet(sheetKey);
             result.addAll(ps.random(numCards, true));
