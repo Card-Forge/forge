@@ -95,6 +95,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean delve = false;
     private boolean dash = false;
     private boolean offering = false;
+    private boolean emerge = false;
     private boolean morphup = false;
     private boolean manifestUp = false;
     private boolean cumulativeupkeep = false;
@@ -123,6 +124,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private List<AbilitySub> chosenList = null;
     private CardCollection tappedForConvoke = new CardCollection();
     private Card sacrificedAsOffering = null;
+    private Card sacrificedAsEmerge = null;
     private int conspireInstances = 0;
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
@@ -776,6 +778,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (tappedForConvoke != null) {
             tappedForConvoke.clear();
         }
+    }
+
+    public boolean isEmerge() {
+        return emerge;
+    }
+    public void setIsEmerge(final boolean bEmerge) {
+        emerge = bEmerge;
+    }
+
+    public Card getSacrificedAsEmerge() {
+        return sacrificedAsEmerge;
+    }
+    public void setSacrificedAsEmerge(final Card c) {
+        sacrificedAsEmerge = c;
+    }
+    public void resetSacrificedAsEmerge() {
+        sacrificedAsEmerge = null;
     }
 
     public boolean isOffering() {

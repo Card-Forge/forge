@@ -718,6 +718,14 @@ public class HumanPlay {
             }
             ability.resetSacrificedAsOffering();
         }
+        if (ability.isEmerge() && ability.getSacrificedAsEmerge() != null) {
+            final Card emerge = ability.getSacrificedAsEmerge();
+            emerge.setUsedToPay(false);
+            if (!manaInputCancelled) {
+                ability.getHostCard().getGame().getAction().sacrifice(emerge, ability);
+            }
+            ability.resetSacrificedAsEmerge();
+        }
         if (ability.getTappedForConvoke() != null) {
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
@@ -774,6 +782,7 @@ public class HumanPlay {
         }
 
         Card offering = null;
+        Card emerge = null;
 
         InputPayMana inpPayment;
         if (ability.isOffering()) {
@@ -782,6 +791,14 @@ public class HumanPlay {
                 return false;
             } else {
                 offering = ability.getSacrificedAsOffering();
+            }
+        }
+        if (ability.isEmerge()) {
+            if (ability.getSacrificedAsEmerge() == null) {
+                System.out.println("Sacrifice input for Emerge cancelled");
+                return false;
+            } else {
+                emerge = ability.getSacrificedAsEmerge();
             }
         }
         if (!toPay.isPaid()) {
@@ -808,6 +825,17 @@ public class HumanPlay {
                 offering.setUsedToPay(false);
                 activator.getGame().getAction().sacrifice(offering, ability);
                 ability.resetSacrificedAsOffering();
+            }
+        }
+        if (ability.isEmerge()) {
+            if (ability.getSacrificedAsEmerge() == null && emerge != null) {
+                ability.setSacrificedAsEmerge(emerge);
+            }
+            if (ability.getSacrificedAsEmerge() != null) {
+                System.out.println("Finishing up Emerge");
+                emerge.setUsedToPay(false);
+                activator.getGame().getAction().sacrifice(emerge, ability);
+                ability.resetSacrificedAsEmerge();
             }
         }
         if (ability.getTappedForConvoke() != null) {

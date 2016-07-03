@@ -60,7 +60,7 @@ public final class CardUtil {
             "Transmute", "Replicate", "Recover", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload",
-            "Scavenge", "Bestow", "Outlast", "Dash", "Renown", "Surge").build();
+            "Scavenge", "Bestow", "Outlast", "Dash", "Renown", "Surge", "Emerge").build();
     /** List of keyword endings of keywords that could be modified by text changes. */
     public static final ImmutableList<String> modifiableKeywordEndings = ImmutableList.<String>builder().add(
             "walk", "cycling", "offering").build();

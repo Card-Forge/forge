@@ -1289,6 +1289,14 @@ public class ComputerUtilMana {
             }
             sa.resetSacrificedAsOffering();
         }
+        if (sa.isEmerge() && sa.getSacrificedAsEmerge() != null) {
+            final Card emerge = sa.getSacrificedAsEmerge();
+            emerge.setUsedToPay(false);
+            if (costIsPaid && !test) {
+                sa.getHostCard().getController().getGame().getAction().sacrifice(emerge, sa);
+            }
+            sa.resetSacrificedAsEmerge();
+        }
     }
     
         

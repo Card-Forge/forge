@@ -1788,6 +1788,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
                 sb.append("\r\n");
+            } else if (keyword.startsWith("Emerge")) {
+                final Cost cost = new Cost(keyword.substring(7), false);
+                sb.append("Emerge ").append(cost.toSimpleString());
+                sb.append(" (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)");
+                sb.append("\r\n");
             } else if (keyword.startsWith("Splice")) {
                 final Cost cost = new Cost(keyword.substring(19), false);
                 sb.append("Splice onto Arcane ").append(cost.toSimpleString()).append("\r\n");

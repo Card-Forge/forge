@@ -83,7 +83,9 @@ public class ManaCostAdjustment {
         if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
             adjustCostByOffering(cost, sa);
         }
-    
+        if (sa.isSpell() && sa.isEmerge()) { // cost reduction from offerings
+            adjustCostByEmerge(cost, sa);
+        }
         // Set cost (only used by Trinisphere) is applied last
         for (final StaticAbility stAb : setAbilities) {
             applyAbility(stAb, "SetCost", sa, cost);
@@ -197,7 +199,26 @@ public class ManaCostAdjustment {
         sa.setSacrificedAsOffering(toSac);
         toSac.setUsedToPay(true); //stop it from interfering with mana input
     }
+
+    private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa) {
     
+        Card toSac = null;
+        CardCollectionView canEmerge = CardLists.filter(sa.getActivatingPlayer().getCreaturesInPlay(), CardPredicates.canBeSacrificedBy(sa));
+
+        final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canEmerge, "Creature");
+
+        if (!toSacList.isEmpty()) {
+            toSac = toSacList.getFirst();
+        }
+        else {
+            return;
+        }
+    
+        cost.decreaseGenericMana(toSac.getCMC());
+    
+        sa.setSacrificedAsEmerge(toSac);
+        toSac.setUsedToPay(true); //stop it from interfering with mana input
+    }
     /**
      * Applies applyRaiseCostAbility ability.
      * 
