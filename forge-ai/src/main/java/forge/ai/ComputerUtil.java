@@ -1566,12 +1566,31 @@ public class ComputerUtil {
         if (handSize == aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD) && landSize > 0) {
             return score;
         }
+
+        CardCollectionView library = ai.getZone(ZoneType.Library).getCards();
+        int landsInDeck = CardLists.filter(library, CardPredicates.isType("Land")).size();
+
         // otherwise, reject bad hands or return score
-        if ( landSize < 2 || landSize == handSize) {
-            // BAD Hands, 0 or 1 lands, or all lands
+        if ( landSize < 2) {
+            // BAD Hands, 0 or 1 lands
+            if (library.size()/landsInDeck > 6) {
+                // Heavy spell deck it's ok
+                return handSize;
+            }
+            return 0;
+        } else if (landSize == handSize) {
+            if (library.size()/landsInDeck < 2) {
+                // Heavy land deck/Momir Basic it's ok
+                return handSize;
+            }
             return 0;
         } else if (handSize >= 7 && landSize >= handSize-1) {
             // BAD Hands - Mana flooding
+
+            if (library.size()/landsInDeck < 2) {
+                // Heavy land deck/Momir Basic it's ok
+                return handSize;
+            }
             return 0;
         }
         return score;
