@@ -27,6 +27,7 @@ import forge.download.GuiDownloadService;
 import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;
 import forge.gui.BoxedProductCardListViewer;
+import forge.gui.CardListChooser;
 import forge.gui.CardListViewer;
 import forge.gui.GuiChoose;
 import forge.gui.framework.FScreen;
@@ -180,6 +181,14 @@ public class GuiDesktop implements IGuiBase {
         viewer.setVisible(true);
         viewer.dispose();
         return viewer.skipTheRest();
+    }
+
+    @Override
+    public PaperCard chooseCard(String title, String message, List<PaperCard> list) {
+        final CardListChooser cardListChooser = new CardListChooser(title, message, list);
+        cardListChooser.setVisible(true);
+        cardListChooser.dispose();
+        return cardListChooser.getSelectedCard();
     }
 
     @Override

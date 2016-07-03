@@ -19626,6 +19626,7 @@ forge-gui/src/main/java/forge/properties/ForgePreferences.java svneol=native#tex
 forge-gui/src/main/java/forge/properties/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/BoosterUtils.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/IQuestRewardCard.java -text
+forge-gui/src/main/java/forge/quest/IQuestTournamentView.java -text
 forge-gui/src/main/java/forge/quest/IVQuestStats.java -text
 forge-gui/src/main/java/forge/quest/QuestController.java -text
 forge-gui/src/main/java/forge/quest/QuestDeckGroupMap.java -text
@@ -19642,6 +19643,7 @@ forge-gui/src/main/java/forge/quest/QuestRewardCard.java -text
 forge-gui/src/main/java/forge/quest/QuestRewardCardDuplicate.java -text
 forge-gui/src/main/java/forge/quest/QuestRewardCardFiltered.java -text
 forge-gui/src/main/java/forge/quest/QuestSpellShop.java -text
+forge-gui/src/main/java/forge/quest/QuestTournamentController.java -text
 forge-gui/src/main/java/forge/quest/QuestUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/QuestUtilCards.java -text
 forge-gui/src/main/java/forge/quest/QuestUtilUnlockSets.java -text

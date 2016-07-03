@@ -25,12 +25,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestDraftUtils {
-    private static final List<DraftMatchup> matchups = new ArrayList<>();
     public static boolean TOURNAMENT_TOGGLE = false;
     public static boolean AI_BACKGROUND = false;
 
     public static boolean matchInProgress = false;
     private static boolean waitForUserInput = false;
+    private static final List<DraftMatchup> matchups = new ArrayList<>();
+
+    public enum Mode {
+        EMPTY,
+        SELECT_TOURNAMENT,
+        PREPARE_DECK,
+        TOURNAMENT_ACTIVE
+    }
 
     public static void completeDraft(final DeckGroup finishedDraft) {
         final List<Deck> aiDecks = new ArrayList<>(finishedDraft.getAiDecks());

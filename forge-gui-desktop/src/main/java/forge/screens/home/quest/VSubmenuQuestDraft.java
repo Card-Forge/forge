@@ -1,22 +1,42 @@
 package forge.screens.home.quest;
 
 import forge.GuiBase;
+import forge.Singletons;
 import forge.assets.FSkinProp;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
+import forge.itemmanager.DeckManager;
+import forge.limited.BoosterDraft;
 import forge.model.FModel;
+import forge.quest.IQuestTournamentView;
+import forge.quest.QuestEventDraft;
+import forge.quest.QuestDraftUtils.Mode;
+import forge.quest.data.QuestEventDraftContainer;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.controllers.CEditorQuestDraftingProcess;
+import forge.screens.deckeditor.controllers.CEditorQuestLimited;
+import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.home.*;
+import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.JXButtonPanel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -24,16 +44,8 @@ import java.awt.geom.Rectangle2D;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
-
+public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestTournamentView {
     SINGLETON_INSTANCE;
-
-    protected enum Mode {
-        EMPTY,
-        SELECT_TOURNAMENT,
-        PREPARE_DECK,
-        TOURNAMENT_ACTIVE
-    }
 
     private final DragTab tab = new DragTab("Tournaments");
 
@@ -180,23 +192,23 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
         return matchups;
     }
 
-    public JLabel getLblFirst() {
+    public FLabel getLblFirst() {
         return lblFirst;
     }
 
-    public JLabel getLblSecond() {
+    public FLabel getLblSecond() {
         return lblSecond;
     }
 
-    public JLabel getLblThird() {
+    public FLabel getLblThird() {
         return lblThird;
     }
 
-    public JLabel getLblFourth() {
+    public FLabel getLblFourth() {
         return lblFourth;
     }
 
-    public JLabel getLblTokens() {
+    public FLabel getLblTokens() {
         return lblTokens;
     }
 
@@ -281,7 +293,6 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
-
     }
 
     private void populateSelectTournament() {
@@ -312,7 +323,6 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     }
 
     private void populateTournamentActive() {
-
         lblTitle.setText("Quest Mode: Draft Tournament - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 1"));
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 20% 0 15px 10px, ax right, span 2");
@@ -340,28 +350,23 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
         JPanel bottomButtons = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
 
         if (FModel.getQuest().getAchievements().getCurrentDraft().playerHasMatchesLeft()) {
-
             VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartMatch, "gap 0 0 0 20px, ax center");
             bottomButtons.add(btnEditDeck, "w 135px!, h 25px!, gap 0 25px 10px 10px, ax right");
             bottomButtons.add(btnLeaveTournament, "w 135px!, h 25px!, gap 25px 0 10px 10px, ax right");
             btnLeaveTournament.setFontSize(12);
-
-        } else {
-
+        }
+        else {
             VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnLeaveTournament, "w 250px!, h 60px!, gap 0 0 20px 20px, ax center");
             bottomButtons.add(btnEditDeck, "w 135px!, h 25px!, gap 0 25px 10px 10px, ax right");
             bottomButtons.add(btnStartMatchSmall, "w 135px!, h 25px!, gap 25px 0 10px 10px, ax right");
             btnLeaveTournament.setFontSize(24);
-
         }
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(bottomButtons, "w 100%!");
         bottomButtons.setOpaque(false);
-
     }
 
     private final class ProportionalPanel extends JPanel {
-
         private static final long serialVersionUID = 2098643413467094674L;
 
         private final SkinImage image;
@@ -381,7 +386,6 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
 
         @Override
         public void paintComponent(final Graphics g) {
-
             Graphics2D g2d = (Graphics2D) g.create();
 
             Dimension srcSize = image.getSizeForPaint(g2d);
@@ -403,13 +407,10 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
                     0, 0, wSrc, hSrc); // Source
 
             g2d.dispose();
-
         }
-
     }
 
     private final class ProportionalDimension extends Dimension {
-
         private static final long serialVersionUID = -428811386088062426L;
 
         private ProportionalDimension(Dimension d, int w, int h) {
@@ -581,9 +582,90 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
             }
 
             g2d.dispose();
-
         }
-
     }
 
+    @Override
+    public void updateEventList(QuestEventDraftContainer events) {
+        pnlTournaments.removeAll();
+        if (events == null) { return; }
+
+        final JXButtonPanel grpPanel = new JXButtonPanel();
+
+        boolean firstPanel = true;
+
+        for (final QuestEventDraft draft : events) {
+            final PnlDraftEvent draftPanel = new PnlDraftEvent(draft);
+            final JRadioButton button = draftPanel.getRadioButton();
+
+            if (firstPanel) {
+                button.setSelected(true);
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override public void run() { button.requestFocusInWindow(); }
+                });
+                firstPanel = false;
+            }
+
+            grpPanel.add(draftPanel, button, "w 100%!, h 135px!, gapy 15px");
+
+            button.addKeyListener(startOnEnter);
+            button.addMouseListener(startOnDblClick);
+        }
+
+        pnlTournaments.add(grpPanel, "w 100%!");
+    }
+
+    private final KeyAdapter startOnEnter = new KeyAdapter() {
+        @Override
+        public void keyPressed(final KeyEvent e) {
+            if (KeyEvent.VK_ENTER == e.getKeyChar()) {
+                btnStartDraft.doClick();
+            }
+        }
+    };
+
+    private final MouseAdapter startOnDblClick = new MouseAdapter() {
+        @Override
+        public void mouseClicked(final MouseEvent e) {
+            if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) {
+                btnStartDraft.doClick();
+            }
+        }
+    };
+
+    @Override
+    public void updateTournamentBoxLabel(String playerID, int iconID, int box, boolean first) {
+        SkinImage icon = FSkin.getAvatars().get(iconID);
+        if (icon == null) {
+            icon = FSkin.getAvatars().get(0);
+        }
+
+        if (first) {
+            matchups[box].setPlayerOne(playerID, icon);
+        }
+        else {
+            matchups[box].setPlayerTwo(playerID, icon);
+        }
+    }
+
+    @Override
+    public void startDraft(BoosterDraft draft) {
+        final CEditorQuestDraftingProcess draftController = new CEditorQuestDraftingProcess(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
+        draftController.showGui(draft);
+
+        draftController.setDraftQuest(CSubmenuQuestDraft.SINGLETON_INSTANCE);
+
+        Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draftController);
+    }
+
+    @Override
+    public void editDeck(boolean isExistingDeck) {
+        final CDetailPicture cDetailPicture = CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture();
+        if (isExistingDeck) {
+            VCurrentDeck.SINGLETON_INSTANCE.setItemManager(new DeckManager(GameType.Draft, cDetailPicture));
+        }
+        Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST_TOURNAMENT);
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuestLimited(FModel.getQuest(), cDetailPicture));
+    }
 }

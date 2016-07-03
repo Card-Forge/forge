@@ -209,6 +209,16 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public PaperCard chooseCard(final String title, final String message, final List<PaperCard> list) {
+        return new WaitCallback<PaperCard>() {
+            @Override
+            public void run() {
+                GuiChoose.one(title + " - " + message, list, this);
+            }
+        }.invokeAndWait();
+    }
+
+    @Override
     public int getAvatarCount() {
         if (FSkin.isLoaded()) {
             return FSkin.getAvatars().size();

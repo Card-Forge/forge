@@ -40,6 +40,7 @@ public interface IGuiBase {
     void download(GuiDownloadService service, Callback<Boolean> callback);
     void showCardList(String title, String message, List<PaperCard> list);
     boolean showBoxedProduct(String title, String message, List<PaperCard> list);
+    PaperCard chooseCard(String title, String message, List<PaperCard> list);
     int getAvatarCount();
     void copyToClipboard(String text);
     void browseToUrl(String url) throws IOException, URISyntaxException;
