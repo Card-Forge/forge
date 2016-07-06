@@ -359,6 +359,17 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             final Game game = getGame();
             if (game != null) {
+                // update Type, color and keywords again if they have changed
+                if (!changedCardTypes.isEmpty()) {
+                    currentState.getView().updateType(currentState);
+                }
+                if (!changedCardColors.isEmpty()) {
+                    currentState.getView().updateColors(this);
+                }
+                if (!changedCardKeywords.isEmpty()) {
+                    currentState.getView().updateKeywords(this, currentState);
+                }
+                
                 if (state == CardStateName.FaceDown) {
                     view.updateHiddenId(game.nextHiddenCardId());
                 }
