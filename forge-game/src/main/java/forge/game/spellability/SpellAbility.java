@@ -1125,6 +1125,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean canTargetSpellAbility(final SpellAbility topSA) {
         final TargetRestrictions tgt = getTargetRestrictions();
 
+        if (this.equals(topSA)) {
+            return false;
+        }
+
         if (hasParam("TargetType") && !topSA.isValid(getParam("TargetType").split(","), getActivatingPlayer(), getHostCard(), this)) {
             return false;
         }

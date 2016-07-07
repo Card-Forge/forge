@@ -15,6 +15,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class CounterAi extends SpellAbilityAi {
 
@@ -41,7 +43,7 @@ public class CounterAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
 
-            final SpellAbility topSA = game.getStack().peekAbility();
+            final SpellAbility topSA = findTopSpellAbility(game, sa);
             if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai
                     || ai.getAllies().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
@@ -52,7 +54,7 @@ public class CounterAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (sa.hasParam("CounterNoManaSpell") && topSA.getTotalManaSpent() == 0) {
+            if (sa.hasParam("CounterNoManaSpell") && topSA.getTotalManaSpent() > 0) {
                 return false;
             }
 
@@ -123,39 +125,24 @@ public class CounterAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final Game game = ai.getGame();
+
         if (tgt != null) {
-            final Game game = ai.getGame();
             if (game.getStack().isEmpty()) {
-                return false;
-            }
-            
-            SpellAbility topSA = game.getStack().peekAbility();
-            
-            // triggered abilities see themselves on the stack, so find another spell on the stack
-            if (sa.isTrigger() && topSA.isTrigger() && game.getStack().size() > 1) {
-                Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
-                SpellAbilityStackInstance si = game.getStack().peek();
-                while (it.hasNext()) {
-                    si = it.next();
-                    if (si.isTrigger()) {
-                        it.remove();
-                    } else {
-                    	break;
-                    }
-                }
-            	topSA = si.getSpellAbility(true);
-            }
-        	
-            if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai) {
                 return false;
             }
 
             sa.resetTargets();
-            if (sa.canTargetSpellAbility(topSA)) {
-                sa.getTargets().add(topSA);
-            } else {
+            Pair<SpellAbility, Boolean> pair = chooseTargetSpellAbility(game, sa, ai, mandatory);
+            SpellAbility tgtSA = pair.getLeft();
+
+            if (tgtSA == null) {
+                return false;
+            }
+            sa.getTargets().add(tgtSA);
+            if (!mandatory && !pair.getRight()) {
+                // If not mandatory and not preferred, bail out after setting target
                 return false;
             }
 
@@ -174,15 +161,17 @@ public class CounterAi extends SpellAbilityAi {
                     toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
                 }
 
-                if (toPay == 0) {
-                    return false;
-                }
-
-                if (toPay <= usableManaSources) {
-                    // If this is a reusable Resource, feel free to play it most
-                    // of the time
-                    if (!SpellAbilityAi.playReusable(ai,sa) || (MyRandom.getRandom().nextFloat() < .4)) {
+                if (!mandatory) {
+                    if (toPay == 0) {
                         return false;
+                    }
+
+                    if (toPay <= usableManaSources) {
+                        // If this is a reusable Resource, feel free to play it most
+                        // of the time
+                        if (!SpellAbilityAi.playReusable(ai,sa) || (MyRandom.getRandom().nextFloat() < .4)) {
+                            return false;
+                        }
                     }
                 }
 
@@ -201,4 +190,61 @@ public class CounterAi extends SpellAbilityAi {
         return true;
     }
 
+    public Pair<SpellAbility, Boolean> chooseTargetSpellAbility(Game game, SpellAbility sa, Player ai, boolean mandatory) {
+        SpellAbility tgtSA;
+        SpellAbility leastBadOption = null;
+        SpellAbility bestOption = null;
+
+        Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
+        SpellAbilityStackInstance si = null;
+        while(it.hasNext()) {
+            si = it.next();
+            tgtSA = si.getSpellAbility(true);
+            if (!sa.canTargetSpellAbility(tgtSA)) {
+                continue;
+            }
+            if (leastBadOption == null) {
+                leastBadOption = tgtSA;
+            }
+
+            if (!CardFactoryUtil.isCounterableBy(tgtSA.getHostCard(), sa) ||
+                tgtSA.getActivatingPlayer() == ai ||
+                !tgtSA.getActivatingPlayer().isOpponentOf(ai)) {
+                // Is this a "better" least bad option
+                if (leastBadOption.getActivatingPlayer().isOpponentOf(ai)) {
+                    // NOOP
+                } else if (sa.getActivatingPlayer().isOpponentOf(ai)) {
+                    // Target opponents uncounterable stuff, before our own stuff
+                    leastBadOption = tgtSA;
+                }
+                continue;
+            }
+
+            if (bestOption == null) {
+                bestOption = tgtSA;
+            } else {
+                // TODO Determine if this option is better than the current best option
+                boolean betterThanBest = false;
+                if (betterThanBest) {
+                    bestOption = tgtSA;
+                }
+                // Don't really need to keep updating leastBadOption once we have a bestOption
+            }
+        }
+
+        return new ImmutablePair<>(bestOption != null ? bestOption : leastBadOption, bestOption != null);
+    }
+
+    public SpellAbility findTopSpellAbility(Game game, SpellAbility sa) {
+        Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
+        SpellAbility tgtSA = it.next().getSpellAbility(true);
+        // Grab the topmost spellability that isn't this SA and use that for comparisons
+        if (sa.equals(tgtSA) && game.getStack().size() > 1) {
+            if (!it.hasNext()) {
+                return null;
+            }
+            tgtSA = it.next().getSpellAbility(true);
+        }
+        return tgtSA;
+    }
 }
