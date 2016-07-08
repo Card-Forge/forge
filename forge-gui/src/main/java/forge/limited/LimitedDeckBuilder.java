@@ -67,7 +67,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     private Iterable<PaperCard> onColorCreatures;
     private Iterable<PaperCard> onColorNonCreatures;
 
-    private static final boolean logToConsole = true;
+    private static final boolean logToConsole = false;
 
     /**
      *
