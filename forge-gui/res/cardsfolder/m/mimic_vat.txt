@@ -5,13 +5,14 @@ T:Mode$ ChangesZone | ValidCard$ Creature.nonToken | Origin$ Battlefield | Desti
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Graveyard | Defined$ Imprinted | ChangeNum$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | ChangeNum$ 1
-A:AB$ CopyPermanent | Cost$ 3 T | Defined$ Imprinted | SubAbility$ DBPump | SpellDescription$ Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
-SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Clones | Permanent$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Clones | TriggerDescription$ Exile the token at the beginning of the next end step. | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:NonStackingEffect:True
+A:AB$ CopyPermanent | Cost$ 3 T | Defined$ Imprinted.ExiledWithSource | Keywords$ Haste | AddSVars$ SneakAttackEOT | AtEOT$ Exile | SpellDescription$ Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanImprinted | Static$ True
 SVar:DBCleanImprinted:DB$ Cleanup | ClearImprinted$ True
+
+SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mimic_vat.jpg
