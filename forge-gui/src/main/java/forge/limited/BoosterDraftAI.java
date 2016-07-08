@@ -120,7 +120,9 @@ public class BoosterDraftAI {
             deckCols.addColorsOf(bestPick);
         }
 
-        System.out.println("Player[" + player + "] picked: " + bestPick + " ranking of " + bestRanking);
+        if (ForgePreferences.DEV_MODE) {
+            System.out.println("Player[" + player + "] picked: " + bestPick + " ranking of " + bestRanking);
+        }
         this.deck.get(player).add(bestPick);
 
         return bestPick;
@@ -153,7 +155,9 @@ public class BoosterDraftAI {
                 }
 
                 if (rank == null) {
-                    System.out.println("Draft Rankings - Card Not Found: " + card.getName());
+                    if (ForgePreferences.DEV_MODE) {
+                        System.out.println("Draft Rankings - Card Not Found: " + card.getName());
+                    }
                     rank = RANK_UNPICKABLE;
                 }
             }

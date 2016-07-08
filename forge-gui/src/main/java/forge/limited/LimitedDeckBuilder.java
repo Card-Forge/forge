@@ -67,7 +67,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     private Iterable<PaperCard> onColorCreatures;
     private Iterable<PaperCard> onColorNonCreatures;
 
-    private static final boolean logToConsole = false;
+    private static final boolean logToConsole = true;
 
     /**
      *
@@ -148,7 +148,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         deckList.addAll(walkers);
         aiPlayables.removeAll(walkers);
 
-        if (walkers.size() > 0) {
+        if (walkers.size() > 0 && logToConsole) {
             System.out.println("Planeswalker: " + walkers.get(0).getName());
         }
 
@@ -260,32 +260,44 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      */
     private void fixDeckSize(final int[] clrCnts, final String landSetCode) {
         while (deckList.size() > 40) {
-            System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
+            if (logToConsole) {
+                System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
+            }
             final PaperCard c = deckList.get(MyRandom.getRandom().nextInt(deckList.size() - 1));
             deckList.remove(c);
             getAiPlayables().add(c);
-            System.out.println(" - Removed " + c.getName() + " randomly.");
+            if (logToConsole) {
+                System.out.println(" - Removed " + c.getName() + " randomly.");
+            }
         }
 
         while (deckList.size() < 40) {
-            System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
+            if (logToConsole) {
+                System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
+            }
             if (getAiPlayables().size() > 1) {
                 final PaperCard c = getAiPlayables().get(MyRandom.getRandom().nextInt(getAiPlayables().size() - 1));
                 deckList.add(c);
                 getAiPlayables().remove(c);
-                System.out.println(" - Added " + c.getName() + " randomly.");
+                if (logToConsole) {
+                    System.out.println(" - Added " + c.getName() + " randomly.");
+                }
             } else if (getAiPlayables().size() == 1) {
                 final PaperCard c = getAiPlayables().get(0);
                 deckList.add(c);
                 getAiPlayables().remove(c);
-                System.out.println(" - Added " + c.getName() + " randomly.");
+                if (logToConsole) {
+                    System.out.println(" - Added " + c.getName() + " randomly.");
+                }
             } else {
                 // if no playable cards remain fill up with basic lands
                 for (int i = 0; i < 5; i++) {
                     if (clrCnts[i] > 0) {
                         final PaperCard cp = getBasicLand(i, landSetCode);
                         deckList.add(cp);
-                        System.out.println(" - Added " + cp.getName() + " as last resort.");
+                        if (logToConsole) {
+                            System.out.println(" - Added " + cp.getName() + " as last resort.");
+                        }
                         break;
                     }
                 }
