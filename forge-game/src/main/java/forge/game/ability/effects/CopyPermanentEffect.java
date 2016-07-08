@@ -15,12 +15,14 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
@@ -34,6 +36,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class CopyPermanentEffect extends SpellAbilityEffect {
 
@@ -177,6 +180,42 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, copy, true);
                         copy.addTrigger(parsedTrigger);
                     }
+
+                    // set power of clone
+                    if (sa.hasParam("SetPower")) {
+                        String rhs = sa.getParam("SetPower");
+                        int power = -1;
+                        try {
+                            power = Integer.parseInt(rhs);
+                        } catch (final NumberFormatException e) {
+                            power = CardFactoryUtil.xCount(copy, copy.getSVar(rhs));
+                        }
+                        for (StaticAbility sta : copy.getStaticAbilities()) {
+                            Map<String, String> params = sta.getMapParams();
+                            if (params.containsKey("CharacteristicDefining") && params.containsKey("SetPower"))
+                                copy.removeStaticAbility(sta);
+                        }
+                        copy.setBasePower(power);
+                    }
+
+                    // set toughness of clone
+                    if (sa.hasParam("SetToughness")) {
+                        String rhs = sa.getParam("SetToughness");
+                        int toughness = -1;
+                        try {
+                            toughness = Integer.parseInt(rhs);
+                        } catch (final NumberFormatException e) {
+                            toughness = CardFactoryUtil.xCount(copy, copy.getSVar(rhs));
+                        }
+                        for (StaticAbility sta : copy.getStaticAbilities()) {
+                            Map<String, String> params = sta.getMapParams();
+                            if (params.containsKey("CharacteristicDefining") && params.containsKey("SetToughness"))
+                                copy.removeStaticAbility(sta);
+                        }
+                        copy.setBaseToughness(toughness);
+                    }
+
+                    copy.updateStateForView();
 
                     // Temporarily register triggers of an object created with CopyPermanent
                     //game.getTriggerHandler().registerActiveTrigger(copy, false);
