@@ -7,5 +7,6 @@ K:Ingest
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoot | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may draw a card. If you do, discard a card.
 SVar:TrigLoot:AB$Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+DeckHints:Type$Processor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_drone.jpg
 Oracle:Devoid (This card has no color.)\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)\nWhen Salvage Drone dies, you may draw a card. If you do, discard a card.

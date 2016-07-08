@@ -5,5 +5,6 @@ PT:1/2
 K:Devoid
 K:Flying
 K:Ingest
+DeckHints:Type$Processor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_intruder.jpg
 Oracle:Devoid (This card has no color.)\nFlying\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)

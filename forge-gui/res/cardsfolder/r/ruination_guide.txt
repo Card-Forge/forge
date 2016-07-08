@@ -6,5 +6,6 @@ K:Devoid
 K:Ingest
 S:Mode$ Continuous | Affected$ Creature.Colorless+Other+YouCtrl | AddPower$ 1 | Description$ Other colorless creatures you control get +1/+0.
 SVar:PlayMain1:TRUE
+DeckHints:Type$Processor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruination_guide.jpg
 Oracle:Devoid (This card has no color.)\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)\nOther colorless creatures you control get +1/+0.

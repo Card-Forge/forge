@@ -6,5 +6,6 @@ K:Devoid
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, target creature gets -3/-3 until end of turn.
 SVar:TrigChangeZone:AB$ Pump | Cost$ ExiledMoveToGrave<1/Card.OppOwn/card an opponent owns> | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
 SVar:PlayMain1:TRUE
+DeckHints:Keyword$Ingest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wasteland_strangler.jpg
 Oracle:Devoid (This card has no color.)\nWhen Wasteland Strangler enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, target creature gets -3/-3 until end of turn.

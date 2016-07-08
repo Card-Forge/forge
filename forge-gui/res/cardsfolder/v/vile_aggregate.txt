@@ -8,5 +8,6 @@ SVar:X:Count$Valid Creature.Colorless+YouCtrl
 K:Trample
 K:Ingest
 SVar:BuffedBy:Creature.Colorless
+DeckHints:Type$Processor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_aggregate.jpg
 Oracle:Devoid (This card has no color.)\nVile Aggregate's power is equal to the number of colorless creatures you control.\nTrample\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)

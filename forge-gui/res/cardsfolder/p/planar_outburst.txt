@@ -3,5 +3,6 @@ ManaCost:3 W W
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature.nonLand | SpellDescription$ Destroy all nonland creatures.
 K:Awaken:4:5 W W W
+DeckHints:Keyword$Awaken
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_outburst.jpg
 Oracle:Destroy all nonland creatures.\nAwaken 4 — {5}{W}{W}{W} (If you cast this spell for {5}{W}{W}{W}, also put four +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)

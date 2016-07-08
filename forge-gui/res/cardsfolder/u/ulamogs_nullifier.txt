@@ -7,5 +7,6 @@ K:Flash
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigProcess | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put two cards your opponents own in exile into their owners' graveyards. If you do, counter target spell.
 SVar:TrigProcess:AB$ Counter | Cost$ ExiledMoveToGrave<2/Card.OppOwn/card an opponent owns> | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell
-http://www.wizards.com/global/images/magic/general/ulamogs_nullifier.jpg
+DeckHints:Keyword$Ingest
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ulamogs_nullifier.jpg
 Oracle:Devoid (This card has no color.)\nFlash\nFlying\nWhen Ulamog's Nullifier enters the battlefield, you may put two cards your opponents own in exile into their owners' graveyards. If you do, counter target spell.

@@ -5,5 +5,6 @@ PT:1/4
 K:Devoid
 K:Ingest
 K:Unblockable
+DeckHints:Type$Processor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benthic_infiltrator.jpg
 Oracle:Devoid (This card has no color.)\nIngest (Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)\nBenthic Infiltrator can't be blocked.

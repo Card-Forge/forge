@@ -5,5 +5,6 @@ PT:2/5
 K:Devoid
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, return target instant or sorcery card from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ ExiledMoveToGrave<1/Card.OppOwn/card an opponent owns> | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtPrompt$ Select target instant or sorcery | Origin$ Graveyard | Destination$ Hand
+DeckHints:Keyword$Ingest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulamogs_reclaimer.jpg
 Oracle:Devoid (This card has no color.)\nWhen Ulamog's Reclaimer enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, return target instant or sorcery card from your graveyard to your hand.

@@ -5,5 +5,6 @@ PT:3/5
 K:Devoid
 A:AB$ Draw | Cost$ 2 ExiledMoveToGrave<1/Card.OppOwn/card an opponent owns> | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHints:Keyword$Ingest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_dust.jpg
 Oracle:Devoid (This card has no color.)\n{2}, Put a card an opponent owns from exile into that player's graveyard: Draw a card, then discard a card.

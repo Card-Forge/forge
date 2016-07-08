@@ -4,5 +4,6 @@ Types:Creature Eldrazi Processor
 PT:3/3
 K:Devoid
 A:AB$ Tap | Cost$ 2 U ExiledMoveToGrave<1/Card.OppOwn/card an opponent owns> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+DeckHints:Keyword$Ingest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_cruiser.jpg
 Oracle:Devoid (This card has no color.)\n{2}{U}, Put a card an opponent owns from exile into that player's graveyard: Tap target creature.
