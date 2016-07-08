@@ -14,6 +14,7 @@ import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 
@@ -266,6 +267,11 @@ public class CloneEffect extends SpellAbilityEffect {
             } catch (final NumberFormatException e) {
                 power = CardFactoryUtil.xCount(tgtCard, tgtCard.getSVar(rhs));
             }
+            for (StaticAbility sta : tgtCard.getStaticAbilities()) {
+                Map<String, String> params = sta.getMapParams();
+                if (params.containsKey("CharacteristicDefining") && params.containsKey("SetPower"))
+                    tgtCard.removeStaticAbility(sta);
+            }
             tgtCard.setBasePower(power);
         }
 
@@ -277,6 +283,11 @@ public class CloneEffect extends SpellAbilityEffect {
                 toughness = Integer.parseInt(rhs);
             } catch (final NumberFormatException e) {
                 toughness = CardFactoryUtil.xCount(tgtCard, tgtCard.getSVar(rhs));
+            }
+            for (StaticAbility sta : tgtCard.getStaticAbilities()) {
+                Map<String, String> params = sta.getMapParams();
+                if (params.containsKey("CharacteristicDefining") && params.containsKey("SetToughness"))
+                    tgtCard.removeStaticAbility(sta);
             }
             tgtCard.setBaseToughness(toughness);
         }
