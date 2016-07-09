@@ -257,7 +257,7 @@ public class TargetSelection {
                 return false;
             }
             else {
-                final Object madeChoice = controller.getGui().oneOrNone(message, selectOptions);
+                Object madeChoice = mandatory ? controller.getGui().one(message, selectOptions) : controller.getGui().oneOrNone(message, selectOptions);
                 if (madeChoice == null) {
                     return false;
                 }
