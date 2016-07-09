@@ -1101,6 +1101,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else if (srcSA.getParam("Destination").equals("Graveyard")) {
                 game.getAction().moveToGraveyard(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("Exile")) {
+                Card host = srcSA.getOriginalHost();
+                if (host == null) {
+                    host = srcSA.getHostCard();
+                }
+                tgtSA.getHostCard().setExiledWith(host);
                 game.getAction().exile(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {
                 game.getAction().moveToLibrary(tgtSA.getHostCard());
