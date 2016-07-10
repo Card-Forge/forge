@@ -113,6 +113,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return new Deck();
             }
         }), null),
+        QuestDraft(new DeckController<DeckGroup>(null, new Supplier<DeckGroup>() { //delay setting root folder until quest loaded
+            @Override
+            public DeckGroup get() {
+                return new DeckGroup("");
+            }
+        }), null),
         PlanarConquest(new DeckController<Deck>(null, new Supplier<Deck>() { //delay setting root folder until conquest loaded
             @Override
             public Deck get() {
@@ -197,6 +203,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, "Inventory", FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
                     new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
+            };
+        case QuestDraft:
+            return new DeckEditorPage[] {
+                    new DraftPackPage(),
+                    new DeckSectionPage(DeckSection.Main),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL)
             };
         case PlanarConquest:
             return new DeckEditorPage[] {
@@ -317,6 +329,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 switch (editorType) {
                                 case Draft:
                                 case Sealed:
+                                case QuestDraft:
                                     //suggest a random set from the ones used in the limited card pool that have all basic lands
                                     Set<CardEdition> availableEditionCodes = new HashSet<>();
                                     for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
@@ -494,6 +507,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Draft:
         case Sealed:
         case Winston:
+        case QuestDraft:
             return CardLimit.None;
         case Commander:
         case TinyLeaders:

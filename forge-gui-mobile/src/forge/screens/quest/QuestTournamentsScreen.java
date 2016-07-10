@@ -3,15 +3,23 @@ package forge.screens.quest;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
+import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.deck.Deck;
+import forge.deck.DeckGroup;
+import forge.deck.FDeckEditor;
+import forge.deck.FDeckEditor.EditorType;
 import forge.interfaces.IButton;
 import forge.limited.BoosterDraft;
+import forge.model.FModel;
 import forge.quest.IQuestTournamentView;
+import forge.quest.QuestEventDraft;
 import forge.quest.QuestTournamentController;
 import forge.quest.QuestDraftUtils.Mode;
 import forge.quest.data.QuestEventDraftContainer;
 import forge.screens.FScreen;
+import forge.screens.limited.DraftingProcessScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
@@ -106,12 +114,18 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     @Override
     public void startDraft(BoosterDraft draft) {
-
+        Forge.openScreen(new DraftingProcessScreen(draft));
     }
 
     @Override
-    public void editDeck(boolean isNew) {
-
+    public void editDeck(boolean isExistingDeck) {
+        DeckGroup deckGroup = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME);
+        if (deckGroup != null) {
+            Deck deck = deckGroup.getHumanDeck();
+            if (deck != null) {
+                Forge.openScreen(new FDeckEditor(EditorType.QuestDraft, deck, isExistingDeck));
+            }
+        }
     }
 
     @Override
