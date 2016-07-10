@@ -3,7 +3,9 @@ ManaCost:7
 Types:Artifact Creature Shapeshifter
 PT:5/5
 A:AB$ ChangeZone | PrecostDesc$ Imprint - | Cost$ 1 | Imprint$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouOwn | SpellDescription$ Exile target creature card from your graveyard.
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddKeyword$ Flying & Fear & First Strike & Double Strike & Haste & Landwalk & Protection & Trample | SharedKeywordsZone$ Exile | SharedRestrictions$ Card.IsImprinted | Description$ As long as a card exiled with CARDNAME has flying, CARDNAME has flying. The same is true for fear, first strike, double strike, haste, landwalk, protection, and trample.
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddKeyword$ Flying & Fear & First Strike & Double Strike & Haste & Landwalk & Protection & Trample | SharedKeywordsZone$ Exile | SharedRestrictions$ Card.IsImprinted+ExiledWithSource | Description$ As long as a card exiled with CARDNAME has flying, CARDNAME has flying. The same is true for fear, first strike, double strike, haste, landwalk, protection, and trample.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigForget | Static$ True
 SVar:TrigForget:DB$ Cleanup | ClearImprinted$ True
 SVar:RemAIDeck:True
