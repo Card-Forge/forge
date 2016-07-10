@@ -18,10 +18,12 @@ Types:Creature Human Cleric
 PT:4/4
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever this creature transforms into CARDNAME, you may exile another target creature until CARDNAME leaves the battlefield.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | ConditionPresent$ Card.Self | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Targeted | ImprintCards$ Self | SVars$ TrigReturn,ExileSelf | ConditionPresent$ Card.Self | Duration$ Permanent
+SVar:DBEffect:DB$ Effect | Triggers$ ComeBack,TrigChange | RememberObjects$ Targeted | ImprintCards$ Self | SVars$ TrigReturn,ExileSelf,TrigForget | ConditionPresent$ Card.Self | Duration$ Permanent
 SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That creature is exiled until Lunarch Inquisitors leaves the battlefield
 SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:TrigChange:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ TrigForget
+SVar:TrigForget:AB$ Pump | Cost$ 0 | ForgetObjects$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lunarch_inquisitors.jpg
 Oracle:Whenever this creature transforms into Lunarch Inquisitors, you may exile another target creature until Lunarch Inquisitors leaves the battlefield.
 
