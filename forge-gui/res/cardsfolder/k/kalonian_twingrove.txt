@@ -5,7 +5,7 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAMEs power and toughness are each equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a green Treefolk Warrior creature token onto the battlefield with "This creature's power and toughness are each equal to the number of Forests you control."
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Treefolk Warrior | TokenTypes$ Creature,Treefolk,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | TokenStaticAbilities$ TokenPT | TokenSVars$ X | References$ X
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Treefolk Warrior | TokenTypes$ Creature,Treefolk,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | TokenStaticAbilities$ TokenPT | TokenSVars$ X | References$ X | TokenImage$ g x x treefolk warrior
 SVar:TokenPT:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control.
 SVar:BuffedBy:Forest
 SVar:NeedsToPlayVar:X GE3
