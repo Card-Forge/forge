@@ -223,7 +223,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         FScreen currentScreen = Forge.getCurrentScreen();
         addItem(duelsItem); duelsItem.setSelected(currentScreen == duelsScreen);
         addItem(challengesItem); challengesItem.setSelected(currentScreen == challengesScreen);
-        //addItem(tournamentsItem); tournamentsItem.setSelected(currentScreen == tournamentsScreen);
+        addItem(tournamentsItem); tournamentsItem.setSelected(currentScreen == tournamentsScreen);
         addItem(decksItem); decksItem.setSelected(currentScreen == decksScreen);
         addItem(spellShopItem); spellShopItem.setSelected(currentScreen == spellShopScreen);
         addItem(bazaarItem); bazaarItem.setSelected(currentScreen == bazaarScreen);
