@@ -4,13 +4,14 @@ Types:Creature Merfolk Rogue
 PT:2/2
 T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME becomes tapped, exile the top three cards of target opponent's library face down.
 SVar:TrigExile:AB$ Mill | Cost$ 0 | ValidTgts$ Opponent | NumCards$ 3 | Destination$ Exile | ExileFaceDown$ True | RememberMilled$ True
-S:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayLookAt$ True | Description$ You may look at cards exiled with CARDNAME.
+S:Mode$ Continuous | Affected$ Card.IsRemembered+ExiledWithSource | AffectedZone$ Exile | MayLookAt$ True | Description$ You may look at cards exiled with CARDNAME.
 A:AB$ SetState | Cost$ U Sac<1/CARDNAME> | Defined$ Remembered | Mode$ TurnFace | SubAbility$ DBCounter | SpellDescription$ Turn all cards exiled with CARDNAME face up. Counter all spells with those names.
-SVar:DBCounter:DB$ Counter | AllType$ Spell | AllValid$ Card.sharesNameWith Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBCleanup | Static$ True
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBCounter:DB$ Counter | AllType$ Spell | AllValid$ Card.sharesNameWith Remembered.ExiledWithSource | SubAbility$ DBCleanup
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grimoire_thief.jpg
