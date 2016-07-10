@@ -4,7 +4,11 @@ Types:Creature Human Wizard
 PT:2/1
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Heroic - Whenever you cast a spell that targets CARDNAME, exile the top three cards of target player's library.
 SVar:TrigExile:AB$ Mill | Cost$ 0 | ValidTgts$ Player | NumCards$ 3 | Destination$ Exile | RememberMilled$ True
-A:AB$ Counter | Cost$ U U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell with the same name as a card exiled | ValidTgts$ Card.sharesNameWith Remembered | SpellDescription$ Counter target spell with the same name as a card exiled with CARDNAME.
+A:AB$ Counter | Cost$ U U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell with the same name as a card exiled | ValidTgts$ Card.sharesNameWith Remembered.ExiledWithSource | SpellDescription$ Counter target spell with the same name as a card exiled with CARDNAME.
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Execute$ TrigCleanup | Static$ True
 SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
