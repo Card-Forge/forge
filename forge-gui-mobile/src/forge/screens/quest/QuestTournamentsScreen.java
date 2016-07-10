@@ -1,6 +1,7 @@
 package forge.screens.quest;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
@@ -24,23 +25,26 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.Utils;
 
 public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestTournamentView {
-    private final FLabel lblInfo = add(new FLabel.Builder().text("Select a tournament to join.")
+    private final FLabel lblCredits = add(new FLabel.Builder().icon(FSkinImage.QUEST_COINSTACK)
+            .iconScaleFactor(1f).font(FSkinFont.get(16)).build());
+
+    private final FLabel lblTokens = add(new FLabel.Builder()
+            .align(HAlignment.RIGHT).font(FSkinFont.get(16)).build());
+
+    private final FLabel lblInfo = add(new FLabel.Builder().text("Select a tournament to join:")
             .align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
 
-    private final FLabel lblCredits = add(new FLabel.Builder().icon(FSkinImage.QUEST_COINSTACK)
-        .text("Available Credits: 0").align(HAlignment.CENTER).insets(Vector2.Zero)
-        .font(FSkinFont.get(14)).build());
-
     private final FLabel lblNoTournaments = add(new FLabel.Builder()
-        .text("There are no tournaments available at this time.").align(HAlignment.CENTER).insets(Vector2.Zero)
-        .font(FSkinFont.get(12)).build());
+            .align(HAlignment.CENTER).text("There are no tournaments available at this time.").insets(Vector2.Zero)
+            .font(FSkinFont.get(12)).build());
 
     private final QuestEventPanel.Container pnlTournaments = add(new QuestEventPanel.Container());
 
-    private final FLabel btnSpendToken = add(new FLabel.ButtonBuilder().text("Spend Token").font(FSkinFont.get(14)).build());
-    private final FLabel btnLeaveTournament = add(new FLabel.ButtonBuilder().text("Leave Tournament").font(FSkinFont.get(12)).build());
+    private final FLabel btnLeaveTournament = add(new FLabel.ButtonBuilder().text("Leave Tournament").build());
+    private final FLabel btnSpendToken = add(new FLabel.ButtonBuilder().text("Spend Token").build());
 
     private final ResultsScreen resultsScreen = new ResultsScreen();
 
@@ -50,17 +54,30 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     public QuestTournamentsScreen() {
         super();
         controller = new QuestTournamentController(this);
+        btnLeaveTournament.setVisible(false);
     }
 
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-        float x = PADDING;
-        float y = startY + PADDING / 2;
+        float gap = Utils.scale(2);
+        float y = startY + gap; //move credits label down a couple pixels so it looks better
+
+        float halfWidth = width / 2;
+        lblCredits.setBounds(0, y, halfWidth, lblCredits.getAutoSizeBounds().height);
+        lblTokens.setBounds(halfWidth, y, halfWidth - gap, lblCredits.getHeight());
+        y += lblCredits.getHeight() + gap;
+
+        TextBounds buttonBounds = btnSpendToken.getAutoSizeBounds();
+        float buttonWidth = buttonBounds.width + 2 * gap;
+        float x = width - gap - buttonWidth;
+        btnSpendToken.setBounds(x, y, buttonWidth, buttonBounds.height + 2 * gap);
+        btnLeaveTournament.setBounds(gap, y, x - 3 * gap, btnSpendToken.getHeight());
+        y += btnSpendToken.getHeight() + gap;
+
+        x = PADDING;
         float w = width - 2 * PADDING;
         lblInfo.setBounds(x, y, w, lblInfo.getAutoSizeBounds().height);
-        y += lblInfo.getHeight();
-        lblCredits.setBounds(x, y, w, lblCredits.getAutoSizeBounds().height);
-        y += lblCredits.getHeight() + PADDING;
+        y += lblInfo.getHeight() + gap;
         lblNoTournaments.setBounds(x, y, w, lblNoTournaments.getAutoSizeBounds().height);
         pnlTournaments.setBounds(x, y, w, height - y);
     }
@@ -145,12 +162,12 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     @Override
     public IButton getLblFourth() {
-        return resultsScreen.lblTokens;
+        return resultsScreen.lblFourth;
     }
 
     @Override
     public IButton getLblTokens() {
-        return resultsScreen.lblFourth;
+        return lblTokens;
     }
 
     @Override
@@ -187,7 +204,6 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         private final FLabel lblSecond = new FLabel.Builder().font(FSkinFont.get(15)).build();
         private final FLabel lblThird = new FLabel.Builder().font(FSkinFont.get(15)).build();
         private final FLabel lblFourth = new FLabel.Builder().font(FSkinFont.get(15)).build();
-        private final FLabel lblTokens = new FLabel.Builder().font(FSkinFont.get(15)).build();
 
         private ResultsScreen() {
             super("Past Results");

@@ -53,8 +53,8 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
 
     private final FLabel lblCredits = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COINSTACK))
-        .iconScaleFactor(0.75)
-        .fontSize(13).build();
+        .iconScaleFactor(0.8f)
+        .fontSize(14).build();
 
     private final FScrollPanel pnlTournaments = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, ax center"), true,
         ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

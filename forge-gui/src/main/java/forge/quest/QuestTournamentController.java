@@ -1,6 +1,5 @@
 package forge.quest;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +27,6 @@ import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 public class QuestTournamentController {
-    private static final DecimalFormat NUMBER_FORMATTER = new DecimalFormat("#,###");
-
     private final IQuestTournamentView view;
     private boolean drafting = false;
     private IGuiGame gui = null;
@@ -233,7 +230,7 @@ public class QuestTournamentController {
     }
 
     private void updateSelectTournament() {
-        view.getLblCredits().setText("Available Credits: " + NUMBER_FORMATTER.format(FModel.getQuest().getAssets().getCredits()));
+        view.getLblCredits().setText("Credits: " + FModel.getQuest().getAssets().getCredits());
 
         final QuestAchievements achievements = FModel.getQuest().getAchievements();
         achievements.generateDrafts();
@@ -393,7 +390,7 @@ public class QuestTournamentController {
 
         final long creditsAvailable = FModel.getQuest().getAssets().getCredits();
         if (draftEvent.canEnter()) {
-            SOptionPane.showMessageDialog("You need " + NUMBER_FORMATTER.format(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", SOptionPane.WARNING_ICON);
+            SOptionPane.showMessageDialog("You need " + (draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", SOptionPane.WARNING_ICON);
             return;
         }
 
