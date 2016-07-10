@@ -3,7 +3,12 @@ ManaCost:2
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile an instant card with converted mana cost 2 or less from your hand.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant.cmcLE2 | ChangeNum$ 1
-A:AB$ Play | Cost$ 2 T | Defined$ Imprinted | Amount$ All | CopyOnce$ True | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SpellDescription$ You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
+
+A:AB$ Play | Cost$ 2 T | Valid$ Card.IsImprinted+ExiledWithSource | ValidZone$ Exile | Amount$ All | CopyOnce$ True | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SpellDescription$ You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 #Amount$ All | CopyOnce$ True for Strionic Resonator
