@@ -23,7 +23,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     private final FLabel lblCredits = add(new FLabel.Builder().icon(FSkinImage.QUEST_COINSTACK)
         .text("Available Credits: 0").align(HAlignment.CENTER).insets(Vector2.Zero)
-        .font(FSkinFont.get(13)).build());
+        .font(FSkinFont.get(14)).build());
 
     private final FLabel lblNoTournaments = add(new FLabel.Builder()
         .text("There are no tournaments available at this time.").align(HAlignment.CENTER).insets(Vector2.Zero)
@@ -52,7 +52,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         lblInfo.setBounds(x, y, w, lblInfo.getAutoSizeBounds().height);
         y += lblInfo.getHeight();
         lblCredits.setBounds(x, y, w, lblCredits.getAutoSizeBounds().height);
-        y += lblCredits.getHeight();
+        y += lblCredits.getHeight() + PADDING;
         lblNoTournaments.setBounds(x, y, w, lblNoTournaments.getAutoSizeBounds().height);
         pnlTournaments.setBounds(x, y, w, height - y);
     }

@@ -394,6 +394,9 @@ public abstract class FScreen extends FContainer {
             Forge.back(); //go back on escape by default
             return true;
         }
+        if (keyCode == Keys.F5) { //allow revalidating current screen when running desktop app
+            revalidate();
+        }
         return super.keyDown(keyCode);
     }
 }
