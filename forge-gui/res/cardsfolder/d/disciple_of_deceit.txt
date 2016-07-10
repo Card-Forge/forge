@@ -3,7 +3,6 @@ ManaCost:U B
 Types:Creature Human Rogue
 PT:1/3
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSearch | TriggerDescription$ Inspired - Whenever CARDNAME becomes untapped, you may discard a nonland card. If you do, search your library for a card with the same converted mana cost as that card, reveal it, put it into your hand, then shuffle your library.
-SVar:TrigSearch:AB$ ChangeZone | Cost$ Discard<1/Card.nonLand/nonland card> | ChangeType$ Card.cmcEQX | References$ X | ChangeNum$ 1 | Origin$ Library | Destination$ Hand
-SVar:X:Discarded$CardManaCost
+SVar:TrigSearch:AB$ ChangeZone | Cost$ Discard<1/Card.nonLand/nonland card> | ChangeType$ Card.SharesCMCWith Discarded | ChangeNum$ 1 | Origin$ Library | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_deceit.jpg
 Oracle:Inspired - Whenever Disciple of Deceit becomes untapped, you may discard a nonland card. If you do, search your library for a card with the same converted mana cost as that card, reveal it, put it into your hand, then shuffle your library.
