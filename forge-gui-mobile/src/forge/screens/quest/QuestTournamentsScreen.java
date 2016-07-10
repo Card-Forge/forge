@@ -29,7 +29,7 @@ import forge.util.Utils;
 
 public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestTournamentView {
     private final FLabel lblCredits = add(new FLabel.Builder().icon(FSkinImage.QUEST_COINSTACK)
-            .iconScaleFactor(1f).font(FSkinFont.get(16)).build());
+            .iconScaleFactor(0.75f).font(FSkinFont.get(16)).build());
 
     private final FLabel lblTokens = add(new FLabel.Builder()
             .align(HAlignment.RIGHT).font(FSkinFont.get(16)).build());
@@ -115,13 +115,18 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     @Override
     public void updateEventList(QuestEventDraftContainer events) {
         pnlTournaments.clear();
-        if (events == null) { return; }
 
-        /*for (QuestEventDraft event : events) {
-            pnlTournaments.add(new QuestEventPanel(event, pnlTournaments));
-        }*/
+        if (events != null) {
+            for (QuestEventDraft event : events) {
+                pnlTournaments.add(new QuestEventPanel(event, pnlTournaments));
+            }
+        }
 
         pnlTournaments.revalidate();
+
+        boolean hasTournaments = pnlTournaments.getChildCount() > 0;
+        pnlTournaments.setVisible(hasTournaments);
+        lblNoTournaments.setVisible(!hasTournaments);
     }
 
     @Override

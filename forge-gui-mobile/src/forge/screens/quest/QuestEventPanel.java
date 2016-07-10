@@ -9,8 +9,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.ImageCache;
-import forge.quest.QuestEvent;
-import forge.quest.QuestUtil;
+import forge.quest.IQuestEvent;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
@@ -36,20 +35,20 @@ class QuestEventPanel extends FDisplayObject {
     private static final float RADIO_BUTTON_RADIUS = Utils.AVG_FINGER_WIDTH / 4;
     private static final float MIN_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
 
-    private final QuestEvent event;
+    private final IQuestEvent event;
     private final FImage img;
     private Container container;
 
-    public QuestEventPanel(final QuestEvent e0, final Container container0) {
+    public QuestEventPanel(final IQuestEvent e0, final Container container0) {
         event = e0;
-        img = ImageCache.getIcon(e0);
+        img = event.hasImage() ? ImageCache.getIcon(e0) : null;
         container = container0;
         if (container.selectedPanel == null) {
             setSelected(true); //select first panel in container by default
         }
     }
 
-    public QuestEvent getEvent() {
+    public IQuestEvent getEvent() {
         return event;
     }
 
@@ -64,7 +63,7 @@ class QuestEventPanel extends FDisplayObject {
         }
         else if (selected0) {
             container.selectedPanel = this;
-            QuestUtil.setEvent(event);
+            event.select();
         }
     }
 
@@ -83,22 +82,27 @@ class QuestEventPanel extends FDisplayObject {
         float h = getHeight();
         g.fillGradientRect(GRADIENT_LEFT_COLOR, GRADIENT_RIGHT_COLOR, false, 0, 0, w, h);
 
-        //draw icon
         float x = PADDING;
         float y = PADDING;
-        float imageSize = h - 2 * PADDING;
-        float maxImageSize = w / 3;
-        if (imageSize > maxImageSize) { //ensure image doesn't take up too much space
-            y += (imageSize - maxImageSize) / 2;
-            imageSize = maxImageSize;
+
+        //draw image if needed
+        if (img != null) {
+            float imageSize = h - 2 * PADDING;
+            float maxImageSize = w / 3;
+            if (imageSize > maxImageSize) { //ensure image doesn't take up too much space
+                y += (imageSize - maxImageSize) / 2;
+                imageSize = maxImageSize;
+            }
+            g.drawImage(img, x, y, imageSize, imageSize);
+
+            //shift title to the right of and slightly below the top of the icon
+            x += imageSize + 2 * PADDING;
+            y = 2 * PADDING;
         }
-        g.drawImage(img, x, y, imageSize, imageSize);
 
         //draw title
-        x += imageSize + 2 * PADDING;
-        y = 2 * PADDING;
         w -= x + 2 * (RADIO_BUTTON_RADIUS + PADDING);
-        String title = event.getTitle() + " (" + event.getDifficulty().getTitle() + ")";
+        String title = event.getFullTitle();
         g.drawText(title, TITLE_FONT, TITLE_COLOR, x, y, w, h, false, HAlignment.LEFT, false);
 
         //draw description

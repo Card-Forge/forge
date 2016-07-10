@@ -50,7 +50,7 @@ import java.util.*;
  * MODEL - A basic event instance in Quest mode. Can be extended for use in
  * unique event types: battles, quests, and others.
  */
-public class QuestEventDraft {
+public class QuestEventDraft implements IQuestEvent {
 
     public static class QuestDraftPrizes {
 
@@ -1096,5 +1096,46 @@ public class QuestEventDraft {
         }
 
         return bracket;
+    }
+
+    @Override
+    public final String getFullTitle() {
+        return title;
+    }
+
+    public String getBoosterList() {
+        String boosterList = "";
+        String[] boosterArray = boosterConfiguration.split("/");
+        for (int i = 0; i < boosterArray.length; i++) {
+            boosterList += FModel.getMagicDb().getEditions().get(boosterArray[i]).getName();
+            if (i != boosterArray.length - 1) {
+                boosterList += " | ";
+            }
+        }
+        return boosterList;
+    }
+
+    @Override
+    public String getDescription() {
+        return getBoosterList() + "\n" + QuestUtil.formatCredits(entryFee) + " Credit Entry Fee";
+    }
+
+    @Override
+    public void select() {
+        QuestUtil.setDraftEvent(this);
+    }
+
+    @Override
+    public String getIconImageKey() {
+        return null;
+    }
+
+    @Override
+    public void setIconImageKey(String iconImageKey) {
+    }
+
+    @Override
+    public boolean hasImage() {
+        return false;
     }
 }

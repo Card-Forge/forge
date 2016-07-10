@@ -30,6 +30,7 @@ import forge.itemmanager.views.ItemTableColumn;
 import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.quest.QuestSpellShop;
+import forge.quest.QuestUtil;
 import forge.screens.deckeditor.views.*;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
@@ -179,7 +180,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     }
 
     private void updateCreditsLabel() {
-        this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
+        this.creditsLabel.setText("Credits: " + QuestUtil.formatCredits(this.questData.getAssets().getCredits()));
     }
 
     /*

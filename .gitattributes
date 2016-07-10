@@ -19625,6 +19625,7 @@ forge-gui/src/main/java/forge/properties/ForgeConstants.java -text
 forge-gui/src/main/java/forge/properties/ForgePreferences.java svneol=native#text/plain
 forge-gui/src/main/java/forge/properties/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/BoosterUtils.java svneol=native#text/plain
+forge-gui/src/main/java/forge/quest/IQuestEvent.java -text
 forge-gui/src/main/java/forge/quest/IQuestRewardCard.java -text
 forge-gui/src/main/java/forge/quest/IQuestTournamentView.java -text
 forge-gui/src/main/java/forge/quest/IVQuestStats.java -text

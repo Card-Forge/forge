@@ -119,7 +119,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     }
 
     public void updateCreditsLabel() {
-        String credits = "Credits: " + FModel.getQuest().getAssets().getCredits();
+        String credits = "Credits: " + QuestUtil.formatCredits(FModel.getQuest().getAssets().getCredits());
         spellShopPage.lblCredits.setText(credits);
         inventoryPage.lblCredits.setText(credits);
     }
@@ -170,7 +170,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     private static abstract class SpellShopBasePage extends TabPage<QuestSpellShopScreen> {
         protected final SpellShopManager itemManager;
-        protected FLabel lblCredits = new FLabel.Builder().icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).font(FSkinFont.get(16)).build();
+        protected FLabel lblCredits = new FLabel.Builder().icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(0.75f).font(FSkinFont.get(16)).build();
 
         protected SpellShopBasePage(String caption0, FImage icon0, boolean isShop0) {
             super(caption0, icon0);

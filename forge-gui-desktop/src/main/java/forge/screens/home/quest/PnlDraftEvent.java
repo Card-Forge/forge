@@ -3,14 +3,11 @@ package forge.screens.home.quest;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.text.DecimalFormat;
-
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
-import forge.model.FModel;
 import forge.quest.QuestEventDraft;
 import forge.quest.QuestUtil;
 import forge.toolbox.FRadioButton;
@@ -19,9 +16,7 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FTextArea;
 
 public class PnlDraftEvent extends JPanel {
-
     private static final long serialVersionUID = 7348489421342846451L;
-    private static final DecimalFormat NUMBER_FORMATTER = new DecimalFormat("#,###");
 
     private final Color clr2 = new Color(255, 255, 0, 0);
     private final SkinColor clr3 = FSkin.getColor(FSkin.Colors.CLR_THEME2).alphaColor(200);
@@ -29,9 +24,8 @@ public class PnlDraftEvent extends JPanel {
     private final FRadioButton radButton;
     
     public PnlDraftEvent(final QuestEventDraft event) {
-        
         super();
-        
+
         radButton = new FRadioButton(event.getTitle());
         radButton.setFont(FSkin.getBoldFont(20));
         radButton.setIconTextGap(10);
@@ -39,18 +33,10 @@ public class PnlDraftEvent extends JPanel {
         final FTextArea eventBoosters = new FTextArea();
         final FTextArea eventFee = new FTextArea();
         
-        String boosterList = "";
-        for (int i = 0; i < event.getBoosterConfiguration().length; i++) {
-            boosterList += FModel.getMagicDb().getEditions().get(event.getBoosterConfiguration()[i]).getName();
-            if (i != event.getBoosterConfiguration().length - 1) {
-                boosterList += " | ";
-            }
-        }
-        
-        eventBoosters.setText(boosterList);
+        eventBoosters.setText(event.getBoosterList());
         eventBoosters.setFont(FSkin.getFont(12));
 
-        eventFee.setText(NUMBER_FORMATTER.format(event.getEntryFee()) + " Credit Entry Fee");
+        eventFee.setText(QuestUtil.formatCredits(event.getEntryFee()) + " Credit Entry Fee");
         eventFee.setFont(FSkin.getFont(12));
         
         radButton.addChangeListener(new ChangeListener() {

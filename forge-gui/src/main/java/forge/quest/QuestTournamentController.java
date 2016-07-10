@@ -88,7 +88,7 @@ public class QuestTournamentController {
             final QuestEventDraft.QuestDraftPrizes prizes = draft.collectPrizes();
 
             if (prizes.hasCredits()) {
-                SOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + prizes.credits + " credits!", "Credits Awarded", FSkinProp.ICO_QUEST_GOLD);
+                SOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + QuestUtil.formatCredits(prizes.credits) + " credits!", "Credits Awarded", FSkinProp.ICO_QUEST_GOLD);
             }
 
             if (prizes.hasIndividualCards()) {
@@ -230,7 +230,7 @@ public class QuestTournamentController {
     }
 
     private void updateSelectTournament() {
-        view.getLblCredits().setText("Credits: " + FModel.getQuest().getAssets().getCredits());
+        view.getLblCredits().setText("Credits: " + QuestUtil.formatCredits(FModel.getQuest().getAssets().getCredits()));
 
         final QuestAchievements achievements = FModel.getQuest().getAchievements();
         achievements.generateDrafts();
@@ -390,11 +390,11 @@ public class QuestTournamentController {
 
         final long creditsAvailable = FModel.getQuest().getAssets().getCredits();
         if (draftEvent.canEnter()) {
-            SOptionPane.showMessageDialog("You need " + (draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", SOptionPane.WARNING_ICON);
+            SOptionPane.showMessageDialog("You need " + QuestUtil.formatCredits(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", SOptionPane.WARNING_ICON);
             return;
         }
 
-        final boolean okayToEnter = SOptionPane.showOptionDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkinProp.ICO_QUEST_GOLD, ImmutableList.of("Yes", "No"), 1) == 0;
+        final boolean okayToEnter = SOptionPane.showOptionDialog("This tournament costs " + QuestUtil.formatCredits(draftEvent.getEntryFee()) + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkinProp.ICO_QUEST_GOLD, ImmutableList.of("Yes", "No"), 1) == 0;
 
         if (!okayToEnter) {
             return;

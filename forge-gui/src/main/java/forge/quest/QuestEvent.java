@@ -20,7 +20,6 @@ package forge.quest;
 import com.google.common.base.Function;
 
 import forge.deck.Deck;
-import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ import java.util.List;
  * MODEL - A basic event instance in Quest mode. Can be extended for use in
  * unique event types: battles, quests, and others.
  */
-public abstract class QuestEvent implements IHasIcon {
+public abstract class QuestEvent implements IQuestEvent {
     // Default vals if none provided in the event file.
     private Deck eventDeck = null;
     private String title = "Mystery Event";
@@ -53,7 +52,7 @@ public abstract class QuestEvent implements IHasIcon {
     };
     
     public final String getTitle() {
-        return this.title;
+        return title;
     }
 
     /**
@@ -64,57 +63,57 @@ public abstract class QuestEvent implements IHasIcon {
     }
 
     public final QuestEventDifficulty getDifficulty() {
-        return this.difficulty;
+        return difficulty;
     }
 
     public final String getDescription() {
-        return this.description;
+        return description;
     }
 
     public final Deck getEventDeck() {
-        return this.eventDeck;
+        return eventDeck;
     }
 
     @Override
     public final String getIconImageKey() {
-        return this.imageKey;
+        return imageKey;
     }
 
     public final String getName() {
-        return this.name;
+        return name;
     }
 
     public final String getProfile() {
-        return this.profile;
+        return profile;
     }
     
-    public void setProfile(final String profi) {
-        this.profile = profi;
+    public void setProfile(final String profile0) {
+        profile = profile0;
     }
 
     public void setName(final String name0) {
-        this.name = name0;
+        name = name0;
     }
 
     public void setTitle(final String title0) {
-        this.title = title0;
+        title = title0;
     }
 
     public void setDifficulty(final QuestEventDifficulty difficulty0) {
-        this.difficulty = difficulty0;
+        difficulty = difficulty0;
     }
 
     public void setDescription(final String description0) {
-        this.description = description0;
+        description = description0;
     }
 
     public void setEventDeck(final Deck eventDeck0) {
-        this.eventDeck = eventDeck0;
+        eventDeck = eventDeck0;
     }
 
     @Override
     public void setIconImageKey(final String s0) {
-        this.imageKey = s0;
+        imageKey = s0;
     }
 
     public final List<InventoryItem> getCardRewardList() {
@@ -122,13 +121,13 @@ public abstract class QuestEvent implements IHasIcon {
             return null;
         }
         if (cardRewardList == null) {
-            this.cardRewardList = new ArrayList<InventoryItem>(BoosterUtils.generateCardRewardList(cardReward));
+            cardRewardList = new ArrayList<InventoryItem>(BoosterUtils.generateCardRewardList(cardReward));
         }
-        return this.cardRewardList;
+        return cardRewardList;
     }
 
     public void setCardReward(final String cardReward0) {
-        this.cardReward = cardReward0;
+        cardReward = cardReward0;
     }
 
     public List<String> getHumanExtraCards() {
@@ -137,5 +136,20 @@ public abstract class QuestEvent implements IHasIcon {
 
     public List<String> getAiExtraCards() {
         return Collections.emptyList();
+    }
+
+    @Override
+    public final String getFullTitle() {
+        return title + " (" + difficulty.getTitle() + ")";
+    }
+
+    @Override
+    public void select() {
+        QuestUtil.setEvent(this);
+    }
+
+    @Override
+    public boolean hasImage() {
+        return true;
     }
 }
