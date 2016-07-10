@@ -3,14 +3,14 @@ ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile the top five cards of target player's library face down. You may look at those cards for as long as they remain exiled.
 SVar:TrigExile:AB$ Mill | Cost$ 0 | ValidTgts$ Player | NumCards$ 5 | Destination$ Exile | ExileFaceDown$ True | RememberMilled$ True | SubAbility$ DBMayLookAt
-SVar:DBMayLookAt:DB$ Effect | Name$ Jester's Scepter Effect | StaticAbilities$ SMayLookAt | Triggers$ TForget | SVars$ DBForget | RememberObjects$ Remembered | Duration$ Permanent
+SVar:DBMayLookAt:DB$ Effect | StaticAbilities$ SMayLookAt | Triggers$ TForget | SVars$ DBForget | RememberObjects$ Remembered | Duration$ Permanent
 SVar:SMayLookAt:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | EffectZone$ Command | MayLookAt$ True | Duration$ Permanent
 SVar:TForget:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
-A:AB$ Counter | Cost$ 2 T ExiledMoveToGrave<1/Card.IsRemembered/card exiled with CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Counter target spell if it has the same name as that card.
+A:AB$ Counter | Cost$ 2 T ExiledMoveToGrave<1/Card.IsRemembered+ExiledWithSource/card exiled with CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Counter target spell if it has the same name as that card.
 SVar:X:Targeted$Valid Card.sharesNameWith MovedToGrave
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jesters_scepter.jpg
