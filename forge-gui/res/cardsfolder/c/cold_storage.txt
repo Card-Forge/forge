@@ -2,7 +2,10 @@ Name:Cold Storage
 ManaCost:4
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SpellDescription$ Exile target creature you control.
-A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup | SpellDescription$ Return each creature card exiled with CARDNAME to the battlefield under your control.
+A:AB$ ChangeZoneAll | Cost$ Sac<1/CARDNAME> | ChangeType$ Card.Creature+IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup | SpellDescription$ Return each creature card exiled with CARDNAME to the battlefield under your control.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
