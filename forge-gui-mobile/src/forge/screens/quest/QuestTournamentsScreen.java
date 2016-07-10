@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.math.Vector2;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -19,6 +20,8 @@ import forge.quest.QuestTournamentController;
 import forge.quest.QuestDraftUtils.Mode;
 import forge.quest.data.QuestEventDraftContainer;
 import forge.screens.limited.DraftingProcessScreen;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
 
@@ -54,6 +57,18 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     public QuestTournamentsScreen() {
         super();
         controller = new QuestTournamentController(this);
+        btnSpendToken.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                controller.spendToken();
+            }
+        });
+        btnLeaveTournament.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                controller.endTournamentAndAwardPrizes();
+            }
+        });
         btnLeaveTournament.setVisible(false);
     }
 
@@ -143,6 +158,28 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 Forge.openScreen(new FDeckEditor(EditorType.QuestDraft, deck, isExistingDeck));
             }
         }
+    }
+
+    @Override
+    protected void startMatch() {
+        FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to handle alerts
+            @Override
+            public void run() {
+                switch (mode) {
+                case SELECT_TOURNAMENT:
+                    controller.startDraft();
+                    break;
+                case PREPARE_DECK:
+                    controller.startTournament();
+                    break;
+                case TOURNAMENT_ACTIVE:
+                    controller.startNextMatch();
+                    break;
+                default:
+                    break;
+                }
+            }
+        });
     }
 
     @Override
