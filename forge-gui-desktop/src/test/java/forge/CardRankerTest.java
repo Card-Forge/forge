@@ -37,10 +37,7 @@ public class CardRankerTest {
         PaperCard c1 = readCard("makindi_patrol.txt");
         list.add(c1);
 
-        List<Pair<Double, PaperCard>> ranked = ranker.rankCards(list);
-        for (Pair<Double, PaperCard> pair : ranked) {
-            System.out.println(pair.getKey().toString() + " " + pair.getValue().getName());
-        }
+        List<PaperCard> ranked = ranker.rankCards(list);
     }
 
     /**

@@ -5,6 +5,5 @@ PT:6/6
 K:Vigilance
 A:AB$ ChangeZone | Cost$Sac<2/Eldrazi.Scion> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate this ability only any time you could cast a sorcery.
 SVar:DiscardMe:1
-SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathless_behemoth.jpg
 Oracle:Vigilance\nSacrifice two Eldrazi Scions: Return Deathless Behemoth from your graveyard to your hand. Activate this ability only any time you could cast a sorcery.
