@@ -3,8 +3,15 @@ ManaCost:3
 Types:Legendary Artifact
 A:AB$ ChangeZone | Cost$ 1 T | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SpellDescription$ Exile target creature you control.
 A:AB$ ChangeZone | Cost$ 7 T | ValidTgts$ Creature.YouDontCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you don't control | RememberTargets$ True | IsCurse$ True | SpellDescription$ Exile target creature you don't control.
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Battlefield | Destination$ Battlefield | SubAbility$ DBCleanup
+
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ExcludedDestinations$ Graveyard | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helvault.jpg
