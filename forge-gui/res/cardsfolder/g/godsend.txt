@@ -7,10 +7,13 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.EquippedBy | ValidBlocker$ Creature | 
 SVar:TrigChooseAttackers:AB$ ChooseCard | Cost$ 0 | DefinedCards$ TriggeredAttackers | SubAbility$ DBExile
 SVar:TrigChooseBlockers:AB$ ChooseCard | Cost$ 0 | DefinedCards$ TriggeredBlockers | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
-S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith Remembered | Caster$ Opponent | Description$ Opponents can't cast cards with the same name as cards exiled with CARDNAME.
-# Clears remembered cards when entering the battlefield
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ StaticClear | Static$ True
-SVar:StaticClear:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith Remembered+ExiledWithSource | Caster$ Opponent | Description$ Opponents can't cast cards with the same name as cards exiled with CARDNAME.
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigForget | Static$ True | Secondary$ True | TriggerDescription$ Forget all remembered cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
 K:Equip 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godsend.jpg
 Oracle:Equipped creature gets +3/+3.\nWhenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.\nOpponents can't cast cards with the same name as cards exiled with Godsend.\nEquip {3}
