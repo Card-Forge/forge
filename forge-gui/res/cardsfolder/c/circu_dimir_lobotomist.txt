@@ -5,10 +5,15 @@ PT:2/3
 T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLibraryChoice | TriggerDescription$ Whenever you cast a blue spell, exile the top card of target library.
 T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLibraryChoice | TriggerDescription$ Whenever you cast a black spell, exile the top card of target library.
 SVar:TrigLibraryChoice:DB$ ChoosePlayer | Defined$ You | AILogic$ Curse | SubAbility$ ExileTop | ChoiceTitle$ Choose target library
-SVar:ExileTop:DB$ Mill | NumCards$ 1 | Defined$ ChosenPlayer | Destination$ Exile | RememberMilled$ True | StackDescription$ None
-S:Mode$ CantBeCast | ValidCard$ Card.nonLand+sharesNameWith Remembered | Caster$ Opponent | Description$ Your opponents can't cast nonland cards with the same name as a card exiled with CARDNAME.
-# Clears remembered cards when entering the battlefield
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ StaticClear | Static$ True
-SVar:StaticClear:DB$ Cleanup | ClearRemembered$ True
+SVar:ExileTop:DB$ Mill | NumCards$ 1 | Defined$ ChosenPlayer | Destination$ Exile | RememberMilled$ True | StackDescription$ None | SubAbility$ DBCleanupChosen
+
+SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True
+
+S:Mode$ CantBeCast | ValidCard$ Card.nonLand+sharesNameWith Remembered.ExiledWithSource | Caster$ Opponent | Description$ Your opponents can't cast nonland cards with the same name as a card exiled with CARDNAME.
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circu_dimir_lobotomist.jpg
 Oracle:Whenever you cast a blue spell, exile the top card of target library.\nWhenever you cast a black spell, exile the top card of target library.\nYour opponents can't cast nonland cards with the same name as a card exiled with Circu, Dimir Lobotomist.
