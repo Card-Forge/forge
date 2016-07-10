@@ -122,6 +122,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         }
     });
 
+    static {
+        statsScreen.addTournamentResultsLabels(tournamentsScreen);
+    }
+
     private static void setCurrentScreen(FScreen screen0) {
         //make it so pressing Back from any screen besides Duels screen always goes to Duels screen
         //and make it so Duels screen always goes back to screen that launched Quest mode

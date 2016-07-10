@@ -11,7 +11,6 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
 import forge.deck.FDeckEditor.EditorType;
-import forge.interfaces.IButton;
 import forge.limited.BoosterDraft;
 import forge.model.FModel;
 import forge.quest.IQuestTournamentView;
@@ -19,12 +18,8 @@ import forge.quest.QuestEventDraft;
 import forge.quest.QuestTournamentController;
 import forge.quest.QuestDraftUtils.Mode;
 import forge.quest.data.QuestEventDraftContainer;
-import forge.screens.FScreen;
 import forge.screens.limited.DraftingProcessScreen;
-import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FScrollPane;
 import forge.util.Utils;
 
 public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestTournamentView {
@@ -46,7 +41,12 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     private final FLabel btnLeaveTournament = add(new FLabel.ButtonBuilder().text("Leave Tournament").build());
     private final FLabel btnSpendToken = add(new FLabel.ButtonBuilder().text("Spend Token").build());
 
-    private final ResultsScreen resultsScreen = new ResultsScreen();
+    private static final FSkinFont RESULTS_FONT = FSkinFont.get(15);
+    private static final Vector2 RESULTS_INSETS = new Vector2(2 * PADDING, 0);
+    private final FLabel lblFirst = new FLabel.Builder().font(RESULTS_FONT).insets(RESULTS_INSETS).build();
+    private final FLabel lblSecond = new FLabel.Builder().font(RESULTS_FONT).insets(RESULTS_INSETS).build();
+    private final FLabel lblThird = new FLabel.Builder().font(RESULTS_FONT).insets(RESULTS_INSETS).build();
+    private final FLabel lblFourth = new FLabel.Builder().font(RESULTS_FONT).insets(RESULTS_INSETS).build();
 
     private final QuestTournamentController controller;
     private Mode mode = Mode.SELECT_TOURNAMENT;
@@ -108,11 +108,6 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     }
 
     @Override
-    public IButton getLblCredits() {
-        return lblCredits;
-    }
-
-    @Override
     public void updateEventList(QuestEventDraftContainer events) {
         pnlTournaments.clear();
 
@@ -151,76 +146,42 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     }
 
     @Override
-    public IButton getLblFirst() {
-        return resultsScreen.lblFirst;
+    public FLabel getLblCredits() {
+        return lblCredits;
     }
 
     @Override
-    public IButton getLblSecond() {
-        return resultsScreen.lblSecond;
+    public FLabel getLblFirst() {
+        return lblFirst;
     }
 
     @Override
-    public IButton getLblThird() {
-        return resultsScreen.lblThird;
+    public FLabel getLblSecond() {
+        return lblSecond;
     }
 
     @Override
-    public IButton getLblFourth() {
-        return resultsScreen.lblFourth;
+    public FLabel getLblThird() {
+        return lblThird;
     }
 
     @Override
-    public IButton getLblTokens() {
+    public FLabel getLblFourth() {
+        return lblFourth;
+    }
+
+    @Override
+    public FLabel getLblTokens() {
         return lblTokens;
     }
 
     @Override
-    public IButton getBtnSpendToken() {
+    public FLabel getBtnSpendToken() {
         return btnSpendToken;
     }
 
     @Override
-    public IButton getBtnLeaveTournament() {
+    public FLabel getBtnLeaveTournament() {
         return btnLeaveTournament;
-    }
-
-    private static class ResultsScreen extends FScreen {
-        private static final float PADDING = FOptionPane.PADDING;
-
-        private final FScrollPane scroller = add(new FScrollPane() {
-            @Override
-            protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-                float x = PADDING;
-                float y = PADDING;
-                float w = visibleWidth - 2 * PADDING;
-                float h = lblFirst.getAutoSizeBounds().height;
-                for (FDisplayObject lbl : getChildren()) {
-                    if (lbl.isVisible()) {
-                        lbl.setBounds(x, y, w, lbl.getHeight() == 0 ? h : lbl.getHeight()); //respect height override if set
-                        y += lbl.getHeight() + PADDING;
-                    }
-                }
-                return new ScrollBounds(visibleWidth, y);
-            }
-        });
-
-        private final FLabel lblFirst = new FLabel.Builder().font(FSkinFont.get(15)).build();
-        private final FLabel lblSecond = new FLabel.Builder().font(FSkinFont.get(15)).build();
-        private final FLabel lblThird = new FLabel.Builder().font(FSkinFont.get(15)).build();
-        private final FLabel lblFourth = new FLabel.Builder().font(FSkinFont.get(15)).build();
-
-        private ResultsScreen() {
-            super("Past Results");
-        }
-
-        @Override
-        public void onActivate() {
-        }
-
-        @Override
-        protected void doLayout(float startY, float width, float height) {
-            scroller.setBounds(0, startY, width, height - startY);
-        }
     }
 }

@@ -131,6 +131,14 @@ public class QuestStatsScreen extends FScreen {
         });
     }
 
+    void addTournamentResultsLabels(QuestTournamentsScreen tournamentsScreen) {
+        scroller.add(new FLabel.Builder().font(FSkinFont.get(16)).text("Tournament Results").build());
+        scroller.add(tournamentsScreen.getLblFirst());
+        scroller.add(tournamentsScreen.getLblSecond());
+        scroller.add(tournamentsScreen.getLblThird());
+        scroller.add(tournamentsScreen.getLblFourth());
+    }
+
     @Override
     public void onActivate() {
         update();
