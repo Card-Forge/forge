@@ -1618,20 +1618,27 @@ public class AbilityUtils {
                 for (final byte c : MagicColor.WUBRG) {
                     final String colorLowerCase = MagicColor.toLongString(c).toLowerCase(),
                             colorCaptCase = StringUtils.capitalize(MagicColor.toLongString(c));
+                    // Color should not replace itself.
+                    if (e.getValue().equalsIgnoreCase(colorLowerCase)) {
+                        continue;
+                	}
                     value = getReplacedText(colorLowerCase, e.getValue(), isDescriptive);
-                    replaced = replaced.replace(colorLowerCase, value.toLowerCase());
+                    replaced = replaced.replaceAll("(?<!>)" + colorLowerCase, value.toLowerCase());
                     value = getReplacedText(colorCaptCase, e.getValue(), isDescriptive);
-                    replaced = replaced.replace(colorCaptCase, StringUtils.capitalize(value));
+                    replaced = replaced.replaceAll("(?<!>)" + colorCaptCase, StringUtils.capitalize(value));
                 }
             } else {
                 value = getReplacedText(key, e.getValue(), isDescriptive);
-                replaced = replaced.replace(key, value);
+                replaced = replaced.replaceAll("(?<!>)" + key, value);
             }
         }
         for (final Entry<String, String> e : card.getChangedTextTypeWords().entrySet()) {
             final String key = e.getKey();
+            final String pkey = CardUtil.getPluralType(key);
+            final String pvalue = getReplacedText(pkey, CardUtil.getPluralType(e.getValue()), isDescriptive);
+            replaced = replaced.replaceAll("(?<!>)" + pkey, pvalue);
             final String value = getReplacedText(key, e.getValue(), isDescriptive);
-            replaced = replaced.replace(key, value);
+            replaced = replaced.replaceAll("(?<!>)" + key, value);
         }
         return replaced;
     }
