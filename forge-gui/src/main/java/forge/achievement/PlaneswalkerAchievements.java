@@ -71,6 +71,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Liliana of the Dark Realms", "Liliana's Ritual", "What do you mean, \"out of character\"?");
         add("Liliana of the Veil", "Liliana's Choice", "Which one of your children do you love best?");
         add("Liliana, Defiant Necromancer", "Liliana's Necromastery", "Come join the Dark Side...");
+        add("Liliana, the Last Hope", "Liliana's Army", "The dead will always outnumber the living...");
         add("Nahiri, the Harbinger", "Nahiri's Mystery Guest", "This should be your cue to run.");
         add("Nahiri, the Lithomancer", "Nahiri's Gift", "I pulled it out! Now I'm a king!");
         add("Narset Transcendent", "Narset's One Rule", "No spells for you!");
@@ -90,6 +91,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Sorin, Grim Nemesis", "Sorin's Vampire Army", "Taste the might of my blood relatives!");
         add("Sorin, Lord of Innistrad", "Sorin's Recruitment", "My favorite game is Shogi!");
         add("Sorin, Solemn Visitor", "Sorin's Abyss", "Don't get so close to the edge!");
+        add("Tamiyo, Field Researcher", "Tamiyo's Omniscience", "I know exactly how your story ends...");
         add("Tamiyo, the Moon Sage", "Tamiyo's Recycling", "Wash, rinse, repeat!");
         add("Teferi, Temporal Archmage", "Teferi's Time Slip", "Let's speed this up a bit!");
         add("Tezzeret the Seeker", "Tezzeret's Robots", "You can't stop the progress!");
