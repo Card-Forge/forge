@@ -1,16 +1,12 @@
 package forge.limited;
 
-import java.awt.print.Paper;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -62,13 +58,14 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     private final List<PaperCard> aiPlayables;
     private final List<PaperCard> deckList = new ArrayList<PaperCard>();
     private final List<String> setsWithBasicLands = new ArrayList<String>();
-    // Views for aiPlayable
 
-    protected CardRanker ranker = new CardRanker();
+    private CardRanker ranker = new CardRanker();
+
+    // Views for aiPlayable
     private Iterable<PaperCard> onColorCreatures;
     private Iterable<PaperCard> onColorNonCreatures;
 
-    private static final boolean logToConsole = true;
+    private static final boolean logToConsole = false;
 
     /**
      *
@@ -88,7 +85,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         // remove Unplayables
         final Iterable<PaperCard> playables = Iterables.filter(availableList,
                 Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES));
-        this.aiPlayables = this.ranker.rankCards(playables);
+        this.aiPlayables = this.ranker.rankCardsInDeck(playables);
         this.availableList.removeAll(aiPlayables);
 
         findBasicLandSets();

@@ -2,8 +2,7 @@ package forge.limited;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import forge.card.CardRulesPredicates;
-import forge.card.DeckHints;
+import forge.card.*;
 import forge.item.PaperCard;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -14,24 +13,29 @@ import java.util.Map;
 
 public class CardRanker {
 
+    private static final double SCORE_UNPICKABLE = -100.0;
+
     /**
      * Rank cards.
      *
      * @param cards PaperCards to rank
      * @return List of beans with card rankings
      */
-    public List<PaperCard> rankCards(final Iterable<PaperCard> cards) {
+    public List<PaperCard> rankCardsInDeck(final Iterable<PaperCard> cards) {
         List<Pair<Double, PaperCard>> cardScores = getScores(cards);
 
-        Collections.sort(cardScores, Collections.reverseOrder(new CardRankingComparator()));
+        return sortAndCreateList(cardScores);
+    }
 
-        List<PaperCard> rankedCards = new ArrayList<>(cardScores.size());
-        for (Pair<Double, PaperCard> pair : cardScores) {
-            System.out.println(pair.getKey().toString() + " " + pair.getValue().getName());
-            rankedCards.add(pair.getValue());
-        }
+    public List<PaperCard> rankCardsInPack(
+            final Iterable<PaperCard> cardsInPack,
+            final List<PaperCard> deck,
+            ColorSet chosenColors,
+            boolean canAddMoreColors
+    ) {
+        List<Pair<Double, PaperCard>> cardScores = getScoresForPack(cardsInPack, deck, chosenColors, canAddMoreColors);
 
-        return rankedCards;
+        return sortAndCreateList(cardScores);
     }
 
     private List<Pair<Double, PaperCard>> getScores(Iterable<PaperCard> cards) {
@@ -42,14 +46,15 @@ public class CardRanker {
             cache.add(card);
         }
 
-        String customRankings = IBoosterDraft.CUSTOM_RANKINGS_FILE[0];
         for (int i = 0; i < cache.size(); i++) {
             final PaperCard card = cache.get(i);
 
-            double score = getRawScore(card, customRankings);
+            double score = getRawScore(card);
+            if (card.getRules().getAiHints().getRemAIDecks()) {
+                score -= 20.0;
+            }
 
-            List<PaperCard> otherCards = getCardsExcept(cache, i);
-
+            List<PaperCard> otherCards = getCardsExceptOne(cache, i);
             score += calculateSynergies(card, otherCards);
 
             cardScores.add(Pair.of(score, card));
@@ -58,28 +63,58 @@ public class CardRanker {
         return cardScores;
     }
 
-    private double getRawScore(PaperCard card, String customRankings) {
-        Double rkg;
-        if (customRankings != null) {
-            rkg = DraftRankCache.getCustomRanking(customRankings, card.getName());
-            if (rkg == null) {
-                // try the default rankings if custom rankings contain no entry
-                rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
+    private List<Pair<Double, PaperCard>> getScoresForPack(
+            Iterable<PaperCard> cardsInPack,
+            List<PaperCard> deck,
+            ColorSet chosenColors,
+            boolean canAddMoreColors
+    ) {
+        List<Pair<Double, PaperCard>> cardScores = new ArrayList<>();
+
+        for (PaperCard card : cardsInPack) {
+            double score = getRawScore(card);
+            if (card.getRules().getAiHints().getRemAIDecks()) {
+                score -= 20.0;
             }
-        } else {
-            rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
+            if( !canAddMoreColors && !card.getRules().getManaCost().canBePaidWithAvaliable(chosenColors.getColor())) {
+                score -= 50.0;
+            }
+
+            score += calculateSynergies(card, deck);
+
+            cardScores.add(Pair.of(score, card));
         }
 
-        double rawScore;
-        if (rkg != null) {
-            rawScore = 100 - (100 * rkg);
+        return cardScores;
+    }
+
+    private double getRawScore(PaperCard card) {
+        Double rawScore;
+        if (MagicColor.Constant.BASIC_LANDS.contains(card.getName())) {
+            rawScore = SCORE_UNPICKABLE;
         } else {
-            rawScore = 0.0;
+            Double rkg;
+            String customRankings = IBoosterDraft.CUSTOM_RANKINGS_FILE[0];
+            if (customRankings != null) {
+                rkg = DraftRankCache.getCustomRanking(customRankings, card.getName());
+                if (rkg == null) {
+                    // try the default rankings if custom rankings contain no entry
+                    rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
+                }
+            } else {
+                rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
+            }
+
+            if (rkg != null) {
+                rawScore = 100 - (100 * rkg);
+            } else {
+                rawScore = SCORE_UNPICKABLE;
+            }
         }
         return rawScore;
     }
 
-    private List<PaperCard> getCardsExcept(List<PaperCard> cache, int i) {
+    private List<PaperCard> getCardsExceptOne(List<PaperCard> cache, int i) {
         List<PaperCard> otherCards = new ArrayList<>();
         otherCards.addAll(cache.subList(0, i));
         if (i + 1 < cache.size()) {
@@ -102,7 +137,9 @@ public class CardRanker {
         final DeckHints hints = card.getRules().getAiHints().getDeckHints();
         if (hints != null && hints.getType() != DeckHints.Type.NONE) {
             final List<PaperCard> comboCards = hints.filter(otherCards);
-            score = comboCards.size() * 10;
+            if (comboCards.size() > 0) {
+                score = comboCards.size() * 10;
+            }
         }
         return score;
     }
@@ -115,9 +152,22 @@ public class CardRanker {
                 String buff = var.getValue();
                 final Iterable<PaperCard> buffers = Iterables.filter(otherCards,
                         Predicates.compose(CardRulesPredicates.subType(buff), PaperCard.FN_GET_RULES));
-                matchBuffScore = Iterables.size(buffers) * 3;
+                if (Iterables.size(buffers) > 0) {
+                    matchBuffScore = Iterables.size(buffers) * 3;
+                }
             }
         }
         return matchBuffScore;
+    }
+
+    private List<PaperCard> sortAndCreateList(List<Pair<Double, PaperCard>> cardScores) {
+        Collections.sort(cardScores, Collections.reverseOrder(new CardRankingComparator()));
+
+        List<PaperCard> rankedCards = new ArrayList<>(cardScores.size());
+        for (Pair<Double, PaperCard> pair : cardScores) {
+            rankedCards.add(pair.getValue());
+        }
+
+        return rankedCards;
     }
 }

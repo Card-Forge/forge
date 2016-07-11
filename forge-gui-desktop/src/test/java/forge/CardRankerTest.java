@@ -2,17 +2,14 @@ package forge;
 
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.card.DeckHints;
 import forge.item.PaperCard;
 import forge.limited.CardRanker;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
-import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.awt.print.Paper;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +29,16 @@ public class CardRankerTest {
         Assert.assertEquals("Hero of Goma Fada", cp.getName());
 
         List<PaperCard> list = new ArrayList<PaperCard>();
-        PaperCard c0 = readCard("hero_of_goma_fada.txt");
+        PaperCard c0 = readCard("makindi_patrol.txt");
         list.add(c0);
-        PaperCard c1 = readCard("makindi_patrol.txt");
+        PaperCard c1 = readCard("hero_of_goma_fada.txt");
         list.add(c1);
+        PaperCard c2 = readCard("altars_reap.txt");
+        list.add(c2);
+        PaperCard c3 = readCard("plains.txt");
+        list.add(c3);
 
-        List<PaperCard> ranked = ranker.rankCards(list);
+        List<PaperCard> ranked = ranker.rankCardsInDeck(list);
     }
 
     /**
