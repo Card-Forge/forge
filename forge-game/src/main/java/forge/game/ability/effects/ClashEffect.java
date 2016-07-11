@@ -39,6 +39,10 @@ public class ClashEffect extends SpellAbilityEffect {
             if (sa.hasParam("WinSubAbility")) {
                 final SpellAbility win = AbilityFactory.getAbility(
                         sa.getHostCard().getSVar(sa.getParam("WinSubAbility")), sa.getHostCard());
+                if (sa.isIntrinsic()) {
+                    win.setIntrinsic(true);
+                    win.changeText();
+                }
                 win.setActivatingPlayer(sa.getHostCard().getController());
                 ((AbilitySub) win).setParent(sa);
 
@@ -49,6 +53,10 @@ public class ClashEffect extends SpellAbilityEffect {
             if (sa.hasParam("OtherwiseSubAbility")) {
                 final SpellAbility otherwise = AbilityFactory.getAbility(
                         sa.getHostCard().getSVar(sa.getParam("OtherwiseSubAbility")), sa.getHostCard());
+                if (sa.isIntrinsic()) {
+                	otherwise.setIntrinsic(true);
+                	otherwise.changeText();
+                }
                 otherwise.setActivatingPlayer(sa.getHostCard().getController());
                 ((AbilitySub) otherwise).setParent(sa);
 

@@ -37,6 +37,12 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         // setup subability to repeat
         final SpellAbility repeat = AbilityFactory.getAbility(sa.getSVar(sa.getParam("RepeatSubAbility")), source);
+
+        if (sa.isIntrinsic()) {
+            repeat.setIntrinsic(true);
+            repeat.changeText();
+        }
+
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
 

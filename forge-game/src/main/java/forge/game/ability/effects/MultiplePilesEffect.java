@@ -105,6 +105,10 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
                 }
             }
             final SpellAbility action = AbilityFactory.getAbility(source.getSVar(sa.getParam("ChosenPile")), source);
+            if (sa.isIntrinsic()) {
+                action.setIntrinsic(true);
+                action.changeText();
+            }
             action.setActivatingPlayer(sa.getActivatingPlayer());
             ((AbilitySub) action).setParent(sa);
             AbilityUtils.resolve(action);

@@ -21,8 +21,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.collect.Iterables;
+import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
@@ -66,15 +70,12 @@ public class TokenEffect extends SpellAbilityEffect {
     private String[] tokenHiddenKeywords;
 
     private void readParameters(final SpellAbility mapParams) {
-    	final SpellAbility root = mapParams.getRootAbility();
         String image;
         String[] keywords;
-
+        
         if (mapParams.hasParam("TokenKeywords")) {
             // TODO: Change this Split to a semicolon or something else
-        	String tokenKeywords = mapParams.getParam("TokenKeywords");
-        	tokenKeywords = AbilityUtils.applyAbilityTextChangeEffects(tokenKeywords, root);
-            keywords = tokenKeywords.split("<>");
+            keywords = mapParams.getParam("TokenKeywords").split("<>");
         } else {
             keywords = new String[0];
         }
@@ -126,18 +127,19 @@ public class TokenEffect extends SpellAbilityEffect {
         this.tokenPower = mapParams.getParam("TokenPower");
         this.tokenToughness = mapParams.getParam("TokenToughness");
 
-        this.tokenOriginalName = mapParams.getParam("TokenName");
-        this.tokenName = AbilityUtils.applyAbilityTextChangeEffects(this.tokenOriginalName, root);
+        this.tokenOriginalTypes = mapParams.getOriginalMapParams().get("TokenTypes").split(",");
+        this.tokenTypes = mapParams.getParam("TokenTypes").split(",");
 
-        String types = mapParams.getParam("TokenTypes");
-        this.tokenOriginalTypes = types.split(",");
-        types = AbilityUtils.applyAbilityTextChangeEffects(types, root);
-        this.tokenTypes = types.split(",");
+        if (mapParams.hasParam("TokenName")) {
+            this.tokenOriginalName = mapParams.getOriginalMapParams().get("TokenName");
+            this.tokenName = mapParams.getParam("TokenName");
+        } else {
+        	this.tokenOriginalName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenOriginalTypes)).getSubtypes(), " ");
+        	this.tokenName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenTypes)).getSubtypes(), " ");
+        }
 
-        String colors = mapParams.getParam("TokenColors");
-        this.tokenOriginalColors = colors.split(",");
-        colors = AbilityUtils.applyAbilityTextChangeEffects(colors, root);
-        this.tokenColors = colors.split(",");
+        this.tokenOriginalColors = mapParams.getOriginalMapParams().get("TokenColors").split(",");
+        this.tokenColors = mapParams.getParam("TokenColors").split(",");
 
         this.tokenKeywords = keywords;
         this.tokenImage = image;
