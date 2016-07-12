@@ -1,7 +1,7 @@
 Name:Last Stand
 ManaCost:W U B R G
 Types:Sorcery
-A:SP$ LoseLife | Cost$ W U B R G | Defined$ Opponent | LifeAmount$ SwampsYouControl | SubAbility$ DBDamageMountain | References$ SwampsYouControl | SpellDescription$ Target opponent loses 2 life for each Swamp you control. CARDNAME deals damage equal to the number of Mountains you control to target creature. Put a 1/1 green Saproling creature token onto the battlefield for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
+A:SP$ LoseLife | Cost$ W U B R G | Defined$ Opponent | LifeAmount$ SwampsYouControl | SubAbility$ DBDamageMountain | References$ SwampsYouControl | SpellDescription$ Target opponent loses 2 life for each Swamp you control. CARDNAME deals damage to target creature equal to the number of Mountains you control. Put a 1/1 green Saproling creature token onto the battlefield for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
 SVar:DBDamageMountain:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ MountainsYouControl | References$ MountainsYouControl | SubAbility$ DBTokenForest
 SVar:DBTokenForest:DB$Token | TokenAmount$ ForestsYouControl | References$ ForestsYouControl | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ DBGainLifePlains
 SVar:DBGainLifePlains:DB$GainLife | Defined$ You | LifeAmount$ PlainsYouControl | References$ PlainsYouControl | SubAbility$ DBDrawCardIsland
@@ -14,4 +14,4 @@ SVar:PlainsYouControl:Count$TypeYouCtrl.Plains/Times.2
 SVar:IslandsYouControl:Count$TypeYouCtrl.Island
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_stand.jpg
-Oracle:Target opponent loses 2 life for each Swamp you control. Last Stand deals damage equal to the number of Mountains you control to target creature. Put a 1/1 green Saproling creature token onto the battlefield for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
+Oracle:Target opponent loses 2 life for each Swamp you control. Last Stand deals damage to target creature equal to the number of Mountains you control. Put a 1/1 green Saproling creature token onto the battlefield for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.

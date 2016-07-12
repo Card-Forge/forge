@@ -1,8 +1,9 @@
 Name:Winter Orb
 ManaCost:2
 Types:Artifact
-S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Land:1 | Description$ Players can't untap more than one land during their untap steps.
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Land:1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, players can't untap more than one land during their untap steps.
+SVar:X:Count$Valid Card.Self+untapped
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_orb.jpg
-Oracle:Players can't untap more than one land during their untap steps.
+Oracle:As long as Winter Orb is untapped, players can't untap more than one land during their untap steps.

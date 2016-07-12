@@ -1,9 +1,9 @@
 Name:Akoum
 ManaCost:no cost
 Types:Plane Zendikar
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Enchantment | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ Players may cast enchantment cards as though they had flash.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Enchantment | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ Players may cast enchantment spells as though they had flash.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, destroy target creature that isn't enchanted.
 SVar:RolledChaos:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature.unenchanted | TgtPrompt$ Select target creature that isn't enchanted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | OppHasCreatureInPlay$ True | RollInMain1$ True
-Oracle:Players may cast enchantment cards as though they had flash.\nWhenever you roll {CHAOS}, destroy target creature that isn't enchanted.
+Oracle:Players may cast enchantment spells as though they had flash.\nWhenever you roll {CHAOS}, destroy target creature that isn't enchanted.

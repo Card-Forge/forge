@@ -2,11 +2,11 @@ Name:Enigma Sphinx Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/+5
-T:Mode$ SpellCast | ValidCard$ Artifact.nonColorless | ValidActivatingPlayer$ You | CheckSVar$ NumColoredCast | SVarCompare$ EQ1 | Execute$ TrigSearch | NoResolvingCheck$ True | TriggerZones$ Command | TriggerDescription$ Whenever you cast a colored artifact spell for the first time in a turn, search your library for a colored artifact card chosen at random whose converted mana cost is less than that spell's converted mana cost. You may play that card without paying its mana cost. If you don't, put that card on the bottom of your library.
+T:Mode$ SpellCast | ValidCard$ Artifact.nonColorless | ValidActivatingPlayer$ You | CheckSVar$ NumColoredCast | SVarCompare$ EQ1 | Execute$ TrigSearch | NoResolvingCheck$ True | TriggerZones$ Command | TriggerDescription$ Whenever you cast a colored artifact spell for the first time each turn, search your library for a colored artifact card chosen at random whose converted mana cost is less than that spell's converted mana cost. You may play that card without paying its mana cost. If you don't, put that card on the bottom of your library.
 SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | AtRandom$ True | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | ChangeType$ Artifact.nonColorless+cmcLTX | ChangeNum$ 1 | References$ X | RememberChanged$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumColoredCast:Count$ThisTurnCast_Artifact.nonColorless+YouCtrl
 SVar:X:Count$TriggeredCardManaCost
 SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Enigma Sphinx Avatar.full.jpg
-Oracle:Hand +0, life +5\nWhenever you cast a colored artifact spell for the first time in a turn, search your library for a colored artifact card chosen at random whose converted mana cost is less than that spell's converted mana cost. You may play that card without paying its mana cost. If you don't, put that card on the bottom of your library.
+Oracle:Hand +0, life +5\nWhenever you cast a colored artifact spell for the first time each turn, search your library for a colored artifact card chosen at random whose converted mana cost is less than that spell's converted mana cost. You may play that card without paying its mana cost. If you don't, put that card on the bottom of your library.

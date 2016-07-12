@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 K:Haste
-S:Mode$ Continuous | Affected$ Sorcery.YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ You may cast sorcery cards as though they had flash.
+S:Mode$ Continuous | Affected$ Sorcery.YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ You may cast sorcery spells as though they had flash.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hypersonic_dragon.jpg
-Oracle:Flying, haste\nYou may cast sorcery cards as though they had flash. (You may cast them any time you could cast an instant.)
+Oracle:Flying, haste\nYou may cast sorcery spells as though they had flash. (You may cast them any time you could cast an instant.)

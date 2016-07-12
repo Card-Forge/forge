@@ -1,8 +1,8 @@
 Name:Vernal Equinox
 ManaCost:3 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.nonToken,Enchantment.nonToken | AffectedZone$ Exile,Graveyard,Hand,Library,Command | AddHiddenKeyword$ Flash | Description$ Any player may cast creature and enchantment cards as though they had flash.
+S:Mode$ Continuous | Affected$ Creature.nonToken,Enchantment.nonToken | AffectedZone$ Exile,Graveyard,Hand,Library,Command | AddHiddenKeyword$ Flash | Description$ Any player may cast creature and enchantment spells as though they had flash.
 SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vernal_equinox.jpg
-Oracle:Any player may cast creature and enchantment cards as though they had flash.
+Oracle:Any player may cast creature and enchantment spells as though they had flash.

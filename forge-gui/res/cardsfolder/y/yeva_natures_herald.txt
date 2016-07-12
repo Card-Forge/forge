@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Legendary Creature Elf Shaman
 PT:4/4
 K:Flash
-S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl+nonToken | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library,Command | Description$ You may cast green creature cards as though they had flash.
+S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl+nonToken | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library,Command | Description$ You may cast green creature spells as though they had flash.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yeva_natures_herald.jpg
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nYou may cast green creature cards as though they had flash.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nYou may cast green creature spells as though they had flash.

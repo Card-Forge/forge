@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | ValidCard$ Creature.nonToken | Origin$ Battlefield | Desti
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Graveyard | Defined$ Imprinted | ChangeNum$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | ChangeNum$ 1
-A:AB$ CopyPermanent | Cost$ 3 T | Defined$ Imprinted.ExiledWithSource | Keywords$ Haste | AddSVars$ SneakAttackEOT | AtEOT$ Exile | SpellDescription$ Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+A:AB$ CopyPermanent | Cost$ 3 T | Defined$ Imprinted.ExiledWithSource | Keywords$ Haste | AddSVars$ SneakAttackEOT | AtEOT$ Exile | SpellDescription$ Put a token onto the battlefield that's a copy of a card exiled with CARDNAME. It gains haste. Exile it at the beginning of the next end step.
 
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
@@ -16,4 +16,4 @@ SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mimic_vat.jpg
-Oracle:Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.\n{3}, {T}: Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+Oracle:Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.\n{3}, {T}: Put a token onto the battlefield that's a copy of a card exiled with Mimic Vat. It gains haste. Exile it at the beginning of the next end step.
