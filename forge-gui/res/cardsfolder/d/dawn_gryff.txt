@@ -1,0 +1,7 @@
+Name:Dawn Gryff
+ManaCost:2 W
+Types:Creature Hippogriff
+PT:2/2
+K:Flying
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dawn_gryff.jpg
+Oracle:Flying 

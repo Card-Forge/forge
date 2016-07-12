@@ -1,0 +1,6 @@
+Name:Unsubstantiate
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature,Card.inZoneStack | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell or creature to its owner's hand.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unsubstantiate.jpg
+Oracle:Return target spell or creature to its owner's hand. 

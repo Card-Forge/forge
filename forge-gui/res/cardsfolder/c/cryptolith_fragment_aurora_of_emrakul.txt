@@ -1,0 +1,26 @@
+Name:Cryptolith Fragment
+ManaCost:3
+Types:Artifact
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBPain | SpellDescription$ Add one mana of any color to your mana pool. Each player loses one life.
+SVar:DBPain:DB$ LoseLife | LifeAmount$ 1 | Defined$ Player
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LE10 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if each player has ten or less life, transform CARDNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:X:PlayerCountPlayers$HighestLifeTotal
+AlternateMode:DoubleFaced
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptolith_fragment.jpg
+Oracle:Cryptolith Fragment enters the battlefield tapped.\n{T}: Add one mana of any color to your mana pool. Each player loses one life.\nAt the beginning of your upkeep, if each player has ten or less life, transform Cryptolith Fragment.
+
+ALTERNATE
+
+Name:Aurora of Emrakul
+ManaCost:no cost
+Types:Creature Eldrazi Reflection
+PT:1/4
+K:Flying
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME attacks, each opponent loses 3 life.
+SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 3
+SVar:HasAttackEffect:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aurora_of_emrakul.jpg
+Oracle:Flying, Deathtouch.\nWhenever Aurora of Emrakul attacks, each opponent loses 3 life.

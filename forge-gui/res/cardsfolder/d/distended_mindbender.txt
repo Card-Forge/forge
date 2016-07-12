@@ -1,0 +1,13 @@
+Name:Distended Mindbender
+ManaCost:8
+Types:Creature Eldrazi Insect
+PT:8/8
+K:Emerge 5 B B
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When you cast CARDNAME, target opponent reveals his or her hand. You choose from it a nonland card with converted mana cost 3 or less and a card with converted mana cost 4 or greater. That player discards those cards.
+SVar:TrigReveal:AB$ RevealHand | Cost$ 0 | TgtPrompt$ Select an opponent | ValidTgts$ Opponent | RememberRevealed$ True | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Card.IsRemembered+cmcLE3+nonLand | ChoiceZone$ Hand | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose a nonland card with converted mana cost 3 or less | ForgetChosen$ True | SubAbility$ DBChoose2
+SVar:DBChoose2:DB$ ChooseCard | Defined$ You | Choices$ Card.IsRemembered+cmcGE4 | ChoiceZone$ Hand | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose a card with converted mana cost 4 or greater | ForgetChosen$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ NotRemembered | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/distended_mindbender.jpg
+Oracle:Emerge {5}{B}{B} (You may cast this spell by sacrificing a creature and paying the emerge cost, reduced by that creature's converted mana cost.)\nWhen you cast Distended Mindbender, target opponent reveals his or her hand. You choose from it a nonland card with converted mana cost 3 or less and a card with converted mana cost 4 or greater. That player discards those cards.
