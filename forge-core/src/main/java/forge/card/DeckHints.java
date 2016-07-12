@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.item.PaperCard;
 import forge.util.PredicateString.StringOp;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +23,7 @@ public class DeckHints {
     /**
      * Enum of types of DeckHints.
      */
-    public enum Type {
+    private enum Type {
 
         /** The Color. */
         COLOR,
@@ -36,84 +37,98 @@ public class DeckHints {
         NONE
     }
 
-    private Type type = Type.NONE;
-    private String filterParam = null;
+    private boolean valid = false;
+    private List<Pair<Type, String>> filters = null;
 
     /**
      * Construct a DeckHints from the SVar string.
      * 
-     * @param wants
+     * @param hints
      *            SVar for DeckHints
      */
-    public DeckHints(String wants) {
-        String[] pieces = wants.split("\\$");
+    public DeckHints(String hints) {
+        String[] pieces = hints.split("\\&");
+        if (pieces.length > 0) {
+            for (String piece : pieces) {
+                Pair<Type, String> pair = parseHint(piece.trim());
+                if (pair != null) {
+                    if (filters == null) {
+                        filters = new ArrayList<>();
+                    }
+                    filters.add(pair);
+                    valid = true;
+                }
+            }
+        }
+    }
+
+    private Pair<Type, String> parseHint(String hint) {
+        Pair<Type, String> pair = null;
+        String[] pieces = hint.split("\\$");
         if (pieces.length == 2) {
             try {
                 Type typeValue = Type.valueOf(pieces[0].toUpperCase());
                 for (Type t : Type.values()) {
                     if (typeValue == t) {
-                        type = t;
+                        pair = Pair.of(t, pieces[1]);
                         break;
                     }
                 }
             } catch (IllegalArgumentException e) {
-                // type will remain NONE
+                // will remain null
             }
-
-            filterParam = pieces[1];
         }
+        return pair;
+    }
+
+    public boolean isValid() {
+        return valid;
     }
 
     /**
-     * @return the type
-     */
-    public Type getType() {
-        return type;
-    }
-
-    /**
-     * Returns a list of Cards from the given List<Card> that match this
+     * Returns a list of Cards from the given List<PaperCard> that match this
      * DeckHints. I.e., other cards that this Card needs in its deck.
      * 
      * @param cardList
      *            list of cards to be filtered
-     * @return List<Card> of Cards that match this DeckHints.
+     * @return List<PaperCard> of Cards that match this DeckHints.
      */
     public List<PaperCard> filter(Iterable<PaperCard> cardList) {
-        List<PaperCard> ret;
-        switch (type) {
-        case TYPE:
-            ret = new ArrayList<PaperCard>();
-            String[] types = filterParam.split("\\|");
-            for (String type : types) {
-                addMatchingItems(ret, cardList, CardRulesPredicates.subType(type), PaperCard.FN_GET_RULES);
+        List<PaperCard> ret = new ArrayList<>();
+        for (Pair<Type, String> pair : filters) {
+            Type type = pair.getLeft();
+            String param = pair.getRight();
+            switch (type) {
+                case TYPE:
+                    String[] types = param.split("\\|");
+                    for (String t : types) {
+                        addMatchingItems(ret, cardList, CardRulesPredicates.subType(t), PaperCard.FN_GET_RULES);
+                    }
+                    break;
+                case COLOR:
+                    String[] colors = param.split("\\|");
+                    for (String color : colors) {
+                        ColorSet cc = ColorSet.fromNames(color);
+                        if (cc.isColorless()) {
+                            addMatchingItems(ret, cardList, CardRulesPredicates.Presets.IS_COLORLESS, PaperCard.FN_GET_RULES);
+                        } else {
+                            addMatchingItems(ret, cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard.FN_GET_RULES);
+                        }
+                    }
+                    break;
+                case KEYWORD:
+                    String[] keywords = param.split("\\|");
+                    for (String keyword : keywords) {
+                        addMatchingItems(ret, cardList, CardRulesPredicates.hasKeyword(keyword), PaperCard.FN_GET_RULES);
+                    }
+                    break;
+                case NAME:
+                    String[] names = param.split("\\|");
+                    for (String name : names) {
+                        addMatchingItems(ret, cardList, CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES);
+                    }
+                    break;
             }
-            break;
-        case COLOR:
-            ret = new ArrayList<PaperCard>();
-            String[] colors = filterParam.split("\\|");
-            for (String color : colors) {
-                ColorSet cc = ColorSet.fromNames(color);
-                addMatchingItems(ret, cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard.FN_GET_RULES);
-            }
-            break;
-        case KEYWORD:
-            ret = new ArrayList<PaperCard>();
-            String[] keywords = filterParam.split("\\|");
-            for (String keyword : keywords) {
-                addMatchingItems(ret, cardList, CardRulesPredicates.hasKeyword(keyword), PaperCard.FN_GET_RULES);
-            }
-            break;
-        case NAME:
-            ret = new ArrayList<PaperCard>();
-            String[] names = filterParam.split("\\|");
-            for (String name : names) {
-                addMatchingItems(ret, cardList, CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES);
-            }
-            break;
-        default:
-            ret = Lists.newArrayList(cardList);
-            break;
         }
         return ret;
     }

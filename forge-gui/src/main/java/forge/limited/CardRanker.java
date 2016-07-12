@@ -127,7 +127,6 @@ public class CardRanker {
         double synergyScore = 0.0;
 
         synergyScore += getScoreForDeckHints(card, otherCards);
-        synergyScore += getScoreForBuffedBy(card, otherCards);
 
         return synergyScore;
     }
@@ -135,29 +134,13 @@ public class CardRanker {
     private double getScoreForDeckHints(PaperCard card, Iterable<PaperCard> otherCards) {
         double score = 0.0;
         final DeckHints hints = card.getRules().getAiHints().getDeckHints();
-        if (hints != null && hints.getType() != DeckHints.Type.NONE) {
+        if (hints != null && hints.isValid()) {
             final List<PaperCard> comboCards = hints.filter(otherCards);
             if (comboCards.size() > 0) {
                 score = comboCards.size() * 10;
             }
         }
         return score;
-    }
-
-    private double getScoreForBuffedBy(PaperCard card, Iterable<PaperCard> otherCards) {
-        double matchBuffScore = 0.0;
-        Iterable<Map.Entry<String, String>> vars = card.getRules().getMainPart().getVariables();
-        for (Map.Entry<String, String> var : vars) {
-            if (var.getKey().equals("BuffedBy")) {
-                String buff = var.getValue();
-                final Iterable<PaperCard> buffers = Iterables.filter(otherCards,
-                        Predicates.compose(CardRulesPredicates.subType(buff), PaperCard.FN_GET_RULES));
-                if (Iterables.size(buffers) > 0) {
-                    matchBuffScore = Iterables.size(buffers) * 3;
-                }
-            }
-        }
-        return matchBuffScore;
     }
 
     private List<PaperCard> sortAndCreateList(List<Pair<Double, PaperCard>> cardScores) {

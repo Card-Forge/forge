@@ -1,7 +1,7 @@
 package forge.card;
 
 /** 
- * TODO: Write javadoc for this type.
+ * CardAiHints holds all the different types of card hints for AI decks.
  *
  */
 public class CardAiHints {

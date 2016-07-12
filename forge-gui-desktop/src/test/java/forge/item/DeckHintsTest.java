@@ -38,13 +38,11 @@ public class DeckHintsTest {
         Assert.assertEquals("Griffin Rider", cp.getName());
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertNotNull(hints);
-        Assert.assertEquals(DeckHints.Type.TYPE, hints.getType());
+        Assert.assertTrue(hints.isValid());
 
         List<PaperCard> list = new ArrayList<PaperCard>();
-        PaperCard c0 = readCard("assault_griffin.txt");
-        list.add(c0);
-        PaperCard c1 = readCard("auramancer.txt");
-        list.add(c1);
+        list.add(readCard("assault_griffin.txt"));
+        list.add(readCard("auramancer.txt"));
 
         Assert.assertEquals(1, hints.filter(list).size());
         Assert.assertEquals("Assault Griffin", hints.filter(list).get(0).getName());
@@ -59,15 +57,12 @@ public class DeckHintsTest {
         Assert.assertEquals("Throne of Empires", cp.getName());
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertNotNull(hints);
-        Assert.assertEquals(DeckHints.Type.NAME, hints.getType());
+        Assert.assertTrue(hints.isValid());
 
         List<PaperCard> list = new ArrayList<PaperCard>();
-        PaperCard c0 = readCard("assault_griffin.txt");
-        list.add(c0);
-        PaperCard c1 = readCard("scepter_of_empires.txt");
-        list.add(c1);
-        PaperCard c2 = readCard("crown_of_empires.txt");
-        list.add(c2);
+        list.add(readCard("assault_griffin.txt"));
+        list.add(readCard("scepter_of_empires.txt"));
+        list.add(readCard("crown_of_empires.txt"));
 
         Assert.assertEquals(2, hints.filter(list).size());
     }
@@ -80,13 +75,11 @@ public class DeckHintsTest {
         IPaperCard cp = readCard("mwonvuli_beast_tracker.txt");
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertNotNull(hints);
-        Assert.assertEquals(DeckHints.Type.KEYWORD, hints.getType());
+        Assert.assertTrue(hints.isValid());
 
         List<PaperCard> list = new ArrayList<PaperCard>();
-        PaperCard c0 = readCard("acidic_slime.txt");
-        list.add(c0);
-        PaperCard c1 = readCard("ajanis_sunstriker.txt");
-        list.add(c1);
+        list.add(readCard("acidic_slime.txt"));
+        list.add(readCard("ajanis_sunstriker.txt"));
 
         Assert.assertEquals(1, hints.filter(list).size());
     }
@@ -99,13 +92,11 @@ public class DeckHintsTest {
         IPaperCard cp = readCard("wurms_tooth.txt");
         DeckHints hints = cp.getRules().getAiHints().getDeckNeeds();
         Assert.assertNotNull(hints);
-        Assert.assertEquals(DeckHints.Type.COLOR, hints.getType());
+        Assert.assertTrue(hints.isValid());
 
         List<PaperCard> list = new ArrayList<PaperCard>();
-        PaperCard c0 = readCard("llanowar_elves.txt");
-        list.add(c0);
-        PaperCard c1 = readCard("unsummon.txt");
-        list.add(c1);
+        list.add(readCard("llanowar_elves.txt"));
+        list.add(readCard("unsummon.txt"));
 
         Assert.assertEquals(1, hints.filter(list).size());
     }
@@ -114,19 +105,30 @@ public class DeckHintsTest {
      * 
      * Test for no wants.
      */
-    @Test(timeOut = 1000, enabled = false)
+    @Test(timeOut = 1000, enabled = true)
     void testNoFilter() {
         PaperCard cp = readCard("assault_griffin.txt");
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertEquals("Assault Griffin", cp.getName());
+        Assert.assertNull(hints);
+    }
+
+    /**
+     * Test for multiple.
+     */
+    @Test(timeOut = 1000, enabled = true)
+    void testMultiple() {
+        PaperCard pc = readCard("ruination_guide.txt");
+        DeckHints hints = pc.getRules().getAiHints().getDeckHints();
         Assert.assertNotNull(hints);
-        Assert.assertEquals(DeckHints.Type.NONE, hints.getType());
+        Assert.assertTrue(hints.isValid());
 
         List<PaperCard> list = new ArrayList<PaperCard>();
-        PaperCard c0 = readCard("assault_griffin.txt");
-        list.add(c0);
+        list.add(readCard("assault_griffin.txt"));
+        list.add(readCard("breaker_of_armies.txt"));
+        list.add(readCard("benthic_infiltrator.txt"));
 
-        Assert.assertEquals(1, hints.filter(list).size());
+        Assert.assertEquals(2, hints.filter(list).size());
     }
 
     /**
