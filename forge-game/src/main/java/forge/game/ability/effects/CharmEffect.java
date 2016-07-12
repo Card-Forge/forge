@@ -114,7 +114,8 @@ public class CharmEffect extends SpellAbilityEffect {
             while (ssa != null) {
                 ssaClone.setTargets(ssa.getTargets());
                 ssaClone.setTargetRestrictions(ssa.getTargetRestrictions());
-                ssaClone.setTargetCard(ssa.getTargetCard());
+                if (ssa.getTargetCard() != null)
+                    ssaClone.setTargetCard(ssa.getTargetCard());
                 ssaClone.setTargetingPlayer(ssa.getTargetingPlayer());
 
                 ssa = ssa.getSubAbility();
