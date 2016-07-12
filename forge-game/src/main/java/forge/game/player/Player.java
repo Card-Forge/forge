@@ -1478,6 +1478,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         Card cause = null;
         if (sa != null) {
             cause = sa.getHostCard();
+            // for Replacement of the dicard Cause
+            if (sa.hasParam("Cause")) {
+                final CardCollection col = AbilityUtils.getDefinedCards(cause, sa.getParam("Cause"), sa);
+                if (!col.isEmpty()) {
+        	        cause = col.getFirst();
+        	    }
+            }
         }
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
