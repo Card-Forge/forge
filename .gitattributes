@@ -2153,9 +2153,9 @@ forge-gui/res/cardsfolder/a/assault_strobe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/assault_suit.txt -text
 forge-gui/res/cardsfolder/a/assault_zeppelid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/assemble_the_legion.txt -text
+forge-gui/res/cardsfolder/a/assembled_alphas.txt -text
 forge-gui/res/cardsfolder/a/assembly_hall.txt -text
 forge-gui/res/cardsfolder/a/assembly_worker.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/a/assempled_alphas.txt -text
 forge-gui/res/cardsfolder/a/assert_authority.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/astral_arena.txt -text
 forge-gui/res/cardsfolder/a/astral_cornucopia.txt -text
@@ -3612,7 +3612,7 @@ forge-gui/res/cardsfolder/c/choice_of_damnations.txt -text
 forge-gui/res/cardsfolder/c/choke.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/choked_estuary.txt -text
 forge-gui/res/cardsfolder/c/choking_fumes.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/c/choking_restraings.txt -text
+forge-gui/res/cardsfolder/c/choking_restraints.txt -text
 forge-gui/res/cardsfolder/c/choking_sands.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/choking_tethers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/choking_vines.txt -text

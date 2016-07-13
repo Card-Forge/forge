@@ -1,4 +1,4 @@
-Name:Choking Restraings
+Name:Choking Restraints
 
 ManaCost:2 W
 

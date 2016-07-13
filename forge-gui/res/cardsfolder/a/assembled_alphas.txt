@@ -1,4 +1,4 @@
-Name:Assempled Alphas
+Name:Assembled Alphas
 
 ManaCost:5 R
 
