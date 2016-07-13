@@ -4,7 +4,7 @@ ManaCost:R
 
 Types:Instant
 
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 3 | EffectZone$ All | Description$ Escalate {1}{W} (Pay this cost for each mode chosen beyond the first.)
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 3 | EffectZone$ All | Description$ Escalate {3} (Pay this cost for each mode chosen beyond the first.)
 
 SVar:IncreaseCost:Modes$Amount/Minus.1
 
