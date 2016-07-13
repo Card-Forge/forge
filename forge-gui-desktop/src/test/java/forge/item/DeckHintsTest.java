@@ -3,7 +3,9 @@ package forge.item;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import junit.framework.Assert;
 
 import org.testng.annotations.BeforeTest;
@@ -44,8 +46,9 @@ public class DeckHintsTest {
         list.add(readCard("assault_griffin.txt"));
         list.add(readCard("auramancer.txt"));
 
-        Assert.assertEquals(1, hints.filter(list).size());
-        Assert.assertEquals("Assault Griffin", hints.filter(list).get(0).getName());
+        List<PaperCard> filtered = hints.filter(list);
+        Assert.assertEquals(1, filtered.size());
+        Assert.assertEquals("Assault Griffin", filtered.get(0).getName());
     }
 
     /**
@@ -128,7 +131,10 @@ public class DeckHintsTest {
         list.add(readCard("breaker_of_armies.txt"));
         list.add(readCard("benthic_infiltrator.txt"));
 
-        Assert.assertEquals(2, hints.filter(list).size());
+
+        Map<DeckHints.Type, Iterable<PaperCard>> filterByType = hints.filterByType(list);
+        Assert.assertEquals(1, Iterables.size(filterByType.get(DeckHints.Type.KEYWORD)));
+        Assert.assertEquals(1, Iterables.size(filterByType.get(DeckHints.Type.COLOR)));
     }
 
     /**

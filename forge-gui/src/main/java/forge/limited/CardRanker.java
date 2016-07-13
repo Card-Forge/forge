@@ -1,6 +1,7 @@
 package forge.limited;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import forge.card.*;
 import forge.item.PaperCard;
@@ -14,6 +15,12 @@ import java.util.Map;
 public class CardRanker {
 
     private static final double SCORE_UNPICKABLE = -100.0;
+    private static final Map<DeckHints.Type, Integer> typeFactors = ImmutableMap.<DeckHints.Type, Integer>builder()
+            .put(DeckHints.Type.COLOR, 1)
+            .put(DeckHints.Type.KEYWORD, 5)
+            .put(DeckHints.Type.NAME, 20)
+            .put(DeckHints.Type.TYPE, 5)
+            .build();
 
     /**
      * Rank cards.
@@ -135,9 +142,10 @@ public class CardRanker {
         double score = 0.0;
         final DeckHints hints = card.getRules().getAiHints().getDeckHints();
         if (hints != null && hints.isValid()) {
-            final List<PaperCard> comboCards = hints.filter(otherCards);
-            if (comboCards.size() > 0) {
-                score = comboCards.size() * 10;
+            final Map<DeckHints.Type, Iterable<PaperCard>> cardsByType = hints.filterByType(otherCards);
+            for (DeckHints.Type type : cardsByType.keySet()) {
+                Iterable<PaperCard> cards = cardsByType.get(type);
+                score += Iterables.size(cards) * typeFactors.get(type);
             }
         }
         return score;

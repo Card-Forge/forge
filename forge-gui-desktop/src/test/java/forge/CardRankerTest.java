@@ -26,7 +26,6 @@ public class CardRankerTest {
     @Test(timeOut = 1000, enabled = true)
     void testRank() {
         PaperCard cp = readCard("hero_of_goma_fada.txt");
-        Assert.assertEquals("Hero of Goma Fada", cp.getName());
 
         List<PaperCard> list = new ArrayList<PaperCard>();
         PaperCard c0 = readCard("makindi_patrol.txt");
@@ -39,6 +38,10 @@ public class CardRankerTest {
         list.add(c3);
 
         List<PaperCard> ranked = ranker.rankCardsInDeck(list);
+        Assert.assertEquals("Hero of Goma Fada", ranked.get(0).getName());
+        Assert.assertEquals("Makindi Patrol", ranked.get(1).getName());
+        Assert.assertEquals("Altar's Reap", ranked.get(2).getName());
+        Assert.assertEquals("Plains", ranked.get(3).getName());
     }
 
     /**
