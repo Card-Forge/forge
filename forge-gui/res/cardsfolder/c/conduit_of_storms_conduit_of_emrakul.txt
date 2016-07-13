@@ -1,42 +1,23 @@
 Name:Conduit of Storms
-
 ManaCost:2 R
-
 Types:Creature Werewolf Horror
-
 PT:2/3
-
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDelTrig | TriggerDescription$ Whenever CARDNAME attacks, add {R} to your mana pool at the beginning of your next main phase this turn.
-
-SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main1,Main2 | ValidPlayer$ You | Execute$ AddMana | TriggerDescription$ At the beginning of your next main phase this turn, add {R} to your mana pool. | SVar:AddMana:DB$ Mana | Cost$ 0 | Produced$ R
-
+SVar:TrigDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main1,Main2 | ThisTurn$ True | ValidPlayer$ You | Execute$ AddMana | TriggerDescription$ At the beginning of your next main phase this turn, add {R} to your mana pool.
+SVar:AddMana:DB$ Mana | Cost$ 0 | Produced$ R
 A:AB$SetState | Cost$ 3 R R | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conduit_of_storms.jpg
-
 AlternateMode:DoubleFaced
-
 Oracle:Whenever Conduit of Storms attacks, add {R} to your mana pool at the beginning of your next main phase this turn.\n{3}{R}{R}: Transform Conduit of Storms.
-
-
 
 ALTERNATE
 
-
-
 Name:Conduit of Emrakul
-
 ManaCost:no cost
-
 Types:Creature Eldrazi Werewolf
-
 PT:5/4
-
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDelTrig | TriggerDescription$ Whenever CARDNAME attacks, add {C}{C} to your mana pool at the beginning of your next main phase this turn.
-
-SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main1,Main2 | ValidPlayer$ You | Execute$ AddMana | TriggerDescription$ At the beginning of your next main phase this turn, add {C}{C} to your mana pool. | SVar:AddMana:DB$ Mana | Cost$ 0 | Produced$ C C
-
+SVar:TrigDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main1,Main2 | ThisTurn$ True | ValidPlayer$ You | Execute$ AddMana | TriggerDescription$ At the beginning of your next main phase this turn, add {C}{C} to your mana pool.
+SVar:AddMana:DB$ Mana | Cost$ 0 | Produced$ C C
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conduit_of_emrakul.jpg
-
 Oracle:Whenever Conduit of Emrakul attacks, add {C}{C} to your mana pool at the beginning of your next main phase this turn.
-
