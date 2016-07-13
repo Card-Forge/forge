@@ -3589,7 +3589,6 @@ forge-gui/res/cardsfolder/c/chill_of_foreboding.txt -text
 forge-gui/res/cardsfolder/c/chill_to_the_bone.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/chilling_apparition.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/chilling_grasp.txt -text
-forge-gui/res/cardsfolder/c/chilling_grasp1.txt -text
 forge-gui/res/cardsfolder/c/chilling_shade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/chime_of_night.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/chimeric_coils.txt svneol=native#text/plain
@@ -6742,7 +6741,6 @@ forge-gui/res/cardsfolder/g/gisas_bidding.txt -text
 forge-gui/res/cardsfolder/g/gisela_blade_of_goldnight.txt -text
 forge-gui/res/cardsfolder/g/gitaxian_probe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/give_no_ground.txt -text
-forge-gui/res/cardsfolder/g/give_no_ground1.txt -text
 forge-gui/res/cardsfolder/g/give_take.txt -text
 forge-gui/res/cardsfolder/g/gix.txt -text
 forge-gui/res/cardsfolder/g/glacial_chasm.txt -text
@@ -9240,7 +9238,6 @@ forge-gui/res/cardsfolder/l/lone_wolf.txt -text
 forge-gui/res/cardsfolder/l/lonely_sandbar.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/long_forgotten_gohei.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/long_road_home.txt -text
-forge-gui/res/cardsfolder/l/long_road_home1.txt -text
 forge-gui/res/cardsfolder/l/long_term_plans.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/longbow_archer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/longhorn_firebeast.txt -text
@@ -11015,6 +11012,7 @@ forge-gui/res/cardsfolder/o/otaria.txt -text
 forge-gui/res/cardsfolder/o/otarian_juggernaut.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/otherworld_atlas.txt -text
 forge-gui/res/cardsfolder/o/otherworldly_journey.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/otherworldly_outburst.txt -text
 forge-gui/res/cardsfolder/o/oubliette.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/ouphe_vandals.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/o/oust.txt svneol=native#text/plain
