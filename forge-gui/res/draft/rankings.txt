@@ -64,7 +64,7 @@
 #63|Blessed Alliance|U|EMN
 #64|Hanweir Battlements|R|EMN
 #65|Soul Separator|R|EMN
-#66|Aurora of Emrakul|U|EMN
+#66|Cryptolith Fragment|U|EMN
 #67|Noose Constrictor|U|EMN
 #68|Clear Shot|U|EMN
 #69|Savage Alliance|U|EMN
