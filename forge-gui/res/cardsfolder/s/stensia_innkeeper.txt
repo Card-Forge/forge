@@ -4,7 +4,7 @@ ManaCost:3 R
 
 Types:Creature Vampire
 
-PT:36/3
+PT:3/3
 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, enters the battlefield, tap target land an opponent controls. That land doesn't untap during its controller's next untap step.
 
