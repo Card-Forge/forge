@@ -1,0 +1,23 @@
+Name:Spell Queller
+ManaCost:1 W U
+Types:Creature Spirit
+PT:2/3
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target spell with converted mana cost 4 or less.
+
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerController$ TriggeredCardController | TriggerDescription$ When Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.
+
+SVar:TrigExile:DB$ChangeZone | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card.cmcLE4 | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Mandatory$ True | Destination$ Exile | IsCurse$ True | TgtPrompt$ Choose target spell with converted mana cost 4 or less | RememberChanged$ True
+
+SVar:TrigPlay:AB$ Play | Cost$ 0 | Defined$ Remembered.ExiledWithSource | Controller$ RememberedOwner | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X | SubAbility$ DBCleanup
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
+SVar:X:Remembered$Amount
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_queller.jpg
+Oracle:Flash\nFlying\nWhen Spell Queller enters the battlefield, exile target spell with converted mana cost 4 or less.\nWhen Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.

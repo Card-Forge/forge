@@ -7936,6 +7936,7 @@ forge-gui/res/cardsfolder/i/icy_manipulator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/icy_prison.txt -text
 forge-gui/res/cardsfolder/i/ideas_unbound.txt -text
 forge-gui/res/cardsfolder/i/identity_crisis.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/i/identity_thief.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/i/idle_thoughts.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/idyllic_tutor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/ifh_biff_efreet.txt svneol=native#text/plain
@@ -9980,6 +9981,7 @@ forge-gui/res/cardsfolder/m/mirror_wall.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mirrored_depths.txt -text
 forge-gui/res/cardsfolder/m/mirrorpool.txt -text
 forge-gui/res/cardsfolder/m/mirrorweave.txt -text
+forge-gui/res/cardsfolder/m/mirrorwing_dragon.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/m/mirrorwood_treefolk.txt -text
 forge-gui/res/cardsfolder/m/mirrorworks.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/miscalculation.txt svneol=native#text/plain
@@ -14101,6 +14103,7 @@ forge-gui/res/cardsfolder/s/soul_rend.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_scourge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_sculptor.txt -text
 forge-gui/res/cardsfolder/s/soul_seizer_ghastly_haunting.txt -text
+forge-gui/res/cardsfolder/s/soul_separator.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/soul_shepherd.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_shred.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_snare.txt svneol=native#text/plain
@@ -14200,6 +14203,7 @@ forge-gui/res/cardsfolder/s/spell_burst.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spell_contortion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spell_crumple.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spell_pierce.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/spell_queller.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/spell_rupture.txt -text
 forge-gui/res/cardsfolder/s/spell_shrivel.txt -text
 forge-gui/res/cardsfolder/s/spell_snare.txt svneol=native#text/plain
@@ -15744,6 +15748,7 @@ forge-gui/res/cardsfolder/t/treasure_trove.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/treasured_find.txt -text
 forge-gui/res/cardsfolder/t/treasury_thrull.txt -text
 forge-gui/res/cardsfolder/t/tree_monkey.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/tree_of_perdition.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/t/tree_of_redemption.txt -text
 forge-gui/res/cardsfolder/t/tree_of_tales.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/treefolk_harbinger.txt svneol=native#text/plain
