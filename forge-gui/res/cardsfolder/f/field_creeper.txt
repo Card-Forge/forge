@@ -1,0 +1,6 @@
+Name:Field Creeper
+ManaCost:2
+Types:Artifact Creature Scarecrow
+PT:2/1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/field_creeper.jpg
+Oracle:

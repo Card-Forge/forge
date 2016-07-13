@@ -3384,6 +3384,7 @@ forge-gui/res/cardsfolder/c/cateran_summons.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/caterwauling_boggart.txt -text
 forge-gui/res/cardsfolder/c/cathars_companion.txt -text
 forge-gui/res/cardsfolder/c/cathars_crusade.txt -text
+forge-gui/res/cardsfolder/c/cathars_shield.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/c/cathartic_adept.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cathedral_membrane.txt -text
 forge-gui/res/cardsfolder/c/cathedral_of_serra.txt -text
@@ -4227,6 +4228,7 @@ forge-gui/res/cardsfolder/c/culling_sun.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/culling_the_weak.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cult_of_the_waxing_moon.txt -text
 forge-gui/res/cardsfolder/c/cultbrand_cinder.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/cultists_staff.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/c/cultivate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cultivator_drone.txt -text
 forge-gui/res/cardsfolder/c/cultural_exchange.txt -text
@@ -5998,6 +6000,7 @@ forge-gui/res/cardsfolder/f/fevered_strength.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fevered_visions.txt -text
 forge-gui/res/cardsfolder/f/fickle_efreet.txt -text
 forge-gui/res/cardsfolder/f/fiddlehead_kami.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/field_creeper.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/f/field_marshal.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/field_of_dreams.txt -text
 forge-gui/res/cardsfolder/f/field_of_reality.txt svneol=native#text/plain
@@ -6563,6 +6566,7 @@ forge-gui/res/cardsfolder/g/gaze_of_pain.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gaze_of_the_gorgon.txt -text
 forge-gui/res/cardsfolder/g/geier_reach_bandit_vildin_pack_alpha.txt -text
 forge-gui/res/cardsfolder/g/geier_reach_sanitarium.txt -text
+forge-gui/res/cardsfolder/g/geist_fueled_scarecrow.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/g/geist_honored_monk.txt -text
 forge-gui/res/cardsfolder/g/geist_of_saint_traft.txt -text
 forge-gui/res/cardsfolder/g/geist_of_the_archives.txt -text
@@ -14560,6 +14564,7 @@ forge-gui/res/cardsfolder/s/stitched_drake.txt -text
 forge-gui/res/cardsfolder/s/stitched_mangler.txt -text
 forge-gui/res/cardsfolder/s/stitcher_geralf.txt -text
 forge-gui/res/cardsfolder/s/stitchers_apprentice.txt -text
+forge-gui/res/cardsfolder/s/stitchers_graft.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/stitchwing_skaab.txt -text
 forge-gui/res/cardsfolder/s/stoic_angel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stoic_builder.txt -text
