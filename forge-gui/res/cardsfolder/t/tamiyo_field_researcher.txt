@@ -2,8 +2,8 @@ Name:Tamiyo, Field Researcher
 ManaCost:1 W G U
 Types:Planeswalker Tamiyo
 Loyalty:4
-A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | Triggers$ TrigDamage,TrigChange | Duration$ UntilYourNextTurn | SVars$ TrigDrawCard,TrigForget | References$ TrigDrawCard | RememberObjects$ Targeted | SpellDescription$ Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
-SVar:TrigDamage:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Creature.IsRemembered | Execute$ TrigDrawCard | SubAbility$ DBCleanup | TriggerDescription$ Whenever a targeted creature of Tamiyo, Field Researcher deals combat damage, you draw a card.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | Triggers$ TrigDamage,TrigChange | Duration$ UntilYourNextTurn | SVars$ TrigForget,TrigDrawCard | References$ TrigForget,TrigDrawCard | RememberObjects$ Targeted | SpellDescription$ Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
+SVar:TrigDamage:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Creature.IsRemembered | Execute$ TrigDrawCard | TriggerDescription$ Whenever a targeted creature of Tamiyo, Field Researcher deals combat damage, you draw a card.
 SVar:TrigDrawCard:AB$ Draw | Cost$ 0 |  NumCards$ 1 | Defined$ You
 SVar:TrigChange:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ TrigForget
 SVar:TrigForget:AB$ Pump | Cost$ 0 | ForgetObjects$ TriggeredCard
