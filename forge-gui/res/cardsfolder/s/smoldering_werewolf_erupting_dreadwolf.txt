@@ -1,0 +1,42 @@
+Name:Smoldering Werewolf
+
+ManaCost:2 R R
+
+Types:Creature Werewolf Horror
+
+PT:3/2
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each of up to two target creatures.
+
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1
+
+A:AB$SetState | Cost$ 4 R R | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_werewolf.jpg
+
+AlternateMode:DoubleFaced
+
+Oracle:When Smoldering Werewolf enters the battlefield, it deals 1 damage to each of up to two target creatures.\n{4}{R}{R}: Transform Smoldering Werewolf.
+
+
+
+ALTERNATE
+
+
+
+Name:Erupting Dreadwolf
+
+ManaCost:no cost
+
+Types:Creature Eldrazi Werewolf
+
+PT:6/4
+
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 2 damage to target creature or player.
+
+SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/erupting_dreadwolf.jpg
+
+Oracle:Whenever Erupting Dreadwolf attacks, it deals 2 damage to target creature or player.
+

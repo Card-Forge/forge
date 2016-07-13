@@ -1,0 +1,14 @@
+Name:Crossroads Consecrator
+
+ManaCost:G
+
+Types:Creature Human Cleric
+
+PT:1/2
+
+A:AB$ Pump | Cost$ G T | NumAtt$ 1 | NumDef$ 1 | ValidTgts$ Card.Human+attacking | TgtPrompt$ Select target attacking Human | SpellDescription$ Target attacking Human gets +1/+1 until end of turn.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crossroads_consecrator.jpg
+
+Oracle:{G}, {T}: Target attacking Human gets +1/+1 until end of turn.
+

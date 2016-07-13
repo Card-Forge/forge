@@ -1,0 +1,16 @@
+Name:Grapple with the Past
+
+ManaCost:1 G
+
+Types:Instant
+
+A:SP$ Mill | Cost$ 1 G | NumCards$ 3 | Defined$ You | SubAbility$ DBChooseCard | SpellDescription$ Put the top three cards of your library into your graveyard, then you may return a creature or land card from your graveyard to your hand.
+
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouOwn,Land.YouOwn | Optional$ Yes | ChoiceZone$ Graveyard | Amount$ 1 | SubAbility$ DBChangeZone
+
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grapple_with_the_past.jpg
+
+Oracle:Put the top three cards of your library into your graveyard, then you may return a creature or land card from your graveyard to your hand. 
+

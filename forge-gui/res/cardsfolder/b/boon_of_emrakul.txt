@@ -1,0 +1,16 @@
+Name:Boon of Emrakul
+
+ManaCost:2 B
+
+Types:Enchantment Aura
+
+K:Enchant creature
+
+A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
+
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ -3 | Description$ Enchanted creature gets +3/-3.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boon_of_emrakul.jpg
+
+Oracle:Enchant creature\nEnchanted creature gets +3/-3. 
+

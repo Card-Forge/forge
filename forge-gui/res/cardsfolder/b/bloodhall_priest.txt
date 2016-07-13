@@ -1,0 +1,22 @@
+Name:Bloodhall Priest
+
+ManaCost:2 B R
+
+Types:Creature Vampire Cleric
+
+PT:4/4
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to target creature or player.
+
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to target creature or player.
+
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0| ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
+
+SVar:HasAttackEffect:TRUE
+
+K:Madness:1 B R
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodhall_priest.jpg
+
+Oracle:Whenever Bloodhall Priest enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to target creature or player.\nMadness {1}{B}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
+

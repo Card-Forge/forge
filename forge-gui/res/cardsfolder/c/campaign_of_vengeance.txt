@@ -1,0 +1,18 @@
+Name:Campaign of Vengeance
+
+ManaCost:3 W B
+
+Types:Enchantment
+
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control attacks, defending player loses 1 life and you gain 1 life.
+
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredDefendingPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife
+
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+
+SVar:PlayMain1:TRUE
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/campaign_of_vengeance.jpg
+
+Oracle:Whenever a creature you control attacks, defending player loses 1 life and you gain 1 life.
+

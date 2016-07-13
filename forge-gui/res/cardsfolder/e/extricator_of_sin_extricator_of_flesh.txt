@@ -1,0 +1,44 @@
+Name:Extricator of Sin
+
+ManaCost:2 W
+
+Types:Creature Human Cleric
+
+PT:0/3
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another permanent. If you do, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+
+SVar:TrigToken:AB$ Token | Cost$ Sac<1/Permanent.Other/another permanent> | TokenAmount$ 1 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2
+
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Delirium$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Delirium - At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
+
+SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform 
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/extricator_of_sin.jpg
+
+AlternateMode:DoubleFaced
+
+Oracle:When Extricator of Sin enters the battlefield, you may sacrifice another permanent. If you do, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.\nDelirium - At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform Extricator of Sin.
+
+
+
+ALTERNATE
+
+
+
+Name:Extricator of Flesh
+
+ManaCost:no cost
+
+Types:Creature Eldrazi Horror
+
+PT:3/5
+
+S:Mode$ Continuous | Affected$ Card.Eldrazi+YouCtrl | AddKeyword$ Vigilance | Description$ Eldrazi you control have vigilance.
+
+A:AB$ Token | Cost$ 2 T Sac<1/Creature.nonEldrazi/non-Eldrazi creature> | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2 | SpellDescription$ Put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/extricator_of_flesh.jpg
+
+Oracle:Eldrazi you control have vigilance.\n{2}, {T}, Sacrifice a non-Eldrazi creature: Put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+

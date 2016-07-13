@@ -1,0 +1,16 @@
+Name:Olivia's Dragoon
+
+ManaCost:1 B
+
+Types:Creature Vampire Berserker
+
+PT:2/2
+
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+
+SVar:RemAIDeck:True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/olivias_dragoon.jpg
+
+Oracle:Discard a card: Olivia's Dragoon gains flying until end of turn.
+

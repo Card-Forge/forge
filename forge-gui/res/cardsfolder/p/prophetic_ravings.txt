@@ -1,0 +1,20 @@
+Name:Prophetic Ravings
+
+ManaCost:R
+
+Types:Enchantment Aura
+
+K:Enchant creature
+
+A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
+
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste | AddAbility$ ProphetDraw | Description$ Enchanted creature has haste and "{T}, Discard a card: Draw a card."
+
+SVar:ProphetDraw:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card. 
+
+SVar:NonStackingAttachEffect:True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_ravings.jpg
+
+Oracle:Enchant creature\nEnchanted creature has haste and "{T}, Discard a card: Draw a card."
+

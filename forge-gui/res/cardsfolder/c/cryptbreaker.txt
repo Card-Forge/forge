@@ -1,0 +1,20 @@
+Name:Cryptbreaker
+
+ManaCost:B
+
+Types:Creature Zombie
+
+PT:1/1
+
+A:AB$ Token | Cost$ 1 B T Discard<1/Card> | TokenImage$ b 2 2 zombie EMN | TokenAltImages$ b_2_2_zombie2_EMN,b_2_2_zombie3_EMN | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield. 
+
+A:AB$ Draw | Cost$ tapXType<3/Zombie> | NumCards$ 1 | SpellDescription$  You draw a card and you lose 1 life.  | SubAbility$ DBLoseLife
+
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+
+SVar:RemAIDeck:True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptbreaker.jpg
+
+Oracle:{1}{B}, {T}, Discard a card: Put a 2/2 black Zombie creature token onto the battlefield.\nTap three untapped Zombies you control: You draw a card and you lose 1 life.
+

@@ -1,0 +1,12 @@
+Name:Splendid Reclamation
+
+ManaCost:3 G
+
+Types:Sorcery
+
+A:SP$ ChangeZoneAll | Cost$ 3 G | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return all land cards from your graveyard to the battlefield tapped.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/splendid_reclamation.jpg
+
+Oracle:Return all land cards from your graveyard to the battlefield tapped.
+

@@ -1,0 +1,24 @@
+Name:Nebelgast Herald
+
+ManaCost:2 U
+
+Types:Creature Spirit
+
+PT:2/1
+
+K:Flash
+
+K:Flying
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever Nebelgast Herald or another Spirit enters the battlefield under your control, tap target creature an opponent controls.
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Spirit+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigTap | Secondary$ True | TriggerDescription$ Whenever another white creature enters the battlefield under your control, tap target creature an opponent controls.
+
+SVar:TrigTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
+
+SVar:BuffedBy:Spirit
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nebelgast_herald.jpg
+
+Oracle:Whenever Nebelgast Herald or another Spirit enters the battlefield under your control, tap target creature an opponent controls.
+

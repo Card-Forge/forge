@@ -1,0 +1,42 @@
+Name:Shrill Howler
+
+ManaCost:2 G
+
+Types:Creature Werewolf Horror
+
+PT:3/1
+
+K:Creatures with power less than CARDNAME's power can't block it. 
+
+A:AB$SetState | Cost$ 5 G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shrill_howler.jpg
+
+AlternateMode:DoubleFaced
+
+Oracle:Creatures with power less than Shrill Howler's power can't block it.\n{5}{G}: Transform Shrill Howler.
+
+
+
+ALTERNATE
+
+
+
+Name:Howling Chorus
+
+ManaCost:no cost
+
+Types:Creature Eldrazi Werewolf
+
+PT:3/5
+
+K:Creatures with power less than CARDNAME's power can't block it. 
+
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a 1/1 white Soldier creature token onto the battlefield.
+
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_chorus.jpg
+
+Oracle:Creatures with power less than Howling Chorus's power can't block it.\nWhenever Howling Chorus deals combat damage to a player, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+

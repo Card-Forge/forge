@@ -1,0 +1,16 @@
+Name:Clear Shot
+
+ManaCost:2 G
+
+Types:Instant
+
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | NumAtt$ +1 | NumDef$ +1 | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control gets +1/+1 until end of turn. It deals damage equal to its power to target creature you don't control.
+
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | References$ X | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | DamageSource$ ParentTarget
+
+SVar:X:ParentTargeted$CardPower
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clear_shot.jpg
+
+Oracle:Target creature you control gets +1/+1 until end of turn. It deals damage equal to its power to target creature you don't control.
+

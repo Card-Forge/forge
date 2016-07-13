@@ -1,0 +1,22 @@
+Name:Markov Crusader
+
+ManaCost:4 B
+
+Types:Creature Vampire Knight
+
+PT:4/3
+
+K:Lifelink
+
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | Description$ Markov Crusader has haste as long as you control another Vampire.
+
+SVar:X:Count$Valid Permanent.YouCtrl+Vampire+Other
+
+SVar:PlayMain1:TRUE
+
+SVar:BuffedBy:Vampire
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/markov_crusader.jpg
+
+Oracle:Lifelink\nMarkov Crusader has haste as long as you control another Vampire.
+

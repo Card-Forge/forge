@@ -1,0 +1,14 @@
+Name:Blood Mist
+
+ManaCost:3 R
+
+Types:Enchantment
+
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gains double strike until end of turn.
+
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Double Strike
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_mist.jpg
+
+Oracle:At the beginning of combat on your turn, target creature you control gains double strike until end of turn.
+

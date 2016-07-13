@@ -1,0 +1,12 @@
+Name:Spreading Flames
+
+ManaCost:6 R
+
+Types:Instant
+
+A:SP$ DealDamage | Cost$ 6 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ 6 | TargetMin$ 1 | TargetMax$ 6 | DividedAsYouChoose$ 6 | SpellDescription$ CARDNAME deals 6 damage divided as you choose among any number of target creatures.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_flames.jpg
+
+Oracle:Spreading Flames deals 6 damage divided as you choose among any number of target creatures.
+

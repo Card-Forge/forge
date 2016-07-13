@@ -1,0 +1,18 @@
+Name:Strange Augmentation
+
+ManaCost:B
+
+Types:Enchantment Aura
+
+K:Enchant creature
+
+A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
+
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | Condition$ Delirium | AddPower$ 2 | AddToughness$ 2 | Description$ Delirium - Enchanted creature gets an additional +2/+2 as long as there are four or more card types among cards in your graveyard.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/strange_augmentation.jpg
+
+Oracle:Enchant creature\nEnchanted creature gets +1/+1.\nDelirium - Enchanted creature gets an additional +2/+2 as long as there are four or more card types among cards in your graveyard.
+

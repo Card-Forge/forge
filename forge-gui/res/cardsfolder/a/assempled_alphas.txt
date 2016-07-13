@@ -1,0 +1,22 @@
+Name:Assempled Alphas
+
+ManaCost:5 R
+
+Types:Creature Wolf
+
+PT:5/5
+
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigDamageAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature and 3 damage to that creature's controller.
+
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDamageBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature and 3 damage to that creature's controller.
+
+SVar:TrigDamageAttacker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 3 | SubAbility$ DBDamage
+
+SVar:TrigDamageBlocker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 3 | SubAbility$ DBDamage
+
+SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 3
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/assembled_alphas.jpg
+
+Oracle:Whenever Assembled Alphas blocks or becomes blocked by a creature, Assembled Alphas deals 3 damage to that creature and 3 damage to that creature's controller.
+

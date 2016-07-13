@@ -1,0 +1,14 @@
+Name:Drag Under
+
+ManaCost:2 U
+
+Types:Sorcery
+
+A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. Draw a card.
+
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drag_under.jpg
+
+Oracle:Return target creature to its owner's hand.\nDraw a card.
+

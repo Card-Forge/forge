@@ -1,0 +1,18 @@
+Name:Geist of the Archives
+
+ManaCost:2 U
+
+Types:Creature Spirit
+
+PT:0/4
+
+K:Defender
+
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry 1.
+
+SVar:TrigScry:AB$ Scry | Cost$ 0 | ScryNum$ 1
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_of_the_archives.jpg
+
+Oracle:Defender\nAt the beginning of your upkeep, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+

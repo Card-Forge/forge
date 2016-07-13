@@ -1,0 +1,18 @@
+Name:Crop Sigil
+
+ManaCost:G
+
+Types:Enchantment
+
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigMill | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put the top card of your library into your graveyard.
+
+SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 1 | Defined$ You
+
+A:AB$ ChangeZone | Cost$ 2 G Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouOwn | SubAbility$ DBReturn | Activation$ Delirium | PrecostDesc$ Delirium - | SpellDescription$ Return up to one target creature card and up to one target land card from your graveyard to your hand. Activate this ability only if there are four or more card types among cards in your graveyard.
+
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Land.YouOwn | TgtPrompt$ Select target land card in your graveyard
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crop_sigil.jpg
+
+Oracle:At the beginning of your upkeep, you may put the top card of your library into your graveyard.\nDelirium - {2}{G}, Sacrifice Crop Sigil: Return up to one target creature card and up to one target land card from your graveyard to your hand. Activate this ability only if there are four or more card types among cards in your graveyard.
+

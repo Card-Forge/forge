@@ -1,0 +1,16 @@
+Name:Fiend Binder
+
+ManaCost:3 W
+
+Types:Creature Human Soldier
+
+PT:3/2
+
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, tap target creature defending player controls.
+
+SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiend_binder.jpg
+
+Oracle:Whenever Fiend Binder attacks, tap target creature defending player controls.
+

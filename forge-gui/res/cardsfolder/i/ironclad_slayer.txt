@@ -1,0 +1,16 @@
+Name:Ironclad Slayer
+
+ManaCost:2 W
+
+Types:Creature Human Warrior
+
+PT:3/2
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target Aura or Equipment card from your graveyard to your hand.
+
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.Aura+YouCtrl,Card.Equipment+YouCtrl
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclad_slayer.jpg
+
+Oracle:When Ironclad Slayer enters the battlefield, you may return target Aura or Equipment card from your graveyard to your hand.
+

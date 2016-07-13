@@ -1,0 +1,42 @@
+Name:Grizzled Angler
+
+ManaCost:2 U
+
+Types:Creature Human
+
+PT:2/3
+
+A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 2 | SubAbility$ DBTransform | SpellDescription$ Put the top two cards of your library into your graveyard. Then if there is a colorless creature card in your graveyard, transform CARDNAME.
+
+SVar:DBTransform:DB$SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
+
+SVar:X:Count$ValidGraveyard Creature.YouOwn+Colorless
+
+AlternateMode:DoubleFaced
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzled_angler.jpg
+
+Oracle:{T}: Put the top two cards of your library into your graveyard. Then if there is a colorless creature card in your graveyard, transform Grizzled Angler.
+
+
+
+ALTERNATE
+
+
+
+Name:Grisly Anglerfish
+
+ManaCost:no cost
+
+Types:Creature Eldrazi Fish
+
+PT:4/5
+
+A:AB$ Effect | Cost$ 6 | StaticAbilities$ MustAttack | References$ MustAttack | SpellDescription$ Creatures your opponents control attack this turn if able.
+
+SVar:MustAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Creatures your opponents control attack this turn if able. 
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grisly_anglerfish.jpg
+
+Oracle:{6}: Creatures your opponents control attack this turn if able.
+

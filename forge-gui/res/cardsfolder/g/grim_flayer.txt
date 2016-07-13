@@ -1,0 +1,20 @@
+Name:Grim Flayer
+
+ManaCost:B G
+
+Types:Creature Human Warrior
+
+PT:2/2
+
+K:Trample
+
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDig | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, look at the top three cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
+
+SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ 3 | Defined$ You | AnyNumber$ | DestinationZone$ Graveyard | LibraryPosition2$ 0
+
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Delirium | Description$ Delirium - CARDNAME gets +2/+2 as long as there are four or more card types in your graveyard.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_flayer.jpg
+
+Oracle:Trample\nWhenever Grim Flayer deals combat damage to a player, look at the top three cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.\nDelirium - Grim Flayer gets +2/+2 as long as there are four or more card types among cards in your graveyard.
+

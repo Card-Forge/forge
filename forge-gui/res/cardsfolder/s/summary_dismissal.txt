@@ -1,0 +1,14 @@
+Name:Summary Dismissal
+
+ManaCost:2 U U
+
+Types:Instant
+
+A:SP$ ChangeZone | Cost$ 2 U U | AllType$ Spell | AllValid$ Card.Other | Origin$ Stack | Destination$ Exile | SubAbility$ DBCounter | SpellDescription$ Exile all other spells and counter all abilities.
+
+SVar:DBCounter: DB$ Counter | Cost$ 0 | AllType$ Activated,Triggered | AllValid$ Card
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/summary_dismissal.jpg
+
+Oracle:Exile all other spells and counter all abilities.
+

@@ -1,0 +1,16 @@
+Name:Somberwald Stag
+
+ManaCost:3 G G
+
+Types:Creature Elk
+
+PT:4/3
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have it fight target creature you don't control.
+
+SVar:TrigFight:AB$ Fight | Cost$ 0 | Defined$ TriggeredCard | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/somberwald_stag.jpg
+
+Oracle:When Somberwald Stag enters the battlefield, you may have it fight target creature you don't control.
+

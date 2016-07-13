@@ -1,0 +1,16 @@
+Name:Scour the Laboratory
+
+ManaCost:4 U U
+
+Types:Instant
+
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE4 | Description$ Delirium - CARDNAME costs {2} less to cast if there are four or more card types among cards in your graveyard.
+
+SVar:X:Count$CardControllerTypes.Graveyard
+
+A:SP$ Draw | Cost$ 4 U U | NumCards$ 3 | SpellDescription$ Draw three cards.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scour_the_laboratory.jpg
+
+Oracle:Delirium - Scour the Laboratory costs {2} less to cast if there are four or more card types among cards in your graveyard.\nDraw three cards. 
+

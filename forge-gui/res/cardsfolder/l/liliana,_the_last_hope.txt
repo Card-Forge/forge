@@ -1,0 +1,28 @@
+Name:Liliana, the Last Hope
+
+ManaCost:1 B B
+
+Types:Planeswalker Liliana
+
+Loyalty:3
+
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -2 | NumDef$ -1 | IsCurse$ True | UntilYourNextTurn$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Up to one target creature gets -2/-1 until your next turn.
+
+A:AP$ Mill | Cost$ SubCounter<2/LOYALTY> | NumCards$ 2 | Planeswalker$ True | Defined$ You | SubAbility$ DBChooseCard | SpellDescription$ Put the top two cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.
+
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouOwn | Optional$ Yes | ChoiceZone$ Graveyard | Amount$ 1 | SubAbility$ DBChangeZone
+
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard 
+
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Liliana, the Last Hope emblem | Image$ liliana_the_last_hope_emblem | Triggers$ TrigToken | SVars$ DBToken | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "At the beginning of your end step, put X 2/2 black Zombie creature tokens onto the battlefield, where X is two plus the number of Zombies you control."
+
+SVar:TrigToken:Mode$ Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ DBToken | TriggerDescription$ At the beginning of your end step, put X 2/2 black Zombie creature tokens onto the battlefield, where X is two plus the number of Zombies you control.
+
+SVar:DBToken:AB$ Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie EMN | TokenAltImages$ b_2_2_zombie2_EMN,b_2_2_zombie3_EMN
+
+SVar:X:Count$Valid Card.Zombie+YouCtrl/Plus.2
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_the_last_hope.jpg
+
+Oracle:[+1]: Up to one target creature gets -2/-1 until your next turn.\n[-2]: Put the top two cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.\n[-7]: You get an emblem with "At the beginning of your end step, put X 2/2 black Zombie creature tokens onto the battlefield, where X is two plus the number of Zombies you control."
+

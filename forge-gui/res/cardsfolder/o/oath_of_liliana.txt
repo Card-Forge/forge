@@ -1,0 +1,20 @@
+Name:Oath of Liliana
+
+ManaCost:2 B
+
+Types:Legendary Enchantment
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a creature.
+
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Opponent | SacValid$ Creature
+
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, put a 2/2 black Zombie creature token onto the battlefield.
+
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie EMN | TokenAltImages$ b_2_2_zombie2_EMN,b_2_2_zombie3_EMN
+
+SVar:X:Count$ThisTurnEntered_Battlefield_Planeswalker.YouCtrl
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_liliana.jpg
+
+Oracle:When Oath of Liliana enters the battlefield, each opponent sacrifices a creature.\nAt the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, put a 2/2 black Zombie creature token onto the battlefield.
+

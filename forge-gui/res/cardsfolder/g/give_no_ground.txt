@@ -1,0 +1,12 @@
+Name:Give No Ground
+
+ManaCost:3 W
+
+Types:Instant
+
+A:SP$ Pump | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +6 | AddHiddenKeyword$ CARDNAME can block any number of creatures. | SpellDescription$ Target creature gets +2/+6 and can block any number of creatures this turn.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/give_no_ground.jpg
+
+Oracle:Target creature gets +2/+6 and can block any number of creatures this turn.
+

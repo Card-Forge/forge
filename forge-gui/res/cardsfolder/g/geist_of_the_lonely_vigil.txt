@@ -1,0 +1,18 @@
+Name:Geist of the Lonely Vigil
+
+ManaCost:1 W
+
+Types:Creature Spirit Cleric
+
+PT:2/3
+
+K:Defender
+
+K:Flying
+
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Condition$ Delirium | Description$ Delirium - CARDNAME can attack as though it didn't have defender as long as there are four or more card types among cards in your graveyard.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_of_the_lonely_vigil.jpg
+
+Oracle:Defender, flying\nDelirium - Geist of the Lonely Vigil can attack as though it didn't have defender as long as there are four or more card types among cards in your graveyard.
+

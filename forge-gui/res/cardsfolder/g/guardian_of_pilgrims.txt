@@ -1,0 +1,18 @@
+Name:Guardian of Pilgrims
+
+ManaCost:1 W
+
+Types:Creature Spirit Cleric
+
+PT:2/2
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +1/+1 until end of turn.
+
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1
+
+SVar:PlayMain1:TRUE
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_pilgrims.jpg
+
+Oracle:When Guardian of Pilgrims enters the battlefield, target creature gets +1/+1 until end of turn.
+

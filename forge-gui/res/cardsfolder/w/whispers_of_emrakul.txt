@@ -1,0 +1,14 @@
+Name:Whispers of Emrakul
+
+ManaCost:1 B
+
+Types:Sorcery
+
+A:SP$ Discard | Cost$ 1 B | ValidTgts$ Opponent | NumCards$ X | References$ X | Mode$ Random | SpellDescription$ Target opponent discards a card at random.\nDelirium - If there are four or more card types among cards in your graveyard, that player discards two cards at random instead.
+
+SVar:X:Count$Delirium.2.1
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whispers_of_emrakul.jpg
+
+Oracle:Target opponent discards a card at random.\nDelirium - If there are four or more card types among cards in your graveyard, that player discards two cards at random instead.
+

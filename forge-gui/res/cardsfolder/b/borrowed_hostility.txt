@@ -1,0 +1,20 @@
+Name:Borrowed Hostility
+
+ManaCost:R
+
+Types:Instant
+
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 3 | EffectZone$ All | Description$ Escalate {1}{W} (Pay this cost for each mode chosen beyond the first.)
+
+SVar:IncreaseCost:Modes$Amount/Minus.1
+
+A:SP$ Charm | Cost$ R | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPumpPower,DBPumpKW | SpellDescription$ Choose one or both - Target creature gets +3/+0 until end of turn; Target creature gains first strike until end of turn.
+
+SVar:DBPumpPower:DB$ Pump | ValidTgts$ Creature | NumAtt$ +3 | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets +3/+0 until end of turn.
+
+SVar:DBPumpKW:DB$ Pump | ValidTgts$ Creature | KW$ First Strike | TgtPrompt$ Select target creature | SpellDescription$ Target creature gains first strike until end of turn.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/borrowed_hostility.jpg
+
+Oracle:Escalate {3} (Pay this cost for each mode chosen beyond the first.)\nChoose one or both -\n• Target creature gets +3/+0 until end of turn.\n• Target creature gains first strike until end of turn.
+

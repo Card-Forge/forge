@@ -1,0 +1,16 @@
+Name:Steadfast Cathar
+
+ManaCost:1 W
+
+Types:Creature Human Soldier
+
+PT:2/1
+
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +0/+2 until end of turn.
+
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 2
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steadfast_cathar.jpg
+
+Oracle:Whenever Steadfast Cathar attacks, it gets +0/+2 until end of turn.
+
