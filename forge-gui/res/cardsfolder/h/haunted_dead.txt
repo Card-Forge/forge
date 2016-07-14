@@ -1,18 +1,12 @@
 Name:Haunted Dead
-
 ManaCost:3 B
-
 Types:Creature Zombie
-
 PT:2/2
-
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 1/1 white Spirit creature token with flying onto the battlefield.
-
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ w 1 1 spirit SOI
-
 A:AB$ ChangeZone | Cost$ 1 B Discard<2/Card> | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
-
+SVar:DiscardMe:2
+SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_dead.jpg
-
 Oracle:When Haunted Dead enters the battlefield, put a 1/1 white Spirit creature token with flying onto the battlefield.\n{1}{B}, Discard two cards: Return Haunted Dead from your graveyard to the battlefield tapped.
 

@@ -2,7 +2,7 @@ Name:Sanitarium Skeleton
 ManaCost:B
 Types:Creature Skeleton
 PT:1/2
-A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:DiscardMe:2
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanitarium_skeleton.jpg
