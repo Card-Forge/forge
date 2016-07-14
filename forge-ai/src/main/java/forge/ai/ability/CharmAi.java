@@ -10,6 +10,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import forge.util.collect.FCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,88 @@ public class CharmAi extends SpellAbilityAi {
             // Current just choose the first available spell, which seem generally less disastrous for the AI.
             //return choices.subList(0, 1);
             return choices.subList(1, choices.size());
+        } else if ("Triskaidekaphobia".equals(sa.getHostCard().getName())) {
+            AbilitySub gain = choices.get(0);
+            AbilitySub lose = choices.get(1);
+            FCollection<Player> opponents = ai.getOpponents();
+
+            boolean oppTainted = false;
+            boolean allyTainted = ai.isCardInPlay("Tainted Remedy");
+            final int aiLife = ai.getLife(); 
+
+            //Check if Opponent controls Tainted Remedy
+            for (Player p : opponents) {
+                if (p.isCardInPlay("Tainted Remedy")) {
+                    oppTainted = true;
+                    break;
+                }
+            }
+            // if ai or ally of ai does control Tainted Remedy, prefer gain life instead of lose
+            if (!allyTainted) {
+                for (Player p : ai.getAllies()) {
+                    if (p.isCardInPlay("Tainted Remedy")) {
+                        allyTainted = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (!ai.canLoseLife() || ai.cantLose()) {
+                // ai cant lose life, or cant lose the game, don't think about others
+                chosenList.add(allyTainted ? gain : lose);
+            } else if (oppTainted || ai.getGame().isCardInPlay("Rain of Gore")) {
+                // Rain of Gore does negate lifegain, so don't benefit the others
+                // same for if a oppoent does control Tainted Remedy
+                // but if ai cant gain life, the effects are negated
+                chosenList.add(ai.canGainLife() ? lose : gain);
+            } else if (ai.getGame().isCardInPlay("Sulfuric Vortex")) {
+                // no life gain, but extra life loss.
+                if (aiLife >= 17)
+                    chosenList.add(lose);
+                // try to prevent to get to 13 with extra lose
+                else if (aiLife < 13 || ((aiLife - 13) % 2) == 1) {
+                    chosenList.add(gain);
+                } else {
+                    chosenList.add(lose);
+                }
+            } else if (ai.canGainLife() && aiLife <= 5) {
+                // critical Life try to gain more
+                chosenList.add(gain);
+            } else if(!ai.canGainLife() && aiLife == 14 ) {
+                // ai cant gain life, but try to avoid falling to 13
+                // but if a oppoent does control Tainted Remedy its irrelevant
+                chosenList.add(oppTainted ? lose : gain);
+            } else if (allyTainted) {
+                // Tainted Remedy negation logic, try gain instead of lose
+                // because negation does turn it into lose for opponents
+                boolean oppCritical = false;
+                // an oppoent is Critical = 14, and can't gain life, try to lose life instead
+                // but only if ai doesn't kill itself with that.
+                if (aiLife != 14) {
+                    for (Player p : opponents) {
+                        if (p.getLife() == 14 && !p.canGainLife() && p.canLoseLife()) {
+                            oppCritical = true;
+                            break;
+                        }
+                    }
+                }
+                chosenList.add(aiLife == 12 || oppCritical ? lose : gain);
+            } else {
+                // normal logic, try to gain life if its critical
+                boolean oppCritical = false;
+                // an oppoent is Critical = 12, and can gain life, try to gain life instead
+                // but only if ai doesn't kill itself with that.
+                if (aiLife != 12) {
+                    for (Player p : opponents) {
+                        if (p.getLife() == 12 && p.canGainLife()) {
+                            oppCritical = true;
+                            break;
+                        }
+                    }
+                }
+                chosenList.add(aiLife == 14 || aiLife <= 10 || oppCritical ? gain : lose);
+            }
+            return chosenList;
         }
         
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
