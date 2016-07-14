@@ -7,5 +7,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SV
 SVar:X:Count$Valid Creature.YouCtrl+Colorless+Other
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Creature.Colorless
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_aggressor.jpg
 Oracle:Devoid (This card has no color.)\nEldrazi Aggressor has haste as long as you control another colorless creature.

@@ -10,5 +10,6 @@ SVar:ChooseVigilance:DB$ Pump | Defined$ Self | KW$ Vigilance | SpellDescription
 SVar:ChooseTrample:DB$ Pump | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
 SVar:BuffedBy:Creature
 SVar:NoZeroToughnessAI:True
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_warleader.jpg
 Oracle:Veteran Warleader's power and toughness are each equal to the number of creatures you control.\nTap another untapped Ally you control: Veteran Warleader gains your choice of first strike, vigilance, or trample until end of turn.

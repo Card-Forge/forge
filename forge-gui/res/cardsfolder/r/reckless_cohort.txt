@@ -5,5 +5,6 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME attacks each combat if able. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME attacks each combat if able unless you control another Ally.
 SVar:X:Count$Valid Ally.Other+YouCtrl
 SVar:BuffedBy:Ally
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_cohort.jpg
 Oracle:Reckless Cohort attacks each combat if able unless you control another Ally.

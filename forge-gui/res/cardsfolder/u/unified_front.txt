@@ -3,5 +3,6 @@ ManaCost:3 W
 Types:Sorcery
 A:SP$ Token | Cost$ 3 W | TokenAmount$ X | References$ X | TokenName$ Kor Ally | TokenTypes$ Creature,Kor,Ally | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Converge — Put a 1/1 white Kor Ally creature token onto the battlefield for each color of mana spent to cast CARDNAME.
 SVar:X:Count$Converge
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unified_front.jpg
 Oracle:Converge — Put a 1/1 white Kor Ally creature token onto the battlefield for each color of mana spent to cast Unified Front.

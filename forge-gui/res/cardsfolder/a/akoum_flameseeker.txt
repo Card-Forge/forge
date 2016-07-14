@@ -6,5 +6,6 @@ A:AB$ Discard | Cost$ T tapXType<1/Ally> | Defined$ You | NumCards$ 1 | Mode$ Tg
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_flameseeker.jpg
 Oracle:Cohort - {T}, Tap an untapped Ally you control: Discard a card. If you do, draw a card.

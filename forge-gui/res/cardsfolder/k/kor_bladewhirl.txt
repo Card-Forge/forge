@@ -7,5 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.O
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ First Strike
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_bladewhirl.jpg
 Oracle:Rally — Whenever Kor Bladewhirl or another Ally enters the battlefield under your control, creatures you control gain first strike until end of turn.

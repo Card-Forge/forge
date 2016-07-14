@@ -4,5 +4,7 @@ Types:Creature Goblin Archer Ally
 PT:2/1
 K:First Strike
 A:AB$ DealDamage | Cost$ T tapXType<1/Ally> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target opponent.
+SVar:RemAIDeck:True
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zadas_commando.jpg
 Oracle:First strike\nCohort - {T}, Tap an untapped Ally you control: Zada's Commando deals 1 damage to target opponent.

@@ -7,5 +7,6 @@ K:Flying
 T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you cast a colorless spell, target opponent exiles the top card of his or her library.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 1 | Destination$ Exile | ValidTgts$ Opponent | TgtPrompt$ Choose the target opponent
 SVar:BuffedBy:Card.Colorless
+DeckHints:Color$Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_harvester.jpg
 Oracle:Devoid (This card has no color.)\nFlying\nWhenever you cast a colorless spell, target opponent exiles the top card of his or her library.

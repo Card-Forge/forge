@@ -3,5 +3,7 @@ ManaCost:W
 Types:Creature Kor Artificer Ally
 PT:1/2
 A:AB$ Dig | Cost$ T tapXType<1/Ally> | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Equipment | SpellDescription$ Look at the top four cards of your library. You may reveal an Equipment card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+SVar:RemAIDeck:True
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stoneforge_acolyte.jpg
 Oracle:Cohort - {T}, Tap an untapped Ally you control: Look at the top four cards of your library. You may reveal an Equipment card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

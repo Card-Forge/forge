@@ -6,5 +6,6 @@ K:Devoid
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+Colorless+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another colorless creature enters the battlefield under your control, target opponent loses 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | LifeAmount$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flayer_drone.jpg
 Oracle:Devoid (This card has no color.)\nFirst strike\nWhenever another colorless creature enters the battlefield under your control, target opponent loses 1 life.

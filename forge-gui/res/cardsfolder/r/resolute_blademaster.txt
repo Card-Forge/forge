@@ -7,5 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.O
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Double Strike
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resolute_blademaster.jpg
 Oracle:Rally — Whenever Resolute Blademaster or another Ally enters the battlefield under your control, creatures you control gain double strike until end of turn.

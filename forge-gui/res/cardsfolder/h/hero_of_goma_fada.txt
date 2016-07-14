@@ -7,5 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.O
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Indestructible
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hero_of_goma_fada.jpg
 Oracle:Rally - Whenever Hero of Goma Fada or another Ally enters the battlefield under your control, creatures you control gain indestructible until end of turn.

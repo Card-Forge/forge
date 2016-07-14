@@ -148,6 +148,14 @@ public class CardRanker {
                 score += Iterables.size(cards) * typeFactors.get(type);
             }
         }
+        final DeckHints needs = card.getRules().getAiHints().getDeckNeeds();
+        if (needs != null && needs.isValid()) {
+            final Map<DeckHints.Type, Iterable<PaperCard>> cardsByType = needs.filterByType(otherCards);
+            for (DeckHints.Type type : cardsByType.keySet()) {
+                Iterable<PaperCard> cards = cardsByType.get(type);
+                score += Iterables.size(cards) * typeFactors.get(type);
+            }
+        }
         return score;
     }
 
