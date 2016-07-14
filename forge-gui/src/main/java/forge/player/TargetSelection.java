@@ -73,6 +73,7 @@ public class TargetSelection {
         final int maxTargets = numTargets != null ? numTargets.intValue() : tgt.getMaxTargets(ability.getHostCard(), ability);
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
         final int numTargeted = ability.getTargets().getNumTargeted();
+        final boolean isSingleZone = ability.getTargetRestrictions().isSingleZone();
 
         final boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
         final boolean hasAllTargets = numTargeted == maxTargets && maxTargets > 0;
@@ -114,6 +115,19 @@ public class TargetSelection {
         }
         else {
             final List<Card> validTargets = CardUtil.getValidCardsToTarget(tgt, ability);
+            // single zone
+            if (isSingleZone) {
+                final List<Card> removeCandidates = new ArrayList<>();
+                final Card firstTgt = ability.getTargets().getFirstTargetedCard();
+                if (firstTgt != null) {
+                    for (Card t : validTargets) {
+                        if (!t.getController().equals(firstTgt.getController())) {
+                            removeCandidates.add(t);
+                        }
+                    }
+                    validTargets.removeAll(removeCandidates);
+                }
+            }
             if (validTargets.isEmpty()) {
                 //if no valid cards to target and only one valid non-card, auto-target the non-card
                 //this handles "target opponent" cards, along with any other cards that can only target a single non-card game entity
