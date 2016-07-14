@@ -4370,6 +4370,7 @@ forge-gui/res/cardsfolder/d/dark_privilege.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_prophecy.txt -text
 forge-gui/res/cardsfolder/d/dark_revenant.txt -text
 forge-gui/res/cardsfolder/d/dark_ritual.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/dark_salvation.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/d/dark_sphere.txt -text
 forge-gui/res/cardsfolder/d/dark_supplicant.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/d/dark_suspicions.txt -text svneol=unset#text/plain
