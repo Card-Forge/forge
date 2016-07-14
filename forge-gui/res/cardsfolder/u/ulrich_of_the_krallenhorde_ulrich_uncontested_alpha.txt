@@ -18,10 +18,9 @@ ManaCost:no cost
 Colors:red,green
 Types:Legendary Creature Werewolf
 PT:6/6
-K:Trample
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigFight | OptionalDecider$ You | TriggerDescription$ Whenever this creature transforms into CARDNAME, you may have it fight target non-Werewolf creature you don't control.
 SVar:TrigFight:AB$ Fight | Cost$ 0 | Defined$ Self | ValidTgts$ Creature.nonWerewolf+YouDontCtrl | TgtPrompt$ Choose target non-Werewolf creature you don't control 
 T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulrich_uncontested_alpha.jpg
-Oracle:Trample\nWhenever this creature transforms into Ulrich, Uncontested Alpha, you may have it fight target non-Werewolf creature you don't control.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Ulrich, Uncontested Alpha. 
+Oracle:Whenever this creature transforms into Ulrich, Uncontested Alpha, you may have it fight target non-Werewolf creature you don't control.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Ulrich, Uncontested Alpha. 
