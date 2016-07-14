@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
@@ -20,6 +22,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.combat.Combat;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
@@ -301,6 +304,25 @@ public class TokenAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         // TODO: AILogic
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.player.Player> options)
+     */
+    @Override
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+        // TODO: AILogic
+        Combat combat = ai.getGame().getCombat();
+        // TokenAttacking 
+        if (combat != null && sa.hasParam("TokenAttacking")) {
+            Card attacker = spawnToken(ai, sa);
+            for (Player p : options) {
+                if (!ComputerUtilCard.canBeBlockedProfitably(p, attacker)) {
+                    return p;
+                }
+            }
+        }
+        return Iterables.getFirst(options, null);
     }
 
     /**
