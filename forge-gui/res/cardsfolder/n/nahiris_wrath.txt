@@ -1,0 +1,9 @@
+Name:Nahiri's Wrath
+ManaCost:2 R
+Types:Sorcery
+A:SP$ DealDamage | Announce$ X | Cost$ 2 R Discard<X/Card> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | TargetMin$ 0 | TargetMax$ X | NumDmg$ Y | References$ X,Y | SpellDescription$ CARDNAME deals damage equal to the total converted mana cost of the discarded cards to each of up to X target creatures and/or planeswalkers.
+SVar:X:XChoice
+SVar:Y:Discarded$CardManaCost
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nahiris_wrath.jpg
+Oracle:As an additional cost to cast Nahiri's Wrath, discard X cards.\nNahiri's Wrath deals damage equal to the total converted mana cost of the discarded cards to each of up to X target creatures and/or planeswalkers.
