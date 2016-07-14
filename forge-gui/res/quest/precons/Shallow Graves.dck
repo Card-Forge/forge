@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Shallow Graves
+Description=Eldritch Moon U/B Intro Pack
+Deck Type=constructed
+Set=EMN
+Image=shallow_graves.jpg
+[Main]
+2 Advanced Stitchwing|EMN
+1 Boon of Emrakul|EMN
+3 Cemetery Recruitment|EMN
+2 Compelling Deterrence|SOI
+1 Crow of Dark Tidings|SOI
+1 Cryptbreaker|EMN
+2 Exultant Cultist|EMN
+1 Ghostly Wings|TOR
+2 Graf Harvest|EMN
+12 Island|SOI
+1 Laboratory Brute|EMN
+1 Lamplighter of Selhoff|SOI
+2 Liliana's Elite|EMN
+1 Liliana's Indignation|SOI
+1 Murder|M13
+1 Noosegraf Mob|EMN
+1 Reckless Scholar|CNS
+2 Seagraf Skaab|SOI
+2 Spontaneous Mutation|EMN
+2 Stitched Mangler|SOI
+1 Stitchwing Skaab|SOI
+1 Succumb to Temptation|EMN
+13 Swamp|SOI
+2 Tattered Haunter|EMN
+1 Throttle|KTK
+1 Wailing Ghoul|EMN
+

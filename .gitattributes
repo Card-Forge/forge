@@ -18555,6 +18555,7 @@ forge-gui/res/quest/precons/Cruel[!!-~]Plots.dck -text
 forge-gui/res/quest/precons/Crusher.dck -text
 forge-gui/res/quest/precons/Cunning[!!-~]Plan.dck -text
 forge-gui/res/quest/precons/Custom[!!-~]Creatures.dck -text
+forge-gui/res/quest/precons/Dangerous[!!-~]Knowledge.dck -text
 forge-gui/res/quest/precons/Dark[!!-~]Devotion.dck -text
 forge-gui/res/quest/precons/Dark[!!-~]Sacrifice.dck -text
 forge-gui/res/quest/precons/Dead[!!-~]Ahead.dck -text
@@ -18703,6 +18704,7 @@ forge-gui/res/quest/precons/Sacred[!!-~]Assault.dck -text
 forge-gui/res/quest/precons/Sacrificial[!!-~]Bam.dck -text
 forge-gui/res/quest/precons/Selesnya[!!-~]Surge.dck -text
 forge-gui/res/quest/precons/Selesnya[!!-~]United.dck -text
+forge-gui/res/quest/precons/Shallow[!!-~]Graves.dck -text
 forge-gui/res/quest/precons/Shamanism.dck -text
 forge-gui/res/quest/precons/Sidestep.dck -text
 forge-gui/res/quest/precons/Simic[!!-~]Synthesis.dck -text
@@ -18747,8 +18749,10 @@ forge-gui/res/quest/precons/Turnabout.dck -text
 forge-gui/res/quest/precons/Twisted[!!-~]Reality.dck -text
 forge-gui/res/quest/precons/Ultimate[!!-~]Sacrifice.dck -text
 forge-gui/res/quest/precons/Unflinching[!!-~]Assault.dck -text
+forge-gui/res/quest/precons/Unlikely[!!-~]Alliances.dck -text
 forge-gui/res/quest/precons/Unnatural[!!-~]Schemes.dck -text
 forge-gui/res/quest/precons/Unstable[!!-~]Terrain.dck -text
+forge-gui/res/quest/precons/Untamed[!!-~]Wild.dck -text
 forge-gui/res/quest/precons/Vampire[!!-~]Onslaught.dck -text
 forge-gui/res/quest/precons/Vicious[!!-~]Cycle.dck -text
 forge-gui/res/quest/precons/Voracious[!!-~]Rage.dck -text
