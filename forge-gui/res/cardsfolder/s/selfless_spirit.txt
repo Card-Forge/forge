@@ -1,16 +1,10 @@
 Name:Selfless Spirit
-
 ManaCost:1 W
-
 Types:Creature Spirit Cleric
-
+K:Flying
 PT:2/1
-
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SpellDescription$ Creatures you control gain indestructible until end of turn.
-
 SVar:RemAIDeck:True
-
-SVar:Picture:http://www.wizards.com/global/images/magic/general/selless_spirit.jpg
-
+SVar:Picture:http://www.wizards.com/global/images/magic/general/selfless_spirit.jpg
 Oracle:Flying\nSacrifice Selfless Spirit: Creatures you control gain indestructible until the end of turn.
 
