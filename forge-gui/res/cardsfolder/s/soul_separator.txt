@@ -5,7 +5,7 @@ A:AB$ ChangeZone | Cost$ 5 T Sac<1/CARDNAME> | RememberLKI$ True | Origin$ Grave
 
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 1 | SetToughness$ 1 | AddTypes$ Spirit | Keywords$ Flying | SubAbility$ DBToken
 
-SVar:DBToken:DB$ Token | TokenImage$ b x x zombie EMN | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenPower$ X | TokenToughness$ Y | TokenColors$ Black | TokenOwner$ You | TokenAmount$ 1 | References$ X,Y | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenImage$ b x y zombie EMN | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenPower$ X | TokenToughness$ Y | TokenColors$ Black | TokenOwner$ You | TokenAmount$ 1 | References$ X,Y | SubAbility$ DBCleanup
 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 
