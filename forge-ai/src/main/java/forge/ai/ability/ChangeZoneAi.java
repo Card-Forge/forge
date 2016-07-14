@@ -1039,7 +1039,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // TODO: ideally the AI should consider at this point which targets exactly to pick (e.g. one card in the first player's graveyard
         // vs. two cards in the second player's graveyard, which cards are more relevant to be targeted, etc.). Consider improving.
         if (sa.getTargetRestrictions().isSingleZone()) {
-            List<Card> removalCandidates = new ArrayList<>();
             Card firstTgt = sa.getTargets().getFirstTargetedCard();
             if (firstTgt != null) {
                 for (Card t : sa.getTargets().getTargetCards()) {
