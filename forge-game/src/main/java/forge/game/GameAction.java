@@ -1233,6 +1233,8 @@ public class GameAction {
         // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
         runParams.put("Card", CardFactory.copyCardWithChangedStats(c, false)); 
         runParams.put("Cause", source);
+        runParams.put("CostStack", game.costPaymentStack);
+        runParams.put("IndividualCostPaymentInstance", game.costPaymentStack.peek());
         game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
 
         return sacrificeDestroy(c);
