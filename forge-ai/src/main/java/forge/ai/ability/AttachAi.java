@@ -1072,7 +1072,8 @@ public class AttachAi extends SpellAbilityAi {
                 return null;
             }
 
-            boolean uselessCreature = isUselessCreature(aiPlayer, attachSource.getEquipping());
+            boolean dontControl = !aiPlayer.equals(attachSource.getEquipping().getController());
+            boolean uselessCreature = isUselessCreature(aiPlayer, attachSource.getEquipping()) || dontControl;
 
             if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never")) {
                 // Do not equip other creatures if the AI profile does not allow moving equipment around
