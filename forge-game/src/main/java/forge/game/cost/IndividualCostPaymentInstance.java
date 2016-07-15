@@ -8,14 +8,17 @@ public class IndividualCostPaymentInstance implements IIdentifiable {
 
     private final int id;
     private final CostPart cost;
+    private final CostPayment payment;
 
-    public IndividualCostPaymentInstance(final CostPart cost) {
+    public IndividualCostPaymentInstance(final CostPart cost, final CostPayment payment) {
         id = nextId();
         this.cost = cost;
+        this.payment = payment;
     }
 
     public int getId() { return id; }
 
     public CostPart getCost() { return cost; }
+    public CostPayment getPayment() { return payment; }
 
 }
