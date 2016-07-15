@@ -153,7 +153,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
-                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p));
+                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), host.getName() + " - Looking at cards in ");
 
                     if (noMove) {
                         // Let the activating player see the cards even if they're not moved
