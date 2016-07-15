@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, enchanted creature's controller sacrifices it and you put a 1/1 colorless Myr artifact creature token onto the battlefield.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ EnchantedController | SacValid$ Card.AttachedBy | SubAbility$ DBToken
+SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ Enchanted | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ c 1 1 myr NPH | TokenOwner$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parasitic_implant.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, enchanted creature's controller sacrifices it and you put a 1/1 colorless Myr artifact creature token onto the battlefield.
