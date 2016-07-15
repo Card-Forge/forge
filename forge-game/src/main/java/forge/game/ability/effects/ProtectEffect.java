@@ -145,6 +145,7 @@ public class ProtectEffect extends SpellAbilityEffect {
 
             for (final String gain : gains) {
                 tgtC.addExtrinsicKeyword("Protection from " + gain);
+                tgtC.updateKeywords();
             }
 
             if (!sa.hasParam("Permanent")) {
@@ -177,6 +178,7 @@ public class ProtectEffect extends SpellAbilityEffect {
 
             for (final String gain : gains) {
                 unTgtC.addExtrinsicKeyword("Protection from " + gain);
+                unTgtC.updateKeywords();
             }
 
             if (!sa.hasParam("Permanent")) {
