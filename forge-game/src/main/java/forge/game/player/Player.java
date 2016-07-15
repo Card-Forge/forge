@@ -1442,19 +1442,23 @@ public class Player extends GameEntity implements Comparable<Player> {
         }*/
         final Card source = sa != null ? sa.getHostCard() : null;
 
-        // Replacement effects
-        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
-        repRunParams.put("Event", "Discard");
-        repRunParams.put("Card", c);
-        repRunParams.put("Source", source);
-        repRunParams.put("Affected", this);
-
-        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
-            return null;
-        }
-
         boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
         boolean discardMadness = sa != null && sa.hasParam("Madness");
+
+        // DiscardToTopOfLibrary and Madness are replacement discards,
+        // that should not trigger other Replacement again
+        if (!discardToTopOfLibrary && !discardMadness) {
+            // Replacement effects
+            final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+            repRunParams.put("Event", "Discard");
+            repRunParams.put("Card", c);
+            repRunParams.put("Source", source);
+            repRunParams.put("Affected", this);
+
+            if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+                return null;
+            }
+        }
 
         StringBuilder sb = new StringBuilder();
         sb.append(this).append(" discards ").append(c);
@@ -1482,8 +1486,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (sa.hasParam("Cause")) {
                 final CardCollection col = AbilityUtils.getDefinedCards(cause, sa.getParam("Cause"), sa);
                 if (!col.isEmpty()) {
-        	        cause = col.getFirst();
-        	    }
+                    cause = col.getFirst();
+                }
             }
         }
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
