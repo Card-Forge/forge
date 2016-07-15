@@ -2,12 +2,13 @@ package forge.game.zone;
 
 import forge.game.cost.IndividualCostPaymentInstance;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 /*
  * simple stack wrapper class for tracking cost payments (mainly for triggers to use)
  */
-public class CostPaymentStack {
+public class CostPaymentStack implements Iterable<IndividualCostPaymentInstance>{
 
     private Stack<IndividualCostPaymentInstance> stack;
 
@@ -34,4 +35,11 @@ public class CostPaymentStack {
     public void clear() {
         stack.clear();
     }
+
+	@Override
+	public Iterator<IndividualCostPaymentInstance> iterator() {
+		return stack.iterator();
+	}
+    
+    
 }
