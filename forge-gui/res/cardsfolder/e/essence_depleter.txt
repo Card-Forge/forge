@@ -5,5 +5,6 @@ PT:2/3
 K:Devoid
 A:AB$ LoseLife | Cost$ 1 C | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 1 life and you gain 1 life.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_depleter.jpg
 Oracle:Devoid (This card has no color.)\n{1}{C}: Target opponent loses 1 life and you gain 1 life. ({C} represents colorless mana.)

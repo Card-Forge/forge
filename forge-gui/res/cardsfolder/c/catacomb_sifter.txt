@@ -8,5 +8,6 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi Scion |
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever another creature you control dies, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
 SVar:TrigScry:AB$ Scry | Cost$ 0 | ScryNum$ 1
+DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catacomb_sifter.jpg
 Oracle:Devoid (This card has no color.)\nWhen Catacomb Sifter enters the battlefield, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."\nWhenever another creature you control dies, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

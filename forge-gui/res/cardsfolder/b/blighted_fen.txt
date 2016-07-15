@@ -3,5 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Sacrifice | Cost$ 4 B T Sac<1/CARDNAME> | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ 1 | SpellDescription$ Target opponent sacrifices a creature.
+DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_fen.jpg
 Oracle:{T}: Add {C} to your mana pool.\n{4}{B}, {T}, Sacrifice Blighted Fen: Target opponent sacrifices a creature.

@@ -4,5 +4,6 @@ Types:Creature Eldrazi Drone
 PT:1/2
 K:Devoid
 A:AB$ Draw | Cost$ 3 C | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prophet_of_distortion.jpg
 Oracle:Devoid (This card has no color.)\n{3}{C}: Draw a card. ({C} represents colorless mana.)

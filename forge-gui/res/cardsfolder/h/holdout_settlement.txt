@@ -3,5 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holdout_settlement.jpg
 Oracle:{T}: Add {C} to your mana pool. ({C} represents colorless mana.)\n{T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.

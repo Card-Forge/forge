@@ -8,5 +8,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescripti
 SVar:TrigToken:AB$ Token | Cost$ C | TokenAmount$ X | References$ X | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3 | TokenAbilities$ ABMana
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken+YouCtrl
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_redeemer.jpg
 Oracle:Devoid (This card has no color.)\nFlash\nWhen you cast Vile Redeemer, you may pay {C}. If you do, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield for each nontoken creature that died under your control this turn. Those tokens have "Sacrifice this creature: Add {C} to your mana pool."

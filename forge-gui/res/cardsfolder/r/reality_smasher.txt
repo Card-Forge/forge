@@ -6,5 +6,6 @@ K:Trample
 K:Haste
 T:Mode$ BecomesTarget | ValidSource$ Card.OppCtrl | SourceType$ Spell | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell an opponent controls, counter that spell unless its controller discards a card.
 SVar:TrigCounter:AB$ Counter | Cost$ 0 | Defined$ TriggeredSourceSA | UnlessCost$ Discard<1/Card> | UnlessPayer$ TriggeredSourceSAController
+DeckNeeds:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_smasher.jpg
 Oracle:({C} represents colorless mana.)\nTrample, haste\nWhenever Reality Smasher becomes the target of a spell an opponent controls, counter that spell unless its controller discards a card.

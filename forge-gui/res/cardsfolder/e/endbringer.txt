@@ -6,5 +6,6 @@ K:CARDNAME untaps during each other player's untap step.
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 A:AB$ Pump | Cost$ C T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't attack or block. | SpellDescription$ Target creature can't attack or block this turn.
 A:AB$ Draw | Cost$ C C T | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckNeeds:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endbringer.jpg
 Oracle:Untap Endbringer during each other player's untap step.\n{T}: Endbringer deals 1 damage to target creature or player.\n{C}, {T}: Target creature can't attack or block this turn.\n{C}{C}, {T}: Draw a card.

@@ -5,5 +5,6 @@ PT:3/3
 K:Devoid
 A:AB$ ChangeZone | Cost$ 2 C | TargetMin$ 1 | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | SpellDescription$ Exile another target creature, then return it to the battlefield tapped under its owner's control.
 SVar:DBReturn:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Tapped$ True | Destination$ Battlefield
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_displacer.jpg
 Oracle:Devoid (This card has no color.)\n{2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.

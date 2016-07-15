@@ -5,5 +5,6 @@ K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add one mana of any color to your mana pool.
 SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ Any
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_vestige.jpg
 Oracle:Crumbling Vestige enters the battlefield tapped.\nWhen Crumbling Vestige enters the battlefield, add one mana of any color to your mana pool.\n{T}: Add {C} to your mana pool. ({C} represents colorless mana.)

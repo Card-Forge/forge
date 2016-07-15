@@ -7,5 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescr
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 1 C | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature
 K:Flying
 K:CARDNAME can't block.
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bearer_of_silence.jpg
 Oracle:Devoid (This card has no color.)\nWhen you cast Bearer of Silence, you may pay {1}{C}. If you do, target opponent sacrifices a creature. ({C} represents colorless mana.)\nFlying\nBearer of Silence can't block.

@@ -3,5 +3,6 @@ ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool. ({C} represents colorless mana.)
 A:AB$ Scry | Cost$ 2 T | ScryNum$ 1 |SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seers_lantern.jpg
 Oracle:{T}: Add {C} to your mana pool. ({C} represents colorless mana.)\n{2}, {T}: Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

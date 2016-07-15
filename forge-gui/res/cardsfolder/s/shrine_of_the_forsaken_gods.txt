@@ -4,5 +4,7 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ GE7 | RestrictValid$ Card.Colorless | SpellDescription$ {T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless spells. Activate this ability only if you control seven or more lands.
 SVar:RemRandomDeck:True
+DeckHas:Ability$Mana.Colorless
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_the_forsaken_gods.jpg
 Oracle:{T}: Add {C} to your mana pool.\n{T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless spells. Activate this ability only if you control seven or more lands.

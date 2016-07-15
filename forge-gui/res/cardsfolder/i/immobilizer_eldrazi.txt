@@ -4,5 +4,6 @@ Types:Creature Eldrazi Drone
 PT:2/1
 K:Devoid
 A:AB$ PumpAll | Cost$ 2 C | ValidCards$ Creature.powerLTtoughness | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Each creature with toughness greater than its power can't block this turn.
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immobilizer_eldrazi.jpg
 Oracle:Devoid (This card has no color.)\n{2}{C}: Each creature with toughness greater than its power can't block this turn. ({C} represents colorless mana.)

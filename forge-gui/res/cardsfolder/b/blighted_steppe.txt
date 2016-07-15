@@ -4,5 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ GainLife | Cost$ 3 W T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ X | References$ X | SpellDescription$ Gain 2 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature/Times.2
+DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_steppe.jpg
 Oracle:{T}: Add {C} to your mana pool.\n{3}{W}, {T}, Sacrifice Blighted Steppe: Gain 2 life for each creature you control.
