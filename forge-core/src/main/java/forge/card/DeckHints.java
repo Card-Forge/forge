@@ -4,13 +4,14 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.item.PaperCard;
-import forge.util.PredicateString;
 import forge.util.PredicateString.StringOp;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * DeckHints provides the ability for a Card to "want" another Card or type of
@@ -23,7 +24,8 @@ public class DeckHints {
      * Enum of types of DeckHints.
      */
     public enum Type {
-
+        /** The Ability */
+        ABILITY,
         /** The Color. */
         COLOR,
         /** The Keyword. */
@@ -63,6 +65,17 @@ public class DeckHints {
 
     public boolean isValid() {
         return valid;
+    }
+    public boolean contains(Type type, String hint) {
+        if (filters == null) {
+            return false;
+        }
+        for (Pair<Type, String> filter : filters) {
+            if (filter.getLeft() == type && filter.getRight().equals(hint)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -129,10 +142,10 @@ public class DeckHints {
     private Iterable<PaperCard> getCardsForFilter(Iterable<PaperCard> cardList, Type type, String param) {
         List<PaperCard> cards = new ArrayList<>();
         switch (type) {
-            case TYPE:
-                String[] types = param.split("\\|");
-                for (String t : types) {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.subType(t), PaperCard.FN_GET_RULES));
+            case ABILITY:
+                String[] abilities = param.split("\\|");
+                for (String ability : abilities) {
+                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHas(Type.ABILITY, ability), PaperCard.FN_GET_RULES));
                 }
                 break;
             case COLOR:
@@ -156,6 +169,12 @@ public class DeckHints {
                 String[] names = param.split("\\|");
                 for (String name : names) {
                     Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES));
+                }
+                break;
+            case TYPE:
+                String[] types = param.split("\\|");
+                for (String t : types) {
+                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.subType(t), PaperCard.FN_GET_RULES));
                 }
                 break;
         }

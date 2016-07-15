@@ -249,6 +249,7 @@ public final class CardRules implements ICardCharacteristics {
         private boolean removedFromRandomDecks = false;
         private DeckHints hints = null;
         private DeckHints needs = null;
+        private DeckHints has = null;
 
         /**
          * Reset all fields to parse next card (to avoid allocating new CardRulesReader N times)
@@ -267,6 +268,7 @@ public final class CardRules implements ICardCharacteristics {
             this.removedFromRandomDecks = false;
             this.needs = null;
             this.hints = null;
+            this.has = null;
         }
 
         /**
@@ -275,7 +277,7 @@ public final class CardRules implements ICardCharacteristics {
          * @return the card
          */
         public final CardRules getCard() {
-            CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs );
+            CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs, has);
             faces[0].assignMissingFields();
             if (null != faces[1]) faces[1].assignMissingFields();
             final CardRules result = new CardRules(faces, altMode, cah);
@@ -333,6 +335,8 @@ public final class CardRules implements ICardCharacteristics {
                         hints = new DeckHints(value);
                     } else if ("DeckNeeds".equals(key)) {
                         needs = new DeckHints(value);
+                    } else if ("DeckHas".equals(key)) {
+                        has = new DeckHints(value);
                     }
                     break;
 
@@ -483,7 +487,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public static CardRules getUnsupportedCardNamed(String name) {
-        CardAiHints cah = new CardAiHints(true, true, null, null);
+        CardAiHints cah = new CardAiHints(true, true, null, null, null);
         CardFace[] faces = { new CardFace(name), null};
         faces[0].setColor(ColorSet.fromMask(0));
         faces[0].setType(CardType.parse(""));

@@ -5,5 +5,6 @@ PT:2/3
 K:Devoid
 A:AB$ Token | Cost$ 1 G ExiledMoveToGrave<1/Card.OppOwn/card an opponent owns> | TokenAmount$ 1 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAbilities$ ABMana | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3 | SpellDescription$ Put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
+DeckHints:Keyword$Ingest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/void_attendant.jpg
 Oracle:Devoid (This card has no color.)\n{1}{G}, Put a card an opponent owns from exile into that player's graveyard: Put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."

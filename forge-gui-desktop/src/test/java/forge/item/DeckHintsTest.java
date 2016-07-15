@@ -131,10 +131,28 @@ public class DeckHintsTest {
         list.add(readCard("breaker_of_armies.txt"));
         list.add(readCard("benthic_infiltrator.txt"));
 
-
         Map<DeckHints.Type, Iterable<PaperCard>> filterByType = hints.filterByType(list);
         Assert.assertEquals(1, Iterables.size(filterByType.get(DeckHints.Type.KEYWORD)));
         Assert.assertEquals(1, Iterables.size(filterByType.get(DeckHints.Type.COLOR)));
+    }
+
+    /**
+     * Test for has ability.
+     */
+    @Test(timeOut = 1000, enabled = true)
+    void testDeckHasAbility() {
+        PaperCard pc = readCard("kozileks_channeler.txt");
+        DeckHints has = pc.getRules().getAiHints().getDeckHas();
+        Assert.assertNotNull(has);
+
+        PaperCard pc2 = readCard("kozileks_pathfinder.txt");
+        DeckHints hints = pc2.getRules().getAiHints().getDeckHints();
+
+        List<PaperCard> list = new ArrayList<>();
+        list.add(pc);
+        list.add(readCard("assault_griffin.txt"));
+
+        Assert.assertEquals(1, hints.filter(list).size());
     }
 
     /**

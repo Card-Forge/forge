@@ -5,5 +5,6 @@ PT:4/5
 T:Mode$ SpellCast | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When you cast CARDNAME, you may put two cards your opponents own from exile into their owners' graveyards. If you do, put three 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
 SVar:TrigToken:AB$ Token | Cost$ ExiledMoveToGrave<2/Card.OppOwn/cards your opponents own> | TokenAmount$ 3 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3 | TokenAbilities$ ABMana
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
+DeckHints:Keyword$Ingest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight_herder.jpg
 Oracle:When you cast Blight Herder, you may put two cards your opponents own from exile into their owners' graveyards. If you do, put three 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."

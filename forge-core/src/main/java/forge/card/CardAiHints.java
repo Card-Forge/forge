@@ -12,13 +12,15 @@ public class CardAiHints {
 
     private final DeckHints deckHints;
     private final DeckHints deckNeeds;
+    private final DeckHints deckHas;
 
 
-    public CardAiHints(boolean remAi, boolean remRandom, DeckHints dh, DeckHints dn) {
+    public CardAiHints(boolean remAi, boolean remRandom, DeckHints dh, DeckHints dn, DeckHints has) {
         isRemovedFromAIDecks = remAi;
         isRemovedFromRandomDecks = remRandom;
         deckHints = dh;
         deckNeeds = dn;
+        deckHas = has;
     }
 
     /**
@@ -51,6 +53,13 @@ public class CardAiHints {
      */
     public DeckHints getDeckNeeds() {
         return deckNeeds;
+    }
+
+    /**
+     * @return the deckHints
+     */
+    public DeckHints getDeckHas() {
+        return deckHas;
     }
 
     /**

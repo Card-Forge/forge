@@ -5,5 +5,6 @@ PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target card with awaken from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl+withAwaken
 S:Mode$ Continuous | Affected$ Creature.Land+YouCtrl | AddKeyword$ Flying | Description$ Land creatures you control have flying.
+DeckHints:Keyword$Awaken
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halimar_tidecaller.jpg
 Oracle:When Halimar Tidecaller enters the battlefield, you may return target card with awaken from your graveyard to your hand.\nLand creatures you control have flying.
