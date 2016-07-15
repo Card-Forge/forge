@@ -4,7 +4,11 @@ Types:Artifact
 A:AB$ ChangeZone | Cost$ X T | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant.cmcEQX,Sorcery.cmcEQX | References$ X | ChangeNum$ 1 | PrecostDesc$ Imprint - | SpellDescription$ You may exile an instant or sorcery card with converted mana cost X from your hand.
 SVar:X:Count$xPaid
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ At the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.
-SVar:TrigCopy:AB$ Play | Cost$ 0 | Defined$ Imprinted | WithoutManaCost$ True | Optional$ True | CopyCard$ True
+SVar:TrigCopy:AB$ Play | Cost$ 0 | Valid$ Card.IsImprinted+ExiledWithSource | ValidZone$ Exile | WithoutManaCost$ True | Optional$ True | CopyCard$ True
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:RemAIDeck:True
