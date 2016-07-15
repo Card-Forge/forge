@@ -191,7 +191,7 @@ public final class StaticAbilityContinuous {
             final Iterable<String> chosencolors = hostCard.getChosenColors();
             for (final String color : chosencolors) {
                 for (int w = 0; w < addKeywords.length; w++) {
-                    addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", color.substring(0, 1).toUpperCase().concat(color.substring(1, color.length())));
+                    addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", StringUtils.capitalize(color));
                 }
             }
             final String chosenType = hostCard.getChosenType();
