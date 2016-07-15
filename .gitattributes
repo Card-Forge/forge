@@ -10512,6 +10512,7 @@ forge-gui/res/cardsfolder/n/nemesis_of_mortals.txt -text
 forge-gui/res/cardsfolder/n/nemesis_of_reason.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/n/nemesis_trap.txt -text
 forge-gui/res/cardsfolder/n/nephalia.txt -text
+forge-gui/res/cardsfolder/n/nephalia_academy.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/n/nephalia_drownyard.txt -text
 forge-gui/res/cardsfolder/n/nephalia_moondrakes.txt -text
 forge-gui/res/cardsfolder/n/nephalia_seakite.txt -text
