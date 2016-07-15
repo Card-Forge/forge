@@ -83,7 +83,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 for (final String keyword : tgtC.getKeywords()) {
                     if (keyword.startsWith("Protection:")) {
                         for (final String kw : kws) {
-                            if (keyword.contains(":" + kw + ":"))
+                            if (keyword.matches("(?i).*:" + kw + ":.*"))
                                 removedKW.add(keyword);
                         }
                     }
