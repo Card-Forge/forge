@@ -6356,6 +6356,7 @@ forge-gui/res/cardsfolder/f/fortress_cyclops.txt -text
 forge-gui/res/cardsfolder/f/fortune_thief.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fossil_find.txt -text
 forge-gui/res/cardsfolder/f/foster.txt -text
+forge-gui/res/cardsfolder/f/foul_emissary.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/f/foul_familiar.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/foul_imp.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/foul_orchard.txt -text
