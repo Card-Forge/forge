@@ -2,6 +2,6 @@ Name:Rootwater Shaman
 ManaCost:2 U
 Types:Creature Merfolk Shaman
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Aura+withEnchant creature+YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ You may cast Aura spells with enchant creature as though they had flash.
+S:Mode$ Continuous | Affected$ Card.Aura+withEnchant creature+YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library,Stack | Description$ You may cast Aura spells with enchant creature as though they had flash.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_shaman.jpg
 Oracle:You may cast Aura spells with enchant creature as though they had flash.
