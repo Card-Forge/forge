@@ -1,6 +1,7 @@
 package forge.game.ability;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -783,12 +784,15 @@ public class AbilityUtils {
         }
 
         String valid = type;
-        int eqIndex = valid.indexOf("EQ");
-        if (eqIndex >= 0) {
-            char reference = valid.charAt(eqIndex + 2); // take whatever goes after EQ
-            if (Character.isLetter(reference)) {
-                String varName = valid.split(",")[0].split("EQ")[1].split("\\+")[0];
-                valid = valid.replace("EQ" + varName, "EQ" + Integer.toString(calculateAmount(source, varName, sa)));
+
+        for (String t : Lists.newArrayList("LT", "LE", "EQ", "GE", "GT", "NE")) {
+            int index = valid.indexOf(t);
+            if (index >= 0) {
+                char reference = valid.charAt(index + 2); // take whatever goes after EQ
+                if (Character.isLetter(reference)) {
+                    String varName = valid.split(",")[0].split(t)[1].split("\\+")[0];
+                    valid = valid.replace(t + varName, t + Integer.toString(calculateAmount(source, varName, sa)));
+                }
             }
         }
         if (sa.hasParam("AbilityCount")) { // replace specific string other than "EQ" cases
