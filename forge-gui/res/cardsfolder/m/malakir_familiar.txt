@@ -6,5 +6,6 @@ K:Flying
 K:Deathtouch
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you gain life, CARDNAME gets +1/+1 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+DeckHints:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malakir_familiar.jpg
 Oracle:Flying, deahtouch\nWhenever you gain life, Malakir Familiar gets +1/+1 until end of turn.

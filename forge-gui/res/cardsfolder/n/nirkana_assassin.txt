@@ -4,5 +4,6 @@ Types:Creature Vampire Assassin Ally
 PT:2/3
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you gain life, CARDNAME gains deathtouch until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Deathtouch
+DeckHints:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalastria_nightwatch.jpg
 Oracle:Whenever you gain life, Nirkana Assassin gains deathtouch until end of turn.

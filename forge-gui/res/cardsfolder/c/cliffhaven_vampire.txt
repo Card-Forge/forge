@@ -5,5 +5,6 @@ PT:2/4
 K:Flying
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, each opponent loses 1 life.
 SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1
+DeckHints:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cliffhaven_vampire.jpg
 Oracle:Flying\nWhenever you gain life, each opponent loses 1 life.

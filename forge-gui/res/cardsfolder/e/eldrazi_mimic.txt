@@ -7,5 +7,6 @@ SVar:TrigAnimate:AB$ Animate | Cost$ 0 | Power$ X | Toughness$ Y | References$ X
 SVar:X:TriggeredCard$CardPower
 SVar:Y:TriggeredCard$CardToughness
 SVar:BuffedBy:Creature.Colorless
+DeckHints:Keyword$Devoid & Color$Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_mimic.jpg
 Oracle:Whenever another colorless creature enters the battlefield under your control, you may change Eldrazi Mimic's base power and toughness to that creature's power and toughness until end of turn.

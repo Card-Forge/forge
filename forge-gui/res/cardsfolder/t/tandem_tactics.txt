@@ -3,5 +3,6 @@ ManaCost:1 W
 Types:Instant
 A:SP$ Pump | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +1  | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SubAbility$ DBGainLife | SpellDescription$ Up to two target creatures each get +1/+2 until end of turn. You gain 2 life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tandem_tactics.jpg
 Oracle:Up to two target creatures each get +1/+2 until end of turn. You gain 2 life.

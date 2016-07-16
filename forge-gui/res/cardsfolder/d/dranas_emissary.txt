@@ -6,5 +6,6 @@ K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of your upkeep, each opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dranas_emissary.jpg
 Oracle:Flying\nAt the beginning of your upkeep, each opponent loses 1 life and you gain 1 life.
