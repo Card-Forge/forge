@@ -1,7 +1,7 @@
 package forge.game.ability;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 
 
 public class AbilityUtils {
+	private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
     public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
         CounterType counterType;
@@ -785,7 +786,7 @@ public class AbilityUtils {
 
         String valid = type;
 
-        for (String t : Lists.newArrayList("LT", "LE", "EQ", "GE", "GT", "NE")) {
+        for (String t : cmpList) {
             int index = valid.indexOf(t);
             if (index >= 0) {
                 char reference = valid.charAt(index + 2); // take whatever goes after EQ
