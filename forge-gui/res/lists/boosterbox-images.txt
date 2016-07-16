@@ -27,6 +27,7 @@ http://downloads.cardforge.link/images/products/boosterboxes/DKA.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/DRK.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/DST.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/DTK.jpg
+http://downloads.cardforge.link/images/products/boosterboxes/EMN.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/EVE.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/EXO.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/FEM.jpg
@@ -60,6 +61,7 @@ http://downloads.cardforge.link/images/products/boosterboxes/MRD.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/NMS.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/NPH.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/ODY.jpg
+http://downloads.cardforge.link/images/products/boosterboxes/OGW.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/ONS.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/ORI.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/PCY.jpg
@@ -70,6 +72,7 @@ http://downloads.cardforge.link/images/products/boosterboxes/ROE.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/RTR.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/SCG.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/SHM.jpg
+http://downloads.cardforge.link/images/products/boosterboxes/SOI.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/SOK.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/SOM.jpg
 http://downloads.cardforge.link/images/products/boosterboxes/STH.jpg
