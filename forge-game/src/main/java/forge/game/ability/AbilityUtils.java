@@ -792,7 +792,9 @@ public class AbilityUtils {
                 char reference = valid.charAt(index + 2); // take whatever goes after EQ
                 if (Character.isLetter(reference)) {
                     String varName = valid.split(",")[0].split(t)[1].split("\\+")[0];
-                    valid = valid.replace(t + varName, t + Integer.toString(calculateAmount(source, varName, sa)));
+                    if (source.hasSVar(varName)) {
+                        valid = valid.replace(t + varName, t + Integer.toString(calculateAmount(source, varName, sa)));
+                    }
                 }
             }
         }
