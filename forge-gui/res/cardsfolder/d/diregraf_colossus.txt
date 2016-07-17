@@ -7,6 +7,7 @@ SVar:X:Count$TypeInYourYard.Zombie
 T:Mode$ SpellCast | ValidCard$ Zombie | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Zombie spell, put a 2/2 black Zombie creature token onto the battlefield tapped.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie SOI | TokenTapped$ True | TokenOwner$ You 
 SVar:BuffedBy:Zombie
+DeckHints:Type$Zombie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diregraf_colossus.jpg
 Oracle:Diregraf Colossus enters the battlefield with a +1/+1 counter on it for each Zombie card in your graveyard.\nWhenever you cast a Zombie spell, put a 2/2 black Zombie creature token onto the battlefield tapped.
 

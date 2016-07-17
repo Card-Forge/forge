@@ -3,6 +3,8 @@ ManaCost:2 B
 Types:Creature Human
 PT:2/3
 A:AB$SetState | Cost$ 2 B | Defined$ Self | Mode$ Transform | Activation$ Delirium | PrecostDesc$ Delirium - | SpellDescription$ Transform CARDNAME.  Activate this ability only if there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kindly_stranger.jpg
 AlternateMode:DoubleFaced
 Oracle:Delirium - {2}{B}: Transform Kindly Stranger. Activate this ability only if there are four or more card types among cards in your graveyard.

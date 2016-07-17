@@ -4,5 +4,6 @@ Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Equipped creature gets +1/+1 and has vigilance.
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Human | AddPower$ 1 | Description$ As long as equipped creature is a Human it gets an additional +1/+0.
 K:Equip 2
+DeckHints:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/true_faith_censer.jpg
 Oracle:Equipped creature gets +1/+1 and has vigilance.\nAs long as equipped creature is a Human, it gets an additional +1/+0.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

@@ -2,6 +2,8 @@ Name:Sinister Concoction
 ManaCost:B
 Types:Enchantment
 A:AB$ Destroy | Cost$ B PayLife<1> Mill<1> Discard<1/Card> Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+DeckHints:Ability$Delirium & Keyword$Madness
+DeckHas:Ability$Graveyard & Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinister_concoction.jpg
 Oracle:{B}, Pay 1 life, Put the top card of your library into your graveyard, Discard a card, Sacrifice Sinister Concoction: Destroy target creature.
 

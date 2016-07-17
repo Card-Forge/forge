@@ -6,6 +6,7 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, another target Human you control gets +2/+2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Human.YouCtrl+Other | TgtPrompt$ Select another target Human you control | NumAtt$ 2 | NumDef$ 2
 SVar:PlayMain1:TRUE
+DeckHints:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intrepid_provisioner.jpg
 Oracle:Trample\nWhen Intrepid Provisioner enters the battlefield, another target Human you control gets +2/+2 until end of turn.
 

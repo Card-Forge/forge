@@ -8,5 +8,6 @@ SVar:NumCreatures:Count$Valid Creature
 SVar:Y:Count$Madness.X.2
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyn's_judgment.jpg
 Oracle:Madness {X}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nAvacyn's Judgment deals 2 damage divided as you choose among any number of target creatures and/or players. If Avacyn's Judgment's madness cost was paid, it deals X damage divided as you choose among those creatures and/or players instead.

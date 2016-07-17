@@ -5,7 +5,9 @@ A:SP$ Mill | Cost$ X B | NumCards$ X | References$ X | Defined$ You | RememberMi
 SVar:DBLoseLife:DB$LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ Y | References$ Y | SubAbility$ DBCleanup
 SVar:X:Count$xPaid
 SVar:Y:Count$ValidGraveyard Creature.IsRemembered/Times.2
-SVar:RemAIDeck:True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+DeckHints:Ability$Delirium
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_indignation.jpg
 Oracle:Put the top X cards of your library into your graveyard. Target player loses 2 life for each creature card put into your graveyard this way.

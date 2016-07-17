@@ -8,6 +8,8 @@ SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Mode$ Hand | RememberDiscarded$ True | 
 SVar:DBDraw:DB$ Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forgotten_creation.jpg
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nAt the beginning of your upkeep, you may discard all the cards in your hand. If you do, draw that many cards.
 

@@ -6,5 +6,6 @@ A:SP$ Token | Cost$ 3 B B | TokenImage$ b 2 2 zombie SOI | TokenAmount$ Y | Refe
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | References$ Y
 SVar:X:Count$xPaid
 SVar:Y:Count$Madness.X.3
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/from_under_the_floorboards.jpg
 Oracle:Madness {X}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nPut three 2/2 black Zombie creature tokens onto the battlefield tapped and you gain 3 life. If From Under the Floorboards's madness cost was paid, instead put X of those tokens onto the battlefield tapped and you gain X life.

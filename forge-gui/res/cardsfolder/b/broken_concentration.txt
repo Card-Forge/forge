@@ -3,6 +3,7 @@ ManaCost:1 U U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 K:Madness:3 U
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_concentration.jpg
 Oracle:Counter target spell.\nMadness {3}{U} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
 

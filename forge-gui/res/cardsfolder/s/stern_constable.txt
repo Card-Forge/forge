@@ -3,6 +3,8 @@ ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
 A:AB$ Tap | Cost$ T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stern_constable.jpg
 Oracle:{T}, Discard a card: Tap target creature.
 

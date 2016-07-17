@@ -5,6 +5,8 @@ A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Library | ChangeTy
 SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic+IsRemembered | ChangeNum$ 1 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for your hand | Shuffle$ False | SubAbility$ DBChangeZone2 | StackDescription$ None
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Land.Basic+IsRemembered | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for your graveyard | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Ability$Delirium
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fork_in_the_road.jpg
 Oracle:Search your library for up to two basic land cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle your library.
 

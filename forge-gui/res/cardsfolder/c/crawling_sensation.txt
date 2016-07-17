@@ -5,5 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigMill | TriggerZo
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 2 | Defined$ You
 T:Mode$ ChangesZone | ValidCard$ Land.YouOwn | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more land cards are put into your graveyard from anywhere for the first time each turn, put a 1/1 green Insect creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 insect SOI
+DeckHints:Ability$Delirium
+DeckHas:Ability$Graveyard
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=409957&type=card
 Oracle:At the beginning of your upkeep, you may put the top two cards of your library into your graveyard.\nWhenever one or more land cards are put into your graveyard from anywhere for the first time each turn, put a 1/1 green Insect creature token onto the battlefield.

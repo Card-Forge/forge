@@ -3,6 +3,7 @@ ManaCost:W
 Types:Instant
 A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBToken | SpellDescription$ Target creature gets +2/+2 until end of turn. If you control an Equipment, put a 1/1 white Human Soldier creature token onto the battlefield.
 SVar:DBToken:DB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Human Soldier | TokenTypes$ Creature,Human,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | ConditionPresent$ Equipment.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control an Equipment, 
+DeckHints:Type$Equipment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_arms.jpg
 Oracle:Target creature gets +2/+2 until end of turn. If you control an Equipment, put a 1/1 white Human Soldier creature token onto the battlefield.
 

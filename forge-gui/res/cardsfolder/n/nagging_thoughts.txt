@@ -3,5 +3,7 @@ ManaCost:1 U
 Types:Sorcery
 A:SP$ Dig | Cost$ 1 U | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
 K:Madness:1 U
+DeckHints:Ability$Delirium & Ability$Discard
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nagging_thoughts.jpg
 Oracle:Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.\nMadness {1}{U} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

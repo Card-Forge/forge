@@ -4,6 +4,7 @@ Types:Creature Human Cleric
 PT:3/3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.Self+equipped | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if CARDNAME is equipped, transform it.
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+DeckHints:Type$Equipment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacynian_missionaries.jpg
 AlternateMode:DoubleFaced
 SVar:EquipMe:Once

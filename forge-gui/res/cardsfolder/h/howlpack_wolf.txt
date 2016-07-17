@@ -7,6 +7,7 @@ SVar:X:Count$Valid Wolf.Other+YouCtrl/Plus.Y
 SVar:Y:Count$Valid Werewolf.Other+YouCtrl
 SVar:BuffedBy:Wolf,Werewolf
 SVar:RemRandomDeck:True
+DeckHints:Type$Wolf & Type$Werewolf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howlpack_wolf.jpg
 Oracle:Howlpack Wolf can't block unless you control another Wolf or Werewolf.
 

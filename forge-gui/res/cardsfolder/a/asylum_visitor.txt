@@ -7,6 +7,7 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ DBLos
 SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 1 
 SVar:TrigCount:Count$ValidHand Card.ActivePlayerCtrl 
 K:Madness:1 B
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/asylum_visitor.jpg
 Oracle:At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
 

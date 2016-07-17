@@ -6,5 +6,6 @@ K:Flying
 T:Mode$ Investigated | ValidPlayer$ You | TriggerZones$ Battlefield | OnlyFirst$ True | Execute$ TrigInvestigate | TriggerDescription$ Whenever you investigate for the first time each turn, investigate an additional time.
 SVar:TrigInvestigate:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Clue | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHints:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erdwal_illuminator.jpg
 Oracle:Flying\nWhenever you investigate for the first time each turn, investigate an additional time.

@@ -6,6 +6,7 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Spirit.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another Spirit enters the battlefield under your control, you gain 2 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 A:AB$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ w 1 1 spirit SOI | SpellDescription$ Put a 1/1 white Spirit creature token with flying onto the battlefield.
+DeckHints:Type$Spirit
 SVar:Picture:Picture:http://www.wizards.com/global/images/magic/general/drogskol_cavalry.jpg
 Oracle:Flying\nWhenever another Spirit enters the battlefield under your control, you gain 2 life.\n{3}{W}: Put a 1/1 white Spirit creature token with flying onto the battlefield.
 

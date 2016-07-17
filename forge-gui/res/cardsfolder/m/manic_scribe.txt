@@ -6,6 +6,8 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill1:AB$ Mill | Cost$ 0 | Defined$ Player.Opponent | NumCards$ 3 
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Delirium$ True | Execute$ TrigMill2 | TriggerZones$ Battlefield | TriggerDescription$ Delirium - At the beginning of each opponent's upkeep, if you have four or more card types among cards in your graveyard, that player puts the top three cards of his or her library into his or her graveyard.
 SVar:TrigMill2:AB$ Mill | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 3
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manic_scribe.jpg
 Oracle:When Manic Scribe enters the battlefield, each opponent puts the top three cards of his or her library into his or her graveyard.\nDelirium - At the beginning of each opponent's upkeep, if you have four or more card types among cards in your graveyard, that player puts the top three cards of his or her library into his or her graveyard.
 

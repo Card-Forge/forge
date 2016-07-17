@@ -3,6 +3,8 @@ ManaCost:3 W
 Types:Creature Ox
 PT:2/5
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Vigilance | Condition$ Delirium | Description$ Delirium - CARDNAME gets +1/+0 and has vigilance as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitors_ox.jpg
 Oracle:Delirium - Inquisitor's Ox gets +1/+0 and has vigilance as long as there are four or more card types among cards in your graveyard.
 

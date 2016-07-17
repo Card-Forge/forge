@@ -6,6 +6,7 @@ SVar:MoonlightDamage:DB$ RepeatEach | RepeatSubAbility$ WolfStrike | UseImprinte
 SVar:WolfStrike:DB$ DealDamage | DamageSource$ Imprinted | NumDmg$ X | References$ X | Defined$ ParentTarget | StackDescription$ None 
 SVar:X:Imprinted$CardPower 
 SVar:RemRandomDeck:True
+DeckHints:Type$Wolf & Type$Werewolf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlight_hunt.jpg
 Oracle:Choose target creature you don't control. Each creature you control that's a Wolf or a Werewolf deals damage equal to its power to that creature.
 

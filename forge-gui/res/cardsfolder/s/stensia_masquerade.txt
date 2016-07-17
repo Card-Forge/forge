@@ -6,6 +6,7 @@ T:Mode$ DamageDone | ValidSource$ Vampire.YouCtrl | ValidTarget$ Player | Combat
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredSource | CounterType$ P1P1 | CounterNum$ 1 
 K:Madness:2 R
 SVar:PlayMain1:TRUE
+DeckHints:Ability$Discard & Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stensia_masquerade.jpg
 Oracle:Attacking creatures you control have first strike.\nWhenever a Vampire you control deals combat damage to a player, put a +1/+1 counter on it.\nMadness {2}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
 

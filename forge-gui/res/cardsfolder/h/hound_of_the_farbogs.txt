@@ -3,5 +3,7 @@ ManaCost:4 B
 Types:Creature Zombie Hound
 PT:5/3
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | Condition$ Delirium | Description$ Delirium - CARDNAME has menace as long as there are four or more card types among cards in your graveyard. (A creature with menace can't be blocked except by two or more creatures.)
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hound_of_the_farbogs.jpg
 Oracle:Delirium - Hound of the Farbogs has menace as long as there are four or more card types among cards in your graveyard. (A creature with menace can't be blocked except by two or more creatures.)

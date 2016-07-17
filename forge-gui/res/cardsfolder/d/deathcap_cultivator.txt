@@ -5,6 +5,8 @@ PT:2/1
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B} to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool. 
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | Condition$ Delirium | Description$ Delirium - CARDNAME has deathtouch as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathcap_cultivator.jpg
 Oracle:{T}: Add {B} or {G} to your mana pool.\nDelirium - Deathcap Cultivator has deathtouch as long as there are four or more card types among cards in your graveyard.
 

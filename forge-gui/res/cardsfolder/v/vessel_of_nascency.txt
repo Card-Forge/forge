@@ -2,5 +2,7 @@ Name:Vessel of Nascency
 ManaCost:G
 Types:Enchantment
 A:AB$ Dig | Cost$ 1 G Sac<1/CARDNAME> | DigNum$ 4 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Artifact,Creature,Enchantment,Land,Planeswalker | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top four card of your library. You may put an artifact, creature, enchantment, land, or planeswalker card from among them into your hand. Put the rest into your graveyard.
+DeckHints:Ability$Delirium
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_nascency.jpg
 Oracle:{1}{G}, Sacrifice Vessel of Nascency: Reveal the top four cards of your library. You may put an artifact, creature, enchantment, land, or planeswalker card from among them into your hand. Put the rest into your graveyard.

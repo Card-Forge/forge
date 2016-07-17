@@ -4,6 +4,8 @@ Types:Creature Wolf Horror
 PT:2/2
 K:First Strike
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Condition$ Delirium | Description$ Delirium - CARDNAME has double strike as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_wolf.jpg
 Oracle:First strike\nDelirium - Scourge Wolf has double strike as long as there are four or more card types among cards in your graveyard.
 

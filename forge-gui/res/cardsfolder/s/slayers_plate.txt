@@ -5,5 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy+Human | Execute$ TrigToken | TriggerDescription$ Whenever equipped creature dies, if it was a Human, put a 1/1 white Spirit creature token with flying onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ w 1 1 spirit SOI | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 K:Equip 3
+DeckHints:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slayers_plate.jpg
 Oracle:Equipped creature gets +4/+2.\nWhenever equipped creature dies, if it was a Human, put a 1/1 white Spirit creature token with flying onto the battlefield.\nEquip {3}

@@ -5,6 +5,7 @@ PT:1/1
 K:Lifelink
 A:AB$ PutCounterAll | Cost$ 2 Sac<1/Creature> | ValidCards$ Vampire.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each Vampire you control.
 SVar:RemAIDeck:True
+DeckHints:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indulgent_aristocrat.jpg
 Oracle:Lifelink\n{2}, Sacrifice a creature: Put a +1/+1 counter on each Vampire you control.
 

@@ -8,6 +8,7 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ B | Defined$ TriggeredCard | Origin$ Grav
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When Relentless Dead dies, you may pay X. If you do, return another target Zombie creature card with converted mana cost X from your graveyard to the battlefield.
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Zombie+Other | TargetsWithDefinedController$ TriggeredCardController | Cost$ X | References$ X
 SVar:X:Targeted$CardManaCost
+DeckHints:Type$Zombie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relentless_dead.jpg
 Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Relentless Dead dies, you may pay {B}. If you do, return it to its owner's hand.\nWhen Relentless Dead dies, you may pay {X}. If you do, return another target Zombie creature card with converted mana cost X from your graveyard to the battlefield.
 

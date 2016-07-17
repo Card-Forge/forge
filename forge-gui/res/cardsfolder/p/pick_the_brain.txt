@@ -4,6 +4,8 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Target opponent reveals his or her hand. You choose a nonland card from it and exile that card. Delirium - If there are four or more card types among cards in your graveyard, search that player's graveyard, hand, and library for any number of cards with the same name as the exiled card, exile those cards, then that player shuffles his or her library.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.sameName | Condition$ Delirium | Origin$ Graveyard,Hand,Library | Defined$ Targeted | Destination$ Exile | Search$ True | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pick_the_brain.jpg
 Oracle:Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.\nDelirium - If there are four or more card types among cards in your graveyard, search that player's graveyard, hand, and library for any number of cards with the same name as the exiled card, exile those cards, then that player shuffles his or her library.
 

@@ -4,5 +4,7 @@ Types:Instant
 K:AlternateAdditionalCost:Discard<1/Card>:5
 A:SP$ DealDamage | Cost$ R | NumDmg$ 5 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals 5 damage to target creature.
 SVar:RemAIDeck:True
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_axe.jpg
 Oracle:As an additional cost to cast Lightning Axe, discard a card or pay {5}.\nLightning Axe deals 5 damage to target creature.

@@ -5,6 +5,7 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Defined$ TriggeredCard | Destination$ Battlefield | Transformed$ True | GainControl$ True 
 AlternateMode:DoubleFaced
+DeckHints:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harvest_hand.jpg
 Oracle:When Harvest Hand dies, return it to the battlefield transformed under your control.
 

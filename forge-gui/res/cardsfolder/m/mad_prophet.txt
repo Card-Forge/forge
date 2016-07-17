@@ -5,5 +5,7 @@ PT:2/2
 K:Haste
 A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_prophet.jpg
 Oracle:Haste\n{T}, Discard a card: Draw a card.

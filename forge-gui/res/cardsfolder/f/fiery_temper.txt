@@ -3,5 +3,6 @@ ManaCost:1 R R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
 K:Madness:R
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_temper.jpg
 Oracle:Fiery Temper deals 3 damage to target creature or player.\nMadness {R} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
