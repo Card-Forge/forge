@@ -11,7 +11,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1
 
 A:AB$SetState | Cost$ 4 R R | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
-
+SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_werewolf.jpg
 
 AlternateMode:DoubleFaced

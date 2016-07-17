@@ -5,7 +5,6 @@ A:SP$ Token | Cost$ X X B | ValidTgts$ Player | TgtPrompt$ Select target player.
 SVar:DBPump:DB$ Pump | Cost$ 0 | NumAtt$ -Y | NumDef$ -Y | References$ Y | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature. | IsCurse$ True
 SVar:X:Count$xPaid
 SVar:Y:Count$Valid Zombie.TargetedPlayerCtrl
-SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_salvation.jpg
 Oracle:Target player puts X 2/2 black Zombie creature tokens onto the battlefield, then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls.
 

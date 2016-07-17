@@ -14,6 +14,8 @@ SVar:ProphetDraw:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescrip
 
 SVar:NonStackingAttachEffect:True
 
+SVar:RemAIDeck:True
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_ravings.jpg
 
 Oracle:Enchant creature\nEnchanted creature has haste and "{T}, Discard a card: Draw a card."

@@ -5,5 +5,6 @@ PT:2/3
 T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ +1
 A:AB$ Token | Cost$ 2 W ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 spirit SOI | TokenKeywords$ Flying | SpellDescription$ Put a 1/1 white Spirit creature token with flying onto the battlefield.
+SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctifier_of_souls.jpg
 Oracle:Whenever another creature enters the battlefield under your control, Sanctifier of Souls gets +1/+1 until end of turn.\n{2}{W}, Exile a creature card from your graveyard: Put a 1/1 white Spirit creature token with flying onto the battlefield.
