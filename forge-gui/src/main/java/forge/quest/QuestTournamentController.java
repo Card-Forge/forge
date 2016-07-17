@@ -252,7 +252,7 @@ public class QuestTournamentController {
         view.getLblThird().setText("3rd Place: " + achievements.getWinsForPlace(3) + " time" + (achievements.getWinsForPlace(3) == 1 ? "" : "s"));
         view.getLblFourth().setText("4th Place: " + achievements.getWinsForPlace(4) + " time" + (achievements.getWinsForPlace(4) == 1 ? "" : "s"));
 
-        view.getLblTokens().setText("Tokens: " + achievements.getDraftTokens());
+        view.getBtnSpendToken().setText("Spend Token (" + achievements.getDraftTokens() + ")");
         view.getBtnSpendToken().setEnabled(achievements.getDraftTokens() > 0);
     }
 

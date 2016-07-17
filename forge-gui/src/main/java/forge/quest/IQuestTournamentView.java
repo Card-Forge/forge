@@ -19,7 +19,6 @@ public interface IQuestTournamentView {
     IButton getLblSecond();
     IButton getLblThird();
     IButton getLblFourth();
-    IButton getLblTokens();
     IButton getBtnSpendToken();
     IButton getBtnLeaveTournament();
 }

@@ -79,8 +79,6 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
     .fontSize(15).build();
     private final FLabel lblFourth = new FLabel.Builder()
     .fontSize(15).build();
-    private final FLabel lblTokens = new FLabel.Builder()
-    .fontSize(15).build();
 
     private final StartButton btnStartDraft  = new StartButton();
     private final StartButton btnStartTournament  = new StartButton();
@@ -144,7 +142,6 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
         pnlStats.add(lblSecond, constraints);
         pnlStats.add(lblThird, constraints);
         pnlStats.add(lblFourth, constraints);
-        pnlStats.add(lblTokens, "h 30px!, gap 0 0 50px 10px, ax center");
         pnlStats.add(btnSpendToken, "w 150px!, h 40px!, ax center");
         pnlStats.setOpaque(false);
 
@@ -206,10 +203,6 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
 
     public FLabel getLblFourth() {
         return lblFourth;
-    }
-
-    public FLabel getLblTokens() {
-        return lblTokens;
     }
 
     public FLabel getBtnSpendToken() {
