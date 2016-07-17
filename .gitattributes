@@ -13886,6 +13886,7 @@ forge-gui/res/cardsfolder/s/slave_of_bolas.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/slavering_nulls.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/slay.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/slayer_of_the_wicked.txt -text
+forge-gui/res/cardsfolder/s/slayers_cleaver.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/slayers_plate.txt -text
 forge-gui/res/cardsfolder/s/slayers_stronghold.txt -text
 forge-gui/res/cardsfolder/s/sleep.txt svneol=native#text/plain
