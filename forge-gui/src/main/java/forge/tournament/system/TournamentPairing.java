@@ -5,9 +5,7 @@ import forge.LobbyPlayer;
 import forge.game.GameOutcome;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TournamentPairing {
     private int round;

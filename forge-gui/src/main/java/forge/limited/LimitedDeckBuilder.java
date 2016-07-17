@@ -129,6 +129,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      *             the set to take basic lands from (pass 'null' for random).
      * @return the new Deck.
      */
+    @SuppressWarnings("unused")
     public Deck buildDeck(final String landSetCode) {
         // 1. Prepare
         hasColor = Predicates.or(new MatchColorIdentity(colors), COLORLESS_CARDS);

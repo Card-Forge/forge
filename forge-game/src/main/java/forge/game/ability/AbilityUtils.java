@@ -511,7 +511,6 @@ public class AbilityUtils {
                 sub = sub.getSubAbility();
             }
             // Count Math
-            final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
             return CardFactoryUtil.doXMath(chosenModes, m, card) * multiplier;
         }

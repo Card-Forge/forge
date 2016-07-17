@@ -1,13 +1,10 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
-import forge.game.combat.Combat;
-import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -105,12 +102,12 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
             return others;
         } else if ("Fatespinner".equals(logic)) {
-            SpellAbility skipDraw = null, skipMain = null, skipCombat = null;
+            SpellAbility skipDraw = null, /*skipMain = null,*/ skipCombat = null;
             for (final SpellAbility sp : spells) {
                 if (sp.getDescription().equals("FatespinnerSkipDraw")) {
                     skipDraw = sp;
                 } else if (sp.getDescription().equals("FatespinnerSkipMain")) {
-                    skipMain = sp;
+                    //skipMain = sp;
                 } else {
                     skipCombat = sp;
                 }

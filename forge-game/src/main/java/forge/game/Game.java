@@ -37,7 +37,6 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
-import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.event.Event;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
