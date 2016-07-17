@@ -3068,6 +3068,7 @@ forge-gui/res/cardsfolder/b/breezekeeper.txt -text
 forge-gui/res/cardsfolder/b/briar_patch.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/briar_shield.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/briarberry_cohort.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/briarbridge_patrol.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/b/briarhorn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/briarknit_kami.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/briarpack_alpha.txt -text
