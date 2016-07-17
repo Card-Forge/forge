@@ -1228,7 +1228,7 @@ public class PlayerControllerHuman
                             sb.append("<...>\n");
                             break;
                         }
-                        sb.append(++c + ". " + activePlayerSAs.get(index).getHostCard()+ "\n");
+                        sb.append(++c + ". " + activePlayerSAs.get(index).getHostCard() + "\n");
                     }
                     sameOrder = getGui().showConfirmDialog(sb.toString(), "Ordering simultaneous abilities", true);
                 }
