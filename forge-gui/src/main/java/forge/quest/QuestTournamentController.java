@@ -374,11 +374,6 @@ public class QuestTournamentController {
         view.populate();
     }
 
-    public void editDeck() {
-        view.editDeck(true);
-        FModel.getQuest().save();
-    }
-
     public void startDraft() {
         if (drafting) {
             SOptionPane.showErrorDialog("You are currently in a draft.\n" +

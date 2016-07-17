@@ -652,7 +652,6 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draftController);
     }
 
-    @Override
     public void editDeck(boolean isExistingDeck) {
         final CDetailPicture cDetailPicture = CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture();
         if (isExistingDeck) {

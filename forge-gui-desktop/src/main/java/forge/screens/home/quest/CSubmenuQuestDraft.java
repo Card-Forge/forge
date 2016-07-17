@@ -44,7 +44,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
         });
         view.getBtnEditDeck().setCommand(new UiCommand() {
             @Override public void run() {
-                controller.editDeck();
+                view.editDeck(true);
             }
         });
         view.getBtnLeaveTournament().setCommand(new UiCommand() {

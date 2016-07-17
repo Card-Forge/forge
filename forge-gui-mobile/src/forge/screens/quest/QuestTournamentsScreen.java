@@ -75,19 +75,29 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         btnSpendToken.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                controller.spendToken();
+                FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to handle alerts
+                    @Override
+                    public void run() {
+                        controller.spendToken();
+                    }
+                });
             }
         });
         btnEditDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                controller.editDeck();
+                editDeck(true);
             }
         });
         btnLeaveTournament.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                controller.endTournamentAndAwardPrizes();
+                FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to handle alerts
+                    @Override
+                    public void run() {
+                        controller.endTournamentAndAwardPrizes();
+                    }
+                });
             }
         });
         deckViewer.setCaption("Main Deck");
@@ -177,7 +187,6 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         return null;
     }
 
-    @Override
     public void editDeck(boolean isExistingDeck) {
         Deck deck = getDeck();
         if (deck != null) {
