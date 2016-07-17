@@ -83,4 +83,8 @@ public enum CSubmenuQuestDraft implements ICDoc {
     public void setCompletedDraft(final DeckGroup finishedDraft) {
         controller.setCompletedDraft(finishedDraft);
     }
+
+    public boolean cancelDraft() {
+        return controller.cancelDraft();
+    }
 }

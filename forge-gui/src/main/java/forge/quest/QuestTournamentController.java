@@ -401,6 +401,22 @@ public class QuestTournamentController {
         view.startDraft(draft);
     }
 
+    public boolean cancelDraft() {
+        if (SOptionPane.showConfirmDialog("This will end the current draft and you will not be able to join this tournament again.\nYour credits will be refunded and the draft will be removed.\n\n" +
+                "Leave anyway?", "Leave Draft?", "Leave", "Cancel", false)) {
+            drafting = false;
+
+            QuestController quest = FModel.getQuest();
+            QuestEventDraft draft = quest.getAchievements().getCurrentDraft();
+            quest.getAssets().addCredits(draft.getEntryFee());
+            quest.getAchievements().deleteDraft(draft);
+            quest.save();
+
+            return true;
+        }
+        return false;
+    }
+
     public void startTournament() {
         FModel.getQuest().save();
 

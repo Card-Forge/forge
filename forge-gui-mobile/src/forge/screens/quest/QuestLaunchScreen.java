@@ -44,9 +44,12 @@ public abstract class QuestLaunchScreen extends LaunchScreen {
 
     public final void update() {
         QuestUtil.updateQuestView(QuestMenu.getMenu());
-        setHeaderCaption(FModel.getQuest().getName() + " - " + getGameType() + "\n(" + FModel.getQuest().getRank() + ")");
-
+        updateHeaderCaption();
         onUpdate();
+    }
+
+    protected void updateHeaderCaption() {
+        setHeaderCaption(FModel.getQuest().getName() + " - " + getGameType() + "\n(" + FModel.getQuest().getRank() + ")");
     }
 
     protected abstract String getGameType();

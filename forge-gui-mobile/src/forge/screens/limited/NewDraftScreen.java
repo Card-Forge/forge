@@ -56,7 +56,7 @@ public class NewDraftScreen extends LaunchScreen {
                         LoadingOverlay.show("Loading new draft...", new Runnable() {
                             @Override
                             public void run() {
-                                Forge.openScreen(new DraftingProcessScreen(draft, EditorType.Draft));
+                                Forge.openScreen(new DraftingProcessScreen(draft, EditorType.Draft, null));
                             }
                         });
                     }

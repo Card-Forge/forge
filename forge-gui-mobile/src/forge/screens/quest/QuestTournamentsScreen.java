@@ -129,7 +129,16 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
             else {
                 deckViewer.setPool(new CardPool());
             }
+        }
+    }
+
+    @Override
+    protected void updateHeaderCaption() {
+        if (mode == Mode.PREPARE_DECK) {
             setHeaderCaption(FModel.getQuest().getName() + " - " + getGameType() + "\nDraft - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
+        }
+        else {
+            super.updateHeaderCaption();
         }
     }
 
@@ -145,6 +154,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         pnlSelectTournament.setVisible(mode == Mode.SELECT_TOURNAMENT);
         pnlPrepareDeck.setVisible(mode == Mode.PREPARE_DECK);
         pnlTournamentActive.setVisible(mode == Mode.TOURNAMENT_ACTIVE);
+        updateHeaderCaption();
     }
 
     @Override
@@ -176,7 +186,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     @Override
     public void startDraft(BoosterDraft draft) {
-        Forge.openScreen(new DraftingProcessScreen(draft, EditorType.QuestDraft));
+        Forge.openScreen(new DraftingProcessScreen(draft, EditorType.QuestDraft, controller));
     }
     
     private Deck getDeck() {

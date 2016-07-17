@@ -17,8 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.collect.ImmutableList;
-import forge.assets.FSkinProp;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -29,8 +27,6 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
-import forge.model.FModel;
-import forge.quest.QuestController;
 import forge.quest.QuestEventDraft;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -38,8 +34,6 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FSkin;
 import forge.util.ItemPool;
 
 import java.util.Map.Entry;
@@ -55,11 +49,9 @@ import java.util.Map.Entry;
 public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     private CSubmenuQuestDraft draftQuest;
-    private QuestController quest;
 
-    public void setDraftQuest(CSubmenuQuestDraft testDraftQuest) {
-        this.draftQuest = testDraftQuest;
-        this.quest = FModel.getQuest();
+    public void setDraftQuest(CSubmenuQuestDraft draftQuest0) {
+        draftQuest = draftQuest0;
     }
 
     private IBoosterDraft boosterDraft;
@@ -68,8 +60,6 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean saved = false;
-
-    private static final ImmutableList<String> leaveOrCancel = ImmutableList.of("Leave", "Cancel");
 
     //========== Constructor
 
@@ -92,8 +82,8 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
         getBtnAddBasicLands().setVisible(false);
 
-        this.setCatalogManager(catalogManager);
-        this.setDeckManager(deckManager);
+        setCatalogManager(catalogManager);
+        setDeckManager(deckManager);
     }
 
     /**
@@ -103,7 +93,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
      *            the in_booster draft
      */
     public final void showGui(final IBoosterDraft inBoosterDraft) {
-        this.boosterDraft = inBoosterDraft;
+        boosterDraft = inBoosterDraft;
     }
 
     /* (non-Javadoc)
@@ -115,16 +105,16 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
         // can only draft one at a time, regardless of the requested quantity
         PaperCard card = items.iterator().next().getKey();
-        this.getDeckManager().addItem(card, 1);
+        getDeckManager().addItem(card, 1);
 
         // get next booster pack
-        this.boosterDraft.setChoice(card);
+        boosterDraft.setChoice(card);
 
-        if (this.boosterDraft.hasNextChoice()) {
-            this.showChoices(this.boosterDraft.nextChoice());
+        if (boosterDraft.hasNextChoice()) {
+            showChoices(boosterDraft.nextChoice());
         }
         else {
-            this.saveDraft();
+            saveDraft();
         }
     }
 
@@ -156,8 +146,8 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
-        this.getCatalogManager().setCaption("Pack " + packNumber + " - Cards");
-        this.getCatalogManager().setPool(list);
+        getCatalogManager().setCaption("Pack " + packNumber + " - Cards");
+        getCatalogManager().setPool(list);
     } // showChoices()
 
     /**
@@ -171,7 +161,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         final Deck deck = new Deck();
 
         // add sideboard to deck
-        deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
+        deck.getOrCreate(DeckSection.Sideboard).addAll(getDeckManager().getPool());
 
         // No need to add basic lands now that Add Basic Lands button exists
         /*final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
@@ -208,10 +198,10 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         saved = true;
 
         // Construct computer's decks and save draft
-        final Deck[] computer = this.boosterDraft.getDecks();
+        final Deck[] computer = boosterDraft.getDecks();
 
         final DeckGroup finishedDraft = new DeckGroup(QuestEventDraft.DECK_NAME);
-        finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(QuestEventDraft.DECK_NAME));
+        finishedDraft.setHumanDeck((Deck) getPlayersDeck().copyTo(QuestEventDraft.DECK_NAME));
         finishedDraft.addAiDecks(computer);
 
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
@@ -254,26 +244,26 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
      */
     @Override
     public void update() {
-        this.getCatalogManager().setup(ItemManagerConfig.DRAFT_PACK);
-        this.getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
+        getCatalogManager().setup(ItemManagerConfig.DRAFT_PACK);
+        getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
 
-        ccAddLabel = this.getBtnAdd().getText();
+        ccAddLabel = getBtnAdd().getText();
 
-        if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen
-            this.showChoices(this.boosterDraft.nextChoice());
-            this.getDeckManager().setPool((Iterable<PaperCard>) null);
+        if (getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen
+            showChoices(boosterDraft.nextChoice());
+            getDeckManager().setPool((Iterable<PaperCard>) null);
         }
         else {
-            this.showChoices(this.getCatalogManager().getPool());
+            showChoices(getCatalogManager().getPool());
         }
 
         //Remove buttons
-        this.getBtnAdd().setVisible(false);
-        this.getBtnAdd4().setVisible(false);
-        this.getBtnRemove().setVisible(false);
-        this.getBtnRemove4().setVisible(false);
+        getBtnAdd().setVisible(false);
+        getBtnAdd4().setVisible(false);
+        getBtnRemove().setVisible(false);
+        getBtnRemove4().setVisible(false);
 
-        this.getBtnCycleSection().setVisible(false);
+        getBtnCycleSection().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
@@ -290,19 +280,12 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     @Override
     public boolean canSwitchAway(boolean isClosing) {
         if (isClosing && !saved) {
-            String userPrompt =
-                    "This will end the current draft and you will not be able to join this tournament again.\nYour credits will be refunded and the draft will be removed.\n\n" +
-                            "Leave anyway?";
-            boolean leave = FOptionPane.showOptionDialog(userPrompt, "Leave Draft?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), leaveOrCancel, 1) == 0;
-            if (leave) {
-                QuestEventDraft draft = quest.getAchievements().getCurrentDraft();
-                quest.getAssets().addCredits(draft.getEntryFee());
-                quest.getAchievements().deleteDraft(draft);
-                quest.save();
+            if (draftQuest.cancelDraft()) {
                 CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
                 VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
+                return true;
             }
-            return leave;
+            return false;
         }
         return true;
     }
@@ -313,12 +296,12 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     @Override
     public void resetUIChanges() {
         //Re-rename buttons
-        this.getBtnAdd().setText(ccAddLabel);
+        getBtnAdd().setText(ccAddLabel);
 
         //Re-add buttons
-        this.getBtnAdd4().setVisible(true);
-        this.getBtnRemove().setVisible(true);
-        this.getBtnRemove4().setVisible(true);
+        getBtnAdd4().setVisible(true);
+        getBtnRemove().setVisible(true);
+        getBtnRemove4().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
