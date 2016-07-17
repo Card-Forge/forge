@@ -755,6 +755,17 @@ public class CombatUtil {
                     || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
                             && combat.getBlockers(attacker).isEmpty())) {
                 attackersWithLure.add(attacker);
+            } else {
+                for (String keyword : attacker.getKeywords()) {
+                    // MustBeBlockedBy <valid>
+                    if (keyword.startsWith("MustBeBlockedBy ")) {
+                        final String valid = keyword.substring("MustBeBlockedBy ".length());
+                        if (blocker.isValid(valid, null, null, null) &&
+                                CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null) == 0) {
+                            attackersWithLure.add(attacker);
+                        }
+                    }
+                }
             }
         }
 
@@ -855,6 +866,19 @@ public class CombatUtil {
             return false;
         }
 
+        boolean mustBeBlockedBy = false;
+        for (String keyword : attacker.getKeywords()) {
+            // MustBeBlockedBy <valid>
+            if (keyword.startsWith("MustBeBlockedBy ")) {
+                final String valid = keyword.substring("MustBeBlockedBy ".length());
+                if (blocker.isValid(valid, null, null, null) &&
+                        CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null) == 0) {
+                    mustBeBlockedBy = true;
+                    break;
+                }
+            }
+        }
+
         // if the attacker has no lure effect, but the blocker can block another
         // attacker with lure, the blocker can't block the former
         if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
@@ -862,6 +886,7 @@ public class CombatUtil {
                 && !(attacker.hasStartOfKeyword("All creatures with flying able to block CARDNAME do so.") && blocker.hasKeyword("Flying"))
                 && !(attacker.hasKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker).isEmpty())
                 && !(blocker.getMustBlockCards() != null && blocker.getMustBlockCards().contains(attacker))
+                && !mustBeBlockedBy
                 && CombatUtil.mustBlockAnAttacker(blocker, combat)) {
             return false;
         }
