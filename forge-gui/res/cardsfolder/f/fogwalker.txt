@@ -11,7 +11,7 @@ K:Skulk
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls doesn't untap during its controller's next untap step.
 
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
-
+SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fogwalker.jpg
 
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Fogwalker enters the battlefield, target creature an opponent controls doesn't untap during its controller's next untap step.

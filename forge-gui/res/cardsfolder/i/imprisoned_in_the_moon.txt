@@ -6,15 +6,13 @@ Types:Enchantment Aura
 
 K:Enchant creature, land, or planeswalker
 
-A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature,Land,Planeswalker | AILogic$ Curse
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature,Land,Planeswalker | AILogic$ Curse | AITgts$ Card.cmcGE3
 
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetColor$ Colorless | AddType$ Land | RemoveCardTypes$ True | RemoveSubTypes$ True | RemoveAllAbilities$ True | AddAbility$ ABMana | Description$ Enchanted permanent is a colorless land with "{T}: Add {C} to your mana pool" and loses all other card types and abilities.
 
 SVar:ABMana:AB$Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool. 
 
 SVar:NonStackingAttachEffect:True
-
-SVar:RemAIDeck:True
 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imprisoned_in_the_moon.jpg
 
