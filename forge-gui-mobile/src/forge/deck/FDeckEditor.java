@@ -279,6 +279,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             break;
         case Draft:
+        case QuestDraft:
             break;
         default:
             //if editing existing non-limited deck, show main deck by default
@@ -289,7 +290,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         if (StringUtils.isEmpty(editDeckName)) {
-            if (editorType == EditorType.Draft) {
+            if (editorType == EditorType.Draft || editorType == EditorType.QuestDraft) {
                 //hide deck header on while drafting
                 setDeck(new Deck());
                 deckHeader.setVisible(false);
@@ -304,7 +305,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
         }
         else {
-            if (editorType == EditorType.Draft) {
+            if (editorType == EditorType.Draft || editorType == EditorType.QuestDraft) {
                 tabPages[0].hideTab(); //hide Draft Pack page if editing existing draft deck
             }
             editorType.getController().load(editDeckPath, editDeckName);
@@ -595,6 +596,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Draft:
         case Sealed:
         case Winston:
+        case QuestDraft:
             return true;
         default:
             return false;
@@ -1152,6 +1154,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 switch (parentScreen.getEditorType()) {
                 case Draft:
                 case Sealed:
+                case QuestDraft:
                     parentScreen.getSideboardPage().addCard(card);
                     break;
                 default:
@@ -1568,6 +1571,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 DeckPreferences.setSealedDeck(deckStr);
                 break;
             case Quest:
+                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, model.toString());
+                FModel.getQuest().save();
+                break;
+            case QuestDraft:
                 FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, model.toString());
                 FModel.getQuest().save();
                 break;

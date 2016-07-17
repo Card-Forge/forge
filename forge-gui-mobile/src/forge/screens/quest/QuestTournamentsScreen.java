@@ -10,7 +10,6 @@ import forge.assets.FSkinImage;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
-import forge.deck.FDeckEditor;
 import forge.deck.FDeckEditor.EditorType;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -167,7 +166,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     @Override
     public void startDraft(BoosterDraft draft) {
-        Forge.openScreen(new DraftingProcessScreen(draft));
+        Forge.openScreen(new DraftingProcessScreen(draft, EditorType.QuestDraft));
     }
     
     private Deck getDeck() {
@@ -182,7 +181,12 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     public void editDeck(boolean isExistingDeck) {
         Deck deck = getDeck();
         if (deck != null) {
-            Forge.openScreen(new FDeckEditor(EditorType.QuestDraft, deck, isExistingDeck));
+            if (isExistingDeck) {
+                Forge.openScreen(new QuestDraftDeckEditor(deck.getName()));
+            }
+            else {
+                Forge.openScreen(new QuestDraftDeckEditor(deck));
+            }
         }
     }
 

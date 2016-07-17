@@ -1366,6 +1366,7 @@ forge-gui-mobile/src/forge/screens/quest/QuestBazaarScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestChallengesScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestDeckEditor.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestDecksScreen.java -text
+forge-gui-mobile/src/forge/screens/quest/QuestDraftDeckEditor.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestDuelsScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestEventPanel.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestLaunchScreen.java -text

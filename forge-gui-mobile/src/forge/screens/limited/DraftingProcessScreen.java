@@ -17,8 +17,8 @@ public class DraftingProcessScreen extends FDeckEditor {
     private boolean isDraftSaved;
     private final BoosterDraft draft;
 
-    public DraftingProcessScreen(BoosterDraft draft0) {
-        super(EditorType.Draft, "", false);
+    public DraftingProcessScreen(BoosterDraft draft0, EditorType editorType0) {
+        super(editorType0, "", false);
         draft = draft0;
         getCatalogPage().refresh(); //must refresh after draft set
     }

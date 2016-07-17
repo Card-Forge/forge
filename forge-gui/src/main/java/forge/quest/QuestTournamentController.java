@@ -411,7 +411,7 @@ public class QuestTournamentController {
 
         final String message = GameType.QuestDraft.getDeckFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
         if (message != null && FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            SOptionPane.showMessageDialog(message, "Deck Invalid");
+            SOptionPane.showMessageDialog("Deck " + message, "Deck Invalid");
             return;
         }
 

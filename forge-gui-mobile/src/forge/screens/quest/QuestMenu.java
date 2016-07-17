@@ -6,6 +6,7 @@ import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
+import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor.DeckController;
 import forge.deck.FDeckEditor.EditorType;
 import forge.interfaces.IButton;
@@ -190,6 +191,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 public void run() {
                     FModel.getQuest().load(QuestDataIO.loadData(data));
                     ((DeckController<Deck>)EditorType.Quest.getController()).setRootFolder(FModel.getQuest().getMyDecks());
+                    ((DeckController<DeckGroup>)EditorType.QuestDraft.getController()).setRootFolder(FModel.getQuest().getDraftDecks());
                     if (reason == LaunchReason.StartQuestMode) {
                         if (QuestUtil.getCurrentDeck() == null) {
                             Forge.openScreen(decksScreen); //if quest doesn't have a deck specified, open decks screen by default
