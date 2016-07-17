@@ -104,6 +104,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDiscardedThisTurn = 0;
     private int numCardsInHandStartedThisTurnWith = 0;
 
+    private CardCollection sacrificedThisTurn = new CardCollection();
+
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
      * on tokens. */
@@ -2239,6 +2241,31 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn = 0;
     }
 
+    public final CardCollectionView getSacrificedThisTurn() {
+        return sacrificedThisTurn;
+    }
+
+    public final void addSacrificedThisTurn(final Card c, final SpellAbility source) {
+        // Play the Sacrifice sound
+        game.fireEvent(new GameEventCardSacrificed());
+
+        final Card cpy = CardFactory.copyCardWithChangedStats(c, false);
+        sacrificedThisTurn.add(cpy);
+
+        // Run triggers
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
+        runParams.put("Card", cpy);
+        runParams.put("Cause", source);
+        runParams.put("CostStack", game.costPaymentStack);
+        runParams.put("IndividualCostPaymentInstance", game.costPaymentStack.peek());
+        game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
+    }
+
+    public final void resetSacrificedThisTurn() {
+        sacrificedThisTurn.clear();
+    }
+
     public final int getSpellsCastThisTurn() {
         return spellsCastThisTurn;
     }
@@ -2436,6 +2463,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setTappedLandForManaThisTurn(false);
         resetLandsPlayedThisTurn();
         resetInvestigatedThisTurn();
+        resetSacrificedThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
     }
