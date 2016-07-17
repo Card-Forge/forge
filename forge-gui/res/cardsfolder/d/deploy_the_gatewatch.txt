@@ -5,7 +5,7 @@ ManaCost:4 W W
 Types:Sorcery
 
 A:SP$ Dig | Cost$ 4 W W | DigNum$ 7 | ChangeNum$ 2 | ChangeValid$ Planeswalker | Optional$ True | DestinationZone$ Battlefield | RestRandomOrder$ True | SpellDescription$ Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
-
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deploy_the_gatewatch.jpg
 
 Oracle:Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

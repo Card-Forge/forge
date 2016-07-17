@@ -10,8 +10,6 @@ T:Mode$ Sacrificed | ValidCard$ Permanent.Other | Execute$ TrigPutCounter | Trig
 
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 
 
-SVar:RemRandomDeck:True
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodbriar.jpg
 
 Oracle:Whenever you sacrifice another permanent, put a +1/+1 counter on Bloodbriar.
