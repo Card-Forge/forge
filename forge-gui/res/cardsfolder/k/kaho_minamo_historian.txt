@@ -4,7 +4,7 @@ Types:Legendary Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ Catalogue | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to three instant cards and exile them. Then shuffle your library.
 SVar:Catalogue:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Instant | ChangeNum$ 3 | RememberChanged$ True | ForgetOtherRemembered$ True
-A:AB$ Play | Cost$ X T | Valid$ Card.IsRemembered+ExiledWithSource+cmcEQX | ValidZone$ Exile | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | References$ X | ForgetTargetRemembered$ True | SpellDescription$ You may cast a card with converted mana cost X exiled with Kaho without paying its mana cost.
+A:AB$ Play | Cost$ X T | Valid$ Card.IsRemembered+ExiledWithSource+cmcEQX | ValidZone$ Exile | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | References$ X | SpellDescription$ You may cast a card with converted mana cost X exiled with Kaho without paying its mana cost.
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Any | Execute$ ForgetCard | Static$ True
 SVar:ForgetCard:DB$ Cleanup | ForgetDefined$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
