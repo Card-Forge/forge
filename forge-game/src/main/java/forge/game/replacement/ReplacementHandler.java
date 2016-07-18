@@ -164,7 +164,8 @@ public class ReplacementHandler {
 
         Card host = replacementEffect.getHostCard();
         // AlternateState for OriginsPlaneswalker
-        if (host.hasAlternateState()) {
+        // FaceDown for cards like Necropotence
+        if (host.hasAlternateState() || host.isFaceDown()) {
             host = game.getCardState(host);
         }
 
