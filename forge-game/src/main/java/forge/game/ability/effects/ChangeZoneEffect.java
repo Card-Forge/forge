@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -998,9 +999,23 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     final Combat combat = game.getCombat();
                     if ( null != combat ) {
                         final FCollectionView<GameEntity> e = combat.getDefenders();
-                        final GameEntity defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare " + c);
-                        combat.addAttacker(c, defender);
-                        game.fireEvent(new GameEventCombatChanged());
+
+                        GameEntity defender = null;
+                        if (sa.hasParam("DefinedDefender")) {
+                            FCollection<GameObject> objs = AbilityUtils.getDefinedObjects(source, sa.getParam("DefinedDefender"), sa);
+                            for(GameObject obj : objs) {
+                                if (obj instanceof GameEntity) {
+                                    defender = (GameEntity)obj;
+                                    break;
+                                }
+                            }
+                        } else {
+                            defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare a defender for " + c );
+                        }
+                        if (defender != null) {
+                            combat.addAttacker(c, defender);
+                            game.fireEvent(new GameEventCombatChanged());
+                        }
                     }
                 }
                 if (sa.hasParam("Blocking")) {

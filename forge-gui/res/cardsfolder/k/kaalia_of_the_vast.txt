@@ -4,6 +4,6 @@ Types:Legendary Creature Human Cleric
 PT:2/2
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Opponent | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks an opponent, you may put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent.
-SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Angel+YouCtrl,Creature.Demon+YouCtrl,Creature.Dragon+YouCtrl | Tapped$ True | Attacking$ True
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Angel+YouCtrl,Creature.Demon+YouCtrl,Creature.Dragon+YouCtrl | Tapped$ True | Attacking$ True | DefinedDefender$ TriggeredDefender
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaalia_of_the_vast.jpg
 Oracle:Flying\nWhenever Kaalia of the Vast attacks an opponent, you may put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent.
