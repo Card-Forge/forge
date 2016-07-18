@@ -1,18 +1,10 @@
 Name:Vexing Scuttler
-
 ManaCost:8
-
 Types:Creature Eldrazi Crab
-
 PT:4/5
-
 K:Emerge 6 U
-
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When you cast CARDNAME, you may destroy target artifact or enchantment.
-
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When you cast CARDNAME, you may return target instant or sorcery card from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_scuttler.jpg
-
 Oracle:Emerge {6}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)\nWhen you cast Vexing Scuttler, you may return target instant or sorcery card from your graveyard to your hand.
 
