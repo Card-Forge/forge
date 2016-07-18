@@ -14682,6 +14682,7 @@ forge-gui/res/cardsfolder/s/stream_of_consciousness.txt -text
 forge-gui/res/cardsfolder/s/stream_of_life.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stream_of_unconsciousness.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/streambed_aquitects.txt -text
+forge-gui/res/cardsfolder/s/street_savvy.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/street_spasm.txt -text
 forge-gui/res/cardsfolder/s/street_sweeper.txt -text
 forge-gui/res/cardsfolder/s/street_wraith.txt svneol=native#text/plain
