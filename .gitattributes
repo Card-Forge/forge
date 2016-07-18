@@ -12251,6 +12251,7 @@ forge-gui/res/cardsfolder/r/remedy.txt -text
 forge-gui/res/cardsfolder/r/remember_the_fallen.txt -text
 forge-gui/res/cardsfolder/r/remembrance.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/reminisce.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/remorseless_punishment.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/r/remote_farm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/remote_isle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/remove.txt svneol=native#text/plain
