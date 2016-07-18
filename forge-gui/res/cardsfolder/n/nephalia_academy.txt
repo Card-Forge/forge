@@ -11,4 +11,4 @@ SVar:DBDiscard:DB$ Discard | Defined$ ReplacedPlayer | Mode$ Defined | DefinedCa
 
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia_academy.jpg
-Oracle:If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.\ņ{T}: Add {C} to your mana pool.
+Oracle:If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.\n{T}: Add {C} to your mana pool.
