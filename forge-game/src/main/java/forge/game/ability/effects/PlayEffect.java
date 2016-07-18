@@ -166,6 +166,9 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ForgetRemembered")) {
                 source.clearRemembered();
             }
+            if (sa.hasParam("ForgetTargetRemembered")) {
+                source.removeRemembered(tgtCard);
+            }
 
             final Card original = tgtCard;
             if (sa.hasParam("CopyCard")) {
