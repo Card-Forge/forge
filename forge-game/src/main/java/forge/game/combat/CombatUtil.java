@@ -498,7 +498,8 @@ public class CombatUtil {
 
         // Landwalk
         if (isUnblockableFromLandwalk(attacker, defender)) {
-            return false;
+            if (CardLists.getAmountOfKeyword(defender.getCreaturesInPlay(), "CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.") == 0)
+            	return false;
         }
 
         return true;
@@ -763,6 +764,7 @@ public class CombatUtil {
                         if (blocker.isValid(valid, null, null, null) &&
                                 CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null) == 0) {
                             attackersWithLure.add(attacker);
+                            break;
                         }
                     }
                 }
@@ -935,6 +937,11 @@ public class CombatUtil {
         }
 
         if (CardFactoryUtil.hasProtectionFrom(blocker, attacker)) {
+            return false;
+        }
+        
+        if (isUnblockableFromLandwalk(attacker, blocker.getController())
+        		&& !blocker.hasKeyword("CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.")) {
             return false;
         }
 
