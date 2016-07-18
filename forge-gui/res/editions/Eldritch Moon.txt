@@ -8,6 +8,7 @@ MciCode=emn
 BoosterCovers=3
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc:!Rare:!Mythic, 1 BasicLand SOI
 ChanceReplaceCommonWith=.125F dfc:RareMythic
+TreatAsSmallSet=true
 
 [cards]
 1 U Abundant Maw
