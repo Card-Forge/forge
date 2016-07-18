@@ -2,13 +2,9 @@ Name:Nephalia Academy
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
-
 R:Event$ Discard | ActiveZones$ Battlefield | ValidCard$ Card.YouCtrl | ValidSource$ Card.OppCtrl | ReplaceWith$ DBReveal | Optional$ True | DiscardFromEffect$ True | Description$ If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.
-
 SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ ReplacedCard | SubAbility$ DBDiscard
-
 SVar:DBDiscard:DB$ Discard | Defined$ ReplacedPlayer | Mode$ Defined | DefinedCards$ ReplacedCard | Cause$ ReplacedSource | DiscardToTopOfLibrary$ True
-
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia_academy.jpg
 Oracle:If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.\n{T}: Add {C} to your mana pool.
