@@ -260,7 +260,7 @@ public class GameAction {
                 position--;
             }
             zoneFrom.remove(c);
-            if (!zoneTo.is(ZoneType.Exile)) {
+            if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
                 c.setExiledWith(null);
             }
         }
