@@ -12,6 +12,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -308,14 +309,27 @@ public class TokenAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.player.Player> options)
      */
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected GameEntity chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         // TODO: AILogic
         Combat combat = ai.getGame().getCombat();
-        // TokenAttacking 
+        // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {
+            // 1. If the card that spawned the token was sent at a planeswalker, attack the same planeswalker with the token. Consider improving.
+            GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
+            if (def != null && def instanceof Card) {
+                if (((Card)def).isPlaneswalker()) {
+                    return def;
+                }
+            }
+            // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
             Card attacker = spawnToken(ai, sa);
-            for (Player p : options) {
-                if (!ComputerUtilCard.canBeBlockedProfitably(p, attacker)) {
+            // TODO: this list potentially includes planeswalkers represented as Card objects. This may need further improvement
+            // (SpellAbilityAi::chooseSingleGameEntity normally expects the list of options to be of the same type).
+            for (GameEntity p : options) {
+                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker)) {
+                    return p;
+                }
+                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker)) {
                     return p;
                 }
             }

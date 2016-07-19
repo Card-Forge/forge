@@ -244,7 +244,7 @@ public abstract class SpellAbilityAi {
 
     }
     
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected GameEntity chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleEntity is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }
