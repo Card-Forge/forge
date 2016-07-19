@@ -1268,8 +1268,7 @@ public class PlayerControllerHuman
 
     @Override
     public boolean playSaFromPlayEffect(final SpellAbility tgtSA) {
-        HumanPlay.playSpellAbility(this, player, tgtSA);
-        return true;
+        return HumanPlay.playSpellAbility(this, player, tgtSA);
     }
 
     @Override
