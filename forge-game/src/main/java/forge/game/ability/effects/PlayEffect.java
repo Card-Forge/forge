@@ -163,9 +163,6 @@ public class PlayEffect extends SpellAbilityEffect {
             if (wasFaceDown) {
                 tgtCard.updateStateForView();
             }
-            if (sa.hasParam("ForgetRemembered")) {
-                source.clearRemembered();
-            }
 
             final Card original = tgtCard;
             if (sa.hasParam("CopyCard")) {
@@ -232,9 +229,19 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.getTargetRestrictions().setMandatory(true);
             }
 
-            remember &= controller.getController().playSaFromPlayEffect(tgtSA);
-            if (remember) {
-                source.addRemembered(tgtSA.getHostCard());
+            if (controller.getController().playSaFromPlayEffect(tgtSA)) {
+                if (remember) {
+                    source.addRemembered(tgtSA.getHostCard());
+                }
+
+                //Forgot only of playing was successful
+                if (sa.hasParam("ForgetRemembered")) {
+                    source.clearRemembered();
+                }
+
+                if (sa.hasParam("ForgetTargetRemembered")) {
+                    source.removeRemembered(tgtCard);
+                }
             }
 
             amount--;
