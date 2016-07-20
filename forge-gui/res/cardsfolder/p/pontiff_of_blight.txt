@@ -3,11 +3,8 @@ ManaCost:4 B B
 Types:Creature Zombie Cleric
 PT:2/7
 K:Extort
-# Put "AddKeyword$ Extort" here to show the keyword in panel
-S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddTrigger$ PontiffExtort | AddSVar$ PontiffExtortOpps & PontiffExtortGainLife | Description$ Other creatures you control have Extort.
-SVar:PontiffExtort:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ PontiffExtortOpps | TriggerDescription$ Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)
-SVar:PontiffExtortOpps:AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ PontiffExtortGainLife
-SVar:PontiffExtortGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
-SVar:AFLifeLost:Number$0
+
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Extort | Description$ Other creatures you control have Extort.
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pontiff_of_blight.jpg
 Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nOther creatures you control have extort. (If a creature has multiple instances of extort, each triggers separately.)

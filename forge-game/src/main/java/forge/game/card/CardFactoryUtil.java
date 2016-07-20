@@ -53,6 +53,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.event.GameEventCardStatsChanged;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordsChange;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
@@ -2546,18 +2547,7 @@ public class CardFactoryUtil {
                 card.setSVar("TrigBondSelf", abStringOther);
             }
             else if (keyword.equals("Extort")) {
-                final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
-                        + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
-                        + " | TriggerDescription$ Extort (Whenever you cast a spell, you may pay W/B. If you do, "
-                        + "each opponent loses 1 life and you gain that much life.)";
-                final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
-                        + "LifeAmount$ 1 | SubAbility$ ExtortGainLife";
-                final String dbString = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | References$ AFLifeLost";
-                final Trigger parsedTrigger = TriggerHandler.parseTrigger(extortTrigger, card, true);
-                card.addTrigger(parsedTrigger);
-                card.setSVar("ExtortOpps", abString);
-                card.setSVar("ExtortGainLife", dbString);
-                card.setSVar("AFLifeLost", "Number$0");
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
@@ -2917,7 +2907,24 @@ public class CardFactoryUtil {
     }
     
     public static void addTriggerAbility(final String keyword, final Card card, final KeywordsChange kws) {
+        final boolean intrinsic = kws == null;
 
+        if (keyword.equals("Extort")) {
+            final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
+                    + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
+                    + " | TriggerDescription$ Extort ("+ Keyword.getInstance(keyword).getReminderText() +")";
+            final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
+                    + "LifeAmount$ 1 | SubAbility$ ExtortGainLife";
+            final String dbString = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | References$ AFLifeLost";
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(extortTrigger, card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(parsedTrigger);
+            card.setSVar("ExtortOpps", abString);
+            card.setSVar("ExtortGainLife", dbString);
+            card.setSVar("AFLifeLost", "Number$0");
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        }
     }
 
     public static void addReplacementEffect(final String keyword, final Card card, final KeywordsChange kws) {
