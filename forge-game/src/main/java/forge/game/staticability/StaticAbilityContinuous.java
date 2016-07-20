@@ -484,13 +484,15 @@ public final class StaticAbilityContinuous {
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
             if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities) {
+                String[] newKeywords = null;
                 if (addKeywords != null) {
-                    for (int j = 0; j < addKeywords.length; ++j) {
-                        addKeywords[j] = addKeywords[j].replace("CardManaCost", affectedCard.getManaCost().getShortString());
+                    newKeywords = Arrays.copyOf(addKeywords, addKeywords.length);
+                    for (int j = 0; j < newKeywords.length; ++j) {
+                    	newKeywords[j] = newKeywords[j].replace("CardManaCost", affectedCard.getManaCost().getShortString());
                     }
                 }
 
-                affectedCard.addChangedCardKeywords(addKeywords, removeKeywords, removeAllAbilities,
+                affectedCard.addChangedCardKeywords(newKeywords, removeKeywords, removeAllAbilities,
                         hostCard.getTimestamp());
             }
 
