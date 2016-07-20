@@ -2221,33 +2221,7 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(effect);
             }
             else if (keyword.startsWith("Unearth")) {
-                card.removeIntrinsicKeyword(keyword);
-
-                final String[] k = keyword.split(":");
-                final String manacost = k[1];
-
-                String effect = "AB$ ChangeZone | Cost$ " + manacost + " | Defined$ Self" +
-                        " | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$" +
-                        " True | ActivationZone$ Graveyard | Unearth$ True | SubAbility$" +
-                        " UnearthPumpSVar | PrecostDesc$ Unearth | StackDescription$ " +
-                        "Unearth: Return CARDNAME to the battlefield. | SpellDescription$" +
-                        " (" + ManaCostParser.parse(manacost) + ": Return CARDNAME to the " +
-                        "battlefield. It gains haste. Exile it at the beginning of the next" +
-                        " end step or if it would leave the battlefield. Unearth only as a sorcery.)";
-                String dbpump = "DB$ Pump | Defined$ Self | KW$ Haste & HIDDEN If CARDNAME" +
-                        " would leave the battlefield, exile it instead of putting it " +
-                        "anywhere else. | Permanent$ True | SubAbility$ UnearthDelayTrigger";
-                String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn" +
-                        " | Execute$ UnearthTrueDeath | TriggerDescription$ Exile " +
-                        "CARDNAME at the beginning of the next end step.";
-                String truedeath = "DB$ ChangeZone | Defined$ Self | Origin$ Battlefield" +
-                        " | Destination$ Exile";
-                card.setSVar("UnearthPumpSVar", dbpump);
-                card.setSVar("UnearthDelayTrigger", delTrig);
-                card.setSVar("UnearthTrueDeath", truedeath);
-                card.addSpellAbility(AbilityFactory.getAbility(effect, card));
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(effect);
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Level up")) {
                 final String strMaxLevel = card.getSVar("maxLevel");
@@ -2948,7 +2922,39 @@ public class CardFactoryUtil {
     }
 
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
+    	final boolean intrinsic = kws == null;
 
+        if (keyword.startsWith("Unearth")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            String effect = "AB$ ChangeZone | Cost$ " + manacost + " | Defined$ Self" +
+                    " | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$" +
+                    " True | ActivationZone$ Graveyard | Unearth$ True | SubAbility$" +
+                    " UnearthPumpSVar | PrecostDesc$ Unearth | StackDescription$ " +
+                    "Unearth: Return CARDNAME to the battlefield. | SpellDescription$" +
+                    " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            String dbpump = "DB$ Pump | Defined$ Self | KW$ Haste & HIDDEN If CARDNAME" +
+                    " would leave the battlefield, exile it instead of putting it " +
+                    "anywhere else. | Permanent$ True | SubAbility$ UnearthDelayTrigger";
+            String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn" +
+                    " | Execute$ UnearthTrueDeath | TriggerDescription$ Exile " +
+                    "CARDNAME at the beginning of the next end step.";
+            String truedeath = "DB$ ChangeZone | Defined$ Self | Origin$ Battlefield" +
+                    " | Destination$ Exile";
+            card.setSVar("UnearthPumpSVar", dbpump);
+            card.setSVar("UnearthDelayTrigger", delTrig);
+            card.setSVar("UnearthTrueDeath", truedeath);
+            
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            if (!intrinsic) {
+	            sa.setTemporary(true);
+	            sa.setIntrinsic(false);
+	            //sa.setOriginalHost(hostCard);
+	            kws.addSpellAbility(sa);
+            }
+            card.addSpellAbility(sa);
+        }
     }
 
     /**
