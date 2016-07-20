@@ -244,12 +244,17 @@ public class CloneEffect extends SpellAbilityEffect {
             keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
             // allow SVar substitution for keywords
             for (int i = 0; i < keywords.size(); i++) {
-                final String k = keywords.get(i);
+                String k = keywords.get(i);
                 if (origSVars.containsKey(k)) {
                     keywords.add("\"" + k + "\"");
                     keywords.remove(k);
                 }
-                tgtCard.addIntrinsicKeyword(keywords.get(i));
+                k = keywords.get(i);
+                tgtCard.addIntrinsicKeyword(k);
+
+                CardFactoryUtil.addTriggerAbility(k, tgtCard, null);
+                CardFactoryUtil.addReplacementEffect(k, tgtCard, null);
+                CardFactoryUtil.addSpellAbility(k, tgtCard, null);
             }
         }
 
