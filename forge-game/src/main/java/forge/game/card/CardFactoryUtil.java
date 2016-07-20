@@ -2851,43 +2851,7 @@ public class CardFactoryUtil {
 
                 card.addReplacementEffect(re);
             } else if (kw.startsWith("etbCounter")) {
-                String parse = kw;
-                card.removeIntrinsicKeyword(parse);
-
-                String[] splitkw = parse.split(":");
-
-                String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " "
-                        + CounterType.valueOf(splitkw[1]).getName() + " counters on it.";
-                String extraparams = "";
-                String amount = splitkw[2];
-                if (splitkw.length > 3) {
-                    if (!splitkw[3].equals("no Condition")) {
-                        extraparams = splitkw[3];
-                    }
-                }
-                if (splitkw.length > 4) {
-                    desc = !splitkw[4].equals("no desc") ? splitkw[4] : "";
-                }
-                String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1]
-                        + " | ETB$ True | CounterNum$ " + amount +  " | SubAbility$ ETBCounterDBSVar";
-                String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                        + "| Defined$ ReplacedCard";
-                try {
-                    Integer.parseInt(amount);
-                }
-                catch (NumberFormatException ignored) {
-                    abStr += " | References$ " + amount;
-                }
-                card.setSVar("ETBCounterSVar", abStr);
-                card.setSVar("ETBCounterDBSVar", dbStr);
-
-                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                        + "| ReplaceWith$ ETBCounterSVar | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
-
-                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
-                re.setLayer(ReplacementLayer.Other);
-
-                card.addReplacementEffect(re);
+                makeEtbCounter(kw, card, true);
             } else if (kw.equals("CARDNAME enters the battlefield tapped.")) {
                 String parse = kw;
                 card.removeIntrinsicKeyword(parse);
@@ -2910,6 +2874,48 @@ public class CardFactoryUtil {
         }
     }
 
+
+    private static ReplacementEffect makeEtbCounter(final String kw, final Card card, final boolean intrinsic)
+    {
+        String parse = kw;
+        card.removeIntrinsicKeyword(parse);
+
+        String[] splitkw = parse.split(":");
+
+        String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " "
+                + CounterType.valueOf(splitkw[1]).getName() + " counters on it.";
+        String extraparams = "";
+        String amount = splitkw[2];
+        if (splitkw.length > 3) {
+            if (!splitkw[3].equals("no Condition")) {
+                extraparams = splitkw[3];
+            }
+        }
+        if (splitkw.length > 4) {
+            desc = !splitkw[4].equals("no desc") ? splitkw[4] : "";
+        }
+        String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1]
+                + " | ETB$ True | CounterNum$ " + amount +  " | SubAbility$ ETBCounterDBSVar";
+        String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
+                + "| Defined$ ReplacedCard";
+        try {
+            Integer.parseInt(amount);
+        }
+        catch (NumberFormatException ignored) {
+            abStr += " | References$ " + amount;
+        }
+        card.setSVar("ETBCounterSVar", abStr);
+        card.setSVar("ETBCounterDBSVar", dbStr);
+
+        String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
+                + "| ReplaceWith$ ETBCounterSVar | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+        re.setLayer(ReplacementLayer.Other);
+
+        return card.addReplacementEffect(re);
+    }
+    
     public static void addTriggerAbility(final String keyword, final Card card, final KeywordsChange kws) {
 
     }
