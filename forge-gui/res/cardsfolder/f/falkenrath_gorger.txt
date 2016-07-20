@@ -2,12 +2,6 @@ Name:Falkenrath Gorger
 ManaCost:R
 Types:Creature Vampire Berserker
 PT:2/1
-S:Mode$ Continuous | Affected$ Creature.YouOwn+Vampire | AffectedZone$ Hand,Library,Graveyard,Exile,Stack,Command | AddKeyword$ Madness | AddReplacementEffects$ GrantedMadnessDiscRepl | AddSVar$ GrantedMadnessDiscSVar & GrantedManessPlay & GrantedMadnessDontPlay & GrantedMadnessCleanup | AddTrigger$ GrantedMadnessTrigger | Description$ Each Vampire creature card you own that isn't on the battlefield has madness. The madness cost is equal to its mana cost. (If you discard a card with madness, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
-SVar:GrantedMadnessDiscRepl:Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | ReplaceWith$ GrantedMadnessDiscSVar | Secondary$ True | Description$ If you discard this card, discard it into exile.
-SVar:GrantedMadnessDiscSVar:DB$ Discard | Defined$ ReplacedPlayer | Mode$ Defined | DefinedCards$ ReplacedCard | Madness$ True
-# TriggerZones Hand added because otherwise this trigger will fire twice, once for the LKI in hand version, and once on the exiled version
-SVar:GrantedMadnessTrigger:Mode$ Discarded | TriggerZones$ Hand | ValidCard$ Card.Self | IsMadness$ True | Execute$ GrantedManessPlay | Secondary$ True | TriggerDescription$ Play Madness - CARDNAME
-SVar:GrantedManessPlay:DB$ Play | Defined$ Self | PlayMadness$ ManaCost | Optional$ True | SubAbility$ GrantedMadnessDontPlay | RememberPlayed$ True
-SVar:GrantedMadnessDontPlay:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Graveyard | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ GrantedMadnessCleanup
-SVar:GrantedMadnessCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Creature.YouOwn+Vampire | AffectedZone$ Hand | AddKeyword$ Madness:CardManaCost | Description$ Each Vampire creature card you own that isn't on the battlefield has madness. The madness cost is equal to its mana cost. (If you discard a card with madness, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
+
 Oracle:Each Vampire creature card you own that isn't on the battlefield has madness. The madness cost is equal to its mana cost. (If you discard a card with madness, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

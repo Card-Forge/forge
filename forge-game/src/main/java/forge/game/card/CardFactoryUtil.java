@@ -2958,6 +2958,33 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
+        } if (keyword.startsWith("Madness")) {
+            // Set Madness Triggers
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+            final String trigPlay = "TrigPlayMadness" + StringUtils.join(manacost.split(" "));
+
+            final String trigStr = "Mode$ Discarded | ValidCard$ Card.Self | IsMadness$ True | " +
+                    "Execute$ " + trigPlay + " | Secondary$ True | TriggerDescription$ " +
+                    "Play Madness " + ManaCostParser.parse(manacost) + " - " + card.getName();
+
+            final String playMadness = "AB$ Play | Cost$ 0 | Defined$ Self | PlayMadness$ " + manacost +
+                    " | ConditionDefined$ Self | ConditionPresent$ Card.StrictlySelf+inZoneExile" + 
+                    " | Optional$ True | SubAbility$ DBWasNotPlayMadness | RememberPlayed$ True";
+            final String moveToYard = "DB$ ChangeZone | Defined$ Self.StrictlySelf | Origin$ Exile | " +
+                    "Destination$ Graveyard | ConditionDefined$ Remembered | ConditionPresent$" +
+                    " Card | ConditionCompare$ EQ0 | SubAbility$ DBMadnessCleanup";
+            final String cleanUp = "DB$ Cleanup | ClearRemembered$ True";
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(parsedTrigger);
+
+            card.setSVar(trigPlay, playMadness);
+            card.setSVar("DBWasNotPlayMadness", moveToYard);
+            card.setSVar("DBMadnessCleanup", cleanUp);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
         }
     }
 
@@ -3011,6 +3038,20 @@ public class CardFactoryUtil {
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
             re.setLayer(ReplacementLayer.Other);
             ReplacementEffect cardre = card.addReplacementEffect(re);
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
+            }
+        } else if (keyword.startsWith("Madness")) {
+            // Set Madness Replacement effects
+            String repeffstr = "Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | " +
+                    "ReplaceWith$ DiscardMadness | Secondary$ True | Description$ " +
+                    "Madness: If you discard this card, discard it into exile.";
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+            String sVarMadness = "DB$ Discard | Defined$ ReplacedPlayer" +
+                    " | Mode$ Defined | DefinedCards$ ReplacedCard | Madness$ True";
+            card.setSVar("DiscardMadness", sVarMadness);
 
             if (!intrinsic) {
                 kws.addReplacement(cardre);
@@ -3538,38 +3579,12 @@ public class CardFactoryUtil {
             }
         } // Megamorph
 
-        if (hasKeyword(card, "Madness") != -1) {
-            final int n = hasKeyword(card, "Madness");
-            if (n != -1) {
-                // Set Madness Replacement effects
-                String repeffstr = "Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | " +
-                		"ReplaceWith$ DiscardMadness | Secondary$ True | Description$ If you" +
-                		" discard this card, discard it into exile.";
-                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
-                card.addReplacementEffect(re);
-                String sVarMadness = "DB$ Discard | Defined$ ReplacedPlayer" +
-                		" | Mode$ Defined | DefinedCards$ ReplacedCard | Madness$ True";
-                card.setSVar("DiscardMadness", sVarMadness);
+        final int madness = hasKeyword(card, "Madness");
+        if (madness != -1) {
+            final String parse = card.getKeywords().get(madness).toString();
 
-                // Set Madness Triggers
-                final String parse = card.getKeywords().get(n).toString();
-                // card.removeIntrinsicKeyword(parse);
-                final String[] k = parse.split(":");
-                String trigStr = "Mode$ Discarded | ValidCard$ Card.Self | IsMadness$ True | " +
-                		"Execute$ TrigPlayMadness | Secondary$ True | TriggerDescription$ " +
-                		"Play Madness - " + card.getName();
-                final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
-                card.addTrigger(myTrigger);
-                String playMadness = "AB$ Play | Cost$ 0 | Defined$ Self | PlayMadness$ " + k[1] + 
-                		" | Optional$ True | SubAbility$ DBWasNotPlayMadness | RememberPlayed$ True";
-                String moveToYard = "DB$ ChangeZone | Defined$ Self | Origin$ Exile | " +
-                		"Destination$ Graveyard | ConditionDefined$ Remembered | ConditionPresent$" +
-                		" Card | ConditionCompare$ EQ0 | SubAbility$ DBMadnessCleanup";
-                String cleanUp = "DB$ Cleanup | ClearRemembered$ True";
-                card.setSVar("TrigPlayMadness", playMadness);
-                card.setSVar("DBWasNotPlayMadness", moveToYard);
-                card.setSVar("DBMadnessCleanup", cleanUp);
-            }
+            addReplacementEffect(parse, card, null);
+            addTriggerAbility(parse, card, null);
         } // madness
 
         if (hasKeyword(card, "Miracle") != -1) {
