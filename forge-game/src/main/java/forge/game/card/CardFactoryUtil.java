@@ -2960,6 +2960,27 @@ public class CardFactoryUtil {
 
     public static void addReplacementEffect(final String keyword, final Card card, final KeywordsChange kws) {
 
+        final boolean intrinsic = kws == null;
+        if (keyword.startsWith("Bloodthirst")) {
+            final String numCounters = keyword.split(" ")[1];
+
+            String desc;
+            if (numCounters.equals("X")) {
+                desc = "Bloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, "
+                        + "where X is the damage dealt to your opponents this turn.)";
+                card.setSVar("X", "Count$BloodthirstAmount");
+            } else {
+                desc = "Bloodthirst " + numCounters + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            }
+
+            final String etbCounter = "etbCounter:P1P1:" + numCounters + ":Bloodthirst$ True:" + desc;
+
+            if (intrinsic) {
+                card.addIntrinsicKeyword(etbCounter);
+            } else {
+                kws.addReplacement(makeEtbCounter(etbCounter, card, intrinsic));            		
+            }
+        }
     }
 
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
@@ -3591,17 +3612,7 @@ public class CardFactoryUtil {
 
         final int bloodthirst = hasKeyword(card, "Bloodthirst");
         if (bloodthirst != -1) {
-            final String numCounters = card.getKeywords().get(bloodthirst).split(" ")[1];
-            String desc = "Bloodthirst "
-                    + numCounters + " (If an opponent was dealt damage this turn, this creature enters the battlefield with "
-                    + numCounters + " +1/+1 counters on it.)";
-            if (numCounters.equals("X")) {
-                desc = "Bloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, "
-                        + "where X is the damage dealt to your opponents this turn.)";
-                card.setSVar("X", "Count$BloodthirstAmount");
-            }
-
-            card.addIntrinsicKeyword("etbCounter:P1P1:" + numCounters + ":Bloodthirst$ True:" + desc);
+            addReplacementEffect(card.getKeywords().get(bloodthirst), card, null);
         } // bloodthirst
 
         final int storm = card.getAmountOfKeyword("Storm");
