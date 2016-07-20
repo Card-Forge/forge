@@ -6373,21 +6373,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                             result.setFalse();
                         }
                         break;
-                    case "CARDNAME can't be the target of red spells or abilities from red sources.":
-                        if (source.isRed()) {
-                            result.setFalse();
-                        }
-                        break;
-                    case "CARDNAME can't be the target of black spells.":
-                        if (source.isBlack() && sa.isSpell()) {
-                            result.setFalse();
-                        }
-                        break;
-                    case "CARDNAME can't be the target of blue spells.":
-                        if (source.isBlue() && sa.isSpell()) {
-                            result.setFalse();
-                        }
-                        break;
                     case "CARDNAME can't be the target of spells.":
                         if (sa.isSpell()) {
                             result.setFalse();
