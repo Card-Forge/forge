@@ -3019,7 +3019,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
             newCks.addKeywordsToCard(this);
             changedCardKeywords.put(timestamp, newCks);
-            changedCardKeywords.put(timestamp, new KeywordsChange(keywords, removeKeywords, removeAllKeywords));
         }
         updateKeywords();
     }
