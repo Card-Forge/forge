@@ -7,10 +7,16 @@ public class KeywordWithCost extends KeywordInstance<KeywordWithCost> {
 
     @Override
     protected void parse(String details) {
+        cost = new Cost(details.split("\\|", 2)[0].trim(), false);
     }
 
     @Override
     protected String formatReminderText(String reminderText) {
-        return String.format(reminderText, cost.toSimpleString());
+        // some reminder does not contain cost
+        if (reminderText.contains("%")) {
+            return String.format(reminderText, cost.toSimpleString());
+        } else {
+            return reminderText;
+        }
     }
 }
