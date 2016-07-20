@@ -2886,7 +2886,37 @@ public class CardFactoryUtil {
     public static void addTriggerAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
 
-        if (keyword.equals("Exalted")) {
+        if (keyword.equals("Cascade")) {
+            final int cascade = intrinsic ? card.getAmountOfKeyword("Cascade") : 1;
+            if (cascade != -1) {
+                final StringBuilder trigScript = new StringBuilder(
+                        "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
+                        "True | TriggerDescription$ Cascade - CARDNAME");
+
+                final String abString = "AB$ DigUntil | Cost$ 0 | Defined$ You | Amount$ 1 | Valid$ "
+                        + "Card.nonLand+cmcLTCascadeX | FoundDestination$ Exile | RevealedDestination$"
+                        + " Exile | References$ CascadeX | ImprintRevealed$ True | RememberFound$ True"
+                        + " | SubAbility$ CascadeCast";
+                final String dbCascadeCast = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | "
+                        + "Optional$ True | SubAbility$ CascadeMoveToLib";
+                final String dbMoveToLib = "DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted"
+                        + " | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1"
+                        + " | SubAbility$ CascadeCleanup";
+                card.setSVar("TrigCascade", abString);
+                card.setSVar("CascadeCast", dbCascadeCast);
+                card.setSVar("CascadeMoveToLib", dbMoveToLib);
+                card.setSVar("CascadeX", "Count$CardManaCost");
+                card.setSVar("CascadeCleanup", "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True");
+                final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, intrinsic);
+            
+                for (int i = 0; i < cascade; i++) {
+                    final Trigger cardTrigger = card.addTrigger(cascadeTrigger);
+                    if (!intrinsic) {
+                        kws.addTrigger(cardTrigger);
+                    }
+                }
+            }
+        } else if (keyword.equals("Exalted")) {
 	        final StringBuilder trigExalted = new StringBuilder(
 	                "Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | "
 	                        + "Execute$ ExaltedPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
@@ -3576,29 +3606,9 @@ public class CardFactoryUtil {
 
             card.addTrigger(stormTrigger);
         } // Storm
-        final int cascade = card.getAmountOfKeyword("Cascade");
-        for (int i = 0; i < cascade; i++) {
-            final StringBuilder trigScript = new StringBuilder(
-                    "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
-                    "True | TriggerDescription$ Cascade - CARDNAME");
 
-            final String abString = "AB$ DigUntil | Cost$ 0 | Defined$ You | Amount$ 1 | Valid$ "
-                    + "Card.nonLand+cmcLTCascadeX | FoundDestination$ Exile | RevealedDestination$"
-                    + " Exile | References$ CascadeX | ImprintRevealed$ True | RememberFound$ True"
-                    + " | SubAbility$ CascadeCast";
-            final String dbCascadeCast = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | "
-                    + "Optional$ True | SubAbility$ CascadeMoveToLib";
-            final String dbMoveToLib = "DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted"
-                    + " | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1"
-                    + " | SubAbility$ CascadeCleanup";
-            card.setSVar("TrigCascade", abString);
-            card.setSVar("CascadeCast", dbCascadeCast);
-            card.setSVar("CascadeMoveToLib", dbMoveToLib);
-            card.setSVar("CascadeX", "Count$CardManaCost");
-            card.setSVar("CascadeCleanup", "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True");
-            final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
-
-            card.addTrigger(cascadeTrigger);
+        if (hasKeyword(card, "Cascade") != -1) {
+            addTriggerAbility("Cascade", card, null);
         } // Cascade
 
         if (hasKeyword(card, "Recover") != -1) {
