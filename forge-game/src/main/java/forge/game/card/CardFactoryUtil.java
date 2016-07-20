@@ -2946,6 +2946,11 @@ public class CardFactoryUtil {
     public static void addReplacementEffect(final String keyword, final Card card, final KeywordsChange kws) {
 
     }
+
+    public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
+
+    }
+
     /**
      * TODO: Write javadoc for this method.
      * @param card

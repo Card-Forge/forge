@@ -24,6 +24,7 @@ import com.google.common.collect.Lists;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 
 /**
@@ -41,6 +42,7 @@ public class KeywordsChange {
 
     private List<Trigger> triggers = Lists.<Trigger>newArrayList();
     private List<ReplacementEffect> replacements = Lists.<ReplacementEffect>newArrayList();
+    private List<SpellAbility> abilities = Lists.<SpellAbility>newArrayList();
     /**
      * 
      * Construct a new {@link KeywordsChange}.
@@ -98,6 +100,7 @@ public class KeywordsChange {
         for (String k : keywords) {
             CardFactoryUtil.addTriggerAbility(k, host, this);
             CardFactoryUtil.addReplacementEffect(k, host, this);
+            CardFactoryUtil.addSpellAbility(k, host, this);
         }
     }
 
@@ -108,6 +111,9 @@ public class KeywordsChange {
         for (ReplacementEffect r : replacements) {
             host.removeReplacementEffect(r);
         }
+        for (SpellAbility s : abilities) {
+            host.removeSpellAbility(s);
+        }
     }
 
     public final void addTrigger(final Trigger trg) {
@@ -116,5 +122,9 @@ public class KeywordsChange {
     
     public final void addReplacement(final ReplacementEffect trg) {
         replacements.add(trg);
+    }
+
+    public final void addSpellAbility(final SpellAbility s) {
+        abilities.add(s);
     }
 }
