@@ -484,6 +484,12 @@ public final class StaticAbilityContinuous {
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
             if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities) {
+                if (addKeywords != null) {
+                    for (int j = 0; j < addKeywords.length; ++j) {
+                        addKeywords[j] = addKeywords[j].replace("CardManaCost", affectedCard.getManaCost().getShortString());
+                    }
+                }
+
                 affectedCard.addChangedCardKeywords(addKeywords, removeKeywords, removeAllAbilities,
                         hostCard.getTimestamp());
             }
@@ -521,19 +527,7 @@ public final class StaticAbilityContinuous {
             if (addAbilities != null) {
                 for (String abilty : addAbilities) {
                     if (abilty.contains("CardManaCost")) {
-                        StringBuilder sb = new StringBuilder();
-                        int generic = affectedCard.getManaCost().getGenericCost();
-                        if (generic > 0) {
-                            sb.append(generic);
-                        }
-                        for (ManaCostShard s : affectedCard.getManaCost()) {
-                            // TODO Sol Investigate, this loop feels wrong
-                            ColorSet cs = ColorSet.fromMask(s.getColorMask());
-                            if(cs.isColorless()) continue;
-                            sb.append(' ');
-                            sb.append(s);
-                        }
-                        abilty = abilty.replace("CardManaCost", sb.toString().trim());
+                        abilty = abilty.replace("CardManaCost", affectedCard.getManaCost().getShortString());
                     } else if (abilty.contains("ConvertedManaCost")) {
                         final String costcmc = Integer.toString(affectedCard.getCMC());
                         abilty = abilty.replace("ConvertedManaCost", costcmc);
