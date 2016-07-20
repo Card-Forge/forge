@@ -39,6 +39,7 @@ import forge.game.cost.Cost;
 import forge.game.event.*;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.replacement.ReplaceMoved;
@@ -1393,12 +1394,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.contains("At the beginning of your upkeep, ")
                     && keyword.contains(" unless you pay")) {
                 sbLong.append(keyword).append("\r\n");
+            } else if (keyword.startsWith("Sunburst") && hasStartOfKeyword("Modular")) {
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
             } else if (keyword.startsWith("Provoke")) {
-                sbLong.append(keyword);
-                sbLong.append(" (When this attacks, you may have target creature ");
-                sbLong.append("defending player controls untap and block it if able.)");
+                sbLong.append(keyword + "(" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.contains("Haunt")) {
                 sb.append("\r\nHaunt (");
                 if (isCreature()) {
@@ -1408,16 +1408,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("exile it haunting target creature.");
                 }
                 sb.append(")");
-            } else if (keyword.equals("Convoke")) {
-                if (sb.length() != 0) {
-                    sb.append("\r\n");
-                }
-                sb.append("Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)");
-            } else if (keyword.equals("Menace")) {
-                if (sb.length() != 0) {
-                    sb.append("\r\n");
-                }
-                sb.append("Menace (This creature can't be blocked except by two or more creatures.)");
+            } else if (keyword.equals("Convoke") || keyword.equals("Menace")) {
+                sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.endsWith(" offering")) {
                 String offeringType = keyword.split(" ")[0];
                 if (sb.length() != 0) {
@@ -1430,11 +1422,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(offeringType);
                 sbLong.append(". Mana cost includes color.)");
             } else if (keyword.startsWith("Soulbond")) {
-                sbLong.append(keyword);
-                sbLong.append(" (You may pair this creature ");
-                sbLong.append("with another unpaired creature when either ");
-                sbLong.append("enters the battlefield. They remain paired for ");
-                sbLong.append("as long as you control both of them)");
+                sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedBy")) {
