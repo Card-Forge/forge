@@ -3004,15 +3004,21 @@ public class Card extends GameEntity implements Comparable<Card> {
         // if the key already exists - merge entries
         final KeywordsChange cks = changedCardKeywords.get(timestamp);
         if (cks != null) {
+        	cks.removeKeywords(this);
             List<String> kws = new ArrayList<>(keywords);
             List<String> rkws = new ArrayList<>(removeKeywords);
             boolean remAll = removeAllKeywords;
             kws.addAll(cks.getKeywords());
             rkws.addAll(cks.getRemoveKeywords());
             remAll |= cks.isRemoveAllKeywords();
-            changedCardKeywords.put(timestamp, new KeywordsChange(kws, rkws, remAll));
+            final KeywordsChange newCks = new KeywordsChange(kws, rkws, remAll);
+            newCks.addKeywordsToCard(this);
+            changedCardKeywords.put(timestamp, newCks);
         }
         else {
+            final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
+            newCks.addKeywordsToCard(this);
+            changedCardKeywords.put(timestamp, newCks);
             changedCardKeywords.put(timestamp, new KeywordsChange(keywords, removeKeywords, removeAllKeywords));
         }
         currentState.getView().updateKeywords(this, currentState);

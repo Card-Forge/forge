@@ -53,6 +53,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.event.GameEventCardStatsChanged;
+import forge.game.keyword.KeywordsChange;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -2909,6 +2910,13 @@ public class CardFactoryUtil {
         }
     }
 
+    public static void addTriggerAbility(final String keyword, final Card card, final KeywordsChange kws) {
+
+    }
+
+    public static void addReplacementEffect(final String keyword, final Card card, final KeywordsChange kws) {
+
+    }
     /**
      * TODO: Write javadoc for this method.
      * @param card
