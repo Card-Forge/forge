@@ -1,8 +1,7 @@
 Name:Favor of the Mighty
 ManaCost:1 W
 Types:Tribal Enchantment Giant
-# Lock in text so can't change color words in "Protection from all colors"
-S:Mode$ Continuous | Affected$ Creature.greatestCMC | AddKeyword$ Protection from white & Protection from blue & Protection from black & Protection from red & Protection from green | LockInText$ True | Description$ Each creature with the highest converted mana cost has protection from all colors.
+S:Mode$ Continuous | Affected$ Creature.greatestCMC | AddKeyword$ Protection from all colors | Description$ Each creature with the highest converted mana cost has protection from all colors.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_mighty.jpg

@@ -1,0 +1,20 @@
+Name:Briarbridge Patrol
+ManaCost:3 G
+Types:Creature Human Warrior
+PT:3/3
+# Two pronged handling of investigation portion
+T:Mode$ DamageDone | ValidSource$ Card | CombatDamage$ False | ValidTarget$ Creature | TriggerZones$ Battlefield | OncePerEffect$ True | Execute$ TrigToken | TriggerDescription$ Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.")
+
+T:Mode$ DealtCombatDamageOnce | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.")
+
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 | TokenAbilities$ ABDraw
+SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+
+# Trigger on Accumulated Clues
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ ClueResearch | SVarCompare$ GE3 | Execute$ TrigCheatCreature | TriggerDescription$ At the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.
+
+SVar:TrigCheatCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
+
+SVar:ClueResearch:Count$SacrificedThisTurn Clue
+SVar:Picture:http://www.wizards.com/global/images/magic/general/briarbridge_patrol.jpg
+Oracle:Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")\nAt the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.

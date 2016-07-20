@@ -113,6 +113,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return new Deck();
             }
         }), null),
+        QuestDraft(new DeckController<DeckGroup>(null, new Supplier<DeckGroup>() { //delay setting root folder until quest loaded
+            @Override
+            public DeckGroup get() {
+                return new DeckGroup("");
+            }
+        }), null),
         PlanarConquest(new DeckController<Deck>(null, new Supplier<Deck>() { //delay setting root folder until conquest loaded
             @Override
             public Deck get() {
@@ -198,6 +204,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
                     new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
             };
+        case QuestDraft:
+            return new DeckEditorPage[] {
+                    new DraftPackPage(),
+                    new DeckSectionPage(DeckSection.Main),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL)
+            };
         case PlanarConquest:
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, "Collection", FSkinImage.SPELLBOOK),
@@ -267,6 +279,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             break;
         case Draft:
+        case QuestDraft:
             break;
         default:
             //if editing existing non-limited deck, show main deck by default
@@ -277,7 +290,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         if (StringUtils.isEmpty(editDeckName)) {
-            if (editorType == EditorType.Draft) {
+            if (editorType == EditorType.Draft || editorType == EditorType.QuestDraft) {
                 //hide deck header on while drafting
                 setDeck(new Deck());
                 deckHeader.setVisible(false);
@@ -292,7 +305,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
         }
         else {
-            if (editorType == EditorType.Draft) {
+            if (editorType == EditorType.Draft || editorType == EditorType.QuestDraft) {
                 tabPages[0].hideTab(); //hide Draft Pack page if editing existing draft deck
             }
             editorType.getController().load(editDeckPath, editDeckName);
@@ -317,6 +330,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 switch (editorType) {
                                 case Draft:
                                 case Sealed:
+                                case QuestDraft:
                                     //suggest a random set from the ones used in the limited card pool that have all basic lands
                                     Set<CardEdition> availableEditionCodes = new HashSet<>();
                                     for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
@@ -494,6 +508,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Draft:
         case Sealed:
         case Winston:
+        case QuestDraft:
             return CardLimit.None;
         case Commander:
         case TinyLeaders:
@@ -581,6 +596,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Draft:
         case Sealed:
         case Winston:
+        case QuestDraft:
             return true;
         default:
             return false;
@@ -1138,6 +1154,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 switch (parentScreen.getEditorType()) {
                 case Draft:
                 case Sealed:
+                case QuestDraft:
                     parentScreen.getSideboardPage().addCard(card);
                     break;
                 default:
@@ -1554,6 +1571,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 DeckPreferences.setSealedDeck(deckStr);
                 break;
             case Quest:
+                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, model.toString());
+                FModel.getQuest().save();
+                break;
+            case QuestDraft:
                 FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, model.toString());
                 FModel.getQuest().save();
                 break;

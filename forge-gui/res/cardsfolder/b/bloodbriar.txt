@@ -1,0 +1,16 @@
+Name:Bloodbriar
+
+ManaCost:2 G
+
+Types:Creature Plant Elemental
+
+PT:2/3
+
+T:Mode$ Sacrificed | ValidCard$ Permanent.Other | Execute$ TrigPutCounter | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice another permanent, put a +1/+1 counter on Bloodbriar.
+
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodbriar.jpg
+
+Oracle:Whenever you sacrifice another permanent, put a +1/+1 counter on Bloodbriar.
+

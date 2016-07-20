@@ -1,0 +1,218 @@
+[metadata]
+Code=EMN
+Date=2016-07-22
+Name=Eldritch Moon
+Code2=EMN
+Type=Expansion
+MciCode=emn
+BoosterCovers=3
+Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc:!Rare:!Mythic, 1 BasicLand SOI
+ChanceReplaceCommonWith=.125F dfc:RareMythic
+TreatAsSmallSet=true
+
+[cards]
+1 U Abundant Maw
+2 M Decimator of the Provinces
+3 R Distended Mindbender
+4 U Drownyard Behemoth
+5 R Elder Deep-Fiend
+6 M Emrakul, the Promised End
+7 R Eternal Scourge
+8 C It of the Horrid Swarm
+9 U Lashweed Lurker
+10 U Mockery of Nature
+11 U Vexing Scuttler
+12 C Wretched Gryff
+13 U Blessed Alliance
+14 C Borrowed Grace
+15 R Bruna, the Fading Light
+16 C Choking Restraints
+17 R Collective Effort
+18 U Courageous Outrider
+19 C Dawn Gryff
+20 M Deploy the Gatewatch
+21 C Desperate Sentry
+22 U Drogskol Shieldmate
+23 U Extricator of Sin
+24 U Faith Unbroken
+25 C Faithbearer Paladin
+26 C Fiend Binder
+27 U Geist of the Lonely Vigil
+28 M Gisela, the Broken Blade
+29 U Give No Ground
+30 C Guardian of Pilgrims
+31 C Ironclad Slayer
+32 C Ironwright's Cleansing
+33 U Lone Rider
+34 U Long Road Home
+35 C Lunarch Mantle
+36 U Peace of Mind
+37 R Providence
+38 U Repel the Abominable
+39 R Sanctifier of Souls
+40 R Selfless Spirit
+41 R Sigarda's Aid
+42 C Sigardian Priest
+43 C Spectral Reserves
+44 C Steadfast Cathar
+45 U Subjugator Angel
+46 R Thalia, Heretic Cathar
+47 R Thalia's Lancers
+48 C Thraben Standard Bearer
+49 U Advanced Stitchwing
+50 U Chilling Grasp
+51 R Coax from the Blind Eternities
+52 C Contingency Plan
+53 C Convolute
+54 U Curious Homunculus
+55 C Displace
+56 R Docent of Perfection
+57 C Drag Under
+58 C Enlightened Maniac
+59 C Exultant Cultist
+60 C Fogwalker
+61 U Fortune's Favor
+62 U Geist of the Archives
+63 U Grizzled Angler
+64 R Identity Thief
+65 R Imprisoned in the Moon
+66 C Ingenious Skaab
+67 C Laboratory Brute
+68 U Lunar Force
+69 R Mausoleum Wanderer
+70 M Mind's Dilation
+71 U Nebelgast Herald
+72 R Niblis of Frost
+73 U Scour the Laboratory
+74 C Spontaneous Mutation
+75 R Summary Dismissal
+76 C Take Inventory
+77 C Tattered Haunter
+78 C Turn Aside
+79 U Unsubstantiate
+80 R Wharf Infiltrator
+81 C Boon of Emrakul
+82 C Borrowed Malevolence
+83 C Cemetery Recruitment
+84 C Certain Death
+85 R Collective Brutality
+86 R Cryptbreaker
+87 R Dark Salvation
+88 U Dusk Feaster
+89 C Gavony Unhallowed
+90 U Graf Harvest
+91 C Graf Rats
+92 U Haunted Dead
+93 M Liliana, the Last Hope
+94 U Liliana's Elite
+95 U Markov Crusader
+96 C Midnight Scavengers
+97 U Murder
+98 R Noosegraf Mob
+99 R Oath of Liliana
+100 C Olivia's Dragoon
+101 U Prying Questions
+102 U Rise from the Grave
+103 U Ruthless Disposal
+104 C Skirsdag Supplicant
+105 C Strange Augmentation
+106 R Stromkirk Condemned
+107 C Succumb to Temptation
+108 C Thraben Foulbloods
+109 M Tree of Perdition
+110 U Vampire Cutthroat
+111 R Voldaren Pariah
+112 C Wailing Ghoul
+113 C Weirded Vampire
+114 U Whispers of Emrakul
+115 U Abandon Reason
+116 C Alchemist's Greeting
+117 R Assembled Alphas
+118 R Bedlam Reveler
+119 U Blood Mist
+120 C Bold Impaler
+121 C Borrowed Hostility
+122 C Brazen Wolves
+123 R Collective Defiance
+124 U Conduit of Storms
+125 U Deranged Whelp
+126 C Distemper of the Blood
+127 C Falkenrath Reaver
+128 U Furyblade Vampire
+129 C Galvanic Bombardment
+130 R Hanweir Garrison
+131 R Harmless Offering
+132 R Impetuous Devils
+133 U Incendiary Flow
+134 U Insatiable Gorgers
+135 C Make Mischief
+136 M Mirrorwing Dragon
+137 M Nahiri's Wrath
+138 C Otherworldly Outburst
+139 C Prophetic Ravings
+140 U Savage Alliance
+141 U Shreds of Sanity
+142 U Smoldering Werewolf
+143 U Spreading Flames
+144 C Stensia Banquet
+145 C Stensia Innkeeper
+146 R Stromkirk Occultist
+147 C Thermo-Alchemist
+148 C Vildin-Pack Outcast
+149 U Weaver of Lightning
+150 C Backwoods Survivalists
+151 C Bloodbriar
+152 U Clear Shot
+153 U Crop Sigil
+154 C Crossroads Consecrator
+155 R Eldritch Evolution
+156 R Emrakul's Evangel
+157 U Emrakul's Influence
+158 U Foul Emissary
+159 U Gnarlwood Dryad
+160 C Grapple with the Past
+161 U Hamlet Captain
+162 M Ishkanah, Grafwidow
+163 U Kessig Prowler
+164 U Noose Constrictor
+165 R Permeating Mass
+166 C Prey Upon
+167 C Primal Druid
+168 U Shrill Howler
+169 U Somberwald Stag
+170 R Spirit of the Hunt
+171 R Splendid Reclamation
+172 C Springsage Ritual
+173 C Swift Spinner
+174 U Tangleclaw Werewolf
+175 C Ulvenwald Captive
+176 R Ulvenwald Observer
+177 C Waxing Moon
+178 C Wolfkin Bond
+179 C Woodcutter's Grit
+180 C Woodland Patrol
+181 R Bloodhall Priest
+182 U Campaign of Vengeance
+183 M Gisa and Geralf
+184 M Grim Flayer
+185 R Heron's Grace Champion
+186 U Mercurial Geists
+187 U Mournwillow
+188 U Ride Down
+189 R Spell Queller
+190 M Tamiyo, Field Researcher
+191 M Ulrich of the Krallenhorde
+192 C Cathar's Shield
+193 U Cryptolith Fragment
+194 C Cultist's Staff
+195 C Field Creeper
+196 U Geist-Fueled Scarecrow
+197 R Lupine Prototype
+198 U Slayer's Cleaver
+199 R Soul Separator
+200 R Stitcher's Graft
+201 C Terrarion
+202 U Thirsting Axe
+203 R Geier Reach Sanitarium
+204 R Hanweir Battlements
+205 U Nephalia Academy

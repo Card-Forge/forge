@@ -3,6 +3,7 @@ package forge.screens.limited;
 import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinFont;
+import forge.deck.FDeckEditor.EditorType;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
 import forge.screens.LaunchScreen;
@@ -55,7 +56,7 @@ public class NewDraftScreen extends LaunchScreen {
                         LoadingOverlay.show("Loading new draft...", new Runnable() {
                             @Override
                             public void run() {
-                                Forge.openScreen(new DraftingProcessScreen(draft));
+                                Forge.openScreen(new DraftingProcessScreen(draft, EditorType.Draft, null));
                             }
                         });
                     }

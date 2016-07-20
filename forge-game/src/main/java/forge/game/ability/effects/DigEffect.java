@@ -153,7 +153,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
-                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p));
+                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), host.getName() + " - Looking at cards in ");
 
                     if (noMove) {
                         // Let the activating player see the cards even if they're not moved
@@ -204,6 +204,7 @@ public class DigEffect extends SpellAbilityEffect {
                     if (forceRevealToController) {
                         // Force revealing the card to the player activating the ability (e.g. Explorer's Scope)
                         game.getAction().revealTo(top, player);
+                        delayedReveal = null; // top is already seen by the player, do not reveal twice
                     }
 
                     // Optional abilities that use a dialog box to prompt the user to skip the ability (e.g. Explorer's Scope, Quest for Ula's Temple)

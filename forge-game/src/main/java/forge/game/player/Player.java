@@ -104,6 +104,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDiscardedThisTurn = 0;
     private int numCardsInHandStartedThisTurnWith = 0;
 
+    private CardCollection sacrificedThisTurn = new CardCollection();
+
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
      * on tokens. */
@@ -1442,19 +1444,23 @@ public class Player extends GameEntity implements Comparable<Player> {
         }*/
         final Card source = sa != null ? sa.getHostCard() : null;
 
-        // Replacement effects
-        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
-        repRunParams.put("Event", "Discard");
-        repRunParams.put("Card", c);
-        repRunParams.put("Source", source);
-        repRunParams.put("Affected", this);
-
-        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
-            return null;
-        }
-
         boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
         boolean discardMadness = sa != null && sa.hasParam("Madness");
+
+        // DiscardToTopOfLibrary and Madness are replacement discards,
+        // that should not trigger other Replacement again
+        if (!discardToTopOfLibrary && !discardMadness) {
+            // Replacement effects
+            final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+            repRunParams.put("Event", "Discard");
+            repRunParams.put("Card", c);
+            repRunParams.put("Source", source);
+            repRunParams.put("Affected", this);
+
+            if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+                return null;
+            }
+        }
 
         StringBuilder sb = new StringBuilder();
         sb.append(this).append(" discards ").append(c);
@@ -1478,6 +1484,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         Card cause = null;
         if (sa != null) {
             cause = sa.getHostCard();
+            // for Replacement of the dicard Cause
+            if (sa.hasParam("Cause")) {
+                final CardCollection col = AbilityUtils.getDefinedCards(cause, sa.getParam("Cause"), sa);
+                if (!col.isEmpty()) {
+                    cause = col.getFirst();
+                }
+            }
         }
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
@@ -2228,6 +2241,31 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn = 0;
     }
 
+    public final CardCollectionView getSacrificedThisTurn() {
+        return sacrificedThisTurn;
+    }
+
+    public final void addSacrificedThisTurn(final Card c, final SpellAbility source) {
+        // Play the Sacrifice sound
+        game.fireEvent(new GameEventCardSacrificed());
+
+        final Card cpy = CardFactory.copyCardWithChangedStats(c, false);
+        sacrificedThisTurn.add(cpy);
+
+        // Run triggers
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
+        runParams.put("Card", cpy);
+        runParams.put("Cause", source);
+        runParams.put("CostStack", game.costPaymentStack);
+        runParams.put("IndividualCostPaymentInstance", game.costPaymentStack.peek());
+        game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
+    }
+
+    public final void resetSacrificedThisTurn() {
+        sacrificedThisTurn.clear();
+    }
+
     public final int getSpellsCastThisTurn() {
         return spellsCastThisTurn;
     }
@@ -2425,6 +2463,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setTappedLandForManaThisTurn(false);
         resetLandsPlayedThisTurn();
         resetInvestigatedThisTurn();
+        resetSacrificedThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
     }

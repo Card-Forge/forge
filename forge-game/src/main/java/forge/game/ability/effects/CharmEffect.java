@@ -37,6 +37,10 @@ public class CharmEffect extends SpellAbilityEffect {
             }
             final String ab = source.getSVar(saChoice);
             AbilitySub sub = (AbilitySub) AbilityFactory.getAbility(ab, source);
+            if (sa.isIntrinsic()) {
+            	sub.setIntrinsic(true);
+            	sub.changeText();
+            }
             sub.setTrigger(sa.isTrigger());
 
             sub.setSVar("CharmOrder", Integer.toString(indx));
@@ -110,7 +114,8 @@ public class CharmEffect extends SpellAbilityEffect {
             while (ssa != null) {
                 ssaClone.setTargets(ssa.getTargets());
                 ssaClone.setTargetRestrictions(ssa.getTargetRestrictions());
-                ssaClone.setTargetCard(ssa.getTargetCard());
+                if (ssa.getTargetCard() != null)
+                    ssaClone.setTargetCard(ssa.getTargetCard());
                 ssaClone.setTargetingPlayer(ssa.getTargetingPlayer());
 
                 ssa = ssa.getSubAbility();

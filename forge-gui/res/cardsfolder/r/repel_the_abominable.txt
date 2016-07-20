@@ -1,0 +1,16 @@
+Name:Repel the Abominable
+
+ManaCost:1 W
+
+Types:Instant
+
+A:SP$ Effect | Cost$ 1 W | Name$ Repel the Abominable Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt this turn by non-Human sources.
+
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Card.nonHuman | Description$ Prevent all damage that would be dealt this turn by non-Human sources.
+
+SVar:RemAIDeck:True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/repel_the_abominable.jpg
+
+Oracle:Prevent all damage that would be dealt this turn by non-Human sources.
+

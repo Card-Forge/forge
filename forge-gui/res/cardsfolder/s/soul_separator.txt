@@ -1,0 +1,16 @@
+Name:Soul Separator
+ManaCost:3
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 5 T Sac<1/CARDNAME> | RememberLKI$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouCtrl | ChangeNum$ 1 | SubAbility$ DBCopy | SpellDescription$ Exile target creature card from your graveyard. Put a token onto the battlefield that's a copy of that card except it's a 1/1, it's a Spirit in addition to its other types, and it has flying. Put a black Zombie creature token onto the battlefield with power equal to that card's power and toughness equal to that card's toughness. 
+
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 1 | SetToughness$ 1 | AddTypes$ Spirit | Keywords$ Flying | SubAbility$ DBToken
+
+SVar:DBToken:DB$ Token | TokenImage$ b x y zombie EMN | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenPower$ X | TokenToughness$ Y | TokenColors$ Black | TokenOwner$ You | TokenAmount$ 1 | References$ X,Y | SubAbility$ DBCleanup
+
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
+SVar:X:RememberedLKI$CardPower
+SVar:Y:RememberedLKI$CardToughness
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_separator.jpg
+Oracle: 5. T, Sacrifice Soul Separator: Exile target creature card from your graveyard. Put a token onto the battlefield that's a copy of that card except it's a 1/1, it's a Spirit in addition to its other types, and it has flying. Put a black Zombie creature token onto the battlefield with power equal to that card's power and toughness equal to that card's toughness. 

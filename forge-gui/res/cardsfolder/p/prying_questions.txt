@@ -1,0 +1,14 @@
+Name:Prying Questions
+
+ManaCost:2 B
+
+Types:Sorcery
+
+A:SP$ LoseLife | Cost$ 2 B | ValidTgts$ Opponent | LifeAmount$ 3 | SpellDescription$ Target opponent loses 3 life and puts a card from his or her hand on top of his or her library.
+
+SVar:DBChangeZone:DB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | Defined$ ParentTarget | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Opponent | Mandatory$ True | IsCurse$ True 
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prying_questions.jpg
+
+Oracle:Target opponent loses 3 life and puts a card from his or her hand on top of his or her library.
+

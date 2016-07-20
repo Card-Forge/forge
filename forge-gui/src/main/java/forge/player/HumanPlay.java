@@ -81,12 +81,12 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    public final static void playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
+    public final static boolean playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
 
         if (sa == controller.getGame().PLAY_LAND_SURROGATE) {
             p.playLand(sa.getHostCard(), false);
-            return;
+            return false;
         }
 
         boolean castFaceDown = sa instanceof Spell && ((Spell)sa).isCastFaceDown();
@@ -98,7 +98,7 @@ public class HumanPlay {
         source.setSplitStateToPlayAbility(sa);
         sa = chooseOptionalAdditionalCosts(p, sa);
         if (sa == null) {
-            return;
+            return false;
         }
 
         if (flippedToCast && !castFaceDown) {
@@ -133,6 +133,7 @@ public class HumanPlay {
                 if (flippedToCast && !castFaceDown) {
                     source.turnFaceDown(true);
                 }
+                return false;
             }
         } else if (payManaCostIfNeeded(controller, p, sa)) {
             if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -145,7 +146,9 @@ public class HumanPlay {
             if (flippedToCast && !castFaceDown) {
                 source.turnFaceDown(true);
             }
+            return false;
         }
+        return true;
     }
 
     /**

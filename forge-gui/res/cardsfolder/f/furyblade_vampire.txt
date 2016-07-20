@@ -1,0 +1,18 @@
+Name:Furyblade Vampire
+
+ManaCost:1 R
+
+Types:Creature Vampire Berserker
+
+PT:1/2
+
+K:Trample
+
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may discard a card. If you do, CARDNAME gets +3/+0 until end of turn.
+
+SVar:TrigPump:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ 3
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/furyblade_vampire.jpg
+
+Oracle:Trample\nAt the beginning of combat on your turn, you may discard a card. If you do, Furyblade Vampire gets +3/+0 until end of turn.
+

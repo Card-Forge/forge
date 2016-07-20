@@ -1216,7 +1216,24 @@ public class PlayerControllerHuman
             }
             if (needPrompt) {
                 List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
-                if (savedOrder == null) { //prompt if no saved order for the current set of abilities
+                boolean sameOrder = false;
+
+                if (savedOrder != null) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Would you like to keep the same order for simultaneous abilities as last time?\n\n");
+                    int c = 0;
+                    for (Integer index : savedOrder) {
+                        if (c > 9) {
+                            // do not list more than ten abilities to avoid overloading the prompt box
+                            sb.append("<...>\n");
+                            break;
+                        }
+                        sb.append(++c + ". " + activePlayerSAs.get(index).getHostCard() + "\n");
+                    }
+                    sameOrder = getGui().showConfirmDialog(sb.toString(), "Ordering simultaneous abilities", true);
+                }
+
+                if (savedOrder == null || !sameOrder) { //prompt if no saved order for the current set of abilities or if the player wants to change the order
                     orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", activePlayerSAs, null);
                     //save order to avoid needing to prompt a second time to order the same abilties
                     savedOrder = new ArrayList<Integer>(activePlayerSAs.size());
@@ -1251,8 +1268,7 @@ public class PlayerControllerHuman
 
     @Override
     public boolean playSaFromPlayEffect(final SpellAbility tgtSA) {
-        HumanPlay.playSpellAbility(this, player, tgtSA);
-        return true;
+        return HumanPlay.playSpellAbility(this, player, tgtSA);
     }
 
     @Override

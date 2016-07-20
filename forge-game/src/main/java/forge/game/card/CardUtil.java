@@ -80,6 +80,13 @@ public final class CardUtil {
             .put("Vampires", "Vampire")
             .put("Werewolves", "Werewolf")
             .put("Zombies", "Zombie")
+
+            // Land Types
+            .put("Mountains", "Mountain")
+            .put("Forests", "Forest")
+            .put("Islands", "Island")
+            .put("Swamps", "Swamp")
+
             .build();
     /**
      * Map of singular type names to the corresponding plural form.

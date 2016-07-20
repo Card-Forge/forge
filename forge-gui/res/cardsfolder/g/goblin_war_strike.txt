@@ -1,8 +1,8 @@
 Name:Goblin War Strike
 ManaCost:R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of Goblins you control to target player.
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of Goblins you control.
 SVar:X:Count$TypeYouCtrl.Goblin
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_strike.jpg
-Oracle:Goblin War Strike deals damage equal to the number of Goblins you control to target player.
+Oracle:Goblin War Strike deals damage to target player equal to the number of Goblins you control.

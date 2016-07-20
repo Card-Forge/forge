@@ -1,0 +1,25 @@
+Name:Docent of Perfection
+ManaCost:3 U U
+Types:Creature Insect Horror
+PT:5/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a 1/1 blue Human Wizard creature token onto the battlefield. Then, if you control three or more Wizards, transform CARDNAME.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Human Wizard | TokenTypes$ Creature,Human,Wizard | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Card.Wizard+YouCtrl | ConditionCompare$ GE3 | Mode$ Transform
+SVar:BuffedBy:Instant,Sorcery
+SVar:Picture:http://www.wizards.com/global/images/magic/general/docent_of_perfection.jpg
+AlternateMode:DoubleFaced
+Oracle:Flying\nWhenever you cast an instant or sorcery spell, put a 1/1 blue Human Wizard creature token onto the battlefield. Then, if you control three or more Wizards, transform Docent of Perfection.
+
+ALTERNATE
+
+Name:Final Iteration
+ManaCost:no cost
+Types:Creature Eldrazi Insect
+PT:6/5
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Wizard+YouCtrl | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Flying | Description$ Wizards you control get +2/+1 and have flying.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a 1/1 blue Human Wizard creature token onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Human Wizard | TokenTypes$ Creature,Human,Wizard | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You
+SVar:Picture:http://www.wizards.com/global/images/magic/general/final_iteration.jpg
+Oracle:Flying\nWizards you control get +2/+1 and have flying.\nWhenever you cast an instant or sorcery spell, put a 1/1 blue Human Wizard creature token onto the battlefield.

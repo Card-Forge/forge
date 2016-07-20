@@ -1,0 +1,12 @@
+Name:Tree of Perdition
+ManaCost:3 B
+Types:Creature Plant
+PT:0/13
+K:Defender
+A:AB$ StoreSVar | Cost$ T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SVar$ OldToughness | Type$ Count | Expression$ CardToughness | SubAbility$ TreeRedemption | ConditionPresent$ Card.StrictlySelf | StackDescription$ SpellDescription | SpellDescription$ Exchange target opponent's life total with CARDNAME's toughness. 
+SVar:TreeRedemption:DB$ Animate | Toughness$ X | References$ X | Permanent$ True | SubAbility$ SetLife | ConditionPresent$ Card.StrictlySelf
+SVar:SetLife:DB$ SetLife | Defined$ ParentTarget | LifeAmount$ OldToughness | References$ OldToughness | ConditionPresent$ Card.StrictlySelf
+SVar:OldToughness:Number$13
+SVar:X:TargetedPlayer$LifeTotal
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_perdition.jpg
+Oracle:Defender\n{T}: Exchange target opponent's life total with Tree of Perdition's toughness. 

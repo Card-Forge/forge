@@ -4938,7 +4938,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             try {
                 x = Integer.parseInt(rhs);
             } catch (final NumberFormatException e) {
-                x = CardFactoryUtil.xCount(source, source.getSVar(rhs));
+                x = AbilityUtils.calculateAmount(source, source.getSVar(rhs), spellAbility);
 
                 // TODO: find a better solution for handling Count$TopOfLibraryCMC for split cards
                 // (currently two CMCs are encoded in one big integer value)
@@ -6224,6 +6224,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 } else if (kw.equals("Protection from multicolored")) {
                     if (CardUtil.getColors(source).isMulticolor() && !colorlessDamage) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from all colors")) {
+                    if (!source.isColorless() && !colorlessDamage) {
                         return true;
                     }
                 } else if (kw.equals("Protection from creatures")) {

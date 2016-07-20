@@ -404,8 +404,10 @@ public class FDeckChooser extends FScreen {
         case Sealed:
             DeckPreferences.setSealedDeck(deck.getName());
             break;
-        default:
+        case Constructed:
             DeckPreferences.setCurrentDeck(deck.getName());
+            break;
+        default:
             break;
         }
         needRefreshOnActivate = true;

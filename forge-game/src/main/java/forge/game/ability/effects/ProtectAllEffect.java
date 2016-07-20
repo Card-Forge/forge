@@ -86,6 +86,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                 if (tgtC.isInPlay()) {
                     for (final String gain : gains) {
                         tgtC.addExtrinsicKeyword("Protection from " + gain);
+                        tgtC.updateKeywords();
                     }
 
                     if (!sa.hasParam("Permanent")) {

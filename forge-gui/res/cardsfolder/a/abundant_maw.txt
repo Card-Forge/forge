@@ -1,0 +1,20 @@
+Name:Abundant Maw
+
+ManaCost:8
+
+Types:Creature Eldrazi Leech
+
+PT:6/4
+
+K:Emerge 6 B
+
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When you cast CARDNAME, target opponent loses 3 life and you gain 3 life.
+
+SVar:TrigDrain:AB$LoseLife | Cost$ 0 | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife
+
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abundant_maw.jpg
+
+Oracle:Emerge {6}{B} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)\nWhen you cast Abundant Maw, target opponent loses 3 life and you gain 3 life.
+

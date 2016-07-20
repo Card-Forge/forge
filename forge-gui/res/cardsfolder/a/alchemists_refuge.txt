@@ -2,10 +2,10 @@ Name:Alchemist's Refuge
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
-A:AB$ Effect | Cost$ G U T | Name$ Refuge Effect | StaticAbilities$ QuickSpell | SpellDescription$ Until end of turn, you may cast nonland cards as though they had flash.
-SVar:QuickSpell:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You may cast nonland cards as though they had flash. | Description$ You may cast nonland cards as though they had flash.
+A:AB$ Effect | Cost$ G U T | Name$ Refuge Effect | StaticAbilities$ QuickSpell | SpellDescription$ You may cast spells this turn as though they had flash.
+SVar:QuickSpell:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You may cast nonland cards as though they had flash. | Description$ You may cast spells this turn as though they had flash.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alchemists_refuge.jpg
-Oracle:{T}: Add {C} to your mana pool.\n{G}{U}, {T}: You may cast nonland cards this turn as though they had flash.
+Oracle:{T}: Add {C} to your mana pool.\n{G}{U}, {T}: You may cast spells this turn as though they had flash.

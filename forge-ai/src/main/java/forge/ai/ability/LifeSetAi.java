@@ -35,6 +35,11 @@ public class LifeSetAi extends SpellAbilityAi {
             return false;
         }
 
+        // TODO add AI logic for that
+        if (sa.hasParam("Redistribute")) {
+            return false;
+        }
+
         // TODO handle proper calculation of X values based on Cost and what
         // would be paid
         int amount;

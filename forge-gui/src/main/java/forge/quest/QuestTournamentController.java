@@ -1,6 +1,5 @@
 package forge.quest;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +27,6 @@ import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 public class QuestTournamentController {
-    private static final DecimalFormat NUMBER_FORMATTER = new DecimalFormat("#,###");
-
     private final IQuestTournamentView view;
     private boolean drafting = false;
     private IGuiGame gui = null;
@@ -91,7 +88,7 @@ public class QuestTournamentController {
             final QuestEventDraft.QuestDraftPrizes prizes = draft.collectPrizes();
 
             if (prizes.hasCredits()) {
-                SOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + prizes.credits + " credits!", "Credits Awarded", FSkinProp.ICO_QUEST_GOLD);
+                SOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + QuestUtil.formatCredits(prizes.credits) + " credits!", "Credits Awarded", FSkinProp.ICO_QUEST_GOLD);
             }
 
             if (prizes.hasIndividualCards()) {
@@ -233,7 +230,7 @@ public class QuestTournamentController {
     }
 
     private void updateSelectTournament() {
-        view.getLblCredits().setText("Available Credits: " + NUMBER_FORMATTER.format(FModel.getQuest().getAssets().getCredits()));
+        view.getLblCredits().setText("Credits: " + QuestUtil.formatCredits(FModel.getQuest().getAssets().getCredits()));
 
         final QuestAchievements achievements = FModel.getQuest().getAchievements();
         achievements.generateDrafts();
@@ -255,7 +252,7 @@ public class QuestTournamentController {
         view.getLblThird().setText("3rd Place: " + achievements.getWinsForPlace(3) + " time" + (achievements.getWinsForPlace(3) == 1 ? "" : "s"));
         view.getLblFourth().setText("4th Place: " + achievements.getWinsForPlace(4) + " time" + (achievements.getWinsForPlace(4) == 1 ? "" : "s"));
 
-        view.getLblTokens().setText("Tokens: " + achievements.getDraftTokens());
+        view.getBtnSpendToken().setText("Spend Token (" + achievements.getDraftTokens() + ")");
         view.getBtnSpendToken().setEnabled(achievements.getDraftTokens() > 0);
     }
 
@@ -377,11 +374,6 @@ public class QuestTournamentController {
         view.populate();
     }
 
-    public void editDeck() {
-        view.editDeck(true);
-        FModel.getQuest().save();
-    }
-
     public void startDraft() {
         if (drafting) {
             SOptionPane.showErrorDialog("You are currently in a draft.\n" +
@@ -393,11 +385,11 @@ public class QuestTournamentController {
 
         final long creditsAvailable = FModel.getQuest().getAssets().getCredits();
         if (draftEvent.canEnter()) {
-            SOptionPane.showMessageDialog("You need " + NUMBER_FORMATTER.format(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", SOptionPane.WARNING_ICON);
+            SOptionPane.showMessageDialog("You need " + QuestUtil.formatCredits(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", SOptionPane.WARNING_ICON);
             return;
         }
 
-        final boolean okayToEnter = SOptionPane.showOptionDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkinProp.ICO_QUEST_GOLD, ImmutableList.of("Yes", "No"), 1) == 0;
+        final boolean okayToEnter = SOptionPane.showOptionDialog("This tournament costs " + QuestUtil.formatCredits(draftEvent.getEntryFee()) + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkinProp.ICO_QUEST_GOLD, ImmutableList.of("Yes", "No"), 1) == 0;
 
         if (!okayToEnter) {
             return;
@@ -409,12 +401,28 @@ public class QuestTournamentController {
         view.startDraft(draft);
     }
 
+    public boolean cancelDraft() {
+        if (SOptionPane.showConfirmDialog("This will end the current draft and you will not be able to join this tournament again.\nYour credits will be refunded and the draft will be removed.\n\n" +
+                "Leave anyway?", "Leave Draft?", "Leave", "Cancel", false)) {
+            drafting = false;
+
+            QuestController quest = FModel.getQuest();
+            QuestEventDraft draft = quest.getAchievements().getCurrentDraft();
+            quest.getAssets().addCredits(draft.getEntryFee());
+            quest.getAchievements().deleteDraft(draft);
+            quest.save();
+
+            return true;
+        }
+        return false;
+    }
+
     public void startTournament() {
         FModel.getQuest().save();
 
         final String message = GameType.QuestDraft.getDeckFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
         if (message != null && FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            SOptionPane.showMessageDialog(message, "Deck Invalid");
+            SOptionPane.showMessageDialog("Deck " + message, "Deck Invalid");
             return;
         }
 

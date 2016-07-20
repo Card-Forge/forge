@@ -5,8 +5,10 @@ T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ T
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 1 | Defined$ You | Destination$ Exile | ExileFaceDown$ True | RememberMilled$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeHandExile | TriggerDescription$ At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with CARDNAME into your hand.
 SVar:TrigChangeHandExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | ChangeType$ Card.YouCtrl | RememberChanged$ True | Imprint$ True | SubAbility$ ChangeBack
-SVar:ChangeBack:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted | Origin$ Exile | Destination$ Hand | ForgetChanged$ True | SubAbility$ DBCleanup
+SVar:ChangeBack:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted+ExiledWithSource | Origin$ Exile | Destination$ Hand | ForgetChanged$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup2
 SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True

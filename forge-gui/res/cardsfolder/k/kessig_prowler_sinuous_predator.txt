@@ -1,0 +1,36 @@
+Name:Kessig Prowler
+
+ManaCost:G
+
+Types:Creature Werewolf Horror
+
+PT:2/1
+
+A:AB$SetState | Cost$ 4 G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_prowler.jpg
+
+AlternateMode:DoubleFaced
+
+Oracle:{4}{G}: Transform Kessig Prowler.
+
+
+
+ALTERNATE
+
+
+
+Name:Sinuous Predator
+
+ManaCost:no cost
+
+Types:Creature Eldrazi Werewolf
+
+PT:4/4
+
+K:CantBeBlockedByAmount GT1
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sinuous_predator.jpg
+
+Oracle:Sinuous Predator can't be blocked by more than one creature.
+

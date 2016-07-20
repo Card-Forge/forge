@@ -20,7 +20,7 @@ public class DelayedReveal implements Serializable {
     private final String messagePrefix;
 
     public DelayedReveal(final Iterable<Card> cards0, final ZoneType zone0, final PlayerView owner0) {
-        this(cards0, zone0, owner0, null);
+        this(cards0, zone0, owner0, "");
     }
     public DelayedReveal(final Iterable<Card> cards0, final ZoneType zone0, final PlayerView owner0, final String messagePrefix0) {
         cards = CardView.getCollection(cards0);

@@ -1,0 +1,12 @@
+Name:Noosegraf Mob
+ManaCost:4 B B
+Types:Creature Zombie
+PT:0/0
+K:etbCounter:P1P1:5
+T:Mode$ SpellCast | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever a player casts a spell, remove a +1/+1 counter from CARDNAME. If you do, put a 2/2 black Zombie creature token onto the battlefield.
+SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie SOI | TokenOwner$ You | ConditionCheckSVar$ CounterX | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:CounterX:Count$RememberedSize
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noosegraf_mob.jpg
+Oracle:Noosegraf Mob enters the battlefield with five +1/+1 counters on it.\nWhenever a player casts a spell, remove a +1/+1 counter from Noosegraf Mob. If you do, put a 2/2 black Zombie creature token onto the battlefield.

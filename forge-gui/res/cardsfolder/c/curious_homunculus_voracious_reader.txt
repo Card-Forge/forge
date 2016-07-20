@@ -1,0 +1,22 @@
+Name:Curious Homunculus
+ManaCost:1 U
+Types:Creature Homunculus
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ Instant,Sorcery | SpellDescription$ Add {C} to your mana pool. Spend this mana only to cast an instant or sorcery spell.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Instant.YouOwn,Sorcery.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform CARDNAME.
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+DeckHints:Type$Instant|Sorcery 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/curious_homunculus.jpg
+Oracle:{T}: Add {C} to your mana pool. Spend this mana only to cast an instant or sorcery spell.\nAt the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform Curious Homunculus.
+
+ALTERNATE
+
+Name:Voracious Reader
+ManaCost:no cost
+Types:Creature Eldrazi Homunculus
+PT:3/4
+K:Prowess
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/voracious_reader.jpg
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nInstant and sorcery spells you cast cost {1} less to cast.

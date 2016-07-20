@@ -3,11 +3,14 @@ ManaCost:3 U
 Types:Creature Human Wizard
 PT:1/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, you may exile an instant card from your hand.
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant | ChangeNum$ 1
-A:AB$ Play | Cost$ X T | Defined$ Imprinted | Amount$ All | CopyOnce$ True | References$ X | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SpellDescription$ Copy the exiled card. You may cast the copy without paying its mana cost. X is the converted mana cost of the exiled card.
-SVar:X:Imprinted$CardManaCost
-T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
-SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | RememberChanged$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant | ChangeNum$ 1
+A:AB$ Play | Cost$ X T | Valid$ Card.IsRemembered+ExiledWithSource | ValidZone$ Exile | Amount$ All | CopyOnce$ True | References$ X | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SpellDescription$ Copy the exiled card. You may cast the copy without paying its mana cost. X is the converted mana cost of the exiled card.
+SVar:X:Remembered$CardManaCost
+
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Any | Execute$ ForgetCard | Static$ True
+SVar:ForgetCard:DB$ Cleanup | ForgetDefined$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 #Amount$ All | CopyOnce$ True for Strionic Resonator
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_arcanist.jpg

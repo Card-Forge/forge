@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dangerous Knowledge
+Description=Eldritch Moon U/R Intro Pack
+Deck Type=constructed
+Set=EMN
+Image=dangerous_knowledge.jpg
+[Main]
+1 Bedlam Reveler|EMN
+1 Convolute|EMN
+1 Dance with Devils|SOI
+1 Drag Under|EMN
+3 Galvanic Bombardment|EMN
+2 Geistblast|SOI
+1 Incendiary Flow|EMN
+2 Ingenious Skaab|EMN
+13 Island|SOI
+2 Make Mischief|EMN
+2 Mercurial Geists|EMN
+12 Mountain|SOI
+1 Niblis of Dusk|SOI
+1 Niblis of Frost|EMN
+1 Pieces of the Puzzle|SOI
+1 Pore Over the Pages|SOI
+1 Pyre Hound|SOI
+1 Reduce to Ashes|SOI
+1 Rise from the Tides|SOI
+1 Sanguinary Mage|SOI
+2 Shreds of Sanity|EMN
+1 Silburlind Snapper|SOI
+3 Take Inventory|EMN
+2 Thermo-Alchemist|EMN
+1 Turn Aside|EMN
+2 Weaver of Lightning|EMN

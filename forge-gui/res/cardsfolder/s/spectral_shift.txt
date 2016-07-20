@@ -2,10 +2,10 @@ Name:Spectral Shift
 ManaCost:1 U
 Types:Instant
 K:Entwine 2
-A:SP$ Charm | Cost$ 1 U | Choices$ DBBasicLand,DBColor | SpellDescription$ Choose one - Change the text of target spell or permanent by replacing all instances of one basic land type with another. (This effects last indefinitely.); or change the text of target spell or permanent by replacing all instances of one color word with another. (This effect lasts indefinitely.)
+A:SP$ Charm | Cost$ 1 U | Choices$ DBBasicLand,DBColor | SpellDescription$ Choose one - Change the text of target spell or permanent by replacing all instances of one basic land type with another. (This effect last indefinitely.); or change the text of target spell or permanent by replacing all instances of one color word with another. (This effect lasts indefinitely.)
 SVar:DBBasicLand:DB$ ChangeText | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | ChangeTypeWord$ ChooseBasicLandType ChooseBasicLandType | Permanent$ True | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one basic land type with another. (This effect lasts indefinitely.)
 SVar:DBColor:DB$ ChangeText | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | ChangeColorWord$ Choose Choose | Permanent$ True | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another. (This effect lasts indefinitely.)
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_shift.jpg
-Oracle:Choose one -\n• Change the text of target spell or permanent by replacing all instances of one basic land type with another. (This effects last indefinitely.)\n• Change the text of target spell or permanent by replacing all instances of one color word with another. (This effects last indefinitely.)\nEntwine {2} (Choose both if you pay the entwine cost.)
+Oracle:Choose one -\n• Change the text of target spell or permanent by replacing all instances of one basic land type with another. (This effect last indefinitely.)\n• Change the text of target spell or permanent by replacing all instances of one color word with another. (This effect last indefinitely.)\nEntwine {2} (Choose both if you pay the entwine cost.)

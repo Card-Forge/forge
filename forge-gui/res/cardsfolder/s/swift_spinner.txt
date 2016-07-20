@@ -1,0 +1,16 @@
+Name:Swift Spinner
+
+ManaCost:3 G
+
+Types:Creature Spider
+
+PT:2/3
+
+K:Flash
+
+K:Reach
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swift_spinner.jpg
+
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nReach (This creature can block creatures with flying.)
+

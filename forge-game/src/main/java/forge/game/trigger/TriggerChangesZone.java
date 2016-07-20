@@ -20,7 +20,6 @@ package forge.game.trigger;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
-import forge.game.cost.CostPayment;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;

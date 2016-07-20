@@ -5,13 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-
+import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -20,6 +21,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.combat.Combat;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
@@ -301,6 +303,55 @@ public class TokenAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         // TODO: AILogic
         return true;
+    }
+
+    /*
+     * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.player.Player> options)
+     */
+    @Override
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+        // TODO: AILogic
+        Combat combat = ai.getGame().getCombat();
+        // TokenAttacking
+        if (combat != null && sa.hasParam("TokenAttacking")) {
+            Card attacker = spawnToken(ai, sa);
+            for (Player p : options) {
+                if (!ComputerUtilCard.canBeBlockedProfitably(p, attacker)) {
+                    return p;
+                }
+            }
+        }
+        return Iterables.getFirst(options, null);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayerOrPlaneswalker(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.GameEntity> options)
+     */
+    @Override
+    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options) {
+        // TODO: AILogic
+        Combat combat = ai.getGame().getCombat();
+        // TokenAttacking
+        if (combat != null && sa.hasParam("TokenAttacking")) {
+            // 1. If the card that spawned the token was sent at a planeswalker, attack the same planeswalker with the token. Consider improving.
+            GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
+            if (def != null && def instanceof Card) {
+                if (((Card)def).isPlaneswalker()) {
+                    return def;
+                }
+            }
+            // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
+            Card attacker = spawnToken(ai, sa);
+            for (GameEntity p : options) {
+                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker)) {
+                    return p;
+                }
+                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker)) {
+                    return p;
+                }
+            }
+        }
+        return Iterables.getFirst(options, null);
     }
 
     /**

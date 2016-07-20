@@ -1,0 +1,34 @@
+Name:Stromkirk Occultist
+
+ManaCost:2 R
+
+Types:Creature Vampire Horror
+
+PT:3/2
+
+K:Trample
+
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile the top card of your library. Until end of turn, you may play that card.
+
+SVar:TrigExile:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect
+
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | TriggerCastPF,TriggerPlayPF | SVars$ TrigRemoveSelf | RememberObjects$ Remembered | SubAbility$ DBCleanup
+
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddHiddenKeyword$ May be played | AffectedZone$ Exile | Description$ Until end of turn, you may play that card.
+
+SVar:TriggerCastPF:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
+
+SVar:TriggerPlayPF:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
+
+SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+
+K:Madness:1 R
+
+SVar:RemAIDeck:True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stromkirk_occultist.jpg
+
+Oracle:Trample\nWhenever Stromkirk Occultist deals combat damage to a player, exile the top card of your library. Until end of turn, you may play that card.\nMadness {1}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
+

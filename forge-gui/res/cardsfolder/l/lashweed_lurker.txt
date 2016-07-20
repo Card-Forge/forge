@@ -1,0 +1,18 @@
+Name:Lashweed Lurker
+
+ManaCost:8
+
+Types:Creature Eldrazi Horror
+
+PT:5/4
+
+K:Emerge 5 G U
+
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When you cast CARDNAME, you may put target nonland permanent on top of its owner's library.
+
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Choose target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lashweed_lurker.jpg
+
+Oracle:Emerge {5}{G}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)\nWhen you cast Lashweed Lurker, you may put target nonland permanent on top of its owner's library.
+

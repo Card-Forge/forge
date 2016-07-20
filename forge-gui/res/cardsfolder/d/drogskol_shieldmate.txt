@@ -1,0 +1,18 @@
+Name:Drogskol Shieldmate
+
+ManaCost:2 W
+
+Types:Creature Spirit Soldier
+
+PT:2/3
+
+K:Flash
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, other creatures you control get +0/+1 until end of turn.
+
+SVar:TrigPumpAll:DB$PumpAll | ValidCards$ Creature.Other+YouCtrl | NumDef$ +1
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drogskol_shieldmate.jpg
+
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Drogskol Shieldmate enters the battlefield, other creatures you control get +0/+1 until end of turn.
+

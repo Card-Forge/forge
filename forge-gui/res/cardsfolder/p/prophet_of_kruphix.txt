@@ -3,6 +3,6 @@ ManaCost:3 G U
 Types:Creature Human Wizard
 PT:2/3
 S:Mode$ Continuous | Affected$ Creature.YouCtrl,Land.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all creatures and lands you control during each other player's untap step.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library,Command | Description$ You may cast creature cards as though they had flash.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library,Command | Description$ You may cast creature spells as though they had flash.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prophet_of_kruphix.jpg
-Oracle:Untap all creatures and lands you control during each other player's untap step.\nYou may cast creature cards as though they had flash.
+Oracle:Untap all creatures and lands you control during each other player's untap step.\nYou may cast creature spells as though they had flash.

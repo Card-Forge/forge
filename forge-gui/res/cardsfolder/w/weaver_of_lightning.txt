@@ -1,0 +1,18 @@
+Name:Weaver of Lightning
+
+ManaCost:2 R
+
+Types:Creature Human Shaman
+
+PT:1/4
+
+K:Reach
+
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 1 damage to target creature an opponent controls.
+
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an oppoonent controls | NumDmg$ 1 
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/weaver_of_lightning.jpg
+
+Oracle:Reach\nWhenever you cast an instant or sorcery spell, Weaver of Lightning deals 1 damage to target creature an opponent controls.
+

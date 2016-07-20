@@ -3,12 +3,6 @@ ManaCost:5 W U
 Types:Creature Angel
 PT:4/4
 K:Flying
-K:Protection from white
-K:Protection from blue
-K:Protection from black
-K:Protection from red
-K:Protection from green
-# Lock in keywords so can't change color words in "Protection from all colors"
-SVar:LockInKeywords:True
+K:Protection from all colors
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iridescent_angel.jpg
 Oracle:Flying, protection from all colors

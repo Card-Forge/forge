@@ -3,8 +3,7 @@ ManaCost:4 W W
 Types:Creature Angel
 PT:4/4
 K:Flying
-# Lock in text so can't change color words in "Protection from all colors"
-S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Protection from artifacts & Protection from white & Protection from blue & Protection from black & Protection from red & Protection from green | LockInText$ True | Description$ As long as CARDNAME is untapped, it has protection from artifacts and from all colors.
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Protection from artifacts & Protection from all colors | Description$ As long as CARDNAME is untapped, it has protection from artifacts and from all colors.
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a spell, you may untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_angel.jpg

@@ -119,6 +119,10 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                         card.addRemembered(z);
                     }
                     final SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("ChosenPile")), card);
+                    if (sa.isIntrinsic()) {
+                        action.setIntrinsic(true);
+                        action.changeText();
+                    }
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
                     AbilityUtils.resolve(action);
@@ -132,6 +136,10 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     }
                     
                     final SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("UnchosenPile")), card);
+                    if (sa.isIntrinsic()) {
+                        action.setIntrinsic(true);
+                        action.changeText();
+                    }
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
                     AbilityUtils.resolve(action);

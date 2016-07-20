@@ -1,0 +1,7 @@
+Name:Coax from the Blind Eternities
+ManaCost:2 U
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 U | Origin$ Sideboard,Exile | Destination$ Hand | ChangeType$ Card.Eldrazi+YouOwn | ChangeNum$ 1 | SpellDescription$ You may choose an Eldrazi card you own from outside the game or in exile, reveal that card, and put it into your hand.
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coax_from_the_blind_eternities.jpg
+Oracle:You may choose an Eldrazi card you own from outside the game or in exile, reveal that card, and put it into your hand.

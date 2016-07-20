@@ -1,0 +1,16 @@
+Name:Liliana's Elite
+
+ManaCost:2 B
+
+Types:Creature Zombie
+
+PT:1/1
+
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each creature card in your graveyard.
+
+SVar:X:Count$TypeInYourYard.Creature
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_elite.jpg
+
+Oracle:Liliana's Elite gets +1/+1 for each creature card in your graveyard.
+

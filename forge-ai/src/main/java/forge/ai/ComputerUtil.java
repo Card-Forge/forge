@@ -1573,7 +1573,7 @@ public class ComputerUtil {
         // otherwise, reject bad hands or return score
         if ( landSize < 2) {
             // BAD Hands, 0 or 1 lands
-            if (library.size()/landsInDeck > 6) {
+            if (landsInDeck == 0 || library.size()/landsInDeck > 6) {
                 // Heavy spell deck it's ok
                 return handSize;
             }

@@ -1,0 +1,17 @@
+Name:Emrakul, the Promised End
+ManaCost:13
+Types:Legendary Creature Eldrazi
+PT:13/13
+K:Flying
+K:Trample
+K:Protection:Instant:Protection from instants
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each card type among cards in your graveyard.
+SVar:X:Count$CardControllerTypes.Graveyard
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigControlPlayer | TriggerDescription$ When you cast CARDNAME, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.
+SVar:TrigControlPlayer:AB$ ControlPlayer | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDelTrig | RememberTargets$ True
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | ValidPlayer$ Player.IsRemembered | Phase$ Untap | Execute$ DBAddTurn | Static$ True
+SVar:DBAddTurn:DB$ AddTurn | Defined$ Remembered | NumTurns$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakul_the_promised_end.jpg
+Oracle:Emrakul, the Promised End costs 1 less to cast for each card type among cards in your graveyard.\nWhen you cast Emrakul, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.\nFlying, trample, protection from instants

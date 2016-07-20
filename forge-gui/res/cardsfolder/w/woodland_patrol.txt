@@ -1,0 +1,14 @@
+Name:Woodland Patrol
+
+ManaCost:2 G
+
+Types:Creature Human Scout
+
+PT:3/2
+
+K:Vigilance
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_patrol.jpg
+
+Oracle:Vigilance
+

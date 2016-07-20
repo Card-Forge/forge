@@ -1,0 +1,20 @@
+Name:Desperate Sentry
+
+ManaCost:2 W
+
+Types:Creature Human Soldier
+
+PT:1/2
+
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2
+
+SVar:SacMe:2 
+
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | Condition$ Delirium | Description$ Delirium - CARDNAME gets +3/+0 as long as there are four or more card types among cards in your graveyard.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_sentry.jpg
+
+Oracle:When Desperate Sentry dies, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.\nDelirium - Desperate Sentry gets +3/+0 as long as there are four or more card types among cards in your graveyard.
+

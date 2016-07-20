@@ -1,5 +1,6 @@
 package forge.game.ability;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 import forge.card.ColorSet;
@@ -33,6 +34,7 @@ import java.util.regex.Pattern;
 
 
 public class AbilityUtils {
+	private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
     public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
         CounterType counterType;
@@ -509,7 +511,6 @@ public class AbilityUtils {
                 sub = sub.getSubAbility();
             }
             // Count Math
-            final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
             return CardFactoryUtil.doXMath(chosenModes, m, card) * multiplier;
         }
@@ -783,12 +784,17 @@ public class AbilityUtils {
         }
 
         String valid = type;
-        int eqIndex = valid.indexOf("EQ");
-        if (eqIndex >= 0) {
-            char reference = valid.charAt(eqIndex + 2); // take whatever goes after EQ
-            if (Character.isLetter(reference)) {
-                String varName = valid.split(",")[0].split("EQ")[1].split("\\+")[0];
-                valid = valid.replace("EQ" + varName, "EQ" + Integer.toString(calculateAmount(source, varName, sa)));
+
+        for (String t : cmpList) {
+            int index = valid.indexOf(t);
+            if (index >= 0) {
+                char reference = valid.charAt(index + 2); // take whatever goes after EQ
+                if (Character.isLetter(reference)) {
+                    String varName = valid.split(",")[0].split(t)[1].split("\\+")[0];
+                    if (source.hasSVar(varName)) {
+                        valid = valid.replace(t + varName, t + Integer.toString(calculateAmount(source, varName, sa)));
+                    }
+                }
             }
         }
         if (sa.hasParam("AbilityCount")) { // replace specific string other than "EQ" cases
@@ -1618,20 +1624,27 @@ public class AbilityUtils {
                 for (final byte c : MagicColor.WUBRG) {
                     final String colorLowerCase = MagicColor.toLongString(c).toLowerCase(),
                             colorCaptCase = StringUtils.capitalize(MagicColor.toLongString(c));
+                    // Color should not replace itself.
+                    if (e.getValue().equalsIgnoreCase(colorLowerCase)) {
+                        continue;
+                	}
                     value = getReplacedText(colorLowerCase, e.getValue(), isDescriptive);
-                    replaced = replaced.replace(colorLowerCase, value.toLowerCase());
+                    replaced = replaced.replaceAll("(?<!>)" + colorLowerCase, value.toLowerCase());
                     value = getReplacedText(colorCaptCase, e.getValue(), isDescriptive);
-                    replaced = replaced.replace(colorCaptCase, StringUtils.capitalize(value));
+                    replaced = replaced.replaceAll("(?<!>)" + colorCaptCase, StringUtils.capitalize(value));
                 }
             } else {
                 value = getReplacedText(key, e.getValue(), isDescriptive);
-                replaced = replaced.replace(key, value);
+                replaced = replaced.replaceAll("(?<!>)" + key, value);
             }
         }
         for (final Entry<String, String> e : card.getChangedTextTypeWords().entrySet()) {
             final String key = e.getKey();
+            final String pkey = CardUtil.getPluralType(key);
+            final String pvalue = getReplacedText(pkey, CardUtil.getPluralType(e.getValue()), isDescriptive);
+            replaced = replaced.replaceAll("(?<!>)" + pkey, pvalue);
             final String value = getReplacedText(key, e.getValue(), isDescriptive);
-            replaced = replaced.replace(key, value);
+            replaced = replaced.replaceAll("(?<!>)" + key, value);
         }
         return replaced;
     }

@@ -1,0 +1,13 @@
+Name:Foul Emissary
+ManaCost:2 G
+Types:Creature Human Horror
+PT:1/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature
+
+T:Mode$ Sacrificed | ValidCard$ Card.Self | WhileKeyword$ Emerge | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice CARDNAME while casting a spell with emerge, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_emissary.jpg
+Oracle:When Foul Emissary enters the battlefield, look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.\nWhen you sacrifice Foul Emissary while casting a spell with emerge, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.

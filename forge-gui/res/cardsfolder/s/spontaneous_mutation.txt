@@ -1,0 +1,22 @@
+Name:Spontaneous Mutation
+
+ManaCost:U
+
+Types:Enchantment Aura
+
+K:Flash
+
+K:Enchant creature
+
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curse
+
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | Description$ Enchanted creature gets -X/-0, where X is the number of cards in your graveyard.
+
+SVar:X:Count$InYourGraveyard/Times.-1
+
+SVar:RemAIDeck:True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spontaneous_mutation.jpg
+
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature gets -X/-0, where X is the number of cards in your graveyard.
+

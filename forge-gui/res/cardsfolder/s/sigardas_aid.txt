@@ -1,0 +1,18 @@
+Name:Sigarda's Aid
+
+ManaCost:W
+
+Types:Enchantment
+
+S:Mode$ Continuous | Affected$ Card.Aura+YouCtrl,Card.Equipment+YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library,Command,Stack | Description$ You may cast Aura and Equipment spells as though they had flash.
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Equipment+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever an Equipment enters the battlefield under your control, you may attach it to target creature you control.
+
+SVar:TrigAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature.YouCtrl | Object$ TriggeredCard 
+
+SVar:NonStackingEffect:True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sigardas_aid.jpg
+
+Oracle:You may cast Aura and Equipment spells as though they had flash.\nWhenever an Equipment enters the battlefield under your control, you may attach it to target creature you control.
+

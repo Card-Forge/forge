@@ -49,6 +49,7 @@ import forge.util.gui.SOptionPane;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,10 @@ import java.util.List;
  * @version $Id$
  */
 public class QuestUtil {
+    private static final DecimalFormat CREDITS_FORMATTER = new DecimalFormat("#,###");
+    public static String formatCredits(long credits) {
+        return CREDITS_FORMATTER.format(credits);
+    }
 
     /**
      * <p>
@@ -368,7 +373,7 @@ public class QuestUtil {
         view0.getLblLife().setVisible(true);
 
         // Stats panel
-        view0.getLblCredits().setText("Credits: " + qS.getCredits());
+        view0.getLblCredits().setText("Credits: " + QuestUtil.formatCredits(qS.getCredits()));
         view0.getLblLife().setText("Life: " + qS.getLife(qCtrl.getMode()));
         view0.getLblWins().setText("Wins: " + qA.getWin());
         view0.getLblLosses().setText("Losses: " + qA.getLost());

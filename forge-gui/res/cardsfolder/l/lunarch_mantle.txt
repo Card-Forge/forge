@@ -1,0 +1,18 @@
+Name:Lunarch Mantle
+
+ManaCost:1 W
+
+Types:Enchantment Aura
+
+K:Enchant creature
+
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddAbility$ SacFlight | Description$ Enchanted creature gets +2/+2 and has "{1}, Sacrifice a permanent: This creature gains flying until end of turn."
+
+SVar:SacFlight:AB$Pump | Cost$ 1 Sac<1/Permanent> | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lunarch_mantle.jpg
+
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has "{1}, Sacrifice a permanent: This creature gains flying until end of turn."
+

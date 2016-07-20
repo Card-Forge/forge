@@ -105,7 +105,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             }
 
             final QuestAssets qS = qData.getAssets();
-            lblCredits.setText("Credits: " + qS.getCredits());
+            lblCredits.setText("Credits: " + QuestUtil.formatCredits(qS.getCredits()));
             lblLife.setText("Life: " + qS.getLife(qData.getMode()));
 
             final List<IQuestBazaarItem> items = qData.getBazaar().getItems(qData, stallDef.getName());

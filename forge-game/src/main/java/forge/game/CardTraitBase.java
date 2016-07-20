@@ -79,7 +79,17 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     public final Map<String, String> getMapParams() {
         return this.mapParams;
     }
-
+    
+    /**
+     * <p>
+     * Getter for the field <code>mapParams</code>.
+     * </p>
+     *
+     * @return a {@link java.util.HashMap} object.
+     */
+    public final Map<String, String> getOriginalMapParams() {
+        return this.originalMapParams;
+    }
     /**
      * Checks if is intrinsic.
      *

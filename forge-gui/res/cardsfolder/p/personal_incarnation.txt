@@ -2,7 +2,7 @@ Name:Personal Incarnation
 ManaCost:3 W W W
 Types:Creature Avatar Incarnation
 PT:6/6
-A:AB$ Effect | Cost$ 0 | Name$ Personal Incarnation Redirection | ReplacementEffects$ PersonalCombat,PersonalNonCombat | OwnerOnly$ True | SVars$ CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | References$ PersonalCombat,PersonalNonCombat,CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | Duration$ HostLeavesOrEOT | RememberObjects$ Self | EffectOwner$ CardOwner | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to its owner instead. Any player may activate this ability, but only if he or she owns CARDNAME.
+A:AB$ Effect | Cost$ 0 | Name$ Personal Incarnation Redirection | ReplacementEffects$ PersonalCombat,PersonalNonCombat | OwnerOnly$ True | SVars$ CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | References$ PersonalCombat,PersonalNonCombat,CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | Duration$ HostLeavesOrEOT | RememberObjects$ Self | EffectOwner$ CardOwner | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to its owner instead. Only CARDNAME's owner may activate this ability.
 SVar:PersonalCombat:Event$ DamageDone | ValidTarget$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next 1 damage that would be dealt to Personal Incarnation this turn is dealt to its owner instead.
 SVar:PersonalNonCombat:Event$ DamageDone | ValidTarget$ Card.IsRemembered | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | Description$ The next 1 damage that would be dealt to Personal Incarnation this turn is dealt to its owner instead.
 SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ You | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ 1 | SubAbility$ RestDmgCombat | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | References$ Y
@@ -19,4 +19,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HavocX:PlayerCountRemembered$LifeTotal/HalfUp
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_incarnation.jpg
-Oracle:{0}: The next 1 damage that would be dealt to Personal Incarnation this turn is dealt to its owner instead. Any player may activate this ability, but only if he or she owns Personal Incarnation.\nWhen Personal Incarnation dies, its owner loses half his or her life, rounded up.
+Oracle:{0}: The next 1 damage that would be dealt to Personal Incarnation this turn is dealt to its owner instead. Only Personal Incarnation's owner may activate this ability.\nWhen Personal Incarnation dies, its owner loses half his or her life, rounded up.

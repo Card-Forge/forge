@@ -1,0 +1,40 @@
+Name:Ulvenwald Captive
+
+ManaCost:1 G
+
+Types:Creature Werewolf Horror
+
+PT:1/2
+
+K:Defender
+
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
+
+A:AB$SetState | Cost$ 5 G G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_captive.jpg
+
+AlternateMode:DoubleFaced
+
+Oracle:Defender\n{T}: Add {G} to your mana pool.\n{5}{G}{G}: Transform Ulvenwald Captive.
+
+
+
+ALTERNATE
+
+
+
+Name:Ulvenwald Abomination
+
+ManaCost:no cost
+
+Types:Creature Eldrazi Werewolf
+
+PT:4/6
+
+A:AB$ Mana | Cost$ T | Produced$ C C | SpellDescription$ Add {C}{C} to your mana pool.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_abomination.jpg
+
+Oracle:{T}: Add {C}{C} to your mana pool.
+

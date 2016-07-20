@@ -1,0 +1,20 @@
+Name:Choking Restraints
+
+ManaCost:2 W
+
+Types:Enchantment Aura
+
+K:Enchant creature
+
+A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
+
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
+
+A:AB$ ChangeZone | Cost$ 3 W W Sac<1/CARDNAME> | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile enchanted creature.
+
+SVar:NonStackingAttachEffect:True 
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/choking_restraints.jpg
+
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{3}{W}{W}, Sacrifice Choking Restraints: Exile enchanted creature.
+

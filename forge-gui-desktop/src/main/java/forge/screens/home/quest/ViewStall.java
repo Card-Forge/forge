@@ -19,6 +19,7 @@ package forge.screens.home.quest;
 
 import forge.model.FModel;
 import forge.quest.QuestController;
+import forge.quest.QuestUtil;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestStallDefinition;
 import forge.quest.data.QuestAssets;
@@ -146,7 +147,7 @@ public class ViewStall extends JPanel {
         final QuestAssets qS = qData.getAssets();
         StringBuilder sb = new StringBuilder();
         sb.append("Credits: ");
-        sb.append(qS.getCredits());
+        sb.append(QuestUtil.formatCredits(qS.getCredits()));
         sb.append("         Life: ");
         sb.append(qS.getLife(qData.getMode()));
         sb.append("         Level: ");

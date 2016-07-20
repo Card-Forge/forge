@@ -107,6 +107,10 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             card.getGame().getAction().nofityOfValue(sa, card, sb.toString(), null);
             if (sa.hasParam("ChooseNumberSubAbility")) {
                 SpellAbility sub = AbilityFactory.getAbility(card.getSVar(sa.getParam("ChooseNumberSubAbility")), card);
+                if (sa.isIntrinsic()) {
+                	sub.setIntrinsic(true);
+                	sub.changeText();
+                }
                 sub.setActivatingPlayer(sa.getActivatingPlayer());
                 ((AbilitySub) sub).setParent(sa);
                 for (Player p : chooseMap.keySet()) {
@@ -119,6 +123,10 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             
             if (sa.hasParam("Lowest")) {
                 SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("Lowest")), card);
+                if (sa.isIntrinsic()) {
+                    action.setIntrinsic(true);
+                    action.changeText();
+                }
                 action.setActivatingPlayer(sa.getActivatingPlayer());
                 ((AbilitySub) action).setParent(sa);
                 for (Player p : lowestNum) {
@@ -130,6 +138,10 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             }
             if (sa.hasParam("Highest")) {
                 SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("Highest")), card);
+                if (sa.isIntrinsic()) {
+                    action.setIntrinsic(true);
+                    action.changeText();
+                }
                 action.setActivatingPlayer(sa.getActivatingPlayer());
                 ((AbilitySub) action).setParent(sa);
                 for (Player p : highestNum) {

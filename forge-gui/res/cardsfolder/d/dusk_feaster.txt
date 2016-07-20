@@ -1,0 +1,18 @@
+Name:Dusk Feaster
+
+ManaCost:5 B B
+
+Types:Creature Vampire
+
+PT:4/5
+
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE4 | Description$ Delirium - CARDNAME costs {2} less to cast if there are four or more card types among cards in your graveyard.
+
+SVar:X:Count$CardControllerTypes.Graveyard
+
+K:Flying
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_feaster.jpg
+
+Oracle:Delirium - Dusk Feaster costs {2} less to cast if there are four or more card types among cards in your graveyard.\nFlying
+

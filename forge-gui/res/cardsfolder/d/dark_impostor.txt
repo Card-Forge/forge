@@ -2,8 +2,12 @@ Name:Dark Impostor
 ManaCost:2 B
 Types:Creature Vampire Assassin
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Exile | Description$ CARDNAME has all activated abilities of all creature cards exiled with it.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.IsRemembered+ExiledWithSource | GainsAbilitiesOfZones$ Exile | Description$ CARDNAME has all activated abilities of all creature cards exiled with it.
 A:AB$ ChangeZone | Cost$ 4 B B | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature | SubAbility$ DBCounter | RememberChanged$ True | SpellDescription$ Exile target creature and put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_impostor.jpg
 Oracle:{4}{B}{B}: Exile target creature and put a +1/+1 counter on Dark Impostor.\nDark Impostor has all activated abilities of all creature cards exiled with it.

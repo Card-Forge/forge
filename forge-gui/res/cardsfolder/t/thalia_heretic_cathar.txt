@@ -1,0 +1,8 @@
+Name:Thalia, Heretic Cathar
+ManaCost:2 W
+Types:Legendary Creature Human Soldier
+PT:3/2
+K:First Strike
+S:Mode$ ETBTapped | ValidCard$ Creature.OppCtrl,Land.nonBasic+OppCtrl | Description$ Creatures and non-basic lands your opponents control enter the battlefield tapped.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thalia_heretic_cathar.jpg
+Oracle:First strike\nCreatures and non-basic lands your opponents control enter the battlefield tapped.

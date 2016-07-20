@@ -498,7 +498,8 @@ public class CombatUtil {
 
         // Landwalk
         if (isUnblockableFromLandwalk(attacker, defender)) {
-            return false;
+            if (CardLists.getAmountOfKeyword(defender.getCreaturesInPlay(), "CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.") == 0)
+            	return false;
         }
 
         return true;
@@ -755,6 +756,18 @@ public class CombatUtil {
                     || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
                             && combat.getBlockers(attacker).isEmpty())) {
                 attackersWithLure.add(attacker);
+            } else {
+                for (String keyword : attacker.getKeywords()) {
+                    // MustBeBlockedBy <valid>
+                    if (keyword.startsWith("MustBeBlockedBy ")) {
+                        final String valid = keyword.substring("MustBeBlockedBy ".length());
+                        if (blocker.isValid(valid, null, null, null) &&
+                                CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null) == 0) {
+                            attackersWithLure.add(attacker);
+                            break;
+                        }
+                    }
+                }
             }
         }
 
@@ -855,6 +868,19 @@ public class CombatUtil {
             return false;
         }
 
+        boolean mustBeBlockedBy = false;
+        for (String keyword : attacker.getKeywords()) {
+            // MustBeBlockedBy <valid>
+            if (keyword.startsWith("MustBeBlockedBy ")) {
+                final String valid = keyword.substring("MustBeBlockedBy ".length());
+                if (blocker.isValid(valid, null, null, null) &&
+                        CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null) == 0) {
+                    mustBeBlockedBy = true;
+                    break;
+                }
+            }
+        }
+
         // if the attacker has no lure effect, but the blocker can block another
         // attacker with lure, the blocker can't block the former
         if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
@@ -862,6 +888,7 @@ public class CombatUtil {
                 && !(attacker.hasStartOfKeyword("All creatures with flying able to block CARDNAME do so.") && blocker.hasKeyword("Flying"))
                 && !(attacker.hasKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker).isEmpty())
                 && !(blocker.getMustBlockCards() != null && blocker.getMustBlockCards().contains(attacker))
+                && !mustBeBlockedBy
                 && CombatUtil.mustBlockAnAttacker(blocker, combat)) {
             return false;
         }
@@ -910,6 +937,11 @@ public class CombatUtil {
         }
 
         if (CardFactoryUtil.hasProtectionFrom(blocker, attacker)) {
+            return false;
+        }
+        
+        if (isUnblockableFromLandwalk(attacker, blocker.getController())
+        		&& !blocker.hasKeyword("CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.")) {
             return false;
         }
 

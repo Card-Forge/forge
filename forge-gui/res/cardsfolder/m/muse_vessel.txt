@@ -2,12 +2,12 @@ Name:Muse Vessel
 ManaCost:4
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | SorcerySpeed$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | Chooser$ Targeted | Hidden$ True | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player exiles a card from his or her hand. Activate this ability only any time you could cast a sorcery.
-A:AB$ ChooseCard | Cost$ 1 | ChoiceZone$ Exile | Choices$ Card.IsRemembered | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Muse Vessel | SubAbility$ DBEffect | AILogic$ Never | SpellDescription$ Choose a card exiled with CARDNAME. You may play that card this turn.
-SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | StaticAbilities$ STPlay | Triggers$ TrigCleanup | SVars$ DBExileSelf | RememberObjects$ ChosenCard | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play a card this turn.
-SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBExileSelf | Static$ True
+A:AB$ ChooseCard | Cost$ 1 | ChoiceZone$ Exile | Choices$ Card.IsRemembered+ExiledWithSource | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Muse Vessel | SubAbility$ DBEffect | AILogic$ Never | SpellDescription$ Choose a card exiled with CARDNAME. You may play that card this turn.
+SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | StaticAbilities$ STPlay | Triggers$ TrigCleanup | SVars$ DBExileSelf | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.ChosenCard | AffectedZone$ Exile | Description$ You may play a card this turn.
+SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.ChosenCard | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBExileSelf | Static$ True
 SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

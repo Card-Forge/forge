@@ -124,6 +124,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String slotReplaceCommonWith = "Common";
     private String additionalSheetForFoils = "";
     private String additionalUnlockSet = "";
+    private boolean smallSetOverride = false;
     private final CardInSet[] cards;
 
     private int boosterArts = 1;
@@ -182,6 +183,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public String getSlotReplaceCommonWith() { return slotReplaceCommonWith; }
     public String getAdditionalSheetForFoils() { return additionalSheetForFoils; }
     public String getAdditionalUnlockSet() { return additionalUnlockSet; }
+    public boolean getSmallSetOverride() { return smallSetOverride; }
     public CardInSet[] getCards() { return cards; }
 
     public static final Function<CardEdition, String> FN_GET_CODE = new Function<CardEdition, String>() {
@@ -230,7 +232,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
 
     public boolean isLargeSet() {
-        return cards.length > 200;
+        return cards.length > 200 && !smallSetOverride;
     }
 
     public int getCntBoosterPictures() {
@@ -334,6 +336,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             res.additionalSheetForFoils = section.get("AdditionalSheetForFoils", "");
 
             res.additionalUnlockSet = section.get("AdditionalSetUnlockedInQuest", ""); // e.g. Time Spiral Timeshifted (TSB) for Time Spiral
+
+            res.smallSetOverride = section.getBoolean("TreatAsSmallSet", false); // for "small" sets with over 200 cards (e.g. Eldritch Moon)
 
             return res;
         }

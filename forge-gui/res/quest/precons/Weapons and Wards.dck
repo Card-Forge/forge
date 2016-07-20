@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Weapons and Wards
+Description=Eldritch Moon W/G Intro Deck
+Deck Type=constructed
+Set=EMN
+Image=weapons_and_wards.jpg
+[Main]
+1 Choking Restraints|EMN
+1 Courageous Outrider|EMN
+2 Crossroads Consecrator|EMN
+2 Cultist's Staff|EMN
+1 Emrakul's Evangel|EMN
+1 Equestrian Skill|SOI
+2 Faith Unbroken|EMN
+2 Fiend Binder|EMN
+12 Forest|SOI
+1 Gryff's Boon|SOI
+2 Hamlet Captain|EMN
+1 Hope Against Hope|SOI
+1 Inspiring Captain|SOI
+2 Intrepid Provisioner|SOI
+2 Ironclad Slayer|EMN
+1 Ironwright's Cleansing|EMN
+1 Militant Inquisitor|SOI
+1 Open the Armory|SOI
+13 Plains|SOI
+1 Sigardian Priest|EMN
+2 Slayer's Cleaver|EMN
+1 Steadfast Cathar|EMN
+2 Strength of Arms|SOI
+2 Subjugator Angel|EMN
+2 Thraben Standard Bearer|EMN
+1 Ulvenwald Observer|EMN

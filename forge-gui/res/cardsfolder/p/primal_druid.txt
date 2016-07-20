@@ -1,0 +1,16 @@
+Name:Primal Druid
+
+ManaCost:1 G
+
+Types:Creature Human Druid
+
+PT:0/3
+
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigChange | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | ShuffleNonMandatory$ True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_druid.jpg
+
+Oracle:When Primal Druid dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+

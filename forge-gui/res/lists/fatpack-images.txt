@@ -14,6 +14,7 @@ http://downloads.cardforge.link/images/products/fatpacks/DIS.jpg
 http://downloads.cardforge.link/images/products/fatpacks/DKA.jpg
 http://downloads.cardforge.link/images/products/fatpacks/DST.jpg
 http://downloads.cardforge.link/images/products/fatpacks/DTK.jpg
+http://downloads.cardforge.link/images/products/fatpacks/EMN.jpg
 http://downloads.cardforge.link/images/products/fatpacks/EVE.jpg
 http://downloads.cardforge.link/images/products/fatpacks/FRF.jpg
 http://downloads.cardforge.link/images/products/fatpacks/FUT.jpg
@@ -38,6 +39,7 @@ http://downloads.cardforge.link/images/products/fatpacks/MRD.jpg
 http://downloads.cardforge.link/images/products/fatpacks/NMS.jpg
 http://downloads.cardforge.link/images/products/fatpacks/NPH.jpg
 http://downloads.cardforge.link/images/products/fatpacks/ODY.jpg
+http://downloads.cardforge.link/images/products/fatpacks/OGW.jpg
 http://downloads.cardforge.link/images/products/fatpacks/ONS.jpg
 http://downloads.cardforge.link/images/products/fatpacks/ORI.jpg
 http://downloads.cardforge.link/images/products/fatpacks/PCY.jpg
@@ -48,6 +50,7 @@ http://downloads.cardforge.link/images/products/fatpacks/ROE.jpg
 http://downloads.cardforge.link/images/products/fatpacks/RTR.jpg
 http://downloads.cardforge.link/images/products/fatpacks/SCG.jpg
 http://downloads.cardforge.link/images/products/fatpacks/SHM.jpg
+http://downloads.cardforge.link/images/products/fatpacks/SOI.jpg
 http://downloads.cardforge.link/images/products/fatpacks/SOK.jpg
 http://downloads.cardforge.link/images/products/fatpacks/SOM.jpg
 http://downloads.cardforge.link/images/products/fatpacks/THS.jpg

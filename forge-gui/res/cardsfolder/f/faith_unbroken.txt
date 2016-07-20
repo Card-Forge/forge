@@ -1,0 +1,30 @@
+Name:Faith Unbroken
+
+ManaCost:3 W
+
+Types:Enchantment Aura
+
+K:Enchant creature you control
+
+A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls until CARDNAME leaves the battlefield.
+
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | ConditionPresent$ Card.Self | SubAbility$ DBEffect
+
+SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Targeted | ImprintCards$ Self | SVars$ TrigReturn,ExileSelf | ConditionPresent$ Card.Self | Duration$ Permanent
+
+SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That creature is exiled until Faith Unbroken leaves the battlefield
+
+SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
+
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+
+SVar:PlayMain1:TRUE
+
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/faith_unbroken.jpg
+
+Oracle:Enchant creature you control\nWhen Faith Unbroken enters the battlefield, exile target creature an opponent controls until Faith Unbroken leaves the battlefield.\nEnchanted creature gets +2/+2.
+

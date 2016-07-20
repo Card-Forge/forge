@@ -1035,6 +1035,20 @@ public class ChangeZoneAi extends SpellAbilityAi {
             sa.getTargets().add(choice);
         }
 
+        // Honor the Single Zone restriction. For now, simply remove targets that do not belong to the same zone as the first targeted card.
+        // TODO: ideally the AI should consider at this point which targets exactly to pick (e.g. one card in the first player's graveyard
+        // vs. two cards in the second player's graveyard, which cards are more relevant to be targeted, etc.). Consider improving.
+        if (sa.getTargetRestrictions().isSingleZone()) {
+            Card firstTgt = sa.getTargets().getFirstTargetedCard();
+            if (firstTgt != null) {
+                for (Card t : sa.getTargets().getTargetCards()) {
+                   if (!t.getController().equals(firstTgt.getController())) {
+                       sa.getTargets().remove(t);
+                   }
+                }
+            }
+        }
+
         return true;
     }
     

@@ -2,7 +2,6 @@ package forge.tournament.system;
 
 import com.google.common.collect.Lists;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 @SuppressWarnings("serial")

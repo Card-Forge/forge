@@ -18,7 +18,9 @@
 package forge.game.trigger;
 
 import forge.game.card.Card;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.CostPaymentStack;
 
 /**
  * <p>
@@ -69,6 +71,41 @@ public class TriggerSacrificed extends Trigger {
         		return false;
         	}
         }
+
+        if (this.mapParams.containsKey("WhileKeyword")) {
+        	final String keyword = this.mapParams.get("WhileKeyword");
+        	boolean withKeyword = false;
+        	
+        	// When cast with Emerge, the cost instance is there
+        	IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams2.get("IndividualCostPaymentInstance");
+        	SpellAbility sa = currentPayment.getPayment().getAbility();
+
+    		if (sa != null && sa.getHostCard() != null) {
+	    		if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
+	    			withKeyword = true;
+	    		}
+    		}
+    		if (!withKeyword) {
+    			// When done for another card to get the Mana, the Emerge card is there
+	    		CostPaymentStack stack = (CostPaymentStack) runParams2.get("CostStack");
+
+	        	for (IndividualCostPaymentInstance individual : stack) {
+	        		sa = individual.getPayment().getAbility();
+	
+	        		if (sa == null ||  sa.getHostCard() == null)
+	        			continue;
+	
+	        		if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
+	        			withKeyword = true;
+	        			break;
+	        		}
+	        	}
+    		}
+    		
+    		if (!withKeyword)
+    			return false;
+        }
+
         return true;
     }
 

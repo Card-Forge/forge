@@ -1,0 +1,21 @@
+Name:Vildin-Pack Outcast
+ManaCost:4 R
+Types:Creature Werewolf Horror
+PT:4/4
+K:Trample
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn. 
+A:AB$SetState | Cost$ 5 R R | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vildin_pack_outcast.jpg
+AlternateMode:DoubleFaced
+Oracle:Trample\n{R}: Vildin-Pack Outcast gets +1/-1 until end of turn.\n{5}{R}{R}: Transform Vildin-Pack Outcast.
+
+ALTERNATE
+
+Name:Dronepack Kindred
+ManaCost:no cost
+Types:Creature Eldrazi Werewolf
+PT:5/7
+K:Trample
+A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dronepack_kindred.jpg
+Oracle:Trample\n{1}: Dronepack Kindred gets +1/+0 until end of turn.

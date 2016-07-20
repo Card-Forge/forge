@@ -75,6 +75,10 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 if (resultIsHeads) {
                     if (sa.hasParam("HeadsSubAbility")) {
                         final SpellAbility heads = AbilityFactory.getAbility(host.getSVar(sa.getParam("HeadsSubAbility")), host);
+                        if (sa.isIntrinsic()) {
+                            heads.setIntrinsic(true);
+                            heads.changeText();
+                        }
                         heads.setActivatingPlayer(player);
                         ((AbilitySub) heads).setParent(sa);
 
@@ -83,6 +87,10 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 } else {
                     if (sa.hasParam("TailsSubAbility")) {
                         final SpellAbility tails = AbilityFactory.getAbility(host.getSVar(sa.getParam("TailsSubAbility")), host);
+                        if (sa.isIntrinsic()) {
+                            tails.setIntrinsic(true);
+                            tails.changeText();
+                        }
                         tails.setActivatingPlayer(player);
                         ((AbilitySub) tails).setParent(sa);
 
@@ -96,6 +104,10 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("WinSubAbility")) {
                         final SpellAbility win = AbilityFactory.getAbility(host.getSVar(sa.getParam("WinSubAbility")), host);
+                        if (sa.isIntrinsic()) {
+                            win.setIntrinsic(true);
+                            win.changeText();
+                        }
                         win.setActivatingPlayer(player);
                         ((AbilitySub) win).setParent(sa);
 
@@ -108,6 +120,10 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("LoseSubAbility")) {
                         final SpellAbility lose = AbilityFactory.getAbility(host.getSVar(sa.getParam("LoseSubAbility")), host);
+                        if (sa.isIntrinsic()) {
+                            lose.setIntrinsic(true);
+                            lose.changeText();
+                        }
                         lose.setActivatingPlayer(player);
                         ((AbilitySub) lose).setParent(sa);
 

@@ -1,0 +1,16 @@
+Name:Insatiable Gorgers
+
+ManaCost:2 R R
+
+Types:Creature Vampire Berserker
+
+PT:5/3
+
+K:CARDNAME attacks each combat if able.
+
+K:Madness:3 R
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/insatiable_gorgers.jpg
+
+Oracle:Insatiable Gorgers attacks each combat if able.\nMadness {3}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
+

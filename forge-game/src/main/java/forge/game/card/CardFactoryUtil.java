@@ -1063,6 +1063,16 @@ public class CardFactoryUtil {
             return game.getPhaseHandler().getPlanarDiceRolledthisTurn();
         }
 
+        //SacrificedThisTurn <type>
+        if (l[0].startsWith("SacrificedThisTurn")) {
+            CardCollectionView list = cc.getSacrificedThisTurn();
+            if (l[0].contains(" ")) {
+                final String[] components = l[0].split(" ", 2);
+                list = CardLists.getValidCards(list, components[1], cc, c);
+            }
+            return list.size();
+        }
+
         final String[] sq;
         sq = l[0].split("\\.");
 

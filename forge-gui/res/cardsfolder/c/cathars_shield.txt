@@ -1,0 +1,10 @@
+Name:Cathar's Shield
+ManaCost:0
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 3 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+3 and has vigilance.
+K:Equip 3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cathars_shield.jpg
+Oracle:Equipped creature gets +0/+3 and has vigilance.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
+
+
+

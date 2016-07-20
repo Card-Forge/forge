@@ -1,0 +1,16 @@
+Name:Tattered Haunter
+
+ManaCost:1 U
+
+Types:Creature Spirit
+
+PT:2/1
+
+K:Flying
+
+K:CARDNAME can block only creatures with flying.
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tattered_haunter.jpg
+
+Oracle:Flying\nTattered Haunter can block only creatures with flying.
+

@@ -1,0 +1,18 @@
+Name:It of the Horrid Swarm
+
+ManaCost:8
+
+Types:Creature Eldrazi Insect
+
+PT:4/4
+
+K:Emerge 6 G
+
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast CARDNAME, put two 1/1 green Insect tokens onto the battlefield.
+
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 insect SOI
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/it_of_the_horrid_swarm.jpg
+
+Oracle:Emerge {6}{G} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)\nWhen you cast It of the Horrid Swarm, put two 1/1 green Insect tokens onto the battlefield.
+

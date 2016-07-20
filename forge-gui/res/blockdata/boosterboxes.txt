@@ -89,3 +89,4 @@ ORI: 36 Boosters
 BFZ: 36 Boosters
 OGW: 36 Boosters
 SOI: 36 Boosters
+EMN: 36 Boosters

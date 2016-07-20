@@ -1,0 +1,18 @@
+Name:Displace
+
+ManaCost:2 U
+
+Types:Instant
+
+A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile up to two target creatures you control, then return those cards to the battlefield under their owner's control.
+
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
+
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
+SVar:RemAIDeck:True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/displace.jpg
+
+Oracle:Exile up to two target creatures you control, then return those cards to the battlefield under their owner's control.
+

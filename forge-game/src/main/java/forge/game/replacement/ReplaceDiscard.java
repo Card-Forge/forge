@@ -77,6 +77,7 @@ public class ReplaceDiscard extends ReplacementEffect {
     public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject("Card", runParams.get("Card"));
         sa.setReplacingObject("Player", runParams.get("Affected"));
+        sa.setReplacingObject("Source", runParams.get("Source"));
     }
 
 }

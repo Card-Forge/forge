@@ -6,6 +6,7 @@ import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
+import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor.DeckController;
 import forge.deck.FDeckEditor.EditorType;
 import forge.interfaces.IButton;
@@ -122,6 +123,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         }
     });
 
+    static {
+        statsScreen.addTournamentResultsLabels(tournamentsScreen);
+    }
+
     private static void setCurrentScreen(FScreen screen0) {
         //make it so pressing Back from any screen besides Duels screen always goes to Duels screen
         //and make it so Duels screen always goes back to screen that launched Quest mode
@@ -186,6 +191,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 public void run() {
                     FModel.getQuest().load(QuestDataIO.loadData(data));
                     ((DeckController<Deck>)EditorType.Quest.getController()).setRootFolder(FModel.getQuest().getMyDecks());
+                    ((DeckController<DeckGroup>)EditorType.QuestDraft.getController()).setRootFolder(FModel.getQuest().getDraftDecks());
                     if (reason == LaunchReason.StartQuestMode) {
                         if (QuestUtil.getCurrentDeck() == null) {
                             Forge.openScreen(decksScreen); //if quest doesn't have a deck specified, open decks screen by default
@@ -223,7 +229,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         FScreen currentScreen = Forge.getCurrentScreen();
         addItem(duelsItem); duelsItem.setSelected(currentScreen == duelsScreen);
         addItem(challengesItem); challengesItem.setSelected(currentScreen == challengesScreen);
-        //addItem(tournamentsItem); tournamentsItem.setSelected(currentScreen == tournamentsScreen);
+        addItem(tournamentsItem); tournamentsItem.setSelected(currentScreen == tournamentsScreen);
         addItem(decksItem); decksItem.setSelected(currentScreen == decksScreen);
         addItem(spellShopItem); spellShopItem.setSelected(currentScreen == spellShopScreen);
         addItem(bazaarItem); bazaarItem.setSelected(currentScreen == bazaarScreen);

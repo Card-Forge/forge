@@ -5,6 +5,5 @@ K:Enchant permanent
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Permanent | AILogic$ Curse | AITgts$ Card.cmcGE3
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetColor$ Colorless | AddType$ Land & Forest | RemoveCardTypes$ True | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted permanent is a colorless Forest land.
 SVar:NonStackingAttachEffect:True
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/song_of_the_dryads.jpg
 Oracle:Enchant permanent\nEnchanted permanent is a colorless Forest land.

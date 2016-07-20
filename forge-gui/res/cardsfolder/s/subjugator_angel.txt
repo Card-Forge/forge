@@ -1,0 +1,18 @@
+Name:Subjugator Angel
+
+ManaCost:4 W W
+
+Types:Creature Angel
+
+PT:4/3
+
+K:Flying
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all creatures your opponents control.
+
+SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Creature.OppCtrl
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/subjugator_angel.jpg
+
+Oracle:Flying\nWhen Subjugator Angel enters the battlefield, tap all creatures your opponents control. 
+

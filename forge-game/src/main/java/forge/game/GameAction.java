@@ -260,7 +260,7 @@ public class GameAction {
                 position--;
             }
             zoneFrom.remove(c);
-            if (!zoneTo.is(ZoneType.Exile)) {
+            if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
                 c.setExiledWith(null);
             }
         }
@@ -1225,15 +1225,7 @@ public class GameAction {
             return null;
         }
 
-        // Play the Sacrifice sound
-        game.fireEvent(new GameEventCardSacrificed());
-
-        // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
-        runParams.put("Card", CardFactory.copyCardWithChangedStats(c, false)); 
-        runParams.put("Cause", source);
-        game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
+        c.getController().addSacrificedThisTurn(c, source);
 
         return sacrificeDestroy(c);
     }

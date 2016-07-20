@@ -3,6 +3,6 @@ ManaCost:3
 Types:Artifact Creature Myr
 PT:2/2
 K:Flash
-S:Mode$ Continuous | Affected$ Artifact.YouCtrl+nonToken | AffectedZone$ Exile,Graveyard,Hand,Library,Command | AddHiddenKeyword$ Flash | Description$ You may cast artifact cards as though they had flash.
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl+nonToken | AffectedZone$ Exile,Graveyard,Hand,Library,Command | AddHiddenKeyword$ Flash | Description$ You may cast artifact spells as though they had flash.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmer_myr.jpg
-Oracle:Flash\nYou may cast artifact cards as though they had flash.
+Oracle:Flash\nYou may cast artifact spells as though they had flash.

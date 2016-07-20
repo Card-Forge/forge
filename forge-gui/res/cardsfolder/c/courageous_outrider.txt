@@ -1,0 +1,16 @@
+Name:Courageous Outrider
+
+ManaCost:3 W
+
+Types:Creature Human Scout
+
+PT:3/4
+
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library. You may reveal a Human card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+
+SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Card.Human
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/courageous_outrider.jpg
+
+Oracle:When Courageous Outrider enters the battlefield, look at the top four cards of your library. You may reveal a Human card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+

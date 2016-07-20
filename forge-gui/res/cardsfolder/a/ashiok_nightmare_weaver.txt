@@ -3,14 +3,14 @@ ManaCost:1 U B
 Types:Planeswalker Ashiok
 Loyalty:3
 A:AB$ Mill | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Opponent | NumCards$ 3 | Destination$ Exile | Planeswalker$ True | RememberMilled$ True | SpellDescription$ Exile the top three cards of target opponent's library.
-A:AB$ ChooseCard | Cost$ SubCounter<X/LOYALTY> | References$ X | Choices$ Creature.cmcEQChosenX+IsRemembered | ChoiceZone$ Exile | Planeswalker$ True | SubAbility$ DBChangeZone | AILogic$ Ashiok | SpellDescription$ Put a creature card with converted mana cost X exiled with CARDNAME onto the battlefield under your control. That creature is a Nightmare in addition to its other types.
-SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.cmcEQChosenX+IsRemembered | ChangeNum$ 1 | GainControl$ True | Imprint$ True | SubAbility$ DBAnimate
+A:AB$ ChooseCard | Cost$ SubCounter<X/LOYALTY> | References$ X | Choices$ Creature.cmcEQChosenX+IsRemembered+ExiledWithSource | ChoiceZone$ Exile | Planeswalker$ True | SubAbility$ DBChangeZone | AILogic$ Ashiok | SpellDescription$ Put a creature card with converted mana cost X exiled with CARDNAME onto the battlefield under your control. That creature is a Nightmare in addition to its other types.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.cmcEQChosenX+IsRemembered+ExiledWithSource | ChangeNum$ 1 | GainControl$ True | Imprint$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | Types$ Nightmare | Permanent$ True | SubAbility$ DBCleanImprint
 SVar:DBCleanImprint:DB$ Cleanup | ClearImprinted$ True
 SVar:X:XChoice
 A:AB$ ChangeZoneAll | Cost$ SubCounter<10/LOYALTY> | ChangeType$ Card.OppCtrl | Origin$ Graveyard,Hand | Destination$ Exile | RememberChanged$ True | Planeswalker$ True | Ultimate$ True | SpellDescription$ Exile all cards from all opponents' hands and graveyards.
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashiok_nightmare_weaver.jpg

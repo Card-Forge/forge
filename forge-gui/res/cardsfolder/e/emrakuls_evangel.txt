@@ -1,0 +1,18 @@
+Name:Emrakul's Evangel
+
+ManaCost:2 G
+
+Types:Creature Human Horror
+
+PT:3/2
+
+A:AB$ Token | Cost$ Sac<X/Creature.Other+nonEldrazi/other non-Eldrazi creatures> Sac<1/CARDNAME> | Announce$ X | TokenAmount$ Y | TokenName$ Eldrazi Horror | TokenColors$ Colorless | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenPower$ 3 | TokenToughness$ 2 | TokenImage$ c 3 2 eldrazi horror | References$ Y | SpellDescription$ Put a 3/2 colorless Eldrazi Horror token onto the battlefield for each creature sacrificed this way.
+
+SVar:Y:Sacrificed$Valid Creature
+
+SVar:X:XChoice
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakuls_evangel.jpg
+
+Oracle:{T}, Sacrifice Emrakul's Evangel and any number of other non-Eldrazi creatures: Put a 3/2 colorless Eldrazi Horror token onto the battlefield for each creature sacrificed this way.
+

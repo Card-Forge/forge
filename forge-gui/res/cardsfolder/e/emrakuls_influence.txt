@@ -1,0 +1,16 @@
+Name:Emrakul's Influence
+
+ManaCost:2 G G
+
+Types:Enchantment
+
+T:Mode$ SpellCast | ValidCard$ Creature.Eldrazi+cmcGE7 | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Eldrazi creature spell with converted mana cost 7 or greater, draw 2 cards.
+
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
+
+SVar:RemRandomDeck:True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakuls_influence.jpg
+
+Oracle:Whenever you cast an Eldrazi creature spell with converted mana cost 7 or greater, draw 2 cards.
+

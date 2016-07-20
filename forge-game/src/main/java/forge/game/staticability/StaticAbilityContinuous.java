@@ -26,6 +26,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.GameCommand;
 import forge.card.ColorSet;
@@ -122,7 +123,7 @@ public final class StaticAbilityContinuous {
         int keywordMultiplier = 1;
 
         String[] addKeywords = null;
-        String[] addHiddenKeywords = null;
+        List<String> addHiddenKeywords = Lists.newArrayList();
         String[] removeKeywords = null;
         String[] addAbilities = null;
         String[] addReplacements = null;
@@ -191,7 +192,7 @@ public final class StaticAbilityContinuous {
             final Iterable<String> chosencolors = hostCard.getChosenColors();
             for (final String color : chosencolors) {
                 for (int w = 0; w < addKeywords.length; w++) {
-                    addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", color.substring(0, 1).toUpperCase().concat(color.substring(1, color.length())));
+                    addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", StringUtils.capitalize(color));
                 }
             }
             final String chosenType = hostCard.getChosenType();
@@ -213,8 +214,12 @@ public final class StaticAbilityContinuous {
             }
         }
 
-        if (layer == StaticAbilityLayer.RULES && params.containsKey("AddHiddenKeyword")) {
-            addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
+        if ((layer == StaticAbilityLayer.RULES || layer == StaticAbilityLayer.ABILITIES1) && params.containsKey("AddHiddenKeyword")) {
+            // can't have or gain, need to be applyed in ABILITIES1
+            for (String k : params.get("AddHiddenKeyword").split(" & ")) {
+                if ( (k.contains("can't have or gain")) == (layer == StaticAbilityLayer.ABILITIES1))
+                    addHiddenKeywords.add(k);
+            }
         }
 
         if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("RemoveKeyword")) {
@@ -484,7 +489,7 @@ public final class StaticAbilityContinuous {
             }
 
             // add HIDDEN keywords
-            if (addHiddenKeywords != null) {
+            if (!addHiddenKeywords.isEmpty()) {
                 for (final String k : addHiddenKeywords) {
                     for (int j = 0; j < keywordMultiplier; j++) {
                         affectedCard.addHiddenExtrinsicKeyword(k);

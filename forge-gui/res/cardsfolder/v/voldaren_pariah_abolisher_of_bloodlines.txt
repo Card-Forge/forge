@@ -1,0 +1,44 @@
+Name:Voldaren Pariah
+
+ManaCost:3 B B
+
+Types:Creature Vampire Horror
+
+PT:3/3
+
+K:Flying
+
+A:AB$SetState | Cost$ Sac<3/Creature.Other/another creature> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+
+K:Madness:B B B
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/voldaren_pariah.jpg
+
+AlternateMode:DoubleFaced
+
+Oracle:Flying\nSacrifice three other creatures: Transform Voldaren Pariah.\nMadness {B}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
+
+
+
+ALTERNATE
+
+
+
+Name:Abolisher of Bloodlines
+
+ManaCost:no cost
+
+Types:Creature Eldrazi Vampire
+
+PT:6/5
+
+K:Flying
+
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When this creature transforms into CARDNAME, target opponent sacrifices three creatures.
+
+SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | ValidTgts$ Opponent | SacValid$ Creature | Amount$ 3 | SacMessage$ Creature
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abolisher_of_bloodlines.jpg
+
+Oracle:Flying\nWhen this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures.
+

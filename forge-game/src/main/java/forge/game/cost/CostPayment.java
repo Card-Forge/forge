@@ -50,6 +50,10 @@ public class CostPayment {
         return this.cost;
     }
 
+    public final SpellAbility getAbility() {
+        return this.ability;
+    }
+    
     /**
      * <p>
      * Constructor for Cost_Payment.
@@ -135,7 +139,7 @@ public class CostPayment {
     	final List<CostPart> costParts = this.getCost().getCostPartsWithZeroMana();
         for (final CostPart part : costParts) {
             // Wrap the cost and push onto the cost stack
-            decisionMaker.getPlayer().getGame().costPaymentStack.push(new IndividualCostPaymentInstance(part));
+            decisionMaker.getPlayer().getGame().costPaymentStack.push(new IndividualCostPaymentInstance(part, this));
 
             PaymentDecision pd = part.accept(decisionMaker);
 
@@ -173,7 +177,7 @@ public class CostPayment {
             if (null == decision) return false;
 
             // wrap the payment and push onto the cost stack
-            decisionMaker.getPlayer().getGame().costPaymentStack.push(new IndividualCostPaymentInstance(part));
+            decisionMaker.getPlayer().getGame().costPaymentStack.push(new IndividualCostPaymentInstance(part, this));
             if (decisionMaker.paysRightAfterDecision() && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability)) {
                 decisionMaker.getPlayer().getGame().costPaymentStack.pop(); // cost is resolved
                 return false;
@@ -185,7 +189,7 @@ public class CostPayment {
 
         for (final CostPart part : this.cost.getCostParts()) {
             // wrap the payment and push onto the cost stack
-            decisionMaker.getPlayer().getGame().costPaymentStack.push(new IndividualCostPaymentInstance(part));
+            decisionMaker.getPlayer().getGame().costPaymentStack.push(new IndividualCostPaymentInstance(part, this));
 
             if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part), this.ability)) {
                 decisionMaker.getPlayer().getGame().costPaymentStack.pop(); // cost is resolved

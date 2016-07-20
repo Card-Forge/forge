@@ -256,8 +256,7 @@ public class ComputerUtilCost {
                     }
                     continue;
                 }
-    
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
                 if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
                     return false;
                 }
@@ -459,8 +458,11 @@ public class ComputerUtilCost {
             if (payerCreatures > sourceCreatures + 1) {
                 return false;
             }
-        } else if ("LifeLE2".equals(aiLogic)) {
-            if (payer.getLife() < 3) {
+        } else if (aiLogic != null && aiLogic.startsWith("LifeLE")) {
+        	// if payer can't lose life its no need to pay unless
+        	if (!payer.canLoseLife())
+        		return false;
+        	else if (payer.getLife() <= Integer.valueOf(aiLogic.substring(6))) {
                 return true;
             }
         } else if ("WillAttack".equals(aiLogic)) {

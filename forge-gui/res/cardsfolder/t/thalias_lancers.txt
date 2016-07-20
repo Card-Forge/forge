@@ -1,0 +1,9 @@
+Name:Thalia's Lancers
+ManaCost:3 W W
+Types:Creature Human Knight
+PT:4/4
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a legendary card, reveal it, put it into your hand, then shuffle your library.
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.Legendary | ChangeNum$ 1 | ShuffleNonMandatory$ True 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thalias_lancers.jpg
+Oracle:First strike\nWhen Thalia's Lancers enters the battlefield, you may search your library for a legendary card, reveal it, put it into your hand, then shuffle your library.
