@@ -13,6 +13,9 @@ public class KeywordWithCostAndAmount extends KeywordInstance<KeywordWithCostAnd
 
     @Override
     protected void parse(String details) {
+        final String[] k = details.split(":");
+        amount = Integer.parseInt(k[0]);
+        cost = new Cost(k[1].split("\\|", 2)[0].trim(), false);
     }
 
     @Override
