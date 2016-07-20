@@ -305,11 +305,30 @@ public class TokenAi extends SpellAbilityAi {
         return true;
     }
 
-    /* (non-Javadoc)
+    /*
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.player.Player> options)
      */
     @Override
-    protected GameEntity chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+        // TODO: AILogic
+        Combat combat = ai.getGame().getCombat();
+        // TokenAttacking
+        if (combat != null && sa.hasParam("TokenAttacking")) {
+            Card attacker = spawnToken(ai, sa);
+            for (Player p : options) {
+                if (!ComputerUtilCard.canBeBlockedProfitably(p, attacker)) {
+                    return p;
+                }
+            }
+        }
+        return Iterables.getFirst(options, null);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayerOrPlaneswalker(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.GameEntity> options)
+     */
+    @Override
+    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options) {
         // TODO: AILogic
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
@@ -323,8 +342,6 @@ public class TokenAi extends SpellAbilityAi {
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
             Card attacker = spawnToken(ai, sa);
-            // TODO: this list potentially includes planeswalkers represented as Card objects. This may need further improvement
-            // (SpellAbilityAi::chooseSingleGameEntity normally expects the list of options to be of the same type).
             for (GameEntity p : options) {
                 if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker)) {
                     return p;

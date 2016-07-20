@@ -222,14 +222,29 @@ public abstract class SpellAbilityAi {
 
     @SuppressWarnings("unchecked")
     public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer) {
-        T firstOption = Iterables.getFirst(options, null);
-        
-        if (firstOption instanceof Card) {
-            return (T) chooseSingleCard(ai, sa, (Collection<Card>) options, isOptional, targetedPlayer);
+        boolean hasPlayer = false;
+        boolean hasCard = false;
+        boolean hasPlaneswalker = false;
+
+        for (T ent : options) {
+            if (ent instanceof Player) {
+                hasPlayer = true;
+            } else if (ent instanceof Card) {
+                hasCard = true;
+                if (((Card)ent).isPlaneswalker()) {
+                    hasPlaneswalker = true;
+                }
+            }
         }
-        if (firstOption instanceof Player) {
+
+        if (hasPlayer && hasPlaneswalker) {
+            return (T) chooseSinglePlayerOrPlaneswalker(ai, sa, (Collection<GameEntity>) options);
+        } else if (hasCard) {
+            return (T) chooseSingleCard(ai, sa, (Collection<Card>) options, isOptional, targetedPlayer);
+        } else if (hasPlayer) {
             return (T) chooseSinglePlayer(ai, sa, (Collection<Player>) options);
         }
+
         return null;
     }
 
@@ -239,16 +254,20 @@ public abstract class SpellAbilityAi {
     }
 
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
-        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleEntity is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleCard is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
 
     }
     
-    protected GameEntity chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
-        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleEntity is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayer is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }
 
+    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayerOrPlaneswalker is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+        return Iterables.getFirst(options, null);
+    }
 
     protected static boolean isUselessCreature(Player ai, Card c) {
         if (c == null) {
