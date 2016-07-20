@@ -574,6 +574,7 @@ forge-game/src/main/java/forge/game/keyword/Keyword.java -text
 forge-game/src/main/java/forge/game/keyword/KeywordCollection.java -text
 forge-game/src/main/java/forge/game/keyword/KeywordInstance.java -text
 forge-game/src/main/java/forge/game/keyword/KeywordWithAmount.java -text
+forge-game/src/main/java/forge/game/keyword/KeywordWithAmountAndType.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/keyword/KeywordWithCost.java -text
 forge-game/src/main/java/forge/game/keyword/KeywordWithCostAndAmount.java -text
 forge-game/src/main/java/forge/game/keyword/KeywordWithCostAndType.java -text
