@@ -2887,49 +2887,60 @@ public class CardFactoryUtil {
         final boolean intrinsic = kws == null;
 
         if (keyword.equals("Cascade")) {
-            final int cascade = intrinsic ? card.getAmountOfKeyword("Cascade") : 1;
-            if (cascade != -1) {
-                final StringBuilder trigScript = new StringBuilder(
-                        "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
-                        "True | TriggerDescription$ Cascade - CARDNAME");
+            final StringBuilder trigScript = new StringBuilder(
+                    "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
+                    "True | TriggerDescription$ Cascade - CARDNAME");
 
-                final String abString = "AB$ DigUntil | Cost$ 0 | Defined$ You | Amount$ 1 | Valid$ "
-                        + "Card.nonLand+cmcLTCascadeX | FoundDestination$ Exile | RevealedDestination$"
-                        + " Exile | References$ CascadeX | ImprintRevealed$ True | RememberFound$ True"
-                        + " | SubAbility$ CascadeCast";
-                final String dbCascadeCast = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | "
-                        + "Optional$ True | SubAbility$ CascadeMoveToLib";
-                final String dbMoveToLib = "DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted"
-                        + " | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1"
-                        + " | SubAbility$ CascadeCleanup";
-                card.setSVar("TrigCascade", abString);
-                card.setSVar("CascadeCast", dbCascadeCast);
-                card.setSVar("CascadeMoveToLib", dbMoveToLib);
-                card.setSVar("CascadeX", "Count$CardManaCost");
-                card.setSVar("CascadeCleanup", "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True");
-                final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, intrinsic);
-            
-                for (int i = 0; i < cascade; i++) {
-                    final Trigger cardTrigger = card.addTrigger(cascadeTrigger);
-                    if (!intrinsic) {
-                        kws.addTrigger(cardTrigger);
-                    }
-                }
-            }
-        } else if (keyword.equals("Exalted")) {
-	        final StringBuilder trigExalted = new StringBuilder(
-	                "Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | "
-	                        + "Execute$ ExaltedPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
-	                        + "Exalted (" + Keyword.getInstance(keyword).getReminderText() + ")");
+            final String abString = "AB$ DigUntil | Cost$ 0 | Defined$ You | Amount$ 1 | Valid$ "
+                    + "Card.nonLand+cmcLTCascadeX | FoundDestination$ Exile | RevealedDestination$"
+                    + " Exile | References$ CascadeX | ImprintRevealed$ True | RememberFound$ True"
+                    + " | SubAbility$ CascadeCast";
+            final String dbCascadeCast = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | "
+                    + "Optional$ True | SubAbility$ CascadeMoveToLib";
+            final String dbMoveToLib = "DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted"
+                    + " | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1"
+                    + " | SubAbility$ CascadeCleanup";
+            card.setSVar("TrigCascade", abString);
+            card.setSVar("CascadeCast", dbCascadeCast);
+            card.setSVar("CascadeMoveToLib", dbMoveToLib);
+            card.setSVar("CascadeX", "Count$CardManaCost");
+            card.setSVar("CascadeCleanup", "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True");
+            final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, intrinsic);
 
-	        final String abStringExalted = "DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +1 | NumDef$ +1";
-	        card.setSVar("ExaltedPump", abStringExalted);
-	        final Trigger exaltedTrigger = TriggerHandler.parseTrigger(trigExalted.toString(), card, intrinsic);
-	        final Trigger cardTrigger = card.addTrigger(exaltedTrigger);
+            final Trigger cardTrigger = card.addTrigger(cascadeTrigger);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
-    	} else if (keyword.equals("Extort")) {
+        } else if (keyword.equals("Dethrone")) {
+            final StringBuilder trigScript = new StringBuilder(
+                    "Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | Secondary$ True | "
+                    + "TriggerZones$ Battlefield | Execute$ DethroneCounters | TriggerDescription$"
+                    + " Dethrone (" + Keyword.getInstance("Dethrone").getReminderText() + ")");
+
+            final String abString = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | "
+                    + "CounterNum$ 1";
+            card.setSVar("DethroneCounters", abString);
+            final Trigger dethroneTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, intrinsic);
+
+
+            final Trigger cardTrigger = card.addTrigger(dethroneTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Exalted")) {
+            final StringBuilder trigExalted = new StringBuilder(
+                    "Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | "
+                            + "Execute$ ExaltedPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
+                            + "Exalted (" + Keyword.getInstance(keyword).getReminderText() + ")");
+
+            final String abStringExalted = "DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +1 | NumDef$ +1";
+            card.setSVar("ExaltedPump", abStringExalted);
+            final Trigger exaltedTrigger = TriggerHandler.parseTrigger(trigExalted.toString(), card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(exaltedTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Extort")) {
             final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
                     + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
                     + " | TriggerDescription$ Extort ("+ Keyword.getInstance(keyword).getReminderText() +")";
@@ -2952,7 +2963,7 @@ public class CardFactoryUtil {
     }
 
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
-    	final boolean intrinsic = kws == null;
+        final boolean intrinsic = kws == null;
 
         if (keyword.startsWith("Unearth")) {
             final String[] k = keyword.split(":");
@@ -2978,10 +2989,10 @@ public class CardFactoryUtil {
             
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             if (!intrinsic) {
-	            sa.setTemporary(true);
-	            sa.setIntrinsic(false);
-	            //sa.setOriginalHost(hostCard);
-	            kws.addSpellAbility(sa);
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
             }
             card.addSpellAbility(sa);
         }
@@ -3607,7 +3618,7 @@ public class CardFactoryUtil {
             card.addTrigger(stormTrigger);
         } // Storm
 
-        if (hasKeyword(card, "Cascade") != -1) {
+        for (int i = 0; i < card.getAmountOfKeyword("Cascade"); i++) {
             addTriggerAbility("Cascade", card, null);
         } // Cascade
 
@@ -3664,20 +3675,8 @@ public class CardFactoryUtil {
             ripplePos = hasKeyword(card, "Ripple", n + 1);
         } // Ripple
 
-        final int dethrone = card.getAmountOfKeyword("Dethrone");
-        card.removeIntrinsicKeyword("Dethrone");
-        for (int i = 0; i < dethrone; i++) {
-            final StringBuilder trigScript = new StringBuilder(
-                    "Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | "
-                    + "TriggerZones$ Battlefield | Execute$ DethroneCounters | TriggerDescription$"
-                    + " Dethrone (Whenever this creature attacks the player with the most life or "
-                    + "tied for the most life, put a +1/+1 counter on it.)");
-
-            final String abString = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | "
-                    + "CounterNum$ 1";
-            card.setSVar("DethroneCounters", abString);
-            final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
-            card.addTrigger(cascadeTrigger);
+        for (int i = 0; i < card.getAmountOfKeyword("Dethrone"); i++) {
+            addTriggerAbility("Dethrone", card, null);
         } // Dethrone
 
         final int exploit = card.getAmountOfKeyword("Exploit");

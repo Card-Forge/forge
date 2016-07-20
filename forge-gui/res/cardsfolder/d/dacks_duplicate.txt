@@ -4,8 +4,6 @@ Types:Creature Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:ChooseCreature:Optional
 SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | AILogic$ AtLeast1 | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone. (Whenever it attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)
-SVar:DBCopy:DB$ Clone | Defined$ ChosenCard | AddKeywords$ Haste | AddTriggers$ DacksDuplicateDethrone | AddSVars$ DacksDuplicateSVar
-SVar:DacksDuplicateDethrone:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | TriggerZones$ Battlefield | Execute$ DacksDuplicateSVar | TriggerDescription$ Dethrone (Whenever this creature attacks the player with the most life or tied for the most life, put a +1/+1 counter on it.)
-SVar:DacksDuplicateSVar:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:DBCopy:DB$ Clone | Defined$ ChosenCard | AddKeywords$ Haste & Dethrone
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dacks_duplicate.jpg
 Oracle:You may have Dack's Duplicate enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone. (Whenever it attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)

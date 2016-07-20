@@ -3,9 +3,7 @@ ManaCost:1 U B R
 Types:Legendary Creature Human Wizard
 PT:3/3
 K:Dethrone
-S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddTrigger$ MarchesaTrig | AddSVar$ DethroneCounters | Description$ Other creatures you control have dethrone.
-SVar:MarchesaTrig:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | TriggerZones$ Battlefield | Execute$ DethroneCounters | TriggerDescription$ Dethrone (Whenever this creature attacks the player with the most life or tied for the most life, put a +1/+1 counter on it.)
-SVar:DethroneCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Dethrone | Description$ Other creatures you control have dethrone.
 T:Mode$ ChangesZone | ValidCard$ Card.YouCtrl+counters_GE1_P1P1 | Origin$ Battlefield | Destination$ Graveyard | DelayedTrigger$ DelTrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it dies, return that card to the battlefield under your control at the beginning of the next end step.
 SVar:DelTrigReturn:Mode$ Phase | Phase$ End Of Turn | Execute$ DBReturn | TriggerDescription$ Return that card to the battlefield at the beginning under your control of the next end step.
 SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
