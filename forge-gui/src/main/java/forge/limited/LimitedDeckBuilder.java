@@ -66,7 +66,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     private Iterable<PaperCard> onColorCreatures;
     private Iterable<PaperCard> onColorNonCreatures;
 
-    protected static final boolean logToConsole = true;
+    protected static final boolean logToConsole = false;
 
     /**
      *
@@ -337,8 +337,12 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
 
         // total of all ClrCnts
         int totalColor = 0;
+        int numColors = 0;
         for (int i = 0; i < 5; i++) {
             totalColor += clrCnts[i];
+            if (clrCnts[i] > 0) {
+                numColors++;
+            }
         }
         if (totalColor == 0) {
             throw new RuntimeException("Add Lands to empty deck list!");
@@ -349,7 +353,13 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         for (int i = 0; i < 5; i++) {
             if (clrCnts[i] > 0) {
                 // calculate number of lands for each color
-                final float p = (float) clrCnts[i] / (float) totalColor;
+                float p = (float) clrCnts[i] / (float) totalColor;
+                if (numColors == 2) {
+                    // In the normal two-color case, constrain to within 40% and 60% so that the AI
+                    // doesn't put too few lands of the lesser color, risking getting screwed on that color.
+                    // Don't do this for the odd case where a third color had to be added to the deck.
+                    p = Math.min(Math.max(p, 0.4f), 0.6f);
+                }
                 int nLand = Math.round(landsNeeded * p); // desired truncation to int
                 if (logToConsole) {
                     System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
@@ -369,9 +379,9 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
             }
         }
 
-        // A common problem at this point is that nLand in the above loop was exactly 1/2,
-        // and it rounds up for both colors, and too many lands were added.
-        // If the deck size is > 40, remove the last land added.
+        // A common problem at this point is that p in the above loop was exactly 1/2,
+        // and nLand rounded up for both colors, so that one too many lands was added.
+        // So if the deck size is > 40, remove the last land added.
         // Otherwise, the fixDeckSize() method would remove random cards.
         while (deckList.size() > 40) {
             deckList.remove(deckList.size() - 1);

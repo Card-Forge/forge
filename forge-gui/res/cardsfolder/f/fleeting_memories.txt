@@ -6,6 +6,7 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifa
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, target player puts the top three cards of his or her library into his or her graveyard.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player
+DeckHas:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_memories.jpg
 Oracle:When Fleeting Memories enters the battlefield, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Clue, target player puts the top three cards of his or her library into his or her graveyard.
 

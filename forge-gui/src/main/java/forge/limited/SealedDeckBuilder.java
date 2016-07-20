@@ -33,6 +33,9 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
     private ColorSet chooseColors() {
         // choose colors based on top 33% of cards
         final List<PaperCard> colorChooserList = new ArrayList<PaperCard>();
+        // this is not exactly right, because the rankings here are taking into account deckhints
+        // for the whole set of cards, when some of those cards could be in colors that won't
+        // make it into the deck
         List<PaperCard> initialRanked = ranker.rankCardsInDeck(getAiPlayables());
         double limit = getAiPlayables().size() * .33;
         for (int i = 0; i < limit; i++) {

@@ -4,6 +4,7 @@ Types:Instant
 A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBToken | SpellDescription$ Target creature gets -4/-0 until end of turn. Investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_scrutiny.jpg
 Oracle:Target creature gets -4/-0 until end of turn.\nInvestigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 

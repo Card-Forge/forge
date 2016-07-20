@@ -16,5 +16,7 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ Clue
 SVar:TrigCheatCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
 
 SVar:ClueResearch:Count$SacrificedThisTurn Clue
+DeckHints:Ability$Investigate
+DeckHas:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briarbridge_patrol.jpg
 Oracle:Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")\nAt the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.

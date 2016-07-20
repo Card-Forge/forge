@@ -14,12 +14,14 @@ import java.util.Map;
 public class CardRanker {
 
     private static final double SCORE_UNPICKABLE = -100.0;
+    // These factors determine the amount of boost given to a card's ranking for each other
+    // card that matches it's deckhints.
     private static final Map<DeckHints.Type, Integer> typeFactors = ImmutableMap.<DeckHints.Type, Integer>builder()
-            .put(DeckHints.Type.ABILITY, 5)
+            .put(DeckHints.Type.ABILITY, 3)
             .put(DeckHints.Type.COLOR, 1)
-            .put(DeckHints.Type.KEYWORD, 5)
-            .put(DeckHints.Type.NAME, 20)
-            .put(DeckHints.Type.TYPE, 5)
+            .put(DeckHints.Type.KEYWORD, 3)
+            .put(DeckHints.Type.NAME, 10)
+            .put(DeckHints.Type.TYPE, 3)
             .build();
     private static boolean logToConsole = false;
 
@@ -148,7 +150,7 @@ public class CardRanker {
                 Iterable<PaperCard> cards = cardsByType.get(type);
                 score += Iterables.size(cards) * typeFactors.get(type);
                 if (logToConsole && Iterables.size(cards) > 0) {
-                    System.out.println(" -- Found " + Iterables.size(cards) + " cards for " + type);
+                    System.out.println(" - " + card.getName() + ": Found " + Iterables.size(cards) + " cards for " + type);
                 }
             }
         }
@@ -159,7 +161,7 @@ public class CardRanker {
                 Iterable<PaperCard> cards = cardsByType.get(type);
                 score += Iterables.size(cards) * typeFactors.get(type);
                 if (logToConsole && Iterables.size(cards) > 0) {
-                    System.out.println(" -- Found " + Iterables.size(cards) + " cards for " + type);
+                    System.out.println(" - " + card.getName() + ": Found " + Iterables.size(cards) + " cards for " + type);
                 }
             }
         }

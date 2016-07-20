@@ -4,6 +4,7 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 |TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | SpellDescription$ Investigate (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.") | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnifying_glass.jpg
 Oracle:{T}: Add {C} to your mana pool.\n{4}, {T}: Investigate (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.")
 
