@@ -33,9 +33,10 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
     private ColorSet chooseColors() {
         // choose colors based on top 33% of cards
         final List<PaperCard> colorChooserList = new ArrayList<PaperCard>();
+        List<PaperCard> initialRanked = ranker.rankCardsInDeck(getAiPlayables());
         double limit = getAiPlayables().size() * .33;
         for (int i = 0; i < limit; i++) {
-            PaperCard cp = getAiPlayables().get(i);
+            PaperCard cp = initialRanked.get(i);
             colorChooserList.add(cp);
             //System.out.println(cp.getName() + " " + cp.getRules().getManaCost().toString());
         }
@@ -80,8 +81,10 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
             }
         }
 
-        System.out.println("COLOR = " + color1);
-        System.out.println("COLOR = " + color2);
+        if (logToConsole) {
+            System.out.println("COLOR = " + color1);
+            System.out.println("COLOR = " + color2);
+        }
         return ColorSet.fromNames(color1, color2);
     }
 }

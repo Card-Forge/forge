@@ -1,6 +1,5 @@
 package forge.limited;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import forge.card.*;
@@ -16,17 +15,19 @@ public class CardRanker {
 
     private static final double SCORE_UNPICKABLE = -100.0;
     private static final Map<DeckHints.Type, Integer> typeFactors = ImmutableMap.<DeckHints.Type, Integer>builder()
+            .put(DeckHints.Type.ABILITY, 5)
             .put(DeckHints.Type.COLOR, 1)
             .put(DeckHints.Type.KEYWORD, 5)
             .put(DeckHints.Type.NAME, 20)
             .put(DeckHints.Type.TYPE, 5)
             .build();
+    private static boolean logToConsole = false;
 
     /**
      * Rank cards.
      *
      * @param cards PaperCards to rank
-     * @return List of beans with card rankings
+     * @return List of ranked cards
      */
     public List<PaperCard> rankCardsInDeck(final Iterable<PaperCard> cards) {
         List<Pair<Double, PaperCard>> cardScores = getScores(cards);
@@ -34,6 +35,14 @@ public class CardRanker {
         return sortAndCreateList(cardScores);
     }
 
+    /**
+     * Rank cards in pack comparing to existing cards in deck.
+     * @param cardsInPack PaperCards to rank
+     * @param deck existing deck
+     * @param chosenColors colors of deck
+     * @param canAddMoreColors can deck add more colors
+     * @return sorted List of ranked cards
+     */
     public List<PaperCard> rankCardsInPack(
             final Iterable<PaperCard> cardsInPack,
             final List<PaperCard> deck,
@@ -62,7 +71,7 @@ public class CardRanker {
             }
 
             List<PaperCard> otherCards = getCardsExceptOne(cache, i);
-            score += calculateSynergies(card, otherCards);
+            score += getScoreForDeckHints(card, otherCards);
 
             cardScores.add(Pair.of(score, card));
         }
@@ -87,7 +96,7 @@ public class CardRanker {
                 score -= 50.0;
             }
 
-            score += calculateSynergies(card, deck);
+            score += getScoreForDeckHints(card, deck);
 
             cardScores.add(Pair.of(score, card));
         }
@@ -130,14 +139,6 @@ public class CardRanker {
         return otherCards;
     }
 
-    private double calculateSynergies(PaperCard card, Iterable<PaperCard> otherCards) {
-        double synergyScore = 0.0;
-
-        synergyScore += getScoreForDeckHints(card, otherCards);
-
-        return synergyScore;
-    }
-
     private double getScoreForDeckHints(PaperCard card, Iterable<PaperCard> otherCards) {
         double score = 0.0;
         final DeckHints hints = card.getRules().getAiHints().getDeckHints();
@@ -146,6 +147,9 @@ public class CardRanker {
             for (DeckHints.Type type : cardsByType.keySet()) {
                 Iterable<PaperCard> cards = cardsByType.get(type);
                 score += Iterables.size(cards) * typeFactors.get(type);
+                if (logToConsole && Iterables.size(cards) > 0) {
+                    System.out.println(" -- Found " + Iterables.size(cards) + " cards for " + type);
+                }
             }
         }
         final DeckHints needs = card.getRules().getAiHints().getDeckNeeds();
@@ -154,6 +158,9 @@ public class CardRanker {
             for (DeckHints.Type type : cardsByType.keySet()) {
                 Iterable<PaperCard> cards = cardsByType.get(type);
                 score += Iterables.size(cards) * typeFactors.get(type);
+                if (logToConsole && Iterables.size(cards) > 0) {
+                    System.out.println(" -- Found " + Iterables.size(cards) + " cards for " + type);
+                }
             }
         }
         return score;
@@ -165,6 +172,9 @@ public class CardRanker {
         List<PaperCard> rankedCards = new ArrayList<>(cardScores.size());
         for (Pair<Double, PaperCard> pair : cardScores) {
             rankedCards.add(pair.getValue());
+            if (logToConsole) {
+                System.out.println(pair.getValue().getName() + "[" + pair.getKey().toString() + "]");
+            }
         }
 
         return rankedCards;
