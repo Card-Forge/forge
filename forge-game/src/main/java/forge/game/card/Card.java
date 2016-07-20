@@ -3021,7 +3021,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             changedCardKeywords.put(timestamp, newCks);
             changedCardKeywords.put(timestamp, new KeywordsChange(keywords, removeKeywords, removeAllKeywords));
         }
-        currentState.getView().updateKeywords(this, currentState);
+        updateKeywords();
     }
 
     public final void addChangedCardKeywords(final String[] keywords, final String[] removeKeywords,
@@ -3042,7 +3042,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final KeywordsChange removeChangedCardKeywords(final long timestamp) {
         KeywordsChange change = changedCardKeywords.remove(timestamp);
         if (change != null) {
-            currentState.getView().updateKeywords(this, currentState);
+            change.removeKeywords(this);
+            updateKeywords();
         }
         return change;
     }
