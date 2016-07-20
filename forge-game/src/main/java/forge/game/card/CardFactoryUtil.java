@@ -2546,6 +2546,9 @@ public class CardFactoryUtil {
                 card.addTrigger(parsedTriggerOther);
                 card.setSVar("TrigBondSelf", abStringOther);
             }
+            else if (keyword.equals("Exalted")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Extort")) {
                 addTriggerAbility(keyword, card, null);
             }
@@ -2909,7 +2912,20 @@ public class CardFactoryUtil {
     public static void addTriggerAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
 
-        if (keyword.equals("Extort")) {
+        if (keyword.equals("Exalted")) {
+	        final StringBuilder trigExalted = new StringBuilder(
+	                "Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | "
+	                        + "Execute$ ExaltedPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
+	                        + "Exalted (" + Keyword.getInstance(keyword).getReminderText() + ")");
+
+	        final String abStringExalted = "DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +1 | NumDef$ +1";
+	        card.setSVar("ExaltedPump", abStringExalted);
+	        final Trigger exaltedTrigger = TriggerHandler.parseTrigger(trigExalted.toString(), card, intrinsic);
+	        final Trigger cardTrigger = card.addTrigger(exaltedTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+    	} else if (keyword.equals("Extort")) {
             final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
                     + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
                     + " | TriggerDescription$ Extort ("+ Keyword.getInstance(keyword).getReminderText() +")";

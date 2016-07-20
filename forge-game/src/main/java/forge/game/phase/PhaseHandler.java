@@ -519,25 +519,6 @@ public class PhaseHandler implements java.io.Serializable {
         }
         game.fireEvent(new GameEventAttackersDeclared(playerTurn, attackersMap));
 
-        // This Exalted handler should be converted to script
-        if (combat.getAttackers().size() == 1) {
-            final Player attackingPlayer = combat.getAttackingPlayer();
-            final Card attacker = combat.getAttackers().get(0);
-            for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
-                int exaltedMagnitude = card.getAmountOfKeyword("Exalted");
-
-                for (int i = 0; i < exaltedMagnitude; i++) {
-                    String abScript = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +1 | NumDef$ +1 | StackDescription$ Exalted for attacker {c:CardUID_%d} (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn).", attacker.getId(), attacker.getId());
-                    SpellAbility ability = AbilityFactory.getAbility(abScript, card);
-                    ability.setActivatingPlayer(card.getController());
-                    ability.setDescription(ability.getStackDescription());
-                    ability.setTrigger(true);
-
-                    game.getStack().addSimultaneousStackEntry(ability);
-                }
-            }
-        }
-
         // fire AttackersDeclared trigger
         if (!combat.getAttackers().isEmpty()) {
             List<GameEntity> attackedTarget = new ArrayList<GameEntity>();
