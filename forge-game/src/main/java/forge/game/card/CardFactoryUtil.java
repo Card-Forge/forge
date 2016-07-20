@@ -2978,7 +2978,39 @@ public class CardFactoryUtil {
             if (intrinsic) {
                 card.addIntrinsicKeyword(etbCounter);
             } else {
-                kws.addReplacement(makeEtbCounter(etbCounter, card, intrinsic));            		
+                kws.addReplacement(makeEtbCounter(etbCounter, card, intrinsic));
+            }
+        } else if (keyword.startsWith("Devour")) {
+
+            final String[] k = keyword.split(":");
+            final String magnitude = k[1];
+
+            String abStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
+                    + " | Defined$ ReplacedCard";
+            String dbStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | "
+                    + "References$ DevourSacX | SacValid$ Creature.Other | SacMessage$ another creature (Devour "+ magnitude + ") | "
+                    + "RememberSacrificed$ True | Optional$ True | "
+                    + "Devour$ True | SubAbility$ Devour"+magnitude+"Counters";
+            String counterStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Devour"+magnitude+"X"
+                    + " | ETB$ True | References$ Devour"+magnitude+"X,DevourSize | SubAbility$ DevourCleanup";
+
+            card.setSVar("DevourETB", abStr);
+            card.setSVar("Devour"+magnitude+"Sac", dbStr);
+            card.setSVar("DevourSacX", "Count$Valid Creature.YouCtrl+Other");
+            card.setSVar("Devour"+magnitude+"Counters", counterStr);
+            card.setSVar("Devour"+magnitude+"X", "SVar$DevourSize/Times." + magnitude);
+            card.setSVar("DevourSize", "Count$RememberedSize");
+            card.setSVar("DevourCleanup", "DB$ Cleanup | ClearRemembered$ True | SubAbility$ DevourETB");
+
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ Devour"+magnitude+"Sac "
+                    + "| Secondary$ True | Description$ Devour " + magnitude + " ("+ Keyword.getInstance(keyword).getReminderText() + ")";
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            re.setLayer(ReplacementLayer.Other);
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
             }
         }
     }
@@ -3524,37 +3556,7 @@ public class CardFactoryUtil {
 
         if (hasKeyword(card, "Devour") != -1) {
             final int n = hasKeyword(card, "Devour");
-            if (n != -1) {
-
-                final String parse = card.getKeywords().get(n).toString();
-                // card.removeIntrinsicKeyword(parse);
-
-                final String[] k = parse.split(":");
-                final String magnitude = k[1];
-
-                String abStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                        + " | Defined$ ReplacedCard | SubAbility$ DevourCleanup";
-                String dbStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | "
-                        + "References$ DevourSacX | SacValid$ Creature.Other | SacMessage$ creature | "
-                        + "RememberSacrificed$ True | Optional$ True | "
-                        + "Devour$ True | SubAbility$ DevourCounters";
-                String counterStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ DevourX"
-                        + " | ETB$ True | References$ DevourX,DevourSize | SubAbility$ DevourETB";
-
-                card.setSVar("DevourETB", abStr);
-                card.setSVar("DevourSac", dbStr);
-                card.setSVar("DevourSacX", "Count$Valid Creature.YouCtrl+Other");
-                card.setSVar("DevourCounters", counterStr);
-                card.setSVar("DevourX", "SVar$DevourSize/Times." + magnitude);
-                card.setSVar("DevourSize", "Count$RememberedSize");
-                card.setSVar("DevourCleanup", "DB$ Cleanup | ClearRemembered$ True");
-
-                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DevourSac";
-
-                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
-                re.setLayer(ReplacementLayer.Other);
-                card.addReplacementEffect(re);
-            }
+            addReplacementEffect(card.getKeywords().get(n), card, null);
         } // Devour
 
         if (hasKeyword(card, "Modular") != -1) {

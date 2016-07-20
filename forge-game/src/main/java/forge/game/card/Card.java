@@ -1321,11 +1321,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else {
                     sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
                 }
-            } else if (keyword.startsWith("Devour")) {
-                final String[] parts = keyword.split(":");
-                final String extra = parts.length > 2 ? parts[2] : "";
-                final String devour = "Devour " + parts[1] + extra;
-                sbLong.append(devour).append("\r\n");
             } else if (keyword.startsWith("Morph")) {
                 sbLong.append("Morph");
                 if (keyword.contains(":")) {
@@ -1397,7 +1392,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Sunburst") && hasStartOfKeyword("Modular")) {
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
-            } else if (keyword.startsWith("Provoke")) {
+            } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour")) {
                 sbLong.append(keyword + "(" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.contains("Haunt")) {
                 sb.append("\r\nHaunt (");
@@ -1408,7 +1403,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("exile it haunting target creature.");
                 }
                 sb.append(")");
-            } else if (keyword.equals("Convoke") || keyword.equals("Menace")) {
+            } else if (keyword.equals("Convoke") || keyword.equals("Menace") || keyword.equals("Dethrone")) {
                 sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.endsWith(" offering")) {
                 String offeringType = keyword.split(" ")[0];
