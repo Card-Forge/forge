@@ -2,9 +2,7 @@ Name:Varolz, the Scar-Striped
 ManaCost:1 B G
 Types:Legendary Creature Troll Warrior
 PT:2/2
-S:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Graveyard | AddAbility$ VarolzScavenge | AddSVar$ VarolzX | Description$ Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost.
-SVar:VarolzScavenge:AB$ PutCounter | Cost$ CardManaCost ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ VarolzX | SorcerySpeed$ True | References$ VarolzX | PrecostDesc$ Scavenge | SpellDescription$ Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.
-SVar:VarolzX:Count$CardPower
+S:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Graveyard | AddKeyword$ Scavenge:CardManaCost | Description$ Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost.
 A:AB$ Regenerate | Cost$ Sac<1/Creature.Other/another creature> | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/varolz_the_scar_striped.jpg
 Oracle:Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost. (Exile a creature card from your graveyard and pay its mana cost: Put a number of +1/+1 counters equal to that card's power on target creature. Scavenge only as a sorcery.)\nSacrifice another creature: Regenerate Varolz, the Scar-Striped.

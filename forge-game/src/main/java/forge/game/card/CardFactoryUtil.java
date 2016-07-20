@@ -2220,6 +2220,9 @@ public class CardFactoryUtil {
                 // add ability to instrinic strings so copies/clones create the ability also
                 card.getCurrentState().addUnparsedAbility(effect);
             }
+            else if (keyword.startsWith("Scavenge")) {
+                addSpellAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Unearth")) {
                 addSpellAbility(keyword, card, null);
             }
@@ -2667,7 +2670,7 @@ public class CardFactoryUtil {
                     abilityStr.append("- ");
                 }
                 abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
-                abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ", {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)");
+                abilityStr.append("| SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")");
                 final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
                 card.addSpellAbility(sa);
                 // add ability to instrinic strings so copies/clones create the ability also
@@ -3018,7 +3021,30 @@ public class CardFactoryUtil {
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
 
-        if (keyword.startsWith("Unearth")) {
+        if (keyword.startsWith("Scavenge")) {
+            final String[] k = keyword.split(":");
+	        final String manacost = k[1];
+
+            String effect = "AB$ PutCounter | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> " +
+                    "| ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 " +
+            		"| CounterNum$ ScavengeX | SorcerySpeed$ True | References$ ScavengeX " + 
+                    "| PrecostDesc$ Scavenge | | CostDesc$ " + ManaCostParser.parse(manacost) + 
+                    "| SpellDescription$ (" + Keyword.getInstance("Scavenge:" + manacost).getReminderText() + ")";
+
+            card.setSVar("ScavengeX", "Count$CardPower");
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            } else {
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getCurrentState().addUnparsedAbility(effect);
+            }
+            card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Unearth")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
@@ -3046,6 +3072,9 @@ public class CardFactoryUtil {
                 sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
+            } else {
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getCurrentState().addUnparsedAbility(effect);
             }
             card.addSpellAbility(sa);
         }

@@ -99,6 +99,7 @@ public enum Keyword {
     SHADOW(SimpleKeyword.class, true, "This creature can block or be blocked by only creatures with shadow."),
     SHROUD(SimpleKeyword.class, true, "This can't be the target of spells or abilities."),
     SKULK(SimpleKeyword.class, true, "This creature can't be blocked by creatures with greater power."),
+    SCAVENGE(KeywordWithCost.class, false, "%s, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery."),
     SOULBOND(SimpleKeyword.class, true, "You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them"),
     SOULSHIFT(KeywordWithAmount.class, false, "When this creature dies, you may return target Spirit card with converted mana cost %d or less from your graveyard to your hand."),
     SPLICE(KeywordWithCostAndType.class, false, "You may reveal this card from your hand as you cast a %s spell. If you do, copy this card's text box onto that spell and pay %s as an additional cost to cast that spell."),
