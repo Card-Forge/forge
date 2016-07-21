@@ -650,9 +650,6 @@ public class PhaseHandler implements java.io.Serializable {
             }
 
             if (!c1.getDamageHistory().getCreatureBlockedThisCombat()) {
-                for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(c1)) {
-                    game.getStack().add(ab);
-                }
                 // Run triggers
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 runParams.put("Blocker", c1);
@@ -691,13 +688,6 @@ public class PhaseHandler implements java.io.Serializable {
             	runParams2.put("Attacker", a);
             	runParams2.put("Blocker", b);
             	game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams2, false);
-            }
-
-            if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
-                // Bushido
-                for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(a)) {
-                    game.getStack().add(ab);
-                }
             }
 
             a.getDamageHistory().setCreatureGotBlockedThisCombat(true);

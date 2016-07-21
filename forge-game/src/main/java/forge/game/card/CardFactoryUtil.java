@@ -2071,26 +2071,6 @@ public class CardFactoryUtil {
         return types.size();
     }
 
-    public static List<SpellAbility> getBushidoEffects(final Card c) {
-        final List<SpellAbility> list = new ArrayList<SpellAbility>();
-        for (final String kw : c.getKeywords()) {
-            if (kw.contains("Bushido")) {
-                final String[] parse = kw.split(" ");
-                final String s = parse[1];
-                final int magnitude = Integer.parseInt(s);
-
-                String description = String.format("Bushido %d (When this blocks or becomes blocked, it gets +%d/+%d until end of turn).", magnitude, magnitude, magnitude);
-                String regularPart = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +%d | NumDef$ +%d | StackDescription$ %s", c.getId(), magnitude, magnitude, description);
-                
-                SpellAbility ability = AbilityFactory.getAbility(regularPart, c);
-                ability.setDescription(ability.getStackDescription());
-                ability.setTrigger(true); // can be copied by Strionic Resonator
-                list.add(ability);
-            }
-        }
-        return list;
-    }
-
     /**
      * <p>
      * getNeededXDamage.
@@ -2535,6 +2515,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Rampage")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Bushido")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
                         + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
@@ -2895,6 +2878,36 @@ public class CardFactoryUtil {
     public static void addTriggerAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
 
+        if (keyword.startsWith("Bushido")) {
+            final String[] k = keyword.split(" ", 2);
+            final String n = k[1];
+
+            final String name = "Bushido" + n;
+
+            final String trigBlock = "Mode$ Blocks | ValidCard$ Card.Self | Execute$ Trig" + name + "Pump | Secondary$ True"
+                    + " | TriggerDescription$ "+ keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String trigBlocked = "Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ Trig" + name + "Pump | Secondary$ True "
+                    + " | TriggerDescription$ "+ keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            String pumpStr = "DB$ Pump | Defined$ Self | NumAtt$ " + n + " | NumDef$ " + n;
+            if ("X".equals(n)) {
+                pumpStr = "DB$ Pump | Defined$ Self | NumAtt$ " + name + " | NumDef$ " + name + " | References$ "+ name;
+                card.setSVar(name, "Count$Valid Creature.attacking");
+            }
+            card.setSVar("Trig" + name + "Pump", pumpStr);
+
+            final Trigger bushidoTrigger1 = TriggerHandler.parseTrigger(trigBlock, card, intrinsic);
+            final Trigger bushidoTrigger2 = TriggerHandler.parseTrigger(trigBlocked, card, intrinsic);
+
+            final Trigger cardTrigger1 = card.addTrigger(bushidoTrigger1);
+            final Trigger cardTrigger2 = card.addTrigger(bushidoTrigger2);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger1);
+                kws.addTrigger(cardTrigger2);
+            }
+        }
         if (keyword.equals("Cascade")) {
             final StringBuilder trigScript = new StringBuilder(
                     "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
