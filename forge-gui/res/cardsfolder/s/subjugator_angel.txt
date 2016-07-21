@@ -10,7 +10,9 @@ K:Flying
 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all creatures your opponents control.
 
-SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Creature.OppCtrl
+SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidCards$ Creature.OppCtrl
+
+SVar:PlayMain1:TRUE
 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/subjugator_angel.jpg
 

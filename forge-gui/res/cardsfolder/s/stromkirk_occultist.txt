@@ -26,8 +26,6 @@ SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destinati
 
 K:Madness:1 R
 
-SVar:RemAIDeck:True
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stromkirk_occultist.jpg
 
 Oracle:Trample\nWhenever Stromkirk Occultist deals combat damage to a player, exile the top card of your library. Until end of turn, you may play that card.\nMadness {1}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

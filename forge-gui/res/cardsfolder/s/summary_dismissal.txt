@@ -8,6 +8,8 @@ A:SP$ ChangeZone | Cost$ 2 U U | AllType$ Spell | AllValid$ Card.Other | Origin$
 
 SVar:DBCounter: DB$ Counter | Cost$ 0 | AllType$ Activated,Triggered | AllValid$ Card
 
+SVar:RemAIDeck:True
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summary_dismissal.jpg
 
 Oracle:Exile all other spells and counter all abilities.
