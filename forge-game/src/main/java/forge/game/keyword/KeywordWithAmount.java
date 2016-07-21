@@ -26,7 +26,7 @@ public class KeywordWithAmount extends KeywordInstance<KeywordWithAmount> {
     protected String formatReminderText(String reminderText) {
         if (withX) {
             StringBuilder result = new StringBuilder(
-                String.format(reminderText.replaceAll("%d", "%s"), "X")
+                String.format(reminderText.replaceAll("\\%(\\d+\\$)?d", "%$1s"), "X")
             );
             if (!extra.isEmpty()) {
                 result.insert(result.length()-2, extra);
