@@ -683,6 +683,10 @@ public class PhaseHandler implements java.io.Serializable {
             
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
+
+                b.addBlockedThisTurn(a);
+                a.addBlockedByThisTurn(b);
+
             	final HashMap<String, Object> runParams2 = new HashMap<String, Object>();
             	runParams2.put("Attacker", a);
             	runParams2.put("Blocker", b);
@@ -698,8 +702,6 @@ public class PhaseHandler implements java.io.Serializable {
                 // Rampage
                 CombatUtil.handleRampage(game, a, blockers);
             }
-
-            CombatUtil.handleFlankingKeyword(game, a, blockers);
 
             a.getDamageHistory().setCreatureGotBlockedThisCombat(true);
         }

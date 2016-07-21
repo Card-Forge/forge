@@ -1104,29 +1104,4 @@ public class CombatUtil {
         game.getStack().addSimultaneousStackEntry(ability);
     }
 
-    public static void handleFlankingKeyword(final Game game, final Card attacker, final List<Card> blockers) {
-        for (final Card blocker : blockers) {
-            if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
-                final int flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
-
-                // Rule 702.23b:  If a creature has multiple instances of flanking, each triggers separately.
-                for (int i = 0; i < flankingMagnitude; i++) {
-                    final String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ -1 | NumDef$ -1 | ", blocker.getId());
-                    final String desc = String.format("StackDescription$ Flanking (The blocker %s (%d) gets -1/-1 until end of turn)", blocker.getName(), blocker.getId());
-
-                    final SpellAbility ability = AbilityFactory.getAbility(effect + desc, attacker);
-                    ability.setActivatingPlayer(attacker.getController());
-                    ability.setDescription(ability.getStackDescription());
-                    ability.setTrigger(true);
-
-                    game.getStack().addSimultaneousStackEntry(ability);
-                }
-            } // flanking
-
-            // TODO what are these lines doing here?
-            blocker.addBlockedThisTurn(attacker);
-            attacker.addBlockedByThisTurn(blocker);
-        }
-    }
-
 } // end class CombatUtil

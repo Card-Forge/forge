@@ -2529,6 +2529,9 @@ public class CardFactoryUtil {
             else if (keyword.equals("Extort")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.equals("Flanking")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
                         + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
@@ -2958,7 +2961,22 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
-        } if (keyword.startsWith("Madness")) {
+        } else if (keyword.equals("Flanking")) {
+            final StringBuilder trigFlanking = new StringBuilder(
+                    "Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.withoutFlanking " +
+        	        " | TriggerZones$ Battlefield | Execute$ FlankingPump | Secondary$ True " +
+                    " | TriggerDescription$ Flanking (" + Keyword.getInstance(keyword).getReminderText() + ")");
+
+            final String abStringFlanking = "DB$ Pump | Defined$ TriggeredBlocker | NumAtt$ -1 | NumDef$ -1";
+
+            final Trigger flankingTrigger = TriggerHandler.parseTrigger(trigFlanking.toString(), card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(flankingTrigger);
+
+            card.setSVar("FlankingPump", abStringFlanking);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Madness")) {
             // Set Madness Triggers
             final String[] k = keyword.split(":");
             final String manacost = k[1];
