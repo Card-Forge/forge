@@ -112,6 +112,15 @@ public final class Lang {
         return getNumeral(cnt) + " " + countedForm;
     }
 
+    public static String nounWithNumeral(final String cnt, final String noun) {
+        if (StringUtils.isNumeric(cnt)) {
+            return nounWithNumeral(Integer.parseInt(cnt), noun);
+        } else {
+            // for X
+            return cnt + " " + getPlural(noun);
+        }
+    }
+
     public static String getPossesive(final String name) {
         if ("You".equalsIgnoreCase(name)) {
             return name + "r"; // to get "your"
