@@ -3589,7 +3589,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (kw.startsWith(k)) {
                 final String[] parse = kw.split(" ");
                 final String s = parse[1];
-                count += Integer.parseInt(s);
+                if (StringUtils.isNumeric(s)) {
+                   count += Integer.parseInt(s);
+                } else {
+                    String svar = StringUtils.join(parse);
+                    if (state.hasSVar(svar)) {
+                        count += AbilityUtils.calculateAmount(this, state.getSVar(svar), null);
+                    }
+                }
             }
         }
         return count;
