@@ -123,6 +123,8 @@ public class CardRanker {
                 rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
             }
 
+            // Convert to a score from 0-100 where higher is better.
+            // Makes it easier to think about and do math with the scores.
             if (rkg != null) {
                 rawScore = 100 - (100 * rkg);
             } else {

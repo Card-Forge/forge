@@ -491,28 +491,28 @@
 #34|Devils' Playground|R|SOI
 #35|Inexorable Blob|R|SOI
 #36|Elusive Tormentor|R|SOI
-#37|Pack Guardian|U|SOI
+#37|Hanweir Militia Captain|R|SOI
 #38|Rattlechains|R|SOI
-#39|Hanweir Militia Captain|R|SOI
+#39|Pack Guardian|U|SOI
 #40|Lightning Axe|U|SOI
 #41|Drogskol Cavalry|R|SOI
 #42|Altered Ego|R|SOI
 #43|Thing in the Ice|R|SOI
 #44|Nearheath Chaplain|U|SOI
 #45|Bound by Moonsilver|U|SOI
-#46|Tamiyo's Journal|R|SOI
-#47|Deathcap Cultivator|R|SOI
-#48|Forgotten Creation|R|SOI
-#49|Sage of Ancient Lore|R|SOI
-#50|Ever After|R|SOI
+#46|Deathcap Cultivator|R|SOI
+#47|Forgotten Creation|R|SOI
+#48|Tamiyo's Journal|R|SOI
+#49|Ever After|R|SOI
+#50|Sage of Ancient Lore|R|SOI
 #51|Scourge Wolf|R|SOI
 #52|Geier Reach Bandit|R|SOI
 #53|Falkenrath Gorger|R|SOI
 #54|Call the Bloodline|U|SOI
 #55|Welcome to the Fold|R|SOI
 #56|Behold the Beyond|M|SOI
-#57|Tooth Collector|U|SOI
-#58|Sinister Concoction|U|SOI
+#57|Sinister Concoction|U|SOI
+#58|Tooth Collector|U|SOI
 #59|Incorrigible Youths|U|SOI
 #60|Fiery Temper|C|SOI
 #61|Obsessive Skinner|U|SOI
@@ -521,9 +521,9 @@
 #64|Angel of Deliverance|R|SOI
 #65|To the Slaughter|R|SOI
 #66|Graf Mole|U|SOI
-#67|Invocation of Saint Traft|R|SOI
-#68|Nephalia Moondrakes|R|SOI
-#69|Gryff's Boon|U|SOI
+#67|Nephalia Moondrakes|R|SOI
+#68|Gryff's Boon|U|SOI
+#69|Invocation of Saint Traft|R|SOI
 #70|Erdwal Illuminator|U|SOI
 #71|Reckless Scholar|U|SOI
 #72|Briarbridge Patrol|U|SOI
@@ -534,17 +534,17 @@
 #77|Ravenous Bloodseeker|U|SOI
 #78|Confirm Suspicions|R|SOI
 #79|Olivia's Bloodsworn|U|SOI
-#80|Indulgent Aristocrat|U|SOI
-#81|Pale Rider of Trostad|U|SOI
-#82|Murderous Compulsion|C|SOI
-#83|Reaper of Flight Moonsilver|U|SOI
+#80|Reaper of Flight Moonsilver|U|SOI
+#81|Murderous Compulsion|C|SOI
+#82|Indulgent Aristocrat|U|SOI
+#83|Pale Rider of Trostad|U|SOI
 #84|Stitchwing Skaab|U|SOI
 #85|Traverse the Ulvenwald|R|SOI
 #86|Arlinn Kord|M|SOI
 #87|Stensia Masquerade|U|SOI
-#88|Archangel Avacyn|M|SOI
-#89|Dead Weight|C|SOI
-#90|Heir of Falkenrath|U|SOI
+#88|Dead Weight|C|SOI
+#89|Heir of Falkenrath|U|SOI
+#90|Archangel Avacyn|M|SOI
 #91|Dance with Devils|U|SOI
 #92|Rabid Bite|C|SOI
 #93|Veteran Cathar|U|SOI
@@ -555,40 +555,40 @@
 #98|Hinterland Logger|C|SOI
 #99|Prized Amalgam|R|SOI
 #100|Breakneck Rider|U|SOI
-#101|Paranoid Parish-Blade|U|SOI
-#102|Lambholt Pacifist|U|SOI
-#103|Epiphany at the Drownyard|R|SOI
+#101|Epiphany at the Drownyard|R|SOI
+#102|Paranoid Parish-Blade|U|SOI
+#103|Lambholt Pacifist|U|SOI
 #104|Ghoulsteed|U|SOI
-#105|Cult of the Waxing Moon|U|SOI
-#106|Solitary Hunter|C|SOI
-#107|Howlpack Resurgence|U|SOI
-#108|Cryptolith Rite|R|SOI
-#109|Ulrich's Kindred|U|SOI
+#105|Solitary Hunter|C|SOI
+#106|Cryptolith Rite|R|SOI
+#107|Cult of the Waxing Moon|U|SOI
+#108|Howlpack Resurgence|U|SOI
+#109|Tenacity|U|SOI
 #110|Spectral Shepherd|U|SOI
-#111|Ongoing Investigation|U|SOI
-#112|Tenacity|U|SOI
-#113|Engulf the Shore|R|SOI
-#114|Dauntless Cathar|C|SOI
+#111|Engulf the Shore|R|SOI
+#112|Dauntless Cathar|C|SOI
+#113|Ongoing Investigation|U|SOI
+#114|Ulrich's Kindred|U|SOI
 #115|Triskaidekaphobia|R|SOI
 #116|Hermit of the Natterknolls|U|SOI
 #117|Kessig Forgemaster|U|SOI
 #118|Geistblast|U|SOI
 #119|Gibbering Fiend|U|SOI
 #120|Malevolent Whispers|U|SOI
-#121|Pious Evangel|U|SOI
-#122|Byway Courier|C|SOI
+#121|Byway Courier|C|SOI
+#122|Pious Evangel|U|SOI
 #123|Startled Awake|M|SOI
 #124|Rise from the Tides|U|SOI
 #125|Humble the Brute|U|SOI
 #126|Morkrut Necropod|U|SOI
 #127|Avacynian Missionaries|U|SOI
-#128|Aberrant Researcher|U|SOI
+#128|Voldaren Duelist|C|SOI
 #129|Spiteful Motives|U|SOI
 #130|Uninvited Geist|U|SOI
-#131|Voldaren Duelist|C|SOI
+#131|Aberrant Researcher|U|SOI
 #132|Puncturing Light|C|SOI
-#133|Throttle|C|SOI
-#134|Pore Over the Pages|U|SOI
+#133|Pore Over the Pages|U|SOI
+#134|Throttle|C|SOI
 #135|Thraben Inspector|C|SOI
 #136|Compelling Deterrence|U|SOI
 #137|Quilled Wolf|C|SOI
@@ -607,16 +607,16 @@
 #150|Bloodmad Vampire|C|SOI
 #151|Rancid Rats|C|SOI
 #152|Town Gossipmonger|U|SOI
-#153|Daring Sleuth|U|SOI
-#154|Port Town|R|SOI
-#155|Game Trail|R|SOI
-#156|Reduce to Ashes|C|SOI
-#157|Niblis of Dusk|C|SOI
-#158|Moorland Drifter|C|SOI
-#159|Choked Estuary|R|SOI
-#160|Eerie Interlude|R|SOI
-#161|Crow of Dark Tidings|C|SOI
-#162|Wild-Field Scarecrow|U|SOI
+#153|Port Town|R|SOI
+#154|Daring Sleuth|U|SOI
+#155|Niblis of Dusk|C|SOI
+#156|Game Trail|R|SOI
+#157|Reduce to Ashes|C|SOI
+#158|Choked Estuary|R|SOI
+#159|Eerie Interlude|R|SOI
+#160|Moorland Drifter|C|SOI
+#161|Wild-Field Scarecrow|U|SOI
+#162|Crow of Dark Tidings|C|SOI
 #163|Just the Wind|C|SOI
 #164|Autumnal Gloom|U|SOI
 #165|Sanguinary Mage|C|SOI
@@ -626,108 +626,108 @@
 #169|Apothecary Geist|C|SOI
 #170|Inspiring Captain|C|SOI
 #171|Vessel of Ephemera|C|SOI
-#172|Ember-Eye Wolf|C|SOI
+#172|Uncaged Fury|C|SOI
 #173|Gatstaf Arsonists|C|SOI
-#174|Uncaged Fury|C|SOI
+#174|Ember-Eye Wolf|C|SOI
 #175|Convicted Killer|C|SOI
 #176|Drownyard Explorers|C|SOI
 #177|Murderer's Axe|U|SOI
 #178|Intrepid Provisioner|C|SOI
 #179|Unruly Mob|C|SOI
-#180|Confront the Unknown|C|SOI
-#181|Watcher in the Web|C|SOI
+#180|Pyre Hound|C|SOI
+#181|Confront the Unknown|C|SOI
 #182|Tormenting Voice|C|SOI
-#183|Pyre Hound|C|SOI
+#183|Watcher in the Web|C|SOI
 #184|Stormrider Spirit|C|SOI
 #185|Devilthorn Fox|C|SOI
-#186|Manic Scribe|U|SOI
-#187|Moldgraf Scavenger|C|SOI
-#188|Vessel of Nascency|C|SOI
-#189|Harvest Hand|U|SOI
-#190|Farbog Revenant|C|SOI
+#186|Vessel of Nascency|C|SOI
+#187|Manic Scribe|U|SOI
+#188|Moldgraf Scavenger|C|SOI
+#189|Farbog Revenant|C|SOI
+#190|Harvest Hand|U|SOI
 #191|Nahiri's Machinations|U|SOI
 #192|Sanitarium Skeleton|C|SOI
-#193|Emissary of the Sleepless|C|SOI
-#194|Thraben Gargoyle|U|SOI
-#195|Vampire Noble|C|SOI
-#196|Thornhide Wolves|C|SOI
+#193|Fevered Visions|R|SOI
+#194|Emissary of the Sleepless|C|SOI
+#195|Thraben Gargoyle|U|SOI
+#196|Vampire Noble|C|SOI
 #197|Rush of Adrenaline|C|SOI
-#198|Stromkirk Mentor|C|SOI
+#198|Thornhide Wolves|C|SOI
 #199|Aim High|C|SOI
-#200|Fevered Visions|R|SOI
-#201|Drownyard Temple|R|SOI
-#202|Expose Evil|C|SOI
+#200|Stromkirk Mentor|C|SOI
+#201|Expose Evil|C|SOI
+#202|Drownyard Temple|R|SOI
 #203|Grotesque Mutation|C|SOI
 #204|Press for Answers|C|SOI
 #205|Cathar's Companion|C|SOI
-#206|Fork in the Road|C|SOI
-#207|True-Faith Censer|C|SOI
-#208|Stoic Builder|C|SOI
+#206|True-Faith Censer|C|SOI
+#207|Stoic Builder|C|SOI
+#208|Fork in the Road|C|SOI
 #209|Macabre Waltz|C|SOI
 #210|Kessig Dire Swine|C|SOI
-#211|Senseless Rage|C|SOI
+#211|Warped Landscape|C|SOI
 #212|Hope Against Hope|U|SOI
-#213|Fleeting Memories|U|SOI
-#214|Warped Landscape|C|SOI
-#215|Silent Observer|C|SOI
-#216|Jace's Scrutiny|C|SOI
-#217|Inquisitor's Ox|C|SOI
-#218|Weirding Wood|U|SOI
-#219|Stallion of Ashmouth|C|SOI
-#220|Militant Inquisitor|C|SOI
+#213|Senseless Rage|C|SOI
+#214|Silent Observer|C|SOI
+#215|Jace's Scrutiny|C|SOI
+#216|Inquisitor's Ox|C|SOI
+#217|Weirding Wood|U|SOI
+#218|Militant Inquisitor|C|SOI
+#219|Fleeting Memories|U|SOI
+#220|Stallion of Ashmouth|C|SOI
 #221|Dual Shot|C|SOI
 #222|Strength of Arms|C|SOI
 #223|Stern Constable|C|SOI
 #224|Loam Dryad|C|SOI
-#225|Gone Missing|C|SOI
-#226|Brain in a Jar|R|SOI
+#225|Brain in a Jar|R|SOI
+#226|Gone Missing|C|SOI
 #227|Survive the Night|C|SOI
 #228|Crawling Sensation|U|SOI
-#229|Furtive Homunculus|C|SOI
-#230|Catalog|C|SOI
-#231|Rottenheart Ghoul|C|SOI
+#229|Catalog|C|SOI
+#230|Rottenheart Ghoul|C|SOI
+#231|Furtive Homunculus|C|SOI
 #232|Nagging Thoughts|C|SOI
-#233|Groundskeeper|U|SOI
-#234|Ghostly Wings|C|SOI
-#235|Broken Concentration|U|SOI
-#236|Skeleton Key|U|SOI
-#237|Hound of the Farbogs|C|SOI
-#238|Lamplighter of Selhoff|C|SOI
-#239|Clip Wings|C|SOI
+#233|Broken Concentration|U|SOI
+#234|Hound of the Farbogs|C|SOI
+#235|Ghostly Wings|C|SOI
+#236|Groundskeeper|U|SOI
+#237|Lamplighter of Selhoff|C|SOI
+#238|Clip Wings|C|SOI
+#239|Skeleton Key|U|SOI
 #240|Merciless Resolve|C|SOI
-#241|Might Beyond Reason|C|SOI
-#242|Equestrian Skill|C|SOI
-#243|Not Forgotten|U|SOI
+#241|Corrupted Grafstone|R|SOI
+#242|Not Forgotten|U|SOI
+#243|Might Beyond Reason|C|SOI
 #244|Alms of the Vein|C|SOI
-#245|Corrupted Grafstone|R|SOI
-#246|Seagraf Skaab|C|SOI
+#245|Equestrian Skill|C|SOI
+#246|Hulking Devil|C|SOI
 #247|Magmatic Chasm|C|SOI
-#248|Hulking Devil|C|SOI
+#248|Seagraf Skaab|C|SOI
 #249|Deny Existence|C|SOI
 #250|Root Out|C|SOI
 #251|Ethereal Guidance|C|SOI
-#252|Shamble Back|C|SOI
-#253|Epitaph Golem|U|SOI
-#254|Haunted Cloak|U|SOI
-#255|Essence Flux|U|SOI
+#252|Essence Flux|U|SOI
+#253|Shamble Back|C|SOI
+#254|Epitaph Golem|U|SOI
+#255|Haunted Cloak|U|SOI
 #256|Explosive Apparatus|C|SOI
 #257|Vessel of Malignity|C|SOI
 #258|Silburlind Snapper|C|SOI
-#259|Dissension in the Ranks|U|SOI
-#260|Trail of Evidence|U|SOI
-#261|Pieces of the Puzzle|C|SOI
-#262|Vessel of Paramnesia|C|SOI
+#259|Pieces of the Puzzle|C|SOI
+#260|Vessel of Paramnesia|C|SOI
+#261|Trail of Evidence|U|SOI
+#262|Dissension in the Ranks|U|SOI
 #263|Forsaken Sanctuary|U|SOI
 #264|Behind the Scenes|U|SOI
-#265|Foul Orchard|U|SOI
-#266|Wicker Witch|C|SOI
+#265|Wicker Witch|C|SOI
+#266|Foul Orchard|U|SOI
 #267|Structural Distortion|C|SOI
 #268|Magnifying Glass|U|SOI
 #269|Vessel of Volatility|C|SOI
 #270|Stone Quarry|U|SOI
-#271|Open the Armory|U|SOI
-#272|Chaplain's Blessing|C|SOI
-#273|Pick the Brain|U|SOI
+#271|Pick the Brain|U|SOI
+#272|Open the Armory|U|SOI
+#273|Chaplain's Blessing|C|SOI
 #274|Second Harvest|R|SOI
 #275|Woodland Stream|U|SOI
 #276|Liliana's Indignation|U|SOI
