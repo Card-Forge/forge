@@ -87,7 +87,7 @@ public enum Keyword {
     PROVOKE(SimpleKeyword.class, false, "Whenever this creature attacks, you may choose to have target creature defending player controls block this creature this combat if able. If you do, untap that creature."),
     PROWESS(SimpleKeyword.class, false, "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."),
     PROWL(KeywordWithCost.class, false, "You may cast this card by paying %s rather than paying its mana cost if you dealt combat damage to a player this turn with a creature that shares any of this spell's creature types."),
-    RAMPAGE(KeywordWithAmount.class, false, "Whenever this creature becomes blocked, it gets +%d/+%d until end of turn for each creature blocking it beyond the first."),
+    RAMPAGE(KeywordWithAmount.class, false, "Whenever this creature becomes blocked, it gets +%1$d/+%1$d until end of turn for each creature blocking it beyond the first."),
     REACH(SimpleKeyword.class, true, "This creature can block creatures with flying."),
     REBOUND(SimpleKeyword.class, true, "If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost."),
     RECOVER(KeywordWithCost.class, false, "When a creature is put into your graveyard from the battlefield, you may pay %s. If you do, return this card from your graveyard to your hand. Otherwise, exile this card."),

@@ -698,9 +698,6 @@ public class PhaseHandler implements java.io.Serializable {
                 for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(a)) {
                     game.getStack().add(ab);
                 }
-
-                // Rampage
-                CombatUtil.handleRampage(game, a, blockers);
             }
 
             a.getDamageHistory().setCreatureGotBlockedThisCombat(true);

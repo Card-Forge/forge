@@ -1066,42 +1066,4 @@ public class CombatUtil {
         return true;
     }
 
-    public static void handleRampage(final Game game, final Card a, final List<Card> blockers) {
-        for (final String keyword : a.getKeywords()) {
-            final int idx = keyword.indexOf("Rampage ");
-            if (idx < 0)
-                continue;
-
-            final int numBlockers = blockers.size();
-            final int magnitude = Integer.valueOf(keyword.substring(idx + "Rampage ".length()));
-            CombatUtil.executeRampageAbility(game, a, magnitude, numBlockers);
-        } // end Rampage
-    }
-
-    /**
-     * executes Rampage abilities for a given card.
-     * @param game
-     * 
-     * @param c
-     *            the card to add rampage bonus to
-     * @param magnitude
-     *            the magnitude of rampage (ie Rampage 2 means magnitude should
-     *            be 2)
-     * @param numBlockers
-     *            - the number of creatures blocking this rampaging creature
-     */
-    private static void executeRampageAbility(final Game game, final Card c, final int magnitude, final int numBlockers) {
-        final int totalBonus = Math.max(0, (numBlockers - 1) * magnitude);
-        final String effect = "AB$ Pump | Cost$ 0 | " + c.getId() + " | NumAtt$ " + totalBonus + " | NumDef$ " + totalBonus + " | ";
-        final String desc = "StackDescription$ Rampage " + magnitude + " (Whenever CARDNAME becomes blocked, it gets +" + magnitude + "/+"
-                + magnitude + " until end of turn for each creature blocking it beyond the first.)";
-
-        final SpellAbility ability = AbilityFactory.getAbility(effect + desc, c);
-        ability.setActivatingPlayer(c.getController());
-        ability.setDescription(ability.getStackDescription());
-        ability.setTrigger(true);
-
-        game.getStack().addSimultaneousStackEntry(ability);
-    }
-
 } // end class CombatUtil

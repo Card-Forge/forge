@@ -2532,6 +2532,9 @@ public class CardFactoryUtil {
             else if (keyword.equals("Flanking")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Rampage")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
                         + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
@@ -3000,6 +3003,27 @@ public class CardFactoryUtil {
             card.setSVar(trigPlay, playMadness);
             card.setSVar("DBWasNotPlayMadness", moveToYard);
             card.setSVar("DBMadnessCleanup", cleanUp);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Rampage")) {
+            final String[] k = keyword.split(" ");
+            final String n = k[1];
+
+            final String trigStr = "Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield " +
+                    " | ValidBlocker$ Creature | MinBlockers$ 1 | Execute$ RampagePump" + n + " | Secondary$ True " +
+                    " | TriggerDescription$ Rampage " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String abStringRampage = "DB$ Pump | Defined$ TriggeredAttacker" +
+                    " | NumAtt$ Rampage" + n + " | NumDef$ Rampage" + n + " | References$ Rampage" + n;
+
+            final Trigger rampageTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(rampageTrigger);
+
+            card.setSVar("RampagePump" + n, abStringRampage);
+            card.setSVar("Rampage" + n, "SVar$RampageCount/Times." + n);
+
+            card.setSVar("RampageCount", "TriggerCount$NumBlockers/Minus.1");
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
