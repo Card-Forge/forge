@@ -1,8 +1,7 @@
 Name:Maelstrom Nexus
 ManaCost:W U B R G
 Types:Enchantment
-
-S:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Exile,Graveyard,Hand,Library,Command | CheckSVar$ Y | SVarCompare$ EQ1 | AddKeyword$ Cascade | Description$ The first spell you cast each turn has cascade. 
+S:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Exile,Graveyard,Hand,Library,Command | CheckSVar$ Y | SVarCompare$ EQ0 | AddKeyword$ Cascade | Description$ The first spell you cast each turn has cascade. 
 SVar:Y:Count$ThisTurnCast_Card.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_nexus.jpg
 Oracle:The first spell you cast each turn has cascade. (When you cast your first spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
