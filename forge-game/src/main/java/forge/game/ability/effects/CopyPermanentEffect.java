@@ -222,6 +222,10 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.setBaseToughness(toughness);
                     }
 
+                    if (sa.hasParam("AtEOTTrig")) {
+                        addSelfTrigger(sa, sa.getParam("AtEOTTrig"), copy);
+                    }
+                    
                     copy.updateStateForView();
 
                     // Temporarily register triggers of an object created with CopyPermanent
@@ -236,9 +240,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     sa.getHostCard().addClone(copyInPlay);
                     if (!pumpKeywords.isEmpty()) {
                         copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, timestamp);
-                    }
-                    if (sa.hasParam("AtEOTTrig")) {
-                        addSelfTrigger(sa, sa.getParam("AtEOTTrig"), copyInPlay);
                     }
                     crds.add(copyInPlay);
                     if (sa.hasParam("RememberCopied")) {
