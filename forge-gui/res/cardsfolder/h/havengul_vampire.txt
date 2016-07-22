@@ -4,6 +4,6 @@ Types:Creature Vampire
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ DeathGift | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ DeathGift | TriggerDescription$ Whenever another creature dies, put a +1/+1 counter on CARDNAME.
-SVar:DeathGift:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:DeathGift:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havengul_vampire.jpg
 Oracle:Whenever Havengul Vampire deals combat damage to a player, put a +1/+1 counter on it.\nWhenever another creature dies, put a +1/+1 counter on Havengul Vampire.

@@ -8,6 +8,6 @@ T:Mode$ SearchedLibrary | ValidPlayer$ Player.Opponent | SearchOwnLibrary$ True 
 SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredPlayer | SacValid$ Creature | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 10
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ DeathGift | TriggerDescription$ Whenever another creature dies, put a +1/+1 counter on CARDNAME.
-SVar:DeathGift:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:DeathGift:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_unshackled.jpg
 Oracle:Flying, trample\nWhenever an opponent searches his or her library, that player sacrifices a creature and loses 10 life.\nWhenever another creature dies, put a +1/+1 counter on Ob Nixilis, Unshackled.
