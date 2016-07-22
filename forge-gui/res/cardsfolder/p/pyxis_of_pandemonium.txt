@@ -3,9 +3,9 @@ ManaCost:1
 Types:Artifact
 A:AB$ Mill | Cost$ T | Defined$ Player | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | ExileFaceDown$ True | SpellDescription$ Each player exiles the top card of his or her library face down.
 A:AB$ SetState | Cost$ 7 T Sac<1/CARDNAME> | Defined$ Remembered | Mode$ TurnFace | SubAbility$ DBChangeZone | SpellDescription$ Each player turns face up all cards he or she owns exiled with CARDNAME, then puts all permanent cards among them onto the battlefield.
-SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Permanent.IsRemembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Permanent.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True

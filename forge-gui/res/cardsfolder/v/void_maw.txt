@@ -6,10 +6,10 @@ K:Trample
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | ReplaceWith$ Exile | Description$ If another creature would die, exile it instead.
 SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ DBRemember
 SVar:DBRemember:DB$ Pump | RememberObjects$ ReplacedCard | ConditionDefined$ ReplacedCard | ConditionPresent$ Card.inZoneExile | ConditionCompare$ GE1
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Pump | Cost$ ExiledMoveToGrave<1/Card.IsRemembered/card exiled with CARDNAME> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+A:AB$ Pump | Cost$ ExiledMoveToGrave<1/Card.IsRemembered+ExiledWithSource/card exiled with CARDNAME> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/void_maw.jpg
 Oracle:Trample\nIf another creature would die, exile it instead.\nPut a card exiled with Void Maw into its owner's graveyard: Void Maw gets +2/+2 until end of turn.

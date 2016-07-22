@@ -2,7 +2,11 @@ Name:Synod Sanctum
 ManaCost:1
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Choose target permanent you control. | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SpellDescription$ Exile target permanent you control.
-A:AB$ ChangeZone | Cost$ 2 Sac<1/CARDNAME> | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SpellDescription$ Return all cards exiled with CARDNAME to the battlefield under your control.
+A:AB$ ChangeZoneAll | Cost$ 2 Sac<1/CARDNAME> | ChangeType$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SpellDescription$ Return all cards exiled with CARDNAME to the battlefield under your control.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synod_sanctum.jpg
 Oracle:{2}, {T}: Exile target permanent you control.\n{2}, Sacrifice Synod Sanctum: Return all cards exiled with Synod Sanctum to the battlefield under your control.
