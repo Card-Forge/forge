@@ -2237,11 +2237,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void removeTempController(final Player player) {
         // Remove each key that yields this player
-        for(Entry<Long,Player> kv : tempControllers.entrySet()) {
-            if (kv.getValue().equals(player)) {
-                tempControllers.remove(kv.getKey());
-            }
-        }
+        this.tempControllers.values().remove(player);
     }
 
     public final void clearTempControllers() {
@@ -4223,6 +4219,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 if (!matched)
                     return false;
+            } else if (property.endsWith("Equipped")) {
+                final Card equipee = source.getEquipping();
+                if (equipee == null || !receivedDamageFromThisTurn.containsKey(equipee))
+                    return false;
+            } else if (property.endsWith("Enchanted")) {
+                final Card equipee = source.getEnchantingCard();
+                if (equipee == null || !receivedDamageFromThisTurn.containsKey(equipee))
+                    return false;
             }
         } else if (property.startsWith("Damaged")) {
             if (!dealtDamageToThisTurn.containsKey(source)) {
@@ -4703,22 +4707,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
             if ((getReceivedDamageFromThisTurn().keySet()).isEmpty()) {
-                return false;
-            }
-        } else if (property.equals("wasDealtDamageByHostThisTurn")) {
-            if (!getReceivedDamageFromThisTurn().keySet().contains(source)) {
-                return false;
-            }
-        } else if (property.equals("wasDealtDamageByEquipeeThisTurn")) {
-            Card equipee = source.getEquipping();
-            if (equipee == null || getReceivedDamageFromThisTurn().keySet().isEmpty()
-                    || !getReceivedDamageFromThisTurn().keySet().contains(equipee)) {
-                return false;
-            }
-         } else if (property.equals("wasDealtDamageByEnchantedThisTurn")) {
-            Card enchanted = source.getEnchantingCard();
-            if (enchanted == null || getReceivedDamageFromThisTurn().keySet().isEmpty()
-                    || !getReceivedDamageFromThisTurn().keySet().contains(enchanted)) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageThisTurn")) {
