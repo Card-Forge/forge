@@ -6,7 +6,7 @@ K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target Spirit gains hexproof until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Spirit | TgtPrompt$ Select target Spirit | KW$ Hexproof
-S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Spirit.YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Command,Exile,Graveyard,Hand,Library | Description$ You may cast artifact, creature, and enchantment spells as though they had flash. 
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Spirit.YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Command,Exile,Graveyard,Hand,Library | Description$ You may Spirit spells as though they had flash. 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rattlechains.jpg
 Oracle:Flash\nFlying\nWhen Rattlechains enters the battlefield, target Spirit gains hexproof until end of turn.\nYou may cast Spirit spells as though they had flash.
 
