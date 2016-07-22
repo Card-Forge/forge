@@ -5,7 +5,7 @@ PT:1/1
 K:Indestructible
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, put a +1/+1 counter on CARDNAME.
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on it.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predator_ooze.jpg
 Oracle:Indestructible\nWhenever Predator Ooze attacks, put a +1/+1 counter on it.\nWhenever a creature dealt damage by Predator Ooze this turn dies, put a +1/+1 counter on Predator Ooze.
