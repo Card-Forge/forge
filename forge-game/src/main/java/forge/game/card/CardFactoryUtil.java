@@ -2503,6 +2503,9 @@ public class CardFactoryUtil {
                 card.addTrigger(parsedTriggerOther);
                 card.setSVar("TrigBondSelf", abStringOther);
             }
+            else if (keyword.equals("Conspire")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Exalted")) {
                 addTriggerAbility(keyword, card, null);
             }
@@ -2930,6 +2933,17 @@ public class CardFactoryUtil {
             final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, intrinsic);
 
             final Trigger cardTrigger = card.addTrigger(cascadeTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Conspire")) {
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ TrigConspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
+            final String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1";
+
+            card.setSVar("TrigConspire", abString);
+            final Trigger conspireTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
+
+            final Trigger cardTrigger = card.addTrigger(conspireTrigger);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }

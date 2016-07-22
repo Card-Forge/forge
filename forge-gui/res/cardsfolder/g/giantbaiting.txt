@@ -1,13 +1,10 @@
 Name:Giantbaiting
 ManaCost:2 RG
 Types:Sorcery
-A:SP$ Token | Cost$ 2 RG | TokenAmount$ 1 | TokenName$ Giant Warrior | TokenTypes$ Creature,Giant,Warrior | TokenOwner$ You | TokenColors$ Red,Green | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Haste | TokenSVars$ GiantbaitingEOT | RememberTokens$ True | SubAbility$ DelTrig | SpellDescription$ Put a 4/4 red and green Giant Warrior creature token with haste onto the battlefield. Exile it at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ Exile the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Token | Cost$ 2 RG | TokenAmount$ 1 | TokenName$ Giant Warrior | TokenTypes$ Creature,Giant,Warrior | TokenOwner$ You | TokenColors$ Red,Green | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Haste | TokenSVars$ GiantbaitingEOT | AtEOT$ Exile | SpellDescription$ Put a 4/4 red and green Giant Warrior creature token with haste onto the battlefield. Exile it at the beginning of the next end step.
 SVar:GiantbaitingEOT:SVar:EndOfTurnLeavePlay:True
+
 K:Conspire
-T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
-SVar:Conspire:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giantbaiting.jpg
 Oracle:Put a 4/4 red and green Giant Warrior creature token with haste onto the battlefield. Exile it at the beginning of the next end step.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it.)
