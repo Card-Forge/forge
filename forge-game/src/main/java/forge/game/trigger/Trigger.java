@@ -25,6 +25,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -381,7 +382,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return the triggered sa
      */
     public final Ability getTriggeredSA() {
-        System.out.println("TriggeredSA = " + this.triggeredSA);
         return this.triggeredSA;
     }
 
@@ -427,7 +427,16 @@ public abstract class Trigger extends TriggerReplacementBase {
         final Trigger copy = tt.createTrigger(originalMapParams, newHost, intrinsic); 
 
         if (this.getOverridingAbility() != null) {
-            copy.setOverridingAbility(this.getOverridingAbility());
+            SpellAbility old = this.getOverridingAbility();
+            SpellAbility sa = old;
+            // try to copy it if newHost is not the wanted host
+            if (!newHost.equals(old.getHostCard())) {
+	            if (old instanceof AbilitySub) {
+	                sa = ((AbilitySub)old).getCopy();
+	                sa.setHostCard(newHost);
+	            }
+            }
+            copy.setOverridingAbility(sa);
         }
 
         // 2015-03-07 Removing the ID copying which makes copied triggers Identical to each other when removing
