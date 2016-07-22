@@ -193,10 +193,21 @@ public abstract class SpellAbilityEffect {
     }
     
 
-    protected static void registerDelayedTrigger(final SpellAbility sa, final String location, final List<Card> crds) {
-        String delTrig = "Mode$ Phase | Phase$ End Of Turn | TriggerDescription$ "
-                + location + " " + crds + " at the beginning of the next end step.";
-        final Trigger trig = TriggerHandler.parseTrigger(delTrig, sa.getHostCard(), true);
+    protected static void registerDelayedTrigger(final SpellAbility sa, String location, final List<Card> crds) {
+        boolean your = location.startsWith("Your");
+        if (your) {
+            location = location.substring("Your".length());
+        }
+
+        StringBuilder delTrig = new StringBuilder();
+            delTrig.append("Mode$ Phase | Phase$ End Of Turn ");
+            if (your) {
+                delTrig.append("| ValidPlayer$ You ");
+            }
+            delTrig.append("| TriggerDescription$ " + location + " " + crds + " at the beginning of ");
+            delTrig.append(your ? "your" : "the");
+            delTrig.append(" next end step.");
+        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), true);
         for (final Card c : crds) {
             trig.addRemembered(c);
         }
@@ -205,6 +216,8 @@ public abstract class SpellAbilityEffect {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
         } else if (location.equals("Exile")) {
             trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
+        } else if (location.equals("Destroy")) {
+            trigSA = "DB$ Destroy | Cost$ 0 | Defined$ DelayTriggerRemembered";
         }
         trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, sa.getHostCard()));
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
