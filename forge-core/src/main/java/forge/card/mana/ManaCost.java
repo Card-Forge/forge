@@ -273,6 +273,23 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      * TODO: Write javadoc for this method.
      * @return
      */
+    public String getShortString() {
+    	StringBuilder sb = new StringBuilder();
+        int generic = getGenericCost();
+        if (generic > 0) {
+            sb.append(generic);
+        }
+        for (ManaCostShard s : this.shards) {
+            sb.append(' ');
+            sb.append(s);
+        }
+        return sb.toString().trim();
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
     public boolean hasPhyrexian() {
         for (ManaCostShard shard : shards) {
             if (shard.isPhyrexian()) {

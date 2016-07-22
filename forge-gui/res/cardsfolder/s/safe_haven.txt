@@ -3,7 +3,13 @@ ManaCost:no cost
 Types:Land
 A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target permanent you control. | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SpellDescription$ Exile target permanent you control.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may sacrifice CARDNAME. If you do, return each card exiled with CARDNAME to the battlefield under its owner's control.
-SVar:TrigReturn:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
+SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ Sac<1/CARDNAME> | ChangeType$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Battlefield
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safe_haven.jpg
 Oracle:{2}, {T}: Exile target creature you control.\nAt the beginning of your upkeep, you may sacrifice Safe Haven. If you do, return each card exiled with Safe Haven to the battlefield under its owner's control.

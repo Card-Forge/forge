@@ -264,6 +264,9 @@ public final class CardUtil {
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);
         }
+
+        newCopy.setZone(in.getZone());
+
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
         newCopy.setTriggers(in.getTriggers(), false);

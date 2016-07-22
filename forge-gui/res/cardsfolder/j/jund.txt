@@ -2,14 +2,7 @@ Name:Jund
 ManaCost:no cost
 Types:Plane Alara
 T:Mode$ SpellCast | ValidCard$ Creature.Black,Creature.Red,Creature.Green | ValidActivatingPlayer$ Player | TriggerZones$ Command | Execute$ DevourPump | TriggerDescription$ Whenever a player casts a black, red, or green creature spell, it gains devour 5. (As the creature enters the battlefield, its controller may sacrifice any number of creatures. The creature enters the battlefield with five times that many +1/+1 counters on it.)
-SVar:DevourPump:AB$ Animate | Cost$ 0 | Defined$ TriggeredCard | Replacements$ etbDevour | sVars$ JundETB,JundSac,JundSacX,JundRememberedX,JundCounters,JundCleanup | Permanent$ True
-SVar:etbDevour:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ JundETB | Description$ Devour 5 (As the creature enters the battlefield, its controller may sacrifice any number of creatures. The creature enters the battlefield with five times that many +1/+1 counters on it.)
-SVar:JundSac:DB$ Sacrifice | Defined$ You | Amount$ JundSacX | References$ JundSacX | SacValid$ Creature.Other | RememberSacrificed$ True | SacMessage$ another creature (Devour 5) | Optional$ True | Devour$ True | SubAbility$ JundCounters
-SVar:JundETB:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | SubAbility$ JundSac
-SVar:JundSacX:Count$Valid Creature.YouCtrl+Other
-SVar:JundCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:JundRememberedX:Count$RememberedSize/Times.5
-SVar:JundCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ JundRememberedX | References$ JundRememberedX | SubAbility$ JundCleanup
+SVar:DevourPump:AB$ Animate | Cost$ 0 | Defined$ TriggeredCard | Keywords$ Devour:5 | Permanent$ True
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, put two 1/1 red Goblin creature tokens onto the battlefield.
 SVar:RolledChaos:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenPower$ 1 | TokenName$ Goblin | TokenToughness$ 1 | TokenColors$ Red | TokenTypes$ Creature,Goblin | TokenOwner$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund.jpg

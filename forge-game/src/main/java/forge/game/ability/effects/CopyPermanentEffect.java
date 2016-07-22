@@ -64,6 +64,10 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final List<String> types = new ArrayList<String>();
         final List<String> svars = new ArrayList<String>();
         final List<String> triggers = new ArrayList<String>();
+        final List<String> pumpKeywords = new ArrayList<String>();
+
+        final long timestamp = game.getNextTimestamp();
+
         if (sa.hasParam("Optional")) {
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, "Copy this permanent?")) {
                 return;
@@ -71,6 +75,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
+        }
+        if (sa.hasParam("PumpKeywords")) {
+            pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
         }
         if (sa.hasParam("AddTypes")) {
             types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
@@ -215,6 +222,10 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.setBaseToughness(toughness);
                     }
 
+                    if (sa.hasParam("AtEOTTrig")) {
+                        addSelfTrigger(sa, sa.getParam("AtEOTTrig"), copy);
+                    }
+                    
                     copy.updateStateForView();
 
                     // Temporarily register triggers of an object created with CopyPermanent
@@ -227,6 +238,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                     copyInPlay.setCloneOrigin(hostCard);
                     sa.getHostCard().addClone(copyInPlay);
+                    if (!pumpKeywords.isEmpty()) {
+                        copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, timestamp);
+                    }
                     crds.add(copyInPlay);
                     if (sa.hasParam("RememberCopied")) {
                         hostCard.addRemembered(copyInPlay);
@@ -298,10 +312,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     }
 
                 }
-                
+
                 if (sa.hasParam("AtEOT")) {
-                    final String location = sa.getParam("AtEOT");
-                    registerDelayedTrigger(sa, location, crds);
+                    registerDelayedTrigger(sa, sa.getParam("AtEOT"), crds);
                 }
                 if (sa.hasParam("ImprintCopied")) {
                     hostCard.addImprintedCards(crds);
@@ -309,22 +322,4 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             } // end canBeTargetedBy
         } // end foreach Card
     } // end resolve
-
-    private static void registerDelayedTrigger(final SpellAbility sa, final String location, final List<Card> crds) {
-        String delTrig = "Mode$ Phase | Phase$ End Of Turn | TriggerDescription$ "
-                + location + " " + crds + " at the beginning of the next end step.";
-        final Trigger trig = TriggerHandler.parseTrigger(delTrig, sa.getHostCard(), true);
-        for (final Card c : crds) {
-            trig.addRemembered(c);
-        }
-        String trigSA = "";
-        if (location.equals("Sacrifice")) {
-            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
-        } else if (location.equals("Exile")) {
-            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
-        }
-        trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, sa.getHostCard()));
-        sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
-    }
-
 }

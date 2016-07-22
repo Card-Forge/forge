@@ -39,6 +39,7 @@ import forge.game.cost.Cost;
 import forge.game.event.*;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.replacement.ReplaceMoved;
@@ -1320,11 +1321,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else {
                     sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
                 }
-            } else if (keyword.startsWith("Devour")) {
-                final String[] parts = keyword.split(":");
-                final String extra = parts.length > 2 ? parts[2] : "";
-                final String devour = "Devour " + parts[1] + extra;
-                sbLong.append(devour).append("\r\n");
             } else if (keyword.startsWith("Morph")) {
                 sbLong.append("Morph");
                 if (keyword.contains(":")) {
@@ -1393,12 +1389,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.contains("At the beginning of your upkeep, ")
                     && keyword.contains(" unless you pay")) {
                 sbLong.append(keyword).append("\r\n");
+            } else if (keyword.startsWith("Sunburst") && hasStartOfKeyword("Modular")) {
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
-            } else if (keyword.startsWith("Provoke")) {
-                sbLong.append(keyword);
-                sbLong.append(" (When this attacks, you may have target creature ");
-                sbLong.append("defending player controls untap and block it if able.)");
+            } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour")) {
+                sbLong.append(keyword + "(" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.contains("Haunt")) {
                 sb.append("\r\nHaunt (");
                 if (isCreature()) {
@@ -1408,16 +1403,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("exile it haunting target creature.");
                 }
                 sb.append(")");
-            } else if (keyword.equals("Convoke")) {
-                if (sb.length() != 0) {
-                    sb.append("\r\n");
-                }
-                sb.append("Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)");
-            } else if (keyword.equals("Menace")) {
-                if (sb.length() != 0) {
-                    sb.append("\r\n");
-                }
-                sb.append("Menace (This creature can't be blocked except by two or more creatures.)");
+            } else if (keyword.equals("Convoke") || keyword.equals("Menace") || keyword.equals("Dethrone")) {
+                sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.endsWith(" offering")) {
                 String offeringType = keyword.split(" ")[0];
                 if (sb.length() != 0) {
@@ -1430,12 +1417,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(offeringType);
                 sbLong.append(". Mana cost includes color.)");
             } else if (keyword.startsWith("Soulbond")) {
-                sbLong.append(keyword);
-                sbLong.append(" (You may pair this creature ");
-                sbLong.append("with another unpaired creature when either ");
-                sbLong.append("enters the battlefield. They remain paired for ");
-                sbLong.append("as long as you control both of them)");
-            } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")) {
+                sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
+            } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
+                    || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedBy")) {
                 sbLong.append(getName()).append(" can't be blocked ");
@@ -2253,11 +2237,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void removeTempController(final Player player) {
         // Remove each key that yields this player
-        for(Entry<Long,Player> kv : tempControllers.entrySet()) {
-            if (kv.getValue().equals(player)) {
-                tempControllers.remove(kv.getKey());
-            }
-        }
+        this.tempControllers.values().remove(player);
     }
 
     public final void clearTempControllers() {
@@ -3004,18 +2984,23 @@ public class Card extends GameEntity implements Comparable<Card> {
         // if the key already exists - merge entries
         final KeywordsChange cks = changedCardKeywords.get(timestamp);
         if (cks != null) {
+        	cks.removeKeywords(this);
             List<String> kws = new ArrayList<>(keywords);
             List<String> rkws = new ArrayList<>(removeKeywords);
             boolean remAll = removeAllKeywords;
             kws.addAll(cks.getKeywords());
             rkws.addAll(cks.getRemoveKeywords());
             remAll |= cks.isRemoveAllKeywords();
-            changedCardKeywords.put(timestamp, new KeywordsChange(kws, rkws, remAll));
+            final KeywordsChange newCks = new KeywordsChange(kws, rkws, remAll);
+            newCks.addKeywordsToCard(this);
+            changedCardKeywords.put(timestamp, newCks);
         }
         else {
-            changedCardKeywords.put(timestamp, new KeywordsChange(keywords, removeKeywords, removeAllKeywords));
+            final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
+            newCks.addKeywordsToCard(this);
+            changedCardKeywords.put(timestamp, newCks);
         }
-        currentState.getView().updateKeywords(this, currentState);
+        updateKeywords();
     }
 
     public final void addChangedCardKeywords(final String[] keywords, final String[] removeKeywords,
@@ -3036,7 +3021,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final KeywordsChange removeChangedCardKeywords(final long timestamp) {
         KeywordsChange change = changedCardKeywords.remove(timestamp);
         if (change != null) {
-            currentState.getView().updateKeywords(this, currentState);
+            change.removeKeywords(this);
+            updateKeywords();
         }
         return change;
     }
@@ -3599,7 +3585,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (kw.startsWith(k)) {
                 final String[] parse = kw.split(" ");
                 final String s = parse[1];
-                count += Integer.parseInt(s);
+                if (StringUtils.isNumeric(s)) {
+                   count += Integer.parseInt(s);
+                } else {
+                    String svar = StringUtils.join(parse);
+                    if (state.hasSVar(svar)) {
+                        count += AbilityUtils.calculateAmount(this, state.getSVar(svar), null);
+                    }
+                }
             }
         }
         return count;
@@ -4226,6 +4219,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 if (!matched)
                     return false;
+            } else if (property.endsWith("Equipped")) {
+                final Card equipee = source.getEquipping();
+                if (equipee == null || !receivedDamageFromThisTurn.containsKey(equipee))
+                    return false;
+            } else if (property.endsWith("Enchanted")) {
+                final Card equipee = source.getEnchantingCard();
+                if (equipee == null || !receivedDamageFromThisTurn.containsKey(equipee))
+                    return false;
             }
         } else if (property.startsWith("Damaged")) {
             if (!dealtDamageToThisTurn.containsKey(source)) {
@@ -4706,22 +4707,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
             if ((getReceivedDamageFromThisTurn().keySet()).isEmpty()) {
-                return false;
-            }
-        } else if (property.equals("wasDealtDamageByHostThisTurn")) {
-            if (!getReceivedDamageFromThisTurn().keySet().contains(source)) {
-                return false;
-            }
-        } else if (property.equals("wasDealtDamageByEquipeeThisTurn")) {
-            Card equipee = source.getEquipping();
-            if (equipee == null || getReceivedDamageFromThisTurn().keySet().isEmpty()
-                    || !getReceivedDamageFromThisTurn().keySet().contains(equipee)) {
-                return false;
-            }
-         } else if (property.equals("wasDealtDamageByEnchantedThisTurn")) {
-            Card enchanted = source.getEnchantingCard();
-            if (enchanted == null || getReceivedDamageFromThisTurn().keySet().isEmpty()
-                    || !getReceivedDamageFromThisTurn().keySet().contains(enchanted)) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageThisTurn")) {
@@ -6370,21 +6355,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                         break;
                     case "CARDNAME can't be equipped.":
                         if (source.isEquipment()) {
-                            result.setFalse();
-                        }
-                        break;
-                    case "CARDNAME can't be the target of red spells or abilities from red sources.":
-                        if (source.isRed()) {
-                            result.setFalse();
-                        }
-                        break;
-                    case "CARDNAME can't be the target of black spells.":
-                        if (source.isBlack() && sa.isSpell()) {
-                            result.setFalse();
-                        }
-                        break;
-                    case "CARDNAME can't be the target of blue spells.":
-                        if (source.isBlue() && sa.isSpell()) {
                             result.setFalse();
                         }
                         break;

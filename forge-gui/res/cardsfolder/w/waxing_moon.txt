@@ -8,6 +8,8 @@ A:SP$ SetState | Cost$ 1 G | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card.Werew
 
 SVar:DBPumpAll:DB$ PumpAll | KW$ Trample | ValidCards$ Creature.YouCtrl
 
+SVar:RemRandomDeck:True
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waxing_moon.jpg
 
 Oracle:Transform up to one target Werewolf you control. Creatures you control gain trample until end of turn.

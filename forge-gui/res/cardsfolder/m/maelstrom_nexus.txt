@@ -1,12 +1,7 @@
 Name:Maelstrom Nexus
 ManaCost:W U B R G
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | CheckSVar$ Y | SVarCompare$ EQ1 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ MaelstromCascade | TriggerDescription$ The first spell you cast each turn has cascade. (When you cast your first spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-SVar:MaelstromCascade:AB$ DigUntil | Cost$ 0 | Defined$ You | Amount$ 1 | Valid$ Card.nonLand+cmcLTX | FoundDestination$ Exile | RevealedDestination$ Exile | References$ X | ImprintRevealed$ True | RememberFound$ True | SubAbility$ DBCast
-SVar:DBCast:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ DBMoveToLib
-SVar:DBMoveToLib:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:X:Count$TriggeredCardManaCost
+S:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Exile,Graveyard,Hand,Library,Command | CheckSVar$ Y | SVarCompare$ EQ0 | AddKeyword$ Cascade | Description$ The first spell you cast each turn has cascade. 
 SVar:Y:Count$ThisTurnCast_Card.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_nexus.jpg
 Oracle:The first spell you cast each turn has cascade. (When you cast your first spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)

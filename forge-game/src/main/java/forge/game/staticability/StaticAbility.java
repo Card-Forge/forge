@@ -150,11 +150,15 @@ public class StaticAbility extends CardTraitBase {
             layers.add(StaticAbilityLayer.MODIFYPT);
         }
 
-        if (layers.isEmpty() || this.mapParams.containsKey("AddHiddenKeyword")) {
+        if (this.mapParams.containsKey("AddHiddenKeyword")) {
         	// special rule for can't have or gain
             if (this.mapParams.get("AddHiddenKeyword").contains("can't have or gain")) {
                 layers.add(StaticAbilityLayer.ABILITIES1);
             }
+            layers.add(StaticAbilityLayer.RULES);
+        }
+
+        if (layers.isEmpty()) {
             layers.add(StaticAbilityLayer.RULES);
         }
 

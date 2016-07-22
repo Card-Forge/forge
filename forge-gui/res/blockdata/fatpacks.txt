@@ -60,4 +60,4 @@ ORI: 9 Boosters, 80 BasicLands
 BFZ: 9 Boosters, 80 BasicLands
 OGW: 9 Boosters, 66 BasicLands BFZ, 14 name('Wastes')
 SOI: 9 Boosters, 80 BasicLands
-EMN: 9 Boosters, 80 BasicLands
+EMN: 9 Boosters, 80 BasicLands SOI

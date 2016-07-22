@@ -21,6 +21,12 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+
 /**
  * <p>
  * Card_Keywords class.
@@ -34,6 +40,9 @@ public class KeywordsChange {
     private final List<String> removeKeywords;
     private final boolean removeAllKeywords;
 
+    private List<Trigger> triggers = Lists.<Trigger>newArrayList();
+    private List<ReplacementEffect> replacements = Lists.<ReplacementEffect>newArrayList();
+    private List<SpellAbility> abilities = Lists.<SpellAbility>newArrayList();
     /**
      * 
      * Construct a new {@link KeywordsChange}.
@@ -85,5 +94,37 @@ public class KeywordsChange {
         return !this.removeAllKeywords
                 && this.keywords.isEmpty()
                 && this.removeKeywords.isEmpty();
+    }
+
+    public final void addKeywordsToCard(final Card host) {
+        for (String k : keywords) {
+            CardFactoryUtil.addTriggerAbility(k, host, this);
+            CardFactoryUtil.addReplacementEffect(k, host, this);
+            CardFactoryUtil.addSpellAbility(k, host, this);
+        }
+    }
+
+    public final void removeKeywords(final Card host) {
+        for (Trigger t : triggers) {
+            host.removeTrigger(t);
+        }
+        for (ReplacementEffect r : replacements) {
+            host.removeReplacementEffect(r);
+        }
+        for (SpellAbility s : abilities) {
+            host.removeSpellAbility(s);
+        }
+    }
+
+    public final void addTrigger(final Trigger trg) {
+        triggers.add(trg);
+    }
+    
+    public final void addReplacement(final ReplacementEffect trg) {
+        replacements.add(trg);
+    }
+
+    public final void addSpellAbility(final SpellAbility s) {
+        abilities.add(s);
     }
 }

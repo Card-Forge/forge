@@ -3,7 +3,6 @@ ManaCost:5 B
 Types:Creature Insect
 PT:3/3
 K:Flying
-A:AB$ PutCounter | Cost$ 2 B B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | References$ X | PrecostDesc$ Scavenge | SpellDescription$ Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.
-SVar:X:Count$CardPower
+K:Scavenge:2 B B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zanikev_locust.jpg
 Oracle:Flying\nScavenge {2}{B}{B} ({2}{B}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)

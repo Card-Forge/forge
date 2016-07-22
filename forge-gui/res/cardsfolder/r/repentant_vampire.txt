@@ -4,8 +4,8 @@ Types:Creature Vampire
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, put a +1/+1 counter on CARDNAME.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME is white. | AddAbility$ Destroy | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME is white and has "{T}: Destroy target black creature."
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
+S:Mode$ Continuous | Affected$ Card.Self | SetColor$ White | AddAbility$ Destroy | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME is white and has "{T}: Destroy target black creature."
 SVar:Destroy:AB$Destroy | Cost$ T | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | SpellDescription$ Destroy target black creature.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repentant_vampire.jpg

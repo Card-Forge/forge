@@ -5,6 +5,13 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
 
     @Override
     protected void parse(String details) {
+        if ("Creature".equals(details)) {
+            type = "creature";
+        } else if (details.contains(":")) {
+            type = details.split(":")[1];
+        } else {
+            type = details;
+        }
     }
 
     @Override

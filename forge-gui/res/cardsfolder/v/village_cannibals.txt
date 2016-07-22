@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Human
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Card.Other+Human | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Human creature dies, put a +1/+1 counter on CARDNAME.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/village_cannibals.jpg
 Oracle:Whenever another Human creature dies, put a +1/+1 counter on Village Cannibals.

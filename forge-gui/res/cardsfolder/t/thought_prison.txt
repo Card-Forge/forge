@@ -3,9 +3,11 @@ ManaCost:5
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may have target player reveal his or her hand. If you do, choose a nonland card from it and exile that card.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Chooser$ You | Imprint$ True | Hidden$ True
-T:Mode$ SpellCast | ValidCard$ Card.cmcEQThoughtX,Card.SharesColorWith Imprinted | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell that shares a color or converted mana cost with the exiled card, CARDNAME deals 2 damage to that player.
+T:Mode$ SpellCast | ValidCard$ Card.SharesCMCWith Imprinted.ExiledWithSource,Card.SharesColorWith Imprinted.ExiledWithSource | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell that shares a color or converted mana cost with the exiled card, CARDNAME deals 2 damage to that player.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ 2 | Defined$ TriggeredActivator
-SVar:ThoughtX:Count$ImprintedCardManaCost
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:RemAIDeck:True

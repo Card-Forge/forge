@@ -15,6 +15,8 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.util.collect.FCollection;
 
 /**
@@ -188,5 +190,65 @@ public abstract class SpellAbilityEffect {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargets()) 
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
+    }
+    
+
+    protected static void registerDelayedTrigger(final SpellAbility sa, String location, final List<Card> crds) {
+        boolean your = location.startsWith("Your");
+        boolean combat = location.endsWith("Combat");
+
+        if (your) {
+            location = location.substring("Your".length());
+        }
+        if (combat) {
+            location = location.substring(0, location.length() - "Combat".length());
+        }
+
+        StringBuilder delTrig = new StringBuilder();
+            delTrig.append("Mode$ Phase | Phase$ ");
+            delTrig.append(combat ? "EndCombat "  : "End Of Turn ");
+ 
+            if (your) {
+                delTrig.append("| ValidPlayer$ You ");
+            }
+            delTrig.append("| TriggerDescription$ " + location + " " + crds + " at the ");
+            if (combat) {
+                delTrig.append("end of combat.");
+            } else {
+                delTrig.append("beginning of ");
+                delTrig.append(your ? "your" : "the");
+                delTrig.append(" next end step.");
+            }
+        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), true);
+        for (final Card c : crds) {
+            trig.addRemembered(c);
+        }
+        String trigSA = "";
+        if (location.equals("Sacrifice")) {
+            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
+        } else if (location.equals("Exile")) {
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
+        } else if (location.equals("Destroy")) {
+            trigSA = "DB$ Destroy | Cost$ 0 | Defined$ DelayTriggerRemembered";
+        }
+        trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, sa.getHostCard()));
+        sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
+    }
+    
+    protected static void addSelfTrigger(final SpellAbility sa, String location, final Card card) {
+    	
+    	String trigStr = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield " +
+    	     "| TriggerDescription$ At the beginning of the end step, " + location.toLowerCase()  + " CARDNAME.";
+    	
+    	final Trigger trig = TriggerHandler.parseTrigger(trigStr, card, true);
+    	
+    	String trigSA = "";
+        if (location.equals("Sacrifice")) {
+            trigSA = "DB$ Sacrifice | SacValid$ Self";
+        } else if (location.equals("Exile")) {
+            trigSA = "DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self";
+        }
+        trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, card));
+        card.addTrigger(trig);
     }
 }

@@ -3,7 +3,7 @@ ManaCost:2 B R G
 Types:Legendary Creature Human Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature is put into a graveyard from the battlefield, you may put X +1/+1 counters on CARDNAME, where X is that creature's power.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X | ConditionPresent$ Card.StrictlySelf
 SVar:X:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kresh_the_bloodbraided.jpg
 Oracle:Whenever another creature dies, you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power.

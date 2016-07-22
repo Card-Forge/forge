@@ -134,8 +134,8 @@ public class TokenEffect extends SpellAbilityEffect {
             this.tokenOriginalName = mapParams.getOriginalMapParams().get("TokenName");
             this.tokenName = mapParams.getParam("TokenName");
         } else {
-        	this.tokenOriginalName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenOriginalTypes)).getSubtypes(), " ");
-        	this.tokenName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenTypes)).getSubtypes(), " ");
+            this.tokenOriginalName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenOriginalTypes)).getSubtypes(), " ");
+            this.tokenName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenTypes)).getSubtypes(), " ");
         }
 
         this.tokenOriginalColors = mapParams.getOriginalMapParams().get("TokenColors").split(",");
@@ -343,6 +343,9 @@ public class TokenEffect extends SpellAbilityEffect {
                 boolean combatChanged = false;
                 final Game game = controller.getGame();
                 for (final Card c : tokens) {
+                    if (sa.hasParam("AtEOTTrig")) {
+                        addSelfTrigger(sa, sa.getParam("AtEOTTrig"), c);
+                    }
                     if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
                         final Combat combat = game.getPhaseHandler().getCombat();
                         final FCollectionView<GameEntity> defs = combat.getDefenders();
@@ -389,6 +392,9 @@ public class TokenEffect extends SpellAbilityEffect {
                 if (combatChanged) {
                     game.updateCombatForView();
                     game.fireEvent(new GameEventCombatChanged());
+                }                
+                if (sa.hasParam("AtEOT")) {
+                    registerDelayedTrigger(sa, sa.getParam("AtEOT"), tokens);
                 }
             }
         }

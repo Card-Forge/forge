@@ -20,6 +20,7 @@ package forge.game.trigger;
 import java.util.Map;
 
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 
 /**
@@ -57,17 +58,22 @@ public class TriggerAttackerBlocked extends Trigger {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ValidBlocker")) {
-            boolean valid = false;
-            @SuppressWarnings("unchecked")
-            final Iterable<Card> list = (Iterable<Card>) runParams2.get("Blockers");
-            for (final Card b : list) {
-                if (matchesValid(b, this.mapParams.get("ValidBlocker").split(","), this.getHostCard())) {
-                    valid = true;
-                    break;
-                }
+
+        if (this.mapParams.containsKey("MinBlockers")) {
+            if ((int)runParams2.get("NumBlockers") < Integer.valueOf(this.mapParams.get("MinBlockers"))) {
+                return false;
             }
-            if (!valid) {
+        }
+
+        if (this.mapParams.containsKey("ValidBlocker")) {
+            @SuppressWarnings("unchecked")
+            int count = CardLists.getValidCardCount(
+                    (Iterable<Card>) runParams2.get("Blockers"),
+                    this.mapParams.get("ValidBlocker"),
+                    this.getHostCard().getController(), this.getHostCard()
+            );
+
+            if ( count == 0 ) {
                 return false;
             }
         }

@@ -5,7 +5,7 @@ PT:4/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all lands.
 SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Land | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigRecall | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to the battlefield tapped under their owners' control.
-SVar:TrigRecall:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Remembered | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
+SVar:TrigRecall:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Remembered.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/realm_razer.jpg

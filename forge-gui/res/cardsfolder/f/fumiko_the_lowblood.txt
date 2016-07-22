@@ -2,10 +2,7 @@ Name:Fumiko the Lowblood
 ManaCost:2 R R
 Types:Legendary Creature Human Samurai
 PT:3/2
+K:Bushido X
 S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Creatures your opponents control attack each turn if able.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ CARDNAME has bushido X, where X is the number of attacking creatures. (When this blocks or becomes blocked, it gets +X/+X until end of turn.)
-T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ CARDNAME has bushido X, where X is the number of attacking creatures. (When this blocks or becomes blocked, it gets +X/+X until end of turn.)
-SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
-SVar:X:Count$Valid Creature.attacking
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fumiko_the_lowblood.jpg
 Oracle:Fumiko the Lowblood has bushido X, where X is the number of attacking creatures. (When this blocks or becomes blocked, it gets +X/+X until end of turn.)\nCreatures your opponents control attack each turn if able.
