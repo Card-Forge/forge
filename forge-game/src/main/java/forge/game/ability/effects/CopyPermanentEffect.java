@@ -300,8 +300,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 }
                 
                 if (sa.hasParam("AtEOT")) {
-                    final String location = sa.getParam("AtEOT");
-                    registerDelayedTrigger(sa, location, crds);
+                    registerDelayedTrigger(sa, sa.getParam("AtEOT"), crds);
                 }
                 if (sa.hasParam("ImprintCopied")) {
                     hostCard.addImprintedCards(crds);
@@ -309,22 +308,4 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             } // end canBeTargetedBy
         } // end foreach Card
     } // end resolve
-
-    private static void registerDelayedTrigger(final SpellAbility sa, final String location, final List<Card> crds) {
-        String delTrig = "Mode$ Phase | Phase$ End Of Turn | TriggerDescription$ "
-                + location + " " + crds + " at the beginning of the next end step.";
-        final Trigger trig = TriggerHandler.parseTrigger(delTrig, sa.getHostCard(), true);
-        for (final Card c : crds) {
-            trig.addRemembered(c);
-        }
-        String trigSA = "";
-        if (location.equals("Sacrifice")) {
-            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
-        } else if (location.equals("Exile")) {
-            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
-        }
-        trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, sa.getHostCard()));
-        sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
-    }
-
 }

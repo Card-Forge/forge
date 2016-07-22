@@ -15,6 +15,8 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.util.collect.FCollection;
 
 /**
@@ -188,5 +190,23 @@ public abstract class SpellAbilityEffect {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargets()) 
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
+    }
+    
+
+    protected static void registerDelayedTrigger(final SpellAbility sa, final String location, final List<Card> crds) {
+        String delTrig = "Mode$ Phase | Phase$ End Of Turn | TriggerDescription$ "
+                + location + " " + crds + " at the beginning of the next end step.";
+        final Trigger trig = TriggerHandler.parseTrigger(delTrig, sa.getHostCard(), true);
+        for (final Card c : crds) {
+            trig.addRemembered(c);
+        }
+        String trigSA = "";
+        if (location.equals("Sacrifice")) {
+            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
+        } else if (location.equals("Exile")) {
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
+        }
+        trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, sa.getHostCard()));
+        sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
     }
 }

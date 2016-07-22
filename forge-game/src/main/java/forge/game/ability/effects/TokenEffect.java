@@ -134,8 +134,8 @@ public class TokenEffect extends SpellAbilityEffect {
             this.tokenOriginalName = mapParams.getOriginalMapParams().get("TokenName");
             this.tokenName = mapParams.getParam("TokenName");
         } else {
-        	this.tokenOriginalName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenOriginalTypes)).getSubtypes(), " ");
-        	this.tokenName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenTypes)).getSubtypes(), " ");
+            this.tokenOriginalName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenOriginalTypes)).getSubtypes(), " ");
+            this.tokenName = StringUtils.join(new CardType(Lists.newArrayList(this.tokenTypes)).getSubtypes(), " ");
         }
 
         this.tokenOriginalColors = mapParams.getOriginalMapParams().get("TokenColors").split(",");
@@ -389,6 +389,9 @@ public class TokenEffect extends SpellAbilityEffect {
                 if (combatChanged) {
                     game.updateCombatForView();
                     game.fireEvent(new GameEventCombatChanged());
+                }                
+                if (sa.hasParam("AtEOT")) {
+                    registerDelayedTrigger(sa, sa.getParam("AtEOT"), tokens);
                 }
             }
         }
