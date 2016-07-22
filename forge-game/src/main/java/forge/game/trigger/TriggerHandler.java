@@ -217,10 +217,10 @@ public class TriggerHandler {
 
         while(itr.hasNext()) {
             t = itr.next();
+
             // Clear if no ZoneFrom, or not coming from the TriggerZone
             if (c.getId() == t.getHostCard().getId() && t.isIntrinsic()) {
-                if (zoneFrom == null || (!t.getMapParams().containsKey("TriggerZones") ||
-                        !t.getMapParams().get("TriggerZones").contains(zoneFrom.getZoneType().toString())))
+                if (!t.zonesCheck(zoneFrom))
                     toBeRemoved.add(t);
             }
         }
@@ -397,8 +397,18 @@ public class TriggerHandler {
         if (regtrig.isSuppressed()) {
             return false; // Trigger removed by effect
         }
-        if (!regtrig.zonesCheck(game.getZoneOf(regtrig.getHostCard()))) {
-            return false; // Host card isn't where it needs to be.
+
+        if (regtrig.getMode().equals(TriggerType.ChangesZone)) {
+            // ChangesZoneTrigger should use ChangeZoneLKI
+            final Card lki = game.getChangeZoneLKIInfo(regtrig.getHostCard());
+
+            if (!regtrig.zonesCheck(game.getZoneOf(lki))) {
+                return false; // Host card isn't where it needs to be.
+            }
+        } else {
+            if (!regtrig.zonesCheck(game.getZoneOf(regtrig.getHostCard()))) {
+                return false; // Host card isn't where it needs to be.
+            }
         }
 
         for (Trigger t : this.activeTriggers) {
