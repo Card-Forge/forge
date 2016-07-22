@@ -64,6 +64,10 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final List<String> types = new ArrayList<String>();
         final List<String> svars = new ArrayList<String>();
         final List<String> triggers = new ArrayList<String>();
+        final List<String> pumpKeywords = new ArrayList<String>();
+
+        final long timestamp = game.getNextTimestamp();
+
         if (sa.hasParam("Optional")) {
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, "Copy this permanent?")) {
                 return;
@@ -71,6 +75,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
+        }
+        if (sa.hasParam("PumpKeywords")) {
+            pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
         }
         if (sa.hasParam("AddTypes")) {
             types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
@@ -227,6 +234,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                     copyInPlay.setCloneOrigin(hostCard);
                     sa.getHostCard().addClone(copyInPlay);
+                    if (!pumpKeywords.isEmpty()) {
+                        copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, timestamp);
+                    }
                     crds.add(copyInPlay);
                     if (sa.hasParam("RememberCopied")) {
                         hostCard.addRemembered(copyInPlay);
@@ -298,7 +308,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     }
 
                 }
-                
+
                 if (sa.hasParam("AtEOT")) {
                     registerDelayedTrigger(sa, sa.getParam("AtEOT"), crds);
                 }
