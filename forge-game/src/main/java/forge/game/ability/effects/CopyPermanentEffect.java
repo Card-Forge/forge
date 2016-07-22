@@ -237,6 +237,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     if (!pumpKeywords.isEmpty()) {
                         copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, timestamp);
                     }
+                    if (sa.hasParam("AtEOTTrig")) {
+                        addSelfTrigger(sa, sa.getParam("AtEOTTrig"), copyInPlay);
+                    }
                     crds.add(copyInPlay);
                     if (sa.hasParam("RememberCopied")) {
                         hostCard.addRemembered(copyInPlay);

@@ -343,6 +343,9 @@ public class TokenEffect extends SpellAbilityEffect {
                 boolean combatChanged = false;
                 final Game game = controller.getGame();
                 for (final Card c : tokens) {
+                    if (sa.hasParam("AtEOTTrig")) {
+                        addSelfTrigger(sa, sa.getParam("AtEOTTrig"), c);
+                    }
                     if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
                         final Combat combat = game.getPhaseHandler().getCombat();
                         final FCollectionView<GameEntity> defs = combat.getDefenders();

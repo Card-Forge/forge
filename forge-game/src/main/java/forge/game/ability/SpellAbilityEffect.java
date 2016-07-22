@@ -234,4 +234,21 @@ public abstract class SpellAbilityEffect {
         trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, sa.getHostCard()));
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
     }
+    
+    protected static void addSelfTrigger(final SpellAbility sa, String location, final Card card) {
+    	
+    	String trigStr = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield " +
+    	     "| TriggerDescription$ At the beginning of the end step, " + location.toLowerCase()  + " CARDNAME.";
+    	
+    	final Trigger trig = TriggerHandler.parseTrigger(trigStr, card, true);
+    	
+    	String trigSA = "";
+        if (location.equals("Sacrifice")) {
+            trigSA = "DB$ Sacrifice | SacValid$ Self";
+        } else if (location.equals("Exile")) {
+            trigSA = "DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self";
+        }
+        trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, card));
+        card.addTrigger(trig);
+    }
 }
