@@ -195,18 +195,30 @@ public abstract class SpellAbilityEffect {
 
     protected static void registerDelayedTrigger(final SpellAbility sa, String location, final List<Card> crds) {
         boolean your = location.startsWith("Your");
+        boolean combat = location.endsWith("Combat");
+
         if (your) {
             location = location.substring("Your".length());
         }
+        if (combat) {
+            location = location.substring(0, location.length() - "Combat".length());
+        }
 
         StringBuilder delTrig = new StringBuilder();
-            delTrig.append("Mode$ Phase | Phase$ End Of Turn ");
+            delTrig.append("Mode$ Phase | Phase$ ");
+            delTrig.append(combat ? "EndCombat "  : "End Of Turn ");
+ 
             if (your) {
                 delTrig.append("| ValidPlayer$ You ");
             }
-            delTrig.append("| TriggerDescription$ " + location + " " + crds + " at the beginning of ");
-            delTrig.append(your ? "your" : "the");
-            delTrig.append(" next end step.");
+            delTrig.append("| TriggerDescription$ " + location + " " + crds + " at the ");
+            if (combat) {
+                delTrig.append("end of combat.");
+            } else {
+                delTrig.append("beginning of ");
+                delTrig.append(your ? "your" : "the");
+                delTrig.append(" next end step.");
+            }
         final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), true);
         for (final Card c : crds) {
             trig.addRemembered(c);
