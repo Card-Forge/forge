@@ -2860,23 +2860,26 @@ public class CardFactoryUtil {
             desc = !splitkw[4].equals("no desc") ? splitkw[4] : "";
         }
         String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1]
-                + " | ETB$ True | CounterNum$ " + amount +  " | SubAbility$ ETBCounterDBSVar";
-        String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                + "| Defined$ ReplacedCard";
-        try {
-            Integer.parseInt(amount);
-        }
-        catch (NumberFormatException ignored) {
+                + " | ETB$ True | CounterNum$ " + amount;
+
+        if (!StringUtils.isNumeric(amount)) {
             abStr += " | References$ " + amount;
         }
-        card.setSVar("ETBCounterSVar", abStr);
-        card.setSVar("ETBCounterDBSVar", dbStr);
+
+        SpellAbility sa = AbilityFactory.getAbility(abStr, card);
+        SpellAbility sub = setupETBReplacementAbility(sa);
+        if (!intrinsic) {
+            sa.setIntrinsic(false);
+            sub.setIntrinsic(false);
+        }
 
         String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                + "| ReplaceWith$ ETBCounterSVar | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+                + "| Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
         re.setLayer(ReplacementLayer.Other);
+
+        re.setOverridingAbility(sa);
 
         return card.addReplacementEffect(re);
     }
@@ -3437,8 +3440,10 @@ public class CardFactoryUtil {
     }
 
     private static final Map<String,String> emptyMap = new TreeMap<String,String>();
-    public static void setupETBReplacementAbility(SpellAbility sa) {
-        sa.appendSubAbility(new AbilitySub(ApiType.InternalEtbReplacement, sa.getHostCard(), null, emptyMap));
+    public static SpellAbility setupETBReplacementAbility(SpellAbility sa) {
+    	AbilitySub as = new AbilitySub(ApiType.InternalEtbReplacement, sa.getHostCard(), null, emptyMap);
+    	sa.appendSubAbility(as);
+    	return as;
         // ETBReplacementMove(sa.getHostCard(), null));
     }
 
