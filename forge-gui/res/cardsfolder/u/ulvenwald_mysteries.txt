@@ -6,6 +6,8 @@ SVar:TrigToken1:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Clue | TokenTyp
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigToken2 | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, put a 1/1 white Human Soldier creature token onto the battlefield.
 SVar:TrigToken2:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Human Soldier | TokenTypes$ Creature,Human,Soldier| TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
+DeckHints:Ability$Investigate
+DeckHas:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_mysteries.jpg
 Oracle:Whenever a nontoken creature you control dies, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Clue, put a 1/1 white Human Soldier creature token onto the battlefield.
 

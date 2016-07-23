@@ -6,5 +6,6 @@ K:Devoid
 A:AB$ DealDamage | Cost$ T | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
 T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a colorless spell, untap Nettle Drone.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettle_drone.jpg
 Oracle:Devoid (This card has no color.)\n{T}: Nettle Drone deals 1 damage to each opponent.\nWhenever you cast a colorless spell, untap Nettle Drone.

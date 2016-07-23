@@ -4,5 +4,6 @@ Types:Sorcery
 A:SP$ LoseLife | Cost$ 2 B | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 3 life and you gain 3 life.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 K:Madness:B
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alms_of_the_vein.jpg
 Oracle:Target opponent loses 3 life and you gain 3 life.\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

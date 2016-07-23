@@ -6,5 +6,6 @@ K:Devoid
 S:Mode$ Continuous | Affected$ Creature.Colorless+Other+YouCtrl | AddToughness$ 1| Description$ Other colorless creatures you control get +0/+1.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
+DeckHints:Keyword$Devoid & Color$Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tide_drifter.jpg
 Oracle:Devoid (This card has no color.)\nOther colorless creatures you control get +0/+1.

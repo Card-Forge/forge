@@ -4,6 +4,8 @@ Types:Enchantment
 A:AB$ Mill | Cost$ B | Defined$ You | NumCards$ 1 | SpellDescription$ Put the top card of your library into your graveyard.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Delirium$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Delirium - At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform 
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/autumnal_gloom.jpg
 AlternateMode:DoubleFaced
 Oracle:{B}: Put the top card of your library into your graveyard.\nDelirium - At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.

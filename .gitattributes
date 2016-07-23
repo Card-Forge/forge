@@ -1134,6 +1134,7 @@ forge-gui-desktop/src/main/java/forge/view/arcane/util/package-info.java -text
 forge-gui-desktop/src/main/java/forge/view/package-info.java -text
 forge-gui-desktop/src/test/java/forge/BoosterDraft1Test.java -text
 forge-gui-desktop/src/test/java/forge/BoosterDraftTest.java -text
+forge-gui-desktop/src/test/java/forge/CardRankerTest.java -text
 forge-gui-desktop/src/test/java/forge/GuiDownloadPicturesLQTest.java -text
 forge-gui-desktop/src/test/java/forge/GuiDownloadSetPicturesLQTest.java -text
 forge-gui-desktop/src/test/java/forge/GuiProgressBarWindowTest.java -text
@@ -19710,6 +19711,7 @@ forge-gui/src/main/java/forge/itemmanager/package-info.java -text
 forge-gui/src/main/java/forge/limited/BoosterDeckBuilder.java -text
 forge-gui/src/main/java/forge/limited/BoosterDraft.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/BoosterDraftAI.java svneol=native#text/plain
+forge-gui/src/main/java/forge/limited/CardRanker.java -text
 forge-gui/src/main/java/forge/limited/CardRankingComparator.java -text
 forge-gui/src/main/java/forge/limited/CustomLimited.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/DeckColors.java svneol=native#text/plain

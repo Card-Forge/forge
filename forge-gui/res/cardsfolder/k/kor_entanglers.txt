@@ -7,5 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.O
 SVar:TrigTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_entanglers.jpg
 Oracle:Rally — Whenever Kor Entanglers or another Ally enters the battlefield under your control, tap target creature an opponent controls.

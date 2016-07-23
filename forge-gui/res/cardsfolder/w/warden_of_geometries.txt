@@ -4,5 +4,6 @@ Types:Creature Eldrazi Drone
 PT:2/3
 K:Vigilance
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool. ({C} represents colorless mana.)
+DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warden_of_geometries.jpg
 Oracle:Vigilance\n{T}: Add {C} to your mana pool. ({C} represents colorless mana.)

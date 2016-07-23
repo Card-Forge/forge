@@ -3,6 +3,7 @@ ManaCost:2 B B
 Types:Sorcery
 A:SP$ Token | Cost$ 2 B B | TokenImage$ b 2 2 zombie SOI | TokenAmount$ 2 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put two 2/2 black Zombie creature tokens onto the battlefield.
 K:Madness:2 B
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gisas_bidding.jpg
 Oracle:Put two 2/2 black Zombie creature tokens onto the battlefield.\nMadness {2}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
 

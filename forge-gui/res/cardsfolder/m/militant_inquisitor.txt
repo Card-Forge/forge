@@ -5,6 +5,7 @@ PT:2/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | References$ X | Description$ CARDNAME gets +1/+0 for each Equipment you control.
 SVar:X:Count$Valid Equipment.YouCtrl
 SVar:BuffedBy:Equipment
+DeckHints:Type$Equipment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/militant_inquisitor.jpg
 Oracle:Militant Inquisitor gets +1/+0 for each Equipment you control.
 

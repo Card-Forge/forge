@@ -4,6 +4,7 @@ Types:Instant
 A:SP$ Tap | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Tap up to two target creatures. Investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card. 
+DeckHas:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/expose_evil.jpg
 Oracle:Tap up to two target creatures.\nInvestigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 

@@ -6,5 +6,6 @@ K:Devoid
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay {C}. If you do, another target creature gains flying until end of turn. ({C} represents colorless mana.)
 SVar:TrigPump:AB$Pump | Cost$ C | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | KW$ Flying
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravity_negator.jpg
 Oracle:Devoid (This card has no color.)\nFlying\nWhen Gravity Negator attacks, you may pay {C}. If you do, another target creature gains flying until end of turn. ({C} represents colorless mana.)

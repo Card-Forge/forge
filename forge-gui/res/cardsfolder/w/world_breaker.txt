@@ -9,5 +9,6 @@ K:Reach
 A:AB$ ChangeZone | Cost$ 2 C Sac<1/Land> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:DiscardMe:1
 SVar:PlayMain1:TRUE
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/world_breaker.jpg
 Oracle:Devoid (This card has no color.)\nWhen you cast World Breaker, exile target artifact, enchantment, or land.\nReach\n{2}{C}, Sacrifice a land: Return World Breaker from your graveyard to your hand. ({C} represents colorless mana.)

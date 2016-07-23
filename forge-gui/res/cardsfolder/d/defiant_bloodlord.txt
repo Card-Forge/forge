@@ -6,5 +6,6 @@ K:Flying
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
 SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | ValidTgts$ Opponent | TgtPromp$ Select target opponent | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$LifeAmount
+DeckHints:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defiant_bloodlord.jpg
 Oracle:Flying\nWhenever you gain life, target opponent loses that much life.

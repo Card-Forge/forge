@@ -6,5 +6,6 @@ K:Devoid
 T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a colorless spell, CARDNAME gets +1/+0 until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1
 SVar:BuffedBy:Card.Colorless
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kozileks_sentinel.jpg
 Oracle:Devoid (This card has no color.)\nWhenever you cast a colorless spell, Kozilek's Sentinel gets +1/+0 until end of turn.

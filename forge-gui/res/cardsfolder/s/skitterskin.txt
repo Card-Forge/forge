@@ -6,5 +6,6 @@ K:Devoid
 K:CARDNAME can't block.
 A:AB$ Regenerate | Cost$ 1 B | CheckSVar$ X | SVarCompare$ GE1 |  References$ X | SpellDescription$ Regenerate CARDNAME. Activate this ability only if you control another colorless creature.
 SVar:X:Count$Valid Creature.Colorless+YouCtrl+Other
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skitterskin.jpg
 Oracle:Devoid (This card has no color.)\nSkitterskin can't block.\n{1}{B}: Regenerate Skitterskin. Activate this ability only if you control another colorless creature.

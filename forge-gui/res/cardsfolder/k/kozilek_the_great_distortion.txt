@@ -9,5 +9,6 @@ SVar:Difference:Number$7/Minus.Y
 K:Menace
 A:AB$ Counter | Announce$ X | Cost$ Discard<1/Card.cmcEQX/card with converted mana cost X> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | AILogic$ Never | SpellDescription$ Counter target spell with converted mana cost X.
 SVar:X:Targeted$CardManaCost 
+DeckNeeds:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kozilek_the_great_distortion.jpg
 Oracle:When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.\nMenace\nDiscard a card with converted mana cost X: Counter target spell with converted mana cost X.

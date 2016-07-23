@@ -184,6 +184,25 @@ public final class CardRulesPredicates {
     }
 
     /**
+     * Has matching DeckHas hint.
+     *
+     * @param type
+     *            the DeckHints.Type
+     * @param has
+     *            the hint
+     * @return the predicate
+     */
+    public static Predicate<CardRules> deckHas(final DeckHints.Type type, final String has) {
+        return new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules card) {
+                DeckHints deckHas = card.getAiHints().getDeckHas();
+                return deckHas != null && deckHas.isValid() && deckHas.contains(type, has);
+            }
+        };
+    }
+
+    /**
      * Core type.
      *
      * @param isEqual

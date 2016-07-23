@@ -8,5 +8,6 @@ K:Flying
 A:AB$ Mill | Cost$ 1 C | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBBounce | SpellDescription$ Target opponent exiles the top card of his or her library. If it's a land card, you may return CARDNAME to its owner's hand.
 SVar:DBBounce:DB$ChangeZone | Origin$ Battlefield | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ GE1 | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimensional_infiltrator.jpg
 Oracle:Devoid (This card has no color.)\nFlash\nFlying\n{1}{C}: Target opponent exiles the top card of his or her library. If it's a land card, you may return Dimensional Infiltrator to its owner's hand. ({C} represents colorless mana.)

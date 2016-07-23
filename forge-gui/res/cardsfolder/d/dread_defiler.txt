@@ -5,5 +5,6 @@ PT:6/8
 K:Devoid
 A:AB$ LoseLife | Cost$ 3 C ExileFromGrave<1/Creature> | LifeAmount$ X | References$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent loses life equal to the exiled card's power.
 SVar:X:Exiled$CardPower
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_defiler.jpg
 Oracle:Devoid (This card has no color.)\n{3}{C}, Exile a creature card from your graveyard: Target opponent loses life equal to the exiled card's power. ({C} represents colorless mana.)

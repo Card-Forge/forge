@@ -6,5 +6,7 @@ K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigChange | Delirium$ True | TriggerZones$ Battlefield | TriggerDescription$ Delirium - Whenever CARDNAME deals damage, if there are four or more card types among cards in your graveyard, exile target creature an opponent controls.
 SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Exile
 SVar:HasCombatEffect:TRUE
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_deliverance.jpg
 Oracle:Flying\nDelirium - Whenever Angel of Deliverance deals damage, if there are four or more card types among cards in your graveyard, exile target creature an opponent controls.

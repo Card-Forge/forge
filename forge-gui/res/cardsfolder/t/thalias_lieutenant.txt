@@ -7,6 +7,7 @@ SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Human.YouCtrl+Other | Cou
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Human enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1 
 SVar:BuffedBy:Human 
+DeckHints:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalias_lieutenant.jpg
 Oracle:When Thalia's Lieutenant enters the battlefield, put a +1/+1 counter on each other Human you control.\nWhenever another Human enters the battlefield under your control, put a +1/+1 counter on Thalia's Lieutenant.
 

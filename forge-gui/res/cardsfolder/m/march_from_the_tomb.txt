@@ -3,5 +3,7 @@ ManaCost:3 W B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 W B | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | References$ X | MaxTotalTargetCMC$ 8 | ValidTgts$ Creature.Ally+YouCtrl | TgtPrompt$ Select target Ally creature card in your graveyard. | SpellDescription$ Return any number of target Ally creature cards with total converted mana cost 8 or less from your graveyard to the battlefield.
 SVar:X:Count$ValidGraveyard Creature.Ally+YouCtrl
+SVar:RemRandomDeck:True
+DeckNeeds:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/march_from_the_tomb.jpg
 Oracle:Return any number of target Ally creature cards with total converted mana cost 8 or less from your graveyard to the battlefield.

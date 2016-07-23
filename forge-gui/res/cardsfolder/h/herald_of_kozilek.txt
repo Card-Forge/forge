@@ -4,5 +4,6 @@ Types:Creature Eldrazi Drone
 PT:2/4
 K:Devoid
 S:Mode$ ReduceCost | ValidCard$ Card.Colorless | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Colorless spells you cast cost {1} less to cast.
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_kozilek.jpg
 Oracle:Devoid (This card has no color.)\nColorless spells you cast cost {1} less to cast.

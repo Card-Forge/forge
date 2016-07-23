@@ -7,6 +7,7 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness
 SVar:X:Count$Valid Creature.YouCtrl
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Human | AddKeyword$ First Strike | Description$ As long as enchanted creature is a Human, it has first strike.
 SVar:BuffedBy:Creature
+DeckHints:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_against_hope.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each creature you control.\nAs long as enchanted creature is a Human, it has first strike. 
 

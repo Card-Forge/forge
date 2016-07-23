@@ -8,6 +8,8 @@ SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 1 | RememberMilled$ 
 SVar:DBTransform:DB$ SetState | Cost$ 0 | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Instant,Card.Sorcery | ConditionCompare$ EQ1 | SubAbility$ Cleanup | Mode$ Transform
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:DoubleFaced
+DeckHints:Ability$Delirium
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aberrant_researcher.jpg
 Oracle:Flying\nAt the beginning of your upkeep, put the top card of your library into your graveyard. If it's an instant or sorcery card, transform Aberrant Researcher.
 

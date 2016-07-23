@@ -7,5 +7,6 @@ SVar:DBPutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ R
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Spirit
 SVar:RemAIDeck:True
+DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_flux.jpg
 Oracle:Exile target creature you control, then return that card to the battlefield under its owner's control. If it's a Spirit, put a +1/+1 counter on it.

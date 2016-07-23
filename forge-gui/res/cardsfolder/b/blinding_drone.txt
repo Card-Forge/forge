@@ -4,5 +4,6 @@ Types:Creature Eldrazi Drone
 PT:1/3
 K:Devoid
 A:AB$ Tap | Cost$ C T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_drone.jpg
 Oracle:Devoid (This card has no color.)\n{C}, {T}: Tap target creature. ({C} represents colorless mana.)

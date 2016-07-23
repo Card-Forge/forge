@@ -22,10 +22,10 @@ public class WinstonDraftAI extends BoosterDraftAI{
     }
 
     public WinstonDraftAI() {
-        this.deck.clear();
+        this.decks.clear();
         this.playerColors.clear();
         for (int i = 0; i < N_DECKS; i++) {
-            this.deck.add(new ArrayList<PaperCard>());
+            this.decks.add(new ArrayList<PaperCard>());
             this.playerColors.add(new DeckColors());
         }
     }
@@ -61,7 +61,7 @@ public class WinstonDraftAI extends BoosterDraftAI{
             }
         }
         if (acquire != null) {
-            this.deck.get(0).addAll(acquire.toFlatList());
+            this.decks.get(0).addAll(acquire.toFlatList());
             //tallyDeckColors();
         }
     }
@@ -104,6 +104,6 @@ public class WinstonDraftAI extends BoosterDraftAI{
     }*/
 
     public int getAIDraftSize() {
-        return this.deck.get(0).size();
+        return this.decks.get(0).size();
     }
 }

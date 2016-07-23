@@ -8,5 +8,6 @@ SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalastria_healer.jpg
 Oracle:Rally — Whenever Kalastria Healer or another Ally enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.

@@ -5,5 +5,6 @@ A:SP$ ChangeZone | Cost$ 3 Reveal<1/Creature.Colorless> | ValidTgts$ Creature | 
 SVar:Y:Revealed$CardPower
 SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titans_presence.jpg
 Oracle:As an additional cost to cast Titan's Presence, reveal a colorless creature card from your hand.\nExile target creature if its power is less than or equal to the revealed card's power.

@@ -4,5 +4,6 @@ Types:Creature Human Cleric Ally
 PT:2/2
 A:AB$ GainLife | Cost$ T tapXType<1/Ally> | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 SVar:RemAIDeck:True
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ondu_war_cleric.jpg
 Oracle:Cohort - {T}, Tap an untapped Ally you control: You gain 2 life.

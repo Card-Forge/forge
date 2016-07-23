@@ -4,5 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 T:Mode$ SpellCast | ValidCard$ Card.Colorless+cmcGE7 | ValidActivatingPlayer$ You | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a colorless spell with converted mana cost 7 or greater, you may sacrifice CARDNAME. If you do, search your library for a colorless creature card, reveal it, put it into your hand, then shuffle your library.
 SVar:TrigSearch:AB$ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Colorless | ChangeNum$ 1
+DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_of_ugin.jpg
 Oracle:{T}: Add {C} to your mana pool.\nWhenever you cast a colorless spell with converted mana cost 7 or greater, you may sacrifice Sanctum of Ugin. If you do, search your library for a colorless creature card, reveal it, put it into your hand, then shuffle your library.

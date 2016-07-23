@@ -7,5 +7,6 @@ SVar:Y:Count$Madness.X.3
 SVar:X:Count$xPaid
 SVar:Z:Targeted$Valid Creature.toughnessLEY
 SVar:RemAIDeck:True
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/welcome_to_the_fold.jpg
 Oracle:Madness {X}{U}{U} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nGain control of target creature if its toughness is 2 or less. If Welcome to the Fold's madness cost was paid, instead gain control of that creature if its toughness is X or less.

@@ -4,5 +4,6 @@ Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ DBToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAbilities$ ABDraw | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Investigate
 Oracle:Whenever you cast an instant or sorcery spell, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 

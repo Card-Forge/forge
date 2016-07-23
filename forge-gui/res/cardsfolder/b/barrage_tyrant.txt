@@ -6,5 +6,6 @@ K:Devoid
 A:AB$ DealDamage | Cost$ 2 R Sac<1/Creature.Colorless+Other/another colorless creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target creature or player.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrage_tyrant.jpg
 Oracle:Devoid (This card has no color.)\n{2}{R}, Sacrifice another colorless creature: Barrage Tyrant deals damage equal to the sacrificed creature's power to target creature or player.

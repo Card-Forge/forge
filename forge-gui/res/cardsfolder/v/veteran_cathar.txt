@@ -3,6 +3,7 @@ ManaCost:1 G
 Types:Creature Human Soldier
 PT:2/2
 A:AB$ Pump | Cost$ 3 W | ValidTgts$ Human | TgtPrompt$ Select target Human | KW$ Double Strike | SpellDescription$ Target Human gains double strike until end of turn.
+DeckHints:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_cathar.jpg
 Oracle:{3}{W}: Target Human gains double strike until end of turn.
 

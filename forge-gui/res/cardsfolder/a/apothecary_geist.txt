@@ -5,5 +5,6 @@ PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | IsPresent$ Spirit.Other+YouCtrl | TriggerDescription$ When CARDNAME enters the battlefield, if you control another Spirit, gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
+DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apothecary_geist.jpg
 Oracle:Flying\nWhen Apothecary Geist enters the battlefield, if you control another Spirit, you gain 3 life.

@@ -3,5 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Draw | Cost$ 2 C T | NumCards$ 1 | ActivationCardsInHand$ 0 | SpellDescription$ Draw a card. Activate this ability only if you have no cards in hand.
+DeckHas:Ability$Mana.Colorless
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_gate_wreckage.jpg
 Oracle:{T}: Add {C} to your mana pool. ({C} represents colorless mana.)\n{2}{C}, {T}: Draw a card. Activate this ability only if you have no cards in hand.

@@ -4,5 +4,6 @@ Types:Creature Eldrazi Processor
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | Execute$ TrigPutCounters | TriggerDescription$ As CARDNAME enters the battlefield, you may put two cards your opponents own from exile into their owners' graveyards. If you do, CARDNAME enters the battlefield with four +1/+1 counters on it.
 SVar:TrigPutCounters:AB$ PutCounter | Cost$ ExiledMoveToGrave<2/Card.OppOwn/card an opponent owns> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 4
+DeckHints:Keyword$Ingest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulamogs_despoiler.jpg
 Oracle:As Ulamog's Despoiler enters the battlefield, you may put two cards your opponents own from exile into their owners' graveyards. If you do, Ulamog's Despoiler enters the battlefield with four +1/+1 counters on it.

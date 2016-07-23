@@ -5,5 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Description$ Enchanted creature gets +1/+1 and has flying.
 A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | Defined$ Enchanted | SpellDescription$ Return enchanted creature to its owner's hand.
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_wings.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has flying.\nDiscard a card: Return enchanted creature to its owner's hand.

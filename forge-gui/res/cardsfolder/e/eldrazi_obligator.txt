@@ -6,5 +6,6 @@ K:Devoid
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When you cast CARDNAME, you may pay {1}{C}. If you do, gain control of target creature until end of turn, untap that creature, and it gains haste until end of turn. ({C} represents colorless mana.)
 SVar:TrigChange:AB$GainControl | Cost$ 1 C | TgtPrompt$ Choose target creature. | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn, untap that creature, and it gains haste until end of turn.
 K:Haste
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_obligator.jpg
 Oracle:Devoid (This card has no color.)\nWhen you cast Eldrazi Obligator, you may pay {1}{C}. If you do, gain control of target creature until end of turn, untap that creature, and it gains haste until end of turn. ({C} represents colorless mana.)\nHaste

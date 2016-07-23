@@ -4,5 +4,6 @@ Types:Creature Vampire Shaman Ally
 PT:2/2
 A:AB$Token | Cost$ T tapXType<1/Ally> | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Zombie | TokenColors$ Black | TokenImage$ b 2 2 zombie OGW | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenTapped$ True | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield tapped.
 SVar:RemAIDeck:True
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dranas_chosen.jpg
 Oracle:Cohort - {T}, Tap an untapped Ally you control: Put a 2/2 black Zombie creature token onto the battlefield tapped.

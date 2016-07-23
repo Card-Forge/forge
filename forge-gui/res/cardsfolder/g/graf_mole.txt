@@ -5,6 +5,7 @@ PT:2/4
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you sacrifice a Clue, you gain 3 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:RemRandomDeck:True
+DeckHints:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graf_mole.jpg
 Oracle:Whenever you sacrifice a Clue, you gain 3 life.
 

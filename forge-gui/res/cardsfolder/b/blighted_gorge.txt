@@ -3,5 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ DealDamage | Cost$ 4 R T Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player. 
+DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_gorge.jpg
 Oracle:{T}: Add {C} to your mana pool.\n{4}{R}, {T}, Sacrifice Blighted Gorge: Blighted Gorge deals 2 damage to target creature or player.

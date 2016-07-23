@@ -6,5 +6,6 @@ K:Devoid
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | References$ X | TriggerDescription$ At the beginning of your upkeep, you lose 1 life unless you control another colorless creature.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X
 SVar:X:Count$Valid Creature.YouCtrl+Colorless+Other
+DeckHints:Keyword$Devoid & Color$Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reaver_drone.jpg
 Oracle:Devoid (This card has no color)\nAt the beginning of your upkeep, you lose 1 life unless you control another colorless creature.

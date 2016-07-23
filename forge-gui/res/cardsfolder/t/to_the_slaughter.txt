@@ -6,5 +6,7 @@ SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature,Planeswa
 SVar:DBSacrificeCreature:DB$ Sacrifice | SacValid$ Creature | SacMessage$ Creature | Defined$ Targeted | ConditionCheckSVar$ XDelirium | ConditionSVarCompare$ GE1 | SubAbility$ DBSacrificePlaneswalker | References$ XDelirium | StackDescription$
 SVar:DBSacrificePlaneswalker:DB$ Sacrifice | SacValid$ Planeswalker | SacMessage$ Planeswalker | Defined$ Targeted | ConditionCheckSVar$ XDelirium | ConditionSVarCompare$ GE1 | References$ XDelirium | StackDescription$
 SVar:XDelirium:Number$0
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/to_the_slaughter.jpg
 Oracle:Target player sacrifices a creature or planeswalker.\nDelirium - If there are four or more card types among cards in your graveyard, instead that player sacrifices a creature and a planeswalker.

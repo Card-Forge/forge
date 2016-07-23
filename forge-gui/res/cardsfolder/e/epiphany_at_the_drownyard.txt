@@ -8,5 +8,7 @@ SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destinatio
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$xPaid/Plus.1
 SVar:X:Count$xPaid
+DeckHints:Ability$Delirium
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epiphany_at_the_drownyard.jpg
 Oracle:Reveal the top X plus one cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.

@@ -4,5 +4,7 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature.Colorless+enteredBattlefieldThisTurn | TgtPrompt$ Select target colorless creature that entered the battlefield this turn | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target colorless creature that entered the battlefield this turn.
+DeckHas:Ability$Mana.Colorless
+DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruins_of_oran_rief.jpg
 Oracle:Ruins of Oran-Rief enters the battlefield tapped.\n{T}: Add {C} to your mana pool. ({C} represents colorless mana.)\n{T}: Put a +1/+1 counter on target colorless creature that entered the battlefield this turn.

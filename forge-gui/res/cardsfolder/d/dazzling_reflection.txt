@@ -9,5 +9,6 @@ SVar:Dazzle:Event$ DamageDone | ValidSource$ Card.IsImprinted | ReplaceWith$ Exi
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsImprinted | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
+DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dazzling_reflection.jpg
 Oracle:You gain life equal to target creature's power. The next time that creature would deal damage this turn, prevent that damage.

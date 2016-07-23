@@ -4,6 +4,8 @@ Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
 K:Equip Discard<1/Card>
 SVar:RemAIDeck:True
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderers_axe.jpg
 Oracle:Equipped creature gets +2/+2.\nEquip - Discard a card.
 

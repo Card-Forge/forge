@@ -6,5 +6,6 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ w 1 1 kor ally | TokenName$ Kor 
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Planeswalker.YouCtrl | ReplaceWith$ AddExtraCounter | Description$ Each planeswalker you control enters the battlefield with an additional loyalty counter on it.
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ LOYALTY | CounterNum$ 1 | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_gideon.jpg
 Oracle:When Oath of Gideon enters the battlefield, put two 1/1 white Kor Ally creature tokens onto the battlefield.\nEach planeswalker you control enters the battlefield with an additional loyalty counter on it.

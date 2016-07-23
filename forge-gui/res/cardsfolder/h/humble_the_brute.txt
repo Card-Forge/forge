@@ -4,6 +4,7 @@ Types:Instant
 A:SP$ Destroy | Cost$ 4 W | ValidTgts$ Creature.powerGE4 | SubAbility$ DBToken | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater. Investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,Clue | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c clue | TokenAltImages$ c_clue2,c_clue3,c_clue4,c_clue5,c_clue6 | TokenAbilities$ ABDraw
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/humble_the_brute.jpg
 Oracle:Destroy target creature with power 4 or greater.\nInvestigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 

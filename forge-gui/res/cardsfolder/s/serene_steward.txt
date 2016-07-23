@@ -5,5 +5,6 @@ PT:2/2
 T:Mode$ LifeGained | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you gain life, you may pay {W}. If you do, put a +1/+1 counter on target creature.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:RemRandomDeck:True
+DeckHints:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_steward.jpg
 Oracle:Whenever you gain life, you may pay {W}. If you do, put a +1/+1 counter on target creature.

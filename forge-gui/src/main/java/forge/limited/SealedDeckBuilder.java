@@ -31,13 +31,15 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
      * @return DeckColors
      */
     private ColorSet chooseColors() {
-        List<Pair<Double, PaperCard>> rankedCards = rankCards(getAiPlayables());
-
         // choose colors based on top 33% of cards
         final List<PaperCard> colorChooserList = new ArrayList<PaperCard>();
-        double limit = rankedCards.size() * .33;
+        // this is not exactly right, because the rankings here are taking into account deckhints
+        // for the whole set of cards, when some of those cards could be in colors that won't
+        // make it into the deck
+        List<PaperCard> initialRanked = ranker.rankCardsInDeck(getAiPlayables());
+        double limit = getAiPlayables().size() * .33;
         for (int i = 0; i < limit; i++) {
-            PaperCard cp = rankedCards.get(i).getValue();
+            PaperCard cp = initialRanked.get(i);
             colorChooserList.add(cp);
             //System.out.println(cp.getName() + " " + cp.getRules().getManaCost().toString());
         }
@@ -64,8 +66,8 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
             }
         }
 
-        String color1 = MagicColor.Constant.GREEN;
-        String color2 = MagicColor.Constant.BLACK;
+        String color1;
+        String color2;
         final Random r = MyRandom.getRandom();
         if (maxColors.size() > 1) {
             int n = r.nextInt(maxColors.size());
@@ -82,8 +84,10 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
             }
         }
 
-        System.out.println("COLOR = " + color1);
-        System.out.println("COLOR = " + color2);
+        if (logToConsole) {
+            System.out.println("COLOR = " + color1);
+            System.out.println("COLOR = " + color2);
+        }
         return ColorSet.fromNames(color1, color2);
     }
 }

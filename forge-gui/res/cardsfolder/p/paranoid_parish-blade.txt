@@ -3,6 +3,8 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:3/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ First Strike | Condition$ Delirium | Description$ Delirium - CARDNAME gets +1/+0 and has first strike as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paranoid_parish_blade.jpg
 Oracle:Delirium &#8212; Paranoid Parish-Blade gets +1/+0 and has first strike as long as there are four or more card types among cards in your graveyard.
 

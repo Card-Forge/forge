@@ -7,6 +7,7 @@ A:AB$ Token | Cost$ 1 G ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenName$
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card. 
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ongoing_investigation.jpg
 Oracle:Whenever one or more creatures you control deal combat damage to a player, investigate. (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")\n{1}{G}, Exile a creature card from your graveyard: Investigate. You gain 2 life. 
 

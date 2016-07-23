@@ -3,6 +3,7 @@ ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 K:Madness:U
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/just_the_wind.jpg
 Oracle:Return target creature to its owner's hand.\nMadness {U} (If you discard this card, discard it into exile. When you do , cast it for its madness cost or put it into your graveyard.)
 

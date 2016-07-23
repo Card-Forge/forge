@@ -4,5 +4,6 @@ Types:Creature Kor Knight Ally
 PT:3/3
 A:AB$ PutCounterAll | Cost$ T tapXType<1/Ally> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | PrecostDesc$ Cohort - | SpellDescription$ Put a +1/+1 counter on each creature you control.
 SVar:RemAIDeck:True
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mundas_vanguard.jpg
 Oracle:Cohort - {T}, Tap an untapped Ally you control: Put a +1/+1 counter on each creature you control.

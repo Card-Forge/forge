@@ -3,5 +3,7 @@ ManaCost:3 G
 Types:Instant
 A:SP$ PutCounter | Cost$ 3 G | CounterNum$ X | CounterType$ P1P1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | References$ X | SpellDescription$ Put two +1/+1 counters on target creature.\nDelirium - Put three +1/+1 counters on that creature instead if there are four or more card tyoes among cards in your graveyard.
 SVar:X:Count$Delirium.3.2
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/might_beyond_reason.jpg
 Oracle:Put two +1/+1 counters on target creature.\nDelirium - Put three +1/+1 counters on that creature instead if there are four or more card tyoes among cards in your graveyard.

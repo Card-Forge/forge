@@ -5,6 +5,8 @@ A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenName$ Clue | TokenTypes$ Artifact,
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$Valid Clue.YouCtrl 
 SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHints:Ability$Investigate
+DeckHas:Ability$Investigate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_call.jpg
 Oracle:Investigate, then target creature gets +1/+1 until end of turn for each Clue you control. (To investigate, put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
 

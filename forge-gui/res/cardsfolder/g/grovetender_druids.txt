@@ -5,5 +5,6 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, you may pay {1}. If you do, put a 1/1 green Plant creature token onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, you may pay {1}. If you do, put a 1/1 green Plant creature token onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenName$ Plant | TokenTypes$ Creature,Plant | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You
+DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grovetender_druids.jpg
 Oracle:Rally — Whenever Grovetender Druids or another Ally enters the battlefield under your control, you may pay {1}. If you do, put a 1/1 green Plant creature token onto the battlefield.

@@ -5,5 +5,7 @@ A:SP$ ChangeZone | Cost$ G | Origin$ Library | Destination$ Hand | ChangeType$ L
 
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land,Creature | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X
 SVar:X:Count$Delirium.1.0
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traverse_the_ulvenwald.jpg
 Oracle:Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.\nDelirium - If there are four or more card types among cards in your graveyard, instead search your library for a creature or land card, reveal it, put it into your hand, then shuffle your library.

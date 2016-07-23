@@ -6,5 +6,6 @@ K:Devoid
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control deals combat damage to an opponent, you may draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
 A:AB$ Pump | Cost$ 3 C | ValidTgts$ Creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn. | TgtPrompt$ Select target creature.
+DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepfathom_skulker.jpg
 Oracle:Devoid (This card has no color.)\nWhenever a creature you control deals combat damage to a player, you may draw a card.\n{3}{C}: Target creature can't be blocked this turn. ({C} represents colorless mana.)
