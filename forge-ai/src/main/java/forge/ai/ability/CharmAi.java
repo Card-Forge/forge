@@ -18,40 +18,10 @@ import java.util.Random;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Random r = MyRandom.getRandom();
-
-        final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
-        final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
-        boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
-
-        // reset the chosen list. Otherwise it will be locked in forever
-        sa.setChosenList(null);
-        List<AbilitySub> chosenList = min > 1 ? chooseMultipleOptionsAi(sa, ai, min) : chooseOptionsAi(sa, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"), false);
-
-        if (chosenList.isEmpty()) {
-            return false;
-        } else {
-            sa.setChosenList(chosenList);
-        }
-
-        // prevent run-away activations - first time will always return true
-        return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-    }
-
-    public static List<AbilitySub> chooseOptionsAi(SpellAbility sa, final Player ai, boolean playNow, int num, int min, boolean allowRepeat, boolean opponentChoser) {
-        if (sa.getChosenList() != null) {
-            return sa.getChosenList();
-        }
-        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
-        List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
-
-        if (opponentChoser) {
-            // This branch is for "An Opponent chooses" Charm spells from Alliances
-            // Current just choose the first available spell, which seem generally less disastrous for the AI.
-            //return choices.subList(0, 1);
-            return choices.subList(1, choices.size());
-        } else if ("Triskaidekaphobia".equals(sa.getHostCard().getName())) {
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        if (aiLogic.equals("Triskaidekaphobia")) {
+            List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+            List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
             AbilitySub gain = choices.get(0);
             AbilitySub lose = choices.get(1);
             FCollection<Player> opponents = ai.getOpponents();
@@ -118,21 +88,50 @@ public class CharmAi extends SpellAbilityAi {
                 }
                 chosenList.add(aiLife == 12 || oppCritical ? lose : gain);
             } else {
-                // normal logic, try to gain life if its critical
-                boolean oppCritical = false;
-                // an oppoent is Critical = 12, and can gain life, try to gain life instead
-                // but only if ai doesn't kill itself with that.
-                if (aiLife != 12) {
-                    for (Player p : opponents) {
-                        if (p.getLife() == 12 && p.canGainLife()) {
-                            oppCritical = true;
-                            break;
-                        }
-                    }
-                }
-                chosenList.add(aiLife == 14 || aiLife <= 10 || oppCritical ? gain : lose);
+                // For cases not handled by the above, try to kill everyone
+                chosenList.add(lose);
             }
-            return chosenList;
+            sa.setChosenList(chosenList);
+        }
+        return true;
+    }
+    
+    @Override
+    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+        final Random r = MyRandom.getRandom();
+
+        final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
+        final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
+        boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
+
+        // reset the chosen list. Otherwise it will be locked in forever
+        sa.setChosenList(null);
+        List<AbilitySub> chosenList = min > 1 ? chooseMultipleOptionsAi(CharmEffect.makePossibleOptions(sa), ai, min)
+                : chooseOptionsAi(sa, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"), false);
+
+        if (chosenList.isEmpty()) {
+            return false;
+        } else {
+            sa.setChosenList(chosenList);
+        }
+
+        // prevent run-away activations - first time will always return true
+        return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+    }
+
+    public static List<AbilitySub> chooseOptionsAi(SpellAbility sa, final Player ai, boolean playNow, int num, int min,
+            boolean allowRepeat, boolean opponentChoser) {
+        if (sa.getChosenList() != null) {
+            return sa.getChosenList();
+        }
+        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
+
+        if (opponentChoser) {
+            // This branch is for "An Opponent chooses" Charm spells from Alliances
+            // Current just choose the first available spell, which seem generally less disastrous for the AI.
+            //return choices.subList(0, 1);
+            return choices.subList(1, choices.size());
         }
         
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
@@ -175,31 +174,29 @@ public class CharmAi extends SpellAbilityAi {
         return chosenList;
     }
 
-    //Extension of chooseOptionsAi specific to multi-option charms (eg. Cryptic Command, DTK commands)
-    private List<AbilitySub> chooseMultipleOptionsAi(SpellAbility sa, final Player ai, int min) {
-        if (sa.getChosenList() != null) {
-            return sa.getChosenList();
-        }
-        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+    // Choice selection for charms that require multiple choices (eg. Cryptic Command, DTK commands)
+    private List<AbilitySub> chooseMultipleOptionsAi(List<AbilitySub> choices, final Player ai, int min) {
         AbilitySub goodChoice = null;
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
-        // select first n playable options
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
+            // Assign generic good choice to fill up choices if necessary 
             if ("Good".equals(sub.getParam("AILogic")) && aic.doTrigger(sub, false)) {
                 goodChoice = sub;
             } else {
+                // Standard canPlayAi()
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {
-                        break;
+                        break;  // enough choices
                     }
                 }
             }
         }
+        // Add generic good choice if one more choice is needed
         if (chosenList.size() == min - 1 && goodChoice != null) {
-            chosenList.add(0, goodChoice);  //hack to make Dromoka's Charm fight targets work
+            chosenList.add(0, goodChoice);  // hack to make Dromoka's Command fight targets work
             return chosenList;
         }
         if (chosenList.size() != min) {
