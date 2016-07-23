@@ -339,6 +339,10 @@ public class AnimateEffect extends AnimateEffectBase {
 
             game.fireEvent(new GameEventCardStatsChanged(c));
         }
+        
+        if (sa.hasParam("AtEOT") && !tgts.isEmpty()) {
+            registerDelayedTrigger(sa, sa.getParam("AtEOT"), tgts);
+        }
     } // animateResolve extends SpellEffect {
 
     /* (non-Javadoc)
