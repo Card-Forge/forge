@@ -361,8 +361,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
             List<Card> casted = game.getStack().getSpellsCastLastTurn();
             boolean conditionMet = false;
             for (Player p : game.getPlayers()) {
-                if (CardLists.filterControlledBy(casted, p).size() > 1)
-                    conditionMet = true;
+                conditionMet |= CardLists.filterControlledBy(casted, p).size() > 1;
             }
             if (!conditionMet) {
                 return false;
