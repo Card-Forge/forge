@@ -9,7 +9,6 @@ import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
 import forge.ai.ability.ChangeZoneAi;
-import forge.ai.ability.CharmAi;
 import forge.ai.ability.ProtectAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -497,7 +496,7 @@ public class PlayerControllerAi extends PlayerController {
      */
     @Override
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
-        return CharmAi.chooseOptionsAi(sa, player, sa.isTrigger(), num, min, allowRepeat, !player.equals(sa.getActivatingPlayer()));
+        return sa.getChosenList();
     }
 
     @Override

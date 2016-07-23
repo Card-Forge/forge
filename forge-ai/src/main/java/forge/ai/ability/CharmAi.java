@@ -27,8 +27,9 @@ public class CharmAi extends SpellAbilityAi {
 
         // reset the chosen list. Otherwise it will be locked in forever
         sa.setChosenList(null);
-        List<AbilitySub> chosenList = min > 1 ? chooseMultipleOptionsAi(CharmEffect.makePossibleOptions(sa), ai, min)
-                : chooseOptionsAi(sa, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"), false);
+        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        List<AbilitySub> chosenList = min > 1 ? chooseMultipleOptionsAi(choices, ai, min)
+                : chooseOptionsAi(choices, sa, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"), false);
 
         if (chosenList.isEmpty()) {
             return false;
@@ -40,11 +41,8 @@ public class CharmAi extends SpellAbilityAi {
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    public static List<AbilitySub> chooseOptionsAi(SpellAbility sa, final Player ai, boolean playNow, int num, int min, boolean allowRepeat, boolean opponentChoser) {
-        if (sa.getChosenList() != null) {
-            return sa.getChosenList();
-        }
-        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+    private List<AbilitySub> chooseOptionsAi(List<AbilitySub> choices, SpellAbility sa, final Player ai,
+            boolean playNow, int num, int min, boolean allowRepeat, boolean opponentChoser) {
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
 
         if (opponentChoser) {
@@ -180,7 +178,6 @@ public class CharmAi extends SpellAbilityAi {
     private List<AbilitySub> chooseMultipleOptionsAi(List<AbilitySub> choices, final Player ai, int min) {
         AbilitySub goodChoice = null;
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
-        // select first n playable options
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
@@ -200,13 +197,11 @@ public class CharmAi extends SpellAbilityAi {
         // Add generic good choice if one more choice is needed
         if (chosenList.size() == min - 1 && goodChoice != null) {
             chosenList.add(0, goodChoice);  // hack to make Dromoka's Command fight targets work
-            return chosenList;
         }
         if (chosenList.size() != min) {
-            return new ArrayList<AbilitySub>();
-        } else {
-            return chosenList;
+            chosenList.clear();
         }
+        return chosenList;
     } 
 
     @Override
