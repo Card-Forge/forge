@@ -25,6 +25,7 @@ import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 
 /**
@@ -43,6 +44,7 @@ public class KeywordsChange {
     private List<Trigger> triggers = Lists.<Trigger>newArrayList();
     private List<ReplacementEffect> replacements = Lists.<ReplacementEffect>newArrayList();
     private List<SpellAbility> abilities = Lists.<SpellAbility>newArrayList();
+    private List<StaticAbility> staticAbilities = Lists.<StaticAbility>newArrayList();
     /**
      * 
      * Construct a new {@link KeywordsChange}.
@@ -101,6 +103,7 @@ public class KeywordsChange {
             CardFactoryUtil.addTriggerAbility(k, host, this);
             CardFactoryUtil.addReplacementEffect(k, host, this);
             CardFactoryUtil.addSpellAbility(k, host, this);
+            CardFactoryUtil.addStaticAbility(k, host, this);
         }
     }
 
@@ -114,6 +117,9 @@ public class KeywordsChange {
         for (SpellAbility s : abilities) {
             host.removeSpellAbility(s);
         }
+        for (StaticAbility st : staticAbilities) {
+            host.removeStaticAbility(st);
+        }
     }
 
     public final void addTrigger(final Trigger trg) {
@@ -126,5 +132,8 @@ public class KeywordsChange {
 
     public final void addSpellAbility(final SpellAbility s) {
         abilities.add(s);
+    }
+    public final void addStaticAbility(final StaticAbility st) {
+        staticAbilities.add(st);
     }
 }

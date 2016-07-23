@@ -112,6 +112,7 @@ public enum Keyword {
     TRANSFIGURE(KeywordWithCost.class, false, "%s, Sacrifice this permanent: Search your library for a creature card with the same converted mana cost as this permanent and put it onto the battlefield. Then shuffle your library. Activate this ability only any time you could cast a sorcery."),
     TRANSMUTE(KeywordWithCost.class, false, "%s, Discard this card: Search your library for a card with the same converted mana cost as the discarded card, reveal that card, and put it into your hand. Then shuffle your library. Activate this ability only any time you could cast a sorcery."),
     UNEARTH(KeywordWithCost.class, false, "%s: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step. If it would leave the battlefield, exile it instead of putting it anywhere else. Activate this ability only any time you could cast a sorcery."),
+    UNLEASH(SimpleKeyword.class, true, "You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it."),
     VANISHING(KeywordWithAmount.class, false, "This permanent enters the battlefield with %d time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it."),
     VIGILANCE(SimpleKeyword.class, true, "Attacking doesn't cause this creature to tap."),
     WITHER(SimpleKeyword.class, true, "This creature deals damage to creatures in the form of -1/-1 counters.");

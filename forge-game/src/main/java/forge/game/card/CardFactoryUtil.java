@@ -69,6 +69,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
@@ -2518,6 +2519,10 @@ public class CardFactoryUtil {
             else if (keyword.equals("Flanking")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.equals("Unleash")) {
+                addReplacementEffect(keyword, card, null);
+                addStaticAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Rampage")) {
                 addTriggerAbility(keyword, card, null);
             }
@@ -2780,6 +2785,36 @@ public class CardFactoryUtil {
         setupEtbKeywords(card);
     }
 
+    private static ReplacementEffect createETBReplacement(final Card card, ReplacementLayer layer,
+            final String effect, final boolean optional, final boolean secondary,
+            final boolean intrinsic, final String valid, final String zone) {
+        SpellAbility repAb = AbilityFactory.getAbility(effect, card);
+        String desc = repAb.getDescription();
+        setupETBReplacementAbility(repAb);
+        if (!intrinsic) {
+            repAb.setIntrinsic(false);
+        }
+
+        StringBuilder repEffsb = new StringBuilder();
+        repEffsb.append("Event$ Moved | ValidCard$ ").append(valid);
+        repEffsb.append(" | Destination$ Battlefield | Description$ ").append(desc);
+        if (optional) {
+            repEffsb.append(" | Optional$ True");
+        }
+        if (secondary) {
+        	repEffsb.append(" | Secondary$ True");
+        }
+
+        if (!zone.isEmpty()) {
+            repEffsb.append(" | ActiveZones$ " + zone);
+        }
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repEffsb.toString(), card, intrinsic);
+        re.setLayer(layer);
+        re.setOverridingAbility(repAb);
+
+        return card.addReplacementEffect(re);
+    }
     /**
      * TODO: Write javadoc for this method.
      * @param card
@@ -2790,49 +2825,29 @@ public class CardFactoryUtil {
             if (kw.startsWith("ETBReplacement")) {
                 String[] splitkw = kw.split(":");
                 ReplacementLayer layer = ReplacementLayer.smartValueOf(splitkw[1]);
-                SpellAbility repAb = AbilityFactory.getAbility(card.getSVar(splitkw[2]), card);
-                String desc = repAb.getDescription();
-                setupETBReplacementAbility(repAb);
+                
+                final boolean optional = splitkw.length >= 4 && splitkw[3].contains("Optional");
 
                 final String valid = splitkw.length >= 6 ? splitkw[5] : "Card.Self";
-
-                StringBuilder repEffsb = new StringBuilder();
-                repEffsb.append("Event$ Moved | ValidCard$ ").append(valid);
-                repEffsb.append(" | Destination$ Battlefield | Description$ ").append(desc);
-                if (splitkw.length >= 4) {
-                    if (splitkw[3].contains("Optional")) {
-                        repEffsb.append(" | Optional$ True");
-                    }
-                }
-                if (splitkw.length >= 5) {
-                    if (!splitkw[4].isEmpty()) {
-                        repEffsb.append(" | ActiveZones$ " + splitkw[4]);
-                    }
-                }
-
-                ReplacementEffect re = ReplacementHandler.parseReplacement(repEffsb.toString(), card, true);
-                re.setLayer(layer);
-                re.setOverridingAbility(repAb);
-
-                card.addReplacementEffect(re);
+                final String zone = splitkw.length >= 5 ? splitkw[4] : "";
+                createETBReplacement(card, layer, card.getSVar(splitkw[2]), optional, true, false, valid, zone);
             } else if (kw.startsWith("etbCounter")) {
                 makeEtbCounter(kw, card, true);
             } else if (kw.equals("CARDNAME enters the battlefield tapped.")) {
                 String parse = kw;
                 card.removeIntrinsicKeyword(parse);
 
-                String abStr = "AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | SubAbility$ MoveETB";
-                String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                        + "| Defined$ ReplacedCard";
-
-                card.setSVar("ETBTappedSVar", abStr);
-                card.setSVar("MoveETB", dbStr);
+                String effect = "AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True";
+                SpellAbility sa = AbilityFactory.getAbility(effect, card);
+                setupETBReplacementAbility(sa);
 
                 String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                        + "| ReplaceWith$ ETBTappedSVar | Description$ CARDNAME enters the battlefield tapped.";
+                        + "| Description$ CARDNAME enters the battlefield tapped.";
 
                 ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
                 re.setLayer(ReplacementLayer.Other);
+
+                re.setOverridingAbility(sa);
 
                 card.addReplacementEffect(re);
             }
@@ -2867,10 +2882,9 @@ public class CardFactoryUtil {
         }
 
         SpellAbility sa = AbilityFactory.getAbility(abStr, card);
-        SpellAbility sub = setupETBReplacementAbility(sa);
+        setupETBReplacementAbility(sa);
         if (!intrinsic) {
             sa.setIntrinsic(false);
-            sub.setIntrinsic(false);
         }
 
         String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
@@ -3131,6 +3145,14 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addReplacement(cardre);
             }
+        } else if (keyword.equals("Unleash")) {
+            String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, true, true, intrinsic, "Card.Self", "");
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
+            }
         }
     }
 
@@ -3215,6 +3237,19 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(effect);
             }
             card.addSpellAbility(sa);
+        }
+    }
+
+    public static void addStaticAbility(final String keyword, final Card card, final KeywordsChange kws) {
+        final boolean intrinsic = kws == null;
+        if (keyword.equals("Unleash")) {
+            final String effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can't block.";
+
+            StaticAbility st = card.addStaticAbility(effect);
+            st.setIntrinsic(intrinsic);
+            if (!intrinsic) {
+                kws.addStaticAbility(st);
+            }
         }
     }
 

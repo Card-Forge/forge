@@ -1398,8 +1398,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Sunburst") && hasStartOfKeyword("Modular")) {
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
-            } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour")) {
-                sbLong.append(keyword + "(" + Keyword.getInstance(keyword).getReminderText() + ")");
+            } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")) {
+                sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.contains("Haunt")) {
                 sb.append("\r\nHaunt (");
                 if (isCreature()) {
