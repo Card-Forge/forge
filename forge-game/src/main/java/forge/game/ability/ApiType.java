@@ -78,6 +78,7 @@ public enum ApiType {
     Mana (ManaEffect.class),
     ManaReflected (ManaReflectedEffect.class),
     Manifest (ManifestEffect.class),
+    Meld (MeldEffect.class),
     Mill (MillEffect.class),
     MoveCounter (CountersMoveEffect.class),
     MultiplePiles (MultiplePilesEffect.class),

@@ -103,7 +103,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardCollection mustBlockCards, clones, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
 
     // if this card is attached or linked to something, what card is it currently attached to
-    private Card equipping, fortifying, cloneOrigin, haunting, effectSource, pairedWith;
+    private Card equipping, fortifying, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
 
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
@@ -457,6 +457,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (oldState == CardStateName.FaceDown) {
                 return turnFaceUp();
             }
+        } else if (mode.equals("Meld") && hasAlternateState()) {
+            return changeToState(CardStateName.Meld);
         }
         return false;
     }
@@ -568,6 +570,10 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final boolean isDoubleFaced() {
         return states.containsKey(CardStateName.Transformed);
+    }
+
+    public final boolean isMeldable() {
+        return states.containsKey(CardStateName.Meld);
     }
 
     public final boolean isFlipCard() {
@@ -6118,6 +6124,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return pairedWith != null;
     }
 
+    public Card getMeldedWith() {   return meldedWith;  }
+
+    public void setMeldedWith(Card meldedWith) {    this.meldedWith = meldedWith;   }
+
     public final int getDamageDoneThisTurn() {
         int sum = 0;
         for (final Card c : dealtDamageToThisTurn.keySet()) {
@@ -6578,14 +6588,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                     System.out.println(String.format("Illegal Split Card CMC mode %s passed to getCMC!", mode.toString()));
                     break;
             }
-        }
-        else {
-            if (currentStateName == CardStateName.Transformed) {
-                // Except in the cases were we clone the back-side of a DFC.
-                requestedCMC = getState(CardStateName.Original).getManaCost().getCMC();
-            } else {
-                requestedCMC = getManaCost().getCMC() + xPaid;
-            }
+        } else if (currentStateName == CardStateName.Transformed) {
+            // Except in the cases were we clone the back-side of a DFC.
+            requestedCMC = getState(CardStateName.Original).getManaCost().getCMC();
+        } else if (currentStateName == CardStateName.Meld) {
+            // Melded creatures have a combined CMC of each of their parts
+            requestedCMC = getState(CardStateName.Original).getManaCost().getCMC() + this.getMeldedWith().getManaCost().getCMC();
+        } else {
+            requestedCMC = getManaCost().getCMC() + xPaid;
         }
         return requestedCMC;
     }
