@@ -2,10 +2,7 @@ Name:Broken Visage
 ManaCost:4 B
 Types:Instant
 A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature.attacking+nonArtifact | TgtPrompt$ Select target nonartifact attacking creature | NoRegen$ True  | SpellDescription$ Destroy target nonartifact attacking creature. It can't be regenerated. Put a black Spirit creature token with that creature's power and toughness onto the battlefield. Sacrifice the token at the beginning of the next end step. | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | Defined$ Targeted | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ Black | TokenPower$ dX | TokenToughness$ dY | References$ dX,dY | TokenSVars$ BrokenVisageEOT | SubAbility$ DelTrig | RememberTokens$ True
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Remembered | TriggerDescription$ Sacrifice the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBToken:DB$ Token | Defined$ Targeted | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ Black | TokenPower$ dX | TokenToughness$ dY | References$ dX,dY | TokenSVars$ BrokenVisageEOT | AtEOT$ Sacrifice
 SVar:BrokenVisageEOT:SVar:EndOfTurnLeavePlay:True
 SVar:dX:Targeted$CardPower
 SVar:dY:Targeted$CardToughness

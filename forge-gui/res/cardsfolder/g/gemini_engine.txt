@@ -3,12 +3,10 @@ ManaCost:6
 Types:Artifact Creature Construct
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, put a colorless Construct artifact creature token named Twin onto the battlefield attacking. Its power is equal to CARDNAME's power and its toughness is equal to CARDNAME's toughness. Sacrifice the token at end of combat.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Twin | TokenTypes$ Artifact,Creature,Construct | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ X | TokenToughness$ Y | TokenAttacking$ True | RememberTokens$ True | SubAbility$ DelTrig | References$ X,Y
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigSacrifice | RememberObjects$ Remembered | TriggerDescription$ At end of combat, Sacrifice the Twin token. | SubAbility$ DBCleanup
-SVar:TrigSacrifice:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Twin | TokenTypes$ Artifact,Creature,Construct | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ X | TokenToughness$ Y | TokenAttacking$ True | TokenSVars$ GeminiEngineEOT | AtEOT$ SacrificeCombat | References$ X,Y
 SVar:X:Count$CardPower
 SVar:Y:Count$CardToughness
 SVar:HasAttackEffect:TRUE
+SVar:GeminiEngineEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemini_engine.jpg
 Oracle:Whenever Gemini Engine attacks, put a colorless Construct artifact creature token named Twin onto the battlefield attacking. Its power is equal to Gemini Engine's power and its toughness is equal to Gemini Engine's toughness. Sacrifice the token at end of combat.

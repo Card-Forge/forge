@@ -2,11 +2,7 @@ Name:Feldon of the Third Path
 ManaCost:1 R R
 Types:Legendary Creature Human Artificer
 PT:2/3
-A:AB$ CopyPermanent | Cost$ 2 R T | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | NumCopies$ 1 | AddTypes$ Artifact | RememberCopied$ True | SubAbility$ DBPump | SpellDescription$ Put a token onto the battlefield that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
-SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Remembered | Permanent$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Remembered | TriggerDescription$ Sacrifice that creature at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ CopyPermanent | Cost$ 2 R T | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | NumCopies$ 1 | AddTypes$ Artifact | AddSVars$ SneakAttackEOT | PumpKeywords$ Haste | AtEOT$ Sacrifice | SubAbility$ DBPump | SpellDescription$ Put a token onto the battlefield that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feldon_of_the_third_path.jpg
 Oracle:{2}{R}, {T}: Put a token onto the battlefield that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.

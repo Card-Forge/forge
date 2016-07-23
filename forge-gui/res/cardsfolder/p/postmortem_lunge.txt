@@ -2,9 +2,7 @@ Name:Postmortem Lunge
 ManaCost:X PB
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ X PB | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPromp$ Choose target creature with CMC equal to X. | References$ X | SubAbility$ DBHaste | AILogic$ BeforeCombat | SpellDescription$ Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
-SVar:DBHaste:DB$ Animate | Defined$ Targeted | Keywords$ Haste | Permanent$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ DBExile | RememberObjects$ Targeted | TriggerDescription$ Exile the creature at the beginning of the next end step. | AILogic$ Always
-SVar:DBExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
+SVar:DBHaste:DB$ Animate | Defined$ Targeted | Keywords$ Haste | Permanent$ True | AtEOT$ Exile
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/postmortem_lunge.jpg

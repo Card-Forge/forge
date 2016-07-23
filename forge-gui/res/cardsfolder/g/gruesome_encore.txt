@@ -2,9 +2,7 @@ Name:Gruesome Encore
 ManaCost:2 B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select target creature in an opponent's graveyard | GainControl$ True | SubAbility$ DBPump | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. Exile it at the beginning of the next end step. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
-SVar:DBPump:DB$ Animate | Keywords$ Haste & HIDDEN If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else. | sVars$ SneakAttackEOT | Defined$ Targeted | Permanent$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Targeted | TriggerDescription$ Exile it at the beginning of the next end step. | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
+SVar:DBPump:DB$ Animate | Keywords$ Haste & HIDDEN If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else. | sVars$ SneakAttackEOT | Defined$ Targeted | Permanent$ True | AtEOT$ Exile
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruesome_encore.jpg
 Oracle:Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. Exile it at the beginning of the next end step. If that creature would leave the battlefield, exile it instead of putting it anywhere else.

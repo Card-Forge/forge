@@ -1,10 +1,7 @@
 Name:Hornet Cannon
 ManaCost:4
 Types:Artifact
-A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenName$ Hornet | TokenTypes$ Artifact,Creature,Insect | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying<>Haste  | TokenSVars$ HornetCannonEOT | SubAbility$ DelTrig | RememberTokens$ True | SpellDescription$ Put a 1/1 colorless Insect artifact creature token with flying and haste named Hornet onto the battlefield. Destroy it at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigDestroy | RememberObjects$ Remembered | TriggerDescription$ Destroy the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ DelayTriggerRemembered
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenName$ Hornet | TokenTypes$ Artifact,Creature,Insect | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying<>Haste  | TokenSVars$ HornetCannonEOT | AtEOT$ Destroy | SpellDescription$ Put a 1/1 colorless Insect artifact creature token with flying and haste named Hornet onto the battlefield. Destroy it at the beginning of the next end step.
 SVar:HornetCannonEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_cannon.jpg
 Oracle:{3}, {T}: Put a 1/1 colorless Insect artifact creature token with flying and haste named Hornet onto the battlefield. Destroy it at the beginning of the next end step.

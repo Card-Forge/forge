@@ -4,9 +4,6 @@ Types:Creature Human Warrior
 PT:3/3
 K:Dash:2 R R
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, put a token onto the battlefield tapped and attacking that's a copy of another target attacking creature. Exile the token at the end of combat.
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ 0 | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target creature | Tapped$ True | CopyAttacking$ True | RememberCopied$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ At end of combat, exile the token. | SubAbility$ DBCleanup
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 0 | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target creature | Tapped$ True | CopyAttacking$ True | AtEOT$ ExileCombat
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamerush_rider.jpg
 Oracle:Whenever Flamerush Rider attacks, put a token onto the battlefield tapped and attacking that's a copy of another target attacking creature. Exile the token at end of combat.\nDash {2}{R}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

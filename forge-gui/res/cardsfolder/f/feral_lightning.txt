@@ -1,10 +1,7 @@
 Name:Feral Lightning
 ManaCost:3 R R R
 Types:Sorcery
-A:SP$ Token | Cost$ 3 R R R | TokenAmount$ 3 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenImage$ r 3 1 elemental SOK | TokenKeywords$ Haste | TokenSVars$ FeralLightningEOT | RememberTokens$ True | SubAbility$ DelTrig | SpellDescription$ Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ Exile the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Token | Cost$ 3 R R R | TokenAmount$ 3 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenImage$ r 3 1 elemental SOK | TokenKeywords$ Haste | TokenSVars$ FeralLightningEOT | AtEOT$ Exile | SpellDescription$ Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
 SVar:FeralLightningEOT:SVar:EndOfTurnLeavePlay:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84373.jpg

@@ -4,10 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigCopy | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, you may put a token onto the battlefield that's a copy of that creature. Exile that token at end of combat.
-SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredAttacker | NumCopies$ 1 | RememberCopied$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ Exile the token at end of combat. | SubAbility$ DBCleanup
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredAttacker | NumCopies$ 1 | AtEOT$ ExileCombat
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_mockery.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks, you may put a token onto the battlefield that's a copy of that creature. Exile that token at end of combat.

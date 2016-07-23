@@ -2,10 +2,7 @@ Name:Thunderheads
 ManaCost:2 U
 Types:Instant
 K:Replicate 2 U
-A:SP$ Token | Cost$ 2 U | TokenName$ Weird | TokenOwner$ You | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Defender<>Flying | TokenSVars$ ThunderheadsEOT | RememberTokens$ True | SubAbility$ DelTrig | TokenAmount$ 1 | TokenColors$ Blue | TokenTypes$ Creature,Weird | SpellDescription$ Put a 3/3 blue Weird creature token with defender and flying onto the battlefield. Exile it at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ Exile the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Token | Cost$ 2 U | TokenName$ Weird | TokenOwner$ You | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Defender<>Flying | TokenSVars$ ThunderheadsEOT | AtEOT$ Exile | TokenAmount$ 1 | TokenColors$ Blue | TokenTypes$ Creature,Weird | SpellDescription$ Put a 3/3 blue Weird creature token with defender and flying onto the battlefield. Exile it at the beginning of the next end step.
 SVar:ThunderheadsEOT:SVar:EndOfTurnLeavePlay:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderheads.jpg

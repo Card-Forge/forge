@@ -1,10 +1,7 @@
 Name:Waylay
 ManaCost:2 W
 Types:Instant
-A:SP$ Token | Cost$ 2 W | TokenAmount$ 3 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenSVars$ WaylayEOT | RememberTokens$ True | SubAbility$ DelTrig | SpellDescription$ Put three 2/2 white Knight creature tokens onto the battlefield. Exile them at the beginning of the next cleanup step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ Exile those token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Token | Cost$ 2 W | TokenAmount$ 3 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenSVars$ WaylayEOT | AtEOT$ Exile | SpellDescription$ Put three 2/2 white Knight creature tokens onto the battlefield. Exile them at the beginning of the next cleanup step.
 SVar:WaylayEOT:SVar:EndOfTurnLeavePlay:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waylay.jpg

@@ -1,10 +1,7 @@
 Name:Thatcher Revolt
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Token | Cost$ 2 R | TokenAmount$ 3 | TokenName$ Human | TokenTypes$ Creature,Human | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | RememberTokens$ True | TokenSVars$ ThatcherRevoltEOT | SubAbility$ DelTrig | SpellDescription$ Put three 1/1 red Human creature tokens with haste onto the battlefield. Sacrifice those tokens at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Remembered | TriggerDescription$ Sacrifice the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Token | Cost$ 2 R | TokenAmount$ 3 | TokenName$ Human | TokenTypes$ Creature,Human | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ ThatcherRevoltEOT | AtEOT$ Sacrifice | SpellDescription$ Put three 1/1 red Human creature tokens with haste onto the battlefield. Sacrifice those tokens at the beginning of the next end step.
 SVar:ThatcherRevoltEOT:SVar:EndOfTurnLeavePlay:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thatcher_revolt.jpg

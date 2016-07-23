@@ -1,11 +1,8 @@
 Name:Firecat Blitz
 ManaCost:X R R
 Types:Sorcery
-A:SP$ Token | Cost$ X R R | TokenAmount$ X | TokenName$ Elemental Cat | TokenTypes$ Creature,Elemental,Cat | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ FirecatBlitzEOT | RememberTokens$ True | SubAbility$ DelTrig | References$ X | SpellDescription$ Put X 1/1 red Elemental Cat creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
-A:SP$ Token | Cost$ R R Sac<Y/Mountain> | TokenAmount$ ChosenX | TokenName$ Elemental Cat | TokenTypes$ Creature,Elemental,Cat | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ FirecatBlitzEOT | RememberTokens$ True | SubAbility$ DelTrig | Flashback$ True | PrecostDesc$ Flashback - | CostDesc$ {R}{R}, Sacrifice X Mountains. | References$ Y | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ Exile the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Token | Cost$ X R R | TokenAmount$ X | TokenName$ Elemental Cat | TokenTypes$ Creature,Elemental,Cat | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ FirecatBlitzEOT | AtEOT$ Exile | References$ X | SpellDescription$ Put X 1/1 red Elemental Cat creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+A:SP$ Token | Cost$ R R Sac<Y/Mountain> | TokenAmount$ ChosenX | TokenName$ Elemental Cat | TokenTypes$ Creature,Elemental,Cat | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ FirecatBlitzEOT | AtEOT$ Exile | Flashback$ True | PrecostDesc$ Flashback - | CostDesc$ {R}{R}, Sacrifice X Mountains. | References$ Y | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:FirecatBlitzEOT:SVar:EndOfTurnLeavePlay:True
 SVar:X:Count$xPaid
 SVar:Y:XChoice

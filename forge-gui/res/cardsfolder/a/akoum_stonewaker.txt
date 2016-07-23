@@ -3,10 +3,7 @@ ManaCost:1 R
 Types:Creature Human Shaman
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may pay {2}{R}. If you do, put a 3/1 red Elemental creature token with trample and haste onto the battlefield. Exile that token at the beginning of the next end step.
-SVar:TrigToken:AB$Token | Cost$ 2 R | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenImage$ r 3 1 elemental bfz | TokenKeywords$ Trample<>Haste | TokenSVars$ AkoumEOT | RememberTokens$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ CARDNAME - Exile the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigToken:AB$Token | Cost$ 2 R | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenImage$ r 3 1 elemental bfz | TokenKeywords$ Trample<>Haste | TokenSVars$ AkoumEOT | AtEOT$ Exile
 SVar:AkoumEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_stonewaker.jpg
 Oracle:Landfall — Whenever a land enters the battlefield under your control, you may pay {2}{R}. If you do, put a 3/1 red Elemental creature token with trample and haste onto the battlefield. Exile that token at the beginning of the next end step.

@@ -2,14 +2,12 @@ Name:Lightning Coils
 ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature you control dies, put a charge counter on CARDNAME.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE5_CHARGE | Execute$ TrigElementalParty | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if CARDNAME has five or more charge counters on it, remove all of them from it and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
-SVar:TrigElementalParty:AB$ Token | Cost$ 0 | TokenAmount$ VIP | TokenImage$ r 3 1 elemental MRD | TokenName$ Elemental | TokenColors$ Red | TokenTypes$ Creature,Elemental | TokenKeywords$ Haste  | TokenSVars$ EOTExile | RememberTokens$ True | SubAbility$ DelTrig | TokenPower$ 3 | TokenToughness$ 1 | References$ VIP
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ Exile the token at the beginning of the next end step. | SubAbility$ DBClearGuestList | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE5_CHARGE | Execute$ DBRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if CARDNAME has five or more charge counters on it, remove all of them from it and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenImage$ r 3 1 elemental MRD | TokenName$ Elemental | TokenColors$ Red | TokenTypes$ Creature,Elemental | TokenKeywords$ Haste | TokenSVars$ EOTExile | TokenPower$ 3 | TokenToughness$ 1 | AtEOT$ Exile | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:EOTExile:SVar:EndOfTurnLeavePlay:True
-SVar:DBClearGuestList:DB$ RemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ VIP | References$ X | SpellDescription$ Remove counters | SubAbility$ DBCleanup
-SVar:VIP:Count$CardCounters.CHARGE
+SVar:X:Count$RememberedSize
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_coils.jpg
 Oracle:Whenever a nontoken creature you control dies, put a charge counter on Lightning Coils.\nAt the beginning of your upkeep, if Lightning Coils has five or more charge counters on it, remove all of them from it and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.

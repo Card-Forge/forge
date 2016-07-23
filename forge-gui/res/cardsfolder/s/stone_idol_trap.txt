@@ -1,10 +1,7 @@
 Name:Stone Idol Trap
 ManaCost:5 R
 Types:Instant Trap
-A:SP$ Token | Cost$ 5 R | TokenAmount$ 1 | TokenName$ Construct | TokenTypes$ Artifact,Creature,Construct | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 6 | TokenToughness$ 12 |  RememberTokens$ True | SubAbility$ DelTrig | TokenKeywords$ Trample | SpellDescription$ Put a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step.
-SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigExile | TriggerDescription$ Exile Construct at the beginning of your next end step.
-SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.IsRemembered
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each attacking creature.
+A:SP$ Token | Cost$ 5 R | TokenAmount$ 1 | TokenName$ Construct | TokenTypes$ Artifact,Creature,Construct | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 6 | TokenToughness$ 12 | AtEOT$ YourExile | TokenKeywords$ Trample | SpellDescription$ Put a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step.
 SVar:X:Count$Valid Creature.attacking
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_idol_trap.jpg
 Oracle:Stone Idol Trap costs {1} less to cast for each attacking creature.\nPut a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step.

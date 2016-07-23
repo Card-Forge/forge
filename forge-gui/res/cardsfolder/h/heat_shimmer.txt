@@ -1,9 +1,7 @@
 Name:Heat Shimmer
 ManaCost:2 R
 Types:Sorcery
-A:SP$ CopyPermanent | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Haste | Triggers$ HeatShimmerTrig | AddSVars$ HearShimmerExile & SneakAttackEOT | SpellDescription$ Put a token that's a copy of target creature onto the battlefield. That token has haste and "At the beginning of the end step, exile this permanent."
-SVar:HeatShimmerTrig:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ HearShimmerExile | TriggerDescription$ At the beginning of the end step, exile CARDNAME.
-SVar:HearShimmerExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self
+A:SP$ CopyPermanent | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Haste | AtEOTTrig$ Exile | AddSVars$ SneakAttackEOT | SpellDescription$ Put a token that's a copy of target creature onto the battlefield. That token has haste and "At the beginning of the end step, exile this permanent."
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_shimmer.jpg
 Oracle:Put a token that's a copy of target creature onto the battlefield. That token has haste and "At the beginning of the end step, exile this permanent."

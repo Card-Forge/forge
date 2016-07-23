@@ -2,9 +2,7 @@ Name:Sneak Attack
 ManaCost:3 R
 Types:Enchantment
 A:AB$ ChangeZone | Cost$ R | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | SubAbility$ DBPump | RememberChanged$ True | ForgetOtherRemembered$ True | AILogic$ BeforeCombat | SpellDescription$ You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.
-SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Remembered | Permanent$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Remembered | TriggerDescription$ CARDNAME - Sacrifice the creature at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
+SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Remembered | Permanent$ True | AtEOT$ Sacrifice | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:NonStackingEffect:True

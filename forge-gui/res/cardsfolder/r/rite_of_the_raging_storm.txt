@@ -3,9 +3,7 @@ ManaCost:3 R R
 Types:Enchantment
 S:Mode$ CantAttack | ValidCard$ Creature.namedLightning Rager | Target$ You,Planeswalker.YouCtrl | Description$ Creatures named Lightning Rager can't attack you or planeswalkers you control.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player puts a 5/1 red Elemental creature token named Lightning Rager onto the battlefield. It has trample, haste, and "At the beginning of the end step, sacrifice this creature."
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Lightning Rager | TokenTypes$ Creature,Elemental | TokenOwner$ TriggeredPlayer | TokenPower$ 5 | TokenToughness$ 1 | TokenKeywords$ Trample<>Haste | TokenTriggers$ LightningRagerTrig | TokenSVars$ LightningRagerSVar,LightningRagerEOT | TokenColors$ Red | TokenImage$ r 5 1 lightning rager
-SVar:LightningRagerTrig:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ LightningRagerSVar | TriggerDescription$ At the beginning of the end step, sacrifice this creature.
-SVar:LightningRagerSVar:DB$ Sacrifice | SacValid$ Self
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Lightning Rager | TokenTypes$ Creature,Elemental | TokenOwner$ TriggeredPlayer | TokenPower$ 5 | TokenToughness$ 1 | TokenKeywords$ Trample<>Haste | TokenSVars$ LightningRagerEOT | TokenColors$ Red | TokenImage$ r 5 1 lightning rager | AtEOTTrig$ Sacrifice
 SVar:LightningRagerEOT:SVar:EndOfTurnLeavePlay:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_the_raging_storm.jpg

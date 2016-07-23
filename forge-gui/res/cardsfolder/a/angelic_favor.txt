@@ -1,10 +1,7 @@
 Name:Angelic Favor
 ManaCost:3 W
 Types:Instant
-A:SP$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenSVars$ AngelicFavorEOT | RememberTokens$ True | SubAbility$ DelTrig | ActivationPhases$ BeginCombat->EndCombat | SpellDescription$ Cast CARDNAME only during combat. Put a 4/4 white Angel creature token with flying onto the battlefield. Exile it at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ CARDNAME - Exile the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenSVars$ AngelicFavorEOT | AtEOT$ Exile | ActivationPhases$ BeginCombat->EndCombat | SpellDescription$ Cast CARDNAME only during combat. Put a 4/4 white Angel creature token with flying onto the battlefield. Exile it at the beginning of the next end step.
 SVar:AngelicFavorEOT:SVar:EndOfTurnLeavePlay:True
 SVar:AltCost:Cost$ tapXType<1/Creature> | IsPresent$ Plains.YouCtrl | Description$ If you control a Plains, you may tap an untapped creature you control rather than pay CARDNAME's mana cost. 
 SVar:RemAIDeck:True

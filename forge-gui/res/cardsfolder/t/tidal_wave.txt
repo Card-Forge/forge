@@ -1,10 +1,7 @@
 Name:Tidal Wave
 ManaCost:2 U
 Types:Instant
-A:SP$ Token | Cost$ 2 U | TokenAmount$ 1 | TokenName$ Wall | TokenTypes$ Creature,Wall | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Defender | TokenSVars$ TidalWaveEOT | RememberTokens$ True | SubAbility$ DelTrig | SpellDescription$ Put a 5/5 blue Wall creature token with defender onto the battlefield. Sacrifice it at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Remembered | TriggerDescription$ Sacrifice the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Token | Cost$ 2 U | TokenAmount$ 1 | TokenName$ Wall | TokenTypes$ Creature,Wall | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Defender | TokenSVars$ TidalWaveEOT | AtEOT$ Sacrifice | SpellDescription$ Put a 5/5 blue Wall creature token with defender onto the battlefield. Sacrifice it at the beginning of the next end step.
 SVar:TidalWaveEOT:SVar:EndOfTurnLeavePlay:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_wave.jpg

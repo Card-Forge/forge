@@ -2,9 +2,7 @@ Name:Sparkspitter
 ManaCost:2 R
 Types:Creature Elemental Spellshaper
 PT:1/3
-A:AB$ Token | Cost$ R T Discard<1/Card> | TokenAmount$ 1 | TokenName$ Spark Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste<>Trample | TokenTriggers$ SparkspitterTrig | TokenSVars$ SparkspitterSVar,SparkspitterEOT | SpellDescription$ Put a 3/1 red Elemental creature token named Spark Elemental onto the battlefield. It has trample, haste, and "At the beginning of the end step, sacrifice Spark Elemental."
-SVar:SparkspitterTrig:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ SparkspitterSVar | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
-SVar:SparkspitterSVar:DB$ Sacrifice | SacValid$ Self
+A:AB$ Token | Cost$ R T Discard<1/Card> | TokenAmount$ 1 | TokenName$ Spark Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste<>Trample | AtEOTTrig$ Sacrifice | TokenSVars$ SparkspitterEOT | SpellDescription$ Put a 3/1 red Elemental creature token named Spark Elemental onto the battlefield. It has trample, haste, and "At the beginning of the end step, sacrifice Spark Elemental."
 SVar:SparkspitterEOT:SVar:EndOfTurnLeavePlay:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130341.jpg

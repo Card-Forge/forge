@@ -1,7 +1,9 @@
 Name:Echo Chamber
 ManaCost:4
 Types:Artifact
-A:AB$ CopyPermanent | Cost$ 4 T | ValidTgts$ Creature | TargetingPlayer$ Player.Opponent | TargetingPlayerControls$ True | TgtPrompt$ Select target creature you control | Keywords$ Haste | AtEOT$ Exile | AddSVars$ SneakAttackEOT | SorcerySpeed$ True | SpellDescription$ An opponent chooses target creature he or she controls. Put a token that's a copy of that creature onto the battlefield. That token gains haste until end of turn. Exile the token at the beginning of the next end step. Activate this ability only any time you could cast a sorcery.
+A:AB$ CopyPermanent | Cost$ 4 T | ValidTgts$ Creature | TargetingPlayer$ Player.Opponent | TargetingPlayerControls$ True | TgtPrompt$ Select target creature you control | RememberCopied$ True | AtEOT$ Exile | SorcerySpeed$ True | SubAbility$ DBPump | SpellDescription$ An opponent chooses target creature he or she controls. Put a token that's a copy of that creature onto the battlefield. That token gains haste until end of turn. Exile the token at the beginning of the next end step. Activate this ability only any time you could cast a sorcery.
+SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echo_chamber.jpg
 Oracle:{4}, {T}: An opponent chooses target creature he or she controls. Put a token that's a copy of that creature onto the battlefield. That token gains haste until end of turn. Exile the token at the beginning of the next end step. Activate this ability only any time you could cast a sorcery.

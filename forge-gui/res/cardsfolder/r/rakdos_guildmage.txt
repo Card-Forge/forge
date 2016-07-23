@@ -3,10 +3,7 @@ ManaCost:BR BR
 Types:Creature Zombie Shaman
 PT:2/2
 A:AB$ Pump | Cost$ 3 B Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$True | SpellDescription$ Target creature gets -2/-2 until end of turn.
-A:AB$ Token | Cost$ 3 R | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 2 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ RakdosEOT | RememberTokens$ True | SubAbility$ DelTrig | SpellDescription$ Put a 2/1 red Goblin creature token with haste onto the battlefield. Exile it at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ CARDNAME - Exile the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Token | Cost$ 3 R | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 2 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ RakdosEOT | AtEOT$ Exile | SpellDescription$ Put a 2/1 red Goblin creature token with haste onto the battlefield. Exile it at the beginning of the next end step.
 SVar:RakdosEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_guildmage.jpg
 Oracle:({B/R} can be paid with either {B} or {R}.)\n{3}{B}, Discard a card: Target creature gets -2/-2 until end of turn.\n{3}{R}: Put a 2/1 red Goblin creature token with haste onto the battlefield. Exile it at the beginning of the next end step.
