@@ -38,10 +38,21 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
     private boolean trigger = true;
     private boolean leavesTrigger = true;
+    private CardCollection meldedCards = new CardCollection();
 
     public PlayerZoneBattlefield(final ZoneType zone, final Player player) {
         super(zone, player);
     }
+
+    public final void addToMelded(final Card c) {
+        c.getZone().remove(c);
+        meldedCards.add(c);
+    }
+
+    public final void removeFromMelded(final Card c) {
+        meldedCards.remove(c);
+    }
+
 
     /** {@inheritDoc} */
     @Override

@@ -6,6 +6,7 @@ public enum CardSplitType
 {
     None(FaceSelectionMethod.USE_PRIMARY_FACE, null),
     Transform(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Transformed),
+    Meld(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Meld),
     Split(FaceSelectionMethod.COMBINE, CardStateName.RightSplit),
     Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Flipped);
 

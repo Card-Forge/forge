@@ -169,7 +169,7 @@ public class AbilityUtils {
             // game.getCardState(Card c) is not working for LKI
             for (final Object o : hostCard.getRemembered()) {
                 if (o instanceof Card) {
-                    cards.add(game.getCardState((Card) o));
+                    cards.addAll(addRememberedFromCardState(game, (Card)o));
                 }
             }
         } else if (defined.equals("RememberedLKI")) {
@@ -197,7 +197,7 @@ public class AbilityUtils {
             if (sa.getRootAbility().isTrigger()) {
                 for (Object o : sa.getRootAbility().getTriggerRemembered()) {
                     if (o instanceof Card) {
-                        cards.add(game.getCardState((Card) o));
+                        cards.addAll(addRememberedFromCardState(game, (Card)o));
                     }
                 }
             }
@@ -293,6 +293,17 @@ public class AbilityUtils {
         }
 
         return cards;
+    }
+
+    private static CardCollection addRememberedFromCardState(Game game, Card c) {
+        CardCollection coll = new CardCollection();
+        Card newState = game.getCardState(c);
+        if (c.getMeldedWith() != null) {
+            // When remembering a card that flickers, also remember it's meld pair
+            coll.add(game.getCardState(c.getMeldedWith()));
+        }
+        coll.add(newState);
+        return coll;
     }
 
     private static Card findEffectRoot(Card startCard) {

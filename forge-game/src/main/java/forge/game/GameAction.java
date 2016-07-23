@@ -342,6 +342,19 @@ public class GameAction {
                     c.setPairedWith(null);
                 }
             }
+            // Spin off Melded card
+            if (c.getMeldedWith() != null) {
+                // Other melded card needs to go "above" or "below" if Library or Graveyard
+                Card unmeld = c.getMeldedWith();
+                //c.setMeldedWith(null);
+                ((PlayerZoneBattlefield)zoneFrom).removeFromMelded(unmeld);
+                Integer unmeldPosition = position;
+                if (unmeldPosition != null && (zoneTo.equals(ZoneType.Library) || zoneTo.equals(ZoneType.Graveyard))) {
+                    // Ask controller if it wants to be on top or bottom of other meld.
+                    unmeldPosition++;
+                }
+                changeZone(null, zoneTo, unmeld, position);
+            }
             // Reveal if face-down
             if (c.isFaceDown()) {
             	c.setState(CardStateName.Original, true);
@@ -1458,7 +1471,12 @@ public class GameAction {
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
                 p1.drawCards(p1.getMaxHandSize());
+
+                // If pl has Backup Plan as a Conspiracy draw that many extra hands
+
             }
+
+            // Choose starting hand for each player with multiple hands
 
             performMulligans(first, game.getRules().hasAppliedVariant(GameType.Commander));
             if (game.isGameOver()) { break; } // conceded during "mulligan" prompt

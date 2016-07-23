@@ -297,6 +297,9 @@ public class CardFactory {
                 c.setRarity(cp.getRarity());
                 c.setState(CardStateName.RightSplit, false);
                 c.setImageKey(originalPicture);
+            } else if (c.isMeldable() && cp instanceof PaperCard) {
+                c.setState(CardStateName.Meld, false);
+                c.setImageKey(cp.getImageKey(true));
             }
 
             c.setSetCode(cp.getEdition());

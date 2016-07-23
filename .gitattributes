@@ -404,6 +404,7 @@ forge-game/src/main/java/forge/game/ability/effects/LookAtEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ManaEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ManaReflectedEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ManifestEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/MeldEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/MillEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/MultiplePilesEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/MustAttackEffect.java -text
@@ -7060,6 +7061,7 @@ forge-gui/res/cardsfolder/g/graceful_antelope.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/g/graceful_reprieve.txt -text
 forge-gui/res/cardsfolder/g/graf_harvest.txt -text
 forge-gui/res/cardsfolder/g/graf_mole.txt -text
+forge-gui/res/cardsfolder/g/graf_rats__chittering_host.txt -text
 forge-gui/res/cardsfolder/g/grafdiggers_cage.txt -text
 forge-gui/res/cardsfolder/g/grafted_exoskeleton.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/grafted_skullcap.txt svneol=native#text/plain
@@ -9842,6 +9844,7 @@ forge-gui/res/cardsfolder/m/midnight_guard.txt -text
 forge-gui/res/cardsfolder/m/midnight_haunting.txt -text
 forge-gui/res/cardsfolder/m/midnight_recovery.txt -text
 forge-gui/res/cardsfolder/m/midnight_ritual.txt -text
+forge-gui/res/cardsfolder/m/midnight_scavengers.txt -text
 forge-gui/res/cardsfolder/m/midsummer_revel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/midvast_protector.txt -text
 forge-gui/res/cardsfolder/m/might_beyond_reason.txt -text

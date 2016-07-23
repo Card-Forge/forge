@@ -7,13 +7,14 @@ public enum CardStateName {
     Flipped,
     Cloner,
     Transformed,
+    Meld,
     Cloned, 
     LeftSplit,
     RightSplit;
 
     /**
      * TODO: Write javadoc for this method.
-     * @param substring
+     * @param value
      * @return
      */
     public static CardStateName smartValueOf(String value) {
