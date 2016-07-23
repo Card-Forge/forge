@@ -2200,6 +2200,9 @@ public class CardFactoryUtil {
                 // add ability to instrinic strings so copies/clones create the ability also
                 card.getCurrentState().addUnparsedAbility(effect);
             }
+            else if (keyword.startsWith("Ninjutsu")) {
+                addSpellAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Scavenge")) {
                 addSpellAbility(keyword, card, null);
             }
@@ -3131,14 +3134,36 @@ public class CardFactoryUtil {
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
 
-        if (keyword.startsWith("Scavenge")) {
+        if (keyword.startsWith("Ninjutsu")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            String effect = "AB$ ChangeZone | Cost$ " + manacost +
+            		" Return<1/Creature.attacking+unblocked/unblocked attacker> " + 
+            		"| PrecostDesc$ Ninjutsu | CostDesc$ " + ManaCostParser.parse(manacost) +
+            		"| ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True " +
+            		"| Destination$ Battlefield | Defined$ Self |" + 
+            		" SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            } else {
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getCurrentState().addUnparsedAbility(effect);
+            }
+            card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Scavenge")) {
             final String[] k = keyword.split(":");
 	        final String manacost = k[1];
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> " +
                     "| ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 " +
             		"| CounterNum$ ScavengeX | SorcerySpeed$ True | References$ ScavengeX " + 
-                    "| PrecostDesc$ Scavenge | | CostDesc$ " + ManaCostParser.parse(manacost) + 
+                    "| PrecostDesc$ Scavenge | CostDesc$ " + ManaCostParser.parse(manacost) + 
                     "| SpellDescription$ (" + Keyword.getInstance("Scavenge:" + manacost).getReminderText() + ")";
 
             card.setSVar("ScavengeX", "Count$CardPower");

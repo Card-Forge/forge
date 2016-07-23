@@ -2,7 +2,7 @@ Name:Silent-Blade Oni
 ManaCost:3 U U B B
 Types:Creature Demon Ninja
 PT:6/5
-A:AB$ ChangeZone | Cost$ 4 U B Return<1/Creature.attacking+unblocked/unblocked attacker> | CostDesc$ Ninjutsu 4 U B | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ ({4}{U}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
+K:Ninjutsu:4 U B
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReveal | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, look at that player's hand. You may cast a nonland card in it without paying that card's mana cost.
 SVar:TrigReveal:DB$ RevealHand | Defined$ TriggeredTarget | SubAbility$ TrigPlay
 SVar:TrigPlay:DB$ Play | Valid$ Card.nonLand+DefenderCtrl | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True

@@ -2,7 +2,7 @@ Name:Ink-Eyes, Servant of Oni
 ManaCost:4 B B
 Types:Legendary Creature Rat Ninja
 PT:5/4
-A:AB$ ChangeZone | Cost$ 3 B B Return<1/Creature.attacking+unblocked/unblocked attacker> | CostDesc$ Ninjutsu 3 B B | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ ({3}{B}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
+K:Ninjutsu:3 B B
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigAnimate | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may put target creature card from that player's graveyard onto the battlefield under your control.
 SVar:TrigAnimate:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in an opponent's graveyard | ValidTgts$ Creature.DefenderCtrl | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control.
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.

@@ -2,7 +2,7 @@ Name:Okiba-Gang Shinobi
 ManaCost:3 B B
 Types:Creature Rat Ninja
 PT:3/2
-A:AB$ ChangeZone | Cost$ 3 B Return<1/Creature.attacking+unblocked/unblocked attacker> | CostDesc$ Ninjutsu {3}{B} | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ ({3}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
+K:Ninjutsu:3 B
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards two cards.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/okiba_gang_shinobi.jpg
