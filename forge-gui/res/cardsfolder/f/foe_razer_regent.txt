@@ -8,5 +8,6 @@ SVar:TrigFight:AB$ Fight | Cost$ 0 | Defined$ TriggeredCard | ValidTgts$ Creatur
 T:Mode$ Fight | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | DelayedTrigger$ DelTrigPutCounter | TriggerDescription$ Whenever a creature you control fights, put two +1/+1 counters on it at the beginning of the next end step.
 SVar:DelTrigPutCounter:Mode$ Phase | Phase$ End of Turn | Execute$ TrigPutCounter | TriggerDescription$ Put two +1/+1 counters on it at the beginning of the next end step.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredFighter | CounterType$ P1P1 | CounterNum$ 2
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foe_razer_regent.jpg
 Oracle:Flying\nWhen Foe-Razer Regent enters the battlefield, you may have it fight target creature you don't control.\nWhenever a creature you control fights, put two +1/+1 counters on it at the beginning of the next end step.

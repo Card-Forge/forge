@@ -6,5 +6,6 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dragon you control attacks, creatures you control get +1/+0 until end of turn.
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +1
 K:Dash:3 B R
+DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kolaghan_the_storms_fury.jpg
 Oracle:Flying\nWhenever a Dragon you control attacks, creatures you control get +1/+0 until end of turn.\nDash {3}{B}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

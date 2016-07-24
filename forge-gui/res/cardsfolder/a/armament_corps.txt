@@ -5,5 +5,6 @@ PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armament_corps.jpg
 Oracle:When Armament Corps enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.

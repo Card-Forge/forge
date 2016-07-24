@@ -4,5 +4,6 @@ Types:Creature Demon
 PT:4/4
 K:Delve
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddKeyword$ Flying & First Strike & Double Strike & Deathtouch & Haste & Hexproof & Indestructible & Lifelink & Reach & Trample & Vigilance | SharedKeywordsZone$ Exile | SharedRestrictions$ Creature.delved | Description$ If a creature card with flying was exiled with CARDNAME's delve ability, CARDNAME has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, reach, trample, and vigilance.
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulflayer.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nIf a creature card with flying was exiled with Soulflayer's delve ability, Soulflayer has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, reach, trample, and vigilance.

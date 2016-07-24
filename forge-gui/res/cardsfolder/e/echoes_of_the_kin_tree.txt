@@ -2,5 +2,6 @@ Name:Echoes of the Kin Tree
 ManaCost:1 W
 Types:Enchantment
 A:AB$ PutCounter | Cost$ 2 W | Bolster$ True | CounterNum$ 1 | CounterType$ P1P1 | SpellDescription$ Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echoes_of_the_kin_tree.jpg
 Oracle:{2}{W}: Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)

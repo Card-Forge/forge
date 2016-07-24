@@ -5,5 +5,6 @@ PT:5/5
 K:Flying
 T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | Execute$ TrigBolster | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dragon you control attacks, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)
 SVar:TrigBolster:AB$ PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 2 | Bolster$ True
+DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromoka_the_eternal.jpg
 Oracle:Flying\nWhenever a Dragon you control attacks, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)

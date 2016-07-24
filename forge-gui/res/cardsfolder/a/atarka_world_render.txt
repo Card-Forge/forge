@@ -8,5 +8,6 @@ T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ Double Strike
 SVar:BuffedBy:Dragon
 SVar:PlayMain1:TRUE
+DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/atarka_world_render.jpg
 Oracle:Flying, trample\nWhenever a Dragon you control attacks, it gains double strike until end of turn.

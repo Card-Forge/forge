@@ -5,5 +5,6 @@ A:AB$ Pump | Announce$ X | Cost$ B SubCounter<X/P1P1/Creature/among creatures yo
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
+DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retribution_of_the_ancients.jpg
 Oracle:{B}, Remove X +1/+1 counters from among creatures you control: Target creature gets -X/-X until end of turn.

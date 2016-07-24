@@ -5,5 +5,6 @@ PT:2/1
 K:Megamorph:3 G
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, put a +1/+1 counter on another target creature you control.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_shield_bearer.jpg
 Oracle:Megamorph {3}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Guardian Shield-Bearer is turned face up, put a +1/+1 counter on another target creature you control.

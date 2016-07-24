@@ -4,5 +4,6 @@ Types:Creature Bird Warrior
 PT:3/3
 K:Delve
 K:Flying
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_scavenger.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying

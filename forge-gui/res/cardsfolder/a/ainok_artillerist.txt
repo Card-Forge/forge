@@ -4,5 +4,6 @@ Types:Creature Hound Archer
 PT:4/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Reach | CheckSVar$ X | SVarCompare$ EQ1 | Description$ CARDNAME has reach as long as it has a +1/+1 counter on it.
 SVar:X:Count$Valid Card.Self+counters_GE1_P1P1
+DeckHints:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ainok_artillerist.jpg
 Oracle:Ainok Artillerist has reach as long as it has a +1/+1 counter on it. (It can block creatures with flying.)

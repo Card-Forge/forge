@@ -4,5 +4,6 @@ Types:Creature Ape
 PT:4/4
 K:Delve
 K:Trample
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hooting_mandrills.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nTrample

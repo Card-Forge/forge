@@ -4,5 +4,6 @@ Types:Sorcery
 A:SP$ Mill | Cost$ 1 B | NumCards$ 3 | Defined$ You | SubAbility$ DBPutCounter | AILogic$ Main1 | SpellDescription$ Choose target creature. Put the top three cards of your library into your graveyard, then put a +1/+1 counter on that creature for each creature card in your graveyard.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:Count$ValidGraveyard Creature.YouOwn
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_strength.jpg
 Oracle:Choose target creature. Put the top three cards of your library into your graveyard, then put a +1/+1 counter on that creature for each creature card in your graveyard.

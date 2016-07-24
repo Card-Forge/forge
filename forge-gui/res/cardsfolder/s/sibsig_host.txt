@@ -4,5 +4,6 @@ Types:Creature Zombie
 PT:2/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player puts the top three cards of his or her library into his or her graveyard.
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 3 | Defined$ Player
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sibsig_host.jpg
 Oracle:When Sibsig Host enters the battlefield, each player puts the top three cards of his or her library into his or her graveyard.

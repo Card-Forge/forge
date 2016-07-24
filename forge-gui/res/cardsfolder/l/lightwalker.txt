@@ -4,5 +4,6 @@ Types:Creature Human Warrior
 PT:2/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ EQ1 | Description$ CARDNAME has flying as long as it has a +1/+1 counter on it.
 SVar:X:Count$Valid Card.Self+counters_GE1_P1P1
+DeckHints:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightwalker.jpg
 Oracle:Lightwalker has flying as long as it has a +1/+1 counter on it.

@@ -5,5 +5,6 @@ PT:3/6
 K:Delve
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sibsig_muckdraggers.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nWhen Sibsig Muckdraggers enters the battlefield, return target creature card from your graveyard to your hand.

@@ -4,5 +4,6 @@ Types:Enchantment
 S:Mode$ ReduceCost | ValidCard$ Creature | Type$ MorphDown | Activator$ You | Amount$ 1 | Description$ Face-down creature spells you cast cost {1} less to cast.
 A:AB$ SetState | Cost$ 1 G | Defined$ Self | Mode$ TurnFace | SpellDescription$ Turn CARDNAME face down. (It becomes a 2/2 creature.)
 SVar:RemAIDeck:True
+DeckHints:Keyword$Morph|Megamorph
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obscuring_aether.jpg
 Oracle:Face-down creature spells you cast cost {1} less to cast.\n{1}{G}: Turn Obscuring AEther face down. (It becomes a 2/2 creature.)

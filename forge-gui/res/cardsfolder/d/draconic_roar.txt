@@ -11,5 +11,6 @@ SVar:WasDragonRevealed:Count$ValidStack Card.Self+pseudokicked+wasCast
 SVar:TotalDragonPresence:SVar$DragonPresence/Plus.WasDragonRevealed
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons
 SVar:StoreNoDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 0 | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0
+DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/draconic_roar.jpg
 Oracle:As an additional cost to cast Draconic Roar, you may reveal a Dragon card from your hand.\nDraconic Roar deals 3 damage to target creature. If you revealed a Dragon card or controlled a Dragon as you cast Draconic Roar, Draconic Roar deals 3 damage to that creature's controller.

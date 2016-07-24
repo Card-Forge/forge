@@ -7,5 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 spirit KTK | TokenKeywords$ Flying
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.YouCtrl
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_ascendancy.jpg
 Oracle:When Abzan Ascendancy enters the battlefield, put a +1/+1 counter on each creature you control.\nWhenever a nontoken creature you control dies, put a 1/1 white Spirit creature token with flying onto the battlefield.

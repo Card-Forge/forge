@@ -7,5 +7,6 @@ K:First Strike
 K:Megamorph:5 R R
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCounters | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, put a +1/+1 counter on each other Dragon creature you control.
 SVar:TrigCounters:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.Dragon+YouCtrl+Other | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormwing_dragon.jpg
 Oracle:Flying, first strike\nMegamorph {5}{R}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Stormwing Dragon is turned face up, put a +1/+1 counter on each other Dragon creature you control.

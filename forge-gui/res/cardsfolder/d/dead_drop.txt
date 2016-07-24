@@ -3,5 +3,6 @@ ManaCost:9 B
 Types:Sorcery
 K:Delve
 A:SP$ Sacrifice | Cost$ 9 B | ValidTgts$ Player | Amount$ 2 | SacValid$ Creature | SpellDescription$ Target player sacrifices two creatures.
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_drop.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nTarget player sacrifices two creatures.

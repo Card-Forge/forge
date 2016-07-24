@@ -10,5 +10,6 @@ SVar:TotalDragonPresence:SVar$DragonPresence/Plus.WasDragonRevealed
 SVar:DragonPresence:Number$0
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons
 SVar:StoreNoDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 0 | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0
+DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silumgars_scorn.jpg
 Oracle:As an additional cost to cast Silumgar's Scorn, you may reveal a Dragon card from your hand.\nCounter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast Silumgar's Scorn, counter that spell instead.

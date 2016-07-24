@@ -11,5 +11,6 @@ SVar:TotalDragonPresence:SVar$DragonPresence/Plus.WasDragonRevealed
 SVar:DragonPresence:Number$0
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons
 SVar:StoreNoDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 0 | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0
+DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scaleguard_sentinels.jpg
 Oracle:As an additional cost to cast Scaleguard Sentinels, you may reveal a Dragon card from your hand.\nScaleguard Sentinels enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast Scaleguard Sentinels.

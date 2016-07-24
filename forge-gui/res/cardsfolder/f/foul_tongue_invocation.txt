@@ -11,5 +11,6 @@ SVar:WasDragonRevealed:Count$ValidStack Card.Self+pseudokicked+wasCast
 SVar:TotalDragonPresence:SVar$DragonPresence/Plus.WasDragonRevealed
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons
 SVar:StoreNoDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 0 | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0
+DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_tongue_invocation.jpg
 Oracle:As an additional cost to cast Foul-Tongue Invocation, you may reveal a Dragon card from your hand.\nTarget player sacrifices a creature. If you revealed a Dragon card or controlled a Dragon as you cast Foul-Tongue Invocation, you gain 4 life.

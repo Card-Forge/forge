@@ -8,5 +8,6 @@ SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Selec
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:BuffedBy:Warrior
+DeckHints:Ability$Graveyard & Type$Warrior
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_woe_reaper.jpg
 Oracle:Whenever Mardu Woe-Reaper or another Warrior enters the battlefield under your control, you may exile target creature card from a graveyard. If you do, you gain 1 life.

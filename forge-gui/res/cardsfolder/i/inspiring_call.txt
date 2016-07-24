@@ -5,5 +5,6 @@ A:SP$ Draw | Cost$ 2 G | NumCards$ X | References$ X | SubAbility$ DBPumpAll | S
 SVar:X:Count$Valid Creature.YouCtrl+counters_GE1_P1P1
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | KW$ Indestructible
 SVar:RemRandomDeck:True
+DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inspiring_call.jpg
 Oracle:Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)

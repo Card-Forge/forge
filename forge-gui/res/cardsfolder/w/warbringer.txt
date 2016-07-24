@@ -4,5 +4,6 @@ Types:Creature Orc Berserker
 PT:3/3
 S:Mode$ ReduceCost | ValidCard$ Card | Type$ Dash | Activator$ You | Amount$ 2 | Description$ Dash costs you pay cost {2} less (as long as this creature is on the battlefield).
 K:Dash:2 R
+DeckHints:Keyword$Dash
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warbringer.jpg
 Oracle:Dash costs you pay cost {2} less. (as long as this creature is on the battlefield)\nDash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

@@ -3,5 +3,6 @@ ManaCost:6 B
 Types:Creature Zombie Fish
 PT:5/5
 K:Delve
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gurmag_angler.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)

@@ -5,5 +5,6 @@ PT:4/4
 K:Flying
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ Whenever you sacrifice a creature, target opponent sacrifices a creature.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature
+DeckHints:Keyword$Exploit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_deathfang.jpg
 Oracle:Flying\nWhenever you sacrifice a creature, target opponent sacrifices a creature.

@@ -5,5 +5,6 @@ K:Delve
 A:SP$ ChangeZone | Cost$ 4 U | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl+nonLand | TgtPrompt$ Select target nonland permanent you control | SubAbility$ DBChange | SpellDescription$ Return target nonland permanent you control and target mpm;amd permanent you don't control to their owners' hands.
 SVar:DBChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouDontCtrl+nonLand | TgtPrompt$ Select target nonland permanent you don't control
 SVar:RemAIDeck:True
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_undoing.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nReturn target nonland permanent you control and target nonland permanent you don't control to their owners' hands.

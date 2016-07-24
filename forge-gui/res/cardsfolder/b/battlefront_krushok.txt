@@ -6,5 +6,6 @@ K:CantBeBlockedByAmount GT1
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddHiddenKeyword$ CantBeBlockedByAmount GT1 | Description$ Each creature you control with a +1/+1 counter on it can't be blocked by more than one creature.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
+DeckHints:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlefront_krushok.jpg
 Oracle:Battlefront Krushok can't be blocked by more than one creature.\nEach creature you control with a +1/+1 counter on it can't be blocked by more than one creature.

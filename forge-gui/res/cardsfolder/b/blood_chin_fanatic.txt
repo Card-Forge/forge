@@ -5,5 +5,6 @@ PT:3/3
 A:AB$ LoseLife | Cost$ 1 B Sac<1/Creature.Other+Warrior/another Warrior creature> | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ X | References$ X | SubAbility$ DBGainLife | SpellDescription$ Target player loses X life and you gain X life, where X is the sacrificed creature's power.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Sacrificed$CardPower
+DeckHints:Type$Warrior
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_chin_fanatic.jpg
 Oracle:{1}{B}, Sacrifice another Warrior creature: Target player loses X life and you gain X life, where X is the sacrificed creature's power.

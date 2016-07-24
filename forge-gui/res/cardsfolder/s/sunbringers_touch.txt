@@ -5,5 +5,7 @@ A:SP$ PutCounter | Cost$ 2 G G | Bolster$ True | CounterNum$ X | References$ X |
 SVar:X:Count$InYourHand
 SVar:DBPumpAll:DB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | KW$ Trample
 SVar:RemAIDeck:True
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunbringers_touch.jpg
 Oracle:Bolster X, where X is the number of cards in your hand. Each creature you control with a +1/+1 counter on it gains trample until end of turn. (To bolster X, choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)

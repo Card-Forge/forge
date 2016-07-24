@@ -6,5 +6,7 @@ K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature you control with a +1/+1 counter on it.
 A:AB$ PutCounter | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:X:Count$Valid Creature.Other+YouCtrl+counters_GE1_P1P1
+DeckHints:Ability$Counters
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_sentinels_of_arashin.jpg
 Oracle:Flying\nHigh Sentinels of Arashin gets +1/+1 for each other creature you control with a +1/+1 counter on it.\n{3}{W}: Put a +1/+1 counter on target creature.

@@ -5,5 +5,6 @@ A:SP$ Mill | Cost$ 3 G | NumCards$ 4 | Defined$ You | SubAbility$ DBChangeZone1 
 SVar:DBChangeZone1:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand
 SVar:RemAIDeck:True
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_reclamation.jpg
 Oracle:Put the top four cards of your library into your graveyard, then return a creature card and a land card from your graveyard to your hand.

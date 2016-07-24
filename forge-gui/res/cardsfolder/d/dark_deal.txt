@@ -9,5 +9,6 @@ SVar:CleanDrawn:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount.Minus.1
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_deal.jpg
 Oracle:Each player discards all the cards in his or her hand, then draws that many cards minus one.

@@ -3,5 +3,6 @@ ManaCost:5 B
 Types:Sorcery
 K:Delve
 A:SP$ Discard | Cost$ 5 B | Defined$ Player.Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Each opponent discards two cards.
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnerve.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nEach opponent discards two cards.

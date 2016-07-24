@@ -5,5 +5,6 @@ PT:4/5
 K:Delve
 A:AB$ Mill | Cost$ 2 GU GU | Defined$ You | NumCards$ 2 | SubAbility$ DBReturn | SpellDescription$ Put the top two cards of your library into your graveyard, then return a nonland card of an opponent's choice from your graveyard to your hand.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | DefinedPlayer$ You | Chooser$ Opponent | Hidden$ True | Mandatory$ True | ChangeType$ Card.nonLand+YouOwn | AILogic$ WorstCard
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tasigur_the_golden_fang.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\n{2}{G/U}{G/U}: Put the top two cards of your library into your graveyard, then return a nonland card of an opponent's choice from your graveyard to your hand.

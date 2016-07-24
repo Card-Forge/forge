@@ -5,5 +5,7 @@ PT:2/3
 K:Outlast W
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Flying | Description$ Each creature you control wth a +1/+1 counter on it has flying.
 SVar:PlayMain1:TRUE
+DeckHints:Ability$Counters
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_falconer.jpg
 Oracle:Outlast {W} ({W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nEach creature you control with a +1/+1 counter on it has flying.

@@ -4,5 +4,6 @@ Types:Creature Naga Shaman
 PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
 SVar:TrigDig:DB$ Dig | Cost$ 0 | DigNum$ 4 | Reveal$ False | ChangeNum$ 1 | ChangeValid$ Card | DestinationZone2$ Graveyard
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_soothsayer.jpg
 Oracle:When Sultai Soothsayer enters the battlefield, look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.

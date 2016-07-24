@@ -10,5 +10,6 @@ SVar:DragonPresence:Number$0
 SVar:StoreDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 1 | ConditionPresent$ Dragon.YouCtrl | SubAbility$ StoreNoDragons
 SVar:StoreNoDragons:DB$ StoreSVar | SVar$ DragonPresence | Type$ Number | Expression$ 0 | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0
 A:SP$ Draw | Cost$ 4 U U | NumCards$ 4 | SpellDescription$ Draw four cards.
+DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonlords_prerogative.jpg
 Oracle:As an additional cost to cast Dragonlord's Prerogative, you may reveal a Dragon card from your hand.\nIf you revealed a Dragon card or controlled a Dragon as you cast Dragonlord's Prerogative, Dragonlord's Prerogative can't be countered.\nDraw four cards.

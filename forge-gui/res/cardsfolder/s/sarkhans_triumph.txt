@@ -3,5 +3,6 @@ ManaCost:2 R
 Types:Instant
 A:SP$ ChangeZone | Cost$ 2 R | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Dragon | ChangeNum$ 1 | SpellDescription$ Search your library for a Dragon creature card, reveal it, put it into your hand, then shuffle your library.
 SVar:RemRandomDeck:True
+DeckNeeds:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhans_triumph.jpg
 Oracle:Search your library for a Dragon creature card, reveal it, put it into your hand, then shuffle your library.

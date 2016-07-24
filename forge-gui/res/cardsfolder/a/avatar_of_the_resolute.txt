@@ -6,5 +6,6 @@ K:Reach
 K:Trample
 K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it.
 SVar:X:Count$Valid Creature.Other+YouCtrl+counters_GE1_P1P1
+DeckHints:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_the_resolute.jpg
 Oracle:Reach, trample\nAvatar of the Resolute enters the battlefield with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it.

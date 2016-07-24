@@ -3,5 +3,6 @@ ManaCost:2 W B G
 Types:Creature Elephant
 PT:5/7
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap each creature you control with a +1/+1 counter on it during each other player's untap step.
+DeckHints:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivorytusk_fortress.jpg
 Oracle:Untap each creature you control with a +1/+1 counter on it during each other player's untap step.

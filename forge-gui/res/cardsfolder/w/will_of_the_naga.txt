@@ -4,5 +4,6 @@ Types:Instant
 K:Delve
 A:SP$ Tap | Cost$ 4 U U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ TrigPump | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
 SVar:TrigPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_breath.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nTap up to two target creatures. Those creatures don't untap during their controller's next untap step.

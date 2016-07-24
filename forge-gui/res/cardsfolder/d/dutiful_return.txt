@@ -2,5 +2,6 @@ Name:Dutiful Return
 ManaCost:3 B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 B | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dutiful_return.jpg
 Oracle:Return up to two target creature cards from your graveyard to your hand.

@@ -4,5 +4,6 @@ Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBolster | TriggerDescription$ When CARDNAME enters the battlefield, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
 SVar:TrigBolster:AB$ PutCounter | Cost$ 0 | Bolster$ True | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandcrafter_mage.jpg
 Oracle:When Sandcrafter Mage enters the battlefield, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)

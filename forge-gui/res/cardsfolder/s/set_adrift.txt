@@ -3,5 +3,6 @@ ManaCost:5 U
 Types:Sorcery
 K:Delve
 A:SP$ ChangeZone | Cost$ 5 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target nonland permanent on top of its owner's library.
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/set_adrift.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nPut target nonland permanent on top of its owner's library.

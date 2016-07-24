@@ -6,5 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigBolster:AB$ PutCounter | Cost$ 0 | Bolster$ True | CounterType$ P1P1 | CounterNum$ 2
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls.
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_scaleguard.jpg
 Oracle:When Elite Scaleguard enters the battlefield, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)\nWhenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls.
