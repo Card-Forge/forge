@@ -3653,9 +3653,10 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // by name can also have color names, so needs to happen before colors.
         if (property.startsWith("named")) {
-            if (!getName().equals(property.substring(5))) {
+            String name = property.substring(5).replace(";", ","); // for some legendary cards
+            if (!getName().equals(name)) {
                 return false;
-            }
+            }   
         } else if (property.startsWith("notnamed")) {
             if (getName().equals(property.substring(8))) {
                 return false;

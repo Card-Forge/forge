@@ -1,0 +1,28 @@
+Name:Gisela, the Broken Blade
+ManaCost:2 W W
+Types:Legendary Creature Angel Horror
+PT:4/3
+K:Flying
+K:First Strike
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+YouOwn | IsPresent2$ Card.YouCtrl+YouOwn+namedBruna; the Fading Light | ValidPlayer$ You | Execute$ StartMeld | TriggerZones$ Battlefield | TriggerDescription$  At the beginning of your end step, if you both own and control CARDNAME and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
+SVar:StartMeld:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ ExileOther
+SVar:ExileOther:DB$ ChangeZone | ChangeType$ Card.YouCtrl+YouOwn+namedBruna; the Fading Light | Hidden$ True | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Mandatory$ True | SubAbility$ Meld
+SVar:Meld:DB$ Meld | Defined$ Remembered | Name$ Brisela, Voice of Nightmares | Primary$ Gisela, the Broken Blade | Secondary$ Bruna, the Fading Light
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gisela_the_broken_blade.jpg
+MeldPair:Bruna, the Fading Light
+AlternateMode:Meld
+Oracle:Flying, first strike, lifelink\nAt the beginning of your end step, if you both own and control Gisela, the Broken Blade and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
+
+ALTERNATE
+
+Name:Brisela, Voice of Nightmares
+Types:Legendary Creature Eldrazi Angel
+PT:9/10
+K:Flying
+K:First Strike
+K:Vigilance
+K:Lifelink
+S:Mode$ CantBeCast | ValidCard$ Card.cmcLE3 | Caster$ Opponent | Description$ Your opponents can't cast spells with converted mana cost 3 or less.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brisela_voice_of_nightmares.jpg
+Oracle:Flying, first strike, vigilance, lifelink\nYour opponents can't cast spells with converted mana cost 3 or less.

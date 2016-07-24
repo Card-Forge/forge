@@ -3137,6 +3137,7 @@ forge-gui/res/cardsfolder/b/browbeat.txt -text
 forge-gui/res/cardsfolder/b/brown_ouphe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/browse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bruna_light_of_alabaster.txt -text
+forge-gui/res/cardsfolder/b/bruna_the_fading_light.txt -text
 forge-gui/res/cardsfolder/b/brush_with_death.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/brushland.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/brushstrider.txt -text
@@ -6751,6 +6752,7 @@ forge-gui/res/cardsfolder/g/gilt_leaf_winnower.txt -text
 forge-gui/res/cardsfolder/g/giltspire_avenger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gisas_bidding.txt -text
 forge-gui/res/cardsfolder/g/gisela_blade_of_goldnight.txt -text
+forge-gui/res/cardsfolder/g/gisela_the_broken_blade_brisela_voice_of_nightmares.txt -text
 forge-gui/res/cardsfolder/g/gitaxian_probe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/give_no_ground.txt -text
 forge-gui/res/cardsfolder/g/give_take.txt -text
