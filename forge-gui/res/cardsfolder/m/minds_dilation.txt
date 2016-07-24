@@ -1,18 +1,10 @@
 Name:Mind's Dilation
-
 ManaCost:5 U U
-
 Types:Enchantment
-
 T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts his or her first spell each turn, that player exiles the top card of his or her library. If it's a nonland card, you may cast it without paying it's mana cost.
-
-SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ CastCard
-
+SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ CastCard
 SVar:CastCard:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
-
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_dilation.jpg
-
 Oracle:Whenever an opponent casts his or her first spell each turn, that player exiles the top card of his or her library. If it's a nonland card, you may cast it without paying it's mana cost.
 
