@@ -2,7 +2,7 @@ Name:Ride Down
 ManaCost:R W
 Types:Instant
 A:SP$ Destroy | Cost$ R W | ValidTgts$ Creature.blocking | TgtPrompt$ Select target blocking creature | RememberLKI$ True | SubAbility$ DBPump | SpellDescription$ Destroy target blocking creature. Creatures that were blocked by that creature this combat gain trample until end of turn.
-SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.isBlockedByRemembered | KW$ Trample | SubAbility$ DBCleanup
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.blockedByRemembered | KW$ Trample | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ride_down.jpg
 Oracle:Destroy target blocking creature. Creatures that were blocked by that creature this combat gain trample until end of turn.
