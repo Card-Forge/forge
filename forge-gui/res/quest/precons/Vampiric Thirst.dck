@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Vampiric Thirst
+Description=Vampiric Thirst - Shadows over Innistrad B/R intro pack.
+Deck Type=constructed
+Set=SOI
+Image=vampiric_thirst.jpg
+[Main]
+2 Indulgent Aristocrat|SOI
+1 Olivia's Bloodsworn|SOI
+2 Ravenous Bloodseeker|SOI
+2 Sanguinary Mage|SOI
+2 Vampire Noble|SOI
+2 Bloodmad Vampire|SOI
+2 Stromkirk Mentor|SOI
+1 Mad Prophet|SOI
+2 Voldaren Duelist|SOI
+2 Twins of Maurer Estate|SOI
+1 Markov Dreadknight|SOI
+2 Incorrigible Youths|SOI
+1 Macabre Waltz|SOI
+1 Murderous Compulsion|SOI
+2 Tormenting Voice|SOI
+2 Alms of the Vein|SOI
+2 Malevolent Whispers|SOI
+1 Burn from Within|SOI
+2 Fiery Temper|SOI
+1 Sinister Concoction|SOI
+1 Senseless Rage|SOI
+1 Creeping Dread|SOI
+13 Swamp|SOI
+12 Mountain|SOI
+[Sideboard]
+
