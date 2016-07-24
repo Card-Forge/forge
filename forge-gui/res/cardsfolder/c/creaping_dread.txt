@@ -1,0 +1,12 @@
+Name:Creeping Dread
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your upkeep, each player discards a card. Each opponent who discarded a card that shares a card type with the card you discarded loses 3 life. (Players reveal the discarded cards simultaneously.)
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBImprint
+SVar:DBImprint:DB$ Pump | ImprintCards$ ValidAll Card.IsRemembered+YouCtrl | SubAbility$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ Imprinted | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ Remembered | ClearRemembered$ True | RepeatSubAbility$ DBDmg | SubAbility$ DBCleanup
+SVar:DBDmg:DB$ LoseLife | Defined$ RememberedController | LifeAmount$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card.sharesCardTypeWith Imprinted
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/creeping_dread.jpg
+Oracle:At the beginning of your upkeep, each player discards a card. Each opponent who discarded a card that shares a card type with the card you discarded loses 3 life. (Players reveal the discarded cards simultaneously.)

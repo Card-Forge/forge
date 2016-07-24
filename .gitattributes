@@ -4097,6 +4097,7 @@ forge-gui/res/cardsfolder/c/crazed_skirge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/creakwood_ghoul.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/creakwood_liege.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cream_of_the_crop.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/creaping_dread.txt -text
 forge-gui/res/cardsfolder/c/creature_bond.txt -text
 forge-gui/res/cardsfolder/c/credit_voucher.txt -text
 forge-gui/res/cardsfolder/c/creeperhulk.txt -text
