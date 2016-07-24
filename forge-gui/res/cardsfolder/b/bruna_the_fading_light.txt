@@ -11,16 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/bruna_the_fading
 MeldPair:Gisela, the Broken Blade
 AlternateMode:Meld
 Oracle:When you cast Bruna, the Fading Light, you may return target Angel or Human creature card from your graveyard to the battlefield.\nFlying, vigilance\n(Melds with Gisela, the Broken Blade.)
-
-ALTERNATE
-
-Name:Brisela, Voice of Nightmares
-Types:Legendary Creature Eldrazi Angel
-PT:9/10
-K:Flying
-K:First Strike
-K:Vigilance
-K:Lifelink
-S:Mode$ CantBeCast | ValidCard$ Card.cmcLE3 | Caster$ Opponent | Description$ Your opponents can't cast spells with converted mana cost 3 or less.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brisela_voice_of_nightmares.jpg
-Oracle:Flying, first strike, vigilance, lifelink\nYour opponents can't cast spells with converted mana cost 3 or less.
