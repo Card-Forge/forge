@@ -1,0 +1,25 @@
+Name:Hanweir Battlements
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
+A:AB$ ChangeZone | Cost$ 3 R R T | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ ExileOther | ConditionPresent$ Card.Self+YouCtrl+YouOwn | ConditionCheckSVar$ X | References$ X | SpellDescription$ If you both own and control CARDNAME and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
+SVar:ExileOther:DB$ ChangeZone | ChangeType$ Creature.YouCtrl+YouOwn+namedHanweir Garrison | Hidden$ True | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Mandatory$ True | SubAbility$ Meld | ConditionCheckSVar$ X | References$ X
+SVar:Meld:DB$ Meld | Defined$ Remembered | Name$ Hanweir, the Writhing Township | Primary$ Hanweir Battlements | Secondary$ Hanweir Garrison
+SVar:X:Count$Valid Creature.YouCtrl+YouOwn+namedHanweir Garrison
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_battlements.jpg
+MeldPair:Hanweir Garrison
+AlternateMode:Meld
+Oracle:{T}: Add Colorless to your mana pool.\n{R}, {T}: Target creature gains haste until end of turn.\n{3}{R}{R}{R}, {T}: If you both own and control Hanweir Battlements and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
+
+ALTERNATE
+
+Name:Hanweir, the Writhing Township
+Types:Legendary Creature Eldrazi Ooze
+PT:7/4
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, put two 3/2 colorless Eldrazi Horror creature tokens onto the battlefield tapped and attacking.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2 | TokenTapped$ True | TokenAttacking$ True | TokenImage$ c 3 2 eldrazi horror EMN
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_the_writhing_township.jpg
+Oracle:Trample, haste\nWhenever Hanweir, the Writhing Township attacks, put two 3/2 colorless Eldrazi Horror creature tokens onto the battlefield tapped and attacking.

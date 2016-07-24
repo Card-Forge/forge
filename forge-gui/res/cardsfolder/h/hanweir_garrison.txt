@@ -1,0 +1,24 @@
+Name:Hanweir Garrison
+ManaCost:2 R
+Types:Creature Human Soldier
+PT:2/3
+Text:(Melds with Hanweir Battlements.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, put two 1/1 red Human creature tokens onto the battlefield tapped and attacking.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenTapped$ True | TokenAttacking$ True | TokenImage$ r 1 1 soldier EMN
+SVar:HasAttackEffect:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_garrison.jpg
+MeldPair:Hanweir Battlements
+AlternateMode:Meld
+Oracle:Whenever Hanweir Garrison attacks, put two 1/1 red Human creature tokens onto the battlefield tapped and attacking.\n(Melds with Hanweir Battlements.)
+
+ALTERNATE
+
+Name:Hanweir, the Writhing Township
+Types:Legendary Creature Eldrazi Ooze
+PT:7/4
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, put two 3/2 colorless Eldrazi Horror creature tokens onto the battlefield tapped and attacking.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2 | TokenTapped$ True | TokenAttacking$ True | TokenImage$ c 3 2 eldrazi horror EMN
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_the_writhing_township.jpg
+Oracle:Trample, haste\nWhenever Hanweir, the Writhing Township attacks, put two 3/2 colorless Eldrazi Horror creature tokens onto the battlefield tapped and attacking.
