@@ -1353,47 +1353,8 @@ public class GameAction {
             return null;
         }
 
-        boolean persist = (c.hasKeyword("Persist") && c.getCounters(CounterType.M1M1) == 0) && !c.isToken();
-        boolean undying = (c.hasKeyword("Undying") && c.getCounters(CounterType.P1P1) == 0) && !c.isToken();
-
         final Card newCard = moveToGraveyard(c);
 
-        // don't trigger persist/undying if the dying has been replaced
-        if (newCard == null || !newCard.isInZone(ZoneType.Graveyard)) {
-            persist = false;
-            undying = false;
-        }
-
-        // System.out.println("Card " + c.getName() +
-        // " is getting sent to GY, and this turn it got damaged by: ");
-
-        if (persist) {
-            final Card persistCard = newCard;
-            String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d" +
-            		" | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1",
-                    persistCard.getId());
-            SpellAbility persistAb = AbilityFactory.getAbility(effect, c);
-            persistAb.setTrigger(true);
-            persistAb.setStackDescription(newCard.getName() + " - Returning from Persist");
-            persistAb.setDescription(newCard.getName() + " - Returning from Persist");
-            persistAb.setActivatingPlayer(c.getController());
-
-            game.getStack().addSimultaneousStackEntry(persistAb);
-        }
-
-        if (undying) {
-            final Card undyingCard = newCard;
-            String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d |" +
-            		" Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1",
-            		undyingCard.getId());
-            SpellAbility undyingAb = AbilityFactory.getAbility(effect, c);
-            undyingAb.setTrigger(true);
-            undyingAb.setStackDescription(newCard.getName() + " - Returning from Undying");
-            undyingAb.setDescription(newCard.getName() + " - Returning from Undying");
-            undyingAb.setActivatingPlayer(c.getController());
-
-            game.getStack().addSimultaneousStackEntry(undyingAb);
-        }
         return newCard;
     }
 

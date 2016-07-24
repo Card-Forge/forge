@@ -2519,6 +2519,12 @@ public class CardFactoryUtil {
             else if (keyword.equals("Flanking")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.equals("Persist")) {
+                addTriggerAbility(keyword, card, null);
+            }
+            else if (keyword.equals("Undying")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Unleash")) {
                 addReplacementEffect(keyword, card, null);
                 addStaticAbility(keyword, card, null);
@@ -3053,6 +3059,19 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
+        } else if (keyword.equals("Persist")) {
+            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard " +
+                    " | Execute$ PersistReturn | ValidCard$ Card.Self+counters_EQ0_M1M1 | Secondary$ True" + 
+            		" | TriggerDescription$ Persist (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            final String effect = "AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1";
+
+            final Trigger persistTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(persistTrigger);
+
+            card.setSVar("PersistReturn", effect);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
         } else if (keyword.startsWith("Rampage")) {
             final String[] k = keyword.split(" ");
             final String n = k[1];
@@ -3071,6 +3090,19 @@ public class CardFactoryUtil {
             card.setSVar("Rampage" + n, "SVar$RampageCount/Times." + n);
 
             card.setSVar("RampageCount", "TriggerCount$NumBlockers/Minus.1");
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Undying")) {
+            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard " +
+                    " | Execute$ UndyingReturn | ValidCard$ Card.Self+counters_EQ0_P1P1 | Secondary$ True" + 
+            		" | TriggerDescription$ Undying (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            final String effect = "AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1";
+
+            final Trigger undyingTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(undyingTrigger);
+
+            card.setSVar("UndyingReturn", effect);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
