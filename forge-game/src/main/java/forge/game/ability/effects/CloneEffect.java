@@ -17,6 +17,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,6 +87,12 @@ public class CloneEffect extends SpellAbilityEffect {
         if (!cloneTargets.isEmpty()) {
             tgtCard = cloneTargets.get(0);
             game.getTriggerHandler().clearInstrinsicActiveTriggers(tgtCard, null);
+        }
+
+        if (sa.hasParam("CloneZone")) {
+            if (!tgtCard.getZone().is(ZoneType.smartValueOf(sa.getParam("CloneZone")))) {
+                return;
+            }
         }
 
         // determine the image to be used for the clone

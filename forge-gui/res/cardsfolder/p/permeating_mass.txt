@@ -1,16 +1,9 @@
 Name:Permeating Mass
-
 ManaCost:G
-
 Types:Creature Spirit
-
 PT:1/3
-
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, that creature becomes a copy of Permeating Mass.
-
-SVar:TrigCopy:AB$Clone | Cost$ 0 | Defined$ Self | CloneTarget$ TriggeredTarget
-
+SVar:TrigCopy:AB$Clone | Cost$ 0 | Defined$ Self | CloneZone$ Battlefield | CloneTarget$ TriggeredTarget
 SVar:Picture:http://www.wizards.com/global/images/magic/general/permeating_mass.jpg
-
 Oracle:Whenever Permeating Mass deals combat damage to a creature, that creature becomes a copy of Permeating Mass.
 
