@@ -38,12 +38,14 @@ public final class CardRules implements ICardCharacteristics {
     private ICardFace otherPart;
     private CardAiHints aiHints;
     private ColorSet colorIdentity;
+    private String meldWith;
 
     private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
         aiHints = cah;
+        meldWith = "";
 
         //calculate color identity
         byte colMask = calculateColorIdentity(mainPart);
@@ -63,6 +65,7 @@ public final class CardRules implements ICardCharacteristics {
         otherPart = newRules.otherPart;
         aiHints = newRules.aiHints;
         colorIdentity = newRules.colorIdentity;
+        meldWith = newRules.meldWith;
     }
 
     private static byte calculateColorIdentity(final ICardFace face) {
@@ -195,6 +198,10 @@ public final class CardRules implements ICardCharacteristics {
         return mainPart.getOracleText().contains("can be your commander");
     }
 
+    public String getMeldWith() {
+        return meldWith;
+    }
+
 //    public Set<String> getSets() { return this.setsPrinted.keySet(); }
 //    public CardInSet getEditionInfo(final String setCode) {
 //        final CardInSet result = this.setsPrinted.get(setCode);
@@ -242,6 +249,7 @@ public final class CardRules implements ICardCharacteristics {
         private String[] pictureUrl = new String[] { null, null };
         private int curFace = 0;
         private CardSplitType altMode = CardSplitType.None;
+        private String meldWith = "";
         private String handLife = null;
 
         // fields to build CardAiHints
@@ -281,6 +289,7 @@ public final class CardRules implements ICardCharacteristics {
             faces[0].assignMissingFields();
             if (null != faces[1]) faces[1].assignMissingFields();
             final CardRules result = new CardRules(faces, altMode, cah);
+            result.meldWith = this.meldWith;
             result.setDlUrls(pictureUrl);
             if (StringUtils.isNotBlank(handLife))
                 result.setVanguardProperties(handLife);
@@ -362,6 +371,8 @@ public final class CardRules implements ICardCharacteristics {
                     if ("ManaCost".equals(key)) {
                         this.faces[this.curFace].setManaCost("no cost".equals(value) ? ManaCost.NO_COST
                                 : new ManaCost(new ManaCostParser(value)));
+                    } else if ("MeldPair".equals(key)) {
+                        this.meldWith = value;
                     }
                     break;
 

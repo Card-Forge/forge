@@ -177,8 +177,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         if (paperCard.getRules().getSplitType() == CardSplitType.None) { return; }
 
-        //allow looking up card by the name of other faces
-        allCardsByName.put(paperCard.getRules().getOtherPart().getName(), paperCard);
+        if (paperCard.getRules().getOtherPart() != null) {
+            //allow looking up card by the name of other faces
+            allCardsByName.put(paperCard.getRules().getOtherPart().getName(), paperCard);
+        }
         if (paperCard.getRules().getSplitType() == CardSplitType.Split) {
             //also include main part for split cards
             allCardsByName.put(paperCard.getRules().getMainPart().getName(), paperCard);
@@ -216,6 +218,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return true;
         }
         return false;
+    }
+
+    public CardRules getRules(String cardname) {
+        CardRules result = rulesByName.get(cardname);
+        if (result != null) {
+            return result;
+        } else {
+            return CardRules.getUnsupportedCardNamed(cardname);
+        }
     }
 
     @Override

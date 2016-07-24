@@ -324,6 +324,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             else if (isDoubleFaced() && currentStateName != CardStateName.Transformed) {
                 return states.get(CardStateName.Transformed);
             }
+            else if (this.isMeldable() && currentStateName != CardStateName.Meld) {
+                return states.get(CardStateName.Meld);
+            }
             else {
                 return states.get(CardStateName.Original);
             }
@@ -6623,6 +6626,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean isCommander() {
+        if (this.getMeldedWith() != null && this.getMeldedWith().isCommander())
+            return true;
         return isCommander;
     }
     public void setCommander(boolean b) {

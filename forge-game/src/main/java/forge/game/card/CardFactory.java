@@ -18,7 +18,9 @@
 package forge.game.card;
 
 import forge.ImageKeys;
+import forge.StaticData;
 import forge.card.CardStateName;
+import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.CardType;
@@ -423,7 +425,11 @@ public class CardFactory {
         if (st != CardSplitType.None) {
             card.addAlternateState(st.getChangedStateName(), false);
             card.setState(st.getChangedStateName(), false);
-            readCardFace(card, rules.getOtherPart());
+            if (rules.getOtherPart() != null) {
+                readCardFace(card, rules.getOtherPart());
+            } else if (!rules.getMeldWith().isEmpty()) {
+                readCardFace(card, StaticData.instance().getCommonCards().getRules(rules.getMeldWith()).getOtherPart());
+            }
         }
         
         if (card.isInAlternateState()) {
