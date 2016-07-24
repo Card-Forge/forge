@@ -2,7 +2,7 @@ Name:Demonic Rising
 ManaCost:3 B B
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ1 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ b 5 5 demon AVR | TokenAmount$ 1 | TokenName$ Demon | TokenTypes$ Creature,Demon | TokenOwner$ You | TokenColors$ Black | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ b 5 5 demon | TokenAltImages$ b_5_5_demon_AVR | TokenAmount$ 1 | TokenName$ Demon | TokenTypes$ Creature,Demon | TokenOwner$ You | TokenColors$ Black | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_rising.jpg
 Oracle:At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield.

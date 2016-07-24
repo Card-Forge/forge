@@ -2,7 +2,7 @@ Name:Call the Scions
 ManaCost:2 G
 Types:Sorcery
 K:Devoid
-A:SP$ Token | Cost$ 2 G | TokenAmount$ 2 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3 | TokenAbilities$ ABMana | SpellDescription$ Put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."
+A:SP$ Token | Cost$ 2 G | TokenAmount$ 2 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3,c_1_1_eldrazi_scion4,c_1_1_eldrazi_scion5,c_1_1_eldrazi_scion6 | TokenAbilities$ ABMana | SpellDescription$ Put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
 DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_the_scions.jpg

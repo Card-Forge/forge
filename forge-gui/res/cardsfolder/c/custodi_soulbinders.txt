@@ -4,6 +4,6 @@ Types:Creature Human Cleric
 PT:0/0
 K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the number of other creatures on the battlefield.
 SVar:X:Count$Valid Creature.Other
-A:AB$ Token | Cost$ 2 W SubCounter<1/P1P1> | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put a 1/1 white Spirit creature token with flying onto the battlefield.
+A:AB$ Token | Cost$ 2 W SubCounter<1/P1P1> | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ w_1_1_spirit_CNS | SpellDescription$ Put a 1/1 white Spirit creature token with flying onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/custodi_soulbinders.jpg
 Oracle:Custodi Soulbinders enters the battlefield with X +1/+1 counters on it, where X is the number of other creatures on the battlefield.\n{2}{W}, Remove a +1/+1 counter from Custodi Soulbinders: Put a 1/1 white Spirit creature token with flying onto the battlefield.

@@ -4,7 +4,7 @@ Types:Instant
 K:Devoid
 A:SP$ Tap | Cost$ 3 U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ TrigPump | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap step. Put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."
 SVar:TrigPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3 | TokenAbilities$ ABMana
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3,c_1_1_eldrazi_scion4,c_1_1_eldrazi_scion5,c_1_1_eldrazi_scion6 | TokenAbilities$ ABMana
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
 DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adverse_conditions.jpg

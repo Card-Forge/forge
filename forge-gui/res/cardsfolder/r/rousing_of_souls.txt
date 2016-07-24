@@ -2,7 +2,7 @@ Name:Rousing of Souls
 ManaCost:2 W
 Types:Sorcery
 A:SP$ Dig | Cost$ 2 W | PreCostDesc$ Parley - | DigNum$ 1 | Defined$ Player | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBToken | SpellDescription$ Each player reveals the top card of his or her library. For each nonland card revealed this way, you put a 1/1 white Spirit creature token with flying onto the battlefield. Then each player draws a card.
-SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ DBDraw
+SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ w_1_1_spirit_CNS | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand

@@ -4,7 +4,7 @@ Types:Creature Eldrazi
 PT:5/5
 K:Devoid
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3 | TokenAbilities$ ABMana
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3,c_1_1_eldrazi_scion4,c_1_1_eldrazi_scion5,c_1_1_eldrazi_scion6 | TokenAbilities$ ABMana
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Tap | Cost$ Sac<1/Card.Eldrazi+Scion> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 DeckHas:Ability$Mana.Colorless
