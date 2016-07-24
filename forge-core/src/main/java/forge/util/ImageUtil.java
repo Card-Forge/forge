@@ -87,14 +87,21 @@ public class ImageUtil {
 
     public static boolean hasBackFacePicture(PaperCard cp) {
         CardSplitType cst = cp.getRules().getSplitType();
-        return cst == CardSplitType.Transform || cst == CardSplitType.Flip;
+        return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld;
     }
 
     public static String getNameToUse(PaperCard cp, boolean backFace) {
         final CardRules card = cp.getRules();
         if (backFace ) {
             if ( hasBackFacePicture(cp) )
-                return card.getOtherPart().getName();
+                if (card.getOtherPart() != null) {
+                    return card.getOtherPart().getName();
+                } else if (!card.getMeldWith().isEmpty()) {
+                    final CardDb db =  StaticData.instance().getCommonCards();
+                    return db.getRules(card.getMeldWith()).getOtherPart().getName();
+                } else {
+            	    return null;
+                }
             else
                 return null;
         } else if(CardSplitType.Split == cp.getRules().getSplitType()) {
