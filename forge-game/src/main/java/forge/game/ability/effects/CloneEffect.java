@@ -100,7 +100,7 @@ public class CloneEffect extends SpellAbilityEffect {
         final boolean keepName = sa.hasParam("KeepName");
         final String originalName = tgtCard.getName();
         final boolean copyingSelf = (tgtCard == cardToCopy);
-        final boolean isTransformed = cardToCopy.getCurrentStateName() == CardStateName.Transformed;
+        final boolean isTransformed = cardToCopy.getCurrentStateName() == CardStateName.Transformed || cardToCopy.getCurrentStateName() == CardStateName.Meld;
         final CardStateName origState = isTransformed || cardToCopy.isFaceDown() ? CardStateName.Original : cardToCopy.getCurrentStateName();
 
         if (!copyingSelf) {
