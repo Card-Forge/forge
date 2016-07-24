@@ -8,8 +8,11 @@ Forge Beta: 07-16-2016 ver 1.5.54
 Release Notes
 -------------
 
+- Booster Draft AI improvements -
+This release features improvements to the drafting AI which should be noticeable in the Booster Draft mode including Quest Draft Tournaments. In particular, the AI should rank the cards better depending on the synergy of their abilities and effects (for the cards that have AI hints scripted for them). Currently these deckbuilding hints are implemented for the sets starting with Khans of Tarkir.
+
 - Eldritch Moon -
-This release contains most of the EMN set. Due to some difficulties with implementing Meld cards, these are not yet available in Forge.
+This release contains most of the EMN set (several cards are not yet available).
 
 - Card Images -
 All missing card images should be available through the content downloaders now, including the Eldritch Moon cards. If you find any that are still missing, please let us know! The remaining tokens and product images will be covered in upcoming releases.
