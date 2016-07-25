@@ -60,7 +60,7 @@ public class ManaCostAdjustment {
         for (Card c : cardsOnBattlefield) {
             final Iterable<StaticAbility> staticAbilities = c.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.getMapParams().get("Mode").equals("RaiseCost")) {
+                if (stAb.getMapParams().get("Mode").equals("RaiseCost") && !stAb.getMapParams().containsKey("Cost")) {
                     raiseAbilities.add(stAb);
                 }
                 else if (stAb.getMapParams().get("Mode").equals("ReduceCost")) {
