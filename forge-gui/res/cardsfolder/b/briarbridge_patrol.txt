@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Human Warrior
 PT:3/3
 # Two pronged handling of investigation portion
-T:Mode$ DamageDone | ValidSource$ Card | CombatDamage$ False | ValidTarget$ Creature | TriggerZones$ Battlefield | OncePerEffect$ True | Execute$ TrigToken | TriggerDescription$ Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.")
+T:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ False | ValidTarget$ Creature | TriggerZones$ Battlefield | OncePerEffect$ True | Execute$ TrigToken | TriggerDescription$ Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.")
 
 T:Mode$ DealtCombatDamageOnce | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.")
 
