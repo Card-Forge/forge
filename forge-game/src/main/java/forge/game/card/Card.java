@@ -1413,6 +1413,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append(")");
             } else if (keyword.equals("Convoke") || keyword.equals("Menace") || keyword.equals("Dethrone")) {
+                if (sb.length() != 0) {
+                    sb.append("\r\n");
+                }
                 sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.endsWith(" offering")) {
                 String offeringType = keyword.split(" ")[0];
