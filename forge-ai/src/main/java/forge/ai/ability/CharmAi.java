@@ -25,26 +25,28 @@ public class CharmAi extends SpellAbilityAi {
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
 
-        // reset the chosen list. Otherwise it will be locked in forever
+        // Reset the chosen list otherwise it will be locked in forever by earlier calls
         sa.setChosenList(null);
-        List<AbilitySub> chosenList = min > 1 ? chooseMultipleOptionsAi(CharmEffect.makePossibleOptions(sa), ai, min)
-                : chooseOptionsAi(sa, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"), false);
+        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        List<AbilitySub> chosenList = min > 1 ? chooseMultipleOptionsAi(choices, ai, min)
+                : chooseOptionsAi(choices, sa, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"), false);
 
         if (chosenList.isEmpty()) {
-            return false;
-        } else {
-            sa.setChosenList(chosenList);
+            if (timingRight) {
+                // Set minimum choices for triggers where chooseMultipleOptionsAi() returns null
+                chosenList = chooseOptionsAi(choices, sa, ai, true, num, min, sa.hasParam("CanRepeatModes"), false);
+            } else {
+                return false;
+            }
         }
+        sa.setChosenList(chosenList);
 
         // prevent run-away activations - first time will always return true
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    public static List<AbilitySub> chooseOptionsAi(SpellAbility sa, final Player ai, boolean playNow, int num, int min, boolean allowRepeat, boolean opponentChoser) {
-        if (sa.getChosenList() != null) {
-            return sa.getChosenList();
-        }
-        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+    private List<AbilitySub> chooseOptionsAi(List<AbilitySub> choices, SpellAbility sa, final Player ai,
+            boolean playNow, int num, int min, boolean allowRepeat, boolean opponentChoser) {
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
 
         if (opponentChoser) {
@@ -136,6 +138,7 @@ public class CharmAi extends SpellAbilityAi {
             return chosenList;
         }
         
+        // Make choice(s)
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (int i = 0; i < num; i++) {
             AbilitySub thisPick = null;
@@ -157,6 +160,7 @@ public class CharmAi extends SpellAbilityAi {
                 chosenList.add(thisPick);
             }
         }
+        // Set minimum choices for triggers
         if (playNow && chosenList.size() < min) {
             for (int i = 0; i < min; i++) {
                 AbilitySub thisPick = null;
@@ -180,7 +184,6 @@ public class CharmAi extends SpellAbilityAi {
     private List<AbilitySub> chooseMultipleOptionsAi(List<AbilitySub> choices, final Player ai, int min) {
         AbilitySub goodChoice = null;
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
-        // select first n playable options
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
@@ -200,13 +203,11 @@ public class CharmAi extends SpellAbilityAi {
         // Add generic good choice if one more choice is needed
         if (chosenList.size() == min - 1 && goodChoice != null) {
             chosenList.add(0, goodChoice);  // hack to make Dromoka's Command fight targets work
-            return chosenList;
         }
         if (chosenList.size() != min) {
-            return new ArrayList<AbilitySub>();
-        } else {
-            return chosenList;
+            chosenList.clear();
         }
+        return chosenList;
     } 
 
     @Override
