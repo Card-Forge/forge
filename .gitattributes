@@ -490,6 +490,7 @@ forge-game/src/main/java/forge/game/combat/CombatView.java -text
 forge-game/src/main/java/forge/game/combat/GlobalAttackRestrictions.java -text
 forge-game/src/main/java/forge/game/cost/Cost.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/cost/CostAddMana.java -text
+forge-game/src/main/java/forge/game/cost/CostAdjustment.java -text
 forge-game/src/main/java/forge/game/cost/CostChooseCreatureType.java -text
 forge-game/src/main/java/forge/game/cost/CostDamage.java -text
 forge-game/src/main/java/forge/game/cost/CostDecisionMakerBase.java -text

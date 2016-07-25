@@ -30,6 +30,7 @@ import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostAddMana;
+import forge.game.cost.CostAdjustment;
 import forge.game.cost.CostDamage;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostDraw;
@@ -281,7 +282,7 @@ public class HumanPlay {
             current = Iterables.getFirst(AbilityUtils.getDefinedCards(source, sourceAbility.getParam("ShowCurrentCard"), sourceAbility), null);
         }
 
-        final List<CostPart> parts = cost.getCostParts();
+        final List<CostPart> parts = CostAdjustment.adjust(cost, sourceAbility).getCostParts();
         final List<CostPart> remainingParts = new ArrayList<CostPart>(parts);
         CostPart costPart = null;
         if (!parts.isEmpty()) {
