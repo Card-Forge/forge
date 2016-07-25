@@ -309,6 +309,8 @@ public final class CardUtil {
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
         newCopy.setChangedCardTypes(in.getChangedCardTypes());
 
+        newCopy.setMeldedWith(in.getMeldedWith());
+
         return newCopy;
     }
 
