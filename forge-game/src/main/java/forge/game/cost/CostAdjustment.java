@@ -103,6 +103,7 @@ public class CostAdjustment {
                     }
                     sub = sub.getSubAbility();
                 }
+                --count;
             } else if ("Strive".equals(amount)) {
                 for (TargetChoices tc : sa.getAllTargetChoices()) {
                     count += tc.getNumTargeted();
