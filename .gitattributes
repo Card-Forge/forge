@@ -15359,6 +15359,7 @@ forge-gui/res/cardsfolder/t/think_tank.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/think_twice.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thirst.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thirst_for_knowledge.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/thirsting_axe.txt -text
 forge-gui/res/cardsfolder/t/thistledown_duo.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thistledown_liege.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thopter_assembly.txt svneol=native#text/plain

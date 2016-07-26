@@ -1,0 +1,13 @@
+Name:Thirsting Axe
+ManaCost:3
+Types:Artifact Equipment
+K:Equip 2
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 4 | Description$ Equipped creature gets +4/+0.
+T:Mode$ DealtCombatDamageOnce | ValidSource$ Creature | ValidTarget$ Creature | Execute$ TrigPump | Static$ True
+SVar:TrigPump:DB$ Pump | Defined$ Self | RememberObjects$ TriggeredSource
+T:Mode$ TurnBegin | ValidPlayer$ Player | Execute$ ClearDamaged | Static$ True
+SVar:ClearDamaged:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.EquippedBy+IsNotRemembered | TriggerZone$ Battlefield | Execute$ SacrificeEquippee | TriggerDescription$ At the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.
+SVar:SacrificeEquippee:DB$ SacrificeAll | ValidCards$ Card.EquippedBy+IsNotRemembered
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thirsting_axe.jpg
+Oracle:Equipped creature gets +4/+0.\nWAt the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
