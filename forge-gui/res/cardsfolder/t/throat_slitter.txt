@@ -2,7 +2,7 @@ Name:Throat Slitter
 ManaCost:4 B
 Types:Creature Rat Ninja
 PT:2/2
-A:AB$ ChangeZone | Cost$ 2 B Return<1/Creature.attacking+unblocked/unblocked attacker> | CostDesc$ Ninjutsu 2 B | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ ({2}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
+K:Ninjutsu:2 B
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, destroy target nonblack creature that player controls.
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack+DefenderCtrl | TgtPrompt$ Select target nonblack creature defending player controls
 SVar:MustBeBlocked:True
