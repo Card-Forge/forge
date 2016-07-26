@@ -109,6 +109,15 @@ public final class AbilityFactory {
         return getAbility(mapParams, type, hostCard);
     }
     
+    public static final SpellAbility getAbility(final Card hostCard, final String svar) {
+        if (!hostCard.hasSVar(svar)) {
+            String source = hostCard.getName();
+            throw new RuntimeException("AbilityFactory : getAbility -- " + source +  " has no SVar: " + svar);
+        } else {
+            return getAbility(hostCard.getSVar(svar), hostCard);
+        }
+    }
+    
     public static final SpellAbility getAbility(final Map<String, String> mapParams, AbilityRecordType type, final Card hostCard) {
         return getAbility(type, type.getApiTypeOf(mapParams), mapParams, parseAbilityCost(hostCard, mapParams, type), hostCard);
     }
