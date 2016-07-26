@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Leech
 PT:2/2
 K:Flying
-S:Mode$ RaiseCost | ValidCard$ Card.Blue | Activator$ You | Type$ Spell | Color$ U | Amount$ 1 | Description$ Blue spells you cast cost {U} more to cast.
+S:Mode$ RaiseCost | ValidCard$ Card.Blue | Activator$ You | Type$ Spell | Cost$ U | Description$ Blue spells you cast cost {U} more to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sapphire_leech.jpg
 Oracle:Flying\nBlue spells you cast cost {U} more to cast.

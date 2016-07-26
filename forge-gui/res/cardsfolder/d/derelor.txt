@@ -2,6 +2,6 @@ Name:Derelor
 ManaCost:3 B
 Types:Creature Thrull
 PT:4/4
-S:Mode$ RaiseCost | ValidCard$ Card.Black | Activator$ You | Type$ Spell | Color$ B | Amount$ 1 | Description$ Black spells you cast cost {B} more to cast.
+S:Mode$ RaiseCost | ValidCard$ Card.Black | Activator$ You | Type$ Spell | Cost$ B | Description$ Black spells you cast cost {B} more to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/derelor.jpg
 Oracle:Black spells you cast cost {B} more to cast.

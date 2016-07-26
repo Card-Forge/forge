@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Leech
 PT:2/2
 A:AB$ Pump | Cost$ B | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-S:Mode$ RaiseCost | ValidCard$ Card.Black | Activator$ You | Type$ Spell | Color$ B | Amount$ 1 | Description$ Black spells you cast cost {B} more to cast.
+S:Mode$ RaiseCost | ValidCard$ Card.Black | Activator$ You | Type$ Spell | Cost$ B | Description$ Black spells you cast cost {B} more to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/andradite_leech.jpg
 Oracle:Black spells you cast cost {B} more to cast.\n{B}: Andradite Leech gets +1/+1 until end of turn.
