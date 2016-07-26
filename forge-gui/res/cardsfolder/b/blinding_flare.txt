@@ -1,10 +1,9 @@
 Name:Blinding Flare
 ManaCost:R
 Types:Sorcery
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ R | EffectZone$ All | Description$ Strive - CARDNAME costs {R} more to cast for each target beyond the first.
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | SpellDescription$ Any number of target creatures can't block this turn.
+K:Strive:R
+A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | SpellDescription$ Any number of target creatures can't block this turn.
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_flare.jpg
 Oracle:Strive - Blinding Flare costs {R} more to cast for each target beyond the first.\nAny number of target creatures can't block this turn.

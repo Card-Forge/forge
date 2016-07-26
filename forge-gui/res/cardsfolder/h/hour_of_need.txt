@@ -1,13 +1,12 @@
 Name:Hour of Need
 ManaCost:2 U
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 1 U | EffectZone$ All | Description$ Strive - CARDNAME costs {1}{U} more to cast for each target beyond the first.
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | References$ X,IncreaseCost | RememberLKI$ True | SubAbility$ DBRepeat | SpellDescription$ Exile any number of target creatures. For each creature exiled this way, its controller puts a 4/4 blue Sphinx creature token with flying onto the battlefield.
+K:Strive:1 U
+A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | References$ X | RememberLKI$ True | SubAbility$ DBRepeat | SpellDescription$ Exile any number of target creatures. For each creature exiled this way, its controller puts a 4/4 blue Sphinx creature token with flying onto the battlefield.
 SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered | UseImprinted$ True | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Sphinx | TokenTypes$ Creature,Sphinx | TokenOwner$ ImprintedController | TokenColors$ Blue | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hour_of_need.jpg
 Oracle:Strive - Hour of Need costs {1}{U} more to cast for each target beyond the first.\nExile any number of target creatures. For each creature exiled this way, its controller puts a 4/4 blue Sphinx creature token with flying onto the battlefield.

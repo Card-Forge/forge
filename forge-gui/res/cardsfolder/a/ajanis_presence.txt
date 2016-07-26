@@ -1,9 +1,8 @@
 Name:Ajani's Presence
 ManaCost:W
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 2 W | EffectZone$ All | Description$ Strive - CARDNAME costs {2}{W} more to cast for each target beyond the first.
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | KW$ Indestructible | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | SpellDescription$ Any number of target creatures each get +1/+1 and gain indestructible until end of turn.
+K:Strive:2 W
+A:SP$ Pump | Cost$ W | ValidTgts$ Creature | KW$ Indestructible | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | SpellDescription$ Any number of target creatures each get +1/+1 and gain indestructible until end of turn.
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_presence.jpg
 Oracle:Strive - Ajani's Presence costs {2}{W} more to cast for each target beyond the first.\nAny number of target creatures each get +1/+1 and gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)

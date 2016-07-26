@@ -1,9 +1,8 @@
 Name:Cruel Feeding
 ManaCost:B
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 2 B | EffectZone$ All | Description$ Strive - CARDNAME costs {2}{B} more to cast for each target beyond the first.
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | KW$ Lifelink | NumAtt$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | SpellDescription$ Any number of target creatures each get +1/+0 and gain lifelink until end of turn.
+K:Strive:2 B
+A:SP$ Pump | Cost$ B | ValidTgts$ Creature | KW$ Lifelink | NumAtt$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | SpellDescription$ Any number of target creatures each get +1/+0 and gain lifelink until end of turn.
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_feeding.jpg
 Oracle:Strive - Cruel Feeding costs {2}{B} more to cast for each target beyond the first.\nAny number of target creatures each get +1/+0 and gain lifelink until end of turn. (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)

@@ -1,9 +1,8 @@
 Name:Nature's Panoply
 ManaCost:G
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 2 G | EffectZone$ All | Description$ Strive - CARDNAME {2}{G} more to cast for each target beyond the first.
+K:Strive:2 G
 A:SP$ PutCounter | Cost$ G | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Choose any number of target creatures. Put a +1/+1 counter on each of them.
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_panoply.jpg
 Oracle:Strive - Nature's Panoply costs {2}{G} more to cast for each target beyond the first.\nChoose any number of target creatures. Put a +1/+1 counter on each of them.

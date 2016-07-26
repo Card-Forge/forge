@@ -1,10 +1,9 @@
 Name:Colossal Heroics
 ManaCost:2 G
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 1 G | EffectZone$ All | Description$ Strive - CARDNAME {1}{G} more to cast for each target beyond the first.
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | SubAbility$ DBUntap | SpellDescription$ Any number of target creatures each get +2/+2 until end of turn. Untap those creatures.
+K:Strive:1 G
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | SubAbility$ DBUntap | SpellDescription$ Any number of target creatures each get +2/+2 until end of turn. Untap those creatures.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colossal_heroics.jpg
 Oracle:Strive - Colossal Heroics costs {1}{G} more to cast for each target beyond the first.\nAny number of target creatures each get +2/+2 until end of turn. Untap those creatures.

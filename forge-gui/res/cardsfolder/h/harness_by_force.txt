@@ -1,9 +1,8 @@
 Name:Harness by Force
 ManaCost:1 R R
 Types:Sorcery
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 2 R | EffectZone$ All | Description$ Strive - CARDNAME costs {2}{R} more to cast for each target beyond the first.
-A:SP$ GainControl | Cost$ 1 R R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of any number of target creatures until end of turn. Untap those creatures. They gain haste until end of turn.
+K:Strive:2 R
+A:SP$ GainControl | Cost$ 1 R R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of any number of target creatures until end of turn. Untap those creatures. They gain haste until end of turn.
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harness_by_force.jpg
 Oracle:Strive - Harness by Force costs {2}{R} more to cast for each target beyond the first.\nGain control of any number of target creatures until end of turn. Untap those creatures. They gain haste until end of turn.

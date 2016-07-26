@@ -1,11 +1,10 @@
 Name:Silence the Believers
 ManaCost:2 B B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B B | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts,IncreaseCost | IsCurse$ True | RememberTargets$ True | SubAbility$ DBExile | StackDescription$ Exile {c:Targeted} and all Auras attached to them. | SpellDescription$ Exile any number of target creatures and all Auras attached to them.
+K:Strive:2 B
+A:SP$ Pump | Cost$ 2 B B | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | IsCurse$ True | RememberTargets$ True | SubAbility$ DBExile | StackDescription$ Exile {c:Targeted} and all Auras attached to them. | SpellDescription$ Exile any number of target creatures and all Auras attached to them.
 SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Aura.AttachedTo Targeted | Origin$ Battlefield | Destination$ Exile | UseAllOriginZones$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MaxTgts:Count$Valid Creature
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 2 B | EffectZone$ All | Description$ Strive - CARDNAME costs {2}{B} more to cast for each target beyond the first.
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silence_the_believers.jpg
 Oracle:Strive - Silence the Believers costs {2}{B} more to cast for each target beyond the first.\nExile any number of target creatures and all Auras attached to them.

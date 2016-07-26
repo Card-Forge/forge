@@ -1,9 +1,8 @@
 Name:Phalanx Formation
 ManaCost:2 W
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 1 W | EffectZone$ All | Description$ Strive - CARDNAME costs {1}{W} more to cast for each target beyond the first.
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | KW$ Double Strike | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | SpellDescription$ Any number of target creatures each gain double strike until end of turn.
+K:Strive:1 W
+A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | KW$ Double Strike | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | SpellDescription$ Any number of target creatures each gain double strike until end of turn.
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phalanx_formation.jpg
 Oracle:Strive - Phalanx Formation costs {1}{W} more to cast for each target beyond the first.\nAny number of target creatures each gain double strike until end of turn. (They deal both first-strike and regular combat damage.)

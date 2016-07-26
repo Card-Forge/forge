@@ -1,10 +1,9 @@
 Name:Kiora's Dismissal
 ManaCost:U
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ U | EffectZone$ All | Description$ Strive - CARDNAME costs {U} more to cast for each target beyond the first.
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | References$ X,IncreaseCost | SpellDescription$ Return any number of target enchantments to their owners' hands.
+K:Strive:U
+A:SP$ ChangeZone | Cost$ U | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | References$ X | SpellDescription$ Return any number of target enchantments to their owners' hands.
 SVar:X:Count$Valid Enchantment
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kioras_dismissal.jpg
 Oracle:Strive - Kiora's Dismissal costs {U} more to cast for each target beyond the first.\nReturn any number of target enchantments to their owners' hands.

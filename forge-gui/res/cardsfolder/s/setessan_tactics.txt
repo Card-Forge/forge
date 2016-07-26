@@ -1,12 +1,11 @@
 Name:Setessan Tactics
 ManaCost:1 G
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ G | EffectZone$ All | Description$ Strive - CARDNAME costs {G} more to cast for each target beyond the first.
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, any number of target creatures each get +1/+1 and gain "{T}: This creature fights another target creature."
+K:Strive:G
+A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, any number of target creatures each get +1/+1 and gain "{T}: This creature fights another target creature."
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Abilities$ SetessanFight
 SVar:SetessanFight:AB$ Fight | Cost$ T | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another creature | SpellDescription$ CARDNAME fights another target creature.
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/setessan_tactics.jpg
 Oracle:Strive - Setessan Tactics costs {G} more to cast for each target beyond the first.\nUntil end of turn, any number of target creatures each get +1/+1 and gain "{T}: This creature fights another target creature."

@@ -1,11 +1,10 @@
 Name:Launch the Fleet
 ManaCost:W
 Types:Sorcery
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | EffectZone$ All | Description$ Strive - CARDNAME costs {1} more to cast for each target beyond the first.
-A:SP$ Animate | Cost$ W | TargetMin$ 0 | TargetMax$ MaxTargets | AILogic$ Attacking | ValidTgts$ Creature | Triggers$ AttackTrigger | sVars$ LaunchTokenAttacking | References$ AttackTrigger,MaxTargets,IncreaseCost,LaunchTokenAttacking | SpellDescription$ Until end of turn, any number of target creatures each gain "Whenever this creature attacks, put a 1/1 white Soldier creature token onto the battlefield tapped and attacking."
+K:Strive:1
+A:SP$ Animate | Cost$ W | TargetMin$ 0 | TargetMax$ MaxTargets | AILogic$ Attacking | ValidTgts$ Creature | Triggers$ AttackTrigger | sVars$ LaunchTokenAttacking | References$ AttackTrigger,MaxTargets,LaunchTokenAttacking | SpellDescription$ Until end of turn, any number of target creatures each gain "Whenever this creature attacks, put a 1/1 white Soldier creature token onto the battlefield tapped and attacking."
 SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ LaunchTokenAttacking | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, put a 1/1 white Soldier creature token onto the battlefield tapped and attacking.
 SVar:LaunchTokenAttacking:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w_1_1_soldier2_ths | TokenAttacking$ True | TokenTapped$ True
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/launch_the_fleet.jpg
 Oracle:Strive - Launch the Fleet costs {1} more to cast for each target beyond the first.\nUntil end of turn, any number of target creatures each gain "Whenever this creature attacks, put a 1/1 white Soldier creature token onto the battlefield tapped and attacking."

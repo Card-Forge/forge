@@ -1,12 +1,11 @@
 Name:Solidarity of Heroes
 ManaCost:1 G
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 1 G | EffectZone$ All | Description$ Strive - CARDNAME costs {1}{G} more to cast for each target beyond the first.
-A:SP$ RepeatEach | Cost$ 1 G | DefinedCards$ Targeted | RepeatSubAbility$ DBPutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | SpellDescription$ Choose any number of target creatures. Double the number of +1/+1 counters on each of them.
+K:Strive:1 G
+A:SP$ RepeatEach | Cost$ 1 G | DefinedCards$ Targeted | RepeatSubAbility$ DBPutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | SpellDescription$ Choose any number of target creatures. Double the number of +1/+1 counters on each of them.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:Remembered$CardCounters.P1P1
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solidarity_of_heroes.jpg
 Oracle:Strive - Solidarity of Heroes costs {1}{G} more to cast for each target beyond the first.\nChoose any number of target creatures. Double the number of +1/+1 counters on each of them.

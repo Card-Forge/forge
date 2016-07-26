@@ -1,12 +1,12 @@
 Name:Polymorphous Rush
 ManaCost:2 U
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 1 U | EffectZone$ All | Description$ Strive - CARDNAME costs {1}{U} more to cast for each target beyond the first.
-A:SP$ ChooseCard | Cost$ 2 U | Defined$ You | Amount$ 1 | Choices$ Creature | Mandatory$ True | SubAbility$ Pump4Tgt | AILogic$ Clone | References$ IncreaseCost | SpellDescription$ Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
-SVar:Pump4Tgt:DB$ RepeatEach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | DefinedCards$ Targeted | RepeatSubAbility$ ShapeTgt
+K:Strive:1 U
+A:SP$ ChooseCard | Cost$ 2 U | Defined$ You | Amount$ 1 | Choices$ Creature | Mandatory$ True | SubAbility$ Pump4Tgt | AILogic$ Clone | SpellDescription$ Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
+SVar:Pump4Tgt:DB$ RepeatEach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | DefinedCards$ Targeted | RepeatSubAbility$ ShapeTgt | SubAbility$ DBCleanup
 SVar:ShapeTgt:DB$ Clone | Defined$ ChosenCard | CloneTarget$ Remembered | Duration$ UntilEndOfTurn
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:MaxTargets:Count$Valid Creature.YouCtrl
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/polymorphous_rush.jpg
 Oracle:Strive - Polymorphous Rush costs {1}{U} more to cast for each target beyond the first.\nChoose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.

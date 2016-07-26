@@ -1,9 +1,8 @@
 Name:Aerial Formation
 ManaCost:U
 Types:Instant
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 2 U | EffectZone$ All | Description$ Strive - CARDNAME costs {2}{U} more to cast for each target beyond the first.
-A:SP$ Pump | Cost$ U | ValidTgts$ Creature | KW$ Flying | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets,IncreaseCost | SpellDescription$ Any number of target creatures each get +1/+1 and gain flying until end of turn.
+K:Strive:2 U
+A:SP$ Pump | Cost$ U | ValidTgts$ Creature | KW$ Flying | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | SpellDescription$ Any number of target creatures each get +1/+1 and gain flying until end of turn.
 SVar:MaxTargets:Count$Valid Creature
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerial_formation.jpg
 Oracle:Strive - Aerial Formation costs {2}{U} more to cast for each target beyond the first.\nAny number of target creatures each get +1/+1 and gain flying until end of turn.
