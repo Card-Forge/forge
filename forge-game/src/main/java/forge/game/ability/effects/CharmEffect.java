@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
 import forge.util.collect.FCollection;
 
 import java.util.ArrayList;
@@ -48,6 +49,36 @@ public class CharmEffect extends SpellAbilityEffect {
             indx++;
         }
         return choices;
+    }
+
+    public static String makeSpellDescription(SpellAbility sa) {
+        int num = Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
+        int min = Integer.parseInt(sa.getParamOrDefault("MinCharmNum", String.valueOf(num)));
+        boolean repeat = sa.hasParam("CanRepeatModes");
+
+        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
+
+        StringBuilder sb = new StringBuilder("Choose ");
+        if (num == min) {
+            sb.append(Lang.getNumeral(num));
+        } else {
+            sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
+        }
+
+        if (repeat) {
+    	    sb.append(". You may choose the same mode more than once.");
+        }
+        sb.append(" - ");
+        int i = 0;
+        for (AbilitySub sub : list) {
+    	    if (i > 0) {
+    	        sb.append("; ");
+    	    }
+    	    sb.append(sub.getParam("SpellDescription"));
+    	    ++i;
+    	}
+
+        return sb.toString();
     }
 
     @Override

@@ -18,6 +18,7 @@
 package forge.game.ability;
 
 import forge.card.CardStateName;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.spellability.*;
@@ -202,6 +203,8 @@ public final class AbilityFactory {
             sb.append(mapParams.get("SpellDescription"));
 
             spellAbility.setDescription(sb.toString());
+        } else if (api == ApiType.Charm) {
+        	spellAbility.setDescription(CharmEffect.makeSpellDescription(spellAbility));
         } else {
             spellAbility.setDescription("");
         }
