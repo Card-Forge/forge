@@ -220,7 +220,7 @@ public class TriggerHandler {
 
             // Clear if no ZoneFrom, or not coming from the TriggerZone
             if (c.getId() == t.getHostCard().getId() && t.isIntrinsic()) {
-                if (!t.zonesCheck(zoneFrom))
+                if (!c.getTriggers().contains(t) || !t.zonesCheck(zoneFrom))
                     toBeRemoved.add(t);
             }
         }
@@ -497,7 +497,7 @@ public class TriggerHandler {
                 };
             }
             else {
-                sa = AbilityFactory.getAbility(host.getSVar(triggerParams.get("Execute")), host);
+                sa = AbilityFactory.getAbility(host, triggerParams.get("Execute"));
             }
         }
 
