@@ -1,22 +1,11 @@
 Name:Savage Alliance
-
 ManaCost:2 R
-
 Types:Instant
-
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 1 | EffectZone$ All | Description$ Escalate {1} (Pay this cost for each mode chosen beyond the first.)
-
-SVar:IncreaseCost:Modes$Amount/Minus.1
-
+K:Escalate:1
 A:SP$ Charm | Cost$ 2 R | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBPumpAll,DBDamage1,DBDamage2 | SpellDescription$ Choose one or more - Creatures target player controls gain trample until end of turn; CARDNAME deals 2 damage to target creature; CARDNAME deals 1 damage to each creature target opponent controls.
-
 SVar:DBPumpAll:DB$ PumpAll | ValidTgts$ Player | ValidCards$ Creature | KW$ Trample | SpellDescription$ Creatures target player controls gain trample until end of turn.
-
 SVar:DBDamage1:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
-
 SVar:DBDamage2:DB$ DamageAll | NumDmg$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | ValidCards$ Creature | ValidDescription$ each creature the opponent controls. | SpellDescription$ CARDNAME deals 1 damage to each creature target opponent controls. 
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_alliance.jpg
-
-Oracle:Escalate {1} (Pay this cost for each mode chosen beyond the first.)\nChoose one or more -\n• Creatures target player controls gain trample until end of turn.\n• Savage Alliance deals 2 damage to target creature.\n• Savage Alliance deals 1 damage to each creature target opponent controls.
+Oracle:Escalate {1} (Pay this cost for each mode chosen beyond the first.)\nChoose one or more -\nâ€¢ Creatures target player controls gain trample until end of turn.\nâ€¢ Savage Alliance deals 2 damage to target creature.\nâ€¢ Savage Alliance deals 1 damage to each creature target opponent controls.
 
