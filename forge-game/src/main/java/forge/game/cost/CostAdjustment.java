@@ -3,6 +3,7 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,8 +15,11 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.Spell;
@@ -54,7 +58,7 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.getMapParams().get("Mode").equals("RaiseCost") && stAb.getMapParams().containsKey("Cost")) {
+                if (stAb.getMapParams().get("Mode").equals("RaiseCost")) {
                     raiseAbilities.add(stAb);
                 }
             }
@@ -80,7 +84,7 @@ public class CostAdjustment {
             return;
         }
 
-        Cost part = new Cost(params.get("Cost"), sa.isAbility());
+        Cost part = new Cost(params.getOrDefault("Cost", "1"), sa.isAbility());
         int count = 0;
 
         if (params.containsKey("ForEachShard")) {
@@ -129,6 +133,243 @@ public class CostAdjustment {
         }
     }
     
+    // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
+    // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
+    public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
+        final Game game = sa.getActivatingPlayer().getGame();
+        final Card originalCard = sa.getHostCard();
+    
+        if (sa.isTrigger()) {
+            return;
+        }
+
+        boolean isStateChangeToFaceDown = false;
+        if (sa.isSpell()) {
+            if (((Spell) sa).isCastFaceDown()) {
+            	// Turn face down to apply cost modifiers correctly
+            	originalCard.setState(CardStateName.FaceDown, false);
+            	isStateChangeToFaceDown = true;
+            }
+        } // isSpell
+
+        CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
+        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
+        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Command));
+        if (!cardsOnBattlefield.contains(originalCard)) {
+            cardsOnBattlefield.add(originalCard);
+        }
+        final List<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
+        final List<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
+
+        // Sort abilities to apply them in proper order
+        for (Card c : cardsOnBattlefield) {
+            for (final StaticAbility stAb : c.getStaticAbilities()) {
+                if (stAb.getMapParams().get("Mode").equals("ReduceCost")) {
+                    reduceAbilities.add(stAb);
+                }
+                else if (stAb.getMapParams().get("Mode").equals("SetCost")) {
+                    setAbilities.add(stAb);
+                }
+            }
+        }
+
+        // Reduce cost
+        for (final StaticAbility stAb : reduceAbilities) {
+        	applyReduceCostAbility(stAb, sa, cost);
+        }
+        if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
+            adjustCostByOffering(cost, sa);
+        }
+        if (sa.isSpell() && sa.isEmerge()) { // cost reduction from offerings
+            adjustCostByEmerge(cost, sa);
+        }
+        // Set cost (only used by Trinisphere) is applied last
+        for (final StaticAbility stAb : setAbilities) {
+            applySetCostAbility(stAb, sa, cost);
+        }
+
+        if (sa.isSpell()) {
+            if (sa.isDelve()) {
+                sa.getHostCard().clearDelved();
+                final Player pc = sa.getActivatingPlayer();
+                final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
+                final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.GENERIC), mutableGrave);
+                for (final Card c : toExile) {
+                    cost.decreaseGenericMana(1);
+                    if (cardsToDelveOut != null) {
+                        cardsToDelveOut.add(c);
+                    } else if (!test) {
+                        sa.getHostCard().addDelved(c);
+                        pc.getGame().getAction().exile(c);
+                    }
+                }
+            }
+            else if (sa.getHostCard().hasKeyword("Convoke")) {
+                adjustCostByConvoke(cost, sa, test);
+            }
+        } // isSpell
+
+        // Reset card state (if changed)
+        if (isStateChangeToFaceDown) {
+        	originalCard.setState(CardStateName.Original, false);
+        }
+    }
+    // GetSpellCostChange
+
+    private static void adjustCostByConvoke(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
+        CardCollectionView untappedCreats = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
+    
+        Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvoke(sa, cost.toManaCost(), untappedCreats);
+        
+        // Convoked creats are tapped here with triggers suppressed,
+        // Then again when payment is done(In InputPayManaCost.done()) with suppression cleared.
+        // This is to make sure that triggers go off at the right time
+        // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
+        for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
+            sa.addTappedForConvoke(conv.getKey());
+            cost.decreaseShard(conv.getValue(), 1);
+            if (!test) {
+                conv.getKey().tap();
+            }
+        }
+    }
+
+    private static void adjustCostByOffering(final ManaCostBeingPaid cost, final SpellAbility sa) {
+        String offeringType = "";
+        for (String kw : sa.getHostCard().getKeywords()) {
+            if (kw.endsWith(" offering")) {
+                offeringType = kw.split(" ")[0];
+                break;
+            }
+        }
+
+        Card toSac = null;
+        CardCollectionView canOffer = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
+                CardPredicates.isType(offeringType), CardPredicates.canBeSacrificedBy(sa));
+
+        final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canOffer, offeringType);
+
+        if (!toSacList.isEmpty()) {
+            toSac = toSacList.getFirst();
+        }
+        else {
+            return;
+        }
+    
+        cost.subtractManaCost(toSac.getManaCost());
+    
+        sa.setSacrificedAsOffering(toSac);
+        toSac.setUsedToPay(true); //stop it from interfering with mana input
+    }
+
+    private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa) {
+    
+        Card toSac = null;
+        CardCollectionView canEmerge = CardLists.filter(sa.getActivatingPlayer().getCreaturesInPlay(), CardPredicates.canBeSacrificedBy(sa));
+
+        final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canEmerge, "Creature");
+
+        if (!toSacList.isEmpty()) {
+            toSac = toSacList.getFirst();
+        }
+        else {
+            return;
+        }
+    
+        cost.decreaseGenericMana(toSac.getCMC());
+    
+        sa.setSacrificedAsEmerge(toSac);
+        toSac.setUsedToPay(true); //stop it from interfering with mana input
+    }
+    /**
+     * Applies applyRaiseCostAbility ability.
+     * 
+     * @param staticAbility
+     *            a StaticAbility
+     * @param sa
+     *            the SpellAbility
+     * @param manaCost
+     *            a ManaCost
+     */
+    private  static void applySetCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
+        final Map<String, String> params = staticAbility.getMapParams();
+        final String amount = params.get("Amount");
+
+        if (!checkRequirement(sa, staticAbility)) {
+            return;
+        }
+
+        int value = 0;
+        if (StringUtils.isNumeric(amount)) {
+            value = Integer.parseInt(amount);
+        } else {
+            if ("Min3".equals(amount)) {
+                int cmc = manaCost.getConvertedManaCost();
+                if (cmc < 3) {
+                    value = 3 - cmc;
+                }
+            }
+        }
+
+        manaCost.increaseGenericMana(value);
+    }
+
+    /**
+     * Applies applyReduceCostAbility ability.
+     * 
+     * @param staticAbility
+     *            a StaticAbility
+     * @param sa
+     *            the SpellAbility
+     * @param manaCost
+     *            a ManaCost
+     */
+    private static void applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
+        //Can't reduce zero cost
+        if (manaCost.toString().equals("{0}")) {
+            return;
+        }
+        final Map<String, String> params = staticAbility.getMapParams();
+        final Card hostCard = staticAbility.getHostCard();
+        final Card card = sa.getHostCard();
+        final String amount = params.get("Amount");
+
+        if (!checkRequirement(sa, staticAbility)) {
+            return;
+        }
+
+        int value;
+        if ("AffectedX".equals(amount)) {
+            value = CardFactoryUtil.xCount(card, hostCard.getSVar(amount));
+        } else if ("X".equals(amount)){
+            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount));
+        } else {
+            value = AbilityUtils.calculateAmount(hostCard, amount, sa);
+        }
+
+        if (!params.containsKey("Cost") && ! params.containsKey("Color")) {
+            int minMana = 0;
+            if (params.containsKey("MinMana")) {
+                minMana = Integer.valueOf(params.get("MinMana"));
+            }
+
+            final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana);
+            if (maxReduction > 0) {
+                manaCost.decreaseGenericMana(Math.min(value, maxReduction));
+            }
+        } else {
+            final String color = params.getOrDefault("Cost", params.get("Color"));
+            for (final String cost : color.split(" ")) {
+                if (StringUtils.isNumeric(cost)) {
+                    manaCost.decreaseGenericMana(Integer.parseInt(cost) * value);
+                } else {
+                    manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
+                }
+            }
+        }
+    }    
+
     private static boolean checkRequirement(final SpellAbility sa, final StaticAbility st) {
         if (st.isSuppressed() || !st.checkConditions()) {
             return false;
@@ -138,7 +379,16 @@ public class CostAdjustment {
         final Card hostCard = st.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getHostCard();
-        
+
+        if (params.containsKey("ValidCard")
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, sa)) {
+            return false;
+        }
+        if (params.containsKey("Activator") && ((activator == null)
+                || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard, sa))) {
+            return false;
+        }
+
         if (params.containsKey("Type")) {
         	final String type = params.get("Type");
             if (type.equals("Spell")) {
@@ -250,7 +500,6 @@ public class CostAdjustment {
                 return false;
             }
         }
-        
         return true;
     }
 }

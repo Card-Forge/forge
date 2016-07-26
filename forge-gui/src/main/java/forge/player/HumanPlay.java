@@ -53,7 +53,6 @@ import forge.game.cost.CostReveal;
 import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostTapType;
 import forge.game.cost.PaymentDecision;
-import forge.game.mana.ManaCostAdjustment;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -175,7 +174,7 @@ public class HumanPlay {
         }
         else {
             manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
-            ManaCostAdjustment.adjust(manaCost, sa, null, false);
+            CostAdjustment.adjust(manaCost, sa, null, false);
         }
 
         boolean isPaid = manaCost.isPaid();
@@ -782,7 +781,7 @@ public class HumanPlay {
 
         CardCollection cardsToDelve = new CardCollection();
         if (isActivatedSa) {
-            ManaCostAdjustment.adjust(toPay, ability, cardsToDelve, false);
+            CostAdjustment.adjust(toPay, ability, cardsToDelve, false);
         }
 
         Card offering = null;

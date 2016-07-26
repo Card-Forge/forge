@@ -22,10 +22,10 @@ import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostAdjustment;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.mana.Mana;
-import forge.game.mana.ManaCostAdjustment;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseType;
@@ -970,7 +970,7 @@ public class ComputerUtilMana {
             restriction = payCosts.getCostMana().getRestiction();
         }
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
-        ManaCostAdjustment.adjust(cost, sa, null, test);
+        CostAdjustment.adjust(cost, sa, null, test);
 
         // Tack xMana Payments into mana here if X is a set value
         if (sa.getPayCosts() != null && (cost.getXcounter() > 0 || extraMana > 0)) {

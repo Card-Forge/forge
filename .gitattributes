@@ -586,7 +586,6 @@ forge-game/src/main/java/forge/game/keyword/Protection.java -text
 forge-game/src/main/java/forge/game/keyword/SimpleKeyword.java -text
 forge-game/src/main/java/forge/game/keyword/UndefinedKeyword.java -text
 forge-game/src/main/java/forge/game/mana/Mana.java svneol=native#text/plain
-forge-game/src/main/java/forge/game/mana/ManaCostAdjustment.java -text
 forge-game/src/main/java/forge/game/mana/ManaCostBeingPaid.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/mana/ManaPool.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/mana/package-info.java svneol=native#text/plain
