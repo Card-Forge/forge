@@ -585,7 +585,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, boolean faceUp) {
+    public boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, String faceUp) {
         return MyRandom.getRandom().nextBoolean();
     }
 

@@ -54,9 +54,4 @@ public class TwoPilesAi extends SpellAbilityAi {
         int size = pool.size();
         return size > 2;
     }
-
-    @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return false;
-    }
 }

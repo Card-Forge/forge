@@ -741,10 +741,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, boolean faceUp) {
-        if (!faceUp) {
+    public boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, String faceUp) {
+        if (faceUp.equals("True")) {
             // AI will choose the first pile if it is larger or the same
             // TODO Improve this to be slightly more random to not be so predictable
+            return pile1.size() >= pile2.size();
+        } else if (faceUp.equals("One")) {
+            // Probably want to see if the face up pile has anything "worth it", then potentially take face down pile
             return pile1.size() >= pile2.size();
         } else {
             boolean allCreatures = Iterables.all(Iterables.concat(pile1, pile2), CardPredicates.Presets.CREATURES);

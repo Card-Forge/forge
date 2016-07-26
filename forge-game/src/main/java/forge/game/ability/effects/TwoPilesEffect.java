@@ -89,16 +89,21 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     return;
                 }
 
+                String title = "One".equals(sa.getParamOrDefault("FaceDown", "False")) ? "Select cards for a face down pile" :
+                        "Divide cards into two piles";
+
+                card.clearRemembered();
+
                 // first, separate the cards into piles
-                final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, "Divide cards into two piles", 0, size, false);
+                final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, title, 0, size, false);
                 final CardCollection pile2 = new CardCollection(pool);
                 pile2.removeAll(pile1);
 
-                System.out.println("Pile 1:" + pile1);
-                System.out.println("Pile 2:" + pile2);
-                card.clearRemembered();
+                //System.out.println("Pile 1:" + pile1);
+                //System.out.println("Pile 2:" + pile2);
 
-                pile1WasChosen = chooser.getController().chooseCardsPile(sa, pile1, pile2, !sa.hasParam("FaceDown"));
+
+                pile1WasChosen = chooser.getController().chooseCardsPile(sa, pile1, pile2, sa.getParamOrDefault("FaceDown", "False"));
                 CardCollectionView chosenPile = pile1WasChosen ? pile1 : pile2;
                 CardCollectionView unchosenPile = !pile1WasChosen ? pile1 : pile2;
                 

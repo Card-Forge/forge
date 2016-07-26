@@ -1,0 +1,10 @@
+Name:Fortune's Favor
+ManaCost:3 U
+Types:Instant
+A:SP$ PeekAndReveal | Cost$ 3 U | Defined$ You | PeekAmount$ 4 | NoPeek$ True | NoReveal$ True | RememberPeeked$ True | SubAbility$ Separate | SpellDescription$ Target opponent looks at the top four cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard.
+SVar:Separate:DB$ TwoPiles | Defined$ You | Separator$ TargetedPlayer | Chooser$ You | ValidTgts$ Opponent | DefinedCards$ Remembered | ChosenPile$ DBHand | UnchosenPile$ DBGrave | Zone$ Library | FaceDown$ One | StackDescription$ None
+SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fortunes_favor.jpg
+Oracle:Target opponent looks at the top four cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard.

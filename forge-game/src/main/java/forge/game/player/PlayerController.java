@@ -205,7 +205,7 @@ public abstract class PlayerController {
 
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
     public abstract Map<GameEntity, CounterType> chooseProliferation();
-    public abstract boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, boolean faceUp);
+    public abstract boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, String faceUp);
 
     public abstract void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards);
 

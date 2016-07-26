@@ -268,11 +268,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RememberObjects")) {
-            pumpRemembered = sa.getParam("RememberObjects");
-        }
-
-        if (pumpRemembered != null) {
-            for (final Object o : AbilityUtils.getDefinedObjects(host, pumpRemembered, sa)) {
+            for (final Object o : AbilityUtils.getDefinedObjects(host, sa.getParam("RememberObjects"), sa)) {
                 host.addRemembered(o);
             }
         }

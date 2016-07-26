@@ -1289,25 +1289,33 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public boolean chooseCardsPile(final SpellAbility sa, final CardCollectionView pile1, final CardCollectionView pile2, final boolean faceUp) {
-        if (!faceUp) {
-            final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
-            final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
+    public boolean chooseCardsPile(final SpellAbility sa, final CardCollectionView pile1, final CardCollectionView pile2, final String faceUp) {
+        final String p1Str = String.format("-- Pile 1 (%s cards) --", pile1.size());
+        final String p2Str = String.format("-- Pile 2 (%s cards) --", pile2.size());
+
+        /*
+        if (faceUp.equals("True")) {
             final List<String> possibleValues = ImmutableList.of(p1Str , p2Str);
             return getGui().confirm(CardView.get(sa.getHostCard()), "Choose a Pile", possibleValues);
         }
-
-        tempShowCards(pile1);
-        tempShowCards(pile2);
+        */
 
         final List<CardView> cards = Lists.newArrayListWithCapacity(pile1.size() + pile2.size() + 2);
-        final CardView pileView1 = new CardView(Integer.MIN_VALUE, null, "--- Pile 1 ---");
-        cards.add(pileView1);
-        cards.addAll(CardView.getCollection(pile1));
+        final CardView pileView1 = new CardView(Integer.MIN_VALUE, null, p1Str);
 
-        final CardView pileView2 = new CardView(Integer.MIN_VALUE + 1, null, "--- Pile 2 ---");
+        cards.add(pileView1);
+        if (faceUp.equals("False")) {
+            tempShowCards(pile1);
+            cards.addAll(CardView.getCollection(pile1));
+        }
+
+        final CardView pileView2 = new CardView(Integer.MIN_VALUE + 1, null, p2Str);
         cards.add(pileView2);
-        cards.addAll(CardView.getCollection(pile2));
+        if (!faceUp.equals("True")) {
+            tempShowCards(pile2);
+            cards.addAll(CardView.getCollection(pile2));
+        }
+
 
         // make sure Pile 1 or Pile 2 is clicked on
         boolean result;
