@@ -50,6 +50,7 @@ public class TriggerTransformed extends Trigger {
                 return false;
             }
         }
+        // FIXME: ideally this trigger should automatically determine which face it belongs to. Why doesn't it work as expected?
         if (this.mapParams.containsKey("ValidFace")) {
             if (!this.getHostCard().getCurrentStateName().toString().equals(this.mapParams.get("ValidFace"))) {
                 return false;
