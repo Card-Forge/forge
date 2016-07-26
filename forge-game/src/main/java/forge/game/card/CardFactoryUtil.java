@@ -3286,8 +3286,14 @@ public class CardFactoryUtil {
             final String manacost = k[1];
             final Cost cost = new Cost(manacost, false);
 
+            StringBuilder sb = new StringBuilder("Escalate ");
+            if (!cost.isOnlyManaCost()) {
+                sb.append("- ");
+            }
+            sb.append(cost.toSimpleString());
+
             final String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All" +
-            		" | Description$ Escalate " + cost.toSimpleString() + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            		" | Description$ " + sb.toString() + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
             StaticAbility st = card.addStaticAbility(effect);
             st.setIntrinsic(intrinsic);
             if (!intrinsic) {
