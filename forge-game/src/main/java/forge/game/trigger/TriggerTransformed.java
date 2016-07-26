@@ -50,6 +50,11 @@ public class TriggerTransformed extends Trigger {
                 return false;
             }
         }
+        if (this.mapParams.containsKey("ValidFace")) {
+            if (!this.getHostCard().getCurrentStateName().toString().equals(this.mapParams.get("ValidFace"))) {
+                return false;
+            }
+        }
 
         return true;
     }
