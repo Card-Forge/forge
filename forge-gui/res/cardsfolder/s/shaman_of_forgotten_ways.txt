@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Human Shaman
 PT:2/3
 A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Card.Creature | SpellDescription$ Add two mana in any combination of colors to your mana pool. Spend this mana only to cast creature spells.
-A:AB$ RepeatEach | Cost$ 9 G G T | CheckSVar$ FormidableTest | SVarCompare$ GE8 | References$ FormidableTest | RepeatPlayers$ Player | RepeatSubAbility$ DBSetLife | SpellDescription$ Each player's life total becomes the number of creatures he or she controls.
+A:AB$ RepeatEach | Cost$ 9 G G T | PrecostDesc$ Formidable - | CheckSVar$ FormidableTest | SVarCompare$ GE8 | References$ FormidableTest | RepeatPlayers$ Player | RepeatSubAbility$ DBSetLife | SpellDescription$ Each player's life total becomes the number of creatures he or she controls. Activate this ability only if creatures you control have total power 8 or greater.
 SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
 SVar:DBSetLife:DB$ SetLife | Defined$ Player.IsRemembered | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
