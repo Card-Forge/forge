@@ -3838,6 +3838,7 @@ forge-gui/res/cardsfolder/c/collateral_damage.txt -text
 forge-gui/res/cardsfolder/c/collected_company.txt -text
 forge-gui/res/cardsfolder/c/collective_blessing.txt -text
 forge-gui/res/cardsfolder/c/collective_defiance.txt -text
+forge-gui/res/cardsfolder/c/collective_effort.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/c/collective_restraint.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/collective_unconscious.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/collective_voyage.txt -text
