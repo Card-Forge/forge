@@ -84,7 +84,8 @@ public class CostAdjustment {
             return;
         }
 
-        Cost part = new Cost(params.getOrDefault("Cost", "1"), sa.isAbility());
+        final String scost = params.containsKey("Cost") ? params.get("Cost") : "1";
+        Cost part = new Cost(scost, sa.isAbility());
         int count = 0;
 
         if (params.containsKey("ForEachShard")) {
@@ -359,7 +360,7 @@ public class CostAdjustment {
                 manaCost.decreaseGenericMana(Math.min(value, maxReduction));
             }
         } else {
-            final String color = params.getOrDefault("Cost", params.get("Color"));
+            final String color = params.containsKey("Cost") ? params.get("Cost") : params.get("Color");
             for (final String cost : color.split(" ")) {
                 if (StringUtils.isNumeric(cost)) {
                     manaCost.decreaseGenericMana(Integer.parseInt(cost) * value);
