@@ -5140,6 +5140,7 @@ forge-gui/res/cardsfolder/d/dross_hopper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dross_prowler.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dross_ripper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dross_scorpion.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/drought.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/d/drove_of_elves.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/drown_in_filth.txt -text
 forge-gui/res/cardsfolder/d/drown_in_sorrow.txt -text

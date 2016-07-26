@@ -1,0 +1,8 @@
+Name:Drought
+ManaCost:2 W W
+Types:Enchantment
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W W
+S:Mode$ RaiseCost | Type$ Spell | ForEachShard$ Black | Cost$ Sac<1/Swamp> | EffectZone$ All | Description$ Spells cost an additional "Sacrifice a Swamp" to cast for each black mana symbol in their mana costs.
+S:Mode$ RaiseCost | Type$ Ability | ForEachShard$ Black | Cost$ Sac<1/Swamp> | EffectZone$ All | Description$ Activated abilities cost an additional "Sacrifice a Swamp" to activate for each black mana symbol in their activation costs.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drought.jpg
+Oracle:At the beginning of your upkeep, sacrifice Drought unless you pay {W}{W}.\nSpells cost an additional "Sacrifice a Swamp" to cast for each black mana symbol in their mana costs.\nActivated abilities cost an additional "Sacrifice a Swamp" to activate for each black mana symbol in their activation costs.
