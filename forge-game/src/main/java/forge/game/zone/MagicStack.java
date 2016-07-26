@@ -792,6 +792,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         boolean result = false;
         Player playerTurn = game.getPhaseHandler().getPlayerTurn();
 
+        if (playerTurn == null) {
+            // caused by DevTools before first turn
+            return false;
+        }
+
         if (playerTurn.hasLost()) {
             playerTurn = game.getNextPlayerAfter(playerTurn);
         }
