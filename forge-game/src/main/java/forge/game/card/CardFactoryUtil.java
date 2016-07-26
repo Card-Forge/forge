@@ -2532,6 +2532,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Rampage")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Strive")) {
+            	addStaticAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Bushido")) {
                 addTriggerAbility(keyword, card, null);
             }
@@ -3274,7 +3277,18 @@ public class CardFactoryUtil {
 
     public static void addStaticAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
-        if (keyword.equals("Unleash")) {
+        if (keyword.startsWith("Strive")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+        
+            final String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
+            		" | Description$ Strive - CARDNAME costs " + ManaCostParser.parse(manacost) + " more to cast for each target beyond the first.";
+            StaticAbility st = card.addStaticAbility(effect);
+            st.setIntrinsic(intrinsic);
+            if (!intrinsic) {
+                kws.addStaticAbility(st);
+            }
+        } else if (keyword.equals("Unleash")) {
             final String effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can't block.";
 
             StaticAbility st = card.addStaticAbility(effect);
