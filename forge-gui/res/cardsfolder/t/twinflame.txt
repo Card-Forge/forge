@@ -1,10 +1,9 @@
 Name:Twinflame
 ManaCost:1 R
 Types:Sorcery
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | References$ IncreaseCost | Color$ 2 R | EffectZone$ All | Description$ Strive - CARDNAME costs {2}{R} more to cast for each target beyond the first.
-A:SP$ CopyPermanent | Cost$ 1 R  | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | TargetMin$ 0 | TargetMax$ MaxTargets | Keywords$ Haste | AtEOT$ Exile | AddSVars$ SneakAttackEOT |  References$ MaxTargets,IncreaseCost | SpellDescription$ Choose any number of target creatures you control. For each of them, put a token that's a copy of that creature onto the battlefield. Those tokens have haste. Exile them at the beginning of the next end step.
+K:Strive:2 R
+A:SP$ CopyPermanent | Cost$ 1 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | TargetMin$ 0 | TargetMax$ MaxTargets | Keywords$ Haste | AtEOT$ Exile | AddSVars$ SneakAttackEOT |  References$ MaxTargets | SpellDescription$ Choose any number of target creatures you control. For each of them, put a token that's a copy of that creature onto the battlefield. Those tokens have haste. Exile them at the beginning of the next end step.
 SVar:MaxTargets:Count$Valid Creature.YouCtrl
-SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twinflame.jpg
 Oracle:Strive - Twinflame costs {2}{R} more to cast for each target beyond the first.\nChoose any number of target creatures you control. For each of them, put a token that's a copy of that creature onto the battlefield. Those tokens have haste. Exile them at the beginning of the next end step.
