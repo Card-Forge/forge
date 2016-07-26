@@ -129,14 +129,6 @@ public class PumpAllAi extends PumpAiBase {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
-     */
-    @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return true;
-    }
-
     boolean pumpAgainstRemoval(Player ai, SpellAbility sa, List<Card> comp) {
         final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
         for (final Card c : comp) {
