@@ -1,0 +1,6 @@
+Name:Brutal Suppression
+ManaCost:R
+Types:Enchantment
+S:Mode$ RaiseCost | Type$ Ability | ValidCard$ Rebel.nonToken | Cost$ Sac<1/Land> | EffectZone$ All | Description$ Activated abilities of nontoken Rebels cost an additional "Sacrifice a land" to activate.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brutal_suppression.jpg
+Oracle:Activated abilities of nontoken Rebels cost an additional "Sacrifice a land" to activate.

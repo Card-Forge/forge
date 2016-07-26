@@ -3146,6 +3146,7 @@ forge-gui/res/cardsfolder/b/brutal_deceiver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/brutal_expulsion.txt -text
 forge-gui/res/cardsfolder/b/brutal_hordechief.txt -text
 forge-gui/res/cardsfolder/b/brutal_nightstalker.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/brutal_suppression.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/b/brutalizer_exarch.txt -text
 forge-gui/res/cardsfolder/b/brute_force.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/brute_strength.txt -text
