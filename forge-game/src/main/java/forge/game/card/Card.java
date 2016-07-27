@@ -499,7 +499,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean turnFaceDown(boolean override) {
-        if (override || !isDoubleFaced()) {
+        if (override || (!isDoubleFaced() && !isMeldable())) {
             preFaceDownState = currentStateName;
             return setState(CardStateName.FaceDown, true);
         }
