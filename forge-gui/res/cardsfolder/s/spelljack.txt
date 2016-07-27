@@ -2,9 +2,8 @@ Name:Spelljack
 ManaCost:3 U U U
 Types:Instant
 A:SP$ Counter | Cost$ 3 U U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCountered$ True | ForgetOtherTargets$ True | Destination$ Exile | SubAbility$ DBEffect | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may play it without paying its mana cost for as long as it remains exiled. (If it has X in its mana cost, X is 0.)
-SVar:DBEffect:DB$ Effect | Name$ Spelljack Effect | RememberObjects$ Remembered | StaticAbilities$ PlayOpp,PlayYou | Duration$ Permanent | Triggers$ TrigCleanup | SVars$ DBCleanup | References$ PlayOpp,PlayYou,TrigCleanup,DBCleanup
-SVar:PlayOpp:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered+OppOwn | AffectedZone$ Exile | AddHiddenKeyword$ May be played by your opponent without paying its mana cost | Description$ You may play cards exiled with Spelljack.
-SVar:PlayYou:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered+YouOwn | AffectedZone$ Exile | AddHiddenKeyword$ May be played without paying its mana cost
+SVar:DBEffect:DB$ Effect | Name$ Spelljack Effect | RememberObjects$ Remembered | StaticAbilities$ Play | Duration$ Permanent | Triggers$ TrigCleanup | SVars$ DBCleanup | References$ Play,TrigCleanup,DBCleanup
+SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play cards exiled with Spelljack.
 SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spelljack.jpg
