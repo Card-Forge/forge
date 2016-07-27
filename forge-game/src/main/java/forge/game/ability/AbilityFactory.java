@@ -189,7 +189,7 @@ public final class AbilityFactory {
         }
 
         if (mapParams.containsKey("SubAbility")) {
-            spellAbility.setSubAbility(getSubAbility(hostCard, hostCard.getSVar(mapParams.get("SubAbility"))));
+            spellAbility.setSubAbility(getSubAbility(hostCard, mapParams.get("SubAbility")));
         }
 
         if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
@@ -348,10 +348,10 @@ public final class AbilityFactory {
      */
     private static final AbilitySub getSubAbility(Card hostCard, String sSub) {
 
-        if (!sSub.equals("")) {
-            return (AbilitySub) AbilityFactory.getAbility(sSub, hostCard);
+        if (hostCard.hasSVar(sSub)) {
+            return (AbilitySub) AbilityFactory.getAbility(hostCard, sSub);
         }
-        System.out.println("SubAbility not found for: " + hostCard);
+        System.out.println("SubAbility '"+ sSub +"' not found for: " + hostCard);
 
         return null;
     }
