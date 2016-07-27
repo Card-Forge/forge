@@ -42,7 +42,7 @@ public enum Keyword {
     EPIC(SimpleKeyword.class, true, "For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability. If the spell has any targets, you may choose new targets for the copy."),
     EQUIP(KeywordWithCost.class, false, "%s: Attach this permanent to target creature you control. Activate this ability only any time you could cast a sorcery."),
     ESCALATE(KeywordWithCost.class, true, "Pay this cost for each mode chosen beyond the first."),
-    EVOKE(KeywordWithCost.class, false, "You may cast this card by paying %s rather than paying its mana cost. If you do, it's sacrificed when it enters the battlefield."),
+    EVOKE(KeywordWithCost.class, false, "You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield."),
     EVOLVE(SimpleKeyword.class, false, "Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature."),
     EXALTED(SimpleKeyword.class, false, "Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn."),
     EXTORT(SimpleKeyword.class, false, "Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life."),

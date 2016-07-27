@@ -2171,7 +2171,8 @@ public class CardFactoryUtil {
                 card.getState(CardStateName.Original).addNonManaAbility(AbilityFactory.buildFusedAbility(card));
             }
             else if (keyword.startsWith("Evoke")) {
-                card.addSpellAbility(makeEvokeSpell(card, keyword));
+                addSpellAbility(keyword, card, null);
+                addTriggerAbility(keyword, card, null);                
             }
             else if (keyword.startsWith("Dash")) {
                 card.addSpellAbility(makeDashSpell(card, keyword));
@@ -2995,6 +2996,19 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
+        } else if (keyword.equals("Evoke")) {
+            final StringBuilder trigStr = new StringBuilder(
+                    "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ EvokeSac | Secondary$ True | TriggerDescription$ "
+                            + "Evoke (" + Keyword.getInstance(keyword).getReminderText() + ")");
+
+            final String effect = "DB$ Sacrifice";
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(trigger);
+
+        	if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
         } else if (keyword.equals("Exalted")) {
             final StringBuilder trigExalted = new StringBuilder(
                     "Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | "
@@ -3196,8 +3210,35 @@ public class CardFactoryUtil {
 
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
+        if (keyword.startsWith("Evoke")) {
+            final String[] k = keyword.split(":");
+            final Cost evokedCost = new Cost(k[1], false);
 
-        if (keyword.startsWith("Ninjutsu")) {
+            final SpellAbility evokedSpell = new SpellPermanent(card) {
+                private static final long serialVersionUID = -1598664196463358630L;
+
+                @Override
+                public void resolve() {
+                    final Game game = card.getGame();
+                    card.setEvoked(true);
+                    game.getAction().moveToPlay(card);
+                }
+            };
+            final StringBuilder desc = new StringBuilder();
+            desc.append("Evoke ").append(evokedCost.toSimpleString()).append(" (");
+            desc.append(Keyword.getInstance(keyword).getReminderText());
+            desc.append(")");
+
+            evokedSpell.setDescription(desc.toString());
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Evoked)");
+            evokedSpell.setStackDescription(sb.toString());
+            evokedSpell.setBasicSpell(false);
+            evokedSpell.setPayCosts(evokedCost);
+
+            card.addSpellAbility(evokedSpell);
+        } else if (keyword.startsWith("Ninjutsu")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
@@ -3504,42 +3545,6 @@ public class CardFactoryUtil {
             }
         }
         return altCostSA;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     * @param evokeKeyword
-     * @return
-     */
-    private static SpellAbility makeEvokeSpell(final Card card, final String evokeKeyword) {
-        final String[] k = evokeKeyword.split(":");
-        final Cost evokedCost = new Cost(k[1], false);
-        
-        final SpellAbility evokedSpell = new SpellPermanent(card) {
-            private static final long serialVersionUID = -1598664196463358630L;
-
-            @Override
-            public void resolve() {
-                final Game game = card.getGame();
-                card.setEvoked(true);
-                game.getAction().moveToPlay(card);
-            }
-        };
-        card.removeIntrinsicKeyword(evokeKeyword);
-        final StringBuilder desc = new StringBuilder();
-        desc.append("Evoke ").append(evokedCost.toSimpleString());
-        desc.append(" (You may cast this spell for its evoke cost. ");
-        desc.append("If you do, when it enters the battlefield, sacrifice it.)");
-
-        evokedSpell.setDescription(desc.toString());
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(card.getName()).append(" (Evoked)");
-        evokedSpell.setStackDescription(sb.toString());
-        evokedSpell.setBasicSpell(false);
-        evokedSpell.setPayCosts(evokedCost);
-        return evokedSpell;
     }
 
     private static final Map<String,String> emptyMap = new TreeMap<String,String>();
