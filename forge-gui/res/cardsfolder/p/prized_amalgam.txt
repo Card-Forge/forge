@@ -4,8 +4,8 @@ Types:Creature Zombie
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Graveyard | ValidCard$ Creature.YouOwn+Other | Execute$ DelTrig | TriggerDescription$ Whenever a creature enters the battlefield, if it entered from your graveyard or you cast it from your graveyard, return CARDNAME from your graveyard to the battlefield tapped at the beginning of the next end step.
 T:Mode$ ChangesZone | Destination$ Battlefield | TriggerZones$ Graveyard | ValidCard$ Creature.YouOwn+YouCtrl+Other+wasCastFromGraveyard | Execute$ DelTrig | Secondary$ True | TriggerDescription$ Whenever a creature enters the battlefield, if it entered from your graveyard or you cast it from your graveyard, return CARDNAME from your graveyard to the battlefield tapped at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ Self | TriggerDescription$ Return CARDNAME to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | ConditionDefined$ DelayTriggerRemembered | ConditionPresent$ Card.StrictlySelf | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
 SVar:DiscardMe:2
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prized_amalgam.jpg
