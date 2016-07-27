@@ -827,24 +827,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             if (sa.hasParam("ShareLandType")) {
-                if (chosenCards.size() == 0) {
-                    // If no cards have been chosen yet, the first card must have a land type
+                // After the first card is chosen, check if the land type is shared
+                for (final Card card : chosenCards) {
                     fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
-                            return  c.hasALandType();
+                            return  c.sharesLandTypeWith(card);
                         }
-                    });
-                } else {
-                    for (final Card card : chosenCards) {
-                        fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
-                            @Override
-                            public boolean apply(final Card c) {
-                                return  c.sharesLandTypeWith(card);
-                            }
 
-                        });
-                    }
+                    });
                 }
             }
             if (totalcmc != null) {
