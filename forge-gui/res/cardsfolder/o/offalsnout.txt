@@ -3,11 +3,9 @@ ManaCost:2 B
 Types:Creature Elemental
 PT:2/2
 K:Flash
+K:Evoke:B
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, exile target card from a graveyard.
 SVar:TrigExile:DB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card
-K:Evoke:B
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/offalsnout.jpg
 Oracle:Flash\nWhen Offalsnout leaves the battlefield, exile target card from a graveyard.\nEvoke {B} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

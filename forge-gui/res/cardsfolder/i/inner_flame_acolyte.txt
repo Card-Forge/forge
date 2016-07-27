@@ -2,11 +2,9 @@ Name:Inner-Flame Acolyte
 ManaCost:1 R R
 Types:Creature Elemental Shaman
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+0 and gains haste until end of turn.
 K:Evoke:R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+0 and gains haste until end of turn.
 SVar:TrigPump:DB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0
 SVar:PlayMain1:ALWAYS
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_flame_acolyte.jpg
 Oracle:When Inner-Flame Acolyte enters the battlefield, target creature gets +2/+0 and gains haste until end of turn.\nEvoke {R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

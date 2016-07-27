@@ -2,10 +2,8 @@ Name:Mournwhelk
 ManaCost:6 B
 Types:Creature Elemental
 PT:3/3
+K:Evoke:3 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target player discards two cards.
 SVar:TrigDiscard:DB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ TgtChoose
-K:Evoke:3 B
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mournwhelk.jpg
 Oracle:When Mournwhelk enters the battlefield, target player discards two cards.\nEvoke {3}{B} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
