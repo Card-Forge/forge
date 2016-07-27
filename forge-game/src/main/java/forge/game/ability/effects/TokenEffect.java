@@ -261,6 +261,7 @@ public class TokenEffect extends SpellAbilityEffect {
 
         final boolean remember = sa.hasParam("RememberTokens");
         final boolean imprint = sa.hasParam("ImprintTokens");
+        final List<Card> allTokens = new ArrayList<Card>();
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
             for (int i = 0; i < finalAmount; i++) {
                 final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
@@ -393,10 +394,11 @@ public class TokenEffect extends SpellAbilityEffect {
                     game.updateCombatForView();
                     game.fireEvent(new GameEventCombatChanged());
                 }                
-                if (sa.hasParam("AtEOT")) {
-                    registerDelayedTrigger(sa, sa.getParam("AtEOT"), tokens);
-                }
+                allTokens.addAll(tokens);
             }
+        }
+        if (sa.hasParam("AtEOT")) {
+            registerDelayedTrigger(sa, sa.getParam("AtEOT"), allTokens);
         }
     }
 }
