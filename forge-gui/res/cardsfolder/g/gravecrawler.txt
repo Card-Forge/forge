@@ -3,8 +3,7 @@ ManaCost:B
 Types:Creature Zombie
 PT:2/1
 K:CARDNAME can't block.
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | AddHiddenKeyword$ May be played | CheckSVar$ X | SVarCompare$ GE1 | Description$ You may cast CARDNAME from you graveyard as long as you control a Zombie.
-SVar:X:Count$Valid Zombie.YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | MayPlay$ True | IsPresent$ Zombie.YouCtrl | Description$ You may cast CARDNAME from you graveyard as long as you control a Zombie.
 SVar:SacMe:3
 SVar:DiscardMe:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravecrawler.jpg
