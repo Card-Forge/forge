@@ -6,9 +6,10 @@ K:First Strike
 K:Hexproof
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with CARDNAME this turn without paying their mana costs.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 4 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBMayBePlayed
-SVar:DBMayBePlayed:DB$ Effect | RememberObjects$ Remembered | Triggers$ TrigCast | SVars$ RemoveCard | StaticAbilities$ STMayPlay | SubAbility$ DBCleanup
-SVar:STMayPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered+nonCreature+nonLand | AddHiddenKeyword$ May be played without paying its mana cost | Description$ You may cast noncreature cards exiled with Narset this turn without paying their mana costs.
+SVar:DBMayBePlayed:DB$ Effect | RememberObjects$ Remembered | Triggers$ TrigCast,TrigMove | SVars$ RemoveCard | StaticAbilities$ STMayPlay | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered+nonCreature+nonLand | MayPlay$ True | MayPlayWithoutManaCost$ True | Description$ You may cast noncreature cards exiled with Narset this turn without paying their mana costs.
 SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | Execute$ RemoveCard | Static$ True | TriggerZones$ Command
+SVar:TrigMove:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ RemoveCard | Static$ True
 SVar:RemoveCard:DB$ Pump | ForgetObjects$ TriggeredCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
