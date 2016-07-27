@@ -4,9 +4,9 @@ Types:Legendary Artifact Creature Human Wizard
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ SenEffect | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, choose target opponent. This turn, that player can't cast spells or activate abilities and plays with his or her hand revealed. You may play cards from that player's hand this turn.
 SVar:SenEffect:AB$ Effect | Cost$ 0 | ValidTgts$ Opponent | StaticAbilities$ STCantBeCast,STCantBeActivated,STHandRevealed,STCanPlay | RememberObjects$ Targeted | AILogic$ Always
-SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Instant,Sorcery | Caster$ Player.IsRemembered | EffectZone$ Command | Description$ This turn, the targeted player can't cast spells or activate abilities and plays with his or her hand revealed.
+SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.IsRemembered | EffectZone$ Command | Description$ This turn, the targeted player can't cast spells or activate abilities and plays with his or her hand revealed.
 SVar:STCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card | Activator$ Player.IsRemembered | EffectZone$ Command
 SVar:STHandRevealed:Mode$ Continuous | Affected$ Player.IsRemembered | AddKeyword$ Play with your hand revealed. | EffectZone$ Command
-SVar:STCanPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.RememberedPlayerCtrl | AffectedZone$ Hand | AddHiddenKeyword$ May be played by your opponent | MayPlay$ True | Description$ You may play cards from that player's hand this turn.
+SVar:STCanPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.RememberedPlayerCtrl | AffectedZone$ Hand | MayPlay$ True | Description$ You may play cards from that player's hand this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sen_triplets.jpg
 Oracle:At the beginning of your upkeep, choose target opponent. This turn, that player can't cast spells or activate abilities and plays with his or her hand revealed. You may play cards from that player's hand this turn.
