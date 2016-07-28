@@ -5,7 +5,7 @@ A:AB$ Shuffle | Cost$ 5 T | SubAbility$ DBReveal | SpellDescription$ Shuffle you
 SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | RememberChanged$ True | SubAbility$ DBAperture
 SVar:DBAperture:DB$ Effect | Name$ Temporal Aperture Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Triggers$ StillTopCheck | SVars$ ExileEffect |  SpellDescription$ Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+TopLibrary | AddKeyword$ You may look at this card. & Your opponent may look at this card. & May be played without paying its mana cost | AffectedZone$ Library
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+TopLibrary | MayPlay$ True | MayPlayWithoutManaCost$ True | AddKeyword$ You may look at this card. & Your opponent may look at this card. | AffectedZone$ Library
 SVar:StillTopCheck:Mode$ Always | TriggerZones$ Command | IsPresent$ Card.TopLibrary+YouCtrl+IsNotRemembered | PresentZone$ Library | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
