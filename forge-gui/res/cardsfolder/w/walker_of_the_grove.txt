@@ -2,10 +2,8 @@ Name:Walker of the Grove
 ManaCost:6 G G
 Types:Creature Elemental
 PT:7/7
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, put a 4/4 green Elemental creature token onto the battlefield.
 K:Evoke:4 G
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, put a 4/4 green Elemental creature token onto the battlefield.
 SVar:TrigToken:DB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walker_of_the_grove.jpg
 Oracle:When Walker of the Grove leaves the battlefield, put a 4/4 green Elemental creature token onto the battlefield.\nEvoke {4}{G} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
