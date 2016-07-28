@@ -2117,26 +2117,6 @@ public class CardFactoryUtil {
             intrinsicAbility.setIntrinsic(true);
         }
     }
-    /*
-    public static final void addCommanderAbilities(final Card cmd) {
-        ReplacementEffect re = ReplacementHandler.parseReplacement(
-                "Event$ Moved | Destination$ Graveyard,Exile | ValidCard$ Card.Self | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement | " +
-                "Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.",
-                cmd, true);
-        cmd.addReplacementEffect(re);
-        if (StringUtils.isBlank(cmd.getSVar("CommanderCostRaise"))) // why condition check is needed?
-            cmd.setSVar("CommanderCostRaise", "Number$0");
-
-        String cmdManaCost = cmd.getManaCost().toString();
-        cmd.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library | Destination$ Command | Defined$ ReplacedCard");
-        cmd.setSVar("DBCommanderIncCast", "DB$ StoreSVar | SVar$ CommanderCostRaise | Type$ CountSVar | Expression$ CommanderCostRaise/Plus.2");
-        SpellAbility sa = AbilityFactory.getAbility("SP$ PermanentCreature | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmdManaCost, cmd);
-        cmd.addSpellAbility(sa);
-
-        cmd.addIntrinsicAbility("SP$ PermanentCreature | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmdManaCost);
-        cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.Self+wasCastFromCommand | EffectZone$ All | AffectedZone$ Stack");
-    }
-    */
 
     /**
      * <p>
