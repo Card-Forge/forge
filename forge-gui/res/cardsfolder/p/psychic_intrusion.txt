@@ -3,7 +3,7 @@ ManaCost:3 U B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 U B | Origin$ Hand,Graveyard | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals his or her hand. You choose a nonland card from that player's graveyard or hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ TriggerCastPI | SVars$ TrigRemoveSelf | RememberObjects$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+OppOwn | AddHiddenKeyword$ May be played by your opponent & May spend mana as though it were mana of any color to cast CARDNAME | AffectedZone$ Exile | Description$ You may cast that card and you may spend mana as though it were mana of any color to cast it.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast that card and you may spend mana as though it were mana of any color to cast it.
 SVar:TriggerCastPI:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
 SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
