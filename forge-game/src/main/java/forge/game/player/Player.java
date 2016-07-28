@@ -524,15 +524,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         assignedDamage.put(source, amount);
-        if (source.hasKeyword("Lifelink")) {
-            source.getController().gainLife(amount, source);
-        }
         source.getDamageHistory().registerDamage(this);
 
         if (isCombat) {
             for (final String type : source.getType()) {
                 source.getController().addProwlType(type);
             }
+        } else if (source.hasKeyword("Lifelink")) {
+            // LifeLink not for Combat Damage at this place
+            source.getController().gainLife(amount, source);
         }
 
         // Run triggers

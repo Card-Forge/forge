@@ -5933,9 +5933,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         source.addDealtDamageToThisTurn(this, damageIn);
         if (isCombat) {
             game.getCombat().addDealtDamageTo(source, this);
-        }
-
-        if (source.hasKeyword("Lifelink")) {
+        } else if (source.hasKeyword("Lifelink")) {
+            // LifeLink not for Combat Damage at this place
             source.getController().gainLife(damageIn, source);
         }
 

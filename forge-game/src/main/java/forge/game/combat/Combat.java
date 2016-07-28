@@ -762,6 +762,10 @@ public class Combat {
         for (final Card damageSource : dealtDamageTo.keySet()) {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             int dealtDamage = damageDealtThisCombat.containsKey(damageSource) ? damageDealtThisCombat.get(damageSource) : 0;
+            // LifeLink for Combat Damage at this place
+            if (dealtDamage > 0 && damageSource.hasKeyword("Lifelink")) {
+                damageSource.getController().gainLife(dealtDamage, damageSource);
+            }
             runParams.put("DamageSource", damageSource);
             runParams.put("DamageTargets", dealtDamageTo.get(damageSource));
             runParams.put("DamageAmount", dealtDamage);
