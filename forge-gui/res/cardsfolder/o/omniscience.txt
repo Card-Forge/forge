@@ -1,7 +1,7 @@
 Name:Omniscience
 ManaCost:7 U U U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn | AddHiddenKeyword$ May be played without paying its mana cost | AffectedZone$ Hand | Description$ You may cast nonland cards from your hand without paying their mana costs.
+S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand | Description$ You may cast nonland cards from your hand without paying their mana costs.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omniscience.jpg
 Oracle:You may cast nonland cards from your hand without paying their mana costs.
