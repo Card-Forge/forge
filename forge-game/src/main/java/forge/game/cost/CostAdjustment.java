@@ -39,6 +39,9 @@ public class CostAdjustment {
         if (sa.isTrigger()) {
             return cost;
         }
+
+        // TODO: find better way to copy Cost object
+        Cost result = new Cost("0", sa.isAbility()).add(cost);
     
         boolean isStateChangeToFaceDown = false;
         if (sa.isSpell() && ((Spell) sa).isCastFaceDown()) {
@@ -65,14 +68,14 @@ public class CostAdjustment {
         }
         // Raise cost
         for (final StaticAbility stAb : raiseAbilities) {
-            applyRaise(cost, sa, stAb);
+            applyRaise(result, sa, stAb);
         }
 
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
             host.setState(CardStateName.Original, false);
         }
-        return cost;
+        return result;
     }
     
     private static void applyRaise(final Cost cost, final SpellAbility sa, final StaticAbility st) {
