@@ -2996,9 +2996,9 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
-        } else if (keyword.equals("Evoke")) {
+        } else if (keyword.startsWith("Evoke")) {
             final StringBuilder trigStr = new StringBuilder(
-                    "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ EvokeSac | Secondary$ True | TriggerDescription$ "
+                    "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Secondary$ True | TriggerDescription$ "
                             + "Evoke (" + Keyword.getInstance(keyword).getReminderText() + ")");
 
             final String effect = "DB$ Sacrifice";
