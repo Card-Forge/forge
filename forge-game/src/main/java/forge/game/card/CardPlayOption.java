@@ -21,17 +21,19 @@ public final class CardPlayOption {
 
     private final PayManaCost payManaCost;
     private final boolean ignoreManaCostColor;
+    private final boolean withFlash;
 
-    public CardPlayOption(final boolean withoutManaCost, final boolean ignoreManaCostColor) {
-        this(withoutManaCost ? PayManaCost.NO : PayManaCost.YES, ignoreManaCostColor);
+    public CardPlayOption(final boolean withoutManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
+        this(withoutManaCost ? PayManaCost.NO : PayManaCost.YES, ignoreManaCostColor, withFlash);
     }
-    private CardPlayOption(final PayManaCost payManaCost, final boolean ignoreManaCostColor) {
+    private CardPlayOption(final PayManaCost payManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
         this.payManaCost = payManaCost;
         this.ignoreManaCostColor = ignoreManaCostColor;
+        this.withFlash = withFlash;
     }
 
-    public CardPlayOption add(final boolean payManaCost, final boolean ignoreManaCostColor) {
-        return new CardPlayOption(this.payManaCost.add(payManaCost), isIgnoreManaCostColor() || ignoreManaCostColor);
+    public CardPlayOption add(final boolean payManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
+        return new CardPlayOption(this.payManaCost.add(payManaCost), isIgnoreManaCostColor() || ignoreManaCostColor, isWithFlash() || withFlash);
     }
 
     public PayManaCost getPayManaCost() {
@@ -40,6 +42,10 @@ public final class CardPlayOption {
 
     public boolean isIgnoreManaCostColor() {
         return ignoreManaCostColor;
+    }
+    
+    public boolean isWithFlash() {
+    	return withFlash;
     }
 
     @Override
@@ -57,7 +63,11 @@ public final class CardPlayOption {
                 return " (with or without paying its mana cost)";
             }
         case NO:
-            return " (without paying its mana cost)";
+        	if (isWithFlash()) {
+        		return " (without paying its mana cost and as though it has flash)";
+        	} else {
+        		return " (without paying its mana cost)";
+        	}
         }
         return StringUtils.EMPTY;
     }

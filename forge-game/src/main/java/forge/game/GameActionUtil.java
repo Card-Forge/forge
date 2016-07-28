@@ -192,11 +192,14 @@ public final class GameActionUtil {
                 final SpellAbility newSA = sa.copy();
                 final SpellAbilityRestriction sar = new SpellAbilityRestriction();
                 sar.setVariables(sa.getRestrictions());
+                if (playOption.isWithFlash()) {
+                	sar.setInstantSpeed(true);
+                }
                 sar.setZone(null);
                 newSA.setRestrictions(sar);
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
-                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                newSA.setDescription(sa.getDescription() + playOption.toString());
                 alternatives.add(newSA); 
             }
         }
@@ -225,17 +228,6 @@ public final class GameActionUtil {
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
-                alternatives.add(newSA);
-            }
-            if (sa.isSpell() && keyword.startsWith("May be played without paying its mana cost and as though it has flash")) {
-                final SpellAbility newSA = sa.copy();
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                sar.setInstantSpeed(true);
-                newSA.setRestrictions(sar);
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
-                newSA.setDescription(sa.getDescription() + " (without paying its mana cost and as though it has flash)");
                 alternatives.add(newSA);
             }
             if (sa.isSpell() && keyword.startsWith("Alternative Cost")) {

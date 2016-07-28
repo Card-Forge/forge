@@ -2277,9 +2277,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final CardPlayOption mayPlay(final Player player) {
         return mayPlay.get(player);
     }
-    public final void setMayPlay(final Player player, final boolean withoutManaCost, final boolean ignoreColor) {
+    public final void setMayPlay(final Player player, final boolean withoutManaCost, final boolean ignoreColor, final boolean withFlash) {
         final CardPlayOption option = this.mayPlay.get(player);
-        this.mayPlay.put(player, option == null ? new CardPlayOption(withoutManaCost, ignoreColor) : option.add(withoutManaCost, ignoreColor));
+        this.mayPlay.put(player, option == null ? new CardPlayOption(withoutManaCost, ignoreColor, withFlash) : option.add(withoutManaCost, ignoreColor, withFlash));
     }
     public final void removeMayPlay(final Player player) {
         this.mayPlay.remove(player);

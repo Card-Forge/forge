@@ -29,9 +29,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
-import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.StaticEffect;
@@ -140,7 +138,7 @@ public final class StaticAbilityContinuous {
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
         boolean controllerMayLookAt = false;
-        boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayIgnoreColor = false;
+        boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayIgnoreColor = false, mayPlayWithFlash = false;
 
         //Global rules changes
         if (layer == StaticAbilityLayer.RULES && params.containsKey("GlobalRule")) {
@@ -375,6 +373,9 @@ public final class StaticAbilityContinuous {
                     mayPlayWithoutManaCost = true;
                 } else if (params.containsKey("MayPlayIgnoreColor")) {
                     mayPlayIgnoreColor = true;
+                }
+                if (params.containsKey("MayPlayWithFlash")) {
+                	mayPlayWithFlash = true;
                 }
             }
 
@@ -611,7 +612,7 @@ public final class StaticAbilityContinuous {
                 affectedCard.setMayLookAt(controller, true);
             }
             if (controllerMayPlay) {
-                affectedCard.setMayPlay(controller, mayPlayWithoutManaCost, mayPlayIgnoreColor);
+                affectedCard.setMayPlay(controller, mayPlayWithoutManaCost, mayPlayIgnoreColor, mayPlayWithFlash);
             }
 
             affectedCard.updateStateForView();
