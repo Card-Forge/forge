@@ -219,17 +219,6 @@ public final class GameActionUtil {
                 }
                 alternatives.add(flashback);
             }
-            if (sa.isSpell() && keyword.equals("May be played without paying its mana cost")) {
-                final SpellAbility newSA = sa.copy();
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                sar.setZone(null);
-                newSA.setRestrictions(sar);
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
-                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
-                alternatives.add(newSA);
-            }
             if (sa.isSpell() && keyword.startsWith("Alternative Cost")) {
                 final SpellAbility newSA = sa.copy();
                 newSA.setBasicSpell(false);
