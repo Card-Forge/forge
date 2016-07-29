@@ -3,8 +3,9 @@ ManaCost:4 U U
 Types:Creature Human Soldier
 PT:4/3
 K:Flying
-A:AB$ Dig | Cost$ 1 U U | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Exile the top card of your library. Until end of turn, you may play that card. (Reveal the card as you exile it.)
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played | PumpZone$ Exile | SubAbility$ DBCleanup
+A:AB$ Mill | Cost$ 1 U U | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. Until end of turn, you may play that card. (Reveal the card as you exile it.)
+SVar:DBEffect:DB$Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerial_caravan.jpg
 Oracle:Flying\n{1}{U}{U}: Exile the top card of your library. Until end of turn, you may play that card. (Reveal the card as you exile it.)
