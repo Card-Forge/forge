@@ -202,6 +202,23 @@ public class EffectEffect extends SpellAbilityEffect {
                     eff.addRemembered(o);
                 }
             }
+            if (sa.hasParam("ForgetOnMoved")) {
+                String zone = sa.getParam("ForgetOnMoved");
+                String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
+                String effect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
+                parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
+                final Trigger addedTrigger = eff.addTrigger(parsedTrigger);
+                addedTrigger.setIntrinsic(true);
+            } else if (sa.hasParam("ExileOnMoved")) {
+                String zone = sa.getParam("ExileOnMoved");
+                String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
+                String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
+                parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
+                final Trigger addedTrigger = eff.addTrigger(parsedTrigger);
+                addedTrigger.setIntrinsic(true);
+            }
         }
 
         // Set Imprinted
