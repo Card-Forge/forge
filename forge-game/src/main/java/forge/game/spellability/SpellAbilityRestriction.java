@@ -216,7 +216,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (cardZone != null && cardZone.is(ZoneType.Stack)) {
                 return false;
             }
-            if (c.mayPlay(activator) != null) {
+            if (!sa.isBasicSpell() && c.mayPlay(activator) != null) {
                 return true;
             }
             if (c.hasKeyword("May be played") && activator.equals(c.getController())) {
