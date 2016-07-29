@@ -961,7 +961,7 @@ public class ComputerUtilMana {
             sa.getHostCard().setCastFrom(card.getZone().getZoneType());
         }
 
-        Cost payCosts = sa.getPayCosts();
+        Cost payCosts = CostAdjustment.adjust(sa.getPayCosts(), sa);
         CostPartMana manapart = payCosts != null ? payCosts.getCostMana() : null;
         final ManaCost mana = payCosts != null ? ( manapart == null ? ManaCost.ZERO : manapart.getManaCostFor(sa) ) : ManaCost.NO_COST;
 
