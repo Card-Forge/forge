@@ -5,8 +5,9 @@ Loyalty:4
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SubAbility$ ChandraDamage | SpellDescription$ CARDNAME deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn.
 SVar:ChandraDamage:DB$ DealDamage | ValidTgts$ Creature.TargetedPlayerCtrl | TgtPrompt$ Select target creature that player controls | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ GE1
-A:AB$ Mill | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBMayBePlay | SpellDescription$ Exile the top card of your library. You may play it this turn.
-SVar:DBMayBePlay:DB$ Pump | Defined$ Remembered | PumpZone$ Exile | KW$ HIDDEN May be played | SubAbility$ DBCleanup
+A:AB$ Mill | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.
+SVar:DBEffect:DB$Effect | RememberObjects$ Remembered | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Mill | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | NumCards$ 10 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.
 SVar:DBChoose:DB$ ChooseCard | Choices$ Instant.IsRemembered,Sorcery.IsRemembered | ChoiceZone$ Exile | Defined$ You | SubAbility$ DBPlay
