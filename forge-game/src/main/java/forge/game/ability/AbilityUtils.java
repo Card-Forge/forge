@@ -157,7 +157,7 @@ public class AbilityUtils {
                 }
             }
         }
-        else if (defined.equals("Remembered")) {
+        else if (defined.equals("Remembered") || defined.equals("RememberedCard")) {
             if (!hostCard.hasRemembered()) {
                 final Card newCard = game.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
