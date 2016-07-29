@@ -2,13 +2,11 @@ Name:Havengul Lich
 ManaCost:3 U B
 Types:Creature Zombie Wizard
 PT:4/4
-A:AB$ Effect | Name$ Havengul Lich Delayed Trigger | Cost$ 1 | ValidTgts$ Creature | TgtZone$ Graveyard | TgtPrompt$ Select target creature card | StaticAbilities$ STPlay | Triggers$ DTMove,DTCast | SVars$ StealAbs,STSteal,CleanupDT | RememberObjects$ Targeted | SpellDescription$ You may cast target creature card in a graveyard this turn. When you cast that card this turn, CARDNAME gains all activated abilities of that card until end of turn.
+A:AB$ Effect | Name$ Havengul Lich Delayed Trigger | Cost$ 1 | ValidTgts$ Creature | TgtZone$ Graveyard | TgtPrompt$ Select target creature card | StaticAbilities$ STPlay | Triggers$ DTCast | SVars$ StealAbs,STSteal | RememberObjects$ Targeted | ExileOnMoved$ Graveyard | SpellDescription$ You may cast target creature card in a graveyard this turn. When you cast that card this turn, CARDNAME gains all activated abilities of that card until end of turn.
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ Until end of turn, you may cast a creature card in a graveyard.
-SVar:DTMove:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Graveyard | Destination$ Any | Execute$ CleanupDT | Static$ True
-SVar:DTCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Execute$ StealAbs | TriggerDescription$ When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn. | Description$ Havengul Lich gains all activated abilities of that card until end of turn.
-SVar:StealAbs:DB$ Effect | Name$ Havengul Lich effect | RememberObjects$ TriggeredCard | StaticAbilities$ STSteal | SubAbility$ CleanupDT
-SVar:STSteal:Mode$ Continuous | Affected$ EffectSource | EffectZone$ Command | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Library,Hand,Stack,Battlefield,Graveyard,Exile,Command
-SVar:CleanupDT:DB$ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DTCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Execute$ StealAbs | TriggerDescription$ When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
+SVar:StealAbs:DB$ Effect | Name$ Havengul Lich effect | RememberObjects$ TriggeredCard | StaticAbilities$ STSteal
+SVar:STSteal:Mode$ Continuous | Affected$ EffectSource | EffectZone$ Command | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Library,Hand,Stack,Battlefield,Graveyard,Exile,Command | Description$ Havengul Lich gains all activated abilities of that card until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havengul_lich.jpg
 Oracle:{1}: You may cast target creature card in a graveyard this turn. When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
