@@ -38,14 +38,24 @@ public class CharmAi extends SpellAbilityAi {
         } else if ("Triskaidekaphobia".equals(sa.getHostCard().getName())) {
             chosenList = chooseTriskaidekaphobia(choices, ai);
         } else {
+            /*
+             * The generic chooseOptionsAi uses canPlayAi() to determine good choices
+             * which means most "bonus" effects like life-gain and random pumps will
+             * usually not be chosen. This is designed to force the AI to only select
+             * the best choice(s) since it does not actually know if it can pay for
+             * "bonus" choices (eg. Entwine/Escalate).
+             * chooseMultipleOptionsAi() uses "AILogic$Good" tags to manually identify
+             * bonus choice(s) for the AI otherwise it might be too hard to ever fulfil
+             * minimum choice requirements with canPlayAi() alone.
+             */
             chosenList = min > 1 ? chooseMultipleOptionsAi(choices, ai, min)
-                    : chooseOptionsAi(choices, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"), false);
+                    : chooseOptionsAi(choices, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"));
         }
 
         if (chosenList.isEmpty()) {
             if (timingRight) {
                 // Set minimum choices for triggers where chooseMultipleOptionsAi() returns null
-                chosenList = chooseOptionsAi(choices, ai, true, num, min, sa.hasParam("CanRepeatModes"), false);
+                chosenList = chooseOptionsAi(choices, ai, true, num, min, sa.hasParam("CanRepeatModes"));
             } else {
                 return false;
             }
@@ -56,47 +66,48 @@ public class CharmAi extends SpellAbilityAi {
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    private List<AbilitySub> chooseOptionsAi(List<AbilitySub> choices, final Player ai, boolean playNow, int num,
-            int min, boolean allowRepeat, boolean opponentChoser) {
+    private List<AbilitySub> chooseOptionsAi(List<AbilitySub> choices, final Player ai, boolean isTrigger, int num,
+            int min, boolean allowRepeat) {
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
-        // Make choice(s)
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        for (int i = 0; i < num; i++) {
-            AbilitySub thisPick = null;
-            for (SpellAbility sub : choices) {
-                sub.setActivatingPlayer(ai);
-                if (!playNow && AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
-                    thisPick = (AbilitySub) sub;
-                    choices.remove(sub);
-                    playNow = true;
-                    break;
+        // First pass using standard canPlayAi() for good choices
+        for (AbilitySub sub : choices) {
+            sub.setActivatingPlayer(ai);
+            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+                chosenList.add(sub);
+                if (chosenList.size() == num) {
+                    return chosenList;  // maximum choices reached
                 }
-                if ((playNow || i < num - 1) && aic.doTrigger(sub, false)) {
-                    thisPick = (AbilitySub) sub;
-                    choices.remove(sub);
-                    break;
-                }
-            }
-            if (thisPick != null) {
-                chosenList.add(thisPick);
             }
         }
-        // Set minimum choices for triggers
-        if (playNow && chosenList.size() < min) {
-            for (int i = 0; i < min; i++) {
-                AbilitySub thisPick = null;
-                for (SpellAbility sub : choices) {
-                    sub.setActivatingPlayer(ai);
-                    if (aic.doTrigger(sub, true)) {
-                        thisPick = (AbilitySub) sub;
-                        choices.remove(sub);
-                        break;
+        if (isTrigger && chosenList.size() < min) {
+            // Second pass using doTrigger(false) to fulfil minimum choice
+            choices.removeAll(chosenList);
+            for (AbilitySub sub : choices) {
+                sub.setActivatingPlayer(ai);
+                if (aic.doTrigger(sub, false)) {
+                    chosenList.add(sub);
+                    if (chosenList.size() == min) {
+                        return chosenList;
                     }
                 }
-                if (thisPick != null) {
-                    chosenList.add(thisPick);
+            }
+            // Third pass using doTrigger(true) to force fill minimum choices
+            if (chosenList.size() < min) {
+                choices.removeAll(chosenList);
+                for (AbilitySub sub : choices) {
+                    sub.setActivatingPlayer(ai);
+                    if (aic.doTrigger(sub, true)) {
+                        chosenList.add(sub);
+                        if (chosenList.size() == min) {
+                            break;
+                        }
+                    }
                 }
             }
+        }
+        if (chosenList.size() < min) {
+            chosenList.clear(); // not enough choices
         }
         return chosenList;
     }
