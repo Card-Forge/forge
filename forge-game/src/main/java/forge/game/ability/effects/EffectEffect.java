@@ -266,6 +266,9 @@ public class EffectEffect extends SpellAbilityEffect {
             else if (duration.equals("UntilYourNextTurn")) {
                 game.getCleanup().addUntil(controller, endEffect);
             }
+            else if (duration.equals("UntilYourNextUpkeep")) {
+                game.getUpkeep().addUntil(controller, endEffect);
+            }
             else if (duration.equals("UntilEndOfCombat")) {
                 game.getEndOfCombat().addUntil(endEffect);
             }
