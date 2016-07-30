@@ -1,7 +1,7 @@
 Name:Crucible of Worlds
 ManaCost:3
 Types:Artifact
-S:Mode$ Continuous | Affected$ Land.YouOwn | AddHiddenKeyword$ May be played | AffectedZone$ Graveyard | Description$ You may play land cards from your graveyard.
+S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play land cards from your graveyard.
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crucible_of_worlds.jpg
 Oracle:You may play land cards from your graveyard.
