@@ -1,11 +1,9 @@
 package forge.game.player;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
+import forge.card.CardType;
 import forge.card.mana.ManaAtom;
 import forge.game.card.CounterType;
 
@@ -311,6 +309,20 @@ public class PlayerView extends GameEntityView {
         TrackableCollection<CardView> cards = get(zoneProp);
         return cards == null ? 0 : cards.size();
     }
+
+    public int getZoneTypes(TrackableProperty zoneProp) {
+        TrackableCollection<CardView> cards = get(zoneProp);
+        HashSet<CardType.CoreType> types = new HashSet<>();
+        if (cards == null)
+            return 0;
+
+        for(CardView c : cards) {
+            types.addAll((Collection<? extends CardType.CoreType>) c.getCurrentState().getType().getCoreTypes());
+        }
+
+        return cards.size();
+    }
+
     private static TrackableProperty getZoneProp(final ZoneType zone) {
         switch (zone) {
         case Ante:

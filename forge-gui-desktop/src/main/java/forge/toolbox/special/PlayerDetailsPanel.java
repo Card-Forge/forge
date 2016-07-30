@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import forge.card.mana.ManaAtom;
+import forge.trackable.TrackableProperty;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +34,7 @@ public class PlayerDetailsPanel extends JPanel {
 
     // Info labels
     private final DetailLabel lblHand = new DetailLabel(FSkinProp.IMG_ZONE_HAND, "Hand (%s/%s)");
-    private final DetailLabel lblGraveyard = new DetailLabel(FSkinProp.IMG_ZONE_GRAVEYARD, "Graveyard (%s)");
+    private final DetailLabel lblGraveyard = new DetailLabel(FSkinProp.IMG_ZONE_GRAVEYARD, "Graveyard (%s) Types[%s]");
     private final DetailLabel lblLibrary = new DetailLabel(FSkinProp.IMG_ZONE_LIBRARY, "Library (%s)");
     private final DetailLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, "Exile (%s)");
     private final DetailLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, "Flashback cards (%s)");
@@ -110,20 +111,20 @@ public class PlayerDetailsPanel extends JPanel {
 
     /**
      * Handles observer update of player Zones - hand, graveyard, etc.
-     *
-     * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateZones() {
         final String handSize = String.valueOf(player.getHandSize()),
                 graveyardSize = String.valueOf(player.getGraveyardSize()),
+                deliriumCount = String.valueOf(player.getZoneTypes(TrackableProperty.Graveyard)),
                 librarySize   = String.valueOf(player.getLibrarySize()),
                 flashbackSize = String.valueOf(player.getFlashbackSize()),
                 exileSize     = String.valueOf(player.getExileSize()),
                 commandSize   = String.valueOf(player.getCommandSize());
+
         lblHand.setText(handSize);
         lblHand.setToolTip(handSize, player.getMaxHandString());
         lblGraveyard.setText(graveyardSize);
-        lblGraveyard.setToolTip(graveyardSize);
+        lblGraveyard.setToolTip(graveyardSize, deliriumCount);
         lblLibrary.setText(librarySize);
         lblLibrary.setToolTip(librarySize);
         lblFlashback.setText(flashbackSize);
