@@ -6756,6 +6756,7 @@ forge-gui/res/cardsfolder/g/gilt_leaf_palace.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gilt_leaf_seer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gilt_leaf_winnower.txt -text
 forge-gui/res/cardsfolder/g/giltspire_avenger.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/gisa_and_geralf.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/g/gisas_bidding.txt -text
 forge-gui/res/cardsfolder/g/gisela_blade_of_goldnight.txt -text
 forge-gui/res/cardsfolder/g/gisela_the_broken_blade_brisela_voice_of_nightmares.txt -text

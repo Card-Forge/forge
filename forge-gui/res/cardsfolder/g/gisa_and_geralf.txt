@@ -1,0 +1,10 @@
+Name:Gisa and Geralf
+ManaCost: 2 U B
+Types:Creature Legendary Creature Human Wizard
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top four cards of your library into your graveyard.
+SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 4 | Defined$ You
+S:Mode$ Continuous | Affected$ Zombie.YouCtrl | PlayerTurn$ True | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ During each of your turns, you may cast a Zombie creature card from your graveyard.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gisa_and_geralf.jpg
+Oracle:When Gisa and Geralf enters the battlefield, put the top four cards of your library into your graveyard.\nDuring each of your turns, you may cast a Zombie creature card from your graveyard.
+
