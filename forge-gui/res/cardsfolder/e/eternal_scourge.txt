@@ -1,18 +1,10 @@
 Name:Eternal Scourge
-
 ManaCost:3
-
 Types:Creature Eldrazi Horror
-
 PT:3/3
-
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ May be played | AffectedZone$ Exile | EffectZone$ Exile | Description$ You may cast CARDNAME from exile.
-
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Exile | EffectZone$ Exile | Description$ You may cast CARDNAME from exile.
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Card.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME becomes the target of a spell or ability an opponent controls, exile CARDNAME.
-
 SVar:TrigChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_scourge.jpg
-
 Oracle:You may cast Eternal Scourge from exile.\nWhen Eternal Scourge becomes the target of a spell or ability an opponent controls, exile Eternal Scourge.
 
