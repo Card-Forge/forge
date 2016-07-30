@@ -2,8 +2,8 @@ Name:Courser of Kruphix
 ManaCost:1 G G
 Types:Enchantment Creature Centaur
 PT:2/4
-S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ You may look at this card. & Your opponent may look at this card. | Description$ Play with the top card of your library revealed.
-S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ May be played | Description$ You may play the top card of your library if it's a land card.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ True | AddHiddenKeyword$ Your opponent may look at this card. | Description$ Play with the top card of your library revealed.
+S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may play the top card of your library if it's a land card.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/courser_of_kruphix.jpg
