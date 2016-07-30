@@ -1,6 +1,6 @@
 Name:Karador, Ghost Chieftain
 ManaCost:5 W B G
-Types:Creature Legendary Creature Centaur Spirit
+Types:Legendary Creature Centaur Spirit
 PT:3/4
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each creature card in your graveyard.
 SVar:X:Count$ValidGraveyard Creature.YouCtrl
