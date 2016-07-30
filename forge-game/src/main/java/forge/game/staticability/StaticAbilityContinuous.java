@@ -139,6 +139,7 @@ public final class StaticAbilityContinuous {
         boolean removeCreatureTypes = false;
         boolean controllerMayLookAt = false;
         boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayIgnoreColor = false, mayPlayWithFlash = false;
+        Integer mayPlayLimit = null;
 
         //Global rules changes
         if (layer == StaticAbilityLayer.RULES && params.containsKey("GlobalRule")) {
@@ -377,6 +378,9 @@ public final class StaticAbilityContinuous {
                 if (params.containsKey("MayPlayWithFlash")) {
                 	mayPlayWithFlash = true;
                 }
+                if (params.containsKey("MayPlayLimit")) {
+                    mayPlayLimit = Integer.parseInt(params.get("MayPlayLimit"));
+                }
             }
 
             if (params.containsKey("IgnoreEffectCost")) {
@@ -611,8 +615,9 @@ public final class StaticAbilityContinuous {
             if (controllerMayLookAt) {
                 affectedCard.setMayLookAt(controller, true);
             }
-            if (controllerMayPlay) {
-                affectedCard.setMayPlay(controller, mayPlayWithoutManaCost, mayPlayIgnoreColor, mayPlayWithFlash);
+            if (controllerMayPlay && (mayPlayLimit == null || hostCard.getMayPlayTurn() < mayPlayLimit)) {
+                Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
+                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayIgnoreColor, mayPlayWithFlash, hostCard);
             }
 
             affectedCard.updateStateForView();

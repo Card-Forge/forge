@@ -35,7 +35,7 @@ public class ComputerUtilAbility {
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 spellAbilities.add(sa);
             }
-            if (c.isFaceDown() && c.isInZone(ZoneType.Exile) && c.mayPlay(player) != null) {
+            if (c.isFaceDown() && c.isInZone(ZoneType.Exile) && !c.mayPlay(player).isEmpty()) {
                 for (final SpellAbility sa : c.getState(CardStateName.Original).getSpellAbilities()) {
                     spellAbilities.add(sa);
                 }

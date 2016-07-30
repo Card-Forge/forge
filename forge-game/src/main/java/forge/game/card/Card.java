@@ -109,7 +109,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private GameEntity enchanting = null;
     private GameEntity mustAttackEntity = null;
 
-    private final Map<Player, CardPlayOption> mayPlay = Maps.newTreeMap();
+    private final Map<Card, CardPlayOption> mayPlay = Maps.newTreeMap();
+    private int mayPlayTurn = 0;
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private final Map<Long, CardChangedType> changedCardTypes = new TreeMap<>();
@@ -1594,11 +1595,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final StringBuilder sb = new StringBuilder();
         if (!mayPlay.isEmpty()) {
             sb.append("May be played by: ");
-            sb.append(Lang.joinHomogenous(mayPlay.entrySet(), new Function<Entry<Player, CardPlayOption>, String>() {
-                @Override public String apply(final Entry<Player, CardPlayOption> entry) {
-                    return entry.getKey().toString() + entry.getValue().toString();
-                }
-            }));
+            sb.append(Lang.joinHomogenous(mayPlay.values()));
             sb.append("\r\n");
         }
 
@@ -2274,15 +2271,38 @@ public class Card extends GameEntity implements Comparable<Card> {
         view.setPlayerMayLook(player, mayLookAt, temp);
     }
 
-    public final CardPlayOption mayPlay(final Player player) {
-        return mayPlay.get(player);
+    public final CardPlayOption mayPlay(final Card host) {
+    	if (host == null) {
+    	    return null;
+    	}
+    	return mayPlay.get(host);
     }
-    public final void setMayPlay(final Player player, final boolean withoutManaCost, final boolean ignoreColor, final boolean withFlash) {
-        final CardPlayOption option = this.mayPlay.get(player);
-        this.mayPlay.put(player, option == null ? new CardPlayOption(withoutManaCost, ignoreColor, withFlash) : option.add(withoutManaCost, ignoreColor, withFlash));
+    public final List<CardPlayOption> mayPlay(final Player player) {
+    	List<CardPlayOption> result = Lists.newArrayList();
+    	for (CardPlayOption o : mayPlay.values()) {
+    		if (o.getPlayer().equals(player)) {
+    			result.add(o);
+    		}
+    	}
+        return result;
     }
-    public final void removeMayPlay(final Player player) {
-        this.mayPlay.remove(player);
+    public final void setMayPlay(final Player player, final boolean withoutManaCost, final boolean ignoreColor, final boolean withFlash, final Card host) {
+        this.mayPlay.put(host, new CardPlayOption(player, host, withoutManaCost, ignoreColor, withFlash));
+    }
+    public final void removeMayPlay(final Card host) {
+        this.mayPlay.remove(host);
+    }
+
+    public int getMayPlayTurn() {
+        return mayPlayTurn;
+    }
+
+    public void incMayPlayTurn() {
+        this.mayPlayTurn++;
+    }
+
+    public void resetMayPlayTurn() {
+        this.mayPlayTurn = 0;
     }
 
     public final CardCollectionView getEquippedBy(boolean allowModify) {
@@ -6511,6 +6531,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         getDamageHistory().setCreatureGotBlockedThisTurn(false);
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
+        resetMayPlayTurn();
     }
 
     public boolean hasETBTrigger(final boolean drawbackOnly) {
@@ -6672,8 +6693,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             abilities.add(sa);
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
         }
-        final CardPlayOption playOption = mayPlay(player);
-        if (isFaceDown() && isInZone(ZoneType.Exile) && playOption != null) {
+
+        if (isFaceDown() && isInZone(ZoneType.Exile) && !mayPlay(player).isEmpty()) {
             for (final SpellAbility sa : getState(CardStateName.Original).getSpellAbilities()) {
                 abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
             }

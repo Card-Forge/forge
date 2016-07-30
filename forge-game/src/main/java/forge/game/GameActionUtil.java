@@ -172,36 +172,48 @@ public final class GameActionUtil {
      */
     public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator) {
         final List<SpellAbility> alternatives = new ArrayList<SpellAbility>();
-        if (!sa.isBasicSpell()) {
-            return alternatives;
-        }
 
         final Card source = sa.getHostCard();
-        final CardPlayOption playOption = source.mayPlay(activator);
-        if (sa.isSpell() && playOption != null) {
-            final PayManaCost payMana = playOption.getPayManaCost();
-            if (payMana == PayManaCost.YES || payMana == PayManaCost.MAYBE) {
+
+        if (sa.isSpell()) {
+            for (CardPlayOption o : source.mayPlay(activator)) {
+                // non basic are only allowed if PayManaCost is yes
+                if (!sa.isBasicSpell() && o.getPayManaCost() == PayManaCost.NO) {
+                    continue;
+                }
+                final Card host = o.getHost();
+
                 final SpellAbility newSA = sa.copy();
                 final SpellAbilityRestriction sar = new SpellAbilityRestriction();
                 sar.setVariables(sa.getRestrictions());
-                sar.setZone(null);
-                newSA.setRestrictions(sar);
-                alternatives.add(newSA); 
-            }
-            if (payMana == PayManaCost.NO || payMana == PayManaCost.MAYBE) {
-                final SpellAbility newSA = sa.copy();
-                final SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                if (playOption.isWithFlash()) {
+                if (o.isWithFlash()) {
                 	sar.setInstantSpeed(true);
                 }
                 sar.setZone(null);
                 newSA.setRestrictions(sar);
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
-                newSA.setDescription(sa.getDescription() + playOption.toString());
-                alternatives.add(newSA); 
+                newSA.setMayPlayHost(host);
+                if (o.getPayManaCost() == PayManaCost.NO) {
+                    newSA.setBasicSpell(false);
+                    newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
+                }
+
+                final StringBuilder sb = new StringBuilder(sa.getDescription());
+                if (!source.equals(host)) {
+                    sb.append(" by ");
+                    if (host.isEmblem() || host.getType().hasSubtype("Effect")) {
+                        sb.append(host.getEffectSource());
+                    } else {
+                        sb.append(host);
+                    }
+                }
+                sb.append(o.toString(false));
+                newSA.setDescription(sb.toString());
+                alternatives.add(newSA);
             }
+        }
+
+        if (!sa.isBasicSpell()) {
+            return alternatives;
         }
 
         for (final String keyword : source.getKeywords()) {

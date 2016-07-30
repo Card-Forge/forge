@@ -42,7 +42,7 @@ public class PlayerZone extends Zone {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (c.mayPlay(who) != null || c.hasKeyword("Your opponent may look at this card.")) {
+                if (!c.mayPlay(who).isEmpty() || c.hasKeyword("Your opponent may look at this card.")) {
                     return true;
                 }
                 return false;
@@ -57,7 +57,7 @@ public class PlayerZone extends Zone {
                 return true;
             }
 
-            if (c.isLand() && (c.mayPlay(c.getController()) != null)) {
+            if (c.isLand() && (!c.mayPlay(c.getController()).isEmpty())) {
                 return true;
             }
 
@@ -68,7 +68,7 @@ public class PlayerZone extends Zone {
                 }
    
                 if (sa.isSpell()
-                        && (c.mayPlay(c.getController()) != null
+                        && (c.mayPlay(sa.getMayPlayHost()) != null
                                 || (c.hasStartOfKeyword("Flashback") && PlayerZone.this.is(ZoneType.Graveyard)))
                         && restrictZone.equals(ZoneType.Hand)) {
                     return true;

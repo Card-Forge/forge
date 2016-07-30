@@ -27,6 +27,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.CardPlayOption;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -216,8 +217,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (cardZone != null && cardZone.is(ZoneType.Stack)) {
                 return false;
             }
-            if (!sa.isBasicSpell() && c.mayPlay(activator) != null) {
-                return true;
+            if (sa.isSpell()) {
+                final CardPlayOption o = c.mayPlay(sa.getMayPlayHost());
+                if (o != null && o.getPlayer() == activator) {
+                     return true;
+                }
             }
             return false;
         }
@@ -296,8 +300,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         	return true;
         }
 
-        if (sa.isSpell() && c.mayPlay(activator) != null) {
-            return true;
+        if (sa.isSpell()) {
+            final CardPlayOption o = c.mayPlay(sa.getMayPlayHost());
+            if (o != null && o.getPlayer() == activator) {
+                return true;
+            }
         }
         
         return false;

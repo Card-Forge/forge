@@ -2,38 +2,40 @@ package forge.game.card;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.game.player.Player;
+
 public final class CardPlayOption {
     public enum PayManaCost {
         /** Indicates the mana cost must be payed. */
         YES,
-        /** Indicates the mana cost must not be payed. */
-        MAYBE,
         /** Indicates the mana cost may not be payed. */
         NO;
-
-        private PayManaCost add(final boolean other) {
-            if (this == MAYBE || (this == YES && other) || (this == NO && !other)) { 
-                return this;
-            }
-            return MAYBE;
-        }
     }
 
+    private final Player player;
+    private final Card host;
     private final PayManaCost payManaCost;
     private final boolean ignoreManaCostColor;
     private final boolean withFlash;
 
-    public CardPlayOption(final boolean withoutManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
-        this(withoutManaCost ? PayManaCost.NO : PayManaCost.YES, ignoreManaCostColor, withFlash);
+    public CardPlayOption(final Player player, final Card host, final boolean withoutManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
+        this(player, host, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, ignoreManaCostColor, withFlash);
     }
-    private CardPlayOption(final PayManaCost payManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
+    private CardPlayOption(final Player player, final Card host, final PayManaCost payManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
+        this.player = player;
+        this.host = host;
         this.payManaCost = payManaCost;
         this.ignoreManaCostColor = ignoreManaCostColor;
         this.withFlash = withFlash;
     }
 
-    public CardPlayOption add(final boolean payManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
-        return new CardPlayOption(this.payManaCost.add(payManaCost), isIgnoreManaCostColor() || ignoreManaCostColor, isWithFlash() || withFlash);
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Card getHost() {
+        return host;
     }
 
     public PayManaCost getPayManaCost() {
@@ -50,26 +52,26 @@ public final class CardPlayOption {
 
     @Override
     public String toString() {
+        return toString(true);
+    }
+
+    public String toString( final boolean withPlayer) {
+        StringBuilder sb = new StringBuilder(withPlayer ? this.player.toString() : StringUtils.EMPTY);
+
         switch (getPayManaCost()) {
         case YES:
             if (isIgnoreManaCostColor()) {
-                return " (may spend mana as though it were mana of any color to cast it)";
+                sb.append(" (may spend mana as though it were mana of any color to cast it)");
             }
             break;
-        case MAYBE:
-            if (isIgnoreManaCostColor()) {
-                return " (with or without paying its mana cost, spending mana as though it were mana of any color to cast it)";
-            } else {
-                return " (with or without paying its mana cost)";
-            }
         case NO:
-        	if (isWithFlash()) {
-        		return " (without paying its mana cost and as though it has flash)";
-        	} else {
-        		return " (without paying its mana cost)";
-        	}
+            sb.append(" (without paying its mana cost");
+            if (isWithFlash()) {
+                sb.append(" and as though it has flash");
+            }
+            sb.append(")");
         }
-        return StringUtils.EMPTY;
+        return sb.toString();
     }
 
 }

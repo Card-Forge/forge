@@ -1,0 +1,9 @@
+Name:Karador, Ghost Chieftain
+ManaCost:5 W B G
+Types:Creature Legendary Creature Centaur Spirit
+PT:3/4
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each creature card in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.YouCtrl
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | PlayerTurn$ True | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ During each of your turns, you may cast one creature card from your graveyard.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/karador_ghost_chieftain.jpg
+Oracle:Karador, Ghost Chieftain costs {1} less to cast for each creature card in your graveyard.\nDuring each of your turns, you may cast one creature card from your graveyard.

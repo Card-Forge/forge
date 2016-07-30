@@ -73,7 +73,7 @@ public class HumanPlaySpellAbility {
         final ManaPool manapool = human.getManaPool();
 
         final Card c = ability.getHostCard();
-        final CardPlayOption option = c.mayPlay(human);
+        final CardPlayOption option = c.mayPlay(ability.getMayPlayHost());
 
         final boolean manaConversion = (ability.isSpell() && (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
                 || (option != null && option.isIgnoreManaCostColor())));

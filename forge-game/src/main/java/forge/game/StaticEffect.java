@@ -1046,7 +1046,7 @@ public class StaticEffect {
                 affectedCard.setMayLookAt(controller, false);
             }
             if (removeMayPlay) {
-                affectedCard.removeMayPlay(controller);
+                affectedCard.removeMayPlay(source);
             }
             affectedCard.updateStateForView();
         }

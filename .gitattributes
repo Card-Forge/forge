@@ -8517,6 +8517,7 @@ forge-gui/res/cardsfolder/k/kami_of_the_waning_moon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kami_of_twisted_reflection.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kangee_aerie_keeper.txt -text
 forge-gui/res/cardsfolder/k/kapsho_kitefins.txt -text
+forge-gui/res/cardsfolder/k/karador_ghost_chieftain.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/k/karakas.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/karametra_god_of_harvests.txt -text
 forge-gui/res/cardsfolder/k/karametras_acolyte.txt -text

@@ -1638,7 +1638,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         if (land != null && !ignoreZoneAndTiming) {
-            final boolean mayPlay = land.mayPlay(this) != null;
+            final boolean mayPlay = !land.mayPlay(this).isEmpty();
             if (land.getOwner() != this && !mayPlay) {
                 return false;
             }

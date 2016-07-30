@@ -1509,10 +1509,10 @@ public class ComputerUtil {
             		ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, game.getCombat())) {
             	return true;
             }
-        } else if (zone.getZoneType() == ZoneType.Exile) {
+        } else if (zone.getZoneType() == ZoneType.Exile && sa.getMayPlayHost() != null) {
             // play cards in exile that can only be played that turn
             if (game.getPhaseHandler().getPhase() == PhaseType.MAIN2) {
-                if (source.mayPlay(ai) != null) {
+                if (source.mayPlay(sa.getMayPlayHost()) != null) {
                     return true;
                 }
             }

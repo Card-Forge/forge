@@ -141,6 +141,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private SpellAbilityView view;
 
+    private Card mayPlay = null;
+
     protected SpellAbility(final Card iSourceCard, final Cost toPay) {
         this(iSourceCard, toPay, null);
     }
@@ -580,6 +582,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setOutlast(boolean outlast0) {
         outlast = outlast0;
+    }
+
+    public Card getMayPlayHost() {
+        return mayPlay;
+    }
+    public void setMayPlayHost(final Card host) {
+        mayPlay = host;
     }
 
     public boolean isLeftSplit() {
