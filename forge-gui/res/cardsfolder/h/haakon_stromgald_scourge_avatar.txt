@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/-3
 A:AB$ Effect | ActivationZone$ Command | Cost$ PayLife<1> | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | PumpZone$ Graveyard | TgtPrompt$ Select target creature in your graveyard, you may play it this turn | RememberObjects$ Targeted | StaticAbilities$ Play | ExileOnMoved$ Graveyard | SpellDescription$ You may play target creature card in your graveyard this turn.
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play remembered card.
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromGraveyard | ValidControllingPlayer$ You | TriggerZones$ Command | Execute$ TrigAnimate | TriggerDescription$  Whenever you play a creature card from your graveyard, it becomes a black Zombie Knight.
 SVar:TrigAnimate:AB$ Animate | Cost$ 0 | Defined$ TriggeredCard | Types$ Zombie,Knight | Colors$ Black | OverwriteColors$ True | Permanent$ True | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Zombie+Knight | AffectedZone$ Battlefield | AddHiddenKeyword$ If CARDNAME would be put into a graveyard, exile it instead. | Description$ If a Zombie Knight would be put into your graveyard from the battlefield, exile it instead.
