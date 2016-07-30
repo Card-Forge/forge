@@ -918,7 +918,12 @@ public class AiController {
     };
 
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
+        return getCardsToDiscard(numDiscard, uTypes, sa, CardCollection.EMPTY);
+    }
+
+    public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa, final CardCollectionView exclude) {
         CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
+        hand.removeAll(exclude);
         if ((uTypes != null) && (sa != null)) {
             hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getHostCard(), sa);
         }
