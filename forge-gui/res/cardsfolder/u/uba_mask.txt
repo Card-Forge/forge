@@ -2,12 +2,9 @@ Name:Uba Mask
 ManaCost:4
 Types:Artifact
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ ExileTop | Description$ If a player would draw a card, that player exiles that card face up instead.
-SVar:ExileTop:AB$ Mill | Cost$ 0 | Defined$ ReplacedPlayer | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | NoReveal$ True
-S:Mode$ Continuous | AffectedZone$ Exile | Affected$ Card.IsRemembered | AddHiddenKeyword$ May be played | Description$ Each player may play cards he or she exiled with CARDNAME this turn.
-T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
-SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+SVar:ExileTop:AB$ Mill | Cost$ 0 | Defined$ ReplacedPlayer | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | NoReveal$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | EffectOwner$ ReplacedPlayer | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uba_mask.jpg
 Oracle:If a player would draw a card, that player exiles that card face up instead.\nEach player may play cards he or she exiled with Uba Mask this turn.
