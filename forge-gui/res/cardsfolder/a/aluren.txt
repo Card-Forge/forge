@@ -1,7 +1,7 @@
 Name:Aluren
 ManaCost:2 G G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.cmcLE3+nonToken | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayWithFlash$ True | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ Any player may play creature cards with converted mana cost 3 or less without paying their mana cost and as though they had flash.
+S:Mode$ Continuous | Affected$ Creature.cmcLE3+nonToken | MayPlay$ True | MayPlayCardOwner$ True | MayPlayWithoutManaCost$ True | MayPlayWithFlash$ True | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ Any player may play creature cards with converted mana cost 3 or less without paying their mana cost and as though they had flash.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aluren.jpg
