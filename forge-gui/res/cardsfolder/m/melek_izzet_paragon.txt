@@ -2,8 +2,8 @@ Name:Melek, Izzet Paragon
 ManaCost:4 U R
 Types:Legendary Creature Weird Wizard
 PT:2/4
-S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ You may look at this card. & Your opponent may look at this card. | Description$ Play with the top card of your library revealed.
-S:Mode$ Continuous | Affected$ Instant.TopLibrary+YouCtrl,Sorcery.TopLibrary+YouCtrl | AffectedZone$ Library | EffectZone$ Battlefield | AddHiddenKeyword$ May be played | Description$ You may cast the top card of your library if it's an instant or sorcery card.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ True | AddHiddenKeyword$ Your opponent may look at this card. | Description$ Play with the top card of your library revealed.
+S:Mode$ Continuous | Affected$ Instant.TopLibrary+YouCtrl,Sorcery.TopLibrary+YouCtrl | AffectedZone$ Library | EffectZone$ Battlefield | MayPlay$ True | Description$ You may cast the top card of your library if it's an instant or sorcery card.
 T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromLibrary,Sorcery.wasCastFromLibrary | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for this copy.
 SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility
 SVar:Picture:http://www.wizards.com/global/images/magic/general/melek_izzet_paragon.jpg
