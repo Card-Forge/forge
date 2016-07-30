@@ -1,8 +1,9 @@
 Name:Elkin Bottle
 ManaCost:3
 Types:Artifact
-A:AB$ Dig | Cost$ 3 T | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Exile the top card of your library. Until the beginning of your next upkeep, you may play that card.
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played | PumpZone$ Exile | UntilYourNextUpkeep$ True | SubAbility$ DBCleanup
+A:AB$ Mill | Cost$ 3 T | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. Until the beginning of your next upkeep, you may play that card.
+SVar:DBEffect:DB$Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elkin_bottle.jpg
 Oracle:{3}, {T}: Exile the top card of your library. Until the beginning of your next upkeep, you may play that card.
