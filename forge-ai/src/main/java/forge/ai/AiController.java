@@ -394,7 +394,7 @@ public class AiController {
             if (!(crd.isLand() || (crd.isFaceDown() && crd.getState(CardStateName.Original).getType().isLand()))) {
                 continue;
             }
-            if (crd.hasKeyword("May be played") || crd.mayPlay(player) != null) {
+            if (crd.mayPlay(player) != null) {
                 landList.add(crd);
             }
         }
@@ -883,7 +883,7 @@ public class AiController {
                 p -= 9;
             }
             // move snap-casted spells to front
-            if (source.isInZone(ZoneType.Graveyard) && source.hasKeyword("May be played")) {
+            if (source.isInZone(ZoneType.Graveyard) && source.mayPlay(ai) != null) {
                 p += 50;
             }
             // artifacts and enchantments with effects that do not stack

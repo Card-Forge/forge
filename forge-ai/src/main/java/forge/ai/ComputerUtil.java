@@ -1512,7 +1512,7 @@ public class ComputerUtil {
         } else if (zone.getZoneType() == ZoneType.Exile) {
             // play cards in exile that can only be played that turn
             if (game.getPhaseHandler().getPhase() == PhaseType.MAIN2) {
-                if (source.hasKeyword("May be played")) {
+                if (source.mayPlay(ai) != null) {
                     return true;
                 }
             }
