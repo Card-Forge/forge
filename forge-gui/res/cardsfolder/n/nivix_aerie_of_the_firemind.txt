@@ -2,8 +2,9 @@ Name:Nivix, Aerie of the Firemind
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
-A:AB$ Dig | Cost$ T 2 U R | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery.
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played | PumpZone$ Exile | SubAbility$ DBCleanup | UntilYourNextTurn$ True | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | ConditionCompare$ EQ1
+A:AB$ Mill | Cost$ T 2 U R | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery.
+SVar:DBEffect:DB$Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile | Duration$ UntilYourNextTurn
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Instant.IsRemembered,Sorcery.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nivix_aerie_of_the_firemind.jpg
