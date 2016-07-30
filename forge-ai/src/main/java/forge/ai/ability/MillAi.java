@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;

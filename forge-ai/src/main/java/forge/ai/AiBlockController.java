@@ -624,7 +624,7 @@ public class AiBlockController {
             blockers.removeAll(combat.getBlockers(attacker));
 
             // Try to use safe blockers first
-            if (blockers.size() > 1) {
+            if (blockers.size() > 0) {
                 safeBlockers = getSafeBlockers(combat, attacker, blockers);
 	            for (final Card blocker : safeBlockers) {
 	                final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
