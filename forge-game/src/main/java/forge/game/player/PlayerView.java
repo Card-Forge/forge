@@ -320,7 +320,7 @@ public class PlayerView extends GameEntityView {
             types.addAll((Collection<? extends CardType.CoreType>) c.getCurrentState().getType().getCoreTypes());
         }
 
-        return cards.size();
+        return types.size();
     }
 
     private static TrackableProperty getZoneProp(final ZoneType zone) {
