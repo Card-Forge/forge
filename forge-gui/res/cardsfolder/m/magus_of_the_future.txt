@@ -2,6 +2,6 @@ Name:Magus of the Future
 ManaCost:2 U U U
 Types:Creature Human Wizard
 PT:2/3
-S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ You may look at this card. & Your opponent may look at this card. & May be played | Description$ Play with the top card of your library revealed. You may play the top card of your library.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ True | MayPlay$ True | AddHiddenKeyword$ Your opponent may look at this card. | Description$ Play with the top card of your library revealed. You may play the top card of your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_future.jpg
 Oracle:Play with the top card of your library revealed.\nYou may play the top card of your library.
