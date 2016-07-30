@@ -4,15 +4,8 @@ Types:Sorcery
 K:Storm
 A:SP$ Shuffle | Cost$ 4 U U | SubAbility$ DBExile | SpellDescription$ Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)
 SVar:DBExile:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect
-
-SVar:DBEffect:DB$Effect | RememberObjects$ Remembered | StaticAbilities$ Play | SubAbility$ DBCleanup | Triggers$ TrigCleanup | SVars$ DBCleanupEffect | References$ Play,TrigCleanup,DBCleanupEffect
-
+SVar:DBEffect:DB$Effect | RememberObjects$ Remembered | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
-
-SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBCleanupEffect | Static$ True
-SVar:DBCleanupEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-
-
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_desire.jpg
 Oracle:Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
