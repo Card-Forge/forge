@@ -9163,10 +9163,10 @@ forge-gui/res/cardsfolder/l/lightning_volley.txt -text
 forge-gui/res/cardsfolder/l/lightwalker.txt -text
 forge-gui/res/cardsfolder/l/lightwielder_paladin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lignify.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/l/liliana,_the_last_hope.txt -text
 forge-gui/res/cardsfolder/l/liliana_heretical_healer.txt -text
 forge-gui/res/cardsfolder/l/liliana_of_the_dark_realms.txt -text
 forge-gui/res/cardsfolder/l/liliana_of_the_veil.txt -text
+forge-gui/res/cardsfolder/l/liliana_the_last_hope.txt -text
 forge-gui/res/cardsfolder/l/liliana_vess.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lilianas_caress.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lilianas_elite.txt -text

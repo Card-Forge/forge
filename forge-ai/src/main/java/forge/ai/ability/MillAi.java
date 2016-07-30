@@ -1,11 +1,15 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicates;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -21,6 +25,11 @@ public class MillAi extends SpellAbilityAi {
         if (aiLogic.equals("Main1")) {
             if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                     && !ComputerUtil.castSpellInMain1(ai, sa)) {
+                return false;
+            }
+        } else if (aiLogic.equals("LilianaMill")) {
+            // Only mill if a "Raise Dead" target is available, in case of control decks with few creatures
+            if (CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES).size() < 1) {
                 return false;
             }
         }
