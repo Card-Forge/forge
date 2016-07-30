@@ -6,11 +6,8 @@ K:Menace
 K:Megamorph:R
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, exile the top card of your library. Until end of turn, you may play that card.
 SVar:TrigExile:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | TriggerCastPF,TriggerPlayPF | SVars$ TrigRemoveSelf | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ Until end of turn, you may play that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddHiddenKeyword$ May be played | AffectedZone$ Exile | Description$ Until end of turn, you may play that card.
-SVar:TriggerCastPF:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
-SVar:TriggerPlayPF:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
-SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ire_shaman.jpg
 Oracle:Menace\nMegamorph {R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)\nWhen Ire Shaman is turned face up, exile the top card of your library. Until end of turn, you may play that card.
