@@ -7553,6 +7553,7 @@ forge-gui/res/cardsfolder/h/heavy_mattock.txt -text
 forge-gui/res/cardsfolder/h/hecatomb.txt -text
 forge-gui/res/cardsfolder/h/heckling_fiends.txt -text
 forge-gui/res/cardsfolder/h/hedge_troll.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/hedonists_trove.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/h/hedron_alignment.txt -text
 forge-gui/res/cardsfolder/h/hedron_archive.txt -text
 forge-gui/res/cardsfolder/h/hedron_blade.txt -text

@@ -1,0 +1,19 @@
+Name:Hedonist's Trove
+ManaCost:5 B B
+Types:Enchantment
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from target opponent's graveyard.
+SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target Opponent | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | RememberChanged$ True
+
+S:Mode$ Continuous | MayPlay$ True | Affected$ Land.IsRemembered+ExiledWithSource | AffectedZone$ Exile | Description$ You may play land cards exiled with CARDNAME.
+
+S:Mode$ Continuous | MayPlay$ True | MayPlayLimit$ 1 | Affected$ Card.nonLand+IsRemembered+ExiledWithSource | AffectedZone$ Exile | Description$ You may play cards exiled with CARDNAME.
+
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hedonists_trove.jpg
+Oracle:When Hedonist's Trove enters the battlefield, exile all cards from target opponent's graveyard.\nYou may play land cards exiled with Hedonist's Trove.\nYou may cast nonland cards exiled with Hedonist's Trove. You can't cast more than one spell this way each turn.
