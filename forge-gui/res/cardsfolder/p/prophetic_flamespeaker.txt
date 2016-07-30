@@ -6,12 +6,8 @@ K:Double Strike
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile the top card of your library. You may play it this turn.
 SVar:TrigExile:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | TriggerCastPF,TriggerPlayPF | SVars$ TrigRemoveSelf | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ Until end of turn, you may play that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddHiddenKeyword$ May be played | AffectedZone$ Exile | Description$ Until end of turn, you may play that card.
-SVar:TriggerCastPF:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
-SVar:TriggerPlayPF:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
-SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_flamespeaker.jpg
 Oracle:Double strike, trample\nWhenever Prophetic Flamespeaker deals combat damage to a player, exile the top card of your library. You may play it this turn.
