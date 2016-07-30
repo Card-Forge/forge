@@ -100,6 +100,9 @@ public class ComputerUtilCost {
         if (cost == null) {
             return true;
         }
+
+        CardCollection hand = new CardCollection(ai.getCardsIn(ZoneType.Hand));
+
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDiscard) {
                 final CostDiscard disc = (CostDiscard) part;
@@ -108,7 +111,7 @@ public class ComputerUtilCost {
                 if (type.equals("CARDNAME") && source.getAbilityText().contains("Bloodrush")) {
                     continue;
                 }
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Hand), type.split(","), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(hand, type.split(","), source.getController(), source, null);
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
@@ -119,6 +122,7 @@ public class ComputerUtilCost {
                         return false;
                     } else {
                         typeList.remove(pref);
+                        hand.remove(pref);
                     }
                 }
             }
