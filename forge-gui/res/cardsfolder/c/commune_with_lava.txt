@@ -3,10 +3,10 @@ ManaCost:X R R
 Types:Instant
 A:SP$ Mill | Cost$ X R R | Defined$ You | NumCards$ X | Destination$ Exile | RememberMilled$ True | References$ X | SubAbility$ DBStoreTurn | SpellDescription$ Exile the top X cards of your library. Until the end of your next turn, you may play those cards.
 SVar:DBStoreTurn:DB$ StoreSVar | SVar$ CurrentTurn | Type$ Count | Expression$ YourTurns | SubAbility$ DBMayBePlay
-SVar:DBMayBePlay:DB$ Effect | StaticAbilities$ STCommuned | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigDuration | SVars$ DBDuration,EndDuration,CurrentTurn
+SVar:DBMayBePlay:DB$ Effect | StaticAbilities$ STCommuned | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigDuration | SVars$ DBDuration,EndDuration,CurrentTurn | ForgetOnMoved$ Exile
 # Even though the Effect is "Permanent", it's not really permanent
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STCommuned:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | AddHiddenKeyword$ May be played | Description$ Until the end of your next turn, you may play those cards.
+SVar:STCommuned:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play those cards.
 SVar:TrigDuration:Mode$ Phase | Phase$ Cleanup | Static$ True | TriggerZones$ Command | Execute$ DBDuration | CheckSVar$ EndDuration | SVarCompare$ GTCurrentTurn
 SVar:DBDuration:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:EndDuration:Count$YourTurns
