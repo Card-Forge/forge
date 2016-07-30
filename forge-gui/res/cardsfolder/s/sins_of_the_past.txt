@@ -3,13 +3,8 @@ ManaCost:4 B B
 Types:Sorcery
 
 A:SP$ Pump | Cost$ 4 B B | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | PumpZone$ Graveyard | SubAbility$ DBEffect | SpellDescription$ Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead. Exile Sins of the Past.
-SVar:DBEffect:DB$Effect | RememberObjects$ Targeted | StaticAbilities$ Play | SubAbility$ DBChange | Triggers$ TrigCleanup | SVars$ DBCleanup | References$ Play,TrigCleanup,DBCleanup
-
+SVar:DBEffect:DB$Effect | RememberObjects$ Targeted | StaticAbilities$ Play | SubAbility$ DBChange | ExileOnMoved$ Graveyard | References$ Play
 SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play remembered card.
-
-SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Graveyard | Destination$ Any | TriggerZones$ Command | Execute$ DBCleanup | Static$ True
-SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sins_of_the_past.jpg
