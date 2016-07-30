@@ -27,10 +27,16 @@ public class AiCostDecision extends CostDecisionMakerBase {
     private final SpellAbility ability;
     private final Card source;
     
+    private final CardCollection discarded;
+    private final CardCollection tapped;
+
     public AiCostDecision(Player ai0, SpellAbility sa) {
         super(ai0);
         ability = sa;
         source = ability.getHostCard();
+
+        discarded = new CardCollection();
+        tapped = new CardCollection();
     }
 
     @Override
@@ -90,7 +96,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
         }
         else {
             final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
-            return PaymentDecision.card(aic.getCardsToDiscard(c, type.split(";"), ability));
+
+            CardCollection result = aic.getCardsToDiscard(c, type.split(";"), ability, discarded);
+            if (result != null) {
+                discarded.addAll(result);
+            }
+            return PaymentDecision.card(result);
         }
     }
 
@@ -396,14 +407,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        CardCollectionView totap = ComputerUtil.chooseTapType(player, cost.getType(), source, !cost.canTapSource, c);
-
+        CardCollectionView totap = ComputerUtil.chooseTapType(player, cost.getType(), source, !cost.canTapSource, c, tapped);
 
         if (totap == null) {
             System.out.println("Couldn't find a valid card to tap for: " + source.getName());
             return null;
         }
-
+        tapped.addAll(totap);
         return PaymentDecision.card(totap);
     }
 
