@@ -3060,7 +3060,7 @@ public class CardFactoryUtil {
                 kws.addTrigger(cardTrigger);
             }
         } else if (keyword.equals("Persist")) {
-            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard " +
+            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
                     " | Execute$ PersistReturn | ValidCard$ Card.Self+counters_EQ0_M1M1 | Secondary$ True" + 
             		" | TriggerDescription$ Persist (" + Keyword.getInstance(keyword).getReminderText() + ")";
             final String effect = "AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1";
@@ -3094,7 +3094,7 @@ public class CardFactoryUtil {
                 kws.addTrigger(cardTrigger);
             }
         } else if (keyword.equals("Undying")) {
-            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard " +
+            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
                     " | Execute$ UndyingReturn | ValidCard$ Card.Self+counters_EQ0_P1P1 | Secondary$ True" + 
             		" | TriggerDescription$ Undying (" + Keyword.getInstance(keyword).getReminderText() + ")";
             final String effect = "AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1";
