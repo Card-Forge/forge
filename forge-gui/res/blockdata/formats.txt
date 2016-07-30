@@ -1,5 +1,5 @@
 [Standard]
-Sets:DTK, ORI, BFZ, OGW, SOI, EMN
+Sets:DTK, ORI, BFZ, OGW, SOI, EMN, W16
 
 [Extended]
 Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG, JOU, M15
