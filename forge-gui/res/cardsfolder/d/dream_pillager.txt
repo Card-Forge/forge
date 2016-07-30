@@ -5,11 +5,9 @@ PT:4/4
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may play nonland cards exiled this way.
 SVar:TrigExile:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ X | References$ X | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | TriggerCastPF | SVars$ TrigRemoveSelf | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ RememberedCard | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.nonLand+IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ Until end of turn, you may play that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.nonLand+IsRemembered | AddHiddenKeyword$ May be played | AffectedZone$ Exile | Description$ Until end of turn, you may play that card.
-SVar:TriggerCastPF:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
-SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:TriggerCount$DamageAmount 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_pillager.jpg
