@@ -1,6 +1,6 @@
 Name:Gisa and Geralf
 ManaCost: 2 U B
-Types:Creature Legendary Creature Human Wizard
+Types:Legendary Creature Human Wizard
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top four cards of your library into your graveyard.
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 4 | Defined$ You
