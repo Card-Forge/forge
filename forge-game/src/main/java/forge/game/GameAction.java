@@ -367,7 +367,7 @@ public class GameAction {
             // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously 
             copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeywords()) {
-                if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
+                if (s.startsWith("You may look at this card.")
                         || s.startsWith("Your opponent may look at this card.")) {
                     copied.removeAllExtrinsicKeyword(s);
                     copied.removeHiddenExtrinsicKeyword(s);
@@ -388,7 +388,7 @@ public class GameAction {
         		|| zoneTo.is(ZoneType.Exile)) {
             copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeywords()) {
-                if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
+                if (s.startsWith("You may look at this card.")
                         || s.startsWith("Your opponent may look at this card.")) {
                     copied.removeAllExtrinsicKeyword(s);
                     copied.removeHiddenExtrinsicKeyword(s);
