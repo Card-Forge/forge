@@ -35,38 +35,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ChangeZoneAi extends SpellAbilityAi {
-
-    /**
-     * <p>
-     * changeZoneCanPlayAI.
-     * </p>
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * 
-     * @return a boolean.
-     */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        if (aiLogic.equals("Always")) {
+            return true;
+        } else if (aiLogic.equals("BeforeCombat")) {
+            if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
+                return false;
+            }
+        } else if (aiLogic.equals("SurpriseBlock")) {
+            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                return false;
+            }
+        }
+        return super.checkAiLogic(ai, sa, aiLogic);
+    }
+
+    @Override
+    protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
         String origin = null;
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
         }
-
-        if (sa.hasParam("AILogic")) {
-        	String logic = sa.getParam("AILogic");
-            if (logic.equals("Always")) {
-                return true;
-            } else if (logic.equals("BeforeCombat")) {
-                if (aiPlayer.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
-                    return false;
-                }
-            } else if (logic.equals("SurpriseBlock")) {
-                if (aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                    return false;
-                }
-            }
-        }
-
         if (sa.hasParam("Hidden") || ZoneType.isHidden(origin)) {
             return hiddenOriginCanPlayAI(aiPlayer, sa);
         }
