@@ -449,8 +449,13 @@ public class ComputerUtil {
     }
 
     public static CardCollection chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount) {
+        return chooseTapType(ai, type, activate, tap, amount, CardCollection.EMPTY);
+    }
+    public static CardCollection chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount, final CardCollectionView exclude) {
+        CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+        all.removeAll(exclude);
         CardCollection typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, null);
+                CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, null);
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
