@@ -2,9 +2,9 @@ Name:Haakon, Stromgald Scourge
 ManaCost:1 B B
 Types:Legendary Creature Zombie Knight
 PT:3/3
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ May be played | AffectedZone$ Graveyard | EffectZone$ Graveyard
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Graveyard
 S:Mode$ CantBeCast | ValidCard$ Card.Self | Origin$ Exile,Hand,Library,Command | EffectZone$ Graveyard,Hand,Library,Command | Description$ You may cast CARDNAME from your graveyard, but not from anywhere else.
-S:Mode$ Continuous | Affected$ Knight.YouCtrl | AddHiddenKeyword$ May be played | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ As long as CARDNAME is on the battlefield, you may play Knight cards from your graveyard.
+S:Mode$ Continuous | Affected$ Knight.YouCtrl | MayPlay$ True | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ As long as CARDNAME is on the battlefield, you may play Knight cards from your graveyard.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose  | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you lose 2 life.
 SVar:TrigLose:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:RemRandomDeck:True
