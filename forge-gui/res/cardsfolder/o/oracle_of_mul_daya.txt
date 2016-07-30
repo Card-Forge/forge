@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Elf Shaman
 PT:2/2
 S:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land on each of your turns.
-S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ You may look at this card. & Your opponent may look at this card. | Description$ Play with the top card of your library revealed.
-S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ May be played | Description$ You may play the top card of your library if it's a land card.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ True | AddHiddenKeyword$ Your opponent may look at this card. | Description$ Play with the top card of your library revealed.
+S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may play the top card of your library if it's a land card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_mul_daya.jpg
 Oracle:You may play an additional land on each of your turns.\nPlay with the top card of your library revealed.\nYou may play the top card of your library if it's a land card.
