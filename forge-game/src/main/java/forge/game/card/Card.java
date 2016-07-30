@@ -1776,7 +1776,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 String[] parts = keyword.split(":");
                 sb.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
             } else if (keyword.equals("CARDNAME can't be countered.")
-                    || keyword.startsWith("May be played") || keyword.startsWith("Conspire")
+                    || keyword.startsWith("Conspire")
                     || keyword.startsWith("Cascade") || keyword.startsWith("Wither")
                     || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))

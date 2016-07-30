@@ -219,9 +219,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (!sa.isBasicSpell() && c.mayPlay(activator) != null) {
                 return true;
             }
-            if (c.hasKeyword("May be played") && activator.equals(c.getController())) {
-                return true;
-            }
             return false;
         }
 

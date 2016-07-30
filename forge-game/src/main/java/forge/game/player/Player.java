@@ -1644,7 +1644,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             final Zone zone = game.getZoneOf(land);
-            if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !(mayPlay || land.hasStartOfKeyword("May be played"))))) {
+            if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !mayPlay))) {
                 return false;
             }
         }
