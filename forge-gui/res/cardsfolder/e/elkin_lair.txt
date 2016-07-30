@@ -3,8 +3,8 @@ ManaCost:3 R
 Types:World Enchantment
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of each player's upkeep, that player exiles a card at random from his or her hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, he or she puts it into his or her graveyard.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ TriggeredPlayer | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | AtRandom$ True | RememberChanged$ True | SubAbility$ ElkinEffect
-SVar:ElkinEffect:DB$ Effect | StaticAbilities$ ElkinPlay | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigReturn,TrigCast,TrigLandPlayed,TrigDuration | SVars$ ElkinSVar,RemoveEffect,DBReturn | SubAbility$ DBResetSVar
-SVar:ElkinPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ May be played | EffectZone$ Command | AffectedZone$ Exile | CheckSVar$ ElkinSVar | Description$ The player may play that card this turn.
+SVar:ElkinEffect:DB$ Effect | StaticAbilities$ ElkinPlay | Duration$ Permanent | ExileOnMoved$ True | RememberObjects$ RememberedCard | Triggers$ TrigReturn,TrigDuration | SVars$ ElkinSVar,RemoveEffect,DBReturn | SubAbility$ DBResetSVar
+SVar:ElkinPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | CheckSVar$ ElkinSVar | Description$ The player may play that card this turn.
 # Even though the Effect is "Permanent", it's not really permanent
 SVar:DBResetSVar:DB$ StoreSVar | SVar$ ElkinSVar | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -15,9 +15,6 @@ SVar:DBDuration:DB$ StoreSVar | SVar$ ElkinSVar | Type$ Number | Expression$ 0
 # Return the card as a normal trigger
 SVar:TrigReturn:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Command | Execute$ DBReturn | TriggerDescription$ At the beginning of the next end step, if the player hasn't played the card, he or she puts it into his or her graveyard.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ RemoveEffect
-# Remove Effect when the card is played
-SVar:TrigLandPlayed:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect
-SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect
 SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elkin_lair.jpg
