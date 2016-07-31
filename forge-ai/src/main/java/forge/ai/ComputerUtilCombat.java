@@ -29,6 +29,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
@@ -1593,8 +1594,13 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean canDestroyAttacker(Player ai, final Card attacker, final Card blocker, final Combat combat,
+    public static boolean canDestroyAttacker(Player ai, Card attacker, Card blocker, final Combat combat,
             final boolean withoutAbilities) {
+        // Can activate transform ability
+        if (!withoutAbilities) {
+            attacker = canTransform(attacker);
+            blocker = canTransform(blocker);
+        }
     	if (canDestroyAttackerBeforeFirstStrike(attacker, blocker, combat, withoutAbilities)) {
     		return true;
     	}
@@ -1828,9 +1834,13 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean canDestroyBlocker(Player ai, final Card blocker, final Card attacker, final Combat combat,
+    public static boolean canDestroyBlocker(Player ai, Card blocker, Card attacker, final Combat combat,
             final boolean withoutAbilities) {
-
+        // Can activate transform ability
+        if (!withoutAbilities) {
+            attacker = canTransform(attacker);
+            blocker = canTransform(blocker);
+        }
     	if (canDestroyBlockerBeforeFirstStrike(blocker, attacker, withoutAbilities)) {
     		return true;
     	}
@@ -2303,6 +2313,25 @@ public class ComputerUtilCombat {
     	}
     
         return false;
+    }
+    
+    /**
+     * Transforms into alternate state if possible
+     * @param original original creature
+     * @return transform creature if possible, original creature otherwise
+     */
+    private final static Card canTransform(Card original) {
+        if (original.isDoubleFaced() && !original.isInAlternateState()) {
+            for (SpellAbility sa : original.getSpellAbilities()) {
+                if (sa.getApi() == ApiType.SetState && ComputerUtilCost.canPayCost(sa, original.getController())) {
+                    Card transformed = CardFactory.copyCard(original, true);    // clone into new object
+                    if (transformed.changeCardState("Transform", null)) {
+                        return transformed;
+                    }
+                }
+            }
+        }
+        return original;
     }
 }
 
