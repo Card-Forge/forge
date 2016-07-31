@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Lists;
 
 import forge.card.mana.ManaCost;
@@ -57,7 +59,7 @@ public class Cost {
     }
 
     public final boolean hasManaCost() {
-    	return !this.hasNoManaCost();
+        return !this.hasNoManaCost();
     }
 
     /**
@@ -93,13 +95,13 @@ public class Cost {
      * CostPartMana}.
      */
     public final List<CostPart> getCostPartsWithZeroMana() {
-    	if (this.hasManaCost()) {
-    		return this.costParts;
-    	}
-    	final List<CostPart> newCostParts = Lists.newArrayListWithCapacity(this.costParts.size() + 1);
-    	newCostParts.addAll(this.costParts);
-    	newCostParts.add(new CostPartMana(ManaCost.ZERO, null));
-    	return newCostParts;
+        if (this.hasManaCost()) {
+            return this.costParts;
+        }
+        final List<CostPart> newCostParts = Lists.newArrayListWithCapacity(this.costParts.size() + 1);
+        newCostParts.addAll(this.costParts);
+        newCostParts.add(new CostPartMana(ManaCost.ZERO, null));
+        return newCostParts;
     }
 
     /**
@@ -284,7 +286,7 @@ public class Cost {
         }
 
         if (parse.startsWith("ChooseCreatureType<")) {
-        	final String[] splitStr = abCostParse(parse, 1);
+            final String[] splitStr = abCostParse(parse, 1);
             return new CostChooseCreatureType(splitStr[0]);
         }
 
@@ -745,6 +747,7 @@ public class Cost {
 
     public Cost add(Cost cost1) {
         CostPartMana costPart2 = this.getCostMana();
+        List<CostPart> toRemove = Lists.newArrayList();
         for (final CostPart part : cost1.getCostParts()) {
             if (part instanceof CostPartMana && costPart2 != null) {
                 ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(((CostPartMana) part).getMana());
@@ -752,12 +755,35 @@ public class Cost {
                 String r2 = costPart2.getRestiction();
                 String r1 = ((CostPartMana) part).getRestiction();
                 String r = r1 == null ? r2 : ( r2 == null ? r1 : r1 + "." + r2);
-                getCostParts().remove(costPart2);
-                getCostParts().add(0, new CostPartMana(oldManaCost.toManaCost(), r));
+                costParts.remove(costPart2);
+                costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
+            } else if (part instanceof CostDiscard || part instanceof CostTapType) {
+                boolean alreadyAdded = false;
+                for (final CostPart other : costParts) {
+                    if (other.getClass().equals(part.getClass()) &&
+                            part.getType().equals(other.getType()) && 
+                            StringUtils.isNumeric(part.getAmount()) &&
+                            StringUtils.isNumeric(other.getAmount())) {
+                        final String amount = String.valueOf(Integer.parseInt(part.getAmount()) + Integer.parseInt(other.getAmount()));
+                        if (part instanceof CostDiscard) {
+                            costParts.add(new CostDiscard(amount, part.getType(), part.getTypeDescription()));
+                        } else if (part instanceof CostTapType) {
+                            CostTapType tappart = (CostTapType)part;
+                            costParts.add(new CostTapType(amount, part.getType(), part.getTypeDescription(), !tappart.canTapSource));
+                        }
+                        toRemove.add(other);
+                        alreadyAdded = true;
+                        break;
+                    }
+                }
+                if (!alreadyAdded) {
+                    costParts.add(part);
+                }
             } else {
-                getCostParts().add(part);
+                costParts.add(part);
             }
         }
+        costParts.removeAll(toRemove);
         this.sort();
         return this;
     }
