@@ -116,8 +116,10 @@ public class StoreSVarAi extends SpellAbilityAi {
 
                 }
 
-                if (shouldDo)
+                if (shouldDo) {
+                    sa.getTargets().add(op);
                     break;
+                }
             }
 
             return shouldDo;
