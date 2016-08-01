@@ -1,11 +1,14 @@
 package forge.ai.ability;
 
-
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -61,5 +64,53 @@ public class SetStateAi extends SpellAbilityAi {
         // Gross generalization, but this always considers alternate
         // states more powerful
         return !sa.getHostCard().isInAlternateState();
+    }
+
+    @Override
+    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        final Card source = sa.getHostCard();
+
+        if (!source.hasAlternateState()) {
+            System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
+            return false;
+        }
+
+        if("Transform".equals(sa.getParam("Mode"))) {
+            // check which state would be better for attacking
+            if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                // need a copy for evaluation
+                Card transformed = CardUtil.getLKICopy(source);
+                transformed.getCurrentState().copyFrom(source, source.getAlternateState());
+                transformed.updateStateForView();
+
+                int valueSource = ComputerUtilCard.evaluateCreature(source);
+                int valueTransformed = ComputerUtilCard.evaluateCreature(transformed);
+                boolean transformAttack = false;
+
+                // if an opponent can't block it, no need to transform (back)
+                for (Player opp : ai.getOpponents()) {
+                    
+                    boolean attackSource = !ComputerUtilCard.canBeBlockedProfitably(opp, source);
+                    boolean attackTransformed = !ComputerUtilCard.canBeBlockedProfitably(opp, transformed);
+
+                    // both forms can attack, try to use the one with better value 
+                    if (attackSource && attackTransformed) {
+                        return valueSource <= valueTransformed;
+                    } else if (attackTransformed) { // only transformed cam attack
+                        transformAttack = true;
+                    }
+                }
+
+                // can only attack in transformed form
+                if (transformAttack) {
+                    return true;
+                }
+
+                // no clear way, alternate state is better,
+                // but for more cleaner way use Evaluate for check
+                return valueSource <= valueTransformed;
+            }
+        }
+        return true;
     }
 }
