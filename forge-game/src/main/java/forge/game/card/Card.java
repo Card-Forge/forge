@@ -309,31 +309,39 @@ public class Card extends GameEntity implements Comparable<Card> {
     public CardState getCurrentState() {
         return currentState;
     }
-    public CardState getAlternateState() {
+
+    public CardStateName getAlternateStateName() {
         if (hasAlternateState()) {
             if (isSplitCard()) {
                 if (currentStateName == CardStateName.RightSplit) {
-                    return states.get(CardStateName.LeftSplit);
+                    return CardStateName.LeftSplit;
                 }
                 else {
-                    return states.get(CardStateName.RightSplit);
+                    return CardStateName.RightSplit;
                 }
             }
             else if (isFlipCard() && currentStateName != CardStateName.Flipped) {
-                return states.get(CardStateName.Flipped);
+                return CardStateName.Flipped;
             }
             else if (isDoubleFaced() && currentStateName != CardStateName.Transformed) {
-                return states.get(CardStateName.Transformed);
+                return CardStateName.Transformed;
             }
             else if (this.isMeldable() && currentStateName != CardStateName.Meld) {
-                return states.get(CardStateName.Meld);
+                return CardStateName.Meld;
             }
             else {
-                return states.get(CardStateName.Original);
+                return CardStateName.Original;
             }
         }
         else if (isFaceDown()) {
-            return states.get(CardStateName.Original);
+            return CardStateName.Original;
+        }
+        return null;
+    }
+
+    public CardState getAlternateState() {
+        if (hasAlternateState() || isFaceDown()) {
+            return states.get(getAlternateStateName());
         }
         return null;
     }
