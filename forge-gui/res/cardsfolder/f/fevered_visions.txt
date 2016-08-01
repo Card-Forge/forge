@@ -4,7 +4,7 @@ Types:Enchantment
 
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's end step, that player draws a card. If the player is your opponent and has four or more cards in hand, CARDNAME deals 2 damage to him or her.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredPlayer | SubAbility$ TrigDamageOpp
-SVar:TrigDamageOpp:DB$DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionOpponentTurn$ True | CheckSVar$ TrigCount | SVarCompare$ GE4
+SVar:TrigDamageOpp:DB$DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionOpponentTurn$ True | ConditionCheckSVar$ TrigCount | ConditionSVarCompare$ GE4
 SVar:TrigCount:Count$ValidHand Card.ActivePlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fevered_visions.jpg
 Oracle:At the beginning of each player's end step, that player draws a card. If the player is your opponent and has four or more cards in hand, Fevered Visions deals 2 damage to him or her.
