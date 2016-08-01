@@ -74,6 +74,11 @@ public class BoosterDraftTest implements IBoosterDraft {
         return this.n > 0;
     }
 
+    @Override
+    public boolean isRoundOver() {
+        return hasNextChoice();
+    }
+
     /**
      * <p>
      * getChosenCards.

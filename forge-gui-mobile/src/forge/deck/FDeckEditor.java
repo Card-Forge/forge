@@ -1361,6 +1361,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             BoosterDraft draft = parentScreen.getDraft();
             draft.setChoice(card);
 
+            // TODO Implement handling of extra boosters
+
             if (draft.hasNextChoice()) {
                 refresh();
             }

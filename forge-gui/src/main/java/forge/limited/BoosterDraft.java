@@ -50,6 +50,8 @@ public class BoosterDraft implements IBoosterDraft {
     protected int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
+    private int[] draftingBooster;
+
     private List<List<PaperCard>> pack; // size 8
 
     /** The draft picks. */
@@ -171,14 +173,6 @@ public class BoosterDraft implements IBoosterDraft {
     protected BoosterDraft() {
         this.draftFormat = LimitedPoolType.Full;
     }
-    /**
-     * <p>
-     * Constructor for BoosterDraft_1.
-     * </p>
-     *
-     * @param draftType
-     *            a {@link java.lang.String} object.
-     */
     protected BoosterDraft(final LimitedPoolType draftType) {
         this.draftAI.setBd(this);
         this.draftFormat = draftType;
@@ -237,13 +231,26 @@ public class BoosterDraft implements IBoosterDraft {
      */
     @Override
     public CardPool nextChoice() {
-        if (this.pack.get(this.getCurrentBoosterIndex()).isEmpty()) {
+        if (this.isRoundOver()) {
+            // If all packs are depleted crack 8 new packs
             this.pack = this.get8BoosterPack();
+            if (this.pack == null) {
+                return null;
+            }
         }
 
         this.computerChoose();
+
         final CardPool result = new CardPool();
         result.addAllFlat(this.pack.get(this.getCurrentBoosterIndex()));
+
+        if (result.isEmpty()) {
+            // Can't set a card, since none are available. Just pass "empty" packs.
+            this.passPacks();
+            // Recur until we find a cardpool or finish
+            return nextChoice();
+        }
+
         return result;
     }
 
@@ -267,55 +274,64 @@ public class BoosterDraft implements IBoosterDraft {
         this.nextBoosterGroup++;
         this.currentBoosterSize = list.get(0).size();
         this.currentBoosterPick = 0;
+        draftingBooster = new int[]{0, 1, 2, 3, 4, 5, 6, 7};
         return list;
     }
 
-    // size 7, all the computers decks
+    public void addSingleBoosterPack(int player, boolean random) {
+        // TODO Cogwork Librarian
+    }
 
-    /**
-     * <p>
-     * getDecks.
-     * </p>
-     *
-     * @return an array of {@link forge.deck.Deck} objects.
-     */
+    // size 7, all the computers decks
     @Override
     public Deck[] getDecks() {
         return this.draftAI.getDecks();
     }
 
+    public void passPacks() {
+        // Alternate direction of pack passing
+        int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
+        for(int i = 0; i < N_PLAYERS; i++) {
+            draftingBooster[i] = (draftingBooster[i] + adjust + pack.size()) % pack.size();
+        }
+    }
+
     protected void computerChoose() {
-        final int iHumansBooster = this.getCurrentBoosterIndex();
-        int iPlayer = 0;
-        for (int i = 1; i < this.pack.size(); i++) {
-            final List<PaperCard> booster = this.pack.get((iHumansBooster + i) % this.pack.size());
-            final PaperCard aiPick = this.draftAI.choose(booster, iPlayer++);
-            booster.remove(aiPick);
+        // Loop through players 1-7 to draft their current pack
+        for (int i = 1; i < N_PLAYERS; i++) {
+            final List<PaperCard> booster = this.pack.get(this.draftingBooster[i]);
+
+            // Empty boosters can happen in a Conspiracy draft
+            if (!booster.isEmpty()) {
+                booster.remove(this.draftAI.choose(booster, i-1));
+            }
         }
     } // computerChoose()
 
     /**
      *
-     * Get the current booster index.
+     * Get the current booster index for the Human
      * @return int
      */
     public int getCurrentBoosterIndex() {
-        return this.currentBoosterPick % BoosterDraft.N_PLAYERS;
+        return this.draftingBooster[0];
     }
 
-    /**
-     * <p>
-     * hasNextChoice.
-     * </p>
-     *
-     * @return a boolean.
-     */
+    @Override
+    public boolean isRoundOver() {
+        for(List<PaperCard> singlePack : this.pack) {
+            if (!singlePack.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
     @Override
     public boolean hasNextChoice() {
-        final boolean isLastGroup = this.nextBoosterGroup >= this.product.size();
-        final boolean isBoosterDepleted = this.currentBoosterPick >= this.currentBoosterSize;
-        final boolean noMoreCards = isLastGroup && isBoosterDepleted;
-        return !noMoreCards;
+        return this.nextBoosterGroup < this.product.size() || !this.isRoundOver();
     }
 
     /** {@inheritDoc} */
@@ -355,6 +371,7 @@ public class BoosterDraft implements IBoosterDraft {
 
         thisBooster.remove(c);
         this.currentBoosterPick++;
+        this.passPacks();
     } // setChoice()
 
     @Override

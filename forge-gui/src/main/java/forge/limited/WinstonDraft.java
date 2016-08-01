@@ -126,6 +126,11 @@ public class WinstonDraft extends BoosterDraft {
         return getNextChoice(0) >= 0;
     }
 
+    @Override
+    public boolean isRoundOver() {
+        return hasNextChoice();
+    }
+
     public boolean isLastPileAndEmptyDeck(final int pile) {
         return this.deck.size() == 0 && getNextChoice(pile+1) >= 0;
     }

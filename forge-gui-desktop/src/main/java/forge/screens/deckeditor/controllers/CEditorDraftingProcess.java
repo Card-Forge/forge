@@ -102,8 +102,15 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         // get next booster pack
         this.boosterDraft.setChoice(card);
 
-        if (this.boosterDraft.hasNextChoice()) {
-            this.showChoices(this.boosterDraft.nextChoice());
+        boolean nextChoice = this.boosterDraft.hasNextChoice();
+        ItemPool<PaperCard> pool = null;
+        if (nextChoice) {
+            pool = this.boosterDraft.nextChoice();
+            nextChoice = pool != null && !pool.isEmpty();
+        }
+
+        if (nextChoice) {
+            this.showChoices(pool);
         }
         else {
             this.saveDraft();
@@ -154,27 +161,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         // add sideboard to deck
         deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
-
-        //no need to add basic lands now that Add Basic Lands button exists
-        /*final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
-        final boolean isZendikarSet = landSet.equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
-        final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
-
-        final int landsCount = 10;
-
-        for(String landName : MagicColor.Constant.BASIC_LANDS) {
-            int numArt = FModel.getMagicDb().getCommonCards().getArtCount(landName, landSet);
-            int minArtIndex = isZendikarSet ? (zendikarSetMode ? 1 : 5) : 1;
-            int maxArtIndex = isZendikarSet ? minArtIndex + 3 : numArt;
-
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
-                for (int i = minArtIndex; i <= maxArtIndex; i++) {
-                    deck.get(DeckSection.Sideboard).add(landName, landSet, i, numArt > 1 ? landsCount : 30);
-                }
-            } else {
-                deck.get(DeckSection.Sideboard).add(landName, landSet, 30);
-            }
-        }*/
 
         return deck;
     } // getPlayersDeck()

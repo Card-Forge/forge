@@ -58,6 +58,7 @@ public interface IBoosterDraft {
      * @return a boolean.
      */
     boolean hasNextChoice();
+    boolean isRoundOver();
 
     /**
      * <p>

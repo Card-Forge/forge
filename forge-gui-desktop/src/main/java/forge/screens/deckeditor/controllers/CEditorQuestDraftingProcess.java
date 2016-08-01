@@ -110,11 +110,18 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         // get next booster pack
         boosterDraft.setChoice(card);
 
-        if (boosterDraft.hasNextChoice()) {
-            showChoices(boosterDraft.nextChoice());
+        boolean nextChoice = this.boosterDraft.hasNextChoice();
+        ItemPool<PaperCard> pool = null;
+        if (nextChoice) {
+            pool = this.boosterDraft.nextChoice();
+            nextChoice = !pool.isEmpty();
+        }
+
+        if (nextChoice) {
+            this.showChoices(pool);
         }
         else {
-            saveDraft();
+            this.saveDraft();
         }
     }
 
