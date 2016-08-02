@@ -46,6 +46,7 @@ import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.OptionalCost;
+import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
@@ -1339,10 +1340,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else {
                     sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
                 }
-            } else if (keyword.startsWith("Morph")) {
-                sbLong.append("Morph");
+            } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")) {
+                String[] k = keyword.split(":"); 
+                sbLong.append(k[0]);
                 if (keyword.contains(":")) {
-                    final Cost mCost = new Cost(keyword.substring(6), true);
+                    final Cost mCost = new Cost(k[1], true);
                     if (!mCost.isOnlyManaCost()) {
                         sbLong.append(" -");
                     }
@@ -1350,21 +1352,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (!mCost.isOnlyManaCost()) {
                         sbLong.append(".");
                     }
+                    sbLong.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")");
                     sbLong.append("\r\n");
                 }
-            } else if (keyword.startsWith("Megamorph")) {
-                sbLong.append("Megamorph");
-                if (keyword.contains(":")) {
-                    final Cost mCost = new Cost(keyword.substring(10), true);
-                    if (!mCost.isOnlyManaCost()) {
-                        sbLong.append(" -");
-                    }
-                    sbLong.append(" ").append(mCost.toString()).delete(sbLong.length() - 2, sbLong.length());
-                    if (!mCost.isOnlyManaCost()) {
-                        sbLong.append(".");
-                    }
-                    sbLong.append("\r\n");
-                }
+            } else if (keyword.startsWith("Emerge")) {
+                final String[] k = keyword.split(" ", 2);
+                sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
+                sbLong.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                sbLong.append("\r\n");
             } else if (keyword.startsWith("Echo")) {
                 sbLong.append("Echo ");
                 final String[] upkeepCostParams = keyword.split(":");
@@ -1677,6 +1672,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 continue;
             }
 
+            // should not print Spelldescription for Morph 
+            if (sa instanceof Spell && ((Spell)sa).isCastFaceDown()) {
+            	continue;
+            }
+
             boolean isNonAuraPermanent = (sa instanceof SpellPermanent) && isNonAura;
             if (isNonAuraPermanent && primaryCost) {
                 // For Alt costs, make sure to display the cost!
@@ -1757,7 +1757,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Replacement effects
         for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
-            sb.append(replacementEffect.toString()).append("\r\n");
+            if (!replacementEffect.isSecondary()) {
+                sb.append(replacementEffect.toString()).append("\r\n");
+            }
         }
 
         // static abilities
@@ -1775,7 +1777,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge"))
                     || (keyword.startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))) {
                 sb.append(keyword.replace(":", " ")).append("\r\n");
-            } else if ((keyword.startsWith("Madness") && !sb.toString().contains("Madness"))
+            } else if (keyword.startsWith("Madness")
                     || (keyword.startsWith("Recover") && !sb.toString().contains("Recover"))
                     || (keyword.startsWith("Miracle") && !sb.toString().contains("Miracle"))) {
                 String[] parts = keyword.split(":");
@@ -1801,11 +1803,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                         sb.append(".");
                     }
                 }
-                sb.append("\r\n");
-            } else if (keyword.startsWith("Emerge")) {
-                final Cost cost = new Cost(keyword.substring(7), false);
-                sb.append("Emerge ").append(cost.toSimpleString());
-                sb.append(" (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)");
                 sb.append("\r\n");
             } else if (keyword.startsWith("Splice")) {
                 final Cost cost = new Cost(keyword.substring(19), false);
