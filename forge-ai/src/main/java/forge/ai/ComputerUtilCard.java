@@ -570,6 +570,10 @@ public class ComputerUtilCard {
         return maxName;
     }
 
+    public static String getMostProminentBasicLandType(final CardCollectionView list) {
+        return getMostProminentType(list, CardType.getBasicTypes());
+    }
+
     /**
      * <p>
      * getMostProminentCreatureType.
@@ -579,6 +583,10 @@ public class ComputerUtilCard {
      * @return a {@link java.lang.String} object.
      */
     public static String getMostProminentCreatureType(final CardCollectionView list) {
+        return getMostProminentType(list, CardType.getAllCreatureTypes());
+    }
+
+    public static String getMostProminentType(final CardCollectionView list, final List<String> valid) {
         if (list.size() == 0) {
             return "";
         }
@@ -587,7 +595,7 @@ public class ComputerUtilCard {
 
         for (final Card c : list) {
             for (final String var : c.getType()) {
-                if (CardType.isACreatureType(var)) {
+                if (valid.contains(var)) {
                     if (!map.containsKey(var)) {
                         map.put(var, 1);
                     } else {
@@ -596,14 +604,14 @@ public class ComputerUtilCard {
                 }
             }
         } // for
-    
+
         int max = 0;
         String maxType = "";
     
         for (final Entry<String, Integer> entry : map.entrySet()) {
             final String type = entry.getKey();
             // Log.debug(type + " - " + entry.getValue());
-    
+
             if (max < entry.getValue()) {
                 max = entry.getValue();
                 maxType = type;
