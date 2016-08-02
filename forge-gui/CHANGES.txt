@@ -1,7 +1,7 @@
-Forge Beta: 07-16-2016 ver 1.5.54
+Forge Beta: 08-02-2016 ver 1.5.55
 
 
-15999 cards in total.
+15897 cards in total.
 
 
 -------------
