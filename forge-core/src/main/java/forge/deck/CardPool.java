@@ -114,7 +114,7 @@ public class CardPool extends ItemPool<PaperCard> {
 
     /**
      * returns n-th card from this DeckSection. LINEAR time. No fixed order between changes
-     * @param i
+     * @param n
      * @return
      */
     public PaperCard get(int n) {
@@ -123,6 +123,14 @@ public class CardPool extends ItemPool<PaperCard> {
             if ( n <= 0 ) return e.getKey();
         }
         return null;
+    }
+
+    public int countByName(String cardName, boolean isCommonCard) {
+        PaperCard pc = isCommonCard
+                ? StaticData.instance().getCommonCards().getCard(cardName)
+                : StaticData.instance().getVariantCards().getCard(cardName);
+
+        return this.count(pc);
     }
 
     @Override

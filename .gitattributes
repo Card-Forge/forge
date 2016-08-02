@@ -1540,6 +1540,7 @@ forge-gui/res/cardsfolder/a/adun_oakenshield.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/advance_scout.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/advanced_hoverguard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/advanced_stitchwing.txt -text
+forge-gui/res/cardsfolder/a/advantageous_proclamation.txt -text
 forge-gui/res/cardsfolder/a/advent_of_the_wurm.txt -text
 forge-gui/res/cardsfolder/a/adventurers_guildhouse.txt -text
 forge-gui/res/cardsfolder/a/adventuring_gear.txt svneol=native#text/plain
