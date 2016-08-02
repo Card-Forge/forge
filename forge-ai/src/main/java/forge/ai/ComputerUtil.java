@@ -198,10 +198,10 @@ public class ComputerUtil {
     }
 
     // this is used for AI's counterspells
-    public static final void playStack(final SpellAbility sa, final Player ai, final Game game) {
+    public static final boolean playStack(final SpellAbility sa, final Player ai, final Game game) {
         sa.setActivatingPlayer(ai);
         if (!ComputerUtilCost.canPayCost(sa, ai)) 
-            return;
+            return false;
             
         final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -217,6 +217,7 @@ public class ComputerUtil {
                 game.getStack().add(sa);
             }
         }
+        return true;
     }
 
     public static final void playSpellAbilityForFree(final Player ai, final SpellAbility sa) {
@@ -230,12 +231,12 @@ public class ComputerUtil {
         ai.getGame().getStack().add(sa);
     }
 
-    public static final void playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
+    public static final boolean playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
         final SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
         if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA)) {
-            return;
+            return false;
         }
 
         final Card source = newSA.getHostCard();
@@ -247,6 +248,7 @@ public class ComputerUtil {
         pay.payComputerCosts(new AiCostDecision(ai, sa));
 
         game.getStack().add(newSA);
+        return true;
     }
 
     public static final void playNoStack(final Player ai, final SpellAbility sa, final Game game) {

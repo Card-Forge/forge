@@ -720,9 +720,9 @@ public class PlayerControllerAi extends PlayerController {
             Spell spell = (Spell) tgtSA;
             if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 if (noManaCost) {
-                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, game);
+                    return ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, game);
                 } else {
-                    ComputerUtil.playStack(tgtSA, player, game);
+                    return ComputerUtil.playStack(tgtSA, player, game);
                 }
             } else 
                 return false; // didn't play spell
