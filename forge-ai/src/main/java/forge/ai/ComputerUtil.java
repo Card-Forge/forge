@@ -1745,25 +1745,29 @@ public class ComputerUtil {
                 chosen = "Creature";
             }
         } else if (kindOfType.equals("Creature")) {
-            Player opp = ai.getOpponent();
             if (logic != null) {
+                List <String> valid = CardType.getAllCreatureTypes();
+                valid.removeAll(invalidTypes);
+
                 if (logic.equals("MostProminentOnBattlefield")) {
-                    chosen = ComputerUtilCard.getMostProminentCreatureType(game.getCardsIn(ZoneType.Battlefield));
+                    chosen = ComputerUtilCard.getMostProminentType(game.getCardsIn(ZoneType.Battlefield), valid);
                 }
                 else if (logic.equals("MostProminentComputerControls")) {
-                    chosen = ComputerUtilCard.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Battlefield));
+                    chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Battlefield), valid);
                 }
-                else if (logic.equals("MostProminentHumanControls")) {
-                    chosen = ComputerUtilCard.getMostProminentCreatureType(opp.getCardsIn(ZoneType.Battlefield));
+                else if (logic.equals("MostProminentOppControls")) {
+            	    CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
+                    chosen = ComputerUtilCard.getMostProminentType(list, valid);
                     if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
-                        chosen = ComputerUtilCard.getMostProminentCreatureType(CardLists.filterControlledBy(game.getCardsInGame(), opp));
+                        list = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
+                        chosen = ComputerUtilCard.getMostProminentType(list, valid);
                     }
                 }
                 else if (logic.equals("MostProminentInComputerDeck")) {
-                    chosen = ComputerUtilCard.getMostProminentCreatureType(CardLists.filterControlledBy(game.getCardsInGame(), ai));
+                    chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), valid);
                 }
                 else if (logic.equals("MostProminentInComputerGraveyard")) {
-                    chosen = ComputerUtilCard.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Graveyard));
+                    chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Graveyard), valid);
                 }
             }
             if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
@@ -1772,7 +1776,13 @@ public class ComputerUtil {
 
         } else if (kindOfType.equals("Basic Land")) {
             if (logic != null) {
-                if (logic.equals("MostNeededType")) {
+                if (logic.equals("MostProminentOppControls")) {
+                    CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
+                    List<String> valid = CardType.getBasicTypes();
+                    valid.removeAll(invalidTypes);
+
+                    chosen = ComputerUtilCard.getMostProminentType(list, valid);
+                } else  if (logic.equals("MostNeededType")) {
                     // Choose a type that is in the deck, but not in hand or on the battlefield 
                     final List<String> basics = new ArrayList<String>();
                     basics.addAll(CardType.Constant.BASIC_TYPES);
