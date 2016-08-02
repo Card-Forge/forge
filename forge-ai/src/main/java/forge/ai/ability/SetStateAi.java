@@ -76,15 +76,21 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         if("Transform".equals(sa.getParam("Mode"))) {
+            // need a copy for evaluation
+            Card transformed = CardUtil.getLKICopy(source);
+            transformed.getCurrentState().copyFrom(source, source.getAlternateState());
+            transformed.updateStateForView();
+
+            int valueSource = ComputerUtilCard.evaluateCreature(source);
+            int valueTransformed = ComputerUtilCard.evaluateCreature(transformed);
+
+            // it would not survive being transformed
+            if (transformed.getNetToughness() < 1) {
+                return false;
+            }
+
             // check which state would be better for attacking
             if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                // need a copy for evaluation
-                Card transformed = CardUtil.getLKICopy(source);
-                transformed.getCurrentState().copyFrom(source, source.getAlternateState());
-                transformed.updateStateForView();
-
-                int valueSource = ComputerUtilCard.evaluateCreature(source);
-                int valueTransformed = ComputerUtilCard.evaluateCreature(transformed);
                 boolean transformAttack = false;
 
                 // if an opponent can't block it, no need to transform (back)
@@ -105,11 +111,15 @@ public class SetStateAi extends SpellAbilityAi {
                 if (transformAttack) {
                     return true;
                 }
-
-                // no clear way, alternate state is better,
-                // but for more cleaner way use Evaluate for check
-                return valueSource <= valueTransformed;
+            } else if (ph.isPlayerTurn(ai) && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                if (ph.inCombat() && ph.getCombat().isUnblocked(source)) {
+                    // if source is unblocked, check for the power
+                    return source.getNetPower() <= transformed.getNetPower();
+                }
             }
+            // no clear way, alternate state is better,
+            // but for more cleaner way use Evaluate for check
+            return valueSource <= valueTransformed;
         }
         return true;
     }
