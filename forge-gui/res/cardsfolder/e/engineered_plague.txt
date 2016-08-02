@@ -2,7 +2,7 @@ Name:Engineered Plague
 ManaCost:2 B
 Types:Enchantment
 K:ETBReplacement:Other:ChooseCT
-SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentHumanControls
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentOppControls
 S:Mode$ Continuous | Affected$ Creature.ChosenType | AddPower$ -1 | AddToughness$ -1 | Description$ All creatures of the chosen type get -1/-1.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
 Oracle:As Engineered Plague enters the battlefield, choose a creature type.\nAll creatures of the chosen type get -1/-1.
