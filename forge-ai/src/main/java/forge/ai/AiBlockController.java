@@ -335,6 +335,10 @@ public class AiBlockController {
 
         // Try to block an attacker without first strike with a gang of first strikers
         for (final Card attacker : attackersLeft) {
+            if (ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, attacker)) {
+                // don't bother with gang blocking if the attacker will regenerate or is indestructible
+                continue;
+            }
             if (!ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false, combat)) {
                 blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
                 final List<Card> firstStrikeBlockers = new ArrayList<>();
@@ -376,16 +380,26 @@ public class AiBlockController {
         attackersLeft = (new ArrayList<>(currentAttackers));
         currentAttackers = new ArrayList<>(attackersLeft);
 
+        boolean considerTripleBlock = true;
+
         // Try to block an attacker with two blockers of which only one will die
         for (final Card attacker : attackersLeft) {
+            if (ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, attacker)) {
+                // don't bother with gang blocking if the attacker will regenerate or is indestructible
+                continue;
+            }
+
+            int evalAttackerValue = ComputerUtilCard.evaluateCreature(attacker);
+
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
             List<Card> usableBlockers;
             final List<Card> blockGang = new ArrayList<>();
             int absorbedDamage; // The amount of damage needed to kill the first blocker
             int currentValue; // The value of the creatures in the blockgang
+            boolean foundDoubleBlock = false; // if true, a good double block is found
 
-            // AI can't handle good triple blocks yet
-            if (CombatUtil.needsBlockers(attacker) > 2) {
+            // AI can't handle good blocks with more than three creatures yet
+            if (CombatUtil.needsBlockers(attacker) > (considerTripleBlock ? 3 : 2)) {
                 continue;
             }
 
@@ -411,6 +425,7 @@ public class AiBlockController {
             absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
             currentValue = ComputerUtilCard.evaluateCreature(leader);
 
+            // consider a double block
             for (final Card blocker : usableBlockers) {
                 // Add an additional blocker if the current blockers are not
                 // enough and the new one would deal the remaining damage
@@ -425,7 +440,7 @@ public class AiBlockController {
                         // The attacker will be killed
                         && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage()
                         // only one blocker can be killed
-                        	|| currentValue + addedValue - 50 <= ComputerUtilCard.evaluateCreature(attacker)
+                        	|| currentValue + addedValue - 50 <= evalAttackerValue
                         // or attacker is worth more
                         	|| (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)))
                         // or life is in danger
@@ -437,7 +452,68 @@ public class AiBlockController {
                     if (CombatUtil.canBlock(attacker, leader, combat)) {
                         combat.addBlocker(attacker, leader);
                     }
+                    foundDoubleBlock = true;
                     break;
+                }
+                if (!foundDoubleBlock && (currentDamage + additionalDamage >= damageNeeded)) {
+                    // a double block was tested which resulted in a potential kill but it was dismissed,
+                    // no need to test for a triple block then to avoid suboptimal plays.
+                    considerTripleBlock = false;
+                }
+            }
+
+            if (foundDoubleBlock || !considerTripleBlock) {
+                continue;
+            }
+
+            // consider a triple block if a double block was not found
+            blockerLoop:
+            for (final Card secondBlocker : usableBlockers) {
+                // consider the properties of the second blocker
+                final int currentDamage = ComputerUtilCombat.totalDamageOfBlockers(attacker, blockGang);
+                final int additionalDamage2 = ComputerUtilCombat.dealsDamageAsBlocker(attacker, secondBlocker);
+                final int absorbedDamage2 = ComputerUtilCombat.getEnoughDamageToKill(secondBlocker, attacker.getNetCombatDamage(), attacker, true);
+                final int addedValue2 = ComputerUtilCard.evaluateCreature(secondBlocker);
+                final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
+                        + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, secondBlocker, combat, false);
+
+                List<Card> usableBlockersAsThird = new ArrayList<>();
+                usableBlockersAsThird.addAll(usableBlockers);
+                usableBlockersAsThird.remove(secondBlocker);
+
+                // loop over the remaining blockers in search of a good third blocker candidate
+                for (Card thirdBlocker : usableBlockersAsThird) {
+                    final int additionalDamage3 = ComputerUtilCombat.dealsDamageAsBlocker(attacker, thirdBlocker);
+                    final int absorbedDamage3 = ComputerUtilCombat.getEnoughDamageToKill(thirdBlocker, attacker.getNetCombatDamage(), attacker, true);
+                    final int addedValue3 = ComputerUtilCard.evaluateCreature(secondBlocker);
+                    final int netCombatDamage = attacker.getNetCombatDamage();
+
+                    if ((damageNeeded > currentDamage || CombatUtil.needsBlockers(attacker) > blockGang.size())
+                            && !(damageNeeded > currentDamage + additionalDamage2 + additionalDamage3)
+                            // The attacker will be killed
+                            && ((absorbedDamage2 + absorbedDamage > netCombatDamage && absorbedDamage3 + absorbedDamage > netCombatDamage
+                               && absorbedDamage3 + absorbedDamage2 > netCombatDamage)
+                            // only one blocker can be killed
+                            || currentValue + addedValue2 + addedValue3 - 50 <= evalAttackerValue
+                            // or attacker is worth more
+                            || (thirdBlocker.isToken() && absorbedDamage2 + absorbedDamage > netCombatDamage)
+                            // or third blocker is a token and no more than two blockers will die, one of which is the third blocker (token)
+                            || (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)))
+                            // or life is in danger
+                            && CombatUtil.canBlock(attacker, secondBlocker, combat)
+                            && CombatUtil.canBlock(attacker, thirdBlocker, combat)) {
+                        // this is needed for attackers that can't be blocked by
+                        // more than 1
+                        currentAttackers.remove(attacker);
+                        combat.addBlocker(attacker, thirdBlocker);
+                        if (CombatUtil.canBlock(attacker, secondBlocker, combat)) {
+                            combat.addBlocker(attacker, secondBlocker);
+                        }
+                        if (CombatUtil.canBlock(attacker, leader, combat)) {
+                            combat.addBlocker(attacker, leader);
+                        }
+                        break blockerLoop;
+                    }
                 }
             }
         }

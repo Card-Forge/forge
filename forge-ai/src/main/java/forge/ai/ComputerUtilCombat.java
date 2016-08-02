@@ -1577,6 +1577,36 @@ public class ComputerUtilCombat {
         return false;
     }
 
+    // can the attacker be potentially destroyed in combat or is it potentially indestructible?
+    /**
+     * <p>
+     * attackerCantBeDestroyedNow.
+     * </p>
+     * @param ai 
+     * 
+     * @param attacker
+     *            a {@link forge.game.card.Card} object.
+     * @return a boolean.
+     */
+    public static boolean attackerCantBeDestroyedInCombat(Player ai, final Card attacker) {
+        // attacker is either indestructible or may regenerate
+        if (attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(ai, attacker))) {
+            return true;
+        }
+
+        // attacker will regenerate
+        if (attacker.getShieldCount() > 0 && !attacker.hasKeyword("CARDNAME can't be regenerated.")) {
+            return true;
+        }
+
+        // all damage will be prevented
+        if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
+            return true;
+        }
+
+        return false;
+    }
+
     // can the blocker destroy the attacker?
     /**
      * <p>
