@@ -1,7 +1,7 @@
 Name:Slayer's Cleaver
 ManaCost:3
 Types:Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ MustBeBlockedBy Creature.Eldrazi | Description$ Equipped creature gets +3/+1 and must be blocked by an Eldrazi if able.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 1 | AddKeyword$ MustBeBlockedBy Creature.Eldrazi | Description$ Equipped creature gets +3/+1 and must be blocked by an Eldrazi if able.
 K:Equip 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slayers_cleaver.jpg
 Oracle:Equipped creature gets +3/+1 and must be blocked by an Eldrazi if able.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)
