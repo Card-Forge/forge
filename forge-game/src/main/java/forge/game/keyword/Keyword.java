@@ -82,7 +82,7 @@ public enum Keyword {
     MULTIKICKER(KeywordWithCost.class, false, "You may pay an additional %s any number of times as you cast this spell."),
     NINJUTSU(KeywordWithCost.class, false, "%s, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking."),
     OUTLAST(KeywordWithCost.class, false, "%s, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery."),
-    OFFERING(KeywordWithType.class, false, "You may cast this card any time you could cast an instant by sacrificing a %s. If you do, the total cost to cast this card is reduced by the mana cost of the sacrificed %s."),
+    OFFERING(KeywordWithType.class, false, "You may cast this card any time you could cast an instant by sacrificing a %1$s and paying the difference in mana costs between this and the sacrificed %1$s. Mana cost includes color."),
     PERSIST(SimpleKeyword.class, true, "When this permanent is put into a graveyard from the battlefield, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),
     PHASING(SimpleKeyword.class, true, "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist."),
     POISONOUS(KeywordWithAmount.class, false, "Whenever this creature deals combat damage to a player, that player gets %d poison counters."),
