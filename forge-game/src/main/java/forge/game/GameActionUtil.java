@@ -245,26 +245,6 @@ public final class GameActionUtil {
                 newSA.setDescription(sa.getDescription() + " (by paying " + actualcost.toSimpleString() + " instead of its mana cost)");
                 alternatives.add(newSA);
             }
-            if (sa.isSpell() && keyword.endsWith(" offering")) {
-                final String offeringType = keyword.split(" ")[0];
-                List<Card> canOffer = CardLists.filter(sa.getHostCard().getController().getCardsIn(ZoneType.Battlefield),
-                        CardPredicates.isType(offeringType));
-                if (source.getController().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-                    canOffer = CardLists.getNotType(canOffer, "Creature");
-                }
-                if (!canOffer.isEmpty()) {
-                    final SpellAbility newSA = sa.copy();
-                    SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                    sar.setVariables(sa.getRestrictions());
-                    sar.setInstantSpeed(true);
-                    newSA.setRestrictions(sar);
-                    newSA.setBasicSpell(false);
-                    newSA.setIsOffering(true);
-                    newSA.setPayCosts(sa.getPayCosts());
-                    newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
-                    alternatives.add(newSA);
-                }
-            }
             if (sa.hasParam("Equip") && sa instanceof AbilityActivated && keyword.equals("EquipInstantSpeed")) {
                 final SpellAbility newSA = ((AbilityActivated) sa).getCopy();
                 SpellAbilityRestriction sar = new SpellAbilityRestriction();

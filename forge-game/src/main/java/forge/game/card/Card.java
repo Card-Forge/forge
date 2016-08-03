@@ -1429,11 +1429,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("\r\n");
                 }
                 sbLong.append(keyword);
-                sbLong.append(" (You may cast this card any time you could cast an instant by sacrificing a ");
-                sbLong.append(offeringType);
-                sbLong.append("and paying the difference in mana costs between this and the sacrificed ");
-                sbLong.append(offeringType);
-                sbLong.append(". Mana cost includes color.)");
+                sbLong.append(" (" + Keyword.getInstance("Offering:"+ offeringType).getReminderText() + ")");
             } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
                     || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge") || keyword.startsWith("Ninjutsu")
                     || keyword.startsWith("Evoke") || keyword.startsWith("Bestow")) {

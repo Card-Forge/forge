@@ -2525,6 +2525,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Bushido")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.endsWith(" offering")) {
+                addSpellAbility(keyword, card, null);
+            }
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
                         + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
@@ -3348,6 +3351,27 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(effect);
             }
             card.addSpellAbility(sa);
+        } else if (keyword.endsWith(" offering")) {
+            final String offeringType = keyword.split(" ")[0];
+            final SpellAbility sa = card.getFirstSpellAbility();
+
+            final SpellAbility newSA = sa.copy();
+            SpellAbilityRestriction sar = new SpellAbilityRestriction();
+            sar.setVariables(sa.getRestrictions());
+            sar.setIsPresent(offeringType + ".YouCtrl+CanBeSacrificedBy");
+            sar.setInstantSpeed(true);
+            newSA.setRestrictions(sar);
+            newSA.getMapParams().put("Secondary", "True");
+            newSA.setBasicSpell(false);
+            newSA.setIsOffering(true);
+            newSA.setPayCosts(sa.getPayCosts());
+            newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
+            if (!intrinsic) {
+                newSA.setTemporary(true);
+                newSA.setIntrinsic(false);
+                kws.addSpellAbility(newSA);
+            }
+            card.addSpellAbility(newSA);
         }
     }
 
