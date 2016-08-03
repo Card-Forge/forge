@@ -2,7 +2,7 @@ Name:Mockery of Nature
 ManaCost:9
 Types:Creature Eldrazi Beast
 PT:6/5
-K:Emerge 7 G
+K:Emerge:7 G
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When you cast CARDNAME, you may destroy target artifact or enchantment.
 SVar:TrigDestroy:DB$ Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Choose target artifact or enchantment.
 SVar:PlayMain1:TRUE

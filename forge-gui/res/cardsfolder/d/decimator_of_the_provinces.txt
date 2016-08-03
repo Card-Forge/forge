@@ -4,8 +4,8 @@ Types:Creature Eldrazi Boar
 PT:7/7
 K:Trample
 K:Haste
-K:Emerge 6 G G G
+K:Emerge:6 G G G
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When you cast CARDNAME, creatures you control get +2/+2 and gain trample until end of turn.
 SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decimator_of_the_provinces.jpg
-Oracle:Emerge {6}{G}{G}{G}\nWhen you cast Decimator of the Provinces, creatures you control get +2/+2 and gain trample until end of turn.\nTrample, haste
+Oracle:Emerge {6}{G}{G}{G} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)\nWhen you cast Decimator of the Provinces, creatures you control get +2/+2 and gain trample until end of turn.\nTrample, haste

@@ -1,18 +1,10 @@
 Name:Drownyard Behemoth
-
 ManaCost:9
-
 Types:Creature Eldrazi Crab
-
 PT:5/7
-
 K:Flash
-
-K:Emerge 7 U
-
+K:Emerge:7 U
 S:Mode$ Continuous | Affected$ Card.Self+enteredBattlefieldThisTurn | AddKeyword$ Hexproof | Description$ CARDNAME has hexproof as long as it entered the battlefield this turn.
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drownyard_behemoth.jpg
-
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEmerge {7}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)\nDrownyard Behemoth has hexproof as long as it entered the battlefield this turn.
 

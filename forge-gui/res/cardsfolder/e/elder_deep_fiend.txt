@@ -3,7 +3,7 @@ ManaCost:8
 Types:Creature Eldrazi Octopus
 PT:5/6
 K:Flash
-K:Emerge 5 U U
+K:Emerge:5 U U
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When you cast CARDNAME, tap up to four target permanents.
 SVar:TrigTap:AB$ Tap | Cost$ 0 | TargetMin$ 0 | TargetMax$ 4 | TgtPrompt$ Select up to four target permanents | ValidTgts$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_deep_fiend.jpg
