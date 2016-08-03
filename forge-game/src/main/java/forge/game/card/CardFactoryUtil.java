@@ -2703,24 +2703,7 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             else if (keyword.startsWith("Bestow")) {
-                final String[] params = keyword.split(":");
-                final String cost = params[1];
-                card.removeIntrinsicKeyword(keyword);       
-
-                final StringBuilder sbAttach = new StringBuilder();
-                sbAttach.append("SP$ Attach | Cost$ ");
-                sbAttach.append(cost);
-                sbAttach.append(" | AILogic$ ").append(params.length > 2 ? params[2] : "Pump");
-                sbAttach.append(" | Bestow$ True | ValidTgts$ Creature");
-                final SpellAbility bestow = AbilityFactory.getAbility(sbAttach.toString(), card);
-
-                bestow.setDescription("Bestow " + ManaCostParser.parse(cost) + " (If you cast this"
-                        + " card for its bestow cost, it's an Aura spell with enchant creature. It"
-                        + " becomes a creature again if it's not attached to a creature.)");
-                bestow.setStackDescription("Bestow - " + card.getName());
-                bestow.setBasicSpell(false);
-                card.addSpellAbility(bestow);
-                card.getCurrentState().addUnparsedAbility(sbAttach.toString());
+            	addSpellAbility(keyword, card, null);
             }
             else if (keyword.equals("Hideaway")) {
                 card.getCurrentState().addIntrinsicKeyword("CARDNAME enters the battlefield tapped.");
@@ -3190,7 +3173,32 @@ public class CardFactoryUtil {
 
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
-        if (keyword.startsWith("Evoke")) {
+        if (keyword.startsWith("Bestow")) {
+            final String[] params = keyword.split(":");
+            final String cost = params[1];       
+
+            final StringBuilder sbAttach = new StringBuilder();
+            sbAttach.append("SP$ Attach | Cost$ ");
+            sbAttach.append(cost);
+            sbAttach.append(" | AILogic$ ").append(params.length > 2 ? params[2] : "Pump");
+            sbAttach.append(" | Bestow$ True | ValidTgts$ Creature");
+
+            final SpellAbility sa = AbilityFactory.getAbility(sbAttach.toString(), card);
+            sa.setDescription("Bestow " + ManaCostParser.parse(cost) +
+            		" (" + Keyword.getInstance(keyword).getReminderText() + ")");
+            sa.setStackDescription("Bestow - " + card.getName());
+            sa.setBasicSpell(false);
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            } else {
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getCurrentState().addUnparsedAbility(sbAttach.toString());
+            }
+            card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Evoke")) {
             final String[] k = keyword.split(":");
             final Cost evokedCost = new Cost(k[1], false);
 

@@ -1406,7 +1406,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") || keyword.startsWith("Bloodthirst")
             		|| keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
-            } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")) {
+            } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
+                    || keyword.startsWith("Soulbond")) {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.contains("Haunt")) {
                 sb.append("\r\nHaunt (");
@@ -1433,11 +1434,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append("and paying the difference in mana costs between this and the sacrificed ");
                 sbLong.append(offeringType);
                 sbLong.append(". Mana cost includes color.)");
-            } else if (keyword.startsWith("Soulbond")) {
-                sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
                     || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge") || keyword.startsWith("Ninjutsu")
-                    || keyword.startsWith("Evoke")) {
+                    || keyword.startsWith("Evoke") || keyword.startsWith("Bestow")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedBy")) {
                 sbLong.append(getName()).append(" can't be blocked ");
