@@ -231,19 +231,6 @@ public final class GameActionUtil {
                 }
                 alternatives.add(flashback);
             }
-            if (sa.isSpell() && keyword.startsWith("Alternative Cost")) {
-                final SpellAbility newSA = sa.copy();
-                newSA.setBasicSpell(false);
-                String kw = keyword;
-                if (keyword.contains("ConvertedManaCost")) {
-                    final String cmc = Integer.toString(sa.getHostCard().getCMC());
-                    kw = keyword.replace("ConvertedManaCost", cmc);
-                }
-                final Cost cost = new Cost(kw.substring(17), false).add(newSA.getPayCosts().copyWithNoMana());
-                newSA.setPayCosts(cost);
-                newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
-                alternatives.add(newSA);
-            }
             if (sa.isSpell() && keyword.equals("You may cast CARDNAME as though it had flash if you pay 2 more to cast it.")) {
                 final SpellAbility newSA = sa.copy();
                 newSA.setBasicSpell(false);

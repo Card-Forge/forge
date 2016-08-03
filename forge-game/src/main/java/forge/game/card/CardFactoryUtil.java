@@ -3173,7 +3173,27 @@ public class CardFactoryUtil {
 
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
-        if (keyword.startsWith("Bestow")) {
+        if (keyword.startsWith("Alternative Cost")) {
+            final String[] kw = keyword.split(":");
+            String costStr = kw[1];   
+            final SpellAbility sa = card.getFirstSpellAbility();
+            final SpellAbility newSA = sa.copy();
+            newSA.setBasicSpell(false);
+            if (costStr.equals("ConvertedManaCost")) {
+            	costStr = Integer.toString(card.getCMC());
+            }
+            final Cost cost = new Cost(costStr, false).add(sa.getPayCosts().copyWithNoMana());
+            newSA.getMapParams().put("Secondary", "True");
+            newSA.setPayCosts(cost);
+            newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
+
+            if (!intrinsic) {
+                newSA.setTemporary(true);
+                newSA.setIntrinsic(false);
+                kws.addSpellAbility(newSA);
+            }
+            card.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Bestow")) {
             final String[] params = keyword.split(":");
             final String cost = params[1];       
 

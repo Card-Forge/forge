@@ -1667,7 +1667,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         for (final SpellAbility sa : state.getSpellAbilities()) {
             // only add abilities not Spell portions of cards
-            if (sa == null || !state.getType().isPermanent()) {
+            if (sa == null || sa.isSecondary() || !state.getType().isPermanent()) {
                 continue;
             }
 
