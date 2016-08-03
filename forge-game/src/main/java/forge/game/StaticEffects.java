@@ -72,7 +72,7 @@ public class StaticEffects {
             return currentEffect;
         }
 
-        final StaticEffect newEffect = new StaticEffect(staticAbility.getHostCard());
+        final StaticEffect newEffect = new StaticEffect(staticAbility);
         this.staticEffects.put(staticAbility, newEffect);
         return newEffect;
     }

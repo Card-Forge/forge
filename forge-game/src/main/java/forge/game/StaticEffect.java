@@ -46,6 +46,7 @@ import com.google.common.collect.Maps;
 public class StaticEffect {
 
     private final Card source;
+    private StaticAbility ability;
     private int keywordNumber = 0;
     private CardCollectionView affectedCards = new CardCollection();
     private List<Player> affectedPlayers = Lists.newArrayList();
@@ -83,8 +84,14 @@ public class StaticEffect {
         this.source = source;
     }
 
+    StaticEffect(final StaticAbility ability) {
+    	this(ability.getHostCard());
+        this.ability = ability;
+    }
+
     private StaticEffect makeMappedCopy(GameObjectMap map) {
         StaticEffect copy = new StaticEffect(map.map(this.source));
+        copy.ability = this.ability;
         copy.keywordNumber = this.keywordNumber;
         copy.affectedCards = map.mapCollection(this.affectedCards);
         copy.affectedPlayers  = map.mapList(this.affectedPlayers);
@@ -1046,7 +1053,7 @@ public class StaticEffect {
                 affectedCard.setMayLookAt(controller, false);
             }
             if (removeMayPlay) {
-                affectedCard.removeMayPlay(source);
+                affectedCard.removeMayPlay(ability);
             }
             affectedCard.updateStateForView();
         }

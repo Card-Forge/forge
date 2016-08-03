@@ -110,7 +110,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private GameEntity enchanting = null;
     private GameEntity mustAttackEntity = null;
 
-    private final Map<Card, CardPlayOption> mayPlay = Maps.newTreeMap();
+    private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newTreeMap();
     private int mayPlayTurn = 0;
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
@@ -2271,11 +2271,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         view.setPlayerMayLook(player, mayLookAt, temp);
     }
 
-    public final CardPlayOption mayPlay(final Card host) {
-    	if (host == null) {
+    public final CardPlayOption mayPlay(final StaticAbility sta) {
+    	if (sta == null) {
     	    return null;
     	}
-    	return mayPlay.get(host);
+    	return mayPlay.get(sta);
     }
     public final List<CardPlayOption> mayPlay(final Player player) {
     	List<CardPlayOption> result = Lists.newArrayList();
@@ -2286,11 +2286,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     	}
         return result;
     }
-    public final void setMayPlay(final Player player, final boolean withoutManaCost, final boolean ignoreColor, final boolean withFlash, final Card host) {
-        this.mayPlay.put(host, new CardPlayOption(player, host, withoutManaCost, ignoreColor, withFlash));
+    public final void setMayPlay(final Player player, final boolean withoutManaCost, final boolean ignoreColor, final boolean withFlash, final StaticAbility sta) {
+        this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, ignoreColor, withFlash));
     }
-    public final void removeMayPlay(final Card host) {
-        this.mayPlay.remove(host);
+    public final void removeMayPlay(final StaticAbility sta) {
+        this.mayPlay.remove(sta);
     }
 
     public int getMayPlayTurn() {

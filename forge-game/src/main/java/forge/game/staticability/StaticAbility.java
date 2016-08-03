@@ -42,7 +42,7 @@ import com.google.common.collect.Maps;
 /**
  * The Class StaticAbility.
  */
-public class StaticAbility extends CardTraitBase {
+public class StaticAbility extends CardTraitBase implements Comparable<StaticAbility> {
 
     private final Set<StaticAbilityLayer> layers;
     private CardCollectionView ignoreEffectCards = new CardCollection();
@@ -620,4 +620,8 @@ public class StaticAbility extends CardTraitBase {
         return layers;
     }
 
+	@Override
+	public int compareTo(StaticAbility arg0) {
+	    return getHostCard().compareTo(arg0.getHostCard());
+	}
 } // end class StaticAbility

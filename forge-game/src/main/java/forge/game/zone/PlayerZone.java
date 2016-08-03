@@ -63,13 +63,18 @@ public class PlayerZone extends Zone {
 
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 final ZoneType restrictZone = sa.getRestrictions().getZone();
+
+                // for mayPlay the restrictZone is null for reasons
+                if (sa.isSpell() && c.mayPlay(sa.getMayPlay()) != null) {
+                    return true;
+                }
+
                 if (PlayerZone.this.is(restrictZone)) {
                     return true;
                 }
-   
+
                 if (sa.isSpell()
-                        && (c.mayPlay(sa.getMayPlayHost()) != null
-                                || (c.hasStartOfKeyword("Flashback") && PlayerZone.this.is(ZoneType.Graveyard)))
+                        && (c.hasStartOfKeyword("Flashback") && PlayerZone.this.is(ZoneType.Graveyard))
                         && restrictZone.equals(ZoneType.Hand)) {
                     return true;
                 }

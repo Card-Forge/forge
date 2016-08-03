@@ -191,7 +191,7 @@ public final class GameActionUtil {
                 }
                 sar.setZone(null);
                 newSA.setRestrictions(sar);
-                newSA.setMayPlayHost(host);
+                newSA.setMayPlay(o.getAbility());
                 if (o.getPayManaCost() == PayManaCost.NO) {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());

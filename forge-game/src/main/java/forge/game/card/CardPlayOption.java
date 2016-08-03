@@ -3,6 +3,7 @@ package forge.game.card;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbility;
 
 public final class CardPlayOption {
     public enum PayManaCost {
@@ -13,17 +14,17 @@ public final class CardPlayOption {
     }
 
     private final Player player;
-    private final Card host;
+    private final StaticAbility sta;
     private final PayManaCost payManaCost;
     private final boolean ignoreManaCostColor;
     private final boolean withFlash;
 
-    public CardPlayOption(final Player player, final Card host, final boolean withoutManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
-        this(player, host, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, ignoreManaCostColor, withFlash);
+    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
+        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, ignoreManaCostColor, withFlash);
     }
-    private CardPlayOption(final Player player, final Card host, final PayManaCost payManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
+    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
         this.player = player;
-        this.host = host;
+        this.sta = sta;
         this.payManaCost = payManaCost;
         this.ignoreManaCostColor = ignoreManaCostColor;
         this.withFlash = withFlash;
@@ -35,7 +36,11 @@ public final class CardPlayOption {
     }
 
     public Card getHost() {
-        return host;
+        return sta.getHostCard();
+    }
+
+    public StaticAbility getAbility() {
+        return sta;
     }
 
     public PayManaCost getPayManaCost() {

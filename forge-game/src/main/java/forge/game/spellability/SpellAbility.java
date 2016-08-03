@@ -36,6 +36,7 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.util.Expressions;
@@ -141,7 +142,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private SpellAbilityView view;
 
-    private Card mayPlay = null;
+    private StaticAbility mayPlay = null;
 
     protected SpellAbility(final Card iSourceCard, final Cost toPay) {
         this(iSourceCard, toPay, null);
@@ -584,11 +585,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         outlast = outlast0;
     }
 
-    public Card getMayPlayHost() {
+    public StaticAbility getMayPlay() {
         return mayPlay;
     }
-    public void setMayPlayHost(final Card host) {
-        mayPlay = host;
+    public void setMayPlay(final StaticAbility sta) {
+        mayPlay = sta;
     }
 
     public boolean isLeftSplit() {

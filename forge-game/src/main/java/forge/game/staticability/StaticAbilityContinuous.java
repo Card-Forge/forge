@@ -617,7 +617,7 @@ public final class StaticAbilityContinuous {
             }
             if (controllerMayPlay && (mayPlayLimit == null || hostCard.getMayPlayTurn() < mayPlayLimit)) {
                 Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
-                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayIgnoreColor, mayPlayWithFlash, hostCard);
+                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayIgnoreColor, mayPlayWithFlash, stAb);
             }
 
             affectedCard.updateStateForView();

@@ -28,6 +28,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPlayOption;
+import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -201,26 +202,39 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * @return a boolean.
      */
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
-        if (this.getZone() == null) {
-            return true;
-        }
 
         final Player activator = sa.getActivatingPlayer();
         final Zone cardZone = activator.getGame().getZoneOf(c);
-        if (cardZone == null || !cardZone.is(this.getZone())) {
+        Card cp = c;
+
+        // for Bestow need to check the animated State
+        if (sa.isSpell() && sa.hasParam("Bestow")) {
+            cp = CardUtil.getLKICopy(c);
+            cp.animateBestow();
+        }
+
+        if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
             // Not a Spell, or on Battlefield, return false
             if (!sa.isSpell() || (cardZone != null && ZoneType.Battlefield.equals(cardZone.getZoneType()))
-                    || !this.getZone().equals(ZoneType.Hand)) {
+                    || (this.getZone() != null && !this.getZone().equals(ZoneType.Hand))) {
                 return false;
             }
             if (cardZone != null && cardZone.is(ZoneType.Stack)) {
                 return false;
             }
             if (sa.isSpell()) {
-                final CardPlayOption o = c.mayPlay(sa.getMayPlayHost());
+                final CardPlayOption o = c.mayPlay(sa.getMayPlay());
                 if (o != null && o.getPlayer() == activator) {
-                     return true;
+                    Map<String,String> params = sa.getMayPlay().getMapParams();
+
+                    if (params.containsKey("Affected")) {
+                        if (!cp.isValid(params.get("Affected"), activator, o.getHost(), null)) {
+                            return false;
+                        }
+                    }
+
+                    return true;
                 }
             }
             return false;
@@ -301,7 +315,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (sa.isSpell()) {
-            final CardPlayOption o = c.mayPlay(sa.getMayPlayHost());
+            final CardPlayOption o = c.mayPlay(sa.getMayPlay());
             if (o != null && o.getPlayer() == activator) {
                 return true;
             }

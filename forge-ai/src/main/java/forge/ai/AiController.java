@@ -884,7 +884,7 @@ public class AiController {
             }
             // move snap-casted spells to front
             if (source.isInZone(ZoneType.Graveyard)) {
-                if(sa.getMayPlayHost() != null && source.mayPlay(sa.getMayPlayHost()) != null) {
+                if(sa.getMayPlay() != null && source.mayPlay(sa.getMayPlay()) != null) {
                     p += 50;
                 }
             }
