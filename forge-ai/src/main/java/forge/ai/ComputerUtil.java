@@ -372,11 +372,11 @@ public class ComputerUtil {
         return null;
     }
 
-    public static CardCollection chooseSacrificeType(final Player ai, final String type, final Card source, final Card target, final int amount) {
+    public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final int amount) {
+        final Card source = ability.getHostCard();
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
-        if (ai.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-            typeList = CardLists.getNotType(typeList, "Creature");
-        }
+
+        typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             typeList.remove(target); // don't sacrifice the card we're pumping

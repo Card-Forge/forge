@@ -3991,6 +3991,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!getExiledWith().equals(host)) {
                 return false;
             }
+        } else if (property.equals("CanBeSacrificedBy")) {
+            if (!canBeSacrificedBy(spellAbility)) {
+                return false;
+            }
         } else if (property.startsWith("AttachedBy")) {
             if (!isEquippedBy(source) && !isEnchantedBy(source) && !isFortifiedBy(source)) {
                 return false;
@@ -6641,8 +6645,21 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!canBeSacrificed()) {
             return false;
         }
-        return !(source != null && getController().isOpponentOf(source.getActivatingPlayer())
-                && getController().hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents."));
+
+        if (source == null){
+            return false;
+        }
+
+        if (isCreature() && source.getActivatingPlayer().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+            return false;
+        }
+
+        if (getController().isOpponentOf(source.getActivatingPlayer())
+                && getController().hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.")) {
+            return false;
+        }
+
+        return true;
     }
 
     public CardRules getRules() {

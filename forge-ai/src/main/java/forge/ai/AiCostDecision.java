@@ -424,11 +424,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source);
         }
         if (cost.getAmount().equals("All")) {
-            /*CardCollectionView typeList = new CardCollection(activator.getCardsIn(ZoneType.Battlefield));
-            typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), activator, source);
-            if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-                typeList = CardLists.getNotType(typeList, "Creature");
-            }*/
             // Does the AI want to use Sacrifice All?
             return null;
         }
@@ -441,7 +436,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
-        CardCollectionView list = ComputerUtil.chooseSacrificeType(player, cost.getType(), source, ability.getTargetCard(), c);
+        CardCollectionView list = ComputerUtil.chooseSacrificeType(player, cost.getType(), ability, ability.getTargetCard(), c);
         return PaymentDecision.card(list);
     }
 

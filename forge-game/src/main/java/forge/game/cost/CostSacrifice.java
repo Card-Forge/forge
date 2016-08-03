@@ -93,9 +93,6 @@ public class CostSacrifice extends CostPartWithList {
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source, ability);
             final Integer amount = this.convertAmount();
 
-            if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-                typeList = CardLists.getNotType(typeList, "Creature");
-            }
             typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 
             if (!needsAnnoucement && (amount != null) && (typeList.size() < amount)) {
@@ -106,13 +103,8 @@ public class CostSacrifice extends CostPartWithList {
             // if X is defined, it needs to be calculated and checked, if X is
             // choice, it can be Paid even if it's 0
         }
-        else {
-            if (!source.canBeSacrificed()) {
-                return false;
-            }
-            else if (source.isCreature() && activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-                return false;
-            }
+        else if (!source.canBeSacrificedBy(ability)) {
+            return false;
         }
 
         return true;

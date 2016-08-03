@@ -1024,9 +1024,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         CardCollectionView list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.canBeSacrificedBy(ability));
         list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
-        if (player.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-            list = CardLists.getNotType(list, "Creature");
-        }
 
         if (cost.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
