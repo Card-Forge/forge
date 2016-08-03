@@ -293,22 +293,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         return true;
     }
 
-    /**
-     * <p>
-     * isSecondary.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isSecondary() {
-        if (this.mapParams.containsKey("Secondary")) {
-            if (this.mapParams.get("Secondary").equals("True")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /** {@inheritDoc} */
     @Override
     public final boolean equals(final Object o) {

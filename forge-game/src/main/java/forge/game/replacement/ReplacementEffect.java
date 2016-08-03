@@ -65,15 +65,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     }
 
     /**
-     * Checks if is secondary.
-     *
-     * @return true, if is secondary
-     */
-    public final boolean isSecondary() {
-        return this.getMapParams().containsKey("Secondary");
-    }
-
-    /**
      * Sets the checks for run.
      * 
      * @param hasRun
