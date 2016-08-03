@@ -265,23 +265,6 @@ public final class GameActionUtil {
                     alternatives.add(newSA);
                 }
             }
-            if (sa.isSpell() && keyword.startsWith("Emerge")) {
-                List<Card> canEmerge = sa.getHostCard().getController().getCreaturesInPlay();
-                if (source.getController().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-                    continue;
-                }
-                if (!canEmerge.isEmpty()) {
-                    final SpellAbility newSA = sa.copy();
-                    SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                    sar.setVariables(sa.getRestrictions());
-                    newSA.setRestrictions(sar);
-                    newSA.setBasicSpell(false);
-                    newSA.setIsEmerge(true);
-                    newSA.setPayCosts(new Cost(keyword.substring(7), false));
-                    newSA.setDescription(sa.getDescription() + " (Emerge)");
-                    alternatives.add(newSA);
-                }
-            }
             if (sa.hasParam("Equip") && sa instanceof AbilityActivated && keyword.equals("EquipInstantSpeed")) {
                 final SpellAbility newSA = ((AbilityActivated) sa).getCopy();
                 SpellAbilityRestriction sar = new SpellAbilityRestriction();

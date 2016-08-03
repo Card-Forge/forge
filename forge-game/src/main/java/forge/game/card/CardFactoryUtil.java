@@ -2510,6 +2510,9 @@ public class CardFactoryUtil {
                 addReplacementEffect(keyword, card, null);
                 addStaticAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Emerge")) {
+                addSpellAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Escalate")) {
                 addStaticAbility(keyword, card, null);
             }
@@ -3218,6 +3221,27 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(sbAttach.toString());
             }
             card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Emerge")) {
+            final String[] kw = keyword.split(":");
+            String costStr = kw[1];   
+            final SpellAbility sa = card.getFirstSpellAbility();
+
+            final SpellAbility newSA = sa.copy();
+            SpellAbilityRestriction sar = new SpellAbilityRestriction();
+            sar.setVariables(sa.getRestrictions());
+            sar.setIsPresent("Creature.YouCtrl+CanBeSacrificedBy");
+            newSA.setRestrictions(sar);
+            newSA.getMapParams().put("Secondary", "True");
+            newSA.setBasicSpell(false);
+            newSA.setIsEmerge(true);
+            newSA.setPayCosts(new Cost(costStr, false));
+            newSA.setDescription(sa.getDescription() + " (Emerge)");
+            if (!intrinsic) {
+                newSA.setTemporary(true);
+                newSA.setIntrinsic(false);
+                kws.addSpellAbility(newSA);
+            }
+            card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Evoke")) {
             final String[] k = keyword.split(":");
             final Cost evokedCost = new Cost(k[1], false);

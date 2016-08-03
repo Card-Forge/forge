@@ -1356,7 +1356,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbLong.append("\r\n");
                 }
             } else if (keyword.startsWith("Emerge")) {
-                final String[] k = keyword.split(" ", 2);
+                final String[] k = keyword.split(":");
                 sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
                 sbLong.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")");
                 sbLong.append("\r\n");
