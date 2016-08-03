@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Legendary Creature Human Samurai
 PT:2/1
 K:Bushido 1
-S:Mode$ Continuous | Affected$ Card.Samurai+YouCtrl | AddHiddenKeyword$ Alternative Cost ConvertedManaCost | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's converted mana cost.
+S:Mode$ Continuous | Affected$ Card.Samurai+YouCtrl | AddKeyword$ Alternative Cost:ConvertedManaCost | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's converted mana cost.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kentaro_the_smiling_cat.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nYou may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's converted mana cost.

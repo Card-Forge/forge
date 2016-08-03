@@ -1,7 +1,7 @@
 Name:Dream Halls
 ManaCost:3 U U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Card.nonToken | AddHiddenKeyword$ Alternative Cost Discard<1/Card.SharesColorWith/color sharing> | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
+S:Mode$ Continuous | Affected$ Card.nonToken | AddKeyword$ Alternative Cost:Discard<1/Card.SharesColorWith/color sharing> | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_halls.jpg
