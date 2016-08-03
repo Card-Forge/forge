@@ -1,10 +1,15 @@
 package forge.ai.ability;
 
 
+import com.google.common.collect.Iterables;
+
 import forge.ai.SpellAbilityAi;
+import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 
 public class ClashAi extends SpellAbilityAi {
 
@@ -32,5 +37,27 @@ public class ClashAi extends SpellAbilityAi {
         }
         return true;
     }
+
+    @Override
+	protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    	for (Player p : options) {
+    		if (p.getCardsIn(ZoneType.Library).size() == 0)
+    			return p;
+    	}
+
+    	CardCollectionView col = ai.getCardsIn(ZoneType.Library);
+    	if (!col.isEmpty() && col.getFirst().getView().mayPlayerLook(ai.getView())) {
+    		final Card top = col.get(0);
+    		for (Player p : options) {
+    			final Card oppTop = p.getCardsIn(ZoneType.Library).getFirst();
+    			// TODO add logic for SplitCards
+    			if (top.getCMC() > oppTop.getCMC()) {
+    				return p;
+    			}
+    		}
+    	}
+
+		return Iterables.getFirst(options, null);
+	}
 
 }
