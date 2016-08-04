@@ -1,0 +1,77 @@
+[metadata]
+Code=DDR
+Date=2016-09-02
+Name=Duel Decks: Nissa vs. Ob Nixilis
+Code2=DDR
+MciCode=ddr
+Type=Duel_Decks
+
+[cards]
+1 M Nissa, Voice of Zendikar
+2 R Abundance
+3 U Briarhorn
+4 C Citanul Woodreaders
+5 C Civic Wayfinder
+6 R Cloudthresher
+7 C Crop Rotation
+8 C Elvish Visionary
+9 C Fertilid
+10 U Gaea's Blessing
+11 C Gilt-Leaf Seer
+12 U Jaddi Lifestrider
+13 C Natural Connection
+14 C Nissa's Chosen
+15 C Oakgnarl Warrior
+16 R Oran-Rief Hydra
+17 C Oran-Rief Invoker
+18 C Saddleback Lagac
+19 U Scythe Leopard
+20 U Seek the Horizon
+21 R Thicket Elemental
+22 C Thornweald Archer
+23 C Vines of the Recluse
+24 U Walker of the Grove
+25 C Wood Elves
+26 U Woodborn Behemoth
+27 C Fertile Thicket
+28 C Khalni Garden
+29 R Mosswort Bridge
+30 U Treetop Village
+31 L Forest
+32 L Forest
+33 L Forest
+34 L Forest
+35 M Ob Nixilis Reignited
+36 C Altar's Reap
+37 U Ambition's Cost
+38 C Bala Ged Scorpion
+39 C Blistergrub
+40 C Cadaver Imp
+41 U Carrier Thrall
+42 C Demon's Grasp
+43 R Desecration Demon
+44 R Despoiler of Souls
+45 C Disfigure
+46 U Doom Blade
+47 C Fetid Imp
+48 C Foul Imp
+49 C Giant Scorpion
+50 C Grim Discovery
+51 C Hideous End
+52 R Indulgent Tormentor
+53 C Innocent Blood
+54 C Mire's Toll
+55 R Pestilence Demon
+56 R Priest of the Blood Rite
+57 U Quest for the Gravelord
+58 C Renegade Demon
+59 U Shadows of the Past
+60 U Smallpox
+61 U Squelching Leeches
+62 C Tendrils of Corruption
+63 C Unhallowed Pact
+64 U Leechridden Swamp
+65 L Swamp
+66 L Swamp
+67 L Swamp
+68 L Swamp
