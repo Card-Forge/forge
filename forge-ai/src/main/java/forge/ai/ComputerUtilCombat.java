@@ -1379,21 +1379,30 @@ public class ComputerUtilCombat {
                 if (!params.get("Mode").equals("Continuous")) {
                     continue;
                 }
-                if (!params.containsKey("Affected") || !params.get("Affected").contains("attacking")) {
-                    continue;
-                }
-                final String valid = params.get("Affected").replace("attacking", "Creature");
-                if (!attacker.isValid(valid, card.getController(), card, null)) {
-                    continue;
-                }
-                if (params.containsKey("AddToughness")) {
-                    if (params.get("AddToughness").equals("X")) {
-                        toughness += CardFactoryUtil.xCount(card, card.getSVar("X"));
-                    } else if (params.get("AddToughness").equals("Y")) {
-                        toughness += CardFactoryUtil.xCount(card, card.getSVar("Y"));
-                    } else {
-                        toughness += Integer.valueOf(params.get("AddToughness"));
-                    }
+                if (params.containsKey("Affected") && params.get("Affected").contains("attacking")) {
+	                final String valid = params.get("Affected").replace("attacking", "Creature");
+	                if (!attacker.isValid(valid, card.getController(), card, null)) {
+	                    continue;
+	                }
+	                if (params.containsKey("AddToughness")) {
+	                    if (params.get("AddToughness").equals("X")) {
+	                        toughness += CardFactoryUtil.xCount(card, card.getSVar("X"));
+	                    } else if (params.get("AddToughness").equals("Y")) {
+	                        toughness += CardFactoryUtil.xCount(card, card.getSVar("Y"));
+	                    } else {
+	                        toughness += Integer.valueOf(params.get("AddToughness"));
+	                    }
+	                }
+                } else if (params.containsKey("Affected") && params.get("Affected").contains("untapped")) {
+	                final String valid = params.get("Affected").replace("untapped", "Creature");
+	                if (!attacker.isValid(valid, card.getController(), card, null) 
+	                		|| attacker.hasKeyword("Vigilance")) {
+	                    continue;
+	                }
+	                // remove the bonus, because it will no longer be granted
+	                if (params.containsKey("AddToughness")) {
+	                	toughness -= Integer.valueOf(params.get("AddToughness"));
+	                }
                 }
             }
         }
