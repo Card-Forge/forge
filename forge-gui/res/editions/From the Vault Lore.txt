@@ -1,0 +1,23 @@
+[metadata]
+Code=V16
+Date=2016-08-19
+Name=From the Vault: Lore
+MciCode=v16
+Type=From_the_Vault
+
+[cards]
+1 M Beseech the Queen
+2 M Cabal Ritual
+3 M Conflux
+4 M Dark Depths
+5 M Glissa, the Traitor
+6 M Helvault
+7 M Memnarch
+8 M Mind's Desire
+9 M Momir Vig, Simic Visionary
+10 M Near-Death Experience
+11 M Obliterate
+12 M Phyrexian Processor
+13 M Tolaria West
+14 M Umezawa's Jitte
+15 M Unmask
