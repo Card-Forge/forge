@@ -31,6 +31,7 @@ public class MessageUtil {
         if (sa == null || sa.getApi() == null || sa.getHostCard() == null) {
             return ("Result: " + value);
         }
+        String choser = StringUtils.capitalize(mayBeYou(player, target));
         switch(sa.getApi()) {
             case ChooseDirection:
                 return value;
@@ -40,13 +41,14 @@ public class MessageUtil {
                 }
                 final boolean random = sa.hasParam("Random");
                 return String.format(random ? "Randomly chosen number for %s is %s" : "%s chooses number: %s", mayBeYou(player, target), value);
+            case ChooseType:
+                return String.format("%s choose %s for effect of %s", choser, value, sa.getHostCard().getName());
             case FlipACoin:
                 String flipper = StringUtils.capitalize(mayBeYou(player, target));
                 return sa.hasParam("NoCall")
                         ? String.format("%s flip comes up %s", Lang.getPossesive(flipper), value)
                         : String.format("%s %s the flip", flipper, Lang.joinVerb(flipper, value));
             case Protection:
-                String choser = StringUtils.capitalize(mayBeYou(player, target));
                 return String.format("%s %s protection from %s", choser, Lang.joinVerb(choser, "choose"), value);
             case Vote:
                 String chooser = StringUtils.capitalize(mayBeYou(player, target));

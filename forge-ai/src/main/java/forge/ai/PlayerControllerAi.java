@@ -353,7 +353,7 @@ public class PlayerControllerAi extends PlayerController {
             chosen = validTypes.get(0);
             Log.warn("AI has no idea how to choose " + kindOfType +", defaulting to 1st element: chosen");
         }
-        game.getAction().nofityOfValue(sa, null, "Computer picked: " + chosen, player);
+        game.getAction().nofityOfValue(sa, player, chosen, player);
         return chosen;
     }
 

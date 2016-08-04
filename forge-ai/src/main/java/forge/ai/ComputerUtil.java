@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.ai.ability.ProtectAi;
@@ -1748,7 +1749,7 @@ public class ComputerUtil {
             }
         } else if (kindOfType.equals("Creature")) {
             if (logic != null) {
-                List <String> valid = CardType.getAllCreatureTypes();
+                List <String> valid = Lists.newArrayList(CardType.getAllCreatureTypes());
                 valid.removeAll(invalidTypes);
 
                 if (logic.equals("MostProminentOnBattlefield")) {
@@ -1780,7 +1781,7 @@ public class ComputerUtil {
             if (logic != null) {
                 if (logic.equals("MostProminentOppControls")) {
                     CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
-                    List<String> valid = CardType.getBasicTypes();
+                    List<String> valid = Lists.newArrayList(CardType.getBasicTypes());
                     valid.removeAll(invalidTypes);
 
                     chosen = ComputerUtilCard.getMostProminentType(list, valid);
