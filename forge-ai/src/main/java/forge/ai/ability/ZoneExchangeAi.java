@@ -34,7 +34,7 @@ public class ZoneExchangeAi extends SpellAbilityAi {
             list = CardLists.getValidCards(list, type, ai, source);
         }
         object2 = ComputerUtilCard.getBestAI(list);
-        if (object1 == null || object2 == null || !object1.isInZone(zone1)) {
+        if (object1 == null || object2 == null || !object1.isInZone(zone1) || !object1.getOwner().equals(ai)) {
             return false;
         }
         if (type.equals("Aura")) {
