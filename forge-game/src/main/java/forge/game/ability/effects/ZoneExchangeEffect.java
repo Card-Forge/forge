@@ -42,7 +42,7 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
             object1 = source;
         }
 
-        if (object1 == null || !object1.isInZone(zone1)) {
+        if (object1 == null || !object1.isInZone(zone1) || !object1.getOwner().equals(p)) {
             // No original object, can't exchange.
             return;
         }
