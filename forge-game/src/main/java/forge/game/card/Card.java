@@ -32,6 +32,7 @@ import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
@@ -1901,30 +1902,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         //Determine if a card has multiple choices, then format it in an easier to read list.
         if (ApiType.Charm.equals(sa.getApi())) {
-            // Only split once! Otherwise some Charm spells looks broken
-            final String[] splitElemText = elementText.split("-", 2);
-            final String chooseText = splitElemText[0].trim();
-            final String[] choices = splitElemText.length > 1 ? splitElemText[1].split(";") : null;
-
-            sb.append(chooseText);
-
-            if (choices != null) {
-                sb.append(" \u2014\r\n");
-                for (int i = 0; i < choices.length; i++) {
-                    String choice = choices[i].trim();
-
-                    if (choice.startsWith("Or ") || choice.startsWith("or ")) {
-                        choice = choice.substring(3);
-                    }
-
-                    sb.append("\u2022 ").append(Character.toUpperCase(choice.charAt(0)))
-                            .append(choice.substring(1));
-                    if (i < choices.length - 1) {
-                        sb.append(".");
-                    }
-                    sb.append("\r\n");
-                }
-            }
+            sb.append(CharmEffect.makeFormatedDescription(sa));
         } else {
             sb.append(elementText).append("\r\n");
         }

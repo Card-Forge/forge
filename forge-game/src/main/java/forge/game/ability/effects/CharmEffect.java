@@ -81,6 +81,34 @@ public class CharmEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
+    public static String makeFormatedDescription(SpellAbility sa) {
+        int num = Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
+        int min = Integer.parseInt(sa.getParamOrDefault("MinCharmNum", String.valueOf(num)));
+        boolean repeat = sa.hasParam("CanRepeatModes");
+
+        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
+
+        StringBuilder sb = new StringBuilder("Choose ");
+        if (num == min) {
+            sb.append(Lang.getNumeral(num));
+        } else {
+            sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
+        }
+
+        if (repeat) {
+    	    sb.append(". You may choose the same mode more than once.");
+        }
+
+        if (!list.isEmpty()) {
+            sb.append(" \u2014\r\n");
+            for (AbilitySub sub : list) {
+                sb.append("\u2022 ").append(sub.getParam("SpellDescription"));
+                sb.append("\r\n");
+            }
+        }
+        return sb.toString();
+    }
+
     @Override
     public void resolve(SpellAbility sa) {
         // all chosen modes have been chained as subabilities to this sa.
