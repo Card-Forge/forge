@@ -77,11 +77,6 @@ public class CloneEffect extends SpellAbilityEffect {
             return;
         }
 
-        // if the target is gone, use LKI of it
-        if (!cardToCopy.getZone().is(ZoneType.Battlefield)) {
-            cardToCopy = game.getChangeZoneLKIInfo(cardToCopy);
-        }
-
         final boolean optional = sa.hasParam("Optional");
         if (optional && !host.getController().getController().confirmAction(sa, null, "Do you want to copy " + cardToCopy + "?")) {
             return;
