@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.util.Expressions;
@@ -117,7 +118,7 @@ public class TriggerDamageDone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Source", this.getRunParams().get("DamageSource"));
+        sa.setTriggeringObject("Source", CardUtil.getLKICopy((Card)this.getRunParams().get("DamageSource")));
         sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
         sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
         // This parameter is here because LKI information related to combat doesn't work properly
