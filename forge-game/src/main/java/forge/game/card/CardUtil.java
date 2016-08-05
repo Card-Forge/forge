@@ -266,8 +266,6 @@ public final class CardUtil {
             newCopy.getState(CardStateName.Cloner).copyFrom(in, in.getState(CardStateName.Cloner));
         }
 
-        newCopy.setZone(in.getZone());
-
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
         newCopy.setTriggers(in.getTriggers(), false);
