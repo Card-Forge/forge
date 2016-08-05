@@ -10,6 +10,8 @@ K:Reach
 
 A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 
+DeckHints:Ability$Discard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noose_constrictor.jpg
 
 Oracle:Reach\nDiscard a card: Noose Constrictor gets +1/+1 until end of turn.

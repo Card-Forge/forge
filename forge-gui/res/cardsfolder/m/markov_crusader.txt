@@ -16,6 +16,8 @@ SVar:PlayMain1:TRUE
 
 SVar:BuffedBy:Vampire
 
+DeckHints:Type$Vampire
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markov_crusader.jpg
 
 Oracle:Lifelink\nMarkov Crusader has haste as long as you control another Vampire.

@@ -7,6 +7,7 @@ K:Flying
 K:Vigilance
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When you cast CARDNAME, you may return target Angel or Human creature card from your graveyard to the battlefield.
 SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Angel+YouCtrl,Creature.Human+YouCtrl
+DeckHints:Name$Gisela the Broken Blade & Type$Human & Type$Angel
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bruna_the_fading_light.jpg
 MeldPair:Gisela, the Broken Blade
 AlternateMode:Meld

@@ -6,6 +6,7 @@ Text:(Melds with Hanweir Battlements.)
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, put two 1/1 red Human creature tokens onto the battlefield tapped and attacking.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Human | TokenTypes$ Creature,Human | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenTapped$ True | TokenAttacking$ True | TokenImage$ r 1 1 human EMN
 SVar:HasAttackEffect:TRUE
+DeckHints:Name$Hanweir Battlements
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_garrison.jpg
 MeldPair:Hanweir Battlements
 AlternateMode:Meld

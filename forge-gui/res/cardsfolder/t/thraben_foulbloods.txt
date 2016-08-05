@@ -8,6 +8,10 @@ PT:3/2
 
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Menace | Condition$ Delirium | Description$ Delirium - CARDNAME gets +1/+1 and has menace as long as there are four or more card types among cards in your graveyard. (A creature with menace can't be blocked except by two or more creatures.)
 
+DeckHints:Ability$Graveyard & Ability$Discard
+
+DeckHas:Ability$Delirium
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_foulbloods.jpg
 
 Oracle:Delirium - Thraben Foulbloods gets +1/+1 and has menace as long as there are four or more card types among cards in your graveyard. (A creature with menace can't be blocked except by two or more creatures.)

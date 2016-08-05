@@ -8,6 +8,10 @@ PT:4/3
 
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Condition$ Delirium | Description$ Delirium - CARDNAME gets +1/+1 and has trample as long as there are four or more card types among cards in your graveyard.
 
+DeckHints:Ability$Graveyard & Ability$Discard
+
+DeckHas:Ability$Delirium
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/backwoods_survivalists.jpg
 
 Oracle:Delirium - Backwoods Survivalists gets +1/+1 and has trample as long as there are four or more card types among cards in your graveyard.

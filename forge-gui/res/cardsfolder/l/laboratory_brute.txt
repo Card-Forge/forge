@@ -10,6 +10,10 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 4 | Defined$ You
 
+DeckHints:Ability$Delirium
+
+DeckHas:Ability$Graveyard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laboratory_brute.jpg
 
 Oracle:When Laboratory Brute enters the battlefield, put the top four cards of your library into your graveyard.

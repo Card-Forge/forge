@@ -7,6 +7,7 @@ A:AB$ ChangeZone | Cost$ 3 R R T | Defined$ Self | Origin$ Battlefield | Destina
 SVar:ExileOther:DB$ ChangeZone | ChangeType$ Creature.YouCtrl+YouOwn+namedHanweir Garrison | Hidden$ True | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Mandatory$ True | SubAbility$ Meld | ConditionCheckSVar$ X | References$ X
 SVar:Meld:DB$ Meld | Defined$ Remembered | Name$ Hanweir, the Writhing Township | Primary$ Hanweir Battlements | Secondary$ Hanweir Garrison
 SVar:X:Count$Valid Creature.YouCtrl+YouOwn+namedHanweir Garrison
+DeckHints:Name$Hanweir Garrison
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_battlements.jpg
 MeldPair:Hanweir Garrison
 AlternateMode:Meld

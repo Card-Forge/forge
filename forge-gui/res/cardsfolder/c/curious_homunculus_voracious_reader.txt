@@ -6,7 +6,7 @@ A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ Instant,Sorcery | SpellDescr
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Instant.YouOwn,Sorcery.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform CARDNAME.
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
-DeckHints:Type$Instant|Sorcery 
+DeckHints:Type$Instant|Sorcery & Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curious_homunculus.jpg
 Oracle:{T}: Add {C} to your mana pool. Spend this mana only to cast an instant or sorcery spell.\nAt the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform Curious Homunculus.
 

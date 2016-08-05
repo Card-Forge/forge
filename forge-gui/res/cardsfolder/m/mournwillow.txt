@@ -16,6 +16,10 @@ SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield |
 
 SVar:PlayMain1:TRUE
 
+DeckHints:Ability$Graveyard & Ability$Discard
+
+DeckHas:Ability$Delirium
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mournwillow.jpg
 
 Oracle:Haste\nDelirium - When Mournwillow enters the battlefield, if there are four or more card types among cards in your graveyard, creatures with power 2 or less can't block this turn.

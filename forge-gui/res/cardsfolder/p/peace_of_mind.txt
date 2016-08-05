@@ -3,5 +3,6 @@ ManaCost:1 W
 Types:Enchantment
 A:AB$ GainLife | Cost$ W Discard<1/Card> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:RemAIDeck:True
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peace_of_mind.jpg
 Oracle:{W}, Discard a card: You gain 3 life.

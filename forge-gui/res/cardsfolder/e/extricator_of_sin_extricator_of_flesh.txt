@@ -6,6 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:AB$ Token | Cost$ Sac<1/Permanent.Other/another permanent> | TokenAmount$ 1 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Delirium$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Delirium - At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform CARDNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform 
+DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extricator_of_sin.jpg
 AlternateMode:DoubleFaced
 Oracle:When Extricator of Sin enters the battlefield, you may sacrifice another permanent. If you do, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.\nDelirium - At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform Extricator of Sin.

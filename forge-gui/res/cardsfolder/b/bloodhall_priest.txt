@@ -16,6 +16,8 @@ SVar:HasAttackEffect:TRUE
 
 K:Madness:1 B R
 
+DeckHints:Ability$Discard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodhall_priest.jpg
 
 Oracle:Whenever Bloodhall Priest enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to target creature or player.\nMadness {1}{B}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

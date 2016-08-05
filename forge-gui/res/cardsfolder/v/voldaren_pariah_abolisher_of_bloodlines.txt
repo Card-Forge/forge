@@ -12,6 +12,8 @@ A:AB$SetState | Cost$ Sac<3/Creature.Other/another creature> | Defined$ Self | M
 
 K:Madness:B B B
 
+DeckHints:Ability$Discard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voldaren_pariah.jpg
 
 AlternateMode:DoubleFaced

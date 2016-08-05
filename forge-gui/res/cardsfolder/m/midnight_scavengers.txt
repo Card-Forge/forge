@@ -5,6 +5,7 @@ PT:3/3
 Text:(Melds with Graf Rats.)
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature card from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl+cmcLE3
+DeckHints:Name$Graf Rats
 MeldPair:Graf Rats
 AlternateMode:Meld
 Oracle:When Midnight Scavengers enters the battlefield, you may return target creature card with converted mana cost 3 or less from your graveyard to your hand.\n(Melds with Graf Rats.)

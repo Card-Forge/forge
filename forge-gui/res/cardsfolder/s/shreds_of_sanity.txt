@@ -12,6 +12,10 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAb
 
 SVar:DBExile:DB$ChangeZone | Origin$ Stack | Destination$ Exile 
 
+DeckHints:Ability$Graveyard
+
+DeckHas:Ability$Discard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shreds_of_sanity.jpg
 
 Oracle:Return up to one target instant card and up to one target sorcery card from your graveyard to your hand, then discard a card. Exile Shreds of Sanity.

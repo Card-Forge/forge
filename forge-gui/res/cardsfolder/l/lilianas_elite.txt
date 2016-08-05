@@ -10,6 +10,8 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 
 SVar:X:Count$TypeInYourYard.Creature
 
+DeckHints:Ability$Graveyard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_elite.jpg
 
 Oracle:Liliana's Elite gets +1/+1 for each creature card in your graveyard.

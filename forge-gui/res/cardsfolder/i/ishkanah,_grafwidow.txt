@@ -16,6 +16,10 @@ A:AB$ LoseLife | Cost$ 6 B | ValidTgts$ Opponent | LifeAmount$ X | References$ X
 
 SVar:X:Count$Valid Card.Spider+YouCtrl 
 
+DeckHints:Ability$Graveyard & Ability$Discard
+
+DeckHas:Ability$Delirium
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ishkanah_grafwidow.jpg
 
 Oracle:Reach\nDelirium - When Ishkanah, Grafwidow enters the battlefield, if there are four or more card types among cards in your graveyard, put three 1/2 green Spider creature tokens with reach onto the battlefield.\n{6}{B}: Target opponent loses 1 life for each Spider you control.

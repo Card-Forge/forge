@@ -14,6 +14,8 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 
 SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.Human+Other+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink
 
+DeckHints:Type$Human
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herons_grace_champion.jpg
 
 Oracle:Flash\nLifelink\nWhen Heron's Grace Champion enters the battlefield, other Humans you control get +1/+1 and gain lifelink until end of turn.

@@ -8,6 +8,10 @@ PT:2/2
 
 A:AB$ PumpAll | Cost$ Discard<1/Card> | ValidCards$ Card.Vampire+YouCtrl | NumAtt$ +1 | NumDef$ +1 | ActivationLimit$ 1 | SpellDescription$ Vampires you control get +1/+1 until end of turn.
 
+DeckHints:Type$Vampire
+
+DeckHas:Ability$Discard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stromkirk_condemned.jpg
 
 Oracle:Discard a card: Vampires you control get +1/+1 until end of turn. Activate this ability only once each turn.

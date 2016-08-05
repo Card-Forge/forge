@@ -12,6 +12,8 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 
 SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.Wolf+Other+YouCtrl,Creature.Werewolf+Other+YouCtrl | NumDef$ +3
 
+DeckHints:Type$Wolf & Type$Werewolf
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_of_the_hunt.jpg
 
 Oracle:Flash\nWhen Spirit of the Hunt enters the battlefield, each other creature you control that's a Wolf or Werewolf gets +0/+3 until end of turn. 

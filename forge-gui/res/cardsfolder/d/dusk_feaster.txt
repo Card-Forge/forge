@@ -12,6 +12,10 @@ SVar:X:Count$CardControllerTypes.Graveyard
 
 K:Flying
 
+DeckHints:Ability$Graveyard & Ability$Discard
+
+DeckHas:Ability$Delirium
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_feaster.jpg
 
 Oracle:Delirium - Dusk Feaster costs {2} less to cast if there are four or more card types among cards in your graveyard.\nFlying

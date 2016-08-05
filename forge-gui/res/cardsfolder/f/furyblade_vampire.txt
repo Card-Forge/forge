@@ -12,6 +12,8 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | Trig
 
 SVar:TrigPump:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ 3
 
+DeckHints:Ability$Discard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furyblade_vampire.jpg
 
 Oracle:Trample\nAt the beginning of combat on your turn, you may discard a card. If you do, Furyblade Vampire gets +3/+0 until end of turn.

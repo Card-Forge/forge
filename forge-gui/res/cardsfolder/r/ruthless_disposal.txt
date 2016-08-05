@@ -3,6 +3,7 @@ ManaCost:4 B
 Types:Sorcery
 A:SP$ Pump | Cost$ 4 B Discard<1/Card> Sac<1/Creature> | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -13 | NumDef$ -13 | SpellDescription$ Two target creatures each get -13/-13 until end of turn.
 SVar:RemAIDeck:True
+DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_disposal.jpg
 Oracle:As an additional cost to cast Ruthless Disposal, discard a card and sacrifice a creature.\nTwo target creatures each get -13/-13 until end of turn.
 

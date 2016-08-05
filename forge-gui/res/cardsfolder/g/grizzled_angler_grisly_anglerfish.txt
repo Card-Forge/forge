@@ -14,6 +14,10 @@ SVar:X:Count$ValidGraveyard Creature.YouOwn+Colorless
 
 AlternateMode:DoubleFaced
 
+DeckHints:Ability$Delirium & Color$Colorless
+
+DeckHas:Ability$Graveyard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzled_angler.jpg
 
 Oracle:{T}: Put the top two cards of your library into your graveyard. Then if there is a colorless creature card in your graveyard, transform Grizzled Angler.

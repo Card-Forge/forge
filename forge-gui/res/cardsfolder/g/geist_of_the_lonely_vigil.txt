@@ -12,6 +12,10 @@ K:Flying
 
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Condition$ Delirium | Description$ Delirium - CARDNAME can attack as though it didn't have defender as long as there are four or more card types among cards in your graveyard.
 
+DeckHints:Ability$Graveyard & Ability$Discard
+
+DeckHas:Ability$Delirium
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_of_the_lonely_vigil.jpg
 
 Oracle:Defender, flying\nDelirium - Geist of the Lonely Vigil can attack as though it didn't have defender as long as there are four or more card types among cards in your graveyard.

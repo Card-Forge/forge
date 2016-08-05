@@ -6,5 +6,7 @@ SVar:Separate:DB$ TwoPiles | Defined$ You | Separator$ TargetedPlayer | Chooser$
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Ability$Delirium
+DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fortunes_favor.jpg
 Oracle:Target opponent looks at the top four cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard.

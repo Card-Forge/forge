@@ -14,6 +14,8 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 
 SVar:RemAIDeck:True
 
+DeckHints:Type$Zombie
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptbreaker.jpg
 
 Oracle:{1}{B}, {T}, Discard a card: Put a 2/2 black Zombie creature token onto the battlefield.\nTap three untapped Zombies you control: You draw a card and you lose 1 life.

@@ -8,6 +8,8 @@ PT:3/3
 
 K:Madness:2 B
 
+DeckHints:Ability$Discard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weirded_vampire.jpg
 
 Oracle:Madness {2}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

@@ -14,6 +14,10 @@ SVar:SacMe:2
 
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | Condition$ Delirium | Description$ Delirium - CARDNAME gets +3/+0 as long as there are four or more card types among cards in your graveyard.
 
+DeckHints:Ability$Graveyard & Ability$Discard
+
+DeckHas:Ability$Delirium
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_sentry.jpg
 
 Oracle:When Desperate Sentry dies, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.\nDelirium - Desperate Sentry gets +3/+0 as long as there are four or more card types among cards in your graveyard.

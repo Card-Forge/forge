@@ -12,6 +12,8 @@ SVar:X:Count$TypeYouCtrl.Vampire
 
 SVar:RemRandomDeck:True
 
+DeckHints:Type$Vampire
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stensia_banquet.jpg
 
 Oracle:Stensia Banquet deals damage to target opponent equal to the number of Vampires you control.\nDraw a card.

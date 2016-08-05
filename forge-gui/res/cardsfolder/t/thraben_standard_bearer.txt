@@ -8,6 +8,8 @@ PT:1/1
 
 A:AB$ Token | Cost$ 1 W T Discard<1/Card> | TokenAmount$ 1 | TokenName$ Human Soldier | TokenOwner$ You | TokenTypes$ Creature,Human,Soldier | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Human Soldier creature token onto the battlefield.
 
+DeckHints:Ability$Discard
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_standard_bearer.jpg
 
 Oracle:{1}{W}, {T}, Discard a card: Put a 1/1 white Human Soldier creature token onto the battlefield.
