@@ -263,6 +263,7 @@ public final class CardUtil {
         newCopy.getCurrentState().copyFrom(in, in.getState(in.getCurrentStateName()));
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);
+            newCopy.getState(CardStateName.Cloner).copyFrom(in, in.getState(CardStateName.Cloner));
         }
 
         newCopy.setZone(in.getZone());
