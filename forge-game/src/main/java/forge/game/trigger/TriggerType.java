@@ -28,6 +28,7 @@ public enum TriggerType {
     Championed(TriggerChampioned.class),
     ChangesController(TriggerChangesController.class),
     ChangesZone(TriggerChangesZone.class),
+    ChangesZoneAll(TriggerChangesZoneAll.class),
     Clashed(TriggerClashed.class),
     CombatDamageDoneOnce(TriggerCombatDamageDoneOnce.class),
     CounterAdded(TriggerCounterAdded.class),

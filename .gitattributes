@@ -672,6 +672,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerBlocks.java svneol=native#tex
 forge-game/src/main/java/forge/game/trigger/TriggerChampioned.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerChangesController.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerChangesZone.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerChangesZoneAll.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerClashed.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerCombatDamageDoneOnce.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCounterAdded.java svneol=native#text/plain

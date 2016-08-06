@@ -318,8 +318,13 @@ public class TriggerHandler {
 
         if (runParams.containsKey("Destination")) {
             // Check static abilities when a card enters the battlefield
-            final String type = (String) runParams.get("Destination");
-            checkStatics |= type.equals("Battlefield");
+            if (runParams.get("Destination") instanceof String) {
+	            final String type = (String) runParams.get("Destination");
+	            checkStatics |= type.equals("Battlefield");
+            } else {
+                final ZoneType zone = (ZoneType) runParams.get("Destination");
+                checkStatics |= zone.equals(ZoneType.Battlefield);
+            }
         }
 
         // AP 
