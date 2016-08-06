@@ -1,6 +1,7 @@
 package forge.player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.FThreads;
 import forge.card.mana.ManaCost;
@@ -58,6 +60,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPayMana;
 import forge.match.input.InputPayManaOfCostPayment;
@@ -500,6 +503,8 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostExile) {
+                final CardCollection exiledList = new CardCollection();
+                ZoneType from = ZoneType.Graveyard;
                 if ("All".equals(part.getType())) {
                     if (!p.getController().confirmPayment(part, "Do you want to exile all cards in your graveyard?")) {
                         return false;
@@ -507,12 +512,12 @@ public class HumanPlay {
 
                     CardCollection cards = new CardCollection(p.getCardsIn(ZoneType.Graveyard));
                     for (final Card card : cards) {
-                        p.getGame().getAction().exile(card);
+                        exiledList.add(p.getGame().getAction().exile(card));
                     }
                 }
                 else {
                     CostExile costExile = (CostExile) part;
-                    ZoneType from = costExile.getFrom();
+                    from = costExile.getFrom();
                     List<Card> list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
                     final int nNeeded = getAmountFromPart(costPart, source, sourceAbility);
                     if (list.size() < nNeeded) {
@@ -527,18 +532,27 @@ public class HumanPlay {
                         for (Card c : list) {
                             p.getGame().getAction().exile(c);
                         }
-                        return true;
-                    }
-                    // replace this with input
-                    for (int i = 0; i < nNeeded; i++) {
-                        final Card c = p.getGame().getCard(SGuiChoose.oneOrNone("Exile from " + from, CardView.getCollection(list)));
-                        if (c == null) {
-                            return false;
-                        }
+                    } else {
+                        // replace this with input
+                        for (int i = 0; i < nNeeded; i++) {
+                            final Card c = p.getGame().getCard(SGuiChoose.oneOrNone("Exile from " + from, CardView.getCollection(list)));
+                            if (c == null) {
+                                return false;
+                            }
 
-                        list.remove(c);
-                        p.getGame().getAction().exile(c);
+                            list.remove(c);
+                            exiledList.add(p.getGame().getAction().exile(c));
+                        }
                     }
+                }
+
+                if (!exiledList.isEmpty()) {
+                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
+                    triggerList.put(from, exiledList);
+                    runParams.put("Cards", triggerList);
+                    runParams.put("Destination", ZoneType.Exile);
+                    p.getGame().getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
                 }
             }
             else if (part instanceof CostPutCardToLib) {
@@ -708,9 +722,22 @@ public class HumanPlay {
     private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
         if (!manaInputCancelled && !cardsToDelve.isEmpty()) {
             Card hostCard = ability.getHostCard();
+            final Game game = hostCard.getGame();
+
+            final CardCollection delved = new CardCollection();
+            final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
+
             for (final Card c : cardsToDelve) {
                 hostCard.addDelved(c);
-                hostCard.getGame().getAction().exile(c);
+                delved.add(game.getAction().exile(c));
+            }
+
+            if (!delved.isEmpty()) {
+                triggerList.put(ZoneType.Graveyard, delved);
+                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                runParams.put("Cards", triggerList);
+                runParams.put("Destination", ZoneType.Exile);
+                game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
             }
         }
         if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
