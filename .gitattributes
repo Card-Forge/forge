@@ -12013,6 +12013,7 @@ forge-gui/res/cardsfolder/r/raksha_golden_cub.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/raksha_golden_cub_avatar.txt -text
 forge-gui/res/cardsfolder/r/rakshasa_deathdealer.txt -text
 forge-gui/res/cardsfolder/r/rakshasa_gravecaller.txt -text
+forge-gui/res/cardsfolder/r/rakshasa_vizier.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/r/rakshasas_disdain.txt -text
 forge-gui/res/cardsfolder/r/rakshasas_secret.txt -text
 forge-gui/res/cardsfolder/r/ral_zarek.txt -text
