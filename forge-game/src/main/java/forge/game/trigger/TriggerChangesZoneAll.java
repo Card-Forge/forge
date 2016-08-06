@@ -48,7 +48,7 @@ public class TriggerChangesZoneAll extends Trigger {
 
         if (this.mapParams.containsKey("ValidCards")) {
             
-            int count = CardLists.getValidCardCount(allCards, this.mapParams.get("ValidCard").split(","),this.getHostCard().getController(),
+            int count = CardLists.getValidCardCount(allCards, this.mapParams.get("ValidCards").split(","),this.getHostCard().getController(),
                     this.getHostCard());
             if (count == 0) {
                 return false;
@@ -81,7 +81,7 @@ public class TriggerChangesZoneAll extends Trigger {
         }
 
         if (this.mapParams.containsKey("ValidCards")) {
-            allCards = CardLists.getValidCards(allCards, this.mapParams.get("ValidCard").split(","),this.getHostCard().getController(),
+            allCards = CardLists.getValidCards(allCards, this.mapParams.get("ValidCards").split(","),this.getHostCard().getController(),
                     this.getHostCard(), sa);
         }
 

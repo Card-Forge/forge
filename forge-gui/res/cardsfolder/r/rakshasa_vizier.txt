@@ -2,8 +2,7 @@ Name:Rakshasa Vizier
 ManaCost:2 B G U
 Types:Creature Cat Demon
 PT:4/4
-
-T:Mode$ ChangesZoneAll | ValidCard$ Card.YouOwn | Origin$ Graveyard | Destination$ Exile | TriggerZones$ Battlefield | Execute$ TrigPutcounter | TriggerDescription$ Whenever one or more cards are put into exile from your graveyard, put that many +1/+1 counters on Rakshasa Vizier.
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Exile | TriggerZones$ Battlefield | Execute$ TrigPutcounter | TriggerDescription$ Whenever one or more cards are put into exile from your graveyard, put that many +1/+1 counters on Rakshasa Vizier.
 SVar:TrigPutcounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Self | CounterNum$ X | References$ X 
 SVar:X:TriggerCount$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakshasa_vizier.jpg
