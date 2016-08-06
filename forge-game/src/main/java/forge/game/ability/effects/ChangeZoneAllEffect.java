@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -14,11 +15,13 @@ import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
     @Override
@@ -128,7 +131,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
         // movedCards should have same timestamp
         long ts = game.getNextTimestamp();
+        final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
         for (final Card c : cards) {
+            final Zone originZone = game.getZoneOf(c);
+
             if (destination == ZoneType.Battlefield) {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
@@ -147,7 +153,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer());
             } else {
                 movedCard = game.getAction().moveTo(destination, c, libraryPos);
-                if (!c.isToken()) {
+                if (destination == ZoneType.Exile && !c.isToken()) {
                     Card host = sa.getOriginalHost();
                     if (host == null) {
                         host = sa.getHostCard();
@@ -184,6 +190,20 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (destination == ZoneType.Battlefield) {
                 movedCard.setTimestamp(ts);
             }
+            
+            if (!movedCard.getZone().equals(originZone)) {
+                if (!triggerList.containsKey(originZone.getZoneType())) {
+                    triggerList.put(originZone.getZoneType(), new CardCollection());
+                }
+                triggerList.get(originZone.getZoneType()).add(movedCard);
+            }
+        }
+
+        if (!triggerList.isEmpty()) {
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Cards", triggerList);
+            runParams.put("Destination", destination);
+            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
         }
 
         // if Shuffle parameter exists, and any amount of cards were owned by
