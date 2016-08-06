@@ -18,10 +18,12 @@
 package forge.player;
 
 import java.util.Collections;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -36,6 +38,7 @@ import forge.game.cost.CostPayment;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
+import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -80,6 +83,7 @@ public class HumanPlaySpellAbility {
         final boolean playerManaConversion = human.hasManaConversion()
                 && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
 
+        boolean keywordColor = false;
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
 
@@ -106,6 +110,24 @@ public class HumanPlaySpellAbility {
             AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_MANA_CONVERSION);
             human.incNumManaConversion();
         }
+        
+        if (ability.isAbility() && ability instanceof AbilityActivated) {
+        	final Map<String, String> params = Maps.newHashMap();
+        	params.put("ManaColorConversion", "Additive");
+
+            for (String keyword : c.getKeywords()) {
+                if (keyword.startsWith("ManaConvert")) {
+                    final String[] k = keyword.split(":");
+                    params.put(k[1] + "Conversion", k[2]);
+                    keywordColor = true;
+                }
+            }
+
+            if (keywordColor) {
+                AbilityUtils.applyManaColorConversion(human, params);
+            }
+        }
+
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         final boolean prerequisitesMet = announceValuesLikeX()
@@ -124,7 +146,7 @@ public class HumanPlaySpellAbility {
                     ability.getHostCard().unanimateBestow();
                 }
             }
-            if (manaConversion) {
+            if (manaConversion || keywordColor) {
                 manapool.restoreColorReplacements();
             }
             if (playerManaConversion) {
@@ -150,7 +172,7 @@ public class HumanPlaySpellAbility {
             if (mayChooseTargets) {
                 clearTargets(ability);
             }
-            if (manaConversion) {
+            if (manaConversion || keywordColor) {
                 manapool.restoreColorReplacements();
             }
         }
