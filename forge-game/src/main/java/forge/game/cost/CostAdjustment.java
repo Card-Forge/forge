@@ -1,11 +1,14 @@
 package forge.game.cost;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
@@ -27,6 +30,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 public class CostAdjustment {
@@ -150,9 +154,9 @@ public class CostAdjustment {
         boolean isStateChangeToFaceDown = false;
         if (sa.isSpell()) {
             if (((Spell) sa).isCastFaceDown()) {
-            	// Turn face down to apply cost modifiers correctly
-            	originalCard.setState(CardStateName.FaceDown, false);
-            	isStateChangeToFaceDown = true;
+                // Turn face down to apply cost modifiers correctly
+                originalCard.setState(CardStateName.FaceDown, false);
+                isStateChangeToFaceDown = true;
             }
         } // isSpell
 
@@ -179,7 +183,7 @@ public class CostAdjustment {
 
         // Reduce cost
         for (final StaticAbility stAb : reduceAbilities) {
-        	applyReduceCostAbility(stAb, sa, cost);
+            applyReduceCostAbility(stAb, sa, cost);
         }
         if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
             adjustCostByOffering(cost, sa);
@@ -195,6 +199,8 @@ public class CostAdjustment {
         if (sa.isSpell()) {
             if (sa.isDelve()) {
                 sa.getHostCard().clearDelved();
+
+                final CardCollection delved = new CardCollection();
                 final Player pc = sa.getActivatingPlayer();
                 final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
                 final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.GENERIC), mutableGrave);
@@ -204,8 +210,16 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        pc.getGame().getAction().exile(c);
+                        delved.add(game.getAction().exile(c));
                     }
+                }
+                if (!delved.isEmpty()) {
+                    final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
+                    triggerList.put(ZoneType.Graveyard, delved);
+                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    runParams.put("Cards", triggerList);
+                    runParams.put("Destination", ZoneType.Exile);
+                    game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
                 }
             }
             else if (sa.getHostCard().hasKeyword("Convoke")) {
@@ -215,7 +229,7 @@ public class CostAdjustment {
 
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
-        	originalCard.setState(CardStateName.Original, false);
+            originalCard.setState(CardStateName.Original, false);
         }
     }
     // GetSpellCostChange
@@ -394,7 +408,7 @@ public class CostAdjustment {
         }
 
         if (params.containsKey("Type")) {
-        	final String type = params.get("Type");
+            final String type = params.get("Type");
             if (type.equals("Spell")) {
                 if (!sa.isSpell()) {
                     return false;
