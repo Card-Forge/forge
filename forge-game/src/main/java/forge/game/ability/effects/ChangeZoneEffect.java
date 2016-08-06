@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -33,6 +34,7 @@ import forge.util.MessageUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
     @Override
@@ -409,7 +411,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         final long ts = game.getNextTimestamp();
-
+        final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
+        
         for (final Card tgtC : tgtCards) {
             if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
@@ -583,15 +586,29 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            if (remember != null && !movedCard.getZone().equals(originZone)) {
-                hostCard.addRemembered(movedCard);
+            if (!movedCard.getZone().equals(originZone)) {
+                if (!triggerList.containsKey(originZone.getZoneType())) {
+                    triggerList.put(originZone.getZoneType(), new CardCollection());
+                }
+                triggerList.get(originZone.getZoneType()).add(movedCard);
+
+                if (remember != null) {
+                    hostCard.addRemembered(movedCard);
+                }
+                if (forget != null) {
+                    hostCard.removeRemembered(movedCard);
+                }
+                if (imprint != null) {
+                    hostCard.addImprintedCard(movedCard);
+                }
             }
-            if (forget != null && !movedCard.getZone().equals(originZone)) {
-                hostCard.removeRemembered(movedCard);
-            }
-            if (imprint != null && !movedCard.getZone().equals(originZone)) {
-                hostCard.addImprintedCard(movedCard);
-            }
+        }
+
+        if (!triggerList.isEmpty()) {
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Cards", triggerList);
+            runParams.put("Destination", destination);
+            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
         }
 
         // for things like Gaea's Blessing
@@ -897,8 +914,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         CardCollection movedCards = new CardCollection();
         long ts = game.getNextTimestamp();
+        final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
         for (Card c : chosenCards) {
             Card movedCard = null;
+            final Zone originZone = game.getZoneOf(c);
             if (destination.equals(ZoneType.Library)) {
                 movedCard = game.getAction().moveToLibrary(c, libraryPos);
             }
@@ -1051,6 +1070,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             
             movedCards.add(movedCard);
 
+            if (!triggerList.containsKey(originZone.getZoneType())) {
+                triggerList.put(originZone.getZoneType(), new CardCollection());
+            }
+            triggerList.get(originZone.getZoneType()).add(movedCard);
+
             if (champion) {
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 runParams.put("Card", source);
@@ -1079,6 +1103,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
             player.shuffle(sa);
         }
+
+        if (!triggerList.isEmpty()) {
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Cards", triggerList);
+            runParams.put("Destination", destination);
+            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
+        }
+        
     }
 
     /**
