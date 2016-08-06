@@ -3,12 +3,11 @@ ManaCost:3 R
 Types:Legendary Creature Goblin Advisor
 PT:3/2
 A:AB$ Token | Cost$ Sac<2/Mountain> | TokenAmount$ 2 | TokenPower$ 1 | TokenName$ Goblin | TokenToughness$ 1 | TokenColors$ Red | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenImage$ r 1 1 goblin TSP | SpellDescription$ Put two 1/1 red Goblin creature tokens onto the battlefield.
-T:Mode$ Blocks | ValidCard$ Creature.YouDontCtrl | ValidBlocked$ Goblin.YouCtrl+Other | Execute$ HalfHeartTrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Goblin you control becomes blocked, sacrifice it. If you do, it deals 4 damage to each creature blocking it.
+T:Mode$ AttackerBlocked | ValidCard$ Goblin.YouCtrl+Other | Execute$ HalfHeartTrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Goblin you control becomes blocked, sacrifice it. If you do, it deals 4 damage to each creature blocking it.
 SVar:HalfHeartTrigSacrifice:AB$ Sacrifice | Cost$ 0 | SacValid$ TriggeredAttacker | RememberSacrificed$ True | SubAbility$ HalfHeartDBDamage
-SVar:HalfHeartDBDamage:DB$ DealDamage | DamageSource$ TriggeredAttacker | NumDmg$ 4 | Defined$ TriggeredBlocker | ConditionCheckSVar$ GoblinX | ConditionSVarCompare$ EQ1 | References$ GoblinX
-T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute$ DBCleanup | TriggerZones$ Battlefield | Static$ True | Secondary$ True | TriggerDescription$ Clear Remembered List
+SVar:HalfHeartDBDamage:DB$ DealDamage | DamageSource$ TriggeredAttacker | NumDmg$ 4 | Defined$ TriggeredBlockers | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:GoblinX:TriggeredAttacker$Valid Card.IsRemembered
+SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ib_halfheart_goblin_tactician.jpg
 Oracle:Whenever another Goblin you control becomes blocked, sacrifice it. If you do, it deals 4 damage to each creature blocking it.\nSacrifice two Mountains: Put two 1/1 red Goblin creature tokens onto the battlefield.
