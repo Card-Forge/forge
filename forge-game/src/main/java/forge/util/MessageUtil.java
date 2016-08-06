@@ -42,7 +42,7 @@ public class MessageUtil {
                 final boolean random = sa.hasParam("Random");
                 return String.format(random ? "Randomly chosen number for %s is %s" : "%s chooses number: %s", mayBeYou(player, target), value);
             case ChooseType:
-                return String.format("%s choose %s for effect of %s", choser, value, sa.getHostCard().getName());
+                return String.format("%s chooses %s for effect of %s", choser, value, sa.getHostCard().getName());
             case FlipACoin:
                 String flipper = StringUtils.capitalize(mayBeYou(player, target));
                 return sa.hasParam("NoCall")
