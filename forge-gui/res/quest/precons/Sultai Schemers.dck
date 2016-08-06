@@ -1,0 +1,47 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sultai Schemers
+Description=The Sultai Brood - represented by the fang of the dragon - is ruthless and pitiless, seeking power and wealth in all forms. The Sultai think nothing of making a profitable pact with demons, nor using necromancy to crush their enemies with the power of the grave.
+Deck Type=constructed
+Set=KTK
+Image=sultai_schemers.jpg
+[Main]
+7 Swamp|KTK
+8 Forest|KTK
+6 Island|KTK
+1 Jungle Hollow|KTK
+2 Opulent Palace|KTK
+1 Thornwood Falls|KTK
+1 Typhoid Rats|M15
+1 Black Cat|M15
+1 Walking Corpse|M15
+2 Satyr Wayfinder|M15
+1 Wall of Mulch|M15
+1 Research Assistant|M15
+2 Necromancer's Assistant|M15
+1 Gravedigger|M15
+1 Rotfeaster Maggot|M15
+1 Rakshasa Vizier|KTK
+1 Sultai Soothsayer|KTK
+2 Sultai Scavenger|KTK
+2 Hooting Mandrills|KTK
+2 Shambling Attendants|KTK
+1 Necropolis Fiend|KTK
+1 Debilitating Injury|KTK
+2 Taigam's Scheming|KTK
+1 Sultai Banner|KTK
+1 Rakshasa's Secret|KTK
+1 Scout the Borders|KTK
+1 Sultai Charm|KTK
+1 Bitter Revelation|KTK
+1 Murderous Cut|KTK
+1 Throttle|KTK
+1 Become Immense|KTK
+1 Set Adrift|KTK
+1 Treasure Cruise|KTK
+1 Dead Drop|KTK
+1 Dismal Backwater|KTK
