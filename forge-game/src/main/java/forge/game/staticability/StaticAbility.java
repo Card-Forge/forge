@@ -19,11 +19,13 @@ package forge.game.staticability;
 
 import forge.card.MagicColor;
 import forge.game.CardTraitBase;
+import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -451,6 +453,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
      */
     public final boolean checkConditions() {
         final Player controller = this.hostCard.getController();
+        final Game game = controller.getGame();
 
         if (this.hostCard.isPhasedOut()) {
             return false;
@@ -511,6 +514,24 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             }
             final Card topCard = controller.getCardsIn(ZoneType.Library).get(0);
             if (!topCard.isValid(this.mapParams.get("TopCardOfLibraryIs").split(","), controller, this.hostCard, null)) {
+                return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("isPresent")) {
+        	final ZoneType zone = mapParams.containsKey("PresentZone") ? ZoneType.valueOf(mapParams.get("PresentZone")) : ZoneType.Battlefield;
+        	final String compare = mapParams.containsKey("PresentCompare") ? mapParams.get("PresentCompare") : "GE1";
+            CardCollectionView list = game.getCardsIn(zone);
+            final String present = mapParams.get("isPresent");
+
+            list = CardLists.getValidCards(list, present.split(","), controller, hostCard, null);
+
+            int right = 1;
+            final String rightString = compare.substring(2);
+            right = AbilityUtils.calculateAmount(hostCard, rightString, this);
+            final int left = list.size();
+
+            if (!Expressions.compare(left, compare, right)) {
                 return false;
             }
         }
