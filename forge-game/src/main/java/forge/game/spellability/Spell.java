@@ -17,14 +17,19 @@
  */
 package forge.game.spellability;
 
+import com.google.common.collect.Sets;
+
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.GameAction;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
@@ -78,7 +83,19 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        if (!(card.isInstant() || activator.canCastSorcery() || card.hasKeyword("Flash")
+        boolean flash = card.hasKeyword("Flash");
+
+        if (this.hasParam("Bestow") && !flash) {
+            // Rule 601.3: cast Bestow with Flash
+            // for the check the card does need to be animated
+            // otherwise the StaticAbility will not found them
+            card.animateBestow();
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(card));
+            flash |= card.hasKeyword("Flash");
+            card.unanimateBestow();
+        }
+
+        if (!(card.isInstant() || activator.canCastSorcery() || flash
                || this.getRestrictions().isInstantSpeed()
                || activator.hasKeyword("You may cast nonland cards as though they had flash.")
                || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash."))) {
