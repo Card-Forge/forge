@@ -20,7 +20,6 @@ package forge.game.card;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardStateName;
-import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.CardType;
@@ -366,14 +365,14 @@ public class CardFactory {
         triggerSB.append("that planar deck and turn it face up");
 
         StringBuilder saSB = new StringBuilder();
-        saSB.append("AB$ RollPlanarDice | Cost$ X | References$ X | SorcerySpeed$ True | AnyPlayer$ True | ActivationZone$ Command | ");
+        saSB.append("AB$ RollPlanarDice | Cost$ PlanarDiceCostX | References$ PlanarDiceCostX | SorcerySpeed$ True | AnyPlayer$ True | ActivationZone$ Command | ");
         saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");        
 
         card.setSVar("RolledWalk", "DB$ Planeswalk | Cost$ 0");
         Trigger planesWalkTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
         card.addTrigger(planesWalkTrigger);
 
-        card.setSVar("X", "Count$RolledThisTurn");
+        card.setSVar("PlanarDiceCostX", "Count$RolledThisTurn");
         SpellAbility planarRoll = AbilityFactory.getAbility(saSB.toString(), card);
         card.addSpellAbility(planarRoll);
     }
