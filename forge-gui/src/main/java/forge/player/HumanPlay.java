@@ -530,7 +530,7 @@ public class HumanPlay {
                         }
                         list = list.subList(0, nNeeded);
                         for (Card c : list) {
-                            p.getGame().getAction().exile(c);
+                            exiledList.add(p.getGame().getAction().exile(c));
                         }
                     } else {
                         // replace this with input
