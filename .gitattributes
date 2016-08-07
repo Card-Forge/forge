@@ -8660,6 +8660,7 @@ forge-gui/res/cardsfolder/k/killing_wave.txt -text
 forge-gui/res/cardsfolder/k/kiln_fiend.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kiln_walker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kilnmouth_dragon.txt -text
+forge-gui/res/cardsfolder/k/kilnspire_district.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/k/kin_tree_invocation.txt -text
 forge-gui/res/cardsfolder/k/kin_tree_warden.txt -text
 forge-gui/res/cardsfolder/k/kindercatch.txt -text
