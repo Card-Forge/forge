@@ -537,8 +537,14 @@ public class ComputerUtil {
         	if(!source.getActivatingPlayer().isOpponentOf(ai)) {
         		return sacrificed; // sacrifice none 
         	}
-        } else if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) { 
-            return sacrificed; // sacrifice none 
+        } else if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) {
+            if ("Pillar Tombs of Aku".equals(host.getName())) {
+                if (!ai.canLoseLife() || ai.cantLose()) {
+                    return sacrificed; // sacrifice none
+                }
+            } else {
+                return sacrificed; // sacrifice none
+            }
         }
 
         if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit")) {
@@ -596,7 +602,7 @@ public class ComputerUtil {
     private static Card chooseCardToSacrifice(final CardCollection remaining, final Player ai, final boolean destroy) {
         // If somehow ("Drop of Honey") they suggest to destroy opponent's card - use the chance!
         for (Card c : remaining) { // first compare is fast, second is precise
-            if (c.getController() != ai && ai.getOpponents().contains(c.getController()))
+            if (ai.isOpponentOf(c.getController()))
                 return c;
         }
         
