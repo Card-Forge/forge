@@ -1,0 +1,18 @@
+Name:Pillar Tombs of Aku
+ManaCost:2 B B
+Types:World Enchantment
+
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player may sacrifice a creature. If that player doesn't, he or she loses 5 life and you sacrifice CARDNAME.
+
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ TriggeredPlayer | RememberSacrificed$ True | Optional$ True | SubAbility$ DBLoseLife
+
+SVar:DBLoseLife:DB$ LoseLife  | Defined$ TriggeredPlayer | LifeAmount$ 5 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBSacSelf
+
+SVar:DBSacSelf:DB$ Sacrifice | SacValid$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pillar_tombs_of_aku.jpg
+Oracle:At the beginning of each player's upkeep, that player may sacrifice a creature. If that player doesn't, he or she loses 5 life and you sacrifice Pillar Tombs of Aku.
+
