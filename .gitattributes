@@ -16520,6 +16520,7 @@ forge-gui/res/cardsfolder/v/volcanic_fallout.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volcanic_geyser.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volcanic_hammer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volcanic_island.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/v/volcanic_offering.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/v/volcanic_rambler.txt -text
 forge-gui/res/cardsfolder/v/volcanic_rush.txt -text
 forge-gui/res/cardsfolder/v/volcanic_spray.txt svneol=native#text/plain
