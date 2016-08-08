@@ -166,8 +166,14 @@ public class DamageDealAi extends DamageAiBase {
             //return null;
         }
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
-        List<Card> hPlay = CardLists.getValidCards(pl.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source, sa);
+        final Game game = source.getGame();
+        List<Card> hPlay = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), activator, source, sa);
+
+        if (activator.equals(ai)) {
+            hPlay = CardLists.filterControlledBy(hPlay, pl);
+        }
 
         final List<GameObject> objects = Lists.newArrayList(sa.getTargets().getTargets());
         if (sa.hasParam("TargetUnique")) {
@@ -193,7 +199,7 @@ public class DamageDealAi extends DamageAiBase {
         });
 
         Card targetCard = null;
-        if (pl.isOpponentOf(ai) && !killables.isEmpty()) {
+        if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
             if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
                 targetCard = ComputerUtilCard.getBestPlaneswalkerAI(killables);
             }
@@ -209,7 +215,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (!hPlay.isEmpty()) {
-            if (pl.isOpponentOf(ai)) {
+            if (pl.isOpponentOf(ai) && activator.equals(ai)) {
                 if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
                     targetCard = ComputerUtilCard.getBestPlaneswalkerAI(hPlay);
                 }
