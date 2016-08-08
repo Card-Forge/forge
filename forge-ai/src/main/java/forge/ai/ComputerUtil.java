@@ -1543,6 +1543,14 @@ public class ComputerUtil {
             return handList.size();
         }
 
+        CardCollectionView library = ai.getZone(ZoneType.Library).getCards();
+        int landsInDeck = CardLists.filter(library, CardPredicates.isType("Land")).size();
+
+        // no land deck, can't do anything better
+        if (landsInDeck == 0) {
+            return handList.size();
+        }
+
         final CardCollectionView lands = CardLists.filter(handList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -1580,9 +1588,6 @@ public class ComputerUtil {
         if (handSize == aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD) && landSize > 0) {
             return score;
         }
-
-        CardCollectionView library = ai.getZone(ZoneType.Library).getCards();
-        int landsInDeck = CardLists.filter(library, CardPredicates.isType("Land")).size();
 
         // otherwise, reject bad hands or return score
         if ( landSize < 2) {
