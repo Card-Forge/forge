@@ -404,10 +404,14 @@ public class TriggerHandler {
         }
 
         if (!regtrig.zonesCheck(game.getZoneOf(regtrig.getHostCard()))) {
+            final Map<String, String> params = regtrig.getMapParams();
+            final Card hostCard = regtrig.getHostCard(); 
             if (!(regtrig instanceof TriggerChangesZone &&
-                    regtrig.getHostCard().getZone().is(ZoneType.Graveyard) &&
+                    "Battlefield".equals(params.get("Origin")) &&
+                    "Graveyard".equals(params.get("Destination")) &&
+                    hostCard.getZone().is(ZoneType.Graveyard) &&
                     regtrig.getActiveZone().contains(ZoneType.Battlefield) &&
-                    game.getLastStateBattlefield().contains(regtrig.getHostCard()))) {
+                    game.getLastStateBattlefield().contains(hostCard))) {
                 return false; // Host card isn't where it needs to be.
             }
         }
