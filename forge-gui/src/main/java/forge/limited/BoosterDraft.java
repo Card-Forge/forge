@@ -95,11 +95,6 @@ public class BoosterDraft implements IBoosterDraft {
             if (block == null) { return false; }
 
             final List<CardEdition> cardSets = block.getSets();
-            if (cardSets.isEmpty()) {
-                SOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
-                return false;
-            }
-
             final Stack<String> sets = new Stack<>();
             for (int k = cardSets.size() - 1; k >= 0; k--) {
                 sets.add(cardSets.get(k).getCode());
@@ -109,6 +104,11 @@ public class BoosterDraft implements IBoosterDraft {
                 if (block.getMetaSet(setCode).isDraftable()) {
                     sets.push(setCode); // to the beginning
                 }
+            }
+
+            if (sets.isEmpty()) {
+                SOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
+                return false;
             }
 
             final int nPacks = block.getCntBoostersDraft();
@@ -279,7 +279,7 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public void addSingleBoosterPack(int player, boolean random) {
-        // TODO Cogwork Librarian
+        // TODO Lore Seeker
     }
 
     // size 7, all the computers decks

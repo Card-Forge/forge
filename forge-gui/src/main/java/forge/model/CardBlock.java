@@ -226,7 +226,7 @@ public final class CardBlock implements Comparable<CardBlock> {
         /**
          * TODO: Write javadoc for Constructor.
          * @param pathname
-         * @param keySelector0
+         * @param editions0
          */
         public Reader(String pathname, CardEdition.Collection editions0) {
             super(pathname, CardBlock.FN_GET_NAME);
@@ -255,7 +255,7 @@ public final class CardBlock implements Comparable<CardBlock> {
                     String metaSpec = set.substring(5);
                     boolean noDraft = metaSpec.startsWith("NoDraft-");
                     if( noDraft ) metaSpec = metaSpec.substring(8);
-                    metas.add(new MetaSet(metaSpec, noDraft));
+                    metas.add(new MetaSet(metaSpec, !noDraft));
                 } else {
                     sets.add(editions.getEditionByCodeOrThrow(set));
                 }
