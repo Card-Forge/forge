@@ -144,6 +144,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private StaticAbility mayPlay = null;
 
+    private CardCollection lastStateBattlefield = null;
+
+    public CardCollection getLastStateBattlefield() {
+        return lastStateBattlefield;
+    }
+
+    public void setLastStateBattlefield(final CardCollectionView lastStateBattlefield) {
+        this.lastStateBattlefield = new CardCollection(lastStateBattlefield);
+    }
+
     protected SpellAbility(final Card iSourceCard, final Cost toPay) {
         this(iSourceCard, toPay, null);
     }
