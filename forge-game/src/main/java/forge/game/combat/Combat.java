@@ -680,6 +680,8 @@ public class Combat {
     }
 
     public void dealAssignedDamage() {
+    	playerWhoAttacks.getGame().copyLastStateBattlefield();
+
         // This function handles both Regular and First Strike combat assignment
         final HashMap<Card, Integer> defMap = defendingDamageMap;
         final HashMap<GameEntity, CardCollection> wasDamaged = new HashMap<GameEntity, CardCollection>();
