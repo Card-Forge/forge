@@ -3,6 +3,6 @@ ManaCost:7 G G
 Types:Creature Spirit
 PT:8/5
 K:Trample
-K:Soulshift 8
+K:Soulshift:8
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_of_jukai.jpg
 Oracle:Trample\nSoulshift 8 (When this creature dies, you may return target Spirit card with converted mana cost 8 or less from your graveyard to your hand.)

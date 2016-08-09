@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Spirit
 PT:4/4
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G
-K:Soulshift 3
+K:Soulshift:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_tended_garden.jpg
 Oracle:At the beginning of your upkeep, sacrifice Kami of the Tended Garden unless you pay {G}.\nSoulshift 3 (When this creature dies, you may return target Spirit card with converted mana cost 3 or less from your graveyard to your hand.)

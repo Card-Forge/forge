@@ -2,7 +2,7 @@ Name:Moonlit Strider
 ManaCost:3 W
 Types:Creature Spirit
 PT:1/4
-K:Soulshift 3
+K:Soulshift:3
 A:AB$ Protection | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlit_strider.jpg

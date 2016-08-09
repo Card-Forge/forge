@@ -2,6 +2,6 @@ Name:Kami of Empty Graves
 ManaCost:3 B
 Types:Creature Spirit
 PT:4/1
-K:Soulshift 3
+K:Soulshift:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_empty_graves.jpg
 Oracle:Soulshift 3 (When this creature dies, you may return target Spirit card with converted mana cost 3 or less from your graveyard to your hand.)

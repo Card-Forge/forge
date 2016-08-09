@@ -2,6 +2,6 @@ Name:Nightsoil Kami
 ManaCost:4 G G
 Types:Creature Spirit
 PT:6/4
-K:Soulshift 5
+K:Soulshift:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightsoil_kami.jpg
 Oracle:Soulshift 5 (When this creature dies, you may return target Spirit card with converted mana cost 5 or less from your graveyard to your hand.)

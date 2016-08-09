@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Creature Spirit
 PT:2/2
 K:Fear
-K:Soulshift 5
+K:Soulshift:5
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crawling_filth.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nSoulshift 5 (When this creature dies, you may return target Spirit card with converted mana cost 5 or less from your graveyard to your hand.)

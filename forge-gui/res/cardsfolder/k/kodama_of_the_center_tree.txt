@@ -2,18 +2,10 @@ Name:Kodama of the Center Tree
 ManaCost:4 G
 Types:Legendary Creature Spirit
 PT:*/*
+K:Soulshift:X:, where X is the number of Spirits you control.:Spirit.YouCtrl
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Spirits you control.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ CARDNAME has soulshift X, where X is the number of Spirits you control. (When this is put into a graveyard from the battlefield, you may return target Spirit card with converted mana cost X or less from your graveyard to your hand.)
-SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Spirit.cmcLEY | TargetsWithDefinedController$ TriggeredCardController | References$ Y
-SVar:X:Count$Valid Spirit.YouCtrl
 
-# FIXME: The following is apparently correct but crashes Forge every time when the Soulshift X trigger resolves. Was unable to fix.
-# SVar:Y:TriggeredCardController$Valid Spirit.YouCtrl
-#
-# The following doesn't work in certain cases (mass removal) and probably corner cases (maybe such as Kodama controlled by someone else rather than its owner), but doesn't crash Forge
-# and works in all basic cases (Kodama dying in combat or to a direct damage spell, for instance). Y=X+1 logic is used to account for Kodama itself (see the 2/1/2005 ruling: X is always
-# at least 1).
-SVar:Y:SVar$X/Plus.1
+SVar:X:Count$Valid Spirit.YouCtrl
 
 SVar:RemRandomDeck:True
 SVar:BuffedBy:Spirit

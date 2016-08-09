@@ -2,6 +2,6 @@ Name:Promised Kannushi
 ManaCost:G
 Types:Creature Human Druid
 PT:1/1
-K:Soulshift 7
+K:Soulshift:7
 SVar:Picture:http://www.wizards.com/global/images/magic/general/promised_kannushi.jpg
 Oracle:Soulshift 7 (When this creature dies, you may return target Spirit card with converted mana cost 7 or less from your graveyard to your hand.)
