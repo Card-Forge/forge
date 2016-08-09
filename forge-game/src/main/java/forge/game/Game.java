@@ -87,6 +87,8 @@ public class Game {
     private final GameLog gameLog = new GameLog();
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
+    
+    private CardCollection lastStateBattlefield = new CardCollection();
 
     private Direction turnOrder = Direction.getDefaultDirection();
 
@@ -98,6 +100,18 @@ public class Game {
 
     private final GameView view; 
     private final Tracker tracker = new Tracker();
+
+
+    public CardCollectionView getLastStateBattlefield() {
+        return lastStateBattlefield;
+    }
+
+    public void copyLastStateBattlefield() {
+        lastStateBattlefield.clear();
+        for (final Player p : getPlayers()) {
+            lastStateBattlefield.addAll(p.getZone(ZoneType.Battlefield).getLKICopy());
+        }
+    }
 
     public final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost) null) {
         @Override
