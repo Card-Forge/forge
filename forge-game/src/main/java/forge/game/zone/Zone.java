@@ -23,6 +23,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardUtil;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
@@ -246,5 +247,17 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     @Override
     public String toString() {
         return zoneType.toString();
+    }
+    
+    public Zone getLKICopy() {
+        Zone result = new Zone(zoneType, game);
+
+        final CardCollection list = new CardCollection();
+        for (final Card c : getCards()) {
+            list.add(CardUtil.getLKICopy(c));
+        }
+        result.setCards(list);
+
+        return result;
     }
 }
