@@ -2,11 +2,12 @@ package forge.game;
 
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
-    import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * Created by Hellfish on 2014-02-09.
@@ -26,6 +27,10 @@ public abstract class TriggerReplacementBase extends CardTraitBase {
         }
     }
 
+    public Set<ZoneType> getActiveZone() {
+        return validHostZones;
+    }
+    
     public void setActiveZone(EnumSet<ZoneType> zones) {
         validHostZones = zones;
     }
