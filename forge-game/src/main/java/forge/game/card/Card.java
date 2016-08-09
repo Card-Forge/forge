@@ -1404,12 +1404,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                     && keyword.contains(" unless you pay")) {
                 sbLong.append(keyword).append("\r\n");
             } else if (keyword.startsWith("Sunburst") && hasStartOfKeyword("Modular")) {
-            } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") || keyword.startsWith("Bloodthirst")
+            } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
             		|| keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond")) {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
+            } else if (keyword.startsWith("Soulshift")) {
+                final String[] k = keyword.split(":");
+                sbLong.append(k[0] + " " + k[1] + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.contains("Haunt")) {
                 sb.append("\r\nHaunt (");
                 if (isCreature()) {
@@ -4940,7 +4943,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             try {
                 x = Integer.parseInt(rhs);
             } catch (final NumberFormatException e) {
-                x = AbilityUtils.calculateAmount(source, source.getSVar(rhs), spellAbility);
+                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
                 // TODO: find a better solution for handling Count$TopOfLibraryCMC for split cards
                 // (currently two CMCs are encoded in one big integer value)

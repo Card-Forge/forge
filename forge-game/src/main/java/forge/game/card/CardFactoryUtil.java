@@ -2242,19 +2242,7 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(sbTransmute);
             }
             else if (keyword.startsWith("Soulshift")) {
-                final String[] k = keyword.split(" ");
-                final int manacost = Integer.parseInt(k[1]);
-
-                final String actualTrigger = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard"
-                        + "| OptionalDecider$ You | ValidCard$ Card.Self | Execute$ SoulshiftAbility"
-                        + "| TriggerController$ TriggeredCardController | TriggerDescription$ " + keyword
-                        + " (When this creature dies, you may return target Spirit card with converted mana cost "
-                        + manacost + " or less from your graveyard to your hand.)";
-                final String abString = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand"
-                        + "| ValidTgts$ Spirit.YouOwn+cmcLE" + manacost;
-                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
-                card.addTrigger(parsedTrigger);
-                card.setSVar("SoulshiftAbility", abString);
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Champion")) {
                 card.removeIntrinsicKeyword(keyword);
@@ -3079,6 +3067,28 @@ public class CardFactoryUtil {
             card.setSVar("Rampage" + n, "SVar$RampageCount/Times." + n);
 
             card.setSVar("RampageCount", "TriggerCount$NumBlockers/Minus.1");
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Soulshift")) {
+            final String[] k = keyword.split(":");
+
+            final String actualTrigger = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard"
+                    + "| Secondary$ True | OptionalDecider$ You | ValidCard$ Card.Self"
+                    + "| TriggerController$ TriggeredCardController | TriggerDescription$ " + k[0] + " " + k[1]
+                    + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            final String effect = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand"
+                    + "| ValidTgts$ Spirit.YouOwn+cmcLE" + k[1];
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
+            final SpellAbility sp = AbilityFactory.getAbility(effect, card);
+            // Soulshift X
+            if (k[1].equals("X")) {
+                sp.setSVar("X", "Count$Soulshift " + k[3]);
+            }
+
+            parsedTrigger.setOverridingAbility(sp);
+            final Trigger cardTrigger = card.addTrigger(parsedTrigger);
+
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
