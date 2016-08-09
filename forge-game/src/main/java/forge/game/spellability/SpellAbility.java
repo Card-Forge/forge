@@ -217,7 +217,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         manaPart = manaPart0;
     }
 
-    public final String getSvarWithFallback(final String name) {
+    public String getSvarWithFallback(final String name) {
         String var = sVars.get(name);
         if (var == null) {
             var = hostCard.getSVar(name);
@@ -225,7 +225,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return var;
     }
 
-    public final String getSVar(final String name) {
+    public String getSVar(final String name) {
         String var = sVars.get(name);
         if (var == null) {
             var = "";
@@ -233,7 +233,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return var;
     }
 
-    public final Integer getSVarInt(final String name) {
+    public Integer getSVarInt(final String name) {
         String var = sVars.get(name);
         if (var != null) {
             try {

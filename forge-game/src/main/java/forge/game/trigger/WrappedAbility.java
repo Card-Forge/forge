@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
@@ -267,7 +268,29 @@ public class WrappedAbility extends Ability {
         return sa.isXCost();
     }
 
+    
+    
     @Override
+	public String getSvarWithFallback(String name) {
+		return sa.getSvarWithFallback(name);
+	}
+
+	@Override
+	public String getSVar(String name) {
+		return sa.getSVar(name);
+	}
+
+	@Override
+	public Integer getSVarInt(String name) {
+		return sa.getSVarInt(name);
+	}
+
+	@Override
+	public Set<String> getSVars() {
+		return sa.getSVars();
+	}
+
+	@Override
     public void resetOnceResolved() {
         // Fixing an issue with Targeting + Paying Mana
         // sa.resetOnceResolved();
