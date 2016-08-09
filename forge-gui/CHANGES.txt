@@ -21,8 +21,6 @@ All missing card images should be available through the content downloaders now,
 Known Issues
 ------------
 
-There is a known issue with Kodama of the Center Tree: its Soulshift X ability used to crash Forge, and until a proper fix can be implemented, a temporary fix was introduced which prevents the crash but makes the Soulshift X ability work incorrectly in certain cases (in particular, it doesn't work correctly with mass removal, and it may have issues when Kodama of the Center Tree is controlled by someone else other than its owner). In the basic cases (such as Kodama of the Center Tree being destroyed in combat or with a direct damage spell) should work correctly. Hopefully one of the developers will be able to implement a better and proper fix for this card soon.
-
 There is a known issue with the cost reduction for cards that have color-locked X in their mana cost (e.g. Drain Life, Soul Burn). Cost reduction will not apply correctly to these cards if the amount by which the cost is reduced is greater than the amount of colorless mana in the mana cost specified on the card (e.g. 1 for Drain Life, 2 for Soul Burn). Fixing this issue likely requires rewriting the way announced color-locked X is interpreted and paid (most likely it has to be represented with colorless mana shards but still locked to the colors required by the card).
 
 Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
