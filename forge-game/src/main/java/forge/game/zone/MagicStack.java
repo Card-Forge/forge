@@ -497,6 +497,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         
         boolean thisHasFizzled = hasFizzled(sa, source, null);
         
+        if (!thisHasFizzled) {
+            game.copyLastStateBattlefield();
+        }
+
         if (thisHasFizzled) { // Fizzle
             if (sa.hasParam("Bestow")) {
                 // 702.102d: if its target is illegal, 
