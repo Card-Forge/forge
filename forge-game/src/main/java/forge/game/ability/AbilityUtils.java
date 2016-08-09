@@ -802,7 +802,7 @@ public class AbilityUtils {
                 char reference = valid.charAt(index + 2); // take whatever goes after EQ
                 if (Character.isLetter(reference)) {
                     String varName = valid.split(",")[0].split(t)[1].split("\\+")[0];
-                    if (source.hasSVar(varName)) {
+                    if (!sa.getSVar(varName).isEmpty() || source.hasSVar(varName)) {
                         valid = valid.replace(t + varName, t + Integer.toString(calculateAmount(source, varName, sa)));
                     }
                 }
@@ -1526,6 +1526,14 @@ public class AbilityUtils {
                         count++;
                     }
                     return count;
+                }
+
+
+                if (l[0].startsWith("Soulshift")) {
+                    final String[] k = l[0].split(" ");
+                    CardCollection list = new CardCollection(sa.getLastStateBattlefield());
+                    list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
+                    return CardFactoryUtil.doXMath(list.size(), expr, c);
                 }
 
                 // Count$TargetedLifeTotal (targeted player's life total)
