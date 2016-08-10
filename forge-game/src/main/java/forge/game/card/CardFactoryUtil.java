@@ -3049,6 +3049,20 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
+        } else if (keyword.startsWith("Poisonous")) {
+            final String[] k = keyword.split(" ");
+            final String n = k[1];
+            final String trigStr = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Secondary$ True"
+                    + " | TriggerZones$ Battlefield | TriggerDescription$ " + keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+
+            final String effect = "AB$ Poison | Cost$ 0 | Defined$ TriggeredTarget | Num$ " + n;
+            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(parsedTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
         } else if (keyword.startsWith("Rampage")) {
             final String[] k = keyword.split(" ");
             final String n = k[1];

@@ -844,7 +844,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         addDamageAfterPrevention(damageToDo, source, true); // damage prevention is already checked
 
         if (damageToDo > 0) {
-            GameActionUtil.executeCombatDamageToPlayerEffects(this, source, damageToDo);
+        	source.getDamageHistory().registerCombatDamage(this);
             return true;
         }
         return false;

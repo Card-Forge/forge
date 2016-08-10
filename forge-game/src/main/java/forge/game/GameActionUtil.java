@@ -75,55 +75,6 @@ public final class GameActionUtil {
         throw new AssertionError();
     }
 
-    // restricted to combat damage, restricted to players
-    /**
-     * <p>
-     * executeCombatDamageToPlayerEffects.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param damage
-     *            a int.
-     */
-    public static void executeCombatDamageToPlayerEffects(final Player player, final Card c, final int damage) {
-
-        if (damage <= 0) {
-            return;
-        }
-
-        for (final String key : c.getKeywords()) {
-            if (!key.startsWith("Poisonous ")) continue;
-            final String[] k = key.split(" ", 2);
-            final int poison = Integer.parseInt(k[1]);
-            // Now can be copied by Strionic Resonator
-            String effect = "AB$ Poison | Cost$ 0 | Defined$ PlayerNamed_" + player.getName() + " | Num$ " + k[1];
-            SpellAbility ability = AbilityFactory.getAbility(effect, c);
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(c);
-            sb.append(" - Poisonous: ");
-            sb.append(player);
-            sb.append(" gets ").append(poison).append(" poison counter");
-            if (poison != 1) {
-                sb.append("s");
-            }
-            sb.append(".");
-
-            ability.setActivatingPlayer(c.getController());
-            ability.setDescription(sb.toString());
-            ability.setStackDescription(sb.toString());
-            ability.setTrigger(true);
-
-            player.getGame().getStack().addSimultaneousStackEntry(ability);
-
-        }
-
-        c.getDamageHistory().registerCombatDamage(player);
-    } // executeCombatDamageToPlayerEffects
-
     /**
      * Gets the st land mana abilities.
      * @param game
