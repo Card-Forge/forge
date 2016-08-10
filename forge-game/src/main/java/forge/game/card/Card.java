@@ -4727,7 +4727,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     break;
         	    }
             }
-            if (found && property.startsWith("not")) {
+            if (found == property.startsWith("not")) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
