@@ -1479,6 +1479,16 @@ public class AbilityUtils {
             }
             if (ctb instanceof SpellAbility) {
                 final SpellAbility sa = (SpellAbility) ctb;
+
+                // special logic for xPaid in SpellAbility
+                if (sq[0].contains("xPaid")) {
+                    // ETB effects of cloned cards have xPaid = 0
+                    if (sa.hasParam("ETB") && sa.getOriginalHost() != null) {
+                        return 0;
+                    }
+                    return CardFactoryUtil.doXMath(c.getXManaCostPaid(), expr, c);
+                }
+
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
                     if (((SpellAbility)ctb).isKicked()) {
