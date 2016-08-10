@@ -5541,9 +5541,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean hasDealtDamageToOpponentThisTurn() {
-        for (final Player p : getDamageHistory().getThisTurnDamaged()) {
-            if (getController().isOpponentOf(p)) {
-                return true;
+        for (final GameEntity e : getDamageHistory().getThisTurnDamaged()) {
+        	if (e instanceof Player) {
+        	    final Player p = (Player) e;
+                if (getController().isOpponentOf(p)) {
+                    return true;
+                }
             }
         }
         return false;

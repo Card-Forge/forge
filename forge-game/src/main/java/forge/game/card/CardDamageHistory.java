@@ -1,9 +1,13 @@
 package forge.game.card;
 
+
+import forge.game.GameEntity;
 import forge.game.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -19,13 +23,15 @@ public class CardDamageHistory {
     private boolean creatureGotBlockedThisTurn = false;
     private int attacksThisTurn = 0;
 
-    private final List<Player> creatureAttackedLastTurnOf = new ArrayList<Player>();
-    private final List<Player> NotAttackedSinceLastUpkeepOf = new ArrayList<Player>();
-    private final List<Player> NotBlockedSinceLastUpkeepOf = new ArrayList<Player>();
-    private final List<Player> NotBeenBlockedSinceLastUpkeepOf = new ArrayList<Player>();
-    private final List<Player> damagedThisTurn = new ArrayList<Player>();
-    private final List<Player> damagedThisTurnInCombat = new ArrayList<Player>();
-    private final List<Player> damagedThisGame = new ArrayList<Player>();
+    private final List<Player> creatureAttackedLastTurnOf = Lists.newArrayList();
+    private final List<Player> NotAttackedSinceLastUpkeepOf = Lists.newArrayList();
+    private final List<Player> NotBlockedSinceLastUpkeepOf = Lists.newArrayList();
+    private final List<Player> NotBeenBlockedSinceLastUpkeepOf = Lists.newArrayList();
+
+    private final List<GameEntity> damagedThisCombat = Lists.newArrayList();
+    private final List<GameEntity> damagedThisTurn = Lists.newArrayList();
+    private final List<GameEntity> damagedThisTurnInCombat = Lists.newArrayList();
+    private final List<GameEntity> damagedThisGame = Lists.newArrayList();
     // used to see if an attacking creature with a triggering attack ability
     // triggered this phase:
     /**
@@ -285,22 +291,25 @@ public class CardDamageHistory {
     public final boolean getCreatureGotBlockedThisTurn() {
         return this.creatureGotBlockedThisTurn;
     }
-    public final List<Player> getThisTurnDamaged() {
+    public final List<GameEntity> getThisTurnDamaged() {
         return damagedThisTurn;
     }
-    public final List<Player> getThisTurnCombatDamaged() {
+    public final List<GameEntity> getThisTurnCombatDamaged() {
         return damagedThisTurnInCombat;
     }
-    public final List<Player> getThisGameDamaged() {
+    public final List<GameEntity> getThisGameDamaged() {
         return damagedThisGame;
     }
     /**
      * TODO: Write javadoc for this method.
      * @param player
      */
-    public void registerCombatDamage(Player player) {
-        if (!damagedThisTurnInCombat.contains(player)) {
-            damagedThisTurnInCombat.add(player);
+    public void registerCombatDamage(GameEntity entity) {
+        if (!damagedThisCombat.contains(entity)) {
+            damagedThisCombat.add(entity);
+        }
+        if (!damagedThisTurnInCombat.contains(entity)) {
+            damagedThisTurnInCombat.add(entity);
         }
     }
     /**
@@ -314,12 +323,12 @@ public class CardDamageHistory {
      * TODO: Write javadoc for this method.
      * @param player
      */
-    public void registerDamage(Player player) {
-        if (!damagedThisTurn.contains(player)) {
-            damagedThisTurn.add(player);
+    public void registerDamage(GameEntity entity) {
+        if (!damagedThisTurn.contains(entity)) {
+            damagedThisTurn.add(entity);
         }
-        if (!damagedThisGame.contains(player)) {
-            damagedThisGame.add(player);
+        if (!damagedThisGame.contains(entity)) {
+            damagedThisGame.add(entity);
         }
     }
 
