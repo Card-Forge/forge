@@ -2800,7 +2800,7 @@ public class CardFactoryUtil {
 
                 final String valid = splitkw.length >= 6 ? splitkw[5] : "Card.Self";
                 final String zone = splitkw.length >= 5 ? splitkw[4] : "";
-                createETBReplacement(card, layer, card.getSVar(splitkw[2]), optional, true, false, valid, zone);
+                createETBReplacement(card, layer, card.getSVar(splitkw[2]), optional, false, true, valid, zone);
             } else if (kw.startsWith("etbCounter")) {
                 makeEtbCounter(kw, card, true);
             } else if (kw.equals("CARDNAME enters the battlefield tapped.")) {
