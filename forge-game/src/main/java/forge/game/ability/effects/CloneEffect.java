@@ -12,6 +12,7 @@ import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
@@ -136,6 +137,20 @@ public class CloneEffect extends SpellAbilityEffect {
         
         // add extra abilities as granted by the copy effect
         addExtraCharacteristics(tgtCard, sa, origSVars);
+
+        // set the host card for copied replacement effects
+        // needed for copied xPaid ETB effects (for the copy, xPaid = 0)
+        for (final ReplacementEffect rep : tgtCard.getReplacementEffects()) {
+            final SpellAbility newSa = rep.getOverridingAbility();
+            if (newSa != null) {
+                newSa.setOriginalHost(cardToCopy);
+            }
+        }
+
+        // set the host card for copied spellabilities
+        for (final SpellAbility newSa : tgtCard.getSpellAbilities()) {
+            newSa.setHostCard(cardToCopy);
+        }
 
         // restore name if it should be unchanged
         if (keepName) {
