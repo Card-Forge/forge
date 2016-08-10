@@ -4717,7 +4717,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!hasDealtDamageToOpponentThisTurn()) {
                 return false;
             }
-        } else if (property.startsWith("dealtCombatDamageThisTurn ")) {
+        } else if (property.startsWith("dealtCombatDamageThisTurn ") || property.startsWith("notDealtCombatDamageThisTurn ")) {
             final String v = property.split(" ")[1]; 
             final List<GameEntity> list = getDamageHistory().getThisTurnCombatDamaged();
             boolean found = false;
@@ -4727,7 +4727,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     break;
         	    }
             }
-            if (!found) {
+            if (found && property.startsWith("not")) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
