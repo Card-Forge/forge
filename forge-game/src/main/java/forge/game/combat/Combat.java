@@ -101,9 +101,11 @@ public class Combat {
 
         //update view for all attackers and blockers
         for (Card c : attackers) {
+            c.getDamageHistory().endCombat();
             c.updateAttackingForView();
         }
         for (Card c : blockers) {
+            c.getDamageHistory().endCombat();
             c.updateBlockingForView();
         }
     }
@@ -736,6 +738,7 @@ public class Combat {
 
             for (final Entry<Card, Integer> entry : assignedDamageMap.entrySet()) {
                 final Card crd = entry.getKey();
+                c.getDamageHistory().registerCombatDamage(crd);
                 damageMap.put(crd, entry.getValue());
                 if (entry.getValue() > 0) {
                     if (damageDealtThisCombat.containsKey(crd)) {

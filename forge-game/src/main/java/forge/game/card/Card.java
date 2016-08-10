@@ -4717,6 +4717,19 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!hasDealtDamageToOpponentThisTurn()) {
                 return false;
             }
+        } else if (property.startsWith("dealtCombatDamageThisTurn ")) {
+            final String v = property.split(" ")[1]; 
+            final List<GameEntity> list = getDamageHistory().getThisTurnCombatDamaged();
+            boolean found = false;
+            for (final GameEntity e : list) {
+                if (e.isValid(v, sourceController, source, spellAbility)) {
+                    found = true;
+                    break;
+        	    }
+            }
+            if (!found) {
+                return false;
+            }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
             if (!source.getDamageHistory().getThisTurnCombatDamaged().contains(controller)) {
                 return false;

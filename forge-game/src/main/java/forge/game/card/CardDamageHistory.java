@@ -4,7 +4,6 @@ package forge.game.card;
 import forge.game.GameEntity;
 import forge.game.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -316,9 +315,15 @@ public class CardDamageHistory {
      * TODO: Write javadoc for this method.
      */
     public void newTurn() {
+        damagedThisCombat.clear();
         damagedThisTurnInCombat.clear();
         damagedThisTurn.clear();
     }
+
+    public void endCombat() {
+        damagedThisCombat.clear();
+    }
+
     /**
      * TODO: Write javadoc for this method.
      * @param player
