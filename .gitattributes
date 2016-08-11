@@ -6797,6 +6797,7 @@ forge-gui/res/cardsfolder/g/gleam_of_battle.txt -text
 forge-gui/res/cardsfolder/g/gleam_of_resistance.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gleancrawler.txt -text
 forge-gui/res/cardsfolder/g/gleeful_sabotage.txt -text
+forge-gui/res/cardsfolder/g/glen_elendra.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/g/glen_elendra_archmage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/glen_elendra_liege.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/glen_elendra_pranksters.txt svneol=native#text/plain
