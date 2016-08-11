@@ -3,9 +3,9 @@ ManaCost:1 W
 Types:Instant
 K:Escalate:2
 A:SP$ Charm | Cost$ 1 W | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBGainLife,DBUntap,DBSacrifice | SpellDescription$ Choose one or more - Target player gains 4 life; Untap up to two target creatures; Target opponent sacrifices an attacking creature.
-SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 4 | SpellDescription$ Target player gains 4 life.
+SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player (to gain 4 life) | LifeAmount$ 4 | SpellDescription$ Target player gains 4 life.
 SVar:DBUntap:DB$ Untap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | SpellDescription$ Untap up to two target creatures.
-SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature.attacking | SacMessage$ Creature  | SpellDescription$ Target opponent sacrifices an attacking creature. 
+SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | TgtPrompt$ Select target player (to sacrifice an attacking creature) | SacValid$ Creature.attacking | SacMessage$ Creature  | SpellDescription$ Target opponent sacrifices an attacking creature. 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_alliance.jpg
 Oracle:Escalate {2} (Pay this cost for each mode chosen beyond the first.)\nChoose one or more -\n• Target player gains 4 life.\n• Untap up to two target creatures.\n• Target opponent sacrifices an attacking creature.
 
