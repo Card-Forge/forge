@@ -2010,6 +2010,19 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (equals(source.getOwner())) {
                 return false;
             }
+        } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
+            final String v = property.split(" ")[1];
+            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
+            boolean found = false;
+            for (final Card card : cards) {
+                if (card.getDamageHistory().getThisCombatDamaged().contains(this)) {
+                    found = true;
+                    break;
+        	    }
+            }
+            if (!found) {
+                return false;
+            }
         } else if (property.equals("wasDealtDamageBySourceThisGame")) {
             if (!source.getDamageHistory().getThisGameDamaged().contains(this)) {
                 return false;
