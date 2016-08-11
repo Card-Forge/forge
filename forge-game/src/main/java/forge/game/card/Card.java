@@ -4718,8 +4718,21 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("dealtCombatDamageThisTurn ") || property.startsWith("notDealtCombatDamageThisTurn ")) {
-            final String v = property.split(" ")[1]; 
+            final String v = property.split(" ")[1];
             final List<GameEntity> list = getDamageHistory().getThisTurnCombatDamaged();
+            boolean found = false;
+            for (final GameEntity e : list) {
+                if (e.isValid(v, sourceController, source, spellAbility)) {
+                    found = true;
+                    break;
+        	    }
+            }
+            if (found == property.startsWith("not")) {
+                return false;
+            }
+        } else if (property.startsWith("dealtCombatDamageThisCombat ") || property.startsWith("notDealtCombatDamageThisCombat ")) {
+            final String v = property.split(" ")[1];
+            final List<GameEntity> list = getDamageHistory().getThisCombatDamaged();
             boolean found = false;
             for (final GameEntity e : list) {
                 if (e.isValid(v, sourceController, source, spellAbility)) {
