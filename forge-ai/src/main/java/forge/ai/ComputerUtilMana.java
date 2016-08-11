@@ -982,8 +982,8 @@ public class ComputerUtilMana {
                 // For Count$xPaid set PayX in the AFs then use that here
                 // Else calculate it as appropriate.
                 final String xSvar = card.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
-                if (!card.getSVar(xSvar).equals("")) {
-                    if (xSvar.equals("PayX")) {
+                if (!sa.getSVar(xSvar).isEmpty() || card.hasSVar(xSvar)) {
+                    if (xSvar.equals("PayX") && card.hasSVar(xSvar)) {
                         manaToAdd = Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X
                     } else {
                         manaToAdd = AbilityUtils.calculateAmount(card, xSvar, sa) * cost.getXcounter();
