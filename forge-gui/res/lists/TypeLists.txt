@@ -272,6 +272,7 @@ Garruk
 Gideon
 Jace
 Karn
+Kaya
 Kiora
 Koth
 Liliana
