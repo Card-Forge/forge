@@ -290,6 +290,9 @@ public class CardDamageHistory {
     public final boolean getCreatureGotBlockedThisTurn() {
         return this.creatureGotBlockedThisTurn;
     }
+    public final List<GameEntity> getThisCombatDamaged() {
+        return damagedThisCombat;
+    }
     public final List<GameEntity> getThisTurnDamaged() {
         return damagedThisTurn;
     }
