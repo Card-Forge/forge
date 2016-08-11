@@ -6807,6 +6807,7 @@ forge-gui/res/cardsfolder/g/glimmering_angel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/glimmerpoint_stag.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/glimmerpost.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/glimmervoid.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/glimmervoid_basin.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/g/glimpse_of_nature.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/glimpse_the_future.txt -text
 forge-gui/res/cardsfolder/g/glimpse_the_sun_god.txt -text
