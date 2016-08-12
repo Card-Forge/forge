@@ -111,6 +111,7 @@ public class CardFactory {
 
         out.setClones(in.getClones());
         out.setZone(in.getZone());
+        out.setCastSA(in.getCastSA());
         for (final Object o : in.getRemembered()) {
             out.addRemembered(o);
         }
