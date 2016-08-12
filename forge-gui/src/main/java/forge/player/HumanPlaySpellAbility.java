@@ -98,6 +98,8 @@ public class HumanPlaySpellAbility {
             if (ability instanceof Spell && !((Spell) ability).isCastFaceDown() && fromState == CardStateName.FaceDown) {
                 c.turnFaceUp();
             }
+            c.setCastSA(ability);
+            ability.setLastStateBattlefield(game.getLastStateBattlefield());
             ability.setHostCard(game.getAction().moveToStack(c));
         }
 
