@@ -89,6 +89,7 @@ public class ComputerUtil {
         final Card source = sa.getHostCard();
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
+            source.setCastSA(sa);
             sa.setHostCard(game.getAction().moveToStack(source));
         }
 
@@ -206,6 +207,7 @@ public class ComputerUtil {
             
         final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
+            source.setCastSA(sa);
             sa.setHostCard(game.getAction().moveToStack(source));
         }
         final Cost cost = sa.getPayCosts();
@@ -226,6 +228,7 @@ public class ComputerUtil {
 
         final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
+            source.setCastSA(sa);
             sa.setHostCard(ai.getGame().getAction().moveToStack(source));
         }
 
@@ -242,6 +245,7 @@ public class ComputerUtil {
 
         final Card source = newSA.getHostCard();
         if (newSA.isSpell() && !source.isCopiedSpell()) {
+            source.setCastSA(newSA);
             newSA.setHostCard(game.getAction().moveToStack(source));
         }
 
@@ -258,6 +262,7 @@ public class ComputerUtil {
         if (ComputerUtilCost.canPayCost(sa, ai)) {
             final Card source = sa.getHostCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
+                source.setCastSA(sa);
                 sa.setHostCard(game.getAction().moveToStack(source));
             }
 
