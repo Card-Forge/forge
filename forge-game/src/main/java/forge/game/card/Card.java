@@ -93,6 +93,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardStateName preFaceDownState = CardStateName.Original;
 
     private ZoneType castFrom = null;
+    private SpellAbility castSA = null;
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
     private Map<Card, Map<CounterType, Integer>> countersAddedBy = new TreeMap<>();
@@ -1400,6 +1401,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
                 sbLong.append(keyword).append("\r\n");
+            } else if (keyword.startsWith("Presence")) {
+                sbLong.append(Keyword.getInstance(keyword).getReminderText());
             } else if (keyword.contains("At the beginning of your upkeep, ")
                     && keyword.contains(" unless you pay")) {
                 sbLong.append(keyword).append("\r\n");
@@ -6501,6 +6504,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public void setCastFrom(final ZoneType castFrom0) {
         castFrom = castFrom0;
+    }
+
+    public SpellAbility getCastSA() {
+        return castSA;
+    }
+
+    public void setCastSA(SpellAbility castSA) {
+        this.castSA = castSA;
     }
 
     public CardDamageHistory getDamageHistory() {
