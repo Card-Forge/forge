@@ -1539,7 +1539,7 @@ public class AbilityUtils {
                 }
 
 
-                if (l[0].startsWith("Soulshift")) {
+                if (l[0].startsWith("LastStateBattlefield")) {
                     final String[] k = l[0].split(" ");
                     CardCollection list = new CardCollection(sa.getLastStateBattlefield());
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
