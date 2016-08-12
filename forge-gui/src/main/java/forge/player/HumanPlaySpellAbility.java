@@ -285,6 +285,8 @@ public class HumanPlaySpellAbility {
                 }
                 card.setXManaCostPaid(value);
             }
+        } else if (needX && manaCost != null && manaCost.getMana().isZero()) {
+            card.setXManaCostPaid(0);
         }
         return true;
     }
