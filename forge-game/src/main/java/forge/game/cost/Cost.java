@@ -749,7 +749,9 @@ public class Cost {
         CostPartMana costPart2 = this.getCostMana();
         List<CostPart> toRemove = Lists.newArrayList();
         for (final CostPart part : cost1.getCostParts()) {
-            if (part instanceof CostPartMana && costPart2 != null) {
+            if (part instanceof CostPartMana && ((CostPartMana) part).getMana().isZero()) {
+                continue; // do not add Zero Mana
+            } else if (part instanceof CostPartMana && costPart2 != null) {
                 ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(((CostPartMana) part).getMana());
                 oldManaCost.addManaCost(costPart2.getMana());
                 String r2 = costPart2.getRestiction();
