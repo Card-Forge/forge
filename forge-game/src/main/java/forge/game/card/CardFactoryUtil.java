@@ -2516,6 +2516,9 @@ public class CardFactoryUtil {
             else if (keyword.endsWith(" offering")) {
                 addSpellAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Presence")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
                         + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
@@ -3063,6 +3066,9 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
+        } else if (keyword.startsWith("Presence")) {
+            final String[] k = keyword.split(":");
+            card.addIntrinsicKeyword("Kicker Reveal<1/" + k[1] + "> : Generic");
         } else if (keyword.startsWith("Rampage")) {
             final String[] k = keyword.split(" ");
             final String n = k[1];
@@ -3097,7 +3103,7 @@ public class CardFactoryUtil {
             final SpellAbility sp = AbilityFactory.getAbility(effect, card);
             // Soulshift X
             if (k[1].equals("X")) {
-                sp.setSVar("X", "Count$Soulshift " + k[3]);
+                sp.setSVar("X", "Count$LastStateBattlefield " + k[3]);
             }
 
             parsedTrigger.setOverridingAbility(sp);
