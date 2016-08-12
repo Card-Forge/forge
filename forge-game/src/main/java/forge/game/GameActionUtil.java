@@ -28,7 +28,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
 import forge.game.card.CardPlayOption;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPlayOption.PayManaCost;
@@ -143,6 +142,7 @@ public final class GameActionUtil {
                 sar.setZone(null);
                 newSA.setRestrictions(sar);
                 newSA.setMayPlay(o.getAbility());
+                newSA.setMayPlayOriginal(sa);
                 if (o.getPayManaCost() == PayManaCost.NO) {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
@@ -151,7 +151,8 @@ public final class GameActionUtil {
                 final StringBuilder sb = new StringBuilder(sa.getDescription());
                 if (!source.equals(host)) {
                     sb.append(" by ");
-                    if (host.isEmblem() || host.getType().hasSubtype("Effect")) {
+                    if ((host.isEmblem() || host.getType().hasSubtype("Effect"))
+                            && host.getEffectSource() != null) {
                         sb.append(host.getEffectSource());
                     } else {
                         sb.append(host);

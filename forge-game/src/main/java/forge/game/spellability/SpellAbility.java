@@ -81,6 +81,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean basicLandAbility; // granted by basic land type
 
     private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
+    private SpellAbility mayPlayOriginal = null;
 
     private CardCollection splicedCards = null;
 
@@ -331,6 +332,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setOriginalHost(final Card c) {
         grantorCard = c;
+    }
+
+
+    public SpellAbility getMayPlayOriginal() {
+        return mayPlayOriginal;
+    }
+
+    public void setMayPlayOriginal(SpellAbility mayPlayOriginal) {
+        this.mayPlayOriginal = mayPlayOriginal;
     }
 
     public String getParamOrDefault(String key, String defaultValue) {

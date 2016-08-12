@@ -354,6 +354,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         sp.setTotalManaSpent(totManaSpent);
+        if (sp.getMayPlayOriginal() != null) {
+            sp.getMayPlayOriginal().setTotalManaSpent(totManaSpent);
+        }
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         HashMap<String, Object> runParams = new HashMap<String, Object>();
