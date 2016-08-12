@@ -1512,6 +1512,20 @@ public class CardFactoryUtil {
             return doXMath(StringUtils.isNumeric(sq[2]) ? Integer.parseInt(sq[2]) : xCount(c, c.getSVar(sq[2])), m, c);
         }
 
+        // Count$Presence_<Type>.<True>.<False>
+        if (sq[0].startsWith("Presence")) {
+            final String type = sq[0].split("_")[1];
+
+            if (c.getCastFrom() != null && c.getCastSA() != null) {
+                int revealed = AbilityUtils.calculateAmount(c, "Revealed$Valid " + type, c.getCastSA());
+                int ctrl = AbilityUtils.calculateAmount(c, "Count$LastStateBattlefield " + type + ".YouCtrl", c.getCastSA());
+                if (revealed + ctrl >= 1) {
+                    return doXMath(StringUtils.isNumeric(sq[1]) ? Integer.parseInt(sq[1]) : xCount(c, c.getSVar(sq[1])), m, c);
+                }
+            }
+            return doXMath(StringUtils.isNumeric(sq[2]) ? Integer.parseInt(sq[2]) : xCount(c, c.getSVar(sq[2])), m, c);
+        }
+
         if (sq[0].equals("YourTurns")) {
             return doXMath(cc.getTurn(), m, c);
         }
