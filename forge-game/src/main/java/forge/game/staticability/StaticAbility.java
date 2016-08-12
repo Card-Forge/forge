@@ -536,6 +536,20 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             }
         }
 
+        if (this.mapParams.containsKey("Presence")) {
+            if (hostCard.getCastFrom() == null || hostCard.getCastSA() == null)
+                return false;
+
+            final String type = this.mapParams.get("Presence");
+
+            int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
+            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
+
+            if (revealed + ctrl == 0) {
+                return false;
+            }
+        }
+
         if (this.mapParams.containsKey("CheckSVar")) {
             final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckSVar"), this);
             String comparator = "GE1";
