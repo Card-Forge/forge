@@ -472,10 +472,12 @@ public class GameAction {
 
         if (zoneFrom == null) {
             c.setCastFrom(null);
+            c.setCastSA(null);
         } else if (zoneTo.is(ZoneType.Stack)) {
             c.setCastFrom(zoneFrom.getZoneType());
         } else if (!(zoneTo.is(ZoneType.Battlefield) && zoneFrom.is(ZoneType.Stack))) {
             c.setCastFrom(null);
+            c.setCastSA(null);
         }
 
         if (c.isAura() && zoneTo.is(ZoneType.Battlefield) && ((zoneFrom == null) || !zoneFrom.is(ZoneType.Stack))
