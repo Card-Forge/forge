@@ -82,7 +82,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
         boolean flash = card.hasKeyword("Flash");
 
-        if (this.hasParam("Bestow")) {
+        if (this.hasParam("Bestow") && !card.isBestowed()) {
             // Rule 601.3: cast Bestow with Flash
             // for the check the card does need to be animated
             // otherwise the StaticAbility will not found them
