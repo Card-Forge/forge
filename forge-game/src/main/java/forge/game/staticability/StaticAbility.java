@@ -137,7 +137,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         if (this.mapParams.containsKey("AddKeyword") || this.mapParams.containsKey("AddAbility")
                 || this.mapParams.containsKey("AddTrigger") || this.mapParams.containsKey("RemoveTriggers")
                 || this.mapParams.containsKey("RemoveKeyword") || this.mapParams.containsKey("AddReplacementEffects")
-                || this.mapParams.containsKey("AddSVar")) {
+                || this.mapParams.containsKey("AddStaticAbility") || this.mapParams.containsKey("AddSVar")) {
             layers.add(StaticAbilityLayer.ABILITIES2);
         }
 
@@ -157,6 +157,10 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             if (this.mapParams.get("AddHiddenKeyword").contains("can't have or gain")) {
                 layers.add(StaticAbilityLayer.ABILITIES1);
             }
+            layers.add(StaticAbilityLayer.RULES);
+        }
+
+        if (this.mapParams.containsKey("IgnoreEffectCost")) {
             layers.add(StaticAbilityLayer.RULES);
         }
 
