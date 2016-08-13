@@ -18,6 +18,7 @@
 package forge.game;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -646,6 +647,7 @@ public class GameAction {
 
         for (final Player p : game.getPlayers()) {
             p.getManaPool().restoreColorReplacements();
+            p.clearStaticAbilities();
         }
 
         // search for cards with static abilities
