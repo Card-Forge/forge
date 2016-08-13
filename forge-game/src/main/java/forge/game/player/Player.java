@@ -1125,7 +1125,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         PlayerZone com = getZone(ZoneType.Command);
 
         if (!staticAbilities.containsKey(host)) {
-            DetachedCardEffect effect = new DetachedCardEffect(host, host + "'s Effect");
+            DetachedCardEffect effect = new DetachedCardEffect(host, host.getName() + "'s Effect");
             effect.setOwner(this);
             staticAbilities.put(host, effect);
         }
