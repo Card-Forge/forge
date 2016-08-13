@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Imperial Guard 3
+Title=Imperial Guard
+Difficulty=hard
+Description=WG Human deck
+Icon=Imperial Guard.jpg
+Deck Type=constructed
+[main]
+1 Canopy Vista
+4 Cavern of Souls
+3 Forest
+1 Fortified Village
+4 Plains
+4 Sunpetal Grove
+1 Temple Garden
+4 Windswept Heath
+2 Angelic Overseer
+3 Avacyn's Pilgrim
+3 Champion of Lambholt
+4 Champion of the Parish
+3 Fiend Hunter
+4 Hamlet Captain
+2 Heron's Grace Champion
+2 Mentor of the Meek
+1 Riders of Gavony
+1 Sigarda, Heron's Grace
+4 Thalia's Lieutenant
+3 Veteran Armorer
+3 Descendants' Path
+3 Oblivion Ring
+[sideboard]
