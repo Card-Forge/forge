@@ -4341,6 +4341,7 @@ forge-gui/res/cardsfolder/d/damnable_pact.txt -text
 forge-gui/res/cardsfolder/d/damnation.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dampen_thought.txt -text
 forge-gui/res/cardsfolder/d/dampening_pulse.txt -text
+forge-gui/res/cardsfolder/d/damping_engine.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/d/damping_field.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/damping_matrix.txt -text
 forge-gui/res/cardsfolder/d/dance_of_many.txt svneol=native#text/plain
