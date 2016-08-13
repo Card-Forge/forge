@@ -23,6 +23,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
@@ -41,7 +42,6 @@ import forge.game.keyword.KeywordsChange;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.Ability;
@@ -57,6 +57,7 @@ import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.MyRandom;
@@ -112,6 +113,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection inboundTokens = new CardCollection();
 
     private KeywordCollection keywords = new KeywordCollection();
+
+    private Map<Card, DetachedCardEffect> staticAbilities = Maps.newHashMap();
+
     private Map<Long, KeywordsChange> changedKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
     private ManaPool manaPool = new ManaPool(this);
     private GameEntity mustAttackEntity = null;
@@ -1107,6 +1111,40 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final KeywordCollectionView getKeywords() {
         return keywords.getView();
+    }
+
+    public final FCollectionView<StaticAbility> getStaticAbilities() {
+        FCollection<StaticAbility> result = new FCollection<StaticAbility>();
+        for (DetachedCardEffect eff : staticAbilities.values()) {
+            result.addAll(eff.getStaticAbilities());
+        }
+        return result;
+    }
+    
+    public final StaticAbility addStaticAbility(final Card host, final String s) {
+        PlayerZone com = getZone(ZoneType.Command);
+
+        if (!staticAbilities.containsKey(host)) {
+            DetachedCardEffect effect = new DetachedCardEffect(host, host + "'s Effect");
+            effect.setOwner(this);
+            staticAbilities.put(host, effect);
+        }
+
+        if (!com.contains(staticAbilities.get(host))) {
+            com.add(staticAbilities.get(host));
+            this.updateZoneForView(com);
+        }
+
+        return staticAbilities.get(host).addStaticAbility(s);
+    }
+
+    public final void clearStaticAbilities() {
+        PlayerZone com = getZone(ZoneType.Command);
+        for (DetachedCardEffect eff : staticAbilities.values()) {
+            com.remove(eff);
+            eff.setStaticAbilities(Lists.<StaticAbility>newArrayList());
+        }
+	    this.updateZoneForView(com);
     }
 
     @Override
@@ -2136,7 +2174,8 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         } else if (property.startsWith("withMost")) {
-            if (property.substring(8).equals("Life")) {
+            final String kind = property.substring(8);
+            if (kind.equals("Life")) {
                 int highestLife = getLife(); // Negative base just in case a few Lich's are running around
                 for (final Player p : game.getPlayers()) {
                     if (p.getLife() > highestLife) {
@@ -2147,7 +2186,25 @@ public class Player extends GameEntity implements Comparable<Player> {
                     return false;
                 }
             }
-            else if (property.substring(8).equals("CardsInHand")) {
+            else if (kind.equals("PermanentInPlay")) {
+                int typeNum = 0;
+                List<Player> controlmost = new ArrayList<Player>();
+                for (final Player p : game.getPlayers()) {
+                    final int num = p.getCardsIn(ZoneType.Battlefield).size();
+                    if (num > typeNum) {
+                        typeNum = num;
+                        controlmost.clear();
+                    }
+                    if (num == typeNum) {
+                        controlmost.add(p);
+                    }
+                }
+
+                if (controlmost.size() != 1 || !controlmost.contains(this)) {
+                    return false;
+                }
+            }
+            else if (kind.equals("CardsInHand")) {
                 int largestHand = 0;
                 Player withLargestHand = null;
                 for (final Player p : game.getPlayers()) {
@@ -2160,7 +2217,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                     return false;
                 }
             }
-            else if (property.substring(8).startsWith("Type")) {
+            else if (kind.startsWith("Type")) {
                 String type = property.split("Type")[1];
                 boolean checkOnly = false;
                 if (type.endsWith("Only")) {
