@@ -100,6 +100,7 @@ public class HumanPlaySpellAbility {
             }
             c.setCastSA(ability);
             ability.setLastStateBattlefield(game.getLastStateBattlefield());
+            ability.setLastStateGraveyard(game.getLastStateGraveyard());
             ability.setHostCard(game.getAction().moveToStack(c));
         }
 
@@ -285,7 +286,7 @@ public class HumanPlaySpellAbility {
                 }
                 card.setXManaCostPaid(value);
             }
-        } else if (needX && manaCost != null && manaCost.getMana().isZero()) {
+        } else if (needX && manaCost != null && manaCost.getMana().isZero() && ability.isSpell()) {
             card.setXManaCostPaid(0);
         }
         return true;
