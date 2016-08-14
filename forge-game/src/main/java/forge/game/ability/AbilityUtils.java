@@ -1546,6 +1546,13 @@ public class AbilityUtils {
                     return CardFactoryUtil.doXMath(list.size(), expr, c);
                 }
 
+                if (l[0].startsWith("LastStateGraveyard")) {
+                    final String[] k = l[0].split(" ");
+                    CardCollection list = new CardCollection(sa.getLastStateGraveyard());
+                    list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
+                    return CardFactoryUtil.doXMath(list.size(), expr, c);
+                }
+
                 // Count$TargetedLifeTotal (targeted player's life total)
                 // Not optimal but since xCount doesn't take SAs, we need to replicate while we have it
                 // Probably would be best if xCount took an optional SA to use in these circumstances

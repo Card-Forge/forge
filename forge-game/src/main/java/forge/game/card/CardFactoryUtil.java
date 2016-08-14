@@ -1526,6 +1526,20 @@ public class CardFactoryUtil {
             return doXMath(StringUtils.isNumeric(sq[2]) ? Integer.parseInt(sq[2]) : xCount(c, c.getSVar(sq[2])), m, c);
         }
 
+        if (sq[0].startsWith("LastStateBattlefield")) {
+            final String[] k = sq[0].split(" ");
+            CardCollection list = new CardCollection(game.getLastStateBattlefield());
+            list = CardLists.getValidCards(list, k[1].split(","), cc, c, null);
+            return CardFactoryUtil.doXMath(list.size(), m, c);
+        }
+
+        if (sq[0].startsWith("LastStateGraveyard")) {
+            final String[] k = sq[0].split(" ");
+            CardCollection list = new CardCollection(game.getLastStateGraveyard());
+            list = CardLists.getValidCards(list, k[1].split(","), cc, c, null);
+            return CardFactoryUtil.doXMath(list.size(), m, c);
+        }
+
         if (sq[0].equals("YourTurns")) {
             return doXMath(cc.getTurn(), m, c);
         }
