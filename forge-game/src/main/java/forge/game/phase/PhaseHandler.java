@@ -22,11 +22,9 @@ import com.google.common.collect.Multimap;
 
 import forge.card.mana.ManaCost;
 import forge.game.*;
-import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
@@ -356,6 +354,10 @@ public class PhaseHandler implements java.io.Serializable {
                         player.onCleanupPhase();
                         player.getController().autoPassCancel(); // autopass won't wrap to next turn
                     }
+                    for (Player player : game.getLostPlayers()) {
+                        player.clearAssignedDamage();
+                    }
+
                     playerTurn.removeKeyword("Skip all combat phases of this turn.");
                     game.getCleanup().executeUntil(getNextTurn());
                     nUpkeepsThisTurn = 0;
