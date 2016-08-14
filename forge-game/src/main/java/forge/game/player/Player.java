@@ -1902,8 +1902,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasBloodthirst() {
-        for (Player opp : getOpponents()) {
-            if (opp.getAssignedDamage() > 0) {
+        for (Player p : game.getRegisteredPlayers()) {
+            if (p.isOpponentOf(this) && p.getAssignedDamage() > 0) {
                 return true;
             }
         }
@@ -1911,20 +1911,15 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public boolean hasFerocious() {
-        final CardCollectionView list = getCreaturesInPlay();
-        final CardCollectionView ferocious = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getNetPower() > 3;
-            }
-        });
-        return !ferocious.isEmpty();
+        return !CardLists.filterPower(getCreaturesInPlay(), 4).isEmpty();
     }
 
     public final int getBloodthirstAmount() {
         int blood = 0;
-        for (Player opp : getOpponents()) {
-            blood += opp.getAssignedDamage();
+        for (Player p : game.getRegisteredPlayers()) {
+            if (p.isOpponentOf(this)) {
+                blood += p.getAssignedDamage();
+            }
         }
         return blood;
     }
