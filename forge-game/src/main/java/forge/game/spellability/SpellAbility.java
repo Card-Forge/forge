@@ -146,6 +146,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private StaticAbility mayPlay = null;
 
     private CardCollection lastStateBattlefield = null;
+    private CardCollection lastStateGraveyard = null;
 
     public CardCollection getLastStateBattlefield() {
         return lastStateBattlefield;
@@ -153,6 +154,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setLastStateBattlefield(final CardCollectionView lastStateBattlefield) {
         this.lastStateBattlefield = new CardCollection(lastStateBattlefield);
+    }
+    public CardCollection getLastStateGraveyard() {
+        return lastStateGraveyard;
+    }
+
+    public void setLastStateGraveyard(final CardCollectionView lastStateGraveyard) {
+        this.lastStateGraveyard = new CardCollection(lastStateGraveyard);
     }
 
     protected SpellAbility(final Card iSourceCard, final Cost toPay) {

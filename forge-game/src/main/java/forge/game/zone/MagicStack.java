@@ -501,7 +501,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         boolean thisHasFizzled = hasFizzled(sa, source, null);
         
         if (!thisHasFizzled) {
-            game.copyLastStateBattlefield();
+            game.copyLastState();
         }
 
         if (thisHasFizzled) { // Fizzle
@@ -532,7 +532,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (isEmpty()) {
-            game.copyLastStateBattlefield();
+            game.copyLastState();
             // FIXME: assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object). Is this correct?
             game.clearChangeZoneLKIInfo();
         }

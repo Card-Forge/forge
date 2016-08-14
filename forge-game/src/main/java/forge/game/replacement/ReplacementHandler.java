@@ -192,10 +192,14 @@ public class ReplacementHandler {
             } while(tailend != null);
         }
 
-        if (effectSA != null && replacementEffect.isIntrinsic()) {
-            effectSA.setIntrinsic(true);
-            effectSA.changeText();
-            effectSA.setReplacementAbility(true);
+        if (effectSA != null) {
+            effectSA.setLastStateBattlefield(game.getLastStateBattlefield());
+            effectSA.setLastStateGraveyard(game.getLastStateGraveyard());
+            if (replacementEffect.isIntrinsic()) {
+                effectSA.setIntrinsic(true);
+                effectSA.changeText();
+                effectSA.setReplacementAbility(true);
+            }
         }
 
         // Decider gets to choose whether or not to apply the replacement.

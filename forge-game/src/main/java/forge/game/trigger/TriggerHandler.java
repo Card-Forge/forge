@@ -517,6 +517,7 @@ public class TriggerHandler {
 
         sa.setHostCard(host);
         sa.setLastStateBattlefield(game.getLastStateBattlefield());
+        sa.setLastStateGraveyard(game.getLastStateGraveyard());
 
         sa.setTrigger(true);
         sa.setSourceTrigger(regtrig.getId());
