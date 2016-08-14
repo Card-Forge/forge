@@ -69,6 +69,7 @@ public class Game {
     private final GameRules rules;
     private final FCollection<Player> allPlayers = new FCollection<Player>();
     private final FCollection<Player> ingamePlayers = new FCollection<Player>();
+    private final FCollection<Player> lostPlayers = new FCollection<Player>();
 
     private List<Card> activePlanes = null;
 
@@ -89,6 +90,7 @@ public class Game {
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
     
     private CardCollection lastStateBattlefield = new CardCollection();
+    private CardCollection lastStateGraveyard = new CardCollection();
 
     private Direction turnOrder = Direction.getDefaultDirection();
 
@@ -105,11 +107,16 @@ public class Game {
     public CardCollectionView getLastStateBattlefield() {
         return lastStateBattlefield;
     }
+    public CardCollectionView getLastStateGraveyard() {
+        return lastStateGraveyard;
+    }
 
-    public void copyLastStateBattlefield() {
+    public void copyLastState() {
         lastStateBattlefield.clear();
+        lastStateGraveyard.clear();
         for (final Player p : getPlayers()) {
             lastStateBattlefield.addAll(p.getZone(ZoneType.Battlefield).getLKICopy());
+            lastStateGraveyard.addAll(p.getZone(ZoneType.Graveyard).getLKICopy());
         }
     }
 
@@ -237,6 +244,10 @@ public class Game {
      */
     public final FCollectionView<Player> getPlayers() {
         return ingamePlayers;
+    }
+
+    public final FCollectionView<Player> getLostPlayers() {
+        return lostPlayers;
     }
 
     /**
@@ -593,6 +604,7 @@ public class Game {
         this.getStack().removeInstancesControlledBy(p);
 
         ingamePlayers.remove(p);
+        lostPlayers.add(p);
 
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Player", p);
