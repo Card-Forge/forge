@@ -196,7 +196,23 @@ public class TriggerHandler {
         return mapParams;
     }
 
+    private void collectTriggerForWaiting() {
+        for (final TriggerWaiting wt : waitingTriggers) {
+            if (wt.getTriggers() != null)
+                continue;
+
+            List<Trigger> trigger = Lists.newArrayList();
+            for (final Trigger t : activeTriggers) {
+                if (canRunTrigger(t,wt.getMode(),wt.getParams())) {
+                    trigger.add(t);
+                }
+            }
+            wt.setTriggers(trigger);
+        }
+    }
+
     public final void resetActiveTriggers() {
+        collectTriggerForWaiting();
         activeTriggers.clear();
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
@@ -319,8 +335,8 @@ public class TriggerHandler {
         if (runParams.containsKey("Destination")) {
             // Check static abilities when a card enters the battlefield
             if (runParams.get("Destination") instanceof String) {
-	            final String type = (String) runParams.get("Destination");
-	            checkStatics |= type.equals("Battlefield");
+                final String type = (String) runParams.get("Destination");
+                checkStatics |= type.equals("Battlefield");
             } else {
                 final ZoneType zone = (ZoneType) runParams.get("Destination");
                 checkStatics |= zone.equals(ZoneType.Battlefield);
@@ -328,11 +344,11 @@ public class TriggerHandler {
         }
 
         // AP 
-        checkStatics |= runNonStaticTriggersForPlayer(playerAP, mode, runParams, delayedTriggersWorkingCopy);
+        checkStatics |= runNonStaticTriggersForPlayer(playerAP, wt, delayedTriggersWorkingCopy);
 
         // NAPs
         for (final Player nap : game.getNonactivePlayers()) {
-            checkStatics |= runNonStaticTriggersForPlayer(nap, mode, runParams, delayedTriggersWorkingCopy);
+            checkStatics |= runNonStaticTriggersForPlayer(nap, wt, delayedTriggersWorkingCopy);
         }
         return checkStatics;
     }
@@ -350,13 +366,16 @@ public class TriggerHandler {
         }
     }
 
-    private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerType mode, 
-            final Map<String, Object> runParams, final List<Trigger> delayedTriggersWorkingCopy ) {
+    private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy ) {
+
+        final TriggerType mode = wt.getMode(); 
+        final Map<String, Object> runParams = wt.getParams();
+        final List<Trigger> triggers = wt.getTriggers() != null ? wt.getTriggers() : activeTriggers;
 
         Card card = null;
         boolean checkStatics = false;
 
-        for (final Trigger t : activeTriggers) {
+        for (final Trigger t : triggers) {
             if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
                 if (runParams.containsKey("Card") && runParams.get("Card") instanceof Card) {
                     card = (Card) runParams.get("Card");
@@ -404,16 +423,7 @@ public class TriggerHandler {
         }
 
         if (!regtrig.zonesCheck(game.getZoneOf(regtrig.getHostCard()))) {
-            final Map<String, String> params = regtrig.getMapParams();
-            final Card hostCard = regtrig.getHostCard(); 
-            if (!(regtrig instanceof TriggerChangesZone &&
-                    "Battlefield".equals(params.get("Origin")) &&
-                    "Graveyard".equals(params.get("Destination")) &&
-                    hostCard.getZone().is(ZoneType.Graveyard) &&
-                    regtrig.getActiveZone().contains(ZoneType.Battlefield) &&
-                    game.getLastStateBattlefield().contains(hostCard))) {
-                return false; // Host card isn't where it needs to be.
-            }
+            return false; // Host card isn't where it needs to be.
         }
 
         for (Trigger t : this.activeTriggers) {
@@ -494,11 +504,11 @@ public class TriggerHandler {
             host = trigCard;
         }
         else {
-        	// get CardState does not work for transformed cards
-        	// also its about LKI
-        	if (host.isInZone(ZoneType.Battlefield) || !host.hasAlternateState()) {
-        		host = game.getCardState(host);
-        	}
+            // get CardState does not work for transformed cards
+            // also its about LKI
+            if (host.isInZone(ZoneType.Battlefield) || !host.hasAlternateState()) {
+                host = game.getCardState(host);
+            }
         }
 
         sa = regtrig.getOverridingAbility();

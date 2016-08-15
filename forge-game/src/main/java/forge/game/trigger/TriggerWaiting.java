@@ -1,5 +1,6 @@
 package forge.game.trigger;
 
+import java.util.List;
 import java.util.Map;
 
 /** 
@@ -8,6 +9,7 @@ import java.util.Map;
 public class TriggerWaiting {
     private TriggerType mode;
     private Map<String, Object> params;
+    private List<Trigger> triggers = null;
 
     public TriggerWaiting(TriggerType m,  Map<String, Object> p) {
         mode = m;
@@ -23,7 +25,15 @@ public class TriggerWaiting {
     }
     
 
-    @Override
+    public List<Trigger> getTriggers() {
+        return triggers;
+    }
+
+    public void setTriggers(final List<Trigger> triggers) {
+        this.triggers = triggers;
+    }
+
+	@Override
     public String toString() {
         return String.format("Waiting trigger: %s with %s", mode, params);
     }
