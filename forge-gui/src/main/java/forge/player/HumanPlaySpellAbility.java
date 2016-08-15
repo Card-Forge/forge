@@ -33,6 +33,8 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardPlayOption;
+import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.mana.ManaPool;
@@ -246,7 +248,8 @@ public class HumanPlaySpellAbility {
 
         boolean needX = true;
         final boolean allowZero = !ability.hasParam("XCantBe0");
-        final CostPartMana manaCost = ability.getPayCosts().getCostMana();
+        final Cost cost = ability.getPayCosts();
+        final CostPartMana manaCost = cost.getCostMana();
         final PlayerController controller = ability.getActivatingPlayer().getController();
         final Card card = ability.getHostCard();
 
@@ -277,17 +280,28 @@ public class HumanPlaySpellAbility {
             }
         }
 
-        if (needX && manaCost != null && manaCost.getAmountOfX() > 0) {
-            final String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
-            if ("Count$xPaid".equals(sVar) || sVar.isEmpty()) {
-                final Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
-                if (value == null) {
-                    return false;
+        if (needX && manaCost != null) {
+            boolean xInCost = manaCost.getAmountOfX() > 0;
+            if (!xInCost) {
+                for (final CostPart part : cost.getCostParts()) {
+                    if (part.getAmount().equals("X")) {
+                        xInCost = true;
+                        break;
+                    }
                 }
-                card.setXManaCostPaid(value);
             }
-        } else if (needX && manaCost != null && manaCost.getMana().isZero() && ability.isSpell()) {
-            card.setXManaCostPaid(0);
+            if (xInCost) {
+                final String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
+                if ("Count$xPaid".equals(sVar) || sVar.isEmpty()) {
+                    final Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
+                    if (value == null) {
+                        return false;
+                    }
+                    card.setXManaCostPaid(value);
+                }
+            } else if (manaCost.getMana().isZero() && ability.isSpell()) {
+                card.setXManaCostPaid(0);
+            }
         }
         return true;
     }
