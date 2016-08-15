@@ -90,6 +90,8 @@ public class ComputerUtil {
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
             source.setCastSA(sa);
+            sa.setLastStateBattlefield(game.getLastStateBattlefield());
+            sa.setLastStateGraveyard(game.getLastStateGraveyard());
             sa.setHostCard(game.getAction().moveToStack(source));
         }
 
