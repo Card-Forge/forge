@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
@@ -51,7 +52,7 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
-        	return false;
+            return false;
         }
         
         if (abCost != null) {
@@ -108,7 +109,7 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if (sa.hasParam("LevelUp")) {
-        	 // creatures enchanted by curse auras have low priority
+        	// creatures enchanted by curse auras have low priority
         	if (source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
                 for (Card aura : source.getEnchantedBy(false)) {
                     if (aura.getController().isOpponentOf(ai)) {
@@ -582,5 +583,100 @@ public class CountersPutAi extends SpellAbilityAi {
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         // logic?
         return Iterables.getFirst(options, null);
+    }
+    
+    protected Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+        // Bolster does use this
+        // TODO need more or less logic there?
+
+        // no logic if there is no options or no to choice
+    	if (!isOptional && Lists.newArrayList(options).size() <= 1) {
+            return Iterables.getFirst(options, null);
+        }
+
+    	final CounterType type = CounterType.valueOf(sa.getParam("CounterType"));
+        final String amountStr = sa.getParam("CounterNum");
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+
+        final boolean isCurse = sa.isCurse();
+
+        if (isCurse) {
+            final CardCollection opponents = CardLists.filterControlledBy(options, ai.getOpponents());
+
+            if (!opponents.isEmpty()) {
+                final CardCollection negative = CardLists.filter(opponents, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card input) {
+                        if (input.hasSVar("EndOfTurnLeavePlay"))
+                            return false;
+                        if (SpellAbilityAi.isUselessCreature(ai, input))
+                            return false;
+                        if (CounterType.M1M1.equals(type) && amount >= input.getNetToughness())
+                            return true;
+                        return ComputerUtil.isNegativeCounter(type, input);
+                    }
+                });
+                if (!negative.isEmpty()) {
+                    return ComputerUtilCard.getBestAI(negative);
+                }
+            }
+        }
+
+        final CardCollection mine = CardLists.filterControlledBy(options, ai);
+        // none of mine?
+        if (mine.isEmpty()) {
+            // Try to Benefit Ally if possible
+            final CardCollection ally = CardLists.filterControlledBy(options, ai.getAllies());
+            if (ally.isEmpty()) {
+                return ComputerUtilCard.getBestAI(ally);
+            }
+            return isOptional ? null : ComputerUtilCard.getWorstAI(options);
+        }
+
+        CardCollection filtered = mine;
+
+        final CardCollection notUseless = CardLists.filter(filtered, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card input) {
+                if (input.hasSVar("EndOfTurnLeavePlay"))
+                    return false;
+                return !SpellAbilityAi.isUselessCreature(ai, input);
+            }
+        });
+
+        if (!notUseless.isEmpty()) {
+            filtered = notUseless;
+        }
+
+        // some special logic to reload Persist/Undying
+        if (CounterType.P1P1.equals(type)) {
+            final CardCollection persist = CardLists.filter(filtered, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card input) {
+                    if (!input.hasKeyword("Persist"))
+                        return false;
+                    return input.getCounters(CounterType.M1M1) <= amount;
+                }
+            });
+
+            if (!persist.isEmpty()) {
+                filtered = persist;
+            }
+        } else if (CounterType.M1M1.equals(type)) {
+            final CardCollection undying = CardLists.filter(filtered, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card input) {
+                    if (!input.hasKeyword("Undying"))
+                        return false;
+                    return input.getCounters(CounterType.P1P1) <= amount && input.getNetToughness() > amount;
+                }
+            });
+
+            if (!undying.isEmpty()) {
+                filtered = undying;
+            }
+        }
+
+        return ComputerUtilCard.getBestAI(filtered);
     }
 }
