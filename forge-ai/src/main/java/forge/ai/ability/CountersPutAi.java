@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
@@ -590,7 +589,7 @@ public class CountersPutAi extends SpellAbilityAi {
         // TODO need more or less logic there?
 
         // no logic if there is no options or no to choice
-    	if (!isOptional && Lists.newArrayList(options).size() <= 1) {
+    	if (!isOptional && Iterables.size(options) <= 1) {
             return Iterables.getFirst(options, null);
         }
 
