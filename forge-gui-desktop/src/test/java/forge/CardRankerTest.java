@@ -17,7 +17,6 @@ import java.util.List;
 @Test(timeOut = 1000, enabled = true)
 public class CardRankerTest {
 
-    private CardRanker ranker = new CardRanker();
     @BeforeTest
     void setupTest() {
         GuiBase.setInterface(new GuiDesktop());
@@ -25,8 +24,6 @@ public class CardRankerTest {
 
     @Test(timeOut = 1000, enabled = true)
     void testRank() {
-        PaperCard cp = readCard("hero_of_goma_fada.txt");
-
         List<PaperCard> list = new ArrayList<PaperCard>();
         PaperCard c0 = readCard("makindi_patrol.txt");
         list.add(c0);
@@ -37,7 +34,7 @@ public class CardRankerTest {
         PaperCard c3 = readCard("plains.txt");
         list.add(c3);
 
-        List<PaperCard> ranked = ranker.rankCardsInDeck(list);
+        List<PaperCard> ranked = CardRanker.rankCardsInDeck(list);
         Assert.assertEquals("Hero of Goma Fada", ranked.get(0).getName());
         Assert.assertEquals("Makindi Patrol", ranked.get(1).getName());
         Assert.assertEquals("Altar's Reap", ranked.get(2).getName());

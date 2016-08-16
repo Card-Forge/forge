@@ -31,7 +31,7 @@ public class CardRanker {
      * @param cards PaperCards to rank
      * @return List of ranked cards
      */
-    public List<PaperCard> rankCardsInDeck(final Iterable<PaperCard> cards) {
+    public static List<PaperCard> rankCardsInDeck(final Iterable<PaperCard> cards) {
         List<Pair<Double, PaperCard>> cardScores = getScores(cards);
 
         return sortAndCreateList(cardScores);
@@ -45,7 +45,7 @@ public class CardRanker {
      * @param canAddMoreColors can deck add more colors
      * @return sorted List of ranked cards
      */
-    public List<PaperCard> rankCardsInPack(
+    public static List<PaperCard> rankCardsInPack(
             final Iterable<PaperCard> cardsInPack,
             final List<PaperCard> deck,
             ColorSet chosenColors,
@@ -56,7 +56,7 @@ public class CardRanker {
         return sortAndCreateList(cardScores);
     }
 
-    private List<Pair<Double, PaperCard>> getScores(Iterable<PaperCard> cards) {
+    private static List<Pair<Double, PaperCard>> getScores(Iterable<PaperCard> cards) {
         List<Pair<Double, PaperCard>> cardScores = new ArrayList<>();
 
         List<PaperCard> cache = new ArrayList<>();
@@ -81,7 +81,7 @@ public class CardRanker {
         return cardScores;
     }
 
-    private List<Pair<Double, PaperCard>> getScoresForPack(
+    private static List<Pair<Double, PaperCard>> getScoresForPack(
             Iterable<PaperCard> cardsInPack,
             List<PaperCard> deck,
             ColorSet chosenColors,
@@ -106,7 +106,7 @@ public class CardRanker {
         return cardScores;
     }
 
-    private double getRawScore(PaperCard card) {
+    private static double getRawScore(PaperCard card) {
         Double rawScore;
         if (MagicColor.Constant.BASIC_LANDS.contains(card.getName())) {
             rawScore = SCORE_UNPICKABLE;
@@ -134,7 +134,7 @@ public class CardRanker {
         return rawScore;
     }
 
-    private List<PaperCard> getCardsExceptOne(List<PaperCard> cache, int i) {
+    private static List<PaperCard> getCardsExceptOne(List<PaperCard> cache, int i) {
         List<PaperCard> otherCards = new ArrayList<>();
         otherCards.addAll(cache.subList(0, i));
         if (i + 1 < cache.size()) {
@@ -143,7 +143,7 @@ public class CardRanker {
         return otherCards;
     }
 
-    private double getScoreForDeckHints(PaperCard card, Iterable<PaperCard> otherCards) {
+    private static double getScoreForDeckHints(PaperCard card, Iterable<PaperCard> otherCards) {
         double score = 0.0;
         final DeckHints hints = card.getRules().getAiHints().getDeckHints();
         if (hints != null && hints.isValid()) {
@@ -170,7 +170,7 @@ public class CardRanker {
         return score;
     }
 
-    private List<PaperCard> sortAndCreateList(List<Pair<Double, PaperCard>> cardScores) {
+    private static List<PaperCard> sortAndCreateList(List<Pair<Double, PaperCard>> cardScores) {
         Collections.sort(cardScores, Collections.reverseOrder(new CardRankingComparator()));
 
         List<PaperCard> rankedCards = new ArrayList<>(cardScores.size());

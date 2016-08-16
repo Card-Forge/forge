@@ -7,7 +7,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +35,7 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
         // this is not exactly right, because the rankings here are taking into account deckhints
         // for the whole set of cards, when some of those cards could be in colors that won't
         // make it into the deck
-        List<PaperCard> initialRanked = ranker.rankCardsInDeck(getAiPlayables());
+        List<PaperCard> initialRanked = CardRanker.rankCardsInDeck(getAiPlayables());
         double limit = getAiPlayables().size() * .33;
         for (int i = 0; i < limit; i++) {
             PaperCard cp = initialRanked.get(i);

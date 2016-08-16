@@ -20,15 +20,10 @@ package forge.limited;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
-import forge.util.Aggregates;
 
 /**
  * <p>
@@ -51,7 +46,6 @@ public class BoosterDraftAI {
     // holds all the cards for each of the computer's decks
     protected final List<List<PaperCard>> decks = new ArrayList<List<PaperCard>>();
     protected final List<DeckColors> playerColors = new ArrayList<DeckColors>();
-    protected CardRanker ranker = new CardRanker();
 
     /**
      * <p>
@@ -74,7 +68,7 @@ public class BoosterDraftAI {
         final ColorSet chosenColors = deckCols.getChosenColors();
         final boolean canAddMoreColors = deckCols.canChoseMoreColors();
 
-        List<PaperCard> rankedCards = ranker.rankCardsInPack(chooseFrom, deck, chosenColors, canAddMoreColors);
+        List<PaperCard> rankedCards = CardRanker.rankCardsInPack(chooseFrom, deck, chosenColors, canAddMoreColors);
         PaperCard bestPick = rankedCards.get(0);
 
         if (canAddMoreColors) {

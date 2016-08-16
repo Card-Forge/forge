@@ -60,8 +60,6 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     private final List<String> setsWithBasicLands = new ArrayList<String>();
     private List<PaperCard> rankedColorList;
 
-    protected CardRanker ranker = new CardRanker();
-
     // Views for aiPlayable
     private Iterable<PaperCard> onColorCreatures;
     private Iterable<PaperCard> onColorNonCreatures;
@@ -133,7 +131,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         hasColor = Predicates.or(new MatchColorIdentity(colors), COLORLESS_CARDS);
         Iterable<PaperCard> colorList = Iterables.filter(aiPlayables,
                 Predicates.compose(hasColor, PaperCard.FN_GET_RULES));
-        rankedColorList = ranker.rankCardsInDeck(colorList);
+        rankedColorList = CardRanker.rankCardsInDeck(colorList);
         onColorCreatures = Iterables.filter(rankedColorList,
                 Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES));
         onColorNonCreatures = Iterables.filter(rankedColorList,
@@ -481,7 +479,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                     Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES));
             // We haven't yet ranked the off-color cards.
             // Compare them to the cards already in the deckList.
-            List<PaperCard> rankedOthers = ranker.rankCardsInPack(others, deckList, colors, true);
+            List<PaperCard> rankedOthers = CardRanker.rankCardsInPack(others, deckList, colors, true);
             List<PaperCard> toAdd = new ArrayList<>();
             for (final PaperCard card : rankedOthers) {
                 // Want a card that has just one "off" color.
