@@ -9,5 +9,6 @@ SVar:ShurikenForget:DB$ Pump | ForgetObjects$ Valid Card.IsRemembered+namedShuri
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:NonStackingAttachEffect:True
+DeckHints:Type$Ninja
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shuriken.jpg
 Oracle:Equipped creature has "{T}, Unattach Shuriken: Shuriken deals 2 damage to target creature. That creature's controller gains control of Shuriken unless it was unattached from a Ninja."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

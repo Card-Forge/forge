@@ -7,6 +7,7 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | 
 #ChosenX SVar created by Cost payment
 A:AB$ Pump | Cost$ 1 T SubCounter<X/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -ChosenX | NumDef$ -ChosenX | References$ X | SpellDescription$ Target creature gets -X/-X until end of turn.
 SVar:X:XChoice
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+DeckHints:Type$Spirit|Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skullmane_baku.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.\n{1}, {T}, Remove X ki counters from Skullmane Baku: Target creature gets -X/-X until end of turn.
