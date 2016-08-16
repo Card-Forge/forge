@@ -7,6 +7,7 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | 
 A:AB$ Tap | Cost$ 1 SubCounter<X/KI> | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target creature | References$ X,MaxTgts | SpellDescription$ Tap X target creatures.
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$CardCounters.KI
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+DeckHints:Type$Spirit|Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waxmane_baku.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Waxmane Baku.\n{1}, Remove X ki counters from Waxmane Baku: Tap X target creatures.

@@ -8,6 +8,7 @@ A:AB$ Pump | Cost$ 1 SubCounter<X/KI> | Defined$ Self | NumAtt$ +Y | References$
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:Y:Number$2/Times.ChosenX
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+DeckHints:Type$Spirit|Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blademane_baku.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Blademane Baku.\n{1}, Remove X ki counters from Blademane Baku: For each counter removed, Blademane Baku gets +2/+0 until end of turn.

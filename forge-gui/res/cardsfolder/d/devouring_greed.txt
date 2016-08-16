@@ -9,5 +9,6 @@ SVar:B:SVar$A/Times.2
 SVar:C:SVar$B/Plus.2
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
+DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devouring_greed.jpg
 Oracle:As an additional cost to cast Devouring Greed, you may sacrifice any number of Spirits.\nTarget player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.
