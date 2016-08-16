@@ -2321,6 +2321,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
         runParams.put("Card", cpy);
+        runParams.put("Player", this);
         runParams.put("Cause", source);
         runParams.put("CostStack", game.costPaymentStack);
         runParams.put("IndividualCostPaymentInstance", game.costPaymentStack.peek());

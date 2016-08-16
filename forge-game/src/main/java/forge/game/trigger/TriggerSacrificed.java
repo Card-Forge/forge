@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import forge.game.card.Card;
 import forge.game.cost.IndividualCostPaymentInstance;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.CostPaymentStack;
 
@@ -52,9 +53,10 @@ public class TriggerSacrificed extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card sac = (Card) runParams2.get("Card");
+        final Player player = (Player) runParams2.get("Player");
         final SpellAbility sourceSA = (SpellAbility) runParams2.get("Cause");
         if (this.mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(sac.getController(), this.mapParams.get("ValidPlayer").split(","),
+            if (!matchesValid(player, this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
