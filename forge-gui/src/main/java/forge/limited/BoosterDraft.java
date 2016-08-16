@@ -114,7 +114,13 @@ public class BoosterDraft implements IBoosterDraft {
             final int nPacks = block.getCntBoostersDraft();
 
             if (sets.size() > 1) {
-                final Object p = SGuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
+                Object p;
+                if (nPacks == 3) {
+                    p = SGuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
+                } else {
+                    p = choosePackByPack(sets, nPacks);
+                }
+
                 if (p == null) { return false; }
 
                 final String[] pp = p.toString().split("/");
@@ -378,6 +384,25 @@ public class BoosterDraft implements IBoosterDraft {
     public boolean isPileDraft() {
         return false;
     }
+
+
+    private static String choosePackByPack(final List<String> setz, int packs) {
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 1; i <= packs; i++) {
+            String choice = SGuiChoose.oneOrNone(String.format("Choose set for Pack %d of %d", i, packs), setz);
+            if (choice == null) {
+                return null;
+            }
+            sb.append(choice);
+
+            if (i != packs) {
+                sb.append("/");
+            }
+        }
+        return sb.toString();
+    }
+
 
     private static List<String> getSetCombos(final List<String> setz) {
         final String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
