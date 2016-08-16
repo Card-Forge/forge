@@ -97,12 +97,17 @@ public class VoteEffect extends SpellAbilityEffect {
                 subAbs.add(sa.getParam("Vote" + type.toString()));
             }
         }
-        
-        for (final String subAb : subAbs) {
-            final SpellAbility action = AbilityFactory.getAbility(host.getSVar(subAb), host);
-            action.setActivatingPlayer(sa.getActivatingPlayer());
-            ((AbilitySub) action).setParent(sa);
-            AbilityUtils.resolve(action);
+        if (sa.hasParam("StoreVoteNum")) {
+            for (final Object type : voteType) {
+                host.setSVar("VoteNum" + type, "Number$" + votes.get(type).size());
+            }
+        } else {
+            for (final String subAb : subAbs) {
+                final SpellAbility action = AbilityFactory.getAbility(host.getSVar(subAb), host);
+                action.setActivatingPlayer(sa.getActivatingPlayer());
+                ((AbilitySub) action).setParent(sa);
+                AbilityUtils.resolve(action);
+            }
         }
         if (sa.hasParam("VoteSubAbility")) {
             host.clearRemembered();
@@ -124,4 +129,5 @@ public class VoteEffect extends SpellAbilityEffect {
         }
         return most;
     }
+
 }
