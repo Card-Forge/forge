@@ -31,49 +31,15 @@ import forge.item.PaperCard;
  * @version $Id$
  */
 public interface IBoosterDraft {
-    /**
-     * <p>
-     * nextChoice.
-     * </p>
-     *
-     * @return a {@link CardPool} object.
-     */
+
     CardPool nextChoice();
-
-    /**
-     * <p>
-     * setChoice.
-     * </p>
-     *
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     */
     void setChoice(PaperCard c);
-
-    /**
-     * <p>
-     * hasNextChoice.
-     * </p>
-     *
-     * @return a boolean.
-     */
     boolean hasNextChoice();
     boolean isRoundOver();
-
-    /**
-     * <p>
-     * getDecks.
-     * </p>
-     *
-     * @return an array of {@link forge.deck.Deck} objects.
-     */
     Deck[] getDecks(); // size 7, all the computers decks
 
-    /** Constant <code>LandSetCode="{}"</code>. */
     CardEdition[] LAND_SET_CODE = { null };
-
     String[] CUSTOM_RANKINGS_FILE = { null };
-
     boolean isPileDraft();
 
 }

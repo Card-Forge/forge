@@ -19750,6 +19750,8 @@ forge-gui/src/main/java/forge/limited/DraftRankCache.java -text
 forge-gui/src/main/java/forge/limited/GauntletMini.java -text
 forge-gui/src/main/java/forge/limited/IBoosterDraft.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/LimitedDeckBuilder.java -text
+forge-gui/src/main/java/forge/limited/LimitedPlayer.java -text
+forge-gui/src/main/java/forge/limited/LimitedPlayerAI.java -text
 forge-gui/src/main/java/forge/limited/LimitedPoolType.java -text
 forge-gui/src/main/java/forge/limited/LimitedWinLoseController.java -text
 forge-gui/src/main/java/forge/limited/ReadDraftRankings.java -text

@@ -35,12 +35,8 @@ import forge.properties.ForgePreferences;
  */
 public class BoosterDraftAI {
 
-    /** The bd. */
+    // TODO When WinstonDraft gets related changes that BoosterDraft gets, this can be deleted
     private IBoosterDraft bd = null;
-
-    /**
-     * Constant <code>nDecks=7.</code>
-     */
     protected static final int N_DECKS = 7;
 
     // holds all the cards for each of the computer's decks
@@ -83,13 +79,6 @@ public class BoosterDraftAI {
         return bestPick;
     }
 
-    /**
-     * <p>
-     * getDecks.
-     * </p>
-     *
-     * @return an array of {@link forge.deck.Deck} objects.
-     */
     public Deck[] getDecks() {
         final Deck[] out = new Deck[this.decks.size()];
 
@@ -103,11 +92,6 @@ public class BoosterDraftAI {
         return out;
     } // getDecks()
 
-    /**
-     * <p>
-     * Constructor for BoosterDraftAI.
-     * </p>
-     */
     public BoosterDraftAI() {
         // Initialize deck array and playerColors list
         for (int i = 0; i < N_DECKS; i++) {
@@ -116,21 +100,9 @@ public class BoosterDraftAI {
         }
     } // BoosterDraftAI()
 
-    /**
-     * Gets the bd.
-     *
-     * @return the bd
-     */
     public IBoosterDraft getBd() {
         return this.bd;
     }
-
-    /**
-     * Sets the bd.
-     *
-     * @param bd0
-     *            the bd to set
-     */
     public void setBd(final IBoosterDraft bd0) {
         this.bd = bd0;
     }

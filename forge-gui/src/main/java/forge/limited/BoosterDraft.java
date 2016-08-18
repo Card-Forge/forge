@@ -43,18 +43,16 @@ import java.util.*;
  * Booster Draft Format.
  */
 public class BoosterDraft implements IBoosterDraft {
-    private final BoosterDraftAI draftAI = new BoosterDraftAI();
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
+    private final List<LimitedPlayer> players = new ArrayList<>();
+    private LimitedPlayer localPlayer;
 
     protected int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
-    private int[] draftingBooster;
+    private int packsInDraft;
 
-    private List<List<PaperCard>> pack; // size 8
-
-    /** The draft picks. */
     private final Map<String, Float> draftPicks = new TreeMap<>();
     protected LimitedPoolType draftFormat;
 
@@ -63,6 +61,7 @@ public class BoosterDraft implements IBoosterDraft {
     public static BoosterDraft createDraft(final LimitedPoolType draftType) {
         final BoosterDraft draft = new BoosterDraft(draftType);
         if (!draft.generateProduct()) { return null; }
+        draft.initializeBoosters();
         return draft;
     }
 
@@ -115,7 +114,7 @@ public class BoosterDraft implements IBoosterDraft {
 
             if (sets.size() > 1) {
                 Object p;
-                if (nPacks == 3) {
+                if (nPacks == 3 && sets.size() < 4) {
                     p = SGuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
                 } else {
                     p = choosePackByPack(sets, nPacks);
@@ -158,7 +157,6 @@ public class BoosterDraft implements IBoosterDraft {
             throw new NoSuchElementException("Draft for mode " + this.draftFormat + " has not been set up!");
         }
 
-        this.pack = this.get8BoosterPack();
         return true;
     }
 
@@ -172,16 +170,26 @@ public class BoosterDraft implements IBoosterDraft {
         IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
         IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = null;
 
-        draft.pack = draft.get8BoosterPack();
+        draft.initializeBoosters();
         return draft;
     }
 
     protected BoosterDraft() {
-        this.draftFormat = LimitedPoolType.Full;
+        this(LimitedPoolType.Full);
     }
     protected BoosterDraft(final LimitedPoolType draftType) {
-        this.draftAI.setBd(this);
         this.draftFormat = draftType;
+
+        localPlayer = new LimitedPlayer(0);
+        players.add(localPlayer);
+        for(int i = 1; i < N_PLAYERS; i++) {
+            players.add(new LimitedPlayerAI(i));
+        }
+    }
+
+    @Override
+    public boolean isPileDraft() {
+        return false;
     }
 
     private void setupCustomDraft(final CustomLimited draft) {
@@ -228,19 +236,12 @@ public class BoosterDraft implements IBoosterDraft {
         return customs;
     }
 
-    /**
-     * <p>
-     * nextChoice.
-     * </p>
-     *
-     * @return a {@link forge.deck.CardPool} object.
-     */
     @Override
     public CardPool nextChoice() {
+        // Primary draft loop - Computer Chooses from their packs, you choose form your packs
         if (this.isRoundOver()) {
-            // If all packs are depleted crack 8 new packs
-            this.pack = this.get8BoosterPack();
-            if (this.pack == null) {
+            // If this round is over, try to start the next round
+            if (!startRound()) {
                 return null;
             }
         }
@@ -248,7 +249,7 @@ public class BoosterDraft implements IBoosterDraft {
         this.computerChoose();
 
         final CardPool result = new CardPool();
-        result.addAllFlat(this.pack.get(this.getCurrentBoosterIndex()));
+        result.addAllFlat(localPlayer.nextChoice());
 
         if (result.isEmpty()) {
             // Can't set a card, since none are available. Just pass "empty" packs.
@@ -260,129 +261,95 @@ public class BoosterDraft implements IBoosterDraft {
         return result;
     }
 
-    /**
-     * <p>
-     * get8BoosterPack.
-     * </p>
-     *
-     * @return an array of {@link forge.deck.CardPool} objects.
-     */
-    public List<List<PaperCard>> get8BoosterPack() {
-        if (this.nextBoosterGroup >= this.product.size()) {
-            return null;
+    public void initializeBoosters() {
+        for(Supplier<List<PaperCard>> boosterRound : this.product) {
+            for (int i = 0; i < N_PLAYERS; i++) {
+                this.players.get(i).receiveUnopenedPack(boosterRound.get());
+            }
         }
+        startRound();
+    }
 
-        final List<List<PaperCard>> list = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            list.add(this.product.get(this.nextBoosterGroup).get());
-        }
-
+    public boolean startRound() {
         this.nextBoosterGroup++;
-        this.currentBoosterSize = list.get(0).size();
         this.currentBoosterPick = 0;
-        draftingBooster = new int[]{0, 1, 2, 3, 4, 5, 6, 7};
-        return list;
+        packsInDraft = this.players.size();
+        LimitedPlayer firstPlayer = this.players.get(0);
+        if (firstPlayer.unopenedPacks.isEmpty()) {
+            return false;
+        }
+
+        for(LimitedPlayer pl : this.players) {
+            pl.newPack();
+        }
+        this.currentBoosterSize = firstPlayer.packQueue.peek().size();
+        return true;
     }
 
-    public void addSingleBoosterPack(int player, boolean random) {
-        // TODO Lore Seeker
-    }
-
-    // size 7, all the computers decks
     @Override
     public Deck[] getDecks() {
-        return this.draftAI.getDecks();
+        Deck decks[] = new Deck[7];
+        for (int i = 1; i < N_PLAYERS; i++) {
+            decks[i-1] = ((LimitedPlayerAI)this.players.get(i)).buildDeck();
+        }
+        return decks;
     }
 
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
         for(int i = 0; i < N_PLAYERS; i++) {
-            draftingBooster[i] = (draftingBooster[i] + adjust + pack.size()) % pack.size();
+            List<PaperCard> passingPack = this.players.get(i).passPack();
+
+            if (!passingPack.isEmpty()) {
+                // TODO Canal Dredger for passing a pack with a single card in it
+
+                int passTo = (i + adjust + N_PLAYERS) % N_PLAYERS;
+                this.players.get(passTo).receiveOpenedPack(passingPack);
+                this.players.get(passTo).adjustPackNumber(adjust, packsInDraft);
+            } else {
+                packsInDraft--;
+            }
         }
     }
 
     protected void computerChoose() {
         // Loop through players 1-7 to draft their current pack
         for (int i = 1; i < N_PLAYERS; i++) {
-            final List<PaperCard> booster = this.pack.get(this.draftingBooster[i]);
-
-            // Empty boosters can happen in a Conspiracy draft
-            if (!booster.isEmpty()) {
-                booster.remove(this.draftAI.choose(booster, i-1));
-            }
+            LimitedPlayer pl = this.players.get(i);
+            pl.draftCard(pl.chooseCard());
         }
-    } // computerChoose()
+    }
 
-    /**
-     *
-     * Get the current booster index for the Human
-     * @return int
-     */
     public int getCurrentBoosterIndex() {
-        return this.draftingBooster[0];
+        return localPlayer.currentPack;
     }
 
     @Override
     public boolean isRoundOver() {
-        for(List<PaperCard> singlePack : this.pack) {
-            if (!singlePack.isEmpty()) {
-                return false;
-            }
-        }
-
-        return true;
+        return packsInDraft == 0;
     }
-
 
     @Override
     public boolean hasNextChoice() {
-        return this.nextBoosterGroup < this.product.size() || !this.isRoundOver();
+        return !this.isRoundOver() || !this.localPlayer.unopenedPacks.isEmpty();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setChoice(final PaperCard c) {
-        final List<PaperCard> thisBooster = this.pack.get(this.getCurrentBoosterIndex());
+        final List<PaperCard> thisBooster = this.localPlayer.nextChoice();
 
         if (!thisBooster.contains(c)) {
             throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c
                     + " - booster pack = " + thisBooster);
         }
 
-        if (ForgePreferences.UPLOAD_DRAFT) {
-            for (int i = 0; i < thisBooster.size(); i++) {
-                final PaperCard cc = thisBooster.get(i);
-                final String cnBk = cc.getName() + "|" + cc.getEdition();
+        recordDraftPick(thisBooster, c);
 
-                float pickValue;
-                if (cc.equals(c)) {
-                    pickValue = thisBooster.size()
-                            * (1f - (((float) this.currentBoosterPick / this.currentBoosterSize) * 2f));
-                }
-                else {
-                    pickValue = 0;
-                }
-
-                if (!this.draftPicks.containsKey(cnBk)) {
-                    this.draftPicks.put(cnBk, pickValue);
-                }
-                else {
-                    final float curValue = this.draftPicks.get(cnBk);
-                    final float newValue = (curValue + pickValue) / 2;
-                    this.draftPicks.put(cnBk, newValue);
-                }
-            }
-        }
-
-        thisBooster.remove(c);
+        this.localPlayer.draftCard(c);
         this.currentBoosterPick++;
         this.passPacks();
-    } // setChoice()
-
-    @Override
-    public boolean isPileDraft() {
-        return false;
     }
 
 
@@ -402,7 +369,6 @@ public class BoosterDraft implements IBoosterDraft {
         }
         return sb.toString();
     }
-
 
     private static List<String> getSetCombos(final List<String> setz) {
         final String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
@@ -465,5 +431,32 @@ public class BoosterDraft implements IBoosterDraft {
             setCombos.add(String.format("%s/%s/%s", sets[8], sets[4], sets[0]));
         }
         return setCombos;
+    }
+
+    private void recordDraftPick(final List<PaperCard> thisBooster, PaperCard c) {
+        if (ForgePreferences.UPLOAD_DRAFT) {
+            for (int i = 0; i < thisBooster.size(); i++) {
+                final PaperCard cc = thisBooster.get(i);
+                final String cnBk = cc.getName() + "|" + cc.getEdition();
+
+                float pickValue;
+                if (cc.equals(c)) {
+                    pickValue = thisBooster.size()
+                            * (1f - (((float) this.currentBoosterPick / this.currentBoosterSize) * 2f));
+                }
+                else {
+                    pickValue = 0;
+                }
+
+                if (!this.draftPicks.containsKey(cnBk)) {
+                    this.draftPicks.put(cnBk, pickValue);
+                }
+                else {
+                    final float curValue = this.draftPicks.get(cnBk);
+                    final float newValue = (curValue + pickValue) / 2;
+                    this.draftPicks.put(cnBk, newValue);
+                }
+            }
+        }
     }
 }
