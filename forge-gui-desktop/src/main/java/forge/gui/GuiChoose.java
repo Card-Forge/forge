@@ -18,10 +18,13 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Function;
 
 import forge.FThreads;
+import forge.card.ICardFace;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
 
@@ -155,6 +158,11 @@ public class GuiChoose {
                             final T sel = list.getSelectedValue();
                             if (sel instanceof InventoryItem) {
                                 matchUI.setCard((InventoryItem) list.getSelectedValue());
+                                return;
+                            } else if (sel instanceof ICardFace) {
+                                final ICardFace face = (ICardFace)sel;
+                                final PaperCard paper = FModel.getMagicDb().getAllCards().getUniqueByName(face.getName());
+                                matchUI.setCard(paper);
                                 return;
                             }
 
