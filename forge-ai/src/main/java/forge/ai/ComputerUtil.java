@@ -210,6 +210,8 @@ public class ComputerUtil {
         final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
             source.setCastSA(sa);
+            sa.setLastStateBattlefield(game.getLastStateBattlefield());
+            sa.setLastStateGraveyard(game.getLastStateGraveyard());
             sa.setHostCard(game.getAction().moveToStack(source));
         }
         final Cost cost = sa.getPayCosts();
@@ -231,6 +233,8 @@ public class ComputerUtil {
         final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
             source.setCastSA(sa);
+            sa.setLastStateBattlefield(game.getLastStateBattlefield());
+            sa.setLastStateGraveyard(game.getLastStateGraveyard());
             sa.setHostCard(ai.getGame().getAction().moveToStack(source));
         }
 
@@ -248,6 +252,8 @@ public class ComputerUtil {
         final Card source = newSA.getHostCard();
         if (newSA.isSpell() && !source.isCopiedSpell()) {
             source.setCastSA(newSA);
+            sa.setLastStateBattlefield(game.getLastStateBattlefield());
+            sa.setLastStateGraveyard(game.getLastStateGraveyard());
             newSA.setHostCard(game.getAction().moveToStack(source));
         }
 
@@ -265,6 +271,8 @@ public class ComputerUtil {
             final Card source = sa.getHostCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 source.setCastSA(sa);
+                sa.setLastStateBattlefield(game.getLastStateBattlefield());
+                sa.setLastStateGraveyard(game.getLastStateGraveyard());
                 sa.setHostCard(game.getAction().moveToStack(source));
             }
 
