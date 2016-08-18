@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
 import forge.card.CardEdition.CardInSet;
@@ -41,8 +42,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
-    private final Map<String, PaperCard> uniqueCardsByName = new TreeMap<String, PaperCard>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
+    private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private static Map<String, String> artPrefs = new HashMap<String, String>();
 
     private final List<PaperCard> allCards = new ArrayList<PaperCard>();
@@ -116,6 +118,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0) {
         this.rulesByName = rules;
         this.editions = editions0;
+
+        // create faces list from rules
+        for (final CardRules rule : rules.values() ) {
+            final ICardFace main = rule.getMainPart(); 
+            facesByName.put(main.getName(), main);
+            final ICardFace other = rule.getMainPart();
+            if (other != null) {
+                facesByName.put(other.getName(), other);
+            }
+        }
     }
 
     public void initialize(boolean logMissingPerEdition, boolean logMissingSummary) {
@@ -459,6 +471,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public Collection<PaperCard> getUniqueCards() {
         return uniqueCardsByName.values();
+    }
+
+    public PaperCard getUniqueByName(final String name) {
+        return uniqueCardsByName.get(name);
+    }
+
+    public Collection<ICardFace> getAllFaces() {
+        return facesByName.values();
+    }
+
+    public ICardFace getFaceByName(final String name) {
+        return facesByName.get(name);
     }
 
     @Override
