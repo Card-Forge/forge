@@ -1070,10 +1070,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             
             movedCards.add(movedCard);
 
-            if (!triggerList.containsKey(originZone.getZoneType())) {
-                triggerList.put(originZone.getZoneType(), new CardCollection());
+            if (originZone != null) {
+                if (!triggerList.containsKey(originZone.getZoneType())) {
+                    triggerList.put(originZone.getZoneType(), new CardCollection());
+                }
+                triggerList.get(originZone.getZoneType()).add(movedCard);
             }
-            triggerList.get(originZone.getZoneType()).add(movedCard);
 
             if (champion) {
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
