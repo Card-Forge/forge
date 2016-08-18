@@ -3678,7 +3678,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("NamedCard")) {
-            if (!getName().equals(source.getNamedCard())) {
+            if (getName().equals("") || !sharesNameWith(source.getNamedCard())) {
                 return false;
             }
         } else if (property.equals("NamedByRememberedPlayer")) {
@@ -5361,12 +5361,16 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isColorless() { return CardUtil.getColors(this).isColorless(); }
 
     public final boolean sharesNameWith(final Card c1) {
-        boolean shares;
-        shares = getName().equals(c1.getName());
+        return sharesNameWith(c1.getName());
+    }
 
-        if (isSplitCard() && c1.isSplitCard()) {
-            shares |= c1.getName().equals(getState(CardStateName.LeftSplit).getName());
-            shares |= c1.getName().equals(getState(CardStateName.RightSplit).getName());
+    public final boolean sharesNameWith(final String name) {
+        boolean shares;
+        shares = getName().equals(name);
+
+        if (isSplitCard()) {
+            shares |= name.equals(getState(CardStateName.LeftSplit).getName());
+            shares |= name.equals(getState(CardStateName.RightSplit).getName());
         }
 
         return shares;
