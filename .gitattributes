@@ -175,6 +175,7 @@ forge-core/src/main/java/forge/card/CardChangedType.java -text
 forge-core/src/main/java/forge/card/CardDb.java -text
 forge-core/src/main/java/forge/card/CardEdition.java -text
 forge-core/src/main/java/forge/card/CardFace.java -text
+forge-core/src/main/java/forge/card/CardFacePredicates.java -text svneol=unset#text/plain
 forge-core/src/main/java/forge/card/CardRarity.java -text
 forge-core/src/main/java/forge/card/CardRules.java -text
 forge-core/src/main/java/forge/card/CardRulesPredicates.java -text
