@@ -116,4 +116,15 @@ final class CardFace implements ICardFace {
         if ( variables == null ) variables = emptyMap;
         if ( null == nonAbilityText ) nonAbilityText = "";
     }
+
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+
+    @Override
+    public int compareTo(ICardFace o) {
+        return getName().compareTo(o.getName());
+    }
 }
