@@ -38,7 +38,9 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.achievement.AchievementCollection;
 import forge.ai.GameState;
+import forge.card.CardDb;
 import forge.card.ColorSet;
+import forge.card.ICardFace;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -1148,9 +1150,9 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public PaperCard chooseSinglePaperCard(final SpellAbility sa, final String message, final Predicate<PaperCard> cpp, final String name) {
-        final Iterable<PaperCard> cardsFromDb = FModel.getMagicDb().getCommonCards().getUniqueCards();
-        final List<PaperCard> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
+    public ICardFace chooseSingleCardFace(final SpellAbility sa, final String message, final Predicate<ICardFace> cpp, final String name) {
+        final Iterable<ICardFace> cardsFromDb = FModel.getMagicDb().getCommonCards().getAllFaces();
+        final List<ICardFace> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
         Collections.sort(cards);
         return getGui().one(message, cards);
     }
@@ -1372,9 +1374,10 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public String chooseCardName(final SpellAbility sa, final Predicate<PaperCard> cpp, final String valid, final String message) {
+    public String chooseCardName(final SpellAbility sa, final Predicate<ICardFace> cpp, final String valid, final String message) {
         while (true) {
-            final PaperCard cp = chooseSinglePaperCard(sa, message, cpp, sa.getHostCard().getName());
+            final ICardFace cardFace = chooseSingleCardFace(sa, message, cpp, sa.getHostCard().getName());
+            final PaperCard cp = FModel.getMagicDb().getCommonCards().getCard(cardFace.getName());
             final Card instanceForPlayer = Card.fromPaperCard(cp, player); // the Card instance for test needs a game to be tested
             if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
                 return cp.getName();
@@ -1768,14 +1771,17 @@ public class PlayerControllerHuman
                 return;
             }
 
-            final List<PaperCard> cards =  Lists.newArrayList(FModel.getMagicDb().getCommonCards().getUniqueCards());
-            Collections.sort(cards);
+            final CardDb carddb = FModel.getMagicDb().getCommonCards();
+            final List<ICardFace> faces =  Lists.newArrayList(carddb.getAllFaces());
+            Collections.sort(faces);
 
             // use standard forge's list selection dialog
-            final IPaperCard c = getGui().oneOrNone("Name the card", cards);
-            if (c == null) {
+            final ICardFace f = getGui().oneOrNone("Name the card", faces);
+            if (f == null) {
                 return;
             }
+
+            final PaperCard c = carddb.getUniqueByName(f.getName());
 
             game.getAction().invoke(new Runnable() { @Override public void run() {
                 game.getAction().moveToHand(Card.fromPaperCard(c, p));
@@ -1792,14 +1798,17 @@ public class PlayerControllerHuman
                 return;
             }
 
-            final List<PaperCard> cards =  Lists.newArrayList(FModel.getMagicDb().getCommonCards().getUniqueCards());
-            Collections.sort(cards);
+            final CardDb carddb = FModel.getMagicDb().getCommonCards();
+            final List<ICardFace> faces =  Lists.newArrayList(carddb.getAllFaces());
+            Collections.sort(faces);
 
             // use standard forge's list selection dialog
-            final IPaperCard c = getGui().oneOrNone("Name the card", cards);
-            if (c == null) {
+            final ICardFace f = getGui().oneOrNone("Name the card", faces);
+            if (f == null) {
                 return;
             }
+
+            final PaperCard c = carddb.getUniqueByName(f.getName());
 
             game.getAction().invoke(new Runnable() {
                 @Override public void run() {
@@ -1930,5 +1939,11 @@ public class PlayerControllerHuman
         final PlayerZone hand = player.getZone(ZoneType.Hand);
         hand.reorder(game.getCard(card), index);
         player.updateZoneForView(hand);
+    }
+
+    @Override
+    public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
+        ICardFace face = getGui().one(message, faces);
+        return face == null ? "" : face.getName();
     }
 }

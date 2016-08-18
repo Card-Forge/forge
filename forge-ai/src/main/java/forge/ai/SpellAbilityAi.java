@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
+import forge.card.ICardFace;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
@@ -267,6 +268,13 @@ public abstract class SpellAbilityAi {
     protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayerOrPlaneswalker is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
+    }
+
+    public String chooseCardName(Player ai, SpellAbility sa, List<ICardFace> faces) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseCardName is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+
+        final ICardFace face = Iterables.getFirst(faces, null); 
+        return face == null ? "" : face.getName();
     }
 
     protected static boolean isUselessCreature(Player ai, Card c) {

@@ -38,6 +38,7 @@ import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
+import forge.card.ICardFace;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -74,7 +75,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.collect.FCollectionView;
 import forge.util.Lang;
@@ -222,7 +222,7 @@ public class CardFactoryUtil {
     public static boolean handleHiddenAgenda(Player player, Card card) {
         SpellAbility sa = new SpellAbility.EmptySa(card);
         sa.getMapParams().put("AILogic", card.getSVar("AgendaLogic"));
-        Predicate<PaperCard> cpp = Predicates.alwaysTrue();
+        Predicate<ICardFace> cpp = Predicates.alwaysTrue();
         //Predicate<Card> pc = Predicates.in(player.getAllCards());
         // TODO This would be better to send in the player's deck, not all cards
         String name = player.getController().chooseCardName(sa, cpp, "Card", "Name a card for " + card.getName());

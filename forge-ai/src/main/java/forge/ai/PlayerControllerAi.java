@@ -11,6 +11,7 @@ import forge.LobbyPlayer;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.ProtectAi;
 import forge.card.ColorSet;
+import forge.card.ICardFace;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -577,8 +578,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public PaperCard chooseSinglePaperCard(SpellAbility sa, String message,
-            Predicate<PaperCard> cpp, String name) {
+    public ICardFace chooseSingleCardFace(SpellAbility sa, String message,
+            Predicate<ICardFace> cpp, String name) {
         throw new UnsupportedOperationException("Should not be called for AI"); // or implement it if you know how
     }
 
@@ -831,7 +832,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message) {
+    public String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message) {
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
             if (logic.equals("MostProminentInComputerDeck")) {
@@ -850,7 +851,7 @@ public class PlayerControllerAi extends PlayerController {
                 return ComputerUtilCard.getMostProminentCardName(cards);
             }
         } else {
-            CardCollectionView list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponent());
+            CardCollectionView list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponents());
             list = CardLists.filter(list, Predicates.not(Presets.LANDS));
             if (!list.isEmpty()) {
                 return list.get(0).getName();
@@ -888,5 +889,14 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void cancelAwaitNextInput() {
         // Do nothing
+    }
+
+    @Override
+    public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return SpellApiToAi.Converter.get(api).chooseCardName(player, sa, faces);
     }
 }

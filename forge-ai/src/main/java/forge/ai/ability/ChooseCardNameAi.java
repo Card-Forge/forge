@@ -1,14 +1,27 @@
 package forge.ai.ability;
 
+import java.util.List;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
+import forge.StaticData;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
+import forge.card.CardDb;
+import forge.card.CardRules;
+import forge.card.CardSplitType;
+import forge.card.CardStateName;
+import forge.card.ICardFace;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.item.PaperCard;
 
 public class ChooseCardNameAi extends SpellAbilityAi {
 
@@ -68,4 +81,42 @@ public class ChooseCardNameAi extends SpellAbilityAi {
         return ComputerUtilCard.getBestAI(options);
     }
 
+    @Override
+    public String chooseCardName(Player ai, SpellAbility sa, List<ICardFace> faces) {
+        // this function is only for "Alhammarret, High Arbiter"
+
+        if (faces.isEmpty()) {
+            return "";
+        } else if (faces.size() == 1) {
+            return Iterables.getFirst(faces, null).getName();
+        }
+
+        List<Card> cards = Lists.newArrayList();
+        final CardDb cardDb = StaticData.instance().getCommonCards();
+
+        for (ICardFace face : faces) {
+            final CardRules rules = cardDb.getRules(face.getName());
+            boolean isOther = rules.getOtherPart() == face;
+            final PaperCard paper = cardDb.getCard(rules.getName());
+            final Card card = Card.fromPaperCard(paper, ai);
+
+            if (rules.getSplitType() == CardSplitType.Split) {
+                Card copy = CardUtil.getLKICopy(card);
+                // for calcing i need only one split side    
+                if (isOther) {
+                    copy.getCurrentState().copyFrom(card, card.getState(CardStateName.RightSplit));                    
+                } else {
+                    copy.getCurrentState().copyFrom(card, card.getState(CardStateName.LeftSplit));
+                }
+                copy.updateStateForView();
+
+                cards.add(copy);
+            } else if (!isOther) {
+                // other can't be cast that way, not need to prevent that
+                cards.add(card);
+            }
+        }
+
+        return ComputerUtilCard.getBestAI(cards).getName();
+    }
 }

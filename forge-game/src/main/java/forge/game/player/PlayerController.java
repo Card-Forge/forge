@@ -13,6 +13,7 @@ import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
 import forge.card.ColorSet;
+import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
@@ -189,15 +190,15 @@ public abstract class PlayerController {
     public abstract byte chooseColor(String message, SpellAbility sa, ColorSet colors);
     public abstract byte chooseColorAllowColorless(String message, Card c, ColorSet colors);
 
-    public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
+    public abstract ICardFace chooseSingleCardFace(SpellAbility sa, String message, Predicate<ICardFace> cpp, String name);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
     public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt);
 
     public abstract boolean confirmPayment(CostPart costPart, String string);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
-	public abstract CardShields chooseRegenerationShield(Card c);
-	
+    public abstract CardShields chooseRegenerationShield(Card c);
+
     // these 4 need some refining.
     public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers);
     public abstract void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs);
@@ -222,8 +223,9 @@ public abstract class PlayerController {
 
     public abstract Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCreats);
 
-    public abstract String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message);
+    public abstract String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message);
 
+    public abstract String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message);
     // better to have this odd method than those if playerType comparison in ChangeZone  
     public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider);
 
