@@ -1,11 +1,11 @@
 package forge.limited;
 
-import com.google.common.collect.Lists;
+//import com.google.common.collect.Lists;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
-import forge.limited.powers.DraftPower;
+//import forge.limited.powers.DraftPower;
 
 import java.util.*;
 
