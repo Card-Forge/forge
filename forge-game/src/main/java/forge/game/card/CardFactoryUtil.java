@@ -3237,7 +3237,7 @@ public class CardFactoryUtil {
 
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
-        if (keyword.startsWith("Alternative Cost")) {
+        if (keyword.startsWith("Alternative Cost") && !card.isLand()) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];   
             final SpellAbility sa = card.getFirstSpellAbility();
