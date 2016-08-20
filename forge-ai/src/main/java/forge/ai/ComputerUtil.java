@@ -228,6 +228,7 @@ public class ComputerUtil {
     }
 
     public static final void playSpellAbilityForFree(final Player ai, final SpellAbility sa) {
+        final Game game = ai.getGame();
         sa.setActivatingPlayer(ai);
 
         final Card source = sa.getHostCard();
@@ -235,7 +236,7 @@ public class ComputerUtil {
             source.setCastSA(sa);
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
-            sa.setHostCard(ai.getGame().getAction().moveToStack(source));
+            sa.setHostCard(game.getAction().moveToStack(source));
         }
 
         ai.getGame().getStack().add(sa);
