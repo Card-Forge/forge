@@ -29,9 +29,9 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -2363,10 +2363,10 @@ public class ComputerUtilCombat {
         if (original.isDoubleFaced() && !original.isInAlternateState()) {
             for (SpellAbility sa : original.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.SetState && ComputerUtilCost.canPayCost(sa, original.getController())) {
-                    Card transformed = CardFactory.copyCard(original, true);    // clone into new object
-                    if (transformed.changeCardState("Transform", null)) {
-                        return transformed;
-                    }
+                    Card transformed = CardUtil.getLKICopy(original);
+                    transformed.getCurrentState().copyFrom(original, original.getAlternateState());
+                    transformed.updateStateForView();
+                    return transformed;
                 }
             }
         }
