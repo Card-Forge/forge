@@ -336,6 +336,7 @@ forge-game/src/main/java/forge/game/ability/effects/AnimateEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/AnimateEffectBase.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/ability/effects/AttachEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BalanceEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/BecomeMonarchEffect.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/ability/effects/BecomesBlockedEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BidLifeEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BondEffect.java -text
@@ -665,6 +666,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerAttackerBlockedByCreature.jav
 forge-game/src/main/java/forge/game/trigger/TriggerAttackerUnblocked.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerAttackersDeclared.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerAttacks.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerBecomeMonarch.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerBecomeMonstrous.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerBecomeRenowned.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerBecomesTarget.java svneol=native#text/plain

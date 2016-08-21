@@ -20,6 +20,7 @@ public enum TriggerType {
     AttackersDeclared(TriggerAttackersDeclared.class),
     AttackerUnblocked(TriggerAttackerUnblocked.class),
     Attacks(TriggerAttacks.class),
+    BecomeMonarch(TriggerBecomeMonarch.class),
     BecomeMonstrous(TriggerBecomeMonstrous.class),
     BecomeRenowned(TriggerBecomeRenowned.class),
     BecomesTarget(TriggerBecomesTarget.class),

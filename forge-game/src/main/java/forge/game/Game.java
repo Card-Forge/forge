@@ -92,6 +92,9 @@ public class Game {
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
+    private Player monarch = null;
+    private Player monarchBeginTurn = null;
+
     private Direction turnOrder = Direction.getDefaultDirection();
 
     private long timestamp = 0;
@@ -103,6 +106,21 @@ public class Game {
     private final GameView view; 
     private final Tracker tracker = new Tracker();
 
+    public Player getMonarch() {
+        return monarch;
+    }
+
+    public void setMonarch(final Player p) {
+        monarch = p;
+    }
+
+    public Player getMonarchBeginTurn() {
+        return monarchBeginTurn;
+    }
+
+    public void setMonarchBeginTurn(Player monarchBeginTurn) {
+        this.monarchBeginTurn = monarchBeginTurn;
+    }
 
     public CardCollectionView getLastStateBattlefield() {
         return lastStateBattlefield;
@@ -597,6 +615,15 @@ public class Game {
                 if (c.getController().equals(p)) {
                     this.getAction().exile(c);
                 }
+            }
+        }
+
+        if (p != null && p.equals(getMonarch())) {
+            // if the player who lost was the Monarch, someone else will be the monarch
+            if(p.equals(getPhaseHandler().getPlayerTurn())) {
+                getAction().becomeMonarch(getNextPlayerAfter(p));
+            } else {
+                getAction().becomeMonarch(getPhaseHandler().getPlayerTurn());
             }
         }
 

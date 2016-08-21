@@ -144,6 +144,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection gainedOwnership = new CardCollection();
     private int numManaConversion = 0;
 
+    private Card monarchEffect = null;
+
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
 
@@ -2043,6 +2045,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (equals(source.getOwner())) {
                 return false;
             }
+        } else if (property.equals("isMonarch")) {
+            if (!equals(game.getMonarch())) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
             final String v = property.split(" ")[1];
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
@@ -2934,5 +2940,49 @@ public class Player extends GameEntity implements Comparable<Player> {
     @Override
     public PlayerView getView() {
         return view;
+    }
+
+    public void createMonarchEffect() {
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (monarchEffect == null) {
+            monarchEffect = new Card(-1, game);
+            monarchEffect.setOwner(this);
+            monarchEffect.setImageKey("t:monarch");
+            monarchEffect.setName("The Monarch");
+            monarchEffect.addType("Effect");
+
+            {
+                final String drawTrig = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | " + 
+                " TriggerDescription$ At the beginning of your end step, draw a card.";
+                final String drawEff = "AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1";
+
+                final Trigger drawTrigger = TriggerHandler.parseTrigger(drawTrig, monarchEffect, true);
+
+                drawTrigger.setOverridingAbility(AbilityFactory.getAbility(drawEff, monarchEffect));
+                monarchEffect.addTrigger(drawTrigger);
+            }
+
+            {
+                final String damageTrig = "Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | TriggerZones$ Command |" +
+                " TriggerDescription$ Whenever a creature deals combat damage to you, its controller becomes the monarch.";
+                final String damageEff = "AB$BecomeMonarch | Cost$ 0 | Defined$ TriggeredSourceController";
+
+                final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, monarchEffect, true);
+
+                damageTrigger.setOverridingAbility(AbilityFactory.getAbility(damageEff, monarchEffect));
+                monarchEffect.addTrigger(damageTrigger);
+            }
+            monarchEffect.updateStateForView();
+        }
+        com.add(monarchEffect);
+
+        this.updateZoneForView(com);
+    }
+    public void removeMonarchEffect() {
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (monarchEffect != null) {
+            com.remove(monarchEffect);
+            this.updateZoneForView(com);
+        }
     }
 }

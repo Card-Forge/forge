@@ -18,7 +18,6 @@
 package forge.game;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -1669,4 +1668,20 @@ public class GameAction {
         }
     }
 
+    public void becomeMonarch(final Player p) {
+        final Player previous = game.getMonarch();
+        if (p == null || p.equals(previous))
+            return;
+
+        if (previous != null)
+            previous.removeMonarchEffect();
+
+        p.createMonarchEffect();
+        game.setMonarch(p);
+
+        // Run triggers
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Player", p);
+        game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
+    }
 }

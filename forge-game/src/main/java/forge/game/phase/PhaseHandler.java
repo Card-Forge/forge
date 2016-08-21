@@ -752,6 +752,8 @@ public class PhaseHandler implements java.io.Serializable {
 
         game.getTriggerHandler().handlePlayerDefinedDelTriggers(next);
 
+        game.setMonarchBeginTurn(game.getMonarch());
+
         if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
             for (Card p :game.getActivePlanes()) {
                 if (p != null) {
