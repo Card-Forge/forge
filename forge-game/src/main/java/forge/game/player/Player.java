@@ -2953,7 +2953,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             {
                 final String drawTrig = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | " + 
-                " TriggerDescription$ At the beginning of your end step, draw a card.";
+                "ValidPlayer$ You |  TriggerDescription$ At the beginning of your end step, draw a card.";
                 final String drawEff = "AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1";
 
                 final Trigger drawTrigger = TriggerHandler.parseTrigger(drawTrig, monarchEffect, true);
