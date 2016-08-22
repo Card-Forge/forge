@@ -2415,17 +2415,7 @@ public class CardFactoryUtil {
                 setupHauntSpell(card);
             }
             else if (keyword.equals("Provoke")) {
-                final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | "
-                        + "OptionalDecider$ You | Execute$ ProvokeAbility | Secondary$ True | TriggerDescription$ "
-                        + "When this attacks, you may have target creature defending player "
-                        + "controls untap and block it if able.";
-                final String abString = "DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | "
-                        + "TgtPrompt$ Select target creature defending player controls | SubAbility$ ProvokeUntap";
-                final String dbString = "DB$ Untap | Defined$ Targeted";
-                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
-                card.addTrigger(parsedTrigger);
-                card.setSVar("ProvokeAbility", abString);
-                card.setSVar("ProvokeUntap", dbString);
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Myriad")) {
                 final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | Execute$ "
@@ -2728,7 +2718,7 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             else if (keyword.startsWith("Bestow")) {
-            	addSpellAbility(keyword, card, null);
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.equals("Hideaway")) {
                 card.getCurrentState().addIntrinsicKeyword("CARDNAME enters the battlefield tapped.");
@@ -2803,7 +2793,7 @@ public class CardFactoryUtil {
             repEffsb.append(" | Optional$ True");
         }
         if (secondary) {
-        	repEffsb.append(" | Secondary$ True");
+            repEffsb.append(" | Secondary$ True");
         }
 
         if (!zone.isEmpty()) {
@@ -2994,7 +2984,7 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(trigger);
 
-        	if (!intrinsic) {
+            if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
         } else if (keyword.equals("Exalted")) {
@@ -3028,7 +3018,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Flanking")) {
             final StringBuilder trigFlanking = new StringBuilder(
                     "Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.withoutFlanking " +
-        	        " | TriggerZones$ Battlefield | Execute$ FlankingPump | Secondary$ True " +
+                    " | TriggerZones$ Battlefield | Execute$ FlankingPump | Secondary$ True " +
                     " | TriggerDescription$ Flanking (" + Keyword.getInstance(keyword).getReminderText() + ")");
 
             final String abStringFlanking = "DB$ Pump | Defined$ TriggeredBlocker | NumAtt$ -1 | NumDef$ -1";
@@ -3070,7 +3060,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Persist")) {
             final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
                     " | Execute$ PersistReturn | ValidCard$ Card.Self+counters_EQ0_M1M1 | Secondary$ True" + 
-            		" | TriggerDescription$ Persist (" + Keyword.getInstance(keyword).getReminderText() + ")";
+                    " | TriggerDescription$ Persist (" + Keyword.getInstance(keyword).getReminderText() + ")";
             final String effect = "AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1";
 
             final Trigger persistTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
@@ -3097,6 +3087,23 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Presence")) {
             final String[] k = keyword.split(":");
             card.addIntrinsicKeyword("Kicker Reveal<1/" + k[1] + "> : Generic");
+        } else if (keyword.equals("Provoke")) {
+            final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | "
+                    + "OptionalDecider$ You | Execute$ ProvokeAbility | Secondary$ True | TriggerDescription$ "
+                    + Keyword.getInstance(keyword).getReminderText();
+            final String abString = "DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | "
+                    + "TgtPrompt$ Select target creature defending player controls | SubAbility$ ProvokeUntap";
+            final String dbString = "DB$ Untap | Defined$ Targeted";
+
+            card.setSVar("ProvokeAbility", abString);
+            card.setSVar("ProvokeUntap", dbString);
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
+
+            final Trigger cardTrigger = card.addTrigger(parsedTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
         } else if (keyword.startsWith("Rampage")) {
             final String[] k = keyword.split(" ");
             final String n = k[1];
@@ -3143,7 +3150,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Undying")) {
             final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
                     " | Execute$ UndyingReturn | ValidCard$ Card.Self+counters_EQ0_P1P1 | Secondary$ True" + 
-            		" | TriggerDescription$ Undying (" + Keyword.getInstance(keyword).getReminderText() + ")";
+                    " | TriggerDescription$ Undying (" + Keyword.getInstance(keyword).getReminderText() + ")";
             final String effect = "AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1";
 
             final Trigger undyingTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
@@ -3244,7 +3251,7 @@ public class CardFactoryUtil {
             final SpellAbility newSA = sa.copy();
             newSA.setBasicSpell(false);
             if (costStr.equals("ConvertedManaCost")) {
-            	costStr = Integer.toString(card.getCMC());
+                costStr = Integer.toString(card.getCMC());
             }
             final Cost cost = new Cost(costStr, false).add(sa.getPayCosts().copyWithNoMana());
             newSA.getMapParams().put("Secondary", "True");
@@ -3269,7 +3276,7 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(sbAttach.toString(), card);
             sa.setDescription("Bestow " + ManaCostParser.parse(cost) +
-            		" (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                    " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             sa.setStackDescription("Bestow - " + card.getName());
             sa.setBasicSpell(false);
             if (!intrinsic) {
@@ -3336,12 +3343,12 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             String effect = "AB$ ChangeZone | Cost$ " + manacost +
-            		" Return<1/Creature.attacking+unblocked/unblocked attacker> " + 
-            		"| PrecostDesc$ Ninjutsu | CostDesc$ " + ManaCostParser.parse(manacost) +
-            		"| ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True " +
-            		"| Destination$ Battlefield | Defined$ Self |" + 
-            		" SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")";
-            
+                    " Return<1/Creature.attacking+unblocked/unblocked attacker> " + 
+                    "| PrecostDesc$ Ninjutsu | CostDesc$ " + ManaCostParser.parse(manacost) +
+                    "| ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True " +
+                    "| Destination$ Battlefield | Defined$ Self |" + 
+                    " SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             if (!intrinsic) {
                 sa.setTemporary(true);
@@ -3355,11 +3362,11 @@ public class CardFactoryUtil {
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Scavenge")) {
             final String[] k = keyword.split(":");
-	        final String manacost = k[1];
+            final String manacost = k[1];
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> " +
                     "| ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 " +
-            		"| CounterNum$ ScavengeX | SorcerySpeed$ True | References$ ScavengeX " + 
+                    "| CounterNum$ ScavengeX | SorcerySpeed$ True | References$ ScavengeX " + 
                     "| PrecostDesc$ Scavenge | CostDesc$ " + ManaCostParser.parse(manacost) + 
                     "| SpellDescription$ (" + Keyword.getInstance("Scavenge:" + manacost).getReminderText() + ")";
 
@@ -3448,7 +3455,7 @@ public class CardFactoryUtil {
             sb.append(cost.toSimpleString());
 
             final String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All" +
-            		" | Description$ " + sb.toString() + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+                    " | Description$ " + sb.toString() + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
             StaticAbility st = card.addStaticAbility(effect);
             st.setIntrinsic(intrinsic);
             if (!intrinsic) {
@@ -3459,7 +3466,7 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             final String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
-            		" | Description$ Strive - CARDNAME costs " + ManaCostParser.parse(manacost) + " more to cast for each target beyond the first.";
+                    " | Description$ Strive - CARDNAME costs " + ManaCostParser.parse(manacost) + " more to cast for each target beyond the first.";
             StaticAbility st = card.addStaticAbility(effect);
             st.setIntrinsic(intrinsic);
             if (!intrinsic) {
@@ -3655,7 +3662,7 @@ public class CardFactoryUtil {
         altCostSA.setDescription(costDescription);
         if (params.containsKey("References")) {
             for (String svar : params.get("References").split(",")) {
-            	altCostSA.setSVar(svar, card.getSVar(svar));
+                altCostSA.setSVar(svar, card.getSVar(svar));
             }
         }
         return altCostSA;
@@ -3663,9 +3670,9 @@ public class CardFactoryUtil {
 
     private static final Map<String,String> emptyMap = new TreeMap<String,String>();
     public static SpellAbility setupETBReplacementAbility(SpellAbility sa) {
-    	AbilitySub as = new AbilitySub(ApiType.InternalEtbReplacement, sa.getHostCard(), null, emptyMap);
-    	sa.appendSubAbility(as);
-    	return as;
+        AbilitySub as = new AbilitySub(ApiType.InternalEtbReplacement, sa.getHostCard(), null, emptyMap);
+        sa.appendSubAbility(as);
+        return as;
         // ETBReplacementMove(sa.getHostCard(), null));
     }
 
