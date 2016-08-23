@@ -108,6 +108,7 @@ public class TriggerAttacks extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
         sa.setTriggeringObject("Defender", this.getRunParams().get("Attacked"));
+        sa.setTriggeringObject("Defenders", this.getRunParams().get("Defenders"));
         sa.setTriggeringObject("DefendingPlayer", this.getRunParams().get("DefendingPlayer"));
     }
 
