@@ -580,15 +580,19 @@ public class AbilityUtils {
             }
             return CardFactoryUtil.handlePaid(tgtList, calcX[1], card) * multiplier;
         }
+        if (calcX[0].startsWith("TriggeredPlayers") || calcX[0].equals("TriggeredCardController")) {
+            String key = calcX[0];
+            if (calcX[0].startsWith("TriggeredPlayers")) {
+                key = "Triggered" + key.substring(16);
+            }
+            final List<Player> players = new ArrayList<Player>();
+            Iterables.addAll(players, getDefinedPlayers(card, key, sa));
+            return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+        }
         if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
             final SpellAbility root = sa.getRootAbility();
             Object o = root.getTriggeringObject(calcX[0].substring(9));
             return o instanceof Player ? CardFactoryUtil.playerXProperty((Player) o, calcX[1], card) * multiplier : 0;
-        }
-        if (calcX[0].equals("TriggeredCardController")) {
-            final List<Player> players = new ArrayList<Player>();
-            Iterables.addAll(players, getDefinedPlayers(card, "TriggeredCardController", sa));
-            return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
         }
         if (calcX[0].equals("TriggeredSpellAbility")) {
             final SpellAbility root = sa.getRootAbility();
