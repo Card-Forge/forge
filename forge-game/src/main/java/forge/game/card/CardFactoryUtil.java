@@ -2191,6 +2191,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Surge")) {
                 card.addSpellAbility(makeSurgeSpell(card, keyword));
             }
+            else if (keyword.equals("Melee")) {
+                addTriggerAbility(keyword, card, null);                
+            }
             else if (keyword.startsWith("Monstrosity")) {
                 final String[] k = keyword.split(":");
                 final String magnitude = k[0].substring(12);
@@ -3054,6 +3057,18 @@ public class CardFactoryUtil {
             card.setSVar(trigPlay, playMadness);
             card.setSVar("DBWasNotPlayMadness", moveToYard);
             card.setSVar("DBMadnessCleanup", cleanUp);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Melee")) {
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Execute$ MeleePump | Secondary$ True " +
+                    " | TriggerDescription$ Melee (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String effect = "DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ MeleeX | NumDef$ MeleeX | References$ MeleeX";
+            card.setSVar("MeleePump", effect);
+            card.setSVar("MeleeX", "TriggeredPlayersDefenders$Amount");
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(trigger);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }

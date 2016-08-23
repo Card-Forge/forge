@@ -1425,7 +1425,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("exile it haunting target creature.");
                 }
                 sb.append(")");
-            } else if (keyword.equals("Convoke") || keyword.equals("Menace") || keyword.equals("Dethrone")) {
+            } else if (keyword.equals("Convoke") || keyword.equals("Menace") || keyword.equals("Dethrone")
+                     || keyword.equals("Melee")) {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 }

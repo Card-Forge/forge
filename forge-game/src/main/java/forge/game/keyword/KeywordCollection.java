@@ -8,11 +8,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Maps;
+
 public class KeywordCollection implements Iterable<String>, Serializable {
     private static final long serialVersionUID = -2882986558147844702L;
 
     private transient KeywordCollectionView view;
-    private final EnumMap<Keyword, List<KeywordInstance<?>>> map = new EnumMap<Keyword, List<KeywordInstance<?>>>(Keyword.class);
+    private final EnumMap<Keyword, List<KeywordInstance<?>>> map = Maps.newEnumMap(Keyword.class);
 
     public boolean contains(Keyword keyword) {
         return map.containsKey(keyword);
