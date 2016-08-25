@@ -116,9 +116,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int mayPlayTurn = 0;
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
-    private final Map<Long, CardChangedType> changedCardTypes = new TreeMap<>();
-    private final Map<Long, KeywordsChange> changedCardKeywords = new TreeMap<>();
-    private final SortedMap<Long, CardColor> changedCardColors = new TreeMap<>();
+    private final Map<Long, CardChangedType> changedCardTypes = Maps.newTreeMap();
+    private final Map<Long, KeywordsChange> changedCardKeywords = Maps.newTreeMap();
+    private final SortedMap<Long, CardColor> changedCardColors = Maps.newTreeMap();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
@@ -132,10 +132,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final MapOfLists<GameEntity, Object> rememberMap = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
     private Map<Player, String> flipResult;
 
-    private Map<Card, Integer> receivedDamageFromThisTurn = new TreeMap<>();
-    private Map<Card, Integer> dealtDamageToThisTurn = new TreeMap<>();
-    private Map<String, Integer> dealtDamageToPlayerThisTurn = new TreeMap<>();
-    private final Map<Card, Integer> assignedDamageMap = new TreeMap<>();
+    private Map<Card, Integer> receivedDamageFromThisTurn = Maps.newTreeMap();
+    private Map<Card, Integer> dealtDamageToThisTurn = Maps.newTreeMap();
+    private Map<String, Integer> dealtDamageToPlayerThisTurn = Maps.newTreeMap();
+    private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
 
     private boolean isCommander = false;
     private boolean startsGameInPlay = false;
@@ -209,7 +209,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Player owner = null;
     private Player controller = null;
     private long controllerTimestamp = 0;
-    private NavigableMap<Long, Player> tempControllers = new TreeMap<>();
+    private NavigableMap<Long, Player> tempControllers = Maps.newTreeMap();
 
     private String originalText = "", text = "";
     private Cost miracleCost = null;
@@ -221,6 +221,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Direction chosenDirection = null;
 
     private Card exiledWith = null;
+
+    private Map<Long, Player> goad = Maps.newTreeMap();
 
     private final List<GameCommand> leavePlayCommandList = new ArrayList<>();
     private final List<GameCommand> etbCommandList = new ArrayList<>();
@@ -6910,5 +6912,25 @@ public class Card extends GameEntity implements Comparable<Card> {
         getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         getZone().remove(this);
         getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+    }
+
+    public final void addGoad(Long timestamp, final Player p) {
+        goad.put(timestamp, p);
+    }
+    
+    public final void removeGoad(Long timestamp) {
+        goad.remove(timestamp);
+    }
+
+    public final boolean isGoaded() {
+        return !goad.isEmpty();
+    }
+
+    public final boolean isGoadedBy(final Player p) {
+        return goad.containsValue(p);
+    }
+
+    public final Collection<Player> getGoaded() {
+        return goad.values();
     }
 }

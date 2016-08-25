@@ -125,7 +125,7 @@ public class AiAttackController {
                 if (sa.getApi() == ApiType.Animate) {
                     if (ComputerUtilCost.canPayCost(sa, defender) 
                             && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
-                        Card animatedCopy = CardFactory.copyCard(c, true);
+                        Card animatedCopy = CardFactory.copyCard(c, false);
                         AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
                         defenders.add(animatedCopy);
                     }
@@ -542,7 +542,9 @@ public class AiAttackController {
                 continue;
             }
             boolean mustAttack = false;
-            if (attacker.getSVar("MustAttack").equals("True")) {
+            if (attacker.isGoaded()) {
+                mustAttack = true;
+            } else if (attacker.getSVar("MustAttack").equals("True")) {
                 mustAttack = true;
             } else if (attacker.getSVar("EndOfTurnLeavePlay").equals("True")
                     && isEffectiveAttacker(ai, attacker, combat)) {

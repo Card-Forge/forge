@@ -69,6 +69,7 @@ public enum ApiType {
     Fight (FightEffect.class),
     FlipACoin (FlipCoinEffect.class),
     Fog (FogEffect.class),
+    Goad (GoadEffect.class),
     GainControl (ControlGainEffect.class),
     GainLife (LifeGainEffect.class),
     GainOwnership (OwnershipGainEffect.class),

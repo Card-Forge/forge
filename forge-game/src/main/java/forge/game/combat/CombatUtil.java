@@ -188,6 +188,25 @@ public class CombatUtil {
             return false;
         }
 
+        // Goad logic
+        // a goaded creature does need to attack a player which does not goaded her
+        // or if not possible a planeswalker or a player which does goaded her
+        if (attacker.isGoaded()) {
+            final boolean goadedByDefender = defender instanceof Player && attacker.isGoadedBy((Player) defender);
+            // attacker got goaded by defender or defender is not player
+            if (goadedByDefender || !(defender instanceof Player)) {
+                for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
+                    if (!defender.equals(ge) && ge instanceof Player) {
+                        // found a player which does not goad that creature
+                        // and creature can attack this player or planeswalker
+                        if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
         // Keywords
         final boolean canAttackWithDefender = attacker.hasKeyword("CARDNAME can attack as though it didn't have defender.");
         for (final String keyword : attacker.getKeywords()) {

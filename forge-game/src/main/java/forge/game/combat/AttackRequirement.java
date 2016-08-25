@@ -34,6 +34,11 @@ public class AttackRequirement {
         }
 
         int nAttackAnything = 0;
+
+        if (attacker.isGoaded()) {
+            nAttackAnything += attacker.getGoaded().size();
+        }
+
         for (final String keyword : attacker.getKeywords()) {
             if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
                 final String defined = keyword.split(":")[1];
