@@ -1206,7 +1206,7 @@ public class AiController {
                  *  5. needs to be updated to ensure that the net toughness is
                  *  still positive after static effects.
                  */
-                final Card creature = CardFactory.copyCard(card, false);
+                final Card creature = CardFactory.copyCard(card, true);
                 ComputerUtilCard.applyStaticContPT(game, creature, null);
                 if (creature.getNetToughness() <= 0 && !creature.hasStartOfKeyword("etbCounter") && mana.countX() == 0
                         && !creature.hasETBTrigger(false) && !creature.hasETBReplacement()
