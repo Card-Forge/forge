@@ -32,6 +32,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         qc.setId(sectionQuest.get("ID", "-1"));
         qc.setOpponent(sectionQuest.get("OpponentName"));
         qc.setRepeatable(sectionQuest.getBoolean("Repeat", false));
+        qc.setPersistent(sectionQuest.getBoolean("Persistent", false));
         qc.setAiLife(sectionQuest.getInt("AILife", 25));
         qc.setWinsReqd(sectionQuest.getInt("Wins", 20));
         qc.setCreditsReward(sectionQuest.getInt("Credit Reward", 100));

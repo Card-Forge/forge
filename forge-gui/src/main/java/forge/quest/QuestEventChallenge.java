@@ -69,6 +69,9 @@ public class QuestEventChallenge extends QuestEvent {
     /** The ai extra cards. */
     private List<String> aiExtraCards = new ArrayList<String>();
 
+    /** If persistent, the challenge does not disappear if the player fails it. */
+    private boolean persistent = false;
+
     private Deck humanDeck = null;
 
     /**
@@ -206,6 +209,25 @@ public class QuestEventChallenge extends QuestEvent {
      */
     public void setRepeatable(final boolean repeatable0) {
         this.repeatable = repeatable0;
+    }
+
+    /**
+     * Checks if is persistent.
+     * 
+     * @return the persistent
+     */
+    public boolean isPersistent() {
+        return this.persistent;
+    }
+
+    /**
+     * Sets the persistent.
+     * 
+     * @param persistent0
+     *            the repeatable to set
+     */
+    public void setPersistent(final boolean persistent0) {
+        this.persistent = persistent0;
     }
 
     /**
