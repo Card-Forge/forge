@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Katara 2
+Title=Katara
+Difficulty=medium
+Description=Mono U Elemental-themed Devotion deck with Master of Waves and Levitation
+Icon=Katara.jpg
+Deck Type=constructed
+[Main]
+1 Air Elemental
+2 Claustrophobia
+3 Clutch of Currents
+3 Counterspell
+1 Cyclone Sire
+3 Frost Walker
+24 Island
+2 Levitation
+4 Master of Waves
+1 Mulldrifter
+3 Plumeveil
+2 Roil Elemental
+1 Rush of Ice
+2 Spreading Seas
+2 Threads of Disloyalty
+2 Water Elemental
+1 Watercourser
+3 Wind Zendikon
