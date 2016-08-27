@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=MIR 1 City: The Fortress of Tefemburu
+Title=The Fortress of Tefemburu
+Difficulty=easy
+Description="If it bears wings, I will put it to the skies over Tefemburu." -Ruya, Zhalfirin archer
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Auspicious Ancestor|MIR
+4 Infantry Veteran|VIS
+4 Longbow Archer|VIS
+4 Mangara's Blessing|MIR
+4 Mangara's Equity|MIR
+4 Mtenda Herder|MIR
+4 Noble Elephant|MIR
+4 Parapet|VIS
+24 Plains|MIR|3
+4 Vigilant Martyr|MIR

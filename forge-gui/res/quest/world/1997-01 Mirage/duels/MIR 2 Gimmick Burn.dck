@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=MIR 2 Gimmick: Burn
+Title=Burn
+Difficulty=medium
+Description=The mightiest clouds sit upon spires of fire. -Femeref adage
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Delirium|MIR
+4 Fireblast|VIS
+4 Flare|MIR
+4 Hammer of Bogardan|MIR
+4 Incinerate|MIR
+4 Kaervek's Purge|MIR
+4 Kaervek's Torch|MIR
+4 Lightning Cloud|VIS
+14 Mountain|MIR|2
+4 Rocky Tar Pit|MIR
+6 Swamp|MIR|1
+4 Volcanic Geyser|MIR

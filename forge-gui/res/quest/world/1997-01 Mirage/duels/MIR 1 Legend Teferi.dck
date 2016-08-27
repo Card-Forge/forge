@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=MIR 1 Legend: Teferi
+Title=Teferi
+Difficulty=easy
+Description=The three wizards knew only that this isle held a great mystery-and that patience alone would solve it.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Flood Plain|MIR
+4 Impulse|VIS
+14 Island|MIR|2
+4 Plains|MIR|1
+4 Rainbow Efreet|VIS
+4 Sands of Time|VIS
+4 Teferi's Curse|MIR
+4 Teferi's Drake|MIR
+4 Teferi's Honor Guard|VIS
+4 Teferi's Imp|MIR
+4 Teferi's Isle|MIR
+2 Teferi's Puzzle Box|VIS
+2 Teferi's Realm|VIS
+2 Vision Charm|VIS

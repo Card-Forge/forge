@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=MIR 2 Tribe: Chimeras (Teeka)
+Title=Teeka
+Difficulty=medium
+Description="Madness and genius are separated only by degrees of success." -Sidar Jabari
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Brass-Talon Chimera|VIS
+4 Coral Atoll|VIS
+4 Inspiration|VIS
+4 Iron-Heart Chimera|VIS
+20 Island|MIR|3
+4 Lead-Belly Chimera|VIS
+4 Power Sink|MIR
+4 Sisay's Ring|VIS
+4 Teeka's Dragon|MIR
+4 Tin-Wing Chimera|VIS
+2 Undo|VIS
+2 Wand of Denial|VIS

@@ -1,0 +1,18 @@
+[quest]
+id=MIR Challenge: Horrible Hordes
+OpponentName=The Horrible Hordes
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Crystal Vein|Crystal Vein|Crystal Vein|Crystal Vein
+[metadata]
+Name=MIR Challenge: Horrible Hordes
+Title=The Horrible Hordes
+Difficulty=easy
+Description=Few are able to underestimate the hordes.
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[main]
+60 Horrible Hordes|MIR

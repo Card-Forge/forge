@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Emberwilde Caliph
+OpponentName=The Emberwilde Caliph
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Emberwilde Caliph|Breathstealer's Crypt
+[metadata]
+Name=MIR Challenge: Emberwilde Caliph
+Title=The Emberwilde Caliph
+Difficulty=medium
+Description=The fire breathes while the air burns.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+30 Island|MIR|4
+30 Mountain|MIR|3

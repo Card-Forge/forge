@@ -1,0 +1,20 @@
+[quest]
+id=MIR Challenge: Afiya Grove
+OpponentName=The Afiya Grove
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=MIR Challenge: Afiya Grove
+Title=The Afiya Grove
+Difficulty=easy
+Description="*sniff* They grow up so fast." -Yawgmoth
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+20 Afiya Grove|MIR
+20 Forest|MIR|4
+20 Phyrexian Walker|VIS

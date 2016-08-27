@@ -8,6 +8,10 @@ Forge Beta: 08-02-2016 ver 1.5.55
 Release Notes
 -------------
 
+- Quest World Updates -
+This release includes the latest quest world update from Xyx. A new world has been added, based on the Mirage block (except the Weatherlight expansion which is not a part of this storyline). Also, other quest worlds have been updated and some of them were expanded to feature new opponents and challenges. The worlds have been renamed to better represent the actual setting they are set in.
+COMPATIBILITY WARNING: Due to the changes in names of worlds themselves as well as some opponent decks, this version of the game may be partially incompatible with the quest saves from the previous versions of the game. If you experience a crash related to your old quest file (e.g. as the game is loading your quest), you may have to delete that quest file manually and start a new quest. Alternatively, you may wish to finish playing the old quest using the older version of the game before upgrading.
+
 - Booster Draft AI improvements -
 This release features improvements to the drafting AI which should be noticeable in the Booster Draft mode including Quest Draft Tournaments. In particular, the AI should rank the cards better depending on the synergy of their abilities and effects (for the cards that have AI hints scripted for them). Currently these deckbuilding hints are implemented for the sets starting with Khans of Tarkir.
 

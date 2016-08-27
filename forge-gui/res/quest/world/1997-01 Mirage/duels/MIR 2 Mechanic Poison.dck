@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=MIR 2 Mechanic: Poison
+Title=Poison
+Difficulty=medium
+Description="If it is weak, either kill it or ignore it. Anything else honors it." -Kaervek
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Abyssal Hunter|MIR
+4 Afiya Grove|MIR
+4 Crypt Cobra|MIR
+4 Dark Banishing|MIR
+4 Enfeeblement|MIR
+10 Forest|MIR|4
+4 Nekrataal|VIS
+4 Sabertooth Cobra|MIR
+2 Seeds of Innocence|MIR
+4 Suq'Ata Assassin|VIS
+16 Swamp|MIR|3

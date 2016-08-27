@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=MIR 1 The Wilds: 
+Title=The Femeref Karoo
+Difficulty=easy
+Description=Prayers for rain are answered with the thunder of hooves.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Benevolent Unicorn|MIR
+4 Crash of Rhinos|MIR
+8 Forest|MIR|1
+4 Gibbering Hyenas|MIR
+4 Grasslands|MIR
+4 Jamuraan Lion|VIS
+4 Karoo|VIS
+4 Karoo Meerkat|MIR
+8 Plains|MIR|2
+4 Rampant Growth|MIR
+2 Sacred Mesa|MIR
+2 Stampeding Wildebeests|VIS
+4 Wellspring|MIR
+4 Wild Elephant|MIR

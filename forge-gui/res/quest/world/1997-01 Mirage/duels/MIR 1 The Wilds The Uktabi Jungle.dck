@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=MIR 1 The Wilds: The Uktabi Jungle
+Title=The Uktabi Jungle
+Difficulty=easy
+Description=The trees have ears, eyes, and teeth.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+2 Barbed Foliage|MIR
+2 Foratog|MIR
+24 Forest|MIR|1
+2 Maro|MIR
+4 Nettletooth Djinn|MIR
+2 Panther Warriors|VIS
+4 Quirion Elves|MIR
+2 Regeneration|MIR
+4 Stalking Tiger|MIR
+4 Uktabi Faerie|MIR
+4 Uktabi Orangutan|VIS
+4 Uktabi Wildcats|MIR
+2 Waiting in the Weeds|MIR

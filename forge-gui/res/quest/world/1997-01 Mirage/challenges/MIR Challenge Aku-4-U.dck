@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Aku-4-U
+OpponentName=Aku-4-U
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+HumanExtras=Aku Djinn
+AIExtras=Horrible Hordes|Horrible Hordes|Horrible Hordes|Horrible Hordes
+[metadata]
+Name=MIR Challenge: Aku-4-U
+Title=Aku-4-U
+Difficulty=hard
+Description="Your arrogance amazes me, Kaervek. Did you not know the price you would pay?" -Mangara
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+60 Swamp|MIR|2

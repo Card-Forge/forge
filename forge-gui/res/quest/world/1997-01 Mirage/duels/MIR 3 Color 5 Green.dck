@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=MIR 3 Color: 5 Green
+Title=The Color Green
+Difficulty=hard
+Description="But no one heard the snake's gentle hiss for peace over the elephant's trumpeting of war." -Afari, Tales
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+1 City of Solitude|VIS
+1 Crash of Rhinos|MIR
+2 Femeref Archers|MIR
+16 Forest|MIR|1
+1 Hall of Gemstone|MIR
+4 Jolrael's Centaur|MIR
+4 Jungle Basin|VIS
+4 Moss Diamond|MIR
+4 Mtenda Lion|MIR
+1 Natural Order|VIS
+4 Nettletooth Djinn|MIR
+4 Quicksand|VIS
+4 Rampant Growth|MIR
+4 River Boa|VIS
+2 Uktabi Orangutan|VIS
+4 Wall of Roots|MIR

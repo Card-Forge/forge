@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=MIR 1 Lore: The Minarbirr Crypts
+Title=The Minarbirr Crypts
+Difficulty=easy
+Description=The rich's heirs often thank them after death . . . but preferably not in person. -Suq'Ata epigram
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Catacomb Dragon|MIR
+4 Crypt Cobra|MIR
+2 Forbidden Crypt|MIR
+3 Funeral Charm|VIS
+4 Gravebane Zombie|MIR
+2 Necromancy|VIS
+2 Necrosavant|VIS
+4 Restless Dead|MIR
+2 Shallow Grave|MIR
+3 Stupor|MIR
+24 Swamp|MIR|4
+2 Tombstone Stairwell|MIR
+4 Wake of Vultures|VIS

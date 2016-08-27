@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=MIR 3 Color: 2 Blue
+Title=The Color Blue
+Difficulty=hard
+Description="You know you've angered the gods when the clouds turn against you." -Sisay, Captain of the Weatherlight
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+2 Breezekeeper|VIS
+4 Cloud Elemental|VIS
+4 Coral Atoll|VIS
+2 Desertion|VIS
+4 Dissipate|MIR
+16 Island|MIR|2
+4 Man-o'-War|VIS
+2 Memory Lapse|MIR
+2 Power Sink|MIR
+4 Quicksand|VIS
+4 Sky Diamond|MIR
+2 Snake Basket|VIS
+4 Suq'Ata Firewalker|MIR
+2 Undo|VIS
+4 Waterspout Djinn|VIS

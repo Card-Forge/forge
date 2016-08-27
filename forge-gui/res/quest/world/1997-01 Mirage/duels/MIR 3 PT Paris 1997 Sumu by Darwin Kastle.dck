@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=MIR 3 PT Paris 1997: Sumu by Darwin Kastle
+Title=Sumu
+Difficulty=hard
+Description=Played by Darwin Kastle at Pro Tour: Paris 1997.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Cloud Elemental|VIS
+4 Fireblast|VIS
+4 Frenetic Efreet|MIR
+4 Goblin Elite Infantry|MIR
+4 Incinerate|MIR
+10 Island|MIR|4
+4 Kaervek's Torch|MIR
+4 Man-o'-War|VIS
+4 Memory Lapse|MIR
+14 Mountain|MIR|3
+4 Suq'Ata Lancer|VIS
+[Sideboard]
+1 Builder's Bane|MIR
+2 Chaos Charm|MIR
+2 Dwarven Miner|MIR
+1 Final Fortune|MIR
+2 Knight of the Mists|VIS
+2 Mind Harness|MIR
+2 Ray of Command|MIR
+1 Sand Golem|MIR
+2 Wildfire Emissary|MIR

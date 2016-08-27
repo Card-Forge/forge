@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=MIR 1 Lore: The Mage Guilds
+Title=The Mage Guilds
+Difficulty=easy
+Description="An ancient court mage unified the houses into guilds to serve Zhalfir above their own interests. Even during the civil war, the guilds stood together, a testament to the wisdom of Teferi." -Afari, Tales
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Armorer Guildmage|MIR
+2 Bad River|MIR
+1 Cadaverous Bloom|MIR
+1 Chaos Charm|MIR
+4 Civic Guildmage|MIR
+1 Ebony Charm|MIR
+1 Emerald Charm|VIS
+2 Flood Plain|MIR
+2 Forest|MIR|2
+1 Funeral Charm|VIS
+4 Granger Guildmage|MIR
+2 Grasslands|MIR
+1 Hearth Charm|VIS
+1 Hope Charm|VIS
+2 Island|MIR|1
+1 Ivory Charm|MIR
+2 Mountain|MIR|1
+2 Mountain Valley|MIR
+2 Plains|MIR|1
+2 Rocky Tar Pit|MIR
+1 Seedling Charm|MIR
+1 Serene Heart|MIR
+4 Shadow Guildmage|MIR
+4 Shaper Guildmage|MIR
+4 Spectral Guardian|MIR
+2 Swamp|MIR|3
+1 Tranquil Domain|MIR
+4 Undiscovered Paradise|VIS
+1 Vision Charm|VIS

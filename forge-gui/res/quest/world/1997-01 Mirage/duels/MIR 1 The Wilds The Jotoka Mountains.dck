@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=MIR 1 The Wilds: The Jotoka Mountains
+Title=The Jotoka Mountains
+Difficulty=easy
+Description=In the eastern reaches of Jamuraa are arrangements of massive stones. No one knows their origins-for certain.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Brushwagg|MIR
+2 Crimson Hellkite|MIR
+4 Crimson Roc|MIR
+4 Dormant Volcano|VIS
+8 Forest|MIR|2
+2 Katabatic Winds|VIS
+10 Mountain|MIR|1
+4 Mountain Valley|MIR
+4 Raging Gorilla|VIS
+4 Rock Basilisk|MIR
+4 Savage Twister|MIR
+4 Tremor|VIS
+2 Wind Shear|VIS
+4 Windreaper Falcon|MIR

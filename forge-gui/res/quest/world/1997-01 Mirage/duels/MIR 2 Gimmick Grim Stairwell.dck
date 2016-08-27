@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=MIR 2 Gimmick: Grim Stairwell
+Title=Grim Stairwell
+Difficulty=medium
+Description="Hmmm-midnight snack."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Anvil of Bogardan|VIS
+9 Forest|MIR|4
+4 Grim Feast|MIR
+4 Nekrataal|VIS
+4 Quirion Elves|MIR
+2 Skulking Ghost|MIR
+11 Swamp|MIR|3
+4 Tar Pit Warrior|VIS
+4 Tombstone Stairwell|MIR
+2 Uktabi Faerie|MIR
+4 Urborg Mindsucker|VIS
+4 Wall of Corpses|MIR
+4 Wall of Roots|MIR

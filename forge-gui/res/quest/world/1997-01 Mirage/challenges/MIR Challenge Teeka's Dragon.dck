@@ -1,0 +1,20 @@
+[quest]
+id=MIR Challenge: Teeka's Dragon
+OpponentName=Teeka's Dragon
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=MIR Challenge: Teeka's Dragon
+Title=Teeka's Dragon
+Difficulty=easy
+Description="If you're good at something, never do it for free." -The Joker, The Dark Knight
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[main]
+30 Crystal Vein|MIR
+20 Helm of Awakening|VIS
+10 Teeka's Dragon|MIR

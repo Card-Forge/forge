@@ -1,0 +1,18 @@
+[quest]
+id=MIR Challenge: Aku Djinn
+OpponentName=The Aku Djinn
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Aku Djinn
+[metadata]
+Name=MIR Challenge: Aku Djinn
+Title=The Aku Djinn
+Difficulty=medium
+Description="Your arrogance amazes me, Kaervek. Did you not know the price you would pay?" -Mangara
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[main]
+60 Swamp|MIR|2

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=MIR 1 Tales: Azeworai
+Title=Azeworai
+Difficulty=easy
+Description="The caliph was so intelligent he could not remember what he knew." -Azeworai, "Three Riddles"
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Bad River|MIR
+4 Crystal Golem|MIR
+4 Daraja Griffin|VIS
+2 Flood Plain|MIR
+2 Forest|MIR|1
+4 Gossamer Chains|VIS
+2 Grasslands|MIR
+1 Island|MIR|1
+4 Memory Lapse|MIR
+1 Mountain|MIR|1
+1 Mountain Valley|MIR
+7 Plains|MIR|1
+4 Radiant Essence|MIR
+2 Rocky Tar Pit|MIR
+3 Solfatara|VIS
+3 Swamp|MIR|1
+4 Tar Pit Warrior|VIS
+4 Undiscovered Paradise|VIS
+4 Wake of Vultures|VIS
+3 Wind Shear|VIS

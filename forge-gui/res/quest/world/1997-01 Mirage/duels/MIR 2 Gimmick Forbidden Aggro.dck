@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=MIR 2 Gimmick: Forbidden Aggro
+Title=Forbidden Aggro
+Difficulty=medium
+Description=In troubled times, there are few greater sorrows than a wayward savior.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Anvil of Bogardan|VIS
+4 Dark Banishing|MIR
+4 Fallen Askari|VIS
+4 Forbidden Crypt|MIR
+4 Incinerate|MIR
+4 Mountain|MIR|2
+4 Quicksand|VIS
+4 Rocky Tar Pit|MIR
+4 Shadow Guildmage|MIR
+4 Skulking Ghost|MIR
+4 Stupor|MIR
+4 Suq'Ata Lancer|VIS
+8 Swamp|MIR|1
+4 Tar Pit Warrior|VIS

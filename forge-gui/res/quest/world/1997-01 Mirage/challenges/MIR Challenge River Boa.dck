@@ -1,0 +1,22 @@
+[quest]
+id=MIR Challenge: River Boa
+OpponentName=The River Boas
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Katabatic Winds
+[metadata]
+Name=MIR Challenge: River Boa
+Title=The River Boas
+Difficulty=hard
+Description="I've had it with these regenerating snakes on this Dominaria plane!" -Samuel L. Jackson, Snakes on a Plane (sort of)
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[main]
+5 Disenchant|MIR
+14 Forest|MIR|2
+6 Grasslands|MIR
+30 River Boa|VIS
+1 Plains|MIR|1

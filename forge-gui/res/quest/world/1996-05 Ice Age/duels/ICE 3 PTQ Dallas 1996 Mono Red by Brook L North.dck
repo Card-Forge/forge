@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=ICE 3 PTQ Dallas 1996: Mono Red by Brook L North
+Title=Mono Red
+Difficulty=hard
+Description=Played by Brook L North at Pro Tour Qualifier: Dallas 1996.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+2 Anarchy|ICE
+2 Balduvian Horde|ALL
+2 Balduvian Hydra|ICE
+4 Goblin Mutant|ICE
+4 Incinerate|ICE
+20 Mountain|ICE|3
+4 Orcish Cannoneers|ICE
+4 Pillage|ALL
+3 Pyrokinesis|ALL
+2 Soldevi Simulacrum|ICE
+3 Stone Rain|ICE
+2 Storm Shaman|ALL|1
+1 Storm Shaman|ALL|2
+2 Thawing Glaciers|ALL
+2 Urza's Bauble|ICE

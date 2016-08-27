@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=MIR 1 Legend: Telim'Tor
+Title=Telim'Tor
+Difficulty=easy
+Description="The curious merely amass knowledge. The ambitious use it." -Telim'Tor
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Builder's Bane|MIR
+2 Consuming Ferocity|MIR
+2 Diamond Kaleidoscope|VIS
+2 Firebreathing|MIR
+2 Illicit Auction|MIR
+4 Knight of Valor|VIS
+2 Magma Mine|VIS
+2 Mob Mentality|VIS
+16 Mountain|MIR|3
+8 Plains|MIR|1
+2 Razor Pendulum|MIR
+4 Suq'Ata Lancer|VIS
+4 Telim'Tor|MIR
+2 Telim'Tor's Darts|MIR
+2 Telim'Tor's Edict|MIR
+4 Wall of Resistance|MIR

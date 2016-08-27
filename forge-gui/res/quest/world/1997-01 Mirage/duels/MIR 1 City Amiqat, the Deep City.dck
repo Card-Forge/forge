@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=MIR 1 City: Amiqat, the Deep City
+Title=Amiqat, the Deep City
+Difficulty=easy
+Description="Our guardian levies a tax on all traders. Wise travelers pay with a minimum of fuss." -Qhattib, Vizier of Amiqat
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Boomerang|MIR
+4 Dissipate|MIR
+4 Flood Plain|MIR
+4 Harbor Guardian|MIR
+4 Hazerider Drake|MIR
+12 Island|MIR|1
+4 Leering Gargoyle|MIR
+4 Memory Lapse|MIR
+8 Plains|MIR|1
+4 Ray of Command|MIR
+4 Reparations|MIR
+4 Tempest Drake|VIS

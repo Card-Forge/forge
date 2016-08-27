@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=MIR 1 The Wilds: The Mtenda Wilds
+Title=The Mtenda Wilds
+Difficulty=easy
+Description="I hate insects of every sort. The only mercy is that they are generally small." -Mwani, Mtenda goatherd
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Bull Elephant|VIS
+2 Elephant Grass|VIS
+2 Feral Instinct|VIS
+14 Forest|MIR|3
+4 Freewind Falcon|VIS
+4 Giant Caterpillar|VIS
+4 Giant Mantis|MIR
+4 Grasslands|MIR
+2 King Cheetah|VIS
+4 Mtenda Griffin|MIR
+4 Mtenda Lion|MIR
+8 Plains|MIR|4
+4 Zebra Unicorn|MIR

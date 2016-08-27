@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=MIR 2 Tribe: Djinns & Efreets
+Title=Djinns & Efreets
+Difficulty=medium
+Description="The efreet is a striding storm with a voice that crackles like fire." -Qhattib, Vizier of Amiqat
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+3 Breezekeeper|VIS
+3 Burning Palm Efreet|MIR
+3 Emberwilde Djinn|MIR
+4 Fire Diamond|MIR
+4 Frenetic Efreet|MIR
+3 Harmattan Efreet|MIR
+14 Island|MIR|4
+10 Mountain|MIR|3
+3 Rainbow Efreet|VIS
+4 Sky Diamond|MIR
+3 Vaporous Djinn|MIR
+3 Waterspout Djinn|VIS
+3 Wildfire Emissary|MIR

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=MIR 1 City: The Tomb City of Aku
+Title=The Tomb City of Aku
+Difficulty=easy
+Description="I no longer believe in a final resting place." -Shauku, Endbringer
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Aku Djinn|VIS
+4 Bad River|MIR
+4 Crypt Rats|VIS
+2 Grave Servitude|MIR
+1 Infernal Contract|MIR
+4 Island|MIR|4
+4 Mountain|MIR|3
+4 Mundungu|VIS
+4 Rocky Tar Pit|MIR
+2 Sewer Rats|MIR
+4 Shadow Guildmage|MIR
+3 Shaper Guildmage|MIR
+4 Shauku's Minion|MIR
+2 Shauku, Endbringer|MIR
+2 Soulshriek|MIR
+9 Swamp|MIR|1
+1 Vampiric Tutor|VIS
+2 Vampirism|VIS

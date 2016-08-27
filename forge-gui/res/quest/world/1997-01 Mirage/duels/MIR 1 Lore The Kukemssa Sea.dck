@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=MIR 1 Lore: The Kukemssa Sea
+Title=The Kukemssa Sea
+Difficulty=easy
+Description="Taniwha rolls in its sleep, and the land is awash with the waves." -Poetics of Hanan
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Coral Atoll|VIS
+4 Coral Fighters|MIR
+2 Harmattan Efreet|MIR
+20 Island|MIR|3
+4 Kukemssa Pirates|MIR
+4 Kukemssa Serpent|MIR
+4 Merfolk Raiders|MIR
+4 Merfolk Seer|MIR
+2 Prosperity|VIS
+4 Sandbar Crocodile|MIR
+4 Sea Scryer|MIR
+2 Taniwha|MIR
+2 Thirst|MIR

@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Bogardan Phoenix
+OpponentName=The Bogardan Phoenix
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Helm of Awakening|Helm of Awakening
+[metadata]
+Name=MIR Challenge: Bogardan Phoenix
+Title=The Bogardan Phoenix
+Difficulty=medium
+Description="Phoenixes burst into flame when it is time for them to die and are reborn from the ashes." -Professor Dumbledore, Harry Potter and the Chamber of Secrets
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+30 Bogardan Phoenix|VIS
+30 Mountain|MIR|4

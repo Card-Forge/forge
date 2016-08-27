@@ -1,0 +1,19 @@
+[quest]
+id=MIR Challenge: Misers' Cage
+OpponentName=The Misers' Cage
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:MIR,VIS
+Credit Reward=120
+AIExtras=Flooded Shoreline|Misers' Cage|Teferi's Isle
+[metadata]
+Name=MIR Challenge: Misers' Cage
+Title=The Misers' Cage
+Difficulty=medium
+Description="Let him be imprisoned while his possessions wander free." -Suq'Ata legal decree
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[main]
+40 Boomerang|MIR
+20 Island|MIR|1

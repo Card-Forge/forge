@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=MIR 1 City: Tulumai, City of Hope
+Title=Tulumai, City of Hope
+Difficulty=easy
+Description="And darkness shall be cast from me /For my soul resides in the Sun." -Femeref dirge
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Celestial Dawn|MIR
+2 City of Solitude|VIS
+2 Enlightened Tutor|MIR
+4 Femeref Archers|MIR
+4 Femeref Enchantress|VIS
+4 Femeref Knight|MIR
+4 Femeref Scouts|MIR
+6 Forest|MIR|1
+4 Grasslands|MIR
+4 Iron Tusk Elephant|MIR
+4 Pacifism|MIR
+14 Plains|MIR|2
+2 Radiant Essence|MIR
+4 Sun Clasp|VIS

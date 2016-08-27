@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=MIR 1 Legend: Rashida Scalebane
+Title=Rashida Scalebane
+Difficulty=easy
+Description=It is not by the blood of dragons that Rashida measures victories, but by the sum of children who no longer wake from nightmares of scales and fire.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Disenchant|MIR
+4 Divine Retribution|MIR
+2 Dragon Mask|VIS
+4 Favorable Destiny|MIR
+6 Forest|MIR|4
+4 Grasslands|MIR
+16 Plains|MIR|4
+4 Rashida Scalebane|MIR
+4 Scalebane's Elite|VIS
+4 Sunweb|MIR
+4 Warrior's Honor|VIS
+4 Zhalfirin Crusader|VIS
