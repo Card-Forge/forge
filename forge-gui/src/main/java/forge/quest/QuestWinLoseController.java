@@ -605,6 +605,11 @@ public class QuestWinLoseController {
         sb.append("Challenge completed.\n\n");
         sb.append("Challenge bounty: ").append(questRewardCredits).append(" credits.");
 
+        String winMessage = ((QuestEventChallenge)qEvent).getWinMessage();
+        if (!winMessage.isEmpty()) {
+            view.showMessage(winMessage.replace("\\n", "\n"), "Congratulations", FSkinProp.ICO_QUEST_NOTES);
+        }
+
         qData.getAssets().addCredits(questRewardCredits);
 
         view.showMessage(sb.toString(), "Challenge Rewards for \"" + qEvent.getTitle() + "\"", FSkinProp.ICO_QUEST_BOX);

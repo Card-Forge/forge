@@ -72,6 +72,9 @@ public class QuestEventChallenge extends QuestEvent {
     /** If persistent, the challenge does not disappear if the player fails it. */
     private boolean persistent = false;
 
+    /** a text message that appears when the player wins the challenge match. */
+    private String winMessage = "";
+
     private Deck humanDeck = null;
 
     /**
@@ -319,6 +322,25 @@ public class QuestEventChallenge extends QuestEvent {
      */
     public void setForceAnte(Boolean forceAnte) {
         this.forceAnte = forceAnte;
+    }
+
+    /**
+     * Gets the win message.
+     * 
+     * @return the winMessage
+     */
+    public String getWinMessage() {
+        return this.winMessage;
+    }
+
+    /**
+     * Sets the win message
+     * 
+     * @param winMessage0
+     *            the winMessage to set
+     */
+    public void setWinMessage(final String winMessage0) {
+        this.winMessage = winMessage0;
     }
 
     /**

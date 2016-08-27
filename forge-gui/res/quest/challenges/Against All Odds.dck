@@ -2,6 +2,8 @@
 id=32
 AILife=50
 Repeat=false
+Persistent=true
+WinMessage=Congratulations!\nYou have completed the ultimate challenge in this quest and have proven that you are strong enough to defeat the deadliest of opponents!\n\nYou are free to continue playing this quest for as long as you desire or start a new one and try proving yourself yet again!
 Wins=100
 Card Reward=10 random rares;Mox Pearl;Mox Sapphire;Mox Jet;Mox Ruby;Mox Emerald
 Credit Reward=1000

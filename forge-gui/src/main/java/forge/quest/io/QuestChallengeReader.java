@@ -39,6 +39,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         qc.setCardReward(sectionQuest.get("Card Reward"));
         qc.setHumanExtraCards(Arrays.asList(TextUtil.split(sectionQuest.get("HumanExtras", ""), '|')));
         qc.setAiExtraCards(Arrays.asList(TextUtil.split(sectionQuest.get("AIExtras", ""), '|')));
+        qc.setWinMessage(sectionQuest.get("WinMessage", ""));
         // Less common properties
         int humanLife = sectionQuest.getInt("HumanLife", 0);
         if (humanLife != 0) {
