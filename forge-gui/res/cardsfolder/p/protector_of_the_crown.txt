@@ -1,0 +1,13 @@
+Name:Protector of the Crown
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ False | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgSelfCombat | IsCombat$ True | Secondary$ True | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
+SVar:DmgSelf:AB$DealDamage | Cost$ 0 | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgSelfCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:X:ReplaceCount$DamageAmount
+SVar:Picture:http://www.wizards.com/global/images/magic/general/protector_of_the_crown.jpg
+Oracle:When Protector of the Crown enters the battlefield, you become the monarch.\nAll damage that would be dealt to you is dealt to Protector of the Crown instead.

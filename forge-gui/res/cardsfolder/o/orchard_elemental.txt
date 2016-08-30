@@ -1,0 +1,10 @@
+Name:Orchard Elemental
+ManaCost:5 G
+Types:Creature Elemental
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Council's dilemma - When CARDNAME enters the battlefield, starting with you, each player votes for sprout or harvest. Put two +1/+1 counters on CARDNAME for each sprout vote. You gain 3 life for each harvest vote.
+SVar:TrigChangeZone:AB$ Vote | Cost$ 0 | Defined$ Player | StoreVoteNum$ True | VoteType$ Sprout,Harvest | SubAbility$ DBVoteSprout
+SVar:DBVoteSprout:DB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ VoteNumSprout/Times.2   | SubAbility$ DBVoteHarvest
+SVar:DBVoteHarvest:DB$ GainLife | Cost$ 0 | LifeAmount$ VoteNumHarvest/Times.3  | Defined$ You
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orchard_elemental.jpg
+Oracle:Council's dilemma - When Orchard Elemental enters the battlefield, starting with you, each player votes for sprout or harvest. Put two +1/+1 counters on Orchard Elemental for each sprout vote. You gain 3 life for each harvest vote.

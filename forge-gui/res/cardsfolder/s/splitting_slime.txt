@@ -1,0 +1,9 @@
+Name:Splitting Slime
+ManaCost:3 G G
+Types:Creature Ooze
+PT:3/3
+K:Monstrosity 3:4 G G
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When CARDNAME becomes monstrous, put a token onto the battlefield that's a copy of Splitting Slime. (The token has no counters and isn't monstrous.)
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/splitting_slime.jpg
+Oracle:{4}{G}{G}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen Splitting Slime becomes monstrous, put a token onto the battlefield that's a copy of Splitting Slime. (The token has no counters and isn't monstrous.)
