@@ -63,4 +63,4 @@ Magic Origins Prerelease, -/7/ORI, ORI ORI ORI Meta-Choose(S(ORI Prerelease Gide
 Battle for Zendikar, 3/6/BFZ, BFZ OGW
 Shadows over Innistrad, 3/6/SOI, SOI EMN
 Eternal Masters, 3/6/SOI, EMA
-#Conspiracy, 3/6/ORI, CN2
+#Conspiracy Take the Crown, 3/6/ORI, CN2
