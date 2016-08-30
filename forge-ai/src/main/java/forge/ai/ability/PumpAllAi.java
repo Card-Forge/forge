@@ -56,7 +56,13 @@ public class PumpAllAi extends PumpAiBase {
         if (tgt != null && sa.canTarget(opp) && sa.hasParam("IsCurse")) {
             sa.resetTargets();
             sa.getTargets().add(opp);
-            comp.clear();
+            return true;
+        }
+        
+        if (tgt != null && sa.canTarget(ai) && !sa.hasParam("IsCurse")) {
+            sa.resetTargets();
+            sa.getTargets().add(ai);
+            return true;
         }
 
         if (!game.getStack().isEmpty() && !sa.isCurse()) {
