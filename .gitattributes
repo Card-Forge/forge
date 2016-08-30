@@ -4364,6 +4364,7 @@ forge-gui/res/cardsfolder/d/dandan.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dangerous_wager.txt -text
 forge-gui/res/cardsfolder/d/daraja_griffin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/darba.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/daretti_ingenious_iconoclast.txt -text
 forge-gui/res/cardsfolder/d/daretti_scrap_savant.txt -text
 forge-gui/res/cardsfolder/d/darien_king_of_kjeldor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/darigaaz_the_igniter.txt -text svneol=unset#text/plain

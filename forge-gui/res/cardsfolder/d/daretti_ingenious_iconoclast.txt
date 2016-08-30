@@ -1,0 +1,10 @@
+Name:Daretti, Ingenious Iconoclast
+ManaCost:1 B R
+Types:Planeswalker Daretti
+Loyalty:3
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Construct | TokenTypes$ Artifact,Creature,Construct | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Defender | SpellDescription$ Put a 1/1 colorless Construct artifact creature token with defender onto the battlefield.
+A:AB$ Sacrifice | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | Amount$ 1 | SacValid$ Artifact | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDestroy | SpellDescription$ You may sacrifice an artifact. If you do, destroy target artifact or creature. | StackDescription$ SpellDescription
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+A:AB$ CopyPermanent | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Artifact | TgtZone$ Battlefield,Graveyard | TgtPrompt$ Select an artifact in graveyard or the battlefield | NumCopies$ 3 | SpellDescription$ Choose target artifact card in a graveyard or artifact on the battlefield. Put three tokens that are copies of it onto the battlefield.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/daretti_ingenious_iconoclast.jpg
+Oracle:[+1]: Put a 1/1 colorless Construct artifact creature token with defender onto the battlefield.\n[-1]: You may sacrifice an artifact. If you do, destroy target artifact or creature.\n[-6]: Choose target artifact card in a graveyard or artifact on the battlefield. Put three tokens that are copies of it onto the battlefield.
