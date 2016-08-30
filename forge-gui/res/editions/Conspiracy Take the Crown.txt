@@ -1,0 +1,229 @@
+[metadata]
+Code=CN2
+Date=2016-08-26
+Name=Conspiracy: Take the Crown
+Code2=CN2
+Type=Other
+
+[cards]
+1 C Adriana's Valor
+2 C Assemble the Rank and Vile
+3 U Echoing Boon
+4 R Emissary's Ploy
+5 C Hired Heist
+6 R Hold the Perimeter
+7 M Hymn of the Wilds
+8 C Incendiary Dissent
+9 C Natural Unity
+10 M Sovereign's Realm
+11 U Summoner's Bond
+12 R Weight Advantage
+13 C Ballot Broker
+14 C Custodi Peacekeeper
+15 U Custodi Soulcaller
+16 C Lieutenants of the Guard
+17 U Noble Banneret
+18 U Palace Jailer
+19 C Palace Sentinels
+20 R Paliano Vanguard
+21 R Protector of the Crown
+22 R Recruiter of the Guard
+23 M Sanctum Prelate
+24 U Spectral Grasp
+25 C Throne Warden
+26 C Wings of the Guard
+27 R Arcane Savant
+28 C Canal Courier
+29 U Coveted Peacock
+30 M Expropriate
+31 U Illusion of Choice
+32 C Illusionary Informant
+33 C Jeering Homunculus
+34 R Keeper of Keys
+35 C Messenger Jays
+36 C Skittering Crustacean
+37 U Spire Phantasm
+38 R Stunt Double
+39 R Archdemon of Paliano
+40 R Capital Punishment
+41 R Custodi Lich
+42 U Deadly Designs
+43 C Garrulous Sycophant
+44 U Marchesa's Decree
+45 C Regicide
+46 C Sinuous Vermin
+47 U Smuggler Captain
+48 C Thorn of the Black Rose
+49 U Besmirch
+50 C Crown-Hunter Hireling
+51 C Deputized Protester
+52 C Garbage Fire
+53 C Goblin Racketeer
+54 R Grenzo, Havoc Raiser
+55 U Grenzo's Ruffians
+56 U Pyretic Hunter
+57 R Skyline Despot
+58 M Subterranean Tremors
+59 R Volatile Chimera
+60 U Animus of Predation
+61 C Borderland Explorer
+62 R Caller of the Untamed
+63 U Domesticated Hydra
+64 C Entourage of Trest
+65 U Fang of the Pack
+66 C Leovold's Operative
+67 C Menagerie Liberator
+68 C Orchard Elemental
+69 R Regal Behemoth
+70 M Selvala, Heart of the Wilds
+71 R Selvala's Stampede
+72 R Splitting Slime
+73 R Adriana, Captain of the Guard
+74 M Daretti, Ingenious Iconoclast
+75 M Kaya, Ghost Assassin
+76 U Knights of the Black Rose
+77 M Leovold, Emissary of Trest
+78 M Queen Marchesa
+79 U Spy Kit
+80 R Throne of the High City
+81 U Affa Guard Hound
+82 C Disenchant
+83 C Doomed Traveler
+84 R Faith's Reward
+85 C Ghostly Possession
+86 U Ghostly Prison
+87 C Gleam of Resistance
+88 C Gods Willing
+89 U Guardian of the Gateless
+90 U Hail of Arrows
+91 R Hallowed Burial
+92 U Hollowhenge Spirit
+93 R Hundred-Handed One
+94 C Kill Shot
+95 R Pariah
+96 C Raise the Alarm
+97 C Reviving Dose
+98 R Spirit of the Hearth
+99 C Wild Griffin
+100 U Windborne Charge
+101 C Zealous Strike
+102 C Bonds of Quicksilver
+103 C Caller of Gales
+104 C Cloaked Siren
+105 R Covenant of Minds
+106 U Deceiver Exarch
+107 R Desertion
+108 U Dismiss
+109 C Divination
+110 C Fleeting Distraction
+111 R Followed Footsteps
+112 U Into the Void
+113 R Kami of the Crescent Moon
+114 U Merfolk Looter
+115 U Merfolk Skyscout
+116 C Mnemonic Wall
+117 C Negate
+118 C Omenspeaker
+119 C Repulse
+120 U Serum Visions
+121 M Show and Tell
+122 R Sphinx of Magosi
+123 C Traumatic Visions
+124 C Vaporkin
+125 U Vertigo Spawn
+126 C Absorb Vis
+127 C Altar's Reap
+128 M Avatar of Woe
+129 C Blood-Toll Harpy
+130 C Child of Night
+131 C Death Wind
+132 U Diabolic Tutor
+133 C Driver of the Dead
+134 U Farbog Boneflinger
+135 C Festergloom
+136 U Fleshbag Marauder
+137 R Guul Draz Specter
+138 R Harvester of Souls
+139 U Infest
+140 R Inquisition of Kozilek
+141 U Keepsake Gorgon
+142 U Mausoleum Turnkey
+143 C Murder
+144 R Phyrexian Arena
+145 U Public Execution
+146 C Raise Dead
+147 R Sangromancer
+148 C Shambling Goblin
+149 C Stromkirk Patrol
+150 C Unnerve
+151 U Burn Away
+152 R Burning Wish
+153 R Charmbreaker Devils
+154 U Coordinated Assault
+155 C Ember Beast
+156 C Fiery Fall
+157 C Flame Slash
+158 U Gang of Devils
+159 C Goblin Balloon Brigade
+160 C Goblin Tunneler
+161 R Gratuitous Violence
+162 U Guttersnipe
+163 R Hamletback Goliath
+164 U Havengul Vampire
+165 C Hurly-Burly
+166 C Ill-Tempered Cyclops
+167 C Kiln Fiend
+168 C Ogre Sentry
+169 U Stoneshock Giant
+170 U Sulfurous Blast
+171 C Tormenting Voice
+172 C Trumpet Blast
+173 C Twin Bolt
+174 U Beast Within
+175 M Berserk
+176 R Birds of Paradise
+177 U Brushstrider
+178 R Burgeoning
+179 C Copperhorn Scout
+180 U Explosive Vegetation
+181 C Fade into Antiquity
+182 R Forgotten Ancient
+183 U Irresistible Prey
+184 C Lace with Moonglove
+185 C Lay of the Land
+186 U Manaplasm
+187 U Nessian Asp
+188 C Netcaster Spider
+189 U Overrun
+190 C Plummet
+191 C Prey Upon
+192 C Ravenous Leucrocota
+193 C Strength in Numbers
+194 C Sylvan Bounty
+195 C Voyaging Satyr
+196 R Wild Pair
+197 U Akroan Hoplite
+198 U Ascended Lawmage
+199 U Carnage Gladiator
+200 U Coiling Oracle
+201 R Dragonlair Spider
+202 R Duskmantle Seer
+203 U Gruul War Chant
+204 U Juniper Order Ranger
+205 U Pharika's Mender
+206 U Shipwreck Singer
+207 U Stormchaser Chimera
+208 C Bronze Sable
+209 R Hedron Matrix
+210 C Hexplate Golem
+211 R Horn of Greed
+212 C Kitesail
+213 C Opaline Unicorn
+214 M Platinum Angel
+215 R Psychosis Crawler
+216 U Runed Servitor
+217 U Dread Statuary
+218 C Evolving Wilds
+219 R Exotic Orchard
+220 U Rogue's Passage
+221 U Shimmering Grotto
