@@ -1,0 +1,10 @@
+Name:Lieutenants of the Guard
+ManaCost:4 W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Council's dilemma - When CARDNAME enters the battlefield, starting with you, each player votes for strength or numbers. Put a +1/+1 counter on CARDNAME for each strength vote and put a 1/1 white Soldier creature token onto the battlefield for each numbers vote.
+SVar:TrigChangeZone:AB$ Vote | Cost$ 0 | Defined$ Player | StoreVoteNum$ True | VoteType$ Strength,Numbers | SubAbility$ DBVoteStrength
+SVar:DBVoteStrength:DB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ VoteNumStrength | SubAbility$ DBVoteNumbers
+SVar:DBVoteNumbers:DB$ Token | TokenAmount$ VoteNumNumbers | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 soldier CN2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lieutenants_of_the_guard.jpg
+Oracle:Council's dilemma - When Lieutenants of the Guard enters the battlefield, starting with you, each player votes for strength or numbers. Put a +1/+1 counter on Lieutenants of the Guard for each strength vote and put a 1/1 white Soldier creature token onto the battlefield for each numbers vote.

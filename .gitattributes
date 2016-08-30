@@ -3312,6 +3312,7 @@ forge-gui/res/cardsfolder/c/capashen_knight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/capashen_standard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/capashen_templar.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/capashen_unicorn.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/capital_punishment.txt -text
 forge-gui/res/cardsfolder/c/capricious_efreet.txt -text
 forge-gui/res/cardsfolder/c/capricious_sorcerer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/capsize.txt svneol=native#text/plain
@@ -8579,6 +8580,7 @@ forge-gui/res/cardsfolder/k/kavu_recluse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kavu_runner.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kavu_scout.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kavu_titan.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/k/kaya_ghost_assassin.txt -text
 forge-gui/res/cardsfolder/k/kaysa.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kazandu_blademaster.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kazandu_refuge.txt svneol=native#text/plain
@@ -9114,6 +9116,7 @@ forge-gui/res/cardsfolder/l/liege_of_the_axe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/liege_of_the_pit.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/liege_of_the_tangle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lieutenant_kirtar.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/l/lieutenants_of_the_guard.txt -text
 forge-gui/res/cardsfolder/l/life_and_limb.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/life_burst.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/life_chisel.txt svneol=native#text/plain
