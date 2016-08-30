@@ -1327,6 +1327,8 @@ public class AiController {
                 continue;
             }
             sa.setActivatingPlayer(player);
+            sa.setLastStateBattlefield(game.getLastStateBattlefield());
+            sa.setLastStateGraveyard(game.getLastStateGraveyard());
             
             AiPlayDecision opinion = canPlayAndPayFor(sa);
             // PhaseHandler ph = game.getPhaseHandler();
