@@ -950,6 +950,9 @@ public class ComputerUtilCard {
         }
         if (c.isLand()) {
             valueTempo += 0.5f / opp.getLandsInPlay().size();   //set back opponent's mana
+            if ("Land".equals(sa.getParam("ValidTgts")) && ph.getPhase().isAfter(PhaseType.COMBAT_END)) {
+            	valueTempo += 0.5; // especially when nothing else can be targeted
+            }
         }
         if (!ph.isPlayerTurn(ai) && ph.getPhase().equals(PhaseType.END_OF_TURN)) {
             valueTempo *= 2;    //prefer to cast at opponent EOT
