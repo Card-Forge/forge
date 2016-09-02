@@ -5314,6 +5314,7 @@ forge-gui/res/cardsfolder/e/echo_circlet.txt -text
 forge-gui/res/cardsfolder/e/echo_mage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/echo_tracer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/echoes_of_the_kin_tree.txt -text
+forge-gui/res/cardsfolder/e/echoing_boon.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/e/echoing_calm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/echoing_courage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/echoing_decay.txt svneol=native#text/plain
