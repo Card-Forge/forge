@@ -40,8 +40,11 @@ import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.storage.IStorage;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -58,6 +61,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     private final DeckController<DeckGroup> controller;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
+    private final List<DeckSection> allSections = new ArrayList<DeckSection>();
 
     //========== Constructor
 
@@ -95,14 +99,20 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
                 CEditorLimited.addBasicLands(CEditorLimited.this);
             }
         });
+
+        allSections.add(DeckSection.Main);
+        allSections.add(DeckSection.Conspiracy);
+
+        this.getBtnCycleSection().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                cycleEditorMode();
+            }
+        });
     }
 
-    /**
-     * @param model
-     * @return
-     */
-    private Deck getSelectedDeck(final DeckGroup model) {
-        return model.getHumanDeck();
+    private Deck getSelectedDeck() {
+        return controller.getModel().getHumanDeck();
     }
 
     //========== Overridden from ACEditorBase
@@ -155,7 +165,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void resetTables() {
-        final Deck toEdit = this.getSelectedDeck(this.controller.getModel());
+        final Deck toEdit = this.getSelectedDeck();
         this.getCatalogManager().setPool(toEdit.getOrCreate(DeckSection.Sideboard));
         this.getDeckManager().setPool(toEdit.getMain());
     }
@@ -188,6 +198,26 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
         }
     }
 
+
+    public void cycleEditorMode() {
+        int curindex = (allSections.indexOf(sectionMode) + 1) % allSections.size();
+        sectionMode = allSections.get(curindex);
+
+        switch(sectionMode) {
+            case Conspiracy:
+                this.getCatalogManager().setup(ItemManagerConfig.DRAFT_CONSPIRACY);
+                this.getDeckManager().setPool(this.getSelectedDeck().getOrCreate(DeckSection.Conspiracy));
+                break;
+            case Main:
+                this.getCatalogManager().setup(getScreen() == FScreen.DECK_EDITOR_DRAFT ? ItemManagerConfig.DRAFT_POOL : ItemManagerConfig.SEALED_POOL);
+                this.getDeckManager().setPool(this.getSelectedDeck().getOrCreate(DeckSection.Main));
+                break;
+
+        }
+
+        this.controller.updateCaptions();
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
@@ -203,6 +233,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
+        this.getBtnCycleSection().setVisible(true);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
