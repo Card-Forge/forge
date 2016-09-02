@@ -2610,6 +2610,7 @@ forge-gui/res/cardsfolder/b/berserk_murlodont.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/berserkers_of_blood_ridge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/berserkers_onslaught.txt -text
 forge-gui/res/cardsfolder/b/beseech_the_queen.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/besmirch.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/b/bestial_fury.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bestial_menace.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/betrayal.txt svneol=native#text/plain
@@ -4299,6 +4300,7 @@ forge-gui/res/cardsfolder/c/cursed_ronin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cursed_scroll.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cursed_totem.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/curtain_of_light.txt -text
+forge-gui/res/cardsfolder/c/custodi_lich.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/c/custodi_soulbinders.txt -text
 forge-gui/res/cardsfolder/c/custodi_squire.txt -text
 forge-gui/res/cardsfolder/c/custodian_of_the_trove.txt -text
