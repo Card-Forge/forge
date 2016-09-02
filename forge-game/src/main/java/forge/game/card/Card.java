@@ -1460,6 +1460,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else if (keyword.equals("Unblockable")) {
                 sbLong.append(getName()).append(" can't be blocked.\r\n");
+            } else if (keyword.equals("AllNonLegendaryCreatureNames")) {
+                sbLong.append(getName()).append(" has all names of nonlegendary creature cards.\r\n");
             }
             else {
                 if ((i != 0) && (sb.length() != 0)) {
@@ -1716,6 +1718,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.insert(sb.indexOf(".) ") + 3, "\r\n");
         }
 
+        if (isGoaded()) {
+            sb.append("is goaded by: " + Lang.joinHomogenous(getGoaded()));
+            sb.append("\r\n");
+        }
         // replace triple line feeds with double line feeds
         int start;
         final String s = "\r\n\r\n\r\n";
@@ -3669,19 +3675,19 @@ public class Card extends GameEntity implements Comparable<Card> {
         // by name can also have color names, so needs to happen before colors.
         if (property.startsWith("named")) {
             String name = property.substring(5).replace(";", ","); // for some legendary cards
-            if (!getName().equals(name)) {
+            if (!sharesNameWith(name)) {
                 return false;
             }   
         } else if (property.startsWith("notnamed")) {
-            if (getName().equals(property.substring(8))) {
+            if (sharesNameWith(property.substring(8))) {
                 return false;
             }
         } else if (property.startsWith("sameName")) {
-            if (getName().equals("") || !sharesNameWith(source)) {
+            if (!sharesNameWith(source)) {
                 return false;
             }
         } else if (property.equals("NamedCard")) {
-            if (getName().equals("") || !sharesNameWith(source.getNamedCard())) {
+            if (!sharesNameWith(source.getNamedCard())) {
                 return false;
             }
         } else if (property.equals("NamedByRememberedPlayer")) {
@@ -3689,7 +3695,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final Card newCard = game.getCardState(source);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Player) {
-                        if (!getName().equals(((Player) o).getNamedCard())) {
+                        if (!sharesNameWith(((Player) o).getNamedCard())) {
                             return false;
                         }
                     }
@@ -3697,7 +3703,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Player) {
-                    if (!getName().equals(((Player) o).getNamedCard())) {
+                    if (!sharesNameWith(((Player) o).getNamedCard())) {
                         return false;
                     }
                 }
@@ -5364,18 +5370,63 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isColorless() { return CardUtil.getColors(this).isColorless(); }
 
     public final boolean sharesNameWith(final Card c1) {
+        // in a corner case where c1 is null, there is no name to share with.
+        if (c1 == null) {
+            return false;
+        }
+
+        // Special Logic for SpyKit
+        if (c1.hasKeyword("AllNonLegendaryCreatureNames")) {
+            if (hasKeyword("AllNonLegendaryCreatureNames")) {
+                // with both does have this, then they share any name
+                return true;
+            } else if (getName().isEmpty()) {
+                // if this does not have a name, then there is no name to share
+                return false;
+            } else {
+                // check if this card has a name from a face
+                // in general token creatures does not have this
+                final ICardFace face = StaticData.instance().getCommonCards().getFaceByName(getName());
+                if (face == null) {
+                    return false;
+                }
+                // TODO add check if face is legal in the format of the game
+                // name does need to be a non-legendary creature
+                final CardType type = face.getType();
+                if (type != null && type.isCreature() && !type.isLegendary())
+                    return true;
+            }
+        }
         return sharesNameWith(c1.getName());
     }
 
     public final boolean sharesNameWith(final String name) {
-        boolean shares;
-        shares = getName().equals(name);
+        // the name is null or empty
+        if (name == null || name.isEmpty()) {
+            return false;
+        }
 
+        boolean shares = getName().equals(name);
+
+        // Split cards has extra logic to check if it does share a name with
         if (isSplitCard()) {
             shares |= name.equals(getState(CardStateName.LeftSplit).getName());
             shares |= name.equals(getState(CardStateName.RightSplit).getName());
         }
 
+        if (!shares && hasKeyword("AllNonLegendaryCreatureNames")) {
+            // check if the name is from a face
+            // in general token creatures does not have this
+            final ICardFace face = StaticData.instance().getCommonCards().getFaceByName(name);
+            if (face == null) {
+                return false;
+            }
+            // TODO add check if face is legal in the format of the game
+            // name does need to be a non-legendary creature
+            final CardType type = face.getType();
+            if (type.isCreature() && !type.isLegendary())
+                return true;
+        }
         return shares;
     }
 
