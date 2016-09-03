@@ -19,6 +19,7 @@ package forge.game.cost;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -80,7 +81,7 @@ public class CostPayEnergy extends CostPart {
                 amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
             }
         } else {
-            return activator.getEnergy() >= amount;
+            return activator.getCounters(CounterType.ENERGY) >= amount;
         }
 
         return true;

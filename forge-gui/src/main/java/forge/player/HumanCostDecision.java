@@ -566,15 +566,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostPayEnergy cost) {
         final String amount = cost.getAmount();
-        final int life = player.getLife();
+        final int energy = player.getCounters(CounterType.ENERGY);
 
         Integer c = cost.convertAmount();
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.startsWith("XChoice")) {
-                int limit = life;
-                final int maxLifePayment = limit < life ? limit : life;
+                int limit = energy;
+                final int maxLifePayment = limit < energy ? limit : energy;
                 c = chooseXValue(maxLifePayment);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);

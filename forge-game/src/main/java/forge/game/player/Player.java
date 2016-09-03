@@ -86,7 +86,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private int life = 20;
     private int startingLife = 20;
-    private int energy = 0;
     private final Map<Card, Integer> assignedDamage = new HashMap<Card, Integer>();
     private int spellsCastThisTurn = 0;
     private int landsPlayedThisTurn = 0;
@@ -493,32 +492,27 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    public final int getEnergy() {
-        return energy;
-    }
-    public final void setEnergy(int newEnergy) { energy = newEnergy; }
-
     public final boolean canPayEnergy(final int energyPayment) {
-        return energy >= energyPayment;
+        int cnt = getCounters(CounterType.ENERGY);
+        return cnt >= energyPayment;
     }
 
     public final int loseEnergy(int lostEnergy) {
-        if (lostEnergy > energy) {
-            return 0;
+        int cnt = getCounters(CounterType.ENERGY);
+        if (lostEnergy > cnt) {
+            return -1;
         }
-        energy -= lostEnergy;
-        return lostEnergy;
+        cnt -= lostEnergy;
+        counters.put(CounterType.ENERGY, cnt);
+        return cnt;
     }
 
     public final boolean payEnergy(final int energyPayment, final Card source) {
         if (energyPayment <= 0)
             return true;
 
-        // rule 118.8
-        if (energy >= energyPayment) {
-            return (loseEnergy(energyPayment) > 0);
-        }
-        return false;
+
+        return canPayEnergy(energyPayment) && loseEnergy(energyPayment) > -1;
     }
 
     // This function handles damage after replacement and prevention effects are applied
