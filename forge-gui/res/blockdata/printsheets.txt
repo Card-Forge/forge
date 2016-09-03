@@ -1011,3 +1011,18 @@ Mana Confluence|EXP
 Strip Mine|EXP
 Tectonic Edge|EXP
 Wasteland|EXP
+
+
+[CN2 Draft Matters]
+Adriana's Valor
+#Assemble the Rank and Vile
+Echoing Boon
+#Emissary's Ploy
+Hired Heist
+#Hold the Permiter
+Hymn of the Wilds
+Incendiary Dissent
+Natural Unity
+#Sovereign's Realm
+#Summoner's Bond
+Weight Advantage

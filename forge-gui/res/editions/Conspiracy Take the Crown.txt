@@ -3,7 +3,10 @@ Code=CN2
 Date=2016-08-26
 Name=Conspiracy: Take the Crown
 Code2=CN2
+MciCode=cn2
 Type=Other
+BoosterCovers=3
+Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Draft Matters"), 1 RareMythic:!fromSheet("CN2 Draft Matters"), 1 fromSheet("CN2 Draft Matters")
 
 [cards]
 1 C Adriana's Valor
