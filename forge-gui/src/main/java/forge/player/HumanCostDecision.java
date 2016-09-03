@@ -24,34 +24,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
-import forge.game.cost.CostAddMana;
-import forge.game.cost.CostChooseCreatureType;
-import forge.game.cost.CostDamage;
-import forge.game.cost.CostDecisionMakerBase;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostDraw;
-import forge.game.cost.CostExile;
-import forge.game.cost.CostExileFromStack;
-import forge.game.cost.CostExiledMoveToGrave;
-import forge.game.cost.CostFlipCoin;
-import forge.game.cost.CostGainControl;
-import forge.game.cost.CostGainLife;
-import forge.game.cost.CostMill;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPayLife;
-import forge.game.cost.CostPutCardToLib;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostRemoveAnyCounter;
-import forge.game.cost.CostRemoveCounter;
-import forge.game.cost.CostReturn;
-import forge.game.cost.CostReveal;
-import forge.game.cost.CostSacrifice;
-import forge.game.cost.CostTap;
-import forge.game.cost.CostTapType;
-import forge.game.cost.CostUnattach;
-import forge.game.cost.CostUntap;
-import forge.game.cost.CostUntapType;
-import forge.game.cost.PaymentDecision;
+import forge.game.cost.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
@@ -585,6 +558,30 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (player.canPayLife(c) && player.getController().confirmPayment(cost, "Pay " + c + " Life?")) {
+            return PaymentDecision.number(c);
+        }
+        return null;
+    }
+
+    @Override
+    public PaymentDecision visit(final CostPayEnergy cost) {
+        final String amount = cost.getAmount();
+        final int life = player.getLife();
+
+        Integer c = cost.convertAmount();
+        if (c == null) {
+            final String sVar = ability.getSVar(amount);
+            // Generalize this
+            if (sVar.startsWith("XChoice")) {
+                int limit = life;
+                final int maxLifePayment = limit < life ? limit : life;
+                c = chooseXValue(maxLifePayment);
+            } else {
+                c = AbilityUtils.calculateAmount(source, amount, ability);
+            }
+        }
+
+        if (player.canPayEnergy(c) && player.getController().confirmPayment(cost, "Pay " + c + " Energy?")) {
             return PaymentDecision.number(c);
         }
         return null;

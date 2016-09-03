@@ -509,6 +509,7 @@ forge-game/src/main/java/forge/game/cost/CostMill.java -text
 forge-game/src/main/java/forge/game/cost/CostPart.java -text
 forge-game/src/main/java/forge/game/cost/CostPartMana.java -text
 forge-game/src/main/java/forge/game/cost/CostPartWithList.java -text
+forge-game/src/main/java/forge/game/cost/CostPayEnergy.java -text
 forge-game/src/main/java/forge/game/cost/CostPayLife.java -text
 forge-game/src/main/java/forge/game/cost/CostPayment.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/cost/CostPutCardToLib.java -text

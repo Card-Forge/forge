@@ -14,6 +14,7 @@ public interface ICostVisitor<T> {
     public T visit(CostMill cost);
     public T visit(CostAddMana cost);
     public T visit(CostPayLife cost);
+    public T visit(CostPayEnergy cost);
     public T visit(CostGainLife cost);
     public T visit(CostPartMana cost);
     public T visit(CostPutCardToLib cost);
@@ -88,6 +89,11 @@ public interface ICostVisitor<T> {
 
         @Override
         public T visit(CostPayLife cost) {
+            return null;
+        }
+
+        @Override
+        public T visit(CostPayEnergy cost) {
             return null;
         }
 

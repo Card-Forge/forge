@@ -316,6 +316,24 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.number(c);
     }
 
+    @Override
+    public PaymentDecision visit(CostPayEnergy cost) {
+        Integer c = cost.convertAmount();
+        if (c == null) {
+            final String sVar = ability.getSVar(cost.getAmount());
+            // Generalize cost
+            if (sVar.equals("XChoice")) {
+                return null;
+            } else {
+                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+            }
+        }
+        if (!player.canPayEnergy(c)) {
+            return null;
+        }
+        return PaymentDecision.number(c);
+    }
+
 
     @Override
     public PaymentDecision visit(CostPutCardToLib cost) {
