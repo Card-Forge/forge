@@ -15,6 +15,7 @@ Tower
 Urza's
 [CreatureTypes]
 Advisor
+Aetherborn
 Ally
 Angel
 Antelope
@@ -166,6 +167,7 @@ Pentavite
 Pest
 Phelddagrif
 Phoenix
+Pilot
 Pincher
 Pirate
 Plant
@@ -190,6 +192,7 @@ Scion
 Scorpion
 Scout
 Serf
+Servo
 Serpent
 Shade
 Shaman
@@ -257,6 +260,7 @@ Clue
 Contraption
 Equipment
 Fortification
+Vehicle
 [WalkerTypes]
 Ajani
 Arlinn
@@ -281,6 +285,7 @@ Narset
 Nissa
 Nixilis
 Ral
+Saheeli
 Sarkhan
 Sorin
 Tamiyo
