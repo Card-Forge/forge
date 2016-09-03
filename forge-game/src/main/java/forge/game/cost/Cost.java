@@ -265,6 +265,12 @@ public class Cost {
             return new CostPayLife(splitStr[0]);
         }
 
+        if (parse.startsWith("PayEnergy<")) {
+            // Payenergy<EnergyCost>
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostPayEnergy(splitStr[0]);
+        }
+
         if (parse.startsWith("GainLife<")) {
             // PayLife<LifeCost>
             final String[] splitStr = abCostParse(parse, 3);
