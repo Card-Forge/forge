@@ -163,7 +163,7 @@ public class TokenEffect extends SpellAbilityEffect {
 
         final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
-        sb.append("Put (").append(finalAmount).append(") ");
+        sb.append("Create (").append(finalAmount).append(") ");
         if (Arrays.asList(this.tokenTypes).contains("Creature")) {
             sb.append(finalPower).append("/").append(finalToughness).append(" ");
         }
@@ -171,7 +171,6 @@ public class TokenEffect extends SpellAbilityEffect {
         if (finalAmount != 1) {
             sb.append("s");
         }
-        sb.append(" onto the battlefield");
 
         if (this.tokenOwner.equals("Opponent")) {
             sb.append(" under your opponent's control.");
