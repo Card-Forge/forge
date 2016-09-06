@@ -7,13 +7,16 @@ start = 0
 incr = 15
 
 # Update these variables, or even better convert to Arguments
-url ='http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=18242&start=%s'
+url ='http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=19036&start=%s'
 txt = ''
-folder = 'SOI'
+folder = 'KLD'
 cards = 0
 
 def normalize_name(name):
-	return name.lower().replace(' ', '_').replace("'", '').replace(u'\xc6', 'AE')
+	return name.lower().replace(' ', '_').replace("'", '').replace(',', '').replace(u'\xc6', 'AE')
+
+
+#allCards = file(os.path.join(folder, 'allcards.txt'), 'w')
 
 condition = True
 try:
@@ -33,14 +36,18 @@ while condition:
 		if not e.text.startswith('Name:'):
 			continue
 
-		script = lxml.html.tostring(e)[6:-7].replace('</a>', '').replace('&lt;','<').replace('&gt;', '>')
+		script = lxml.html.tostring(e)[6:-7].replace('</a>', '')
+		#allCards.write(script.replace('<br>', '\n'))
+		#allCards.write('\n\n')
 		while True:
 			idx = script.find('<a ')
 			if idx == -1:
 				break
 			backIdx = script.find('>', idx)
+			#print script[idx:backIdx]
 			script = script[0:idx] + script[backIdx+1:]
 
+		#script = script.replace('&lt;','<').replace('&gt;', '>')
 		lines = script.split('<br>')
 
 		name = ''
@@ -64,14 +71,18 @@ while condition:
 			path = os.path.join(folder, '%s%s.txt' % (name, i))
 			i += 1
 
-		with open(path, 'w') as f:
-			for line in lines:
-				f.write("%s\n" % line)
+		try:
+			with open(path, 'w') as f:
+				for line in lines:
+					f.write("%s\n" % line)
+		except:
+			print path, " Failed..."
+			continue
 
 		cards += 1
 
 	start += incr
-	print ("About to loop...")
+	print ("About to loop... %s" % start)
 	raw_input("Press Enter to continue...")
 
 

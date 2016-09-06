@@ -20,18 +20,25 @@ r = requests.get('http://mtgjson.com/json/%s.json' % result.setcode)
 d = r.json()
 cards = d['cards']
 
-f = open('%s.txt' % result.name, 'w')
+f = open('%s.txt' % d['name'], 'w')
 
 f.write('[metadata]\n')
 f.write('Code=%s\n' % result.setcode)
-f.write('Date=2015-XX-XX\n')
-f.write('Name=%s\n' % result.name)
+f.write('Date=%s\n' % d['releaseDate'])
+f.write('Name=%s\n' % d['name'])
 f.write('Code2=%s\n' % result.setcode)
-f.write('Type=%s\n\n' % result.settype)
+f.write('MciCode=%s\n' % result.setcode.lower())
+f.write('Type=%s\n\n' % d['type'])
 f.write('[cards]\n')
 
 for c in cards:
+	l = []
+	l.append(c['number']) 
+
 	rarity = c['rarity'][0]
 	if rarity == 'B':
 		rarity = 'L'
-	f.write(rarity + ' ' + c['name'].replace(u'\xc6', 'AE') + '\n')
+	l.append(rarity)
+	l.append(c['name'].replace(u'\xc6', 'AE'))
+	l.append('\n')
+	f.write(' '.join(l))
