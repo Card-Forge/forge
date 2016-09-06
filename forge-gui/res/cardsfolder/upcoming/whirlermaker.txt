@@ -1,0 +1,7 @@
+Name:Whirlermaker
+ManaCost:3
+Types:Artifact
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter KLD | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlermaker.jpg
+Oracle:{4}, {T}: Create a 1/1 colorless Thopter artifact creature token with flying.
+
