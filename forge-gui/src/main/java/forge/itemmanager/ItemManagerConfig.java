@@ -32,6 +32,8 @@ public enum ItemManagerConfig {
             null, null, 4, 1),
     DRAFT_POOL(SColumnUtil.getCatalogDefaultColumns(false), false, false, false,
             GroupDef.DEFAULT, ColumnDef.CMC, 4, 1),
+    DRAFT_CONSPIRACY(SColumnUtil.getSpecialCardPoolDefaultColumns(), false, false, true,
+            null, null, 4, 0),
     SEALED_POOL(SColumnUtil.getCatalogDefaultColumns(false), false, false, false,
             GroupDef.COLOR, ColumnDef.CMC, 4, 1),
     SPELL_SHOP(SColumnUtil.getSpellShopDefaultColumns(), false, false, false,
