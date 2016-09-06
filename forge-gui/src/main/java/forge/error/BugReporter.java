@@ -58,8 +58,7 @@ public class BugReporter {
     private static final String FORUM_URL;
 
     static {
-        final String forgeVersion = BuildInfo.getVersionString();
-        if (StringUtils.containsIgnoreCase(forgeVersion, "svn") || StringUtils.containsIgnoreCase(forgeVersion, "snapshot")) {
+        if (BuildInfo.isDevelopmentVersion()) {
             FORUM_URL = "http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=6333&start=54564487645#bottom";
         } else {
             FORUM_URL = "http://www.slightlymagic.net/forum/viewforum.php?f=26";

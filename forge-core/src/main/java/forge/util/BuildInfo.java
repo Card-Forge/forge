@@ -39,4 +39,10 @@ public class BuildInfo {
         }
         return version;
     }
+
+    public static boolean isDevelopmentVersion() {
+        String forgeVersion = getVersionString();
+        return StringUtils.containsIgnoreCase(forgeVersion, "svn") ||
+                StringUtils.containsIgnoreCase(forgeVersion, "snapshot");
+    }
 }

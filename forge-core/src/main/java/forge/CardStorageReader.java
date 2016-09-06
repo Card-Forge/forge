@@ -39,6 +39,7 @@ import java.util.concurrent.Future;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import forge.util.BuildInfo;
 import org.apache.commons.lang3.time.StopWatch;
 
 import forge.card.CardRules;
@@ -139,14 +140,6 @@ public class CardStorageReader {
         return result;
     }
 
-    /**
-     * Starts reading cards into memory until the given card is found.
-     *
-     * After that, we save our place in the list of cards (on disk) in case we
-     * need to load more.
-     *
-     * @return the Card or null if it was not found.
-     */
     public final Iterable<CardRules> loadCards() {
 
         final Localizer localizer = Localizer.getInstance();
@@ -211,7 +204,7 @@ public class CardStorageReader {
         }
 
         return result;
-    } // loadCardsUntilYouFind(String)
+    }
 
     private void executeLoadTask(final Collection<CardRules> result, final List<Callable<List<CardRules>>> tasks, final CountDownLatch cdl) {
         try {
@@ -289,6 +282,11 @@ public class CardStorageReader {
                 continue;
             }
             if (filename.startsWith(".")) {
+                continue;
+            }
+
+            if (filename.equalsIgnoreCase("upcoming") && !BuildInfo.isDevelopmentVersion()) {
+                // If upcoming folder exits, only load these cards on development builds
                 continue;
             }
 
