@@ -1,0 +1,8 @@
+Name:Ovalchase Dragster
+ManaCost:4
+Types:Artifact Vehicle
+PT:6/1
+K:Trample
+K:Haste
+K:Crew:1
+Oracle:Trample, haste\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

@@ -26,6 +26,7 @@ public enum Keyword {
     CHANGELING(SimpleKeyword.class, true, "This card is every creature type at all times."),
     CONSPIRE(SimpleKeyword.class, false, "As an additional cost to cast this spell, you may tap two untapped creatures you control that each share a color with it. If you do, copy it."),
     CONVOKE(SimpleKeyword.class, true, "Each creature you tap while playing this spell reduces its cost by {1} or by one mana of that creature's color."),
+    Crew(KeywordWithAmount.class, true, "Tap any number of creatures you control with total power %1$d or more: This Vehicle becomes an artifact creature until end of turn."),
     CUMULATIVE_UPKEEP(KeywordWithCost.class, false, "At the beginning of your upkeep, put an age counter on this permanent. Then you may pay %s for each age counter on it. If you don't, sacrifice it."),
     CYCLING(Cycling.class, false, "%s, Discard this card: Draw a card."), //Typecycling reminder text handled by Cycling class
     DASH(KeywordWithCost.class, true, "You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step."),

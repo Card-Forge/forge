@@ -2540,6 +2540,10 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Presence")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Crew")) {
+                addSpellAbility(keyword, card, null);
+            }
+
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
                         + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
@@ -3452,6 +3456,28 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Crew")) {
+            final String[] k = keyword.split(":");
+            final String power = k[1];
+
+            // tapXType has a special check for withTotalPower, and NEEDS it to be "+withTotalPowerGE"
+            // So adding redundant YouCtrl to simplify matters even though its unnecessary
+            String effect = "AB$ Animate | Cost$ tapXType<Any/Creature.YouCtrl+withTotalPowerGE" + power +
+                    "> | CostDesc$ Crew " + power + " (Tap any number of creatures you control with total power " + power +
+                    " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Creature,Artifact | OverwriteTypes$ True | " +
+                    "KeepSubtypes$ True | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            } else {
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getCurrentState().addUnparsedAbility(effect);
+            }
+            card.addSpellAbility(sa);
         }
     }
 
