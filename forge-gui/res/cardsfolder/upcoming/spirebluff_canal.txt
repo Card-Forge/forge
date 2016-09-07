@@ -1,0 +1,11 @@
+Name:Spirebluff Canal
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
+SVar:LandTapped:AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT2 | References$ ETBCheckSVar2 | SubAbility$ MoveToPlay
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:ETBCheckSVar2:Count$Valid Land.YouCtrl
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spirebluff_canal.jpg
+Oracle:Spirebluff Canal enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {U} or {R} to your mana pool.

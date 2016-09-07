@@ -16210,12 +16210,16 @@ forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/upcoming/aerial_responder.txt -text
+forge-gui/res/cardsfolder/upcoming/blooming_marsh.txt -text
+forge-gui/res/cardsfolder/upcoming/botanical_sanctum.txt -text
 forge-gui/res/cardsfolder/upcoming/ceremonial_rejection.txt -text
 forge-gui/res/cardsfolder/upcoming/chandra_pyrogenius.txt -text
+forge-gui/res/cardsfolder/upcoming/concealed_courtyard.txt -text
 forge-gui/res/cardsfolder/upcoming/curio_vendor.txt -text
 forge-gui/res/cardsfolder/upcoming/depala_pilot_exemplar.txt -text
 forge-gui/res/cardsfolder/upcoming/furious_reprisal.txt -text
 forge-gui/res/cardsfolder/upcoming/gonti_lord_of_luxury.txt -text
+forge-gui/res/cardsfolder/upcoming/inspiring_vantage.txt -text
 forge-gui/res/cardsfolder/upcoming/inventors_fair.txt -text
 forge-gui/res/cardsfolder/upcoming/inventors_goggles.txt -text
 forge-gui/res/cardsfolder/upcoming/nissa_natures_artisan.txt -text
@@ -16223,6 +16227,7 @@ forge-gui/res/cardsfolder/upcoming/ovalchase_dragster.txt -text
 forge-gui/res/cardsfolder/upcoming/saheelis_artistry.txt -text
 forge-gui/res/cardsfolder/upcoming/skyship_stalker.txt -text
 forge-gui/res/cardsfolder/upcoming/speedway_fanatic.txt -text
+forge-gui/res/cardsfolder/upcoming/spirebluff_canal.txt -text
 forge-gui/res/cardsfolder/upcoming/tasseled_dromedary.txt -text
 forge-gui/res/cardsfolder/upcoming/terror_of_the_fairgrounds.txt -text
 forge-gui/res/cardsfolder/upcoming/verdurous_gearhulk.txt -text
