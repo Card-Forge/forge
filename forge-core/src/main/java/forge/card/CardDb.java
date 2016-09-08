@@ -134,12 +134,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         Set<String> allMissingCards = new LinkedHashSet<String>();
         List<String> missingCards = new ArrayList<String>();
         Map<String, Integer> artIds = new HashMap<String, Integer>();
+        CardEdition upcomingSet = null;
+        Date today = new Date();
 
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean isCoreExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION || e.getType() == CardEdition.Type.REPRINT; 
             if (logMissingPerEdition && isCoreExpSet) {
                 System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
             }
+            if (e.getDate().after(today)) {
+                upcomingSet = e;
+            }
+
             for (CardEdition.CardInSet cis : e.getCards()) {
                 int artIdx = 1;
                 if (artIds.containsKey(cis.name)) {
@@ -174,10 +180,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             System.out.printf("Totally %d cards not implemented: %s\n", allMissingCards.size(), StringUtils.join(allMissingCards, " | "));
         }
 
+        if (upcomingSet != null) {
+            System.err.println("Upcoming set " + upcomingSet + " dated in the future. All unaccounted cards will be added to this set with unknown rarity.");
+        }
+
         for (CardRules cr : rulesByName.values()) {
             if (!allCardsByName.containsKey(cr.getName())) {
-                System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/cardeditions/ folder. ");
-                addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
+                if (upcomingSet != null) {
+                    addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, 1));
+                } else {
+                    System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/cardeditions/ folder. ");
+                    addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
+                }
             }
         }
 

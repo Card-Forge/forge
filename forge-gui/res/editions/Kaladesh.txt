@@ -1,0 +1,10 @@
+[metadata]
+Code=KLD
+Date=2016-09-30
+Name=Kaladesh
+Code2=KLD
+Type=Expansion
+MciCode=kld
+BoosterCovers=3
+
+[cards]
