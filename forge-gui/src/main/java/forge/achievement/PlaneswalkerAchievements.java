@@ -37,10 +37,13 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Chandra Ablaze", "Chandra's Bargain", "I feel like I've seen those before...");
         add("Chandra Nalaar", "Chandra's Rage", "Feel the power of my wrath!");
         add("Chandra, Flamecaller", "Chandra's Sea of Flames", "You didn't activate this for 0 just to get the achievement, did you?");
+        add("Chandra, Pyrogenius", "Chandra's Warm Embrace", "Did I say 'warm'? I meant 'red hot'.");
         add("Chandra, Pyromaster", "Chandra's Vengeance", "Please file in triplicate!");
         add("Chandra, Roaring Flame", "Chandra's Roar", "The opponent continues to burn...");
         add("Chandra, the Firebrand", "Chandra's Hex", "When burning five is just not enough.");
+        add("Chandra, Torch of Defiance", "Chandra's Defiance", "Let's torch it!");
         add("Dack Fayden", "Dack's Discount", "Do you have any evidence it was me?");
+        add("Daretti, Ingenious Iconoclast", "Daretti's Mass Production", "Imitation is the sincerest form of irritation.");
         add("Daretti, Scrap Savant", "Daretti's Recycler", "Save the environment!");
         add("Domri Rade", "Domri's Surprise", "That's GOTTA get me a date!");
         add("Elspeth Tirel", "Elspeth's Solitude", "Tokens are my only friends...");
@@ -64,6 +67,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Jace, the Mind Sculptor", "Jace's Lobotomy", "What do you mean, \"overpowered\"?");
         add("Jace, Unraveler of Secrets", "Jace's Perfect Plan", "So, I've read about this neat guy named Erayo...");
         add("Karn Liberated", "Karn's Reset", "Let's do this again!");
+        add("Kaya, Ghost Assassin", "Kaya's Syphon", "You don't MIND, do you?");
         add("Kiora, Master of the Depths", "Kiora's Fight Club", "First rule is not to talk about the sucker punches");
         add("Kiora, the Crashing Wave", "Kiora's Kraken", "Say hello to Cthulhu for me!");
         add("Koth of the Hammer", "Koth's Eruption", "You won't like the mountains when they are angry!");
@@ -77,12 +81,15 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Narset Transcendent", "Narset's One Rule", "No spells for you!");
         add("Nicol Bolas, Planeswalker", "Bolas's Ultimatum", "Whatever you do, don't call him \"Nicol\"!");
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
+        add("Nissa, Nature Artisan", "Nissa's Stampede", "Big enough for you?");
         add("Nissa, Sage Animist", "Nissa's Wake-Up Call", "Wake up! Time to work!");
+        add("Nissa, Vital Force", "Nissa's Harvest", "What a landfall!");
         add("Nissa, Voice of Zendikar", "Nissa's Bounty", "It's harvest time!");
         add("Nissa, Worldwaker", "Nissa's Awakening", "The whole country is here!");
         add("Ob Nixilis of the Black Oath", "Nixilis's Black Oath", "We all have to bring sacrifices sometimes.");
         add("Ob Nixilis Reignited", "Ob Nixilis's Torment", "I'll give you dreams from beyond the underworld!");
         add("Ral Zarek", "Ral's Long Day", "So much work, so much time!");
+        add("Saheeli Rai", "Saheeli's Creativity", "I love when all the pieces come together!");
         add("Sarkhan Vol", "Sarkhan's Dragons", "Go forth, my minions!");
         add("Sarkhan the Mad", "Sarkhan's Beatdown", "Tag! You're it!");
         add("Sarkhan, the Dragonspeaker", "Sarkhan's Voices", "Huh? What are you saying?)");
