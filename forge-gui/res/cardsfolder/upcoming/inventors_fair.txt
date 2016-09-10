@@ -4,7 +4,7 @@ Types:Legendary Land
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Condition$ Metalcraft | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
-A:AB$ ChangeZone | Cost$ 4 T Sac&lt;1/CARDNAME&gt; | Activation$ Metalcraft | Origin$ Library | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact card, reveal it, put it into your hand, then shuffle your library. Activate this ability only if you control three or more artifacts.
+A:AB$ ChangeZone | Cost$ 4 T Sac<1/CARDNAME> | Activation$ Metalcraft | Origin$ Library | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact card, reveal it, put it into your hand, then shuffle your library. Activate this ability only if you control three or more artifacts.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inventors_fair.jpg
 Oracle:At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.\n{T}: Add {C} to your mana pool.\n{4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle your library. Activate this ability only if you control three or more artifacts. 
 
