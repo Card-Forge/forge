@@ -785,7 +785,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!currentState.getTriggers().isEmpty()) {
             for (final Trigger t : currentState.getTriggers()) {
                 final SpellAbility sa = t.getTriggeredSA();
-                triggered = sa.getTriggeringObject(typeIn);
+                triggered = sa.hasTriggeringObject(typeIn) ? sa.getTriggeringObject(typeIn) : null;
                 if (triggered != null) {
                     break;
                 }
