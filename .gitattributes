@@ -16209,6 +16209,7 @@ forge-gui/res/cardsfolder/u/utter_end.txt -text
 forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/upcoming/acrobatic_maneuver.txt -text
 forge-gui/res/cardsfolder/upcoming/aerial_responder.txt -text
 forge-gui/res/cardsfolder/upcoming/arborback_stomper.txt -text
 forge-gui/res/cardsfolder/upcoming/blooming_marsh.txt -text
@@ -16225,6 +16226,7 @@ forge-gui/res/cardsfolder/upcoming/gonti_lord_of_luxury.txt -text
 forge-gui/res/cardsfolder/upcoming/inspiring_vantage.txt -text
 forge-gui/res/cardsfolder/upcoming/inventors_fair.txt -text
 forge-gui/res/cardsfolder/upcoming/inventors_goggles.txt -text
+forge-gui/res/cardsfolder/upcoming/kambal_consul_of_allocation.txt -text
 forge-gui/res/cardsfolder/upcoming/larger_than_life.txt -text
 forge-gui/res/cardsfolder/upcoming/nissa_natures_artisan.txt -text
 forge-gui/res/cardsfolder/upcoming/nissa_vital_force.txt -text
