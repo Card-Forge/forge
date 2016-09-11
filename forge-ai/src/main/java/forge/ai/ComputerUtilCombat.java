@@ -1280,6 +1280,8 @@ public class ComputerUtilCombat {
                 String bonus = new String(source.getSVar(att));
                 if (bonus.contains("TriggerCount$NumBlockers")) {
                     bonus = bonus.replace("TriggerCount$NumBlockers", "Number$1");
+                } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
+                    bonus = bonus.replace("TriggeredPlayersDefenders$Amount", "Number$1");
                 }
                 power += CardFactoryUtil.xCount(source, bonus);
 
