@@ -95,6 +95,7 @@ forge-ai/src/main/java/forge/ai/ability/FlipACoinAi.java -text
 forge-ai/src/main/java/forge/ai/ability/FogAi.java -text
 forge-ai/src/main/java/forge/ai/ability/GameLossAi.java -text
 forge-ai/src/main/java/forge/ai/ability/GameWinAi.java -text
+forge-ai/src/main/java/forge/ai/ability/GoadAi.java -text svneol=unset#text/plain
 forge-ai/src/main/java/forge/ai/ability/HauntAi.java -text
 forge-ai/src/main/java/forge/ai/ability/LegendaryRuleAi.java -text
 forge-ai/src/main/java/forge/ai/ability/LifeExchangeAi.java -text
