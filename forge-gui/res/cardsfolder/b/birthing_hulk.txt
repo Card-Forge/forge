@@ -9,4 +9,4 @@ SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDe
 A:AB$ Regenerate | Cost$ 1 C | SpellDescription$ Regenerate CARDNAME.
 DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/birthing_hulk.jpg
-Oracle:When Birthing Hulk enters the battlefield, put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool." ({C} represents colorless mana.)\n{1}{C}: Regenerate Birthing Hulk.
+Oracle:Devoid (This card has no color.)\nWhen Birthing Hulk enters the battlefield, put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool." ({C} represents colorless mana.)\n{1}{C}: Regenerate Birthing Hulk.
