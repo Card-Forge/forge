@@ -13,7 +13,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> {
     }
     public String getReminderText() {
         String result = formatReminderText(keyword.reminderText);
-        Matcher m = Pattern.compile("\\{(\\w):(.+)\\}").matcher(result);
+        Matcher m = Pattern.compile("\\{(\\w):(.+?)\\}").matcher(result);
         
         StringBuffer sb = new StringBuffer();
         while (m.find()) {

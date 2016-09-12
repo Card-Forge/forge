@@ -2525,6 +2525,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Escalate")) {
                 addStaticAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Fabricate")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Rampage")) {
                 addTriggerAbility(keyword, card, null);
             }
@@ -3019,6 +3022,34 @@ public class CardFactoryUtil {
             card.setSVar("ExtortOpps", abString);
             card.setSVar("ExtortGainLife", dbString);
             card.setSVar("AFLifeLost", "Number$0");
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Fabricate")) {
+            final String[] k = keyword.split(":");
+            final String n = k[1];
+
+            final String name = StringUtils.join(k);
+
+            final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield "
+                    + " | Execute$ " + name + "Choose | ValidCard$ Card.Self | Secondary$ True"
+                    + " | TriggerDescription$ Fabricate " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String choose = "DB$ GenericChoice | Choices$ DB" + name + "Counter,DB" + name + "Token | ConditionPresent$ Card.StrictlySelf | SubAbility$ DB" + name + "Token2 | AILogic$ " + name;
+            final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + n + " | SpellDescription$ put "
+                    + Lang.nounWithNumeral(n, "+1/+1 counter") + " on it";
+            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenName$ Servo | TokenTypes$ Artifact,Creature,Servo "
+                    + " | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ c 1 1 servo KLD | SpellDescription$ Create "
+                    + Lang.nounWithNumeral(n, "1/1 colorless Servo artifact creature token") + ".";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(trigger);
+
+            card.setSVar(name + "Choose", choose);
+            card.setSVar("DB" + name + "Counter", counter);
+            card.setSVar("DB" + name + "Token", token);
+            card.setSVar("DB" + name + "Token2", token + " | ConditionPresent$ Card.StrictlySelf | ConditionCompare$ EQ0");
+
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }

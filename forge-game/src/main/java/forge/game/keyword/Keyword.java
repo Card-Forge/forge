@@ -49,6 +49,7 @@ public enum Keyword {
     EXALTED(SimpleKeyword.class, false, "Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn."),
     EXTORT(SimpleKeyword.class, false, "Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life."),
     EXPLOIT(SimpleKeyword.class, false, "When this creature enters the battlefield, you may sacrifice a creature."),
+    FABRICATE(KeywordWithAmount.class, false, "When this creature enters the battlefield, put {%1$d:+1/+1 counter} on it, or create {%1$d:1/1 colorless Servo artifact creature token}."),
     FADING(KeywordWithAmount.class, false, "This permanent enters the battlefield with %d fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it."),
     FATESEAL(KeywordWithAmount.class, false, "Look at the top %d cards of an opponent's library, then put any number of them on the bottom of that player's library and the rest on top in any order."),
     FEAR(SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or black creatures."),
