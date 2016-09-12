@@ -2573,8 +2573,18 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void removeChangedCardTypes(final long timestamp) {
-        changedCardTypes.remove(timestamp);
+        CardChangedType changed = changedCardTypes.remove(timestamp);
         currentState.getView().updateType(currentState);
+
+        // if it stops being a land, the abilities does need to be removed
+        if (changed != null && changed.getAddType().isLand()) {
+            for (final String s : changed.getAddType().getSubtypes()) {
+                if(CardType.isABasicLandType(s)) {
+                    GameActionUtil.grantBasicLandsManaAbilities(ImmutableList.of(this));
+                    break;
+        	    }
+            }
+        }
     }
 
     public final void addColor(final String s, final boolean addToColors, final long timestamp) {
