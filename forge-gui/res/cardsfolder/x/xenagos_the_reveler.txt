@@ -4,7 +4,7 @@ Types:Planeswalker Xenagos
 Loyalty:3
 A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Amount$ X | Produced$ Combo R G | Planeswalker$ True | References$ X | SpellDescription$ Add X mana in any combination of {R} and/or {G} to your mana pool, where X is the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
-A:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Satyr | TokenColors$ Red,Green | TokenTypes$ Creature,Satyr | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Haste | Planeswalker$ True | TokenImage$ rg 2 2 satyr | SpellDescription$ Put a 2/2 red and green Satyr creature token with haste onto the battlefield.
+A:AB$ Token | Cost$ SubCounter<0/LOYALTY> | TokenAmount$ 1 | TokenName$ Satyr | TokenColors$ Red,Green | TokenTypes$ Creature,Satyr | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Haste | Planeswalker$ True | TokenImage$ rg 2 2 satyr | SpellDescription$ Put a 2/2 red and green Satyr creature token with haste onto the battlefield.
 A:AB$ Mill | Cost$ SubCounter<6/LOYALTY> | NumCards$ 7 | Destination$ Exile | RememberMilled$ True | Planeswalker$ True | Ultimate$ True | SubAbility$ DBChangeZone | SpellDescription$ Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered,Land.IsRemembered | Hidden$ True | ChangeNum$ Y | References$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
