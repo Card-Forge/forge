@@ -16212,6 +16212,7 @@ forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/upcoming/acrobatic_maneuver.txt -text
 forge-gui/res/cardsfolder/upcoming/aerial_responder.txt -text
+forge-gui/res/cardsfolder/upcoming/angel_of_invention.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/upcoming/arborback_stomper.txt -text
 forge-gui/res/cardsfolder/upcoming/blooming_marsh.txt -text
 forge-gui/res/cardsfolder/upcoming/botanical_sanctum.txt -text
