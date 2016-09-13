@@ -41,37 +41,39 @@ Type=Duel_Decks
 32 L Forest
 33 L Forest
 34 L Forest
-35 M Ob Nixilis Reignited
-36 C Altar's Reap
-37 U Ambition's Cost
-38 C Bala Ged Scorpion
-39 C Blistergrub
-40 C Cadaver Imp
-41 U Carrier Thrall
-42 C Demon's Grasp
-43 R Desecration Demon
-44 R Despoiler of Souls
-45 C Disfigure
-46 U Doom Blade
-47 C Fetid Imp
-48 C Foul Imp
-49 C Giant Scorpion
-50 C Grim Discovery
-51 C Hideous End
-52 R Indulgent Tormentor
-53 C Innocent Blood
-54 C Mire's Toll
-55 R Pestilence Demon
-56 R Priest of the Blood Rite
-57 U Quest for the Gravelord
-58 C Renegade Demon
-59 U Shadows of the Past
-60 U Smallpox
-61 U Squelching Leeches
-62 C Tendrils of Corruption
-63 C Unhallowed Pact
-64 U Leechridden Swamp
-65 L Swamp
+35 L Forest
+36 M Ob Nixilis Reignited
+37 C Altar's Reap
+38 U Ambition's Cost
+39 C Bala Ged Scorpion
+40 C Blistergrub
+41 C Cadaver Imp
+42 U Carrier Thrall
+43 C Demon's Grasp
+44 R Desecration Demon
+45 R Despoiler of Souls
+46 C Disfigure
+47 U Doom Blade
+48 C Fetid Imp
+49 C Foul Imp
+50 C Giant Scorpion
+51 C Grim Discovery
+52 C Hideous End
+53 R Indulgent Tormentor
+54 C Innocent Blood
+55 C Mire's Toll
+56 R Pestilence Demon
+57 R Priest of the Blood Rite
+58 U Quest for the Gravelord
+59 C Renegade Demon
+60 U Shadows of the Past
+61 U Smallpox
+62 U Squelching Leeches
+63 C Tendrils of Corruption
+64 C Unhallowed Pact
+65 U Leechridden Swamp
 66 L Swamp
 67 L Swamp
 68 L Swamp
+69 L Swamp
+70 L Swamp
