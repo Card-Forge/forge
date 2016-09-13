@@ -2577,7 +2577,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.getView().updateType(currentState);
 
         // if it stops being a land, the abilities does need to be removed
-        if (changed != null && changed.getAddType().isLand()) {
+        if (changed != null && changed.getAddType() != null && changed.getAddType().isLand()) {
             for (final String s : changed.getAddType().getSubtypes()) {
                 if(CardType.isABasicLandType(s)) {
                     GameActionUtil.grantBasicLandsManaAbilities(ImmutableList.of(this));
