@@ -1,4 +1,4 @@
-Name:Ceremonial Rejection
+Name:Ceremonious Rejection
 ManaCost:U
 Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target colorless spell | ValidTgts$ Card.Colorless | SpellDescription$ Counter target colorless spell.
