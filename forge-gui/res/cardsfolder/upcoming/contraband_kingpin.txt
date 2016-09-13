@@ -1,0 +1,9 @@
+Name:Contraband Kingpin
+ManaCost:U B
+Types:Creature Aetherborn Rogue
+PT:1/4
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever an artifact enters the battlefield under your control, scry 1.
+SVar:TrigScry:AB$ Scry | Cost$ 0 | ScryNum$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/contraband_kingpin.jpg
+Oracle:Lifelink\nWhenever an artifact enters the battlefield under your control, scry 1.
