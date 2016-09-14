@@ -16250,6 +16250,11 @@ forge-gui/res/cardsfolder/upcoming/speedway_fanatic.txt -text
 forge-gui/res/cardsfolder/upcoming/spirebluff_canal.txt -text
 forge-gui/res/cardsfolder/upcoming/tasseled_dromedary.txt -text
 forge-gui/res/cardsfolder/upcoming/terror_of_the_fairgrounds.txt -text
+forge-gui/res/cardsfolder/upcoming/thriving_grubs.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/upcoming/thriving_ibex.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/upcoming/thriving_rats.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/upcoming/thriving_rhino.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/upcoming/thriving_turtle.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/upcoming/unlicensed_disintegration.txt -text
 forge-gui/res/cardsfolder/upcoming/verdurous_gearhulk.txt -text
 forge-gui/res/cardsfolder/upcoming/welding_sparks.txt -text
