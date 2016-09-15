@@ -16215,11 +16215,15 @@ forge-gui/res/cardsfolder/upcoming/aerial_responder.txt -text
 forge-gui/res/cardsfolder/upcoming/aether_hub.txt -text
 forge-gui/res/cardsfolder/upcoming/angel_of_invention.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/upcoming/arborback_stomper.txt -text
+forge-gui/res/cardsfolder/upcoming/aviary_mechanic.txt -text
 forge-gui/res/cardsfolder/upcoming/blooming_marsh.txt -text
 forge-gui/res/cardsfolder/upcoming/blossoming_defense.txt -text
 forge-gui/res/cardsfolder/upcoming/botanical_sanctum.txt -text
+forge-gui/res/cardsfolder/upcoming/brazen_scourge.txt -text
+forge-gui/res/cardsfolder/upcoming/cathartic_reunion.txt -text
 forge-gui/res/cardsfolder/upcoming/ceremonious_rejection.txt -text
 forge-gui/res/cardsfolder/upcoming/chandra_pyrogenius.txt -text
+forge-gui/res/cardsfolder/upcoming/chandras_pyrohelix.txt -text
 forge-gui/res/cardsfolder/upcoming/cloudblazer.txt -text
 forge-gui/res/cardsfolder/upcoming/concealed_courtyard.txt -text
 forge-gui/res/cardsfolder/upcoming/contraband_kingpin.txt -text
@@ -16232,30 +16236,42 @@ forge-gui/res/cardsfolder/upcoming/fragmentize.txt -text
 forge-gui/res/cardsfolder/upcoming/furious_reprisal.txt -text
 forge-gui/res/cardsfolder/upcoming/glint_nest_crane.txt -text
 forge-gui/res/cardsfolder/upcoming/gonti_lord_of_luxury.txt -text
+forge-gui/res/cardsfolder/upcoming/impeccable_timing.txt -text
 forge-gui/res/cardsfolder/upcoming/incendiary_sabotage.txt -text
 forge-gui/res/cardsfolder/upcoming/inspiring_vantage.txt -text
+forge-gui/res/cardsfolder/upcoming/inventors_apprentice.txt -text
 forge-gui/res/cardsfolder/upcoming/inventors_fair.txt -text
 forge-gui/res/cardsfolder/upcoming/inventors_goggles.txt -text
 forge-gui/res/cardsfolder/upcoming/kambal_consul_of_allocation.txt -text
 forge-gui/res/cardsfolder/upcoming/larger_than_life.txt -text
 forge-gui/res/cardsfolder/upcoming/lawless_broker.txt -text
+forge-gui/res/cardsfolder/upcoming/long_finned_skywhale.txt -text
+forge-gui/res/cardsfolder/upcoming/nimble_innovator.txt -text
 forge-gui/res/cardsfolder/upcoming/nissa_natures_artisan.txt -text
 forge-gui/res/cardsfolder/upcoming/nissa_vital_force.txt -text
 forge-gui/res/cardsfolder/upcoming/noxious_gearhulk.txt -text
 forge-gui/res/cardsfolder/upcoming/ovalchase_daredevil.txt -text
 forge-gui/res/cardsfolder/upcoming/ovalchase_dragster.txt -text
+forge-gui/res/cardsfolder/upcoming/oviya_pashiri_sage_lifecrafter.txt -text
 forge-gui/res/cardsfolder/upcoming/prakhata_club_security.txt -text
+forge-gui/res/cardsfolder/upcoming/reckless_fireweaver.txt -text
+forge-gui/res/cardsfolder/upcoming/refurbish.txt -text
+forge-gui/res/cardsfolder/upcoming/restoration_gearsmith.txt -text
+forge-gui/res/cardsfolder/upcoming/ruinous_gremlin.txt -text
 forge-gui/res/cardsfolder/upcoming/saheeli_rai.txt -text
 forge-gui/res/cardsfolder/upcoming/saheelis_artistry.txt -text
+forge-gui/res/cardsfolder/upcoming/scrapheap_scrounger.txt -text
 forge-gui/res/cardsfolder/upcoming/self_assembler.txt -text
 forge-gui/res/cardsfolder/upcoming/sky_skiff.txt -text
 forge-gui/res/cardsfolder/upcoming/skyship_stalker.txt -text
 forge-gui/res/cardsfolder/upcoming/skysovereign_consul_flagship.txt -text
+forge-gui/res/cardsfolder/upcoming/skywhalers_shot.txt -text
 forge-gui/res/cardsfolder/upcoming/smugglers_copter.txt -text
 forge-gui/res/cardsfolder/upcoming/speedway_fanatic.txt -text
 forge-gui/res/cardsfolder/upcoming/spirebluff_canal.txt -text
 forge-gui/res/cardsfolder/upcoming/tasseled_dromedary.txt -text
 forge-gui/res/cardsfolder/upcoming/terror_of_the_fairgrounds.txt -text
+forge-gui/res/cardsfolder/upcoming/tezzerets_ambition.txt -text
 forge-gui/res/cardsfolder/upcoming/thriving_grubs.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/upcoming/thriving_ibex.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/upcoming/thriving_rats.txt -text svneol=unset#text/plain

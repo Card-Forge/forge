@@ -1,0 +1,8 @@
+Name:Restoration Gearsmith
+ManaCost:2 W B
+Types:Creature Human Artificer
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target artifact or creature card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/restoration_gearsmith.jpg
+Oracle:When Restoration Gearsmith enters the battlefield, return target instant or sorcery card from your graveyard to your hand.

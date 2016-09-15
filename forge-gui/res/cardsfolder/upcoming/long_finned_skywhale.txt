@@ -1,0 +1,8 @@
+Name:Long-Finned Skywhale
+ManaCost:2 U U
+Types:Creature Whale
+PT:4/3
+K:Flying
+K:CARDNAME can block only creatures with flying.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/long_finned_skywhale.jpg
+Oracle:Flying\nLong-Finned Skywhale can block only creatures with flying.
