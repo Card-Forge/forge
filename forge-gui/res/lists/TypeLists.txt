@@ -270,6 +270,7 @@ Chandra
 Dack
 Daretti
 Domri
+Dovin
 Elspeth
 Freyalise
 Garruk
