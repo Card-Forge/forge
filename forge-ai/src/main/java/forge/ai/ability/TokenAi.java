@@ -361,6 +361,17 @@ public class TokenAi extends SpellAbilityAi {
      * @return token creature created by ability
      */
     public static Card spawnToken(Player ai, SpellAbility sa) {
+        return spawnToken(ai, sa, false);
+    }
+
+    /**
+     * Create the token as a Card object.
+     * @param ai owner of the new token
+     * @param sa Token SpellAbility
+     * @param notNull if the token would not survive, still return it
+     * @return token creature created by ability
+     */
+    public static Card spawnToken(Player ai, SpellAbility sa, boolean notNull) {
         final Card host = sa.getHostCard();
 
         String[] tokenKeywords = sa.hasParam("TokenKeywords") ? sa.getParam("TokenKeywords").split("<>") : new String[0];
@@ -487,7 +498,7 @@ public class TokenAi extends SpellAbilityAi {
         // Apply static abilities and prune dead tokens
         final Game game = ai.getGame();
         ComputerUtilCard.applyStaticContPT(game, c, null);
-        if (c.getNetToughness() < 1) {
+        if (!notNull && c.getNetToughness() < 1) {
             return null;
         } else {
             return c;
