@@ -16216,10 +16216,13 @@ forge-gui/res/cardsfolder/upcoming/aether_hub.txt -text
 forge-gui/res/cardsfolder/upcoming/aetherflux_reservoir.txt -text
 forge-gui/res/cardsfolder/upcoming/aetherworks_marvel.txt -text
 forge-gui/res/cardsfolder/upcoming/angel_of_invention.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/upcoming/aradara_express.txt -text
 forge-gui/res/cardsfolder/upcoming/arborback_stomper.txt -text
 forge-gui/res/cardsfolder/upcoming/aviary_mechanic.txt -text
+forge-gui/res/cardsfolder/upcoming/ballista_charger.txt -text
 forge-gui/res/cardsfolder/upcoming/blooming_marsh.txt -text
 forge-gui/res/cardsfolder/upcoming/blossoming_defense.txt -text
+forge-gui/res/cardsfolder/upcoming/bomat_bazaar_barge.txt -text
 forge-gui/res/cardsfolder/upcoming/botanical_sanctum.txt -text
 forge-gui/res/cardsfolder/upcoming/brazen_scourge.txt -text
 forge-gui/res/cardsfolder/upcoming/cathartic_reunion.txt -text
