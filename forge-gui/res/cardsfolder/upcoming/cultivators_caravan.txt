@@ -1,0 +1,8 @@
+Name:Cultivator's Caravan
+ManaCost:3
+Types:Artifact Vehicle
+PT:5/5
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+K:Crew:3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cultivators_caravan.jpg
+Oracle:{T}: Add one mana of any color to your mana pool.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This vehicle becomes an artifact creature until end of turn.)

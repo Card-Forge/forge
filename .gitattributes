@@ -16232,11 +16232,14 @@ forge-gui/res/cardsfolder/upcoming/chandras_pyrohelix.txt -text
 forge-gui/res/cardsfolder/upcoming/cloudblazer.txt -text
 forge-gui/res/cardsfolder/upcoming/concealed_courtyard.txt -text
 forge-gui/res/cardsfolder/upcoming/contraband_kingpin.txt -text
+forge-gui/res/cardsfolder/upcoming/cultivators_caravan.txt -text
 forge-gui/res/cardsfolder/upcoming/curio_vendor.txt -text
+forge-gui/res/cardsfolder/upcoming/demolition_stomper.txt -text
 forge-gui/res/cardsfolder/upcoming/depala_pilot_exemplar.txt -text
 forge-gui/res/cardsfolder/upcoming/dovin_baan.txt -text
 forge-gui/res/cardsfolder/upcoming/essence_extraction.txt -text
 forge-gui/res/cardsfolder/upcoming/filigree_familiar.txt -text
+forge-gui/res/cardsfolder/upcoming/fleetwheel_cruiser.txt -text
 forge-gui/res/cardsfolder/upcoming/foundry_inspector.txt -text
 forge-gui/res/cardsfolder/upcoming/fragmentize.txt -text
 forge-gui/res/cardsfolder/upcoming/furious_reprisal.txt -text
@@ -16262,6 +16265,7 @@ forge-gui/res/cardsfolder/upcoming/oviya_pashiri_sage_lifecrafter.txt -text
 forge-gui/res/cardsfolder/upcoming/prakhata_club_security.txt -text
 forge-gui/res/cardsfolder/upcoming/reckless_fireweaver.txt -text
 forge-gui/res/cardsfolder/upcoming/refurbish.txt -text
+forge-gui/res/cardsfolder/upcoming/renegade_freighter.txt -text
 forge-gui/res/cardsfolder/upcoming/restoration_gearsmith.txt -text
 forge-gui/res/cardsfolder/upcoming/ruinous_gremlin.txt -text
 forge-gui/res/cardsfolder/upcoming/saheeli_rai.txt -text
