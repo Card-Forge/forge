@@ -16213,6 +16213,8 @@ forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/upcoming/acrobatic_maneuver.txt -text
 forge-gui/res/cardsfolder/upcoming/aerial_responder.txt -text
 forge-gui/res/cardsfolder/upcoming/aether_hub.txt -text
+forge-gui/res/cardsfolder/upcoming/aetherflux_reservoir.txt -text
+forge-gui/res/cardsfolder/upcoming/aetherworks_marvel.txt -text
 forge-gui/res/cardsfolder/upcoming/angel_of_invention.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/upcoming/arborback_stomper.txt -text
 forge-gui/res/cardsfolder/upcoming/aviary_mechanic.txt -text
@@ -16232,6 +16234,7 @@ forge-gui/res/cardsfolder/upcoming/depala_pilot_exemplar.txt -text
 forge-gui/res/cardsfolder/upcoming/dovin_baan.txt -text
 forge-gui/res/cardsfolder/upcoming/essence_extraction.txt -text
 forge-gui/res/cardsfolder/upcoming/filigree_familiar.txt -text
+forge-gui/res/cardsfolder/upcoming/foundry_inspector.txt -text
 forge-gui/res/cardsfolder/upcoming/fragmentize.txt -text
 forge-gui/res/cardsfolder/upcoming/furious_reprisal.txt -text
 forge-gui/res/cardsfolder/upcoming/glint_nest_crane.txt -text
