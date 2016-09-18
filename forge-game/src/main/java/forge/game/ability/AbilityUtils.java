@@ -1542,17 +1542,26 @@ public class AbilityUtils {
                     return count;
                 }
 
-
                 if (l[0].startsWith("LastStateBattlefield")) {
                     final String[] k = l[0].split(" ");
-                    CardCollection list = new CardCollection(sa.getLastStateBattlefield());
+                    CardCollectionView list = null;
+                    if (sa.getLastStateBattlefield() != null) {
+                    	list = new CardCollection(sa.getLastStateBattlefield());
+                    } else { // LastState is Empty
+                    	list = sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield);
+                    }
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
                     return CardFactoryUtil.doXMath(list.size(), expr, c);
                 }
 
                 if (l[0].startsWith("LastStateGraveyard")) {
                     final String[] k = l[0].split(" ");
-                    CardCollection list = new CardCollection(sa.getLastStateGraveyard());
+                    CardCollectionView list = null;
+                    if (sa.getLastStateGraveyard() != null) {
+                        list = new CardCollection(sa.getLastStateGraveyard());
+                    } else { // LastState is Empty
+                        list = sa.getHostCard().getGame().getCardsIn(ZoneType.Graveyard);
+                    }
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
                     return CardFactoryUtil.doXMath(list.size(), expr, c);
                 }
