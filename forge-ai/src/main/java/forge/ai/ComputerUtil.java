@@ -497,6 +497,49 @@ public class ComputerUtil {
         return tapList;
     }
 
+    public static CardCollection chooseTapTypeAccumulatePower(final Player ai, final String type, final Card activate, final boolean tap, final int amount, final CardCollectionView exclude) {
+        // Used for Crewing vehicles, ideally we sort by useless creatures. Can't Attack/Defender
+        int totalPower = 0;
+
+        CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+        all.removeAll(exclude);
+        CardCollection typeList =
+                CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, null);
+
+        // is this needed?
+        typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+
+        if (tap) {
+            typeList.remove(activate);
+        }
+        CardLists.sortByPowerAsc(typeList);
+
+        final CardCollection tapList = new CardCollection();
+
+        // Very very rudimentary
+        for (Card next : typeList) {
+            int pow = next.getNetPower();
+            if (pow <= 0) {
+                continue;
+            }
+            totalPower += pow;
+            if (pow >= amount) {
+                // If the power of this creature matches the totalPower needed
+                // Might as well only use this creature?
+                tapList.clear();
+            }
+            tapList.add(next);
+            if (totalPower >= amount) {
+                break;
+            }
+        }
+
+        if (totalPower < amount) {
+            return null;
+        }
+        return tapList;
+    }
+
     public static CardCollection chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount) {
         CardCollection typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, null);

@@ -408,11 +408,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostTapType cost) {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
+        String type = cost.getType();
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 CardCollectionView typeList =
-                        CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
+                        CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"),
                                 ability.getActivatingPlayer(), ability.getHostCard(), ability);
                 typeList = CardLists.filter(typeList, Presets.UNTAPPED);
                 c = typeList.size();
@@ -421,14 +422,26 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        if (cost.getType().contains("sharesCreatureTypeWith") || cost.getType().contains("withTotalPowerGE")) {
+        if (type.contains("sharesCreatureTypeWith")) {
             return null;
         }
 
-        CardCollectionView totap = ComputerUtil.chooseTapType(player, cost.getType(), source, !cost.canTapSource, c, tapped);
+        boolean totalPower = false;
+        String totalP = "";
+        CardCollectionView totap;
+        if (type.contains("+withTotalPowerGE")) {
+            totalPower = true;
+            totalP = type.split("withTotalPowerGE")[1];
+            type = type.replace("+withTotalPowerGE" + totalP, "");
+            totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, source, !cost.canTapSource, Integer.parseInt(totalP), tapped);
+        } else {
+            totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, tapped);
+        }
+
+
 
         if (totap == null) {
-            System.out.println("Couldn't find a valid card to tap for: " + source.getName());
+            System.out.println("Couldn't find a valid card(s) to tap for: " + source.getName());
             return null;
         }
         tapped.addAll(totap);
