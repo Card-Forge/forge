@@ -7,9 +7,12 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -223,10 +226,20 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             // if host would put into the battlefield attacking
             if (combat != null && combat.isAttacking(host)) {
                 final Player defender = combat.getDefenderPlayerByAttacker(host);
-                if (!ComputerUtilCard.canBeBlockedProfitably(defender, copy)) {
+                if (defender.canLoseLife() && !ComputerUtilCard.canBeBlockedProfitably(defender, copy)) {
                     return counterSA;
                 }
                 return tokenSA;
+            }
+
+            // if the host has haste and can attack
+            if (CombatUtil.canAttack(copy)) {
+                for (final Player opp : player.getOpponents()) {
+                    if (CombatUtil.canAttack(copy, opp) &&
+                            opp.canLoseLife() &&
+                            !ComputerUtilCard.canBeBlockedProfitably(opp, copy))
+                        return counterSA;
+                }
             }
 
             // TODO check for trigger to turn token ETB into +1/+1 counter for host
@@ -237,6 +250,16 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             // Token would not survive 
             if (tokenCard.getNetToughness() < 1) {
                 return counterSA;
+            }
+
+            // Special Card logic, this one try to median its power with the number of artifacts
+            if ("Marionette Master".equals(host.getName())) {
+                CardCollection list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
+                return list.size() >= copy.getNetPower() ? counterSA : tokenSA;
+            } else if ("Cultivator of Blades".equals(host.getName())) {
+                // Cultivator does try to median with number of Creatures
+                CardCollection list = player.getCreaturesInPlay();
+                return list.size() >= copy.getNetPower() ? counterSA : tokenSA;
             }
 
             // evaluate Creature with +1/+1
