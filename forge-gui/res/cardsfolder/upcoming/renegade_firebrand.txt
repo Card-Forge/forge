@@ -1,0 +1,8 @@
+Name:Renegade Firebrand
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | AddPower$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a Chandra planeswalker, CARDNAME gets +1/+0 and has first strike.
+SVar:X:Count$Valid Planeswalker.Chandra+YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_firebrand.jpg
+Oracle:As long as you control a Chandra planeswalker, Renegade Firebrand gets +1/+0 and has first strike.
