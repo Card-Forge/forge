@@ -497,14 +497,19 @@ public class ComputerUtil {
         return tapList;
     }
 
-    public static CardCollection chooseTapTypeAccumulatePower(final Player ai, final String type, final Card activate, final boolean tap, final int amount, final CardCollectionView exclude) {
+    public static CardCollection chooseTapTypeAccumulatePower(final Player ai, final String type, final SpellAbility sa, final boolean tap, final int amount, final CardCollectionView exclude) {
         // Used for Crewing vehicles, ideally we sort by useless creatures. Can't Attack/Defender
         int totalPower = 0;
+        final Card activate = sa.getHostCard();
 
         CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.removeAll(exclude);
         CardCollection typeList =
-                CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, null);
+                CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
+
+        if (sa.hasParam("Crew")) {
+            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew a vehicle");
+        }
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);

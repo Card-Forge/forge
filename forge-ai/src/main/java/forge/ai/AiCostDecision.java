@@ -433,7 +433,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             totalPower = true;
             totalP = type.split("withTotalPowerGE")[1];
             type = type.replace("+withTotalPowerGE" + totalP, "");
-            totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, source, !cost.canTapSource, Integer.parseInt(totalP), tapped);
+            totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), tapped);
         } else {
             totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, tapped);
         }

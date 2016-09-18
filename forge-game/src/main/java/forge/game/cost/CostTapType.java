@@ -127,7 +127,11 @@ public class CostTapType extends CostPartWithList {
             typeList.remove(source);
         }
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
-        
+
+        if (ability.hasParam("Crew")) {
+            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew a vehicle");
+        }
+
         if (sameType) {
             for (final Card card : typeList) {
                 if (CardLists.filter(typeList, new Predicate<Card>() {

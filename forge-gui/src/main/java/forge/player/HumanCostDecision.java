@@ -1093,6 +1093,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         CardCollection typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player,
                 source, ability);
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+
+        if (ability.hasParam("Crew")) {
+            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew a vehicle");
+        }
+
         if (c == null && !amount.equals("Any")) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
