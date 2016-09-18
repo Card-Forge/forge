@@ -46,6 +46,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Daretti, Ingenious Iconoclast", "Daretti's Mass Production", "Imitation is the sincerest form of irritation.");
         add("Daretti, Scrap Savant", "Daretti's Recycler", "Save the environment!");
         add("Domri Rade", "Domri's Surprise", "That's GOTTA get me a date!");
+        add("Dovin Baan", "Dovin's Static", "Have you tried to turn it off and on again?");
         add("Elspeth Tirel", "Elspeth's Solitude", "Tokens are my only friends...");
         add("Elspeth, Knight-Errant", "Elspeth's Endurance", "Bant will prevail!");
         add("Elspeth, Sun's Champion", "Elspeth's Crusade", "With Heliod on my side, I'm invincible!");
