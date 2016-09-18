@@ -16239,6 +16239,7 @@ forge-gui/res/cardsfolder/upcoming/depala_pilot_exemplar.txt -text
 forge-gui/res/cardsfolder/upcoming/dovin_baan.txt -text
 forge-gui/res/cardsfolder/upcoming/essence_extraction.txt -text
 forge-gui/res/cardsfolder/upcoming/filigree_familiar.txt -text
+forge-gui/res/cardsfolder/upcoming/flame_lash.txt -text
 forge-gui/res/cardsfolder/upcoming/fleetwheel_cruiser.txt -text
 forge-gui/res/cardsfolder/upcoming/foundry_inspector.txt -text
 forge-gui/res/cardsfolder/upcoming/fragmentize.txt -text
@@ -16254,6 +16255,7 @@ forge-gui/res/cardsfolder/upcoming/inventors_goggles.txt -text
 forge-gui/res/cardsfolder/upcoming/kambal_consul_of_allocation.txt -text
 forge-gui/res/cardsfolder/upcoming/larger_than_life.txt -text
 forge-gui/res/cardsfolder/upcoming/lawless_broker.txt -text
+forge-gui/res/cardsfolder/upcoming/liberating_combustion.txt -text
 forge-gui/res/cardsfolder/upcoming/long_finned_skywhale.txt -text
 forge-gui/res/cardsfolder/upcoming/nimble_innovator.txt -text
 forge-gui/res/cardsfolder/upcoming/nissa_natures_artisan.txt -text
@@ -16280,6 +16282,7 @@ forge-gui/res/cardsfolder/upcoming/smugglers_copter.txt -text
 forge-gui/res/cardsfolder/upcoming/speedway_fanatic.txt -text
 forge-gui/res/cardsfolder/upcoming/spirebluff_canal.txt -text
 forge-gui/res/cardsfolder/upcoming/tasseled_dromedary.txt -text
+forge-gui/res/cardsfolder/upcoming/terrain_elemental.txt -text
 forge-gui/res/cardsfolder/upcoming/terror_of_the_fairgrounds.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzerets_ambition.txt -text
 forge-gui/res/cardsfolder/upcoming/thriving_grubs.txt -text svneol=unset#text/plain
@@ -16289,6 +16292,7 @@ forge-gui/res/cardsfolder/upcoming/thriving_rhino.txt -text svneol=unset#text/pl
 forge-gui/res/cardsfolder/upcoming/thriving_turtle.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/upcoming/torch_gauntlet.txt -text
 forge-gui/res/cardsfolder/upcoming/unlicensed_disintegration.txt -text
+forge-gui/res/cardsfolder/upcoming/verdant_crescendo.txt -text
 forge-gui/res/cardsfolder/upcoming/verdurous_gearhulk.txt -text
 forge-gui/res/cardsfolder/upcoming/welding_sparks.txt -text
 forge-gui/res/cardsfolder/upcoming/whirlermaker.txt -text
