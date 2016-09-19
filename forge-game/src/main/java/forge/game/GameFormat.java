@@ -35,13 +35,8 @@ import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderFileSections;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 
 public class GameFormat implements Comparable<GameFormat> {
@@ -73,7 +68,7 @@ public class GameFormat implements Comparable<GameFormat> {
         allowedSetCodes = sets == null ? new ArrayList<String>() : Lists.newArrayList(sets);
         bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
         restrictedCardNames = restrictedCards == null ? new ArrayList<String>() : Lists.newArrayList(restrictedCards);
-        
+
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
         this.restrictedCardNames_ro = Collections.unmodifiableList(restrictedCardNames);
@@ -273,7 +268,7 @@ public class GameFormat implements Comparable<GameFormat> {
         }
 
         public Set<GameFormat> getAllFormatsOfDeck(Deck deck) {
-            Set<GameFormat> result = new HashSet<GameFormat>();
+            SortedSet<GameFormat> result = new TreeSet<GameFormat>();
             CardPool allCards = deck.getAllCardsInASinglePool();
             for(GameFormat gf : naturallyOrdered) {
                 if (gf.isPoolLegal(allCards)) {
