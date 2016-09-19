@@ -1,0 +1,10 @@
+Name:Aethertorch Renegade
+ManaCost:2 R
+Types:Creature Human Rogue
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E}{E} (four energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 4
+A:AB$ DealDamage | Cost$ T PayEnergy<2> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
+A:AB$ DealDamage | Cost$ T PayEnergy<8> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to target player.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aethertorch_renegade.jpg
+Oracle:When Aethertorch Renegade enters the battlefield, you get {E}{E}{E}{E} (four energy counters).\n{T}, Pay {E}{E}: Aethertorch Renegade deals 1 damage to target creature.\n{T}, Pay {E}{E}{E}{E}{E}{E}{E}{E}: Aethertorch Renegade deals 6 damage to target player.

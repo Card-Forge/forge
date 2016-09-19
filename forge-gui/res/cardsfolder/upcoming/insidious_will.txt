@@ -1,0 +1,9 @@
+Name:Insidious Will
+ManaCost:2 U U
+Types:Instant
+A:SP$ Charm | Cost$ 2 U U | Choices$ DBCounter,DBChangeTargets,DBCopySpellAbility | Defined$ You | SpellDescription$ Choose one - Counter target spell; You may choose new targets for target spell; Copy target instant or sorcery spell. You may choose new targets for the copy.
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Counter target spell | SpellDescription$ Counter target spell.
+SVar:DBChangeTargets:DB$ ChangeTargets | TargetType$ Spell | Optional$ True | ValidTgts$ Card | SpellDescription$ You may choose new targets for target spell. 
+SVar:DBCopySpellAbility:DB$ CopySpellAbility | ValidTgts$ Instant,Sorcery | TargetType$ Spell | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.  
+SVar:Picture:http://www.wizards.com/global/images/magic/general/insidious_will.jpg
+Oracle:Choose one -\n• Counter target spell.\n• You may choose new targets for target spell.\n• Copy target instant or sorcery spell. You may choose new targets for the copy.

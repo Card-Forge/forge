@@ -1,0 +1,8 @@
+Name:Narnam Cobra
+ManaCost:2
+Types:Artifact Creature Snake
+PT:2/1
+A:AB$ Pump | Cost$ G | KW$ Deathtouch | Defined$ Self | SpellDescription$ CARDNAME gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/narnam_cobra.jpg
+Oracle:{G}: Narnam Cobra gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)

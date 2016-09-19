@@ -1,0 +1,6 @@
+Name:Vedalken Blademaster
+ManaCost:2 U
+Types:Creature Vedalken Soldier
+PT:2/3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_blademaster.jpg
+Oracle:

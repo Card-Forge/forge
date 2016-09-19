@@ -1,0 +1,8 @@
+Name:Iron League Steed
+ManaCost:4
+Types:Artifact Creature Construct
+PT:2/2
+K:Haste
+K:Fabricate:1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_league_steed.jpg
+Oracle:Haste\nFabricate 1 (When this creature enters the battlefield, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)

@@ -1,0 +1,7 @@
+Name:Visionary Augmenter
+ManaCost:2 W W
+Types:Creature Dwarf Artificer
+PT:2/1
+K:Fabricate:2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/visionary_augmenter.jpg
+Oracle:Fabricate 2 (When this creature enters the battlefield, put two +1/+1 counters on it or create two 1/1 colorless Servo artifact creature tokens.)

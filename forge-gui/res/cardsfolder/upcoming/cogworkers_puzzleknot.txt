@@ -1,0 +1,8 @@
+Name:Cogworker's Puzzleknot
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Servo artifact creature token.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Servo | TokenTypes$ Artifact,Creature,Servo | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ c 1 1 servo | TokenAltImages$ c_1_1_servo2,c_1_1_servo3
+A:AB$ Token | Cost$ 1 W Sac<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Servo | TokenTypes$ Artifact,Creature,Servo | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ c 1 1 servo | TokenAltImages$ c_1_1_servo2,c_1_1_servo3 | SpellDescription$ Create a 1/1 colorless Servo artifact creature token.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cogworkers_puzzleknot.jpg
+Oracle:When Cogworker's Puzzleknot enters the battlefield, create a 1/1 colorless Servo artifact creature token.\n{1}{W}, Sacrifice Cogworker's Puzzleknot: Create a 1/1 colorless Servo artifact creature token.

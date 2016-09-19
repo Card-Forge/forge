@@ -1,0 +1,13 @@
+Name:Bomat Courier
+ManaCost:1
+Types:Artifact Creature Construct
+PT:1/1
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of your library face down. (You can't look at it.)
+SVar:TrigExile:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | ExileFaceDown$ True | NoReveal$ True 
+A:AB$ ChangeZoneAll | Cost$ R Discard<0/Hand> Sac<1/CARDNAME> | ChangeType$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Hand | SpellDescription$ Put all cards exiled with Bomat Courier into their owners' hands.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bomat_courier.jpg
+Oracle:Haste\nWhenever Bomat Courier attacks, exile the top card of your library face down. (You can't look at it.)\n{R}, Discard your hand, Sacrifice Bomat Courier: Put all cards exiled with Bomat Courier into their owners' hands.

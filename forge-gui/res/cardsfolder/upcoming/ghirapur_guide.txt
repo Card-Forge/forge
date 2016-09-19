@@ -1,0 +1,7 @@
+Name:Ghirapur Guide
+ManaCost:2 G
+Types:Creature Elf Scout
+PT:3/2
+A:AB$ Pump | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | KW$ HIDDEN CantBeBlockedBy Creature.powerLE2 | SpellDescription$ Target creature you control can't be blocked by creatures with power 2 or less this turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghirapur_guide.jpg
+Oracle:{2}{G}: Target creature you control can't be blocked by creatures with power 2 or less this turn.

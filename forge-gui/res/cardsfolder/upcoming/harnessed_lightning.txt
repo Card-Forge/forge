@@ -1,0 +1,8 @@
+Name:Harnessed Lightning
+ManaCost:1 R
+Types:Instant
+A:SP$ PutCounter | Cost$ 1 R | Defined$ You | CounterType$ ENERGY | CounterNum$ 3 | SubAbility$ DBDealDamage | SpellDescription$ Choose target creature. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. Harnessed Lightning deals that much damage to that creature.
+SVar:DBDealDamage:DB$DealDamage | Cost$ PayEnergy<X> | References$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X
+SVar:X:Count$xPaid
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harnessed_lightning.jpg
+Oracle:Choose target creature. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. Harnessed Lightning deals that much damage to that creature.

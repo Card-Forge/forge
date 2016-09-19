@@ -1,0 +1,8 @@
+Name:Eliminate the Competition
+ManaCost:4 B
+Types:Sorcery
+A:SP$ Destroy | Cost$ 4 B Sac<X/Creature> | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select target creatures | References$ X | SpellDescription$ Destroy X target creatures.
+SVar:X:XChoice
+#ChosenX SVar created by Cost payment
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eliminate_the_competition.jpg
+Oracle:As an additional cost to cast Eliminate the Competition, sacrifice X creatures.\nDestroy X target creatures.

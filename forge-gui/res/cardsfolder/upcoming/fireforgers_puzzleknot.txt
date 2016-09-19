@@ -1,0 +1,8 @@
+Name:Fireforger's Puzzleknot
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target creature or player.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
+A:AB$ DealDamage | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player. 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fireforgers_puzzleknot.jpg
+Oracle:When Fireforger's Puzzleknot enters the battlefield, it deals 1 damage to target creature or player.\n{2}{R}, Sacrifice Fireforger's Puzzleknot: It deals 1 damage to target creature or player.

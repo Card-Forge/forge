@@ -1,0 +1,8 @@
+Name:Die Young
+ManaCost:1 B
+Types:Instant
+A:SP$ PutCounter | Cost$ 1 B | Defined$ You | CounterType$ ENERGY | CounterNum$ 2 | SubAbility$ DBPump | SpellDescription$ Choose target creature. You get {E}{E} (two energy counters), then you may pay any amount of {E}. The creature gets -1/-1 until end of turn for each {E} paid this way.
+SVar:DBPump:DB$Pump | Cost$ PayEnergy<X> | References$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True 
+SVar:X:Count$xPaid
+SVar:Picture:http://www.wizards.com/global/images/magic/general/die_young.jpg
+Oracle:Choose target creature. You get {E}{E} (two energy counters), then you may pay any amount of {E}. The creature gets -1/-1 until end of turn for each {E} paid this way.

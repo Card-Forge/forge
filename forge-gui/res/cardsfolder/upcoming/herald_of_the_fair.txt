@@ -1,0 +1,9 @@
+Name:Herald of the Fair
+ManaCost:2 W
+Types:Creature Human
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control gets +1/+1 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 1 | NumDef$ 1
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_the_fair.jpg
+Oracle:When Herald of the Fair enters the battlefield, target creature you control gets +1/+1 until end of turn.

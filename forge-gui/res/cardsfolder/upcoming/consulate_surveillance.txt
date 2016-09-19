@@ -1,0 +1,11 @@
+Name:Consulate Surveillance
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E}{E} (four energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 4
+A:AB$ ChooseSource | Cost$ PayEnergy<2> | Choices$ Card | ChoiceTitle$ Choose a source | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage that would be dealt to you this turn by a source of your choice.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PreventFromSource | References$ PreventFromSource | RememberObjects$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:PreventFromSource:Mode$ PreventDamage | EffectZone$ Command |  Target$ You | Source$ Card.IsRemembered | Description$ Prevent all damage that would be dealt to you this turn by a source of your choice.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/consulate_surveillance.jpg
+Oracle:When Consulate Surveillance enters the battlefield, you get {E}{E}{E}{E} (four energy counters).\nPay {E}{E}: Prevent all damage that would be dealt to you this turn by a source of your choice.
