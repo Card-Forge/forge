@@ -5,6 +5,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
+import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -48,6 +49,10 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             sb.append(" ").append(c);
         }
 
+        for (final Player tgtPlayer : getTargetPlayers(sa)) {
+            sb.append(" ").append(tgtPlayer);
+        }
+
         sb.append(".");
 
         return sb.toString();
@@ -81,6 +86,16 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberRemoved")) {
             rememberRemoved = true;
         }
+        for (final Player tgtPlayer : getTargetPlayers(sa)) {
+            // Removing energy
+            if ((tgt == null) || tgtPlayer.canBeTargetedBy(sa)) {
+                if (sa.getParam("CounterNum").equals("All")) {
+                    cntToRemove = tgtPlayer.getCounters(counterType);
+                }
+                tgtPlayer.subtractCounter(counterType, cntToRemove);
+            }
+        }
+
         for (final Card tgtCard : getTargetCards(sa)) {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 final Zone zone = game.getZoneOf(tgtCard);
