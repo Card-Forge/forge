@@ -120,6 +120,8 @@ public enum CounterType {
 
     HOOFPRINT(),
 
+    HOUR(),
+
     HOURGLASS(),
 
     HUNGER(),
