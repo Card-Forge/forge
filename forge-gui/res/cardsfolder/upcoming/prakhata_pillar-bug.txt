@@ -1,4 +1,4 @@
-Name:Prahkata Pillar-Bug
+Name:Prakhata Pillar-Bug
 ManaCost:3
 Types:Artifact Creature Insect
 PT:2/3
