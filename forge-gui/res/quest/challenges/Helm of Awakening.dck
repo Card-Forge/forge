@@ -1,0 +1,59 @@
+[quest]
+id=36
+AILife=20
+Repeat=true
+Wins=15
+Card Reward=3 artifact rares
+Credit Reward=500
+HumanExtras=Helm of Awakening|Helm of Awakening
+AIExtras=Helm of Awakening|Helm of Awakening|Darksteel Forge
+[metadata]
+Name=quest36
+Title=Helm of Awakening
+Difficulty=hard
+Description=The game starts with four copies of Helm of Awakening on the battlefield, which reduces the cost of all spells by 4 generic mana. Put lots of expensive spells into your deck and enjoy the discount!
+Icon=Helm of Awakening.jpg
+Deck Type=constructed
+[main]
+20 Forest
+1 Desert Twister
+1 Dosan's Oldest Chant
+1 Nissa's Renewal
+1 Reach of Branches
+1 Primeval Bounty
+1 Kavu Titan
+1 Adaptive Snapjaw
+1 Deadly Insect
+1 Garruk's Packleader
+1 Geist Trappers
+1 Kurgadon
+1 Mitotic Slime
+1 Rhox Maulers
+1 Rotted Hystrix
+1 Silverglade Elemental
+1 Stingerfling Spider
+1 Tajuru Pathwarden
+1 Thragtusk
+1 Watcher in the Web
+1 Great Oak Guardian
+1 Greenwarden of Murasa
+1 Multani, Maro-Sorcerer
+1 Paleoloth
+1 Phytotitan
+1 Primeval Titan
+1 Primordial Sage
+1 Rampaging Baloths
+1 Roughshod Mentor
+1 Skysnare Spider
+1 Soul of the Harvest
+1 Thundering Tanadon
+1 Ancient Ooze
+1 Chancellor of the Tangle
+1 Elderscale Wurm
+1 Gaea's Revenge
+1 Garruk's Horde
+1 Hornet Queen
+1 Moldgraf Monstrosity
+1 Pelakka Wurm
+1 Archetype of Endurance
+[sideboard]

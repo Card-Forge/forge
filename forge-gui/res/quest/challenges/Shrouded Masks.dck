@@ -1,0 +1,33 @@
+[quest]
+id=37
+AILife=20
+Repeat=true
+Wins=15
+Card Reward=3 enchantment rares
+Credit Reward=500
+HumanExtras=Ivory Mask
+AIExtras=Ivory Mask|Privileged Position|Greater Auramancy
+[metadata]
+Name=quest37
+Title=Shrouded Masks
+Difficulty=hard
+Description=You and your opponent both start the game with copies of Ivory Mask which grants shroud. In addition your opponent starts with Privileged Position and Greater Auramancy, so you won't be able to target you, your opponent or your opponents permanents. Keep that in mind when building your deck!
+Icon=Shrouded Masks.jpg
+Deck Type=constructed
+[main]
+10 Swamp
+10 Island
+4 Underground Sea
+4 Phantasmal Bear
+4 Skulking Ghost
+4 Gossamer Phantasm
+4 Frost Walker
+3 Skulking Knight
+3 Tethered Skirge
+2 Skulking Fugitive
+2 Tar Pit Warrior
+3 Illusionary Servant
+1 Phantom Beast
+4 Phantasmal Dragon
+2 Cursed Monstrosity
+[sideboard]

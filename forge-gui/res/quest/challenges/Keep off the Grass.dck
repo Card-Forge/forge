@@ -1,0 +1,30 @@
+[quest]
+id=33
+AILife=20
+Repeat=true
+Wins=15
+Card Reward=3 sorcery rares
+Credit Reward=500
+HumanExtras=
+AIExtras=No Mercy|Weakstone|The Tabernacle at Pendrell Vale|Torpor Orb|Feroz's Ban|Moat|Martial Law|Cursed Totem|AEther Storm|Ghostly Prison
+[metadata]
+Name=quest33
+Title=Keep off the Grass
+Difficulty=hard
+Description=The Opponent starts with lots of cards that makes using creatures impossible. Try to build a deck that wins without using creatures! 
+Icon=Keep off the Grass.jpg
+Deck Type=constructed
+[main]
+24 Swamp
+4 Alms of the Vein
+4 Syphon Soul
+2 Vampiric Touch
+4 Blood Tithe
+4 Brush with Death
+4 Soul Feast
+4 Syphon Life
+4 Consume Spirit
+4 Corrupt
+1 Stolen Grain 
+1 Sorin's Vengeance
+[sideboard]
