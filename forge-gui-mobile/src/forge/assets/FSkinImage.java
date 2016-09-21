@@ -97,6 +97,7 @@ public enum FSkinImage implements FImage {
     COUNTERS2       (FSkinProp.IMG_COUNTERS2, SourceFile.ICONS),
     COUNTERS3       (FSkinProp.IMG_COUNTERS3, SourceFile.ICONS),
     COUNTERS_MULTI  (FSkinProp.IMG_COUNTERS_MULTI, SourceFile.ICONS),
+    ENERGY          (FSkinProp.IMG_PLAYER_ENERGY, SourceFile.ICONS),
 
     //Dock Icons
     SHORTCUTS    (FSkinProp.ICO_SHORTCUTS, SourceFile.ICONS),
