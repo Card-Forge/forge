@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import forge.game.card.Card;
 import forge.game.card.CounterType;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 /**
@@ -50,11 +51,25 @@ public class TriggerCounterAddedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final Card addedTo = (Card) runParams2.get("Card");
         final CounterType addedType = (CounterType) runParams2.get("CounterType");
 
         if (this.mapParams.containsKey("ValidCard")) {
+            if (!runParams2.containsKey("Card"))
+                return false;
+
+            final Card addedTo = (Card) runParams2.get("Card");
             if (!addedTo.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+                    this.getHostCard(), null)) {
+                return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("ValidPlayer")) {
+            if (!runParams2.containsKey("Player"))
+                return false;
+
+            final Player addedTo = (Player) runParams2.get("Player");
+            if (!addedTo.isValid(this.mapParams.get("ValidPlayer").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
@@ -73,13 +88,20 @@ public class TriggerCounterAddedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        if (this.getRunParams().containsKey("Card"))
+            sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        if (this.getRunParams().containsKey("Player"))
+            sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Added once: ").append(sa.getTriggeringObject("Card"));
+        sb.append("Added once: ");
+        if (sa.hasTriggeringObject("Card"))
+            sb.append(sa.getTriggeringObject("Card"));
+        if (sa.hasTriggeringObject("Player"))
+            sb.append(sa.getTriggeringObject("Player"));
         return sb.toString();
     }
 }

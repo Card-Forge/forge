@@ -927,7 +927,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             getGame().fireEvent(new GameEventPlayerCounters(this, counterType, oldValue, newValue));
         }
 
-        /* TODO Run triggers when something cares
         final Map<String, Object> runParams = new TreeMap<>();
         runParams.put("Player", this);
         runParams.put("CounterType", counterType);
@@ -937,7 +936,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (addAmount > 0) {
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, runParams, false);
         }
-        */
     }
 
     @Override
