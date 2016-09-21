@@ -6,5 +6,280 @@ Code2=KLD
 Type=Expansion
 MciCode=kld
 BoosterCovers=3
+Booster=10 Common:!fromSheet("KLD Planeswalker Decks"), 3 Uncommon:!fromSheet("KLD Planeswalker Decks"), 1 RareMythic:!fromSheet("KLD Planeswalker Decks"), 1 BasicLand
 
 [cards]
+1 C Acrobatic Maneuver
+2 U Aerial Responder
+3 R Aetherstorm Roc
+4 M Angel of Invention
+5 R Authority of the Consuls
+6 C Aviary Mechanic
+7 C Built to Last
+8 R Captured by the Consulate
+9 M Cataclysmic Gearhulk
+10 U Consulate Surveillance
+11 U Consul's Shieldguard
+12 C Eddytrail Hawk
+13 U Fairgrounds Warden
+14 C Fragmentize
+15 R Fumigate
+16 U Gearshift Ace
+17 C Glint-Sleeve Artisan
+18 C Herald of the Fair
+19 C Impeccable Timing
+20 C Inspired Charge
+21 R Master Trinketeer
+22 C Ninth Bridge Patrol
+23 C Pressure Point
+24 C Propeller Pioneer
+25 U Refurbish
+26 C Revoke Privileges
+27 U Servo Exhibition
+28 C Skyswirl Harrier
+29 U Skywhaler's Shot
+30 C Tasseled Dromedary
+31 C Thriving Ibex
+32 R Toolcraft Exemplar
+33 U Trusty Companion
+34 U Visionary Augmenter
+35 U Wispweaver Angel
+36 U Aether Meltdown
+37 C Aether Theorist
+38 C Aether Tradewinds
+39 R Aethersquall Ancient
+40 U Ceremonious Rejection
+41 R Confiscation Coup
+42 C Curio Vendor
+43 U Disappearing Act
+44 C Dramatic Reversal
+45 U Era of Innovation
+46 U Experimental Aviator
+47 C Failed Inspection
+48 C Gearseeker Serpent
+49 U Glimmer of Genius
+50 U Glint-Nest Crane
+51 C Hightide Hermit
+52 R Insidious Will
+53 U Janjeet Sentry
+54 U Long-Finned Skywhale
+55 C Malfunction
+56 M Metallurgic Summonings
+57 U Minister of Inquiries
+58 C Nimble Innovator
+59 R Padeem, Consul of Innovation
+60 R Paradoxical Outcome
+61 C Revolutionary Rebuff
+62 R Saheeli's Artistry
+63 C Select for Inspection
+64 U Shrewd Negotiation
+65 C Tezzeret's Ambition
+66 C Thriving Turtle
+67 M Torrential Gearhulk
+68 C Vedalken Blademaster
+69 C Weldfast Wingsmith
+70 C Wind Drake
+71 U Aetherborn Marauder
+72 C Ambitious Aetherborn
+73 M Demon of Dark Schemes
+74 C Dhund Operative
+75 U Diabolic Tutor
+76 C Die Young
+77 C Dukhara Scavenger
+78 R Eliminate the Competition
+79 U Embraal Bruiser
+80 U Essence Extraction
+81 C Fortuitous Find
+82 C Foundry Screecher
+83 U Fretwork Colony
+84 R Gonti, Lord of Luxury
+85 U Harsh Scrutiny
+86 C Lawless Broker
+87 C Live Fast
+88 R Lost Legacy
+89 U Make Obsolete
+90 R Marionette Master
+91 C Maulfist Squad
+92 R Midnight Oil
+93 C Mind Rot
+94 U Morbid Curiosity
+95 C Night Market Lookout
+96 M Noxious Gearhulk
+97 U Ovalchase Daredevil
+98 C Prakhata Club Security
+99 C Rush of Vitality
+100 C Subtle Strike
+101 R Syndicate Trafficker
+102 C Thriving Rats
+103 C Tidy Conclusion
+104 U Underhanded Designs
+105 U Weaponcraft Enthusiast
+106 U Aethertorch Renegade
+107 U Brazen Scourge
+108 C Built to Smash
+109 C Cathartic Reunion
+110 M Chandra, Torch of Defiance
+111 C Chandra's Pyrohelix
+112 M Combustible Gearhulk
+113 C Demolish
+114 R Fateful Showdown
+115 U Furious Reprisal
+116 C Giant Spectacle
+117 U Harnessed Lightning
+118 C Hijack
+119 U Incendiary Sabotage
+120 U Inventor's Apprentice
+121 R Lathnu Hellion
+122 R Madcap Experiment
+123 U Maulfist Doorbuster
+124 R Pia Nalaar
+125 U Quicksmith Genius
+126 C Reckless Fireweaver
+127 C Renegade Tactics
+128 C Ruinous Gremlin
+129 C Salivating Gremlins
+130 R Skyship Stalker
+131 U Spark of Creativity
+132 U Speedway Fanatic
+133 C Spireside Infiltrator
+134 C Spontaneous Artist
+135 U Start Your Engines
+136 R Territorial Gorger
+137 C Terror of the Fairgrounds
+138 C Thriving Grubs
+139 C Wayward Giant
+140 C Welding Sparks
+141 C Appetite for the Unnatural
+142 U Arborback Stomper
+143 R Architect of the Untamed
+144 U Armorcraft Judge
+145 C Attune with Aether
+146 U Blossoming Defense
+147 R Bristling Hydra
+148 C Commencement of Festivities
+149 C Cowl Prowler
+150 U Creeping Mold
+151 R Cultivator of Blades
+152 R Dubious Challenge
+153 U Durable Handicraft
+154 U Elegant Edgecrafters
+155 U Fairgrounds Trumpeter
+156 U Ghirapur Guide
+157 C Highspire Artisan
+158 C Hunt the Weak
+159 C Kujar Seedsculptor
+160 C Larger Than Life
+161 U Longtusk Cub
+162 U Nature's Way
+163 M Nissa, Vital Force
+164 C Ornamental Courage
+165 R Oviya Pashiri, Sage Lifecrafter
+166 C Peema Outrider
+167 C Riparian Tiger
+168 C Sage of Shaila's Claim
+169 U Servant of the Conduit
+170 C Take Down
+171 C Thriving Rhino
+172 M Verdurous Gearhulk
+173 C Wild Wanderer
+174 R Wildest Dreams
+175 C Wily Bandar
+176 U Cloudblazer
+177 U Contraband Kingpin
+178 R Depala, Pilot Exemplar
+179 M Dovin Baan
+180 U Empyreal Voyager
+181 U Engineered Might
+182 U Hazardous Conditions
+183 R Kambal, Consul of Allocation
+184 M Rashmi, Eternities Crafter
+185 U Restoration Gearsmith
+186 M Saheeli Rai
+187 U Unlicensed Disintegration
+188 U Veteran Motorist
+189 U Voltaic Brawler
+190 U Whirler Virtuoso
+191 C Accomplished Automaton
+192 R Aetherflux Reservoir
+193 M Aetherworks Marvel
+194 R Animation Module
+195 C Aradara Express
+196 U Ballista Charger
+197 C Bastion Mastodon
+198 U Bomat Bazaar Barge
+199 R Bomat Courier
+200 U Chief of the Foundry
+201 C Cogworker's Puzzleknot
+202 C Consulate Skygate
+203 R Cultivator's Caravan
+204 R Deadlock Trap
+205 U Decoction Module
+206 U Demolition Stomper
+207 C Dukhara Peafowl
+208 R Dynavolt Tower
+209 C Eager Construct
+210 R Electrostatic Pummeler
+211 U Fabrication Module
+212 U Filigree Familiar
+213 C Fireforger's Puzzleknot
+214 R Fleetwheel Cruiser
+215 U Foundry Inspector
+216 R Ghirapur Orrery
+217 C Glassblower's Puzzleknot
+218 C Inventor's Goggles
+219 U Iron League Steed
+220 R Key to the City
+221 C Metalspinner's Puzzleknot
+222 R Metalwork Colossus
+223 R Multiform Wonder
+224 C Narnam Cobra
+225 U Ovalchase Dragster
+226 R Panharmonicon
+227 U Perpetual Timepiece
+228 C Prakhata Pillar-Bug
+229 C Prophetic Prism
+230 C Renegade Freighter
+231 R Scrapheap Scrounger
+232 C Self-Assembler
+233 C Sky Skiff
+234 M Skysovereign, Consul Flagship
+235 R Smuggler's Copter
+236 U Snare Thopter
+237 C Torch Gauntlet
+238 C Weldfast Monitor
+239 U Whirlermaker
+240 C Woodweaver's Puzzleknot
+241 C Workshop Assistant
+242 U Aether Hub
+243 R Blooming Marsh
+244 R Botanical Sanctum
+245 R Concealed Courtyard
+246 R Inspiring Vantage
+247 R Inventors' Fair
+248 U Sequestered Stash
+249 R Spirebluff Canal
+250 L Plains
+251 L Plains
+252 L Plains
+253 L Island
+254 L Island
+255 L Island
+256 L Swamp
+257 L Swamp
+258 L Swamp
+259 L Mountain
+260 L Mountain
+261 L Mountain
+262 L Forest
+263 L Forest
+264 L Forest
+265 M Chandra, Pyrogenius
+266 C Flame Lash
+267 R Liberating Combustion
+268 U Renegade Firebrand
+269 C Stone Quarry
+270 M Nissa, Nature's Artisan
+271 U Guardian of the Great Conduit
+272 C Terrain Elemental
+272 R Verdant Crescendo
+273 C Woodland Stream

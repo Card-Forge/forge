@@ -1026,3 +1026,15 @@ Natural Unity
 #Sovereign's Realm
 #Summoner's Bond
 Weight Advantage
+
+[KLD Planeswalker Decks]
+Chandra, Pyrogenius
+Flame Lash
+Liberating Combustion
+Renegade Firebrand
+Stone Quarry
+Nissa, Nature's Artisan
+Guardian of the Great Conduit
+Terrain Elemental
+Verdant Crescendo
+Woodland Stream
