@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.cost.*;
 import forge.game.spellability.Spell;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,31 +31,6 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
-import forge.game.cost.Cost;
-import forge.game.cost.CostAddMana;
-import forge.game.cost.CostAdjustment;
-import forge.game.cost.CostDamage;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostDraw;
-import forge.game.cost.CostExile;
-import forge.game.cost.CostFlipCoin;
-import forge.game.cost.CostGainControl;
-import forge.game.cost.CostGainLife;
-import forge.game.cost.CostMill;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPartWithList;
-import forge.game.cost.CostPayLife;
-import forge.game.cost.CostPayment;
-import forge.game.cost.CostPutCardToLib;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostRemoveAnyCounter;
-import forge.game.cost.CostRemoveCounter;
-import forge.game.cost.CostReturn;
-import forge.game.cost.CostReveal;
-import forge.game.cost.CostSacrifice;
-import forge.game.cost.CostTapType;
-import forge.game.cost.PaymentDecision;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -663,6 +639,21 @@ public class HumanPlay {
                     mayRemovePart = false;
                 }
             }
+            else if (part instanceof CostPayEnergy) {
+                CounterType counterType = CounterType.ENERGY;
+                int amount = getAmountFromPartX(part, source, sourceAbility);
+
+                if (!part.canPay(sourceAbility)) {
+                    return false;
+                }
+
+                if (!p.getController().confirmPayment(part, "Do you want to spend " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + "?")) {
+                    return false;
+                }
+
+                p.payEnergy(amount, source);
+            }
+
             else {
                 throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost was met: " + part.getClass());
             }

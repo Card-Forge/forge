@@ -503,7 +503,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return -1;
         }
         cnt -= lostEnergy;
-        counters.put(CounterType.ENERGY, cnt);
+        this.setCounters(CounterType.ENERGY, cnt);
         return cnt;
     }
 
