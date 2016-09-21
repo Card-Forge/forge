@@ -64,3 +64,4 @@ Battle for Zendikar, 3/6/BFZ, BFZ OGW
 Shadows over Innistrad, 3/6/SOI, SOI EMN
 Eternal Masters, 3/6/SOI, EMA
 #Conspiracy Take the Crown, 3/6/ORI, CN2
+Kaladesh, 3/6/KLD, KLD
