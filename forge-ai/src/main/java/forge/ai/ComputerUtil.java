@@ -508,7 +508,7 @@ public class ComputerUtil {
                 CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
         if (sa.hasParam("Crew")) {
-            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew a vehicle");
+            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
         }
 
         // is this needed?

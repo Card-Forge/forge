@@ -1095,7 +1095,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
 
         if (ability.hasParam("Crew")) {
-            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew a vehicle");
+            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
         }
 
         if (c == null && !amount.equals("Any")) {
