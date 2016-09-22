@@ -140,6 +140,7 @@ Mole
 Monger
 Mongoose
 Monk
+Monkey
 Moonfolk
 Mutant
 Myr
