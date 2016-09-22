@@ -34,11 +34,17 @@ public class ScryEffect extends SpellAbilityEffect {
             num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("ScryNum"), sa);
         }
 
+        boolean isOptional = sa.hasParam("Optional");
+
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                if (isOptional && !p.getController().confirmAction(sa, null, "Do you want to scry?")) {
+                    continue;
+                }
+
                 p.scry(num);
             }
         }

@@ -82,7 +82,7 @@ def initializeOracleText():
 	return oracleDict
 
 def normalizeOracle(oracle):
-	return oracle.replace(u'\u2014', '-').replace(u'\u2018', "'").replace(u'\u201c', '"').replace(u'\u201d', '"').replace(u'\u2022', '-').replace(u'\xc6', 'AE').replace(u'\xf6', 'o')
+	return oracle.replace(u'\u2014', '-').replace(u'\u2212', '-').replace(u'\u2018', "'").replace(u'\u201c', '"').replace(u'\u201d', '"').replace(u'\u2022', '-').replace(u'\xc6', 'AE').replace(u'\xf6', 'o')
 
 
 def initializeForgeCards():
