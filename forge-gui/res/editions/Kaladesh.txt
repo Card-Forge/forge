@@ -46,7 +46,7 @@ Booster=10 Common:!fromSheet("KLD Planeswalker Decks"), 3 Uncommon:!fromSheet("K
 35 U Wispweaver Angel
 36 U Aether Meltdown
 37 C Aether Theorist
-38 C Aether Tradewinds
+38 C AEther Tradewinds
 39 R Aethersquall Ancient
 40 U Ceremonious Rejection
 41 R Confiscation Coup
