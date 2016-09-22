@@ -1870,6 +1870,15 @@ public class CardFactoryUtil {
             }
 
         }
+
+        if (string.startsWith("SumCMC")) {
+            int sumCMC = 0;
+            for(Card c : paidList) {
+                sumCMC += c.getCMC();
+            }
+            return sumCMC;
+        }
+
         if (string.startsWith("Valid")) {
             
             final String[] splitString = string.split("/", 2);
