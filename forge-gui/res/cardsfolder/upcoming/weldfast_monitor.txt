@@ -1,0 +1,8 @@
+Name:Weldfast Monitor
+ManaCost:3
+Types:Artifact Creature Lizard
+PT:3/2
+A:AB$ Pump | Cost$ R | KW$ Menace | Defined$ Self | SpellDescription$ CARDNAME gains gains menace until end of turn.
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/weldfast_monitor.jpg
+Oracle:{R}: Weldfast Monitor gains menace until end of turn.
