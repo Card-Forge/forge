@@ -13,5 +13,5 @@ SVar:Max:Remembered$CardCounters.P1P1
 SVar:DBMove:DB$ MoveCounter | Source$ Remembered | Defined$ Self | CounterNum$ X | CounterType$ P1P1 | SubAbility$ DBCleanup
 SVar:X:Count$ChosenNumber
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_cannibal.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherborn_marauder.jpg
 Oracle:Flying, lifelink\nWhen Aetherborn Marauder enters the battlefield, move any number of +1/+1 counters from other permanents you control onto Aetherborn Marauder.
