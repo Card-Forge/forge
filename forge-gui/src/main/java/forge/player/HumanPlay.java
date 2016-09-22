@@ -241,7 +241,8 @@ public class HumanPlay {
      */
     private static int getAmountFromPartX(CostPart part, Card source, SpellAbility sourceAbility) {
         String amountString = part.getAmount();
-        return StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+        // Probably should just be -
+        return AbilityUtils.calculateAmount(source, amountString, sourceAbility);
     }
 
     /**
