@@ -581,7 +581,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
         }
 
-        if (player.canPayEnergy(c) && player.getController().confirmPayment(cost, "Pay " + c + " Energy?")) {
+        if (player.canPayEnergy(c) &&
+                player.getController().confirmPayment(cost, "Pay " + c + " Energy? (You have " + player.getCounters(CounterType.ENERGY) + ")")) {
             return PaymentDecision.number(c);
         }
         return null;

@@ -5,12 +5,8 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -274,6 +270,24 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             int evalToken = ComputerUtilCard.evaluateCreatureList(tokenList);
 
             return evalToken >= evalCounter ? tokenSA : counterSA;
+        } else if ("CombustibleGearhulk".equals(logic)) {
+            Player controller = sa.getActivatingPlayer();
+            List<ZoneType> zones = ZoneType.listValueOf("Graveyard, Battlefield, Exile");
+            int life = player.getLife();
+            CardCollectionView revealedCards = controller.getCardsIn(zones);
+
+            if (revealedCards.size() < 5) {
+                // Not very many revealed cards, just guess based on lifetotal
+                return life < 7 ? spells.get(0) : spells.get(1);
+            }
+
+            int totalCMC = 0;
+            for(Card c : revealedCards) {
+                totalCMC += c.getCMC();
+            }
+
+            int bestGuessDamage = totalCMC * 3 / revealedCards.size();
+            return life <= bestGuessDamage ? spells.get(0) : spells.get(1);
         }
         return spells.get(0);   // return first choice if no logic found
     }
