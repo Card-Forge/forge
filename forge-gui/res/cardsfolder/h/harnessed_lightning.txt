@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Instant
 A:SP$ PutCounter | Cost$ 1 R | Defined$ You | CounterType$ ENERGY | CounterNum$ 3 | SubAbility$ DBChooseNumber | SpellDescription$ Choose target creature. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. Harnessed Lightning deals that much damage to that creature.
 SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ Pay Energy for Damage | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | References$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X |  UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True
+SVar:DBDealDamage:DB$ DealDamage | References$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True
 SVar:Max:Count$YourCountersEnergy
 SVar:X:Count$ChosenNumber
 SVar:RemAIDeck:True
