@@ -14439,6 +14439,7 @@ forge-gui/res/cardsfolder/s/spare_from_evil.txt -text
 forge-gui/res/cardsfolder/s/spark_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spark_jolt.txt -text
 forge-gui/res/cardsfolder/s/spark_mage.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/s/spark_of_creativity.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/spark_spray.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spark_trooper.txt -text
 forge-gui/res/cardsfolder/s/sparkcaster.txt svneol=native#text/plain
