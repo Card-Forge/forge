@@ -1,4 +1,254 @@
 //Rank|Name|Rarity|Set
+#1|Chandra, Torch of Defiance|M|KLD
+#2|Verdurous Gearhulk|M|KLD
+#3|Noxious Gearhulk|M|KLD
+#4|Saheeli Rai|M|KLD
+#5|Combustible Gearhulk|M|KLD
+#6|Skysovereign, Consul Flagship|M|KLD
+#7|Angel of Invention|M|KLD
+#8|Confiscation Coup|R|KLD
+#9|Torrential Gearhulk|M|KLD
+#10|Demon of Dark Schemes|M|KLD
+#11|Nissa, Vital Force|M|KLD
+#12|Cataclysmic Gearhulk|M|KLD
+#13|Dovin Baan|M|KLD
+#14|Aetherstorm Roc|R|KLD
+#15|Rashmi, Eternities Crafter|M|KLD
+#16|Aethersquall Ancient|R|KLD
+#17|Depala, Pilot Exemplar|R|KLD
+#18|Master Trinketeer|R|KLD
+#19|Skyship Stalker|R|KLD
+#20|Aerial Responder|U|KLD
+#21|Fumigate|R|KLD
+#22|Saheeli's Artistry|R|KLD
+#23|Captured by the Consulate|R|KLD
+#24|Gonti, Lord of Luxury|R|KLD
+#25|Marionette Master|R|KLD
+#26|Syndicate Trafficker|R|KLD
+#27|Furious Reprisal|U|KLD
+#28|Pia Nalaar|R|KLD
+#29|Bristling Hydra|R|KLD
+#30|Longtusk Cub|U|KLD
+#31|Oviya Pashiri, Sage Lifecrafter|R|KLD
+#32|Empyreal Voyager|U|KLD
+#33|Unlicensed Disintegration|U|KLD
+#34|Whirler Virtuoso|U|KLD
+#35|Fleetwheel Cruiser|R|KLD
+#36|Multiform Wonder|R|KLD
+#37|Scrapheap Scrounger|R|KLD
+#38|Architect of the Untamed|R|KLD
+#39|Restoration Gearsmith|U|KLD
+#40|Voltaic Brawler|U|KLD
+#41|Metalwork Colossus|R|KLD
+#42|Fairgrounds Warden|U|KLD
+#43|Midnight Oil|R|KLD
+#44|Fateful Showdown|R|KLD
+#45|Harnessed Lightning|U|KLD
+#46|Welding Sparks|C|KLD
+#47|Arborback Stomper|U|KLD
+#48|Armorcraft Judge|U|KLD
+#49|Cultivator of Blades|R|KLD
+#50|Hunt the Weak|C|KLD
+#51|Servant of the Conduit|U|KLD
+#52|Cloudblazer|U|KLD
+#53|Kambal, Consul of Allocation|R|KLD
+#54|Veteran Motorist|U|KLD
+#55|Filigree Familiar|U|KLD
+#56|Revoke Privileges|C|KLD
+#57|Long-Finned Skywhale|U|KLD
+#58|Aetherborn Marauder|U|KLD
+#59|Nature's Way|U|KLD
+#60|Smuggler's Copter|R|KLD
+#61|Contraband Kingpin|U|KLD
+#62|Skywhaler's Shot|U|KLD
+#63|Padeem, Consul of Innovation|R|KLD
+#64|Essence Extraction|U|KLD
+#65|Chandra's Pyrohelix|C|KLD
+#66|Wildest Dreams|R|KLD
+#67|Thriving Ibex|C|KLD
+#68|Eliminate the Competition|R|KLD
+#69|Lathnu Hellion|R|KLD
+#70|Thriving Grubs|C|KLD
+#71|Thriving Rhino|C|KLD
+#72|Chief of the Foundry|U|KLD
+#73|Wispweaver Angel|U|KLD
+#74|Aether Meltdown|U|KLD
+#75|Malfunction|C|KLD
+#76|Dhund Operative|C|KLD
+#77|Die Young|C|KLD
+#78|Embraal Bruiser|U|KLD
+#79|Tidy Conclusion|C|KLD
+#80|Maulfist Doorbuster|U|KLD
+#81|Quicksmith Genius|U|KLD
+#82|Kujar Seedsculptor|C|KLD
+#83|Cultivator's Caravan|R|KLD
+#84|Impeccable Timing|C|KLD
+#85|Toolcraft Exemplar|R|KLD
+#86|Trusty Companion|U|KLD
+#87|Make Obsolete|U|KLD
+#88|Ovalchase Daredevil|U|KLD
+#89|Thriving Rats|C|KLD
+#90|Salivating Gremlins|C|KLD
+#91|Peema Outrider|C|KLD
+#92|Deadlock Trap|R|KLD
+#93|Snare Thopter|U|KLD
+#94|Gearshift Ace|U|KLD
+#95|Glint-Sleeve Artisan|C|KLD
+#96|Glint-Nest Crane|U|KLD
+#97|Foundry Screecher|C|KLD
+#98|Weaponcraft Enthusiast|U|KLD
+#99|Brazen Scourge|U|KLD
+#100|Territorial Gorger|R|KLD
+#101|Fairgrounds Trumpeter|U|KLD
+#102|Ghirapur Guide|U|KLD
+#103|Foundry Inspector|U|KLD
+#104|Key to the City|R|KLD
+#105|Blooming Marsh|R|KLD
+#106|Botanical Sanctum|R|KLD
+#107|Concealed Courtyard|R|KLD
+#108|Inspiring Vantage|R|KLD
+#109|Spirebluff Canal|R|KLD
+#110|Consul's Shieldguard|U|KLD
+#111|Visionary Augmenter|U|KLD
+#112|Nimble Innovator|C|KLD
+#113|Vedalken Blademaster|C|KLD
+#114|Wind Drake|C|KLD
+#115|Lawless Broker|C|KLD
+#116|Underhanded Designs|U|KLD
+#117|Aethertorch Renegade|U|KLD
+#118|Speedway Fanatic|U|KLD
+#119|Wayward Giant|C|KLD
+#120|Appetite for the Unnatural|C|KLD
+#121|Sage of Shaila's Claim|C|KLD
+#122|Iron League Steed|U|KLD
+#123|Prophetic Prism|C|KLD
+#124|Inventors' Fair|R|KLD
+#125|Fragmentize|C|KLD
+#126|Herald of the Fair|C|KLD
+#127|Propeller Pioneer|C|KLD
+#128|Insidious Will|R|KLD
+#129|Select for Inspection|C|KLD
+#130|Live Fast|C|KLD
+#131|Spontaneous Artist|C|KLD
+#132|Bomat Bazaar Barge|U|KLD
+#133|Fireforger's Puzzleknot|C|KLD
+#134|Narnam Cobra|C|KLD
+#135|Aviary Mechanic|C|KLD
+#136|Servo Exhibition|U|KLD
+#137|Skyswirl Harrier|C|KLD
+#138|Aether Theorist|C|KLD
+#139|Gearseeker Serpent|C|KLD
+#140|Glimmer of Genius|U|KLD
+#141|Janjeet Sentry|U|KLD
+#142|Weldfast Wingsmith|C|KLD
+#143|Subtle Strike|C|KLD
+#144|Incendiary Sabotage|U|KLD
+#145|Inventor's Apprentice|U|KLD
+#146|Ruinous Gremlin|C|KLD
+#147|Spark of Creativity|U|KLD
+#148|Spireside Infiltrator|C|KLD
+#149|Riparian Tiger|C|KLD
+#150|Engineered Might|U|KLD
+#151|Ballista Charger|U|KLD
+#152|Dukhara Peafowl|C|KLD
+#153|Eager Construct|C|KLD
+#154|Fabrication Module|U|KLD
+#155|Hightide Hermit|C|KLD
+#156|Revolutionary Rebuff|C|KLD
+#157|Maulfist Squad|C|KLD
+#158|Prakhata Club Security|C|KLD
+#159|Attune with Aether|C|KLD
+#160|Elegant Edgecrafters|U|KLD
+#161|Highspire Artisan|C|KLD
+#162|Hazardous Conditions|U|KLD
+#163|Aetherworks Marvel|M|KLD
+#164|Aradara Express|C|KLD
+#165|Cogworker's Puzzleknot|C|KLD
+#166|Renegade Freighter|C|KLD
+#167|Workshop Assistant|C|KLD
+#168|Aether Hub|U|KLD
+#169|Eddytrail Hawk|C|KLD
+#170|Ninth Bridge Patrol|C|KLD
+#171|Curio Vendor|C|KLD
+#172|Experimental Aviator|U|KLD
+#173|Paradoxical Outcome|R|KLD
+#174|Ambitious Aetherborn|C|KLD
+#175|Fretwork Colony|U|KLD
+#176|Harsh Scrutiny|U|KLD
+#177|Morbid Curiosity|U|KLD
+#178|Cathartic Reunion|C|KLD
+#179|Wild Wanderer|C|KLD
+#180|Bastion Mastodon|C|KLD
+#181|Bomat Courier|R|KLD
+#182|Metalspinner's Puzzleknot|C|KLD
+#183|Ovalchase Dragster|U|KLD
+#184|Prakhata Pillar-Bug|C|KLD
+#185|Weldfast Monitor|C|KLD
+#186|Inspired Charge|C|KLD
+#187|Disappearing Act|U|KLD
+#188|Diabolic Tutor|U|KLD
+#189|Hijack|C|KLD
+#190|Reckless Fireweaver|C|KLD
+#191|Blossoming Defense|U|KLD
+#192|Cowl Prowler|C|KLD
+#193|Decoction Module|U|KLD
+#194|Electrostatic Pummeler|R|KLD
+#195|Authority of the Consuls|R|KLD
+#196|Built to Last|C|KLD
+#197|Aether Tradewinds|C|KLD
+#198|Era of Innovation|U|KLD
+#199|Tezzeret's Ambition|C|KLD
+#200|Dukhara Scavenger|C|KLD
+#201|Terror of the Fairgrounds|C|KLD
+#202|Accomplished Automaton|C|KLD
+#203|Demolition Stomper|U|KLD
+#204|Dynavolt Tower|R|KLD
+#205|Sky Skiff|C|KLD
+#206|Acrobatic Maneuver|C|KLD
+#207|Failed Inspection|C|KLD
+#208|Minister of Inquiries|U|KLD
+#209|Mind Rot|C|KLD
+#210|Built to Smash|C|KLD
+#211|Start Your Engines|U|KLD
+#212|Animation Module|R|KLD
+#213|Consulate Skygate|C|KLD
+#214|Self-Assembler|C|KLD
+#215|Whirlermaker|U|KLD
+#216|Thriving Turtle|C|KLD
+#217|Fortuitous Find|C|KLD
+#218|Night Market Lookout|C|KLD
+#219|Rush of Vitality|C|KLD
+#220|Durable Handicraft|U|KLD
+#221|Sequestered Stash|U|KLD
+#222|Metallurgic Summonings|M|KLD
+#223|Shrewd Negotiation|U|KLD
+#224|Renegade Tactics|C|KLD
+#225|Creeping Mold|U|KLD
+#226|Ornamental Courage|C|KLD
+#227|Take Down|C|KLD
+#228|Wily Bandar|C|KLD
+#229|Glassblower's Puzzleknot|C|KLD
+#230|Inventor's Goggles|C|KLD
+#231|Woodweaver's Puzzleknot|C|KLD
+#232|Consulate Surveillance|U|KLD
+#233|Pressure Point|C|KLD
+#234|Giant Spectacle|C|KLD
+#235|Torch Gauntlet|C|KLD
+#236|Refurbish|U|KLD
+#237|Tasseled Dromedary|C|KLD
+#238|Demolish|C|KLD
+#239|Larger Than Life|C|KLD
+#240|Ghirapur Orrery|R|KLD
+#241|Dramatic Reversal|C|KLD
+#242|Panharmonicon|R|KLD
+#243|Commencement of Festivities|C|KLD
+#244|Perpetual Timepiece|U|KLD
+#245|Ceremonious Rejection|U|KLD
+#246|Madcap Experiment|R|KLD
+#247|Aetherflux Reservoir|R|KLD
+#248|Lost Legacy|R|KLD
+#249|Dubious Challenge|R|KLD
+//Rank|Name|Rarity|Set
 #1|Liliana, the Last Hope|M|EMN
 #2|Ishkanah, Grafwidow|M|EMN
 #3|Decimator of the Provinces|M|EMN
