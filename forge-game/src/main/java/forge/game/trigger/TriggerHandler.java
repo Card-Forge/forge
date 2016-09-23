@@ -327,7 +327,16 @@ public class TriggerHandler {
         // Static triggers
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                runSingleTrigger(t, runParams);
+                int x = 1;
+
+                if (handlePanharmonicon(t, runParams)) {
+                    x += t.getHostCard().getController().getAmountOfKeyword("Panharmonicon");
+                }
+
+                for (int i = 0; i < x; ++i) {
+                    runSingleTrigger(t, runParams);
+                }
+
                 checkStatics = true;
             }
         }
@@ -387,7 +396,15 @@ public class TriggerHandler {
                     }
                 }
 
-                runSingleTrigger(t, runParams);
+                int x = 1;
+
+                if (handlePanharmonicon(t, runParams)) {
+                    x += t.getHostCard().getController().getAmountOfKeyword("Panharmonicon");
+                }
+
+                for (int i = 0; i < x; ++i) {
+                    runSingleTrigger(t, runParams);
+                }
                 checkStatics = true;
             }
         }
@@ -609,5 +626,30 @@ public class TriggerHandler {
                 regtrig.getHostCard().removeTrigger(regtrig);
             }
         }
+    }
+
+    private boolean handlePanharmonicon(final Trigger t, final Map<String, Object> runParams) {
+        // not a changesZone trigger
+        if (t.getMode() != TriggerType.ChangesZone) {
+            return false;
+        }
+
+        // not a Permanent you control
+        if (!t.getHostCard().isPermanent() || !t.getHostCard().isInZone(ZoneType.Battlefield)) {
+            return false;
+        }
+
+        // its not an ETB trigger or the card is not a Artifact or Creature
+        if (runParams.get("Destination") instanceof String) {
+            final String dest = (String) runParams.get("Destination");
+            if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
+                final Card card = (Card) runParams.get("Card");
+                if (card.isCreature() || card.isArtifact()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
