@@ -82,7 +82,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Narset Transcendent", "Narset's One Rule", "No spells for you!");
         add("Nicol Bolas, Planeswalker", "Bolas's Ultimatum", "Whatever you do, don't call him \"Nicol\"!");
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
-        add("Nissa, Nature Artisan", "Nissa's Stampede", "Big enough for you?");
+        add("Nissa, Nature's Artisan", "Nissa's Stampede", "Big enough for you?");
         add("Nissa, Sage Animist", "Nissa's Wake-Up Call", "Wake up! Time to work!");
         add("Nissa, Vital Force", "Nissa's Harvest", "What a landfall!");
         add("Nissa, Voice of Zendikar", "Nissa's Bounty", "It's harvest time!");
