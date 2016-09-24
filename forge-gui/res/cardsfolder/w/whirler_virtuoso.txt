@@ -1,7 +1,7 @@
 Name:Whirler Virtuoso
 ManaCost:1 U R
 Types:Creature Vedalken Artificer
-PT:1/3
+PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E} (three energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
 A:AB$ Token | Cost$ PayEnergy<3> | TokenAmount$ 1 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter KLD | TokenAltImages$ c_1_1_thopter2_KLD,c_1_1_thopter3_KLD | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying.
