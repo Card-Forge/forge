@@ -1039,7 +1039,7 @@ Terrain Elemental
 Verdant Crescendo
 Woodland Stream
 
-[Kaladesh Inventions]
+[KLD Masterpiece Series]
 Cataclysmic Gearhulk|MPS
 Torrential Gearhulk|MPS
 Noxious Gearhulk|MPS

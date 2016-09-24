@@ -7,7 +7,7 @@ Type=Expansion
 MciCode=kld
 BoosterCovers=3
 Booster=10 Common:!fromSheet("KLD Planeswalker Decks"), 3 Uncommon:!fromSheet("KLD Planeswalker Decks"), 1 RareMythic:!fromSheet("KLD Planeswalker Decks"), 1 BasicLand
-AdditionalSheetForFoils=fromSheet("Kaladesh Inventions")
+AdditionalSheetForFoils=fromSheet("KLD Masterpiece Series")
 AdditionalSetUnlockedInQuest=MPS
 
 [cards]
