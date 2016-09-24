@@ -1045,7 +1045,7 @@ Torrential Gearhulk|MPS
 Noxious Gearhulk|MPS
 Combustible Gearhulk|MPS
 Verdurous Gearhulk|MPS
-Aether Vial|MPS
+AEther Vial|MPS
 Champion's Helm|MPS
 Chromatic Lantern|MPS
 Chrome Mox|MPS

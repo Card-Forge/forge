@@ -11,7 +11,7 @@ Type=Other
 3 M Noxious Gearhulk
 4 M Combustible Gearhulk
 5 M Verdurous Gearhulk
-6 M Aether Vial
+6 M AEther Vial
 7 M Champion's Helm
 8 M Chromatic Lantern
 9 M Chrome Mox
