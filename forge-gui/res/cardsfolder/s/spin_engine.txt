@@ -3,6 +3,7 @@ ManaCost:3
 Types:Artifact Creature Construct
 PT:3/1
 A:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | KW$ HIDDEN CantBlockCardUIDSource | DefinedKW$ CardUIDSource | UntilHostLeavesPlayOrEOT$ True | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+DeckNeeds:Color$Red
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spin_engine.jpg
 Oracle:{R}: Target creature can't block Spin Engine this turn.
