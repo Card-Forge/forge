@@ -18,6 +18,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +30,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final boolean dividedAsYouChoose = sa.hasParam("DividedAsYouChoose");
 
-        final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
+
         final int amount = AbilityUtils.calculateAmount(card, sa.getParam("CounterNum"), sa);
         if (sa.hasParam("Bolster")) {
             sb.append("Bolster ").append(amount);
@@ -43,7 +44,16 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.hasParam("UpTo")) {
             sb.append("up to ");
         }
-        sb.append(amount).append(" ").append(cType.getName()).append(" counter");
+
+        sb.append(amount).append(" ");
+
+        String type = sa.getParam("CounterType");
+        if (type.equals("ExistingCounter")) {
+            sb.append("of an existing counter");
+        } else {
+
+            sb.append( CounterType.valueOf(type).getName()).append(" counter");
+        }
         if (amount != 1) {
             sb.append("s");
         }
@@ -77,13 +87,17 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
 
-        CounterType counterType;
+        String strTyp = sa.getParam("CounterType");
+        CounterType counterType = null;
+        boolean existingCounter = strTyp.equals("ExistingCounter");
 
-        try {
-            counterType = AbilityUtils.getCounterType(sa.getParam("CounterType"), sa);
-        } catch (Exception e) {
-            System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
-            return;
+        if (!existingCounter) {
+            try {
+                counterType = AbilityUtils.getCounterType(strTyp, sa);
+            } catch (Exception e) {
+                System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
+                return;
+            }
         }
 
         final boolean etbcounter = sa.hasParam("ETB");
@@ -108,6 +122,30 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         for (final GameObject obj : tgtObjects) {
+            if (existingCounter) {
+                final List<CounterType> choices = new ArrayList<CounterType>();
+                if (obj instanceof Card) {
+                    for (final CounterType ct : ((Card) obj).getCounters().keySet()) {
+                        if (((Card) obj).getCounters(ct) > 0) {
+                            choices.add(ct);
+                        }
+                    }
+                }
+                else if (obj instanceof Player) {
+                    for (final CounterType ct : ((Player) obj).getCounters().keySet()) {
+                        if (((Player) obj).getCounters(ct) > 0) {
+                            choices.add(ct);
+                        }
+                    }
+                }
+
+                if (choices.isEmpty()) {
+                    continue;
+                }
+                counterType = choices.size() == 1 ? choices.get(0) : activator.getController().chooseCounterType(choices, sa, "Select counter type to add");
+            }
+
+
             if (obj instanceof Card) {
                 Card tgtCard = (Card) obj;
                 counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;
