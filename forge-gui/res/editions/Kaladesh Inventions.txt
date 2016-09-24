@@ -1,0 +1,38 @@
+[metadata]
+Code=MPS
+Date=2016-09-30
+Name=Kaladesh Inventions
+MciCode=mps
+Type=Other
+
+[cards]
+1 M Cataclysmic Gearhulk
+2 M Torrential Gearhulk
+3 M Noxious Gearhulk
+4 M Combustible Gearhulk
+5 M Verdurous Gearhulk
+6 M Aether Vial
+7 M Champion's Helm
+8 M Chromatic Lantern
+9 M Chrome Mox
+10 M Cloudstone Curio
+11 M Crucible of Worlds
+12 M Gauntlet of Power
+13 M Hangarback Walker
+14 M Lightning Greaves
+15 M Lotus Petal
+16 M Mana Crypt
+17 M Mana Vault
+18 M Mind's Eye
+19 M Mox Opal
+20 M Painter's Servant
+21 M Rings of Brighthearth
+22 M Scroll Rack
+23 M Sculpting Steel
+24 M Sol Ring
+25 M Solemn Simulacrum
+26 M Static Orb
+27 M Steel Overseer
+28 M Sword of Feast and Famine
+29 M Sword of Fire and Ice
+30 M Sword of Light and Shadow

@@ -1038,3 +1038,35 @@ Guardian of the Great Conduit
 Terrain Elemental
 Verdant Crescendo
 Woodland Stream
+
+[Kaladesh Inventions]
+Cataclysmic Gearhulk|MPS
+Torrential Gearhulk|MPS
+Noxious Gearhulk|MPS
+Combustible Gearhulk|MPS
+Verdurous Gearhulk|MPS
+Aether Vial|MPS
+Champion's Helm|MPS
+Chromatic Lantern|MPS
+Chrome Mox|MPS
+Cloudstone Curio|MPS
+Crucible of Worlds|MPS
+Gauntlet of Power|MPS
+Hangarback Walker|MPS
+Lightning Greaves|MPS
+Lotus Petal|MPS
+Mana Crypt|MPS
+Mana Vault|MPS
+Mind's Eye|MPS
+Mox Opal|MPS
+Painter's Servant|MPS
+Rings of Brighthearth|MPS
+Scroll Rack|MPS
+Sculpting Steel|MPS
+Sol Ring|MPS
+Solemn Simulacrum|MPS
+Static Orb|MPS
+Steel Overseer|MPS
+Sword of Feast and Famine|MPS
+Sword of Fire and Ice|MPS
+Sword of Light and Shadow|MPS
