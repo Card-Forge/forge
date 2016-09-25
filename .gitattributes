@@ -12448,6 +12448,7 @@ forge-gui/res/cardsfolder/r/reforge_the_soul.txt -text
 forge-gui/res/cardsfolder/r/refresh.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/refreshing_rain.txt -text
 forge-gui/res/cardsfolder/r/refurbish.txt -text
+forge-gui/res/cardsfolder/r/regal_behemoth.txt -text
 forge-gui/res/cardsfolder/r/regal_force.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/regal_unicorn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/regathan_firecat.txt -text
@@ -13512,6 +13513,7 @@ forge-gui/res/cardsfolder/s/selkie_hedge_mage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sell_sword_brute.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/seller_of_songbirds.txt -text
 forge-gui/res/cardsfolder/s/selvala_explorer_returned.txt -text
+forge-gui/res/cardsfolder/s/selvala_heart_of_the_wilds.txt -text
 forge-gui/res/cardsfolder/s/selvalas_charge.txt -text
 forge-gui/res/cardsfolder/s/selvalas_enforcer.txt -text
 forge-gui/res/cardsfolder/s/selvalas_stampede.txt -text
