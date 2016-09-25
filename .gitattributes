@@ -3326,6 +3326,7 @@ forge-gui/res/cardsfolder/c/calming_verse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/caltrops.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/camel.txt -text
 forge-gui/res/cardsfolder/c/campaign_of_vengeance.txt -text
+forge-gui/res/cardsfolder/c/canal_courier.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/c/cancel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/candelabra_of_tawnos.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/candles_glow.txt -text
