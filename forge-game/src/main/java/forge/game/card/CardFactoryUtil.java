@@ -1027,6 +1027,14 @@ public class CardFactoryUtil {
             return doXMath(num, m, c);
         }
 
+        // Count$CountersAddedToPermYouCtrl <CounterType>
+        if (l[0].startsWith("CountersAddedToPermYouCtrl")) {
+            final String[] components = l[0].split(" ", 2);
+            final CounterType counterType = CounterType.valueOf(components[1]);
+            int n = cc.getCounterToPermThisTurn(counterType);
+            return doXMath(n, m, c);
+        }
+
         // Count$CountersAdded <CounterType> <ValidSource>
         if (l[0].startsWith("CountersAdded")) {
             final String[] components = l[0].split(" ", 3);
