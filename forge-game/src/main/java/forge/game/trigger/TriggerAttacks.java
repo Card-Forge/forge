@@ -100,6 +100,24 @@ public class TriggerAttacks extends Trigger {
         	}
         }
 
+        if (this.mapParams.containsKey("AttackDifferentPlayers")) {
+            GameEntity attacked = (GameEntity) runParams2.get("Attacked");
+            boolean found = false;
+            if (attacked instanceof Player) {
+                @SuppressWarnings("unchecked")
+                List<GameEntity> list = (List<GameEntity>) runParams2.get("Defenders");
+                for (GameEntity e : list) {
+                    if ((e instanceof Player) && !e.equals(attacked)) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+
         return true;
     }
 
