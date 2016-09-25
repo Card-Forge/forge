@@ -5926,6 +5926,7 @@ forge-gui/res/cardsfolder/f/faerie_swarm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/faerie_tauntings.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/faerie_trickery.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/failed_inspection.txt -text
+forge-gui/res/cardsfolder/f/fairgrounds_trumpeter.txt -text
 forge-gui/res/cardsfolder/f/fairgrounds_warden.txt -text
 forge-gui/res/cardsfolder/f/faith_healer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/faith_unbroken.txt -text
