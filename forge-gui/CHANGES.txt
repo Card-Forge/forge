@@ -1,7 +1,7 @@
-Forge Beta: 08-02-2016 ver 1.5.55
+Forge Beta: 09-26-2016 ver 1.5.56
 
 
-15897 cards in total.
+16205 cards in total.
 
 
 -------------
@@ -15,15 +15,17 @@ COMPATIBILITY WARNING: Due to the changes in names of worlds themselves as well 
 - Booster Draft AI improvements -
 This release features improvements to the drafting AI which should be noticeable in the Booster Draft mode including Quest Draft Tournaments. In particular, the AI should rank the cards better depending on the synergy of their abilities and effects (for the cards that have AI hints scripted for them). Currently these deckbuilding hints are implemented for the sets starting with Khans of Tarkir.
 
-- Eldritch Moon -
-This release has the latest set, Eldritch Moon, fully implemented. Along with the other additions and improvements this puts the current Standard format at 100% supported.
+- Conspiracy: Take the Crown -
+This release contains most of the cards from the Conspiracy: Take the Crown set.
 
-- Card Images -
-All missing card images should be available through the content downloaders now, including the Eldritch Moon cards. If you find any that are still missing, please let us know! The remaining tokens and product images will be covered in upcoming releases.
+- Kaladesh -
+This release has the latest set, Kaladesh, almost fully implemented.
 
 ------------
 Known Issues
 ------------
+
+Images for the latest sets will be available soon.
 
 There is a known issue with the cost reduction for cards that have color-locked X in their mana cost (e.g. Drain Life, Soul Burn). Cost reduction will not apply correctly to these cards if the amount by which the cost is reduced is greater than the amount of colorless mana in the mana cost specified on the card (e.g. 1 for Drain Life, 2 for Soul Burn). Fixing this issue likely requires rewriting the way announced color-locked X is interpreted and paid (most likely it has to be represented with colorless mana shards but still locked to the colors required by the card).
 
