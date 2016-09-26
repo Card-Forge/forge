@@ -2,6 +2,7 @@ package forge.achievement;
 
 import forge.deck.Deck;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.player.Player;
 import forge.properties.ForgeConstants;
 
@@ -55,6 +56,10 @@ public class ChallengeAchievements extends AchievementCollection {
 
         @Override
         protected final boolean eval(Player player, Game game) {
+            if (game.getRules().hasAppliedVariant(GameType.MomirBasic)) {
+                // Momir Basic uses a fixed pre-defined deck format (all lands), so designing it to be that way is not the player's achievement
+                return false;
+            }
             if (player.getOutcome().hasWon()) {
                 return eval(player.getRegisteredPlayer().getDeck());
             }

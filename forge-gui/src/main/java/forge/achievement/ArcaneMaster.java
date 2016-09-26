@@ -1,6 +1,7 @@
 package forge.achievement;
 
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.player.Player;
 
 public class ArcaneMaster extends Achievement {
@@ -14,6 +15,9 @@ public class ArcaneMaster extends Achievement {
 
     @Override
     protected int evaluate(Player player, Game game) {
+        if (game.getRules().hasAppliedVariant(GameType.MomirBasic)) {
+            return defaultValue; // Momir Basic is exempt from this achievement (custom rules do not require any spellcasting by default)
+        }
         if (player.getOutcome().hasWon()) {
             return player.getAchievementTracker().spellsCast;
         }
