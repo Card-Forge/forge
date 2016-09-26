@@ -1222,6 +1222,8 @@ public class AbilityUtils {
                         }
                     }
                 }
+            } else if (o instanceof SpellAbilityStackInstance) {
+                s = ((SpellAbilityStackInstance) o).getSpellAbility(true);
             }
         }
         else if (defined.equals("Remembered")) {

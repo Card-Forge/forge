@@ -3367,6 +3367,7 @@ forge-gui/res/cardsfolder/c/captivating_glance.txt -text
 forge-gui/res/cardsfolder/c/captivating_vampire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/captive_flame.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/capture_of_jingzhou.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/captured_by_the_consulate.txt -text
 forge-gui/res/cardsfolder/c/captured_sunlight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/carapace.txt -text
 forge-gui/res/cardsfolder/c/carapace_forger.txt svneol=native#text/plain
