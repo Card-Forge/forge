@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -15,6 +16,10 @@ public class Domain extends ProgressiveAchievement {
 
     @Override
     protected boolean eval(Player player, Game game) {
+        if (game.getRules().hasAppliedVariant(GameType.MomirBasic)) {
+            // Not an achievement in Momir Basic (easy to get due to predefined deck contents)
+            return false;
+        }
         if (player.getOutcome().hasWon()) {
             Set<String> basicLands = new HashSet<String>();
             for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
