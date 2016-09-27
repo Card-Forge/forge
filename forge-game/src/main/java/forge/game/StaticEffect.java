@@ -1055,7 +1055,7 @@ public class StaticEffect {
             if (removeMayPlay) {
                 affectedCard.removeMayPlay(ability);
             }
-            affectedCard.updateStateForView();
+            //affectedCard.updateStateForView();
         }
         return affectedCards;
     }
