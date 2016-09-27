@@ -35,6 +35,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ChangeZoneAi extends SpellAbilityAi {
+    /*
+     * This class looks horribly convoluted with hidden/known + CanPlay/Drawback/Trigger
+     * and static functions like chooseCardToHiddenOriginChangeZone(). It might be a good
+     * idea to re-factor ChangeZoneAi into more specific effects since it is really doing
+     * too much: blink/bounce/exile/tutor/Raise Dead/Surgical Extraction/......
+     */
+    
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if (aiLogic.equals("Always")) {
@@ -372,6 +379,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         final Card source = sa.getHostCard();
 
+        if (sa.hasParam("AILogic")) {
+            if (sa.getParam("AILogic").equals("Never")) {
+                /*
+                 * Hack to stop AI from using Aviary Mechanic's "may bounce" trigger.
+                 * Ideally it should look for a good bounce target like "Pacifism"-victims
+                 * but there is no simple way to check that. It is preferable for the AI
+                 * to make sub-optimal choices (waste bounce) than to make obvious mistakes
+                 * (bounce useful permanent).
+                 */
+                return false;
+            }
+        }
 
         List<ZoneType> origin = new ArrayList<ZoneType>();
         if (sa.hasParam("Origin")) {
