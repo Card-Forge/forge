@@ -100,7 +100,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     }
                     else if (sa.hasParam("DefinedMagnet")){
                         GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
-                        if (changingTgtSA.canTarget(newTarget)) {
+                        if (newTarget != null && changingTgtSA.canTarget(newTarget)) {
                             changingTgtSA.resetTargets();
                             changingTgtSA.getTargets().add(newTarget);
                             changingTgtSI.updateTarget(changingTgtSA.getTargets());
