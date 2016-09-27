@@ -333,6 +333,7 @@ public class VPlayerPanel extends FContainer {
     private class LifeLabel extends FDisplayObject {
         private int life = player.getLife();
         private int poisonCounters = player.getCounters(CounterType.POISON);
+        private int energyCounters = player.getCounters(CounterType.ENERGY);
         private String lifeStr = String.valueOf(life);
 
         private LifeLabel() {
@@ -359,6 +360,8 @@ public class VPlayerPanel extends FContainer {
                 poisonCounters = player.getCounters(CounterType.POISON);
             }
 
+            energyCounters = player.getCounters(CounterType.ENERGY);
+
             //when gui player loses life, vibrate device for a length of time based on amount of life lost
             if (vibrateDuration > 0 && MatchController.instance.isLocalPlayer(player) &&
                     FModel.getPreferences().getPrefBoolean(FPref.UI_VIBRATE_ON_LIFE_LOSS)) {
@@ -375,7 +378,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public void draw(Graphics g) {
-            if (poisonCounters == 0) {
+            if (poisonCounters == 0 && energyCounters == 0) {
                 g.drawText(lifeStr, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, HAlignment.CENTER, true);
             }
             else {
@@ -384,8 +387,14 @@ public class VPlayerPanel extends FContainer {
                 float textWidth = getWidth() - textStart;
                 g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
                 g.drawText(lifeStr, INFO_FONT, INFO_FORE_COLOR, textStart, 0, textWidth, halfHeight, false, HAlignment.CENTER, true);
-                g.drawImage(FSkinImage.POISON, 0, halfHeight, halfHeight, halfHeight);
-                g.drawText(String.valueOf(poisonCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, HAlignment.CENTER, true);
+                if (poisonCounters > 0) { //prioritize showing poison counters over energy counters
+                    g.drawImage(FSkinImage.POISON, 0, halfHeight, halfHeight, halfHeight);
+                    g.drawText(String.valueOf(poisonCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, HAlignment.CENTER, true);
+                }
+                else {
+                    g.drawImage(FSkinImage.ENERGY, 0, halfHeight, halfHeight, halfHeight);
+                    g.drawText(String.valueOf(energyCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, HAlignment.CENTER, true);
+                }
             }
         }
     }
