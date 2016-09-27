@@ -124,7 +124,7 @@ public class AiAttackController {
             for (SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
                     if (sa.hasParam("Crew")) {
-                        if (!ComputerUtilCombat.canCrew(defender, sa)) {
+                        if (sa.getHostCard().isTapped() || !ComputerUtilCombat.canCrew(defender, sa)) {
                             continue;
                         }
                     }
