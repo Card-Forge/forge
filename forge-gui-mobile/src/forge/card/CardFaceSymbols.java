@@ -68,6 +68,7 @@ public class CardFaceSymbols {
 
         MANA_IMAGES.put("S", FSkinImage.MANA_SNOW);
         MANA_IMAGES.put("T", FSkinImage.TAP);
+        MANA_IMAGES.put("E", FSkinImage.ENERGY);
         MANA_IMAGES.put("slash", FSkinImage.SLASH);
         MANA_IMAGES.put("attack", FSkinImage.ATTACK);
         MANA_IMAGES.put("defend", FSkinImage.DEFEND);

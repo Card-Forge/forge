@@ -55,6 +55,7 @@ public class TextRenderer {
         symbolLookup.put("Q", FSkinImage.UNTAP);
         symbolLookup.put("S", FSkinImage.MANA_SNOW);
         symbolLookup.put("T", FSkinImage.TAP);
+        symbolLookup.put("E", FSkinImage.ENERGY);
         symbolLookup.put("AE", FSkinImage.AETHER_SHARD);
         symbolLookup.put("PW", FSkinImage.PW_BADGE_COMMON);
         symbolLookup.put("CR", FSkinImage.QUEST_COINSTACK);

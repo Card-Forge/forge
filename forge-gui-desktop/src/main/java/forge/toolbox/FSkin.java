@@ -1273,7 +1273,7 @@ public class FSkin {
         addEncodingSymbol("Q", FSkinProp.IMG_UNTAP);
         addEncodingSymbol("S", FSkinProp.IMG_MANA_SNOW);
         addEncodingSymbol("T", FSkinProp.IMG_TAP);
-        addEncodingSymbol("E", FSkinProp.IMG_PLAYER_ENERGY);
+        addEncodingSymbol("E", FSkinProp.IMG_ENERGY);
 
         // Set look and feel after skin loaded
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");
