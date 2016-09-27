@@ -1,5 +1,5 @@
 Name:Protector of the Crown
-ManaCost:2 W
+ManaCost:5 W
 Types:Creature Human Soldier
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
