@@ -629,7 +629,7 @@ public final class StaticAbilityContinuous {
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayIgnoreColor, mayPlayWithFlash, stAb);
             }
 
-            //affectedCard.updateStateForView();
+            //affectedCard.updateStateForView(); // FIXME: causes intolerable flickering for cards such as Thassa, God of the Sea or Wind Zendikon.
         }
 
         return affectedCards;
