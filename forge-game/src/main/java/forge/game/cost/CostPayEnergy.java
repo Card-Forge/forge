@@ -48,7 +48,12 @@ public class CostPayEnergy extends CostPart {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Pay ").append(this.getAmount()).append(" Energy");
+        sb.append("Pay ");
+
+        int count = Integer.parseInt(getAmount()) - paidAmount;
+        for (int i = 0; i < count; i++) {
+            sb.append("{E}");
+        }
         return sb.toString();
     }
 
