@@ -45,6 +45,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
 import java.util.ArrayList;
@@ -2375,6 +2376,25 @@ public class ComputerUtilCombat {
             }
         }
         return original;
+    }
+
+    /**
+     * Returns true if the given player p can crew a vehicle with the crew spell ability crewSA.
+     * @param p player to test
+     * @param crewSa Crew spell ability on an artifact vehicle
+     * @return true if a vehicle can be crewed at this moment, false otherwise
+     */
+    public final static boolean canCrew(Player p, SpellAbility crewSa) {
+        int totPower = 0;
+        for (Card c : p.getZone(ZoneType.Battlefield).getCards()) {
+            if (c.isCreature() && !c.isTapped()) {
+                totPower += c.getCurrentPower();
+            }
+        }
+
+        int crewReq = Integer.parseInt(TextUtil.split(crewSa.getParam("CostDesc"), ' ', 3)[1]);
+
+        return totPower >= crewReq;
     }
 }
 

@@ -123,6 +123,11 @@ public class AiAttackController {
             }
             for (SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
+                    if (sa.hasParam("Crew")) {
+                        if (!ComputerUtilCombat.canCrew(defender, sa)) {
+                            continue;
+                        }
+                    }
                     if (ComputerUtilCost.canPayCost(sa, defender) 
                             && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                         Card animatedCopy = CardFactory.copyCard(c, true);
