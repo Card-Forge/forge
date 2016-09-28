@@ -26,7 +26,8 @@ import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.util.collect.FCollection;
 
 import java.util.Map;
-import java.util.TreeMap;
+
+import com.google.common.collect.Maps;
 
 
 public abstract class GameEntity extends GameObject implements IIdentifiable {
@@ -34,8 +35,8 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     private String name = "";
     private int preventNextDamage = 0;
     private CardCollection enchantedBy;
-    private Map<Card, Map<String, String>> preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
-    protected Map<CounterType, Integer> counters = new TreeMap<>();
+    private Map<Card, Map<String, String>> preventionShieldsWithEffects = Maps.newTreeMap();
+    protected Map<CounterType, Integer> counters = Maps.newEnumMap(CounterType.class);
 
     protected GameEntity(int id0) {
         id = id0;
@@ -134,7 +135,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
     }
     public void resetPreventNextDamageWithEffect() {
-        preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
+        preventionShieldsWithEffects.clear();
     }
 
     public abstract boolean hasKeyword(final String keyword);

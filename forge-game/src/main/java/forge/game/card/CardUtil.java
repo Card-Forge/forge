@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeMap;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.ImageKeys;
 import forge.card.CardStateName;
@@ -279,7 +279,7 @@ public final class CardUtil {
         newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost() + in.getSemiPermanentPowerBoost());
         newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost() + in.getSemiPermanentToughnessBoost());
 
-        newCopy.setCounters(new TreeMap<CounterType, Integer>(in.getCounters()));
+        newCopy.setCounters(Maps.newEnumMap(in.getCounters()));
         newCopy.setExtrinsicKeyword(in.getExtrinsicKeyword());
 
         newCopy.setColor(in.determineColor().getColor());
