@@ -2,9 +2,7 @@ Name:Quicksmith Genius
 ManaCost:2 R
 Types:Creature Human Artificer
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever an artifact enters the battlefield under your control, you may discard a card. If you do, draw a card.
-SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an artifact enters the battlefield under your control, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksmith_genius.jpg
 Oracle:Whenever an artifact enters the battlefield under your control, you may discard a card. If you do, draw a card.
