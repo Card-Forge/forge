@@ -7,7 +7,7 @@ A:AB$ ChangeZone | Cost$ B G | Origin$ Battlefield | Destination$ Exile | ValidT
 A:AB$ ChangeZone | Cost$ 2 B | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered+ExiledWithSource | Hidden$ True | GainControl$ True | SpellDescription$ Put a creature card exiled with CARDNAME onto the battlefield under your control.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigForget | Static$ True | Secondary$ True | TriggerDescription$ Forget all remembered cards.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget all remembered cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
