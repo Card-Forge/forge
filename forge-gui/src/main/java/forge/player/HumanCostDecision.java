@@ -1151,7 +1151,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (totalPower) {
             final int i = Integer.parseInt(totalP);
             final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 0, typeList.size(), typeList);
-            inp.setMessage("Select a card to tap.");
+            inp.setMessage("Select a creature to tap.");
             inp.setCancelAllowed(true);
             inp.showAndWait();
 

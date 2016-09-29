@@ -4841,25 +4841,18 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
-        } else if (property.startsWith("greatestCMC")) {
+        } else if (property.startsWith("greatestCMC_")) {
             CardCollectionView cards = game.getCardsIn(ZoneType.Battlefield);
-            if (property.contains("ControlledBy")) {
+            String prop = property.substring("greatestCMC_".length());
+            if (prop.contains("ControlledBy")) {
+                prop = prop.split("ControlledBy")[0];
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
                 cards = CardLists.filterControlledBy(cards, p);
-                if (!cards.contains(this)) {
-                    return false;
-                }
             }
-            for (final Card crd : cards) {
-                if (crd.isSplitCard()) {
-                    if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > getCMC() || crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > getCMC()) {
-                        return false;
-                    }
-                } else {
-                    if (crd.getCMC() > getCMC()) {
-                        return false;
-                    }
-                }
+            cards = CardLists.getType(cards, prop);
+            cards = CardLists.getCardsWithHighestCMC(cards);
+            if (!cards.contains(this)) {
+                return false;
             }
         } else if (property.startsWith("greatestRememberedCMC")) {
             CardCollection cards = new CardCollection();
