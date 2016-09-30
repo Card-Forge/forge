@@ -7,5 +7,7 @@ SVar:ExtraETBCounter:Event$ Moved | ActiveZones$ Command | Destination$ Battlefi
 SVar:AddExtraCounter:AB$ PutCounter | Cost$ 0 | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 A:AB$ Draw |Cost$ G U SubCounter<1/P1P1/Creature.YouCtrl/Creature you Control> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zameck_guildmage.jpg
 Oracle:{G}{U}: This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.\n{G}{U}, Remove a +1/+1 counter from a creature you control: Draw a card.

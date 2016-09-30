@@ -3,5 +3,6 @@ ManaCost:X G
 Types:Sorcery
 A:SP$ Token | Cost$ X G | TokenAmount$ 1 | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | References$ X | TokenImage$ g x x ooze rtr | SpellDescription$ Put an X/X green Ooze creature token onto the battlefield.
 SVar:X:Count$xPaid
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slime_molding.jpg
 Oracle:Put an X/X green Ooze creature token onto the battlefield.

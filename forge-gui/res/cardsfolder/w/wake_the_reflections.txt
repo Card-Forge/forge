@@ -3,5 +3,6 @@ ManaCost:W
 Types:Sorcery
 A:SP$ ChooseCard | Cost$ W | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | AILogic$ AtLeast1 | SubAbility$ DBCopy | Mandatory$ True | SpellDescription$ Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
 SVar:DBCopy:DB$ CopyPermanent | Defined$ ChosenCard
+DeckNeeds:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wake_the_reflections.jpg
 Oracle:Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)

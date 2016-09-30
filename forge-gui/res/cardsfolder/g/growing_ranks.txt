@@ -5,5 +5,6 @@ T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | E
 SVar:TrigChoose:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | Mandatory$ True | RememberChosen$ True
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/growing_ranks.jpg
 Oracle:At the beginning of your upkeep, populate. (Put a token onto the battlefield that's a copy of a creature token you control.)

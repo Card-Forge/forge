@@ -4,5 +4,6 @@ Types:Sorcery
 A:SP$ Token | Cost$ 2 U B | TokenAmount$ 1 | TokenName$ Horror | TokenTypes$ Creature,Horror | TokenOwner$ You | TokenColors$ Blue,Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ Cipher | SpellDescription$ Put a 1/1/ blue and black Horror creature token with flying onto the battlefield. Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
 SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
 SVar:IsEncoded:Number$0
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_of_the_nightwing.jpg
 Oracle:Put a 1/1 blue and black Horror creature token with flying onto the battlefield.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
