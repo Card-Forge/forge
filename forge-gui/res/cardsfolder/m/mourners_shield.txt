@@ -4,7 +4,7 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile target card from a graveyard.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Imprint$ True
 A:AB$ ChooseSource | Cost$ 2 T | Choices$ Card.SharesColorWith Imprinted | ChoiceTitle$ Choose a source that shares a color with the exiled card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ PreventFromSource | References$ PreventFromSource | RememberObjects$ Remembered | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PreventFromSource | References$ PreventFromSource | RememberObjects$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:PreventFromSource:Mode$ PreventDamage | EffectZone$ Command | Source$ Card.IsRemembered | Description$ Prevent all damage that would be dealt by a source of your choice that shares a color with the exiled card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanImprinted | Static$ True
