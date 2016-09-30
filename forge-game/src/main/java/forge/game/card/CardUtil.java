@@ -479,8 +479,7 @@ public final class CardUtil {
             }
         }
 
-        // TODO Sol Remove production of "1" Generic Mana
-        if (maxChoices == 6 && (ab.canProduce("1") || ab.canProduce("C"))) {
+        if (maxChoices == 6 && ab.canProduce("C")) {
             colors.add(MagicColor.Constant.COLORLESS);
         }
 
