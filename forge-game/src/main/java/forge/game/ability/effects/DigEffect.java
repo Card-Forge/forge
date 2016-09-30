@@ -285,7 +285,7 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                         }
 
-                        if (!changeValid.isEmpty()) {
+                        if (!changeValid.isEmpty() && !sa.hasParam("ExileFaceDown")) {
                             game.getAction().reveal(movedCards, chooser, true,
                                     chooser + " picked " + (movedCards.size() == 1 ? "this card" : "these cards") + " from ");
                         }
