@@ -35,6 +35,7 @@ import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.CostPayment;
 import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -1247,6 +1248,15 @@ public class ComputerUtilCombat {
                     && !abilityParams.get("DB").equals("PumpAll")) {
                 continue;
             }
+
+            if (abilityParams.containsKey("Cost")) {
+                final SpellAbility sa = AbilityFactory.getAbility(ability, source);
+                sa.setActivatingPlayer(source.getController());
+                if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                    continue;
+                }
+            }
+
             List<Card> list = new ArrayList<Card>();
             if (!abilityParams.containsKey("ValidCards")) {
                 list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
@@ -1450,6 +1460,15 @@ public class ComputerUtilCombat {
                     && !abilityParams.get("DB").equals("PumpAll")) {
                 continue;
             }
+
+            if (abilityParams.containsKey("Cost")) {
+                final SpellAbility sa = AbilityFactory.getAbility(ability, source);
+                sa.setActivatingPlayer(source.getController());
+                if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                    continue;
+                }
+            }
+
             List<Card> list = new ArrayList<Card>();
             if (!abilityParams.containsKey("ValidCards")) {
                 list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
