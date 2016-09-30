@@ -87,13 +87,6 @@ public class CostPayment {
             return true;
         }
 
-        final Card card = ability.getHostCard();
-
-        Player activator = ability.getActivatingPlayer();
-        if (activator == null) {
-            activator = card.getController();
-        }
-
         for (final CostPart part : cost.getCostParts()) {
             if (!part.canPay(ability)) {
                 return false;
