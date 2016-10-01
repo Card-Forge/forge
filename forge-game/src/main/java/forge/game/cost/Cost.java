@@ -758,13 +758,14 @@ public class Cost {
             if (part instanceof CostPartMana && ((CostPartMana) part).getMana().isZero()) {
                 continue; // do not add Zero Mana
             } else if (part instanceof CostPartMana && costPart2 != null) {
-                ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(((CostPartMana) part).getMana());
+                CostPartMana mPart = (CostPartMana) part;
+                ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(mPart.getMana());
                 oldManaCost.addManaCost(costPart2.getMana());
                 String r2 = costPart2.getRestiction();
-                String r1 = ((CostPartMana) part).getRestiction();
+                String r1 = mPart.getRestiction();
                 String r = r1 == null ? r2 : ( r2 == null ? r1 : r1 + "." + r2);
                 costParts.remove(costPart2);
-                costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r, ((CostPartMana)part).isExiledCreatureCost(), ((CostPartMana)part).isEnchantedCreatureCost()));
+                costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r, mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost()));
             } else if (part instanceof CostDiscard || part instanceof CostTapType) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
