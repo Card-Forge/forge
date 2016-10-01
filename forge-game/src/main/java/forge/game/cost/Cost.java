@@ -764,7 +764,7 @@ public class Cost {
                 String r1 = ((CostPartMana) part).getRestiction();
                 String r = r1 == null ? r2 : ( r2 == null ? r1 : r1 + "." + r2);
                 costParts.remove(costPart2);
-                costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
+                costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r, ((CostPartMana)part).isExiledCreatureCost(), ((CostPartMana)part).isEnchantedCreatureCost()));
             } else if (part instanceof CostDiscard || part instanceof CostTapType) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
