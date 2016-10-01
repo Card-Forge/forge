@@ -765,7 +765,14 @@ public class Cost {
                 String r1 = mPart.getRestiction();
                 String r = r1 == null ? r2 : ( r2 == null ? r1 : r1 + "." + r2);
                 costParts.remove(costPart2);
-                costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r, mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost()));
+                if (r == null && (mPart.isExiledCreatureCost() || mPart.isEnchantedCreatureCost())) {
+                    // FIXME: something was amiss when trying to add the cost since the mana cost is either \EnchantedCost or \Exiled but the
+                    // restriction no longer marks it as such. Therefore, we need to explicitly copy the ExiledCreatureCost/EnchantedCreatureCost
+                    // to make cards like Merseine or Back from the Brink work.
+                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r, mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost()));
+                } else {
+                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
+                }
             } else if (part instanceof CostDiscard || part instanceof CostTapType) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
