@@ -10,6 +10,7 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -338,9 +339,11 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         }
 
         if (params.containsKey("CheckDefinedPlayer")) {
+            SpellAbility mockAbility = this.getHostCard().getFirstSpellAbility();
+            mockAbility.setActivatingPlayer(hostController);
             final String sIsPresent = params.get("CheckDefinedPlayer");
-            int playersize = AbilityUtils.getDefinedPlayers(game.getCardState(this.getHostCard()), sIsPresent, 
-                    this.getHostCard().getFirstSpellAbility()).size();
+            int playersize = AbilityUtils.getDefinedPlayers(game.getCardState(this.getHostCard()), sIsPresent,
+                    mockAbility).size();
             String comparator = "GE1";
             if (params.containsKey("DefinedPlayerCompare")) {
                 comparator = params.get("DefinedPlayerCompare");
