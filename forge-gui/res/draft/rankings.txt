@@ -188,7 +188,7 @@
 #187|Decoction Module|U|KLD
 #188|Fireforger's Puzzleknot|C|KLD
 #189|Self-Assembler|C|KLD
-#190|Aether Tradewinds|C|KLD
+#190|AEther Tradewinds|C|KLD
 #191|Disappearing Act|U|KLD
 #192|Era of Innovation|U|KLD
 #193|Fortuitous Find|C|KLD
