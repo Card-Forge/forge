@@ -3,8 +3,7 @@ ManaCost:2 R
 Types:Creature Sliver
 PT:2/2
 K:TypeCycling:Sliver:3
-S:Mode$ Continuous | Affected$ Sliver | EffectZone$ Battlefield | AffectedZone$ Hand | AddAbility$ SliverCycling | Description$ Each Sliver card in each player's hand has slivercycling {3}.
-SVar:SliverCycling:AB$ ChangeZone | Cost$ 3 Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Slivercycling | CostDesc$ {3} | Origin$ Library | Destination$ Hand | ChangeType$ Sliver | ChangeNum$ 1 | SpellDescription$ (3, Discard this card: Search your library for a Sliver card, reveal it, and put it into your hand. Then shuffle your library.)
+S:Mode$ Continuous | Affected$ Sliver | EffectZone$ Battlefield | AffectedZone$ Hand | AddKeyword$ TypeCycling:Sliver:3 | Description$ Each Sliver card in each player's hand has slivercycling {3}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homing_sliver.jpg
 Oracle:Each Sliver card in each player's hand has slivercycling {3}.\nSlivercycling {3} ({3}, Discard this card: Search your library for a Sliver card, reveal it, and put it into your hand. Then shuffle your library.)
