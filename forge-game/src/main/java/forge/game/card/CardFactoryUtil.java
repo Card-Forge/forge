@@ -265,64 +265,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * abilityCycle.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     * @param cycleCost
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.game.spellability.SpellAbility} object.
-     */
-    public static SpellAbility abilityCycle(final Card sourceCard, String cycleCost) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("AB$ Draw | Cost$ ");
-        sb.append(cycleCost);
-        sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Cycling ");
-        sb.append("| SpellDescription$ Draw a card.");
-
-        SpellAbility cycle = AbilityFactory.getAbility(sb.toString(), sourceCard);
-        cycle.setIsCycling(true);
-
-        return cycle;
-    } // abilityCycle()
-
-    /**
-     * <p>
-     * abilityTypecycle.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     * @param cycleCost
-     *            a {@link java.lang.String} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.game.spellability.SpellAbility} object.
-     */
-    public static SpellAbility abilityTypecycle(final Card sourceCard, String cycleCost, final String type) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("AB$ ChangeZone | Cost$ ").append(cycleCost);
-
-        String desc = type;
-        if (type.equals("Basic")) {
-            desc = "Basic land";
-        }
-
-        sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(desc).append("cycling ");
-        sb.append("| Origin$ Library | Destination$ Hand |");
-        sb.append("ChangeType$ ").append(type);
-        sb.append(" | SpellDescription$ Search your library for a ").append(desc).append(" card, reveal it,");
-        sb.append(" and put it into your hand. Then shuffle your library.");
-
-        SpellAbility cycle = AbilityFactory.getAbility(sb.toString(), sourceCard);
-        cycle.setIsCycling(true);
-
-        return cycle;
-    } // abilityTypecycle()
-
-    /**
-     * <p>
      * abilitySuspendStatic.
      * </p>
      * 
@@ -2258,21 +2200,10 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(effect);
             }
             else if (keyword.startsWith("Cycling")) {
-                card.removeIntrinsicKeyword(keyword);
-
-                final String[] k = keyword.split(":");
-                final String manacost = k[1];
-
-                card.addSpellAbility(abilityCycle(card, manacost));
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("TypeCycling")) {
-                card.removeIntrinsicKeyword(keyword);
-
-                final String[] k = keyword.split(":");
-                final String type = k[1];
-                final String manacost = k[2];
-
-                card.addSpellAbility(abilityTypecycle(card, manacost, type));
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Transmute")) {
                 card.removeIntrinsicKeyword(keyword);
@@ -3524,6 +3455,61 @@ public class CardFactoryUtil {
             } else {
                 // add ability to instrinic strings so copies/clones create the ability also
                 card.getCurrentState().addUnparsedAbility(effect);
+            }
+            card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Cycling")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("AB$ Draw | Cost$ ");
+            sb.append(manacost);
+            sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Cycling ");
+            sb.append("| SpellDescription$ Draw a card.");
+
+            SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
+            sa.setIsCycling(true);
+
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            } else {
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getCurrentState().addUnparsedAbility(sb.toString());
+            }
+            card.addSpellAbility(sa);
+        } else if (keyword.startsWith("TypeCycling")) {
+            final String[] k = keyword.split(":");
+            final String type = k[1];
+            final String manacost = k[2];
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("AB$ ChangeZone | Cost$ ").append(manacost);
+
+            String desc = type;
+            if (type.equals("Basic")) {
+                desc = "Basic land";
+            }
+
+            sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(desc).append("cycling ");
+            sb.append("| Origin$ Library | Destination$ Hand |");
+            sb.append("ChangeType$ ").append(type);
+            sb.append(" | SpellDescription$ Search your library for a ").append(desc).append(" card, reveal it,");
+            sb.append(" and put it into your hand. Then shuffle your library.");
+
+            SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
+            sa.setIsCycling(true);
+
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            } else {
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getCurrentState().addUnparsedAbility(sb.toString());
             }
             card.addSpellAbility(sa);
         }
