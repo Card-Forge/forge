@@ -4,4 +4,4 @@ Types:Creature Lizard
 PT:6/5
 K:Menace
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ripscale_predator.jpg
-Oracle:Ripscale Predator can't be blocked except by two or more creatures.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)
