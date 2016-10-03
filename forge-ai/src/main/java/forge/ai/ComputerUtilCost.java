@@ -412,6 +412,14 @@ public class ComputerUtilCost {
                 }
             }
         }
+        // KLD vehicle
+        if (sa.hasParam("Crew")) {  // put under checkTapTypeCost?
+            for (final CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostTapType && part.getType().contains("+withTotalPowerGE")) {
+                    return new AiCostDecision(player, sa).visit((CostTapType)part) != null;
+                }
+            }
+        }
 
         return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded) 
             && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);

@@ -114,7 +114,7 @@ public class AiAttackController {
         Predicate<Card> canAnimate = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
-                return !c.isCreature() && !c.isPlaneswalker();
+                return !c.isTapped() && !c.isCreature() && !c.isPlaneswalker();
             }
         };
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
@@ -123,11 +123,6 @@ public class AiAttackController {
             }
             for (SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
-                    if (sa.hasParam("Crew")) {
-                        if (sa.getHostCard().isTapped() || !ComputerUtilCombat.canCrew(defender, sa)) {
-                            continue;
-                        }
-                    }
                     if (ComputerUtilCost.canPayCost(sa, defender) 
                             && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                         Card animatedCopy = CardFactory.copyCard(c, true);

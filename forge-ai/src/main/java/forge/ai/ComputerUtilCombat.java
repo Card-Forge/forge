@@ -31,7 +31,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -47,7 +46,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
 import java.util.ArrayList;
@@ -2396,25 +2394,6 @@ public class ComputerUtilCombat {
             }
         }
         return original;
-    }
-
-    /**
-     * Returns true if the given player p can crew a vehicle with the crew spell ability crewSA.
-     * @param p player to test
-     * @param crewSa Crew spell ability on an artifact vehicle
-     * @return true if a vehicle can be crewed at this moment, false otherwise
-     */
-    public final static boolean canCrew(Player p, SpellAbility crewSa) {
-        // get Untapped Creatures
-        CardCollectionView typeList = CardLists.filter(p.getCreaturesInPlay(), Presets.UNTAPPED);
-        // remove them which can't crew Vehicles
-        typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
-        // get Total Power
-        int totPower = CardLists.getTotalPower(typeList);
-
-        int crewReq = Integer.parseInt(TextUtil.split(crewSa.getParam("CostDesc"), ' ', 3)[1]);
-
-        return totPower >= crewReq;
     }
 }
 

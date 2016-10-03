@@ -409,6 +409,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
         String type = cost.getType();
+        boolean isVehicle = type.contains("+withTotalPowerGE");
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
@@ -419,18 +420,18 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
             } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
+                if (!isVehicle) {
+                    c = AbilityUtils.calculateAmount(source, amount, ability);
+                }
             }
         }
         if (type.contains("sharesCreatureTypeWith")) {
             return null;
         }
 
-        boolean totalPower = false;
         String totalP = "";
         CardCollectionView totap;
-        if (type.contains("+withTotalPowerGE")) {
-            totalPower = true;
+        if (isVehicle) {
             totalP = type.split("withTotalPowerGE")[1];
             type = type.replace("+withTotalPowerGE" + totalP, "");
             totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), tapped);
@@ -438,10 +439,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
             totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, tapped);
         }
 
-
-
         if (totap == null) {
-            System.out.println("Couldn't find a valid card(s) to tap for: " + source.getName());
+//            System.out.println("Couldn't find a valid card(s) to tap for: " + source.getName());
             return null;
         }
         tapped.addAll(totap);
