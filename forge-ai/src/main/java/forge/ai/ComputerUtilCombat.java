@@ -31,6 +31,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -2404,12 +2405,12 @@ public class ComputerUtilCombat {
      * @return true if a vehicle can be crewed at this moment, false otherwise
      */
     public final static boolean canCrew(Player p, SpellAbility crewSa) {
-        int totPower = 0;
-        for (Card c : p.getZone(ZoneType.Battlefield).getCards()) {
-            if (c.isCreature() && !c.isTapped()) {
-                totPower += c.getCurrentPower();
-            }
-        }
+        // get Untapped Creatures
+        CardCollectionView typeList = CardLists.filter(p.getCreaturesInPlay(), Presets.UNTAPPED);
+        // remove them which can't crew Vehicles
+        typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
+        // get Total Power
+        int totPower = CardLists.getTotalPower(typeList);
 
         int crewReq = Integer.parseInt(TextUtil.split(crewSa.getParam("CostDesc"), ' ', 3)[1]);
 
