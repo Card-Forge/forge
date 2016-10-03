@@ -790,7 +790,6 @@ forge-gui-desktop/.project -text
 forge-gui-desktop/.settings/org.eclipse.core.resources.prefs -text
 forge-gui-desktop/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui-desktop/.settings/org.eclipse.m2e.core.prefs -text
-forge-gui-desktop/forge.jar -text
 forge-gui-desktop/pom.xml -text
 forge-gui-desktop/src/main/config/Forge.icns -text
 forge-gui-desktop/src/main/config/appbundler-1.0-custom.jar -text
