@@ -34,7 +34,7 @@ public class DamageDealAi extends DamageAiBase {
         Card source = sa.getHostCard();
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$ChosenNumber")) {
-            int energy = source.getCounters(CounterType.ENERGY);
+            int energy = ai.getCounters(CounterType.ENERGY);
             for (SpellAbility s : source.getSpellAbilities()) {
                 if ("PayEnergy".equals(s.getParam("AILogic"))) {
                     energy += AbilityUtils.calculateAmount(source, s.getParam("CounterNum"), sa);
