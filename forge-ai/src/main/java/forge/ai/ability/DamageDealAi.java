@@ -31,8 +31,28 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
-        final Card source = sa.getHostCard();
+        Card source = sa.getHostCard();
 
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$ChosenNumber")) {
+            int energy = source.getCounters(CounterType.ENERGY);
+            for (SpellAbility s : source.getSpellAbilities()) {
+                if ("PayEnergy".equals(s.getParam("AILogic"))) {
+                    energy += AbilityUtils.calculateAmount(source, s.getParam("CounterNum"), sa);
+                    break;
+                }
+            }
+            for (; energy > 0; energy--) {
+                if (this.damageTargetAI(ai, sa, energy, false)) {
+                    dmg = ComputerUtilCombat.getEnoughDamageToKill(sa.getTargetCard(), energy, source, false, false);
+                    if (dmg > energy || dmg < 1) {
+                        continue; // in case the calculation gets messed up somewhere
+                    }
+                    source.setSVar("EnergyToPay", "Number$" + dmg);
+                    return true;
+                }
+            }
+            return false;
+        }
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);

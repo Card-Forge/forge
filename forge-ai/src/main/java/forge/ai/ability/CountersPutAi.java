@@ -49,6 +49,10 @@ public class CountersPutAi extends SpellAbilityAi {
         if ("Never".equals(sa.getParam("AILogic"))) {
             return false;
         }
+        
+        if ("PayEnergy".equals(sa.getParam("AILogic"))) {
+            return true;
+        }
 
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
             return false;

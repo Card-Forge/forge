@@ -1493,6 +1493,7 @@ public class AiController {
     }
 
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
+        final Card source = sa.getHostCard();
         final String logic = sa.getParam("AILogic");
         if ("GainLife".equals(logic)) {
             if (player.getLife() < 5 || player.getCardsIn(ZoneType.Hand).size() >= player.getMaxHandSize()) {
@@ -1528,6 +1529,8 @@ public class AiController {
             return MyRandom.getRandom().nextInt(Math.min(player.getLife() / 3, player.getOpponent().getLife())) + 1;
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
+        } else if (source.hasSVar("EnergyToPay")) {
+            return AbilityUtils.calculateAmount(source, source.getSVar("EnergyToPay"), sa);
         }
         return max;
     }
