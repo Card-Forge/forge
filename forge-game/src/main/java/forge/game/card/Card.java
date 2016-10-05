@@ -2682,14 +2682,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final int getSetPower() {
         if (newPT.isEmpty()) {
-            return -1;
+            return Integer.MAX_VALUE;
         }
         return getLatestPT().getLeft();
     }
 
     public final int getSetToughness() {
         if (newPT.isEmpty()) {
-            return -1;
+            return Integer.MAX_VALUE;
         }
         return getLatestPT().getRight();
     }
@@ -2705,9 +2705,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private synchronized Pair<Integer, Integer> getLatestPT() {
         // Find latest set power
         long maxPowerTimestamp = -2;
-        int latestPower = -1;
+        int latestPower = Integer.MAX_VALUE;
         for (final CardPowerToughness pt : newPT) {
-            if (pt.getTimestamp() >= maxPowerTimestamp && pt.getPower() != -1) {
+            if (pt.getTimestamp() >= maxPowerTimestamp && pt.getPower() != Integer.MAX_VALUE) {
                 maxPowerTimestamp = pt.getTimestamp();
                 latestPower = pt.getPower();
             }
@@ -2715,9 +2715,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Find latest set toughness
         long maxToughnessTimestamp = -2;
-        int latestToughness = -1;
+        int latestToughness = Integer.MAX_VALUE;
         for (final CardPowerToughness pt : newPT) {
-            if (pt.getTimestamp() >= maxToughnessTimestamp && pt.getToughness() != -1) {
+            if (pt.getTimestamp() >= maxToughnessTimestamp && pt.getToughness() != Integer.MAX_VALUE) {
                 maxToughnessTimestamp = pt.getTimestamp();
                 latestToughness = pt.getToughness();
             }
@@ -2747,7 +2747,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getCurrentPower() {
         int total = getBasePower();
         final int setPower = getSetPower();
-        if (setPower != -1) {
+        if (setPower != Integer.MAX_VALUE) {
             total = setPower;
         }
         return total;
@@ -2782,7 +2782,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getCurrentToughness() {
         int total = getBaseToughness();
         final int setToughness = getSetToughness();
-        if (setToughness != -1) {
+        if (setToughness != Integer.MAX_VALUE) {
             total = setToughness;
         }
         return total;

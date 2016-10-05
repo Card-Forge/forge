@@ -34,8 +34,8 @@ final class CardFace implements ICardFace {
     private ColorSet color = null;
 
     private String oracleText = null;
-    private int iPower = -1;
-    private int iToughness = -1;
+    private int iPower = Integer.MAX_VALUE;
+    private int iToughness = Integer.MAX_VALUE;
     private String power = null;
     private String toughness = null;
     private int initialLoyalty = -1;
@@ -91,10 +91,17 @@ final class CardFace implements ICardFace {
         if (slashPos == -1) {
             throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", this.getName()));
         }
-        this.power = value.substring(0, slashPos);
-        this.toughness = value.substring(slashPos + 1);
+        boolean negPower = value.charAt(0) == '-';
+        boolean negToughness = value.charAt(slashPos + 1) == '-';
+
+        this.power = negPower ? value.substring(1, slashPos) : value.substring(0, slashPos);
+        this.toughness = negToughness ? value.substring(slashPos + 2) : value.substring(slashPos + 1);
+
         this.iPower = StringUtils.isNumeric(this.power) ? Integer.parseInt(this.power) : 0;
         this.iToughness = StringUtils.isNumeric(this.toughness) ? Integer.parseInt(this.toughness) : 0;
+
+        if (negPower) { this.iPower *= -1; }
+        if (negToughness) { this.iToughness *= -1; }
     }
 
     // Raw fields used for Card creation

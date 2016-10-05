@@ -465,11 +465,11 @@ public class CardFactory {
 
         c.setColor(face.getColor().getColor());
 
-        if (face.getIntPower() >= 0) {
+        if (face.getIntPower() != Integer.MAX_VALUE) {
             c.setBasePower(face.getIntPower());
             c.setBasePowerString(face.getPower());
         }
-        if (face.getIntToughness() >= 0) {
+        if (face.getIntToughness() != Integer.MAX_VALUE) {
             c.setBaseToughness(face.getIntToughness());
             c.setBaseToughnessString(face.getToughness());
         }
