@@ -145,7 +145,7 @@ public final class QuestUtilCards {
         }
 
         if (!wastesCodes.isEmpty()) {
-            String wasteCode = Aggregates.random(snowLandCodes);
+            String wasteCode = Aggregates.random(wastesCodes);
             pool.add(db.getCard("Wastes", wasteCode), 5);
         }
 
