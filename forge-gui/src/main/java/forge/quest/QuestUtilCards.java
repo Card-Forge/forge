@@ -82,6 +82,7 @@ public final class QuestUtilCards {
 
         List<String> landCodes = new ArrayList<>();
         List<String> snowLandCodes = new ArrayList<>();
+        List<String> wastesCodes = new ArrayList<>();
 
         if (usedFormat != null) {
             List<String> availableEditions = usedFormat.getAllowedSetCodes();
@@ -99,6 +100,10 @@ public final class QuestUtilCards {
             if (usedFormat.isSetLegal("CSP")) {
                 snowLandCodes.add("CSP");
             }
+
+            if (usedFormat.isSetLegal("OGW")) {
+                wastesCodes.add("OGW");
+            }
         } else {
             Iterable<CardEdition> allEditions = FModel.getMagicDb().getEditions();
             for (CardEdition edition : Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands)) {
@@ -106,6 +111,7 @@ public final class QuestUtilCards {
             }
             snowLandCodes.add("ICE");
             snowLandCodes.add("CSP");
+            wastesCodes.add("OGW");
         }
 
         String landCode = Aggregates.random(landCodes);
@@ -136,6 +142,11 @@ public final class QuestUtilCards {
             for (String landName : MagicColor.Constant.SNOW_LANDS) {
                 pool.add(db.getCard(landName, snowLandCode), nSnow);
             }
+        }
+
+        if (!wastesCodes.isEmpty()) {
+            String wasteCode = Aggregates.random(snowLandCodes);
+            pool.add(db.getCard("Wastes", wasteCode), 5);
         }
 
         return pool;
