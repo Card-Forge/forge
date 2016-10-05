@@ -327,6 +327,8 @@ public final class CardRules implements ICardCharacteristics {
                         this.altMode = CardSplitType.smartValueOf(value);
                     } else if ("ALTERNATE".equals(key)) {
                         this.curFace = 1;
+                    } else if ("AltName".equals(key)) {
+                        this.faces[curFace].setAltName(value);
                     }
                 break;
 

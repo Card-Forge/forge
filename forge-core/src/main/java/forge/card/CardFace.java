@@ -28,6 +28,7 @@ final class CardFace implements ICardFace {
     private final static Map<String, String> emptyMap = Collections.unmodifiableMap(new TreeMap<String, String>());
 
     private final String name;
+    private String altName = null;
     private CardType type = null;
     private ManaCost manaCost = ManaCost.NO_COST;
     private ColorSet color = null;
@@ -70,12 +71,15 @@ final class CardFace implements ICardFace {
     @Override public String getNonAbilityText()       { return nonAbilityText; }
     @Override public Iterable<Entry<String, String>> getVariables() { return variables.entrySet(); }
 
+    @Override public String getAltName()              { return this.altName; }
+    
     public CardFace(String name0) { 
         this.name = name0; 
         if ( StringUtils.isBlank(name0) )
             throw new RuntimeException("Card name is empty");
     }
     // Here come setters to allow parser supply values
+    void setAltName(String name)             { this.altName = name; }
     void setType(CardType type0)             { this.type = type0; }
     void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
     void setColor(ColorSet color0)           { this.color = color0; }
