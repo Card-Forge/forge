@@ -6,7 +6,7 @@ A:SP$ Repeat | Cost$ 3 B B | ValidTgts$ Opponent | RepeatSubAbility$ DBChoose | 
 SVar:DBChoose:DB$ GenericChoice | Defined$ ParentTarget | Choices$ Discard,Sacrifice | AILogic$ PayUnlessCost
 
 SVar:Discard:DB$ LoseLife | LifeAmount$ 5 | Defined$ ParentTarget | UnlessCost$ Discard<2/Card> | UnlessPayer$ ParentTarget | UnlessAI$ LifeLE5 | SpellDescription$ you lose 5 life unless you discard two cards.
-SVar:Sacrifice:DB$ LoseLife | LifeAmount$ 5 | Defined$ ParentTarget | UnlessCost$ Sac<1/Creature,Planeswalker/creature or planeswalker> | UnlessPayer$ ParentTarget | UnlessAI$ LifeLE5 | SpellDescription$ you lose 5 life unless you sacrifice a creature or planeswalker.
+SVar:Sacrifice:DB$ LoseLife | LifeAmount$ 5 | Defined$ ParentTarget | UnlessCost$ Sac<1/Creature;Planeswalker/creature or planeswalker> | UnlessPayer$ ParentTarget | UnlessAI$ LifeLE5 | SpellDescription$ you lose 5 life unless you sacrifice a creature or planeswalker.
 
 SVar:AIPreference:SacCost$Creature.token
 
