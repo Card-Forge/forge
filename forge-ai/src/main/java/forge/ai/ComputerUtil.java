@@ -395,6 +395,12 @@ public class ComputerUtil {
 
         typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 
+        if (ability.hasParam("AILogic") && ability.getParam("AILogic").equals("DontSacSelf") && typeList.contains(source)) {
+            // don't sacrifice the card that is ETBing to its own ability (e.g. Harvester Troll)
+            // TODO: there should probably be a more generic way to do this based on detecting ETB sac abilities.
+            typeList.remove(source);
+        }
+
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             typeList.remove(target); // don't sacrifice the card we're pumping
         }
