@@ -118,6 +118,11 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
                 return false;
             }
+        } else if (keyword.endsWith("CantBlockCardUIDSource")) {    // can't block CARDNAME this turn
+            if (ph.isPlayerTurn(human) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                    || ph.getPhase().isBefore(PhaseType.MAIN1) || !CombatUtil.canBlock(sa.getHostCard(), card)) {
+                return false;
+            }
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
             if (ph.getPhase().isBefore(PhaseType.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)
                     || !Untap.canUntap(card)) {
