@@ -542,9 +542,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("FaceDown")) {
                         movedCard.setState(CardStateName.FaceDown, true);
                     }
-                    if (sa.hasParam("Ninjutsu") || sa.hasParam("Attacking")) {
+                    if (sa.hasParam("Attacking")) {
                         // What should they attack?
-                        // TODO Ninjutsu needs to actually select the Defender, instead of auto selecting player
                         FCollectionView<GameEntity> defenders = game.getCombat().getDefenders();
                         if (!defenders.isEmpty()) { 
                             // Blockeres are already declared, set this to unblocked
@@ -552,6 +551,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             game.getCombat().getBandOfAttacker(tgtC).setBlocked(false);
                             game.fireEvent(new GameEventCombatChanged());
                         }
+                    }
+                    if (sa.hasParam("Ninjutsu")) {
+                        // Ninjutsu need to get the Defender of the Returned Creature 
+                        final Card returned = sa.getPaidList("Returned").getFirst();
+                        final GameEntity defender = game.getCombat().getDefenderByAttacker(returned);
+                        game.getCombat().addAttacker(tgtC, defender);
+                        game.getCombat().getBandOfAttacker(tgtC).setBlocked(false);
+                        game.fireEvent(new GameEventCombatChanged());
                     }
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
                         tgtC.setTapped(true);
