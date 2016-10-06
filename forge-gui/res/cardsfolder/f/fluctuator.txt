@@ -4,4 +4,4 @@ Types:Artifact
 S:Mode$ ReduceCost | ValidCard$ Card | Type$ Cycling | Activator$ You | Amount$ 2 | Description$ Cycling abilities you activate cost you up to {2} less to activate.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fluctuator.jpg
-Oracle:Cycling abilities you activate cost you up to {2} less to activate.
+Oracle:Cycling abilities you activate cost up to {2} less to activate.
