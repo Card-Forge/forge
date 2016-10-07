@@ -1142,12 +1142,11 @@ public class AbilityUtils {
             players.add(sa.getActivatingPlayer());
         }
         else if (defined.equals("Opponent")) {
-            //players.addAll(sa.getActivatingPlayer().getOpponents());
-            players.add(sa.getActivatingPlayer().getOpponent());
+            players.addAll(sa.getActivatingPlayer().getOpponents());
         }
         else {
             for (Player p : game.getPlayersInTurnOrder()) {
-                if (p.isValid(defined, sa.getActivatingPlayer(), sa.getHostCard(), null)) {
+                if (p.isValid(defined, sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     players.add(p);
                 }
             }
