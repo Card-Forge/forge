@@ -2043,6 +2043,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (equals(sourceController) || !isOpponentOf(sourceController)) {
                 return false;
             }
+        } else if (property.startsWith("OpponentOf ")) {
+            final String v = property.split(" ")[1];
+            final List<Player> players = AbilityUtils.getDefinedPlayers(source, v, spellAbility);
+            for (final Player p : players) {
+                if (equals(p) || !isOpponentOf(p)) {
+                    return false;
+                }
+            }
         } else if (property.equals("Allies")) {
             if (equals(sourceController) || isOpponentOf(sourceController)) {
                 return false;
