@@ -192,6 +192,8 @@ public enum CounterType {
 
     PLAGUE(),
 
+    PLOT(),
+
     PRESSURE(),
 
     PHYLACTERY,
