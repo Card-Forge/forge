@@ -2494,6 +2494,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Crew")) {
                 addSpellAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Retrace")) {
+                addSpellAbility(keyword, card, null);
+            }
 
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
@@ -3512,6 +3515,27 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(sb.toString());
             }
             card.addSpellAbility(sa);
+        } else if (keyword.equals("Retrace")) {
+            final SpellAbility sa = card.getFirstSpellAbility();
+
+            final SpellAbility newSA = sa.copy();
+            SpellAbilityRestriction sar = new SpellAbilityRestriction();
+            sar.setVariables(sa.getRestrictions());
+            sar.setZone(ZoneType.Graveyard);
+            newSA.setRestrictions(sar);
+            newSA.getMapParams().put("CostDesc", "Retrace");
+            newSA.getMapParams().put("Secondary", "True");
+            newSA.setBasicSpell(false);
+
+            final Cost cost = new Cost("Discard<1/Land>", false).add(sa.getPayCosts());
+            newSA.setPayCosts(cost);
+            //newSA.setDescription(sa.getDescription() + " (Retrace)");
+            if (!intrinsic) {
+                newSA.setTemporary(true);
+                newSA.setIntrinsic(false);
+                kws.addSpellAbility(newSA);
+            }
+            card.addSpellAbility(newSA);
         }
     }
 

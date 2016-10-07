@@ -1414,7 +1414,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             		|| keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
-                    || keyword.startsWith("Soulbond")) {
+                    || keyword.startsWith("Soulbond") || keyword.equals("Retrace")) {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
                     || keyword.startsWith("Crew")) {
@@ -1755,7 +1755,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         // I think SpellAbilities should be displayed after Keywords
         // Add SpellAbilities
         for (final SpellAbility element : state.getSpellAbilities()) {
-            sb.append(formatSpellAbility(element));
+            if (!element.isSecondary()) {
+                sb.append(formatSpellAbility(element));
+            }
         }
 
         // Add Keywords
@@ -1905,9 +1907,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
-            } else if (keyword.equals("Rebound")) {
-                sb.append(keyword)
-                        .append(" (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)\r\n");
+            } else if (keyword.equals("Rebound") || keyword.equals("Retrace")) {
+                sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             }
         }
         return sb;
