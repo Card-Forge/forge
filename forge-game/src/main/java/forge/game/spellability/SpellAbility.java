@@ -18,6 +18,7 @@
 package forge.game.spellability;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
@@ -645,6 +646,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (clone.hostCard != null && clone.hostCard.getGame() != null) {
                 clone.hostCard.getGame().addSpellAbility(clone.id, clone);
             }
+            // need to clone the maps too so they can be changed
+            clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
+            clone.mapParams = Maps.newHashMap(this.mapParams);
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }

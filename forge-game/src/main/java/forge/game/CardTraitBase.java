@@ -29,7 +29,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     protected Card hostCard;
 
     /** The map params. */
-    protected final Map<String, String> originalMapParams = Maps.newHashMap(),
+    protected Map<String, String> originalMapParams = Maps.newHashMap(),
             mapParams = Maps.newHashMap();
 
     /** The is intrinsic. */
