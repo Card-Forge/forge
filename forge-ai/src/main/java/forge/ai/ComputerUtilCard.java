@@ -1213,7 +1213,7 @@ public class ComputerUtilCard {
                             }
                         }
                     }
-                    if (totalPowerUnblocked >= opp.getLife()){
+                    if (totalPowerUnblocked >= opp.getLife()) {
                         return true;
                     }
                 }
