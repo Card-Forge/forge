@@ -53,7 +53,7 @@ public class AnimateAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
-        if (sa.hasParam("Attacking")) { // Launch the Fleet
+        if ("Attacking".equals(aiLogic)) { // Launch the Fleet
             if (ph.getPlayerTurn().isOpponentOf(ai) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
@@ -65,7 +65,7 @@ public class AnimateAi extends SpellAbilityAi {
             }
             return !sa.getTargets().isEmpty();
         }
-        if ("EOT".equals(sa.getParam("AILogic")) && ph.getPhase().isBefore(PhaseType.MAIN2)) {
+        if ("EOT".equals(aiLogic) && ph.getPhase().isBefore(PhaseType.MAIN2)) {
             return false;
         }
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -134,8 +134,8 @@ public class AnimateAi extends SpellAbilityAi {
         final Game game = aiPlayer.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         
-        if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
-        	return false;  // what is this for?
+        if (sa.getSubAbility() == null) {
+        	return false;  // why is this necessary?
         }
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getApi() == ApiType.Sacrifice) {
             return true;    // interrupt sacrifice
