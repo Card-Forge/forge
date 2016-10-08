@@ -1202,9 +1202,15 @@ public class ComputerUtilCard {
                             continue;
                         }
                         if (atk == c) {
-                            totalPowerUnblocked += pumpedDmg;
+                            totalPowerUnblocked += pumpedDmg; // this accounts for Trample by now
                         } else {
                             totalPowerUnblocked += ComputerUtilCombat.damageIfUnblocked(atk, opp, combat, true);
+                            if (combat.isBlocked(atk)) {
+                                // consider Trample damage properly for a blocked creature
+                                for (Card blk : combat.getBlockers(atk)) {
+                                    totalPowerUnblocked -= ComputerUtilCombat.getDamageToKill(blk);
+                                }
+                            }
                         }
                     }
                     if (totalPowerUnblocked >= opp.getLife()){
