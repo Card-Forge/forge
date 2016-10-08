@@ -32,7 +32,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
-import forge.ai.ability.AnimateAi;
 import forge.ai.ability.ProtectAi;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -45,7 +44,6 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -504,7 +502,6 @@ public class ComputerUtil {
         // Used for Crewing vehicles, ideally we sort by useless creatures. Can't Attack/Defender
         int totalPower = 0;
         final Card activate = sa.getHostCard();
-        int vehicleValue = 0;
 
         CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.removeAll(exclude);
@@ -513,9 +510,6 @@ public class ComputerUtil {
 
         if (sa.hasParam("Crew")) {
             typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
-            Card vehicle = CardFactory.copyCard(sa.getHostCard(), true);
-            AnimateAi.becomeAnimated(vehicle, false, sa);
-            vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
         }
 
         // is this needed?
@@ -524,14 +518,15 @@ public class ComputerUtil {
         if (tap) {
             typeList.remove(activate);
         }
-        CardLists.sortByPowerAsc(typeList);
-
+        ComputerUtilCard.sortByEvaluateCreature(typeList);
+        Collections.reverse(typeList);
+        
         final CardCollection tapList = new CardCollection();
 
-        // Very very rudimentary
+        // Accumulate from "worst" creature
         for (Card next : typeList) {
             int pow = next.getNetPower();
-            if (pow <= 0 || ComputerUtilCard.evaluateCreature(next) > vehicleValue) {
+            if (pow <= 0) {
                 continue;
             }
             totalPower += pow;

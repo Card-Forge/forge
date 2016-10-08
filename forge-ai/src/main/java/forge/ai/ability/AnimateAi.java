@@ -137,9 +137,11 @@ public class AnimateAi extends SpellAbilityAi {
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
         	return false;  // what is this for?
         }
-        
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getApi() == ApiType.Sacrifice) {
             return true;    // interrupt sacrifice
+        }
+        if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source)) {
+            return false;   // prevent crewing with equal or better creatures
         }
         if (null == tgt) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);

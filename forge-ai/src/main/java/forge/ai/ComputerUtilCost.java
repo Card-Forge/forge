@@ -1,11 +1,16 @@
 package forge.ai;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+
+import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
@@ -296,8 +301,39 @@ public class ComputerUtilCost {
         if (cost == null) {
             return true;
         }
+        boolean isVehicle = source.hasStartOfKeyword("Crew");
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostTapType) {
+                /*
+                 * Only crew with creatures weaker than vehicle
+                 * 
+                 * Possible improvements:
+                 * - block against evasive (flyers, intimidate, etc.)
+                 * - break board stall by racing with evasive vehicle
+                 */
+                if (isVehicle) {
+                    for (SpellAbility sa : source.getSpellAbilities()) {
+                        if (sa.getApi() == ApiType.Animate) {
+                            Card vehicle = CardFactory.copyCard(sa.getHostCard(), true);
+                            AnimateAi.becomeAnimated(vehicle, false, sa);
+                            final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
+                            String type = part.getType();
+                            String totalP = type.split("withTotalPowerGE")[1];
+                            type = type.replace("+withTotalPowerGE" + totalP, "");
+                            CardCollection exclude = CardLists.getValidCards(
+                                    new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), type.split(";"),
+                                    source.getController(), source, sa);
+                            exclude = CardLists.filter(exclude, new Predicate<Card>() {
+                                @Override
+                                public boolean apply(final Card c) {
+                                    return ComputerUtilCard.evaluateCreature(c) >= vehicleValue;
+                                }
+                            }); // exclude creatures >= vehicle
+                            return ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true,
+                                    Integer.parseInt(totalP), exclude) != null;
+                        }
+                    }
+                }
             	return false;
             }
         }
