@@ -1193,6 +1193,24 @@ public class ComputerUtilCard {
                 if (pumpedDmg >= opp.getLife()) {
                     return true;
                 }
+                // try to determine if pumping a creature for more power will give lethal on board
+                // considering all unblocked creatures after the blockers are already declared
+                if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && pumpedDmg > dmg) {
+                    int totalPowerUnblocked = 0;
+                    for (Card atk : combat.getAttackers()) {
+                        if (combat.isBlocked(atk) && !atk.hasKeyword("Trample")) {
+                            continue;
+                        }
+                        if (atk == c) {
+                            totalPowerUnblocked += pumpedDmg;
+                        } else {
+                            totalPowerUnblocked += ComputerUtilCombat.damageIfUnblocked(atk, opp, combat, true);
+                        }
+                    }
+                    if (totalPowerUnblocked >= opp.getLife()){
+                        return true;
+                    }
+                }
                 float value = 1.0f * (pumpedDmg - dmg);
                 if (c == sa.getHostCard() && power > 0) {
                     int divisor = sa.getPayCosts().getTotalMana().getCMC();
