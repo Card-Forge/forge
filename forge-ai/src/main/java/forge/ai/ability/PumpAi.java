@@ -6,6 +6,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -460,6 +461,28 @@ public class PumpAi extends PumpAiBase {
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
 
+        if (numDefense.equals("-X") && sa.getSVar("X").equals("Count$ChosenNumber")) {
+            int energy = ai.getCounters(CounterType.ENERGY);
+            for (SpellAbility s : source.getSpellAbilities()) {
+                if ("PayEnergy".equals(s.getParam("AILogic"))) {
+                    energy += AbilityUtils.calculateAmount(source, s.getParam("CounterNum"), sa);
+                    break;
+                }
+            }
+            int minus = 0;
+            for (; energy > 0; energy--) {
+                if (pumpTgtAI(ai, sa, -energy, -energy, false, true)) {
+                    minus = sa.getTargetCard().getNetToughness();
+                    if (minus > energy || minus < 1) {
+                        continue; // in case the calculation gets messed up somewhere
+                    }
+                    source.setSVar("EnergyToPay", "Number$" + minus);
+                    return true;
+                }
+            }
+            return false;
+        }
+        
         int defense;
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             defense = Integer.parseInt(source.getSVar("PayX"));
