@@ -27,6 +27,7 @@ import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.limited.DraftRankCache;
 import forge.model.FModel;
@@ -425,7 +426,7 @@ public enum ColumnDef {
     }
 
     private static Integer toPower(final InventoryItem i) {
-        int result = -1;
+        int result = Integer.MAX_VALUE;
         if (i instanceof PaperCard) {
             result = ((IPaperCard) i).getRules().getIntPower();
             if (result == Integer.MAX_VALUE) {
@@ -442,7 +443,7 @@ public enum ColumnDef {
     }
 
     private static Integer toCMC(final InventoryItem i) {
-        return i instanceof PaperCard ? ((IPaperCard) i).getRules().getManaCost().getCMC() : -1;
+        return i instanceof PaperCard ? ((IPaperCard) i).getRules().getManaCost().getCMC() : Integer.MAX_VALUE;
     }
 
     private static CardRarity toRarity(final InventoryItem i) {
