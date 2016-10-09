@@ -442,7 +442,7 @@ public enum ColumnDef {
     }
 
     private static Integer toCMC(final InventoryItem i) {
-        return i instanceof PaperCard ? ((IPaperCard) i).getRules().getManaCost().getCMC() : Integer.MAX_VALUE;
+        return i instanceof PaperCard ? ((IPaperCard) i).getRules().getManaCost().getCMC() : -1;
     }
 
     private static CardRarity toRarity(final InventoryItem i) {
