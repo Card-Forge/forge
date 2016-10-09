@@ -3,7 +3,6 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,6 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -405,6 +405,21 @@ public class ComputerUtilCard {
     public static int evaluateCreatureList(final CardCollectionView list) {
         return Aggregates.sum(list, creatureEvaluator);
     }
+    
+    public static Map<String, Integer> evaluateCreatureListByName(final CardCollectionView list) {
+        // Compute value for each possible target
+        Map<String, Integer> values = Maps.newHashMap();
+        for (Card c : list) {
+            String name = c.getName();
+            int val = evaluateCreature(c);
+            if (values.containsKey(name)) {
+                values.put(name, values.get(name) + val);
+            } else {
+                values.put(name, val);
+            }
+        }
+        return values;
+    }
 
     public static boolean doesCreatureAttackAI(final Player ai, final Card card) {
         AiAttackController aiAtk = new AiAttackController(ai);
@@ -547,7 +562,7 @@ public class ComputerUtilCard {
             return "";
         }
     
-        final Map<String, Integer> map = new HashMap<String, Integer>();
+        final Map<String, Integer> map = Maps.newHashMap();
     
         for (final Card c : list) {
             final String name = c.getName();
@@ -591,7 +606,7 @@ public class ComputerUtilCard {
             return "";
         }
 
-        final Map<String, Integer> map = new HashMap<String, Integer>();
+        final Map<String, Integer> map = Maps.newHashMap();
 
         for (final Card c : list) {
             for (final String var : c.getType()) {
