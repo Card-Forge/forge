@@ -27,7 +27,6 @@ import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.limited.DraftRankCache;
 import forge.model.FModel;
