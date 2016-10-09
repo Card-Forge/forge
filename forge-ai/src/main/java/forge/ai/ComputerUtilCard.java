@@ -421,13 +421,11 @@ public class ComputerUtilCard {
         return values;
     }
 
-    public static boolean doesCreatureAttackAI(final Player ai, final Card card) {
-        AiAttackController aiAtk = new AiAttackController(ai);
-        Combat combat = new Combat(ai);
-        aiAtk.declareAttackers(combat);
-        return combat.isAttacking(card);
+    public static boolean doesCreatureAttackAI(final Player aiPlayer, final Card card) {
+        AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
+        return aic.getPredictedCombat().isAttacking(card);
     }
-    
+
     /**
      * Extension of doesCreatureAttackAI() for "virtual" creatures that do not actually exist on the battlefield yet
      * such as unanimated manlands.

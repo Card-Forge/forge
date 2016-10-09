@@ -105,6 +105,7 @@ public class AiController {
     private final Player player;
     private final Game game;
     private final AiCardMemory memory;
+    private Combat predictedCombat;
     private boolean cheatShuffle;
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
@@ -131,6 +132,15 @@ public class AiController {
 
     public AiCardMemory getCardMemory() {
         return memory;
+    }
+
+    public Combat getPredictedCombat() {
+        if (predictedCombat == null) {
+            AiAttackController aiAtk = new AiAttackController(player);
+            predictedCombat = new Combat(player);
+            aiAtk.declareAttackers(predictedCombat);
+        }
+        return predictedCombat;
     }
 
     public AiController(final Player computerPlayer, final Game game0) {
@@ -1241,6 +1251,10 @@ public class AiController {
     }
 
     public List<SpellAbility> chooseSpellAbilityToPlay() {
+        // Reset cached predicted combat, as it may be stale. It will be
+        // re-created if needed and used for any AI logic that needs it.
+        predictedCombat = null;
+
         final PhaseType phase = game.getPhaseHandler().getPhase();
 
         if (game.getStack().isEmpty() && phase.isMain()) {
