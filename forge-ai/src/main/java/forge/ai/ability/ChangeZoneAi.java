@@ -32,6 +32,7 @@ import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class ChangeZoneAi extends SpellAbilityAi {
@@ -44,9 +45,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if (aiLogic.equals("Always")) {
-            return true;
-        } else if (aiLogic.equals("BeforeCombat")) {
+        if (aiLogic.equals("BeforeCombat")) {
             if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
                 return false;
             }
@@ -60,6 +59,51 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
+        // Checks for "return true" unlike checkAiLogic()
+        String aiLogic = sa.getParam("AILogic");
+        if (aiLogic != null) {
+            if (aiLogic.equals("Always")) {
+                return true;
+            }
+            if (aiLogic.equals("SameName")) {   // Declaration in Stone
+                final Game game = aiPlayer.getGame();
+                final Card source = sa.getHostCard();
+                final TargetRestrictions tgt = sa.getTargetRestrictions();
+                final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
+                CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), aiPlayer,
+                        source, sa);
+                list = CardLists.filterControlledBy(list, aiPlayer.getOpponents());
+                if (list.isEmpty()) {
+                    return false;   // no valid targets
+                }
+                // Compute value for each possible target
+                HashMap<String, Integer> values = new HashMap<>();
+                for (Card c : list) {
+                    String name = c.getName();
+                    int val = ComputerUtilCard.evaluateCreature(c);
+                    if (values.containsKey(name)) {
+                        values.put(name, values.get(name) + val);
+                    } else {
+                        values.put(name, val);
+                    }
+                }
+                // Get best target
+                int best = -1;
+                String target = null;
+                for (String s : values.keySet()) {
+                    if (values.get(s) > best) {
+                        best = values.get(s);
+                        target = s;
+                    }
+                }
+                for (Card c : list) {
+                    if (target.equals(c.getName())) {
+                        sa.getTargets().add(c);
+                        return true;
+                    }
+                }
+            }
+        }
         String origin = null;
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
