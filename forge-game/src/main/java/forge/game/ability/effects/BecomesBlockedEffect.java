@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;

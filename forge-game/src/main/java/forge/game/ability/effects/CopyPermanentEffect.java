@@ -9,7 +9,6 @@ import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;

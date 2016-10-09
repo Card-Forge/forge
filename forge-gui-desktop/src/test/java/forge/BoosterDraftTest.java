@@ -7,7 +7,6 @@ import forge.game.card.Card;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.limited.IBoosterDraft;
-import forge.limited.LimitedPlayer;
 import forge.model.FModel;
 
 import org.testng.annotations.Test;

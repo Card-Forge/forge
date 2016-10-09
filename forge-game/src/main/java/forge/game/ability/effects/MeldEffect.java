@@ -2,14 +2,12 @@ package forge.game.ability.effects;
 
 import forge.card.CardStateName;
 import forge.game.Game;
-import forge.game.GameAction;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 
@@ -17,7 +15,6 @@ public class MeldEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card hostCard = sa.getHostCard();
-        String name = sa.getParam("Name");
         String primName = sa.getParam("Primary");
         String secName = sa.getParam("Secondary");
         Game game = hostCard.getGame();

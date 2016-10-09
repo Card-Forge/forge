@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.FThreads;
 import forge.GuiBase;
 import forge.util.BuildInfo;

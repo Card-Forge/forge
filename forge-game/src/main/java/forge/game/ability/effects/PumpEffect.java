@@ -201,7 +201,6 @@ public class PumpEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final long timestamp = game.getNextTimestamp();
 
-        String pumpRemembered = null;
         String pumpForget = null;
         String pumpImprint = null;
 
