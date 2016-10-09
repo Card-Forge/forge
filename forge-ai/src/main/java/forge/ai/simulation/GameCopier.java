@@ -236,7 +236,7 @@ public class GameCopier {
             
             int setPower = c.getSetPower();
             int setToughness = c.getSetToughness();
-            if (setPower != -1 || setToughness != -1)  {
+            if (setPower != Integer.MAX_VALUE || setToughness != Integer.MAX_VALUE)  {
                 // TODO: Copy the full list with timestamps.
                 newCard.addNewPT(setPower, setToughness, newGame.getNextTimestamp());
             }

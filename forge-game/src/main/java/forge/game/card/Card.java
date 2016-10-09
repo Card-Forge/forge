@@ -2700,7 +2700,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Get the latest set Power and Toughness of this Card.
      *
      * @return the latest set Power and Toughness of this {@link Card} as the
-     * left and right values of a {@link Pair}, respectively. A value of -1
+     * left and right values of a {@link Pair}, respectively. A value of Integer.MAX_VALUE
      * means that particular property has not been set.
      */
     private synchronized Pair<Integer, Integer> getLatestPT() {

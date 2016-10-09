@@ -191,7 +191,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     // set power of clone
                     if (sa.hasParam("SetPower")) {
                         String rhs = sa.getParam("SetPower");
-                        int power = -1;
+                        int power = Integer.MAX_VALUE;
                         try {
                             power = Integer.parseInt(rhs);
                         } catch (final NumberFormatException e) {
@@ -208,7 +208,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     // set toughness of clone
                     if (sa.hasParam("SetToughness")) {
                         String rhs = sa.getParam("SetToughness");
-                        int toughness = -1;
+                        int toughness = Integer.MAX_VALUE;
                         try {
                             toughness = Integer.parseInt(rhs);
                         } catch (final NumberFormatException e) {

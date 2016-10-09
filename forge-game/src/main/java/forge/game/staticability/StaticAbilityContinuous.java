@@ -115,9 +115,9 @@ public final class StaticAbilityContinuous {
         String addT = "";
         int toughnessBonus = 0;
         String setP = "";
-        int setPower = -1;
+        int setPower = Integer.MAX_VALUE;
         String setT = "";
-        int setToughness = -1;
+        int setToughness = Integer.MAX_VALUE;
         int keywordMultiplier = 1;
 
         String[] addKeywords = null;
@@ -462,13 +462,13 @@ public final class StaticAbilityContinuous {
             // set P/T
             if (layer == StaticAbilityLayer.SETPT) {
                 if (params.containsKey("CharacteristicDefining")) {
-                    if (setPower != -1) {
+                    if (setPower != Integer.MAX_VALUE) {
                         affectedCard.setBasePower(setPower);
                     }
-                    if (setToughness != -1) {
+                    if (setToughness != Integer.MAX_VALUE) {
                         affectedCard.setBaseToughness(setToughness);
                     }
-                } else if ((setPower != -1) || (setToughness != -1)) {
+                } else if ((setPower != Integer.MAX_VALUE) || (setToughness != Integer.MAX_VALUE)) {
                     // non CharacteristicDefining
                     if (setP.startsWith("AffectedX")) {
                         setPower = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, setP));

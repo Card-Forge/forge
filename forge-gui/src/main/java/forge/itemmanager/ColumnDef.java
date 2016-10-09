@@ -428,15 +428,17 @@ public enum ColumnDef {
         int result = -1;
         if (i instanceof PaperCard) {
             result = ((IPaperCard) i).getRules().getIntPower();
-            if (result == -1) {
-                result = ((IPaperCard) i).getRules().getInitialLoyalty();
+            if (result == Integer.MAX_VALUE) {
+                if (((IPaperCard)i).getRules().getType().isPlaneswalker()) {
+                    result = ((IPaperCard) i).getRules().getInitialLoyalty();
+                }
             }
         }
         return result;
     }
 
     private static Integer toToughness(final InventoryItem i) {
-        return i instanceof PaperCard ? ((IPaperCard) i).getRules().getIntToughness() : -1;
+        return i instanceof PaperCard ? ((IPaperCard) i).getRules().getIntToughness() : Integer.MAX_VALUE;
     }
 
     private static Integer toCMC(final InventoryItem i) {

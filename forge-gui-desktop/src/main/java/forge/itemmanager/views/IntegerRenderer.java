@@ -21,7 +21,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * A quick converter to avoid -1 being displayed for unapplicable values.
+ * A quick converter to avoid Integer.MAX_VALUE being displayed for unapplicable values.
  */
 @SuppressWarnings("serial")
 public class IntegerRenderer extends ItemCellRenderer {
@@ -36,7 +36,7 @@ public class IntegerRenderer extends ItemCellRenderer {
     public final Component getTableCellRendererComponent(final JTable table, Object value0,
             final boolean isSelected, final boolean hasFocus, final int row, final int column) {
 
-        if (value0 == null || (int)value0 == -1) { value0 = "-"; }
+        if (value0 == null || (int)value0 == Integer.MAX_VALUE) { value0 = "-"; }
         return super.getTableCellRendererComponent(table, value0, isSelected, hasFocus, row, column);
     }
 }
