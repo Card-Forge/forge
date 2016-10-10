@@ -604,6 +604,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
         Card source = sa.getHostCard();
 
+        // need to update active trigger
+        game.getTriggerHandler().resetActiveTriggers();
+
         if (source.isCopiedSpell() || sa.isAbility()) {
             // do nothing
         }
