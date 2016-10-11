@@ -1909,6 +1909,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
             } else if (keyword.equals("Rebound") || keyword.equals("Retrace")) {
                 sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
+            }else if (keyword.startsWith("Presence")) {
+                sb.append(Keyword.getInstance(keyword).getReminderText());
             }
         }
         return sb;
