@@ -17,6 +17,8 @@
  */
 package forge.game.cost;
 
+import com.google.common.base.Strings;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -49,11 +51,7 @@ public class CostPayEnergy extends CostPart {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Pay ");
-
-        int count = Integer.parseInt(getAmount()) - paidAmount;
-        for (int i = 0; i < count; i++) {
-            sb.append("{E}");
-        }
+        sb.append(Strings.repeat("{E}", Integer.parseInt(getAmount())));
         return sb.toString();
     }
 
