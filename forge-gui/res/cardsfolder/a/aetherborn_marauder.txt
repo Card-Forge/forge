@@ -5,12 +5,12 @@ PT:2/2
 K:Flying
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMoveCounters | TriggerDescription$ When CARDNAME enters the battlefield, move any number of +1/+1 counters from other permanents you control onto CARDNAME.
-SVar:TrigMoveCounters:DB$ Repeat | MaxRepeat$ RepeatCap | RepeatSubAbility$ PermanentToAbsorb
+SVar:TrigMoveCounters:DB$ Repeat | MaxRepeat$ RepeatCap | References$ RepeatCap | RepeatSubAbility$ PermanentToAbsorb
 SVar:RepeatCap:Count$Valid Permanent.YouCtrl+Other+counters_GE1_P1P1
 SVar:PermanentToAbsorb:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Permanent.YouCtrl+Other+counters_GE1_P1P1 | ChoiceTitle$ Move +1/+1 counters from? | RememberChosen$ True | SubAbility$ DBAmountToMove
-SVar:DBAmountToMove:DB$ ChooseNumber | Max$ Max | ListTitle$ Take how many +1/+1 counters? | SubAbility$ DBMove
+SVar:DBAmountToMove:DB$ ChooseNumber | Max$ Max | References$ Max | ListTitle$ Take how many +1/+1 counters? | SubAbility$ DBMove
 SVar:Max:Remembered$CardCounters.P1P1
-SVar:DBMove:DB$ MoveCounter | Source$ Remembered | Defined$ Self | CounterNum$ X | CounterType$ P1P1 | SubAbility$ DBCleanup
+SVar:DBMove:DB$ MoveCounter | Source$ Remembered | Defined$ Self | References$ X | CounterNum$ X | CounterType$ P1P1 | SubAbility$ DBCleanup
 SVar:X:Count$ChosenNumber
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherborn_marauder.jpg
