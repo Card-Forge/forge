@@ -855,7 +855,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean isFirstCombat() {
-        return (nCombatsThisTurn == 1);
+        return (nCombatsThisTurn == 0);
     }
 
     public final boolean isFirstUpkeep() {
