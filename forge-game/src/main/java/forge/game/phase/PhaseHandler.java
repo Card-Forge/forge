@@ -513,6 +513,8 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         nCombatsThisTurn++;
+        // Reset all active Triggers
+        game.getTriggerHandler().resetActiveTriggers();
 
         // Prepare and fire event 'attackers declared'
         Multimap<GameEntity, Card> attackersMap = ArrayListMultimap.create();
@@ -855,7 +857,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean isFirstCombat() {
-        return (nCombatsThisTurn == 0);
+        return (nCombatsThisTurn == 1);
     }
 
     public final boolean isFirstUpkeep() {
