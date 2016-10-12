@@ -1042,6 +1042,13 @@ public class AttachAi extends SpellAbilityAi {
             list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
         } else {
             list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
+
+            if (attachSource.isAura()) {
+                list = CardLists.filter(list, CardPredicates.canBeEnchantedBy(attachSource));
+            } else if (attachSource.isEquipment()) {
+                list = CardLists.filter(list, CardPredicates.canBeEquippedBy(attachSource));
+            }
+
             // TODO If Attaching without casting, don't need to actually target.
             // I believe this is the only case where mandatory will be true, so just
             // check that when starting that work
