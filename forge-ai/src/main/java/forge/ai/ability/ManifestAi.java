@@ -3,7 +3,7 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.cost.Cost;
+import forge.game.card.CardCollectionView;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -18,21 +18,24 @@ import forge.util.MyRandom;
 public class ManifestAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Cost cost = sa.getPayCosts();
-        final Game game = ai.getGame();
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        // Manifest doesn't have any "Pay X to manifest X triggers"
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
-        }
+        return true;
+    }
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
+     */
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        return true;
+    }
 
-        if (sa.hasParam("AILogic")) {
-            if ("Never".equals(sa.getParam("AILogic"))) {
-                return false;
-            }
-        }
-
-        PhaseHandler ph = game.getPhaseHandler();
+    /**
+     * Checks if the AI will play a SpellAbility based on its phase restrictions
+     */
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        final Card source = sa.getHostCard();
         // Only manifest things on your turn if sorcery speed, or would pump one of my creatures
         if (ph.isPlayerTurn(ai)) {
             if (ph.getPhase().isBefore(PhaseType.MAIN2)
@@ -51,29 +54,8 @@ public class ManifestAi extends SpellAbilityAi {
                 return false;
             }
         } else {
-        	// try to ambush attackers
-        	if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-        		return false;
-        	}
-        }
-
-        final Card source = sa.getHostCard();
-
-        if (cost != null) {
-            // Sacrifice is the only cost Manifest actually has, but i'll leave these others for now
-            if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, null)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, cost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
+            // try to ambush attackers
+            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         }
@@ -87,8 +69,48 @@ public class ManifestAi extends SpellAbilityAi {
                 return false;
             }
         }
+        
+        return true;
+    }
 
-		// Probably should be a little more discerning on playing during OPPs turn
+    @Override
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        final Game game = ai.getGame();
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
+
+        // Library is empty, no Manifest
+        final CardCollectionView library = ai.getCardsIn(ZoneType.Library);
+        if (library.isEmpty())
+            return false;
+
+        // try not to mill himself with Manifest
+        if (library.size() < 5 && !ai.isCardInPlay("Laboratory Maniac")) {
+            return false;
+        }
+
+        final Card topCard = library.getFirst();
+        if (topCard.getView().mayPlayerLook(ai.getView())) {
+            // try to avoid manifest a non Permanent
+            if (!topCard.isPermanent())
+                return false;
+
+            // do not manifest a card with X in its cost
+            if (topCard.getManaCost().countX() > 0)
+                return false;
+
+            // try to avoid manifesting a creature with zero or less thoughness
+            if (topCard.isCreature() && topCard.getNetToughness() <= 0)
+                return false;
+
+            // card has ETBTrigger or ETBReplacement
+            if (topCard.hasETBTrigger(false) || topCard.hasETBReplacement()) {
+                return false;
+            }
+        }
+
+        // Probably should be a little more discerning on playing during OPPs turn
         if (SpellAbilityAi.playReusable(ai, sa)) {
             return true;
         }
@@ -102,19 +124,4 @@ public class ManifestAi extends SpellAbilityAi {
 
         return MyRandom.getRandom().nextFloat() < .8;
     }
-
-    @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        // Manifest doesn't have any "Pay X to manifest X triggers"
-
-        return true;
-    }
-    /* (non-Javadoc)
-     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
-     */
-    @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        return true;
-    }
-
 }
