@@ -91,7 +91,9 @@ public class ComputerUtilCost {
                     return false;
                 }
 
-                if (sa != null) {
+                // check the sa what the PaymentDecision is.
+                // ignore Loyality abilities with Zero as Cost
+                if (sa != null && !CounterType.LOYALTY.equals(type)) {
                     final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa);
                     PaymentDecision pay = decision.visit(remCounter);
                     if (pay == null || pay.c <= 0) {
