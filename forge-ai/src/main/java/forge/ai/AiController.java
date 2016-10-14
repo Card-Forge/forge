@@ -151,14 +151,16 @@ public class AiController {
     }
 
     private List<SpellAbility> getPossibleETBCounters() {
-        final Player opp = player.getOpponent();
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
         all.addAll(player.getCardsIn(ZoneType.Exile));
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
         if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
             all.add(player.getCardsIn(ZoneType.Library).get(0));
         }
-        all.addAll(opp.getCardsIn(ZoneType.Exile));
+
+        for (final Player opp : player.getOpponents()) {
+            all.addAll(opp.getCardsIn(ZoneType.Exile));
+        }
 
         final List<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : all) {
@@ -756,7 +758,7 @@ public class AiController {
             
             // Prevent the computer from summoning Ball Lightning type creatures after attacking
             if (card.hasSVar("EndOfTurnLeavePlay")
-                    && (game.getPhaseHandler().isPlayerTurn(player.getOpponent())
+                    && (!game.getPhaseHandler().isPlayerTurn(player)
                          || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                          || player.hasKeyword("Skip your next combat phase."))) {
                 return AiPlayDecision.AnotherTime;
@@ -1182,7 +1184,7 @@ public class AiController {
                     return AiPlayDecision.CostNotAcceptable;
                 }
     
-                if (!ComputerUtilCost.checkRemoveCounterCost(cost, card)) {
+                if (!ComputerUtilCost.checkRemoveCounterCost(cost, card, spell)) {
                     return AiPlayDecision.CostNotAcceptable;
                 }
             }

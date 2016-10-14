@@ -58,6 +58,9 @@ public class ComputerUtilCost {
         return true;
     }
 
+    public static boolean checkRemoveCounterCost(final Cost cost, final Card source) {
+    	return checkRemoveCounterCost(cost, source, null);
+    }
     /**
      * Check remove counter cost.
      * 
@@ -67,7 +70,7 @@ public class ComputerUtilCost {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkRemoveCounterCost(final Cost cost, final Card source) {
+    public static boolean checkRemoveCounterCost(final Cost cost, final Card source, final SpellAbility sa) {
         if (cost == null) {
             return true;
         }
@@ -81,6 +84,19 @@ public class ComputerUtilCost {
                         return false;
                     }
                     continue;
+                }
+
+                // even if it can be paid, removing zero counters should not be done. 
+                if (part.payCostFromSource() && source.getCounters(type) <= 0) {
+                    return false;
+                }
+
+                if (sa != null) {
+                    final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa);
+                    PaymentDecision pay = decision.visit(remCounter);
+                    if (pay == null || pay.c <= 0) {
+                        return false;
+                    }
                 }
 
                 //don't kill the creature
@@ -314,8 +330,8 @@ public class ComputerUtilCost {
                 if (isVehicle) {
                     for (SpellAbility sa : source.getSpellAbilities()) {
                         if (sa.getApi() == ApiType.Animate) {
-                            Card vehicle = CardFactory.copyCard(sa.getHostCard(), true);
-                            AnimateAi.becomeAnimated(vehicle, false, sa);
+                            Card vehicle = CardFactory.copyCard(sa.getHostCard(), false);
+                            AnimateAi.becomeAnimated(vehicle, sa.getHostCard().hasSickness(), sa);
                             final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
                             String type = part.getType();
                             String totalP = type.split("withTotalPowerGE")[1];
