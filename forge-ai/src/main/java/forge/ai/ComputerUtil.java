@@ -298,9 +298,8 @@ public class ComputerUtil {
             final String[] prefValid = activate.getSVar("AIPreference").split("\\$");
             if (prefValid[0].equals(pref)) {
                 final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
-                if (prefList.size() != 0) {
-                    CardLists.shuffle(prefList);
-                    return prefList.get(0);
+                if (!prefList.isEmpty()) {
+                	return ComputerUtilCard.getWorstAI(prefList);
                 }
             }
         }
