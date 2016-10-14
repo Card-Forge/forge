@@ -5453,6 +5453,19 @@ public class Card extends GameEntity implements Comparable<Card> {
         return shares;
     }
 
+    public final boolean sharesCMCWith(final int n) {
+        //need to get GameState for Discarded Cards
+        final Card host = game.getCardState(this);
+
+        if (host.isSplitCard() && host.getCurrentStateName() == CardStateName.Original) {
+            int x = host.getCMC(SplitCMCMode.LeftSplitCMC);
+            int x2 = host.getCMC(SplitCMCMode.RightSplitCMC);
+            return x == n || x2 == n;
+        } else {
+            return host.getCMC() == n;
+        }
+    }
+    
     public final boolean sharesCMCWith(final Card c1) {
         int x;
         int x2 = -1;
@@ -5464,15 +5477,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Card other = game.getCardState(c1);
 
         if (host.isSplitCard() && host.getCurrentStateName() == CardStateName.Original) {
-            x = host.getState(CardStateName.LeftSplit).getManaCost().getCMC();
-            x2 = host.getState(CardStateName.RightSplit).getManaCost().getCMC();
+            x = host.getCMC(SplitCMCMode.LeftSplitCMC);
+            x2 = host.getCMC(SplitCMCMode.RightSplitCMC);
         } else {
             x = host.getCMC();
         }
 
         if (other.isSplitCard() && other.getCurrentStateName() == CardStateName.Original) {
-            y = other.getState(CardStateName.LeftSplit).getManaCost().getCMC();
-            y2 = other.getState(CardStateName.RightSplit).getManaCost().getCMC();
+            y = other.getCMC(SplitCMCMode.LeftSplitCMC);
+            y2 = other.getCMC(SplitCMCMode.RightSplitCMC);
 
             if (host.isSplitCard() && host.getCurrentStateName() == CardStateName.Original) {
                 return x == y || x == y2 || x2 == y || x2 == y2;
