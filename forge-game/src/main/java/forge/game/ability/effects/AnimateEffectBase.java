@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
-    void doAnimate(final Card c, final SpellAbility sa, final int power, final int toughness,
+    void doAnimate(final Card c, final SpellAbility sa, final Integer power, final Integer toughness,
             final CardType addType, final CardType removeType, final String colors,
             final List<String> keywords, final List<String> removeKeywords,
             final List<String> hiddenKeywords, final long timestamp) {
@@ -76,7 +76,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             removeCreatureTypes = true;
         }
 
-        if ((power != -1) || (toughness != -1)) {
+        if ((power != null) || (toughness != null)) {
             c.addNewPT(power, toughness, timestamp);
         }
 

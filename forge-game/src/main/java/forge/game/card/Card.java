@@ -2708,29 +2708,35 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     private synchronized Pair<Integer, Integer> getLatestPT() {
         // Find latest set power
-        long maxPowerTimestamp = -2;
-        int latestPower = Integer.MAX_VALUE;
-        for (final CardPowerToughness pt : newPT) {
-            if (pt.getTimestamp() >= maxPowerTimestamp && pt.getPower() != Integer.MAX_VALUE) {
-                maxPowerTimestamp = pt.getTimestamp();
-                latestPower = pt.getPower();
+        newPT.sort(new Comparator<CardPowerToughness>() {
+            @Override
+            public int compare(CardPowerToughness o1, CardPowerToughness o2) {
+                return o1.getTimestamp() < o2.getTimestamp() ? -1 : o1.getTimestamp() == o2.getTimestamp() ? 0 : 1;
             }
+        });
+
+        Integer power = null,
+                toughness = null;
+
+        int size = newPT.size();
+        for(int i = size - 1; i >= 0; i--) {
+            CardPowerToughness pt = newPT.get(i);
+            if (power == null && pt.getPower() != null)
+                power = pt.getPower();
+            if (toughness == null && pt.getToughness() != null)
+                toughness = pt.getToughness();
         }
 
-        // Find latest set toughness
-        long maxToughnessTimestamp = -2;
-        int latestToughness = Integer.MAX_VALUE;
-        for (final CardPowerToughness pt : newPT) {
-            if (pt.getTimestamp() >= maxToughnessTimestamp && pt.getToughness() != Integer.MAX_VALUE) {
-                maxToughnessTimestamp = pt.getTimestamp();
-                latestToughness = pt.getToughness();
-            }
-        }
+        if (power == null)
+            power = Integer.MAX_VALUE;
 
-        return Pair.of(latestPower, latestToughness);
+        if (toughness == null)
+            toughness = Integer.MAX_VALUE;
+
+        return Pair.of(power, toughness);
     }
 
-    public final void addNewPT(final int power, final int toughness, final long timestamp) {
+    public final void addNewPT(final Integer power, final Integer toughness, final long timestamp) {
         newPT.add(new CardPowerToughness(power, toughness, timestamp));
         currentState.getView().updatePower(this);
         currentState.getView().updateToughness(this);

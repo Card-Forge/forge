@@ -38,11 +38,11 @@ public class AnimateAllEffect extends AnimateEffectBase {
         final Map<String, String> svars = host.getSVars();
 
         // AF specific sa
-        int power = -1;
+        Integer power = null;
         if (sa.hasParam("Power")) {
             power = AbilityUtils.calculateAmount(host, sa.getParam("Power"), sa);
         }
-        int toughness = -1;
+        Integer toughness = null;
         if (sa.hasParam("Toughness")) {
             toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }

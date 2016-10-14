@@ -49,11 +49,11 @@ public class AnimateEffect extends AnimateEffectBase {
         }
 
         // AF specific sa
-        int power = -1;
+        Integer power = null;
         if (sa.hasParam("Power")) {
             power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
         }
-        int toughness = -1;
+        Integer toughness = null;
         if (sa.hasParam("Toughness")) {
             toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
         }

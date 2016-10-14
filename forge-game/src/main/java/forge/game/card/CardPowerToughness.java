@@ -27,8 +27,8 @@ package forge.game.card;
  */
 public class CardPowerToughness {
 
-    private final int power;
-    private final int toughness;
+    private final Integer power;
+    private final Integer toughness;
     private long timeStamp = 0;
 
     /**
@@ -54,7 +54,7 @@ public class CardPowerToughness {
      * @param stamp
      *            a long.
      */
-    CardPowerToughness(final int newPower, final int newToughness, final long stamp) {
+    CardPowerToughness(final Integer newPower, final Integer newToughness, final long stamp) {
         this.power = newPower;
         this.toughness = newToughness;
         this.timeStamp = stamp;
@@ -66,7 +66,7 @@ public class CardPowerToughness {
      * 
      * @return int
      */
-    public final int getPower() {
+    public final Integer getPower() {
         return this.power;
     }
 
@@ -76,7 +76,7 @@ public class CardPowerToughness {
      * 
      * @return int
      */
-    public final int getToughness() {
+    public final Integer getToughness() {
         return this.toughness;
     }
 
@@ -93,7 +93,7 @@ public class CardPowerToughness {
      *            a long.
      * @return a boolean.
      */
-    public final boolean equals(final int newPower, final int newToughness, final long stamp) {
+    public final boolean equals(final Integer newPower, final Integer newToughness, final long stamp) {
         return (this.timeStamp == stamp) && (this.power == newPower) && (this.toughness == newToughness);
     }
 }
