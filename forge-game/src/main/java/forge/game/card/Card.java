@@ -2708,7 +2708,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     private synchronized Pair<Integer, Integer> getLatestPT() {
         // Find latest set power
-        newPT.sort(new Comparator<CardPowerToughness>() {
+        Collections.sort(newPT, new Comparator<CardPowerToughness>() {
             @Override
             public int compare(CardPowerToughness o1, CardPowerToughness o2) {
                 return o1.getTimestamp() < o2.getTimestamp() ? -1 : o1.getTimestamp() == o2.getTimestamp() ? 0 : 1;
