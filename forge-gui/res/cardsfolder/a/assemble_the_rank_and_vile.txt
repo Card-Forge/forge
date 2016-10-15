@@ -1,0 +1,10 @@
+Name:Assemble the Rank and Vile
+ManaCost:no cost
+Types:Conspiracy
+K:Hidden agenda
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.NamedCard+YouCtrl | EffectZone$ Battlefield | AddTrigger$ AtRaVDie | AddSVar$ AtRaVZombie | Description$ Creatures you control with the chosen name have "When this creature dies, you may pay {B}. If you do, put a 2/2 black Zombie creature token onto the battlefield tapped."
+SVar:AtRaVDie:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ AtRaVZombie | TriggerDescription$ When this creature dies, you may pay {B}. If you do, put a 2/2 black Zombie creature token onto the battlefield tapped.
+SVar:AtRaVZombie:AB$ Token | Cost$ B | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenTapped$ True | TokenImage$ b 2 2 zombie CN2 
+SVar:AgendaLogic:BestCreatureInComputerDeck
+SVar:Picture:http://www.wizards.com/global/images/magic/general/assemble_the_rank_and_vile.jpg
+Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly name a card. You may turn this conspiracy face up any time and reveal the chosen name.)\nCreatures you control with the chosen name have "When this creature dies, you may pay {B}. If you do, put a 2/2 black Zombie creature token onto the battlefield tapped."

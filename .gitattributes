@@ -2188,6 +2188,7 @@ forge-gui/res/cardsfolder/a/assault_strobe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/assault_suit.txt -text
 forge-gui/res/cardsfolder/a/assault_zeppelid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/assemble_the_legion.txt -text
+forge-gui/res/cardsfolder/a/assemble_the_rank_and_vile.txt -text
 forge-gui/res/cardsfolder/a/assembled_alphas.txt -text
 forge-gui/res/cardsfolder/a/assembly_hall.txt -text
 forge-gui/res/cardsfolder/a/assembly_worker.txt svneol=native#text/plain
@@ -5014,6 +5015,7 @@ forge-gui/res/cardsfolder/d/dodecapod.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dogged_hunter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dogpile.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dolmen_gate.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/domesticated_hydra.txt -text
 forge-gui/res/cardsfolder/d/domestication.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dominarias_judgment.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dominate.txt svneol=native#text/plain
