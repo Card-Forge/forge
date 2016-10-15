@@ -16440,6 +16440,8 @@ forge-gui/res/cardsfolder/u/utter_end.txt -text
 forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/upcoming/assemble_the_rank_and_vile.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/upcoming/domesticated_hydra.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/v/vacuumelt.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vaevictis_asmadi.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vagrant_plowbeasts.txt svneol=native#text/plain
