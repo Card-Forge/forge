@@ -7,11 +7,10 @@ import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -315,11 +314,10 @@ public class ComputerUtilCost {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkTapTypeCost(final Player ai, final Cost cost, final Card source) {
+    public static boolean checkTapTypeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sa) {
         if (cost == null) {
             return true;
         }
-        boolean isVehicle = source.hasStartOfKeyword("Crew");
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostTapType) {
                 /*
@@ -329,28 +327,25 @@ public class ComputerUtilCost {
                  * - block against evasive (flyers, intimidate, etc.)
                  * - break board stall by racing with evasive vehicle
                  */
-                if (isVehicle) {
-                    for (SpellAbility sa : source.getSpellAbilities()) {
-                        if (sa.getApi() == ApiType.Animate) {
-                            Card vehicle = CardFactory.copyCard(sa.getHostCard(), false);
-                            AnimateAi.becomeAnimated(vehicle, sa.getHostCard().hasSickness(), sa);
-                            final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
-                            String type = part.getType();
-                            String totalP = type.split("withTotalPowerGE")[1];
-                            type = type.replace("+withTotalPowerGE" + totalP, "");
-                            CardCollection exclude = CardLists.getValidCards(
-                                    new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), type.split(";"),
-                                    source.getController(), source, sa);
-                            exclude = CardLists.filter(exclude, new Predicate<Card>() {
-                                @Override
-                                public boolean apply(final Card c) {
-                                    return ComputerUtilCard.evaluateCreature(c) >= vehicleValue;
-                                }
-                            }); // exclude creatures >= vehicle
-                            return ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true,
-                                    Integer.parseInt(totalP), exclude) != null;
+                if (sa.hasParam("Crew")) {
+                    //Card vehicle = CardFactory.copyCard(sa.getHostCard(), true);
+                	Card vehicle = CardUtil.getLKICopy(source);
+                    AnimateAi.becomeAnimated(vehicle, source.hasSickness(), sa);
+                    final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
+                    String type = part.getType();
+                    String totalP = type.split("withTotalPowerGE")[1];
+                    type = type.replace("+withTotalPowerGE" + totalP, "");
+                    CardCollection exclude = CardLists.getValidCards(
+                            new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), type.split(";"),
+                            source.getController(), source, sa);
+                    exclude = CardLists.filter(exclude, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return ComputerUtilCard.evaluateCreature(c) >= vehicleValue;
                         }
-                    }
+                    }); // exclude creatures >= vehicle
+                    return ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true,
+                            Integer.parseInt(totalP), exclude) != null;
                 }
             	return false;
             }

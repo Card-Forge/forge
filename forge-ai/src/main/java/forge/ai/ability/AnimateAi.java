@@ -13,7 +13,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -88,7 +87,7 @@ public class AnimateAi extends SpellAbilityAi {
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
                 ComputerUtilCard.sortByEvaluateCreature(list);
                 if (!list.isEmpty() && list.size() == nToSac && ComputerUtilCost.canPayCost(sa, ai)) {
-                    Card animatedCopy = CardFactory.copyCard(source, true);
+                    Card animatedCopy = CardUtil.getLKICopy(source);//CardFactory.copyCard(source, false);
                     becomeAnimated(animatedCopy, source.hasSickness(), sa);
                     list.add(animatedCopy);
                     list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard(),
@@ -139,7 +138,7 @@ public class AnimateAi extends SpellAbilityAi {
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getApi() == ApiType.Sacrifice) {
             return true;    // interrupt sacrifice
         }
-        if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source)) {
+        if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa)) {
             return false;   // prevent crewing with equal or better creatures
         }
         if (null == tgt) {
@@ -174,7 +173,7 @@ public class AnimateAi extends SpellAbilityAi {
                 }
 
                 if (!SpellAbilityAi.isSorcerySpeed(sa) && !sa.hasParam("Permanent")) {
-                    Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer, c.getGame());
+                    Card animatedCopy = CardUtil.getLKICopy(c);
                     AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
                     if (ph.isPlayerTurn(aiPlayer)
                             && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {

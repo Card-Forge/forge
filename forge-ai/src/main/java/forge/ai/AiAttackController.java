@@ -30,8 +30,8 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -125,7 +125,7 @@ public class AiAttackController {
                 if (sa.getApi() == ApiType.Animate) {
                     if (ComputerUtilCost.canPayCost(sa, defender) 
                             && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
-                        Card animatedCopy = CardFactory.copyCard(c, true);
+                        Card animatedCopy = CardUtil.getLKICopy(c);
                         AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
                         defenders.add(animatedCopy);
                     }
