@@ -10,7 +10,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -328,9 +327,7 @@ public class ComputerUtilCost {
                  * - break board stall by racing with evasive vehicle
                  */
                 if (sa.hasParam("Crew")) {
-                    //Card vehicle = CardFactory.copyCard(sa.getHostCard(), true);
-                	Card vehicle = CardUtil.getLKICopy(source);
-                    AnimateAi.becomeAnimated(vehicle, source.hasSickness(), sa);
+                	Card vehicle = AnimateAi.becomeAnimated(source, sa);
                     final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
                     String type = part.getType();
                     String totalP = type.split("withTotalPowerGE")[1];

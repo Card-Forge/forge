@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -31,10 +33,11 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * <p>
@@ -87,8 +90,7 @@ public class AnimateAi extends SpellAbilityAi {
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
                 ComputerUtilCard.sortByEvaluateCreature(list);
                 if (!list.isEmpty() && list.size() == nToSac && ComputerUtilCost.canPayCost(sa, ai)) {
-                    Card animatedCopy = CardUtil.getLKICopy(source);//CardFactory.copyCard(source, false);
-                    becomeAnimated(animatedCopy, source.hasSickness(), sa);
+                    Card animatedCopy = becomeAnimated(source, sa);
                     list.add(animatedCopy);
                     list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard(),
                             topStack);
@@ -144,8 +146,8 @@ public class AnimateAi extends SpellAbilityAi {
         if (null == tgt) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             boolean bFlag = false;
-        	boolean givesHaste = sa.hasParam("Keywords") && sa.getParam("Keywords").contains("Haste");
-        	for (final Card c : defined) {
+            boolean givesHaste = sa.hasParam("Keywords") && sa.getParam("Keywords").contains("Haste");
+            for (final Card c : defined) {
                 bFlag |= !c.isCreature() && !c.isTapped()
                         && (!c.hasSickness() || givesHaste || !ph.isPlayerTurn(aiPlayer))
                         && !c.isEquipping();
@@ -161,11 +163,11 @@ public class AnimateAi extends SpellAbilityAi {
                         toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
                     }
                     if (sa.hasParam("Keywords")) {
-                    	for (String keyword : sa.getParam("Keywords").split(" & ")) {
-                    		if (!source.hasKeyword(keyword)) {
-                    			bFlag = true;
-                    		}
-                    	}
+                        for (String keyword : sa.getParam("Keywords").split(" & ")) {
+                            if (!source.hasKeyword(keyword)) {
+                                bFlag = true;
+                            }
+                        }
                     }
                     if (power + toughness > c.getCurrentPower() + c.getCurrentToughness()) {
                         bFlag = true;
@@ -173,8 +175,7 @@ public class AnimateAi extends SpellAbilityAi {
                 }
 
                 if (!SpellAbilityAi.isSorcerySpeed(sa) && !sa.hasParam("Permanent")) {
-                    Card animatedCopy = CardUtil.getLKICopy(c);
-                    AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
+                    Card animatedCopy = becomeAnimated(c, sa);
                     if (ph.isPlayerTurn(aiPlayer)
                             && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
                         return false;
@@ -184,8 +185,8 @@ public class AnimateAi extends SpellAbilityAi {
                         return false;
                     }
                 }
-        	}
-        	return bFlag; // All of the defined stuff is animated, not very useful
+            }
+            return bFlag; // All of the defined stuff is animated, not very useful
         } else {
             sa.resetTargets();
             if (!animateTgtAI(sa)) {
@@ -213,29 +214,105 @@ public class AnimateAi extends SpellAbilityAi {
         if (sa.usesTargeting() && !animateTgtAI(sa) && !mandatory) {
             return false;
         }
-
-        // Improve AI for triggers. If source is a creature with:
-        // When ETB, sacrifice a creature. Check to see if the AI has something
-        // to sacrifice
-
-        // Eventually, we can call the trigger of ETB abilities with
-        // not mandatory as part of the checks to cast something
-        if (sa.hasParam("AITgts")) {
-            final TargetRestrictions tgt = sa.getTargetRestrictions();
-            final Card animateSource = sa.getHostCard();
-            CardCollectionView list = aiPlayer.getGame().getCardsIn(tgt.getZone());
-            list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), animateSource, sa);
-            CardCollection prefList = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(),
-                    animateSource);
-            if (!prefList.isEmpty()) {
-                CardLists.shuffle(prefList);
-                sa.getTargets().add(prefList.getFirst());
-            }
-        }
         return true;
     }
 
     private boolean animateTgtAI(final SpellAbility sa) {
+        final Player ai = sa.getActivatingPlayer();
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        
+        final CardType types = new CardType();
+        if (sa.hasParam("Types")) {
+            types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
+        }
+
+        // something is used for animate into creature
+        if (types.isCreature()) {
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
+            final Card source = sa.getHostCard();
+            CardCollectionView list = ai.getGame().getCardsIn(tgt.getZone());
+            list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source, sa);
+            // need to targetable
+            list = CardLists.getTargetableCards(list, sa);
+
+            // try to look for AI targets if able
+            if (sa.hasParam("AITgts")) {
+                CardCollection prefList = CardLists.getValidCards(list, sa.getParam("AITgts").split(","), ai, source, sa);
+                if(!prefList.isEmpty()) {
+                    list = prefList;
+                }
+            }
+
+            // list is empty, no possible targets
+            if (list.isEmpty()) {
+                return false;
+            }
+
+            Map<Card, Integer> data = Maps.newHashMap();
+            for (final Card c : list) {
+                // don't use Permanent animate on something that would leave the field
+                if (c.hasSVar("EndOfTurnLeavePlay") && sa.hasParam("Permanent")) {
+                    continue;
+                }
+
+                // if tapped it might not attack or block
+                if (c.isTapped()) {
+                    continue;
+                }
+
+                // make Animated copy and evaluate it
+                final Card animatedCopy = becomeAnimated(c, sa);
+                int aValue = ComputerUtilCard.evaluateCreature(animatedCopy);
+
+                // animated creature has zero toughness, don't do that
+                if (animatedCopy.getNetToughness() <= 0) {
+                    continue;
+                }
+
+                // if original is already a Creature,
+                // evaluate their value to check if it becomes better
+                if (c.isCreature()) {
+                    int cValue = ComputerUtilCard.evaluateCreature(c);
+                    if (cValue <= aValue)
+                        continue;
+                }
+
+                // if its player turn,
+                // check if its Permanent or that creature would attack
+                if (ph.isPlayerTurn(ai)) {
+                    if (!sa.hasParam("Permanent") && 
+                            !ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animatedCopy)) {
+                        continue;
+                    }
+                }
+
+                // store in map
+                data.put(c, aValue);
+            }
+
+            // data is empty, no good targets
+            if (data.isEmpty()) {
+                return false;
+            }
+
+            // get the best creature to be animated 
+            List<Card> maxList = Lists.newArrayList();
+            int maxValue = 0;
+            for (final Map.Entry<Card, Integer> e : data.entrySet()) {
+                int v = e.getValue(); 
+                if (v > maxValue) {
+                    maxValue = v;
+                    maxList.clear();
+                }
+                maxList.add(e.getKey());
+            }
+
+            // select the worst of the best
+            final Card worst = ComputerUtilCard.getWorstAI(maxList);
+            sa.getTargets().add(worst);
+            return true;            
+        }
+        
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that animate a target. Those can just use SVar:RemAIDeck:True until
@@ -244,6 +321,12 @@ public class AnimateAi extends SpellAbilityAi {
         return false;
     }
 
+    public static Card becomeAnimated(final Card card, final SpellAbility sa) {
+        final Card copy = CardUtil.getLKICopy(card);
+        becomeAnimated(copy, card.hasSickness(), sa);
+        return copy;
+    }
+    
     public static void becomeAnimated(final Card card, final boolean hasOriginalCardSickness, final SpellAbility sa) {
         // duplicating AnimateEffect.resolve
         final Card source = sa.getHostCard();
@@ -278,17 +361,17 @@ public class AnimateAi extends SpellAbilityAi {
             types.add(source.getChosenType());
         }
 
-        final List<String> keywords = new ArrayList<String>();
+        final List<String> keywords = Lists.newArrayList();
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
 
-        final List<String> removeKeywords = new ArrayList<String>();
+        final List<String> removeKeywords = Lists.newArrayList();
         if (sa.hasParam("RemoveKeywords")) {
             removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
         }
 
-        final List<String> hiddenKeywords = new ArrayList<String>();
+        final List<String> hiddenKeywords = Lists.newArrayList();
         if (sa.hasParam("HiddenKeywords")) {
             hiddenKeywords.addAll(Arrays.asList(sa.getParam("HiddenKeywords").split(" & ")));
         }
@@ -308,37 +391,37 @@ public class AnimateAi extends SpellAbilityAi {
             if (colors.equals("ChosenColor")) {
                 tmpDesc = CardUtil.getShortColorsString(source.getChosenColors());
             } else {
-                tmpDesc = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(","))));
+                tmpDesc = CardUtil.getShortColorsString(Lists.newArrayList(Arrays.asList(colors.split(","))));
             }
         }
         final String finalDesc = tmpDesc;
 
         // abilities to add to the animated being
-        final List<String> abilities = new ArrayList<String>();
+        final List<String> abilities = Lists.newArrayList();
         if (sa.hasParam("Abilities")) {
             abilities.addAll(Arrays.asList(sa.getParam("Abilities").split(",")));
         }
 
         // replacement effects to add to the animated being
-        final List<String> replacements = new ArrayList<String>();
+        final List<String> replacements = Lists.newArrayList();
         if (sa.hasParam("Replacements")) {
             replacements.addAll(Arrays.asList(sa.getParam("Replacements").split(",")));
         }
 
         // triggers to add to the animated being
-        final List<String> triggers = new ArrayList<String>();
+        final List<String> triggers = Lists.newArrayList();
         if (sa.hasParam("Triggers")) {
             triggers.addAll(Arrays.asList(sa.getParam("Triggers").split(",")));
         }
 
         // static abilities to add to the animated being
-        final List<String> stAbs = new ArrayList<String>();
+        final List<String> stAbs = Lists.newArrayList();
         if (sa.hasParam("staticAbilities")) {
             stAbs.addAll(Arrays.asList(sa.getParam("staticAbilities").split(",")));
         }
 
         // sVars to add to the animated being
-        final List<String> sVars = new ArrayList<String>();
+        final List<String> sVars = Lists.newArrayList();
         if (sa.hasParam("sVars")) {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
@@ -401,7 +484,7 @@ public class AnimateAi extends SpellAbilityAi {
         // TODO will all these abilities/triggers/replacements/etc. lead to
         // memory leaks or unintended effects?
         // remove abilities
-        final List<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> removedAbilities = Lists.newArrayList();
         boolean clearAbilities = sa.hasParam("OverwriteAbilities");
         boolean clearSpells = sa.hasParam("OverwriteSpells");
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
@@ -416,7 +499,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // give abilities
-        final List<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> addedAbilities = Lists.newArrayList();
         if (abilities.size() > 0) {
             for (final String s : abilities) {
                 final String actualAbility = source.getSVar(s);
@@ -427,7 +510,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // Grant triggers
-        final List<Trigger> addedTriggers = new ArrayList<Trigger>();
+        final List<Trigger> addedTriggers = Lists.newArrayList();
         if (triggers.size() > 0) {
             for (final String s : triggers) {
                 final String actualTrigger = source.getSVar(s);
@@ -437,7 +520,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // give replacement effects
-        final List<ReplacementEffect> addedReplacements = new ArrayList<ReplacementEffect>();
+        final List<ReplacementEffect> addedReplacements = Lists.newArrayList();
         if (replacements.size() > 0) {
             for (final String s : replacements) {
                 final String actualReplacement = source.getSVar(s);
@@ -448,7 +531,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // suppress triggers from the animated card
-        final List<Trigger> removedTriggers = new ArrayList<Trigger>();
+        final List<Trigger> removedTriggers = Lists.newArrayList();
         if (sa.hasParam("OverwriteTriggers") || removeAll) {
             final FCollectionView<Trigger> triggersToRemove = card.getTriggers();
             for (final Trigger trigger : triggersToRemove) {
@@ -486,7 +569,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // suppress static abilities from the animated card
-        final List<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
+        final List<StaticAbility> removedStatics = Lists.newArrayList();
         if (sa.hasParam("OverwriteStatics") || removeAll) {
             final FCollectionView<StaticAbility> staticsToRemove = card.getStaticAbilities();
             for (final StaticAbility stAb : staticsToRemove) {
@@ -496,7 +579,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // suppress static abilities from the animated card
-        final List<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
+        final List<ReplacementEffect> removedReplacements = Lists.newArrayList();
         if (sa.hasParam("OverwriteReplacements") || removeAll) {
             for (final ReplacementEffect re : card.getReplacementEffects()) {
                 re.setTemporarilySuppressed(true);
