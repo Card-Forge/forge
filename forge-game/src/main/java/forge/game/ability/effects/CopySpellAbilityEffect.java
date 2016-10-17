@@ -77,9 +77,10 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             final int spellCount = Integer.parseInt(sa.getParam("CopyMultipleSpells"));
 
             for (int multi = 0; multi < spellCount && !tgtSpells.isEmpty(); multi++) {
-                String prompt = "Select " + Lang.getOrdinal(multi) + " spell to copy to stack";
+                String prompt = "Select " + Lang.getOrdinal(multi + 1) + " spell to copy to stack";
                 SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt);
                 SpellAbility copiedSpell = CardFactory.copySpellAbilityAndSrcCard(card, chosen.getHostCard(), chosen, true);
+                copiedSpell.getHostCard().setController(card.getController(), card.getGame().getNextTimestamp());
                 copiedSpell.setActivatingPlayer(controller);
                 copies.add(copiedSpell);
                 tgtSpells.remove(chosen);
