@@ -3,7 +3,7 @@ package forge.game.keyword;
 import forge.game.cost.Cost;
 
 public class KeywordWithCost extends KeywordInstance<KeywordWithCost> {
-    private Cost cost;
+    protected Cost cost;
 
     @Override
     protected void parse(String details) {
