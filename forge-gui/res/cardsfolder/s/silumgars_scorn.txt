@@ -2,8 +2,7 @@ Name:Silumgar's Scorn
 ManaCost:U U
 Types:Instant
 K:Presence:Dragon
-K:Kicker Reveal<1/Dragon> : Generic
-A:SP$ Counter | Cost$ U U | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ 1 | ConditionCheckSVar$ TotalPresence | ConditionSVarCompare$ EQ0 | StackDescription$ SpellDescription | SubAbility$ DBCounter | SpellDescription$ Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, counter that spell instead.
+A:SP$ Counter | Cost$ U U | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ 1 | ConditionCheckSVar$ TotalPresence | ConditionSVarCompare$ EQ0 | References$ TotalPresence | StackDescription$ SpellDescription | SubAbility$ DBCounter | SpellDescription$ Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, counter that spell instead.
 SVar:DBCounter:DB$ Counter | Defined$ Targeted | References$ TotalPresence | ConditionCheckSVar$ TotalPresence | ConditionSVarCompare$ GE1 | StackDescription$ None
 SVar:TotalPresence:Count$Presence_Dragon.1.0
 DeckHints:Type$Dragon
