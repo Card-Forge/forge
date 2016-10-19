@@ -109,7 +109,7 @@ public class TriggerDamageDone extends Trigger {
             SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams2.get("SpellAbilityStackInstance");
 
             // si == null means the stack is empty
-            return si == null || si.attemptOncePerEffectTrigger(this.getHostCard());
+            return si == null || !si.hasOncePerEffectTrigger(this);
         }
 
         return true;

@@ -31,6 +31,7 @@ import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -328,9 +329,10 @@ public class TriggerHandler {
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
                 int x = 1;
+                int p = t.getHostCard().getController().getAmountOfKeyword("Panharmonicon");
 
-                if (handlePanharmonicon(t, runParams)) {
-                    x += t.getHostCard().getController().getAmountOfKeyword("Panharmonicon");
+                if (p > 0 && handlePanharmonicon(t, runParams)) {
+                    x += p;
                 }
 
                 for (int i = 0; i < x; ++i) {
@@ -396,10 +398,18 @@ public class TriggerHandler {
                     }
                 }
 
-                int x = 1;
+                if (t.getMapParams().containsKey("OncePerEffect")) {
+                    SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams.get("SpellAbilityStackInstance");
+                    if (si != null) {
+                        si.addOncePerEffectTrigger(t);
+                    }
+                }
 
-                if (handlePanharmonicon(t, runParams)) {
-                    x += t.getHostCard().getController().getAmountOfKeyword("Panharmonicon");
+                int x = 1;
+                int p = t.getHostCard().getController().getAmountOfKeyword("Panharmonicon");
+
+                if (p > 0 && handlePanharmonicon(t, runParams)) {
+                    x += p;
                 }
 
                 for (int i = 0; i < x; ++i) {
