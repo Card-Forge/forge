@@ -1411,7 +1411,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbx.append("Kicker ");
                     final Cost cost = new Cost(n[1], false);
                     sbx.append(cost.toSimpleString());
-                    if (Lists.newArrayList(n).size() > 1) {
+                    if (Lists.newArrayList(n).size() > 2) {
                         sbx.append(" and/or ");
                         final Cost cost2 = new Cost(n[2], false);
                         sbx.append(cost2.toSimpleString());
@@ -1864,7 +1864,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbx.append("Kicker ");
                     final Cost cost = new Cost(n[1], false);
                     sbx.append(cost.toSimpleString());
-                    if (Lists.newArrayList(n).size() > 1) {
+                    if (Lists.newArrayList(n).size() > 2) {
                 	    sbx.append(" and/or ");
                 	    final Cost cost2 = new Cost(n[2], false);
                         sbx.append(cost2.toSimpleString());
