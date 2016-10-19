@@ -226,7 +226,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (sa.isSpell()) {
                 final CardPlayOption o = c.mayPlay(sa.getMayPlay());
                 if (o == null) {
-                    return cardZone.is(this.getZone());
+                    return this.getZone() == null || cardZone.is(this.getZone());
                 } else if (o.getPlayer() == activator) {
                     Map<String,String> params = sa.getMayPlay().getMapParams();
 
