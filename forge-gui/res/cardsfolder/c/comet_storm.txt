@@ -2,7 +2,7 @@ Name:Comet Storm
 ManaCost:X R R
 Types:Instant
 A:SP$ DealDamage | Cost$ X R R | Announce$ Multikicker,X | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | TargetMin$ TargetsNum | TargetMax$ TargetsNum | References$ X,TargetsNum | SpellDescription$ CARDNAME deals X damage to each target creature and/or player.
-K:Multikicker 1
+K:Multikicker:1
 SVar:TargetsNum:Count$TimesKicked/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/comet_storm.jpg
 SVar:X:Count$xPaid

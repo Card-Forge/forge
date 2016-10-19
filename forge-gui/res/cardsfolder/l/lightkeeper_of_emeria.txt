@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Angel
 PT:2/4
 K:Flying
-K:Multikicker W
+K:Multikicker:W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life for each time it was kicked.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:Count$TimesKicked/Times.2

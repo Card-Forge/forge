@@ -3,7 +3,7 @@ ManaCost:3 U U
 Types:Creature Sphinx
 PT:3/5
 K:Flying
-K:Kicker 1 U
+K:Kicker:1 U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notkicked | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards. Then if it wasn't kicked, discard three cards.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Secondary$ True | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, draw three cards.
 SVar:TrigKicker:DB$Draw | Cost$ 0 | NumCards$ 3

@@ -1,7 +1,7 @@
 Name:Dwarven Landslide
 ManaCost:3 R
 Types:Sorcery
-K:Kicker 2 R Sac<1/Land>
+K:Kicker:2 R Sac<1/Land>
 A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TargetMin$ X | TargetMax$ X | References$ X | TgtPrompt$ Select target land | SpellDescription$ Destroy target land. If CARDNAME was kicked, destroy another target land.
 SVar:X:Count$Kicked.2.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_landslide.jpg

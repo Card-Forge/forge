@@ -2,7 +2,7 @@ Name:Ravaging Riftwurm
 ManaCost:1 G G
 Types:Creature Wurm
 PT:6/6
-K:Kicker 4
+K:Kicker:4
 K:Vanishing:2
 K:etbCounter:TIME:3:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with three additional time counters on it.
 SVar:WasKicked:Count$Kicked.1.0

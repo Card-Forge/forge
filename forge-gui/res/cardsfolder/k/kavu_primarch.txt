@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Kavu
 PT:3/3
 K:Convoke
-K:Kicker 4
+K:Kicker:4
 K:etbCounter:P1P1:4:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with four +1/+1 counters on it.
 SVar:WasKicked:Count$Kicked.1.0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_primarch.jpg

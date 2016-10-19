@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:5/3
 K:Haste
 K:Trample
-K:Kicker R
+K:Kicker:R
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+notkicked | Execute$ TrigNotKicked | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME unless it was kicked.
 SVar:TrigNotKicked:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skizzik.jpg

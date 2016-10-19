@@ -2,7 +2,7 @@ Name:Urborg Emissary
 ManaCost:2 B
 Types:Creature Human Wizard
 PT:3/1
-K:Kicker 1 U
+K:Kicker:1 U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, return target permanent to its owner's hand.
 SVar:TrigKicker:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_emissary.jpg

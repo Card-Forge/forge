@@ -2,7 +2,7 @@ Name:Necravolver
 ManaCost:2 B
 Types:Creature Volver
 PT:2/2
-K:Kicker 1 G : W
+K:Kicker:1 G:W
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked 1 | Origin$ Any | Destination$ Battlefield | Execute$ VolverPumped | Static$ True | TriggerDescription$ If CARDNAME was kicked with its {1}{G} kicker, it enters the battlefield with two +1/+1 counters on it and with trample.
 SVar:VolverPumped:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ VolverStomp
 SVar:VolverStomp:DB$ Pump | Defined$ Self | KW$ Trample | Permanent$ True
@@ -13,5 +13,6 @@ SVar:PseudoLifelink:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ VolverT
 SVar:VolverTrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ VolverX | References$ VolverX
 SVar:VolverX:TriggerCount$DamageAmount
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Green|White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necravolver.jpg
 Oracle:Kicker {1}{G} and/or {W} (You may pay an additional {1}{G} and/or {W} as you cast this spell.)\nIf Necravolver was kicked with its {1}{G} kicker, it enters the battlefield with two +1/+1 counters on it and with trample.\nIf Necravolver was kicked with its {W} kicker, it enters the battlefield with a +1/+1 counter on it and with "Whenever Necravolver deals damage, you gain that much life."

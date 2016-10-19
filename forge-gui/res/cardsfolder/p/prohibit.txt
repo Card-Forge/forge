@@ -1,7 +1,7 @@
 Name:Prohibit
 ManaCost:1 U
 Types:Instant
-K:Kicker 2
+K:Kicker:2
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX | References$ X,Y | SpellDescription$ Counter target spell if its converted mana cost is 2 or less. If CARDNAME was kicked, counter that spell if its converted mana cost is 4 or less instead.
 SVar:X:Count$Kicked.4.2
 SVar:Y:Targeted$CardManaCost
