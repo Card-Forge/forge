@@ -2121,11 +2121,10 @@ public class CardFactoryUtil {
 
         for (String keyword : card.getKeywords()) {
             if (keyword.startsWith("Multikicker")) {
-                final String[] k = keyword.split("kicker ");
-                String mkCost = k[1].split(":")[0];
+                final String[] n = keyword.split(":");
                 final SpellAbility sa = card.getFirstSpellAbility();
-                sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(mkCost)));
-                if (k[1].endsWith("Generic")) {
+                sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(n[1])));
+                if (keyword.endsWith("Generic")) {
                     sa.addAnnounceVar("Pseudo-multikicker");
                 } else {
                     sa.addAnnounceVar("Multikicker");
@@ -3087,7 +3086,7 @@ public class CardFactoryUtil {
             }
         } else if (keyword.startsWith("Presence")) {
             final String[] k = keyword.split(":");
-            card.addIntrinsicKeyword("Kicker Reveal<1/" + k[1] + "> : Generic");
+            card.addIntrinsicKeyword("Kicker:Reveal<1/" + k[1] + ">:Generic");
         } else if (keyword.equals("Provoke")) {
             final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | "
                     + "OptionalDecider$ You | Execute$ ProvokeAbility | Secondary$ True | TriggerDescription$ "

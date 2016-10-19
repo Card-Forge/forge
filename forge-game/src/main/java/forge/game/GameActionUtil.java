@@ -230,7 +230,7 @@ public final class GameActionUtil {
         // Buyback, Kicker
         for (String keyword : source.getKeywords()) {
             if (keyword.startsWith("AlternateAdditionalCost")) {
-                final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
+                final List<SpellAbility> newAbilities = Lists.newArrayList();
                 String[] costs = TextUtil.split(keyword, ':');
                 for (SpellAbility sa : abilities) {
                     final SpellAbility newSA = sa.copy();
@@ -280,12 +280,12 @@ public final class GameActionUtil {
                     }
                 }
             } else if (keyword.startsWith("Kicker")) {
+            	String[] sCosts = TextUtil.split(keyword.substring(6), ':');
+            	boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
+                // If this is a "generic kicker" (Undergrowth), ignore value for kicker creations
+                int numKickers = sCosts.length - (generic ? 1 : 0);
                 for (int i = 0; i < abilities.size(); i++) {
-                    String[] sCosts = TextUtil.split(keyword.substring(7), ':');
-                    boolean generic = sCosts[sCosts.length - 1].trim().equals("Generic");
                     int iUnKicked = i;
-                    // If this is a "generic kicker" (Undergrowth), ignore value for kicker creations
-                    int numKickers = sCosts.length - (generic ? 1 : 0);
                     for (int j = 0; j < numKickers; j++) {
                         final SpellAbility newSA = abilities.get(iUnKicked).copy();
                         newSA.setBasicSpell(false);

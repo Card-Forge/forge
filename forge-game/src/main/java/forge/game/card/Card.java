@@ -1397,10 +1397,27 @@ public class Card extends GameEntity implements Comparable<Card> {
                         .append(" or pay ")
                         .append(cost2.toSimpleString())
                         .append(".\r\n");
+            } else if (keyword.startsWith("Multikicker")) {
+                if (!keyword.endsWith("Generic")) {
+                    final String[] n = keyword.split(":");
+                    final Cost cost = new Cost(n[1], false);
+                    sbLong.append("Multikicker ").append(cost.toSimpleString());
+                    sbLong.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")").append("\r\n");
+                }
             } else if (keyword.startsWith("Kicker")) {
                 if (!keyword.endsWith("Generic")) {
-                    final Cost cost = new Cost(keyword.substring(7), false);
-                    sbLong.append("Kicker ").append(cost.toSimpleString()).append("\r\n");
+                    final StringBuilder sbx = new StringBuilder();
+                    final String[] n = keyword.split(":");
+                    sbx.append("Kicker ");
+                    final Cost cost = new Cost(n[1], false);
+                    sbx.append(cost.toSimpleString());
+                    if (Lists.newArrayList(n).size() > 1) {
+                        sbx.append(" and/or ");
+                        final Cost cost2 = new Cost(n[2], false);
+                        sbx.append(cost2.toSimpleString());
+                    }
+                    sbx.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                    sbLong.append(sbx).append("\r\n");
                 }
             } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
                 sbLong.append(keyword).append("\r\n");
@@ -1835,13 +1852,25 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("\r\n");
             } else if (keyword.startsWith("Multikicker")) {
                 if (!keyword.endsWith("Generic")) {
-                    final Cost cost = new Cost(keyword.substring(7), false);
-                    sb.append("Multikicker ").append(cost.toSimpleString()).append("\r\n");
+                    final String[] n = keyword.split(":");
+                    final Cost cost = new Cost(n[1], false);
+                    sb.append("Multikicker ").append(cost.toSimpleString());
+                    sb.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")").append("\r\n");
                 }
             } else if (keyword.startsWith("Kicker")) {
                 if (!keyword.endsWith("Generic")) {
-                    final Cost cost = new Cost(keyword.substring(7), false);
-                    sb.append("Kicker ").append(cost.toSimpleString()).append("\r\n");
+                    final StringBuilder sbx = new StringBuilder();
+                    final String[] n = keyword.split(":");
+                    sbx.append("Kicker ");
+                    final Cost cost = new Cost(n[1], false);
+                    sbx.append(cost.toSimpleString());
+                    if (Lists.newArrayList(n).size() > 1) {
+                	    sbx.append(" and/or ");
+                	    final Cost cost2 = new Cost(n[2], false);
+                        sbx.append(cost2.toSimpleString());
+                    }
+                    sbx.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                    sb.append(sbx).append("\r\n");
                 }
             } else if (keyword.startsWith("AlternateAdditionalCost")) {
                 final String costString1 = keyword.split(":")[1];
