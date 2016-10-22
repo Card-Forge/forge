@@ -19,14 +19,13 @@ public class SetStateAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final String mode = sa.getParam("Mode");
 
-        if (!"TurnFace".equals(mode) && !source.hasAlternateState()) {
-            System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
-            return false;
-        }
-
         // Prevent transform into legendary creature if copy already exists
         // Check first if Legend Rule does still apply
         if (!aiPlayer.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
+            if (!source.hasAlternateState()) {
+                System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
+                return false;
+            }
 
             // check if the other side is legendary and if such Card already is in Play
             final CardState other = source.getAlternateState();
@@ -47,12 +46,15 @@ public class SetStateAi extends SpellAbilityAi {
                 }
             }
         }
-        
-        if (sa.getTargetRestrictions() != null) {
+
+        if (sa.usesTargeting()) {
+            // TODO add Logic for tgts
             return false;
         }
 
-        if("Transform".equals(mode)) {
+        if("TurnFace".equals(mode)) {
+            return true;
+        } else if("Transform".equals(mode)) {
             return !source.hasKeyword("CARDNAME can't transform");
         } else if ("Flip".equals(mode)) {
             return true;
@@ -70,14 +72,13 @@ public class SetStateAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
         final Card source = sa.getHostCard();
-        final String mode = sa.getParam("Mode");
 
-        if (!"TurnFace".equals(mode) && !source.hasAlternateState()) {
-            System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
-            return false;
-        }
+        if("Transform".equals(sa.getParam("Mode"))) {
+            if (!source.hasAlternateState()) {
+                System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
+                return false;
+            }
 
-        if("Transform".equals(mode)) {
             // need a copy for evaluation
             Card transformed = CardUtil.getLKICopy(source);
             transformed.getCurrentState().copyFrom(source, source.getAlternateState());
