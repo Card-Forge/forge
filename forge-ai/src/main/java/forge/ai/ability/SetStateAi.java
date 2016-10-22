@@ -17,8 +17,9 @@ public class SetStateAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(final Player aiPlayer, final SpellAbility sa) {
         final Card source = sa.getHostCard();
+        final String mode = sa.getParam("Mode");
 
-        if (!source.hasAlternateState()) {
+        if (!"TurnFace".equals(mode) && !source.hasAlternateState()) {
             System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
             return false;
         }
@@ -51,9 +52,9 @@ public class SetStateAi extends SpellAbilityAi {
             return false;
         }
 
-        if("Transform".equals(sa.getParam("Mode"))) {
+        if("Transform".equals(mode)) {
             return !source.hasKeyword("CARDNAME can't transform");
-        } else if ("Flip".equals(sa.getParam("Mode"))) {
+        } else if ("Flip".equals(mode)) {
             return true;
         }
         return false;
@@ -69,13 +70,14 @@ public class SetStateAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
         final Card source = sa.getHostCard();
+        final String mode = sa.getParam("Mode");
 
-        if (!source.hasAlternateState()) {
+        if (!"TurnFace".equals(mode) && !source.hasAlternateState()) {
             System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
             return false;
         }
 
-        if("Transform".equals(sa.getParam("Mode"))) {
+        if("Transform".equals(mode)) {
             // need a copy for evaluation
             Card transformed = CardUtil.getLKICopy(source);
             transformed.getCurrentState().copyFrom(source, source.getAlternateState());
