@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
@@ -15,9 +16,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.List;
-import java.util.Map;
-
 public class ControlExchangeAi extends SpellAbilityAi {
 
 /* (non-Javadoc)
@@ -30,15 +28,14 @@ public class ControlExchangeAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
 
-        List<Card> list =
+        CardCollection list =
                 CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
-            public boolean apply(final Card c) {
-                final Map<String, String> vars = c.getSVars();
-                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
+            public boolean apply(final Card c) {                
+                return !c.hasSVar("RemAIDeck") && c.canBeTargetedBy(sa);
             }
         });
         object1 = ComputerUtilCard.getBestAI(list);
@@ -62,28 +59,54 @@ public class ControlExchangeAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
             }
         } else {
             if (mandatory) {
-                CardCollection list2 = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield),
-                        tgt.getValidTgts(), aiPlayer, sa.getHostCard(), sa);
-                while (!list2.isEmpty()) {
-                    Card best = ComputerUtilCard.getBestAI(list2);
-                    if (sa.canTarget(best)) {
-                        sa.getTargets().add(best);
-                        return true;
-                    }
-                    list2.remove(best);
-                }
-                return false;
+                return chkAIDrawback(sa, aiPlayer);
             } else {
                 return canPlayAI(aiPlayer, sa);
             }
         }
         return true;
     }
+
+    @Override
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        if (!sa.usesTargeting()) {
+            return true;
+        }
+
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+
+        CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield),
+                tgt.getValidTgts(), aiPlayer, sa.getHostCard(), sa);
+
+        // only select the cards that can be targeted
+        list = CardLists.getTargetableCards(list, sa);
+
+        if (list.isEmpty())
+            return false;
+
+        Card best = ComputerUtilCard.getBestAI(list);
+
+        // if Param has Defined, check if the best Target is better than the Defined
+        if (sa.hasParam("Defined")) {
+            final Card object = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
+            // TODO add evaluate Land if able
+            final Card realBest = ComputerUtilCard.getBestAI(Lists.newArrayList(best, object));
+
+            // Defined card is better than this one, try to avoid trade
+            if (!best.equals(realBest)) {
+                return false;
+            }
+        }
+
+        // add best Target
+        sa.getTargets().add(best);
+        return true;
+    }   
+    
 }
