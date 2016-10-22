@@ -106,9 +106,15 @@ public class MillAi extends SpellAbilityAi {
 
                 // if it would mill none, try other one
                 if (numCards <= 0) {
-                    if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))
-                            && source.getSVar("X").startsWith("Count$xPaid")) {
-                        // Spell is PayX based
+                    if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z")))
+                    {
+                        if (source.getSVar("X").startsWith("Count$xPaid")) {
+                            // Spell is PayX based
+                        } else if (source.getSVar("X").startsWith("Remembered$ChromaSource")) {
+                            // Cards like Sanity Grinding
+                        } else {
+                            continue;
+                        }
                     } else {
                         continue;
                     }
