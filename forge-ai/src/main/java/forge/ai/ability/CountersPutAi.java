@@ -40,6 +40,12 @@ public class CountersPutAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("CounterNum");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
 
+        if ("ExistingCounter".equals(type)) {
+            // Prevent animation module from crashing for now
+            // TODO needs AI for targeting with this type
+            return false;
+        }
+
         final Player player = sa.isCurse() ? ai.getOpponent() : ai;
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
@@ -361,6 +367,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         Card choice = null;
         final String type = sa.getParam("CounterType");
+
         final String amountStr = sa.getParam("CounterNum");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
