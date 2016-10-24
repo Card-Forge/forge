@@ -549,6 +549,24 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         description = originalDescription;
     }
 
+    public String getCostDescription() {
+        if (payCosts == null || (this instanceof AbilitySub)) { // SubAbilities don't have Costs or Cost
+            return "";
+        } else {
+            StringBuilder sb = new StringBuilder();
+            // descriptors
+            if (hasParam("PrecostDesc")) {
+                sb.append(getParam("PrecostDesc")).append(" ");
+            }
+            if (hasParam("CostDesc")) {
+                sb.append(getParam("CostDesc")).append(" ");
+            } else {
+                sb.append(payCosts.toString());
+            }
+            return sb.toString();
+        }
+    }
+
     /** {@inheritDoc} */
     @Override
     public final String toString() {

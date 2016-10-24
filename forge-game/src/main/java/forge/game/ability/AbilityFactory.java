@@ -199,14 +199,7 @@ public final class AbilityFactory {
 
             if (type != AbilityRecordType.SubAbility) { // SubAbilities don't have Costs or Cost
                               // descriptors
-                if (mapParams.containsKey("PrecostDesc")) {
-                    sb.append(mapParams.get("PrecostDesc")).append(" ");
-                }
-                if (mapParams.containsKey("CostDesc")) {
-                    sb.append(mapParams.get("CostDesc")).append(" ");
-                } else {
-                    sb.append(abCost.toString());
-                }
+            	sb.append(spellAbility.getCostDescription());
             }
 
             sb.append(mapParams.get("SpellDescription"));

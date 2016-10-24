@@ -39,8 +39,8 @@ public class CharmEffect extends SpellAbilityEffect {
             final String ab = source.getSVar(saChoice);
             AbilitySub sub = (AbilitySub) AbilityFactory.getAbility(ab, source);
             if (sa.isIntrinsic()) {
-            	sub.setIntrinsic(true);
-            	sub.changeText();
+                sub.setIntrinsic(true);
+                sub.changeText();
             }
             sub.setTrigger(sa.isTrigger());
 
@@ -58,7 +58,10 @@ public class CharmEffect extends SpellAbilityEffect {
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
 
-        StringBuilder sb = new StringBuilder("Choose ");
+        StringBuilder sb = new StringBuilder();
+        sb.append(sa.getCostDescription());
+        sb.append("Choose ");
+
         if (num == min) {
             sb.append(Lang.getNumeral(num));
         } else {
@@ -66,17 +69,17 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (repeat) {
-    	    sb.append(". You may choose the same mode more than once.");
+            sb.append(". You may choose the same mode more than once.");
         }
         sb.append(" - ");
         int i = 0;
         for (AbilitySub sub : list) {
-    	    if (i > 0) {
-    	        sb.append("; ");
-    	    }
-    	    sb.append(sub.getParam("SpellDescription"));
-    	    ++i;
-    	}
+            if (i > 0) {
+                sb.append("; ");
+            }
+            sb.append(sub.getParam("SpellDescription"));
+            ++i;
+        }
 
         return sb.toString();
     }
@@ -88,7 +91,10 @@ public class CharmEffect extends SpellAbilityEffect {
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
 
-        StringBuilder sb = new StringBuilder("Choose ");
+        StringBuilder sb = new StringBuilder();
+        sb.append(sa.getCostDescription());
+        sb.append("Choose ");
+
         if (num == min) {
             sb.append(Lang.getNumeral(num));
         } else {
@@ -96,7 +102,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (repeat) {
-    	    sb.append(". You may choose the same mode more than once.");
+            sb.append(". You may choose the same mode more than once.");
         }
 
         if (!list.isEmpty()) {
