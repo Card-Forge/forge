@@ -20,6 +20,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import com.google.common.collect.Lists;
 import forge.ai.AiCardMemory;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -80,6 +81,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         Player opp = ai.getOpponent();
+        List<Player> opponents = ai.getOpponents();
 
         // if Defined, then don't worry about targeting
         if (tgt == null) {
@@ -98,15 +100,14 @@ public class ControlGainAi extends SpellAbilityAi {
                 sa.setTargetingPlayer(targetingPlayer);
                 return targetingPlayer.getController().chooseTargetsFor(sa);
             }
+            if (tgt.isRandomTarget()) {
+                sa.getTargets().add(Aggregates.random(tgt.getAllCandidates(sa, false)));
+            }
             if (tgt.canOnlyTgtOpponent()) {
                 if (!opp.canBeTargetedBy(sa)) {
                     return false;
                 }
-                if (tgt.isRandomTarget()) {
-                    sa.getTargets().add(Aggregates.random(tgt.getAllCandidates(sa, false)));
-                } else {
-                    sa.getTargets().add(opp);
-                }
+                sa.getTargets().add(opp);
             }
         }
 
@@ -118,8 +119,12 @@ public class ControlGainAi extends SpellAbilityAi {
             return false;
         }
 
-        CardCollection list =
-                CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+        CardCollection list = new CardCollection();
+        for (Player pl : opponents) {
+            list.addAll(pl.getCardsIn(ZoneType.Battlefield));
+        }
+
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
         
         // AI won't try to grab cards that are filtered out of AI decks on purpose
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -143,25 +148,28 @@ public class ControlGainAi extends SpellAbilityAi {
             return false;
         }
 
+        int creatures = 0, artifacts = 0, planeswalkers = 0, lands = 0, enchantments = 0;
+
+        for (final Card c : list) {
+            if (c.isCreature()) {
+                creatures++;
+            }
+            if (c.isArtifact()) {
+                artifacts++;
+            }
+            if (c.isLand()) {
+                lands++;
+            }
+            if (c.isEnchantment()) {
+                enchantments++;
+            }
+            if (c.isPlaneswalker()) {
+                planeswalkers++;
+            }
+        }
+
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card t = null;
-            for (final Card c : list) {
-                if (c.isCreature()) {
-                    hasCreature = true;
-                }
-                if (c.isArtifact()) {
-                    hasArtifact = true;
-                }
-                if (c.isLand()) {
-                    hasLand = true;
-                }
-                if (c.isEnchantment()) {
-                    hasEnchantment = true;
-                }
-                if (c.isPlaneswalker()) {
-                    hasPW = true;
-                }
-            }
 
             if (list.isEmpty()) {
                 if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
@@ -173,32 +181,45 @@ public class ControlGainAi extends SpellAbilityAi {
                 }
             }
 
-            if (hasPW) {
-                t = ComputerUtilCard.getBestPlaneswalkerAI(list);
-            } else if (hasCreature) {
-                t = ComputerUtilCard.getBestCreatureAI(list);
-                if (lose != null && lose.contains("EOT")) {
-                    // Remember to always attack with this creature since it'll bounce back to its owner at end of turn anyway
-                    ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().rememberCard(t, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
+            while (t == null) {
+                if (planeswalkers > 0) {
+                    t = ComputerUtilCard.getBestPlaneswalkerAI(list);
+                } else if (creatures > 0) {
+                    t = ComputerUtilCard.getBestCreatureAI(list);
+                } else if (artifacts > 0) {
+                    t = ComputerUtilCard.getBestArtifactAI(list);
+                } else if (lands > 0) {
+                    t = ComputerUtilCard.getBestLandAI(list);
+                } else if (enchantments > 0) {
+                    t = ComputerUtilCard.getBestEnchantmentAI(list, sa, true);
+                } else {
+                    t = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
                 }
-            } else if (hasArtifact) {
-                t = ComputerUtilCard.getBestArtifactAI(list);
-            } else if (hasLand) {
-                t = ComputerUtilCard.getBestLandAI(list);
-            } else if (hasEnchantment) {
-                t = ComputerUtilCard.getBestEnchantmentAI(list, sa, true);
-            } else {
-                t = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
+
+                if (t.isCreature())
+                    creatures--;
+                if (t.isPlaneswalker())
+                    planeswalkers--;
+                if (t.isLand())
+                    lands--;
+                if (t.isArtifact())
+                    artifacts--;
+                if (t.isEnchantment())
+                    enchantments--;
+
+                if (!sa.canTarget(t)) {
+                    list.remove(t);
+                    t = null;
+                    if (list.isEmpty()) {
+                        break;
+                    }
+                }
+            };
+
+            if (t != null) {
+                sa.getTargets().add(t);
+                list.remove(t);
             }
-
-            sa.getTargets().add(t);
-            list.remove(t);
-
-            hasCreature = false;
-            hasArtifact = false;
-            hasLand = false;
-            hasEnchantment = false;
-            hasPW = false;
         }
 
         return true;

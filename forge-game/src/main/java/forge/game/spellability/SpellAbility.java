@@ -796,6 +796,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
+            if (tr.isDifferentControllers()) {
+                Player newController;
+                if (entity instanceof Card) {
+                    newController = ((Card) entity).getController();
+                    for (final Card c : targetChosen.getTargetCards()) {
+                        if (entity != c && c.getController().equals(newController))
+                            return false;
+                    }
+                }
+            }
+
             String[] validTgt = tr.getValidTgts();
             if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, getActivatingPlayer(), getHostCard(), this)) {
                return false;
