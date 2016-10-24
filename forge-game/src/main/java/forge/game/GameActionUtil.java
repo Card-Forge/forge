@@ -170,6 +170,12 @@ public final class GameActionUtil {
 
         for (final String keyword : source.getKeywords()) {
             if (sa.isSpell() && keyword.startsWith("Flashback")) {
+                // if source has No Mana cost, and flashback doesn't have own one,
+                // flashback can't work
+                if (keyword.equals("Flashback") && source.getManaCost().isNoCost()) {
+                    continue;
+                }
+
                 final SpellAbility flashback = sa.copy();
                 flashback.setFlashBackAbility(true);
                 SpellAbilityRestriction sar = new SpellAbilityRestriction();
