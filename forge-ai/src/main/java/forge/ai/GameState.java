@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Lists;
+
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.effects.DetachedCardEffect;
@@ -294,7 +296,7 @@ public abstract class GameState {
                 } else if (info.equalsIgnoreCase("IsCommander:True")) {
                     // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);
-                    player.setCommander(c);
+                    player.setCommanders(Lists.newArrayList(c));
                     player.getZone(ZoneType.Command).add(Player.createCommanderEffect(player.getGame(), c));
                 }
             }

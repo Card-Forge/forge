@@ -10,8 +10,10 @@ import forge.item.PaperCard;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.Lists;
 
 public class RegisteredPlayer {
     private final Deck originalDeck; // never return or modify this instance (it's a reference to game resources)
@@ -27,7 +29,7 @@ public class RegisteredPlayer {
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
     private Iterable<PaperCard> conspiracies = null;
-    private PaperCard commander = null;
+    private List<PaperCard> commanders = Lists.newArrayList();
     private PaperCard vanguardAvatar = null;
     private PaperCard planeswalker = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
@@ -94,7 +96,7 @@ public class RegisteredPlayer {
 
     public static RegisteredPlayer forCommander(final Deck deck) {
         RegisteredPlayer start = new RegisteredPlayer(deck);
-        start.commander = deck.get(DeckSection.Commander).get(0);
+        start.commanders = deck.getCommanders();
         start.setStartingLife(40);
         return start;
     }
@@ -114,12 +116,12 @@ public class RegisteredPlayer {
     		start.schemes = schemes;
     	}
     	if (appliedVariants.contains(GameType.Commander)) {
-            start.commander = deck.has(DeckSection.Commander) ? deck.get(DeckSection.Commander).get(0) : null;
+            start.commanders = deck.getCommanders();
             start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40
 		                                                         // Modified for layering of variants to life +20
     	}
         if (appliedVariants.contains(GameType.TinyLeaders)) {
-            start.commander = deck.has(DeckSection.Commander) ? deck.get(DeckSection.Commander).get(0) : null;
+            start.commanders = deck.getCommanders();
             start.setStartingLife(start.getStartingLife() + 5);
         }
     	if (appliedVariants.contains(GameType.Planechase)) {
@@ -138,12 +140,11 @@ public class RegisteredPlayer {
         return this;
     }
 
-    public PaperCard getCommander() {
-        return commander;
+    public List<PaperCard> getCommanders() {
+        return commanders;
     }
     public void assignCommander() {
-        CardPool section = currentDeck.get(DeckSection.Commander);
-        commander = section == null ? null : section.get(0);
+    	commanders = currentDeck.getCommanders();
     }
 
     public PaperCard getVanguardAvatar() {

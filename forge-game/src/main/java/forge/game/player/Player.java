@@ -55,6 +55,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -138,7 +139,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private int teamNumber = -1;
     private Card activeScheme = null;
-    private Card commander = null;
+    private List<Card> commanders = Lists.newArrayList();
     private final Game game;
     private boolean triedToDrawFromEmptyLibrary = false;
     private boolean isPlayingExtraTrun = false;
@@ -2831,12 +2832,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         achievementTracker.mulliganTo = newHand;
     }
 
-    public Card getCommander() {
-        return commander;
+    public List<Card> getCommanders() {
+        return commanders;
     }
-    public void setCommander(Card commander0) {
-        if (commander == commander0) { return; }
-        commander = commander0;
+    public void setCommanders(List<Card> commander0) {
+    	if (commander0 == commanders) { return; }
+        commanders = commander0;
         view.updateCommander(this);
     }
 
@@ -2899,17 +2900,22 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Commander
-        Card cmd = null;
-        if (registeredPlayer.getCommander() != null) {
-            cmd = Card.fromPaperCard(registeredPlayer.getCommander(), this);
+        if (!registeredPlayer.getCommanders().isEmpty()) {
+            List<Card> commanders = Lists.newArrayList();
+            for (PaperCard pc : registeredPlayer.getCommanders()) {
+                Card cmd = Card.fromPaperCard(pc, this);
+                cmd.setCommander(true);
+                com.add(cmd);
+                commanders.add(cmd);
+                com.add(createCommanderEffect(game, cmd));
+            }
+            this.setCommanders(commanders);
         }
         else if (registeredPlayer.getPlaneswalker() != null) { // Planeswalker
-            cmd = Card.fromPaperCard(registeredPlayer.getPlaneswalker(), this);
-        }
-        if (cmd != null) {
+            Card cmd = Card.fromPaperCard(registeredPlayer.getPlaneswalker(), this);
             cmd.setCommander(true);
             com.add(cmd);
-            setCommander(cmd);
+            setCommanders(Lists.newArrayList(cmd));
             com.add(createCommanderEffect(game, cmd));
         }
 

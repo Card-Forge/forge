@@ -1,6 +1,7 @@
 package forge.achievement;
 
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 
@@ -20,9 +21,16 @@ public class Blackjack extends Achievement {
         if (player.getOutcome().hasWon()) {
             for (Player p : game.getRegisteredPlayers()) {
                 if (p.isOpponentOf(player) && p.getOutcome().lossState == GameLossReason.CommanderDamage) {
-                    Integer damage = p.getCommanderDamage(player.getCommander());
-                    if (damage != null && damage >= THRESHOLD) {
-                        return damage;
+                    int max = 0;
+                    for (Card c : player.getCommanders()) {
+                        Integer damage = p.getCommanderDamage(c);
+                        if (damage != null && damage >= THRESHOLD) {
+                            max = damage;
+                            return damage;
+                        }
+                    }
+                    if (max > 0) {
+                        return max;
                     }
                 }
             }

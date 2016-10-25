@@ -121,12 +121,14 @@ public class ConquestUtil {
         }
 
         //remove commander
-        PaperCard commander = deck.get(DeckSection.Commander).get(0);
-        availableCards.remove(commander);
+        byte colorIdentity = 0; 
+        for (PaperCard commander : deck.getCommanders()) {
+            colorIdentity |=  commander.getRules().getColorIdentity().getColor();
+            availableCards.remove(commander);
+        }
 
         //remove any cards that aren't allowed in deck due to color identity
-        final ColorSet colorIdentity = commander.getRules().getColorIdentity();
-        if (!colorIdentity.equals(ColorSet.ALL_COLORS)) {
+        if (colorIdentity != MagicColor.ALL_COLORS) {
             List<PaperCard> invalidCards = new ArrayList<PaperCard>();
             for (PaperCard pc : availableCards) {
                 if (!pc.getRules().getColorIdentity().hasNoColorsExcept(colorIdentity)) {

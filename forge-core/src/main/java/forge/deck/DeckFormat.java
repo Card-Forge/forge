@@ -182,15 +182,20 @@ public enum DeckFormat {
         }
 
         if (hasCommander()) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
-            final PaperCard commander = deck.getCommander();
-            if (commander == null) {
+            final List<PaperCard> commanders = deck.getCommanders();
+
+            if (commanders.isEmpty()) {
                 return "is missing a commander";
             }
-            if (!isLegalCommander(commander.getRules())) {
-                return "has an illegal commander";
+
+            byte cmdCI = 0;
+            for (PaperCard pc : commanders) {
+                if (!isLegalCommander(pc.getRules())) {
+                    return "has an illegal commander";
+                }
+                cmdCI |= pc.getRules().getColorIdentity().getColor();
             }
 
-            final byte cmdCI = commander.getRules().getColorIdentity().getColor();
             final List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
 
             for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
@@ -271,22 +276,22 @@ public enum DeckFormat {
     }
 
     public static String getPlaneSectionConformanceProblem(final CardPool planes) {
-    	//Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
-    	if (planes == null || planes.countAll() < 10) {
-    		return "should have at least 10 planes";
-    	}
-    	int phenoms = 0;
-    	for (Entry<PaperCard, Integer> cp : planes) {
-    		if (cp.getKey().getRules().getType().hasType(CardType.CoreType.Phenomenon)) {
-    			phenoms++;
-    		}
-    		if (cp.getValue() > 1) {
-    			return "must not contain multiple copies of any Plane or Phenomena";
-    		}
-    	}
-    	if (phenoms > 2) {
-    		return "must not contain more than 2 Phenomena";
-    	}
+        //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
+        if (planes == null || planes.countAll() < 10) {
+            return "should have at least 10 planes";
+        }
+        int phenoms = 0;
+        for (Entry<PaperCard, Integer> cp : planes) {
+            if (cp.getKey().getRules().getType().hasType(CardType.CoreType.Phenomenon)) {
+                phenoms++;
+            }
+            if (cp.getValue() > 1) {
+                return "must not contain multiple copies of any Plane or Phenomena";
+            }
+        }
+        if (phenoms > 2) {
+            return "must not contain more than 2 Phenomena";
+        }
         return null;
     }
 

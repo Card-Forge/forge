@@ -131,11 +131,6 @@ public class AbilityManaPart implements java.io.Serializable {
         if (player.getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return;
         }
-        /*ColorSet CID = null;
-
-        if (player.getGame().getRules().hasCommander()) {
-            CID = player.getCommander().getRules().getColorIdentity();
-        }*/
         //clear lastProduced
         this.lastManaProduced.clear();
 
@@ -573,12 +568,18 @@ public class AbilityManaPart implements java.io.Serializable {
             return origProduced.replace("Combo ", "");
         }
         // ColorIdentity
-        Card cmdr = getSourceCard().getController().getCommander();
-        if (cmdr == null) {
+        List<Card> commanders = getSourceCard().getController().getCommanders();
+        if (commanders.isEmpty()) {
             return "";
         }
+
+        byte ci = 0;
+        for (final Card c : commanders) {
+            ci |= c.getRules().getColorIdentity().getColor();
+        }
+
         StringBuilder sb = new StringBuilder();
-        ColorSet identity = cmdr.getRules().getColorIdentity();
+        ColorSet identity = ColorSet.fromMask(ci);
         if (identity.hasWhite()) { sb.append("W "); }
         if (identity.hasBlue())  { sb.append("U "); }
         if (identity.hasBlack()) { sb.append("B "); }

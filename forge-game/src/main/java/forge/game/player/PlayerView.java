@@ -97,8 +97,8 @@ public class PlayerView extends GameEntityView {
     }
 
     public final String getCommanderInfo() {
-        final CardView commander = getCommander();
-        if (commander == null) {
+        final List<CardView> commanders = getCommanders();
+        if (commanders == null || commanders.isEmpty()) {
             return StringUtils.EMPTY;
         }
 
@@ -108,34 +108,38 @@ public class PlayerView extends GameEntityView {
             opponents = Collections.emptyList();
         }
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
-            final int damage = p.getCommanderDamage(this.getCommander());
-            if (damage > 0) {
-                final String text = String.format("Commander damage to %s:", p);
-                sb.append(String.format(text + " %d\r\n", damage));
+            for (final CardView v : this.getCommanders()) {
+                final int damage = p.getCommanderDamage(v);
+                if (damage > 0) {
+                    final String text = String.format("Commander damage to %s from %s:", p, v.getName());
+                    sb.append(String.format(text + " %d\r\n", damage));
+                }
             }
         }
         return sb.toString();
     }
 
     public final List<String> getPlayerCommanderInfo() {
-        final CardView commander = getCommander();
-        if (commander == null) {
+        final List<CardView> commanders = getCommanders();
+        if (commanders == null || commanders.isEmpty()) {
             return Collections.emptyList();
         }
 
         final FCollectionView<PlayerView> opponents = getOpponents();
         final List<String> info = Lists.newArrayListWithExpectedSize(opponents.size());
-        info.add(String.format("Commander: %s", commander));
+        info.add(String.format("Commanders: %s", Lang.joinHomogenous(commanders)));
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
-            final int damage = this.getCommanderDamage(p.getCommander());
-            if (damage > 0) {
-                final String text;
-                if (p.equals(this)) {
-                    text = "Commander damage from own commander:";
-                } else {
-                    text = String.format("Commander damage from %s:", p);
+            for (final CardView v : p.getCommanders()) {
+                final int damage = this.getCommanderDamage(v);
+                if (damage > 0) {
+                    final String text;
+                    if (p.equals(this)) {
+                        text = String.format("Commander damage from own commander %s:", v);
+                    } else {
+                        text = String.format("Commander damage from %s's %s:", p, v);
+                    }
+                    info.add(String.format(text + " %d\r\n", damage));
                 }
-                info.add(String.format(text + " %d\r\n", damage));
             }
         }
         return info;
@@ -214,11 +218,15 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Keywords, ImmutableMultiset.copyOf(p.getKeywords()));
     }
 
-    public CardView getCommander() {
+    public List<CardView> getCommanders() {
         return get(TrackableProperty.Commander);
     }
     void updateCommander(Player p) {
-        set(TrackableProperty.Commander, GameEntityView.get(p.getCommander()));
+    	List<CardView> result = Lists.newArrayList();
+    	for (final Card c : p.getCommanders()) {
+    		result.add(c.getView());
+    	}
+        set(TrackableProperty.Commander, result);
     }
 
     public int getCommanderDamage(CardView commander) {

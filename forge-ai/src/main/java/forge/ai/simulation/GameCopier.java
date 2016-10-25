@@ -74,7 +74,7 @@ public class GameCopier {
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setPreventNextDamage(origPlayer.getPreventNextDamage());
-            newPlayer.setCommander(origPlayer.getCommander()); // will be fixed up below
+            newPlayer.setCommanders(origPlayer.getCommanders()); // will be fixed up below
             playerMap.put(origPlayer, newPlayer);
         }
 
@@ -88,7 +88,11 @@ public class GameCopier {
         copyGameState(newGame);
 
         for (Player p : newGame.getPlayers()) {
-            p.setCommander(gameObjectMap.map(p.getCommander()));
+            List<Card> commanders = Lists.newArrayList();
+            for (final Card c : p.getCommanders()) {
+                commanders.add(gameObjectMap.map(c));
+            }
+            p.setCommanders(commanders);
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);

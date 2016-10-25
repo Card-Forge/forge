@@ -18,6 +18,7 @@
 package forge.deck;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardDb.SetPreference;
@@ -108,12 +109,16 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return this.parts.get(DeckSection.Main);
     }
 
-    public PaperCard getCommander() {
+    public List<PaperCard> getCommanders() {
+        List<PaperCard> result = Lists.newArrayList();
         final CardPool cp = get(DeckSection.Commander);
-        if (cp != null && !cp.isEmpty()) {
-            return cp.get(0);
+        if (cp == null) {
+            return result;
         }
-        return null;
+        for (final Entry<PaperCard, Integer> c : cp) {
+            result.add(c.getKey());
+        }
+        return result;
     }
 
     // may return nulls
