@@ -2496,6 +2496,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Retrace")) {
                 addSpellAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Undaunted")) {
+                addStaticAbility(keyword, card, null);
+            }
 
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
@@ -3573,6 +3576,14 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Unleash")) {
             final String effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can't block.";
 
+            StaticAbility st = card.addStaticAbility(effect);
+            st.setIntrinsic(intrinsic);
+            if (!intrinsic) {
+                kws.addStaticAbility(st);
+            }
+        } else if (keyword.startsWith("Undaunted")) {
+            final String effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Undaunted | EffectZone$ All" +
+                    " | Description$ Undaunted (This spell costs {1} less to cast for each opponent.)";
             StaticAbility st = card.addStaticAbility(effect);
             st.setIntrinsic(intrinsic);
             if (!intrinsic) {

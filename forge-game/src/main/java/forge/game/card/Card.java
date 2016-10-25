@@ -1430,7 +1430,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
             		|| keyword.startsWith("Strive") || keyword.startsWith("Escalate")
             		|| keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
-                    || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
+                    || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")
+                    || keyword.startsWith("Undaunted")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond") || keyword.equals("Retrace")) {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");

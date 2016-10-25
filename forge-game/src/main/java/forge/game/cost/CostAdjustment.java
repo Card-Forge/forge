@@ -360,6 +360,8 @@ public class CostAdjustment {
         int value;
         if ("AffectedX".equals(amount)) {
             value = CardFactoryUtil.xCount(card, hostCard.getSVar(amount));
+        } else if ("Undaunted".equals(amount)) {
+            value = card.getController().getOpponents().size();
         } else if ("X".equals(amount)){
             value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount));
         } else {
