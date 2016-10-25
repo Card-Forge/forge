@@ -3567,7 +3567,7 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             final String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
-                    " | Description$ Strive - CARDNAME costs " + ManaCostParser.parse(manacost) + " more to cast for each target beyond the first.";
+                    " | Description$ Strive - " + Keyword.getInstance(keyword).getReminderText();
             StaticAbility st = card.addStaticAbility(effect);
             st.setIntrinsic(intrinsic);
             if (!intrinsic) {
@@ -3581,9 +3581,9 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addStaticAbility(st);
             }
-        } else if (keyword.startsWith("Undaunted")) {
+        } else if (keyword.equals("Undaunted")) {
             final String effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Undaunted | EffectZone$ All" +
-                    " | Description$ Undaunted (This spell costs {1} less to cast for each opponent.)";
+                    " | Description$ Undaunted (" + Keyword.getInstance(keyword).getReminderText() + ")";
             StaticAbility st = card.addStaticAbility(effect);
             st.setIntrinsic(intrinsic);
             if (!intrinsic) {

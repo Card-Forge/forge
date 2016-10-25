@@ -1431,7 +1431,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             		|| keyword.startsWith("Strive") || keyword.startsWith("Escalate")
             		|| keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")
-                    || keyword.startsWith("Undaunted")) {
+                    || keyword.equals("Undaunted")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond") || keyword.equals("Retrace")) {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
@@ -1940,7 +1940,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
             } else if (keyword.equals("Rebound") || keyword.equals("Retrace")) {
                 sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
-            }else if (keyword.startsWith("Presence")) {
+            } else if (keyword.startsWith("Presence")) {
                 sb.append(Keyword.getInstance(keyword).getReminderText());
             }
         }
