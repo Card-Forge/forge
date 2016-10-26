@@ -40,6 +40,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Callback;
 import forge.util.ItemPool;
+import forge.util.Lang;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
 
@@ -523,8 +524,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected void save(final Callback<Boolean> callback) {
         if (StringUtils.isEmpty(deck.getName())) {
-            PaperCard commander = deck.getCommander();
-            String initialInput = commander == null ? "" : commander.getName(); //use commander name as default deck name
+            List<PaperCard> commanders = deck.getCommanders(); //use commander name as default deck name
+            String initialInput = Lang.joinHomogenous(commanders); 
             FOptionPane.showInputDialog("Enter name for new deck", initialInput, new Callback<String>() {
                 @Override
                 public void run(String result) {
@@ -915,15 +916,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Commander:
             case TinyLeaders:
-                final PaperCard commander = parentScreen.getDeck().getCommander();
-                if (commander == null) {
+                final List<PaperCard> commanders = parentScreen.getDeck().getCommanders();
+                if (commanders.isEmpty()) {
                     //if no commander set for deck, only show valid commanders
                     additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
                     cardManager.setCaption("Commanders");
                 }
                 else {
                     //if a commander has been set, only show cards that match its color identity
-                    additionalFilter = DeckFormat.Commander.isLegalCardForCommanderPredicate(commander);
+                    additionalFilter = DeckFormat.Commander.isLegalCardForCommanderPredicate(commanders);
                     cardManager.setCaption("Cards");
                 }
                 //fall through to below
@@ -951,7 +952,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         private boolean needsCommander() {
-            return parentScreen.getCommanderPage() != null && parentScreen.getDeck().getCommander() == null;
+            return parentScreen.getCommanderPage() != null && parentScreen.getDeck().getCommanders().isEmpty();
         }
 
         private void setCommander(PaperCard card) {

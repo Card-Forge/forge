@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.assets.FSkinProp;
 import forge.assets.IHasSkinProp;
@@ -129,13 +131,9 @@ public class ConquestUtil {
 
         //remove any cards that aren't allowed in deck due to color identity
         if (colorIdentity != MagicColor.ALL_COLORS) {
-            List<PaperCard> invalidCards = new ArrayList<PaperCard>();
-            for (PaperCard pc : availableCards) {
-                if (!pc.getRules().getColorIdentity().hasNoColorsExcept(colorIdentity)) {
-                    invalidCards.add(pc);
-                }
-            }
-            availableCards.removeAll(invalidCards);
+            Predicate<PaperCard> pred = DeckFormat.Commander.isLegalCardForCommanderPredicate(deck.getCommanders());
+
+            availableCards.retainAll(Lists.newArrayList(Iterables.filter(availableCards, pred)));
         }
 
         //create pool from available cards

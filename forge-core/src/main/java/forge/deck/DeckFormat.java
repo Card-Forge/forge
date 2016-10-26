@@ -28,10 +28,12 @@ import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 
 import forge.StaticData;
 import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.card.ICardFace;
 import forge.deck.generation.DeckGenPool;
@@ -383,13 +385,11 @@ public enum DeckFormat {
         };
     }
 
-    public Predicate<PaperCard> isLegalCardForCommanderPredicate(PaperCard commander) {
-        final byte cmdCI = commander.getRules().getColorIdentity().getColor(); 
-        return new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
-                return card.getRules().getColorIdentity().hasNoColorsExcept(cmdCI);
-            }
-        };
+    public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders) {
+        byte cmdCI = 0;
+        for (final PaperCard p : commanders) {
+            cmdCI |= p.getRules().getColorIdentity().getColor();
+        }
+        return Predicates.compose(CardRulesPredicates.hasColorIdentity(cmdCI), PaperCard.FN_GET_RULES);
     }
 }

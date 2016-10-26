@@ -10,6 +10,7 @@ import com.google.common.base.Predicates;
 
 import forge.GuiBase;
 import forge.assets.ISkinImage;
+import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.deck.generation.DeckGenPool;
 import forge.item.PaperCard;
@@ -112,13 +113,7 @@ public class ConquestRegion {
                     break;
                 case "colors":
                     colorSet = ColorSet.fromNames(value.toCharArray());
-                    final int colorMask = colorSet.getColor();
-                    pred = new Predicate<PaperCard>() {
-                        @Override
-                        public boolean apply(PaperCard pc) {
-                            return pc.getRules().getColorIdentity().hasNoColorsExcept(colorMask);
-                        }
-                    };
+                    pred = Predicates.compose(CardRulesPredicates.hasColorIdentity(colorSet.getColor()), PaperCard.FN_GET_RULES);
                     break;
                 case "sets":
                     final String[] sets = value.split(",");
