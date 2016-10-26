@@ -222,11 +222,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.Commander);
     }
     void updateCommander(Player p) {
-    	List<CardView> result = Lists.newArrayList();
-    	for (final Card c : p.getCommanders()) {
-    		result.add(c.getView());
-    	}
-        set(TrackableProperty.Commander, result);
+        set(TrackableProperty.Commander, CardView.getCollection(p.getCommanders()));
     }
 
     public int getCommanderDamage(CardView commander) {
