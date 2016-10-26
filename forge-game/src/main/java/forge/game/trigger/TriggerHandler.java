@@ -534,7 +534,9 @@ public class TriggerHandler {
             // get CardState does not work for transformed cards
             // also its about LKI
             if (host.isInZone(ZoneType.Battlefield) || !host.hasAlternateState()) {
-                host = game.getCardState(host);
+                // if host changes Zone with other cards, try to use original host
+                if (!regtrig.getMode().equals(TriggerType.ChangesZone))
+                    host = game.getCardState(host);
             }
         }
 
