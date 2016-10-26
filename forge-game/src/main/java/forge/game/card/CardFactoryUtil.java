@@ -993,6 +993,7 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("CommanderCastFromCommandZone")) {
+        	// TODO fix it for multiple commanders
             // Read SVar CommanderCostRaise from Commander Effect
             Card commeff = CardLists.filter(cc.getCardsIn(ZoneType.Command),
                     CardPredicates.nameEquals("Commander Effect")).get(0);
@@ -1245,6 +1246,17 @@ public class CardFactoryUtil {
                 }
             }
             return doXMath(colorOcurrencices, m, c);
+        }
+
+        if (sq[0].contains("ColorsCtrl")) {
+        	final CardCollectionView list = cc.getCardsIn(ZoneType.Battlefield);
+        	int n = 0;
+        	for (final byte col : MagicColor.WUBRG) {
+        		if (!CardLists.getColor(list, col).isEmpty()) {
+        			n++;
+        		}
+        	}
+            return doXMath(n, m, c);
         }
 
         if (sq[0].contains("Hellbent")) {
