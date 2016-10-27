@@ -97,7 +97,7 @@ public enum TrackableProperty {
     HasUnlimitedHandSize(TrackableTypes.BooleanType),
     NumDrawnThisTurn(TrackableTypes.IntegerType),
     Keywords(TrackableTypes.KeywordCollectionViewType, false),
-    Commander(TrackableTypes.CardViewType),
+    Commander(TrackableTypes.CardViewCollectionType, false),
     CommanderDamage(TrackableTypes.IntegerMapType),
     MindSlaveMaster(TrackableTypes.PlayerViewType),
     Ante(TrackableTypes.CardViewCollectionType, false),
