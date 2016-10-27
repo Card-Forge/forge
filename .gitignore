@@ -218,6 +218,7 @@ forge-gui/res/skins/zendikar/layouts
 forge-gui/res/skins/zendikar/pics*
 forge-gui/res/skins/zendikar/pics_product
 forge-gui/target
+forge-gui/tools/AllCards.json
 forge-gui/tools/EditionTrackingResults
 forge-gui/tools/PerSetTrackingResults
 forge-gui/tools/oracleScript.log
