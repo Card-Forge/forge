@@ -201,7 +201,7 @@ public enum DeckFormat {
                     return "has an illegal commander";
                 }
 
-                if (hasPartner == false) {
+                if (hasPartner != null && !hasPartner.booleanValue()) {
                     return "has an illegal commander partnership";
                 }
 
