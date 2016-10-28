@@ -522,11 +522,11 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             }
         }
 
-        if (this.mapParams.containsKey("isPresent")) {
+        if (this.mapParams.containsKey("IsPresent")) {
         	final ZoneType zone = mapParams.containsKey("PresentZone") ? ZoneType.valueOf(mapParams.get("PresentZone")) : ZoneType.Battlefield;
         	final String compare = mapParams.containsKey("PresentCompare") ? mapParams.get("PresentCompare") : "GE1";
             CardCollectionView list = game.getCardsIn(zone);
-            final String present = mapParams.get("isPresent");
+            final String present = mapParams.get("IsPresent");
 
             list = CardLists.getValidCards(list, present.split(","), controller, hostCard, null);
 

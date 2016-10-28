@@ -1,0 +1,16 @@
+Name:Charging Cinderhorn
+ManaCost:3 R
+Types:Creature Elemental Ox
+PT:4/2
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | CheckSVar$ AttackedThisTurn | References$ AttackedThisTurn | SVarCompare$ EQ0 | TriggerDescription$ At the beginning of each player's end step, if no creatures attacked this turn, put a fury counter on CARDNAME. Then CARDNAME deals damage equal to the number of fury counters on it to that player. 
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ FURY | CounterNum$ 1 | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
+SVar:X:Count$CardCounters.FURY
+T:Mode$ AttackersDeclared | Execute$ TrigStoreSVar | Static$ True
+SVar:TrigStoreSVar:DB$ StoreSVar | SVar$ AttackedThisTurn | Type$ Number | Expression$ 1
+SVar:AttackedThisTurn:Number$0
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ StoreSVar | SVar$ AttackedThisTurn | Type$ Number | Expression$ 0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_cinderhorn.jpg
+Oracle:At the beginning of each player's end step, if no creatures attacked this turn, put a fury counter on Charging Cinderhorn. Then Charging Cinderhorn deals damage equal to the number of fury counters on it to that player. 
