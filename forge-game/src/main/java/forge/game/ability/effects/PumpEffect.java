@@ -7,7 +7,6 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
@@ -45,8 +44,6 @@ public class PumpEffect extends SpellAbilityEffect {
                 kws.add(kw);
                 if (kw.equals("Suspend") && !applyTo.hasSuspend()) {
                     applyTo.setSuspend(true);
-                    CardFactoryUtil.addSuspendUpkeepTrigger(applyTo);
-                    CardFactoryUtil.addSuspendPlayTrigger(applyTo);
                 }
             }
         }

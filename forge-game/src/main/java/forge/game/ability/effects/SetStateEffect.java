@@ -1,10 +1,13 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 import forge.game.event.GameEventCardStatsChanged;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 import java.util.Iterator;
@@ -38,13 +41,16 @@ public class SetStateEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(final SpellAbility sa) {
-
+        final Player p = sa.getActivatingPlayer();
         final String mode = sa.getParam("Mode");
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final List<Card> tgtCards = getTargetCards(sa);
 
         final boolean remChanged = sa.hasParam("RememberChanged");
+        final boolean morphUp = sa.hasParam("MorphUp");
+        final boolean manifestUp = sa.hasParam("ManifestUp");
+        final boolean hiddenAgenda = sa.hasParam("HiddenAgenda");
 
         for (final Card tgt : tgtCards) {
             if (sa.usesTargeting() && !tgt.canBeTargetedBy(sa)) {
@@ -67,12 +73,32 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
             }
 
-            boolean hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"));
-            if ( hasTransformed ) {
-                game.fireEvent(new GameEventCardStatsChanged(tgt));
+            boolean hasTransformed = false;
+            if (morphUp) {
+                hasTransformed = tgt.turnFaceUp();
+            } else if (manifestUp) {
+                hasTransformed = tgt.turnFaceUp(true, true);
+            } else {
+                hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"));
             }
-            if ( hasTransformed && remChanged) {
-                host.addRemembered(tgt);
+            if ( hasTransformed ) {
+                if (morphUp) {
+                    String sb = p + " has unmorphed " + tgt.getName();
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                } else if (manifestUp) {
+                    String sb = p + " has unmanifested " + tgt.getName();
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                } else if (hiddenAgenda) {
+                    String sb = p + " has revealed " + tgt.getName() + " with the chosen name " + tgt.getNamedCard();
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                }
+                game.fireEvent(new GameEventCardStatsChanged(tgt));
+                if (sa.hasParam("Mega")) {
+                    tgt.addCounter(CounterType.P1P1, 1, true);
+                }
+                if (remChanged) {
+                    host.addRemembered(tgt);
+                }
             }
         }
     }

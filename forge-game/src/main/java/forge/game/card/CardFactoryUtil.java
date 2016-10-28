@@ -52,8 +52,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card.SplitCMCMode;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
-import forge.game.cost.CostPayment;
-import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordsChange;
 import forge.game.phase.PhaseHandler;
@@ -136,39 +134,21 @@ public class CardFactoryUtil {
      *            a {@link forge.game.cost.Cost} object.
      * @return a {@link forge.game.spellability.AbilityActivated} object.
      */
-    public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost, final boolean mega) {
-        final AbilityStatic morphUp = new AbilityStatic(sourceCard, cost, null) {
-
-            @Override
-            public void resolve() {
-                if (sourceCard.turnFaceUp()) {
-                    String sb = this.getActivatingPlayer() + " has unmorphed " + sourceCard.getName();
-                    sourceCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
-                    sourceCard.getGame().fireEvent(new GameEventCardStatsChanged(sourceCard));
-                }
-                if (mega) {
-                	sourceCard.addCounter(CounterType.P1P1, 1, true);
-                }
-            }
-
-            @Override
-            public boolean canPlay() {
-                return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
-                        && sourceCard.isInPlay() && CostPayment.canPayAdditionalCosts(cost, this);
-            }
-
-        }; // morph_up
-
+    public static SpellAbility abilityMorphUp(final Card sourceCard, final String costStr, final boolean mega) {
+        Cost cost = new Cost(costStr, true);
         String costDesc = cost.toString();
         // get rid of the ": " at the end
         costDesc = costDesc.substring(0, costDesc.length() - 2);
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Morph");
-        if (!cost.isOnlyManaCost()) {
-            sb.append(" -");
+
+        String ab = "ST$ SetState | Cost$ " + costStr + " | CostDesc$ Morph " + costDesc
+                + " | MorphUp$ True"
+                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown"
+                + " | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its morph cost.)";
+        if (mega) {
+            ab += " | Mega$ True";
         }
-        sb.append(" ").append(costDesc).append(" (Turn this face up any time for its morph cost.)");
-        morphUp.setDescription(sb.toString());
+
+        final SpellAbility morphUp = AbilityFactory.getAbility(ab, sourceCard);
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
@@ -178,38 +158,20 @@ public class CardFactoryUtil {
         return morphUp;
     }
 
-    public static AbilityStatic abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
+    public static SpellAbility abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
         final Cost cost = new Cost(manaCost, true);
-
-        final AbilityStatic manifestUp = new AbilityStatic(sourceCard, cost, null) {
-
-            @Override
-            public void resolve() {
-                if (sourceCard.turnFaceUp(true, true)) {
-                    String sb = this.getActivatingPlayer() + " has unmanifested " + sourceCard.getName();
-                    sourceCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
-                    sourceCard.getGame().fireEvent(new GameEventCardStatsChanged(sourceCard));
-                }
-            }
-
-            @Override
-            public boolean canPlay() {
-                return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
-                        && sourceCard.isInPlay() && sourceCard.isManifested();
-            }
-
-        }; // manifest_up
 
         String costDesc = cost.toString();
         // get rid of the ": " at the end
         costDesc = costDesc.substring(0, costDesc.length() - 2);
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Unmanifest");
-        if (!cost.isOnlyManaCost()) {
-            sb.append(" -");
-        }
-        sb.append(" ").append(costDesc).append(" (Turn this face up any time for its mana cost.)");
-        manifestUp.setDescription(sb.toString());
+
+        String ab = "ST$ SetState | CostDesc$ Unmanifest " + costDesc
+                + " | ManifestUp$ True"
+                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+manifested"
+                + " | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its mana cost.)";
+
+        final SpellAbility manifestUp = AbilityFactory.getAbility(ab, sourceCard);
+        manifestUp.setPayCosts(cost);
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
@@ -237,30 +199,12 @@ public class CardFactoryUtil {
         return true;
     }
 
-    public static AbilityStatic abilityRevealHiddenAgenda(final Card sourceCard) {
-        final AbilityStatic revealAgenda = new AbilityStatic(sourceCard, Cost.Zero, null) {
-
-            @Override
-            public void resolve() {
-                if (sourceCard.turnFaceUp()) {
-                    String sb = this.getActivatingPlayer() + " has revealed " + sourceCard.getName() + " with the chosen name " + sourceCard.getNamedCard();
-                    sourceCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
-                    sourceCard.getGame().fireEvent(new GameEventCardStatsChanged(sourceCard));
-                }
-            }
-
-            @Override
-            public boolean canPlay() {
-                return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
-                        && sourceCard.isInZone(ZoneType.Command);
-            }
-
-            // TODO When should the AI activate this?
-
-        }; // reveal hidden agenda
-
-        revealAgenda.setDescription("Reveal this Hidden Agenda at any time. ");
-        return revealAgenda;
+    private static SpellAbility abilityRevealHiddenAgenda(final Card sourceCard) {
+        String ab = "ST$ SetState"
+                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+inZoneCommand"
+                + " | HiddenAgenda$ True"
+                + " | Mode$ TurnFace | SpellDescription$ Reveal this Hidden Agenda at any time.";
+        return AbilityFactory.getAbility(ab, sourceCard);
     }
 
     /**
@@ -320,47 +264,6 @@ public class CardFactoryUtil {
         suspend.getRestrictions().setZone(ZoneType.Hand);
         return suspend;
     } // abilitySuspendStatic()
-
-    public static void addSuspendUpkeepTrigger(Card card) {
-        //upkeep trigger
-        StringBuilder upkeepTrig = new StringBuilder();
-        String triggerSvar = "SuspendTrigSV"; // FIXME: the SVars were previously random UUIDs (which caused the keyword not to work). 
-        String removeCounterSvar = "SuspendRemoveCtrSV";
-
-        upkeepTrig.append("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile | CheckSVar$ ");
-        upkeepTrig.append(triggerSvar);
-        upkeepTrig.append(" | SVarCompare$ GE1 | References$ ");
-        upkeepTrig.append(triggerSvar);
-        upkeepTrig.append(" | Execute$ ");
-        upkeepTrig.append(removeCounterSvar);
-        // Mark this trigger as Secondary, so it's not displayed twice
-        upkeepTrig.append(" | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, if this card is suspended, remove a time counter from it");
-
-        card.setSVar(removeCounterSvar, "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1");
-        card.setSVar(triggerSvar,"Count$ValidExile Card.Self+suspended");
-
-        final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig.toString(), card, true);
-        card.addTrigger(parsedUpkeepTrig);
-    }
-
-    public static void addSuspendPlayTrigger(Card card) {
-        //play trigger
-        StringBuilder playTrig = new StringBuilder();
-        String playSvar = "SuspendPlaySV"; // FIXME: the SVars were previously random UUIDs (which caused the keyword not to work).
-
-        playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ TIME | NewCounterAmount$ 0 | Secondary$ True | Execute$ ");
-        playTrig.append(playSvar);
-        playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
-        playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
-
-        StringBuilder playWithoutCost = new StringBuilder();
-        playWithoutCost.append("DB$ Play | Defined$ Self | WithoutManaCost$ True | SuspendCast$ True");
-
-        final Trigger parsedPlayTrigger = TriggerHandler.parseTrigger(playTrig.toString(), card, true);
-        card.addTrigger(parsedPlayTrigger);
-
-        card.setSVar(playSvar, playWithoutCost.toString());
-    }
 
     /**
      * <p>
@@ -2304,15 +2207,14 @@ public class CardFactoryUtil {
                 card.addTrigger(parsedUpkeepTrig);
             }
             else if (keyword.startsWith("Suspend")) {
-                card.removeIntrinsicKeyword(keyword);
                 card.setSuspend(true);
                 final String[] k = keyword.split(":");
 
                 final String timeCounters = k[1];
                 final String cost = k[2];
                 card.addSpellAbility(abilitySuspendStatic(card, cost, timeCounters));
-                addSuspendUpkeepTrigger(card);
-                addSuspendPlayTrigger(card);
+
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Fading")) {
                 final String[] k = keyword.split(":");
@@ -3162,6 +3064,38 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
+        } else if (keyword.startsWith("Suspend")) {
+            //upkeep trigger
+            StringBuilder upkeepTrig = new StringBuilder();;
+
+            upkeepTrig.append("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile ");
+            upkeepTrig.append(" | IsPresent$ Card.Self+suspended | PresentZone$ Exile");
+            // Mark this trigger as Secondary, so it's not displayed twice
+            upkeepTrig.append(" | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, if this card is suspended, remove a time counter from it");
+
+            final String abRemove = "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1";
+
+            final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig.toString(), card, intrinsic);
+            parsedUpkeepTrig.setOverridingAbility(AbilityFactory.getAbility(abRemove, card));
+            final Trigger cardTriggerUpkeep = card.addTrigger(parsedUpkeepTrig);
+
+            //play trigger
+            StringBuilder playTrig = new StringBuilder();
+
+            playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ TIME | NewCounterAmount$ 0 | Secondary$ True ");
+            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
+            playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
+
+            final String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | SuspendCast$ True";
+
+            final Trigger parsedPlayTrigger = TriggerHandler.parseTrigger(playTrig.toString(), card, intrinsic);
+            parsedPlayTrigger.setOverridingAbility(AbilityFactory.getAbility(abPlay, card));
+            final Trigger cardTriggerPlay = card.addTrigger(parsedPlayTrigger);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTriggerUpkeep);
+                kws.addTrigger(cardTriggerPlay);
+            }
         } else if (keyword.equals("Undying")) {
             final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
                     " | Execute$ UndyingReturn | ValidCard$ Card.Self+counters_EQ0_P1P1 | Secondary$ True" + 
@@ -3995,13 +3929,12 @@ public class CardFactoryUtil {
                 Map<String, String> sVars = card.getSVars();
 
                 final String[] k = parse.split(":");
-                final Cost cost = new Cost(k[1], true);
 
                 card.addSpellAbility(abilityMorphDown(card));
 
                 card.setState(CardStateName.FaceDown, false);
 
-                card.addSpellAbility(abilityMorphUp(card, cost, false));
+                card.addSpellAbility(abilityMorphUp(card, k[1], false));
                 card.setSVars(sVars); // for Warbreak Trumpeter.
 
                 card.setState(CardStateName.Original, false);
@@ -4016,13 +3949,12 @@ public class CardFactoryUtil {
                 Map<String, String> sVars = card.getSVars();
 
                 final String[] k = parse.split(":");
-                final Cost cost = new Cost(k[1], true);
 
                 card.addSpellAbility(abilityMorphDown(card));
 
                 card.setState(CardStateName.FaceDown, false);
 
-                card.addSpellAbility(abilityMorphUp(card, cost, true));
+                card.addSpellAbility(abilityMorphUp(card, k[1], true));
                 card.setSVars(sVars);
                 card.setState(CardStateName.Original, false);
             }

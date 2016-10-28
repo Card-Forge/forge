@@ -61,8 +61,6 @@ public class PumpAllEffect extends SpellAbilityEffect {
             }
             if (suspend && !tgtC.hasSuspend()) {
                 tgtC.setSuspend(true);
-                CardFactoryUtil.addSuspendUpkeepTrigger(tgtC);
-                CardFactoryUtil.addSuspendPlayTrigger(tgtC);
             }
 
             if (sa.hasParam("RememberAllPumped")) {
