@@ -241,7 +241,7 @@ public class GameAction {
         copied.getOwner().removeInboundToken(copied);
 
         if (c.wasSuspendCast()) {
-            copied = GameAction.addSuspendTriggers(c);
+            copied = GameAction.addSuspendTriggers(copied);
         }
 
         if (suppress) {
