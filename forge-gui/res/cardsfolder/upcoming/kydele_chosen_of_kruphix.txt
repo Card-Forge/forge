@@ -1,0 +1,10 @@
+Name:Kydele, Chosen of Kruphix
+ManaCost:2 G U
+Types:Legendary Creature Human Wizard
+PT:2/3
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | References$ X | SpellDescription$ Add {C} to your mana pool for each card you've drawn this turn.
+SVar:X:Count$YouDrewThisTurn 
+K:Partner
+DeckHas:Ability$Mana.Colorless
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kydele_chosen_of_kruphix.jpg
+Oracle:{T}: Add {C} to your mana pool for each card you've drawn this turn.\nPartner (You can have two commanders if both have partner.)

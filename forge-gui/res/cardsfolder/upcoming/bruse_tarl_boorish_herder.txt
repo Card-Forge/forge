@@ -1,0 +1,12 @@
+Name:Bruse Tarl, Boorish Herder
+ManaCost:2 R W
+Types:Legendary Creature Human Ally
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, target creature you control gains double strike and lifelink until end of turn.
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, target creature you control gains double strike and lifelink until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Double Strike & Lifelink
+K:Partner
+SVar:HasAttackEffect:TRUE
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bruse_tarl_boorish_herder.jpg
+Oracle:Whenever Bruse Tarl, Boorish Herder enters the battlefield or attacks, target creature you control gains double strike and lifelink until end of turn.\nPartner (You can have two commanders if both have partner.)
