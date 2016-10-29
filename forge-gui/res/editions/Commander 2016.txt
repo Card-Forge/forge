@@ -1,4 +1,4 @@
-[metadata]
+
 Code=C16
 Date=2016-11-11
 Name=Commander 2016
@@ -19,7 +19,7 @@ Type=Other
 10 R Manifold Insights
 11 R Cruel Entertainment
 12 R Curse of Vengeance
-13 R Curtains’ Call
+13 R Curtains' Call
 14 R Magus of the Will
 15 U Parting Thoughts
 16 R Charging Cinderhorn
@@ -27,20 +27,20 @@ Type=Other
 18 U Frenzied Fugue
 19 R Goblin Spymaster
 20 R Runehorn Hellkite
-21 R Benefactor’s Draught
+21 R Benefactor's Draught
 22 U Evolutionary Escalation
 23 R Primeval Protector
 24 R Seeds of Renewal
 25 R Stonehoof Chieftain
 26 R Akiri, Line-Slinger
 27 U Ancient Excavation
-28 M Atraxa, Praetors’ Voice
+28 M Atraxa, Praetors' Voice
 29 M Breya, Etherium Shaper
 30 M Bruse Tarl, Boorish Herder
 31 U Grave Upheaval
 32 M Ikra Shidiqi, the Usurper
 33 M Ishai, Ojutai Dragonspeaker
-34 R Kraum, Ludevic’s Opus
+34 R Kraum, Ludevic's Opus
 35 M Kydele, Chosen of Kruphix
 36 M Kynaios and Tiro of Meletis
 37 M Ludevic, Necro-Alchemist
@@ -65,7 +65,7 @@ Type=Other
 56 C Ash Barrens
 57 U Abzan Falconer
 58 R Blazing Archon
-59 R RBlind Obedience
+59 R Blind Obedience
 60 U Brave the Sands
 61 R Cathars' Crusade
 62 R Citadel Siege
@@ -82,9 +82,9 @@ Type=Other
 73 R Phyrexian Rebirth
 74 R Reveillark
 75 R Reverse the Sands
-76 C Sanctum Gargoyle
-77 U Sphere of Safety
-78 U Swords to Plowshares
+76 R Sanctum Gargoyle
+77 R Sphere of Safety
+78 R Swords to Plowshares
 79 R Wave of Reckoning
 80 R Windborn Muse
 81 R Academy Elite
@@ -95,10 +95,10 @@ Type=Other
 86 R Chief Engineer
 87 R Devastation Tide
 88 C Disdainful Stroke
-89 U Etherium Sculptor
-90 C Ethersworn Adjudicator
-91 C Evacuation
-92 M Master of Etherium
+89 C Etherium Sculptor
+90 M Ethersworn Adjudicator
+91 R Evacuation
+92 R Master of Etherium
 93 R Minds Aglow
 94 U Propaganda
 95 R Read the Runes
@@ -145,16 +145,16 @@ Type=Other
 136 R Trash for Treasure
 137 R Volcanic Vision
 138 R Wheel of Fate
-139 R Whims of Fate
+139 R Whims of the Fates
 140 U Whipflare
 141 U Beast Within
 142 R Beastmaster Ascension
 143 R Burgeoning
 144 R Champion of Lambholt
 145 R Collective Voyage
-146 C Cultivate
+146 R Cultivate
 147 R Den Protector
-148 C Far Wanderings
+148 U Far Wanderings
 149 C Farseek
 150 R Forgotten Ancient
 151 U Gamekeeper
@@ -165,7 +165,7 @@ Type=Other
 156 R Lurking Predators
 157 R Managorger Hydra
 158 R Mycoloth
-159 R Oath of Druids
+159 C Oath of Druids
 160 C Quirion Explorer
 161 C Rampant Growth
 162 R Realm Seekers
@@ -219,7 +219,7 @@ Type=Other
 210 M Master Biomancer
 211 R Merciless Eviction
 212 U Mortify
-213 R Nath of the GLit Leaf
+213 R Nath of the Gilt-Leaf
 214 U Naya Charm
 215 U Necrogenesis
 216 M Progenitor Mimic
@@ -254,7 +254,7 @@ Type=Other
 245 R Bonehoard
 246 R Cauldron of Souls
 247 R Chromatic Lantern
-248 C Command Sphere
+248 C Commander's Sphere
 249 U Cranial Plating
 250 U Darksteel Ingot
 251 R Empyrial Plate
@@ -263,9 +263,9 @@ Type=Other
 254 U Fellwar Stone
 255 C Golgari Signet
 256 C Gruul Signet
-257 U Howling Mine
+257 R Howling Mine
 258 C Ichor Wellspring
-259 U Keening Stone
+259 R Keening Stone
 260 U Lightning Greaves
 261 U Loxodon Warhammer
 262 C Mycosynth Wellspring
@@ -330,7 +330,7 @@ Type=Other
 321 U Savage Lands
 322 U Seaside Citadel
 323 C Seat of the Synod
-324 U Selesnya Samctuary
+324 U Selesnya Sanctuary
 325 R Shadowblood Ridge
 326 U Simic Growth Chamber
 327 R Spinerock Knoll
