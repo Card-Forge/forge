@@ -177,10 +177,11 @@ public final class StaticAbilityContinuous {
             }
         }
 
-        if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("KeywordMultiplier")) {
+        if (params.containsKey("KeywordMultiplier")) {
             final String multiplier = params.get("KeywordMultiplier");
             if (multiplier.equals("X")) {
-                se.setXValue(AbilityUtils.calculateAmount(hostCard, "X", stAb));
+                keywordMultiplier = AbilityUtils.calculateAmount(hostCard, "X", stAb);
+                se.setXValue(keywordMultiplier);
             } else {
                 keywordMultiplier = Integer.valueOf(multiplier);
             }
