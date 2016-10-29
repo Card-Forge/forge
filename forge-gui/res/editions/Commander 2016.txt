@@ -5,3 +5,55 @@ Name=Commander 2016
 Code2=C16
 MciCode=c16
 Type=Other
+
+[cards]
+1 R Duelist's Heritage
+2 R Entrapment Maneuver
+3 U Orzhov Advokist
+4 R Selfless Squire
+5 R Sublime Exhalation
+6 R Coastal Breach
+7 R Deepglow Skate
+8 R Faerie Artisans
+9 U Grip of Phyresis
+10 R Manifold Insights
+11 R Cruel Entertainment
+12 R Curse of Vengeance
+13 R Curtains’ Call
+14 R Magus of the Will
+15 U Parting Thoughts
+16 R Charging Cinderhorn
+17 R Divergent Transformations
+18 U Frenzied Fugue
+19 R Goblin Spymaster
+20 R Runehorn Hellkite
+21 R Benefactor’s Draught
+22 U Evolutionary Escalation
+23 R Primeval Protector
+24 R Seeds of Renewal
+25 R Stonehoof Chieftain
+26 R Akiri, Line-Slinger
+27 U Ancient Excavation
+28 M Atraxa, Praetors’ Voice
+29 M Breya, Etherium Shaper
+30 M Bruse Tarl, Boorish Herder
+31 U Grave Upheaval
+32 M Ikra Shidiqi, the Usurper
+33 M Ishai, Ojutai Dragonspeaker
+34 R Kraum, Ludevic’s Opus
+35 M Kydele, Chosen of Kruphix
+36 M Kynaios and Tiro of Meletis
+37 M Ludevic, Necro-Alchemist
+38 U Migratory Route
+39 M Ravos, Soultender
+40 R Reyhan, Last of the Abzan
+41 M Saskia the Unyielding
+42 M Sidar Kondo of Jamuraa
+43 M Silas Renn, Seeker Adept
+44 U Sylvan Reclamation
+45 M Tana, the Bloodsower
+46 R Thrasios, Triton Hero
+47 U Treacherous Terrain
+48 R Tymna the Weaver
+49 M Vial Smasher the Fierce
+50 M Yidris, Maelstrom Wielder
