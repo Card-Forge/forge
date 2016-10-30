@@ -75,7 +75,7 @@ public enum Keyword {
     LANDWALK(KeywordWithType.class, false, "This creature is unblockable as long as defending player controls a %s."),
     LEVELUP(KeywordWithCost.class, false, "%s: Put a level counter on this permanent. Activate this ability only any time you could cast a sorcery."),
     LIFELINK(SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
-    LIVING_WEAPON(SimpleKeyword.class, true, "When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this Equipment to it."),
+    LIVING_WEAPON(SimpleKeyword.class, true, "When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this Equipment to it."),
     MADNESS(KeywordWithCost.class, true, "If you discard this card, you may cast it for %s instead of putting it into your graveyard."),
     MELEE(SimpleKeyword.class, true, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked with a creature this combat."),
     MENACE(SimpleKeyword.class, true, "This creature can't be blocked except by two or more creatures."),
