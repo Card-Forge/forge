@@ -4,7 +4,8 @@ Types:Creature Giant
 PT:6/6
 T:Mode$ DamageDone | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigSac | CombatDamage$ True | TriggerDescription$ Whenever you're dealt combat damage, sacrifice CARDNAME.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Self
-K:Monstrosity 2:4 G G
+K:Monstrosity:2:4 G G
 S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Reach | Description$ As long as CARDNAME is monstrous, it has reach.
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swarmborn_giant.jpg
 Oracle:When you're dealt combat damage, sacrifice Swarmborn Giant.\n{4}{G}{G}: Monstrosity 2. (If this creature isn't monstrous, put two +1/+1 counters on it and it becomes monstrous.)\nAs long as Swarmborn Giant is monstrous, it has reach.

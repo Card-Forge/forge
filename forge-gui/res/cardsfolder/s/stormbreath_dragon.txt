@@ -5,10 +5,11 @@ PT:4/4
 K:Flying
 K:Haste
 K:Protection from white
-K:Monstrosity 3:5 R R
+K:Monstrosity:3:5 R R
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ When CARDNAME becomes monstrous, it deals damage to each opponent equal to the number of cards in that player's hand.
 SVar:TrigDmg:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBDmg
 SVar:DBDmg:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X | References$ X
 SVar:X:Count$ValidHand Card.RememberedPlayerCtrl
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormbreath_dragon.jpg
 Oracle:Flying, haste, protection from white\n{5}{R}{R}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen Stormbreath Dragon becomes monstrous, it deals damage to each opponent equal to the number of cards in that player's hand.
