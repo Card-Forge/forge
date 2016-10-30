@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
 import forge.card.ColorSet;
@@ -96,51 +97,49 @@ public class ComputerUtilMana {
         return payManaCost(cost, sa, ai, test, checkPlayable);
     }
 
-    private static class ManaProducingCard {
-        private int score;
+    private static Integer scoreManaProducingCard(final Card card) {
+        int score = 0;
 
-        public ManaProducingCard(final Card card) {
-            score = 0;
-
-            for (SpellAbility ability : card.getSpellAbilities()) {
-                ability.setActivatingPlayer(card.getController());
-                if (ability.isManaAbility()) {
-                    score += ability.calculateScoreForManaAbility();
-                }
-                else if (!ability.isTrigger() && ability.isPossible()) {
-                    score += 13; //add 13 for any non-mana activated abilities
-                }
+        for (SpellAbility ability : card.getSpellAbilities()) {
+            ability.setActivatingPlayer(card.getController());
+            if (ability.isManaAbility()) {
+                score += ability.calculateScoreForManaAbility();
             }
-
-            if (card.isCreature()) {
-                //treat attacking and blocking as though they're non-mana abilities
-                if (CombatUtil.canAttack(card, card.getController().getOpponent())) {
-                    score += 13;
-                }
-                if (CombatUtil.canBlock(card)) {
-                    score += 13;
-                }
+            else if (!ability.isTrigger() && ability.isPossible()) {
+                score += 13; //add 13 for any non-mana activated abilities
             }
         }
+
+        if (card.isCreature()) {
+            //treat attacking and blocking as though they're non-mana abilities
+            if (CombatUtil.canAttack(card)) {
+                score += 13;
+            }
+            if (CombatUtil.canBlock(card)) {
+                score += 13;
+            }
+        }
+
+        return score;
     }
     
     private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap) {
-        final Map<Card, ManaProducingCard> manaCardMap = new HashMap<>();
-        final List<Card> orderedCards = new ArrayList<>();
+        final Map<Card, Integer> manaCardMap = Maps.newHashMap();
+        final List<Card> orderedCards = Lists.newArrayList();
         
         for (final ManaCostShard shard : manaAbilityMap.keySet()) {
             for (SpellAbility ability : manaAbilityMap.get(shard)) {
-                if (!manaCardMap.containsKey(ability.getHostCard())) {
-                    ManaProducingCard manaProducingCard = new ManaProducingCard(ability.getHostCard());
-                    manaCardMap.put(ability.getHostCard(), manaProducingCard);
-                    orderedCards.add(ability.getHostCard());
+            	final Card hostCard = ability.getHostCard();
+                if (!manaCardMap.containsKey(hostCard)) {
+                    manaCardMap.put(hostCard, scoreManaProducingCard(hostCard));
+                    orderedCards.add(hostCard);
                 }
             }
         }
         Collections.sort(orderedCards, new Comparator<Card>() {
             @Override
             public int compare(final Card card1, final Card card2) {
-                return Integer.compare(manaCardMap.get(card1).score, manaCardMap.get(card2).score);
+                return Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
             }
         });
 
