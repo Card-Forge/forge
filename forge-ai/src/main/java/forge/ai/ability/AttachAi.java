@@ -1216,7 +1216,6 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static boolean isUsefulAttachKeyword(final String keyword, final Card card, final SpellAbility sa, final int powerBonus) {
         final Player ai = sa.getActivatingPlayer();
-        final Player opponent = ai.getOpponent();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
@@ -1228,10 +1227,18 @@ public class AttachAi extends SpellAbilityAi {
                 || keyword.endsWith("walk") || keyword.startsWith("CantBeBlockedBy")
                 || keyword.equals("All creatures able to block CARDNAME do so."));
         // give evasive keywords to creatures that can attack and deal damage
+
+        boolean canBeBlocked = false;
+        for (Player opp : ai.getOpponents()) {
+            if (CombatUtil.canBeBlocked(card, opp)) {
+                canBeBlocked = true;
+            }
+        }
+
         if (evasive) {
             if (card.getNetCombatDamage() + powerBonus <= 0
                     || !ComputerUtilCombat.canAttackNextTurn(card)
-                    || !CombatUtil.canBeBlocked(card, opponent)) {
+                    || !canBeBlocked) {
                 return false;
             }
         } else if (keyword.equals("Haste")) {
@@ -1246,7 +1253,7 @@ public class AttachAi extends SpellAbilityAi {
             return true;
         } else if (keyword.endsWith("Deathtouch") || keyword.endsWith("Wither")) {
             if (card.getNetCombatDamage() + powerBonus <= 0
-                    || ((!CombatUtil.canBeBlocked(card, opponent) || !ComputerUtilCombat.canAttackNextTurn(card))
+                    || ((!canBeBlocked || !ComputerUtilCombat.canAttackNextTurn(card))
                             && !CombatUtil.canBlock(card, true))) {
                 return false;
             }
@@ -1263,17 +1270,17 @@ public class AttachAi extends SpellAbilityAi {
         } else if (keyword.startsWith("Flanking")) {
             if (card.getNetCombatDamage() + powerBonus <= 0
                     || !ComputerUtilCombat.canAttackNextTurn(card)
-                    || !CombatUtil.canBeBlocked(card, opponent)) {
+                    || !canBeBlocked) {
                 return false;
             }
         } else if (keyword.startsWith("Bushido")) {
-            if ((!CombatUtil.canBeBlocked(card, opponent) || !ComputerUtilCombat.canAttackNextTurn(card))
+            if ((!canBeBlocked || !ComputerUtilCombat.canAttackNextTurn(card))
                     && !CombatUtil.canBlock(card, true)) {
                 return false;
             }
         } else if (keyword.equals("Trample")) {
             if (card.getNetCombatDamage() + powerBonus <= 1
-                    || !CombatUtil.canBeBlocked(card, opponent)
+                    || !canBeBlocked
                     || !ComputerUtilCombat.canAttackNextTurn(card)) {
                 return false;
             }
