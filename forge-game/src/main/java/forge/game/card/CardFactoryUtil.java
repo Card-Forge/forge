@@ -2290,30 +2290,7 @@ public class CardFactoryUtil {
                 card.setSVar("MyriadCleanup", dbString4);
             }
             else if (keyword.equals("Living Weapon")) {
-                card.removeIntrinsicKeyword(keyword);
-
-                final StringBuilder sbTrig = new StringBuilder();
-                sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
-                sbTrig.append("ValidCard$ Card.Self | Execute$ TrigGerm | TriggerDescription$ ");
-                sbTrig.append("Living Weapon (When this Equipment enters the battlefield, ");
-                sbTrig.append("put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)");
-
-                final StringBuilder sbGerm = new StringBuilder();
-                sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenName$ Germ | TokenTypes$ Creature,Germ | RememberTokens$ True | ");
-                sbGerm.append("TokenOwner$ You | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 0 | TokenImage$ B 0 0 Germ | SubAbility$ DBGermAttach");
-
-                final StringBuilder sbAttach = new StringBuilder();
-                sbAttach.append("DB$ Attach | Defined$ Remembered | SubAbility$ DBGermClear");
-
-                final StringBuilder sbClear = new StringBuilder();
-                sbClear.append("DB$ Cleanup | ClearRemembered$ True");
-
-                card.setSVar("TrigGerm", sbGerm.toString());
-                card.setSVar("DBGermAttach", sbAttach.toString());
-                card.setSVar("DBGermClear", sbClear.toString());
-
-                final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
-                card.addTrigger(etbTrigger);
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Epic")) {
             	addSpellAbility(keyword, card, null);
@@ -2892,6 +2869,36 @@ public class CardFactoryUtil {
 
             card.setSVar("FlankingPump", abStringFlanking);
             if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Living Weapon")) {
+            final StringBuilder sbTrig = new StringBuilder();
+            sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
+            sbTrig.append("ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ ");
+            sbTrig.append("Living Weapon (" + Keyword.getInstance(keyword).getReminderText() + ")");
+
+            final StringBuilder sbGerm = new StringBuilder();
+            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenName$ Germ | TokenTypes$ Creature,Germ | RememberTokens$ True | ");
+            sbGerm.append("TokenOwner$ You | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 0 | TokenImage$ B 0 0 Germ");
+
+            final SpellAbility saGerm = AbilityFactory.getAbility(sbGerm.toString(), card);
+
+            final String sbAttach = "DB$ Attach | Defined$ Remembered";
+            final AbilitySub saAttach = (AbilitySub) AbilityFactory.getAbility(sbAttach, card);
+            saGerm.setSubAbility(saAttach);
+
+            final String sbClear = "DB$ Cleanup | ClearRemembered$ True";
+            final AbilitySub saClear = (AbilitySub) AbilityFactory.getAbility(sbClear, card);
+            saAttach.setSubAbility(saClear);
+
+            final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, intrinsic);
+
+            etbTrigger.setOverridingAbility(saGerm);
+
+            final Trigger cardTrigger = card.addTrigger(etbTrigger);
+
+            if (!intrinsic) {
+                saGerm.setIntrinsic(false);
                 kws.addTrigger(cardTrigger);
             }
         } else if (keyword.startsWith("Madness")) {
