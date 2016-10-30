@@ -1,10 +1,9 @@
 Name:Remote Farm
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped with two depletion counters on it.
-SVar:LandTapped:AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter
-SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ DEPLETION | CounterNum$ 2 | SubAbility$ MoveToPlay
-SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter | SpellDescription$ CARDNAME enters the battlefield tapped with two depletion counters on it.
+SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ DEPLETION | CounterNum$ 2
 A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ W | SubAbility$ DBSac | Amount$ 2 | SpellDescription$ Add {W}{W} to your mana pool. If there are no depletion counters on CARDNAME, sacrifice it.
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_EQ0_DEPLETION
 SVar:RemAIDeck:True
