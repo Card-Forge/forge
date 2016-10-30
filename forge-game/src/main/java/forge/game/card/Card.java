@@ -1431,7 +1431,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             		|| keyword.startsWith("Strive") || keyword.startsWith("Escalate")
             		|| keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")
-                    || keyword.equals("Undaunted")) {
+                    || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                     || keyword.equals("Living Weapon")) {

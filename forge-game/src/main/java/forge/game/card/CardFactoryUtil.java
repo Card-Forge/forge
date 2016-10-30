@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import forge.card.mana.ManaAtom;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -40,6 +39,7 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
@@ -74,8 +74,8 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.collect.FCollectionView;
 import forge.util.Lang;
+import forge.util.collect.FCollectionView;
 
 /**
  * <p>
@@ -2068,23 +2068,7 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);                
             }
             else if (keyword.startsWith("Monstrosity")) {
-                final String[] k = keyword.split(":");
-                final String magnitude = k[0].substring(12);
-                final String manacost = k[1];
-                card.removeIntrinsicKeyword(keyword);
-
-                String ref = "X".equals(magnitude) ? " | References$ X" : "";
-                String counters = StringUtils.isNumeric(magnitude) 
-                        ? Lang.nounWithNumeral(Integer.parseInt(magnitude), "+1/+1 counter"): "X +1/+1 counters";
-                String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ " +
-                        "Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " +
-                        magnitude + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " +
-                        magnitude + " (If this creature isn't monstrous, put " + 
-                        counters + " on it and it becomes monstrous.) | StackDescription$ SpellDescription" + ref;
-
-                card.addSpellAbility(AbilityFactory.getAbility(effect, card));
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(effect);
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Ninjutsu")) {
                 addSpellAbility(keyword, card, null);
@@ -3356,6 +3340,30 @@ public class CardFactoryUtil {
             evokedSpell.setPayCosts(evokedCost);
 
             card.addSpellAbility(evokedSpell);
+        } else if (keyword.startsWith("Monstrosity")) {
+            final String[] k = keyword.split(":");
+            final String magnitude = k[1];
+            final String manacost = k[2];
+
+            String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ "
+                    + "Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " + magnitude
+                    + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " + magnitude + " ("
+                    + Keyword.getInstance(keyword).getReminderText() + ") | StackDescription$ SpellDescription";
+            if ("X".equals(magnitude)) {
+                effect += " | References$ X";
+            }
+            if (card.hasSVar("MonstrosityAILogic")) {
+                effect += "| AILogic$ " + card.getSVar("MonstrosityAILogic");
+            }
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                // sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            }
+            card.addSpellAbility(sa);
         } else if (keyword.startsWith("Ninjutsu")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
