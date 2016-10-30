@@ -26,6 +26,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -115,10 +116,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (params.containsKey("ConditionOptionalPaid")) {
                 this.optionalBoolean = Boolean.parseBoolean(params.get("ConditionOptionalPaid"));
             }
-        }
-
-        if (params.containsKey("ConditionDragonPresence")) {
-            this.dragonPresence = true;
         }
 
         if (params.containsKey("ConditionZone")) {
@@ -220,6 +217,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                     + " Did not have activator set in SpellAbility_Condition.checkConditions()");
         }
         final Game game = activator.getGame();
+        final PhaseHandler phase = game.getPhaseHandler();
+        final Card host = sa.getHostCard();
 
         if (this.isHellbent() && !activator.hasHellbent()) return false;
         if (this.isThreshold() && !activator.hasThreshold()) return false;
@@ -234,13 +233,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.optionalCostPaid && this.optionalBoolean && !sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
         if (this.optionalCostPaid && !this.optionalBoolean && sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
-
-        if (this.dragonPresence) {
-            if (!(sa.isOptionalCostPaid(OptionalCost.Generic) ||
-                    sa.getHostCard().getSVar("DragonPresence").equals("Number$1"))) {
-                return false;
-            }
-        }
         
         if (this.isAllTargetsLegal()) {
             for (Card c : sa.getTargets().getTargetCards()) {
@@ -269,11 +261,11 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
-        if (this.isPlayerTurn() && !activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
+        if (this.isPlayerTurn() && !phase.isPlayerTurn(activator)) {
             return false;
         }
 
-        if (this.isOpponentTurn() && !activator.getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(activator)) {
+        if (this.isOpponentTurn() && !phase.getPlayerTurn().isOpponentOf(activator)) {
             return false;
         }
 
@@ -287,7 +279,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.getPhases().size() > 0) {
             boolean isPhase = false;
-            final PhaseType currPhase = game.getPhaseHandler().getPhase();
+            final PhaseType currPhase = phase.getPhase();
             for (final PhaseType s : this.getPhases()) {
                 if (s == currPhase) {
                     isPhase = true;
@@ -316,7 +308,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.getIsPresent() != null) {
             CardCollectionView list;
             if (this.getPresentDefined() != null) {
-                list = AbilityUtils.getDefinedCards(sa.getHostCard(), this.getPresentDefined(), sa);
+                list = AbilityUtils.getDefinedCards(host, this.getPresentDefined(), sa);
             } else {
                 list = game.getCardsIn(ZoneType.Battlefield);
             }
@@ -330,7 +322,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             } catch (final NumberFormatException e) { // Otherwise, grab it from
                                                       // the
                 // SVar
-                right = CardFactoryUtil.xCount(sa.getHostCard(), sa.getHostCard().getSVar(rightString));
+                right = CardFactoryUtil.xCount(host, host.getSVar(rightString));
             }
 
             final int left = list.size();
@@ -363,7 +355,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             int right = 1;
             final String rightString = this.getLifeAmount().substring(2);
             if (rightString.equals("X")) {
-                right = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getHostCard().getSVar("X"), sa);
+                right = AbilityUtils.calculateAmount(host, host.getSVar("X"), sa);
             } else {
                 right = Integer.parseInt(this.getLifeAmount().substring(2));
             }
@@ -419,8 +411,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getsVarToCheck() != null) {
-            final int svarValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarToCheck(), sa);
-            final int operandValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarOperand(), sa);
+            final int svarValue = AbilityUtils.calculateAmount(host, this.getsVarToCheck(), sa);
+            final int operandValue = AbilityUtils.calculateAmount(host, this.getsVarOperand(), sa);
 
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;
