@@ -550,7 +550,8 @@ public class CountersPutAi extends SpellAbilityAi {
         if (mode == PlayerActionConfirmMode.Tribute) {
             // add counter if that opponent has a giant creature
             final List<Card> creats = player.getCreaturesInPlay();
-            final int tributeAmount = source.getKeywordMagnitude("Tribute");
+            final int tributeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
+
             final boolean isHaste = source.hasKeyword("Haste");
             List<Card> threatening = CardLists.filter(creats, new Predicate<Card>() {
                 @Override
@@ -582,7 +583,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 } else if (logic.equals("DontControlCreatures")) {
                     return !creats.isEmpty();
                 } else if (logic.equals("OppHasCardsInHand")) {
-                    return !player.getOpponent().getCardsIn(ZoneType.Hand).isEmpty();
+                    return sa.getActivatingPlayer().getCardsIn(ZoneType.Hand).isEmpty();
                 }
             }
         }

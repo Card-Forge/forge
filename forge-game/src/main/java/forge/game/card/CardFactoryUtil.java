@@ -2428,20 +2428,8 @@ public class CardFactoryUtil {
                 card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
             }
             else if (keyword.startsWith("Tribute")) {
-                final int tributeAmount = card.getKeywordMagnitude("Tribute");
-
-                final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
-                        + " ReplaceWith$ TributeAddCounter | Secondary$ True | Description$ Tribute "
-                        + tributeAmount + " (As this creature enters the battlefield, an opponent of your"
-                        + " choice may place " + tributeAmount + " +1/+1 counter on it.)";
-                final String abString = "DB$ PutCounter | Defined$ ReplacedCard | Tribute$ True | "
-                        + "CounterType$ P1P1 | CounterNum$ " + tributeAmount
-                        + " | ETB$ True | SubAbility$ TributeMoveToPlay";
-                final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
-                        + "Defined$ ReplacedCard | Hidden$ True";
-                card.setSVar("TributeAddCounter", abString);
-                card.setSVar("TributeMoveToPlay", moveToPlay);
-                card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
+                addReplacementEffect(keyword, card, null);
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Amplify")) {
                 // find position of Amplify keyword
@@ -3067,16 +3055,32 @@ public class CardFactoryUtil {
                 kws.addTrigger(cardTriggerUpkeep);
                 kws.addTrigger(cardTriggerPlay);
             }
+        } else if (keyword.startsWith("Tribute")) {
+        	// use hardcoded ability name
+            final String abStr = "TrigNotTribute";
+
+            // get Description from Ability
+            final String desc = AbilityFactory.getMapParams(card.getSVar(abStr)).get("SpellDescription");
+            final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed " +
+                     " | Execute$ " + abStr + " | TriggerDescription$ " + desc;
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(parsedTrigger);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+
         } else if (keyword.equals("Undying")) {
             final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
                     " | Execute$ UndyingReturn | ValidCard$ Card.Self+counters_EQ0_P1P1 | Secondary$ True" + 
                     " | TriggerDescription$ Undying (" + Keyword.getInstance(keyword).getReminderText() + ")";
             final String effect = "AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1";
 
-            final Trigger undyingTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
-            final Trigger cardTrigger = card.addTrigger(undyingTrigger);
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(parsedTrigger);
 
-            card.setSVar("UndyingReturn", effect);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
@@ -3181,6 +3185,20 @@ public class CardFactoryUtil {
             String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, true, true, intrinsic, "Card.Self", "");
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
+            }
+        } else if (keyword.startsWith("Tribute")) {
+            final String[] k = keyword.split(":");
+            final String tributeAmount = k[1];
+
+            final String effect = "DB$ PutCounter | Defined$ ReplacedCard | Tribute$ True | "
+                    + "CounterType$ P1P1 | CounterNum$ " + tributeAmount
+                    + " | ETB$ True | SpellDescription$ Tribute " + tributeAmount
+                    + " ("+ Keyword.getInstance(keyword).getReminderText() + ")";
+
+            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self", "");
 
             if (!intrinsic) {
                 kws.addReplacement(cardre);

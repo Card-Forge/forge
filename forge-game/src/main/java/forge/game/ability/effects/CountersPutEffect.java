@@ -154,7 +154,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         counterAmount = Math.max(Math.min(max - tgtCard.getCounters(counterType), counterAmount), 0);
                     }
                     if (sa.hasParam("Tribute")) {
-                        String message = "Do you want to put " + tgtCard.getKeywordMagnitude("Tribute") + " +1/+1 counters on " + tgtCard + " ?";
+                        String message = "Do you want to put " + counterAmount + " +1/+1 counters on " + tgtCard + " ?";
                         Player chooser = activator.getController().chooseSingleEntityForEffect(activator.getOpponents(), sa, "Choose an opponent");
                         if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
                             tgtCard.setTributed(true);

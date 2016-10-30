@@ -1436,7 +1436,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")) {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
-                    || keyword.startsWith("Crew")) {
+                    || keyword.startsWith("Crew") || keyword.startsWith("Tribute")) {
                 final String[] k = keyword.split(":");
                 sbLong.append(k[0] + " " + k[1] + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.contains("Haunt")) {
