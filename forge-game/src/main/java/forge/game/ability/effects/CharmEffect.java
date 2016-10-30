@@ -153,10 +153,6 @@ public class CharmEffect extends SpellAbilityEffect {
     }
 
     private static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
-        SpellAbility saDeepest = sa;
-        while (saDeepest.getSubAbility() != null) {
-            saDeepest = saDeepest.getSubAbility();
-        }
 
         // Sort Chosen by SA order
         Collections.sort(chosen, new Comparator<AbilitySub>() {
@@ -170,8 +166,8 @@ public class CharmEffect extends SpellAbilityEffect {
             // Clone the chosen, just in case the some subAb gets chosen multiple times
             AbilitySub clone = (AbilitySub)sub.getCopy();
 
-            saDeepest.setSubAbility(clone);
-            clone.setActivatingPlayer(saDeepest.getActivatingPlayer());
+            // update ActivatingPlayer
+            clone.setActivatingPlayer(sa.getActivatingPlayer());
 
             // do not forget what was targeted by the subability
             SpellAbility ssa = sub;
@@ -187,14 +183,10 @@ public class CharmEffect extends SpellAbilityEffect {
                 ssaClone = ssaClone.getSubAbility();
             }
 
-            clone.setParent(saDeepest);
-
-            // to chain the next one (but make sure it goes all the way at the end of the SA chain)
-            saDeepest = clone;
-            while (saDeepest.getSubAbility() != null) {
-                saDeepest = saDeepest.getSubAbility();
-            }
+            // add Clone to Tail of sa
+            sa.appendSubAbility(clone);
         }
+        
     }
 
 
