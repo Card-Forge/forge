@@ -32,6 +32,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
@@ -197,6 +198,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setHostCard(final Card c) {
         if (hostCard == c) { return; }
         super.setHostCard(c);
+
+        if (subAbility != null) {
+            subAbility.setHostCard(c);
+        }
+
         view.updateHostCard(this);
         view.updateDescription(this); //description can change if host card does
     }
@@ -664,9 +670,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (clone.hostCard != null && clone.hostCard.getGame() != null) {
                 clone.hostCard.getGame().addSpellAbility(clone.id, clone);
             }
+
             // need to clone the maps too so they can be changed
             clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
             clone.mapParams = Maps.newHashMap(this.mapParams);
+
+            // run special copy Ability to make a deep copy
+            CardFactory.copySpellAbility(this, clone);
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }

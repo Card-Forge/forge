@@ -404,25 +404,12 @@ public final class GameActionUtil {
                 newSA.setDescription(newSA.getDescription() + " (Splicing " + c + " onto it)");
                 newSA.addSplicedCards(c);
 
-                // copy all subAbilities
-                SpellAbility child = newSA;
-                while (child.getSubAbility() != null) {
-                    AbilitySub newChild = child.getSubAbility().getCopy();
-                    child.setSubAbility(newChild);
-                    child.setActivatingPlayer(newSA.getActivatingPlayer());
-                    child = newChild;
-                }
+                newSA.setActivatingPlayer(sa.getActivatingPlayer());
 
+                newSA.setHostCard(source);
                 //add the spliced ability to the end of the chain
-                child.setSubAbility(subAbility);
+                newSA.appendSubAbility(subAbility);
 
-                //set correct source and activating player to all the spliced abilities
-                child = subAbility;
-                while (child != null) {
-                    child.setHostCard(source);
-                    child.setActivatingPlayer(newSA.getActivatingPlayer());
-                    child = child.getSubAbility();
-                }
                 newSAs.add(newSA);
                 allSaCombinations.add(++i, newSA);
             }

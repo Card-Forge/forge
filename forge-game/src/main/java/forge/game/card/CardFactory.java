@@ -204,18 +204,12 @@ public class CardFactory {
         }
         else {
             copySA = sa.copy();
-            copySA.setHostCard(c);
-            SpellAbility parentSA = copySA;
-            SpellAbility subSA = copySA.getSubAbility();
+            AbilitySub subSA = copySA.getSubAbility();
             while (subSA != null) {
-                AbilitySub copySubSA = ((AbilitySub) subSA).getCopy();
-                parentSA.setSubAbility(copySubSA);
-                copySubSA.setParent(parentSA);
-                copySubSA.setHostCard(c);
-                copySubSA.setCopied(true);
-                parentSA = copySubSA;
-                subSA = copySubSA.getSubAbility();
+                subSA.setCopied(true);
+                subSA = subSA.getSubAbility();
             }
+            copySA.setHostCard(c);
         }
         c.getCurrentState().setNonManaAbilities(copySA);
         copySA.setCopied(true);
