@@ -18,23 +18,21 @@
 package forge.ai;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
@@ -162,7 +160,7 @@ public class AiController {
             all.addAll(opp.getCardsIn(ZoneType.Exile));
         }
 
-        final List<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> spellAbilities = Lists.newArrayList();
         for (final Card c : all) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {
                 if (sa instanceof SpellPermanent) {
@@ -191,19 +189,19 @@ public class AiController {
                         && !sa.getHostCard().hasKeyword("CARDNAME can't be countered.")) {
                     return true;
                 } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && !host.hasKeyword("CARDNAME can't be countered.")
-                		&& host.getCMC() == c.getCounters(CounterType.CHARGE)) {
+                        && host.getCMC() == c.getCounters(CounterType.CHARGE)) {
                     return true;
                 }  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && !host.hasKeyword("CARDNAME can't be countered.")) {
-                	for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                		if (!card.isToken() && card.getName().equals(host.getName())) {
-                			return true;
-                		}
-                	}
-                	for (Card card : game.getCardsIn(ZoneType.Graveyard)) {
-                		if (card.getName().equals(host.getName())) {
-                			return true;
-                		}
-                	}
+                    for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+                        if (!card.isToken() && card.getName().equals(host.getName())) {
+                            return true;
+                        }
+                    }
+                    for (Card card : game.getCardsIn(ZoneType.Graveyard)) {
+                        if (card.getName().equals(host.getName())) {
+                            return true;
+                        }
+                    }
                 } 
             }
         }
@@ -278,9 +276,9 @@ public class AiController {
                     rightapi = true;
                 }
                 if (!(exSA instanceof AbilitySub)) {
-                	if (!ComputerUtilCost.canPayCost(exSA, player)) {
-                		return false;
-                	}
+                    if (!ComputerUtilCost.canPayCost(exSA, player)) {
+                        return false;
+                    }
                 }
             }
 
@@ -363,7 +361,7 @@ public class AiController {
     }
 
     private static List<SpellAbility> getPlayableCounters(final CardCollection l) {
-        final List<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
+        final List<SpellAbility> spellAbility = Lists.newArrayList();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {
                 // Check if this AF is a Counterpsell
@@ -488,21 +486,21 @@ public class AiController {
 
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
-	        CardCollection nonTappeddLands = new CardCollection();
-	        for (Card land : landList) {
-	            // Is this the best way to check if a land ETB Tapped?
-	            if (land.hasSVar("ETBTappedSVar")) {
-	                continue;
-	            }
-	            // Glacial Fortress and friends
-	            if (land.hasSVar("ETBCheckSVar") && CardFactoryUtil.xCount(land, land.getSVar("ETBCheckSVar")) == 0) {
-	                continue;
-	            }
-	            nonTappeddLands.add(land);
-	        }
-	        if (!nonTappeddLands.isEmpty()) {
-	            landList = nonTappeddLands;
-	        }
+            CardCollection nonTappeddLands = new CardCollection();
+            for (Card land : landList) {
+                // Is this the best way to check if a land ETB Tapped?
+                if (land.hasSVar("ETBTappedSVar")) {
+                    continue;
+                }
+                // Glacial Fortress and friends
+                if (land.hasSVar("ETBCheckSVar") && CardFactoryUtil.xCount(land, land.getSVar("ETBCheckSVar")) == 0) {
+                    continue;
+                }
+                nonTappeddLands.add(land);
+            }
+            if (!nonTappeddLands.isEmpty()) {
+                landList = nonTappeddLands;
+            }
         }
 
         // Choose first land to be able to play a one drop
@@ -528,7 +526,7 @@ public class AiController {
 
         //play lands with a basic type that is needed the most
         final CardCollectionView landsInBattlefield = player.getCardsIn(ZoneType.Battlefield);
-        final List<String> basics = new ArrayList<String>();
+        final List<String> basics = Lists.newArrayList();
 
         // what types can I go get?
         for (final String name : MagicColor.Constant.BASIC_LANDS) {
@@ -537,26 +535,26 @@ public class AiController {
             }
         }
         if (!basics.isEmpty()) {
-	        // Which basic land is least available
-	        int minSize = Integer.MAX_VALUE;
-	        String minType = null;
+            // Which basic land is least available
+            int minSize = Integer.MAX_VALUE;
+            String minType = null;
 
-	        for (String b : basics) {
-	            final int num = CardLists.getType(landsInBattlefield, b).size();
-	            if (num < minSize) {
-	                minType = b;
-	                minSize = num;
-	            }
-	        }
+            for (String b : basics) {
+                final int num = CardLists.getType(landsInBattlefield, b).size();
+                if (num < minSize) {
+                    minType = b;
+                    minSize = num;
+                }
+            }
 
-	        if (minType != null) {
-	            landList = CardLists.getType(landList, minType);
-	        }
+            if (minType != null) {
+                landList = CardLists.getType(landList, minType);
+            }
 
-	        // pick dual lands if available
-	        if (Iterables.any(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS))) {
-	            landList = CardLists.filter(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
-	        }
+            // pick dual lands if available
+            if (Iterables.any(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS))) {
+                landList = CardLists.filter(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
+            }
         }
         return landList.get(0);
     }
@@ -693,23 +691,23 @@ public class AiController {
                 final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
                 final Card source = sa.getHostCard();
                 if (source.hasConverge()) {
-                	card.setSVar("PayX", Integer.toString(0));
-                	int nColors = ComputerUtilMana.getConvergeCount(sa, player);
-                	for (int i = 1; i <= xPay; i++) {
-                		card.setSVar("PayX", Integer.toString(i));
-                		int newColors = ComputerUtilMana.getConvergeCount(sa, player);
-                		if (newColors > nColors) {
-                			nColors = newColors;
-                		} else {
-                			card.setSVar("PayX", Integer.toString(i - 1));
-                			break;
-                		}
-                	}
+                    card.setSVar("PayX", Integer.toString(0));
+                    int nColors = ComputerUtilMana.getConvergeCount(sa, player);
+                    for (int i = 1; i <= xPay; i++) {
+                        card.setSVar("PayX", Integer.toString(i));
+                        int newColors = ComputerUtilMana.getConvergeCount(sa, player);
+                        if (newColors > nColors) {
+                            nColors = newColors;
+                        } else {
+                            card.setSVar("PayX", Integer.toString(i - 1));
+                            break;
+                        }
+                    }
                 } else {
-	                if (xPay <= 0) {
-	                    return AiPlayDecision.CantAffordX;
-	                }
-	                card.setSVar("PayX", Integer.toString(xPay));
+                    if (xPay <= 0) {
+                        return AiPlayDecision.CantAffordX;
+                    }
+                    card.setSVar("PayX", Integer.toString(xPay));
                 }
             } else if (mana.isZero()) {
                 // if mana is zero, but card mana cost does have X, then something is wrong
@@ -742,17 +740,17 @@ public class AiController {
             }
             
             if (sa.hasParam("Announce") && sa.getParam("Announce").startsWith("Multikicker")) {
-            	//String announce = sa.getParam("Announce");
+                //String announce = sa.getParam("Announce");
                 ManaCost mkCost = sa.getMultiKickerManaCost();
                 ManaCost mCost = sa.getPayCosts().getTotalMana();
                 for (int i = 0; i < 10; i++) {
-                	mCost = ManaCost.combine(mCost, mkCost);
-                	ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
-                	if (!ComputerUtilMana.canPayManaCost(mcbp, sa, player)) {
-                		card.setKickerMagnitude(i);
-                		break;
-                	}
-                	card.setKickerMagnitude(i+1);
+                    mCost = ManaCost.combine(mCost, mkCost);
+                    ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
+                    if (!ComputerUtilMana.canPayManaCost(mcbp, sa, player)) {
+                        card.setKickerMagnitude(i);
+                        break;
+                    }
+                    card.setKickerMagnitude(i+1);
                 }
             }
             
@@ -780,7 +778,7 @@ public class AiController {
             // save cards with flash for surprise blocking
             if (card.hasKeyword("Flash")
                     && (player.isUnlimitedHandSize() || player.getCardsIn(ZoneType.Hand).size() <= player.getMaxHandSize()
-                    	|| game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
+                        || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                     && player.getManaPool().totalMana() <= 0
                     && (game.getPhaseHandler().isPlayerTurn(player)
                             || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
@@ -799,7 +797,7 @@ public class AiController {
                     final Ability emptyAbility = new AbilityStatic(card, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
                     emptyAbility.setActivatingPlayer(player);
                     if (!ComputerUtilCost.canPayCost(emptyAbility, player)) {
-                    	return AiPlayDecision.AnotherTime;
+                        return AiPlayDecision.AnotherTime;
                     }
                 }
             }
@@ -808,7 +806,7 @@ public class AiController {
         if (sa instanceof Spell) {
             
             if (ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife() 
-            		&& !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+                    && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
                 return AiPlayDecision.CurseEffects;
             }
             return canPlaySpellBasic(card);
@@ -874,9 +872,9 @@ public class AiController {
             }
             
             if (a.getHostCard().hasSVar("FreeSpellAI")) {
-            	return -1;
+                return -1;
             } else if (b.getHostCard().hasSVar("FreeSpellAI")) {
-            	return 1;
+                return 1;
             }
 
             a1 += getSpellAbilityPriority(a);
@@ -900,7 +898,7 @@ public class AiController {
             }
             // use Surge and Prowl costs when able to
             if (sa.isSurged() || 
-            		(sa.getRestrictions().getProwlTypes() != null && !sa.getRestrictions().getProwlTypes().isEmpty())) {
+                    (sa.getRestrictions().getProwlTypes() != null && !sa.getRestrictions().getProwlTypes().isEmpty())) {
                 p += 9;
             }
             // 1. increase chance of using Surge effects
@@ -967,7 +965,7 @@ public class AiController {
         if (sa != null) {
             sourceCard = sa.getHostCard();
             if ("Always".equals(sa.getParam("AILogic")) && !validCards.isEmpty()) {
-            	min = 1;
+                min = 1;
             }
         }
     
@@ -1267,7 +1265,7 @@ public class AiController {
                 if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
                         || player.cantLoseForZeroOrLessLife() ) {
                     game.PLAY_LAND_SURROGATE.setHostCard(land);
-                    final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+                    final List<SpellAbility> abilities = Lists.newArrayList();
                     abilities.add(game.PLAY_LAND_SURROGATE);
                     return abilities;
                 }
@@ -1279,7 +1277,7 @@ public class AiController {
 
         // System.out.println("Chosen to play: " + sa);
 
-        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> abilities = Lists.newArrayList();
         abilities.add(sa);
         return abilities;
     }
@@ -1424,7 +1422,7 @@ public class AiController {
         Card hostCard = effect.getHostCard();
         if (hostCard.hasAlternateState()) {
             hostCard = game.getCardState(hostCard);
-    	}
+        }
 
         if (effect.getMapParams().containsKey("AICheckSVar")) {
             System.out.println("aiShouldRun?" + sa);
@@ -1471,7 +1469,7 @@ public class AiController {
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
         // AI would play everything. But limits to one copy of (Leyline of Singularity) and (Gemstone Caverns)
         
-        List<SpellAbility> result = new ArrayList<SpellAbility>();
+        List<SpellAbility> result = Lists.newArrayList();
         for(SpellAbility sa : usableFromOpeningHand) {
             // Is there a better way for the AI to decide this?
             if (doTrigger(sa, false)) {
@@ -1556,7 +1554,7 @@ public class AiController {
     }
 
     public Map<GameEntity, CounterType> chooseProliferation() {
-        final Map<GameEntity, CounterType> result = new HashMap<>();  
+        final Map<GameEntity, CounterType> result = Maps.newHashMap();  
         
         final List<Player> allies = player.getAllies();
         allies.add(player);
@@ -1564,7 +1562,31 @@ public class AiController {
         final Function<Card, CounterType> predProliferate = new Function<Card, CounterType>() {
             @Override
             public CounterType apply(Card crd) {
+                //fast way out, no need to check other stuff
+                if (!crd.hasCounters()) {
+                    return null;
+                }
+
+                // cards controlled by ai or ally with Vanishing or Fading
+                // and exaclty one counter of the specifice type gets high priority to keep the card
+                if (allies.contains(crd.getController())) {
+                    // except if its a Chronozoa, because it WANTS to be removed to make more
+                    if (crd.hasKeyword("Vanishing") && !"Chronozoa".equals(crd.getName())) {
+                        if (crd.getCounters(CounterType.TIME) == 1) {
+                            return CounterType.TIME;
+                        }
+                    } else if (crd.hasKeyword("Fading")) {
+                        if (crd.getCounters(CounterType.FADE) == 1) {
+                            return CounterType.FADE;
+                        }
+                    }
+                }
+
                 for (final Entry<CounterType, Integer> c1 : crd.getCounters().entrySet()) {
+                    // if card can not recive the given counter, try another one
+                    if (!crd.canReceiveCounters(c1.getKey())) {
+                        continue;
+                    }
                     if (ComputerUtil.isNegativeCounter(c1.getKey(), crd) && enemies.contains(crd.getController())) {
                         return c1.getKey();
                     }
@@ -1592,6 +1614,8 @@ public class AiController {
         for (Player pl : allies) {
             if (pl.getCounters(CounterType.EXPERIENCE) > 0) {
                 result.put(pl, CounterType.EXPERIENCE);
+            } else if (pl.getCounters(CounterType.ENERGY) > 0) {
+                result.put(pl, CounterType.ENERGY);
             }
         }
 
@@ -1645,7 +1669,7 @@ public class AiController {
     }
 
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) {
-        List<PaperCard> result = new ArrayList<PaperCard>();
+        List<PaperCard> result = Lists.newArrayList();
         for (Entry<DeckSection, CardPool> ds : myDeck) {
             for (Entry<PaperCard, Integer> cp : ds.getValue()) {
                 if (cp.getKey().getRules().getAiHints().getRemAIDecks()) 
