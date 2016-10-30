@@ -2235,18 +2235,7 @@ public class CardFactoryUtil {
                 card.addTrigger(parsedUpkeepTrig);
             }
             else if (keyword.startsWith("Renown")) {
-                final String[] k = keyword.split(" ");
-                final String suffix = !k[1].equals("1") ? "s" : "";
-                card.removeIntrinsicKeyword(keyword);
-                String renownTrig = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player"
-                		+ " | IsPresent$ Card.Self+IsNotRenowned | CombatDamage$ True | Execute$"
-                		+ " TrigBecomeRenown | TriggerDescription$ Renown " + k[1] +" (When this "
-                		+ "creature deals combat damage to a player, if it isn't renowned, put " 
-                		+ k[1] + " +1/+1 counter" + suffix + " on it and it becomes renowned.) ";
-                card.setSVar("TrigBecomeRenown", "AB$ PutCounter | Cost$ 0 | Defined$ Self | "
-                		+ "CounterType$ P1P1 | CounterNum$ " + k[1] + " | Renown$ True");
-                final Trigger parseRenownTrig = TriggerHandler.parseTrigger(renownTrig, card, true);
-                card.addTrigger(parseRenownTrig);
+                addTriggerAbility(keyword, card, null); 
             }
             else if (keyword.startsWith("Vanishing")) {
                 final String[] k = keyword.split(":");
@@ -3008,6 +2997,23 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
+        } else if (keyword.startsWith("Renown")) {
+            final String[] k = keyword.split(":");
+
+            String renownTrig = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player"
+                    + " | IsPresent$ Card.Self+IsNotRenowned | CombatDamage$ True "
+                    + " | TriggerDescription$ Renown " + k[1] +" (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String effect = "AB$ PutCounter | Cost$ 0 | Defined$ Self | "
+                    + "CounterType$ P1P1 | CounterNum$ " + k[1] + " | Renown$ True";
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(renownTrig, card, intrinsic);
+            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(parsedTrigger);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
         } else if (keyword.startsWith("Soulshift")) {
             final String[] k = keyword.split(":");
 
@@ -3063,7 +3069,7 @@ public class CardFactoryUtil {
                 kws.addTrigger(cardTriggerPlay);
             }
         } else if (keyword.startsWith("Tribute")) {
-        	// use hardcoded ability name
+            // use hardcoded ability name
             final String abStr = "TrigNotTribute";
 
             // get Description from Ability
@@ -3236,7 +3242,7 @@ public class CardFactoryUtil {
             }
             card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Awaken")) {
-        	final String[] k = keyword.split(":");
+            final String[] k = keyword.split(":");
             final String counters = k[1];
             final Cost awakenCost = new Cost(k[2], false);
 
@@ -3253,7 +3259,7 @@ public class CardFactoryUtil {
             awakenSub.setSubAbility(animateSub);
             awakenSpell.appendSubAbility(awakenSub);
             String desc = "Awaken " + counters + " - " + awakenCost.toSimpleString() +
-            		" (" + Keyword.getInstance(keyword).getReminderText() + ")";
+                    " (" + Keyword.getInstance(keyword).getReminderText() + ")";
             awakenSpell.setDescription(desc);
             awakenSpell.setBasicSpell(false);
             awakenSpell.setPayCosts(awakenCost);
