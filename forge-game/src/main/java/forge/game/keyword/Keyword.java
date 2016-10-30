@@ -84,6 +84,7 @@ public enum Keyword {
     MODULAR(KeywordWithAmount.class, false, "This creature enters the battlefield with %d +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature."),
     MORPH(KeywordWithCost.class, true, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost."),
     MULTIKICKER(KeywordWithCost.class, false, "You may pay an additional %s any number of times as you cast this spell."),
+    MYRIAD(SimpleKeyword.class, false, "Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker he or she controls. If one or more tokens are created this way, exile the tokens at end of combat."),
     NINJUTSU(KeywordWithCost.class, false, "%s, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking."),
     OUTLAST(KeywordWithCost.class, false, "%s, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery."),
     OFFERING(KeywordWithType.class, false, "You may cast this card any time you could cast an instant by sacrificing a %1$s and paying the difference in mana costs between this and the sacrificed %1$s. Mana cost includes color."),
@@ -201,6 +202,7 @@ public enum Keyword {
         return inst;
     }
 
+    @Override
     public String toString() {
         return displayName;
     }

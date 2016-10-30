@@ -926,6 +926,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     	return "Count$Converge".equals(getSVar("X")) || "Count$Converge".equals(getSVar("Y")) || hasKeyword("Sunburst");
     }
 
+    @Override
     public final boolean canReceiveCounters(final CounterType type) {
         if (hasKeyword("CARDNAME can't have counters placed on it.")) {
             return false;
@@ -959,6 +960,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         addCounter(counterType, n, applyMultiplier, false);
     }
 
+    @Override
     protected void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier, final boolean fireEvents) {
         int addAmount = n;
         if(addAmount < 0) {
@@ -1054,6 +1056,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return counterAmount;
     }
 
+    @Override
     public final void subtractCounter(final CounterType counterName, final int n) {
         Integer oldValue = counters.get(counterName);
         int newValue = oldValue == null ? 0 : Math.max(oldValue - n, 0);
@@ -1092,11 +1095,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
+    @Override
     public final void setCounters(final Map<CounterType, Integer> allCounters) {
         counters = allCounters;
         view.updateCounters(this);
     }
 
+    @Override
     public final void clearCounters() {
         if (counters.isEmpty()) { return; }
         counters.clear();
@@ -1434,7 +1439,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
-                    || keyword.equals("Living Weapon")) {
+                    || keyword.equals("Living Weapon") || keyword.equals("Myriad")) {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute")
