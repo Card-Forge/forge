@@ -2250,27 +2250,9 @@ public class CardFactoryUtil {
             }
             else if (keyword.startsWith("Vanishing")) {
                 final String[] k = keyword.split(":");
-                // etbcounter
+                // etbcounter only for intrinsic
                 card.addIntrinsicKeyword("etbCounter:TIME:" + k[1] + ":no Condition:no desc");
-                // Remove Time counter trigger
-                String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | " +
-                        "TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME" +
-                        " | Execute$ TrigUpkeepVanishing | TriggerDescription$ At the " +
-                        "beginning of your upkeep, if CARDNAME has a time counter on it, " +
-                        "remove a time counter from it. | Secondary$ True";
-                card.setSVar("TrigUpkeepVanishing", "AB$ RemoveCounter | Cost$ 0 | Defined$ Self" +
-                        " | CounterType$ TIME | CounterNum$ 1");
-                final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, true);
-                card.addTrigger(parsedUpkeepTrig);
-                // sacrifice trigger
-                String sacTrig = "Mode$ CounterRemoved | TriggerZones$ Battlefield | ValidCard$" +
-                        " Card.Self | NewCounterAmount$ 0 | Secondary$ True | CounterType$ TIME |" +
-                        " Execute$ TrigVanishingSac | TriggerDescription$ When the last time " +
-                        "counter is removed from CARDNAME, sacrifice it.";
-                card.setSVar("TrigVanishingSac", "AB$ Sacrifice | Cost$ 0 | SacValid$ Self");
-
-                final Trigger parsedSacTrigger = TriggerHandler.parseTrigger(sacTrig, card, true);
-                card.addTrigger(parsedSacTrigger);
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Delve")) {
                 card.getSpellAbilities().getFirst().setDelve(true);
@@ -3108,6 +3090,32 @@ public class CardFactoryUtil {
             card.setSVar("UndyingReturn", effect);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Vanishing")) {
+            // Remove Time counter trigger
+            final String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | " +
+                    "TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME | " +
+                    "Secondary$ True | TriggerDescription$ At the beginning of your upkeep, " +
+                    "if CARDNAME has a time counter on it, remove a time counter from it.";
+            final String remove = "DB$ RemoveCounter | Defined$ Self" +
+                    " | CounterType$ TIME | CounterNum$ 1";
+            final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
+            parsedUpkeepTrig.setOverridingAbility(AbilityFactory.getAbility(remove, card));
+            final Trigger cardUpkeepTrig = card.addTrigger(parsedUpkeepTrig);
+
+            // sacrifice trigger
+            String sacTrig = "Mode$ CounterRemoved | TriggerZones$ Battlefield | ValidCard$" +
+                    " Card.Self | NewCounterAmount$ 0 | Secondary$ True | CounterType$ TIME |" +
+                    " TriggerDescription$ When the last time counter is removed from CARDNAME," +
+                    " sacrifice it.";
+            final String sac = "DB$ Sacrifice | SacValid$ Self";
+            final Trigger parsedSacTrigger = TriggerHandler.parseTrigger(sacTrig, card, intrinsic);
+            parsedSacTrigger.setOverridingAbility(AbilityFactory.getAbility(sac, card));
+            final Trigger cardSacTrig = card.addTrigger(parsedSacTrigger);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardUpkeepTrig);
+                kws.addTrigger(cardSacTrig);
             }
         }
     }
