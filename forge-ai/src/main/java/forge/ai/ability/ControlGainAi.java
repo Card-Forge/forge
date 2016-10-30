@@ -20,11 +20,8 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import com.google.common.collect.Lists;
-import forge.ai.AiCardMemory;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
-import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -71,12 +68,6 @@ import java.util.Map;
 public class ControlGainAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
-        boolean hasCreature = false;
-        boolean hasArtifact = false;
-        boolean hasEnchantment = false;
-        boolean hasLand = false;
-        boolean hasPW = false;
-
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
