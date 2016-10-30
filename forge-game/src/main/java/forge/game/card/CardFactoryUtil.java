@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeMap;
 
 import forge.card.mana.ManaAtom;
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardStateName;
@@ -2684,22 +2684,11 @@ public class CardFactoryUtil {
             } else if (kw.startsWith("etbCounter")) {
                 makeEtbCounter(kw, card, true);
             } else if (kw.equals("CARDNAME enters the battlefield tapped.")) {
-                String parse = kw;
-                card.removeIntrinsicKeyword(parse);
+                card.removeIntrinsicKeyword(kw);
 
-                String effect = "AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True";
-                SpellAbility sa = AbilityFactory.getAbility(effect, card);
-                setupETBReplacementAbility(sa);
+                String effect = "AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | SpellDescription$ CARDNAME enters the battlefield tapped.";
 
-                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                        + "| Description$ CARDNAME enters the battlefield tapped.";
-
-                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
-                re.setLayer(ReplacementLayer.Other);
-
-                re.setOverridingAbility(sa);
-
-                card.addReplacementEffect(re);
+                createETBReplacement(card, ReplacementLayer.Other, effect, false, false, true, "ValidCard$ Card.Self", "");
             }
         }
     }
@@ -3745,7 +3734,7 @@ public class CardFactoryUtil {
         return altCostSA;
     }
 
-    private static final Map<String,String> emptyMap = new TreeMap<String,String>();
+    private static final Map<String,String> emptyMap = Maps.newTreeMap();
     public static SpellAbility setupETBReplacementAbility(SpellAbility sa) {
         AbilitySub as = new AbilitySub(ApiType.InternalEtbReplacement, sa.getHostCard(), null, emptyMap);
         sa.appendSubAbility(as);
