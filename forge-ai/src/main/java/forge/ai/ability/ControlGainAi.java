@@ -19,6 +19,7 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -35,11 +36,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.collect.FCollectionView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
@@ -68,16 +68,17 @@ import java.util.Map;
 public class ControlGainAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
+
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        Player opp = ai.getOpponent();
-        List<Player> opponents = ai.getOpponents();
+        final Game game = ai.getGame();
+        final FCollectionView<Player> opponents = ai.getOpponents();
 
         // if Defined, then don't worry about targeting
         if (tgt == null) {
             if (sa.hasParam("AllValid")) {
-                CardCollectionView tgtCards = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+                CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), opponents);
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;
@@ -95,10 +96,16 @@ public class ControlGainAi extends SpellAbilityAi {
                 sa.getTargets().add(Aggregates.random(tgt.getAllCandidates(sa, false)));
             }
             if (tgt.canOnlyTgtOpponent()) {
-                if (!opp.canBeTargetedBy(sa)) {
+                boolean found = false;
+                for (final Player opp : opponents) {
+                    if (opp.canBeTargetedBy(sa)) {
+                        sa.getTargets().add(opp);
+                        break;
+                    }
+                }
+                if (!found) {
                     return false;
                 }
-                sa.getTargets().add(opp);
             }
         }
 
@@ -121,17 +128,38 @@ public class ControlGainAi extends SpellAbilityAi {
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                final Map<String, String> vars = c.getSVars();
                 if (!c.canBeTargetedBy(sa)) {
                     return false;
                 }
                 if (sa.isTrigger()) {
                     return true;
                 }
-                if (c.isCreature() && (!ComputerUtilCombat.canAttackNextTurn(c, ai.getOpponent()) || c.getNetCombatDamage() == 0)) {
+
+                // do not take perm control on something that leaves the play end of turn 
+                if (!lose.contains("EOT") && c.hasSVar("EndOfTurnLeavePlay")) {
                     return false;
                 }
-                return !vars.containsKey("RemAIDeck");
+
+                if (c.isCreature()) {
+                    if (c.getNetCombatDamage() <= 0) {
+                        return false;
+                    }
+
+                    // can not attack any opponent
+                    boolean found = false;
+                    for (final Player opp : opponents) {
+                        if (ComputerUtilCombat.canAttackNextTurn(c, opp)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        return false;
+                    }
+                }
+
+                // do not take control on something it doesn't know how to use
+                return !c.hasSVar("RemAIDeck");
             }
         });
 
@@ -242,7 +270,7 @@ public class ControlGainAi extends SpellAbilityAi {
         final Game game = ai.getGame();
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             if (sa.hasParam("AllValid")) {
-                CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponent());
+                CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;
@@ -263,7 +291,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
-        final List<Card> cards = new ArrayList<Card>();
+        final List<Card> cards = Lists.newArrayList();
         for (Player p : options) {
             cards.addAll(p.getCreaturesInPlay());
         }
