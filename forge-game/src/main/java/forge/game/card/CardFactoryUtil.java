@@ -140,6 +140,10 @@ public class CardFactoryUtil {
         // get rid of the ": " at the end
         costDesc = costDesc.substring(0, costDesc.length() - 2);
 
+        if (!cost.isOnlyManaCost()) {
+            costDesc = "- " + costDesc;
+        }
+
         String ab = "ST$ SetState | Cost$ " + costStr + " | CostDesc$ Morph " + costDesc
                 + " | MorphUp$ True"
                 + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown"
@@ -159,19 +163,15 @@ public class CardFactoryUtil {
     }
 
     public static SpellAbility abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
-        final Cost cost = new Cost(manaCost, true);
 
-        String costDesc = cost.toString();
-        // get rid of the ": " at the end
-        costDesc = costDesc.substring(0, costDesc.length() - 2);
+        String costDesc = manaCost.toString();
 
-        String ab = "ST$ SetState | CostDesc$ Unmanifest " + costDesc
+        String ab = "ST$ SetState | Cost$ + " + costDesc + " + | CostDesc$ Unmanifest " + costDesc
                 + " | ManifestUp$ True"
                 + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+manifested"
                 + " | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its mana cost.)";
 
         final SpellAbility manifestUp = AbilityFactory.getAbility(ab, sourceCard);
-        manifestUp.setPayCosts(cost);
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
