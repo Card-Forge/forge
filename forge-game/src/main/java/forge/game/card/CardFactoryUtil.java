@@ -2059,7 +2059,7 @@ public class CardFactoryUtil {
                 card.addSpellAbility(makeDashSpell(card, keyword));
             }
             else if (keyword.startsWith("Awaken")) {
-                card.addSpellAbility(makeAwakenSpell(card, keyword));
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Surge")) {
                 card.addSpellAbility(makeSurgeSpell(card, keyword));
@@ -2316,7 +2316,7 @@ public class CardFactoryUtil {
                 card.addTrigger(etbTrigger);
             }
             else if (keyword.equals("Epic")) {
-                makeEpic(card);
+            	addSpellAbility(keyword, card, null);
             }
             else if (keyword.equals("Soulbond")) {
              // Setup ETB trigger for card with Soulbond keyword
@@ -3221,6 +3221,30 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Awaken")) {
+        	final String[] k = keyword.split(":");
+            final String counters = k[1];
+            final Cost awakenCost = new Cost(k[2], false);
+
+            final SpellAbility awakenSpell = card.getFirstSpellAbility().copy();
+
+            final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
+                    + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control";
+            final String animate = "DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$"
+                    + " Creature,Elemental | Permanent$ True | Keywords$ Haste";
+
+            final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(awaken, card);
+            final AbilitySub animateSub = (AbilitySub) AbilityFactory.getAbility(animate, card);
+
+            awakenSub.setSubAbility(animateSub);
+            awakenSpell.appendSubAbility(awakenSub);
+            String desc = "Awaken " + counters + " - " + awakenCost.toSimpleString() +
+            		" (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            awakenSpell.setDescription(desc);
+            awakenSpell.setBasicSpell(false);
+            awakenSpell.setPayCosts(awakenCost);
+
+            card.addSpellAbility(awakenSpell);
         } else if (keyword.startsWith("Bestow")) {
             final String[] params = keyword.split(":");
             final String cost = params[1];       
@@ -3267,6 +3291,23 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
+        } else if (keyword.equals("Epic")) {
+            // Epic does modify existing SA, and does not add new one
+
+            // Add the Epic effect as a subAbility
+            String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent | Unique$ True";
+
+            final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
+
+            card.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
+            card.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
+                    + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
+            card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource");
+
+            final SpellAbility origSA = card.getFirstSpellAbility();
+
+            // append to original SA
+            origSA.appendSubAbility(newSA);            
         } else if (keyword.startsWith("Evoke")) {
             final String[] k = keyword.split(":");
             final Cost evokedCost = new Cost(k[1], false);
@@ -3549,33 +3590,6 @@ public class CardFactoryUtil {
     /**
      * TODO: Write javadoc for this method.
      * @param card
-     * @return
-     */
-    private static void makeEpic(final Card card) {
-
-        // Add the Epic effect as a subAbility
-        String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent | Unique$ True";
-        
-        final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
-        
-        card.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
-        card.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
-                + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
-        card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource");
-        
-        final SpellAbility origSA = card.getSpellAbilities().getFirst();
-        
-        SpellAbility child = origSA;
-        while (child.getSubAbility() != null) {
-            child = child.getSubAbility();
-        }
-        child.setSubAbility(newSA);
-        newSA.setParent(child);
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
      */
     private static void setupHauntSpell(final Card card) {
         final int hauntPos = card.getKeywordPosition("Haunt");
@@ -3774,48 +3788,6 @@ public class CardFactoryUtil {
         dashSpell.setPayCosts(dashCost);
         dashSpell.setDash(true);
         return dashSpell;
-    }
-
-    /**
-     * make Awaken keyword
-     * @param card
-     * @param awakenKeyword
-     * @return
-     */
-    private static SpellAbility makeAwakenSpell(final Card card, final String awakenKeyword) {
-        final String[] k = awakenKeyword.split(":");
-        final String counters = k[1];
-        final String suffix = !counters.equals("1") ? "s" : "";
-        final Cost awakenCost = new Cost(k[2], false);
-        // Leave intrinsic Keyword for retrieval by Halimar Tidecaller
-        //card.removeIntrinsicKeyword(awakenKeyword);
-        
-        final SpellAbility awakenSpell = card.getFirstSpellAbility().copy();
-
-        // get the last subability of the spell to attach awaken in the end
-        SpellAbility lastSub = awakenSpell;
-        while (lastSub.getSubAbility() != null) {
-            final AbilitySub copySubSA = ((AbilitySub) lastSub.getSubAbility()).getCopy();
-            lastSub.setSubAbility(copySubSA);
-            lastSub = copySubSA;
-        }
-
-        final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
-                + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | SubAbility$"
-                + " AwakenAnimate";
-        final String dbAnimate = "DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$"
-                + " Creature,Elemental | Permanent$ True | Keywords$ Haste";
-        card.setSVar("AwakenAnimate", dbAnimate);
-        final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(awaken, card);
-        lastSub.setSubAbility(awakenSub);
-        String desc = "Awaken " + counters + " - " + awakenCost.toSimpleString() + " (If you cast "
-                + "this spell for " + awakenCost.toSimpleString() + ", also put " + counters
-                + " +1/+1 counter"+ suffix + " on target land you control and it becomes a 0/0 "
-                + "Elemental creature with haste. It's still a land.)";
-        awakenSpell.setDescription(desc);
-        awakenSpell.setBasicSpell(false);
-        awakenSpell.setPayCosts(awakenCost);
-        return awakenSpell;
     }
 
     /**
