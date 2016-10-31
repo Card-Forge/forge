@@ -2601,9 +2601,9 @@ public class CardFactoryUtil {
             } else if (kw.equals("CARDNAME enters the battlefield tapped.")) {
                 card.removeIntrinsicKeyword(kw);
 
-                String effect = "AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | SpellDescription$ CARDNAME enters the battlefield tapped.";
+                String effect = "DB$ Tap | Defined$ Self | ETB$ True | SpellDescription$ CARDNAME enters the battlefield tapped.";
 
-                createETBReplacement(card, ReplacementLayer.Other, effect, false, false, true, "ValidCard$ Card.Self", "");
+                createETBReplacement(card, ReplacementLayer.Other, effect, false, false, true, "Card.Self", "");
             }
         }
     }
