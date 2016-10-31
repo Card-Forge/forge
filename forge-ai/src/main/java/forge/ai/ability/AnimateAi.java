@@ -1,5 +1,9 @@
 package forge.ai.ability;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -32,11 +36,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
-
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -213,6 +212,17 @@ public class AnimateAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting() && !animateTgtAI(sa) && !mandatory) {
             return false;
+        } else if (sa.usesTargeting() && mandatory) {
+            // fallback if animate is mandatory
+            sa.resetTargets();
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
+            final Card source = sa.getHostCard();
+            CardCollectionView list = aiPlayer.getGame().getCardsIn(tgt.getZone());
+            list = CardLists.getValidCards(list, tgt.getValidTgts(), aiPlayer, source, sa);
+            if (list.isEmpty()) {
+                return false;
+            }
+            sa.getTargets().add(ComputerUtilCard.getWorstAI(list));
         }
         return true;
     }
