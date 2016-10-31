@@ -692,25 +692,27 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : activePlayerSAs) {
-            prepareSingleSa(sa.getHostCard(),sa,true);
-            ComputerUtil.playStack(sa, player, game);
+            if (prepareSingleSa(sa.getHostCard(),sa,true)) {
+                ComputerUtil.playStack(sa, player, game);
+            }
         }
     }
     
-    private void prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory){
+    private boolean prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory){
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
-            targetingPlayer.getController().chooseTargetsFor(sa);
+            return targetingPlayer.getController().chooseTargetsFor(sa);
         } else {
-            brains.doTrigger(sa, isMandatory);
+            return brains.doTrigger(sa, isMandatory);
         }
     }
 
     @Override
     public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
-        prepareSingleSa(host, wrapperAbility, isMandatory);
-        ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
+        if (prepareSingleSa(host, wrapperAbility, isMandatory)) {
+            ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
+        }
     }
 
     @Override
