@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.card.ICardFace;
 import forge.game.GameEntity;
@@ -15,7 +16,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
 /**
@@ -41,11 +41,11 @@ public abstract class SpellAbilityAi {
         final Cost cost = sa.getPayCosts();
 
         if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(source, sa)) {
-        	return false;
+            return false;
         }
 
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa)) {
-        	return false;
+            return false;
         }
 
         if (sa.hasParam("AILogic") && !checkAiLogic(ai, sa, sa.getParam("AILogic"))) {
@@ -110,6 +110,12 @@ public abstract class SpellAbilityAi {
             return false;
         }
 
+        // a mandatory SpellAbility with targeting but without candidates,
+        // does not need to go any deeper
+        if (sa.usesTargeting() && mandatory && !sa.getTargetRestrictions().hasCandidates(sa, true)) {
+            return false;
+        }
+
         return doTriggerNoCostWithSubs(aiPlayer, sa, mandatory);
     }
 
@@ -129,29 +135,48 @@ public abstract class SpellAbilityAi {
         if (canPlayAI(aiPlayer, sa)) {
             return true;
         }
-        if (mandatory) {
-            final TargetRestrictions tgt = sa.getTargetRestrictions();
-            final Player opp = aiPlayer.getOpponent();
-            if (tgt != null) {
-                if (opp.canBeTargetedBy(sa)) {
+
+        // not mandatory, short way out
+        if (!mandatory) {
+            return false;
+        }
+
+        // invalid target might prevent it
+        if (sa.usesTargeting()) {
+            // make list of players it does try to target
+            List<Player> players = Lists.newArrayList();
+            players.addAll(aiPlayer.getOpponents());
+            players.addAll(aiPlayer.getAllies());
+            players.add(aiPlayer);
+
+            // try to target opponent, then ally, then itself
+            for (final Player p : players) {
+                if (p.canBeTargetedBy(sa)) {
                     sa.resetTargets();
-                    sa.getTargets().add(opp);
-                } else if (aiPlayer.canBeTargetedBy(sa)) {
-                	sa.resetTargets();
-                    sa.getTargets().add(aiPlayer);
-                } else {
-                    return false;
+                    sa.getTargets().add(p);
+                    return true;
                 }
             }
-            return true;
+
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
      * Handles the AI decision to play a sub-SpellAbility
      */
     public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+        // sub-SpellAbility might use targets too
+        if (sa.usesTargeting()) {
+            // no Candidates, no adding to Stack
+            if (!sa.getTargetRestrictions().hasCandidates(sa, true)) {
+                return false;
+            }
+            // but if it does, it should override this function
+            System.err.println("Warning: default (ie. inherited from base class) implementation of chkAIDrawback is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+            return false;
+        }
         return true;
     }
 
