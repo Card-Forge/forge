@@ -356,7 +356,7 @@ public final class StaticAbilityContinuous {
                             newSA.setOriginalHost(c);
                             newSA.setIntrinsic(false);
                             newSA.setTemporary(true);
-                            CardFactoryUtil.correctAbilityChainSourceCard(newSA, hostCard);
+                            newSA.setHostCard(hostCard);
                             addFullAbs.add(newSA);
                         }
                     }

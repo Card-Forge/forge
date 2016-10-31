@@ -1,13 +1,12 @@
 package forge.game;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-
-import java.util.EnumSet;
-import java.util.Set;
 
 /**
  * Created by Hellfish on 2014-02-09.
@@ -23,7 +22,7 @@ public abstract class TriggerReplacementBase extends CardTraitBase {
         this.hostCard = c;
 
         if (overridingAbility != null) {
-            CardFactoryUtil.correctAbilityChainSourceCard(overridingAbility, c);
+            overridingAbility.setHostCard(c);
         }
     }
 

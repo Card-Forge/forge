@@ -1996,14 +1996,6 @@ public class CardFactoryUtil {
         return neededDamage;
     }
 
-    public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card) {
-        sa.setHostCard(card);
-
-        if (sa.getSubAbility() != null) {
-            correctAbilityChainSourceCard(sa.getSubAbility(), card);
-        }
-    }
-
     /**
      * Adds the ability factory abilities.
      * 
