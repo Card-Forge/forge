@@ -101,6 +101,8 @@ public enum CounterType {
     FLOOD(),
 
     FUNGUS(),
+    
+    FURY(),
 
     FUSE(),
 
@@ -235,6 +237,8 @@ public enum CounterType {
     SLIME(),
 
     SOOT(),
+    
+    SPITE(),
 
     SPORE(),
 
