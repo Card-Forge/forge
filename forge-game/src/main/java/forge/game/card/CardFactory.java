@@ -17,11 +17,18 @@
  */
 package forge.game.card;
 
+import java.util.List;
+import java.util.Map.Entry;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.CardStateName;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.CardType.CoreType;
 import forge.card.ICardFace;
@@ -42,14 +49,6 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map.Entry;
-
-import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
 
 /**
  * <p>
@@ -183,7 +182,7 @@ public class CardFactory {
             if (newColor.equals("ChosenColor")) {
                 tmp = CardUtil.getShortColorsString(source.getChosenColors());
             } else {
-                tmp = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(newColor.split(","))));
+                tmp = CardUtil.getShortColorsString(Lists.newArrayList(newColor.split(",")));
             }
             final String finalColors = tmp;
 
@@ -644,6 +643,7 @@ public class CardFactory {
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {
+        to.setActivatingPlayer(from.getActivatingPlayer());
         to.setDescription(from.getDescription());
         to.setStackDescription(from.getDescription());
     
@@ -693,7 +693,7 @@ public class CardFactory {
         }
 
         private static String[] getCardTypes(Card c) {
-            List<String> relevantTypes = new ArrayList<String>();
+            List<String> relevantTypes = Lists.newArrayList();
             for (CoreType t : c.getType().getCoreTypes()) {
                 relevantTypes.add(t.name());
             }
@@ -720,6 +720,7 @@ public class CardFactory {
             return c;
         }
 
+        @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append(name).append(',');
@@ -765,7 +766,7 @@ public class CardFactory {
     }
 
     public static List<Card> makeToken(final TokenInfo tokenInfo, final Player controller) {
-        final List<Card> list = new ArrayList<Card>();
+        final List<Card> list = Lists.newArrayList();
         final Card c = tokenInfo.toCard(controller.getGame());
         final int multiplier = controller.getTokenDoublersMagnitude();
         for (int i = 0; i < multiplier; i++) {
