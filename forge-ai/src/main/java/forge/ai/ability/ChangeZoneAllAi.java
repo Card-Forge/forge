@@ -1,10 +1,18 @@
 package forge.ai.ability;
 
+import java.util.Collections;
+import java.util.Random;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
+import forge.ai.AiPlayerPredicates;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -16,12 +24,10 @@ import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-
-import java.util.Random;
 
 public class ChangeZoneAllAi extends SpellAbilityAi {
     @Override
@@ -29,6 +35,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // Change Zone All, can be any type moving from one zone to another
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
+        final Game game = ai.getGame();
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
 
@@ -54,11 +61,14 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // ex. "Return all Auras attached to target"
         // ex. "Return all blocking/blocked by target creature"
 
-        final Player opp = ai.getOpponent();
-        final CardCollectionView humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+        CardCollectionView oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
+        oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
+
+        // final CardCollectionView humanType =
+        // AbilityUtils.filterListByType(opp.getCardsIn(origin),
+        // sa.getParam("ChangeType"), sa);
         CardCollectionView computerType = ai.getCardsIn(origin);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         
         // Ugin AI: always try to sweep before considering +1 
         if (source.getName().equals("Ugin, the Spirit Dragon")) {
@@ -67,7 +77,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             Card single = null;
             for (int i = 0; i < loyalty; i++) {
                 source.setSVar("ChosenX", "Number$" + i);
-                final CardCollectionView oppType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+                oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
+                oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
                 computerType = AbilityUtils.filterListByType(ai.getCardsIn(origin), sa.getParam("ChangeType"), sa);
                 int net = ComputerUtilCard.evaluatePermanentList(oppType) - ComputerUtilCard.evaluatePermanentList(computerType) - i;
                 if (net > best) {
@@ -116,13 +127,18 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
-            if (tgt != null) {
-                if (opp.getCardsIn(ZoneType.Hand).isEmpty()
-                        || !opp.canBeTargetedBy(sa)) {
-                    return false;
-                }
+            // search targetable Opponents
+            final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(), PlayerPredicates.isTargetableBy(sa));
+
+            // get the one with the most handsize
+            Player oppTarget = Collections.max(Lists.newArrayList(oppList), PlayerPredicates.compareByZoneSize(origin));
+
+            // set the target
+            if (oppTarget != null && !oppTarget.getCardsIn(ZoneType.Hand).isEmpty()) {
                 sa.resetTargets();
-                sa.getTargets().add(opp);
+                sa.getTargets().add(oppTarget);
+            } else {
+                return false;
             }
         } else if (origin.equals(ZoneType.Battlefield)) {
             // this statement is assuming the AI is trying to use this spell
@@ -131,39 +147,60 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             // occur
             // if only creatures are affected evaluate both lists and pass only
             // if human creatures are more valuable
-            if (tgt != null) {
-                if (opp.getCardsIn(ZoneType.Hand).isEmpty()
-                        || !opp.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting()) {
+                // search targetable Opponents
+                final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
+                        PlayerPredicates.isTargetableBy(sa));
+
+                // get the one with the most in graveyard
+                // zone is visible so evaluate which would be hurt the most
+                Player oppTarget = Collections.max(Lists.newArrayList(oppList),
+                        PlayerPredicates.compareByZoneSize(origin));
+
+                // set the target
+                if (oppTarget != null && !oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty()) {
+                    sa.resetTargets();
+                    sa.getTargets().add(oppTarget);
+                } else {
                     return false;
                 }
-                sa.resetTargets();
-                sa.getTargets().add(opp);
                 computerType = new CardCollection();
             }
-            if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
+            if ((CardLists.getNotType(oppType, "Creature").size() == 0)
+                    && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                 if ((ComputerUtilCard.evaluateCreatureList(computerType) + 200) >= ComputerUtilCard
-                        .evaluateCreatureList(humanType)) {
+                        .evaluateCreatureList(oppType)) {
                     return false;
                 }
             } // otherwise evaluate both lists by CMC and pass only if human
               // permanents are more valuable
             else if ((ComputerUtilCard.evaluatePermanentList(computerType) + 3) >= ComputerUtilCard
-                    .evaluatePermanentList(humanType)) {
+                    .evaluatePermanentList(oppType)) {
                 return false;
             }
 
             // Don't cast during main1?
-            if (ai.getGame().getPhaseHandler().is(PhaseType.MAIN1, ai)) {
+            if (game.getPhaseHandler().is(PhaseType.MAIN1, ai)) {
                 return false;
             }
         } else if (origin.equals(ZoneType.Graveyard)) {
-            if (tgt != null) {
-                if (opp.getCardsIn(ZoneType.Graveyard).isEmpty()
-                        || !opp.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting()) {
+                // search targetable Opponents
+                final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
+                        PlayerPredicates.isTargetableBy(sa));
+
+                // get the one with the most in graveyard
+                // zone is visible so evaluate which would be hurt the most
+                Player oppTarget = Collections.max(Lists.newArrayList(oppList),
+                        AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
+
+                // set the target
+                if (oppTarget != null && !oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty()) {
+                    sa.resetTargets();
+                    sa.getTargets().add(oppTarget);
+                } else {
                     return false;
                 }
-                sa.resetTargets();
-                sa.getTargets().add(opp);
             }
         } else if (origin.equals(ZoneType.Exile)) {
 
@@ -178,28 +215,30 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         if (destination.equals(ZoneType.Battlefield)) {
             if (sa.getParam("GainControl") != null) {
                 // Check if the cards are valuable enough
-                if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
+                if ((CardLists.getNotType(oppType, "Creature").size() == 0)
+                        && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                     if ((ComputerUtilCard.evaluateCreatureList(computerType) + ComputerUtilCard
-                            .evaluateCreatureList(humanType)) < 400) {
+                            .evaluateCreatureList(oppType)) < 400) {
                         return false;
                     }
                 } // otherwise evaluate both lists by CMC and pass only if human
                   // permanents are less valuable
                 else if ((ComputerUtilCard.evaluatePermanentList(computerType) + ComputerUtilCard
-                        .evaluatePermanentList(humanType)) < 6) {
+                        .evaluatePermanentList(oppType)) < 6) {
                     return false;
                 }
             } else {
                 // don't activate if human gets more back than AI does
-                if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
+                if ((CardLists.getNotType(oppType, "Creature").size() == 0)
+                        && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                     if (ComputerUtilCard.evaluateCreatureList(computerType) <= (ComputerUtilCard
-                            .evaluateCreatureList(humanType) + 100)) {
+                            .evaluateCreatureList(oppType) + 100)) {
                         return false;
                     }
                 } // otherwise evaluate both lists by CMC and pass only if human
                   // permanents are less valuable
                 else if (ComputerUtilCard.evaluatePermanentList(computerType) <= (ComputerUtilCard
-                        .evaluatePermanentList(humanType) + 2)) {
+                        .evaluatePermanentList(oppType) + 2)) {
                     return false;
                 }
             }
@@ -260,28 +299,37 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, final SpellAbility sa, boolean mandatory) {
         // Change Zone All, can be any type moving from one zone to another
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
 
-        final Player opp = ai.getOpponent();
-        final CardCollectionView humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+        CardCollectionView humanType = CardLists.filterControlledBy(ai.getGame().getCardsIn(origin), ai.getOpponents());
+        humanType = AbilityUtils.filterListByType(humanType, sa.getParam("ChangeType"), sa);
+
         CardCollectionView computerType = ai.getCardsIn(origin);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
 
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
-            final TargetRestrictions tgt = sa.getTargetRestrictions();
-            if (tgt != null) {
-                if (opp.getCardsIn(ZoneType.Hand).isEmpty()
-                        || !opp.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting()) {
+                // search targetable Opponents
+                final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
+                        PlayerPredicates.isTargetableBy(sa));
+
+                // get the one with the most handsize
+                Player oppTarget = Collections.max(Lists.newArrayList(oppList),
+                        PlayerPredicates.compareByZoneSize(origin));
+
+                // set the target
+                if (oppTarget != null && !oppTarget.getCardsIn(ZoneType.Hand).isEmpty()) {
+                    sa.resetTargets();
+                    sa.getTargets().add(oppTarget);
+                } else {
                     return false;
                 }
-                sa.resetTargets();
-                sa.getTargets().add(opp);
             }
         } else if (origin.equals(ZoneType.Battlefield)) {
             // this statement is assuming the AI is trying to use this spell offensively
@@ -300,14 +348,23 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 return false;
             }
         } else if (origin.equals(ZoneType.Graveyard)) {
-            final TargetRestrictions tgt = sa.getTargetRestrictions();
-            if (tgt != null) {
-                if (opp.getCardsIn(ZoneType.Graveyard).isEmpty()
-                        || !opp.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting()) {
+                // search targetable Opponents
+                final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
+                        PlayerPredicates.isTargetableBy(sa));
+
+                // get the one with the most in graveyard
+                // zone is visible so evaluate which would be hurt the most
+                Player oppTarget = Collections.max(Lists.newArrayList(oppList),
+                        AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
+
+                // set the target
+                if (oppTarget != null && !oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty()) {
+                    sa.resetTargets();
+                    sa.getTargets().add(oppTarget);
+                } else {
                     return false;
                 }
-                sa.resetTargets();
-                sa.getTargets().add(opp);
             }
         } else if (origin.equals(ZoneType.Exile)) {
 
@@ -320,6 +377,10 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         }
 
         if (destination.equals(ZoneType.Battlefield)) {
+            // if mandatory, no need to evaluate
+            if (mandatory) {
+                return true;
+            }
             if (sa.getParam("GainControl") != null) {
                 // Check if the cards are valuable enough
                 if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
