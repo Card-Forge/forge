@@ -19,6 +19,7 @@ forge-ai/src/main/java/forge/ai/AiCardMemory.java -text
 forge-ai/src/main/java/forge/ai/AiController.java svneol=native#text/plain
 forge-ai/src/main/java/forge/ai/AiCostDecision.java -text
 forge-ai/src/main/java/forge/ai/AiPlayDecision.java -text
+forge-ai/src/main/java/forge/ai/AiPlayerPredicates.java -text svneol=unset#text/plain
 forge-ai/src/main/java/forge/ai/AiProfileUtil.java -text
 forge-ai/src/main/java/forge/ai/AiProps.java -text
 forge-ai/src/main/java/forge/ai/ComputerUtil.java svneol=native#text/plain
