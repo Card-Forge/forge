@@ -150,7 +150,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean copiedSpell = false;
 
     private boolean canCounter = true;
-    private boolean evoked = false;
 
     private boolean unearthed;
 
@@ -1470,7 +1469,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(" (" + Keyword.getInstance("Offering:"+ offeringType).getReminderText() + ")");
             } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
                     || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge") || keyword.startsWith("Ninjutsu")
-                    || keyword.startsWith("Evoke") || keyword.startsWith("Bestow")) {
+                    || keyword.startsWith("Evoke") || keyword.startsWith("Bestow") || keyword.startsWith("Dash")
+                    || keyword.startsWith("Surge")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedBy")) {
                 sbLong.append(getName()).append(" can't be blocked ");
@@ -5236,9 +5236,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("evoked")) {
-            if (!isEvoked()) {
+            if (getCastSA() == null) {
                 return false;
             }
+            return getCastSA().isEvoke();
         } else if (property.equals("HasDevoured")) {
             if (devouredCards == null || devouredCards.isEmpty()) {
                 return false;
@@ -6181,12 +6182,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return (c != null ? c.getImageKey() : "");
     }
 
-    public final boolean isEvoked() {
-        return evoked;
-    }
-    public final void setEvoked(final boolean evokedIn) {
-        evoked = evokedIn;
-    }
 
     public final void setTributed(final boolean b) {
         tributed = b;

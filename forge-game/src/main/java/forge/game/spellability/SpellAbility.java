@@ -98,6 +98,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean cycling = false;
     private boolean delve = false;
     private boolean dash = false;
+    private boolean evoke = false;
     private boolean offering = false;
     private boolean emerge = false;
     private boolean morphup = false;
@@ -844,6 +845,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void setDash(final boolean isDash) {
         dash = isDash;
+    }
+
+    public final boolean isEvoke() {
+        return evoke;
+    }
+
+    public final void setEvoke(final boolean isEvoke) {
+        evoke = isEvoke;
     }
 
     public CardCollection getTappedForConvoke() {

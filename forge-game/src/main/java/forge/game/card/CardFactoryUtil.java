@@ -66,7 +66,6 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -2048,13 +2047,13 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);                
             }
             else if (keyword.startsWith("Dash")) {
-                card.addSpellAbility(makeDashSpell(card, keyword));
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Awaken")) {
                 addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Surge")) {
-                card.addSpellAbility(makeSurgeSpell(card, keyword));
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.equals("Melee")) {
                 addTriggerAbility(keyword, card, null);                
@@ -3270,16 +3269,41 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(sbAttach.toString());
             }
             card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Dash")) {
+            final String[] k = keyword.split(":");
+            final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | SubAbility$"
+                    + " DashDelayedTrigger";
+            final String dbDelayTrigger = "DB$ DelayedTrigger | Mode$ Phase | Phase$"
+                    + " End of Turn | Execute$ DashReturnSelf | RememberObjects$ Self"
+                    + " | TriggerDescription$ Return CARDNAME from the battlefield to" + " its owner's hand.";
+            final String dbReturn = "DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand"
+                    + " | Defined$ DelayTriggerRemembered";
+            card.setSVar("DashDelayedTrigger", dbDelayTrigger);
+            card.setSVar("DashReturnSelf", dbReturn);
+
+            final SpellAbility newSA = AbilityFactory.getAbility(dashString, card);
+            String desc = "Dash " + ManaCostParser.parse(k[1]) + " (" + Keyword.getInstance(keyword).getReminderText()
+                    + ")";
+            newSA.setStackDescription(card.getName() + " (Dash)");
+            newSA.setDescription(desc);
+            newSA.setBasicSpell(false);
+            newSA.setDash(true);
+
+            if (!intrinsic) {
+                newSA.setTemporary(true);
+                newSA.setIntrinsic(false);
+                kws.addSpellAbility(newSA);
+            }
+            card.addSpellAbility(newSA);
+
         } else if (keyword.startsWith("Emerge")) {
             final String[] kw = keyword.split(":");
-            String costStr = kw[1];   
+            String costStr = kw[1];
             final SpellAbility sa = card.getFirstSpellAbility();
 
             final SpellAbility newSA = sa.copy();
-            SpellAbilityRestriction sar = new SpellAbilityRestriction();
-            sar.setVariables(sa.getRestrictions());
-            sar.setIsPresent("Creature.YouCtrl+CanBeSacrificedBy");
-            newSA.setRestrictions(sar);
+
+            newSA.getRestrictions().setIsPresent("Creature.YouCtrl+CanBeSacrificedBy");
             newSA.getMapParams().put("Secondary", "True");
             newSA.setBasicSpell(false);
             newSA.setIsEmerge(true);
@@ -3310,32 +3334,32 @@ public class CardFactoryUtil {
             origSA.appendSubAbility(newSA);            
         } else if (keyword.startsWith("Evoke")) {
             final String[] k = keyword.split(":");
+            final SpellAbility sa = card.getFirstSpellAbility();
+
+            final SpellAbility newSA = sa.copy();
             final Cost evokedCost = new Cost(k[1], false);
 
-            final SpellAbility evokedSpell = new SpellPermanent(card) {
-                private static final long serialVersionUID = -1598664196463358630L;
-
-                @Override
-                public void resolve() {
-                    final Game game = card.getGame();
-                    card.setEvoked(true);
-                    game.getAction().moveToPlay(card);
-                }
-            };
             final StringBuilder desc = new StringBuilder();
             desc.append("Evoke ").append(evokedCost.toSimpleString()).append(" (");
             desc.append(Keyword.getInstance(keyword).getReminderText());
             desc.append(")");
 
-            evokedSpell.setDescription(desc.toString());
+            newSA.setDescription(desc.toString());
 
             final StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" (Evoked)");
-            evokedSpell.setStackDescription(sb.toString());
-            evokedSpell.setBasicSpell(false);
-            evokedSpell.setPayCosts(evokedCost);
+            newSA.setStackDescription(sb.toString());
+            newSA.setBasicSpell(false);
+            newSA.setPayCosts(evokedCost);
+            newSA.setEvoke(true);
 
-            card.addSpellAbility(evokedSpell);
+            if (!intrinsic) {
+                newSA.setTemporary(true);
+                newSA.setIntrinsic(false);
+                kws.addSpellAbility(newSA);
+            }
+
+            card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Monstrosity")) {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
@@ -3405,6 +3429,26 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(effect);
             }
             card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Surge")) {
+            final String[] k = keyword.split(":");
+            final Cost surgeCost = new Cost(k[1], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copy();
+
+            newSA.setPayCosts(surgeCost);
+            newSA.setBasicSpell(false);
+            newSA.addOptionalCost(OptionalCost.Surge);
+            newSA.getRestrictions().setSurge(true);
+
+            String desc = "Surge " + surgeCost.toSimpleString() + " (" + Keyword.getInstance(keyword).getReminderText()
+                    + ")";
+            newSA.setDescription(desc);
+            if (!intrinsic) {
+                newSA.setTemporary(true);
+                newSA.setIntrinsic(false);
+                // sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(newSA);
+            }
+            card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Unearth")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -3443,11 +3487,11 @@ public class CardFactoryUtil {
             final SpellAbility sa = card.getFirstSpellAbility();
 
             final SpellAbility newSA = sa.copy();
-            SpellAbilityRestriction sar = new SpellAbilityRestriction();
-            sar.setVariables(sa.getRestrictions());
+
+            SpellAbilityRestriction sar = sa.getRestrictions();
             sar.setIsPresent(offeringType + ".YouCtrl+CanBeSacrificedBy");
             sar.setInstantSpeed(true);
-            newSA.setRestrictions(sar);
+
             newSA.getMapParams().put("Secondary", "True");
             newSA.setBasicSpell(false);
             newSA.setIsOffering(true);
@@ -3540,10 +3584,7 @@ public class CardFactoryUtil {
             final SpellAbility sa = card.getFirstSpellAbility();
 
             final SpellAbility newSA = sa.copy();
-            SpellAbilityRestriction sar = new SpellAbilityRestriction();
-            sar.setVariables(sa.getRestrictions());
-            sar.setZone(ZoneType.Graveyard);
-            newSA.setRestrictions(sar);
+            newSA.getRestrictions().setZone(ZoneType.Graveyard);
             newSA.getMapParams().put("CostDesc", "Retrace");
             newSA.getMapParams().put("Secondary", "True");
             newSA.setBasicSpell(false);
@@ -3775,69 +3816,6 @@ public class CardFactoryUtil {
         sa.appendSubAbility(as);
         return as;
         // ETBReplacementMove(sa.getHostCard(), null));
-    }
-
-    /**
-     * make Dash keyword
-     * @param card
-     * @param dashKeyword
-     * @return
-     */
-    private static SpellAbility makeDashSpell(final Card card, final String dashKeyword) {
-        final String[] k = dashKeyword.split(":");
-        final Cost dashCost = new Cost(k[1], false);
-        card.removeIntrinsicKeyword(dashKeyword);
-        final String dashString = "SP$ PermanentCreature | Cost$ " + k[1] + " | SubAbility$"
-                + " DashPump";
-        final String dbHaste = "DB$ Pump | Defined$ Self | KW$ Haste | Permanent$ True"
-                + " | SubAbility$ DashDelayedTrigger";
-        final String dbDelayTrigger = "DB$ DelayedTrigger | Mode$ Phase | Phase$"
-                + " End of Turn | Execute$ DashReturnSelf | RememberObjects$ Self"
-                + " | TriggerDescription$ Return CARDNAME from the battlefield to"
-                + " its owner's hand.";
-        final String dbReturn = "DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand"
-                + " | Defined$ DelayTriggerRemembered";
-        card.setSVar("DashPump", dbHaste);
-        card.setSVar("DashDelayedTrigger", dbDelayTrigger);
-        card.setSVar("DashReturnSelf", dbReturn);
-
-        final SpellAbility dashSpell = AbilityFactory.getAbility(dashString, card);
-        String desc = "Dash " + dashCost.toSimpleString() + " (You may cast this "
-                + "spell for its dash cost. If you do, it gains haste, and it's "
-                + "returned from the battlefield to its owner's hand at the beginning"
-                + " of the next end step.)";
-        dashSpell.setStackDescription(card.getName() + " (Dash)");
-        dashSpell.setDescription(desc);
-        dashSpell.setBasicSpell(false);
-        dashSpell.setPayCosts(dashCost);
-        dashSpell.setDash(true);
-        return dashSpell;
-    }
-
-    /**
-     * make Surge keyword
-     * @param card
-     * @param surgeKeyword
-     * @return
-     */
-    private static SpellAbility makeSurgeSpell(final Card card, final String surgeKeyword) {
-        final String[] k = surgeKeyword.split(":");
-        final Cost surgeCost = new Cost(k[1], false);
-        card.removeIntrinsicKeyword(surgeKeyword);
-        final SpellAbility surgeSpell = card.getFirstSpellAbility().copy();
-
-        surgeSpell.setPayCosts(surgeCost);
-        surgeSpell.setBasicSpell(false);
-        surgeSpell.addOptionalCost(OptionalCost.Surge);
-
-        final SpellAbilityRestriction restriction = new SpellAbilityRestriction();
-        restriction.setVariables(card.getFirstSpellAbility().getRestrictions());
-        restriction.setSurge(true);
-        surgeSpell.setRestrictions(restriction);
-        String desc = "Surge " + surgeCost.toSimpleString() + " (You may cast this spell for its "
-                + "surge cost if you or a teammate has cast another spell this turn.)";
-        surgeSpell.setDescription(desc);
-        return surgeSpell;
     }
 
     /**
