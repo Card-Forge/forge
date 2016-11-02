@@ -653,10 +653,10 @@ public class CardFactory {
             to.setSubAbility(from.getSubAbility().getCopy());
         }
         if (from.getRestrictions() != null) {
-            to.setRestrictions(from.getRestrictions());
+            to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());
         }
         if (from.getConditions() != null) {
-            to.setConditions(from.getConditions());
+            to.setConditions((SpellAbilityCondition) from.getConditions().copy());
         }
     
         for (String sVar : from.getSVars()) {

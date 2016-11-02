@@ -17,11 +17,12 @@
  */
 package forge.game.spellability;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -32,7 +33,7 @@ import java.util.List;
  * @version $Id$
  * @since 1.0.15
  */
-public class SpellAbilityVariables {
+public class SpellAbilityVariables implements Cloneable {
     // A class for handling SpellAbility Variables. These restrictions include:
     // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
     // Threshold, Metalcraft, Hellbent, LevelRange, etc
@@ -54,7 +55,7 @@ public class SpellAbilityVariables {
      */
     public void setVariables(SpellAbilityVariables sav) {
         this.zone = sav.getZone();
-        this.phases = new ArrayList<PhaseType>(sav.getPhases());
+        this.phases = Lists.newArrayList(sav.getPhases());
         this.sorcerySpeed = sav.isSorcerySpeed();
         this.instantSpeed = sav.isInstantSpeed();
         this.anyPlayer = sav.isAnyPlayer();
@@ -76,7 +77,7 @@ public class SpellAbilityVariables {
         this.hellbent = sav.isHellbent();
         this.allTargetsLegal = sav.isAllTargetsLegal();
         this.shareAllColors = sav.getShareAllColors();
-        this.prowlTypes = new ArrayList<String>(sav.getProwlTypes());
+        this.prowlTypes = Lists.newArrayList(sav.getProwlTypes());
         this.isPresent = sav.getIsPresent();
         this.presentCompare = sav.getPresentCompare();
         this.presentDefined = sav.getPresentDefined();
@@ -99,7 +100,7 @@ public class SpellAbilityVariables {
     private ZoneType zone = ZoneType.Battlefield;
 
     /** The phases. */
-    private List<PhaseType> phases = new ArrayList<PhaseType>();
+    private List<PhaseType> phases = Lists.newArrayList();
 
     /** The b sorcery speed. */
     private boolean sorcerySpeed = false;
@@ -158,7 +159,7 @@ public class SpellAbilityVariables {
     private boolean allTargetsLegal = false;
 
     /** The prowl. */
-    private List<String> prowlTypes = new ArrayList<String>();
+    private List<String> prowlTypes = Lists.newArrayList();
 
     /** The s is present. */
     private String isPresent = null;
@@ -1025,4 +1026,12 @@ public class SpellAbilityVariables {
         this.targetsSingleTarget = b;
     }
 
+    public SpellAbilityVariables copy() {
+        try {
+            return (SpellAbilityVariables) clone();
+        } catch (final CloneNotSupportedException e) {
+            System.err.println(e);
+        }
+        return null;
+    }
 } // end class SpellAbilityVariables
