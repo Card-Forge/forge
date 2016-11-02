@@ -643,7 +643,9 @@ public class CardFactory {
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {
-        to.setActivatingPlayer(from.getActivatingPlayer());
+        if (from.getActivatingPlayer() != null) {
+            to.setActivatingPlayer(from.getActivatingPlayer());
+        }
         to.setDescription(from.getDescription());
         to.setStackDescription(from.getDescription());
     
