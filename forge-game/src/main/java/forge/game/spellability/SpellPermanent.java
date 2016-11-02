@@ -19,9 +19,12 @@ package forge.game.spellability;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Maps;
+
+import forge.game.ability.ApiType;
+import forge.game.ability.SpellApiBased;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
-import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -31,7 +34,7 @@ import forge.game.zone.ZoneType;
  * @author Forge
  * @version $Id$
  */
-public class SpellPermanent extends Spell {
+public class SpellPermanent extends SpellApiBased {
     /** Constant <code>serialVersionUID=2413495058630644447L</code>. */
     private static final long serialVersionUID = 2413495058630644447L;
 
@@ -44,17 +47,8 @@ public class SpellPermanent extends Spell {
      *            a {@link forge.game.card.Card} object.
      */
     public SpellPermanent(final Card sourceCard) {
-        super(sourceCard, new Cost(sourceCard.getManaCost(), false));
-
-        if (sourceCard.isCreature()) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append(sourceCard.getName()).append(" - Creature ").append(sourceCard.getNetPower());
-            sb.append(" / ").append(sourceCard.getNetToughness());
-            this.setStackDescription(sb.toString());
-        } else {
-            this.setStackDescription(sourceCard.getName());
-        }
-
+        super(sourceCard.isCreature() ? ApiType.PermanentCreature : ApiType.PermanentNoncreature, sourceCard,
+                new Cost(sourceCard.getManaCost(), false), null, Maps.<String, String>newHashMap());
 
         this.setDescription(this.getStackDescription());
 
@@ -64,11 +58,4 @@ public class SpellPermanent extends Spell {
 
     } // Spell_Permanent()
 
-    /** {@inheritDoc} */
-    @Override
-    public void resolve() {
-        Card c = this.getHostCard();
-        c.setController(this.getActivatingPlayer(), 0);
-        this.getActivatingPlayer().getGame().getAction().moveTo(ZoneType.Battlefield, c);
-    }
 }

@@ -1,5 +1,7 @@
 package forge.game.ability;
 
+import java.util.Map;
+
 import forge.game.ability.effects.ChangeZoneAllEffect;
 import forge.game.ability.effects.ChangeZoneEffect;
 import forge.game.ability.effects.ManaEffect;
@@ -9,8 +11,6 @@ import forge.game.cost.Cost;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.Spell;
 import forge.game.spellability.TargetRestrictions;
-
-import java.util.Map;
 
 public class SpellApiBased extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;
@@ -39,7 +39,12 @@ public class SpellApiBased extends Spell {
 
     @Override
     public String getStackDescription() {
-        return effect.getStackDescriptionWithSubs(mapParams, this);
+        // prefer setted stack Description if able 
+        final String result = super.getStackDescription();
+        if (result.isEmpty()) {
+            return effect.getStackDescriptionWithSubs(mapParams, this);
+        }
+        return result;
     }
 
     /* (non-Javadoc)

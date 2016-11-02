@@ -55,11 +55,13 @@ public abstract class SpellAbilityEffect {
     public final String getStackDescriptionWithSubs(final Map<String, String> params, final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
 
-        // prelude for when this is root ability
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getHostCard()).append(" -");
+        if (sa.getApi() != ApiType.PermanentCreature && sa.getApi() != ApiType.PermanentNoncreature) {
+            // prelude for when this is root ability
+            if (!(sa instanceof AbilitySub)) {
+                sb.append(sa.getHostCard()).append(" -");
+            }
+            sb.append(" ");
         }
-        sb.append(" ");
 
         // Own description
         String stackDesc = params.get("StackDescription");
@@ -81,10 +83,13 @@ public abstract class SpellAbilityEffect {
             sb.append(baseDesc);
         }
 
-        // This includes all subAbilities
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
+        // only add to StackDescription if its not a Permanent Spell
+        if (sa.getApi() != ApiType.PermanentCreature && sa.getApi() != ApiType.PermanentNoncreature) {
+            // This includes all subAbilities
+            final AbilitySub abSub = sa.getSubAbility();
+            if (abSub != null) {
+                sb.append(abSub.getStackDescription());
+            }
         }
 
         if (sa.hasParam("Announce")) {
