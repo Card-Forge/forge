@@ -417,6 +417,7 @@ forge-game/src/main/java/forge/game/ability/effects/MustBlockEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/OwnershipGainEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/PeekAndRevealEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/PermanentCreatureEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/PermanentEffect.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/ability/effects/PermanentNoncreatureEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/PhasesEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/PlaneswalkEffect.java -text
