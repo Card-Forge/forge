@@ -37,7 +37,6 @@ import com.google.common.collect.Maps;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
-import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -53,7 +52,6 @@ import forge.game.ability.SpellApiBased;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -80,7 +78,6 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -88,8 +85,8 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Expressions;
-import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
 
 /**
  * <p>
@@ -685,109 +682,6 @@ public class AiController {
             return AiPlayDecision.CurseEffects;
         }
         if (sa instanceof SpellPermanent) {
-            ManaCost mana = sa.getPayCosts().getTotalMana();
-            if (mana.countX() > 0) {
-                // Set PayX here to maximum value.
-                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
-                final Card source = sa.getHostCard();
-                if (source.hasConverge()) {
-                    card.setSVar("PayX", Integer.toString(0));
-                    int nColors = ComputerUtilMana.getConvergeCount(sa, player);
-                    for (int i = 1; i <= xPay; i++) {
-                        card.setSVar("PayX", Integer.toString(i));
-                        int newColors = ComputerUtilMana.getConvergeCount(sa, player);
-                        if (newColors > nColors) {
-                            nColors = newColors;
-                        } else {
-                            card.setSVar("PayX", Integer.toString(i - 1));
-                            break;
-                        }
-                    }
-                } else {
-                    if (xPay <= 0) {
-                        return AiPlayDecision.CantAffordX;
-                    }
-                    card.setSVar("PayX", Integer.toString(xPay));
-                }
-            } else if (mana.isZero()) {
-                // if mana is zero, but card mana cost does have X, then something is wrong
-                ManaCost cardCost = card.getManaCost(); 
-                if (cardCost != null && cardCost.countX() > 0) {
-                    return AiPlayDecision.CantPlayAi;
-                }
-            }
-            
-            // Check for valid targets before casting
-            if (card.getSVar("OblivionRing").length() > 0) {
-                SpellAbility effectExile = AbilityFactory.getAbility(card.getSVar("TrigExile"), card);
-                final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
-                final TargetRestrictions tgt = effectExile.getTargetRestrictions();
-                final CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), player, card, effectExile);
-                CardCollection targets = CardLists.getTargetableCards(list, sa);
-                if (sa.getHostCard().getName().equals("Suspension Field")) {
-                    //existing "exile until leaves" enchantments only target opponent's permanents
-                    final Player ai = sa.getActivatingPlayer();
-                    targets = CardLists.filter(targets, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return !c.getController().equals(ai);
-                        }
-                    });
-                }
-                if (targets.isEmpty()) {
-                    return AiPlayDecision.AnotherTime;
-                }
-            }
-            
-            if (sa.hasParam("Announce") && sa.getParam("Announce").startsWith("Multikicker")) {
-                //String announce = sa.getParam("Announce");
-                ManaCost mkCost = sa.getMultiKickerManaCost();
-                ManaCost mCost = sa.getPayCosts().getTotalMana();
-                for (int i = 0; i < 10; i++) {
-                    mCost = ManaCost.combine(mCost, mkCost);
-                    ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
-                    if (!ComputerUtilMana.canPayManaCost(mcbp, sa, player)) {
-                        card.setKickerMagnitude(i);
-                        break;
-                    }
-                    card.setKickerMagnitude(i+1);
-                }
-            }
-            
-            // Prevent the computer from summoning Ball Lightning type creatures after attacking
-            if (card.hasSVar("EndOfTurnLeavePlay")
-                    && (!game.getPhaseHandler().isPlayerTurn(player)
-                         || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                         || player.hasKeyword("Skip your next combat phase."))) {
-                return AiPlayDecision.AnotherTime;
-            }
-
-            // Prevent the computer from summoning Ball Lightning type creatures after attacking
-            if (card.hasStartOfKeyword("You may cast CARDNAME as though it had flash. If") && !card.getController().couldCastSorcery(sa)) {
-                return AiPlayDecision.AnotherTime;
-            }
-            
-            // Wait for Main2 if possible
-            if (game.getPhaseHandler().is(PhaseType.MAIN1)
-                    && game.getPhaseHandler().isPlayerTurn(player)
-                    && player.getManaPool().totalMana() <= 0
-                    && !ComputerUtil.castPermanentInMain1(player, sa)) {
-                return AiPlayDecision.WaitForMain2;
-            }
-            
-            // save cards with flash for surprise blocking
-            if (card.hasKeyword("Flash")
-                    && (player.isUnlimitedHandSize() || player.getCardsIn(ZoneType.Hand).size() <= player.getMaxHandSize()
-                        || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                    && player.getManaPool().totalMana() <= 0
-                    && (game.getPhaseHandler().isPlayerTurn(player)
-                            || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
-                    && (!card.hasETBTrigger(true) || card.hasSVar("AmbushAI"))
-                    && game.getStack().isEmpty()
-                    && !ComputerUtil.castPermanentInMain1(player, sa)) {
-                return AiPlayDecision.AnotherTime;
-            }
-            
             // don't play cards without being able to pay the upkeep for
             for (String ability : card.getKeywords()) {
                 if (ability.startsWith("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
@@ -1040,17 +934,9 @@ public class AiController {
 
         // Abilities without api may also use this routine, However they should provide a unique mode value
         if (api == null) {
-            if (sa instanceof SpellPermanent) {
-                Card card = sa.getHostCard();
-                if (card.isCreature()) {
-                    api = ApiType.PermanentCreature;
-                } else {
-                    api = ApiType.PermanentNoncreature;
-                }
-            } else {
-                String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).", mode);
-                throw new IllegalArgumentException(exMsg);
-            }
+            String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).",
+                    mode);
+            throw new IllegalArgumentException(exMsg);
         }
         return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
     }
@@ -1158,95 +1044,21 @@ public class AiController {
             if (!chance)
                 return AiPlayDecision.TargetingFailed;
 
-            return canPlaySpellBasic(card);
-        }
-        
-        if (spell instanceof SpellPermanent) {
-            if (mandatory) {
-                return AiPlayDecision.WillPlay;
-            }
-            ManaCost mana = spell.getPayCosts().getTotalMana();
-            final Cost cost = spell.getPayCosts();
-    
-            if (cost != null) {
-                // AI currently disabled for these costs
-                if (!ComputerUtilCost.checkLifeCost(player, cost, card, 4, null)) {
-                    return AiPlayDecision.CostNotAcceptable;
+            if (spell instanceof SpellPermanent) {
+                if (mandatory) {
+                    return AiPlayDecision.WillPlay;
                 }
-    
-                if (!ComputerUtilCost.checkDiscardCost(player, cost, card)) {
-                    return AiPlayDecision.CostNotAcceptable;
-                }
-    
-                if (!ComputerUtilCost.checkSacrificeCost(player, cost, card)) {
-                    return AiPlayDecision.CostNotAcceptable;
-                }
-    
-                if (!ComputerUtilCost.checkRemoveCounterCost(cost, card, spell)) {
-                    return AiPlayDecision.CostNotAcceptable;
-                }
-            }
-    
-            // check on legendary
-            if (card.getType().isLegendary() && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-                if (player.isCardInPlay(card.getName())) {
-                    return AiPlayDecision.WouldDestroyLegend;
-                }
-            }
-            if (card.isPlaneswalker()) {
-                CardCollection list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
-                for (String type : card.getType().getSubtypes()) { //determine planewalker subtype
-                    final CardCollection cl = CardLists.getType(list, type);
-                    if (!cl.isEmpty()) {
-                        return AiPlayDecision.WouldDestroyOtherPlaneswalker;
-                    }
-                    break;
-                }
-            }
-            if (card.getType().hasSupertype(Supertype.World)) {
-                CardCollection list = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), "World");
-                if (!list.isEmpty()) {
-                    return AiPlayDecision.WouldDestroyWorldEnchantment;
-                }
-            }
 
-            if (card.isCreature()) {
-                /*
-                 * Checks if the creature will have non-positive toughness
-                 * after applying static effects. Exceptions:
-                 *  1. has "etbCounter" keyword (eg. Endless One)
-                 *  2. paid non-zero for X cost
-                 *  3. has ETB trigger
-                 *  4. has ETB replacement
-                 *  5. has NoZeroToughnessAI svar (eg. Veteran Warleader)
-                 *  
-                 *  1. and 2. should probably be merged and applied on the
-                 *  card after checking for effects like Doubling Season for
-                 *  getNetToughness to see the true value.
-                 *  3. currently allows the AI to suicide creatures as long as
-                 *  it has an ETB. Maybe it should check if said ETB is
-                 *  actually worth it.
-                 *  Not sure what 4. is for.
-                 *  5. needs to be updated to ensure that the net toughness is
-                 *  still positive after static effects.
-                 */
-                final Card creature = CardFactory.copyCard(card, true);
-                ComputerUtilCard.applyStaticContPT(game, creature, null);
-                if (creature.getNetToughness() <= 0 && !creature.hasStartOfKeyword("etbCounter") && mana.countX() == 0
-                        && !creature.hasETBTrigger(false) && !creature.hasETBReplacement()
-                        && !creature.hasSVar("NoZeroToughnessAI")) {
-                    return AiPlayDecision.WouldBecomeZeroToughnessCreature;
+                if (!checkETBEffects(card, spell, null)) {
+                    return AiPlayDecision.BadEtbEffects;
                 }
-            }
-
-            if (!checkETBEffects(card, spell, null)) {
-                return AiPlayDecision.BadEtbEffects;
-            }
-            if (damage + ComputerUtil.getDamageFromETB(player, card) >= player.getLife() && !player.cantLoseForZeroOrLessLife() 
-                    && player.canLoseLife()) {
-                return AiPlayDecision.BadEtbEffects;
+                if (damage + ComputerUtil.getDamageFromETB(player, card) >= player.getLife()
+                        && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+                    return AiPlayDecision.BadEtbEffects;
+                }
             }
         }
+
         return canPlaySpellBasic(card);
     }
 

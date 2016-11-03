@@ -1,39 +1,60 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.SpellAbilityAi;
 import forge.game.Game;
-import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
+import forge.game.ability.AbilityFactory;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 
 /** 
  * AbilityFactory for Creature Spells.
  *
  */
-public class PermanentNoncreatureAi extends SpellAbilityAi {
+public class PermanentNoncreatureAi extends PermanentAi {
 
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)
+    @Override
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        if ("Never".equals(aiLogic) || "DontCast".equals(aiLogic)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * The rest of the logic not covered by the canPlayAI template is defined
+     * here
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        String logic = sa.getParam("AILogic");
-        Game game = aiPlayer.getGame();
-        final PhaseHandler ph = game.getPhaseHandler();
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
 
-        if ("DontCast".equals(logic)) {
+        if (!super.checkApiLogic(ai, sa))
             return false;
-        }
 
-        // Wait for Main2 if possible
-        if (ph.is(PhaseType.MAIN1) && ph.isPlayerTurn(aiPlayer)
-                && !ComputerUtil.castPermanentInMain1(aiPlayer, sa)) {
-            return false;
-        }
+        final Card host = sa.getHostCard();
+        final Game game = ai.getGame();
 
-        // AI shouldn't be retricted all that much for Creatures for now
+        // Check for valid targets before casting
+        if (host.hasSVar("OblivionRing")) {
+            SpellAbility effectExile = AbilityFactory.getAbility(host.getSVar("TrigExile"), host);
+            final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
+            final TargetRestrictions tgt = effectExile.getTargetRestrictions();
+            final CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, host,
+                    effectExile);
+            CardCollection targets = CardLists.getTargetableCards(list, sa);
+            if (sa.getHostCard().getName().equals("Suspension Field")) {
+                // existing "exile until leaves" enchantments only target
+                // opponent's permanents
+                targets = CardLists.filterControlledBy(targets, ai.getOpponents());
+            }
+            if (targets.isEmpty()) {
+                // AiPlayDecision.AnotherTime
+                return false;
+            }
+        }
         return true;
     }
 }

@@ -109,6 +109,7 @@ forge-ai/src/main/java/forge/ai/ability/MillAi.java -text
 forge-ai/src/main/java/forge/ai/ability/MustAttackAi.java -text
 forge-ai/src/main/java/forge/ai/ability/MustBlockAi.java -text
 forge-ai/src/main/java/forge/ai/ability/PeekAndRevealAi.java -text
+forge-ai/src/main/java/forge/ai/ability/PermanentAi.java -text svneol=unset#text/plain
 forge-ai/src/main/java/forge/ai/ability/PermanentCreatureAi.java -text
 forge-ai/src/main/java/forge/ai/ability/PermanentNoncreatureAi.java -text
 forge-ai/src/main/java/forge/ai/ability/PhasesAi.java -text
