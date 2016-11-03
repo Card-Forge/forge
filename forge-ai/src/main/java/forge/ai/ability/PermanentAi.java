@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardType.Supertype;
@@ -11,6 +12,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -131,6 +133,23 @@ public class PermanentAi extends SpellAbilityAi {
             }
         }
 
+        // don't play cards without being able to pay the upkeep for
+        for (String ability : card.getKeywords()) {
+            if (ability.startsWith("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
+                final String[] k = ability.split(" pay ");
+                final String costs = k[1].replaceAll("[{]", "").replaceAll("[}]", " ");
+
+                final SpellAbility emptyAbility = new SpellAbility.EmptySa(card, ai);
+                emptyAbility.setPayCosts(new Cost(costs, true));
+                emptyAbility.setTargetRestrictions(sa.getTargetRestrictions());
+
+                emptyAbility.setActivatingPlayer(ai);
+                if (!ComputerUtilCost.canPayCost(emptyAbility, ai)) {
+                    // AiPlayDecision.AnotherTime
+                    return false;
+                }
+            }
+        }
         return true;
     }
 

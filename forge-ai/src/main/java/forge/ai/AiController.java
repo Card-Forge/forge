@@ -70,9 +70,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.Ability;
 import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
@@ -682,19 +680,6 @@ public class AiController {
             return AiPlayDecision.CurseEffects;
         }
         if (sa instanceof SpellPermanent) {
-            // don't play cards without being able to pay the upkeep for
-            for (String ability : card.getKeywords()) {
-                if (ability.startsWith("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
-                    final String[] k = ability.split(" pay ");
-                    final String costs = k[1].replaceAll("[{]", "").replaceAll("[}]", " ");
-                    Cost cost = new Cost(costs, true);
-                    final Ability emptyAbility = new AbilityStatic(card, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
-                    emptyAbility.setActivatingPlayer(player);
-                    if (!ComputerUtilCost.canPayCost(emptyAbility, player)) {
-                        return AiPlayDecision.AnotherTime;
-                    }
-                }
-            }
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa instanceof Spell) {
@@ -862,7 +847,7 @@ public class AiController {
                 min = 1;
             }
         }
-    
+
         // look for good discards
         while (count < min) {
             Card prefCard = null;
