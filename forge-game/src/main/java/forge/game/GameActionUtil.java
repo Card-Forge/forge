@@ -40,7 +40,6 @@ import forge.util.TextUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -121,7 +120,7 @@ public final class GameActionUtil {
      *         the provided {@link SpellAbility}.
      */
     public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator) {
-        final List<SpellAbility> alternatives = new ArrayList<SpellAbility>();
+        final List<SpellAbility> alternatives = Lists.newArrayList();
 
         final Card source = sa.getHostCard();
 
@@ -134,13 +133,11 @@ public final class GameActionUtil {
                 final Card host = o.getHost();
 
                 final SpellAbility newSA = sa.copy();
-                final SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
+                final SpellAbilityRestriction sar = newSA.getRestrictions();
                 if (o.isWithFlash()) {
                 	sar.setInstantSpeed(true);
                 }
                 sar.setZone(null);
-                newSA.setRestrictions(sar);
                 newSA.setMayPlay(o.getAbility());
                 newSA.setMayPlayOriginal(sa);
                 if (o.getPayManaCost() == PayManaCost.NO) {
@@ -178,10 +175,8 @@ public final class GameActionUtil {
 
                 final SpellAbility flashback = sa.copy();
                 flashback.setFlashBackAbility(true);
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                sar.setZone(ZoneType.Graveyard);
-                flashback.setRestrictions(sar);
+
+                flashback.getRestrictions().setZone(ZoneType.Graveyard);
 
                 // there is a flashback cost (and not the cards cost)
                 if (!keyword.equals("Flashback")) {
@@ -196,20 +191,15 @@ public final class GameActionUtil {
                 newCost.increaseGenericMana(2);
                 final Cost actualcost = new Cost(newCost.toManaCost(), false);
                 newSA.setPayCosts(actualcost);
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
-                sar.setInstantSpeed(true);
-                newSA.setRestrictions(sar);
+                newSA.getRestrictions().setInstantSpeed(true);
                 newSA.setDescription(sa.getDescription() + " (by paying " + actualcost.toSimpleString() + " instead of its mana cost)");
                 alternatives.add(newSA);
             }
             if (sa.hasParam("Equip") && sa instanceof AbilityActivated && keyword.equals("EquipInstantSpeed")) {
                 final SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                SpellAbilityRestriction sar = new SpellAbilityRestriction();
-                sar.setVariables(sa.getRestrictions());
+                SpellAbilityRestriction sar = newSA.getRestrictions();
                 sar.setSorcerySpeed(false);
                 sar.setInstantSpeed(true);
-                newSA.setRestrictions(sar);
                 newSA.setDescription(sa.getDescription() + " (you may activate any time you could cast an instant )");
                 alternatives.add(newSA);
             }
@@ -225,7 +215,7 @@ public final class GameActionUtil {
      * @return an ArrayList<SpellAbility>.
      */
     public static List<SpellAbility> getOptionalCosts(final SpellAbility original) {
-        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> abilities = Lists.newArrayList();
 
         final Card source = original.getHostCard();
         abilities.add(original);
@@ -348,7 +338,7 @@ public final class GameActionUtil {
         }
 
         // Splice
-        final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> newAbilities = Lists.newArrayList();
         for (SpellAbility sa : abilities) {
             if (sa.isSpell() && sa.getHostCard().getType().hasStringType("Arcane") && sa.getApi() != null ) {
                 newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
@@ -369,8 +359,8 @@ public final class GameActionUtil {
      * get abilities with all Splice options
      */
     private  static final List<SpellAbility> getSpliceAbilities(SpellAbility sa) {
-        List<SpellAbility> newSAs = new ArrayList<SpellAbility>();
-        List<SpellAbility> allSaCombinations = new ArrayList<SpellAbility>();
+        List<SpellAbility> newSAs = Lists.newArrayList();
+        List<SpellAbility> allSaCombinations = Lists.newArrayList();
         allSaCombinations.add(sa);
         Card source = sa.getHostCard();
 
