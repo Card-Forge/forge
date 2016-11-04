@@ -2317,7 +2317,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Undaunted")) {
                 addStaticAbility(keyword, card, null);
             }
-
+            else if (keyword.equals("Prowess")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Evolve")) {
                 final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
                         + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
@@ -2507,23 +2509,6 @@ public class CardFactoryUtil {
                 card.setSVar("DBHideawayCleanup", "DB$ Cleanup | ClearRemembered$ True");
             }
         }
-
-        // Prowess
-        final int prowess = card.getAmountOfKeyword("Prowess");
-        card.removeIntrinsicKeyword("Prowess");
-        final StringBuilder trigProwess = new StringBuilder(
-                "Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | "
-                        + "Execute$ ProwessPump | TriggerZones$ Battlefield | TriggerDescription$ "
-                        + "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 "
-                        + "until end of turn.)");
-
-        final String abStringProwess = "DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1";
-        card.getCurrentState().setSVar("ProwessPump", abStringProwess);
-        final Trigger prowessTrigger = TriggerHandler.parseTrigger(trigProwess.toString(), card, true);
-        for (int i = 0; i < prowess; i++) {
-            card.getCurrentState().addTrigger(prowessTrigger);
-            card.getCurrentState().setSVar("BuffedBy", "Card.nonCreature+nonLand"); // for the AI
-        } // Prowess
 
         // AddCost
         if (card.hasSVar("FullCost")) {
@@ -2979,6 +2964,24 @@ public class CardFactoryUtil {
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Prowess")) {
+            final String trigProwess = "Mode$ SpellCast | ValidCard$ Card.nonCreature" 
+                    + " | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ "
+                    + "Prowess (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String effect = "DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1";
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigProwess, card, intrinsic);
+            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+
+            final Trigger cardTrigger = card.addTrigger(parsedTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+
+            if (!card.hasSVar("BuffedBy")) {
+                card.setSVar("BuffedBy", "Card.nonCreature+nonLand"); // for the AI
             }
         } else if (keyword.startsWith("Rampage")) {
             final String[] k = keyword.split(" ");
