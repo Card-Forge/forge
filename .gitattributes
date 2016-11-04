@@ -591,6 +591,7 @@ forge-game/src/main/java/forge/game/keyword/KeywordWithCostAndType.java -text
 forge-game/src/main/java/forge/game/keyword/KeywordWithType.java -text
 forge-game/src/main/java/forge/game/keyword/KeywordsChange.java -text
 forge-game/src/main/java/forge/game/keyword/Kicker.java -text svneol=unset#text/plain
+forge-game/src/main/java/forge/game/keyword/Modular.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/keyword/Protection.java -text
 forge-game/src/main/java/forge/game/keyword/SimpleKeyword.java -text
 forge-game/src/main/java/forge/game/keyword/UndefinedKeyword.java -text

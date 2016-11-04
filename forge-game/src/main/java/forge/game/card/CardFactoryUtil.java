@@ -2058,6 +2058,10 @@ public class CardFactoryUtil {
             else if (keyword.equals("Melee")) {
                 addTriggerAbility(keyword, card, null);                
             }
+            else if (keyword.startsWith("Modular")) {
+                addReplacementEffect(keyword, card, null);
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Monstrosity")) {
                 addSpellAbility(keyword, card, null);
             }
@@ -2881,6 +2885,27 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
+        } else if (keyword.startsWith("Modular")) {
+            final String abStr = "AB$ PutCounter | Cost$ 0 | ValidTgts$ Artifact.Creature | " +
+                    "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";
+            
+            String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard" +
+                    " | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController" +
+                    " | Secondary$ True | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, " +
+                    "you may put a +1/+1 counter on target artifact creature for each +1/+1 counter on CARDNAME";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            
+            SpellAbility ab = AbilityFactory.getAbility(abStr, card);
+            
+            ab.setSVar("ModularX", "TriggeredCard$CardCounters.P1P1");
+            
+            trigger.setOverridingAbility(ab);
+            
+            final Trigger cardTrigger = card.addTrigger(trigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
         } else if (keyword.equals("Myriad")) {
             final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | Execute$ "
                     + "MyriadAbility | Secondary$ True | TriggerDescription$ Myriad ("
@@ -2896,7 +2921,7 @@ public class CardFactoryUtil {
             final String dbString3 = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$"
                     + " Battlefield | Destination$ Exile";
             final String dbString4 = "DB$ Cleanup | ClearImprinted$ True";
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
 
             card.setSVar("MyriadAbility", abString);
             card.setSVar("MyriadCopy", dbString1);
@@ -3172,6 +3197,28 @@ public class CardFactoryUtil {
 
             if (!intrinsic) {
                 kws.addReplacement(cardre);
+            }
+        } else if (keyword.startsWith("Modular")) {
+            final String[] k = keyword.split(":");
+            final String m = k[1];
+
+            StringBuilder sb = new StringBuilder("etbCounter:P1P1:");
+            sb.append(m).append(":no Condition:");
+            sb.append("Modular ");
+            if (!StringUtils.isNumeric(m)) {
+                sb.append("- ");
+            }
+            sb.append(m);
+            sb.append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
+
+            if ("Sunburst".equals(m)) {
+                card.setSVar(m, "Count$Converge");
+            }
+
+            if (intrinsic) {
+                card.addIntrinsicKeyword(sb.toString());
+            } else {
+                kws.addReplacement(makeEtbCounter(sb.toString(), card, intrinsic));
             }
         } else if (keyword.equals("Unleash")) {
             String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + Keyword.getInstance(keyword).getReminderText() + ")";
@@ -3965,33 +4012,6 @@ public class CardFactoryUtil {
             final int n = hasKeyword(card, "Devour");
             addReplacementEffect(card.getKeywords().get(n), card, null);
         } // Devour
-
-        if (hasKeyword(card, "Modular") != -1) {
-            final int n = hasKeyword(card, "Modular");
-            if (n != -1) {
-                final String parse = card.getKeywords().get(n).toString();
-                card.getKeywords().remove(parse);
-
-                final int m = Integer.parseInt(parse.substring(8));
-
-                card.addIntrinsicKeyword("etbCounter:P1P1:" + m + ":no Condition: " +
-                        "Modular " + m + " (This enters the battlefield with " + m + " +1/+1 counters on it. When it's put into a graveyard, " +
-                        "you may put its +1/+1 counters on target artifact creature.)");
-
-                final String abStr = "AB$ PutCounter | Cost$ 0 | References$ ModularX | ValidTgts$ Artifact.Creature | " +
-                        "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";
-                card.setSVar("ModularTrig", abStr);
-                card.setSVar("ModularX", "TriggeredCard$CardCounters.P1P1");
-                
-                String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard" +
-                        " | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | Execute$ ModularTrig | " +
-                        "Secondary$ True | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, " +
-                        "you may put a +1/+1 counter on target artifact creature for each +1/+1 counter on CARDNAME";
-                final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
-                card.addTrigger(myTrigger);
-            }
-        } // Modular
-        
 
         /*
          * WARNING: must keep this keyword processing before etbCounter keyword
