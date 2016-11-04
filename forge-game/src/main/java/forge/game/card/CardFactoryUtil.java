@@ -3488,7 +3488,7 @@ public class CardFactoryUtil {
 
             final SpellAbility newSA = sa.copy();
 
-            SpellAbilityRestriction sar = sa.getRestrictions();
+            SpellAbilityRestriction sar = newSA.getRestrictions();
             sar.setIsPresent(offeringType + ".YouCtrl+CanBeSacrificedBy");
             sar.setInstantSpeed(true);
 
