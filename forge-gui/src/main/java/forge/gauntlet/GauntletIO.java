@@ -187,6 +187,11 @@ public class GauntletIO {
             final boolean foil = "1".equals(reader.getAttribute("foil"));
             PaperCard card = FModel.getMagicDb().getCommonCards().getCard(name, set, index);
             if (null == card) {
+                FModel.getMagicDb().attemptToLoadCard(name, set);
+                card = FModel.getMagicDb().getCommonCards().getCard(name, set, index);
+            }
+            if (null == card) {
+                FModel.getMagicDb().attemptToLoadCard(name, set);
                 card = FModel.getMagicDb().getCommonCards().getCard(name, set, -1);
             }
             if (null == card) {
