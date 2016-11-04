@@ -211,10 +211,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             putSection(sec, pool);
         }
 
+        deferredSections = null;
         if (!hasExplicitlySpecifiedSet) {
             convertByXitaxMethod();
         }
-        deferredSections = null;
     }
 
     private void convertByXitaxMethod() {
