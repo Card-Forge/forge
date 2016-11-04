@@ -149,6 +149,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Changes how much information is displayed in the game log. Sorted by least to most verbose.",
                 GameLogEntryType.class),
                 3);
+        lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
+                "Load Card Scripts Lazily",
+                "If turned on, Forge will load card scripts as they're needed instead of at start up. (Warning: Experimental)"), 3);
 
         //Graphic Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,

@@ -4,6 +4,7 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.PrintSheet;
+import forge.card.CardDb.CardRequest;
 import forge.item.BoosterBox;
 import forge.item.FatPack;
 import forge.item.SealedProduct;
@@ -24,21 +25,27 @@ import java.util.TreeMap;
  * @author Max
  */
 public class StaticData {
+    private final CardStorageReader reader;
+    private final String blockDataFolder;
     private final CardDb commonCards;
     private final CardDb variantCards;
     private final CardDb allCards;
     private final CardEdition.Collection editions;
-    private final IStorage<SealedProduct.Template> boosters;
-    private final IStorage<SealedProduct.Template> specialBoosters;
-    private final IStorage<SealedProduct.Template> tournaments;
-    private final IStorage<FatPack.Template> fatPacks;
-    private final IStorage<BoosterBox.Template> boosterBoxes;
-    private final IStorage<PrintSheet> printSheets;
+
+    // Loaded lazily:
+    private IStorage<SealedProduct.Template> boosters;
+    private IStorage<SealedProduct.Template> specialBoosters;
+    private IStorage<SealedProduct.Template> tournaments;
+    private IStorage<FatPack.Template> fatPacks;
+    private IStorage<BoosterBox.Template> boosterBoxes;
+    private IStorage<PrintSheet> printSheets;
 
     private static StaticData lastInstance = null;
 
     public StaticData(CardStorageReader reader, String editionFolder, String blockDataFolder) {
+        this.reader = reader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
+        this.blockDataFolder = blockDataFolder;
         lastInstance = this;
 
         final Map<String, CardRules> regularCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -66,13 +73,6 @@ public class StaticData {
         commonCards.initialize(false, false);
         variantCards.initialize(false, false);
         allCards.initialize( false, false);
-
-        this.boosters = new StorageBase<>("Boosters", editions.getBoosterGenerator());
-        this.specialBoosters = new StorageBase<>("Special boosters", new SealedProduct.Template.Reader(new File(blockDataFolder, "boosters-special.txt")));
-        this.tournaments = new StorageBase<>("Starter sets", new SealedProduct.Template.Reader(new File(blockDataFolder, "starters.txt")));
-        this.fatPacks = new StorageBase<>("Fat packs", new FatPack.Template.Reader(blockDataFolder + "fatpacks.txt"));
-        this.boosterBoxes = new StorageBase<>("Booster boxes", new BoosterBox.Template.Reader(blockDataFolder + "boosterboxes.txt"));
-        this.printSheets = new StorageBase<>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
     }
 
     public static StaticData instance() {
@@ -96,30 +96,53 @@ public class StaticData {
         return sortedEditions;
     }
 
+    public void attemptToLoadCard(String encodedCardName, String setCode) {
+        CardDb.CardRequest r = CardRequest.fromString(encodedCardName);
+        String cardName = r.cardName;
+        CardRules rules = reader.attemptToLoadCard(cardName, setCode);
+        if (rules != null) {
+            commonCards.loadCard(cardName, rules);
+            variantCards.loadCard(cardName, rules);
+            allCards.loadCard(cardName, rules);
+        }
+    }
+
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
     public IStorage<FatPack.Template> getFatPacks() {
+        if (fatPacks == null)
+            fatPacks = new StorageBase<>("Fat packs", new FatPack.Template.Reader(blockDataFolder + "fatpacks.txt"));
         return fatPacks;
     }
 
     public IStorage<BoosterBox.Template> getBoosterBoxes() {
+        if (boosterBoxes == null)
+            boosterBoxes = new StorageBase<>("Booster boxes", new BoosterBox.Template.Reader(blockDataFolder + "boosterboxes.txt"));
         return boosterBoxes;
     }
 
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
     public final IStorage<SealedProduct.Template> getTournamentPacks() {
+        if (tournaments == null)
+            tournaments = new StorageBase<>("Starter sets", new SealedProduct.Template.Reader(new File(blockDataFolder, "starters.txt")));
         return tournaments;
     }
 
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
     public final IStorage<SealedProduct.Template> getBoosters() {
+        if (boosters == null)
+            boosters = new StorageBase<>("Boosters", editions.getBoosterGenerator());
         return boosters;
     }
 
     public final IStorage<SealedProduct.Template> getSpecialBoosters() {
+        if (specialBoosters == null)
+            specialBoosters = new StorageBase<>("Special boosters", new SealedProduct.Template.Reader(new File(blockDataFolder, "boosters-special.txt")));
         return specialBoosters;
     }
 
     public IStorage<PrintSheet> getPrintSheets() {
+        if (printSheets == null)
+            printSheets = new StorageBase<>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
         return printSheets;
     }
 

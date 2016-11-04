@@ -1,10 +1,8 @@
 package forge.deck.io;
 
-import forge.card.CardDb;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.item.IPaperCard;
 import forge.util.FileSection;
 import forge.util.FileSectionManual;
 import forge.util.FileUtil;
@@ -74,40 +72,11 @@ public class DeckSerializer {
         if (dh == null) {
             return null;
         }
-    
-        final Deck d = new Deck(dh.getName());
+
+        Deck d = new Deck(dh.getName());
         d.setComment(dh.getComment());
         d.getTags().addAll(dh.getTags());
-    
-        boolean hasExplicitlySpecifiedSet = false;
-        
-        for (Entry<String, List<String>> s : sections.entrySet()) {
-            DeckSection sec = DeckSection.smartValueOf(s.getKey());
-            if (sec == null) {
-                continue;
-            }
-            
-            for(String k : s.getValue()) 
-                if ( k.indexOf(CardDb.NameSetSeparator) > 0 )
-                    hasExplicitlySpecifiedSet = true;
-    
-            CardPool pool = CardPool.fromCardList(s.getValue());
-            // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
-            IPaperCard sample = pool.get(0);
-            if (sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon())) {
-                sec = DeckSection.Planes;
-            }
-            if (sample != null && sample.getRules().getType().isScheme()) {
-                sec = DeckSection.Schemes;
-            }
-    
-            d.putSection(sec, pool);
-        }
-        
-        if (!hasExplicitlySpecifiedSet) {
-            d.convertByXitaxMethod();
-        }
-            
+        d.setDeferredSections(sections);
         return d;
     }
 }

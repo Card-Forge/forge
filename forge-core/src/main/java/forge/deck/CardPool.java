@@ -63,14 +63,16 @@ public class CardPool extends ItemPool<PaperCard> {
     // NOTE: ART indices are "1" -based
     public void add(String cardName, String setCode, final int artIndex, final int amount) {
         PaperCard cp = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
-        boolean isCommonCard = cp != null;
+        final boolean isCommonCard = cp != null;
         if (!isCommonCard) {
             cp = StaticData.instance().getVariantCards().getCard(cardName, setCode);
+            if (cp == null) {
+                StaticData.instance().attemptToLoadCard(cardName, setCode);
+                cp = StaticData.instance().getVariantCards().getCard(cardName, setCode);
+            }
         }
 
-        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length()-1)) && cardName.charAt(cardName.length()-2) == CardDb.NameSetSeparator;
         int artCount = 1;
-
         if (cp != null ) {
             setCode = cp.getEdition();
             cardName = cp.getName();
@@ -80,6 +82,7 @@ public class CardPool extends ItemPool<PaperCard> {
             cp = StaticData.instance().getCommonCards().createUnsuportedCard(cardName); 
         }
 
+        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length()-1)) && cardName.charAt(cardName.length()-2) == CardDb.NameSetSeparator;
         if (artIndexExplicitlySet || artCount <= 1) {
             // either a specific art index is specified, or there is only one art, so just add the card
             this.add(cp, amount);

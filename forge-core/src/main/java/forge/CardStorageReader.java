@@ -28,7 +28,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
@@ -49,7 +51,7 @@ import forge.util.ThreadUtil;
 
 /**
  * <p>
- * CardReader class.
+ * CardStorageReader class.
  * </p>
  *
  * @author Forge
@@ -57,10 +59,6 @@ import forge.util.ThreadUtil;
  */
 
 public class CardStorageReader {
-    public interface Observer {
-        public void cardLoaded(CardRules rules, List<String> lines, File fileOnDisk);
-    }
-
     public interface ProgressObserver{
         void setOperationName(String name, boolean usePercents);
         void report(int current, int total);
@@ -85,14 +83,15 @@ public class CardStorageReader {
     private transient File cardsfolder;
 
     private transient ZipFile zip;
+    private transient Map<String, ZipEntry> zipEntriesMap;
     private final transient Charset charset;
 
-    private final Observer observer;
+    private final boolean loadCardsLazily;
 
-    public CardStorageReader(final String cardDataDir, final CardStorageReader.ProgressObserver progressObserver, final Observer observer) {
+    public CardStorageReader(final String cardDataDir, final CardStorageReader.ProgressObserver progressObserver, boolean loadCardsLazily) {
         this.progressObserver = progressObserver != null ? progressObserver : CardStorageReader.ProgressObserver.emptyObserver;
         this.cardsfolder = new File(cardDataDir);
-        this.observer = observer;
+        this.loadCardsLazily = loadCardsLazily;
 
         // These read data for lightweight classes.
         if (!cardsfolder.exists()) {
@@ -140,15 +139,99 @@ public class CardStorageReader {
         return result;
     }
 
-    public final Iterable<CardRules> loadCards() {
+    // Note: This is custom coded for efficiency, since it allows
+    // to do the relevant transformation in a single pass with just
+    // a single char array allocation.
+    private String transformName(String cardName) {
+        char[] chars = new char[cardName.length()];
+        int charIndex = 0;
+        for (int i = 0; i < cardName.length(); i++) {
+            char c = Character.toLowerCase(cardName.charAt(i));
+            if (c == '\'') {
+                continue;
+            }
+            if (c < 'a' || c > 'z') {
+                if (chars[charIndex - 1] == '_') {
+                    continue;
+                }
+                c = '_';
+            }
+            chars[charIndex++] = c;
+        }
+        if (chars[charIndex - 1] == '_') {
+            charIndex--;
+        }
+        return new String(chars, 0, charIndex);
+    }
+    
+    private ZipEntry findZipEntryForCard(String transformedName) {
+        if (zip == null) {
+            return null;
+        }
 
+        if (zipEntriesMap == null) {
+            zipEntriesMap = new HashMap<String, ZipEntry>();
+            for (ZipEntry entry : getZipEntries()) {
+                zipEntriesMap.put(entry.getName(), entry);
+            }
+        }
+
+        ZipEntry entry = zipEntriesMap.get(transformedName + CardStorageReader.CARD_FILE_DOT_EXTENSION);
+        if (entry == null) {
+            // Double faced cards file naming convention currently has both names - so try to prefix match.
+            // TODO: Consider changing the naming convention for DFCs.
+            for (String fileName : zipEntriesMap.keySet()) {
+                if (fileName.startsWith(transformedName)) {
+                    entry = zipEntriesMap.get(fileName);
+                    break;
+                }
+            }
+        }
+        return entry;
+    }
+    
+    private File findFileForCard(String transformedName) {
+        String folder = cardsfolder.getAbsolutePath() + "/" + transformedName.charAt(0);
+        File file = new File(folder + "/" + transformedName + CardStorageReader.CARD_FILE_DOT_EXTENSION);
+        if (!file.exists()) {
+            file = null;
+            // Double faced cards file naming convention currently has both names - so try to prefix match.
+            // TODO: Consider changing the naming convention for DFCs.
+            for (String fileName : new File(folder).list()) {
+                if (fileName.startsWith(transformedName)) {
+                    file = new File(folder, fileName);
+                    break;
+                }
+            }
+        }
+        return file;
+    }
+
+    public final CardRules attemptToLoadCard(String cardName, String setCode) {
+        String transformedName = transformName(cardName);
+        CardRules rules = null;
+
+        // TODO: Should CardRules.Reader object be cached?
+        ZipEntry entry = findZipEntryForCard(transformedName);
+        if (entry != null) {
+            rules = loadCard(new CardRules.Reader(), entry);
+        } else {
+            File file = findFileForCard(transformedName);
+            if (file != null) {
+                rules = loadCard(new CardRules.Reader(), file);
+            }
+        }
+
+        return rules;
+    }
+
+    public final Iterable<CardRules> loadCards() {
         final Localizer localizer = Localizer.getInstance();
 
         progressObserver.setOperationName(localizer.getMessage("splash.loading.examining-cards"), true);
 
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
-
 
         final Set<CardRules> result = new TreeSet<>(new Comparator<CardRules>() {
             @Override
@@ -157,11 +240,14 @@ public class CardStorageReader {
             }
         });
 
+        if (loadCardsLazily) {
+            return result;
+        }
+ 
         final List<File> allFiles = collectCardFiles(new ArrayList<File>(), this.cardsfolder);
-        if(!allFiles.isEmpty()) {
+        if (!allFiles.isEmpty()) {
             int fileParts = zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 3;
-            if( allFiles.size() < fileParts * 100)
-            {
+            if (allFiles.size() < fileParts * 100) {
                 fileParts = allFiles.size() / 100; // to avoid creation of many threads for a dozen of files
             }
             final CountDownLatch cdlFiles = new CountDownLatch(fileParts);
@@ -176,23 +262,10 @@ public class CardStorageReader {
             System.out.printf("Read cards: %s files in %d ms (%d parts) %s%n", allFiles.size(), timeOnParse, taskFiles.size(), useThreadPool ? "using thread pool" : "in same thread");
         }
 
-        if( this.zip != null ) {
+        if (this.zip != null) {
             final CountDownLatch cdlZip = new CountDownLatch(NUMBER_OF_PARTS);
             List<Callable<List<CardRules>>> taskZip;
-
-            ZipEntry entry;
-            final List<ZipEntry> entries = new ArrayList<>();
-            // zipEnum was initialized in the constructor.
-            final Enumeration<? extends ZipEntry> zipEnum = this.zip.entries();
-            while (zipEnum.hasMoreElements()) {
-                entry = zipEnum.nextElement();
-                if (entry.isDirectory() || !entry.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION)) {
-                    continue;
-                }
-                entries.add(entry);
-            }
-
-            taskZip = makeTaskListForZip(entries, cdlZip);
+            taskZip = makeTaskListForZip(getZipEntries(), cdlZip);
             progressObserver.setOperationName(localizer.getMessage("splash.loading.cards-archive"), true);
             progressObserver.report(0, taskZip.size());
             final StopWatch sw = new StopWatch();
@@ -204,6 +277,21 @@ public class CardStorageReader {
         }
 
         return result;
+    }
+
+    private List<ZipEntry> getZipEntries() {
+        ZipEntry entry;
+        final List<ZipEntry> entries = new ArrayList<>();
+        // zipEnum was initialized in the constructor.
+        final Enumeration<? extends ZipEntry> zipEnum = this.zip.entries();
+        while (zipEnum.hasMoreElements()) {
+            entry = zipEnum.nextElement();
+            if (entry.isDirectory() || !entry.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION)) {
+                continue;
+            }
+            entries.add(entry);
+        }
+        return entries;
     }
 
     private void executeLoadTask(final Collection<CardRules> result, final List<Callable<List<CardRules>>> tasks, final CountDownLatch cdl) {
@@ -295,7 +383,6 @@ public class CardStorageReader {
         return accumulator;
     }
 
-
     private List<String> readScript(final InputStream inputStream) {
         return FileUtil.readAllLines(new InputStreamReader(inputStream, this.charset), true);
     }
@@ -311,11 +398,7 @@ public class CardStorageReader {
             fileInputStream = new FileInputStream(file);
             reader.reset();
             final List<String> lines = readScript(fileInputStream);
-            final CardRules rules = reader.readCard(lines);
-            if ( null != observer ) {
-                observer.cardLoaded(rules, lines, file);
-            }
-            return rules;
+            return reader.readCard(lines);
         } catch (final FileNotFoundException ex) {
             throw new RuntimeException("CardReader : run error -- file not found: " + file.getPath(), ex);
         } finally {

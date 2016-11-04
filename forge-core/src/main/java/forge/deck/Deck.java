@@ -22,7 +22,9 @@ import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardDb.SetPreference;
+import forge.card.CardDb;
 import forge.card.CardEdition;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 
 import java.util.*;
@@ -40,7 +42,10 @@ import java.util.Map.Entry;
 @SuppressWarnings("serial")
 public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPool>> {
     private final Map<DeckSection, CardPool> parts = new EnumMap<DeckSection, CardPool>(DeckSection.class);
-    private final Set<String>                tags  = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    private final Set<String> tags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
+    // the lazy card load feature to ensure we don't need to load all cards on start up.
+    private Map<String, List<String>> deferredSections;
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -106,7 +111,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     public CardPool getMain() {
-        return this.parts.get(DeckSection.Main);
+        loadDeferredSections();
+        return parts.get(DeckSection.Main);
     }
 
     public List<PaperCard> getCommanders() {
@@ -123,7 +129,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     // may return nulls
     public CardPool get(DeckSection deckSection) {
-        return this.parts.get(deckSection);
+        loadDeferredSections();
+        return parts.get(deckSection);
     }
 
     public boolean has(DeckSection deckSection) {
@@ -146,6 +153,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         this.parts.put(section, pool);
     }
 
+    public void setDeferredSections(Map<String, List<String>> deferredSections) {
+        this.deferredSections = deferredSections;
+    }
+
     /* (non-Javadoc)
      * @see forge.deck.DeckBase#cloneFieldsTo(forge.deck.DeckBase)
      */
@@ -153,6 +164,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     protected void cloneFieldsTo(final DeckBase clone) {
         super.cloneFieldsTo(clone);
         final Deck result = (Deck) clone;
+        loadDeferredSections();
         for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
             CardPool cp = new CardPool();
             result.parts.put(kv.getKey(), cp);
@@ -170,7 +182,42 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return new Deck(name0);
     }
 
-    public void convertByXitaxMethod() {
+    private void loadDeferredSections() {
+        if (deferredSections == null) {
+            return;
+        }
+
+        boolean hasExplicitlySpecifiedSet = false;
+        for (Entry<String, List<String>> s : deferredSections.entrySet()) {
+            DeckSection sec = DeckSection.smartValueOf(s.getKey());
+            if (sec == null) {
+                continue;
+            }
+
+            final List<String> cardsInSection = s.getValue();
+            for (String k : cardsInSection) 
+                if (k.indexOf(CardDb.NameSetSeparator) > 0)
+                    hasExplicitlySpecifiedSet = true;
+
+            CardPool pool = CardPool.fromCardList(cardsInSection);
+            // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
+            IPaperCard sample = pool.get(0);
+            if (sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon())) {
+                sec = DeckSection.Planes;
+            }
+            if (sample != null && sample.getRules().getType().isScheme()) {
+                sec = DeckSection.Schemes;
+            }
+            putSection(sec, pool);
+        }
+
+        if (!hasExplicitlySpecifiedSet) {
+            convertByXitaxMethod();
+        }
+        deferredSections = null;
+    }
+
+    private void convertByXitaxMethod() {
         CardEdition earliestSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getAllCardsInASinglePool());
 
         Calendar cal = Calendar.getInstance();
@@ -217,6 +264,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
      */
     @Override
     public Iterator<Entry<DeckSection, CardPool>> iterator() {
+        loadDeferredSections();
         return parts.entrySet().iterator();
     }
 
@@ -245,6 +293,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     @Override
     public boolean isEmpty() {
+        loadDeferredSections();
         for (CardPool part : parts.values()) {
             if (!part.isEmpty()) {
                 return false;

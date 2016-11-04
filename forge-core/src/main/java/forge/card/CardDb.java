@@ -48,6 +48,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private static Map<String, String> artPrefs = new HashMap<String, String>();
     
     private final Map<String, String> alternateName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, Integer> artIds = new HashMap<String, Integer>();
 
     private final List<PaperCard> allCards = new ArrayList<PaperCard>();
     private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards);
@@ -72,7 +73,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
     
     // NO GETTERS/SETTERS HERE!
-    private static class CardRequest {
+    public static class CardRequest {
         public String cardName;
         public String edition;
         public int artIndex;
@@ -137,11 +138,35 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
         }
     }
+    
+    private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
+        int artIdx = 1;
+        String key = e.getCode() + "/" + cis.name;
+        if (artIds.containsKey(key)) {
+            artIdx = artIds.get(key) + 1;
+        }
+
+        artIds.put(key, artIdx);
+        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
+    }
+
+    public void loadCard(String cardName, CardRules cr) {
+        rulesByName.put(cardName, cr);
+
+        for (CardEdition e : editions) {
+            for (CardInSet cis : e.getCards()) {
+                if (cis.name.equals(cardName)) {
+                    addSetCard(e, cis, cr);
+                }
+            }
+        }
+
+        reIndex();
+    }
 
     public void initialize(boolean logMissingPerEdition, boolean logMissingSummary) {
         Set<String> allMissingCards = new LinkedHashSet<String>();
         List<String> missingCards = new ArrayList<String>();
-        Map<String, Integer> artIds = new HashMap<String, Integer>();
         CardEdition upcomingSet = null;
         Date today = new Date();
 
@@ -155,14 +180,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
 
             for (CardEdition.CardInSet cis : e.getCards()) {
-                int artIdx = 1;
-                if (artIds.containsKey(cis.name)) {
-                    artIdx = artIds.get(cis.name) + 1;
-                }
-                artIds.put(cis.name, artIdx);
                 CardRules cr = rulesByName.get(cis.name);
                 if (cr != null) {
-                    addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
+                    addSetCard(e, cis, cr);
                 }
                 else {
                     missingCards.add(cis.name);
