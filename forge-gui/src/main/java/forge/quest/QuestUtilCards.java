@@ -463,9 +463,13 @@ public final class QuestUtilCards {
      * @return the sell mutliplier
      */
     public double getSellMultiplier() {
-        double multi = 0.20 + (0.001 * this.qc.getAchievements().getWin());
-        if (multi > 0.6) {
-            multi = 0.6;
+        double baseMultiplier = Double.parseDouble(this.qpref.getPref(QPref.SHOP_SELLING_PERCENTAGE_BASE))/100.0;
+        double maxMultiplier = Double.parseDouble(this.qpref.getPref(QPref.SHOP_SELLING_PERCENTAGE_MAX))/100.0;
+
+
+        double multi = baseMultiplier + (0.001 * this.qc.getAchievements().getWin());
+        if (maxMultiplier > 0 && multi > maxMultiplier) {
+            multi = maxMultiplier;
         }
 
         final int lvlEstates = this.qc.getMode() == QuestMode.Fantasy ? this.qa.getItemLevel(QuestItemType.ESTATES) : 0;

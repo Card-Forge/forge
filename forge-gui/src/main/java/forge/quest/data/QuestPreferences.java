@@ -154,6 +154,10 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         // How many packs the shop start with.
         SHOP_STARTING_PACKS("5"),
 
+        // Value * .20 + Wins
+        SHOP_SELLING_PERCENTAGE_BASE("20"),
+        SHOP_SELLING_PERCENTAGE_MAX("60"),
+
         // Maximum selling price in a spell shop
         SHOP_MAX_SELLING_PRICE("1000"),
         // Wins until the selling price limit is removed
@@ -277,6 +281,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
 
             case SHOP_MAX_PACKS:
             case SHOP_MAX_SELLING_PRICE:
+            case SHOP_SELLING_PERCENTAGE_BASE:
+            case SHOP_SELLING_PERCENTAGE_MAX:
             case SHOP_WINS_FOR_ADDITIONAL_PACK:
             case PLAYSET_SIZE:
             case PLAYSET_ANY_NUMBER_SIZE:
