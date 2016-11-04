@@ -639,7 +639,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         // Write to log that attempt,
         if (cR == CardRarity.Unknown) {
-            new Exception().printStackTrace();
             System.err.println(String.format("An unknown card found when loading Forge decks: \"%s\" Forge does not know of such a card's existence. Have you mistyped the card name?", cardName));
         }
         else {
