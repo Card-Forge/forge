@@ -1432,10 +1432,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(keyword).append("\r\n");
             } else if (keyword.startsWith("Sunburst") && hasStartOfKeyword("Modular")) {
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
-            		|| keyword.startsWith("Strive") || keyword.startsWith("Escalate")
-            		|| keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
+                    || keyword.startsWith("Strive") || keyword.startsWith("Escalate")
+                    || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")
-                    || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")) {
+                    || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")
+                    || keyword.startsWith("Graft")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                     || keyword.equals("Living Weapon") || keyword.equals("Myriad")) {

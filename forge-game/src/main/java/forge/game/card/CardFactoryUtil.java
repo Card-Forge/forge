@@ -2055,6 +2055,10 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Surge")) {
                 addSpellAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Graft")) {
+                addReplacementEffect(keyword, card, null);
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Melee")) {
                 addTriggerAbility(keyword, card, null);                
             }
@@ -2801,6 +2805,26 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
+        } else if (keyword.startsWith("Graft")) {
+            final String abStr = "DB$ MoveCounter | Source$ Self | "
+                    + "Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1";
+
+            String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other"
+                + "| Origin$ Any | Destination$ Battlefield "
+                + "| TriggerZones$ Battlefield | OptionalDecider$ You "
+                + "| IsPresent$ Card.Self+counters_GE1_P1P1"
+                + "| Secondary$ True | TriggerDescription$ "
+                + "Whenever another creature enters the battlefield, you "
+                + "may move a +1/+1 counter from this creature onto it.";
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+
+            trigger.setOverridingAbility(AbilityFactory.getAbility(abStr, card));
+
+            final Trigger cardTrigger = card.addTrigger(trigger);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
         } else if (keyword.equals("Living Weapon")) {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
@@ -3186,6 +3210,21 @@ public class CardFactoryUtil {
 
             if (!intrinsic) {
                 kws.addReplacement(cardre);
+            }
+        } else if (keyword.startsWith("Graft")) {
+            final String[] k = keyword.split(":");
+            final String m = k[1];
+
+            StringBuilder sb = new StringBuilder("etbCounter:P1P1:");
+            sb.append(m).append(":no Condition:");
+            sb.append("Graft ");
+            sb.append(m);
+            sb.append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
+
+            if (intrinsic) {
+                card.addIntrinsicKeyword(sb.toString());
+            } else {
+                kws.addReplacement(makeEtbCounter(sb.toString(), card, intrinsic));
             }
         } else if (keyword.startsWith("Madness")) {
             // Set Madness Replacement effects
@@ -4020,27 +4059,6 @@ public class CardFactoryUtil {
          * WARNING: must keep this keyword processing before etbCounter keyword
          * processing.
          */
-        final int graft = hasKeyword(card, "Graft");
-        if (graft != -1) {
-            final String parse = card.getKeywords().get(graft).toString();
-
-            final int m = Integer.parseInt(parse.substring(6));
-            final String abStr = "AB$ MoveCounter | Cost$ 0 | Source$ Self | "
-                    + "Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1";
-            card.setSVar("GraftTrig", abStr);
-
-            String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other | "
-                + "Origin$ Any | Destination$ Battlefield"
-                + " | TriggerZones$ Battlefield | OptionalDecider$ You | "
-                + "IsPresent$ Card.Self+counters_GE1_P1P1 | "
-                + "Execute$ GraftTrig | TriggerDescription$ "
-                + "Whenever another creature enters the battlefield, you "
-                + "may move a +1/+1 counter from this creature onto it.";
-            final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
-            card.addTrigger(myTrigger);
-
-            card.addIntrinsicKeyword("etbCounter:P1P1:" + m);
-        }
 
         final int bloodthirst = hasKeyword(card, "Bloodthirst");
         if (bloodthirst != -1) {
