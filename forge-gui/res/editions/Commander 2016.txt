@@ -152,7 +152,7 @@ Type=Other
 143 R Burgeoning
 144 R Champion of Lambholt
 145 R Collective Voyage
-146 R Cultivate
+146 C Cultivate
 147 R Den Protector
 148 U Far Wanderings
 149 C Farseek
