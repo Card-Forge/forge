@@ -2600,8 +2600,10 @@ public class CardFactoryUtil {
 
         String[] splitkw = parse.split(":");
 
-        String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " "
-                + CounterType.valueOf(splitkw[1]).getName() + " counters on it.";
+        String desc = "CARDNAME enters the battlefield with ";
+        desc += Lang.nounWithNumeral(splitkw[2], CounterType.valueOf(splitkw[1]).getName() + " counter");
+        desc += " on it.";
+
         String extraparams = "";
         String amount = splitkw[2];
         if (splitkw.length > 3) {
