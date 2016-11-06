@@ -2281,6 +2281,9 @@ public class CardFactoryUtil {
             else if (keyword.equals("Flanking")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.equals("Ingest")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Persist")) {
                 addTriggerAbility(keyword, card, null);
             }
@@ -2834,6 +2837,22 @@ public class CardFactoryUtil {
                 + "| Secondary$ True | TriggerDescription$ "
                 + "Whenever another creature enters the battlefield, you "
                 + "may move a +1/+1 counter from this creature onto it.";
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+
+            trigger.setOverridingAbility(AbilityFactory.getAbility(abStr, card));
+
+            final Trigger cardTrigger = card.addTrigger(trigger);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Ingest")) {
+            final String trigStr = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True"
+                    + "| Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Ingest ("
+                    + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String abStr = "DB$ Mill | NumCards$ 1 | Destination$ Exile | Defined$ TriggeredTarget";
+
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
             trigger.setOverridingAbility(AbilityFactory.getAbility(abStr, card));
@@ -4157,20 +4176,6 @@ public class CardFactoryUtil {
         for (int i = 0; i < card.getAmountOfKeyword("Dethrone"); i++) {
             addTriggerAbility("Dethrone", card, null);
         } // Dethrone
-
-        final int ingest = card.getAmountOfKeyword("Ingest");
-        card.removeIntrinsicKeyword("Ingest");
-        final StringBuilder trigIngest = new StringBuilder(
-                "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True"
-                + " | Execute$ IngestExile | TriggerZones$ Battlefield | TriggerDescription$ Ingest "
-                + "(Whenever this creature deals combat damage to a player, that player exiles the "
-                + "top card of his or her library.)");
-        final String abStringIngest = "DB$ Mill | NumCards$ 1 | Destination$ Exile | Defined$ TriggeredTarget";
-        card.setSVar("IngestExile", abStringIngest);
-        final Trigger ingestTrigger = TriggerHandler.parseTrigger(trigIngest.toString(), card, true);
-        for (int i = 0; i < ingest; i++) {
-            card.addTrigger(ingestTrigger);
-        } // Ingest
     }
 
     public final static void refreshTotemArmor(Card c) {
