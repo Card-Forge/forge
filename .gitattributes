@@ -3973,9 +3973,9 @@ forge-gui/res/cardsfolder/c/congregate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/congregation_at_dawn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conifer_strider.txt -text
 forge-gui/res/cardsfolder/c/conjured_currency.txt -text
-forge-gui/res/cardsfolder/c/conjurer's_closet.txt -text
 forge-gui/res/cardsfolder/c/conjurers_ban.txt -text
 forge-gui/res/cardsfolder/c/conjurers_bauble.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/conjurers_closet.txt -text
 forge-gui/res/cardsfolder/c/conquer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conquering_manticore.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conquerors_pledge.txt svneol=native#text/plain
@@ -14009,8 +14009,8 @@ forge-gui/res/cardsfolder/s/sisters_of_stone_death.txt -text svneol=unset#text/p
 forge-gui/res/cardsfolder/s/sisters_of_stone_death_avatar.txt -text
 forge-gui/res/cardsfolder/s/sisters_of_the_flame.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sivitri_scarzam.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/s/sivvi's_valor.txt -text
 forge-gui/res/cardsfolder/s/sivvis_ruse.txt -text
+forge-gui/res/cardsfolder/s/sivvis_valor.txt -text
 forge-gui/res/cardsfolder/s/sizzle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skaab_goliath.txt -text
 forge-gui/res/cardsfolder/s/skaab_ruinator.txt -text
