@@ -151,7 +151,7 @@ public class CardStorageReader {
                 continue;
             }
             if (c < 'a' || c > 'z') {
-                if (chars[charIndex - 1] == '_') {
+                if (charIndex > 0 && chars[charIndex - 1] == '_') {
                     continue;
                 }
                 c = '_';
