@@ -71,8 +71,8 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.collect.FCollection;
 import forge.util.MyRandom;
+import forge.util.collect.FCollection;
 
 
 /**
@@ -2027,30 +2027,57 @@ public class ComputerUtil {
                 }
             }
 
-            String ability = source.getSVar(trigParams.get("Execute"));
-            if (ability.isEmpty()) {
-                continue;
-            }
-         
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
-            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
-                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
-                if (!"TriggeredActivator".equals(abilityParams.get("Defined"))) {
+            if (!trigParams.containsKey("Execute")) {
+                // fall back for OverridingAbility
+                SpellAbility trigSa = trigger.getOverridingAbility();
+                if (trigSa == null) {
                     continue;
                 }
-                if (!abilityParams.containsKey("NumDmg")) {
+                if (trigSa.getApi() == ApiType.DealDamage) {
+                    if (!"TriggeredActivator".equals(trigSa.getParam("Defined"))) {
+                        continue;
+                    }
+                    if (!trigSa.hasParam("NumDmg")) {
+                        continue;
+                    }
+                    damage += ComputerUtilCombat.predictDamageTo(player,
+                            AbilityUtils.calculateAmount(source, trigSa.getParam("NumDmg"), trigSa), source, false);
+                } else if (trigSa.getApi() == ApiType.LoseLife) {
+                    if (!"TriggeredActivator".equals(trigSa.getParam("Defined"))) {
+                        continue;
+                    }
+                    if (!trigSa.hasParam("LifeAmount")) {
+                        continue;
+                    }
+                    damage += AbilityUtils.calculateAmount(source, trigSa.getParam("LifeAmount"), trigSa);
+                }
+            } else {
+                String ability = source.getSVar(trigParams.get("Execute"));
+                if (ability.isEmpty()) {
                     continue;
                 }
-                damage += ComputerUtilCombat.predictDamageTo(player, AbilityUtils.calculateAmount(source, abilityParams.get("NumDmg"), null), source, false);
-            } else if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("LoseLife"))
-                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("LoseLife"))) {
-                if (!"TriggeredActivator".equals(abilityParams.get("Defined"))) {
-                    continue;
+
+                final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+                if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
+                        || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
+                    if (!"TriggeredActivator".equals(abilityParams.get("Defined"))) {
+                        continue;
+                    }
+                    if (!abilityParams.containsKey("NumDmg")) {
+                        continue;
+                    }
+                    damage += ComputerUtilCombat.predictDamageTo(player,
+                            AbilityUtils.calculateAmount(source, abilityParams.get("NumDmg"), null), source, false);
+                } else if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("LoseLife"))
+                        || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("LoseLife"))) {
+                    if (!"TriggeredActivator".equals(abilityParams.get("Defined"))) {
+                        continue;
+                    }
+                    if (!abilityParams.containsKey("LifeAmount")) {
+                        continue;
+                    }
+                    damage += AbilityUtils.calculateAmount(source, abilityParams.get("LifeAmount"), null);
                 }
-                if (!abilityParams.containsKey("LifeAmount")) {
-                    continue;
-                }
-                damage += AbilityUtils.calculateAmount(source, abilityParams.get("LifeAmount"), null);
             }
         }
         
