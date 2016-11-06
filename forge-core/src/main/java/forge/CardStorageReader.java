@@ -197,10 +197,13 @@ public class CardStorageReader {
             file = null;
             // Double faced cards file naming convention currently has both names - so try to prefix match.
             // TODO: Consider changing the naming convention for DFCs.
-            for (String fileName : new File(folder).list()) {
-                if (fileName.startsWith(transformedName)) {
-                    file = new File(folder, fileName);
-                    break;
+            String[] fileNames = new File(folder).list();
+            if (fileNames != null) {
+                for (String fileName : new File(folder).list()) {
+                    if (fileName.startsWith(transformedName)) {
+                        file = new File(folder, fileName);
+                        break;
+                    }
                 }
             }
         }
