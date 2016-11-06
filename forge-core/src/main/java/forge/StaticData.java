@@ -7,6 +7,7 @@ import forge.card.PrintSheet;
 import forge.card.CardDb.CardRequest;
 import forge.item.BoosterBox;
 import forge.item.FatPack;
+import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
@@ -94,6 +95,21 @@ public class StaticData {
             Collections.reverse(sortedEditions); //put newer sets at the top
         }
         return sortedEditions;
+    }
+
+    public PaperCard getOrLoadCommonCard(String cardName, String setCode, int artIndex, boolean foil) {
+        PaperCard card = commonCards.getCard(cardName, setCode, artIndex);
+        if (card == null) {
+            attemptToLoadCard(cardName, setCode);
+            commonCards.getCard(cardName, setCode, artIndex);
+        }
+        if (card == null) {
+            card = commonCards.getCard(cardName, setCode, -1);
+        }
+        if (card == null) {
+            return null;
+        }
+        return foil ? commonCards.getFoiled(card) : card;
     }
 
     public void attemptToLoadCard(String encodedCardName, String setCode) {
