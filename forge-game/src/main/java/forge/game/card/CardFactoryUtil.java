@@ -2272,6 +2272,9 @@ public class CardFactoryUtil {
             else if (keyword.equals("Exalted")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.equals("Exploit")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Extort")) {
                 addTriggerAbility(keyword, card, null);
             }
@@ -2746,6 +2749,19 @@ public class CardFactoryUtil {
             card.setSVar("ExaltedPump", abStringExalted);
             final Trigger exaltedTrigger = TriggerHandler.parseTrigger(trigExalted.toString(), card, intrinsic);
             final Trigger cardTrigger = card.addTrigger(exaltedTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Exploit")) {
+            final String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Secondary$ True"
+                    + " | TriggerDescription$ Exploit (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            final String effect = "DB$ Sacrifice | SacValid$ Creature | Exploit$ True | Optional$ True";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(trigger);
+
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
@@ -4142,18 +4158,6 @@ public class CardFactoryUtil {
             addTriggerAbility("Dethrone", card, null);
         } // Dethrone
 
-        final int exploit = card.getAmountOfKeyword("Exploit");
-        card.removeIntrinsicKeyword("Exploit");
-        final StringBuilder trigExploit = new StringBuilder(
-                "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield"
-                + " | Execute$ ExploitSac | TriggerDescription$ Exploit (When this creature enters"
-                + " the battlefield, you may sacrifice a creature.)");
-        final String abStringExploit = "DB$ Sacrifice | SacValid$ Creature | Exploit$ True | Optional$ True";
-        card.setSVar("ExploitSac", abStringExploit);
-        final Trigger exploitTrigger = TriggerHandler.parseTrigger(trigExploit.toString(), card, true);
-        for (int i = 0; i < exploit; i++) {
-            card.addTrigger(exploitTrigger);
-        } // Exploit
         final int ingest = card.getAmountOfKeyword("Ingest");
         card.removeIntrinsicKeyword("Ingest");
         final StringBuilder trigIngest = new StringBuilder(
