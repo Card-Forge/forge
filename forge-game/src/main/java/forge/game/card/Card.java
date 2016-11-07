@@ -3818,12 +3818,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
             if (property.startsWith("non") == CardUtil.getColors(this).isMonoColor()) return false;
 
-        } else if (property.contains("ChosenColor")) {
+        } else if (property.startsWith("ChosenColor")) {
             if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
             if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(MagicColor.fromName(source.getChosenColor())))
                 return false;
 
-        } else if (property.contains("AnyChosenColor")) {
+        } else if (property.startsWith("AnyChosenColor")) {
             if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
             if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor()))
                 return false;
