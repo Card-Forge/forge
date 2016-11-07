@@ -954,6 +954,20 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
             else if (c == null && "XChoice".equals(sVarAmount)) {
                 cntRemoved = chooseXValue(maxCounters);
+            } else if (ability != null && !ability.getRestrictions().isPwAbility()) {
+                // ignore Planeswalker abilities for this
+                if (maxCounters < cntRemoved) {
+                    return null;
+                }
+                
+                final StringBuilder sb = new StringBuilder("Remove ");
+                sb.append(Lang.nounWithNumeral(amount, cost.counter.getName() + " counter"));
+                sb.append(" from ");
+                sb.append(source.getName());
+                sb.append("?");
+                if (!player.getController().confirmPayment(cost, sb.toString())) {
+                    return null;
+                }
             }
 
             if (maxCounters < cntRemoved) {
