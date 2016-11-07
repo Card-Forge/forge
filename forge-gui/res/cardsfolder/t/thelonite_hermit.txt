@@ -3,10 +3,11 @@ ManaCost:3 G
 Types:Creature Elf Shaman
 PT:1/1
 K:Morph:3 G G
-S:Mode$ Continuous | Affected$ Creature.Saproling | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ Saproling creatures get +1/+1.
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, put four 1/1 green Saproling creature tokens onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling TSP | SpellDescription$ Put four 1/1 green Saproling creature tokens onto the battlefield.
-SVar:X:Count$Valid Card.Self+faceUp
+S:Mode$ Continuous | Affected$ Creature.Saproling | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Card.Self+faceUp | Description$ Saproling creatures get +1/+1.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, create four 1/1 green Saproling creature tokens.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling TSP | SpellDescription$ Create four 1/1 green Saproling creature tokens.
 SVar:PlayMain1:TRUE
+DeckHints:Type$Fungus
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
-Oracle:Saproling creatures get +1/+1.\nMorph {3}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Thelonite Hermit is turned face up, put four 1/1 green Saproling creature tokens onto the battlefield.
+Oracle:Saproling creatures get +1/+1.\nMorph {3}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Thelonite Hermit is turned face up, create four 1/1 green Saproling creature tokens.
