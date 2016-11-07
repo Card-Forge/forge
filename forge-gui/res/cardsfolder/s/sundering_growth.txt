@@ -1,10 +1,10 @@
 Name:Sundering Growth
 ManaCost:GW GW
 Types:Instant
-A:SP$ Destroy | Cost$ GW GW | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBChoose | SpellDescription$ Destroy target artifact or enchantment, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-SVar:DBChoose:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | Mandatory$ True | RememberChosen$ True
-SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Destroy | Cost$ GW GW | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBChoose | SpellDescription$ Destroy target artifact or enchantment, then populate. (Create a token that's a copy of a creature token you control.)
+SVar:DBChoose:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | Mandatory$ True | AILogic$ Clone
+SVar:DBCopy:DB$ CopyPermanent | Defined$ ChosenCard | NumCopies$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 DeckHints:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sundering_growth.jpg
-Oracle:Destroy target artifact or enchantment, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+Oracle:Destroy target artifact or enchantment, then populate. (Create a token that's a copy of a creature token you control.)

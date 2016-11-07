@@ -1,10 +1,10 @@
 Name:Growing Ranks
 ManaCost:2 GW GW
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigChoose | TriggerDescription$ At the beginning of your upkeep, populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-SVar:TrigChoose:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | Mandatory$ True | RememberChosen$ True
-SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHints:Ability$Token
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigChoose | TriggerDescription$ At the beginning of your upkeep, populate. (Create a token that's a copy of a creature token you control.)
+SVar:TrigChoose:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | Mandatory$ True | AILogic$ Clone
+SVar:DBCopy:DB$ CopyPermanent | Defined$ ChosenCard | NumCopies$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckNeeds:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/growing_ranks.jpg
-Oracle:At the beginning of your upkeep, populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+Oracle:At the beginning of your upkeep, populate. (Create a token that's a copy of a creature token you control.)
