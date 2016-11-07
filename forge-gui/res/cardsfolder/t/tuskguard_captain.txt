@@ -2,7 +2,7 @@ Name:Tuskguard Captain
 ManaCost:2 G
 Types:Creature Human Warrior
 PT:2/3
-K:Outlast G
+K:Outlast:G
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
 SVar:PlayMain1:TRUE
 DeckHints:Ability$Counters
