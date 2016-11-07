@@ -2435,35 +2435,7 @@ public class CardFactoryUtil {
                 card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             else if (keyword.startsWith("Outlast")) {
-                final String outlastString = keyword.substring(7);
-                final String[] outlastExtras = outlastString.contains("|") ? outlastString.split("\\|", 2) : null;
-                // Get cost string
-                String outlastCost = "";
-                if (outlastExtras != null) {
-                    outlastCost = outlastExtras[0].trim();
-                } else {
-                    outlastCost = outlastString.trim();
-                }
-                // Create outlast ability string
-                final StringBuilder abilityStr = new StringBuilder();
-                abilityStr.append("AB$ PutCounter | Cost$ ");
-                abilityStr.append(outlastCost);
-                abilityStr.append(" T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 ");
-                abilityStr.append("| SorcerySpeed$ True | Outlast$ True ");
-                if (outlastExtras != null) {
-                    abilityStr.append("| ").append(outlastExtras[1]).append(" ");
-                }
-                abilityStr.append("| PrecostDesc$ Outlast ");
-                Cost cost = new Cost(outlastCost, true);
-                if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                    abilityStr.append("- ");
-                }
-                abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
-                abilityStr.append("| SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")");
-                final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
-                card.addSpellAbility(sa);
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(abilityStr.toString());
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Fortify")) {
                 final String equipString = keyword.substring(7);
@@ -3530,6 +3502,35 @@ public class CardFactoryUtil {
             } else {
                 // add ability to instrinic strings so copies/clones create the ability also
                 card.getCurrentState().addUnparsedAbility(effect);
+            }
+            card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Outlast")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            // Create outlast ability string
+            final StringBuilder abilityStr = new StringBuilder();
+            abilityStr.append("AB$ PutCounter | Cost$ ");
+            abilityStr.append(manacost);
+            abilityStr.append(" T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 ");
+            abilityStr.append("| SorcerySpeed$ True | Outlast$ True ");
+            abilityStr.append("| PrecostDesc$ Outlast ");
+            Cost cost = new Cost(manacost, true);
+            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+                abilityStr.append("- ");
+            }
+            abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
+            abilityStr.append("| SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")");
+
+            final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            } else {
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Scavenge")) {
