@@ -2232,6 +2232,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Haunt")) {
                 setupHauntSpell(card);
             }
+            else if (keyword.startsWith("Annihilator")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.equals("Provoke")) {
                 addTriggerAbility(keyword, card, null);
             }
