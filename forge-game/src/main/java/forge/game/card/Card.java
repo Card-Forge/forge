@@ -1430,7 +1430,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.contains("At the beginning of your upkeep, ")
                     && keyword.contains(" unless you pay")) {
                 sbLong.append(keyword).append("\r\n");
-            } else if (keyword.startsWith("Sunburst") && hasStartOfKeyword("Modular")) {
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                     || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
@@ -1444,7 +1443,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute")
-                    || keyword.startsWith("Renown")) {
+                    || keyword.startsWith("Renown") || keyword.startsWith("Annihilator")) {
                 final String[] k = keyword.split(":");
                 sbLong.append(k[0] + " " + k[1] + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.contains("Haunt")) {
@@ -3671,7 +3670,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         int count = 0;
         for (final String kw : getKeywords(state)) {
             if (kw.startsWith(k)) {
-                final String[] parse = kw.split(" ");
+                final String[] parse = kw.contains(":") ? kw.split(":") : kw.split(" ");
                 final String s = parse[1];
                 if (StringUtils.isNumeric(s)) {
                    count += Integer.parseInt(s);

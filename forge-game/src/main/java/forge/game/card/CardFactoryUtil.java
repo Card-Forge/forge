@@ -2619,7 +2619,24 @@ public class CardFactoryUtil {
     public static void addTriggerAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
 
-        if (keyword.startsWith("Bushido")) {
+        if (keyword.startsWith("Annihilator")) {
+            final String[] k = keyword.split(":");
+            final String n = k[1];
+            
+            final String trig = "Mode$ Attacks | ValidCard$ Creature.YouCtrl | "
+                            + "TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
+                            + "Annihilator " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String effect = "AB$ Sacrifice | Cost$ 0 | Defined$ DefendingPlayer | SacValid$ Permanent | Amount$ " + k[1];
+            
+            final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(trigger);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Bushido")) {
             final String[] k = keyword.split(" ", 2);
             final String n = k[1];
 
@@ -2648,8 +2665,7 @@ public class CardFactoryUtil {
                 kws.addTrigger(cardTrigger1);
                 kws.addTrigger(cardTrigger2);
             }
-        }
-        if (keyword.equals("Cascade")) {
+        } else if (keyword.equals("Cascade")) {
             final StringBuilder trigScript = new StringBuilder(
                     "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
                     "True | TriggerDescription$ Cascade - CARDNAME");
@@ -2715,15 +2731,14 @@ public class CardFactoryUtil {
                 kws.addTrigger(cardTrigger);
             }
         } else if (keyword.equals("Exalted")) {
-            final StringBuilder trigExalted = new StringBuilder(
-                    "Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | "
-                            + "Execute$ ExaltedPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
-                            + "Exalted (" + Keyword.getInstance(keyword).getReminderText() + ")");
+            final String trig = "Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | "
+                    + "Execute$ ExaltedPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
+                    + "Exalted (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
-            final String abStringExalted = "DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +1 | NumDef$ +1";
-            card.setSVar("ExaltedPump", abStringExalted);
-            final Trigger exaltedTrigger = TriggerHandler.parseTrigger(trigExalted.toString(), card, intrinsic);
-            final Trigger cardTrigger = card.addTrigger(exaltedTrigger);
+            final String effect = "DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +1 | NumDef$ +1";
+            final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(trigger);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }

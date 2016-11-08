@@ -13,7 +13,7 @@ public enum Keyword {
     AWAKEN(KeywordWithCostAndAmount.class, true, "If you cast this spell for %s, also put {%d:+1/+1 counter} on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land."),
     AFFINITY(KeywordWithType.class, false, "This spell costs you {1} less to cast for each %s you control."),
     AMPLIFY(KeywordWithAmountAndType.class, false, "As this creature enters the battlefield, put %d +1/+1 counter on it for each %s card you reveal in your hand."),
-    ANNIHILATOR(KeywordWithAmount.class, false, "Whenever this creature attacks, defending player sacrifices %d permanents."),
+    ANNIHILATOR(KeywordWithAmount.class, false, "Whenever this creature attacks, defending player sacrifices {%d:permanent}."),
     AURA_SWAP(KeywordWithCost.class, false, "%s: You may exchange this permanent with an Aura card in your hand."),
     BANDING(SimpleKeyword.class, true, "Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking."),
     BATTLE_CRY(SimpleKeyword.class, false, "Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn."),

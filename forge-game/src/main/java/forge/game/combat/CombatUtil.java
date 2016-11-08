@@ -322,26 +322,6 @@ public class CombatUtil {
         runParams.put("Defenders", combat.getDefenders());
         game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
 
-        // Annihilator: can be copied by Strionic Resonator now
-        if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
-            for (final String key : c.getKeywords()) {
-                if (!key.startsWith("Annihilator ")) continue;
-                final String[] k = key.split(" ", 2);
-
-                final String sb = "Annihilator - Defending player sacrifices " + k[1] + " permanents.";
-                final String effect = "AB$ Sacrifice | Cost$ 0 | Defined$ DefendingPlayer | SacValid$ Permanent | Amount$ " + k[1];
-
-                final SpellAbility ability = AbilityFactory.getAbility(effect, c);
-                ability.setActivatingPlayer(c.getController());
-                ability.setDescription(sb);
-                ability.setStackDescription(sb);
-                ability.setTrigger(true);
-
-                game.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        }
-
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
         c.getController().setAttackedWithCreatureThisTurn(true);
