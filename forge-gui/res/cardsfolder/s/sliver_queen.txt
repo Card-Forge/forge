@@ -2,6 +2,8 @@ Name:Sliver Queen
 ManaCost:W U B R G
 Types:Legendary Creature Sliver
 PT:7/7
-A:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenName$ Sliver | TokenTypes$ Creature,Sliver | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 colorless Sliver creature token onto the battlefield.
+A:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenName$ Sliver | TokenTypes$ Creature,Sliver | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create a 1/1 colorless Sliver creature token.
+DeckHints:Type$Sliver
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_queen.jpg
-Oracle:{2}: Put a 1/1 colorless Sliver creature token onto the battlefield.
+Oracle:{2}: Create a 1/1 colorless Sliver creature token.
