@@ -17,6 +17,8 @@
  */
 package forge.ai.ability;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -32,14 +34,12 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.collect.FCollectionView;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
@@ -69,7 +69,11 @@ public class ControlGainAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
 
-        final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
+        final List<String> lose = Lists.newArrayList();
+
+        if (sa.hasParam("LoseControl")) {
+            lose.addAll(Lists.newArrayList(sa.getParam("LoseControl").split(",")));
+        }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = ai.getGame();
@@ -96,22 +100,20 @@ public class ControlGainAi extends SpellAbilityAi {
                 sa.getTargets().add(Aggregates.random(tgt.getAllCandidates(sa, false)));
             }
             if (tgt.canOnlyTgtOpponent()) {
-                boolean found = false;
-                for (final Player opp : opponents) {
-                    if (opp.canBeTargetedBy(sa)) {
-                        sa.getTargets().add(opp);
-                        break;
-                    }
-                }
-                if (!found) {
+                List<Player> oppList = Lists
+                        .newArrayList(Iterables.filter(opponents, PlayerPredicates.isTargetableBy(sa)));
+
+                if (oppList.isEmpty()) {
                     return false;
                 }
+
+                sa.getTargets().add(oppList.get(0));
             }
         }
 
         // Don't steal something if I can't Attack without, or prevent it from
         // blocking at least
-        if (lose != null && lose.contains("EOT")
+        if (lose.contains("EOT")
                 && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && !sa.isTrigger()) {
             return false;
@@ -276,9 +278,13 @@ public class ControlGainAi extends SpellAbilityAi {
                     return false;
                 }
             }
+            final List<String> lose = Lists.newArrayList();
 
-            final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
-            if ((lose != null) && lose.contains("EOT")
+            if (sa.hasParam("LoseControl")) {
+                lose.addAll(Lists.newArrayList(sa.getParam("LoseControl").split(",")));
+            }
+
+            if (lose.contains("EOT")
                     && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
