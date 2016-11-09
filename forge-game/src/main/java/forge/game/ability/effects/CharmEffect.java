@@ -105,6 +105,13 @@ public class CharmEffect extends SpellAbilityEffect {
             sb.append(". You may choose the same mode more than once.");
         }
 
+        if (sa.hasParam("ChoiceRestriction")) {
+            String rest = sa.getParam("ChoiceRestriction");
+            if (rest.equals("NotRemembered")) {
+                sb.append(" that hasn't been chosen");
+            }
+        }
+
         if (!list.isEmpty()) {
             sb.append(" \u2014\r\n");
             for (AbilitySub sub : list) {
