@@ -402,6 +402,7 @@ forge-game/src/main/java/forge/game/ability/effects/FogEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/GameLossEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/GameWinEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/GoadEffect.java -text svneol=unset#text/plain
+forge-game/src/main/java/forge/game/ability/effects/HauntEffect.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/ability/effects/LifeExchangeEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/LifeGainEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/LifeLoseEffect.java -text

@@ -294,7 +294,7 @@ public final class CardUtil {
         newCopy.setClones(in.getClones());
         newCopy.setHaunting(in.getHaunting());
         for (final Card haunter : in.getHauntedBy()) {
-            newCopy.addHauntedBy(haunter);
+            newCopy.addHauntedBy(haunter, false);
         }
         for (final Object o : in.getRemembered()) {
             newCopy.addRemembered(o);

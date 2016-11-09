@@ -25,9 +25,10 @@ import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.Lists;
 
 /**
  * <p>
@@ -199,14 +200,14 @@ public final class AbilityFactory {
 
             if (type != AbilityRecordType.SubAbility) { // SubAbilities don't have Costs or Cost
                               // descriptors
-            	sb.append(spellAbility.getCostDescription());
+                sb.append(spellAbility.getCostDescription());
             }
 
             sb.append(mapParams.get("SpellDescription"));
 
             spellAbility.setDescription(sb.toString());
         } else if (api == ApiType.Charm) {
-        	spellAbility.setDescription(CharmEffect.makeSpellDescription(spellAbility));
+            spellAbility.setDescription(CharmEffect.makeSpellDescription(spellAbility));
         } else {
             spellAbility.setDescription("");
         }
@@ -354,7 +355,7 @@ public final class AbilityFactory {
     }
 
     public static final void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {
-        List<ZoneType> origin = new ArrayList<ZoneType>();
+        List<ZoneType> origin = Lists.newArrayList();
         if (params.containsKey("Origin")) {
             origin = ZoneType.listValueOf(params.get("Origin"));
         }
@@ -396,12 +397,12 @@ public final class AbilityFactory {
     }
 
     public static final SpellAbility buildEntwineAbility(final SpellAbility sa) {
-    	final Card source = sa.getHostCard();
+        final Card source = sa.getHostCard();
         final String[] saChoices = sa.getParam("Choices").split(",");
         if (sa.getApi() != ApiType.Charm || saChoices.length != 2) 
             throw new IllegalStateException("Entwine ability may be built only on charm cards");
         final String ab = source.getSVar(saChoices[0]);
-    	Map<String, String> firstMap = getMapParams(ab);
+        Map<String, String> firstMap = getMapParams(ab);
         AbilityRecordType firstType = AbilityRecordType.getRecordType(firstMap);
         ApiType firstApi = firstType.getApiTypeOf(firstMap);
         firstMap.put("StackDecription", firstMap.get("SpellDescription"));
@@ -409,7 +410,7 @@ public final class AbilityFactory {
         SpellAbility entwineSA = getAbility(AbilityRecordType.Spell, firstApi, firstMap, new Cost(sa.getPayCosts().toSimpleString(), false), source);
 
         final String ab2 = source.getSVar(saChoices[1]);
-    	Map<String, String> secondMap = getMapParams(ab2);
+        Map<String, String> secondMap = getMapParams(ab2);
         ApiType secondApi = firstType.getApiTypeOf(secondMap);
         secondMap.put("StackDecription", secondMap.get("SpellDescription"));
         secondMap.put("SpellDescription", "");
@@ -419,7 +420,7 @@ public final class AbilityFactory {
         entwineSA.setBasicSpell(false);
         entwineSA.setActivatingPlayer(sa.getActivatingPlayer());
         entwineSA.setRestrictions(sa.getRestrictions());
-		return entwineSA;
+        return entwineSA;
     }
 
 } // end class AbilityFactory

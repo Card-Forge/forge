@@ -5,7 +5,8 @@ import forge.game.ability.effects.*;
 import forge.util.ReflectionUtil;
 
 import java.util.Map;
-import java.util.TreeMap;
+
+import com.google.common.collect.Maps;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -69,11 +70,12 @@ public enum ApiType {
     Fight (FightEffect.class),
     FlipACoin (FlipCoinEffect.class),
     Fog (FogEffect.class),
-    Goad (GoadEffect.class),
     GainControl (ControlGainEffect.class),
     GainLife (LifeGainEffect.class),
     GainOwnership (OwnershipGainEffect.class),
     GenericChoice (ChooseGenericEffect.class),
+    Goad (GoadEffect.class),
+    Haunt (HauntEffect.class),
     LookAt (LookAtEffect.class),
     LoseLife (LifeLoseEffect.class),
     LosesGame (GameLossEffect.class),
@@ -146,14 +148,13 @@ public enum ApiType {
 
     InternalEtbReplacement (ETBReplacementEffect.class),
     InternalLegendaryRule (CharmEffect.class),
-    InternalHaunt (CharmEffect.class),
     InternalIgnoreEffect (CharmEffect.class);
 
 
     private final SpellAbilityEffect instanceEffect;
     private final Class<? extends SpellAbilityEffect> clsEffect;
 
-    private static final Map<String, ApiType> allValues = new TreeMap<String, ApiType>(String.CASE_INSENSITIVE_ORDER);
+    private static final Map<String, ApiType> allValues = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
 
     ApiType(Class<? extends SpellAbilityEffect> clsEf) { this(clsEf, true); }
     ApiType(Class<? extends SpellAbilityEffect> clsEf, final boolean isStateLess) {

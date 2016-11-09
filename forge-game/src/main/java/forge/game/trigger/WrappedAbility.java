@@ -196,8 +196,8 @@ public class WrappedAbility extends Ability {
 
     @Override
     public String getStackDescription() {
-        final StringBuilder sb = new StringBuilder(toUnsuppressedString());
-        if (this.getTargetRestrictions() != null) {
+        final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(toUnsuppressedString(), this));
+        if (usesTargeting()) {
             sb.append(" (Targeting ");
             for (final GameObject o : this.getTargets().getTargets()) {
                 sb.append(o.toString());
@@ -271,26 +271,26 @@ public class WrappedAbility extends Ability {
     
     
     @Override
-	public String getSvarWithFallback(String name) {
-		return sa.getSvarWithFallback(name);
-	}
+    public String getSvarWithFallback(String name) {
+        return sa.getSvarWithFallback(name);
+    }
 
-	@Override
-	public String getSVar(String name) {
-		return sa.getSVar(name);
-	}
+    @Override
+    public String getSVar(String name) {
+        return sa.getSVar(name);
+    }
 
-	@Override
-	public Integer getSVarInt(String name) {
-		return sa.getSVarInt(name);
-	}
+    @Override
+    public Integer getSVarInt(String name) {
+        return sa.getSVarInt(name);
+    }
 
-	@Override
-	public Set<String> getSVars() {
-		return sa.getSVars();
-	}
+    @Override
+    public Set<String> getSVars() {
+        return sa.getSVars();
+    }
 
-	@Override
+    @Override
     public void resetOnceResolved() {
         // Fixing an issue with Targeting + Paying Mana
         // sa.resetOnceResolved();

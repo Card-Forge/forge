@@ -1686,7 +1686,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary()) {
-                sb.append(trig.toString().replaceAll("\\\\r\\\\n", "\r\n")).append("\r\n");
+                sb.append(trig.replaceAbilityText(trig.toString(), null).replaceAll("\\\\r\\\\n", "\r\n")).append("\r\n");
             }
         }
 
@@ -1793,7 +1793,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary()) {
-                sb.append(trig.toString()).append("\r\n");
+                sb.append(trig.replaceAbilityText(trig.toString(), null)).append("\r\n");
             }
         }
 
@@ -6269,11 +6269,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isHauntedBy(Card c) {
         return FCollection.hasElement(hauntedBy, c);
     }
-    public final void addHauntedBy(Card c) {
+    public final void addHauntedBy(Card c, final boolean update) {
         hauntedBy = view.addCard(hauntedBy, c, TrackableProperty.HauntedBy);
-        if (c != null) {
+        if (c != null && update) {
             c.setHaunting(this);
         }
+    }
+    public final void addHauntedBy(Card c) {
+        addHauntedBy(c, true);
     }
     public final void removeHauntedBy(Card c) {
         hauntedBy = view.removeCard(hauntedBy, c, TrackableProperty.HauntedBy);

@@ -1,6 +1,5 @@
 package forge.ai;
 
-import java.util.EnumMap;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
@@ -13,7 +12,7 @@ import forge.util.ReflectionUtil;
 public enum SpellApiToAi {
     Converter;
 
-    private final Map<ApiType, SpellAbilityAi> apiToInstance = new EnumMap<>(ApiType.class);
+    private final Map<ApiType, SpellAbilityAi> apiToInstance = Maps.newEnumMap(ApiType.class);
 
     // Do the extra copy to make an actual EnumMap (faster)
     private final Map<ApiType, Class<? extends SpellAbilityAi>> apiToClass = Maps.newEnumMap(ImmutableMap
@@ -79,6 +78,7 @@ public enum SpellApiToAi {
             .put(ApiType.GainOwnership, CannotPlayAi.class)
             .put(ApiType.GenericChoice, ChooseGenericEffectAi.class)
             .put(ApiType.Goad, GoadAi.class)
+            .put(ApiType.Haunt, HauntAi.class)
             .put(ApiType.LoseLife, LifeLoseAi.class)
             .put(ApiType.LosesGame, GameLossAi.class)
             .put(ApiType.Mana, ManaEffectAi.class)
@@ -149,7 +149,6 @@ public enum SpellApiToAi {
 
             .put(ApiType.InternalEtbReplacement, CanPlayAsDrawbackAi.class)
             .put(ApiType.InternalLegendaryRule, LegendaryRuleAi.class)
-            .put(ApiType.InternalHaunt, HauntAi.class)
             .put(ApiType.InternalIgnoreEffect, CannotPlayAi.class)
             .build());
 

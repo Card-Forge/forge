@@ -20,6 +20,9 @@ package forge.game.trigger;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.TriggerReplacementBase;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.ApiType;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -156,6 +159,51 @@ public abstract class Trigger extends TriggerReplacementBase {
         } else {
             return "";
         }
+    }
+
+    public final String replaceAbilityText(final String desc, SpellAbility sa) {
+        String result = desc;
+
+        // this function is for ABILITY
+        if (!result.contains("ABILITY")) {
+            return result;
+        }
+
+        // it has already sa, used in WrappedAbility
+        if (sa == null) {
+            sa = getOverridingAbility();
+        }
+        if (sa == null && this.mapParams.containsKey("Execute")) {
+             sa = AbilityFactory.getAbility(hostCard, this.mapParams.get("Execute"));
+        }
+        if (sa != null) {
+            String saDesc;
+            // if sa is a wrapper, get the Wrapped Ability
+            if (sa.isWrapper()) {
+                final WrappedAbility wa = (WrappedAbility) sa;
+                sa = wa.getWrappedAbility();
+
+                // wrapped Charm spells are special,
+                // only get the selected abilities
+                if (ApiType.Charm.equals(sa.getApi())) {
+                    saDesc = sa.getStackDescription();
+                } else {
+                    saDesc = sa.getDescription();
+                }
+            } else if (ApiType.Charm.equals(sa.getApi())) {
+                // use special formating, can be used in Card Description
+                saDesc = CharmEffect.makeFormatedDescription(sa);
+            } else {
+                saDesc = sa.getDescription();
+            }
+            if (!saDesc.isEmpty()) {
+                // string might have leading whitespace
+                saDesc = saDesc.trim();
+                saDesc = saDesc.substring(0, 1).toLowerCase() + saDesc.substring(1);
+                result = result.replace("ABILITY", saDesc);
+            }
+        }
+        return result;
     }
 
     /**

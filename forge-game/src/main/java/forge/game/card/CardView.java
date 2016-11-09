@@ -620,26 +620,6 @@ public class CardView extends GameEntityView {
             sb.append("]\r\n");
         }
 
-        Iterable<CardView> hauntedBy = getHauntedBy();
-        if (hauntedBy != null) {
-            sb.append("Haunted by: ");
-            boolean needDelim = false;
-            for (final CardView c : hauntedBy) {
-                if (needDelim) {
-                    sb.append(",");
-                }
-                else { needDelim = false; }
-                sb.append(c);
-            }
-            sb.append("\r\n");
-        }
-
-        CardView haunting = getHaunting();
-        if (haunting != null) {
-            sb.append("Haunting: ").append(haunting);
-            sb.append("\r\n");
-        }
-
         CardView pairedWith = getPairedWith();
         if (pairedWith != null) {
             sb.append("\r\n \r\nPaired With: ").append(pairedWith);

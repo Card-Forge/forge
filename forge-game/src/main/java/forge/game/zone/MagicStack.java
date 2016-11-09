@@ -41,11 +41,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
@@ -58,7 +55,6 @@ import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.Ability;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.OptionalCost;
@@ -527,40 +523,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
         finishResolving(sa, thisHasFizzled);
 
-        if (source.hasStartOfKeyword("Haunt") && !source.isCreature() && game.getZoneOf(source).is(ZoneType.Graveyard)) {
-            handleHauntForNonPermanents(sa);
-        }
-
         if (isEmpty()) {
             game.copyLastState();
             // FIXME: assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object). Is this correct?
             game.clearChangeZoneLKIInfo();
-        }
-    }
-
-    private void handleHauntForNonPermanents(final SpellAbility sa) {
-        final Card source = sa.getHostCard();
-        final CardCollection creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-        final Ability haunterDiesWork = new Ability(source, ManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                game.getAction().exile(source);
-                getTargetCard().addHauntedBy(source);
-            }
-        };
-        for (int i = 0; i < creats.size(); i++) {
-            haunterDiesWork.setActivatingPlayer(sa.getActivatingPlayer());
-            if (!creats.get(i).canBeTargetedBy(haunterDiesWork)) {
-                creats.remove(i);
-                i--;
-            }
-        }
-        if (!creats.isEmpty()) {
-            haunterDiesWork.setDescription("");
-            haunterDiesWork.setTargetRestrictions(new TargetRestrictions("", "Creature".split(" "), "1", "1"));
-            final Card targetCard = source.getController().getController().chooseSingleEntityForEffect(creats, new SpellAbility.EmptySa(ApiType.InternalHaunt, source), "Choose target creature to haunt.");
-            haunterDiesWork.setTargetCard(targetCard);
-            add(haunterDiesWork);
         }
     }
 

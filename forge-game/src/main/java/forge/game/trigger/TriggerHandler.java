@@ -616,7 +616,7 @@ public class TriggerHandler {
         wrapperAbility.setTrigger(true);
         wrapperAbility.setMandatory(isMandatory);
         //wrapperAbility.setDescription(wrapperAbility.getStackDescription());
-        wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
+        //wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
         wrapperAbility.setLastStateBattlefield(game.getLastStateBattlefield());
         if (regtrig.isStatic()) {
