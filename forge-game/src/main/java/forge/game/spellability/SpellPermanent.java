@@ -50,6 +50,8 @@ public class SpellPermanent extends SpellApiBased {
         super(sourceCard.isCreature() ? ApiType.PermanentCreature : ApiType.PermanentNoncreature, sourceCard,
                 new Cost(sourceCard.getManaCost(), false), null, Maps.<String, String>newHashMap());
 
+        // reset StackDescription for something with Text
+        this.setStackDescription("");
         this.setDescription(this.getStackDescription());
 
         if (this.getPayCosts().getTotalMana().countX() > 0 && StringUtils.isNotBlank(getHostCard().getSVar("X"))) {
