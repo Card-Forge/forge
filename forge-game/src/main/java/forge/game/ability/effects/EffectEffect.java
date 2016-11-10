@@ -27,7 +27,8 @@ public class EffectEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        return sa.getDescription();
+        // try to use SpellDescription
+        return sa.getParamOrDefault("SpellDescription", "");
     }
 
     /**
