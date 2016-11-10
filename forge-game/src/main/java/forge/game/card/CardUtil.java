@@ -17,16 +17,14 @@
  */
 package forge.game.card;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.ImageKeys;
 import forge.card.CardStateName;
@@ -49,7 +47,7 @@ public final class CardUtil {
     // disable instantiation
     private CardUtil() { }
 
-    public static final List<String> NON_STACKING_LIST = new ArrayList<String>();
+    public static final List<String> NON_STACKING_LIST = Lists.newArrayList();
 
     /** List of all keywords that could be modified by text changes.
      *  Mostly this is caused by them having a variable, like a cost.
@@ -71,8 +69,20 @@ public final class CardUtil {
      * So Clerics maps to Cleric, Demons to Demon, etc.
      */
     public static final ImmutableBiMap<String, String> singularTypes = ImmutableBiMap.<String, String>builder()
-    		.put("Beasts", "Beast")
-    		.put("Clerics", "Cleric")
+            .put("Badgers", "Badger")
+            .put("Barbarians", "Barbarian")
+            .put("Basilisks", "Basilisk")
+            .put("Bats", "Bat")
+            .put("Bears", "Bear")
+            .put("Beasts", "Beast")
+            .put("Beebles", "Beeble")
+            .put("Berserkers", "Berserker")
+            .put("Birds", "Bird")
+            .put("Blinkmoths", "Blinkmoth")
+            .put("Boars", "Boar")
+            .put("Bringers", "Bringer")
+            .put("Brushwaggs", "Brushwagg")
+    	    .put("Clerics", "Cleric")
             .put("Demons", "Demon")
             .put("Dragons", "Dragon")
             .put("Elves", "Elf")
@@ -233,7 +243,7 @@ public final class CardUtil {
     }
 
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
-        List<Card> res = new ArrayList<Card>();
+        List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         res.addAll(game.getStack().getSpellsCastThisTurn());
 
@@ -243,7 +253,7 @@ public final class CardUtil {
     }
 
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
-        List<Card> res = new ArrayList<Card>();
+        List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         res.addAll(game.getStack().getSpellsCastLastTurn());
 
@@ -349,7 +359,7 @@ public final class CardUtil {
 
     // a nice entry point with minimum parameters
     public static Set<String> getReflectableManaColors(final SpellAbility sa) {
-        return getReflectableManaColors(sa, sa, new HashSet<String>(), new CardCollection());
+        return getReflectableManaColors(sa, sa, Sets.<String>newHashSet(), new CardCollection());
     }
     
     private static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
@@ -434,7 +444,7 @@ public final class CardUtil {
                 abilities.addAll(c.getManaAbilities());
             }
 
-            final List<SpellAbility> reflectAbilities = new ArrayList<SpellAbility>();
+            final List<SpellAbility> reflectAbilities = Lists.newArrayList();
 
             for (final SpellAbility ab : abilities) {
                 if (maxChoices == colors.size()) {
@@ -532,7 +542,7 @@ public final class CardUtil {
 
         // If all cards (including subability targets) must have the same controller
         if (tgt.isSameController() && !targetedObjects.isEmpty()) {
-            final List<Card> list = new ArrayList<Card>();
+            final List<Card> list = Lists.newArrayList();
             for (final Object o : targetedObjects) {
                 if (o instanceof Card) {
                     list.add((Card) o);
@@ -540,12 +550,7 @@ public final class CardUtil {
             }
             if (!list.isEmpty()) {
                 final Card card = list.get(0);
-                choices = CardLists.filter(choices, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.sharesControllerWith(card);
-                    }
-                });
+                choices = CardLists.filter(choices, CardPredicates.sharesControllerWith(card));
             }
         }
 
