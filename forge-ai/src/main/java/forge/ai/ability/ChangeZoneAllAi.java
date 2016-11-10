@@ -332,6 +332,10 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
             }
         } else if (origin.equals(ZoneType.Battlefield)) {
+            // if mandatory, no need to evaluate
+            if (mandatory) {
+                return true;
+            }
             // this statement is assuming the AI is trying to use this spell offensively
             // if the AI is using it defensively, then something else needs to occur
             // if only creatures are affected evaluate both lists and pass only
