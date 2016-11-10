@@ -36,10 +36,13 @@ public class CostPaymentStack implements Iterable<IndividualCostPaymentInstance>
         stack.clear();
     }
 
-	@Override
-	public Iterator<IndividualCostPaymentInstance> iterator() {
-		return stack.iterator();
-	}
-    
-    
+    @Override
+    public Iterator<IndividualCostPaymentInstance> iterator() {
+        return stack.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return stack.toString();
+    }
 }
