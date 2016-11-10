@@ -29,6 +29,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPlayOption;
 import forge.game.card.CardUtil;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -432,6 +433,15 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
             if (numActivates > limits) {
                 return false;
+            }
+        }
+
+        // Rule 605.3c about Mana Abilities
+        if (sa.isManaAbility()) {
+            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+                if (i.getPayment().getAbility().equals(sa)) {
+                    return false;
+                }
             }
         }
 

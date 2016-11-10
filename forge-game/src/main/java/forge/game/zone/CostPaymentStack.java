@@ -1,5 +1,7 @@
 package forge.game.zone;
 
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPayment;
 import forge.game.cost.IndividualCostPaymentInstance;
 
 import java.util.Iterator;
@@ -14,6 +16,10 @@ public class CostPaymentStack implements Iterable<IndividualCostPaymentInstance>
 
     public CostPaymentStack() {
         stack = new Stack<IndividualCostPaymentInstance>();
+    }
+
+    public IndividualCostPaymentInstance push(final CostPart cost, final CostPayment payment) {
+        return this.push(new IndividualCostPaymentInstance(cost, payment));
     }
 
     public IndividualCostPaymentInstance push(IndividualCostPaymentInstance costPaymentInstance) {
