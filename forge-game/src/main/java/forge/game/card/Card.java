@@ -1313,17 +1313,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (p.length > 4) {
                     s.append(p[4]);
                 } else {
-                    final CounterType counter = CounterType.valueOf(p[1]);
-                    final String numCounters = p[2];
                     s.append(getName());
                     s.append(" enters the battlefield with ");
-                    s.append(numCounters);
-                    s.append(" ");
-                    s.append(counter.getName());
-                    s.append(" counter");
-                    if (!numCounters.equals("1")) {
-                        s.append("s");
-                    }
+                    s.append(Lang.nounWithNumeral(p[2], CounterType.valueOf(p[1]).getName() + " counter"));
                     s.append(" on it.");
                 }
                 sbLong.append(s).append("\r\n");
