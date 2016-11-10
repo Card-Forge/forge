@@ -68,44 +68,45 @@ public class TriggerSacrificed extends Trigger {
             }
         }
         if (this.mapParams.containsKey("ValidSourceController")) {
-        	if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(this.mapParams.get("ValidSourceController"),
-        			this.getHostCard().getController(), this.getHostCard(), null)) {
-        		return false;
-        	}
+            if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(this.mapParams.get("ValidSourceController"),
+                    this.getHostCard().getController(), this.getHostCard(), null)) {
+                return false;
+            }
         }
 
         if (this.mapParams.containsKey("WhileKeyword")) {
-        	final String keyword = this.mapParams.get("WhileKeyword");
-        	boolean withKeyword = false;
-        	
-        	// When cast with Emerge, the cost instance is there
-        	IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams2.get("IndividualCostPaymentInstance");
-        	SpellAbility sa = currentPayment.getPayment().getAbility();
+            final String keyword = this.mapParams.get("WhileKeyword");
+            boolean withKeyword = false;
 
-    		if (sa != null && sa.getHostCard() != null) {
-	    		if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
-	    			withKeyword = true;
-	    		}
-    		}
-    		if (!withKeyword) {
-    			// When done for another card to get the Mana, the Emerge card is there
-	    		CostPaymentStack stack = (CostPaymentStack) runParams2.get("CostStack");
+            // When cast with Emerge, the cost instance is there
+            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams2.get("IndividualCostPaymentInstance");
+            SpellAbility sa = currentPayment.getPayment().getAbility();
 
-	        	for (IndividualCostPaymentInstance individual : stack) {
-	        		sa = individual.getPayment().getAbility();
-	
-	        		if (sa == null ||  sa.getHostCard() == null)
-	        			continue;
-	
-	        		if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
-	        			withKeyword = true;
-	        			break;
-	        		}
-	        	}
-    		}
-    		
-    		if (!withKeyword)
-    			return false;
+            if (sa != null && sa.getHostCard() != null) {
+                if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
+                    withKeyword = true;
+                }
+            }
+
+            if (!withKeyword) {
+                // When done for another card to get the Mana, the Emerge card is there
+                CostPaymentStack stack = (CostPaymentStack) runParams2.get("CostStack");
+
+                for (IndividualCostPaymentInstance individual : stack) {
+                    sa = individual.getPayment().getAbility();
+
+                    if (sa == null ||  sa.getHostCard() == null)
+                        continue;
+
+                    if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
+                        withKeyword = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!withKeyword)
+                return false;
         }
 
         return true;
