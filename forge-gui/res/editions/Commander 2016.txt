@@ -165,7 +165,7 @@ Type=Other
 156 R Lurking Predators
 157 R Managorger Hydra
 158 R Mycoloth
-159 C Oath of Druids
+159 R Oath of Druids
 160 C Quirion Explorer
 161 C Rampant Growth
 162 R Realm Seekers
