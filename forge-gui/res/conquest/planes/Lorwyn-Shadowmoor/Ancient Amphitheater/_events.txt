@@ -1,6 +1,9 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Brion Stoutarm|Deck:Brion Stoutarm.dck|Variant:Commander|Avatar:Brion Soutarm|Desc:
+Name:Chandra|Deck:Chandra.dck|Variant:Planeswalker|Avatar:Chandra Nalaar|Desc:
+Name:Giants & Kithkin|Deck:Giants & Kithkin.dck|Variant:None|Avatar:Cloudgoat Ranger|Desc:
+Name:Giants|Deck:Giants.dck|Variant:None|Avatar:Hamletback Goliath|Desc:
+Name:Tokens of Light|Deck:Mono W Tokens.dck|Variant:None|Avatar:Feudkiller's Verdict|Desc:
+Name:Rosheen Meanderer|Deck:Rosheen Meanderer.dck|Variant:Commander|Avatar:Rosheen Meanderer|Desc:
+Name:Stonehewer Giant|Deck:Stonehewer Giant.dck|Variant:Vanguard|Avatar:Stonehewer Giant|Desc:
+Name:Warriors Come Out to Play|Deck:Warriors Come Out to Play.dck|Variant:None|Avatar:Borderland Behemoth|Desc:
+Name:Evoking the Dawn|Deck:WR Evoke.dck|Variant:None|Avatar:Dawnfluke|Desc:

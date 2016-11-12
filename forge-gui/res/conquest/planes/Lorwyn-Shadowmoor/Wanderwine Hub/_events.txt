@@ -1,6 +1,9 @@
-Name:Name1|Deck:Merrow-WU-LOR-Wizard.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Merrow-UB-LOR-Friends.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Merrow-WU-LOR-Rogue|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Merrow-UB-SHM-Rogue.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Merrow-U-LORSHM-Mill.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Merrow-U-LORSHM-Rogue.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Defenders of Thoughtweft|Deck:Defenders of Thoughtweft.dck|Variant:None|Avatar:Parapet Watchers|Desc:
+Name:Enchanted Evening|Deck:Enchanted Evening.dck|Variant:None|Avatar:Enchanted Evening|Desc:
+Name:Evoking the Wanderwine|Deck:Evoking the Wanderwine.dck|Variant:None|Avatar:Benthicore|Desc:
+Name:Knights of the Wanderwine|Deck:Knights of the Wanderwine.dck|Variant:None|Avatar:Kinsbaile Cavalier|Desc:
+Name:Millfolk|Deck:Millfolk.dck|Variant:None|Avatar:Drowner of Secrets|Desc:
+Name:Wanderwine Rogues|Deck:Wanderwine Rogues.dck|Variant:None|Avatar:Cache Raiders|Desc:
+Name:Wizards of Wanderwine Hub|Deck:Wizards of Wanderwine Hub.dck|Variant:None|Avatar:Puresight Merrow|Desc:
+Name:Sygg, River Cutthroat|Deck:Sygg, River Cutthroat.dck|Variant:Commander|Avatar:Sygg, River Cutthroat|Desc:
+Name:Sygg, River Guide|Deck:Sygg, River Guide.dck|Variant:Commander|Avatar:Sygg, River Guide|Desc:

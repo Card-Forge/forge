@@ -1,6 +1,9 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Defense of the Clachan|Deck:Defense of the Clachan.dck|Variant:None|Avatar:Ballynock Cohort|Desc:
+Name:Evoking Glory|Deck:Evoking Glory.dck|Variant:None|Avatar:Shinewend|Desc:
+Name:Kithkin Clerics|Deck:Kithkin Clerics.dck|Variant:None|Avatar:Battletide Alchemist|Desc:
+Name:Persistence of the Oversoul|Deck:Persistence of the Oversoul.dck|Variant:None|Avatar:Oversoul of Dusk|Desc:
+Name:Soldiers of the Clachan|Deck:Soldiers of the Clachan.dck|Variant:None|Avatar:Ballyrush Banneret|Desc:
+Name:Birgid, Hero of Kinsbaile|Deck:Birgid, Hero of Kinsbaile.dck|Variant:Commander|Avatar:Birgid, Hero of Kinsbaile|Desc:
+Name:Gaddock Teeg|Deck:Gaddock Teeg.dck|Variant:Commander|Avatar:Gaddock Teeg|Desc:
+Name:Figure of Destiny|Deck:Figure of Destiny.dck|Variant:Vanguard|Avatar:Figure of Destiny|Desc:
+Name:Ajani Goldmane|Deck:Ajani Goldmane.dck|Variant:Planeswalker|Avatar:Ajani Goldmane|Desc:

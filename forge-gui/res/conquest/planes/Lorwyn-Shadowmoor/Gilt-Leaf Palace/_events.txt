@@ -1,6 +1,9 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Dwynen, Gilt-Leaf Daen|Deck:Dwynen, Gilt-Leaf Daen.dck|Variant:Commander|Avatar:Dwynen, Gilt-Leaf Daen|Desc:
+Name:Elvish Persistence|Deck:Elvish Persistence.dck|Variant:None|Avatar:Medicine Runner|Desc:
+Name:Eyeblight Hunters|Deck:Eyeblight Hunters.dck|Variant:None|Avatar:Hunter of Eyeblights|Desc:
+Name:Liliana Vess|Deck:Liliana Vess.dck|Variant:Planeswalker|Avatar:Liliana Vess|Desc:
+Name:Malaren of the Mornsong|Deck:Malaren of the Mornsong-vanguard.dck|Variant:Vanguard|Avatar:Malaren of the Mornsong|Desc:
+Name:Malaren of the Mornsong|Deck:Malaren of the Mornsong.dck|Variant:Commander|Avatar:Malaren of the Mornsong|Desc:
+Name:Nath of the Gilt-Leaf|Nath of the Gilt-Leaf.dck|Variant:Commander|Avatar:Nath of the Gilt-Leaf|Desc:
+Name:Rhys the Exiled|Rhys the Exiled.dck|Variant:Commander|Avatar:Rhys the Exiled|Desc:
+Name:Rhys the Redeemed|Rhys the Redeemed.dck|Variant:Commander|Avatar:Rhys the Redeemed|Desc:
