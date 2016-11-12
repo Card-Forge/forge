@@ -17833,11 +17833,6 @@ forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Ancient[!!-~]Amphitheater/Stoneh
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Ancient[!!-~]Amphitheater/WR[!!-~]Evoke.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Ancient[!!-~]Amphitheater/Warriors[!!-~]Come[!!-~]Out[!!-~]to[!!-~]Play.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Ancient[!!-~]Amphitheater/_events.txt -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Auntie's[!!-~]Hovel/Boggart-BR-LOR-Shaman.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Auntie's[!!-~]Hovel/Boggart-LOR-RogueProwl.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Auntie's[!!-~]Hovel/Boggart-RDW.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Auntie's[!!-~]Hovel/Boggart-RG-Boggartish[!!-~]Deus.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Auntie's[!!-~]Hovel/Boggart-RG-SHM.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Auntie's[!!-~]Hovel/Boggarts.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Auntie's[!!-~]Hovel/Chroma[!!-~]Burn.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Auntie's[!!-~]Hovel/Demigod[!!-~]of[!!-~]Revenge.dck -text
@@ -17879,7 +17874,7 @@ forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Primal[!!-~]Beyond/Mirror[!!-~]E
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Primal[!!-~]Beyond/Reaper[!!-~]King.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Primal[!!-~]Beyond/_events.txt -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Rustic[!!-~]Clachan/Ajani[!!-~]Goldmane.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Rustic[!!-~]Clachan/Birgid,[!!-~]Hero[!!-~]of[!!-~]Kinsbaile.dck -text
+forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Rustic[!!-~]Clachan/Brigid,[!!-~]Hero[!!-~]of[!!-~]Kinsbaile.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Rustic[!!-~]Clachan/Defense[!!-~]of[!!-~]the[!!-~]Clachan.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Rustic[!!-~]Clachan/Evoking[!!-~]Glory.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Rustic[!!-~]Clachan/Figure[!!-~]of[!!-~]Destiny.dck -text
@@ -17902,14 +17897,6 @@ forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Defenders[!!
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Enchanted[!!-~]Evening.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Evoking[!!-~]the[!!-~]Wanderwine.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Knights[!!-~]of[!!-~]the[!!-~]Wanderwine.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Merrow-U-LORSHM-Mill.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Merrow-U-LORSHM-Rogue.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Merrow-UB-LOR-Friends.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Merrow-UB-LORSHM-Wizard.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Merrow-UB-SHM-Friends.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Merrow-UB-SHM-Rogue.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Merrow-WU-LOR-Rogue.dck -text
-forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Merrow-WU-LOR-Wizard.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Millfolk.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Sygg,[!!-~]River[!!-~]Cutthroat.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Sygg,[!!-~]River[!!-~]Guide.dck -text

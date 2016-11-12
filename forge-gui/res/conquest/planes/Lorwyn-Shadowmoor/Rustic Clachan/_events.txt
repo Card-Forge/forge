@@ -3,7 +3,7 @@ Name:Evoking Glory|Deck:Evoking Glory.dck|Variant:None|Avatar:Shinewend|Desc:
 Name:Kithkin Clerics|Deck:Kithkin Clerics.dck|Variant:None|Avatar:Battletide Alchemist|Desc:
 Name:Persistence of the Oversoul|Deck:Persistence of the Oversoul.dck|Variant:None|Avatar:Oversoul of Dusk|Desc:
 Name:Soldiers of the Clachan|Deck:Soldiers of the Clachan.dck|Variant:None|Avatar:Ballyrush Banneret|Desc:
-Name:Birgid, Hero of Kinsbaile|Deck:Birgid, Hero of Kinsbaile.dck|Variant:Commander|Avatar:Birgid, Hero of Kinsbaile|Desc:
+Name:Brigid, Hero of Kinsbaile|Deck:Brigid, Hero of Kinsbaile.dck|Variant:Commander|Avatar:Brigid, Hero of Kinsbaile|Desc:
 Name:Gaddock Teeg|Deck:Gaddock Teeg.dck|Variant:Commander|Avatar:Gaddock Teeg|Desc:
 Name:Figure of Destiny|Deck:Figure of Destiny.dck|Variant:Vanguard|Avatar:Figure of Destiny|Desc:
 Name:Ajani Goldmane|Deck:Ajani Goldmane.dck|Variant:Planeswalker|Avatar:Ajani Goldmane|Desc:
