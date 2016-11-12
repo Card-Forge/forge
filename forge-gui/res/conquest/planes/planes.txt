@@ -1,6 +1,6 @@
 Name:Alara|RegionSize:9|Desc:
 Name:Dominaria|RegionSize:9|Unreachable:True|Desc:
-Name:Innistrad|RegionSize:6|Desc:
+Name:Innistrad|RegionSize:9|Desc:
 Name:Kaladesh|RegionSize:6|Unreachable:True|Desc:
 Name:Kamigawa|RegionSize:6|Unreachable:True|Desc:
 Name:Lorwyn-Shadowmoor|RegionSize:9|Desc:
