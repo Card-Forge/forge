@@ -1,4 +1,4 @@
-Name:Brion Stoutarm|Deck:Brion Stoutarm.dck|Variant:Commander|Avatar:Brion Soutarm|Desc:
+Name:Brion Stoutarm|Deck:Brion Stoutarm.dck|Variant:Commander|Avatar:Brion Stoutarm|Desc:
 Name:Chandra|Deck:Chandra.dck|Variant:Planeswalker|Avatar:Chandra Nalaar|Desc:
 Name:Giants & Kithkin|Deck:Giants & Kithkin.dck|Variant:None|Avatar:Cloudgoat Ranger|Desc:
 Name:Giants|Deck:Giants.dck|Variant:None|Avatar:Hamletback Goliath|Desc:
