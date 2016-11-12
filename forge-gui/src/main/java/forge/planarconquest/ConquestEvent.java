@@ -80,6 +80,10 @@ public class ConquestEvent {
             if (avatarCard == null) {
                 //if not in plane's card pool, load from all cards instead
                 avatarCard = FModel.getMagicDb().getCommonCards().getCard(avatar);
+                if (avatarCard == null) {
+                    //if not in common cards, check variant cards
+                    avatarCard = FModel.getMagicDb().getVariantCards().getCard(avatar);
+                }
             }
         }
         return avatarCard;
