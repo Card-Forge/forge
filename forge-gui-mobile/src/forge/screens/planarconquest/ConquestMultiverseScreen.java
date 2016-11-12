@@ -493,9 +493,14 @@ public class ConquestMultiverseScreen extends FScreen {
             float w = getWidth();
             float regionHeight = w / CardRenderer.CARD_ART_RATIO;
             float rowHeight = regionHeight / model.getCurrentPlane().getRowsPerRegion();
+            float margin = rowHeight * 1.5f;  //use rowHeight * 1.5f margin so an extra row is kept visible above and below your current location
+            float maxMargin = getHeight() / 2; //prevent flicker if rows too tall to fit 3 on screen at once
+            if (margin > maxMargin) {
+                margin = maxMargin;
+            }
 
             Vector2 pos = activeMoveAnimation == null ? getPosition(model.getCurrentLocation()) : activeMoveAnimation.pos;
-            scrollIntoView(pos.x, pos.y - getScrollTop(), 0, 0, rowHeight * 1.5f); //use rowHeight * 1.5f margin so an extra row is kept visible above and below your current location
+            scrollIntoView(pos.x, pos.y - getScrollTop(), 0, 0, margin);
         }
 
         private class MoveAnimation extends ForgeAnimation {
