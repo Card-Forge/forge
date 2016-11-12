@@ -1,6 +1,6 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:House Stromkirk|Deck:House Stromkirk.dck|Variant:None|Avatar:Stromkirk Captain|Desc:
+Name:Madness|Deck:Madness.dck|Variant:None|Avatar:Bloodhall Priest|Desc:
+Name:House Falkenrath|Deck:House Falkenrath.dck|Variant:None|Avatar:Falkenrath Aristocrat|Desc:
+Name:Nekrataal|Deck:Nekrataal.dck|Variant:Vanguard|Avatar:Nekrataal|Desc:
+Name:House Voldaren|Deck:House Voldaren.dck|Variant:Commander|Avatar:Olivia Voldaren|Desc:
+Name:House Markov|Deck:House Markov.dck|Variant:Planeswalker|Avatar:Sorin Markov|Desc:
