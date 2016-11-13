@@ -1344,7 +1344,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")) {
                 String[] k = keyword.split(":"); 
                 sbLong.append(k[0]);
-                if (keyword.contains(":")) {
+                if (k.length > 1) {
                     final Cost mCost = new Cost(k[1], true);
                     if (!mCost.isOnlyManaCost()) {
                         sbLong.append(" -");
