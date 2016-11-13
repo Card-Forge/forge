@@ -177,6 +177,8 @@ public class DeckHints {
                     Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.subType(t), PaperCard.FN_GET_RULES));
                 }
                 break;
+            case NONE:
+                break;
         }
         return cards;
     }

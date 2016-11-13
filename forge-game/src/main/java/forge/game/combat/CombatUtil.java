@@ -34,7 +34,6 @@ import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
-import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;

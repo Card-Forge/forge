@@ -212,7 +212,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
                 this.getCatalogManager().setup(getScreen() == FScreen.DECK_EDITOR_DRAFT ? ItemManagerConfig.DRAFT_POOL : ItemManagerConfig.SEALED_POOL);
                 this.getDeckManager().setPool(this.getSelectedDeck().getOrCreate(DeckSection.Main));
                 break;
-
+            default:
+                break;
         }
 
         this.controller.updateCaptions();
