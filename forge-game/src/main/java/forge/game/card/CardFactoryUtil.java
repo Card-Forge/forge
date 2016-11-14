@@ -591,6 +591,12 @@ public class CardFactoryUtil {
                 totDmg += p.getAssignedDamage();
             }
             return doXMath(totDmg, m, source);
+        } else if (sq[0].contains("LifeLostThisTurn")) {
+            int totDmg = 0;
+            for (Player p : players) {
+                totDmg += p.getLifeLostThisTurn();
+            }
+            return doXMath(totDmg, m, source);
         }
 
         if (players.size() > 0) {
