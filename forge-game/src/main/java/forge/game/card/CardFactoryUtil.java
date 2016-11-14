@@ -2627,7 +2627,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String n = k[1];
             
-            final String trig = "Mode$ Attacks | ValidCard$ Creature.YouCtrl | "
+            final String trig = "Mode$ Attacks | ValidCard$ Card.Self | "
                             + "TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
                             + "Annihilator " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
