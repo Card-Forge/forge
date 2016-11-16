@@ -856,7 +856,7 @@ public class AbilityUtils {
         }
         else if (defined.equals("TargetedController")) {
             final CardCollection list = getDefinedCards(card, "Targeted", sa);
-            final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(card, "Targeted", sa);
+            final List<SpellAbility> sas = getDefinedSpellAbilities(card, "Targeted", sa);
 
             for (final Card c : list) {
                 final Player p = c.getController();
@@ -890,7 +890,7 @@ public class AbilityUtils {
         }
         else if (defined.equals("ParentTargetedController")) {
             final CardCollection list = getDefinedCards(card, "ParentTarget", sa);
-            final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(card, "Targeted", sa);
+            final List<SpellAbility> sas = getDefinedSpellAbilities(card, "Targeted", sa);
 
             for (final Card c : list) {
                 final Player p = c.getController();
@@ -905,41 +905,12 @@ public class AbilityUtils {
                 }
             }
         }
-        else if (defined.equals("Remembered")) {
-            for (final Object rem : card.getRemembered()) {
-                if (rem instanceof Player) {
-                    players.add((Player) rem);
-                }
-            }
+        else if (defined.startsWith("Remembered")) {
+            addPlayer(card.getRemembered(), defined, players);
         }
-        else if (defined.equals("DelayTriggerRemembered")) {
+        else if (defined.startsWith("DelayTriggerRemembered")) {
             if (sa.isTrigger()) {
-                for (Object o : sa.getRootAbility().getTriggerRemembered()) {
-                    if (o instanceof Player) {
-                        players.add((Player) o);
-                    }
-                }
-            }
-        }
-        else if (defined.equals("RememberedOpponents")) {
-            for (final Object rem : card.getRemembered()) {
-                if (rem instanceof Player) {
-                    players.addAll(((Player) rem).getOpponents());
-                }
-            }
-        }
-        else if (defined.equals("RememberedController")) {
-            for (final Object rem : card.getRemembered()) {
-                if (rem instanceof Card) {
-                    players.add(((Card) rem).getController());
-                }
-            }
-        }
-        else if (defined.equals("RememberedOwner")) {
-            for (final Object rem : card.getRemembered()) {
-                if (rem instanceof Card) {
-                    players.add(((Card) rem).getOwner());
-                }
+                addPlayer(sa.getRootAbility().getTriggerRemembered(), defined, players);
             }
         }
         else if (defined.equals("ImprintedController")) {
@@ -1718,5 +1689,25 @@ public class AbilityUtils {
             return val;
         }
         return applyAbilityTextChangeEffects(val, ability);
+    }
+
+    private static void addPlayer(Iterable<Object> objects, final String def, FCollection<Player> players) {
+        for (Object o : objects) {
+            if (o instanceof Player) {
+                final Player p = (Player) o;
+                if (def.endsWith("Opponents")) {
+                    players.addAll(p.getOpponents());
+                } else {
+                    players.add(p);
+                }
+            } else if (o instanceof Card) {
+                final Card c = (Card) o;
+                if (def.endsWith("Controller")) {
+                    players.add(c.getController());
+                } else if (def.endsWith("Owner")) {
+                    players.add(c.getOwner());
+                }
+            }
+        }
     }
 }
