@@ -52,6 +52,10 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
 
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, sa.getHostCard(), true);
 
+        if (sa.hasParam("CopyTriggeringObjects")) {
+            delTrig.setStoredTriggeredObjects(sa.getTriggeringObjects());
+        }
+
         if (triggerRemembered != null) {
             for (final Object o : AbilityUtils.getDefinedObjects(sa.getHostCard(), triggerRemembered, sa)) {
                 if (o instanceof SpellAbility) {
