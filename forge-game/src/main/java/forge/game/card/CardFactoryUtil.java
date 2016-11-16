@@ -3720,22 +3720,11 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             String effect = "AB$ ChangeZone | Cost$ " + manacost + " | Defined$ Self" +
-                    " | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$" +
-                    " True | ActivationZone$ Graveyard | Unearth$ True | SubAbility$" +
-                    " UnearthPumpSVar | PrecostDesc$ Unearth | StackDescription$ " +
+                    " | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True" +
+                    " | ActivationZone$ Graveyard | Unearth$ True | " +
+                    " | PrecostDesc$ Unearth | StackDescription$ " +
                     "Unearth: Return CARDNAME to the battlefield. | SpellDescription$" +
                     " (" + Keyword.getInstance(keyword).getReminderText() + ")";
-            String dbpump = "DB$ Pump | Defined$ Self | KW$ Haste & HIDDEN If CARDNAME" +
-                    " would leave the battlefield, exile it instead of putting it " +
-                    "anywhere else. | Permanent$ True | SubAbility$ UnearthDelayTrigger";
-            String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn" +
-                    " | Execute$ UnearthTrueDeath | TriggerDescription$ Exile " +
-                    "CARDNAME at the beginning of the next end step.";
-            String truedeath = "DB$ ChangeZone | Defined$ Self | Origin$ Battlefield" +
-                    " | Destination$ Exile";
-            card.setSVar("UnearthPumpSVar", dbpump);
-            card.setSVar("UnearthDelayTrigger", delTrig);
-            card.setSVar("UnearthTrueDeath", truedeath);
             
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             if (!intrinsic) {
