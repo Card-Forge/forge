@@ -1,12 +1,13 @@
-Name:AEther Membrane
+Name:Aether Membrane
+AltName:AEther Membrane
 ManaCost:1 R R
 Types:Creature Wall
 PT:0/5
 K:Defender
 K:Reach
-T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | DelayedTrigger$ DelayedTrig | TriggerDescription$ Whenever CARDNAME blocks a creature, return that creature to its owner's hand at end of combat.
-SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigBounce | TriggerDescription$ Return blocked creature to its owner's hand at end of combat.
-SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredAttacker
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ DelayedTrig | TriggerDescription$ Whenever CARDNAME blocks a creature, return that creature to its owner's hand at end of combat.
+SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigBounce | RememberObjects$ TriggeredAttacker | TriggerDescription$ Return blocked creature to its owner's hand at end of combat.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ DelayTriggerRemembered
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_membrane.jpg
 Oracle:Defender, reach (This creature can block creatures with flying.)\nWhenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.

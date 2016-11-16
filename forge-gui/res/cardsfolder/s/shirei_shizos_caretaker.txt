@@ -2,9 +2,9 @@ Name:Shirei, Shizo's Caretaker
 ManaCost:4 B
 Types:Legendary Creature Spirit
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.powerLE1+YouOwn | OptionalDecider$ You | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever a creature with power 1 or less is put into your graveyard from the battlefield, you may return that card to the battlefield at the beginning of the next end step if CARDNAME is still on the battlefield.
-SVar:DelTrig:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigReturn | IsPresent$ Card.Self | PresentZone$ Battlefield | TriggerDescription$ Return creature to the battlefield.
-SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.powerLE1+YouOwn | OptionalDecider$ You | Execute$ DelTrig | TriggerDescription$ Whenever a creature with power 1 or less is put into your graveyard from the battlefield, you may return that card to the battlefield at the beginning of the next end step if CARDNAME is still on the battlefield.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigReturn | IsPresent$ Card.Self | PresentZone$ Battlefield | RememberObjects$ TriggeredCard | TriggerDescription$ Return creature to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ DelayTriggerRemembered | IsPresent$ Card.Self+StrictlySelf | PresentZone$ Battlefield
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Static$ True | Execute$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearTriggered$ True
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+powerLE1+YouOwn | AddSVar$ Sac
