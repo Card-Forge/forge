@@ -17,6 +17,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.util.Lang;
 import forge.util.collect.FCollection;
 
 /**
@@ -199,6 +200,7 @@ public abstract class SpellAbilityEffect {
     
 
     protected static void registerDelayedTrigger(final SpellAbility sa, String location, final List<Card> crds) {
+        boolean intrinsic = sa.isIntrinsic();
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");
 
@@ -216,7 +218,9 @@ public abstract class SpellAbilityEffect {
             if (your) {
                 delTrig.append("| ValidPlayer$ You ");
             }
-            delTrig.append("| TriggerDescription$ " + location + " " + crds + " at the ");
+            delTrig.append("| TriggerDescription$ " + location + " ");
+            delTrig.append(Lang.joinHomogenous(crds));
+            delTrig.append(" at the ");
             if (combat) {
                 delTrig.append("end of combat.");
             } else {
@@ -224,7 +228,7 @@ public abstract class SpellAbilityEffect {
                 delTrig.append(your ? "your" : "the");
                 delTrig.append(" next end step.");
             }
-        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), true);
+        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
         for (final Card c : crds) {
             trig.addRemembered(c);
         }
@@ -236,7 +240,9 @@ public abstract class SpellAbilityEffect {
         } else if (location.equals("Destroy")) {
             trigSA = "DB$ Destroy | Cost$ 0 | Defined$ DelayTriggerRemembered";
         }
-        trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, sa.getHostCard()));
+        final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
+        newSa.setIntrinsic(intrinsic);
+        trig.setOverridingAbility(newSa);
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
     }
     
