@@ -247,22 +247,20 @@ public class AiController {
                 continue;
             }
 
-            if (tr.getOverridingAbility() != null) {
-                // Abilities yet
-                continue;
-            }
-            
             // if trigger is not mandatory - no problem
             if (params.get("OptionalDecider") != null && api == null) {
                 continue;
             }
 
-            // Maybe better considerations
-            final String execute = params.get("Execute");
-            if (execute == null) {
-                continue;
+            SpellAbility exSA = tr.getOverridingAbility();
+
+            if (exSA == null) {
+                // Maybe better considerations
+                if (!params.containsKey("Execute")) {
+                    continue;
+                }
+                exSA = AbilityFactory.getAbility(card, params.get("Execute"));
             }
-            final SpellAbility exSA = AbilityFactory.getAbility(card.getSVar(execute), card);
 
             if (api != null) {
                 if (exSA.getApi() != api) {
