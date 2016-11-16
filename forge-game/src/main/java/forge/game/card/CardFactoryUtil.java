@@ -2109,19 +2109,7 @@ public class CardFactoryUtil {
                 addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Transmute")) {
-                card.removeIntrinsicKeyword(keyword);
-                final String manacost = keyword.split(":")[1];
-                final String sbTransmute = "AB$ ChangeZone | Cost$ " + manacost + " Discard<1/CARDNAME>"
-                        + " | CostDesc$ Transmute " + ManaCostParser.parse(manacost)+ " | ActivationZone$ Hand"
-                        + " | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQ" + card.getManaCost().getCMC()
-                        + " | ChangeNum$ 1 | SorcerySpeed$ True | References$ TransmuteX | SpellDescription$ ("
-                        + ManaCostParser.parse(manacost) + ", Discard this card: Search your library for a card "
-                        + "with the same converted mana cost as the discarded card, reveal that card, "
-                        + "and put it into your hand. Then shuffle your library. Activate this ability "
-                        + "only any time you could cast a sorcery.)";
-                final SpellAbility abTransmute = AbilityFactory.getAbility(sbTransmute, card);
-                card.addSpellAbility(abTransmute);
-                card.getCurrentState().addUnparsedAbility(sbTransmute);
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Soulshift")) {
                 addTriggerAbility(keyword, card, null);
@@ -3708,6 +3696,25 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Transmute")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            final String effect = "AB$ ChangeZone | Cost$ " + manacost + " Discard<1/CARDNAME>"
+                    + " | PrecostDesc$ Transmute | CostDesc$ " + ManaCostParser.parse(manacost) + " | ActivationZone$ Hand"
+                    + " | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQ" + card.getManaCost().getCMC()
+                    + " | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ ("
+                    + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                sa.setIntrinsic(false);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            }
+
+            card.addSpellAbility(sa);
         } else if (keyword.startsWith("Unearth")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
