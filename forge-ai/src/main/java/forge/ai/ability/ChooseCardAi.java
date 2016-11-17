@@ -144,7 +144,10 @@ public class ChooseCardAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+        if (sa.hasParam("AILogic") && !checkAiLogic(ai, sa, sa.getParam("AILogic"))) {
+            return false;
+        }
+        return checkApiLogic(ai, sa);
     }
     
     /* (non-Javadoc)
