@@ -1,5 +1,5 @@
 Name:Damping Engine
-ManaCost:5
+ManaCost:4
 Types:Artifact
 S:Mode$ Continuous | Affected$ Player.withMostPermanentInPlay | AddStaticAbility$ STCantPlayLand & STCantCast | IgnoreEffectCost$ Sac<1/Permanent> | Description$ A player who controls more permanents than each other player can't play lands or cast artifact, creature, or enchantment spells. That player may sacrifice a permanent for that player to ignore this effect until end of turn.
 
