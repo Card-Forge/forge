@@ -1,7 +1,7 @@
 Name:Sinuous Vermin
 ManaCost:1 B
 Types:Creature Rat Horror
-PT:3/3
+PT:2/2
 K:Monstrosity:3:3 B B
 S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Menace | Description$ As long as CARDNAME is monstrous, it has menace. (It can't be blocked except by two or more creatures.)
 DeckHas:Ability$Counters
