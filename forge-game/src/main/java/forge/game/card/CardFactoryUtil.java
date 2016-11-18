@@ -2877,9 +2877,9 @@ public class CardFactoryUtil {
 
             // Trigger for when the haunted creature leaves the battlefield
             final StringBuilder sbHauntRemoved = new StringBuilder();
-            sbUnExiled.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ");
-            sbUnExiled.append("ValidCard$ Creature.HauntedBy | Static$ True | Secondary$ True | ");
-            sbUnExiled.append("TriggerDescription$ Blank");
+            sbHauntRemoved.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ");
+            sbHauntRemoved.append("ValidCard$ Creature.HauntedBy | Static$ True | Secondary$ True | ");
+            sbHauntRemoved.append("TriggerDescription$ Blank");
 
             final Trigger trigHauntRemoved = TriggerHandler.parseTrigger(sbHauntRemoved.toString(), card,
                     intrinsic);
