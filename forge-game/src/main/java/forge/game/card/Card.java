@@ -211,7 +211,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private NavigableMap<Long, Player> tempControllers = Maps.newTreeMap();
 
     private String originalText = "", text = "";
-    private Cost miracleCost = null;
     private String chosenType = "";
     private List<String> chosenColors;
     private String namedCard = "";
@@ -3469,13 +3468,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setUnearthed(final boolean b) {
         unearthed = b;
-    }
-
-    public final Cost getMiracleCost() {
-        return miracleCost;
-    }
-    public final void setMiracleCost(final Cost cost) {
-        miracleCost = cost;
     }
 
     public final boolean hasSuspend() {

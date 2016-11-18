@@ -17,6 +17,8 @@
  */
 package forge.game.trigger;
 
+import forge.game.Game;
+import forge.game.GameStage;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -61,6 +63,13 @@ public class TriggerDrawn extends Trigger {
 
         if (this.mapParams.containsKey("Number")) {
             if (number != Integer.parseInt(this.mapParams.get("Number"))) {
+                return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("Miracle")) {
+            final Game game = this.getHostCard().getGame();
+            if (number != 1 || game.getAge() == GameStage.Mulligan) {
                 return false;
             }
         }

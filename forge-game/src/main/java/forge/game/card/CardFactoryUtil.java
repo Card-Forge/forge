@@ -901,7 +901,7 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("CommanderCastFromCommandZone")) {
-        	// TODO fix it for multiple commanders
+                // TODO fix it for multiple commanders
             // Read SVar CommanderCostRaise from Commander Effect
             Card commeff = CardLists.filter(cc.getCardsIn(ZoneType.Command),
                     CardPredicates.nameEquals("Commander Effect")).get(0);
@@ -994,14 +994,14 @@ public class CardFactoryUtil {
             return doXMath(cc.getOpponentsGreatestLifeTotal(), m, c);
         }
         if (sq[0].contains("OppsAtLifeTotal")) {
-        	final int lifeTotal = xCount(c, sq[1]);
-        	int number = 0;
-        	for (final Player opp : cc.getOpponents()) {
-        		if (opp.getLife() == lifeTotal) {
-        			number++;
-        		}
-        	}
-        	return doXMath(number, m, c);
+                final int lifeTotal = xCount(c, sq[1]);
+                int number = 0;
+                for (final Player opp : cc.getOpponents()) {
+                        if (opp.getLife() == lifeTotal) {
+                                number++;
+                        }
+                }
+                return doXMath(number, m, c);
         }
 
         //  Count$TargetedLifeTotal (targeted player's life total)
@@ -1157,13 +1157,13 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("ColorsCtrl")) {
-        	final CardCollectionView list = cc.getCardsIn(ZoneType.Battlefield);
-        	int n = 0;
-        	for (final byte col : MagicColor.WUBRG) {
-        		if (!CardLists.getColor(list, col).isEmpty()) {
-        			n++;
-        		}
-        	}
+                final CardCollectionView list = cc.getCardsIn(ZoneType.Battlefield);
+                int n = 0;
+                for (final byte col : MagicColor.WUBRG) {
+                        if (!CardLists.getColor(list, col).isEmpty()) {
+                                n++;
+                        }
+                }
             return doXMath(n, m, c);
         }
 
@@ -1473,7 +1473,7 @@ public class CardFactoryUtil {
     }
 
     private static CardCollectionView getCardListForXCount(final Card c, final Player cc, final String[] sq) {
-    	final List<Player> opps = cc.getOpponents();
+        final List<Player> opps = cc.getOpponents();
         CardCollection someCards = new CardCollection();
         final Game game = c.getGame();
         
@@ -1503,41 +1503,41 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("OppCtrl")) {
-        	for (final Player p : opps) {
-        		someCards.addAll(p.getZone(ZoneType.Battlefield).getCards());
-        	}
+                for (final Player p : opps) {
+                        someCards.addAll(p.getZone(ZoneType.Battlefield).getCards());
+                }
         }
 
         if (sq[0].contains("InOppYard")) {
-        	for (final Player p : opps) {
-        		someCards.addAll(p.getCardsIn(ZoneType.Graveyard));
-        	}
+                for (final Player p : opps) {
+                        someCards.addAll(p.getCardsIn(ZoneType.Graveyard));
+                }
         }
 
         if (sq[0].contains("InOppHand")) {
-        	for (final Player p : opps) {
-        		someCards.addAll(p.getCardsIn(ZoneType.Hand));
-        	}
+                for (final Player p : opps) {
+                        someCards.addAll(p.getCardsIn(ZoneType.Hand));
+                }
         }
 
         if (sq[0].contains("InChosenHand")) {
-        	if (c.getChosenPlayer() != null) {
-        		someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
-        	}
+                if (c.getChosenPlayer() != null) {
+                        someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
+                }
         }
 
         if (sq[0].contains("InChosenYard")) {
-        	if (c.getChosenPlayer() != null) {
-        		someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
-        	}
+                if (c.getChosenPlayer() != null) {
+                        someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
+                }
         }
 
         if (sq[0].contains("OnBattlefield")) {
-        	someCards.addAll(game.getCardsIn(ZoneType.Battlefield));
+                someCards.addAll(game.getCardsIn(ZoneType.Battlefield));
         }
 
         if (sq[0].contains("InAllYards")) {
-        	someCards.addAll(game.getCardsIn(ZoneType.Graveyard));
+                someCards.addAll(game.getCardsIn(ZoneType.Graveyard));
         }
 
         if (sq[0].contains("SpellsOnStack")) {
@@ -1545,7 +1545,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("InAllHands")) {
-        	someCards.addAll(game.getCardsIn(ZoneType.Hand));
+                someCards.addAll(game.getCardsIn(ZoneType.Hand));
         }
 
         //  Count$InTargetedHand (targeted player's cards in hand)
@@ -2240,7 +2240,7 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Epic")) {
-            	addSpellAbility(keyword, card, null);
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.equals("Soulbond")) {
              // Setup ETB trigger for card with Soulbond keyword
@@ -2280,6 +2280,9 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Ingest")) {
+                addTriggerAbility(keyword, card, null);
+            }
+            else if (keyword.startsWith("Miracle")) {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Persist")) {
@@ -2981,9 +2984,9 @@ public class CardFactoryUtil {
                     "Execute$ " + trigPlay + " | Secondary$ True | TriggerDescription$ " +
                     "Play Madness " + ManaCostParser.parse(manacost) + " - " + card.getName();
 
-            final String playMadness = "AB$ Play | Cost$ 0 | Defined$ Self | PlayMadness$ " + manacost +
+            final String playMadness = "AB$ Play | Cost$ 0 | Defined$ Self | PlayCost$ " + manacost +
                     " | ConditionDefined$ Self | ConditionPresent$ Card.StrictlySelf+inZoneExile" + 
-                    " | Optional$ True | SubAbility$ DBWasNotPlayMadness | RememberPlayed$ True";
+                    " | Optional$ True | SubAbility$ DBWasNotPlayMadness | RememberPlayed$ True | Madness$ True";
             final String moveToYard = "DB$ ChangeZone | Defined$ Self.StrictlySelf | Origin$ Exile | " +
                     "Destination$ Graveyard | ConditionDefined$ Remembered | ConditionPresent$" +
                     " Card | ConditionCompare$ EQ0 | SubAbility$ DBMadnessCleanup";
@@ -3006,6 +3009,22 @@ public class CardFactoryUtil {
             card.setSVar("MeleePump", effect);
             card.setSVar("MeleeX", "TriggeredPlayersDefenders$Amount");
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(trigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Miracle")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+            final String abStr = "DB$ Play | Defined$ Self | PlayCost$ " + manacost;
+
+            final String trigStr = "Mode$ Drawn | ValidCard$ Card.Self | Miracle$ True | Secondary$ True "
+                + "| Static$ True | TriggerDescription$ CARDNAME - Miracle";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+
+            trigger.setOverridingAbility(AbilityFactory.getAbility(abStr, card));
+
             final Trigger cardTrigger = card.addTrigger(trigger);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
@@ -4082,17 +4101,6 @@ public class CardFactoryUtil {
             addTriggerAbility(parse, card, null);
         } // madness
 
-        if (hasKeyword(card, "Miracle") != -1) {
-            final int n = hasKeyword(card, "Miracle");
-            if (n != -1) {
-                final String parse = card.getKeywords().get(n).toString();
-                // card.removeIntrinsicKeyword(parse);
-
-                final String[] k = parse.split(":");
-                card.setMiracleCost(new Cost(k[1], false));
-            }
-        } // miracle
-
         if (hasKeyword(card, "Devour") != -1) {
             final int n = hasKeyword(card, "Devour");
             addReplacementEffect(card.getKeywords().get(n), card, null);
@@ -4129,22 +4137,22 @@ public class CardFactoryUtil {
         if (hasKeyword(card, "Recover") != -1) {
             final String recoverCost = card.getKeywords().get(card.getKeywordPosition("Recover")).split(":")[1];
             final String abStr = "AB$ ChangeZone | Cost$ 0 | Defined$ Self"
-            		+ " | Origin$ Graveyard | Destination$ Hand | UnlessCost$ "
+                        + " | Origin$ Graveyard | Destination$ Hand | UnlessCost$ "
                     + recoverCost + " | UnlessPayer$ You | UnlessSwitched$ True"
                     + " | UnlessResolveSubs$ WhenNotPaid | SubAbility$ RecoverExile";
             card.setSVar("RecoverTrig", abStr);
             card.setSVar("RecoverExile", "DB$ ChangeZone | Defined$ Self"
-            		+ " | Origin$ Graveyard | Destination$ Exile");
+                        + " | Origin$ Graveyard | Destination$ Exile");
             String trigObject = card.isCreature() ? "Creature.Other+YouOwn" : "Creature.YouOwn";
             String trigArticle = card.isCreature() ? "another" : "a";
             String trigStr = "Mode$ ChangesZone | ValidCard$ " + trigObject
-            		+ " | Origin$ Battlefield | Destination$ Graveyard | "
-            		+ "TriggerZones$ Graveyard | Execute$ RecoverTrig | "
-            		+ "TriggerDescription$ When " + trigArticle + " creature is "
-            		+ "put into your graveyard from the battlefield, you "
-            		+ "may pay " + recoverCost + ". If you do, return "
-            		+ "CARDNAME from your graveyard to your hand. Otherwise,"
-            		+ " exile CARDNAME. | Secondary$ True";
+                        + " | Origin$ Battlefield | Destination$ Graveyard | "
+                        + "TriggerZones$ Graveyard | Execute$ RecoverTrig | "
+                        + "TriggerDescription$ When " + trigArticle + " creature is "
+                        + "put into your graveyard from the battlefield, you "
+                        + "may pay " + recoverCost + ". If you do, return "
+                        + "CARDNAME from your graveyard to your hand. Otherwise,"
+                        + " exile CARDNAME. | Secondary$ True";
             final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
             card.addTrigger(myTrigger);
         } // Recover

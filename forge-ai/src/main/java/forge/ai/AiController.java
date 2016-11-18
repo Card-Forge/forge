@@ -18,7 +18,6 @@
 package forge.ai;
 
 import java.security.InvalidParameterException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -972,40 +971,6 @@ public class AiController {
         }
 
         return Boolean.parseBoolean(prop);
-    }
-
-    /** Returns the spell ability which has already been played - use it for reference only */ 
-    public SpellAbility chooseAndPlaySa(boolean mandatory, boolean withoutPayingManaCost, final SpellAbility... list) {
-        return chooseAndPlaySa(Arrays.asList(list), mandatory, withoutPayingManaCost);
-    }
-    /** Returns the spell ability which has already been played - use it for reference only */
-    public SpellAbility chooseAndPlaySa(final List<SpellAbility> choices, boolean mandatory, boolean withoutPayingManaCost) {
-        for (final SpellAbility sa : choices) {
-            sa.setActivatingPlayer(player);
-            //Spells
-            if (sa instanceof Spell) {
-                if (AiPlayDecision.WillPlay != canPlayFromEffectAI((Spell) sa, mandatory, withoutPayingManaCost)) {
-                    continue;
-                }
-            }
-            else {
-                if (AiPlayDecision.WillPlay == canPlaySa(sa)) {
-                    continue;
-                }
-            }
-
-            if (withoutPayingManaCost) {
-                ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, sa, game);
-            }
-            else if (!ComputerUtilCost.canPayCost(sa, player)) {
-                continue;
-            }
-            else {
-                ComputerUtil.playStack(sa, player, game);
-            }
-            return sa;
-        }
-        return null;
     }
 
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {

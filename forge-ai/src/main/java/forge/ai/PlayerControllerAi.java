@@ -1,5 +1,12 @@
 package forge.ai;
 
+import java.security.InvalidParameterException;
+import java.util.*;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -44,17 +51,10 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
-import forge.util.collect.FCollection;
-import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.security.InvalidParameterException;
-import java.util.*;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
 
 /** 
@@ -79,6 +79,7 @@ public class PlayerControllerAi extends PlayerController {
         brains.setUseSimulation(value);
     }
 
+    @Override
     public SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
         if (abilities.size() == 0) {
             return null;
@@ -315,11 +316,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void playMiracle(SpellAbility miracle, Card card) {
-        getAi().chooseAndPlaySa(false, false, miracle);
-    }
-
-    @Override
     public CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave) {
         return getAi().chooseCardsToDelve(genericAmount, grave);
     }
@@ -436,6 +432,7 @@ public class PlayerControllerAi extends PlayerController {
         return brains.chooseNumber(sa, title, min, max);
     }
     
+    @Override
     public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
         return brains.chooseNumber(sa, title, options, relatedPlayer);
     }

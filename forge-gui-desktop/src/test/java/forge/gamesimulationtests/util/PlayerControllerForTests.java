@@ -269,11 +269,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public void playMiracle(SpellAbility miracle, Card card) {
-        throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");
-    }
-
-    @Override
     public CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave) {
         return CardCollection.EMPTY;
     }

@@ -695,14 +695,6 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public void playMiracle(final SpellAbility miracle, final Card card) {
-        final CardView view = CardView.get(card);
-        if (getGui().confirm(view, view + " - Drawn. Play for Miracle Cost?")) {
-            HumanPlay.playSpellAbility(this, player, miracle);
-        }
-    }
-
-    @Override
     public CardCollectionView chooseCardsToDelve(final int genericAmount, final CardCollection grave) {
         final int cardsInGrave = Math.min(genericAmount, grave.size());
         if (cardsInGrave == 0) {
