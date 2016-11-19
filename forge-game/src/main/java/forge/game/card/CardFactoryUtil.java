@@ -2332,17 +2332,7 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Evolve")) {
-                final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
-                        + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
-                        + "TriggerZones$ Battlefield | Execute$ EvolveAddCounter | Secondary$ True | "
-                        + "TriggerDescription$ Evolve (Whenever a creature enters the battlefield under your "
-                        + "control, if that creature has greater power or toughness than this creature, put a "
-                        + "+1/+1 counter on this creature.)";
-                final String abString = "AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | "
-                        + "CounterNum$ 1 | Evolve$ True";
-                final Trigger parsedTrigger = TriggerHandler.parseTrigger(evolveTrigger, card, true);
-                card.addTrigger(parsedTrigger);
-                card.setSVar("EvolveAddCounter", abString);
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Dredge")) {
                 final int dredgeAmount = card.getKeywordMagnitude("Dredge");
@@ -2724,6 +2714,21 @@ public class CardFactoryUtil {
                             + "Evoke (" + Keyword.getInstance(keyword).getReminderText() + ")");
 
             final String effect = "DB$ Sacrifice";
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(trigger);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.equals("Evolve")) {
+            final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                    + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
+                    + "TriggerZones$ Battlefield | Secondary$ True | "
+                    + "TriggerDescription$ Evolve (" + Keyword.getInstance(keyword).getReminderText()+ ")";
+            final String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | "
+                    + "CounterNum$ 1 | Evolve$ True";
+            
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(trigger);
