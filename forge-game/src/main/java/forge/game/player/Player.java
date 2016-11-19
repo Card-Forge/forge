@@ -27,7 +27,6 @@ import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
-import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -44,7 +43,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
-import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -1348,11 +1346,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 numDrawnThisDrawStep++;
             }
             view.updateNumDrawnThisTurn(this);
-
-            // Miracle draws
-            if (numDrawnThisTurn == 1 && game.getAge() != GameStage.Mulligan) {
-                drawMiracle(c);
-            }
 
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -2773,26 +2766,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
-    public final void drawMiracle(final Card card) {
-        // Whenever a card with miracle is the first card drawn in a turn,
-        // you may cast it for it's miracle cost
-        if (card.getMiracleCost() == null) {
-            return;
-        }
-
-        final SpellAbility playForMiracleCost = card.getFirstSpellAbility().copy();
-        playForMiracleCost.setPayCosts(card.getMiracleCost());
-        playForMiracleCost.setStackDescription(card.getName() + " - Cast via Miracle");
-
-        // TODO Convert this to a Trigger
-        final Ability miracleTrigger = new MiracleTrigger(card, ManaCost.ZERO, playForMiracleCost);
-        miracleTrigger.setStackDescription(card.getName() + " - Miracle.");
-        miracleTrigger.setActivatingPlayer(card.getOwner());
-        miracleTrigger.setTrigger(true);
-
-        game.getStack().add(miracleTrigger);
-    }
-
     public boolean isSkippingDraw() {
         if (hasKeyword("Skip your next draw step.")) {
             removeKeyword("Skip your next draw step.");
@@ -2810,22 +2783,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void removeInboundToken(Card c) {
         inboundTokens.remove(c);
-    }
-
-    private final class MiracleTrigger extends Ability {
-        private final SpellAbility miracle;
-
-        private MiracleTrigger(Card sourceCard0, ManaCost manaCost0, SpellAbility miracle0) {
-            super(sourceCard0, manaCost0);
-            miracle = miracle0;
-        }
-
-        @Override
-        public void resolve() {
-            miracle.setActivatingPlayer(getHostCard().getOwner());
-            // pay miracle cost here.
-            getHostCard().getOwner().getController().playMiracle(miracle, getHostCard());
-        }
     }
 
     public void onMulliganned() {
@@ -2936,27 +2893,30 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public static DetachedCardEffect createCommanderEffect(Game game, Card commander) {
-        DetachedCardEffect eff = new DetachedCardEffect(commander, "Commander Effect");
+        final String name = Lang.getPossesive(commander.getName()) + " Commander Effect";
+        DetachedCardEffect eff = new DetachedCardEffect(commander, name);
 
         eff.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard");
         eff.setSVar("DBCommanderIncCast","DB$ StoreSVar | References$ CommanderCostRaise | SVar$ CommanderCostRaise | Type$ CountSVar | Expression$ CommanderCostRaise/Plus.2");
         eff.setSVar("CommanderCostRaise","Number$0");
 
-        Trigger t = TriggerHandler.parseTrigger("Mode$ SpellCast | Static$ True | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | References$ CommanderCostRaise | Execute$ DBCommanderIncCast", eff, true);
+        Trigger t = TriggerHandler.parseTrigger("Mode$ SpellCast | Static$ True | ValidCard$ Card.YouOwn+EffectSource+wasCastFromCommand | References$ CommanderCostRaise | Execute$ DBCommanderIncCast", eff, true);
         eff.addTrigger(t);
-        String moved = "Event$ Moved | ValidCard$ Card.IsCommander+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement "; 
+
+        String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement "; 
         if (game.getRules().hasAppliedVariant(GameType.TinyLeaders)) {
             moved += " | Destination$ Graveyard,Exile | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.";
         } else {
             moved += " | Destination$ Graveyard,Exile,Hand,Library | Description$ If a commander would be exiled or put into hand, graveyard, or library from anywhere, that player may put it into the command zone instead.";
         }
         eff.addReplacementEffect(ReplacementHandler.parseReplacement(moved, eff, true));
-        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.YouOwn+IsCommander | AffectedZone$ Command";
+
+        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command";
         if (game.getRules().hasAppliedVariant(GameType.Planeswalker)) { //support paying for Planeswalker with any color mana
             mayBePlayedAbility += " | MayPlayIgnoreColor$ True";
         }
         eff.addStaticAbility(mayBePlayedAbility);
-        eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | References$ CommanderCostRaise | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | AffectedZone$ Command,Stack");
+        eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | References$ CommanderCostRaise | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+EffectSource+wasCastFromCommand | AffectedZone$ Command,Stack");
         return eff;
     }
 

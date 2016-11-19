@@ -568,7 +568,7 @@ public class CardView extends GameEntityView {
         }
         if (isCommander()) {
             sb.append(getOwner()).append("'s Commander\r\n");
-            sb.append(getOwner().getCommanderInfo()).append("\r\n");
+            sb.append(getOwner().getCommanderInfo(this)).append("\r\n");
         }
 
         if (isSplitCard()) {

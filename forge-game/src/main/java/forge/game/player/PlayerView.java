@@ -96,9 +96,8 @@ public class PlayerView extends GameEntityView {
         return opponents != null && opponents.contains(other);
     }
 
-    public final String getCommanderInfo() {
-        final List<CardView> commanders = getCommanders();
-        if (commanders == null || commanders.isEmpty()) {
+    public final String getCommanderInfo(CardView v) {
+        if (v == null) {
             return StringUtils.EMPTY;
         }
 
@@ -108,12 +107,10 @@ public class PlayerView extends GameEntityView {
             opponents = Collections.emptyList();
         }
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
-            for (final CardView v : this.getCommanders()) {
-                final int damage = p.getCommanderDamage(v);
-                if (damage > 0) {
-                    final String text = String.format("Commander damage to %s from %s:", p, v.getName());
-                    sb.append(String.format(text + " %d\r\n", damage));
-                }
+            final int damage = p.getCommanderDamage(v);
+            if (damage > 0) {
+                final String text = String.format("Commander damage to %s from %s:", p, v.getName());
+                sb.append(String.format(text + " %d\r\n", damage));
             }
         }
         return sb.toString();

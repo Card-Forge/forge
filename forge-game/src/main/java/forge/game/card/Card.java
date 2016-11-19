@@ -4024,6 +4024,15 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!getExiledWith().equals(host)) {
                 return false;
             }
+        } else if (property.equals("EffectSource")) {
+            if (!source.isEmblem() && !source.getType().hasSubtype("Effect")) {
+                return false;
+            }
+
+            final Card c = source.getEffectSource();
+            if (!equals(c)) {
+                return false;
+            }
         } else if (property.equals("CanBeSacrificedBy")) {
             if (!canBeSacrificedBy(spellAbility)) {
                 return false;

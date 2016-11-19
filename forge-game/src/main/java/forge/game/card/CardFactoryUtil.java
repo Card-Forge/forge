@@ -901,10 +901,13 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("CommanderCastFromCommandZone")) {
-                // TODO fix it for multiple commanders
             // Read SVar CommanderCostRaise from Commander Effect
-            Card commeff = CardLists.filter(cc.getCardsIn(ZoneType.Command),
-                    CardPredicates.nameEquals("Commander Effect")).get(0);
+            Card commeff = CardLists.filter(cc.getCardsIn(ZoneType.Command), new Predicate<Card>() {
+                @Override
+                public boolean apply(Card input) {
+                    return c.equals(input.getEffectSource()) && input.getName().endsWith("Commander Effect");
+                }
+            }).get(0);
             return doXMath(xCount(commeff, commeff.getSVar("CommanderCostRaise")), "DivideEvenlyDown.2", c);
         }
         
