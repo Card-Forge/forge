@@ -1,5 +1,8 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
@@ -12,14 +15,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.List;
-import java.util.Map;
-
 public class CountersProliferateAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        boolean chance = true;
+    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
 
         final List<Card> cperms = Lists.newArrayList();
         final List<Player> allies = ai.getAllies();
@@ -53,7 +52,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
         boolean opponentPoison = false;
 
         for (final Player o : ai.getOpponents()) {
-            opponentPoison |= ai.getOpponent().getPoisonCounters() >= 1;
+            opponentPoison |= o.getPoisonCounters() >= 1;
             hperms.addAll(CardLists.filter(o.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
@@ -76,7 +75,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
         if (cperms.isEmpty() && hperms.isEmpty() && !opponentPoison && !allyExpOrEnergy) {
             return false;
         }
-        return chance;
+        return true;
     }
 
     @Override
