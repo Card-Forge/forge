@@ -88,6 +88,7 @@ public enum SpellApiToAi {
             .put(ApiType.Mill, MillAi.class)
             .put(ApiType.MoveCounter, CountersMoveAi.class)
             .put(ApiType.MultiplePiles, CannotPlayAi.class)
+            .put(ApiType.MultiplyCounter, CountersMultiplyAi.class)
             .put(ApiType.MustAttack, MustAttackAi.class)
             .put(ApiType.MustBlock, MustBlockAi.class)
             .put(ApiType.NameCard, ChooseCardNameAi.class)

@@ -1,11 +1,12 @@
 package forge.ai.ability;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
@@ -13,8 +14,6 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 
 public class RepeatEachAi extends SpellAbilityAi {
@@ -38,21 +37,6 @@ public class RepeatEachAi extends SpellAbilityAi {
             if (compTokenCreats.size() <= humTokenCreats.size()) {
                 return false;
             }
-        } else if ("DoubleCounters".equals(logic)) {
-            // TODO Improve this logic, double Planeswalker counters first, then +1/+1 on Useful creatures
-            // Then Charge Counters, then -1/-1 on Opposing Creatures
-            CardCollection perms = new CardCollection(aiPlayer.getCardsIn(ZoneType.Battlefield));
-            perms = CardLists.filter(CardLists.getTargetableCards(perms, sa), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.hasCounters();
-                }
-            });
-            if (perms.isEmpty()) {
-                return false;
-            }
-            CardLists.shuffle(perms);
-            sa.setTargetCard(perms.get(0));
         } else if ("RemoveAllCounters".equals(logic)) {
             // Break Dark Depths
             CardCollectionView depthsList = aiPlayer.getCardsIn(ZoneType.Battlefield, "Dark Depths");

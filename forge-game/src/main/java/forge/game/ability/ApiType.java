@@ -86,6 +86,7 @@ public enum ApiType {
     Mill (MillEffect.class),
     MoveCounter (CountersMoveEffect.class),
     MultiplePiles (MultiplePilesEffect.class),
+    MultiplyCounter (CountersMultiplyEffect.class),
     MustAttack (MustAttackEffect.class),
     MustBlock (MustBlockEffect.class),
     NameCard (ChooseCardNameEffect.class),

@@ -43,7 +43,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
@@ -1381,9 +1380,8 @@ public class ComputerUtilCard {
     public static boolean canPumpAgainstRemoval(Player ai, SpellAbility sa) {
         final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
         final CardCollection threatenedTargets = new CardCollection();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             for (final Card card : cards) {
                 if (objects.contains(card)) {
@@ -1393,9 +1391,8 @@ public class ComputerUtilCard {
             // For pumps without targeting restrictions, just return immediately until this is fleshed out.
             return false;
         }
+        CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
 
-        CardCollection targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
-        targetables = CardLists.getTargetableCards(targetables, sa);
         targetables = ComputerUtil.getSafeTargets(ai, sa, targetables);
         for (final Card c : targetables) {
             if (objects.contains(c)) {
@@ -1405,13 +1402,14 @@ public class ComputerUtilCard {
         if (!threatenedTargets.isEmpty()) {
             ComputerUtilCard.sortByEvaluateCreature(threatenedTargets);
             for (Card c : threatenedTargets) {
-                sa.getTargets().add(c);
-                if (sa.getTargets().getNumTargeted() >= tgt.getMaxTargets(sa.getHostCard(), sa)) {
-                    break;
+                if (sa.canAddMoreTarget()) {
+                    sa.getTargets().add(c);
+                    if (!sa.canAddMoreTarget()) {
+                        break;
+                    }
                 }
             }
-            if (sa.getTargets().getNumTargeted() > tgt.getMaxTargets(sa.getHostCard(), sa)
-                    || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+            if (!sa.isTargetNumberValid()) {
                 sa.resetTargets();
                 return false;
             }
