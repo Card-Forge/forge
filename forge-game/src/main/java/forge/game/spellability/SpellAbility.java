@@ -1068,6 +1068,29 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     /**
+     * returns true if another target can be added
+     * @return 
+     */
+    public boolean canAddMoreTarget() {
+        if (!this.usesTargeting()) {
+            return false;
+        }
+        
+        return targetChosen.getNumTargeted() < targetRestrictions.getMaxTargets(hostCard, this);
+    }
+    
+    public boolean isTargetNumberValid() {
+        if (!this.usesTargeting()) {
+            return targetChosen.isEmpty();
+        }
+        
+        int numTargets = targetChosen.getNumTargeted();
+        if (targetRestrictions.getMinTargets(hostCard, this) > numTargets || (targetRestrictions.getMaxTargets(hostCard, this) < numTargets)) {
+            return false;
+        }
+        return true;
+    }
+    /**
      * <p>
      * getAllTargetChoices.
      * </p>
