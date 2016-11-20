@@ -176,6 +176,7 @@ public class CardStorageReader {
             }
         }
 
+        transformedName = transformedName.charAt(0) + "/" + transformedName;
         ZipEntry entry = zipEntriesMap.get(transformedName + CardStorageReader.CARD_FILE_DOT_EXTENSION);
         if (entry == null) {
             // Double faced cards file naming convention currently has both names - so try to prefix match.
