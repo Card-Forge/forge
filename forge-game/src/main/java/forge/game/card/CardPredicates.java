@@ -17,6 +17,8 @@
  */
 package forge.game.card;
 
+import java.util.Comparator;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -257,6 +259,16 @@ public final class CardPredicates {
             @Override
             public boolean apply(final Card c) {
                 return c.getNetPower() > minPower;
+            }
+        };
+    }
+
+    public static final Comparator<Card> compareByCounterType(final CounterType type) {
+        return new Comparator<Card>() {
+            @Override
+            public int compare(Card arg0, Card arg1) {
+                return Integer.compare(arg0.getCounters(type),
+                    arg1.getCounters(type));
             }
         };
     }
