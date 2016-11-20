@@ -82,9 +82,9 @@ Type=Other
 73 R Phyrexian Rebirth
 74 R Reveillark
 75 R Reverse the Sands
-76 R Sanctum Gargoyle
-77 R Sphere of Safety
-78 R Swords to Plowshares
+76 C Sanctum Gargoyle
+77 U Sphere of Safety
+78 U Swords to Plowshares
 79 R Wave of Reckoning
 80 R Windborn Muse
 81 R Academy Elite
@@ -154,7 +154,7 @@ Type=Other
 145 R Collective Voyage
 146 C Cultivate
 147 R Den Protector
-148 U Far Wanderings
+148 C Far Wanderings
 149 C Farseek
 150 R Forgotten Ancient
 151 U Gamekeeper
