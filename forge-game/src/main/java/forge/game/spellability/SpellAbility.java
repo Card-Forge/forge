@@ -1076,16 +1076,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
         
-        return targetChosen.getNumTargeted() < targetRestrictions.getMaxTargets(hostCard, this);
+        return getTargets().getNumTargeted() < getTargetRestrictions().getMaxTargets(hostCard, this);
     }
     
     public boolean isTargetNumberValid() {
         if (!this.usesTargeting()) {
-            return targetChosen.isEmpty();
+            return getTargets().isEmpty();
         }
         
-        int numTargets = targetChosen.getNumTargeted();
-        if (targetRestrictions.getMinTargets(hostCard, this) > numTargets || (targetRestrictions.getMaxTargets(hostCard, this) < numTargets)) {
+        int numTargets = getTargets().getNumTargeted();
+        if (getTargetRestrictions().getMinTargets(hostCard, this) > numTargets || (getTargetRestrictions().getMaxTargets(hostCard, this) < numTargets)) {
             return false;
         }
         return true;
