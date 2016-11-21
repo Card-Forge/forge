@@ -772,7 +772,7 @@ public class CardFactory {
         final Card c = tokenInfo.toCard(controller.getGame());
         final int multiplier = controller.getTokenDoublersMagnitude();
         for (int i = 0; i < multiplier; i++) {
-            Card temp = copyStats(c, controller);
+            Card temp = i == 0 ? c : copyStats(c, controller);
 
             for (final String kw : tokenInfo.intrinsicKeywords) {
                 temp.addIntrinsicKeyword(kw);
