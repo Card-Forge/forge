@@ -35,7 +35,7 @@ import forge.util.collect.FCollectionView;
  * @author Forge
  * @version $Id$
  */
-public abstract class AbilityActivated extends SpellAbility implements java.io.Serializable {
+public abstract class AbilityActivated extends SpellAbility implements java.io.Serializable, Cloneable {
     /** Constant <code>serialVersionUID=1L</code>. */
     private static final long serialVersionUID = 1L;
 
@@ -139,5 +139,15 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
     public boolean promptIfOnlyPossibleAbility() {
     	return false; //TODO: allow showing prompt based on whether ability has cost that requires user input and possible "misclick protection" setting
     	//return !this.isManaAbility(); //prompt user for non-mana activated abilities even is only possible ability
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Object clone() {
+        try {
+            return super.clone();
+        } catch (final Exception ex) {
+            throw new RuntimeException("AbilityActivated : clone() error, " + ex);
+        }
     }
 }
