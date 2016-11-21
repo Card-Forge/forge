@@ -105,12 +105,12 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public HashMap<String, Object> getTriggeringObjects() {
+    public Map<String, Object> getTriggeringObjects() {
         return sa.getTriggeringObjects();
     }
 
     @Override
-    public void setTriggeringObjects(final HashMap<String, Object> triggeredObjects) {
+    public void setTriggeringObjects(final Map<String, Object> triggeredObjects) {
         sa.setTriggeringObjects(triggeredObjects);
     }
 

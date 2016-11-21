@@ -552,6 +552,9 @@ public class TriggerHandler {
             else {
                 sa = AbilityFactory.getAbility(host, triggerParams.get("Execute"));
             }
+        } else {
+            // need to copy the SA because of TriggeringObjects
+            sa = sa.copy();
         }
 
         sa.setHostCard(host);

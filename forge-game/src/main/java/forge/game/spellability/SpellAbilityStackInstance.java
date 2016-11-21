@@ -30,6 +30,9 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -86,14 +89,14 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     // is Kicked, is Buyback
 
     // Triggers
-    private final HashMap<String, Object> triggeringObjects;
+    private final Map<String, Object> triggeringObjects;
     private final List<Object> triggerRemembered;
 
-    private final HashMap<String, String> storedSVars = new HashMap<>();
+    private final Map<String, String> storedSVars = Maps.newHashMap();
 
     private final List<ZoneType> zonesToOpen;
     private final Map<Player, Object> playersWithValidTargets;
-    private final Set<Trigger> oncePerEffectTriggers = new HashSet<>();
+    private final Set<Trigger> oncePerEffectTriggers = Sets.newHashSet();
 
     private final StackItemView view;
 

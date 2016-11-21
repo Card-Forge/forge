@@ -18,6 +18,7 @@
 package forge.game.spellability;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.mana.ManaCost;
@@ -92,7 +93,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean optionalTrigger = false;
     private boolean replacementAbility = false;
     private int sourceTrigger = -1;
-    private List<Object> triggerRemembered = new ArrayList<Object>();
+    private List<Object> triggerRemembered = Lists.newArrayList();
 
     private boolean flashBackAbility = false;
     private boolean cycling = false;
@@ -117,14 +118,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     protected ApiType api = null;
 
-    private final List<Mana> payingMana = new ArrayList<Mana>();
-    private final List<SpellAbility> paidAbilities = new ArrayList<SpellAbility>();
+    private final List<Mana> payingMana = Lists.newArrayList();
+    private final List<SpellAbility> paidAbilities = Lists.newArrayList();
 
-    private HashMap<String, CardCollection> paidLists = new HashMap<String, CardCollection>();
+    private HashMap<String, CardCollection> paidLists = Maps.newHashMap();
 
-    private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
+    private Map<String, Object> triggeringObjects = Maps.newHashMap();
 
-    private HashMap<String, Object> replacingObjects = new HashMap<String, Object>();
+    private HashMap<String, Object> replacingObjects = Maps.newHashMap();
 
     private List<AbilitySub> chosenList = null;
     private CardCollection tappedForConvoke = new CardCollection();
@@ -476,11 +477,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return saRoot.optionalCosts.contains(cost);
     }
 
-    public HashMap<String, Object> getTriggeringObjects() {
+    public Map<String, Object> getTriggeringObjects() {
         return triggeringObjects;
     }
-    public void setTriggeringObjects(final HashMap<String, Object> triggeredObjects) {
-        triggeringObjects = triggeredObjects;
+    public void setTriggeringObjects(final Map<String, Object> triggeredObjects) {
+        triggeringObjects = Maps.newHashMap(triggeredObjects);
     }
     public Object getTriggeringObject(final String type) {
         return triggeringObjects.get(type);
@@ -492,7 +493,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return triggeringObjects.containsKey(type);
     }
     public void resetTriggeringObjects() {
-        triggeringObjects = new HashMap<String, Object>();
+        triggeringObjects = Maps.newHashMap();
     }
 
     public List<Object> getTriggerRemembered() {
@@ -502,7 +503,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         triggerRemembered = list;
     }
     public void resetTriggerRemembered() {
-        triggerRemembered = new ArrayList<Object>();
+        triggerRemembered = Lists.newArrayList();
     }
 
     public HashMap<String, Object> getReplacingObjects() {
@@ -675,6 +676,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // need to clone the maps too so they can be changed
             clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
             clone.mapParams = Maps.newHashMap(this.mapParams);
+
+            clone.triggeringObjects = Maps.newHashMap(this.triggeringObjects);
 
             // run special copy Ability to make a deep copy
             CardFactory.copySpellAbility(this, clone);
@@ -1099,7 +1102,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * @since 1.0.15
      */
     public final List<TargetChoices> getAllTargetChoices() {
-        final List<TargetChoices> res = new ArrayList<TargetChoices>();
+        final List<TargetChoices> res = Lists.newArrayList();
 
         SpellAbility sa = getRootAbility();
         if (sa.getTargetRestrictions() != null) {
@@ -1224,7 +1227,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public final List<GameObject> getUniqueTargets() {
-        final List<GameObject> targets = new ArrayList<GameObject>();
+        final List<GameObject> targets = Lists.newArrayList();
         SpellAbility child = getParent();
         while (child != null) {
             if (child.getTargetRestrictions() != null) {

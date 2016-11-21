@@ -35,6 +35,9 @@ import forge.game.zone.ZoneType;
 
 import java.util.*;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 /**
  * <p>
  * Abstract Trigger class. Constructed by reflection only
@@ -77,9 +80,9 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     private TriggerType mode;
 
-    private HashMap<String, Object> storedTriggeredObjects = null;
+    private Map<String, Object> storedTriggeredObjects = null;
     
-    private List<Object> triggerRemembered = new ArrayList<Object>();
+    private List<Object> triggerRemembered = Lists.newArrayList();
 
     // number of times this trigger was activated this this turn
     // used to handle once-per-turn triggers like Crawling Sensation
@@ -94,8 +97,8 @@ public abstract class Trigger extends TriggerReplacementBase {
      *            a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
-    public final void setStoredTriggeredObjects(final HashMap<String, Object> storedTriggeredObjects) {
-        this.storedTriggeredObjects = storedTriggeredObjects;
+    public final void setStoredTriggeredObjects(final Map<String, Object> storedTriggeredObjects) {
+        this.storedTriggeredObjects = Maps.newHashMap(storedTriggeredObjects);
     }
 
     /**
@@ -106,7 +109,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
-    public final HashMap<String, Object> getStoredTriggeredObjects() {
+    public final Map<String, Object> getStoredTriggeredObjects() {
         return this.storedTriggeredObjects;
     }
 

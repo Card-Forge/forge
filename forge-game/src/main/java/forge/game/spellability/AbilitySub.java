@@ -38,7 +38,7 @@ import java.util.Map;
  * @author Forge
  * @version $Id$
  */
-public final class AbilitySub extends SpellAbility implements java.io.Serializable {
+public final class AbilitySub extends SpellAbility implements java.io.Serializable, Cloneable {
     /** Constant <code>serialVersionUID=4650634415821733134L</code>. */
     private static final long serialVersionUID = 4650634415821733134L;
 
@@ -117,5 +117,15 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     @Override
     public void resolve() {
         effect.resolve(this);
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public final Object clone() {
+        try {
+            return super.clone();
+        } catch (final Exception ex) {
+            throw new RuntimeException("AbilitySub : clone() error, " + ex);
+        }
     }
 }
