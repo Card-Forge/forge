@@ -63,6 +63,8 @@ public class CostExile extends CostPartWithList {
         final Integer i = this.convertAmount();
         sb.append("Exile ");
 
+        String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
+
         if (this.payCostFromSource()) {
             sb.append(this.getType());
             if (!this.from.equals(ZoneType.Battlefield)) {
@@ -75,8 +77,6 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.from.equals(ZoneType.Battlefield)) {
-            final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
             if (!this.payCostFromSource()) {
                 sb.append(" you control");
@@ -84,18 +84,10 @@ public class CostExile extends CostPartWithList {
             return sb.toString();
         }
 
-        if (i != null) {
-            sb.append(i);
-        } else {
-            sb.append(this.getAmount());
+        if (!desc.equals("Card") && !desc.endsWith("card")) {
+            desc += " card";
         }
-        if (!this.getType().equals("Card")) {
-            sb.append(" " + this.getType());
-        }
-        sb.append(" card");
-        if ((i == null) || (i > 1)) {
-            sb.append("s");
-        }
+        sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
 
         if (this.sameZone) {
             sb.append(" from the same ");
