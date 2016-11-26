@@ -245,11 +245,24 @@ public final class CardPredicates {
         };
     }
 
-    public static final Predicate<Card> hasCounter(final CounterType type) {
+    public static final Predicate<Card> hasCounters() {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getCounters(type) > 0;
+                return c.hasCounters();
+            }
+        };
+    }
+
+    public static final Predicate<Card> hasCounter(final CounterType type) {
+        return hasCounter(type, 1);
+    }
+
+    public static final Predicate<Card> hasCounter(final CounterType type, final int n) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getCounters(type) >= n;
             }
         };
     }
