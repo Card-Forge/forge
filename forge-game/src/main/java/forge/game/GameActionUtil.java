@@ -394,11 +394,12 @@ public final class GameActionUtil {
                 newSA.setDescription(newSA.getDescription() + " (Splicing " + c + " onto it)");
                 newSA.addSplicedCards(c);
 
+                //add the spliced ability to the end of the chain
+                newSA.appendSubAbility(subAbility);
+
                 newSA.setActivatingPlayer(sa.getActivatingPlayer());
 
                 newSA.setHostCard(source);
-                //add the spliced ability to the end of the chain
-                newSA.appendSubAbility(subAbility);
 
                 newSAs.add(newSA);
                 allSaCombinations.add(++i, newSA);
