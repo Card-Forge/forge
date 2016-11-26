@@ -1,6 +1,11 @@
 package forge.ai;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.card.CardType;
 import forge.game.Game;
@@ -18,10 +23,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class AiCostDecision extends CostDecisionMakerBase {
     private final SpellAbility ability;
@@ -53,7 +54,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
-        String choice = player.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.Constant.CREATURE_TYPES), new ArrayList<String>());
+        String choice = player.getController().chooseSomeType("Creature", ability, CardType.getAllCreatureTypes(),
+                Lists.<String>newArrayList());
         return PaymentDecision.type(choice);
     }
 
@@ -181,7 +183,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             }
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
-        List<SpellAbility> chosen = new ArrayList<SpellAbility>();
+        List<SpellAbility> chosen = Lists.newArrayList();
         for (SpellAbilityStackInstance si :source.getGame().getStack()) {
             SpellAbility sp = si.getSpellAbility(true).getRootAbility();
             if (si.getSourceCard().isValid(cost.getType().split(";"), source.getController(), source, sp)) {
@@ -259,7 +261,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostGainLife cost) {
-        final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
+        final List<Player> oppsThatCanGainLife = Lists.newArrayList();
         
         for (final Player opp : cost.getPotentialTargets(player, source)) {
             if (opp.canGainLife()) {
@@ -526,11 +528,76 @@ public class AiCostDecision extends CostDecisionMakerBase {
         final String type = cost.getType();
 
         CardCollectionView typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source, ability);
-        CardCollectionView hperms = CardLists.filter(typeList, new Predicate<Card>() {
+
+        // no target
+        if (typeList.isEmpty()) {
+            return null;
+        }
+
+        // the first things are benefit from removing counters
+
+        // try to remove +1/+1 counter from undying creature
+        List<Card> prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterType.P1P1, c),
+                CardPredicates.hasKeyword("Undying"));
+
+        if (!prefs.isEmpty()) {
+            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterType.P1P1));
+            PaymentDecision result = PaymentDecision.card(prefs);
+            result.ct = CounterType.P1P1;
+            return result;
+        }
+
+        // try to remove -1/-1 counter from persist creature
+        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterType.M1M1, c),
+                CardPredicates.hasKeyword("Persist"));
+
+        if (!prefs.isEmpty()) {
+            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterType.M1M1));
+            PaymentDecision result = PaymentDecision.card(prefs);
+            result.ct = CounterType.M1M1;
+            return result;
+        }
+
+        // try to remove Time counter from Chronozoa, it will generate more
+        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterType.TIME, c),
+                CardPredicates.nameEquals("Chronozoa"));
+
+        if (!prefs.isEmpty()) {
+            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterType.TIME));
+            PaymentDecision result = PaymentDecision.card(prefs);
+            result.ct = CounterType.TIME;
+            return result;
+        }
+
+        // try to remove Quest counter on something with enough counters for the
+        // effect to continue
+        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterType.QUEST, c));
+
+        if (!prefs.isEmpty()) {
+            prefs = CardLists.filter(prefs, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card crd) {
+                    // a Card without MaxQuestEffect doesn't need any Quest
+                    // counters
+                    int e = 0;
+                    if (crd.hasSVar("MaxQuestEffect")) {
+                        e = Integer.parseInt(crd.getSVar("MaxQuestEffect"));
+                    }
+                    return crd.getCounters(CounterType.QUEST) >= e + c;
+                }
+            });
+            Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterType.TIME)));
+            PaymentDecision result = PaymentDecision.card(prefs);
+            result.ct = CounterType.QUEST;
+            return result;
+        }
+
+        // filter for only cards with enough counters
+        typeList = CardLists.filter(typeList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
-                for (final CounterType c1 : CounterType.values()) {
-                    if (crd.getCounters(c1) >= c  && ComputerUtil.isNegativeCounter(c1, crd)) {
+                for (Integer i : crd.getCounters().values()) {
+                    if (i >= c) {
                         return true;
                     }
                 }
@@ -538,20 +605,78 @@ public class AiCostDecision extends CostDecisionMakerBase {
             }
         });
 
-        if(hperms.isEmpty())
+        // nothing with enough counters of any type
+        if (typeList.isEmpty()) {
             return null;
-        
-        PaymentDecision result = PaymentDecision.card(hperms);
-        Card valid = hperms.get(0);
-        for (CounterType c1 : valid.getCounters().keySet()) {
-            if (valid.getCounters(c1) >= c && ComputerUtil.isNegativeCounter(c1, valid)) {
-                result.ct = c1;
-                break;
-            }
         }
-        // Only find cards with enough negative counters
-        // TODO: add ai for Chisei, Heart of Oceans
-        return result;
+
+        // filter for negative counters
+        List<Card> negatives = CardLists.filter(typeList, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card crd) {
+                for (Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
+                    if (e.getValue() >= c && ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        if (!negatives.isEmpty()) {
+            final Card card = ComputerUtilCard.getBestAI(negatives);
+            PaymentDecision result = PaymentDecision.card(card);
+
+            for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {
+                if (e.getValue() >= c && ComputerUtil.isNegativeCounter(e.getKey(), card)) {
+                    result.ct = e.getKey();
+                    break;
+                }
+            }
+            return result;
+        }
+
+        // filter for useless counters
+        // they have no effect on the card, if they are there or removed
+        List<Card> useless = CardLists.filter(typeList, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card crd) {
+                for (Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
+                    if (e.getValue() >= c && ComputerUtil.isUselessCounter(e.getKey())) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        if (!useless.isEmpty()) {
+            final Card card = useless.get(0);
+            PaymentDecision result = PaymentDecision.card(card);
+
+            for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {
+                if (e.getValue() >= c && ComputerUtil.isUselessCounter(e.getKey())) {
+                    result.ct = e.getKey();
+                    break;
+                }
+            }
+            return result;
+        }
+        
+        // try a way to pay unless cost
+        if ("Chisei, Heart of Oceans".equals(ability.getHostCard().getName())) {
+            final Card card = ComputerUtilCard.getWorstAI(typeList);
+            PaymentDecision result = PaymentDecision.card(card);
+            for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {
+                if (e.getValue() >= c) {
+                    result.ct = e.getKey();
+                    break;
+                }
+            }
+            return result;
+        }
+
+        return null;
     }
 
     @Override
