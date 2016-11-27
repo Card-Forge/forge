@@ -384,6 +384,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         api = apiType;
     }
 
+    public SpellAbility findSubAbilityByType(ApiType apiType) {
+        SpellAbility sub = this.getSubAbility();
+        while (sub != null) {
+            if (apiType.equals(sub.getApi())) {
+                return sub;
+            }
+            sub = sub.getSubAbility();
+        }
+        return null;
+    }
+
     public final boolean isCurse() {
         return hasParam("IsCurse");
     }
