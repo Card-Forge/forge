@@ -153,22 +153,6 @@ public class AttachEffect extends SpellAbilityEffect {
     }
 
     /**
-     * Gets the attach spell ability.
-     * 
-     * @param source
-     *            the source
-     * @return the attach spell ability
-     */
-    public static SpellAbility getAttachSpellAbility(final Card source) {
-        for (final SpellAbility sa : source.getSpells()) {
-            if (sa.getApi() == ApiType.Attach) {
-                return sa;
-            }
-        }
-        return null;
-    }
-
-    /**
      * Attach aura on indirect enter battlefield.
      * 
      * @param source
@@ -178,7 +162,7 @@ public class AttachEffect extends SpellAbilityEffect {
     public static boolean attachAuraOnIndirectEnterBattlefield(final Card source) {
         // When an Aura ETB without being cast you can choose a valid card to
         // attach it to
-        final SpellAbility aura = getAttachSpellAbility(source);
+        final SpellAbility aura = source.getFirstAttachSpell();
 
         if (aura == null) {
             return false;

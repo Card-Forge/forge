@@ -528,7 +528,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // Auras without Candidates stay in their current
                     // location
                     if (tgtC.isAura()) {
-                        final SpellAbility saAura = AttachEffect.getAttachSpellAbility(tgtC);
+                        final SpellAbility saAura = tgtC.getFirstAttachSpell();
                         saAura.setActivatingPlayer(sa.getActivatingPlayer());
                         if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
                             continue;

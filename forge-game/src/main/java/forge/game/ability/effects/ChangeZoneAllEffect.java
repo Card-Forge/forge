@@ -138,7 +138,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (destination == ZoneType.Battlefield) {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
-                    final SpellAbility saAura = AttachEffect.getAttachSpellAbility(c);
+                    final SpellAbility saAura = c.getFirstAttachSpell();
                     if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
                         continue;
                     }

@@ -2005,7 +2005,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final SpellAbility getFirstAttachSpell() {
         for (final SpellAbility sa : getSpells()) {
-            if (sa.isSpell() && sa.getApi() == ApiType.Attach) {
+            if (sa.getApi() == ApiType.Attach) {
                 return sa;
             }
         }
