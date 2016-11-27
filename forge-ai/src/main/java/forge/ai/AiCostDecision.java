@@ -586,7 +586,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     return crd.getCounters(CounterType.QUEST) >= e + c;
                 }
             });
-            Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterType.TIME)));
+            Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterType.QUEST)));
             PaymentDecision result = PaymentDecision.card(prefs);
             result.ct = CounterType.QUEST;
             return result;
