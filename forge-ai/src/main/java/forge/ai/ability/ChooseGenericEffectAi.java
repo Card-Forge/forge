@@ -1,5 +1,11 @@
 package forge.ai.ability;
 
+import java.util.List;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -16,24 +22,25 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
 
-import java.util.List;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
-/**
- * TODO: Write javadoc for this type.
- *
- */
 public class ChooseGenericEffectAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        if ("Khans".equals(sa.getParam("AILogic")) || "Dragons".equals(sa.getParam("AILogic"))) {
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        if ("Khans".equals(aiLogic) || "Dragons".equals(aiLogic)) {
+            return true;
+        } else if (aiLogic.startsWith("Fabricate")) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        if (sa.hasParam("AILogic") && !checkAiLogic(ai, sa, sa.getParam("AILogic"))) {
+            return false;
+        }
+        return true;
     }
 
     /* (non-Javadoc)
