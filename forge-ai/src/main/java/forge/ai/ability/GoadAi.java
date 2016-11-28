@@ -13,7 +13,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class GoadAi extends SpellAbilityAi {
@@ -21,15 +20,13 @@ public class GoadAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
         // use this part only for targeting
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             // get all possible targets
-            List<Card> list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), activator, source, sa);
+            List<Card> list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
             if (list.isEmpty())
                 return false;
