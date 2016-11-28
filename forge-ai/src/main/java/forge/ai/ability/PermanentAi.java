@@ -153,4 +153,25 @@ public class PermanentAi extends SpellAbilityAi {
         return true;
     }
 
+    @Override
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        final Card source = sa.getHostCard();
+        final Cost cost = sa.getPayCosts();
+
+        if (sa.getConditions() != null && !sa.getConditions().areMet(sa)) {
+            return false;
+        }
+
+        if (sa.hasParam("AILogic") && !checkAiLogic(ai, sa, sa.getParam("AILogic"))) {
+            return false;
+        }
+        if (cost != null && !willPayCosts(ai, sa, cost, source)) {
+            return false;
+        }
+        if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
+            return false;
+        }
+        return checkApiLogic(ai, sa);
+    }
+
 }

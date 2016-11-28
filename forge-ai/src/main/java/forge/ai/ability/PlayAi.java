@@ -99,7 +99,9 @@ public class PlayAi extends SpellAbilityAi {
                     // timing restrictions still apply
                     if (!s.getRestrictions().checkTimingRestrictions(c, s))
                         continue;
-                    if (sa.hasParam("PlayCost")) {
+                    if (sa.hasParam("WithoutManaCost")) {
+                        spell = (Spell) spell.copyWithNoManaCost();
+                    } else if (sa.hasParam("PlayCost")) {
                         Cost abCost;
                         if ("ManaCost".equals(sa.getParam("PlayCost"))) {
                             abCost = new Cost(c.getManaCost(), false);
