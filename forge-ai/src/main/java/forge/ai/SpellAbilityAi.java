@@ -38,6 +38,16 @@ public abstract class SpellAbilityAi {
      */
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
+
+        if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(source, sa)) {
+            return false;
+        }
+
+        return canPlayWithoutRestrict(ai, sa);
+    }
+
+    protected boolean canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
+        final Card source = sa.getHostCard();
         final Cost cost = sa.getPayCosts();
 
         if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(source, sa)) {
@@ -48,13 +58,20 @@ public abstract class SpellAbilityAi {
             return false;
         }
 
-        if (sa.hasParam("AILogic") && !checkAiLogic(ai, sa, sa.getParam("AILogic"))) {
-            return false;
+        if (sa.hasParam("AILogic")) {
+            final String logic = sa.getParam("AILogic");
+            if (!checkAiLogic(ai, sa, logic)) {
+                return false;
+            }
+            if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler(), logic)) {
+                return false;
+            }
+        } else {
+            if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
+                return false;
+            }
         }
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
-            return false;
-        }
-        if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
             return false;
         }
         return checkApiLogic(ai, sa);
@@ -95,6 +112,10 @@ public abstract class SpellAbilityAi {
         return true;
     }
     
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
+            final String logic) {
+        return checkPhaseRestrictions(ai, sa, ph);
+    }
     /**
      * The rest of the logic not covered by the canPlayAI template is defined here
      */
@@ -132,7 +153,7 @@ public abstract class SpellAbilityAi {
      * Handles the AI decision to play a triggered SpellAbility
      */
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        if (canPlayAI(aiPlayer, sa)) {
+        if (canPlayWithoutRestrict(aiPlayer, sa)) {
             return true;
         }
 
@@ -205,6 +226,8 @@ public abstract class SpellAbilityAi {
      * @return a boolean.
      */
     protected static boolean playReusable(final Player ai, final SpellAbility sa) {
+        PhaseHandler phase = ai.getGame().getPhaseHandler();
+
         // TODO probably also consider if winter orb or similar are out
 
         if (sa.getPayCosts() == null || sa instanceof AbilitySub) {
@@ -219,14 +242,14 @@ public abstract class SpellAbilityAi {
             return true;
         }
     
-        if (sa.getRestrictions().isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+        if (sa.getRestrictions().isPwAbility() && phase.is(PhaseType.MAIN2)) {
             return true;
         }
         if (sa.isSpell() && !sa.isBuyBackAbility()) {
             return false;
         }
         
-        PhaseHandler phase = ai.getGame().getPhaseHandler();
+
         return phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai);
     }
 
