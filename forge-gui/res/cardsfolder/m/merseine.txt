@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ KeepTapped | AITgts$ Card.cmcGE2
 K:etbCounter:NET:3
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | CheckSVar$ X | Description$ Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it.
-A:AB$ RemoveCounter | EnchantedControllerActivator$ True | Cost$ Mana<1\EnchantedCost>  |  | CostDesc$ Pay enchanted creature's mana cost: | CounterType$ NET | CounterNum$ 1 | SpellDescription$ Remove a net counter from CARDNAME. Any player may activate this ability, but only if he or she controls the enchanted creature.
+A:AB$ RemoveCounter | EnchantedControllerActivator$ True | Cost$ Mana<1\EnchantedCost> | CostDesc$ Pay enchanted creature's mana cost: | CounterType$ NET | CounterNum$ 1 | SpellDescription$ Remove a net counter from CARDNAME. Any player may activate this ability, but only if he or she controls the enchanted creature.
 SVar:X:Count$CardCounters.NET
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Merseine.jpg
 Oracle:Enchant creature\nMerseine enters the battlefield with three net counters on it.\nEnchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it.\nPay enchanted creature's mana cost: Remove a net counter from Merseine. Any player may activate this ability, but only if he or she controls the enchanted creature.
