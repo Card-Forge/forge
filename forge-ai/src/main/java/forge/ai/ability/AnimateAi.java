@@ -129,7 +129,6 @@ public class AnimateAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
         final Game game = aiPlayer.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
@@ -142,7 +141,7 @@ public class AnimateAi extends SpellAbilityAi {
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa)) {
             return false;   // prevent crewing with equal or better creatures
         }
-        if (null == tgt) {
+        if (!sa.usesTargeting()) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             boolean bFlag = false;
             boolean givesHaste = sa.hasParam("Keywords") && sa.getParam("Keywords").contains("Haste");
@@ -262,6 +261,11 @@ public class AnimateAi extends SpellAbilityAi {
             for (final Card c : list) {
                 // don't use Permanent animate on something that would leave the field
                 if (c.hasSVar("EndOfTurnLeavePlay") && sa.hasParam("Permanent")) {
+                    continue;
+                }
+
+                // non-Curse Animate not on Opponent Stuff if able
+                if (c.getController().isOpponentOf(ai) && !sa.isCurse()) {
                     continue;
                 }
 
