@@ -248,7 +248,7 @@ public class AnimateAi extends SpellAbilityAi {
             // try to look for AI targets if able
             if (sa.hasParam("AITgts")) {
                 CardCollection prefList = CardLists.getValidCards(list, sa.getParam("AITgts").split(","), ai, source, sa);
-                if(!prefList.isEmpty()) {
+                if(!prefList.isEmpty() || sa.hasParam("AITgtsStrict")) {
                     list = prefList;
                 }
             }
