@@ -232,7 +232,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     Map<String,String> params = sa.getMayPlay().getMapParams();
 
                     if (params.containsKey("Affected")) {
-                        if (!cp.isValid(params.get("Affected"), activator, o.getHost(), null)) {
+                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), null)) {
                             return false;
                         }
                     }
