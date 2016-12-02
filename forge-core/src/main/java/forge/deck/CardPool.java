@@ -94,7 +94,7 @@ public class CardPool extends ItemPool<PaperCard> {
             cp = StaticData.instance().getCommonCards().createUnsuportedCard(cardName); 
         }
 
-        boolean artIndexExplicitlySet = artIndex > 0 || (Character.isDigit(cardName.charAt(cardName.length()-1)) && cardName.charAt(cardName.length()-2) == CardDb.NameSetSeparator);
+        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length()-1)) && cardName.charAt(cardName.length()-2) == CardDb.NameSetSeparator;
         if (artIndexExplicitlySet || artCount <= 1) {
             // either a specific art index is specified, or there is only one art, so just add the card
             this.add(cp, amount);
