@@ -49,7 +49,19 @@ public class CardPool extends ItemPool<PaperCard> {
     }
     
     public void add(final String cardName, final int amount) {
-        this.add(cardName, null, -1, amount);
+        if (cardName.contains("|")) {
+            // an encoded cardName with set and possibly art index was passed, split it and pass in full
+            String[] splitCardName = StringUtils.split(cardName, "|");
+            if (splitCardName.length == 2) {
+                // set specified
+                this.add(splitCardName[0], splitCardName[1], amount);
+            } else if (splitCardName.length == 3) {
+                // set and art specified
+                this.add(splitCardName[0], splitCardName[1], Integer.parseInt(splitCardName[2]), amount);
+            }
+        } else {
+            this.add(cardName, null, -1, amount);
+        }
     }    
 
     public void add(final String cardName, final String setCode) {
@@ -82,7 +94,7 @@ public class CardPool extends ItemPool<PaperCard> {
             cp = StaticData.instance().getCommonCards().createUnsuportedCard(cardName); 
         }
 
-        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length()-1)) && cardName.charAt(cardName.length()-2) == CardDb.NameSetSeparator;
+        boolean artIndexExplicitlySet = artIndex > 0 || (Character.isDigit(cardName.charAt(cardName.length()-1)) && cardName.charAt(cardName.length()-2) == CardDb.NameSetSeparator);
         if (artIndexExplicitlySet || artCount <= 1) {
             // either a specific art index is specified, or there is only one art, so just add the card
             this.add(cp, amount);
