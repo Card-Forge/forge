@@ -9,14 +9,21 @@ import com.google.common.collect.Lists;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -31,16 +38,20 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             return true;
         } else if (aiLogic.startsWith("Fabricate")) {
             return true;
+        } else if ("Pump".equals(aiLogic)) {
+            // or is that more generic?
+            for (AbilitySub sb : sa.getAdditionalAbilityList("Choices")) {
+                if (SpellApiToAi.Converter.get(sb.getApi()).canPlayAIWithSubs(ai, sb)) {
+                    return true;
+                }
+            }
         }
         return false;
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        if (sa.hasParam("AILogic") && !checkAiLogic(ai, sa, sa.getParam("AILogic"))) {
-            return false;
-        }
-        return true;
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        return sa.hasParam("AILogic");
     }
 
     /* (non-Javadoc)
@@ -295,6 +306,19 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
             int bestGuessDamage = totalCMC * 3 / revealedCards.size();
             return life <= bestGuessDamage ? spells.get(0) : spells.get(1);
+        } else if ("Pump".equals(logic)) {
+            List<SpellAbility> filtered = Lists.newArrayList();
+            // filter first for the spells which can be done
+            for (SpellAbility sp : spells) {
+                if (SpellApiToAi.Converter.get(sp.getApi()).canPlayAIWithSubs(player, sp)) {
+                    filtered.add(sp);
+                }
+            }
+            
+            // TODO find better way to check
+            if (!filtered.isEmpty()) {
+                return filtered.get(0);
+            }
         }
         return spells.get(0);   // return first choice if no logic found
     }
