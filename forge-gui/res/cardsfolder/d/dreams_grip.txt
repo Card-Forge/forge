@@ -1,9 +1,9 @@
 Name:Dream's Grip
 ManaCost:U
 Types:Instant
-K:Entwine 1
-A:SP$ Charm | Cost$ U | Choices$ DBTap,DBUntap | CharmNum$ 1 | SpellDescription$ Choose one - Tap target permanent; or untap target permanent.
-SVar:DBTap:DB$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to tap | SpellDescription$ Tap target permanent;
+K:Entwine:1
+A:SP$ Charm | Cost$ U | Choices$ DBTap,DBUntap | CharmNum$ 1
+SVar:DBTap:DB$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to tap | SpellDescription$ Tap target permanent.
 SVar:DBUntap:DB$ Untap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to untap | SpellDescription$ Untap target permanent.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreams_grip.jpg

@@ -1,8 +1,8 @@
 Name:Roar of the Kha
 ManaCost:1 W
 Types:Instant
-K:Entwine 1 W
-A:SP$ Charm | Cost$ 1 W | Choices$ DBPump,DBUntap | CharmNum$ 1 | SpellDescription$ Choose one -  Creatures you control get +1/+1 until end of turn; or untap all creatures you control.
+K:Entwine:1 W
+A:SP$ Charm | Cost$ 1 W | Choices$ DBPump,DBUntap | CharmNum$ 1
 SVar:DBPump:DB$ PumpAll | NumAtt$ 1 | NumDef$ 1 | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control get +1/+1 until end of turn;
 SVar:DBUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control.
 SVar:RemAIDeck:True
