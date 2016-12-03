@@ -28,6 +28,7 @@ import forge.util.FileSection;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 /**
@@ -39,6 +40,15 @@ import com.google.common.collect.Lists;
  * @version $Id$
  */
 public final class AbilityFactory {
+
+    static final List<String> additionalAbilityKeys = Lists.newArrayList(
+            "WinSubAbility", "OtherwiseSubAbility", // Clash
+            "ChooseNumberSubAbility", "Lowest", "Highest", // ChooseNumber
+            "HeadsSubAbility", "TailsSubAbility", "LoseSubAbility", // FlipCoin
+            "ChosenPile", "UnchosenPile", // MultiplePiles & TwoPiles
+            "RepeatSubAbility", // Repeat & RepeatEach
+            "Execute" // DelayedTrigger
+        );
 
     public enum AbilityRecordType {
         Ability("AB"),
@@ -136,7 +146,7 @@ public final class AbilityFactory {
         return abCost;
     }
 
-    public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams, Cost abCost, Card hostCard) {
+    public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams, Cost abCost,final Card hostCard) {
         TargetRestrictions abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
 
         if (api == ApiType.CopySpellAbility || api == ApiType.Counter || api == ApiType.ChangeTargets || api == ApiType.ControlSpell) {
@@ -181,16 +191,31 @@ public final class AbilityFactory {
             spellAbility.setSVar(mapParams.get("Execute"), hostCard.getSVar(mapParams.get("Execute")));
         }
 
-        if (api == ApiType.RepeatEach) {
-            spellAbility.setSVar(mapParams.get("RepeatSubAbility"), hostCard.getSVar(mapParams.get("RepeatSubAbility")));
-        }
-
         if (mapParams.containsKey("PreventionSubAbility")) {
             spellAbility.setSVar(mapParams.get("PreventionSubAbility"), hostCard.getSVar(mapParams.get("PreventionSubAbility")));
         }
 
         if (mapParams.containsKey("SubAbility")) {
             spellAbility.setSubAbility(getSubAbility(hostCard, mapParams.get("SubAbility")));
+        }
+
+        for (final String key : additionalAbilityKeys) {
+            if (mapParams.containsKey(key)) {
+                spellAbility.setAdditionalAbility(key, getSubAbility(hostCard, mapParams.get(key)));
+            }
+        }
+
+        if (api == ApiType.Charm  || api == ApiType.GenericChoice) {
+            final String key = "Choices";
+            if (mapParams.containsKey(key)) {
+                List<String> names = Lists.newArrayList(mapParams.get(key).split(","));
+                spellAbility.setAdditionalAbilityList(key, Lists.transform(names, new Function<String, AbilitySub>() {
+                    @Override
+                    public AbilitySub apply(String input) {
+                        return getSubAbility(hostCard, input);
+                    } 
+                }));
+            }
         }
 
         if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
@@ -211,7 +236,7 @@ public final class AbilityFactory {
         } else {
             spellAbility.setDescription("");
         }
-        
+
         initializeParams(spellAbility, mapParams);
         makeRestrictions(spellAbility, mapParams);
         makeConditions(spellAbility, mapParams);
@@ -395,32 +420,4 @@ public final class AbilityFactory {
         left.appendSubAbility(right);
         return left;
     }
-
-    public static final SpellAbility buildEntwineAbility(final SpellAbility sa) {
-        final Card source = sa.getHostCard();
-        final String[] saChoices = sa.getParam("Choices").split(",");
-        if (sa.getApi() != ApiType.Charm || saChoices.length != 2) 
-            throw new IllegalStateException("Entwine ability may be built only on charm cards");
-        final String ab = source.getSVar(saChoices[0]);
-        Map<String, String> firstMap = getMapParams(ab);
-        AbilityRecordType firstType = AbilityRecordType.getRecordType(firstMap);
-        ApiType firstApi = firstType.getApiTypeOf(firstMap);
-        firstMap.put("StackDecription", firstMap.get("SpellDescription"));
-        firstMap.put("SpellDescription", sa.getDescription() + " Entwine (Choose both if you pay the entwine cost.)");
-        SpellAbility entwineSA = getAbility(AbilityRecordType.Spell, firstApi, firstMap, new Cost(sa.getPayCosts().toSimpleString(), false), source);
-
-        final String ab2 = source.getSVar(saChoices[1]);
-        Map<String, String> secondMap = getMapParams(ab2);
-        ApiType secondApi = firstType.getApiTypeOf(secondMap);
-        secondMap.put("StackDecription", secondMap.get("SpellDescription"));
-        secondMap.put("SpellDescription", "");
-        AbilitySub sub =  (AbilitySub) getAbility(AbilityRecordType.SubAbility, secondApi, secondMap, null, source);
-        entwineSA.appendSubAbility(sub);
-
-        entwineSA.setBasicSpell(false);
-        entwineSA.setActivatingPlayer(sa.getActivatingPlayer());
-        entwineSA.setRestrictions(sa.getRestrictions());
-        return entwineSA;
-    }
-
 } // end class AbilityFactory

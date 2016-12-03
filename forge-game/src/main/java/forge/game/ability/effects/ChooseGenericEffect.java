@@ -1,18 +1,17 @@
 package forge.game.ability.effects;
 
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 public class ChooseGenericEffect extends SpellAbilityEffect {
 
@@ -31,12 +30,8 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final String[] choices = sa.getParam("Choices").split(",");
-        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
-         
-        for (String s : choices) {
-            abilities.add(AbilityFactory.getAbility(host.getSVar(s), host));
-        }
+
+        final List<SpellAbility> abilities = Lists.<SpellAbility>newArrayList(sa.getAdditionalAbilityList("Choices"));
         
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -46,24 +41,18 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            int idxChosen = 0;
-            String chosenName;
+            SpellAbility chosenSA = null;
             if (sa.hasParam("AtRandom")) {
-                idxChosen = MyRandom.getRandom().nextInt(choices.length);
-                chosenName = choices[idxChosen];
+                int idxChosen = MyRandom.getRandom().nextInt(abilities.size());
+                chosenSA = abilities.get(idxChosen);
             } else {
-                SpellAbility saChosen = p.getController().chooseSingleSpellForEffect(abilities, sa, "Choose one");
-                idxChosen = abilities.indexOf(saChosen);
-                chosenName = choices[idxChosen];
+                chosenSA = p.getController().chooseSingleSpellForEffect(abilities, sa, "Choose one");
             }
-            SpellAbility chosenSA = AbilityFactory.getAbility(host.getSVar(chosenName), host);
-            String chosenValue = abilities.get(idxChosen).getDescription();
+            String chosenValue = chosenSA.getDescription();
             if (sa.hasParam("ShowChoice")) {
                 boolean dontNotifySelf = sa.getParam("ShowChoice").equals("ExceptSelf");
                 p.getGame().getAction().nofityOfValue(sa, p, chosenValue, dontNotifySelf ? sa.getActivatingPlayer() : null);
             }
-            chosenSA.setActivatingPlayer(sa.getActivatingPlayer());
-            ((AbilitySub) chosenSA).setParent(sa);
             p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue, sa.hasParam("ShowChoice")));
             AbilityUtils.resolve(chosenSA);
         }

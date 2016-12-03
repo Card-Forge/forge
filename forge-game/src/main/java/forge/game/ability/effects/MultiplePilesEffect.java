@@ -1,8 +1,9 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -16,8 +17,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -57,7 +56,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
         final ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
         final boolean randomChosen = sa.hasParam("RandomChosen");
         final int piles = Integer.parseInt(sa.getParam("Piles"));
-        final Map<Player, List<CardCollectionView>> record = new HashMap<Player, List<CardCollectionView>>();
+        final Map<Player, List<CardCollectionView>> record = Maps.newHashMap();
 
         String valid = "";
         if (sa.hasParam("ValidCards")) {
@@ -83,7 +82,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
                 }
                 pool = CardLists.getValidCards(pool, valid, source.getController(), source);
 
-                List<CardCollectionView> pileList = new ArrayList<CardCollectionView>();
+                List<CardCollectionView> pileList = Lists.newArrayList();
 
                 for (int i = 1; i < piles; i++) {
                     int size = pool.size();
@@ -104,14 +103,11 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
                     source.addRemembered(c);
                 }
             }
-            final SpellAbility action = AbilityFactory.getAbility(source.getSVar(sa.getParam("ChosenPile")), source);
-            if (sa.isIntrinsic()) {
-                action.setIntrinsic(true);
-                action.changeText();
+
+            AbilitySub sub = sa.getAdditonalAbility("ChosenPile");
+            if (sub != null) {
+                AbilityUtils.resolve(sub);
             }
-            action.setActivatingPlayer(sa.getActivatingPlayer());
-            ((AbilitySub) action).setParent(sa);
-            AbilityUtils.resolve(action);
             source.clearRemembered();
         }
     }

@@ -17,6 +17,7 @@
  */
 package forge.game.spellability;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -115,6 +116,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
     private SpellAbilityCondition conditions = new SpellAbilityCondition();
     private AbilitySub subAbility = null;
+    
+    private Map<String, AbilitySub> additionalAbilities = Maps.newHashMap();
+    private Map<String, List<AbilitySub>> additionalAbilityLists = Maps.newHashMap();
 
     protected ApiType api = null;
 
@@ -203,6 +207,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         if (subAbility != null) {
             subAbility.setHostCard(c);
+        }
+        for (AbilitySub sa : additionalAbilities.values()) {
+            sa.setHostCard(c);
+        }
+        for (List<AbilitySub> list : additionalAbilityLists.values()) {
+            for (AbilitySub sa : list) {
+                sa.setHostCard(c);
+            }
         }
 
         view.updateHostCard(this);
@@ -310,6 +322,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (subAbility != null) {
             subAbility.setActivatingPlayer(player);
         }
+        for (AbilitySub sa : additionalAbilities.values()) {
+            sa.setActivatingPlayer(player);
+        }
+        for (List<AbilitySub> list : additionalAbilityLists.values()) {
+            for (AbilitySub sa : list) {
+                sa.setActivatingPlayer(player);
+            }
+        }
         view.updateCanPlay(this);
     }
 
@@ -369,10 +389,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public boolean hasParam(String key) {
         return mapParams.containsKey(key);
-    }
-
-    public void copyParamsToMap(Map<String, String> mapParam) {
-        mapParam.putAll(mapParams);
     }
 
     // If this is not null, then ability was made in a factory
@@ -481,6 +497,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isSurged() {
         return isOptionalCostPaid(OptionalCost.Surge);
+    }
+
+    public boolean isEntwine() {
+        return isOptionalCostPaid(OptionalCost.Entwine);
     }
 
     public boolean isOptionalCostPaid(OptionalCost cost) {
@@ -621,6 +641,50 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             subAbility.setParent(this);
         }
         view.updateDescription(this); //description changes when sub-abilities change
+    }
+    
+    public Map<String, AbilitySub> getAdditonalAbilities() {
+        return additionalAbilities;
+    }
+    public AbilitySub getAdditonalAbility(final String name) {
+        if (additionalAbilities.containsKey(name)) {
+            return additionalAbilities.get(name);
+        }
+        return null;
+    }
+
+    public void setAdditionalAbility(final String name, final AbilitySub sa) {
+        if (sa == null) {
+            additionalAbilities.remove(name);
+        } else {
+            sa.setParent(this);
+            additionalAbilities.put(name, sa);
+        }
+        view.updateDescription(this); //description changes when sub-abilities change
+    }
+
+    public Map<String, List<AbilitySub>> getAdditionalAbilityLists() {
+        return additionalAbilityLists;
+    }
+    public List<AbilitySub> getAdditionalAbilityList(final String name) {
+        if (additionalAbilityLists.containsKey(name)) {
+            return additionalAbilityLists.get(name);
+        } else {
+            return ImmutableList.of();
+        }
+    }
+    
+    public void setAdditionalAbilityList(final String name, final List<AbilitySub> list) {
+        if (list == null || list.isEmpty()) {
+            additionalAbilityLists.remove(name);
+        } else {
+            List<AbilitySub> result = Lists.newArrayList(list);
+            for (AbilitySub sa : result) {
+                sa.setParent(this);
+            }
+            additionalAbilityLists.put(name, result);
+        }
+        view.updateDescription(this);
     }
     public void appendSubAbility(final AbilitySub toAdd) {
         SpellAbility tailend = this;
@@ -1450,6 +1514,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (subAbility != null) {
             subAbility.changeText();
         }
+        for (AbilitySub sa : additionalAbilities.values()) {
+            sa.changeText();
+        }
+        
+        for (List<AbilitySub> list : additionalAbilityLists.values()) {
+            for (AbilitySub sa : list) {
+                sa.changeText();
+            }
+        }
     }
 
     @Override
@@ -1457,6 +1530,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         super.setIntrinsic(i);
         if (subAbility != null) {
             subAbility.setIntrinsic(i);
+        }
+        for (AbilitySub sa : additionalAbilities.values()) {
+            sa.setIntrinsic(i);
+        }
+        for (List<AbilitySub> list : additionalAbilityLists.values()) {
+            for (AbilitySub sa : list) {
+                sa.setIntrinsic(i);
+            }
         }
     }
 

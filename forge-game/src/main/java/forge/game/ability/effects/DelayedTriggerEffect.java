@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
@@ -13,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 public class DelayedTriggerEffect extends SpellAbilityEffect {
 
@@ -31,9 +31,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-
-        Map<String, String> mapParams = new HashMap<String, String>();
-        sa.copyParamsToMap(mapParams);
+        Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
         if (mapParams.containsKey("Cost")) {
             mapParams.remove("Cost");
         }
@@ -75,7 +73,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         }
 
         if (mapParams.containsKey("Execute")) {
-            SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(mapParams.get("Execute")), sa.getHostCard());
+            SpellAbility overridingSA = sa.getAdditonalAbility("Execute");
             overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
             // Set Transform timestamp when the delayed trigger is created
             if (ApiType.SetState == overridingSA.getApi()) {

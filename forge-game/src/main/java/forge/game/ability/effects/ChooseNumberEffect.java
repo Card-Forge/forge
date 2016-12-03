@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -9,11 +8,13 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import java.util.Random;
 
 public class ChooseNumberEffect extends SpellAbilityEffect {
@@ -49,7 +50,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Map<Player, Integer> chooseMap = new HashMap<Player, Integer>(); 
+        final Map<Player, Integer> chooseMap = Maps.newHashMap(); 
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -80,8 +81,8 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
         }
         if (secretlyChoose) {
             StringBuilder sb = new StringBuilder();
-            List<Player> highestNum = new ArrayList<Player>();
-            List<Player> lowestNum = new ArrayList<Player>();
+            List<Player> highestNum = Lists.newArrayList();
+            List<Player> lowestNum = Lists.newArrayList();
             int highest = 0;
             int lowest = Integer.MAX_VALUE;
             for (Entry<Player, Integer> ev : chooseMap.entrySet()) {
@@ -106,13 +107,8 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             }
             card.getGame().getAction().nofityOfValue(sa, card, sb.toString(), null);
             if (sa.hasParam("ChooseNumberSubAbility")) {
-                SpellAbility sub = AbilityFactory.getAbility(card.getSVar(sa.getParam("ChooseNumberSubAbility")), card);
-                if (sa.isIntrinsic()) {
-                	sub.setIntrinsic(true);
-                	sub.changeText();
-                }
-                sub.setActivatingPlayer(sa.getActivatingPlayer());
-                ((AbilitySub) sub).setParent(sa);
+                AbilitySub sub = sa.getAdditonalAbility("ChooseNumberSubAbility");
+                
                 for (Player p : chooseMap.keySet()) {
                     card.addRemembered(p);
                     card.setChosenNumber(chooseMap.get(p));
@@ -122,32 +118,22 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             }
             
             if (sa.hasParam("Lowest")) {
-                SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("Lowest")), card);
-                if (sa.isIntrinsic()) {
-                    action.setIntrinsic(true);
-                    action.changeText();
-                }
-                action.setActivatingPlayer(sa.getActivatingPlayer());
-                ((AbilitySub) action).setParent(sa);
+                AbilitySub sub = sa.getAdditonalAbility("Lowest");
+
                 for (Player p : lowestNum) {
                     card.addRemembered(p);
                     card.setChosenNumber(lowest);
-                    AbilityUtils.resolve(action);
+                    AbilityUtils.resolve(sub);
                     card.clearRemembered();
                 }
             }
             if (sa.hasParam("Highest")) {
-                SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("Highest")), card);
-                if (sa.isIntrinsic()) {
-                    action.setIntrinsic(true);
-                    action.changeText();
-                }
-                action.setActivatingPlayer(sa.getActivatingPlayer());
-                ((AbilitySub) action).setParent(sa);
+                AbilitySub sub = sa.getAdditonalAbility("Highest");
+
                 for (Player p : highestNum) {
                     card.addRemembered(p);
                     card.setChosenNumber(highest);
-                    AbilityUtils.resolve(action);
+                    AbilityUtils.resolve(sub);
                     card.clearRemembered();
                 }
                 if (sa.hasParam("RememberHighest")) {

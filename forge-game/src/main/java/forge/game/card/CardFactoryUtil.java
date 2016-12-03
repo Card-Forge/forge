@@ -2301,6 +2301,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Emerge")) {
                 addSpellAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Entwine")) {
+                addSpellAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Escalate")) {
                 addStaticAbility(keyword, card, null);
             }
@@ -3541,6 +3544,24 @@ public class CardFactoryUtil {
             newSA.setIsEmerge(true);
             newSA.setPayCosts(new Cost(costStr, false));
             newSA.setDescription(sa.getDescription() + " (Emerge)");
+            if (!intrinsic) {
+                newSA.setTemporary(true);
+                newSA.setIntrinsic(false);
+                kws.addSpellAbility(newSA);
+            }
+            card.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Entwine")) {
+            final String[] kw = keyword.split(":");
+            String costStr = kw[1];
+            final SpellAbility sa = card.getFirstSpellAbility();
+
+            final SpellAbility newSA = sa.copy();
+            newSA.getMapParams().put("Secondary", "True");
+            newSA.setBasicSpell(false);
+            newSA.setPayCosts(new Cost(costStr, false).add(sa.getPayCosts()));
+            newSA.addOptionalCost(OptionalCost.Entwine);
+            newSA.setDescription(sa.getDescription() + " (Entwine)");
+            newSA.setStackDescription(""); // Empty StackDescription to rebuild it.
             if (!intrinsic) {
                 newSA.setTemporary(true);
                 newSA.setIntrinsic(false);

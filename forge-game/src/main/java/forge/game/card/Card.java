@@ -1846,7 +1846,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append(" (You may pay an additional cost as you cast CARDNAME. If you do, put CARDNAME back into your hand as it resolves.)");
                 sb.append("\r\n");
             } else if (keyword.startsWith("Entwine")) {
-                final Cost cost = new Cost(keyword.substring(8), false);
+                final String[] n = keyword.split(":");
+                final Cost cost = new Cost(n[1], false);
                 sb.append("Entwine ").append(cost.toSimpleString());
                 sb.append(" (Choose both if you pay the entwine cost.)");
                 sb.append("\r\n");

@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Iterables;
-import forge.game.ability.AbilityFactory;
+import com.google.common.collect.Lists;
+
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -10,7 +10,6 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 import forge.util.collect.FCollection;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -20,7 +19,6 @@ public class CharmEffect extends SpellAbilityEffect {
     public static List<AbilitySub> makePossibleOptions(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         Iterable<Object> restriction = null;
-        final String[] saChoices = sa.getParam("Choices").split(",");
 
         if (sa.hasParam("ChoiceRestriction")) {
             String rest = sa.getParam("ChoiceRestriction");
@@ -28,24 +26,16 @@ public class CharmEffect extends SpellAbilityEffect {
                 restriction = source.getRemembered();
             }
         }
-
-        List<AbilitySub> choices = new ArrayList<AbilitySub>();
+        
         int indx = 0;
-        for (final String saChoice : saChoices) {
-            if (restriction != null && Iterables.contains(restriction, saChoice)) {
-                // If there is a choice restriction, and the current choice fails that, skip it.
-                continue;
-            }
-            final String ab = source.getSVar(saChoice);
-            AbilitySub sub = (AbilitySub) AbilityFactory.getAbility(ab, source);
-            if (sa.isIntrinsic()) {
-                sub.setIntrinsic(true);
-                sub.changeText();
-            }
+        List<AbilitySub> choices = sa.getAdditionalAbilityList("Choices");
+        if (restriction != null) {
+            choices.removeAll(Lists.newArrayList(restriction));
+        }
+        // set CharmOrder
+        for (AbilitySub sub : choices) {
             sub.setTrigger(sa.isTrigger());
-
             sub.setSVar("CharmOrder", Integer.toString(indx));
-            choices.add(sub);
             indx++;
         }
         return choices;
@@ -138,6 +128,12 @@ public class CharmEffect extends SpellAbilityEffect {
         //this resets all previous choices
         sa.setSubAbility(null);
 
+        // Entwine does use all Choices
+        if (sa.isEntwine()) {
+            chainAbilities(sa, makePossibleOptions(sa));
+            return;
+        }
+
         final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
 
@@ -165,7 +161,7 @@ public class CharmEffect extends SpellAbilityEffect {
         Collections.sort(chosen, new Comparator<AbilitySub>() {
             @Override
             public int compare(AbilitySub o1, AbilitySub o2) {
-                return Integer.parseInt(o1.getSVar("CharmOrder")) - Integer.parseInt(o2.getSVar("CharmOrder"));
+                return Integer.compare(o1.getSVarInt("CharmOrder"), o2.getSVarInt("CharmOrder"));
             }
         });
 

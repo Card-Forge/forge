@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -123,14 +122,11 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     for (final Card z : chosenPile) {
                         card.addRemembered(z);
                     }
-                    final SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("ChosenPile")), card);
-                    if (sa.isIntrinsic()) {
-                        action.setIntrinsic(true);
-                        action.changeText();
+
+                    AbilitySub sub = sa.getAdditonalAbility("ChosenPile");
+                    if (sub != null) {
+                        AbilityUtils.resolve(sub);
                     }
-                    action.setActivatingPlayer(sa.getActivatingPlayer());
-                    ((AbilitySub) action).setParent(sa);
-                    AbilityUtils.resolve(action);
                 }
 
                 // take action on the unchosen pile
@@ -140,14 +136,10 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                         card.addRemembered(z);
                     }
                     
-                    final SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("UnchosenPile")), card);
-                    if (sa.isIntrinsic()) {
-                        action.setIntrinsic(true);
-                        action.changeText();
+                    AbilitySub sub = sa.getAdditonalAbility("UnchosenPile");
+                    if (sub != null) {
+                        AbilityUtils.resolve(sub);
                     }
-                    action.setActivatingPlayer(sa.getActivatingPlayer());
-                    ((AbilitySub) action).setParent(sa);
-                    AbilityUtils.resolve(action);
                 }
             }
         }

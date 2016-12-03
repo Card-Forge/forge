@@ -1,17 +1,13 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.game.Game;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -35,16 +31,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
 
-        // setup subability to repeat
-        final SpellAbility repeat = AbilityFactory.getAbility(sa.getSVar(sa.getParam("RepeatSubAbility")), source);
-
-        if (sa.isIntrinsic()) {
-            repeat.setIntrinsic(true);
-            repeat.changeText();
-        }
-
-        repeat.setActivatingPlayer(sa.getActivatingPlayer());
-        ((AbilitySub) repeat).setParent(sa);
+        AbilitySub repeat = sa.getAdditonalAbility("RepeatSubAbility");        
 
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
@@ -55,7 +42,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         CardCollectionView repeatCards = null;
 
         if (sa.hasParam("RepeatCards")) {
-            List<ZoneType> zone = new ArrayList<ZoneType>();
+            List<ZoneType> zone = Lists.newArrayList();
             if (sa.hasParam("Zone")) {
                 zone = ZoneType.listValueOf(sa.getParam("Zone"));
             } else {
@@ -137,8 +124,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             if (target == null) {
                 target = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
             }
-            Set<CounterType> types = new HashSet<CounterType>(target.getCounters().keySet());
-            for (CounterType type : types) {
+            for (CounterType type : target.getCounters().keySet()) {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Number$").append(target.getCounters(type));
                 source.setSVar("RepeatSVarCounter", type.getName().toUpperCase());
@@ -148,7 +134,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
         if (recordChoice) {
             boolean random = sa.hasParam("Random");
-            Map<Player, List<Card>> recordMap = new HashMap<Player, List<Card>>();
+            Map<Player, List<Card>> recordMap = Maps.newHashMap();
             if (sa.hasParam("ChoosePlayer")) {
                 for (Card card : repeatCards) {
                     Player p;

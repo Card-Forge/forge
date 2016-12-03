@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import forge.game.GameObject;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -13,8 +12,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 public class FlipCoinEffect extends SpellAbilityEffect {
 
@@ -73,28 +74,14 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 }
 
                 if (resultIsHeads) {
-                    if (sa.hasParam("HeadsSubAbility")) {
-                        final SpellAbility heads = AbilityFactory.getAbility(host.getSVar(sa.getParam("HeadsSubAbility")), host);
-                        if (sa.isIntrinsic()) {
-                            heads.setIntrinsic(true);
-                            heads.changeText();
-                        }
-                        heads.setActivatingPlayer(player);
-                        ((AbilitySub) heads).setParent(sa);
-
-                        AbilityUtils.resolve(heads);
+                    AbilitySub sub = sa.getAdditonalAbility("HeadsSubAbility");
+                    if (sub != null) {
+                        AbilityUtils.resolve(sub);
                     }
                 } else {
-                    if (sa.hasParam("TailsSubAbility")) {
-                        final SpellAbility tails = AbilityFactory.getAbility(host.getSVar(sa.getParam("TailsSubAbility")), host);
-                        if (sa.isIntrinsic()) {
-                            tails.setIntrinsic(true);
-                            tails.changeText();
-                        }
-                        tails.setActivatingPlayer(player);
-                        ((AbilitySub) tails).setParent(sa);
-
-                        AbilityUtils.resolve(tails);
+                    AbilitySub sub = sa.getAdditonalAbility("TailsSubAbility");
+                    if (sub != null) {
+                        AbilityUtils.resolve(sub);
                     }
                 }
             } else {
@@ -102,32 +89,19 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     if (sa.getParam("RememberWinner") != null) {
                         host.addRemembered(host);
                     }
-                    if (sa.hasParam("WinSubAbility")) {
-                        final SpellAbility win = AbilityFactory.getAbility(host.getSVar(sa.getParam("WinSubAbility")), host);
-                        if (sa.isIntrinsic()) {
-                            win.setIntrinsic(true);
-                            win.changeText();
-                        }
-                        win.setActivatingPlayer(player);
-                        ((AbilitySub) win).setParent(sa);
-
-                        AbilityUtils.resolve(win);
+                    AbilitySub sub = sa.getAdditonalAbility("WinSubAbility");
+                    if (sub != null) {
+                        AbilityUtils.resolve(sub);
                     }
                     // runParams.put("Won","True");
                 } else {
                     if (sa.getParam("RememberLoser") != null) {
                         host.addRemembered(host);
                     }
-                    if (sa.hasParam("LoseSubAbility")) {
-                        final SpellAbility lose = AbilityFactory.getAbility(host.getSVar(sa.getParam("LoseSubAbility")), host);
-                        if (sa.isIntrinsic()) {
-                            lose.setIntrinsic(true);
-                            lose.changeText();
-                        }
-                        lose.setActivatingPlayer(player);
-                        ((AbilitySub) lose).setParent(sa);
 
-                        AbilityUtils.resolve(lose);
+                    AbilitySub sub = sa.getAdditonalAbility("LoseSubAbility");
+                    if (sub != null) {
+                        AbilityUtils.resolve(sub);
                     }
                     // runParams.put("Won","False");
                 }
@@ -186,7 +160,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         caller.getGame().getAction().nofityOfValue(sa, caller, result ? "win" : "lose", null);
 
         // Run triggers
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        Map<String,Object> runParams = Maps.newHashMap();
         runParams.put("Player", caller);
         runParams.put("Result", Boolean.valueOf(result));
         caller.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);

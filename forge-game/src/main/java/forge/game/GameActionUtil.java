@@ -264,17 +264,6 @@ public final class GameActionUtil {
                         i++;
                     }
                 }
-            } else if (keyword.startsWith("Entwine")) {
-                for (int i = 0; i < abilities.size(); i++) {
-                	final SpellAbility newSA = abilities.get(i).copy();
-            		SpellAbility entwine = AbilityFactory.buildEntwineAbility(newSA);
-            		entwine.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
-            		entwine.addOptionalCost(OptionalCost.Entwine);
-                	if (newSA.canPlay()) {
-                        abilities.add(i, entwine);
-                        i++;
-                    }
-                }
             } else if (keyword.startsWith("Kicker")) {
             	String[] sCosts = TextUtil.split(keyword.substring(6), ':');
             	boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);

@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import forge.game.GameAction;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -36,32 +35,19 @@ public class ClashEffect extends SpellAbilityEffect {
         runParams.put("Player", sa.getHostCard().getController());
 
         if (victory) {
-            if (sa.hasParam("WinSubAbility")) {
-                final SpellAbility win = AbilityFactory.getAbility(
-                        sa.getHostCard().getSVar(sa.getParam("WinSubAbility")), sa.getHostCard());
-                if (sa.isIntrinsic()) {
-                    win.setIntrinsic(true);
-                    win.changeText();
-                }
-                win.setActivatingPlayer(sa.getHostCard().getController());
-                ((AbilitySub) win).setParent(sa);
 
-                AbilityUtils.resolve(win);
+            AbilitySub sub = sa.getAdditonalAbility("WinSubAbility");
+            if (sub != null) {
+                AbilityUtils.resolve(sub);
             }
+
             runParams.put("Won", "True");
         } else {
-            if (sa.hasParam("OtherwiseSubAbility")) {
-                final SpellAbility otherwise = AbilityFactory.getAbility(
-                        sa.getHostCard().getSVar(sa.getParam("OtherwiseSubAbility")), sa.getHostCard());
-                if (sa.isIntrinsic()) {
-                	otherwise.setIntrinsic(true);
-                	otherwise.changeText();
-                }
-                otherwise.setActivatingPlayer(sa.getHostCard().getController());
-                ((AbilitySub) otherwise).setParent(sa);
-
-                AbilityUtils.resolve(otherwise);
+            AbilitySub sub = sa.getAdditonalAbility("OtherwiseSubAbility");
+            if (sub != null) {
+                AbilityUtils.resolve(sub);
             }
+
             runParams.put("Won", "False");
         }
 

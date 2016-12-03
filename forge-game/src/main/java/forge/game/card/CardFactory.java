@@ -18,8 +18,10 @@
 package forge.game.card;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -651,6 +653,17 @@ public class CardFactory {
     
         if (from.getSubAbility() != null) {
             to.setSubAbility(from.getSubAbility().getCopy());
+        }
+        for (Map.Entry<String, AbilitySub> e : from.getAdditonalAbilities().entrySet()) {
+            to.setAdditionalAbility(e.getKey(), e.getValue().getCopy());
+        }
+        for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
+            to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), new Function<AbilitySub, AbilitySub>() {
+                @Override
+                public AbilitySub apply(AbilitySub input) {
+                    return input.getCopy();
+                }
+            }));
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());

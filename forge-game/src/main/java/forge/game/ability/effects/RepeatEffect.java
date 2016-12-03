@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -26,15 +25,7 @@ public class RepeatEffect extends SpellAbilityEffect {
         Card source = sa.getHostCard();
 
         // setup subability to repeat
-        final SpellAbility repeat = AbilityFactory.getAbility(sa.getHostCard().getSVar(sa.getParam("RepeatSubAbility")), source);
-
-        if (sa.isIntrinsic()) {
-            repeat.setIntrinsic(true);
-            repeat.changeText();
-        }
-
-        repeat.setActivatingPlayer(sa.getActivatingPlayer());
-        ((AbilitySub) repeat).setParent(sa);
+        AbilitySub repeat = sa.getAdditonalAbility("RepeatSubAbility");        
 
         Integer maxRepeat = null;
         if (sa.hasParam("MaxRepeat")) {
@@ -50,11 +41,14 @@ public class RepeatEffect extends SpellAbilityEffect {
             if (maxRepeat != null && maxRepeat <= count) {
                 // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:
                 // Helm of Obedience vs Graveyard to Library replacement effect
+            	
+            	if(source.getName().equals("Helm of Obedience")) {
                 StringBuilder infLoop = new StringBuilder(sa.getHostCard().toString());
                 infLoop.append(" - To avoid an infinite loop, this repeat has been broken ");
                 infLoop.append(" and the game will now continue in the current state, ending the loop early. ");
                 infLoop.append("Once Draws are available this probably should change to a Draw.");
                 System.out.println(infLoop.toString());
+            	}
                 break;
             }
         } while (checkRepeatConditions(sa));

@@ -244,12 +244,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
-        if (sp.getApi() == ApiType.Charm) {
-            boolean remember = sp.hasParam("RememberChoice");
-            if (remember) {
-                // Remember the ChoiceName here for later handling
-                source.addRemembered(sp.getSubAbility().getParam("ChoiceName"));
-            }
+        if (sp.getApi() == ApiType.Charm && sp.hasParam("RememberChoice")) {
+            // Remember the Choice here for later handling
+            source.addRemembered(sp.getSubAbility());
         }
 
         //cancel auto-pass for all opponents of activating player
@@ -618,12 +615,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sa == null) {
             return true;
         }
-        TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
-            int numTargets = sa.getTargets().getNumTargeted();
-            if (tgt.getMinTargets(source, sa) > numTargets || (tgt.getMaxTargets(source, sa) < numTargets)) {
-                return false;
-            }
+        if (!sa.isTargetNumberValid()) {
+            return false;
         }
         return hasLegalTargeting(sa.getSubAbility(), source);
     }
