@@ -321,6 +321,10 @@ public class PumpEffect extends SpellAbilityEffect {
             applyPump(sa, tgtC, a, d, keywords, timestamp);
         }
 
+        if (sa.hasParam("AtEOT") && !tgtCards.isEmpty()) {
+            registerDelayedTrigger(sa, sa.getParam("AtEOT"), tgtCards);
+        }
+        
         for (final Card tgtC : untargetedCards) {
             // only pump things in PumpZone
             if (!tgtC.isInZone(pumpZone)) {

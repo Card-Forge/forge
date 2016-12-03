@@ -238,7 +238,7 @@ public abstract class SpellAbilityEffect {
         } else if (location.equals("Exile")) {
             trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
         } else if (location.equals("Destroy")) {
-            trigSA = "DB$ Destroy | Cost$ 0 | Defined$ DelayTriggerRemembered";
+            trigSA = "DB$ Destroy | Defined$ DelayTriggerRemembered";
         }
         final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
         newSa.setIntrinsic(intrinsic);
