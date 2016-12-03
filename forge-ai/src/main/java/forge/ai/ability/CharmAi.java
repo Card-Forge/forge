@@ -1,5 +1,10 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Random;
+
+import com.google.common.collect.Lists;
+
 import forge.ai.AiController;
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
@@ -12,13 +17,14 @@ import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class CharmAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+        // sa is Entwined, no need for extra logic
+        if (sa.isEntwine()) {
+            return true;
+        }
+
         final Random r = MyRandom.getRandom();
 
         final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
@@ -68,7 +74,7 @@ public class CharmAi extends SpellAbilityAi {
 
     private List<AbilitySub> chooseOptionsAi(List<AbilitySub> choices, final Player ai, boolean isTrigger, int num,
             int min, boolean allowRepeat) {
-        List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
+        List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
@@ -113,7 +119,7 @@ public class CharmAi extends SpellAbilityAi {
     }
 
     private List<AbilitySub> chooseTriskaidekaphobia(List<AbilitySub> choices, final Player ai) {
-        List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
+        List<AbilitySub> chosenList = Lists.newArrayList();
         AbilitySub gain = choices.get(0);
         AbilitySub lose = choices.get(1);
         FCollection<Player> opponents = ai.getOpponents();
@@ -200,7 +206,7 @@ public class CharmAi extends SpellAbilityAi {
     // Choice selection for charms that require multiple choices (eg. Cryptic Command, DTK commands)
     private List<AbilitySub> chooseMultipleOptionsAi(List<AbilitySub> choices, final Player ai, int min) {
         AbilitySub goodChoice = null;
-        List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
+        List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
