@@ -5,11 +5,9 @@ import forge.ai.AiController;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
-import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 
@@ -61,14 +59,12 @@ public class RepeatAi extends SpellAbilityAi {
          }
 
     	// setup subability to repeat
-        final SpellAbility repeat = AbilityFactory.getAbility(sa.getHostCard().getSVar(sa.getParam("RepeatSubAbility")), sa.getHostCard());
+        final SpellAbility repeat = sa.getAdditonalAbility("RepeatSubAbility");
 
         if (repeat == null) {
         	return false;
         }
 
-        repeat.setActivatingPlayer(sa.getActivatingPlayer());
-        ((AbilitySub) repeat).setParent(sa);
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         return aic.doTrigger(repeat, mandatory);
     }
