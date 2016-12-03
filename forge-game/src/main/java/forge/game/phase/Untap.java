@@ -90,7 +90,8 @@ public class Untap extends Phase {
 
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
                 || c.hasKeyword("This card doesn't untap during your next untap step.")
-                || c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
+                || c.hasKeyword("This card doesn't untap during your next two untap steps.")
+                || c.hasKeyword("This card doesn't untap.")) {
             return false;
         }
         return true;
@@ -165,6 +166,7 @@ public class Untap extends Phase {
         // other players untapping during your untap phase
         List<Card> cardsWithKW = CardLists.getKeyword(game.getCardsIn(ZoneType.Battlefield),
                 "CARDNAME untaps during each other player's untap step.");
+        cardsWithKW = CardLists.getNotKeyword(cardsWithKW, "This card doesn't untap.");
         final FCollection<Player> otherPlayers = new FCollection<Player>(game.getPlayers());
         otherPlayers.remove(player);
         cardsWithKW = CardLists.filter(cardsWithKW, CardPredicates.isControlledByAnyOf(otherPlayers));

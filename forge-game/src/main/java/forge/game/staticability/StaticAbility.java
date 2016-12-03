@@ -507,7 +507,14 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
 
         if (this.mapParams.containsKey("Phases")) {
             List<PhaseType> phases = PhaseType.parseRange(this.mapParams.get("Phases"));
-            if (!phases.contains(controller.getGame().getPhaseHandler().getPhase())) {
+            if (!phases.contains(game.getPhaseHandler().getPhase())) {
+                return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("PlayerTurn")) {
+            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, this.mapParams.get("PlayerTurn"), null);
+            if (!players.contains(game.getPhaseHandler().getPlayerTurn())) {
                 return false;
             }
         }
