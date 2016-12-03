@@ -1683,7 +1683,14 @@ public class AbilityUtils {
             val = ((SpellAbility) ability).getSVar(sVarName);
         }
         if (StringUtils.isEmpty(val)) {
-            val = ability.getHostCard().getSVar(sVarName);
+            Card host = null;
+            if (ability instanceof SpellAbility) {
+                host = ((SpellAbility) ability).getOriginalHost();
+            }
+            if (host == null) {
+                host = ability.getHostCard();
+            }
+            val = host.getSVar(sVarName);
         }
         if (!ability.isIntrinsic() || StringUtils.isEmpty(val)) {
             return val;
