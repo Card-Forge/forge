@@ -262,6 +262,7 @@ public class TokenEffect extends SpellAbilityEffect {
         final boolean imprint = sa.hasParam("ImprintTokens");
         final List<Card> allTokens = new ArrayList<Card>();
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
+            final Game game = controller.getGame();
             for (int i = 0; i < finalAmount; i++) {
                 final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
                 final CardFactory.TokenInfo tokenInfo = new CardFactory.TokenInfo(substitutedName, imageName,
@@ -271,9 +272,9 @@ public class TokenEffect extends SpellAbilityEffect {
                     if (this.tokenTapped) {
                         tok.setTapped(true);
                     }
-                    controller.getGame().getAction().moveToPlay(tok);
+                    game.getAction().moveToPlay(tok);
                 }
-                controller.getGame().fireEvent(new GameEventTokenCreated());
+                game.fireEvent(new GameEventTokenCreated());
                 
                 // Grant rule changes
                 if (this.tokenHiddenKeywords != null) {
@@ -299,12 +300,9 @@ public class TokenEffect extends SpellAbilityEffect {
 
                 // Grant triggers
                 if (this.tokenTriggers != null) {
-
                     for (final String s : this.tokenTriggers) {
                         final String actualTrigger = AbilityUtils.getSVar(root, s);
-
                         for (final Card c : tokens) {
-
                             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
                             final String ability = AbilityUtils.getSVar(root, parsedTrigger.getMapParams().get("Execute"));
                             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
@@ -341,17 +339,22 @@ public class TokenEffect extends SpellAbilityEffect {
                 }
 
                 boolean combatChanged = false;
-                final Game game = controller.getGame();
                 for (final Card c : tokens) {
                     if (sa.hasParam("AtEOTTrig")) {
                         addSelfTrigger(sa, sa.getParam("AtEOTTrig"), c);
                     }
+                    // To show the Abilities and Trigger on the Token
+                    c.updateStateForView();
                     if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
-                        final Combat combat = game.getPhaseHandler().getCombat();
+                        final Combat combat = game.getCombat();
+
+                        // into battlefield attacking only should work if you are the attacking player
+                        if (combat.getAttackingPlayer().equals(controller)) {
                         final FCollectionView<GameEntity> defs = combat.getDefenders();
-                        final GameEntity defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
-                        combat.addAttacker(c, defender);
-                        combatChanged = true;
+                            final GameEntity defender = controller.getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
+                            combat.addAttacker(c, defender);
+                            combatChanged = true;
+                        }
                     }
                     if (this.tokenBlocking != null && game.getPhaseHandler().inCombat()) {
                         final Combat combat = game.getPhaseHandler().getCombat();
