@@ -68,7 +68,9 @@ public abstract class SpellAbilityEffect {
         String stackDesc = params.get("StackDescription");
         if (stackDesc != null) {
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
-                sb.append(params.get("SpellDescription").replace("CARDNAME", sa.getHostCard().getName()));
+                if (params.get("SpellDescription") != null) {
+                    sb.append(params.get("SpellDescription").replace("CARDNAME", sa.getHostCard().getName()));
+                }
                 if (sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
                     sb.append(" (Targeting: " + sa.getTargets().getTargets() + ")");
                 }
