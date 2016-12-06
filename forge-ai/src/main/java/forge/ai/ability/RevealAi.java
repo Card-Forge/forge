@@ -1,40 +1,40 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilCost;
+import java.util.Random;
+
+import forge.ai.AiPlayDecision;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
+import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
 
-import java.util.Random;
-
 public class RevealAi extends RevealAiBase {
+
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
-        final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getHostCard();
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
 
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
-                return false;
+        // logic to see if it should reveal Mircacle Card
+        if (sa.hasParam("MiracleCost")) {
+            final Card c = sa.getHostCard();
+            for (SpellAbility s : c.getBasicSpells()) {
+                Spell spell = (Spell) s;
+                s.setActivatingPlayer(ai);
+                // timing restrictions still apply
+                if (!s.getRestrictions().checkTimingRestrictions(c, s))
+                    continue;
+
+                spell = (Spell) spell.copyWithDefinedCost(new Cost(sa.getParam("MiracleCost"), false));
+
+                if (AiPlayDecision.WillPlay == ((PlayerControllerAi) ai.getController()).getAi()
+                        .canPlayFromEffectAI(spell, false, true)) {
+                    return true;
+                }
             }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
-                return false;
-            }
-
+            return false;
         }
 
         // we can reuse this function here...

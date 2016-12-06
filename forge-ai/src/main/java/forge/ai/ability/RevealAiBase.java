@@ -1,31 +1,40 @@
 package forge.ai.ability;
 
 
+import java.util.Collections;
+import java.util.List;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public abstract class RevealAiBase extends SpellAbilityAi {
 
     protected  boolean revealHandTargetAI(final Player ai, final SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        Player opp = ai.getOpponent();
-        final int humanHandSize = opp.getCardsIn(ZoneType.Hand).size();
-
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             // ability is targeted
             sa.resetTargets();
 
-            final boolean canTgtHuman = opp.canBeTargetedBy(sa);
+            List<Player> opps = ai.getOpponents();
 
-            if (!canTgtHuman || (humanHandSize == 0)) {
+            if (opps.isEmpty()) {
                 return false;
-            } else {
-                sa.getTargets().add(opp);
             }
+
+            opps = Lists.newArrayList(Iterables.filter(opps, PlayerPredicates.isTargetableBy(sa)));
+
+            Player p = Collections.max(opps, PlayerPredicates.compareByZoneSize(ZoneType.Hand));
+
+            if (p.getCardsIn(ZoneType.Hand).isEmpty()) {
+                return false;
+            }
+            sa.getTargets().add(p);
         } else {
             // if it's just defined, no big deal
         }
