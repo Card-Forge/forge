@@ -648,8 +648,8 @@ public class CardFactory {
         if (from.getActivatingPlayer() != null) {
             to.setActivatingPlayer(from.getActivatingPlayer());
         }
-        to.setDescription(from.getDescription());
-        to.setStackDescription(from.getDescription());
+        to.setDescription(from.getOriginalDescription());
+        to.setStackDescription(from.getOriginalStackDescription());
     
         if (from.getSubAbility() != null) {
             to.setSubAbility(from.getSubAbility().getCopy());
@@ -675,6 +675,7 @@ public class CardFactory {
         for (String sVar : from.getSVars()) {
             to.setSVar(sVar, from.getSVar(sVar));
         }
+        to.changeText();
     }
     
     public static class TokenInfo {
