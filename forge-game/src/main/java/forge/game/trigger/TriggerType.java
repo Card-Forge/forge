@@ -62,6 +62,7 @@ public enum TriggerType {
     PlanarDice(TriggerPlanarDice.class),
     PlaneswalkedFrom(TriggerPlaneswalkedFrom.class),
     PlaneswalkedTo(TriggerPlaneswalkedTo.class),
+    Revealed(TriggerRevealed.class),
     Sacrificed(TriggerSacrificed.class),
     Scry(TriggerScry.class),
     SearchedLibrary(TriggerSearchedLibrary.class),

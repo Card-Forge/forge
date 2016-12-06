@@ -721,6 +721,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerPhaseOut.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPlanarDice.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPlaneswalkedFrom.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPlaneswalkedTo.java -text
+forge-game/src/main/java/forge/game/trigger/TriggerRevealed.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerSacrificed.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerScry.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerSearchedLibrary.java -text

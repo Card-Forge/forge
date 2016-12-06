@@ -3027,18 +3027,29 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Miracle")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
-            final String abStr = "DB$ Play | Defined$ Self | PlayCost$ " + manacost;
+            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self | MiracleCost$ " + manacost;
+            final String abStrPlay = "DB$ Play | Defined$ Self | PlayCost$ " + manacost;
 
-            final String trigStr = "Mode$ Drawn | ValidCard$ Card.Self | Miracle$ True | Secondary$ True "
-                + "| Static$ True | TriggerDescription$ CARDNAME - Miracle";
+            final String trigStrDrawn = "Mode$ Drawn | ValidCard$ Card.Self | Miracle$ True | Secondary$ True"
+                + " | OptionalDecider$ You | Static$ True | TriggerDescription$ CARDNAME - Miracle";
 
-            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            final String trigStrRevealed = "Mode$ Revealed | ValidCard$ Card.Self | Miracle$ True"
+                + " | IsPresent$ Card.Self | PresentZone$ Hand | Secondary$ True"
+                + " | TriggerDescription$ CARDNAME - Miracle";
 
-            trigger.setOverridingAbility(AbilityFactory.getAbility(abStr, card));
+            final Trigger triggerDrawn = TriggerHandler.parseTrigger(trigStrDrawn, card, intrinsic);
 
-            final Trigger cardTrigger = card.addTrigger(trigger);
+            triggerDrawn.setOverridingAbility(AbilityFactory.getAbility(abStrReveal, card));
+
+            final Trigger triggerRevealed = TriggerHandler.parseTrigger(trigStrRevealed, card, intrinsic);
+
+            triggerRevealed.setOverridingAbility(AbilityFactory.getAbility(abStrPlay, card));
+
+            final Trigger cardTriggerDrawn = card.addTrigger(triggerDrawn);
+            final Trigger cardTriggerRevealed = card.addTrigger(triggerRevealed);
             if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
+                kws.addTrigger(cardTriggerDrawn);
+                kws.addTrigger(cardTriggerRevealed);
             }
         } else if (keyword.startsWith("Modular")) {
             final String abStr = "AB$ PutCounter | Cost$ 0 | ValidTgts$ Artifact.Creature | " +

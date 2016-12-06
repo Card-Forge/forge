@@ -9,25 +9,26 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 public class RevealEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final Game game = host.getGame();
         final boolean anyNumber = sa.hasParam("AnyNumber");
         int cnt = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa) : 1;
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         for (final Player p : getTargetPlayers(sa)) {
-            final Game game = p.getGame();
-            if (tgt == null || p.canBeTargetedBy(sa)) {
+            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 final CardCollectionView cardsInHand = p.getZone(ZoneType.Hand).getCards();
                 if (cardsInHand.isEmpty()) {
                     continue; 
@@ -71,10 +72,15 @@ public class RevealEffect extends SpellAbilityEffect {
                 }
 
                 game.getAction().reveal(revealed, p);
-
-                if (sa.hasParam("RememberRevealed")) {
-                    for (final Card rem : revealed) {
-                        host.addRemembered(rem);
+                for (final Card c : revealed) {
+                    Map<String, Object> runParams = Maps.newHashMap();
+                    runParams.put("Card", c);
+                    if (sa.hasParam("MiracleCost")) {
+                        runParams.put("Miracle", true);
+                    }
+                    game.getTriggerHandler().runTrigger(TriggerType.Revealed, runParams, false);
+                    if (sa.hasParam("RememberRevealed")) {
+                        host.addRemembered(c);
                     }
                 }
             }
