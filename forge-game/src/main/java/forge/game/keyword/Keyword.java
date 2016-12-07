@@ -80,6 +80,7 @@ public enum Keyword {
     MELEE(SimpleKeyword.class, true, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked with a creature this combat."),
     MENACE(SimpleKeyword.class, true, "This creature can't be blocked except by two or more creatures."),
     MEGAMORPH(KeywordWithCost.class, true, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it."),
+    MIRACLE(KeywordWithCost.class, false, "You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn."),
     MONSTROSITY(KeywordWithCostAndAmount.class, false, "If this creature isn't monstrous, put {%2$d:+1/+1 counter} on it and it becomes monstrous."),
     MODULAR(Modular.class, false, "This creature enters the battlefield with {%d:+1/+1 counter} on it. When it dies, you may put its +1/+1 counters on target artifact creature."),
     MORPH(KeywordWithCost.class, true, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost."),
