@@ -74,6 +74,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityCondition;
 import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -259,6 +260,8 @@ public class AiController {
                     continue;
                 }
                 exSA = AbilityFactory.getAbility(card, params.get("Execute"));
+            } else {
+                exSA = exSA.copy();
             }
 
             if (api != null) {
@@ -281,6 +284,17 @@ public class AiController {
                 exSA.setActivatingPlayer(player);
             }
             exSA.setTrigger(true);
+
+            // for trigger test, need to ignore the conditions
+            if (exSA.getConditions() != null) {
+                SpellAbilityCondition cons = exSA.getConditions();
+                if (cons.getIsPresent() != null) {
+                    String pres = cons.getIsPresent();
+                    if ("Card.Self".equals(pres) || "Card.StrictlySelf".equals(pres)) {
+                        cons.setIsPresent(null);
+                    }
+                }
+            }
 
             // Run non-mandatory trigger.
             // These checks only work if the Executing SpellAbility is an Ability_Sub.

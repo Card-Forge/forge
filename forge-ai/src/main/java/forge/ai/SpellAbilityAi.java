@@ -50,10 +50,6 @@ public abstract class SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Cost cost = sa.getPayCosts();
 
-        if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(source, sa)) {
-            return false;
-        }
-
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa)) {
             return false;
         }
