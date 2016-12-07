@@ -16,7 +16,24 @@ public class RevealAi extends RevealAiBase {
 
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        // we can reuse this function here...
+        final boolean bFlag = revealHandTargetAI(ai, sa/* , true, false */);
 
+        if (!bFlag) {
+            return false;
+        }
+
+        final Random r = MyRandom.getRandom();
+        boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
+
+        if (SpellAbilityAi.playReusable(ai, sa)) {
+            randomReturn = true;
+        }
+        return randomReturn;
+    }
+
+    @Override
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // logic to see if it should reveal Mircacle Card
         if (sa.hasParam("MiracleCost")) {
             final Card c = sa.getHostCard();
@@ -36,25 +53,6 @@ public class RevealAi extends RevealAiBase {
             }
             return false;
         }
-
-        // we can reuse this function here...
-        final boolean bFlag = revealHandTargetAI(ai, sa/*, true, false*/);
-
-        if (!bFlag) {
-            return false;
-        }
-
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
-
-        if (SpellAbilityAi.playReusable(ai, sa)) {
-            randomReturn = true;
-        }
-        return randomReturn;
-    }
-
-    @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         if (!revealHandTargetAI(ai, sa/*, false, mandatory*/)) {
             return false;
