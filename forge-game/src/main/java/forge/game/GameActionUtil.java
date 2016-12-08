@@ -98,7 +98,7 @@ public final class GameActionUtil {
             AbilityRecordType type = BASIC_LAND_ABILITIES_TYPES[i];
             for (final Card land : lands) {
                 if (land.getType().hasSubtype(landType)) {
-                    final SpellAbility sa = AbilityFactory.getAbility(mapParams, type, land);
+                    final SpellAbility sa = AbilityFactory.getAbility(mapParams, type, land, null);
                     sa.setBasicLandAbility(true);
                     land.getCurrentState().addManaAbility(sa);
                 }
@@ -372,7 +372,7 @@ public final class GameActionUtil {
             Map<String, String> params = AbilityFactory.getMapParams(c.getCurrentState().getFirstUnparsedAbility());
             AbilityRecordType rc = AbilityRecordType.getRecordType(params);
             ApiType api = rc.getApiTypeOf(params);
-            AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c);
+            AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c, null);
 
             // Add the subability to all existing variants
             for (int i = 0; i < allSaCombinations.size(); ++i) {

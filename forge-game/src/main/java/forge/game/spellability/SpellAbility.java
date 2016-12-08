@@ -209,11 +209,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             subAbility.setHostCard(c);
         }
         for (AbilitySub sa : additionalAbilities.values()) {
-            sa.setHostCard(c);
+            if (sa.getHostCard() != c) {
+                sa.setHostCard(c);
+            }
         }
         for (List<AbilitySub> list : additionalAbilityLists.values()) {
             for (AbilitySub sa : list) {
-                sa.setHostCard(c);
+                if (sa.getHostCard() != c) {
+                    sa.setHostCard(c);
+                }
             }
         }
 
@@ -323,11 +327,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             subAbility.setActivatingPlayer(player);
         }
         for (AbilitySub sa : additionalAbilities.values()) {
-            sa.setActivatingPlayer(player);
+            if (sa.getActivatingPlayer() != player) {
+                sa.setActivatingPlayer(player);
+            }
         }
         for (List<AbilitySub> list : additionalAbilityLists.values()) {
             for (AbilitySub sa : list) {
-                sa.setActivatingPlayer(player);
+                if (sa.getActivatingPlayer() != player) {
+                    sa.setActivatingPlayer(player);
+                }
             }
         }
         view.updateCanPlay(this);
@@ -1520,7 +1528,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         description = AbilityUtils.applyDescriptionTextChangeEffects(originalDescription, this);
 
         if (subAbility != null) {
-            subAbility.changeText();
+            // if the parent of the subability is not this,
+            // then there might be a loop
+            if (subAbility.getParent() == this) {
+                subAbility.changeText();
+            }
         }
         for (AbilitySub sa : additionalAbilities.values()) {
             sa.changeText();
@@ -1540,11 +1552,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             subAbility.setIntrinsic(i);
         }
         for (AbilitySub sa : additionalAbilities.values()) {
-            sa.setIntrinsic(i);
+            if (sa.isIntrinsic() != i) {
+                sa.setIntrinsic(i);
+            }
         }
         for (List<AbilitySub> list : additionalAbilityLists.values()) {
             for (AbilitySub sa : list) {
-                sa.setIntrinsic(i);
+                if (sa.isIntrinsic() != i) {
+                    sa.setIntrinsic(i);
+                }
             }
         }
     }
