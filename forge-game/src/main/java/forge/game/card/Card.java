@@ -2043,9 +2043,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         return currentState.getNonManaAbilities();
     }
-    public final Iterable<String> getUnparsedAbilities() {
-        return currentState.getUnparsedAbilities();
+
+    public final FCollectionView<SpellAbility> getIntrinsicSpellAbilities() {
+        return currentState.getIntrinsicSpellAbilities();
     }
+
     public final FCollectionView<SpellAbility> getAllSpellAbilities() {
         final FCollection<SpellAbility> res = new FCollection<>();
         for (final CardStateName key : states.keySet()) {
@@ -3276,18 +3278,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         originalSVars.clear();
     }
 
-    public final void setIntrinsicAbilities(final List<String> a) {
-        currentState.setUnparsedAbilities(new ArrayList<>(a));
-    }
-
     public final void addIntrinsicKeyword(final String s) {
         if (currentState.addIntrinsicKeyword(s)) {
             currentState.getView().updateKeywords(this, currentState);
         }
-    }
-
-    public final void addIntrinsicAbility(final String s) {
-        currentState.addIntrinsicAbility(s);
     }
 
     public final void removeIntrinsicKeyword(final String s) {
@@ -3300,7 +3294,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return extrinsicKeyword;
     }
     public final void setExtrinsicKeyword(final List<String> a) {
-        extrinsicKeyword = new ArrayList<>(a);
+        extrinsicKeyword = Lists.newArrayList(a);
     }
 
     public void addExtrinsicKeyword(final String s) {

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
@@ -456,8 +457,6 @@ public class TokenAi extends SpellAbilityAi {
                 final String actualAbility = host.getSVar(s);
                 final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
                 c.addSpellAbility(grantedAbility);
-                // added ability to intrinsic list so copies and clones work
-                c.getCurrentState().addUnparsedAbility(actualAbility);
             }
         }
 

@@ -20,6 +20,7 @@ package forge.game;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.card.MagicColor;
 import forge.game.ability.AbilityFactory;
@@ -369,7 +370,8 @@ public final class GameActionUtil {
             if (spliceKwCost == null)
                 continue;
 
-            Map<String, String> params = AbilityFactory.getMapParams(c.getCurrentState().getFirstUnparsedAbility());
+            SpellAbility firstSpell = c.getCurrentState().getFirstAbility();
+            Map<String, String> params = Maps.newHashMap(firstSpell.getMapParams());
             AbilityRecordType rc = AbilityRecordType.getRecordType(params);
             ApiType api = rc.getApiTypeOf(params);
             AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c, null);

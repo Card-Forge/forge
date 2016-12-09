@@ -292,8 +292,6 @@ public class TokenEffect extends SpellAbilityEffect {
                         for (final Card c : tokens) {
                             final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
                             c.addSpellAbility(grantedAbility);
-                            // added ability to intrinsic list so copies and clones work
-                            c.getCurrentState().addUnparsedAbility(actualAbility);
                         }
                     }
                 }

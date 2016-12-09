@@ -30,6 +30,7 @@ import java.util.Map;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * <p>
@@ -440,16 +441,17 @@ public final class AbilityFactory {
         if(!card.isSplitCard()) 
             throw new IllegalStateException("Fuse ability may be built only on split cards");
         
-        final String strLeftAbility = card.getState(CardStateName.LeftSplit).getFirstUnparsedAbility();
-        Map<String, String> leftMap = getMapParams(strLeftAbility);
+        SpellAbility leftAbility = card.getState(CardStateName.LeftSplit).getFirstAbility();
+        Map<String, String> leftMap = Maps.newHashMap(leftAbility.getMapParams());
         AbilityRecordType leftType = AbilityRecordType.getRecordType(leftMap);
         ApiType leftApi = leftType.getApiTypeOf(leftMap);
         leftMap.put("StackDecription", leftMap.get("SpellDescription"));
         leftMap.put("SpellDescription", "Fuse (you may cast both halves of this card from your hand).");
         leftMap.put("ActivationZone", "Hand");
-    
-        final String strRightAbility = card.getState(CardStateName.RightSplit).getFirstUnparsedAbility();
-        Map<String, String> rightMap = getMapParams(strRightAbility);
+
+        SpellAbility rightAbility = card.getState(CardStateName.RightSplit).getFirstAbility();
+        Map<String, String> rightMap = Maps.newHashMap(rightAbility.getMapParams());
+
         AbilityRecordType rightType = AbilityRecordType.getRecordType(leftMap);
         ApiType rightApi = leftType.getApiTypeOf(rightMap);
         rightMap.put("StackDecription", rightMap.get("SpellDescription"));

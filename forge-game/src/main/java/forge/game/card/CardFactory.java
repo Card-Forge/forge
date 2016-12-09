@@ -91,7 +91,11 @@ public class CardFactory {
             out = CardFactory.copyStats(in, in.getController());
             out.setToken(true);
 
-            CardFactoryUtil.addAbilityFactoryAbilities(out);
+            // add abilities
+            for (SpellAbility sa : in.getIntrinsicSpellAbilities()) {
+                out.addSpellAbility(sa);
+            }
+
             for (String s : out.getStaticAbilityStrings()) {
                 out.addStaticAbility(s);
             }
@@ -313,7 +317,7 @@ public class CardFactory {
                 continue; // Ignore FaceDown for DFC since they have none.
             }
             card.setState(state, false);
-            CardFactoryUtil.addAbilityFactoryAbilities(card);
+
             for (String stAb : card.getStaticAbilityStrings()) {
                 final StaticAbility s = card.addStaticAbility(stAb);
                 s.setIntrinsic(true);
@@ -441,12 +445,14 @@ public class CardFactory {
     }
 
     private static void readCardFace(Card c, ICardFace face) {
-        for (String a : face.getAbilities())                 c.addIntrinsicAbility(a);
+
         for (String k : face.getKeywords())                  c.addIntrinsicKeyword(k);
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for (String s : face.getStaticAbilities())           c.addStaticAbilityString(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
         for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
+
+        CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
 
         c.setName(face.getName());
         c.setManaCost(face.getManaCost());
@@ -636,7 +642,10 @@ public class CardFactory {
         to.setTriggers(fromCharacteristics.getTriggers(), true);
         to.setReplacementEffects(fromCharacteristics.getReplacementEffects());
         // add abilities
-        CardFactoryUtil.addAbilityFactoryAbilities(to);
+        for (SpellAbility sa : fromCharacteristics.getIntrinsicSpellAbilities()) {
+            to.addSpellAbility(sa);
+        }
+
         for (String staticAbility : to.getStaticAbilityStrings()) {
         	to.addStaticAbility(staticAbility);
         }

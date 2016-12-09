@@ -17,14 +17,15 @@
  */
 package forge.game.card;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.card.CardEdition;
 import forge.card.CardRarity;
@@ -48,16 +49,15 @@ public class CardState {
     private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
     private int baseToughness = 0;
-    private List<String> intrinsicKeywords = new ArrayList<String>();
+    private List<String> intrinsicKeywords = Lists.newArrayList();
     private final FCollection<SpellAbility> nonManaAbilities = new FCollection<SpellAbility>();
     private final FCollection<SpellAbility> manaAbilities = new FCollection<SpellAbility>();
-    private List<String> unparsedAbilities = new ArrayList<String>();
     private FCollection<Trigger> triggers = new FCollection<Trigger>();
     private FCollection<ReplacementEffect> replacementEffects = new FCollection<ReplacementEffect>();
     private FCollection<StaticAbility> staticAbilities = new FCollection<StaticAbility>();
-    private List<String> staticAbilityStrings = new ArrayList<String>();
+    private List<String> staticAbilityStrings = Lists.newArrayList();
     private String imageKey = "";
-    private Map<String, String> sVars = new TreeMap<String, String>();
+    private Map<String, String> sVars = Maps.newTreeMap();
 
     private CardRarity rarity = CardRarity.Unknown;
     private String setCode = CardEdition.UNKNOWN.getCode();
@@ -170,10 +170,6 @@ public class CardState {
         return changed;
     }
 
-    public final boolean addIntrinsicAbility(final String s) {
-        return s.trim().length() != 0 && unparsedAbilities.add(s);
-    }
-
     public final boolean removeIntrinsicKeyword(final String s) {
         return intrinsicKeywords.remove(s);
     }
@@ -195,6 +191,16 @@ public class CardState {
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         return nonManaAbilities;
     }
+
+    public final FCollectionView<SpellAbility> getIntrinsicSpellAbilities() {
+        return new FCollection<SpellAbility>(Iterables.filter(getSpellAbilities(), new Predicate<SpellAbility>() {
+            @Override
+            public boolean apply(SpellAbility input) {
+                return input.isIntrinsic();
+            }
+        }));
+    }
+
     public final void setNonManaAbilities(SpellAbility sa) {
     	nonManaAbilities.clear();
     	if (sa != null) {
@@ -243,17 +249,8 @@ public class CardState {
         }
     }
 
-    public final Iterable<String> getUnparsedAbilities() {
-        return unparsedAbilities;
-    }
-    public final String getFirstUnparsedAbility() {
-        return Iterables.getFirst(unparsedAbilities, null);
-    }
-    public final boolean addUnparsedAbility(String a) {
-        return unparsedAbilities.add(a);
-    }
-    public final void setUnparsedAbilities(final List<String> list) {
-        unparsedAbilities = list;
+    public final SpellAbility getFirstAbility() {
+        return Iterables.getFirst(getIntrinsicSpellAbilities(), null);
     }
 
     public final FCollectionView<Trigger> getTriggers() {
@@ -335,7 +332,8 @@ public class CardState {
         view.updateFoilIndex(this);
     }
     public final void setSVars(final Map<String, String> newSVars) {
-        sVars = newSVars;
+        sVars = Maps.newTreeMap();
+        sVars.putAll(newSVars);
         view.updateFoilIndex(this);
     }
 
@@ -355,13 +353,12 @@ public class CardState {
         setColor(source.getColor());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
-        intrinsicKeywords = new ArrayList<String>(source.intrinsicKeywords);
-        unparsedAbilities = new ArrayList<String>(source.unparsedAbilities);
-        staticAbilityStrings = new ArrayList<String>(source.staticAbilityStrings);
+        intrinsicKeywords = Lists.newArrayList(source.intrinsicKeywords);
+        staticAbilityStrings = Lists.newArrayList(source.staticAbilityStrings);
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
         setSetCode(source.setCode);
-        setSVars(new TreeMap<String, String>(source.getSVars()));
+        setSVars(source.getSVars());
         replacementEffects = new FCollection<ReplacementEffect>();
         for (ReplacementEffect RE : source.getReplacementEffects()) {
             replacementEffects.add(RE.getCopy());

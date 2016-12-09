@@ -2010,10 +2010,10 @@ public class CardFactoryUtil {
      * @param card
      *            the card
      */
-    public static final void addAbilityFactoryAbilities(final Card card) {
+    public static final void addAbilityFactoryAbilities(final Card card, final Iterable<String> abilities) {
         // **************************************************
         // AbilityFactory cards
-        for (String rawAbility : card.getUnparsedAbilities()) {
+        for (String rawAbility : abilities) {
             final SpellAbility intrinsicAbility = AbilityFactory.getAbility(rawAbility, card);
             card.addSpellAbility(intrinsicAbility);
             intrinsicAbility.setIntrinsic(true);
@@ -2102,8 +2102,6 @@ public class CardFactoryUtil {
                         " could cast a sorcery.)";
 
                 card.addSpellAbility(AbilityFactory.getAbility(effect, card));
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(effect);
             }
             else if (keyword.startsWith("Cycling")) {
                 addSpellAbility(keyword, card, null);
@@ -2431,8 +2429,6 @@ public class CardFactoryUtil {
                 // instantiate attach ability
                 final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
                 card.addSpellAbility(sa);
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             else if (keyword.startsWith("Outlast")) {
                 addSpellAbility(keyword, card, null);
@@ -2467,8 +2463,6 @@ public class CardFactoryUtil {
                 // instantiate attach ability
                 final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
                 card.addSpellAbility(sa);
-                // add ability to intrinsic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             else if (keyword.startsWith("Bestow")) {
                 addSpellAbility(keyword, card, null);
@@ -3462,10 +3456,10 @@ public class CardFactoryUtil {
             newSA.getMapParams().put("Secondary", "True");
             newSA.setPayCosts(cost);
             newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
+            newSA.setIntrinsic(intrinsic);
 
             if (!intrinsic) {
                 newSA.setTemporary(true);
-                newSA.setIntrinsic(false);
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
@@ -3491,7 +3485,13 @@ public class CardFactoryUtil {
             awakenSpell.setDescription(desc);
             awakenSpell.setBasicSpell(false);
             awakenSpell.setPayCosts(awakenCost);
+            awakenSpell.setIntrinsic(intrinsic);
 
+            if (!intrinsic) {
+                awakenSpell.setTemporary(true);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(awakenSpell);
+            }
             card.addSpellAbility(awakenSpell);
         } else if (keyword.startsWith("Bestow")) {
             final String[] params = keyword.split(":");
@@ -3508,14 +3508,12 @@ public class CardFactoryUtil {
                     " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             sa.setStackDescription("Bestow - " + card.getName());
             sa.setBasicSpell(false);
+            sa.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
-            } else {
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(sbAttach.toString());
             }
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Dash")) {
@@ -3537,10 +3535,10 @@ public class CardFactoryUtil {
             newSA.setDescription(desc);
             newSA.setBasicSpell(false);
             newSA.setDash(true);
+            newSA.setIntrinsic(intrinsic);
 
             if (!intrinsic) {
                 newSA.setTemporary(true);
-                newSA.setIntrinsic(false);
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
@@ -3558,9 +3556,10 @@ public class CardFactoryUtil {
             newSA.setIsEmerge(true);
             newSA.setPayCosts(new Cost(costStr, false));
             newSA.setDescription(sa.getDescription() + " (Emerge)");
+            newSA.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 newSA.setTemporary(true);
-                newSA.setIntrinsic(false);
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
@@ -3576,9 +3575,10 @@ public class CardFactoryUtil {
             newSA.addOptionalCost(OptionalCost.Entwine);
             newSA.setDescription(sa.getDescription() + " (Entwine)");
             newSA.setStackDescription(""); // Empty StackDescription to rebuild it.
+            newSA.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 newSA.setTemporary(true);
-                newSA.setIntrinsic(false);
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
@@ -3619,10 +3619,10 @@ public class CardFactoryUtil {
             newSA.setBasicSpell(false);
             newSA.setPayCosts(evokedCost);
             newSA.setEvoke(true);
+            newSA.setIntrinsic(intrinsic);
 
             if (!intrinsic) {
                 newSA.setTemporary(true);
-                newSA.setIntrinsic(false);
                 kws.addSpellAbility(newSA);
             }
 
@@ -3638,6 +3638,7 @@ public class CardFactoryUtil {
 
                 final SpellAbility sa = AbilityFactory.getAbility(abString, card);
                 sa.setPayCosts(new Cost(card.getManaCost(), false));
+                sa.setIntrinsic(intrinsic);
                 card.addSpellAbility(sa);
             }
         } else if (keyword.startsWith("Monstrosity")) {
@@ -3657,9 +3658,10 @@ public class CardFactoryUtil {
             }
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 // sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
             }
@@ -3676,14 +3678,12 @@ public class CardFactoryUtil {
                     " SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
-            } else {
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(effect);
             }
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Outlast")) {
@@ -3705,14 +3705,12 @@ public class CardFactoryUtil {
             abilityStr.append("| SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")");
 
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
+            sa.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
-            } else {
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(abilityStr.toString());
             }
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Scavenge")) {
@@ -3728,14 +3726,12 @@ public class CardFactoryUtil {
             card.setSVar("ScavengeX", "Count$CardPower");
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
-            } else {
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(effect);
             }
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Surge")) {
@@ -3751,9 +3747,11 @@ public class CardFactoryUtil {
             String desc = "Surge " + surgeCost.toSimpleString() + " (" + Keyword.getInstance(keyword).getReminderText()
                     + ")";
             newSA.setDescription(desc);
+            
+            newSA.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 newSA.setTemporary(true);
-                newSA.setIntrinsic(false);
                 // sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(newSA);
             }
@@ -3769,9 +3767,10 @@ public class CardFactoryUtil {
                     + Keyword.getInstance(keyword).getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
             }
@@ -3789,14 +3788,12 @@ public class CardFactoryUtil {
                     " (" + Keyword.getInstance(keyword).getReminderText() + ")";
             
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
-            } else {
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(effect);
             }
             card.addSpellAbility(sa);
         } else if (keyword.endsWith(" offering")) {
@@ -3814,9 +3811,10 @@ public class CardFactoryUtil {
             newSA.setIsOffering(true);
             newSA.setPayCosts(sa.getPayCosts());
             newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
+            newSA.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 newSA.setTemporary(true);
-                newSA.setIntrinsic(false);
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
@@ -3832,14 +3830,12 @@ public class CardFactoryUtil {
                     "KeepSubtypes$ True | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
-            } else {
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(effect);
             }
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Cycling")) {
@@ -3854,15 +3850,12 @@ public class CardFactoryUtil {
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIsCycling(true);
+            sa.setIntrinsic(intrinsic);
 
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
-            } else {
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(sb.toString());
             }
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("TypeCycling")) {
@@ -3886,15 +3879,12 @@ public class CardFactoryUtil {
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIsCycling(true);
+            sa.setIntrinsic(intrinsic);
 
             if (!intrinsic) {
                 sa.setTemporary(true);
-                sa.setIntrinsic(false);
                 //sa.setOriginalHost(hostCard);
                 kws.addSpellAbility(sa);
-            } else {
-                // add ability to instrinic strings so copies/clones create the ability also
-                card.getCurrentState().addUnparsedAbility(sb.toString());
             }
             card.addSpellAbility(sa);
         } else if (keyword.equals("Retrace")) {
@@ -3908,10 +3898,11 @@ public class CardFactoryUtil {
 
             final Cost cost = new Cost("Discard<1/Land>", false).add(sa.getPayCosts());
             newSA.setPayCosts(cost);
+            newSA.setIntrinsic(intrinsic);
+
             //newSA.setDescription(sa.getDescription() + " (Retrace)");
             if (!intrinsic) {
                 newSA.setTemporary(true);
-                newSA.setIntrinsic(false);
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
