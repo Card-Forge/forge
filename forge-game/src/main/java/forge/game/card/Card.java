@@ -1430,7 +1430,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                     || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
-                    || keyword.equals("Ingest")) {
+                    || keyword.equals("Ingest") || keyword.equals("Changeling")) {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute")
@@ -1939,7 +1939,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
-            } else if (keyword.equals("Rebound") || keyword.equals("Retrace")) {
+            } else if (keyword.equals("Rebound") || keyword.equals("Retrace") || keyword.equals("Changeling")) {
                 sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Presence")) {
                 sb.append(Keyword.getInstance(keyword).getReminderText());

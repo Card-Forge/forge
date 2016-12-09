@@ -2298,6 +2298,9 @@ public class CardFactoryUtil {
                 addReplacementEffect(keyword, card, null);
                 addStaticAbility(keyword, card, null);
             }
+            else if (keyword.equals("Changeling")) {
+                addStaticAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Emerge")) {
                 addSpellAbility(keyword, card, null);
             }
@@ -3931,6 +3934,15 @@ public class CardFactoryUtil {
 
             final String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All" +
                     " | Description$ " + sb.toString() + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+            StaticAbility st = card.addStaticAbility(effect);
+            st.setIntrinsic(intrinsic);
+            if (!intrinsic) {
+                kws.addStaticAbility(st);
+            }
+        } else if (keyword.equals("Changeling")) {
+            final String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+                " | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Secondary$ True" +
+                " | Description$ Changeling (" + Keyword.getInstance(keyword).getReminderText() + ")";
             StaticAbility st = card.addStaticAbility(effect);
             st.setIntrinsic(intrinsic);
             if (!intrinsic) {
