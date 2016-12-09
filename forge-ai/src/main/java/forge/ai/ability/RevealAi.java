@@ -47,7 +47,7 @@ public class RevealAi extends RevealAiBase {
                 spell = (Spell) spell.copyWithDefinedCost(new Cost(sa.getParam("MiracleCost"), false));
 
                 if (AiPlayDecision.WillPlay == ((PlayerControllerAi) ai.getController()).getAi()
-                        .canPlayFromEffectAI(spell, false, true)) {
+                        .canPlayFromEffectAI(spell, false, false)) {
                     return true;
                 }
             }
