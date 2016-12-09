@@ -2,7 +2,7 @@ Name:Game-Trail Changeling
 ManaCost:3 G G
 Types:Creature Shapeshifter
 PT:4/4
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+K:Changeling
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/game_trail_changeling.jpg
-Oracle:Changeling (This card is every creature type at all times.)\nTrample
+Oracle:Changeling (This card is every creature type.)\nTrample

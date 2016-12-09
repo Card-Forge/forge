@@ -2,8 +2,8 @@ Name:Turtleshell Changeling
 ManaCost:3 U
 Types:Creature Shapeshifter
 PT:1/4
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+K:Changeling
 A:AB$ Pump | Cost$ 1 U | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turtleshell_changeling.jpg
-Oracle:Changeling (This card is every creature type at all times.)\n{1}{U}: Switch Turtleshell Changeling's power and toughness until end of turn.
+Oracle:Changeling (This card is every creature type.)\n{1}{U}: Switch Turtleshell Changeling's power and toughness until end of turn.

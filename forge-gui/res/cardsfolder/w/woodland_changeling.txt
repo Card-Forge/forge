@@ -2,6 +2,6 @@ Name:Woodland Changeling
 ManaCost:1 G
 Types:Creature Shapeshifter
 PT:2/2
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+K:Changeling
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_changeling.jpg
-Oracle:Changeling (This card is every creature type at all times.)
+Oracle:Changeling (This card is every creature type.)
