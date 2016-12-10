@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Ariel 3
+Title=Ariel
+Difficulty=hard
+Description=U splash G linear Merfolk deck with Collected Company and many cheap creatures
+Icon=Ariel.jpg
+Deck Type=constructed
+[Main]
+4 Botanical Sanctum
+3 Cold-Eyed Selkie
+4 Collected Company
+1 Coralhelm Commander
+2 Forest|ORI
+4 Hinterland Harbor
+10 Island|ORI
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+3 Merrow Commerce
+3 Merrow Reejerey
+2 Savor the Moment
+4 Sea's Claim
+3 Stonybrook Banneret
+1 Thassa, God of the Sea
+4 Triton Shorestalker
+2 True-Name Nemesis
+2 Vapor Snag
