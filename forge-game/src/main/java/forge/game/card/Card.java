@@ -2593,14 +2593,28 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addChangedCardTypes(final CardType addType, final CardType removeType,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeCreatureTypes, final long timestamp) {
+        addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes, timestamp, true);
+    }
+
+    public final void addChangedCardTypes(final CardType addType, final CardType removeType,
+            final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
+            final boolean removeCreatureTypes, final long timestamp, final boolean updateView) {
 
         changedCardTypes.put(timestamp, new CardChangedType(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes));
-        currentState.getView().updateType(currentState);
+        if (updateView) {
+            currentState.getView().updateType(currentState);
+        }
     }
 
     public final void addChangedCardTypes(final String[] types, final String[] removeTypes,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeCreatureTypes, final long timestamp) {
+        addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes, timestamp, true);
+    }
+
+    public final void addChangedCardTypes(final String[] types, final String[] removeTypes,
+            final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
+            final boolean removeCreatureTypes, final long timestamp, final boolean updateView) {
         CardType addType = null;
         CardType removeType = null;
         if (types != null) {
@@ -2612,12 +2626,18 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
-                removeCreatureTypes, timestamp);
+                removeCreatureTypes, timestamp, updateView);
     }
 
     public final void removeChangedCardTypes(final long timestamp) {
+        removeChangedCardTypes(timestamp, true);
+    }
+
+    public final void removeChangedCardTypes(final long timestamp, final boolean updateView) {
         CardChangedType changed = changedCardTypes.remove(timestamp);
-        currentState.getView().updateType(currentState);
+        if (updateView) {
+            currentState.getView().updateType(currentState);
+        }
 
         // if it stops being a land, the abilities does need to be removed
         if (changed != null && changed.getAddType() != null && changed.getAddType().isLand()) {
@@ -3066,6 +3086,11 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
             final boolean removeAllKeywords, final long timestamp) {
+        addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, timestamp, true);
+    }
+
+    public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
+            final boolean removeAllKeywords, final long timestamp, final boolean updateView) {
         keywords.removeAll(getCantHaveOrGainKeyword());
         // if the key already exists - merge entries
         final KeywordsChange cks = changedCardKeywords.get(timestamp);
@@ -3086,7 +3111,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             newCks.addKeywordsToCard(this);
             changedCardKeywords.put(timestamp, newCks);
         }
-        updateKeywords();
+        
+        if (updateView) {
+            updateKeywords();
+        }
     }
 
     public final void addChangedCardKeywords(final String[] keywords, final String[] removeKeywords,
@@ -3105,10 +3133,16 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final KeywordsChange removeChangedCardKeywords(final long timestamp) {
+        return removeChangedCardKeywords(timestamp, true);
+    }
+
+    public final KeywordsChange removeChangedCardKeywords(final long timestamp, final boolean updateView) {
         KeywordsChange change = changedCardKeywords.remove(timestamp);
         if (change != null) {
             change.removeKeywords(this);
-            updateKeywords();
+            if (updateView) {   
+                updateKeywords();
+            }
         }
         return change;
     }
@@ -6221,13 +6255,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void animateBestow() {
         bestowTimestamp = getGame().getNextTimestamp();
         addChangedCardTypes(new CardType(Collections.singletonList("Aura")),
-                new CardType(Collections.singletonList("Creature")), false, false, false, true, bestowTimestamp);
-        addChangedCardKeywords(Collections.singletonList("Enchant creature"), new ArrayList<String>(), false, bestowTimestamp);
+                new CardType(Collections.singletonList("Creature")), false, false, false, true, bestowTimestamp, false);
+        addChangedCardKeywords(Collections.singletonList("Enchant creature"), new ArrayList<String>(), false, bestowTimestamp, false);
     }
 
     public final void unanimateBestow() {
-        removeChangedCardKeywords(bestowTimestamp);
-        removeChangedCardTypes(bestowTimestamp);
+        removeChangedCardKeywords(bestowTimestamp, false);
+        removeChangedCardTypes(bestowTimestamp, false);
         bestowTimestamp = -1;
     }
 
