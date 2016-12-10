@@ -9,7 +9,7 @@ SVar:DBEffect:DB$ Effect | EffectOwner$ Remembered | StaticAbilities$ STPlay | T
 SVar:RDraw:Event$ Draw | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ DBChooseOpp | Description$ If you would draw a card, exile the top card of an opponent's library face down instead.
 SVar:DBChooseOpp:DB$ ChoosePlayer | ChoiceTitle$ Choose an opponent whose top library card to exile | Choices$ Player.Opponent | AILogic$ Curse | SubAbility$ DBExile
 SVar:DBExile:DB$ Mill | NumCards$ 1 | Destination$ Exile | ExileFaceDown$ True | Defined$ Player.Chosen | RememberMilled$ True
-SVar:STPlay:Mode$ Continuous | MayLookAt$ True | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play cards exiled with Shared Fate.
+SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play cards exiled with Shared Fate.
 SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ForgetDefined$ TriggeredCard
 SVar:RemAIDeck:True

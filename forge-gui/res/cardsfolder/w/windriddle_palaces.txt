@@ -1,7 +1,7 @@
 Name:Windriddle Palaces
 ManaCost:no cost
 Types:Plane Belenon
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.TopLibrary | AffectedZone$ Library | AddHiddenKeyword$ You may look at this card. & Your opponent may look at this card. | Description$ Players play with the top card of their libraries revealed.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.TopLibrary | AffectedZone$ Library | MayLookAt$ Player | Description$ Players play with the top card of their libraries revealed.
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.TopLibrary | AffectedZone$ Library | MayPlay$ You | Description$ You may play the top card of any player's library.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, each player puts the top card of his or her library into his or her graveyard.
 SVar:RolledChaos:AB$ Mill | Cost$ 0 | NumCards$ 1 | Defined$ Player
