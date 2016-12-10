@@ -82,14 +82,18 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
         boolean flash = card.hasKeyword("Flash");
 
-        if (this.hasParam("Bestow") && !card.isBestowed()) {
+        if (this.hasParam("Bestow") && !card.isBestowed() && !card.isInZone(ZoneType.Battlefield)) {
             // Rule 601.3: cast Bestow with Flash
             // for the check the card does need to be animated
             // otherwise the StaticAbility will not found them
+
+            // LKI copy does not work, need to check for the Static Abilities which might effect this card
             card.animateBestow(false); // when animating and unanimating Bestow, do not update the view to prevent flickering
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(card));
             flash = card.hasKeyword("Flash");
             card.unanimateBestow(false);
+            // need to check again to reset the Keywords and other effects
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(card));
         }
 
         if (!(card.isInstant() || activator.canCastSorcery() || flash
