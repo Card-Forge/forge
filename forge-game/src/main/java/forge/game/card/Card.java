@@ -6253,15 +6253,23 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void animateBestow() {
+        animateBestow(true);
+    }
+
+    public final void animateBestow(final boolean updateView) {
         bestowTimestamp = getGame().getNextTimestamp();
         addChangedCardTypes(new CardType(Collections.singletonList("Aura")),
-                new CardType(Collections.singletonList("Creature")), false, false, false, true, bestowTimestamp, false);
-        addChangedCardKeywords(Collections.singletonList("Enchant creature"), new ArrayList<String>(), false, bestowTimestamp, false);
+                new CardType(Collections.singletonList("Creature")), false, false, false, true, bestowTimestamp, updateView);
+        addChangedCardKeywords(Collections.singletonList("Enchant creature"), new ArrayList<String>(), false, bestowTimestamp, updateView);
     }
 
     public final void unanimateBestow() {
-        removeChangedCardKeywords(bestowTimestamp, false);
-        removeChangedCardTypes(bestowTimestamp, false);
+        unanimateBestow(true);
+    }
+
+    public final void unanimateBestow(final boolean updateView) {
+        removeChangedCardKeywords(bestowTimestamp, updateView);
+        removeChangedCardTypes(bestowTimestamp, updateView);
         bestowTimestamp = -1;
     }
 

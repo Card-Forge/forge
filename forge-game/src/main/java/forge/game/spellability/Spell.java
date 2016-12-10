@@ -86,10 +86,10 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             // Rule 601.3: cast Bestow with Flash
             // for the check the card does need to be animated
             // otherwise the StaticAbility will not found them
-            card.animateBestow();
+            card.animateBestow(false); // when animating and unanimating Bestow, do not update the view to prevent flickering
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(card));
             flash = card.hasKeyword("Flash");
-            card.unanimateBestow();
+            card.unanimateBestow(false);
         }
 
         if (!(card.isInstant() || activator.canCastSorcery() || flash
