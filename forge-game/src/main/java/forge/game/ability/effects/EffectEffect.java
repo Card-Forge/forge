@@ -150,7 +150,7 @@ public class EffectEffect extends SpellAbilityEffect {
         // Grant abilities
         if (effectAbilities != null) {
             for (final String s : effectAbilities) {
-                final String actualAbility = hostCard.getSVar(s);
+                final String actualAbility = AbilityUtils.getSVar(sa, s);
 
                 final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, eff);
                 eff.addSpellAbility(grantedAbility);
@@ -161,9 +161,11 @@ public class EffectEffect extends SpellAbilityEffect {
         // Grant triggers
         if (effectTriggers != null) {
             for (final String s : effectTriggers) {
-                final String actualTrigger = hostCard.getSVar(s);
+                final String actualTrigger = AbilityUtils.getSVar(sa, s);
 
                 final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, eff, true);
+                final String ability = AbilityUtils.getSVar(sa, parsedTrigger.getMapParams().get("Execute"));
+                parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, eff));
                 final Trigger addedTrigger = eff.addTrigger(parsedTrigger);
                 addedTrigger.setIntrinsic(true);
             }
@@ -172,7 +174,7 @@ public class EffectEffect extends SpellAbilityEffect {
         // Grant static abilities
         if (effectStaticAbilities != null) {
             for (final String s : effectStaticAbilities) {
-                final StaticAbility addedStaticAbility = eff.addStaticAbility(hostCard.getSVar(s));
+                final StaticAbility addedStaticAbility = eff.addStaticAbility(AbilityUtils.getSVar(sa, s));
                 addedStaticAbility.setIntrinsic(true);
             }
         }
@@ -180,7 +182,7 @@ public class EffectEffect extends SpellAbilityEffect {
         // Grant replacement effects
         if (effectReplacementEffects != null) {
             for (final String s : effectReplacementEffects) {
-                final String actualReplacement = hostCard.getSVar(s);
+                final String actualReplacement = AbilityUtils.getSVar(sa, s);
 
                 final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true);
                 final ReplacementEffect addedReplacement = eff.addReplacementEffect(parsedReplacement);

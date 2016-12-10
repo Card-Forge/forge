@@ -3027,6 +3027,19 @@ public class CardFactoryUtil {
             final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self | MiracleCost$ " + manacost;
             final String abStrPlay = "DB$ Play | Defined$ Self | PlayCost$ " + manacost;
 
+            final String abStrEffect = "DB$ Effect | RememberObjects$ Self | Duration$ Permanent "
+                + " | StaticAbilities$ SMayLookAt | Triggers$ TrigCleanup";
+
+            final String abStrLook = "Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Hand "
+                + " | EffectZone$ Command | MayLookAt$ Player";
+
+            //SVar:TrigCleanup:
+            final String trigExile = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Hand " +
+                    " | Destination$ Any | TriggerZones$ Command | Static$ True | Execute$ MiracleSelfExile";
+
+            //SVar:DBExileSelf:
+            final String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"; 
+
             final String trigStrDrawn = "Mode$ Drawn | ValidCard$ Card.Self | Miracle$ True | Secondary$ True"
                 + " | OptionalDecider$ You | Static$ True | TriggerDescription$ CARDNAME - Miracle";
 
@@ -3036,7 +3049,15 @@ public class CardFactoryUtil {
 
             final Trigger triggerDrawn = TriggerHandler.parseTrigger(trigStrDrawn, card, intrinsic);
 
-            triggerDrawn.setOverridingAbility(AbilityFactory.getAbility(abStrReveal, card));
+            SpellAbility revealSA = AbilityFactory.getAbility(abStrReveal, card);
+
+            AbilitySub effectSA = (AbilitySub)AbilityFactory.getAbility(abStrEffect, card);
+            effectSA.setSVar("SMayLookAt", abStrLook);
+            effectSA.setSVar("TrigCleanup", trigExile);
+            effectSA.setSVar("MiracleSelfExile", abExile);
+            revealSA.setSubAbility(effectSA);
+
+            triggerDrawn.setOverridingAbility(revealSA);
 
             final Trigger triggerRevealed = TriggerHandler.parseTrigger(trigStrRevealed, card, intrinsic);
 
