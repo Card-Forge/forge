@@ -42,7 +42,7 @@ public class PlayerZone extends Zone {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (!c.mayPlay(who).isEmpty() || c.hasKeyword("Your opponent may look at this card.")) {
+                if (!c.mayPlay(who).isEmpty() || c.mayPlayerLook(who)) {
                     return true;
                 }
                 return false;
@@ -53,7 +53,7 @@ public class PlayerZone extends Zone {
     private final class OwnCardsActivationFilter implements Predicate<Card> {
         @Override
         public boolean apply(final Card c) {
-            if (c.hasKeyword("You may look at this card.")) {
+            if (c.mayPlayerLook(c.getController())) {
                 return true;
             }
 

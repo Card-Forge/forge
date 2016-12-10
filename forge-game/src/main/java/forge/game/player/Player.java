@@ -1313,7 +1313,15 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (!library.isEmpty()) {
             Card c = library.get(0);
-            boolean topCardRevealed = c.hasKeyword("Your opponent may look at this card.");
+            boolean topCardRevealed = false;
+
+            for (Player p : this.getAllOtherPlayers()) {
+                if (c.mayPlayerLook(p)) {
+                    topCardRevealed = true;
+                    break;
+                }
+            }
+
             c = game.getAction().moveToHand(c);
             drawn.add(c);
 
@@ -1348,7 +1356,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             view.updateNumDrawnThisTurn(this);
 
             // Run triggers
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Card", c);
             runParams.put("Number", numDrawnThisTurn);
             runParams.put("Player", this);

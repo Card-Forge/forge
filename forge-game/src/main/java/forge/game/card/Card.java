@@ -2296,6 +2296,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         view.updateController(this);
     }
 
+    public boolean mayPlayerLook(final Player player) {
+        return view.mayPlayerLook(player.getView());
+    }
+
     public final void setMayLookAt(final Player player, final boolean mayLookAt) {
         setMayLookAt(player, mayLookAt, false);
     }

@@ -379,19 +379,13 @@ public class CardView extends GameEntityView {
             //$FALL-THROUGH$
         case Sideboard:
             //face-up cards in these zones are hidden to opponents unless they specify otherwise
-            if (controller.isOpponentOf(viewer) && !getCurrentState().getOpponentMayLook()) {
+            if (controller.isOpponentOf(viewer) && !mayPlayerLook(viewer)) {
                 break;
             }
             return true;
         case Library:
         case PlanarDeck:
             //cards in these zones are hidden to all unless they specify otherwise
-            if (viewer != null && viewer.equals(controller) && getCurrentState().getYouMayLook()) {
-                return true;
-            }
-            if (controller.isOpponentOf(viewer) && getCurrentState().getOpponentMayLook()) {
-                return true;
-            }
             break;
         case SchemeDeck:
             // true for now, to actually see the Scheme cards (can't see deck anyway)
@@ -438,9 +432,6 @@ public class CardView extends GameEntityView {
             return true;
         }
         if (isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer)) {
-            return true;
-        }
-        if (getController().isOpponentOf(viewer) && getCurrentState().getOpponentMayLook()) {
             return true;
         }
         return false;
@@ -969,12 +960,7 @@ public class CardView extends GameEntityView {
         public boolean hasTrample() {
             return get(TrackableProperty.HasTrample);
         }
-        public boolean getYouMayLook() {
-            return get(TrackableProperty.YouMayLook);
-        }
-        public boolean getOpponentMayLook() {
-            return get(TrackableProperty.OpponentMayLook);
-        }
+
         public int getBlockAdditional() {
             return get(TrackableProperty.BlockAdditional);
         }
@@ -990,8 +976,6 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasInfect, c.hasKeyword("Infect", state));
             set(TrackableProperty.HasStorm, c.hasKeyword("Storm", state));
             set(TrackableProperty.HasTrample, c.hasKeyword("Trample", state));
-            set(TrackableProperty.YouMayLook, c.hasKeyword("You may look at this card."));
-            set(TrackableProperty.OpponentMayLook, c.hasKeyword("Your opponent may look at this card."));
             set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature.", state));
             updateAbilityText(c, state);
         }

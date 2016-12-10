@@ -366,13 +366,6 @@ public class GameAction {
         } else if (toBattlefield) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously 
             copied.setTimestamp(game.getNextTimestamp());
-            for (String s : copied.getKeywords()) {
-                if (s.startsWith("You may look at this card.")
-                        || s.startsWith("Your opponent may look at this card.")) {
-                    copied.removeAllExtrinsicKeyword(s);
-                    copied.removeHiddenExtrinsicKeyword(s);
-                }
-            }
             for (Player p : game.getPlayers()) {
                 copied.getDamageHistory().setNotAttackedSinceLastUpkeepOf(p);
                 copied.getDamageHistory().setNotBlockedSinceLastUpkeepOf(p);
@@ -387,13 +380,6 @@ public class GameAction {
         		|| zoneTo.is(ZoneType.Library)
         		|| zoneTo.is(ZoneType.Exile)) {
             copied.setTimestamp(game.getNextTimestamp());
-            for (String s : copied.getKeywords()) {
-                if (s.startsWith("You may look at this card.")
-                        || s.startsWith("Your opponent may look at this card.")) {
-                    copied.removeAllExtrinsicKeyword(s);
-                    copied.removeHiddenExtrinsicKeyword(s);
-                }
-            }
             copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
                 copied.setState(CardStateName.Original, true);
@@ -948,7 +934,10 @@ public class GameAction {
             final Player pl = (Player) entity;
             boolean invalid = false;
 
-            if (tgt.canOnlyTgtOpponent() && !c.getController().isOpponentOf(pl)) {
+            if (!game.getPlayers().contains(pl)) {
+                // lost player can't have Aura on it
+                invalid = true;
+            } else if (tgt.canOnlyTgtOpponent() && !c.getController().isOpponentOf(pl)) {
                 invalid = true;
             }
             else if (pl.hasProtectionFrom(c)) {

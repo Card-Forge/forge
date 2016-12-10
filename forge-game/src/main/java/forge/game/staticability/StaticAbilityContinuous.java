@@ -137,7 +137,9 @@ public final class StaticAbilityContinuous {
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
-        boolean controllerMayLookAt = false;
+
+        List<Player> mayLookAt = null;
+
         boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayIgnoreColor = false, mayPlayWithFlash = false;
         Integer mayPlayLimit = null;
 
@@ -367,7 +369,11 @@ public final class StaticAbilityContinuous {
         if (layer == StaticAbilityLayer.RULES) {
             // These fall under Rule changes, as they don't fit any other category
             if (params.containsKey("MayLookAt")) {
-                controllerMayLookAt = true;
+                String look = params.get("MayLookAt");
+                if ("True".equals(look)) {
+                    look = "You";
+                }
+                mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, null);
             }
             if (params.containsKey("MayPlay")) {
                 controllerMayPlay = true;
@@ -622,8 +628,10 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            if (controllerMayLookAt) {
-                affectedCard.setMayLookAt(controller, true);
+            if (mayLookAt != null) {
+                for (Player p : mayLookAt) {
+                    affectedCard.setMayLookAt(p, true);
+                }
             }
             if (controllerMayPlay && (mayPlayLimit == null || hostCard.getMayPlayTurn() < mayPlayLimit)) {
                 Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;

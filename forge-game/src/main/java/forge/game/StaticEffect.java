@@ -17,6 +17,7 @@
  */
 package forge.game;
 
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -875,7 +876,6 @@ public class StaticEffect {
     final CardCollectionView remove() {
         final CardCollectionView affectedCards = getAffectedCards();
         final List<Player> affectedPlayers = getAffectedPlayers();
-        final Player controller = getSource().getController();
         final Map<String, String> params = getParams();
 
         String changeColorWordsTo = null;
@@ -888,7 +888,9 @@ public class StaticEffect {
         boolean setPT = false;
         String[] addHiddenKeywords = null;
         String addColors = null;
-        boolean removeMayLookAt = false, removeMayPlay = false;
+        boolean removeMayPlay = false;
+
+        List<Player> mayLookAt = null;
 
         if (params.containsKey("ChangeColorWordsTo")) {
             changeColorWordsTo = params.get("ChangeColorWordsTo");
@@ -952,7 +954,11 @@ public class StaticEffect {
         }
 
         if (params.containsKey("MayLookAt")) {
-            removeMayLookAt = true;
+            String look = params.get("MayLookAt");
+            if ("True".equals(look)) {
+                look = "You";
+            }
+            mayLookAt = AbilityUtils.getDefinedPlayers(source, look, null);
         }
         if (params.containsKey("MayPlay")) {
             removeMayPlay = true;
@@ -1049,8 +1055,10 @@ public class StaticEffect {
             }
 
             // remove may look at
-            if (removeMayLookAt) {
-                affectedCard.setMayLookAt(controller, false);
+            if (mayLookAt != null) {
+                for (Player p : mayLookAt) {
+                    affectedCard.setMayLookAt(p, false);
+                }
             }
             if (removeMayPlay) {
                 affectedCard.removeMayPlay(ability);
