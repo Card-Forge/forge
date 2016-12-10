@@ -105,7 +105,13 @@ public class Upkeep extends Phase {
                     final String[] k = ability.split(":");
                     sb.append("Cumulative upkeep for " + c);
 
-                    final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
+                    final SpellAbility upkeepAbility = new SpellAbility(c, Cost.Zero) {
+
+                        @Override
+                        public boolean canPlay() {
+                            return true;
+                        }
+
                         @Override
                         public void resolve() {
                             c.addCounter(CounterType.AGE, 1, true);
@@ -127,6 +133,7 @@ public class Upkeep extends Phase {
                     upkeepAbility.setActivatingPlayer(controller);
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
+                    upkeepAbility.setTrigger(true);
 
                     game.getStack().addSimultaneousStackEntry(upkeepAbility);
                 }

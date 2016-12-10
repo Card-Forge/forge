@@ -804,17 +804,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (activator == null) {
                 if (sa.getHostCard().getController().equals(activePlayer)) {
                     activePlayerSAs.add(sa);
-                    simultaneousStackEntryList.remove(i);
-                    i--;
                 }
             } else {
                 if (activator.equals(activePlayer)) {
                     activePlayerSAs.add(sa);
-                    simultaneousStackEntryList.remove(i);
-                    i--;
                 }
             }
         }
+        simultaneousStackEntryList.removeAll(activePlayerSAs);
+
         if (activePlayerSAs.isEmpty()) {
             return false;
         }

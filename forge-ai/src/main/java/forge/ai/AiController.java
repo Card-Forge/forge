@@ -1182,6 +1182,10 @@ public class AiController {
             return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
         if (spell instanceof WrappedAbility)
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
+        if (spell.getPayCosts() == Cost.Zero && spell.getTargetRestrictions() == null) {
+            // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
+            return true;
+        }
         
         return false;
     }
