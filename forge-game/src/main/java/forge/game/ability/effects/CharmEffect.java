@@ -28,7 +28,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
         
         int indx = 0;
-        List<AbilitySub> choices = sa.getAdditionalAbilityList("Choices");
+        List<AbilitySub> choices = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
         if (restriction != null) {
             choices.removeAll(Lists.newArrayList(restriction));
         }
