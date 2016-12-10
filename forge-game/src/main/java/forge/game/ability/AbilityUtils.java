@@ -194,8 +194,9 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.equals("DelayTriggerRemembered")) {
-            if (sa.getRootAbility().isTrigger()) {
-                for (Object o : sa.getRootAbility().getTriggerRemembered()) {
+            SpellAbility trigSa = sa.isTrigger() ? sa : sa.getRootAbility().isTrigger() ? sa.getRootAbility() : null;
+            if (trigSa != null) {
+                for (Object o : trigSa.getTriggerRemembered()) {
                     if (o instanceof Card) {
                         cards.addAll(addRememberedFromCardState(game, (Card)o));
                     }
