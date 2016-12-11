@@ -4,5 +4,6 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put three +1/+1 counters on target creature you control and three +1/+1 counters on target creature an opponent controls.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBPutCounter
 SVar:DBPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature opponent controls | CounterType$ P1P1 | CounterNum$ 3
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evolutionary_escalation.jpg
 Oracle:At the beginning of your upkeep, put three +1/+1 counters on target creature you control and three +1/+1 counters on target creature an opponent controls.

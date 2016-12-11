@@ -5,5 +5,6 @@ A:SP$ GainControl | Cost$ 2 U | ValidTgts$ Equipment | TgtPrompt$ Select target 
 SVar:DBToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Germ | TokenTypes$ Creature,Germ | TokenOwner$ You | TokenPower$ 0 | TokenToughness$ 0 | TokenColors$ Black | TokenImage$ b 0 0 germ C16 | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ Targeted | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grip_of_phyresis.jpg
 Oracle:Gain control of target Equipment, then create a 0/0 black Germ creature token and attach that Equipment to it.

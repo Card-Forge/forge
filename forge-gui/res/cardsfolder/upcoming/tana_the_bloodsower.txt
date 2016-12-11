@@ -7,5 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g_1_1_saproling_C16
 SVar:X:TriggerCount$DamageAmount
 K:Partner
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tana_the_bloodsower.jpg
 Oracle:Trample\nWhenever Tana, the Bloodsower deals combat damage to a player, create that many 1/1 green Saproling creature tokens.\nPartner (You can have two commanders if both have partner.)

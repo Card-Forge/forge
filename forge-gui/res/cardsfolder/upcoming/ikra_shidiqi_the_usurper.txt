@@ -7,5 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | Trigg
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardToughness
 K:Partner
+DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ikra_shidiqi_the_usurper.jpg
 Oracle:Menace\nWhenever a creature you control deals combat damage to a player, you gain life equal to that creature's toughness.\nPartner (You can have two commanders if both have partner.)
