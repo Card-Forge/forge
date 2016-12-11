@@ -240,7 +240,7 @@ public final class AbilityFactory {
             }
         }
 
-        if (type != AbilityRecordType.SubAbility) {
+        if (type != AbilityRecordType.SubAbility || parent == null) {
             for (final String key : additionalAbilityKeys) {
                 if (mapParams.containsKey(key) && spellAbility.getAdditonalAbility(key) == null) {
                     spellAbility.setAdditionalAbility(key, getSubAbility(hostCard, mapParams.get(key), spellAbility));
