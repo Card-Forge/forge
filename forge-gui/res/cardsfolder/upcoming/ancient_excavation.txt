@@ -1,0 +1,11 @@
+Name:Ancient Excavation
+ManaCost:2 U B
+Types:Instant
+A:SP$ Draw | Cost$ 2 U B | NumCards$ X | SubAbility$ DBDiscard | References$ X | RememberDrawn$ True | SpellDescription$ Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ Y | References$ Y | Mode$ TgtChoose | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$InYourHand
+Svar:Y:Remembered$Amount
+K:TypeCycling:Basic:2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_excavation.jpg
+Oracle:Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.)

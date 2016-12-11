@@ -1,0 +1,8 @@
+Name:Seeds of Renewal
+ManaCost:6 G
+Types:Sorcery
+K:Undaunted
+A:SP$ ChangeZone | Cost$ 6 G | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SubAbility$ DBChange | SpellDescription$ Return up to two target cards from your graveyard to your hand. Exile CARDNAME.
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seeds_of_renewal.jpg
+Oracle:Return up to two target cards from your graveyard to your hand. Exile Seeds of Renewal.

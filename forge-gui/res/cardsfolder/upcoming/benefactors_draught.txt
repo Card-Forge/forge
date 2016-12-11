@@ -1,0 +1,10 @@
+Name:Benefactor's Draught
+ManaCost:1 G
+Types:Instant
+A:SP$ UntapAll | Cost$ 1 G | ValidCards$ Creature | SubAbility$ DBEffect | SpellDescription$ Untap all creatures. Until end of turn, whenever a creature an opponent controls blocks, draw a card. Draw a card.
+SVar:DBEffect:DB$Effect | Name$ Benefactor's Draught Effect | Triggers$ TrigBlock | SVars$ EffDraw | SubAbility$ DBDraw
+SVar:TrigSpellCast:Mode$ Blocks | ValidCard$ Creature.OppCtrl | Execute$ EffDraw | TriggerDescription$ Whenever a creature an opponent controls blocks, draw a card.
+SVar:EffDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+SVar:DBDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/benefactors_draught.jpg
+Oracle:Untap all creatures. Until end of turn, whenever a creature an opponent controls blocks, draw a card.\nDraw a card.

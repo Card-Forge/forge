@@ -1,0 +1,10 @@
+Name:Crystalline Crawler
+ManaCost:4
+Types:Artifact Creature Construct
+PT:1/1
+K:etbCounter:P1P1:X:no Condition:Converge — CARDNAME enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
+SVar:X:Count$Converge
+A:AB$ Mana | Cost$ SubCounter<1/P1P1> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+A:AB$ PutCounter | Cost$ T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crystalline_crawler.jpg
+Oracle:Converge - Crystalline Crawler enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.\nRemove a +1/+1 counter from Crystalline Crawler: Add one mana of any color to your mana pool.\n{T}: Put a +1/+1 counter on Crystalline Crawler.

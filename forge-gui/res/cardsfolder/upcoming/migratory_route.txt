@@ -1,0 +1,8 @@
+Name:Migratory Route
+ManaCost:3 W U
+Types:Sorcery
+A:SP$ Token | Cost$ 3 W U | TokenAmount$ 4 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ w 1 1 bird C16 | SpellDescription$ Create four 1/1 white Bird creature tokens with flying.
+K:TypeCycling:Basic:2
+DeckHas:Ability$Token
+SVar:Picture:http://www.wizards.com/global/images/magic/general/migratory_route.jpg
+Oracle:Create four 1/1 white Bird creature tokens with flying.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.)
