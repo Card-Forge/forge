@@ -2170,19 +2170,7 @@ public class CardFactoryUtil {
                 card.setSVar("GraveyardToLibrary", ab);
             }
             else if (keyword.startsWith("Echo")) {
-                final String[] k = keyword.split(":");
-                final String cost = k[1];
-                
-                String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
-                        " | Execute$ TrigUpkeepEcho | IsPresent$ Card.Self+cameUnderControlSinceLastUpkeep | Secondary$ True | " +
-                        "TriggerDescription$ Echo: At the beginning of your upkeep, if CARDNAME came under your control since the " +
-                        "beginning of your last upkeep, sacrifice it unless you pay the Echo cost";
-                String ref = "X".equals(cost) ? " | References$ X" : "";
-                card.setSVar("TrigUpkeepEcho", "AB$ Sacrifice | Cost$ 0 | SacValid$ Self | "
-                        + "Echo$ " + cost + ref);
- 
-                final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, true);
-                card.addTrigger(parsedUpkeepTrig);
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Suspend")) {
                 card.setSuspend(true);
@@ -2708,6 +2696,25 @@ public class CardFactoryUtil {
 
 
             final Trigger cardTrigger = card.addTrigger(dethroneTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Echo")) {
+            final String[] k = keyword.split(":");
+            final String cost = k[1];
+
+            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
+                    " | IsPresent$ Card.Self+cameUnderControlSinceLastUpkeep | Secondary$ True | " +
+                    "TriggerDescription$ " + Keyword.getInstance(keyword).getReminderText();
+
+            String ref = "X".equals(cost) ? " | References$ X" : "";
+            String effect = "DB$ Sacrifice | SacValid$ Self | "
+                    + "Echo$ " + cost + ref;
+
+            final Trigger trigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(trigger);
+
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
