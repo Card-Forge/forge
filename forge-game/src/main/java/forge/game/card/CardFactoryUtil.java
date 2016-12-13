@@ -66,6 +66,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -2210,7 +2211,15 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Delve")) {
-                card.getSpellAbilities().getFirst().setDelve(true);
+                if (card.isPermanent()) {
+                    for (SpellAbility sa : card.getSpellAbilities()) {
+                        if (sa instanceof SpellPermanent) {
+                            sa.setDelve(true);
+                        }
+                    }
+                } else {
+                    card.getSpellAbilities().getFirst().setDelve(true);
+                }
             }
             else if (keyword.startsWith("Haunt")) {
                 addSpellAbility(keyword, card, null);
