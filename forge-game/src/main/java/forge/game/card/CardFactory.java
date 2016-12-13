@@ -305,11 +305,6 @@ public class CardFactory {
 
         // may have to change the spell
 
-        // this is the "default" spell for permanents like creatures and artifacts 
-        if (card.isPermanent() && !card.isAura() && !card.isLand()) {
-            card.addSpellAbility(new SpellPermanent(card));
-        }
-
         CardFactoryUtil.parseKeywords(card, cardName);
 
         for (final CardStateName state : card.getStates()) {
@@ -452,8 +447,6 @@ public class CardFactory {
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
         for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
 
-        CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
-
         c.setName(face.getName());
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
@@ -474,6 +467,16 @@ public class CardFactory {
             c.setBaseToughness(face.getIntToughness());
             c.setBaseToughnessString(face.getToughness());
         }
+
+        // SpellPermanent only for Original State
+        if (c.getCurrentStateName() == CardStateName.Original) {
+            // this is the "default" spell for permanents like creatures and artifacts 
+            if (c.isPermanent() && !c.isAura() && !c.isLand()) {
+                c.addSpellAbility(new SpellPermanent(c));
+            }
+        }
+
+        CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
     }
 
     /**
