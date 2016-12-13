@@ -2211,15 +2211,7 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.equals("Delve")) {
-                if (card.isPermanent()) {
-                    for (SpellAbility sa : card.getSpellAbilities()) {
-                        if (sa instanceof SpellPermanent) {
-                            sa.setDelve(true);
-                        }
-                    }
-                } else {
-                    card.getSpellAbilities().getFirst().setDelve(true);
-                }
+                card.getSpellAbilities().getFirst().setDelve(true);
             }
             else if (keyword.startsWith("Haunt")) {
                 addSpellAbility(keyword, card, null);
