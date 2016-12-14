@@ -508,6 +508,16 @@ public class QuestController {
         final List<String> unlockedChallengeIds = new ArrayList<String>();
         final List<String> availableChallengeIds = achievements.getCurrentChallenges();
 
+        // clean up challenges potentially coming over from a different quest world
+        List<String> nonExistentIds = new ArrayList<String>();
+        for (String cid : availableChallengeIds) {
+            if (this.getChallenges().get(cid) == null) {
+                System.out.println("Warning: removing a challenge that does not exist in the current quest world: " + cid);
+                nonExistentIds.add(cid);
+            }
+        }
+        availableChallengeIds.removeAll(nonExistentIds);
+
         int maxChallenges = achievements.getWin() / getTurnsToUnlockChallenge() - achievements.getChallengesPlayed();
         if (maxChallenges > 5) {
             maxChallenges = 5;
