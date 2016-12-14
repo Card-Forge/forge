@@ -334,7 +334,10 @@ public class HumanPlay {
                     part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostAddMana) {
-                if (!p.getController().confirmPayment(part, "Do you want to add " + part.toString() + " to your mana pool?" + orString)) {
+                String desc = part.toString();
+                desc = desc.substring(0, 1).toLowerCase() + desc.substring(1);
+
+                if (!p.getController().confirmPayment(part, "Do you want to "+ desc + "?" + orString)) {
                     return false;
                 }
                 PaymentDecision pd = part.accept(hcd);
