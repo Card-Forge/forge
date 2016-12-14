@@ -99,7 +99,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);
                 while(ncopied > 0) {
                     final PaperCard cp = Aggregates.random(copysource);
-                    final Card possibleCard = Card.fromPaperCard(cp, null);
+                    final Card possibleCard = Card.fromPaperCard(cp, sa.getActivatingPlayer());
                     // Need to temporarily set the Owner so the Game is set
                     possibleCard.setOwner(sa.getActivatingPlayer());
 
