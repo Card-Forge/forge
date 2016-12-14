@@ -17,23 +17,13 @@
  */
 package forge.game.phase;
 
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CounterType;
-import forge.game.cost.Cost;
 import forge.game.player.Player;
-import forge.game.player.PlayerController.ManaPaymentPurpose;
-import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-
-import java.util.HashMap;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>
@@ -91,45 +81,6 @@ public class Upkeep extends Phase {
                             + "| UnlessPayer$ You | UnlessCost$ " + cost;
 
                     SpellAbility upkeepAbility = AbilityFactory.getAbility(effect, c);
-                    upkeepAbility.setActivatingPlayer(controller);
-                    upkeepAbility.setStackDescription(sb.toString());
-                    upkeepAbility.setDescription(sb.toString());
-                    upkeepAbility.setTrigger(true);
-
-                    game.getStack().addSimultaneousStackEntry(upkeepAbility);
-                }
-
-                // Cumulative upkeep
-                if (ability.startsWith("Cumulative upkeep")) {
-                    final StringBuilder sb = new StringBuilder();
-                    final String[] k = ability.split(":");
-                    sb.append("Cumulative upkeep for " + c);
-
-                    final SpellAbility upkeepAbility = new SpellAbility(c, Cost.Zero) {
-
-                        @Override
-                        public boolean canPlay() {
-                            return true;
-                        }
-
-                        @Override
-                        public void resolve() {
-                            c.addCounter(CounterType.AGE, 1, true);
-                            String cost = CardFactoryUtil.multiplyCost(k[1], c.getCounters(CounterType.AGE));
-                            final Cost upkeepCost = new Cost(cost, true);
-                            this.setCumulativeupkeep(true);
-                            boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, this, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
-                            final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                            runParams.put("CumulativeUpkeepPaid", Boolean.valueOf(isPaid));
-                            runParams.put("Card", this.getHostCard());
-                            runParams.put("PayingMana", StringUtils.join(this.getPayingMana(), ""));
-                            game.getTriggerHandler().runTrigger(TriggerType.PayCumulativeUpkeep, runParams, false);
-                            if (!isPaid) {
-                                game.getAction().sacrifice(c, this);
-                            }
-                        }
-                    };
-                    sb.append("\n");
                     upkeepAbility.setActivatingPlayer(controller);
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());

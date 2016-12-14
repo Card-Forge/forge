@@ -20,7 +20,6 @@ package forge.game.card;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -263,90 +262,6 @@ public class CardFactoryUtil {
         suspend.getRestrictions().setZone(ZoneType.Hand);
         return suspend;
     } // abilitySuspendStatic()
-
-    /**
-     * <p>
-     * multiplyCost.
-     * </p>
-     * 
-     * @param manacost
-     *            a {@link java.lang.String} object.
-     * @param multiplier
-     *            a int.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String multiplyCost(final String manacost, final int multiplier) {
-        if (multiplier == 0) {
-            return "";
-        }
-        if (multiplier == 1) {
-            return manacost;
-        }
-
-        final String[] tokenized = manacost.split("\\s");
-        final StringBuilder sb = new StringBuilder();
-
-        if (Character.isDigit(tokenized[0].charAt(0))) {
-            // cost starts with "generic" number cost
-            int cost = Integer.parseInt(tokenized[0]);
-            cost = multiplier * cost;
-            tokenized[0] = "" + cost;
-            sb.append(tokenized[0]);
-        }
-        else {
-            if (tokenized[0].contains("<")) {
-                final String[] advCostPart = tokenized[0].split("<");
-                final String costVariable = advCostPart[1].split(">")[0];
-                final String[] advCostPartValid = costVariable.split("\\/", 2);
-                // multiply the number part of the cost object
-                int num = Integer.parseInt(advCostPartValid[0]);
-                num = multiplier * num;
-                tokenized[0] = advCostPart[0] + "<" + num;
-                if (advCostPartValid.length > 1) {
-                    tokenized[0] = tokenized[0] + "/" + advCostPartValid[1];
-                }
-                tokenized[0] = tokenized[0] + ">";
-                sb.append(tokenized[0]);
-            }
-            else {
-                for (int i = 0; i < multiplier; i++) {
-                    // tokenized[0] = tokenized[0] + " " + tokenized[0];
-                    sb.append((" "));
-                    sb.append(tokenized[0]);
-                }
-            }
-        }
-
-        for (int i = 1; i < tokenized.length; i++) {
-            if (tokenized[i].contains("<")) {
-                final String[] advCostParts = tokenized[i].split("<");
-                final String costVariables = advCostParts[1].split(">")[0];
-                final String[] advCostPartsValid = costVariables.split("\\/", 2);
-                // multiply the number part of the cost object
-                int num = Integer.parseInt(advCostPartsValid[0]);
-                num = multiplier * num;
-                tokenized[i] = advCostParts[0] + "<" + num;
-                if (advCostPartsValid.length > 1) {
-                    tokenized[i] = tokenized[i] + "/" + advCostPartsValid[1];
-                }
-                tokenized[i] = tokenized[i] + ">";
-                sb.append((" "));
-                sb.append(tokenized[i]);
-            }
-            else {
-                for (int j = 0; j < multiplier; j++) {
-                    // tokenized[i] = tokenized[i] + " " + tokenized[i];
-                    sb.append((" "));
-                    sb.append(tokenized[i]);
-                }
-            }
-        }
-
-        String result = sb.toString();
-        //System.out.println("result: " + result);
-        result = result.trim();
-        return result;
-    }
 
     /**
      * <p>
@@ -1903,7 +1818,7 @@ public class CardFactoryUtil {
         }
         int allCreatureType = 0;
 
-        final Map<String, Integer> map = new HashMap<String, Integer>();
+        final Map<String, Integer> map = Maps.newHashMap();
         for (final Card c : list) {
             // Remove Duplicated types
             final Set<String> creatureTypes = c.getType().getCreatureTypes();
@@ -2170,6 +2085,9 @@ public class CardFactoryUtil {
                 card.setSVar("GraveyardToLibrary", ab);
             }
             else if (keyword.startsWith("Echo")) {
+                addTriggerAbility(keyword, card, null);
+            }
+            else if (keyword.startsWith("Cumulative upkeep")) {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Suspend")) {
@@ -2680,6 +2598,28 @@ public class CardFactoryUtil {
             final Trigger conspireTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
 
             final Trigger cardTrigger = card.addTrigger(conspireTrigger);
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Cumulative upkeep")) {
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[1], false);
+            String costDesc = cost.toSimpleString();
+
+            if (!cost.isOnlyManaCost()) {
+                costDesc = "- " + costDesc;
+            }
+
+            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
+                    " | IsPresent$ Card.Self | Secondary$ True | TriggerDescription$ " + k[0] + " " +
+                    costDesc + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            String effect = "DB$ Sacrifice | SacValid$ Self | CumulativeUpkeep$ " + k[1];
+
+            final Trigger trigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            final Trigger cardTrigger = card.addTrigger(trigger);
+
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
