@@ -134,6 +134,10 @@ public class Cost {
         return manapart == null ? ManaCost.ZERO : manapart.getManaToPay();
     }
 
+    private Cost() {
+    	
+    }
+
     private Cost(int genericMana) {
         costParts.add(new CostPartMana(ManaCost.get(genericMana), null));
     }
@@ -447,12 +451,21 @@ public class Cost {
         return splitStr;
     }
 
+    public final Cost copy() {
+        Cost toRet = new Cost();
+        toRet.isAbility = this.isAbility;
+        for (CostPart cp : this.costParts) {
+            toRet.costParts.add(cp.copy());
+        }
+        return toRet;
+    }
+    
     public final Cost copyWithNoMana() {
         Cost toRet = new Cost(0);
         toRet.isAbility = this.isAbility;
         for (CostPart cp : this.costParts) {
             if (!(cp instanceof CostPartMana))
-                toRet.costParts.add(cp);
+                toRet.costParts.add(cp.copy());
         }
         return toRet;
     }
@@ -773,7 +786,8 @@ public class Cost {
                 } else {
                     costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
                 }
-            } else if (part instanceof CostDiscard || part instanceof CostTapType) {
+            } else if (part instanceof CostDiscard || part instanceof CostTapType || 
+                    part instanceof CostAddMana) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
                     if (other.getClass().equals(part.getClass()) &&
@@ -786,6 +800,8 @@ public class Cost {
                         } else if (part instanceof CostTapType) {
                             CostTapType tappart = (CostTapType)part;
                             costParts.add(new CostTapType(amount, part.getType(), part.getTypeDescription(), !tappart.canTapSource));
+                        } else if (part instanceof CostAddMana) {
+                            costParts.add(new CostAddMana(amount, part.getType(), part.getTypeDescription()));
                         }
                         toRemove.add(other);
                         alreadyAdded = true;

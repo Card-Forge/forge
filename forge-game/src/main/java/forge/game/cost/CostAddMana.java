@@ -70,11 +70,7 @@ public class CostAddMana extends CostPart {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility sa) {
         Card source = sa.getHostCard();
-        
-        /*ColorSet cid = null;
-        if (ai.getGame().getRules().hasCommander()) {
-            cid = ai.getCommander().getRules().getColorIdentity();
-        }*/
+
         List<Mana> manaProduced = new ArrayList<Mana>();
         final String type = this.getType();
         for (int n = 0; n < decision.c; n++) {

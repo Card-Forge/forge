@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-
 import forge.game.CardTraitBase;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -29,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * The Class CostPart.
  */
-public abstract class CostPart implements Comparable<CostPart> {
+public abstract class CostPart implements Comparable<CostPart>, Cloneable {
     private String originalAmount;
     private String amount;
     private final String originalType, originalTypeDescription;
@@ -185,6 +184,16 @@ public abstract class CostPart implements Comparable<CostPart> {
     public abstract boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa);
 
     public int paymentOrder() { return 5; }
+
+    public CostPart copy() {
+    	CostPart clone = null;
+        try {
+            clone = (CostPart) clone();
+        } catch (final CloneNotSupportedException e) {
+            System.err.println(e);
+        }
+        return clone;
+    }
 
     @Override
     public int compareTo(CostPart o) {

@@ -1,13 +1,12 @@
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
@@ -44,8 +43,7 @@ public class CostAdjustment {
             return cost;
         }
 
-        // TODO: find better way to copy Cost object
-        Cost result = new Cost("0", sa.isAbility()).add(cost);
+        Cost result = cost.copy();
     
         boolean isStateChangeToFaceDown = false;
         if (sa.isSpell() && ((Spell) sa).isCastFaceDown()) {
@@ -60,7 +58,7 @@ public class CostAdjustment {
         if (!cardsOnBattlefield.contains(host)) {
             cardsOnBattlefield.add(host);
         }
-        final List<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
+        final List<StaticAbility> raiseAbilities = Lists.newArrayList();
     
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
@@ -166,8 +164,8 @@ public class CostAdjustment {
         if (!cardsOnBattlefield.contains(originalCard)) {
             cardsOnBattlefield.add(originalCard);
         }
-        final List<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
-        final List<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
+        final List<StaticAbility> reduceAbilities = Lists.newArrayList();
+        final List<StaticAbility> setAbilities = Lists.newArrayList();
 
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
@@ -216,7 +214,7 @@ public class CostAdjustment {
                 if (!delved.isEmpty()) {
                     final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
                     triggerList.put(ZoneType.Graveyard, delved);
-                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    final Map<String, Object> runParams = Maps.newHashMap();
                     runParams.put("Cards", triggerList);
                     runParams.put("Destination", ZoneType.Exile);
                     game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
