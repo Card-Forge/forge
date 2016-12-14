@@ -1887,12 +1887,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                         .append(".\r\n");
             } else if (keyword.startsWith("Storm")) {
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {
-                    if (sb.toString().contains("Storm (When you cast this spell, copy it for each spell cast before it this turn.")) {
-                        sb.insert(
-                                sb.indexOf("Storm (When you cast this spell, copy it for each spell cast before it this turn.") + 81,
-                                " You may choose new targets for the copies.");
+                    String stormDescBegin = "Storm (When you cast this spell, copy it for each spell cast before it this turn.";
+                    String stormDescEnd = " You may choose new targets for the copies.)";
+                    if (sb.toString().contains(stormDescBegin)) {
+                        sb.insert(sb.indexOf(stormDescBegin) + stormDescBegin.length() + 1, stormDescEnd);
                     } else {
-                        sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)");
+                        sb.append(stormDescBegin + stormDescEnd);
                     }
                 }
             } else if (keyword.startsWith("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
