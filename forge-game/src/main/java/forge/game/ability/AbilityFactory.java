@@ -240,9 +240,6 @@ public final class AbilityFactory {
             }
         }
 
-        if (hostCard.getName().equals("Sapphire Charm")) {
-            System.out.println("Type: " + type + ", Parent: " + parent);
-        }
         if (type != AbilityRecordType.SubAbility || parent == null || parent.getApi() == ApiType.Charm) {
             for (final String key : additionalAbilityKeys) {
                 if (mapParams.containsKey(key) && spellAbility.getAdditonalAbility(key) == null) {
