@@ -306,11 +306,11 @@ public class CountersPutAi extends SpellAbilityAi {
 
                 list.remove(choice);
                 sa.getTargets().add(choice);
-                choice = null;
                 if (divided) {
                     abTgt.addDividedAllocation(choice, amount);
                     break;
                 }
+                choice = null;
             }
             if (sa.getTargets().isEmpty()) {
                 return false;
