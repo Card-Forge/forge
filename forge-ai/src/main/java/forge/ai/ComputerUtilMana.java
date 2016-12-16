@@ -200,6 +200,13 @@ public class ComputerUtilMana {
                 continue;
             }
 
+            // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
+            if (sa.getHostCard() != null && sa.getApi() == ApiType.Animate && sa.getHostCard().isAura() 
+                    && ma.getHostCard() == sa.getHostCard().getEnchantingCard() 
+                    && ma.getPayCosts().hasTapCost()) {
+                continue;
+            }
+
             final String typeRes = cost.getSourceRestriction();
             if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().getType().hasStringType(typeRes)) {
                 continue;
@@ -350,6 +357,7 @@ public class ComputerUtilMana {
             }
 
             SpellAbility saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
+
             if (saPayment == null) {
                 if (!toPay.isPhyrexian() || !ai.canPayLife(2)) {
                     break; // cannot pay
