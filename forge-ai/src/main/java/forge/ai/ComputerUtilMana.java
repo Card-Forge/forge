@@ -202,6 +202,7 @@ public class ComputerUtilMana {
 
             // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
             if (sa.getHostCard() != null && sa.getApi() == ApiType.Animate && sa.getHostCard().isAura() 
+                    && "Enchanted".equals(sa.getParam("Defined"))
                     && ma.getHostCard() == sa.getHostCard().getEnchantingCard() 
                     && ma.getPayCosts().hasTapCost()) {
                 continue;
