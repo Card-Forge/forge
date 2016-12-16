@@ -325,6 +325,9 @@ public class CardState {
         }
     }
     public final boolean hasSVar(final String var) {
+        if (var == null) {
+            return false;
+        }
         return sVars.containsKey(var);
     }
     public final void setSVar(final String var, final String str) {
