@@ -157,6 +157,10 @@ public class CharmEffect extends SpellAbilityEffect {
 
     private static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
 
+        if (chosen == null) {
+            return;
+        }
+
         // Sort Chosen by SA order
         Collections.sort(chosen, new Comparator<AbilitySub>() {
             @Override
