@@ -126,7 +126,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
         
-        if (list == null || list.isEmpty()) {
+        if (list.isEmpty()) {
             // no valid targets, so we need to bail
             return false;
         }
