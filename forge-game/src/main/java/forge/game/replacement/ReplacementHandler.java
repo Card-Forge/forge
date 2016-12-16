@@ -110,12 +110,17 @@ public class ReplacementHandler {
         for (final Player p : game.getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
+
+                    // when testing ReplaceMoved effects, make sure to check last known information since the host card
+                    // could have been moved, e.g. via a mass removal event (e.g. Kalitas, Traitor of Ghet + Wrath of God)
+                    Card zoneCheckCard = replacementEffect instanceof ReplaceMoved ? game.getChangeZoneLKIInfo(crd) : crd;
+
                     if (!replacementEffect.hasRun()
                             && replacementEffect.getLayer() == layer
                             && replacementEffect.requirementsCheck(game)
                             && replacementEffect.canReplace(runParams)
                             && !possibleReplacers.contains(replacementEffect)
-                            && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
+                            && replacementEffect.zonesCheck(game.getZoneOf(zoneCheckCard))) {
                         possibleReplacers.add(replacementEffect);
                     }
                 }

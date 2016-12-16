@@ -321,6 +321,8 @@ public final class CardUtil {
 
         newCopy.setMeldedWith(in.getMeldedWith());
 
+        newCopy.setZone(in.getZone());
+
         return newCopy;
     }
 
