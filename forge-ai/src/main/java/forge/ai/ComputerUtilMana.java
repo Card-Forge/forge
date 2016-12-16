@@ -357,7 +357,6 @@ public class ComputerUtilMana {
             }
 
             SpellAbility saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
-
             if (saPayment == null) {
                 if (!toPay.isPhyrexian() || !ai.canPayLife(2)) {
                     break; // cannot pay
