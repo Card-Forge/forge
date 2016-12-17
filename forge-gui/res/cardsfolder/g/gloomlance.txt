@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberLKI$ True | SubAbility$ DBDiscard | SpellDescription$ Destroy target creature. If that creature was green or white, its controller discards a card.
 SVar:DBDiscard:DB$ Discard | Defined$ RememberedController | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:RememberedLKI$Valid Card.Green,Card.White
+SVar:X:TargetedLKI$Valid Card.Green,Card.White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomlance.jpg
 Oracle:Destroy target creature. If that creature was green or white, its controller discards a card.
