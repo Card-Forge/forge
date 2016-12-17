@@ -130,20 +130,20 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             if (!sa.usesTargeting()) {
                 // TODO: improve logic for non-targeted SAs of this type (most are currently RemAIDeck, e.g. Memory Jar, Timetwister)
                 return true;
-            }
-
-            // search targetable Opponents
-            final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(), PlayerPredicates.isTargetableBy(sa));
-
-            // get the one with the most handsize
-            Player oppTarget = Collections.max(Lists.newArrayList(oppList), PlayerPredicates.compareByZoneSize(origin));
-
-            // set the target
-            if (oppTarget != null && !oppTarget.getCardsIn(ZoneType.Hand).isEmpty()) {
-                sa.resetTargets();
-                sa.getTargets().add(oppTarget);
             } else {
-                return false;
+                // search targetable Opponents
+                final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(), PlayerPredicates.isTargetableBy(sa));
+
+                // get the one with the most handsize
+                Player oppTarget = Collections.max(Lists.newArrayList(oppList), PlayerPredicates.compareByZoneSize(origin));
+
+                // set the target
+                if (oppTarget != null && !oppTarget.getCardsIn(ZoneType.Hand).isEmpty()) {
+                    sa.resetTargets();
+                    sa.getTargets().add(oppTarget);
+                } else {
+                    return false;
+                }
             }
         } else if (origin.equals(ZoneType.Battlefield)) {
             // this statement is assuming the AI is trying to use this spell
