@@ -44,16 +44,11 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         final Player player = controller.getPlayer();
 
         //update all achievements for GUI player after game finished
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                FModel.getAchievements(game.getRules().getGameType()).updateAll(player);
-                AltWinAchievements.instance.updateAll(player);
-                PlaneswalkerAchievements.instance.updateAll(player);
-                ChallengeAchievements.instance.updateAll(player);
-            }
-        });
-    }
+        FModel.getAchievements(game.getRules().getGameType()).updateAll(player);
+        AltWinAchievements.instance.updateAll(player);
+        PlaneswalkerAchievements.instance.updateAll(player);
+        ChallengeAchievements.instance.updateAll(player);
+}
 
     public static void buildComboBox(IComboBox<AchievementCollection> cb) {
         cb.addItem(FModel.getAchievements(GameType.Constructed));
