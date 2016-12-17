@@ -501,6 +501,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Add manifest demorph static ability for creatures
         if (isCreature && !cost.isNoCost()) {
             c.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost));
+
+            c.updateStateForView();
         }
 
         return c;

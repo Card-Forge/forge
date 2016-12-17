@@ -164,12 +164,14 @@ public class CardFactoryUtil {
 
         String costDesc = manaCost.toString();
 
-        String ab = "ST$ SetState | Cost$ + " + costDesc + " + | CostDesc$ Unmanifest " + costDesc
+        // Cost need to be set later
+        String ab = "ST$ SetState | Cost$ 0 | CostDesc$ Unmanifest " + costDesc
                 + " | ManifestUp$ True"
                 + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+manifested"
                 + " | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its mana cost.)";
 
         final SpellAbility manifestUp = AbilityFactory.getAbility(ab, sourceCard);
+        manifestUp.setPayCosts(new Cost(manaCost, true));
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
