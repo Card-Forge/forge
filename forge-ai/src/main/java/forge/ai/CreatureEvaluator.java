@@ -163,7 +163,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value -= subValue(50, "eot-leaves");
         } else if (c.hasStartOfKeyword("Cumulative upkeep")) {
             value -= subValue(30, "cupkeep");
-        } else if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
+        } else if (c.hasStartOfKeyword("UpkeepCost")) {
             value -= subValue(20, "sac-unless");
         } else if (c.hasStartOfKeyword("Echo") && c.cameUnderControlSinceLastUpkeep()) {
             value -= subValue(10, "echo-unpaid");

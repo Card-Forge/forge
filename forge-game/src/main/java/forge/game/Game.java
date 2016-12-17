@@ -43,7 +43,6 @@ import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
-import forge.game.phase.Upkeep;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -77,7 +76,7 @@ public class Game {
     public final Phase endOfCombat;
     public final Phase endOfTurn;
     public final Untap untap;
-    public final Upkeep upkeep;
+    public final Phase upkeep;
     public final MagicStack stack;
     public final CostPaymentStack costPaymentStack = new CostPaymentStack();
     private final PhaseHandler phaseHandler;
@@ -239,7 +238,7 @@ public class Game {
         phaseHandler = new PhaseHandler(this);
 
         untap = new Untap(this);
-        upkeep = new Upkeep(this);
+        upkeep = new Phase(PhaseType.UPKEEP);
         cleanup = new Phase(PhaseType.CLEANUP);
         endOfCombat = new Phase(PhaseType.COMBAT_END);
         endOfTurn = new Phase(PhaseType.END_OF_TURN);
@@ -304,7 +303,7 @@ public class Game {
     public final Untap getUntap() {
         return untap;
     }
-    public final Upkeep getUpkeep() {
+    public final Phase getUpkeep() {
         return upkeep;
     }
     public final Phase getEndOfCombat() {

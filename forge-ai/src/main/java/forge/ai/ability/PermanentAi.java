@@ -135,9 +135,9 @@ public class PermanentAi extends SpellAbilityAi {
 
         // don't play cards without being able to pay the upkeep for
         for (String ability : card.getKeywords()) {
-            if (ability.startsWith("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
-                final String[] k = ability.split(" pay ");
-                final String costs = k[1].replaceAll("[{]", "").replaceAll("[}]", " ");
+            if (ability.startsWith("UpkeepCost")) {
+                final String[] k = ability.split(":");
+                final String costs = k[1];
 
                 final SpellAbility emptyAbility = new SpellAbility.EmptySa(card, ai);
                 emptyAbility.setPayCosts(new Cost(costs, true));
