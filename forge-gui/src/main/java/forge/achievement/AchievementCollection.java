@@ -48,7 +48,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         AltWinAchievements.instance.updateAll(player);
         PlaneswalkerAchievements.instance.updateAll(player);
         ChallengeAchievements.instance.updateAll(player);
-}
+    }
 
     public static void buildComboBox(IComboBox<AchievementCollection> cb) {
         cb.addItem(FModel.getAchievements(GameType.Constructed));
