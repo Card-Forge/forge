@@ -127,6 +127,11 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
+            if (!sa.usesTargeting()) {
+                // TODO: the AI can't currently handle non-targeting abilities of this type (e.g. Memory Jar, Timetwister, etc.)
+                return false;
+            }
+
             // search targetable Opponents
             final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(), PlayerPredicates.isTargetableBy(sa));
 
