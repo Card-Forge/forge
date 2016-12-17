@@ -131,6 +131,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         CardPredicates.nameEquals(max.getValue().getKey()), CardPredicates.isTargetableBy(sa));
 
                 // list should contain only one element or zero
+                sa.resetTargets();
                 for (Card c : list) {
                     sa.getTargets().add(c);
                     return true;
