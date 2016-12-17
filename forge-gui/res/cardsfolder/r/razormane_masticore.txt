@@ -3,11 +3,7 @@ ManaCost:5
 Types:Artifact Creature Masticore
 PT:5/5
 K:First Strike
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card.
-SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacrifice
-SVar:DBSacrifice:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+K:UpkeepCost:Discard<1/Card>
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your draw step, you may have CARDNAME deal 3 damage to target creature.
 SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3
 SVar:RemAIDeck:True

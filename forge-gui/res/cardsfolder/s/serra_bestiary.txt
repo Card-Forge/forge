@@ -2,7 +2,7 @@ Name:Serra Bestiary
 ManaCost:W W
 Types:Enchantment Aura
 K:Enchant creature
-K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W W
+K:UpkeepCost:W W
 A:SP$ Attach | Cost$ W W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.
 S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | TapAbility$ True

@@ -3,10 +3,6 @@ ManaCost:2 U U
 Types:Creature Elemental
 PT:4/4
 K:Flying
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you return a land you control to its owner's hand.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Land.YouCtrl | RememberChanged$ True | SubAbility$ DBSac
-SVar:DBSac:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | References$ X
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+K:UpkeepCost:Return<1/Land>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_tsunami.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Living Tsunami unless you return a land you control to its owner's hand.

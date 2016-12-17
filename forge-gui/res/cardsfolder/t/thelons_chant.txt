@@ -1,7 +1,7 @@
 Name:Thelon's Chant
 ManaCost:1 G G
 Types:Enchantment
-K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G
+K:UpkeepCost:G
 T:Mode$ ChangesZone | ValidCard$ Swamp | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever a player puts a Swamp onto the battlefield, CARDNAME deals 3 damage to that player unless he or she puts a -1/-1 counter on a creature he or she controls.
 SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 3 | UnlessCost$ AddCounter<1/M1M1/Creature.YouCtrl/a creature you control> | UnlessPayer$ TriggeredCardController
 SVar:RemRandomDeck:True

@@ -2,6 +2,6 @@ Name:Whipstitched Zombie
 ManaCost:1 B
 Types:Creature Zombie
 PT:2/2
-K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B
+K:UpkeepCost:B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whipstitched_zombie.jpg
 Oracle:At the beginning of your upkeep, sacrifice Whipstitched Zombie unless you pay {B}.

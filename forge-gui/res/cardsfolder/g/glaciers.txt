@@ -1,7 +1,7 @@
 Name:Glaciers
 ManaCost:2 W U
 Types:Enchantment
-K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W U
+K:UpkeepCost:W U
 S:Mode$ Continuous | Affected$ Mountain | AddType$ Plains | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ All Mountains are Plains.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glaciers.jpg
