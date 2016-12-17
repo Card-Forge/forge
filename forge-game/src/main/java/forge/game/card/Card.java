@@ -238,6 +238,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardRules cardRules;
     private final CardView view;
 
+    private boolean isTemporaryCopy = false;
+
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
@@ -6704,7 +6706,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean isInPlay() {
-        return isInZone(ZoneType.Battlefield);
+        return isInZone(ZoneType.Battlefield) && !isTemporaryCopy;
     }
 
     public void onCleanupPhase(final Player turn) {
@@ -7096,5 +7098,13 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final Collection<Player> getGoaded() {
         return goad.values();
+    }
+
+    public final boolean getIsTemporaryCopy() {
+        return this.isTemporaryCopy;
+    }
+
+    public final void setIsTemporaryCopy(boolean temp) {
+        this.isTemporaryCopy = temp;
     }
 }

@@ -323,8 +323,7 @@ public final class CardUtil {
 
         newCopy.setZone(in.getZone());
 
-        // copy the timestamp, necessary for the purpose of triggers that test the timestamp of a LKI-copied card.
-        newCopy.setTimestamp(in.getTimestamp());
+        newCopy.setIsTemporaryCopy(true); // signals that this card should not be considered to be in play
 
         return newCopy;
     }
