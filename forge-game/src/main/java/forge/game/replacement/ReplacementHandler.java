@@ -29,8 +29,10 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.Visitor;
-import java.util.*;
+
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class ReplacementHandler {
     private final Game game;
