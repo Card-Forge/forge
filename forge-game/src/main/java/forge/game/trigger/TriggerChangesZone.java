@@ -75,7 +75,14 @@ public class TriggerChangesZone extends Trigger {
 
         if (this.mapParams.containsKey("Destination")) {
             if (!this.mapParams.get("Destination").equals("Any")) {
-                if (!this.mapParams.get("Destination").equals(runParams2.get("Destination"))) {
+                boolean validDest = false;
+                for (final String dest : this.mapParams.get("Destination").split(",")) {
+                    if (dest.equals(runParams2.get("Destination"))) {
+                        validDest = true;
+                        break;
+                    }
+                }
+                if (!validDest) {
                     return false;
                 }
             }
