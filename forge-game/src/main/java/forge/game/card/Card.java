@@ -233,12 +233,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     // Zone-changing spells should store card's zone here
     private Zone currentZone = null;
 
+    // LKI copies of cards are allowed to store the LKI about the zone the card was known to be in last.
+    // For all cards except LKI copies this should always be null.
+    private Zone savedLastKnownZone = null;
+
     private int countersAdded = 0;
 
     private CardRules cardRules;
     private final CardView view;
-
-    private boolean isTemporaryCopy = false;
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -6706,7 +6708,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean isInPlay() {
-        return isInZone(ZoneType.Battlefield) && !isTemporaryCopy;
+        return isInZone(ZoneType.Battlefield);
     }
 
     public void onCleanupPhase(final Player turn) {
@@ -7100,11 +7102,24 @@ public class Card extends GameEntity implements Comparable<Card> {
         return goad.values();
     }
 
-    public final boolean getIsTemporaryCopy() {
-        return this.isTemporaryCopy;
+    /**
+     * Returns the last known zone information for the card. If the card is a LKI copy of another card,
+     * then it stores the relevant information in savedLastKnownZone, which is returned. If the card is
+     * not a LKI copy (e.g. an ordinary card in the game), it does not have this information and then
+     * the last known zone is assumed to be the current zone the card is currently in.
+     * @return last known zone of the card (either LKI, if present, or the current zone).
+     */
+    public final Zone getLastKnownZone() {
+        return this.savedLastKnownZone != null ? this.savedLastKnownZone : getZone();
     }
 
-    public final void setIsTemporaryCopy(boolean temp) {
-        this.isTemporaryCopy = temp;
+    /**
+     * Sets the last known zone information for the card. Should only be used by LKI copies of cards
+     * obtained via CardUtil::getLKICopy. Otherwise should be null, which means that current zone the
+     * card is in is the last known zone.
+     * @param zone last known zone information for the card.
+     */
+    public final void setLastKnownZone(Zone zone) {
+        this.savedLastKnownZone = zone;
     }
 }

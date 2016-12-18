@@ -321,9 +321,7 @@ public final class CardUtil {
 
         newCopy.setMeldedWith(in.getMeldedWith());
 
-        newCopy.setZone(in.getZone());
-
-        newCopy.setIsTemporaryCopy(true); // signals that this card should not be considered to be in play
+        newCopy.setLastKnownZone(in.getZone()); // used for the purpose of cards that care about the zone the card was known to be in last
 
         return newCopy;
     }

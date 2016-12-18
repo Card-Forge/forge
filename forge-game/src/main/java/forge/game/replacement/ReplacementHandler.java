@@ -25,13 +25,12 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.Visitor;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.*;
+import org.apache.commons.lang3.StringUtils;
 
 public class ReplacementHandler {
     private final Game game;
@@ -113,14 +112,14 @@ public class ReplacementHandler {
 
                     // when testing ReplaceMoved effects, make sure to check last known information since the host card
                     // could have been moved, e.g. via a mass removal event (e.g. Kalitas, Traitor of Ghet + Wrath of God)
-                    Card zoneCheckCard = replacementEffect instanceof ReplaceMoved ? game.getChangeZoneLKIInfo(crd) : crd;
+                    Zone cardZone = replacementEffect instanceof ReplaceMoved ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
 
                     if (!replacementEffect.hasRun()
                             && replacementEffect.getLayer() == layer
                             && replacementEffect.requirementsCheck(game)
                             && replacementEffect.canReplace(runParams)
                             && !possibleReplacers.contains(replacementEffect)
-                            && replacementEffect.zonesCheck(game.getZoneOf(zoneCheckCard))) {
+                            && replacementEffect.zonesCheck(cardZone)) {
                         possibleReplacers.add(replacementEffect);
                     }
                 }
