@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
-import forge.ai.*;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilMana;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -34,6 +36,7 @@ public class ManifestAi extends SpellAbilityAi {
     /**
      * Checks if the AI will play a SpellAbility based on its phase restrictions
      */
+    @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Card source = sa.getHostCard();
         // Only manifest things on your turn if sorcery speed, or would pump one of my creatures
@@ -91,7 +94,7 @@ public class ManifestAi extends SpellAbilityAi {
         }
 
         final Card topCard = library.getFirst();
-        if (topCard.getView().mayPlayerLook(ai.getView())) {
+        if (topCard.mayPlayerLook(ai)) {
             // try to avoid manifest a non Permanent
             if (!topCard.isPermanent())
                 return false;

@@ -46,7 +46,7 @@ public class ClashAi extends SpellAbilityAi {
     	}
 
     	CardCollectionView col = ai.getCardsIn(ZoneType.Library);
-    	if (!col.isEmpty() && col.getFirst().getView().mayPlayerLook(ai.getView())) {
+        if (!col.isEmpty() && col.getFirst().mayPlayerLook(ai)) {
     		final Card top = col.get(0);
     		for (Player p : options) {
     			final Card oppTop = p.getCardsIn(ZoneType.Library).getFirst();
