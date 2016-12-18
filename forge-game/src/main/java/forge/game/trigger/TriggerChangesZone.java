@@ -25,9 +25,12 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.util.Expressions;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.google.common.collect.Sets;
 
 /**
  * <p>
@@ -41,7 +44,7 @@ public class TriggerChangesZone extends Trigger {
 
     // stores the costs when this trigger has already been run (to prevent multiple card draw triggers for single
     // discard event of multiple cards on the Gitrog Moster for instance)
-    private Set<Integer> processedCostEffects = new HashSet<Integer>();
+    private Set<Integer> processedCostEffects = Sets.newHashSet();
 
     /**
      * <p>
@@ -67,7 +70,9 @@ public class TriggerChangesZone extends Trigger {
                 if (this.mapParams.get("Origin") == null) {
                     return false;
                 }
-                if (!this.mapParams.get("Origin").equals(runParams2.get("Origin"))) {
+                if (!ArrayUtils.contains(
+                    this.mapParams.get("Origin").split(","), runParams2.get("Origin")
+                )) {
                     return false;
                 }
             }
@@ -75,24 +80,19 @@ public class TriggerChangesZone extends Trigger {
 
         if (this.mapParams.containsKey("Destination")) {
             if (!this.mapParams.get("Destination").equals("Any")) {
-                boolean validDest = false;
-                for (final String dest : this.mapParams.get("Destination").split(",")) {
-                    if (dest.equals(runParams2.get("Destination"))) {
-                        validDest = true;
-                        break;
-                    }
-                }
-                if (!validDest) {
+                if (!ArrayUtils.contains(
+                    this.mapParams.get("Destination").split(","), runParams2.get("Destination")
+                )) {
                     return false;
                 }
             }
         }
 
         if (this.mapParams.containsKey("ExcludedDestinations")) {
-            for (final String notTo : this.mapParams.get("ExcludedDestinations").split(",")) {
-                if (notTo.equals(runParams2.get("Destination"))) {
-                    return false;
-                }
+            if (!ArrayUtils.contains(
+                this.mapParams.get("ExcludedDestinations").split(","), runParams2.get("Destination")
+            )) {
+                return false;
             }
         }
 
