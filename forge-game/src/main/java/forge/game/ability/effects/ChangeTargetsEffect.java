@@ -92,11 +92,13 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 while(changingTgtSI != null) {
                     SpellAbility changingTgtSA = changingTgtSI.getSpellAbility(true);
                     if (sa.hasParam("RandomTarget")){
-                        changingTgtSA.resetTargets();
-                        List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
-                        GameEntity choice = Aggregates.random(candidates);
-                        changingTgtSA.getTargets().add(choice);
-                        changingTgtSI.updateTarget(changingTgtSA.getTargets());
+                        if (changingTgtSA.usesTargeting()) {
+                            changingTgtSA.resetTargets();
+                            List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
+                            GameEntity choice = Aggregates.random(candidates);
+                            changingTgtSA.getTargets().add(choice);
+                            changingTgtSI.updateTarget(changingTgtSA.getTargets());
+                        }
                     }
                     else if (sa.hasParam("DefinedMagnet")){
                         GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
