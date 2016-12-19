@@ -148,6 +148,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 wasFaceDown = false;
             }
 
+            if (sa.hasParam("ShowCardToActivator")) {
+                game.getAction().revealTo(tgtCard, activator);
+            }
+
             if (optional && !controller.getController().confirmAction(sa, null, String.format("Do you want to play %s?", tgtCard))) {
                 if (wasFaceDown) {
                     tgtCard.setState(CardStateName.FaceDown, false);
