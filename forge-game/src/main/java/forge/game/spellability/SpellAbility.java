@@ -781,6 +781,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbility copyWithNoManaCost() {
         final SpellAbility newSA = copy();
         newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
+        if (!newSA.hasParam("WithoutManaCost")) {
+            newSA.mapParams.put("WithoutManaCost", "True");
+        }
         newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
         return newSA;
     }
