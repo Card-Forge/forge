@@ -242,6 +242,11 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             sa.getTargets().add(choice);
         }
 
+        if (sa.getTargets().getNumTargeted() == 0) {
+            // Nothing was ever targeted, so we need to bail.
+            return false;
+        }
+
         return true;
     }
 
