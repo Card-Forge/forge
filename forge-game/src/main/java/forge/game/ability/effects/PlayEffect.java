@@ -217,9 +217,9 @@ public class PlayEffect extends SpellAbilityEffect {
             final boolean noManaCost = sa.hasParam("WithoutManaCost");
             if (noManaCost) {
                 tgtSA = tgtSA.copyWithNoManaCost();
+                // FIXME: a hack to get cards like Detonate only allow legal targets when cast without paying mana cost (with X=0).
                 if (tgtSA.hasParam("ValidTgtsWithoutManaCost")) {
                     tgtSA.getTargetRestrictions().changeValidTargets(tgtSA.getParam("ValidTgtsWithoutManaCost").split(","));
-                    tgtSA.resetTargets();
                 }
             } else if (sa.hasParam("PlayCost")) {
                 Cost abCost;
