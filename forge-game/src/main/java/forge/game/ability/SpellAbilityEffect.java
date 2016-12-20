@@ -102,7 +102,7 @@ public abstract class SpellAbilityEffect {
         } else{
             if (sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null &&
                     sa.getPayCosts().getCostMana().getAmountOfX() > 0) {
-                int amount = CardFactoryUtil.xCount(sa.getHostCard(), sa.getSVar("X"));
+                int amount = sa.getHostCard().getXManaCostPaid();
                 sb.append(String.format(" (%s=%d)", "X", amount));
             }
         }
