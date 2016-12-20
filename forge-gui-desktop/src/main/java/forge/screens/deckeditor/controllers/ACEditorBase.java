@@ -17,6 +17,8 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -31,6 +33,7 @@ import javax.swing.SwingUtilities;
 
 import forge.UiCommand;
 import forge.assets.FSkinProp;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
@@ -56,6 +59,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.ContextMenuBuilder;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
+import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.view.FView;
 
@@ -196,7 +200,11 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         final DeckController<TModel> controller = getDeckController();
         final Deck deck = controller != null && controller.getModel() instanceof Deck ? (Deck)controller.getModel() : null;
 
+        final CardPool allCards = deck.getAllCardsInASinglePool(deck.has(DeckSection.Commander));
+        Iterable<Entry<String,Integer>> cardsByName = Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME);
+
         for (final Entry<TItem, Integer> itemEntry : itemsToAdd) {
+
             final TItem item = itemEntry.getKey();
             final PaperCard card = item instanceof PaperCard ? (PaperCard)item : null;
             int qty = itemEntry.getValue();
@@ -208,12 +216,14 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             }
             else {
                 max = (limit == CardLimit.Singleton ? 1 : FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
-                max -= deck.getMain().count(card);
-                if (deck.has(DeckSection.Sideboard)) {
-                    max -= deck.get(DeckSection.Sideboard).count(card);
-                }
-                if (deck.has(DeckSection.Commander)) {
-                    max -= deck.get(DeckSection.Commander).count(card);
+                Entry<String, Integer> cardAmountInfo = Iterables.find(cardsByName, new Predicate<Entry<String, Integer>>() {
+                    @Override
+                    public boolean apply(Entry<String, Integer> t) {
+                        return t.getKey().equals(card.getName());
+                    }
+                }, null);
+                if (cardAmountInfo != null) {
+                    max -= cardAmountInfo.getValue();
                 }
             }
             if (qty > max) {
