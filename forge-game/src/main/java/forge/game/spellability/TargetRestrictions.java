@@ -775,4 +775,7 @@ public class TargetRestrictions {
         }
     }
 
+    public final void changeValidTargets(final String[] validTgts) {
+        this.originalValidTgts = validTgts;
+    }
 }
