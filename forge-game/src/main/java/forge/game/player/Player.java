@@ -560,8 +560,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             for (final String type : source.getType()) {
                 source.getController().addProwlType(type);
             }
-        } else if (source.hasKeyword("Lifelink")) {
-            // LifeLink not for Combat Damage at this place
+        } 
+
+        // Both combat and non-combat lifelink is handled here
+        if (source.hasKeyword("Lifelink")) {
             source.getController().gainLife(amount, source);
         }
 
