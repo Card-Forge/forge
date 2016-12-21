@@ -12,6 +12,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
@@ -897,5 +898,26 @@ public class PlayerControllerAi extends PlayerController {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return SpellApiToAi.Converter.get(api).chooseCardName(player, sa, faces);
+    }
+
+    @Override
+    public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
+        // sort from best to worst
+        CardLists.sortByCmcDesc(cards);
+
+        List<Card> result = Lists.newArrayList();
+
+        SpellAbility oldSA = sa;
+        // TODO maybe add some more Logic into it
+        for (final Card c : cards) {
+            SpellAbility newSA = oldSA.copy();
+            AbilityUtils.addSpliceEffect(newSA, c);
+            // check if AI still wants or can play the card with spliced effect
+            if (AiPlayDecision.WillPlay == getAi().canPlayFromEffectAI((Spell) newSA, false, false)) {
+                oldSA = newSA;
+                result.add(c);
+            }
+        }
+        return result;
     }
 }

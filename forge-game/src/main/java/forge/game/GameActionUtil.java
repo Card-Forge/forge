@@ -20,7 +20,6 @@ package forge.game;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import forge.card.MagicColor;
 import forge.game.ability.AbilityFactory;
@@ -326,77 +325,7 @@ public final class GameActionUtil {
                 }
             }
         }
-
-        // Splice
-        final List<SpellAbility> newAbilities = Lists.newArrayList();
-        for (SpellAbility sa : abilities) {
-            if (sa.isSpell() && sa.getHostCard().getType().hasStringType("Arcane") && sa.getApi() != null ) {
-                newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
-            }
-        }
-        abilities.addAll(newAbilities);
         return abilities;
-    }
-
-    /**
-     * <p>
-     * getSpliceAbilities.
-     * </p>
-     * 
-     * @param sa
-     *            a SpellAbility.
-     * @return an ArrayList<SpellAbility>.
-     * get abilities with all Splice options
-     */
-    private  static final List<SpellAbility> getSpliceAbilities(SpellAbility sa) {
-        List<SpellAbility> newSAs = Lists.newArrayList();
-        List<SpellAbility> allSaCombinations = Lists.newArrayList();
-        allSaCombinations.add(sa);
-        Card source = sa.getHostCard();
-
-        for (Card c : sa.getActivatingPlayer().getCardsIn(ZoneType.Hand)) {
-            if (c.equals(source)) {
-                continue;
-            }
-
-            String spliceKwCost = null;
-            for (String keyword : c.getKeywords()) {
-                if (keyword.startsWith("Splice")) {
-                    spliceKwCost = keyword.substring(19);
-                    break;
-                }
-            }
-
-            if (spliceKwCost == null)
-                continue;
-
-            SpellAbility firstSpell = c.getCurrentState().getFirstAbility();
-            Map<String, String> params = Maps.newHashMap(firstSpell.getMapParams());
-            AbilityRecordType rc = AbilityRecordType.getRecordType(params);
-            ApiType api = rc.getApiTypeOf(params);
-            AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c, null);
-
-            // Add the subability to all existing variants
-            for (int i = 0; i < allSaCombinations.size(); ++i) {
-                //create a new spell copy
-                final SpellAbility newSA = allSaCombinations.get(i).copy();
-                newSA.setBasicSpell(false);
-                newSA.setPayCosts(new Cost(spliceKwCost, false).add(newSA.getPayCosts()));
-                newSA.setDescription(newSA.getDescription() + " (Splicing " + c + " onto it)");
-                newSA.addSplicedCards(c);
-
-                //add the spliced ability to the end of the chain
-                newSA.appendSubAbility(subAbility);
-
-                newSA.setActivatingPlayer(sa.getActivatingPlayer());
-
-                newSA.setHostCard(source);
-
-                newSAs.add(newSA);
-                allSaCombinations.add(++i, newSA);
-            }
-        }
-        return newSAs;
     }
 
     private static boolean hasUrzaLands(final Player p) {

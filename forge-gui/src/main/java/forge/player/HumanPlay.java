@@ -87,6 +87,10 @@ public class HumanPlay {
             CharmEffect.makeChoices(sa);
         }
 
+        if (source.getType().hasStringType("Arcane")) {
+            sa = AbilityUtils.addSpliceEffects(sa);
+        }
+
         if (sa.hasParam("Bestow")) {
             source.animateBestow();
         }
@@ -173,7 +177,7 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    public static final void playSaWithoutPayingManaCost(final PlayerControllerHuman controller, final Game game, final SpellAbility sa, boolean mayChooseNewTargets) {
+    public static final void playSaWithoutPayingManaCost(final PlayerControllerHuman controller, final Game game, SpellAbility sa, boolean mayChooseNewTargets) {
         FThreads.assertExecutedByEdt(false);
         final Card source = sa.getHostCard();
 
@@ -182,6 +186,9 @@ public class HumanPlay {
         if (sa.getPayCosts() != null) {
             if (sa.getApi() == ApiType.Charm && !sa.isWrapper() && !sa.isCopied()) {
                 CharmEffect.makeChoices(sa);
+            }
+            if (source.getType().hasStringType("Arcane") && !sa.isCopied()) {
+                sa = AbilityUtils.addSpliceEffects(sa);
             }
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 

@@ -1,7 +1,9 @@
 package forge.game.ability;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -11,6 +13,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
@@ -1719,5 +1722,67 @@ public class AbilityUtils {
                 }
             }
         }
+    }
+    
+    public static SpellAbility addSpliceEffects(final SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        final Player player = sa.getActivatingPlayer();
+        
+        final CardCollection splices = CardLists.filter(player.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
+            @Override
+            public boolean apply(Card input) {
+                return input.hasStartOfKeyword("Splice");
+            }
+        });
+
+        splices.remove(source);
+
+        if (splices.isEmpty()) {
+            return sa;
+        }
+
+        final List<Card> choosen = player.getController().chooseCardsForSplice(sa, splices);
+
+        if (choosen.isEmpty()) {
+            return sa;
+        }
+
+        final SpellAbility newSA = sa.copy();
+        for (final Card c : choosen) {
+            addSpliceEffect(newSA, c);
+        }
+        return newSA;
+    }
+
+    public static void addSpliceEffect(final SpellAbility sa, final Card c) {
+        Cost spliceCost = null;
+        for (final String k : c.getKeywords()) {
+            if (k.startsWith("Splice")) {
+                final String n[] = k.split(":");
+                spliceCost = new Cost(n[2], false);
+            }
+        }
+
+        if (spliceCost == null)
+            return;
+        
+        SpellAbility firstSpell = c.getFirstSpellAbility();
+        Map<String, String> params = Maps.newHashMap(firstSpell.getMapParams());
+        AbilityRecordType rc = AbilityRecordType.getRecordType(params);
+        ApiType api = rc.getApiTypeOf(params);
+        AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c, null);
+
+        subAbility.setActivatingPlayer(sa.getActivatingPlayer());
+        subAbility.setHostCard(sa.getHostCard());
+        subAbility.setOriginalHost(c);
+
+        //add the spliced ability to the end of the chain
+        sa.appendSubAbility(subAbility);
+
+        // update master SpellAbility
+        sa.setBasicSpell(false);
+        sa.setPayCosts(spliceCost.add(sa.getPayCosts()));
+        sa.setDescription(sa.getDescription() + " (Splicing " + c + " onto it)");
+        sa.addSplicedCards(c);
     }
 }

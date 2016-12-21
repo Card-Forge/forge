@@ -84,7 +84,7 @@ import forge.util.collect.FCollection;
  * @version $Id$
  */
 public class ComputerUtil {
-    public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa, final Game game) {
+    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game) {
         game.getStack().freezeStack();
         final Card source = sa.getHostCard();
 
@@ -97,6 +97,10 @@ public class ComputerUtil {
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
+        }
+
+        if (source.getType().hasStringType("Arcane") && !source.isCopiedSpell()) {
+            sa = AbilityUtils.addSpliceEffects(sa);
         }
 
         if (sa.hasParam("Bestow")) {

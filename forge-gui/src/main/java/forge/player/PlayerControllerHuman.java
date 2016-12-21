@@ -1938,4 +1938,10 @@ public class PlayerControllerHuman
         ICardFace face = getGui().one(message, faces);
         return face == null ? "" : face.getName();
     }
+
+    @Override
+    public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
+        return getGui().many("Choose cards to Splice onto", "Chosen Cards", 0, cards.size(), cards, sa.getHostCard().getView());
+    }
+    
 }

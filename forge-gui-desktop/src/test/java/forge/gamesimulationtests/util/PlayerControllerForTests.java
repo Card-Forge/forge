@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.testng.collections.Lists;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -669,6 +670,11 @@ public class PlayerControllerForTests extends PlayerController {
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
+        return Lists.newArrayList();
     }
 
 }

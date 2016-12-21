@@ -8,6 +8,9 @@ public class KeywordWithCostAndType extends KeywordInstance<KeywordWithCostAndTy
 
     @Override
     protected void parse(String details) {
+        final String[] k = details.split(":");
+        type = k[0];
+        cost = new Cost(k[1], false);
     }
 
     @Override
