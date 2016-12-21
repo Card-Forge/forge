@@ -8,15 +8,12 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import forge.GuiBase;
 import forge.deck.Deck;
-import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
@@ -111,8 +108,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
         starter.add(human);
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
-        final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.startMatch(GameType.Gauntlet, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+        gd.startRound(starter, human);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
