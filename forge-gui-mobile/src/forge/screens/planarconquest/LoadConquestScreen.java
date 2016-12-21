@@ -94,10 +94,12 @@ public class LoadConquestScreen extends LaunchScreen {
                 final ConquestController qc = FModel.getConquest();
 
                 Map<String, ConquestData> arrConquests = new HashMap<String, ConquestData>();
-                for (File f : dirConquests.listFiles()) {
-                    if (f.isDirectory()) {
-                        ConquestData data = new ConquestData(f);
-                        arrConquests.put(data.getName(), data);
+                if (dirConquests.listFiles() != null) {
+                    for (File f : dirConquests.listFiles()) {
+                        if (f.isDirectory()) {
+                            ConquestData data = new ConquestData(f);
+                            arrConquests.put(data.getName(), data);
+                        }
                     }
                 }
 
