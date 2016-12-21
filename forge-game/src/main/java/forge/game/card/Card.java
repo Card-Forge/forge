@@ -1692,7 +1692,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // static abilities
         for (final StaticAbility stAb : state.getStaticAbilities()) {
-            sb.append(stAb.toString()).append("\r\n");
+            if (!stAb.isSecondary()) {
+                sb.append(stAb.toString()).append("\r\n");
+            }
         }
 
         final List<String> addedManaStrings = new ArrayList<>();
@@ -1803,6 +1805,10 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // static abilities
         for (final StaticAbility stAb : state.getStaticAbilities()) {
+            if (!stAb.isSecondary()) {
+                continue;
+            }
+
             final String stAbD = stAb.toString();
             if (!stAbD.equals("")) {
                 sb.append(stAbD).append("\r\n");
@@ -1845,8 +1851,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append("\r\n");
             } else if (keyword.startsWith("Splice")) {
-                final Cost cost = new Cost(keyword.substring(19), false);
-                sb.append("Splice onto Arcane ").append(cost.toSimpleString()).append("\r\n");
+                final String[] n = keyword.split(":");
+                final Cost cost = new Cost(n[2], false);
+                sb.append("Splice onto ").append(n[1]).append(" ").append(cost.toSimpleString());
+                sb.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")").append("\r\n");
             } else if (keyword.startsWith("Buyback")) {
                 final Cost cost = new Cost(keyword.substring(8), false);
                 sb.append("Buyback ").append(cost.toSimpleString());
