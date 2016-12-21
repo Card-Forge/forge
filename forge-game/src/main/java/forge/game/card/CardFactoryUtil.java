@@ -3913,6 +3913,7 @@ public class CardFactoryUtil {
 
     public static void addStaticAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
+        String effect = null;
 
         if (keyword.startsWith("Escalate")) {
             final String[] k = keyword.split(":");
@@ -3925,45 +3926,28 @@ public class CardFactoryUtil {
             }
             sb.append(cost.toSimpleString());
 
-            final String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All" +
+            effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All" +
                     " | Description$ " + sb.toString() + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
-            StaticAbility st = card.addStaticAbility(effect);
-            st.setIntrinsic(intrinsic);
-            if (!intrinsic) {
-                kws.addStaticAbility(st);
-            }
         } else if (keyword.equals("Changeling")) {
-            final String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
                 " | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Secondary$ True" +
                 " | Description$ Changeling (" + Keyword.getInstance(keyword).getReminderText() + ")";
-            StaticAbility st = card.addStaticAbility(effect);
-            st.setIntrinsic(intrinsic);
-            if (!intrinsic) {
-                kws.addStaticAbility(st);
-            }
         } else if (keyword.startsWith("Strive")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
-            final String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
+            effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
                     " | Description$ Strive - " + Keyword.getInstance(keyword).getReminderText();
-            StaticAbility st = card.addStaticAbility(effect);
-            st.setIntrinsic(intrinsic);
-            if (!intrinsic) {
-                kws.addStaticAbility(st);
-            }
         } else if (keyword.equals("Unleash")) {
-            final String effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can't block.";
-
-            StaticAbility st = card.addStaticAbility(effect);
-            st.setIntrinsic(intrinsic);
-            if (!intrinsic) {
-                kws.addStaticAbility(st);
-            }
+            effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can't block.";
         } else if (keyword.equals("Undaunted")) {
-            final String effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Undaunted | EffectZone$ All" +
+            effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Undaunted | EffectZone$ All" +
                     " | Description$ Undaunted (" + Keyword.getInstance(keyword).getReminderText() + ")";
+        }
+
+        if (effect != null) {
             StaticAbility st = card.addStaticAbility(effect);
+            card.addStaticAbilityString(effect);
             st.setIntrinsic(intrinsic);
             if (!intrinsic) {
                 kws.addStaticAbility(st);
