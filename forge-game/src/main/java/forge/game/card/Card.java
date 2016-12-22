@@ -356,7 +356,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return states.get(state);
     }
     public boolean setState(final CardStateName state, boolean updateView) {
-
         if (!states.containsKey(state)) {
             System.out.println(getName() + " tried to switch to non-existant state \"" + state + "\"!");
             return false; // Nonexistant state.
@@ -427,7 +426,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void clearStates(final CardStateName state, boolean updateView) {
-        if (states.remove(state) != null && updateView) {
+        if (states.remove(state) == null) {
+            return;
+        }
+        if (state == currentStateName) {
+            currentStateName = CardStateName.Original;
+        }
+        if (updateView) {
             view.updateState(this);
         }
     }

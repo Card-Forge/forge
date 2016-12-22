@@ -561,4 +561,23 @@ public class GameSimulatorTest extends TestCase {
         assertNull(strSimGame, findCardWithName(simGame, "Thespian's Stage"));
         assertNotNull(strSimGame, findCardWithName(simGame, "Marit Lage"));
     }
+    
+    public void testThespianStageSelfCopy() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard("Swamp", p);
+        addCard("Swamp", p);
+        Card thespian = addCard("Thespian's Stage", p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        
+        SpellAbility sa = findSAWithPrefix(thespian, "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
+        assertNotNull(sa);
+        sa.getTargets().add(thespian);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(sa);
+        Game simGame = sim.getSimulatedGameState();
+        assertNotNull(gameStateToString(simGame), findCardWithName(simGame, "Thespian's Stage"));
+    }
 }
