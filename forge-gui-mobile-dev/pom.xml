@@ -21,6 +21,37 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+
+      <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <configuration>
+              <attach>false</attach>
+              <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                  <manifest>
+                      <mainClass>forge.app.Main</mainClass>
+                      <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                  </manifest>
+                  <manifestEntries>
+                      <Implementation-Version>${fullversionstring}</Implementation-Version>
+                  </manifestEntries>
+              </archive>
+          </configuration>
+          <executions>
+              <execution>
+                  <id>make-assembly</id>
+                  <!-- this is used for inheritance merges -->
+                  <phase>package</phase>
+                  <!-- bind to the packaging phase -->
+                  <goals>
+                      <goal>single</goal>
+                  </goals>
+              </execution>
+          </executions>
+      </plugin>
+
     </plugins>
   </build>
 

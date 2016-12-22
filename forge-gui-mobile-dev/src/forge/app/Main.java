@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
 
 import forge.Forge;
@@ -18,18 +19,42 @@ import forge.util.Utils;
 
 public class Main {
     public static void main(String[] args) {
+        // Set this to "true" to make the mobile game port run as a full-screen desktop application
+        boolean desktopMode = false;
+        // Set this to the location where you want the mobile game port to look for assets when working as a full-screen desktop application
+        // (uncomment the bottom version and comment the top one to load the res folder from the current folder the .jar is in if you would
+        // like to make the game load from a desktop game folder configuration).
+        String desktopModeAssetsDir = "../forge-gui/";
+        //String desktopModeAssetsDir = "./";
+        
+        // Assets directory used when the game fully emulates smartphone/tablet mode (desktopMode = false), useful when debugging from IDE
         String assetsDir = AssetsDownloader.SHARE_DESKTOP_ASSETS ? "../forge-gui/" : "testAssets/";
         if (!AssetsDownloader.SHARE_DESKTOP_ASSETS) {
             FileUtil.ensureDirectoryExists(assetsDir);
         }
 
+        // Place the file "switch_orientation.ini" to your assets folder to make the game switch to landscape orientation (unless desktopMode = true)
         String switchOrientationFile = assetsDir + "switch_orientation.ini";
         boolean landscapeMode = FileUtil.doesFileExist(switchOrientationFile);
+
+        // Width and height for standard smartphone/tablet mode (desktopMode = false)
         int screenWidth = landscapeMode ? (int)(Utils.BASE_HEIGHT * 16 / 9) : (int)Utils.BASE_WIDTH;
         int screenHeight = (int)Utils.BASE_HEIGHT;
 
+        // Fullscreen width and height for desktop mode (desktopMode = true)
+        int fullscreenWidth = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
+        int fullscreenHeight = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
+
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.resizable = false;
+        config.width = desktopMode ? fullscreenWidth : screenWidth;
+        config.height = desktopMode ? fullscreenHeight : screenHeight;
+        config.fullscreen = desktopMode ? true : false;
+        config.title = "Forge";
+        //config.useHDPI = true; // enable HiDPI on Mac OS X (not tested)
+
         new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(switchOrientationFile),
-                assetsDir), "Forge", screenWidth, screenHeight);
+                desktopMode ? desktopModeAssetsDir : assetsDir), config);
     }
 
     private static class DesktopAdapter implements IDeviceAdapter {
