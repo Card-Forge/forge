@@ -581,6 +581,13 @@ public class AbilityUtils {
 
             for (final SpellAbility s : saList) {
                 tgtList.addAll(getDefinedCards(s.getHostCard(), "Targeted", s));
+                // Check sub-abilities, so that modal cards like Abzan Charm are correctly handled.
+                // TODO: Should this be done in a more general place, like in getDefinedCards()?
+                AbilitySub abSub = s.getSubAbility();
+                while (abSub != null) {
+                    tgtList.addAll(getDefinedCards(abSub.getHostCard(), "Targeted", abSub));
+                    abSub = abSub.getSubAbility();
+                }
             }
             return CardFactoryUtil.handlePaid(tgtList, calcX[1], card) * multiplier;
         }
