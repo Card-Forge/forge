@@ -726,7 +726,10 @@ public class CardFactory {
                 relevantTypes.add(t.name());
             }
             Iterables.addAll(relevantTypes, c.getType().getSubtypes());
-            return  relevantTypes.toArray(new String[relevantTypes.size()]);
+            if (c.getType().isLegendary()) {
+                relevantTypes.add("Legendary");
+            }
+            return relevantTypes.toArray(new String[relevantTypes.size()]);
         }
 
         private Card toCard(Game game) {
