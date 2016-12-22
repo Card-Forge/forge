@@ -28,6 +28,7 @@ import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
@@ -188,14 +189,13 @@ public class GameCopier {
     
     private static final boolean USE_FROM_PAPER_CARD = true;
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
-        if (c.isToken()) {
+        if (c.isToken() && !c.isEmblem()) {
             String tokenStr = new CardFactory.TokenInfo(c).toString();
             // TODO: Use a version of the API that doesn't return a list (i.e. these shouldn't be affected
             // by doubling season, etc).
             return CardFactory.makeToken(CardFactory.TokenInfo.fromString(tokenStr), newOwner).get(0);
         }
-
-        if (USE_FROM_PAPER_CARD) {
+        if (USE_FROM_PAPER_CARD && !c.isEmblem()) {
             return Card.fromPaperCard(c.getPaperCard(), newOwner);
         }
 
@@ -208,6 +208,9 @@ public class GameCopier {
         newCard.setName(c.getName());
         for (String type : c.getType()) {
             newCard.addType(type);
+        }
+        for (StaticAbility stAb : c.getStaticAbilities()) {
+            newCard.addStaticAbilityCopy(stAb);
         }
         for (SpellAbility sa : c.getSpellAbilities()) {
             SpellAbility saCopy;

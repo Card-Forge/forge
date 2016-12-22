@@ -340,7 +340,37 @@ public class GameSimulatorTest extends TestCase {
         assertFalse(minusTwoCopy.canPlay());
         assertEquals(1, minusTwoCopy.getActivationsThisTurn());
     }
-    
+
+    public void testPlaneswalkerEmblems() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        String bearCardName = "Runeclaw Bear";
+        addCard(bearCardName, p);
+        Card gideon = addCard("Gideon, Ally of Zendikar", p);
+        gideon.addCounter(CounterType.LOYALTY, 4, false);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        CardCollection cards = ComputerUtilAbility.getAvailableCards(game, p);
+        List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(cards, p);
+        SpellAbility minusFour = findSAWithPrefix(abilities, "-4: You get an emblem");
+        assertNotNull(minusFour);
+        minusFour.setActivatingPlayer(p);
+        assertTrue(minusFour.canPlay());
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(minusFour);
+        Game simGame = sim.getSimulatedGameState();
+        Card simBear = findCardWithName(simGame, bearCardName);
+        assertEquals(3, simBear.getNetPower());
+
+        GameCopier copier = new GameCopier(simGame);
+        Game copy = copier.makeCopy();
+        Card copyBear = findCardWithName(copy, bearCardName);
+        assertEquals(3, copyBear.getNetPower());
+    }
+
     public void testManifest() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
