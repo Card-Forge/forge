@@ -102,6 +102,10 @@ public class CardState {
         }
     }
     public final void setType(final CardType type0) {
+        if (type0 == type) {
+            // Logic below would incorrectly clear the type if it's the same object.
+            return;
+        }
         if (type0.isEmpty() && type.isEmpty()) { return; }
         type.clear();
         type.addAll(type0);

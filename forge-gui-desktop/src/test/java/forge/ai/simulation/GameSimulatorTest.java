@@ -568,6 +568,7 @@ public class GameSimulatorTest extends TestCase {
         addCard("Swamp", p);
         addCard("Swamp", p);
         Card thespian = addCard("Thespian's Stage", p);
+        assertTrue(thespian.isLand());
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
         
@@ -578,6 +579,8 @@ public class GameSimulatorTest extends TestCase {
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(sa);
         Game simGame = sim.getSimulatedGameState();
-        assertNotNull(gameStateToString(simGame), findCardWithName(simGame, "Thespian's Stage"));
+        Card thespianSim = findCardWithName(simGame, "Thespian's Stage");
+        assertNotNull(gameStateToString(simGame), thespianSim);
+        assertTrue(thespianSim.isLand());
     }
 }
