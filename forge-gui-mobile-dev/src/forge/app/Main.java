@@ -8,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
-import com.google.common.io.Files;
 
 import forge.Forge;
 import forge.assets.AssetsDownloader;
@@ -17,9 +16,6 @@ import forge.util.FileUtil;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import forge.util.Utils;
-import java.nio.charset.Charset;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Main {
     public static void main(String[] args) {
