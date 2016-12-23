@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
+import com.google.common.io.Files;
 
 import forge.Forge;
 import forge.assets.AssetsDownloader;
@@ -16,6 +17,9 @@ import forge.util.FileUtil;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import forge.util.Utils;
+import java.nio.charset.Charset;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
     public static void main(String[] args) {
@@ -42,9 +46,17 @@ public class Main {
         int screenHeight = (int)Utils.BASE_HEIGHT;
 
         // Fullscreen width and height for desktop mode (desktopMode = true)
+        // Can be specified inside the file fullscreen_resolution.ini to override default (in the format WxH, e.g. 1920x1080)
         int fullscreenWidth = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
         int fullscreenHeight = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
-
+        if (FileUtil.doesFileExist(assetsDir + "fullscreen_resolution.ini")) {
+            String[] res = new String(FileUtil.readFileToString(assetsDir + "fullscreen_resolution.ini")).split("x");
+            if (res.length == 2) {
+                fullscreenWidth = Integer.parseInt(res[0].trim());
+                fullscreenHeight = Integer.parseInt(res[1].trim());
+            }
+        }
+                
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
         config.width = desktopMode ? fullscreenWidth : screenWidth;
