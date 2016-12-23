@@ -63,7 +63,7 @@ public class PermanentCreatureAi extends PermanentAi {
                     //do not dash if creature can be played normally
                     return false;
                 }
-                Card dashed = CardFactory.copyCard(sa.getHostCard(), true);
+                Card dashed = CardUtil.getLKICopy(sa.getHostCard());
                 dashed.setSickness(false);
                 return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, dashed);
             } else {
