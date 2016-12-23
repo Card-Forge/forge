@@ -1448,10 +1448,13 @@ public class AiController {
 
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) {
         List<PaperCard> result = Lists.newArrayList();
-        for (Entry<DeckSection, CardPool> ds : myDeck) {
-            for (Entry<PaperCard, Integer> cp : ds.getValue()) {
-                if (cp.getKey().getRules().getAiHints().getRemAIDecks()) 
-                    result.add(cp.getKey());
+        // When using simulation, AI should be able to figure out most cards.
+        if (!useSimulation) {
+            for (Entry<DeckSection, CardPool> ds : myDeck) {
+                for (Entry<PaperCard, Integer> cp : ds.getValue()) {
+                    if (cp.getKey().getRules().getAiHints().getRemAIDecks()) 
+                        result.add(cp.getKey());
+                }
             }
         }
         return result;
