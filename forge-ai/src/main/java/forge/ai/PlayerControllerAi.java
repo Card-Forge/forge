@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
-import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.ProtectAi;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
@@ -864,11 +863,10 @@ public class PlayerControllerAi extends PlayerController {
     public Card chooseSingleCardForZoneChange(ZoneType destination,
             List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal,
             String selectPrompt, boolean isOptional, Player decider) {
-
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
-        return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
+        return brains.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
 
     @Override

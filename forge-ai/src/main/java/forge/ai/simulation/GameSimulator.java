@@ -10,6 +10,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
+import forge.ai.simulation.SpellAbilityPicker.Interceptor;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
@@ -74,6 +75,10 @@ public class GameSimulator {
         debugLines = null;
     }
 
+    public void setInterceptor(Interceptor interceptor) {
+        ((PlayerControllerAi) aiPlayer.getController()).getAi().getSimulationPicker().setInterceptor(interceptor);
+    }
+ 
     private void printDiff(List<String> lines1, List<String> lines2) {
         int i = 0;
         int j = 0;

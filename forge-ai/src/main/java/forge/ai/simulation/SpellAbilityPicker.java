@@ -1,28 +1,38 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
+import forge.ai.ability.ChangeZoneAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.spellability.TargetChoices;
+import forge.game.zone.ZoneType;
 
 public class SpellAbilityPicker {
     private Game game;
     private Player player;
     private Score bestScore;
     private boolean printOutput;
-
+    private Interceptor interceptor;
+ 
     public SpellAbilityPicker(Game game, Player player) {
         this.game = game;
         this.player = player;
+    }
+
+    public void setInterceptor(Interceptor in) {
+        this.interceptor = in;
     }
     
     private void print(String str) {
@@ -65,11 +75,11 @@ public class SpellAbilityPicker {
             return null;
         }
         SpellAbility bestSa = null;
-        print("Evaluating...");
         GameSimulator simulator = new GameSimulator(controller, game, player);
         // FIXME: This is wasteful, we should re-use the same simulator...
         Score origGameScore = simulator.getScoreForOrigGame();
         Score bestSaValue = origGameScore;
+        print("Evaluating... (orig score = " + origGameScore +  ")");
         for (final SpellAbility sa : candidateSAs) {
             print(abilityToString(sa));;
             Score value = evaluateSa(controller, sa);
@@ -153,13 +163,60 @@ public class SpellAbilityPicker {
 
     private Score evaluateSa(SimulationController controller, SpellAbility sa) {
         GameSimulator.debugPrint("Evaluate SA: " + sa);
+
+        Score bestScore = new Score(Integer.MIN_VALUE);
         if (!sa.usesTargeting()) {
-            GameSimulator simulator = new GameSimulator(controller, game, player);
-            return simulator.simulateSpellAbility(sa);
+            // TODO: Refactor this into a general decision tree.
+            Interceptor interceptor = new Interceptor() {
+                private int numChoices = -1;
+                private int nextChoice = 0;
+                private Card choice;
+
+                @Override
+                public Card chooseCard(CardCollection fetchList) {
+                    choice = null;
+                    // Prune duplicates.
+                    HashSet<String> uniqueCards = new HashSet<String>();
+                    for (int i = 0; i < fetchList.size(); i++) {
+                        Card card = fetchList.get(i);
+                        if (uniqueCards.add(card.getName()) && uniqueCards.size() == nextChoice + 1) {
+                            choice = card;
+                        }
+                    }
+                    numChoices = uniqueCards.size();
+                    nextChoice++;
+                    GameSimulator.debugPrint("Trying out choice " + choice);
+                    return choice;
+                }
+
+                @Override
+                public Card getLastChoice() {
+                    return choice;
+                }
+
+                @Override
+                public boolean hasMoreChoices() {
+                    return nextChoice < numChoices;
+                }
+            };
+
+            do {
+                GameSimulator simulator = new GameSimulator(controller, game, player);
+                simulator.setInterceptor(interceptor);
+                Score score = simulator.simulateSpellAbility(sa);
+                if (score.value > bestScore.value) {
+                    bestScore = score;
+                    Card choice = interceptor.getLastChoice();
+                    if (choice != null) {
+                        bestScore.choice = choice.getName();
+                    }
+                }
+            } while (interceptor.hasMoreChoices());
+            return bestScore;
         }
+
         GameSimulator.debugPrint("Checking out targets");
         PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
-        Score bestScore = new Score(Integer.MIN_VALUE);
         TargetChoices tgt = null;
         while (selector.selectNextTargets()) {
             GameSimulator.debugPrint("Trying targets: " + sa.getTargets().getTargetedString());
@@ -177,4 +234,25 @@ public class SpellAbilityPicker {
         return bestScore;
     }
 
+    public Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
+            CardCollection fetchList, Player player2, Player decider) {
+        if (interceptor != null) {
+            return interceptor.chooseCard(fetchList);
+        }
+        // TODO: Make the below more robust?
+        if (bestScore != null && bestScore.choice != null) {
+            for (Card c : fetchList) {
+                if (c.getName().equals(bestScore.choice)) {
+                    return c;
+                }
+            }
+        }
+        return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+    }
+
+    public interface Interceptor {
+        public Card chooseCard(CardCollection fetchList);
+        public Card getLastChoice();
+        public boolean hasMoreChoices();
+    }
 }

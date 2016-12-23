@@ -167,6 +167,7 @@ public class GameStateEvaluator {
     public static class Score {
         public final int value;
         public final int summonSickValue;
+        public String choice;
         
         public Score(int value) {
             this.value = value;
@@ -182,6 +183,10 @@ public class GameStateEvaluator {
             if (other == null)
                 return false;
             return value == other.value && summonSickValue == other.summonSickValue;
+        }
+
+        public String toString() {
+            return value + (summonSickValue != value ? " (ss " + summonSickValue + ")" :"");
         }
     }
 }

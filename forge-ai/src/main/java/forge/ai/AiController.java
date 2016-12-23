@@ -33,6 +33,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.ai.ability.ChangeZoneAi;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
@@ -113,6 +114,10 @@ public class AiController {
 
     public void setUseSimulation(boolean value) {
         this.useSimulation = value;
+    }
+    
+    public SpellAbilityPicker getSimulationPicker() {
+        return simPicker;
     }
     
     public Game getGame() {
@@ -1556,5 +1561,12 @@ public class AiController {
         return MyRandom.getRandom().nextBoolean();
     }
 
+    public Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
+            CardCollection fetchList, Player player2, Player decider) {
+        if (useSimulation) {
+            return simPicker.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+        }
+        return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+    }
 }
 
