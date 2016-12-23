@@ -1,5 +1,6 @@
 package forge.achievement;
 
+import forge.GuiBase;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
@@ -38,23 +39,32 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         //don't update achievements if player cheated during game
         if (controller.hasCheated()) {
             return;
-        }
+        } 
 
         final Game game = controller.getGame();
         final Player player = controller.getPlayer();
 
         //update all achievements for GUI player after game finished
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                FModel.getAchievements(game.getRules().getGameType()).updateAll(player);
-                AltWinAchievements.instance.updateAll(player);
-                PlaneswalkerAchievements.instance.updateAll(player);
-                ChallengeAchievements.instance.updateAll(player);
-            }
-        });
+        //(we are doing it in different threads in different game ports to prevent freezing when processing multiple achievements)
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            ThreadUtil.invokeInGameThread(new Runnable() {
+                @Override
+                public void run() {
+                    doUpdateAllAchievements(game, player);
+                }
+            });
+        } else {
+            doUpdateAllAchievements(game, player);
+        }
     }
 
+    private static void doUpdateAllAchievements(final Game game, final Player player) {
+        FModel.getAchievements(game.getRules().getGameType()).updateAll(player);
+        AltWinAchievements.instance.updateAll(player);
+        PlaneswalkerAchievements.instance.updateAll(player);
+        ChallengeAchievements.instance.updateAll(player);
+    }
+    
     public static void buildComboBox(IComboBox<AchievementCollection> cb) {
         cb.addItem(FModel.getAchievements(GameType.Constructed));
         cb.addItem(FModel.getAchievements(GameType.Draft));

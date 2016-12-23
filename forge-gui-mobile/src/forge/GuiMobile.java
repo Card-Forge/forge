@@ -56,6 +56,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public boolean isLibgdxPort() {
+        return true;
+    }
+
+    @Override
     public String getCurrentVersion() {
         return Forge.CURRENT_VERSION;
     }

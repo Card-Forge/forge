@@ -19,6 +19,7 @@ import forge.util.Callback;
 
 public interface IGuiBase {
     boolean isRunningOnDesktop();
+    boolean isLibgdxPort();
     String getCurrentVersion();
     String getAssetsDir();
     void invokeInEdtNow(Runnable runnable);

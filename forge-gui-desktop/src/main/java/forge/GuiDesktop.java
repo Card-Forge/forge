@@ -59,6 +59,11 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public boolean isLibgdxPort() {
+        return false;
+    }
+
+    @Override
     public String getCurrentVersion() {
         return BuildInfo.getVersionString();
     }
