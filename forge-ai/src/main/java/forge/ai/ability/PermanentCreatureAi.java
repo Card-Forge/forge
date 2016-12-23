@@ -57,13 +57,16 @@ public class PermanentCreatureAi extends PermanentAi {
         if (sa.isDash()) {
             //only checks that the dashed creature will attack
             if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                if (!card.getZone().is(ZoneType.Hand)) {
+                    return false;
+                }
                 if (ai.hasKeyword("Skip your next combat phase."))
                     return false;
                 if (ComputerUtilCost.canPayCost(sa.getHostCard().getSpellPermanent(), ai)) {
                     //do not dash if creature can be played normally
                     return false;
                 }
-                Card dashed = CardFactory.copyCard(sa.getHostCard(), false);
+                Card dashed = CardFactory.copyCard(sa.getHostCard(), true);
                 dashed.setSickness(false);
                 return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, dashed);
             } else {
