@@ -8,7 +8,6 @@ import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
-import forge.game.ability.ApiType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -38,15 +37,15 @@ public class SpellAbilityPicker {
             controller = new SimulationController();
             printOutput = true;
         }
-        print("---- choose ability  (phase = " +  game.getPhaseHandler().getPhase() + ")");
-        long startTime = System.currentTimeMillis();
+        String phaseStr = game.getPhaseHandler().getPhase().toString();
+        if (game.getPhaseHandler().getPlayerTurn() != player) {
+            phaseStr = "opponent " + phaseStr;
+        }
+        print("---- choose ability  (phase = " + phaseStr + ")");
 
+        long startTime = System.currentTimeMillis();
         List<SpellAbility> candidateSAs = new ArrayList<>();
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-            // Don't add Counterspells to the "normal" playcard lookups
-            if (skipCounter && sa.getApi() == ApiType.Counter) {
-                continue;
-            }
             if (sa.isManaAbility()) {
                 continue;
             }
@@ -61,6 +60,7 @@ public class SpellAbilityPicker {
                 continue;
             candidateSAs.add(sa);
         }
+
         if (candidateSAs.isEmpty()) {
             return null;
         }
