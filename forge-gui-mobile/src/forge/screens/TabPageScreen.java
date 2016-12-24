@@ -50,6 +50,15 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         initialize();
     }
 
+    public TabPageScreen(String headerCaption, FPopupMenu menu, TabPage<T>[] tabPages0, boolean alwaysRenderHorizontal) {
+        super(headerCaption, menu);
+        tabHeader = add(new TabHeader<T>(tabPages0, false));
+        tabHeader.showBottomBorder = false;
+        tabHeader.alwaysRenderHorizontal = alwaysRenderHorizontal;
+        tabPages = tabHeader.tabPages;
+        initialize();
+    }
+
     @SuppressWarnings("unchecked")
     private void initialize() {
         int index = 0;
@@ -127,6 +136,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         private boolean isScrollable;
         private FDisplayObject finalVisibleTab;
         private boolean showBottomBorder = true;
+        private boolean alwaysRenderHorizontal = false;
 
         private final FScrollPane scroller = add(new FScrollPane() {
             @Override
@@ -139,7 +149,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                     }
                 }
 
-                if (Forge.isLandscapeMode()) {
+                if (Forge.isLandscapeMode() && !alwaysRenderHorizontal) {
                     //render vertically in Landscape mode
                     float y = 0;
                     for (FDisplayObject child : getChildren()) {

@@ -42,7 +42,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     private final FLabel btnBuySellMultiple = add(new FLabel.ButtonBuilder().font(FSkinFont.get(16)).parseSymbols().build());
 
     public QuestSpellShopScreen() {
-        super("", QuestMenu.getMenu(), new SpellShopBasePage[] { new SpellShopPage(), new InventoryPage() });
+        super("", QuestMenu.getMenu(), new SpellShopBasePage[] { new SpellShopPage(), new InventoryPage() }, true);
         spellShopPage = ((SpellShopPage)tabPages[0]);
         inventoryPage = ((InventoryPage)tabPages[1]);
 

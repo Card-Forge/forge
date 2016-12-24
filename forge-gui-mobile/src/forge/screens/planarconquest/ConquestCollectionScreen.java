@@ -42,7 +42,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
         super("", ConquestMenu.getMenu(), new CollectionTab[] {
             new CollectionTab("Collection", FSkinImage.SPELLBOOK),
             new CollectionTab("Exile", FSkinImage.EXILE)
-        });
+        }, true);
         btnExileRetrieveMultiple.setVisible(false); //hide unless in multi-select mode
         btnExileRetrieveMultiple.setCommand(new FEventHandler() {
             @Override
