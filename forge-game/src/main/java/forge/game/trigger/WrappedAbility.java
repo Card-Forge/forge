@@ -381,6 +381,11 @@ public class WrappedAbility extends Ability {
         return sa.usesTargeting();
     }
 
+    @Override
+    public void resetTargets() {
+        sa.resetTargets();
+    }
+
     // //////////////////////////////////////
     // THIS ONE IS ALL THAT MATTERS
     // //////////////////////////////////////
