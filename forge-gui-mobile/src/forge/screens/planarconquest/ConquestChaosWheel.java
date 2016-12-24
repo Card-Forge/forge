@@ -1,6 +1,7 @@
 package forge.screens.planarconquest;
 
 import com.badlogic.gdx.math.Vector2;
+import forge.Forge;
 
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
@@ -41,8 +42,11 @@ public class ConquestChaosWheel extends FOverlay {
     @Override
     public void drawOverlay(Graphics g) {
         //draw wheel
-        float x = FOptionPane.PADDING;
-        float wheelSize = getWidth() - 2 * x;
+        float wheelSize = getWidth() - 2 * FOptionPane.PADDING;
+        if (Forge.isLandscapeMode()) {
+            wheelSize /= 2;
+        }
+        float x = (getWidth() - wheelSize) / 2;
         float y = (getHeight() - wheelSize) / 2;
         FSkinTexture.BG_CHAOS_WHEEL.drawRotated(g, x, y, wheelSize, wheelSize, animation.getWheelRotation());
 
