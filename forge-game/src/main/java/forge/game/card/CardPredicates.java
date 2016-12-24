@@ -286,6 +286,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> hasSVar(final String name) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.hasSVar(name);
+            }
+        };
+    }
+
     public static class Presets {
 
         /**
