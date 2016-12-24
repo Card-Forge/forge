@@ -87,7 +87,7 @@ public class HumanPlay {
             CharmEffect.makeChoices(sa);
         }
 
-        if (source.getType().hasStringType("Arcane")) {
+        if (sa.isSpell() && source.getType().hasStringType("Arcane")) {
             sa = AbilityUtils.addSpliceEffects(sa);
         }
 
@@ -184,11 +184,13 @@ public class HumanPlay {
         source.setSplitStateToPlayAbility(sa);
 
         if (sa.getPayCosts() != null) {
-            if (sa.getApi() == ApiType.Charm && !sa.isWrapper() && !sa.isCopied()) {
-                CharmEffect.makeChoices(sa);
-            }
-            if (source.getType().hasStringType("Arcane") && !sa.isCopied()) {
-                sa = AbilityUtils.addSpliceEffects(sa);
+            if (!sa.isCopied()) {
+                if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+                    CharmEffect.makeChoices(sa);
+                }
+                if (sa.isSpell() && source.getType().hasStringType("Arcane")) {
+                    sa = AbilityUtils.addSpliceEffects(sa);
+                }
             }
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 

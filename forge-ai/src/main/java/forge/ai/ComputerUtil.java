@@ -93,14 +93,14 @@ public class ComputerUtil {
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
             sa.setHostCard(game.getAction().moveToStack(source));
+
+            if (source.getType().hasStringType("Arcane")) {
+                sa = AbilityUtils.addSpliceEffects(sa);
+            }
         }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
-        }
-
-        if (source.getType().hasStringType("Arcane") && !source.isCopiedSpell()) {
-            sa = AbilityUtils.addSpliceEffects(sa);
         }
 
         if (sa.hasParam("Bestow")) {
