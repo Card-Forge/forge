@@ -76,6 +76,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -1567,6 +1568,63 @@ public class AiController {
             return simPicker.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
         }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+    }
+
+    public List<SpellAbility> orderPlaySa(List<SpellAbility> activePlayerSAs) {
+        // list is only one or empty, no need to filter
+        if (activePlayerSAs.size() < 2) {
+            return activePlayerSAs;
+        }
+
+        List<SpellAbility> result = Lists.newArrayList();
+
+        // filter list by ApiTypes
+        List<SpellAbility> discard = filterListByApi(activePlayerSAs, ApiType.Discard);
+        List<SpellAbility> mandatoryDiscard = filterList(activePlayerSAs, SpellAbilityPredicates.isMandatory());
+
+        List<SpellAbility> draw = filterListByApi(activePlayerSAs, ApiType.Draw);
+
+        List<SpellAbility> putCounter = filterListByApi(activePlayerSAs, ApiType.PutCounter);
+        List<SpellAbility> putCounterAll = filterListByApi(activePlayerSAs, ApiType.PutCounterAll);
+
+        List<SpellAbility> evolve = filterList(putCounter, SpellAbilityPredicates.hasParam("Evolve"));
+
+        // do mandatory discard early if hand is empty or has DiscardMe card
+        boolean discardEarly = false;
+        CardCollectionView playerHand = player.getCardsIn(ZoneType.Hand);
+        if (playerHand.isEmpty() || CardLists.count(playerHand, CardPredicates.hasSVar("DiscardMe")) > 0) {
+            discardEarly = true;
+            result.addAll(mandatoryDiscard);
+        }
+
+        // do Evolve Trigger before other PutCounter SpellAbilities
+        // do putCounter before Draw/Discard because it can cause a Draw Trigger
+        result.addAll(evolve);
+        result.addAll(putCounter);
+        result.addAll(putCounterAll);
+
+        // do Draw before Discard
+        result.addAll(draw);
+        result.addAll(discard); // optional Discard, probably combined with Draw
+
+        if (!discardEarly) {
+            result.addAll(mandatoryDiscard);
+        }
+
+        result.addAll(activePlayerSAs);
+        return result;
+    }
+
+    // TODO move to more common place
+    private <T> List<T> filterList(List<T> input, Predicate<T> pred) {
+        List<T> filtered = Lists.newArrayList(Iterables.filter(input, pred));
+        input.removeAll(filtered);
+        return filtered;
+    }
+
+    // TODO move to more common place
+    private List<SpellAbility> filterListByApi(List<SpellAbility> input, ApiType type) {
+        return filterList(input, SpellAbilityPredicates.isApi(type));
     }
 }
 

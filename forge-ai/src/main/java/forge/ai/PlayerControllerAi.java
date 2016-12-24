@@ -688,13 +688,13 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
-        for (final SpellAbility sa : activePlayerSAs) {
+        for (final SpellAbility sa : getAi().orderPlaySa(activePlayerSAs)) {
             if (prepareSingleSa(sa.getHostCard(),sa,true)) {
                 ComputerUtil.playStack(sa, player, game);
             }
         }
     }
-    
+
     private boolean prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory){
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
