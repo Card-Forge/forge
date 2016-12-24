@@ -343,6 +343,11 @@ public class CardState {
         sVars.putAll(newSVars);
         view.updateFoilIndex(this);
     }
+    public final void removeSVar(final String var) {
+        if (sVars.containsKey(var)) {
+            sVars.remove(var);
+        }
+    }
 
     public final int getFoil() {
         final String foil = getSVar("Foil");

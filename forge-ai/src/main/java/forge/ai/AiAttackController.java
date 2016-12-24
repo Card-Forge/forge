@@ -544,7 +544,7 @@ public class AiAttackController {
                 mustAttack = true;
             } else if (attacker.getSVar("MustAttack").equals("True")) {
                 mustAttack = true;
-            } else if (attacker.getSVar("EndOfTurnLeavePlay").equals("True")
+            } else if (attacker.hasSVar("EndOfTurnLeavePlay")
                     && isEffectiveAttacker(ai, attacker, combat)) {
                 mustAttack = true;
             } else {

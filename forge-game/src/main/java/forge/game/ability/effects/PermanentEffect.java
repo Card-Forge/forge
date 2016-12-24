@@ -26,6 +26,7 @@ public class PermanentEffect extends SpellAbilityEffect {
         // some extra for Dashing
         if (sa.isDash()) {
             c.addExtrinsicKeyword("Haste");
+            c.setSVar("EndOfTurnLeavePlay", "Dash");
             c.updateKeywords();
         }
     }

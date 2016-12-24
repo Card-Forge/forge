@@ -162,6 +162,11 @@ public class GameAction {
             zoneChangedEarly = true;
         }
 
+        // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
+        if (fromBattlefield && c.getSVar("EndOfTurnLeavePlay").equals("Dash")) {
+            c.removeSVar("EndOfTurnLeavePlay");
+        }
+        
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
         if (suppress || (!fromBattlefield && !toHand)) {

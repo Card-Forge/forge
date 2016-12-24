@@ -1137,6 +1137,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.setSVars(newSVars);
     }
 
+    public final void removeSVar(final String var) {
+        currentState.removeSVar(var);
+    }
+    
     public final int sumAllCounters() {
         int count = 0;
         for (final Integer value2 : counters.values()) {
