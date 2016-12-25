@@ -53,6 +53,7 @@ public class Forge implements ApplicationListener {
     private static boolean exited;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Stack<FScreen> screens = new Stack<FScreen>();
+    private static boolean textureFiltering = false;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
         if (GuiBase.getInterface() == null) {
@@ -75,14 +76,18 @@ public class Forge implements ApplicationListener {
         splashScreen = new SplashScreen();
         Gdx.input.setInputProcessor(new MainInputProcessor());
 
+        ForgePreferences prefs = new ForgePreferences();
+
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
-            skinName = new ForgePreferences().getPref(FPref.UI_SKIN);
+            skinName = prefs.getPref(FPref.UI_SKIN);
         }
         else {
             skinName = "default"; //use default skin if preferences file doesn't exist yet
         }
         FSkin.loadLight(skinName, splashScreen);
+
+        textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
 
         //load model on background thread (using progress bar to report progress)
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -260,6 +265,10 @@ public class Forge implements ApplicationListener {
                 }
             }
         });
+    }
+
+    public static boolean isTextureFilteringEnabled() {
+        return textureFiltering; 
     }
 
     public static boolean isLandscapeMode() {

@@ -189,6 +189,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Show Match Background",
                 "Show match background image on battlefield, otherwise background texture shown instead."),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_LIBGDX_TEXTURE_FILTERING,
+                "Battlefield Texture Filtering",
+                "Filter card art on battlefield to make it look less pixelated on large screens (restart required)."),
+                4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_CURRENT_COLORS,
                 "Detailed Card Color",
                 "Displays the breakdown of the current color of cards in the card detail information panel.",

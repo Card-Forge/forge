@@ -58,6 +58,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_COMPACT_LIST_ITEMS ("false"),
         UI_CARD_SIZE ("small"),
         UI_SINGLE_CARD_ZOOM("false"),
+        UI_LIBGDX_TEXTURE_FILTERING("false"),
         UI_BUGZ_NAME (""),
         UI_BUGZ_PWD (""),
         UI_ANTE ("false"),
