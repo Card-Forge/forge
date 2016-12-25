@@ -8,8 +8,6 @@ import com.google.common.cache.CacheLoader;
 
 import forge.Forge;
 import forge.ImageKeys;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
 
 final class ImageLoader extends CacheLoader<String, Texture> {
     @Override
