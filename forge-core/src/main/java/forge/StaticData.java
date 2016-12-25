@@ -30,7 +30,6 @@ public class StaticData {
     private final String blockDataFolder;
     private final CardDb commonCards;
     private final CardDb variantCards;
-    private final CardDb allCards;
     private final CardEdition.Collection editions;
 
     // Loaded lazily:
@@ -51,29 +50,24 @@ public class StaticData {
 
         final Map<String, CardRules> regularCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         final Map<String, CardRules> variantsCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-        final Map<String, CardRules> fullCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
 
         for (CardRules card : reader.loadCards()) {
             if (null == card) continue;
 
             final String cardName = card.getName();
-            if ( card.isVariant() ) {
+            if (card.isVariant()) {
                 variantsCards.put(cardName, card);
-            }
-            else {
+            } else {
                 regularCards.put(cardName, card);
             }
-            fullCards.put(cardName, card);
         }
 
         commonCards = new CardDb(regularCards, editions);
         variantCards = new CardDb(variantsCards, editions);
-        allCards = new CardDb(fullCards, editions);
 
         //muse initialize after establish field values for the sake of card image logic
         commonCards.initialize(false, false);
         variantCards.initialize(false, false);
-        allCards.initialize( false, false);
     }
 
     public static StaticData instance() {
@@ -117,9 +111,11 @@ public class StaticData {
         String cardName = r.cardName;
         CardRules rules = reader.attemptToLoadCard(cardName, setCode);
         if (rules != null) {
-            commonCards.loadCard(cardName, rules);
-            variantCards.loadCard(cardName, rules);
-            allCards.loadCard(cardName, rules);
+            if (rules.isVariant()) {
+                variantCards.loadCard(cardName, rules);
+            } else {
+                commonCards.loadCard(cardName, rules);
+            }
         }
     }
 
@@ -169,9 +165,4 @@ public class StaticData {
     public CardDb getVariantCards() {
         return variantCards;
     }
-
-    public CardDb getAllCards() {
-         return allCards;
-     }
-
 }

@@ -161,7 +161,10 @@ public class GuiChoose {
                                 return;
                             } else if (sel instanceof ICardFace) {
                                 final ICardFace face = (ICardFace)sel;
-                                final PaperCard paper = FModel.getMagicDb().getAllCards().getUniqueByName(face.getName());
+                                PaperCard paper = FModel.getMagicDb().getCommonCards().getUniqueByName(face.getName());
+                                if (paper == null) {
+                                    paper = FModel.getMagicDb().getVariantCards().getUniqueByName(face.getName());
+                                }
                                 matchUI.setCard(paper);
                                 return;
                             }
