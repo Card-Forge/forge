@@ -77,9 +77,7 @@ public class SpellAbilityPicker {
     public SpellAbility chooseSpellAbilityToPlay(SimulationController controller, List<SpellAbility> all, boolean skipCounter) {
         printOutput = (controller == null);
 
-        // FIXME: This is wasteful, we should re-use the same simulator...
-        GameSimulator simulator = new GameSimulator(controller, game, player);
-        Score origGameScore = simulator.getScoreForOrigGame();
+        Score origGameScore = new GameStateEvaluator().getScoreForGameState(game, player);
         List<SpellAbility> candidateSAs = getCandidateSpellsAndAbilities(all);
         if (controller != null) {
             // This is a recursion during a higher-level simulation. Just return the head of the best
