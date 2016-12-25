@@ -76,7 +76,6 @@ public class SimulationController {
         int writeIndex = 0;
         for (int i = 0; i < sequence.size(); i++) {
             Plan.Decision d = sequence.get(i);
-            System.out.println("SeqInput: " + d);
             if (d.sa != null) {
                 sequence.set(writeIndex, d);
                 writeIndex++;
