@@ -90,7 +90,7 @@ import forge.util.collect.FCollectionView;
 
 /**
  * <p>
- * ComputerAI_General class.
+ * AiController class.
  * </p>
  * 
  * @author Forge
@@ -273,9 +273,8 @@ public class AiController {
             if (api != null) {
                 if (exSA.getApi() != api) {
                     continue;
-                } else {
-                    rightapi = true;
                 }
+                rightapi = true;
                 if (!(exSA instanceof AbilitySub)) {
                     if (!ComputerUtilCost.canPayCost(exSA, player)) {
                         return false;
@@ -975,7 +974,7 @@ public class AiController {
     public int getIntProperty(AiProps propName) {
         String prop = AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
 
-        if (prop == null || prop.equals("")) {
+        if (prop == null || prop.isEmpty()) {
             return Integer.parseInt(propName.getDefault());
         }
 
@@ -985,7 +984,7 @@ public class AiController {
     public boolean getBooleanProperty(AiProps propName) {
         String prop = AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
 
-        if (prop == null || prop.equals("")) {
+        if (prop == null || prop.isEmpty()) {
             return Boolean.parseBoolean(propName.getDefault());
         }
 
@@ -993,14 +992,12 @@ public class AiController {
     }
 
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
-        final Card card = spell.getHostCard();
-        
         int damage = ComputerUtil.getDamageForPlaying(player, spell);
-        
         if (damage >= player.getLife() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
             return AiPlayDecision.CurseEffects;
         }
 
+        final Card card = spell.getHostCard();
         if (spell instanceof SpellApiBased) {
             boolean chance = false;
             if (withoutPayingManaCost) {
@@ -1101,7 +1098,7 @@ public class AiController {
             return null;
         }
         final CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
-    
+
         if (!game.getStack().isEmpty()) {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
             if (counter != null) return counter;
@@ -1110,11 +1107,8 @@ public class AiController {
             if (counterETB != null)
                 return counterETB;
         }
-    
-        SpellAbility result = chooseSpellAbilityToPlayFromList(ComputerUtilAbility.getSpellAbilities(cards, player), true);
-        if (null == result) 
-            return null;
-        return result;
+
+        return chooseSpellAbilityToPlayFromList(ComputerUtilAbility.getSpellAbilities(cards, player), true);
     }
 
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
