@@ -386,7 +386,7 @@ public class AiController {
     }
 
     // plays a land if one is available
-    public CardCollection getLandsToPlay() {
+    private CardCollection getLandsToPlay() {
         final CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
         hand.addAll(player.getCardsIn(ZoneType.Exile));
         CardCollection landList = CardLists.filter(hand, Presets.LANDS);
@@ -479,7 +479,7 @@ public class AiController {
         return landList;
     }
 
-    public Card chooseBestLandToPlay(CardCollection landList) {
+    private Card chooseBestLandToPlay(CardCollection landList) {
         if (landList.isEmpty()) {
             return null;
         }
@@ -613,7 +613,7 @@ public class AiController {
         return predictSpellToCastInMain2(exceptSA, true);
     }
 
-    public SpellAbility predictSpellToCastInMain2(ApiType exceptSA, boolean handOnly) {
+    private SpellAbility predictSpellToCastInMain2(ApiType exceptSA, boolean handOnly) {
         if (!getBooleanProperty(AiProps.PREDICT_SPELLS_FOR_MAIN2)) {
             return null;
         }
@@ -700,7 +700,6 @@ public class AiController {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa instanceof Spell) {
-            
             if (ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife() 
                     && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
                 return AiPlayDecision.CurseEffects;
@@ -1030,6 +1029,39 @@ public class AiController {
         return canPlaySpellBasic(card);
     }
 
+    // declares blockers for given defender in a given combat
+    public void declareBlockersFor(Player defender, Combat combat) {
+        AiBlockController block = new AiBlockController(defender);
+        // When player != defender, AI should declare blockers for its benefit.
+        block.assignBlockersForCombat(combat);
+    }
+
+    public void declareAttackers(Player attacker, Combat combat) {
+        // 12/2/10(sol) the decision making here has moved to getAttackers()
+        AiAttackController aiAtk = new AiAttackController(attacker); 
+        aiAtk.declareAttackers(combat);
+
+        // if invalid: just try an attack declaration that we know to be legal
+        if (!CombatUtil.validateAttackers(combat)) {
+            combat.clearAttackers();
+            final Map<Card, GameEntity> legal = combat.getAttackConstraints().getLegalAttackers().getLeft();
+            System.err.println("AI Attack declaration invalid, defaulting to: " + legal);
+            for (final Map.Entry<Card, GameEntity> mandatoryAttacker : legal.entrySet()) {
+                combat.addAttacker(mandatoryAttacker.getKey(), mandatoryAttacker.getValue());
+            }
+            if (!CombatUtil.validateAttackers(combat)) {
+                aiAtk.declareAttackers(combat);
+            }
+        }
+
+        for (final Card element : combat.getAttackers()) {
+            // tapping of attackers happens after Propaganda is paid for
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
+            Log.debug(sb.toString());
+        }
+    }
+
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         // Reset cached predicted combat, as it may be stale. It will be
         // re-created if needed and used for any AI logic that needs it.
@@ -1062,40 +1094,6 @@ public class AiController {
         return abilities;
     }
 
-    // declares blockers for given defender in a given combat
-    public void declareBlockersFor(Player defender, Combat combat) {
-        AiBlockController block = new AiBlockController(defender);
-        // When player != defender, AI should declare blockers for its benefit.
-        block.assignBlockersForCombat(combat);
-    }
-    
-
-    public void declareAttackers(Player attacker, Combat combat) {
-        // 12/2/10(sol) the decision making here has moved to getAttackers()
-        AiAttackController aiAtk = new AiAttackController(attacker); 
-        aiAtk.declareAttackers(combat);
-
-        // if invalid: just try an attack declaration that we know to be legal
-        if (!CombatUtil.validateAttackers(combat)) {
-            combat.clearAttackers();
-            final Map<Card, GameEntity> legal = combat.getAttackConstraints().getLegalAttackers().getLeft();
-            System.err.println("AI Attack declaration invalid, defaulting to: " + legal);
-            for (final Map.Entry<Card, GameEntity> mandatoryAttacker : legal.entrySet()) {
-                combat.addAttacker(mandatoryAttacker.getKey(), mandatoryAttacker.getValue());
-            }
-            if (!CombatUtil.validateAttackers(combat)) {
-                aiAtk.declareAttackers(combat);
-            }
-        }
-
-        for (final Card element : combat.getAttackers()) {
-            // tapping of attackers happens after Propaganda is paid for
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
-            Log.debug(sb.toString());
-        }
-    }
-
     private final SpellAbility getSpellAbilityToPlay() {
         // if top of stack is owned by me
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
@@ -1108,18 +1106,18 @@ public class AiController {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
             if (counter != null) return counter;
     
-            SpellAbility counterETB = chooseSpellAbilityToPlay(this.getPossibleETBCounters(), false);
+            SpellAbility counterETB = chooseSpellAbilityToPlayFromList(getPossibleETBCounters(), false);
             if (counterETB != null)
                 return counterETB;
         }
     
-        SpellAbility result = chooseSpellAbilityToPlay(ComputerUtilAbility.getSpellAbilities(cards, player), true);
+        SpellAbility result = chooseSpellAbilityToPlayFromList(ComputerUtilAbility.getSpellAbilities(cards, player), true);
         if (null == result) 
             return null;
         return result;
     }
-    
-    private SpellAbility chooseSpellAbilityToPlay(final List<SpellAbility> all, boolean skipCounter) {
+
+    private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
         if (all == null || all.isEmpty())
             return null;
         
@@ -1149,7 +1147,7 @@ public class AiController {
         }
         
         return null;
-    }     
+    }
 
     public CardCollection chooseCardsToDelve(int genericCost, CardCollection grave) {
         CardCollection toExile = new CardCollection();
@@ -1183,7 +1181,6 @@ public class AiController {
     }
     
     public boolean doTrigger(SpellAbility spell, boolean mandatory) {
-        
         if (spell.getApi() != null)
             return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
         if (spell instanceof WrappedAbility)
@@ -1247,9 +1244,8 @@ public class AiController {
         }
 
         return false;
-    }    
-    
-    
+    }
+
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
         // AI would play everything. But limits to one copy of (Leyline of Singularity) and (Gemstone Caverns)
         
@@ -1527,7 +1523,6 @@ public class AiController {
         return library;
     } // smoothComputerManaCurve()
 
-    
     public int chooseNumber(SpellAbility sa, String title,List<Integer> options, Player relatedPlayer) {
         switch(sa.getApi())
         {
