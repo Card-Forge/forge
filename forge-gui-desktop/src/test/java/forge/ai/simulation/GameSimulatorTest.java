@@ -10,6 +10,7 @@ import forge.GuiBase;
 import forge.GuiDesktop;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.LobbyPlayerAi;
+import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.card.CardStateName;
 import forge.deck.Deck;
 import forge.game.Game;
@@ -49,11 +50,11 @@ public class GameSimulatorTest extends TestCase {
         }
         return game;
     }
-    
+
     private GameSimulator createSimulator(Game game, Player p) {
-        return new GameSimulator(new SimulationController(), game, p);
+        return new GameSimulator(new SimulationController(new Score(0)), game, p);
     }
- 
+
     private Card findCardWithName(Game game, String name) {
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals(name)) {

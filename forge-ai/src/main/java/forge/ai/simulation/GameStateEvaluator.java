@@ -79,9 +79,9 @@ public class GameStateEvaluator {
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             int value = evalCard(game, aiPlayer, c, combat);
             int summonSickValue = value;
-            // To make the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
+            // To make the AI hold-off on playing creatures before MAIN2 if they give no other benefits,
             // keep track of the score while treating summon sick creatures as having a value of 0.
-            if (gamePhase == PhaseType.MAIN1 && c.isSick() && c.getController() == aiPlayer) {
+            if (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick() && c.getController() == aiPlayer) {
                 summonSickValue = 0;
             }
             String str = c.getName();
@@ -167,7 +167,6 @@ public class GameStateEvaluator {
     public static class Score {
         public final int value;
         public final int summonSickValue;
-        public String choice;
         
         public Score(int value) {
             this.value = value;

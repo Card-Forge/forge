@@ -16,23 +16,43 @@ public class PossibleTargetSelector {
     private int targetIndex;
     private List<GameObject> validTargets;
 
+    public static class Targets {
+        final int originalTargetCount;
+        final int targetIndex;
+        final String description;
+        
+        private Targets(int originalTargetCount, int targetIndex, String description)  {
+            this.originalTargetCount = originalTargetCount;
+            this.targetIndex = targetIndex;
+            this.description = description;
+
+            if (targetIndex < 0 || targetIndex >= originalTargetCount) {
+                throw new IllegalArgumentException("Invalid targetIndex=" + targetIndex);
+            }
+        }
+        
+        @Override
+        public String toString() {
+            return description;
+        }
+    }
+
     public PossibleTargetSelector(Game game, Player self, SpellAbility sa) {
         this.sa = sa;
         this.tgt = sa.getTargetRestrictions();
         this.targetIndex = 0;
         this.validTargets = new ArrayList<GameObject>();
+        sa.resetTargets();
         sa.setActivatingPlayer(self);
         for (GameObject o : tgt.getAllCandidates(sa, true)) {
             validTargets.add(o);
         }
     }
- 
-    public boolean selectNextTargets() {
-        if (targetIndex >= validTargets.size()) {
-            return false;
-        }
+
+    private void selectTargetsByIndex(int index) {
         sa.resetTargets();
-        int index = targetIndex;
+
+        // TODO: smarter about multiple targets, identical targets, etc...
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa) && index < validTargets.size()) {
             sa.getTargets().add(validTargets.get(index++));
         }
@@ -53,8 +73,25 @@ public class PossibleTargetSelector {
                 }
             }
         }
+    }
 
-        // TODO: smarter about multiple targets, identical targets, etc...
+    public Targets getLastSelectedTargets() {
+        return new Targets(validTargets.size(), targetIndex - 1, sa.getTargets().getTargetedString());
+    }
+
+    public boolean selectTargets(Targets targets) {
+        if (targets.originalTargetCount != validTargets.size()) {
+            return false;
+        }
+        selectTargetsByIndex(targets.targetIndex);
+        return true;
+    }
+ 
+    public boolean selectNextTargets() {
+        if (targetIndex >= validTargets.size()) {
+            return false;
+        }
+        selectTargetsByIndex(targetIndex);
         targetIndex++;
         return true;
     }

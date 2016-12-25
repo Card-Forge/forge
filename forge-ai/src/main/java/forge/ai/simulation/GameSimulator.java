@@ -192,7 +192,7 @@ public class GameSimulator {
         }
         controller.printState(score, origSa);
         if (controller.shouldRecurse() && !simGame.isGameOver()) {
-            controller.push(sa);
+            controller.push(sa, score);
             SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);
             CardCollection cards = ComputerUtilAbility.getAvailableCards(simGame, aiPlayer);
             List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, aiPlayer);

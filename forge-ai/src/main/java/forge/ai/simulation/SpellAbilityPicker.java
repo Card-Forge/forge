@@ -1,6 +1,5 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -25,7 +24,9 @@ public class SpellAbilityPicker {
     private Score bestScore;
     private boolean printOutput;
     private Interceptor interceptor;
- 
+
+    private Plan plan;
+
     public SpellAbilityPicker(Game game, Player player) {
         this.game = game;
         this.player = player;
@@ -40,22 +41,20 @@ public class SpellAbilityPicker {
             System.out.println(str);
         }
     }
-    
-    public SpellAbility chooseSpellAbilityToPlay(SimulationController controller, final List<SpellAbility> all, boolean skipCounter) {
-        printOutput = false;
-        if (controller == null) {
-            controller = new SimulationController();
-            printOutput = true;
-        }
+
+    private void printPhaseInfo() {
         String phaseStr = game.getPhaseHandler().getPhase().toString();
         if (game.getPhaseHandler().getPlayerTurn() != player) {
             phaseStr = "opponent " + phaseStr;
         }
         print("---- choose ability  (phase = " + phaseStr + ")");
-
-        long startTime = System.currentTimeMillis();
-        List<SpellAbility> candidateSAs = new ArrayList<>();
-        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
+    }
+    
+    private List<SpellAbility> getCandidateSpellsAndAbilities(List<SpellAbility> all) {
+        List<SpellAbility> candidateSAs = ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player);
+        int writeIndex = 0;
+        for (int i = 0; i < candidateSAs.size(); i++) {
+            SpellAbility sa = candidateSAs.get(i);
             if (sa.isManaAbility()) {
                 continue;
             }
@@ -68,20 +67,59 @@ public class SpellAbilityPicker {
             
             if (opinion != AiPlayDecision.WillPlay)
                 continue;
-            candidateSAs.add(sa);
+            candidateSAs.set(writeIndex,  sa);
+            writeIndex++;
+        }
+        candidateSAs.subList(writeIndex, candidateSAs.size()).clear();
+        return candidateSAs;
+    }
+
+    public SpellAbility chooseSpellAbilityToPlay(SimulationController controller, List<SpellAbility> all, boolean skipCounter) {
+        printOutput = (controller == null);
+
+        // FIXME: This is wasteful, we should re-use the same simulator...
+        GameSimulator simulator = new GameSimulator(controller, game, player);
+        Score origGameScore = simulator.getScoreForOrigGame();
+        List<SpellAbility> candidateSAs = getCandidateSpellsAndAbilities(all);
+        if (controller != null) {
+            // This is a recursion during a higher-level simulation. Just return the head of the best
+            // sequence directly, no need to create a Plan object.
+            return chooseSpellAbilityToPlayImpl(controller, candidateSAs, origGameScore);
         }
 
-        if (candidateSAs.isEmpty()) {
-            return null;
+        printPhaseInfo();
+        SpellAbility sa = getPlannedSpellAbility(origGameScore, candidateSAs);
+        if (sa != null) {
+            return sa;
         }
+        createNewPlan(origGameScore, candidateSAs);
+        return getPlannedSpellAbility(origGameScore, candidateSAs);
+    }
+
+    private void createNewPlan(Score origGameScore, List<SpellAbility> candidateSAs) {
+        plan = null;
+        SimulationController controller = new SimulationController(origGameScore);
+        SpellAbility sa = chooseSpellAbilityToPlayImpl(controller, candidateSAs, origGameScore);
+        if (sa == null) {
+            print("No good plan at this time");
+            return;
+        }
+
+        plan = controller.getBestPlan();
+        print("New plan with score " + controller.getBestScore() + ":");
+        int i = 0;
+        for (Plan.Decision d : plan.getDecisions()) {
+            print(++i + ". " + d);
+        }
+    }
+
+    private SpellAbility chooseSpellAbilityToPlayImpl(SimulationController controller, List<SpellAbility> candidateSAs, Score origGameScore) {
+        long startTime = System.currentTimeMillis();
+
         SpellAbility bestSa = null;
-        GameSimulator simulator = new GameSimulator(controller, game, player);
-        // FIXME: This is wasteful, we should re-use the same simulator...
-        Score origGameScore = simulator.getScoreForOrigGame();
         Score bestSaValue = origGameScore;
         print("Evaluating... (orig score = " + origGameScore +  ")");
         for (final SpellAbility sa : candidateSAs) {
-            print(abilityToString(sa));;
             Score value = evaluateSa(controller, sa);
             if (value.value > bestSaValue.value) {
                 bestSaValue = value;
@@ -102,6 +140,41 @@ public class SpellAbilityPicker {
         print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue.summonSickValue + " TIME: " + execTime);
         this.bestScore = bestSaValue;
         return bestSa;
+    }
+
+    private SpellAbility getPlannedSpellAbility(Score origGameScore, List<SpellAbility> availableSAs) {
+        if (plan != null && plan.hasNextDecision()) {
+            boolean badTargets = false;
+            boolean saNotFound = false;
+            Plan.Decision decision = plan.selectNextDecision();
+            if (decision.initialScore.equals(origGameScore)) {
+                // TODO: Other safeguards like list of SAs and maybe the index and such?
+                for (final SpellAbility sa : availableSAs) {
+                    if (sa.toString().equals(decision.sa)) {
+                        if (decision.targets != null) {
+                            PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
+                            if (!selector.selectTargets(decision.targets)) {
+                                badTargets = true;
+                                break;
+                            }
+                        }
+                        print("Planned decision " + plan.getNextDecisionIndex() + ": " + abilityToString(sa) + " " + decision.choice);
+                        return sa;
+                    }
+                }
+                saNotFound = true;
+            }
+            print("Failed to continue planned action (" + decision.sa + "). Cause:");
+            if (badTargets) {
+                print("  Bad targets!");
+            } else if (saNotFound) {
+                print("  Couldn't find spell/ability!");
+            } else {
+                print("  Unexpected game score (" + decision.initialScore + " vs. expected " + origGameScore + ")!");
+            }
+            plan = null;
+        }
+        return null;
     }
  
     public Score getScoreForChosenAbility() {
@@ -161,12 +234,11 @@ public class SpellAbilityPicker {
         return AiPlayDecision.WillPlay;
     }
 
-    private Score evaluateSa(SimulationController controller, SpellAbility sa) {
-        GameSimulator.debugPrint("Evaluate SA: " + sa);
+    private Score evaluateSa(final SimulationController controller, SpellAbility sa) {
+        controller.evaluateSpellAbility(sa);
 
         Score bestScore = new Score(Integer.MIN_VALUE);
         if (!sa.usesTargeting()) {
-            // TODO: Refactor this into a general decision tree.
             Interceptor interceptor = new Interceptor() {
                 private int numChoices = -1;
                 private int nextChoice = 0;
@@ -185,7 +257,9 @@ public class SpellAbilityPicker {
                     }
                     numChoices = uniqueCards.size();
                     nextChoice++;
-                    GameSimulator.debugPrint("Trying out choice " + choice);
+                    if (choice != null) {
+                        controller.evaluateCardChoice(choice);
+                    }
                     return choice;
                 }
 
@@ -204,30 +278,33 @@ public class SpellAbilityPicker {
                 GameSimulator simulator = new GameSimulator(controller, game, player);
                 simulator.setInterceptor(interceptor);
                 Score score = simulator.simulateSpellAbility(sa);
+                if (interceptor.getLastChoice() != null) {
+                    controller.doneEvaluating(score);
+                }
                 if (score.value > bestScore.value) {
                     bestScore = score;
-                    Card choice = interceptor.getLastChoice();
-                    if (choice != null) {
-                        bestScore.choice = choice.getName();
-                    }
                 }
             } while (interceptor.hasMoreChoices());
+            controller.doneEvaluating(bestScore);
             return bestScore;
         }
 
-        GameSimulator.debugPrint("Checking out targets");
         PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
         TargetChoices tgt = null;
         while (selector.selectNextTargets()) {
-            GameSimulator.debugPrint("Trying targets: " + sa.getTargets().getTargetedString());
+            controller.evaluateTargetChoices(selector.getLastSelectedTargets());
             GameSimulator simulator = new GameSimulator(controller, game, player);
             Score score = simulator.simulateSpellAbility(sa);
+            controller.doneEvaluating(score);
+            // TODO: Get rid of the below when no longer needed.
             if (score.value > bestScore.value) {
                 bestScore = score;
                 tgt = sa.getTargets();
                 sa.resetTargets();
             }
         }
+        controller.doneEvaluating(bestScore);
+
         if (tgt != null) {
             sa.setTargets(tgt);
         }
@@ -240,12 +317,15 @@ public class SpellAbilityPicker {
             return interceptor.chooseCard(fetchList);
         }
         // TODO: Make the below more robust?
-        if (bestScore != null && bestScore.choice != null) {
+        if (plan != null && plan.getSelectedDecision() != null) {
+            String choice = plan.getSelectedDecision().choice;
             for (Card c : fetchList) {
-                if (c.getName().equals(bestScore.choice)) {
+                if (c.getName().equals(choice)) {
+                    print("  Planned choice: " + c);
                     return c;
                 }
             }
+            print("Failed to use planned choice (" + choice + "). Not found!");
         }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
     }
