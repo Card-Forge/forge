@@ -7,14 +7,12 @@ import java.util.List;
 import java.util.Set;
 
 import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.ai.simulation.SpellAbilityPicker.Interceptor;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
@@ -134,31 +132,34 @@ public class GameSimulator {
         return simulateSpellAbility(origSa, this.eval);
     }
     public Score simulateSpellAbility(SpellAbility origSa, GameStateEvaluator eval) {
-        // TODO: optimize: prune identical SA (e.g. two of the same card in hand)
-        SpellAbility sa = findSaInSimGame(origSa);
-        if (sa == null) {
-            System.err.println("SA not found! " + sa);
-            return new Score(Integer.MIN_VALUE, Integer.MIN_VALUE);
-        }
+        SpellAbility sa;
+        if (origSa instanceof SpellAbilityPicker.PlayLandAbility) {
+            Card hostCard = (Card) copier.find(origSa.getHostCard());
+            aiPlayer.playLand(hostCard, false);
+            sa = origSa;
+        } else {
+            // TODO: optimize: prune identical SA (e.g. two of the same card in hand)
+            sa = findSaInSimGame(origSa);
+            if (sa == null) {
+                System.err.println("SA not found! " + origSa);
+                return new Score(Integer.MIN_VALUE, Integer.MIN_VALUE);
+            }
 
-        debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
-        sa.setActivatingPlayer(aiPlayer);
-        if (origSa.usesTargeting()) {
-            final boolean divided = sa.hasParam("DividedAsYouChoose");
-            final TargetRestrictions origTgtRes = origSa.getTargetRestrictions();
-            final TargetRestrictions tgtRes = sa.getTargetRestrictions();
-            for (final GameObject o : origSa.getTargets().getTargets()) {
-                final GameObject target = copier.find(o);
-                sa.getTargets().add(target);
-                if (divided) {
-                    tgtRes.addDividedAllocation(target, origTgtRes.getDividedValue(o));
+            debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
+            sa.setActivatingPlayer(aiPlayer);
+            if (origSa.usesTargeting()) {
+                final boolean divided = sa.hasParam("DividedAsYouChoose");
+                final TargetRestrictions origTgtRes = origSa.getTargetRestrictions();
+                final TargetRestrictions tgtRes = sa.getTargetRestrictions();
+                for (final GameObject o : origSa.getTargets().getTargets()) {
+                    final GameObject target = copier.find(o);
+                    sa.getTargets().add(target);
+                    if (divided) {
+                        tgtRes.addDividedAllocation(target, origTgtRes.getDividedValue(o));
+                    }
                 }
             }
-        }
 
-        if (sa == origSa.getHostCard().getGame().PLAY_LAND_SURROGATE) {
-            aiPlayer.playLand(sa.getHostCard(), false);
-        } else {
             if (debugPrint && !sa.getAllTargetChoices().isEmpty()) {
                 debugPrint("Targets: ");
                 for (TargetChoices target : sa.getAllTargetChoices()) {
@@ -171,7 +172,6 @@ public class GameSimulator {
 
         // TODO: Support multiple opponents.
         Player opponent = aiPlayer.getOpponent();
-
         resolveStack(simGame, opponent);
 
         // TODO: If this is during combat, before blockers are declared,
@@ -194,9 +194,7 @@ public class GameSimulator {
         if (controller.shouldRecurse() && !simGame.isGameOver()) {
             controller.push(sa, score);
             SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);
-            CardCollection cards = ComputerUtilAbility.getAvailableCards(simGame, aiPlayer);
-            List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, aiPlayer);
-            SpellAbility nextSa = sim.chooseSpellAbilityToPlay(controller, all, true);
+            SpellAbility nextSa = sim.chooseSpellAbilityToPlay(controller);
             if (nextSa != null) {
                 score = sim.getScoreForChosenAbility();
             }
@@ -212,18 +210,26 @@ public class GameSimulator {
             @Override
             public void run() {
                 final Set<Card> allAffectedCards = new HashSet<Card>();
+                game.getAction().checkStateEffects(false, allAffectedCards);
                 game.getStack().addAllTriggeredAbilitiesToStack();
                 while (!game.getStack().isEmpty() && !game.isGameOver()) {
                     debugPrint("Resolving:" + game.getStack().peekAbility());
+
                     // Resolve the top effect on the stack.
                     game.getStack().resolveStack();
+ 
                     // Evaluate state based effects as a result of resolving stack.
                     // Note: Needs to happen after resolve stack rather than at the
                     // top of the loop to ensure state effects are evaluated after the
                     // last resolved effect
                     game.getAction().checkStateEffects(false, allAffectedCards);
-                    // Add any triggers as a result of resolving the effect.
+
+                    // Add any triggers additional triggers as a result of the above.
+                    // Must be below state effects, since legendary rule is evaluated
+                    // as part of state effects and trigger come afterward. (e.g. to
+                    // correctly handle two Dark Depths - one having no counters).
                     game.getStack().addAllTriggeredAbilitiesToStack();
+
                     // Continue until stack is empty.
                 }
             }

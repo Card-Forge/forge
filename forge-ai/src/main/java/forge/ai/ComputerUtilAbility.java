@@ -3,17 +3,63 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class ComputerUtilAbility {
+    public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
+        if (!game.getStack().isEmpty() || !game.getPhaseHandler().getPhase().isMain()) {
+            return null;
+        }
+        final CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
+        hand.addAll(player.getCardsIn(ZoneType.Exile));
+        CardCollection landList = CardLists.filter(hand, Presets.LANDS);
+
+        //filter out cards that can't be played
+        landList = CardLists.filter(landList, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                if (!c.getSVar("NeedsToPlay").isEmpty()) {
+                    final String needsToPlay = c.getSVar("NeedsToPlay");
+                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay.split(","), c.getController(), c, null);
+                    if (list.isEmpty()) {
+                        return false;
+                    }
+                }
+                return player.canPlayLand(c);
+            }
+        });
+
+        final CardCollection landsNotInHand = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
+        landsNotInHand.addAll(game.getCardsIn(ZoneType.Exile));
+        if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
+            landsNotInHand.add(player.getCardsIn(ZoneType.Library).get(0));
+        }
+        for (final Card crd : landsNotInHand) {
+            if (!(crd.isLand() || (crd.isFaceDown() && crd.getState(CardStateName.Original).getType().isLand()))) {
+                continue;
+            }
+            if (!crd.mayPlay(player).isEmpty()) {
+                landList.add(crd);
+            }
+        }
+        if (landList.isEmpty()) {
+            return null;
+        }
+        return landList;
+    }
+
     public static CardCollection getAvailableCards(final Game game, final Player player) {
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
 

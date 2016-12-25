@@ -35,7 +35,6 @@ import com.google.common.collect.Maps;
 
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.simulation.SpellAbilityPicker;
-import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
@@ -65,7 +64,6 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.mana.ManaCostBeingPaid;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
@@ -384,44 +382,9 @@ public class AiController {
         return spellAbility;
     }
 
-    // plays a land if one is available
-    private CardCollection getLandsToPlay() {
+    private CardCollection filterLandsToPlay(CardCollection landList) {
         final CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
-        hand.addAll(player.getCardsIn(ZoneType.Exile));
-        CardCollection landList = CardLists.filter(hand, Presets.LANDS);
         CardCollection nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
-        
-        //filter out cards that can't be played
-        landList = CardLists.filter(landList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (!c.getSVar("NeedsToPlay").isEmpty()) {
-                    final String needsToPlay = c.getSVar("NeedsToPlay");
-                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay.split(","), c.getController(), c, null);
-                    if (list.isEmpty()) {
-                        return false;
-                    }
-                }
-                return player.canPlayLand(c);
-            }
-        });
-    
-        final CardCollection landsNotInHand = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
-        landsNotInHand.addAll(game.getCardsIn(ZoneType.Exile));
-        if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
-            landsNotInHand.add(player.getCardsIn(ZoneType.Library).get(0));
-        }
-        for (final Card crd : landsNotInHand) {
-            if (!(crd.isLand() || (crd.isFaceDown() && crd.getState(CardStateName.Original).getType().isLand()))) {
-                continue;
-            }
-            if (!crd.mayPlay(player).isEmpty()) {
-                landList.add(crd);
-            }
-        }
-        if (landList.isEmpty()) {
-            return null;
-        }
         if (landList.size() == 1 && nonLandList.size() < 3) {
             CardCollectionView cardsInPlay = player.getCardsIn(ZoneType.Battlefield);
             CardCollection landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
@@ -1059,16 +1022,29 @@ public class AiController {
         }
     }
 
+    private List<SpellAbility> singleSpellAbilityList(SpellAbility sa) {
+        if (sa == null) { return null; }
+
+        // System.out.println("Chosen to play: " + sa);
+
+        final List<SpellAbility> abilities = Lists.newArrayList();
+        abilities.add(sa);
+        return abilities;
+    }
+
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         // Reset cached predicted combat, as it may be stale. It will be
         // re-created if needed and used for any AI logic that needs it.
         predictedCombat = null;
 
-        final PhaseType phase = game.getPhaseHandler().getPhase();
+        if (useSimulation && SpellAbilityPicker.SIMULATE_LAND_PLAYS) {
+            return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
+        }
 
-        if (game.getStack().isEmpty() && phase.isMain()) {
-            Log.debug("Computer " + phase.nameForUi);
-            CardCollection landsWannaPlay = getLandsToPlay();
+        CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
+        if (landsWannaPlay != null) {
+            landsWannaPlay = filterLandsToPlay(landsWannaPlay);
+            Log.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
                 Card land = chooseBestLandToPlay(landsWannaPlay);
                 if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
@@ -1081,14 +1057,11 @@ public class AiController {
             }
         }
 
-        SpellAbility sa = getSpellAbilityToPlay();
-        if (sa == null) { return null; }
+        if (useSimulation && !SpellAbilityPicker.SIMULATE_LAND_PLAYS) {
+            return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
+        }
 
-        // System.out.println("Chosen to play: " + sa);
-
-        final List<SpellAbility> abilities = Lists.newArrayList();
-        abilities.add(sa);
-        return abilities;
+        return singleSpellAbilityList(getSpellAbilityToPlay());
     }
 
     private final SpellAbility getSpellAbilityToPlay() {
@@ -1114,11 +1087,7 @@ public class AiController {
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
         if (all == null || all.isEmpty())
             return null;
-        
-        if (useSimulation) {
-            return simPicker.chooseSpellAbilityToPlay(null, all, skipCounter);
-        }
-        
+
         Collections.sort(all, saComparator); // put best spells first
         
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {

@@ -10,8 +10,6 @@ import forge.game.spellability.SpellAbility;
 
 public class SimulationController {
     private static int MAX_DEPTH = 2;
-    
-    private int recursionDepth;
 
     private List<Plan.Decision> currentStack;
     private List<Score> scoreStack;
@@ -25,8 +23,12 @@ public class SimulationController {
         currentStack = new ArrayList<Plan.Decision>();
     }
     
+    private int getRecursionDepth() {
+        return scoreStack.size() - 1;
+    }
+    
     public boolean shouldRecurse() {
-        return recursionDepth < MAX_DEPTH;
+        return getRecursionDepth() < MAX_DEPTH;
     }
     
     private Plan.Decision getLastDecision() {
@@ -90,21 +92,24 @@ public class SimulationController {
     }
     
     public void push(SpellAbility sa, Score score) {
-        GameSimulator.debugPrint("Recursing DEPTH=" + recursionDepth);
+        GameSimulator.debugPrint("Recursing DEPTH=" + getRecursionDepth());
         GameSimulator.debugPrint("  With: " + sa);
-        recursionDepth++;
         scoreStack.add(score);
     }
 
     public void pop(Score score, SpellAbility nextSa) {
-        recursionDepth--;
         scoreStack.remove(scoreStack.size() - 1);
-        GameSimulator.debugPrint("DEPTH"+recursionDepth+" best score " + score + " " + nextSa);
+        GameSimulator.debugPrint("DEPTH"+getRecursionDepth()+" best score " + score + " " + nextSa);
     }
 
     public void printState(Score score, SpellAbility origSa) {
+        int recursionDepth = getRecursionDepth();
         for (int i = 0; i < recursionDepth; i++)
             System.err.print("  ");
-        System.err.println(recursionDepth + ": [" + score.value + "] " + SpellAbilityPicker.abilityToString(origSa));
+        String choice = "";
+        if (!currentStack.isEmpty() && currentStack.get(currentStack.size() - 1).choice != null) {
+            choice = " -> " + currentStack.get(currentStack.size() - 1).choice;
+        }
+        System.err.println(recursionDepth + ": [" + score.value + "] " + SpellAbilityPicker.abilityToString(origSa) + choice);
     }
 }

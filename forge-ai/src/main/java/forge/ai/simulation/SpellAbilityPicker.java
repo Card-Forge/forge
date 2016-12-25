@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -11,14 +12,22 @@ import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 
 public class SpellAbilityPicker {
+    // Note: The below is currently disabled because it requires
+    // increasing SimulationController.MAX_DEPTH which explodes the
+    // the evaluation tree too much. Enable it once we're doing more
+    // pruning of the search space.
+    public static boolean SIMULATE_LAND_PLAYS = false;
+
     private Game game;
     private Player player;
     private Score bestScore;
@@ -61,7 +70,7 @@ public class SpellAbilityPicker {
             sa.setActivatingPlayer(player);
             
             AiPlayDecision opinion = canPlayAndPayForSim(sa);
-            print("  " + opinion + ": " + sa);
+            // print("  " + opinion + ": " + sa);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
             
@@ -74,8 +83,35 @@ public class SpellAbilityPicker {
         return candidateSAs;
     }
 
-    public SpellAbility chooseSpellAbilityToPlay(SimulationController controller, List<SpellAbility> all, boolean skipCounter) {
+    public SpellAbility chooseSpellAbilityToPlay(SimulationController controller) {
         printOutput = (controller == null);
+        
+        if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+            return null;
+        }
+
+        // Pass if top of stack is owned by me.
+        if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
+            return null;
+        }
+
+        CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
+        if (SIMULATE_LAND_PLAYS) {
+            CardCollection landsToPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
+            if (landsToPlay != null) {
+                HashMap<String, Card> landsDeDupe = new HashMap<String, Card>();
+                for (Card land : landsToPlay) {
+                    Card previousLand = landsDeDupe.get(land.getName());
+                    // Skip identical lands.
+                    if (previousLand != null && previousLand.getZone() == land.getZone() && previousLand.getOwner() == land.getOwner()) {
+                        continue;
+                    }
+                    landsDeDupe.put(land.getName(), land);
+                    all.add(new PlayLandAbility(land));
+                }
+            }
+        }
 
         Score origGameScore = new GameStateEvaluator().getScoreForGameState(game, player);
         List<SpellAbility> candidateSAs = getCandidateSpellsAndAbilities(all);
@@ -88,10 +124,18 @@ public class SpellAbilityPicker {
         printPhaseInfo();
         SpellAbility sa = getPlannedSpellAbility(origGameScore, candidateSAs);
         if (sa != null) {
-            return sa;
+            return transformSA(sa);
         }
         createNewPlan(origGameScore, candidateSAs);
-        return getPlannedSpellAbility(origGameScore, candidateSAs);
+        return transformSA(getPlannedSpellAbility(origGameScore, candidateSAs));
+    }
+
+    private SpellAbility transformSA(SpellAbility sa) {
+        if (sa instanceof PlayLandAbility) {
+            game.PLAY_LAND_SURROGATE.setHostCard(sa.getHostCard());
+            return game.PLAY_LAND_SURROGATE;
+        }
+        return sa;
     }
 
     private void createNewPlan(Score origGameScore, List<SpellAbility> candidateSAs) {
@@ -183,6 +227,9 @@ public class SpellAbilityPicker {
         String saString = "N/A";
         if (sa != null) {
             saString = sa.toString();
+            if (saString.length() > 40) {
+                saString = saString.substring(0, 40) + "...";
+            }
             if (sa.usesTargeting()) {
                 saString += " (targets: " + sa.getTargets().getTargetedString() + ")";
             }
@@ -213,6 +260,9 @@ public class SpellAbilityPicker {
     }
     
     private AiPlayDecision canPlayAndPayForSim(final SpellAbility sa) {
+        if (sa instanceof PlayLandAbility) {
+            return AiPlayDecision.WillPlay;
+        }
         if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
@@ -326,6 +376,24 @@ public class SpellAbilityPicker {
             print("Failed to use planned choice (" + choice + "). Not found!");
         }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+    }
+    
+    public static class PlayLandAbility extends Ability {
+        public PlayLandAbility(Card land) {
+            super(null, (Cost) null);
+            setHostCard(land);
+        }
+   
+        @Override
+        public boolean canPlay() {
+            return true; //if this ability is added anywhere, it can be assumed that land can be played
+        }
+        @Override
+        public void resolve() {
+            throw new RuntimeException("This ability is intended to indicate \"land to play\" choice only");
+        }
+        @Override
+        public String toUnsuppressedString() { return "Play land " + (getHostCard() != null ? getHostCard().getName() : ""); }
     }
 
     public interface Interceptor {

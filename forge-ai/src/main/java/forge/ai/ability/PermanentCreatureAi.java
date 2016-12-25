@@ -6,7 +6,6 @@ import forge.ai.ComputerUtilCost;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CardFactory;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
