@@ -35,6 +35,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import forge.game.GameEntity;
+import forge.game.GameObjectMap;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -82,6 +83,48 @@ public class Combat {
 
         attackConstraints = new AttackConstraints(this);
     }
+
+    public Combat(Combat combat, GameObjectMap map) {
+        playerWhoAttacks = map.map(combat.playerWhoAttacks);
+        for (GameEntity entry : combat.attackableEntries) {
+            attackableEntries.add(map.map(entry));
+        }
+
+        for (Entry<GameEntity, AttackingBand> entry : combat.attackedByBands.entries()) {
+            ArrayList<Card> attackers = new ArrayList<Card>();
+            for (Card c : entry.getValue().getAttackers()) {
+                attackers.add(map.map(c));
+            }
+            attackedByBands.put(map.map(entry.getKey()), new AttackingBand(attackers));
+        }
+        for (Entry<AttackingBand, Card> entry : combat.blockedBands.entries()) {
+            ArrayList<Card> attackers = new ArrayList<Card>();
+            for (Card c : entry.getKey().getAttackers()) {
+                attackers.add(map.map(c));
+            }
+            blockedBands.put(new AttackingBand(attackers), map.map(entry.getValue()));
+        }
+        for (Entry<Card, Integer> entry : combat.defendingDamageMap.entrySet()) {
+            defendingDamageMap.put(map.map(entry.getKey()), entry.getValue());
+        }
+        
+        for (Entry<Card, CardCollection> entry : combat.attackersOrderedForDamageAssignment.entrySet()) {
+            attackersOrderedForDamageAssignment.put(map.map(entry.getKey()), map.mapCollection(entry.getValue()));
+        }
+        for (Entry<Card, CardCollection> entry : combat.blockersOrderedForDamageAssignment.entrySet()) {
+            blockersOrderedForDamageAssignment.put(map.map(entry.getKey()), map.mapCollection(entry.getValue()));
+        }
+        // Note: Doesn't currently set up lkiCache, since it's just a cache and not strictly needed...
+        for (Entry<Card, GameEntity> entry : combat.dealtDamageTo.entries()) {
+            dealtDamageTo.put(map.map(entry.getKey()), map.map(entry.getValue()));
+        }
+        for (Entry<Card, GameEntity> entry : combat.dealtDamageToThisCombat.entries()) {
+            dealtDamageToThisCombat.put(map.map(entry.getKey()), map.map(entry.getValue()));
+        }
+
+        attackConstraints = new AttackConstraints(this);
+    }
+
 
     public void endCombat() {
         //backup attackers and blockers

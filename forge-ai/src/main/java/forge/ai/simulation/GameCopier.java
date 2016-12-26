@@ -22,6 +22,8 @@ import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CounterType;
+import forge.game.combat.Combat;
+import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.AbilityActivated;
@@ -79,8 +81,9 @@ public class GameCopier {
             playerMap.put(origPlayer, newPlayer);
         }
 
-        Player newPlayerTurn = playerMap.get(origGame.getPhaseHandler().getPlayerTurn());
-        newGame.getPhaseHandler().devModeSet(origGame.getPhaseHandler().getPhase(), newPlayerTurn);
+        PhaseHandler origPhaseHandler = origGame.getPhaseHandler();
+        Player newPlayerTurn = playerMap.get(origPhaseHandler.getPlayerTurn());
+        newGame.getPhaseHandler().devModeSet(origPhaseHandler.getPhase(), newPlayerTurn);
         newGame.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         for (Player p : newGame.getPlayers()) {
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(false);
@@ -104,11 +107,14 @@ public class GameCopier {
         }
 
         newGame.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
-        
         newGame.getTriggerHandler().resetActiveTriggers();
 
         if (GameSimulator.COPY_STACK)
             copyStack(origGame, newGame, gameObjectMap);
+
+        if (origPhaseHandler.getCombat() != null) {
+            newGame.getPhaseHandler().setCombat(new Combat(origPhaseHandler.getCombat(), gameObjectMap));
+        }
 
         return newGame;
     }

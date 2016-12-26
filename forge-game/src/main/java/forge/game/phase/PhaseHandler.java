@@ -1051,4 +1051,8 @@ public class PhaseHandler implements java.io.Serializable {
         }
         game.updateCombatForView();
     }
+
+    public void setCombat(Combat combat) {
+        this.combat = combat;
+    }
 }

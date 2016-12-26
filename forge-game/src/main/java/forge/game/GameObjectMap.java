@@ -26,7 +26,7 @@ public abstract class GameObjectMap {
         return (GameEntity) map((GameObject) e);
     }
 
-    public CardCollectionView mapCollection(final CardCollectionView cards) {
+    public CardCollection mapCollection(final CardCollectionView cards) {
         final CardCollection collection = new CardCollection();
         for (final Card c : cards) {
             collection.add(map(c));
