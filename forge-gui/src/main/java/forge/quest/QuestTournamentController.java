@@ -177,10 +177,19 @@ public class QuestTournamentController {
 
             final QuestDraftFormat format = SGuiChoose.oneOrNone("Choose Draft Format", formats);
             if (format != null) {
-                achievements.spendDraftToken(format);
-
-                update();
-                view.populate();
+                QuestEventDraft evt = QuestEventDraft.getDraftOrNull(FModel.getQuest(), format);
+                if (evt != null) {
+                    String fee = String.format("The entry fee for this booster draft tournament is %d credits.\nWould you like to spend a token and create this tournament?", evt.getEntryFee());
+                    if (SOptionPane.showConfirmDialog(fee, "Creating a Booster Draft Tournament")) {
+                        achievements.spendDraftToken(format);
+    
+                        update();
+                        view.populate();
+                    }
+                } else {
+                    SOptionPane.showErrorDialog("Unexpected error when creating a draft tournament " + format.getName() + ". Please report this as a bug.");
+                    System.err.println("Error creating booster draft tournament (QuestEventDraft object was null): " + format.getName());
+                }
             }
         }
     }
