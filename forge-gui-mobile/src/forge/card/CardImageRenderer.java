@@ -328,7 +328,7 @@ public class CardImageRenderer {
         else {
             g.drawImage(image, x, y, w, h);
         }
-        CardRenderer.drawFoilEffect(g, card, x, y, w, y);
+        CardRenderer.drawFoilEffect(g, card, x, y, w, h);
     }
 
     public static void drawDetails(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {
