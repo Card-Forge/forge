@@ -184,8 +184,12 @@ public class SpellAbilityPicker {
         return bestSa;
     }
 
+    public boolean hasActivePlan() {
+        return plan != null && plan.hasNextDecision();
+    }
+
     private SpellAbility getPlannedSpellAbility(Score origGameScore, List<SpellAbility> availableSAs) {
-        if (plan != null && plan.hasNextDecision()) {
+        if (hasActivePlan()) {
             boolean badTargets = false;
             boolean saNotFound = false;
             Plan.Decision decision = plan.selectNextDecision();
@@ -226,13 +230,14 @@ public class SpellAbilityPicker {
     public static String abilityToString(SpellAbility sa) {
         String saString = "N/A";
         if (sa != null) {
-            saString = sa.toString();
+            saString = sa.toString().replace(sa.getHostCard().getName(), "<$>");
             if (saString.length() > 40) {
                 saString = saString.substring(0, 40) + "...";
             }
             if (sa.usesTargeting()) {
                 saString += " (targets: " + sa.getTargets().getTargetedString() + ")";
             }
+            saString = sa.getHostCard() + " -> " + saString;
         }
         return saString;
     }
@@ -340,10 +345,16 @@ public class SpellAbilityPicker {
         PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
         TargetChoices tgt = null;
         while (selector.selectNextTargets()) {
-            controller.evaluateTargetChoices(selector.getLastSelectedTargets());
-            GameSimulator simulator = new GameSimulator(controller, game, player);
-            Score score = simulator.simulateSpellAbility(sa);
-            controller.doneEvaluating(score);
+            // Get estimated score from the controller if this SA/target pair has been seen before.
+            Score score = controller.evaluateTargetChoices(sa, selector.getLastSelectedTargets());
+            if (score == null) {
+                // First time we see this, evaluate!
+                GameSimulator simulator = new GameSimulator(controller, game, player);
+                score = simulator.simulateSpellAbility(sa);
+                controller.doneEvaluating(score);
+            } else {
+                controller.printState(score, sa, " - via estimate (skipped)");
+            }
             // TODO: Get rid of the below when no longer needed.
             if (score.value > bestScore.value) {
                 bestScore = score;

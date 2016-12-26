@@ -1037,7 +1037,7 @@ public class AiController {
         // re-created if needed and used for any AI logic that needs it.
         predictedCombat = null;
 
-        if (useSimulation && SpellAbilityPicker.SIMULATE_LAND_PLAYS) {
+        if (useSimulation && (SpellAbilityPicker.SIMULATE_LAND_PLAYS || simPicker.hasActivePlan())) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
 

@@ -190,9 +190,9 @@ public class GameSimulator {
             debugPrint = true;
             printDiff(origLines, simLines);
         }
-        controller.printState(score, origSa);
+        controller.possiblyCacheResult(score, origSa);
         if (controller.shouldRecurse() && !simGame.isGameOver()) {
-            controller.push(sa, score);
+            controller.push(sa, score, this);
             SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);
             SpellAbility nextSa = sim.chooseSpellAbilityToPlay(controller);
             if (nextSa != null) {
@@ -242,5 +242,9 @@ public class GameSimulator {
 
     public Score getScoreForOrigGame() {
         return origScore;
+    }
+    
+    public GameCopier getGameCopier() {
+        return copier;
     }
 }

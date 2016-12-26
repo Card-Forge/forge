@@ -105,8 +105,8 @@ public class GameStateEvaluator {
         debugPrint("Score = " + score);
         return new Score(score, summonSickScore);
     }
-
-    protected int evalCard(Game game, Player aiPlayer, Card c, Combat combat) {
+    
+    public int evalCard(Game game, Player aiPlayer, Card c, Combat combat) {
         // TODO: These should be based on other considerations - e.g. in relation to opponents state.
         if (c.isCreature()) {
             // Ignore temp boosts post combat, since it's a waste.
