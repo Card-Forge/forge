@@ -22,6 +22,7 @@ import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -46,7 +47,7 @@ public class ReplacementHandler {
 
     //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
-    public ReplacementResult run(final HashMap<String, Object> runParams) {
+    public ReplacementResult run(final Map<String, Object> runParams) {
         final Object affected = runParams.get("Affected");
         Player decider = null;
 
@@ -97,7 +98,7 @@ public class ReplacementHandler {
      *            the run params,same as for triggers.
      * @return true if the event was replaced.
      */
-    public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer, final Player decider, final Game game) {
+    public ReplacementResult run(final Map<String, Object> runParams, final ReplacementLayer layer, final Player decider, final Game game) {
         final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         // Round up Non-static replacement effects ("Until EOT," or
         // "The next time you would..." etc)
@@ -185,6 +186,8 @@ public class ReplacementHandler {
             SpellAbility tailend = effectSA;
             do {
                 replacementEffect.setReplacingObjects(runParams, tailend);
+                //set original Params to update them later
+                tailend.setReplacingObject("OriginalParams", runParams);
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
 
@@ -194,6 +197,8 @@ public class ReplacementHandler {
             SpellAbility tailend = effectSA;
             do {
                 replacementEffect.setReplacingObjects(runParams, tailend);
+                //set original Params to update them later
+                tailend.setReplacingObject("OriginalParams", runParams);
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
         }
@@ -250,6 +255,10 @@ public class ReplacementHandler {
             manaAb.getManaPart().produceMana(rep, player1, manaAb);
         } else {
             player.getController().playSpellAbilityNoStack(effectSA, true);
+            // if the spellability is a replace effect then its some new logic
+            if (ApiType.ReplaceEffect.equals(effectSA.getApi())) {
+                return ReplacementResult.Updated;
+            }
         }
 
         return ReplacementResult.Replaced;

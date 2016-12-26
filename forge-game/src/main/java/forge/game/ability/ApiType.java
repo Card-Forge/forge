@@ -117,6 +117,7 @@ public enum ApiType {
     ReorderZone (ReorderZoneEffect.class),
     Repeat (RepeatEffect.class),
     RepeatEach (RepeatEachEffect.class),
+    ReplaceEffect (ReplaceEffect.class),
     RestartGame (RestartGameEffect.class),
     Reveal (RevealEffect.class),
     RevealHand (RevealHandEffect.class),

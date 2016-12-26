@@ -441,6 +441,7 @@ forge-game/src/main/java/forge/game/ability/effects/RemoveFromCombatEffect.java 
 forge-game/src/main/java/forge/game/ability/effects/ReorderZoneEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/RepeatEachEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/RepeatEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/ReplaceEffect.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/ability/effects/RestartGameEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/RevealEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/RevealHandEffect.java -text
@@ -634,6 +635,7 @@ forge-game/src/main/java/forge/game/replacement/ReplaceGameLoss.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceMoved.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceProduceMana.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceSetInMotion.java -text
+forge-game/src/main/java/forge/game/replacement/ReplaceToken.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/replacement/ReplaceTurnFaceUp.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceUntap.java -text
 forge-game/src/main/java/forge/game/replacement/ReplacementEffect.java -text

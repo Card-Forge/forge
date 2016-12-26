@@ -7,5 +7,6 @@ package forge.game.replacement;
 public enum ReplacementResult {
     Replaced,
     NotReplaced,
-    Prevented;
+    Prevented,
+    Updated;
 }

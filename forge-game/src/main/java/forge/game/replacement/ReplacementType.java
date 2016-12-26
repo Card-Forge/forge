@@ -11,8 +11,9 @@ import java.util.Map;
  *
  */
 public enum ReplacementType {
-	AddCounter(ReplaceAddCounter.class),
+    AddCounter(ReplaceAddCounter.class),
     Counter(ReplaceCounter.class),
+    CreateToken(ReplaceToken.class),
     DamageDone(ReplaceDamage.class),
     Destroy(ReplaceDestroy.class),
     Discard(ReplaceDiscard.class),
@@ -24,12 +25,12 @@ public enum ReplacementType {
     SetInMotion(ReplaceSetInMotion.class),
     TurnFaceUp(ReplaceTurnFaceUp.class),
     Untap(ReplaceUntap.class);
-    
+
     Class<? extends ReplacementEffect> clasz;
     private ReplacementType(Class<? extends ReplacementEffect> cls) {
         clasz = cls;
     }
-    
+
     public static ReplacementType getTypeFor(ReplacementEffect e) {
         final Class<? extends ReplacementEffect> cls = e.getClass();
         for (final ReplacementType v : ReplacementType.values()) {

@@ -96,7 +96,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private SpellAbility castSA = null;
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
-    private Map<Card, Map<CounterType, Integer>> countersAddedBy = new TreeMap<>();
+    private Map<Card, Map<CounterType, Integer>> countersAddedBy = Maps.newTreeMap();
     private List<String> extrinsicKeyword = new ArrayList<>();
     // Hidden keywords won't be displayed on the card
     private final CopyOnWriteArrayList<String> hiddenExtrinsicKeyword = new CopyOnWriteArrayList<>();
@@ -301,7 +301,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Clear old dfc trigger from the trigger handler
             getGame().getTriggerHandler().clearInstrinsicActiveTriggers(this, null);
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
-            HashMap<String, Object> runParams = new HashMap<>();
+            Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Transformer", this);
             getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
             this.incrementTransformedTimestamp();
@@ -546,14 +546,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             boolean result = setState(preFaceDownState, true);
             if (result && runTriggers) {
                 // Run replacement effects
-                HashMap<String, Object> repParams = new HashMap<>();
+                Map<String, Object> repParams = Maps.newHashMap();
                 repParams.put("Event", "TurnFaceUp");
                 repParams.put("Affected", this);
                 getGame().getReplacementHandler().run(repParams);
 
                 // Run triggers
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
-                final Map<String, Object> runParams = new TreeMap<>();
+                final Map<String, Object> runParams = Maps.newTreeMap();
                 runParams.put("Card", this);
                 getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams, false);
             }
@@ -750,7 +750,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void addFlipResult(final Player flipper, final String result) {
         if (flipResult == null) {
-            flipResult = new TreeMap<>();
+            flipResult = Maps.newTreeMap();
         }
         flipResult.put(flipper, result);
     }
@@ -975,15 +975,24 @@ public class Card extends GameEntity implements Comparable<Card> {
         if(addAmount < 0) {
             addAmount = 0; // As per rule 107.1b
         }
-        final HashMap<String, Object> repParams = new HashMap<>();
+        final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "AddCounter");
         repParams.put("Affected", this);
         repParams.put("CounterType", counterType);
         repParams.put("CounterNum", addAmount);
         repParams.put("EffectOnly", applyMultiplier);
-        if (getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+
+        switch (getGame().getReplacementHandler().run(repParams)) {
+        case NotReplaced:
+            break;
+        case Updated: {
+            addAmount = (int) repParams.get("CounterNum");
+            break;
+        }
+        default:
             return;
         }
+
         if (canReceiveCounters(counterType)) {
             if (counterType == CounterType.DREAM && hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
                 addAmount = Math.min(7 - getCounters(CounterType.DREAM), addAmount);
@@ -1021,7 +1030,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             // Run triggers
-            final Map<String, Object> runParams = new TreeMap<>();
+            final Map<String, Object> runParams = Maps.newTreeMap();
             runParams.put("Card", this);
             runParams.put("CounterType", counterType);
             for (int i = 0; i < addAmount; i++) {
@@ -1042,7 +1051,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param counterAmount - the amount of counters added
      */
     public final void addCountersAddedBy(final Card source, final CounterType counterType, final int counterAmount) {
-        final Map<CounterType, Integer> counterMap = new TreeMap<>();
+        final Map<CounterType, Integer> counterMap = Maps.newTreeMap();
         counterMap.put(counterType, counterAmount);
         countersAddedBy.put(source, counterMap);
     }
@@ -1096,7 +1105,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Run triggers
         int curCounters = oldValue == null ? 0 : oldValue;
         for (int i = 0; i < delta && curCounters != 0; i++) {
-            final Map<String, Object> runParams = new TreeMap<>();
+            final Map<String, Object> runParams = Maps.newTreeMap();
             runParams.put("Card", this);
             runParams.put("CounterType", counterName);
             runParams.put("NewCounterAmount", --curCounters);
@@ -2498,7 +2507,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         getGame().fireEvent(new GameEventCardAttachment(this, c, null, AttachMethod.Equip));
 
         // Run triggers
-        final Map<String, Object> runParams = new TreeMap<>();
+        final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("Equipment", this);
         runParams.put("Card", c);
         getGame().getTriggerHandler().runTrigger(TriggerType.Unequip, runParams, false);
@@ -3044,7 +3053,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (tapped) { return; }
 
         // Run triggers
-        final Map<String, Object> runParams = new TreeMap<>();
+        final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("Card", this);
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
@@ -3065,7 +3074,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Run triggers
-        final Map<String, Object> runParams = new TreeMap<>();
+        final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("Card", this);
         getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams, false);
 
@@ -3604,7 +3613,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
-        final Map<String, Object> runParams = new TreeMap<>();
+        final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("Card", this);
 
         if (!isPhasedOut()) {
@@ -5968,8 +5977,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             CardCollectionView preventionEffectSources = new CardCollection(shieldMap.keySet());
             Card shieldSource = preventionEffectSources.get(0);
             if (preventionEffectSources.size() > 1) {
-                Map<String, Card> choiceMap = new TreeMap<>();
-                List<String> choices = new ArrayList<>();
+                Map<String, Card> choiceMap = Maps.newTreeMap();
+                List<String> choices = Lists.newArrayList();
                 for (final Card key : preventionEffectSources) {
                     String effDesc = shieldMap.get(key).get("EffectString");
                     int descIndex = effDesc.indexOf("SpellDescription");
@@ -6126,7 +6135,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final int replaceDamage(final int damageIn, final Card source, final boolean isCombat) {
         // Replacement effects
-        final HashMap<String, Object> repParams = new HashMap<>();
+        final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
         repParams.put("DamageSource", source);
@@ -6168,7 +6177,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Run triggers
-        final Map<String, Object> runParams = new TreeMap<>();
+        final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("DamageSource", source);
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", damageIn);
@@ -6958,7 +6967,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return CardFactory.getCard(pc, owner, owner == null ? null : owner.getGame());
     }
 
-    private static final Map<PaperCard, Card> cp2card = new HashMap<>();
+    private static final Map<PaperCard, Card> cp2card = Maps.newHashMap();
     public static Card getCardForUi(IPaperCard pc) {
         if (pc instanceof PaperCard) {
             Card res = cp2card.get(pc);
