@@ -1,9 +1,11 @@
 Name:Doubling Season
 ManaCost:4 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ You | AddKeyword$ TokenDoubler | Description$ If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.
-R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YouCtrl | EffectOnly$ True | ReplaceWith$ AddDoubleCounters | Description$ If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
-SVar:AddDoubleCounters:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ ReplacedCounterType | CounterNum$ X | References$ X
-SVar:X:ReplaceCount$CounterNum/Twice
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DoubleToken | EffectOnly$ True | Description$ If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.
+SVar:DoubleToken:DB$ ReplaceEffect | VarName$ TokenNum | VarValue$ X | References$ X
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YouCtrl | EffectOnly$ True | ReplaceWith$ DoubleCounters | Description$ If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
+SVar:DoubleCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ Y | References$ Y
+SVar:X:ReplaceCount$TokenNum/Twice
+SVar:Y:ReplaceCount$CounterNum/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_season.jpg
 Oracle:If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.\nIf an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
