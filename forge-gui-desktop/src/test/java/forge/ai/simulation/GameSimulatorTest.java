@@ -584,4 +584,43 @@ public class GameSimulatorTest extends TestCase {
         assertNotNull(gameStateToString(simGame), thespianSim);
         assertTrue(thespianSim.isLand());
     }
+
+    public void testDash() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mountain", p);
+        addCard("Mountain", p);
+        String berserkerCardName = "Lightning Berserker";
+        Card berserkerCard = addCardToZone(berserkerCardName, p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        SpellAbility dashSA = findSAWithPrefix(berserkerCard, "Dash");
+        assertNotNull(dashSA);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(dashSA).value;
+        assertTrue(score >  0);
+        Game simGame = sim.getSimulatedGameState();
+
+        Card berserker = findCardWithName(simGame, berserkerCardName);
+        assertNotNull(berserker);
+        assertEquals(1, berserker.getNetPower());
+        assertEquals(1, berserker.getNetToughness());
+        assertFalse(berserker.isSick());
+        
+        SpellAbility pumpSA = findSAWithPrefix(berserker, "{R}: CARDNAME gets +1/+0 until end of turn.");
+        assertNotNull(pumpSA);
+        GameSimulator sim2 = createSimulator(simGame, (Player) sim.getGameCopier().find(p));
+        int score2 = sim2.simulateSpellAbility(pumpSA).value;
+        assert(score2 > score);
+        Game simGame2 = sim2.getSimulatedGameState();
+
+        Card berserker2 = findCardWithName(simGame2, berserkerCardName);
+        assertNotNull(berserker2);
+        assertEquals(2, berserker2.getNetPower());
+        assertEquals(1, berserker2.getNetToughness());
+        assertFalse(berserker2.isSick());
+    }
 }

@@ -315,6 +315,8 @@ public class GameCopier {
                 newCard.setNamedCard(c.getNamedCard());
             }
 
+            newCard.setSVars(c.getSVars());
+
             // TODO: FIXME
             if (c.hasRemembered()) {
                 for (Object o : c.getRemembered()) {
