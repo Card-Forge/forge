@@ -282,7 +282,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         view = new CardView(id0, game == null ? null : game.getTracker());
         currentState = new CardState(view.getCurrentState(), this);
         states.put(CardStateName.Original, currentState);
-        states.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(this));
         view.updateChangedColorWords(this);
         view.updateChangedTypes(this);
         view.updateSickness(this);
@@ -357,8 +356,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public boolean setState(final CardStateName state, boolean updateView) {
         if (!states.containsKey(state)) {
-            System.out.println(getName() + " tried to switch to non-existant state \"" + state + "\"!");
-            return false; // Nonexistant state.
+            if (state == CardStateName.FaceDown) {
+                // The face-down state is created lazily only when needed.
+                states.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(this));
+            } else {
+                System.out.println(getName() + " tried to switch to non-existant state \"" + state + "\"!");
+                return false; // Nonexistant state.
+            }
         }
 
         if (state.equals(currentStateName)) {
@@ -591,7 +595,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean hasAlternateState() {
-        return states.keySet().size() > 2;
+        // Note: Since FaceDown state is created lazily (whereas previously
+        // it was always created), adjust threshold based on its existence.
+        int threshold = (states.containsKey(CardStateName.FaceDown) ? 2 : 1);
+        return states.keySet().size() > threshold;
     }
 
     public final boolean isDoubleFaced() {
@@ -6290,6 +6297,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setManifested(final boolean manifested) {
         this.manifested = manifested;
         final String image = manifested ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE;
+        // Note: This should only be called after state has been set to CardStateName.FaceDown,
+        // so the below call should be valid since the state should have been created already.
         getState(CardStateName.FaceDown).setImageKey(ImageKeys.getTokenKey(image));
     }
 
