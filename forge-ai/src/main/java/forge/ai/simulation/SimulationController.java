@@ -11,7 +11,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 public class SimulationController {
-    private static int MAX_DEPTH = 2;
+    private static int MAX_DEPTH = 3;
 
     private List<Plan.Decision> currentStack;
     private List<Score> scoreStack;

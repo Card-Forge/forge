@@ -22,11 +22,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 
 public class SpellAbilityPicker {
-    // Note: The below is currently disabled because it requires
-    // increasing SimulationController.MAX_DEPTH which explodes the
-    // the evaluation tree too much. Enable it once we're doing more
-    // pruning of the search space.
-    public static boolean SIMULATE_LAND_PLAYS = false;
+    public static boolean SIMULATE_LAND_PLAYS = true;
 
     private Game game;
     private Player player;
