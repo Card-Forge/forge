@@ -51,6 +51,7 @@ public abstract class GameState {
 
     public abstract IPaperCard getPaperCard(String cardName);
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("humanlife=%d\n", humanLife));
@@ -269,9 +270,7 @@ public abstract class GameState {
             Card c;
             if (cardinfo[0].startsWith("t:")) {
                 String tokenStr = cardinfo[0].substring(2);
-                // TODO: Use a version of the API that doesn't return a list (i.e. these shouldn't be affected
-                // by doubling season, etc).
-                c = CardFactory.makeToken(CardFactory.TokenInfo.fromString(tokenStr), player).get(0);
+                c = CardFactory.makeOneToken(CardFactory.TokenInfo.fromString(tokenStr), player);
             } else {
                 c = Card.fromPaperCard(getPaperCard(cardinfo[0]), player);
             }

@@ -2563,11 +2563,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardLists.getColor(getCardsIn(ZoneType.Battlefield), color);
     }
 
-    public int getTokenDoublersMagnitude() {
-        int tokenDoublers = keywords.getAmount("TokenDoubler");
-        return 1 << tokenDoublers; // pow(a,0) = 1; pow(a,1) = a
-    }
-
     public final int getAmountOfKeyword(final String k) {
         return keywords.getAmount(k);
     }

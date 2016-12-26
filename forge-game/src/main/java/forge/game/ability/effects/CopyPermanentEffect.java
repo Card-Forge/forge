@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
@@ -32,7 +33,6 @@ import forge.util.PredicateString.StringOp;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -59,11 +59,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        final List<String> keywords = new ArrayList<String>();
-        final List<String> types = new ArrayList<String>();
-        final List<String> svars = new ArrayList<String>();
-        final List<String> triggers = new ArrayList<String>();
-        final List<String> pumpKeywords = new ArrayList<String>();
+        final List<String> keywords = Lists.newArrayList();
+        final List<String> types = Lists.newArrayList();
+        final List<String> svars = Lists.newArrayList();
+        final List<String> triggers = Lists.newArrayList();
+        final List<String> pumpKeywords = Lists.newArrayList();
 
         final long timestamp = game.getNextTimestamp();
 
@@ -119,8 +119,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (sa.hasParam("RandomCopied")) {
-                List<PaperCard> copysource = new ArrayList<PaperCard>(cards);
-                List<Card> choice = new ArrayList<Card>();
+                List<PaperCard> copysource = Lists.newArrayList(cards);
+                List<Card> choice = Lists.newArrayList();
                 final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
                 int ncopied = AbilityUtils.calculateAmount(hostCard, num, sa);
                 while(ncopied > 0) {
@@ -156,8 +156,26 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         for (final Card c : tgtCards) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
 
-                int multiplier = numCopies * hostCard.getController().getTokenDoublersMagnitude();
-                final List<Card> crds = new ArrayList<Card>(multiplier);
+                int multiplier = numCopies;
+                
+                final Map<String, Object> repParams = Maps.newHashMap();
+                repParams.put("Event", "CreateToken");
+                repParams.put("Affected", controller);
+                repParams.put("TokenNum", multiplier);
+                repParams.put("EffectOnly", true);
+
+                switch (game.getReplacementHandler().run(repParams)) {
+                case NotReplaced:
+                    break;
+                case Updated: {
+                    multiplier = (int) repParams.get("TokenNum");
+                    break;
+                }
+                default:
+                    return ;
+                }
+                
+                final List<Card> crds = Lists.newArrayListWithCapacity(multiplier);
 
                 for (int i = 0; i < multiplier; i++) {
                     final Card copy = CardFactory.copyCopiableCharacteristics(c, sa.getActivatingPlayer());

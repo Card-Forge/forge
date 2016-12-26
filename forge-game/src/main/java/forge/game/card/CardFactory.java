@@ -25,6 +25,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.ImageKeys;
 import forge.StaticData;
@@ -797,9 +798,33 @@ public class CardFactory {
     }
 
     public static List<Card> makeToken(final TokenInfo tokenInfo, final Player controller) {
+        return makeToken(tokenInfo, controller, true);
+    }
+    
+    public static List<Card> makeToken(final TokenInfo tokenInfo, final Player controller, final boolean applyMultiplier) {
         final List<Card> list = Lists.newArrayList();
-        final Card c = tokenInfo.toCard(controller.getGame());
-        final int multiplier = controller.getTokenDoublersMagnitude();
+        final Game game = controller.getGame();
+        final Card c = tokenInfo.toCard(game);
+
+        int multiplier = 1;
+
+        final Map<String, Object> repParams = Maps.newHashMap();
+        repParams.put("Event", "CreateToken");
+        repParams.put("Affected", controller);
+        repParams.put("TokenNum", multiplier);
+        repParams.put("EffectOnly", applyMultiplier);
+
+        switch (game.getReplacementHandler().run(repParams)) {
+        case NotReplaced:
+            break;
+        case Updated: {
+            multiplier = (int) repParams.get("TokenNum");
+            break;
+        }
+        default:
+            return list;
+        }
+
         for (int i = 0; i < multiplier; i++) {
             Card temp = i == 0 ? c : copyStats(c, controller);
 
@@ -813,6 +838,22 @@ public class CardFactory {
             list.add(temp);
         }
         return list;
+    }
+    
+    public static Card makeOneToken(final TokenInfo info, final Player controller) {
+
+        final Game game = controller.getGame();
+        final Card c = info.toCard(game);
+
+        for (final String kw : info.intrinsicKeywords) {
+            c.addIntrinsicKeyword(kw);
+        }
+
+        c.setOwner(controller);
+        c.setToken(true);
+        CardFactoryUtil.parseKeywords(c, c.getName());
+        CardFactoryUtil.setupKeywordedAbilities(c);
+        return c;
     }
 
     /**

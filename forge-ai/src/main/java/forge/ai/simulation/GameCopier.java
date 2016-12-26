@@ -191,9 +191,7 @@ public class GameCopier {
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
         if (c.isToken() && !c.isEmblem()) {
             String tokenStr = new CardFactory.TokenInfo(c).toString();
-            // TODO: Use a version of the API that doesn't return a list (i.e. these shouldn't be affected
-            // by doubling season, etc).
-            return CardFactory.makeToken(CardFactory.TokenInfo.fromString(tokenStr), newOwner).get(0);
+            return CardFactory.makeOneToken(CardFactory.TokenInfo.fromString(tokenStr), newOwner);
         }
         if (USE_FROM_PAPER_CARD && !c.isEmblem()) {
             return Card.fromPaperCard(c.getPaperCard(), newOwner);

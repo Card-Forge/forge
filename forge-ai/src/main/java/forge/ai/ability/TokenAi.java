@@ -438,16 +438,16 @@ public class TokenAi extends SpellAbilityAi {
         final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
         final CardFactory.TokenInfo tokenInfo = new CardFactory.TokenInfo(substitutedName, imageName,
                 cost, substitutedTypes, tokenKeywords, finalPower, finalToughness);
-        List<Card> tokens = CardFactory.makeToken(tokenInfo, ai);
-        if (tokens.isEmpty()) {
+        Card token = CardFactory.makeOneToken(tokenInfo, ai);
+
+        if (token == null) {
             return null;
         }
-        final Card c = tokens.get(0);
         
         // Grant rule changes
         if (tokenHiddenKeywords != null) {
             for (final String s : tokenHiddenKeywords) {
-                c.addHiddenExtrinsicKeyword(s);
+                token.addHiddenExtrinsicKeyword(s);
             }
         }
 
@@ -455,8 +455,8 @@ public class TokenAi extends SpellAbilityAi {
         if (tokenAbilities != null) {
             for (final String s : tokenAbilities) {
                 final String actualAbility = host.getSVar(s);
-                final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
-                c.addSpellAbility(grantedAbility);
+                final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, token);
+                token.addSpellAbility(grantedAbility);
             }
         }
 
@@ -464,10 +464,10 @@ public class TokenAi extends SpellAbilityAi {
         if (tokenTriggers != null) {
             for (final String s : tokenTriggers) {
                 final String actualTrigger = host.getSVar(s);
-                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, token, true);
                 final String ability = host.getSVar(parsedTrigger.getMapParams().get("Execute"));
-                parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
-                c.addTrigger(parsedTrigger);
+                parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, token));
+                token.addTrigger(parsedTrigger);
             }
         }
 
@@ -481,7 +481,7 @@ public class TokenAi extends SpellAbilityAi {
                     name = actualSVar.split(":")[0];
                     actualSVar = actualSVar.split(":")[1];
                 }
-                c.setSVar(name, actualSVar);
+                token.setSVar(name, actualSVar);
             }
         }
 
@@ -489,18 +489,18 @@ public class TokenAi extends SpellAbilityAi {
         if (tokenStaticAbilities != null) {
             for (final String s : tokenStaticAbilities) {
                 final String actualAbility = host.getSVar(s);
-                c.addStaticAbilityString(actualAbility);
-                c.addStaticAbility(actualAbility);
+                token.addStaticAbilityString(actualAbility);
+                token.addStaticAbility(actualAbility);
             }
         }
         
         // Apply static abilities and prune dead tokens
         final Game game = ai.getGame();
-        ComputerUtilCard.applyStaticContPT(game, c, null);
-        if (!notNull && c.getNetToughness() < 1) {
+        ComputerUtilCard.applyStaticContPT(game, token, null);
+        if (!notNull && token.getNetToughness() < 1) {
             return null;
         } else {
-            return c;
+            return token;
         }
     }
 }
