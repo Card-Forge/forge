@@ -161,20 +161,23 @@ public class SimulationController {
     public void possiblyCacheResult(Score score, SpellAbility sa) {
         boolean cached = false;
 
-        Plan.Decision d = currentStack.get(currentStack.size() - 1);
-        int scoreDelta = score.value - d.initialScore.value;
-        // Needed to make sure below is only executed when target decisions are ended.
-        // Also, only cache negative effects - so that in those cases we don't need to
-        // recurse.
-        if (scoreDelta <= 0 && d.targets != null) {
-            // FIXME: Support more than one target in this logic.
-            GameObject[] hostAndTarget = getOriginalHostCardAndTarget(sa);
-            if (hostAndTarget != null) {
-                GameStateEvaluator evaluator = new GameStateEvaluator();
-                Player player = sa.getActivatingPlayer();
-                int cardScore = evaluator.evalCard(player.getGame(), player, sa.getTargetCard(), null);
-                effectCache.add(new CachedEffect(hostAndTarget[0], sa, hostAndTarget[1], cardScore, scoreDelta));
-                cached = true;
+        // TODO: Why is the check below needed by tests?
+        if (!currentStack.isEmpty()) {
+            Plan.Decision d = currentStack.get(currentStack.size() - 1);
+            int scoreDelta = score.value - d.initialScore.value;
+            // Needed to make sure below is only executed when target decisions are ended.
+            // Also, only cache negative effects - so that in those cases we don't need to
+            // recurse.
+            if (scoreDelta <= 0 && d.targets != null) {
+                // FIXME: Support more than one target in this logic.
+                GameObject[] hostAndTarget = getOriginalHostCardAndTarget(sa);
+                if (hostAndTarget != null) {
+                    GameStateEvaluator evaluator = new GameStateEvaluator();
+                    Player player = sa.getActivatingPlayer();
+                    int cardScore = evaluator.evalCard(player.getGame(), player, sa.getTargetCard(), null);
+                    effectCache.add(new CachedEffect(hostAndTarget[0], sa, hostAndTarget[1], cardScore, scoreDelta));
+                    cached = true;
+                }
             }
         }
 
