@@ -197,7 +197,10 @@ public class GameCopier {
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
         if (c.isToken() && !c.isEmblem()) {
             String tokenStr = new CardFactory.TokenInfo(c).toString();
-            return CardFactory.makeOneToken(CardFactory.TokenInfo.fromString(tokenStr), newOwner);
+            Card result = CardFactory.makeOneToken(CardFactory.TokenInfo.fromString(tokenStr), newOwner);
+            CardFactory.copyCopiableCharacteristics(c, result);
+            CardFactory.copyCopiableAbilities(c, result);
+            return result;
         }
         if (USE_FROM_PAPER_CARD && !c.isEmblem()) {
             return Card.fromPaperCard(c.getPaperCard(), newOwner);

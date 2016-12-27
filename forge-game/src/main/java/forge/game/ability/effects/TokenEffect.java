@@ -291,6 +291,8 @@ public class TokenEffect extends SpellAbilityEffect {
                         final String actualAbility = AbilityUtils.getSVar(root, s);
                         for (final Card c : tokens) {
                             final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
+                            // Set intrinsic, so that effects like Clone will copy these.
+                            grantedAbility.setIntrinsic(true);
                             c.addSpellAbility(grantedAbility);
                         }
                     }

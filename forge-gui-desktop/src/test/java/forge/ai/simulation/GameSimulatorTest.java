@@ -623,4 +623,40 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(1, berserker2.getNetToughness());
         assertFalse(berserker2.isSick());
     }
+
+    public void testTokenAbilities() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        Card callTheScionsCard = addCardToZone("Call the Scions", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        SpellAbility callTheScionsSA = callTheScionsCard.getSpellAbilities().get(0);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(callTheScionsSA).value;
+        assertTrue(score >  0);
+        Game simGame = sim.getSimulatedGameState();
+
+        Card scion = findCardWithName(simGame, "Eldrazi Scion");
+        assertNotNull(scion);
+        assertEquals(1, scion.getNetPower());
+        assertEquals(1, scion.getNetToughness());
+        assertTrue(scion.isSick());
+        assertNotNull(findSAWithPrefix(scion, "Sacrifice CARDNAME: Add {C} to your mana pool."));
+
+        GameCopier copier = new GameCopier(simGame);
+        Game copy = copier.makeCopy();
+        Card scionCopy = findCardWithName(copy, "Eldrazi Scion");
+        assertNotNull(scionCopy);
+        assertEquals(1, scionCopy.getNetPower());
+        assertEquals(1, scionCopy.getNetToughness());
+        assertTrue(scionCopy.isSick());
+        System.err.println("Search continues on: " + scionCopy);
+        assertNotNull(findSAWithPrefix(scionCopy, "Sacrifice CARDNAME: Add {C} to your mana pool."));
+    }
 }
