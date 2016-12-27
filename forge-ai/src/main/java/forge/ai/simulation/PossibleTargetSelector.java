@@ -30,7 +30,7 @@ public class PossibleTargetSelector {
         final int originalTargetCount;
         final int targetIndex;
         final String description;
-        
+
         private Targets(int targetingSaIndex, int originalTargetCount, int targetIndex, String description)  {
             this.targetingSaIndex = targetingSaIndex;
             this.originalTargetCount = originalTargetCount;
@@ -41,7 +41,7 @@ public class PossibleTargetSelector {
                 throw new IllegalArgumentException("Invalid targetIndex=" + targetIndex);
             }
         }
-        
+
         @Override
         public String toString() {
             return description;
@@ -60,6 +60,8 @@ public class PossibleTargetSelector {
         if (targetingSa == null) {
             return;
         }
+        sa.setActivatingPlayer(player);
+        targetingSa.resetTargets();
         tgt = targetingSa.getTargetRestrictions();
         maxTargets = tgt.getMaxTargets(sa.getHostCard(), targetingSa);
 
@@ -70,8 +72,6 @@ public class PossibleTargetSelector {
             }
             validTargets.add(o);
         }
-        targetingSa.resetTargets();
-        sa.setActivatingPlayer(player);
     }
 
     private static class SimilarTargetSkipper {
@@ -88,7 +88,7 @@ public class PossibleTargetSelector {
             } else  {
                 creatureScores = new HashMap<Card, Integer>();
             }
-            
+
             int score = ComputerUtilCard.evaluateCreature(c);
             creatureScores.put(c, score);
             return score;
@@ -192,12 +192,14 @@ public class PossibleTargetSelector {
 
     public boolean selectTargets(Targets targets) {
         if (targets.originalTargetCount != validTargets.size() || targets.targetingSaIndex != targetingSaIndex) {
+            System.err.println("SA: "+sa + " tSA: " + targetingSa);
+            System.err.println(targets.originalTargetCount + " vs. " + validTargets.size() + " - " + targets.targetingSaIndex + " vs. " + targetingSaIndex);
             return false;
         }
         selectTargetsByIndex(targets.targetIndex);
         return true;
     }
- 
+
     public boolean selectNextTargets() {
         if (targetIndex >= validTargets.size()) {
             return false;
