@@ -183,12 +183,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         view = view0;
         if (hostCard != null && hostCard.getGame() != null) {
-            hostCard.getGame().addSpellAbility(id, this);
+            hostCard.getGame().addSpellAbility(this);
         }
     }
 
     @Override
-    public int getId() {
+    public final int getId() {
         return id;
     }
     @Override
@@ -204,6 +204,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setHostCard(final Card c) {
         if (hostCard == c) { return; }
         super.setHostCard(c);
+        Game oldGame = hostCard != null ? hostCard.getGame() : null;
+        Game newGame = c != null ? c.getGame() : null;
+        if (oldGame != newGame) {
+            if (oldGame != null) { oldGame.removeSpellAbility(this); }
+            if (newGame != null) { newGame.addSpellAbility(this); }
+        }
 
         if (subAbility != null) {
             subAbility.setHostCard(c);
@@ -760,7 +766,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone = (SpellAbility) clone();
             clone.id = nextId();
             clone.view = new SpellAbilityView(clone);
-
+            if (hostCard != null && hostCard.getGame() != null) {
+                hostCard.getGame().addSpellAbility(clone);
+            }
             // need to clone the maps too so they can be changed
             clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
             clone.mapParams = Maps.newHashMap(this.mapParams);

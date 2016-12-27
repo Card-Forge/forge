@@ -13,6 +13,10 @@ public class GameEntityCache<Entity extends IIdentifiable, View extends Trackabl
         entityCache.put(id, entity);
     }
 
+    public void remove(Integer id) {
+        entityCache.remove(id);
+    }
+
     public Entity get(View entityView) {
         if (entityView == null) { return null; }
         return entityCache.get(entityView.getId());

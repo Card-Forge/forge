@@ -193,8 +193,11 @@ public class Game {
     public SpellAbility getSpellAbility(final SpellAbilityView view) {
         return spabCache.get(view);
     }
-    public void addSpellAbility(int id, SpellAbility spellAbility) {
-        spabCache.put(Integer.valueOf(id), spellAbility);
+    public void addSpellAbility(SpellAbility spellAbility) {
+        spabCache.put(spellAbility.getId(), spellAbility);
+    }
+    public void removeSpellAbility(SpellAbility spellAbility) {
+        spabCache.remove(spellAbility.getId());
     }
 
     public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */

@@ -2068,9 +2068,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void addSpellAbility(final SpellAbility a) {
         a.setHostCard(this);
-        if (game != null) {
-            game.addSpellAbility(a.getId(), a);
-        }
         currentState.addSpellAbility(a);
         currentState.getView().updateAbilityText(this, currentState);
     }
