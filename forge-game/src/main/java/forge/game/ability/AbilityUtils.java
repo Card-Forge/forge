@@ -922,9 +922,14 @@ public class AbilityUtils {
             addPlayer(card.getRemembered(), defined, players);
         }
         else if (defined.startsWith("DelayTriggerRemembered")) {
-            if (sa.isTrigger()) {
-                addPlayer(sa.getRootAbility().getTriggerRemembered(), defined, players);
+            SpellAbility trigSa = sa;
+            while (!trigSa.isTrigger() && sa.getRootAbility() != null) {
+                trigSa = sa.getRootAbility();
             }
+            if (!trigSa.isTrigger()) {
+                System.err.println("Warning: unable to find trigger in the parent chain of SubAbility " + sa);
+            }
+            addPlayer(trigSa.getTriggerRemembered(), defined, players);
         }
         else if (defined.equals("ImprintedController")) {
             for (final Card rem : card.getImprintedCards()) {
