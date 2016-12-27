@@ -191,7 +191,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LIBGDX_TEXTURE_FILTERING,
                 "Battlefield Texture Filtering",
-                "Filter card art on battlefield to make it look less pixelated on large screens (restart required)."),
+                "Filter card art on battlefield to make it less pixelated on large screens (restart required, may reduce performance)."),
                 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_CURRENT_COLORS,
                 "Detailed Card Color",
