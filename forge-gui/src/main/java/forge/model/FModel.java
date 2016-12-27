@@ -56,6 +56,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+
 /**
  * The default Model implementation for Forge.
  *
@@ -91,7 +93,7 @@ public final class FModel {
     private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
 
-    public static void initialize(final IProgressBar progressBar) {
+    public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         ImageKeys.initializeDirs(
                 ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,
                 ForgeConstants.CACHE_TOKEN_PICS_DIR, ForgeConstants.CACHE_ICON_PICS_DIR,
@@ -103,6 +105,9 @@ public final class FModel {
         // Preferences are initialized first so that the splash screen can be translated.
         try {
             preferences = new ForgePreferences();
+            if (adjustPrefs != null) {
+                adjustPrefs.apply(preferences);
+            }
             GamePlayerUtil.getGuiPlayer().setName(preferences.getPref(FPref.PLAYER_NAME));
         }
         catch (final Exception exn) {

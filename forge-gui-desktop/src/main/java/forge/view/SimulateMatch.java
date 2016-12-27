@@ -27,7 +27,7 @@ import forge.util.Lang;
 
 public class SimulateMatch {
     public static void simulate(String[] args) {
-        FModel.initialize(null);
+        FModel.initialize(null, null);
 
         System.out.println("Simulation mode");
         if(args.length < 4) {

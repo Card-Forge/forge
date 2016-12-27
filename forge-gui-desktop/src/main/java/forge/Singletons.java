@@ -50,7 +50,7 @@ public final class Singletons {
             view = FView.SINGLETON_INSTANCE;
         }
 
-        FModel.initialize(view == null ? null : view.getSplash().getProgressBar());
+        FModel.initialize(view == null ? null : view.getSplash().getProgressBar(), null);
 
         if (withUi) {
             control = FControl.instance;

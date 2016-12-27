@@ -4,10 +4,12 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.GuiBase;
 import forge.GuiDesktop;
+import forge.StaticData;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
@@ -29,6 +31,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 
 public class GameSimulatorTest extends TestCase {
     private static boolean initialized = false;
@@ -45,7 +49,13 @@ public class GameSimulatorTest extends TestCase {
 
         if (!initialized) {
             GuiBase.setInterface(new GuiDesktop());
-            FModel.initialize(null);
+            FModel.initialize(null, new Function<ForgePreferences, Void>()  {
+                @Override
+                public Void apply(ForgePreferences preferences) {
+                    preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, true);
+                    return null;
+                }
+            });
             initialized = true;
         }
         return game;
@@ -93,6 +103,10 @@ public class GameSimulatorTest extends TestCase {
 
     private Card createCard(String name, Player p) {
         IPaperCard paperCard = FModel.getMagicDb().getCommonCards().getCard(name);
+        if (paperCard == null) {
+            StaticData.instance().attemptToLoadCard(name, "");
+            paperCard = FModel.getMagicDb().getCommonCards().getCard(name);
+        }
         return Card.fromPaperCard(paperCard, p);
     }
 
