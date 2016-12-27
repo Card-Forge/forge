@@ -72,10 +72,19 @@ public class SimulationController {
     }
     
     private GameObject[] getOriginalHostCardAndTarget(SpellAbility sa) {
-        if (sa.getTargets() == null || sa.getTargets().getTargets().size() != 1) {
+        SpellAbility saOrSubSa = sa;
+        do {
+            if (saOrSubSa.usesTargeting()) {
+                break;
+            }
+            saOrSubSa = saOrSubSa.getSubAbility();
+        } while (saOrSubSa != null);
+
+        if (saOrSubSa == null || saOrSubSa.getTargets() == null || saOrSubSa.getTargets().getTargets().size() != 1) {
             return null;
         }
-        GameObject target = sa.getTargets().getTargets().get(0);
+        GameObject target = saOrSubSa.getTargets().getTargets().get(0);
+        GameObject originalTarget = target;
         if (!(target instanceof Card)) { return null; }
         GameObject hostCard = sa.getHostCard();
         for (int i = simulatorStack.size() - 1; i >= 0; i--) {
@@ -83,7 +92,7 @@ public class SimulationController {
             target = copier.reverseFind(target);
             hostCard = copier.reverseFind(hostCard);
         }
-        return new GameObject[] { hostCard, target };
+        return new GameObject[] { hostCard, target, originalTarget };
     }
 
     public Score evaluateTargetChoices(SpellAbility sa, PossibleTargetSelector.Targets targets) {
@@ -94,7 +103,7 @@ public class SimulationController {
                 if (effect.hostCard == hostAndTarget[0] && effect.target == hostAndTarget[1] && effect.sa.equals(saString)) {
                     GameStateEvaluator evaluator = new GameStateEvaluator();
                     Player player = sa.getActivatingPlayer();
-                    int cardScore = evaluator.evalCard(player.getGame(), player, sa.getTargetCard(), null);
+                    int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2], null);
                     if (cardScore == effect.targetScore) {
                         Score currentScore = getCurrentScore();
                         // TODO: summonSick score?
@@ -174,7 +183,7 @@ public class SimulationController {
                 if (hostAndTarget != null) {
                     GameStateEvaluator evaluator = new GameStateEvaluator();
                     Player player = sa.getActivatingPlayer();
-                    int cardScore = evaluator.evalCard(player.getGame(), player, sa.getTargetCard(), null);
+                    int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2], null);
                     effectCache.add(new CachedEffect(hostAndTarget[0], sa, hostAndTarget[1], cardScore, scoreDelta));
                     cached = true;
                 }

@@ -147,18 +147,24 @@ public class GameSimulator {
 
             debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
             sa.setActivatingPlayer(aiPlayer);
-            if (origSa.usesTargeting()) {
-                final boolean divided = sa.hasParam("DividedAsYouChoose");
-                final TargetRestrictions origTgtRes = origSa.getTargetRestrictions();
-                final TargetRestrictions tgtRes = sa.getTargetRestrictions();
-                for (final GameObject o : origSa.getTargets().getTargets()) {
-                    final GameObject target = copier.find(o);
-                    sa.getTargets().add(target);
-                    if (divided) {
-                        tgtRes.addDividedAllocation(target, origTgtRes.getDividedValue(o));
+            SpellAbility origSaOrSubSa = origSa;
+            SpellAbility saOrSubSa = sa;
+            do {
+                if (origSaOrSubSa.usesTargeting()) {
+                    final boolean divided = origSaOrSubSa.hasParam("DividedAsYouChoose");
+                    final TargetRestrictions origTgtRes = origSaOrSubSa.getTargetRestrictions();
+                    final TargetRestrictions tgtRes = saOrSubSa.getTargetRestrictions();
+                    for (final GameObject o : origSaOrSubSa.getTargets().getTargets()) {
+                        final GameObject target = copier.find(o);
+                        saOrSubSa.getTargets().add(target);
+                        if (divided) {
+                            tgtRes.addDividedAllocation(target, origTgtRes.getDividedValue(o));
+                        }
                     }
                 }
-            }
+                origSaOrSubSa = origSaOrSubSa.getSubAbility();
+                saOrSubSa = saOrSubSa.getSubAbility();
+            } while (saOrSubSa != null);
 
             if (debugPrint && !sa.getAllTargetChoices().isEmpty()) {
                 debugPrint("Targets: ");

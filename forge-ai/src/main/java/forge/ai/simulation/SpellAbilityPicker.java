@@ -226,9 +226,13 @@ public class SpellAbilityPicker {
             if (saString.length() > 40) {
                 saString = saString.substring(0, 40) + "...";
             }
-            if (sa.usesTargeting()) {
-                saString += " (targets: " + sa.getTargets().getTargetedString() + ")";
-            }
+            SpellAbility saOrSubSa = sa;
+            do {
+                if (saOrSubSa.usesTargeting()) {
+                    saString += " (targets: " + saOrSubSa.getTargets().getTargetedString() + ")";
+                }
+                saOrSubSa = saOrSubSa.getSubAbility();
+            } while (saOrSubSa != null);
             saString = sa.getHostCard() + " -> " + saString;
         }
         return saString;
@@ -255,7 +259,18 @@ public class SpellAbilityPicker {
 
         return false;
     }
-    
+
+    private boolean atLeastOneConditionMet(SpellAbility saOrSubSa) {
+        do {
+            SpellAbilityCondition conditions = saOrSubSa.getConditions();
+            if (conditions == null || conditions.areMet(saOrSubSa)) {
+                return true;
+            }
+            saOrSubSa = saOrSubSa.getSubAbility();
+        } while (saOrSubSa != null);
+        return false;
+    }
+
     private AiPlayDecision canPlayAndPayForSim(final SpellAbility sa) {
         if (sa instanceof PlayLandAbility) {
             return AiPlayDecision.WillPlay;
@@ -263,8 +278,11 @@ public class SpellAbilityPicker {
         if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
-        SpellAbilityCondition conditions = sa.getConditions();
-        if (conditions != null && !conditions.areMet(sa)) {
+
+        // Note: Can'tjust check condition on the top ability, because it may have
+        // sub-abilities without conditions (e.g. wild slash's main ability has a
+        // main ability with conditions but the burn sub-ability has none).
+        if (!atLeastOneConditionMet(sa)) {
             return AiPlayDecision.CantPlaySa;
         }
 
@@ -283,7 +301,8 @@ public class SpellAbilityPicker {
         controller.evaluateSpellAbility(sa);
 
         Score bestScore = new Score(Integer.MIN_VALUE);
-        if (!sa.usesTargeting()) {
+        PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
+        if (!selector.hasPossibleTargets()) {
             Interceptor interceptor = new Interceptor() {
                 private int numChoices = -1;
                 private int nextChoice = 0;
@@ -334,7 +353,6 @@ public class SpellAbilityPicker {
             return bestScore;
         }
 
-        PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
         TargetChoices tgt = null;
         while (selector.selectNextTargets()) {
             // Get estimated score from the controller if this SA/target pair has been seen before.
