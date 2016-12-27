@@ -31,7 +31,6 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
