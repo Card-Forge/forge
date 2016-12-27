@@ -129,7 +129,12 @@ public class TargetChoices implements Cloneable {
     public final String getTargetedString() {
         final List<GameObject> tgts = getTargets();
         final StringBuilder sb = new StringBuilder();
+        boolean first = true;
         for (final Object o : tgts) {
+            if (!first) {
+                sb.append(" ");
+            }
+            first = false;
             if (o instanceof Player) {
                 final Player p = (Player) o;
                 sb.append(p.getName());
@@ -142,9 +147,7 @@ public class TargetChoices implements Cloneable {
                 final SpellAbility sa = (SpellAbility) o;
                 sb.append(sa);
             }
-            sb.append(" ");
         }
-
         return sb.toString();
     }
 
