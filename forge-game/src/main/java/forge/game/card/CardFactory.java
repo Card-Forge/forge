@@ -647,7 +647,7 @@ public class CardFactory {
         to.setReplacementEffects(fromCharacteristics.getReplacementEffects());
         // add abilities
         for (SpellAbility sa : fromCharacteristics.getIntrinsicSpellAbilities()) {
-            to.addSpellAbility(sa.copy());
+            to.addSpellAbility(sa.copy(to));
         }
 
         for (String staticAbility : to.getStaticAbilityStrings()) {
