@@ -192,8 +192,6 @@ public class PossibleTargetSelector {
 
     public boolean selectTargets(Targets targets) {
         if (targets.originalTargetCount != validTargets.size() || targets.targetingSaIndex != targetingSaIndex) {
-            System.err.println("SA: "+sa + " tSA: " + targetingSa);
-            System.err.println(targets.originalTargetCount + " vs. " + validTargets.size() + " - " + targets.targetingSaIndex + " vs. " + targetingSaIndex);
             return false;
         }
         selectTargetsByIndex(targets.targetIndex);
