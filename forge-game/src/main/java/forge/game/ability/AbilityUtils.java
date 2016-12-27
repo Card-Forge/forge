@@ -199,7 +199,7 @@ public class AbilityUtils {
         } else if (defined.equals("DelayTriggerRemembered")) {
             SpellAbility trigSa = sa;
             while (trigSa != null && !trigSa.isTrigger()) {
-                trigSa = sa.getRootAbility();
+                trigSa = trigSa.getRootAbility();
             }
             if (trigSa != null) {
                 for (Object o : trigSa.getTriggerRemembered()) {
@@ -929,7 +929,7 @@ public class AbilityUtils {
         else if (defined.startsWith("DelayTriggerRemembered")) {
             SpellAbility trigSa = sa;
             while (trigSa != null && !trigSa.isTrigger()) {
-                trigSa = sa.getRootAbility();
+                trigSa = trigSa.getRootAbility();
             }
             if (trigSa != null) {
                 addPlayer(trigSa.getTriggerRemembered(), defined, players);
