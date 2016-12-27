@@ -31,7 +31,7 @@ public class ReplaceEffect extends SpellAbilityEffect {
         case NotReplaced:
         case Updated: {
             for (Map.Entry<String, Object> e : params.entrySet()) {
-                originalParams.replace(e.getKey(), e.getValue());
+                originalParams.put(e.getKey(), e.getValue());
             }
         }
         default:
