@@ -777,6 +777,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             // run special copy Ability to make a deep copy
             CardFactory.copySpellAbility(this, clone);
+            setHostCard(newHostCard);
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }
