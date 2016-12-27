@@ -755,19 +755,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility copy() {
-        return copy(hostCard);
-    }
-
-    public SpellAbility copy(Card newHostCard) {
         SpellAbility clone = null;
         try {
             clone = (SpellAbility) clone();
             clone.id = nextId();
             clone.view = new SpellAbilityView(clone);
-            clone.hostCard = newHostCard;
-            if (clone.hostCard != null && clone.hostCard.getGame() != null) {
-                clone.hostCard.getGame().addSpellAbility(clone.id, clone);
-            }
 
             // need to clone the maps too so they can be changed
             clone.originalMapParams = Maps.newHashMap(this.originalMapParams);
@@ -777,7 +769,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             // run special copy Ability to make a deep copy
             CardFactory.copySpellAbility(this, clone);
-            setHostCard(newHostCard);
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }
