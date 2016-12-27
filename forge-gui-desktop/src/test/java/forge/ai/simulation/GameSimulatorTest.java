@@ -613,8 +613,7 @@ public class GameSimulatorTest extends TestCase {
         SpellAbility pumpSA = findSAWithPrefix(berserker, "{R}: CARDNAME gets +1/+0 until end of turn.");
         assertNotNull(pumpSA);
         GameSimulator sim2 = createSimulator(simGame, (Player) sim.getGameCopier().find(p));
-        int score2 = sim2.simulateSpellAbility(pumpSA).value;
-        assert(score2 > score);
+        sim2.simulateSpellAbility(pumpSA);
         Game simGame2 = sim2.getSimulatedGameState();
 
         Card berserker2 = findCardWithName(simGame2, berserkerCardName);
