@@ -36,6 +36,14 @@ public class GameStateEvaluator {
         return combat;
     }
 
+    private static String cardToString(Card c) {
+        String str = c.getName();
+        if (c.isCreature()) {
+            str += " " + c.getNetPower() + "/" + c.getNetToughness();
+        }
+        return str;
+    }
+
     public Score getScoreForGameState(Game game, Player aiPlayer) {
         if (game.isGameOver()) {
             return game.getOutcome().getWinningPlayer() == aiPlayer ? new Score(Integer.MAX_VALUE) : new Score(Integer.MIN_VALUE);
@@ -84,10 +92,7 @@ public class GameStateEvaluator {
             if (gamePhase.isBefore(PhaseType.MAIN2) && c.isSick() && c.getController() == aiPlayer) {
                 summonSickValue = 0;
             }
-            String str = c.getName();
-            if (c.isCreature()) {
-                str += " " + c.getNetPower() + "/" + c.getNetToughness();
-            }
+            String str = cardToString(c);
             if (c.getController() == aiPlayer) {
                 debugPrint("  Battlefield: " + str + " = " + value);
                 score += value;
@@ -149,7 +154,7 @@ public class GameStateEvaluator {
         @Override
         protected int getEffectivePower(final Card c) {
             if (ignoreTempBoosts) {
-                Card.StatBreakdown breakdown = c.getNetToughnessBreakdown();
+                Card.StatBreakdown breakdown = c.getNetCombatDamageBreakdown();
                 return breakdown.getTotal() - breakdown.tempBoost;
             }
             return c.getNetCombatDamage();

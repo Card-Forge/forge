@@ -35,7 +35,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             }
         }
         value += addValue(power * 15, "power");
-        value += addValue(toughness * 10, "toughness");
+        value += addValue(toughness * 10, "toughness: " + toughness);
         value += addValue(c.getCMC() * 5, "cmc");
     
         // Evasion keywords

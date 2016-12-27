@@ -258,6 +258,7 @@ public class GameCopier {
             newCard.setSemiPermanentPowerBoost(c.getSemiPermanentPowerBoost());
             newCard.addTempToughnessBoost(c.getTempToughnessBoost());
             newCard.setSemiPermanentToughnessBoost(c.getSemiPermanentToughnessBoost());
+            newCard.setDamage(c.getDamage());
             
             newCard.setChangedCardTypes(c.getChangedCardTypes());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
