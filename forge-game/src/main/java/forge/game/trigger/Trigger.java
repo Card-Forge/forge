@@ -342,6 +342,11 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
         } else if ("AttackedPlayerWithMostLife".equals(condition)) {
             GameEntity attacked = (GameEntity) runParams.get("Attacked");
+            if (attacked == null) {
+                // Check "Defender" too because once triggering objects are set on TriggerAttacks, the value of Attacked
+                // ends up being in Defender at that point.
+                attacked = (GameEntity) runParams.get("Defender");
+            }
             if (attacked == null || !attacked.isValid("Player.withMostLife",
                     this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
