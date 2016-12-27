@@ -197,13 +197,18 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.equals("DelayTriggerRemembered")) {
-            SpellAbility trigSa = sa.isTrigger() ? sa : sa.getRootAbility().isTrigger() ? sa.getRootAbility() : null;
+            SpellAbility trigSa = sa;
+            while (trigSa != null && !trigSa.isTrigger()) {
+                trigSa = sa.getRootAbility();
+            }
             if (trigSa != null) {
                 for (Object o : trigSa.getTriggerRemembered()) {
                     if (o instanceof Card) {
                         cards.addAll(addRememberedFromCardState(game, (Card)o));
                     }
                 }
+            } else {
+                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
         } else if (defined.equals("FirstRemembered")) {
             Object o = Iterables.getFirst(hostCard.getRemembered(), null);
@@ -923,13 +928,14 @@ public class AbilityUtils {
         }
         else if (defined.startsWith("DelayTriggerRemembered")) {
             SpellAbility trigSa = sa;
-            while (!trigSa.isTrigger() && sa.getRootAbility() != null) {
+            while (trigSa != null && !trigSa.isTrigger()) {
                 trigSa = sa.getRootAbility();
             }
-            if (!trigSa.isTrigger()) {
-                System.err.println("Warning: unable to find trigger in the parent chain of SubAbility " + sa);
+            if (trigSa != null) {
+                addPlayer(trigSa.getTriggerRemembered(), defined, players);
+            } else {
+                System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
-            addPlayer(trigSa.getTriggerRemembered(), defined, players);
         }
         else if (defined.equals("ImprintedController")) {
             for (final Card rem : card.getImprintedCards()) {
