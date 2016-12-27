@@ -89,7 +89,7 @@ public class TextRenderer {
         lineWidths.clear();
         font = font0;
         needClip = false;
-        if (fullText.isEmpty()) { return; }
+        if (fullText == null || fullText.isEmpty()) { return; }
 
         totalHeight = font.getCapHeight();
         if (totalHeight > height) {
