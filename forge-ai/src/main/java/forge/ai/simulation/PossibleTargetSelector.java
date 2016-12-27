@@ -1,11 +1,16 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import com.google.common.collect.ArrayListMultimap;
+
+import forge.ai.ComputerUtilCard;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
@@ -15,6 +20,7 @@ public class PossibleTargetSelector {
     private final SpellAbility sa;
     private SpellAbility targetingSa;
     private int targetingSaIndex;
+    private int maxTargets;
     private TargetRestrictions tgt;
     private int targetIndex;
     private List<GameObject> validTargets;
@@ -42,18 +48,91 @@ public class PossibleTargetSelector {
         }
     }
 
-    public PossibleTargetSelector(Game game, Player self, SpellAbility sa) {
+    public PossibleTargetSelector(Game game, Player player, SpellAbility sa) {
         this.sa = sa;
         chooseTargetingSubAbility();
-        this.tgt = targetingSa != null ? targetingSa.getTargetRestrictions() : null;
         this.targetIndex = 0;
         this.validTargets = new ArrayList<GameObject>();
-        if (targetingSa != null) {
-            sa.setActivatingPlayer(self);
-            targetingSa.resetTargets();
-            for (GameObject o : tgt.getAllCandidates(sa, true)) {
-                validTargets.add(o);
+        generateValidTargets(player);
+    }
+
+    private void generateValidTargets(Player player) {
+        if (targetingSa == null) {
+            return;
+        }
+        tgt = targetingSa.getTargetRestrictions();
+        maxTargets = tgt.getMaxTargets(sa.getHostCard(), targetingSa);
+
+        SimilarTargetSkipper skipper = new SimilarTargetSkipper();
+        for (GameObject o : tgt.getAllCandidates(sa, true)) {
+            if (maxTargets == 1 && skipper.shouldSkipTarget(o)) {
+                continue;
             }
+            validTargets.add(o);
+        }
+        targetingSa.resetTargets();
+        sa.setActivatingPlayer(player);
+    }
+
+    private static class SimilarTargetSkipper {
+        private ArrayListMultimap<String, Card> validTargetsMap = ArrayListMultimap.<String, Card>create();
+        private HashMap<Card, String> cardTypeStrings = new HashMap<Card, String>();
+        private HashMap<Card, Integer> creatureScores;
+
+        private int getCreatureScore(Card c) {
+            if (creatureScores != null) {
+                Integer score = creatureScores.get(c);
+                if (score != null) {
+                    return score;
+                }
+            } else  {
+                creatureScores = new HashMap<Card, Integer>();
+            }
+            
+            int score = ComputerUtilCard.evaluateCreature(c);
+            creatureScores.put(c, score);
+            return score;
+        }
+
+        private String getTypeString(Card c) {
+            String str = cardTypeStrings.get(c);
+            if (str != null) {
+                return str;
+            }
+            str = c.getType().toString();
+            cardTypeStrings.put(c, str);
+            return str;
+        }
+
+        public boolean shouldSkipTarget(GameObject o) {
+            // TODO: Support non-card targets, such as spells on the stack.
+            if (!(o instanceof Card)) {
+                return false;
+            }
+
+            Card c = (Card) o;
+            for (Card existingTarget : validTargetsMap.get(c.getName())) {
+                // Note: Checks are ordered from cheapest to more expensive ones. For example, type equals()
+                // ends up calling toString() on the type object and is more expensive than the checks above it.
+                if (c.getController() != c.getController() || c.getOwner() != existingTarget.getOwner()) {
+                    continue;
+                }
+                if (c.getSpellAbilities().size() != existingTarget.getSpellAbilities().size()) {
+                    continue;
+                }
+                // Note: This doesn't just do equals() on the types because a) it doesn't exist and b) if
+                // it existed and just used toString() comparison it would be less efficient than doing it
+                // in this class, which caches the strings.
+                if (!getTypeString(existingTarget).equals(getTypeString(c))) {
+                    continue;
+                }
+                if (c.isCreature() && getCreatureScore(c) != getCreatureScore(existingTarget)) {
+                    continue;
+                }
+                return true;
+            }
+            validTargetsMap.put(c.getName(), c);
+            return false;
         }
     }
 
@@ -84,8 +163,8 @@ public class PossibleTargetSelector {
     private void selectTargetsByIndex(int index) {
         targetingSa.resetTargets();
 
-        // TODO: smarter about multiple targets, identical targets, etc...
-        while (targetingSa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), targetingSa) && index < validTargets.size()) {
+        // TODO: smarter about multiple targets, etc...
+        while (targetingSa.getTargets().getNumTargeted() < maxTargets && index < validTargets.size()) {
             targetingSa.getTargets().add(validTargets.get(index++));
         }
 
