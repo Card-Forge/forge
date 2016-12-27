@@ -733,7 +733,10 @@ public class QuestDataIO {
                     if ("string".equals(nodename)) {
                         pool.add(FModel.getMagicDb().getCommonCards().getCard(reader.getValue()));
                     } else if ("card".equals(nodename)) { // new format
-                        pool.add(this.readCardPrinted(reader), cnt);
+                        PaperCard pc = this.readCardPrinted(reader);
+                        if (pc != null) {
+                            pool.add(pc, cnt);
+                        }
                     }
                     reader.moveUp();
                 }
@@ -899,7 +902,7 @@ public class QuestDataIO {
             final boolean foil = "1".equals(reader.getAttribute("foil"));
             PaperCard card = FModel.getMagicDb().getOrLoadCommonCard(name, set, index, foil);
             if (null == card) {
-                throw new RuntimeException("Unsupported card found in quest save: " + name + " from edition " + set);
+                System.err.println("Warning: Unsupported card found in quest save: " + name + " from edition " + set +". It will be removed from the quest save.");
             }
             return card;
         }
