@@ -222,7 +222,11 @@ public class SpellAbilityPicker {
     public static String abilityToString(SpellAbility sa) {
         String saString = "N/A";
         if (sa != null) {
-            saString = sa.toString().replace(sa.getHostCard().getName(), "<$>");
+            saString = sa.toString();
+            String cardName = sa.getHostCard().getName();
+            if (!cardName.isEmpty()) {
+                saString = saString.replace(cardName, "<$>");
+            }
             if (saString.length() > 40) {
                 saString = saString.substring(0, 40) + "...";
             }
