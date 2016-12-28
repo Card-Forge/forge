@@ -43,7 +43,7 @@ public class ReplaceGainLife extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<String, Object> runParams) {
-        if (!runParams.get("Event").equals("GainLife")) {
+        if (!runParams.get("Event").equals("GainLife") && (int)runParams.get("LifeGained") <= 0) {
             return false;
         }
         if (this.getMapParams().containsKey("ValidPlayer")) {

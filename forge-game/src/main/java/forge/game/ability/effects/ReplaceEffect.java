@@ -8,6 +8,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.SpellAbility;
 
 public class ReplaceEffect extends SpellAbilityEffect {
@@ -27,14 +28,19 @@ public class ReplaceEffect extends SpellAbilityEffect {
         params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
 
         //try to call replacementHandler with new Params
-        switch (game.getReplacementHandler().run(params)) {
+        ReplacementResult result = game.getReplacementHandler().run(params); 
+        switch (result) {
         case NotReplaced:
         case Updated: {
             for (Map.Entry<String, Object> e : params.entrySet()) {
                 originalParams.put(e.getKey(), e.getValue());
             }
+            // effect was updated
+            originalParams.put("ReplacementResult", ReplacementResult.Updated);
         }
         default:
+            // effect was replaced with something else
+            originalParams.put("ReplacementResult", result);
             break;
         }
     }

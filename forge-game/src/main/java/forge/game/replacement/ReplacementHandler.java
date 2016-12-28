@@ -257,6 +257,10 @@ public class ReplacementHandler {
             player.getController().playSpellAbilityNoStack(effectSA, true);
             // if the spellability is a replace effect then its some new logic
             if (ApiType.ReplaceEffect.equals(effectSA.getApi())) {
+                // if ReplacementResult is set in run params use that instead
+                if (runParams.containsKey("ReplacementResult")) {
+                    return (ReplacementResult) runParams.get("ReplacementResult");
+                }
                 return ReplacementResult.Updated;
             }
         }
