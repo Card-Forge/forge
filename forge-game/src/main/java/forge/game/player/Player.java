@@ -410,6 +410,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             } else {
                 return false;
             }
+            break;
         default:       
             return false;
         }

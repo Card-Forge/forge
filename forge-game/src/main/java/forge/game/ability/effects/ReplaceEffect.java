@@ -37,6 +37,7 @@ public class ReplaceEffect extends SpellAbilityEffect {
             }
             // effect was updated
             originalParams.put("ReplacementResult", ReplacementResult.Updated);
+            break;
         }
         default:
             // effect was replaced with something else
