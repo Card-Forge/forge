@@ -81,11 +81,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck));
 
-    private final Map<Card, Integer> commanderDamage = new HashMap<Card, Integer>();
+    private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
 
     private int life = 20;
     private int startingLife = 20;
-    private final Map<Card, Integer> assignedDamage = new HashMap<Card, Integer>();
+    private final Map<Card, Integer> assignedDamage = Maps.newHashMap();
     private int spellsCastThisTurn = 0;
     private int landsPlayedThisTurn = 0;
     private int investigatedThisTurn = 0;
@@ -222,7 +222,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Replacement effects
-        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        final Map<String, Object> repRunParams = Maps.newHashMap();
         repRunParams.put("Event", "SetInMotion");
         repRunParams.put("Affected", this);
 
@@ -237,7 +237,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Scheme", activeScheme);
         game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
     }
@@ -382,24 +382,39 @@ public class Player extends GameEntity implements Comparable<Player> {
         return life;
     }
 
-    public final boolean gainLife(final int toGain, final Card source) {
+    public final boolean gainLife(int lifeGain, final Card source) {
+        
         // Run any applicable replacement effects.
-        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "GainLife");
         repParams.put("Affected", this);
-        repParams.put("LifeGained", toGain);
+        repParams.put("LifeGained", lifeGain);
         repParams.put("Source", source);
 
         if (!canGainLife()) {
             return false;
         }
 
-        if (game.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        switch (getGame().getReplacementHandler().run(repParams)) {
+        case NotReplaced:
+            break;
+        case Updated:
+            // check if this is still the affected player
+            if (this.equals(repParams.get("Affected"))) {
+                lifeGain = (int) repParams.get("LifeGained");
+                // negative update means life loss
+                if (lifeGain < 0) {
+                    this.loseLife(-lifeGain);
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        default:       
             return false;
         }
 
         boolean newLifeSet = false;
-        final int lifeGain = toGain;
 
         if (lifeGain > 0) {
             int oldLife = life;
@@ -409,7 +424,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             lifeGainedThisTurn += lifeGain;
 
             // Run triggers
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Player", this);
             runParams.put("LifeAmount", lifeGain);
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
@@ -453,7 +468,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         lifeLostThisTurn += toLose;
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", this);
         runParams.put("LifeAmount", toLose);
         game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
@@ -566,7 +581,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("DamageSource", source);
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", amount);
@@ -706,17 +721,24 @@ public class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int replaceDamage(final int damage, final Card source, final boolean isCombat) {
         // Replacement effects
-        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
         repParams.put("DamageSource", source);
         repParams.put("DamageAmount", damage);
         repParams.put("IsCombat", isCombat);
 
-        if (game.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        switch (getGame().getReplacementHandler().run(repParams)) {
+        case NotReplaced:
+            return damage;
+        case Updated:
+            // check if this is still the affected player
+            if (this.equals(repParams.get("Affected"))) {
+                return (int) repParams.get("DamageAmount");
+            }
+        default:       
             return 0;
         }
-        return damage;
     }
 
     @Override
@@ -796,7 +818,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
         repParams.put("DamageSource", source);
@@ -838,7 +860,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int getAssignedDamage(final String type) {
-        final Map<Card, Integer> valueMap = new HashMap<Card, Integer>();
+        final Map<Card, Integer> valueMap = Maps.newHashMap();
         for (final Card c : assignedDamage.keySet()) {
             if (c.getType().hasStringType(type)) {
                 valueMap.put(c, assignedDamage.get(c));
@@ -1270,7 +1292,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         getGame().fireEvent(new GameEventScry(this, numToTop, numToBottom));
 
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", this);
         getGame().getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
     }
@@ -1303,7 +1325,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerZone library = getZone(ZoneType.Library);
 
         // Replacement effects
-        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        final Map<String, Object> repRunParams = Maps.newHashMap();
         repRunParams.put("Event", "Draw");
         repRunParams.put("Affected", this);
 
@@ -1516,7 +1538,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // that should not trigger other Replacement again
         if (!discardToTopOfLibrary && !discardMadness) {
             // Replacement effects
-            final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+            final Map<String, Object> repRunParams = Maps.newHashMap();
             repRunParams.put("Event", "Discard");
             repRunParams.put("Card", c);
             repRunParams.put("Source", source);
@@ -1557,7 +1579,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         }
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", this);
         runParams.put("Card", c);
         runParams.put("Cause", cause);
@@ -1650,7 +1672,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         getZone(ZoneType.Library).setCards(getController().cheatShuffle(list));
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", this);
         runParams.put("Source", sa);
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams, false);
@@ -1672,7 +1694,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.fireEvent(new GameEventLandPlayed(this, land));
 
             // Run triggers
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Card", land);
             game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
             game.getStack().unfreezeStack();
@@ -1820,7 +1842,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             // Replacement effects
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Affected", this);
             runParams.put("Event", "GameLoss");
 
@@ -2336,7 +2358,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void addInvestigatedThisTurn() {
         investigatedThisTurn++;
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        Map<String,Object> runParams = Maps.newHashMap();
         runParams.put("Player", this);
         runParams.put("Num", investigatedThisTurn);
         game.getTriggerHandler().runTrigger(TriggerType.Investigated, runParams,false);
@@ -2357,7 +2379,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         sacrificedThisTurn.add(cpy);
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
         runParams.put("Card", cpy);
         runParams.put("Player", this);
@@ -2703,7 +2725,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         game.setActivePlanes(currentPlanes);
         //Run PlaneswalkedTo triggers here.
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        Map<String,Object> runParams = Maps.newHashMap();
         runParams.put("Cards", currentPlanes);
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams,false);
     }

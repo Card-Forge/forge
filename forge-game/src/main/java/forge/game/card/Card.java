@@ -6046,7 +6046,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        final HashMap<String, Object> repParams = new HashMap<>();
+        final HashMap<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
         repParams.put("DamageSource", source);
@@ -6149,11 +6149,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         repParams.put("DamageAmount", damageIn);
         repParams.put("IsCombat", isCombat);
 
-        if (getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        switch (getGame().getReplacementHandler().run(repParams)) {
+        case NotReplaced:
+            return damageIn;
+        case Updated:
+            // check if this is still the affected card
+            if (this.equals(repParams.get("Affected"))) {
+                return (int) repParams.get("DamageAmount");
+            }
+        default:
             return 0;
         }
-
-        return damageIn;
     }
 
     public final void addDamage(final Map<Card, Integer> sourcesMap) {
