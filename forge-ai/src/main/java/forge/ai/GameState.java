@@ -240,10 +240,15 @@ public abstract class GameState {
                     }
                     boolean tapped = c.isTapped();
                     boolean sickness = c.hasSickness();
+                    Map<CounterType, Integer> counters = c.getCounters();
+                    // Note: Not clearCounters() since we want to keep the counters
+                    // var as-is.
+                    c.setCounters(new HashMap<CounterType, Integer>());
                     p.getZone(ZoneType.Hand).add(c);
                     p.getGame().getAction().moveToPlay(c);
                     c.setTapped(tapped);
                     c.setSickness(sickness);
+                    c.setCounters(counters);
                 }
             } else {
                 zone.setCards(kv.getValue());
