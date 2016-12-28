@@ -672,4 +672,37 @@ public class GameSimulatorTest extends TestCase {
         System.err.println("Search continues on: " + scionCopy);
         assertNotNull(findSAWithPrefix(scionCopy, "Sacrifice CARDNAME: Add {C} to your mana pool."));
     }
+
+    public void testMarkedDamage() {
+        // Marked damage is important, as it's used during the AI declare attackers logic
+        // which affects game state score - since P/T boosts are evaluated differently for
+        // creatures participating in combat.
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        String giantCardName = "Hill Giant";
+        Card giant = addCard(giantCardName, p);
+        addCard("Mountain", p);
+        Card shockCard = addCardToZone("Shock", p, ZoneType.Hand);
+        SpellAbility shockSA = shockCard.getSpellAbilities().get(0);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        
+        assertEquals(3, giant.getNetPower());
+        assertEquals(3, giant.getNetToughness());
+        assertEquals(0, giant.getDamage());
+        
+        GameSimulator sim = createSimulator(game, p);
+        shockSA.setTargetCard(giant);
+        sim.simulateSpellAbility(shockSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simGiant = findCardWithName(simGame, giantCardName);
+        assertEquals(2, simGiant.getDamage());
+        
+        GameCopier copier = new GameCopier(simGame);
+        Game copy = copier.makeCopy();
+        Card giantCopy = findCardWithName(copy, giantCardName);
+        assertEquals(2, giantCopy.getDamage());
+    }
 }
