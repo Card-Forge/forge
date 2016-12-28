@@ -2,8 +2,10 @@ Name:Boon Reflection
 ManaCost:4 W
 Types:Enchantment
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainDouble | Description$ If you would gain life, you gain twice that much life instead.
-SVar:GainDouble:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X | References$ X
 SVar:X:ReplaceCount$LifeGained/Twice
 SVar:PlayMain1:True
+DeckHints:Keyword$Lifelink
+DeckNeeds:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boon_reflection.jpg
 Oracle:If you would gain life, you gain twice that much life instead.

@@ -4,8 +4,9 @@ Types:Creature Rhino Monk
 PT:1/5
 K:Lifelink
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainDouble | Description$ If you would gain life, you gain twice that much life instead.
-SVar:GainDouble:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X | References$ X
 SVar:X:ReplaceCount$LifeGained/Twice
 SVar:PlayMain1:True
+DeckHints:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_faithmender.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nIf you would gain life, you gain twice that much life instead.
