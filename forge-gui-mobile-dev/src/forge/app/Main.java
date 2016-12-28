@@ -57,9 +57,9 @@ public class Main {
         config.resizable = false;
         config.width = desktopMode ? fullscreenWidth : screenWidth;
         config.height = desktopMode ? fullscreenHeight : screenHeight;
-        config.fullscreen = desktopMode ? true : false;
+        config.fullscreen = desktopMode;
         config.title = "Forge";
-        config.useHDPI = desktopMode ? true : false; // enable HiDPI on Mac OS
+        config.useHDPI = desktopMode; // enable HiDPI on Mac OS
 
         new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(switchOrientationFile),
                 desktopMode ? desktopModeAssetsDir : assetsDir), config);
