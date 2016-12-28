@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.GuiBase;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.deck.CardPool;
@@ -16,6 +18,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
 import forge.limited.BoosterDraft;
 import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.IQuestTournamentView;
 import forge.quest.QuestEventDraft;
 import forge.quest.QuestTournamentController;
@@ -302,6 +305,80 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         @Override
         protected void doLayout(float width, float height) {
             
+        FLabel[] labels = new FLabel[16];
+        String[] playerIDs = new String[16];
+        int[] iconIDs = new int[16];
+        
+        String pairedPlayer1 = FModel.getQuest().getAchievements().getCurrentDraft().getBracket().getNextPairing().getPairedPlayers().get(0).getPlayer().getName();
+        String pairedPlayer2 = FModel.getQuest().getAchievements().getCurrentDraft().getBracket().getNextPairing().getPairedPlayers().get(1).getPlayer().getName();
+        String draftTitle = FModel.getQuest().getAchievements().getCurrentDraft().getFullTitle();
+
+        float x = PADDING;
+        float w = width - 2 * PADDING;
+        float y = PADDING;
+
+        FLabel lblStandings = add(new FLabel.Builder().text("Draft: " + draftTitle).align(HAlignment.CENTER).font(FSkinFont.get(20)).build());
+        lblStandings.setBounds(x, y, w, lblStandings.getAutoSizeBounds().height);
+        y += lblStandings.getHeight() + PADDING;
+
+        for (int i = 0; i < 15; i++) {
+            String playerID = FModel.getQuest().getAchievements().getCurrentDraft().getStandings()[i];
+
+            switch (playerID) {
+            case QuestEventDraft.HUMAN:
+                playerIDs[i] = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
+                if (FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",").length > 0) {
+                    iconIDs[i] = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]);
+                }
+                break;
+            case QuestEventDraft.UNDETERMINED:
+                playerIDs[i] = "Undetermined";
+                iconIDs[i] = GuiBase.getInterface().getAvatarCount() - 1;
+                break;
+            default:
+                iconIDs[i] = FModel.getQuest().getAchievements().getCurrentDraft().getAIIcons()[Integer.parseInt(playerID) - 1];
+                playerIDs[i] = FModel.getQuest().getAchievements().getCurrentDraft().getAINames()[Integer.parseInt(playerID) - 1];
+                break;
+            }
+
+        }
+
+        for (int j = 0; j < 13; j += 2) {
+            if (j == 0) {
+                FLabel qfinals = add(new FLabel.Builder().text("QUARTERFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                qfinals.setBounds(x, y, w, qfinals.getAutoSizeBounds().height);
+                y += qfinals.getHeight() + PADDING;
+            } else if (j == 8) {
+                FLabel sfinals = add(new FLabel.Builder().text("SEMIFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                sfinals.setBounds(x, y, w, sfinals.getAutoSizeBounds().height);
+                y += sfinals.getHeight() + PADDING;
+            } else if (j == 12) {
+                FLabel finals = add(new FLabel.Builder().text("FINAL MATCH").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                finals.setBounds(x, y, w, finals.getAutoSizeBounds().height);
+                y += finals.getHeight() + PADDING;
+            }
+
+            boolean currentMatch = (playerIDs[j].equals(pairedPlayer1) || playerIDs[j+1].equals(pairedPlayer1))
+                    && (playerIDs[j].equals(pairedPlayer2) || playerIDs[j+1].equals(pairedPlayer2));
+            String labelText = playerIDs[j] + " vs. " + playerIDs[j+1];
+
+            /* TODO: Implement drawing avatar pictures next to player names
+            FTextureRegionImage avatar1 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j]));
+            FTextureRegionImage avatar2 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j+1]));
+            */
+
+            labels[j] = add(add(new FLabel.Builder().icon(currentMatch ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE).text(labelText).align(HAlignment.CENTER).font(FSkinFont.get(16)).build()));
+            labels[j].setBounds(x, y, w, labels[j].getAutoSizeBounds().height);
+            if (currentMatch) {
+                labels[j].setTextColor(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE));
+            }
+
+            y += labels[j].getHeight();
+
+            if (j == 6 || j == 10) {
+                y += PADDING;
+            }
+        }
         }
     }
 }
