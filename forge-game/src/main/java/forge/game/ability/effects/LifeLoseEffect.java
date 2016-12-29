@@ -2,15 +2,16 @@ package forge.game.ability.effects;
 
 
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.util.Lang;
 
 public class LifeLoseEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
-     * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
+     * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -19,20 +20,16 @@ public class LifeLoseEffect extends SpellAbilityEffect {
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
         int affected = getTargetPlayers(sa).size();
-        for (int i = 0; i < affected; i++) {
-            final Player player = getTargetPlayers(sa).get(i);
-            sb.append(player);
-            sb.append(i < (affected - 2) ? ", " : i == (affected - 2) ? " and " : " ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
-        sb.append(affected > 1 ? "each lose " : "loses ");
+        sb.append(affected > 1 ? " each lose " : " loses ");
         sb.append(amount).append(" life.");
 
         return sb.toString();
     }
 
     /* (non-Javadoc)
-     * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
+     * @see forge.game.ability.SpellAbilityEffect#resolve(forge.game.spellability.SpellAbility)
      */
     @Override
     public void resolve(SpellAbility sa) {
@@ -41,9 +38,8 @@ public class LifeLoseEffect extends SpellAbilityEffect {
 
         final int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Player p : getTargetPlayers(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 lifeLost += p.loseLife(lifeAmount);
             }
         }
@@ -51,7 +47,7 @@ public class LifeLoseEffect extends SpellAbilityEffect {
 
         // Exceptional case for Extort: must propagate the amount of life lost to subability, 
         // otherwise the first Extort trigger per game won't work
-        if (sa.getHostCard().hasKeyword("Extort") && sa.getSubAbility() != null) {
+        if (sa.getSubAbility() != null && ApiType.GainLife.equals(sa.getSubAbility().getApi())) {
             sa.getSubAbility().setSVar("AFLifeLost", "Number$" + Integer.toString(lifeLost));
         }
         
