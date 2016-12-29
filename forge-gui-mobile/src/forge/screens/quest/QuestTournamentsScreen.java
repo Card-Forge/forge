@@ -31,6 +31,9 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.tournament.system.TournamentPairing;
+import forge.tournament.system.TournamentPlayer;
+import forge.util.Aggregates;
 import forge.util.Utils;
 
 public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestTournamentView {
@@ -54,8 +57,8 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     //Prepare Deck panel
     private final PrepareDeckPanel pnlPrepareDeck = add(new PrepareDeckPanel());
 
-    private final FButton btnEditDeck = pnlPrepareDeck.add(new FButton("Edit Deck"));
-    private final FButton btnLeaveTournament = pnlPrepareDeck.add(new FButton("Leave Tournament"));
+    private final FButton btnEditDeck = add(new FButton("Edit Deck"));
+    private final FButton btnLeaveTournament = add(new FButton("Leave Tournament"));
     private final CardManager deckViewer = pnlPrepareDeck.add(new CardManager(false));
 
     //Tournament Active panel
@@ -103,6 +106,13 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 });
             }
         });
+        
+        pnlPrepareDeck.add(btnEditDeck);
+        pnlPrepareDeck.add(btnLeaveTournament);
+
+        pnlTournamentActive.add(btnEditDeck);
+        pnlTournamentActive.add(btnLeaveTournament);
+
         deckViewer.setCaption("Main Deck");
         deckViewer.setup(ItemManagerConfig.QUEST_DRAFT_DECK_VIEWER);
         setMode(Mode.SELECT_TOURNAMENT);
@@ -272,22 +282,17 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     private void testInjectStandings() {
         QuestEventDraft qd = FModel.getQuest().getAchievements().getCurrentDraft();
-        String[] standings = qd.getStandings();
+        TournamentPairing pairing = qd.getBracket().getNextPairing();
 
-        int pos = 0;
-        for (int i = 0; i < 16; i++) {
-            if (standings[i].equals(QuestEventDraft.UNDETERMINED)) {
-                pos = i;
+        TournamentPlayer winner = Aggregates.random(pairing.getPairedPlayers());
+        for (TournamentPlayer tp : pairing.getPairedPlayers()) {
+            if (winner.equals(tp.getPlayer())) {
+                pairing.setWinner(winner);
                 break;
             }
         }
+        qd.getBracket().reportMatchCompletion(pairing);
 
-        standings[8] = QuestEventDraft.HUMAN;
-        standings[9] = "6";
-
-        qd.setBracket(QuestEventDraft.createBracketFromStandings(standings, qd.getAINames(), qd.getAIIcons()));
-        qd.addWin();
-        FModel.getQuest().save();
         onUpdate();
         pnlTournamentActive.clear();
         pnlTournamentActive.revalidate();
@@ -343,6 +348,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
             float x = PADDING;
             float w = width - 2 * PADDING;
+            float buttonWidth = (width - 3 * PADDING) / 2;
             float y = PADDING;
 
             FLabel lblStandings = add(new FLabel.Builder().text("Draft: " + draftTitle).align(HAlignment.CENTER).font(FSkinFont.get(20)).build());
@@ -407,6 +413,11 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                     y += PADDING;
                 }
             }
+
+            y += labels[0].getHeight() + PADDING;
+
+            btnEditDeck.setBounds(PADDING, y, buttonWidth, FTextField.getDefaultHeight());
+            btnLeaveTournament.setBounds(btnEditDeck.getRight() + PADDING, y, buttonWidth, btnEditDeck.getHeight());
         }
     }
 }
