@@ -85,6 +85,9 @@ import forge.util.collect.FCollection;
  */
 public class ComputerUtil {
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game) {
+        return handlePlayingSpellAbility(ai, sa, game, null);
+    }
+    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
         game.getStack().freezeStack();
         final Card source = sa.getHostCard();
 
@@ -102,7 +105,9 @@ public class ComputerUtil {
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
         }
-
+        if (chooseTargets != null) {
+            chooseTargets.run();
+        }
         if (sa.hasParam("Bestow")) {
             sa.getHostCard().animateBestow();
         }

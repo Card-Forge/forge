@@ -19,6 +19,7 @@ public class SimulationController {
     private Plan.Decision bestSequence; // last action of sequence
     private Score bestScore;
     private List<CachedEffect> effectCache = new ArrayList<CachedEffect>();
+    private GameObject[] currentHostAndTarget;
 
     private static class CachedEffect {
         final GameObject hostCard;
@@ -71,50 +72,12 @@ public class SimulationController {
         currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), choice));
     }
     
-    private GameObject[] getOriginalHostCardAndTarget(SpellAbility sa) {
-        SpellAbility saOrSubSa = sa;
-        do {
-            if (saOrSubSa.usesTargeting()) {
-                break;
-            }
-            saOrSubSa = saOrSubSa.getSubAbility();
-        } while (saOrSubSa != null);
-
-        if (saOrSubSa == null || saOrSubSa.getTargets() == null || saOrSubSa.getTargets().getTargets().size() != 1) {
-            return null;
-        }
-        GameObject target = saOrSubSa.getTargets().getTargets().get(0);
-        GameObject originalTarget = target;
-        if (!(target instanceof Card)) { return null; }
-        GameObject hostCard = sa.getHostCard();
-        for (int i = simulatorStack.size() - 1; i >= 0; i--) {
-            GameCopier copier = simulatorStack.get(i).getGameCopier();
-            target = copier.reverseFind(target);
-            hostCard = copier.reverseFind(hostCard);
-        }
-        return new GameObject[] { hostCard, target, originalTarget };
+    public void evaluateChosenModes(int[] chosenModes, String modesStr) {
+        currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), chosenModes, modesStr));
     }
 
-    public Score evaluateTargetChoices(SpellAbility sa, PossibleTargetSelector.Targets targets) {
-        GameObject[] hostAndTarget = getOriginalHostCardAndTarget(sa);
-        if (hostAndTarget != null) {
-            String saString = sa.toString();
-            for (CachedEffect effect : effectCache) {
-                if (effect.hostCard == hostAndTarget[0] && effect.target == hostAndTarget[1] && effect.sa.equals(saString)) {
-                    GameStateEvaluator evaluator = new GameStateEvaluator();
-                    Player player = sa.getActivatingPlayer();
-                    int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2], null);
-                    if (cardScore == effect.targetScore) {
-                        Score currentScore = getCurrentScore();
-                        // TODO: summonSick score?
-                        return new Score(currentScore.value + effect.scoreDelta, currentScore.summonSickValue);
-                    }
-                }
-            }
-        }
-
+    public void evaluateTargetChoices(SpellAbility sa, PossibleTargetSelector.Targets targets) {
         currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), targets));
-        return null;
     }
 
     public void doneEvaluating(Score score) {
@@ -130,6 +93,10 @@ public class SimulationController {
     }
     
     public Plan getBestPlan() {
+        if (!currentStack.isEmpty()) {
+            throw new RuntimeException("getBestPlan() expects currentStack to be empty!");
+        }
+
         ArrayList<Plan.Decision> sequence = new ArrayList<Plan.Decision>();
         Plan.Decision current = bestSequence;
         while (current != null) {
@@ -148,12 +115,42 @@ public class SimulationController {
                 sequence.get(writeIndex - 1).targets = d.targets;
             } else if (d.choice != null) {
                 sequence.get(writeIndex - 1).choice = d.choice;
+            } else if (d.modes != null) {
+                sequence.get(writeIndex - 1).modes = d.modes;
+                sequence.get(writeIndex - 1).modesStr = d.modesStr;
             }
         }
         sequence.subList(writeIndex, sequence.size()).clear();
         return new Plan(sequence);
     }
-    
+
+    private Plan.Decision getLastMergedDecision() {
+        PossibleTargetSelector.Targets targets = null;
+        String choice = null;
+        int[] modes = null;
+        String modesStr = null;
+
+        Plan.Decision d = currentStack.get(currentStack.size() - 1);
+        while (d.sa == null) {
+            if (d.targets != null) {
+                targets = d.targets;
+            } else if (d.choice != null) {
+                choice = d.choice;
+            } else if (d.modes != null) {
+                modes = d.modes;
+                modesStr = d.modesStr;
+            }
+            d = d.prevDecision;
+        }
+
+        Plan.Decision merged  = new Plan.Decision(d.initialScore, d.prevDecision, d.sa);
+        merged.targets = targets;
+        merged.choice = choice;
+        merged.modes = modes;
+        merged.modesStr = modesStr;
+        return merged;
+    }
+
     public void push(SpellAbility sa, Score score, GameSimulator simulator) {
         GameSimulator.debugPrint("Recursing DEPTH=" + getRecursionDepth());
         GameSimulator.debugPrint("  With: " + sa);
@@ -167,8 +164,63 @@ public class SimulationController {
         GameSimulator.debugPrint("DEPTH"+getRecursionDepth()+" best score " + score + " " + nextSa);
     }
 
+    public GameObject[] getOriginalHostCardAndTarget(SpellAbility sa) {
+        SpellAbility saOrSubSa = sa;
+        while (saOrSubSa != null && !saOrSubSa.usesTargeting()) {
+            saOrSubSa = saOrSubSa.getSubAbility();
+        }
+
+        if (saOrSubSa == null || saOrSubSa.getTargets() == null || saOrSubSa.getTargets().getTargets().size() != 1) {
+            return null;
+        }
+        GameObject target = saOrSubSa.getTargets().getTargets().get(0);
+        GameObject originalTarget = target;
+        if (!(target instanceof Card)) {  return null; }
+        Card hostCard = sa.getHostCard();
+        for (int i = simulatorStack.size() - 1; i >= 0; i--) {
+            GameCopier copier = simulatorStack.get(i).getGameCopier();
+            if (copier.getCopiedGame() != hostCard.getGame()) {
+                throw new RuntimeException("Expected hostCard and copier game to match!");
+            }
+            if (copier.getCopiedGame() != ((Card) target).getGame()) {
+                throw new RuntimeException("Expected target and copier game to match!");
+            }
+            target = copier.reverseFind(target);
+            hostCard = (Card) copier.reverseFind(hostCard);
+        }
+        return new GameObject[] { hostCard, target, originalTarget };
+    }
+
+    public void setHostAndTarget(SpellAbility sa, GameSimulator simulator) {
+        simulatorStack.add(simulator);
+        currentHostAndTarget = getOriginalHostCardAndTarget(sa);
+        simulatorStack.remove(simulatorStack.size() - 1);
+    }
+
+    public Score shouldSkipTarget(SpellAbility sa, PossibleTargetSelector.Targets targets, GameSimulator simulator) {
+        simulatorStack.add(simulator);
+        GameObject[] hostAndTarget = getOriginalHostCardAndTarget(sa);
+        simulatorStack.remove(simulatorStack.size() - 1);
+        if (hostAndTarget != null) {
+            String saString = sa.toString();
+            for (CachedEffect effect : effectCache) {
+                if (effect.hostCard == hostAndTarget[0] && effect.target == hostAndTarget[1] && effect.sa.equals(saString)) {
+                    GameStateEvaluator evaluator = new GameStateEvaluator();
+                    Player player = sa.getActivatingPlayer();
+                    int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2], null);
+                    if (cardScore == effect.targetScore) {
+                        Score currentScore = getCurrentScore();
+                        // TODO: summonSick score?
+                        return new Score(currentScore.value + effect.scoreDelta, currentScore.summonSickValue);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     public void possiblyCacheResult(Score score, SpellAbility sa) {
-        boolean cached = false;
+        String cached = "";
 
         // TODO: Why is the check below needed by tests?
         if (!currentStack.isEmpty()) {
@@ -179,28 +231,31 @@ public class SimulationController {
             // recurse.
             if (scoreDelta <= 0 && d.targets != null) {
                 // FIXME: Support more than one target in this logic.
-                GameObject[] hostAndTarget = getOriginalHostCardAndTarget(sa);
-                if (hostAndTarget != null) {
+                GameObject[] hostAndTarget = currentHostAndTarget;
+                if (currentHostAndTarget != null) {
                     GameStateEvaluator evaluator = new GameStateEvaluator();
                     Player player = sa.getActivatingPlayer();
                     int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2], null);
                     effectCache.add(new CachedEffect(hostAndTarget[0], sa, hostAndTarget[1], cardScore, scoreDelta));
-                    cached = true;
+                    cached = " (added to cache)";
                 }
             }
         }
 
-        printState(score, sa, cached ? " (added to cache)" : "");
+        currentHostAndTarget = null;
+        printState(score, sa, cached, true);
     }
 
-    public void printState(Score score, SpellAbility origSa, String suffix) {
+    public void printState(Score score, SpellAbility origSa, String suffix, boolean useStack) {
         int recursionDepth = getRecursionDepth();
         for (int i = 0; i < recursionDepth; i++)
             System.err.print("  ");
-        String choice = "";
-        if (!currentStack.isEmpty() && currentStack.get(currentStack.size() - 1).choice != null) {
-            choice = " -> " + currentStack.get(currentStack.size() - 1).choice;
+        String str;
+        if (useStack && !currentStack.isEmpty()) {
+            str = getLastMergedDecision().toString();
+        } else {
+            str = SpellAbilityPicker.abilityToString(origSa);
         }
-        System.err.println(recursionDepth + ": [" + score.value + "] " + SpellAbilityPicker.abilityToString(origSa) + choice + suffix);
+        System.err.println(recursionDepth + ": [" + score.value + "] " + str + suffix);
     }
 }

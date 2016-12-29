@@ -27,6 +27,7 @@ public class GameSimulator {
     private GameStateEvaluator eval;
     private List<String> origLines;
     private Score origScore;
+    private Interceptor interceptor;
     
     public GameSimulator(final SimulationController controller, final Game origGame, final Player origAiPlayer) {
         this.controller = controller;
@@ -74,6 +75,7 @@ public class GameSimulator {
     }
 
     public void setInterceptor(Interceptor interceptor) {
+        this.interceptor = interceptor;
         ((PlayerControllerAi) aiPlayer.getController()).getAi().getSimulationPicker().setInterceptor(interceptor);
     }
  
@@ -173,7 +175,15 @@ public class GameSimulator {
                 }
                 System.out.println();
             }
-            ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame);
+            final SpellAbility playingSa = sa;
+            ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, new Runnable() {
+                @Override
+                public void run() {
+                    if (interceptor != null) {
+                        interceptor.chooseTargets(playingSa, GameSimulator.this);
+                    }
+                }
+            });
         }
 
         // TODO: Support multiple opponents.

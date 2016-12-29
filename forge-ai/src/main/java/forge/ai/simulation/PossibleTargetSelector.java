@@ -7,11 +7,11 @@ import java.util.List;
 import com.google.common.collect.ArrayListMultimap;
 
 import forge.ai.ComputerUtilCard;
-import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.spellability.TargetRestrictions;
@@ -48,12 +48,16 @@ public class PossibleTargetSelector {
         }
     }
 
-    public PossibleTargetSelector(Game game, Player player, SpellAbility sa) {
+    public PossibleTargetSelector(SpellAbility sa) {
+        this(sa, null);
+    }
+
+    public PossibleTargetSelector(SpellAbility sa, List<AbilitySub> plannedModes) {
         this.sa = sa;
-        chooseTargetingSubAbility();
+        chooseTargetingSubAbility(plannedModes);
         this.targetIndex = 0;
         this.validTargets = new ArrayList<GameObject>();
-        generateValidTargets(player);
+        generateValidTargets(sa.getHostCard().getController());
     }
 
     private void generateValidTargets(Player player) {
@@ -141,26 +145,36 @@ public class PossibleTargetSelector {
         return conditions == null || conditions.areMet(saOrSubSa);
     }
 
-    private void chooseTargetingSubAbility() {
+    private void chooseTargetingSubAbility(List<AbilitySub> plannedSubs) {
         // TODO: This needs to handle case where multiple sub-abilities each have targets.
-        SpellAbility saOrSubSa = sa;
         int index = 0;
-        do {
+        for (SpellAbility saOrSubSa = sa; saOrSubSa != null; saOrSubSa = saOrSubSa.getSubAbility()) {
             if (saOrSubSa.usesTargeting() && conditionsAreMet(saOrSubSa)) {
                 targetingSaIndex = index;
                 targetingSa = saOrSubSa;
                 return;
             }
-            saOrSubSa = saOrSubSa.getSubAbility();
             index++;
-        } while (saOrSubSa != null);
+        }
+        // When plannedSubs is provided, also consider them even though they've not yet been added to the
+        // sub-ability chain. This is the case when we're choosing modes for a charm-style effect.
+        if (plannedSubs != null) {
+            for (AbilitySub sub : plannedSubs) {
+                if (sub.usesTargeting() && conditionsAreMet(sub)) {
+                    targetingSaIndex = index;
+                    targetingSa = sub;
+                    return;
+                }
+                index++;
+            }
+        }
     }
 
     public boolean hasPossibleTargets() {
         return !validTargets.isEmpty();
     }
 
-    private void selectTargetsByIndex(int index) {
+    private void selectTargetsByIndexImpl(int index) {
         targetingSa.resetTargets();
 
         // TODO: smarter about multiple targets, etc...
@@ -190,11 +204,22 @@ public class PossibleTargetSelector {
         return new Targets(targetingSaIndex, validTargets.size(), targetIndex - 1, targetingSa.getTargets().getTargetedString());
     }
 
-    public boolean selectTargets(Targets targets) {
-        if (targets.originalTargetCount != validTargets.size() || targets.targetingSaIndex != targetingSaIndex) {
+    public boolean selectTargetsByIndex(int targetIndex) {
+        if (targetIndex >= validTargets.size()) {
             return false;
         }
-        selectTargetsByIndex(targets.targetIndex);
+        selectTargetsByIndexImpl(targetIndex);
+        this.targetIndex = targetIndex + 1;
+        return true;
+    }
+
+    public boolean selectTargets(Targets targets) {
+        if (targets.originalTargetCount != validTargets.size() || targets.targetingSaIndex != targetingSaIndex) {
+            System.err.println("Expected: " + validTargets.size() + " " + targetingSaIndex + " got: " + targets.originalTargetCount + " " + targets.targetingSaIndex);
+            return false;
+        }
+        selectTargetsByIndexImpl(targets.targetIndex);
+        this.targetIndex = targets.targetIndex + 1;
         return true;
     }
 
@@ -202,8 +227,12 @@ public class PossibleTargetSelector {
         if (targetIndex >= validTargets.size()) {
             return false;
         }
-        selectTargetsByIndex(targetIndex);
+        selectTargetsByIndexImpl(targetIndex);
         targetIndex++;
         return true;
+    }
+
+    public int getValidTargetsSize() {
+        return validTargets.size();
     }
 }

@@ -55,6 +55,14 @@ public class GameCopier {
         this.origGame = origGame;
     }
     
+    public Game getOriginalGame() {
+        return origGame;
+    }
+    
+    public Game getCopiedGame() {
+        return gameObjectMap.getGame();
+    }
+    
     public Game makeCopy() {
         List<RegisteredPlayer> origPlayers = origGame.getMatch().getPlayers();
         List<RegisteredPlayer> newPlayers = new ArrayList<>();

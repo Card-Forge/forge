@@ -491,6 +491,10 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
+        List<AbilitySub> result = brains.chooseModeForAbility(sa, min, num, allowRepeat);
+        if (result != null) {
+            return result;
+        }
         /**
          * Called when CharmEffect resolves for the AI to select its choices.
          * The list of chosen options (sa.getChosenList()) should be set by

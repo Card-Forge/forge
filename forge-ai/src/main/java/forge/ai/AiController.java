@@ -1584,5 +1584,12 @@ public class AiController {
     private List<SpellAbility> filterListByApi(List<SpellAbility> input, ApiType type) {
         return filterList(input, SpellAbilityPredicates.isApi(type));
     }
+
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
+        if (simPicker != null) {
+            return simPicker.chooseModeForAbility(sa, min, num, allowRepeat);
+        }
+        return null;
+    }
 }
 

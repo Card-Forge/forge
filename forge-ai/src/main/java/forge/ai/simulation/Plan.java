@@ -45,11 +45,21 @@ public class Plan {
         final String sa;
         PossibleTargetSelector.Targets targets;
         String choice;
+        int[] modes;
+        String modesStr; // for human pretty-print consumption only
 
         public Decision(Score initialScore, Decision prevDecision, SpellAbility sa) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.sa = sa.toString();
+            this.targets = null;
+            this.choice = null;
+        }
+        
+        public Decision(Score initialScore, Decision prevDecision, String saString) {
+            this.initialScore = initialScore;
+            this.prevDecision = prevDecision;
+            this.sa = saString;
             this.targets = null;
             this.choice = null;
         }
@@ -70,9 +80,30 @@ public class Plan {
             this.choice = choice.getName();
         }
 
+        public Decision(Score initialScore, Decision prevDecision, int[] modes, String modesStr) {
+            this.initialScore = initialScore;
+            this.prevDecision = prevDecision;
+            this.sa = null;
+            this.targets = null;
+            this.choice = null;
+            this.modes = modes;
+            this.modesStr = modesStr;
+        }
+
         @Override
         public String toString() {
-            return "[initScore=" + initialScore + " " + sa + " " + targets + " " + choice + "]";
+            StringBuilder sb = new StringBuilder();
+            sb.append("[initScore=").append(initialScore).append(" ");
+            if (modesStr != null) {
+                sb.append(modesStr);
+            } else {
+                sb.append(sa);
+            }
+            if (targets != null) {
+                sb.append(" (targets: ").append(targets).append(")");
+            }
+            sb.append("]");
+            return sb.toString();
         }
     }
 }

@@ -1,8 +1,12 @@
 package forge.ai.simulation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.math3.util.CombinatoricsUtils;
 
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilAbility;
@@ -10,15 +14,16 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
-import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 
 public class SpellAbilityPicker {
@@ -189,14 +194,15 @@ public class SpellAbilityPicker {
                 // TODO: Other safeguards like list of SAs and maybe the index and such?
                 for (final SpellAbility sa : availableSAs) {
                     if (sa.toString().equals(decision.sa)) {
-                        if (decision.targets != null) {
-                            PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
+                        // If modes != null, targeting will be done in chooseModeForAbility().
+                        if (decision.modes == null && decision.targets != null) {
+                            PossibleTargetSelector selector = new PossibleTargetSelector(sa);
                             if (!selector.selectTargets(decision.targets)) {
                                 badTargets = true;
                                 break;
                             }
                         }
-                        print("Planned decision " + plan.getNextDecisionIndex() + ": " + abilityToString(sa) + " " + decision.choice);
+                        print("Planned decision " + plan.getNextDecisionIndex() + ": " + decision);
                         return sa;
                     }
                 }
@@ -301,87 +307,204 @@ public class SpellAbilityPicker {
         return AiPlayDecision.WillPlay;
     }
 
+    private static List<AbilitySub> getModeCombination(List<AbilitySub> choices, int[] modeIndexes) {
+        ArrayList<AbilitySub> modes = new ArrayList<AbilitySub>();
+        for (int modeIndex : modeIndexes) {
+            modes.add(choices.get(modeIndex));
+        }
+        return modes;
+    }
+
     private Score evaluateSa(final SimulationController controller, SpellAbility sa) {
         controller.evaluateSpellAbility(sa);
 
         Score bestScore = new Score(Integer.MIN_VALUE);
-        PossibleTargetSelector selector = new PossibleTargetSelector(game, player, sa);
-        if (!selector.hasPossibleTargets()) {
-            Interceptor interceptor = new Interceptor() {
-                private int numChoices = -1;
-                private int nextChoice = 0;
-                private Card choice;
+        Interceptor interceptor = new Interceptor() {
+            private Iterator<int[]> modeIterator;
+            private int[] selectedModes;
+            private Score bestScoreForMode = new Score(Integer.MIN_VALUE);
+            private boolean advancedToNextMode;
 
-                @Override
-                public Card chooseCard(CardCollection fetchList) {
-                    choice = null;
-                    // Prune duplicates.
-                    HashSet<String> uniqueCards = new HashSet<String>();
-                    for (int i = 0; i < fetchList.size(); i++) {
-                        Card card = fetchList.get(i);
-                        if (uniqueCards.add(card.getName()) && uniqueCards.size() == nextChoice + 1) {
-                            choice = card;
+            private Score[] cachedTargetScores;
+            private int nextTarget = 0;
+            private Score bestScoreForTarget = new Score(Integer.MIN_VALUE);
+
+            private int numChoices = -1;
+            private int nextChoice = 0;
+            private Card selectedChoice;
+            private Score bestScoreForChoice = new Score(Integer.MIN_VALUE);
+
+            public List<AbilitySub> chooseModesForAbility(List<AbilitySub> choices, int min, int num, boolean allowRepeat) {
+                if (modeIterator == null) {
+                    // TODO: Below doesn't support allowRepeat!
+                    modeIterator = CombinatoricsUtils.combinationsIterator(choices.size(), num);
+                    selectedModes = modeIterator.next();
+                    advancedToNextMode = true;
+                }
+                // Note: If modeIterator already existed, selectedModes would have been updated in advance().
+                List<AbilitySub> result = getModeCombination(choices, selectedModes);
+                if (advancedToNextMode) {
+                    StringBuilder sb = new StringBuilder();
+                    for (AbilitySub sub : result) {
+                        if (sb.length() > 0) {
+                            sb.append(" ");
+                        }
+                        sb.append(sub);
+                    }
+                    controller.evaluateChosenModes(selectedModes, sb.toString());
+                    advancedToNextMode = false;
+                }
+                return result;
+            }
+
+            @Override
+            public Card chooseCard(CardCollection fetchList) {
+                // Prune duplicates.
+                HashSet<String> uniqueCards = new HashSet<String>();
+                for (int i = 0; i < fetchList.size(); i++) {
+                    Card card = fetchList.get(i);
+                    if (uniqueCards.add(card.getName()) && uniqueCards.size() == nextChoice + 1) {
+                        selectedChoice = card;
+                    }
+                }
+                numChoices = uniqueCards.size();
+                if (selectedChoice != null) {
+                    controller.evaluateCardChoice(selectedChoice);
+                }
+                return selectedChoice;
+            }
+
+            @Override
+            public void chooseTargets(SpellAbility sa, GameSimulator simulator) {
+                // Note: Can't just keep a TargetSelector object cached because it's
+                // responsible for setting state on a SA and the SA object changes each
+                // time since it's a different simulation.
+                PossibleTargetSelector selector = new PossibleTargetSelector(sa);
+                if (selector.hasPossibleTargets()) {
+                    if (cachedTargetScores == null) {
+                        cachedTargetScores = new Score[selector.getValidTargetsSize()];
+                        nextTarget = -1;
+                        for (int i = 0; i < cachedTargetScores.length; i++) {
+                            selector.selectTargetsByIndex(i);
+                            cachedTargetScores[i] = controller.shouldSkipTarget(sa, selector.getLastSelectedTargets(), simulator);
+                            if (cachedTargetScores[i] != null) {
+                                controller.printState(cachedTargetScores[i], sa, " - via estimate (skipped)", false);
+                            } else if (nextTarget == -1) {
+                                nextTarget = i;
+                            }
+                        }
+                        // If all targets were cached, we unfortunately have to evaluate the first target again
+                        // because at this point we're already running the simulation code and there's no turning
+                        // back. This used to be not possible when the PossibleTargetSelector was controlling the
+                        // flow. :(
+                        if (nextTarget == -1) { nextTarget = 0; }
+                    }
+                    selector.selectTargetsByIndex(nextTarget);
+                    controller.setHostAndTarget(sa, simulator);
+                    // The hierarchy is modes -> targets -> choices. In the presence of multiple choices, we want to call
+                    // evaluate just once at the top level. We can do this by only calling when numChoices is -1.
+                    if (numChoices == -1) {
+                        controller.evaluateTargetChoices(sa, selector.getLastSelectedTargets());
+                    }
+                    return;
+                }
+            }
+
+            @Override
+            public Card getSelectedChoice() {
+                return selectedChoice;
+            }
+
+            @Override
+            public int[] getSelectModes() {
+                return selectedModes;
+            }
+
+            @Override
+            public boolean advance(Score lastScore) {
+                if (lastScore.value > bestScoreForChoice.value) {
+                    bestScoreForChoice = lastScore;
+                }
+                if (lastScore.value > bestScoreForTarget.value) {
+                    bestScoreForTarget = lastScore;
+                }
+                if (lastScore.value > bestScoreForMode.value) {
+                    bestScoreForMode = lastScore;
+                }
+
+                if (numChoices != -1) {
+                    if (selectedChoice != null) {
+                        controller.doneEvaluating(bestScoreForChoice);
+                    }
+                    bestScoreForChoice = new Score(Integer.MIN_VALUE);
+                    selectedChoice = null;
+                    if (nextChoice + 1 < numChoices) {
+                        nextChoice++;
+                        return true;
+                    }
+                    nextChoice = 0;
+                    numChoices = -1;
+                }
+                if (cachedTargetScores != null) {
+                    controller.doneEvaluating(bestScoreForTarget);
+                    bestScoreForTarget = new Score(Integer.MIN_VALUE);
+                    while (nextTarget + 1 < cachedTargetScores.length) {
+                        nextTarget++;
+                        if (cachedTargetScores[nextTarget] == null) {
+                            return true;
                         }
                     }
-                    numChoices = uniqueCards.size();
-                    nextChoice++;
-                    if (choice != null) {
-                        controller.evaluateCardChoice(choice);
+                    nextTarget = -1;
+                    cachedTargetScores = null;
+                }
+                if (modeIterator != null) {
+                    controller.doneEvaluating(bestScoreForMode);
+                    bestScoreForMode = new Score(Integer.MIN_VALUE);
+                    if (modeIterator.hasNext()) {
+                        selectedModes = modeIterator.next();
+                        advancedToNextMode = true;
+                        return true;
                     }
-                    return choice;
+                    modeIterator = null;
                 }
-
-                @Override
-                public Card getLastChoice() {
-                    return choice;
-                }
-
-                @Override
-                public boolean hasMoreChoices() {
-                    return nextChoice < numChoices;
-                }
-            };
-
-            do {
-                GameSimulator simulator = new GameSimulator(controller, game, player);
-                simulator.setInterceptor(interceptor);
-                Score score = simulator.simulateSpellAbility(sa);
-                if (interceptor.getLastChoice() != null) {
-                    controller.doneEvaluating(score);
-                }
-                if (score.value > bestScore.value) {
-                    bestScore = score;
-                }
-            } while (interceptor.hasMoreChoices());
-            controller.doneEvaluating(bestScore);
-            return bestScore;
-        }
-
-        TargetChoices tgt = null;
-        while (selector.selectNextTargets()) {
-            // Get estimated score from the controller if this SA/target pair has been seen before.
-            Score score = controller.evaluateTargetChoices(sa, selector.getLastSelectedTargets());
-            if (score == null) {
-                // First time we see this, evaluate!
-                GameSimulator simulator = new GameSimulator(controller, game, player);
-                score = simulator.simulateSpellAbility(sa);
-                controller.doneEvaluating(score);
-            } else {
-                controller.printState(score, sa, " - via estimate (skipped)");
+                return false;
             }
-            // TODO: Get rid of the below when no longer needed.
-            if (score.value > bestScore.value) {
-                bestScore = score;
-                tgt = sa.getTargets();
-                sa.resetTargets();
+        };
+
+        Score lastScore = null;
+        do {
+            GameSimulator simulator = new GameSimulator(controller, game, player);
+            simulator.setInterceptor(interceptor);
+            lastScore = simulator.simulateSpellAbility(sa);
+            if (lastScore.value > bestScore.value) {
+                bestScore = lastScore;
             }
-        }
+        } while (interceptor.advance(lastScore));
         controller.doneEvaluating(bestScore);
-
-        if (tgt != null) {
-            sa.setTargets(tgt);
-        }
         return bestScore;
+    }
+
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
+        if (interceptor != null) {
+            List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+            return interceptor.chooseModesForAbility(choices, min, num, allowRepeat);
+        }
+        if (plan != null && plan.getSelectedDecision() != null && plan.getSelectedDecision().modes != null) {
+            Plan.Decision decision = plan.getSelectedDecision();
+            List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+            // TODO: Validate that there's no discrepancies between choices and modes?
+            List<AbilitySub> plannedModes = getModeCombination(choices, decision.modes);
+            if (plan.getSelectedDecision().targets != null) {
+                PossibleTargetSelector selector = new PossibleTargetSelector(sa, plannedModes);
+                if (!selector.selectTargets(decision.targets)) {
+                    print("Failed to continue planned action (" + decision.sa + "). Cause:");
+                    print("  Bad targets for modes!");
+                    return null;
+                }
+            }
+            return plannedModes;
+        }
+        return null;
     }
 
     public Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
@@ -422,8 +545,11 @@ public class SpellAbilityPicker {
     }
 
     public interface Interceptor {
+        public List<AbilitySub> chooseModesForAbility(List<AbilitySub> choices, int min, int num, boolean allowRepeat);
         public Card chooseCard(CardCollection fetchList);
-        public Card getLastChoice();
-        public boolean hasMoreChoices();
+        public void chooseTargets(SpellAbility sa, GameSimulator simulator);
+        public Card getSelectedChoice();
+        public int[] getSelectModes();
+        public boolean advance(Score lastScore);
     }
 }
