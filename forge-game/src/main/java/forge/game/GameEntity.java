@@ -55,7 +55,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         getView().updateName(this);
     }
 
-    public boolean addDamage(final int damage, final Card source) {
+    public int addDamage(final int damage, final Card source) {
         int damageToDo = damage;
 
         damageToDo = replaceDamage(damageToDo, source, false);
@@ -64,13 +64,13 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return addDamageAfterPrevention(damageToDo, source, false);
     }
 
-    public boolean addDamageWithoutPrevention(final int damage, final Card source) {
+    public int addDamageWithoutPrevention(final int damage, final Card source) {
         int damageToDo = replaceDamage(damage, source, false);
         return addDamageAfterPrevention(damageToDo, source, false);
     }
 
     // This function handles damage after replacement and prevention effects are applied
-    public abstract boolean addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat);
+    public abstract int addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat);
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
