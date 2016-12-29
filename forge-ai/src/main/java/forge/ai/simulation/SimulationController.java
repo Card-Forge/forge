@@ -50,7 +50,7 @@ public class SimulationController {
     }
     
     public boolean shouldRecurse() {
-        return getRecursionDepth() < MAX_DEPTH;
+        return bestScore.value != Integer.MAX_VALUE && getRecursionDepth() < MAX_DEPTH;
     }
     
     private Plan.Decision getLastDecision() {
