@@ -203,9 +203,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     public void setHostCard(final Card c) {
         if (hostCard == c) { return; }
-        super.setHostCard(c);
         Game oldGame = hostCard != null ? hostCard.getGame() : null;
         Game newGame = c != null ? c.getGame() : null;
+        super.setHostCard(c);
         if (oldGame != newGame) {
             if (oldGame != null) { oldGame.removeSpellAbility(this); }
             if (newGame != null) { newGame.addSpellAbility(this); }

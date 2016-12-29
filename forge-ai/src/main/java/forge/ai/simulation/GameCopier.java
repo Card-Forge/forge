@@ -108,7 +108,18 @@ public class GameCopier {
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        
+
+        for (Card c : newGame.getCardsInGame()) {
+            for (SpellAbility sa : c.getSpellAbilities()) {
+                Player activatingPlayer = sa.getActivatingPlayer();
+                if (activatingPlayer != null && activatingPlayer.getGame() != newGame) {
+                    sa.setActivatingPlayer(gameObjectMap.map(activatingPlayer));
+                }
+            }
+        }
+        origGame.validateSpabCache();
+        newGame.validateSpabCache();
+
         // Undo effects first before calculating them below, to avoid them applying twice.
         for (StaticEffect effect : origGame.getStaticEffects().getEffects()) {
             effect.removeMapped(gameObjectMap);

@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,5 +40,9 @@ public class GameEntityCache<Entity extends IIdentifiable, View extends Trackabl
 
     public void clear() {
         entityCache.clear();
+    }
+
+    public Collection<Entity> getValues() {
+        return entityCache.values();
     }
 }

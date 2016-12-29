@@ -199,6 +199,16 @@ public class Game {
     public void removeSpellAbility(SpellAbility spellAbility) {
         spabCache.remove(spellAbility.getId());
     }
+    public void validateSpabCache() {
+        for (SpellAbility sa : spabCache.getValues()) {
+            if (sa.getHostCard() != null && sa.getHostCard().getGame() != this) {
+                throw new RuntimeException();
+            }
+            if (sa.getActivatingPlayer() != null && sa.getActivatingPlayer().getGame() != this) {
+                throw new RuntimeException();
+            }
+        }
+    }
 
     public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
         rules = rules0;
