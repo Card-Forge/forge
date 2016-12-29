@@ -521,6 +521,7 @@ public class GameSimulatorTest extends TestCase {
 
         SpellAbility sa = findSAWithPrefix(ajani, "+1: Distribute");
         assertNotNull(sa);
+        sa.setActivatingPlayer(p);
 
         PossibleTargetSelector selector = new PossibleTargetSelector(sa);
         while (selector.selectNextTargets()) {
