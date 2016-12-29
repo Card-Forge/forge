@@ -31,8 +31,6 @@ import java.util.Map;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * <p>
@@ -218,11 +216,9 @@ public final class AbilityFactory {
             final String name = mapParams.get("SubAbility");
             SpellAbility p = parent;
             AbilitySub sub = null;
-            boolean exist = false;
             while (p != null) {
                 sub = p.getAdditonalAbility(name);
                 if (sub != null) {
-                    exist = true;
                     break;
                 }
                 p = p.getParent();
@@ -231,26 +227,12 @@ public final class AbilityFactory {
                 sub = getSubAbility(hostCard, name, spellAbility);
             }
             spellAbility.setSubAbility(sub);
-            spellAbility.setAdditionalAbility(name, sub);
-            
-            if (!exist) {
-                for (final String key : additionalAbilityKeys) {
-                    if (sub.hasParam(key) && sub.getAdditonalAbility(key) == null) {
-                        sub.setAdditionalAbility(key, getSubAbility(hostCard, sub.getParam(key), sub));
-                    }
-                }
-            }
+            spellAbility.setAdditionalAbility(name, sub);            
         }
 
-        // FIXME: this is a list of APIs that fail to work unless additional abilities are created for them below.
-        // Is there are reason we are not just creating additional abilities by default for all APIs?
-        List<ApiType> apiList = new ArrayList<>(Arrays.asList(ApiType.Charm, ApiType.Repeat, ApiType.RepeatEach));
-
-        if (type != AbilityRecordType.SubAbility || parent == null || apiList.contains(parent.getApi())) {
-            for (final String key : additionalAbilityKeys) {
-                if (mapParams.containsKey(key) && spellAbility.getAdditonalAbility(key) == null) {
-                    spellAbility.setAdditionalAbility(key, getSubAbility(hostCard, mapParams.get(key), spellAbility));
-                }
+        for (final String key : additionalAbilityKeys) {
+            if (mapParams.containsKey(key) && spellAbility.getAdditonalAbility(key) == null) {
+                spellAbility.setAdditionalAbility(key, getSubAbility(hostCard, mapParams.get(key), spellAbility));
             }
         }
 
