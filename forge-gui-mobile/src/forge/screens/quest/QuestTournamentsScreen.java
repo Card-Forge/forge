@@ -13,6 +13,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor.EditorType;
+import forge.game.GameType;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
@@ -184,7 +185,8 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     @Override
     public void updateTournamentBoxLabel(String playerID, int iconID, int box, boolean first) {
-
+        pnlTournamentActive.clear();
+        pnlTournamentActive.revalidate();
     }
 
     @Override
@@ -269,6 +271,29 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         return btnLeaveTournament;
     }
 
+    private void testInjectStandings() {
+        QuestEventDraft qd = FModel.getQuest().getAchievements().getCurrentDraft();
+        String[] standings = qd.getStandings();
+
+        int pos = 0;
+        for (int i = 0; i < 16; i++) {
+            if (standings[i].equals(QuestEventDraft.UNDETERMINED)) {
+                pos = i;
+                break;
+            }
+        }
+
+        standings[8] = QuestEventDraft.HUMAN;
+        standings[9] = "6";
+
+        qd.setBracket(QuestEventDraft.createBracketFromStandings(standings, qd.getAINames(), qd.getAIIcons()));
+        qd.addWin();
+        FModel.getQuest().save();
+        onUpdate();
+        pnlTournamentActive.clear();
+        pnlTournamentActive.revalidate();
+    }
+    
     private class SelectTournamentPanel extends FContainer {
         @Override
         protected void doLayout(float width, float height) {
@@ -304,6 +329,10 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     private class TournamentActivePanel extends FContainer {
         @Override
         protected void doLayout(float width, float height) {
+
+            if (FModel.getQuest().getAchievements().getCurrentDraft() == null) {
+                return;
+            }
 
             FLabel[] labels = new FLabel[16];
             String[] playerIDs = new String[16];
