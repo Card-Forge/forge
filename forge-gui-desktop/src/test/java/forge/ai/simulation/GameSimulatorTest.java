@@ -341,7 +341,7 @@ public class GameSimulatorTest extends TestCase {
         abilities = ComputerUtilAbility.getSpellAbilities(cards, simP);
         SpellAbility minusTwoSim = findSAWithPrefix(abilities, "-2: Put a 2/2 black Vampire");
         assertNotNull(minusTwoSim);
-        minusTwo.setActivatingPlayer(simP);
+        minusTwoSim.setActivatingPlayer(simP);
         assertFalse(minusTwoSim.canPlay());
         assertEquals(1, minusTwoSim.getActivationsThisTurn());
         
