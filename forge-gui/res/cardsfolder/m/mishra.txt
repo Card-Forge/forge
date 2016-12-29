@@ -2,10 +2,8 @@ Name:Mishra
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/-3
-R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Creature.YouCtrl | ReplaceWith$ DmgTimes2 | IsCombat$ False | Description$ If a creature you control would deal damage, it deals double that damage instead.
-R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Creature.YouCtrl | ReplaceWith$ DmgTimes2Combat | IsCombat$ True | Secondary$ True | Description$ If a creature you control would deal damage, it deals double that damage instead.
-SVar:DmgTimes2:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
-SVar:DmgTimes2Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Creature.YouCtrl | ReplaceWith$ DmgTwice | Description$ If a creature you control would deal damage, it deals double that damage instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Mishra.full.jpg
 Oracle:Hand +0, life -3\nIf a creature you control would deal damage, it deals double that damage instead.
