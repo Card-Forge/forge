@@ -143,7 +143,7 @@ public class SimulationController {
             d = d.prevDecision;
         }
 
-        Plan.Decision merged  = new Plan.Decision(d.initialScore, d.prevDecision, d.sa);
+        Plan.Decision merged  = new Plan.Decision(d.initialScore, d.prevDecision, d.sa, d.saHumanStr);
         merged.targets = targets;
         merged.choice = choice;
         merged.modes = modes;
@@ -252,7 +252,7 @@ public class SimulationController {
             System.err.print("  ");
         String str;
         if (useStack && !currentStack.isEmpty()) {
-            str = getLastMergedDecision().toString();
+            str = getLastMergedDecision().toString(true);
         } else {
             str = SpellAbilityPicker.abilityToString(origSa);
         }

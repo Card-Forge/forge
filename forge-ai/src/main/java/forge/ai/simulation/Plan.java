@@ -43,6 +43,7 @@ public class Plan {
         final Score initialScore;
 
         final String sa;
+        final String saHumanStr;
         PossibleTargetSelector.Targets targets;
         String choice;
         int[] modes;
@@ -52,14 +53,16 @@ public class Plan {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.sa = sa.toString();
+            this.saHumanStr = SpellAbilityPicker.abilityToString(sa);
             this.targets = null;
             this.choice = null;
         }
         
-        public Decision(Score initialScore, Decision prevDecision, String saString) {
+        public Decision(Score initialScore, Decision prevDecision, String saString, String saHumanStr) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.sa = saString;
+            this.saHumanStr = saHumanStr;
             this.targets = null;
             this.choice = null;
         }
@@ -68,6 +71,7 @@ public class Plan {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.sa = null;
+            this.saHumanStr = null;
             this.targets = targets;
             this.choice = null;
         }
@@ -76,6 +80,7 @@ public class Plan {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.sa = null;
+            this.saHumanStr = null;
             this.targets = null;
             this.choice = choice.getName();
         }
@@ -84,26 +89,35 @@ public class Plan {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.sa = null;
+            this.saHumanStr = null;
             this.targets = null;
             this.choice = null;
             this.modes = modes;
             this.modesStr = modesStr;
         }
 
-        @Override
-        public String toString() {
+        public String toString(boolean showHostCard) {
             StringBuilder sb = new StringBuilder();
-            sb.append("[initScore=").append(initialScore).append(" ");
+            if (!showHostCard) {
+                sb.append("[initScore=").append(initialScore).append(" ");
+            }
             if (modesStr != null) {
                 sb.append(modesStr);
             } else {
-                sb.append(sa);
+                sb.append(showHostCard ? saHumanStr : sa);
             }
             if (targets != null) {
                 sb.append(" (targets: ").append(targets).append(")");
             }
-            sb.append("]");
+            if (!showHostCard) {
+                sb.append("]");
+            }
             return sb.toString();
+        }
+
+        @Override
+        public String toString() {
+            return toString(false);
         }
     }
 }

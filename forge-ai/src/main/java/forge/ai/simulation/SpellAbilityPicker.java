@@ -348,6 +348,8 @@ public class SpellAbilityPicker {
                     for (AbilitySub sub : result) {
                         if (sb.length() > 0) {
                             sb.append(" ");
+                        } else {
+                            sb.append(sub.getHostCard()).append(" -> ");
                         }
                         sb.append(sub);
                     }

@@ -670,7 +670,6 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(1, scionCopy.getNetPower());
         assertEquals(1, scionCopy.getNetToughness());
         assertTrue(scionCopy.isSick());
-        System.err.println("Search continues on: " + scionCopy);
         assertNotNull(findSAWithPrefix(scionCopy, "Sacrifice CARDNAME: Add {C} to your mana pool."));
     }
 
