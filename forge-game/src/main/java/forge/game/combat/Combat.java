@@ -28,7 +28,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -70,8 +69,7 @@ public class Combat {
     private Map<Card, CardCollection> blockersOrderedForDamageAssignment = Maps.newHashMap();
     private Map<GameEntity, CombatLki> lkiCache = Maps.newHashMap();
     private Table<Card, GameEntity, Integer> dealtDamageTo = HashBasedTable.create();
-    private Multimap<Card, GameEntity> dealtDamageToThisCombat = HashMultimap.create();
-    
+
     // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW) 
     private CardCollection combatantsThatDealtFirstStrikeDamage = new CardCollection();
 
@@ -120,9 +118,6 @@ public class Combat {
         for (Table.Cell<Card, GameEntity, Integer> entry : combat.dealtDamageTo.cellSet()) {
             dealtDamageTo.put(map.map(entry.getRowKey()), map.map(entry.getColumnKey()), entry.getValue());
         }
-        for (Entry<Card, GameEntity> entry : combat.dealtDamageToThisCombat.entries()) {
-            dealtDamageToThisCombat.put(map.map(entry.getKey()), map.map(entry.getValue()));
-        }
 
         attackConstraints = new AttackConstraints(this);
     }
@@ -142,7 +137,6 @@ public class Combat {
         blockersOrderedForDamageAssignment.clear();
         lkiCache.clear();
         combatantsThatDealtFirstStrikeDamage.clear();
-        dealtDamageToThisCombat.clear();
 
         //update view for all attackers and blockers
         for (Card c : attackers) {
@@ -801,7 +795,6 @@ public class Combat {
             int dealtDamage = 0;
             for (Map.Entry<GameEntity, Integer> e : row.entrySet()) {
                 dealtDamage += e.getValue();
-                dealtDamageToThisCombat.put(damageSource, e.getKey());
             }
             // LifeLink for Combat Damage at this place
             if (dealtDamage > 0 && damageSource.hasKeyword("Lifelink")) {
