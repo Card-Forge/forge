@@ -31,9 +31,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.tournament.system.TournamentPairing;
-import forge.tournament.system.TournamentPlayer;
-import forge.util.Aggregates;
 import forge.util.Utils;
 
 public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestTournamentView {
