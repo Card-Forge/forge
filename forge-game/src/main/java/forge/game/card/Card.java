@@ -5852,6 +5852,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             damageToAdd = replaceDamage(damageToAdd, source, true);
             damageToAdd = preventDamage(damageToAdd, source, true);
 
+            if (damageToAdd > 0) {
+                getDamageHistory().registerCombatDamage(source);
+            }
             map.put(source, damageToAdd);
         }
 

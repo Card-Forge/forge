@@ -780,20 +780,7 @@ public class Combat {
                 continue;
             }
 
-            final Map<Card, Integer> assignedDamageMap = c.getAssignedDamageMap();
-            final Map<Card, Integer> damageMap = Maps.newHashMap();
-
-            for (final Entry<Card, Integer> entry : assignedDamageMap.entrySet()) {
-                final Card crd = entry.getKey();
-                c.getDamageHistory().registerCombatDamage(crd);
-                damageMap.put(crd, entry.getValue());
-                if (entry.getValue() > 0) {
-                    this.addDealtDamageTo(crd, c, entry.getValue());
-                }
-            }
-            c.addCombatDamage(damageMap);
-
-            damageMap.clear();
+            c.addCombatDamage(c.getAssignedDamageMap());
             c.clearAssignedDamage();
         }
         
