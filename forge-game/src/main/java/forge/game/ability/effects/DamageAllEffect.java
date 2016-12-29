@@ -97,8 +97,8 @@ public class DamageAllEffect extends SpellAbilityEffect {
             }
         }
 
-        if (damageSum > 0 && source.hasKeyword("Lifelink")) {
-            source.getController().gainLife(damageSum, source);
+        if (damageSum > 0 && sourceLKI.hasKeyword("Lifelink")) {
+            source.getController().gainLife(damageSum, sourceLKI);
         }
     }
 }
