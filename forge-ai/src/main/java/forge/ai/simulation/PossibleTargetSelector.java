@@ -70,7 +70,7 @@ public class PossibleTargetSelector {
         maxTargets = tgt.getMaxTargets(sa.getHostCard(), targetingSa);
 
         SimilarTargetSkipper skipper = new SimilarTargetSkipper();
-        for (GameObject o : tgt.getAllCandidates(sa, true)) {
+        for (GameObject o : tgt.getAllCandidates(targetingSa, true)) {
             if (maxTargets == 1 && skipper.shouldSkipTarget(o)) {
                 continue;
             }
