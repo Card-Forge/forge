@@ -280,24 +280,6 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         return btnLeaveTournament;
     }
 
-    private void testInjectStandings() {
-        QuestEventDraft qd = FModel.getQuest().getAchievements().getCurrentDraft();
-        TournamentPairing pairing = qd.getBracket().getNextPairing();
-
-        TournamentPlayer winner = Aggregates.random(pairing.getPairedPlayers());
-        for (TournamentPlayer tp : pairing.getPairedPlayers()) {
-            if (winner.equals(tp.getPlayer())) {
-                pairing.setWinner(winner);
-                break;
-            }
-        }
-        qd.getBracket().reportMatchCompletion(pairing);
-
-        onUpdate();
-        pnlTournamentActive.clear();
-        pnlTournamentActive.revalidate();
-    }
-    
     private class SelectTournamentPanel extends FContainer {
         @Override
         protected void doLayout(float width, float height) {
