@@ -31,6 +31,8 @@ import java.util.Map;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * <p>
@@ -240,7 +242,11 @@ public final class AbilityFactory {
             }
         }
 
-        if (type != AbilityRecordType.SubAbility || parent == null || parent.getApi() == ApiType.Charm) {
+        // FIXME: this is a list of APIs that fail to work unless additional abilities are created for them below.
+        // Is there are reason we are not just creating additional abilities by default for all APIs?
+        List<ApiType> apiList = new ArrayList<>(Arrays.asList(ApiType.Charm, ApiType.Repeat, ApiType.RepeatEach));
+
+        if (type != AbilityRecordType.SubAbility || parent == null || apiList.contains(parent.getApi())) {
             for (final String key : additionalAbilityKeys) {
                 if (mapParams.containsKey(key) && spellAbility.getAdditonalAbility(key) == null) {
                     spellAbility.setAdditionalAbility(key, getSubAbility(hostCard, mapParams.get(key), spellAbility));
