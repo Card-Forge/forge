@@ -19,7 +19,6 @@ package forge.game.combat;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,12 +27,15 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.Table;
+
 import forge.game.GameEntity;
 import forge.game.GameObjectMap;
 import forge.game.card.Card;
@@ -62,12 +64,12 @@ public class Combat {
     private final Multimap<GameEntity, AttackingBand> attackedByBands = Multimaps.synchronizedMultimap(ArrayListMultimap.<GameEntity, AttackingBand>create());
     private final Multimap<AttackingBand, Card> blockedBands = Multimaps.synchronizedMultimap(ArrayListMultimap.<AttackingBand, Card>create());
 
-    private final HashMap<Card, Integer> defendingDamageMap = new HashMap<Card, Integer>();
+    private final Map<Card, Integer> defendingDamageMap = Maps.newHashMap();
 
-    private Map<Card, CardCollection> attackersOrderedForDamageAssignment = new HashMap<Card, CardCollection>();
-    private Map<Card, CardCollection> blockersOrderedForDamageAssignment = new HashMap<Card, CardCollection>();
-    private Map<GameEntity, CombatLki> lkiCache = new HashMap<GameEntity, CombatLki>();
-    private Multimap<Card, GameEntity> dealtDamageTo = HashMultimap.create();
+    private Map<Card, CardCollection> attackersOrderedForDamageAssignment = Maps.newHashMap();
+    private Map<Card, CardCollection> blockersOrderedForDamageAssignment = Maps.newHashMap();
+    private Map<GameEntity, CombatLki> lkiCache = Maps.newHashMap();
+    private Table<Card, GameEntity, Integer> dealtDamageTo = HashBasedTable.create();
     private Multimap<Card, GameEntity> dealtDamageToThisCombat = HashMultimap.create();
     
     // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW) 
@@ -115,8 +117,8 @@ public class Combat {
             blockersOrderedForDamageAssignment.put(map.map(entry.getKey()), map.mapCollection(entry.getValue()));
         }
         // Note: Doesn't currently set up lkiCache, since it's just a cache and not strictly needed...
-        for (Entry<Card, GameEntity> entry : combat.dealtDamageTo.entries()) {
-            dealtDamageTo.put(map.map(entry.getKey()), map.map(entry.getValue()));
+        for (Table.Cell<Card, GameEntity, Integer> entry : combat.dealtDamageTo.cellSet()) {
+            dealtDamageTo.put(map.map(entry.getRowKey()), map.map(entry.getColumnKey()), entry.getValue());
         }
         for (Entry<Card, GameEntity> entry : combat.dealtDamageToThisCombat.entries()) {
             dealtDamageToThisCombat.put(map.map(entry.getKey()), map.map(entry.getValue()));
@@ -574,7 +576,7 @@ public class Combat {
             if (!isBlocked) {
                 for (Card attacker : ab.getAttackers()) {
                     // Run Unblocked Trigger
-                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    final Map<String, Object> runParams = Maps.newHashMap();
                     runParams.put("Attacker", attacker);
                     runParams.put("Defender",getDefenderByAttacker(attacker));
                     runParams.put("DefendingPlayer", getDefenderPlayerByAttacker(attacker));
@@ -720,22 +722,23 @@ public class Combat {
         return assignedDamage;
     }
 
-    public final void addDealtDamageTo(final Card source, final GameEntity ge) {
-        dealtDamageTo.put(source, ge);
+    public final void addDealtDamageTo(final Card source, final GameEntity ge, final int dmg) {
+        int old = dealtDamageTo.contains(source, ge) ? dealtDamageTo.get(source, ge) : 0;
+        dealtDamageTo.put(source, ge, dmg + old);
     }
 
     public void dealAssignedDamage() {
     	playerWhoAttacks.getGame().copyLastState();
 
         // This function handles both Regular and First Strike combat assignment
-        final HashMap<Card, Integer> defMap = defendingDamageMap;
-        final HashMap<GameEntity, CardCollection> wasDamaged = new HashMap<GameEntity, CardCollection>();
-        final Map<Card, Integer> damageDealtThisCombat = new HashMap<Card, Integer>();
+        final Map<Card, Integer> defMap = defendingDamageMap;
+        final Map<GameEntity, CardCollection> wasDamaged = Maps.newHashMap();
 
         for (final Entry<Card, Integer> entry : defMap.entrySet()) {
             GameEntity defender = getDefenderByAttacker(entry.getKey());
             if (defender instanceof Player) { // player
-                if (((Player) defender).addCombatDamage(entry.getValue(), entry.getKey())) {
+                int dmg = ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey()); 
+                if (dmg > 0) {
                     if (wasDamaged.containsKey(defender)) {
                         wasDamaged.get(defender).add(entry.getKey());
                     } else {
@@ -743,11 +746,12 @@ public class Combat {
                         l.add(entry.getKey());
                         wasDamaged.put(defender, l);
                     }
-                    damageDealtThisCombat.put(entry.getKey(), entry.getValue());
+                    this.addDealtDamageTo(entry.getKey(), defender, entry.getValue());
                 }
             }
             else if (defender instanceof Card) { // planeswalker
-                if (((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey())) {
+                int dmg = ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey()); 
+                if (dmg > 0) {
                     if (wasDamaged.containsKey(defender)) {
                         wasDamaged.get(defender).add(entry.getKey());
                     }
@@ -777,18 +781,14 @@ public class Combat {
             }
 
             final Map<Card, Integer> assignedDamageMap = c.getAssignedDamageMap();
-            final HashMap<Card, Integer> damageMap = new HashMap<Card, Integer>();
+            final Map<Card, Integer> damageMap = Maps.newHashMap();
 
             for (final Entry<Card, Integer> entry : assignedDamageMap.entrySet()) {
                 final Card crd = entry.getKey();
                 c.getDamageHistory().registerCombatDamage(crd);
                 damageMap.put(crd, entry.getValue());
                 if (entry.getValue() > 0) {
-                    if (damageDealtThisCombat.containsKey(crd)) {
-                        damageDealtThisCombat.put(crd, damageDealtThisCombat.get(crd) + entry.getValue());
-                    } else {
-                        damageDealtThisCombat.put(crd, entry.getValue());
-                    }
+                    this.addDealtDamageTo(crd, c, entry.getValue());
                 }
             }
             c.addCombatDamage(damageMap);
@@ -799,7 +799,7 @@ public class Combat {
         
         // Run triggers
         for (final GameEntity ge : wasDamaged.keySet()) {
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("DamageSources", wasDamaged.get(ge));
             runParams.put("DamageTarget", ge);
             ge.getGame().getTriggerHandler().runTrigger(TriggerType.CombatDamageDoneOnce, runParams, false);
@@ -807,19 +807,24 @@ public class Combat {
         // This was deeper before, but that resulted in the stack entry acting like before.
 
         // when ... deals combat damage to one or more
-        for (final Card damageSource : dealtDamageTo.keySet()) {
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            int dealtDamage = damageDealtThisCombat.containsKey(damageSource) ? damageDealtThisCombat.get(damageSource) : 0;
+        for (final Card damageSource : dealtDamageTo.rowKeySet()) {
+            final Map<String, Object> runParams = Maps.newHashMap();
+            Map<GameEntity, Integer> row = dealtDamageTo.row(damageSource);
+            
+            int dealtDamage = 0;
+            for (Map.Entry<GameEntity, Integer> e : row.entrySet()) {
+                dealtDamage += e.getValue();
+                dealtDamageToThisCombat.put(damageSource, e.getKey());
+            }
             // LifeLink for Combat Damage at this place
             if (dealtDamage > 0 && damageSource.hasKeyword("Lifelink")) {
                 damageSource.getController().gainLife(dealtDamage, damageSource);
             }
             runParams.put("DamageSource", damageSource);
-            runParams.put("DamageTargets", dealtDamageTo.get(damageSource));
+            runParams.put("DamageTargets", row.keySet());
             runParams.put("DamageAmount", dealtDamage);
             damageSource.getGame().getTriggerHandler().runTrigger(TriggerType.DealtCombatDamageOnce, runParams, false);
         }
-        dealtDamageToThisCombat.putAll(dealtDamageTo);
         dealtDamageTo.clear();
     }
 

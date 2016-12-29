@@ -6174,19 +6174,16 @@ public class Card extends GameEntity implements Comparable<Card> {
      * applied.
      */
     @Override
-    public final boolean addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat) {
+    public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat) {
 
         if (damageIn == 0) {
-            return false; // Rule 119.8
+            return 0; // Rule 119.8
         }
 
         addReceivedDamageFromThisTurn(source, damageIn);
         source.addDealtDamageToThisTurn(this, damageIn);
         if (isCombat) {
-            game.getCombat().addDealtDamageTo(source, this);
-        } else if (source.hasKeyword("Lifelink")) {
-            // LifeLink not for Combat Damage at this place
-            source.getController().gainLife(damageIn, source);
+            game.getCombat().addDealtDamageTo(source, this, damageIn);
         }
 
         // Run triggers
@@ -6231,7 +6228,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Play the Damage sound
             game.fireEvent(new GameEventCardDamaged(this, source, damageIn, damageType));
         }
-        return true;
+        return damageIn;
     }
 
     public final String getSetCode() {

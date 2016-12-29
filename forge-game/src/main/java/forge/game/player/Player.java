@@ -534,14 +534,14 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     // This function handles damage after replacement and prevention effects are applied
     @Override
-    public final boolean addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat) {
+    public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat) {
         if (amount <= 0) {
-            return false;
+            return 0;
         }
         //String additionalLog = "";
         source.addDealtDamageToPlayerThisTurn(getName(), amount);
         if (isCombat) {
-            game.getCombat().addDealtDamageTo(source, this);
+            game.getCombat().addDealtDamageTo(source, this, amount);
         }
 
         boolean infect = source.hasKeyword("Infect")
@@ -576,9 +576,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             for (final String type : source.getType()) {
                 source.getController().addProwlType(type);
             }
-        } else if (source.hasKeyword("Lifelink")) {
-            // LifeLink not for Combat Damage at this place
-            source.getController().gainLife(amount, source);
         }
 
         // Run triggers
@@ -592,7 +589,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
         game.fireEvent(new GameEventPlayerDamaged(this, source, amount, isCombat, infect));
-        return true;
+        return amount;
     }
 
     // This should be also usable by the AI to forecast an effect (so it must not change the game state)
@@ -888,7 +885,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return Aggregates.max(getOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
     }
 
-    public final boolean addCombatDamage(final int damage, final Card source) {
+    public final int addCombatDamage(final int damage, final Card source) {
         int damageToDo = damage;
 
         damageToDo = replaceDamage(damageToDo, source, true);
@@ -897,10 +894,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         addDamageAfterPrevention(damageToDo, source, true); // damage prevention is already checked
 
         if (damageToDo > 0) {
-        	source.getDamageHistory().registerCombatDamage(this);
-            return true;
+            source.getDamageHistory().registerCombatDamage(this);
         }
-        return false;
+        return damageToDo;
     }
 
     public final boolean canReceiveCounters(final CounterType type) {

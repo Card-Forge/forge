@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 public class DamageDealEffect extends SpellAbilityEffect {
 
@@ -119,6 +120,8 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final Card source = definedSources.get(0);
         final Card sourceLKI = sa.getHostCard().getGame().getChangeZoneLKIInfo(definedSources.get(0));
 
+        int damageSum = 0;
+        
         if (divideOnResolution) {
             // Dividing Damage up to multiple targets using combat damage box
             // Currently only used for Master of the Wild Hunt
@@ -138,9 +141,13 @@ public class DamageDealEffect extends SpellAbilityEffect {
             Player assigningPlayer = players.get(0);
             Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
             for (Entry<Card, Integer> dt : map.entrySet()) {
-                dt.getKey().addDamage(dt.getValue(), sourceLKI);
+                damageSum += dt.getKey().addDamage(dt.getValue(), sourceLKI);
             }
-            
+
+            // non combat damage cause lifegain there
+            if (!combatDmg && damageSum > 0 && sourceLKI.hasKeyword("Lifelink")) {
+                sourceLKI.getController().gainLife(damageSum, sourceLKI);
+            }
             return;
         }
         
@@ -155,18 +162,22 @@ public class DamageDealEffect extends SpellAbilityEffect {
                         c.clearAssignedDamage();
                     }
                     else if (noPrevention) {
-                        if (c.addDamageWithoutPrevention(dmg, sourceLKI) && remember) {
+                        int damagePrev = c.addDamageWithoutPrevention(dmg, sourceLKI);
+                        damageSum += damagePrev;
+                        if (damagePrev > 0 && remember) {
                             source.addRemembered(c);
                         }
                     } else if (combatDmg) {
-                        HashMap<Card, Integer> combatmap = new HashMap<Card, Integer>();
+                        HashMap<Card, Integer> combatmap = Maps.newHashMap();
                         combatmap.put(sourceLKI, dmg);
                         c.addCombatDamage(combatmap);
                         if (remember) {
                             source.addRemembered(c);
                         }
                     } else {
-                        if (c.addDamage(dmg, sourceLKI) && remember) {
+                        int damageDealt = c.addDamage(dmg, sourceLKI);
+                        damageSum += damageDealt;
+                        if (damageDealt > 0 && remember) {
                             source.addRemembered(c);
                         }
                     }
@@ -176,7 +187,9 @@ public class DamageDealEffect extends SpellAbilityEffect {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
                     if (noPrevention) {
-                        if (p.addDamageWithoutPrevention(dmg, sourceLKI) && remember) {
+                        int damagePrev = p.addDamageWithoutPrevention(dmg, sourceLKI);
+                        damageSum += damagePrev;
+                        if (damagePrev > 0 && remember) {
                             source.addRemembered(p);
                         }
                     } else if (combatDmg) {
@@ -185,12 +198,19 @@ public class DamageDealEffect extends SpellAbilityEffect {
                             source.addRemembered(p);
                         }
                     } else {
-                        if (p.addDamage(dmg, sourceLKI) && remember) {
+                        int damageDealt = p.addDamage(dmg, sourceLKI);
+                        damageSum += damageDealt;
+                        if (damageDealt > 0 && remember) {
                             source.addRemembered(p);
                         }
                     }
                 }
             }
+        }
+
+        // non combat damage cause lifegain there
+        if (!combatDmg && damageSum > 0 && sourceLKI.hasKeyword("Lifelink")) {
+            sourceLKI.getController().gainLife(damageSum, sourceLKI);
         }
     }
 }

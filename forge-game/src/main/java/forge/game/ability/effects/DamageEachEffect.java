@@ -75,18 +75,22 @@ public class DamageEachEffect extends SpellAbilityEffect {
                 final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
 
                 final int dmg = CardFactoryUtil.xCount(source, sa.getSVar("X"));
+                int damageSum = 0;
                 // System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                        c.addDamage(dmg, sourceLKI);
+                        damageSum += c.addDamage(dmg, sourceLKI);
                     }
 
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!targeted || p.canBeTargetedBy(sa)) {
-                        p.addDamage(dmg, sourceLKI);
+                        damageSum += p.addDamage(dmg, sourceLKI);
                     }
+                }
+                if (damageSum > 0 && sourceLKI.hasKeyword("Lifelink")) {
+                    sourceLKI.getController().gainLife(damageSum, sourceLKI);
                 }
             }
         }
@@ -98,7 +102,10 @@ public class DamageEachEffect extends SpellAbilityEffect {
 
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
                     // System.out.println(source+" deals "+dmg+" damage to "+source);
-                    source.addDamage(dmg, sourceLKI);
+                    int damage = source.addDamage(dmg, sourceLKI);
+                    if (damage > 0 && sourceLKI.hasKeyword("Lifelink")) {
+                        sourceLKI.getController().gainLife(damage, sourceLKI);
+                    }
                 }
             }
             if (sa.getParam("DefinedCards").equals("Remembered")) {
@@ -107,12 +114,16 @@ public class DamageEachEffect extends SpellAbilityEffect {
                     final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
 
                     Card rememberedcard;
+                    int damageSum = 0;
                     for (final Object o : sa.getHostCard().getRemembered()) {
                         if (o instanceof Card) {
                             rememberedcard = (Card) o;
                             // System.out.println(source + " deals " + dmg + " damage to " + rememberedcard);
-                            rememberedcard.addDamage(dmg, sourceLKI);
+                            damageSum += rememberedcard.addDamage(dmg, sourceLKI);
                         }
+                    }
+                    if (damageSum > 0 && sourceLKI.hasKeyword("Lifelink")) {
+                        sourceLKI.getController().gainLife(damageSum, sourceLKI);
                     }
                 }
             }

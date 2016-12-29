@@ -52,6 +52,9 @@ public class DamageAllEffect extends SpellAbilityEffect {
         final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
+        final boolean rememberCard = sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedCreature");
+        final boolean rememberPlayer = sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedPlayer");
+
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
 
         String players = "";
@@ -74,8 +77,11 @@ public class DamageAllEffect extends SpellAbilityEffect {
 
         list = AbilityUtils.filterListByType(list, sa.getParam("ValidCards"), sa);
 
+        int damageSum = 0;
         for (final Card c : list) {
-            if (c.addDamage(dmg, sourceLKI) && (sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedCreature"))) {
+            int cardDamage = c.addDamage(dmg, sourceLKI);
+            damageSum += cardDamage;
+            if (cardDamage > 0 && rememberCard) {
                 source.addRemembered(c);
             }
         }
@@ -83,10 +89,16 @@ public class DamageAllEffect extends SpellAbilityEffect {
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                if (p.addDamage(dmg, sourceLKI) && (sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedPlayer"))) {
+                int playerDamage = p.addDamage(dmg, sourceLKI);
+                damageSum += playerDamage;
+                if (playerDamage > 0 && rememberPlayer) {
                     source.addRemembered(p);
                 }
             }
+        }
+
+        if (damageSum > 0 && source.hasKeyword("Lifelink")) {
+            source.getController().gainLife(damageSum, source);
         }
     }
 }

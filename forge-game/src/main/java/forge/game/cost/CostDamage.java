@@ -17,6 +17,7 @@
  */
 package forge.game.cost;
 
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -58,7 +59,12 @@ public class CostDamage extends CostPart {
     
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa) {
-        return payer.addDamage(decision.c, sa.getHostCard());
+        final Card source = sa.getHostCard();
+        int dmg = payer.addDamage(decision.c, source);
+        if (dmg > 0 && source.hasKeyword("Lifelink")) {
+            source.getController().gainLife(dmg, source);
+        }
+        return decision.c > 0;
     }
 
     @Override
