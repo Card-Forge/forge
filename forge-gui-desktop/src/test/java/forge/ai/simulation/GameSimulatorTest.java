@@ -705,4 +705,40 @@ public class GameSimulatorTest extends TestCase {
         Card giantCopy = findCardWithName(copy, giantCardName);
         assertEquals(2, giantCopy.getDamage());
     }
+    
+    public void testTransform() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard("Swamp", p);
+        addCard("Swamp", p);
+        addCard("Swamp", p);
+        String lilianaCardName = "Liliana, Heretical Healer";
+        String lilianaPWName = "Liliana, Defiant Necromancer";
+        Card lilianaInPlay = addCard(lilianaCardName, p);
+        Card lilianaInHand = addCardToZone(lilianaCardName, p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        
+        assertTrue(lilianaInPlay.isCreature());
+        assertEquals(2, lilianaInPlay.getNetPower());
+        assertEquals(3, lilianaInPlay.getNetToughness());
+        
+        SpellAbility playLiliana = lilianaInHand.getSpellAbilities().get(0);
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(playLiliana);
+        Game simGame = sim.getSimulatedGameState();
+        assertNull(findCardWithName(simGame, lilianaCardName));
+        Card lilianaPW = findCardWithName(simGame, lilianaPWName);
+        assertNotNull(lilianaPW);
+        assertTrue(lilianaPW.isPlaneswalker());
+        assertEquals(3, lilianaPW.getCurrentLoyalty());
+
+        GameCopier copier = new GameCopier(simGame);
+        Game copy = copier.makeCopy();
+        Card lilianaPWCopy = findCardWithName(copy, lilianaPWName);
+        assertNotNull(lilianaPWCopy);
+        assertTrue(lilianaPWCopy.isPlaneswalker());
+        assertEquals(3, lilianaPWCopy.getCurrentLoyalty());
+    }
 }

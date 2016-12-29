@@ -186,6 +186,7 @@ public class GameCopier {
             Card otherCard = cardMap.get(card);
             otherCard.setTimestamp(card.getTimestamp());
             otherCard.setSickness(card.hasSickness());
+            otherCard.setState(card.getCurrentStateName(), false);
             if (card.isEnchanting()) {
                 otherCard.setEnchanting(gameObjectMap.map(card.getEnchanting()));
             }
