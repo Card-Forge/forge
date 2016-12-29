@@ -4,10 +4,10 @@ Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature | Execute$ CoinFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacks, flip a coin. If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage.
 SVar:CoinFlip:DB$ FlipACoin | WinSubAbility$ CreateWinEffect | LoseSubAbility$ CreateLossEffect
 # Winning Effect
-SVar:CreateWinEffect:DB$ Effect | Name$ Impulsive Maneuvers Win Effect | ReplacementEffects$ EventWinDamageDone | SVars$ IMDmgTimes2,WinX,ExileEffect | References$ EventWinDamageDone,IMDmgTimes2,WinX | ImprintCards$ TriggeredAttacker
-SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | ReplaceWith$ IMDmgTimes2 | IsCombat$ True | Description$ The next time creature would deal combat damage this turn, it deals double that damage instead.
-SVar:IMDmgTimes2:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | NumDmg$ WinX | References$ WinX | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | SubAbility$ ExileEffect
-SVar:WinX:ReplaceCount$DamageAmount/Times.2
+SVar:CreateWinEffect:DB$ Effect | Name$ Impulsive Maneuvers Win Effect | ReplacementEffects$ EventWinDamageDone | SVars$ DmgTwice,WinX,ExileEffect | References$ EventWinDamageDone,DmgTwice,WinX | ImprintCards$ TriggeredAttacker
+SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | ReplaceWith$ DmgTwice | Description$ The next time creature would deal combat damage this turn, it deals double that damage instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ WinX | References$ WinX | SubAbility$ ExileEffect
+SVar:WinX:ReplaceCount$DamageAmount/Twice
 # Losing Effect
 SVar:CreateLossEffect:DB$ Effect | Name$ Impulsive Maneuvers Loss Effect | ReplacementEffects$ EventLossDamageDone | SVars$ ExileEffect | References$ EventLossDamageDone,ExileEffect | ImprintCards$ TriggeredAttacker
 SVar:EventLossDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | ReplaceWith$ ExileEffect | PreventionEffect$ True | IsCombat$ True | Description$ The next time creature would deal combat damage this turn, prevent that damage.

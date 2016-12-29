@@ -2,12 +2,10 @@ Name:Overblaze
 ManaCost:3 R
 Types:Instant Arcane
 K:Splice:Arcane:2 R R
-A:SP$ Effect | Cost$ 3 R | Name$ Overblaze Effect | ValidTgts$ Permanent | RememberObjects$ Targeted | ReplacementEffects$ OverblazeEvent1,OverblazeEvent2 | SVars$ DmgTwice,DmgTwiceCombat,X | References$ OverblazeEvent1,OverblazeEvent2,DmgTwice,DmgTwiceCombat,X | SpellDescription$ Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
-SVar:OverblazeEvent1:Event$ DamageDone | ValidSource$ Permanent.IsRemembered | ValidTarget$ Creature,Player | IsCombat$ False | ReplaceWith$ DmgTwice | Description$ Each time target permanent would deal noncombat damage to a creature or player this turn, it deals double that damage to that creature or player instead.
-SVar:DmgTwice:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
-SVar:OverblazeEvent2:Event$ DamageDone | ValidSource$ Permanent.IsRemembered | ValidTarget$ Creature,Player | IsCombat$ True | ReplaceWith$ DmgTwiceCombat | Description$ Each time target permanent would deal combat damage to a creature or player this turn, it deals double that damage to that creature or player instead.
-SVar:DmgTwiceCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
-SVar:X:ReplaceCount$DamageAmount/Times.2
+A:SP$ Effect | Cost$ 3 R | Name$ Overblaze Effect | ValidTgts$ Permanent | RememberObjects$ Targeted | ReplacementEffects$ OverblazeEvent | SVars$ DmgTwice,X | References$ OverblazeEvent,DmgTwice,X | SpellDescription$ Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
+SVar:OverblazeEvent:Event$ DamageDone | ValidSource$ Permanent.IsRemembered | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwice | Description$ Each time target permanent would deal noncombat damage to a creature or player this turn, it deals double that damage to that creature or player instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
