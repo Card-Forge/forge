@@ -2,10 +2,7 @@ Name:Veteran Bodyguard
 ManaCost:3 W W
 Types:Creature Human
 PT:2/5
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ False | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelfCombat | IsCombat$ True | IsPresent$ Card.Self+untapped | Secondary$ True | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
-SVar:DmgSelf:AB$DealDamage | Cost$ 0 | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
-SVar:DmgSelfCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
-SVar:X:ReplaceCount$DamageAmount
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
+SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Self | VarType$ Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_bodyguard.jpg
 Oracle:As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.
