@@ -1,13 +1,16 @@
 package forge.game.ability.effects;
 
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.SpellAbility;
 
@@ -20,12 +23,30 @@ public class ReplaceEffect extends SpellAbilityEffect {
 
         final String varName = sa.getParam("VarName");
         final String varValue = sa.getParam("VarValue");
+        final String type = sa.getParamOrDefault("VarType", "amount");
 
         @SuppressWarnings("unchecked")
         Map<String, Object> originalParams = (Map<String, Object>) sa.getReplacingObject("OriginalParams");
         Map<String, Object> params = Maps.newHashMap(originalParams);
 
-        params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
+        if ("Card".equals(type)) {
+            List<Card> list = AbilityUtils.getDefinedCards(card, varValue, sa);
+            if (list.size() > 0) {
+                params.put(varName, list.get(0));
+            }
+        } else  if ("Player".equals(type)) {
+            List<Player> list = AbilityUtils.getDefinedPlayers(card, varValue, sa);
+            if (list.size() > 0) {
+                params.put(varName, list.get(0));
+            }
+        } else if ("GameEntity".equals(type)) {
+            List<GameObject> list = AbilityUtils.getDefinedObjects(card, varValue, sa);
+            if (list.size() > 0) {
+                params.put(varName, list.get(0));
+            }
+        } else {
+            params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
+        }
 
         //try to call replacementHandler with new Params
         ReplacementResult result = game.getReplacementHandler().run(params); 
