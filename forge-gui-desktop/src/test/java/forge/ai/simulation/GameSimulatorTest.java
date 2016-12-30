@@ -706,6 +706,238 @@ public class GameSimulatorTest extends TestCase {
         assertEquals(2, giantCopy.getDamage());
     }
     
+    public void testLifelinkDamageSpell() {
+        Game game = initAndCreateGame();
+        Player p1 = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+
+        String kalitasName = "Kalitas, Traitor of Ghet";
+        String pridemateName = "Ajani's Pridemate";
+        String indestructibilityName = "Indestructibility";
+        String ignitionName = "Chandra's Ignition";
+        String broodName = "Brood Monitor";
+
+        // enough to cast Chandra's Ignition
+        for (int i = 0; i < 5; ++i) {
+            addCard("Mountain", p1);
+        }
+
+        Card kalitas = addCard(kalitasName, p1);
+        Card pridemate = addCard(pridemateName, p1);
+        Card indestructibility = addCard(indestructibilityName, p1);
+
+        indestructibility.enchantEntity(pridemate);
+
+        Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
+        SpellAbility ignitionSA = ignition.getFirstSpellAbility();
+
+        addCard(broodName, p2);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p1);
+        ignitionSA.setTargetCard(kalitas);
+        sim.simulateSpellAbility(ignitionSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simKalitas = findCardWithName(simGame, kalitasName);
+        Card simPridemate = findCardWithName(simGame, pridemateName);
+        Card simBrood = findCardWithName(simGame, broodName);
+
+        // because it was destroyed
+        assertNull(simBrood);
+
+        assertEquals(0, simKalitas.getDamage());
+        assertEquals(3, simPridemate.getDamage());
+
+        // only triggered once
+        assertTrue(simPridemate.hasCounters());
+        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getToughnessBonusFromCounters());
+        assertEquals(1, simPridemate.getPowerBonusFromCounters());
+
+        // 3 times 3 damage with life gain = 9 + 20 = 29
+        assertEquals(29, simGame.getPlayers().get(0).getLife());
+        assertEquals(17, simGame.getPlayers().get(1).getLife());
+    }
+
+    public void testLifelinkDamageSpellMultiplier() {
+        Game game = initAndCreateGame();
+        Player p1 = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+
+        String kalitasName = "Kalitas, Traitor of Ghet";
+        String pridemateName = "Ajani's Pridemate";
+        String giselaName = "Gisela, Blade of Goldnight";
+        String ignitionName = "Chandra's Ignition";
+        String broodName = "Brood Monitor";
+
+        // enough to cast Chandra's Ignition
+        for (int i = 0; i < 5; ++i) {
+            addCard("Mountain", p1);
+        }
+
+        Card kalitas = addCard(kalitasName, p1);
+        addCard(pridemateName, p1);
+        addCard(giselaName, p1);
+
+        Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
+        SpellAbility ignitionSA = ignition.getFirstSpellAbility();
+
+        addCard(broodName, p2);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p1);
+        ignitionSA.setTargetCard(kalitas);
+        sim.simulateSpellAbility(ignitionSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simKalitas = findCardWithName(simGame, kalitasName);
+        Card simPridemate = findCardWithName(simGame, pridemateName);
+        Card simGisela = findCardWithName(simGame, giselaName);
+        Card simBrood = findCardWithName(simGame, broodName);
+
+        // because it was destroyed
+        assertNull(simBrood);
+
+        assertEquals(0, simKalitas.getDamage());
+        // 2 of the 3 are prevented
+        assertEquals(1, simPridemate.getDamage());
+        assertEquals(1, simGisela.getDamage());
+
+        // only triggered once
+        assertTrue(simPridemate.hasCounters());
+        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getToughnessBonusFromCounters());
+        assertEquals(1, simPridemate.getPowerBonusFromCounters());
+
+        // 2 times 3 / 2 rounded down = 2 * 1 = 2
+        // 2 times 3 * 2 = 12
+        assertEquals(34, simGame.getPlayers().get(0).getLife());
+        assertEquals(14, simGame.getPlayers().get(1).getLife());
+    }
+
+    public void testLifelinkDamageSpellRedirected() {
+        Game game = initAndCreateGame();
+        Player p1 = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+
+        String kalitasName = "Kalitas, Traitor of Ghet";
+        String pridemateName = "Ajani's Pridemate";
+        String indestructibilityName = "Indestructibility";
+        String ignitionName = "Chandra's Ignition";
+        String broodName = "Brood Monitor";
+        String palisadeName = "Palisade Giant";
+
+        // enough to cast Chandra's Ignition
+        for (int i = 0; i < 5; ++i) {
+            addCard("Mountain", p1);
+        }
+
+        Card kalitas = addCard(kalitasName, p1);
+        Card pridemate = addCard(pridemateName, p1);
+        Card indestructibility = addCard(indestructibilityName, p1);
+
+        indestructibility.enchantEntity(pridemate);
+
+        Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
+        SpellAbility ignitionSA = ignition.getFirstSpellAbility();
+
+        addCard(broodName, p2);
+        addCard(palisadeName, p2);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p1);
+        ignitionSA.setTargetCard(kalitas);
+        sim.simulateSpellAbility(ignitionSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simKalitas = findCardWithName(simGame, kalitasName);
+        Card simPridemate = findCardWithName(simGame, pridemateName);
+        Card simBrood = findCardWithName(simGame, broodName);
+        Card simPalisade = findCardWithName(simGame, palisadeName);
+
+        // not destroyed because damage redirected
+        assertNotNull(simBrood);
+        assertEquals(0, simBrood.getDamage());
+
+        //destoryed because of to much redirected damage
+        assertNull(simPalisade);
+
+        assertEquals(0, simKalitas.getDamage());
+        assertEquals(3, simPridemate.getDamage());
+
+        // only triggered once
+        assertTrue(simPridemate.hasCounters());
+        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getToughnessBonusFromCounters());
+        assertEquals(1, simPridemate.getPowerBonusFromCounters());
+
+        // 4 times 3 damage with life gain = 12 + 20 = 32
+        assertEquals(32, simGame.getPlayers().get(0).getLife());
+        assertEquals(20, simGame.getPlayers().get(1).getLife());
+    }
+
+    public void testLifelinkDamageSpellMultipleDamage() {
+        Game game = initAndCreateGame();
+        Player p1 = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+
+        String soulfireName = "Soulfire Grand Master";
+        String pridemateName = "Ajani's Pridemate";
+        String coneName = "Cone of Flame";
+
+        String bearCardName = "Runeclaw Bear";
+        String giantCardName = "Hill Giant";
+
+        // enough to cast Cone of Flame
+        for (int i = 0; i < 5; ++i) {
+            addCard("Mountain", p1);
+        }
+
+        addCard(soulfireName, p1);
+        addCard(pridemateName, p1);
+
+        Card bearCard = addCard(bearCardName, p2);
+        Card giantCard = addCard(giantCardName, p2);
+
+        Card cone = addCardToZone(coneName, p1, ZoneType.Hand);
+        SpellAbility coneSA = cone.getFirstSpellAbility();
+
+        coneSA.setTargetCard(bearCard); // one damage to bear
+        coneSA.getSubAbility().setTargetCard(giantCard); // two damage to giant
+        coneSA.getSubAbility().getSubAbility().getTargets().add(p2); // three damage to player
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p1);
+
+        sim.simulateSpellAbility(coneSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simBear = findCardWithName(simGame, bearCardName);
+        Card simGiant = findCardWithName(simGame, giantCardName);
+        Card simPridemate = findCardWithName(simGame, pridemateName);
+
+        // spell deals multiple damages to multiple targets, each of them causes lifegain
+        assertNotNull(simPridemate);
+        assertTrue(simPridemate.hasCounters());
+        assertEquals(3, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(3, simPridemate.getToughnessBonusFromCounters());
+        assertEquals(3, simPridemate.getPowerBonusFromCounters());
+
+        assertNotNull(simBear);
+        assertEquals(1, simBear.getDamage());
+
+        assertNotNull(simGiant);
+        assertEquals(2, simGiant.getDamage());
+
+        assertEquals(26, simGame.getPlayers().get(0).getLife());
+        assertEquals(17, simGame.getPlayers().get(1).getLife());
+    }
+
     public void testTransform() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
