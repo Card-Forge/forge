@@ -93,6 +93,7 @@ public class SpellAbilityVariables implements Cloneable {
         this.targetValidTargeting = sav.getTargetValidTargeting();
         this.targetsSingleTarget = sav.targetsSingleTarget();
         this.pwAbility = sav.isPwAbility();
+        this.presenceCondition = sav.getPresenceCondition();
     }
 
     // default values for Sorcery speed abilities
@@ -212,6 +213,9 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The b targetsSingleTargeting */
     private boolean targetsSingleTarget = false;
+
+    /** The Presence condition to check */
+    private String presenceCondition = "";
 
     /**
      * <p>
@@ -1033,5 +1037,19 @@ public class SpellAbilityVariables implements Cloneable {
             System.err.println(e);
         }
         return null;
+    }
+
+    /**
+     * @return the condition from the Presence keyword, empty if keyword is absent
+     */
+    public String getPresenceCondition() {
+        return this.presenceCondition;
+    }
+
+    /**
+     * @param s the condition from the Presence keyword
+     */
+    public void setPresenceCondition(String s) {
+        this.presenceCondition = s;
     }
 } // end class SpellAbilityVariables
