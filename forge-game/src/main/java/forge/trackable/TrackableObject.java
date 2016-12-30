@@ -30,6 +30,10 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         return id;
     }
 
+    public final Tracker getTracker() {
+        return tracker;
+    }
+
     @Override
     public int hashCode() {
         return id;

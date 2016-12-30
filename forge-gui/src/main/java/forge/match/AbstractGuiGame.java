@@ -72,10 +72,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void setGameView(final GameView gameView0) {
         if (gameView == null || gameView0 == null) {
             if (gameView0 != null) {
-                //ensure lookup dictionaries are reset before each game
-                TrackableTypes.CardViewType.clearLookupDictionary();
-                TrackableTypes.PlayerViewType.clearLookupDictionary();
-                TrackableTypes.StackItemViewType.clearLookupDictionary();
                 gameView0.updateObjLookup();
             }
             gameView = gameView0;

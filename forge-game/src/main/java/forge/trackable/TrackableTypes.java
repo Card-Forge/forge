@@ -37,13 +37,16 @@ public class TrackableTypes {
     }
 
     public static abstract class TrackableObjectType<T extends TrackableObject> extends TrackableType<T> {
-        private final HashMap<Integer, T> objLookup = new HashMap<Integer, T>();
-
         private TrackableObjectType() {
+        }
+
+        protected HashMap<Integer, T> getObjLookup(T obj) {
+            return obj.getTracker().getObjLookupForType(this);
         }
 
         public T lookup(T from) {
             if (from == null) { return null; }
+            HashMap<Integer, T> objLookup = getObjLookup(from);
             T to = objLookup.get(from.getId());
             if (to == null) {
                 objLookup.put(from.getId(), from);
@@ -52,12 +55,9 @@ public class TrackableTypes {
             return to;
         }
 
-        public void clearLookupDictionary() {
-            objLookup.clear();
-        }
-
         @Override
         protected void updateObjLookup(T newObj) {
+            HashMap<Integer, T> objLookup = getObjLookup(newObj);
             if (newObj != null && !objLookup.containsKey(newObj.getId())) {
                 objLookup.put(newObj.getId(), newObj);
                 newObj.updateObjLookup();
@@ -68,6 +68,7 @@ public class TrackableTypes {
         protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
             T newObj = from.get(prop);
             if (newObj != null) {
+                HashMap<Integer, T> objLookup = getObjLookup(newObj);
                 T existingObj = objLookup.get(newObj.getId());
                 if (existingObj != null) { //if object exists already, update its changed properties
                     existingObj.copyChangedProps(newObj);
@@ -107,14 +108,14 @@ public class TrackableTypes {
                 for (int i = 0; i < newCollection.size(); i++) {
                     T newObj = newCollection.get(i);
                     if (newObj != null) {
-                        T existingObj = itemType.objLookup.get(newObj.getId());
+                        T existingObj = itemType.getObjLookup(newObj).get(newObj.getId());
                         if (existingObj != null) { //if object exists already, update its changed properties
                             existingObj.copyChangedProps(newObj);
                             newCollection.remove(i);
                             newCollection.add(i, existingObj);
                         }
                         else { //if object is new, cache in object lookup
-                            itemType.objLookup.put(newObj.getId(), newObj);
+                            itemType.getObjLookup(newObj).put(newObj.getId(), newObj);
                         }
                     }
                 }
