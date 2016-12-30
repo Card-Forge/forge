@@ -3,11 +3,11 @@ package forge.ai.simulation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
@@ -81,7 +81,7 @@ public class GameCopier {
                 newPlayer.addSpellCastThisTurn();
             for (int j = 0; j < origPlayer.getLandsPlayedThisTurn(); j++)
                 newPlayer.addLandPlayedThisTurn();
-            newPlayer.setPoisonCounters(origPlayer.getPoisonCounters(), null);
+            newPlayer.setCounters(Maps.newEnumMap(origPlayer.getCounters()));
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setPreventNextDamage(origPlayer.getPreventNextDamage());
@@ -324,11 +324,7 @@ public class GameCopier {
 
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
-                for(Entry<CounterType, Integer> kv : counters.entrySet()) {
-                    String str = kv.getKey().toString();
-                    int count = kv.getValue();
-                    newCard.addCounter(CounterType.valueOf(str), count, false);
-                }
+                newCard.setCounters(Maps.newEnumMap(counters));
             }
             if (c.getChosenPlayer() != null) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));

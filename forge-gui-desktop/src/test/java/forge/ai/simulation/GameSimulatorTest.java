@@ -973,4 +973,28 @@ public class GameSimulatorTest extends TestCase {
         assertTrue(lilianaPWCopy.isPlaneswalker());
         assertEquals(3, lilianaPWCopy.getCurrentLoyalty());
     }
+
+    public void testEnergy() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard("Island", p);
+        String turtleCardName = "Thriving Turtle";
+        Card turtleCard = addCardToZone(turtleCardName, p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        assertEquals(0, p.getCounters(CounterType.ENERGY));
+
+        SpellAbility playTurtle = turtleCard.getSpellAbilities().get(0);
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(playTurtle);
+        Game simGame = sim.getSimulatedGameState();
+        Player simP = simGame.getPlayers().get(1);
+        assertEquals(2, simP.getCounters(CounterType.ENERGY));
+        
+        GameCopier copier = new GameCopier(simGame);
+        Game copy = copier.makeCopy();
+        Player copyP = copy.getPlayers().get(1);
+        assertEquals(2, copyP.getCounters(CounterType.ENERGY));
+    }
 }
