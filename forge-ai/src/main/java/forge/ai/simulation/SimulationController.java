@@ -108,7 +108,7 @@ public class SimulationController {
         int writeIndex = 0;
         for (int i = 0; i < sequence.size(); i++) {
             Plan.Decision d = sequence.get(i);
-            if (d.sa != null) {
+            if (d.saRef != null) {
                 sequence.set(writeIndex, d);
                 writeIndex++;
             } else if (d.targets != null) {
@@ -131,7 +131,7 @@ public class SimulationController {
         String modesStr = null;
 
         Plan.Decision d = currentStack.get(currentStack.size() - 1);
-        while (d.sa == null) {
+        while (d.saRef == null) {
             if (d.targets != null) {
                 targets = d.targets;
             } else if (d.choice != null) {
@@ -143,7 +143,7 @@ public class SimulationController {
             d = d.prevDecision;
         }
 
-        Plan.Decision merged  = new Plan.Decision(d.initialScore, d.prevDecision, d.sa, d.saHumanStr);
+        Plan.Decision merged  = new Plan.Decision(d.initialScore, d.prevDecision, d.saRef);
         merged.targets = targets;
         merged.choice = choice;
         merged.modes = modes;

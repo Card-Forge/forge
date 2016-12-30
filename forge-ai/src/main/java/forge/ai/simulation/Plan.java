@@ -38,12 +38,34 @@ public class Plan {
         return nextDecisionIndex;
     }
 
+    public static class SpellAbilityRef {
+        private final String sa;
+        private final String saHumanStr;
+
+        private SpellAbilityRef(SpellAbility sa) {
+            this.sa = sa.toString();
+            this.saHumanStr = SpellAbilityPicker.abilityToString(sa);
+        }
+
+        public boolean matches(SpellAbility sa) {
+            return sa.toString().equals(this.sa);
+        }
+
+        public String toString(boolean showHostCard) {
+            return showHostCard ? saHumanStr : sa;
+        }
+
+        @Override
+        public String toString() {
+            return toString(false);
+        }
+    }
+
     public static class Decision {
         final Decision prevDecision;
         final Score initialScore;
 
-        final String sa;
-        final String saHumanStr;
+        final SpellAbilityRef saRef;
         PossibleTargetSelector.Targets targets;
         String choice;
         int[] modes;
@@ -52,17 +74,15 @@ public class Plan {
         public Decision(Score initialScore, Decision prevDecision, SpellAbility sa) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
-            this.sa = sa.toString();
-            this.saHumanStr = SpellAbilityPicker.abilityToString(sa);
+            this.saRef = new SpellAbilityRef(sa);
             this.targets = null;
             this.choice = null;
         }
         
-        public Decision(Score initialScore, Decision prevDecision, String saString, String saHumanStr) {
+        public Decision(Score initialScore, Decision prevDecision, SpellAbilityRef saRef) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
-            this.sa = saString;
-            this.saHumanStr = saHumanStr;
+            this.saRef = saRef;
             this.targets = null;
             this.choice = null;
         }
@@ -70,8 +90,7 @@ public class Plan {
         public Decision(Score initialScore, Decision prevDecision, PossibleTargetSelector.Targets targets) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
-            this.sa = null;
-            this.saHumanStr = null;
+            this.saRef = null;
             this.targets = targets;
             this.choice = null;
         }
@@ -79,8 +98,7 @@ public class Plan {
         public Decision(Score initialScore, Decision prevDecision, Card choice) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
-            this.sa = null;
-            this.saHumanStr = null;
+            this.saRef = null;
             this.targets = null;
             this.choice = choice.getName();
         }
@@ -88,8 +106,7 @@ public class Plan {
         public Decision(Score initialScore, Decision prevDecision, int[] modes, String modesStr) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
-            this.sa = null;
-            this.saHumanStr = null;
+            this.saRef = null;
             this.targets = null;
             this.choice = null;
             this.modes = modes;
@@ -104,7 +121,7 @@ public class Plan {
             if (modesStr != null) {
                 sb.append(modesStr);
             } else {
-                sb.append(showHostCard ? saHumanStr : sa);
+                sb.append(saRef.toString(showHostCard));
             }
             if (targets != null) {
                 sb.append(" (targets: ").append(targets).append(")");

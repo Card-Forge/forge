@@ -193,7 +193,7 @@ public class SpellAbilityPicker {
             if (decision.initialScore.equals(origGameScore)) {
                 // TODO: Other safeguards like list of SAs and maybe the index and such?
                 for (final SpellAbility sa : availableSAs) {
-                    if (sa.toString().equals(decision.sa)) {
+                    if (decision.saRef.matches(sa)) {
                         // If modes != null, targeting will be done in chooseModeForAbility().
                         if (decision.modes == null && decision.targets != null) {
                             PossibleTargetSelector selector = new PossibleTargetSelector(sa);
@@ -208,7 +208,7 @@ public class SpellAbilityPicker {
                 }
                 saNotFound = true;
             }
-            print("Failed to continue planned action (" + decision.sa + "). Cause:");
+            print("Failed to continue planned action (" + decision.saRef + "). Cause:");
             if (badTargets) {
                 print("  Bad targets!");
             } else if (saNotFound) {
@@ -499,7 +499,7 @@ public class SpellAbilityPicker {
             if (plan.getSelectedDecision().targets != null) {
                 PossibleTargetSelector selector = new PossibleTargetSelector(sa, plannedModes);
                 if (!selector.selectTargets(decision.targets)) {
-                    print("Failed to continue planned action (" + decision.sa + "). Cause:");
+                    print("Failed to continue planned action (" + decision.saRef + "). Cause:");
                     print("  Bad targets for modes!");
                     return null;
                 }
