@@ -27,7 +27,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -40,6 +39,7 @@ import forge.game.GameObjectMap;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.util.collect.FCollection;
@@ -68,7 +68,7 @@ public class Combat {
     private Map<Card, CardCollection> attackersOrderedForDamageAssignment = Maps.newHashMap();
     private Map<Card, CardCollection> blockersOrderedForDamageAssignment = Maps.newHashMap();
     private Map<GameEntity, CombatLki> lkiCache = Maps.newHashMap();
-    private Table<Card, GameEntity, Integer> dealtDamageTo = HashBasedTable.create();
+    private CardDamageMap dealtDamageTo = new CardDamageMap();
 
     // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW) 
     private CardCollection combatantsThatDealtFirstStrikeDamage = new CardCollection();
@@ -716,45 +716,21 @@ public class Combat {
         return assignedDamage;
     }
 
-    public final void addDealtDamageTo(final Card source, final GameEntity ge, final int dmg) {
-        int old = dealtDamageTo.contains(source, ge) ? dealtDamageTo.get(source, ge) : 0;
-        dealtDamageTo.put(source, ge, dmg + old);
+    public final CardDamageMap getDamageMap() {
+        return dealtDamageTo;
     }
 
     public void dealAssignedDamage() {
     	playerWhoAttacks.getGame().copyLastState();
 
         // This function handles both Regular and First Strike combat assignment
-        final Map<Card, Integer> defMap = defendingDamageMap;
-        final Map<GameEntity, CardCollection> wasDamaged = Maps.newHashMap();
-
-        for (final Entry<Card, Integer> entry : defMap.entrySet()) {
+        for (final Entry<Card, Integer> entry : defendingDamageMap.entrySet()) {
             GameEntity defender = getDefenderByAttacker(entry.getKey());
             if (defender instanceof Player) { // player
-                int dmg = ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey()); 
-                if (dmg > 0) {
-                    if (wasDamaged.containsKey(defender)) {
-                        wasDamaged.get(defender).add(entry.getKey());
-                    } else {
-                        CardCollection l = new CardCollection();
-                        l.add(entry.getKey());
-                        wasDamaged.put(defender, l);
-                    }
-                    this.addDealtDamageTo(entry.getKey(), defender, entry.getValue());
-                }
+                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo);
             }
             else if (defender instanceof Card) { // planeswalker
-                int dmg = ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey()); 
-                if (dmg > 0) {
-                    if (wasDamaged.containsKey(defender)) {
-                        wasDamaged.get(defender).add(entry.getKey());
-                    }
-                    else {
-                        CardCollection l = new CardCollection();
-                        l.add(entry.getKey());
-                        wasDamaged.put(defender, l);
-                    }
-                }
+                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo);
             }
         }
 
@@ -765,41 +741,39 @@ public class Combat {
         combatants.addAll(getAllBlockers());
         combatants.addAll(getDefendingPlaneswalkers());
 
-        Card c;
-        for (int i = 0; i < combatants.size(); i++) {
-            c = combatants.get(i);
-
+        for (final Card c : combatants) {
             // if no assigned damage to resolve, move to next
             if (c.getTotalAssignedDamage() == 0) {
                 continue;
             }
 
-            c.addCombatDamage(c.getAssignedDamageMap());
+            c.addCombatDamage(c.getAssignedDamageMap(), dealtDamageTo);
             c.clearAssignedDamage();
         }
         
         // Run triggers
-        for (final GameEntity ge : wasDamaged.keySet()) {
+        for (final GameEntity ge : dealtDamageTo.columnKeySet()) {
             final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("DamageSources", wasDamaged.get(ge));
+            runParams.put("DamageSources", dealtDamageTo.column(ge).keySet());
             runParams.put("DamageTarget", ge);
             ge.getGame().getTriggerHandler().runTrigger(TriggerType.CombatDamageDoneOnce, runParams, false);
         }
         // This was deeper before, but that resulted in the stack entry acting like before.
 
+        // LifeLink for Combat Damage at this place
+        dealtDamageTo.dealLifelinkDamage();
+
         // when ... deals combat damage to one or more
         for (final Card damageSource : dealtDamageTo.rowKeySet()) {
             final Map<String, Object> runParams = Maps.newHashMap();
             Map<GameEntity, Integer> row = dealtDamageTo.row(damageSource);
-            
+
+            // TODO find better way to get the sum
             int dealtDamage = 0;
-            for (Map.Entry<GameEntity, Integer> e : row.entrySet()) {
-                dealtDamage += e.getValue();
+            for (Integer i : row.values()) {
+                dealtDamage += i;
             }
-            // LifeLink for Combat Damage at this place
-            if (dealtDamage > 0 && damageSource.hasKeyword("Lifelink")) {
-                damageSource.getController().gainLife(dealtDamage, damageSource);
-            }
+
             runParams.put("DamageSource", damageSource);
             runParams.put("DamageTargets", row.keySet());
             runParams.put("DamageAmount", dealtDamage);

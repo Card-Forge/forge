@@ -7,11 +7,12 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardDamageMap;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FightEffect extends SpellAbilityEffect {
 
@@ -52,14 +53,17 @@ public class FightEffect extends SpellAbilityEffect {
         }
         
         boolean fightToughness = sa.hasParam("FightWithToughness");
+        CardDamageMap damageMap = new CardDamageMap();
 
-        dealDamage(fighters.get(0), fighters.get(1), fightToughness);
-        dealDamage(fighters.get(1), fighters.get(0), fightToughness);
+        dealDamage(fighters.get(0), fighters.get(1), fightToughness, damageMap);
+        dealDamage(fighters.get(1), fighters.get(0), fightToughness, damageMap);
+
+        damageMap.dealLifelinkDamage();
 
         for (Card c : fighters) {
-        	final HashMap<String, Object> runParams = Maps.newHashMap();
-        	runParams.put("Fighter", c);
-        	game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
+            final Map<String, Object> runParams = Maps.newHashMap();
+            runParams.put("Fighter", c);
+            game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
         }
     }
 
@@ -106,14 +110,10 @@ public class FightEffect extends SpellAbilityEffect {
         return fighterList;
     }
     
-    private void dealDamage(Card source, Card target, boolean fightToughness) {
+    private void dealDamage(Card source, Card target, boolean fightToughness, CardDamageMap damageMap) {
         final int dmg = fightToughness ? source.getNetToughness() : source.getNetPower();
 
-        int damageDealt = target.addDamage(dmg, source);
-
-        if (damageDealt > 0 && source.hasKeyword("Lifelink")) {
-            source.getController().gainLife(damageDealt, source);
-        }
+        target.addDamage(dmg, source, damageMap);
     }
 
 }

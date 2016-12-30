@@ -21,7 +21,7 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -53,7 +53,7 @@ public class TriggerCombatDamageDoneOnce extends Trigger {
     @SuppressWarnings("unchecked")
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        final List<Card> srcs = (List<Card>) runParams2.get("DamageSources");
+        final Set<Card> srcs = (Set<Card>) runParams2.get("DamageSources");
         final GameEntity tgt = (GameEntity) runParams2.get("DamageTarget");
 
         if (this.mapParams.containsKey("ValidSource")) {

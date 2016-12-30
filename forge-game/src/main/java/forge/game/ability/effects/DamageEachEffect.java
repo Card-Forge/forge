@@ -4,6 +4,7 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardDamageMap;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -69,28 +70,26 @@ public class DamageEachEffect extends SpellAbilityEffect {
         final List<GameObject> tgts = getTargets(sa, "DefinedPlayers");
 
         final boolean targeted = (sa.usesTargeting());
+        CardDamageMap damageMap = new CardDamageMap();
 
         for (final Object o : tgts) {
             for (final Card source : sources) {
                 final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
 
                 final int dmg = CardFactoryUtil.xCount(source, sa.getSVar("X"));
-                int damageSum = 0;
+                
                 // System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                        damageSum += c.addDamage(dmg, sourceLKI);
+                        c.addDamage(dmg, sourceLKI, damageMap);
                     }
 
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!targeted || p.canBeTargetedBy(sa)) {
-                        damageSum += p.addDamage(dmg, sourceLKI);
+                        p.addDamage(dmg, sourceLKI, damageMap);
                     }
-                }
-                if (damageSum > 0 && sourceLKI.hasKeyword("Lifelink")) {
-                    sourceLKI.getController().gainLife(damageSum, sourceLKI);
                 }
             }
         }
@@ -102,10 +101,7 @@ public class DamageEachEffect extends SpellAbilityEffect {
 
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
                     // System.out.println(source+" deals "+dmg+" damage to "+source);
-                    int damage = source.addDamage(dmg, sourceLKI);
-                    if (damage > 0 && sourceLKI.hasKeyword("Lifelink")) {
-                        sourceLKI.getController().gainLife(damage, sourceLKI);
-                    }
+                    source.addDamage(dmg, sourceLKI, damageMap);
                 }
             }
             if (sa.getParam("DefinedCards").equals("Remembered")) {
@@ -113,20 +109,17 @@ public class DamageEachEffect extends SpellAbilityEffect {
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
                     final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
 
-                    Card rememberedcard;
-                    int damageSum = 0;
                     for (final Object o : sa.getHostCard().getRemembered()) {
                         if (o instanceof Card) {
-                            rememberedcard = (Card) o;
+                            Card rememberedcard = (Card) o;
                             // System.out.println(source + " deals " + dmg + " damage to " + rememberedcard);
-                            damageSum += rememberedcard.addDamage(dmg, sourceLKI);
+                            rememberedcard.addDamage(dmg, sourceLKI, damageMap);
                         }
-                    }
-                    if (damageSum > 0 && sourceLKI.hasKeyword("Lifelink")) {
-                        sourceLKI.getController().gainLife(damageSum, sourceLKI);
                     }
                 }
             }
         }
+
+        damageMap.dealLifelinkDamage();
     }
 }

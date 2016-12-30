@@ -534,15 +534,12 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     // This function handles damage after replacement and prevention effects are applied
     @Override
-    public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat) {
+    public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat, CardDamageMap damageMap) {
         if (amount <= 0) {
             return 0;
         }
         //String additionalLog = "";
         source.addDealtDamageToPlayerThisTurn(getName(), amount);
-        if (isCombat) {
-            game.getCombat().addDealtDamageTo(source, this, amount);
-        }
 
         boolean infect = source.hasKeyword("Infect")
                 || hasKeyword("All damage is dealt to you as though its source had infect.");
@@ -553,8 +550,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         else {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
-            if (hasKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.")
-                    && life <= amount) {
+            if (hasKeyword("DamageLifeThreshold:7") && life - 7 <= amount) {
+                // only active if life is over 7, so no bad thing
+                loseLife(Math.min(amount, life - 7));
+            } else if (hasKeyword("DamageLifeThreshold:1") && life <= amount) {
                 loseLife(Math.min(amount, life - 1));
             }
             else {
@@ -589,6 +588,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
         game.fireEvent(new GameEventPlayerDamaged(this, source, amount, isCombat, infect));
+
+        if (amount > 0) {
+            damageMap.put(source, this, amount);
+        }
         return amount;
     }
 
@@ -648,7 +651,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
         int restDamage = damage;
 
-        if (hasKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.")) {
+        if (hasKeyword("DamageLifeThreshold:7")) {
+            restDamage = Math.min(restDamage, life - 7);
+        } else if (hasKeyword("DamageLifeThreshold:1")) {
             restDamage = Math.min(restDamage, life - 1);
         }
 
@@ -714,29 +719,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         return restDamage;
-    }
-
-    @Override
-    public final int replaceDamage(final int damage, final Card source, final boolean isCombat) {
-        // Replacement effects
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "DamageDone");
-        repParams.put("Affected", this);
-        repParams.put("DamageSource", source);
-        repParams.put("DamageAmount", damage);
-        repParams.put("IsCombat", isCombat);
-
-        switch (getGame().getReplacementHandler().run(repParams)) {
-        case NotReplaced:
-            return damage;
-        case Updated:
-            // check if this is still the affected player
-            if (this.equals(repParams.get("Affected"))) {
-                return (int) repParams.get("DamageAmount");
-            }
-        default:       
-            return 0;
-        }
     }
 
     @Override
@@ -885,13 +867,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         return Aggregates.max(getOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
     }
 
-    public final int addCombatDamage(final int damage, final Card source) {
+    public final int addCombatDamage(final int damage, final Card source, CardDamageMap damageMap) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, true);
+        damageToDo = replaceDamage(damageToDo, source, true, true, damageMap);
         damageToDo = preventDamage(damageToDo, source, true);
 
-        addDamageAfterPrevention(damageToDo, source, true); // damage prevention is already checked
+        damageToDo = addDamageAfterPrevention(damageToDo, source, true, damageMap); // damage prevention is already checked
 
         if (damageToDo > 0) {
             source.getDamageHistory().registerCombatDamage(this);

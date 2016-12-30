@@ -1,11 +1,13 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -26,19 +28,20 @@ public class DamageAllEffect extends SpellAbilityEffect {
         final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
+        final String definedStr = sa.getParam("DamageSource");
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), definedStr, sa);
 
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
-        final Card source = definedSources.get(0);
-
-        if (source != sa.getHostCard()) {
-            sb.append(source.toString()).append(" deals");
+        if (!definedSources.isEmpty() && definedSources.get(0) != sa.getHostCard()) {
+            sb.append(definedSources.get(0).toString()).append(" deals");
+        } else if ("ParentTarget".equals(definedStr)){
+            sb.append("Target creature deals");
         } else {
             sb.append("Deals");
         }
 
         sb.append(" ").append(dmg).append(" damage to ").append(desc);
 
-            return sb.toString();
+        return sb.toString();
     }
 
     @Override
@@ -77,28 +80,30 @@ public class DamageAllEffect extends SpellAbilityEffect {
 
         list = AbilityUtils.filterListByType(list, sa.getParam("ValidCards"), sa);
 
-        int damageSum = 0;
+        CardDamageMap damageMap = new CardDamageMap();
+
         for (final Card c : list) {
-            int cardDamage = c.addDamage(dmg, sourceLKI);
-            damageSum += cardDamage;
-            if (cardDamage > 0 && rememberCard) {
-                source.addRemembered(c);
-            }
+            c.addDamage(dmg, sourceLKI, damageMap);
         }
 
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                int playerDamage = p.addDamage(dmg, sourceLKI);
-                damageSum += playerDamage;
-                if (playerDamage > 0 && rememberPlayer) {
-                    source.addRemembered(p);
+                p.addDamage(dmg, sourceLKI, damageMap);
+            }
+        }
+
+        // do Remember there
+        if (rememberCard || rememberPlayer) {
+            for (GameEntity e : damageMap.row(sourceLKI).keySet()) {
+                if (e instanceof Card && rememberCard) {
+                    source.addRemembered(e);
+                } else if (e instanceof Player && rememberPlayer) {
+                    source.addRemembered(e);
                 }
             }
         }
 
-        if (damageSum > 0 && sourceLKI.hasKeyword("Lifelink")) {
-            source.getController().gainLife(damageSum, sourceLKI);
-        }
+        damageMap.dealLifelinkDamage();
     }
 }

@@ -5844,12 +5844,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         return total;
     }
 
-    public final void addCombatDamage(final Map<Card, Integer> map) {
+    public final void addCombatDamage(final Map<Card, Integer> map, CardDamageMap damageMap) {
         for (final Entry<Card, Integer> entry : map.entrySet()) {
             final Card source = entry.getKey();
             int damageToAdd = entry.getValue();
 
-            damageToAdd = replaceDamage(damageToAdd, source, true);
+            damageToAdd = replaceDamage(damageToAdd, source, true, true, damageMap);
             damageToAdd = preventDamage(damageToAdd, source, true);
 
             if (damageToAdd > 0) {
@@ -5859,7 +5859,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (isInPlay()) {
-            addDamage(map);
+            addDamage(map, damageMap);
         }
     }
 
@@ -6142,33 +6142,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return restDamage;
     }
 
-    @Override
-    public final int replaceDamage(final int damageIn, final Card source, final boolean isCombat) {
-        // Replacement effects
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "DamageDone");
-        repParams.put("Affected", this);
-        repParams.put("DamageSource", source);
-        repParams.put("DamageAmount", damageIn);
-        repParams.put("IsCombat", isCombat);
-
-        switch (getGame().getReplacementHandler().run(repParams)) {
-        case NotReplaced:
-            return damageIn;
-        case Updated:
-            // check if this is still the affected card
-            if (this.equals(repParams.get("Affected"))) {
-                return (int) repParams.get("DamageAmount");
-            }
-        default:
-            return 0;
-        }
-    }
-
-    public final void addDamage(final Map<Card, Integer> sourcesMap) {
+    public final void addDamage(final Map<Card, Integer> sourcesMap, CardDamageMap damageMap) {
         for (final Entry<Card, Integer> entry : sourcesMap.entrySet()) {
             // damage prevention is already checked!
-            addDamageAfterPrevention(entry.getValue(), entry.getKey(), true);
+            addDamageAfterPrevention(entry.getValue(), entry.getKey(), true, damageMap);
         }
     }
 
@@ -6177,7 +6154,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * applied.
      */
     @Override
-    public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat) {
+    public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, CardDamageMap damageMap) {
 
         if (damageIn == 0) {
             return 0; // Rule 119.8
@@ -6185,9 +6162,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         addReceivedDamageFromThisTurn(source, damageIn);
         source.addDealtDamageToThisTurn(this, damageIn);
-        if (isCombat) {
-            game.getCombat().addDealtDamageTo(source, this, damageIn);
-        }
 
         // Run triggers
         final Map<String, Object> runParams = Maps.newTreeMap();
@@ -6231,6 +6205,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Play the Damage sound
             game.fireEvent(new GameEventCardDamaged(this, source, damageIn, damageType));
         }
+
+        if (damageIn > 0) {
+            damageMap.put(source, this, damageIn);
+        }
+
         return damageIn;
     }
 

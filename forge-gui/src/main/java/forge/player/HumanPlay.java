@@ -25,6 +25,7 @@ import forge.game.ability.effects.FlipCoinEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -385,8 +386,11 @@ public class HumanPlay {
                 if (!p.getController().confirmPayment(part, "Do you want " + source + " to deal " + amount + " damage to you?")) {
                     return false;
                 }
+                CardDamageMap damageMap = new CardDamageMap();
 
-                p.addDamage(amount, source);
+                p.addDamage(amount, source, damageMap);
+
+                damageMap.dealLifelinkDamage();
             }
             else if (part instanceof CostPutCounter) {
                 CounterType counterType = ((CostPutCounter) part).getCounter();

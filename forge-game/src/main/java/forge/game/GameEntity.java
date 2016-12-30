@@ -20,6 +20,7 @@ package forge.game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
@@ -55,22 +56,51 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         getView().updateName(this);
     }
 
-    public int addDamage(final int damage, final Card source) {
+    public int addDamage(final int damage, final Card source, final CardDamageMap damageMap) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, false);
+        damageToDo = replaceDamage(damageToDo, source, false, true, damageMap);
         damageToDo = preventDamage(damageToDo, source, false);
 
-        return addDamageAfterPrevention(damageToDo, source, false);
+        return addDamageAfterPrevention(damageToDo, source, false, damageMap);
     }
 
-    public int addDamageWithoutPrevention(final int damage, final Card source) {
-        int damageToDo = replaceDamage(damage, source, false);
-        return addDamageAfterPrevention(damageToDo, source, false);
+    public int addDamageWithoutPrevention(final int damage, final Card source, final CardDamageMap damageMap) {
+        int damageToDo = replaceDamage(damage, source, false, false, damageMap);
+        return addDamageAfterPrevention(damageToDo, source, false, damageMap);
+    }
+
+    public int replaceDamage(final int damage, final Card source, final boolean isCombat, final boolean prevention, final CardDamageMap damageMap) {
+     // Replacement effects
+        final Map<String, Object> repParams = Maps.newHashMap();
+        repParams.put("Event", "DamageDone");
+        repParams.put("Affected", this);
+        repParams.put("DamageSource", source);
+        repParams.put("DamageAmount", damage);
+        repParams.put("IsCombat", isCombat);
+
+        switch (getGame().getReplacementHandler().run(repParams)) {
+        case NotReplaced:
+            return damage;
+        case Updated:
+            int newDamage = (int) repParams.get("DamageAmount");
+            GameEntity newTarget = (GameEntity)repParams.get("Affected");
+            // check if this is still the affected card or player
+            if (this.equals(newTarget)) {
+                return newDamage;
+            } else {
+                if (prevention) {
+                    newDamage = newTarget.preventDamage(newDamage, source, isCombat);
+                }
+                newTarget.addDamageAfterPrevention(newDamage, source, isCombat, damageMap);
+            }
+        default:
+            return 0;
+        }
     }
 
     // This function handles damage after replacement and prevention effects are applied
-    public abstract int addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat);
+    public abstract int addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat, CardDamageMap damageMap);
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
@@ -79,8 +109,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
     public abstract int staticReplaceDamage(final int damage, final Card source, final boolean isCombat);
-
-    public abstract int replaceDamage(final int damage, final Card source, final boolean isCombat);
 
     public abstract int preventDamage(final int damage, final Card source, final boolean isCombat);
 
