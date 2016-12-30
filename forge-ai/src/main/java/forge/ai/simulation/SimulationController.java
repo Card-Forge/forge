@@ -64,8 +64,8 @@ public class SimulationController {
         return scoreStack.get(scoreStack.size() - 1);
     }
     
-    public void evaluateSpellAbility(SpellAbility sa) {
-        currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), sa));
+    public void evaluateSpellAbility(List<SpellAbility> saList, int saIndex) {
+        currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), new Plan.SpellAbilityRef(saList, saIndex)));
     }
     
     public void evaluateCardChoice(Card choice) {

@@ -158,11 +158,11 @@ public class SpellAbilityPicker {
         SpellAbility bestSa = null;
         Score bestSaValue = origGameScore;
         print("Evaluating... (orig score = " + origGameScore +  ")");
-        for (final SpellAbility sa : candidateSAs) {
-            Score value = evaluateSa(controller, sa);
+        for (int i = 0; i < candidateSAs.size(); i++) {
+            Score value = evaluateSa(controller, candidateSAs, i);
             if (value.value > bestSaValue.value) {
                 bestSaValue = value;
-                bestSa = sa;
+                bestSa = candidateSAs.get(i);
             }
         }
 
@@ -185,40 +185,37 @@ public class SpellAbilityPicker {
         return plan != null && plan.hasNextDecision();
     }
 
+    private void printPlannedActionFailure(Plan.Decision decision, String cause) {
+        print("Failed to continue planned action (" + decision.saRef + "). Cause:");
+        print("  " + cause + "!");
+        plan = null;
+    }
+
     private SpellAbility getPlannedSpellAbility(Score origGameScore, List<SpellAbility> availableSAs) {
-        if (hasActivePlan()) {
-            boolean badTargets = false;
-            boolean saNotFound = false;
-            Plan.Decision decision = plan.selectNextDecision();
-            if (decision.initialScore.equals(origGameScore)) {
-                // TODO: Other safeguards like list of SAs and maybe the index and such?
-                for (final SpellAbility sa : availableSAs) {
-                    if (decision.saRef.matches(sa)) {
-                        // If modes != null, targeting will be done in chooseModeForAbility().
-                        if (decision.modes == null && decision.targets != null) {
-                            PossibleTargetSelector selector = new PossibleTargetSelector(sa);
-                            if (!selector.selectTargets(decision.targets)) {
-                                badTargets = true;
-                                break;
-                            }
-                        }
-                        print("Planned decision " + plan.getNextDecisionIndex() + ": " + decision);
-                        return sa;
-                    }
-                }
-                saNotFound = true;
-            }
-            print("Failed to continue planned action (" + decision.saRef + "). Cause:");
-            if (badTargets) {
-                print("  Bad targets!");
-            } else if (saNotFound) {
-                print("  Couldn't find spell/ability!");
-            } else {
-                print("  Unexpected game score (" + decision.initialScore + " vs. expected " + origGameScore + ")!");
-            }
+        if (!hasActivePlan()) {
             plan = null;
+            return null;
         }
-        return null;
+        Plan.Decision decision = plan.selectNextDecision();
+        if (!decision.initialScore.equals(origGameScore)) {
+            printPlannedActionFailure(decision, "Unexpected game score (" + decision.initialScore + " vs. expected " + origGameScore + ")");
+            return null;
+        }
+        SpellAbility sa = decision.saRef.findReferencedAbility(availableSAs);
+        if (sa == null) {
+            printPlannedActionFailure(decision, "Couldn't find spell/ability!");
+            return null;
+        }
+        // If modes != null, targeting will be done in chooseModeForAbility().
+        if (decision.modes == null && decision.targets != null) {
+            PossibleTargetSelector selector = new PossibleTargetSelector(sa);
+            if (selector.selectTargets(decision.targets)) {
+                printPlannedActionFailure(decision, "Bad targets");
+                return null;
+            }
+        }
+        print("Planned decision " + plan.getNextDecisionIndex() + ": " + decision);
+        return sa;
     }
  
     public Score getScoreForChosenAbility() {
@@ -315,8 +312,9 @@ public class SpellAbilityPicker {
         return modes;
     }
 
-    private Score evaluateSa(final SimulationController controller, SpellAbility sa) {
-        controller.evaluateSpellAbility(sa);
+    private Score evaluateSa(final SimulationController controller, List<SpellAbility> saList, int saIndex) {
+        controller.evaluateSpellAbility(saList, saIndex);
+        SpellAbility sa = saList.get(saIndex);
 
         Score bestScore = new Score(Integer.MIN_VALUE);
         Interceptor interceptor = new Interceptor() {
@@ -499,8 +497,7 @@ public class SpellAbilityPicker {
             if (plan.getSelectedDecision().targets != null) {
                 PossibleTargetSelector selector = new PossibleTargetSelector(sa, plannedModes);
                 if (!selector.selectTargets(decision.targets)) {
-                    print("Failed to continue planned action (" + decision.saRef + "). Cause:");
-                    print("  Bad targets for modes!");
+                    printPlannedActionFailure(decision, "Bad targets for modes");
                     return null;
                 }
             }

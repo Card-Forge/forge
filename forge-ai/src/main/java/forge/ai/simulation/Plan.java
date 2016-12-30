@@ -39,20 +39,29 @@ public class Plan {
     }
 
     public static class SpellAbilityRef {
-        private final String sa;
+        private final int saIndex;
+        private final int saCount;
+        private final String saStr;
         private final String saHumanStr;
 
-        private SpellAbilityRef(SpellAbility sa) {
-            this.sa = sa.toString();
+        public SpellAbilityRef(List<SpellAbility> saList, int saIndex) {
+            this.saIndex = saIndex;
+            this.saCount = saList.size();
+            SpellAbility sa = saList.get(saIndex);
+            this.saStr = sa.toString();
             this.saHumanStr = SpellAbilityPicker.abilityToString(sa);
         }
 
-        public boolean matches(SpellAbility sa) {
-            return sa.toString().equals(this.sa);
+        public SpellAbility findReferencedAbility(List<SpellAbility> availableSAs) {
+            if (availableSAs.size() != saCount) {
+                return null;
+            }
+            SpellAbility sa = availableSAs.get(saIndex);
+            return sa.toString().equals(saStr) ? sa : null;
         }
 
         public String toString(boolean showHostCard) {
-            return showHostCard ? saHumanStr : sa;
+            return showHostCard ? saHumanStr : saStr;
         }
 
         @Override
@@ -71,14 +80,6 @@ public class Plan {
         int[] modes;
         String modesStr; // for human pretty-print consumption only
 
-        public Decision(Score initialScore, Decision prevDecision, SpellAbility sa) {
-            this.initialScore = initialScore;
-            this.prevDecision = prevDecision;
-            this.saRef = new SpellAbilityRef(sa);
-            this.targets = null;
-            this.choice = null;
-        }
-        
         public Decision(Score initialScore, Decision prevDecision, SpellAbilityRef saRef) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
