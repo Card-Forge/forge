@@ -477,6 +477,7 @@ forge-game/src/main/java/forge/game/card/CardCollection.java -text
 forge-game/src/main/java/forge/game/card/CardCollectionView.java -text
 forge-game/src/main/java/forge/game/card/CardColor.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardDamageHistory.java -text
+forge-game/src/main/java/forge/game/card/CardDamageMap.java -text
 forge-game/src/main/java/forge/game/card/CardFactory.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardFactoryUtil.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardLists.java svneol=native#text/plain
