@@ -178,6 +178,13 @@ public class SimulationController {
         if (!(target instanceof Card)) {  return null; }
         Card hostCard = sa.getHostCard();
         for (int i = simulatorStack.size() - 1; i >= 0; i--) {
+            if (target == null || hostCard == null) {
+                // This could happen when evaluating something that couldn't exist
+                // in the original game - for example, targeting a token that came
+                // into being as a result of simulating something earlier. Unfortunately,
+                // we can't cache this case.
+                return null;
+            }
             GameCopier copier = simulatorStack.get(i).getGameCopier();
             if (copier.getCopiedGame() != hostCard.getGame()) {
                 throw new RuntimeException("Expected hostCard and copier game to match!");
