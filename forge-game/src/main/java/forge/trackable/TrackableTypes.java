@@ -57,6 +57,7 @@ public class TrackableTypes {
 
         @Override
         protected void updateObjLookup(Tracker tracker, T newObj) {
+            if (tracker == null) { return; }
             HashMap<Integer, T> objLookup = getObjLookup(tracker);
             if (newObj != null && !objLookup.containsKey(newObj.getId())) {
                 objLookup.put(newObj.getId(), newObj);
