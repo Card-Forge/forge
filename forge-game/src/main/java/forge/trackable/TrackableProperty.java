@@ -169,8 +169,8 @@ public enum TrackableProperty {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> void updateObjLookup(T newObj) {
-        ((TrackableType<T>)type).updateObjLookup(newObj);
+    public <T> void updateObjLookup(Tracker tracker, T newObj) {
+        ((TrackableType<T>)type).updateObjLookup(tracker, newObj);
     }
 
     public void copyChangedProps(TrackableObject from, TrackableObject to) {

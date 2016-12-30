@@ -26,7 +26,7 @@ public class TrackableTypes {
         private TrackableType() {
         }
 
-        protected void updateObjLookup(T newObj) {
+        protected void updateObjLookup(Tracker tracker, T newObj) {
         }
         protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
             to.set(prop, from.get(prop));
@@ -40,13 +40,13 @@ public class TrackableTypes {
         private TrackableObjectType() {
         }
 
-        protected HashMap<Integer, T> getObjLookup(T obj) {
-            return obj.getTracker().getObjLookupForType(this);
+        protected HashMap<Integer, T> getObjLookup(Tracker tracker) {
+            return tracker.getObjLookupForType(this);
         }
 
         public T lookup(T from) {
             if (from == null) { return null; }
-            HashMap<Integer, T> objLookup = getObjLookup(from);
+            HashMap<Integer, T> objLookup = getObjLookup(from.getTracker());
             T to = objLookup.get(from.getId());
             if (to == null) {
                 objLookup.put(from.getId(), from);
@@ -56,8 +56,8 @@ public class TrackableTypes {
         }
 
         @Override
-        protected void updateObjLookup(T newObj) {
-            HashMap<Integer, T> objLookup = getObjLookup(newObj);
+        protected void updateObjLookup(Tracker tracker, T newObj) {
+            HashMap<Integer, T> objLookup = getObjLookup(tracker);
             if (newObj != null && !objLookup.containsKey(newObj.getId())) {
                 objLookup.put(newObj.getId(), newObj);
                 newObj.updateObjLookup();
@@ -68,7 +68,7 @@ public class TrackableTypes {
         protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
             T newObj = from.get(prop);
             if (newObj != null) {
-                HashMap<Integer, T> objLookup = getObjLookup(newObj);
+                HashMap<Integer, T> objLookup = getObjLookup(newObj.getTracker());
                 T existingObj = objLookup.get(newObj.getId());
                 if (existingObj != null) { //if object exists already, update its changed properties
                     existingObj.copyChangedProps(newObj);
@@ -90,11 +90,11 @@ public class TrackableTypes {
         }
 
         @Override
-        protected void updateObjLookup(TrackableCollection<T> newCollection) {
+        protected void updateObjLookup(Tracker tracker, TrackableCollection<T> newCollection) {
             if (newCollection != null) {
                 for (T newObj : newCollection) {
                     if (newObj != null) {
-                        itemType.updateObjLookup(newObj);
+                        itemType.updateObjLookup(tracker, newObj);
                     }
                 }
             }
@@ -105,17 +105,18 @@ public class TrackableTypes {
             TrackableCollection<T> newCollection = from.get(prop);
             if (newCollection != null) {
                 //swap in objects in old collection for objects in new collection
+                HashMap<Integer, T> objLookup = itemType.getObjLookup(from.getTracker());
                 for (int i = 0; i < newCollection.size(); i++) {
                     T newObj = newCollection.get(i);
                     if (newObj != null) {
-                        T existingObj = itemType.getObjLookup(newObj).get(newObj.getId());
+                        T existingObj = objLookup.get(newObj.getId());
                         if (existingObj != null) { //if object exists already, update its changed properties
                             existingObj.copyChangedProps(newObj);
                             newCollection.remove(i);
                             newCollection.add(i, existingObj);
                         }
                         else { //if object is new, cache in object lookup
-                            itemType.getObjLookup(newObj).put(newObj.getId(), newObj);
+                            objLookup.put(newObj.getId(), newObj);
                         }
                     }
                 }

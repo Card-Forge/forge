@@ -62,18 +62,18 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         if (value == null || value.equals(key.getDefaultValue())) {
             if (props.remove(key) != null) {
                 changedProps.add(key);
-                key.updateObjLookup(value);
+                key.updateObjLookup(tracker, value);
             }
         }
         else if (!value.equals(props.put(key, value))) {
             changedProps.add(key);
-            key.updateObjLookup(value);
+            key.updateObjLookup(tracker, value);
         }
     }
 
     public final void updateObjLookup() {
         for (final Entry<TrackableProperty, Object> prop : props.entrySet()) {
-            prop.getKey().updateObjLookup(prop.getValue());
+            prop.getKey().updateObjLookup(tracker, prop.getValue());
         }
     }
 
@@ -92,7 +92,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     //use when updating collection type properties with using set
     protected final void flagAsChanged(final TrackableProperty key) {
         changedProps.add(key);
-        key.updateObjLookup(props.get(key));
+        key.updateObjLookup(tracker, props.get(key));
     }
 
     public final void serialize(final TrackableSerializer ts) {
