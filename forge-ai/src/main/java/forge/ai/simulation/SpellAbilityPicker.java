@@ -209,7 +209,7 @@ public class SpellAbilityPicker {
         // If modes != null, targeting will be done in chooseModeForAbility().
         if (decision.modes == null && decision.targets != null) {
             PossibleTargetSelector selector = new PossibleTargetSelector(sa);
-            if (selector.selectTargets(decision.targets)) {
+            if (!selector.selectTargets(decision.targets)) {
                 printPlannedActionFailure(decision, "Bad targets");
                 return null;
             }
