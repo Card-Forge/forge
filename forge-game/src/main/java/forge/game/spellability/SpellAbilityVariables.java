@@ -214,7 +214,7 @@ public class SpellAbilityVariables implements Cloneable {
     /** The b targetsSingleTargeting */
     private boolean targetsSingleTarget = false;
 
-    /** The Presence condition to check */
+    /** The Presence keyword value containing the relevant condition */
     private String presenceCondition = "";
 
     /**
