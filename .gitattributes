@@ -16120,6 +16120,7 @@ forge-gui/res/cardsfolder/t/traveling_plague.txt -text
 forge-gui/res/cardsfolder/t/traverse_the_ulvenwald.txt -text
 forge-gui/res/cardsfolder/t/treacherous_link.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/treacherous_pit_dweller.txt -text
+forge-gui/res/cardsfolder/t/treacherous_terrain.txt -text
 forge-gui/res/cardsfolder/t/treacherous_urge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/treacherous_vampire.txt -text
 forge-gui/res/cardsfolder/t/treacherous_werewolf.txt -text

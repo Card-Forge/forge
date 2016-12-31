@@ -1,0 +1,11 @@
+Name:Treacherous Terrain
+ManaCost:6 R G
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 6 R G | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DmgOpp | SpellDescription$ CARDNAME deals damage to each opponent equal to the number of lands that player controls.
+SVar:DmgOpp:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | References$ X
+SVar:X:Count$Valid Land.RememberedPlayerCtrl
+K:TypeCycling:Basic:2
+SVar:AIPlayForSub:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_terrain.jpg
+Oracle:Treacherous Terrain deals damage to each opponent equal to the number of lands that player controls.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.)
