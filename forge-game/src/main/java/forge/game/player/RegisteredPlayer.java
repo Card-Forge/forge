@@ -127,7 +127,9 @@ public class RegisteredPlayer {
     	if (appliedVariants.contains(GameType.Planechase)) {
             start.planes = planes;
     	}
-    	start.setVanguardAvatar(vanguardAvatar);
+        if (appliedVariants.contains(GameType.Vanguard) || appliedVariants.contains(GameType.MomirBasic)) {
+        	start.setVanguardAvatar(vanguardAvatar);
+        }
     	return start;
     }
 
