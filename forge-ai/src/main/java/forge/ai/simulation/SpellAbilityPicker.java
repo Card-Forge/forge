@@ -27,8 +27,6 @@ import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
 
 public class SpellAbilityPicker {
-    public static boolean SIMULATE_LAND_PLAYS = true;
-
     private Game game;
     private Player player;
     private Score bestScore;
@@ -94,19 +92,17 @@ public class SpellAbilityPicker {
 
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
-        if (SIMULATE_LAND_PLAYS) {
-            CardCollection landsToPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
-            if (landsToPlay != null) {
-                HashMap<String, Card> landsDeDupe = new HashMap<String, Card>();
-                for (Card land : landsToPlay) {
-                    Card previousLand = landsDeDupe.get(land.getName());
-                    // Skip identical lands.
-                    if (previousLand != null && previousLand.getZone() == land.getZone() && previousLand.getOwner() == land.getOwner()) {
-                        continue;
-                    }
-                    landsDeDupe.put(land.getName(), land);
-                    all.add(new PlayLandAbility(land));
+        CardCollection landsToPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
+        if (landsToPlay != null) {
+            HashMap<String, Card> landsDeDupe = new HashMap<String, Card>();
+            for (Card land : landsToPlay) {
+                Card previousLand = landsDeDupe.get(land.getName());
+                // Skip identical lands.
+                if (previousLand != null && previousLand.getZone() == land.getZone() && previousLand.getOwner() == land.getOwner()) {
+                    continue;
                 }
+                landsDeDupe.put(land.getName(), land);
+                all.add(new PlayLandAbility(land));
             }
         }
 
