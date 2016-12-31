@@ -1283,8 +1283,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final CardCollectionView drawCards(final int n) {
         final CardCollection drawn = new CardCollection();
         final CardCollection toReveal = new CardCollection();
+
+        // always allow drawing cards before the game actually starts (e.g. Maralen of the Mornsong Avatar)
+        final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
+
         for (int i = 0; i < n; i++) {
-            if (!canDraw()) {
+            if (gameStarted && !canDraw()) {
                 return drawn;
             }
             drawn.addAll(doDraw(toReveal));
