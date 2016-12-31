@@ -520,7 +520,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         }
 
         if (this.mapParams.containsKey("PlayerTurn")) {
-            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, this.mapParams.get("Defined"), null);
+            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, this.mapParams.get("PlayerTurn"), null);
             if (!players.contains(game.getPhaseHandler().getPlayerTurn())) {
                 return false;
             }
