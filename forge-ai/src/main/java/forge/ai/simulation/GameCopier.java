@@ -85,6 +85,7 @@ public class GameCopier {
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setPreventNextDamage(origPlayer.getPreventNextDamage());
+            newPlayer.getManaPool().add(origPlayer.getManaPool());
             newPlayer.setCommanders(origPlayer.getCommanders()); // will be fixed up below
             playerMap.put(origPlayer, newPlayer);
         }

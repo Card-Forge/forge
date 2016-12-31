@@ -14,6 +14,7 @@ import forge.ai.ComputerUtilAbility;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.card.CardStateName;
+import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameRules;
@@ -996,5 +997,47 @@ public class GameSimulatorTest extends TestCase {
         Game copy = copier.makeCopy();
         Player copyP = copy.getPlayers().get(1);
         assertEquals(2, copyP.getCounters(CounterType.ENERGY));
+    }
+
+    public void testFloatingMana() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCard("Swamp", p);
+        Card darkRitualCard = addCardToZone("Dark Ritual", p, ZoneType.Hand);
+        Card darkConfidantCard = addCardToZone("Dark Confidant", p, ZoneType.Hand);
+        Card deathriteCard = addCardToZone("Deathrite Shaman", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        assertTrue(p.getManaPool().isEmpty());
+
+        SpellAbility playRitual = darkRitualCard.getSpellAbilities().get(0);
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(playRitual);
+        Game simGame = sim.getSimulatedGameState();
+        Player simP = simGame.getPlayers().get(1);
+        assertEquals(3, simP.getManaPool().totalMana());
+        assertEquals(3, simP.getManaPool().getAmountOfColor(MagicColor.BLACK));
+
+        Card darkConfidantCard2 = (Card) sim.getGameCopier().find(darkConfidantCard);
+        SpellAbility playDarkConfidant2 = darkConfidantCard2.getSpellAbilities().get(0);
+        Card deathriteCard2 = (Card) sim.getGameCopier().find(deathriteCard);
+        
+        GameSimulator sim2 = createSimulator(simGame, simP);
+        sim2.simulateSpellAbility(playDarkConfidant2);
+        Game sim2Game = sim2.getSimulatedGameState();
+        Player sim2P = sim2Game.getPlayers().get(1);
+        assertEquals(1, sim2P.getManaPool().totalMana());
+        assertEquals(1, sim2P.getManaPool().getAmountOfColor(MagicColor.BLACK));
+
+        Card deathriteCard3 = (Card) sim2.getGameCopier().find(deathriteCard2);
+        SpellAbility playDeathriteCard3 = deathriteCard3.getSpellAbilities().get(0);
+
+        GameSimulator sim3 = createSimulator(sim2Game, sim2P);
+        sim3.simulateSpellAbility(playDeathriteCard3);
+        Game sim3Game = sim3.getSimulatedGameState();
+        Player sim3P = sim3Game.getPlayers().get(1);
+        assertEquals(0, sim3P.getManaPool().totalMana());
+        assertEquals(0, sim3P.getManaPool().getAmountOfColor(MagicColor.BLACK));
     }
 }
