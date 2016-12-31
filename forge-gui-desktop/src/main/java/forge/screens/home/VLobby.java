@@ -533,7 +533,7 @@ public class VLobby implements ILobbyView {
         final PlayerPanel pp = playerPanels.get(playerIndex);
         final CardDetailPanel cdp = vgdAvatarDetails.get(playerIndex);
 
-        final PaperCard vanguardAvatar;
+        PaperCard vanguardAvatar = null;
         final Deck deck = decks[playerIndex];
         if (selected instanceof PaperCard) {
             pp.setVanguardButtonText(((PaperCard) selected).getName());
@@ -548,7 +548,7 @@ public class VLobby implements ILobbyView {
             cdp.setVisible(false);
 
             if (sel == null) {
-                vanguardAvatar = null;
+                return;
             } else {
                 if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
                     vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
