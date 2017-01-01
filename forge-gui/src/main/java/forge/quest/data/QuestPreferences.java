@@ -31,6 +31,9 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
     public enum QPref {
 
         // How many of each rarity comes in a won booster pack
+// How many of each rarity comes in a won booster pack
+// How many of each rarity comes in a won booster pack
+// How many of each rarity comes in a won booster pack
         BOOSTER_COMMONS("11"),
         BOOSTER_UNCOMMONS("3"),
         BOOSTER_RARES("1"),
@@ -170,7 +173,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
 
         ITEM_LEVEL_RESTRICTION("1"),
 
-        RANDOMLY_DECIDE_AI_VS_AI("0");
+        SIMULATE_AI_VS_AI_RESULTS("0");
 
         private final String strDefaultVal;
 

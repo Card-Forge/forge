@@ -12,6 +12,9 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiGame;
+import forge.item.PaperCard;
+import forge.limited.DraftRankCache;
+import forge.limited.SealedCardPoolGenerator;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -25,7 +28,9 @@ import forge.util.storage.IStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map.Entry;
 
 public class QuestDraftUtils {
     public static boolean TOURNAMENT_TOGGLE = false;
@@ -271,7 +276,7 @@ public class QuestDraftUtils {
 
         final DraftMatchup nextMatch = matchups.remove(0);
 
-        if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.RANDOMLY_DECIDE_AI_VS_AI) == 1) {
+        if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1) {
             // the user asked to decide the AI vs AI match randomly, so just call the UI update and leave the rest to injection code
             if (injectRandomMatchOutcome(false)) {
                 update(gui);
@@ -412,7 +417,42 @@ public class QuestDraftUtils {
         }
     }
 
+    // TODO: this is based on SealedPoolCardGenerator#sealedDeckComparer, maybe refactor that part to be able to use the same code everywhere
+    // to avoid code duplication
+    private static double rankDraftDeckValue(String sid) {
+        DeckGroup draftDecks = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME);
+        Deck d = sid.equals(QuestEventDraft.HUMAN) ? draftDecks.getHumanDeck() : draftDecks.getAiDecks().get(Integer.parseInt(sid) - 1);
+
+        double value = 0;
+        double divider = 0;
+
+        double best = 1.0;
+
+        for (Entry<PaperCard, Integer> kv : d.getMain()) {
+            PaperCard evalCard = kv.getKey();
+            int count = kv.getValue();
+            if (DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
+                double add = DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition());
+                value += add * count;
+                divider += count;
+                if (best > add) {
+                    best = add;
+                }
+            }
+        }
+
+        if (divider == 0 || value == 0) {
+            return 0;
+        }
+
+        value /= divider;
+
+        return (20.0 / (best + (2 * value)));
+    }
+
     public static boolean injectRandomMatchOutcome(boolean simHumanMatches) {
+        matchInProgress = true; // prevent the player from trying to start another match before we finish simulating results
+        
         QuestEventDraft qd = FModel.getQuest().getAchievements().getCurrentDraft();
 
         int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
@@ -427,11 +467,18 @@ public class QuestDraftUtils {
             }
         }
 
-        // TODO: bias the outcome towards a deck with higher total card draft rating value instead of going 50-50
-        boolean randomWinner = MyRandom.getRandom().nextBoolean();
-        qd.getStandings()[pos] = randomWinner ? sid1 : sid2;
+        // evaluate decks
+        double deck1Value = rankDraftDeckValue(sid1);
+        double deck2Value = rankDraftDeckValue(sid2);
+
+        // Bias victory towards a deck with higher total draft rank value
+        // Decks with higher rank value have 75% win rate vs. decks with lower rank.
+        boolean strongerDeckWon = MyRandom.getRandom().nextInt(100) < 75;
+        qd.getStandings()[pos] = strongerDeckWon ? (deck1Value > deck2Value ? sid1 : sid2) : (deck1Value > deck2Value ? sid2 : sid1);
 
         FModel.getQuest().save();
+
+        matchInProgress = false;
 
         return true;
     }

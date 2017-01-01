@@ -91,7 +91,7 @@ public class QuestPrefsScreen extends FScreen {
 
         //Quest Draft Tournament Preferences
         scroller.add(new PrefsHeader("Quest Draft Tournaments", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_EXPERT));
-        scroller.add(new PrefsOption("Do Not Play AI Matches", QPref.RANDOMLY_DECIDE_AI_VS_AI, PrefsGroup.DRAFT_TOURNAMENTS));
+        scroller.add(new PrefsOption("Simulate AI vs. AI Results", QPref.SIMULATE_AI_VS_AI_RESULTS, PrefsGroup.DRAFT_TOURNAMENTS));
 
         //Difficulty Adjustments (All)
         scroller.add(new PrefsHeader("Difficulty Adjustments (All)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_ALL));

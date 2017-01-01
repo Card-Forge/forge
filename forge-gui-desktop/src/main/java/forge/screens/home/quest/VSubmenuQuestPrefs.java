@@ -441,10 +441,10 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlDraftTournaments.removeAll();
         pnlDraftTournaments.add(lblErrDraftTournaments, "w 100%!, h 30px!, span 2 1");
 
-        FLabel randomAIMatches = new FLabel.Builder().text("Do Not Play AI Matches").fontAlign(SwingConstants.RIGHT).build();
+        FLabel randomAIMatches = new FLabel.Builder().text("Simulate AI vs. AI Results").fontAlign(SwingConstants.RIGHT).build();
         randomAIMatches.setToolTipText("If set to 1, AI vs. AI matches in draft tournaments will not be played and their outcome will be decided randomly instead.");
         pnlDraftTournaments.add(randomAIMatches, labelConstraints);
-        pnlDraftTournaments.add(new PrefInput(QPref.RANDOMLY_DECIDE_AI_VS_AI, QuestPreferencesErrType.DRAFT_TOURNAMENTS), fieldConstraints);
+        pnlDraftTournaments.add(new PrefInput(QPref.SIMULATE_AI_VS_AI_RESULTS, QuestPreferencesErrType.DRAFT_TOURNAMENTS), fieldConstraints);
 
     }
 
