@@ -16,12 +16,15 @@ import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.data.QuestPreferences;
 import forge.tournament.system.TournamentBracket;
 import forge.tournament.system.TournamentPairing;
 import forge.tournament.system.TournamentPlayer;
+import forge.util.MyRandom;
 import forge.util.storage.IStorage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class QuestDraftUtils {
@@ -146,6 +149,11 @@ public class QuestDraftUtils {
             latestSet--;
         }
 
+        if (latestSet == currentStandings.length - 1) {
+            // No more matches left
+            return;
+        }
+
         //Fill in any missing spots in previous brackets
         boolean foundMatchups = false;
         for (int i = 0; i <= latestSet && i <= 14; i += 2) {
@@ -262,6 +270,15 @@ public class QuestDraftUtils {
         gui.enableOverlay();
 
         final DraftMatchup nextMatch = matchups.remove(0);
+
+        if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.RANDOMLY_DECIDE_AI_VS_AI) == 1) {
+            // the user asked to decide the AI vs AI match randomly, so just call the UI update and leave the rest to injection code
+            if (injectRandomMatchOutcome(false)) {
+                update(gui);
+                return;
+            }
+        }
+
         matchInProgress = true;
 
         if (nextMatch.hasHumanPlayer()) {
@@ -393,5 +410,29 @@ public class QuestDraftUtils {
         private boolean hasHumanPlayer() {
             return humanPlayer != null;
         }
+    }
+
+    public static boolean injectRandomMatchOutcome(boolean simHumanMatches) {
+        QuestEventDraft qd = FModel.getQuest().getAchievements().getCurrentDraft();
+
+        int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
+        int offset = (pos - 8) * 2;
+
+        String sid1 = qd.getStandings()[offset];
+        String sid2 = qd.getStandings()[offset + 1];
+
+        if (sid1.equals(QuestEventDraft.HUMAN) || sid2.equals(QuestEventDraft.HUMAN)) {
+            if (!simHumanMatches) {
+                return false;
+            }
+        }
+
+        // TODO: bias the outcome towards a deck with higher total card draft rating value instead of going 50-50
+        boolean randomWinner = MyRandom.getRandom().nextBoolean();
+        qd.getStandings()[pos] = randomWinner ? sid1 : sid2;
+
+        FModel.getQuest().save();
+
+        return true;
     }
 }

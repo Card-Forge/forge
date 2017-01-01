@@ -19,6 +19,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestDraftUtils.Mode;
 import forge.quest.QuestEventDraft.QuestDraftFormat;
 import forge.quest.data.QuestAchievements;
+import forge.quest.data.QuestPreferences;
 import forge.tournament.system.TournamentBracket;
 import forge.tournament.system.TournamentPairing;
 import forge.tournament.system.TournamentPlayer;
@@ -459,5 +460,11 @@ public class QuestTournamentController {
 
         gui = GuiBase.getInterface().getNewGuiGame();
         QuestDraftUtils.startNextMatch(gui);
+
+        if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.RANDOMLY_DECIDE_AI_VS_AI) == 1) {
+            // need to force a view update after a random match outcome was injected into standings
+            view.populate();
+            update();
+        }
     }
 }

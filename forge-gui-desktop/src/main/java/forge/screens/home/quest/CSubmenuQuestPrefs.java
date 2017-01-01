@@ -84,6 +84,10 @@ public enum CSubmenuQuestPrefs implements ICDoc {
             view.getLblErrShop().setVisible(true);
             view.getLblErrShop().setText(s);
             break;
+        case DRAFT_TOURNAMENTS:
+            view.getLblErrDraftTournaments().setVisible(true);
+            view.getLblErrDraftTournaments().setText(s);
+            break;
         default:
             break;
         }
@@ -99,6 +103,7 @@ public enum CSubmenuQuestPrefs implements ICDoc {
         view.getLblErrDifficulty().setVisible(false);
         view.getLblErrRewards().setVisible(false);
         view.getLblErrShop().setVisible(false);
+        view.getLblErrDraftTournaments().setVisible(false);
     }
 
 }

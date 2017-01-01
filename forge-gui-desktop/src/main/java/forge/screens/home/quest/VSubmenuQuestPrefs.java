@@ -52,11 +52,13 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     private final JPanel pnlDifficulty = new JPanel();
     private final JPanel pnlBooster = new JPanel();
     private final JPanel pnlShop = new JPanel();
+    private final JPanel pnlDraftTournaments = new JPanel();
 
     private final FLabel lblErrRewards = new FLabel.Builder().text("Rewards Error").fontStyle(Font.BOLD).build();
     private final FLabel lblErrDifficulty = new FLabel.Builder().text("Difficulty Error").fontStyle(Font.BOLD).build();
     private final FLabel lblErrBooster = new FLabel.Builder().text("Booster Error").fontStyle(Font.BOLD).build();
     private final FLabel lblErrShop = new FLabel.Builder().text("Shop Error").fontStyle(Font.BOLD).build();
+    private final FLabel lblErrDraftTournaments = new FLabel.Builder().text("Draft Tournaments Error").fontStyle(Font.BOLD).build();
 
     private final QuestPreferences prefs = FModel.getQuestPreferences();
     private PrefInput focusTarget;
@@ -66,7 +68,8 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         REWARDS, /** */
         DIFFICULTY, /** */
         BOOSTER, /** */
-        SHOP
+        SHOP, /***/
+        DRAFT_TOURNAMENTS;
     }
 
     /**
@@ -82,6 +85,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         lblErrDifficulty.setForeground(Color.red);
         lblErrBooster.setForeground(Color.red);
         lblErrShop.setForeground(Color.red);
+        lblErrDraftTournaments.setForeground(Color.red);
 
         // Rewards panel
         final FPanel pnlTitleRewards = new FPanel();
@@ -127,6 +131,17 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlContent.add(pnlTitleShop, "w 96%!, h 36px!, gap 2% 0 10px 10px");
         pnlContent.add(pnlShop, "w 96%!, gap 2% 0 10px 20px");
         populateShop();
+
+        // Draft tournaments panel
+        final FPanel pnlTitleDraftTournaments = new FPanel();
+        pnlTitleDraftTournaments.setLayout(new MigLayout("insets 0, align center"));
+        pnlTitleDraftTournaments.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        pnlTitleDraftTournaments.add(new FLabel.Builder().text("Draft Tournaments")
+                .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COIN))
+                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+        pnlContent.add(pnlTitleDraftTournaments, "w 96%!, h 36px!, gap 2% 0 10px 10px");
+        pnlContent.add(pnlDraftTournaments, "w 96%!, gap 2% 0 10px 20px");
+        populateDraftTournaments();
     }
 
     /* (non-Javadoc)
@@ -188,6 +203,11 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     /** @return {@link javax.swing.JLabel} */
     public JLabel getLblErrBooster() {
         return lblErrBooster;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblErrDraftTournaments() {
+        return lblErrDraftTournaments;
     }
 
     public void focusFirstTextbox() {
@@ -411,6 +431,20 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
 
         pnlShop.add(new FLabel.Builder().text("Item Level Restriction").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlShop.add(new PrefInput(QPref.ITEM_LEVEL_RESTRICTION, QuestPreferencesErrType.SHOP), fieldConstraints);
+
+    }
+
+    private void populateDraftTournaments() {
+
+        pnlDraftTournaments.setOpaque(false);
+        pnlDraftTournaments.setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 3"));
+        pnlDraftTournaments.removeAll();
+        pnlDraftTournaments.add(lblErrDraftTournaments, "w 100%!, h 30px!, span 2 1");
+
+        FLabel randomAIMatches = new FLabel.Builder().text("Do Not Play AI Matches").fontAlign(SwingConstants.RIGHT).build();
+        randomAIMatches.setToolTipText("If set to 1, AI vs. AI matches in draft tournaments will not be played and their outcome will be decided randomly instead.");
+        pnlDraftTournaments.add(randomAIMatches, labelConstraints);
+        pnlDraftTournaments.add(new PrefInput(QPref.RANDOMLY_DECIDE_AI_VS_AI, QuestPreferencesErrType.DRAFT_TOURNAMENTS), fieldConstraints);
 
     }
 

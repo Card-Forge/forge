@@ -29,7 +29,8 @@ public class QuestPrefsScreen extends FScreen {
         DIFFICULTY_EASY,
         DIFFICULTY_MEDIUM,
         DIFFICULTY_HARD,
-        DIFFICULTY_EXPERT
+        DIFFICULTY_EXPERT,
+        DRAFT_TOURNAMENTS
     }
 
     private FScrollPane scroller = add(new FScrollPane() {
@@ -88,6 +89,10 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Playset Size: Basic Lands", QPref.PLAYSET_BASIC_LAND_SIZE, PrefsGroup.SHOP));
         scroller.add(new PrefsOption("Playset Size: Any Number", QPref.PLAYSET_ANY_NUMBER_SIZE, PrefsGroup.SHOP));
 
+        //Quest Draft Tournament Preferences
+        scroller.add(new PrefsHeader("Quest Draft Tournaments", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_EXPERT));
+        scroller.add(new PrefsOption("Do Not Play AI Matches", QPref.RANDOMLY_DECIDE_AI_VS_AI, PrefsGroup.DRAFT_TOURNAMENTS));
+
         //Difficulty Adjustments (All)
         scroller.add(new PrefsHeader("Difficulty Adjustments (All)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_ALL));
         //scroller.add(new PrefsOption("Starting basic lands", QPref.STARTING_BASIC_LANDS, PrefsGroup.DIFFICULTY_ALL)); // Add Basic Lands is used instead
@@ -95,7 +100,7 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Color bias (1-100%)", QPref.STARTING_POOL_COLOR_BIAS, PrefsGroup.DIFFICULTY_ALL));
         scroller.add(new PrefsOption("Penalty for loss", QPref.PENALTY_LOSS, PrefsGroup.DIFFICULTY_ALL));
 
-        //Difficult Adjustments (Easy)
+        //Difficulty Adjustments (Easy)
         scroller.add(new PrefsHeader("Difficulty Adjustments (Easy)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_EASY));
         scroller.add(new PrefsOption("Wins For Booster", QPref.WINS_BOOSTER_EASY, PrefsGroup.DIFFICULTY_EASY));
         scroller.add(new PrefsOption("Wins For Rank Increase", QPref.WINS_RANKUP_EASY, PrefsGroup.DIFFICULTY_EASY));
@@ -107,7 +112,7 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Starting rares", QPref.STARTING_RARES_EASY, PrefsGroup.DIFFICULTY_EASY));
         scroller.add(new PrefsOption("Starting credits", QPref.STARTING_CREDITS_EASY, PrefsGroup.DIFFICULTY_EASY));
 
-        //Difficult Adjustments (Medium)
+        //Difficulty Adjustments (Medium)
         scroller.add(new PrefsHeader("Difficulty Adjustments (Medium)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_MEDIUM));
         scroller.add(new PrefsOption("Wins For Booster", QPref.WINS_BOOSTER_MEDIUM, PrefsGroup.DIFFICULTY_MEDIUM));
         scroller.add(new PrefsOption("Wins For Rank Increase", QPref.WINS_RANKUP_MEDIUM, PrefsGroup.DIFFICULTY_MEDIUM));
@@ -119,7 +124,7 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Starting rares", QPref.STARTING_RARES_MEDIUM, PrefsGroup.DIFFICULTY_MEDIUM));
         scroller.add(new PrefsOption("Starting credits", QPref.STARTING_CREDITS_MEDIUM, PrefsGroup.DIFFICULTY_MEDIUM));
 
-        //Difficult Adjustments (Hard)
+        //Difficulty Adjustments (Hard)
         scroller.add(new PrefsHeader("Difficulty Adjustments (Hard)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_HARD));
         scroller.add(new PrefsOption("Wins For Booster", QPref.WINS_BOOSTER_HARD, PrefsGroup.DIFFICULTY_HARD));
         scroller.add(new PrefsOption("Wins For Rank Increase", QPref.WINS_RANKUP_HARD, PrefsGroup.DIFFICULTY_HARD));
@@ -131,7 +136,7 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Starting rares", QPref.STARTING_RARES_HARD, PrefsGroup.DIFFICULTY_HARD));
         scroller.add(new PrefsOption("Starting credits", QPref.STARTING_CREDITS_HARD, PrefsGroup.DIFFICULTY_HARD));
 
-        //Difficult Adjustments (Expert)
+        //Difficulty Adjustments (Expert)
         scroller.add(new PrefsHeader("Difficulty Adjustments (Expert)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_EXPERT));
         scroller.add(new PrefsOption("Wins For Booster", QPref.WINS_BOOSTER_EXPERT, PrefsGroup.DIFFICULTY_EXPERT));
         scroller.add(new PrefsOption("Wins For Rank Increase", QPref.WINS_RANKUP_EXPERT, PrefsGroup.DIFFICULTY_EXPERT));
@@ -213,6 +218,9 @@ public class QuestPrefsScreen extends FScreen {
                             break;
                         case SHOP:
                             prefType = "Shop Preferences";
+                            break;
+                        case DRAFT_TOURNAMENTS:
+                            prefType = "Draft Tournaments";
                             break;
                         default:
                             prefType = "Difficulty Adjustments";

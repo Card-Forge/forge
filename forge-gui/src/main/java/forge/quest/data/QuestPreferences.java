@@ -168,7 +168,9 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         PLAYSET_ANY_NUMBER_SIZE("500"),
         PLAYSET_BASIC_LAND_SIZE("50"),
 
-        ITEM_LEVEL_RESTRICTION("1");
+        ITEM_LEVEL_RESTRICTION("1"),
+
+        RANDOMLY_DECIDE_AI_VS_AI("0");
 
         private final String strDefaultVal;
 
