@@ -973,7 +973,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 final GameEntity oldEnchanted = c.getEnchanting();
                                 c.removeEnchanting(oldEnchanted);
                             }
-                            if (!checkCanAttachTo(c, attachedTo)) {
+                            // TODO: this should ideally be handled with !attachedTo.canBeEnchantedBy(c), but the relevant function is not adapted
+                            // for corner cases tested here and modifying it to accomodate these situations (e.g. Boonweaver Giant + Animate Dead)
+                            // tends to break other things.
+                            if (!checkCanIndirectlyAttachTo(c, attachedTo)) {
                                 // if an aura can't enchant the source, it shouldn't move (303.4i, 303.4j)
                                 continue;
                             }
@@ -1193,7 +1196,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
     }
 
-    private static boolean checkCanAttachTo(final Card source, final Card target) {
+    private static boolean checkCanIndirectlyAttachTo(final Card source, final Card target) {
         final SpellAbility attachEff = source.getFirstAttachSpell();
 
         if (attachEff == null) {
