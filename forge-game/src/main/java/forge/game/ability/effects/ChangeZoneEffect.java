@@ -973,8 +973,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 final GameEntity oldEnchanted = c.getEnchanting();
                                 c.removeEnchanting(oldEnchanted);
                             }
-                            if (!c.canBeEnchantedBy(attachedTo))
-                            {
+                            if (!checkCanAttachTo(c, attachedTo)) {
                                 // if an aura can't enchant the source, it shouldn't move (303.4i, 303.4j)
                                 continue;
                             }
@@ -1192,5 +1191,20 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 System.out.println("Moving spell to " + srcSA.getParam("Destination"));
             }
         }
+    }
+
+    private static boolean checkCanAttachTo(final Card source, final Card target) {
+        final SpellAbility attachEff = source.getFirstAttachSpell();
+
+        if (attachEff == null) {
+            return false;
+        }
+
+        final Game game = source.getGame();
+        final TargetRestrictions tgt = attachEff.getTargetRestrictions();
+
+        CardCollectionView list = game.getCardsIn(tgt.getZone());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), attachEff.getActivatingPlayer(), source, attachEff);
+        return list.contains(target);
     }
 }
