@@ -32,6 +32,7 @@ import forge.util.Lang;
 import forge.util.MessageUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -973,6 +974,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 final GameEntity oldEnchanted = c.getEnchanting();
                                 c.removeEnchanting(oldEnchanted);
                             }
+                            if (!checkCanAttachTo(c, attachedTo)) {
+                                // if an aura can't enchant the source, it shouldn't move (303.4i, 303.4j)
+                                continue;
+                            }
+                            if ( ((c.hasKeyword("Enchant creature card in a graveyard") || c.hasKeyword("Enchant instant card in a graveyard")) && !attachedTo.getZone().is(ZoneType.Graveyard))
+                                    || !attachedTo.getZone().is(ZoneType.Battlefield)) {
+                                // if the source of the effect is no longer in the zone where it can be enchanted, aura does not move
+                                continue;
+                            }
                             c.enchantEntity(attachedTo);
                         }
                         else if (c.isEquipment()) { //Equipment
@@ -1184,4 +1194,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
     }
 
+    private static boolean checkCanAttachTo(final Card source, final Card target) {
+        final SpellAbility attachEff = source.getFirstAttachSpell();
+
+        if (attachEff == null) {
+            return false;
+        }
+
+        final Game game = source.getGame();
+        final TargetRestrictions tgt = attachEff.getTargetRestrictions();
+
+        CardCollectionView list = game.getCardsIn(tgt.getZone());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), attachEff.getActivatingPlayer(), source, attachEff);
+        return list.contains(target);
+    }
 }
