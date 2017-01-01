@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 
 public class DamageDealEffect extends SpellAbilityEffect {
 
@@ -168,26 +167,14 @@ public class DamageDealEffect extends SpellAbilityEffect {
                         c.setHasBeenDealtDeathtouchDamage(false);
                         c.clearAssignedDamage();
                     }
-                    else if (noPrevention) {
-                        c.addDamageWithoutPrevention(dmg, sourceLKI, damageMap);
-                    } else if (combatDmg) {
-                        Map<Card, Integer> combatmap = Maps.newHashMap();
-                        combatmap.put(sourceLKI, dmg);
-                        c.addCombatDamage(combatmap, damageMap);
-                    } else {
-                        c.addDamage(dmg, sourceLKI, damageMap);
+                    else {
+                        c.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap);
                     }
                 }
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
-                    if (noPrevention) {
-                        p.addDamageWithoutPrevention(dmg, sourceLKI, damageMap);
-                    } else if (combatDmg) {
-                        p.addCombatDamage(dmg, sourceLKI, damageMap);
-                    } else {
-                        p.addDamage(dmg, sourceLKI, damageMap);
-                    }
+                    p.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap);
                 }
             }
         }

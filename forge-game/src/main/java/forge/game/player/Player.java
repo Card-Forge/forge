@@ -867,20 +867,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return Aggregates.max(getOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
     }
 
-    public final int addCombatDamage(final int damage, final Card source, CardDamageMap damageMap) {
-        int damageToDo = damage;
-
-        damageToDo = replaceDamage(damageToDo, source, true, true, damageMap);
-        damageToDo = preventDamage(damageToDo, source, true);
-
-        damageToDo = addDamageAfterPrevention(damageToDo, source, true, damageMap); // damage prevention is already checked
-
-        if (damageToDo > 0) {
-            source.getDamageHistory().registerCombatDamage(this);
-        }
-        return damageToDo;
-    }
-
     public final boolean canReceiveCounters(final CounterType type) {
         if (hasKeyword("PLAYER can't have counters placed on him or her.")) {
             return false;

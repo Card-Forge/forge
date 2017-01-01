@@ -5846,21 +5846,15 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void addCombatDamage(final Map<Card, Integer> map, CardDamageMap damageMap) {
         for (final Entry<Card, Integer> entry : map.entrySet()) {
-            final Card source = entry.getKey();
-            int damageToAdd = entry.getValue();
-
-            damageToAdd = replaceDamage(damageToAdd, source, true, true, damageMap);
-            damageToAdd = preventDamage(damageToAdd, source, true);
-
-            if (damageToAdd > 0) {
-                getDamageHistory().registerCombatDamage(source);
-            }
-            map.put(source, damageToAdd);
+            addCombatDamage(entry.getValue(), entry.getKey(), damageMap);
         }
+    }
 
+    protected int addCombatDamageBase(final int damage, final Card source, CardDamageMap damageMap) {
         if (isInPlay()) {
-            addDamage(map, damageMap);
+            return super.addCombatDamageBase(damage, source, damageMap);
         }
+        return 0;
     }
 
     // This is used by the AI to forecast an effect (so it must not change the game state)

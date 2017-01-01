@@ -22,7 +22,6 @@ import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -256,12 +255,9 @@ public class ReplacementHandler {
         } else {
             player.getController().playSpellAbilityNoStack(effectSA, true);
             // if the spellability is a replace effect then its some new logic
-            if (ApiType.ReplaceEffect.equals(effectSA.getApi())) {
-                // if ReplacementResult is set in run params use that instead
-                if (runParams.containsKey("ReplacementResult")) {
-                    return (ReplacementResult) runParams.get("ReplacementResult");
-                }
-                return ReplacementResult.Updated;
+            // if ReplacementResult is set in run params use that instead
+            if (runParams.containsKey("ReplacementResult")) {
+                return (ReplacementResult) runParams.get("ReplacementResult");
             }
         }
 

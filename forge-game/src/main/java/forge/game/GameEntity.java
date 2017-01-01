@@ -56,6 +56,16 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         getView().updateName(this);
     }
 
+    public final int addDamage(final int damage, final Card source, boolean isCombat, boolean noPrevention, final CardDamageMap damageMap) {
+        if (noPrevention) {
+            return addDamageWithoutPrevention(damage, source, damageMap);
+        } else if (isCombat) {
+            return addCombatDamage(damage, source, damageMap);
+        } else {
+            return addDamage(damage, source, damageMap);
+        }
+    }
+
     public int addDamage(final int damage, final Card source, final CardDamageMap damageMap) {
         int damageToDo = damage;
 
@@ -65,6 +75,23 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return addDamageAfterPrevention(damageToDo, source, false, damageMap);
     }
 
+    public final int addCombatDamage(final int damage, final Card source, CardDamageMap damageMap) {
+        int damageToDo = damage;
+
+        damageToDo = replaceDamage(damageToDo, source, true, true, damageMap);
+        damageToDo = preventDamage(damageToDo, source, true);
+
+        if (damageToDo > 0) {
+            source.getDamageHistory().registerCombatDamage(this);
+        }
+
+        return addCombatDamageBase(damageToDo, source, damageMap); // damage prevention is already checked
+    }
+
+    protected int addCombatDamageBase(final int damage, final Card source, CardDamageMap damageMap) {
+        return addDamageAfterPrevention(damage, source, true, damageMap);
+    }
+    
     public int addDamageWithoutPrevention(final int damage, final Card source, final CardDamageMap damageMap) {
         int damageToDo = replaceDamage(damage, source, false, false, damageMap);
         return addDamageAfterPrevention(damageToDo, source, false, damageMap);
@@ -78,6 +105,8 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         repParams.put("DamageSource", source);
         repParams.put("DamageAmount", damage);
         repParams.put("IsCombat", isCombat);
+        repParams.put("NoPreventDamage", !prevention);
+        repParams.put("DamageMap", damageMap);
 
         switch (getGame().getReplacementHandler().run(repParams)) {
         case NotReplaced:
