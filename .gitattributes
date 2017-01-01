@@ -9109,6 +9109,7 @@ forge-gui/res/cardsfolder/k/kuro_pitlord.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kuros_taken.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kusari_gama.txt -text
 forge-gui/res/cardsfolder/k/kydele_chosen_of_kruphix.txt -text
+forge-gui/res/cardsfolder/k/kynaios_and_tiro_of_meletis.txt -text
 forge-gui/res/cardsfolder/k/kyoki_sanitys_eclipse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kyren_archive.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/k/kyren_glider.txt svneol=native#text/plain
