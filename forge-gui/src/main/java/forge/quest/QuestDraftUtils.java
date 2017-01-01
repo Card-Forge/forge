@@ -14,7 +14,6 @@ import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.limited.DraftRankCache;
-import forge.limited.SealedCardPoolGenerator;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -28,7 +27,6 @@ import forge.util.storage.IStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 
