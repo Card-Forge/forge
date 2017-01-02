@@ -12,8 +12,6 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiGame;
-import forge.item.PaperCard;
-import forge.limited.DraftRankCache;
 import forge.limited.LimitedDeckEvaluator;
 import forge.match.HostedMatch;
 import forge.model.FModel;
@@ -29,7 +27,6 @@ import forge.util.storage.IStorage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 
 public class QuestDraftUtils {
     public static boolean TOURNAMENT_TOGGLE = false;
@@ -416,8 +413,6 @@ public class QuestDraftUtils {
         }
     }
 
-    // TODO: this is based on SealedPoolCardGenerator#sealedDeckComparer, maybe refactor that part to be able to use the same code everywhere
-    // to avoid code duplication
     private static double rankDraftDeckValue(String sid) {
         DeckGroup draftDecks = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME);
         Deck d = sid.equals(QuestEventDraft.HUMAN) ? draftDecks.getHumanDeck() : draftDecks.getAiDecks().get(Integer.parseInt(sid) - 1);

@@ -23,8 +23,13 @@ import forge.item.PaperCard;
 import java.util.Map.Entry;
 
 /**
- *
- * @author agetian
+ * <p>
+ * LimitedDeckEvaluator class.
+ * </p>
+ * 
+ * @author Forge
+ * @version $Id: LimitedDeckEvaluator.java 32932 2017-01-02 05:16:54Z Agetian $
+ * @since 1.5.58
  */
 public class LimitedDeckEvaluator {
     
