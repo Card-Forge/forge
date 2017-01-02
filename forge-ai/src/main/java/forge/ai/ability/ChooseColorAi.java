@@ -36,9 +36,9 @@ public class ChooseColorAi extends SpellAbilityAi {
 
         if ("Nykthos, Shrine to Nyx".equals(sa.getHostCard().getName())) {
             PhaseHandler ph = game.getPhaseHandler();
-        	if (!ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.MAIN2)) {
-        		return false;
-        	}
+            if (!ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.MAIN2)) {
+                return false;
+            }
             String prominentColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield));
             int devotion = CardFactoryUtil.xCount(sa.getHostCard(), "Count$Devotion." + prominentColor);
             //int numLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(MagicColor.Constant.BASIC_LANDS.get(MagicColor.getIndexOfFirstColor(MagicColor.fromName(prominentColor))))).size(); // TODO: maybe this logic also has to take the number of available lands of most prominent color type into account
