@@ -821,8 +821,8 @@ public class QuestEventDraft implements IQuestEvent {
 
             for (CardEdition allowedQuestSet : allowedQuestSets) {
                 if (allowedQuestSet.isLargeSet() && !singleSets.contains(allowedQuestSet.getCode())) {
-                    if (!allowedQuestSet.hasBoosterTemplate()) {
-                        // skip sets that do not have a booster template and will thus crash
+                    if (!allowedQuestSet.hasBoosterTemplate() || allowedQuestSet.getType() == CardEdition.Type.OTHER) {
+                        // skip non-tournament legal and other unusual sets that will crash in Quest Mode
                         continue;
                     }
                     possibleFormats.add(new QuestDraftFormat(allowedQuestSet));
