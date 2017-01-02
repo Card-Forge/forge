@@ -8,8 +8,18 @@ Forge Beta: 10-26-2016 ver 1.5.57
 Release Notes
 -------------
 
-This release includes mostly bug fixes and an assortment of Kaladesh card fixes, some AI improvements and also the display of energy counters under the player's avatar in desktop version of Forge.
+- Commander 2016 -
+This release features most Commander 2016 cards scripted and ready to play. The few remaining cards that are not currently supported may be scripted in the upcoming versions of Forge.
 
+- Quest Mode Updates and Fixes -
+It is now possible to simulate random AI vs. AI match outcome instead of playing out all AI vs. AI matches and making the player watch them. AI decks with higher total card draft ranking value have a higher chance of "winning" a random simulated AI vs. AI match. This option is disabled by default and can be enabled in Quest Preferences (set the option "Simulate AI vs. AI Matches" to 1). When using a token to create a new quest draft tournament, the player will be shown the entry fee for the tournament and will be asked to confirm creating that tournament with the provided entry fee in mind. Quest mode has become more robust and resistant to quest data corruption. Non-tournament legal substandard cards (e.g. Conspiracies) will no longer be added to quest card pool from reward booster packs and possibly other sources to prevent persistent crashes (these cards had no possible use in quest mode anyway). Quest draft tournaments with sets that have no standard draft template in Forge (e.g. Commander, Conspiracy) will no longer be created in order to prevent the game crashing when trying to start a draft tournament.
+
+- Incremental Updates and Fixes -
+This release features many bug fixes and general improvements. Multiple corner cases and card interactions were fixed or changed to conform to Magic: the Gathering rules more closely. For example, the damage subsystem has been rewritten to allow proper interaction with replacement effects and lifelink (e.g. Gisela, Blade of Goldnight + Kalitas, Traitor or Ghet or Ajani's Pridemate getting a counter from Kalitas, Traitor of Ghet dealing damage to multiple creatures via Chandra's Ignition). Splice onto Arcane has been reworked to make it more intuitive for the player and more rule compliant. The AI received some fixes and updates, and there is an ongoing work on improving the simulated AI which is currently considered experimental and disabled by default.
+
+- Android Updates -
+Some work went into porting the remaining features from desktop version of the game to mobile Forge. In particular, it is now possible to start a match against a particular opponent in Sealed Deck and Booster Draft modes in addition to the gauntlet mode which is still default. The work to enable quest draft tournaments in mobile Forge is ongoing and should not be considered complete at the moment, draft tournaments in quest mode are still not fully functional in mobile Forge and you will not be able to complete a draft tournament yet.
+The mobile port of Forge now features an option "Battlefield Texture Filtering" which smoothes out card art on the battlefield. This can help make the graphics smoother on larger tablet screens (e.g. 12") or when connected to an external monitor. This option, however, comes with a performance penalty and may blur the card art too much on smaller screens. It is disabled by default.
 
 ------------
 Known Issues
