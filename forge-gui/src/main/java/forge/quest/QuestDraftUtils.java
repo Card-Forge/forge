@@ -272,14 +272,17 @@ public class QuestDraftUtils {
 
         final DraftMatchup nextMatch = matchups.remove(0);
 
-        matchInProgress = true;
-
         if (nextMatch.hasHumanPlayer()) {
             waitForUserInput = true;
         } else {
+            if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1) {
+                return;
+            }
             gui.disableOverlay();
             waitForUserInput = false;
         }
+
+        matchInProgress = true;
 
         GameRules rules = createQuestDraftRuleset();
 
