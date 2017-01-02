@@ -462,9 +462,10 @@ public class QuestTournamentController {
             if (!QuestDraftUtils.injectRandomMatchOutcome(false)) {
                 gui = GuiBase.getInterface().getNewGuiGame();
                 QuestDraftUtils.startNextMatch(gui);
+            } else {
+                view.populate();
+                update();
             }
-            view.populate();
-            update();
         } else {
             gui = GuiBase.getInterface().getNewGuiGame();
             QuestDraftUtils.startNextMatch(gui);
