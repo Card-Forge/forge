@@ -465,6 +465,9 @@ public class QuestTournamentController {
             }
             view.populate();
             update();
+        } else {
+            gui = GuiBase.getInterface().getNewGuiGame();
+            QuestDraftUtils.startNextMatch(gui);
         }
     }
 }
