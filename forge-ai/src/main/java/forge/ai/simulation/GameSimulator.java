@@ -9,7 +9,6 @@ import java.util.Set;
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
-import forge.ai.simulation.SpellAbilityPicker.Interceptor;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
@@ -27,8 +26,8 @@ public class GameSimulator {
     private GameStateEvaluator eval;
     private List<String> origLines;
     private Score origScore;
-    private Interceptor interceptor;
-    
+    private SpellAbilityChoicesIterator interceptor;
+
     public GameSimulator(final SimulationController controller, final Game origGame, final Player origAiPlayer) {
         this.controller = controller;
         copier = new GameCopier(origGame);
@@ -74,7 +73,7 @@ public class GameSimulator {
         debugLines = null;
     }
 
-    public void setInterceptor(Interceptor interceptor) {
+    public void setInterceptor(SpellAbilityChoicesIterator interceptor) {
         this.interceptor = interceptor;
         ((PlayerControllerAi) aiPlayer.getController()).getAi().getSimulationPicker().setInterceptor(interceptor);
     }
