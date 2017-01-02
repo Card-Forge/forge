@@ -14,6 +14,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.limited.DraftRankCache;
+import forge.limited.LimitedDeckEvaluator;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -421,31 +422,7 @@ public class QuestDraftUtils {
         DeckGroup draftDecks = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME);
         Deck d = sid.equals(QuestEventDraft.HUMAN) ? draftDecks.getHumanDeck() : draftDecks.getAiDecks().get(Integer.parseInt(sid) - 1);
 
-        double value = 0;
-        double divider = 0;
-
-        double best = 1.0;
-
-        for (Entry<PaperCard, Integer> kv : d.getMain()) {
-            PaperCard evalCard = kv.getKey();
-            int count = kv.getValue();
-            if (DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
-                double add = DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition());
-                value += add * count;
-                divider += count;
-                if (best > add) {
-                    best = add;
-                }
-            }
-        }
-
-        if (divider == 0 || value == 0) {
-            return 0;
-        }
-
-        value /= divider;
-
-        return (20.0 / (best + (2 * value)));
+        return LimitedDeckEvaluator.getDeckDraftValue(d);
     }
 
     public static boolean injectRandomMatchOutcome(boolean simHumanMatches) {

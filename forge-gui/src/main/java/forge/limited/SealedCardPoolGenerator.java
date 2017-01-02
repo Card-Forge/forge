@@ -136,7 +136,7 @@ public class SealedCardPoolGenerator {
         }
 
         // Rank the AI decks
-        sealed.rankAiDecks(new SealedDeckComparer());
+        sealed.rankAiDecks(new LimitedDeckEvaluator.LimitedDeckComparer());
 
         FModel.getDecks().getSealed().add(sealed);
         return sealed;
@@ -464,48 +464,5 @@ public class SealedCardPoolGenerator {
 
     public boolean isEmpty() {
         return product.isEmpty();
-    }
-
-    private static class SealedDeckComparer implements java.util.Comparator<Deck> {
-        public double getDraftValue(Deck d) {
-            double value = 0;
-            double divider = 0;
-
-            if (d.getMain().isEmpty()) {
-                return 0;
-            }
-
-            double best = 1.0;
-
-            for (Entry<PaperCard, Integer> kv : d.getMain()) {
-                PaperCard evalCard = kv.getKey();
-                int count = kv.getValue();
-                if (DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
-                    double add = DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition());
-                    // System.out.println(evalCard.getName() + " is worth " + add);
-                    value += add * count;
-                    divider += count;
-                    if (best > add) {
-                        best = add;
-                    }
-                }
-            }
-
-            if (divider == 0 || value == 0) {
-                return 0;
-            }
-
-            value /= divider;
-
-            return (20.0 / (best + (2 * value)));
-        }
-
-        @Override
-        public int compare(Deck o1, Deck o2) {
-            double delta = getDraftValue(o1) - getDraftValue(o2);
-            if ( delta > 0 ) return 1;
-            if ( delta < 0 ) return -1;
-            return 0;
-        }
     }
 }
