@@ -356,7 +356,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 list.addAll(AbilityUtils.getDefinedPlayers(sa.getHostCard(), this.getPlayerDefined(), sa));
             }
             List<Player> contains = AbilityUtils.getDefinedPlayers(sa.getHostCard(), this.getPlayerContains(), sa);
-            if (!list.containsAll(contains)) {
+            if (contains.isEmpty() || !list.containsAll(contains)) {
                 return false;
             }
         }
