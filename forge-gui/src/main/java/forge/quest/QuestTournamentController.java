@@ -458,11 +458,11 @@ public class QuestTournamentController {
             return;
         }
 
-        gui = GuiBase.getInterface().getNewGuiGame();
-        QuestDraftUtils.startNextMatch(gui);
-
         if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1) {
-            // need to force a view update after a random match outcome was injected into standings
+            if (!QuestDraftUtils.injectRandomMatchOutcome(false)) {
+                gui = GuiBase.getInterface().getNewGuiGame();
+                QuestDraftUtils.startNextMatch(gui);
+            }
             view.populate();
             update();
         }

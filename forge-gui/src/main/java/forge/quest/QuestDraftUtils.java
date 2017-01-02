@@ -272,14 +272,6 @@ public class QuestDraftUtils {
 
         final DraftMatchup nextMatch = matchups.remove(0);
 
-        if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1) {
-            // the user asked to decide the AI vs AI match randomly, so just call the UI update and leave the rest to injection code
-            if (injectRandomMatchOutcome(false)) {
-                update(gui);
-                return;
-            }
-        }
-
         matchInProgress = true;
 
         if (nextMatch.hasHumanPlayer()) {
@@ -433,6 +425,7 @@ public class QuestDraftUtils {
 
         if (sid1.equals(QuestEventDraft.HUMAN) || sid2.equals(QuestEventDraft.HUMAN)) {
             if (!simHumanMatches) {
+                matchInProgress = false;
                 return false;
             }
         }
