@@ -421,6 +421,12 @@ public class QuestDraftUtils {
         QuestEventDraft qd = FModel.getQuest().getAchievements().getCurrentDraft();
 
         int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
+        if (pos == -1) {
+            // no more matches left to play
+            matchInProgress = false;
+            return true;
+        }
+
         int offset = (pos - 8) * 2;
 
         String sid1 = qd.getStandings()[offset];
