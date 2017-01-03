@@ -54,7 +54,7 @@ public class ChooseColorAi extends SpellAbilityAi {
                 return false;
             }
 
-            final CardCollectionView cards = ai.getCardsIn(new ZoneType[]{ZoneType.Hand, ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Command});
+            final CardCollectionView cards = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command});
             List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, ai);
 
             // TODO: this is inexact for the purpose, assuming that each land can serve as at least some form of mana source.
@@ -84,6 +84,7 @@ public class ChooseColorAi extends SpellAbilityAi {
                 testSa.setActivatingPlayer(ai);
                 if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSa) == AiPlayDecision.WillPlay) {
                     // the AI is willing to play the spell
+                    System.out.println("Willing to play " + testSa + " for " + testSa.getHostCard());
                     return true;
                 }
             }
