@@ -118,6 +118,7 @@ public enum ApiType {
     Repeat (RepeatEffect.class),
     RepeatEach (RepeatEachEffect.class),
     ReplaceEffect (ReplaceEffect.class),
+    ReplaceSplitDamage (ReplaceSplitDamageEffect.class),
     RestartGame (RestartGameEffect.class),
     Reveal (RevealEffect.class),
     RevealHand (RevealHandEffect.class),
