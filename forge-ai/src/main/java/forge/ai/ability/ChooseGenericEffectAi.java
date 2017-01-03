@@ -65,7 +65,13 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if ("CombustibleGearhulk".equals(sa.getParam("AILogic"))) {
-            return true;
+            for (final Player p : aiPlayer.getOpponents()) {
+                if (p.canBeTargetedBy(sa)) {
+                    sa.resetTargets();
+                    sa.getTargets().add(p);
+                    return true;
+                }
+            }
         }
 
         return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
