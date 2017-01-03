@@ -153,8 +153,8 @@ public abstract class SpellAbilityAi {
             return true;
         }
 
-        // not mandatory, short way out unless there is an AI logic specified for the SA
-        if (!mandatory && (!sa.hasParam("AILogic") || "Never".equals(sa.getParam("AILogic")))) {
+        // not mandatory, short way out
+        if (!mandatory) {
             return false;
         }
 

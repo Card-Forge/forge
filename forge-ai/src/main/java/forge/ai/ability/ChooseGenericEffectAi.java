@@ -63,6 +63,15 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     }
 
     @Override
+    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        if ("CombustibleGearhulk".equals(sa.getParam("AILogic"))) {
+            return true;
+        }
+
+        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+    }
+
+    @Override
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
