@@ -84,7 +84,6 @@ public class ChooseColorAi extends SpellAbilityAi {
                 testSa.setActivatingPlayer(ai);
                 if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSa) == AiPlayDecision.WillPlay) {
                     // the AI is willing to play the spell
-                    System.out.println("Willing to play " + testSa + " for " + testSa.getHostCard());
                     return true;
                 }
             }
