@@ -894,17 +894,24 @@ public class Player extends GameEntity implements Comparable<Player> {
             // Can't add negative or 0 counters, bail out now
             return;
         }
-        /* TODO Add Counter replacement if it ever effects Players
-        final HashMap<String, Object> repParams = new HashMap<>();
+
+        final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "AddCounter");
         repParams.put("Affected", this);
         repParams.put("CounterType", counterType);
         repParams.put("CounterNum", addAmount);
         repParams.put("EffectOnly", applyMultiplier);
-        if (getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+
+        switch (getGame().getReplacementHandler().run(repParams)) {
+        case NotReplaced:
+            break;
+        case Updated: {
+            addAmount = (int) repParams.get("CounterNum");
+            break;
+        }
+        default:
             return;
         }
-        */
 
         final int oldValue = getCounters(counterType);
         final int newValue = addAmount + oldValue;
@@ -915,7 +922,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             getGame().fireEvent(new GameEventPlayerCounters(this, counterType, oldValue, newValue));
         }
 
-        final Map<String, Object> runParams = new TreeMap<>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", this);
         runParams.put("CounterType", counterType);
         for (int i = 0; i < addAmount; i++) {

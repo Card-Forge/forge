@@ -2,6 +2,7 @@ package forge.game.replacement;
 
 import forge.game.card.Card;
 import forge.game.card.CounterType;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 import java.util.Map;
@@ -39,7 +40,19 @@ public class ReplaceAddCounter extends ReplacementEffect {
         }
 
         if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+            Object o = runParams.get("Affected");
+            if (!(o instanceof Card)) {
+                return false;
+            }
+            if (!matchesValid(o, this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+                return false;
+            }
+        } else if (mapParams.containsKey("ValidPlayer")) {
+            Object o = runParams.get("Affected");
+            if (!(o instanceof Player)) {
+                return false;
+            }
+            if (!matchesValid(o, this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
@@ -61,7 +74,12 @@ public class ReplaceAddCounter extends ReplacementEffect {
     public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject("CounterNum", runParams.get("CounterNum"));
         sa.setReplacingObject("CounterType", ((CounterType) runParams.get("CounterType")).getName());
-        sa.setReplacingObject("Card", runParams.get("Affected"));
+        Object o = runParams.get("Affected");
+        if (o instanceof Card) {
+            sa.setReplacingObject("Card", o);
+        } else if (o instanceof Player) {
+            sa.setReplacingObject("Player", o);
+        }
     }
 
 }
