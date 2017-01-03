@@ -32,6 +32,7 @@ import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
+import java.util.Arrays;
 
 public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestTournamentView {
     //Select Tournament panel
@@ -312,8 +313,8 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     private class TournamentActivePanel extends FContainer {
         @Override
         protected void doLayout(float width, float height) {
-
-            if (FModel.getQuest().getAchievements().getCurrentDraft() == null) {
+            QuestEventDraft qd = FModel.getQuest().getAchievements().getCurrentDraft();
+            if (qd == null) {
                 return;
             }
 
@@ -321,9 +322,17 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
             String[] playerIDs = new String[16];
             int[] iconIDs = new int[16];
 
-            String pairedPlayer1 = FModel.getQuest().getAchievements().getCurrentDraft().getBracket().getNextPairing().getPairedPlayers().get(0).getPlayer().getName();
-            String pairedPlayer2 = FModel.getQuest().getAchievements().getCurrentDraft().getBracket().getNextPairing().getPairedPlayers().get(1).getPlayer().getName();
-            String draftTitle = FModel.getQuest().getAchievements().getCurrentDraft().getFullTitle();
+            String draftTitle = qd.getFullTitle();
+
+            int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
+            String sid1, sid2, pairedPlayer1 = "NONE", pairedPlayer2 = "NONE";
+            if (pos != -1) {
+                int offset = (pos - 8) * 2;
+                sid1 = qd.getStandings()[offset];
+                sid2 = qd.getStandings()[offset + 1];
+                pairedPlayer1 = sid1.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : qd.getAINames()[Integer.parseInt(sid1) - 1];
+                pairedPlayer2 = sid2.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : qd.getAINames()[Integer.parseInt(sid2) - 1];
+            }
 
             float x = PADDING;
             float w = width - 2 * PADDING;
@@ -335,7 +344,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
             y += lblStandings.getHeight() + PADDING;
 
             for (int i = 0; i < 15; i++) {
-                String playerID = FModel.getQuest().getAchievements().getCurrentDraft().getStandings()[i];
+                String playerID = qd.getStandings()[i];
 
                 switch (playerID) {
                     case QuestEventDraft.HUMAN:
@@ -349,26 +358,32 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                         iconIDs[i] = GuiBase.getInterface().getAvatarCount() - 1;
                         break;
                     default:
-                        iconIDs[i] = FModel.getQuest().getAchievements().getCurrentDraft().getAIIcons()[Integer.parseInt(playerID) - 1];
-                        playerIDs[i] = FModel.getQuest().getAchievements().getCurrentDraft().getAINames()[Integer.parseInt(playerID) - 1];
+                        iconIDs[i] = qd.getAIIcons()[Integer.parseInt(playerID) - 1];
+                        playerIDs[i] = qd.getAINames()[Integer.parseInt(playerID) - 1];
                         break;
                 }
 
             }
 
             for (int j = 0; j < 13; j += 2) {
-                if (j == 0) {
-                    FLabel qfinals = add(new FLabel.Builder().text("QUARTERFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
-                    qfinals.setBounds(x, y, w, qfinals.getAutoSizeBounds().height);
-                    y += qfinals.getHeight() + PADDING;
-                } else if (j == 8) {
-                    FLabel sfinals = add(new FLabel.Builder().text("SEMIFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
-                    sfinals.setBounds(x, y, w, sfinals.getAutoSizeBounds().height);
-                    y += sfinals.getHeight() + PADDING;
-                } else if (j == 12) {
-                    FLabel finals = add(new FLabel.Builder().text("FINAL MATCH").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
-                    finals.setBounds(x, y, w, finals.getAutoSizeBounds().height);
-                    y += finals.getHeight() + PADDING;
+                switch (j) {
+                    case 0:
+                        FLabel qfinals = add(new FLabel.Builder().text("QUARTERFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                        qfinals.setBounds(x, y, w, qfinals.getAutoSizeBounds().height);
+                        y += qfinals.getHeight() + PADDING;
+                        break;
+                    case 8:
+                        FLabel sfinals = add(new FLabel.Builder().text("SEMIFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                        sfinals.setBounds(x, y, w, sfinals.getAutoSizeBounds().height);
+                        y += sfinals.getHeight() + PADDING;
+                        break;
+                    case 12:
+                        FLabel finals = add(new FLabel.Builder().text("FINAL MATCH").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                        finals.setBounds(x, y, w, finals.getAutoSizeBounds().height);
+                        y += finals.getHeight() + PADDING;
+                        break;
+                    default:
+                        break;
                 }
 
                 boolean currentMatch = (playerIDs[j].equals(pairedPlayer1) || playerIDs[j + 1].equals(pairedPlayer1))
