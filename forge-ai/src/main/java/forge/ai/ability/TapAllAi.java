@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -51,6 +52,17 @@ public class TapAllAi extends SpellAbilityAi {
 
         validTappables = CardLists.getValidCards(validTappables, valid, source.getController(), source);
         validTappables = CardLists.filter(validTappables, Presets.UNTAPPED);
+
+        if (sa.hasParam("AILogic")) {
+            String logic = sa.getParam("AILogic");
+            if (logic.startsWith("AtLeast")) {
+                Integer num = AbilityUtils.calculateAmount(source, logic.substring(7), sa);
+                System.out.println("Num = " + num);
+                if (validTappables.size() < num) {
+                    return false;
+                }
+            }
+        }
 
         final Random r = MyRandom.getRandom();
         if (r.nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
