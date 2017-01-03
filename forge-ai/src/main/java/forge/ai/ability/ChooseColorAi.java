@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
-import forge.ai.AiController;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
@@ -12,7 +11,6 @@ import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
@@ -22,7 +20,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellPermanent;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import java.util.List;
