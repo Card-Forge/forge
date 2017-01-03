@@ -72,7 +72,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                     return true;
                 }
             }
-            return true; // perhaps the opponent(s) had Sigarda, Heron's Grace or another effect in play, still play the creature as 6/6
+            return true; // perhaps the opponent(s) had Sigarda, Heron's Grace or another effect giving hexproof in play, still play the creature as 6/6
         }
 
         return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
