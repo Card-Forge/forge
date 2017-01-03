@@ -324,8 +324,9 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
             String draftTitle = qd.getFullTitle();
 
-            int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
             String sid1, sid2, pairedPlayer1 = "NONE", pairedPlayer2 = "NONE";
+
+            int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
             if (pos != -1) {
                 int offset = (pos - 8) * 2;
                 sid1 = qd.getStandings()[offset];
