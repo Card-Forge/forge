@@ -1202,7 +1202,11 @@ public class PlayerControllerHuman
             String saLookupKey = firstStr;
             char delim = (char)5;
             for (int i = 1; i < orderedSAs.size(); i++) {
-                final String saStr = orderedSAs.get(i).toString();
+                SpellAbility currentSa = orderedSAs.get(i);
+                String saStr = currentSa.toString();
+                if (currentSa.getHostCard() != null) {
+                    saStr += " - " + currentSa.getHostCard().getId();
+                }
                 if (!needPrompt && !saStr.equals(firstStr)) {
                     needPrompt = true; //prompt by default unless all abilities are the same
                 }
