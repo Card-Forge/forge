@@ -19,6 +19,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.StringUtils;
 
 public class PermanentAi extends SpellAbilityAi {
 
@@ -150,6 +151,46 @@ public class PermanentAi extends SpellAbilityAi {
                 }
             }
         }
+
+        // check for specific AI preferences
+        if (card.hasSVar("AICastPreference")) {
+            String pref = card.getSVar("AICastPreference");
+            String[] groups = StringUtils.split(pref, "|");
+            for (String group : groups) {
+                String[] elems = StringUtils.split(group.trim(), '$');
+                String param = elems[0].trim();
+                String value = elems[1].trim();
+                if (param.equals("MustHaveInHand")) {
+                    // Only cast if another card is present in hand (e.g. Illusions of Grandeur followed by Donate)
+                    boolean hasCard = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(value)).size() > 0;
+                    if (!hasCard) {
+                        return false;
+                    }
+                } else if (param.equals("MaxControlled")) {
+                    // Only cast unless there are X or more cards like this on the battlefield under AI control already
+                    int numControlled = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())).size();
+                    if (numControlled >= Integer.parseInt(value)) {
+                        return false;
+                    }
+                } else if (elems[0].trim().equals("NumManaSources")) {
+                    // Only cast if there are X or more mana sources controlled by the AI
+                    CardCollection m = ComputerUtilMana.getAvailableMana(ai, true);
+                    if (m.size() < Integer.parseInt(value)) {
+                        return false;
+                    }
+                } else if (elems[0].trim().equals("NumManaSourcesNextTurn")) {
+                    // Only cast if there are X or more mana sources controlled by the AI *or*
+                    // if there are X-1 mana sources in play but the AI has an extra land in hand
+                    CardCollection m = ComputerUtilMana.getAvailableMana(ai, true);
+                    int hasExtraLandInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size() > 0 ? 1 : 0;
+                    if (m.size() + hasExtraLandInHand < Integer.parseInt(value)) {
+                        return false;
+                    }
+                }
+            }
+            
+        }
+        
         return true;
     }
 

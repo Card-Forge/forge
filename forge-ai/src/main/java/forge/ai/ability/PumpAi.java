@@ -5,6 +5,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
@@ -93,6 +94,20 @@ public class PumpAi extends PumpAiBase {
         		sa.getTargets().add(lowest);
         		return true;
         	}
+        } else if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("Donate")) {
+            // Donate currently supports only one special code path (Illusions of Grandeur)
+            CardCollectionView aiList = ai.getCardsIn(ZoneType.Battlefield, "Illusions of Grandeur");
+            if (aiList.size() > 0) {
+                // Donate an Illusions of Grandeur, step 1 - target the opponent.
+                if (sa.getParam("AILogic").equals("DonateTargetPlayer")) {
+                    sa.resetTargets();
+                    sa.getTargets().add(ai.getOpponents().get(0)); // TODO: expand this to donate to an opp who doesn't have Illusions yet
+                    return true;
+                }
+            }
+            // AI currently does not know how to handle Donate effectively otherwise
+            // TODO: enhance this for other cases (e.g. Donating a card with bad drawback to the opponent)
+            return false;
         }
         
         if (ComputerUtil.preventRunAwayActivations(sa)) {
@@ -232,6 +247,13 @@ public class PumpAi extends PumpAiBase {
                     return true;
                 } else {
                     return false;
+                }
+            } else if (sa.getParam("AILogic").equals("DonateTargetPerm")) {
+                // Illusions of Grandeur + Donate, step 2 - target Illusions.
+                CardCollectionView aiList = ai.getCardsIn(ZoneType.Battlefield, "Illusions of Grandeur");
+                if (aiList.size() > 0) {
+                    sa.getTargets().add(aiList.get(0));
+                    return true;
                 }
             }
             if (isFight) {
