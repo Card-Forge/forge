@@ -57,9 +57,7 @@ public class ChooseColorAi extends SpellAbilityAi {
             final CardCollectionView cards = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command});
             List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, ai);
 
-            // TODO: this is inexact for the purpose, assuming that each land can serve as at least some form of mana source.
-            // Improve somehow to only account for mana-producing lands and also possibly for other (non-land) mana sources.
-            int numLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, CardPredicates.Presets.UNTAPPED)).size();
+            int numLands = CardLists.filter(ComputerUtilMana.getAvailableMana(ai, true), CardPredicates.Presets.UNTAPPED).size();
 
             for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
                 ManaCost cost = testSa.getPayCosts().getTotalMana();
