@@ -66,7 +66,9 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     private final DevLabel lblSetLife = new DevLabel("Set Player Life");
     private final DevLabel lblWinGame = new DevLabel("Win Game");
     private final DevLabel lblCardToBattlefield = new DevLabel("Add Card to Play");
+    private final DevLabel lblExileFromPlay = new DevLabel("Exile Card from Play");
     private final DevLabel lblCardToHand = new DevLabel("Add Card to Hand");
+    private final DevLabel lblExileFromHand = new DevLabel("Exile Card from Hand");
     private final DevLabel lblRiggedRoll = new DevLabel("Rigged Planar Roll");
     private final DevLabel lblWalkTo = new DevLabel("Planeswalk to");
 
@@ -86,6 +88,8 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         viewport.add(this.lblViewAll, halfConstraints);
         viewport.add(this.lblCardToHand, halfConstraintsLeft);
         viewport.add(this.lblCardToBattlefield, halfConstraints);
+        viewport.add(this.lblExileFromPlay, halfConstraintsLeft);
+        viewport.add(this.lblExileFromHand, halfConstraints);
         viewport.add(this.lblSetLife, halfConstraintsLeft);
         viewport.add(this.lblWinGame, halfConstraints);
         viewport.add(this.lblSetupGame, halfConstraintsLeft);
@@ -183,8 +187,18 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public DevLabel getLblExileFromHand() {
+        return this.lblExileFromHand;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
     public final DevLabel getLblCardToBattlefield() {
         return lblCardToBattlefield;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public DevLabel getLblExileFromPlay() {
+        return this.lblExileFromPlay;
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */

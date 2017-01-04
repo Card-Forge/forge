@@ -26,6 +26,16 @@ public interface IDevModeCheats {
 
     void addCardToHand();
 
+    /*
+     * Exiles cards from specified player's hand. Will prompt user for player and cards.
+     */
+    void exileCardsFromHand();
+
+    /*
+     * Exiles cards from play. Will prompt user for player and cards.
+     */
+    void exileCardsFromBattlefield();
+
     void addCardToBattlefield();
 
     void riggedPlanarRoll();
@@ -78,6 +88,12 @@ public interface IDevModeCheats {
         }
         @Override
         public void addCardToHand() {
+        }
+        @Override
+        public void exileCardsFromHand() {
+        }
+        @Override
+        public void exileCardsFromBattlefield() {
         }
         @Override
         public void addCardToBattlefield() {

@@ -33,6 +33,8 @@ public class DevModeMenu implements ActionListener, IDevListener {
         TUTOR_FOR_CARD("Tutor for Card"),
         ADD_CARD_TO_HAND("Add Card to Hand"),
         ADD_CARD_TO_PLAY("Add Card to Play"),
+        EXILE_FROM_HAND("Exile from Hand"),
+        EXILE_FROM_PLAY("Exile from Play"),
         SET_PLAYER_LIFE("Set Player Life"),
         WIN_GAME("Win Game"),
         SETUP_GAME_STATE("Setup Game State"),
@@ -76,6 +78,8 @@ public class DevModeMenu implements ActionListener, IDevListener {
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.ADD_CARD_TO_HAND));
         menu.add(getMenuItem(DevMenuItem.ADD_CARD_TO_PLAY));
+        menu.add(getMenuItem(DevMenuItem.EXILE_FROM_HAND));
+        menu.add(getMenuItem(DevMenuItem.EXILE_FROM_PLAY));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.SET_PLAYER_LIFE));
         menu.add(getMenuItem(DevMenuItem.WIN_GAME));
@@ -119,6 +123,8 @@ public class DevModeMenu implements ActionListener, IDevListener {
         case TUTOR_FOR_CARD:       { controller.tutorForCard(); break; }
         case ADD_CARD_TO_HAND:     { controller.addCardToHand(); break; }
         case ADD_CARD_TO_PLAY:     { controller.addCardToBattlefield(); break; }
+        case EXILE_FROM_PLAY:	   { controller.exileCardsFromPlay(); break; }
+        case EXILE_FROM_HAND:	   { controller.exileCardsFromHand(); break; }
         case SET_PLAYER_LIFE:      { controller.setPlayerLife(); break; }
         case WIN_GAME:             { controller.winGame(); break; }
         case SETUP_GAME_STATE:     { controller.setupGameState(); break; }

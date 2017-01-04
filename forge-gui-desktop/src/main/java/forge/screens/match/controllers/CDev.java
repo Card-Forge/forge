@@ -35,12 +35,14 @@ public final class CDev implements ICDoc {
         view.getLblDumpGame().addMouseListener(madDump);
         view.getLblTutor().addMouseListener(madTutor);
         view.getLblCardToHand().addMouseListener(madCardToHand);
+        view.getLblExileFromHand().addMouseListener(madExileFromHand);
         view.getLblCounterPermanent().addMouseListener(madCounter);
         view.getLblTapPermanent().addMouseListener(madTap);
         view.getLblUntapPermanent().addMouseListener(madUntap);
         view.getLblSetLife().addMouseListener(madLife);
         view.getLblWinGame().addMouseListener(madWinGame);
         view.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
+        view.getLblExileFromPlay().addMouseListener(madExileFromPlay);
         view.getLblRiggedRoll().addMouseListener(madRiggedRoll);
         view.getLblWalkTo().addMouseListener(madWalkToPlane);
     }
@@ -130,6 +132,17 @@ public final class CDev implements ICDoc {
         getController().cheat().addCardToHand();
     }
 
+
+    private final MouseListener madExileFromHand = new MouseAdapter() {
+        @Override
+        public void mousePressed(final MouseEvent e) {
+            exileCardsFromHand();
+        }
+    };
+    public void exileCardsFromHand() {
+        getController().cheat().exileCardsFromHand();;
+    }
+
     private final MouseListener madCounter = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
@@ -188,6 +201,16 @@ public final class CDev implements ICDoc {
     };
     public void addCardToBattlefield() {
         getController().cheat().addCardToBattlefield();
+    }
+
+    private final MouseListener madExileFromPlay = new MouseAdapter() {
+        @Override
+        public void mousePressed(final MouseEvent e) {
+            exileCardsFromPlay();
+        }
+    };
+    public void exileCardsFromPlay() {
+        getController().cheat().exileCardsFromBattlefield();
     }
 
     private final MouseListener madRiggedRoll = new MouseAdapter() {

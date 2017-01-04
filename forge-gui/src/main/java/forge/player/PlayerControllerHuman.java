@@ -1784,6 +1784,72 @@ public class PlayerControllerHuman
             }});
         }
 
+       /* (non-Javadoc)
+        * @see forge.player.IDevModeCheats#exileCardsFromHand()
+        */
+        @Override
+        public void exileCardsFromHand() {
+            final Player p = game.getPlayer(getGui().oneOrNone("Exile card(s) from which player's hand?", PlayerView.getCollection(game.getPlayers())));
+            if (p == null) { return; }
+
+            final CardCollection selection;
+
+            CardCollectionView cardsInHand = p.getCardsIn(ZoneType.Hand);
+            selection = game.getCardList(getGui().many("Choose cards to exile",
+                    "Discarded", 0, -1, CardView.getCollection(cardsInHand), null));
+
+            if (selection != null && selection.size() > 0)
+            {
+                for (Card c : selection)
+                {
+                    if (c == null) { continue; }
+                    if (game.getAction().moveTo(ZoneType.Exile, c) != null)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(p).append(" exiles ").append(c).append(" due to Dev Cheats.");
+                        game.getGameLog().add(GameLogEntryType.DISCARD,  sb.toString());
+                    }
+                    else
+                    {
+                        game.getGameLog().add(GameLogEntryType.INFORMATION,  "DISCARD CHEAT ERROR");
+                    }
+                }
+            }
+        }
+
+        /* (non-Javadoc)
+         * @see forge.player.IDevModeCheats#exileCardsFromBattlefield()
+         */
+        @Override
+        public void exileCardsFromBattlefield() {
+            final Player p = game.getPlayer(getGui().oneOrNone("Exile card(s) from which player's battlefield?", PlayerView.getCollection(game.getPlayers())));
+            if (p == null) { return; }
+
+            final CardCollection selection;
+
+            CardCollectionView cardsInPlay = p.getCardsIn(ZoneType.Battlefield);
+            selection = game.getCardList(getGui().many("Choose cards to exile",
+                    "Discarded", 0, -1, CardView.getCollection(cardsInPlay), null));
+
+            if (selection != null && selection.size() > 0)
+            {
+                for (Card c : selection)
+                {
+                    if (c == null) { continue; }
+                    if (game.getAction().moveTo(ZoneType.Exile, c) != null)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(p).append(" exiles ").append(c).append(" due to Dev Cheats.");
+                        game.getGameLog().add(GameLogEntryType.ZONE_CHANGE,  sb.toString());
+                    }
+                    else
+                    {
+                        game.getGameLog().add(GameLogEntryType.INFORMATION,  "EXILE FROM PLAY CHEAT ERROR");
+                    }
+                }
+            }
+        }
+
         /* (non-Javadoc)
          * @see forge.player.IDevModeCheats#addCardToBattlefield()
          */
