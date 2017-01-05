@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicates;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
@@ -182,8 +183,12 @@ public class PermanentAi extends SpellAbilityAi {
                     // Only cast if there are X or more mana sources controlled by the AI *or*
                     // if there are X-1 mana sources in play but the AI has an extra land in hand
                     CardCollection m = ComputerUtilMana.getAvailableMana(ai, true);
-                    int hasExtraLandInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size() > 0 ? 1 : 0;
-                    if (m.size() + hasExtraLandInHand < Integer.parseInt(value)) {
+                    int extraMana = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size() > 0 ? 1 : 0;
+                    if (card.getName().equals("Illusions of Grandeur")) {
+                        // TODO: this is currently hardcoded for specific Illusions-Donate cost reduction spells, need to make this generic.
+                       extraMana += Math.min(3, CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.or(CardPredicates.nameEquals("Sapphire Medallion"), CardPredicates.nameEquals("Helm of Awakening"))).size()) * 2; // each cost-reduction spell accounts for {1} in both Illusions and Donate
+                    }
+                    if (m.size() + extraMana < Integer.parseInt(value)) {
                         return false;
                     }
                 }
