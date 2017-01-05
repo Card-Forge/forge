@@ -1,29 +1,27 @@
 [duel]
 [metadata]
-Name=The Great and Powerful Trixie 4
+Name=The Great and Powerful Trixie 3
 Title=The Great and Powerful Trixie
-Difficulty=very hard
-Description=Mono Blue Trix combo deck with Illusions of Grandeur and Donate
+Difficulty=hard
+Description=U splash W Trix combo deck with Illusions of Grandeur and Donate
 Icon=The Great and Powerful Trixie.jpg
 Deck Type=constructed
 [main]
 1 Ancestral Recall
-3 Ancestral Vision
+2 Ancestral Vision
 4 Arcane Denial
 4 Counterspell
-1 Dig Through Time
 2 Disdainful Stroke
 4 Donate
+3 Enlightened Tutor
 2 Essence Scatter
+4 Glacial Fortress
 4 Illusions of Grandeur
-13 Island
-2 Meekstone
-1 Mox Jet
+10 Island
 1 Mox Pearl
 1 Mox Sapphire
-4 Propaganda
+3 Mystical Tutor
 4 Sapphire Medallion
-1 Sol Ring
-1 Treasure Cruise
+4 Tundra
 3 Unsummon
 4 Vapor Snag
