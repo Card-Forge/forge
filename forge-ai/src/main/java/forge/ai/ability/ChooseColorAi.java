@@ -57,7 +57,7 @@ public class ChooseColorAi extends SpellAbilityAi {
             final CardCollectionView cards = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command});
             List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, ai);
 
-            int numLands = CardLists.filter(ComputerUtilMana.getAvailableMana(ai, true), CardPredicates.Presets.UNTAPPED).size();
+            int numManaSrcs = CardLists.filter(ComputerUtilMana.getAvailableMana(ai, true), CardPredicates.Presets.UNTAPPED).size();
 
             for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
                 ManaCost cost = testSa.getPayCosts().getTotalMana();
@@ -69,7 +69,7 @@ public class ChooseColorAi extends SpellAbilityAi {
                 } else if (colorProfile != 0 && (cost.getColorProfile() & MagicColor.fromName(prominentColor)) == 0) {
                     // does not feature prominent color, won't be able to pay for it with Nykthos activated for this color
                     continue;
-                } else if ((testSa.getPayCosts().getTotalMana().getCMC() > devotion + numLands - 3)) {
+                } else if ((testSa.getPayCosts().getTotalMana().getCMC() > devotion + numManaSrcs - 3)) {
                     // the cost may be too high even if we tap Nykthos
                     continue;
                 }
