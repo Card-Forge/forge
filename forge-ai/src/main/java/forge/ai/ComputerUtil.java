@@ -393,6 +393,16 @@ public class ComputerUtil {
             		return ComputerUtilCard.getWorstAI(typeList);
             	}
             }
+        } else if (pref.contains("DonateMe")) {
+            // search for permanents with DonateMe. priority 1 is the lowest, priority 5 the highest
+            for (int ip = 0; ip < 6; ip++) {
+                final int priority = 6 - ip;
+                for (Card c : typeList) {
+                    if (c.hasSVar("DonateMe") && Integer.parseInt(c.getSVar("DonateMe")) == priority) {
+                        return c;
+                    }
+                }
+            }
         }
         return null;
     }

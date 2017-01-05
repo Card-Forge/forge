@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
@@ -95,18 +96,16 @@ public class PumpAi extends PumpAiBase {
         		return true;
         	}
         } else if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("Donate")) {
-            // Donate currently supports only one special code path (Illusions of Grandeur)
-            CardCollectionView aiList = ai.getCardsIn(ZoneType.Battlefield, "Illusions of Grandeur");
-            if (aiList.size() > 0) {
-                // Donate an Illusions of Grandeur, step 1 - target the opponent.
+            Card donateTarget = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DonateMe", CardLists.filter(ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
+            if (donateTarget != null) {
+                // Donate, step 1 - target the opponent.
                 if (sa.getParam("AILogic").equals("DonateTargetPlayer")) {
                     sa.resetTargets();
-                    sa.getTargets().add(ai.getOpponents().get(0)); // TODO: expand this to donate to an opp who doesn't have Illusions yet
+                    sa.getTargets().add(ai.getOpponents().get(0)); // TODO: how should this work with multiple opponents?
                     return true;
                 }
             }
-            // AI currently does not know how to handle Donate effectively otherwise
-            // TODO: enhance this for other cases (e.g. Donating a card with bad drawback to the opponent)
+            // No targets found to donate, so do nothing.
             return false;
         }
         
@@ -249,10 +248,10 @@ public class PumpAi extends PumpAiBase {
                     return false;
                 }
             } else if (sa.getParam("AILogic").equals("DonateTargetPerm")) {
-                // Illusions of Grandeur + Donate, step 2 - target Illusions.
-                CardCollectionView aiList = ai.getCardsIn(ZoneType.Battlefield, "Illusions of Grandeur");
-                if (aiList.size() > 0) {
-                    sa.getTargets().add(aiList.get(0));
+                // Donate, step 2 - target a donatable permanent.
+                Card donateTarget = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DonateMe", CardLists.filter(ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
+                if (donateTarget != null) {
+                    sa.getTargets().add(donateTarget);
                     return true;
                 }
             }
