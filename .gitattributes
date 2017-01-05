@@ -65,6 +65,7 @@ forge-ai/src/main/java/forge/ai/ability/CloneAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ControlExchangeAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ControlGainAi.java -text
 forge-ai/src/main/java/forge/ai/ability/CopyPermanentAi.java -text
+forge-ai/src/main/java/forge/ai/ability/CopySpellAbilityAi.java -text
 forge-ai/src/main/java/forge/ai/ability/CounterAi.java -text
 forge-ai/src/main/java/forge/ai/ability/CountersAi.java svneol=native#text/plain
 forge-ai/src/main/java/forge/ai/ability/CountersMoveAi.java -text
@@ -3565,6 +3566,7 @@ forge-gui/res/cardsfolder/c/ceta_sanctuary.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cetavolver.txt -text
 forge-gui/res/cardsfolder/c/chain_lightning.txt -text
 forge-gui/res/cardsfolder/c/chain_of_plasma.txt -text
+forge-gui/res/cardsfolder/c/chain_of_smog.txt -text
 forge-gui/res/cardsfolder/c/chain_of_vapor.txt -text
 forge-gui/res/cardsfolder/c/chain_reaction.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/chain_stasis.txt -text

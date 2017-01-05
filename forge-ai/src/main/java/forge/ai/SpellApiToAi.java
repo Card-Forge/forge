@@ -45,7 +45,7 @@ public enum SpellApiToAi {
             .put(ApiType.Cleanup, AlwaysPlayAi.class)
             .put(ApiType.Clone, CloneAi.class)
             .put(ApiType.CopyPermanent, CopyPermanentAi.class)
-            .put(ApiType.CopySpellAbility, CanPlayAsDrawbackAi.class)
+            .put(ApiType.CopySpellAbility, CopySpellAbilityAi.class)
             .put(ApiType.ControlPlayer, CannotPlayAi.class)
             .put(ApiType.ControlSpell, CannotPlayAi.class)
             .put(ApiType.Counter, CounterAi.class)
