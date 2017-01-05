@@ -63,7 +63,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             control = new QuestWinLose(this, game0);
             break;
         case QuestDraft:
-            //control = new QuestDraftWinLose(this, game0);
+            control = new QuestDraftWinLose(this, game0);
             break;
         case PlanarConquest:
             control = new ConquestWinLose(this, game0);

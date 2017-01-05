@@ -1367,6 +1367,7 @@ forge-gui-mobile/src/forge/screens/match/winlose/ConquestWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ControlWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/GauntletWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/LimitedWinLose.java -text
+forge-gui-mobile/src/forge/screens/match/winlose/QuestDraftWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/QuestWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
 forge-gui-mobile/src/forge/screens/online/OnlineChatScreen.java -text
