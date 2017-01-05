@@ -1,0 +1,11 @@
+Name:Sram, Senior Edificer
+ManaCost:1 W
+Types:Legendary Creature Dwarf Advisor
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Aura,Equipment,Vehicle | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Aura, Equipment, or Vehicle spell, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:RemRandomDeck:True
+DeckNeeds:Type$Enchantment
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sram_senior_edificer.jpg
+Oracle:Whenever you cast an Aura, Equipment, or Vehicle spell, draw a card.
+

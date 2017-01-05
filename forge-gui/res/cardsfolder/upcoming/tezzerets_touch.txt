@@ -1,0 +1,12 @@
+Name:Tezzeret's Touch
+ManaCost:1 U B
+Types:Enchantment Aura
+K:Enchant artifact
+A:SP$ Attach | Cost$ 1 U B | ValidTgts$ Artifact | AITgts$ Card.nonCreature | AILogic$ Animate
+S:Mode$ Continuous | Affected$ Card.AttachedBy | SetPower$ 5 | SetToughness$ 5 | AddType$ Creature | Description$ Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted artifact is put into a graveyard, return that card to its owner's hand.
+
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzerets_touch.jpg
+Oracle:Enchant artifact\nEnchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.\nWhen enchanted artifact is put into a graveyard, return that card to its owner's hand.
