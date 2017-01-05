@@ -43,14 +43,15 @@ public class ChooseColorAi extends SpellAbilityAi {
         if ("Nykthos, Shrine to Nyx".equals(source.getName())) {
             PhaseHandler ph = game.getPhaseHandler();
             if (!ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.MAIN2)) {
-                // TODO: currently limited to Main 2, somehow improve to let the AI use Nykthos at other time?
+                // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?
                 return false;
             }
             String prominentColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield));
             int devotion = CardFactoryUtil.xCount(source, "Count$Devotion." + prominentColor);
+            int activationCost = sa.getPayCosts().getTotalMana().getCMC() + (sa.getPayCosts().hasTapCost() ? 1 : 0);
 
-            // do not use Nykthos if devotion to most prominent color is less than 4 (since {2} is paid to activate Nykthos, and Nykthos itself is tapped too)
-            if (devotion < 4) {
+            // do not use this SA if devotion to most prominent color is less than its own activation cost + 1 (to actually get advantage)
+            if (devotion < activationCost + 1) {
                 return false;
             }
 
@@ -64,18 +65,18 @@ public class ChooseColorAi extends SpellAbilityAi {
                 byte colorProfile = cost.getColorProfile();
                 
                 if ((cost.getCMC() == 0)) {
-                    // no mana cost, no need to tap Nykthos to activate it
+                    // no mana cost, no need to activate this SA then (additional mana not needed)
                     continue;
                 } else if (colorProfile != 0 && (cost.getColorProfile() & MagicColor.fromName(prominentColor)) == 0) {
-                    // does not feature prominent color, won't be able to pay for it with Nykthos activated for this color
+                    // does not feature prominent color, won't be able to pay for it with SA activated for this color
                     continue;
-                } else if ((testSa.getPayCosts().getTotalMana().getCMC() > devotion + numManaSrcs - 3)) {
-                    // the cost may be too high even if we tap Nykthos
+                } else if ((testSa.getPayCosts().getTotalMana().getCMC() > devotion + numManaSrcs - activationCost)) {
+                    // the cost may be too high even if we activate this SA
                     continue;
                 }
 
-                if (testSa.getHostCard().getName().equals("Nykthos, Shrine to Nyx")) {
-                    // prevent infinitely recursing Nykthos's own ability when testing AI play decision
+                if (testSa.getHostCard().getName().equals(source.getName())) {
+                    // prevent infinitely recursing own ability when testing AI play decision
                     continue;
                 }
 
