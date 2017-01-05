@@ -1,0 +1,9 @@
+[metadata]
+Code=AER
+Date=2017-01-20
+Name=Aether Revolt
+Code2=AER
+Type=Expansion
+MciCode=aer
+
+[cards]

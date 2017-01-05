@@ -18329,6 +18329,7 @@ forge-gui/res/draft/cube_juzamjedi.draft -text
 forge-gui/res/draft/cube_mtgo_rankings.txt -text
 forge-gui/res/draft/cube_skiera.draft -text
 forge-gui/res/draft/rankings.txt -text
+forge-gui/res/editions/Aether[!!-~]Revolt.txt -text
 forge-gui/res/editions/Alara[!!-~]Reborn.txt -text
 forge-gui/res/editions/Alliances.txt -text
 forge-gui/res/editions/Antiquities.txt -text
