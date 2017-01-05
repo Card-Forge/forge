@@ -3,7 +3,10 @@ package forge.game.player;
 import java.util.Comparator;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -17,12 +20,35 @@ public final class PlayerPredicates {
             }
         };
     }
+    
+    public static final Predicate<Player> isCardInPlay(final String cardName) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return p.isCardInPlay(cardName);
+            }
+        };
+    }
+    
+    public static final Predicate<Player> isNotCardInPlay(final String cardName) {
+        return Predicates.not(isCardInPlay(cardName));
+    }
 
     public static final Comparator<Player> compareByZoneSize(final ZoneType zone) {
         return new Comparator<Player>() {
             @Override
             public int compare(Player arg0, Player arg1) {
                 return Integer.compare(arg0.getCardsIn(zone).size(), arg1.getCardsIn(zone).size());
+            }
+        };
+    }
+    
+    public static final Comparator<Player> compareByZoneSize(final ZoneType zone, final Predicate<Card> pred) {
+        return new Comparator<Player>() {
+            @Override
+            public int compare(Player arg0, Player arg1) {
+                return Integer.compare(CardLists.count(arg0.getCardsIn(zone), pred),
+                        CardLists.count(arg1.getCardsIn(zone), pred));
             }
         };
     }
