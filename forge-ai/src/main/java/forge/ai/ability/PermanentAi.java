@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicates;
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
@@ -157,29 +158,31 @@ public class PermanentAi extends SpellAbilityAi {
         if (card.hasSVar("AICastPreference")) {
             String pref = card.getSVar("AICastPreference");
             String[] groups = StringUtils.split(pref, "|");
+            boolean dontCast = false, doCast = true;
             for (String group : groups) {
                 String[] elems = StringUtils.split(group.trim(), '$');
                 String param = elems[0].trim();
                 String value = elems[1].trim();
+
                 if (param.equals("MustHaveInHand")) {
                     // Only cast if another card is present in hand (e.g. Illusions of Grandeur followed by Donate)
                     boolean hasCard = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(value)).size() > 0;
                     if (!hasCard) {
-                        return false;
+                        dontCast = true;
                     }
                 } else if (param.equals("MaxControlled")) {
                     // Only cast unless there are X or more cards like this on the battlefield under AI control already
                     int numControlled = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())).size();
                     if (numControlled >= Integer.parseInt(value)) {
-                        return false;
+                        dontCast = true;
                     }
-                } else if (elems[0].trim().equals("NumManaSources")) {
+                } else if (param.equals("NumManaSources")) {
                     // Only cast if there are X or more mana sources controlled by the AI
                     CardCollection m = ComputerUtilMana.getAvailableMana(ai, true);
                     if (m.size() < Integer.parseInt(value)) {
-                        return false;
+                        dontCast = true;
                     }
-                } else if (elems[0].trim().equals("NumManaSourcesNextTurn")) {
+                } else if (param.equals("NumManaSourcesNextTurn")) {
                     // Only cast if there are X or more mana sources controlled by the AI *or*
                     // if there are X-1 mana sources in play but the AI has an extra land in hand
                     CardCollection m = ComputerUtilMana.getAvailableMana(ai, true);
@@ -189,11 +192,24 @@ public class PermanentAi extends SpellAbilityAi {
                        extraMana += Math.min(3, CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.or(CardPredicates.nameEquals("Sapphire Medallion"), CardPredicates.nameEquals("Helm of Awakening"))).size()) * 2; // each cost-reduction spell accounts for {1} in both Illusions and Donate
                     }
                     if (m.size() + extraMana < Integer.parseInt(value)) {
-                        return false;
+                        dontCast = true;
+                    }
+                } else if (param.equals("NeverCastIfLifeBelow")) {
+                    // Do not cast this spell if AI life is below a certain threshold
+                    if (ai.getLife() < Integer.parseInt(value)) {
+                        dontCast = true;
+                    }
+                } else if (param.equals("AlwaysCastIfLifeBelow")) {
+                    if (ai.getLife() < Integer.parseInt(value)) {
+                        dontCast = false;
+                        break; // disregard other preferences, always cast as a last resort
                     }
                 }
             }
-            
+
+            if (dontCast) {
+                return false;
+            } 
         }
         
         return true;
