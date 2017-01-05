@@ -19,6 +19,7 @@ package forge.game.replacement;
 
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.ability.AbilityUtils;
 import forge.util.Expressions;
@@ -94,6 +95,25 @@ public class ReplaceDamage extends ReplacementEffect {
         }
         if (getMapParams().containsKey("IsEquipping") && !getHostCard().isEquipping()) {
             return false;
+        }
+
+        // check for DamageRedirection, the Thing where the damage is redirected to must be a creature or planeswalker or a player 
+        if (getMapParams().containsKey("DamageTarget")) {
+            String def = getMapParams().get("DamageTarget");
+
+            for (Player p : AbilityUtils.getDefinedPlayers(hostCard, def, null)) {
+                if (!p.getGame().getPlayers().contains(p)) {
+                    return false;
+                }
+            }
+            for (Card c : AbilityUtils.getDefinedCards(hostCard, def, null)) {
+                if (!c.isCreature() && !c.isPlaneswalker()) {
+                    return false;
+                }
+                if (!c.isInPlay()) {
+                    return false;
+                }
+            }
         }
 
         return true;
