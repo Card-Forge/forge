@@ -146,13 +146,17 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     @Override
     public final String toString() {
+        return toString(false);
+    }
+
+    public final String toString(boolean active) {
         if (this.mapParams.containsKey("TriggerDescription") && !this.isSuppressed()) {
 
             StringBuilder sb = new StringBuilder();
             String desc = this.mapParams.get("TriggerDescription");
-            desc = desc.replace("CARDNAME", getHostCard().getName());
+            desc = desc.replace("CARDNAME", active ? getHostCard().toString() : getHostCard().getName());
             if (getHostCard().getEffectSource() != null) {
-                desc = desc.replace("EFFECTSOURCE", getHostCard().getEffectSource().getName());
+                desc = desc.replace("EFFECTSOURCE", active ? getHostCard().getEffectSource().toString() : getHostCard().getEffectSource().getName());
             }
             sb.append(desc);
             if (!this.triggerRemembered.isEmpty()) {
