@@ -191,20 +191,12 @@ public class WrappedAbility extends Ability {
 
     @Override
     public String toUnsuppressedString() {
-        String strg = this.getStackDescription();
-        /* use augmented stack description as string for wrapped things */
-        String card = regtrig.getHostCard().toString();
-        if (!strg.contains(card) && strg.contains(" this ")) {
-            /* a hack for Evolve and similar that don't have CARDNAME */
-            return card + ": " + strg;
-        } else {
-            return strg;
-        }
+        return regtrig.toString();
     }
 
     @Override
     public String getStackDescription() {
-        final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this));
+        final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(toUnsuppressedString(), this));
         if (usesTargeting()) {
             sb.append(" (Targeting ");
             for (final GameObject o : this.getTargets().getTargets()) {
