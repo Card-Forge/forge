@@ -1238,8 +1238,8 @@ public class PlayerControllerHuman
                     orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", activePlayerSAs, null);
                     //save order to avoid needing to prompt a second time to order the same abilties
                     savedOrder = new ArrayList<Integer>(activePlayerSAs.size());
-                    for (SpellAbility sa : activePlayerSAs) {
-                        savedOrder.add(orderedSAs.indexOf(sa));
+                    for (SpellAbility sa : orderedSAs) {
+                        savedOrder.add(activePlayerSAs.indexOf(sa));
                     }
                     orderedSALookup.put(saLookupKey, savedOrder);
                 }
