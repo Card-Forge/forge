@@ -38,7 +38,7 @@ import forge.toolbox.FEvent.FEventHandler;
  */
 public class QuestDraftWinLose extends ControlWinLose {
     private final transient ViewWinLose view;
-    private final QuestWinLoseController controller;
+    private final ControlWinLose controller;
 
     /**
      * Instantiates a new quest win lose handler.
@@ -46,8 +46,17 @@ public class QuestDraftWinLose extends ControlWinLose {
     public QuestDraftWinLose(final ViewWinLose view0, final GameView game0) {
         super(view0, game0);
         this.view = view0;
-        controller = new QuestWinLoseController(game0, view0);
+        controller = new ControlWinLose(view0, game0);
+    }
 
+    @Override
+    public final void actionOnQuit() {
+        controller.actionOnQuit();
+        super.actionOnQuit();
+    }
+
+    @Override
+    public final void showRewards(){
         final QuestController quest = FModel.getQuest();
         final boolean gameHadHumanPlayer = MatchController.instance.hasLocalPlayers();
 
@@ -116,12 +125,6 @@ public class QuestDraftWinLose extends ControlWinLose {
                 }
             }
         });
-    }
-
-    @Override
-    public final void actionOnQuit() {
-        controller.actionOnQuit();
-        super.actionOnQuit();
     }
 }
 
