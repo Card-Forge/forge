@@ -2,7 +2,7 @@ Name:Paradox Engine
 ManaCost:5
 Types:Legendary Artifact
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntapAll | TriggerDescription$ Whenever you cast a spell, untap all nonland permanents you control.
-SVar:TrigUntapAll:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
+SVar:TrigUntapAll:AB$ UntapAll | Cost$ 0 | ValidCards$ Card.YouCtrl+nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paradox_engine.jpg
 Oracle:Whenever you cast a spell, untap all nonland permanents you control.
 
