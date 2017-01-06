@@ -58,7 +58,7 @@ public class VPrompt implements IVDoc<CPrompt> {
         public void keyPressed(final KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 if (btnCancel.isEnabled()) {
-                    if (!btnCancel.getText().equals("End Turn")) {
+                    if (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || !btnCancel.getText().equals("End Turn")) {
                         btnCancel.doClick();
                     }
                 }

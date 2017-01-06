@@ -80,6 +80,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
     private final JCheckBox cbPauseWhileMinimized = new OptionsCheckBox("Pause While Minimized");
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
+    private final JCheckBox cbEscapeEndsTurn = new OptionsCheckBox("Use Escape Key to End Turn");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
@@ -161,6 +162,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbPauseWhileMinimized, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled, Forge pauses when minimized (primarily for AI vs AI)."), regularConstraints);
+
+        pnlPrefs.add(cbEscapeEndsTurn, regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, Escape key functions as an alternative shortcut to end the current turn."), regularConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
@@ -576,6 +580,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbCompactPrompt() {
         return cbCompactPrompt;
+    }
+
+    public final JCheckBox getCbEscapeEndsTurn() {
+        return cbEscapeEndsTurn;
     }
 
     public final JCheckBox getCbHideReminderText() {
