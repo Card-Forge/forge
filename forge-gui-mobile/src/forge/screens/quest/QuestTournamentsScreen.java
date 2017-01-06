@@ -313,26 +313,11 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     private class TournamentActivePanel extends FContainer {
         @Override
         protected void doLayout(float width, float height) {
+            // TODO: updating bracket results should really be handled via updateTournamentBoxLabel
+
             QuestEventDraft qd = FModel.getQuest().getAchievements().getCurrentDraft();
             if (qd == null) {
                 return;
-            }
-
-            FLabel[] labels = new FLabel[16];
-            String[] playerIDs = new String[16];
-            int[] iconIDs = new int[16];
-
-            String draftTitle = qd.getFullTitle();
-
-            String sid1, sid2, pairedPlayer1 = "NONE", pairedPlayer2 = "NONE";
-
-            int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
-            if (pos != -1) {
-                int offset = (pos - 8) * 2;
-                sid1 = qd.getStandings()[offset];
-                sid2 = qd.getStandings()[offset + 1];
-                pairedPlayer1 = sid1.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : qd.getAINames()[Integer.parseInt(sid1) - 1];
-                pairedPlayer2 = sid2.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : qd.getAINames()[Integer.parseInt(sid2) - 1];
             }
 
             float x = PADDING;
@@ -340,72 +325,90 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
             float buttonWidth = (width - 3 * PADDING) / 2;
             float y = PADDING;
 
+            FLabel[] labels = new FLabel[16];
+            String[] playerIDs = new String[16];
+            int[] iconIDs = new int[16];
+
+            String draftTitle = qd.getFullTitle();
             FLabel lblStandings = add(new FLabel.Builder().text("Draft: " + draftTitle).align(HAlignment.CENTER).font(FSkinFont.get(20)).build());
             lblStandings.setBounds(x, y, w, lblStandings.getAutoSizeBounds().height);
             y += lblStandings.getHeight() + PADDING;
 
-            for (int i = 0; i < 15; i++) {
-                String playerID = qd.getStandings()[i];
-
-                switch (playerID) {
-                    case QuestEventDraft.HUMAN:
-                        playerIDs[i] = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
-                        if (FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",").length > 0) {
-                            iconIDs[i] = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]);
-                        }
-                        break;
-                    case QuestEventDraft.UNDETERMINED:
-                        playerIDs[i] = "Undetermined";
-                        iconIDs[i] = GuiBase.getInterface().getAvatarCount() - 1;
-                        break;
-                    default:
-                        iconIDs[i] = qd.getAIIcons()[Integer.parseInt(playerID) - 1];
-                        playerIDs[i] = qd.getAINames()[Integer.parseInt(playerID) - 1];
-                        break;
+            if (qd.getBracket().isTournamentOver()) {
+                getBtnLeaveTournament().setText("Collect Prizes");
+            } else {
+                String sid1, sid2, pairedPlayer1 = "NONE", pairedPlayer2 = "NONE";
+                int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
+                if (pos != -1) {
+                    int offset = (pos - 8) * 2;
+                    sid1 = qd.getStandings()[offset];
+                    sid2 = qd.getStandings()[offset + 1];
+                    pairedPlayer1 = sid1.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : qd.getAINames()[Integer.parseInt(sid1) - 1];
+                    pairedPlayer2 = sid2.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : qd.getAINames()[Integer.parseInt(sid2) - 1];
                 }
 
-            }
+                for (int i = 0; i < 15; i++) {
+                    String playerID = qd.getStandings()[i];
 
-            for (int j = 0; j < 13; j += 2) {
-                switch (j) {
-                    case 0:
-                        FLabel qfinals = add(new FLabel.Builder().text("QUARTERFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
-                        qfinals.setBounds(x, y, w, qfinals.getAutoSizeBounds().height);
-                        y += qfinals.getHeight() + PADDING;
-                        break;
-                    case 8:
-                        FLabel sfinals = add(new FLabel.Builder().text("SEMIFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
-                        sfinals.setBounds(x, y, w, sfinals.getAutoSizeBounds().height);
-                        y += sfinals.getHeight() + PADDING;
-                        break;
-                    case 12:
-                        FLabel finals = add(new FLabel.Builder().text("FINAL MATCH").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
-                        finals.setBounds(x, y, w, finals.getAutoSizeBounds().height);
-                        y += finals.getHeight() + PADDING;
-                        break;
-                    default:
-                        break;
+                    switch (playerID) {
+                        case QuestEventDraft.HUMAN:
+                            playerIDs[i] = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
+                            if (FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",").length > 0) {
+                                iconIDs[i] = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]);
+                            }
+                            break;
+                        case QuestEventDraft.UNDETERMINED:
+                            playerIDs[i] = "Undetermined";
+                            iconIDs[i] = GuiBase.getInterface().getAvatarCount() - 1;
+                            break;
+                        default:
+                            iconIDs[i] = qd.getAIIcons()[Integer.parseInt(playerID) - 1];
+                            playerIDs[i] = qd.getAINames()[Integer.parseInt(playerID) - 1];
+                            break;
+                    }
+
                 }
 
-                boolean currentMatch = (playerIDs[j].equals(pairedPlayer1) || playerIDs[j + 1].equals(pairedPlayer1))
-                        && (playerIDs[j].equals(pairedPlayer2) || playerIDs[j + 1].equals(pairedPlayer2));
-                String labelText = playerIDs[j] + " vs. " + playerIDs[j + 1];
+                for (int j = 0; j < 13; j += 2) {
+                    switch (j) {
+                        case 0:
+                            FLabel qfinals = add(new FLabel.Builder().text("QUARTERFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                            qfinals.setBounds(x, y, w, qfinals.getAutoSizeBounds().height);
+                            y += qfinals.getHeight() + PADDING;
+                            break;
+                        case 8:
+                            FLabel sfinals = add(new FLabel.Builder().text("SEMIFINALS").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                            sfinals.setBounds(x, y, w, sfinals.getAutoSizeBounds().height);
+                            y += sfinals.getHeight() + PADDING;
+                            break;
+                        case 12:
+                            FLabel finals = add(new FLabel.Builder().text("FINAL MATCH").align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                            finals.setBounds(x, y, w, finals.getAutoSizeBounds().height);
+                            y += finals.getHeight() + PADDING;
+                            break;
+                        default:
+                            break;
+                    }
 
-                /* TODO: Implement drawing avatar pictures next to player names
-                FTextureRegionImage avatar1 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j]));
-                FTextureRegionImage avatar2 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j+1]));
-                 */
+                    boolean currentMatch = (playerIDs[j].equals(pairedPlayer1) || playerIDs[j + 1].equals(pairedPlayer1))
+                            && (playerIDs[j].equals(pairedPlayer2) || playerIDs[j + 1].equals(pairedPlayer2));
+                    String labelText = playerIDs[j] + " vs. " + playerIDs[j + 1];
 
-                labels[j] = add(add(new FLabel.Builder().icon(currentMatch ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE).text(labelText).align(HAlignment.CENTER).font(FSkinFont.get(16)).build()));
-                labels[j].setBounds(x, y, w, labels[j].getAutoSizeBounds().height);
-                if (currentMatch) {
-                    labels[j].setTextColor(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE));
-                }
+                    /* TODO: Implement drawing avatar pictures next to player names
+                    FTextureRegionImage avatar1 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j]));
+                    FTextureRegionImage avatar2 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j+1]));
+                     */
+                    labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE).text(labelText).align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
+                    labels[j].setBounds(x, y, w, labels[j].getAutoSizeBounds().height);
+                    if (currentMatch) {
+                        labels[j].setTextColor(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE));
+                    }
 
-                y += labels[j].getHeight();
+                    y += labels[j].getHeight();
 
-                if (j == 6 || j == 10) {
-                    y += PADDING;
+                    if (j == 6 || j == 10) {
+                        y += PADDING;
+                    }
                 }
             }
 

@@ -22,7 +22,6 @@ import forge.match.NextGameDecision;
 import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.quest.QuestDraftUtils;
-import forge.quest.QuestWinLoseController;
 import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -70,7 +69,6 @@ public class QuestDraftWinLose extends ControlWinLose {
         QuestDraftUtils.update(MatchController.instance);
         QuestDraftUtils.matchInProgress = false;
         if (!gameHadHumanPlayer) {
-            //QuestDraftUtils.matchInProgress = false;
             return;
         }
 
@@ -110,8 +108,6 @@ public class QuestDraftWinLose extends ControlWinLose {
                                 quest.getAchievements().getCurrentDraft().setWinner(playerView.getName());
                                 quest.save();
                                 // TODO: update needed here?
-                                //CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
-                                //VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
                             }
                         }
                         //The player is probably not interested in watching more AI matches.
