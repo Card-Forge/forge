@@ -11,6 +11,9 @@ Release Notes
 - Commander 2016 -
 This release features most Commander 2016 cards scripted and ready to play. The few remaining cards that are not currently supported may be scripted in the upcoming versions of Forge.
 
+- Escape Key Functionality Change -
+Forge now does not allow the player to use the Escape key as a form of an "End Turn" shortcut by default in order to avoid situations when pressing Escape recklessly can lead to missing one's own turn or other dangerous and undesirable situations. However, if you prefer the old behavior, it can be reenabled using the "Use Escape Key To End Turn" option in Forge preferences.
+
 - Quest Mode Updates and Fixes -
 It is now possible to simulate random AI vs. AI match outcome instead of playing out all AI vs. AI matches and making the player watch them. AI decks with higher total card draft ranking value have a higher chance of "winning" a random simulated AI vs. AI match. This option is disabled by default and can be enabled in Quest Preferences (set the option "Simulate AI vs. AI Matches" to 1). When using a token to create a new quest draft tournament, the player will be shown the entry fee for the tournament and will be asked to confirm creating that tournament with the provided entry fee in mind. Quest mode has become more robust and resistant to quest data corruption. Non-tournament legal substandard cards (e.g. Conspiracies) will no longer be added to quest card pool from reward booster packs and possibly other sources to prevent persistent crashes (these cards had no possible use in quest mode anyway). Quest draft tournaments with sets that have no standard draft template in Forge (e.g. Commander, Conspiracy) will no longer be created in order to prevent the game crashing when trying to start a draft tournament.
 
