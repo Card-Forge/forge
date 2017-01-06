@@ -99,7 +99,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         if (!(card.isInstant() || activator.canCastSorcery() || flash
                || this.getRestrictions().isInstantSpeed()
                || activator.hasKeyword("You may cast nonland cards as though they had flash.")
-               || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash."))) {
+               || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash.")
+               || (card.isFaceDown() && !card.getZone().is(ZoneType.Battlefield) && card.getState(CardStateName.Original).getType().isInstant()))) {
             return false;
         }
 
