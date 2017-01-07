@@ -24,6 +24,7 @@ import forge.game.card.CardDamageMap;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
+import forge.game.trigger.TriggerType;
 import forge.util.collect.FCollection;
 
 import java.util.Map;
@@ -139,7 +140,68 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     // not change the game state)
     public abstract int staticReplaceDamage(final int damage, final Card source, final boolean isCombat);
 
-    public abstract int preventDamage(final int damage, final Card source, final boolean isCombat);
+    public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
+        if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
+                || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
+            return damage;
+        }
+
+        int restDamage = damage;
+
+        // first try to replace the damage
+        final Map<String, Object> repParams = Maps.newHashMap();
+        repParams.put("Event", "DamageDone");
+        repParams.put("Affected", this);
+        repParams.put("DamageSource", source);
+        repParams.put("DamageAmount", damage);
+        repParams.put("IsCombat", isCombat);
+        repParams.put("Prevention", true);
+
+        switch (getGame().getReplacementHandler().run(repParams)) {
+        case NotReplaced:
+            restDamage = damage;
+            break;
+        case Updated:
+            restDamage = (int) repParams.get("DamageAmount");
+            break;
+        default:
+            restDamage = 0;
+        }
+
+        // then apply static Damage Prevention effects
+        restDamage = staticDamagePrevention(restDamage, source, isCombat, false);
+
+        // then apply ShieldEffects with Special Effect
+        restDamage = preventShieldEffect(restDamage);
+
+        // then do Shield with only number
+        if (restDamage <= 0) {
+            restDamage = 0;
+        } else if (restDamage >= getPreventNextDamage()) {
+            restDamage = restDamage - getPreventNextDamage();
+            setPreventNextDamage(0);
+        } else {
+            setPreventNextDamage(getPreventNextDamage() - restDamage);
+            restDamage = 0;
+        }
+
+        // if damage is greater than restDamage, damage was prevented 
+        if (damage > restDamage) {
+            int prevent = damage - restDamage;
+            
+            final Map<String, Object> runParams = Maps.newHashMap();
+            runParams.put("DamageTarget", this);
+            runParams.put("DamageAmount", prevent);
+            runParams.put("DamageSource", source);
+            runParams.put("IsCombatDamage", isCombat);
+            
+            getGame().getTriggerHandler().runTrigger(TriggerType.DamagePrevented, runParams, false);
+        }
+
+        return restDamage;
+    }
+
+    protected abstract int preventShieldEffect(final int damage);
 
     public int getPreventNextDamage() {
         return preventNextDamage;

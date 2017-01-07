@@ -604,6 +604,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     // This should be also usable by the AI to forecast an effect (so it must not change the game state)
     @Override
     public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat, final boolean isTest) {
+        if (damage <= 0) {
+            return 0;
+        }
         if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damage;
         }
@@ -727,11 +730,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         return restDamage;
     }
 
-    @Override
-    public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
-        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
-                || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
-            return damage;
+    protected int preventShieldEffect(final int damage) {
+        if (damage <= 0) {
+            return 0;
         }
 
         int restDamage = damage;
@@ -803,29 +804,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 System.out.println("Remaining damage: " + restDamage);
             }
         }
-
-        final Map<String, Object> repParams = Maps.newHashMap();
-        repParams.put("Event", "DamageDone");
-        repParams.put("Affected", this);
-        repParams.put("DamageSource", source);
-        repParams.put("DamageAmount", damage);
-        repParams.put("IsCombat", isCombat);
-        repParams.put("Prevention", true);
-
-        if (game.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
-            return 0;
-        }
-
-        restDamage = staticDamagePrevention(restDamage, source, isCombat, false);
-
-        if (restDamage >= getPreventNextDamage()) {
-            restDamage = restDamage - getPreventNextDamage();
-            setPreventNextDamage(0);
-        } else {
-            setPreventNextDamage(getPreventNextDamage() - restDamage);
-            restDamage = 0;
-        }
-
         return restDamage;
     }
 
