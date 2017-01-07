@@ -11,6 +11,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -69,6 +70,10 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // sa.getParam("ChangeType"), sa);
         CardCollectionView computerType = ai.getCardsIn(origin);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
+        
+        if (source.getName().equals("Timetwister")) {
+            return SpecialCardAi.Timetwister.consider(ai, sa);
+        }
         
         // Ugin AI: always try to sweep before considering +1 
         if (source.getName().equals("Ugin, the Spirit Dragon")) {

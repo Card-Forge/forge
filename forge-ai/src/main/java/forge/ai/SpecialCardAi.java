@@ -233,6 +233,31 @@ public class SpecialCardAi {
             return false; // haven't found anything to play with the excess generated mana
         }
     }
+
+    // Timetwister
+    public static class Timetwister {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            final int aiHandSize = ai.getCardsIn(ZoneType.Hand).size();
+            int maxOppHandSize = 0;
+
+            final int HAND_SIZE_THRESHOLD = 3;
+
+            for (Player p : ai.getOpponents()) {
+                int handSize = p.getCardsIn(ZoneType.Hand).size();
+                if (handSize > maxOppHandSize) {
+                    maxOppHandSize = handSize;
+                }
+            }
+
+            if (aiHandSize < HAND_SIZE_THRESHOLD || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD) {
+                // use in case we're getting low on cards or if we're significantly behind our opponent in cards in hand
+                return true;
+            }
+
+            return false;
+        }
+    }
+    
     // Yawgmoth's Bargain
     public static class YawgmothsBargain {
         public static boolean consider(Player ai, SpellAbility sa) {
