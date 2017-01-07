@@ -368,7 +368,7 @@ public class ComputerUtilMana {
                 if (saPayment.getParam("AILogic").equals("BlackLotus")) {
                     consider = SpecialCardAi.BlackLotus.consider(ai, sa, cost);
                     if (!consider) {
-                        saExcludeList.add(saPayment);
+                        saExcludeList.add(saPayment); // since we checked this already, do not loop indefinitely checking again
                         continue;
                     }
                 }
