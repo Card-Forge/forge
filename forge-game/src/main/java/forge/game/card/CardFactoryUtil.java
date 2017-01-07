@@ -1099,7 +1099,9 @@ public class CardFactoryUtil {
         if (sq[0].contains("FatefulHour")) {
             return doXMath(Integer.parseInt(sq[cc.getLife() <= 5 ? 1 : 2]), m, c);
         }
-
+        if (sq[0].contains("Revolt")) {
+            return doXMath(Integer.parseInt(sq[cc.hasRevolt() ? 1 : 2]), m, c);
+        }
         if (sq[0].contains("Landfall")) {
             return doXMath(Integer.parseInt(sq[cc.hasLandfall() ? 1 : 2]), m, c);
         }

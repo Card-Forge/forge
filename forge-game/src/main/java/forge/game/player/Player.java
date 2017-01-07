@@ -107,6 +107,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDiscardedThisTurn = 0;
     private int numCardsInHandStartedThisTurnWith = 0;
 
+    private boolean revolt = false;
+
     private CardCollection sacrificedThisTurn = new CardCollection();
 
     private Map<CounterType, Integer> countersAddedtoPermThisTurn = Maps.newEnumMap(CounterType.class);
@@ -1898,8 +1900,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasMetalcraft() {
-        final CardCollectionView list = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
-        return list.size() >= 3;
+        return CardLists.count(getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS) >= 3;
     }
 
     public final boolean hasThreshold() {
@@ -1908,6 +1909,14 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean hasHellbent() {
         return getZone(ZoneType.Hand).isEmpty();
+    }
+
+    public final boolean hasRevolt() {
+        return revolt;
+    }
+
+    public final void setRevolt(final boolean val) {
+        revolt = val;
     }
 
     public final boolean hasDelirium() {
@@ -1953,7 +1962,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         prowl.add(type);
     }
     public final void resetProwl() {
-        prowl = new ArrayList<String>();
+        prowl.clear();
     }
 
     public final void setLibrarySearched(final int l) {
@@ -2588,6 +2597,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetCounterToPermThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
+        setRevolt(false);
     }
 
     public boolean canCastSorcery() {

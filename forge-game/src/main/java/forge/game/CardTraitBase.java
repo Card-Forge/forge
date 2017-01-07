@@ -208,6 +208,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         if ("True".equalsIgnoreCase(params.get("Hellbent")) && !hostController.hasHellbent()) return false;
         if ("True".equalsIgnoreCase(params.get("Bloodthirst")) && !hostController.hasBloodthirst()) return false;
         if ("True".equalsIgnoreCase(params.get("FatefulHour")) && hostController.getLife() > 5) return false;
+        if ("True".equalsIgnoreCase(params.get("Revolt")) && !hostController.hasRevolt()) return false;
 
         if (params.containsKey("Presence")) {
             if (hostCard.getCastFrom() == null || hostCard.getCastSA() == null)

@@ -91,6 +91,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Hellbent")) {
                 this.setHellbent(true);
             }
+            if (value.equals("Revolt")) {
+                this.setRevolt(true);
+            }
             if (value.equals("Kicked")) {
                 this.kicked = true;
             }
@@ -228,6 +231,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isThreshold() && !activator.hasThreshold()) return false;
         if (this.isMetalcraft() && !activator.hasMetalcraft()) return false;
         if (this.isDelirium() && !activator.hasDelirium()) return false;
+        if (this.isRevolt() && !activator.hasRevolt()) return false;
         
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;

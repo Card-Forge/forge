@@ -166,7 +166,11 @@ public class GameAction {
         if (fromBattlefield && c.getSVar("EndOfTurnLeavePlay").equals("Dash")) {
             c.removeSVar("EndOfTurnLeavePlay");
         }
-        
+
+        if (fromBattlefield && !toBattlefield) {
+            c.getController().setRevolt(true);
+        }
+
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
         if (suppress || (!fromBattlefield && !toHand)) {
