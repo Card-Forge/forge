@@ -209,8 +209,8 @@ public class ComputerUtilCost {
                 }
     
                 // check if there's override for the remainingLife threshold
-                if (sourceAbility != null && sourceAbility.hasParam("AIMinLifeThreshold")) {
-                    remainingLife = Integer.parseInt(sourceAbility.getParam("AIMinLifeThreshold"));
+                if (sourceAbility != null && sourceAbility.hasParam("AILifeThreshold")) {
+                    remainingLife = Integer.parseInt(sourceAbility.getParam("AILifeThreshold"));
                 }
 
                 if (ai.getLife() - amount < remainingLife && !ai.cantLoseForZeroOrLessLife()) {

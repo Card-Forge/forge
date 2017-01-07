@@ -2,7 +2,7 @@ Name:Yawgmoth's Bargain
 ManaCost:4 B B
 Types:Enchantment
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
-A:AB$ Draw | Cost$ PayLife<1> | NumCards$ 1 | AILogic$ YawgmothsBargain | AIMinLifeThreshold$ 1 | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ PayLife<1> | NumCards$ 1 | AILogic$ YawgmothsBargain | AILifeThreshold$ 1 | SpellDescription$ Draw a card.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_bargain.jpg
 Oracle:Skip your draw step.\nPay 1 life: Draw a card.
