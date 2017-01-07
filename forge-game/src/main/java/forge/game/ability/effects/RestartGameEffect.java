@@ -69,6 +69,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
             player.setStartingLife(psc.getStartingLife());
             player.setPoisonCounters(0, sa.getHostCard());
+            player.setLandsPlayedLastTurn(0);
             player.resetLandsPlayedThisTurn();
             player.resetInvestigatedThisTurn();
             player.initVariantsZones(psc);

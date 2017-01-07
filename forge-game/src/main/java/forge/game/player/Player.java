@@ -88,7 +88,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<Card, Integer> assignedDamage = Maps.newHashMap();
     private final Map<Card, Integer> assignedCombatDamage = Maps.newHashMap();
     private int spellsCastThisTurn = 0;
+    private int spellsCastLastTurn = 0;
     private int landsPlayedThisTurn = 0;
+    private int landsPlayedLastTurn = 0;
     private int investigatedThisTurn = 0;
     private int lifeLostThisTurn = 0;
     private int lifeLostLastTurn = 0;
@@ -2333,12 +2335,18 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getLandsPlayedThisTurn() {
         return landsPlayedThisTurn;
     }
+    public final int getLandsPlayedLastTurn() {
+        return landsPlayedLastTurn;
+    }
     public final void addLandPlayedThisTurn() {
         landsPlayedThisTurn++;
         achievementTracker.landsPlayed++;
     }
     public final void resetLandsPlayedThisTurn() {
         landsPlayedThisTurn = 0;
+    }
+    public final void setLandsPlayedLastTurn(int num) {
+        landsPlayedLastTurn = num;
     }
 
     public final int getInvestigateNumThisTurn() {
@@ -2398,6 +2406,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getSpellsCastThisTurn() {
         return spellsCastThisTurn;
     }
+    public final int getSpellsCastLastTurn() {
+        return spellsCastLastTurn;
+    }
     public final void addSpellCastThisTurn() {
         spellsCastThisTurn++;
         achievementTracker.spellsCast++;
@@ -2407,6 +2418,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void resetSpellsCastThisTurn() {
         spellsCastThisTurn = 0;
+    }
+    public final void setSpellsCastLastTurn(int num) {
+        spellsCastLastTurn = num;
     }
 
     public final int getLifeGainedThisTurn() {
@@ -2589,6 +2603,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setAttackedWithCreatureThisTurn(false);
         setActivateLoyaltyAbilityThisTurn(false);
         setTappedLandForManaThisTurn(false);
+        setLandsPlayedLastTurn(getLandsPlayedThisTurn());
         resetLandsPlayedThisTurn();
         resetInvestigatedThisTurn();
         resetSacrificedThisTurn();
