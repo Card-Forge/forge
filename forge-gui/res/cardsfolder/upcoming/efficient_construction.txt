@@ -1,0 +1,9 @@
+Name:Efficient Construction
+ManaCost:3 U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter KLD | TokenAltImages$ c_1_1_thopter2_KLD,c_1_1_thopter3_KLD
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+SVar:Picture:http://www.wizards.com/global/images/magic/general/efficient_construction.jpg
+Oracle:Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.
