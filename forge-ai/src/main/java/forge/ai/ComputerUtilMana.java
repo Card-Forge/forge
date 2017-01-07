@@ -330,6 +330,8 @@ public class ComputerUtilMana {
 
         final ManaPool manapool = ai.getManaPool();
         ManaCostShard toPay = null;
+        List<SpellAbility> saExcludeList = new ArrayList<>();
+
         // Loop over mana needed
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost);
@@ -357,7 +359,30 @@ public class ComputerUtilMana {
                 break;
             }
 
+            saList.removeAll(saExcludeList);
+
             SpellAbility saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
+
+            if (saPayment != null && saPayment.hasParam("AILogic")) {
+                boolean consider = false;
+                if (saPayment.getParam("AILogic").equals("BlackLotus")) {
+                    consider = SpecialCardAi.BlackLotus.consider(ai, sa, cost);
+                    if (!consider) {
+                        saExcludeList.add(saPayment);
+                        continue;
+                    }
+                }
+            }
+            if (saPayment != null && saPayment.hasParam("AILogic")) {
+                if (saPayment.getParam("AILogic").startsWith("AIMinCMCToPayFor")) {
+                    Integer val = Integer.parseInt(saPayment.getParam("AILogic").substring(16));
+                    if (cost.getConvertedManaCost() < val) {
+                        saExcludeList.add(saPayment); // since we have already checked this, don't loop indefinitely checking again
+                        continue;
+                    }
+                }
+            }
+
             if (saPayment == null) {
                 if (!toPay.isPhyrexian() || !ai.canPayLife(2)) {
                     break; // cannot pay

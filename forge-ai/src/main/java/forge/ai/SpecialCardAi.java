@@ -23,10 +23,12 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -54,6 +56,27 @@ import java.util.List;
  * own file, inside its own package, for example, forge.ai.cards.
  */
 public class SpecialCardAi {
+
+    // Black Lotus and Lotus Bloom
+    public static class BlackLotus {
+        public static boolean consider(Player ai, SpellAbility sa, ManaCostBeingPaid cost) {
+            CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
+            int numManaSrcs = manaSources.size();
+
+            int paidCMC = cost.getConvertedManaCost();
+
+            if (paidCMC < 4) {
+                if (paidCMC == 3 && numManaSrcs < 3) {
+                    // if it's a CMC 3 spell and we're more than one mana source short for it, might be worth it
+                    return true;
+                } 
+                // otherwise, probably not worth wasting a Lotus on a spell with CMC less than 4
+                return false;
+            }
+
+            return true;
+        }
+    }
 
     // Donate
     public static class Donate {
