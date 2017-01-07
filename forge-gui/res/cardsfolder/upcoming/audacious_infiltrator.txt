@@ -1,0 +1,7 @@
+Name:Audacious Infiltrator
+ManaCost:1 W
+Types:Creature Dwarf Rogue
+PT:3/1
+K:CantBeBlockedBy Artifact.Creature 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/audacious_infiltrator.jpg
+Oracle:Audacious Infiltrator can't be blocked by artifact creatures.

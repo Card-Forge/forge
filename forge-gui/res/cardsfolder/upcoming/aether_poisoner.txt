@@ -1,0 +1,12 @@
+Name:Aether Poisoner
+ManaCost:1 B
+Types:Creature Human Artificer
+PT:1/1
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token.
+SVar:TrigToken:AB$ Token | Cost$ PayEnergy<2> | TokenAmount$ 1 | TokenName$ Servo | TokenTypes$ Artifact,Creature,Servo | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ c 1 1 servo | TokenAltImages$ c_1_1_servo2,c_1_1_servo3
+SVar:HasAttackEffect:TRUE 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_poisoner.jpg
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen Aether Poisoner enters the battlefield, you get {E}{E} (two energy counters).\nWhenever Aether Poisoner attacks, you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token.

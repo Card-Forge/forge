@@ -1,0 +1,12 @@
+Name:Baral, Chief of Compliance
+ManaCost:1 U
+Types:Legendary Creature Human Wizard
+PT:1/3
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+T:Mode$ Countered | ValidCause$ Card.YouCtrl | ValidCard$ Card | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ Whenever a spell or ability you control counters a spell, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:DB$Draw | NumCards$ 1 | SubAbility$ DBDiscard
+
+SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 
+DeckHints:Type$Instant|Sorcery
+SVar:Picture:http://www.wizards.com/global/images/magic/general/baral_chief_of_compliance.jpg
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nWhenever a spell or ability you control counters a spell, you may draw a card. If you do, discard a card.
