@@ -32,6 +32,7 @@ forge-ai/src/main/java/forge/ai/CreatureEvaluator.java -text
 forge-ai/src/main/java/forge/ai/GameState.java -text
 forge-ai/src/main/java/forge/ai/LobbyPlayerAi.java -text
 forge-ai/src/main/java/forge/ai/PlayerControllerAi.java -text
+forge-ai/src/main/java/forge/ai/SpecialCardAi.java -text
 forge-ai/src/main/java/forge/ai/SpellAbilityAi.java -text
 forge-ai/src/main/java/forge/ai/SpellApiToAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ActivateAbilityAi.java -text

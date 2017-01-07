@@ -7,6 +7,7 @@ import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -41,53 +42,7 @@ public class ChooseColorAi extends SpellAbilityAi {
         }
 
         if ("Nykthos, Shrine to Nyx".equals(source.getName())) {
-            PhaseHandler ph = game.getPhaseHandler();
-            if (!ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.MAIN2)) {
-                // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?
-                return false;
-            }
-            String prominentColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield));
-            int devotion = CardFactoryUtil.xCount(source, "Count$Devotion." + prominentColor);
-            int activationCost = sa.getPayCosts().getTotalMana().getCMC() + (sa.getPayCosts().hasTapCost() ? 1 : 0);
-
-            // do not use this SA if devotion to most prominent color is less than its own activation cost + 1 (to actually get advantage)
-            if (devotion < activationCost + 1) {
-                return false;
-            }
-
-            final CardCollectionView cards = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command});
-            List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, ai);
-
-            int numManaSrcs = CardLists.filter(ComputerUtilMana.getAvailableMana(ai, true), CardPredicates.Presets.UNTAPPED).size();
-
-            for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
-                ManaCost cost = testSa.getPayCosts().getTotalMana();
-                byte colorProfile = cost.getColorProfile();
-                
-                if ((cost.getCMC() == 0)) {
-                    // no mana cost, no need to activate this SA then (additional mana not needed)
-                    continue;
-                } else if (colorProfile != 0 && (cost.getColorProfile() & MagicColor.fromName(prominentColor)) == 0) {
-                    // does not feature prominent color, won't be able to pay for it with SA activated for this color
-                    continue;
-                } else if ((testSa.getPayCosts().getTotalMana().getCMC() > devotion + numManaSrcs - activationCost)) {
-                    // the cost may be too high even if we activate this SA
-                    continue;
-                }
-
-                if (testSa.getHostCard().getName().equals(source.getName())) {
-                    // prevent infinitely recursing own ability when testing AI play decision
-                    continue;
-                }
-
-                testSa.setActivatingPlayer(ai);
-                if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSa) == AiPlayDecision.WillPlay) {
-                    // the AI is willing to play the spell
-                    return true;
-                }
-            }
-
-            return false; // haven't found anything to play with the excess generated mana
+            return SpecialCardAi.NykthosShrineToNyx.consider(ai, sa);
         }
 
         if ("Oona, Queen of the Fae".equals(source.getName())) {

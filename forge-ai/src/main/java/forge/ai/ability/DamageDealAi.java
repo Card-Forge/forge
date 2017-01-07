@@ -112,7 +112,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         // temporarily disabled until better AI
-        if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+        if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
             return false;
         }
 

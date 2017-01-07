@@ -1166,7 +1166,7 @@ public class ComputerUtilMana {
 
                 // don't kill yourself
                 final Cost abCost = m.getPayCosts();
-                if (!ComputerUtilCost.checkLifeCost(ai, abCost, sourceCard, 1, null)) {
+                if (!ComputerUtilCost.checkLifeCost(ai, abCost, sourceCard, 1, m)) {
                     continue;
                 }
 

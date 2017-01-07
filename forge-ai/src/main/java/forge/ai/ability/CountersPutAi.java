@@ -66,7 +66,7 @@ public class CountersPutAi extends SpellAbilityAi {
         
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
                 return false;
             }
 

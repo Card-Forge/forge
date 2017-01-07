@@ -86,7 +86,7 @@ public abstract class SpellAbilityAi {
      * Evaluated costs are: life, discard, sacrifice and counter-removal
      */
     protected boolean willPayCosts(final Player ai, final SpellAbility sa, final Cost cost, final Card source) {
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, null)) {
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
             return false;
         }
         if (!ComputerUtilCost.checkDiscardCost(ai, cost, source)) {

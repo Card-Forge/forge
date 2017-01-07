@@ -35,7 +35,7 @@ public class CounterAi extends SpellAbilityAi {
             if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
                 return false;
             }
         }

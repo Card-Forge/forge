@@ -751,7 +751,7 @@ public class ComputerUtil {
                     if (controller == ai) {
                         final Cost abCost = sa.getPayCosts();
                         if (abCost != null) {
-                            if (!ComputerUtilCost.checkLifeCost(controller, abCost, c, 4, null)) {
+                            if (!ComputerUtilCost.checkLifeCost(controller, abCost, c, 4, sa)) {
                                 continue; // Won't play ability
                             }
 

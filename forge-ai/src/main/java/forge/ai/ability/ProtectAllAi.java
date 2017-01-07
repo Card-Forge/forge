@@ -21,7 +21,7 @@ public class ProtectAllAi extends SpellAbilityAi {
         final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until better AI
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, hostCard, 4, null)) {
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, hostCard, 4, sa)) {
             return false;
         }
 

@@ -33,7 +33,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         if (abCost != null) {
             // AI currently disabled for some costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
                 return false;
             }
         }

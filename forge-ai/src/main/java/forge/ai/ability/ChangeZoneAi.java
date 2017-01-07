@@ -137,6 +137,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return true;
                 }
             }
+            if (aiLogic.equals("Necropotence")) {
+                return SpecialCardAi.Necropotence.consider(aiPlayer, sa);
+            }
         }
         String origin = null;
         if (sa.hasParam("Origin")) {
@@ -245,7 +248,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
                 return false;
             }
 
@@ -654,7 +657,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
                 return false;
             }
 

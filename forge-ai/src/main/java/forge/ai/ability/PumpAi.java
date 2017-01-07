@@ -17,6 +17,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -277,38 +278,8 @@ public class PumpAi extends PumpAiBase {
                 return true;
             }
         } else if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("Donate")) {
-            final Card donateTarget = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DonateMe", CardLists.filter(
-                    ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
-            if (donateTarget != null) {
-                // Donate, step 1 - target the opponent.
-                if (sa.getParam("AILogic").equals("DonateTargetPlayer")) {
-                    // first filter for opponents which can be targeted by SA
-                    final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
-                            PlayerPredicates.isTargetableBy(sa));
-
-                    // filter for player with does not have donate target
-                    // already
-                    Iterable<Player> oppTarget = Iterables.filter(oppList,
-                            PlayerPredicates.isNotCardInPlay(donateTarget.getName()));
-                    // fall back to previous list
-                    if (Iterables.isEmpty(oppTarget)) {
-                        oppTarget = oppList;
-                    }
-
-                    // select player with less lands on the field
-                    Player opp = Collections.min(Lists.newArrayList(oppTarget),
-                            PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.Presets.LANDS));
-
-                    if (opp != null) {
-                        sa.resetTargets();
-                        sa.getTargets().add(opp);
-                        return true;
-                    }
-                    return true;
-                }
-            }
-            // No targets found to donate, so do nothing.
-            return false;
+            // Donate step 1 - try to target an opponent, preferably one who does not have a donate target yet
+            return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
@@ -449,12 +420,8 @@ public class PumpAi extends PumpAiBase {
                     return false;
                 }
             } else if (sa.getParam("AILogic").equals("DonateTargetPerm")) {
-                // Donate, step 2 - target a donatable permanent.
-                Card donateTarget = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DonateMe", CardLists.filter(ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
-                if (donateTarget != null) {
-                    sa.getTargets().add(donateTarget);
-                    return true;
-                }
+                // Donate step 2 - target a donatable permanent.
+                return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
             }
             if (isFight) {
                 return FightAi.canFightAi(ai, sa, attack, defense);

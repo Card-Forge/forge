@@ -69,7 +69,7 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, amount, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, amount, sa)) {
                 return false;
             }
 

@@ -1,0 +1,256 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package forge.ai;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
+import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
+import forge.game.player.Player;
+import forge.game.player.PlayerPredicates;
+import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Special logic for individual cards
+ * 
+ * Specific methods for each card that requires special handling are stored in inner classes 
+ * Each class should have a name based on the name of the card and ideally preceded with a 
+ * single-line comment with the full English card name to make searching for them easier.
+ * 
+ * Class methods should return "true" if they are successful and have completed their task in full,
+ * otherwise should return "false" to signal that the AI should not use the card under current
+ * circumstances. A good convention to follow is to call the method "consider" if it's the only
+ * method necessary, or considerXXXX if several methods do different tasks, and use at least two
+ * mandatory parameters (Player ai, SpellAbility sa, in this order) and, if necessary, additional
+ * parameters later.
+ * 
+ * If this class ends up being busy, consider splitting it into individual classes, each in its
+ * own file, inside its own package, for example, forge.ai.cards.
+ */
+public class SpecialCardAi {
+
+    // Donate
+    public static class Donate {
+        public static boolean considerTargetingOpponent(Player ai, SpellAbility sa) {
+            final Card donateTarget = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DonateMe", CardLists.filter(
+                    ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
+            if (donateTarget != null) {
+                // first filter for opponents which can be targeted by SA
+                final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
+                        PlayerPredicates.isTargetableBy(sa));
+
+                // filter for player who does not have donate target already
+                Iterable<Player> oppTarget = Iterables.filter(oppList,
+                        PlayerPredicates.isNotCardInPlay(donateTarget.getName()));
+                // fall back to previous list
+                if (Iterables.isEmpty(oppTarget)) {
+                    oppTarget = oppList;
+                }
+
+                // select player with less lands on the field (helpful for Illusions of Grandeur and probably Pacts too)
+                Player opp = Collections.min(Lists.newArrayList(oppTarget),
+                        PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.Presets.LANDS));
+
+                if (opp != null) {
+                    sa.resetTargets();
+                    sa.getTargets().add(opp);
+                    return true;
+                }
+                return true;
+            }
+            // No targets found to donate, so do nothing.
+            return false;
+        }
+
+        public static boolean considerDonatingPermanent(Player ai, SpellAbility sa) {
+            Card donateTarget = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DonateMe", CardLists.filter(ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
+            if (donateTarget != null) {
+                sa.resetTargets();
+                sa.getTargets().add(donateTarget);
+                return true;
+            }
+
+            // Should never get here because targetOpponent, called before targetPermanentToDonate, should already have made the AI bail
+            System.err.println("Warning: Donate AI failed at SpecialCardAi.Donate#targetPermanentToDonate despite successfully targeting an opponent first.");
+            return false;
+        }
+    }
+
+    // Necropotence
+    public static class Necropotence {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            Game game = ai.getGame();
+            int computerHandSize = ai.getZone(ZoneType.Hand).size();
+            int maxHandSize = ai.getMaxHandSize();
+
+            if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Yawgmoth's Bargain")).size() > 0) {
+                // Prefer Yawgmoth's Bargain because AI is generally better with it
+
+                // TODO: in presence of bad effects which deal damage when a card is drawn, probably better to prefer Necropotence instead?
+                // (not sure how to detect the presence of such effects yet)
+                return false;
+            }
+
+            PhaseHandler ph = game.getPhaseHandler();
+
+            int exiledWithNecro = 1; // start with 1 because if this succeeds, one extra card will be exiled with Necro
+            for (Card c : ai.getCardsIn(ZoneType.Exile)) {
+                if (c.getExiledWith() != null && "Necropotence".equals(c.getExiledWith().getName()) && c.isFaceDown()) {
+                    exiledWithNecro++;
+                }
+            }
+
+            // TODO: Any other bad effects like that?
+            boolean blackViseOTB = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise")).size() > 0;
+
+            if (!ph.isPlayerTurn(ai) && ph.is(PhaseType.MAIN2)
+                    && ai.getSpellsCastLastTurn() == 0 
+                    && ai.getSpellsCastThisTurn() == 0
+                    && ai.getLandsPlayedLastTurn() == 0) {
+                // We're in a situation when we have nothing castable in hand, something needs to be done
+                if (!blackViseOTB) {
+                    // exile-loot +1 card when a max hand size, hoping to get a workable spell or land
+                    return computerHandSize + exiledWithNecro - 1 == maxHandSize; 
+                } else {
+                    // Loot to 7 in presence of Black Vise, hoping to find what to do
+                    // NOTE: can still currently get theoretically locked with 7 uncastable spells. Loot to 8 instead?
+                    return computerHandSize + exiledWithNecro <= maxHandSize;
+                }
+            } else if (blackViseOTB && computerHandSize + exiledWithNecro - 1 >= 4) { 
+                // try not to overdraw in presence of Black Vise
+                return false; 
+            } else if (computerHandSize + exiledWithNecro - 1 >= maxHandSize) {
+                // Only draw until we reach max hand size
+                return false;
+            } else if (!ph.isPlayerTurn(ai) || !ph.is(PhaseType.MAIN2)) {
+                // Only activate in AI's own turn (sans the exception above)
+                return false;
+            } 
+
+            return true;
+        }
+    }
+
+    // Nykthos, Shrine to Nyx
+    public static class NykthosShrineToNyx {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            Game game = ai.getGame();
+            PhaseHandler ph = game.getPhaseHandler();
+            if (!ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.MAIN2)) {
+                // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?
+                return false;
+            }
+            String prominentColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield));
+            int devotion = CardFactoryUtil.xCount(sa.getHostCard(), "Count$Devotion." + prominentColor);
+            int activationCost = sa.getPayCosts().getTotalMana().getCMC() + (sa.getPayCosts().hasTapCost() ? 1 : 0);
+
+            // do not use this SA if devotion to most prominent color is less than its own activation cost + 1 (to actually get advantage)
+            if (devotion < activationCost + 1) {
+                return false;
+            }
+
+            final CardCollectionView cards = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command});
+            List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, ai);
+
+            int numManaSrcs = CardLists.filter(ComputerUtilMana.getAvailableMana(ai, true), CardPredicates.Presets.UNTAPPED).size();
+
+            for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
+                ManaCost cost = testSa.getPayCosts().getTotalMana();
+                byte colorProfile = cost.getColorProfile();
+                
+                if ((cost.getCMC() == 0)) {
+                    // no mana cost, no need to activate this SA then (additional mana not needed)
+                    continue;
+                } else if (colorProfile != 0 && (cost.getColorProfile() & MagicColor.fromName(prominentColor)) == 0) {
+                    // does not feature prominent color, won't be able to pay for it with SA activated for this color
+                    continue;
+                } else if ((testSa.getPayCosts().getTotalMana().getCMC() > devotion + numManaSrcs - activationCost)) {
+                    // the cost may be too high even if we activate this SA
+                    continue;
+                }
+
+                if (testSa.getHostCard().getName().equals(sa.getHostCard().getName())) {
+                    // prevent infinitely recursing own ability when testing AI play decision
+                    continue;
+                }
+
+                testSa.setActivatingPlayer(ai);
+                if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSa) == AiPlayDecision.WillPlay) {
+                    // the AI is willing to play the spell
+                    return true;
+                }
+            }
+
+            return false; // haven't found anything to play with the excess generated mana
+        }
+    }
+    // Yawgmoth's Bargain
+    public static class YawgmothsBargain {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            Game game = ai.getGame();
+            PhaseHandler ph = game.getPhaseHandler();
+
+            int computerHandSize = ai.getZone(ZoneType.Hand).size();
+            int maxHandSize = ai.getMaxHandSize();
+
+            // TODO: Any other bad effects like that?
+            boolean blackViseOTB = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise")).size() > 0;
+
+            // TODO: Consider effects like "whenever a player draws a card, he loses N life" (e.g. Nekusar, the Mindraiser),
+            //       and effects that draw an additional card whenever a card is drawn.
+
+            if (!ph.isPlayerTurn(ai) && ph.is(PhaseType.END_OF_TURN) 
+                    && ai.getSpellsCastLastTurn() == 0 
+                    && ai.getSpellsCastThisTurn() == 0 
+                    && ai.getLandsPlayedLastTurn() == 0) {
+                // We're in a situation when we have nothing castable in hand, something needs to be done
+                if (!blackViseOTB) {
+                    // draw +1 card when a max hand size, hoping to draw a workable spell or land
+                    return computerHandSize == maxHandSize;
+                } else {
+                    // draw cards hoping to draw answers even in presence of Black Vise if there's no valid play
+                    // TODO: maybe limit to 1 or 2 cards at a time?
+                    return computerHandSize + 1 <= maxHandSize; // currently draws to 7 cards
+                }
+            } else if (blackViseOTB && computerHandSize + 1 > 4) {
+                    // try not to overdraw in presence of Black Vise
+                    return false;
+            } else if (computerHandSize + 1 > maxHandSize) {
+                // Only draw until we reach max hand size
+                return false;
+            } else if (!ph.isPlayerTurn(ai)) {
+                // Only activate in AI's own turn (sans the exception above)
+                return false;
+            } 
+
+            return true;
+        }
+    }
+    
+}

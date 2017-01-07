@@ -68,7 +68,7 @@ public class LifeGainAi extends SpellAbilityAi {
 	            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, false)) {
 	                return false;
 	            }
-	            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+	            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
 	                return false;
 	            }
 	

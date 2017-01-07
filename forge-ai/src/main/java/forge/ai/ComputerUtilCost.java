@@ -195,8 +195,7 @@ public class ComputerUtilCost {
      * @param sourceAbility TODO
      * @return true, if successful
      */
-    public static boolean checkLifeCost(final Player ai, final Cost cost, final Card source, final int remainingLife, SpellAbility sourceAbility) {
-        // TODO - Pass in SA for everything else that calls this function
+    public static boolean checkLifeCost(final Player ai, final Cost cost, final Card source, int remainingLife, SpellAbility sourceAbility) {
         if (cost == null) {
             return true;
         }
@@ -209,6 +208,11 @@ public class ComputerUtilCost {
                     amount = AbilityUtils.calculateAmount(source, payLife.getAmount(), sourceAbility);
                 }
     
+                // check if there's override for the remainingLife threshold
+                if (sourceAbility != null && sourceAbility.hasParam("AIMinLifeThreshold")) {
+                    remainingLife = Integer.parseInt(sourceAbility.getParam("AIMinLifeThreshold"));
+                }
+
                 if (ai.getLife() - amount < remainingLife && !ai.cantLoseForZeroOrLessLife()) {
                     return false;
                 }

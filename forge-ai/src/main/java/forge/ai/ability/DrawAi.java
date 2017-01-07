@@ -29,6 +29,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
 import forge.game.cost.PaymentDecision;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -60,7 +61,7 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
                 return false;
             }
 
@@ -119,7 +120,8 @@ public class DrawAi extends SpellAbilityAi {
                     || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1
-                && !ComputerUtil.activateForCost(sa, ai)) {
+                && !ComputerUtil.activateForCost(sa, ai)
+                && !"YawgmothsBargain".equals(sa.getParam("AILogic"))) {
             return false;
         }
 
@@ -221,9 +223,18 @@ public class DrawAi extends SpellAbilityAi {
         }
         //if (n)
 
+
+        // Logic for cards that require special handling
+        if (sa.hasParam("AILogic")) {
+            if ("YawgmothsBargain".equals(sa.getParam("AILogic"))) {
+                return SpecialCardAi.YawgmothsBargain.consider(ai, sa);
+            }
+        }
+
+        // Generic logic for all cards that do not need any special handling
+
         // TODO: if xPaid and one of the below reasons would fail, instead of
         // bailing reduce toPay amount to acceptable level
-
         if (tgt != null) {
             // ability is targeted
             sa.resetTargets();

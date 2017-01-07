@@ -32,7 +32,7 @@ public class DiscardAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
                 return false;
             }
 

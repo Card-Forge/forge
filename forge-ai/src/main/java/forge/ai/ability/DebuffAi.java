@@ -46,7 +46,7 @@ public class DebuffAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 40, null)) {
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 40, sa)) {
             return false;
         }
 
