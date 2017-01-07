@@ -1197,58 +1197,36 @@ public class PlayerControllerHuman
     public void orderAndPlaySimultaneousSa(final List<SpellAbility> activePlayerSAs) {
         List<SpellAbility> orderedSAs = activePlayerSAs;
         if (activePlayerSAs.size() > 1) {
-            final String firstStr = orderedSAs.get(0).toString();
+            final String firstStr = activePlayerSAs.get(0).toString();
             boolean needPrompt = false;
             String saLookupKey = firstStr;
-            if (orderedSAs.get(0).getHostCard() != null) {
-                saLookupKey += " - " + orderedSAs.get(0).getHostCard().getId();
-            }
             char delim = (char)5;
-            for (int i = 1; i < orderedSAs.size(); i++) {
-                SpellAbility currentSa = orderedSAs.get(i);
+            for (int i = 1; i < activePlayerSAs.size(); i++) {
+                SpellAbility currentSa = activePlayerSAs.get(i);
                 String saStr = currentSa.toString();
-                if (currentSa.getHostCard() != null) {
-                    saStr += " - " + currentSa.getHostCard().getId();
-                }
                 if (!needPrompt && !saStr.equals(firstStr)) {
                     needPrompt = true; //prompt by default unless all abilities are the same
                 }
                 saLookupKey += delim + saStr;
             }
             if (needPrompt) {
-                List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
-                boolean sameOrder = false;
+            	List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
+            	boolean sameOrder = false;
 
-                if (savedOrder != null) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Would you like to keep the same order for simultaneous abilities as last time?\n\n");
-                    int c = 0;
-                    for (Integer index : savedOrder) {
-                        if (c > 9) {
-                            // do not list more than ten abilities to avoid overloading the prompt box
-                            sb.append("<...>\n");
-                            break;
-                        }
-                        sb.append(++c + ". " + activePlayerSAs.get(index).getHostCard() + "\n");
-                    }
-                    sameOrder = getGui().showConfirmDialog(sb.toString(), "Ordering simultaneous abilities", true);
-                }
-
-                if (savedOrder == null || !sameOrder) { //prompt if no saved order for the current set of abilities or if the player wants to change the order
-                    orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", activePlayerSAs, null);
-                    //save order to avoid needing to prompt a second time to order the same abilities
-                    savedOrder = new ArrayList<Integer>(activePlayerSAs.size());
-                    for (SpellAbility sa : orderedSAs) {
-                        savedOrder.add(activePlayerSAs.indexOf(sa));
-                    }
-                    orderedSALookup.put(saLookupKey, savedOrder);
-                }
-                else { //avoid prompt and just apply saved order
-                    orderedSAs = new ArrayList<SpellAbility>();
-                    for (Integer index : savedOrder) {
-                        orderedSAs.add(activePlayerSAs.get(index));
+            	if (savedOrder != null) {
+            		orderedSAs = new ArrayList<SpellAbility>();
+            		for (Integer index : savedOrder) {
+            			orderedSAs.add(activePlayerSAs.get(index));
                     }
                 }
+            	orderedSAs = getGui().order(((savedOrder==null)?"Select order for":"Reorder") + " simultaneous abilities",
+            			"Resolve first", orderedSAs, null);
+                //save order to avoid needing to prompt a second time to order the same abilities
+                savedOrder = new ArrayList<Integer>(activePlayerSAs.size());
+                for (SpellAbility sa : orderedSAs) {
+                    savedOrder.add(activePlayerSAs.indexOf(sa));
+                }
+                orderedSALookup.put(saLookupKey, savedOrder);
             }
         }
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
