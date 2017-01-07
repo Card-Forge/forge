@@ -199,14 +199,21 @@ public class WrappedAbility extends Ability {
 	}
     }
 
+    // include triggering information so that different effects look different
+    // this information is in the stack description so just use that
+    // a real solution would include only the triggering information that actually is used, but that's a major change
     @Override
     public String toUnsuppressedString() {
-        return regtrig.toString();
+    	String desc = this.getStackDescription(); /* use augmented stack description as string for wrapped things */
+       	String card = getTrigger().getHostCard().toString(); 
+        if ( !desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
+        	return card + ": " + desc; 
+        } else return desc; 
     }
 
     @Override
     public String getStackDescription() {
-        final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(toUnsuppressedString(), this));
+        final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this));
         if (usesTargeting()) {
             sb.append(" (Targeting ");
             for (final GameObject o : this.getTargets().getTargets()) {
