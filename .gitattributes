@@ -13573,6 +13573,7 @@ forge-gui/res/cardsfolder/s/self_inflicted_wound.txt -text
 forge-gui/res/cardsfolder/s/selfless_cathar.txt -text
 forge-gui/res/cardsfolder/s/selfless_exorcist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/selfless_spirit.txt -text
+forge-gui/res/cardsfolder/s/selfless_squire.txt -text
 forge-gui/res/cardsfolder/s/selhoff_occultist.txt -text
 forge-gui/res/cardsfolder/s/selkie_hedge_mage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sell_sword_brute.txt svneol=native#text/plain
@@ -16590,7 +16591,6 @@ forge-gui/res/cardsfolder/upcoming/release_the_gremlins.txt -text
 forge-gui/res/cardsfolder/upcoming/renegade_map.txt -text
 forge-gui/res/cardsfolder/upcoming/rishkar_peema_renegade.txt -text
 forge-gui/res/cardsfolder/upcoming/rishkars_expertise.txt -text
-forge-gui/res/cardsfolder/upcoming/selfless_squire.txt -text
 forge-gui/res/cardsfolder/upcoming/shipwreck_moray.txt -text
 forge-gui/res/cardsfolder/upcoming/siege_modification.txt -text
 forge-gui/res/cardsfolder/upcoming/sram_senior_edificer.txt -text

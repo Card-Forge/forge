@@ -535,6 +535,44 @@ public class GameSimulatorTest extends TestCase {
         }
     }
     
+    public void testDamagePreventedTrigger() {
+        String ajaniCardName = "Ajani Steadfast";
+        String selflessCardName = "Selfless Squire";
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        addCard(selflessCardName, p);
+        addCard("Mountain", p);
+        Card boltCard = addCardToZone("Lightning Bolt", p, ZoneType.Hand);
+        SpellAbility boltSA = boltCard.getFirstSpellAbility();
+
+        Card ajani = addCard(ajaniCardName, p);
+        ajani.addCounter(CounterType.LOYALTY, 8, false);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        
+
+        SpellAbility sa = findSAWithPrefix(ajani, "-7:");
+        assertNotNull(sa);
+        sa.setActivatingPlayer(p);
+
+        GameSimulator sim = createSimulator(game, p);
+        boltSA.getTargets().add(p);
+        sim.simulateSpellAbility(sa);
+        sim.simulateSpellAbility(boltSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simSelfless = findCardWithName(simGame, selflessCardName);
+
+        // only one damage
+        assertEquals(19, simGame.getPlayers().get(0).getLife());
+
+        // only triggered once
+        assertTrue(simSelfless.hasCounters());
+        assertEquals(2, simSelfless.getCounters(CounterType.P1P1));
+        assertEquals(2, simSelfless.getToughnessBonusFromCounters());
+        assertEquals(2, simSelfless.getPowerBonusFromCounters());
+    }
+
     public void testChosenColors() {
         String bearCardName = "Runeclaw Bear";
 
@@ -685,7 +723,7 @@ public class GameSimulatorTest extends TestCase {
         Card giant = addCard(giantCardName, p);
         addCard("Mountain", p);
         Card shockCard = addCardToZone("Shock", p, ZoneType.Hand);
-        SpellAbility shockSA = shockCard.getSpellAbilities().get(0);
+        SpellAbility shockSA = shockCard.getFirstSpellAbility();
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -893,6 +931,9 @@ public class GameSimulatorTest extends TestCase {
         String bearCardName = "Runeclaw Bear";
         String giantCardName = "Hill Giant";
 
+        String tormentName = "Everlasting Torment";
+        String meliraName = "Melira, Sylvok Outcast";
+
         // enough to cast Cone of Flame
         for (int i = 0; i < 5; ++i) {
             addCard("Mountain", p1);
@@ -935,8 +976,81 @@ public class GameSimulatorTest extends TestCase {
         assertNotNull(simGiant);
         assertEquals(2, simGiant.getDamage());
 
+        // 1 + 2 + 3 lifegain
         assertEquals(26, simGame.getPlayers().get(0).getLife());
         assertEquals(17, simGame.getPlayers().get(1).getLife());
+        
+        // second pard with Everlasting Torment
+        addCard(tormentName, p2);
+
+        GameSimulator sim2 = createSimulator(game, p1);
+
+        sim2.simulateSpellAbility(coneSA);
+        Game simGame2 = sim2.getSimulatedGameState();
+        Card simBear2 = findCardWithName(simGame2, bearCardName);
+        Card simGiant2 = findCardWithName(simGame2, giantCardName);
+        Card simPridemate2 = findCardWithName(simGame2, pridemateName);
+
+        // no Lifegain because of Everlasting Torment
+        assertNotNull(simPridemate2);
+        assertFalse(simPridemate2.hasCounters());
+        assertEquals(0, simPridemate2.getCounters(CounterType.P1P1));
+        assertEquals(0, simPridemate2.getToughnessBonusFromCounters());
+        assertEquals(0, simPridemate2.getPowerBonusFromCounters());
+
+        assertNotNull(simBear2);
+        assertEquals(0, simBear2.getDamage());
+        assertTrue(simBear2.hasCounters());
+        assertEquals(1, simBear2.getCounters(CounterType.M1M1));
+        assertEquals(-1, simBear2.getToughnessBonusFromCounters());
+        assertEquals(-1, simBear2.getPowerBonusFromCounters());
+
+        assertNotNull(simGiant2);
+        assertEquals(0, simGiant2.getDamage());
+        assertTrue(simGiant2.hasCounters());
+        assertEquals(2, simGiant2.getCounters(CounterType.M1M1));
+        assertEquals(-2, simGiant2.getToughnessBonusFromCounters());
+        assertEquals(-2, simGiant2.getPowerBonusFromCounters());
+
+        // no life gain
+        assertEquals(20, simGame2.getPlayers().get(0).getLife());
+        assertEquals(17, simGame2.getPlayers().get(1).getLife());
+
+        // third pard with Melira prevents wither 
+        addCard(meliraName, p2);
+
+        GameSimulator sim3 = createSimulator(game, p1);
+
+        sim3.simulateSpellAbility(coneSA);
+        Game simGame3 = sim3.getSimulatedGameState();
+        Card simBear3 = findCardWithName(simGame3, bearCardName);
+        Card simGiant3 = findCardWithName(simGame3, giantCardName);
+        Card simPridemate3 = findCardWithName(simGame3, pridemateName);
+
+        // no Lifegain because of Everlasting Torment
+        assertNotNull(simPridemate3);
+        assertFalse(simPridemate3.hasCounters());
+        assertEquals(0, simPridemate3.getCounters(CounterType.P1P1));
+        assertEquals(0, simPridemate3.getToughnessBonusFromCounters());
+        assertEquals(0, simPridemate3.getPowerBonusFromCounters());
+
+        assertNotNull(simBear3);
+        assertEquals(0, simBear3.getDamage());
+        assertFalse(simBear3.hasCounters());
+        assertEquals(0, simBear3.getCounters(CounterType.M1M1));
+        assertEquals(0, simBear3.getToughnessBonusFromCounters());
+        assertEquals(0, simBear3.getPowerBonusFromCounters());
+
+        assertNotNull(simGiant3);
+        assertEquals(0, simGiant3.getDamage());
+        assertFalse(simGiant3.hasCounters());
+        assertEquals(0, simGiant3.getCounters(CounterType.M1M1));
+        assertEquals(0, simGiant3.getToughnessBonusFromCounters());
+        assertEquals(0, simGiant3.getPowerBonusFromCounters());
+
+        // no life gain
+        assertEquals(20, simGame2.getPlayers().get(0).getLife());
+        assertEquals(17, simGame2.getPlayers().get(1).getLife());
     }
 
     public void testTransform() {
@@ -1039,5 +1153,201 @@ public class GameSimulatorTest extends TestCase {
         Player sim3P = sim3Game.getPlayers().get(1);
         assertEquals(0, sim3P.getManaPool().totalMana());
         assertEquals(0, sim3P.getManaPool().getAmountOfColor(MagicColor.BLACK));
+    }
+
+    public void testEnKor() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        
+        String soulfireName = "Soulfire Grand Master";
+        String pridemateName = "Ajani's Pridemate";
+        
+        String enKorName = "Spirit en-Kor";
+        String bearName = "Runeclaw Bear";
+        String shockName = "Shock";
+        
+        addCard("Mountain", p);
+
+        addCard(soulfireName, p);
+        addCard(pridemateName, p);
+
+        Card shockCard = addCardToZone(shockName, p, ZoneType.Hand);
+        
+        Card enKor = addCard(enKorName, p);
+        
+        SpellAbility enKorSA = findSAWithPrefix(enKor, "{0}:");
+        
+        Card bear = addCard(bearName, p);
+        
+        SpellAbility shockSA = shockCard.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        
+        assertEquals(2, enKor.getNetPower());
+        assertEquals(2, enKor.getNetToughness());
+        assertEquals(0, enKor.getDamage());
+        
+        assertEquals(2, bear.getNetPower());
+        assertEquals(2, bear.getNetToughness());
+        assertEquals(0, bear.getDamage());
+        
+        GameSimulator sim = createSimulator(game, p);
+        enKorSA.setTargetCard(bear);
+        shockSA.setTargetCard(enKor);
+        sim.simulateSpellAbility(enKorSA);
+        sim.simulateSpellAbility(shockSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simEnKor = findCardWithName(simGame, enKorName);
+        Card simBear = findCardWithName(simGame, bearName);
+        
+        assertNotNull(simEnKor);
+        assertEquals(1, simEnKor.getDamage());
+
+        assertNotNull(simBear);
+        assertEquals(1, simBear.getDamage());
+        
+        Card simPridemate = findCardWithName(simGame, pridemateName);
+
+        // only triggered once
+        assertTrue(simPridemate.hasCounters());
+        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getToughnessBonusFromCounters());
+        assertEquals(1, simPridemate.getPowerBonusFromCounters());
+
+        assertEquals(22, simGame.getPlayers().get(0).getLife());
+    }
+    
+    public void testRazia() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+
+        String soulfireName = "Soulfire Grand Master";
+        String pridemateName = "Ajani's Pridemate";
+
+        String raziaName = "Razia, Boros Archangel";
+        String bearName = "Runeclaw Bear";
+        String greetingName = "Alchemist's Greeting";
+
+        for (int i = 0; i < 5; ++i) {
+            addCard("Mountain", p);
+        }
+
+        addCard(soulfireName, p);
+        addCard(pridemateName, p);
+
+        Card greetingCard = addCardToZone(greetingName, p, ZoneType.Hand);
+
+        Card razia = addCard(raziaName, p);
+
+        SpellAbility preventSA = findSAWithPrefix(razia, "{T}:");
+
+        Card bear = addCard(bearName, p);
+
+        SpellAbility greetingSA = greetingCard.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        assertEquals(0, razia.getDamage());
+
+        assertEquals(2, bear.getNetPower());
+        assertEquals(2, bear.getNetToughness());
+        assertEquals(0, bear.getDamage());
+
+        GameSimulator sim = createSimulator(game, p);
+        preventSA.setTargetCard(razia);
+        preventSA.getSubAbility().setTargetCard(bear);
+        greetingSA.setTargetCard(razia);
+        sim.simulateSpellAbility(preventSA);
+        sim.simulateSpellAbility(greetingSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simRazia = findCardWithName(simGame, raziaName);
+        Card simBear = findCardWithName(simGame, bearName);
+
+        assertNotNull(simRazia);
+        assertEquals(1, simRazia.getDamage());
+
+        // bear destroyed
+        assertNull(simBear);
+
+        Card simPridemate = findCardWithName(simGame, pridemateName);
+
+        // only triggered once
+        assertTrue(simPridemate.hasCounters());
+        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getToughnessBonusFromCounters());
+        assertEquals(1, simPridemate.getPowerBonusFromCounters());
+
+        assertEquals(24, simGame.getPlayers().get(0).getLife());
+    }
+
+    public void testRazia2() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        
+        String soulfireName = "Soulfire Grand Master";
+        String pridemateName = "Ajani's Pridemate";
+        
+        String raziaName = "Razia, Boros Archangel";
+        String elementalName = "Air Elemental";
+        String shockName = "Shock";
+        
+        for (int i = 0; i < 2; ++i) {
+            addCard("Mountain", p);
+        }
+
+        addCard(soulfireName, p);
+        addCard(pridemateName, p);
+
+        Card shockCard1 = addCardToZone(shockName, p, ZoneType.Hand);
+        Card shockCard2 = addCardToZone(shockName, p, ZoneType.Hand);
+        
+        Card razia = addCard(raziaName, p);
+        
+        SpellAbility preventSA = findSAWithPrefix(razia, "{T}:");
+        
+        Card elemental = addCard(elementalName, p);
+        
+        SpellAbility shockSA1 = shockCard1.getFirstSpellAbility();
+        SpellAbility shockSA2 = shockCard2.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        assertEquals(0, razia.getDamage());
+        
+        assertEquals(4, elemental.getNetPower());
+        assertEquals(4, elemental.getNetToughness());
+        assertEquals(0, elemental.getDamage());
+        
+        GameSimulator sim = createSimulator(game, p);
+        preventSA.setTargetCard(razia);
+        preventSA.getSubAbility().setTargetCard(elemental);
+        shockSA1.setTargetCard(razia);
+        shockSA2.setTargetCard(razia);
+        sim.simulateSpellAbility(preventSA);
+        sim.simulateSpellAbility(shockSA1);
+        sim.simulateSpellAbility(shockSA2);
+        Game simGame = sim.getSimulatedGameState();
+        Card simRazia = findCardWithName(simGame, raziaName);
+        Card simElemental = findCardWithName(simGame, elementalName);
+        
+        assertNotNull(simRazia);
+        assertEquals(1, simRazia.getDamage());
+
+        // elemental not destroyed
+        assertNotNull(simElemental);
+        assertEquals(3, simElemental.getDamage());
+        
+        Card simPridemate = findCardWithName(simGame, pridemateName);
+
+        // only triggered twice
+        assertTrue(simPridemate.hasCounters());
+        assertEquals(2, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(2, simPridemate.getToughnessBonusFromCounters());
+        assertEquals(2, simPridemate.getPowerBonusFromCounters());
+
+        assertEquals(24, simGame.getPlayers().get(0).getLife());
     }
 }
