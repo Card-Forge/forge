@@ -135,7 +135,7 @@ public class SpecialCardAi {
                     && ai.getLandsPlayedLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
-                    // exile-loot +1 card when a max hand size, hoping to get a workable spell or land
+                    // exile-loot +1 card when at max hand size, hoping to get a workable spell or land
                     return computerHandSize + exiledWithNecro - 1 == maxHandSize; 
                 } else {
                     // Loot to 7 in presence of Black Vise, hoping to find what to do
@@ -231,7 +231,7 @@ public class SpecialCardAi {
                     && ai.getLandsPlayedLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
-                    // draw +1 card when a max hand size, hoping to draw a workable spell or land
+                    // draw +1 card when at max hand size, hoping to draw a workable spell or land
                     return computerHandSize == maxHandSize;
                 } else {
                     // draw cards hoping to draw answers even in presence of Black Vise if there's no valid play
