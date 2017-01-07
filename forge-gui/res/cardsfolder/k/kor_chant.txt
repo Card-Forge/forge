@@ -8,7 +8,7 @@ SVar:DBChooseSource:DB$ ChooseSource | Choices$ Card | SubAbility$ DBEffect
 
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | SVars$ SelflessDmg,ExileEffect | References$ SelflessDamage,OutOfSight,SelflessDmg,ExileEffect | ImprintCards$ ParentTarget | RememberObjects$ ThisTargetedCard | SubAbility$ DBCleanup | ConditionDefined$ ParentTarget | ConditionPresent$ Card | ConditionCompare$ GE1
 
-SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ValidSource$ Card.ChosenCard | ReplaceWith$ SelflessDmg | IsPresent$ Creature.IsRemembered | Description$ All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ValidSource$ Card.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ Remembered | Description$ All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
 
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card
 

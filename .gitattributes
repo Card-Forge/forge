@@ -12673,6 +12673,7 @@ forge-gui/res/cardsfolder/r/revenant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/revenant_patriarch.txt -text
 forge-gui/res/cardsfolder/r/revenge_of_the_hunted.txt -text
 forge-gui/res/cardsfolder/r/reverberate.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/reverberation.txt -text
 forge-gui/res/cardsfolder/r/revered_dead.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/revered_elder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/revered_unicorn.txt -text svneol=unset#text/plain

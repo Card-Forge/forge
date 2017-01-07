@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.EnchantedBy | ReplaceWith$ DmgEnchanted | Description$ All damage that would be dealt to enchanted creature is dealt to its controller instead.
-SVar:DmgEnchanted:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EnchantedController | VarType$ Player
+SVar:DmgEnchanted:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ReplacedTargetController | VarType$ Player
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_link.jpg
 Oracle:Enchant creature\nAll damage that would be dealt to enchanted creature is dealt to its controller instead.

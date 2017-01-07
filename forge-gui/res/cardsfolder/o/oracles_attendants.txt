@@ -3,12 +3,16 @@ ManaCost:3 W
 Types:Creature Human Soldier
 PT:1/5
 A:AB$ ChooseSource | Cost$ T | Choices$ Card | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ All damage that would be dealt to target creature this turn by a source of your choice is dealt to CARDNAME instead.
-SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ DmgSelf,ExileEffect | References$ SelflessDamage,OutOfSight,DmgSelf,ExileEffect | Duration$ HostLeavesOrEOT | ImprintCards$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
-SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ValidSource$ Card.ChosenCard | ReplaceWith$ DmgSelf | Description$ All damage that would be dealt to target creature this turn by a source of your choice is dealt to Oracle's Attendants instead.
-SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card
-SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Imprinted | Execute$ ExileEffect | Static$ True
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage from | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | SVars$ SelflessDmg,ExileEffect | References$ SelflessDamage,OutOfSight,SelflessDmg,ExileEffect | Duration$ HostLeavesOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ValidSource$ Card.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ EffectSource | Description$ The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to EFFECTSOURCE instead.
+SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card
+#Zone Change for the source of your choice
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Defined$ ChosenCard | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oracles_attendants.jpg
 Oracle:{T}: All damage that would be dealt to target creature this turn by a source of your choice is dealt to Oracle's Attendants instead.
+
+
+

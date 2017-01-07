@@ -7,7 +7,7 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | SVars$ SelflessD
 
 SVar:SelflessDamage:Event$ DamageDone | ValidSource$ Card.ChosenCard | ReplaceWith$ SelflessDmg | Description$ The next time a source of your choice would deal damage this turn, that damage is dealt to that source's controller instead.
 
-SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ChosenCardController | VarType$ Player | SubAbility$ ExileEffect
+SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ReplacedSourceController | VarType$ Player | SubAbility$ ExileEffect
 
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
