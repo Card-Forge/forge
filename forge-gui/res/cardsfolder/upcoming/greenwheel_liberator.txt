@@ -1,0 +1,8 @@
+Name:Greenwheel Liberator
+ManaCost:1 G
+Types:Creature Elf Warrior
+PT:2/1
+K:etbCounter:P1P1:2:CheckSVar$ Revolt:Revolt - CARDNAME enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.
+SVar:Morbid:Count$Revolt.1.0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/greenwheel_liberator.jpg
+Oracle:Revolt - Greenbelt Liberator enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.

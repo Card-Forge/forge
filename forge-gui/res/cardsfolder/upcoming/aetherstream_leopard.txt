@@ -8,6 +8,5 @@ SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}. If you do, it gets +2/+0 until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ PayEnergy<1> | Defined$ Self | NumAtt$ +2
 SVar:HasAttackEffect:TRUE 
-Artifact,Creature,Servo | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ c 1 1 servo | TokenAltImages$ c_1_1_servo2,c_1_1_servo3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_swooper.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherstream_leopard.jpg
 Oracle:Trample\nWhen Aetherstream Leopard enters the battlefield, you get {E} (an energy counter).\nWhenever Aetherstream Leopard attacks, you may pay {E}. If you do, it gets +2/+0 until end of turn.
