@@ -44,7 +44,7 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         return get(TrackableProperty.Key);
     }
     void updateKey(SpellAbilityStackInstance si) {
-        set(TrackableProperty.Key, si.getSpellAbility(false).toUnsuppressedString());
+    	set(TrackableProperty.Key, si.getSpellAbility(false).yieldKey());
     }
 
     public int getSourceTrigger() {

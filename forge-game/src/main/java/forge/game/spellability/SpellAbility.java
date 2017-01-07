@@ -580,6 +580,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
     }
+    
+    // key for autoyield - the card description (including number) plus the effect description
+    public String yieldKey() { 
+	return getHostCard().toString() + ": " + toUnsuppressedString();
+    }
 
     public String getStackDescription() {
         String text = getHostCard().getView().getText();

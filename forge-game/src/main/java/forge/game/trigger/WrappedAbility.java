@@ -189,6 +189,16 @@ public class WrappedAbility extends Ability {
         return sa.getView();
     }
 
+    // key for autoyield - if there is a trigger use its description as the wrapper now has triggering information in its description
+    @Override
+    public String yieldKey() { 
+	if ( getTrigger() != null ) {
+	    return getHostCard().toString() + ": " + getTrigger().toString();
+	} else {
+	    return super.yieldKey();
+	}
+    }
+
     @Override
     public String toUnsuppressedString() {
         return regtrig.toString();

@@ -911,7 +911,7 @@ public class PlayerControllerHuman
             }
         } else {
             final SpellAbility ability = stack.peekAbility();
-            if (ability != null && ability.isAbility() && getGui().shouldAutoYield(ability.toUnsuppressedString())) {
+            if (ability != null && ability.isAbility() && getGui().shouldAutoYield(ability.yieldKey())) {
                 //avoid prompt for input if top ability of stack is set to auto-yield
                 try {
                     Thread.sleep(FControlGamePlayback.resolveDelay);
@@ -1236,7 +1236,7 @@ public class PlayerControllerHuman
 
                 if (savedOrder == null || !sameOrder) { //prompt if no saved order for the current set of abilities or if the player wants to change the order
                     orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", activePlayerSAs, null);
-                    //save order to avoid needing to prompt a second time to order the same abilties
+                    //save order to avoid needing to prompt a second time to order the same abilities
                     savedOrder = new ArrayList<Integer>(activePlayerSAs.size());
                     for (SpellAbility sa : orderedSAs) {
                         savedOrder.add(activePlayerSAs.indexOf(sa));
