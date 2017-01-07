@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant artifact
 A:SP$ Attach | Cost$ 3 R | ValidTgts$ Artifact | AILogic$ Curse
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted artifact's controller, CARDNAME deals 1 damage to that player.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$ 2
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 2
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When enchanted artifact is put into a graveyard, create a 2/2 red Gremlin creature token.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Gremlin | TokenTypes$ Creature,Gremlin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 2 | TokenToughness$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gremlin_infestation.jpg
