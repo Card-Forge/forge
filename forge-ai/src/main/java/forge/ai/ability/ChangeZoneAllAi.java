@@ -71,6 +71,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         CardCollectionView computerType = ai.getCardsIn(origin);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         
+        // Timetwister AI
         if (source.getName().equals("Timetwister")) {
             return SpecialCardAi.Timetwister.consider(ai, sa);
         }
