@@ -1953,13 +1953,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int getBloodthirstAmount() {
-        int blood = 0;
-        for (Player p : game.getRegisteredPlayers()) {
-            if (p.isOpponentOf(this)) {
-                blood += p.getAssignedDamage();
-            }
-        }
-        return blood;
+        return Aggregates.sum(Iterables.filter(
+                game.getRegisteredPlayers(), PlayerPredicates.isOpponentOf(this)), Accessors.FN_GET_ASSIGNED_DAMAGE);
     }
 
     public final boolean hasSurge() {

@@ -18,6 +18,7 @@ import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -343,7 +344,8 @@ public class AbilityUtils {
     public static int calculateAmount(final Card card, String amount, final CardTraitBase ability) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
-        final Game game = card.getController().getGame();
+        final Player player = card.getController();
+        final Game game = player.getGame();
 
         // Strip and save sign for calculations
         final boolean startsWithPlus = amount.charAt(0) == '+';
@@ -423,11 +425,15 @@ public class AbilityUtils {
                 return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
             }
             else if (hType.equals("Opponents")) {
-                players.addAll(card.getController().getOpponents());
+                players.addAll(player.getOpponents());
+                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+            }
+            else if (hType.equals("RegisteredOpponents")) {
+                players.addAll(Iterables.filter(game.getRegisteredPlayers(),PlayerPredicates.isOpponentOf(player)));
                 return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
             }
             else if (hType.equals("Other")) {
-                players.addAll(card.getController().getAllOtherPlayers());
+                players.addAll(player.getAllOtherPlayers());
                 return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
             }
             else if (hType.equals("Remembered")) {

@@ -21,6 +21,15 @@ public final class PlayerPredicates {
         };
     }
     
+    public static final Predicate<Player> isOpponentOf(final Player player) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return p.isOpponentOf(player);
+            }
+        };
+    }
+    
     public static final Predicate<Player> isCardInPlay(final String cardName) {
         return new Predicate<Player>() {
             @Override
