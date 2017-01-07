@@ -261,6 +261,8 @@ public enum CounterType {
     TRAP(),
 
     TREASURE(),
+    
+    UNITY(),
 
     VELOCITY(),
 
