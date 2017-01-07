@@ -2312,35 +2312,7 @@ public class CardFactoryUtil {
                 card.setSVar("Revealed", "Remembered$Amount");
             }
             else if (keyword.startsWith("Equip")) {
-                // Check for additional params such as preferred AI targets
-                final String equipString = keyword.substring(5);
-                final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
-                // Get cost string
-                String equipCost = "";
-                if (equipExtras != null) {
-                    equipCost = equipExtras[0].trim();
-                } else {
-                    equipCost = equipString.trim();
-                }
-                // Create attach ability string
-                final StringBuilder abilityStr = new StringBuilder();
-                abilityStr.append("AB$ Attach | Cost$ ");
-                abilityStr.append(equipCost);
-                abilityStr.append(" | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control ");
-                abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
-                if (equipExtras != null) {
-                    abilityStr.append("| ").append(equipExtras[1]).append(" ");
-                }
-                abilityStr.append("| PrecostDesc$ Equip ");
-                Cost cost = new Cost(equipCost, true);
-                if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                    abilityStr.append("- ");
-                }
-                abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
-                abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target creature you control. Equip only as a sorcery.)");
-                // instantiate attach ability
-                final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
-                card.addSpellAbility(sa);
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Outlast")) {
                 addSpellAbility(keyword, card, null);
@@ -3603,6 +3575,42 @@ public class CardFactoryUtil {
 
             // append to original SA
             origSA.appendSubAbility(newSA);            
+        } else if (keyword.startsWith("Equip")) {
+            // Check for additional params such as preferred AI targets
+            final String equipString = keyword.substring(5);
+            final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
+            // Get cost string
+            String equipCost = "";
+            if (equipExtras != null) {
+                equipCost = equipExtras[0].trim();
+            } else {
+                equipCost = equipString.trim();
+            }
+            // Create attach ability string
+            final StringBuilder abilityStr = new StringBuilder();
+            abilityStr.append("AB$ Attach | Cost$ ");
+            abilityStr.append(equipCost);
+            abilityStr.append(" | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control ");
+            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
+            if (equipExtras != null) {
+                abilityStr.append("| ").append(equipExtras[1]).append(" ");
+            }
+            abilityStr.append("| PrecostDesc$ Equip ");
+            Cost cost = new Cost(equipCost, true);
+            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+                abilityStr.append("- ");
+            }
+            abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
+            abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target creature you control. Equip only as a sorcery.)");
+            // instantiate attach ability
+            final SpellAbility newSA = AbilityFactory.getAbility(abilityStr.toString(), card);
+            newSA.setIntrinsic(intrinsic);
+            if (!intrinsic) {
+                newSA.setTemporary(true);
+                // sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(newSA);
+            }
+            card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Evoke")) {
             final String[] k = keyword.split(":");
             final SpellAbility sa = card.getFirstSpellAbility();
