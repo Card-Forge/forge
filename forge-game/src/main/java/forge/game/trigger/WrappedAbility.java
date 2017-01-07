@@ -193,7 +193,11 @@ public class WrappedAbility extends Ability {
     @Override
     public String yieldKey() { 
 	if ( getTrigger() != null ) {
-	    return getHostCard().toString() + ": " + getTrigger().toString();
+	    if ( getHostCard() != null ) {
+		return getHostCard().toString() + ": " + getTrigger().toString();
+	    } else {
+		return getTrigger().toString();
+	    }
 	} else {
 	    return super.yieldKey();
 	}
