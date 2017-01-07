@@ -86,6 +86,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int life = 20;
     private int startingLife = 20;
     private final Map<Card, Integer> assignedDamage = Maps.newHashMap();
+    private final Map<Card, Integer> assignedCombatDamage = Maps.newHashMap();
     private int spellsCastThisTurn = 0;
     private int landsPlayedThisTurn = 0;
     private int investigatedThisTurn = 0;
@@ -125,10 +126,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean tappedLandForManaThisTurn = false;
     private int attackersDeclaredThisTurn = 0;
 
-    private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
+    private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
 
     private CardCollection currentPlanes = new CardCollection();
-    private List<String> prowl = new ArrayList<String>();
+    private List<String> prowl = Lists.newArrayList();
 
     private PlayerStatistics stats = new PlayerStatistics();
     private PlayerController controller;
@@ -568,10 +569,13 @@ public class Player extends GameEntity implements Comparable<Player> {
             view.updateCommanderDamage(this);
         }
 
-        assignedDamage.put(source, amount);
+        int old = assignedDamage.containsKey(source) ? assignedDamage.get(source) : 0;
+        assignedDamage.put(source, old + amount);
         source.getDamageHistory().registerDamage(this);
 
         if (isCombat) {
+            old = assignedCombatDamage.containsKey(source) ? assignedCombatDamage.get(source) : 0;
+            assignedCombatDamage.put(source, old + amount);
             for (final String type : source.getType()) {
                 source.getController().addProwlType(type);
             }
@@ -825,11 +829,20 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void clearAssignedDamage() {
         assignedDamage.clear();
+        assignedCombatDamage.clear();
     }
 
     public final int getAssignedDamage() {
         int num = 0;
         for (final Integer value : assignedDamage.values()) {
+            num += value;
+        }
+        return num;
+    }
+    
+    public final int getAssignedCombatDamage() {
+        int num = 0;
+        for (final Integer value : assignedCombatDamage.values()) {
             num += value;
         }
         return num;
@@ -2107,6 +2120,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
             if (assignedDamage.isEmpty()) {
+                return false;
+            }
+        } else if (property.startsWith("wasDealtCombatDamageThisTurn")) {
+            if (assignedCombatDamage.isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("LostLifeThisTurn")) {
