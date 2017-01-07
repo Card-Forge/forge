@@ -1,13 +1,13 @@
 package forge.trackable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeMap;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.card.CardType;
 import forge.card.CardTypeView;
@@ -40,16 +40,11 @@ public class TrackableTypes {
         private TrackableObjectType() {
         }
 
-        protected HashMap<Integer, T> getObjLookup(Tracker tracker) {
-            return tracker.getObjLookupForType(this);
-        }
-
         public T lookup(T from) {
             if (from == null) { return null; }
-            HashMap<Integer, T> objLookup = getObjLookup(from.getTracker());
-            T to = objLookup.get(from.getId());
+            T to = from.getTracker().getObj(this, from.getId());
             if (to == null) {
-                objLookup.put(from.getId(), from);
+                from.getTracker().putObj(this, from.getId(), from);
                 return from;
             }
             return to;
@@ -58,9 +53,8 @@ public class TrackableTypes {
         @Override
         protected void updateObjLookup(Tracker tracker, T newObj) {
             if (tracker == null) { return; }
-            HashMap<Integer, T> objLookup = getObjLookup(tracker);
-            if (newObj != null && !objLookup.containsKey(newObj.getId())) {
-                objLookup.put(newObj.getId(), newObj);
+            if (newObj != null && !tracker.hasObj(this, newObj.getId())) {
+                tracker.putObj(this, newObj.getId(), newObj);
                 newObj.updateObjLookup();
             }
         }
@@ -69,14 +63,13 @@ public class TrackableTypes {
         protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
             T newObj = from.get(prop);
             if (newObj != null) {
-                HashMap<Integer, T> objLookup = getObjLookup(newObj.getTracker());
-                T existingObj = objLookup.get(newObj.getId());
+                T existingObj = newObj.getTracker().getObj(this, newObj.getId());
                 if (existingObj != null) { //if object exists already, update its changed properties
                     existingObj.copyChangedProps(newObj);
                     newObj = existingObj;
                 }
                 else { //if object is new, cache in object lookup
-                    objLookup.put(newObj.getId(), newObj);
+                    newObj.getTracker().putObj(this, newObj.getId(), newObj);
                 }
             }
             to.set(prop, newObj);
@@ -106,18 +99,17 @@ public class TrackableTypes {
             TrackableCollection<T> newCollection = from.get(prop);
             if (newCollection != null) {
                 //swap in objects in old collection for objects in new collection
-                HashMap<Integer, T> objLookup = itemType.getObjLookup(from.getTracker());
                 for (int i = 0; i < newCollection.size(); i++) {
                     T newObj = newCollection.get(i);
                     if (newObj != null) {
-                        T existingObj = objLookup.get(newObj.getId());
+                        T existingObj = from.getTracker().getObj(itemType, newObj.getId());
                         if (existingObj != null) { //if object exists already, update its changed properties
                             existingObj.copyChangedProps(newObj);
                             newCollection.remove(i);
                             newCollection.add(i, existingObj);
                         }
                         else { //if object is new, cache in object lookup
-                            objLookup.put(newObj.getId(), newObj);
+                            from.getTracker().putObj(itemType, newObj.getId(), newObj);
                         }
                     }
                 }
@@ -176,7 +168,7 @@ public class TrackableTypes {
     };
 
     //make this quicker than having to define a new class for every single enum
-    private static HashMap<Class<? extends Enum<?>>, TrackableType<?>> enumTypes = new HashMap<>();
+    private static Map<Class<? extends Enum<?>>, TrackableType<?>> enumTypes = Maps.newHashMap();
 
     @SuppressWarnings("unchecked")
     public static <E extends Enum<E>> TrackableType<E> EnumType(final Class<E> enumType) {
@@ -443,7 +435,7 @@ public class TrackableTypes {
         public List<String> deserialize(TrackableDeserializer td, List<String> oldValue) {
             int size = td.readInt();
             if (size > 0) {
-                List<String> set = new ArrayList<String>();
+                List<String> set = Lists.newArrayList();
                 for (int i = 0; i < size; i++) {
                     set.add(td.readString());
                 }
@@ -470,7 +462,7 @@ public class TrackableTypes {
         public Set<String> deserialize(TrackableDeserializer td, Set<String> oldValue) {
             int size = td.readInt();
             if (size > 0) {
-                Set<String> set = new HashSet<String>();
+                Set<String> set = Sets.newHashSet();
                 for (int i = 0; i < size; i++) {
                     set.add(td.readString());
                 }
@@ -497,7 +489,7 @@ public class TrackableTypes {
         public Map<String, String> deserialize(TrackableDeserializer td, Map<String, String> oldValue) {
             int size = td.readInt();
             if (size > 0) {
-                Map<String, String> map = new HashMap<String, String>();
+                Map<String, String> map = Maps.newHashMap();
                 for (int i = 0; i < size; i++) {
                     map.put(td.readString(), td.readString());
                 }
@@ -525,7 +517,7 @@ public class TrackableTypes {
         public Map<Integer, Integer> deserialize(TrackableDeserializer td, Map<Integer, Integer> oldValue) {
             int size = td.readInt();
             if (size > 0) {
-                Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+                Map<Integer, Integer> map = Maps.newHashMap();
                 for (int i = 0; i < size; i++) {
                     map.put(td.readInt(), td.readInt());
                 }
@@ -553,7 +545,7 @@ public class TrackableTypes {
         public Map<Byte, Integer> deserialize(TrackableDeserializer td, Map<Byte, Integer> oldValue) {
             int size = td.readInt();
             if (size > 0) {
-                Map<Byte, Integer> map = new HashMap<Byte, Integer>();
+                Map<Byte, Integer> map = Maps.newHashMap();
                 for (int i = 0; i < size; i++) {
                     map.put(td.readByte(), td.readInt());
                 }
@@ -581,7 +573,7 @@ public class TrackableTypes {
         public Map<CounterType, Integer> deserialize(TrackableDeserializer td, Map<CounterType, Integer> oldValue) {
             int size = td.readInt();
             if (size > 0) {
-                Map<CounterType, Integer> map = new TreeMap<CounterType, Integer>();
+                Map<CounterType, Integer> map = Maps.newEnumMap(CounterType.class);
                 for (int i = 0; i < size; i++) {
                     map.put(CounterType.valueOf(td.readString()), td.readInt());
                 }

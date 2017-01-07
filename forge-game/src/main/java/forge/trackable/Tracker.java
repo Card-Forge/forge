@@ -1,16 +1,18 @@
 package forge.trackable;
 
-import java.util.HashMap;
 import java.util.List;
 
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Table;
 
 import forge.trackable.TrackableTypes.TrackableType;
 
 public class Tracker {
     private int freezeCounter = 0;
     private final List<DelayedPropChange> delayedPropChanges = Lists.newArrayList();
-    private final HashMap<TrackableType<?>, Object> objLookups = new HashMap<>();
+
+    private final Table<TrackableType<?>, Integer, Object> objLookups = HashBasedTable.create();
 
     public final boolean isFrozen() {
         return freezeCounter > 0;
@@ -22,14 +24,17 @@ public class Tracker {
 
     // Note: objLookups exist on the tracker and not on the TrackableType because
     // TrackableType is global and Tracker is per game.
-    public <T> HashMap<Integer, T> getObjLookupForType(TrackableType<T> type) {
-        @SuppressWarnings("unchecked")
-        HashMap<Integer, T> result = (HashMap<Integer, T>) objLookups.get(type);
-        if (result == null) {
-            result = new HashMap<>();
-            objLookups.put(type, result);
-        }
-        return result;
+    @SuppressWarnings("unchecked")
+    public <T> T getObj(TrackableType<T> type, Integer id) {
+        return (T)objLookups.get(type, id);
+    }
+
+    public boolean hasObj(TrackableType<?> type, Integer id) {
+        return objLookups.contains(type, id);
+    }
+
+    public <T> void putObj(TrackableType<T> type, Integer id, T val) {
+        objLookups.put(type, id, val);
     }
 
     public void unfreeze() {
