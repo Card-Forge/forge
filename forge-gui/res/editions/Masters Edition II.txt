@@ -1,0 +1,255 @@
+[metadata]
+Code=ME2
+Date=2008-09-22
+Name=Masters Edition II
+Code2=ME2
+Type=Online
+BoosterCovers=1
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
+
+[cards]
+1 U Abbey Gargoyles
+201 C Adarkar Sentinel
+202 C Aeolipile
+39 U Aether Storm
+115 C Ambush Party
+116 R Anarchy
+2 R Angel of Fury
+3 U Angel of Light
+117 R An-Zerrin Ruins
+4 C Armor of Faith
+77 C Armor Thrull
+5 C Armored Griffin
+78 U Ashen Ghoul
+203 R Ashnod's Cylix
+153 C Aurochs
+6 C Aysen Bureaucrats
+7 U Aysen Crusader
+225 R Badlands
+40 C Balduvian Conjurer
+79 U Balduvian Dead
+118 R Balduvian Hydra
+226 R Balduvian Trading Post
+204 C Barbed Sextant
+41 R Binding Grasp
+154 R Bounty of the Hunt
+42 C Brainstorm
+119 C Brassclaw Orcs
+120 R Brimstone Dragon
+80 C Brine Shaman
+81 U Broken Visage
+43 U Browse
+121 U Burnout
+155 C Carapace
+8 R Caribou Range
+82 C Cloak of Confusion
+205 U Clockwork Steed
+9 C Combat Medic
+122 U Conquer
+44 U Counterspell
+83 U Dance of the Dead
+84 C Dark Banishing
+123 C Death Spark
+45 R Deep Spawn
+85 U Demonic Consultation
+206 R Despotic Scepter
+191 U Diabolic Vision
+10 C Disenchant
+46 R Dreams of the Dead
+86 C Drift of the Dead
+87 C Dry Spell
+227 U Dwarven Ruins
+88 R Dystopia
+192 R Earthlink
+89 R Ebon Praetor
+228 U Ebon Stronghold
+193 R Elemental Augury
+207 R Elkin Bottle
+208 C Elven Lyre
+156 R Elvish Farmer
+157 C Elvish Hunter
+158 C Elvish Ranger
+159 U Elvish Spirit Guide
+11 R Energy Storm
+47 C Enervate
+12 U Errand of Duty
+124 C Errantry
+160 U Essence Filter
+48 C Essence Flare
+13 U Farrel's Mantle
+14 U Farrel's Zealot
+161 C Feral Thallid
+125 R Fire Dragon
+126 U Flame Spirit
+162 C Folk of the Pines
+163 U Forbidden Lore
+164 U Forgotten Lore
+90 C Foul Familiar
+194 U Fumarole
+91 C Funeral March
+165 R Fungal Bloom
+166 R Fyndhorn Pollen
+92 C Gangrenous Zombies
+167 C Giant Growth
+195 U Giant Trap Door Spider
+229 R Glacial Chasm
+127 R Glacial Crevasses
+128 C Goblin Ski Patrol
+129 U Gorilla Shaman
+93 R Grandmother Sengir
+209 R Gustha's Scepter
+230 U Havenwood Battleground
+231 R Heart of Yavimaya
+210 R Helm of Obedience
+15 C Icatian Javelineers
+16 C Icatian Phalanx
+17 C Icatian Scout
+232 U Ice Floe
+49 U Iceberg
+94 C Icequake
+50 C Icy Prison
+95 R Ihsan's Shade
+130 R Imperial Recruiter
+96 R Imperial Seal
+131 C Incinerate
+97 R Infernal Darkness
+18 U Inheritance
+132 C Ironclaw Orcs
+19 R Ivory Gargoyle
+211 R Jester's Mask
+212 U Jeweled Amulet
+168 U Johtull Wurm
+169 U Joven's Ferrets
+20 U Juniper Order Advocate
+133 U Karplusan Giant
+170 R Kaysa
+98 C Kjeldoran Dead
+21 C Kjeldoran Elite Guard
+22 U Kjeldoran Home Guard
+233 R Kjeldoran Outpost
+23 C Kjeldoran Skycaptain
+99 U Knight of Stromgald
+100 C Krovikan Fetish
+101 R Krovikan Horror
+51 C Krovikan Sorcerer
+102 U Krovikan Vampire
+52 C Lat-Nam's Legacy
+134 U Lava Burst
+171 C Leaping Lizard
+103 U Lim-Dûl's High Guard
+213 R Lodestone Bauble
+24 R Lost Order of Jarkeld
+53 R Magus of the Unseen
+214 R Mana Crypt
+54 R Marjhan
+55 R Mesmeric Trance
+135 C Meteor Shower
+104 R Minion of Leshrac
+215 U Mishra's Groundbreaker
+105 U Misinformation
+136 R Mudslide
+56 R Musician
+57 U Narwhal
+196 U Nature's Blessing
+172 R Nature's Wrath
+106 C Necrite
+107 R Necropotence
+173 U Night Soil
+137 U Orc General
+138 U Orcish Cannoneers
+139 U Orcish Captain
+140 C Orcish Conscripts
+141 C Orcish Farmer
+142 C Orcish Lumberjack
+143 R Orcish Squatters
+144 C Orcish Veteran
+25 R Order of the Sacred Torch
+26 U Order of the White Shield
+145 C Panic
+58 U Personal Tutor
+108 C Phantasmal Fiend
+59 C Phantasmal Mount
+216 U Phyrexian Devourer
+217 R Phyrexian Portal
+146 U Pillage
+60 C Portent
+147 R Pyrokinesis
+27 R Ravages of War
+61 U Ray of Command
+62 C Red Cliffs Armada
+28 C Reinforcements
+29 C Reprisal
+148 U Retribution
+30 R Righteous Fury
+174 R Ritual of Subdual
+109 R Ritual of the Machine
+149 R Rogue Skycaptain
+218 C Roterothopter
+31 R Royal Decree
+32 C Royal Trooper
+234 U Ruins of Trokair
+33 U Sacred Boon
+235 R Savannah
+34 R Scars of the Veteran
+63 C Screeching Drake
+64 R Sea Drake
+65 U Sea Spirit
+35 C Shield Bearer
+175 C Shrink
+66 C Shyft
+67 R Sibilant Spirit
+197 R Skeleton Ship
+219 U Skull Catapult
+220 U Snow Fortress
+245 L Snow-Covered Forest
+242 L Snow-Covered Island
+244 L Snow-Covered Mountain
+241 L Snow-Covered Plains
+243 L Snow-Covered Swamp
+221 U Soldevi Digger
+236 R Soldevi Excavations
+222 U Soldevi Simulacrum
+110 C Songs of the Damned
+111 U Soul Exchange
+112 U Soul Kiss
+176 U Spore Cloud
+177 U Spore Flower
+178 U Stampede
+150 U Stone Spirit
+151 C Stonehands
+68 U Storm Elemental
+198 R Storm Spirit
+113 R Stromgald Cabal
+179 R Stunted Growth
+36 R Sustaining Spirit
+237 U Svyelunite Temple
+37 U Swords to Plowshares
+238 R Taiga
+69 R Temporal Manipulation
+180 C Thallid
+181 C Thallid Devourer
+182 R Thelonite Druid
+183 C Thermokarst
+70 R Thought Lash
+71 U Thunder Wall
+223 R Time Bomb
+184 C Tinder Wall
+239 R Tundra
+240 R Underground Sea
+152 C Varchild's Crusader
+72 C Viscerid Armor
+73 U Viscerid Drone
+74 C Wall of Kelp
+38 C Warning
+224 U Whirling Catapult
+185 C Whiteout
+186 R Wiitigo
+75 U Wind Spirit
+199 U Wings of Aesthir
+200 R Winter's Night
+114 U Withering Wisps
+187 R Wolf Pack
+188 C Woolly Mammoths
+189 U Woolly Spider
+190 U Yavimaya Ancients
+76 C Zuran Spellcaster

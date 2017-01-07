@@ -1,0 +1,205 @@
+[metadata]
+Code=MED
+Date=2007-09-10
+Name=Masters Edition
+Code2=MED
+Type=Online
+BoosterCovers=1
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
+
+[cards]
+141 R Adun Oakenshield
+29 R Amnesia
+1 U Angry Mob
+57 U Animate Dead
+2 U Animate Wall
+151 R Ankh of Mishra
+30 C Apprentice Wizard
+31 C Arcane Denial
+3 R Argivian Archaeologist
+4 R Armageddon
+85 C Artifact Blast
+152 C Ashnod's Transmogrant
+113 R Autumn Willow
+86 R Balduvian Horde
+87 R Ball Lightning
+58 R Baron Sengir
+59 C Basal Thrull
+5 C Benalish Hero
+114 R Berserk
+88 C Bestial Fury
+60 U Black Knight
+61 U Blight
+62 U Breeding Pit
+89 C Brothers of Fire
+115 U Carnivorous Plant
+142 U Centaur Archer
+63 R Chains of Mephistopheles
+116 C Chub Toad
+153 U Clockwork Beast
+64 R Contagion
+154 U Copper Tablet
+90 C Crookshank Kobolds
+6 R Crusade
+65 C Cuombajj Witches
+155 U Cursed Rack
+143 R Dakkon Blackblade
+7 C Death Speakers
+8 C Death Ward
+66 U Derelor
+175 R Diamond Valley
+32 R Diminishing Returns
+9 U Divine Transformation
+156 C Dragon Engine
+10 C Dust to Dust
+91 U Dwarven Catapult
+92 C Dwarven Soldier
+67 U Eater of the Dead
+11 U Elder Land Wurm
+144 U Energy Arc
+68 C Erg Raiders
+117 R Eureka
+12 C Exile
+70 C Feast or Famine
+145 U Fire Covenant
+93 C Fissure
+33 R Force of Will
+157 R Forcefield
+193 L Forest
+194 L Forest
+195 L Forest
+118 C Fyndhorn Elves
+119 R Gargantuan Gorilla
+120 C Ghazbán Ogre
+34 C Giant Tortoise
+94 C Goblin Chirurgeon
+95 U Goblin Grenade
+96 U Goblin Mutant
+97 R Goblin Wizard
+98 C Goblins of the Flarg
+99 U Granite Gargoyle
+13 U Greater Realm of Preservation
+14 U Hallowed Ground
+15 R Hand of Justice
+71 R Hecatomb
+35 U High Tide
+16 C Holy Light
+36 U Homarid Spawning Bed
+121 C Hungry Mist
+72 C Hyalopterous Lemure
+37 C Hydroblast
+146 U Hymn of Rebirth
+73 U Hymn to Tourach
+17 C Icatian Lieutenant
+18 U Icatian Town
+122 U Ice Storm
+123 R Ifh-Bíff Efreet
+38 U Illusionary Forces
+39 C Illusionary Wall
+40 R Illusions of Grandeur
+184 L Island
+185 L Island
+186 L Island
+176 R Island of Wak-Wak
+158 R Ivory Tower
+147 R Jacques le Vert
+100 R Jokulhaups
+41 U Juxtapose
+74 R Juzám Djinn
+101 U Keldon Warlord
+75 R Khabál Ghoul
+19 C Knights of Thorn
+177 R Lake of the Dead
+102 C Lightning Bolt
+148 U Lim-Dûl's Vault
+149 R Lord of Tresserhorn
+103 R Mana Flare
+104 R Márton Stromgald
+20 C Mesa Pegasus
+76 C Mindstab Thrull
+159 R Mirror Universe
+178 U Mishra's Factory
+21 R Moat
+190 L Mountain
+191 L Mountain
+192 L Mountain
+105 C Mountain Yeti
+42 U Mystic Remora
+124 C Nature's Lore
+77 U Nether Shadow
+160 R Nevinyrral's Disk
+161 C Onulet
+106 U Orcish Mechanics
+22 C Order of Leitbur
+78 C Order of the Ebon Hand
+79 C Oubliette
+80 C Paralyze
+23 R Petra Sphinx
+43 C Phantom Monster
+150 R Phelddagrif
+81 C Phyrexian Boon
+162 U Phyrexian War Beast
+181 L Plains
+182 L Plains
+183 L Plains
+44 R Polar Kraken
+82 R Pox
+24 R Preacher
+125 R Primal Order
+45 U Psychic Purge
+46 C Psychic Venom
+107 C Pyroblast
+126 U Rabid Wombat
+179 R Rainbow Vale
+25 C Righteous Avengers
+163 R Ring of Ma'rûf
+47 C River Merfolk
+127 C Roots
+128 C Scryb Sprites
+48 C Sea Sprite
+49 U Seasinger
+26 R Seraph
+50 R Serendib Efreet
+164 R Serpent Generator
+129 C Shambling Strider
+165 U Shield of the Ages
+166 C Shield Sphere
+130 U Singing Tree
+131 U Spectral Bears
+108 U Spinal Villain
+167 U Stone Calendar
+109 U Stone Giant
+132 U Storm Seeker
+168 R Su-Chi
+51 U Sunken City
+187 L Swamp
+188 L Swamp
+189 L Swamp
+133 R Sylvan Library
+169 R Tawnos's Coffin
+52 C Telekinesis
+180 R Thawing Glaciers
+69 U The Fallen
+134 U Thicket Basilisk
+135 C Thorn Thallid
+83 R Thrull Champion
+84 C Thrull Retainer
+27 U Thunder Spirit
+53 R Time Elemental
+28 U Tivadar's Crusade
+136 R Tornado
+170 U Urza's Bauble
+171 C Urza's Chalice
+110 R Varchild's War-Riders
+54 R Vesuvan Doppelganger
+55 U Vodalian Knights
+172 U Walking Wall
+137 C Wanderlust
+111 U Winds of Change
+138 U Winter Blast
+173 R Winter Orb
+56 C Word of Undoing
+139 C Wyluli Wolf
+140 U Yavimaya Ants
+112 R Ydwen Efreet
+174 U Zuran Orb

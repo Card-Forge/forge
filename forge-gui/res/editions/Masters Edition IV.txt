@@ -1,0 +1,279 @@
+[metadata]
+Code=ME4
+Date=2011-01-10
+Name=Masters Edition IV
+Code2=ME4
+Type=Online
+BoosterCovers=1
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 fromSheet("UrzaLands")
+
+[cards]
+36 R Acid Rain
+176 C Aesthir Glider
+37 U Air Elemental
+177 R Al-abara's Carpet
+1 C Alaborn Musketeer
+2 C Alaborn Trooper
+106 R Aladdin
+178 R Alchor's Tomb
+107 R Ali from Cairo
+141 C Alluring Scent
+179 C Amulet of Kroog
+3 U Angelic Voices
+38 U Animate Artifact
+4 U Argivian Blacksmith
+142 C Argothian Pixies
+143 U Argothian Treefolk
+5 R Armageddon
+180 R Armageddon Clock
+108 C Artifact Blast
+181 R Ashnod's Altar
+109 C Atog
+241 R Badlands
+6 R Balance
+182 U Basalt Monolith
+242 R Bayou
+144 U Bee Sting
+110 C Bird Maiden
+71 U Black Knight
+7 U Blaze of Glory
+39 U Blue Elemental Blast
+183 U Book of Rass
+184 R Bottle of Suleiman
+40 R Braingeyser
+185 C Brass Man
+186 U Bronze Horse
+187 R Candelabra of Tawnos
+188 U Celestial Sword
+8 R Champion Lancer
+145 R Channel
+146 C Citanul Druid
+243 R City of Brass
+189 U Clay Statue
+190 U Clockwork Avian
+191 U Clockwork Gnomes
+192 C Clockwork Swarm
+41 R Cloud Dragon
+42 C Cloud Spirit
+193 R Colossus of Sardia
+43 R Control Magic
+9 R Conversion
+44 R Copy Artifact
+194 U Coral Helm
+45 C Counterspell
+147 C Crumble
+148 R Cyclone
+72 C Cyclopean Mummy
+195 R Cyclopean Tomb
+73 U Dakmor Plague
+74 C Dark Ritual
+149 R Deathcoil Wurm
+75 R Deathgrip
+76 R Demonic Hordes
+77 R Demonic Tutor
+111 U Detonate
+112 R Devastation
+196 U Diabolic Machine
+10 C Divine Offering
+197 C Dragon Engine
+46 R Drain Power
+78 R Dread Reaper
+79 U Dread Wight
+150 R Drop of Honey
+47 C Drowned
+11 U Dust to Dust
+80 R Ebon Dragon
+198 C Ebony Horse
+199 C Ebony Rhino
+244 U Elephant Graveyard
+151 C Elite Cat Warrior
+48 U Energy Flux
+12 R Eye for an Eye
+49 C False Summoning
+152 R Fastbond
+113 U Fire Imp
+114 R Fire Tempest
+115 U Fireball
+200 R Floodwater Dam
+201 C Flying Carpet
+153 C Fog
+154 R Force of Nature
+116 R Fork
+81 C Foul Spirit
+155 U Gaea's Avenger
+82 U Gate to Phyrexia
+202 R Gauntlet of Might
+156 C Giant Growth
+50 C Giant Tortoise
+203 C Glasses of Urza
+83 R Gloom
+117 C Goblin Bully
+118 C Goblin Cavaliers
+119 C Goblin Caves
+120 C Goblin Firestarter
+121 U Goblin General
+122 C Goblin Shrine
+123 U Goblin Warrens
+124 C Gorilla War Cry
+204 U Grapeshot Catapult
+84 C Gravebind
+85 R Guardian Beast
+13 R Harsh Justice
+86 C Hasran Ogress
+14 C Healing Salve
+205 U Horn of Deafening
+87 C Howl from Beyond
+206 R Ice Cauldron
+207 U Icy Manipulator
+51 R In the Eye of Chaos
+157 U Instill Energy
+158 C Ironhoof Ox
+15 R Island Sanctuary
+208 R Jade Monolith
+209 U Juggernaut
+88 U Junún Efreet
+16 C Just Fate
+17 R Kismet
+210 R Kormus Bell
+159 U Kudzu
+125 R Last Chance
+126 C Lava Flow
+18 R Leeches
+245 R Library of Alexandria
+211 C Library of Leng
+89 R Lich
+160 R Lifeforce
+90 C Lim-Dûl's Cohort
+161 R Living Lands
+212 U Living Wall
+52 R Mahamoti Djinn
+213 R Mana Matrix
+214 R Mana Vault
+19 R Martyr's Cry
+20 U Martyrs of Korlis
+246 R Maze of Ith
+215 C Mightstone
+127 R Mijae Djinn
+91 R Minion of Tevesh Szat
+247 R Mishra's Workshop
+53 U Mystic Decree
+216 R Naked Singularity
+248 C Oasis
+217 R Obelisk of Undoing
+218 C Obsianus Golem
+128 C Ogre Taskmaster
+219 C Onulet
+129 U Orcish Mechanics
+21 C Osai Vultures
+92 R Overwhelming Forces
+54 C Owl Familiar
+220 U Pentagram of the Ages
+22 R Personal Incarnation
+55 C Phantasmal Forces
+56 C Phantasmal Terrain
+221 U Planar Gate
+249 R Plateau
+57 R Power Artifact
+222 C Primal Clay
+130 U Primitive Justice
+58 U Prodigal Sorcerer
+93 C Prowling Nightstalker
+162 U Radjan Spirit
+94 R Rain of Daggers
+223 R Rakalite
+59 C Reconstruction
+131 U Red Elemental Blast
+163 R Regrowth
+23 C Righteous Charge
+224 R Ring of Renewal
+132 U Roc of Kher Ridges
+133 R Rock Hydra
+134 C Rockslide Ambush
+164 C Sandstorm
+250 R Savannah
+24 U Savannah Lions
+225 U Scarecrow
+165 R Scarwood Bandits
+166 C Scavenger Folk
+95 U Scavenging Ghoul
+251 R Scrubland
+60 C Sea Serpent
+135 R Sedge Troll
+96 U Sengir Vampire
+61 R Serendib Djinn
+25 U Serra Angel
+26 U Serra Aviary
+27 C Serra Bestiary
+226 U Shapeshifter
+136 R Shivan Dragon
+97 R Sinkhole
+62 C Sleight of Hand
+137 R Smoke
+227 R Sol Ring
+228 U Soldevi Golem
+63 U Soldevi Machinist
+98 C Soul Shred
+167 C Southern Elephant
+28 C Spotted Griffin
+168 U Squall
+229 C Staff of Zegon
+64 R Stasis
+29 R Steam Catapult
+252 R Strip Mine
+30 U Swords to Plowshares
+169 U Sylvan Tutor
+65 C Symbol of Unsummoning
+230 C Tablet of Epityr
+253 R Taiga
+66 U Talas Researcher
+231 C Tawnos's Wand
+232 U Tawnos's Weaponry
+31 C Temple Acolyte
+99 C Terror
+233 R Tetravus
+67 U Theft of Dreams
+68 R Thing from the Deep
+138 R Thunder Dragon
+234 R Time Vault
+170 R Titania's Song
+69 R Transmute Artifact
+235 R Triassic Egg
+254 R Tropical Island
+171 R Tsunami
+255 R Tundra
+139 U Two-Headed Giant of Foriys
+256 R Underground Sea
+236 C Urza's Chalice
+257 L Urza's Mine
+257 L Urza's Mine
+257 L Urza's Mine
+257 L Urza's Mine
+237 R Urza's Miter
+258 L Urza's Power Plant
+258 L Urza's Power Plant
+258 L Urza's Power Plant
+258 L Urza's Power Plant
+259 L Urza's Tower
+259 L Urza's Tower
+259 L Urza's Tower
+259 L Urza's Tower
+32 R Veteran Bodyguard
+238 R Vibrating Sphere
+260 R Volcanic Island
+172 C War Mammoth
+100 C Warp Artifact
+70 U Water Elemental
+101 C Weakness
+239 U Weakstone
+140 R Wheel of Fortune
+173 U Whiptail Wurm
+33 U White Knight
+102 U Wicked Pact
+34 C Wild Aesthir
+35 C Wild Griffin
+174 U Wild Ox
+175 R Wood Elemental
+103 R Word of Command
+104 U Xenic Poltergeist
+240 C Yotian Soldier
+105 U Zombie Master

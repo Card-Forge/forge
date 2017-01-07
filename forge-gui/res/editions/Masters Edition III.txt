@@ -1,0 +1,240 @@
+[metadata]
+Code=ME3
+Date=2009-09-07
+Name=Masters Edition III
+Code2=ME3
+Type=Online
+BoosterCovers=1
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
+
+[cards]
+85 U Active Volcano
+1 R Akron Legionnaire
+2 U Alabaster Potion
+57 R All Hallow's Eve
+3 C Amrou Kithkin
+86 C Anaba Ancestor
+87 C Anaba Spirit Crafter
+141 R Angus Mackenzie
+113 R Arboria
+142 R Arcades Sabboth
+188 R Arena of the Ancients
+58 U Ashes to Ashes
+189 C Astrolabe
+143 U Axelrod Gunnarson
+59 U Banshee
+144 C Barktooth Warbeard
+190 R Barl's Cage
+145 U Bartel Runeaxe
+204 R Bayou
+205 R Bazaar of Baghdad
+29 C Benthic Explorers
+191 R Black Vise
+88 C Blood Lust
+192 C Bone Flute
+30 C Boomerang
+146 U Boris Devilboon
+31 U Borrowing 100,000 Arrows
+32 C Brilliant Plan
+89 R Burning of Xinye
+4 U Call to Arms
+33 R Capture of Jingzhou
+60 U Carrion Ants
+90 C Chain Lightning
+147 R Chromium
+91 U Cinder Storm
+206 R City of Shadows
+5 R Cleanse
+193 C Coal Golem
+114 R Concordant Crossroads
+92 U Corrupt Eunuchs
+61 R Cosmic Horror
+93 C Crimson Kobolds
+94 U Crimson Manticore
+34 U Dance of Many
+6 C D'Avenant Archer
+62 C Demonic Torment
+115 U Desert Twister
+63 C Desperate Charge
+194 U Didgeridoo
+7 C Disenchant
+95 U Disharmony
+8 R Divine Intervention
+96 R Dong Zhou, the Tyrant
+9 U Eightfold Maze
+116 C Elves of Deep Shadow
+64 C Evil Presence
+10 U Exorcist
+117 U Faerie Noble
+11 U False Defeat
+65 U Famine
+195 C Fellwar Stone
+66 C Fevered Strength
+97 C Fire Ambush
+98 C Fire Drake
+118 C Fire Sprites
+99 R Firestorm Phoenix
+35 U Flash Flood
+36 C Force Spike
+37 C Forced Retreat
+228 L Forest
+229 L Forest
+230 L Forest
+100 U Forked Lightning
+119 R Freyalise's Winds
+101 U Frost Giant
+148 R Gabriel Angelfire
+120 U Gaea's Touch
+196 R Gauntlets of Chaos
+67 C Ghostly Visit
+68 C Ghosts of the Damned
+121 C Giant Growth
+69 R Grim Tutor
+12 U Guan Yu, Sainted Warrior
+13 R Guan Yu's 1,000-Li March
+149 R Gwendlyn Di Corci
+150 R Halfdane
+207 U Hammerheim
+151 R Hazezon Tamar
+14 C Heal
+122 C Heavy Fog
+70 R Hellfire
+123 R Hua Tuo, Honored Physician
+152 U Hunding Gjornersen
+124 C Hunting Cheetah
+102 C Hurloon Minotaur
+197 R Illusionary Mask
+103 C Immolation
+38 C Infuse
+219 L Island
+220 L Island
+221 L Island
+15 U Ivory Guardians
+153 C Jedit Ojanen
+154 C Jerrard of the Closed Fist
+125 C Jungle Lion
+208 R Karakas
+155 U Kei Takahashi
+126 U Killer Bees
+156 U Kjeldoran Frostbeast
+198 U Knowledge Vault
+104 U Kobold Drill Sergeant
+105 U Kobold Overlord
+106 C Kobold Taskmaster
+107 C Kobolds of Kher Keep
+16 R Kongming, "Sleeping Dragon"
+39 C Labyrinth Minotaur
+157 U Lady Caleria
+158 U Lady Evangela
+159 C Lady Orca
+40 R Land Equilibrium
+17 R Land Tax
+71 C Lesser Werewolf
+199 R Life Chisel
+18 C Lightning Blow
+19 R Liu Bei, Lord of Shu
+127 R Living Plane
+160 U Livonya Silone
+20 U Loyal Retainers
+108 R Lu Bu, Master-at-Arms
+41 U Lu Meng, Wu General
+42 U Lu Xun, Scholar General
+43 R Mana Drain
+44 R Mana Vortex
+161 U Marhault Elsdragon
+128 R Meng Huo, Barbarian King
+129 C Meng Huo's Horde
+72 R Mind Twist
+21 C Misfortune's Gain
+225 L Mountain
+226 L Mountain
+227 L Mountain
+162 U Nebuchadnezzar
+73 R Nether Void
+163 R Nicol Bolas
+200 R Nova Pentacle
+45 R Old Man of the Sea
+164 R Palladia-Mors
+165 U Pavel Maliki
+22 C Peach Garden Oath
+216 L Plains
+217 L Plains
+218 L Plains
+209 R Plateau
+166 U Princess Lucrezia
+109 C Raging Minotaur
+167 U Ragnar
+168 C Ramirez DePietro
+169 U Ramses Overdark
+170 R Rasputin Dreamweaver
+46 U Recall
+130 U Reincarnation
+47 C Remove Soul
+48 R Reset
+49 U Reveka, Wizard Savant
+131 U Riding the Dilu Horse
+171 U Riven Turnbull
+172 R Rohgahh of Kher Keep
+110 R Rolling Earthquake
+173 R Rubinia Soulsinger
+210 R Scrubland
+132 C Scryb Sprites
+23 C Shu Cavalry
+24 C Shu Elite Companions
+25 C Shu General
+26 C Shu Soldier-Farmers
+174 C Sir Shandlar of Eberyn
+175 C Sivitri Scarzam
+133 C Slashing Tiger
+201 C Sol Grail
+211 R Sorrow's Path
+176 U Spectral Shield
+50 U Spiny Starfish
+74 C Spirit Shackle
+134 C Spoils of Victory
+177 U Stangg
+75 U Stolen Grain
+111 R Storm World
+51 C Strategic Planning
+52 U Sun Ce, Young Conquerer
+53 R Sun Quan, Lord of Wu
+178 U Sunastian Falconer
+222 L Swamp
+223 L Swamp
+224 L Swamp
+202 R Sword of the Ages
+76 U Takklemaggot
+179 R Tetsuo Umezawa
+77 R The Abyss
+180 C The Lady of the Mountain
+212 R The Tabernacle at Pendrell Vale
+78 U The Wretched
+135 C Three Visits
+181 C Tobias Andrion
+182 U Tor Wauki
+183 C Torsten Von Ursus
+136 U Tracker
+137 C Trip Wire
+213 R Tropical Island
+184 U Tuknir Deathlock
+214 U Urborg
+185 R Vaevictis Asmadi
+215 R Volcanic Island
+203 R Voodoo Doll
+27 C Wall of Light
+186 R Wandering Mage
+79 C Wei Elite Companions
+80 C Wei Infantry
+81 U Wei Night Raiders
+82 C Wei Strike Force
+138 U Willow Priestess
+139 R Willow Satyr
+140 U Wormwood Treefolk
+54 C Wu Elite Cavalry
+55 C Wu Longbowman
+56 C Wu Warship
+83 U Xiahou Dun, the One-Eyed
+187 R Xira Arien
+84 C Young Wei Recruits
+28 U Zhang Fei, Fierce Warrior
+112 R Zodiac Dragon

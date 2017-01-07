@@ -32,15 +32,19 @@ Ravnica, 3/6/RAV, RAV GPT DIS
 Coldsnap, 3/6/9ED, CSP  
 Time Spiral, 3/6/TSP, TSP PLC FUT
 Tenth Edition, 3/6/10E, 10E  
+Masters Edition, 3/6/MED, MED
 Lorwyn, 3/6/LRW, LRW MOR 
 Shadowmoor, 3/6/SHM, SHM EVE 
 Shards of Alara, 3/6/ALA, ALA CFX ARB
+Masters Edition II, 3/6/MED, ME2
 Magic 2010, 3/6/M10, M10  
+Masters Edition III, 3/6/ME3, ME3
 Zendikar, 3/6/ZEN, ZEN WWK 
 Rise of the Eldrazi, 3/6/ROE, ROE  
 Magic 2011, 3/6/M11, M11  
 Scars of Mirrodin, 3/6/SOM, SOM MBS NPH
 Magic 2012, 3/6/M12, M12  
+Masters Edition IV, 3/6/ME3, ME4
 Innistrad, 3/6/ISD, ISD DKA 
 Avacyn Restored, 3/6/AVR, AVR  
 Magic 2013, 3/6/M13, M13  
@@ -65,3 +69,4 @@ Shadows over Innistrad, 3/6/SOI, SOI EMN
 Eternal Masters, 3/6/SOI, EMA
 #Conspiracy Take the Crown, 3/6/ORI, CN2
 Kaladesh, 3/6/KLD, KLD
+
