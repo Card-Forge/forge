@@ -16511,12 +16511,14 @@ forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/upcoming/aegis_automaton.txt -text
 forge-gui/res/cardsfolder/upcoming/aeronaut_admiral.txt -text
 forge-gui/res/cardsfolder/upcoming/aethergeode_miner.txt -text
+forge-gui/res/cardsfolder/upcoming/aethersphere_harvester.txt -text
 forge-gui/res/cardsfolder/upcoming/aetherwind_basker.txt -text
 forge-gui/res/cardsfolder/upcoming/ajani_unyielding.txt -text
 forge-gui/res/cardsfolder/upcoming/ajani_valiant_protector.txt -text
 forge-gui/res/cardsfolder/upcoming/consulate_crackdown.txt -text
 forge-gui/res/cardsfolder/upcoming/consulate_dreadnought.txt -text
 forge-gui/res/cardsfolder/upcoming/disallow.txt -text
+forge-gui/res/cardsfolder/upcoming/filigree_crawler.txt -text
 forge-gui/res/cardsfolder/upcoming/glint_sleeve_siphoner.txt -text
 forge-gui/res/cardsfolder/upcoming/gontis_aether_heart.txt -text
 forge-gui/res/cardsfolder/upcoming/hungry_flames.txt -text

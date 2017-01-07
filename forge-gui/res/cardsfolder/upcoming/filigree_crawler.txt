@@ -1,0 +1,11 @@
+Name:Filigree Crawler
+ManaCost:4
+Types:Artifact Creature Insect
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter ORI | TokenAltImages$ c 1 1 thopter2 ORI
+DeckHas:Ability$Token
+SVar:SacMe:1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_crawler.jpg
+Oracle:When Filigree Crawler dies, create a 1/1 colorless Thopter artifact creature token with flying.
+
