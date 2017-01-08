@@ -16584,6 +16584,7 @@ forge-gui/res/cardsfolder/upcoming/oath_of_ajani.txt -text
 forge-gui/res/cardsfolder/upcoming/pacification_array.txt -text
 forge-gui/res/cardsfolder/upcoming/paradox_engine.txt -text
 forge-gui/res/cardsfolder/upcoming/peacewalker_colossus.txt -text
+forge-gui/res/cardsfolder/upcoming/pendulum_of_patterns.txt -text
 forge-gui/res/cardsfolder/upcoming/pias_revolution.txt -text
 forge-gui/res/cardsfolder/upcoming/planar_bridge.txt -text
 forge-gui/res/cardsfolder/upcoming/quicksmith_rebel.txt -text
@@ -16600,6 +16601,7 @@ forge-gui/res/cardsfolder/upcoming/srams_expertise.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzeret_master_of_metal.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzeret_the_schemer.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzerets_betrayal.txt -text
+forge-gui/res/cardsfolder/upcoming/tezzerets_simulacrum.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzerets_touch.txt -text
 forge-gui/res/cardsfolder/upcoming/trophy_mage.txt -text
 forge-gui/res/cardsfolder/upcoming/untethered_express.txt -text
