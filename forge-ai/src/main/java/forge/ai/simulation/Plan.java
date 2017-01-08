@@ -49,7 +49,7 @@ public class Plan {
             this.saCount = saList.size();
             SpellAbility sa = saList.get(saIndex);
             this.saStr = sa.toString();
-            this.saHumanStr = SpellAbilityPicker.abilityToString(sa);
+            this.saHumanStr = SpellAbilityPicker.abilityToString(sa, false);
         }
 
         public SpellAbility findReferencedAbility(List<SpellAbility> availableSAs) {

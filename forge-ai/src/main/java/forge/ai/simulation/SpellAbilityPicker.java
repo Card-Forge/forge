@@ -176,6 +176,10 @@ public class SpellAbilityPicker {
         return plan != null && plan.hasNextDecision();
     }
 
+    public Plan getPlan() {
+        return plan;
+    }
+
     private void printPlannedActionFailure(Plan.Decision decision, String cause) {
         print("Failed to continue planned action (" + decision.saRef + "). Cause:");
         print("  " + cause + "!");
@@ -214,6 +218,9 @@ public class SpellAbilityPicker {
     }
 
     public static String abilityToString(SpellAbility sa) {
+        return abilityToString(sa, true);
+    }
+    public static String abilityToString(SpellAbility sa, boolean withTargets) {
         String saString = "N/A";
         if (sa != null) {
             saString = sa.toString();
@@ -224,13 +231,15 @@ public class SpellAbilityPicker {
             if (saString.length() > 40) {
                 saString = saString.substring(0, 40) + "...";
             }
-            SpellAbility saOrSubSa = sa;
-            do {
-                if (saOrSubSa.usesTargeting()) {
-                    saString += " (targets: " + saOrSubSa.getTargets().getTargetedString() + ")";
-                }
-                saOrSubSa = saOrSubSa.getSubAbility();
-            } while (saOrSubSa != null);
+            if (withTargets) {
+                SpellAbility saOrSubSa = sa;
+                do {
+                    if (saOrSubSa.usesTargeting()) {
+                        saString += " (targets: " + saOrSubSa.getTargets().getTargetedString() + ")";
+                    }
+                    saOrSubSa = saOrSubSa.getSubAbility();
+                } while (saOrSubSa != null);
+            }
             saString = sa.getHostCard() + " -> " + saString;
         }
         return saString;
