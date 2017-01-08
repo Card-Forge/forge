@@ -68,5 +68,11 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         assertEquals(game.PLAY_LAND_SURROGATE, sa);
         assertEquals(mountain, sa.getHostCard());
+
+        Plan plan = picker.getPlan();
+        assertEquals(2, plan.getDecisions().size());
+        assertEquals("Play land Mountain", plan.getDecisions().get(0).saRef.toString());
+        assertEquals("Shock deals 2 damage to target creature or player.", plan.getDecisions().get(1).saRef.toString());
+        assertTrue(plan.getDecisions().get(1).targets.toString().contains("Runeclaw Bear"));
     }
 }
