@@ -421,7 +421,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertNotNull(sa);
         sa.setActivatingPlayer(p);
 
-        PossibleTargetSelector selector = new PossibleTargetSelector(sa);
+        MultiTargetSelector selector = new MultiTargetSelector(sa, null);
         while (selector.selectNextTargets()) {
             GameSimulator sim = createSimulator(game, p);
             sim.simulateSpellAbility(sa);

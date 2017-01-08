@@ -158,6 +158,7 @@ forge-ai/src/main/java/forge/ai/ability/ZoneExchangeAi.java -text
 forge-ai/src/main/java/forge/ai/simulation/GameCopier.java -text
 forge-ai/src/main/java/forge/ai/simulation/GameSimulator.java -text
 forge-ai/src/main/java/forge/ai/simulation/GameStateEvaluator.java -text
+forge-ai/src/main/java/forge/ai/simulation/MultiTargetSelector.java -text
 forge-ai/src/main/java/forge/ai/simulation/Plan.java -text
 forge-ai/src/main/java/forge/ai/simulation/PossibleTargetSelector.java -text
 forge-ai/src/main/java/forge/ai/simulation/SimulationController.java -text

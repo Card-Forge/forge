@@ -75,7 +75,7 @@ public class Plan {
         final Score initialScore;
 
         final SpellAbilityRef saRef;
-        PossibleTargetSelector.Targets targets;
+        MultiTargetSelector.Targets targets;
         String choice;
         int[] modes;
         String modesStr; // for human pretty-print consumption only
@@ -88,7 +88,7 @@ public class Plan {
             this.choice = null;
         }
         
-        public Decision(Score initialScore, Decision prevDecision, PossibleTargetSelector.Targets targets) {
+        public Decision(Score initialScore, Decision prevDecision, MultiTargetSelector.Targets targets) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.saRef = null;

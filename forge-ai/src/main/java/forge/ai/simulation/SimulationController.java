@@ -76,7 +76,7 @@ public class SimulationController {
         currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), chosenModes, modesStr));
     }
 
-    public void evaluateTargetChoices(SpellAbility sa, PossibleTargetSelector.Targets targets) {
+    public void evaluateTargetChoices(SpellAbility sa, MultiTargetSelector.Targets targets) {
         currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), targets));
     }
 
@@ -125,7 +125,7 @@ public class SimulationController {
     }
 
     private Plan.Decision getLastMergedDecision() {
-        PossibleTargetSelector.Targets targets = null;
+        MultiTargetSelector.Targets targets = null;
         String choice = null;
         int[] modes = null;
         String modesStr = null;
@@ -204,7 +204,7 @@ public class SimulationController {
         simulatorStack.remove(simulatorStack.size() - 1);
     }
 
-    public Score shouldSkipTarget(SpellAbility sa, PossibleTargetSelector.Targets targets, GameSimulator simulator) {
+    public Score shouldSkipTarget(SpellAbility sa, GameSimulator simulator) {
         simulatorStack.add(simulator);
         GameObject[] hostAndTarget = getOriginalHostCardAndTarget(sa);
         simulatorStack.remove(simulatorStack.size() - 1);

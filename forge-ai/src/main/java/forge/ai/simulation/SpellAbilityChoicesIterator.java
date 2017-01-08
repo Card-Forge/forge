@@ -22,7 +22,7 @@ public class SpellAbilityChoicesIterator {
     private Score bestScoreForMode = new Score(Integer.MIN_VALUE);
     private boolean advancedToNextMode;
 
-    private Score[] cachedTargetScores;
+    private ArrayList<Score> cachedTargetScores;
     private int nextTarget = 0;
     private Score bestScoreForTarget = new Score(Integer.MIN_VALUE);
 
@@ -88,20 +88,21 @@ public class SpellAbilityChoicesIterator {
         // Note: Can't just keep a TargetSelector object cached because it's
         // responsible for setting state on a SA and the SA object changes each
         // time since it's a different simulation.
-        PossibleTargetSelector selector = new PossibleTargetSelector(sa);
+        MultiTargetSelector selector = new MultiTargetSelector(sa, null);
         if (selector.hasPossibleTargets()) {
             if (cachedTargetScores == null) {
-                cachedTargetScores = new Score[selector.getValidTargetsSize()];
+                cachedTargetScores = new ArrayList<>();
                 nextTarget = -1;
-                for (int i = 0; i < cachedTargetScores.length; i++) {
-                    selector.selectTargetsByIndex(i);
-                    cachedTargetScores[i] = controller.shouldSkipTarget(sa, selector.getLastSelectedTargets(), simulator);
-                    if (cachedTargetScores[i] != null) {
-                        controller.printState(cachedTargetScores[i], sa, " - via estimate (skipped)", false);
+                for (int i = 0; selector.selectNextTargets(); i++) {
+                    Score score = controller.shouldSkipTarget(sa, simulator);
+                    cachedTargetScores.add(score);
+                    if (score != null) {
+                        controller.printState(score, sa, " - via estimate (skipped)", false);
                     } else if (nextTarget == -1) {
                         nextTarget = i;
                     }
                 }
+                selector.reset();
                 // If all targets were cached, we unfortunately have to evaluate the first target again
                 // because at this point we're already running the simulation code and there's no turning
                 // back. This used to be not possible when the PossibleTargetSelector was controlling the
@@ -154,9 +155,9 @@ public class SpellAbilityChoicesIterator {
         if (cachedTargetScores != null) {
             controller.doneEvaluating(bestScoreForTarget);
             bestScoreForTarget = new Score(Integer.MIN_VALUE);
-            while (nextTarget + 1 < cachedTargetScores.length) {
+            while (nextTarget + 1 < cachedTargetScores.size()) {
                 nextTarget++;
-                if (cachedTargetScores[nextTarget] == null) {
+                if (cachedTargetScores.get(nextTarget) == null) {
                     return true;
                 }
             }

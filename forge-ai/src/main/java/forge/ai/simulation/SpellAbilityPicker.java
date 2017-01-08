@@ -203,7 +203,7 @@ public class SpellAbilityPicker {
         }
         // If modes != null, targeting will be done in chooseModeForAbility().
         if (decision.modes == null && decision.targets != null) {
-            PossibleTargetSelector selector = new PossibleTargetSelector(sa);
+            MultiTargetSelector selector = new MultiTargetSelector(sa, null);
             if (!selector.selectTargets(decision.targets)) {
                 printPlannedActionFailure(decision, "Bad targets");
                 return null;
@@ -334,7 +334,7 @@ public class SpellAbilityPicker {
             // TODO: Validate that there's no discrepancies between choices and modes?
             List<AbilitySub> plannedModes = SpellAbilityChoicesIterator.getModeCombination(choices, decision.modes);
             if (plan.getSelectedDecision().targets != null) {
-                PossibleTargetSelector selector = new PossibleTargetSelector(sa, plannedModes);
+                MultiTargetSelector selector = new MultiTargetSelector(sa, plannedModes);
                 if (!selector.selectTargets(decision.targets)) {
                     printPlannedActionFailure(decision, "Bad targets for modes");
                     return null;

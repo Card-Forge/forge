@@ -11,9 +11,7 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityCondition;
 import forge.game.spellability.TargetRestrictions;
 
 public class PossibleTargetSelector {
@@ -48,15 +46,17 @@ public class PossibleTargetSelector {
         }
     }
 
-    public PossibleTargetSelector(SpellAbility sa) {
-        this(sa, null);
+    public PossibleTargetSelector(SpellAbility sa, SpellAbility targetingSa, int targetingSaIndex) {
+        this.sa = sa;
+        this.targetingSa = targetingSa;
+        this.targetingSaIndex = targetingSaIndex;
+        this.validTargets = new ArrayList<GameObject>();
+        generateValidTargets(sa.getHostCard().getController());
     }
 
-    public PossibleTargetSelector(SpellAbility sa, List<AbilitySub> plannedModes) {
-        this.sa = sa;
-        chooseTargetingSubAbility(plannedModes);
-        this.targetIndex = 0;
-        this.validTargets = new ArrayList<GameObject>();
+    public void reset() {
+        targetIndex = 0;
+        validTargets.clear();
         generateValidTargets(sa.getHostCard().getController());
     }
 
@@ -140,36 +140,6 @@ public class PossibleTargetSelector {
         }
     }
 
-    private static boolean conditionsAreMet(SpellAbility saOrSubSa) {
-        SpellAbilityCondition conditions = saOrSubSa.getConditions();
-        return conditions == null || conditions.areMet(saOrSubSa);
-    }
-
-    private void chooseTargetingSubAbility(List<AbilitySub> plannedSubs) {
-        // TODO: This needs to handle case where multiple sub-abilities each have targets.
-        int index = 0;
-        for (SpellAbility saOrSubSa = sa; saOrSubSa != null; saOrSubSa = saOrSubSa.getSubAbility()) {
-            if (saOrSubSa.usesTargeting() && conditionsAreMet(saOrSubSa)) {
-                targetingSaIndex = index;
-                targetingSa = saOrSubSa;
-                return;
-            }
-            index++;
-        }
-        // When plannedSubs is provided, also consider them even though they've not yet been added to the
-        // sub-ability chain. This is the case when we're choosing modes for a charm-style effect.
-        if (plannedSubs != null) {
-            for (AbilitySub sub : plannedSubs) {
-                if (sub.usesTargeting() && conditionsAreMet(sub)) {
-                    targetingSaIndex = index;
-                    targetingSa = sub;
-                    return;
-                }
-                index++;
-            }
-        }
-    }
-
     public boolean hasPossibleTargets() {
         return !validTargets.isEmpty();
     }
@@ -177,7 +147,6 @@ public class PossibleTargetSelector {
     private void selectTargetsByIndexImpl(int index) {
         targetingSa.resetTargets();
 
-        // TODO: smarter about multiple targets, etc...
         while (targetingSa.getTargets().getNumTargeted() < maxTargets && index < validTargets.size()) {
             targetingSa.getTargets().add(validTargets.get(index++));
         }
@@ -230,9 +199,5 @@ public class PossibleTargetSelector {
         selectTargetsByIndexImpl(targetIndex);
         targetIndex++;
         return true;
-    }
-
-    public int getValidTargetsSize() {
-        return validTargets.size();
     }
 }

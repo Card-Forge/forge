@@ -171,4 +171,30 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         String expected = "Fiery Confluence -> " + dmgOppStr + " " + dmgOppStr + " " + dmgOppStr;
         assertEquals(expected, picker.getPlan().getDecisions().get(0).modesStr);
     }
+
+    public void testMultipleTargets() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mountain", p);
+        addCard("Mountain", p);
+        Card spell = addCardToZone("Arc Trail", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        Card bear = addCard("Runeclaw Bear", opponent);
+        Card men = addCard("Flying Men", opponent);
+        opponent.setLife(20, null);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        assertEquals(spell.getSpellAbilities().get(0), sa);
+        assertEquals(bear, sa.getTargetCard());
+        assertEquals("2", sa.getParam("NumDmg"));
+        SpellAbility subSa = sa.getSubAbility();
+        assertEquals(men, subSa.getTargetCard());
+        assertEquals("1", subSa.getParam("NumDmg"));
+    }
 }
