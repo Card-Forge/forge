@@ -16576,6 +16576,7 @@ forge-gui/res/cardsfolder/upcoming/heroic_intervention.txt -text
 forge-gui/res/cardsfolder/upcoming/hidden_herbalists.txt -text
 forge-gui/res/cardsfolder/upcoming/hidden_stockpile.txt -text
 forge-gui/res/cardsfolder/upcoming/hungry_flames.txt -text
+forge-gui/res/cardsfolder/upcoming/inspiring_roar.txt -text
 forge-gui/res/cardsfolder/upcoming/kari_zev_skyship_raider.txt -text
 forge-gui/res/cardsfolder/upcoming/kari_zevs_expertise.txt -text
 forge-gui/res/cardsfolder/upcoming/metallic_mimic.txt -text
@@ -16593,10 +16594,12 @@ forge-gui/res/cardsfolder/upcoming/rishkar_peema_renegade.txt -text
 forge-gui/res/cardsfolder/upcoming/rishkars_expertise.txt -text
 forge-gui/res/cardsfolder/upcoming/shipwreck_moray.txt -text
 forge-gui/res/cardsfolder/upcoming/siege_modification.txt -text
+forge-gui/res/cardsfolder/upcoming/spire_of_industry.txt -text
 forge-gui/res/cardsfolder/upcoming/sram_senior_edificer.txt -text
 forge-gui/res/cardsfolder/upcoming/srams_expertise.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzeret_master_of_metal.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzeret_the_schemer.txt -text
+forge-gui/res/cardsfolder/upcoming/tezzerets_betrayal.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzerets_touch.txt -text
 forge-gui/res/cardsfolder/upcoming/trophy_mage.txt -text
 forge-gui/res/cardsfolder/upcoming/untethered_express.txt -text
