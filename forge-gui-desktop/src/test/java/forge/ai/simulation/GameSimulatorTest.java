@@ -2,124 +2,21 @@ package forge.ai.simulation;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
-import forge.GuiBase;
-import forge.GuiDesktop;
-import forge.StaticData;
 import forge.ai.ComputerUtilAbility;
-import forge.ai.LobbyPlayerAi;
-import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
-import forge.deck.Deck;
 import forge.game.Game;
-import forge.game.GameRules;
-import forge.game.GameStage;
-import forge.game.GameType;
-import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.item.IPaperCard;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 
-public class GameSimulatorTest extends TestCase {
-    private static boolean initialized = false;
-
-    private Game initAndCreateGame() {
-        List<RegisteredPlayer> players = Lists.newArrayList();
-        Deck d1 = new Deck();
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", null)));
-        GameRules rules = new GameRules(GameType.Constructed);
-        Match match = new Match(rules, players, "Test");
-        Game game = new Game(players, rules, match);
-        game.setAge(GameStage.Play);
-
-        if (!initialized) {
-            GuiBase.setInterface(new GuiDesktop());
-            FModel.initialize(null, new Function<ForgePreferences, Void>()  {
-                @Override
-                public Void apply(ForgePreferences preferences) {
-                    preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, true);
-                    return null;
-                }
-            });
-            initialized = true;
-        }
-        return game;
-    }
-
-    private GameSimulator createSimulator(Game game, Player p) {
-        return new GameSimulator(new SimulationController(new Score(0)), game, p);
-    }
-
-    private Card findCardWithName(Game game, String name) {
-        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            if (c.getName().equals(name)) {
-                return c;
-            }
-        }
-        return null;
-    }
-    
-    private String gameStateToString(Game game) {
-        StringBuilder sb = new StringBuilder();
-        for (ZoneType zone : ZoneType.values()) {
-            CardCollectionView cards = game.getCardsIn(zone);
-            if (!cards.isEmpty()) {
-                sb.append("Zone ").append(zone.name()).append(":\n");
-                for (Card c : game.getCardsIn(zone)) {
-                    sb.append("  ").append(c).append("\n");
-                }
-            }
-        }
-        return sb.toString();
-    }
-
-    private SpellAbility findSAWithPrefix(Card c, String prefix) {
-        return findSAWithPrefix(c.getSpellAbilities(), prefix);
-    }
-    
-    private SpellAbility findSAWithPrefix(Iterable<SpellAbility> abilities, String prefix) {
-        for (SpellAbility sa : abilities) {
-            if (sa.getDescription().startsWith(prefix)) {
-                return sa;
-            }
-        }
-        return null;
-    }
-
-    private Card createCard(String name, Player p) {
-        IPaperCard paperCard = FModel.getMagicDb().getCommonCards().getCard(name);
-        if (paperCard == null) {
-            StaticData.instance().attemptToLoadCard(name, "");
-            paperCard = FModel.getMagicDb().getCommonCards().getCard(name);
-        }
-        return Card.fromPaperCard(paperCard, p);
-    }
-
-    private Card addCardToZone(String name, Player p, ZoneType zone) {
-        Card c = createCard(name, p);
-        p.getZone(zone).add(c);
-        return c;
-    }
-
-    private Card addCard(String name, Player p) {
-        return addCardToZone(name, p, ZoneType.Battlefield);
-    }
+public class GameSimulatorTest extends SimulationTestCase {
 
     public void testActivateAbilityTriggers() {
         Game game = initAndCreateGame();
