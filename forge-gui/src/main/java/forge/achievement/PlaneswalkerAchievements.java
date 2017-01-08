@@ -29,9 +29,11 @@ public class PlaneswalkerAchievements extends AchievementCollection {
     protected void addAchievements() {
         add("Ajani Goldmane", "Ajani's Avatar", "Serra? Is that you?");
         add("Ajani Steadfast", "Ajani's Forcefield", "Shields up!");
+        add("Ajani Unyielding", "Ajani's Mentoring Program", "Today's lesson: How to be strong.");
         add("Ajani Vengeant", "Ajani's Tantrum", "Look Ma! No lands!");
         add("Ajani, Caller of the Pride", "Ajani's Menagerie", "You're a crazy cat lady now!");
         add("Ajani, Mentor of Heroes", "Ajani's Vitality", "Do sta let!");
+        add("Ajani, Valiant Protector", "Ajani's Valiant Smash", "Sometimes, life can be brutal.");
         add("Arlinn, Embraced by the Moon", "Arlinn's Hunt", "Fair fight? What fair fight?");
         add("Ashiok, Nightmare Weaver", "Ashiok's Identity", "I subscribe to the theory of blank slate!");
         add("Chandra Ablaze", "Chandra's Bargain", "I feel like I've seen those before...");
@@ -102,8 +104,10 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Tamiyo, Field Researcher", "Tamiyo's Omniscience", "I know exactly how your story ends...");
         add("Tamiyo, the Moon Sage", "Tamiyo's Recycling", "Wash, rinse, repeat!");
         add("Teferi, Temporal Archmage", "Teferi's Time Slip", "Let's speed this up a bit!");
+        add("Tezzeret the Schemer", "Tezzeret's Assembly Line", "Smashing, isn't it?");
         add("Tezzeret the Seeker", "Tezzeret's Robots", "You can't stop the progress!");
         add("Tezzeret, Agent of Bolas", "Tezzeret's Drain", "Technological superiority for the win!");
+        add("Tezzeret, Master of Metal", "Tezzeret's Confiscation", "Your stuff will serve a grander design - mine.");
         add("Tibalt, the Fiend-Blooded", "Tibalt's Treason", "My side is the winning side!");
         add("Ugin, the Spirit Dragon", "Ugin's Anti-Ultimatum", "A ragtag band of misfits, brought from the future...");
         add("Venser, the Sojourner", "Venser's Oblivion", "Let's just clean this up a bit...");
