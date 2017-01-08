@@ -204,6 +204,8 @@ public class SpellAbilityChoicesIterator {
         // Note: This returns a new int[] array and doesn't modify indexes in place,
         // since that gets returned to the caller.
         private int[] getNextIndexes() {
+            // TODO: In some cases, ordering has no effect - e.g. AAB and BAA are equivalent.
+            // We should detect those and skip equivalent modes.
             for (int i = indexes.length - 1; i >= 0; i--) {
                 if (indexes[i] < numChoices - 1) {
                     int[] nextIndexes = new int[indexes.length];
