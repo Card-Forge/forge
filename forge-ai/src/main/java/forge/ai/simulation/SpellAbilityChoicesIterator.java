@@ -58,7 +58,7 @@ public class SpellAbilityChoicesIterator {
                 if (sb.length() > 0) {
                     sb.append(" ");
                 } else {
-                    sb.append(sub.getHostCard()).append(" -> ");
+                    sb.append(sub.getHostCard().getName()).append(" -> ");
                 }
                 sb.append(sub);
             }
