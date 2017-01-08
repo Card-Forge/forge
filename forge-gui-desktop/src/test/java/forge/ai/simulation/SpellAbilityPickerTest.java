@@ -76,6 +76,47 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         assertTrue(plan.getDecisions().get(1).targets.toString().contains("Runeclaw Bear"));
     }
 
+    public void testModeSelection() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Island", p);
+        addCard("Swamp", p);
+        Card spell = addCardToZone("Dromar's Charm", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        addCard("Runeclaw Bear", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        // Expected: All creatures get -2/-2 to kill the bear.
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        assertEquals(spell.getSpellAbilities().get(0), sa);
+        assertEquals("Dromar's Charm -> Target creature gets -2/-2 until end of turn", picker.getPlan().getDecisions().get(0).modesStr);
+    }
+
+    public void testModeSelection2() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Island", p);
+        addCard("Swamp", p);
+        Card spell = addCardToZone("Dromar's Charm", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        // Expected: Gain 5 life, since other modes aren't helpful.
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        assertEquals(spell.getSpellAbilities().get(0), sa);
+        assertEquals("Dromar's Charm -> You gain 5 life;", picker.getPlan().getDecisions().get(0).modesStr);
+    }
+
     public void testMultipleModes() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
