@@ -197,6 +197,10 @@ public class CardLists {
         return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, null));
     }
 
+    public static CardCollection getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source, SpellAbility sa) {
+        return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, sa));
+    }
+
     public static List<Card> getValidCardsAsList(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
         return CardLists.filterAsList(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, null));
     }
