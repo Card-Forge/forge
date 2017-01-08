@@ -767,6 +767,31 @@ public class CardFactoryUtil {
             return highest;
         }
 
+        if (l[0].startsWith("MostCardName")) {
+        	String[] lparts = l[0].split(" ", 2);
+            final String[] rest = lparts[1].split(",");
+
+            final CardCollectionView cardsInZones = lparts[0].length() > 12 
+                ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(12)))
+                : game.getCardsIn(ZoneType.Battlefield);
+
+            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
+            final Map<String, Integer> map = Maps.newHashMap();
+            for (final Card card : cards) {
+                // Remove Duplicated types
+                final String name = card.getName();
+                Integer count = map.get(name);
+                map.put(name, count == null ? 1 : count + 1);
+            }
+            int max = 0;
+            for (final Entry<String, Integer> entry : map.entrySet()) {
+                if (max < entry.getValue()) {
+                    max = entry.getValue();
+                }
+            }
+            return max;
+        }
+
         if (l[0].startsWith("DifferentCardNames_")) {
             final List<String> crdname = new ArrayList<String>();
             final String restriction = l[0].substring(19);
