@@ -56,7 +56,12 @@ public class SimulationTestCase extends TestCase {
     }
 
     protected GameSimulator createSimulator(Game game, Player p) {
-        return new GameSimulator(new SimulationController(new Score(0)), game, p);
+        return new GameSimulator(new SimulationController(new Score(0)) {
+            @Override
+            public boolean shouldRecurse() {
+                return false;
+            }
+        }, game, p);
     }
 
     protected Card findCardWithName(Game game, String name) {
