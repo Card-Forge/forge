@@ -1,0 +1,10 @@
+Name:Ironclad Revolutionary
+ManaCost:4 B B
+Types:Creature Aetherborn Artificer
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice an artifact. If you do, put two +1/+1 counters on CARDNAME and each opponent loses 2 life.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ Sac<1/Artifact> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
+SVar:AIPreference:SacCost$Artifact.token
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclad_revolutionary.jpg
+Oracle:When Ironclad Revolutionary enters the battlefield, you may sacrifice an artifact. If you do, put two +1/+1 counters on Ironclad Revolutionary and each opponent loses 2 life.

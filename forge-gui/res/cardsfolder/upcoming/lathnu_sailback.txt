@@ -1,0 +1,6 @@
+Name:Lathnu Sailback
+ManaCost:4 R
+Types:Creature Lizard
+PT:5/4
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lathnu_sailback.jpg
+Oracle:
