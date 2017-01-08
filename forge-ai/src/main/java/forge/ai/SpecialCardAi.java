@@ -78,6 +78,31 @@ public class SpecialCardAi {
         }
     }
 
+    // Chain of Smog
+    public static class ChainOfSmog {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            if (ai.getCardsIn(ZoneType.Hand).size() == 0) {
+                // avoid failure to add to stack by providing a legal target
+                // TODO: this makes the AI target opponents with 0 cards in hand, but bailing from here causes a
+                // "failed to add to stack" error, needs investigation and improvement.
+                Player targOpp = ai.getOpponent();
+
+                for (Player opp : ai.getOpponents()) {
+                    if (opp.getCardsIn(ZoneType.Hand).size() > 0) {
+                        targOpp = opp;
+                        break;
+                    }
+                }
+
+                sa.getParent().resetTargets();
+                sa.getParent().getTargets().add(targOpp);
+                return true;
+            }
+
+            return false;
+        }
+    }
+        
     // Donate
     public static class Donate {
         public static boolean considerTargetingOpponent(Player ai, SpellAbility sa) {

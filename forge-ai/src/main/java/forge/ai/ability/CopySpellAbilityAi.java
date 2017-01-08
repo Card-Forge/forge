@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -25,23 +26,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         // generic method SpellAbilityAi#chkDrawbackWithSubs and are handled there.
 
         if ("ChainOfSmog".equals(sa.getParam("AILogic"))) {
-            if (aiPlayer.getCardsIn(ZoneType.Hand).size() == 0) {
-                // avoid failure to add to stack by providing a legal target
-                // TODO: this makes the AI target opponents with 0 cards in hand, but bailing from here causes a
-                // "failed to add to stack" error, needs investigation and improvement.
-                Player targOpp = aiPlayer.getOpponent(); 
-
-                for (Player opp : aiPlayer.getOpponents()) {
-                    if (opp.getCardsIn(ZoneType.Hand).size() > 0) {
-                        targOpp = opp;
-                        break;
-                    }
-                }
-
-                sa.getParent().resetTargets();
-                sa.getParent().getTargets().add(targOpp);
-                return true;
-            }
+            return SpecialCardAi.ChainOfSmog.consider(aiPlayer, sa);
         }
 
         return super.chkAIDrawback(sa, aiPlayer);
