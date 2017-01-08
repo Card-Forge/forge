@@ -433,6 +433,15 @@ public class PlayerControllerAi extends PlayerController {
     }
     
     @Override
+    public int chooseNumber(SpellAbility sa, String string, int min, int max, Map<String, Object> params) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return SpellApiToAi.Converter.get(api).chooseNumber(player, sa, min, max, params);
+    };
+
+    @Override
     public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
         return brains.chooseNumber(sa, title, options, relatedPlayer);
     }
@@ -598,6 +607,22 @@ public class PlayerControllerAi extends PlayerController {
         // an initial target
         // find first nonzero counter on target
         return Iterables.getFirst(options, null);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.game.player.PlayerController#chooseCounterType(java.util.List,
+     * forge.game.spellability.SpellAbility, java.lang.String, java.util.Map)
+     */
+    @Override
+    public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt,
+            Map<String, Object> params) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return SpellApiToAi.Converter.get(api).chooseCounterType(options, sa, params);
     }
 
     @Override

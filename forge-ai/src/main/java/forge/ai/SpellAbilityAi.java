@@ -2,6 +2,7 @@ package forge.ai;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -9,6 +10,7 @@ import com.google.common.collect.Lists;
 import forge.card.ICardFace;
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -301,7 +303,6 @@ public abstract class SpellAbilityAi {
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleCard is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
-
     }
     
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
@@ -319,6 +320,14 @@ public abstract class SpellAbilityAi {
 
         final ICardFace face = Iterables.getFirst(faces, null); 
         return face == null ? "" : face.getName();
+    }
+
+    public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
+        return max;
+    }
+
+    public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
+        return Iterables.getFirst(options, null);
     }
 
     protected static boolean isUselessCreature(Player ai, Card c) {

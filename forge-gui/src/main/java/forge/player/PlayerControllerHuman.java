@@ -1211,7 +1211,6 @@ public class PlayerControllerHuman
             }
             if (needPrompt) {
             	List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
-            	boolean sameOrder = false;
 
             	if (savedOrder != null) {
             		orderedSAs = new ArrayList<SpellAbility>();

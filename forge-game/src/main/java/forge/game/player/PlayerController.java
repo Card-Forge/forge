@@ -178,6 +178,9 @@ public abstract class PlayerController {
 
     public abstract int chooseNumber(SpellAbility sa, String title, int min, int max);
     public abstract int chooseNumber(SpellAbility sa, String title, List<Integer> values, Player relatedPlayer);
+    public int chooseNumber(SpellAbility sa, String string, int min, int max, Map<String, Object> params) {
+        return chooseNumber(sa, string, min, max);
+    };
 
     public final boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice) { return chooseBinary(sa, question, kindOfChoice, null); }
     public abstract boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultChioce);
@@ -191,7 +194,12 @@ public abstract class PlayerController {
 
     public abstract ICardFace chooseSingleCardFace(SpellAbility sa, String message, Predicate<ICardFace> cpp, String name);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
+
     public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt);
+    public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt,
+            Map<String, Object> params) {
+        return chooseCounterType(options, sa, prompt);
+    }
 
     public abstract boolean confirmPayment(CostPart costPart, String string);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams);

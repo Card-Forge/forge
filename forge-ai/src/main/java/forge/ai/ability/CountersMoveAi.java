@@ -1,8 +1,10 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
@@ -212,7 +214,7 @@ public class CountersMoveAi extends SpellAbilityAi {
         // TODO handle proper calculation of X values based on Cost
         int amount = 0;
 
-        if (amountStr.equals("All")) {
+        if (amountStr.equals("All") || amountStr.equals("Any")) {
             // sa has Source, otherwise Source is the Target
             if (sa.hasParam("Source")) {
                 final List<Card> srcCards = AbilityUtils.getDefinedCards(host, sa.getParam("Source"), sa);
@@ -445,5 +447,35 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
             return false;
         }
+    }
+
+    // used for multiple sources -> defied
+    // or for source -> multiple defined
+    @Override
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional,
+            Player targetedPlayer) {
+        if (sa.hasParam("AiLogic")) {
+            String logic = sa.getParam("AiLogic");
+
+            if ("ToValid".equals(logic)) {
+                // cards like Forgotten Ancient
+                // can put counter on any creature, but should only put one on
+                // Ai controlled ones
+                List<Card> aiCards = CardLists.filterControlledBy(options, ai);
+                return ComputerUtilCard.getBestCreatureAI(aiCards);
+            } else if ("FromValid".equals(logic)) {
+                // cards like Aetherborn Marauder
+                return ComputerUtilCard.getWorstCreatureAI(options);
+            }
+        }
+        return Iterables.getFirst(options, null);
+    }
+
+    // used when selecting how many counters to move
+    @Override
+    public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
+        // TODO improve logic behind it
+        // like keeping the last counter on a 0/0 creature
+        return max;
     }
 }
