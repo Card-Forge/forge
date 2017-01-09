@@ -87,7 +87,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final Game game;
     private final IPaperCard paperCard;
 
-    private final Map<CardStateName, CardState> states = new EnumMap<>(CardStateName.class);
+    private final Map<CardStateName, CardState> states = Maps.newEnumMap(CardStateName.class);
     private CardState currentState;
     private CardStateName currentStateName = CardStateName.Original;
     private CardStateName preFaceDownState = CardStateName.Original;
@@ -97,7 +97,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
     private Map<Card, Map<CounterType, Integer>> countersAddedBy = Maps.newTreeMap();
-    private List<String> extrinsicKeyword = new ArrayList<>();
+    private List<String> extrinsicKeyword = Lists.newArrayList();
     // Hidden keywords won't be displayed on the card
     private final CopyOnWriteArrayList<String> hiddenExtrinsicKeyword = new CopyOnWriteArrayList<>();
 
@@ -128,7 +128,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     /** Original values of SVars changed by text changes. */
     private Map<String, String> originalSVars = Maps.newHashMap();
 
-    private final Set<Object> rememberedObjects = new LinkedHashSet<>();
+    private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
     private final MapOfLists<GameEntity, Object> rememberMap = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
     private Map<Player, String> flipResult;
 
@@ -178,7 +178,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private long timestamp = -1; // permanents on the battlefield
 
     // stack of set power/toughness
-    private List<CardPowerToughness> newPT = new ArrayList<>();
+    private List<CardPowerToughness> newPT = Lists.newArrayList();
     private int baseLoyalty = 0;
     private String basePowerString = null;
     private String baseToughnessString = null;
@@ -5190,9 +5190,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("notattacking")) {
             return null == combat || !combat.isAttacking(this);
         } else if (property.equals("attackedThisCombat")) {
-        	if (null == combat || !this.getDamageHistory().getCreatureAttackedThisCombat()) {
+            if (null == combat || !this.getDamageHistory().getCreatureAttackedThisCombat()) {
                 return false;
-        	}
+            }
+        } else if (property.equals("blockedThisCombat")) {
+            if (null == combat || !this.getDamageHistory().getCreatureBlockedThisCombat()) {
+                return false;
+            }
         } else if (property.equals("attackedBySourceThisCombat")) {
             if (null == combat) return false;
             final GameEntity defender = combat.getDefenderByAttacker(source);
