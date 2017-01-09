@@ -3,6 +3,8 @@ package forge.ai.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Joiner;
+
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -10,6 +12,7 @@ import forge.game.spellability.SpellAbility;
 public class Plan {
     private List<Decision> decisions;
     private int nextDecisionIndex;
+    private int nextChoice;
     private Decision selectedDecision;
 
     public Plan(ArrayList<Decision> decisions) {
@@ -27,11 +30,23 @@ public class Plan {
     public Decision selectNextDecision() {
         selectedDecision = decisions.get(nextDecisionIndex);
         nextDecisionIndex++;
+        nextChoice = 0;
         return selectedDecision;
     }
-    
+
     public Decision getSelectedDecision() {
         return selectedDecision;
+    }
+
+    public String getSelectedDecisionNextChoice() {
+        if (selectedDecision.choices != null && nextChoice < selectedDecision.choices.size()) {
+            return selectedDecision.choices.get(nextChoice);
+        }
+        return null;
+    }
+
+    public void advanceNextChoice() {
+        nextChoice++;
     }
 
     public int getNextDecisionIndex() {
@@ -76,7 +91,7 @@ public class Plan {
 
         final SpellAbilityRef saRef;
         MultiTargetSelector.Targets targets;
-        String choice;
+        List<String> choices;
         int[] modes;
         String modesStr; // for human pretty-print consumption only
 
@@ -84,8 +99,6 @@ public class Plan {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.saRef = saRef;
-            this.targets = null;
-            this.choice = null;
         }
         
         public Decision(Score initialScore, Decision prevDecision, MultiTargetSelector.Targets targets) {
@@ -93,23 +106,20 @@ public class Plan {
             this.prevDecision = prevDecision;
             this.saRef = null;
             this.targets = targets;
-            this.choice = null;
         }
         
         public Decision(Score initialScore, Decision prevDecision, Card choice) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.saRef = null;
-            this.targets = null;
-            this.choice = choice.getName();
+            this.choices = new ArrayList<>();
+            this.choices.add(choice.getName());
         }
 
         public Decision(Score initialScore, Decision prevDecision, int[] modes, String modesStr) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.saRef = null;
-            this.targets = null;
-            this.choice = null;
             this.modes = modes;
             this.modesStr = modesStr;
         }
@@ -127,8 +137,8 @@ public class Plan {
             if (targets != null) {
                 sb.append(" (targets: ").append(targets).append(")");
             }
-            if (choice != null) {
-                sb.append(" (chosen: ").append(choice).append(")");
+            if (choices != null) {
+                sb.append(" (chosen: ").append(Joiner.on(", ").join(choices)).append(")");
             }
             if (!showHostCard) {
                 sb.append("]");

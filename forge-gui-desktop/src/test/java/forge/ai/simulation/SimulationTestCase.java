@@ -1,10 +1,13 @@
 package forge.ai.simulation;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
+import forge.AIOption;
 import forge.GuiBase;
 import forge.GuiDesktop;
 import forge.StaticData;
@@ -35,7 +38,9 @@ public class SimulationTestCase extends TestCase {
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", null)));
+        Set<AIOption> options = new HashSet<>();
+        options.add(AIOption.USE_SIMULATION);
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", options)));
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players, "Test");
         Game game = new Game(players, rules, match);

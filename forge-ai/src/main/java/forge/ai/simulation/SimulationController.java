@@ -113,8 +113,12 @@ public class SimulationController {
                 writeIndex++;
             } else if (d.targets != null) {
                 sequence.get(writeIndex - 1).targets = d.targets;
-            } else if (d.choice != null) {
-                sequence.get(writeIndex - 1).choice = d.choice;
+            } else if (d.choices != null) {
+                Plan.Decision to = sequence.get(writeIndex - 1);
+                if (to.choices == null) {
+                    to.choices = new ArrayList<>();
+                }
+                to.choices.addAll(d.choices);
             } else if (d.modes != null) {
                 sequence.get(writeIndex - 1).modes = d.modes;
                 sequence.get(writeIndex - 1).modesStr = d.modesStr;
@@ -126,7 +130,7 @@ public class SimulationController {
 
     private Plan.Decision getLastMergedDecision() {
         MultiTargetSelector.Targets targets = null;
-        String choice = null;
+        List<String> choices = new ArrayList<>();
         int[] modes = null;
         String modesStr = null;
 
@@ -134,8 +138,9 @@ public class SimulationController {
         while (d.saRef == null) {
             if (d.targets != null) {
                 targets = d.targets;
-            } else if (d.choice != null) {
-                choice = d.choice;
+            } else if (d.choices != null) {
+                // Since we're iterating backwards, add to the front.
+                choices.addAll(0, d.choices);
             } else if (d.modes != null) {
                 modes = d.modes;
                 modesStr = d.modesStr;
@@ -145,7 +150,9 @@ public class SimulationController {
 
         Plan.Decision merged  = new Plan.Decision(d.initialScore, d.prevDecision, d.saRef);
         merged.targets = targets;
-        merged.choice = choice;
+        if (!choices.isEmpty()) {
+            merged.choices = choices;
+        }
         merged.modes = modes;
         merged.modesStr = modesStr;
         return merged;

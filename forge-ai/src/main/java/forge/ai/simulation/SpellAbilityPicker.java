@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ability.ChangeZoneAi;
@@ -12,6 +13,9 @@ import forge.game.Game;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -344,15 +348,11 @@ public class SpellAbilityPicker {
         }
         return null;
     }
-
-    public Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
-            CardCollection fetchList, Player player2, Player decider) {
-        if (interceptor != null) {
-            return interceptor.chooseCard(fetchList);
-        }
+    
+    private Card getPlannedChoice(CardCollection fetchList) {
         // TODO: Make the below more robust?
         if (plan != null && plan.getSelectedDecision() != null) {
-            String choice = plan.getSelectedDecision().choice;
+            String choice = plan.getSelectedDecisionNextChoice();
             for (Card c : fetchList) {
                 if (c.getName().equals(choice)) {
                     print("  Planned choice: " + c);
@@ -361,9 +361,43 @@ public class SpellAbilityPicker {
             }
             print("Failed to use planned choice (" + choice + "). Not found!");
         }
+        return null;
+    }
+
+    public Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
+            CardCollection fetchList, Player player2, Player decider) {
+        if (fetchList.size() >= 2) {
+            if (interceptor != null) {
+                return interceptor.chooseCard(fetchList);
+            }
+            Card card = getPlannedChoice(fetchList);
+            if (card != null) {
+                plan.advanceNextChoice();
+                return card;
+            }
+        }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
     }
-    
+
+    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount) {
+        if (amount == 1) {
+            Card source = ability.getHostCard();
+            CardCollection cardList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
+            cardList = CardLists.filter(cardList, CardPredicates.canBeSacrificedBy(ability));
+            if (cardList.size() >= 2) {
+                if (interceptor != null) {
+                    return new CardCollection(interceptor.chooseCard(cardList));
+                }
+                Card card = getPlannedChoice(cardList);
+                if (card != null) {
+                    plan.advanceNextChoice();
+                    return new CardCollection(card);
+                }
+            }
+        }
+        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount);
+    }
+
     public static class PlayLandAbility extends Ability {
         public PlayLandAbility(Card land) {
             super(null, (Cost) null);

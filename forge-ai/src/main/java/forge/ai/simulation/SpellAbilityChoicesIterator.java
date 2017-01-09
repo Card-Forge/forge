@@ -25,11 +25,19 @@ public class SpellAbilityChoicesIterator {
     private ArrayList<Score> cachedTargetScores;
     private int nextTarget = 0;
     private Score bestScoreForTarget = new Score(Integer.MIN_VALUE);
+    private boolean pushTarget = true;
 
-    private int numChoices = -1;
-    private int nextChoice = 0;
-    private Card selectedChoice;
-    private Score bestScoreForChoice = new Score(Integer.MIN_VALUE);
+    private static class ChoicePoint {
+        int numChoices = -1;
+        int nextChoice = 0;
+        Card selectedChoice;
+        Score bestScoreForChoice = new Score(Integer.MIN_VALUE);
+    }
+    private ArrayList<ChoicePoint> choicePoints = new ArrayList<>();
+    private int incrementedCpIndex = 0;
+    private int cpIndex = -1;
+
+    private int evalDepth;
 
     public SpellAbilityChoicesIterator(SimulationController controller) {
         this.controller = controller;
@@ -63,25 +71,35 @@ public class SpellAbilityChoicesIterator {
                 sb.append(sub);
             }
             controller.evaluateChosenModes(selectedModes, sb.toString());
+            evalDepth++;
             advancedToNextMode = false;
         }
         return result;
     }
 
     public Card chooseCard(CardCollection fetchList) {
+        cpIndex++;
+        if (cpIndex >= choicePoints.size()) {
+            choicePoints.add(new ChoicePoint());
+        }
+        ChoicePoint cp = choicePoints.get(cpIndex);
         // Prune duplicates.
         HashSet<String> uniqueCards = new HashSet<String>();
         for (int i = 0; i < fetchList.size(); i++) {
             Card card = fetchList.get(i);
-            if (uniqueCards.add(card.getName()) && uniqueCards.size() == nextChoice + 1) {
-                selectedChoice = card;
+            if (uniqueCards.add(card.getName()) && uniqueCards.size() == cp.nextChoice + 1) {
+                cp.selectedChoice = card;
             }
         }
-        numChoices = uniqueCards.size();
-        if (selectedChoice != null) {
-            controller.evaluateCardChoice(selectedChoice);
+        if (cp.selectedChoice == null) {
+            throw new RuntimeException();
         }
-        return selectedChoice;
+        cp.numChoices = uniqueCards.size();
+        if (cpIndex >= incrementedCpIndex) {
+            controller.evaluateCardChoice(cp.selectedChoice);
+            evalDepth++;
+        }
+        return cp.selectedChoice;
     }
 
     public void chooseTargets(SpellAbility sa, GameSimulator simulator) {
@@ -111,17 +129,15 @@ public class SpellAbilityChoicesIterator {
             }
             selector.selectTargetsByIndex(nextTarget);
             controller.setHostAndTarget(sa, simulator);
-            // The hierarchy is modes -> targets -> choices. In the presence of multiple choices, we want to call
-            // evaluate just once at the top level. We can do this by only calling when numChoices is -1.
-            if (numChoices == -1) {
+            // The hierarchy is modes -> targets -> choices[]. In the presence of choices, we want to call
+            // evaluate just once at the top level.
+            if (pushTarget) {
                 controller.evaluateTargetChoices(sa, selector.getLastSelectedTargets());
+                evalDepth++;
+                pushTarget = false;
             }
             return;
         }
-    }
-
-    public Card getSelectedChoice() {
-        return selectedChoice;
     }
 
     public int[] getSelectModes() {
@@ -129,8 +145,11 @@ public class SpellAbilityChoicesIterator {
     }
 
     public boolean advance(Score lastScore) {
-        if (lastScore.value > bestScoreForChoice.value) {
-            bestScoreForChoice = lastScore;
+        cpIndex = -1;
+        for (ChoicePoint cp : choicePoints) {
+            if (lastScore.value > cp.bestScoreForChoice.value) {
+                cp.bestScoreForChoice = lastScore;
+            }
         }
         if (lastScore.value > bestScoreForTarget.value) {
             bestScoreForTarget = lastScore;
@@ -139,21 +158,28 @@ public class SpellAbilityChoicesIterator {
             bestScoreForMode = lastScore;
         }
 
-        if (numChoices != -1) {
-            if (selectedChoice != null) {
-                controller.doneEvaluating(bestScoreForChoice);
+        if (!choicePoints.isEmpty()) {
+            for (int i = choicePoints.size() - 1; i >= 0; i--) {
+                ChoicePoint cp = choicePoints.get(i);
+                if (cp.nextChoice + 1 < cp.numChoices) {
+                    cp.nextChoice++;
+                    // Remove tail of the list.
+                    incrementedCpIndex = i;
+                    for (int j = choicePoints.size() - 1; j >= i; j--) {
+                        doneEvaluating(choicePoints.get(j).bestScoreForChoice);
+                    }
+                    choicePoints.subList(i + 1, choicePoints.size()).clear();
+                    return true;
+                }
             }
-            bestScoreForChoice = new Score(Integer.MIN_VALUE);
-            selectedChoice = null;
-            if (nextChoice + 1 < numChoices) {
-                nextChoice++;
-                return true;
+            for (int i = choicePoints.size() - 1; i >= 0; i--) {
+                doneEvaluating(choicePoints.get(i).bestScoreForChoice);
             }
-            nextChoice = 0;
-            numChoices = -1;
+            choicePoints.clear();
         }
         if (cachedTargetScores != null) {
-            controller.doneEvaluating(bestScoreForTarget);
+            pushTarget = true;
+            doneEvaluating(bestScoreForTarget);
             bestScoreForTarget = new Score(Integer.MIN_VALUE);
             while (nextTarget + 1 < cachedTargetScores.size()) {
                 nextTarget++;
@@ -165,7 +191,7 @@ public class SpellAbilityChoicesIterator {
             cachedTargetScores = null;
         }
         if (modeIterator != null) {
-            controller.doneEvaluating(bestScoreForMode);
+            doneEvaluating(bestScoreForMode);
             bestScoreForMode = new Score(Integer.MIN_VALUE);
             if (modeIterator.hasNext()) {
                 selectedModes = modeIterator.next();
@@ -174,7 +200,16 @@ public class SpellAbilityChoicesIterator {
             }
             modeIterator = null;
         }
+
+        if (evalDepth != 0) {
+            throw new RuntimeException("" + evalDepth);
+        }
         return false;
+    }
+
+    private void doneEvaluating(Score bestScore) {
+        controller.doneEvaluating(bestScore);
+        evalDepth--;
     }
 
     public static List<AbilitySub> getModeCombination(List<AbilitySub> choices, int[] modeIndexes) {

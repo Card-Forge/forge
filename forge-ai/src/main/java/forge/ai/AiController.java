@@ -1587,5 +1587,12 @@ public class AiController {
         }
         return null;
     }
+
+    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount) {
+        if (simPicker != null) {
+            return simPicker.chooseSacrificeType(type, ability, amount);
+        }
+        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount);
+    }
 }
 

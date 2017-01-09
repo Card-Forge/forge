@@ -1,7 +1,10 @@
 package forge.ai.simulation;
 
+import java.util.List;
+
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -196,5 +199,40 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         SpellAbility subSa = sa.getSubAbility();
         assertEquals(men, subSa.getTargetCard());
         assertEquals("1", subSa.getParam("NumDmg"));
+    }
+
+    public void testLandSearchForCombo() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Forest", p);
+        addCard("Thespian's Stage", p);
+        Card darkDepths = addCard("Dark Depths", p);
+
+        Card cropRotation = addCardToZone("Crop Rotation", p, ZoneType.Hand);
+
+        addCardToZone("Forest", p, ZoneType.Library);
+        addCardToZone("Urborg, Tomb of Yawgmoth", p, ZoneType.Library);
+        addCardToZone("Swamp", p, ZoneType.Library);
+
+        darkDepths.setCounters(CounterType.ICE, 10);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        assertEquals(10, darkDepths.getCounters(CounterType.ICE));
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        assertEquals(cropRotation.getSpellAbilities().get(0), sa);
+        // Expected: Sac a Forest to get an Urborg.
+        List<String> choices = picker.getPlan().getDecisions().get(0).choices;
+        assertEquals(2, choices.size());
+        assertEquals("Forest", choices.get(0));
+        assertEquals("Urborg, Tomb of Yawgmoth", choices.get(1));
+        // Next, expected to use Thespian's Stage to copy Dark Depths.
+        Plan.Decision d2 = picker.getPlan().getDecisions().get(1);
+        String expected = "{2}, {T}: Thespian's Stage becomes a copy of target land and gains this ability.";
+        assertEquals(expected, d2.saRef.toString());
+        assertTrue(d2.targets.toString().contains("Dark Depths"));
     }
 }

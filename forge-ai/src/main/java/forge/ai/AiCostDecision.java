@@ -468,7 +468,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
-        CardCollectionView list = ComputerUtil.chooseSacrificeType(player, cost.getType(), ability, ability.getTargetCard(), c);
+        final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
+        CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c);
         return PaymentDecision.card(list);
     }
 
