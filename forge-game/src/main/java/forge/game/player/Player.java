@@ -465,11 +465,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         else if (toLose == 0) {
             // Rule 118.4
             // this is for players being able to pay 0 life nothing to do
+            // no trigger for lost no life
+            return 0;
         }
         else {
             System.out.println("Player - trying to lose negative life");
             return 0;
         }
+
+        boolean firstLost = lifeLostThisTurn == 0;
 
         lifeLostThisTurn += toLose;
 
@@ -477,6 +481,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", this);
         runParams.put("LifeAmount", toLose);
+        runParams.put("FirstTime", firstLost);
         game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
 
         return lifeLost;

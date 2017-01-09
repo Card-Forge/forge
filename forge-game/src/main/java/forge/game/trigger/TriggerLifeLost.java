@@ -17,6 +17,8 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -42,16 +44,22 @@ public class TriggerLifeLost extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerLifeLost(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerLifeLost(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("ValidPlayer")) {
             if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
+                return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("FirstTime")) {
+            if (!(boolean)runParams2.get("FirstTime")) {
                 return false;
             }
         }
