@@ -1,0 +1,7 @@
+Name:Night Market Guard
+ManaCost:3
+Types:Artifact Creature Construct
+PT:3/1
+K:CARDNAME can block an additional creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/night_market_guard.jpg
+Oracle:Night Market Guard can block an additional creature each combat.

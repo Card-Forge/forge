@@ -1,0 +1,8 @@
+Name:Ridgescale Tusker
+ManaCost:3 G G
+Types:Creature Beast
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each other creature you control.
+SVar:TrigPutCounters:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ridgescale_tusker.jpg
+Oracle:When Ridgescale Tusker enters the battlefield, put a +1/+1 counter on each other creature you control.

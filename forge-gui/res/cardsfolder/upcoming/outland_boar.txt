@@ -1,0 +1,7 @@
+Name:Outland Boar
+ManaCost:2 R G
+Types:Creature Boar
+PT:4/4
+K:CantBeBlockedBy Creature.powerLE2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/outland_boar.jpg
+Oracle:Outland Boar can't be blocked by creatures with power 2 or less.
