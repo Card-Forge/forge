@@ -2095,43 +2095,75 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!found) {
                 return false;
             }
-        } else if (property.equals("wasDealtDamageBySourceThisGame")) {
-            if (!source.getDamageHistory().getThisGameDamaged().contains(this)) {
+        } else if (property.equals("wasDealtDamageThisGameBy ")) {
+            final String v = property.split(" ")[1];
+            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
+            boolean found = false;
+            for (final Card card : cards) {
+                if (card.getDamageHistory().getThisGameDamaged().contains(this)) {
+                    found = true;
+                    break;
+                    }
+            }
+            if (!found) {
                 return false;
             }
-        } else if (property.equals("wasDealtDamageBySourceThisTurn")) {
-            if (!source.getDamageHistory().getThisTurnDamaged().contains(this)) {
+        } else if (property.equals("wasDealtDamageThisTurnBy ")) {
+            final String v = property.split(" ")[1];
+            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
+            boolean found = false;
+            for (final Card card : cards) {
+                if (card.getDamageHistory().getThisTurnDamaged().contains(this)) {
+                    found = true;
+                    break;
+                    }
+            }
+            if (!found) {
+                return false;
+            }
+        } else if (property.equals("wasDealtCombatDamageThisTurnBy ")) {
+            final String v = property.split(" ")[1];
+            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
+            
+            boolean found = false;
+            for (final Card card : cards) {
+                if (card.getDamageHistory().getThisTurnCombatDamaged().contains(this)) {
+                    found = true;
+                    break;
+                    }
+            }
+            if (!found) {
                 return false;
             }
         } else if (property.equals("attackedBySourceThisCombat")) {
             if (game.getCombat() == null || !equals(game.getCombat().getDefenderPlayerByAttacker(source))) {
                 return false;
             }
-        } else if (property.startsWith("wasDealtDamageThisTurn")) {
+        } else if (property.equals("wasDealtDamageThisTurn")) {
             if (assignedDamage.isEmpty()) {
                 return false;
             }
-        } else if (property.startsWith("wasDealtCombatDamageThisTurn")) {
+        } else if (property.equals("wasDealtCombatDamageThisTurn")) {
             if (assignedCombatDamage.isEmpty()) {
                 return false;
             }
-        } else if (property.startsWith("LostLifeThisTurn")) {
+        } else if (property.equals("LostLifeThisTurn")) {
             if (lifeLostThisTurn <= 0) {
                 return false;
             }
-        } else if (property.startsWith("DeclaredAttackerThisTurn")) {
+        } else if (property.equals("DeclaredAttackerThisTurn")) {
             if (attackersDeclaredThisTurn <= 0) {
                 return false;
             }
-        } else if (property.startsWith("TappedLandForManaThisTurn")) {
+        } else if (property.equals("TappedLandForManaThisTurn")) {
             if (!this.tappedLandForManaThisTurn) {
                 return false;
             }
-        } else if (property.startsWith("NoCardsInHandAtBeginningOfTurn")) {
+        } else if (property.equals("NoCardsInHandAtBeginningOfTurn")) {
             if (numCardsInHandStartedThisTurnWith > 0) {
                 return false;
             }
-        } else if (property.startsWith("CardsInHandAtBeginningOfTurn")) {
+        } else if (property.equals("CardsInHandAtBeginningOfTurn")) {
             if (numCardsInHandStartedThisTurnWith <= 0) {
                 return false;
             }
@@ -2150,11 +2182,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (source.isRemembered(this)) {
                 return false;
             }
-        } else if (property.startsWith("EnchantedBy")) {
+        } else if (property.equals("EnchantedBy")) {
             if (!isEnchantedBy(source)) {
                 return false;
             }
-        } else if (property.startsWith("Chosen")) {
+        } else if (property.equals("Chosen")) {
             if (source.getChosenPlayer() == null || !source.getChosenPlayer().equals(this)) {
                 return false;
             }
