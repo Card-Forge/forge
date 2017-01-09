@@ -308,6 +308,9 @@ public final class CMatchUI
     }
 
     public List<VField> getFieldViews() {
+        if (view == null) {
+            return null;
+        }
         return view.getFieldViews();
     }
     public VField getFieldViewFor(final PlayerView p) {

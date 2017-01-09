@@ -64,6 +64,8 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private int intialMouseDragX = -1, intialMouseDragY;
     private boolean dragEnabled;
 
+    private final List<LayoutEventListener> layoutListeners = new ArrayList<>(1);
+
     public CardPanelContainer(final CMatchUI matchUI, final FScrollPane scrollPane) {
         this.matchUI = matchUI;
         this.scrollPane = scrollPane;
@@ -293,6 +295,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         fromPanel.dispose();
         getCardPanels().remove(fromPanel);
         remove(fromPanel);
+        this.doLayout();
         invalidate();
         repaint();
     }
@@ -418,4 +421,21 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     public void setMouseDragPanel(final CardPanel mouseDragPanel0) {
         this.mouseDragPanel = mouseDragPanel0;
     }
+
+    @Override 
+    public void doLayout() {
+        // Inform listeners we're doing layout
+        for (LayoutEventListener listener : layoutListeners) {
+            listener.doingLayout();
+        }
+    }
+
+    public static interface LayoutEventListener {
+        void doingLayout();
+    }
+
+    public void addLayoutListener(LayoutEventListener listener) {
+        this.layoutListeners.add(listener);
+    }
+
 }

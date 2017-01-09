@@ -22,6 +22,8 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
@@ -48,6 +50,8 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
+import forge.view.arcane.CardPanelContainer;
+import forge.view.arcane.util.CardPanelMouseListener;
 
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.
@@ -60,6 +64,8 @@ public class TargetingOverlay {
     private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
     private final List<Arc> arcsFoe = new ArrayList<Arc>();
     private final List<Arc> arcsFriend = new ArrayList<Arc>();
+    private final ArcAssembler assembler = new ArcAssembler();
+    private final Set<Integer> stackItemIDs = new HashSet<Integer>();
 
     private static class Arc {
         private final int x1, y1, x2, y2;
@@ -74,6 +80,8 @@ public class TargetingOverlay {
 
     private final Set<CardView> cardsVisualized = new HashSet<CardView>();
     private CardPanel activePanel = null;
+
+    private long lastUpdated = System.currentTimeMillis();
 
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
@@ -91,21 +99,33 @@ public class TargetingOverlay {
         return this.pnl;
     }
 
-    // TODO - this is called every repaint, regardless if card
-    // positions have changed or not.  Could perform better if
-    // it checked for a state change.  Doublestrike 28-09-12
-    private void assembleArcs(final CombatView combat) {
+    // Though this is called on every repaint, we compare the last time it
+    // ran against the current time to prevent CPU usage from spiking from overly
+    // frequent updates. It is also called (without the timer) in response to
+    // certain important UI events.
+    private boolean assembleArcs(final CombatView combat, boolean forceAssemble) {
+        if (forceAssemble || System.currentTimeMillis() - lastUpdated > 50) {
+            lastUpdated = System.currentTimeMillis();
+        } else {
+            return false;
+        }
+
+        if (!assembler.getIsListening() && matchUI != null && matchUI.getFieldViews() != null) {
+            assembler.setIsListening(true);
+            for (final VField f : matchUI.getFieldViews()) {
+                f.getTabletop().addLayoutListener(assembler);
+                f.getTabletop().addCardPanelMouseListener(assembler);
+            }
+        }
         //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
         arcsFoe.clear();
         arcsFriend.clear();
         cardPanels.clear();
         cardsVisualized.clear();
 
-        final StackInstanceTextArea activeStackItem = matchUI.getCStack().getView().getHoveredItem();
-
         switch (matchUI.getCDock().getArcState()) {
             case OFF:
-                return;
+                return true;
             case MOUSEOVER:
                 // Draw only hovered card
                 activePanel = null;
@@ -119,7 +139,7 @@ public class TargetingOverlay {
                         }
                     }
                 }
-                if (activePanel == null && activeStackItem == null) { return; }
+                if (activePanel == null) { return true; }
                 break;
             case ON:
                 // Draw all
@@ -130,20 +150,7 @@ public class TargetingOverlay {
 
         //final Point docOffsets = FView.SINGLETON_INSTANCE.getLpnDocument().getLocationOnScreen();
         // Locations of arc endpoint, per card, with ID as primary key.
-        final Map<Integer, Point> endpoints = new HashMap<Integer, Point>();
-
-        Point cardLocOnScreen;
-        Point locOnScreen = this.getPanel().getLocationOnScreen();
-
-        for (CardPanel c : cardPanels) {
-            if (c.isShowing()) {
-	            cardLocOnScreen = c.getCardLocationOnScreen();
-	            endpoints.put(c.getCard().getId(), new Point(
-	                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + (float)c.getWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X),
-	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + (float)c.getHeight() * CardPanel.TARGET_ORIGIN_FACTOR_Y)
-	            ));
-            }
-        }
+        final Map<Integer, Point> endpoints = getCardEndpoints();
 
         if (matchUI.getCDock().getArcState() == ArcState.MOUSEOVER) {
             // Only work with the active panel
@@ -161,8 +168,49 @@ public class TargetingOverlay {
             }
         }
 
-        //draw arrow connecting active item on stack
+        return true;
+    }
+
+    private Map<Integer, Point> getCardEndpoints() {
+        final Map<Integer, Point> endpoints = new HashMap<Integer, Point>();
+
+        Point cardLocOnScreen;
+        Point locOnScreen = this.getPanel().getLocationOnScreen();
+
+        for (CardPanel c : cardPanels) {
+            if (c.isShowing()) {
+	            cardLocOnScreen = c.getCardLocationOnScreen();
+	            endpoints.put(c.getCard().getId(), new Point(
+	                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + (float)c.getWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X),
+	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + (float)c.getHeight() * CardPanel.TARGET_ORIGIN_FACTOR_Y)
+	            ));
+            }
+        }
+        return endpoints;
+    }
+
+    private void assembleStackArrows() {
+        final StackInstanceTextArea activeStackItem = matchUI.getCStack().getView().getHoveredItem();
+
         if (activeStackItem != null) {
+            // Add event listeners to the stack item to repaint on mouse
+            // entry/exit, to clear up visual artifacts of our arrows
+            if (stackItemIDs.add(activeStackItem.hashCode())) {
+                activeStackItem.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(final MouseEvent e) {
+                        assembleStackArrows();
+                        FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    }
+                    @Override
+                    public void mouseExited(final MouseEvent e) {
+                        assembleStackArrows();
+                        FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    }
+                });
+            }
+            final Map<Integer, Point> endpoints = getCardEndpoints();
+            Point locOnScreen = this.getPanel().getLocationOnScreen();
             Point itemLocOnScreen = activeStackItem.getLocationOnScreen();
             if (itemLocOnScreen != null) {
                 itemLocOnScreen.x += StackInstanceTextArea.CARD_WIDTH * CardPanel.TARGET_ORIGIN_FACTOR_X + StackInstanceTextArea.PADDING - locOnScreen.getX();
@@ -176,7 +224,7 @@ public class TargetingOverlay {
                     }
                     for (PlayerView p : instance.getTargetPlayers()) {
                         Point point = getPlayerTargetingArrowPoint(p, locOnScreen);
-                        if(point != null) {
+                        if (point != null) {
                             addArc(point, itemLocOnScreen, activator.isOpponentOf(p));
                         }
                     }
@@ -199,7 +247,9 @@ public class TargetingOverlay {
     }
 
     private void addArc(Point end, Point start, boolean connectsFoes) {
-        if (start == null || end == null) { return; }
+        if (start == null || end == null) {
+            return;
+        }
 
         if (connectsFoes) {
             arcsFoe.add(new Arc(end, start));
@@ -210,7 +260,9 @@ public class TargetingOverlay {
     }
 
     private void addArcsForCard(final CardView c, final Map<Integer, Point> endpoints, final CombatView combat) {
-        if (!cardsVisualized.add(c)) { return; } //don't add arcs for cards if card already visualized
+        if (!cardsVisualized.add(c)) {
+            return; //don't add arcs for cards if card already visualized
+        }
 
         final CardView enchanting = c.getEnchantingCard();
         final CardView equipping = c.getEquipping();
@@ -384,12 +436,20 @@ public class TargetingOverlay {
             if (overlaystate == ArcState.OFF) { return; }
 
             // Arc drawing
+            boolean assembled = false;
             final GameView gameView = matchUI.getGameView();
             if (gameView != null) {
-                assembleArcs(gameView.getCombat());
+                assembled = assembleArcs(gameView.getCombat(), false);
+                assembleStackArrows();
             }
 
-            if (arcsFoe.isEmpty() && arcsFriend.isEmpty()) { return; }
+            if (arcsFoe.isEmpty() && arcsFriend.isEmpty()) {
+                if (assembled) {
+                    // We still need to repaint to get rid of visual artifacts
+                    FView.SINGLETON_INSTANCE.getFrame().repaint();
+                }
+                return;
+            }
 
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -407,7 +467,49 @@ public class TargetingOverlay {
             drawArcs(g2d, colorOther, arcsFriend);
             drawArcs(g2d, colorCombat, arcsFoe);
 
-            FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
+            if (assembled) {
+                FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
+            }
         }
+    }
+
+    // A class for listening to CardPanelContainer events, so that we can redraw arcs in response
+    class ArcAssembler implements CardPanelContainer.LayoutEventListener, CardPanelMouseListener {
+        // An "initialized"-type variable is needed since we can't initialize on construction
+        // (because CardPanelContainers aren't ready at that point)
+	    private boolean isListening = false;
+	    public boolean getIsListening() { return isListening; }
+	    public void setIsListening(boolean listening) { isListening = listening; }
+
+        private void assembleAndRepaint() {
+            final GameView gameView = matchUI.getGameView();
+            if (gameView != null) {
+                assembleArcs(gameView.getCombat(), true); // Force update despite timer
+                FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
+            }
+        }
+        @Override
+        public void doingLayout() {
+            assembleAndRepaint();
+        }
+        @Override
+        public void mouseOver(CardPanel panel, MouseEvent evt) {
+            assembleAndRepaint();
+        }
+        @Override
+        public void mouseOut(CardPanel panel, MouseEvent evt) {
+            assembleAndRepaint();
+        }
+        // We don't need the other mouse events the interface provides; stub them out
+        @Override
+        public void mouseLeftClicked(CardPanel panel, MouseEvent evt) {}
+        @Override
+        public void mouseRightClicked(CardPanel panel, MouseEvent evt) {}
+        @Override
+        public void mouseDragStart(CardPanel dragPanel, MouseEvent evt) {}
+        @Override
+        public void mouseDragged(CardPanel dragPanel, int dragOffsetX, int dragOffsetY, MouseEvent evt) {}
+        @Override
+        public void mouseDragEnd(CardPanel dragPanel, MouseEvent evt) {}
     }
 }

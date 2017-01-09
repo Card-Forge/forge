@@ -335,6 +335,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.revalidate();
         positionAllCards(lastTemplate);
         repaint();
+
+        super.doLayout();
     }
 
     // Position all card panels
