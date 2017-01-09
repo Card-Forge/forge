@@ -16610,8 +16610,8 @@ forge-gui/res/cardsfolder/upcoming/mobile_garrison.txt -text
 forge-gui/res/cardsfolder/upcoming/monstrous_onslaught.txt -text
 forge-gui/res/cardsfolder/upcoming/narnam_renegade.txt -text
 forge-gui/res/cardsfolder/upcoming/natural_obsolescence.txt -text
-forge-gui/res/cardsfolder/upcoming/night[!!-~]market[!!-~]aeronaut.txt -text
-forge-gui/res/cardsfolder/upcoming/night[!!-~]market[!!-~]guard.txt -text
+forge-gui/res/cardsfolder/upcoming/night_market_aeronaut.txt -text
+forge-gui/res/cardsfolder/upcoming/night_market_guard.txt -text
 forge-gui/res/cardsfolder/upcoming/oath_of_ajani.txt -text
 forge-gui/res/cardsfolder/upcoming/outland_boar.txt -text
 forge-gui/res/cardsfolder/upcoming/pacification_array.txt -text
