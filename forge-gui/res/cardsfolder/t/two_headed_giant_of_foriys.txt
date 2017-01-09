@@ -5,4 +5,4 @@ PT:4/4
 K:Trample
 K:CARDNAME can block an additional creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/two_headed_giant_of_foriys.jpg
-Oracle:Trample\nTwo-Headed Giant of Foriys can block an additional creature.
+Oracle:Trample\nTwo-Headed Giant of Foriys can block an additional creature each combat.
