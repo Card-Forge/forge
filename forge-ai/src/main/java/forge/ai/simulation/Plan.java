@@ -127,6 +127,9 @@ public class Plan {
             if (targets != null) {
                 sb.append(" (targets: ").append(targets).append(")");
             }
+            if (choice != null) {
+                sb.append(" (chosen: ").append(choice).append(")");
+            }
             if (!showHostCard) {
                 sb.append("]");
             }
