@@ -22,12 +22,15 @@ import com.google.common.collect.Lists;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -283,6 +286,63 @@ public class SpecialCardAi {
         }
     }
     
+    public static class UginTheSpiritDragon {
+        public static boolean considerPWAbilityPriority(Player ai, SpellAbility sa, ZoneType origin, CardCollectionView oppType, CardCollectionView computerType) {
+            Card source = sa.getHostCard();
+            Game game = source.getGame();
+            
+            final int loyalty = source.getCounters(CounterType.LOYALTY);
+            int x = -1, best = 0;
+            Card single = null;
+            for (int i = 0; i < loyalty; i++) {
+                source.setSVar("ChosenX", "Number$" + i);
+                oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
+                oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
+                computerType = AbilityUtils.filterListByType(ai.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+                int net = ComputerUtilCard.evaluatePermanentList(oppType) - ComputerUtilCard.evaluatePermanentList(computerType) - i;
+                if (net > best) {
+                    x = i;
+                    best = net;
+                    if (oppType.size() == 1) {
+                        single = oppType.getFirst();
+                    } else {
+                        single = null;
+                    }
+                }
+            }
+            // check if +1 would be sufficient
+            if (single != null) {
+                SpellAbility ugin_burn = null;
+                for (final SpellAbility s : source.getSpellAbilities()) {
+                    if (s.getApi() == ApiType.DealDamage) {
+                        ugin_burn = s;
+                        break;
+                    }
+                }
+                if (ugin_burn != null) {
+                    // basic logic copied from DamageDealAi::dealDamageChooseTgtC
+                    if (ugin_burn.canTarget(single)) {
+                        final boolean can_kill = single.getSVar("Targeting").equals("Dies")
+                                || (ComputerUtilCombat.getEnoughDamageToKill(single, 3, source, false, false) <= 3)
+                                        && !ComputerUtil.canRegenerate(ai, single)
+                                        && !(single.getSVar("SacMe").length() > 0);
+                        if (can_kill) {
+                            return false;
+                        }
+                    }
+                    // simple check to burn player instead of exiling planeswalker
+                    if (single.isPlaneswalker() && single.getCurrentLoyalty() <= 3) {
+                        return false;
+                    }
+                }
+            }
+             if (x == -1) {
+                return false;
+            }
+            source.setSVar("ChosenX", "Number$" + x);
+            return true;
+        }
+    }
     // Yawgmoth's Bargain
     public static class YawgmothsBargain {
         public static boolean consider(Player ai, SpellAbility sa) {

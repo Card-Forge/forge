@@ -7,20 +7,16 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.AiPlayerPredicates;
-import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -78,56 +74,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         
         // Ugin AI: always try to sweep before considering +1 
         if (source.getName().equals("Ugin, the Spirit Dragon")) {
-            final int loyalty = source.getCounters(CounterType.LOYALTY);
-            int x = -1, best = 0;
-            Card single = null;
-            for (int i = 0; i < loyalty; i++) {
-                source.setSVar("ChosenX", "Number$" + i);
-                oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
-                oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
-                computerType = AbilityUtils.filterListByType(ai.getCardsIn(origin), sa.getParam("ChangeType"), sa);
-                int net = ComputerUtilCard.evaluatePermanentList(oppType) - ComputerUtilCard.evaluatePermanentList(computerType) - i;
-                if (net > best) {
-                    x = i;
-                    best = net;
-                    if (oppType.size() == 1) {
-                        single = oppType.getFirst();
-                    } else {
-                        single = null;
-                    }
-                }
-            }
-            // check if +1 would be sufficient
-            if (single != null) {
-                SpellAbility ugin_burn = null;
-                for (final SpellAbility s : source.getSpellAbilities()) {
-                    if (s.getApi() == ApiType.DealDamage) {
-                        ugin_burn = s;
-                        break;
-                    }
-                }
-                if (ugin_burn != null) {
-                    // basic logic copied from DamageDealAi::dealDamageChooseTgtC
-                    if (ugin_burn.canTarget(single)) {
-                        final boolean can_kill = single.getSVar("Targeting").equals("Dies")
-                                || (ComputerUtilCombat.getEnoughDamageToKill(single, 3, source, false, false) <= 3)
-                                        && !ComputerUtil.canRegenerate(ai, single)
-                                        && !(single.getSVar("SacMe").length() > 0);
-                        if (can_kill) {
-                            return false;
-                        }
-                    }
-                    // simple check to burn player instead of exiling planeswalker
-                    if (single.isPlaneswalker() && single.getCurrentLoyalty() <= 3) {
-                        return false;
-                    }
-                }
-            }
-             if (x == -1) {
-                return false;
-            }
-            source.setSVar("ChosenX", "Number$" + x);
-            return true;
+            return SpecialCardAi.UginTheSpiritDragon.considerPWAbilityPriority(ai, sa, origin, oppType, computerType);
         }
 
         // TODO improve restrictions on when the AI would want to use this
