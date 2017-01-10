@@ -3,34 +3,31 @@
 Name=The Great and Powerful Trixie 4
 Title=The Great and Powerful Trixie
 Difficulty=very hard
-Description=UB Necro-Donate Trix combo deck with Necropotence, Yawgmoth's Bargain, Illusions of Grandeur and Donate
+Description=UB Necro-Donate Trix combo deck with Necropotence, Illusions of Grandeur and Donate
 Icon=The Great and Powerful Trixie.jpg
 Deck Type=constructed
 [main]
 1 Ancestral Recall
-2 Arcane Denial
+3 Arcane Denial
 1 Black Lotus
 4 Counterspell
 1 Demonic Tutor
+3 Disdainful Stroke
 4 Donate
+1 Drowned Catacomb
 3 Drowned Catacomb
-2 Hero's Downfall
+3 Essence Scatter
 4 Illusions of Grandeur
-4 Island
-1 Jet Medallion
+5 Island
 1 Mox Jet
 1 Mox Sapphire
-1 Necropotence
-2 Palace Siege
-3 Sapphire Medallion
-4 Sinkhole
-1 Sol Ring
+1 Mystical Tutor
+4 Necropotence
+4 Sapphire Medallion
 1 Strip Mine
-4 Swamp
-2 Terror
 1 Time Walk
-2 Ultimate Price
 4 Underground Sea
+1 Unsummon
 2 Urborg, Tomb of Yawgmoth
+4 Vapor Snag
 3 Wasteland
-1 Yawgmoth's Bargain
