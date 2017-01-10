@@ -62,3 +62,4 @@ OGW: 9 Boosters, 66 BasicLands BFZ, 14 name('Wastes')
 SOI: 9 Boosters, 80 BasicLands
 EMN: 9 Boosters, 80 BasicLands SOI
 KLD: 9 Boosters, 80 BasicLands
+AER: 9 Boosters, 80 BasicLands KLD
