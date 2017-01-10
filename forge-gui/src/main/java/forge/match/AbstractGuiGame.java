@@ -375,6 +375,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         disableAutoYields = b0;
     }
 
+    @Override
+    public final void clearAutoYields() {
+        autoYields.clear();
+        triggersAlwaysAccept.clear();
+    }
+
     // Triggers preliminary choice: ask, decline or play
     private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
 

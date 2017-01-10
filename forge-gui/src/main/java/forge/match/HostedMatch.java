@@ -255,6 +255,7 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
+            humanController.getGui().clearAutoYields();
             humanController.getGui().afterGameEnd();
         }
         humanControllers.clear();

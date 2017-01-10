@@ -162,6 +162,7 @@ public interface IGuiGame {
     void setShouldAlwaysAcceptTrigger(int trigger);
     void setShouldAlwaysDeclineTrigger(int trigger);
     void setShouldAlwaysAskTrigger(int trigger);
+    void clearAutoYields();
 
     void setCurrentPlayer(PlayerView player);
 }
