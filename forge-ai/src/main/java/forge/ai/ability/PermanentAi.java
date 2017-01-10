@@ -157,7 +157,7 @@ public class PermanentAi extends SpellAbilityAi {
         if (card.hasSVar("AICastPreference")) {
             String pref = card.getSVar("AICastPreference");
             String[] groups = StringUtils.split(pref, "|");
-            boolean dontCast = false, doCast = true;
+            boolean dontCast = false;
             for (String group : groups) {
                 String[] elems = StringUtils.split(group.trim(), '$');
                 String param = elems[0].trim();
@@ -202,6 +202,11 @@ public class PermanentAi extends SpellAbilityAi {
                     if (ai.getLife() < Integer.parseInt(value)) {
                         dontCast = false;
                         break; // disregard other preferences, always cast as a last resort
+                    }
+                } else if (param.equals("OnlyFromZone")) {
+                    if (!card.getZone().getZoneType().toString().equals(value)) {
+                        dontCast = true;
+                        break;  // limit casting to a specific zone only
                     }
                 }
             }
