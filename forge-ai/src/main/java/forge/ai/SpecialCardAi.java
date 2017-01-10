@@ -38,6 +38,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.item.IPaperCard;
 import java.util.Collections;
 import java.util.List;
 
@@ -150,6 +151,50 @@ public class SpecialCardAi {
             // Should never get here because targetOpponent, called before targetPermanentToDonate, should already have made the AI bail
             System.err.println("Warning: Donate AI failed at SpecialCardAi.Donate#targetPermanentToDonate despite successfully targeting an opponent first.");
             return false;
+        }
+    }
+
+    // Living Death (and possibly other similar cards using AILogic LivingDeath)
+    public static class LivingDeath {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            int aiBattlefieldPower = 0, aiGraveyardPower = 0;
+            CardCollection aiCreaturesInGY = CardLists.filter(ai.getZone(ZoneType.Graveyard).getCards(), CardPredicates.Presets.CREATURES);
+
+            if (aiCreaturesInGY.isEmpty()) {
+                // nothing in graveyard, so cut short
+                return false;
+            }
+            
+            for (Card c : ai.getCreaturesInPlay()) {
+                if (!SpellAbilityAi.isUselessCreature(ai, c)) {
+                    aiBattlefieldPower += ComputerUtilCard.evaluateCreature(c);
+                }
+            }
+            for (Card c : aiCreaturesInGY) {
+                aiGraveyardPower += ComputerUtilCard.evaluateCreature(c);
+            }
+
+            int oppBattlefieldPower = 0, oppGraveyardPower = 0; //TODO: not used yet (see below)
+            List<Player> opponents = ai.getOpponents(); // TODO: not used yet (see below)
+            for (Player p : opponents) {
+                int playerPower = 0;
+                int tempGraveyardPower = 0;
+                for (Card c : p.getCreaturesInPlay()) {
+                    playerPower += ComputerUtilCard.evaluateCreature(c);
+                }
+                for (Card c : CardLists.filter(p.getZone(ZoneType.Graveyard).getCards(), CardPredicates.Presets.CREATURES)) {
+                    tempGraveyardPower += ComputerUtilCard.evaluateCreature(c);
+                }
+                if (playerPower > oppBattlefieldPower) {
+                    oppBattlefieldPower = playerPower;
+                }
+                if (tempGraveyardPower > oppGraveyardPower) {
+                    oppGraveyardPower = tempGraveyardPower;
+                }
+            }
+
+            // if we get more value out of this than our opponent does (hopefully), go for it
+            return (aiGraveyardPower - aiBattlefieldPower) > (oppGraveyardPower - oppBattlefieldPower);
         }
     }
 

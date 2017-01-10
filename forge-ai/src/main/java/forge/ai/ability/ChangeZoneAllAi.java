@@ -67,8 +67,13 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         CardCollectionView computerType = ai.getCardsIn(origin);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         
+        // Living Death AI
+        if ("LivingDeath".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.LivingDeath.consider(ai, sa);
+        }
+
         // Timetwister AI
-        if (source.getName().equals("Timetwister")) {
+        if ("Timetwister".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.Timetwister.consider(ai, sa);
         }
         
