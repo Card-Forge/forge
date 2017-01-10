@@ -295,7 +295,9 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         fromPanel.dispose();
         getCardPanels().remove(fromPanel);
         remove(fromPanel);
-        this.doLayout();
+        if (fromPanel.getAttachedPanels() != null) {
+            this.doLayout();
+        }
         invalidate();
         repaint();
     }
