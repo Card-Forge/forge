@@ -5023,6 +5023,7 @@ forge-gui/res/cardsfolder/d/disturbing_plot.txt -text
 forge-gui/res/cardsfolder/d/dive_bomber.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/divebomber_griffin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/divergent_growth.txt -text
+forge-gui/res/cardsfolder/d/divergent_transformations.txt -text
 forge-gui/res/cardsfolder/d/diversionary_tactics.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/divert.txt -text
 forge-gui/res/cardsfolder/d/divination.txt svneol=native#text/plain
@@ -9777,6 +9778,7 @@ forge-gui/res/cardsfolder/m/mangaras_tome.txt -text
 forge-gui/res/cardsfolder/m/maniacal_rage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/manic_scribe.txt -text
 forge-gui/res/cardsfolder/m/manic_vandal.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/manifold_insights.txt -text
 forge-gui/res/cardsfolder/m/manipulate_fate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mannichi_the_fevered_dream.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/manor_gargoyle.txt -text
