@@ -648,7 +648,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 needLayoutRefresh = true;
             }
         }
-        if (needLayoutRefresh) {
+        if (needLayoutRefresh || !toDelete.isEmpty()) {
             doLayout();
         }
 
