@@ -119,6 +119,11 @@ public class ControlGainAi extends SpellAbilityAi {
             return false;
         }
 
+        if (sa.hasParam("Defined")) {
+            // no need to target, we'll pick up the target from Defined
+            return true;
+        }
+
         CardCollection list = new CardCollection();
         for (Player pl : opponents) {
             list.addAll(pl.getCardsIn(ZoneType.Battlefield));
@@ -127,10 +132,6 @@ public class ControlGainAi extends SpellAbilityAi {
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
         
         if (list.isEmpty()) {
-            if (sa.hasParam("Defined")) {
-                // no need to target, we'll pick up the target from Defined
-                return true;
-            }
             // no valid targets, so we need to bail
             return false;
         }
