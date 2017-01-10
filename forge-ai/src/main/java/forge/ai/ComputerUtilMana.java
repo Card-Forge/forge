@@ -1327,24 +1327,27 @@ public class ComputerUtilMana {
      * Matches list of creatures to shards in mana cost for convoking.
      * @param cost cost of convoked ability
      * @param list creatures to be evaluated
+     * @param improvise
      * @return map between creatures and shards to convoke
      */
-    public static Map<Card, ManaCostShard> getConvokeFromList(final ManaCost cost, List<Card> list) {
+    public static Map<Card, ManaCostShard> getConvokeOrImproviseFromList(final ManaCost cost, List<Card> list, boolean improvise) {
         final Map<Card, ManaCostShard> convoke = new HashMap<Card, ManaCostShard>();
         Card convoked = null;
-        for (ManaCostShard toPay : cost) {
-            for (Card c : list) {
-                final int mask = c.determineColor().getColor() & toPay.getColorMask();
-                if (mask != 0) {
-                    convoked = c;
-                    convoke.put(c, toPay);
-                    break;
+        if (!improvise) {
+            for (ManaCostShard toPay : cost) {
+                for (Card c : list) {
+                    final int mask = c.determineColor().getColor() & toPay.getColorMask();
+                    if (mask != 0) {
+                        convoked = c;
+                        convoke.put(c, toPay);
+                        break;
+                    }
                 }
+                if (convoked != null) {
+                    list.remove(convoked);
+                }
+                convoked = null;
             }
-            if (convoked != null) {
-                list.remove(convoked);
-            }
-            convoked = null;
         }
         for (int i = 0; i < list.size() && i < cost.getGenericCost(); i++) {
             convoke.put(list.get(i), ManaCostShard.GENERIC);

@@ -611,8 +611,8 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost,
-            CardCollectionView untappedCreats) {
+    public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost,
+                                                                     CardCollectionView untappedCards, boolean improvise) {
         // TODO: AI to choose a creature to tap would go here
         // Probably along with deciding how many creatures to tap
         return new HashMap<Card, ManaCostShard>();

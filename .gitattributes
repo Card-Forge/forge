@@ -20536,7 +20536,7 @@ forge-gui/src/main/java/forge/match/input/InputPlaybackControl.java -text
 forge-gui/src/main/java/forge/match/input/InputProliferate.java -text
 forge-gui/src/main/java/forge/match/input/InputProxy.java -text
 forge-gui/src/main/java/forge/match/input/InputQueue.java -text
-forge-gui/src/main/java/forge/match/input/InputSelectCardsForConvoke.java -text
+forge-gui/src/main/java/forge/match/input/InputSelectCardsForConvokeOrImprovise.java -text
 forge-gui/src/main/java/forge/match/input/InputSelectCardsFromList.java -text
 forge-gui/src/main/java/forge/match/input/InputSelectEntitiesFromList.java -text
 forge-gui/src/main/java/forge/match/input/InputSelectManyBase.java -text

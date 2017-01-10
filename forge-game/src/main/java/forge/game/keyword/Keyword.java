@@ -68,6 +68,7 @@ public enum Keyword {
     HEXPROOF(SimpleKeyword.class, true, "This can't be the target of spells or abilities your opponents control."),
     HIDEAWAY(SimpleKeyword.class, false, "This permanent enters the battlefield tapped. When it does, look at the top four cards of your library, exile one of them face down, then put the rest on the bottom of your library in any order."),
     HORSEMANSHIP(SimpleKeyword.class, true, "This creature can't be blocked except by creatures with horsemanship."),
+    IMPROVISE(SimpleKeyword.class, true, "Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}."),
     INFECT(SimpleKeyword.class, true, " This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters."),
     INGEST(SimpleKeyword.class, false, "Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library."),
     INTIMIDATE(SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or creatures that share a color with it."),
@@ -207,6 +208,10 @@ public enum Keyword {
     @Override
     public String toString() {
         return displayName;
+    }
+
+    public String getDescription() {
+        return String.format("%s (%s)", displayName, reminderText);
     }
 
     public static List<Keyword> getAllKeywords() {

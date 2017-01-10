@@ -1478,7 +1478,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append(")");
             } else if (keyword.equals("Convoke") || keyword.equals("Menace") || keyword.equals("Dethrone")
-                     || keyword.equals("Melee")) {
+                     || keyword.equals("Melee") || keyword.equals("Improvise")) {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 }
@@ -1961,6 +1961,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\r\n");
+            } else if (keyword.equals("Improvise")) {
+                sb.append(Keyword.IMPROVISE.getDescription()).append("\r\n");
             } else if (keyword.equals("Delve")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);

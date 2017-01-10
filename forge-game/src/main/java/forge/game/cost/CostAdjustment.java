@@ -220,8 +220,11 @@ public class CostAdjustment {
                     game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
                 }
             }
-            else if (sa.getHostCard().hasKeyword("Convoke")) {
-                adjustCostByConvoke(cost, sa, test);
+            if (sa.getHostCard().hasKeyword("Convoke")) {
+                adjustCostByConvokeOrImprovise(cost, sa, false, test);
+            }
+            if (sa.getHostCard().hasKeyword("Improvise")) {
+                adjustCostByConvokeOrImprovise(cost, sa, true, test);
             }
         } // isSpell
 
@@ -232,11 +235,15 @@ public class CostAdjustment {
     }
     // GetSpellCostChange
 
-    private static void adjustCostByConvoke(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
-        CardCollectionView untappedCreats = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-        untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
-    
-        Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvoke(sa, cost.toManaCost(), untappedCreats);
+    private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean improvise, boolean test) {
+        CardCollectionView untappedCards = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.UNTAPPED);
+        if (improvise) {
+            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.ARTIFACTS);
+        } else {
+            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.CREATURES);
+        }
+
+        Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvokeOrImprovise(sa, cost.toManaCost(), untappedCards, improvise);
         
         // Convoked creats are tapped here with triggers suppressed,
         // Then again when payment is done(In InputPayManaCost.done()) with suppression cleared.

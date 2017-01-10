@@ -20,29 +20,35 @@ import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
 
-public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> {
+public final class InputSelectCardsForConvokeOrImprovise extends InputSelectManyBase<Card> {
     private static final long serialVersionUID = -1779224307654698954L;
     private final Map<Card, ImmutablePair<Byte, ManaCostShard>> chosenCards = new HashMap<Card, ImmutablePair<Byte, ManaCostShard>>();
     private final ManaCostBeingPaid remainingCost;
     private final Player player;
-    private final CardCollectionView availableCreatures;
+    private final CardCollectionView availableCards;
+    private final boolean improvise;
+    private final String cardType;
+    private final String description;
 
-    public InputSelectCardsForConvoke(final PlayerControllerHuman controller, final Player p, final ManaCost cost, final CardCollectionView untapped) {
+    public InputSelectCardsForConvokeOrImprovise(final PlayerControllerHuman controller, final Player p, final ManaCost cost, final CardCollectionView untapped, boolean impr) {
         super(controller, 0, Math.min(cost.getCMC(), untapped.size()));
         remainingCost = new ManaCostBeingPaid(cost);
         player = p;
-        availableCreatures = untapped;
+        availableCards = untapped;
+        improvise = impr;
+        cardType = impr ? "artifact" : "creature";
+        description = impr ? "Improvise" : "Convoke";
     }
 
     @Override
     protected String getMessage() {
-        return "Choose creatures to tap for convoke.\nRemaining mana cost is " + remainingCost.toString();
+        return String.format("Choose %s to tap for %s .\nRemaining mana cost is %s", cardType, description, remainingCost.toString());
     }
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (!availableCreatures.contains(card)) {
-            // Not in untapped creatures list provided. Not a legal Convoke selection.
+        if (!availableCards.contains(card)) {
+            // Not in untapped list provided. Not a legal Convoke selection.
             return false;
         }
 
@@ -54,18 +60,21 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
         }
         else {
             byte chosenColor;
-            ColorSet colors = CardUtil.getColors(card);
-            if (colors.isMulticolor()) {
-                //if card is multicolor, strip out any colors which can't be paid towards remaining cost
-                colors = ColorSet.fromMask(colors.getColor() & remainingCost.getUnpaidColors());
-            }
-            if (!colors.isMulticolor()) {
-                // Since the convoke mana logic can use colored mana as generic if needed,
-                // there is no need to prompt the user when convoking with a mono-color creature.
-                chosenColor = colors.getColor();
-            }
-            else { //prompt user if more than one option for which color to pay towards convoke
-                chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, colors);
+            if (improvise) {
+                chosenColor = ManaCostShard.COLORLESS.getColorMask();
+            } else {
+                ColorSet colors = CardUtil.getColors(card);
+                if (colors.isMulticolor()) {
+                    //if card is multicolor, strip out any colors which can't be paid towards remaining cost
+                    colors = ColorSet.fromMask(colors.getColor() & remainingCost.getUnpaidColors());
+                }
+                if (!colors.isMulticolor()) {
+                    // Since the convoke mana logic can use colored mana as generic if needed,
+                    // there is no need to prompt the user when convoking with a mono-color creature.
+                    chosenColor = colors.getColor();
+                } else { //prompt user if more than one option for which color to pay towards convoke
+                    chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, colors);
+                }
             }
             final ManaCostShard shard = remainingCost.payManaViaConvoke(chosenColor);
             if (shard != null) {
@@ -73,7 +82,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
                 onSelectStateChanged(card, true);
             }
             else {
-                showMessage("The colors provided by " + card.toString() + " you've chosen cannot be used to decrease the manacost of " + remainingCost.toString());
+                showMessage("The colors provided by " + card.toString() + " you've chosen cannot be used to pay the manacost of " + remainingCost.toString());
                 return false;
             }
         }
@@ -84,8 +93,8 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
 
     @Override
     public String getActivateAction(final Card card) {
-        if (availableCreatures.contains(card)) {
-            return "tap creature for Convoke";
+        if (availableCards.contains(card)) {
+            return String.format("tap %s for %s", cardType, description);
         }
         return null;
     }

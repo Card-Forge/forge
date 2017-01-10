@@ -105,7 +105,7 @@ import forge.match.input.InputPayMana;
 import forge.match.input.InputProliferate;
 import forge.match.input.InputProxy;
 import forge.match.input.InputQueue;
-import forge.match.input.InputSelectCardsForConvoke;
+import forge.match.input.InputSelectCardsForConvokeOrImprovise;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectEntitiesFromList;
 import forge.model.FModel;
@@ -1343,8 +1343,8 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public Map<Card, ManaCostShard> chooseCardsForConvoke(final SpellAbility sa, final ManaCost manaCost, final CardCollectionView untappedCreats) {
-        final InputSelectCardsForConvoke inp = new InputSelectCardsForConvoke(this, player, manaCost, untappedCreats);
+    public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(final SpellAbility sa, final ManaCost manaCost, final CardCollectionView untappedCards, boolean improvise) {
+        final InputSelectCardsForConvokeOrImprovise inp = new InputSelectCardsForConvokeOrImprovise(this, player, manaCost, untappedCards, improvise);
         inp.showAndWait();
         return inp.getConvokeMap();
     }

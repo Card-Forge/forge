@@ -825,38 +825,46 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCreats0) {
+    public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean improvise) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         //Filter out mana sources that will interfere with payManaCost()
-        CardCollection untappedCreats = CardLists.filter(untappedCreats0, new Predicate<Card>() {
+        CardCollection untapped = CardLists.filter(untappedCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.getManaAbilities().isEmpty();
             }
         });
-        
-        //Only convoke after attackers have been declared
+
+        // Filter out creatures if AI hasn't attacked yet
         if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            return new HashMap<Card, ManaCostShard>();
+            if (improvise) {
+                untapped = CardLists.filter(untapped, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {return !c.isCreature();
+                    }
+                });
+            } else {
+                return new HashMap<Card, ManaCostShard>();
+            }
         }
         
         //Do not convoke potential blockers until after opponent's attack
         final CardCollectionView blockers = ComputerUtilCard.getLikelyBlockers(ai, null);
         if ((ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||
                 (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
-            untappedCreats.removeAll((List<?>)blockers);
+            untapped.removeAll((List<?>)blockers);
             //Add threatened creatures
             if (!ai.getGame().getStack().isEmpty()) {
                 final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), null);
                 for (Card c : blockers) {
-                    if (objects.contains(c)) {
-                        untappedCreats.add(c);
+                    if (objects.contains(c) && (!improvise || c.isArtifact())) {
+                        untapped.add(c);
                     }
                 }
             }
         }
-        return ComputerUtilMana.getConvokeFromList(manaCost, untappedCreats);
+        return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, improvise);
     }
 
     @Override
