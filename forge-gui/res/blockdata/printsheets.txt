@@ -682,6 +682,11 @@
 1 Wayfaring Temple|RTR
 1 Wild Beastmaster|RTR
 
+[ME4 UrzaLands]
+1 Urza's Tower|ME4
+1 Urza's Mine|ME4
+1 Urza's Power Plant|ME4
+
 [CNS Draft Matters]
 #1 Advantageous Proclamation|CNS
 #1 AEther Searcher|CNS
@@ -1039,7 +1044,7 @@ Terrain Elemental
 Verdant Crescendo
 Woodland Stream
 
-[KLD Masterpiece Series]
+[MPS Kaladesh Inventions]
 Cataclysmic Gearhulk|MPS
 Torrential Gearhulk|MPS
 Noxious Gearhulk|MPS
@@ -1071,7 +1076,28 @@ Sword of Feast and Famine|MPS
 Sword of Fire and Ice|MPS
 Sword of Light and Shadow|MPS
 
-[ME4 UrzaLands]
-1 Urza's Tower|ME4
-1 Urza's Mine|ME4
-1 Urza's Power Plant|ME4
+[MPS Aether Revolt Inventions]
+Arcbound Ravager|MPS
+Black Vise|MPS
+Chalice of the Void|MPS
+Defense Grid|MPS
+Duplicant|MPS
+Engineered Explosives|MPS
+Ensnaring Bridge|MPS
+Extraplanar Lens|MPS
+Grindstone|MPS
+Meekstone|MPS
+Oblivion Stone|MPS
+Ornithopter|MPS
+Paradox Engine|MPS
+Pithing Needle|MPS
+Planar Bridge|MPS
+Platinum Angel|MPS
+Sphere of Resistance|MPS
+Staff of Domination|MPS
+Sundering Titan|MPS
+Sword of Body and Mind|MPS
+Sword of War and Peace|MPS
+Trinisphere|MPS
+Vedalken Shackles|MPS
+Wurmcoil Engine|MPS

@@ -1,7 +1,7 @@
 [metadata]
 Code=MPS
 Date=2016-09-30
-Name=Kaladesh Inventions
+Name=Masterpiece Series
 MciCode=mps
 Type=Other
 
@@ -36,3 +36,27 @@ Type=Other
 28 M Sword of Feast and Famine
 29 M Sword of Fire and Ice
 30 M Sword of Light and Shadow
+31 M Arcbound Ravager
+32 M Black Vise
+33 M Chalice of the Void
+34 M Defense Grid
+35 M Duplicant
+36 M Engineered Explosives
+37 M Ensnaring Bridge
+38 M Extraplanar Lens
+39 M Grindstone
+40 M Meekstone
+41 M Oblivion Stone
+42 M Ornithopter
+43 M Paradox Engine
+44 M Pithing Needle
+45 M Planar Bridge
+46 M Platinum Angel
+47 M Sphere of Resistance
+48 M Staff of Domination
+49 M Sundering Titan
+50 M Sword of Body and Mind
+51 M Sword of War and Peace
+52 M Trinisphere
+53 M Vedalken Shackles
+54 M Wurmcoil Engine
