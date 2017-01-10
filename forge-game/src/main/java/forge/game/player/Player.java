@@ -18,7 +18,7 @@
 package forge.game.player;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
@@ -263,14 +263,8 @@ public class Player extends GameEntity implements Comparable<Player> {
      * returns all opponents.
      * Should keep player relations somewhere in the match structure
      */
-    public final FCollection<Player> getOpponents() {
-        FCollection<Player> result = new FCollection<Player>();
-        for (Player p : game.getPlayers()) {
-            if (p.isOpponentOf(this)) {
-                result.add(p);
-            }
-        }
-        return result;
+    public final PlayerCollection getOpponents() {
+        return game.getPlayers().filter(PlayerPredicates.isOpponentOf(this));
     }
 
     public void updateOpponentsForView() {
@@ -319,22 +313,16 @@ public class Player extends GameEntity implements Comparable<Player> {
      * returns allied players.
      * Should keep player relations somewhere in the match structure
      */
-    public final FCollection<Player> getAllies() {
-        FCollection<Player> result = new FCollection<Player>();
-        for (Player p : game.getPlayers()) {
-            if (!p.isOpponentOf(this)) {
-                result.add(p);
-            }
-        }
-        return result;
+    public final PlayerCollection getAllies() {
+        return game.getPlayers().filter(Predicates.not(PlayerPredicates.isOpponentOf(this)));
     }
 
     /**
      * returns all other players.
      * Should keep player relations somewhere in the match structure
      */
-    public final FCollection<Player> getAllOtherPlayers() {
-        FCollection<Player> result = new FCollection<Player>(game.getPlayers());
+    public final PlayerCollection getAllOtherPlayers() {
+        PlayerCollection result = new PlayerCollection(game.getPlayers());
         result.remove(this);
         return result;
     }
@@ -344,14 +332,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Should keep player relations somewhere in the match structure
      */
     public final Player getWeakestOpponent() {
-        List<Player> opponents = getOpponents();
-        Player weakest = opponents.get(0);
-        for (int i = 1; i < opponents.size(); i++) {
-            if (weakest.getLife() > opponents.get(i).getLife()) {
-                weakest = opponents.get(i);
-            }
-        }
-        return weakest;
+        return getOpponents().min(PlayerPredicates.compareByLife());
     }
 
     public boolean isOpponentOf(Player other) {
@@ -1838,7 +1819,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (getOutcome() != null && getOutcome().lossState == GameLossReason.Conceded) {
             return false;
         }
-        return (hasKeyword("You can't lose the game.") || Iterables.any(getOpponents(), Predicates.CANT_WIN));
+        return (hasKeyword("You can't lose the game.") || Iterables.any(getOpponents(), PlayerPredicates.CANT_WIN));
     }
 
     public final boolean cantLoseForZeroOrLessLife() {
@@ -1952,7 +1933,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasSurge() {
-        FCollection<Player> list = getAllies();
+        PlayerCollection list = getAllies();
         list.add(this);
         return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), list).isEmpty();
     }
@@ -2488,21 +2469,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 1;
         }
         return getName().compareTo(o.getName());
-    }
-
-    public static class Predicates {
-        public static final Predicate<Player> NOT_LOST = new Predicate<Player>() {
-            @Override
-            public boolean apply(Player p) {
-                return p.getOutcome() == null || p.getOutcome().hasWon();
-            }
-        };
-        public static final Predicate<Player> CANT_WIN = new Predicate<Player>() {
-            @Override
-            public boolean apply(final Player p) {
-                return p.hasKeyword("You can't win the game.");
-            }
-        };
     }
 
     public static class Accessors {

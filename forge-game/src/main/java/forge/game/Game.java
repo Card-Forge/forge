@@ -45,6 +45,7 @@ import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementHandler;
@@ -57,8 +58,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.*;
 import forge.trackable.Tracker;
 import forge.util.Aggregates;
-import forge.util.collect.FCollection;
-import forge.util.collect.FCollectionView;
 import forge.util.Visitor;
 
 /**
@@ -66,9 +65,9 @@ import forge.util.Visitor;
  */
 public class Game {
     private final GameRules rules;
-    private final FCollection<Player> allPlayers = new FCollection<Player>();
-    private final FCollection<Player> ingamePlayers = new FCollection<Player>();
-    private final FCollection<Player> lostPlayers = new FCollection<Player>();
+    private final PlayerCollection allPlayers = new PlayerCollection();
+    private final PlayerCollection ingamePlayers = new PlayerCollection();
+    private final PlayerCollection lostPlayers = new PlayerCollection();
 
     private List<Card> activePlanes = null;
 
@@ -272,22 +271,22 @@ public class Game {
     /**
      * Gets the players who are still fighting to win.
      */
-    public final FCollectionView<Player> getPlayers() {
+    public final PlayerCollection getPlayers() {
         return ingamePlayers;
     }
 
-    public final FCollectionView<Player> getLostPlayers() {
+    public final PlayerCollection getLostPlayers() {
         return lostPlayers;
     }
 
     /**
      * Gets the players who are still fighting to win, in turn order.
      */
-    public final FCollectionView<Player> getPlayersInTurnOrder() {
+    public final PlayerCollection getPlayersInTurnOrder() {
         if (turnOrder.isDefaultDirection()) {
             return ingamePlayers;
         }
-        final FCollection<Player> players = new FCollection<Player>(ingamePlayers);
+        final PlayerCollection players = new PlayerCollection(ingamePlayers);
         Collections.reverse(players);
         return players;
     }
@@ -295,9 +294,9 @@ public class Game {
     /**
      * Gets the nonactive players who are still fighting to win, in turn order.
      */
-    public final FCollectionView<Player> getNonactivePlayers() {
+    public final PlayerCollection getNonactivePlayers() {
         // Don't use getPlayersInTurnOrder to prevent copying the player collection twice
-        final FCollection<Player> players = new FCollection<>(ingamePlayers);
+        final PlayerCollection players = new PlayerCollection(ingamePlayers);
         players.remove(phaseHandler.getPlayerTurn());
         if (!turnOrder.isDefaultDirection()) {
             Collections.reverse(players);

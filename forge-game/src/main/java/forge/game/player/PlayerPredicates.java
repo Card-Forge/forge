@@ -61,4 +61,26 @@ public final class PlayerPredicates {
             }
         };
     }
+    
+    public static final Comparator<Player> compareByLife() {
+        return new Comparator<Player>() {
+            @Override
+            public int compare(Player arg0, Player arg1) {
+                return Integer.compare(arg0.getLife(), arg1.getLife());
+            }
+        };
+    }
+    
+    public static final Predicate<Player> NOT_LOST = new Predicate<Player>() {
+        @Override
+        public boolean apply(Player p) {
+            return p.getOutcome() == null || p.getOutcome().hasWon();
+        }
+    };
+    public static final Predicate<Player> CANT_WIN = new Predicate<Player>() {
+        @Override
+        public boolean apply(final Player p) {
+            return p.hasKeyword("You can't win the game.");
+        }
+    };
 }
