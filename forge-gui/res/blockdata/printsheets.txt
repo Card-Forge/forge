@@ -1101,3 +1101,14 @@ Sword of War and Peace|MPS
 Trinisphere|MPS
 Vedalken Shackles|MPS
 Wurmcoil Engine|MPS
+
+[AER Planeswalker Decks]
+Ajani's Aid
+Ajani's Comrade
+Inspiring Roar
+Tranquil Expanse
+Tezzeret's Betrayal
+Tezzeret's Simulacrum
+Pendulum of Patterns
+Submerged Boneyard
+
