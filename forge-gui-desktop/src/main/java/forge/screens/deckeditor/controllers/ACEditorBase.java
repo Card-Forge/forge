@@ -196,10 +196,23 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
      * @return pool of additions allowed to deck
      */
     protected ItemPool<TItem> getAllowedAdditions(final Iterable<Entry<TItem, Integer>> itemsToAdd) {
-        final ItemPool<TItem> additions = new ItemPool<TItem>(getCatalogManager().getGenericType());
+        final ItemPool<TItem> additions = new ItemPool<>(getCatalogManager().getGenericType());
         final CardLimit limit = getCardLimit();
         final DeckController<TModel> controller = getDeckController();
-        final Deck deck = controller != null && controller.getModel() instanceof Deck ? (Deck)controller.getModel() : controller.getModel() instanceof DeckGroup ? ((DeckGroup)controller.getModel()).getHumanDeck() : null;
+
+        Deck deck = null;
+        if (controller != null) {
+            if (controller.getModel() instanceof Deck) {
+                deck = (Deck)controller.getModel(); // constructed deck
+            } else if (controller.getModel() instanceof DeckGroup) {
+                deck = ((DeckGroup)controller.getModel()).getHumanDeck(); // limited deck
+            }
+        }
+
+        if (deck == null) {
+            System.err.println("Warning: ACEditorBase#getAllowedAdditions could not properly process the deck in controller.getModel(), returning empty item pool.");
+            return additions; // returning empty additions
+        }
 
         final CardPool allCards = deck.getAllCardsInASinglePool(deck.has(DeckSection.Commander));
         Iterable<Entry<String,Integer>> cardsByName = Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME);
@@ -211,7 +224,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             int qty = itemEntry.getValue();
 
             int max;
-            if (deck == null || card == null || card.getRules().getType().isBasic() ||
+            if (card == null || card.getRules().getType().isBasic() ||
                     limit == CardLimit.None || limitExceptions.contains(card.getName())) {
                 max = Integer.MAX_VALUE;
             }
