@@ -1523,9 +1523,12 @@ public class AbilityUtils {
                     return sum;
                 }
                 if (sq[0].startsWith("TriggerRememberAmount")) {
-                    final SpellAbility root = sa.getRootAbility();
+                    SpellAbility trigSa = sa;
+                    while (trigSa != null && !trigSa.isTrigger()) {
+                        trigSa = trigSa.getRootAbility();
+                    }
                     int count = 0;
-                    for (final Object o : root.getTriggerRemembered()) {
+                    for (final Object o : trigSa.getTriggerRemembered()) {
                         if (o instanceof Integer) {
                             count += (Integer) o;
                         }
