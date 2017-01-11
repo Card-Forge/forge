@@ -1015,7 +1015,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         setTotalCountersToAdd(addAmount);
 
         if (fireEvents) {
-            final Integer oldValue = counters.get(counterType);
+            final Integer oldValue = getCounters(counterType);
             final Integer newValue = addAmount + (oldValue == null ? 0 : oldValue);
 
             if (!newValue.equals(oldValue)) {
@@ -1083,7 +1083,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     @Override
     public final void subtractCounter(final CounterType counterName, final int n) {
-        Integer oldValue = counters.get(counterName);
+        Integer oldValue = getCounters(counterName);
         int newValue = oldValue == null ? 0 : Math.max(oldValue - n, 0);
 
         final int delta = (oldValue == null ? 0 : oldValue) - newValue;
