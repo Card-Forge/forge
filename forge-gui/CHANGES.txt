@@ -8,6 +8,9 @@ Forge Beta: 10-26-2016 ver 1.5.57
 Release Notes
 -------------
 
+- Aether Revolt (pre-release) -
+This release features many Aether Revolt cards that you can play with in all game modes. The remaining cards are expected to be scripted in the upcoming versions of Forge. Since this is the first release featuring Aether Revolt in its pre-release period, some issues are to be expected, please report any bugs and inconsistencies you experience with these cards at the forums. 
+
 - Commander 2016 -
 This release features most Commander 2016 cards scripted and ready to play. The few remaining cards that are not currently supported may be scripted in the upcoming versions of Forge.
 
