@@ -39,6 +39,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
+import forge.util.Aggregates;
 import java.util.Collections;
 import java.util.List;
 
@@ -86,10 +87,10 @@ public class SpecialCardAi {
     public static class ChainOfSmog {
         public static boolean consider(Player ai, SpellAbility sa) {
             if (ai.getCardsIn(ZoneType.Hand).size() == 0) {
-                // avoid failure to add to stack by providing a legal target
+                // to avoid failure to add to stack, provide a legal target opponent first (choosing random at this point)
                 // TODO: this makes the AI target opponents with 0 cards in hand, but bailing from here causes a
                 // "failed to add to stack" error, needs investigation and improvement.
-                Player targOpp = ai.getOpponent();
+                Player targOpp = Aggregates.random(ai.getOpponents());
 
                 for (Player opp : ai.getOpponents()) {
                     if (opp.getCardsIn(ZoneType.Hand).size() > 0) {
