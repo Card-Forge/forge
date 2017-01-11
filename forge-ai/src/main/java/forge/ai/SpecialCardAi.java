@@ -38,7 +38,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.item.IPaperCard;
 import forge.util.Aggregates;
 import java.util.Collections;
 import java.util.List;
