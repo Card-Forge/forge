@@ -48,11 +48,11 @@ public class DeckQuantityRenderer extends ItemCellRenderer {
             int delta = 0;
             int x = e.getX() - cellBounds.x;
 
-            if (x <= imgSize) { //add button
-                delta = 1;
-            }
-            else if (x >= cellBounds.width - imgSize) { //remove button
+            if (x <= imgSize) { //remove button
                 delta = -1;
+            }
+            else if (x >= cellBounds.width - imgSize) { //add button
+                delta = 1;
             }
 
             if (delta != 0) {
@@ -73,7 +73,7 @@ public class DeckQuantityRenderer extends ItemCellRenderer {
         super.paint(g);
 
         int y = (this.getHeight() - imgSize) / 2;
-        FSkin.drawImage(g, imgAdd, 0, y, imgSize, imgSize);
-        FSkin.drawImage(g, imgRemove, this.getWidth() - imgSize, y, imgSize, imgSize);
+        FSkin.drawImage(g, imgRemove, 0, y, imgSize, imgSize);
+        FSkin.drawImage(g, imgAdd, this.getWidth() - imgSize, y, imgSize, imgSize);
     }
 }
