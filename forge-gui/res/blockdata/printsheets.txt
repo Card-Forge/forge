@@ -1103,12 +1103,13 @@ Vedalken Shackles|MPS
 Wurmcoil Engine|MPS
 
 [AER Planeswalker Decks]
+Ajani, Valiant Protector 
 Ajani's Aid
 Ajani's Comrade
 Inspiring Roar
 Tranquil Expanse
+Tezzeret, Master of Metal
 Tezzeret's Betrayal
 Tezzeret's Simulacrum
 Pendulum of Patterns
 Submerged Boneyard
-

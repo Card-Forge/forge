@@ -5,8 +5,202 @@ Name=Aether Revolt
 Code2=AER
 Type=Expansion
 MciCode=aer
-Booster=10 Common:!fromSheet("AER Planeswalker Decks"), 3 Uncommon:!fromSheet("AER Planeswalker Decks"), 1 RareMythic:!fromSheet("AER Planeswalker Decks"), 1 BasicLand
+Booster=10 Common:!fromSheet("AER Planeswalker Decks"), 3 Uncommon:!fromSheet("AER Planeswalker Decks"), 1 RareMythic:!fromSheet("AER Planeswalker Decks"), 1 BasicLand KLD
 AdditionalSheetForFoils=fromSheet("MPS Aether Revolt Inventions")
 AdditionalSetUnlockedInQuest=MPS
 
 [cards]
+1 U Aerial Modification
+2 U Aeronaut Admiral
+3 C Aether Inspector
+4 R Aethergeode Miner
+5 U Airdrop Aeronauts
+6 C Alley Evasion
+7 C Audacious Infiltrator
+8 C Bastion Enforcer
+9 R Call for Unity
+10 C Caught in the Brights
+11 R Consulate Crackdown
+12 C Conviction
+13 C Countless Gears Renegade
+14 C Dawnfeather Eagle
+15 U Deadeye Harpooner
+16 C Decommission
+17 U Deft Dismissal
+18 M Exquisite Archangel
+19 U Felidar Guardian
+20 C Ghirapur Osprey
+21 U Restoration Specialist
+22 R Solemn Recruit
+23 R Sram, Senior Edificer
+24 R Sram's Expertise
+25 U Thopter Arrest
+26 C Aether Swooper
+27 R Aethertide Whale
+28 R Baral, Chief of Compliance
+29 R Baral's Expertise
+30 C Bastion Inventor
+31 R Disallow
+32 C Dispersal Technician
+33 U Efficient Construction
+34 C Hinterland Drake
+35 C Ice Over
+36 U Illusionist's Stratagem
+37 C Leave in the Dust
+38 M Mechanized Production
+39 C Metallic Rebuke
+40 C Negate
+41 R Quicksmith Spy
+42 U Reverse Engineer
+43 U Salvage Scuttler
+44 U Shielded Aether Thief
+45 C Shipwreck Moray
+46 U Skyship Plunderer
+47 C Take into Custody
+48 U Trophy Mage
+49 R Whir of Invention
+50 U Wind-Kin Raiders
+51 C Aether Poisoner
+52 C Alley Strangler
+53 R Battle at the Bridge
+54 C Cruel Finality
+55 C Daring Demolition
+56 C Defiant Salvager
+57 U Fatal Push
+58 C Fen Hauler
+59 U Foundry Hornet
+60 C Fourth Bridge Prowler
+61 U Gifted Aetherborn
+62 R Glint-Sleeve Siphoner
+63 U Gonti's Machinations
+64 M Herald of Anguish
+65 U Ironclad Revolutionary
+66 R Midnight Entourage
+67 C Night Market Aeronaut
+68 U Perilous Predicament
+69 C Renegade's Getaway
+70 C Resourceful Return
+71 R Secret Salvage
+72 U Sly Requisitioner
+73 U Vengeful Rebel
+74 R Yahenni, Undying Partisan
+75 R Yahenni's Expertise
+76 C Aether Chaser
+77 C Chandra's Revolution
+78 C Destructive Tampering
+79 C Embraal Gear-Smasher
+80 U Enraged Giant
+81 R Freejam Regent
+82 C Frontline Rebel
+83 U Gremlin Infestation
+84 U Hungry Flames
+85 M Indomitable Creativity
+86 U Invigorated Rampage
+87 R Kari Zev, Skyship Raider
+88 R Kari Zev's Expertise
+89 C Lathnu Sailback
+90 M Lightning Runner
+91 R Pia's Revolution
+92 C Precise Strike
+93 R Quicksmith Rebel
+94 U Ravenous Intruder
+95 U Reckless Racer
+96 R Release the Gremlins
+97 U Scrapper Champion
+98 C Shock
+99 U Siege Modification
+100 C Sweatworks Brawler
+101 C Wrangle
+102 C Aether Herder
+103 C Aetherstream Leopard
+104 M Aetherwind Basker
+105 R Aid from the Cowl
+106 C Druid of the Cowl
+107 R Greenbelt Rampager
+108 R Greenwheel Liberator
+109 R Heroic Intervention
+110 U Hidden Herbalists
+111 C Highspire Infusion
+112 U Lifecraft Awakening
+113 C Lifecraft Cavalry
+114 U Lifecrafter's Gift
+115 U Maulfist Revolutionary
+116 U Monstrous Onslaught
+117 U Narnam Renegade
+118 C Natural Obsolescence
+119 U Peema Aether-Seer
+120 C Prey Upon
+121 U Ridgescale Tusker
+122 R Rishkar, Peema Renegade
+123 R Rishkar's Expertise
+124 C Scrounging Bandar
+125 C Silkweaver Elite
+126 C Unbridled Growth
+127 M Ajani Unyielding
+128 R Dark Intimations
+129 U Hidden Stockpile
+130 U Maverick Thopterist
+131 R Oath of Ajani
+132 U Outland Boar
+133 U Renegade Rallier
+134 U Renegade Wheelsmith
+135 U Rogue Refiner
+136 U Spire Patrol
+137 M Tezzeret the Schemer
+138 U Tezzeret's Touch
+139 U Weldfast Engineer
+140 U Winding Constrictor
+141 C Aegis Automaton
+142 R Aethersphere Harvester
+143 C Augmenting Automaton
+144 U Barricade Breaker
+145 U Cogwork Assembler
+146 U Consulate Dreadnought
+147 C Consulate Turret
+148 U Crackdown Construct
+149 U Daredevil Dragster
+150 C Filigree Crawler
+151 C Foundry Assembler
+152 M Gonti's Aether Heart
+153 M Heart of Kiran
+154 R Hope of Ghirapur
+155 C Implement of Combustion
+156 C Implement of Examination
+157 C Implement of Ferocity
+158 C Implement of Improvement
+159 C Implement of Malice
+160 R Inspiring Statuary
+161 C Irontread Crusher
+162 R Lifecrafter's Bestiary
+163 R Merchant's Dockhand
+164 R Metallic Mimic
+165 C Mobile Garrison
+166 C Night Market Guard
+167 U Ornithopter
+168 U Pacification Array
+169 M Paradox Engine
+170 R Peacewalker Colossus
+171 M Planar Bridge
+172 C Prizefighter Construct
+173 C Renegade Map
+174 C Reservoir Walker
+175 R Scrap Trawler
+176 U Servo Schematic
+177 U Treasure Keeper
+178 C Universal Solvent
+179 U Untethered Express
+180 C Verdant Automaton
+181 R Walking Ballista
+182 C Watchful Automaton
+183 C Welder Automaton
+184 R Spire of Industry
+185 M Ajani, Valiant Protector 
+186 R Ajani's Aid
+187 U Ajani's Comrade
+188 C Inspiring Roar
+189 C Tranquil Expanse
+190 M Tezzeret, Master of Metal
+191 R Tezzeret's Betrayal
+192 U Tezzeret's Simulacrum
+193 C Pendulum of Patterns
+194 C Submerged Boneyard
