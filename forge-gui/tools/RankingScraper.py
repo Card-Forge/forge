@@ -1,3 +1,4 @@
+import json
 import sys
 import requests
 import argparse
@@ -6,7 +7,7 @@ import BeautifulSoup
 BESTIAIRE = False
 SMDS = True
 
-def bestiaireRanking(code='ORI', name='Magic Origins'):
+def bestiaireRanking(code='EMN', name='Magic Origins'):
 	# POST http://draft.bestiaire.org/ranking.php
 	# Params:
 	# edition: ORI
@@ -15,7 +16,7 @@ def bestiaireRanking(code='ORI', name='Magic Origins'):
 	pass
 	# Output to file
 
-def smdsRankings(edition='MAGICORIGINS', name='Magic Origins'):
+def smdsRankings(edition='EldritchMoom', name='Eldritch Moon'):
 	# get http://syunakira.com/smd/pointranking/index.php?packname=MAGICORIGINS&language=English
 	r = requests.get("http://syunakira.com/smd/pointranking/index.php?packname=%s&language=English" % edition)
 	bs = BeautifulSoup.BeautifulSoup(r.text)
@@ -44,6 +45,48 @@ def smdsRankings(edition='MAGICORIGINS', name='Magic Origins'):
 
 	return True
 	
+def draftsimRankings(edition='SOI', name='Shadows over Innistrad'):
+	r = requests.get("http://draftsim.com/%s.js" % edition)
+	tx = r.text
+	start = tx.find('[')
+	end = tx.rfind(']')
+
+	# Deal with illegal JSON :(
+	replaceList = ['name', 'castingcost1', 'castingcost2', 'type', 'rarity', 'myrating', 'image', 'cmc', 'colors', 'creaturesort', 'colorsort']
+	# Has an extra comma that json loader doesn't like
+	txt = tx[start:end-1]+']'
+	for rpl in replaceList:
+		txt = txt.replace('%s:'%rpl, '"%s":'%rpl)
+
+
+	cardlist = json.loads(txt)
+	cardlist.sort(key=lambda k:k['myrating'], reverse=True)
+	with open(name + '_Rankings.txt', 'w') as out:
+		for counter, card in enumerate(cardlist):
+			l = [str(counter+1), card['name'].replace('_', ' '), card['rarity'], edition]
+			out.write('#')
+			out.write('|'.join(l))
+			out.write('\n')
+
+def editionsRankssim(edition='SOI', name='Shadows over Innistrad'):
+	r = requests.get("http://draftsim.com/%s.js" % edition)
+	tx = r.text
+	start = tx.find('[')
+	end = tx.rfind(']')
+
+	# Deal with illegal JSON :(
+	replaceList = ['name', 'castingcost1', 'castingcost2', 'type', 'rarity', 'myrating', 'image', 'cmc', 'colors', 'creaturesort', 'colorsort']
+	# Has an extra comma that json loader doesn't like
+	txt = tx[start:end-1]+']'
+	for rpl in replaceList:
+		txt = txt.replace('%s:'%rpl, '"%s":'%rpl)
+
+	cardlist = json.loads(txt)
+	out = open('%s.txt' % name, 'w')
+	for idx, card in enumerate(cardlist):
+		out.write('%s %s %s\n' % (idx+1, card['rarity'], card['name']))
+	out.close()
+
 
 def idToNameLoops(name, code=None):
 	metadata = True
