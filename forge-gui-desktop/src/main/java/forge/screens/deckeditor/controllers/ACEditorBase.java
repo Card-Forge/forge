@@ -209,13 +209,11 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             }
         }
 
-        if (deck == null) {
-            System.err.println("Warning: ACEditorBase#getAllowedAdditions could not properly process the deck in controller.getModel(), returning empty item pool.");
-            return additions; // returning empty additions
+        Iterable<Entry<String,Integer>> cardsByName = null;
+        if (deck != null) {
+            final CardPool allCards = deck.getAllCardsInASinglePool(deck.has(DeckSection.Commander));
+            cardsByName = Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME);
         }
-
-        final CardPool allCards = deck.getAllCardsInASinglePool(deck.has(DeckSection.Commander));
-        Iterable<Entry<String,Integer>> cardsByName = Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME);
 
         for (final Entry<TItem, Integer> itemEntry : itemsToAdd) {
 
@@ -224,7 +222,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             int qty = itemEntry.getValue();
 
             int max;
-            if (card == null || card.getRules().getType().isBasic() ||
+            if (deck == null || card == null || card.getRules().getType().isBasic() ||
                     limit == CardLimit.None || limitExceptions.contains(card.getName())) {
                 max = Integer.MAX_VALUE;
             }
