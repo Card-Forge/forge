@@ -38,7 +38,7 @@ public class AnimateEffect extends AnimateEffectBase {
         String animateRemembered = null;
 
         //if host is not on the battlefield don't apply
-        if (sa.hasParam("UntilHostLeavesPlay")
+        if ((sa.hasParam("UntilHostLeavesPlay") || sa.hasParam("UntilLoseControlOfHost"))
                 && !sa.getHostCard().isInPlay()) {
             return;
         }
@@ -301,6 +301,9 @@ public class AnimateEffect extends AnimateEffectBase {
                     game.getEndOfCombat().addUntil(unanimate);
                 } else if (sa.hasParam("UntilHostLeavesPlay")) {
                     source.addLeavesPlayCommand(unanimate);
+                } else if (sa.hasParam("UntilLoseControlOfHost")) {
+                    sa.getHostCard().addLeavesPlayCommand(unanimate);
+                    sa.getHostCard().addChangeControllerCommand(unanimate);
                 } else if (sa.hasParam("UntilYourNextUpkeep")) {
                     game.getUpkeep().addUntil(source.getController(), unanimate);
                 } else if (sa.hasParam("UntilTheEndOfYourNextUpkeep")) {
