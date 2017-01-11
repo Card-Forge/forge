@@ -193,4 +193,24 @@ public class TargetChoices implements Cloneable {
         tc.numTargeted = numTargeted;
         return tc;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TargetChoices) {
+            TargetChoices compare = (TargetChoices)obj;
+
+            if (this.getNumTargeted() != compare.getNumTargeted()) {
+                return false;
+            }
+            for (int i = 0; i < this.getTargets().size(); i++) {
+                if (!compare.getTargets().get(i).equals(this.getTargets().get(i))) {
+                    return false;
+                }
+            }
+            return true;
+
+        } else {
+            return false;
+        }
+    }
 }
