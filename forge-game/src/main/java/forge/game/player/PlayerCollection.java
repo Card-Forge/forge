@@ -46,21 +46,21 @@ public class PlayerCollection extends FCollection<Player> {
     }
     
     // sort functions with Comparator
-    Player min(Comparator<Player> comp) {
+    public Player min(Comparator<Player> comp) {
         return Collections.min(this, comp);
     }
-    Player max(Comparator<Player> comp) {
+    public Player max(Comparator<Player> comp) {
         return Collections.min(this, comp);
     }
     
     // value functions with Function
-    Integer min(Function<Player, Integer> func) {
+    public Integer min(Function<Player, Integer> func) {
         return Aggregates.min(this, func);
     }
-    Integer max(Function<Player, Integer> func) {
+    public Integer max(Function<Player, Integer> func) {
         return Aggregates.max(this, func);
     }
-    Integer sum(Function<Player, Integer> func) {
+    public Integer sum(Function<Player, Integer> func) {
         return Aggregates.sum(this, func);
     }
 }
