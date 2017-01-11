@@ -85,14 +85,14 @@ public class SpecialCardAi {
     // Chain of Smog
     public static class ChainOfSmog {
         public static boolean consider(Player ai, SpellAbility sa) {
-            if (ai.getCardsIn(ZoneType.Hand).size() == 0) {
+            if (ai.getCardsIn(ZoneType.Hand).isEmpty()) {
                 // to avoid failure to add to stack, provide a legal target opponent first (choosing random at this point)
                 // TODO: this makes the AI target opponents with 0 cards in hand, but bailing from here causes a
                 // "failed to add to stack" error, needs investigation and improvement.
                 Player targOpp = Aggregates.random(ai.getOpponents());
 
                 for (Player opp : ai.getOpponents()) {
-                    if (opp.getCardsIn(ZoneType.Hand).size() > 0) {
+                    if (!opp.getCardsIn(ZoneType.Hand).isEmpty()) {
                         targOpp = opp;
                         break;
                     }
@@ -205,7 +205,7 @@ public class SpecialCardAi {
             int computerHandSize = ai.getZone(ZoneType.Hand).size();
             int maxHandSize = ai.getMaxHandSize();
 
-            if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Yawgmoth's Bargain")).size() > 0) {
+            if (!CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Yawgmoth's Bargain")).isEmpty()) {
                 // Prefer Yawgmoth's Bargain because AI is generally better with it
 
                 // TODO: in presence of bad effects which deal damage when a card is drawn, probably better to prefer Necropotence instead?
@@ -223,7 +223,7 @@ public class SpecialCardAi {
             }
 
             // TODO: Any other bad effects like that?
-            boolean blackViseOTB = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise")).size() > 0;
+            boolean blackViseOTB = !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise")).isEmpty();
 
             if (!ph.isPlayerTurn(ai) && ph.is(PhaseType.MAIN2)
                     && ai.getSpellsCastLastTurn() == 0 
@@ -398,7 +398,7 @@ public class SpecialCardAi {
             int maxHandSize = ai.getMaxHandSize();
 
             // TODO: Any other bad effects like that?
-            boolean blackViseOTB = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise")).size() > 0;
+            boolean blackViseOTB = !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise")).isEmpty();
 
             // TODO: Consider effects like "whenever a player draws a card, he loses N life" (e.g. Nekusar, the Mindraiser),
             //       and effects that draw an additional card whenever a card is drawn.
