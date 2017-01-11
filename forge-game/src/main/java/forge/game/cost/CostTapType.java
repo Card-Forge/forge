@@ -148,7 +148,7 @@ public class CostTapType extends CostPartWithList {
 
         if (totalPower) {
             final int i = Integer.parseInt(totalP);
-            return CardLists.getTotalPower(typeList) >= i;
+            return CardLists.getTotalPower(typeList, true) >= i;
         }
 
         final Integer amount = this.convertAmount();

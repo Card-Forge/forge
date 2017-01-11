@@ -350,11 +350,14 @@ public class CardLists {
 
     /**
      * Given a list of cards, return their combined power
+     * 
+     * @param cardList the list of creature cards for which to sum the power
+     * @param ignoreNegativePower if true, treats negative power as 0
      */
-    public static int getTotalPower(Iterable<Card> cardList) {
+    public static int getTotalPower(Iterable<Card> cardList, boolean ignoreNegativePower) {
         int total = 0;
         for (final Card crd : cardList) {
-            total += crd.getNetPower();
+            total += ignoreNegativePower ? Math.max(0, crd.getNetPower()) : crd.getNetPower();
         }
         return total;
     }
