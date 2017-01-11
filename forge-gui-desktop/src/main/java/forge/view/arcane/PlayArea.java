@@ -642,13 +642,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             newPanels.add(placeholder);
         }
 
-        boolean needLayoutRefresh = !newPanels.isEmpty();
+        boolean needLayoutRefresh = !newPanels.isEmpty() || !toDelete.isEmpty();
         for (final CardView card : modelCopy) {
             if (doUpdateCard(card, true)) {
                 needLayoutRefresh = true;
             }
         }
-        if (needLayoutRefresh || !toDelete.isEmpty()) {
+        if (needLayoutRefresh) {
             doLayout();
         }
 
