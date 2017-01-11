@@ -50,7 +50,7 @@ public class PlayerCollection extends FCollection<Player> {
         return Collections.min(this, comp);
     }
     public Player max(Comparator<Player> comp) {
-        return Collections.min(this, comp);
+        return Collections.max(this, comp);
     }
     
     // value functions with Function
