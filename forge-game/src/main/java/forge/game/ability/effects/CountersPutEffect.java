@@ -90,6 +90,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
         String strTyp = sa.getParam("CounterType");
         CounterType counterType = null;
         boolean existingCounter = strTyp.equals("ExistingCounter");
+        boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
+        String amount = sa.getParamOrDefault("CounterNum", "1");
 
         if (!existingCounter) {
             try {
@@ -103,7 +105,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final boolean etbcounter = sa.hasParam("ETB");
         final boolean remember = sa.hasParam("RememberCounters");
         final boolean rememberCards = sa.hasParam("RememberCards");
-        int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
+        int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
         if (sa.hasParam("UpTo")) {
@@ -142,7 +144,21 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (choices.isEmpty()) {
                     continue;
                 }
-                counterType = choices.size() == 1 ? choices.get(0) : activator.getController().chooseCounterType(choices, sa, "Select counter type to add");
+
+                if (eachExistingCounter) {
+                    for(CounterType ct : choices) {
+                        if (obj instanceof Player) {
+                            ((Player) obj).addCounter(ct, counterAmount, true);
+
+                        }
+                        if (obj instanceof Card) {
+                            ((Card) obj).addCounter(ct, counterAmount, true);
+                        }
+                    }
+                    continue;
+                } else {
+                    counterType = choices.size() == 1 ? choices.get(0) : activator.getController().chooseCounterType(choices, sa, "Select counter type to add");
+                }
             }
 
 
