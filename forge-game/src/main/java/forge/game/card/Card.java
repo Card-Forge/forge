@@ -1023,7 +1023,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final int toughnessBonusBefore = getToughnessBonusFromCounters();
                 final int loyaltyBefore = getCurrentLoyalty();
 
-                counters.put(counterType, newValue);
+                setCounters(counterType, newValue);
                 getController().addCounterToPermThisTurn(counterType, addAmount);
                 view.updateCounters(this);
 
@@ -1093,12 +1093,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         int toughnessBonusBefore = getToughnessBonusFromCounters();
         int loyaltyBefore = getCurrentLoyalty();
 
-        if (newValue > 0) {
-            counters.put(counterName, newValue);
-        }
-        else {
-            counters.remove(counterName);
-        }
+        setCounters(counterName, newValue);
         view.updateCounters(this);
 
         //fire card stats changed event if p/t bonuses or loyalty changed from subtracted counters

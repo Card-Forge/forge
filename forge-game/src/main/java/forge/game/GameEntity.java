@@ -336,7 +336,11 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public void setCounters(final CounterType counterType, final Integer num) {
-        counters.put(counterType, num);
+        if (num <= 0) {
+            counters.remove(counterType);
+        } else {
+            counters.put(counterType, num);
+        }
     }
 
     abstract public void setCounters(final Map<CounterType, Integer> allCounters);

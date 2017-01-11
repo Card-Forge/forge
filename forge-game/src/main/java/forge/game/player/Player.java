@@ -511,7 +511,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return -1;
         }
         cnt -= lostEnergy;
-        this.setCounters(CounterType.ENERGY, cnt);
+        this.setCounters(CounterType.ENERGY, cnt, true);
         return cnt;
     }
 
@@ -896,12 +896,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         final int oldValue = getCounters(counterType);
         final int newValue = addAmount + oldValue;
-        counters.put(counterType, newValue);
-        view.updateCounters(this);
-
-        if (fireEvents) {
-            getGame().fireEvent(new GameEventPlayerCounters(this, counterType, oldValue, newValue));
-        }
+        this.setCounters(counterType, newValue, fireEvents);
 
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", this);
@@ -922,16 +917,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final int delta = oldValue - newValue;
         if (delta == 0) { return; }
 
-
-        if (newValue > 0) {
-            counters.put(counterName, newValue);
-        }
-        else {
-            counters.remove(counterName);
-        }
-        view.updateCounters(this);
-
-        getGame().fireEvent(new GameEventPlayerCounters(this, counterName, oldValue, newValue));
+        setCounters(counterName, newValue, true);
 
         /* TODO Run triggers when something cares
         int curCounters = oldValue;
@@ -952,10 +938,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
-    public void setCounters(final CounterType counterType, final Integer num) {
+    public void setCounters(final CounterType counterType, final Integer num, boolean fireEvents) {
+        Integer old = getCounters(counterType);
         counters.put(counterType, num);
         view.updateCounters(this);
-        getGame().fireEvent(new GameEventPlayerCounters(this, counterType, 0, 0));
+        if (fireEvents) {
+            getGame().fireEvent(new GameEventPlayerCounters(this, counterType, old, num));
+        }
     }
 
     @Override
@@ -971,7 +960,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setPoisonCounters(final int num, Card source) {
         int oldPoison = getCounters(CounterType.POISON);
-        setCounters(CounterType.POISON, num);
+        setCounters(CounterType.POISON, num, true);
         game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
     }
     public final void addPoisonCounters(final int num, final Card source) {
