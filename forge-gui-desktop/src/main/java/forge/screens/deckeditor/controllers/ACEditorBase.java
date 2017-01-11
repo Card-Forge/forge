@@ -36,6 +36,7 @@ import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
@@ -198,7 +199,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         final ItemPool<TItem> additions = new ItemPool<TItem>(getCatalogManager().getGenericType());
         final CardLimit limit = getCardLimit();
         final DeckController<TModel> controller = getDeckController();
-        final Deck deck = controller != null && controller.getModel() instanceof Deck ? (Deck)controller.getModel() : null;
+        final Deck deck = controller != null && controller.getModel() instanceof Deck ? (Deck)controller.getModel() : controller.getModel() instanceof DeckGroup ? ((DeckGroup)controller.getModel()).getHumanDeck() : null;
 
         final CardPool allCards = deck.getAllCardsInASinglePool(deck.has(DeckSection.Commander));
         Iterable<Entry<String,Integer>> cardsByName = Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME);
