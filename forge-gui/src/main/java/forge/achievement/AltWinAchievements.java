@@ -42,6 +42,7 @@ public class AltWinAchievements extends AchievementCollection {
         add("Near-Death Experience", "The Edge", "Phew... I thought I was going to die!");
         add("Phage the Untouchable", "The Untouchable", "None are immune to her deadly touch!");
         add("Test of Endurance", "The Test", "So... did I pass?");
+        add("Mechanized Production", "The Rise of Replicas", "Welcome to the future of mass production!");
     }
 
     private void add(String cardName0, String displayName0, String flavorText0) {
