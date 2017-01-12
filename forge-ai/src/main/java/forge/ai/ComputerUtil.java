@@ -308,22 +308,46 @@ public class ComputerUtil {
             if (prefValid[0].equals(pref)) {
                 final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
 
-                if (activate.hasSVar("AIPreferenceCreatureEvalThreshold")) {
-                    // Threshold of 150 is just below the level of a 1/1 mana dork or a 2/2 baseline creature with no keywords
-                    int threshold = Integer.parseInt(activate.getSVar("AIPreferenceCreatureEvalThreshold"));
-                    int minNeeded = activate.hasSVar("AIPreferenceCreatureMinCount") ? Integer.parseInt(activate.getSVar("AIPreferenceCreatureMinCount")) : 1;
-                    List<Card> toRemove = Lists.newArrayList();
-                    for (Card c : prefList) {
-                        if (c.isCreature()) {
-                            if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
-                                continue;
-                            }
-                            toRemove.add(c);
+                // check if there are any additional conditions
+                if (activate.hasSVar("AIPreferenceParams")) {
+                    int threshold = -1; // Threshold of 150 is just below the level of a 1/1 mana dork or a 2/2 baseline creature with no keywords
+                    int minNeeded = -1;
+
+                    String[] params = StringUtils.split(activate.getSVar("AIPreferenceParams"), '|');
+                    for (String param : params) {
+                        String[] props = StringUtils.split(param, "$");
+                        String parName = props[0].trim();
+                        String parValue = props[1].trim();
+
+                        switch (parName) {
+                            case "CreatureEvalThreshold":
+                                threshold = Integer.parseInt(parValue);
+                                break;
+                            case "MinCreaturesBelowThreshold":
+                                minNeeded = Integer.parseInt(parValue);
+                                break;
+                            default:
+                                System.err.println("Warning: unknown parameter " + parName + " in AIPreferenceParams for card " + activate);
+                                break;
                         }
                     }
-                    prefList.removeAll(toRemove);
-                    if (prefList.size() < minNeeded) {
-                        return null;
+
+                    if (threshold != -1) {
+                        List<Card> toRemove = Lists.newArrayList();
+                        for (Card c : prefList) {
+                            if (c.isCreature()) {
+                                if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
+                                    continue;
+                                }
+                                toRemove.add(c);
+                            }
+                        }
+                        prefList.removeAll(toRemove);
+                    }
+                    if (minNeeded != -1) {
+                        if (prefList.size() < minNeeded) {
+                            return null;
+                        }
                     }
                 }
 
