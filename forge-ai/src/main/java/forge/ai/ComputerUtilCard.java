@@ -1430,4 +1430,15 @@ public class ComputerUtilCard {
         }
         return false;
     }
+
+    public static boolean hasActiveUndyingOrPersist(final Card c) {
+        if (c.hasKeyword("Undying") && c.getCounters(CounterType.P1P1) == 0) {
+            return true;
+        }
+        if (c.hasKeyword("Persist") && c.getCounters(CounterType.M1M1) == 0) {
+            return true;
+        }
+        return false;
+    }
+
 }

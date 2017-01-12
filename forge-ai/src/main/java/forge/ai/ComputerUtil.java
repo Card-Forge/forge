@@ -308,47 +308,27 @@ public class ComputerUtil {
             if (prefValid[0].equals(pref)) {
                 final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
 
-                // check if there are any additional conditions
-                if (activate.hasSVar("AIPreferenceParams")) {
-                    int threshold = -1; 
-                    int minNeeded = -1;
+                int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold");
+                int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold");
+                System.out.println("Threshold = " + threshold + ", minNeeded = " + minNeeded);
 
-                    String[] params = StringUtils.split(activate.getSVar("AIPreferenceParams"), '|');
-                    for (String param : params) {
-                        String[] props = StringUtils.split(param, "$");
-                        String parName = props[0].trim();
-                        String parValue = props[1].trim();
-
-                        switch (parName) {
-                            case "CreatureEvalThreshold":
-                                // Threshold of 150 is just below the level of a 1/1 mana dork or a 2/2 baseline creature with no keywords
-                                threshold = Integer.parseInt(parValue);
-                                break;
-                            case "MinCreaturesBelowThreshold":
-                                minNeeded = Integer.parseInt(parValue);
-                                break;
-                            default:
-                                System.err.println("Warning: unknown parameter " + parName + " in AIPreferenceParams for card " + activate);
-                                break;
-                        }
-                    }
-
-                    if (threshold != -1) {
-                        List<Card> toRemove = Lists.newArrayList();
-                        for (Card c : prefList) {
-                            if (c.isCreature()) {
-                                if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
-                                    continue;
-                                }
-                                toRemove.add(c);
+                if (threshold != -1) {
+                    List<Card> toRemove = Lists.newArrayList();
+                    for (Card c : prefList) {
+                        if (c.isCreature()) {
+                            if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
+                                continue;
+                            } else if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                                continue;
                             }
+                            toRemove.add(c);
                         }
-                        prefList.removeAll(toRemove);
                     }
-                    if (minNeeded != -1) {
-                        if (prefList.size() < minNeeded) {
-                            return null;
-                        }
+                    prefList.removeAll(toRemove);
+                }
+                if (minNeeded != -1) {
+                    if (prefList.size() < minNeeded) {
+                        return null;
                     }
                 }
 
@@ -450,6 +430,38 @@ public class ComputerUtil {
             }
         }
         return null;
+    }
+
+    public static int getAIPreferenceParameter(final Card c, final String paramName) {
+        if (!c.hasSVar("AIPreferenceParams")) {
+            return -1;
+        }
+
+        String[] params = StringUtils.split(c.getSVar("AIPreferenceParams"), '|');
+        for (String param : params) {
+            String[] props = StringUtils.split(param, "$");
+            String parName = props[0].trim();
+            String parValue = props[1].trim();
+
+            switch (parName) {
+                case "CreatureEvalThreshold":
+                    // Threshold of 150 is just below the level of a 1/1 mana dork or a 2/2 baseline creature with no keywords
+                    if (paramName.equals(parName)) {
+                        return Integer.parseInt(parValue);
+                    }
+                    break;
+                case "MinCreaturesBelowThreshold":
+                    if (paramName.equals(parName)) {
+                        return Integer.parseInt(parValue);
+                    }
+                    break;
+                default:
+                    System.err.println("Warning: unknown parameter " + parName + " in AIPreferenceParams for card " + c);
+                    break;
+            }
+        }
+
+        return -1;
     }
 
     public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final int amount) {
@@ -661,6 +673,8 @@ public class ComputerUtil {
         CardCollection remaining = new CardCollection(cardlist);
         final CardCollection sacrificed = new CardCollection();
         final Card host = source.getHostCard();
+        final boolean considerSacLogic = "ConsiderSac".equals(source.getParam("AILogic"));
+        final int considerSacThreshold = getAIPreferenceParameter(host, "CreatureEvalThreshold");
 
         if ("OpponentOnly".equals(source.getParam("AILogic"))) {
         	if(!source.getActivatingPlayer().isOpponentOf(ai)) {
@@ -671,12 +685,12 @@ public class ComputerUtil {
                 if (!ai.canLoseLife() || ai.cantLose()) {
                     return sacrificed; // sacrifice none
                 }
-            } else {
+            } else if (!considerSacLogic) {
                 return sacrificed; // sacrifice none
             }
         }
 
-        if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit")) {
+        if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit") || considerSacLogic) {
         	if (source.hasParam("Exploit")) {
         		for (Trigger t : host.getTriggers()) {
         			if (t.getMode() == TriggerType.Exploited) {
@@ -701,14 +715,11 @@ public class ComputerUtil {
             remaining = CardLists.filter(remaining, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < 190) {
+                    if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < (considerSacThreshold != -1 ? considerSacThreshold : 190)) {
                         return true;
                     }
                     
-                    if (c.hasKeyword("Undying") && c.getCounters(CounterType.P1P1) == 0) {
-                        return true;
-                    }
-                    if (c.hasKeyword("Persist") && c.getCounters(CounterType.M1M1) == 0) {
+                    if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
                         return true;
                     }
                     
