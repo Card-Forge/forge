@@ -243,7 +243,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
 
             // if host would leave the play or if host is useless, create tokens
-            if (host.hasSVar("EndOfTurnLeavePlay") || isUselessCreature(player, host)) {
+            if (host.hasSVar("EndOfTurnLeavePlay") || ComputerUtilCard.isUselessCreature(player, host)) {
                 return tokenSA;
             }
 

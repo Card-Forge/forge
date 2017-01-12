@@ -329,18 +329,4 @@ public abstract class SpellAbilityAi {
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
         return Iterables.getFirst(options, null);
     }
-
-    protected static boolean isUselessCreature(Player ai, Card c) {
-        if (c == null) {
-            return true;
-        }
-
-        if (c.hasKeyword("CARDNAME can't attack or block.")
-                || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped())
-                || (c.getOwner() == ai && ai.getOpponents().contains(c.getController()))) {
-            return true;
-        }
-
-        return false;
-    }
 }

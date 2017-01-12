@@ -166,7 +166,7 @@ public class SpecialCardAi {
             }
             
             for (Card c : ai.getCreaturesInPlay()) {
-                if (!SpellAbilityAi.isUselessCreature(ai, c)) {
+                if (!ComputerUtilCard.isUselessCreature(ai, c)) {
                     aiBattlefieldPower += ComputerUtilCard.evaluateCreature(c);
                 }
             }
@@ -388,6 +388,7 @@ public class SpecialCardAi {
             return true;
         }
     }
+
     // Yawgmoth's Bargain
     public static class YawgmothsBargain {
         public static boolean consider(Player ai, SpellAbility sa) {

@@ -159,7 +159,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             // for such Trigger, do not move counter to another players creature
             if (!dest.getController().equals(ai)) {
                 return false;
-            } else if (isUselessCreature(ai, dest)) {
+            } else if (ComputerUtilCard.isUselessCreature(ai, dest)) {
                 return false;
             } else if (dest.hasSVar("EndOfTurnLeavePlay")) {
                 return false;
@@ -267,7 +267,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(Card card) {
                         // do not weak a useless creature if able
-                        if (isUselessCreature(ai, card)) {
+                        if (ComputerUtilCard.isUselessCreature(ai, card)) {
                             return false;
                         }
 
@@ -313,7 +313,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(Card card) {
                         // gain from useless
-                        if (isUselessCreature(ai, card)) {
+                        if (ComputerUtilCard.isUselessCreature(ai, card)) {
                             return true;
                         }
 
@@ -373,7 +373,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(Card card) {
                         // gain from useless
-                        if (isUselessCreature(ai, card)) {
+                        if (ComputerUtilCard.isUselessCreature(ai, card)) {
                             return false;
                         }
 
@@ -421,7 +421,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(Card card) {
                         // gain from useless
-                        if (!isUselessCreature(ai, card)) {
+                        if (!ComputerUtilCard.isUselessCreature(ai, card)) {
                             return true;
                         }
 

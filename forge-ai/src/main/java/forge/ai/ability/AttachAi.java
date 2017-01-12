@@ -866,7 +866,7 @@ public class AttachAi extends SpellAbilityAi {
             	betterList = CardLists.filter(magnetList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return !isUselessCreature(ai, c);
+                        return !ComputerUtilCard.isUselessCreature(ai, c);
                     }
                 });
 
@@ -1079,7 +1079,7 @@ public class AttachAi extends SpellAbilityAi {
                 return null;
             }
 
-            boolean uselessCreature = isUselessCreature(aiPlayer, attachSource.getEquipping());
+            boolean uselessCreature = ComputerUtilCard.isUselessCreature(aiPlayer, attachSource.getEquipping());
 
             if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never")) {
                 // Do not equip other creatures if the AI profile does not allow moving equipment around
@@ -1390,7 +1390,7 @@ public class AttachAi extends SpellAbilityAi {
             return true;
         }
 
-        if (sa.getHostCard().isEquipment() && isUselessCreature(ai, c)) {
+        if (sa.getHostCard().isEquipment() && ComputerUtilCard.isUselessCreature(ai, c)) {
             // useless to equip a creature that can't attack or block.
             return false;
         }

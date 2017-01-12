@@ -620,7 +620,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     public boolean apply(Card input) {
                         if (input.hasSVar("EndOfTurnLeavePlay"))
                             return false;
-                        if (SpellAbilityAi.isUselessCreature(ai, input))
+                        if (ComputerUtilCard.isUselessCreature(ai, input))
                             return false;
                         if (CounterType.M1M1.equals(type) && amount >= input.getNetToughness())
                             return true;
@@ -651,7 +651,7 @@ public class CountersPutAi extends SpellAbilityAi {
             public boolean apply(Card input) {
                 if (input.hasSVar("EndOfTurnLeavePlay"))
                     return false;
-                return !SpellAbilityAi.isUselessCreature(ai, input);
+                return !ComputerUtilCard.isUselessCreature(ai, input);
             }
         });
 

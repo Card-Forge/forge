@@ -37,7 +37,7 @@ public class GoadAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(Card c) {
                         // filter only creatures which can attack
-                        if (isUselessCreature(ai, c)) {
+                        if (ComputerUtilCard.isUselessCreature(ai, c)) {
                             return false;
                         }
                         // select creatures which can attack an Opponent other than ai
@@ -62,7 +62,7 @@ public class GoadAi extends SpellAbilityAi {
                     @Override
                     public boolean apply(Card c) {
                         // filter only creatures which can attack
-                        if (isUselessCreature(ai, c)) {
+                        if (ComputerUtilCard.isUselessCreature(ai, c)) {
                             return false;
                         }
                         // select only creatures AI can block
