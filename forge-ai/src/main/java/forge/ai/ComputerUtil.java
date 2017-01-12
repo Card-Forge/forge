@@ -723,7 +723,7 @@ public class ComputerUtil {
 
                     if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
                         sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
-                    } else if (considerSacLogic) {
+                    } else if (considerSacLogic && considerSacThreshold != -1) {
                         sacThreshold = considerSacThreshold;
                     }
 
