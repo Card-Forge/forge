@@ -307,6 +307,26 @@ public class ComputerUtil {
             final String[] prefValid = activate.getSVar("AIPreference").split("\\$");
             if (prefValid[0].equals(pref)) {
                 final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
+
+                if (activate.hasSVar("AIPreferenceCreatureEvalThreshold")) {
+                    // Threshold of 150 is just below the level of a 1/1 mana dork or a 2/2 baseline creature with no keywords
+                    int threshold = Integer.parseInt(activate.getSVar("AIPreferenceCreatureEvalThreshold"));
+                    int minNeeded = activate.hasSVar("AIPreferenceCreatureMinCount") ? Integer.parseInt(activate.getSVar("AIPreferenceCreatureMinCount")) : 1;
+                    List<Card> toRemove = Lists.newArrayList();
+                    for (Card c : prefList) {
+                        if (c.isCreature()) {
+                            if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
+                                continue;
+                            }
+                            toRemove.add(c);
+                        }
+                    }
+                    prefList.removeAll(toRemove);
+                    if (prefList.size() < minNeeded) {
+                        return null;
+                    }
+                }
+
                 if (!prefList.isEmpty()) {
                 	return ComputerUtilCard.getWorstAI(prefList);
                 }
