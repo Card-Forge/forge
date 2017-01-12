@@ -48,6 +48,13 @@ public class MillAi extends SpellAbilityAi {
                 && ph.getNextTurn().equals(ai))) {
             return false; // only self-mill at opponent EOT
         }
+        if (sa.getHostCard().isCreature() && sa.getPayCosts().hasTapCost()) {
+            if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai))) {
+                // creatures with a tap cost to mill (e.g. Doorkeeper) should be activated at the opponent's end step
+                // because they are also potentially useful for combat
+                return false;
+            }
+        }
         return true;
     }
     
