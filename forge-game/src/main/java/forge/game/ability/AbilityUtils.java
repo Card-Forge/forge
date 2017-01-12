@@ -198,10 +198,7 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.equals("DelayTriggerRemembered")) {
-            SpellAbility trigSa = sa;
-            while (trigSa != null && !trigSa.isTrigger()) {
-                trigSa = trigSa.getRootAbility();
-            }
+            SpellAbility trigSa = sa.getTriggeringAbility();
             if (trigSa != null) {
                 for (Object o : trigSa.getTriggerRemembered()) {
                     if (o instanceof Card) {
@@ -933,10 +930,7 @@ public class AbilityUtils {
             addPlayer(card.getRemembered(), defined, players);
         }
         else if (defined.startsWith("DelayTriggerRemembered")) {
-            SpellAbility trigSa = sa;
-            while (trigSa != null && !trigSa.isTrigger()) {
-                trigSa = trigSa.getRootAbility();
-            }
+            SpellAbility trigSa = sa.getTriggeringAbility();
             if (trigSa != null) {
                 addPlayer(trigSa.getTriggerRemembered(), defined, players);
             } else {
@@ -1523,10 +1517,7 @@ public class AbilityUtils {
                     return sum;
                 }
                 if (sq[0].startsWith("TriggerRememberAmount")) {
-                    SpellAbility trigSa = sa;
-                    while (trigSa != null && !trigSa.isTrigger()) {
-                        trigSa = trigSa.getRootAbility();
-                    }
+                    SpellAbility trigSa = sa.getTriggeringAbility();
                     int count = 0;
                     for (final Object o : trigSa.getTriggerRemembered()) {
                         if (o instanceof Integer) {
