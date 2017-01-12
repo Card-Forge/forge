@@ -1422,6 +1422,9 @@ public class ComputerUtilCard {
         if (c == null) {
             return true;
         }
+        if (!c.isCreature()) {
+            return false;
+        }
         if (c.hasKeyword("CARDNAME can't attack or block.") || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped()) || (c.getOwner() == ai && ai.getOpponents().contains(c.getController()))) {
             return true;
         }
