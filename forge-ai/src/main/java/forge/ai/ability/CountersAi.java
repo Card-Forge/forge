@@ -17,6 +17,8 @@
  */
 package forge.ai.ability;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
@@ -26,8 +28,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.util.Aggregates;
-
-import java.util.List;
 
 
 /**
@@ -58,12 +58,8 @@ public abstract class CountersAi {
         Card choice;
         if (type.equals("M1M1")) {
             // try to kill the best killable creature, or reduce the best one
-            final List<Card> killable = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getNetToughness() <= amount;
-                }
-            });
+            // but try not to target a Undying Creature
+            final List<Card> killable = CardLists.getNotKeyword(CardLists.filterToughness(list, amount), "Undying");
             if (killable.size() > 0) {
                 choice = ComputerUtilCard.getBestCreatureAI(killable);
             } else {
