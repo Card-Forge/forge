@@ -1,0 +1,10 @@
+Name:Maverick Thopterist
+ManaCost:3 U R
+Types:Creature Human Artificer
+PT:2/2
+K:Improvise
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 colorless Thopter artifact creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ c 1 1 thopter KLD | TokenAltImages$ c_1_1_thopter2_KLD,c_1_1_thopter3_KLD
+DeckHas:Ability$Token
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maverick_thopterist.jpg
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nWhen Maverick Thopterist enters the battlefield, create two 1/1 colorless Thopter artifact creature tokens with flying.

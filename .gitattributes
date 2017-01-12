@@ -16544,7 +16544,10 @@ forge-gui/res/cardsfolder/upcoming/audacious_infiltrator.txt -text
 forge-gui/res/cardsfolder/upcoming/augmenting_automaton.txt -text
 forge-gui/res/cardsfolder/upcoming/baral_chief_of_compliance.txt -text
 forge-gui/res/cardsfolder/upcoming/barals_expertise.txt -text
+forge-gui/res/cardsfolder/upcoming/barricade_breaker.txt -text
 forge-gui/res/cardsfolder/upcoming/bastion_enforcer.txt -text
+forge-gui/res/cardsfolder/upcoming/bastion_inventor.txt -text
+forge-gui/res/cardsfolder/upcoming/battle_at_the_bridge.txt -text
 forge-gui/res/cardsfolder/upcoming/call_for_unity.txt -text
 forge-gui/res/cardsfolder/upcoming/caught_in_the_brights.txt -text
 forge-gui/res/cardsfolder/upcoming/chandras_revolution.txt -text
@@ -16568,12 +16571,16 @@ forge-gui/res/cardsfolder/upcoming/dispersal_technician.txt -text
 forge-gui/res/cardsfolder/upcoming/druid_of_the_cowl.txt -text
 forge-gui/res/cardsfolder/upcoming/efficient_construction.txt -text
 forge-gui/res/cardsfolder/upcoming/embraal_gear_smasher.txt -text
+forge-gui/res/cardsfolder/upcoming/enraged_giant.txt -text
 forge-gui/res/cardsfolder/upcoming/exquisite_archangel.txt -text
 forge-gui/res/cardsfolder/upcoming/fatal_push.txt -text
 forge-gui/res/cardsfolder/upcoming/felidar_guardian.txt -text
+forge-gui/res/cardsfolder/upcoming/fen_hauler.txt -text
 forge-gui/res/cardsfolder/upcoming/filigree_crawler.txt -text
+forge-gui/res/cardsfolder/upcoming/foundry_assembler.txt -text
 forge-gui/res/cardsfolder/upcoming/foundry_hornet.txt -text
 forge-gui/res/cardsfolder/upcoming/fourth_bridge_prowler.txt -text
+forge-gui/res/cardsfolder/upcoming/freejam_regent.txt -text
 forge-gui/res/cardsfolder/upcoming/frontline_rebel.txt -text
 forge-gui/res/cardsfolder/upcoming/ghirapur_osprey.txt -text
 forge-gui/res/cardsfolder/upcoming/gifted_aetherborn.txt -text
@@ -16582,6 +16589,7 @@ forge-gui/res/cardsfolder/upcoming/gontis_aether_heart.txt -text
 forge-gui/res/cardsfolder/upcoming/greenwheel_liberator.txt -text
 forge-gui/res/cardsfolder/upcoming/gremlin_infestation.txt -text
 forge-gui/res/cardsfolder/upcoming/heart_of_kiran.txt -text
+forge-gui/res/cardsfolder/upcoming/herald_of_anguish.txt -text
 forge-gui/res/cardsfolder/upcoming/heroic_intervention.txt -text
 forge-gui/res/cardsfolder/upcoming/hidden_herbalists.txt -text
 forge-gui/res/cardsfolder/upcoming/hidden_stockpile.txt -text
@@ -16596,6 +16604,7 @@ forge-gui/res/cardsfolder/upcoming/implement_of_ferocity.txt -text
 forge-gui/res/cardsfolder/upcoming/implement_of_improvement.txt -text
 forge-gui/res/cardsfolder/upcoming/implement_of_malice.txt -text
 forge-gui/res/cardsfolder/upcoming/inspiring_roar.txt -text
+forge-gui/res/cardsfolder/upcoming/inspiring_statuary.txt -text
 forge-gui/res/cardsfolder/upcoming/invigorated_rampage.txt -text
 forge-gui/res/cardsfolder/upcoming/ironclad_revolutionary.txt -text
 forge-gui/res/cardsfolder/upcoming/irontread_crusher.txt -text
@@ -16609,9 +16618,11 @@ forge-gui/res/cardsfolder/upcoming/lifecrafters_bestiary.txt -text
 forge-gui/res/cardsfolder/upcoming/lifecrafters_gift.txt -text
 forge-gui/res/cardsfolder/upcoming/lightning_runner.txt -text
 forge-gui/res/cardsfolder/upcoming/maulfist_revolutionary.txt -text
+forge-gui/res/cardsfolder/upcoming/maverick_thopterist.txt -text
 forge-gui/res/cardsfolder/upcoming/mechanized_production.txt -text
 forge-gui/res/cardsfolder/upcoming/merchants_dockhand.txt -text
 forge-gui/res/cardsfolder/upcoming/metallic_mimic.txt -text
+forge-gui/res/cardsfolder/upcoming/metallic_rebuke.txt -text
 forge-gui/res/cardsfolder/upcoming/midnight_entourage.txt -text
 forge-gui/res/cardsfolder/upcoming/mobile_garrison.txt -text
 forge-gui/res/cardsfolder/upcoming/monstrous_onslaught.txt -text
@@ -16642,6 +16653,7 @@ forge-gui/res/cardsfolder/upcoming/renegades_getaway.txt -text
 forge-gui/res/cardsfolder/upcoming/reservoir_walker.txt -text
 forge-gui/res/cardsfolder/upcoming/resourceful[!!-~]return.txt -text
 forge-gui/res/cardsfolder/upcoming/restoration_specialist.txt -text
+forge-gui/res/cardsfolder/upcoming/reverse_engineer.txt -text
 forge-gui/res/cardsfolder/upcoming/ridgescale_tusker.txt -text
 forge-gui/res/cardsfolder/upcoming/rishkar_peema_renegade.txt -text
 forge-gui/res/cardsfolder/upcoming/rishkars_expertise.txt -text
@@ -16656,11 +16668,13 @@ forge-gui/res/cardsfolder/upcoming/shipwreck_moray.txt -text
 forge-gui/res/cardsfolder/upcoming/siege_modification.txt -text
 forge-gui/res/cardsfolder/upcoming/silkweaver_elite.txt -text
 forge-gui/res/cardsfolder/upcoming/skyship_plunderer.txt -text
+forge-gui/res/cardsfolder/upcoming/sly_requisitioner.txt -text
 forge-gui/res/cardsfolder/upcoming/solemn_recruit.txt -text
 forge-gui/res/cardsfolder/upcoming/spire_of_industry.txt -text
 forge-gui/res/cardsfolder/upcoming/spire_patrol.txt -text
 forge-gui/res/cardsfolder/upcoming/sram_senior_edificer.txt -text
 forge-gui/res/cardsfolder/upcoming/srams_expertise.txt -text
+forge-gui/res/cardsfolder/upcoming/sweatworks_brawler.txt -text
 forge-gui/res/cardsfolder/upcoming/take_into_custody.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzeret_master_of_metal.txt -text
 forge-gui/res/cardsfolder/upcoming/tezzeret_the_schemer.txt -text
@@ -16678,6 +16692,8 @@ forge-gui/res/cardsfolder/upcoming/walking_ballista.txt -text
 forge-gui/res/cardsfolder/upcoming/watchful_automaton.txt -text
 forge-gui/res/cardsfolder/upcoming/welder_automaton.txt -text
 forge-gui/res/cardsfolder/upcoming/weldfast_engineer.txt -text
+forge-gui/res/cardsfolder/upcoming/whir_of_invention.txt -text
+forge-gui/res/cardsfolder/upcoming/wind_kin_raiders.txt -text
 forge-gui/res/cardsfolder/upcoming/winding_constrictor.txt -text
 forge-gui/res/cardsfolder/upcoming/wrangle.txt -text
 forge-gui/res/cardsfolder/upcoming/yahenni_undying_partisan.txt -text

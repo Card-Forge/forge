@@ -1,0 +1,8 @@
+Name:Fen Hauler
+ManaCost:6 B
+Types:Creature Insect
+PT:5/5
+K:Improvise
+K:CantBeBlockedBy Artifact.Creature 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fen_hauler.jpg
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nFen Hauler can't be blocked by artifact creatures.
