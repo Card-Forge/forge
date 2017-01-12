@@ -7,6 +7,7 @@ import com.google.common.base.Predicates;
 
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -43,6 +44,29 @@ public final class PlayerPredicates {
         return Predicates.not(isCardInPlay(cardName));
     }
 
+
+    public static final Predicate<Player> hasCounters() {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return p.hasCounters();
+            }
+        };
+    }
+
+    public static final Predicate<Player> hasCounter(final CounterType type) {
+        return hasCounter(type, 1);
+    }
+
+    public static final Predicate<Player> hasCounter(final CounterType type, final int n) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return p.getCounters(type) >= n;
+            }
+        };
+    }
+    
     public static final Comparator<Player> compareByZoneSize(final ZoneType zone) {
         return new Comparator<Player>() {
             @Override
