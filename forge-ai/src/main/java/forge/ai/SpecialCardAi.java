@@ -17,6 +17,7 @@
  */
 package forge.ai;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.MagicColor;
@@ -107,6 +108,32 @@ public class SpecialCardAi {
         }
     }
         
+    // Desecration Demon
+    public static class DesecrationDemon {
+        private static final int demonSacThreshold = Integer.MAX_VALUE; // if we're in dire conditions, sac everything from worst to best hoping to find an answer
+
+        public static boolean considerSacrificingCreature(Player ai, SpellAbility sa) {
+            CardCollection flyingCreatures = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.UNTAPPED, Predicates.or(CardPredicates.hasKeyword("Flying"), CardPredicates.hasKeyword("Reach"))));
+            boolean hasUsefulBlocker = false;
+
+            for (Card c : flyingCreatures) {
+                if (!ComputerUtilCard.isUselessCreature(ai, c)) {
+                    hasUsefulBlocker = true;
+                }
+            }
+
+            if (ai.getLife() <= sa.getHostCard().getNetPower() && !hasUsefulBlocker) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        public static int getSacThreshold() {
+            return demonSacThreshold;
+        }
+    }
+
     // Donate
     public static class Donate {
         public static boolean considerTargetingOpponent(Player ai, SpellAbility sa) {

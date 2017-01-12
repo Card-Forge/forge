@@ -668,7 +668,7 @@ public class ComputerUtil {
         return returnList;
     }
 
-    public static CardCollection choosePermanentsToSacrifice(final Player ai, final CardCollectionView cardlist, final int amount, SpellAbility source, 
+    public static CardCollection choosePermanentsToSacrifice(final Player ai, final CardCollectionView cardlist, final int amount, final SpellAbility source, 
             final boolean destroy, final boolean isOptional) {
         CardCollection remaining = new CardCollection(cardlist);
         final CardCollection sacrificed = new CardCollection();
@@ -680,6 +680,10 @@ public class ComputerUtil {
         	if(!source.getActivatingPlayer().isOpponentOf(ai)) {
         		return sacrificed; // sacrifice none 
         	}
+        } else if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
+            if (!SpecialCardAi.DesecrationDemon.considerSacrificingCreature(ai, source)) {
+                return sacrificed; // don't sacrifice unless in special conditions specified by DesecrationDemon AI
+            }
         } else if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) {
             if ("Pillar Tombs of Aku".equals(host.getName())) {
                 if (!ai.canLoseLife() || ai.cantLose()) {
@@ -715,7 +719,15 @@ public class ComputerUtil {
             remaining = CardLists.filter(remaining, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < (considerSacThreshold != -1 ? considerSacThreshold : 190)) {
+                    int sacThreshold = 190;
+
+                    if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
+                        sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
+                    } else if (considerSacLogic) {
+                        sacThreshold = considerSacThreshold;
+                    }
+
+                    if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold) {
                         return true;
                     }
                     
