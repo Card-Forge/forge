@@ -310,7 +310,7 @@ public class ComputerUtil {
 
                 // check if there are any additional conditions
                 if (activate.hasSVar("AIPreferenceParams")) {
-                    int threshold = -1; // Threshold of 150 is just below the level of a 1/1 mana dork or a 2/2 baseline creature with no keywords
+                    int threshold = -1; 
                     int minNeeded = -1;
 
                     String[] params = StringUtils.split(activate.getSVar("AIPreferenceParams"), '|');
@@ -321,6 +321,7 @@ public class ComputerUtil {
 
                         switch (parName) {
                             case "CreatureEvalThreshold":
+                                // Threshold of 150 is just below the level of a 1/1 mana dork or a 2/2 baseline creature with no keywords
                                 threshold = Integer.parseInt(parValue);
                                 break;
                             case "MinCreaturesBelowThreshold":
