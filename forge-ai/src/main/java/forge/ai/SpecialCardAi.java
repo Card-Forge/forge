@@ -225,7 +225,7 @@ public class SpecialCardAi {
             // TODO: Any other bad effects like that?
             boolean blackViseOTB = !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise")).isEmpty();
 
-            if (!ph.isPlayerTurn(ai) && ph.is(PhaseType.MAIN2)
+            if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.MAIN2)
                     && ai.getSpellsCastLastTurn() == 0 
                     && ai.getSpellsCastThisTurn() == 0
                     && ai.getLandsPlayedLastTurn() == 0) {
@@ -404,7 +404,7 @@ public class SpecialCardAi {
             // TODO: Consider effects like "whenever a player draws a card, he loses N life" (e.g. Nekusar, the Mindraiser),
             //       and effects that draw an additional card whenever a card is drawn.
 
-            if (!ph.isPlayerTurn(ai) && ph.is(PhaseType.END_OF_TURN) 
+            if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN) 
                     && ai.getSpellsCastLastTurn() == 0 
                     && ai.getSpellsCastThisTurn() == 0 
                     && ai.getLandsPlayedLastTurn() == 0) {
