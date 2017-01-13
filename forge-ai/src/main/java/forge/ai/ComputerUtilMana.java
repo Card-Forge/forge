@@ -1354,4 +1354,27 @@ public class ComputerUtilMana {
         }
         return convoke;
     }
+
+    public static int determineMaxAffordableX(Player ai, SpellAbility sa) {
+        int numTgts = 0;
+        int numX = sa.getPayCosts().getCostMana().getMana().countX();
+
+        if (numX == 0) {
+            return -1;
+        }
+
+        int testX = 1;
+        while (testX <= 100) {
+            if (ComputerUtilMana.canPayManaCost(sa, ai, testX)) {
+                numTgts++;
+            } else {
+                break;
+            }
+            testX++;
+        }
+
+        numTgts /= numX;
+
+        return numTgts;
+    }
 }

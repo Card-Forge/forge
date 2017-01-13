@@ -5,6 +5,7 @@ import com.google.common.base.Predicate;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
+import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -36,6 +37,8 @@ public class DestroyAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         final String logic = sa.getParam("AILogic");
+        final boolean hasXCost = sa.getPayCosts().getCostMana().getMana().countX() > 0;
+
         CardCollection list;
 
         if (abCost != null) {
@@ -149,8 +152,19 @@ public class DestroyAi extends SpellAbilityAi {
             if (list.isEmpty()) {
                 return false;
             }
+
+            int maxTargets = abTgt.getMaxTargets(sa.getHostCard(), sa);
+            if (hasXCost) {
+                // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
+                maxTargets = Math.min(ComputerUtilMana.determineMaxAffordableX(ai, sa), abTgt.getMaxTargets(sa.getHostCard(), sa));
+                if (maxTargets == 0) {
+                    // can't afford X
+                    return false;
+                }
+            }
+
             // target loop
-            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < maxTargets) {
                 if (list.isEmpty()) {
                     if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
