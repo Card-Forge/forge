@@ -8360,6 +8360,7 @@ forge-gui/res/cardsfolder/i/index.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/indigo_faerie.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/indomitable_ancients.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/indomitable_archangel.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/i/indomitable_creativity.txt -text
 forge-gui/res/cardsfolder/i/indomitable_will.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/indrik_stomphowler.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/indrik_umbra.txt -text
