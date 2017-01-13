@@ -118,8 +118,9 @@ public class ReplacementHandler {
                     // the Wild destroyed in response to a creature spell going on stack still making the card ETB as a 
                     // copy of the Essence. This probably needs some rework to allow both to function correctly without 
                     // the need for hacks and exclusions.
-                    boolean isRemoval = "Graveyard".equals(replacementEffect.getMapParams().get("Destination")) || "Exile".equals(replacementEffect.getMapParams().get("Destination"));
-                    Zone cardZone = replacementEffect instanceof ReplaceMoved && isRemoval ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
+                    boolean isReplaceMovedOnRemoval = replacementEffect instanceof ReplaceMoved && ("Graveyard".equals(replacementEffect.getMapParams().get("Destination")) || "Exile".equals(replacementEffect.getMapParams().get("Destination")));
+
+                    Zone cardZone = isReplaceMovedOnRemoval ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
 
                     if (!replacementEffect.hasRun()
                             && replacementEffect.getLayer() == layer
