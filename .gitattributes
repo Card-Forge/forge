@@ -19240,6 +19240,7 @@ forge-gui/res/quest/duels/Zatanna[!!-~]2.dck -text
 forge-gui/res/quest/duels/Zeus[!!-~]3.dck -text
 forge-gui/res/quest/precons/Abzan[!!-~]Siege.dck -text
 forge-gui/res/quest/precons/Air[!!-~]Razers.dck -text
+forge-gui/res/quest/precons/Ajani,[!!-~]Valiant[!!-~]Protector.dck -text
 forge-gui/res/quest/precons/Angelic[!!-~]Fury.dck -text
 forge-gui/res/quest/precons/Angelic[!!-~]Might.dck -text
 forge-gui/res/quest/precons/Anthousas[!!-~]Army.dck -text
@@ -19464,6 +19465,7 @@ forge-gui/res/quest/precons/Sweet[!!-~]Revenge.dck -text
 forge-gui/res/quest/precons/Swift[!!-~]Justice.dck -text
 forge-gui/res/quest/precons/Take[!!-~]to[!!-~]the[!!-~]Sky.dck -text
 forge-gui/res/quest/precons/Temur[!!-~]Avalanche.dck -text
+forge-gui/res/quest/precons/Tezzeret,[!!-~]Master[!!-~]of[!!-~]Metal.dck -text
 forge-gui/res/quest/precons/The[!!-~]Adventurers.dck -text
 forge-gui/res/quest/precons/The[!!-~]Spikes.dck -text
 forge-gui/res/quest/precons/The[!!-~]Swarm.dck -text
