@@ -24,9 +24,9 @@ public class LifeGainEffect extends SpellAbilityEffect {
         if (!amountStr.equals("AFLifeLost") || sa.hasSVar(amountStr)) {
             final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
-            sb.append("gains ").append(amount).append(" life.");
+            sb.append(" gains ").append(amount).append(" life.");
         } else {
-            sb.append("gains life equal to the life lost this way.");
+            sb.append(" gains life equal to the life lost this way.");
         }
 
         return sb.toString();
