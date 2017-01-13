@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
