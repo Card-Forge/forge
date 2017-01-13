@@ -2,8 +2,9 @@ Name:Indomitable Creativity
 ManaCost:X R R R
 Types:Sorcery
 A:SP$ Destroy | Cost$ X R R R | ValidTgts$ Artifact,Creature | TargetMin$ 0 | TargetMax$ MaxTgts | Origin$ Battlefield | Destination$ Graveyard | RememberTargets$ True | References$ X,MaxTgts | SubAbility$ DBTransform | SpellDescription$ Destroy X target artifacts and/or creatures. For each permanent destroyed this way, its controller reveals cards from the top of his or her library until an artifact or creature card is revealed and exiles that card. Those players put the exiled cards onto the battlefield, then shuffle their libraries.
-SVar:DBTransform:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | ChooseOrder$ True | Zone$ Exile | RepeatSubAbility$ DBReveal | SubAbility$ DBCleanRemembered
-SVar:DBReveal:DB$ DigUntil | Defined$ ImprintedOwner | Amount$ 1 | Valid$ Artifact,Creature | ValidDescription$ artifact or creature | RevealedDestination$ Library | RevealedLibraryPosition$ 0 | FoundDestination$ Battlefield | SubAbility$ DBCleanup | Shuffle$ True
+SVar:DBTransform:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | ChooseOrder$ True | Zone$ Exile | RepeatSubAbility$ DBReveal | SubAbility$ DBShuffle
+SVar:DBReveal:DB$ DigUntil | Defined$ ImprintedOwner | Amount$ 1 | Valid$ Artifact,Creature | ValidDescription$ artifact or creature | RevealedDestination$ Library | RevealedLibraryPosition$ 0 | FoundDestination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBShuffle:DB$ Shuffle | Defined$ RememberedOwner | SubAbility$ DBCleanRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:DBCleanRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Targeted$Amount
