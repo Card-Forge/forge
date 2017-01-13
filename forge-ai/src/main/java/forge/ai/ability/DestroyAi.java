@@ -37,7 +37,7 @@ public class DestroyAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         final String logic = sa.getParam("AILogic");
-        final boolean hasXCost = sa.getPayCosts().getCostMana().getMana().countX() > 0;
+        boolean hasXCost = false;
 
         CardCollection list;
 
@@ -53,6 +53,8 @@ public class DestroyAi extends SpellAbilityAi {
             if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
+            
+            hasXCost = abCost.getCostMana() != null ? abCost.getCostMana().getMana().countX() > 0 : false;
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
