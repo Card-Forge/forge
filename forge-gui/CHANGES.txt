@@ -47,7 +47,7 @@ There is a known issue with the cost reduction for cards that have color-locked 
 
 Currently Improvise is implemented as a "clone" of Convoke keyword, which does not work correctly in corner cases (for example, together with an instance of Convoke or Delve). This is planned to be addressed soon.
 
-Essence of the Wild works wrong in the following corner case: when a creature spell is cast and Essence of the Wild is destroyed while the creature spell is on the stack, the creature still enters the battlefield as a copy of Essence of the Wild even though the Essence is already in the graveyard.
+Replacement effects that happen when a card moves from zone to zone (e.g. ETB replacement effect of Essence of the Wild; Kalitas, Traitor of Ghet replacement effect for a dying creature) need some rework to allow all of them to work in a rule-exact way without the need for special exclusions and hacks (see ReplacementHandler.java:120).
 
 There is a known issue that allows Qasali Ambusher to be cast from any zone for its ambush ability (requires MayPlay update to be fixed). For now, a temporary measure was set up to prevent the AI from abusing this issue, but it is up to the human player to deliberately choose not to abuse this when possible.
 

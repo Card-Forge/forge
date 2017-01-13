@@ -114,7 +114,10 @@ public class ReplacementHandler {
 
                     // when testing ReplaceMoved effects, make sure to check last known information since the host card
                     // could have been moved, e.g. via a mass removal event (e.g. Kalitas, Traitor of Ghet + Wrath of God)
-                    Zone cardZone = replacementEffect instanceof ReplaceMoved ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
+                    // TODO: currently excluding ETB triggers to avoid issues like e.g. Essence of the Wild destroyed in
+                    // response to a creature spell going on stack still making the card ETB as a copy of the Essence.
+                    // This probably needs some rework to allow both to function correctly without the need for hacks.
+                    Zone cardZone = replacementEffect instanceof ReplaceMoved && !"Battlefield".equals(replacementEffect.getMapParams().get("Destination")) ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
 
                     if (!replacementEffect.hasRun()
                             && replacementEffect.getLayer() == layer
