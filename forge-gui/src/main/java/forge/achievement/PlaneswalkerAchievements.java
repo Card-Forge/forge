@@ -29,7 +29,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
     protected void addAchievements() {
         add("Ajani Goldmane", "Ajani's Avatar", "Serra? Is that you?");
         add("Ajani Steadfast", "Ajani's Forcefield", "Shields up!");
-        add("Ajani Unyielding", "Ajani's Mentoring Program", "Today's lesson: How to be strong.");
+        add("Ajani Unyielding", "Ajani's Mentoring", "Today's lesson: How to be strong.");
         add("Ajani Vengeant", "Ajani's Tantrum", "Look Ma! No lands!");
         add("Ajani, Caller of the Pride", "Ajani's Menagerie", "You're a crazy cat lady now!");
         add("Ajani, Mentor of Heroes", "Ajani's Vitality", "Do sta let!");
