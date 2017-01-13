@@ -8218,6 +8218,7 @@ forge-gui/res/cardsfolder/i/icatian_town.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/ice_cage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/ice_cave.txt -text
 forge-gui/res/cardsfolder/i/ice_floe.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/i/ice_over.txt -text
 forge-gui/res/cardsfolder/i/ice_storm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/iceberg.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/icefall.txt svneol=native#text/plain
@@ -12758,6 +12759,7 @@ forge-gui/res/cardsfolder/r/resounding_scream.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/resounding_silence.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/resounding_thunder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/resounding_wave.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/resourceful_return.txt -text
 forge-gui/res/cardsfolder/r/respite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/resplendent_mentor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rest_for_the_weary.txt svneol=native#text/plain
