@@ -1356,6 +1356,10 @@ public class ComputerUtilMana {
     }
 
     public static int determineMaxAffordableX(Player ai, SpellAbility sa) {
+        if (sa.getPayCosts() == null || sa.getPayCosts().getCostMana() == null) {
+            return -1;
+        }
+
         int numTgts = 0;
         int numX = sa.getPayCosts().getCostMana().getAmountOfX();
 
