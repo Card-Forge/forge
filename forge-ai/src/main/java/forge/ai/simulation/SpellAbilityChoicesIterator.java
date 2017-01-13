@@ -13,7 +13,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import java.util.function.Consumer;
 
 public class SpellAbilityChoicesIterator {
     private SimulationController controller;
