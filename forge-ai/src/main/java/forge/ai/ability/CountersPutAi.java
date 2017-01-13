@@ -11,6 +11,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.*;
+import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
