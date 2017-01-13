@@ -54,7 +54,7 @@ public class DestroyAi extends SpellAbilityAi {
                 return false;
             }
             
-            hasXCost = abCost.getCostMana() != null ? abCost.getCostMana().getMana().countX() > 0 : false;
+            hasXCost = abCost.getCostMana() != null ? abCost.getCostMana().getAmountOfX() > 0 : false;
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
