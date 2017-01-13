@@ -48,6 +48,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         if (messagePrefix != null) {
             msg.append(messagePrefix).append("\n");
         }
+        msg.append(saPaidFor.getStackDescription()).append("\n");
         msg.append("Pay Mana Cost: ").append(displayMana);
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
