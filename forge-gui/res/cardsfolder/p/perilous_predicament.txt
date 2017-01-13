@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ RepeatEach | Cost$ 4 B | AILogic$ OpponentHasMultipleCreatures | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBSacAll | SpellDescription$ Each opponent sacrifices an artifact creature and a nonartifact creature.
 SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.Artifact+RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ DBChoose2
 SVar:DBChoose2:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.nonArtifact+IsNotRemembered+RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True
-SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Permanent.IsRemembered | SubAbility$ Cleanup
+SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Permanent.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perilous_predicament.jpg
