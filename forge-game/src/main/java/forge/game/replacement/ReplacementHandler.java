@@ -114,7 +114,7 @@ public class ReplacementHandler {
 
                     // Use "CheckLKIZone" parameter to test for effects that care abut where the card was last (e.g. Kalitas, Traitor of Ghet
                     // getting hit by mass removal should still produce tokens).
-                    Zone cardZone = "True".equals(replacementEffect.getMapParams().get("CheckLKIZone")) ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
+                    Zone cardZone = "True".equals(replacementEffect.getMapParams().get("CheckSelfLKIZone")) ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
 
                     if (!replacementEffect.hasRun()
                             && replacementEffect.getLayer() == layer
