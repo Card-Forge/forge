@@ -77,7 +77,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enhance UI for Touchscreens");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
-    private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox("Show Spell Description on Payment/Targeting");
+    private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox("Spell Description in Payment Prompt");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
     private final JCheckBox cbPauseWhileMinimized = new OptionsCheckBox("Pause While Minimized");
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
