@@ -77,6 +77,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enhance UI for Touchscreens");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
+    private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox("Show Spell Description on Payment/Targeting");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
     private final JCheckBox cbPauseWhileMinimized = new OptionsCheckBox("Pause While Minimized");
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
@@ -165,6 +166,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEscapeEndsTurn, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled, Escape key functions as an alternative shortcut to end the current turn."), regularConstraints);
+
+        pnlPrefs.add(cbDetailedPaymentDesc, regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, detailed spell/ability descriptions are shown when choosing targets and paying costs."), regularConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
@@ -604,6 +608,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbManaLostPrompt() {
     	return cbManaLostPrompt;
+    }
+
+    public final JCheckBox getCbDetailedPaymentDesc() {
+        return cbDetailedPaymentDesc;
     }
 
     /** @return {@link forge.toolbox.FLabel} */

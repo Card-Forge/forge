@@ -118,6 +118,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Free Block Handling",
                 "When enabled, if you would have to pay 0 to block, pay automatically without prompt."),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_DETAILED_SPELLDESC_IN_PROMPT,
+                "Show Spell Description on Payment/Targeting",
+                "When enabled, detailed spell/ability descriptions are shown when choosing targets and paying costs."),
+                1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,

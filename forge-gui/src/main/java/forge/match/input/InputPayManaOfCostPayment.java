@@ -4,7 +4,9 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
@@ -48,7 +50,9 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         if (messagePrefix != null) {
             msg.append(messagePrefix).append("\n");
         }
-        msg.append(saPaidFor.getStackDescription()).append("\n");
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
+            msg.append(saPaidFor.getStackDescription().replace("(Targeting ERROR)", "")).append("\n");
+        }
         msg.append("Pay Mana Cost: ").append(displayMana);
         if (this.phyLifeToLose > 0) {
             msg.append(" (");

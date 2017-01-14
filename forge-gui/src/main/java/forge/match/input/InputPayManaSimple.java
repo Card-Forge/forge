@@ -23,7 +23,9 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
 
 //pays the cost of a card played from the player's hand
@@ -119,7 +121,10 @@ public class InputPayManaSimple extends InputPayMana {
      */
     @Override
     protected String getMessage() {
-        final StringBuilder msg = new StringBuilder(saPaidFor.getStackDescription()).append("\n");
+        final StringBuilder msg = new StringBuilder();
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
+            msg.append(saPaidFor.getStackDescription().replace("(Targeting ERROR)", "")).append("\n");
+        }
         msg.append("Pay Mana Cost: ").append(this.manaCost.toString(false, player.getManaPool()));
         if (this.phyLifeToLose > 0) {
             msg.append(" (");

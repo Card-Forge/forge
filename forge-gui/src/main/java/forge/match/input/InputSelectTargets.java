@@ -16,7 +16,9 @@ import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
 
 public final class InputSelectTargets extends InputSyncronizedBase {
@@ -59,7 +61,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append("Parent Targeted:");
             sb.append(sa.getUniqueTargets()).append("\n");
         }
-        sb.append(sa.getStackDescription()).append("\n").append(tgt.getVTSelection());
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
+            sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n").append(tgt.getVTSelection());
+        } else {
+            sb.append(sa.getHostCard() + " - " + tgt.getVTSelection());
+        }
 
         final int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);
         final int targeted = sa.getTargets().getNumTargeted();
