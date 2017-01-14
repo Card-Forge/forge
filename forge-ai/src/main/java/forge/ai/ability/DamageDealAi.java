@@ -53,10 +53,14 @@ public class DamageDealAi extends DamageAiBase {
             }
             return false;
         }
-        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(dmg));
+        if (damage.equals("X")) {
+            if (sa.getSVar(damage).equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                source.setSVar("PayX", Integer.toString(dmg));
+            } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+                dmg--; // the card will be spent casting the spell, so actual damage is 1 less
+            }
         }
         if (!this.damageTargetAI(ai, sa, dmg, true)) {
             return false;
@@ -73,12 +77,16 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
-        if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") ||
-                sa.getHostCard().getName().equals("Crater's Claws"))) {
-            // Set PayX here to maximum value.
-            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(dmg));
+        if (damage.equals("X")) {
+            if (sa.getSVar(damage).equals("Count$xPaid") || source.getName().equals("Crater's Claws")) {
+                // Set PayX here to maximum value.
+                dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                source.setSVar("PayX", Integer.toString(dmg));
+            } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+                dmg--; // the card will be spent casting the spell, so actual damage is 1 less
+            }
         }
+
         if (sa.getHostCard().getName().equals("Crater's Claws") && ai.hasFerocious()) {
             dmg += 2;
         }
