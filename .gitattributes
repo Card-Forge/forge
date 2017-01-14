@@ -13531,6 +13531,7 @@ forge-gui/res/cardsfolder/s/scragnoth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scrambleverse.txt -text
 forge-gui/res/cardsfolder/s/scrap.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scrap_mastery.txt -text
+forge-gui/res/cardsfolder/s/scrap_trawler.txt -text
 forge-gui/res/cardsfolder/s/scrapbasket.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scrapdiver_serpent.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/scrapheap.txt svneol=native#text/plain

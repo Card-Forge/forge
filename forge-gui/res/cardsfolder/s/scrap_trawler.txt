@@ -1,0 +1,10 @@
+Name:Scrap Trawler
+ManaCost:3
+Types:Artifact Creature Construct
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturnArti | TriggerDescription$ Whenever CARDNAME or another artifact you control is put into a graveyard from the battlefield, return to your hand target artifact card in your graveyard with lesser converted mana cost. 
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.YouCtrl+Other | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigReturnArti | TriggerDescription$ Whenever CARDNAME or another artifact you control is put into a graveyard from the battlefield, return to your hand target artifact card in your graveyard with lesser converted mana cost. 
+SVar:TrigReturnArti:DB$ ChangeZone | ValidTgts$ Artifact.cmcLTX | Origin$ Graveyard | Destination$ Hand | References$ X
+SVar:X:TriggeredCard$CardManaCost
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scrap_trawler.jpg
+Oracle:Whenever Scrap Trawler or another artifact you control is put into a graveyard from the battlefield, return to your hand target artifact card in your graveyard with lesser converted mana cost.
