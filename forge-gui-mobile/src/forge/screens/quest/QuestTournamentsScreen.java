@@ -20,10 +20,12 @@ import forge.limited.BoosterDraft;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.IQuestTournamentView;
+import forge.quest.QuestDraftUtils;
 import forge.quest.QuestEventDraft;
 import forge.quest.QuestTournamentController;
 import forge.quest.QuestDraftUtils.Mode;
 import forge.quest.data.QuestEventDraftContainer;
+import forge.quest.data.QuestPreferences;
 import forge.screens.limited.DraftingProcessScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
@@ -61,6 +63,8 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     //Tournament Active panel
     private final TournamentActivePanel pnlTournamentActive = add(new TournamentActivePanel());
+    private final FButton btnEditDeckInTourn = add(new FButton("Edit Deck"));
+    private final FButton btnLeaveTournamentInTourn = add(new FButton("Leave Tournament"));
 
     //Results labels
     private static final FSkinFont RESULTS_FONT = FSkinFont.get(15);
@@ -104,12 +108,31 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 });
             }
         });
-        
+
+        // TODO: is it possible to somehow reuse the original btnEditDeck/btnLeaveTournament
+        btnEditDeckInTourn.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                editDeck(true);
+            }
+        });
+        btnLeaveTournamentInTourn.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to handle alerts
+                    @Override
+                    public void run() {
+                        controller.endTournamentAndAwardPrizes();
+                    }
+                });
+            }
+        });
+
         pnlPrepareDeck.add(btnEditDeck);
         pnlPrepareDeck.add(btnLeaveTournament);
 
-        pnlTournamentActive.add(btnEditDeck);
-        pnlTournamentActive.add(btnLeaveTournament);
+        pnlTournamentActive.add(btnEditDeckInTourn);
+        pnlTournamentActive.add(btnLeaveTournamentInTourn);
 
         deckViewer.setCaption("Main Deck");
         deckViewer.setup(ItemManagerConfig.QUEST_DRAFT_DECK_VIEWER);
@@ -162,9 +185,14 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     public void setMode(Mode mode0) {
         if (mode == mode0) { return; }
         mode = mode0;
-        pnlSelectTournament.setVisible(mode == Mode.SELECT_TOURNAMENT);
+        pnlSelectTournament.setVisible(mode == Mode.SELECT_TOURNAMENT || mode == Mode.EMPTY);
         pnlPrepareDeck.setVisible(mode == Mode.PREPARE_DECK);
         pnlTournamentActive.setVisible(mode == Mode.TOURNAMENT_ACTIVE);
+        btnEditDeckInTourn.setVisible(mode == Mode.TOURNAMENT_ACTIVE);
+        btnLeaveTournamentInTourn.setVisible(mode == Mode.TOURNAMENT_ACTIVE);
+        btnEditDeck.setVisible(mode == Mode.PREPARE_DECK);
+        btnLeaveTournament.setVisible(mode == Mode.PREPARE_DECK);
+
         updateHeaderCaption();
     }
 
@@ -223,6 +251,14 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     @Override
     protected void startMatch() {
+        if (mode == Mode.TOURNAMENT_ACTIVE && FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1 && QuestDraftUtils.isNextMatchAIvsAI()) {
+            // Special handling for simulating AI vs. AI match outcome - do not invoke in background thread (since the match is not played out)
+            // and instead revalidate right after the outcome is decided in order to refresh the tournament screen.
+            controller.startNextMatch();
+            revalidate();
+            return;
+        }
+
         FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to handle alerts
             @Override
             public void run() {
@@ -276,6 +312,13 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     @Override
     public FButton getBtnLeaveTournament() {
         return btnLeaveTournament;
+    }
+
+    public FButton getBtnEditDeckInTourn() {
+        return btnEditDeckInTourn;
+    }
+    public FButton getBtnLeaveTournamentInTourn() {
+        return btnLeaveTournamentInTourn;
     }
 
     private class SelectTournamentPanel extends FContainer {
@@ -334,9 +377,21 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
             lblStandings.setBounds(x, y, w, lblStandings.getAutoSizeBounds().height);
             y += lblStandings.getHeight() + PADDING;
 
-            if (qd.getBracket().isTournamentOver()) {
-                getBtnLeaveTournament().setText("Collect Prizes");
+            boolean tournamentComplete = !qd.playerHasMatchesLeft();
+
+            btnEditDeckInTourn.setVisible(mode == Mode.TOURNAMENT_ACTIVE);
+            btnLeaveTournamentInTourn.setVisible(mode == Mode.TOURNAMENT_ACTIVE);
+
+            if (tournamentComplete) {
+                String sid = qd.getStandings()[qd.getStandings().length - 1];
+                String winnersName = sid.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : qd.getAINames()[Integer.parseInt(sid) - 1];
+                FLabel lblWinner = add(new FLabel.Builder().text("Winner: " + winnersName).align(HAlignment.CENTER).font(FSkinFont.get(20)).build());
+                lblWinner.setBounds(x, y, w, lblStandings.getAutoSizeBounds().height);
+                y += lblWinner.getHeight() + PADDING;
+                getBtnLeaveTournamentInTourn().setText("Collect Prizes");
             } else {
+                getBtnLeaveTournamentInTourn().setText("Leave Tournament");
+
                 String sid1, sid2, pairedPlayer1 = "NONE", pairedPlayer2 = "NONE";
                 int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
                 if (pos != -1) {
@@ -412,10 +467,10 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                 }
             }
 
-            y += labels[0].getHeight() + PADDING;
+            y += lblStandings.getHeight() + PADDING;
 
-            btnEditDeck.setBounds(PADDING, y, buttonWidth, FTextField.getDefaultHeight());
-            btnLeaveTournament.setBounds(btnEditDeck.getRight() + PADDING, y, buttonWidth, btnEditDeck.getHeight());
+            btnEditDeckInTourn.setBounds(PADDING, y, buttonWidth, FTextField.getDefaultHeight());
+            btnLeaveTournamentInTourn.setBounds(btnEditDeckInTourn.getRight() + PADDING, y, buttonWidth, btnEditDeckInTourn.getHeight());
         }
     }
 }

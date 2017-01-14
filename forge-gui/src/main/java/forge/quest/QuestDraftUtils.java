@@ -415,6 +415,25 @@ public class QuestDraftUtils {
         return LimitedDeckEvaluator.getDeckDraftValue(d);
     }
 
+    public static boolean isNextMatchAIvsAI() {
+        QuestEventDraft qd = FModel.getQuest().getAchievements().getCurrentDraft();
+        int pos = Arrays.asList(qd.getStandings()).indexOf(QuestEventDraft.UNDETERMINED);
+        if (pos == -1) {
+            return false;
+        }
+
+        int offset = (pos - 8) * 2;
+
+        String sid1 = qd.getStandings()[offset];
+        String sid2 = qd.getStandings()[offset + 1];
+
+        if (sid1.equals(QuestEventDraft.HUMAN) || sid2.equals(QuestEventDraft.HUMAN)) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static boolean injectRandomMatchOutcome(boolean simHumanMatches) {
         matchInProgress = true; // prevent the player from trying to start another match before we finish simulating results
         
