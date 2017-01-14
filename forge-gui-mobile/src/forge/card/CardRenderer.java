@@ -244,6 +244,9 @@ public class CardRenderer {
         else if (card.getCurrentState().isPlaneswalker()) {
             type += " (" + loyalty + ")";
         }
+        else if (card.getCurrentState().getType().hasSubtype("Vehicle")) {
+            type += String.format(" [%s / %s]", power, toughness);
+        }
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
     }
 
@@ -424,6 +427,13 @@ public class CardRenderer {
             pieces.add("/");
             pieces.add(String.valueOf(details.getToughness()));
         }
+        else if (details.getType().hasSubtype("Vehicle")) {
+            pieces.add("[");
+            pieces.add(String.valueOf(details.getPower()));
+            pieces.add("/");
+            pieces.add(String.valueOf(details.getToughness()));
+            pieces.add("]");
+        }
         if (details.isPlaneswalker()) {
             if (pieces.isEmpty()) {
                 pieces.add(String.valueOf(details.getLoyalty()));
@@ -432,6 +442,7 @@ public class CardRenderer {
                 pieces.add("(" + details.getLoyalty() + ")");
             }
         }
+
         if (pieces.isEmpty()) { return; }
 
         FSkinFont font = FSkinFont.forHeight(h * 0.15f);
