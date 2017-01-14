@@ -112,15 +112,9 @@ public class ReplacementHandler {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
 
-                    // when testing ReplaceMoved effects, make sure to check last known information since the host card
-                    // could have been moved, e.g. via a mass removal event (e.g. Kalitas, Traitor of Ghet + Wrath of God)
-                    // TODO: currently only processing removal effects that way to avoid issues like e.g. Essence of 
-                    // the Wild destroyed in response to a creature spell going on stack still making the card ETB as a 
-                    // copy of the Essence. This probably needs some rework to allow both to function correctly without 
-                    // the need for hacks and exclusions.
-                    boolean isReplaceMovedOnRemoval = replacementEffect instanceof ReplaceMoved && ("Graveyard".equals(replacementEffect.getMapParams().get("Destination")) || "Exile".equals(replacementEffect.getMapParams().get("Destination")));
-
-                    Zone cardZone = isReplaceMovedOnRemoval ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
+                    // Use "CheckLKIZone" parameter to test for effects that care abut where the card was last (e.g. Kalitas, Traitor of Ghet
+                    // getting hit by mass removal should still produce tokens).
+                    Zone cardZone = "True".equals(replacementEffect.getMapParams().get("CheckLKIZone")) ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
 
                     if (!replacementEffect.hasRun()
                             && replacementEffect.getLayer() == layer
