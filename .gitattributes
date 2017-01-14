@@ -4528,6 +4528,7 @@ forge-gui/res/cardsfolder/d/dark_favor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_hatchling.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_heart_of_the_wood.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_impostor.txt -text
+forge-gui/res/cardsfolder/d/dark_inimations.txt -text
 forge-gui/res/cardsfolder/d/dark_maze.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_offering.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dark_petition.txt -text
