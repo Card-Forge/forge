@@ -134,7 +134,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
                 if (eachExistingCounter) {
                     for(CounterType ct : choices) {
-                        if (obj instanceof GameEntity) {
+                        if (obj instanceof Player) {
                             ((Player) obj).addCounter(ct, counterAmount, true);
 
                         }
