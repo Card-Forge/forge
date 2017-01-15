@@ -12,7 +12,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        return false;
+        return sa.isMandatory(); // AI doesn't do anything with this SA yet, but at least it shouldn't miss mandatory triggers
     }
 
     /* (non-Javadoc)
@@ -39,6 +39,9 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             // if it's just defined, no big deal
         }
 
-        return false;
+        // TODO: the AI currently doesn't do anything with this ability, consider improving.
+        // For now, "true" is returned (without any action) if the SA is mandatory in order
+        // not to miss triggers.
+        return sa.isMandatory();
     }
 }
