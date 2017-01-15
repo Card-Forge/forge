@@ -296,9 +296,9 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         fromPanel.dispose();
         getCardPanels().remove(fromPanel);
         remove(fromPanel);
-        FView.SINGLETON_INSTANCE.getFrame().repaint(); // necessary to get rid of lingering visual artifacts (e.g. unneeded targeting arrows)
         invalidate();
         repaint();
+        FView.SINGLETON_INSTANCE.getFrame().repaint(); // necessary to get rid of lingering visual artifacts (e.g. unneeded targeting arrows)
     }
 
     public final void setCardPanels(final List<CardPanel> cardPanels) {
