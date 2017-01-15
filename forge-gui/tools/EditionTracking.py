@@ -101,7 +101,7 @@ def initializeForgeCards():
 							name += ' // '
 
 						if not name or split:
-							name += line[5:].rstrip()
+							name += line[5:].rstrip().lower()
 						
 					elif line.startswith("AlternateMode") and 'Split' in line:
 						split = True
@@ -283,7 +283,7 @@ if __name__ == '__main__':
 		for key in mtgDataCards.keys():
 			setList = mtgDataCards[key]
 			if currentSet in setList:
-				if key in forgeCards:
+				if key.lower() in forgeCards:
 					currentImplemented.append(key)
 				elif key != "":
 					currentMissing.append(key)
