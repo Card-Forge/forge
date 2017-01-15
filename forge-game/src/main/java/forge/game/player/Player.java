@@ -250,6 +250,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     /**
      * getOpponent. Used by current-generation AI.
      */
+    @Deprecated
     public final Player getOpponent() {
         for (Player p : game.getPlayers()) {
             if (p.isOpponentOf(this)) {
