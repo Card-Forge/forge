@@ -35,6 +35,7 @@ import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.CardZoomer;
+import forge.view.FView;
 import forge.view.arcane.util.CardPanelMouseListener;
 
 /**
@@ -295,9 +296,9 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         fromPanel.dispose();
         getCardPanels().remove(fromPanel);
         remove(fromPanel);
+        FView.SINGLETON_INSTANCE.getFrame().repaint(); // necessary to get rid of lingering visual artifacts (e.g. unneeded targeting arrows)
         invalidate();
         repaint();
-        this.doLayout();
     }
 
     public final void setCardPanels(final List<CardPanel> cardPanels) {
