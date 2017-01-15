@@ -222,7 +222,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
             this.getParent().validate();
         }
 
-    super.doLayout();
+        super.doLayout();
     }
 
     @Override

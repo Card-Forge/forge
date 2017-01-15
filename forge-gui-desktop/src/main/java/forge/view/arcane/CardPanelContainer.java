@@ -297,6 +297,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         remove(fromPanel);
         invalidate();
         repaint();
+        this.doLayout();
     }
 
     public final void setCardPanels(final List<CardPanel> cardPanels) {
