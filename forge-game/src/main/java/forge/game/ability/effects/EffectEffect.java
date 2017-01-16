@@ -25,20 +25,12 @@ import com.google.common.collect.Lists;
 
 public class EffectEffect extends SpellAbilityEffect {
 
-    @Override
-    protected String getStackDescription(SpellAbility sa) {
-        // try to use SpellDescription
-        return sa.getParamOrDefault("SpellDescription", "");
-    }
-
     /**
      * <p>
      * effectResolve.
      * </p>
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      */
 
     @Override
