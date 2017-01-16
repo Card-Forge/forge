@@ -1,5 +1,5 @@
 Name:Sidar Kondo of Jamuraa
-ManaCost:3 G W
+ManaCost:2 G W
 Types:Legendary Creature Human Knight
 PT:2/5
 K:Flanking
