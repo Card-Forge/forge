@@ -8052,6 +8052,7 @@ forge-gui/res/cardsfolder/h/hooting_mandrills.txt -text
 forge-gui/res/cardsfolder/h/hope_against_hope.txt -text
 forge-gui/res/cardsfolder/h/hope_and_glory.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hope_charm.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/hope_of_ghirapur.txt -text
 forge-gui/res/cardsfolder/h/hopeful_eidolon.txt -text
 forge-gui/res/cardsfolder/h/hopping_automaton.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/horde_ambusher.txt -text

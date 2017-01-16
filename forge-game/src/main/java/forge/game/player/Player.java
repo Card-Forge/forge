@@ -2066,7 +2066,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!found) {
                 return false;
             }
-        } else if (property.equals("wasDealtDamageThisGameBy ")) {
+        } else if (property.startsWith("wasDealtDamageThisGameBy ")) {
             final String v = property.split(" ")[1];
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             boolean found = false;
@@ -2079,7 +2079,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!found) {
                 return false;
             }
-        } else if (property.equals("wasDealtDamageThisTurnBy ")) {
+        } else if (property.startsWith("wasDealtDamageThisTurnBy ")) {
             final String v = property.split(" ")[1];
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             boolean found = false;
@@ -2092,7 +2092,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!found) {
                 return false;
             }
-        } else if (property.equals("wasDealtCombatDamageThisTurnBy ")) {
+        } else if (property.startsWith("wasDealtCombatDamageThisTurnBy ")) {
             final String v = property.split(" ")[1];
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             
