@@ -7426,6 +7426,7 @@ forge-gui/res/cardsfolder/g/green_mana_battery.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/green_scarab.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/green_suns_zenith.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/green_ward.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/greenbelt_rampager.txt -text
 forge-gui/res/cardsfolder/g/greener_pastures.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/greenhilt_trainee.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/greenseeker.txt svneol=native#text/plain
