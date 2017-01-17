@@ -292,6 +292,7 @@ public class HumanPlay {
         }
 
         final HumanCostDecision hcd = new HumanCostDecision(controller, p, sourceAbility, source);
+        boolean mandatory = cost.isMandatory();
         
         //the following costs do not need inputs
         for (CostPart part : parts) {
@@ -437,8 +438,10 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!p.getController().confirmPayment(part, "Do you want to remove " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " from " + source + "?")) {
-                    return false;
+                if (!mandatory) {
+                    if (!p.getController().confirmPayment(part, "Do you want to remove " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " from " + source + "?")) {
+                        return false;
+                    }
                 }
 
                 source.subtractCounter(counterType, amount);
@@ -454,8 +457,11 @@ public class HumanPlay {
                     }
                 }
                 if (allCounters < amount) { return false; }
-                if (!p.getController().confirmPayment(part, "Do you want to remove counters from " + part.getDescriptiveType() + " ?")) {
-                    return false;
+
+                if (!mandatory) {
+                    if (!p.getController().confirmPayment(part, "Do you want to remove counters from " + part.getDescriptiveType() + " ?")) {
+                        return false;
+                    }
                 }
 
                 list = CardLists.getValidCards(list, part.getType().split(";"), p, source, sourceAbility);
@@ -663,8 +669,10 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!p.getController().confirmPayment(part, "Do you want to spend " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + "?")) {
-                    return false;
+                if (!mandatory) {
+                    if (!p.getController().confirmPayment(part, "Do you want to spend " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + "?")) {
+                        return false;
+                    }
                 }
 
                 p.payEnergy(amount, source);

@@ -47,6 +47,7 @@ import forge.util.TextUtil;
 public class Cost {
     private boolean isAbility = true;
     private final List<CostPart> costParts = new ArrayList<CostPart>();
+    private boolean isMandatory = false;
 
     private boolean tapCost = false;
 
@@ -134,6 +135,17 @@ public class Cost {
         return manapart == null ? ManaCost.ZERO : manapart.getManaToPay();
     }
 
+    /**
+     * <p>
+     * isMandatory
+     * </p>
+     * 
+     * @return boolean
+     */
+    public final boolean isMandatory() {
+        return this.isMandatory;
+    }
+    
     private Cost() {
     	
     }
@@ -178,8 +190,11 @@ public class Cost {
 
         CostPartMana parsedMana = null;
         for (String part : parts) {
-            if ("XCantBe0".equals(part))
+            if ("XCantBe0".equals(part)) {
                 xCantBe0 = true;
+            } else if ("Mandatory".equals(part)) {
+                this.isMandatory = true;
+            }
             else {
                 CostPart cp = parseCostPart(part, tapCost, untapCost);
                 if (null != cp )
