@@ -994,7 +994,7 @@ public class ComputerUtilCard {
         	}
         } else if (c.isPlaneswalker()) {
             threat = 1;
-        } else if (aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS) && (c.isArtifact() && !c.isCreature()) || (c.isEnchantment() && !c.isAura())) {
+        } else if (aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS) && ((c.isArtifact() && !c.isCreature()) || (c.isEnchantment() && !c.isAura()))) {
             // non-creature artifacts and global enchantments with suspicious intrinsic abilities
             boolean priority = false;
             if (c.getOwner().isOpponentOf(ai) && c.getController().isOpponentOf(ai)) {
