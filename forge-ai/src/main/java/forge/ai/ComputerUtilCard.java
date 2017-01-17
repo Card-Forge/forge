@@ -44,6 +44,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -846,6 +847,7 @@ public class ComputerUtilCard {
     
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
+        final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         final Player opp = ai.getOpponent();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
@@ -992,6 +994,43 @@ public class ComputerUtilCard {
         	}
         } else if (c.isPlaneswalker()) {
             threat = 1;
+        } else if (aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS) && (c.isArtifact() && !c.isCreature()) || (c.isEnchantment() && !c.isAura())) {
+            // non-creature artifacts and global enchantments with suspicious intrinsic abilities
+            boolean priority = false;
+            if (c.getOwner().isOpponentOf(ai) && c.getController().isOpponentOf(ai)) {
+                // if this thing is both owned and controlled by an opponent and it has a continuous ability,
+                // assume it either benefits the player or disrupts the opponent
+                for (final StaticAbility stAb : c.getStaticAbilities()) {
+                    final Map<String, String> params = stAb.getMapParams();
+                    if (params.get("Mode").equals("Continuous") && stAb.isIntrinsic() && !stAb.isTemporary()) {
+                        priority = true;
+                        break;
+                    }
+                }
+                if (!priority) {
+                    for (final Trigger t : c.getTriggers()) {
+                        if (t.isIntrinsic() && !t.isTemporary()) {
+                            // has a triggered ability, could be benefitting the opponent or disrupting the AI
+                            priority = true;
+                            break;
+                        }
+                    }
+                }
+                // if this thing has AILogic set to "Curse", it's probably meant as some form of disruption
+                if (!priority) {
+                    for (final String sVar : c.getSVars().keySet()) {
+                        if (c.getSVars().get(sVar).contains("AILogic$ Curse")) {
+                            // this is a curse ability, so prioritize its removal
+                            priority = true;
+                            break;
+                        }
+                    }
+                }
+                // if it's a priority object, set its threat level to high
+                if (priority) {
+                    threat = 1.0f;
+                }
+            }
         } else {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();

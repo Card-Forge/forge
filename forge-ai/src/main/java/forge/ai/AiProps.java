@@ -34,7 +34,8 @@ public enum AiProps { /** */
     PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS ("true"),
     PREDICT_SPELLS_FOR_MAIN2 ("true"), /** */
     RESERVE_MANA_FOR_MAIN2_CHANCE ("0"), /** */
-    PLAY_AGGRO ("false"); /** */
+    PLAY_AGGRO ("false"), /** */
+    ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS ("false"); /** */
 
     private final String strDefaultVal;
 
