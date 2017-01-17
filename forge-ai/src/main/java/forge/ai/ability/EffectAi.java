@@ -2,23 +2,30 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -212,6 +219,34 @@ public class EffectAi extends SpellAbilityAi {
                 // for DamageDeal sub-abilities (eg. Wild Slash, Skullcrack)
                 SpellAbility burn = sa.getSubAbility();
                 return SpellApiToAi.Converter.get(burn.getApi()).canPlayAIWithSubs(ai, burn);
+            } else if (logic.equals("CastFromGraveyardUntilEOT")) {
+                // Effects that allow you to play stuff from graveyard until end of turn (e.g. Yawgmoth's Will)
+                CardCollectionView cardsInGY = ai.getCardsIn(ZoneType.Graveyard);
+                if (cardsInGY.size() == 0) {
+                    return false;
+                }
+                
+                int minManaAdj = 2; // we want the AI to have some spare mana for possible other spells to cast from GY/hand
+                int minCastableInGY = 3; // we want the AI to have several castable cards in GY before attempting an effect
+                List<SpellAbility> saList = ComputerUtilAbility.getSpellAbilities(cardsInGY, ai);
+                int selfCMC = sa.getPayCosts().getCostMana().getMana().getCMC();
+
+                // Currently limited to considering nonland permanents, since instants and sorceries may be very contextual
+                // and land drops are generally made by the AI in main 1 before casting spells, so testing for them is iffy.
+                int numCastable = 0;
+                for (SpellAbility ab : saList) {
+                    final Card src = ab.getHostCard();
+                    if (ab instanceof SpellPermanent && !src.getType().isLand()) {
+                        int CMC = ab.getPayCosts().getTotalMana() != null ? ab.getPayCosts().getTotalMana().getCMC() : 0;
+                        int Xcount = ab.getPayCosts().getTotalMana() != null ? ab.getPayCosts().getTotalMana().countX() : 0;
+
+                        if ((Xcount == 0 && CMC == 0) || ComputerUtilMana.canPayManaCost(ab, ai, selfCMC + minManaAdj)) {
+                            numCastable++;
+                        }
+                    }
+                }
+
+                return numCastable >= minCastableInGY;
             }
         } else { //no AILogic
             return false;
