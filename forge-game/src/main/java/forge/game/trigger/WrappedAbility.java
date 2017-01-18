@@ -192,15 +192,15 @@ public class WrappedAbility extends Ability {
     // key for autoyield - if there is a trigger use its description as the wrapper now has triggering information in its description
     @Override
     public String yieldKey() { 
-	if ( getTrigger() != null ) {
-	    if ( getHostCard() != null ) {
-		return getHostCard().toString() + ": " + getTrigger().toString();
-	    } else {
-		return getTrigger().toString();
-	    }
-	} else {
-	    return super.yieldKey();
-	}
+        if (getTrigger() != null) {
+            if (getHostCard() != null) {
+                return getHostCard().toString() + ": " + getTrigger().toString();
+            } else {
+                return getTrigger().toString();
+            }
+        } else {
+            return super.yieldKey();
+        }
     }
 
     // include triggering information so that different effects look different
