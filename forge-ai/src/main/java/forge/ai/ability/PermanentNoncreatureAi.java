@@ -45,7 +45,8 @@ public class PermanentNoncreatureAi extends PermanentAi {
             final CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, host,
                     effectExile);
             CardCollection targets = CardLists.getTargetableCards(list, sa);
-            if (sa.getHostCard().getName().equals("Suspension Field")) {
+            if (sa.getHostCard().getName().equals("Suspension Field") 
+                    || sa.getHostCard().getName().equals("Detention Sphere")) {
                 // existing "exile until leaves" enchantments only target
                 // opponent's permanents
                 targets = CardLists.filterControlledBy(targets, ai.getOpponents());
