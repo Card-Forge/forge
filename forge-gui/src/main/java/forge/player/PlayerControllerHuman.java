@@ -1198,21 +1198,25 @@ public class PlayerControllerHuman
         List<SpellAbility> orderedSAs = activePlayerSAs;
         if (activePlayerSAs.size() > 1) {
             final String firstStr = activePlayerSAs.get(0).toString();
-            Integer idxAdditionalInfo = firstStr.indexOf(" ["); // no need for extra granularity based on a specific zone changer object etc.
             boolean needPrompt = false;
+
+            Integer idxAdditionalInfo = firstStr.indexOf(" ["); // for the purpose of pre-ordering, no need for extra granularity.
             String saLookupKey = idxAdditionalInfo != -1 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr;
+
             char delim = (char)5;
             for (int i = 1; i < activePlayerSAs.size(); i++) {
                 SpellAbility currentSa = activePlayerSAs.get(i);
                 String saStr = currentSa.toString();
-                idxAdditionalInfo = saStr.indexOf(" [");
-                if (idxAdditionalInfo != -1) {
-                    saStr = saStr.substring(0, idxAdditionalInfo - 1);
-                }
+
                 if (!needPrompt && !saStr.equals(firstStr)) {
                     needPrompt = true; //prompt by default unless all abilities are the same
                 }
+
                 saLookupKey += delim + saStr;
+                idxAdditionalInfo = saLookupKey.indexOf(" [");
+                if (idxAdditionalInfo != -1) {
+                    saLookupKey = saLookupKey.substring(0, idxAdditionalInfo - 1);
+                }
             }
             if (needPrompt) {
             	List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
