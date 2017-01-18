@@ -626,7 +626,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmPayment(CostPart costPart, String prompt) {
+    public boolean confirmPayment(CostPart costPart, String prompt, SpellAbility sa) {
         return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method) 
     }
 
@@ -760,8 +760,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Map<GameEntity, CounterType> chooseProliferation() {
-        return brains.chooseProliferation();
+    public Map<GameEntity, CounterType> chooseProliferation(SpellAbility sa) {
+        return brains.chooseProliferation(sa);
     }
 
     @Override

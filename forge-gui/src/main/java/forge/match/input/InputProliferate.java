@@ -11,15 +11,18 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
 public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     private static final long serialVersionUID = -1779224307654698954L;
     private final Map<GameEntity, CounterType> chosenCounters = new HashMap<GameEntity, CounterType>();
+    private SpellAbility sa;
 
-    public InputProliferate(final PlayerControllerHuman controller) {
+    public InputProliferate(final PlayerControllerHuman controller, final SpellAbility sa) {
         super(controller, 1, Integer.MAX_VALUE);
+	this.sa = sa;
     }
 
     @Override

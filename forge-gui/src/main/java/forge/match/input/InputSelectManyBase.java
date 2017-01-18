@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.spellability.SpellAbility;
 import forge.player.PlayerControllerHuman;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase {
@@ -16,6 +17,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected final int min;
     protected final int max;
     protected boolean allowCancel = false;
+    protected SpellAbility sa = null;
 
     protected String message = "Source-Card-Name - Select %d more card(s)";
 
@@ -26,6 +28,11 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         }
         this.min = min;
         this.max = max;
+    }
+    
+    protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max, final SpellAbility sa) {
+    	this(controller,min,max);
+    	this.sa = sa;
     }
 
     protected void refresh() {

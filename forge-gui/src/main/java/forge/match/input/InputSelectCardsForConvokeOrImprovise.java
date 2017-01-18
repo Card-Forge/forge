@@ -16,6 +16,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
@@ -29,8 +30,9 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
     private final boolean improvise;
     private final String cardType;
     private final String description;
+    private SpellAbility sa;
 
-    public InputSelectCardsForConvokeOrImprovise(final PlayerControllerHuman controller, final Player p, final ManaCost cost, final CardCollectionView untapped, boolean impr) {
+    public InputSelectCardsForConvokeOrImprovise(final PlayerControllerHuman controller, final Player p, final ManaCost cost, final CardCollectionView untapped, boolean impr, final SpellAbility sa) {
         super(controller, 0, Math.min(cost.getCMC(), untapped.size()));
         remainingCost = new ManaCostBeingPaid(cost);
         player = p;
@@ -38,11 +40,15 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
         improvise = impr;
         cardType = impr ? "artifact" : "creature";
         description = impr ? "Improvise" : "Convoke";
+	this.sa = sa;
     }
 
     @Override
     protected String getMessage() {
-        return String.format("Choose %s to tap for %s .\nRemaining mana cost is %s", cardType, description, remainingCost.toString());
+	StringBuilder sb = new StringBuilder();
+	if (sa != null) sb.append(sa.getStackDescription());
+	sb.append(String.format("Choose %s to tap for %s .\nRemaining mana cost is %s", cardType, description, remainingCost.toString()));
+        return sb.toString();
     }
 
     @Override

@@ -18,6 +18,7 @@
 package forge.match.input;
 
 import forge.game.card.Card;
+import forge.game.spellability.SpellAbility;
 import forge.player.PlayerControllerHuman;
 
  /**
@@ -36,22 +37,24 @@ public class InputConfirm extends InputSyncronizedBase {
     private final String noButtonText;
     private final boolean defaultYes;
     private boolean result;
+    private SpellAbility sa;
 
-    public InputConfirm(final PlayerControllerHuman controller, String message0) {
-        this(controller, message0, "Yes", "No", true);
+    public InputConfirm(final PlayerControllerHuman controller, String message0, SpellAbility sa) {
+        this(controller, message0, "Yes", "No", true, sa);
     }
 
-    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0) {
-        this(controller, message0, yesButtonText0, noButtonText0, true);
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, SpellAbility sa) {
+        this(controller, message0, yesButtonText0, noButtonText0, true, sa);
     }
 
-    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0, SpellAbility sa) {
         super(controller);
         message = message0;
         yesButtonText = yesButtonText0;
         noButtonText = noButtonText0;
         defaultYes = defaultYes0;
         result = defaultYes0;
+	this.sa = sa ;
     }
 
     /** {@inheritDoc} */

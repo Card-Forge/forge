@@ -24,7 +24,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Player controller = sa.getHostCard().getController();
-        Map<GameEntity, CounterType> proliferateChoice = controller.getController().chooseProliferation();
+        Map<GameEntity, CounterType> proliferateChoice = controller.getController().chooseProliferation(sa);
         if (proliferateChoice == null )
             return;
         for(Entry<GameEntity, CounterType> ge: proliferateChoice.entrySet()) {

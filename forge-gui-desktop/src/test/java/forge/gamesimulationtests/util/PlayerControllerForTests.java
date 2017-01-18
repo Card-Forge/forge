@@ -496,7 +496,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmPayment(CostPart costPart, String string) {
+    public boolean confirmPayment(CostPart costPart, String string, SpellAbility ability) {
         return true;
     }
 
@@ -564,7 +564,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public Map<GameEntity, CounterType> chooseProliferation() {
+    public Map<GameEntity, CounterType> chooseProliferation(final SpellAbility sa) {
         // TODO Auto-generated method stub
         return null;
     }

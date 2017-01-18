@@ -282,12 +282,12 @@ public class HumanPlay {
         }
 
         if (parts.isEmpty() || (costPart.getAmount().equals("0") && parts.size() < 2)) {
-            return p.getController().confirmPayment(costPart, "Do you want to pay {0}?" + orString);
+            return p.getController().confirmPayment(costPart, "Do you want to pay {0}?" + orString, sourceAbility);
         }
         // 0 mana costs were slipping through because CostPart.getAmount returns 1
         else if (costPart instanceof CostPartMana && parts.size() < 2) {
             if (((CostPartMana) costPart).getManaToPay().isZero()) {
-                return p.getController().confirmPayment(costPart, "Do you want to pay {0}?" + orString);
+                return p.getController().confirmPayment(costPart, "Do you want to pay {0}?" + orString, sourceAbility);
             }
         }
 
@@ -304,7 +304,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!p.getController().confirmPayment(part, "Do you want to pay " + amount + " life?" + orString)) {
+                if (!p.getController().confirmPayment(part, "Do you want to pay " + amount + " life?" + orString, sourceAbility)) {
                     return false;
                 }
 
@@ -328,7 +328,7 @@ public class HumanPlay {
                 sb.append(res.contains(p) ? "" : "let that player ");
                 sb.append("draw " + Lang.nounWithAmount(amount, " card") + "?" + orString);
 
-                if (!p.getController().confirmPayment(part, sb.toString())) {
+                if (!p.getController().confirmPayment(part, sb.toString(), sourceAbility)) {
                     return false;
                 }
 
@@ -348,7 +348,7 @@ public class HumanPlay {
                 String desc = part.toString();
                 desc = desc.substring(0, 1).toLowerCase() + desc.substring(1);
 
-                if (!p.getController().confirmPayment(part, "Do you want to "+ desc + "?" + orString)) {
+                if (!p.getController().confirmPayment(part, "Do you want to "+ desc + "?" + orString, sourceAbility)) {
                     return false;
                 }
                 PaymentDecision pd = part.accept(hcd);
@@ -362,7 +362,7 @@ public class HumanPlay {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
                 final CardCollectionView list = p.getCardsIn(ZoneType.Library);
                 if (list.size() < amount) { return false; }
-                if (!p.getController().confirmPayment(part, "Do you want to mill " + amount + " card" + (amount == 1 ? "" : "s") + "?" + orString)) {
+                if (!p.getController().confirmPayment(part, "Do you want to mill " + amount + " card" + (amount == 1 ? "" : "s") + "?" + orString, sourceAbility)) {
                     return false;
                 }
                 CardCollectionView listmill = p.getCardsIn(ZoneType.Library, amount);
@@ -370,7 +370,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostFlipCoin) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!p.getController().confirmPayment(part, "Do you want to flip " + amount + " coin" + (amount == 1 ? "" : "s") + "?" + orString)) {
+                if (!p.getController().confirmPayment(part, "Do you want to flip " + amount + " coin" + (amount == 1 ? "" : "s") + "?" + orString, sourceAbility)) {
                     return false;
                 }
                 final int n = FlipCoinEffect.getFilpMultiplier(p);
@@ -384,7 +384,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!p.getController().confirmPayment(part, "Do you want " + source + " to deal " + amount + " damage to you?")) {
+                if (!p.getController().confirmPayment(part, "Do you want " + source + " to deal " + amount + " damage to you?", sourceAbility)) {
                     return false;
                 }
                 CardDamageMap damageMap = new CardDamageMap();
@@ -403,7 +403,7 @@ public class HumanPlay {
                         return false;
                     }
 
-                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?", sourceAbility)) {
                         return false;
                     }
 
@@ -413,11 +413,11 @@ public class HumanPlay {
                     CardCollectionView list = p.getGame().getCardsIn(ZoneType.Battlefield);
                     list = CardLists.getValidCards(list, part.getType().split(";"), p, source, sourceAbility);
                     if (list.isEmpty()) { return false; }
-                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?", sourceAbility)) {
                         return false;
                     }
                     while (amount > 0) {
-                        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list);
+                        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, sourceAbility);
                         inp.setMessage("Select a card to add a counter to");
                         inp.setCancelAllowed(true);
                         inp.showAndWait();
@@ -474,7 +474,7 @@ public class HumanPlay {
                         }
                     });
                     if (list.isEmpty()) { return false; }
-                    InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list);
+                    InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, sourceAbility);
                     inp.setMessage("Select a card to remove a counter");
                     inp.setCancelAllowed(true);
                     inp.showAndWait();
@@ -504,7 +504,7 @@ public class HumanPlay {
                 final CardCollection exiledList = new CardCollection();
                 ZoneType from = ZoneType.Graveyard;
                 if ("All".equals(part.getType())) {
-                    if (!p.getController().confirmPayment(part, "Do you want to exile all cards in your graveyard?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to exile all cards in your graveyard?", sourceAbility)) {
                         return false;
                     }
 
@@ -523,7 +523,7 @@ public class HumanPlay {
                     }
                     if (from == ZoneType.Library) {
                         if (!p.getController().confirmPayment(part, "Do you want to exile " + nNeeded +
-                                " card" + (nNeeded == 1 ? "" : "s") + " from your library?")) {
+                                " card" + (nNeeded == 1 ? "" : "s") + " from your library?", sourceAbility)) {
                             return false;
                         }
                         list = list.subList(0, nNeeded);
@@ -628,7 +628,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostDiscard) {
                 if ("Hand".equals(part.getType())) {
-                    if (!p.getController().confirmPayment(part, "Do you want to discard your hand?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to discard your hand?", sourceAbility)) {
                         return false;
                     }
 
@@ -715,7 +715,7 @@ public class HumanPlay {
     private static boolean payCostPart(final PlayerControllerHuman controller, SpellAbility sourceAbility, CostPartWithList cpl, int amount, CardCollectionView list, String actionName) {
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list, sourceAbility);
         inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
         inp.setCancelAllowed(true);
 

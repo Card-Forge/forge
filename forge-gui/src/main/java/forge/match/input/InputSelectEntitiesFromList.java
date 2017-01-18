@@ -6,6 +6,7 @@ import java.util.List;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.player.PlayerControllerHuman;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -26,6 +27,11 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         }
     }
 
+    public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0, final SpellAbility sa) {
+    	this(controller,min,max,validChoices0);
+    	this.sa = sa;
+    }
+    
     @Override
     protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (!selectEntity(c)) {

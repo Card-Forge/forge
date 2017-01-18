@@ -330,15 +330,15 @@ public class PlayerControllerHuman
 
     @Override
     public CardCollectionView choosePermanentsToSacrifice(final SpellAbility sa, final int min, final int max, final CardCollectionView valid, final String message) {
-        return choosePermanentsTo(min, max, valid, message, "sacrifice");
+        return choosePermanentsTo(min, max, valid, message, "sacrifice", sa);
     }
 
     @Override
     public CardCollectionView choosePermanentsToDestroy(final SpellAbility sa, final int min, final int max, final CardCollectionView valid, final String message) {
-        return choosePermanentsTo(min, max, valid, message, "destroy");
+        return choosePermanentsTo(min, max, valid, message, "destroy", sa);
     }
 
-    private CardCollectionView choosePermanentsTo(final int min, int max, final CardCollectionView valid, final String message, final String action) {
+    private CardCollectionView choosePermanentsTo(final int min, int max, final CardCollectionView valid, final String message, final String action, final SpellAbility sa) {
         max = Math.min(max, valid.size());
         if (max <= 0) {
             return CardCollection.EMPTY;
@@ -350,7 +350,7 @@ public class PlayerControllerHuman
         }
         builder.append("%d " + message + "(s) to " + action + ".");
 
-        final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid);
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
         inp.setMessage(builder.toString());
         inp.setCancelAllowed(min == 0);
         inp.showAndWait();
@@ -381,7 +381,7 @@ public class PlayerControllerHuman
         }
 
         if (cardsAreInMyHandOrBattlefield) {
-            final InputSelectCardsFromList sc = new InputSelectCardsFromList(this, min, max, sourceList);
+            final InputSelectCardsFromList sc = new InputSelectCardsFromList(this, min, max, sourceList, sa);
             sc.setMessage(title);
             sc.setCancelAllowed(isOptional);
             sc.showAndWait();
@@ -430,7 +430,7 @@ public class PlayerControllerHuman
             if (delayedReveal != null) {
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
             }
-            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1, optionList);
+            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1, optionList, sa);
             input.setCancelAllowed(isOptional);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
@@ -516,8 +516,8 @@ public class PlayerControllerHuman
             return true;
         }
 
-        final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
-        buildQuestion.append(regtrig.getHostCard().toString()).append("?");
+        final StringBuilder buildQuestion = new StringBuilder("<b>Use triggered ability of ");
+        buildQuestion.append(regtrig.getHostCard().toString()).append("?</b>");
         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_PROMPT)) {
             //append trigger description unless prompt is compact
             buildQuestion.append("\n(");
@@ -536,7 +536,8 @@ public class PlayerControllerHuman
             }
         }
 
-        final InputConfirm inp = new InputConfirm(this, buildQuestion.toString());
+	// pfps: trigger is on stack so do we really need to put it in the prompt area?
+        final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(),sa);
         inp.showAndWait();
         return inp.getResult();
     }
@@ -546,7 +547,7 @@ public class PlayerControllerHuman
         if (game.getPlayers().size() == 2) {
             final String prompt = String.format("%s, you %s\n\nWould you like to play or draw?",
                     player.getName(), isFirstGame ? " have won the coin toss." : " lost the last game.");
-            final InputConfirm inp = new InputConfirm(this, prompt, "Play", "Draw");
+            final InputConfirm inp = new InputConfirm(this, prompt, "Play", "Draw", null);
             inp.showAndWait();
             return inp.getResult() ? this.player : this.player.getOpponents().get(0);
         }
@@ -688,7 +689,7 @@ public class PlayerControllerHuman
             return choices;
         }
 
-        final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid);
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
         inp.setMessage(sa.hasParam("AnyNumber") ? "Discard up to %d card(s)" : "Discard %d card(s)");
         inp.showAndWait();
         return new CardCollection(inp.getSelected());
@@ -749,7 +750,7 @@ public class PlayerControllerHuman
      */
     @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(final int num, final CardCollectionView hand, final String uType, final SpellAbility sa) {
-        final InputSelectEntitiesFromList<Card> target = new InputSelectEntitiesFromList<Card>(this, num, num, hand) {
+        final InputSelectEntitiesFromList<Card> target = new InputSelectEntitiesFromList<Card>(this, num, num, hand, sa) {
             private static final long serialVersionUID = -5774108410928795591L;
 
             @Override
@@ -1158,8 +1159,8 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public boolean confirmPayment(final CostPart costPart, final String question) {
-        final InputConfirm inp = new InputConfirm(this, question);
+    public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
+        final InputConfirm inp = new InputConfirm(this, question, sa);
         inp.showAndWait();
         return inp.getResult();
     }
@@ -1264,8 +1265,8 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public Map<GameEntity, CounterType> chooseProliferation() {
-        final InputProliferate inp = new InputProliferate(this);
+    public Map<GameEntity, CounterType> chooseProliferation(final SpellAbility sa) {
+        final InputProliferate inp = new InputProliferate(this,sa);
         inp.setCancelAllowed(true);
         inp.showAndWait();
         if (inp.hasCancelled()) {
@@ -1358,7 +1359,7 @@ public class PlayerControllerHuman
 
     @Override
     public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(final SpellAbility sa, final ManaCost manaCost, final CardCollectionView untappedCards, boolean improvise) {
-        final InputSelectCardsForConvokeOrImprovise inp = new InputSelectCardsForConvokeOrImprovise(this, player, manaCost, untappedCards, improvise);
+        final InputSelectCardsForConvokeOrImprovise inp = new InputSelectCardsForConvokeOrImprovise(this, player, manaCost, untappedCards, improvise, sa);
         inp.showAndWait();
         return inp.getConvokeMap();
     }

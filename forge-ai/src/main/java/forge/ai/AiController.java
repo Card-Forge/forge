@@ -1292,7 +1292,7 @@ public class AiController {
         throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
     }
 
-    public Map<GameEntity, CounterType> chooseProliferation() {
+    public Map<GameEntity, CounterType> chooseProliferation(final SpellAbility sa) {
         final Map<GameEntity, CounterType> result = Maps.newHashMap();  
         
         final List<Player> allies = player.getAllies();
