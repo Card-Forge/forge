@@ -5,8 +5,8 @@ PT:1/1
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBEffect | TriggerDescription$ When CARDNAME enters the battlefield, prevent all damage that would be dealt to you this turn.
 
-SVar:DBEffect:DB$ Effect | ReplacementEffects$ Prevent | SVars$ Prevent
-SVar:Prevent:Mode$ PreventDamage | Target$ You | Description$ Prevent all damage that would be dealt to you this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ Prevent | SVars$ Prevent
+SVar:Prevent:Mode$ PreventDamage | EffectZone$ Command | Target$ You | Description$ Prevent all damage that would be dealt to you this turn.
 
 T:Mode$ DamagePrevented | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPut | References$ X | TriggerDescription$ Whenever damage that would be dealt to you is prevented, put that many +1/+1 counters on CARDNAME.
 SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X
