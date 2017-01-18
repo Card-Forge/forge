@@ -439,7 +439,7 @@ public class HumanPlay {
                 }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, "Do you want to remove " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " from " + source + "?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to remove " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " from " + source + "?",sourceAbility)) {
                         return false;
                     }
                 }
@@ -459,7 +459,7 @@ public class HumanPlay {
                 if (allCounters < amount) { return false; }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, "Do you want to remove counters from " + part.getDescriptiveType() + " ?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to remove counters from " + part.getDescriptiveType() + " ?",sourceAbility)) {
                         return false;
                     }
                 }
@@ -670,7 +670,7 @@ public class HumanPlay {
                 }
 
                 if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, "Do you want to spend " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + "?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to spend " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + "?",sourceAbility)) {
                         return false;
                     }
                 }
