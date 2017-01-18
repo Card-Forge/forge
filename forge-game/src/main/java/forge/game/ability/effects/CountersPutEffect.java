@@ -129,14 +129,19 @@ public class CountersPutEffect extends SpellAbilityEffect {
             if (existingCounter) {
                 final List<CounterType> choices = Lists.newArrayList();
                 if (obj instanceof GameEntity) {
-                    choices.addAll(((GameEntity)obj).getCounters().keySet());
+                    GameEntity entity = (GameEntity)obj;
+                    // get types of counters
+                    for (CounterType ct : entity.getCounters().keySet()) {
+                        if (entity.canReceiveCounters(ct)) {
+                            choices.add(ct);
+                        }
+                    }
                 }
 
                 if (eachExistingCounter) {
                     for(CounterType ct : choices) {
                         if (obj instanceof Player) {
                             ((Player) obj).addCounter(ct, counterAmount, true);
-
                         }
                         if (obj instanceof Card) {
                             ((Card) obj).addCounter(ct, counterAmount, true);
@@ -169,6 +174,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     if (sa.hasParam("UpTo")) {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Target", obj);
+                        params.put("CounterType", counterType);
                         counterAmount = pc.chooseNumber(sa, "How many counters?", 0, counterAmount, params);
                     }
 
