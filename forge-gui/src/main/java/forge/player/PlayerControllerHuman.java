@@ -1198,12 +1198,17 @@ public class PlayerControllerHuman
         List<SpellAbility> orderedSAs = activePlayerSAs;
         if (activePlayerSAs.size() > 1) {
             final String firstStr = activePlayerSAs.get(0).toString();
+            Integer idxAdditionalInfo = firstStr.indexOf(" ["); // no need for extra granularity based on a specific zone changer object etc.
             boolean needPrompt = false;
-            String saLookupKey = firstStr;
+            String saLookupKey = idxAdditionalInfo != -1 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr;
             char delim = (char)5;
             for (int i = 1; i < activePlayerSAs.size(); i++) {
                 SpellAbility currentSa = activePlayerSAs.get(i);
                 String saStr = currentSa.toString();
+                idxAdditionalInfo = saStr.indexOf(" [");
+                if (idxAdditionalInfo != -1) {
+                    saStr = saStr.substring(0, idxAdditionalInfo - 1);
+                }
                 if (!needPrompt && !saStr.equals(firstStr)) {
                     needPrompt = true; //prompt by default unless all abilities are the same
                 }
@@ -1218,8 +1223,13 @@ public class PlayerControllerHuman
             			orderedSAs.add(activePlayerSAs.get(index));
                     }
                 }
-            	orderedSAs = getGui().order(((savedOrder==null)?"Select order for":"Reorder") + " simultaneous abilities",
-            			"Resolve first", orderedSAs, null);
+                if (savedOrder != null) {
+                    boolean preselect = FModel.getPreferences().getPrefBoolean(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER);
+                    orderedSAs = getGui().order("Reorder simultaneous abilities", "Resolve first", 0, 0,
+                            preselect ? new ArrayList<SpellAbility>() : orderedSAs, preselect ? orderedSAs : new ArrayList<SpellAbility>(), null, false);
+                } else {
+                   	orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", orderedSAs, null);
+                }
                 //save order to avoid needing to prompt a second time to order the same abilities
                 savedOrder = new ArrayList<Integer>(activePlayerSAs.size());
                 for (SpellAbility sa : orderedSAs) {

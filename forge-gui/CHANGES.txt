@@ -8,8 +8,11 @@ Forge Beta: 01-13-2017 ver 1.5.58
 Release Notes
 -------------
 
-- Aether Revolt (pre-release) -
-This release features many Aether Revolt cards that you can play with in all game modes. The remaining cards are expected to be scripted in the upcoming versions of Forge. Since this is the first release featuring Aether Revolt in its pre-release period, some issues are to be expected, please report any bugs and inconsistencies you experience with these cards at the forums. 
+- New Option: Preselect Last Known Order of Simultaneous Abilities -
+In both desktop and mobile Forge, there is now an option in Forge Preferences called "Preselect Last Order of Abilities" that preselects the last known order of simultaneous abilities, thus making it possible to just use "Space" once to confirm the previous order instead of having to press Space for each ability or clicking the ">>" button to add the previous order once more. This option is currently disabled by default to avoid being confusing to users who are used to doing it the way it used to be before.
+
+- Aether Revolt -
+This release features all Aether Revolt cards that you can play with in all game modes. There are still some remaining caveats and issues that are hopefully going to be addressed soon. Please report any issues you encounter with the new cards.
 
 - Commander 2016 -
 This release features most Commander 2016 cards scripted and ready to play. The few remaining cards that are not currently supported may be scripted in the upcoming versions of Forge.

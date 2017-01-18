@@ -82,6 +82,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbPauseWhileMinimized = new OptionsCheckBox("Pause While Minimized");
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
     private final JCheckBox cbEscapeEndsTurn = new OptionsCheckBox("Use Escape Key to End Turn");
+    private final JCheckBox cbPreselectPrevAbOrder = new OptionsCheckBox("Preselect Last Order of Abilities");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
@@ -169,6 +170,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbDetailedPaymentDesc, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled, detailed spell/ability descriptions are shown when choosing targets and paying costs."), regularConstraints);
+
+        pnlPrefs.add(cbPreselectPrevAbOrder, regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, preselects the last defined simultaneous ability order in the ordering dialog."), regularConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
@@ -612,6 +616,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbDetailedPaymentDesc() {
         return cbDetailedPaymentDesc;
+    }
+
+    public final JCheckBox getcbPreselectPrevAbOrder() {
+        return cbPreselectPrevAbOrder;
     }
 
     /** @return {@link forge.toolbox.FLabel} */
