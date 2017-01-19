@@ -622,7 +622,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-
         if (!triggerList.isEmpty()) {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Cards", triggerList);
