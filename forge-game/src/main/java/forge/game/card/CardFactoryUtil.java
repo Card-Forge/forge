@@ -2449,7 +2449,7 @@ public class CardFactoryUtil {
      * TODO: Write javadoc for this method.
      * @param card
      */
-    private static void setupEtbKeywords(final Card card) {
+    public static void setupEtbKeywords(final Card card) {
         for (String kw : card.getKeywords()) {
 
             if (kw.startsWith("ETBReplacement")) {

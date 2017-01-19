@@ -613,7 +613,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     hostCard.addImprintedCard(movedCard);
                 }
             }
+
+            // Without this, for example, The Rack returned from exile to hand via Necropotence has
+            // its ETB replacement effect missing and does not work.
+            // TODO: Why does this happen? How generic should this "ETB keyword reset" be and where is it best done?
+            if (sa.hasParam("ResetETBKeywords")) {
+                CardFactoryUtil.setupEtbKeywords(movedCard);
+            }
         }
+
 
         if (!triggerList.isEmpty()) {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
