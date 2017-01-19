@@ -968,30 +968,38 @@ public class CombatUtil {
             return false;
         }
 
-        if (attacker.hasStartOfKeyword("CantBeBlockedBy ")) {
-            final int keywordPosition = attacker.getKeywordPosition("CantBeBlockedBy ");
-            final String parse = attacker.getKeywords().get(keywordPosition).toString();
-            final String[] k = parse.split(" ", 2);
-            final String[] restrictions = k[1].split(",");
-            if (blocker.isValid(restrictions, attacker.getController(), attacker, null)) {
-            	//Dragon Hunter check
-            	if (!k[1].contains("withoutReach") || !attacker.getType().hasCreatureType("Dragon")
-            			|| !blocker.hasKeyword("CARDNAME can block Dragons as though it had reach.")) {
-            		return false;
-            	}
+        for (String k : attacker.getKeywords()) {
+            if (k.startsWith("CantBeBlockedBy ")) {
+                final String[] n = k.split(" ", 2);
+                final String[] restrictions = n[1].split(",");
+                if (blocker.isValid(restrictions, attacker.getController(), attacker, null)) {
+                    boolean stillblock = false;
+                    //Dragon Hunter check
+                    if (n[1].contains("withoutReach") && blocker.hasStartOfKeyword("IfReach")) {
+                        for (String k2 : blocker.getKeywords()) {
+                            if (k2.startsWith("IfReach")) {
+                                String n2[] = k2.split(":");
+                                if (attacker.getType().hasCreatureType(n2[1])) {
+                                    stillblock = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (!stillblock) {
+                        return false;
+                    }
+                }
             }
         }
-
-        if (blocker.hasStartOfKeyword("CantBlock")) {
-            final int keywordPosition = blocker.getKeywordPosition("CantBlock");
-            final String parse = blocker.getKeywords().get(keywordPosition).toString();
-            if (parse.startsWith("CantBlockCardUID")) {
-                final String[] k = parse.split("_", 2);
+        for (String keyword : attacker.getKeywords()) {
+            if (keyword.startsWith("CantBlockCardUID")) {
+                final String[] k = keyword.split("_", 2);
                 if (attacker.getId() == Integer.parseInt(k[1])) {
                     return false;
                 }
-            } else {
-                final String[] parse0 = parse.split(":");
+            } else if (keyword.startsWith("CantBlock")) {
+                final String[] parse0 = keyword.split(":");
                 final String[] k = parse0[0].split(" ", 2);
                 final String[] restrictions = k[1].split(",");
                 if (attacker.isValid(restrictions, blocker.getController(), blocker, null)) {
@@ -1005,9 +1013,19 @@ public class CombatUtil {
         }
 
         if (attacker.hasKeyword("Flying") && !blocker.hasKeyword("Flying") && !blocker.hasKeyword("Reach")) {
-        	if (!attacker.getType().hasCreatureType("Dragon") || !blocker.hasKeyword("CARDNAME can block Dragons as though it had reach.")) {
-        		return false;
-        	}
+            boolean stillblock = false;
+            for (String k : blocker.getKeywords()) {
+                if (k.startsWith("IfReach")) {
+                    String n[] = k.split(":");
+                    if (attacker.getType().hasCreatureType(n[1])) {
+                        stillblock = true;
+                        break;  
+                    }
+                }
+            }
+            if (!stillblock) {
+                return false;
+            }
         }
 
         if (attacker.hasKeyword("Horsemanship") && !blocker.hasKeyword("Horsemanship")) {

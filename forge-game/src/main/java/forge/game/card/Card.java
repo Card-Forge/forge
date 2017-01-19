@@ -1508,6 +1508,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(getName()).append(" can't be blocked.\r\n");
             } else if (keyword.equals("AllNonLegendaryCreatureNames")) {
                 sbLong.append(getName()).append(" has all names of nonlegendary creature cards.\r\n");
+            } else if (keyword.startsWith("IfReach")) {
+                String k[] = keyword.split(":");
+                sbLong.append(getName()).append(" can block ")
+                .append(CardUtil.getPluralType(k[1]))
+                .append(" as though it had reach.\r\n");
             }
             else {
                 if ((i != 0) && (sb.length() != 0)) {
