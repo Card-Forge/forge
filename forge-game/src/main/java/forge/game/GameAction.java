@@ -155,6 +155,13 @@ public class GameAction {
             c.setState(CardStateName.Original, true);
         }
 
+        // Cards returned from exile face-down must be reset to their original state, otherwise
+        // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
+        // up on the wrong card state etc.).
+        if (zoneTo.is(ZoneType.Hand) && zoneFrom.is(ZoneType.Exile)) {
+            c.setState(CardStateName.Original, true);
+        }
+
         if (fromBattlefield && toHand && c.wasSuspendCast()) {
             // TODO: This has to be set early for suspend-cast creatures bounced to hand, otherwise they
             // end up in a state when they are considered on the battlefield. There should be a better solution.
