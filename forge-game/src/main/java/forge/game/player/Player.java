@@ -249,14 +249,32 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * getOpponent. Used by current-generation AI.
+     * 
+     * This method is deprecated, should not be used in new code and should gradually be
+     * replaced in the code with getOpponents() instead, which is multiplayer-friendly
+     * and can be used to selectively target a specific opponent based on conditions
+     * valid for each particular use case.
+     * 
+     * Until this can be remedied, getOpponent has been modified to return the opponent
+     * with the lowest life count, which is not optimal but at least should not make the
+     * AI heavily biased against the first (usually human) opponent.
      */
     @Deprecated
     public final Player getOpponent() {
-        for (Player p : game.getPlayers()) {
-            if (p.isOpponentOf(this)) {
-                return p;
+        Player opponent = null;
+        int minLife = Integer.MAX_VALUE;
+
+        for (Player p : this.getOpponents()) {
+            if (p.getLife() < minLife) {
+                opponent = p;
+                minLife = p.getLife();
             }
         }
+
+        if (opponent != null) {
+            return opponent;
+        }
+
         throw new IllegalStateException("No opponents left ingame for " + this);
     }
 
