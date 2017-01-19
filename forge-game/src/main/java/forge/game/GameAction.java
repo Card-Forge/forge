@@ -158,7 +158,7 @@ public class GameAction {
         // Cards returned from exile face-down must be reset to their original state, otherwise
         // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
         // up on the wrong card state etc.).
-        if (zoneTo.is(ZoneType.Hand) && zoneFrom.is(ZoneType.Exile)) {
+        if (zoneTo.is(ZoneType.Hand) && zoneFrom.is(ZoneType.Exile) && c.isFaceDown()) {
             c.setState(CardStateName.Original, true);
         }
 
