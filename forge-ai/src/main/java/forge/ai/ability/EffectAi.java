@@ -7,7 +7,9 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilDeck;
 import forge.ai.ComputerUtilMana;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
@@ -216,34 +218,8 @@ public class EffectAi extends SpellAbilityAi {
                 // for DamageDeal sub-abilities (eg. Wild Slash, Skullcrack)
                 SpellAbility burn = sa.getSubAbility();
                 return SpellApiToAi.Converter.get(burn.getApi()).canPlayAIWithSubs(ai, burn);
-            } else if (logic.equals("CastFromGraveyardUntilEOT")) {
-                // Effects that allow you to play stuff from graveyard until end of turn (e.g. Yawgmoth's Will)
-                CardCollectionView cardsInGY = ai.getCardsIn(ZoneType.Graveyard);
-                if (cardsInGY.size() == 0) {
-                    return false;
-                }
-                
-                int minManaAdj = 2; // we want the AI to have some spare mana for possible other spells to cast from GY/hand
-                int minCastableInGY = 3; // we want the AI to have several castable cards in GY before attempting an effect
-                List<SpellAbility> saList = ComputerUtilAbility.getSpellAbilities(cardsInGY, ai);
-                int selfCMC = sa.getPayCosts().getCostMana().getMana().getCMC();
-
-                // Currently limited to considering nonland permanents, since instants and sorceries may be very contextual
-                // and land drops are generally made by the AI in main 1 before casting spells, so testing for them is iffy.
-                int numCastable = 0;
-                for (SpellAbility ab : saList) {
-                    final Card src = ab.getHostCard();
-                    if (ab instanceof SpellPermanent && !src.getType().isLand()) {
-                        int CMC = ab.getPayCosts().getTotalMana() != null ? ab.getPayCosts().getTotalMana().getCMC() : 0;
-                        int Xcount = ab.getPayCosts().getTotalMana() != null ? ab.getPayCosts().getTotalMana().countX() : 0;
-
-                        if ((Xcount == 0 && CMC == 0) || ComputerUtilMana.canPayManaCost(ab, ai, selfCMC + minManaAdj)) {
-                            numCastable++;
-                        }
-                    }
-                }
-
-                return numCastable >= minCastableInGY;
+            } else if (logic.equals("YawgmothsWill")) {
+                return SpecialCardAi.YawgmothsWill.consider(ai, sa);
             }
         } else { //no AILogic
             return false;

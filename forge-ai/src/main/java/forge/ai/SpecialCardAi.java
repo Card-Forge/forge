@@ -38,6 +38,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.SpellPermanent;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import java.util.Collections;
@@ -459,4 +461,58 @@ public class SpecialCardAi {
         }
     }
     
+    // Yawgmoth's Will (can potentially be expanded for other broadly similar effects too)
+    public static class YawgmothsWill {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            CardCollectionView cardsInGY = ai.getCardsIn(ZoneType.Graveyard);
+            if (cardsInGY.size() == 0) {
+                return false;
+            }
+
+            int minManaAdj = 2; // we want the AI to have some spare mana for possible other spells to cast
+            float minCastableInGY = 3.0f; // we want the AI to have several castable cards in GY before attempting this effect
+            List<SpellAbility> saList = ComputerUtilAbility.getSpellAbilities(cardsInGY, ai);
+            int selfCMC = sa.getPayCosts().getCostMana().getMana().getCMC();
+
+            float numCastable = 0.0f;
+            for (SpellAbility ab : saList) {
+                final Card src = ab.getHostCard();
+
+                if (ab.getApi() == ApiType.Counter) {
+                    // cut short considering to play counterspells via Yawgmoth's Will
+                    continue;
+                }
+                if (ab.getHostCard().getName().equals(sa.getHostCard().getName())) {
+                    // prevent infinitely recursing own ability when testing AI play decision
+                    continue;
+                }
+
+                // check to see if the AI is willing to play this card
+                final SpellAbility testAb = ab.copy();
+                testAb.getRestrictions().setZone(ZoneType.Graveyard);
+                testAb.setActivatingPlayer(ai);
+
+                boolean willPlayAb = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testAb) == AiPlayDecision.WillPlay;
+
+                // Land drops are generally made by the AI in main 1 before casting spells, so testing for them is iffy.
+                if (!src.getType().isLand() && willPlayAb) {
+                    int CMC = ab.getPayCosts().getTotalMana() != null ? ab.getPayCosts().getTotalMana().getCMC() : 0;
+                    int Xcount = ab.getPayCosts().getTotalMana() != null ? ab.getPayCosts().getTotalMana().countX() : 0;
+
+                    if ((Xcount == 0 && CMC == 0) || ComputerUtilMana.canPayManaCost(ab, ai, selfCMC + minManaAdj)) {
+                        if (src.isInstant() || src.isSorcery()) {
+                            // instants and sorceries are one-shot, so only treat them as 1/2 value for the purpose of meeting minimum 
+                            // castable cards in graveyard requirements 
+                            numCastable += 0.5f;
+                        } else {
+                            numCastable += 1.0f;
+                        }
+                    }
+                }
+            }
+
+            return numCastable >= minCastableInGY;
+        }
+    }
+
 }
