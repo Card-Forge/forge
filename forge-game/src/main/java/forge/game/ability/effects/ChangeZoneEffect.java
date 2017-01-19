@@ -435,6 +435,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             Card movedCard = null;
 
+            boolean retExiledFaceDownToHand = originZone.getZoneType().equals(ZoneType.Exile) && destination.equals(ZoneType.Hand) && tgtC.isFaceDown();
+
             if (destination.equals(ZoneType.Library)) {
                 // library position is zero indexed
                 int libraryPosition = 0;
@@ -615,9 +617,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             // Without this, for example, The Rack returned from exile to hand via Necropotence has
-            // its ETB replacement effect missing and does not work.
+            // its ETB replacement effect missing and does not work (ditto via any other card that
+            // exiles a card face down and then returns it to hand, e.g. Bane Alley Broker).
             // TODO: Why does this happen? How generic should this "ETB keyword reset" be and where is it best done?
-            if (sa.hasParam("ResetETBKeywords")) {
+            if (retExiledFaceDownToHand) {
                 CardFactoryUtil.setupEtbKeywords(movedCard);
             }
         }
