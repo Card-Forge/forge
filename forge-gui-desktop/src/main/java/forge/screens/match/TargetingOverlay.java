@@ -81,7 +81,9 @@ public class TargetingOverlay {
     private final Set<CardView> cardsVisualized = new HashSet<CardView>();
     private CardPanel activePanel = null;
 
-    private long lastUpdated = System.currentTimeMillis();
+    //private long lastUpdated = System.currentTimeMillis(); // TODO: determine if timer is needed (see below)
+    private int allowedUpdates = 0;
+    private final int MAX_CONSECUTIVE_UPDATES = 1;
 
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
@@ -99,15 +101,27 @@ public class TargetingOverlay {
         return this.pnl;
     }
 
-    // Though this is called on every repaint, we compare the last time it
-    // ran against the current time to prevent CPU usage from spiking from overly
-    // frequent updates. It is also called (without the timer) in response to
-    // certain important UI events.
+    // Though this is called on every repaint, we take means to avoid it fully
+    // running every time (to reduce CPU usage).
     private boolean assembleArcs(final CombatView combat, boolean forceAssemble) {
-        if (forceAssemble || System.currentTimeMillis() - lastUpdated > 50) {
-            lastUpdated = System.currentTimeMillis();
-        } else {
-            return false;
+        if (!forceAssemble) {
+            /* -- Minimum update frequency timer, currently disabled --
+            long now = System.currentTimeMillis();
+            if (now - lastUpdated <= 10) {
+                // TODO: Minimum timer needed? How bad are CPU spikes without this on fast machines?
+                return false;
+            }
+            */
+            if (allowedUpdates >= MAX_CONSECUTIVE_UPDATES) {
+                // Reduce update spam by blocking every Nth attempt (zero-based).
+                // N should be adjusted to as low as possible to keep CPU usage low,
+                // while being high enough to avoid visual artifacts.
+                allowedUpdates = 0;
+                return false;
+            } else {
+                allowedUpdates++;
+                //lastUpdated = now; // Uncomment if enabling timer above
+            }
         }
 
         if (!assembler.getIsListening() && matchUI != null && matchUI.getFieldViews() != null) {
