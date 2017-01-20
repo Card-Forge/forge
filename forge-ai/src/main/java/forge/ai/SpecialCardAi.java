@@ -32,6 +32,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
+import forge.game.cost.CostPart;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -187,6 +188,34 @@ public class SpecialCardAi {
         }
     }
 
+    // Force of Will
+    public static class ForceOfWill {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            CardCollection blueCards = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.isColor(MagicColor.BLUE));
+
+            boolean isExileMode = false;
+            for (CostPart c : sa.getPayCosts().getCostParts()) {
+                if (c.toString().contains("Exile")) {
+                    isExileMode = true; // the AI is trying to go for the "exile and pay life" alt cost
+                    break;
+                }
+            }
+
+            if (isExileMode) {
+                if (blueCards.size() < 2) {
+                    // Need to have something else in hand that is blue in addition to Force of Will itself,
+                    // otherwise the AI will fail to play the card and the card will disappear from the pool
+                    return false;
+                } else if (CardLists.filter(blueCards, Predicates.or(CardPredicates.hasCMC(0), CardPredicates.hasCMC(1), CardPredicates.hasCMC(2), CardPredicates.hasCMC(3))).isEmpty()) {
+                    // We probably need a low-CMC card to exile to it, exiling a higher CMC spell may be suboptimal
+                    // since the AI does not prioritize/value cards vs. permission at the moment.
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
     // Living Death (and possibly other similar cards using AILogic LivingDeath)
     public static class LivingDeath {
         public static boolean consider(Player ai, SpellAbility sa) {

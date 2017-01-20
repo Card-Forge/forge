@@ -1,19 +1,26 @@
 package forge.ai.ability;
 
+import forge.ai.AiProps;
 import java.util.Iterator;
 
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -26,6 +33,8 @@ public class CounterAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
+        int tgtCMC = 0;
+
         if (game.getStack().isEmpty()) {
             return false;
         }
@@ -36,6 +45,12 @@ public class CounterAi extends SpellAbilityAi {
                 return false;
             }
             if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
+                return false;
+            }
+        }
+
+        if ("Force of Will".equals(source.getName())) {
+            if (!SpecialCardAi.ForceOfWill.consider(ai, sa)) {
                 return false;
             }
         }
@@ -61,6 +76,10 @@ public class CounterAi extends SpellAbilityAi {
             sa.resetTargets();
             if (sa.canTargetSpellAbility(topSA)) {
                 sa.getTargets().add(topSA);
+                if (topSA.getPayCosts().getTotalMana() != null) {
+                    tgtCMC = topSA.getPayCosts().getTotalMana().getCMC();
+                    tgtCMC += topSA.getPayCosts().getTotalMana().countX() > 0 ? 3 : 0; // TODO: somehow determine the value of X paid and account for it?
+                }
             } else {
                 return false;
             }
@@ -110,11 +129,19 @@ public class CounterAi extends SpellAbilityAi {
             String logic = sa.getParam("AILogic");
             if ("Never".equals(logic)) {
                 return false;
+            } else if (logic.startsWith("MinCMC.")) {
+                int minCMC = Integer.parseInt(logic.substring(7));
+                if (tgtCMC < minCMC) {
+                    return false;
+                }
             }
         }
 
-
-
+        // if minimum CMC to use counterspells against is specified in the AI profile, obey it
+        if (tgtCMC < ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.MIN_SPELL_CMC_TO_COUNTER)) {
+            return false;
+        }
+        
         return toReturn;
     }
 
