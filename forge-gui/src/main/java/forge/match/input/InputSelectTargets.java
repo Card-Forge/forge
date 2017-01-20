@@ -50,13 +50,17 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         getController().getGui().setCard(CardView.get(sa.getHostCard()));
         final StringBuilder sb = new StringBuilder();
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
-	    // sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n<b>").append(tgt.getVTSelection()).append("</b>\n");
-	    if ( sa.isAbility() ) { sb.append(sa.getHostCard()).append(" - " ); }
-	    sb.append(sa.toString()).append("\n<b>").append(tgt.getVTSelection()).append("</b>\n");
+            // sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n<b>").append(tgt.getVTSelection()).append("</b>\n");
+            if (sa.isAbility()) {
+                sb.append(sa.getHostCard()).append(" - ");
+            }
+            sb.append(sa.toString().replace("(Targeting ERROR)", "")).append("\n<b>").append(tgt.getVTSelection()).append("</b>\n");
         } else {
             sb.append(sa.getHostCard()).append(" - ").append(tgt.getVTSelection()).append("\n");
         }
-	if ( ! targetDepth.entrySet().isEmpty() ) { sb.append("Targeted:\n"); }
+        if (!targetDepth.entrySet().isEmpty()) {
+            sb.append("Targeted:\n");
+        }
         for (final Entry<GameEntity, Integer> o : targetDepth.entrySet()) {
             sb.append(o.getKey());
             if (o.getValue() > 1) {
