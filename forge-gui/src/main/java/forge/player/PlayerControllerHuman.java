@@ -503,7 +503,9 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public boolean confirmTrigger(final SpellAbility sa, final Trigger regtrig, final Map<String, String> triggerParams, final boolean isMandatory) {
+    public boolean confirmTrigger(final WrappedAbility wrapper, final Map<String, String> triggerParams, final boolean isMandatory) {
+	final SpellAbility sa = wrapper.getWrappedAbility();
+	final Trigger regtrig = wrapper.getTrigger();
         if (getGui().shouldAlwaysAcceptTrigger(regtrig.getId())) {
             return true;
         }
@@ -518,7 +520,8 @@ public class PlayerControllerHuman
 
         final StringBuilder buildQuestion = new StringBuilder("<b>Use triggered ability of ");
         buildQuestion.append(regtrig.getHostCard().toString()).append("?</b>");
-        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_PROMPT)) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_PROMPT) &&
+            !FModel.getPreferences().getPrefBoolean(FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) ) {
             //append trigger description unless prompt is compact
             buildQuestion.append("\n(");
             buildQuestion.append(triggerParams.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
@@ -537,7 +540,7 @@ public class PlayerControllerHuman
         }
 
 	// pfps: trigger is on stack so do we really need to put it in the prompt area?
-        final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(),sa);
+        final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(), wrapper);
         inp.showAndWait();
         return inp.getResult();
     }

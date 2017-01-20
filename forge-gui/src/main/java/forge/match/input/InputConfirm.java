@@ -19,6 +19,8 @@ package forge.match.input;
 
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.WrappedAbility;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
@@ -63,14 +65,21 @@ public class InputConfirm extends InputSyncronizedBase {
     @Override
     protected final void showMessage() {
         getController().getGui().updateButtons(getOwner(), yesButtonText, noButtonText, true, true, defaultYes);
-        if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
-	     (sa!=null) ) {
-	    showMessage(sa.getStackDescription() + "\n" + message, sa.getView());
-        } else {
-	    showMessage(message, (sa!=null)?sa.getView():null);
-	}
-    }
 
+
+        if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
+        		(sa!=null) ) {	
+            System.out.println("Triggera " + sa.isTrigger() + sa.isWrapper() + sa.getHostCard() + " :: " + sa.toString());
+            System.out.println("Triggerb " + sa + " :: " + sa.getStackDescription());
+
+        	final StringBuilder sb = new StringBuilder();	
+        	sb.append(sa.getStackDescription()).append("\n").append(message);
+        	showMessage(sb.toString(), sa.getView());
+        } else {
+        	showMessage(message, (sa!=null)?sa.getView():null);
+        }
+    }
+    
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {

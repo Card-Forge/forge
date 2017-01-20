@@ -178,7 +178,9 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmTrigger(SpellAbility sa, Trigger regtrig, Map<String, String> triggerParams, boolean isMandatory) {
+    public boolean confirmTrigger(WrappedAbility wrapper, Map<String, String> triggerParams, boolean isMandatory) {
+	final SpellAbility sa = wrapper.getWrappedAbility();
+	final Trigger regtrig = wrapper.getTrigger();
         if (sa.getHostCard().getName().equals("Deathmist Raptor")) {
             return true;
         }

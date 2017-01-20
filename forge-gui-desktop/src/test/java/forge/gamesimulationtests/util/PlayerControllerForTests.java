@@ -208,7 +208,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmTrigger(SpellAbility sa, Trigger regtrig, Map<String, String> triggerParams, boolean isMandatory) {
+    public boolean confirmTrigger(WrappedAbility wrapper, Map<String, String> triggerParams, boolean isMandatory) {
         return true;
     }
 

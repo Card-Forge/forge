@@ -440,7 +440,7 @@ public class WrappedAbility extends Ability {
 
         TriggerHandler th = game.getTriggerHandler();
 
-        if (decider != null && !decider.getController().confirmTrigger(sa, regtrig, triggerParams, this.isMandatory())) {
+        if (decider != null && !decider.getController().confirmTrigger(this, triggerParams, this.isMandatory())) {
             return;
         }
 
