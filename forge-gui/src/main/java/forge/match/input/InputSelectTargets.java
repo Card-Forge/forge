@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.ImmutableList;
+import forge.GuiBase;
 
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -54,7 +55,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             if (sa.isAbility()) {
                 sb.append(sa.getHostCard()).append(" - ");
             }
-            sb.append(sa.toString().replace("(Targeting ERROR)", "")).append("\n<b>").append(tgt.getVTSelection()).append("</b>\n");
+            if (GuiBase.getInterface().isLibgdxPort()) {
+                // Apparently <b>...</b> tags do not work in mobile Forge
+                sb.append(sa.toString().replace("(Targeting ERROR)", "")).append("\n").append(tgt.getVTSelection()).append("\n");
+            } else {
+                sb.append(sa.toString().replace("(Targeting ERROR)", "")).append("\n<b>").append(tgt.getVTSelection()).append("</b>\n");
+            }
         } else {
             sb.append(sa.getHostCard()).append(" - ").append(tgt.getVTSelection()).append("\n");
         }
