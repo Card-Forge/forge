@@ -68,14 +68,20 @@ public class SpecialCardAi {
             CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
             int numManaSrcs = manaSources.size();
 
+            CardCollection allCards = CardLists.filter(ai.getAllCards(), Predicates.and(CardPredicates.Presets.NON_TOKEN, CardPredicates.isOwner(ai)));
+            int numHighCMC = CardLists.filter(allCards, Predicates.or(CardPredicates.hasCMC(5), CardPredicates.hasCMC(6), CardPredicates.hasCMC(7), CardPredicates.hasCMC(8))).size();
+            int numLowCMC = CardLists.filter(allCards, Predicates.or(CardPredicates.hasCMC(1), CardPredicates.hasCMC(2), CardPredicates.hasCMC(3))).size();
+            boolean isLowCMCDeck = numHighCMC <= 6 && numLowCMC >= 25;
+            
+            int minCMC = isLowCMCDeck ? 3 : 4; // probably not worth wasting a lotus on a low-CMC spell (<4 CMC), except in low-CMC decks, where 3 CMC may be fine
             int paidCMC = cost.getConvertedManaCost();
 
-            if (paidCMC < 4) {
+            if (paidCMC < minCMC) {
                 if (paidCMC == 3 && numManaSrcs < 3) {
-                    // if it's a CMC 3 spell and we're more than one mana source short for it, might be worth it
+                    // if it's a CMC 3 spell and we're more than one mana source short for it, might be worth it anyway
                     return true;
                 } 
-                // otherwise, probably not worth wasting a Lotus on a spell with CMC less than 4
+
                 return false;
             }
 
