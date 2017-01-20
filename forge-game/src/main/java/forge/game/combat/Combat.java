@@ -35,6 +35,7 @@ import com.google.common.collect.Multimaps;
 import com.google.common.collect.Table;
 
 import forge.game.GameEntity;
+import forge.game.GameLogEntryType;
 import forge.game.GameObjectMap;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -445,6 +446,21 @@ public class Combat {
             // Damage Ordering needs to take cards like Melee into account, is that happening?
             CardCollection orderedBlockers = playerWhoAttacks.getController().orderBlockers(pair.getLeft(), pair.getRight()); // we know there's a list
             blockersOrderedForDamageAssignment.put(pair.getLeft(), orderedBlockers);
+
+            // Display the chosen order of blockers in the log
+            // TODO: this is best done via a combat panel update
+            StringBuilder sb = new StringBuilder();
+            sb.append(playerWhoAttacks.getName());
+            sb.append(" has ordered blockers for ");
+            sb.append(pair.getLeft());
+            sb.append(": ");
+            for (int i = 0; i < orderedBlockers.size(); i++) {
+                sb.append(orderedBlockers.get(i));
+                if (i != orderedBlockers.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+            playerWhoAttacks.getGame().getGameLog().add(GameLogEntryType.COMBAT, sb.toString());
         }
     }
     
