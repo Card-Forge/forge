@@ -51,9 +51,14 @@ public class InputPayManaOfCostPayment extends InputPayMana {
             msg.append(messagePrefix).append("\n");
         }
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
-            msg.append(saPaidFor.getStackDescription().replace("(Targeting ERROR)", "")).append("\n");
+            // msg.append(saPaidFor.getStackDescription().replace("(Targeting ERROR)", ""));
+	    if ( saPaidFor.isSpell() ) {
+		msg.append(saPaidFor.getStackDescription().replace("(Targeting ERROR)", ""));
+	    } else { 
+		msg.append(saPaidFor.getHostCard()).append(" - ").append(saPaidFor.toString());
+	    }
         }
-        msg.append("Pay Mana Cost: ").append(displayMana);
+        msg.append("\n").append("Pay Mana Cost: ").append(displayMana);
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
             msg.append(this.phyLifeToLose);

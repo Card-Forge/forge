@@ -861,11 +861,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         private final CardCollectionView validChoices;
 
         public InputSelectCardToRemoveCounter(final PlayerControllerHuman controller, final int cntCounters, final CounterType cType, final CardCollectionView validCards, final SpellAbility sa) {
-            super(controller, cntCounters, cntCounters);
+            super(controller, cntCounters, cntCounters, sa);
             this.validChoices = validCards;
             counterType = cType;
             cardsChosen = cntCounters > 0 ? new HashMap<Card, Integer>() : null;
-            this.sa = sa;
         }
 
         @Override

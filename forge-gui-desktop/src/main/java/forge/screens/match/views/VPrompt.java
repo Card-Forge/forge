@@ -17,6 +17,8 @@
  */
 package forge.screens.match.views;
 
+import forge.game.card.CardView;
+import forge.game.spellability.SpellAbilityView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -33,6 +35,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Assembles Swing components of message report.
@@ -52,6 +56,11 @@ public class VPrompt implements IVDoc<CPrompt> {
     private final FScrollPane messageScroller = new FScrollPane(tarMessage, false,
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
+    private SpellAbilityView sav = null ; 
+
+    public void setSpellAbilityView(final SpellAbilityView sav) {
+	this.sav = sav ;
+    }
 
     private KeyAdapter buttonKeyAdapter = new KeyAdapter() {
         @Override
@@ -84,6 +93,15 @@ public class VPrompt implements IVDoc<CPrompt> {
 
         tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessage.setMargin(new Insets(3, 3, 3, 3));
+
+        messageScroller.getViewport().getView().addMouseListener(new MouseAdapter() {
+        	@Override 
+        	public void mouseEntered(final MouseEvent e) {
+        		if ( sav != null ) {
+			    controller.getMatchUI().setCard(sav.getHostCard());
+        		}
+        	}
+        });
     }
 
     //========== Overridden methods

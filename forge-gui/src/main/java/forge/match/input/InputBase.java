@@ -25,6 +25,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 
@@ -116,6 +117,9 @@ public abstract class InputBase implements java.io.Serializable, Input {
     // to remove need for CMatchUI dependence
     protected final void showMessage(final String message) {
         controller.getGui().showPromptMessage(getOwner(), message);
+    }
+    protected final void showMessage(final String message, final SpellAbilityView sav) {
+        controller.getGui().showPromptMessage(getOwner(), message, sav);
     }
 
     protected String getTurnPhasePriorityMessage(final Game game) {

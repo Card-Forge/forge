@@ -49,7 +49,14 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         // Display targeting card in cardDetailPane in case it's not obviously visible.
         getController().getGui().setCard(CardView.get(sa.getHostCard()));
         final StringBuilder sb = new StringBuilder();
-        sb.append("Targeted:\n");
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
+	    // sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n<b>").append(tgt.getVTSelection()).append("</b>\n");
+	    if ( sa.isAbility() ) { sb.append(sa.getHostCard()).append(" - " ); }
+	    sb.append(sa.toString()).append("\n<b>").append(tgt.getVTSelection()).append("</b>\n");
+        } else {
+            sb.append(sa.getHostCard()).append(" - ").append(tgt.getVTSelection()).append("\n");
+        }
+	if ( ! targetDepth.entrySet().isEmpty() ) { sb.append("Targeted:\n"); }
         for (final Entry<GameEntity, Integer> o : targetDepth.entrySet()) {
             sb.append(o.getKey());
             if (o.getValue() > 1) {
@@ -61,11 +68,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append("Parent Targeted:");
             sb.append(sa.getUniqueTargets()).append("\n");
         }
-        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
-            sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n").append(tgt.getVTSelection());
-        } else {
-            sb.append(sa.getHostCard() + " - " + tgt.getVTSelection());
-        }
 
         final int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);
         final int targeted = sa.getTargets().getNumTargeted();
@@ -73,7 +75,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(String.format("\n(%d more can be targeted)", Integer.valueOf(maxTargets - targeted)));
         }
 
-        showMessage(sb.toString().replace("CARDNAME", sa.getHostCard().toString()));
+        showMessage(sb.toString().replace("CARDNAME", sa.getHostCard().toString()), sa.getView());
 
         // If reached Minimum targets, enable OK button
         if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {

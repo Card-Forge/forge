@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -27,7 +29,12 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
 
     @Override
     protected String getMessage() {
-        final StringBuilder sb = new StringBuilder("Choose permanents and/or players with counters on them to add one more counter of that type.");
+    	final StringBuilder sb = new StringBuilder();
+        if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
+	     sa != null ) {
+	    sb.append(sa.getStackDescription()).append("\n");
+    	}
+    	sb.append("Choose permanents and/or players with counters on them to add one more counter of that type.");
         sb.append("\n\nYou've selected so far:\n");
         if (chosenCounters.isEmpty()) {
             sb.append("(none)");

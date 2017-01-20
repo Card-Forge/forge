@@ -422,7 +422,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 getController().getGui().updateButtons(getOwner(), "Auto", "Cancel", true, true, true);
             }
         }
-        showMessage(getMessage());
+        showMessage(getMessage(), saPaidFor.getView());
     }
 
     @Override

@@ -8,7 +8,9 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.properties.ForgePreferences;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase {
     private static final long serialVersionUID = -2305549394512889450L;
@@ -51,7 +53,12 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
 
     @Override
     public final void showMessage() {
-        showMessage(getMessage());
+        if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
+	     (sa!=null) ) {
+	    showMessage( sa.getStackDescription() + "\n" + getMessage(), sa.getView() ) ;
+	} else {
+	    showMessage(getMessage(), (sa!=null)?sa.getView():null);
+	}
         getController().getGui().updateButtons(getOwner(), hasEnoughTargets(), allowCancel, true);
     }
 

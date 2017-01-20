@@ -28,6 +28,8 @@ import javax.swing.JButton;
 
 import forge.FThreads;
 import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.spellability.SpellAbilityView;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.screens.match.CMatchUI;
@@ -47,6 +49,9 @@ public class CPrompt implements ICDoc {
         this.view = new VPrompt(this);
     }
 
+    public final CMatchUI getMatchUI() {
+        return matchUI;
+    }
     public final VPrompt getView() {
         return view;
     }
@@ -100,6 +105,11 @@ public class CPrompt implements ICDoc {
 
     public void setMessage(final String s0) {
         view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
+        view.setSpellAbilityView(null);
+    }
+    public void setMessage(final String s0, final SpellAbilityView sav) {
+    	view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
+    	view.setSpellAbilityView(sav);
     }
 
     /**

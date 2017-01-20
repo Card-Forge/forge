@@ -791,6 +791,10 @@ public final class CMatchUI
     public void showPromptMessage(final PlayerView playerView, final String message) {
         cPrompt.setMessage(message);
     }
+    //  no override for now
+    public void showPromptMessage(final PlayerView playerView, final String message, final SpellAbilityView sav ) {
+        cPrompt.setMessage(message,sav);
+    }
 
     @Override
     public void showManaPool(final PlayerView player) {

@@ -72,6 +72,12 @@ public class NetGuiGame extends AbstractGuiGame {
         updateGameView();
         send(ProtocolMethod.showPromptMessage, playerView, message);
     }
+    
+    @Override
+    public void showPromptMessage(final PlayerView playerView, final String message, final SpellAbilityView sav) {
+        updateGameView();
+        send(ProtocolMethod.showPromptMessage, playerView, message);
+    }
 
     @Override
     public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {

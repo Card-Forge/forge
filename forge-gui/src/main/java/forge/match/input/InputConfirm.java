@@ -19,7 +19,9 @@ package forge.match.input;
 
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.properties.ForgePreferences;
 
  /**
   * <p>
@@ -61,7 +63,12 @@ public class InputConfirm extends InputSyncronizedBase {
     @Override
     protected final void showMessage() {
         getController().getGui().updateButtons(getOwner(), yesButtonText, noButtonText, true, true, defaultYes);
-        showMessage(message);
+        if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
+	     (sa!=null) ) {
+	    showMessage(sa.getStackDescription() + "\n" + message, sa.getView());
+        } else {
+	    showMessage(message, (sa!=null)?sa.getView():null);
+	}
     }
 
     /** {@inheritDoc} */

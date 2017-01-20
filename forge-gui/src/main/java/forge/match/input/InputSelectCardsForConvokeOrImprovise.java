@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -33,20 +35,22 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
     private SpellAbility sa;
 
     public InputSelectCardsForConvokeOrImprovise(final PlayerControllerHuman controller, final Player p, final ManaCost cost, final CardCollectionView untapped, boolean impr, final SpellAbility sa) {
-        super(controller, 0, Math.min(cost.getCMC(), untapped.size()));
+        super(controller, 0, Math.min(cost.getCMC(), untapped.size()), sa);
         remainingCost = new ManaCostBeingPaid(cost);
         player = p;
         availableCards = untapped;
         improvise = impr;
         cardType = impr ? "artifact" : "creature";
         description = impr ? "Improvise" : "Convoke";
-	this.sa = sa;
     }
 
     @Override
     protected String getMessage() {
 	StringBuilder sb = new StringBuilder();
-	if (sa != null) sb.append(sa.getStackDescription());
+        if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
+	     sa != null ) {
+	    sb.append(sa.getStackDescription()).append("\n");
+	}
 	sb.append(String.format("Choose %s to tap for %s .\nRemaining mana cost is %s", cardType, description, remainingCost.toString()));
         return sb.toString();
     }
