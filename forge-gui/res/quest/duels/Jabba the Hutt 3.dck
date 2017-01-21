@@ -1,10 +1,10 @@
 [duel]
 [metadata]
-Name=Jabba the Hut 3
-Title=Jabba the Hut
+Name=Jabba the Hutt 3
+Title=Jabba the Hutt
 Difficulty=hard
 Description=UB Infect deck
-Icon=Jabba the Hut.jpg
+Icon=Jabba the Hutt.jpg
 Deck Type=constructed
 [main]
 2 Bonesplitter
