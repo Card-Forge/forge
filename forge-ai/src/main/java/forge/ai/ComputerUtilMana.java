@@ -383,6 +383,9 @@ public class ComputerUtilMana {
                 if (!toPay.isPhyrexian() || !ai.canPayLife(2) || (ai.getLife() <= 2 && !ai.cantLoseForZeroOrLessLife())) {
                     break; // cannot pay
                 }
+                if ("Never".equals(sa.getParam("AIPhyrexianPayment"))) {
+                    break; // unwise to pay
+                }
 
                 cost.payPhyrexian();
                 if (!test) {
