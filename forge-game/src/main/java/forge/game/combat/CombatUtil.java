@@ -992,7 +992,7 @@ public class CombatUtil {
                 }
             }
         }
-        for (String keyword : attacker.getKeywords()) {
+        for (String keyword : blocker.getKeywords()) {
             if (keyword.startsWith("CantBlockCardUID")) {
                 final String[] k = keyword.split("_", 2);
                 if (attacker.getId() == Integer.parseInt(k[1])) {
