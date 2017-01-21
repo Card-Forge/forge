@@ -83,7 +83,7 @@ public class TargetingOverlay {
 
     //private long lastUpdated = System.currentTimeMillis(); // TODO: determine if timer is needed (see below)
     private int allowedUpdates = 0;
-    private final int MAX_CONSECUTIVE_UPDATES = 1;
+    private final int MAX_CONSECUTIVE_UPDATES = 3;
 
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
