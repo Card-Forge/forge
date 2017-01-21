@@ -99,7 +99,7 @@ public class InputConfirm extends InputSyncronizedBase {
         noButtonText = noButtonText0;
         defaultYes = defaultYes0;
         result = defaultYes0;
-        this.sa = null ;
+        this.sa = null;
         this.card = card0;
     }
 
