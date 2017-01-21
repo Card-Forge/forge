@@ -222,6 +222,7 @@ public class SpecialCardAi {
             return true;
         }
     }
+
     // Living Death (and possibly other similar cards using AILogic LivingDeath)
     public static class LivingDeath {
         public static boolean consider(Player ai, SpellAbility sa) {
@@ -242,8 +243,8 @@ public class SpecialCardAi {
                 aiGraveyardPower += ComputerUtilCard.evaluateCreature(c);
             }
 
-            int oppBattlefieldPower = 0, oppGraveyardPower = 0; //TODO: not used yet (see below)
-            List<Player> opponents = ai.getOpponents(); // TODO: not used yet (see below)
+            int oppBattlefieldPower = 0, oppGraveyardPower = 0; 
+            List<Player> opponents = ai.getOpponents();
             for (Player p : opponents) {
                 int playerPower = 0;
                 int tempGraveyardPower = 0;
