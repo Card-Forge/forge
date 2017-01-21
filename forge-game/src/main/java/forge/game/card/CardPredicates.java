@@ -244,6 +244,36 @@ public final class CardPredicates {
             }
         };
     }
+    
+    public static final Predicate<Card> greaterCMC(final int cmc) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                if (c.isSplitCard()) {
+                    return c.getCMC(Card.SplitCMCMode.LeftSplitCMC) >= cmc
+                            || c.getCMC(Card.SplitCMCMode.RightSplitCMC) >= cmc;
+                } else {
+                    return c.getCMC() >= cmc;
+                }
+                
+            }
+        };
+    }
+
+    public static final Predicate<Card> lessCMC(final int cmc) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                if (c.isSplitCard()) {
+                    return c.getCMC(Card.SplitCMCMode.LeftSplitCMC) <= cmc
+                            || c.getCMC(Card.SplitCMCMode.RightSplitCMC) <= cmc;
+                } else {
+                    return c.getCMC() <= cmc;
+                }
+                
+            }
+        };
+    }
 
     public static final Predicate<Card> hasCounters() {
         return new Predicate<Card>() {

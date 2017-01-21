@@ -12,6 +12,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -90,15 +91,10 @@ public class DestroyAi extends SpellAbilityAi {
         		sa.getTargets().add(worst);
         		return true;
         	}
-            list = CardLists.getTargetableCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
+            list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
             if ("FatalPush".equals(logic)) {
                 final int cmcMax = ai.hasRevolt() ? 4 : 2;
-                list = CardLists.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.getCMC() <= cmcMax;
-                    }
-                });
+                list = CardLists.filter(list, CardPredicates.lessCMC(cmcMax));
             }
             if (sa.hasParam("AITgts")) {
             	if (sa.getParam("AITgts").equals("BetterThanSource")) {
@@ -198,7 +194,7 @@ public class DestroyAi extends SpellAbilityAi {
                         }
                     }
                     if ("Pongify".equals(logic)) {
-                        final Card token = TokenAi.spawnToken(ai.getOpponent(), sa.getSubAbility());
+                        final Card token = TokenAi.spawnToken(choice.getController(), sa.getSubAbility());
                         if (token == null) {
                             return true;    // becomes Terminate
                         } else {

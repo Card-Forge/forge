@@ -17,10 +17,15 @@
  */
 package forge.ai;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -42,8 +47,6 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Special logic for individual cards
@@ -70,20 +73,11 @@ public class SpecialCardAi {
             CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
             int numManaSrcs = manaSources.size();
 
-            CardCollection allCards = CardLists.filter(ai.getAllCards(), Predicates.and(CardPredicates.Presets.NON_TOKEN, CardPredicates.isOwner(ai)));
+            CardCollection allCards = CardLists.filter(ai.getAllCards(), Arrays.asList(CardPredicates.Presets.NON_TOKEN,
+                    Predicates.not(CardPredicates.Presets.LANDS), CardPredicates.isOwner(ai)));
 
-            int numHighCMC = CardLists.filter(allCards, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getCMC() >= 5;
-                }
-            }).size();
-            int numLowCMC = CardLists.filter(allCards, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getCMC() >= 1 && c.getCMC() <= 3;
-                }
-            }).size();
+            int numHighCMC = CardLists.count(allCards, CardPredicates.greaterCMC(5));
+            int numLowCMC = CardLists.count(allCards, CardPredicates.lessCMC(3));
 
             boolean isLowCMCDeck = numHighCMC <= 6 && numLowCMC >= 25;
             
