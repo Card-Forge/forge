@@ -349,7 +349,7 @@ public class SpecialCardAi {
                 ManaCost cost = testSa.getPayCosts().getTotalMana();
                 byte colorProfile = cost.getColorProfile();
                 
-                if ((cost.getCMC() == 0)) {
+                if (cost.getCMC() == 0 && cost.countX() == 0) {
                     // no mana cost, no need to activate this SA then (additional mana not needed)
                     continue;
                 } else if (colorProfile != 0 && (cost.getColorProfile() & MagicColor.fromName(prominentColor)) == 0) {
