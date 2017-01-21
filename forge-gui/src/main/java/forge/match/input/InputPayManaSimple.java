@@ -123,7 +123,7 @@ public class InputPayManaSimple extends InputPayMana {
     protected String getMessage() {
         final StringBuilder msg = new StringBuilder();
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
-            msg.append(saPaidFor.getStackDescription().replace("(Targeting ERROR)", "")).append("\n");
+            msg.append(saPaidFor.getStackDescription().replace("(Targeting ERROR)", "")).append("\n\n");
         }
         msg.append("Pay Mana Cost: ").append(this.manaCost.toString(false, player.getManaPool()));
         if (this.phyLifeToLose > 0) {
