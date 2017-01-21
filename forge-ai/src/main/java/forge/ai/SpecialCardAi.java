@@ -17,6 +17,7 @@
  */
 package forge.ai;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -70,13 +71,24 @@ public class SpecialCardAi {
             int numManaSrcs = manaSources.size();
 
             CardCollection allCards = CardLists.filter(ai.getAllCards(), Predicates.and(CardPredicates.Presets.NON_TOKEN, CardPredicates.isOwner(ai)));
-            int numHighCMC = CardLists.filter(allCards, Predicates.or(CardPredicates.hasCMC(5), CardPredicates.hasCMC(6), CardPredicates.hasCMC(7), CardPredicates.hasCMC(8))).size();
-            int numLowCMC = CardLists.filter(allCards, Predicates.or(CardPredicates.hasCMC(1), CardPredicates.hasCMC(2), CardPredicates.hasCMC(3))).size();
+
+            int numHighCMC = CardLists.filter(allCards, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return c.getCMC() >= 5;
+                }
+            }).size();
+            int numLowCMC = CardLists.filter(allCards, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return c.getCMC() >= 1 && c.getCMC() <= 3;
+                }
+            }).size();
+
             boolean isLowCMCDeck = numHighCMC <= 6 && numLowCMC >= 25;
             
             int minCMC = isLowCMCDeck ? 3 : 4; // probably not worth wasting a lotus on a low-CMC spell (<4 CMC), except in low-CMC decks, where 3 CMC may be fine
             int paidCMC = cost.getConvertedManaCost();
-
             if (paidCMC < minCMC) {
                 if (paidCMC == 3 && numManaSrcs < 3) {
                     // if it's a CMC 3 spell and we're more than one mana source short for it, might be worth it anyway
@@ -206,7 +218,12 @@ public class SpecialCardAi {
                     // Need to have something else in hand that is blue in addition to Force of Will itself,
                     // otherwise the AI will fail to play the card and the card will disappear from the pool
                     return false;
-                } else if (CardLists.filter(blueCards, Predicates.or(CardPredicates.hasCMC(0), CardPredicates.hasCMC(1), CardPredicates.hasCMC(2), CardPredicates.hasCMC(3))).isEmpty()) {
+                } else if (CardLists.filter(blueCards, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return c.getCMC() <= 3;
+                    }
+                }).isEmpty()) {
                     // We probably need a low-CMC card to exile to it, exiling a higher CMC spell may be suboptimal
                     // since the AI does not prioritize/value cards vs. permission at the moment.
                     return false;
