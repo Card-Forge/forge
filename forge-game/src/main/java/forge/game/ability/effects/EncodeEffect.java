@@ -17,10 +17,8 @@ public class EncodeEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
-        sb.append("chooses a card to encode with Cipher.");
+        sb.append(sa.getActivatingPlayer());
+        sb.append(" chooses a card to encode with Cipher.");
 
         return sb.toString();
     }
