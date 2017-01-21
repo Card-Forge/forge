@@ -1031,9 +1031,9 @@ public class PlayerControllerHuman
             default:                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
         // return getGui().confirm(CardView.get(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
-	final InputConfirm inp = new InputConfirm(this, question, labels.get(0), labels.get(1), defaultVal == null || defaultVal.booleanValue(), sa);
-	inp.showAndWait();
-	return inp.getResult();
+        final InputConfirm inp = new InputConfirm(this, question, labels.get(0), labels.get(1), defaultVal == null || defaultVal.booleanValue(), sa);
+        inp.showAndWait();
+        return inp.getResult();
     }
 
     @Override

@@ -36,7 +36,9 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max, final SpellAbility sa0) {
     	this(controller,min,max);
     	this.sa = sa0;
-	this.card = sa0.getView().getHostCard();
+        if (sa0 != null) {
+            this.card = sa0.getView().getHostCard();
+        }
     }
 
     protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max, final CardView card0) {

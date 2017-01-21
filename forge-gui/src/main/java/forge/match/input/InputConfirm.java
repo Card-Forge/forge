@@ -61,8 +61,8 @@ public class InputConfirm extends InputSyncronizedBase {
         noButtonText = noButtonText0;
         defaultYes = defaultYes0;
         result = defaultYes0;
-	this.sa = null;
-	this.card = null;
+        this.sa = null;
+        this.card = null;
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0, SpellAbility sa0) {
@@ -80,8 +80,8 @@ public class InputConfirm extends InputSyncronizedBase {
         noButtonText = noButtonText0;
         defaultYes = defaultYes0;
         result = defaultYes0;
-	this.sa = sa0;
-	this.card = sa.getView().getHostCard();
+        this.sa = sa0;
+        this.card = sa != null ? sa.getView().getHostCard() : null;
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0, CardView card0) {
@@ -99,8 +99,8 @@ public class InputConfirm extends InputSyncronizedBase {
         noButtonText = noButtonText0;
         defaultYes = defaultYes0;
         result = defaultYes0;
-	this.sa = null ;
-	this.card = card0;
+        this.sa = null ;
+        this.card = card0;
     }
 
     /** {@inheritDoc} */
