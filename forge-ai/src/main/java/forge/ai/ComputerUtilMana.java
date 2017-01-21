@@ -31,6 +31,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerPredicates;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
@@ -383,8 +384,16 @@ public class ComputerUtilMana {
                 if (!toPay.isPhyrexian() || !ai.canPayLife(2) || (ai.getLife() <= 2 && !ai.cantLoseForZeroOrLessLife())) {
                     break; // cannot pay
                 }
-                if ("Never".equals(sa.getParam("AIPhyrexianPayment"))) {
-                    break; // unwise to pay
+
+                if (sa.hasParam("AIPhyrexianPayment")) {
+                    if ("Never".equals(sa.getParam("AIPhyrexianPayment"))) {
+                        break; // unwise to pay
+                    } else if (sa.getParam("AIPhyrexianPayment").startsWith("OnFatalDamage.")) {
+                        int dmg = Integer.parseInt(sa.getParam("AIPhyrexianPayment").substring(14));
+                        if (ai.getOpponents().filter(PlayerPredicates.lifeLessOrEqualTo(dmg)).isEmpty()) {
+                            break; // no one to finish with the gut shot
+                        }
+                    }
                 }
 
                 cost.payPhyrexian();
