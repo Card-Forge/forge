@@ -54,6 +54,24 @@ public final class PlayerPredicates {
         };
     }
 
+    public static final Predicate<Player> lifeLessOrEqualTo(final int n) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return p.getLife() <= n;
+            }
+        };
+    }
+
+    public static final Predicate<Player> lifeGreaterOrEqualTo(final int n) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return p.getLife() >= n;
+            }
+        };
+    }
+
     public static final Predicate<Player> hasCounter(final CounterType type) {
         return hasCounter(type, 1);
     }
