@@ -28,37 +28,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
 
         if (sa.hasParam("AILogic")) {
             if ("SpellMagnet".equals(sa.getParam("AILogic"))) {
-                // Cards like Spellskite that retarget spells to itself
-
-                if (topSa == null) {
-                    // nothing on stack, so nothing to target
-                    return false;
-                }
-                if (!topSa.usesTargeting() || topSa.getTargets().getTargetCards().contains(sa.getHostCard())) {
-                    // if this does not target at all or already targets host, no need to redirect it again
-                    return false;
-                }
-                if (topSa.getHostCard() != null && !topSa.getHostCard().getController().isOpponentOf(aiPlayer)) {
-                    // make sure not to redirect our own abilities
-                    return false;
-                }
-                if (!topSa.canTarget(sa.getHostCard())) {
-                    // don't try targeting it if we can't legally target Spellskite with it in the first place
-                    return false;
-                }
-
-                if ("Spellskite".equals(sa.getHostCard().getName())) {
-                    int potentialDmg = ComputerUtil.predictDamageFromSpell(topSa, aiPlayer);
-                    boolean canPayBlue = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(new ManaCost(new ManaCostParser("U"))), sa, aiPlayer);
-                    if (potentialDmg != -1 && potentialDmg <= 2 && !canPayBlue && topSa.getTargets().getTargets().contains(aiPlayer)) {
-                        // do not pay Phyrexian mana if the spell is a damaging one but it deals less damage or the same damage as we'll pay life
-                        return false;
-                    }
-                }
-
-                sa.resetTargets();
-                sa.getTargets().add(topSa);
-                return true;
+                return doSpellMagnet(sa, topSa, aiPlayer);
             }
         }
 
@@ -68,6 +38,54 @@ public class ChangeTargetsAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        final Game game = sa.getHostCard().getGame();
+        final SpellAbility topSa = game.getStack().isEmpty() ? null : ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
+
+        if (sa.hasParam("AILogic")) {
+            if ("SpellMagnet".equals(sa.getParam("AILogic"))) {
+                return doSpellMagnet(sa, topSa, aiPlayer);
+            }
+        }
+
+        return true;
+    }
+
+    private boolean doSpellMagnet(SpellAbility sa, SpellAbility topSa, Player aiPlayer) {
+        // For cards like Spellskite that retarget spells to itself
+        if (topSa == null) {
+            // nothing on stack, so nothing to target
+            return false;
+        }
+
+        if (sa.getTargets().getNumTargeted() != 0) {
+            // something was already chosen before (e.g. in response to a trigger - Mizzium Meddler), so just proceed
+            return true;
+        }
+
+        if (!topSa.usesTargeting() || topSa.getTargets().getTargetCards().contains(sa.getHostCard())) {
+            // if this does not target at all or already targets host, no need to redirect it again
+            return false;
+        }
+        if (topSa.getHostCard() != null && !topSa.getHostCard().getController().isOpponentOf(aiPlayer)) {
+            // make sure not to redirect our own abilities
+            return false;
+        }
+        if (!topSa.canTarget(sa.getHostCard())) {
+            // don't try targeting it if we can't legally target the host card with it in the first place
+            return false;
+        }
+
+        if ("Spellskite".equals(sa.getHostCard().getName())) {
+            int potentialDmg = ComputerUtil.predictDamageFromSpell(topSa, aiPlayer);
+            boolean canPayBlue = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(new ManaCost(new ManaCostParser("U"))), sa, aiPlayer);
+            if (potentialDmg != -1 && potentialDmg <= 2 && !canPayBlue && topSa.getTargets().getTargets().contains(aiPlayer)) {
+                // do not pay Phyrexian mana if the spell is a damaging one but it deals less damage or the same damage as we'll pay life
+                return false;
+            }
+        }
+
+        sa.resetTargets();
+        sa.getTargets().add(topSa);
         return true;
     }
 }
