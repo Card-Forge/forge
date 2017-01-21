@@ -303,6 +303,7 @@ public final class CardUtil {
         newCopy.setFortifiedBy(in.getFortifiedBy(false));
         newCopy.setClones(in.getClones());
         newCopy.setHaunting(in.getHaunting());
+        newCopy.setCopiedPermanent(in.getCopiedPermanent());
         for (final Card haunter : in.getHauntedBy()) {
             newCopy.addHauntedBy(haunter, false);
         }
