@@ -51,28 +51,28 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         getController().getGui().setCard(CardView.get(sa.getHostCard()));
         final StringBuilder sb = new StringBuilder();
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
-            // sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n").append(tgt.getVTSelection()).append("\n");
+            // sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n").append(tgt.getVTSelection());
             if (sa.isAbility()) {
                 sb.append(sa.getHostCard()).append(" - ");
             }
-	    // Apparently <b>...</b> tags do not work in mobile Forge, so don't include them (for now)
-	    sb.append(sa.toString().replace("(Targeting ERROR)", "")).append("\n\n").append(tgt.getVTSelection()).append("\n");
+            // Apparently <b>...</b> tags do not work in mobile Forge, so don't include them (for now)
+            sb.append(sa.toString().replace("(Targeting ERROR)", "")).append("\n\n").append(tgt.getVTSelection());
         } else {
-            sb.append(sa.getHostCard()).append(" - ").append(tgt.getVTSelection()).append("\n");
+            sb.append(sa.getHostCard()).append(" - ").append(tgt.getVTSelection());
         }
         if (!targetDepth.entrySet().isEmpty()) {
-            sb.append("Targeted:\n");
+            sb.append("\nTargeted:");
         }
         for (final Entry<GameEntity, Integer> o : targetDepth.entrySet()) {
+            sb.append("\n");
             sb.append(o.getKey());
             if (o.getValue() > 1) {
                 sb.append(String.format(" (%d times)", o.getValue()));
             }
-            sb.append("\n");
         }
         if (!sa.getUniqueTargets().isEmpty()) {
-            sb.append("Parent Targeted:");
-            sb.append(sa.getUniqueTargets()).append("\n");
+            sb.append("\nParent Targeted:");
+            sb.append(sa.getUniqueTargets());
         }
 
         final int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);
