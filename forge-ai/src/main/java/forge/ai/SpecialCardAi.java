@@ -212,12 +212,7 @@ public class SpecialCardAi {
                     // Need to have something else in hand that is blue in addition to Force of Will itself,
                     // otherwise the AI will fail to play the card and the card will disappear from the pool
                     return false;
-                } else if (CardLists.filter(blueCards, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.getCMC() <= 3;
-                    }
-                }).isEmpty()) {
+                } else if (CardLists.filter(blueCards, CardPredicates.lessCMC(3)).isEmpty()) {
                     // We probably need a low-CMC card to exile to it, exiling a higher CMC spell may be suboptimal
                     // since the AI does not prioritize/value cards vs. permission at the moment.
                     return false;
