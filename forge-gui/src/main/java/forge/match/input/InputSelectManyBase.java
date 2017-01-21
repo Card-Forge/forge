@@ -66,7 +66,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         	//	    showMessage( sa.getStackDescription() + "\n" + getMessage(), sa.getView() ) ;
         	final StringBuilder sb = new StringBuilder();
         	sb.append(card.toString());
-        	if ( sa != null ) {
+        	if ( (sa != null) && (!sa.toString().isEmpty()) ) { // apparently some spell abilities have no useful string value
         		sb.append(" - ").append(sa.toString());
         	}
         	sb.append("\n\n").append(getMessage());
