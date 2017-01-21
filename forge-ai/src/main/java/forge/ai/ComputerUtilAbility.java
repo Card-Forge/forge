@@ -15,7 +15,9 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+import java.util.Iterator;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -105,5 +107,23 @@ public class ComputerUtilAbility {
             result.addAll(GameActionUtil.getOptionalCosts(sa));
         }
         return result;
+    }
+
+    public static SpellAbility getTopSpellAbilityOnStack(Game game, SpellAbility sa) {
+        Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
+
+        if (!it.hasNext()) {
+            return null;
+        }
+
+        SpellAbility tgtSA = it.next().getSpellAbility(true);
+        // Grab the topmost spellability that isn't this SA and use that for comparisons
+        if (sa.equals(tgtSA) && game.getStack().size() > 1) {
+            if (!it.hasNext()) {
+                return null;
+            }
+            tgtSA = it.next().getSpellAbility(true);
+        }
+        return tgtSA;
     }
 }

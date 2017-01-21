@@ -2076,6 +2076,32 @@ public class ComputerUtil {
         return ComputerUtilCard.getBestCreatureAI(killables);
     }
     
+    public static int predictDamageFromSpell(final SpellAbility sa, final Player targetPlayer) {
+        int damage = -1; // returns -1 if the spell does not deal damage
+        final Card card = sa.getHostCard();
+    
+        SpellAbility ab = sa;
+        while (ab != null) {
+            if (ab.getApi() == ApiType.DealDamage) {
+                if (damage == -1) { damage = 0; } // found a damage-dealing spell
+                if (!ab.hasParam("NumDmg")) {
+                    continue;
+                }
+                damage += ComputerUtilCombat.predictDamageTo(targetPlayer,
+                        AbilityUtils.calculateAmount(card, ab.getParam("NumDmg"), ab), card, false);
+            } else if (ab.getApi() == ApiType.LoseLife) {
+                if (damage == -1) { damage = 0; } // found a damage-dealing spell
+                if (!ab.hasParam("LifeAmount")) {
+                    continue;
+                }
+                damage += AbilityUtils.calculateAmount(card, ab.getParam("LifeAmount"), ab);
+            }
+            ab = ab.getSubAbility();
+        }
+        
+        return damage;
+    }
+    
     public static int getDamageForPlaying(final Player player, final SpellAbility sa) {
         
         // check for bad spell cast triggers

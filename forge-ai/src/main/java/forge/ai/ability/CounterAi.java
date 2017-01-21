@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.AiProps;
+import forge.ai.ComputerUtilAbility;
 import java.util.Iterator;
 
 import forge.ai.ComputerUtilCost;
@@ -54,7 +55,7 @@ public class CounterAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
 
-            final SpellAbility topSA = findTopSpellAbility(game, sa);
+            final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
             if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai
                     || ai.getAllies().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
@@ -256,18 +257,5 @@ public class CounterAi extends SpellAbilityAi {
         }
 
         return new ImmutablePair<>(bestOption != null ? bestOption : leastBadOption, bestOption != null);
-    }
-
-    public SpellAbility findTopSpellAbility(Game game, SpellAbility sa) {
-        Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
-        SpellAbility tgtSA = it.next().getSpellAbility(true);
-        // Grab the topmost spellability that isn't this SA and use that for comparisons
-        if (sa.equals(tgtSA) && game.getStack().size() > 1) {
-            if (!it.hasNext()) {
-                return null;
-            }
-            tgtSA = it.next().getSpellAbility(true);
-        }
-        return tgtSA;
     }
 }

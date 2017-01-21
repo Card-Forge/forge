@@ -314,6 +314,7 @@ public class ComputerUtilMana {
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable) {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
+        boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
 
         List<SpellAbility> paymentList = Lists.newArrayList();
 
@@ -324,7 +325,7 @@ public class ComputerUtilMana {
         boolean hasConverge = sa.getHostCard().hasConverge();
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
 				checkPlayable, manaSpentToPay, hasConverge);
-        if (sourcesForShards == null) {
+        if (sourcesForShards == null && !purePhyrexian) {
         	return false;	// no mana abilities to use for paying
         }
 
@@ -353,7 +354,11 @@ public class ComputerUtilMana {
             		hasConverge = false;
             	}
             } else {
-            	saList = sourcesForShards.get(toPay);
+                if (!(sourcesForShards == null && purePhyrexian)) {
+                    saList = sourcesForShards.get(toPay);
+                } else {
+                    saList = Lists.newArrayList(); // Phyrexian mana only: no valid mana sources, but can still pay life
+                }
             }
             if (saList == null) {
                 break;
@@ -361,7 +366,7 @@ public class ComputerUtilMana {
 
             saList.removeAll(saExcludeList);
 
-            SpellAbility saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
+            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
 
             if (saPayment != null && saPayment.hasParam("AILogic")) {
                 boolean consider = false;
@@ -375,7 +380,7 @@ public class ComputerUtilMana {
             }
 
             if (saPayment == null) {
-                if (!toPay.isPhyrexian() || !ai.canPayLife(2)) {
+                if (!toPay.isPhyrexian() || !ai.canPayLife(2) || (ai.getLife() <= 2 && !ai.cantLoseForZeroOrLessLife())) {
                     break; // cannot pay
                 }
 

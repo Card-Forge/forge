@@ -170,6 +170,15 @@ public class ManaCostBeingPaid {
         return false;
     }
 
+    public final boolean containsOnlyPhyrexianMana() {
+        for (ManaCostShard shard : unpaidShards.keySet()) {
+            if (!shard.isPhyrexian()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public final boolean payPhyrexian() {
         ManaCostShard phy = null;
         for (ManaCostShard mcs : unpaidShards.keySet()) {
