@@ -92,13 +92,13 @@ public class DestroyAi extends SpellAbilityAi {
         	}
             list = CardLists.getTargetableCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
             if ("FatalPush".equals(logic)) {
-            	final int cmcMax = ai.hasRevolt() ? 4 : 2;
-            	list = CardLists.filter(list, new Predicate<Card>() {
-            		 @Override
-                     public boolean apply(final Card c) {
-            			 return c.getCMC() <= cmcMax;
-            		 }
-            	});
+                final int cmcMax = ai.hasRevolt() ? 4 : 2;
+                list = CardLists.filter(list, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return c.getCMC() <= cmcMax;
+                    }
+                });
             }
             if (sa.hasParam("AITgts")) {
             	if (sa.getParam("AITgts").equals("BetterThanSource")) {
