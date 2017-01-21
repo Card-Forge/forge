@@ -30,6 +30,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+import forge.match.input.InputConfirm;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectManyBase;
 import forge.util.Aggregates;
@@ -946,10 +947,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (cost.payCostFromSource()) {
             final int maxCounters = source.getCounters(cost.counter);
             if (amount.equals("All")) {
-                final CardView view = CardView.get(ability.getHostCard());
-                if (!controller.getGui().confirm(view, "Remove all counters?")) {
-                    return null;
-                }
+                // final CardView view = CardView.get(ability.getHostCard());
+                // if (!controller.getGui().confirm(view, "Remove all counters?")) {
+                //    return null;
+                // }
+		final InputConfirm inp = new InputConfirm(controller, "Remove all counters?", ability);
+		inp.showAndWait();
+		if (!inp.getResult()) {
+		    return null;
+		}
                 cntRemoved = maxCounters;
             }
             else if (c == null && "XChoice".equals(sVarAmount)) {

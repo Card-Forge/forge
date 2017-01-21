@@ -9,21 +9,19 @@ public class InputSelectCardsFromList extends InputSelectEntitiesFromList<Card> 
     private static final long serialVersionUID = 6230360322294805986L;
 
     public InputSelectCardsFromList(final PlayerControllerHuman controller, final int cnt, final FCollectionView<Card> validCards) {
-        super(controller, cnt, cnt, validCards); // to avoid hangs
+        this(controller, cnt, cnt, validCards);
     }
     
     public InputSelectCardsFromList(final PlayerControllerHuman controller, final int cnt, final FCollectionView<Card> validCards, final SpellAbility sa) {
-    	this(controller,cnt,validCards);
-    	this.sa = sa;
+    	this(controller, cnt, cnt, validCards, sa);
     }
 
     public InputSelectCardsFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<Card> validCards) {
-        super(controller, min, max, validCards); // to avoid hangs
+        super(controller, min, max, validCards);
     }
 
     public InputSelectCardsFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<Card> validCards, final SpellAbility sa) {
-    	this(controller,min,max,validCards);
-    	this.sa = sa;
+    	super(controller, min, max, validCards, sa);
     }
     
 }

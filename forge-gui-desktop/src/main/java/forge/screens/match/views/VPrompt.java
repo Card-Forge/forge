@@ -18,7 +18,6 @@
 package forge.screens.match.views;
 
 import forge.game.card.CardView;
-import forge.game.spellability.SpellAbilityView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -56,10 +55,10 @@ public class VPrompt implements IVDoc<CPrompt> {
     private final FScrollPane messageScroller = new FScrollPane(tarMessage, false,
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
-    private SpellAbilityView sav = null ; 
+    private CardView card = null ; 
 
-    public void setSpellAbilityView(final SpellAbilityView sav) {
-	this.sav = sav ;
+    public void setCardView(final CardView card) {
+	this.card = card ;
     }
 
     private KeyAdapter buttonKeyAdapter = new KeyAdapter() {
@@ -97,8 +96,8 @@ public class VPrompt implements IVDoc<CPrompt> {
         messageScroller.getViewport().getView().addMouseListener(new MouseAdapter() {
         	@Override 
         	public void mouseEntered(final MouseEvent e) {
-        		if ( sav != null ) {
-			    controller.getMatchUI().setCard(sav.getHostCard());
+        		if ( card != null ) {
+			    controller.getMatchUI().setCard(card);
         		}
         	}
         });

@@ -20,6 +20,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected final int max;
     protected boolean allowCancel = false;
     protected SpellAbility sa = null;
+    protected CardView card;
 
     protected String message = "Source-Card-Name - Select %d more card(s)";
 
@@ -32,9 +33,16 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         this.max = max;
     }
     
-    protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max, final SpellAbility sa) {
+    protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max, final SpellAbility sa0) {
     	this(controller,min,max);
-    	this.sa = sa;
+    	this.sa = sa0;
+	this.card = sa0.getView().getHostCard();
+    }
+
+    protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max, final CardView card0) {
+    	this(controller,min,max);
+    	this.sa = null;
+    	this.card = card0;
     }
 
     protected void refresh() {
@@ -54,11 +62,22 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     @Override
     public final void showMessage() {
         if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
-	     (sa!=null) ) {
-	    showMessage( sa.getStackDescription() + "\n" + getMessage(), sa.getView() ) ;
-	} else {
-	    showMessage(getMessage(), (sa!=null)?sa.getView():null);
-	}
+        		(card!=null) ) {
+        	//	    showMessage( sa.getStackDescription() + "\n" + getMessage(), sa.getView() ) ;
+        	final StringBuilder sb = new StringBuilder();
+        	sb.append(card.toString());
+        	if ( sa != null ) {
+        		sb.append(" - ").append(sa.toString());
+        	}
+        	sb.append("\n\n").append(getMessage());
+        	showMessage(sb.toString(), card);
+        } else {
+        	if (card!=null) { 
+        		showMessage(getMessage(), card);
+        	} else {
+        		showMessage(getMessage());
+        	}
+        }
         getController().getGui().updateButtons(getOwner(), hasEnoughTargets(), allowCancel, true);
     }
 

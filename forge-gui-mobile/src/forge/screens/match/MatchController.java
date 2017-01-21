@@ -157,7 +157,7 @@ public class MatchController extends AbstractGuiGame {
     }
     
     @Override
-    public void showPromptMessage(final PlayerView player, final String message, final SpellAbilityView sav) {
+    public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
         view.getPrompt(player).setMessage(message);
     }
 

@@ -29,7 +29,6 @@ import javax.swing.JButton;
 import forge.FThreads;
 import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.spellability.SpellAbilityView;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.screens.match.CMatchUI;
@@ -105,11 +104,11 @@ public class CPrompt implements ICDoc {
 
     public void setMessage(final String s0) {
         view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
-        view.setSpellAbilityView(null);
+        view.setCardView(null);
     }
-    public void setMessage(final String s0, final SpellAbilityView sav) {
+    public void setMessage(final String s0, final CardView card) {
     	view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
-    	view.setSpellAbilityView(sav);
+    	view.setCardView(card);
     }
 
     /**

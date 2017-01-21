@@ -21,6 +21,7 @@ import java.util.List;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -119,7 +120,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
         controller.getGui().showPromptMessage(getOwner(), message);
     }
     protected final void showMessage(final String message, final SpellAbilityView sav) {
-        controller.getGui().showPromptMessage(getOwner(), message, sav);
+        controller.getGui().showPromptMessage(getOwner(), message, sav.getHostCard());
+    }
+    protected final void showMessage(final String message, final CardView card) {
+        controller.getGui().showPromptMessage(getOwner(), message, card);
     }
 
     protected String getTurnPhasePriorityMessage(final Game game) {

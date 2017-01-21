@@ -110,6 +110,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         }
 
         final CardView cView = c0.getView();
+	//pfps leave this as is for now - it is confirming during another confirm so it might need the popup
         if (isSerumPowder && getController().getGui().confirm(cView, "Use " + cView + "'s ability?")) {
             cardSelectLocked = true;
             ThreadUtil.invokeInGameThread(new Runnable() {

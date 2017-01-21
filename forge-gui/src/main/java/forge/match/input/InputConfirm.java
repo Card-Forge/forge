@@ -18,7 +18,9 @@
 package forge.match.input;
 
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.model.FModel;
@@ -42,38 +44,85 @@ public class InputConfirm extends InputSyncronizedBase {
     private final boolean defaultYes;
     private boolean result;
     private SpellAbility sa;
+    private CardView card;
 
-    public InputConfirm(final PlayerControllerHuman controller, String message0, SpellAbility sa) {
-        this(controller, message0, "Yes", "No", true, sa);
+    public InputConfirm(final PlayerControllerHuman controller, String message0) {
+        this(controller, message0, "Yes", "No", true);
     }
 
-    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, SpellAbility sa) {
-        this(controller, message0, yesButtonText0, noButtonText0, true, sa);
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0) {
+        this(controller, message0, yesButtonText0, noButtonText0, true);
     }
 
-    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0, SpellAbility sa) {
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
         super(controller);
         message = message0;
         yesButtonText = yesButtonText0;
         noButtonText = noButtonText0;
         defaultYes = defaultYes0;
         result = defaultYes0;
-	this.sa = sa ;
+	this.sa = null;
+	this.card = null;
+    }
+
+    public InputConfirm(final PlayerControllerHuman controller, String message0, SpellAbility sa0) {
+        this(controller, message0, "Yes", "No", true, sa0);
+    }
+
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, SpellAbility sa0) {
+        this(controller, message0, yesButtonText0, noButtonText0, true, sa0);
+    }
+
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0, SpellAbility sa0) {
+        super(controller);
+        message = message0;
+        yesButtonText = yesButtonText0;
+        noButtonText = noButtonText0;
+        defaultYes = defaultYes0;
+        result = defaultYes0;
+	this.sa = sa0;
+	this.card = sa.getView().getHostCard();
+    }
+
+    public InputConfirm(final PlayerControllerHuman controller, String message0, CardView card0) {
+        this(controller, message0, "Yes", "No", true, card0);
+    }
+
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, CardView card0) {
+        this(controller, message0, yesButtonText0, noButtonText0, true, card0);
+    }
+
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0, CardView card0) {
+        super(controller);
+        message = message0;
+        yesButtonText = yesButtonText0;
+        noButtonText = noButtonText0;
+        defaultYes = defaultYes0;
+        result = defaultYes0;
+	this.sa = null ;
+	this.card = card0;
     }
 
     /** {@inheritDoc} */
     @Override
     protected final void showMessage() {
         getController().getGui().updateButtons(getOwner(), yesButtonText, noButtonText, true, true, defaultYes);
-
-
-        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)
-                && (sa != null)) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append(sa.getStackDescription()).append("\n").append(message);
-            showMessage(sb.toString(), sa.getView());
+        if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
+        		(card!=null) ) {	
+        	final StringBuilder sb = new StringBuilder();
+        	//was sb.append(sa.getStackDescription()).append("\n").append(message);
+        	sb.append(card.toString());
+        	if ( sa != null ) {
+        		sb.append(" - ").append(sa.toString());
+        	}
+        	sb.append("\n\n").append(message);
+        	showMessage(sb.toString(), card);
         } else {
-            showMessage(message, (sa != null) ? sa.getView() : null);
+        	if ( card!=null ) {
+        		showMessage(message, card);
+        	} else {
+        		showMessage(message);
+        	}
         }
     }
     

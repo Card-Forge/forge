@@ -316,9 +316,15 @@ public class PlayerControllerHuman
     }
 
     private final boolean assignDamageAsIfNotBlocked(final Card attacker) {
-        return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
-                || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                && getGui().confirm(CardView.get(attacker), "Do you want to assign its combat damage as though it weren't blocked?"));
+	if ( attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.") || 
+	     attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.") ) {
+	    // return getGui().confirm(CardView.get(attacker), "Do you want to assign its combat damage as though it weren't blocked?");
+	    final InputConfirm inp = new InputConfirm(this, "Do you want to assign its combat damage as though it weren't blocked?", CardView.get(attacker));
+	    inp.showAndWait();
+	    return inp.getResult();
+	} else {
+	    return false;
+	}
     }
 
     @Override
@@ -488,18 +494,27 @@ public class PlayerControllerHuman
      */
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message) {
-        return getGui().confirm(CardView.get(sa.getHostCard()), message);
+        // return getGui().confirm(CardView.get(sa.getHostCard()), message);
+        final InputConfirm inp = new InputConfirm(this, message, sa);
+        inp.showAndWait();
+        return inp.getResult();
     }
 
     @Override
     public boolean confirmBidAction(final SpellAbility sa, final PlayerActionConfirmMode bidlife,
             final String string, final int bid, final Player winner) {
-        return getGui().confirm(CardView.get(sa.getHostCard()), string + " Highest Bidder " + winner);
+        // return getGui().confirm(CardView.get(sa.getHostCard()), string + " Highest Bidder " + winner);
+        final InputConfirm inp = new InputConfirm(this, string + " Highest Bidder " + winner, sa);
+        inp.showAndWait();
+        return inp.getResult();
     }
 
     @Override
     public boolean confirmStaticApplication(final Card hostCard, final GameEntity affected, final String logic, final String message) {
-        return getGui().confirm(CardView.get(hostCard), message);
+        // return getGui().confirm(CardView.get(hostCard), message);
+        final InputConfirm inp = new InputConfirm(this, message, hostCard.getView());
+        inp.showAndWait();
+        return inp.getResult();
     }
 
     @Override
@@ -518,11 +533,11 @@ public class PlayerControllerHuman
             return true;
         }
 
-        final StringBuilder buildQuestion = new StringBuilder("<b>Use triggered ability of ");
-        buildQuestion.append(regtrig.getHostCard().toString()).append("?</b>");
+        final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
+        buildQuestion.append(regtrig.getHostCard().toString()).append("?");
         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_PROMPT) &&
             !FModel.getPreferences().getPrefBoolean(FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) ) {
-            //append trigger description unless prompt is compact
+            //append trigger description unless prompt is compact or detailed descriptions are on
             buildQuestion.append("\n(");
             buildQuestion.append(triggerParams.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
             buildQuestion.append(")");
@@ -539,7 +554,6 @@ public class PlayerControllerHuman
             }
         }
 
-	// pfps: trigger is on stack so do we really need to put it in the prompt area?
         final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(), wrapper);
         inp.showAndWait();
         return inp.getResult();
@@ -550,7 +564,7 @@ public class PlayerControllerHuman
         if (game.getPlayers().size() == 2) {
             final String prompt = String.format("%s, you %s\n\nWould you like to play or draw?",
                     player.getName(), isFirstGame ? " have won the coin toss." : " lost the last game.");
-            final InputConfirm inp = new InputConfirm(this, prompt, "Play", "Draw", null);
+            final InputConfirm inp = new InputConfirm(this, prompt, "Play", "Draw");
             inp.showAndWait();
             return inp.getResult() ? this.player : this.player.getOpponents().get(0);
         }
@@ -644,7 +658,10 @@ public class PlayerControllerHuman
         final CardView view = CardView.get(c);
 
         tempShowCard(c);
-        final boolean result = getGui().confirm(view, String.format("Put %s on the top or bottom of your library?", view), ImmutableList.of("Top", "Bottom"));
+        // final boolean result = getGui().confirm(view, String.format("Put %s on the top or bottom of your library?", view), ImmutableList.of("Top", "Bottom"));
+        final InputConfirm inp = new InputConfirm(this, String.format("Put %s on the top or bottom of your library?", view), "Top", "Bottom", true, view);
+        inp.showAndWait();
+	final boolean result = inp.getResult();
         endTempShowCards();
 
         return result;
@@ -845,7 +862,9 @@ public class PlayerControllerHuman
      */
     @Override
     public boolean confirmReplacementEffect(final ReplacementEffect replacementEffect, final SpellAbility effectSA, final String question) {
-        return getGui().confirm(CardView.get(replacementEffect.getHostCard()), question);
+	final InputConfirm inp = new InputConfirm(this, question, effectSA);
+        inp.showAndWait();
+        return inp.getResult();
     }
 
     @Override
@@ -1008,9 +1027,13 @@ public class PlayerControllerHuman
             case UntapOrLeaveTapped: labels = ImmutableList.of("Untap",                      "Leave tapped"); break;
             case UntapTimeVault:     labels = ImmutableList.of("Untap (and skip this turn)", "Leave tapped"); break;
             case PlayOrDraw:         labels = ImmutableList.of("Play",                       "Draw");         break;
+            case LeftOrRight:        labels = ImmutableList.of("Left",                       "Right");        break;
             default:                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
-        return getGui().confirm(CardView.get(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
+        // return getGui().confirm(CardView.get(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
+	final InputConfirm inp = new InputConfirm(this, question, labels.get(0), labels.get(1), defaultVal == null || defaultVal.booleanValue(), sa);
+	inp.showAndWait();
+	return inp.getResult();
     }
 
     @Override
@@ -1141,7 +1164,11 @@ public class PlayerControllerHuman
         if (colorNames.size() > 2) {
             return MagicColor.fromName(getGui().one(message, colorNames));
         }
-        final int idxChosen = getGui().confirm(CardView.get(c), message, colorNames) ? 0 : 1;
+	//final boolean confirmed = getGui().confirm(CardView.get(c), message, colorNames) ;
+	final InputConfirm inp = new InputConfirm(this, message, colorNames.get(0), colorNames.get(1), CardView.get(c));
+	inp.showAndWait();
+	final boolean confirmed = inp.getResult();
+        final int idxChosen = confirmed ? 0 : 1;
         return MagicColor.fromName(colorNames.get(idxChosen));
     }
 
