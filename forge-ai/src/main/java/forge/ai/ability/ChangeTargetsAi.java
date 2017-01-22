@@ -62,6 +62,10 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             // don't try targeting it if we can't legally target the host card with it in the first place
             return false;
         }
+        if (!sa.canTarget(topSa)) {
+            // don't try retargeting a spell that the current card can't legally retarget (e.g. Muck Drubb + Lightning Bolt to the face)
+            return false;
+        }
         
         if (sa.getPayCosts().getCostMana() != null && sa.getPayCosts().getCostMana().getMana().hasPhyrexian()) {
             ManaCost manaCost = sa.getPayCosts().getCostMana().getMana();
