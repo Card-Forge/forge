@@ -52,6 +52,8 @@ Currently Improvise is implemented as a "clone" of Convoke keyword, which does n
 
 Champion of Lambholt implementation needs to be improved, currently it will not work correctly with several Champions of Lambholt present on the battlefield, and may have other unwanted caveats.
 
+Spellskite apparently does not work correctly if attempting to retarget more than one spell ability from the same source sequentially (for example, from Cone of Flame). It will allow the player to pick the exact spell ability from a list (which is confusing because it'll typically list the same text several times), but trying to pick different abilities in sequential activations still amounts to only one of the spell abilities being retargeted on resolution.
+
 Replacement effects that happen when a card moves from zone to zone (e.g. ETB replacement effect of Essence of the Wild; Kalitas, Traitor of Ghet replacement effect for a dying creature) need some rework to allow all of them to work in a rule-exact way without the need for special exclusions and hacks (see ReplacementHandler.java:120).
 
 There is a known issue that allows Qasali Ambusher to be cast from any zone for its ambush ability (requires MayPlay update to be fixed). For now, a temporary measure was set up to prevent the AI from abusing this issue, but it is up to the human player to deliberately choose not to abuse this when possible.
