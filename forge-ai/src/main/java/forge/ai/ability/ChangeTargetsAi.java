@@ -6,6 +6,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -26,10 +27,8 @@ public class ChangeTargetsAi extends SpellAbilityAi {
         final Game game = sa.getHostCard().getGame();
         final SpellAbility topSa = game.getStack().isEmpty() ? null : ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
 
-        if (sa.hasParam("AILogic")) {
-            if ("SpellMagnet".equals(sa.getParam("AILogic"))) {
-                return doSpellMagnet(sa, topSa, aiPlayer);
-            }
+        if ("Self".equals(sa.getParam("DefinedMagnet"))) {
+            return doSpellMagnet(sa, topSa, aiPlayer);
         }
 
         // The AI can't otherwise play this ability, but should at least not miss mandatory activations (e.g. triggers).
@@ -41,10 +40,8 @@ public class ChangeTargetsAi extends SpellAbilityAi {
         final Game game = sa.getHostCard().getGame();
         final SpellAbility topSa = game.getStack().isEmpty() ? null : ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
 
-        if (sa.hasParam("AILogic")) {
-            if ("SpellMagnet".equals(sa.getParam("AILogic"))) {
-                return doSpellMagnet(sa, topSa, aiPlayer);
-            }
+        if ("Self".equals(sa.getParam("DefinedMagnet"))) {
+            return doSpellMagnet(sa, topSa, aiPlayer);
         }
 
         return true;
@@ -64,8 +61,18 @@ public class ChangeTargetsAi extends SpellAbilityAi {
 
         if (!topSa.usesTargeting() || topSa.getTargets().getTargetCards().contains(sa.getHostCard())) {
             // if this does not target at all or already targets host, no need to redirect it again
+
+            // TODO: currently the AI does not know how to change several targets to the same object (e.g.
+            // Cone Flame) and will stupidly keep retargeting the first available target unless stopped here.
+            // Needs investigation and improvement.
             return false;
         }
+        if (topSa.getTargets().getNumTargeted() > 1 && topSa.hasParam("DividedAsYouChoose")) {
+            // TODO: currently the AI will crash the game if it tries to change the target of a SA with a
+            // divided allocation map. May need improvement.
+            return false;
+        }
+
         if (topSa.getHostCard() != null && !topSa.getHostCard().getController().isOpponentOf(aiPlayer)) {
             // make sure not to redirect our own abilities
             return false;
@@ -74,8 +81,9 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             // don't try targeting it if we can't legally target the host card with it in the first place
             return false;
         }
-
-        if ("Spellskite".equals(sa.getHostCard().getName())) {
+        
+        if (sa.getPayCosts().getCostMana() != null && "{P/U}".equals(sa.getPayCosts().getCostMana().getMana().getShortString())) {
+            // e.g. Spellskite or a creature receiving its ability that requires Phyrexian mana P/U
             int potentialDmg = ComputerUtil.predictDamageFromSpell(topSa, aiPlayer);
             boolean canPayBlue = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(new ManaCost(new ManaCostParser("U"))), sa, aiPlayer);
             if (potentialDmg != -1 && potentialDmg <= 2 && !canPayBlue && topSa.getTargets().getTargets().contains(aiPlayer)) {
