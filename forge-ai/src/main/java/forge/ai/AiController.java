@@ -788,10 +788,13 @@ public class AiController {
 
             if (ApiType.DestroyAll == sa.getApi()) {
                 p += 4;
+            } else if (ApiType.Mana == sa.getApi()) {
+                p -= 9;
             }
 
-            else if (ApiType.Mana == sa.getApi()) {
-                p -= 9;
+            // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
+            if (source.hasKeyword("Storm")) {
+                p -= (((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
             }
 
             return p;
@@ -1091,6 +1094,16 @@ public class AiController {
             if (skipCounter && sa.getApi() == ApiType.Counter) {
                 continue;
             }
+
+            if (sa.getHostCard().hasKeyword("Storm") 
+                    && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
+                    && CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm")))).size() > 0) {
+                if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
+                    // skip evaluating Storm unless we reached the minimum Storm count
+                    continue;
+                }
+            }
+
             sa.setActivatingPlayer(player);
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());

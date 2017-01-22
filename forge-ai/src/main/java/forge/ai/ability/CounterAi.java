@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.AiController;
 import forge.ai.AiProps;
 import forge.ai.ComputerUtilAbility;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
@@ -19,6 +21,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -31,6 +34,7 @@ public class CounterAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         int tgtCMC = 0;
+        SpellAbility tgtSA = null;
 
         if (game.getStack().isEmpty()) {
             return false;
@@ -74,6 +78,7 @@ public class CounterAi extends SpellAbilityAi {
             if (sa.canTargetSpellAbility(topSA)) {
                 sa.getTargets().add(topSA);
                 if (topSA.getPayCosts().getTotalMana() != null) {
+                    tgtSA = topSA;
                     tgtCMC = topSA.getPayCosts().getTotalMana().getCMC();
                     tgtCMC += topSA.getPayCosts().getTotalMana().countX() > 0 ? 3 : 0; // TODO: somehow determine the value of X paid and account for it?
                 }
@@ -134,9 +139,41 @@ public class CounterAi extends SpellAbilityAi {
             }
         }
 
-        // if minimum CMC to use counterspells against is specified in the AI profile, obey it
-        if (tgtCMC < ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.MIN_SPELL_CMC_TO_COUNTER)) {
-            return false;
+        // Specific constraints for the AI to use/not use counterspells against specific groups of spells
+        // (specified in the AI profile)
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        boolean ctrCmc0ManaPerms = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_CMC_0_MANA_MAKING_PERMS);
+        boolean ctrDamageSpells = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_DAMAGE_SPELLS);
+        boolean ctrRemovalSpells = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_REMOVAL_SPELLS);
+        boolean ctrOtherCounters = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_OTHER_COUNTERSPELLS);
+        String ctrNamed = aic.getProperty(AiProps.ALWAYS_COUNTER_SPELLS_FROM_NAMED_CARDS);
+        if (tgtSA != null && tgtCMC < aic.getIntProperty(AiProps.MIN_SPELL_CMC_TO_COUNTER)) {
+            boolean dontCounter = true;
+            Card tgtSource = tgtSA.getHostCard();
+            if ((tgtSource != null && tgtCMC == 0 && tgtSource.isPermanent() && !tgtSource.getManaAbilities().isEmpty() && ctrCmc0ManaPerms)
+                    || (tgtSA.getApi() == ApiType.DealDamage || tgtSA.getApi() == ApiType.LoseLife || tgtSA.getApi() == ApiType.DamageAll && ctrDamageSpells)
+                    || (tgtSA.getApi() == ApiType.Counter && ctrOtherCounters)
+                    || (tgtSA.getApi() == ApiType.Destroy || tgtSA.getApi() == ApiType.DestroyAll || tgtSA.getApi() == ApiType.Sacrifice
+                       || tgtSA.getApi() == ApiType.SacrificeAll && ctrRemovalSpells)) {
+                dontCounter = false;
+            }
+
+            if (tgtSource != null && !ctrNamed.isEmpty() && !"none".equalsIgnoreCase(ctrNamed)) {
+                for (String name : StringUtils.split(ctrNamed, ";")) {
+                    if (name.equals(tgtSource.getName())) {
+                        dontCounter = false;
+                    }
+                }
+            }
+                
+            // should always counter CMC 1 with Mental Misstep despite a possible limitation by minimum CMC
+            if (tgtCMC == 1 && "Mental Misstep".equals(source.getName())) {
+                dontCounter = false;
+            }
+
+            if (dontCounter) {
+                return false;
+            }
         }
         
         return toReturn;

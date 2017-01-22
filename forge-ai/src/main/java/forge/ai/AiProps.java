@@ -35,8 +35,15 @@ public enum AiProps { /** */
     PREDICT_SPELLS_FOR_MAIN2 ("true"), /** */
     RESERVE_MANA_FOR_MAIN2_CHANCE ("0"), /** */
     PLAY_AGGRO ("false"), /** */
-    MIN_SPELL_CMC_TO_COUNTER ("0"), /** */
-    ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS ("false"); /** */
+    MIN_SPELL_CMC_TO_COUNTER ("0"),
+    ALWAYS_COUNTER_OTHER_COUNTERSPELLS ("true"), /** */
+    ALWAYS_COUNTER_DAMAGE_SPELLS ("true"), /** */
+    ALWAYS_COUNTER_CMC_0_MANA_MAKING_PERMS ("true"), /** */
+    ALWAYS_COUNTER_REMOVAL_SPELLS ("true"), /** */
+    ALWAYS_COUNTER_SPELLS_FROM_NAMED_CARDS (""), /** */
+    ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS ("false"), /** */
+    PRIORITY_REDUCTION_FOR_STORM_SPELLS ("0"), /** */
+    MIN_COUNT_FOR_STORM_SPELLS ("0"); /** */
 
     private final String strDefaultVal;
 
