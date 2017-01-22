@@ -83,11 +83,9 @@ public class CostPayEnergy extends CostPart {
             if (!sVar.startsWith("XChoice")) {
                 amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
             }
-        } else {
-            return activator.getCounters(CounterType.ENERGY) >= amount;
         }
 
-        return true;
+        return activator.getCounters(CounterType.ENERGY) >= amount;
     }
 
     @Override
