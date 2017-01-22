@@ -53,11 +53,6 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             // Needs investigation and improvement.
             return false;
         }
-        if (topSa.hasParam("DividedAsYouChoose")) {
-            // TODO: currently the AI will crash the game if it tries to change the target of a SA with a
-            // divided allocation map. May need improvement.
-            return false;
-        }
 
         if (topSa.getHostCard() != null && !topSa.getHostCard().getController().isOpponentOf(aiPlayer)) {
             // make sure not to redirect our own abilities

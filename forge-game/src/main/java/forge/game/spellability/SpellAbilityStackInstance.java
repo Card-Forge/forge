@@ -293,6 +293,33 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             view.updateTargetPlayers(this);
             view.updateText(this);
 
+            if (ability.hasParam("DividedAsYouChoose")) {
+                // try to update DividedAsYouChoose after retargeting
+                Object toRemove = null;
+                Object toAdd = null;
+                HashMap<Object,Integer> map = ability.getTargetRestrictions().getDividedMap();
+                // detect which target has changed
+                for (Object obj : map.keySet()) {
+                    if (!target.getTargets().contains(obj)) {
+                        toRemove = obj;
+                        break;
+                    }
+                }
+                // detect a new target
+                for (Object newTgts : target.getTargets()) {
+                    if (!map.containsKey(newTgts)) {
+                        toAdd = newTgts;
+                        break;
+                    }
+                }
+
+                if (toRemove != null && toAdd != null) {
+                    int div = map.get(toRemove);
+                    map.remove(toRemove);
+                    ability.getTargetRestrictions().addDividedAllocation(toAdd, div);
+                }
+            }
+            
             // Run BecomesTargetTrigger
             Map<String, Object> runParams = new HashMap<>();
             runParams.put("SourceSA", ability);
