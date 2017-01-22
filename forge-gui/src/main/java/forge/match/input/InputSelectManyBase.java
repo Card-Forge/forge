@@ -64,21 +64,20 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     @Override
     public final void showMessage() {
         if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
-        		(card!=null) ) {
-        	//	    showMessage( sa.getStackDescription() + "\n" + getMessage(), sa.getView() ) ;
-        	final StringBuilder sb = new StringBuilder();
-        	sb.append(card.toString());
-        	if ( (sa != null) && (!sa.toString().isEmpty()) ) { // apparently some spell abilities have no useful string value
-        		sb.append(" - ").append(sa.toString());
-        	}
-        	sb.append("\n\n").append(getMessage());
-        	showMessage(sb.toString(), card);
+             (card!=null) ) {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.toString());
+            if ( (sa != null) && (!sa.toString().isEmpty()) ) { // some spell abilities have no useful string value
+                sb.append(" - ").append(sa.toString());
+            }
+            sb.append("\n\n").append(getMessage());
+            showMessage(sb.toString(), card);
         } else {
-        	if (card!=null) { 
-        		showMessage(getMessage(), card);
-        	} else {
-        		showMessage(getMessage());
-        	}
+            if (card!=null) { 
+                showMessage(getMessage(), card);
+            } else {
+                showMessage(getMessage());
+            }
         }
         getController().getGui().updateButtons(getOwner(), hasEnoughTargets(), allowCancel, true);
     }

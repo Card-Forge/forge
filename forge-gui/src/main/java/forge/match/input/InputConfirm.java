@@ -108,21 +108,20 @@ public class InputConfirm extends InputSyncronizedBase {
     protected final void showMessage() {
         getController().getGui().updateButtons(getOwner(), yesButtonText, noButtonText, true, true, defaultYes);
         if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
-        		(card!=null) ) {	
-        	final StringBuilder sb = new StringBuilder();
-        	//was sb.append(sa.getStackDescription()).append("\n").append(message);
-        	sb.append(card.toString());
-        	if ( sa != null ) {
-        		sb.append(" - ").append(sa.toString());
-        	}
-        	sb.append("\n\n").append(message);
-        	showMessage(sb.toString(), card);
+             (card!=null) ) {	
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.toString());
+            if ( (sa != null) && (sa.toString().length()>1) ) { // some spell abilities have no useful string value
+                sb.append(" - ").append(sa.toString());
+            }
+            sb.append("\n\n").append(message);
+            showMessage(sb.toString(), card);
         } else {
-        	if ( card!=null ) {
-        		showMessage(message, card);
-        	} else {
-        		showMessage(message);
-        	}
+            if ( card!=null ) {
+                showMessage(message, card);
+            } else {
+                showMessage(message);
+            }
         }
     }
     
