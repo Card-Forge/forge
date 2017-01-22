@@ -5,8 +5,6 @@ import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
-import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -17,34 +15,22 @@ public class ChangeTargetsAi extends SpellAbilityAi {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI
-     * (forge.game.player.Player, java.util.Map,
-     * forge.card.spellability.SpellAbility)
+     * @see forge.ai.SpellAbilityAi#checkApiLogic(forge.game.player.Player,
+     * forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Game game = sa.getHostCard().getGame();
-        final SpellAbility topSa = game.getStack().isEmpty() ? null : ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
+        final SpellAbility topSa = game.getStack().isEmpty() ? null
+                : ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
 
         if ("Self".equals(sa.getParam("DefinedMagnet"))) {
-            return doSpellMagnet(sa, topSa, aiPlayer);
+            return doSpellMagnet(sa, topSa, ai);
         }
 
-        // The AI can't otherwise play this ability, but should at least not miss mandatory activations (e.g. triggers).
+        // The AI can't otherwise play this ability, but should at least not
+        // miss mandatory activations (e.g. triggers).
         return sa.isMandatory();
-    }
-
-    @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        final Game game = sa.getHostCard().getGame();
-        final SpellAbility topSa = game.getStack().isEmpty() ? null : ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
-
-        if ("Self".equals(sa.getParam("DefinedMagnet"))) {
-            return doSpellMagnet(sa, topSa, aiPlayer);
-        }
-
-        return true;
     }
 
     private boolean doSpellMagnet(SpellAbility sa, SpellAbility topSa, Player aiPlayer) {
@@ -82,11 +68,15 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             return false;
         }
         
-        if (sa.getPayCosts().getCostMana() != null && sa.getPayCosts().getCostMana().getMana().getShardCount(ManaCostShard.PU) > 0) {
+        if (sa.getPayCosts().getCostMana() != null && sa.getPayCosts().getCostMana().getMana().hasPhyrexian()) {
+            ManaCost manaCost = sa.getPayCosts().getCostMana().getMana();
+            int payDamage = manaCost.getPhyrexianCount() * 2;
             // e.g. Spellskite or a creature receiving its ability that requires Phyrexian mana P/U
             int potentialDmg = ComputerUtil.predictDamageFromSpell(topSa, aiPlayer);
-            boolean canPayBlue = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(new ManaCost(new ManaCostParser("U"))), sa, aiPlayer);
-            if (potentialDmg != -1 && potentialDmg <= 2 && !canPayBlue && topSa.getTargets().getTargets().contains(aiPlayer)) {
+            ManaCost normalizedMana = manaCost.getNormalizedMana();
+            boolean canPay = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(normalizedMana), sa, aiPlayer);
+            if (potentialDmg != -1 && potentialDmg <= payDamage && !canPay
+                    && topSa.getTargets().getTargets().contains(aiPlayer)) {
                 // do not pay Phyrexian mana if the spell is a damaging one but it deals less damage or the same damage as we'll pay life
                 return false;
             }
