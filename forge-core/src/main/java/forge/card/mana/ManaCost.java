@@ -18,12 +18,13 @@
 package forge.card.mana;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Lists;
 
 /**
  * <p>
@@ -34,7 +35,7 @@ import org.apache.commons.lang3.StringUtils;
  * @version $Id: CardManaCost.java 9708 2011-08-09 19:34:12Z jendave $
  */
 
-public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostShard>, Serializable {
+public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostShard>, Serializable, Cloneable {
     private static final long serialVersionUID = -2477430496624149226L;
 
     private static final char DELIM = (char)6;
@@ -68,7 +69,13 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
     private ManaCost(int cmc) {
         this.hasNoCost = cmc < 0;
         this.genericCost = cmc < 0 ? 0 : cmc;
-        sealClass(new ArrayList<ManaCostShard>());
+        sealClass(Lists.<ManaCostShard>newArrayList());
+    }
+    
+    private ManaCost(int cmc, List<ManaCostShard> shards0) {
+        this.hasNoCost = cmc < 0;
+        this.genericCost = cmc < 0 ? 0 : cmc;
+        sealClass(shards0);
     }
 
     private void sealClass(List<ManaCostShard> shards0) {
@@ -84,7 +91,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      *            the parser
      */
     public ManaCost(final IParserManaCost parser) {
-        final List<ManaCostShard> shardsTemp = new ArrayList<ManaCostShard>();
+        final List<ManaCostShard> shardsTemp = Lists.newArrayList();
         this.hasNoCost = false;
         while (parser.hasNext()) {
             final ManaCostShard shard = parser.next();
@@ -251,7 +258,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
     public static ManaCost deserialize(String value) {
         String[] pieces = StringUtils.split(value, DELIM);
         ManaCost mc = new ManaCost(Integer.parseInt(pieces[0]));
-        List<ManaCostShard> sh = new ArrayList<ManaCostShard>();
+        List<ManaCostShard> sh = Lists.newArrayList();
         for (int i = 1; i < pieces.length; i++) {
             sh.add(ManaCostShard.valueOf(pieces[i]));
         }
@@ -298,6 +305,29 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         }
         return false;
     }
+    
+    public int getPhyrexianCount() {
+        int i = 0;
+        for (ManaCostShard shard : shards) {
+            if (shard.isPhyrexian()) {
+                i++;
+            }
+        }
+        return i;
+    }
+    
+    /**
+     * works for Phyrexian Mana and 2Half mana, not for Hybrid mana
+     * @return
+     */
+    public ManaCost getNormalizedMana() {
+        List<ManaCostShard> list = Lists.newArrayList();
+        for (ManaCostShard shard : shards) {
+            list.add(ManaCostShard.valueOf(shard.getColorMask()));
+        }
+        
+        return new ManaCost(this.genericCost, list);
+    }
 
     /**
      * TODO: Write javadoc for this method.
@@ -335,7 +365,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      */
     public static ManaCost combine(ManaCost a, ManaCost b) {
         ManaCost res = new ManaCost(a.genericCost + b.genericCost);
-        List<ManaCostShard> sh = new ArrayList<ManaCostShard>();
+        List<ManaCostShard> sh = Lists.newArrayList();
         sh.addAll(a.shards);
         sh.addAll(b.shards);
         res.sealClass(sh);
