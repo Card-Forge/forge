@@ -6,7 +6,6 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
