@@ -663,7 +663,8 @@ public class AbilityUtils {
             }
         }
         else if (calcX[0].startsWith("Triggered")) {
-            list = getDefinedCards(card, calcX[0], sa);
+            final SpellAbility root = sa.getRootAbility();
+            list = new CardCollection((Card) root.getTriggeringObject(calcX[0].substring(9)));
         }
         else if (calcX[0].startsWith("TriggerCount")) {
             // TriggerCount is similar to a regular Count, but just
