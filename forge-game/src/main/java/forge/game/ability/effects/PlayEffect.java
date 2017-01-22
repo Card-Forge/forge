@@ -55,7 +55,6 @@ public class PlayEffect extends SpellAbilityEffect {
         final Game game = activator.getGame();
         final boolean optional = sa.hasParam("Optional");
         boolean remember = sa.hasParam("RememberPlayed");
-        boolean useEncoded = false;
         int amount = 1;
         if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
             amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
@@ -79,7 +78,6 @@ public class PlayEffect extends SpellAbilityEffect {
             final CardCollectionView encodedCards = source.getEncodedCards();
             final int encodedIndex = Integer.parseInt(sa.getParam("Encoded")) - 1;
             tgtCards = new CardCollection(encodedCards.get(encodedIndex));
-            useEncoded = true;
         }
         else if (sa.hasParam("AnySupportedCard")) {
             List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
@@ -177,10 +175,6 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtCard.setZone(zone);
                 if (zone != null) {
                     zone.add(tgtCard);
-                }
-
-                if (useEncoded) {
-                    tgtCard.setSVar("IsEncoded", "Number$1");
                 }
             }
 
