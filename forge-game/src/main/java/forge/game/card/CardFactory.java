@@ -387,10 +387,9 @@ public class CardFactory {
                 + " | ValidTarget$ You | Optional$ True | OptionalDecider$ Opponent | ReplaceWith$ ChooseDmgPW | Secondary$ True"
                 + " | AICheckSVar$ DamagePWAI | AISVarCompare$ GT4 | Description$ Redirect damage to " + card.toString();
         state.addReplacementEffect(ReplacementHandler.parseReplacement(replacement, card, true));
-        state.setSVar("ChooseDmgPW", "AB$ ChooseCard | Cost$ 0 | Defined$ ReplacedSourceController | Choices$ Planeswalker.YouCtrl" +
+        state.setSVar("ChooseDmgPW", "AB$ ChooseCard | Cost$ 0 | Defined$ ReplacedSourceController | References$ DamagePWAI | Choices$ Planeswalker.YouCtrl" +
         		" | ChoiceZone$ Battlefield | Mandatory$ True | SubAbility$ DamagePW | ChoiceTitle$ Choose a planeswalker to redirect damage");
-        state.setSVar("DamagePW", "DB$ DealDamage | Defined$ ChosenCard | NumDmg$ DamagePWX | DamageSource$ ReplacedSource | References$ DamagePWX,DamagePWAI");
-        state.setSVar("DamagePWX", "ReplaceCount$DamageAmount");
+        state.setSVar("DamagePW", "DB$ ReplaceEffect | VarName$ Affected | VarValue$ ChosenCard | VarType$ Card");
         state.setSVar("DamagePWAI", "ReplaceCount$DamageAmount/NMinus.DamagePWY");
         state.setSVar("DamagePWY", "Count$YourLifeTotal");
     }
