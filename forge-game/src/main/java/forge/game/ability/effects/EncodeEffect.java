@@ -15,6 +15,10 @@ import forge.game.zone.ZoneType;
 public class EncodeEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
+        if (sa.getHostCard().isToken()) {
+            return "";
+        }
+        
         final StringBuilder sb = new StringBuilder();
 
         sb.append(sa.getActivatingPlayer());
@@ -29,6 +33,10 @@ public class EncodeEffect extends SpellAbilityEffect {
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
 
+        if (host.isToken()) {
+            return;
+        }
+        
         // make list of creatures that controller has on Battlefield
         CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
         choices = CardLists.getValidCards(choices, "Creature.YouCtrl", host.getController(), host);
