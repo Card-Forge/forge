@@ -45,8 +45,8 @@ public class Main {
         // Can be specified inside the file fullscreen_resolution.ini to override default (in the format WxH, e.g. 1920x1080)
         int fullscreenWidth = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
         int fullscreenHeight = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
-        if (FileUtil.doesFileExist(assetsDir + "fullscreen_resolution.ini")) {
-            String[] res = new String(FileUtil.readFileToString(assetsDir + "fullscreen_resolution.ini")).split("x");
+        if (FileUtil.doesFileExist(desktopModeAssetsDir + "fullscreen_resolution.ini")) {
+            String[] res = FileUtil.readFileToString(desktopModeAssetsDir + "fullscreen_resolution.ini").split("x");
             if (res.length == 2) {
                 fullscreenWidth = Integer.parseInt(res[0].trim());
                 fullscreenHeight = Integer.parseInt(res[1].trim());
