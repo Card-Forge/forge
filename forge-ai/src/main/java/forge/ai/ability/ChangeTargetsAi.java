@@ -6,6 +6,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -81,7 +82,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             return false;
         }
         
-        if (sa.getPayCosts().getCostMana() != null && "{P/U}".equals(sa.getPayCosts().getCostMana().getMana().getShortString())) {
+        if (sa.getPayCosts().getCostMana() != null && sa.getPayCosts().getCostMana().getMana().getShardCount(ManaCostShard.PU) > 0) {
             // e.g. Spellskite or a creature receiving its ability that requires Phyrexian mana P/U
             int potentialDmg = ComputerUtil.predictDamageFromSpell(topSa, aiPlayer);
             boolean canPayBlue = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(new ManaCost(new ManaCostParser("U"))), sa, aiPlayer);
