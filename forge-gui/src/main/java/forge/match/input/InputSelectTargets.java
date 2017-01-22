@@ -52,11 +52,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         final StringBuilder sb = new StringBuilder();
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
             // sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n").append(tgt.getVTSelection());
-            if (sa.isAbility()) {
-                sb.append(sa.getHostCard()).append(" - ");
-            }
             // Apparently <b>...</b> tags do not work in mobile Forge, so don't include them (for now)
-            sb.append(sa.toString().replace("(Targeting ERROR)", "")).append("\n\n").append(tgt.getVTSelection());
+            sb.append(sa.getHostCard().toString()).append(" - ");
+            sb.append(sa.toString()).append("\n\n").append(tgt.getVTSelection());
         } else {
             sb.append(sa.getHostCard()).append(" - ").append(tgt.getVTSelection());
         }
