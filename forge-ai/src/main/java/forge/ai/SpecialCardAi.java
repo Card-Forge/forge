@@ -182,7 +182,7 @@ public class SpecialCardAi {
         
     // Dark Ritual and other similar instants/sorceries that add mana to mana pool
     public static class DarkRitualOrSimilar {
-        public static boolean consider(Player ai, SpellAbility sa) {
+        public static boolean consider(final Player ai, SpellAbility sa) {
             PhaseHandler ph = ai.getGame().getPhaseHandler();
 
             if (!(ph.getPlayerTurn().equals(ai) && ph.is(PhaseType.MAIN2))) {
@@ -206,12 +206,25 @@ public class SpecialCardAi {
 
             String restrictValid = sa.hasParam("RestrictValid") ? sa.getParam("RestrictValid") : "Card";
 
-            int numPerms = CardLists.filter(ai.getCardsIn(ZoneType.Hand), 
+            CardCollection castablePerms = CardLists.filter(ai.getCardsIn(ZoneType.Hand), 
                     Predicates.and(CardPredicates.Presets.NONLAND_PERMANENTS, CardPredicates.restriction(restrictValid.split(","), ai, sa.getHostCard(), sa),
-                            CardPredicates.lessCMC(searchCMC), Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor)))).size();
+                            CardPredicates.lessCMC(searchCMC), Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
+
+            // make sure we don't try for a legendary permanent we already have
+            castablePerms = CardLists.filter(castablePerms, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    if (c.getType().isLegendary()) {
+                        if (ai.isCardInPlay(c.getName())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            });
 
             // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
-            return numPerms > 0;
+            return castablePerms.size() > 0;
         }
     }
     
