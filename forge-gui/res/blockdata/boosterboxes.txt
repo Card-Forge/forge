@@ -78,6 +78,7 @@ DGM: 36 Boosters
 MMA: 24 Boosters
 M14: 36 Boosters
 THS: 36 Boosters
+CNS: 36 Boosters
 BNG: 36 Boosters
 JOU: 36 Boosters
 M15: 36 Boosters
@@ -90,5 +91,6 @@ BFZ: 36 Boosters
 OGW: 36 Boosters
 SOI: 36 Boosters
 EMN: 36 Boosters
+CN2: 36 Boosters
 KLD: 36 Boosters
 AER: 36 Boosters
