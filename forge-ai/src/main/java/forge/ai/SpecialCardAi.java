@@ -67,11 +67,13 @@ import forge.util.Aggregates;
  */
 public class SpecialCardAi {
 
-    // Birthing Pod
+    // Birthing Pod, Natural Order, possibly can be expanded other similar cards
     public static class BirthingPod {
         public static boolean consider(final Player ai, SpellAbility sa) {
             Card source = sa.getHostCard();
             PhaseHandler ph = ai.getGame().getPhaseHandler();
+            boolean sacWorst = sa.getParam("AILogic").contains("SacWorst");
+            boolean anyCMC = sa.getParam("AILogic").contains("AnyCMCGoal");
             
             if (!ph.is(PhaseType.MAIN2)) {
                 // Should be given a chance to cast other spells as well as to use a previously upgraded creature
@@ -79,14 +81,20 @@ public class SpecialCardAi {
             }
 
             CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-            listToSac.sort(CardLists.CmcComparatorInv); // try to upgrade best creatures first
+            listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
             
             for (Card sacCandidate : listToSac) {
                 int sacCMC = sacCandidate.getCMC();
                 int goalCMC = sacCMC + 1;
 
                 CardCollection listGoal = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
-                listGoal = CardLists.getValidCards(listGoal, "Creature.cmcEQ" + goalCMC, source.getController(), source);
+                if (!anyCMC) {
+                    // e.g. Birthing Pod - ensure we have a valid card to upgrade to
+                    listGoal = CardLists.getValidCards(listGoal, "Creature.cmcEQ" + goalCMC, source.getController(), source);
+                } else {
+                    // e.g. Natural Order - ensure we're upgrading to something better
+                    listGoal = CardLists.getValidCards(listGoal, "Creature.cmcGE" + goalCMC, source.getController(), source);
+                }
                 listGoal = CardLists.filter(listGoal, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
