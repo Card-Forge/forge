@@ -69,12 +69,12 @@ import org.apache.commons.lang3.StringUtils;
 public class SpecialCardAi {
 
     // Birthing Pod, Natural Order, possibly can be expanded for other similar cards
-    public static class BirthingPod {
+    public static class BirthingPodOrSimilar {
         public static boolean consider(final Player ai, SpellAbility sa) {
             Card source = sa.getHostCard();
             PhaseHandler ph = ai.getGame().getPhaseHandler();
             boolean sacWorst = sa.getParam("AILogic").contains("SacWorst");
-            boolean anyCMC = sa.getParam("AILogic").contains("AnyCMCGoal");
+            boolean anyCMC = sa.getParam("AILogic").contains("GoalAnyCMC");
             
             if (!ph.is(PhaseType.MAIN2)) {
                 // Should be given a chance to cast other spells as well as to use a previously upgraded creature
