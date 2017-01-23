@@ -84,7 +84,6 @@ public class SpecialCardAi {
             String definedSac = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
             String definedGoal = sa.hasParam("AISearchGoal") ? sa.getParam("AISearchGoal") : "Creature";
 
-            System.out.println("sac = " + definedSac + ", goal = " + definedGoal);
             String overridePrefix = definedGoal.contains(".") ? definedGoal + "+" : definedGoal + ".";
 
             CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedSac.split(","), ai, source, sa));
