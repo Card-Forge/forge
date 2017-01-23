@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicate;
 import java.util.Collections;
 import java.util.Random;
 
@@ -17,7 +18,9 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -166,7 +169,17 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
             }
         } else if (origin.equals(ZoneType.Exile)) {
+            String logic = sa.getParam("AILogic");
 
+            if (logic != null && logic.startsWith("DiscardAllAndRetExiled")) {
+                int numExiledWithSrc = CardLists.filter(ai.getCardsIn(ZoneType.Exile), CardPredicates.isExiledWith(source)).size();
+                int curHandSize = ai.getCardsIn(ZoneType.Hand).size();
+            
+                // minimum card advantage unless the hand will be fully reloaded
+                int minAdv = logic.contains(".minAdv") ? Integer.parseInt(logic.substring(logic.indexOf(".minAdv") + 7)) : 0;
+
+                return (curHandSize + minAdv - 1 < numExiledWithSrc) || (numExiledWithSrc >= ai.getMaxHandSize());
+            }
         } else if (origin.equals(ZoneType.Stack)) {
             // time stop can do something like this:
             // Origin$ Stack | Destination$ Exile | SubAbility$ DBSkip

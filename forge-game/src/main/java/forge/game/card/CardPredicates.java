@@ -334,6 +334,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> isExiledWith(final Card card) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return card.equals(c.getExiledWith());
+            }
+        };
+    }
+
     public static class Presets {
 
         /**
