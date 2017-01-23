@@ -210,7 +210,7 @@ public class SpecialCardAi {
                     Predicates.and(CardPredicates.Presets.NONLAND_PERMANENTS, CardPredicates.restriction(restrictValid.split(","), ai, sa.getHostCard(), sa),
                             CardPredicates.lessCMC(searchCMC), Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor)))).size();
 
-            // TODO: this will probably still waste the card a lot. Somehow improve detection of castable material.
+            // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
             return numPerms > 0;
         }
     }
