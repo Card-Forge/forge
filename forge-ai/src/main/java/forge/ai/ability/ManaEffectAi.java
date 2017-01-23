@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 
 import forge.ai.ComputerUtil;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -11,6 +12,9 @@ public class ManaEffectAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        if ("ManaRitual".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.DarkRitualOrSimilar.consider(ai, sa);
+        }
         if (ai.getGame().getPhaseHandler().is(PhaseType.MAIN2) && ComputerUtil.activateForCost(sa, ai)) {
             return true;
         }

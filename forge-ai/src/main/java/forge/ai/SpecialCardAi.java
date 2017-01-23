@@ -180,6 +180,31 @@ public class SpecialCardAi {
         }
     }
         
+    // Dark Ritual and other similar instants/sorceries that add mana to mana pool
+    public static class DarkRitualOrSimilar {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            PhaseHandler ph = ai.getGame().getPhaseHandler();
+
+            if (!(ph.getPlayerTurn().equals(ai) && ph.is(PhaseType.MAIN2))) {
+                return false;
+            }
+
+            CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
+            int numManaSrcs = manaSources.size();
+            int manaReceived = Integer.parseInt(sa.getParam("Amount"));
+            int selfCost = sa.getPayCosts().getCostMana() != null ? sa.getPayCosts().getCostMana().getMana().getCMC() : 0;
+            byte producedColor = MagicColor.fromName(sa.getParam("Produced"));
+
+            // try to determine the number of permanents we can cast with this
+            int numPerms = CardLists.filter(ai.getCardsIn(ZoneType.Hand), 
+                    Predicates.and(CardPredicates.Presets.NONLAND_PERMANENTS, CardPredicates.lessCMC(numManaSrcs - selfCost + manaReceived),
+                            Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor)))).size();
+
+            // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
+            return numPerms > 0;
+        }
+    }
+    
     // Desecration Demon
     public static class DesecrationDemon {
         private static final int demonSacThreshold = Integer.MAX_VALUE; // if we're in dire conditions, sac everything from worst to best hoping to find an answer

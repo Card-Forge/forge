@@ -218,6 +218,15 @@ public final class CardPredicates {
         };
     } // getColor()
 
+    public static final Predicate<Card> isColorless() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return CardUtil.getColors(c).isColorless();
+            }
+        };
+    }
+
     public static final Predicate<Card> isEquippedBy(final String name) {
         return new Predicate<Card>() {
             @Override
@@ -461,6 +470,24 @@ public final class CardPredicates {
             @Override
             public boolean apply(Card c) {
                 return c.isLand();
+            }
+        };
+        /**
+         * a Predicate<Card> to get all permanents.
+         */
+        public static final Predicate<Card> PERMANENTS = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.isPermanent();
+            }
+        };
+        /**
+         * a Predicate<Card> to get all nonland permanents.
+         */
+        public static final Predicate<Card> NONLAND_PERMANENTS = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.isPermanent() && !c.isLand();
             }
         };
 
