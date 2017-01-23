@@ -1718,7 +1718,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         // static abilities
         for (final StaticAbility stAb : state.getStaticAbilities()) {
             if (!stAb.isSecondary()) {
-                sb.append(stAb.toString()).append("\r\n");
+                final String stAbD = stAb.toString();
+                if (!stAbD.equals("")) {
+                    sb.append(stAbD).append("\r\n");
+                }
             }
         }
 
@@ -1831,12 +1834,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         // static abilities
         for (final StaticAbility stAb : state.getStaticAbilities()) {
             if (!stAb.isSecondary()) {
-                continue;
-            }
-
-            final String stAbD = stAb.toString();
-            if (!stAbD.equals("")) {
-                sb.append(stAbD).append("\r\n");
+                final String stAbD = stAb.toString();
+                if (!stAbD.equals("")) {
+                    sb.append(stAbD).append("\r\n");
+                }
             }
         }
 
