@@ -106,6 +106,9 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
+                if (this.getDescription().contains("(without paying its mana cost)")) {
+                    return false;
+                }
                 CardStateName stateBackup = hostCard.getCurrentStateName();
                 hostCard.setState(CardStateName.FaceDown, false);
                 boolean success = super.canPlay();
