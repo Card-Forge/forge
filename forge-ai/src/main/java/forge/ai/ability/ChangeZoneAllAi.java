@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicate;
 import java.util.Collections;
 import java.util.Random;
 
@@ -20,7 +19,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
