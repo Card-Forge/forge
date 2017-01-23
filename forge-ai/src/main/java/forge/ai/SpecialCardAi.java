@@ -17,11 +17,11 @@
  */
 package forge.ai;
 
+import com.google.common.base.Predicate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -67,6 +67,44 @@ import forge.util.Aggregates;
  */
 public class SpecialCardAi {
 
+    // Birthing Pod
+    public static class BirthingPod {
+        public static boolean consider(final Player ai, SpellAbility sa) {
+            Card source = sa.getHostCard();
+            CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+
+            listToSac.sort(CardLists.CmcComparatorInv); // try to upgrade best creatures first
+            
+            for (Card sacCandidate : listToSac) {
+                int sacCMC = sacCandidate.getCMC();
+                int goalCMC = sacCMC + 1;
+
+                CardCollection listGoal = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
+                listGoal = CardLists.getValidCards(listGoal, "Creature.cmcEQ" + goalCMC, source.getController(), source);
+                listGoal = CardLists.filter(listGoal, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        if (c.getType().isLegendary()) {
+                            if (ai.isCardInPlay(c.getName())) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                });
+                
+                if (!listGoal.isEmpty()) {
+                    // make sure we're upgrading sacCMC->goalCMC
+                    source.setSVar("AIPreferenceOverride", "Creature.cmcEQ" + sacCMC);
+                    return true;
+                }
+            }
+
+            // no candidates to upgrade
+            return false;
+        }
+    }
+    
     // Black Lotus and Lotus Bloom
     public static class BlackLotus {
         public static boolean consider(Player ai, SpellAbility sa, ManaCostBeingPaid cost) {

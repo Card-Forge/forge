@@ -307,6 +307,11 @@ public class ComputerUtil {
             final String[] prefValid = activate.getSVar("AIPreference").split("\\$");
             if (prefValid[0].equals(pref)) {
                 final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
+                CardCollection overrideList = null;
+
+                if (activate.hasSVar("AIPreferenceOverride")) {
+                    overrideList = CardLists.getValidCards(typeList, activate.getSVar("AIPreferenceOverride"), activate.getController(), activate, null);
+                }
 
                 int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold");
                 int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold");
@@ -332,7 +337,7 @@ public class ComputerUtil {
                 }
 
                 if (!prefList.isEmpty()) {
-                	return ComputerUtilCard.getWorstAI(prefList);
+                	return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
                 }
             }
         }

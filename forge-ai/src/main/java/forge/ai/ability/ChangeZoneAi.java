@@ -48,6 +48,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
     
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        if (sa.getHostCard() != null && sa.getHostCard().hasSVar("AIPreferenceOverride")) {
+            // currently used by Birthing Pod logic, might need simplification
+            sa.getHostCard().removeSVar("AIPreferenceOverride");
+        }
+
         if (aiLogic.equals("BeforeCombat")) {
             if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
                 return false;
@@ -67,8 +72,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (aiLogic != null) {
             if (aiLogic.equals("Always")) {
                 return true;
-            }
-            if (aiLogic.equals("SameName")) {   // Declaration in Stone
+            } else if (aiLogic.equals("BirthingPod")) {
+                return SpecialCardAi.BirthingPod.consider(aiPlayer, sa);
+            } else if (aiLogic.equals("SameName")) {   // Declaration in Stone
                 final Game game = aiPlayer.getGame();
                 final Card source = sa.getHostCard();
                 final TargetRestrictions tgt = sa.getTargetRestrictions();
