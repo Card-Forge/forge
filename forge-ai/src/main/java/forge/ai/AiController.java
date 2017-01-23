@@ -797,6 +797,11 @@ public class AiController {
                 p -= (((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
             }
 
+            // try to cast mana ritual spells before casting spells to maximize potential mana
+            if ("ManaRitual".equals(sa.getParam("AILogic"))) {
+                p += 9;
+            }
+
             return p;
         }
     };
