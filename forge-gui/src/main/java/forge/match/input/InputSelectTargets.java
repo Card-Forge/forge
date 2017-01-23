@@ -79,7 +79,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(String.format("\n(%d more can be targeted)", Integer.valueOf(maxTargets - targeted)));
         }
 
-        showMessage(sb.toString().replace("CARDNAME", sa.getHostCard().toString()), sa.getView());
+        String message = sb.toString().replace("CARDNAME", sa.getHostCard().toString()).replace("(Targeting ERROR)", "");
+        showMessage(message, sa.getView());
 
         // If reached Minimum targets, enable OK button
         if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
