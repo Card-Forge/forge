@@ -206,25 +206,35 @@ public class SpecialCardAi {
 
             String restrictValid = sa.hasParam("RestrictValid") ? sa.getParam("RestrictValid") : "Card";
 
-            CardCollection castablePerms = CardLists.filter(ai.getCardsIn(ZoneType.Hand), 
-                    Predicates.and(CardPredicates.Presets.NONLAND_PERMANENTS, CardPredicates.restriction(restrictValid.split(","), ai, sa.getHostCard(), sa),
+            CardCollection cardList = new CardCollection();
+            List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
+            for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
+                ManaCost cost = testSa.getPayCosts().getTotalMana();
+                if (cost.getCMC() == 0 && cost.countX() == 0) {
+                    // no mana cost, no need to activate this SA then (additional mana not needed)
+                    continue;
+                }
+
+                if (testSa.getHostCard().getName().equals(sa.getHostCard().getName())) {
+                    // prevent infinitely recursing own ability when testing AI play decision
+                    continue;
+                }
+
+                SpellAbility testSaNoCost = testSa.copyWithNoManaCost();
+                testSaNoCost.setActivatingPlayer(ai);
+                if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
+                    // the AI is willing to play the spell
+                    if (!cardList.contains(testSa.getHostCard())) {
+                        cardList.add(testSa.getHostCard());
+                    }
+                }
+            }
+
+            CardCollection castableSpells = CardLists.filter(cardList, Predicates.and(CardPredicates.restriction(restrictValid.split(","), ai, sa.getHostCard(), sa),
                             CardPredicates.lessCMC(searchCMC), Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
 
-            // make sure we don't try for a legendary permanent we already have
-            castablePerms = CardLists.filter(castablePerms, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (c.getType().isLegendary()) {
-                        if (ai.isCardInPlay(c.getName())) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            });
-
             // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
-            return castablePerms.size() > 0;
+            return castableSpells.size() > 0;
         }
     }
     
