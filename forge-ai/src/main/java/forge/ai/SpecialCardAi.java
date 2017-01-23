@@ -81,17 +81,20 @@ public class SpecialCardAi {
                 return false;
             }
             
-            String definedPref = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
-            String overridePrefix = definedPref.contains(".") ? definedPref + "+" : definedPref + ".";
+            String definedSac = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
+            String definedGoal = sa.hasParam("AISearchGoal") ? sa.getParam("AISearchGoal") : "Creature";
 
-            CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedPref.split(","), ai, source, sa));
+            System.out.println("sac = " + definedSac + ", goal = " + definedGoal);
+            String overridePrefix = definedGoal.contains(".") ? definedGoal + "+" : definedGoal + ".";
+
+            CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedSac.split(","), ai, source, sa));
             listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
 
             for (Card sacCandidate : listToSac) {
                 int sacCMC = sacCandidate.getCMC();
                 int goalCMC = sacCMC + 1;
 
-                CardCollection listGoal = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(definedPref.split(","), ai, source, sa));
+                CardCollection listGoal = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(definedGoal.split(","), ai, source, sa));
 
                 if (!anyCMC) {
                     // e.g. Birthing Pod - ensure we have a valid card to upgrade to
