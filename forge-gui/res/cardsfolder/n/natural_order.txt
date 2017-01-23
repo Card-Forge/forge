@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 G G Sac<1/Creature.Green/green creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Green | ChangeNum$ 1 | AILogic$ BirthingPod.SacWorst+AnyCMCGoal | SpellDescription$ Search your library for a green creature card and put it onto the battlefield. Then shuffle your library.
 # AI Preference is needed to make the AI consider the ability. Further constraints are defined by AILogic BirthingPod.
-SVar:AIPreference:SacCost$Creature
+SVar:AIPreference:SacCost$Creature.Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_order.jpg
 Oracle:As an additional cost to cast Natural Order, sacrifice a green creature.\nSearch your library for a green creature card and put it onto the battlefield. Then shuffle your library.

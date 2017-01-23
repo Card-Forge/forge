@@ -47,6 +47,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Special logic for individual cards
@@ -79,21 +80,25 @@ public class SpecialCardAi {
                 // Should be given a chance to cast other spells as well as to use a previously upgraded creature
                 return false;
             }
-
-            CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-            listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
             
+            String definedPref = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
+            String overridePrefix = definedPref.contains(".") ? definedPref + "+" : definedPref + ".";
+
+            CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedPref.split(","), ai, source, sa));
+            listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
+
             for (Card sacCandidate : listToSac) {
                 int sacCMC = sacCandidate.getCMC();
                 int goalCMC = sacCMC + 1;
 
-                CardCollection listGoal = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
+                CardCollection listGoal = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(definedPref.split(","), ai, source, sa));
+
                 if (!anyCMC) {
                     // e.g. Birthing Pod - ensure we have a valid card to upgrade to
-                    listGoal = CardLists.getValidCards(listGoal, "Creature.cmcEQ" + goalCMC, source.getController(), source);
+                    listGoal = CardLists.getValidCards(listGoal, overridePrefix + "cmcEQ" + goalCMC, source.getController(), source);
                 } else {
                     // e.g. Natural Order - ensure we're upgrading to something better
-                    listGoal = CardLists.getValidCards(listGoal, "Creature.cmcGE" + goalCMC, source.getController(), source);
+                    listGoal = CardLists.getValidCards(listGoal, overridePrefix + "cmcGE" + goalCMC, source.getController(), source);
                 }
                 listGoal = CardLists.filter(listGoal, new Predicate<Card>() {
                     @Override
