@@ -71,8 +71,14 @@ public class SpecialCardAi {
     public static class BirthingPod {
         public static boolean consider(final Player ai, SpellAbility sa) {
             Card source = sa.getHostCard();
-            CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+            PhaseHandler ph = ai.getGame().getPhaseHandler();
+            
+            if (!ph.is(PhaseType.MAIN2)) {
+                // Should be given a chance to cast other spells as well as to use a previously upgraded creature
+                return false;
+            }
 
+            CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
             listToSac.sort(CardLists.CmcComparatorInv); // try to upgrade best creatures first
             
             for (Card sacCandidate : listToSac) {
