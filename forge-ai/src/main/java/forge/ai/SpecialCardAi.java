@@ -67,7 +67,7 @@ import forge.util.Aggregates;
  */
 public class SpecialCardAi {
 
-    // Birthing Pod, Natural Order, possibly can be expanded other similar cards
+    // Birthing Pod, Natural Order, possibly can be expanded for other similar cards
     public static class BirthingPod {
         public static boolean consider(final Player ai, SpellAbility sa) {
             Card source = sa.getHostCard();

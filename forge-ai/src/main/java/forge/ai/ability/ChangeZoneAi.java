@@ -72,7 +72,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (aiLogic != null) {
             if (aiLogic.equals("Always")) {
                 return true;
-            } else if (aiLogic.startsWith("BirthingPod")) { // Birthing Pod, Natural Order
+            } else if (aiLogic.startsWith("BirthingPod")) { // Birthing Pod, Natural Order, etc.
                 return SpecialCardAi.BirthingPod.consider(aiPlayer, sa);
             } else if (aiLogic.equals("SameName")) {   // Declaration in Stone
                 final Game game = aiPlayer.getGame();
