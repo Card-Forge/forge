@@ -191,16 +191,26 @@ public class SpecialCardAi {
 
             CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
             int numManaSrcs = manaSources.size();
-            int manaReceived = Integer.parseInt(sa.getParam("Amount"));
+            int manaReceived = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
             int selfCost = sa.getPayCosts().getCostMana() != null ? sa.getPayCosts().getCostMana().getMana().getCMC() : 0;
             byte producedColor = MagicColor.fromName(sa.getParam("Produced"));
+            int searchCMC = numManaSrcs - selfCost + manaReceived;
 
-            // try to determine the number of permanents we can cast with this
+            if ("X".equals(sa.getParam("Produced")) && "Count$CardsInYourHand".equals(sa.getHostCard().getSVar("X"))) {
+                searchCMC--; // the spell in hand will be used
+            }
+
+            if (searchCMC <= 0) {
+                return false;
+            }
+
+            String restrictValid = sa.hasParam("RestrictValid") ? sa.getParam("RestrictValid") : "Card";
+
             int numPerms = CardLists.filter(ai.getCardsIn(ZoneType.Hand), 
-                    Predicates.and(CardPredicates.Presets.NONLAND_PERMANENTS, CardPredicates.lessCMC(numManaSrcs - selfCost + manaReceived),
-                            Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor)))).size();
+                    Predicates.and(CardPredicates.Presets.NONLAND_PERMANENTS, CardPredicates.restriction(restrictValid.split(","), ai, sa.getHostCard(), sa),
+                            CardPredicates.lessCMC(searchCMC), Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor)))).size();
 
-            // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
+            // TODO: this will probably still waste the card a lot. Somehow improve detection of castable material.
             return numPerms > 0;
         }
     }
