@@ -11,6 +11,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
@@ -161,13 +162,20 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             int maxTargets = abTgt.getMaxTargets(sa.getHostCard(), sa);
+            
             if (hasXCost) {
                 // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
                 maxTargets = Math.min(ComputerUtilMana.determineMaxAffordableX(ai, sa), abTgt.getMaxTargets(sa.getHostCard(), sa));
-                if (maxTargets == 0) {
-                    // can't afford X
-                    return false;
-                }
+            }
+            if (sa.hasParam("AIMaxTgtsCount")) {
+                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
+                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
+                maxTargets = Math.min(CardFactoryUtil.xCount(sa.getHostCard(), "Count$" + sa.getParam("AIMaxTgtsCount")), maxTargets);
+            }
+
+            if (maxTargets == 0) {
+                // can't afford X or otherwise target anything
+                return false;
             }
 
             // target loop

@@ -310,7 +310,6 @@ public class ComputerUtil {
 
                 int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold");
                 int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold");
-                System.out.println("Threshold = " + threshold + ", minNeeded = " + minNeeded);
 
                 if (threshold != -1) {
                     List<Card> toRemove = Lists.newArrayList();
