@@ -332,12 +332,7 @@ public class SpecialCardAi {
     public static class ManaRitual {
         public static boolean consider(final Player ai, SpellAbility sa) {
             final Card host = sa.getHostCard();
-            final PhaseHandler ph = ai.getGame().getPhaseHandler();
-
-            if (!(ph.getPlayerTurn().equals(ai) && (ph.is(PhaseType.MAIN2) || ph.is(PhaseType.MAIN1)))) {
-                return false;
-            }
-
+          
             CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
             int numManaSrcs = manaSources.size();
             int manaReceived = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
@@ -377,16 +372,11 @@ public class SpecialCardAi {
                 SpellAbility testSaNoCost = testSa.copyWithNoManaCost();
                 testSaNoCost.setActivatingPlayer(ai);
                 if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
-                    if (!testSa.getHostCard().isInstant() && !ph.is(PhaseType.MAIN2)) {
-                        // AI sometimes thinks that it's willing to cast a sorcery in Main1 and then it doesn't,
-                        // so avoid evaluating them unless already in Main2
+                    if (testSa.getHostCard().isInstant()) {
+                        // AI is bad at choosing which instants are worth a Ritual
                         continue;
                     }
-                    if (testSa.getApi() == ApiType.Counter || testSa.getApi() == ApiType.Mana) {
-                        // do not specifically look to activate this for a counterspell or for another mana-
-                        // producing ability.
-                        continue;
-                    }
+
                     // the AI is willing to play the spell
                     if (!cardList.contains(testSa.getHostCard())) {
                         cardList.add(testSa.getHostCard());
