@@ -316,15 +316,18 @@ public class PlayerControllerHuman
     }
 
     private final boolean assignDamageAsIfNotBlocked(final Card attacker) {
-	if ( attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.") || 
-	     attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.") ) {
-	    // return getGui().confirm(CardView.get(attacker), "Do you want to assign its combat damage as though it weren't blocked?");
-	    final InputConfirm inp = new InputConfirm(this, "Do you want to assign its combat damage as though it weren't blocked?", CardView.get(attacker));
-	    inp.showAndWait();
-	    return inp.getResult();
-	} else {
-	    return false;
-	}
+        if (attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
+                || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+            if (GuiBase.getInterface().isLibgdxPort()) {
+                return getGui().confirm(CardView.get(attacker), "Do you want to assign its combat damage as though it weren't blocked?");
+            } else {
+                final InputConfirm inp = new InputConfirm(this, "Do you want to assign its combat damage as though it weren't blocked?", CardView.get(attacker));
+                inp.showAndWait();
+                return inp.getResult();
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -494,27 +497,36 @@ public class PlayerControllerHuman
      */
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message) {
-        // return getGui().confirm(CardView.get(sa.getHostCard()), message);
-        final InputConfirm inp = new InputConfirm(this, message, sa);
-        inp.showAndWait();
-        return inp.getResult();
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return getGui().confirm(CardView.get(sa.getHostCard()), message);
+        } else {
+            final InputConfirm inp = new InputConfirm(this, message, sa);
+            inp.showAndWait();
+            return inp.getResult();
+        }
     }
 
     @Override
     public boolean confirmBidAction(final SpellAbility sa, final PlayerActionConfirmMode bidlife,
             final String string, final int bid, final Player winner) {
-        // return getGui().confirm(CardView.get(sa.getHostCard()), string + " Highest Bidder " + winner);
-        final InputConfirm inp = new InputConfirm(this, string + " Highest Bidder " + winner, sa);
-        inp.showAndWait();
-        return inp.getResult();
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return getGui().confirm(CardView.get(sa.getHostCard()), string + " Highest Bidder " + winner);
+        } else {
+            final InputConfirm inp = new InputConfirm(this, string + " Highest Bidder " + winner, sa);
+            inp.showAndWait();
+            return inp.getResult();
+        }
     }
 
     @Override
     public boolean confirmStaticApplication(final Card hostCard, final GameEntity affected, final String logic, final String message) {
-        // return getGui().confirm(CardView.get(hostCard), message);
-        final InputConfirm inp = new InputConfirm(this, message, hostCard.getView());
-        inp.showAndWait();
-        return inp.getResult();
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return getGui().confirm(CardView.get(hostCard), message);
+        } else {
+            final InputConfirm inp = new InputConfirm(this, message, hostCard.getView());
+            inp.showAndWait();
+            return inp.getResult();
+        }
     }
 
     @Override
@@ -659,11 +671,16 @@ public class PlayerControllerHuman
 
         tempShowCard(c);
         getGui().setCard(c.getView());
-        // final boolean result = getGui().confirm(view, String.format("Put %s on the top or bottom of your library?", view), ImmutableList.of("Top", "Bottom"));
-        final InputConfirm inp = new InputConfirm(this, String.format("Put %s on the top or bottom of your library?", view), "Top", "Bottom", true, c.getView());
-        inp.showAndWait();
-        final boolean result = inp.getResult();
-        endTempShowCards();
+
+        boolean result = false;
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            result = getGui().confirm(view, String.format("Put %s on the top or bottom of your library?", view), ImmutableList.of("Top", "Bottom"));
+        } else {
+            final InputConfirm inp = new InputConfirm(this, String.format("Put %s on the top or bottom of your library?", view), "Top", "Bottom", true, c.getView());
+            inp.showAndWait();
+            result = inp.getResult();
+            endTempShowCards();
+        }
 
         return result;
     }
@@ -1031,10 +1048,13 @@ public class PlayerControllerHuman
             case LeftOrRight:        labels = ImmutableList.of("Left",                       "Right");        break;
             default:                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
-        // return getGui().confirm(CardView.get(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
-        final InputConfirm inp = new InputConfirm(this, question, labels.get(0), labels.get(1), defaultVal == null || defaultVal.booleanValue(), sa);
-        inp.showAndWait();
-        return inp.getResult();
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return getGui().confirm(CardView.get(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
+        } else {
+            final InputConfirm inp = new InputConfirm(this, question, labels.get(0), labels.get(1), defaultVal == null || defaultVal.booleanValue(), sa);
+            inp.showAndWait();
+            return inp.getResult();
+        }
     }
 
     @Override
@@ -1165,10 +1185,16 @@ public class PlayerControllerHuman
         if (colorNames.size() > 2) {
             return MagicColor.fromName(getGui().one(message, colorNames));
         }
-	//final boolean confirmed = getGui().confirm(CardView.get(c), message, colorNames) ;
-	final InputConfirm inp = new InputConfirm(this, message, colorNames.get(0), colorNames.get(1), CardView.get(c));
-	inp.showAndWait();
-	final boolean confirmed = inp.getResult();
+        
+        boolean confirmed = false;
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            confirmed = getGui().confirm(CardView.get(c), message, colorNames) ;
+        } else {
+            final InputConfirm inp = new InputConfirm(this, message, colorNames.get(0), colorNames.get(1), CardView.get(c));
+            inp.showAndWait();
+            confirmed = inp.getResult();
+        }
+            
         final int idxChosen = confirmed ? 0 : 1;
         return MagicColor.fromName(colorNames.get(idxChosen));
     }
