@@ -7,9 +7,11 @@ import java.util.Map;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import forge.ai.AiCardMemory;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardType;
 import forge.game.Game;
@@ -182,6 +184,7 @@ public class AnimateAi extends SpellAbilityAi {
                             && !ComputerUtilCard.doesSpecifiedCreatureBlock(aiPlayer, animatedCopy)) {
                         return false;
                     }
+                    this.rememberAnimatedThisTurn(aiPlayer, c);
                 }
             }
             return bFlag; // All of the defined stuff is animated, not very useful
@@ -221,7 +224,9 @@ public class AnimateAi extends SpellAbilityAi {
             if (list.isEmpty()) {
                 return false;
             }
-            sa.getTargets().add(ComputerUtilCard.getWorstAI(list));
+            Card toAnimate = ComputerUtilCard.getWorstAI(list);
+            this.rememberAnimatedThisTurn(aiPlayer, toAnimate);
+            sa.getTargets().add(toAnimate);
         }
         return true;
     }
@@ -323,6 +328,7 @@ public class AnimateAi extends SpellAbilityAi {
 
             // select the worst of the best
             final Card worst = ComputerUtilCard.getWorstAI(maxList);
+            this.rememberAnimatedThisTurn(ai, worst);
             sa.getTargets().add(worst);
             return true;            
         }
@@ -601,5 +607,15 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
         ComputerUtilCard.applyStaticContPT(game, card, null);
+    }
+
+    private void rememberAnimatedThisTurn(Player ai, Card c) {
+        AiCardMemory mem = ((PlayerControllerAi)ai.getController()).getAi().getCardMemory();
+        mem.rememberCard(c, AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
+    }
+
+    public static boolean isAnimatedThisTurn(Player ai, Card c) {
+        AiCardMemory mem = ((PlayerControllerAi)ai.getController()).getAi().getCardMemory();
+        return mem.isRememberedCard(c, AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
     }
 }

@@ -40,10 +40,17 @@ import java.util.Set;
  */
 public class AiCardMemory {
 
-    private Set<Card> memMandatoryAttackers = new HashSet<Card>();
-    private Set<Card> memHeldManaSources = new HashSet<Card>();
-    private Set<Card> memAttachedThisTurn = new HashSet<Card>();
-    //private HashSet<Card> memRevealedCards = new HashSet<Card>();
+    private final Set<Card> memMandatoryAttackers;
+    private final Set<Card> memHeldManaSources;
+    private final Set<Card> memAttachedThisTurn;
+    private final Set<Card> memAnimatedThisTurn;
+
+    public AiCardMemory() {
+        this.memMandatoryAttackers = new HashSet<>();
+        this.memHeldManaSources = new HashSet<>();
+        this.memAttachedThisTurn = new HashSet<>();
+        this.memAnimatedThisTurn = new HashSet<>();
+    }
 
     /**
      * Defines the memory set in which the card is remembered
@@ -54,6 +61,7 @@ public class AiCardMemory {
         MANDATORY_ATTACKERS,
         HELD_MANA_SOURCES, 
         ATTACHED_THIS_TURN,
+        ANIMATED_THIS_TURN,
         //REVEALED_CARDS // stub, not linked to AI code yet
     }
 
@@ -65,6 +73,8 @@ public class AiCardMemory {
                 return memHeldManaSources;
             case ATTACHED_THIS_TURN:
                 return memAttachedThisTurn;
+            case ANIMATED_THIS_TURN:
+                return memAnimatedThisTurn;
             //case REVEALED_CARDS:
             //    return memRevealedCards;
             default:
@@ -236,5 +246,6 @@ public class AiCardMemory {
         clearMemorySet(MemorySet.MANDATORY_ATTACKERS);
         clearMemorySet(MemorySet.HELD_MANA_SOURCES);
         clearMemorySet(MemorySet.ATTACHED_THIS_TURN);
+        clearMemorySet(MemorySet.ANIMATED_THIS_TURN);
     }
 }

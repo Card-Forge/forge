@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
+import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -201,12 +202,19 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
-            if (sa.getHostCard() != null && sa.getApi() == ApiType.Animate && sa.getHostCard().isAura() 
-                    && "Enchanted".equals(sa.getParam("Defined"))
-                    && ma.getHostCard() == sa.getHostCard().getEnchantingCard() 
-                    && ma.getPayCosts().hasTapCost()) {
-                continue;
+            if (sa.getHostCard() != null && sa.getApi() == ApiType.Animate) {
+                // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
+                if (sa.getHostCard().isAura() && "Enchanted".equals(sa.getParam("Defined"))
+                        && ma.getHostCard() == sa.getHostCard().getEnchantingCard()
+                        && ma.getPayCosts().hasTapCost()) {
+                    continue;
+                }
+
+                // If a manland was previously animated this turn, do not tap it to animate another manland
+                if (sa.getHostCard().isLand() && ma.getHostCard().isLand() 
+                        && AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) {
+                    continue;
+                }
             }
 
             final String typeRes = cost.getSourceRestriction();
