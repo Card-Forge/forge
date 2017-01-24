@@ -19,7 +19,7 @@ public class ManaEffectAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkAiLogic(Player ai, SpellAbility sa, String aiLogic) {
-            if ("ManaRitual".equals(aiLogic)) {
+        if ("ManaRitual".equals(aiLogic)) {
             return SpecialCardAi.ManaRitual.consider(ai, sa);
         }
         return super.checkAiLogic(ai, sa, aiLogic);
