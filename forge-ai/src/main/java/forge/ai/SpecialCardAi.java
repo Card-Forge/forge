@@ -17,11 +17,13 @@
  */
 package forge.ai;
 
-import com.google.common.base.Predicate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -47,7 +49,6 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Special logic for individual cards
@@ -181,23 +182,25 @@ public class SpecialCardAi {
     }
         
     // Dark Ritual and other similar instants/sorceries that add mana to mana pool
-    public static class DarkRitualOrSimilar {
+    public static class ManaRitual {
         public static boolean consider(final Player ai, SpellAbility sa) {
-            PhaseHandler ph = ai.getGame().getPhaseHandler();
-
-            if (!(ph.getPlayerTurn().equals(ai) && ph.is(PhaseType.MAIN2))) {
-                return false;
-            }
+            final Card host = sa.getHostCard();
 
             CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
             int numManaSrcs = manaSources.size();
-            int manaReceived = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
+            int manaReceived = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
             int selfCost = sa.getPayCosts().getCostMana() != null ? sa.getPayCosts().getCostMana().getMana().getCMC() : 0;
             byte producedColor = MagicColor.fromName(sa.getParam("Produced"));
             int searchCMC = numManaSrcs - selfCost + manaReceived;
 
-            if ("X".equals(sa.getParam("Produced")) && "Count$CardsInYourHand".equals(sa.getHostCard().getSVar("X"))) {
-                searchCMC--; // the spell in hand will be used
+            if ("X".equals(sa.getParam("Produced"))) {
+                String x = host.getSVar("X");
+                if ("Count$CardsInYourHand".equals(x) && host.isInZone(ZoneType.Hand)) {
+                    searchCMC--; // the spell in hand will be used
+                } else if (x.startsWith("Count$NamedInAllYards") && host.isInZone(ZoneType.Graveyard)) {
+                    searchCMC--; // the spell in graveyard will be used
+                }
+
             }
 
             if (searchCMC <= 0) {
@@ -215,7 +218,7 @@ public class SpecialCardAi {
                     continue;
                 }
 
-                if (testSa.getHostCard().getName().equals(sa.getHostCard().getName())) {
+                if (testSa.getHostCard().getName().equals(host.getName())) {
                     // prevent infinitely recursing own ability when testing AI play decision
                     continue;
                 }
@@ -230,8 +233,11 @@ public class SpecialCardAi {
                 }
             }
 
-            CardCollection castableSpells = CardLists.filter(cardList, Predicates.and(CardPredicates.restriction(restrictValid.split(","), ai, sa.getHostCard(), sa),
-                            CardPredicates.lessCMC(searchCMC), Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
+            CardCollection castableSpells = CardLists.filter(cardList,
+                    Arrays.asList(
+                            CardPredicates.restriction(restrictValid.split(","), ai, host, sa),
+                            CardPredicates.lessCMC(searchCMC),
+                            Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
 
             // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
             return castableSpells.size() > 0;
