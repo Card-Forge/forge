@@ -1419,8 +1419,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
     private boolean doSacAndUpgradeLogic(final Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
         PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean sacWorst = sa.getParam("AILogic").contains("SacWorst");
-        boolean anyCMC = sa.getParam("AILogic").contains("GoalAnyCMC");
+        String logic = sa.getParam("AILogic");
+        boolean sacWorst = logic.contains("SacWorst");
 
         if (!ph.is(PhaseType.MAIN2)) {
             // Should be given a chance to cast other spells as well as to use a previously upgraded creature
@@ -1428,28 +1428,31 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         String definedSac = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
-        String definedGoal = sa.hasParam("AISearchGoal") ? sa.getParam("AISearchGoal") : "Creature";
-
-        String overridePrefix = definedGoal.contains(".") ? definedGoal + "+" : definedGoal + ".";
+        String definedGoal = sa.getParam("ChangeType");
+        boolean anyCMC = !definedGoal.contains(".cmc");
 
         CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedSac.split(","), ai, source, sa));
         listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
 
-        CardCollection listLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(definedGoal.split(","), ai, source, sa));
-
         for (Card sacCandidate : listToSac) {
             int sacCMC = sacCandidate.getCMC();
-            int goalCMC = sacCMC + 1;
 
-            CardCollection listGoal = new CardCollection(listLib);
+            int goalCMC = source.hasSVar("X") ? AbilityUtils.calculateAmount(source, source.getSVar("X").replace("Sacrificed$CardManaCost", "Number$" + sacCMC), sa) : sacCMC + 1;
+            String curGoal = definedGoal;
 
             if (!anyCMC) {
-                // e.g. Birthing Pod - ensure we have a valid card to upgrade to
-                listGoal = CardLists.getValidCards(listGoal, overridePrefix + "cmcEQ" + goalCMC, source.getController(), source);
-            } else {
-                // e.g. Natural Order - ensure we're upgrading to something better
-                listGoal = CardLists.getValidCards(listGoal, overridePrefix + "cmcGE" + goalCMC, source.getController(), source);
+                // TODO: improve the detection of X in the "cmc**X" part to avoid clashing with other letters in the definition
+                curGoal = definedGoal.replace("X", String.format("%d", goalCMC));
             }
+
+            CardCollection listGoal = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(curGoal.split(","), ai, source, sa));
+
+            if (!anyCMC) {
+                listGoal = CardLists.getValidCards(listGoal, curGoal, source.getController(), source);
+            } else {
+                listGoal = CardLists.getValidCards(listGoal, curGoal + (curGoal.contains(".") ? "+" : ".") + "cmcGE" + goalCMC, source.getController(), source);
+            }
+
             listGoal = CardLists.filter(listGoal, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
