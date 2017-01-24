@@ -33,7 +33,7 @@ public class ManaEffectAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(Player ai, SpellAbility sa, String aiLogic) {
         if ("ManaRitual".equals(aiLogic)) {
-            return doManaRitual(ai, sa);
+            return doManaRitualLogic(ai, sa);
         }
         return super.checkAiLogic(ai, sa, aiLogic);
     }
@@ -105,7 +105,7 @@ public class ManaEffectAi extends SpellAbilityAi {
     }
     
     // Dark Ritual and other similar instants/sorceries that add mana to mana pool
-    private boolean doManaRitual(Player ai, SpellAbility sa) {
+    private boolean doManaRitualLogic(Player ai, SpellAbility sa) {
         final Card host = sa.getHostCard();
           
         CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
