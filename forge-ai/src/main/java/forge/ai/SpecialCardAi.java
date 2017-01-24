@@ -69,66 +69,6 @@ import forge.util.Aggregates;
  */
 public class SpecialCardAi {
 
-    // Birthing Pod, Natural Order, possibly can be expanded for other similar cards
-    public static class BirthingPodOrSimilar {
-        public static boolean consider(final Player ai, SpellAbility sa) {
-            Card source = sa.getHostCard();
-            PhaseHandler ph = ai.getGame().getPhaseHandler();
-            boolean sacWorst = sa.getParam("AILogic").contains("SacWorst");
-            boolean anyCMC = sa.getParam("AILogic").contains("GoalAnyCMC");
-            
-            if (!ph.is(PhaseType.MAIN2)) {
-                // Should be given a chance to cast other spells as well as to use a previously upgraded creature
-                return false;
-            }
-            
-            String definedSac = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
-            String definedGoal = sa.hasParam("AISearchGoal") ? sa.getParam("AISearchGoal") : "Creature";
-
-            String overridePrefix = definedGoal.contains(".") ? definedGoal + "+" : definedGoal + ".";
-
-            CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedSac.split(","), ai, source, sa));
-            listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
-
-            CardCollection listLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(definedGoal.split(","), ai, source, sa));
-
-            for (Card sacCandidate : listToSac) {
-                int sacCMC = sacCandidate.getCMC();
-                int goalCMC = sacCMC + 1;
-
-                CardCollection listGoal = new CardCollection(listLib);
-
-                if (!anyCMC) {
-                    // e.g. Birthing Pod - ensure we have a valid card to upgrade to
-                    listGoal = CardLists.getValidCards(listGoal, overridePrefix + "cmcEQ" + goalCMC, source.getController(), source);
-                } else {
-                    // e.g. Natural Order - ensure we're upgrading to something better
-                    listGoal = CardLists.getValidCards(listGoal, overridePrefix + "cmcGE" + goalCMC, source.getController(), source);
-                }
-                listGoal = CardLists.filter(listGoal, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        if (c.getType().isLegendary()) {
-                            if (ai.isCardInPlay(c.getName())) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
-                });
-                
-                if (!listGoal.isEmpty()) {
-                    // make sure we're upgrading sacCMC->goalCMC
-                    source.setSVar("AIPreferenceOverride", "Creature.cmcEQ" + sacCMC);
-                    return true;
-                }
-            }
-
-            // no candidates to upgrade
-            return false;
-        }
-    }
-    
     // Black Lotus and Lotus Bloom
     public static class BlackLotus {
         public static boolean consider(Player ai, SpellAbility sa, ManaCostBeingPaid cost) {

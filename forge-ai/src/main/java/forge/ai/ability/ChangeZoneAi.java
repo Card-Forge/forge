@@ -23,6 +23,7 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -37,6 +38,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
 public class ChangeZoneAi extends SpellAbilityAi {
     /*
@@ -49,7 +51,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if (sa.getHostCard() != null && sa.getHostCard().hasSVar("AIPreferenceOverride")) {
-            // currently used by Birthing Pod logic, might need simplification
+            // currently used by SacAndUpgrade logic, might need simplification
             sa.getHostCard().removeSVar("AIPreferenceOverride");
         }
 
@@ -73,7 +75,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (aiLogic.equals("Always")) {
                 return true;
             } else if (aiLogic.startsWith("SacAndUpgrade")) { // Birthing Pod, Natural Order, etc.
-                return SpecialCardAi.BirthingPodOrSimilar.consider(aiPlayer, sa);
+                return this.doSacAndUpgradeLogic(aiPlayer, sa);
+            } else if (aiLogic.equals("Necropotence")) {
+                return SpecialCardAi.Necropotence.consider(aiPlayer, sa);
             } else if (aiLogic.equals("SameName")) {   // Declaration in Stone
                 final Game game = aiPlayer.getGame();
                 final Card source = sa.getHostCard();
@@ -142,9 +146,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     sa.getTargets().add(c);
                     return true;
                 }
-            }
-            if (aiLogic.equals("Necropotence")) {
-                return SpecialCardAi.Necropotence.consider(aiPlayer, sa);
             }
         }
         String origin = null;
@@ -1481,4 +1482,60 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return Iterables.getFirst(options, null);
     }
     
+    private boolean doSacAndUpgradeLogic(final Player ai, SpellAbility sa) {
+        Card source = sa.getHostCard();
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        boolean sacWorst = sa.getParam("AILogic").contains("SacWorst");
+        boolean anyCMC = sa.getParam("AILogic").contains("GoalAnyCMC");
+
+        if (!ph.is(PhaseType.MAIN2)) {
+            // Should be given a chance to cast other spells as well as to use a previously upgraded creature
+            return false;
+        }
+
+        String definedSac = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
+        String definedGoal = sa.hasParam("AISearchGoal") ? sa.getParam("AISearchGoal") : "Creature";
+
+        String overridePrefix = definedGoal.contains(".") ? definedGoal + "+" : definedGoal + ".";
+
+        CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedSac.split(","), ai, source, sa));
+        listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
+
+        CardCollection listLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(definedGoal.split(","), ai, source, sa));
+
+        for (Card sacCandidate : listToSac) {
+            int sacCMC = sacCandidate.getCMC();
+            int goalCMC = sacCMC + 1;
+
+            CardCollection listGoal = new CardCollection(listLib);
+
+            if (!anyCMC) {
+                // e.g. Birthing Pod - ensure we have a valid card to upgrade to
+                listGoal = CardLists.getValidCards(listGoal, overridePrefix + "cmcEQ" + goalCMC, source.getController(), source);
+            } else {
+                // e.g. Natural Order - ensure we're upgrading to something better
+                listGoal = CardLists.getValidCards(listGoal, overridePrefix + "cmcGE" + goalCMC, source.getController(), source);
+            }
+            listGoal = CardLists.filter(listGoal, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    if (c.getType().isLegendary()) {
+                        if (ai.isCardInPlay(c.getName())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            });
+
+            if (!listGoal.isEmpty()) {
+                // make sure we're upgrading sacCMC->goalCMC
+                source.setSVar("AIPreferenceOverride", "Creature.cmcEQ" + sacCMC);
+                return true;
+            }
+        }
+
+        // no candidates to upgrade
+        return false;
+    }
 }
