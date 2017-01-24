@@ -658,6 +658,7 @@ public class PlayerControllerHuman
         final CardView view = CardView.get(c);
 
         tempShowCard(c);
+        getGui().setCard(c.getView());
         // final boolean result = getGui().confirm(view, String.format("Put %s on the top or bottom of your library?", view), ImmutableList.of("Top", "Bottom"));
         final InputConfirm inp = new InputConfirm(this, String.format("Put %s on the top or bottom of your library?", view), "Top", "Bottom", true, c.getView());
         inp.showAndWait();
