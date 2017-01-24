@@ -332,6 +332,11 @@ public class SpecialCardAi {
     public static class ManaRitual {
         public static boolean consider(final Player ai, SpellAbility sa) {
             final Card host = sa.getHostCard();
+            final PhaseHandler ph = ai.getGame().getPhaseHandler();
+
+            if (!(ph.getPlayerTurn().equals(ai) && ph.is(PhaseType.MAIN2))) {
+                return false;
+            }
 
             CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
             int numManaSrcs = manaSources.size();
