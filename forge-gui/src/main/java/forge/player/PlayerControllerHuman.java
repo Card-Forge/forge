@@ -679,9 +679,9 @@ public class PlayerControllerHuman
             final InputConfirm inp = new InputConfirm(this, String.format("Put %s on the top or bottom of your library?", view), "Top", "Bottom", true, c.getView());
             inp.showAndWait();
             result = inp.getResult();
-            endTempShowCards();
         }
 
+        endTempShowCards();
         return result;
     }
 
