@@ -334,7 +334,7 @@ public class SpecialCardAi {
             final Card host = sa.getHostCard();
             final PhaseHandler ph = ai.getGame().getPhaseHandler();
 
-            if (!(ph.getPlayerTurn().equals(ai) && ph.is(PhaseType.MAIN2))) {
+            if (!(ph.getPlayerTurn().equals(ai) && (ph.is(PhaseType.MAIN2) || ph.is(PhaseType.MAIN1)))) {
                 return false;
             }
 
@@ -352,7 +352,6 @@ public class SpecialCardAi {
                 } else if (x.startsWith("Count$NamedInAllYards") && host.isInZone(ZoneType.Graveyard)) {
                     searchCMC--; // the spell in graveyard will be used
                 }
-
             }
 
             if (searchCMC <= 0) {
@@ -378,6 +377,16 @@ public class SpecialCardAi {
                 SpellAbility testSaNoCost = testSa.copyWithNoManaCost();
                 testSaNoCost.setActivatingPlayer(ai);
                 if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
+                    if (!testSa.getHostCard().isInstant() && !ph.is(PhaseType.MAIN2)) {
+                        // AI sometimes thinks that it's willing to cast a sorcery in Main1 and then it doesn't,
+                        // so avoid evaluating them unless already in Main2
+                        continue;
+                    }
+                    if (testSa.getApi() == ApiType.Counter || testSa.getApi() == ApiType.Mana) {
+                        // do not specifically look to activate this for a counterspell or for another mana-
+                        // producing ability.
+                        continue;
+                    }
                     // the AI is willing to play the spell
                     if (!cardList.contains(testSa.getHostCard())) {
                         cardList.add(testSa.getHostCard());
