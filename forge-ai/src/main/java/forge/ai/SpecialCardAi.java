@@ -90,11 +90,13 @@ public class SpecialCardAi {
             CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedSac.split(","), ai, source, sa));
             listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
 
+            CardCollection listLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(definedGoal.split(","), ai, source, sa));
+
             for (Card sacCandidate : listToSac) {
                 int sacCMC = sacCandidate.getCMC();
                 int goalCMC = sacCMC + 1;
 
-                CardCollection listGoal = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(definedGoal.split(","), ai, source, sa));
+                CardCollection listGoal = new CardCollection(listLib);
 
                 if (!anyCMC) {
                     // e.g. Birthing Pod - ensure we have a valid card to upgrade to
@@ -180,70 +182,7 @@ public class SpecialCardAi {
             return false;
         }
     }
-        
-    // Dark Ritual and other similar instants/sorceries that add mana to mana pool
-    public static class ManaRitual {
-        public static boolean consider(final Player ai, SpellAbility sa) {
-            final Card host = sa.getHostCard();
 
-            CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
-            int numManaSrcs = manaSources.size();
-            int manaReceived = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
-            int selfCost = sa.getPayCosts().getCostMana() != null ? sa.getPayCosts().getCostMana().getMana().getCMC() : 0;
-            byte producedColor = MagicColor.fromName(sa.getParam("Produced"));
-            int searchCMC = numManaSrcs - selfCost + manaReceived;
-
-            if ("X".equals(sa.getParam("Produced"))) {
-                String x = host.getSVar("X");
-                if ("Count$CardsInYourHand".equals(x) && host.isInZone(ZoneType.Hand)) {
-                    searchCMC--; // the spell in hand will be used
-                } else if (x.startsWith("Count$NamedInAllYards") && host.isInZone(ZoneType.Graveyard)) {
-                    searchCMC--; // the spell in graveyard will be used
-                }
-
-            }
-
-            if (searchCMC <= 0) {
-                return false;
-            }
-
-            String restrictValid = sa.hasParam("RestrictValid") ? sa.getParam("RestrictValid") : "Card";
-
-            CardCollection cardList = new CardCollection();
-            List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
-            for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
-                ManaCost cost = testSa.getPayCosts().getTotalMana();
-                if (cost.getCMC() == 0 && cost.countX() == 0) {
-                    // no mana cost, no need to activate this SA then (additional mana not needed)
-                    continue;
-                }
-
-                if (testSa.getHostCard().getName().equals(host.getName())) {
-                    // prevent infinitely recursing own ability when testing AI play decision
-                    continue;
-                }
-
-                SpellAbility testSaNoCost = testSa.copyWithNoManaCost();
-                testSaNoCost.setActivatingPlayer(ai);
-                if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
-                    // the AI is willing to play the spell
-                    if (!cardList.contains(testSa.getHostCard())) {
-                        cardList.add(testSa.getHostCard());
-                    }
-                }
-            }
-
-            CardCollection castableSpells = CardLists.filter(cardList,
-                    Arrays.asList(
-                            CardPredicates.restriction(restrictValid.split(","), ai, host, sa),
-                            CardPredicates.lessCMC(searchCMC),
-                            Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
-
-            // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
-            return castableSpells.size() > 0;
-        }
-    }
-    
     // Desecration Demon
     public static class DesecrationDemon {
         private static final int demonSacThreshold = Integer.MAX_VALUE; // if we're in dire conditions, sac everything from worst to best hoping to find an answer
@@ -389,7 +328,69 @@ public class SpecialCardAi {
             return (aiGraveyardPower - aiBattlefieldPower) > (oppGraveyardPower - oppBattlefieldPower);
         }
     }
+    // Dark Ritual and other similar instants/sorceries that add mana to mana pool
+    public static class ManaRitual {
+        public static boolean consider(final Player ai, SpellAbility sa) {
+            final Card host = sa.getHostCard();
 
+            CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
+            int numManaSrcs = manaSources.size();
+            int manaReceived = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
+            int selfCost = sa.getPayCosts().getCostMana() != null ? sa.getPayCosts().getCostMana().getMana().getCMC() : 0;
+            byte producedColor = MagicColor.fromName(sa.getParam("Produced"));
+            int searchCMC = numManaSrcs - selfCost + manaReceived;
+
+            if ("X".equals(sa.getParam("Produced"))) {
+                String x = host.getSVar("X");
+                if ("Count$CardsInYourHand".equals(x) && host.isInZone(ZoneType.Hand)) {
+                    searchCMC--; // the spell in hand will be used
+                } else if (x.startsWith("Count$NamedInAllYards") && host.isInZone(ZoneType.Graveyard)) {
+                    searchCMC--; // the spell in graveyard will be used
+                }
+
+            }
+
+            if (searchCMC <= 0) {
+                return false;
+            }
+
+            String restrictValid = sa.hasParam("RestrictValid") ? sa.getParam("RestrictValid") : "Card";
+
+            CardCollection cardList = new CardCollection();
+            List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
+            for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
+                ManaCost cost = testSa.getPayCosts().getTotalMana();
+                if (cost.getCMC() == 0 && cost.countX() == 0) {
+                    // no mana cost, no need to activate this SA then (additional mana not needed)
+                    continue;
+                }
+
+                if (testSa.getHostCard().getName().equals(host.getName())) {
+                    // prevent infinitely recursing own ability when testing AI play decision
+                    continue;
+                }
+
+                SpellAbility testSaNoCost = testSa.copyWithNoManaCost();
+                testSaNoCost.setActivatingPlayer(ai);
+                if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
+                    // the AI is willing to play the spell
+                    if (!cardList.contains(testSa.getHostCard())) {
+                        cardList.add(testSa.getHostCard());
+                    }
+                }
+            }
+
+            CardCollection castableSpells = CardLists.filter(cardList,
+                    Arrays.asList(
+                            CardPredicates.restriction(restrictValid.split(","), ai, host, sa),
+                            CardPredicates.lessCMC(searchCMC),
+                            Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
+
+            // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
+            return castableSpells.size() > 0;
+        }
+    }
+    
     // Necropotence
     public static class Necropotence {
         public static boolean consider(Player ai, SpellAbility sa) {
