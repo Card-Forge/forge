@@ -626,6 +626,9 @@ public class AiController {
 
     public AiPlayDecision canPlaySa(SpellAbility sa) {
         final Card card = sa.getHostCard();
+        if (!checkAiSpecificRestrictions(player, sa)) {
+            return AiPlayDecision.CantPlayAi;
+        }
         if (sa instanceof WrappedAbility) {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }
@@ -1612,5 +1615,19 @@ public class AiController {
         }
         return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount);
     }
+    
+    private boolean checkAiSpecificRestrictions(final Player ai, final SpellAbility sa) {
+        // AI-specific restrictions specified as activation parameters in spell abilities
+        
+        if (sa.hasParam("AILifeThreshold")) {
+            System.out.println("threshold");
+            if (ai.getLife() <= Integer.parseInt(sa.getParam("AILifeThreshold"))) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
 }
 
