@@ -372,6 +372,11 @@ public class SpecialCardAi {
                 SpellAbility testSaNoCost = testSa.copyWithNoManaCost();
                 testSaNoCost.setActivatingPlayer(ai);
                 if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
+                    if (testSa.getHostCard().isPermanent() && !testSa.getHostCard().hasKeyword("Haste") 
+                        && !ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+                        // AI will waste a ritual in Main 1 unless the casted permanent is a haste creature
+                        continue;
+                    }
                     if (testSa.getHostCard().isInstant()) {
                         // AI is bad at choosing which instants are worth a Ritual
                         continue;
