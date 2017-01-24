@@ -17,6 +17,7 @@
  */
 package forge.match.input;
 
+import forge.GuiBase;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
@@ -42,6 +43,26 @@ public class InputConfirm extends InputSyncronizedBase {
     private boolean result;
     private SpellAbility sa;
     private CardView card;
+
+    // simple interface to hide ugliness deciding how to confirm
+    public static boolean confirm(final PlayerControllerHuman controller, final CardView card, String message) {
+         if (GuiBase.getInterface().isLibgdxPort()) {
+             return controller.getGui().confirm(card,message);
+         } else {
+             final InputConfirm inp = new InputConfirm(controller, message, card);
+             inp.showAndWait();
+             return inp.getResult();
+         }
+    }
+    public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, String message) {
+         if (GuiBase.getInterface().isLibgdxPort()) {
+             return controller.getGui().confirm((sa==null)?null:CardView.get(sa.getHostCard()),message);
+         } else {
+             final InputConfirm inp = new InputConfirm(controller, message, sa);
+             inp.showAndWait();
+             return inp.getResult();
+         }
+    }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0) {
         this(controller, message0, "Yes", "No", true);

@@ -318,13 +318,7 @@ public class PlayerControllerHuman
     private final boolean assignDamageAsIfNotBlocked(final Card attacker) {
         if (attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
                 || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
-            if (GuiBase.getInterface().isLibgdxPort()) {
-                return getGui().confirm(CardView.get(attacker), "Do you want to assign its combat damage as though it weren't blocked?");
-            } else {
-                final InputConfirm inp = new InputConfirm(this, "Do you want to assign its combat damage as though it weren't blocked?", CardView.get(attacker));
-                inp.showAndWait();
-                return inp.getResult();
-            }
+            return InputConfirm.confirm(this, CardView.get(attacker), "Do you want to assign its combat damage as though it weren't blocked?");
         } else {
             return false;
         }
@@ -497,36 +491,18 @@ public class PlayerControllerHuman
      */
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
-            return getGui().confirm(CardView.get(sa.getHostCard()), message);
-        } else {
-            final InputConfirm inp = new InputConfirm(this, message, sa);
-            inp.showAndWait();
-            return inp.getResult();
-        }
+    	return InputConfirm.confirm(this, sa, message);
     }
 
     @Override
     public boolean confirmBidAction(final SpellAbility sa, final PlayerActionConfirmMode bidlife,
             final String string, final int bid, final Player winner) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
-            return getGui().confirm(CardView.get(sa.getHostCard()), string + " Highest Bidder " + winner);
-        } else {
-            final InputConfirm inp = new InputConfirm(this, string + " Highest Bidder " + winner, sa);
-            inp.showAndWait();
-            return inp.getResult();
-        }
+    	return InputConfirm.confirm(this, sa, string + " Highest Bidder " + winner);
     }
 
     @Override
     public boolean confirmStaticApplication(final Card hostCard, final GameEntity affected, final String logic, final String message) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
-            return getGui().confirm(CardView.get(hostCard), message);
-        } else {
-            final InputConfirm inp = new InputConfirm(this, message, hostCard.getView());
-            inp.showAndWait();
-            return inp.getResult();
-        }
+    	return InputConfirm.confirm(this, CardView.get(hostCard), message);
     }
 
     @Override
