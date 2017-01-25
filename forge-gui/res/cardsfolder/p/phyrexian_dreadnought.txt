@@ -10,11 +10,11 @@ SVar:SacrificeCreatures:DB$ SacrificeAll | Defined$ Remembered | ConditionCheckS
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TotalPower:Remembered$CardPower
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:NeedsToPlayVar:Y GE12
-SVar:Y:Count$SumPower_Creature.YouCtrl
 SVar:RemRandomDeck:True
 
 # TODO: why does this card not work for the AI? It correctly specifies targets but Phyrexian Dreadnought is still sacrificed.
+SVar:NeedsToPlayVar:Y GE12
+SVar:Y:Count$SumPower_Creature.YouCtrl
 SVar:RemAIDeck:True
 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_dreadnought.jpg
