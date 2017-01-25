@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Snake
 PT:4/4
 K:Tribute:3
-SVar:TrigNotTribute:AB$ GainLife | Cost$ 0 | LifeAmount$ 4 | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you gain 4 life.
+SVar:TrigNotTribute:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you gain 4 life.
 SVar:TributeAILogic:Never
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_of_the_golden_grove.jpg

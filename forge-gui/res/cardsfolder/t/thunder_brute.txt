@@ -4,8 +4,7 @@ Types:Creature Cyclops
 PT:5/5
 K:Trample
 K:Tribute:3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | Execute$ TrigNotTribute
-SVar:TrigNotTribute:AB$ Pump | Cost$ 0 | KW$ Haste | Defined$ Self | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, it gains haste until end of turn.
+SVar:TrigNotTribute:DB$ Pump | KW$ Haste | Defined$ Self | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, it gains haste until end of turn.
 SVar:PlayMain1:ALWAYS
 SVar:TributeAILogic:CanBlockThisTurn
 DeckHas:Ability$Counters
