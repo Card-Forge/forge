@@ -106,9 +106,6 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
-                if (this.getDescription().contains("(without paying its mana cost)")) {
-                    return false;
-                }
                 CardStateName stateBackup = hostCard.getCurrentStateName();
                 hostCard.setState(CardStateName.FaceDown, false);
                 boolean success = super.canPlay();
@@ -120,6 +117,7 @@ public class CardFactoryUtil {
         morphDown.setDescription("(You may cast this card face down as a 2/2 creature for {3}.)");
         morphDown.setStackDescription("Morph - Creature 2/2");
         morphDown.setCastFaceDown(true);
+        morphDown.setBasicSpell(false);
 
         return morphDown;
     }
