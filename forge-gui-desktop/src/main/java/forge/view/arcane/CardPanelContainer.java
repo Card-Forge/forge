@@ -63,6 +63,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private int mouseDragOffsetX, mouseDragOffsetY;
     private int intialMouseDragX = -1, intialMouseDragY;
     private boolean dragEnabled;
+    private boolean isDragged;
 
     private final List<LayoutEventListener> layoutListeners = new ArrayList<>(1);
 
@@ -364,6 +365,14 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         this.dragEnabled = dragEnabled;
     }
 
+    public final boolean isDragged() {
+        return this.isDragged;
+    }
+
+    public final void setDragged(boolean isDragged) {
+        this.isDragged = isDragged;
+    }
+
     public final void addCardPanelMouseListener(final CardPanelMouseListener listener) {
         this.listeners.add(listener);
     }
@@ -429,8 +438,10 @@ public abstract class CardPanelContainer extends SkinnedPanel {
 
     private void doingLayout() {
         // Inform listeners we're doing layout
-        for (LayoutEventListener listener : layoutListeners) {
-            listener.doingLayout();
+        if (!this.isDragged) {
+            for (LayoutEventListener listener : layoutListeners) {
+                listener.doingLayout();
+            }
         }
     }
 

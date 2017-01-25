@@ -492,10 +492,13 @@ public class TargetingOverlay {
         // An "initialized"-type variable is needed since we can't initialize on construction
         // (because CardPanelContainers aren't ready at that point)
 	    private boolean isListening = false;
+        private boolean isDragged = false;
 	    public boolean getIsListening() { return isListening; }
 	    public void setIsListening(boolean listening) { isListening = listening; }
 
         private void assembleAndRepaint() {
+            if (isDragged) { return; }
+
             final GameView gameView = matchUI.getGameView();
             if (gameView != null) {
                 assembleArcs(gameView.getCombat(), true); // Force update despite timer
@@ -514,16 +517,19 @@ public class TargetingOverlay {
         public void mouseOut(CardPanel panel, MouseEvent evt) {
             assembleAndRepaint();
         }
+
+        // Do not aggressively assemble/repaint when dragging around card panels
+        @Override
+        public void mouseDragStart(CardPanel dragPanel, MouseEvent evt) { isDragged = true; }
+        @Override
+        public void mouseDragEnd(CardPanel dragPanel, MouseEvent evt) { isDragged = false; }
+
         // We don't need the other mouse events the interface provides; stub them out
         @Override
         public void mouseLeftClicked(CardPanel panel, MouseEvent evt) {}
         @Override
         public void mouseRightClicked(CardPanel panel, MouseEvent evt) {}
         @Override
-        public void mouseDragStart(CardPanel dragPanel, MouseEvent evt) {}
-        @Override
         public void mouseDragged(CardPanel dragPanel, int dragOffsetX, int dragOffsetY, MouseEvent evt) {}
-        @Override
-        public void mouseDragEnd(CardPanel dragPanel, MouseEvent evt) {}
     }
 }

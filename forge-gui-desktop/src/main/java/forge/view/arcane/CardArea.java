@@ -57,6 +57,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     private int actualCardsPerRow;
     private int mouseDragStartX;
     private int mouseDragStartY;
+    private boolean isDragged;
     private boolean isVertical;
     private boolean hasScrollbars;
 
@@ -222,7 +223,9 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
             this.getParent().validate();
         }
 
-        super.doLayout();
+        if (!isDragged) {
+            super.doLayout();
+        }
     }
 
     @Override
@@ -237,6 +240,9 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseDragStart(final CardPanel dragPanel, final MouseEvent evt) {
+        this.isDragged = true;
+        super.setDragged(true);
+
         super.mouseDragStart(dragPanel, evt);
 
         this.mouseDragStartX = dragPanel.getCardX();
@@ -284,6 +290,9 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
+        this.isDragged = false;
+        super.setDragged(false);
+
         super.mouseDragEnd(dragPanel, evt);
         this.doLayout();
         final JLayeredPane layeredPane = SwingUtilities.getRootPane(CardPanel.getDragAnimationPanel()).getLayeredPane();
