@@ -378,12 +378,15 @@ public class SpecialCardAi {
     // Phyrexian Dreadnought
     public static class PhyrexianDreadnought {
         public static CardCollection reviseCreatureSacList(Player ai, SpellAbility sa, CardCollection choices) {
-            choices.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
+            choices.sort(Collections.reverseOrder(ComputerUtilCard.EvaluateCreatureComparator));
             int power = 0;
             List<Card> toKeep = Lists.newArrayList();
             for (Card c : choices) {
                 if (c.getName().equals(sa.getHostCard().getName())) {
                     continue; // not worth it sac'ing another Dreadnaught
+                }
+                if (c.getNetPower() < 1) {
+                    continue; // contributes nothing to Dreadnought requirements
                 }
                 if (power >= 12) {
                     break;
