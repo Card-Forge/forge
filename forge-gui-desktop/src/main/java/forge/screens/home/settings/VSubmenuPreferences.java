@@ -76,6 +76,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnableMusic = new OptionsCheckBox("Enable Music");
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enhance UI for Touchscreens");
+    private final JCheckBox cbTimedTargOverlay = new OptionsCheckBox("Enable Targeting Overlay Optimization");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox("Spell Description in Payment Prompt");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
@@ -251,6 +252,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbStackCreatures, regularConstraints);
         pnlPrefs.add(new NoteLabel("Stacks identical creatures on the battlefield like lands, artifacts, and enchantments."), regularConstraints);
+
+        pnlPrefs.add(cbTimedTargOverlay, "w 80%!, gap 10% 0 0 10px, span 2 1");
+        pnlPrefs.add(new NoteLabel("Enables throttling-based optimization of targeting overlay to reduce CPU use (only disable if you experience choppiness on older hardware, requires starting a new match)"), regularConstraints);
 
         pnlPrefs.add(cbpDisplayCurrentCardColors, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Displays the breakdown of the current color of cards in the card detail information panel."), regularConstraints);
@@ -580,6 +584,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbAltSoundSystem() {
         return cbAltSoundSystem;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbTimedTargOverlay() {
+        return cbTimedTargOverlay;
     }
 
     public final JCheckBox getCbUiForTouchScreen() {

@@ -43,6 +43,9 @@ import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VStack.StackInstanceTextArea;
@@ -101,8 +104,102 @@ public class TargetingOverlay {
         return this.pnl;
     }
 
-    // Though this is called on every repaint, we take means to avoid it fully
-    // running every time (to reduce CPU usage).
+    // The original version of assembleArcs, without code to throttle it.
+    // Re-added as the new version was causing issues for at least one user.
+    private void assembleArcs(final CombatView combat) {
+        //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+        arcsFoe.clear();
+        arcsFriend.clear();
+        cardPanels.clear();
+        cardsVisualized.clear();
+
+        final StackInstanceTextArea activeStackItem = matchUI.getCStack().getView().getHoveredItem();
+
+        switch (matchUI.getCDock().getArcState()) {
+            case OFF:
+                return;
+            case MOUSEOVER:
+                // Draw only hovered card
+                activePanel = null;
+                for (final VField f : matchUI.getFieldViews()) {
+                    cardPanels.addAll(f.getTabletop().getCardPanels());
+                    final List<CardPanel> cPanels = f.getTabletop().getCardPanels();
+                    for (final CardPanel c : cPanels) {
+                        if (c.isSelected()) {
+                            activePanel = c;
+                            break;
+                        }
+                    }
+                }
+                if (activePanel == null && activeStackItem == null) { return; }
+                break;
+            case ON:
+                // Draw all
+                for (final VField f : matchUI.getFieldViews()) {
+                    cardPanels.addAll(f.getTabletop().getCardPanels());
+                }
+        }
+
+        //final Point docOffsets = FView.SINGLETON_INSTANCE.getLpnDocument().getLocationOnScreen();
+        // Locations of arc endpoint, per card, with ID as primary key.
+        final Map<Integer, Point> endpoints = new HashMap<Integer, Point>();
+
+        Point cardLocOnScreen;
+        Point locOnScreen = this.getPanel().getLocationOnScreen();
+
+        for (CardPanel c : cardPanels) {
+            if (c.isShowing()) {
+	            cardLocOnScreen = c.getCardLocationOnScreen();
+            endpoints.put(c.getCard().getId(), new Point(
+                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + (float)c.getWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X),
+	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + (float)c.getHeight() * CardPanel.TARGET_ORIGIN_FACTOR_Y)
+            ));
+           }
+       }
+
+        if (matchUI.getCDock().getArcState() == ArcState.MOUSEOVER) {
+            // Only work with the active panel
+            if (activePanel != null) {
+                addArcsForCard(activePanel.getCard(), endpoints, combat);
+            }
+        }
+        else {
+            // Work with all card panels currently visible
+            for (final CardPanel c : cardPanels) {
+                if (!c.isShowing()) {
+                    continue;
+                }
+                addArcsForCard(c.getCard(), endpoints, combat);
+            }
+        }
+
+        //draw arrow connecting active item on stack
+        if (activeStackItem != null) {
+            Point itemLocOnScreen = activeStackItem.getLocationOnScreen();
+            if (itemLocOnScreen != null) {
+                itemLocOnScreen.x += StackInstanceTextArea.CARD_WIDTH * CardPanel.TARGET_ORIGIN_FACTOR_X + StackInstanceTextArea.PADDING - locOnScreen.getX();
+                itemLocOnScreen.y += StackInstanceTextArea.CARD_HEIGHT * CardPanel.TARGET_ORIGIN_FACTOR_Y + StackInstanceTextArea.PADDING - locOnScreen.getY();
+    
+                StackItemView instance = activeStackItem.getItem();
+                PlayerView activator = instance.getActivatingPlayer();
+                while (instance != null) {
+                    for (CardView c : instance.getTargetCards()) {
+                        addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()));
+                    }
+                    for (PlayerView p : instance.getTargetPlayers()) {
+                        Point point = getPlayerTargetingArrowPoint(p, locOnScreen);
+                        if(point != null) {
+                            addArc(point, itemLocOnScreen, activator.isOpponentOf(p));
+                        }
+                    }
+                    instance = instance.getSubInstance();
+                }
+            }
+        }
+    }
+
+    // A throttled version of assembleArcs. Though it is still called on every
+    // repaint, we take means to avoid it fully running every time (to reduce CPU usage).
     private boolean assembleArcs(final CombatView combat, boolean forceAssemble) {
         if (!forceAssemble) {
             /* -- Minimum update frequency timer, currently disabled --
@@ -203,6 +300,7 @@ public class TargetingOverlay {
         return endpoints;
     }
 
+    // This section is a refactored portion of the new-style assembleArcs.
     private void assembleStackArrows() {
         final StackInstanceTextArea activeStackItem = matchUI.getCStack().getView().getHoveredItem();
 
@@ -356,7 +454,9 @@ public class TargetingOverlay {
     }
 
     private class OverlayPanel extends SkinnedPanel {
-        // Arrow drawing code by the MAGE team, used with permission.
+        private final boolean useThrottling = FModel.getPreferences().getPrefBoolean(FPref.UI_TIMED_TARGETING_OVERLAY_UPDATES);
+
+        // Arrow drawing code by the XMage team, used with permission.
         private Area getArrow(float length, float bendPercent) {
             float p1x = 0, p1y = 0;
             float p2x = length, p2y = 0;
@@ -453,13 +553,18 @@ public class TargetingOverlay {
             boolean assembled = false;
             final GameView gameView = matchUI.getGameView();
             if (gameView != null) {
-                assembled = assembleArcs(gameView.getCombat(), false);
-                assembleStackArrows();
+                if (useThrottling) {
+                    assembled = assembleArcs(gameView.getCombat(), false);
+                    assembleStackArrows();
+                } else {
+                    assembleArcs(gameView.getCombat());
+                }
             }
 
             if (arcsFoe.isEmpty() && arcsFriend.isEmpty()) {
                 if (assembled) {
                     // We still need to repaint to get rid of visual artifacts
+                    // The original (non-throttled) code did not do this repaint.
                     FView.SINGLETON_INSTANCE.getFrame().repaint();
                 }
                 return;
@@ -481,7 +586,7 @@ public class TargetingOverlay {
             drawArcs(g2d, colorOther, arcsFriend);
             drawArcs(g2d, colorCombat, arcsFoe);
 
-            if (assembled) {
+            if (assembled || !useThrottling) {
                 FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
             }
         }
