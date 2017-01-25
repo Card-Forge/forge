@@ -124,8 +124,8 @@ public class TargetingOverlay {
             }
         }
 
-        if (!assembler.getIsListening() && matchUI != null && matchUI.getFieldViews() != null) {
-            assembler.setIsListening(true);
+        if (!assembler.isListening() && matchUI != null && matchUI.getFieldViews() != null) {
+            assembler.setListening(true);
             for (final VField f : matchUI.getFieldViews()) {
                 f.getTabletop().addLayoutListener(assembler);
                 f.getTabletop().addCardPanelMouseListener(assembler);
@@ -493,8 +493,8 @@ public class TargetingOverlay {
         // (because CardPanelContainers aren't ready at that point)
 	    private boolean isListening = false;
         private boolean isDragged = false;
-	    public boolean getIsListening() { return isListening; }
-	    public void setIsListening(boolean listening) { isListening = listening; }
+	    public boolean isListening() { return isListening; }
+	    public void setListening(boolean listening) { isListening = listening; }
 
         private void assembleAndRepaint() {
             if (isDragged) { return; }
