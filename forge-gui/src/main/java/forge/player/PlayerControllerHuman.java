@@ -649,13 +649,7 @@ public class PlayerControllerHuman
         getGui().setCard(c.getView());
 
         boolean result = false;
-        if (GuiBase.getInterface().isLibgdxPort()) {
-            result = getGui().confirm(view, String.format("Put %s on the top or bottom of your library?", view), ImmutableList.of("Top", "Bottom"));
-        } else {
-            final InputConfirm inp = new InputConfirm(this, String.format("Put %s on the top or bottom of your library?", view), "Top", "Bottom", true, c.getView());
-            inp.showAndWait();
-            result = inp.getResult();
-        }
+	result = InputConfirm.confirm(this, view, String.format("Put %s on the top or bottom of your library?", view), true, ImmutableList.of("Top", "Bottom"));
 
         endTempShowCards();
         return result;
@@ -1024,13 +1018,8 @@ public class PlayerControllerHuman
             case LeftOrRight:        labels = ImmutableList.of("Left",                       "Right");        break;
             default:                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
-        if (GuiBase.getInterface().isLibgdxPort()) {
-            return getGui().confirm(CardView.get(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
-        } else {
-            final InputConfirm inp = new InputConfirm(this, question, labels.get(0), labels.get(1), defaultVal == null || defaultVal.booleanValue(), sa);
-            inp.showAndWait();
-            return inp.getResult();
-        }
+	
+        return InputConfirm.confirm(this, sa, question, defaultVal == null || defaultVal.booleanValue(), labels);
     }
 
     @Override
@@ -1163,14 +1152,7 @@ public class PlayerControllerHuman
         }
         
         boolean confirmed = false;
-        if (GuiBase.getInterface().isLibgdxPort()) {
-            confirmed = getGui().confirm(CardView.get(c), message, colorNames) ;
-        } else {
-            final InputConfirm inp = new InputConfirm(this, message, colorNames.get(0), colorNames.get(1), CardView.get(c));
-            inp.showAndWait();
-            confirmed = inp.getResult();
-        }
-            
+	confirmed = InputConfirm.confirm(this, CardView.get(c), message, true, colorNames) ;
         final int idxChosen = confirmed ? 0 : 1;
         return MagicColor.fromName(colorNames.get(idxChosen));
     }

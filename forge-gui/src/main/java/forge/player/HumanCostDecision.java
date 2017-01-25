@@ -948,17 +948,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (cost.payCostFromSource()) {
             final int maxCounters = source.getCounters(cost.counter);
             if (amount.equals("All")) {
-                if (GuiBase.getInterface().isLibgdxPort()) {
-                    final CardView view = CardView.get(ability.getHostCard());
-                    if (!controller.getGui().confirm(view, "Remove all counters?")) {
-                        return null;
-                    }
-                } else {
-                    final InputConfirm inp = new InputConfirm(controller, "Remove all counters?", ability);
-                    inp.showAndWait();
-                    if (!inp.getResult()) {
-                        return null;
-                    }
+                if (!InputConfirm.confirm(controller, ability, "Remove all counters?")) {
+                    return null;
                 }
                 cntRemoved = maxCounters;
             }

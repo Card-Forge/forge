@@ -17,6 +17,10 @@
  */
 package forge.match.input;
 
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
+
 import forge.GuiBase;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -45,20 +49,37 @@ public class InputConfirm extends InputSyncronizedBase {
     private CardView card;
 
     // simple interface to hide ugliness deciding how to confirm
-    public static boolean confirm(final PlayerControllerHuman controller, final CardView card, String message) {
+    protected static ImmutableList<String> defaultOptions = ImmutableList.of("Yes", "No");
+    public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final String message) {
+        return InputConfirm.confirm(controller, card, message, true, defaultOptions);
+    }
+    public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final String message, final boolean defaultIsYes, final List<String> options) {
          if (GuiBase.getInterface().isLibgdxPort()) {
-             return controller.getGui().confirm(card,message);
+             return controller.getGui().confirm(card, message, defaultIsYes, options);
          } else {
-             final InputConfirm inp = new InputConfirm(controller, message, card);
+             InputConfirm inp;
+             if ( options.size() == 2 ) {
+                 inp = new InputConfirm(controller, message, options.get(0), options.get(1), defaultIsYes, card);
+             } else { 
+                 inp = new InputConfirm(controller, message, defaultOptions.get(0), defaultOptions.get(1), defaultIsYes, card);
+             }
              inp.showAndWait();
              return inp.getResult();
          }
     }
-    public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, String message) {
+    public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, final String message) {
+        return InputConfirm.confirm(controller, sa, message, true, defaultOptions);
+    }
+    public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, final String message, final boolean defaultIsYes, final List<String> options) {
          if (GuiBase.getInterface().isLibgdxPort()) {
-             return controller.getGui().confirm((sa==null)?null:CardView.get(sa.getHostCard()),message);
+             return controller.getGui().confirm((sa==null)?null:CardView.get(sa.getHostCard()), message, defaultIsYes, options);
          } else {
-             final InputConfirm inp = new InputConfirm(controller, message, sa);
+             InputConfirm inp;
+             if ( options.size() == 2 ) {
+                 inp = new InputConfirm(controller, message, options.get(0), options.get(1), defaultIsYes, sa);
+             } else { 
+                 inp = new InputConfirm(controller, message, defaultOptions.get(0), defaultOptions.get(1), defaultIsYes, sa);
+             }
              inp.showAndWait();
              return inp.getResult();
          }
@@ -126,7 +147,7 @@ public class InputConfirm extends InputSyncronizedBase {
     protected final void showMessage() {
         getController().getGui().updateButtons(getOwner(), yesButtonText, noButtonText, true, true, defaultYes);
         if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
-             (card!=null) ) {	
+             (card!=null) ) {
             final StringBuilder sb = new StringBuilder();
             sb.append(card.toString());
             if ( (sa != null) && (sa.toString().length()>1) ) { // some spell abilities have no useful string value
