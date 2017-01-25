@@ -10,6 +10,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.TextRenderer;
+import forge.card.CardZoom;
+import forge.game.card.CardView;
 import forge.menu.FMagnifyView;
 import forge.toolbox.FButton;
 import forge.toolbox.FButton.Corner;
@@ -29,6 +31,11 @@ public class VPrompt extends FContainer {
     private final FButton btnOk, btnCancel;
     private final MessageLabel lblMessage;
     private String message;
+    private CardView card = null ; 
+
+    public void setCardView(final CardView card) {
+        this.card = card ;
+    }
 
     public VPrompt(String okText, String cancelText, FEventHandler okCommand, FEventHandler cancelCommand) {
         lblMessage = add(new MessageLabel());
@@ -57,6 +64,11 @@ public class VPrompt extends FContainer {
     }
     public void setMessage(String message0) {
         message = message0;
+        card = null ;
+    }
+    public void setMessage(String message0, CardView card0) {
+        message = message0;
+        card = card0;
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */
@@ -86,6 +98,22 @@ public class VPrompt extends FContainer {
             TextBounds textBounds = renderer.getWrappedBounds(message, FONT, maxWidth);
             if (textBounds.height > maxHeight) {
                 FMagnifyView.show(this, message, FORE_COLOR, BACK_COLOR, FONT, false);
+            }
+            return true;
+        }
+
+        @Override
+        public boolean fling(float x, float y) {
+            if ( card != null ) { 
+                CardZoom.show(card);
+            }
+            return true;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            if ( card != null ) { 
+                CardZoom.show(card);
             }
             return true;
         }
