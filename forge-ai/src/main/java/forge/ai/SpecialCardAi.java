@@ -21,9 +21,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -378,6 +375,26 @@ public class SpecialCardAi {
         }
     }
 
+    // Phyrexian Dreadnought
+    public static class PhyrexianDreadnought {
+        public static CardCollection reviseCreatureSacList(Player ai, SpellAbility sa, CardCollection choices) {
+            choices.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
+            int power = 0;
+            List<Card> toKeep = Lists.newArrayList();
+            for (Card c : choices) {
+                if (c.getName().equals(sa.getHostCard().getName())) {
+                    continue; // not worth it sac'ing another Dreadnaught
+                }
+                if (power >= 12) {
+                    break;
+                }
+                toKeep.add(c);
+                power += c.getNetPower();
+            }
+
+            return new CardCollection(toKeep);
+        }
+    }
     // Timetwister
     public static class Timetwister {
         public static boolean consider(Player ai, SpellAbility sa) {

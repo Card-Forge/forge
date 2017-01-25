@@ -1424,8 +1424,13 @@ public class AiController {
                     }
                 }
         }
+
+        // TODO: Hack for Phyrexian Dreadnought. Might need generalization (possibly its own AI logic)
+        if (sa.getHostCard() != null && "Phyrexian Dreadnought".equals(sa.getHostCard().getName())) {
+            result = SpecialCardAi.PhyrexianDreadnought.reviseCreatureSacList(player, sa, result);
+        }
+
         return result;
-        
     }
 
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) {
