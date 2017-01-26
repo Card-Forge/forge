@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Aetherborn Rogue
 PT:3/3
 S:Mode$ Continuous | Affected$ Aetherborn.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Self | TriggerController$ TriggeredCardController | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME or another Aetherborn you control dies, you draw a card and you lose 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME or another Aetherborn you control dies, you draw a card and you lose 1 life.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Aetherborn.Other+YouCtrl | TriggerZones$ Battlefield | TriggerController$ TriggeredCardController | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Aetherborn you control dies, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 
