@@ -802,7 +802,7 @@ public class Cost {
                     costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
                 }
             } else if (part instanceof CostDiscard || part instanceof CostTapType || 
-                    part instanceof CostAddMana) {
+                    part instanceof CostAddMana || part instanceof CostPayLife) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
                     if (other.getClass().equals(part.getClass()) &&
@@ -817,6 +817,8 @@ public class Cost {
                             costParts.add(new CostTapType(amount, part.getType(), part.getTypeDescription(), !tappart.canTapSource));
                         } else if (part instanceof CostAddMana) {
                             costParts.add(new CostAddMana(amount, part.getType(), part.getTypeDescription()));
+                        } else if (part instanceof CostPayLife) {
+                            costParts.add(new CostPayLife(amount));
                         }
                         toRemove.add(other);
                         alreadyAdded = true;
