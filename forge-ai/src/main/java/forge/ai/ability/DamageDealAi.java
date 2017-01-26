@@ -704,7 +704,15 @@ public class DamageDealAi extends DamageAiBase {
 
     private boolean doXLifeDrainLogic(Player ai, SpellAbility sa, int origDmg) {
         Card source = sa.getHostCard();
-        int dmg = origDmg - source.getCMC(); // otherwise AI incorrectly calculates mana it can afford
+
+        // detect the top ability that actually targets in Drain Life and Soul Burn scripts
+        SpellAbility saTgt = sa;
+        while (saTgt.getParent() != null) {
+            saTgt = saTgt.getParent();
+        }
+
+        // TODO: somehow account for the cost reduction?
+        int dmg = origDmg - saTgt.getPayCosts().getTotalMana().getCMC(); // otherwise AI incorrectly calculates mana it can afford
         Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
 
         if (dmg < 3 && dmg < opponent.getLife()) {
@@ -727,11 +735,6 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        // detect the top ability that actually targets in Drain Life and Soul Burn scripts
-        SpellAbility saTgt = sa;
-        while (saTgt.getParent() != null) {
-            saTgt = saTgt.getParent();
-        }
         saTgt.resetTargets();
         saTgt.getTargets().add(tgtCreature != null && dmg < opponent.getLife() ? tgtCreature : opponent);
 
