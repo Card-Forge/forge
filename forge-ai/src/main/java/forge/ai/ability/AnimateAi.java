@@ -137,7 +137,10 @@ public class AnimateAi extends SpellAbilityAi {
             return false;  // what is this for?
         }
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getApi() == ApiType.Sacrifice) {
-            return true;    // interrupt sacrifice
+            if (!AnimateAi.isAnimatedThisTurn(aiPlayer, source)) {
+                this.rememberAnimatedThisTurn(aiPlayer, source);
+                return true;    // interrupt sacrifice
+            }
         }
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa)) {
             return false;   // prevent crewing with equal or better creatures
