@@ -11,7 +11,6 @@ import forge.ai.AiCardMemory;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardType;
 import forge.game.Game;

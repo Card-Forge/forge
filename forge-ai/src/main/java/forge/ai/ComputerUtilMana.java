@@ -212,6 +212,7 @@ public class ComputerUtilMana {
 
                 // If a manland was previously animated this turn, do not tap it to animate another manland
                 if (sa.getHostCard().isLand() && ma.getHostCard().isLand() 
+                        && ai.getController() instanceof PlayerControllerAi
                         && AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) {
                     continue;
                 }
