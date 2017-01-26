@@ -4,19 +4,15 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.ai.*;
-import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
-import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -27,10 +23,8 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import java.util.HashMap;
 
 import java.util.List;
-import java.util.Map;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
