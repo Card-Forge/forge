@@ -706,21 +706,37 @@ public class DamageDealAi extends DamageAiBase {
         Card source = sa.getHostCard();
         int dmg = origDmg - source.getCMC(); // otherwise AI incorrectly calculates mana it can afford
 
+        if (dmg < 3) {
+            return false;
+        }
+
+        Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
+        CardCollection creatures = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+
+        Card tgtCreature = null;
+        for (Card c : creatures) {
+            int power = c.getNetPower();
+            int toughness = c.getNetToughness();
+            boolean canDie = !(c.hasKeyword("Indestructible") || ComputerUtil.canRegenerate(c.getController(), c));
+
+            // Currently will target creatures with toughness 3+ (or power 5+) 
+            // and only if the creature can actually die
+            if (canDie && toughness <= dmg && (toughness >= 3 || power >= 5)) {
+                tgtCreature = c;
+                break;
+            }
+        }
+
         // detect the top ability that actually targets in Drain Life and Soul Burn scripts
         SpellAbility saTgt = sa;
         while (saTgt.getParent() != null) {
             saTgt = saTgt.getParent();
         }
         saTgt.resetTargets();
-        saTgt.getTargets().add(ai.getOpponents().min(PlayerPredicates.compareByLife()));
+        saTgt.getTargets().add(tgtCreature != null ? tgtCreature : opponent);
 
         // TODO: this currently does not work for Soul Burn because of xColorManaPaid (B/R) which the AI doesn't set
-        if (dmg >= 3) {
-            source.setSVar("PayX", Integer.toString(dmg));
-            return true;
-        }
-
-        // TODO: improve to make it also target creatures
-        return false;
+        source.setSVar("PayX", Integer.toString(dmg));
+        return true;
     }
 }
