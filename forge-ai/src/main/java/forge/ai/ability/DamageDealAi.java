@@ -4,32 +4,40 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.ai.*;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import java.util.HashMap;
 
 import java.util.List;
+import java.util.Map;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        final String logic = sa.getParam("AILogic");
 
         Card source = sa.getHostCard();
 
@@ -58,6 +66,11 @@ public class DamageDealAi extends DamageAiBase {
                 // Set PayX here to maximum value.
                 dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(dmg));
+
+                // Life Drain
+                if ("XLifeDrain".equals(logic)) {
+                    return doXLifeDrainLogic(ai, sa, dmg);
+                }
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
@@ -693,5 +706,27 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return true;
+    }
+
+    private boolean doXLifeDrainLogic(Player ai, SpellAbility sa, int origDmg) {
+        Card source = sa.getHostCard();
+        int dmg = origDmg - source.getCMC(); // otherwise AI incorrectly calculates mana it can afford
+
+        // detect the top ability that actually targets in Drain Life and Soul Burn scripts
+        SpellAbility saTgt = sa;
+        while (saTgt.getParent() != null) {
+            saTgt = saTgt.getParent();
+        }
+        saTgt.resetTargets();
+        saTgt.getTargets().add(ai.getOpponents().min(PlayerPredicates.compareByLife()));
+
+        // TODO: this currently does not work for Soul Burn because of xColorManaPaid (B/R) which the AI doesn't set
+        if (dmg >= 3) {
+            source.setSVar("PayX", Integer.toString(dmg));
+            return true;
+        }
+
+        // TODO: improve to make it also target creatures
+        return false;
     }
 }
