@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 
@@ -70,6 +72,16 @@ public class CPrompt implements ICDoc {
         }
     };
 
+    private final PropertyChangeListener focusOnEnable = new PropertyChangeListener() {
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+            boolean isEnabled = (Boolean) evt.getNewValue();
+            if (isEnabled && (lastFocusedButton == null || lastFocusedButton == view.getBtnOK())) {
+                view.getBtnOK().requestFocusInWindow();
+            }
+        }
+    };
+
     private final FocusListener onFocus = new FocusAdapter() {
         @Override
         public void focusGained(final FocusEvent e) {
@@ -86,6 +98,10 @@ public class CPrompt implements ICDoc {
         button.addActionListener(onClick);
         button.removeFocusListener(onFocus);
         button.addFocusListener(onFocus);
+        if (button == view.getBtnOK()) {
+            button.removePropertyChangeListener("enabled", focusOnEnable);
+            button.addPropertyChangeListener("enabled", focusOnEnable);
+        }
     }
 
     @Override
