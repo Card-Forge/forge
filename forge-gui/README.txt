@@ -12,7 +12,7 @@ Updating to a newer version Instructions:
 -----------------------------------------
 
 - User data migration -
-User data files, like decks, saved gauntlets, and card pictures, are now stored in new directories separate from the program data.  When this version of Forge is first run, it will scan the program directory for all user data and automatically migrate the files to their new homes.  There are three defined user data directores: userDir, cacheDir, and cardPicsDir, and their locations depend on the standard paths for your operating system:
+User data files, like decks, saved gauntlets, and card pictures, are now stored in new directories separate from the program data.  When this version of Forge is first run, it will scan the program directory for all user data and automatically migrate the files to their new homes.  There are three defined user data directories: userDir, cacheDir, and cardPicsDir, and their locations depend on the standard paths for your operating system:
 
     Windows:
         userDir=%APPDATA%/Forge/
