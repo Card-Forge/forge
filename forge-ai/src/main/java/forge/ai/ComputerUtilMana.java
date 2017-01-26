@@ -800,10 +800,10 @@ public class ComputerUtilMana {
 
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
         if (curPhase == PhaseType.MAIN2 || curPhase == PhaseType.CLEANUP) {
-            aic.getCardMemory().clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES);
+            AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES);
         }
         else {
-            if (aic.getCardMemory().isRememberedCard(sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+            if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
                 // This mana source is held elsewhere for a Main Phase 2 spell.
                 return true;
             }

@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
+import forge.ai.AiCardMemory;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
@@ -10,6 +11,7 @@ import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -63,7 +65,7 @@ public class ManaEffectAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
-         if ("ManaRitual".equals(logic)) {
+        if (logic.startsWith("ManaRitual")) {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
@@ -110,7 +112,9 @@ public class ManaEffectAi extends SpellAbilityAi {
           
         CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
         int numManaSrcs = manaSources.size();
-        int manaReceived = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
+        int manaReceived = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
+        manaReceived *= sa.getParam("Produced").split(" ").length;
+
         int selfCost = sa.getPayCosts().getCostMana() != null ? sa.getPayCosts().getCostMana().getMana().getCMC() : 0;
         byte producedColor = MagicColor.fromName(sa.getParam("Produced"));
         int searchCMC = numManaSrcs - selfCost + manaReceived;
@@ -139,8 +143,8 @@ public class ManaEffectAi extends SpellAbilityAi {
                 continue;
             }
 
-            if (testSa.getHostCard().getName().equals(host.getName())) {
-                // prevent infinitely recursing own ability when testing AI play decision
+            if (testSa.getHostCard().equals(host) || testSa.hasParam("AIRecursiveTestAbility")) {
+                // prevent infinitely recursing mana ritual and other abilities with reentry
                 continue;
             }
 

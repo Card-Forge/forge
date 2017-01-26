@@ -359,8 +359,8 @@ public class SpecialCardAi {
                     continue;
                 }
 
-                if (testSa.getHostCard().getName().equals(sa.getHostCard().getName())) {
-                    // prevent infinitely recursing own ability when testing AI play decision
+                if (testSa.getHostCard().getName().equals(sa.getHostCard().getName()) || testSa.hasParam("AIRecursiveTestAbility")) {
+                    // prevent infinitely recursing abilities that are susceptible to reentry
                     continue;
                 }
 
@@ -544,8 +544,9 @@ public class SpecialCardAi {
                     // cut short considering to play counterspells via Yawgmoth's Will
                     continue;
                 }
-                if (ab.getHostCard().getName().equals(sa.getHostCard().getName())) {
-                    // prevent infinitely recursing own ability when testing AI play decision
+
+                if (ab.getHostCard().getName().equals(sa.getHostCard().getName()) || ab.hasParam("AIRecursiveTestAbility")) {
+                    // prevent infinitely recursing abilities that are susceptible to reentry
                     continue;
                 }
 

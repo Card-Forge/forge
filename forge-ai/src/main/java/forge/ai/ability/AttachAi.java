@@ -1095,7 +1095,7 @@ public class AttachAi extends SpellAbilityAi {
             // make sure to prioritize casting spells in main 2 (creatures, other equipment, etc.) rather than moving equipment around
             boolean decideMoveFromUseless = uselessCreature && aic.getBooleanProperty(AiProps.PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS);
 
-            if (!decideMoveFromUseless && aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+            if (!decideMoveFromUseless && AiCardMemory.isMemorySetEmpty(aiPlayer, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
                 SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Attach);
                 if (futureSpell != null && futureSpell.getHostCard() != null) {
                     aic.reserveManaSourcesForMain2(futureSpell);
@@ -1103,12 +1103,12 @@ public class AttachAi extends SpellAbilityAi {
             }
 
             // avoid randomly moving the equipment back and forth between several creatures in one turn
-            if (aic.getCardMemory().isRememberedCard(sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN)) {
+            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN)) {
                 return null;
             } 
         }
         
-        aic.getCardMemory().rememberCard(sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN);
+        AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN);
 
         if (c == null && mandatory) {
             CardLists.shuffle(list);

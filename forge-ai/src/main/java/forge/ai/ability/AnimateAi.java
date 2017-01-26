@@ -610,12 +610,10 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     private void rememberAnimatedThisTurn(Player ai, Card c) {
-        AiCardMemory mem = ((PlayerControllerAi)ai.getController()).getAi().getCardMemory();
-        mem.rememberCard(c, AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
+        AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
     }
 
     public static boolean isAnimatedThisTurn(Player ai, Card c) {
-        AiCardMemory mem = ((PlayerControllerAi)ai.getController()).getAi().getCardMemory();
-        return mem.isRememberedCard(c, AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
+        return AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
     }
 }
