@@ -132,7 +132,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
 
         final CardCollection saidNoTo = new CardCollection();
-        while (tgtCards.size() > saidNoTo.size() && amount > 0) {
+        while (tgtCards.size() > saidNoTo.size() && saidNoTo.size() < amount && amount > 0) {
             Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, "Select a card to play");
             if (tgtCard == null) {
                 return;
