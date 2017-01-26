@@ -706,11 +706,11 @@ public class DamageDealAi extends DamageAiBase {
         Card source = sa.getHostCard();
         int dmg = origDmg - source.getCMC(); // otherwise AI incorrectly calculates mana it can afford
 
-        if (dmg < 3) {
+        Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
+        if (dmg < 3 && dmg < opponent.getLife()) {
             return false;
         }
 
-        Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
         CardCollection creatures = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 
         Card tgtCreature = null;
@@ -733,7 +733,7 @@ public class DamageDealAi extends DamageAiBase {
             saTgt = saTgt.getParent();
         }
         saTgt.resetTargets();
-        saTgt.getTargets().add(tgtCreature != null ? tgtCreature : opponent);
+        saTgt.getTargets().add((tgtCreature != null && dmg < opponent.getLife()) ? tgtCreature : opponent);
 
         // TODO: this currently does not work for Soul Burn because of xColorManaPaid (B/R) which the AI doesn't set
         source.setSVar("PayX", Integer.toString(dmg));
