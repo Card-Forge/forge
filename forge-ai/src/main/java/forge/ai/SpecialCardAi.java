@@ -359,7 +359,7 @@ public class SpecialCardAi {
                     continue;
                 }
 
-                if (testSa.getHostCard().getName().equals(sa.getHostCard().getName()) || testSa.hasParam("AIRecursiveTestAbility")) {
+                if (testSa.getHostCard().getName().equals(sa.getHostCard().getName()) || testSa.hasParam("AINoRecursiveCheck")) {
                     // prevent infinitely recursing abilities that are susceptible to reentry
                     continue;
                 }
@@ -545,7 +545,7 @@ public class SpecialCardAi {
                     continue;
                 }
 
-                if (ab.getHostCard().getName().equals(sa.getHostCard().getName()) || ab.hasParam("AIRecursiveTestAbility")) {
+                if (ab.getHostCard().getName().equals(sa.getHostCard().getName()) || ab.hasParam("AINoRecursiveCheck")) {
                     // prevent infinitely recursing abilities that are susceptible to reentry
                     continue;
                 }

@@ -141,7 +141,7 @@ public class ManaEffectAi extends SpellAbilityAi {
                 continue;
             }
 
-            if (testSa.getHostCard().getName().equals(host.getName()) || testSa.hasParam("AIRecursiveTestAbility")) {
+            if (testSa.getHostCard().getName().equals(host.getName()) || testSa.hasParam("AINoRecursiveCheck")) {
                 // prevent infinitely recursing mana ritual and other abilities with reentry
                 continue;
             }
