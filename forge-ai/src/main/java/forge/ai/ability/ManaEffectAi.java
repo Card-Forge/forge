@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
-import forge.ai.AiCardMemory;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
@@ -11,7 +10,6 @@ import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
