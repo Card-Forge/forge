@@ -705,8 +705,8 @@ public class DamageDealAi extends DamageAiBase {
     private boolean doXLifeDrainLogic(Player ai, SpellAbility sa, int origDmg) {
         Card source = sa.getHostCard();
         int dmg = origDmg - source.getCMC(); // otherwise AI incorrectly calculates mana it can afford
-
         Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
+
         if (dmg < 3 && dmg < opponent.getLife()) {
             return false;
         }
@@ -733,7 +733,7 @@ public class DamageDealAi extends DamageAiBase {
             saTgt = saTgt.getParent();
         }
         saTgt.resetTargets();
-        saTgt.getTargets().add((tgtCreature != null && dmg < opponent.getLife()) ? tgtCreature : opponent);
+        saTgt.getTargets().add(tgtCreature != null && dmg < opponent.getLife() ? tgtCreature : opponent);
 
         // TODO: this currently does not work for Soul Burn because of xColorManaPaid (B/R) which the AI doesn't set
         source.setSVar("PayX", Integer.toString(dmg));
