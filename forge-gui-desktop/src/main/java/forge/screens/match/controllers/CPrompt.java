@@ -23,6 +23,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.Window;
+import java.awt.Dialog;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -72,12 +76,30 @@ public class CPrompt implements ICDoc {
         }
     };
 
+    private final WindowAdapter focusOKButtonOnDialogClose = new WindowAdapter() {
+        @Override
+        public void windowClosed(WindowEvent evt) {
+            view.getBtnOK().requestFocusInWindow();
+        }
+    };
+
     private final PropertyChangeListener focusOnEnable = new PropertyChangeListener() {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-            boolean isEnabled = (Boolean) evt.getNewValue();
-            if (isEnabled && (lastFocusedButton == null || lastFocusedButton == view.getBtnOK())) {
-                view.getBtnOK().requestFocusInWindow();
+            if (lastFocusedButton == null || lastFocusedButton == view.getBtnOK()) {
+                // Attempt to resolve sporadic button focus issues when dialogs are shown.
+                Dialog activeDialog = getActiveDialog(true);
+                if (activeDialog != null) {
+                    // If this dialog already has our listener, remove it
+                    activeDialog.removeWindowListener(focusOKButtonOnDialogClose);
+                    activeDialog.addWindowListener(focusOKButtonOnDialogClose);
+                }
+
+                // Focus the OK button when it becomes enabled
+                boolean isEnabled = (Boolean) evt.getNewValue();
+                if (isEnabled) {
+                    view.getBtnOK().requestFocusInWindow();
+                }
             }
         }
     };
@@ -108,6 +130,19 @@ public class CPrompt implements ICDoc {
     public void initialize() {
         _initButton(view.getBtnCancel(), actCancel);
         _initButton(view.getBtnOK(), actOK);
+    }
+
+    private static Dialog getActiveDialog(boolean modalOnly)
+    {
+        Window[] windows = Window.getWindows();
+        if (windows != null) {
+            for (Window w : windows) {
+                if (w.isShowing() && w instanceof Dialog && (!modalOnly || ((Dialog)w).isModal())) {
+                    return (Dialog)w;
+                }
+            }
+        }
+        return null;
     }
 
     private void selectButtonOk() {
