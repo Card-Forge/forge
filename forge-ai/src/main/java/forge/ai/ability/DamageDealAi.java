@@ -23,8 +23,10 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import java.util.HashMap;
 
 import java.util.List;
+import java.util.Map;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
@@ -57,14 +59,14 @@ public class DamageDealAi extends DamageAiBase {
         }
         if (damage.equals("X")) {
             if (sa.getSVar(damage).equals("Count$xPaid")) {
+                // Life Drain
+                if ("XLifeDrain".equals(logic)) {
+                    return doXLifeDrainLogic(ai, sa);
+                }
+
                 // Set PayX here to maximum value.
                 dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(dmg));
-
-                // Life Drain
-                if ("XLifeDrain".equals(logic)) {
-                    return doXLifeDrainLogic(ai, sa, dmg);
-                }
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
@@ -702,7 +704,7 @@ public class DamageDealAi extends DamageAiBase {
         return true;
     }
 
-    private boolean doXLifeDrainLogic(Player ai, SpellAbility sa, int origDmg) {
+    private boolean doXLifeDrainLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
 
         // detect the top ability that actually targets in Drain Life and Soul Burn scripts
@@ -711,9 +713,19 @@ public class DamageDealAi extends DamageAiBase {
             saTgt = saTgt.getParent();
         }
 
-        // TODO: somehow account for the cost reduction?
-        int dmg = origDmg - saTgt.getPayCosts().getTotalMana().getCMC(); // otherwise AI incorrectly calculates mana it can afford
         Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
+
+        // TODO: somehow account for the possible cost reduction?
+        int xColorRemaining = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));
+        int dmg = xColorRemaining - saTgt.getPayCosts().getTotalMana().getCMC(); // otherwise AI incorrectly calculates mana it can afford
+
+        // set the color map for black X for the purpose of Soul Burn
+        // TODO: somehow generalize this calculation to allow other potential similar cards to function in the future
+        if ("Soul Burn".equals(source.getName())) {
+            Map<String, Integer> xByColor = new HashMap<>();
+            xByColor.put("B", dmg - ComputerUtilMana.determineLeftoverMana(sa, ai, "R"));
+            source.setXManaCostPaidByColor(xByColor);
+        }
 
         if (dmg < 3 && dmg < opponent.getLife()) {
             return false;
@@ -739,7 +751,6 @@ public class DamageDealAi extends DamageAiBase {
         saTgt.resetTargets();
         saTgt.getTargets().add(tgtCreature != null && dmg < opponent.getLife() ? tgtCreature : opponent);
 
-        // TODO: this currently does not work for Soul Burn because of xColorManaPaid (B/R) which the AI doesn't set
         source.setSVar("PayX", Integer.toString(dmg));
         return true;
     }

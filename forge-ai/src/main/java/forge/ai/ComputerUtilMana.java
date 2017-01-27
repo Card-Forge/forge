@@ -12,6 +12,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -1291,6 +1292,34 @@ public class ComputerUtilMana {
             if (!canPayManaCost(sa, player, i)) {
                 return i - 1;
             }
+        }
+        return 99;
+    }
+
+    /**
+     * <p>
+     * determineLeftoverMana.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @param player
+     *            a {@link forge.game.player.Player} object.
+     * @param shardColor
+     *            a mana shard to specifically test for.
+     * @return a int.
+     * @since 1.0.15
+     */
+    public static int determineLeftoverMana(final SpellAbility sa, final Player player, final String shardColor) {
+        ManaCost origCost = sa.getPayCosts().getTotalMana();
+
+        String shardSurplus = shardColor;
+        for (int i = 1; i < 100; i++) {
+            ManaCost extra = new ManaCost(new ManaCostParser(shardSurplus));
+            if (!canPayManaCost(new ManaCostBeingPaid(ManaCost.combine(origCost, extra)), sa, player)) {
+                return i - 1;
+            }
+            shardSurplus += " " + shardColor;
         }
         return 99;
     }
