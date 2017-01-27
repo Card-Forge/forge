@@ -43,6 +43,7 @@ public enum AiProps { /** */
     ALWAYS_COUNTER_SPELLS_FROM_NAMED_CARDS (""), /** */
     ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS ("false"), /** */
     PRIORITY_REDUCTION_FOR_STORM_SPELLS ("0"), /** */
+    USE_BERSERK_AGGRESSIVELY ("false"), /** */
     MIN_COUNT_FOR_STORM_SPELLS ("0"); /** */
 
     private final String strDefaultVal;

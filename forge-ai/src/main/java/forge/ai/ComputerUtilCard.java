@@ -1087,6 +1087,7 @@ public class ComputerUtilCard {
         final Game game = ai.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final Combat combat = phase.getCombat();
+        final boolean isBerserk = "Berserk".equals(sa.getParam("AILogic"));
         
         if (!c.canBeTargetedBy(sa)) {
             return false;
@@ -1173,6 +1174,9 @@ public class ComputerUtilCard {
             List<Card> opposing = null;
             boolean pumpedWillDie = false;
             final boolean isAttacking = combat.isAttacking(c);
+
+            if (isBerserk && isAttacking) { pumpedWillDie = true; }
+
             if (isAttacking) {
                 pumpedCombat.addAttacker(pumped, opp);
                 opposing = combat.getBlockers(c);
@@ -1302,6 +1306,17 @@ public class ComputerUtilCard {
                 }
             }
         }
+        
+        if (isBerserk) {
+            // if we got here, Berserk will result in the pumped creature dying at EOT and the opponent will not lose
+            if (ai.getController() instanceof PlayerControllerAi) {
+                boolean aggr = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.USE_BERSERK_AGGRESSIVELY);
+                if (!aggr) {
+                    return false;
+                }
+            }
+        }
+
         return MyRandom.getRandom().nextFloat() < chance;
     }
     
@@ -1329,8 +1344,12 @@ public class ComputerUtilCard {
                 kws.add(kw);
             }
         }
+
+        final boolean isBerserk = "Berserk".equals(sa.getParam("AILogic"));
+        final int berserkPower = isBerserk ? c.getCurrentPower() : 0;
+
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
-        pumped.addTempPowerBoost(c.getTempPowerBoost() + power);
+        pumped.addTempPowerBoost(c.getTempPowerBoost() + power + berserkPower);
         pumped.addTempToughnessBoost(c.getTempToughnessBoost() + toughness);
         pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();

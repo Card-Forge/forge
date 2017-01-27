@@ -1,13 +1,11 @@
 package forge.ai.ability;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.AiController;
@@ -36,7 +34,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.TargetRestrictions;
@@ -144,6 +141,7 @@ public class PumpAi extends PumpAiBase {
         final String aiLogic = sa.getParam("AILogic");
 
         final boolean isFight = "Fight".equals(aiLogic) || "PowerDmg".equals(aiLogic);
+        final boolean isBerserk = "Berserk".equals(aiLogic);
 
         if ("MoveCounter".equals(aiLogic)) {
             final SpellAbility moveSA = sa.findSubAbilityByType(ApiType.MoveCounter);
@@ -337,7 +335,7 @@ public class PumpAi extends PumpAiBase {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
         }
 
-        if ((numDefense.contains("X") && defense == 0) || (numAttack.contains("X") && attack == 0)) {
+        if ((numDefense.contains("X") && defense == 0) || (numAttack.contains("X") && attack == 0 && !isBerserk)) {
             return false;
         }
 

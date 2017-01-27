@@ -1308,7 +1308,7 @@ public class ComputerUtilMana {
      * @param shardColor
      *            a mana shard to specifically test for.
      * @return a int.
-     * @since 1.0.15
+     * @since 1.5.59
      */
     public static int determineLeftoverMana(final SpellAbility sa, final Player player, final String shardColor) {
         ManaCost origCost = sa.getPayCosts().getTotalMana();
