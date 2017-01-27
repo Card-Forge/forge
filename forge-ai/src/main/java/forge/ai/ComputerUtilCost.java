@@ -580,7 +580,9 @@ public class ComputerUtilCost {
 
         for (Card c : cardsToConsider) {
             for (SpellAbility sa : c.getManaAbilities()) {
-                colorsAvailable.add(sa.getManaPart().getOrigProduced());
+                if (sa.getManaPart() != null) {
+                    colorsAvailable.add(sa.getManaPart().getOrigProduced());
+                }
             }
         }
 

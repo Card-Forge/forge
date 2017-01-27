@@ -4,9 +4,11 @@ import com.google.common.base.Predicates;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityUtils;
@@ -136,8 +138,14 @@ public class ManaEffectAi extends SpellAbilityAi {
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
         for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
             ManaCost cost = testSa.getPayCosts().getTotalMana();
+            boolean canPayWithAvailableColors = cost.canBePaidWithAvaliable(ColorSet.fromNames(
+                    ComputerUtilCost.getAvailableManaColors(ai, (List<Card>)null)).getColor());
+            
             if (cost.getCMC() == 0 && cost.countX() == 0) {
                 // no mana cost, no need to activate this SA then (additional mana not needed)
+                continue;
+            } else if (cost.getColorProfile() != 0 && !canPayWithAvailableColors) {
+                // don't have one of each shard represented, may not be able to pay the cost
                 continue;
             }
 

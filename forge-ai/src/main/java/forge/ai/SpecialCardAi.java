@@ -24,6 +24,7 @@ import java.util.List;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.card.ColorSet;
 
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -346,13 +347,17 @@ public class SpecialCardAi {
 
             for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
                 ManaCost cost = testSa.getPayCosts().getTotalMana();
+                boolean canPayWithAvailableColors = cost.canBePaidWithAvaliable(ColorSet.fromNames(
+                    ComputerUtilCost.getAvailableManaColors(ai, sa.getHostCard())).getColor());
+                
                 byte colorProfile = cost.getColorProfile();
                 
                 if (cost.getCMC() == 0 && cost.countX() == 0) {
                     // no mana cost, no need to activate this SA then (additional mana not needed)
                     continue;
-                } else if (colorProfile != 0 && (cost.getColorProfile() & MagicColor.fromName(prominentColor)) == 0) {
-                    // does not feature prominent color, won't be able to pay for it with SA activated for this color
+                } else if (colorProfile != 0 && !canPayWithAvailableColors
+                    && (cost.getColorProfile() & MagicColor.fromName(prominentColor)) == 0) {
+                    // don't have at least one of each shard required to pay, so most likely won't be able to pay
                     continue;
                 } else if ((testSa.getPayCosts().getTotalMana().getCMC() > devotion + numManaSrcs - activationCost)) {
                     // the cost may be too high even if we activate this SA
