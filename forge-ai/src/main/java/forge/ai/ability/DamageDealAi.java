@@ -728,8 +728,9 @@ public class DamageDealAi extends DamageAiBase {
             boolean canDie = !(c.hasKeyword("Indestructible") || ComputerUtil.canRegenerate(c.getController(), c));
 
             // Currently will target creatures with toughness 3+ (or power 5+) 
-            // and only if the creature can actually die
-            if (canDie && toughness <= dmg && (toughness >= 3 || power >= 5)) {
+            // and only if the creature can actually die, do not "underdrain"
+            // unless the creature has high power
+            if (canDie && toughness <= dmg && ((toughness == dmg && toughness >= 3) || power >= 5)) {
                 tgtCreature = c;
                 break;
             }
