@@ -279,6 +279,13 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
 
+        if (sa.getHostCard().getName().equals("Profaner of the Dead")) {
+            // TODO: this is a stub to prevent the AI from crashing the game when, for instance, playing the opponent's
+            // Profaner from exile without paying its mana cost. Otherwise the card is marked RemAIDeck and there is no
+            // specific AI to support playing it in a smarter way. Feel free to expand.
+            return !CardLists.filter(ai.getOpponents().getCardsIn(origin), CardPredicates.Presets.CREATURES).isEmpty();
+        }
+
         CardCollectionView humanType = CardLists.filterControlledBy(ai.getGame().getCardsIn(origin), ai.getOpponents());
         humanType = AbilityUtils.filterListByType(humanType, sa.getParam("ChangeType"), sa);
 
