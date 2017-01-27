@@ -71,7 +71,7 @@ public class DestroyAllAi extends SpellAbilityAi {
             if (ai.isCardInPlay("Crucible of Worlds") && !opponent.isCardInPlay("Crucible of Worlds") && !opplist.isEmpty()) {
                 return true;
             }
-            if (ComputerUtilCard.evaluatePermanentList(ailist) + 1 < ComputerUtilCard.evaluatePermanentList(opplist)) {
+            if (ComputerUtilCard.evaluatePermanentList(ailist) < ComputerUtilCard.evaluatePermanentList(opplist) + 1) {
                 return false;
             }
         } else if (ComputerUtilCard.evaluatePermanentList(ailist) >= ComputerUtilCard.evaluatePermanentList(opplist)) {
@@ -175,7 +175,7 @@ public class DestroyAllAi extends SpellAbilityAi {
         	if (ai.isCardInPlay("Crucible of Worlds") && !opponent.isCardInPlay("Crucible of Worlds") && !opplist.isEmpty()) {
         		return true;
         	}
-            if (ComputerUtilCard.evaluatePermanentList(ailist) + 1 < ComputerUtilCard.evaluatePermanentList(opplist)) {
+            if (ComputerUtilCard.evaluatePermanentList(ailist) < ComputerUtilCard.evaluatePermanentList(opplist) + 1) {
                 return false;
             }
         } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
