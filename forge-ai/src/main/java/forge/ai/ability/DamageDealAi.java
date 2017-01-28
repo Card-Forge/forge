@@ -107,6 +107,25 @@ public class DamageDealAi extends DamageAiBase {
             // This dummy ability will just deal 0 damage, but holds the logic for the AI for Master of Wild Hunt
             List<Card> wolves = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.Wolf+untapped+YouCtrl+Other", ai, source);
             dmg = Aggregates.sum(wolves, CardPredicates.Accessors.fnGetNetPower);
+        } else if ("Triskelion".equals(logic)) {
+            final int n = source.getCounters(CounterType.P1P1);
+            if (n > 0) {
+                if (ComputerUtil.playImmediately(ai, sa)) {
+                    /*
+                     * Mostly used to ping the player with remaining counters. The issue with
+                     * stacked effects might appear here.
+                     */
+                    return damageTargetAI(ai, sa, n, true);
+                } else {
+                    /*
+                     * Only ping when stack is clear to avoid hassle of evaluating stacked effects
+                     * like protection/pumps or over-killing target.
+                     */
+                    return ai.getGame().getStack().isEmpty() && damageTargetAI(ai, sa, n, false);
+                }
+            } else {
+                return false;
+            }
         }
         
         if (source.getName().equals("Sorin, Grim Nemesis")) {
