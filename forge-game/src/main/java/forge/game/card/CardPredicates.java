@@ -305,6 +305,16 @@ public final class CardPredicates {
             }
         };
     }
+    
+    public static final Predicate<Card> hasLessCounter(final CounterType type, final int n) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                int x = c.getCounters(type);
+                return x > 0 && x <= n;
+            }
+        };
+    }
 
     public static final Predicate<Card> hasGreaterPowerThan(final int minPower) {
         return new Predicate<Card>() {
