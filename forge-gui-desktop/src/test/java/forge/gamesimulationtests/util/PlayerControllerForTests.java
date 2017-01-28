@@ -491,7 +491,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt) {
+    public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt, Map<String, Object> params) {
         return Iterables.getFirst(options, CounterType.P1P1);
     }
 
