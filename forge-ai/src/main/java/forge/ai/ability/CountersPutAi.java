@@ -241,12 +241,6 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
 
-        // Phase-based LevelUp priorities are handled in checkPhaseRestrictions
-        // If we got here, we can safely assume AI is willing to activate it 
-        if (sa.hasParam("LevelUp")) {
-            return true;
-        }
-
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
 
@@ -292,10 +286,6 @@ public class CountersPutAi extends SpellAbilityAi {
             }
         }
 
-        if (sa.hasParam("Monstrosity")) {
-            return true;
-        }
-        
         PhaseHandler ph = ai.getGame().getPhaseHandler();
         
         if (!ai.getGame().getStack().isEmpty() && !SpellAbilityAi.isSorcerySpeed(sa)) {
@@ -437,7 +427,7 @@ public class CountersPutAi extends SpellAbilityAi {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             // Don't activate Curse abilities on my cards and non-curse abilites
             // on my opponents
-            if (cards.isEmpty() || !cards.get(0).getController().isOpponentOf(ai)) {
+            if (cards.isEmpty() || cards.get(0).getController().isOpponentOf(ai)) {
                 return false;
             }
 
