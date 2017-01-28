@@ -1354,7 +1354,7 @@ public class ComputerUtil {
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
-            if (sa != spell && sa != sub) {
+            if (sa == null || (sa != spell && sa != sub)) {
                 Iterables.addAll(objects, ComputerUtil.predictThreatenedObjects(ai, sa, spell));
             }
             if (top) {
