@@ -472,17 +472,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility saSrc, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets) {
-
-        // Spellskite and other spell magnets
-        if ("Self".equals(saSrc.getParam("DefinedMagnet"))) {
-            for (Pair<SpellAbilityStackInstance, GameObject> tgt : allTargets) {
-                if (!tgt.getKey().getTargetChoices().getTargets().contains(saSrc.getHostCard())) {
-                    return tgt;
-                }
-            }
-        }
-
-        // fallback mechanism (if the AI logic gets here at some point for no reason, consider improving)
+        // TODO Teach AI how to use Spellskite
         return allTargets.get(0);
     }
 

@@ -32,7 +32,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import forge.game.GameObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -286,10 +285,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     }
 
     public void updateTarget(TargetChoices target) {
-        updateTarget(target, null);
-    }
-
-    public void updateTarget(TargetChoices target, GameObject newTargetObj) {
         if (target != null) {
             tc = target;
             ability.setTargets(tc);
@@ -305,30 +300,23 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                 HashMap<Object,Integer> map = ability.getTargetRestrictions().getDividedMap();
                 // detect which target has changed
                 for (Object obj : map.keySet()) {
-                    if (!target.getTargets().contains((GameObject)obj)) {
+                    if (!target.getTargets().contains(obj)) {
                         toRemove = obj;
                         break;
                     }
                 }
                 // detect a new target
-                if (newTargetObj != null) {
-                    toAdd = newTargetObj;
-                } else {
-                    // TODO: this is imprecise when retargeting twice from the same SA to the same
-                    // object. Ideally updateTarget should always be called with the explicit
-                    // specification of newTargetObj, if at all possible.
-                    for (Object newTgts : target.getTargets()) {
-                        if (!map.containsKey(newTgts)) {
-                            toAdd = newTgts;
-                            break;
-                        }
+                for (Object newTgts : target.getTargets()) {
+                    if (!map.containsKey(newTgts)) {
+                        toAdd = newTgts;
+                        break;
                     }
                 }
 
                 if (toRemove != null && toAdd != null) {
                     int div = map.get(toRemove);
                     map.remove(toRemove);
-                    ability.getTargetRestrictions().updateDividedAllocation(toAdd, div);
+                    ability.getTargetRestrictions().addDividedAllocation(toAdd, div);
                 }
             }
             
