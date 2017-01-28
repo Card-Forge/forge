@@ -13,7 +13,6 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
@@ -80,7 +79,7 @@ public class CharmAi extends SpellAbilityAi {
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
-            sub.getRestrictions().setZone(ZoneType.Hand);
+            sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
@@ -93,6 +92,7 @@ public class CharmAi extends SpellAbilityAi {
             choices.removeAll(chosenList);
             for (AbilitySub sub : choices) {
                 sub.setActivatingPlayer(ai);
+                sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
                 if (aic.doTrigger(sub, false)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {
@@ -105,6 +105,7 @@ public class CharmAi extends SpellAbilityAi {
                 choices.removeAll(chosenList);
                 for (AbilitySub sub : choices) {
                     sub.setActivatingPlayer(ai);
+                    sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
                     if (aic.doTrigger(sub, true)) {
                         chosenList.add(sub);
                         if (chosenList.size() == min) {
