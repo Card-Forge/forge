@@ -10,7 +10,6 @@ import forge.game.GameObject;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 
 public class ChangeTargetsAi extends SpellAbilityAi {
 
