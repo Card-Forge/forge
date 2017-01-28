@@ -47,10 +47,6 @@ public class ChangeTargetsAi extends SpellAbilityAi {
 
         if (!topSa.usesTargeting() || topSa.getTargets().getTargetCards().contains(sa.getHostCard())) {
             // if this does not target at all or already targets host, no need to redirect it again
-
-            // TODO: currently the AI does not know how to change several targets to the same object (e.g.
-            // Cone Flame) and will stupidly keep retargeting the first available target unless stopped here.
-            // Needs investigation and improvement.
             return false;
         }
 

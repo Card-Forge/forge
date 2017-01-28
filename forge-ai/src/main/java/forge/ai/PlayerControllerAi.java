@@ -472,7 +472,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility saSrc, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets) {
-        // TODO Teach AI how to use Spellskite
+        // TODO Teach AI how to determine the most damaging subability when retargeting a spell
+        // with multiple targets (Arc Lightning, Cone of Flame, etc.) with Spellskite
+        // (currently simply always returns the first valid target ability)
         return allTargets.get(0);
     }
 
