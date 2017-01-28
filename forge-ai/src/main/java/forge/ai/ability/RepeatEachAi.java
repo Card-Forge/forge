@@ -7,10 +7,8 @@ import com.google.common.base.Predicate;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -37,35 +35,6 @@ public class RepeatEachAi extends SpellAbilityAi {
             if (compTokenCreats.size() <= humTokenCreats.size()) {
                 return false;
             }
-        } else if ("RemoveAllCounters".equals(logic)) {
-            // Break Dark Depths
-            CardCollectionView depthsList = aiPlayer.getCardsIn(ZoneType.Battlefield, "Dark Depths");
-            depthsList = CardLists.filter(depthsList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    return crd.getCounters(CounterType.ICE) >= 3;
-                }
-            });
-
-            if (depthsList.size() > 0) {
-                sa.getTargets().add(depthsList.getFirst());
-                return true;
-            }
-
-            // Get rid of Planeswalkers:
-            CardCollectionView list = aiPlayer.getOpponent().getCardsIn(ZoneType.Battlefield);
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    return crd.isPlaneswalker() && (crd.getCounters(CounterType.LOYALTY) >= 5);
-                }
-            });
-
-            if (list.isEmpty()) {
-                return false;
-            }
-
-            sa.getTargets().add(list.getFirst());
         } else if ("BalanceLands".equals(logic)) {
             if (CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() >= 5) {
                 return false;
