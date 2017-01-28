@@ -1166,7 +1166,7 @@ public class PlayerControllerHuman
     }
 
     @Override
-    public CounterType chooseCounterType(final List<CounterType> options, final SpellAbility sa, final String prompt) {
+    public CounterType chooseCounterType(final List<CounterType> options, final SpellAbility sa, final String prompt, Map<String, Object> params) {
         if (options.size() <= 1) {
             return Iterables.getFirst(options, null);
         }

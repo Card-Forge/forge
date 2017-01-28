@@ -195,11 +195,8 @@ public abstract class PlayerController {
     public abstract ICardFace chooseSingleCardFace(SpellAbility sa, String message, Predicate<ICardFace> cpp, String name);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
 
-    public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt);
-    public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt,
-            Map<String, Object> params) {
-        return chooseCounterType(options, sa, prompt);
-    }
+    public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt,
+            Map<String, Object> params);
 
     public abstract boolean confirmPayment(CostPart costPart, String string, SpellAbility sa);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams);

@@ -602,17 +602,6 @@ public class PlayerControllerAi extends PlayerController {
         return ComputerUtilCard.chooseColor(sa, min, max, options);
     }
 
-    @Override
-    public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt) {
-        // may write a smarter AI if you need to (with calls to AI-clas for given API ability)
-
-        // TODO: ArsenalNut (06 Feb 12)computer needs
-        // better logic to pick a counter type and probably
-        // an initial target
-        // find first nonzero counter on target
-        return Iterables.getFirst(options, null);
-    }
-
     /*
      * (non-Javadoc)
      * 
