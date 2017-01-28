@@ -757,6 +757,20 @@ public class TargetRestrictions {
     }
 
     /**
+     * Update divided amount relative to a specific card/player (used when retargeting).
+     * @param tgt the targeted object
+     * @param portionAllocated the divided portion allocated
+     */
+    public final void updateDividedAllocation(final Object tgt, final Integer portionAllocated) {
+        int prevAlloc = 0;
+        if (this.dividedMap.containsKey(tgt)) {
+            prevAlloc = this.getDividedValue(tgt);
+            this.dividedMap.remove(tgt);
+        }
+        this.dividedMap.put(tgt, portionAllocated + prevAlloc);
+    }
+
+    /**
      * Get the divided amount relative to a specific card/player.
      * @param tgt the targeted object
      * @return an int.

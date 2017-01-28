@@ -6,9 +6,11 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 
 public class ChangeTargetsAi extends SpellAbilityAi {
 
@@ -45,21 +47,12 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             return true;
         }
 
-        if (!topSa.usesTargeting() || topSa.getTargets().getTargetCards().contains(sa.getHostCard())) {
-            // if this does not target at all or already targets host, no need to redirect it again
-
-            // TODO: currently the AI does not know how to change several targets to the same object (e.g.
-            // Cone Flame) and will stupidly keep retargeting the first available target unless stopped here.
-            // Needs investigation and improvement.
+        if (!topSa.usesTargeting()) {
+            // if this does not target at all, nothing to do
             return false;
         }
-
         if (topSa.getHostCard() != null && !topSa.getHostCard().getController().isOpponentOf(aiPlayer)) {
             // make sure not to redirect our own abilities
-            return false;
-        }
-        if (!topSa.canTarget(sa.getHostCard())) {
-            // don't try targeting it if we can't legally target the host card with it in the first place
             return false;
         }
         if (!sa.canTarget(topSa)) {
@@ -67,6 +60,34 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             return false;
         }
         
+        // ensure it's a legitimate retarget and not a duplicate
+        SpellAbility testSa = topSa;
+        boolean canTargetHost = false;
+        boolean hasOtherTargets = false;
+        boolean isTargetingHost = false;
+        boolean hasUniqueTargets = false;
+        int numTargeted = 0;
+        while (testSa != null) {
+            for (GameObject o : testSa.getTargets().getTargets()) {
+                numTargeted++;
+                if (!o.equals(sa.getHostCard())) {
+                    hasOtherTargets = true;
+                } else {
+                    isTargetingHost = true;
+                }
+            }
+            if (testSa.canTarget(sa.getHostCard())) {
+                canTargetHost = true;
+            }
+            if (testSa.getTargetRestrictions().isUniqueTargets()) {
+                hasUniqueTargets = true;
+            }
+            testSa = testSa.getSubAbility();
+        }
+        if (!(canTargetHost && hasOtherTargets && (!isTargetingHost || !hasUniqueTargets))) {
+            return false;
+        }
+
         if (sa.getPayCosts().getCostMana() != null && sa.getPayCosts().getCostMana().getMana().hasPhyrexian()) {
             ManaCost manaCost = sa.getPayCosts().getCostMana().getMana();
             int payDamage = manaCost.getPhyrexianCount() * 2;
@@ -74,6 +95,9 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             int potentialDmg = ComputerUtil.predictDamageFromSpell(topSa, aiPlayer);
             ManaCost normalizedMana = manaCost.getNormalizedMana();
             boolean canPay = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(normalizedMana), sa, aiPlayer);
+            if (potentialDmg > 0 && numTargeted > 1 && !canPay) {
+                return false; // AI is not very good at evaluating multitargeted spells and will overpay life, so don't do it for now
+            }
             if (potentialDmg != -1 && potentialDmg <= payDamage && !canPay
                     && topSa.getTargets().getTargets().contains(aiPlayer)) {
                 // do not pay Phyrexian mana if the spell is a damaging one but it deals less damage or the same damage as we'll pay life
