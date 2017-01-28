@@ -8,7 +8,6 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
@@ -17,6 +16,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 
 public class CountersRemoveEffect extends SpellAbilityEffect {
     @Override
@@ -24,14 +24,20 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final String counterName = sa.getParam("CounterType");
+        final String num = sa.getParam("CounterNum");
 
-        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
+        int amount = 0;
+        if (!num.equals("All") && !num.equals("Remembered")) {
+            amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
+        };
 
         sb.append("Remove ");
         if (sa.hasParam("UpTo")) {
             sb.append("up to ");
         }
-        if ("Any".matches(counterName)) {
+        if ("All".matches(counterName)) {
+            sb.append("all counter");
+        } else if ("Any".matches(counterName)) {
             if (amount == 1) {
                 sb.append("a counter");
             } else {
@@ -64,32 +70,29 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final String type = sa.getParam("CounterType");
+        final String num = sa.getParam("CounterNum");
         int cntToRemove = 0;
-        if (!sa.getParam("CounterNum").equals("All") && !sa.getParam("CounterNum").equals("Remembered")) {
-            cntToRemove = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
+        if (!num.equals("All") && !num.equals("Remembered")) {
+            cntToRemove = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
         }
 
         CounterType counterType = null;
 
-        try {
-            counterType = AbilityUtils.getCounterType(type, sa);
-        } catch (Exception e) {
-            if (!type.matches("Any")) {
+        if (!type.equals("Any") && !type.equals("All")) {
+            try {
+                counterType = AbilityUtils.getCounterType(type, sa);
+            } catch (Exception e) {
                 System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
                 return;
             }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        boolean rememberRemoved = sa.hasParam("RememberRemoved");
 
-        boolean rememberRemoved = false;
-        if (sa.hasParam("RememberRemoved")) {
-            rememberRemoved = true;
-        }
         for (final Player tgtPlayer : getTargetPlayers(sa)) {
             // Removing energy
-            if ((tgt == null) || tgtPlayer.canBeTargetedBy(sa)) {
-                if (sa.getParam("CounterNum").equals("All")) {
+            if (!sa.usesTargeting() || tgtPlayer.canBeTargetedBy(sa)) {
+                if (num.equals("All")) {
                     cntToRemove = tgtPlayer.getCounters(counterType);
                 }
                 tgtPlayer.subtractCounter(counterType, cntToRemove);
@@ -97,9 +100,14 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         }
 
         for (final Card tgtCard : getTargetCards(sa)) {
-            if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
+            if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
                 final Zone zone = game.getZoneOf(tgtCard);
-                if (sa.getParam("CounterNum").equals("All")) {
+                if (type.equals("All")) {
+                    for (Map.Entry<CounterType, Integer> e : tgtCard.getCounters().entrySet()) {
+                        tgtCard.subtractCounter(e.getKey(), e.getValue());
+                    }
+                    continue;
+                } else if (num.equals("All")) {
                     cntToRemove = tgtCard.getCounters(counterType);
                 } else if (sa.getParam("CounterNum").equals("Remembered")) {
                     cntToRemove = tgtCard.getCountersAddedBy(card, counterType);
@@ -107,13 +115,21 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                 
                 PlayerController pc = sa.getActivatingPlayer().getController();
                 
-                if (type.matches("Any")) {
+                if (type.equals("Any")) {
                     while (cntToRemove > 0 && tgtCard.hasCounters()) {
                         final Map<CounterType, Integer> tgtCounters = tgtCard.getCounters();
-
-                        CounterType chosenType = pc.chooseCounterType(ImmutableList.copyOf(tgtCounters.keySet()), sa, "Select type of counters to remove");
-                        String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
-                        int chosenAmount = pc.chooseNumber(sa, prompt, 1, Math.min(cntToRemove, tgtCounters.get(chosenType)));
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("Target", tgtCard);
+                        
+                        String prompt = "Select type of counters to remove";
+                        CounterType chosenType = pc.chooseCounterType(
+                                ImmutableList.copyOf(tgtCounters.keySet()), sa, prompt, params);
+                        prompt = "Select the number of " + chosenType.getName() + " counters to remove";
+                        int max = Math.min(cntToRemove, tgtCounters.get(chosenType));
+                        params = Maps.newHashMap();
+                        params.put("Target", tgtCard);
+                        params.put("CounterType", chosenType);
+                        int chosenAmount = pc.chooseNumber(sa, prompt, 1, max, params);
 
                         tgtCard.subtractCounter(chosenType, chosenAmount);
                         if (rememberRemoved) {
@@ -124,14 +140,19 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                         cntToRemove -= chosenAmount;
                     }
                 } else {
+                    cntToRemove = Math.min(cntToRemove, tgtCard.getCounters(counterType));
+
                     if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Exile)) {
-                        if (sa.hasParam("UpTo")) 
-                            cntToRemove = pc.chooseNumber(sa, "Select the number of " + type + " counters to remove", 0, cntToRemove);
+                        if (sa.hasParam("UpTo")) {
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Target", tgtCard);
+                            params.put("CounterType", type);
+                            String title = "Select the number of " + type + " counters to remove";
+                            cntToRemove = pc.chooseNumber(sa, title, 0, cntToRemove, params);
+                        }
+                            
                     }
                     if (rememberRemoved) {
-                        if (cntToRemove > tgtCard.getCounters(counterType)) {
-                            cntToRemove = tgtCard.getCounters(counterType);
-                        }
                         for (int i = 0; i < cntToRemove; i++) {
                             card.addRemembered(Pair.of(counterType, i));
                         }
