@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import forge.game.GameObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -285,6 +286,10 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     }
 
     public void updateTarget(TargetChoices target) {
+        updateTarget(target, null, null);
+    }
+
+    public void updateTarget(TargetChoices target, GameObject oldTarget, GameObject newTarget) {
         if (target != null) {
             tc = target;
             ability.setTargets(tc);
@@ -298,18 +303,30 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                 Object toRemove = null;
                 Object toAdd = null;
                 HashMap<Object,Integer> map = ability.getTargetRestrictions().getDividedMap();
-                // detect which target has changed
-                for (Object obj : map.keySet()) {
-                    if (!target.getTargets().contains(obj)) {
-                        toRemove = obj;
-                        break;
+
+                if (oldTarget != null) {
+                    toRemove = oldTarget;
+                } else {
+                    // try to deduce which target has been replaced
+                    // (this may be imprecise, updateTarget should specify old target if possible)
+                    for (Object obj : map.keySet()) {
+                        if (!target.getTargets().contains((GameObject)obj)) {
+                            toRemove = obj;
+                            break;
+                        }
                     }
                 }
-                // detect a new target
-                for (Object newTgts : target.getTargets()) {
-                    if (!map.containsKey(newTgts)) {
-                        toAdd = newTgts;
-                        break;
+
+                if (newTarget != null) {
+                    toAdd = newTarget;
+                } else {
+                    // try to deduce which target was added
+                    // (this may be imprecise, updateTarget should specify new target if possible)
+                    for (Object newTgts : target.getTargets()) {
+                        if (!map.containsKey(newTgts)) {
+                            toAdd = newTgts;
+                            break;
+                        }
                     }
                 }
 
