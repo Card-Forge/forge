@@ -10,6 +10,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.*;
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -290,6 +291,10 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
             }
         }
+
+        if (sa.hasParam("Monstrosity")) {
+            return true;
+        }
         
         PhaseHandler ph = ai.getGame().getPhaseHandler();
         
@@ -564,8 +569,24 @@ public class CountersPutAi extends SpellAbilityAi {
             list = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
             
             if (amountStr.equals("X") && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) || source.getSVar(amountStr).equals("Count$xPaid") )) {
+
+                // detect if there's more than one X in the cost (Hangarback Walker, Walking Ballista, etc.)
+                SpellAbility testSa = sa;
+                int countX = 0;
+                while (testSa != null && testSa.getPayCosts() != null && countX == 0) {
+                    countX = testSa.getPayCosts().getTotalMana().countX();
+                    testSa = testSa.getSubAbility();
+                }
+                if (countX == 0) {
+                    // try determining it from the card itself if neither SA has "X" in the cost
+                    countX = source.getState(CardStateName.Original).getManaCost().countX();
+                }
+
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                source.setSVar("PayX", Integer.toString(ComputerUtilMana.determineLeftoverMana(sa, ai)));
+                int payX = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                if (countX > 1) { payX /= countX; }
+
+                source.setSVar("PayX", Integer.toString(payX));
             }
             
             if (!mandatory) {
