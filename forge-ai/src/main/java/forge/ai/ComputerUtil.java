@@ -1857,7 +1857,7 @@ public class ComputerUtil {
             }
 
             if (c.isBasicLand()) {
-                if (landsInHand.size() >= cardsInHand.size() / 2) {
+                if (landsInHand.size() >= Math.max(cardsInHand.size() / 2, 2)) {
                     // scry basic lands away if we already have enough lands in hand
                     bottom = true;
                 } else if (landsOTB.size() > 5 && thisLandOTB.size() > 2) {
@@ -1874,7 +1874,7 @@ public class ComputerUtil {
 
             if (ComputerUtilCard.evaluateCreature(c) < avgCreatureValue) {
                 if (creaturesOTB.size() > 5 || (creaturesOTB.size() > 3 && c.getCMC() <= 3
-                    && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold && maxControlledCMC >= 4)) {
+                    && maxControlledCMC >= 4 && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold)) {
                     // if we are already at a stage when we have 4+ CMC creatures on the battlefield, or when we
                     // have more than 5 creatures on the battlefield, probably worth it to scry away low value 
                     // creatures with low CMC
