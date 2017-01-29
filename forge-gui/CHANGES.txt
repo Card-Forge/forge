@@ -1,7 +1,7 @@
-Forge Beta: 01-13-2017 ver 1.5.58
+Forge Beta: 01-29-2017 ver 1.5.59
 
 
-16443 cards in total.
+16451 cards in total.
 
 
 -------------
@@ -93,5 +93,5 @@ Zuchinni
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
-(Thanks to the MAGE team for permission to use their targeting arrows.)
+(Thanks to the XMage team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
