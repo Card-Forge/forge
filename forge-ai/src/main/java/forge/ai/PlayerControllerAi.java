@@ -496,6 +496,24 @@ public class PlayerControllerAi extends PlayerController {
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.game.player.PlayerController#chooseBinary(forge.game.spellability.
+     * SpellAbility, java.lang.String,
+     * forge.game.player.PlayerController.BinaryChoiceType, java.util.Map)
+     */
+    @Override
+    public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice,
+            Map<String, Object> params) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return SpellApiToAi.Converter.get(api).chooseBinary(kindOfChoice, sa, params);
+    }
+
     @Override
     public Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap) {
         int i = MyRandom.getRandom().nextInt(options.size());
@@ -521,46 +539,6 @@ public class PlayerControllerAi extends PlayerController {
         }
         return sa.getChosenList();
     }
-
-    @Override
-    public Pair<CounterType,String> chooseAndRemoveOrPutCounter(Card cardWithCounter) {
-        if (!cardWithCounter.hasCounters()) {
-            System.out.println("chooseCounterType was reached with a card with no counters on it. Consider filtering this card out earlier");
-            return null;
-        }
-
-        final Player controller = cardWithCounter.getController();
-        final List<Player> enemies = player.getOpponents();
-        final List<Player> allies = player.getAllies();
-        allies.add(player);
-
-        List<CounterType> countersToIncrease = new ArrayList<CounterType>();
-        List<CounterType> countersToDecrease = new ArrayList<CounterType>();
-
-        for (final CounterType counter : cardWithCounter.getCounters().keySet()) {
-            if ((!ComputerUtil.isNegativeCounter(counter, cardWithCounter) && allies.contains(controller))
-                || (ComputerUtil.isNegativeCounter(counter, cardWithCounter) && enemies.contains(controller))) {
-                countersToIncrease.add(counter);
-            } else {
-                countersToDecrease.add(counter);
-            }
-        }
-
-        if (!countersToIncrease.isEmpty()) {
-            int random = MyRandom.getRandom().nextInt(countersToIncrease.size());
-            return new ImmutablePair<CounterType,String>(countersToIncrease.get(random),"Put");
-        }
-        else if (!countersToDecrease.isEmpty()) {
-            int random = MyRandom.getRandom().nextInt(countersToDecrease.size());
-            return new ImmutablePair<CounterType,String>(countersToDecrease.get(random),"Remove");
-        }
-
-        // shouldn't reach here but just in case, remove random counter
-        List<CounterType> countersOnCard = new ArrayList<CounterType>();
-        int random = MyRandom.getRandom().nextInt(countersOnCard.size());
-        return new ImmutablePair<CounterType,String>(countersOnCard.get(random),"Remove");
-    }
-
     
     @Override
     public byte chooseColorAllowColorless(String message, Card card, ColorSet colors) {

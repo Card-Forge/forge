@@ -57,7 +57,6 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
-import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.card.CardSpecification;
@@ -292,11 +291,6 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public Mana chooseManaFromPool(List<Mana> manaChoices) {
         return chooseItem(manaChoices);
-    }
-
-    @Override
-    public Pair<CounterType, String> chooseAndRemoveOrPutCounter(Card cardWithCounter) {
-        throw new IllegalStateException("Erring on the side of caution here...");
     }
 
     @Override

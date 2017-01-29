@@ -1009,13 +1009,14 @@ public class PlayerControllerHuman
     public boolean chooseBinary(final SpellAbility sa, final String question, final BinaryChoiceType kindOfChoice, final Boolean defaultVal) {
         final List<String> labels;
         switch (kindOfChoice) {
-            case HeadsOrTails:       labels = ImmutableList.of("Heads",                      "Tails");        break;
-            case TapOrUntap:         labels = ImmutableList.of("Tap",                        "Untap");        break;
-            case OddsOrEvens:        labels = ImmutableList.of("Odds",                       "Evens");        break;
-            case UntapOrLeaveTapped: labels = ImmutableList.of("Untap",                      "Leave tapped"); break;
-            case UntapTimeVault:     labels = ImmutableList.of("Untap (and skip this turn)", "Leave tapped"); break;
-            case PlayOrDraw:         labels = ImmutableList.of("Play",                       "Draw");         break;
-            case LeftOrRight:        labels = ImmutableList.of("Left",                       "Right");        break;
+            case HeadsOrTails:       labels = ImmutableList.of("Heads",                      "Tails");          break;
+            case TapOrUntap:         labels = ImmutableList.of("Tap",                        "Untap");          break;
+            case OddsOrEvens:        labels = ImmutableList.of("Odds",                       "Evens");          break;
+            case UntapOrLeaveTapped: labels = ImmutableList.of("Untap",                      "Leave tapped");   break;
+            case UntapTimeVault:     labels = ImmutableList.of("Untap (and skip this turn)", "Leave tapped");   break;
+            case PlayOrDraw:         labels = ImmutableList.of("Play",                       "Draw");           break;
+            case LeftOrRight:        labels = ImmutableList.of("Left",                       "Right");          break;
+            case AddOrRemove:        labels = ImmutableList.of("Add Counter",                "Remove Counter"); break;
             default:                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
 	
@@ -1036,24 +1037,6 @@ public class PlayerControllerHuman
     public Card chooseProtectionShield(final GameEntity entityBeingDamaged, final List<String> options, final Map<String, Card> choiceMap) {
         final String title = entityBeingDamaged + " - select which prevention shield to use";
         return choiceMap.get(getGui().one(title, options));
-    }
-
-    @Override
-    public Pair<CounterType,String> chooseAndRemoveOrPutCounter(final Card cardWithCounter) {
-        if (!cardWithCounter.hasCounters()) {
-            System.out.println("chooseCounterType was reached with a card with no counters on it. Consider filtering this card out earlier");
-            return null;
-        }
-
-        final String counterChoiceTitle = "Choose a counter type on " + cardWithCounter;
-        final CounterType chosen = getGui().one(counterChoiceTitle, ImmutableList.copyOf(cardWithCounter.getCounters().keySet()));
-
-        final String putOrRemoveTitle = "What to do with that '" + chosen.getName() + "' counter ";
-        final String putString = "Put another " + chosen.getName() + " counter on " + cardWithCounter;
-        final String removeString = "Remove a " + chosen.getName() + " counter from " + cardWithCounter;
-        final String addOrRemove = getGui().one(putOrRemoveTitle, ImmutableList.of(putString, removeString));
-
-        return new ImmutablePair<CounterType,String>(chosen,addOrRemove);
     }
 
     @Override

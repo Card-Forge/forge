@@ -1,18 +1,22 @@
 package forge.game.ability.effects;
 
-import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
+import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
-import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import java.util.List;
+import java.util.Map;
 
 /** 
  * API for adding to or subtracting from existing counters on a target.
@@ -23,10 +27,16 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         sb.append(sa.getActivatingPlayer().getName());
-        sb.append(" removes a counter from or puts another of those counters on ");
 
-        final List<GameObject> targets = getTargets(sa);
-        sb.append(Lang.joinHomogenous(targets));
+        if (sa.hasParam("CounterType")) {
+            CounterType ctype = CounterType.valueOf(sa.getParam("CounterType"));
+            sb.append(" removes a ").append(ctype.getName());
+            sb.append(" counter from or put another ").append(ctype.getName()).append(" counter on ");
+        } else {
+            sb.append(" removes a counter from or puts another of those counters on ");
+        }
+
+        sb.append(Lang.joinHomogenous(getTargets(sa)));
 
         return sb.toString();
     }
@@ -34,28 +44,47 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
-        final int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
+        final Card source = sa.getHostCard();
+        final int counterAmount = AbilityUtils.calculateAmount(source, sa.getParam("CounterNum"), sa);
+        
+        CounterType ctype = null;
+        if (sa.hasParam("CounterType")) {
+            ctype = CounterType.valueOf(sa.getParam("CounterType"));
+        }
+        
+        PlayerController pc = activator.getController();
 
-        List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
-
-        for (final Card tgtCard : tgtCards) {
+        for (final Card tgtCard : getDefinedCardsOrTargeted(sa)) {
             if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
                 if (tgtCard.hasCounters()) {
-                    Pair<CounterType,String> selection = activator.getController().chooseAndRemoveOrPutCounter(tgtCard);
-                    final CounterType chosenCounter = selection.getLeft();
-                    final boolean putCounter = selection.getRight().startsWith("Put");
+                    
+                    final Map<CounterType, Integer> tgtCounters = tgtCard.getCounters();
+                    Map<String, Object> params = Maps.newHashMap();
+                    params.put("Target", tgtCard);
+                    
+                    List<CounterType> list = Lists.newArrayList(tgtCounters.keySet());
+                    if (ctype != null) {
+                        list = Lists.newArrayList(ctype);
+                    }
+                    
+                    String prompt = "Select type of counters to add or remove";
+                    CounterType chosenType = pc.chooseCounterType(list, sa, prompt, params);
+                    
+                    params.put("CounterType", chosenType);
+                    prompt = "What to do with that '" + chosenType.getName() + "' counter ";
+                    Boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
                     if (putCounter) {
                         // Put another of the chosen counter on card
                         final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                         if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
-                            tgtCard.addCounter(chosenCounter, counterAmount, true);
+                            tgtCard.addCounter(chosenType, counterAmount, true);
                         } else {
                             // adding counters to something like re-suspend cards
-                            tgtCard.addCounter(chosenCounter, counterAmount, false);
+                            tgtCard.addCounter(chosenType, counterAmount, false);
                         }
                     } else {
-                        tgtCard.subtractCounter(chosenCounter, counterAmount);
+                        tgtCard.subtractCounter(chosenType, counterAmount);
                     }
                 }
             }

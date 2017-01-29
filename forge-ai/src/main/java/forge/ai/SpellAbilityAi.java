@@ -16,6 +16,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
@@ -328,5 +329,9 @@ public abstract class SpellAbilityAi {
 
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
         return Iterables.getFirst(options, null);
+    }
+
+    public boolean chooseBinary(BinaryChoiceType kindOfChoice, SpellAbility sa, Map<String, Object> params) {
+        return MyRandom.getRandom().nextBoolean();
     }
 }

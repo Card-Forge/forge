@@ -38,7 +38,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
-import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -69,6 +68,7 @@ public abstract class PlayerController {
         UntapOrLeaveTapped,
         UntapTimeVault,
         LeftOrRight,
+        AddOrRemove,
     }
 
     protected final Game game;
@@ -164,7 +164,6 @@ public abstract class PlayerController {
     }
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes);
-    public abstract Pair<CounterType,String> chooseAndRemoveOrPutCounter(Card cardWithCounter);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
     public abstract CardCollectionView getCardsToMulligan(Player firstPlayer);
 
@@ -182,8 +181,10 @@ public abstract class PlayerController {
         return chooseNumber(sa, string, min, max);
     };
 
-    public final boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice) { return chooseBinary(sa, question, kindOfChoice, null); }
+    public final boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice) { return chooseBinary(sa, question, kindOfChoice, (Boolean) null); }
     public abstract boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultChioce);
+    public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Map<String, Object> params)  { return chooseBinary(sa, question, kindOfChoice); }
+    
     public abstract boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
     public abstract Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap);
 
