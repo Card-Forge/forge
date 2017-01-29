@@ -52,7 +52,7 @@ public class ScryAi extends SpellAbilityAi {
         // in the playerturn Scry should only be done in Main1 or in upkeep if able
         if (ph.isPlayerTurn(ai)) {
             if (SpellAbilityAi.isSorcerySpeed(sa)) {
-                return ph.is(PhaseType.MAIN1);
+                return ph.is(PhaseType.MAIN1) || (sa.hasParam("Planeswalker") && ph.is(PhaseType.MAIN2));
             } else {
                 return ph.is(PhaseType.UPKEEP);
             }
