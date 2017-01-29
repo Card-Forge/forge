@@ -21,6 +21,10 @@ public class TriggerCrewed extends Trigger {
             }
         }
         if (this.mapParams.containsKey("ValidCrew")) {
+            if (runParams2.get("Crew") == null) {
+                return false;
+            }
+
             boolean passes = false;
             for (Object member : (CardCollection)runParams2.get("Crew")) {
                 passes |= matchesValid(member, this.mapParams.get("ValidCrew").split(","),
