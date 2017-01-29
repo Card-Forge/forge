@@ -464,11 +464,12 @@ public class DamageDealAi extends DamageAiBase {
                 // on the stack
                 // or from taking combat damage
 
-                boolean freePing = immediately || sa.getPayCosts() == null
+                final Cost abCost = sa.getPayCosts();
+                boolean freePing = immediately || abCost == null
                         || sa.getTargets().getNumTargeted() > 0;
 
                 if (!source.isSpell()) {
-                    if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility()) {
+                    if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility() && abCost.isReusuableResource()) {
                         if (phase.getNextTurn().equals(ai))
                             freePing = true;
                     }
