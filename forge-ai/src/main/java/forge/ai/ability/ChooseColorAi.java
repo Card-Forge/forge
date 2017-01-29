@@ -1,20 +1,14 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
-import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseHandler;
@@ -23,7 +17,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-import java.util.List;
 
 public class ChooseColorAi extends SpellAbilityAi {
 
@@ -31,6 +24,7 @@ public class ChooseColorAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
         
         if (!sa.hasParam("AILogic")) {
             return false;
@@ -46,7 +40,6 @@ public class ChooseColorAi extends SpellAbilityAi {
         }
 
         if ("Oona, Queen of the Fae".equals(source.getName())) {
-            PhaseHandler ph = game.getPhaseHandler();
         	if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
         		return false;
         	}
@@ -57,7 +50,6 @@ public class ChooseColorAi extends SpellAbilityAi {
         }
         
         if ("Addle".equals(source.getName())) {
-            PhaseHandler ph = game.getPhaseHandler();
         	if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || ai.getOpponent().getCardsIn(ZoneType.Hand).isEmpty()) {
         		return false;
         	}
@@ -78,6 +70,14 @@ public class ChooseColorAi extends SpellAbilityAi {
                 }
             }
         	return false;
+        }
+
+        if (logic.equals("MostProminentInComputerDeck")) {
+            if ("Astral Cornucopia".equals(source.getName())) {
+                // activate in Main 2 hoping that the extra mana surplus will make a difference
+                // (consider expanding)
+                return ph.is(PhaseType.MAIN2, ai);
+            }
         }
 
         boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
