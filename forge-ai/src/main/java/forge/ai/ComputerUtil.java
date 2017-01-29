@@ -27,6 +27,7 @@ import java.util.Random;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -1832,15 +1833,57 @@ public class ComputerUtil {
     }
 
     public static boolean scryWillMoveCardToBottomOfLibrary(Player player, Card c) {
+        CardCollectionView allCards = player.getAllCards();
+        CardCollectionView cardsInHand = player.getCardsIn(ZoneType.Hand);
+        CardCollectionView cardsOTB = player.getCardsIn(ZoneType.Battlefield);
+        
+        // evaluate creatures available in deck
+        CardCollectionView allCreatures = CardLists.filter(allCards, Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.isOwner(player)));
+        int numCards = allCreatures.size();
+
         boolean bottom = false;
-        if (c.isBasicLand()) {
-            CardCollection cl = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
-            bottom = cl.size() > 5; // if control more than 5 Basic land, probably don't need more
+        if (c.isLand()) {
+            CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.LANDS);
+            CardCollection thisLandOTB = CardLists.filter(cardsOTB, CardPredicates.nameEquals(c.getName()));
+            CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.Presets.LANDS);
+
+            if (landsOTB.isEmpty() && landsInHand.size() >= Math.max(cardsInHand.size() / 2, 3)) {
+                // when evaluating opening hand after a mulligan, scry any land to the bottom if
+                // we already have enough lands in hand
+                return true;
+            }
+
+            if (c.isBasicLand()) {
+                if (landsInHand.size() >= cardsInHand.size() / 2) {
+                    // scry basic lands away if we already have enough lands in hand
+                    bottom = true;
+                } else if (landsOTB.size() > 5 && thisLandOTB.size() > 2) {
+                    // if control more than 5 Basic lands, more than 2 of them of the type in question,
+                    // scry to the bottom
+                    bottom = true;
+                } else if (landsOTB.size() > 8) {
+                    // more than 8 lands already, probably don't need another basic land, so scry to the bottom
+                    bottom = true;
+                }
+            }
+        } else if (c.isCreature()) {
+            CardCollection creaturesOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.CREATURES);
+            int avgCreatureValue = numCards != 0 ? ComputerUtilCard.evaluateCreatureList(allCreatures) / numCards : 0;
+            int minCreatEvalThreshold = 160; // just a bit higher than a baseline 2/2 creature or a 1/1 mana dork
+            int maxControlledCMC = Aggregates.max(creaturesOTB, CardPredicates.Accessors.fnGetCmc);
+
+            if (creaturesOTB.size() > 5 && ComputerUtilCard.evaluateCreature(c) < avgCreatureValue) {
+                // if control more than 5 creatures and the creature evaluates to below average value in deck,
+                // scry it to the bottom
+                bottom = true;
+            } else if (maxControlledCMC >= 4 && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold
+                    && c.getCMC() <= 3) {
+                // if we are already at a stage when we have 4+ CMC creatures on the battlefield, probably
+                // worth it to scry away low value creatures with low CMC
+                bottom = true;
+            }
         }
-        else if (c.isCreature()) {
-            CardCollection cl = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-            bottom = cl.size() > 5; // if control more than 5 Creatures, probably don't need more
-        }
+
         return bottom;
     }
 
