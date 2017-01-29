@@ -1851,6 +1851,9 @@ public class ComputerUtil {
                 // when evaluating opening hand after a mulligan, scry any land to the bottom if
                 // we already have enough lands in hand
                 return true;
+            } else if (landsOTB.size() > 8) {
+                // probably enough lands not to urgently need another one, so look for more gas instead
+                return true;
             }
 
             if (c.isBasicLand()) {
@@ -1860,9 +1863,6 @@ public class ComputerUtil {
                 } else if (landsOTB.size() > 5 && thisLandOTB.size() > 2) {
                     // if control more than 5 Basic lands, more than 2 of them of the type in question,
                     // scry to the bottom
-                    bottom = true;
-                } else if (landsOTB.size() > 8) {
-                    // more than 8 lands already, probably don't need another basic land, so scry to the bottom
                     bottom = true;
                 }
             }
@@ -1877,7 +1877,7 @@ public class ComputerUtil {
                 // scry it to the bottom
                 bottom = true;
             } else if (maxControlledCMC >= 4 && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold
-                    && c.getCMC() <= 3) {
+                    && c.getCMC() <= 2) {
                 // if we are already at a stage when we have 4+ CMC creatures on the battlefield, probably
                 // worth it to scry away low value creatures with low CMC
                 bottom = true;
