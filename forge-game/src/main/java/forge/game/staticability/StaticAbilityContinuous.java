@@ -203,9 +203,17 @@ public final class StaticAbilityContinuous {
             }
             final String chosenName = hostCard.getNamedCard();
             final String hostCardUID = Integer.toString(hostCard.getId()); // Protection with "doesn't remove" effect
+            final String hostCardPower = Integer.toString(hostCard.getNetPower());
             for (int w = 0; w < addKeywords.length; w++) {
                 if (addKeywords[w].startsWith("Protection:")) {
-                    addKeywords[w] = addKeywords[w].replaceAll("ChosenName", "Card.named" + chosenName).replace("HostCardUID", hostCardUID);
+                    String k = addKeywords[w];
+                    k = k.replaceAll("ChosenName", "Card.named" + chosenName);
+                    k = k.replace("HostCardUID", hostCardUID);
+                    addKeywords[w] = k;
+                } else if (addKeywords[w].startsWith("CantBeBlockedBy")) {
+                    String k = addKeywords[w];
+                    k = k.replaceAll("HostCardPower", hostCardPower);
+                    addKeywords[w] = k;
                 }
             }
             if (params.containsKey("SharedKeywordsZone")) {
