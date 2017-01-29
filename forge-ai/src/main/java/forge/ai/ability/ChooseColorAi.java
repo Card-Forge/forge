@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicates;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
@@ -17,6 +18,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import java.util.Arrays;
 
 public class ChooseColorAi extends SpellAbilityAi {
 
@@ -75,8 +77,13 @@ public class ChooseColorAi extends SpellAbilityAi {
         if (logic.equals("MostProminentInComputerDeck")) {
             if ("Astral Cornucopia".equals(source.getName())) {
                 // activate in Main 2 hoping that the extra mana surplus will make a difference
-                // (consider expanding)
-                return ph.is(PhaseType.MAIN2, ai);
+                // if there are some nonland permanents of prominent color in hand
+                CardCollectionView prominentPerms = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.and(
+                        CardPredicates.Presets.NONLAND_PERMANENTS,
+                        Predicates.or(CardPredicates.isColorless(), 
+                                CardPredicates.isColor(MagicColor.fromName(ComputerUtilCard.getMostProminentColor(ai.getAllCards()))))));
+
+                return prominentPerms.size() > 0 && ph.is(PhaseType.MAIN2, ai);
             }
         }
 
