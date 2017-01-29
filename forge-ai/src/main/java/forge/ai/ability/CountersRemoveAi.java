@@ -323,7 +323,10 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return doTgt(aiPlayer, sa, mandatory);
+        if (sa.usesTargeting()) {
+            return doTgt(aiPlayer, sa, mandatory);
+        }
+        return mandatory;
     }
 
     /*
