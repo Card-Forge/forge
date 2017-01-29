@@ -1872,15 +1872,14 @@ public class ComputerUtil {
             int minCreatEvalThreshold = 160; // just a bit higher than a baseline 2/2 creature or a 1/1 mana dork
             int maxControlledCMC = Aggregates.max(creaturesOTB, CardPredicates.Accessors.fnGetCmc);
 
-            if (creaturesOTB.size() > 5 && ComputerUtilCard.evaluateCreature(c) < avgCreatureValue) {
-                // if control more than 5 creatures and the creature evaluates to below average value in deck,
-                // scry it to the bottom
-                bottom = true;
-            } else if (maxControlledCMC >= 4 && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold
-                    && c.getCMC() <= 3 && creaturesOTB.size() > 3) {
-                // if we are already at a stage when we have 4+ CMC creatures on the battlefield, probably
-                // worth it to scry away low value creatures with low CMC
-                bottom = true;
+            if (ComputerUtilCard.evaluateCreature(c) < avgCreatureValue) {
+                if (creaturesOTB.size() > 5 || (creaturesOTB.size() > 3 && c.getCMC() <= 3
+                    && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold && maxControlledCMC >= 4)) {
+                    // if we are already at a stage when we have 4+ CMC creatures on the battlefield, or when we
+                    // have more than 5 creatures on the battlefield, probably worth it to scry away low value 
+                    // creatures with low CMC
+                    bottom = true;
+                }
             }
         }
 
