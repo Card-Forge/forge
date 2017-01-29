@@ -25,7 +25,7 @@ public class ChooseColorAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
-        
+
         if (!sa.hasParam("AILogic")) {
             return false;
         }
@@ -40,36 +40,36 @@ public class ChooseColorAi extends SpellAbilityAi {
         }
 
         if ("Oona, Queen of the Fae".equals(source.getName())) {
-        	if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-        		return false;
-        	}
+            if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                return false;
+            }
             // Set PayX here to maximum value.
             int x = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(x));
             return true;
         }
-        
+
         if ("Addle".equals(source.getName())) {
-        	if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || ai.getOpponent().getCardsIn(ZoneType.Hand).isEmpty()) {
-        		return false;
-        	}
+            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || ai.getOpponent().getCardsIn(ZoneType.Hand).isEmpty()) {
+                return false;
+            }
             return true;
         }
-        
+
         if (logic.equals("MostExcessOpponentControls")) {
-        	for (byte color : MagicColor.WUBRG) {
-        		CardCollectionView ailist = ai.getCardsIn(ZoneType.Battlefield);
-        		CardCollectionView opplist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-        		
-        		ailist = CardLists.filter(ailist, CardPredicates.isColor(color));
-        		opplist = CardLists.filter(opplist, CardPredicates.isColor(color));
+            for (byte color : MagicColor.WUBRG) {
+                CardCollectionView ailist = ai.getCardsIn(ZoneType.Battlefield);
+                CardCollectionView opplist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+
+                ailist = CardLists.filter(ailist, CardPredicates.isColor(color));
+                opplist = CardLists.filter(opplist, CardPredicates.isColor(color));
 
                 int excess = ComputerUtilCard.evaluatePermanentList(opplist) - ComputerUtilCard.evaluatePermanentList(ailist);
                 if (excess > 4) {
-                	return true;
+                    return true;
                 }
             }
-        	return false;
+            return false;
         }
 
         if (logic.equals("MostProminentInComputerDeck")) {
