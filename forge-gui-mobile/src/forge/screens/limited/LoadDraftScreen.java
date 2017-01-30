@@ -158,6 +158,7 @@ public class LoadDraftScreen extends LaunchScreen {
                                         pl.assignConspiracies();
                                     }
 
+                                    FModel.getGauntletMini().resetGauntletDraft();
                                     final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
                                     hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
                                 }

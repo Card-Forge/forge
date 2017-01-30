@@ -151,6 +151,7 @@ public class LoadSealedScreen extends LaunchScreen {
                                         pl.assignConspiracies();
                                     }
 
+                                    FModel.getGauntletMini().resetGauntletDraft();
                                     final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
                                     hostedMatch.startMatch(GameType.Sealed, null, starter, human, GuiBase.getInterface().getNewGuiGame());
                                 }
