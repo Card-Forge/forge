@@ -438,6 +438,12 @@ public class CountersPutAi extends SpellAbilityAi {
             if (!(type.equals("P1P1") || type.equals("M1M1") || type.equals("ICE")) && (r.nextFloat() < (.1 * currCounters))) {
                 return false;
             }
+            // Instant +1/+1
+            if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa)) {
+                if (!(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
+                    return false;   // only if next turn and cost is reusable
+                }
+            }
         }
 
         boolean immediately = ComputerUtil.playImmediately(ai, sa);
