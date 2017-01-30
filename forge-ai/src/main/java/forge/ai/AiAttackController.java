@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.ai.ability.AnimateAi;
@@ -418,10 +419,14 @@ public class AiAttackController {
             } else if (c.getName().equals("Peacewalker Colossus")) {
                 // can activate other vehicles for {1}{W}
                 // TODO: the AI should ideally predict how many times it can activate
-                // for now, just break at this point and assume that at least +1 extra
-                // vehicle can activate
-                maxBlockersAfterCrew++;
-                break;
+                // for now, unless the opponent is tapped out, break at this point 
+                // and do not predict the blocker limit (which is safer)
+                if (!CardLists.filter(oppBattlefield, Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS)).isEmpty()) {
+                    maxBlockersAfterCrew = Integer.MAX_VALUE;
+                    break;
+                } else {
+                    maxBlockersAfterCrew--;
+                }
             } else if (cardType.hasSubtype("Vehicle") && !cardType.isCreature()) {
                 maxBlockersAfterCrew--;
             }
