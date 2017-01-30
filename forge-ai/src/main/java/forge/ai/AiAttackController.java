@@ -25,12 +25,14 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.ai.ability.AnimateAi;
+import forge.card.CardTypeView;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -399,6 +401,25 @@ public class AiAttackController {
         final List<Card> remainingAttackers = new ArrayList<Card>(this.attackers);
         final List<Card> remainingBlockers = new ArrayList<Card>(this.blockers);
         final List<Card> blockedAttackers = new ArrayList<Card>();
+
+        // Conservative prediction for vehicles: the AI tries to acknowledge the fact that
+        // at least one creature will tap to crew a blocking vehicle when predicting if an
+        // alpha strike for lethal is viable
+        int maxBlockersAfterCrew = remainingBlockers.size(); 
+        for (Card c : this.blockers) {
+            CardTypeView cardType = c.getCurrentState().getType();
+            boolean oppControlsPW = !CardLists.filter(c.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS).isEmpty();
+
+            if (c.getName().equals("Heart of Kirin") && oppControlsPW) {
+                continue;
+            } else if (c.getName().equals("Peacewalker Colossus")) {
+                // TODO: the AI should probably predict if the human can actually use its activated ability
+                continue;
+            } else if (cardType.hasSubtype("Vehicle") && !cardType.isCreature()) {
+                maxBlockersAfterCrew--;
+            }
+        }
+
         final Player opp = this.defendingOpponent;
 
         for (Card attacker : attackers) {
@@ -423,18 +444,20 @@ public class AiAttackController {
 
         // presumes the Human will block
         for (Card blocker : remainingBlockers) {
-            if (remainingAttackers.isEmpty()) {
+            if (remainingAttackers.isEmpty() || maxBlockersAfterCrew == 0) {
                 break;
             }
             if (blocker.hasKeyword("CARDNAME can block an additional creature.")) {
                 blockedAttackers.add(remainingAttackers.get(0));
                 remainingAttackers.remove(0);
+                maxBlockersAfterCrew--;
                 if (remainingAttackers.isEmpty()) {
                     break;
                 }
             }
             blockedAttackers.add(remainingAttackers.get(0));
             remainingAttackers.remove(0);
+            maxBlockersAfterCrew--;
         }
         unblockedAttackers.addAll(remainingAttackers);
         
