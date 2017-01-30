@@ -1833,35 +1833,47 @@ public class ComputerUtil {
     }
 
     public static boolean scryWillMoveCardToBottomOfLibrary(Player player, Card c) {
+        boolean bottom = false;
+
         CardCollectionView allCards = player.getAllCards();
         CardCollectionView cardsInHand = player.getCardsIn(ZoneType.Hand);
         CardCollectionView cardsOTB = player.getCardsIn(ZoneType.Battlefield);
+
+        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.LANDS);
+        CardCollection thisLandOTB = CardLists.filter(cardsOTB, CardPredicates.nameEquals(c.getName()));
+        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.Presets.LANDS);
+        // valuable mana-producing artifacts that may be equated to a land
+        List<String> manaArts = Arrays.asList("Mox Pearl", "Mox Sapphire", "Mox Jet", "Mox Ruby", "Mox Emerald");
         
         // evaluate creatures available in deck
         CardCollectionView allCreatures = CardLists.filter(allCards, Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.isOwner(player)));
         int numCards = allCreatures.size();
 
-        boolean bottom = false;
-        if (c.isLand()) {
-            CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.LANDS);
-            CardCollection thisLandOTB = CardLists.filter(cardsOTB, CardPredicates.nameEquals(c.getName()));
-            CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.Presets.LANDS);
+        // opening hand evaluation after mulligan (Scry 1) and other possible situations
+        // with no lands on the battlefield yet
+        if (landsOTB.isEmpty()) {
+            if (landsInHand.size() >= Math.max(cardsInHand.size() / 2, 3)) {
+                // scry any land to the bottom if we already have enough lands in hand
+                bottom = true;
+            } else if (landsInHand.isEmpty() && !c.isLand() && !manaArts.contains(c.getName())) {
+                // scry away non-lands if there are still no lands in hand after
+                // mulliganing to max AI mulligan threshold
+                bottom = true;
+            }
+        }
 
-            if (landsOTB.isEmpty() && landsInHand.size() >= Math.max(cardsInHand.size() / 2, 3)) {
-                // when evaluating opening hand after a mulligan, scry any land to the bottom if
-                // we already have enough lands in hand
-                return true;
-            } else if (landsOTB.size() >= 8) {
+        if (c.isLand()) {
+            if (landsOTB.size() >= 8) {
                 // probably enough lands not to urgently need another one, so look for more gas instead
-                return true;
+                bottom = true;
             }
 
             if (c.isBasicLand()) {
                 if (landsInHand.size() >= Math.max(cardsInHand.size() / 2, 2)) {
                     // scry basic lands away if we already have enough lands in hand
                     bottom = true;
-                } else if (landsOTB.size() > 5 && thisLandOTB.size() > 2) {
-                    // if control more than 5 Basic lands, more than 2 of them of the type in question,
+                } else if (landsOTB.size() > 5 && thisLandOTB.size() >= 2) {
+                    // if we control more than 5 lands, 2 or more of them of the type in question,
                     // scry to the bottom
                     bottom = true;
                 }
@@ -1873,11 +1885,14 @@ public class ComputerUtil {
             int maxControlledCMC = Aggregates.max(creaturesOTB, CardPredicates.Accessors.fnGetCmc);
 
             if (ComputerUtilCard.evaluateCreature(c) < avgCreatureValue) {
-                if (creaturesOTB.size() > 5 || (creaturesOTB.size() > 3 && c.getCMC() <= 3
-                    && maxControlledCMC >= 4 && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold)) {
-                    // if we are already at a stage when we have 4+ CMC creatures on the battlefield, or when we
-                    // have more than 5 creatures on the battlefield, probably worth it to scry away low value 
-                    // creatures with low CMC
+                if (creaturesOTB.size() > 5) {
+                    // if there are more than five creatures and the creature is question is below average for
+                    // the deck, scry it to the bottom
+                    bottom = true;
+                } else if (creaturesOTB.size() > 3 && c.getCMC() <= 3
+                        && maxControlledCMC >= 4 && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold) {
+                    // if we are already at a stage when we have 4+ CMC creatures on the battlefield,
+                    // probably worth it to scry away very low value creatures with low CMC
                     bottom = true;
                 }
             }
