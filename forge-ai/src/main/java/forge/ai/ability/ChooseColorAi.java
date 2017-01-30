@@ -76,13 +76,11 @@ public class ChooseColorAi extends SpellAbilityAi {
         if (logic.equals("MostProminentInComputerDeck")) {
             if ("Astral Cornucopia".equals(source.getName())) {
                 // activate in Main 2 hoping that the extra mana surplus will make a difference
-                // if there are some nonland permanents of prominent color in hand
-                CardCollectionView prominentPerms = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.and(
-                        CardPredicates.Presets.NONLAND_PERMANENTS,
-                        Predicates.or(CardPredicates.isColorless(), 
-                                CardPredicates.isColor(MagicColor.fromName(ComputerUtilCard.getMostProminentColor(ai.getAllCards()))))));
+                // if there are some nonland permanents in hand
+                CardCollectionView permanents = CardLists.filter(ai.getCardsIn(ZoneType.Hand), 
+                        CardPredicates.Presets.NONLAND_PERMANENTS);
 
-                return prominentPerms.size() > 0 && ph.is(PhaseType.MAIN2, ai);
+                return permanents.size() > 0 && ph.is(PhaseType.MAIN2, ai);
             }
         }
 
