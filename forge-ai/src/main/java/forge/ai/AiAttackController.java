@@ -408,13 +408,20 @@ public class AiAttackController {
         int maxBlockersAfterCrew = remainingBlockers.size(); 
         for (Card c : this.blockers) {
             CardTypeView cardType = c.getCurrentState().getType();
-            boolean oppControlsPW = !CardLists.filter(c.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS).isEmpty();
+            CardCollectionView oppBattlefield = c.getController().getCardsIn(ZoneType.Battlefield);
 
-            if (c.getName().equals("Heart of Kirin") && oppControlsPW) {
-                continue;
+            if (c.getName().equals("Heart of Kiran")) {
+                if (!CardLists.filter(oppBattlefield, CardPredicates.Presets.PLANEWALKERS).isEmpty()) {
+                    // can be activated by removing a loyalty counter instead of tapping a creature
+                    continue;
+                }
             } else if (c.getName().equals("Peacewalker Colossus")) {
-                // TODO: the AI should probably predict if the human can actually use its activated ability
-                continue;
+                // can activate other vehicles for {1}{W}
+                // TODO: the AI should ideally predict how many times it can activate
+                // for now, just break at this point and assume that at least +1 extra
+                // vehicle can activate
+                maxBlockersAfterCrew++;
+                break;
             } else if (cardType.hasSubtype("Vehicle") && !cardType.isCreature()) {
                 maxBlockersAfterCrew--;
             }
