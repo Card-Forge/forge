@@ -1839,9 +1839,9 @@ public class ComputerUtil {
         CardCollectionView cardsInHand = player.getCardsIn(ZoneType.Hand);
         CardCollectionView cardsOTB = player.getCardsIn(ZoneType.Battlefield);
 
-        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.LANDS);
+        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.LANDS_PRODUCING_MANA);
         CardCollection thisLandOTB = CardLists.filter(cardsOTB, CardPredicates.nameEquals(c.getName()));
-        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.Presets.LANDS);
+        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.Presets.LANDS_PRODUCING_MANA);
         // valuable mana-producing artifacts that may be equated to a land
         List<String> manaArts = Arrays.asList("Mox Pearl", "Mox Sapphire", "Mox Jet", "Mox Ruby", "Mox Emerald");
         
@@ -1849,15 +1849,10 @@ public class ComputerUtil {
         CardCollectionView allCreatures = CardLists.filter(allCards, Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.isOwner(player)));
         int numCards = allCreatures.size();
 
-        // opening hand evaluation after mulligan (Scry 1) and other possible situations
-        // with no lands on the battlefield yet
-        if (landsOTB.isEmpty()) {
-            if (landsInHand.size() >= Math.max(cardsInHand.size() / 2, 3)) {
-                // scry any land to the bottom if we already have enough lands in hand
-                bottom = true;
-            } else if (landsInHand.isEmpty() && !c.isLand() && !manaArts.contains(c.getName())) {
-                // scry away non-lands if there are still no lands in hand after
-                // mulliganing to max AI mulligan threshold
+        if (landsOTB.size() < 3 && landsInHand.isEmpty()) {
+            if ((!c.isLand() && !manaArts.contains(c.getName())) || c.getManaAbilities().isEmpty()) {
+                // scry away non-lands and non-manaproducing lands in situations when the land count
+                // on the battlefield is low, to try to improve the mana base early
                 bottom = true;
             }
         }
@@ -1866,15 +1861,15 @@ public class ComputerUtil {
             if (landsOTB.size() >= 8) {
                 // probably enough lands not to urgently need another one, so look for more gas instead
                 bottom = true;
+            } else if (landsInHand.size() >= Math.max(cardsInHand.size() / 2, 2)) {
+                // scry lands to the bottom if we already have enough lands in hand
+                bottom = true;
             }
 
             if (c.isBasicLand()) {
-                if (landsInHand.size() >= Math.max(cardsInHand.size() / 2, 2)) {
-                    // scry basic lands away if we already have enough lands in hand
-                    bottom = true;
-                } else if (landsOTB.size() > 5 && thisLandOTB.size() >= 2) {
-                    // if we control more than 5 lands, 2 or more of them of the type in question,
-                    // scry to the bottom
+                if (landsOTB.size() > 5 && thisLandOTB.size() >= 2) {
+                    // if we control more than 5 lands, 2 or more of them of the basic type in question,
+                    // scry to the bottom if it's a basic land
                     bottom = true;
                 }
             }
