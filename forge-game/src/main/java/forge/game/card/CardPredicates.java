@@ -492,6 +492,15 @@ public final class CardPredicates {
             }
         };
         /**
+         * a Predicate<Card> to get all mana-producing lands.
+         */
+        public static final Predicate<Card> LANDS_PRODUCING_MANA = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.isLand() && !c.getManaAbilities().isEmpty();
+            }
+        };
+        /**
          * a Predicate<Card> to get all permanents.
          */
         public static final Predicate<Card> PERMANENTS = new Predicate<Card>() {
