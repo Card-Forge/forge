@@ -528,7 +528,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public SpellAbility getTriggeringAbility() {
         SpellAbility trigSa = this;
-        while (trigSa != null && !trigSa.isTrigger()) {
+        if (!trigSa.isTrigger()) {
             trigSa = trigSa.getRootAbility();
         }
         return trigSa;
