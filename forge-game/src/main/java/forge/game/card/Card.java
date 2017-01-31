@@ -1336,7 +1336,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final String[] p = keyword.split(":");
                 final StringBuilder s = new StringBuilder();
                 if (p.length > 4) {
-                    s.append(p[4]);
+                    if (!"no desc".equals(p[4])) {
+                        s.append(p[4]);
+                    }
                 } else {
                     s.append(getName());
                     s.append(" enters the battlefield with ");
@@ -1356,7 +1358,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 String k = keyword;
                 k = k.replace("Curse", "");
                 sbLong.append(k).append("\r\n");
-            } else if (keyword.startsWith("Fading") || keyword.startsWith("Ripple") || keyword.startsWith("Vanishing")) {
+            } else if (keyword.startsWith("Ripple")) {
                 sbLong.append(keyword.replace(":", " ")).append("\r\n");
             } else if (keyword.startsWith("Madness")) {
                 String[] parts = keyword.split(":");
@@ -1447,19 +1449,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.contains("At the beginning of your upkeep, ")
                     && keyword.contains(" unless you pay")) {
                 sbLong.append(keyword).append("\r\n");
-            } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
-                    || keyword.startsWith("Strive") || keyword.startsWith("Escalate")
-                    || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
+            } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")
-                    || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")
-                    || keyword.startsWith("Graft") || keyword.startsWith("UpkeepCost")) {
+                    || keyword.startsWith("UpkeepCost")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                     || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                     || keyword.equals("Ingest") || keyword.equals("Changeling")) {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
-            } else if (keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
+            } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
+                    || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute")
+                    || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
                     || keyword.startsWith("Renown") || keyword.startsWith("Annihilator")) {
                 final String[] k = keyword.split(":");
                 sbLong.append(k[0] + " " + k[1] + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
@@ -1488,7 +1489,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
                     || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge") || keyword.startsWith("Ninjutsu")
                     || keyword.startsWith("Evoke") || keyword.startsWith("Bestow") || keyword.startsWith("Dash")
-                    || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")) {
+                    || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
+                    || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")
+                    || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedBy")) {
                 sbLong.append(getName()).append(" can't be blocked ");

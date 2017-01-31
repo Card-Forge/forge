@@ -2131,31 +2131,15 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Fading")) {
-                final String[] k = keyword.split(":");
-
-                card.addIntrinsicKeyword("etbCounter:FADE:" + k[1] + ":no Condition:no desc");
-
-                String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
-                        " | Execute$ TrigUpkeepFading | Secondary$ True | TriggerDescription$ At the beginning of " +
-                        "your upkeep, remove a fade counter from CARDNAME. If you can't, sacrifice CARDNAME.";
-
-                card.setSVar("TrigUpkeepFading", "AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ FADE" +
-                        " | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBUpkeepFadingSac");
-                card.setSVar("DBUpkeepFadingSac","DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ FadingCheckSVar" +
-                        " | ConditionSVarCompare$ EQ0 | References$ FadingCheckSVar | SubAbility$ FadingCleanup");
-                card.setSVar("FadingCleanup","DB$ Cleanup | ClearRemembered$ True");
-                card.setSVar("FadingCheckSVar","Count$RememberedSize");
-                final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, true);
-                card.addTrigger(parsedUpkeepTrig);
+                addTriggerAbility(keyword, card, null);
+                addReplacementEffect(keyword, card, null);
             }
             else if (keyword.startsWith("Renown")) {
                 addTriggerAbility(keyword, card, null); 
             }
             else if (keyword.startsWith("Vanishing")) {
-                final String[] k = keyword.split(":");
-                // etbcounter only for intrinsic
-                card.addIntrinsicKeyword("etbCounter:TIME:" + k[1] + ":no Condition:no desc");
                 addTriggerAbility(keyword, card, null);
+                addReplacementEffect(keyword, card, null);
             }
             else if (keyword.equals("Delve")) {
                 card.getSpellAbilities().getFirst().setDelve(true);
@@ -2478,7 +2462,6 @@ public class CardFactoryUtil {
     private static ReplacementEffect makeEtbCounter(final String kw, final Card card, final boolean intrinsic)
     {
         String parse = kw;
-        card.removeIntrinsicKeyword(parse);
 
         String[] splitkw = parse.split(":");
 
@@ -2510,7 +2493,7 @@ public class CardFactoryUtil {
         }
 
         String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                + "| Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+                + "| Secondary$ True | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
         re.setLayer(ReplacementLayer.Other);
@@ -2755,6 +2738,23 @@ public class CardFactoryUtil {
             card.setSVar("DB" + name + "Token", token);
             card.setSVar("DB" + name + "Token2", token + " | ConditionPresent$ Card.StrictlySelf | ConditionCompare$ EQ0");
 
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Fading")) {
+            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
+                    " | Execute$ TrigUpkeepFading | Secondary$ True | TriggerDescription$ At the beginning of " +
+                    "your upkeep, remove a fade counter from CARDNAME. If you can't, sacrifice CARDNAME.";
+
+            card.setSVar("TrigUpkeepFading", "AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ FADE" +
+                    " | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBUpkeepFadingSac");
+            card.setSVar("DBUpkeepFadingSac","DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ FadingCheckSVar" +
+                    " | ConditionSVarCompare$ EQ0 | References$ FadingCheckSVar | SubAbility$ FadingCleanup");
+            card.setSVar("FadingCleanup","DB$ Cleanup | ClearRemembered$ True");
+            card.setSVar("FadingCheckSVar","Count$RememberedSize");
+            final Trigger trigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(trigger);
+            
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
             }
@@ -3330,10 +3330,10 @@ public class CardFactoryUtil {
 
             final String etbCounter = "etbCounter:P1P1:" + numCounters + ":Bloodthirst$ True:" + desc;
 
-            if (intrinsic) {
-                card.addIntrinsicKeyword(etbCounter);
-            } else {
-                kws.addReplacement(makeEtbCounter(etbCounter, card, intrinsic));
+            final ReplacementEffect re = makeEtbCounter(etbCounter, card, intrinsic);
+
+            if (!intrinsic) {
+                kws.addReplacement(re);
             }
         } else if (keyword.startsWith("Devour")) {
 
@@ -3367,6 +3367,21 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addReplacement(cardre);
             }
+        } else if (keyword.startsWith("Fading")) {
+            final String[] k = keyword.split(":");
+            final String m = k[1];
+
+            StringBuilder sb = new StringBuilder("etbCounter:FADE:");
+            sb.append(m).append(":no Condition:");
+            sb.append("Fading ");
+            sb.append(m);
+            sb.append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
+
+            final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
+
+            if (!intrinsic) {
+                kws.addReplacement(re);
+            }
         } else if (keyword.startsWith("Graft")) {
             final String[] k = keyword.split(":");
             final String m = k[1];
@@ -3377,10 +3392,10 @@ public class CardFactoryUtil {
             sb.append(m);
             sb.append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
 
-            if (intrinsic) {
-                card.addIntrinsicKeyword(sb.toString());
-            } else {
-                kws.addReplacement(makeEtbCounter(sb.toString(), card, intrinsic));
+            final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
+
+            if (!intrinsic) {
+                kws.addReplacement(re);
             }
         } else if (keyword.startsWith("Madness")) {
             // Set Madness Replacement effects
@@ -3413,10 +3428,10 @@ public class CardFactoryUtil {
                 card.setSVar(m, "Count$Converge");
             }
 
-            if (intrinsic) {
-                card.addIntrinsicKeyword(sb.toString());
-            } else {
-                kws.addReplacement(makeEtbCounter(sb.toString(), card, intrinsic));
+            final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
+
+            if (!intrinsic) {
+                kws.addReplacement(re);
             }
         } else if (keyword.equals("Unleash")) {
             String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + Keyword.getInstance(keyword).getReminderText() + ")";
@@ -3439,6 +3454,21 @@ public class CardFactoryUtil {
 
             if (!intrinsic) {
                 kws.addReplacement(cardre);
+            }
+        } else if (keyword.startsWith("Vanishing")) {
+            final String[] k = keyword.split(":");
+            final String m = k[1];
+
+            StringBuilder sb = new StringBuilder("etbCounter:TIME:");
+            sb.append(m).append(":no Condition:");
+            sb.append("Vanishing ");
+            sb.append(m);
+            sb.append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
+
+            final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
+
+            if (!intrinsic) {
+                kws.addReplacement(re);
             }
         }
     }
