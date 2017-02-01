@@ -97,7 +97,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>("Close Action:");
     private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<>("AI Personality:");
     private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>("Show Detailed Card Color:");
-    private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>("Auto-Yield Mode:");
+    private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>("Auto-Yield:");
 
     /**
      * Constructor.
@@ -177,7 +177,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel("When enabled, preselects the last defined simultaneous ability order in the ordering dialog."), regularConstraints);
 
         pnlPrefs.add(cbpAutoYieldMode, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Defines the granularity level of auto-yields (yield to each unique ability or to each unique card)."), regularConstraints);
+        pnlPrefs.add(new NoteLabel("Defines the granularity level of auto-yields (per unique ability or per unique card)."), regularConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
