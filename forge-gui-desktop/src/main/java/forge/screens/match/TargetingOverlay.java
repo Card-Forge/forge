@@ -201,6 +201,10 @@ public class TargetingOverlay {
     // A throttled version of assembleArcs. Though it is still called on every
     // repaint, we take means to avoid it fully running every time (to reduce CPU usage).
     private boolean assembleArcs(final CombatView combat, boolean forceAssemble) {
+        if (!this.getPanel().isShowing()) {
+            return false;
+        }
+
         if (!forceAssemble) {
             /* -- Minimum update frequency timer, currently disabled --
             long now = System.currentTimeMillis();
@@ -302,6 +306,10 @@ public class TargetingOverlay {
 
     // This section is a refactored portion of the new-style assembleArcs.
     private void assembleStackArrows() {
+        if (!this.getPanel().isShowing()) {
+            return;
+        }
+
         final StackInstanceTextArea activeStackItem = matchUI.getCStack().getView().getHoveredItem();
 
         if (activeStackItem != null) {
