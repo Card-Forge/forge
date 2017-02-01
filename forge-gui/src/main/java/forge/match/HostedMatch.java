@@ -38,6 +38,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.player.PlayerControllerHuman;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -255,7 +256,11 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
-            humanController.getGui().clearAutoYields();
+            if (FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_CARD) || isMatchOver()) {
+                // when autoyielding per card, we need to clear auto yields between games since card IDs change
+                humanController.getGui().clearAutoYields();
+            }
+
             humanController.getGui().afterGameEnd();
         }
         humanControllers.clear();
