@@ -44,7 +44,6 @@ import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.views.VField;
