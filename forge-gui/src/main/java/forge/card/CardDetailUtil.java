@@ -300,30 +300,33 @@ public class CardDetailUtil {
         // text changes
         final Map<String, String> changedColorWords = card.getChangedColorWords();
         final Map<String, String> changedTypes = card.getChangedTypes();
-        if (!(changedColorWords.isEmpty() && changedTypes.isEmpty())) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-        }
-        for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
-            // ignore lower case and plural form keys, to avoid duplicity
-            if (Character.isUpperCase(e.getKey().charAt(0)) &&
-                    !CardUtil.singularTypes.containsKey(e.getKey())) {
-                area.append("Text changed: all instances of ");
-                if (e.getKey().equals("Any")) {
-                    if (changedColorWords.containsKey(e.getKey())) {
-                        area.append("color words");
-                    } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
-                        area.append("basic land types");
-                    } else {
-                        area.append("creature types");
-                    }
-                } else {
-                    area.append(e.getKey());
+        if (changedColorWords != null && changedTypes != null) {
+            if (!(changedColorWords.isEmpty() && changedTypes.isEmpty())) {
+                if (area.length() != 0) {
+                    area.append("\n");
                 }
-                area.append(" are replaced by ");
-                area.append(e.getValue());
-                area.append(".\n");
+            }
+
+            for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
+                // ignore lower case and plural form keys, to avoid duplicity
+                if (Character.isUpperCase(e.getKey().charAt(0))
+                        && !CardUtil.singularTypes.containsKey(e.getKey())) {
+                    area.append("Text changed: all instances of ");
+                    if (e.getKey().equals("Any")) {
+                        if (changedColorWords.containsKey(e.getKey())) {
+                            area.append("color words");
+                        } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
+                            area.append("basic land types");
+                        } else {
+                            area.append("creature types");
+                        }
+                    } else {
+                        area.append(e.getKey());
+                    }
+                    area.append(" are replaced by ");
+                    area.append(e.getValue());
+                    area.append(".\n");
+                }
             }
         }
 
