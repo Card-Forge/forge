@@ -82,10 +82,11 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
         UI_PAUSE_WHILE_MINIMIZED("false"),
         UI_TOKENS_IN_SEPARATE_ROW("false"), // Display tokens in their own battlefield row.
-        UI_DISPLAY_CURRENT_COLORS("Never"),
+        UI_DISPLAY_CURRENT_COLORS(ForgeConstants.DISP_CURRENT_COLORS_NEVER),
         UI_FILTER_LANDS_BY_COLOR_IDENTITY("true"),
         UI_ALLOW_ESC_TO_END_TURN ("false"),
         UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
+        UI_AUTO_YIELD_MODE (ForgeConstants.AUTO_YIELD_PER_ABILITY),
 
         UI_FOR_TOUCHSCREN("false"),
 

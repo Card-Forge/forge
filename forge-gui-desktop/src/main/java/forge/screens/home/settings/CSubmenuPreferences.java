@@ -117,7 +117,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbManaLostPrompt(), FPref.UI_MANA_LOST_PROMPT));
         lstControls.add(Pair.of(view.getCbEscapeEndsTurn(), FPref.UI_ALLOW_ESC_TO_END_TURN));
         lstControls.add(Pair.of(view.getCbDetailedPaymentDesc(), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT));
-        lstControls.add(Pair.of(view.getcbPreselectPrevAbOrder(), FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER));
+        lstControls.add(Pair.of(view.getCbPreselectPrevAbOrder(), FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER));
 
         lstControls.add(Pair.of(view.getCbFilterLandsByColorId(), FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY));
 
@@ -181,6 +181,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeCloseActionComboBox();
         initializeAiProfilesComboBox();
         initializeColorIdentityCombobox();
+        initializeAutoYieldModeComboBox();
         initializePlayerNameButton();
     }
 
@@ -318,6 +319,14 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
     }
     
+    private void initializeAutoYieldModeComboBox() {
+        final String[] elems = {ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD};
+        final FPref userSetting = FPref.UI_AUTO_YIELD_MODE;
+        final FComboBoxPanel<String> panel = this.view.getAutoYieldModeComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(elems, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
     private <E> FComboBox<E> createComboBox(final E[] items, final ForgePreferences.FPref setting) {
         final FComboBox<E> comboBox = new FComboBox<>(items);
         addComboBoxListener(comboBox, setting);

@@ -194,4 +194,7 @@ public final class ForgeConstants {
     public static final String DISP_CURRENT_COLORS_MULTI_OR_CHANGED = "Multi+Changed";
     public static final String DISP_CURRENT_COLORS_NEVER = "Never";
 
+    // Constants for Auto-Yield Mode
+    public static final String AUTO_YIELD_PER_CARD = "Per Card";
+    public static final String AUTO_YIELD_PER_ABILITY = "Per Ability";
 }

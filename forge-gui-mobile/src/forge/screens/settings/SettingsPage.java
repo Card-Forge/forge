@@ -126,6 +126,11 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Preselect Last Order of Abilities",
                 "When enabled, preselects the last defined simultaneous ability order in the ordering dialog."),
                 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
+                "Auto-Yield Mode",
+                "Defines the granularity level of auto-yields (yield to each unique ability or to each unique card).",
+                new String[]{ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD}), 
+                1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,
