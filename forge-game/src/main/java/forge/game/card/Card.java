@@ -1506,7 +1506,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (keyword.contains("CardUID")) {
                     sbLong.append("CardID (").append(Integer.valueOf(keyword.split("CantBlockCardUID_")[1])).append(")");
                 } else {
-                    final String[] k = keyword.split(":");
+                    final String[] k = keyword.split(" ");
                     sbLong.append(k.length > 1 ? k[1] + ".\r\n" : "");
                 }
             } else if (keyword.equals("Unblockable")) {
