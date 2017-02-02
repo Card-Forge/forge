@@ -192,7 +192,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
                     final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                     if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
-                        tgtCard.addCounter(counterType, counterAmount, true);
+                        if (etbcounter) {
+                            tgtCard.addEtbCounter(counterType, counterAmount);
+                        } else {
+                            tgtCard.addCounter(counterType, counterAmount, true);
+                        }
                         if (remember) {
                             final int value = tgtCard.getTotalCountersToAdd();
                             tgtCard.addCountersAddedBy(card, counterType, value);
@@ -219,7 +223,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     } else {
                         // adding counters to something like re-suspend cards
                         // etbcounter should apply multiplier
-                        tgtCard.addCounter(counterType, counterAmount, etbcounter);
+                        if (etbcounter) {
+                            tgtCard.addEtbCounter(counterType, counterAmount);
+                        } else {
+                            tgtCard.addCounter(counterType, counterAmount, false);
+                        }
                     }
                 }
             } else if (obj instanceof Player) {

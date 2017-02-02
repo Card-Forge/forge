@@ -227,7 +227,7 @@ public class GameAction {
                 copied.getOwner().addInboundToken(copied);
             }
 
-            HashMap<String, Object> repParams = new HashMap<String, Object>();
+            Map<String, Object> repParams = Maps.newHashMap();
             repParams.put("Event", "Moved");
             repParams.put("Affected", copied);
             repParams.put("CardLKI", lastKnownInfo);
@@ -251,6 +251,10 @@ public class GameAction {
                 zoneTo = c.getOwner().getZone(ZoneType.Exile);
                 lastKnownInfo = CardUtil.getLKICopy(c);
                 c.setUnearthed(false);
+            }
+
+            if (toBattlefield) {
+                copied.putEtbCounters();
             }
         }
 

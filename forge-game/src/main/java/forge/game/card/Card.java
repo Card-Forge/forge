@@ -242,6 +242,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardRules cardRules;
     private final CardView view;
 
+    private Map<CounterType, Integer> etbCounters = Maps.newEnumMap(CounterType.class);
+
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
@@ -7125,5 +7127,29 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setLastKnownZone(Zone zone) {
         this.savedLastKnownZone = zone;
+    }
+
+    /**
+     * ETBCounters are only used between replacementEffects
+     * and when the Card really enters the Battlefield with the counters
+     * @return map of counters
+     */    
+    public final Map<CounterType,Integer> getEtbCounters() {
+        return etbCounters;
+    }
+
+    public final void addEtbCounter(CounterType type, Integer val) {
+        int old = etbCounters.containsKey(type) ? etbCounters.get(type) : 0;
+        etbCounters.put(type, old + val);
+    }
+
+    public final void clearEtbCounters() {
+        etbCounters.clear();
+    }
+
+    public final void putEtbCounters() {
+        for (Map.Entry<CounterType, Integer> e : etbCounters.entrySet()) {
+            this.addCounter(e.getKey(), e.getValue(), true);
+        }
     }
 }
