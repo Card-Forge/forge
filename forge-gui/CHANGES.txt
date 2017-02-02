@@ -15,6 +15,9 @@ Note that in when auto-yielding per ability, auto-yields will NOT be automatical
 - New Quest World -
 There is a new quest world from Xyx based around the Portal set. Here's the description from the author: "It's 1997 and Magic has become the most elaborately complex game on the planet. In an attempt to make the game accessible to a wider audience, Wizards of the Coast releases Magic's first "Starter level" product: Portal, a set of simple cards with generic fantasy flavor. Fortunately, "simple" and "generic" do not automatically translate to "dumb" or "bland". Portal is quite elegant in its simplicity, visually distinct, with resonant top-down card design. It is both AI-friendly and beginner-friendly, but because it is not immediately apparent what all the good cards and decks are, it is also "experienced-player-friendly". If you ever want to introduce a friend to Magic and/or Forge, you could do a lot worse than send them on a Portal quest!"
 
+- New Cubes for Drafting -
+Many cubes were added for cube drafting in Booster Draft mode, many of them based on well known cubes available online. Many cubes were ported over from XMage and can thus now be played in Forge against the AI. Also, a 2017 MTGO Vintage cube was added, as contributed on the forum by zookham.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the 1.5.59 Beta release run.
 
