@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 3 Color: 4 Red
+Title=The Color Red
+Difficulty=hard
+Description=Chaos does not choose its enemies.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|POR|1
+3 Earthquake|POR
+2 Fire Dragon|POR
+4 Fire Imp|POR
+2 Forked Lightning|POR
+25 Mountain|POR|2
+4 Pillaging Horde|POR
+4 Pyroclasm|POR
+4 Spitting Earth|POR
+4 Volcanic Dragon|POR
+4 Volcanic Hammer|POR

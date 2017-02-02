@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=POR 2 Gimmick: Geddon
+Title=Geddon
+Difficulty=medium
+Description="'O miserable of happy! Is this the end // Of this new glorious world . . . ?'" -John Milton, Paradise Lost
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Armageddon|POR
+4 Cloud Pirates|POR
+4 Cloud Spirit|POR
+4 Gift of Estates|POR
+11 Island|POR|2
+4 Knight Errant|POR
+4 Man-o'-War|POR
+4 Owl Familiar|POR
+9 Plains|POR|4
+4 Symbol of Unsummoning|POR
+4 Time Ebb|POR
+4 Wind Drake|POR

@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 2 Gimmick: Mana
+Title=Mana
+Difficulty=medium
+Description=". . . inviting the soul to wander for a spell in abysses of solitude . . . ." -Kate Chopin, The Awakening
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Command of Unsummoning|POR
+4 Fire Snake|POR
+10 Island|POR|4
+4 Lava Flow|POR
+4 Man-o'-War|POR
+14 Mountain|POR|2
+4 Pyroclasm|POR
+4 Rain of Salt|POR
+4 Stone Rain|POR
+4 Symbol of Unsummoning|POR
+4 Time Ebb|POR

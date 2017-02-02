@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=POR 2 Strategy Card: Air Superiority
+Title=Air Superiority
+Difficulty=medium
+Description="Winning with this deck means playing defense early on and using your large creatures with flying to attack your opponent in the later stages of the game. Since flying creatures are so difficult to intercept, they often make the difference between victory and defeat." -The Air Superiority Strategy Card
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Archangel|POR
+1 Ardent Militia|POR
+1 Armored Pegasus|POR
+1 Blessed Reversal|POR
+1 Border Guard|POR
+1 Cloud Dragon|POR
+1 Cloud Spirit|POR
+1 Command of Unsummoning|POR
+1 Djinn of the Lamp|POR
+1 Horned Turtle|POR
+7 Island|POR|1
+1 Mystic Denial|POR
+1 Path of Peace|POR
+7 Plains|POR|1
+1 Snapping Drake|POR
+1 Spotted Griffin|POR
+1 Starlit Angel|POR
+1 Storm Crow|POR
+1 Symbol of Unsummoning|POR
+1 Time Ebb|POR
+1 Vengeance|POR
+1 Wall of Swords|POR
+1 Wind Drake|POR

@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 209: The Elves
+Title=The Elves
+Difficulty=easy
+Description=It's up to you if you enter their woods—and up to them if you leave.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Breath of Life|POR
+4 Devoted Hero|POR
+4 Elven Cache|POR
+4 Elvish Ranger|POR
+14 Forest|POR|4
+4 Fruition|POR
+4 Keen-Eyed Archers|POR
+4 Nature's Cloak|POR
+10 Plains|POR|4
+2 Renewing Dawn|POR
+2 Starlight|POR
+4 Wood Elves|POR

@@ -1,0 +1,18 @@
+[quest]
+id=POR Challenge: Thing from the Deep
+OpponentName=The Thing from the Deep
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=Thing from the Deep
+[metadata]
+Name=POR Challenge: Thing from the Deep
+Title=The Thing from the Deep
+Difficulty=hard
+Description=Seafarers fear sailing off the world's edge not so much as down its gullet.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+60 Island|POR|4

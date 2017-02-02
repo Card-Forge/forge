@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 15: Nature's Guardians
+Title=Nature's Guardians
+Difficulty=easy
+Description=One of the forest's best protectors is the forest itself.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+24 Forest|POR|1
+4 Moon Sprite|POR
+2 Natural Order|POR
+4 Natural Spring|POR
+4 Nature's Lore|POR
+4 Plant Elemental|POR
+4 Primeval Force|POR
+4 Redwood Treefolk|POR
+4 Rowan Treefolk|POR
+2 Sylvan Tutor|POR
+4 Willow Dryad|POR

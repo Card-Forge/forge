@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 2 Gimmick: Burn
+Title=Burn
+Difficulty=medium
+Description=Fire never dies alone.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|POR|1
+4 Dry Spell|POR
+4 Earthquake|POR
+4 Fire Tempest|POR
+4 Lava Axe|POR
+16 Mountain|POR|2
+4 Scorching Spear|POR
+8 Swamp|POR|1
+4 Vampiric Feast|POR
+4 Vampiric Touch|POR
+4 Volcanic Hammer|POR

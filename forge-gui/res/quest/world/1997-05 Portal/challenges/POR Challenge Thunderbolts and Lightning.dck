@@ -1,0 +1,20 @@
+[quest]
+id=POR Challenge: Thunderbolts and Lightning
+OpponentName=Thunderbolts and Lightning
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=POR Challenge: Thunderbolts and Lightning
+Title=Thunderbolts and Lightning
+Difficulty=medium
+Description=very, very fright'ning me
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+15 Forked Lightning|POR
+30 Mountain|POR|2
+15 Thundermare|POR

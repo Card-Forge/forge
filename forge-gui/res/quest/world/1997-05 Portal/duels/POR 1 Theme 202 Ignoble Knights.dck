@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 202: (Ig)noble Knights
+Title=(Ig)noble Knights
+Difficulty=easy
+Description="... Before honor is humility." -The Bible, Proverbs 15:33
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Charging Paladin|POR
+4 Craven Knight|POR
+4 Dread Charge|POR
+4 Gift of Estates|POR
+4 Knight Errant|POR
+4 Mercenary Knight|POR
+14 Plains|POR|2
+4 Sacred Knight|POR
+10 Swamp|POR|4
+4 Valorous Charge|POR
+4 Wall of Swords|POR

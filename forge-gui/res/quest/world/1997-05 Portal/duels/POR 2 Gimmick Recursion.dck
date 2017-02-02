@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=POR 2 Gimmick: Recursion
+Title=Recursion
+Difficulty=medium
+Description=The earth cannot hold that which magic commands.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Dry Spell|POR
+4 Ebon Dragon|POR
+4 Endless Cockroaches|POR
+4 Gravedigger|POR
+4 Mercenary Knight|POR
+4 Noxious Toad|POR
+4 Raise Dead|POR
+4 Serpent Assassin|POR
+24 Swamp|POR|3
+4 Undying Beast|POR

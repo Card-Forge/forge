@@ -1,0 +1,20 @@
+[quest]
+id=POR Challenge: Prosperity
+OpponentName=Prosperity
+AILife=200
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=POR Challenge: Prosperity
+Title=Prosperity
+Difficulty=easy
+Description="Life can never be too good."
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+100 Island|POR|1
+100 Prosperity|POR
+100 Command of Unsummoning|POR

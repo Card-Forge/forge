@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=POR 3 Combo-Control
+Title=Combo-Control
+Difficulty=hard
+Description=". . . inviting the soul to wander for a spell in abysses of solitude . . . ." -Kate Chopin, The Awakening
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Archangel|POR
+2 Armageddon|POR
+4 Breath of Life|POR
+2 Djinn of the Lamp|POR
+13 Island|POR|1
+4 Man-o'-War|POR
+2 Mystic Denial|POR
+4 Owl Familiar|POR
+13 Plains|POR|1
+4 Symbol of Unsummoning|POR
+4 Time Ebb|POR
+4 Wrath of God|POR

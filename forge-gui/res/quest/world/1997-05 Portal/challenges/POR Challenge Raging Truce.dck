@@ -1,0 +1,21 @@
+[quest]
+id=POR Challenge: Raging Truce
+OpponentName=Raging Truce
+AILife=100
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=POR Challenge: Raging Truce
+Title=Raging Truce
+Difficulty=easy
+Description=Charging alone takes uncommon daring or uncommon stupidity. Or both.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+40 Mountain|POR|4
+40 Plains|POR|3
+40 Temporary Truce|POR
+80 Raging Goblin|POR|2

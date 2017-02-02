@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=POR 2 Strategy Card: Domination
+Title=Domination
+Difficulty=medium
+Description="The key to this deck is the "card advantage" it can give you over your opponent. This means that, either by drawing extra cards or making your opponent discard, you have access to more cards than your opponent. Cards represent a player's options throughout a game, so the more cards you have in your hand, the more options you have." -The Domination Strategy Card
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Ancestral Memories|POR
+1 Arrogant Vampire|POR
+1 Baleful Stare|POR
+1 Capricious Sorcerer|POR
+1 Ebon Dragon|POR
+1 Endless Cockroaches|POR
+1 Gravedigger|POR
+7 Island|POR|3
+1 King's Assassin|POR
+1 Man-o'-War|POR
+1 Mind Knives|POR
+1 Mind Rot|POR
+1 Noxious Toad|POR
+1 Owl Familiar|POR
+1 Phantom Warrior|POR
+1 Serpent Assassin|POR
+7 Swamp|POR|3
+1 Symbol of Unsummoning|POR
+1 Theft of Dreams|POR
+1 Touch of Brilliance|POR
+1 Undying Beast|POR
+1 Wicked Pact|POR
+1 Withering Gaze|POR

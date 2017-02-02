@@ -1,0 +1,21 @@
+[quest]
+id=POR Challenge: Inclement Weather
+OpponentName=Inclement Weather
+AILife=40
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=POR Challenge: Inclement Weather
+Title=Inclement Weather
+Difficulty=easy
+Description=
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+15 Earthquake|POR
+15 Forest|POR|2
+15 Hurricane|POR
+15 Mountain|POR|4

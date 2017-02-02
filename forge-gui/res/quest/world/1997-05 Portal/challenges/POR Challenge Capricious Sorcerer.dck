@@ -1,0 +1,19 @@
+[quest]
+id=POR Challenge: Capricious Sorcerer
+OpponentName=Tim
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:POR
+Credit Reward=120
+AIExtras=Capricious Sorcerer
+[metadata]
+Name=POR Challenge: Capricious Sorcerer
+Title=Capricious Sorcerer
+Difficulty=easy
+Description="There are some who call me... Tim." -Tim the Sorcerer, Monty Python and the Holy Grail
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+30 Capricious Sorcerer|POR
+30 Island|POR|2

@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=POR 3 Stragegy: Red Rock
+Title=Red Rock
+Difficulty=hard
+Description=Fear is as effective a weapon as the blade.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Assassin's Blade|POR
+4 Blaze|POR|1
+1 Endless Cockroaches|POR
+4 Fire Imp|POR
+4 Gravedigger|POR
+4 Hand of Death|POR|2
+4 King's Assassin|POR
+10 Mountain|POR|2
+4 Serpent Assassin|POR
+16 Swamp|POR|1
+1 Undying Beast|POR
+4 Volcanic Hammer|POR

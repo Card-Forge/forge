@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 12: Benthic Depths
+Title=Benthic Depths
+Difficulty=easy
+Description=Sailors fear the deep-sea serpent; others thank the gods it has no legs.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+2 Baleful Stare|POR
+4 Coral Eel|POR
+4 Deep-Sea Serpent|POR
+4 Giant Octopus|POR
+4 Horned Turtle|POR
+24 Island|POR|1
+4 Man-o'-War|POR
+4 Merfolk of the Pearl Trident|POR
+4 Thing from the Deep|POR
+4 Time Ebb|POR
+2 Withering Gaze|POR

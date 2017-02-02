@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=POR 3 Color: 3 Black
+Title=The Color Black
+Difficulty=hard
+Description=Charm and grace may hide a foul heart.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Arrogant Vampire|POR
+4 Assassin's Blade|POR
+2 Ebon Dragon|POR
+1 Endless Cockroaches|POR
+4 Gravedigger|POR
+4 Hand of Death|POR|2
+4 King's Assassin|POR
+4 Mercenary Knight|POR
+4 Serpent Assassin|POR
+2 Serpent Warrior|POR
+26 Swamp|POR|3
+1 Undying Beast|POR

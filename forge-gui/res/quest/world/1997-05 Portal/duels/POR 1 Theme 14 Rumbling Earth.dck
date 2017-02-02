@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 14: Rumbling Earth
+Title=Rumbling Earth
+Difficulty=easy
+Description=The wisest man builds his house behind the rock.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Craven Giant|POR
+4 Earthquake|POR
+4 Highland Giant|POR
+4 Hill Giant|POR
+4 Hulking Cyclops|POR
+24 Mountain|POR|3
+4 Mountain Goat|POR
+4 Spitting Earth|POR
+4 Stone Rain|POR
+4 Wall of Granite|POR

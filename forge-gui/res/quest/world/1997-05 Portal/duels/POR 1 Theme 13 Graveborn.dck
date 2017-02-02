@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 13: Graveborn
+Title=Graveborn
+Difficulty=easy
+Description=A touch, not comforting, but of death.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Arrogant Vampire|POR
+4 Bog Wraith|POR
+4 Gravedigger|POR
+4 Raise Dead|POR
+4 Skeletal Crocodile|POR
+4 Skeletal Snake|POR
+24 Swamp|POR|3
+4 Undying Beast|POR
+4 Vampiric Feast|POR
+4 Vampiric Touch|POR

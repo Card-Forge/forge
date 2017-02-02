@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=POR 2 Gimmick: Sweeping Dragons
+Title=Sweeping Dragons
+Difficulty=medium
+Description=Let sweeping dragons lie.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Alabaster Dragon|POR
+4 Earthquake|POR
+4 Fire Dragon|POR
+4 Gift of Estates|POR
+16 Mountain|POR|4
+12 Plains|POR|3
+4 Pyroclasm|POR
+4 Scorching Winds|POR
+4 Volcanic Dragon|POR
+4 Wrath of God|POR

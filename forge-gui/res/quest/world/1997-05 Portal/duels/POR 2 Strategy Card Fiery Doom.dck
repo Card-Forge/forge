@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=POR 2 Strategy Card: Fiery Doom
+Title=Fiery Doom
+Difficulty=medium
+Description="One of red's strengths is dealing damage directly to creatures and opponents, while one of black's strenghths is destroying creatures. These two colors make a potent combination, allowing you to kill off your opponent's creatures while amassing your own army. Soon enough you'll be able to attack with a whole battalion and claim victory." -The Fiery Doom Strategy Card
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Assassin's Blade|POR
+1 Blaze|POR|1
+1 Craven Giant|POR
+1 Craven Knight|POR
+1 Endless Cockroaches|POR
+1 Fire Dragon|POR
+1 Fire Imp|POR
+1 Fire Snake|POR
+1 Forked Lightning|POR
+1 Gravedigger|POR
+1 Hand of Death|POR|2
+1 King's Assassin|POR
+7 Mountain|POR|2
+1 Nature's Ruin|POR
+1 Scorching Spear|POR
+1 Scorching Winds|POR
+1 Serpent Assassin|POR
+1 Skeletal Crocodile|POR
+1 Spitting Earth|POR
+7 Swamp|POR|1
+1 Undying Beast|POR
+1 Virtue's Ruin|POR
+1 Volcanic Hammer|POR

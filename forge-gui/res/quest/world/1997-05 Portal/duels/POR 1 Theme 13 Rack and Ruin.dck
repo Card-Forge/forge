@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=POR 1 Theme 13: Rack and Ruin
+Title=Rack and Ruin
+Difficulty=easy
+Description=All must fall, and those who stand highest fall hardest.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Dry Spell|POR
+4 Ebon Dragon|POR
+4 Mercenary Knight|POR
+4 Mind Knives|POR
+4 Mind Rot|POR
+4 Nature's Ruin|POR
+4 Noxious Toad|POR
+24 Swamp|POR|3
+4 Undying Beast|POR
+4 Virtue's Ruin|POR
