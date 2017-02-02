@@ -256,6 +256,7 @@ public class GameAction {
             if (toBattlefield) {
                 copied.putEtbCounters();
             }
+            copied.clearEtbCounters();
         }
 
         copied.getOwner().removeInboundToken(copied);
