@@ -938,6 +938,10 @@ public class AttachAi extends SpellAbilityAi {
                         if (isUsefulAttachKeyword(keyword, c, sa, pow)) {
                             return true;
                         }
+                        if (c.hasKeyword("Infect") && pow >= 2) {
+                            // consider +2 power a significant bonus on Infect creatures
+                            return true;
+                        }
                     }
                     return false;
                 }
