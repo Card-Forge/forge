@@ -3317,7 +3317,7 @@ public class CardFactoryUtil {
 
         final boolean intrinsic = kws == null;
         if (keyword.startsWith("Bloodthirst")) {
-            final String numCounters = keyword.split(" ")[1];
+            final String numCounters = keyword.split(":")[1];
 
             String desc;
             if (numCounters.equals("X")) {

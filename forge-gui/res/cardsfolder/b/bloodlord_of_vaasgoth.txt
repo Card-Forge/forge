@@ -2,7 +2,7 @@ Name:Bloodlord of Vaasgoth
 ManaCost:3 B B
 Types:Creature Vampire Warrior
 PT:3/3
-K:Bloodthirst 3
+K:Bloodthirst:3
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Creature.Vampire | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ BloodPump | TriggerDescription$ Whenever you cast a Vampire creature spell, it gains bloodthirst 3.
 SVar:BloodPump:AB$ Animate | Cost$ 0 | Defined$ TriggeredCard | Keywords$ Bloodthirst 3 | Permanent$ True
