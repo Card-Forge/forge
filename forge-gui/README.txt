@@ -1532,6 +1532,28 @@ Desktop Forge UI has been updated a little bit. In the deck editor, the +/- butt
 Some work went into porting the remaining features from desktop version of the game to mobile Forge. In particular, it is now possible to start a match against a particular opponent in Sealed Deck and Booster Draft modes in addition to the gauntlet mode which is still default. The work to enable quest draft tournaments in mobile Forge is ongoing and should not be considered complete at the moment, draft tournaments in quest mode are still not fully functional in mobile Forge and you will not be able to complete a draft tournament yet.
 The mobile port of Forge now features an option "Battlefield Texture Filtering" which smoothes out card art on the battlefield. This can help make the graphics smoother on larger tablet screens (e.g. 12") or when connected to an external monitor. This option, however, comes with a performance penalty and may blur the card art too much on smaller screens. It is disabled by default.
 
+v1.5.59 Changes
+===============
+
+- Aether Revolt -
+This release features all Aether Revolt cards that you can play with in all game modes. There are still some remaining caveats and issues that are hopefully going to be addressed soon. Please report any issues you encounter with the new cards.
+
+- Commander 2016 -
+This release features most Commander 2016 cards scripted and ready to play. The few remaining cards that are not currently supported may be scripted in the upcoming versions of Forge.
+
+- Auto-Yielding Granularity -
+It is now possible to specify the granularity level for auto-yields: it is possible to choose between yielding to each unique ability or to each unique card. The difference is that, for example, when yielding per ability if you auto-yield to Hellrider's triggered ability once, all triggers from other Hellrider cards will be automatically auto-yielded to as well. When yielding per card, you will need to auto-yield to each Hellrider separately. The historical Forge default of auto-yielding per ability has been restored, and the option can now be toggled in Forge Preferences (check out "Auto-Yield" under Gameplay) in both Desktop and Mobile Forge.
+Note that in when auto-yielding per ability, auto-yields will NOT be automatically cleared between games in a match, which should speed the game up. When auto-yielding per card, auto-yields WILL be automatically cleared between games because they are dependent on card IDs which change from game to game, thus you will need to auto-yield to each card again in each game of the match.
+
+- User interface updates and changes -
+Some notable modifications were made to the Forge UI for desktop computers. First of all, many pop-up prompts have been replaced with prompt window queries - for example, Scry 1 now shows the request to put the card on the top or bottom of the library in the prompt window instead of a pop-up dialog window, and allows to view the card in question by moving the mouse over the prompt window, which is more convenient. Second of all, in both desktop and mobile Forge, there is now an option in Forge Preferences called "Preselect Last Order of Abilities" that preselects the last known order of simultaneous abilities, thus making it possible to just use "Space" once to confirm the previous order instead of having to press Space for each ability or clicking the ">>" button to add the previous order once more. This option is currently disabled by default to avoid being confusing to users who are used to doing it the way it used to be before. Also, there is now an option to view detailed spell ability descriptions in the prompt window during mana payment and targeting, which is enabled by default but can be enabled/disabled in Forge preferences ("Spell Description in Payment Prompt" under the "Gameplay" preference group).
+
+- Targeting Overlay Optional Optimization -
+Throttling-based targeting overlay optimization aimed at eliminating continuous CPU use has been made optional (but enabled by default). Most users running modern hardware will want this option enabled because it will significantly reduce CPU use when playing Forge, especially when playing with the targeting overlay always on. However, some users running older hardware at slower CPU clock speed may experience choppiness (for example, when dragging card panels in hand), in which case we advise you to try disabling the option "Enabled Targeting Overlay Optimization" in Forge preferences under "Graphic Options".
+
+- AI updates - 
+Artificial intelligence received several improvements and fixes. The AI should now be able to use mana ritual cards (Dark Ritual and similar cards), sacrifice-and-upgrade cards (Birthing Pod, Eldritch Evolution, Natural Order). AI for some other card groups has been improved. The AI should no longer animate manlands with other manlands that were animated during the same turn, it should not instantly sac Bomat Courier, no longer kill itself by activating Smallpox and Pox at 1 life. The AI should now be able to use Spellskite correctly (at least when redirecting a single targeted ability). Some other improvements and modifications were made as well, hopefully making the AI more fun to play against.
+
 ---------------------------
 
 This product includes software developed by the Indiana University Extreme! Lab (http://www.extreme.indiana.edu/).
