@@ -2087,17 +2087,17 @@ public class PlayerControllerHuman
         private class DummyTriggerEvent implements ITriggerEvent {
             @Override
             public int getButton() {
-                throw new UnsupportedOperationException("Emulated event.");
+                return 1; // Emulate left mouse button
             }
             
             @Override
             public int getX() {
-                throw new UnsupportedOperationException("Emulated event.");
+                return 0; // Hopefully this doesn't do anything wonky!
             }
             
             @Override
             public int getY() {
-                throw new UnsupportedOperationException("Emulated event.");
+                return 0;
             }
         }
     }
