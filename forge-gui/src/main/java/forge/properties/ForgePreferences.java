@@ -172,7 +172,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_ALPHASTRIKE ("65"),
         SHORTCUT_SHOWTARGETING ("84"),
         SHORTCUT_AUTOYIELD_ALWAYS_YES ("89"),
-        SHORTCUT_AUTOYIELD_ALWAYS_NO ("78");
+        SHORTCUT_AUTOYIELD_ALWAYS_NO ("78"),
+        SHORTCUT_MACRO_RECORD ("16 82"),
+        SHORTCUT_MACRO_NEXT_ACTION ("16 50");
         
         private final String strDefaultVal;
 

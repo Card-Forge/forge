@@ -92,6 +92,7 @@ import forge.game.zone.ZoneType;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
+import forge.interfaces.IMacroSystem;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.match.NextGameDecision;
@@ -118,6 +119,7 @@ import forge.util.Lang;
 import forge.util.MessageUtil;
 import forge.util.TextUtil;
 import forge.util.gui.SOptionPane;
+import java.util.Arrays;
 
 /**
  * A prototype for player controller class
@@ -1508,6 +1510,7 @@ public class PlayerControllerHuman
         }
         return cheats;
     }
+
     public boolean hasCheated() {
         return cheats != null;
     }
@@ -1953,6 +1956,152 @@ public class PlayerControllerHuman
         }
     }
 
+    private IMacroSystem macros;
+    @Override
+    public IMacroSystem macros() {
+        if (macros == null) {
+            macros = new MacroSystem();
+        }
+        return macros;
+    }
+
+    // Simple macro system implementation. Its goal is to simulate "clicking"
+    // on cards/players in an automated way, to reduce mechanical overhead of
+    // situations like repeated combo activation.
+    public class MacroSystem implements IMacroSystem {
+        // Position in the macro "sequence".
+        private int sequenceIndex = 0;
+        // "Actions" are stored as a pair of the "action" recipient (the entity
+        // to "click") and a boolean representing whether the entity is a player.
+        private final List<Pair<GameEntityView, Boolean>> rememberedActions = new ArrayList<>();
+
+        @Override
+        public void setRememberedActions() {
+            final String dialogTitle = "Remember Action Sequence";
+            // Not sure if this priority guard is really needed, but it seems like an alright idea.
+            final Input input = inputQueue.getInput();
+            if (!(input instanceof InputPassPriority)) {
+                getGui().message("You must have priority to use this feature.", dialogTitle);
+                return;
+            }
+
+            sequenceIndex = 0;
+            rememberedActions.clear();
+            // Use a Pair so we can keep a flag for isPlayer
+            final List<Pair<Integer, Boolean>> entityInfo = new ArrayList<>();
+            final int playerID = getPlayer().getId();
+            // Only support 1 opponent for now. There are some ideas about supporting
+            // multiplayer games in the future, but for now it would complicate the parsing
+            // process, and this implementation is still a "proof of concept".
+            int opponentID = 0;
+            for (final Player player : game.getPlayers()) {
+                if (player.getId() != playerID) {
+                    opponentID = player.getId();
+                    break;
+                }
+            }
+
+            // A more informative prompt would be useful, but the dialog seems to
+            // like to clip text in long messages...
+            final String prompt = "Enter a sequence (card IDs and/or \"opponent\"/\"me\"). (e.g. 7, opponent, 18)";
+            String textSequence = getGui().showInputDialog(prompt, dialogTitle);
+            if (textSequence == null || textSequence.trim().isEmpty()) {
+                return;
+            }
+            // Clean up input
+            textSequence = textSequence.trim().toLowerCase().replaceAll("[@%]", "");
+            // Replace "opponent" and "me" with symbols to ease following replacements
+            textSequence = textSequence.replaceAll("\\bopponent\\b", "%").replaceAll("\\bme\\b", "@");
+            // Strip user input of anything that's not a digit/comma/whitespace/special symbol
+            textSequence = textSequence.replaceAll("[^\\d\\s,@%]", "");
+            // Now change various allowed delimiters to something neutral
+            textSequence = textSequence.replaceAll("(,\\s+|,|\\s+)", "_");
+            final String[] splitSequence = textSequence.split("_");
+            for (final String textID : splitSequence) {
+                if (StringUtils.isNumeric(textID)) {
+                    entityInfo.add(Pair.of(Integer.valueOf(textID), false));
+                } else if (textID.equals("%")) {
+                    entityInfo.add(Pair.of(opponentID, true));
+                } else if (textID.equals("@")) {
+                    entityInfo.add(Pair.of(playerID, true));
+                }
+            }
+            if (entityInfo.isEmpty()) {
+                getGui().message("Error: Check IDs and ensure they're separated by spaces and/or commas.", dialogTitle);
+                return;
+            }
+
+            // Fetch cards and players specified by the user input
+            final ZoneType[] zones = {ZoneType.Battlefield, ZoneType.Hand, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Command};
+            final CardCollectionView cards = game.getCardsIn(Arrays.asList(zones));
+            for (final Pair<Integer, Boolean> entity : entityInfo) {
+                boolean found = false;
+                // Nested loops are no fun; however, seems there's no better way to get stuff by ID
+                boolean isPlayer = entity.getValue();
+                if (isPlayer) {
+                    for (final Player player : game.getPlayers()) {
+                        if (player.getId() == entity.getKey()) {
+                            found = true;
+                            rememberedActions.add(Pair.of((GameEntityView)player.getView(), true));
+                            break;
+                        }
+                    }
+                } else {
+                    for (final Card card : cards) {
+                        if (card.getId() == entity.getKey()) {
+                            found = true;
+                            rememberedActions.add(Pair.of((GameEntityView)card.getView(), false));
+                            break;
+                        }
+                    }
+                }
+                if (!found) {
+                    getGui().message("Error: Entity with ID " + entity.getKey() + " not found.", dialogTitle);
+                    rememberedActions.clear();
+                    return;
+                }
+            }
+        }
+
+        @Override
+        public void nextRememberedAction() {
+            final String dialogTitle = "Do Next Action in Sequence";
+            if (rememberedActions.isEmpty()) {
+                getGui().message("Please define an action sequence first.", dialogTitle);
+                return;
+            }
+            if (sequenceIndex >= rememberedActions.size()) {
+                // Wrap around to repeat the sequence
+                sequenceIndex = 0;
+            }
+            final Pair<GameEntityView, Boolean> action = rememberedActions.get(sequenceIndex);
+            final boolean isPlayer = action.getValue();
+            if (isPlayer) {
+                selectPlayer((PlayerView) action.getKey(), new DummyTriggerEvent());
+            } else {
+                selectCard((CardView) action.getKey(), null, new DummyTriggerEvent());
+            }
+            sequenceIndex++;
+        }
+
+        private class DummyTriggerEvent implements ITriggerEvent {
+            @Override
+            public int getButton() {
+                throw new UnsupportedOperationException("Emulated event.");
+            }
+            
+            @Override
+            public int getX() {
+                throw new UnsupportedOperationException("Emulated event.");
+            }
+            
+            @Override
+            public int getY() {
+                throw new UnsupportedOperationException("Emulated event.");
+            }
+        }
+    }
+
     @Override
     public void concede() {
         if (player != null) {
@@ -2006,5 +2155,5 @@ public class PlayerControllerHuman
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
         return getGui().many("Choose cards to Splice onto", "Chosen Cards", 0, cards.size(), cards, sa.getHostCard().getView());
     }
-    
+
 }

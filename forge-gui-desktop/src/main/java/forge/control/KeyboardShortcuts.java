@@ -168,6 +168,23 @@ public class KeyboardShortcuts {
             }
         };
 
+        final Action actMacroRecord = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                matchUI.getGameController().macros().setRememberedActions();
+            }
+        };
+        
+        final Action actMacroNextAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                matchUI.getGameController().macros().nextRememberedAction();
+            }
+        };
         
         //========== Instantiate shortcut objects and add to list.
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, "Match: show stack panel", actShowStack, am, im));
@@ -180,6 +197,8 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, "Match: toggle targeting visual overlay", actTgtOverlay, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_YES, "Match: auto-yield ability on stack (Always Yes)", actAutoYieldAndYes, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_NO, "Match: auto-yield ability on stack (Always No)", actAutoYieldAndNo, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, "Match: record a macro sequence of actions", actMacroRecord, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, "Match: execute next action in a recorded macro", actMacroNextAction, am, im));
         return list;
     } // End initMatchShortcuts()
 

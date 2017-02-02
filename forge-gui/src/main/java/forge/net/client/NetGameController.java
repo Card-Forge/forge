@@ -7,6 +7,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
+import forge.interfaces.IMacroSystem;
 import forge.match.NextGameDecision;
 import forge.net.GameProtocolSender;
 import forge.net.ProtocolMethod;
@@ -117,5 +118,25 @@ public class NetGameController implements IGameController {
     @Override
     public void reorderHand(final CardView card, final int index) {
         send(ProtocolMethod.reorderHand, card, Integer.valueOf(index));
+    }
+
+    private IMacroSystem macros;
+    @Override
+    public IMacroSystem macros() {
+        if (macros == null) {
+            macros = new MacroSystem();
+        }
+        return macros;
+    }
+    public class MacroSystem implements IMacroSystem {
+        @Override
+        public void setRememberedActions() {
+            send(ProtocolMethod.setRememberedActions);
+        }
+
+        @Override
+        public void nextRememberedAction() {
+            send(ProtocolMethod.nextRememberedAction);
+        }
     }
 }

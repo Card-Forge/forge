@@ -66,6 +66,8 @@ public enum ProtocolMethod {
     openZones           (Mode.SERVER, Boolean.TYPE, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
     restoreOldZones     (Mode.SERVER, Void.TYPE, Map/*PlayerView,Object*/.class),
     isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
+    setRememberedActions(Mode.SERVER, Void.TYPE),
+    nextRememberedAction(Mode.SERVER, Void.TYPE),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in

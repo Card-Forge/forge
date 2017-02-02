@@ -39,6 +39,8 @@ public interface IGameController {
 
     IDevModeCheats cheat();
 
+    IMacroSystem macros();
+
     void nextGameDecision(NextGameDecision decision);
 
     String getActivateDescription(CardView card);
