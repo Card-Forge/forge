@@ -796,7 +796,7 @@ public class AiController {
             }
 
             // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
-            if (source.hasKeyword("Storm")) {
+            if (source.hasKeyword("Storm") && ai.getController() instanceof PlayerControllerAi) {
                 p -= (((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
             }
 
