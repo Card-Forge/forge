@@ -63,6 +63,8 @@ public class ConquestAwardPool {
         }
 
         public void rewardCard(List<PaperCard> rewards) {
+            if (isEmpty()) { return; }
+
             int index = Aggregates.randomInt(0, cards.size() - 1);
             PaperCard c = cards.get(index);
             cards.remove(index);
