@@ -1110,6 +1110,12 @@ public class AttachAi extends SpellAbilityAi {
             if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN)) {
                 return null;
             } 
+
+            // do not equip if the new creature is not significantly better than the previous one (evaluates at least better by evalT)
+            int evalT = aic.getIntProperty(AiProps.MOVE_EQUIPMENT_CREATURE_EVAL_THRESHOLD);
+            if (!decideMoveFromUseless && ComputerUtilCard.evaluateCreature(c) - ComputerUtilCard.evaluateCreature(attachSource.getEquipping()) < evalT) {
+                return null;
+            }
         }
         
         AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN);
