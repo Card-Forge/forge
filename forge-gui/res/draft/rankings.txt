@@ -1,4 +1,60 @@
 //Rank|Name|Rarity|Set
+#1|Cataclysmic Gearhulk|MPS
+#1|Torrential Gearhulk|MPS
+#1|Noxious Gearhulk|MPS
+#1|Combustible Gearhulk|MPS
+#1|Verdurous Gearhulk|MPS
+#1|AEther Vial|MPS
+#1|Champion's Helm|MPS
+#1|Chromatic Lantern|MPS
+#1|Chrome Mox|MPS
+#1|Cloudstone Curio|MPS
+#1|Crucible of Worlds|MPS
+#1|Gauntlet of Power|MPS
+#1|Hangarback Walker|MPS
+#1|Lightning Greaves|MPS
+#1|Lotus Petal|MPS
+#1|Mana Crypt|MPS
+#1|Mana Vault|MPS
+#1|Mind's Eye|MPS
+#1|Mox Opal|MPS
+#1|Painter's Servant|MPS
+#1|Rings of Brighthearth|MPS
+#1|Scroll Rack|MPS
+#1|Sculpting Steel|MPS
+#1|Sol Ring|MPS
+#1|Solemn Simulacrum|MPS
+#1|Static Orb|MPS
+#1|Steel Overseer|MPS
+#1|Sword of Feast and Famine|MPS
+#1|Sword of Fire and Ice|MPS
+#1|Sword of Light and Shadow|MPS
+#1|Arcbound Ravager|MPS
+#1|Black Vise|MPS
+#1|Chalice of the Void|MPS
+#1|Defense Grid|MPS
+#1|Duplicant|MPS
+#1|Engineered Explosives|MPS
+#1|Ensnaring Bridge|MPS
+#1|Extraplanar Lens|MPS
+#1|Grindstone|MPS
+#1|Meekstone|MPS
+#1|Oblivion Stone|MPS
+#1|Ornithopter|MPS
+#1|Paradox Engine|MPS
+#1|Pithing Needle|MPS
+#1|Planar Bridge|MPS
+#1|Platinum Angel|MPS
+#1|Sphere of Resistance|MPS
+#1|Staff of Domination|MPS
+#1|Sundering Titan|MPS
+#1|Sword of Body and Mind|MPS
+#1|Sword of War and Peace|MPS
+#1|Trinisphere|MPS
+#1|Vedalken Shackles|MPS
+#1|Wurmcoil Engine|MPS
+#100|Dummy Card|M|MPS
+//Rank|Name|Rarity|Set
 #1|Herald of Anguish|M|AER
 #2|Ajani Unyielding|M|AER
 #3|Aethersphere Harvester|R|AER
