@@ -1,58 +1,58 @@
 //Rank|Name|Rarity|Set
-#1|Cataclysmic Gearhulk|MPS
-#1|Torrential Gearhulk|MPS
-#1|Noxious Gearhulk|MPS
-#1|Combustible Gearhulk|MPS
-#1|Verdurous Gearhulk|MPS
-#1|AEther Vial|MPS
-#1|Champion's Helm|MPS
-#1|Chromatic Lantern|MPS
-#1|Chrome Mox|MPS
-#1|Cloudstone Curio|MPS
-#1|Crucible of Worlds|MPS
-#1|Gauntlet of Power|MPS
-#1|Hangarback Walker|MPS
-#1|Lightning Greaves|MPS
-#1|Lotus Petal|MPS
-#1|Mana Crypt|MPS
-#1|Mana Vault|MPS
-#1|Mind's Eye|MPS
-#1|Mox Opal|MPS
-#1|Painter's Servant|MPS
-#1|Rings of Brighthearth|MPS
-#1|Scroll Rack|MPS
-#1|Sculpting Steel|MPS
-#1|Sol Ring|MPS
-#1|Solemn Simulacrum|MPS
-#1|Static Orb|MPS
-#1|Steel Overseer|MPS
-#1|Sword of Feast and Famine|MPS
-#1|Sword of Fire and Ice|MPS
-#1|Sword of Light and Shadow|MPS
-#1|Arcbound Ravager|MPS
-#1|Black Vise|MPS
-#1|Chalice of the Void|MPS
-#1|Defense Grid|MPS
-#1|Duplicant|MPS
-#1|Engineered Explosives|MPS
-#1|Ensnaring Bridge|MPS
-#1|Extraplanar Lens|MPS
-#1|Grindstone|MPS
-#1|Meekstone|MPS
-#1|Oblivion Stone|MPS
-#1|Ornithopter|MPS
-#1|Paradox Engine|MPS
-#1|Pithing Needle|MPS
-#1|Planar Bridge|MPS
-#1|Platinum Angel|MPS
-#1|Sphere of Resistance|MPS
-#1|Staff of Domination|MPS
-#1|Sundering Titan|MPS
-#1|Sword of Body and Mind|MPS
-#1|Sword of War and Peace|MPS
-#1|Trinisphere|MPS
-#1|Vedalken Shackles|MPS
-#1|Wurmcoil Engine|MPS
+#1|Cataclysmic Gearhulk|M|MPS
+#1|Torrential Gearhulk|M|MPS
+#1|Noxious Gearhulk|M|MPS
+#1|Combustible Gearhulk|M|MPS
+#1|Verdurous Gearhulk|M|MPS
+#1|AEther Vial|M|MPS
+#1|Champion's Helm|M|MPS
+#1|Chromatic Lantern|M|MPS
+#1|Chrome Mox|M|MPS
+#1|Cloudstone Curio|M|MPS
+#1|Crucible of Worlds|M|MPS
+#1|Gauntlet of Power|M|MPS
+#1|Hangarback Walker|M|MPS
+#1|Lightning Greaves|M|MPS
+#1|Lotus Petal|M|MPS
+#1|Mana Crypt|M|MPS
+#1|Mana Vault|M|MPS
+#1|Mind's Eye|M|MPS
+#1|Mox Opal|M|MPS
+#1|Painter's Servant|M|MPS
+#1|Rings of Brighthearth|M|MPS
+#1|Scroll Rack|M|MPS
+#1|Sculpting Steel|M|MPS
+#1|Sol Ring|M|MPS
+#1|Solemn Simulacrum|M|MPS
+#1|Static Orb|M|MPS
+#1|Steel Overseer|M|MPS
+#1|Sword of Feast and Famine|M|MPS
+#1|Sword of Fire and Ice|M|MPS
+#1|Sword of Light and Shadow|M|MPS
+#1|Arcbound Ravager|M|MPS
+#1|Black Vise|M|MPS
+#1|Chalice of the Void|M|MPS
+#1|Defense Grid|M|MPS
+#1|Duplicant|M|MPS
+#1|Engineered Explosives|M|MPS
+#1|Ensnaring Bridge|M|MPS
+#1|Extraplanar Lens|M|MPS
+#1|Grindstone|M|MPS
+#1|Meekstone|M|MPS
+#1|Oblivion Stone|M|MPS
+#1|Ornithopter|M|MPS
+#1|Paradox Engine|M|MPS
+#1|Pithing Needle|M|MPS
+#1|Planar Bridge|M|MPS
+#1|Platinum Angel|M|MPS
+#1|Sphere of Resistance|M|MPS
+#1|Staff of Domination|M|MPS
+#1|Sundering Titan|M|MPS
+#1|Sword of Body and Mind|M|MPS
+#1|Sword of War and Peace|M|MPS
+#1|Trinisphere|M|MPS
+#1|Vedalken Shackles|M|MPS
+#1|Wurmcoil Engine|M|MPS
 #100|Dummy Card|M|MPS
 //Rank|Name|Rarity|Set
 #1|Herald of Anguish|M|AER
