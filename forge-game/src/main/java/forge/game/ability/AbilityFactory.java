@@ -412,17 +412,17 @@ public final class AbilityFactory {
     }
 
     public static final void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {
-        List<ZoneType> origin = Lists.newArrayList();
         if (params.containsKey("Origin")) {
-            origin = ZoneType.listValueOf(params.get("Origin"));
+            List<ZoneType> origin = ZoneType.listValueOf(params.get("Origin"));
+
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
+        
+            // Don't set the zone if it targets a player
+            if ((tgt != null) && !tgt.canTgtPlayer()) {
+                sa.getTargetRestrictions().setZone(origin);
+            }
         }
     
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-    
-        // Don't set the zone if it targets a player
-        if ((tgt != null) && !tgt.canTgtPlayer()) {
-            sa.getTargetRestrictions().setZone(origin);
-        }
     }
 
     public static final SpellAbility buildFusedAbility(final Card card) {

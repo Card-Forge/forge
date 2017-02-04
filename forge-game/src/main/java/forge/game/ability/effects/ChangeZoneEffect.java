@@ -31,21 +31,22 @@ import forge.util.collect.*;
 import forge.util.Lang;
 import forge.util.MessageUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
+    
+    private boolean isHidden(SpellAbility sa) {
+        boolean hidden = sa.hasParam("Hidden");
+        if (!hidden && sa.hasParam("Origin")) {
+            hidden = ZoneType.isHidden(sa.getParam("Origin"));
+        }
+        return hidden;
+    }
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
-
-        String origin = "";
-        if (sa.hasParam("Origin")) {
-            origin = sa.getParam("Origin");
-        }
-
-        if (sa.hasParam("Hidden") || ZoneType.isHidden(origin)) {
+        if (isHidden(sa)) {
             return changeHiddenOriginStackDescription(sa);
         }
         return changeKnownOriginStackDescription(sa);
@@ -88,7 +89,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String fetcherNames = Lang.joinHomogenous(fetchers, Player.Accessors.FN_GET_NAME);
 
         // Player who chooses the cards to move
-        List<Player> choosers = new ArrayList<Player>();
+        List<Player> choosers = Lists.newArrayList();
         if (sa.hasParam("Chooser")) {
             choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
         }
@@ -236,7 +237,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         sb.append(" ");
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
+        ZoneType origin = null;
+        if (sa.hasParam("Origin")) {
+            origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
+        }
 
         final StringBuilder sbTargets = new StringBuilder();
 
@@ -260,7 +264,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         if (destination.equals(ZoneType.Battlefield)) {
             sb.append("Put").append(targetname);
-            if (origin.equals(ZoneType.Graveyard)) {
+            if (ZoneType.Graveyard.equals(origin)) {
                 sb.append(fromGraveyard);
             }
 
@@ -276,7 +280,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         if (destination.equals(ZoneType.Hand)) {
             sb.append("Return").append(targetname);
-            if (origin.equals(ZoneType.Graveyard)) {
+            if (ZoneType.Graveyard.equals(origin)) {
                 sb.append(fromGraveyard);
             }
             sb.append(" to").append(pronoun).append("owners hand.");
@@ -290,7 +294,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(" into").append(pronoun).append("owner's library.");
             } else {
                 sb.append("Put").append(targetname);
-                if (origin.equals(ZoneType.Graveyard)) {
+                if (ZoneType.Graveyard.equals(origin)) {
                     sb.append(fromGraveyard);
                 }
 
@@ -311,7 +315,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         if (destination.equals(ZoneType.Exile)) {
             sb.append("Exile").append(targetname);
-            if (origin.equals(ZoneType.Graveyard)) {
+            if (ZoneType.Graveyard.equals(origin)) {
                 sb.append(fromGraveyard);
             }
             sb.append(".");
@@ -324,7 +328,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         if (destination.equals(ZoneType.Graveyard)) {
             sb.append("Put").append(targetname);
-            sb.append(" from ").append(origin);
+            if (origin != null) {
+                sb.append(" from ").append(origin);
+            }
             sb.append(" into").append(pronoun).append("owner's graveyard.");
         }
 
@@ -341,11 +347,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        String origin = "";
-        if (sa.hasParam("Origin")) {
-            origin = sa.getParam("Origin");
-        }
-        if ((sa.hasParam("Hidden") || ZoneType.isHidden(origin)) && !sa.hasParam("Ninjutsu")) {
+        if (isHidden(sa) && !sa.hasParam("Ninjutsu")) {
             changeHiddenOriginResolve(sa);
         } else {
             //else if (isKnown(origin) || sa.containsKey("Ninjutsu")) {
@@ -370,7 +372,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
 
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
+        final List<ZoneType> origin = Lists.newArrayList();
+        if (sa.hasParam("Origin")) {
+            origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
+        }
 
         boolean altDest = false;
         if (sa.hasParam("DestinationAlternative")) {
@@ -429,7 +434,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             // if Target isn't in the expected Zone, continue
 
-            if (originZone == null || !origin.contains(originZone.getZoneType())) {
+            if (originZone == null || (!origin.isEmpty() && !origin.contains(originZone.getZoneType()))) {
                 continue;
             }
 
@@ -616,7 +621,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         if (!triggerList.isEmpty()) {
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Cards", triggerList);
             runParams.put("Destination", destination);
             game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
@@ -692,7 +697,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        List<ZoneType> origin = new ArrayList<ZoneType>();
+        List<ZoneType> origin = Lists.newArrayList();
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
@@ -813,7 +818,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Player", decider);
             runParams.put("Target", Lists.newArrayList(player));
             decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
@@ -1101,7 +1106,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             if (champion) {
-                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                final Map<String, Object> runParams = Maps.newHashMap();
                 runParams.put("Card", source);
                 runParams.put("Championed", c);
                 game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
@@ -1130,7 +1135,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         if (!triggerList.isEmpty()) {
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Cards", triggerList);
             runParams.put("Destination", destination);
             game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);

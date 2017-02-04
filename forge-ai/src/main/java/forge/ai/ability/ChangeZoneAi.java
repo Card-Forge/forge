@@ -1,5 +1,14 @@
 package forge.ai.ability;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -31,14 +40,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
 
 public class ChangeZoneAi extends SpellAbilityAi {
     /*
@@ -82,11 +83,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return this.doSameNameLogic(aiPlayer, sa);
             }
         }
-        String origin = null;
-        if (sa.hasParam("Origin")) {
-            origin = sa.getParam("Origin");
-        }
-        if (sa.hasParam("Hidden") || ZoneType.isHidden(origin)) {
+        if (isHidden(sa)) {
             return hiddenOriginCanPlayAI(aiPlayer, sa);
         }
         return knownOriginCanPlayAI(aiPlayer, sa);
@@ -103,18 +100,20 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        String origin = null;
-        if (sa.hasParam("Origin")) {
-            origin = sa.getParam("Origin");
-        }
-
-        if (sa.hasParam("Hidden") || ZoneType.isHidden(origin)) {
+        if (isHidden(sa)) {
             return hiddenOriginPlayDrawbackAI(aiPlayer, sa);
         }
         return knownOriginPlayDrawbackAI(aiPlayer, sa);
     }
 
 
+    private static boolean isHidden(SpellAbility sa) {
+        boolean hidden = sa.hasParam("Hidden");
+        if (!hidden && sa.hasParam("Origin")) {
+            hidden = ZoneType.isHidden(sa.getParam("Origin"));
+        }
+        return hidden;
+    }
 
     /**
      * <p>
@@ -129,12 +128,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        String origin = null;
-        if (sa.hasParam("Origin")) {
-            origin = sa.getParam("Origin");
-        }
-
-        if (sa.hasParam("Hidden") || ZoneType.isHidden(origin)) {
+        if (isHidden(sa)) {
             return hiddenTriggerAI(aiPlayer, sa, mandatory);
         }
         return knownOriginTriggerAI(aiPlayer, sa, mandatory);
@@ -586,37 +580,21 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     private static boolean knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
-        final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getHostCard();
 
-        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
+        final List<ZoneType> origin = Lists.newArrayList();
+        if (sa.hasParam("Origin")) {
+            origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
+        } else if (sa.hasParam("TgtZone")) {
+            origin.addAll(ZoneType.listValueOf(sa.getParam("TgtZone")));
+        }
+
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
 
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
-                return false;
-            }
-        }
-
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-        	return false;
+            return false;
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return false;
             }
@@ -636,7 +614,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // return this card from battlefield: cards like Blinking Spirit
             // in general this should only be used to protect from Imminent Harm
             // (dying or losing control of)
-            if (origin.equals(ZoneType.Battlefield)) {
+            if (origin.contains(ZoneType.Battlefield)) {
                 if (ai.getGame().getStack().isEmpty()) {
                     return false;
                 }
@@ -666,27 +644,59 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
         }
+
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null && !SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.ai.SpellAbilityAi#checkPhaseRestrictions(forge.game.player.Player,
+     * forge.game.spellability.SpellAbility, forge.game.phase.PhaseHandler)
+     */
+    @Override
+    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+
+        if (isHidden(sa)) {
+            return true;
+        }
+
+        final List<ZoneType> origin = Lists.newArrayList();
+        if (sa.hasParam("Origin")) {
+            origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
+        } else if (sa.hasParam("TgtZone")) {
+            origin.addAll(ZoneType.listValueOf(sa.getParam("TgtZone")));
+        }
+
+        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
+
         // don't return something to your hand if your hand is full of good stuff
-        if (destination.equals(ZoneType.Hand) && origin.equals(ZoneType.Graveyard)) {
+        if (destination.equals(ZoneType.Hand) && origin.contains(ZoneType.Graveyard)) {
             final int handSize = ai.getCardsIn(ZoneType.Hand).size();
-            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
+            if (ph.getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
-            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && handSize > 1) {
+            if (ph.getPhase().isBefore(PhaseType.MAIN2) && handSize > 1) {
                 return false;
             }
-            if (ai.getGame().getPhaseHandler().isPlayerTurn(ai) && handSize >= ai.getMaxHandSize()) {
+            if (ph.isPlayerTurn(ai) && handSize >= ai.getMaxHandSize()) {
                 return false;
             }
         }
         
         //don't unearth after attacking is possible
-        if (sa.hasParam("Unearth") && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-        	return false;
+        if (sa.hasParam("Unearth") && ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return false;
         }
 
-        if (destination.equals(ZoneType.Library) && origin.equals(ZoneType.Graveyard)) {
-            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+        if (destination.equals(ZoneType.Library) && origin.contains(ZoneType.Graveyard)) {
+            if (ph.getPhase().isBefore(PhaseType.MAIN2)) {
                 return false;
             }
             if (ComputerUtil.waitForBlocking(sa)) {
@@ -694,12 +704,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb)) {
-        	return false;
-        }
-
-        return true;
+        return super.checkPhaseRestrictions(ai, sa, ph);
     }
 
     /**
@@ -712,7 +717,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static boolean knownOriginPlayDrawbackAI(final Player aiPlayer, final SpellAbility sa) {
-        if (sa.getTargetRestrictions() == null) {
+        if (!sa.usesTargeting()) {
             return true;
         }
 
@@ -732,7 +737,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     private static boolean isPreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory, boolean immediately) {
         final Card source = sa.getHostCard();
-        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
+        final List<ZoneType> origin = Lists.newArrayList();
+        if (sa.hasParam("Origin")) {
+            origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
+        } else if (sa.hasParam("TgtZone")) {
+            origin.addAll(ZoneType.listValueOf(sa.getParam("TgtZone")));
+        }
+
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = ai.getGame();
@@ -783,22 +794,22 @@ public class ChangeZoneAi extends SpellAbilityAi {
         immediately |= ComputerUtil.playImmediately(ai, sa);
 
         // Narrow down the list:
-        if (origin.equals(ZoneType.Battlefield)) {
-        	if ("Polymorph".equals(sa.getParam("AILogic"))) {
-        		list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
-        		if (list.isEmpty()) {
-        			return false;
-        		}
-        		Card worst = ComputerUtilCard.getWorstAI(list);
-        		if (worst.isCreature() && ComputerUtilCard.evaluateCreature(worst) >= 200) {
-        			return false;
-        		}
-        		if (!worst.isCreature() && worst.getCMC() > 1) {
-        			return false;
-        		}
-        		sa.getTargets().add(worst);
-        		return true;
-        	}
+        if (origin.contains(ZoneType.Battlefield)) {
+            if ("Polymorph".equals(sa.getParam("AILogic"))) {
+                list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                Card worst = ComputerUtilCard.getWorstAI(list);
+                if (worst.isCreature() && ComputerUtilCard.evaluateCreature(worst) >= 200) {
+                    return false;
+                }
+                if (!worst.isCreature() && worst.getCMC() > 1) {
+                    return false;
+                }
+                sa.getTargets().add(worst);
+                return true;
+            }
 
             // Combat bouncing
             if (tgt.getMinTargets(sa.getHostCard(), sa) <= 1) {
@@ -895,7 +906,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }*/
             }
 
-        } else if (origin.equals(ZoneType.Graveyard)) {
+        } else if (origin.contains(ZoneType.Graveyard)) {
         	if (destination.equals(ZoneType.Exile) || destination.equals(ZoneType.Library)) {
                 // Don't use these abilities before main 2 if possible
                 if (!immediately && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
@@ -927,7 +938,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // blink human targets only during combat
-        if (origin.equals(ZoneType.Battlefield)
+        if (origin.contains(ZoneType.Battlefield)
                 && destination.equals(ZoneType.Exile)
                 && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone  && subAffected.equals("Remembered")))
                 && !(game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS) || sa.isAbility())) {
@@ -935,7 +946,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // Exile and bounce opponents stuff
-        if (destination.equals(ZoneType.Exile) || origin.equals(ZoneType.Battlefield)) {
+        if (destination.equals(ZoneType.Exile) || origin.contains(ZoneType.Battlefield)) {
 
             // don't rush bouncing stuff when not going to attack
             if (!immediately && sa.getPayCosts() != null
@@ -960,7 +971,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // Only care about combatants during combat
-        if (game.getPhaseHandler().inCombat() && origin.equals(ZoneType.Battlefield)) {
+        if (game.getPhaseHandler().inCombat() && origin.contains(ZoneType.Battlefield)) {
         	CardCollection newList = CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
         	if (!newList.isEmpty() || !sa.isTrigger()) {
         		list = newList;
@@ -981,23 +992,23 @@ public class ChangeZoneAi extends SpellAbilityAi {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                if (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield)) {
+                if (destination.equals(ZoneType.Battlefield) || origin.contains(ZoneType.Battlefield)) {
                     final Card mostExpensive = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
                     if (mostExpensive.isCreature()) {
                         // if a creature is most expensive take the best one
                         if (destination.equals(ZoneType.Exile)) {
                             // If Exiling things, don't give bonus to Tokens
                             choice = ComputerUtilCard.getBestCreatureAI(list);
-                        } else if (origin.equals(ZoneType.Graveyard)) {
-                        	choice = mostExpensive;
-                        	// Karmic Guide can chain another creature
-                    		for (Card c : list) {
-                    			if ("Karmic Guide".equals(c.getName())) {
-                    				choice = c;
-                    				break;
-                    			}
-                    		}
-                    	} else {
+                        } else if (origin.contains(ZoneType.Graveyard)) {
+                            choice = mostExpensive;
+                            // Karmic Guide can chain another creature
+                            for (Card c : list) {
+                                if ("Karmic Guide".equals(c.getName())) {
+                                    choice = c;
+                                    break;
+                                }
+                            }
+                        } else {
                             choice = ComputerUtilCard.getBestCreatureToBounceAI(list);
                         }
                     } else {
