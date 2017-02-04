@@ -82,12 +82,13 @@ public class DamageDealAi extends DamageAiBase {
 
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
         if (damage.equals("X")) {
-            if (sa.getSVar(damage).equals("Count$xPaid") || source.getName().equals("Crater's Claws")) {
+            if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
                 // Set PayX here to maximum value.
                 dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(dmg));
@@ -96,7 +97,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        if (sa.getHostCard().getName().equals("Crater's Claws") && ai.hasFerocious()) {
+        if (source.equals("Crater's Claws") && ai.hasFerocious()) {
             dmg += 2;
         }
         
@@ -128,7 +129,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
         
-        if (source.getName().equals("Sorin, Grim Nemesis")) {
+        if (sourceName.equals("Sorin, Grim Nemesis")) {
             int loyalty = source.getCounters(CounterType.LOYALTY);
             for (; loyalty > 0; loyalty--) {
                 if (this.damageTargetAI(ai, sa, loyalty, false)) {
@@ -173,7 +174,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if ((damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")) ||
-                sa.getHostCard().getName().equals("Crater's Claws")){
+                sourceName.equals("Crater's Claws")){
             // If I can kill my target by paying less mana, do it
             if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.hasParam("DividedAsYouChoose")) {
                 int actualPay = 0;
@@ -184,7 +185,7 @@ public class DamageDealAi extends DamageAiBase {
                         actualPay = adjDamage;
                     }
                 }
-                if (sa.getHostCard().getName().equals("Crater's Claws") && ai.hasFerocious()) {
+                if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
                     actualPay = actualPay > 2 ? actualPay - 2 : 0;
                 }
                 source.setSVar("PayX", Integer.toString(actualPay));
@@ -301,7 +302,7 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageTargetAI(final Player ai, final SpellAbility saMe, final int dmg, final boolean immediately) {
         final TargetRestrictions tgt = saMe.getTargetRestrictions();
-        if ("Atarka's Command".equals(saMe.getHostCard().getName())) {
+        if ("Atarka's Command".equals(ComputerUtilAbility.getAbilitySourceName(saMe))) {
         	// playReusable in damageChooseNontargeted wrongly assumes that CharmEffect options are re-usable
         	return this.shouldTgtP(ai, saMe, dmg, false);
         }
@@ -726,6 +727,7 @@ public class DamageDealAi extends DamageAiBase {
 
     private boolean doXLifeDrainLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
+        String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
         // detect the top ability that actually targets in Drain Life and Soul Burn scripts
         SpellAbility saTgt = sa;
@@ -741,7 +743,7 @@ public class DamageDealAi extends DamageAiBase {
 
         // set the color map for black X for the purpose of Soul Burn
         // TODO: somehow generalize this calculation to allow other potential similar cards to function in the future
-        if ("Soul Burn".equals(source.getName())) {
+        if ("Soul Burn".equals(sourceName)) {
             Map<String, Integer> xByColor = new HashMap<>();
             xByColor.put("B", dmg - ComputerUtilMana.determineLeftoverMana(sa, ai, "R"));
             source.setXManaCostPaidByColor(xByColor);

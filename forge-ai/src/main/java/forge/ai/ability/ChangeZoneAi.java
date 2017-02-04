@@ -161,6 +161,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // have access to more mana
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         ZoneType origin = null;
         final Player opponent = ai.getOpponent();
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
@@ -295,7 +296,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (!activateForCost && list.isEmpty()) {
                 return false;
             }
-            if ("Atarka's Command".equals(source.getName()) 
+            if ("Atarka's Command".equals(sourceName) 
             		&& (list.size() < 2 || ai.getLandsPlayedThisTurn() < 1)) {
             	// be strict on playing lands off charms
             	return false;
@@ -311,7 +312,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             
-            if (source.getName().equals("Temur Sabertooth")) {
+            if (sourceName.equals("Temur Sabertooth")) {
                 // activated bounce + pump
                 if (ComputerUtilCard.shouldPumpCard(ai, sa.getSubAbility(), source, 0, 0, Arrays.asList("Indestructible")) ||
                         ComputerUtilCard.canPumpAgainstRemoval(ai, sa.getSubAbility())) {
@@ -1335,7 +1336,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 c = ComputerUtilCard.getBestAI(fetchList);
             } else {
                 c = ComputerUtilCard.getWorstAI(fetchList);
-                if (sa.getHostCard().getName().equals("Temur Sabertooth")) {
+                if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Temur Sabertooth")) {
                     Card tobounce = canBouncePermanent(player, sa, fetchList);
                     if (tobounce != null) {
                         c = tobounce;
@@ -1354,7 +1355,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         } else {
             // Don't fetch another tutor with the same name
-            CardCollection sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(sa.getHostCard().getName())));
+            CardCollection sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(ComputerUtilAbility.getAbilitySourceName(sa))));
             if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                 fetchList = sameNamed;
             }

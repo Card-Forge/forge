@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import forge.ai.AiController;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
@@ -133,6 +134,7 @@ public class PumpAi extends PumpAiBase {
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.<String>newArrayList();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
@@ -306,7 +308,7 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            if (source.getName().equals("Necropolis Fiend")) {
+            if (sourceName.equals("Necropolis Fiend")) {
             	xPay = Math.min(xPay, sa.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size());
                 sa.setSVar("X", Integer.toString(xPay));
             }

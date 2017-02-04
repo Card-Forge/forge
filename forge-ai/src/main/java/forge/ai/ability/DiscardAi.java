@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
@@ -24,6 +25,7 @@ public class DiscardAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Cost abCost = sa.getPayCosts();
 
         if (abCost != null) {
@@ -46,7 +48,7 @@ public class DiscardAi extends SpellAbilityAi {
 
         }
         
-        if ("Chandra, Flamecaller".equals(source.getName())) {
+        if ("Chandra, Flamecaller".equals(sourceName)) {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();
             return MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand));
         }

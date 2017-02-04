@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicates;
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpecialCardAi;
@@ -25,6 +26,7 @@ public class ChooseColorAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final PhaseHandler ph = game.getPhaseHandler();
 
         if (!sa.hasParam("AILogic")) {
@@ -36,11 +38,11 @@ public class ChooseColorAi extends SpellAbilityAi {
             return false;
         }
 
-        if ("Nykthos, Shrine to Nyx".equals(source.getName())) {
+        if ("Nykthos, Shrine to Nyx".equals(sourceName)) {
             return SpecialCardAi.NykthosShrineToNyx.consider(ai, sa);
         }
 
-        if ("Oona, Queen of the Fae".equals(source.getName())) {
+        if ("Oona, Queen of the Fae".equals(sourceName)) {
             if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
@@ -50,7 +52,7 @@ public class ChooseColorAi extends SpellAbilityAi {
             return true;
         }
 
-        if ("Addle".equals(source.getName())) {
+        if ("Addle".equals(sourceName)) {
             if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || ai.getOpponent().getCardsIn(ZoneType.Hand).isEmpty()) {
                 return false;
             }
@@ -74,7 +76,7 @@ public class ChooseColorAi extends SpellAbilityAi {
         }
 
         if (logic.equals("MostProminentInComputerDeck")) {
-            if ("Astral Cornucopia".equals(source.getName())) {
+            if ("Astral Cornucopia".equals(sourceName)) {
                 // activate in Main 2 hoping that the extra mana surplus will make a difference
                 // if there are some nonland permanents in hand
                 CardCollectionView permanents = CardLists.filter(ai.getCardsIn(ZoneType.Hand), 

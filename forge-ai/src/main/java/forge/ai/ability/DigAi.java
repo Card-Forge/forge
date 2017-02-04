@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
@@ -119,7 +120,7 @@ public class DigAi extends SpellAbilityAi {
 
         // AI actions for individual cards (until this AI can be generalized)
         if (sa.getHostCard() != null) {
-            if (sa.getHostCard().getName().equals("Explorer's Scope")) {
+            if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Explorer's Scope")) {
                 // for Explorer's Scope, always put a land on the battlefield tapped
                 // (TODO: might not always be a good idea, e.g. when a land ETBing can have detrimental effects)
                 return true;

@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
@@ -22,9 +23,8 @@ public class StoreSVarAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        //
-
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         final PhaseHandler ph = game.getPhaseHandler();
@@ -68,7 +68,7 @@ public class StoreSVarAi extends SpellAbilityAi {
             }
             return false;
         }
-        else if ("Tree of Redemption".equals(source.getName())) {
+        else if ("Tree of Redemption".equals(sourceName)) {
             if (!ai.canGainLife())
                 return false;
 
@@ -87,7 +87,7 @@ public class StoreSVarAi extends SpellAbilityAi {
                 return false;
             }
         }
-        else if ("Tree of Perdition".equals(source.getName())) {
+        else if ("Tree of Perdition".equals(sourceName)) {
             boolean shouldDo = false;
 
             if (ComputerUtil.waitForBlocking(sa))

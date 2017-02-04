@@ -665,7 +665,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         }
         
         // try a way to pay unless cost
-        if ("Chisei, Heart of Oceans".equals(ability.getHostCard().getName())) {
+        if ("Chisei, Heart of Oceans".equals(ComputerUtilAbility.getAbilitySourceName(ability))) {
             final Card card = ComputerUtilCard.getWorstAI(typeList);
             PaymentDecision result = PaymentDecision.card(card);
             for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {

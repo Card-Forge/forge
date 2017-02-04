@@ -121,6 +121,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         CardCollection list;
         Card choice = null;
         final String type = sa.getParam("CounterType");
@@ -220,7 +221,7 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
         
-        if (source.getName().equals("Feat of Resistance")) {    // sub-ability should take precedence
+        if (sourceName.equals("Feat of Resistance")) {    // sub-ability should take precedence
             CardCollection prot = ProtectAi.getProtectCreatures(ai, sa.getSubAbility());
             if (!prot.isEmpty()) {
                 sa.getTargets().add(prot.get(0));
@@ -334,7 +335,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (source.getName().equals("Abzan Charm")) {
+            if (sourceName.equals("Abzan Charm")) {
                 final TargetRestrictions abTgt = sa.getTargetRestrictions();
                 // specific AI for instant with distribute two +1/+1 counters
                 ComputerUtilCard.sortByEvaluateCreature(list);
@@ -394,7 +395,7 @@ public class CountersPutAi extends SpellAbilityAi {
                                 }
                             }
                         }
-                        if (sa.getHostCard().getName().equals("Dromoka's Command")) {
+                        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Dromoka's Command")) {
                             choice = CountersAi.chooseBoonTarget(list, type);
                         }
                     } else {

@@ -1426,7 +1426,7 @@ public class AiController {
         }
 
         // TODO: Hack for Phyrexian Dreadnought. Might need generalization (possibly its own AI logic)
-        if (sa.getHostCard() != null && "Phyrexian Dreadnought".equals(sa.getHostCard().getName())) {
+        if ("Phyrexian Dreadnought".equals(ComputerUtilAbility.getAbilitySourceName(sa))) {
             result = SpecialCardAi.PhyrexianDreadnought.reviseCreatureSacList(player, sa, result);
         }
 

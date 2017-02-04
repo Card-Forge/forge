@@ -32,6 +32,7 @@ public class CounterAi extends SpellAbilityAi {
         boolean toReturn = true;
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = ai.getGame();
         int tgtCMC = 0;
         SpellAbility tgtSA = null;
@@ -50,7 +51,7 @@ public class CounterAi extends SpellAbilityAi {
             }
         }
 
-        if ("Force of Will".equals(source.getName())) {
+        if ("Force of Will".equals(sourceName)) {
             if (!SpecialCardAi.ForceOfWill.consider(ai, sa)) {
                 return false;
             }

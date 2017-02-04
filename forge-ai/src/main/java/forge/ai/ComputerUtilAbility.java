@@ -126,4 +126,12 @@ public class ComputerUtilAbility {
         }
         return tgtSA;
     }
+
+    public static Card getAbilitySource(SpellAbility sa) {
+        return sa.getOriginalHost() != null ? sa.getOriginalHost() : sa.getHostCard();
+    }
+
+    public static String getAbilitySourceName(SpellAbility sa) {
+        return sa.getOriginalHost() != null ? sa.getOriginalHost().getName() : sa.getHostCard() != null ? sa.getHostCard().getName() : "";
+    }
 }

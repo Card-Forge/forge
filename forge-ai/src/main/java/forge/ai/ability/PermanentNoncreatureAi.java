@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtilAbility;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
@@ -35,6 +36,7 @@ public class PermanentNoncreatureAi extends PermanentAi {
             return false;
 
         final Card host = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = ai.getGame();
 
         // Check for valid targets before casting
@@ -45,8 +47,8 @@ public class PermanentNoncreatureAi extends PermanentAi {
             final CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, host,
                     effectExile);
             CardCollection targets = CardLists.getTargetableCards(list, sa);
-            if (host.getName().equals("Suspension Field") 
-                    || host.getName().equals("Detention Sphere")) {
+            if (sourceName.equals("Suspension Field") 
+                    || sourceName.equals("Detention Sphere")) {
                 // existing "exile until leaves" enchantments only target
                 // opponent's permanents
                 // TODO: consider replacing the condition with host.hasSVar("OblivionRing")

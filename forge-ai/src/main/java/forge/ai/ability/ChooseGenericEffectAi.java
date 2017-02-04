@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.ai.ComputerUtilAbility;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -81,6 +82,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     @Override
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
         Card host = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = host.getGame();
         final Combat combat = game.getCombat();
         final String logic = sa.getParam("AILogic");
@@ -283,10 +285,10 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
 
             // Special Card logic, this one try to median its power with the number of artifacts
-            if ("Marionette Master".equals(host.getName())) {
+            if ("Marionette Master".equals(sourceName)) {
                 CardCollection list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
                 return list.size() >= copy.getNetPower() ? counterSA : tokenSA;
-            } else if ("Cultivator of Blades".equals(host.getName())) {
+            } else if ("Cultivator of Blades".equals(sourceName)) {
                 // Cultivator does try to median with number of Creatures
                 CardCollection list = player.getCreaturesInPlay();
                 return list.size() >= copy.getNetPower() ? counterSA : tokenSA;

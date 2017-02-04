@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.ai.ComputerUtilAbility;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -94,7 +95,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                     if (!combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                         return false;
                     }
-                    int ref = host.getName().equals("Forcefield") ? 1 : 0;
+                    int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
                     return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
                 }
             });
@@ -154,7 +155,7 @@ public class ChooseCardAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         final Card host = sa.getHostCard();
         final Player ctrl = host.getController();
         final String logic = sa.getParam("AILogic");
@@ -200,7 +201,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                     if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                         return false;
                     }
-                    int ref = host.getName().equals("Forcefield") ? 1 : 0; 
+                    int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0; 
                     return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
                 }
             });

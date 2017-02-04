@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
@@ -150,15 +151,16 @@ public class FightAi extends SpellAbilityAi {
      */
     public static boolean canFightAi(final Player ai, final SpellAbility sa, int power, int toughness) {
     	final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final AbilitySub tgtFight = sa.getSubAbility();
-        if ("Savage Punch".equals(source.getName()) && !ai.hasFerocious()) {
+        if ("Savage Punch".equals(sourceName) && !ai.hasFerocious()) {
             power = 0;
             toughness = 0;
         }
         // Get sorted creature lists
         CardCollection aiCreatures = ai.getCreaturesInPlay();
         CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
-		if ("Time to Feed".equals(source.getName())) {	// flip sa
+		if ("Time to Feed".equals(sourceName)) {	// flip sa
 			aiCreatures = CardLists.getTargetableCards(aiCreatures, tgtFight);
 			aiCreatures = ComputerUtil.getSafeTargets(ai, tgtFight, aiCreatures);
 			humCreatures = CardLists.getTargetableCards(humCreatures, sa);
@@ -189,7 +191,7 @@ public class FightAi extends SpellAbilityAi {
                     }
                 } else {
                     if (FightAi.shouldFight(aiCreature, humanCreature, power, toughness)) {
-                    	if ("Time to Feed".equals(source.getName())) {	// flip targets
+                    	if ("Time to Feed".equals(sourceName)) {	// flip targets
                     		final Card tmp = aiCreature;
                     		aiCreature = humanCreature;
                     		humanCreature = tmp;

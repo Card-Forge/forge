@@ -181,7 +181,7 @@ public class PlayerControllerAi extends PlayerController {
     public boolean confirmTrigger(WrappedAbility wrapper, Map<String, String> triggerParams, boolean isMandatory) {
 	final SpellAbility sa = wrapper.getWrappedAbility();
 	final Trigger regtrig = wrapper.getTrigger();
-        if (sa.getHostCard().getName().equals("Deathmist Raptor")) {
+        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
             return true;
         }
         if (triggerParams.containsKey("DelayedTrigger") || isMandatory) {

@@ -143,8 +143,10 @@ public class DrawAi extends SpellAbilityAi {
         final AbilitySub sub = sa.getSubAbility();
         if (sub != null && sub.getApi() == ApiType.Discard) {
             final Card source = sa.getHostCard();
+            final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
+
             int numHand = ai.getCardsIn(ZoneType.Hand).size();
-            if ("Jace, Vryn's Prodigy".equals(source.getName())) {
+            if ("Jace, Vryn's Prodigy".equals(sourceName)) {
                 boolean hasJace = false;
                 for (Card pw : CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
                     for (String type : pw.getType().getSubtypes()) {

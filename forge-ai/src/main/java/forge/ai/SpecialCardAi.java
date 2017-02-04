@@ -364,7 +364,8 @@ public class SpecialCardAi {
                     continue;
                 }
 
-                if (testSa.getHostCard().getName().equals(sa.getHostCard().getName()) || testSa.hasParam("AINoRecursiveCheck")) {
+                if (ComputerUtilAbility.getAbilitySourceName(testSa).equals(ComputerUtilAbility.getAbilitySourceName(sa))
+                        || testSa.hasParam("AINoRecursiveCheck")) {
                     // prevent infinitely recursing abilities that are susceptible to reentry
                     continue;
                 }
@@ -387,7 +388,7 @@ public class SpecialCardAi {
             int power = 0;
             List<Card> toKeep = Lists.newArrayList();
             for (Card c : choices) {
-                if (c.getName().equals(sa.getHostCard().getName())) {
+                if (c.getName().equals(ComputerUtilAbility.getAbilitySourceName(sa))) {
                     continue; // not worth it sac'ing another Dreadnaught
                 }
                 if (c.getNetPower() < 1) {
@@ -550,7 +551,8 @@ public class SpecialCardAi {
                     continue;
                 }
 
-                if (ab.getHostCard().getName().equals(sa.getHostCard().getName()) || ab.hasParam("AINoRecursiveCheck")) {
+                if (ComputerUtilAbility.getAbilitySourceName(ab).equals(ComputerUtilAbility.getAbilitySourceName(sa))
+                        || ab.hasParam("AINoRecursiveCheck")) {
                     // prevent infinitely recursing abilities that are susceptible to reentry
                     continue;
                 }

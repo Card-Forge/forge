@@ -22,6 +22,7 @@ public class LifeGainAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = source.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final int life = ai.getLife();
@@ -38,7 +39,7 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         //Ugin AI: always use ultimate
-        if (source.getName().equals("Ugin, the Spirit Dragon")) {
+        if (sourceName.equals("Ugin, the Spirit Dragon")) {
           //TODO: somehow link with DamageDealAi for cases where +1 = win
             return true;
         }

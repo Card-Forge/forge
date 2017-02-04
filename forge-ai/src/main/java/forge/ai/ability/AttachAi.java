@@ -77,7 +77,7 @@ public class AttachAi extends SpellAbilityAi {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
-        if (sa.getHostCard().getName().equals("Chained to the Rocks")) {
+        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
             final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
             final TargetRestrictions exile_tgt = effectExile.getTargetRestrictions();
@@ -364,7 +364,7 @@ public class AttachAi extends SpellAbilityAi {
     	Card c = null;
         // AI For choosing a Card to Animate.
         List<Card> betterList = CardLists.getNotType(list, "Creature");
-        if (sa.getHostCard().getName().equals("Animate Artifact")) {
+        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Animate Artifact")) {
             betterList = CardLists.filter(betterList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -473,7 +473,7 @@ public class AttachAi extends SpellAbilityAi {
         // I know this isn't much better than Hardcoding, but some cards need it for now
         final Player ai = sa.getActivatingPlayer();
         Card chosen = null;
-        if ("Guilty Conscience".equals(sa.getHostCard().getName())) {
+        if ("Guilty Conscience".equals(ComputerUtilAbility.getAbilitySourceName(sa))) {
             List<Card> aiStuffies = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {

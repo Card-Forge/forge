@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 
 import forge.ai.AiController;
 import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.CharmEffect;
@@ -41,7 +42,7 @@ public class CharmAi extends SpellAbilityAi {
             // Current just choose the first available spell, which seem generally less disastrous for the AI.
             //return choices.subList(0, 1);
             chosenList = choices.subList(1, choices.size());
-        } else if ("Triskaidekaphobia".equals(sa.getHostCard().getName())) {
+        } else if ("Triskaidekaphobia".equals(ComputerUtilAbility.getAbilitySourceName(sa))) {
             chosenList = chooseTriskaidekaphobia(choices, ai);
         } else {
             /*

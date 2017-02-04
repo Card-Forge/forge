@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.AiPlayerPredicates;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
@@ -33,6 +34,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // Change Zone All, can be any type moving from one zone to another
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = ai.getGame();
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
@@ -79,7 +81,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         }
         
         // Ugin AI: always try to sweep before considering +1 
-        if (source.getName().equals("Ugin, the Spirit Dragon")) {
+        if (sourceName.equals("Ugin, the Spirit Dragon")) {
             return SpecialCardAi.UginTheSpiritDragon.considerPWAbilityPriority(ai, sa, origin, oppType, computerType);
         }
 
@@ -279,7 +281,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
 
-        if (sa.getHostCard().getName().equals("Profaner of the Dead")) {
+        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Profaner of the Dead")) {
             // TODO: this is a stub to prevent the AI from crashing the game when, for instance, playing the opponent's
             // Profaner from exile without paying its mana cost. Otherwise the card is marked RemAIDeck and there is no
             // specific AI to support playing it in a smarter way. Feel free to expand.

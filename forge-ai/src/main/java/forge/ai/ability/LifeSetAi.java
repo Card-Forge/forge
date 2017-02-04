@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
@@ -111,6 +112,7 @@ public class LifeSetAi extends SpellAbilityAi {
         final Player opponent = ai.getOpponent();
         final int hlife = opponent.getLife();
         final Card source = sa.getHostCard();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
         final String amountStr = sa.getParam("LifeAmount");
 
@@ -124,7 +126,7 @@ public class LifeSetAi extends SpellAbilityAi {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
 
-        if (source.getName().equals("Eternity Vessel")
+        if (sourceName.equals("Eternity Vessel")
                 && (opponent.isCardInPlay("Vampire Hexmage") || (source.getCounters(CounterType.CHARGE) == 0))) {
             return false;
         }
