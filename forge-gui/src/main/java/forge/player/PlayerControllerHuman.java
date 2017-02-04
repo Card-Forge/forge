@@ -1987,8 +1987,8 @@ public class PlayerControllerHuman
                 return;
             }
 
+            int currentIndex = sequenceIndex;
             sequenceIndex = 0;
-            rememberedActions.clear();
             // Use a Pair so we can keep a flag for isPlayer
             final List<Pair<Integer, Boolean>> entityInfo = new ArrayList<>();
             final int playerID = getPlayer().getId();
@@ -2008,9 +2008,18 @@ public class PlayerControllerHuman
             final String prompt = "Enter a sequence (card IDs and/or \"opponent\"/\"me\"). (e.g. 7, opponent, 18)";
             String textSequence = getGui().showInputDialog(prompt, dialogTitle, FSkinProp.ICO_QUEST_NOTES, rememberedSequenceText);
             if (textSequence == null || textSequence.trim().isEmpty()) {
+                rememberedActions.clear();
                 if (!rememberedSequenceText.isEmpty()) {
                     rememberedSequenceText = "";
                     getGui().message("Action sequence cleared.", dialogTitle);
+                }
+                return;
+            }
+            // If they haven't changed the sequence, inform them the index is reset
+            // but don't change rememberedActions.
+            if (textSequence.equals(rememberedSequenceText)) {
+                if (currentIndex > 0 && currentIndex < rememberedActions.size()) {
+                    getGui().message("Restarting action sequence.", dialogTitle);
                 }
                 return;
             }
