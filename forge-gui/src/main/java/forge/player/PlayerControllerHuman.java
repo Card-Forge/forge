@@ -2008,6 +2008,12 @@ public class PlayerControllerHuman
             final String prompt = "Enter a sequence (card IDs and/or \"opponent\"/\"me\"). (e.g. 7, opponent, 18)";
             String textSequence = getGui().showInputDialog(prompt, dialogTitle, FSkinProp.ICO_QUEST_NOTES, rememberedSequenceText);
             if (textSequence == null || textSequence.trim().isEmpty()) {
+                if (!rememberedSequenceText.isEmpty()) {
+                    rememberedSequenceText = "";
+                    rememberedActions.clear();
+                    sequenceIndex = 0;
+                    getGui().message("Action sequence cleared.", dialogTitle);
+                }
                 return;
             }
             rememberedSequenceText = textSequence;
