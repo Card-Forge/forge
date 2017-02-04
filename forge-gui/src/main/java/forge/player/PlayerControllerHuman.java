@@ -2024,6 +2024,7 @@ public class PlayerControllerHuman
                 return;
             }
             rememberedSequenceText = textSequence;
+            rememberedActions.clear();
 
             // Clean up input
             textSequence = textSequence.trim().toLowerCase().replaceAll("[@%]", "");
