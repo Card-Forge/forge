@@ -271,7 +271,14 @@ public final class CardUtil {
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
-        newCopy.getCurrentState().copyFrom(in, in.getState(in.getCurrentStateName()));
+
+        // don't just copy the current state. copy all of them
+        // needed for Transformed to get the CMC correct
+        for (final CardStateName state : in.getStates()) {
+            CardFactory.copyState(in, state, newCopy, state);
+        }
+        newCopy.setState(in.getCurrentStateName(), true);
+
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);
             newCopy.getState(CardStateName.Cloner).copyFrom(in, in.getState(CardStateName.Cloner));
