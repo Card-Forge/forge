@@ -567,23 +567,28 @@ public final class CMatchUI
         final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
 
         // Remove focusable so the right button grabs focus properly
-        if (toFocus == btn2)
-            btn1.setFocusable(false);
-        else if (toFocus == btn1)
-            btn2.setFocusable(false);
-
-        btn1.setEnabled(enable1);
+	//pfps This seems wrong so I've commented it out for now and replaced it
+        //if (toFocus == btn2)
+	//btn1.setFocusable(false);
+        //else if (toFocus == btn1)
+	//btn2.setFocusable(false);
+	btn2.setFocusable(enable2);  // order may matter here
+	btn1.setFocusable(enable1);
         btn2.setEnabled(enable2);
+        btn1.setEnabled(enable1);
 
         // ensure we don't steal focus from an overlay
         if (toFocus != null) {
-            FThreads.invokeInEdtLater(new Runnable() {
-                @Override public final void run() {
-                    btn1.setFocusable(true);
-                    btn2.setFocusable(true);
-                    toFocus.requestFocus();
-                }
-            });
+	    final Runnable focusRoutine = new Runnable() {
+		    @Override public final void run() {
+			toFocus.requestFocusInWindow();
+		    }
+		};
+	    if ( FThreads.isGuiThread() ) { //pfps run this now whether in EDT or not so that it doesn't clobber later stuff
+        	FThreads.invokeInEdtNowOrLater(focusRoutine);
+	    } else {
+        	FThreads.invokeInEdtAndWait(focusRoutine);
+	    };
         }
     }
 
