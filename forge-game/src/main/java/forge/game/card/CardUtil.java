@@ -277,7 +277,8 @@ public final class CardUtil {
         for (final CardStateName state : in.getStates()) {
             CardFactory.copyState(in, state, newCopy, state);
         }
-        newCopy.setState(in.getCurrentStateName(), true);
+        // DO NOT UPDATE THE VIEW!
+        newCopy.setState(in.getCurrentStateName(), false);
 
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);
