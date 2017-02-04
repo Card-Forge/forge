@@ -48,7 +48,7 @@ public class KeyboardShortcuts {
     @SuppressWarnings("serial")
     public static List<Shortcut> attachKeyboardShortcuts(final CMatchUI matchUI) {
         final JComponent c = Singletons.getView().getFrame().getLayeredPane();
-        final InputMap im = c.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        final InputMap im = c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         final ActionMap am = c.getActionMap();
 
         final List<Shortcut> list = new ArrayList<Shortcut>();
