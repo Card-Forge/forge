@@ -497,7 +497,7 @@ public final class CardPredicates {
         public static final Predicate<Card> LANDS_PRODUCING_MANA = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
-                return c.isLand() && (!c.getManaAbilities().isEmpty() || c.isBasicLand());
+                return c.isBasicLand() || (c.isLand() && !c.getManaAbilities().isEmpty());
             }
         };
         /**
