@@ -17,7 +17,6 @@
  */
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -207,7 +206,7 @@ public class TokenEffect extends SpellAbilityEffect {
             }
         }
 
-        final List<String> imageNames = new ArrayList<String>(1);
+        final List<String> imageNames = Lists.newArrayListWithCapacity(1);
         if (this.tokenImage.equals("")) {
             imageNames.add(PaperToken.makeTokenFileName(originalColorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenOriginalName));
         } else {
@@ -260,7 +259,7 @@ public class TokenEffect extends SpellAbilityEffect {
 
         final boolean remember = sa.hasParam("RememberTokens");
         final boolean imprint = sa.hasParam("ImprintTokens");
-        final List<Card> allTokens = new ArrayList<Card>();
+        final List<Card> allTokens = Lists.newArrayList();
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
             final Game game = controller.getGame();
             for (int i = 0; i < finalAmount; i++) {
@@ -268,13 +267,6 @@ public class TokenEffect extends SpellAbilityEffect {
                 final CardFactory.TokenInfo tokenInfo = new CardFactory.TokenInfo(substitutedName, imageName,
                         cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
                 final List<Card> tokens = CardFactory.makeToken(tokenInfo, controller);
-                for (Card tok : tokens) {
-                    if (this.tokenTapped) {
-                        tok.setTapped(true);
-                    }
-                    game.getAction().moveToPlay(tok);
-                }
-                game.fireEvent(new GameEventTokenCreated());
                 
                 // Grant rule changes
                 if (this.tokenHiddenKeywords != null) {
@@ -337,6 +329,14 @@ public class TokenEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+
+                for (Card tok : tokens) {
+                    if (this.tokenTapped) {
+                        tok.setTapped(true);
+                    }
+                    game.getAction().moveToPlay(tok);
+                }
+                game.fireEvent(new GameEventTokenCreated());
 
                 boolean combatChanged = false;
                 for (final Card c : tokens) {
