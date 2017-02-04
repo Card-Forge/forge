@@ -2010,8 +2010,6 @@ public class PlayerControllerHuman
             if (textSequence == null || textSequence.trim().isEmpty()) {
                 if (!rememberedSequenceText.isEmpty()) {
                     rememberedSequenceText = "";
-                    rememberedActions.clear();
-                    sequenceIndex = 0;
                     getGui().message("Action sequence cleared.", dialogTitle);
                 }
                 return;
