@@ -204,7 +204,7 @@ public class CardDetailPanel extends SkinnedPanel {
             nameCost = String.format("%s - %s", name, manaCost);
         }
         nameCostLabel.setText(FSkin.encodeSymbols(nameCost, false));
-        typeLabel.setText(CardDetailUtil.formatCardType(state, mayView));
+        typeLabel.setText(FSkin.encodeSymbols(CardDetailUtil.formatCardType(state, mayView),false));
 
         final String set;
         final CardRarity rarity;
