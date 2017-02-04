@@ -38,6 +38,7 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.achievement.AchievementCollection;
 import forge.ai.GameState;
+import forge.assets.FSkinProp;
 import forge.card.CardDb;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
@@ -1974,6 +1975,7 @@ public class PlayerControllerHuman
         // "Actions" are stored as a pair of the "action" recipient (the entity
         // to "click") and a boolean representing whether the entity is a player.
         private final List<Pair<GameEntityView, Boolean>> rememberedActions = new ArrayList<>();
+        private String rememberedSequenceText = "";
 
         @Override
         public void setRememberedActions() {
@@ -2004,10 +2006,12 @@ public class PlayerControllerHuman
             // A more informative prompt would be useful, but the dialog seems to
             // like to clip text in long messages...
             final String prompt = "Enter a sequence (card IDs and/or \"opponent\"/\"me\"). (e.g. 7, opponent, 18)";
-            String textSequence = getGui().showInputDialog(prompt, dialogTitle);
+            String textSequence = getGui().showInputDialog(prompt, dialogTitle, FSkinProp.ICO_QUEST_NOTES, rememberedSequenceText);
             if (textSequence == null || textSequence.trim().isEmpty()) {
                 return;
             }
+            rememberedSequenceText = textSequence;
+
             // Clean up input
             textSequence = textSequence.trim().toLowerCase().replaceAll("[@%]", "");
             // Replace "opponent" and "me" with symbols to ease following replacements
