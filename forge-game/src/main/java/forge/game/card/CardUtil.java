@@ -275,10 +275,14 @@ public final class CardUtil {
         // don't just copy the current state. copy all of them
         // needed for Transformed to get the CMC correct
         for (final CardStateName state : in.getStates()) {
-            CardFactory.copyState(in, state, newCopy, state, false);
+            if (!newCopy.getStates().contains(state)) {
+                newCopy.addAlternateState(state, false);
+            }
+            newCopy.getState(state).copyFrom(in, in.getState(state));
         }
-        // DO NOT UPDATE THE VIEW!
-        newCopy.setState(in.getCurrentStateName(), false);
+        // TODO: the line below unexpectedly breaks the visual state of cards (tapped/untapped,
+        // counters, etc.). If it's necessary, we need to figure out how to make it not break stuff.
+        //newCopy.setState(in.getCurrentStateName(), false);
 
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);
