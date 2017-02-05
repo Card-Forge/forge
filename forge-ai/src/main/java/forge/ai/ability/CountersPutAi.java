@@ -116,8 +116,7 @@ public class CountersPutAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player ai, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
-        // based on
-        // what the expected targets could be
+        // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
@@ -127,6 +126,10 @@ public class CountersPutAi extends SpellAbilityAi {
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
+
+        final boolean isClockwork = "True".equals(sa.getParam("UpTo")) && "Self".equals(sa.getParam("Defined"))
+                && "P1P0".equals(sa.getParam("CounterType")) && "Count$xPaid".equals(source.getSVar("X"))
+                && sa.hasParam("MaxFromEffect");
 
         if ("ExistingCounter".equals(type)) {
             final boolean eachExisting = sa.hasParam("EachExistingCounter");
@@ -254,8 +257,24 @@ public class CountersPutAi extends SpellAbilityAi {
         }
         
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
+            // By default, set PayX here to maximum value (used for most SAs of this type).
             amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
+
+            if (isClockwork) {
+                // Clockwork Avian and other similar cards: do not tap all mana for X,
+                // instead only rewind to max allowed value when the power gets low enough.
+                int curCtrs = source.getCounters(CounterType.P1P0);
+                int maxCtrs = Integer.parseInt(sa.getParam("MaxFromEffect"));
+
+                // This will "rewind" clockwork cards when they fall to 50% power or below, consider improving
+                if (curCtrs > Math.ceil(maxCtrs / 2.0)) {
+                    return false;
+                }
+
+                amount = Math.min(amount, maxCtrs - curCtrs);
+                if (amount <= 0) { return false; }
+            }
+
             source.setSVar("PayX", Integer.toString(amount));
         }
 
