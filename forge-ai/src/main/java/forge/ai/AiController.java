@@ -1625,7 +1625,6 @@ public class AiController {
         // AI-specific restrictions specified as activation parameters in spell abilities
         
         if (sa.hasParam("AILifeThreshold")) {
-            System.out.println("threshold");
             if (player.getLife() <= Integer.parseInt(sa.getParam("AILifeThreshold"))) {
                 return false;
             }
