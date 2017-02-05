@@ -1,5 +1,6 @@
 package forge.screens.match.menus;
 
+import com.google.common.primitives.Ints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -146,6 +147,12 @@ public final class GameMenu {
         final ButtonGroup group = new ButtonGroup();
 
         SkinIcon menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF);
+
+        if (matchUI.getCDock().getArcState() == null) {
+            final String arcStateStr = FModel.getPreferences().getPref(FPref.UI_TARGETING_OVERLAY);
+            final Integer arcState = Ints.tryParse(arcStateStr);
+            matchUI.getCDock().setArcState(ArcState.values()[arcState == null ? 0 : arcState]);
+        }
 
         SkinnedRadioButtonMenuItem menuItem;
         menuItem = getTargetingArcRadioButton("Off", FSkinProp.ICO_ARCSOFF, ArcState.OFF);
