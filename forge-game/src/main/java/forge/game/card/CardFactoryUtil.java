@@ -3158,10 +3158,10 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
 
             String renownTrig = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player"
-                    + " | IsPresent$ Card.Self+IsNotRenowned | CombatDamage$ True "
+                    + " | IsPresent$ Card.Self+IsNotRenowned | CombatDamage$ True | Secondary$ True"
                     + " | TriggerDescription$ Renown " + k[1] +" (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
-            final String effect = "AB$ PutCounter | Cost$ 0 | Defined$ Self | "
+            final String effect = "DB$ PutCounter | Defined$ Self | "
                     + "CounterType$ P1P1 | CounterNum$ " + k[1] + " | Renown$ True";
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(renownTrig, card, intrinsic);
