@@ -202,10 +202,12 @@ public class FloatingCardArea extends CardArea {
 
     private void showWindow() {
         onShow();
+        window.setFocusableWindowState(false); // should probably do this earlier
         window.setVisible(true);
     }
     private void showOrHideWindow() {
         onShow();
+        window.setFocusableWindowState(false); // should probably do this earlier
         window.setVisible(!window.isVisible());
     }
     private void onShow() {
