@@ -581,10 +581,10 @@ public final class CMatchUI
         if (toFocus != null) {
 	    final Runnable focusRoutine = new Runnable() {
 		    @Override public final void run() {
-			toFocus.requestFocusInWindow();
+			toFocus.requestFocus();  // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
 		    }
 		};
-	    if ( FThreads.isGuiThread() ) { //pfps run this now whether in EDT or not so that it doesn't clobber later stuff
+	    if ( FThreads.isGuiThread() ) { // run this now whether in EDT or not so that it doesn't clobber later stuff
         	FThreads.invokeInEdtNowOrLater(focusRoutine);
 	    } else {
         	FThreads.invokeInEdtAndWait(focusRoutine);
