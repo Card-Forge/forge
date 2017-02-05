@@ -78,10 +78,10 @@ public class CardDetailPanel extends SkinnedPanel {
         setLayout(null);
         setOpaque(false);
 
-        nameCostLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).build();
-        typeLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).build();
+        nameCostLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip("Card Name and Cost").build();
+        typeLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip("Card Type").build();
         idLabel = new FLabel.Builder().fontAlign(SwingConstants.LEFT).tooltip("Card ID").build();
-        powerToughnessLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).build();
+        powerToughnessLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip("Card P/T or Loyalty").build();
         setInfoLabel = new JLabel();
         setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -99,8 +99,8 @@ public class CardDetailPanel extends SkinnedPanel {
         add(nameCostLabel);
         add(typeLabel);
         add(idLabel);
-        add(powerToughnessLabel);
         add(setInfoLabel);
+        add(powerToughnessLabel);
         add(scrArea);
     }
 
@@ -115,21 +115,23 @@ public class CardDetailPanel extends SkinnedPanel {
         final int x = insets;
         int y = insets;
         final int lineWidth = getWidth() - 2 * insets;
-        final int lineHeight = nameCostLabel.getPreferredSize().height;
-        final int dy = lineHeight + 1;
+        // final int lineHeight = nameCostLabel.getPreferredSize().height;
+        // final int dy = lineHeight + 1;
 
-        nameCostLabel.setBounds(x, y, lineWidth, lineHeight);
-        y += dy;
+        int areaHeight = nameCostLabel.getPreferredSize().height;
+        nameCostLabel.setBounds(x, y, lineWidth, areaHeight);
+        y += areaHeight + 1 ;
 
-        typeLabel.setBounds(x, y, lineWidth, lineHeight);
-        y += dy;
+        areaHeight = typeLabel.getPreferredSize().height;
+        typeLabel.setBounds(x, y, lineWidth, areaHeight);
+        y += areaHeight + 1 ;
 
-        idLabel.setBounds(x, y, idLabel.getAutoSizeWidth(), lineHeight);
-        powerToughnessLabel.setBounds(x, y, lineWidth, lineHeight);
-
+        areaHeight = idLabel.getPreferredSize().height;
+        idLabel.setBounds(x, y, idLabel.getAutoSizeWidth(), areaHeight);
+        powerToughnessLabel.setBounds(x, y, lineWidth, areaHeight);
         //+1 to x,y so set info label right up against border and the baseline matches ID and P/T
-        setInfoLabel.setBounds(x + lineWidth - setInfoWidth + 1, y + 1, setInfoWidth, lineHeight);
-        y += dy;
+        setInfoLabel.setBounds(x + lineWidth - setInfoWidth + 1, y + 1, setInfoWidth, areaHeight);
+        y += areaHeight + 1 ;
 
         scrArea.setBounds(0, y, getWidth(), getHeight() - y);
     }
