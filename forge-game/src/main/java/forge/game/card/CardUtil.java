@@ -275,7 +275,7 @@ public final class CardUtil {
         // don't just copy the current state. copy all of them
         // needed for Transformed to get the CMC correct
         for (final CardStateName state : in.getStates()) {
-            CardFactory.copyState(in, state, newCopy, state);
+            CardFactory.copyState(in, state, newCopy, state, false);
         }
         // DO NOT UPDATE THE VIEW!
         newCopy.setState(in.getCurrentStateName(), false);

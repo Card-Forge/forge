@@ -608,7 +608,13 @@ public class CardFactory {
      * @param toState
      *            the {@link CardStateName} of {@code to} to copy to.
      */
-    public static void copyState(final Card from, final CardStateName fromState, final Card to, final CardStateName toState) {
+    public static void copyState(final Card from, final CardStateName fromState, final Card to,
+            final CardStateName toState) {
+        copyState(from, fromState, to, toState, true);
+    }
+
+    public static void copyState(final Card from, final CardStateName fromState, final Card to,
+            final CardStateName toState, boolean updateView) {
         // copy characteristics not associated with a state
         to.setBaseLoyalty(from.getBaseLoyalty());
         to.setBasePowerString(from.getBasePowerString());
@@ -617,10 +623,9 @@ public class CardFactory {
 
         // get CardCharacteristics for desired state
         if (!to.getStates().contains(toState)) {
-        	to.addAlternateState(toState, true);
+            to.addAlternateState(toState, updateView);
         }
-    	final CardState toCharacteristics = to.getState(toState),
-    			fromCharacteristics = from.getState(fromState);
+        final CardState toCharacteristics = to.getState(toState), fromCharacteristics = from.getState(fromState);
         toCharacteristics.copyFrom(from, fromCharacteristics);
     }
     
