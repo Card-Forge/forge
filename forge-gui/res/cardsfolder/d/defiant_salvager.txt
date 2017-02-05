@@ -2,7 +2,7 @@ Name:Defiant Salvager
 ManaCost:2 B
 Types:Creature Aetherborn Artificer
 PT:2/2
-A:AB$ PutCounter | Cost$ Sac<1/Artifact;Creature/artifact or creature> | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+A:AB$ PutCounter | Cost$ Sac<1/Artifact;Creature/artifact or creature> | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate this ability only any time you could cast a sorcery.
 SVar:BuffedBy:Artifact,Creature
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defiant_salvager.jpg
