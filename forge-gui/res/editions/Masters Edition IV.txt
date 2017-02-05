@@ -131,7 +131,7 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 fromSheet("ME4 UrzaLands")
 15 R Island Sanctuary
 208 R Jade Monolith
 209 U Juggernaut
-88 U Junún Efreet
+88 U Junun Efreet
 16 C Just Fate
 17 R Kismet
 210 R Kormus Bell
@@ -143,7 +143,7 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 fromSheet("ME4 UrzaLands")
 211 C Library of Leng
 89 R Lich
 160 R Lifeforce
-90 C Lim-Dûl's Cohort
+90 C Lim-Dul's Cohort
 161 R Living Lands
 212 U Living Wall
 52 R Mahamoti Djinn

@@ -136,7 +136,7 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 52 C Lat-Nam's Legacy
 134 U Lava Burst
 171 C Leaping Lizard
-103 U Lim-Dûl's High Guard
+103 U Lim-Dul's High Guard
 213 R Lodestone Bauble
 24 R Lost Order of Jarkeld
 53 R Magus of the Unseen

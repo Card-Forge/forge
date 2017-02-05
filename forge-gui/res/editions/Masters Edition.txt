@@ -70,7 +70,7 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 195 L Forest
 118 C Fyndhorn Elves
 119 R Gargantuan Gorilla
-120 C Ghazbán Ogre
+120 C Ghazban Ogre
 34 C Giant Tortoise
 94 C Goblin Chirurgeon
 95 U Goblin Grenade
@@ -93,7 +93,7 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 17 C Icatian Lieutenant
 18 U Icatian Town
 122 U Ice Storm
-123 R Ifh-Bíff Efreet
+123 R Ifh-Biff Efreet
 38 U Illusionary Forces
 39 C Illusionary Wall
 40 R Illusions of Grandeur
@@ -105,16 +105,16 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 147 R Jacques le Vert
 100 R Jokulhaups
 41 U Juxtapose
-74 R Juzám Djinn
+74 R Juzam Djinn
 101 U Keldon Warlord
-75 R Khabál Ghoul
+75 R Khabal Ghoul
 19 C Knights of Thorn
 177 R Lake of the Dead
 102 C Lightning Bolt
-148 U Lim-Dûl's Vault
+148 U Lim-Dul's Vault
 149 R Lord of Tresserhorn
 103 R Mana Flare
-104 R Márton Stromgald
+104 R Marton Stromgald
 20 C Mesa Pegasus
 76 C Mindstab Thrull
 159 R Mirror Universe
@@ -152,7 +152,7 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 126 U Rabid Wombat
 179 R Rainbow Vale
 25 C Righteous Avengers
-163 R Ring of Ma'rûf
+163 R Ring of Ma'ruf
 47 C River Merfolk
 127 C Roots
 128 C Scryb Sprites
