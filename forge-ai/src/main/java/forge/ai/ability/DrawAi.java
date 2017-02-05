@@ -35,63 +35,20 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class DrawAi extends SpellAbilityAi {
 
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return targetAI(ai, sa, false);
-    }
-
     /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
+     * @see forge.ai.SpellAbilityAi#checkApiLogic(forge.game.player.Player, forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getHostCard();
-        final Cost abCost = sa.getPayCosts();
-        final Game game = ai.getGame();
-
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                AiCostDecision aiDecisions = new AiCostDecision(ai, sa);
-                for (final CostPart part : abCost.getCostParts()) {
-                    if (part instanceof CostDiscard) {
-                        PaymentDecision decision = part.accept(aiDecisions);
-                        if ( null == decision )
-                            return false;
-                        for (Card discard : decision.cards) {
-                            if (!ComputerUtil.isWorseThanDraw(ai, discard)) {
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
-                return false;
-            }
-
-        }
-
+    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         if (!targetAI(ai, sa, false)) {
             return false;
         }
 
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             final Player player = sa.getTargets().getFirstTargetedPlayer();
             if (player != null && player.isOpponentOf(ai)) {
                 return true;
@@ -107,33 +64,85 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         }
 
-        if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
-        	return false;
-        }
-
-        // Don't use draw abilities before main 2 if possible
-        if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
-            return false;
-        }
-        if ((!game.getPhaseHandler().getNextTurn().equals(ai)
-                    || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
-                && ai.getCardsIn(ZoneType.Hand).size() > 1
-                && !ComputerUtil.activateForCost(sa, ai)
-                && !"YawgmothsBargain".equals(sa.getParam("AILogic"))) {
-            return false;
-        }
-
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {
             return false;
         }
 
         if (!canLoot(ai, sa)) {
-        	return false;
+                return false;
         }
         return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.ai.SpellAbilityAi#willPayCosts(forge.game.player.Player,
+     * forge.game.spellability.SpellAbility, forge.game.cost.Cost,
+     * forge.game.card.Card)
+     */
+    @Override
+    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, source)) {
+            return false;
+        }
+
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
+            return false;
+        }
+
+        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source)) {
+            AiCostDecision aiDecisions = new AiCostDecision(ai, sa);
+            for (final CostPart part : cost.getCostParts()) {
+                if (part instanceof CostDiscard) {
+                    PaymentDecision decision = part.accept(aiDecisions);
+                    if (null == decision)
+                        return false;
+                    for (Card discard : decision.cards) {
+                        if (!ComputerUtil.isWorseThanDraw(ai, discard)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.ai.SpellAbilityAi#checkPhaseRestrictions(forge.game.player.Player,
+     * forge.game.spellability.SpellAbility, forge.game.phase.PhaseHandler)
+     */
+    @Override
+    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+
+        // Don't use draw abilities before main 2 if possible
+        if (ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
+                && !ComputerUtil.castSpellInMain1(ai, sa)) {
+            return false;
+        }
+        if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
+                && ai.getCardsIn(ZoneType.Hand).size() > 1 && !ComputerUtil.activateForCost(sa, ai)
+                && !"YawgmothsBargain".equals(sa.getParam("AILogic"))) {
+            return false;
+        }
+
+        return super.checkPhaseRestrictions(ai, sa, ph);
+    }
+
+    @Override
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        return targetAI(ai, sa, false);
     }
 
     /**
@@ -146,22 +155,9 @@ public class DrawAi extends SpellAbilityAi {
             final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
             int numHand = ai.getCardsIn(ZoneType.Hand).size();
-            if ("Jace, Vryn's Prodigy".equals(sourceName)) {
-                boolean hasJace = false;
-                for (Card pw : CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
-                    for (String type : pw.getType().getSubtypes()) {
-                        if (type.equals("Jace")) {
-                            hasJace = true;
-                            break;
-                        }
-                    }
-                }
-                if (ai.getCardsIn(ZoneType.Graveyard).size() > 3) {
-                    if (hasJace) {
-                        return false;
-                    }
-                    return true;
-                }
+            if ("Jace, Vryn's Prodigy".equals(sourceName) && ai.getCardsIn(ZoneType.Graveyard).size() > 3) {
+                return CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS,
+                        CardPredicates.isType("Jace")).size() <= 0;
             }
             if (source.isSpell() && ai.getCardsIn(ZoneType.Hand).contains(source)) {
                 numHand--; // remember to count looter card if it is a spell in hand
@@ -185,7 +181,6 @@ public class DrawAi extends SpellAbilityAi {
     }
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
         final boolean drawback = (sa instanceof AbilitySub);
         final Game game = ai.getGame();
@@ -237,7 +232,7 @@ public class DrawAi extends SpellAbilityAi {
 
         // TODO: if xPaid and one of the below reasons would fail, instead of
         // bailing reduce toPay amount to acceptable level
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             // ability is targeted
             sa.resetTargets();
 
