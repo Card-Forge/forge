@@ -174,7 +174,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
         }
 
         // targeting does failed
-        if (!sa.isTargetNumberValid()) {
+        if (!sa.isTargetNumberValid() || sa.getTargets().getNumTargeted() == 0) {
             sa.resetTargets();
             return false;
         }
