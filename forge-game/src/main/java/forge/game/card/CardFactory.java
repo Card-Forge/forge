@@ -88,7 +88,6 @@ public class CardFactory {
                               : getCard(in.getPaperCard(), in.getOwner(), in.getId(), in.getGame());
         } else { // token
             int id = assignNewId ? in.getGame().nextCardId() : in.getId();
-            out = new Card(id, in.getPaperCard(), in.getGame());
             out = CardFactory.copyStats(in, in.getController());
             out.setToken(true);
 
