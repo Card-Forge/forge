@@ -567,28 +567,29 @@ public final class CMatchUI
         final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
 
         // Remove focusable so the right button grabs focus properly
-	//pfps This seems wrong so I've commented it out for now and replaced it
+        //pfps This seems wrong so I've commented it out for now and replaced it
         //if (toFocus == btn2)
-	//btn1.setFocusable(false);
+        //btn1.setFocusable(false);
         //else if (toFocus == btn1)
-	//btn2.setFocusable(false);
-	btn2.setFocusable(enable2);  // order may matter here
-	btn1.setFocusable(enable1);
+        //btn2.setFocusable(false);
+        btn2.setFocusable(enable2);  // order may matter here
+        btn1.setFocusable(enable1);
         btn2.setEnabled(enable2);
         btn1.setEnabled(enable1);
 
         // ensure we don't steal focus from an overlay
         if (toFocus != null) {
-	    final Runnable focusRoutine = new Runnable() {
-		    @Override public final void run() {
-			toFocus.requestFocus();  // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
-		    }
-		};
-	    if ( FThreads.isGuiThread() ) { // run this now whether in EDT or not so that it doesn't clobber later stuff
-        	FThreads.invokeInEdtNowOrLater(focusRoutine);
-	    } else {
-        	FThreads.invokeInEdtAndWait(focusRoutine);
-	    };
+            final Runnable focusRoutine = new Runnable() {
+                @Override
+                public final void run() {
+                    toFocus.requestFocus();  // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
+                }
+            };
+            if (FThreads.isGuiThread()) { // run this now whether in EDT or not so that it doesn't clobber later stuff
+                FThreads.invokeInEdtNowOrLater(focusRoutine);
+            } else {
+                FThreads.invokeInEdtAndWait(focusRoutine);
+            };
         }
     }
 
