@@ -73,6 +73,7 @@ public class VDock implements IVDoc<CDock> {
      */
     @Override
     public void populate() {
+        btnTargeting.setFocusable(false); // don't let the targeting arc switcher get focus
         final JPanel pnl = parentCell.getBody();
         // Mig layout does not support wrapping!
         // http://stackoverflow.com/questions/5715833/how-do-you-make-miglayout-behave-like-wrap-layout
