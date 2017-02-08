@@ -271,15 +271,11 @@ public final class CardUtil {
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
+        newCopy.getCurrentState().copyFrom(in, in.getState(in.getCurrentStateName()));
 
-        // don't just copy the current state. copy all of them
-        // needed for Transformed to get the CMC correct
-        for (final CardStateName state : in.getStates()) {
-            CardFactory.copyState(in, state, newCopy, state, false);
-        }
-        // TODO: the line below unexpectedly breaks the visual state of cards (tapped/untapped,
-        // counters, etc.). If it's necessary, we need to figure out how to make it not break stuff.
-        //newCopy.setState(in.getCurrentStateName(), false);
+        // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
+        // (e.g. Scrap Trawler + transformed Harvest Hand)
+        newCopy.setLKICMC(in.getCMC()); 
 
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);

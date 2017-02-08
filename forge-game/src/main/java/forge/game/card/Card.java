@@ -236,6 +236,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     // LKI copies of cards are allowed to store the LKI about the zone the card was known to be in last.
     // For all cards except LKI copies this should always be null.
     private Zone savedLastKnownZone = null;
+    // LKI copies of cards store CMC separately to avoid shenanigans with the game state visualization
+    // breaking when the LKI object is changed to a different card state.
+    private int lkiCMC = -1;
 
     private int countersAdded = 0;
 
@@ -6792,6 +6795,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (isToken() && getCopiedPermanent() == null) {
             return 0;
         }
+        if (lkiCMC >= 0) {
+            return lkiCMC; // a workaround used by getLKICopy
+        }
 
         int xPaid = 0;
 
@@ -6833,6 +6839,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             requestedCMC = getManaCost().getCMC() + xPaid;
         }
         return requestedCMC;
+    }
+
+    public final void setLKICMC(final int cmc) {
+        this.lkiCMC = cmc;
     }
 
     public final boolean canBeSacrificedBy(final SpellAbility source) {
