@@ -572,17 +572,16 @@ public final class CMatchUI
         //btn1.setFocusable(false);
         //else if (toFocus == btn1)
         //btn2.setFocusable(false);
+        btn2.setFocusable(enable2);  // order may matter here
+        btn1.setFocusable(enable1);
+        btn2.setEnabled(enable2);
+        btn1.setEnabled(enable1);
 
         // ensure we don't steal focus from an overlay
         if (toFocus != null) {
             final Runnable focusRoutine = new Runnable() {
                 @Override
                 public final void run() {
-                    btn2.setFocusable(enable2);  // order may matter here
-                    btn1.setFocusable(enable1);
-                    btn2.setEnabled(enable2);
-                    btn1.setEnabled(enable1);
-
                     toFocus.requestFocus();  // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
                 }
             };
