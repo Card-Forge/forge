@@ -126,13 +126,14 @@ public class CardDetailPanel extends SkinnedPanel {
         typeLabel.setBounds(x, y, lineWidth, areaHeight);
         y += areaHeight + 1 ;
 
-        areaHeight = idLabel.getPreferredSize().height;
+        areaHeight = Math.max(Math.max(idLabel.getPreferredSize().height,
+        		powerToughnessLabel.getPreferredSize().height),
+        		setInfoLabel.getPreferredSize().height);
         idLabel.setBounds(x, y, idLabel.getAutoSizeWidth(), areaHeight);
         powerToughnessLabel.setBounds(x, y, lineWidth, areaHeight);
         //+1 to x,y so set info label right up against border and the baseline matches ID and P/T
         setInfoLabel.setBounds(x + lineWidth - setInfoWidth + 1, y + 1, setInfoWidth, areaHeight);
         y += areaHeight + 1 ;
-
         scrArea.setBounds(0, y, getWidth(), getHeight() - y);
     }
 
