@@ -573,8 +573,7 @@ public final class CMatchUI
         //else if (toFocus == btn1)
         //btn2.setFocusable(false);
 
-        btn1.setEnabled(enable1);
-        btn2.setEnabled(enable2);
+
 
         final Runnable focusRoutine = new Runnable() {
             @Override
@@ -582,6 +581,8 @@ public final class CMatchUI
                 // The only button that is focusable is the enabled default button
                 // This prevents the user from somehow focusing on on some other button
                 // and then using the keyboard to try to select it
+                btn1.setEnabled(enable1);
+                btn2.setEnabled(enable2);
                 btn1.setFocusable(enable1 && focus1 );
                 btn2.setFocusable(enable2 && !focus1);
                 // ensure we don't steal focus from an overlay
