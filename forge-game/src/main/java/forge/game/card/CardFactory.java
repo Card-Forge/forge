@@ -87,8 +87,7 @@ public class CardFactory {
             out = assignNewId ? getCard(in.getPaperCard(), in.getOwner(), in.getGame()) 
                               : getCard(in.getPaperCard(), in.getOwner(), in.getId(), in.getGame());
         } else { // token
-            int id = assignNewId ? in.getGame().nextCardId() : in.getId();
-            out = CardFactory.copyStats(in, in.getController());
+            out = CardFactory.copyStats(in, in.getController(), assignNewId);
             out.setToken(true);
 
             // add abilities
@@ -577,8 +576,11 @@ public class CardFactory {
      * 			  created Card.
      * @return a new {@link forge.game.card.Card}.
      */
-    public static Card copyStats(final Card in, final Player newOwner) {
-        int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
+    public static Card copyStats(final Card in, final Player newOwner, boolean assignNewId) {
+        int id = in.getId();
+        if (assignNewId) {
+            id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
+        }
         final Card c = new Card(id, in.getPaperCard(), in.getGame());
     
         c.setOwner(newOwner);
@@ -829,7 +831,7 @@ public class CardFactory {
         }
 
         for (int i = 0; i < multiplier; i++) {
-            Card temp = i == 0 ? c : copyStats(c, controller);
+            Card temp = i == 0 ? c : copyStats(c, controller, true);
 
             for (final String kw : tokenInfo.intrinsicKeywords) {
                 temp.addIntrinsicKeyword(kw);
