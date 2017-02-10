@@ -1345,14 +1345,14 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].startsWith("LastStateBattlefield")) {
-            final String[] k = sq[0].split(" ");
+            final String[] k = l[0].split(" ");
             CardCollection list = new CardCollection(game.getLastStateBattlefield());
             list = CardLists.getValidCards(list, k[1].split(","), cc, c, null);
             return CardFactoryUtil.doXMath(list.size(), m, c);
         }
 
         if (sq[0].startsWith("LastStateGraveyard")) {
-            final String[] k = sq[0].split(" ");
+            final String[] k = l[0].split(" ");
             CardCollection list = new CardCollection(game.getLastStateGraveyard());
             list = CardLists.getValidCards(list, k[1].split(","), cc, c, null);
             return CardFactoryUtil.doXMath(list.size(), m, c);
