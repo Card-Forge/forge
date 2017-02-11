@@ -506,6 +506,9 @@ public class CountersPutAi extends SpellAbilityAi {
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
+        final boolean isMandatoryTrigger = (sa.isTrigger() && !sa.isOptionalTrigger()) 
+                || (sa.getRootAbility().isTrigger() || !sa.getRootAbility().isOptionalTrigger());
+
         if (sa.usesTargeting()) {
             CardCollection list = null;
 
@@ -517,17 +520,18 @@ public class CountersPutAi extends SpellAbilityAi {
 
             list = CardLists.getTargetableCards(list, sa);
 
-            if (list.size() == 0) {
-                return false;
+            if (list.isEmpty() && isMandatoryTrigger) {
+                // broaden the scope of possible targets if we are resolving a mandatory trigger
+                list = CardLists.getTargetableCards(new CardCollection(game.getCardsIn(ZoneType.Battlefield)), sa);
             }
 
             sa.resetTargets();
             // target loop
             while (sa.canAddMoreTarget()) {
 
-                if (list.size() == 0) {
+                if (list.isEmpty()) {
                     if (!sa.isTargetNumberValid()
-                            || (sa.getTargets().getNumTargeted() == 0)) {
+                            || sa.getTargets().getNumTargeted() == 0) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -541,6 +545,8 @@ public class CountersPutAi extends SpellAbilityAi {
                     String txt = source.getAbilityText();
                     if (txt != null && txt.contains("Awaken ")) {
                         choice = ComputerUtilCard.getWorstLand(list);
+                    } else if ("BoonCounterOnOppPermanent".equals(sa.getParam("AILogic"))) {
+                        choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
                         choice = CountersAi.chooseBoonTarget(list, type);
                     }
