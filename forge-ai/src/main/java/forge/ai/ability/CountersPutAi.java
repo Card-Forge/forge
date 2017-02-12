@@ -545,7 +545,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     String txt = source.getAbilityText();
                     if (txt != null && txt.contains("Awaken ")) {
                         choice = ComputerUtilCard.getWorstLand(list);
-                    } else if ("BoonCounterOnOppPermanent".equals(sa.getParam("AILogic"))) {
+                    } else if ("BoonCounterOnOppCreature".equals(sa.getParam("AILogic"))) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
                         choice = CountersAi.chooseBoonTarget(list, type);
