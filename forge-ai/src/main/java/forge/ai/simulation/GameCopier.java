@@ -238,7 +238,7 @@ public class GameCopier {
             newCard.addType(type);
         }
         for (StaticAbility stAb : c.getStaticAbilities()) {
-            newCard.addStaticAbilityCopy(stAb);
+            newCard.addStaticAbility(stAb);
         }
         for (SpellAbility sa : c.getSpellAbilities()) {
             SpellAbility saCopy;

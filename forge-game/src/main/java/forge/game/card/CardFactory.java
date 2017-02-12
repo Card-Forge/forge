@@ -95,7 +95,7 @@ public class CardFactory {
                 out.addSpellAbility(sa);
             }
 
-            for (String s : out.getStaticAbilityStrings()) {
+            for (StaticAbility s : out.getStaticAbilities()) {
                 out.addStaticAbility(s);
             }
         }
@@ -312,11 +312,6 @@ public class CardFactory {
             }
             card.setState(state, false);
 
-            for (String stAb : card.getStaticAbilityStrings()) {
-                final StaticAbility s = card.addStaticAbility(stAb);
-                s.setIntrinsic(true);
-            }
-
             // ******************************************************************
             // ************** Link to different CardFactories *******************
             if (card.isPlaneswalker()) {
@@ -441,7 +436,7 @@ public class CardFactory {
 
         for (String k : face.getKeywords())                  c.addIntrinsicKeyword(k);
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
-        for (String s : face.getStaticAbilities())           c.addStaticAbilityString(s);
+        for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
         for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
 
@@ -655,7 +650,7 @@ public class CardFactory {
             to.addSpellAbility(sa.copy());
         }
 
-        for (String staticAbility : to.getStaticAbilityStrings()) {
+        for (StaticAbility staticAbility : fromCharacteristics.getStaticAbilities()) {
         	to.addStaticAbility(staticAbility);
         }
         // reset state

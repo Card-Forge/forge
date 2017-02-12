@@ -20,8 +20,6 @@ package forge.game.card;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -55,7 +53,6 @@ public class CardState {
     private FCollection<Trigger> triggers = new FCollection<Trigger>();
     private FCollection<ReplacementEffect> replacementEffects = new FCollection<ReplacementEffect>();
     private FCollection<StaticAbility> staticAbilities = new FCollection<StaticAbility>();
-    private List<String> staticAbilityStrings = Lists.newArrayList();
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
 
@@ -294,17 +291,6 @@ public class CardState {
         view.updateImageKey(this);
     }
 
-    public final Iterable<String> getStaticAbilityStrings() {
-        return staticAbilityStrings;
-    }
-    public final void setStaticAbilityStrings(final List<String> staticAbilityStrings0) {
-        staticAbilityStrings = staticAbilityStrings0;
-    }
-    public boolean addStaticAbilityString(String s) {
-        if (StringUtils.isBlank(s)) { return false; }
-        return staticAbilityStrings.add(s);
-    }
-
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
         return replacementEffects;
     }
@@ -366,7 +352,6 @@ public class CardState {
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
         intrinsicKeywords = Lists.newArrayList(source.intrinsicKeywords);
-        staticAbilityStrings = Lists.newArrayList(source.staticAbilityStrings);
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
         setSetCode(source.setCode);
@@ -374,6 +359,10 @@ public class CardState {
         replacementEffects = new FCollection<ReplacementEffect>();
         for (ReplacementEffect RE : source.getReplacementEffects()) {
             replacementEffects.add(RE.getCopy());
+        }
+        this.staticAbilities.clear();
+        for (StaticAbility sa : source.getStaticAbilities()) {
+            this.staticAbilities.add(new StaticAbility(sa, c));
         }
         view.updateKeywords(c, this);
     }

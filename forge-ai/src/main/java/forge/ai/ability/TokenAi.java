@@ -488,9 +488,7 @@ public class TokenAi extends SpellAbilityAi {
         // Grant static abilities
         if (tokenStaticAbilities != null) {
             for (final String s : tokenStaticAbilities) {
-                final String actualAbility = host.getSVar(s);
-                token.addStaticAbilityString(actualAbility);
-                token.addStaticAbility(actualAbility);
+                token.addStaticAbility(host.getSVar(s));
             }
         }
         

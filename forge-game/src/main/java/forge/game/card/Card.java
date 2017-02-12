@@ -188,7 +188,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean hasBeenDealtDeathtouchDamage = false;
 
     // regeneration
-    private List<CardShields> shields = new ArrayList<>();
+    private List<CardShields> shields = Lists.newArrayList();
     private int regeneratedThisTurn = 0;
 
     private int turnInZone;
@@ -222,11 +222,11 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private Map<Long, Player> goad = Maps.newTreeMap();
 
-    private final List<GameCommand> leavePlayCommandList = new ArrayList<>();
-    private final List<GameCommand> etbCommandList = new ArrayList<>();
-    private final List<GameCommand> untapCommandList = new ArrayList<>();
-    private final List<GameCommand> changeControllerCommandList = new ArrayList<>();
-    private final List<Object[]> staticCommandList = new ArrayList<>();
+    private final List<GameCommand> leavePlayCommandList = Lists.newArrayList();
+    private final List<GameCommand> etbCommandList = Lists.newArrayList();
+    private final List<GameCommand> untapCommandList = Lists.newArrayList();
+    private final List<GameCommand> changeControllerCommandList = Lists.newArrayList();
+    private final List<Object[]> staticCommandList = Lists.newArrayList();
 
     private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX");
 
@@ -1221,7 +1221,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final Iterable<String> getChosenColors() {
         if (chosenColors == null) {
-            return new ArrayList<>();
+            return Lists.newArrayList();
         }
         return chosenColors;
     }
@@ -1554,7 +1554,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         boolean negative = true;
         final List<String> subs = Lists.newArrayList(TextUtil.split(keyword.split(" ", 2)[1], ','));
         final List<List<String>> subsAnd = Lists.newArrayList();
-        final List<String> orClauses = new ArrayList<>();
+        final List<String> orClauses = Lists.newArrayList();
         for (final String expession : subs) {
             final List<String> parts = Lists.newArrayList(expession.split("[.+]"));
             for (int p = 0; p < parts.size(); p++) {
@@ -1733,7 +1733,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        final List<String> addedManaStrings = new ArrayList<>();
+        final List<String> addedManaStrings = Lists.newArrayList();
         boolean primaryCost = true;
         boolean isNonAura = !type.hasSubtype("Aura");
 
@@ -2490,7 +2490,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, c, AttachMethod.Equip));
 
         // run trigger
-        final HashMap<String, Object> runParams = new HashMap<>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("AttachSource", this);
         runParams.put("AttachTarget", c);
         getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
@@ -2510,7 +2510,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Play the Equip sound
         getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, c, AttachMethod.Fortify));
         // run trigger
-        final HashMap<String, Object> runParams = new HashMap<>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("AttachSource", this);
         runParams.put("AttachTarget", c);
         getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
@@ -2598,7 +2598,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         getGame().fireEvent(new GameEventCardAttachment(this, null, entity, AttachMethod.Enchant));
 
         // run trigger
-        final HashMap<String, Object> runParams = new HashMap<>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("AttachSource", this);
         runParams.put("AttachTarget", entity);
         getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
@@ -3083,7 +3083,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!tapped) { return; }
 
         // Run Replacement effects
-        final HashMap<String, Object> repRunParams = new HashMap<>();
+        final Map<String, Object> repRunParams = Maps.newHashMap();
         repRunParams.put("Event", "Untap");
         repRunParams.put("Affected", this);
 
@@ -3150,8 +3150,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         final KeywordsChange cks = changedCardKeywords.get(timestamp);
         if (cks != null) {
         	cks.removeKeywords(this);
-            List<String> kws = new ArrayList<>(keywords);
-            List<String> rkws = new ArrayList<>(removeKeywords);
+            List<String> kws = Lists.newArrayList(keywords);
+            List<String> rkws = Lists.newArrayList(removeKeywords);
             boolean remAll = removeAllKeywords;
             kws.addAll(cks.getKeywords());
             rkws.addAll(cks.getRemoveKeywords());
@@ -3173,14 +3173,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void addChangedCardKeywords(final String[] keywords, final String[] removeKeywords,
             final boolean removeAllKeywords, final long timestamp) {
-        List<String> keywordsList = new ArrayList<>();
-        List<String> removeKeywordsList = new ArrayList<>();
+        List<String> keywordsList = Lists.newArrayList();
+        List<String> removeKeywordsList = Lists.newArrayList();
         if (keywords != null) {
-            keywordsList = new ArrayList<>(Arrays.asList(keywords));
+            keywordsList = Lists.newArrayList(Arrays.asList(keywords));
         }
 
         if (removeKeywords != null) {
-            removeKeywordsList = new ArrayList<>(Arrays.asList(removeKeywords));
+            removeKeywordsList = Lists.newArrayList(Arrays.asList(removeKeywords));
         }
 
         addChangedCardKeywords(keywordsList, removeKeywordsList, removeAllKeywords, timestamp);
@@ -3206,7 +3206,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getUnhiddenKeywords(currentState);
     }
     public final List<String> getUnhiddenKeywords(CardState state) {
-        final List<String> keywords = new ArrayList<>();
+        final List<String> keywords = Lists.newArrayList();
         Iterables.addAll(keywords, state.getIntrinsicKeywords());
         keywords.addAll(extrinsicKeyword);
 
@@ -3410,7 +3410,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void removeAllExtrinsicKeyword(final String s) {
-        final List<String> strings = new ArrayList<>();
+        final List<String> strings = Lists.newArrayList();
         strings.add(s);
         boolean needKeywordUpdate = false;
         if (extrinsicKeyword.removeAll(strings)) {
@@ -3459,7 +3459,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final List<String> getCantHaveOrGainKeyword() {
-        final List<String> cantGain = new ArrayList<>();
+        final List<String> cantGain = Lists.newArrayList();
         for (String s : hiddenExtrinsicKeyword) {
             if (s.contains("can't have or gain")) {
                 cantGain.add(s.split("can't have or gain ")[1]);
@@ -3468,18 +3468,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         return cantGain;
     }
 
-    public final void setStaticAbilityStrings(final List<String> a) {
-        currentState.setStaticAbilityStrings(new ArrayList<>(a));
-    }
-
-    public final Iterable<String> getStaticAbilityStrings() {
-        return currentState.getStaticAbilityStrings();
-    }
     public final void setStaticAbilities(final List<StaticAbility> a) {
-        currentState.setStaticAbilities(new ArrayList<>(a));
-    }
-    public final void addStaticAbilityString(final String s) {
-        currentState.addStaticAbilityString(s);
+        currentState.setStaticAbilities(a);
     }
 
     public final FCollectionView<StaticAbility> getStaticAbilities() {
@@ -3488,12 +3478,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final StaticAbility addStaticAbility(final String s) {
         if (!s.trim().isEmpty()) {
             final StaticAbility stAb = new StaticAbility(s, this);
+            stAb.setIntrinsic(true);
             currentState.addStaticAbility(stAb);
             return stAb;
         }
         return null;
     }
-    public final StaticAbility addStaticAbilityCopy(final StaticAbility stAb) {
+    public final StaticAbility addStaticAbility(final StaticAbility stAb) {
         final StaticAbility stAbCopy = new StaticAbility(stAb, this);
         currentState.addStaticAbility(stAbCopy);
         return stAbCopy;
@@ -6279,7 +6270,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         bestowTimestamp = getGame().getNextTimestamp();
         addChangedCardTypes(new CardType(Collections.singletonList("Aura")),
                 new CardType(Collections.singletonList("Creature")), false, false, false, true, bestowTimestamp, updateView);
-        addChangedCardKeywords(Collections.singletonList("Enchant creature"), new ArrayList<String>(), false, bestowTimestamp, updateView);
+        addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.<String>newArrayList(), false, bestowTimestamp, updateView);
     }
 
     public final void unanimateBestow() {
@@ -7059,7 +7050,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // Collects all the keywords into a list.
     private static final class ListKeywordVisitor extends Visitor<String> {
-        private List<String> keywords = new ArrayList<>();
+        private List<String> keywords = Lists.newArrayList();
 
         @Override
         public void visit(String kw) {

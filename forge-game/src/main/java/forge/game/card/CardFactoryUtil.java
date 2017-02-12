@@ -4013,7 +4013,6 @@ public class CardFactoryUtil {
 
         if (effect != null) {
             StaticAbility st = card.addStaticAbility(effect);
-            card.addStaticAbilityString(effect);
             st.setIntrinsic(intrinsic);
             if (!intrinsic) {
                 kws.addStaticAbility(st);
