@@ -22,6 +22,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
+
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -65,14 +67,10 @@ import forge.util.Visitor;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -211,6 +209,9 @@ public class GameAction {
                 for (final ReplacementEffect repl : copied.getReplacementEffects()) {
                     repl.setHostCard(copied);
                 }
+                for (final StaticAbility sa : copied.getStaticAbilities()) {
+                    sa.setHostCard(copied);
+                }
                 if (c.getName().equals("Skullbriar, the Walking Grave")) {
                     copied.setCounters(c.getCounters());
                 }
@@ -309,7 +310,7 @@ public class GameAction {
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Card", lastKnownInfo);
         runParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType().name() : null);
         runParams.put("Destination", zoneTo.getZoneType().name());
@@ -317,7 +318,7 @@ public class GameAction {
         runParams.put("IndividualCostPaymentInstance", game.costPaymentStack.peek());
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
         if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield)) {
-            final HashMap<String, Object> runParams2 = new HashMap<String, Object>();
+            final Map<String, Object> runParams2 = Maps.newHashMap();
             runParams2.put("Card", lastKnownInfo);
             runParams2.put("OriginalController", zoneFrom.getPlayer());
             game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams2, false);
@@ -527,7 +528,7 @@ public class GameAction {
         c.setTurnInZone(tiz);
         c.setCameUnderControlSinceLastUpkeep(true);
 
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Card", c);
         runParams.put("OriginalController", original);
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
@@ -758,7 +759,7 @@ public class GameAction {
             }
         }
 
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
         if (runEvents && !affectedCards.isEmpty()) {
@@ -767,7 +768,7 @@ public class GameAction {
     }
 
     public final void checkStateEffects(final boolean runEvents) {
-        checkStateEffects(runEvents, new HashSet<Card>());
+        checkStateEffects(runEvents, Sets.<Card>newHashSet());
     }
     public final void checkStateEffects(final boolean runEvents, final Set<Card> affectedCards) {
         // sol(10/29) added for Phase updates, state effects shouldn't be
@@ -817,7 +818,7 @@ public class GameAction {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetToughness() <= 0) {
                         if (noRegCreats == null) {
-                            noRegCreats = new LinkedList<Card>();
+                            noRegCreats = Lists.newLinkedList();
                         }
                         noRegCreats.add(c);
                         checkAgain = true;
@@ -825,7 +826,7 @@ public class GameAction {
                         for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
                             if (c.getNetToughness() <= dmg.intValue()) {
                                 if (desCreats == null) {
-                                    desCreats = new LinkedList<Card>();
+                                    desCreats = Lists.newLinkedList();
                                 }
                                 desCreats.add(c);
                                 checkAgain = true;
@@ -837,7 +838,7 @@ public class GameAction {
                     // Rule 704.5h - Destroy due to deathtouch
                     else if (c.getNetToughness() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage()) {
                         if (desCreats == null) {
-                            desCreats = new LinkedList<Card>();
+                            desCreats = Lists.newLinkedList();
                         }
                         desCreats.add(c);
                         c.setHasBeenDealtDeathtouchDamage(false);
@@ -1068,7 +1069,7 @@ public class GameAction {
             if (p.checkLoseCondition()) { // this will set appropriate outcomes
                 // Run triggers
                 if (losers == null) {
-                    losers = new ArrayList<Player>(3);
+                    losers = Lists.newArrayListWithCapacity(3);
                 }
                 losers.add(p);
             }
@@ -1092,7 +1093,7 @@ public class GameAction {
                     reason = null; // they cannot lose!
                 } else {
                     if (losers == null) {
-                        losers = new ArrayList<Player>(3);
+                        losers = Lists.newArrayListWithCapacity(3);
                     }
                     losers.add(p);
                 }
@@ -1108,8 +1109,8 @@ public class GameAction {
         }
 
         if (reason == null) {
-        	List<Player> notLost = new ArrayList<Player>();
-        	Set<Integer> teams = new HashSet<Integer>();
+        	List<Player> notLost = Lists.newArrayList();
+        	Set<Integer> teams = Sets.newHashSet();
         	for (Player p : allPlayers) {
                 if (p.getOutcome() == null || p.getOutcome().hasWon()) {
                 	notLost.add(p);
@@ -1219,7 +1220,7 @@ public class GameAction {
             return false;
         }
 
-        List<Card> toKeep = new ArrayList<Card>();
+        List<Card> toKeep = Lists.newArrayList();
         long ts = 0;
 
         for (final Card crd : worlds) {
@@ -1292,7 +1293,7 @@ public class GameAction {
         }
 
         // Replacement effects
-        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        final Map<String, Object> repRunParams = Maps.newHashMap();
         repRunParams.put("Event", "Destroy");
         repRunParams.put("Source", sa);
         repRunParams.put("Card", c);
@@ -1311,7 +1312,7 @@ public class GameAction {
         game.fireEvent(new GameEventCardDestroyed());
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Card", c);
         runParams.put("Causer", activator);
         game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
@@ -1465,7 +1466,7 @@ public class GameAction {
             checkStateEffects(true); // why?
 
             // Run Trigger beginning of the game
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, true);
             //</THIS CODE WILL WORK WITH PHASE = NULL>
 
@@ -1494,7 +1495,7 @@ public class GameAction {
         }
 
         // Power Play - Each player with a Power Play in the CommandZone becomes the Starting Player
-        Set<Player> powerPlayers = new HashSet<>();
+        Set<Player> powerPlayers = Sets.newHashSet();
         for (Card c : game.getCardsIn(ZoneType.Command)) {
             if (c.getName().equals("Power Play")) {
                 powerPlayers.add(c.getOwner());
@@ -1630,7 +1631,7 @@ public class GameAction {
     private void runOpeningHandActions(final Player first) {
         Player takesAction = first;
         do {
-            List<SpellAbility> usableFromOpeningHand = new ArrayList<SpellAbility>();
+            List<SpellAbility> usableFromOpeningHand = Lists.newArrayList();
 
             // Select what can be activated from a given hand
             for (final Card c : takesAction.getCardsIn(ZoneType.Hand)) {
@@ -1689,7 +1690,7 @@ public class GameAction {
         game.setMonarch(p);
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", p);
         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
     }
