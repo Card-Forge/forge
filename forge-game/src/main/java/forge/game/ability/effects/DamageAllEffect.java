@@ -81,15 +81,16 @@ public class DamageAllEffect extends SpellAbilityEffect {
         list = AbilityUtils.filterListByType(list, sa.getParam("ValidCards"), sa);
 
         CardDamageMap damageMap = new CardDamageMap();
+        CardDamageMap preventMap = new CardDamageMap();
 
         for (final Card c : list) {
-            c.addDamage(dmg, sourceLKI, damageMap);
+            c.addDamage(dmg, sourceLKI, damageMap, preventMap);
         }
 
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                p.addDamage(dmg, sourceLKI, damageMap);
+                p.addDamage(dmg, sourceLKI, damageMap, preventMap);
             }
         }
 
@@ -104,6 +105,7 @@ public class DamageAllEffect extends SpellAbilityEffect {
             }
         }
 
+        preventMap.triggerPreventDamage(false);
         damageMap.dealLifelinkDamage();
     }
 }

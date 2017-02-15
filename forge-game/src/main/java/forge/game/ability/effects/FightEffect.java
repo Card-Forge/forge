@@ -54,10 +54,12 @@ public class FightEffect extends SpellAbilityEffect {
         
         boolean fightToughness = sa.hasParam("FightWithToughness");
         CardDamageMap damageMap = new CardDamageMap();
+        CardDamageMap preventMap = new CardDamageMap();
 
-        dealDamage(fighters.get(0), fighters.get(1), fightToughness, damageMap);
-        dealDamage(fighters.get(1), fighters.get(0), fightToughness, damageMap);
+        dealDamage(fighters.get(0), fighters.get(1), fightToughness, damageMap, preventMap);
+        dealDamage(fighters.get(1), fighters.get(0), fightToughness, damageMap, preventMap);
 
+        preventMap.triggerPreventDamage(false);
         damageMap.dealLifelinkDamage();
 
         for (Card c : fighters) {
@@ -110,10 +112,10 @@ public class FightEffect extends SpellAbilityEffect {
         return fighterList;
     }
     
-    private void dealDamage(Card source, Card target, boolean fightToughness, CardDamageMap damageMap) {
+    private void dealDamage(Card source, Card target, boolean fightToughness, CardDamageMap damageMap, CardDamageMap preventMap) {
         final int dmg = fightToughness ? source.getNetToughness() : source.getNetPower();
 
-        target.addDamage(dmg, source, damageMap);
+        target.addDamage(dmg, source, damageMap, preventMap);
     }
 
 }

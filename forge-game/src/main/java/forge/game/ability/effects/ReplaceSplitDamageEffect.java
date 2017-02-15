@@ -56,13 +56,14 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
             Card sourceLKI = (Card) sa.getReplacingObject("Source");
 
             CardDamageMap damageMap = (CardDamageMap) originalParams.get("DamageMap");
+            CardDamageMap preventMap = (CardDamageMap) originalParams.get("PreventMap");
             
             boolean isCombat = (Boolean) originalParams.get("IsCombat");
             boolean noPrevention = (Boolean) originalParams.get("NoPreventDamage");
             
             GameEntity obj = (GameEntity) list.get(0);
 
-            obj.addDamage(n, sourceLKI, isCombat, noPrevention, damageMap);
+            obj.addDamage(n, sourceLKI, isCombat, noPrevention, damageMap, preventMap);
         }
 
         // no damage for original target anymore

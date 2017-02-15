@@ -739,14 +739,16 @@ public class Combat {
     public void dealAssignedDamage() {
     	playerWhoAttacks.getGame().copyLastState();
 
+    	CardDamageMap preventMap = new CardDamageMap();
+
         // This function handles both Regular and First Strike combat assignment
         for (final Entry<Card, Integer> entry : defendingDamageMap.entrySet()) {
             GameEntity defender = getDefenderByAttacker(entry.getKey());
             if (defender instanceof Player) { // player
-                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo);
+                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap);
             }
             else if (defender instanceof Card) { // planeswalker
-                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo);
+                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap);
             }
         }
 
@@ -763,7 +765,7 @@ public class Combat {
                 continue;
             }
 
-            c.addCombatDamage(c.getAssignedDamageMap(), dealtDamageTo);
+            c.addCombatDamage(c.getAssignedDamageMap(), dealtDamageTo, preventMap);
             c.clearAssignedDamage();
         }
         
@@ -774,6 +776,8 @@ public class Combat {
             runParams.put("DamageTarget", ge);
             ge.getGame().getTriggerHandler().runTrigger(TriggerType.CombatDamageDoneOnce, runParams, false);
         }
+
+        preventMap.triggerPreventDamage(true);
         // This was deeper before, but that resulted in the stack entry acting like before.
 
         // LifeLink for Combat Damage at this place

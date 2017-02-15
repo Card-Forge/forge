@@ -124,6 +124,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
 
         // make a new damage map, combat damage will be applied later into combat map
         CardDamageMap damageMap = new CardDamageMap();
+        CardDamageMap preventMap = new CardDamageMap();
         
         if (divideOnResolution) {
             // Dividing Damage up to multiple targets using combat damage box
@@ -144,7 +145,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
             Player assigningPlayer = players.get(0);
             Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
             for (Entry<Card, Integer> dt : map.entrySet()) {
-                dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap);
+                dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap);
             }
 
             // transport combat damage back into combat damage map
@@ -168,13 +169,13 @@ public class DamageDealEffect extends SpellAbilityEffect {
                         c.clearAssignedDamage();
                     }
                     else {
-                        c.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap);
+                        c.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap, preventMap);
                     }
                 }
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
-                    p.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap);
+                    p.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap, preventMap);
                 }
             }
         }
@@ -187,6 +188,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         if (combatDmg) {
             game.getCombat().getDamageMap().putAll(damageMap);
         } else {
+            preventMap.triggerPreventDamage(false);
             // non combat damage cause lifegain there
             damageMap.dealLifelinkDamage();
         }

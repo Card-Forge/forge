@@ -69,8 +69,9 @@ public class DamageEachEffect extends SpellAbilityEffect {
 
         final List<GameObject> tgts = getTargets(sa, "DefinedPlayers");
 
-        final boolean targeted = (sa.usesTargeting());
+        final boolean targeted = sa.usesTargeting();
         CardDamageMap damageMap = new CardDamageMap();
+        CardDamageMap preventMap = new CardDamageMap();
 
         for (final Object o : tgts) {
             for (final Card source : sources) {
@@ -82,13 +83,13 @@ public class DamageEachEffect extends SpellAbilityEffect {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                        c.addDamage(dmg, sourceLKI, damageMap);
+                        c.addDamage(dmg, sourceLKI, damageMap, preventMap);
                     }
 
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!targeted || p.canBeTargetedBy(sa)) {
-                        p.addDamage(dmg, sourceLKI, damageMap);
+                        p.addDamage(dmg, sourceLKI, damageMap, preventMap);
                     }
                 }
             }
@@ -101,7 +102,7 @@ public class DamageEachEffect extends SpellAbilityEffect {
 
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
                     // System.out.println(source+" deals "+dmg+" damage to "+source);
-                    source.addDamage(dmg, sourceLKI, damageMap);
+                    source.addDamage(dmg, sourceLKI, damageMap, preventMap);
                 }
             }
             if (sa.getParam("DefinedCards").equals("Remembered")) {
@@ -113,12 +114,13 @@ public class DamageEachEffect extends SpellAbilityEffect {
                         if (o instanceof Card) {
                             Card rememberedcard = (Card) o;
                             // System.out.println(source + " deals " + dmg + " damage to " + rememberedcard);
-                            rememberedcard.addDamage(dmg, sourceLKI, damageMap);
+                            rememberedcard.addDamage(dmg, sourceLKI, damageMap, preventMap);
                         }
                     }
                 }
             }
         }
+        preventMap.triggerPreventDamage(false);
 
         damageMap.dealLifelinkDamage();
     }

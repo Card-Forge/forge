@@ -7,9 +7,11 @@ import java.util.Map;
 
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 
 import forge.game.GameEntity;
+import forge.game.trigger.TriggerType;
 
 public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
     private Table<Card, GameEntity, Integer> dataMap = HashBasedTable.create();
@@ -27,6 +29,24 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
             }
         }
     }   
+    
+    public void triggerPreventDamage(boolean isCombat) {
+        for (Map.Entry<GameEntity, Map<Card, Integer>> e : this.columnMap().entrySet()) {
+            int sum = 0;
+            for (final int i : e.getValue().values()) {
+                sum += i;
+            }
+            if (sum > 0) {
+                final GameEntity ge = e.getKey();
+                final Map<String, Object> runParams = Maps.newHashMap();
+                runParams.put("DamageTarget", ge);
+                runParams.put("DamageAmount", sum);
+                runParams.put("IsCombatDamage", isCombat);
+                
+                ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamagePreventedOnce, runParams, false);
+            }
+        }
+    }
 
     /**
      * special put logic, sum the values

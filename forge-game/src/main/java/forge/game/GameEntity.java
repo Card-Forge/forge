@@ -57,49 +57,54 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         getView().updateName(this);
     }
 
-    public final int addDamage(final int damage, final Card source, boolean isCombat, boolean noPrevention, final CardDamageMap damageMap) {
+    public final int addDamage(final int damage, final Card source, boolean isCombat, boolean noPrevention,
+            final CardDamageMap damageMap, final CardDamageMap preventMap) {
         if (noPrevention) {
-            return addDamageWithoutPrevention(damage, source, damageMap);
+            return addDamageWithoutPrevention(damage, source, damageMap, preventMap);
         } else if (isCombat) {
-            return addCombatDamage(damage, source, damageMap);
+            return addCombatDamage(damage, source, damageMap, preventMap);
         } else {
-            return addDamage(damage, source, damageMap);
+            return addDamage(damage, source, damageMap, preventMap);
         }
     }
 
-    public int addDamage(final int damage, final Card source, final CardDamageMap damageMap) {
+    public int addDamage(final int damage, final Card source, final CardDamageMap damageMap,
+            final CardDamageMap preventMap) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, false, true, damageMap);
-        damageToDo = preventDamage(damageToDo, source, false);
+        damageToDo = replaceDamage(damageToDo, source, false, true, damageMap, preventMap);
+        damageToDo = preventDamage(damageToDo, source, false, preventMap);
 
         return addDamageAfterPrevention(damageToDo, source, false, damageMap);
     }
 
-    public final int addCombatDamage(final int damage, final Card source, CardDamageMap damageMap) {
+    public final int addCombatDamage(final int damage, final Card source, final CardDamageMap damageMap,
+            final CardDamageMap preventMap) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, true, true, damageMap);
-        damageToDo = preventDamage(damageToDo, source, true);
+        damageToDo = replaceDamage(damageToDo, source, true, true, damageMap, preventMap);
+        damageToDo = preventDamage(damageToDo, source, true, preventMap);
 
         if (damageToDo > 0) {
             source.getDamageHistory().registerCombatDamage(this);
         }
-
-        return addCombatDamageBase(damageToDo, source, damageMap); // damage prevention is already checked
+        // damage prevention is already checked
+        return addCombatDamageBase(damageToDo, source, damageMap); 
     }
 
     protected int addCombatDamageBase(final int damage, final Card source, CardDamageMap damageMap) {
         return addDamageAfterPrevention(damage, source, true, damageMap);
     }
-    
-    public int addDamageWithoutPrevention(final int damage, final Card source, final CardDamageMap damageMap) {
-        int damageToDo = replaceDamage(damage, source, false, false, damageMap);
+
+    public int addDamageWithoutPrevention(final int damage, final Card source, final CardDamageMap damageMap,
+            final CardDamageMap preventMap) {
+        int damageToDo = replaceDamage(damage, source, false, false, damageMap, preventMap);
         return addDamageAfterPrevention(damageToDo, source, false, damageMap);
     }
 
-    public int replaceDamage(final int damage, final Card source, final boolean isCombat, final boolean prevention, final CardDamageMap damageMap) {
-     // Replacement effects
+    public int replaceDamage(final int damage, final Card source, final boolean isCombat, final boolean prevention,
+            final CardDamageMap damageMap, final CardDamageMap preventMap) {
+        // Replacement effects
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
@@ -108,19 +113,20 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         repParams.put("IsCombat", isCombat);
         repParams.put("NoPreventDamage", !prevention);
         repParams.put("DamageMap", damageMap);
+        repParams.put("PreventMap", preventMap);
 
         switch (getGame().getReplacementHandler().run(repParams)) {
         case NotReplaced:
             return damage;
         case Updated:
             int newDamage = (int) repParams.get("DamageAmount");
-            GameEntity newTarget = (GameEntity)repParams.get("Affected");
+            GameEntity newTarget = (GameEntity) repParams.get("Affected");
             // check if this is still the affected card or player
             if (this.equals(newTarget)) {
                 return newDamage;
             } else {
                 if (prevention) {
-                    newDamage = newTarget.preventDamage(newDamage, source, isCombat);
+                    newDamage = newTarget.preventDamage(newDamage, source, isCombat, preventMap);
                 }
                 newTarget.addDamageAfterPrevention(newDamage, source, isCombat, damageMap);
             }
@@ -140,7 +146,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     // not change the game state)
     public abstract int staticReplaceDamage(final int damage, final Card source, final boolean isCombat);
 
-    public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
+    public final int preventDamage(final int damage, final Card source, final boolean isCombat, CardDamageMap preventMap) {
         if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
@@ -156,6 +162,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         repParams.put("DamageAmount", damage);
         repParams.put("IsCombat", isCombat);
         repParams.put("Prevention", true);
+        repParams.put("PreventMap", preventMap);
 
         switch (getGame().getReplacementHandler().run(repParams)) {
         case NotReplaced:
@@ -188,6 +195,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         // if damage is greater than restDamage, damage was prevented 
         if (damage > restDamage) {
             int prevent = damage - restDamage;
+            preventMap.put(source, this, damage - restDamage);
             
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("DamageTarget", this);

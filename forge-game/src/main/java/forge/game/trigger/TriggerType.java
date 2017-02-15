@@ -40,6 +40,7 @@ public enum TriggerType {
     Cycled(TriggerCycled.class),
     DamageDone(TriggerDamageDone.class),
     DamagePrevented(TriggerDamagePrevented.class),
+    DamagePreventedOnce(TriggerDamagePreventedOnce.class),
     DealtCombatDamageOnce(TriggerDealtCombatDamageOnce.class),
     Destroyed(TriggerDestroyed.class),
     Devoured(TriggerDevoured.class),

@@ -638,7 +638,7 @@ public class CardFactory {
         final CardState fromCharacteristics = from.getState(fromState);
         final CardStateName oldToState = to.getCurrentStateName();
         if (!to.getStates().contains(toState)) {
-        	to.addAlternateState(toState, false);
+            to.addAlternateState(toState, false);
         }
 
         to.setState(toState, false);
@@ -651,7 +651,7 @@ public class CardFactory {
         }
 
         for (StaticAbility staticAbility : fromCharacteristics.getStaticAbilities()) {
-        	to.addStaticAbility(staticAbility);
+            to.addStaticAbility(staticAbility);
         }
         // reset state
         to.setState(oldToState, false);
