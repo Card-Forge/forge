@@ -62,8 +62,9 @@ public class CostDamage extends CostPart {
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa) {
         final Card source = sa.getHostCard();
         CardDamageMap damageMap = new CardDamageMap();
+        CardDamageMap preventMap = new CardDamageMap();
 
-        payer.addDamage(decision.c, source, damageMap);
+        payer.addDamage(decision.c, source, damageMap, preventMap);
 
         damageMap.dealLifelinkDamage();
 

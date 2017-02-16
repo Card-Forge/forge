@@ -388,8 +388,9 @@ public class HumanPlay {
                     return false;
                 }
                 CardDamageMap damageMap = new CardDamageMap();
+                CardDamageMap preventMap = new CardDamageMap();
 
-                p.addDamage(amount, source, damageMap);
+                p.addDamage(amount, source, damageMap, preventMap);
 
                 damageMap.dealLifelinkDamage();
             }
