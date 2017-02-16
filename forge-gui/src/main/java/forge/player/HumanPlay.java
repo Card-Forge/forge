@@ -392,6 +392,7 @@ public class HumanPlay {
 
                 p.addDamage(amount, source, damageMap, preventMap);
 
+                preventMap.triggerPreventDamage(false);
                 damageMap.dealLifelinkDamage();
             }
             else if (part instanceof CostPutCounter) {
