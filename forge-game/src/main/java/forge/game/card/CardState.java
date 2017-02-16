@@ -365,7 +365,7 @@ public class CardState {
         }
         this.staticAbilities.clear();
         for (StaticAbility sa : source.getStaticAbilities()) {
-            StaticAbility saCopy = new StaticAbility(sa, c);
+            StaticAbility saCopy = new StaticAbility(sa, this.card);
             saCopy.setIntrinsic(sa.isIntrinsic());
             this.staticAbilities.add(saCopy);
         }
