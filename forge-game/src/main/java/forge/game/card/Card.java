@@ -3490,7 +3490,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         return null;
     }
     public final StaticAbility addStaticAbility(final StaticAbility stAb) {
+        return addStaticAbility(stAb, false);
+    }
+    public final StaticAbility addStaticAbility(final StaticAbility stAb, boolean intrinsic) {
         final StaticAbility stAbCopy = new StaticAbility(stAb, this);
+        stAbCopy.setIntrinsic(intrinsic);
         currentState.addStaticAbility(stAbCopy);
         return stAbCopy;
     }

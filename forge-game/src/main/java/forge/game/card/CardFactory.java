@@ -650,8 +650,12 @@ public class CardFactory {
             to.addSpellAbility(sa.copy());
         }
 
+        // add static abilities
+        to.getCurrentState().clearStaticAbilities();
         for (StaticAbility staticAbility : fromCharacteristics.getStaticAbilities()) {
-            to.addStaticAbility(staticAbility);
+            if (staticAbility.isIntrinsic()) {
+                to.addStaticAbility(staticAbility, true);
+            }
         }
         // reset state
         to.setState(oldToState, false);

@@ -282,6 +282,9 @@ public class CardState {
     public final void setStaticAbilities(final Iterable<StaticAbility> staticAbilities0) {
         staticAbilities = new FCollection<StaticAbility>(staticAbilities0);
     }
+    public final void clearStaticAbilities() {
+        staticAbilities.clear();
+    }
 
     public final String getImageKey() {
         return imageKey;
@@ -362,7 +365,9 @@ public class CardState {
         }
         this.staticAbilities.clear();
         for (StaticAbility sa : source.getStaticAbilities()) {
-            this.staticAbilities.add(new StaticAbility(sa, c));
+            StaticAbility saCopy = new StaticAbility(sa, c);
+            saCopy.setIntrinsic(sa.isIntrinsic());
+            this.staticAbilities.add(saCopy);
         }
         view.updateKeywords(c, this);
     }
