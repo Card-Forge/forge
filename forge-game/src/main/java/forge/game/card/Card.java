@@ -382,6 +382,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentStateName = state;
         currentState = states.get(state);
 
+        // update the host for static abilities
+        for (StaticAbility sa : currentState.getStaticAbilities()) {
+            sa.setHostCard(this);
+        }
+
         if (updateView) {
             view.updateState(this);
 
