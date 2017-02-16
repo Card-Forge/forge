@@ -94,10 +94,6 @@ public class CardFactory {
             for (SpellAbility sa : in.getIntrinsicSpellAbilities()) {
                 out.addSpellAbility(sa);
             }
-
-            for (StaticAbility s : out.getStaticAbilities()) {
-                out.addStaticAbility(s);
-            }
         }
 
         for (final CardStateName state : in.getStates()) {
