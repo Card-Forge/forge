@@ -5850,9 +5850,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         return total;
     }
 
-    public final void addCombatDamage(final Map<Card, Integer> map, CardDamageMap damageMap) {
+    public final void addCombatDamage(final Map<Card, Integer> map, final CardDamageMap damageMap, final CardDamageMap preventMap) {
         for (final Entry<Card, Integer> entry : map.entrySet()) {
-            addCombatDamage(entry.getValue(), entry.getKey(), damageMap);
+            addCombatDamage(entry.getValue(), entry.getKey(), damageMap, preventMap);
         }
     }
 
