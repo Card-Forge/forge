@@ -117,7 +117,7 @@ public class PhasesAi extends SpellAbilityAi {
         if (!list.isEmpty()) {
             CardCollectionView oppList = CardLists.filter(list, Predicates.not(CardPredicates.isController(source.getController())));
             sa.resetTargets();
-            sa.getTargets().add(oppList.isEmpty() ? ComputerUtilCard.getBestAI(oppList) : ComputerUtilCard.getWorstAI(list));
+            sa.getTargets().add(!oppList.isEmpty() ? ComputerUtilCard.getBestAI(oppList) : ComputerUtilCard.getWorstAI(list));
             return true;
         }
 
