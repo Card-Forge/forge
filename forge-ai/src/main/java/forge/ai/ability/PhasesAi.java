@@ -1,11 +1,14 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicates;
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -108,6 +111,20 @@ public class PhasesAi extends SpellAbilityAi {
 
         CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa), sa);
+
+        // in general, if it's our own creature, choose the weakest one, if it's the opponent's creature,
+        // choose the strongest one
+        if (!list.isEmpty()) {
+            CardCollectionView oppList = CardLists.filter(list, Predicates.not(CardPredicates.isController(source.getController())));
+            if (!oppList.isEmpty()) {
+                sa.resetTargets();
+                sa.getTargets().add(ComputerUtilCard.getBestAI(list));
+            } else {
+                sa.resetTargets();
+                sa.getTargets().add(ComputerUtilCard.getWorstAI(list));
+            }
+            return true;
+        }
 
         return false;
     }
