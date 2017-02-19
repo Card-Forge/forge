@@ -1,5 +1,9 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
@@ -17,10 +21,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 public class FightAi extends SpellAbilityAi {
     @Override
@@ -41,7 +41,7 @@ public class FightAi extends SpellAbilityAi {
         CardCollectionView aiCreatures = ai.getCreaturesInPlay();
         aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
         aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
-        List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+        List<Card> humCreatures = ai.getOpponents().getCreaturesInPlay();
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
 
         // assumes the triggered card belongs to the ai
@@ -114,7 +114,7 @@ public class FightAi extends SpellAbilityAi {
         
         //try to make a good trade or no trade
         final Card source = sa.getHostCard();
-        List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+        List<Card> humCreatures = ai.getOpponents().getCreaturesInPlay();
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
         if (humCreatures.isEmpty()) {
             return false;
@@ -159,7 +159,7 @@ public class FightAi extends SpellAbilityAi {
         }
         // Get sorted creature lists
         CardCollection aiCreatures = ai.getCreaturesInPlay();
-        CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
+        CardCollection humCreatures = ai.getOpponents().getCreaturesInPlay();
 		if ("Time to Feed".equals(sourceName)) {	// flip sa
 			aiCreatures = CardLists.getTargetableCards(aiCreatures, tgtFight);
 			aiCreatures = ComputerUtil.getSafeTargets(ai, tgtFight, aiCreatures);
