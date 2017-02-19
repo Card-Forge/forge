@@ -1334,6 +1334,7 @@ public class GameAction {
             public void run() {
                 if (c.isInPlay() && c.isCreature()) {
                     c.addExtrinsicKeyword("Haste");
+                    c.updateStateForView();
                 }
             } // execute()
         };
@@ -1348,6 +1349,7 @@ public class GameAction {
                 if (c.getSVar("HasteFromSuspend").equals("True")) {
                     c.setSVar("HasteFromSuspend", "False");
                     c.removeExtrinsicKeyword("Haste");
+                    c.updateStateForView();
                 }
             } // execute()
         };
