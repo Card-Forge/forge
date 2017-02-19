@@ -703,7 +703,7 @@ public class ComputerUtilCard {
      */
     public static Card getWorstLand(final List<Card> lands) {
         Card worstLand = null;
-        int maxScore = 0;
+        int maxScore = Integer.MIN_VALUE;
         // first, check for tapped, basic lands
         for (Card tmp : lands) {
             int score = tmp.isTapped() ? 2 : 0;
@@ -726,7 +726,7 @@ public class ComputerUtilCard {
 
     public static Card getBestLandToAnimate(final Iterable<Card> lands) {
         Card land = null;
-        int maxScore = 0;
+        int maxScore = Integer.MIN_VALUE;
         // first, check for tapped, basic lands
         for (Card tmp : lands) {
             // TODO Improve this by choosing basic lands that I have plenty of mana in
