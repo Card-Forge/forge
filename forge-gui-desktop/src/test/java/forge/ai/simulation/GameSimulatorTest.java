@@ -223,7 +223,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, p);
         List<SpellAbility> abilities = ComputerUtilAbility.getSpellAbilities(cards, p);
-        SpellAbility minusTwo = findSAWithPrefix(abilities, "-2: Put a 2/2 black Vampire");
+        SpellAbility minusTwo = findSAWithPrefix(abilities, "-2: Create a 2/2 black Vampire");
         assertNotNull(minusTwo);
         minusTwo.setActivatingPlayer(p);
         assertTrue(minusTwo.canPlay());
@@ -237,7 +237,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Player simP = simGame.getPlayers().get(1);
         cards = ComputerUtilAbility.getAvailableCards(simGame, simP);
         abilities = ComputerUtilAbility.getSpellAbilities(cards, simP);
-        SpellAbility minusTwoSim = findSAWithPrefix(abilities, "-2: Put a 2/2 black Vampire");
+        SpellAbility minusTwoSim = findSAWithPrefix(abilities, "-2: Create a 2/2 black Vampire");
         assertNotNull(minusTwoSim);
         minusTwoSim.setActivatingPlayer(simP);
         assertFalse(minusTwoSim.canPlay());
@@ -248,7 +248,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Player copyP = copy.getPlayers().get(1);
         cards = ComputerUtilAbility.getAvailableCards(copy, copyP);
         abilities = ComputerUtilAbility.getSpellAbilities(cards, copyP);
-        SpellAbility minusTwoCopy = findSAWithPrefix(abilities, "-2: Put a 2/2 black Vampire");
+        SpellAbility minusTwoCopy = findSAWithPrefix(abilities, "-2: Create a 2/2 black Vampire");
         minusTwoCopy.setActivatingPlayer(copyP);
         assertFalse(minusTwoCopy.canPlay());
         assertEquals(1, minusTwoCopy.getActivationsThisTurn());
