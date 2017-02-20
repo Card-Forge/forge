@@ -25,6 +25,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
@@ -33,7 +34,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.AbilitySub;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -124,20 +126,32 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
-
         // Don't use draw abilities before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                 && !ComputerUtil.castSpellInMain1(ai, sa)) {
             return false;
         }
+
+        return super.checkPhaseRestrictions(ai, sa, ph);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * forge.ai.SpellAbilityAi#checkPhaseRestrictions(forge.game.player.Player,
+     * forge.game.spellability.SpellAbility, forge.game.phase.PhaseHandler,
+     * java.lang.String)
+     */
+    @Override
+    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
         if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1 && !ComputerUtil.activateForCost(sa, ai)
-                && !"YawgmothsBargain".equals(sa.getParam("AILogic"))) {
+                && !"YawgmothsBargain".equals(logic)) {
             return false;
         }
-
-        return super.checkPhaseRestrictions(ai, sa, ph);
+        return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
 
     @Override
@@ -149,8 +163,8 @@ public class DrawAi extends SpellAbilityAi {
      * Check if looter (draw + discard) effects are worthwhile
      */
     private boolean canLoot(Player ai, SpellAbility sa) {
-        final AbilitySub sub = sa.getSubAbility();
-        if (sub != null && sub.getApi() == ApiType.Discard) {
+        final SpellAbility sub = sa.findSubAbilityByType(ApiType.Discard);
+        if (sub != null) {
             final Card source = sa.getHostCard();
             final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
@@ -163,8 +177,14 @@ public class DrawAi extends SpellAbilityAi {
                 numHand--; // remember to count looter card if it is a spell in hand
             }
             int numDraw = 1;
+
             if (sa.hasParam("NumCards")) {
-                numDraw = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
+                String numDrawStr = sa.getParam("NumCards");
+                if (numDrawStr.equals("X") && sa.getSVar(numDrawStr).equals("Count$Converge")) {
+                    numDraw = ComputerUtilMana.getConvergeCount(sa, ai);
+                } else {
+                    numDraw = AbilityUtils.calculateAmount(source, numDrawStr, sa);
+                }
             }
             int numDiscard = 1;
             if (sub.hasParam("NumCards")) {
@@ -182,14 +202,15 @@ public class DrawAi extends SpellAbilityAi {
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
-        final boolean drawback = (sa instanceof AbilitySub);
+        final boolean drawback = sa.getParent() != null;
         final Game game = ai.getGame();
-        Player opp = ai.getOpponent();
 
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
-        final int humanLibrarySize = opp.getCardsIn(ZoneType.Library).size();
         final int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
         final int computerMaxHandSize = ai.getMaxHandSize();
+
+        final SpellAbility loseLife = sa.findSubAbilityByType(ApiType.LoseLife);
+        final SpellAbility getPoison = sa.findSubAbilityByType(ApiType.Poison);
 
         //if a spell is used don't count the card
         if (sa.isSpell() && source.isInZone(ZoneType.Hand)) {
@@ -206,7 +227,7 @@ public class DrawAi extends SpellAbilityAi {
         if (num != null && num.equals("X")) {
             if (source.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                if (sa instanceof AbilitySub && !source.getSVar("PayX").equals("")) {
+                if (drawback && !source.getSVar("PayX").equals("")) {
                     numCards = Integer.parseInt(source.getSVar("PayX"));
                 } else {
                     numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
@@ -218,8 +239,6 @@ public class DrawAi extends SpellAbilityAi {
                 numCards = ComputerUtilMana.getConvergeCount(sa, ai);
             }
         }
-        //if (n)
-
 
         // Logic for cards that require special handling
         if (sa.hasParam("AILogic")) {
@@ -236,57 +255,170 @@ public class DrawAi extends SpellAbilityAi {
             // ability is targeted
             sa.resetTargets();
 
-            final boolean canTgtHuman = sa.canTarget(opp);
-            final boolean canTgtComp = sa.canTarget(ai);
-            boolean tgtHuman = false;
-
-            if (!canTgtHuman && !canTgtComp) {
-                return false;
-            }
-
-            if (canTgtHuman && !opp.cantLose() && numCards >= humanLibrarySize) {
-                // Deck the Human? DO IT!
-                sa.getTargets().add(opp);
-                return true;
-            }
-
-            if (numCards >= computerLibrarySize) {
-                if (xPaid) {
-                    numCards = computerLibrarySize - 1;
-                    source.setSVar("PayX", Integer.toString(numCards));
-                } else {
-                    // Don't deck your self
-                    if (!mandatory) {
-                        return false;
-                    }
-                    tgtHuman = true;
-                }
-            }
-
-            if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
-                if (xPaid) {
-                    numCards = computerMaxHandSize - computerHandSize;
-                    source.setSVar("PayX", Integer.toString(numCards));
-                } else {
-                    // Don't draw too many cards and then risk discarding cards
-                    // at EOT
-                    // TODO: "NextUpkeep" is deprecated
-                    if (!(sa.hasParam("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
-                        return false;
-                    }
-                }
-            }
-
+            // if it wouldn't draw anything and its not mandatory, skip it
             if (numCards == 0 && !mandatory && !drawback) {
                 return false;
             }
 
-            if ((!tgtHuman || !canTgtHuman) && canTgtComp) {
-                sa.getTargets().add(ai);
-            } else if (mandatory && canTgtHuman) {
-                sa.getTargets().add(opp);
-            } else {
+            // filter player that can be targeted
+            PlayerCollection players = game.getPlayers().filter(PlayerPredicates.isTargetableBy(sa));
+
+            // no targets skip it
+            if (players.isEmpty()) {
                 return false;
+            }
+
+            // filter opponents
+            PlayerCollection opps = players.filter(PlayerPredicates.isOpponentOf(ai));
+
+            for (Player oppA : opps) {
+                // try to kill opponent
+                if (oppA.cantLose()) {
+                    continue;
+                }
+
+                // try to mill opponent
+                if (numCards >= oppA.getCardsIn(ZoneType.Library).size()) {
+                    // but only it he doesn't have Laboratory Maniac
+                    // also disable it for other checks later too
+                    if (oppA.isCardInPlay("Laboratory Maniac")) {
+                        continue;
+                    }
+
+                    sa.getTargets().add(oppA);
+                    return true;
+                }
+
+                // try to make opponent pay to death
+                if (loseLife != null && oppA.canLoseLife()) {
+                    // loseLife for Target
+                    if (loseLife.hasParam("Defined") && "Targeted".equals(loseLife.getParam("Defined"))) {
+                        // currently all Draw / Lose cards use the same value
+                        // for drawing and losing life
+                        if (numCards >= oppA.getLife()) {
+                            if (xPaid) {
+                                source.setSVar("PayX", Integer.toString(oppA.getLife()));
+                            }
+                            sa.getTargets().add(oppA);
+                            return true;
+                        }
+                    }
+                }
+                // try to make opponent lose to poison
+                // currently only Caress of Phyrexia
+                if (getPoison != null && oppA.canReceiveCounters(CounterType.POISON)) {
+                    if (oppA.getPoisonCounters() + numCards > 9) {
+                        sa.getTargets().add(oppA);
+                        return true;
+                    }
+                }
+            }
+            
+            boolean aiTarget = ai.canBeTargetedBy(sa);
+            // checks what the ai prevent from casting it on itself
+            // if spell is not mandatory
+            if (aiTarget && !ai.cantLose()) {
+                if (numCards >= computerLibrarySize) {
+                    if (xPaid) {
+                        numCards = computerLibrarySize - 1;
+                    } else if (!ai.isCardInPlay("Laboratory Maniac")) {
+                        aiTarget = false;
+                    }
+                }
+
+                if (loseLife != null && ai.canLoseLife()) {
+                    if (numCards >= ai.getLife() + 5) {
+                        if (xPaid) {
+                            numCards = Math.min(numCards, ai.getLife() - 5);
+                        }
+                    } else {
+                        aiTarget = false;
+                    }
+                }
+
+                if (getPoison != null && ai.canReceiveCounters(CounterType.POISON)) {
+                    if (numCards + ai.getPoisonCounters() >= 8) {
+                        aiTarget = false;
+                    }
+                }
+
+                if (xPaid) {
+                    source.setSVar("PayX", Integer.toString(numCards));
+                }
+            }
+
+            if (aiTarget) {
+                if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
+                    if (xPaid) {
+                        numCards = computerMaxHandSize - computerHandSize;
+                        source.setSVar("PayX", Integer.toString(numCards));
+                    } else {
+                        // Don't draw too many cards and then risk discarding
+                        // cards at EOT
+                        if (!drawback && !mandatory) {
+                            return false;
+                        }
+                    }
+                }
+
+                sa.getTargets().add(ai);
+                return true;
+            }
+
+            // try to benefit ally
+            for (Player ally : ai.getAllies()) {
+                // try to select ally to help
+                if (!sa.canTarget(ally)) {
+                    continue;
+                }
+
+                // use xPaid abilties only for itself
+                if (xPaid) {
+                    continue;
+                }
+
+                // ally would draw more than it can
+                if (numCards >= ally.getCardsIn(ZoneType.Library).size()) {
+                    if (!ally.isCardInPlay("Laboratory Maniac")) {
+                        continue;
+                    }
+                }
+
+                // ally would lose because of life lost
+                if (loseLife != null && ally.canLoseLife()) {
+                    if (numCards < ai.getLife() - 5) {
+                        continue;
+                    }
+                }
+
+                // ally would lose because of poison
+                if (getPoison != null && ally.canReceiveCounters(CounterType.POISON)) {
+                    if (ally.getPoisonCounters() + numCards > 9) {
+                        continue;
+                    }
+                }
+
+                sa.getTargets().add(ally);
+                return true;
+            }
+
+            // no nice targets, don't do it
+            if (!mandatory) {
+                return false;
+            }
+
+            // still try to target opponent first
+            Player oppMin = opps.min(PlayerPredicates.compareByLife());
+            if (oppMin != null) {
+                sa.getTargets().add(oppMin);
+                return true;
+            }
+
+            // final solution for a possible target
+            Player result = players.min(PlayerPredicates.compareByLife());
+            if (result != null) {
+                sa.getTargets().add(result);
+                return true;
             }
         } else if (!mandatory) {
             // TODO: consider if human is the defined player
@@ -300,7 +432,7 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (numCards == 0  && !drawback) {
+            if (numCards == 0 && !drawback) {
                 return false;
             }
 
@@ -309,7 +441,7 @@ public class DrawAi extends SpellAbilityAi {
                     && !sa.isTrigger()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
-                if (!sa.hasParam("NextUpkeep") && !drawback) {
+                if (!drawback) {
                     return false;
                 }
             }
@@ -331,6 +463,9 @@ public class DrawAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
         // AI shouldn't mill itself
-        return numCards < player.getZone(ZoneType.Library).size();
+        if (numCards < player.getZone(ZoneType.Library).size())
+            return true;
+        // except it has Laboratory Maniac
+        return player.isCardInPlay("Laboratory Maniac");
     }
 }
