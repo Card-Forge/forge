@@ -136,13 +136,15 @@ public class GameSimulator {
         SpellAbility sa;
         if (origSa instanceof SpellAbilityPicker.PlayLandAbility) {
             Card hostCard = (Card) copier.find(origSa.getHostCard());
-            aiPlayer.playLand(hostCard, false);
+            if (!aiPlayer.playLand(hostCard, false)) {
+                System.err.println("Simulation: Couldn't play land! " + origSa);
+            }
             sa = origSa;
         } else {
             // TODO: optimize: prune identical SA (e.g. two of the same card in hand)
             sa = findSaInSimGame(origSa);
             if (sa == null) {
-                System.err.println("SA not found! " + origSa);
+                System.err.println("Simulation: SA not found! " + origSa);
                 return new Score(Integer.MIN_VALUE, Integer.MIN_VALUE);
             }
 

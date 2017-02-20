@@ -111,6 +111,18 @@ public class GameCopier {
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         for (Card c : newGame.getCardsInGame()) {
+            Card origCard = (Card) reverseFind(c);
+            if (origCard.hasRemembered()) {
+                for (Object o : origCard.getRemembered()) {
+                    if (o instanceof GameObject) {
+                        c.addRemembered(find((GameObject)o));
+                    } else {
+                        System.err.println(c + " Remembered: " + o + "/" + o.getClass());
+                        c.addRemembered(o);
+                    }
+                    
+                }
+            }
             for (SpellAbility sa : c.getSpellAbilities()) {
                 Player activatingPlayer = sa.getActivatingPlayer();
                 if (activatingPlayer != null && activatingPlayer.getGame() != newGame) {
@@ -209,7 +221,6 @@ public class GameCopier {
             if (card.isPaired()) {
                 otherCard.setPairedWith(cardMap.get(card.getPairedWith()));
             }
-            otherCard.setCommander(card.isCommander());
             // TODO: Verify that the above relationships are preserved bi-directionally or not.
         }
     }
@@ -224,7 +235,9 @@ public class GameCopier {
             return result;
         }
         if (USE_FROM_PAPER_CARD && !c.isEmblem()) {
-            return Card.fromPaperCard(c.getPaperCard(), newOwner);
+            Card newCard = Card.fromPaperCard(c.getPaperCard(), newOwner);
+            newCard.setCommander(c.isCommander());
+            return newCard;
         }
 
         // TODO: The above is very expensive and accounts for the vast majority of GameCopier execution time.
@@ -234,6 +247,7 @@ public class GameCopier {
         Card newCard = new Card(newGame.nextCardId(), c.getPaperCard(), newGame);
         newCard.setOwner(newOwner);
         newCard.setName(c.getName());
+        newCard.setCommander(c.isCommander());
         for (String type : c.getType()) {
             newCard.addType(type);
         }
@@ -341,14 +355,6 @@ public class GameCopier {
             }
 
             newCard.setSVars(c.getSVars());
-
-            // TODO: FIXME
-            if (c.hasRemembered()) {
-                for (Object o : c.getRemembered()) {
-                    System.out.println("Remembered: " + o +  o.getClass());
-                    //newCard.addRemembered(o);
-                }
-            }
         }
 
         if (zone == ZoneType.Stack) {
