@@ -236,7 +236,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         assertTrue(d2.targets.toString().contains("Dark Depths"));
     }
 
-    public void testPlayRememberedCards2() {
+    public void testPlayRememberedCardsLand() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
@@ -263,5 +263,33 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         assertEquals(3, plan.getDecisions().size());
         assertEquals("Play land Mountain", plan.getDecisions().get(1).saRef.toString());
         assertEquals("Lightning Bolt deals 3 damage to target creature or player.", plan.getDecisions().get(2).saRef.toString());
+    }
+
+    public void testPlayRememberedCardsSpell() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Mountain", p);
+        addCard("Mountain", p);
+        addCard("Mountain", p);
+        Card abbot = addCardToZone("Abbot of Keral Keep", p, ZoneType.Hand);
+        // Note: This assumes the top of library is revealed. If the AI is made
+        // smarter to not assume that, then this test can be updated to have
+        // something that reveals top of library active - e.g. Lens of Clarity.
+        addCardToZone("Lightning Bolt", p, ZoneType.Library);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        // Expected plan:
+        //  1. Play Abbot.
+        //  3. Play Bolt exiled by Abbot.
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        assertEquals(abbot.getSpellAbilities().get(0), sa);
+        Plan plan = picker.getPlan();
+        assertEquals(2, plan.getDecisions().size());
+        String saDesc = plan.getDecisions().get(1).saRef.toString();
+        assertTrue(saDesc, saDesc.startsWith("Lightning Bolt deals 3 damage to target creature or player."));
     }
 }
