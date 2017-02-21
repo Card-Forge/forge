@@ -99,6 +99,8 @@ public class ClashAi extends SpellAbilityAi {
             if (tgt != null) {
                 sa.resetTargets();
                 sa.getTargets().add(tgt);
+            } else {
+                return false; // cut short if this part of the clause is not satisfiable (with current card pool should never get here)
             }
         }
 
