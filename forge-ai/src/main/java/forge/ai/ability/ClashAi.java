@@ -2,10 +2,13 @@ package forge.ai.ability;
 
 
 import com.google.common.collect.Iterables;
+import forge.ai.ComputerUtilCard;
 
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
@@ -19,7 +22,13 @@ public class ClashAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return true;
+        boolean legalAction = true;
+
+        if (sa.usesTargeting()) {
+            legalAction = selectTarget(aiPlayer, sa);
+        }
+
+        return legalAction;
     }
 
 
@@ -31,18 +40,13 @@ public class ClashAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+        boolean legalAction = true;
+
         if (sa.usesTargeting()) {
-            PlayerCollection players = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
-            // use chooseSinglePlayer function to the select player
-            Player chosen = chooseSinglePlayer(ai, sa, players);
-            if (chosen != null) {
-                sa.resetTargets();
-                sa.getTargets().add(chosen);
-                return true;
-            }
-            return false;
+            legalAction = selectTarget(ai, sa);
         }
-        return true;
+
+        return legalAction;
     }
 
     /*
@@ -71,6 +75,34 @@ public class ClashAi extends SpellAbilityAi {
         }
 
         return Iterables.getFirst(options, null);
+    }
+
+    private boolean selectTarget(Player ai, SpellAbility sa) {
+        String valid = sa.getParam("ValidTgts");
+
+        PlayerCollection players = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        // use chooseSinglePlayer function to the select player
+        Player chosen = chooseSinglePlayer(ai, sa, players);
+        if (chosen != null) {
+            sa.resetTargets();
+            sa.getTargets().add(chosen);
+        }
+
+        if ("Creature".equals(valid)) {
+            // Springjack Knight
+            CardCollectionView aiCreats = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+            CardCollectionView oppCreats = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+
+            // TODO: Whirlpool Whelm also uses creature targeting but it's trickier to support
+            Card tgt = aiCreats.isEmpty() ? ComputerUtilCard.getWorstCreatureAI(oppCreats) : ComputerUtilCard.getBestCreatureAI(aiCreats);
+
+            if (tgt != null) {
+                sa.resetTargets();
+                sa.getTargets().add(tgt);
+            }
+        }
+
+        return sa.getTargets().getNumTargeted() > 0;
     }
 
 }
