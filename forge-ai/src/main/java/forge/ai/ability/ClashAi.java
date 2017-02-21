@@ -90,10 +90,10 @@ public class ClashAi extends SpellAbilityAi {
 
         if ("Creature".equals(valid)) {
             // Springjack Knight
+            // TODO: Whirlpool Whelm also uses creature targeting but it's trickier to support
             CardCollectionView aiCreats = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
             CardCollectionView oppCreats = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 
-            // TODO: Whirlpool Whelm also uses creature targeting but it's trickier to support
             Card tgt = aiCreats.isEmpty() ? ComputerUtilCard.getWorstCreatureAI(oppCreats) : ComputerUtilCard.getBestCreatureAI(aiCreats);
 
             if (tgt != null) {
