@@ -36,30 +36,36 @@ public class AttachEffect extends SpellAbilityEffect {
         }
 
         Card source = sa.getHostCard();
-        Card card = sa.getHostCard();
 
-        final List<GameObject> targets = getTargets(sa);
+        CardCollection attachments;
+        final List<GameObject> targets = getDefinedOrTargeted(sa, "Defined");
+        GameObject attachTo;
+
+        if (targets.isEmpty()) {
+            return;
+        } else {
+            attachTo = targets.get(0);
+        }
 
         final Player p = sa.getActivatingPlayer();
-        String message = "Do you want to attach " + card + " to " + targets + "?";
-        if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
-            return;
 
         if (sa.hasParam("Object")) {
-            CardCollection lists = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa);
+            attachments = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa);
             if (sa.hasParam("ChooseAnObject")) {
-                card = p.getController().chooseSingleEntityForEffect(lists, sa, sa.getParam("ChooseAnObject"));
-            } else {
-                card = Iterables.getFirst(lists, null);
+                Card c = p.getController().chooseSingleEntityForEffect(attachments, sa, sa.getParam("ChooseAnObject"));
+                attachments.clear();
+                attachments.add(c);
             }
-            if (card == null) {
-                return;
-            }
+        } else {
+            attachments = new CardCollection(source);
         }
 
         // If Cast Targets will be checked on the Stack
-        for (final Object o : targets) {
-            handleAttachment(card, o, sa);
+        for (final Card attachment : attachments) {
+            String message = "Do you want to attach " + attachment + " to " + attachTo + "?";
+            if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
+                continue;
+            handleAttachment(attachment, attachTo, sa);
         }
     }
 
