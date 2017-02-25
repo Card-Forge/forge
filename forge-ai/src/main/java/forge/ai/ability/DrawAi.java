@@ -330,9 +330,12 @@ public class DrawAi extends SpellAbilityAi {
                     if (numCards >= ai.getLife() + 5) {
                         if (xPaid) {
                             numCards = Math.min(numCards, ai.getLife() - 5);
+                            if (numCards <= 0) {
+                                aiTarget = false;
+                            }
+                        } else {
+                            aiTarget = false;
                         }
-                    } else {
-                        aiTarget = false;
                     }
                 }
 
