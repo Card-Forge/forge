@@ -7,22 +7,34 @@ import com.google.common.base.Joiner;
 
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
 
 public class Plan {
-    private List<Decision> decisions;
+    private final List<Decision> decisions;
+    private final Score finalScore;
     private int nextDecisionIndex;
     private int nextChoice;
     private Decision selectedDecision;
+    private PhaseType startPhase;
 
-    public Plan(ArrayList<Decision> decisions) {
+    public Plan(ArrayList<Decision> decisions, Score finalScore) {
         this.decisions = decisions;
+        this.finalScore = finalScore;
     }
     
+    public Score getFinalScore() {
+        return finalScore;
+    }
+
+    public PhaseType getStartPhase() {
+        return startPhase;
+    }
+
     public List<Decision> getDecisions() {
         return decisions;
     }
-    
+
     public boolean hasNextDecision() {
         return nextDecisionIndex < decisions.size();
     }

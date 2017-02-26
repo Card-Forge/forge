@@ -24,6 +24,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.AbilityActivated;
@@ -64,6 +65,9 @@ public class GameCopier {
     }
     
     public Game makeCopy() {
+        return makeCopy(null);
+    }
+    public Game makeCopy(PhaseType advanceToPhase) {
         List<RegisteredPlayer> origPlayers = origGame.getMatch().getPlayers();
         List<RegisteredPlayer> newPlayers = new ArrayList<>();
         for (RegisteredPlayer p : origPlayers) {
@@ -148,6 +152,10 @@ public class GameCopier {
             newGame.getPhaseHandler().setCombat(new Combat(origPhaseHandler.getCombat(), gameObjectMap));
         }
 
+        if (advanceToPhase != null) {
+            newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase);
+        }
+        
         return newGame;
     }
 

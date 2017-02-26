@@ -125,7 +125,7 @@ public class SimulationController {
             }
         }
         sequence.subList(writeIndex, sequence.size()).clear();
-        return new Plan(sequence);
+        return new Plan(sequence, getBestScore());
     }
 
     private Plan.Decision getLastMergedDecision() {
@@ -221,7 +221,7 @@ public class SimulationController {
                 if (effect.hostCard == hostAndTarget[0] && effect.target == hostAndTarget[1] && effect.sa.equals(saString)) {
                     GameStateEvaluator evaluator = new GameStateEvaluator();
                     Player player = sa.getActivatingPlayer();
-                    int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2], null);
+                    int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2]);
                     if (cardScore == effect.targetScore) {
                         Score currentScore = getCurrentScore();
                         // TODO: summonSick score?
@@ -249,7 +249,7 @@ public class SimulationController {
                 if (currentHostAndTarget != null) {
                     GameStateEvaluator evaluator = new GameStateEvaluator();
                     Player player = sa.getActivatingPlayer();
-                    int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2], null);
+                    int cardScore = evaluator.evalCard(player.getGame(), player, (Card) hostAndTarget[2]);
                     effectCache.add(new CachedEffect(hostAndTarget[0], sa, hostAndTarget[1], cardScore, scoreDelta));
                     cached = " (added to cache)";
                 }

@@ -5,6 +5,7 @@ import java.util.List;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
+import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -22,7 +23,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         addCard("Runeclaw Bear", opponent);
         opponent.setLife(2, null);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
@@ -43,7 +44,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         Card bearCard = addCard("Runeclaw Bear", opponent);
         opponent.setLife(20, null);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
@@ -91,7 +92,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         Player opponent = game.getPlayers().get(0);
         addCard("Runeclaw Bear", opponent);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         // Expected: All creatures get -2/-2 to kill the bear.
@@ -110,7 +111,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         addCard("Swamp", p);
         Card spell = addCardToZone("Dromar's Charm", p, ZoneType.Hand);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         // Expected: Gain 5 life, since other modes aren't helpful.
@@ -134,7 +135,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         addCard("Runeclaw Bear", opponent);
         opponent.setLife(20, null);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         // Expected: 2x 1 damage to each creature, 1x 2 damage to each opponent.
@@ -162,7 +163,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         addCard("Runeclaw Bear", opponent);
         opponent.setLife(6, null);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         // Expected: 3x 2 damage to each opponent.
@@ -188,7 +189,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         Card men = addCard("Flying Men", opponent);
         opponent.setLife(20, null);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
@@ -291,5 +292,97 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         assertEquals(2, plan.getDecisions().size());
         String saDesc = plan.getDecisions().get(1).saRef.toString();
         assertTrue(saDesc, saDesc.startsWith("Lightning Bolt deals 3 damage to target creature or player."));
+    }
+    
+    public void testPlayingPumpSpellsAfterBlocks() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        opponent.setLife(2, null);
+        
+        Card blocker = addCard("Fugitive Wizard", opponent);
+        Card attacker1 = addCard("Dwarven Trader", p);
+        attacker1.setSickness(false);
+        Card attacker2 = addCard("Kird Ape", p);
+        attacker2.setSickness(false);
+        addCard("Mountain", p);
+        addCardToZone("Brute Force", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        assertNull(picker.chooseSpellAbilityToPlay(null));
+
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_BEGIN, p);
+        game.getAction().checkStateEffects(true);
+        assertNull(picker.chooseSpellAbilityToPlay(null));
+
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_ATTACKERS, p);
+        Combat combat = new Combat(p);
+        combat.addAttacker(attacker1, opponent);
+        combat.addAttacker(attacker2, opponent);
+        game.getPhaseHandler().setCombat(combat);
+        game.getAction().checkStateEffects(true);        
+        assertNull(picker.chooseSpellAbilityToPlay(null));
+
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_BLOCKERS, p, false);
+        game.getAction().checkStateEffects(true);
+        combat.addBlocker(attacker1, blocker);
+        combat.getBandOfAttacker(attacker1).setBlocked(true);
+        combat.getBandOfAttacker(attacker2).setBlocked(false);
+        combat.orderBlockersForDamageAssignment();
+        combat.orderAttackersForDamageAssignment();
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        assertNotNull(sa);
+        assertEquals("Target creature gets +3/+3 until end of turn.", sa.toString());
+        assertEquals(attacker2, sa.getTargetCard());
+    }
+    
+    public void testPlayingSorceryPumpSpellsBeforeBlocks() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        opponent.setLife(2, null);
+
+        addCard("Fugitive Wizard", opponent);
+        Card attacker1 = addCard("Dwarven Trader", p);
+        attacker1.setSickness(false);
+        Card attacker2 = addCard("Kird Ape", p);
+        attacker2.setSickness(false);
+        addCard("Mountain", p);
+        Card furor = addCardToZone("Furor of the Bitten", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        assertNotNull(sa);
+        assertEquals(furor.getSpellAbilities().get(0), sa);
+        assertEquals(attacker1, sa.getTargetCard());
+    }
+
+    public void testPlayingRemovalBeforeBlocks() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        opponent.setLife(2, null);
+
+        Card blocker = addCard("Fugitive Wizard", opponent);
+        Card attacker1 = addCard("Dwarven Trader", p);
+        attacker1.setSickness(false);
+        addCard("Swamp", p);
+        addCard("Swamp", p);
+        addCardToZone("Doom Blade", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        assertNotNull(sa);
+        assertEquals("Destroy target nonblack creature.", sa.toString());
+        assertEquals(blocker, sa.getTargetCard());
     }
 }

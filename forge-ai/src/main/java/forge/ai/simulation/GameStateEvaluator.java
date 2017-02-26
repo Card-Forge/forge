@@ -1,19 +1,16 @@
 package forge.ai.simulation;
 
-import forge.ai.AiAttackController;
 import forge.ai.CreatureEvaluator;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class GameStateEvaluator {
     private boolean debugging = false;
-    private boolean ignoreTempBoosts = false;
     private SimulationCreatureEvaluator eval = new SimulationCreatureEvaluator();
 
     public void setDebugging(boolean debugging) {
@@ -21,19 +18,25 @@ public class GameStateEvaluator {
     }
     
     private static void debugPrint(String s) {
-        //System.err.println(s);
         GameSimulator.debugPrint(s);
     }
     
-    private Combat simulateUpcomingCombatThisTurn(Game game) {
-        PhaseHandler handler = game.getPhaseHandler();
-        if (handler.getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
+    private static class CombatSimResult {
+        public GameCopier copier;
+        public Game gameCopy;
+    }
+    private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame) {
+        PhaseType phase = evalGame.getPhaseHandler().getPhase();
+        if (phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
             return null;
         }
-        AiAttackController aiAtk = new AiAttackController(handler.getPlayerTurn());
-        Combat combat = new Combat(handler.getPlayerTurn());
-        aiAtk.declareAttackers(combat);
-        return combat;
+        GameCopier copier = new GameCopier(evalGame);
+        Game gameCopy = copier.makeCopy();
+        gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE);
+        CombatSimResult result = new CombatSimResult();
+        result.copier = copier;
+        result.gameCopy = gameCopy;
+        return result;
     }
 
     private static String cardToString(Card c) {
@@ -44,13 +47,27 @@ public class GameStateEvaluator {
         return str;
     }
 
+    private Score getScoreForGameOver(Game game, Player aiPlayer) {
+        return game.getOutcome().getWinningPlayer() == aiPlayer ? new Score(Integer.MAX_VALUE) : new Score(Integer.MIN_VALUE);
+    }
+    
     public Score getScoreForGameState(Game game, Player aiPlayer) {
         if (game.isGameOver()) {
-            return game.getOutcome().getWinningPlayer() == aiPlayer ? new Score(Integer.MAX_VALUE) : new Score(Integer.MIN_VALUE);
+            return getScoreForGameOver(game, aiPlayer);
         }
         
-        Combat combat = simulateUpcomingCombatThisTurn(game);
+        CombatSimResult result = simulateUpcomingCombatThisTurn(game);
+        if (result != null) {
+            Player aiPlayerCopy = (Player) result.copier.find(aiPlayer);
+            if (result.gameCopy.isGameOver()) {
+                return getScoreForGameOver(result.gameCopy, aiPlayerCopy);
+            }
+            return getScoreForGameStateImpl(result.gameCopy, aiPlayerCopy);
+        }
+        return getScoreForGameStateImpl(game, aiPlayer);
+    }
 
+    private Score getScoreForGameStateImpl(Game game, Player aiPlayer) {
         int score = 0;
         // TODO: more than 2 players
         int myCards = 0;
@@ -85,7 +102,7 @@ public class GameStateEvaluator {
         int summonSickScore = score;
         PhaseType gamePhase = game.getPhaseHandler().getPhase();
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            int value = evalCard(game, aiPlayer, c, combat);
+            int value = evalCard(game, aiPlayer, c);
             int summonSickValue = value;
             // To make the AI hold-off on playing creatures before MAIN2 if they give no other benefits,
             // keep track of the score while treating summon sick creatures as having a value of 0.
@@ -111,20 +128,10 @@ public class GameStateEvaluator {
         return new Score(score, summonSickScore);
     }
     
-    public int evalCard(Game game, Player aiPlayer, Card c, Combat combat) {
+    public int evalCard(Game game, Player aiPlayer, Card c) {
         // TODO: These should be based on other considerations - e.g. in relation to opponents state.
         if (c.isCreature()) {
-            // Ignore temp boosts post combat, since it's a waste.
-            // TODO: Make this smarter. Right now, it only looks if the creature will attack - but
-            // does not consider things like blocks or the outcome of combat.
-            // Also, sometimes temp boosts post combat could be useful - e.g. if you then want to make your
-            // creature fight another, etc.
-            ignoreTempBoosts = true;
-            if (combat != null && combat.isAttacking(c)) {
-                ignoreTempBoosts = false;
-            }
-            int result = eval.evaluateCreature(c);
-            return result;
+            return eval.evaluateCreature(c);
         } else if (c.isLand()) {
             return 100;
         } else if (c.isEnchantingCard()) {
@@ -153,19 +160,13 @@ public class GameStateEvaluator {
 
         @Override
         protected int getEffectivePower(final Card c) {
-            if (ignoreTempBoosts) {
-                Card.StatBreakdown breakdown = c.getNetCombatDamageBreakdown();
-                return breakdown.getTotal() - breakdown.tempBoost;
-            }
-            return c.getNetCombatDamage();
+            Card.StatBreakdown breakdown = c.getNetCombatDamageBreakdown();
+            return breakdown.getTotal() - breakdown.tempBoost;
         }
         @Override
         protected int getEffectiveToughness(final Card c) {
-            if (ignoreTempBoosts) {
-                Card.StatBreakdown breakdown = c.getNetToughnessBreakdown();
-                return breakdown.getTotal() - breakdown.tempBoost;
-            }
-            return c.getNetToughness();
+            Card.StatBreakdown breakdown = c.getNetToughnessBreakdown();
+            return breakdown.getTotal() - breakdown.tempBoost;
         }
     }
 

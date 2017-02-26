@@ -179,7 +179,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        assertEquals(20, p.getOpponent().getLife());
+        assertEquals(20, game.getPlayers().get(0).getLife());
         
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();

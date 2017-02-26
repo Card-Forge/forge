@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,7 +58,22 @@ public class SpellAbilityPicker {
         print("---- choose ability  (phase = " + phaseStr + ")");
     }
     
-    private List<SpellAbility> getCandidateSpellsAndAbilities(List<SpellAbility> all) {
+    private List<SpellAbility> getCandidateSpellsAndAbilities() {
+        CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
+        CardCollection landsToPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
+        if (landsToPlay != null) {
+            HashMap<String, Card> landsDeDupe = new HashMap<String, Card>();
+            for (Card land : landsToPlay) {
+                Card previousLand = landsDeDupe.get(land.getName());
+                // Skip identical lands.
+                if (previousLand != null && previousLand.getZone() == land.getZone() && previousLand.getOwner() == land.getOwner()) {
+                    continue;
+                }
+                landsDeDupe.put(land.getName(), land);
+                all.add(new PlayLandAbility(land));
+            }
+        }
         List<SpellAbility> candidateSAs = ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player);
         int writeIndex = 0;
         for (int i = 0; i < candidateSAs.size(); i++) {
@@ -89,28 +105,12 @@ public class SpellAbilityPicker {
             return null;
         }
 
-        CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
-        List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
-        CardCollection landsToPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
-        if (landsToPlay != null) {
-            HashMap<String, Card> landsDeDupe = new HashMap<String, Card>();
-            for (Card land : landsToPlay) {
-                Card previousLand = landsDeDupe.get(land.getName());
-                // Skip identical lands.
-                if (previousLand != null && previousLand.getZone() == land.getZone() && previousLand.getOwner() == land.getOwner()) {
-                    continue;
-                }
-                landsDeDupe.put(land.getName(), land);
-                all.add(new PlayLandAbility(land));
-            }
-        }
-
         Score origGameScore = new GameStateEvaluator().getScoreForGameState(game, player);
-        List<SpellAbility> candidateSAs = getCandidateSpellsAndAbilities(all);
+        List<SpellAbility> candidateSAs = getCandidateSpellsAndAbilities();
         if (controller != null) {
             // This is a recursion during a higher-level simulation. Just return the head of the best
             // sequence directly, no need to create a Plan object.
-            return chooseSpellAbilityToPlayImpl(controller, candidateSAs, origGameScore);
+            return chooseSpellAbilityToPlayImpl(controller, candidateSAs, origGameScore, null);
         }
 
         printPhaseInfo();
@@ -130,31 +130,81 @@ public class SpellAbilityPicker {
         return sa;
     }
 
-    private void createNewPlan(Score origGameScore, List<SpellAbility> candidateSAs) {
-        plan = null;
+    private Plan formulatePlanWithPhase(Score origGameScore, List<SpellAbility> candidateSAs, PhaseType phase) {
         SimulationController controller = new SimulationController(origGameScore);
-        SpellAbility sa = chooseSpellAbilityToPlayImpl(controller, candidateSAs, origGameScore);
-        if (sa == null) {
-            print("No good plan at this time");
-            return;
+        SpellAbility sa = chooseSpellAbilityToPlayImpl(controller, candidateSAs, origGameScore, phase);
+        if (sa != null) {
+            return controller.getBestPlan();
         }
+        return null;
+    }
 
-        plan = controller.getBestPlan();
-        print("New plan with score " + controller.getBestScore() + ":");
+    private void printPlan(Plan plan, String intro) {
+        if (plan == null) {
+            print(intro + ": no plan!");
+        }
+        print(intro +" plan with score " + plan.getFinalScore() + ":");
         int i = 0;
         for (Plan.Decision d : plan.getDecisions()) {
             print(++i + ". " + d);
         }
     }
 
-    private SpellAbility chooseSpellAbilityToPlayImpl(SimulationController controller, List<SpellAbility> candidateSAs, Score origGameScore) {
+    private static boolean isSorcerySpeed(SpellAbility sa) {
+        // TODO: Can we use the actual rules engine for this instead of trying to do the logic ourselves?
+        if (sa instanceof PlayLandAbility) {
+            return false;
+        }
+        if (sa.isSpell()) {
+            return !sa.getHostCard().isInstant() && !sa.getHostCard().hasKeyword("Flash");
+        }
+        if (sa.getRestrictions().isPwAbility()) {
+            return !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed.");
+        }
+        return sa.isAbility() && sa.getRestrictions().isSorcerySpeed();
+    }
+
+    private void createNewPlan(Score origGameScore, List<SpellAbility> candidateSAs) {
+        plan = null;
+
+        Plan bestPlan = formulatePlanWithPhase(origGameScore, candidateSAs, null);
+        if (bestPlan == null) {
+            print("No good plan at this time");
+            return;
+        }
+
+        PhaseType currentPhase = game.getPhaseHandler().getPhase();
+        if (currentPhase.isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            List<SpellAbility> candidateSAs2 = new ArrayList<SpellAbility>();
+            for (SpellAbility sa : candidateSAs) {
+                if (!isSorcerySpeed(sa)) {
+                    System.err.println("Not sorcery: " + sa);
+                    candidateSAs2.add(sa);
+                }
+            }
+            if (!candidateSAs2.isEmpty()) {
+                System.err.println("Formula plan with phase bloom");
+                Plan afterBlockersPlan = formulatePlanWithPhase(origGameScore, candidateSAs2, PhaseType.COMBAT_DECLARE_BLOCKERS);
+                if (afterBlockersPlan != null && afterBlockersPlan.getFinalScore().value >= bestPlan.getFinalScore().value) {
+                    printPlan(afterBlockersPlan, "After blockers");
+                    print("Deciding to wait until after declare blockers.");
+                    return;
+                }
+            }
+        }
+
+        printPlan(bestPlan, "Current phase (" + currentPhase + ")");
+        plan = bestPlan;
+    }
+
+    private SpellAbility chooseSpellAbilityToPlayImpl(SimulationController controller, List<SpellAbility> candidateSAs, Score origGameScore, PhaseType phase) {
         long startTime = System.currentTimeMillis();
 
         SpellAbility bestSa = null;
         Score bestSaValue = origGameScore;
         print("Evaluating... (orig score = " + origGameScore +  ")");
         for (int i = 0; i < candidateSAs.size(); i++) {
-            Score value = evaluateSa(controller, candidateSAs, i);
+            Score value = evaluateSa(controller, phase, candidateSAs, i);
             if (value.value > bestSaValue.value) {
                 bestSaValue = value;
                 bestSa = candidateSAs.get(i);
@@ -193,6 +243,11 @@ public class SpellAbilityPicker {
     private SpellAbility getPlannedSpellAbility(Score origGameScore, List<SpellAbility> availableSAs) {
         if (!hasActivePlan()) {
             plan = null;
+            return null;
+        }
+        PhaseType startPhase = plan.getStartPhase();
+        if (startPhase != null && game.getPhaseHandler().getPhase().isBefore(startPhase)) {
+            print("Waiting until phase " + startPhase + " to proceed with the plan.");
             return null;
         }
         Plan.Decision decision = plan.selectNextDecision();
@@ -308,7 +363,7 @@ public class SpellAbilityPicker {
         return AiPlayDecision.WillPlay;
     }
 
-    private Score evaluateSa(final SimulationController controller, List<SpellAbility> saList, int saIndex) {
+    private Score evaluateSa(final SimulationController controller, PhaseType phase, List<SpellAbility> saList, int saIndex) {
         controller.evaluateSpellAbility(saList, saIndex);
         SpellAbility sa = saList.get(saIndex);
 
@@ -316,7 +371,7 @@ public class SpellAbilityPicker {
         final SpellAbilityChoicesIterator choicesIterator = new SpellAbilityChoicesIterator(controller);
         Score lastScore = null;
         do {
-            GameSimulator simulator = new GameSimulator(controller, game, player);
+            GameSimulator simulator = new GameSimulator(controller, game, player, phase);
             simulator.setInterceptor(choicesIterator);
             lastScore = simulator.simulateSpellAbility(sa);
             if (lastScore.value > bestScore.value) {

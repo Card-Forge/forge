@@ -889,8 +889,6 @@ public class PhaseHandler implements java.io.Serializable {
         // don't even offer priority, because it's untap of 1st turn now
         givePriorityToPlayer = false;
 
-        final Set<Card> allAffectedCards = new HashSet<Card>();
-
         // MAIN GAME LOOP
         while (!game.isGameOver()) {
             if (givePriorityToPlayer) {
@@ -903,17 +901,9 @@ public class PhaseHandler implements java.io.Serializable {
 
                 int loopCount = 0;
                 do {
-                    do {
-                        // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
-                        game.getAction().checkStateEffects(false, allAffectedCards);
-                        if (game.isGameOver()) {
-                            return; // state-based effects check could lead to game over
-                        }
-                    } while (game.getStack().addAllTriggeredAbilitiesToStack()); //loop so long as something was added to stack
-
-                    if (!allAffectedCards.isEmpty()) {
-                        game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
-                        allAffectedCards.clear();
+                    if (checkStateBasedEffects()) {
+                        // state-based effects check could lead to game over
+                        return;
                     }
 
                     if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
@@ -996,9 +986,39 @@ public class PhaseHandler implements java.io.Serializable {
         }
     }
 
+    private boolean checkStateBasedEffects() {
+        final Set<Card> allAffectedCards = new HashSet<Card>();
+        do {
+            // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
+            game.getAction().checkStateEffects(false, allAffectedCards);
+            if (game.isGameOver()) {
+                return true; // state-based effects check could lead to game over
+            }
+        } while (game.getStack().addAllTriggeredAbilitiesToStack()); //loop so long as something was added to stack
+
+        if (!allAffectedCards.isEmpty()) {
+            game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
+            allAffectedCards.clear();
+        }
+        return false;
+    }
+
+    public final boolean devAdvanceToPhase(PhaseType targetPhase) {
+        while (phase.isBefore(targetPhase)) {
+            if (checkStateBasedEffects()) {
+                return false;
+            }
+            onPhaseEnd();
+            advanceToNextPhase();
+            onPhaseBegin();
+        }
+        checkStateBasedEffects();
+        return true;
+    }
+
     // this is a hack for the setup game state mode, do not use outside of devSetupGameState code
     // as it avoids calling any of the phase effects that may be necessary in a less enforced context
-    public final void devModeSet(final PhaseType phase0, final Player player0) {
+    public final void devModeSet(final PhaseType phase0, final Player player0, boolean endCombat) {
         if (phase0 != null) {
             setPhase(phase0);
         }
@@ -1007,7 +1027,12 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         game.fireEvent(new GameEventTurnPhase(playerTurn, phase, ""));
-        endCombat(); // not-null can be created only when declare attackers phase begins
+        if (endCombat) {
+            endCombat(); // not-null can be created only when declare attackers phase begins
+        }
+    }
+    public final void devModeSet(final PhaseType phase0, final Player player0) {
+        devModeSet(phase0, player0, true);
     }
 
     public final void endTurnByEffect() {

@@ -19,6 +19,7 @@ package forge.game.combat;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -91,19 +92,23 @@ public class Combat {
             attackableEntries.add(map.map(entry));
         }
 
+        HashMap<AttackingBand, AttackingBand> bandsMap = new HashMap<>();
         for (Entry<GameEntity, AttackingBand> entry : combat.attackedByBands.entries()) {
+            AttackingBand origBand = entry.getValue();
             ArrayList<Card> attackers = new ArrayList<Card>();
-            for (Card c : entry.getValue().getAttackers()) {
+            for (Card c : origBand.getAttackers()) {
                 attackers.add(map.map(c));
             }
-            attackedByBands.put(map.map(entry.getKey()), new AttackingBand(attackers));
+            AttackingBand newBand = new AttackingBand(attackers);
+            Boolean blocked = entry.getValue().isBlocked();
+            if (blocked != null) {
+                newBand.setBlocked(blocked);
+            }
+            bandsMap.put(origBand, newBand);
+            attackedByBands.put(map.map(entry.getKey()), newBand);
         }
         for (Entry<AttackingBand, Card> entry : combat.blockedBands.entries()) {
-            ArrayList<Card> attackers = new ArrayList<Card>();
-            for (Card c : entry.getKey().getAttackers()) {
-                attackers.add(map.map(c));
-            }
-            blockedBands.put(new AttackingBand(attackers), map.map(entry.getValue()));
+            blockedBands.put(bandsMap.get(entry.getKey()), map.map(entry.getValue()));
         }
         for (Entry<Card, Integer> entry : combat.defendingDamageMap.entrySet()) {
             defendingDamageMap.put(map.map(entry.getKey()), entry.getValue());
@@ -123,6 +128,28 @@ public class Combat {
         attackConstraints = new AttackConstraints(this);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (GameEntity defender : attackableEntries) {
+            CardCollection attackers = getAttackersOf(defender);
+            if (attackers.isEmpty()) {
+                continue;
+            }
+            sb.append(defender);
+            sb.append(" is being attacked by:\n");
+            for (Card attacker : attackers) {
+                sb.append("  ").append(attacker).append("\n");
+                for (Card blocker : getBlockers(attacker)) {
+                    sb.append("  ... blocked by: ").append(blocker).append("\n");
+                }
+            }
+        }
+        if (sb.length() == 0) {
+            return "<no attacks>";
+        }
+        return sb.toString();
+    }
 
     public void endCombat() {
         //backup attackers and blockers

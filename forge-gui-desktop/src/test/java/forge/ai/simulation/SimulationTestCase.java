@@ -66,7 +66,7 @@ public class SimulationTestCase extends TestCase {
             public boolean shouldRecurse() {
                 return false;
             }
-        }, game, p);
+        }, game, p, null);
     }
 
     protected Card findCardWithName(Game game, String name) {

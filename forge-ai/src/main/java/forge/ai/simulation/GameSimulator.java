@@ -12,6 +12,7 @@ import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
@@ -28,10 +29,10 @@ public class GameSimulator {
     private Score origScore;
     private SpellAbilityChoicesIterator interceptor;
 
-    public GameSimulator(final SimulationController controller, final Game origGame, final Player origAiPlayer) {
+    public GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer, PhaseType advanceToPhase) {
         this.controller = controller;
         copier = new GameCopier(origGame);
-        simGame = copier.makeCopy();
+        simGame = copier.makeCopy(advanceToPhase);
 
         aiPlayer = (Player) copier.find(origAiPlayer);
         eval = new GameStateEvaluator();
@@ -42,20 +43,9 @@ public class GameSimulator {
         debugPrint = false;
         origScore = eval.getScoreForGameState(origGame, origAiPlayer);
 
-        eval.setDebugging(true);
-        List<String> simLines = new ArrayList<String>();
-        debugLines = simLines;
-        Score simScore = eval.getScoreForGameState(simGame, aiPlayer);
-        if (!simScore.equals(origScore)) {
-            // Re-eval orig with debug printing.
-            origLines = new ArrayList<String>();
-            debugLines = origLines;
-            eval.getScoreForGameState(origGame, origAiPlayer);
-            // Print debug info.
-            printDiff(origLines, simLines);
-            throw new RuntimeException("Game copy error. See diff output above for details.");
+        if (advanceToPhase == null) {
+            ensureGameCopyScoreMatches(origGame, origAiPlayer);
         }
-        eval.setDebugging(false);
 
         // If the stack on the original game is not empty, resolve it
         // first and get the updated eval score, since this is what we'll
@@ -71,6 +61,23 @@ public class GameSimulator {
 
         debugPrint = false;
         debugLines = null;
+    }
+
+    private void ensureGameCopyScoreMatches(Game origGame, Player origAiPlayer) {
+        eval.setDebugging(true);
+        List<String> simLines = new ArrayList<String>();
+        debugLines = simLines;
+        Score simScore = eval.getScoreForGameState(simGame, aiPlayer);
+        if (!simScore.equals(origScore)) {
+            // Re-eval orig with debug printing.
+            origLines = new ArrayList<String>();
+            debugLines = origLines;
+            eval.getScoreForGameState(origGame, origAiPlayer);
+            // Print debug info.
+            printDiff(origLines, simLines);
+            throw new RuntimeException("Game copy error. See diff output above for details.");
+        }
+        eval.setDebugging(false);
     }
 
     public void setInterceptor(SpellAbilityChoicesIterator interceptor) {
