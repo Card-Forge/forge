@@ -303,7 +303,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         Card blocker = addCard("Fugitive Wizard", opponent);
         Card attacker1 = addCard("Dwarven Trader", p);
         attacker1.setSickness(false);
-        Card attacker2 = addCard("Kird Ape", p);
+        Card attacker2 = addCard("Dwarven Trader", p);
         attacker2.setSickness(false);
         addCard("Mountain", p);
         addCardToZone("Brute Force", p, ZoneType.Hand);

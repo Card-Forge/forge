@@ -10,6 +10,7 @@ import forge.ai.ComputerUtilCard;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -115,6 +116,7 @@ public class PossibleTargetSelector {
             }
 
             Card c = (Card) o;
+            Combat combat = c.getGame().getCombat();
             for (Card existingTarget : validTargetsMap.get(c.getName())) {
                 // Note: Checks are ordered from cheapest to more expensive ones. For example, type equals()
                 // ends up calling toString() on the type object and is more expensive than the checks above it.
@@ -130,7 +132,25 @@ public class PossibleTargetSelector {
                 if (!getTypeString(existingTarget).equals(getTypeString(c))) {
                     continue;
                 }
-                if (c.isCreature() && getCreatureScore(c) != getCreatureScore(existingTarget)) {
+                if (c.isCreature()) {
+                    if (!existingTarget.isCreature()) {
+                        continue;
+                    }
+                    if (getCreatureScore(c) != getCreatureScore(existingTarget)) {
+                        continue;
+                    }
+                    if (combat != null) {
+                        if (combat.getDefenderByAttacker(c) != combat.getDefenderByAttacker(existingTarget)) {
+                            // Either attacking different entities or one is attacking and the other is not.
+                            continue;
+                        }
+                        
+                        if (combat.isBlocked(c) || combat.isBlocked(existingTarget) ||
+                            combat.isBlocking(c) || combat.isBlocking(existingTarget)) {
+                            // If either is blocked or blocking, consider them separately as well.
+                            continue;
+                        }
+                    }
                     continue;
                 }
                 return true;
