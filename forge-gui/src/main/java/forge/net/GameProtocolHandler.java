@@ -56,7 +56,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                         } catch (final IllegalAccessException | IllegalArgumentException e) {
                             System.err.println(String.format("Unknown protocol method %s with %d args", methodName, args == null ? 0 : args.length));
                         } catch (final InvocationTargetException e) {
-                            throw new RuntimeException(e);
+                            throw new RuntimeException(e.getTargetException());
                         }
                     } else {
                         Serializable reply = null;
@@ -71,7 +71,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                         } catch (final IllegalAccessException | IllegalArgumentException e) {
                             System.err.println(String.format("Unknown protocol method %s with %d args, replying with null", methodName, args == null ? 0 : args.length));
                         } catch (final InvocationTargetException e) {
-                            throw new RuntimeException(e);
+                            throw new RuntimeException(e.getTargetException());
                         }
                         getRemote(ctx).send(new ReplyEvent(event.getId(), reply));
                     }
