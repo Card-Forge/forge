@@ -94,3 +94,4 @@ EMN: 36 Boosters
 CN2: 36 Boosters
 KLD: 36 Boosters
 AER: 36 Boosters
+MM3: 24 Boosters
