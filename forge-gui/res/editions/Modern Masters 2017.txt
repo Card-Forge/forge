@@ -1,0 +1,260 @@
+[metadata]
+Name=Modern Masters 2017
+Code=MM3
+Date=2017-03-17
+MciCode=mm3
+Type=Reprint
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 RareMythic
+FoilChanceInBooster=100
+
+[cards]
+1 C Attended Knight
+2 U Banishing Stroke
+3 R Blade Splicer
+4 M Entreat the Angels
+5 C Eyes in the Skies
+6 U Flickerwisp
+7 C Gideon's Lawkeeper
+8 C Graceful Reprieve
+9 U Intangible Virtue
+10 C Kor Hookmaster
+11 C Kor Skyfisher
+12 U Lingering Souls
+13 M Linvala, Keeper of Silence
+14 C Lone Missionary
+15 U Master Splicer
+16 C Momentary Blink
+17 U Path to Exile
+18 C Pitfall Trap
+19 R Ranger of Eos
+20 R Restoration Angel
+21 C Rootborn Defenses
+22 R Seance
+23 C Sensor Splicer
+24 C Soul Warden
+25 R Stony Silence
+26 R Terminus
+27 U Urbis Protector
+28 C Wake the Reflections
+29 C Youthful Knight
+30 C Augur of Bolas
+31 U Azure Mage
+32 R Cackling Counterpart
+33 U Compulsive Research
+34 C Crippling Chill
+35 R Cyclonic Rift
+36 R Deadeye Navigator
+37 U Familiar's Ruse
+38 C Forbidden Alchemy
+39 C Ghostly Flicker
+40 R Gifts Ungiven
+41 C Grasp of Phantoms
+42 C Kraken Hatchling
+43 C Mist Raven
+44 C Mystical Teachings
+45 U Opportunity
+46 R Phantasmal Image
+47 C Rewind
+48 C Sea Gate Oracle
+49 U Serum Visions
+50 M Snapcaster Mage
+51 C Spell Pierce
+52 C Spire Monitor
+53 C Tandem Lookout
+54 M Temporal Mastery
+55 R Venser, Shaper Savant
+56 U Wall of Frost
+57 U Wing Splicer
+58 C Wingcrafter
+59 U Abyssal Specter
+60 C Bone Splinters
+61 U Corpse Connoisseur
+62 C Cower in Fear
+63 R Damnation
+64 R Death's Shadow
+65 C Delirium Skeins
+66 R Desecration Demon
+67 C Dregscape Zombie
+68 U Entomber Exarch
+69 R Extractor Demon
+70 C Falkenrath Noble
+71 C Gnawing Zombie
+72 M Griselbrand
+73 C Grisly Spectacle
+74 C Grixis Slavedriver
+75 U Inquisition of Kozilek
+76 M Liliana of the Veil
+77 R Mind Shatter
+78 C Mortician Beetle
+79 C Night Terrors
+80 C Ogre Jailbreaker
+81 C Pit Keeper
+82 C Recover
+83 U Seal of Doom
+84 R Sever the Bloodline
+85 U Unburial Rites
+86 C Vampire Aristocrat
+87 U Vampire Nighthawk
+88 U Ancient Grudge
+89 C Battle-Rattle Shaman
+90 R Blood Moon
+91 M Bonfire of the Damned
+92 C Chandra's Outrage
+93 C Dragon Fodder
+94 C Dynacharge
+95 U Goblin Assault
+96 R Goblin Guide
+97 C Hanweir Lancer
+98 R Hellrider
+99 C Madcap Skills
+100 C Magma Jet
+101 R Mizzium Mortars
+102 C Mogg Flunkies
+103 U Molten Rain
+104 C Mudbutton Torchrunner
+105 M Past in Flames
+106 U Pyrewild Shaman
+107 U Pyroclasm
+108 R Pyromancer Ascension
+109 C Rubblebelt Maaka
+110 C Scorched Rusalka
+111 C Scourge Devil
+112 U Skirsdag Cultist
+113 C Thunderous Wrath
+114 C Traitorous Instinct
+115 U Vithian Stinger
+116 R Zealous Conscripts
+117 U Arachnus Spinner
+118 C Arachnus Web
+119 C Avacyn's Pilgrim
+120 U Baloth Cage Trap
+121 R Call of the Herd
+122 M Craterhoof Behemoth
+123 C Death-Hood Cobra
+124 C Druid's Deliverance
+125 C Explore
+126 C Fists of Ironwood
+127 U Gaea's Anthem
+128 U Harmonize
+129 C Hungry Spriggan
+130 U Might of Old Krosa
+131 C Penumbra Spider
+132 R Primal Command
+133 C Revive
+134 R Scavenging Ooze
+135 C Seal of Primordium
+136 C Slaughterhorn
+137 C Slime Molding
+138 C Strength in Numbers
+139 R Summoning Trap
+140 C Sylvan Ranger
+141 M Tarmogoyf
+142 U Thornscape Battlemage
+143 R Thragtusk
+144 R Ulvenwald Tracker
+145 U Vital Splicer
+146 R Abrupt Decay
+147 R Advent of the Wurm
+148 R Aethermage's Touch
+149 U Agent of Masks
+150 C Agony Warp
+151 C Auger Spree
+152 U Bronzebeak Moa
+153 R Broodmate Dragon
+154 C Call of the Conclave
+155 U Carnage Gladiator
+156 C Centaur Healer
+157 C Coiling Oracle
+158 R Cruel Ultimatum
+159 C Deputy of Acquittals
+160 C Dinrova Horror
+161 M Domri Rade
+162 R Evil Twin
+163 R Falkenrath Aristocrat
+164 R Fiery Justice
+165 U Ghor-Clan Rampager
+166 C Goblin Electromancer
+167 U Golgari Germination
+168 C Golgari Rotwurm
+169 C Ground Assault
+170 U Gruul War Chant
+171 U Izzet Charm
+172 C Kathari Bomber
+173 U Moroii
+174 U Mystic Genesis
+175 R Niv-Mizzet, Dracogenius
+176 R Obzedat, Ghost Council
+177 M Olivia Voldaren
+178 C Pilfered Plans
+179 U Putrefy
+180 U Rhox War Monk
+181 U Sedraxis Specter
+182 R Simic Sky Swallower
+183 U Sin Collector
+184 C Skyknight Legionnaire
+185 U Soul Manipulation
+186 U Soul Ransom
+187 M Sphinx's Revelation
+188 C Spike Jester
+189 U Sprouting Thrinax
+190 R Stoic Angel
+191 U Sunhome Guildmage
+192 C Talon Trooper
+193 U Teleportal
+194 U Terminate
+195 U Thundersong Trumpeter
+196 U Tower Gargoyle
+197 U Unflinching Courage
+198 U Urban Evolution
+199 U Vanish into Memory
+200 M Voice of Resurgence
+201 U Wall of Denial
+202 U Wayfaring Temple
+203 U Woolly Thoctar
+204 R Zur the Enchanter
+205 C Aethertow
+206 R Boros Reckoner
+207 C Burning-Tree Emissary
+208 C Giantbaiting
+209 C Gift of Orzhova
+210 U Mistmeadow Witch
+211 C Sundering Growth
+212 U Tattermunge Witch
+213 U Torrent of Souls
+214 R Wort, the Raidmother
+215 U Azorius Signet
+216 R Basilisk Collar
+217 U Boros Signet
+218 R Damping Matrix
+219 U Dimir Signet
+220 U Golgari Signet
+221 R Grafdigger's Cage
+222 U Gruul Signet
+223 U Izzet Signet
+224 U Orzhov Signet
+225 U Rakdos Signet
+226 U Selesnya Signet
+227 U Simic Signet
+228 U Arcane Sanctum
+229 R Arid Mesa
+230 C Azorius Guildgate
+231 C Boros Guildgate
+232 M Cavern of Souls
+233 U Crumbling Necropolis
+234 C Dimir Guildgate
+235 C Golgari Guildgate
+236 C Gruul Guildgate
+237 C Izzet Guildgate
+238 U Jungle Shrine
+239 R Marsh Flats
+240 R Misty Rainforest
+241 C Orzhov Guildgate
+242 C Rakdos Guildgate
+243 U Savage Lands
+244 R Scalding Tarn
+245 U Seaside Citadel
+246 C Selesnya Guildgate
+247 C Shimmering Grotto
+248 C Simic Guildgate
+249 R Verdant Catacombs
