@@ -353,6 +353,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final Comparator<Card> compareByTimestamp() {
+        return new Comparator<Card>() {
+            @Override
+            public int compare(Card arg0, Card arg1) {
+                return Long.compare(arg0.getTimestamp(), arg1.getTimestamp());
+            }
+        };
+    }
+
     public static class Presets {
 
         /**
