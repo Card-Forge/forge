@@ -1268,7 +1268,7 @@ public class AiController {
 
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
         final Card source = sa.getHostCard();
-        final String logic = sa.getParam("AILogic");
+        final String logic = sa.getParamOrDefault("AILogic", "Max");
         if ("GainLife".equals(logic)) {
             if (player.getLife() < 5 || player.getCardsIn(ZoneType.Hand).size() >= player.getMaxHandSize()) {
                 return min;

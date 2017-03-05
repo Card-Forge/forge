@@ -102,6 +102,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
         final Player controller = sa.hasParam("EffectOwner") ? ownerEff : sa.getActivatingPlayer();
         final Card eff = new Card(game.nextCardId(), game);
+        eff.setTimestamp(game.getNextTimestamp());
         eff.setName(name);
         // if name includes emplem then it should be one
         eff.addType(name.endsWith("emblem") ? "Emblem" : "Effect");

@@ -9,6 +9,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
+import java.util.Map;
+
 public class VoteAi extends SpellAbilityAi {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
@@ -40,5 +42,13 @@ public class VoteAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         return true;
+    }
+
+    @Override
+    public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
+        if (sa.getActivatingPlayer().isOpponentOf(player)) {
+            return min;
+        }
+        return max;
     }
 }

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import com.google.common.base.Predicate;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -70,10 +71,48 @@ public class VoteEffect extends SpellAbilityEffect {
         }
         ListMultimap<Object, Player> votes = ArrayListMultimap.create();
 
+        Player voter = null;
+
+        List<Player> voters = game.getPlayers().filter(new Predicate<Player>() {
+            @Override
+            public boolean apply(Player input) {
+                return input.hasKeyword("You choose how each player votes this turn.");
+            }
+        });
+
+        if (voters.size() > 1) {
+            long latestTimestamp = -1;
+            for(Player p : voters) {
+                List<Card> illusions = CardLists.filter(p.getCardsIn(ZoneType.Command), new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card input) {
+                        return input.getName().equals("Illusion of Choice Effect");
+                    }
+                });
+                for(Card illusion : illusions) {
+                    if (illusion.getTimestamp() > latestTimestamp) {
+                        latestTimestamp = illusion.getTimestamp();
+                        voter = p;
+                    }
+                }
+            }
+        } else if (voters.size() == 1) {
+            voter = voters.get(0);
+        }
+
         for (final Player p : tgtPlayers) {
             int voteAmount = p.getKeywords().getAmount("You get an additional vote.") + 1;
+            int optionalVotes = p.getKeywords().getAmount("You may vote an additional time.");
+            voteAmount += p.getController().chooseNumber(sa, "How many additional votes do you want?", 0, optionalVotes);
+
             for (int i = 0; i < voteAmount; i++) {
-                final Object result = p.getController().vote(sa, host + "Vote:", voteType, votes);
+                Object result;
+                if (voter == null) {
+                    result = p.getController().vote(sa, host + "Vote:", voteType, votes);
+                } else {
+                    result = voter.getController().vote(sa, host + "Vote:", voteType, votes);
+                }
+
                 votes.put(result, p);
                 host.getGame().getAction().nofityOfValue(sa, p, result + "\r\nCurrent Votes:" + votes, p);
             }
