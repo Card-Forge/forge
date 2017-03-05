@@ -85,6 +85,15 @@ public final class PlayerPredicates {
         };
     }
     
+    public static final Predicate<Player> hasKeyword(final String keyword) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return p.hasKeyword(keyword);
+            }
+        };
+    }
+
     public static final Comparator<Player> compareByZoneSize(final ZoneType zone) {
         return new Comparator<Player>() {
             @Override
