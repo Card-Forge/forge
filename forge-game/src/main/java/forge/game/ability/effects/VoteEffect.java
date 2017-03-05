@@ -1,17 +1,17 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-import com.google.common.base.Predicate;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -19,7 +19,10 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -49,7 +52,7 @@ public class VoteEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-        final List<Object> voteType = new ArrayList<Object>();
+        final List<Object> voteType = Lists.newArrayList();
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
@@ -73,29 +76,11 @@ public class VoteEffect extends SpellAbilityEffect {
 
         Player voter = null;
 
-        List<Player> voters = game.getPlayers().filter(new Predicate<Player>() {
-            @Override
-            public boolean apply(Player input) {
-                return input.hasKeyword("You choose how each player votes this turn.");
-            }
-        });
+        PlayerCollection voters = game.getPlayers().filter(PlayerPredicates.hasKeyword("You choose how each player votes this turn."));
 
         if (voters.size() > 1) {
-            long latestTimestamp = -1;
-            for(Player p : voters) {
-                List<Card> illusions = CardLists.filter(p.getCardsIn(ZoneType.Command), new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card input) {
-                        return input.getName().equals("Illusion of Choice Effect");
-                    }
-                });
-                for(Card illusion : illusions) {
-                    if (illusion.getTimestamp() > latestTimestamp) {
-                        latestTimestamp = illusion.getTimestamp();
-                        voter = p;
-                    }
-                }
-            }
+            List<Card> illusions = CardLists.filter(voters.getCardsIn(ZoneType.Command), CardPredicates.nameEquals("Illusion of Choice Effect"));
+            voter = Collections.max(illusions, CardPredicates.compareByTimestamp()).getController();
         } else if (voters.size() == 1) {
             voter = voters.get(0);
         }
@@ -104,21 +89,17 @@ public class VoteEffect extends SpellAbilityEffect {
             int voteAmount = p.getKeywords().getAmount("You get an additional vote.") + 1;
             int optionalVotes = p.getKeywords().getAmount("You may vote an additional time.");
             voteAmount += p.getController().chooseNumber(sa, "How many additional votes do you want?", 0, optionalVotes);
+            Player realVoter = voter == null ? p : voter;
 
             for (int i = 0; i < voteAmount; i++) {
-                Object result;
-                if (voter == null) {
-                    result = p.getController().vote(sa, host + "Vote:", voteType, votes);
-                } else {
-                    result = voter.getController().vote(sa, host + "Vote:", voteType, votes);
-                }
+                Object result = realVoter.getController().vote(sa, host + "Vote:", voteType, votes);
 
                 votes.put(result, p);
                 host.getGame().getAction().nofityOfValue(sa, p, result + "\r\nCurrent Votes:" + votes, p);
             }
         }
         
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("AllVotes", votes);
         game.getTriggerHandler().runTrigger(TriggerType.Vote, runParams, false);
 
