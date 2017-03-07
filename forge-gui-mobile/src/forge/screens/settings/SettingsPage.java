@@ -122,6 +122,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Spell Description in Payment Prompt",
                 "When enabled, detailed spell/ability descriptions are shown when choosing targets and paying costs."),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
+                "Show Storm Count in Prompt Panel",
+                "When enabled, displays the current storm count in the prompt panel."),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER,
                 "Preselect Last Order of Abilities",
                 "When enabled, preselects the last defined simultaneous ability order in the ordering dialog."),

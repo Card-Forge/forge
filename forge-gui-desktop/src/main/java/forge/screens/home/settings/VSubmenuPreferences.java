@@ -89,6 +89,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
     private final JCheckBox cbStackCreatures = new OptionsCheckBox("Stack Creatures");
     private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox("Filter Lands by Color in Activated Abilities");
+    private final JCheckBox cbShowStormCount = new OptionsCheckBox("Show Storm Count in Prompt Pane");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -172,6 +173,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbDetailedPaymentDesc, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled, detailed spell/ability descriptions are shown when choosing targets and paying costs."), regularConstraints);
+
+        pnlPrefs.add(cbShowStormCount, regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, displays the current storm count in the prompt pane."), regularConstraints);
 
         pnlPrefs.add(cbPreselectPrevAbOrder, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled, preselects the last defined simultaneous ability order in the ordering dialog."), regularConstraints);
@@ -633,6 +637,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbDetailedPaymentDesc() {
         return cbDetailedPaymentDesc;
+    }
+
+    public final JCheckBox getCbShowStormCount() {
+        return cbShowStormCount;
     }
 
     public final JCheckBox getCbPreselectPrevAbOrder() {

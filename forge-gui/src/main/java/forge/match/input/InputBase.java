@@ -27,7 +27,9 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
 
 /**
@@ -135,9 +137,15 @@ public abstract class InputBase implements java.io.Serializable, Input {
         sb.append("Phase: ").append(ph.getPhase().nameForUi).append("\n");
         sb.append("Stack: ");
         if (!game.getStack().isEmpty()) {
-            sb.append(game.getStack().size()).append(" to Resolve.");
+            sb.append(game.getStack().size()).append(" to Resolve.\n");
         } else {
-            sb.append("Empty");
+            sb.append("Empty\n");
+        }
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_SHOW_STORM_COUNT_IN_PROMPT)) {
+            int stormCount = game.getView().getStormCount();
+            if (stormCount > 0) {
+                sb.append("Storm Count: ").append(stormCount).append("\n");
+            }
         }
         return sb.toString();
     }
