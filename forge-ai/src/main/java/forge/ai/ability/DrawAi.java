@@ -314,7 +314,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
             }
             
-            boolean aiTarget = ai.canBeTargetedBy(sa);
+            boolean aiTarget = sa.canTarget(ai);
             // checks what the ai prevent from casting it on itself
             // if spell is not mandatory
             if (aiTarget && !ai.cantLose()) {
