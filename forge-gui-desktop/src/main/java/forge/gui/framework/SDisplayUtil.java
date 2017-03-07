@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import forge.FThreads;
+import forge.toolbox.FButton;
 import forge.view.FFrame;
 
 /**
@@ -108,12 +109,17 @@ public class SDisplayUtil {
                     dc.setSelected(tab0);
                 }
                 // set focus back to previous owner, if any
+                // if (null != c  &&  c instanceof FButton) {  //pfps UGLY but maybe necessary (probably not)
                 if (null != c) {
                     c.requestFocusInWindow();
                 }
             }
         };
-        FThreads.invokeInEdtLater(showTabRoutine);
+        if ( FThreads.isGuiThread() ) { //pfps run this now whether in EDT or not so that it doesn't clobber later stuff
+        	FThreads.invokeInEdtNowOrLater(showTabRoutine);
+        } else {
+        	FThreads.invokeInEdtAndWait(showTabRoutine);
+        }
     }
 
     public static GraphicsDevice getGraphicsDevice(final Point point) {
