@@ -137,14 +137,14 @@ public abstract class InputBase implements java.io.Serializable, Input {
         sb.append("Phase: ").append(ph.getPhase().nameForUi).append("\n");
         sb.append("Stack: ");
         if (!game.getStack().isEmpty()) {
-            sb.append(game.getStack().size()).append(" to Resolve.\n");
+            sb.append(game.getStack().size()).append(" to Resolve.");
         } else {
-            sb.append("Empty\n");
+            sb.append("Empty");
         }
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_SHOW_STORM_COUNT_IN_PROMPT)) {
             int stormCount = game.getView().getStormCount();
             if (stormCount > 0) {
-                sb.append("Storm Count: ").append(stormCount).append("\n");
+                sb.append("\n").append("Storm Count: ").append(stormCount).append("\n");
             }
         }
         return sb.toString();
