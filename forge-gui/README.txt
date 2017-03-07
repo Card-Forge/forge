@@ -1554,6 +1554,19 @@ Throttling-based targeting overlay optimization aimed at eliminating continuous 
 - AI updates - 
 Artificial intelligence received several improvements and fixes. The AI should now be able to use mana ritual cards (Dark Ritual and similar cards), sacrifice-and-upgrade cards (Birthing Pod, Eldritch Evolution, Natural Order). AI for some other card groups has been improved. The AI should no longer animate manlands with other manlands that were animated during the same turn, it should not instantly sac Bomat Courier, no longer kill itself by activating Smallpox and Pox at 1 life. The AI should now be able to use Spellskite correctly (at least when redirecting a single targeted ability). Some other improvements and modifications were made as well, hopefully making the AI more fun to play against.
 
+v1.5.60 Changes
+===============
+
+- New Quest World -
+There is a new quest world from Xyx based around the Portal set. Here's the description from the author: "It's 1997 and Magic has become the most elaborately complex game on the planet. In an attempt to make the game accessible to a wider audience, Wizards of the Coast releases Magic's first "Starter level" product: Portal, a set of simple cards with generic fantasy flavor. Fortunately, "simple" and "generic" do not automatically translate to "dumb" or "bland". Portal is quite elegant in its simplicity, visually distinct, with resonant top-down card design. It is both AI-friendly and beginner-friendly, but because it is not immediately apparent what all the good cards and decks are, it is also "experienced-player-friendly". If you ever want to introduce a friend to Magic and/or Forge, you could do a lot worse than send them on a Portal quest!"
+
+- New Cubes for Drafting -
+Many cubes were added for cube drafting in Booster Draft mode, many of them based on well known cubes available online. Many cubes were ported over from XMage and can thus now be played in Forge against the AI. Also, a 2017 MTGO Vintage cube was added, as contributed on the forum by zookham.
+
+- Experimental Feature: Repeatable Sequences (Macros) -
+A new feature for advanced users is available for testing. During a match, you can use the default shortcut shift-R to specify a sequence of actions (mouse clicks, essentially, in the desktop paradigm). Type the IDs of cards/players you'd like to interact with, in order. Then the default shortcut @ (shift-2) will execute your sequence, one "click" at a time, repeating when it reaches the end. This is useful for executing repeated combos, such as sacrificing a recurring creature to Goblin Bombardment. You can see the IDs of cards by turning them on under "Card Overlays" in the "Game" menu.
+Caveats: Only two-player Magic is supported at the moment (opponents beyond the first cannot yet be specified in an action sequence). Objects that aren't cards or players, such as the mana pool, also cannot yet be scripted (though this may be added in the future). Finally, the macro will dutifully execute your click sequence without regard to changes in game state (so if an opponent kills your specified creature mid-macro, and you continue to execute it, you will be essentially clicking on the creature in the graveyard, which may or may not be what you want).
+
 ---------------------------
 
 This product includes software developed by the Indiana University Extreme! Lab (http://www.extreme.indiana.edu/).
