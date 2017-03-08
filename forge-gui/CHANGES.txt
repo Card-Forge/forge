@@ -1,4 +1,4 @@
-Forge Beta: ??-??-2017 ver 1.5.60
+Forge Beta: ??-??-2017 ver 1.5.61
 
 
 16451 cards in total.
@@ -12,7 +12,7 @@ Release Notes
 There is a new option to visualize the current storm count in the prompt pane (in desktop Forge) or panel (in mobile Forge). It is disabled by default, but can be enabled in Forge preferences, please refer to the "Show Storm Count in Prompt Pane/Panel" option.
 
 - Bug fixes -
-As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the 1.5.59 Beta release run.
+As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the 1.5.60 Beta release run.
 
 ------------
 Known Issues
