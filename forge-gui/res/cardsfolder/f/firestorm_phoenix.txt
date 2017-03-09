@@ -1,6 +1,6 @@
 Name:Firestorm Phoenix
 ManaCost:4 R R
-Types:Creature Zombie
+Types:Creature Phoenix
 PT:3/2
 K:Flying
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ ToHand | Description$ If CARDNAME would die, return CARDNAME to its owner's hand instead. Until that player's next turn, that player plays with that card revealed in his or her hand and can't play it.
