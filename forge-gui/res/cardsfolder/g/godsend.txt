@@ -11,7 +11,7 @@ S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith Remembered+ExiledWithSource 
 
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigForget | Static$ True | Secondary$ True | TriggerDescription$ Forget all remembered cards.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget all remembered cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 
 K:Equip 3
