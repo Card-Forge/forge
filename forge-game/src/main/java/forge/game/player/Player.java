@@ -2804,6 +2804,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
+    public CardCollectionView getInboundTokens() {
+        return inboundTokens;
+    }
+    
     public void addInboundToken(Card c) {
         inboundTokens.add(c);
     }

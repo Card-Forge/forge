@@ -534,6 +534,7 @@ public class Game {
             visitor.visitAll(player.getZone(ZoneType.Battlefield).getCards(false));
             visitor.visitAll(player.getZone(ZoneType.Exile).getCards());
             visitor.visitAll(player.getZone(ZoneType.Command).getCards());
+            visitor.visitAll(player.getInboundTokens());
         }
         visitor.visitAll(getStackZone().getCards());
     }
