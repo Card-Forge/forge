@@ -1,4 +1,4 @@
-		Name:Luminarch Ascension
+Name:Luminarch Ascension
 ManaCost:1 W
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPut | OptionalDecider$ You | CheckSVar$ X | SVarCompare$ EQ0 | TriggerDescription$ At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on CARDNAME. (Damage causes loss of life.)
