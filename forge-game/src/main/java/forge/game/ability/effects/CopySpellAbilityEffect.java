@@ -70,7 +70,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             return;
         }
 
-        boolean mayChoseNewTargets = true;
+        boolean mayChooseNewTargets = true;
         List<SpellAbility> copies = new ArrayList<SpellAbility>();
         
         if (sa.hasParam("CopyMultipleSpells")) {
@@ -107,7 +107,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 for(Player p : targetedSA.getTargets().getTargetPlayers())
                     candidates.remove(p);
                 
-                mayChoseNewTargets = false;
+                mayChooseNewTargets = false;
                 for (GameEntity o : candidates) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
                     resetFirstTargetOnCopy(copy, o, targetedSA);
@@ -133,7 +133,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 valid = CardLists.getValidCards(valid, type.split(","), chosenSA.getActivatingPlayer(), chosenSA.getHostCard(), sa);
                 Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                 valid.remove(originalTarget);
-                mayChoseNewTargets = false;
+                mayChooseNewTargets = false;
                 for (final Card c : valid) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
                     resetFirstTargetOnCopy(copy, c, targetedSA);
@@ -155,7 +155,10 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         }
         
         for(SpellAbility copySA : copies) {
-            controller.getController().playSpellAbilityForFree(copySA, mayChoseNewTargets);
+            if (mayChooseNewTargets && copySA.usesTargeting()) {
+                copySA.getTargetRestrictions().setMandatory(true);
+            }
+            controller.getController().playSpellAbilityForFree(copySA, mayChooseNewTargets);
         }
     } // end resolve
 
