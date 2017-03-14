@@ -99,7 +99,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         assertEquals(spell.getSpellAbilities().get(0), sa);
-        assertEquals("Dromar's Charm -> Target creature gets -2/-2 until end of turn", picker.getPlan().getDecisions().get(0).modesStr);
+        assertEquals("Dromar's Charm -> Target creature gets -2/-2 until end of turn.", picker.getPlan().getDecisions().get(0).modesStr);
     }
 
     public void testModeSelection2() {
@@ -118,7 +118,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         assertEquals(spell.getSpellAbilities().get(0), sa);
-        assertEquals("Dromar's Charm -> You gain 5 life;", picker.getPlan().getDecisions().get(0).modesStr);
+        assertEquals("Dromar's Charm -> You gain 5 life.", picker.getPlan().getDecisions().get(0).modesStr);
     }
 
     public void testMultipleModes() {
