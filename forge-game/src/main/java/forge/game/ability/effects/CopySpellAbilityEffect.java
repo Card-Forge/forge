@@ -156,6 +156,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         
         for(SpellAbility copySA : copies) {
             if (mayChooseNewTargets && copySA.usesTargeting()) {
+                // TODO: ideally this should be implemented by way of allowing the player to cancel targeting
+                // but in that case preserving whatever target was specified for the original spell (since
+                // "changing targets" is the optional part).
                 copySA.getTargetRestrictions().setMandatory(true);
             }
             controller.getController().playSpellAbilityForFree(copySA, mayChooseNewTargets);
