@@ -1,4 +1,4 @@
-	Name:Imperial Mask
+Name:Imperial Mask
 ManaCost:4 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+nonToken | Execute$ TrigCopyPermanent | TriggerDescription$ When CARDNAME enters the battlefield, if it's not a token, each of your teammates creates a token that's a copy of CARDNAME.
