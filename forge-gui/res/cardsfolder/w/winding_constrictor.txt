@@ -2,11 +2,11 @@ Name:Winding Constrictor
 ManaCost:B G
 Types:Creature Snake
 PT:2/3
-R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Artifact.YouCtrl,Creature.YouCtrl | ReplaceWith$ AddOneMoreCounters | Description$ If one or more counters would be placed on an artifact or creature you control, that many of those counters plus one are placed on that permanent instead.
-R:Event$ AddCounter | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ AddOneMoreCounters | Description$ If you would get one or more counters, you get that many of those counters plus one instead.
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Artifact.YouCtrl,Creature.YouCtrl | ReplaceWith$ AddOneMoreCounters | Description$ If one or more counters would be placed on an artifact or creature you control, that many plus one of each of those kinds of counters are placed on that permanent instead.
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ AddOneMoreCounters | Description$ If you would get one or more counters, you get that many plus one of each of those kinds of counters instead.
 SVar:AddOneMoreCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ X | References$ X
 SVar:X:ReplaceCount$CounterNum/Plus.1
 SVar:RemRandomDeck:True
 DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winding_constrictor.jpg
-Oracle:If one or more counters would be placed on an artifact or creature you control, that many of those counters plus one are placed on that permanent instead.\nIf you would get one or more counters, you get that many of those counters plus one instead.
+Oracle:If one or more counters would be placed on an artifact or creature you control, that many plus one of each of those kinds of counters are placed on that permanent instead.\nIf you would get one or more counters, you get that many plus one of each of those kinds of counters instead.

@@ -4,13 +4,13 @@ Types:Planeswalker Garruk
 Loyalty:3
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_LE2_LOYALTY | Execute$ TrigTransform | TriggerDescription$ When CARDNAME has two or fewer loyalty counters on him, transform him.
 A:AB$ DealDamage | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DamageThis | Planeswalker$ True | SpellDescription$ CARDNAME deals 3 damage to target creature. That creature deals damage equal to its power to him.
-A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ g 2 2 wolf ISD | Planeswalker$ True | References$ Y | SpellDescription$ Put a 2/2 green Wolf creature token onto the battlefield.
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ g 2 2 wolf ISD | Planeswalker$ True | References$ Y | SpellDescription$ Create a 2/2 green Wolf creature token.
 SVar:DamageThis:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y | References$ Y
 SVar:Y:Targeted$CardPower
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruk_relentless.jpg
-Oracle:When Garruk Relentless has two or fewer loyalty counters on him, transform him.\n[0] Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him.\n[0] Put a 2/2 green Wolf creature token onto the battlefield.
+Oracle:When Garruk Relentless has two or fewer loyalty counters on him, transform him.\n[0] Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him.\n[0] Create a 2/2 green Wolf creature token.
 
 ALTERNATE
 
@@ -19,10 +19,10 @@ ManaCost:no cost
 Colors:green,black
 Types:Planeswalker Garruk
 Loyalty:3
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenName$ Wolf | TokenImage$ b 1 1 wolf |TokenColors$ Black | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Deathtouch | Planeswalker$ True | SpellDescription$ Put a 1/1 black Wolf creature token with deathtouch onto the battlefield.
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenName$ Wolf | TokenImage$ b 1 1 wolf |TokenColors$ Black | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Deathtouch | Planeswalker$ True | SpellDescription$ Create a 1/1 black Wolf creature token with deathtouch.
 A:AB$ Sacrifice | Cost$ SubCounter<1/LOYALTY> | Defined$ You | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBSearch | Planeswalker$ True | SpellDescription$ Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
 A:AB$ PumpAll | Cost$ SubCounter<3/LOYALTY> | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ X | NumDef$ X | Planeswalker$ True | Ultimate$ True | References$ X | SpellDescription$ Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruk_the_veil_cursed.jpg
-Oracle:[+1] Put a 1/1 black Wolf creature token with deathtouch onto the battlefield.\n[-1] Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.\n[-3] Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
+Oracle:[+1] Create a 1/1 black Wolf creature token with deathtouch.\n[-1] Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.\n[-3] Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.

@@ -2,7 +2,7 @@ Name:Clone Shell
 ManaCost:5
 Types:Artifact Creature Shapeshifter
 PT:2/2
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Imprint — When Clone Shell enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order.
 SVar:TrigDig:AB$ Dig | Cost$ 0  | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | Imprint$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFaceUp | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
 SVar:TrigFaceUp:AB$ SetState | Cost$ 0 | Defined$ Imprinted | SubAbility$ DBChangeZone | Mode$ TurnFace
@@ -10,4 +10,4 @@ SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destinat
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:SacMe:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clone_shell.jpg
-Oracle:Imprint - When Clone Shell enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order.\nWhen Clone Shell dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
+Oracle:Imprint — When Clone Shell enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order.\nWhen Clone Shell dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
