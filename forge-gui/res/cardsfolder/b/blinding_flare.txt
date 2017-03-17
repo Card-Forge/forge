@@ -6,4 +6,4 @@ A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | 
 SVar:MaxTargets:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_flare.jpg
-Oracle:Strive - Blinding Flare costs {R} more to cast for each target beyond the first.\nAny number of target creatures can't block this turn.
+Oracle:Strive — Blinding Flare costs {R} more to cast for each target beyond the first.\nAny number of target creatures can't block this turn.

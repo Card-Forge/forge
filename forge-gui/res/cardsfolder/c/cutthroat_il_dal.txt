@@ -2,7 +2,7 @@ Name:Cutthroat il-Dal
 ManaCost:3 B
 Types:Creature Human Rogue
 PT:4/1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Shadow | Condition$ Hellbent | Description$ Hellbent - CARDNAME has shadow as long as you have no cards in hand. (It can block or be blocked by only creatures with shadow.)
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Shadow | Condition$ Hellbent | Description$ Hellbent — CARDNAME has shadow as long as you have no cards in hand. (It can block or be blocked by only creatures with shadow.)
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cutthroat_il_dal.jpg
-Oracle:Hellbent - Cutthroat il-Dal has shadow as long as you have no cards in hand. (It can block or be blocked by only creatures with shadow.)
+Oracle:Hellbent — Cutthroat il-Dal has shadow as long as you have no cards in hand. (It can block or be blocked by only creatures with shadow.)

@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Creature Vampire
 PT:4/4
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ Dies | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +2/+2 and has "When CARDNAME dies, you lose 6 life."
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ Dies | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +2/+2 and has "When CARDNAME dies, you lose 6 life."
 SVar:Dies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you lose 6 life.
 SVar:TrigLose:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 6
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice it unless you exile a card from your graveyard.
@@ -11,4 +11,4 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | Tri
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_vampire.jpg
-Oracle:Flying\nWhenever Treacherous Vampire attacks or blocks, sacrifice it unless you exile a card from your graveyard.\nThreshold - As long as seven or more cards are in your graveyard, Treacherous Vampire gets +2/+2 and has "When Treacherous Vampire dies, you lose 6 life."
+Oracle:Flying\nWhenever Treacherous Vampire attacks or blocks, sacrifice it unless you exile a card from your graveyard.\nThreshold — As long as seven or more cards are in your graveyard, Treacherous Vampire gets +2/+2 and has "When Treacherous Vampire dies, you lose 6 life."

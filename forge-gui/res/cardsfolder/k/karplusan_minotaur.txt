@@ -9,4 +9,4 @@ T:Mode$ FlippedCoin | ValidPlayer$ You | ValidResult$ Lose | TriggerZones$ Battl
 SVar:TrigOppDmg:AB$ DealDamage | Cost$ 0 | NumDmg$ 1 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TargetingPlayer$ Opponent
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_minotaur.jpg
-Oracle:Cumulative upkeep-Flip a coin. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever you win a coin flip, Karplusan Minotaur deals 1 damage to target creature or player.\nWhenever you lose a coin flip, Karplusan Minotaur deals 1 damage to target creature or player of an opponent's choice.
+Oracle:Cumulative upkeep—Flip a coin. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever you win a coin flip, Karplusan Minotaur deals 1 damage to target creature or player.\nWhenever you lose a coin flip, Karplusan Minotaur deals 1 damage to target creature or player of an opponent's choice.

@@ -2,7 +2,7 @@ Name:Sacred Mesa
 ManaCost:2 W
 Types:Enchantment
 K:UpkeepCost:Sac<1/Pegasus>
-A:AB$ Token | Cost$ 1 W | TokenImage$ w 1 1 pegasus flying | TokenAmount$ 1 | TokenName$ Pegasus | TokenTypes$ Creature,Pegasus | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put a 1/1 white Pegasus creature token with flying onto the battlefield.
+A:AB$ Token | Cost$ 1 W | TokenImage$ w 1 1 pegasus flying | TokenAmount$ 1 | TokenName$ Pegasus | TokenTypes$ Creature,Pegasus | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Create a 1/1 white Pegasus creature token with flying.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_mesa.jpg
-Oracle:At the beginning of your upkeep, sacrifice Sacred Mesa unless you sacrifice a Pegasus.\n{1}{W}: Put a 1/1 white Pegasus creature token with flying onto the battlefield.
+Oracle:At the beginning of your upkeep, sacrifice Sacred Mesa unless you sacrifice a Pegasus.\n{1}{W}: Create a 1/1 white Pegasus creature token with flying.
