@@ -1596,7 +1596,7 @@ public class AiController {
     }
 
     // TODO move to more common place
-    private <T> List<T> filterList(List<T> input, Predicate<T> pred) {
+    private <T> List<T> filterList(List<T> input, Predicate<? super T> pred) {
         List<T> filtered = Lists.newArrayList(Iterables.filter(input, pred));
         input.removeAll(filtered);
         return filtered;

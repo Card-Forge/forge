@@ -398,17 +398,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         this.mayPlayOriginal = mayPlayOriginal;
     }
 
-    public String getParamOrDefault(String key, String defaultValue) {
-        return mapParams.containsKey(key) ? mapParams.get(key) : defaultValue;
-    }
-
-    public String getParam(String key) {
-        return mapParams.get(key);
-    }
-    public boolean hasParam(String key) {
-        return mapParams.containsKey(key);
-    }
-
     // If this is not null, then ability was made in a factory
     public ApiType getApi() {
         return api;
