@@ -40,6 +40,8 @@ import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.CardTraitBase;
+import forge.game.CardTraitPredicates;
 import forge.game.Direction;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -1607,6 +1609,10 @@ public class AiController {
         return filterList(input, SpellAbilityPredicates.isApi(type));
     }
 
+    private <T extends CardTraitBase> List<T> filterListByAiLogic(List<T> list, final String logic) {
+        return filterList(list, CardTraitPredicates.hasParam("AiLogic", logic));
+    }
+
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
         if (simPicker != null) {
             return simPicker.chooseModeForAbility(sa, min, num, allowRepeat);
@@ -1631,6 +1637,42 @@ public class AiController {
         }
         
         return true;
+    }
+
+    public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> list,
+            Map<String, Object> runParams) {
+        // no need to choose anything
+        if (list.size() <= 1) {
+            return Iterables.getFirst(list, null);
+        }
+
+        if (runParams.containsKey("Event")) {
+            // replace lifegain effects
+            if ("GainLife".equals(runParams.get("Event"))) {
+                List<ReplacementEffect> noGain = filterListByAiLogic(list, "NoLife");
+                List<ReplacementEffect> loseLife = filterListByAiLogic(list, "LoseLife");
+                List<ReplacementEffect> doubleLife = filterListByAiLogic(list, "DoubleLife");
+                List<ReplacementEffect> lichDraw = filterListByAiLogic(list, "LichDraw");
+
+                if (!noGain.isEmpty()) {
+                    // no lifegain is better than lose life
+                    return Iterables.getFirst(noGain, null);
+                } else if (!loseLife.isEmpty()) {
+                    // lose life before double life to prevent lose double
+                    return Iterables.getFirst(loseLife, null);
+                } else if (!lichDraw.isEmpty()) {
+                    // lich draw before double life to prevent to draw to much
+                    return Iterables.getFirst(lichDraw, null);
+                } else if (!doubleLife.isEmpty()) {
+                    // other than that, do double life
+                    return Iterables.getFirst(doubleLife, null);
+                }
+            }
+        }
+
+        // AI logic for choosing which replacement effect to apply
+        // happens here.
+        return Iterables.getFirst(list, null);
     }
     
 }

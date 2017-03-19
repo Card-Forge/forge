@@ -603,9 +603,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams) {
-        // AI logic for choosing which replacement effect to apply
-        // happens here.
-        return possibleReplacers.get(0);
+        return brains.chooseSingleReplacementEffect(possibleReplacers, runParams);
     }
 
     @Override
