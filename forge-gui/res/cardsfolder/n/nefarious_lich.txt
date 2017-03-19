@@ -8,7 +8,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:CheckYard:Count$ValidGraveyard Card.YouOwn
 SVar:CheckExile:Count$ValidExile Card.IsRemembered
 SVar:X:ReplaceCount$DamageAmount
-R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | AiLogic$ LichDraw | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
 SVar:Draw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ Y | References$ Y
 SVar:Y:ReplaceCount$LifeGained
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigLose | TriggerDescription$ When CARDNAME leaves the battlefield, you lose the game.

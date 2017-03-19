@@ -6,7 +6,7 @@ SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destinati
 SVar:TrigLoseLife:DB$ LoseLife | Cost$ 0 | LifeAmount$ LifeTotal | References$ LifeTotal
 SVar:LifeTotal:Count$YourLifeTotal
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
-R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | AiLogic$ LichDraw | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
 SVar:Draw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
 SVar:X:ReplaceCount$LifeGained
 T:Mode$ DamageDone | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigLoseOrSac | TriggerDescription$ Whenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.
