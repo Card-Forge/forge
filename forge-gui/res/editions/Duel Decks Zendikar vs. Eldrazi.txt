@@ -15,7 +15,7 @@ Type=Duel_Decks
 46 C Bloodthrone Vampire
 47 R Butcher of Malakir
 48 C Cadaver Imp
-49 C Consume the Meek
+49 R Consume the Meek
 50 U Corpsehatch
 51 C Dominator Drone
 52 C Heartstabber Mosquito
@@ -27,7 +27,7 @@ Type=Duel_Decks
 58 U Vampire Nighthawk
 59 C Emrakul's Hatcher
 60 C Forked Bolt
-61 C Hellion Eruption
+61 R Hellion Eruption
 62 R Magmaw
 63 C Torch Slinger
 64 U Forerunner of Slaughter
