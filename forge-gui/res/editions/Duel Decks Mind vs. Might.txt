@@ -24,7 +24,7 @@ Type=Duel_Decks
 15 C Rampant Growth
 16 U Roar of the Wurm
 17 C Skarrgan Pit-Skulk
-18 U Sylvan Might
+18 C Sylvan Might
 19 R Talara's Battalion
 20 R Radha, Heir to Keld
 21 U Relentless Hunter
