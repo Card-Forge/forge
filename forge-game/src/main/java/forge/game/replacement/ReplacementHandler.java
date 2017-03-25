@@ -32,6 +32,8 @@ import forge.util.Visitor;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
+
 import java.util.*;
 
 public class ReplacementHandler {
@@ -58,28 +60,27 @@ public class ReplacementHandler {
         } else {
             decider = ((Card) affected).getController();
         }
-        final Game game = decider.getGame(); 
 
         if (runParams.get("Event").equals("Moved")) {
-            ReplacementResult res = run(runParams, ReplacementLayer.Control, decider, game);
+            ReplacementResult res = run(runParams, ReplacementLayer.Control, decider);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
-            res = run(runParams, ReplacementLayer.Copy, decider, game);
+            res = run(runParams, ReplacementLayer.Copy, decider);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
-            res = run(runParams, ReplacementLayer.Other, decider, game);
+            res = run(runParams, ReplacementLayer.Other, decider);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
-            res = run(runParams, ReplacementLayer.None, decider, game);
+            res = run(runParams, ReplacementLayer.None, decider);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
         }
         else {
-            ReplacementResult res = run(runParams, ReplacementLayer.None, decider, game);
+            ReplacementResult res = run(runParams, ReplacementLayer.None, decider);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
@@ -89,16 +90,8 @@ public class ReplacementHandler {
 
     }
 
-    /**
-     * 
-     * Runs any applicable replacement effects.
-     * 
-     * @param runParams
-     *            the run params,same as for triggers.
-     * @return true if the event was replaced.
-     */
-    public ReplacementResult run(final Map<String, Object> runParams, final ReplacementLayer layer, final Player decider, final Game game) {
-        final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
+    public List<ReplacementEffect> getReplacementList(final Map<String, Object> runParams, final ReplacementLayer layer) {
+        final List<ReplacementEffect> possibleReplacers = Lists.newArrayList();
         // Round up Non-static replacement effects ("Until EOT," or
         // "The next time you would..." etc)
         /*for (final ReplacementEffect replacementEffect : this.tmpEffects) {
@@ -108,8 +101,9 @@ public class ReplacementHandler {
         }*/
 
         // Round up Static replacement effects
-        for (final Player p : game.getPlayers()) {
-            for (final Card crd : p.getAllCards()) {
+        game.forEachCardInGame(new Visitor<Card>() {
+            @Override
+            public void visit(Card crd) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
 
                     // Use "CheckLKIZone" parameter to test for effects that care abut where the card was last (e.g. Kalitas, Traitor of Ghet
@@ -117,7 +111,7 @@ public class ReplacementHandler {
                     Zone cardZone = "True".equals(replacementEffect.getMapParams().get("CheckSelfLKIZone")) ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
 
                     if (!replacementEffect.hasRun()
-                            && replacementEffect.getLayer() == layer
+                            && (layer == null || replacementEffect.getLayer() == layer)
                             && replacementEffect.requirementsCheck(game)
                             && replacementEffect.canReplace(runParams)
                             && !possibleReplacers.contains(replacementEffect)
@@ -126,7 +120,21 @@ public class ReplacementHandler {
                     }
                 }
             }
-        }
+            
+        });
+        return possibleReplacers;
+    }
+    
+    /**
+     * 
+     * Runs any applicable replacement effects.
+     * 
+     * @param runParams
+     *            the run params,same as for triggers.
+     * @return true if the event was replaced.
+     */
+    public ReplacementResult run(final Map<String, Object> runParams, final ReplacementLayer layer, final Player decider) {
+        final List<ReplacementEffect> possibleReplacers = getReplacementList(runParams, layer);
 
         if (possibleReplacers.isEmpty()) {
             return ReplacementResult.NotReplaced;
