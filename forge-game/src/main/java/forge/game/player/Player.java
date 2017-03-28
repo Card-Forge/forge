@@ -2776,10 +2776,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void resetAttackedThisCombat() {
         // resets the status of attacked/blocked this phase
-        CardCollectionView list = CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+        CardCollectionView list = getCardsIn(ZoneType.Battlefield);
 
-        for (int i = 0; i < list.size(); i++) {
-            final Card c = list.get(i);
+        for (Card c : list) {
             if (c.getDamageHistory().getCreatureAttackedThisCombat()) {
                 c.getDamageHistory().setCreatureAttackedThisCombat(false);
             }
