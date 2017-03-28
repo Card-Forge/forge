@@ -2774,7 +2774,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.setActivePlanes(currentPlanes);
     }
 
-    public final void resetAttackedThisCombat() {
+    public final void resetCombatantsThisCombat() {
         // resets the status of attacked/blocked this phase
         CardCollectionView list = getCardsIn(ZoneType.Battlefield);
 
