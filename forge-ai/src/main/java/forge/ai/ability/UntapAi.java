@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import java.util.List;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -13,13 +15,13 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
-import java.util.List;
-
 public class UntapAi extends SpellAbilityAi {
+    @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Card source = sa.getHostCard();
         if ("EOT".equals(sa.getParam("AILogic")) && (source.getGame().getPhaseHandler().getNextTurn() != ai
@@ -30,6 +32,7 @@ public class UntapAi extends SpellAbilityAi {
         return !("Never".equals(aiLogic));
     }
 
+    @Override
     protected boolean willPayCosts(final Player ai, final SpellAbility sa, final Cost cost, final Card source) {
         if (!ComputerUtilCost.checkAddM1M1CounterCost(cost, source)) {
             return false;
@@ -297,6 +300,9 @@ public class UntapAi extends SpellAbilityAi {
     
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer) {
-        return ComputerUtilCard.getBestAI(CardLists.filterControlledBy(list, ai.getAllies()));
+        PlayerCollection pl = new PlayerCollection();
+        pl.add(ai);
+        pl.addAll(ai.getAllies());
+        return ComputerUtilCard.getBestAI(CardLists.filterControlledBy(list, pl));
     }
 }
