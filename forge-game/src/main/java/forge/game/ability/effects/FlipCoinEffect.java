@@ -12,12 +12,16 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.Maps;
 
 public class FlipCoinEffect extends SpellAbilityEffect {
+
+    public static boolean[] BOTH_CHOICES = new boolean[] {false, true};
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
@@ -116,7 +120,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * flipCoinNoCall  Flip a coin without any call.
      * </p>
      * 
-     * @param source   the source card.
+     * @param sa   the source card.
      * @param flipper  the player flipping the coin.
      * @param multiplier
      * @return a boolean.
@@ -126,13 +130,12 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         int numSuccesses = 0;
 
         do {
-            boolean[] results = new boolean[multiplier];
+            Set<Boolean> flipResults = new HashSet<>();
             for (int i = 0; i < multiplier; i++) {
-                final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
-                flipper.getGame().fireEvent(new GameEventFlipCoin());
-                results[i] = resultIsHeads;
+                flipResults.add(MyRandom.getRandom().nextBoolean());
             }
-            result = multiplier == 1 ? results[0] : flipper.getController().chooseFlipResult(sa, flipper, results, false);
+            flipper.getGame().fireEvent(new GameEventFlipCoin());
+            result = flipResults.size() == 1 ? flipResults.iterator().next() : flipper.getController().chooseFlipResult(sa, flipper, BOTH_CHOICES, false);
             if (result) {
                 numSuccesses++;
             }
@@ -152,44 +155,43 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * </p>
      * 
      * @param caller
-     *            a {@link forge.game.player.Player} object.
-     * @param source
-     *            a {@link forge.game.card.Card} object.
+     * @param sa
      * @param multiplier
      * @return a boolean.
      */
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
-        boolean result = false;
+        boolean wonFlip = false;
         int numSuccesses = 0;
 
         do {
-            boolean [] results = new boolean [multiplier];
+            Set<Boolean> flipResults = new HashSet<>();
             final boolean choice = caller.getController().chooseBinary(sa, sa.getHostCard().getName() + " - Call coin flip", PlayerController.BinaryChoiceType.HeadsOrTails);
             for (int i = 0; i < multiplier; i++) {
-                // Play the Flip A Coin sound
-                caller.getGame().fireEvent(new GameEventFlipCoin());
-                final boolean flip = MyRandom.getRandom().nextBoolean();
-                results[i] = flip == choice;
+                flipResults.add(MyRandom.getRandom().nextBoolean());
             }
-            result = multiplier == 1 ? results[0] : caller.getController().chooseFlipResult(sa, caller, results, true);
-            if (result) {
+            // Play the Flip A Coin sound
+            caller.getGame().fireEvent(new GameEventFlipCoin());
+            boolean result = flipResults.size() == 1 ? flipResults.iterator().next() : caller.getController().chooseFlipResult(sa, caller, BOTH_CHOICES, true);
+            wonFlip = result == choice;
+
+            if (wonFlip) {
                 numSuccesses++;
             }
-            
-            caller.getGame().getAction().nofityOfValue(sa, caller, result ? "win" : "lose", null);
+
+            caller.getGame().getAction().nofityOfValue(sa, caller, wonFlip ? "win" : "lose", null);
 
             // Run triggers
             Map<String,Object> runParams = Maps.newHashMap();
             runParams.put("Player", caller);
-            runParams.put("Result", Boolean.valueOf(result));
+            runParams.put("Result", Boolean.valueOf(wonFlip));
             caller.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
-        } while (sa.hasParam("FlipUntilYouLose") && result != false);
+        } while (sa.hasParam("FlipUntilYouLose") && !wonFlip);
         
         if (sa.hasParam("FlipUntilYouLose")) {
             sa.getAdditonalAbility("LoseSubAbility").setSVar(sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X", "Number$" + numSuccesses);
         }
 
-        return result;
+        return wonFlip;
     }
 
     public static int getFilpMultiplier(final Player flipper) {
