@@ -31,11 +31,14 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
 import forge.ai.ability.ProtectAi;
+import forge.ai.ability.TokenAi;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
@@ -61,6 +64,8 @@ import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -2061,48 +2066,196 @@ public class ComputerUtil {
     }
 
     public static Object vote(Player ai, List<Object> options, SpellAbility sa, Multimap<Object, Player> votes) {
+        final Card source = sa.getHostCard();
+        final Player controller = source.getController();
+        final Game game = controller.getGame();
+
+        boolean opponent = controller.isOpponentOf(ai);
+
         if (!sa.hasParam("AILogic")) {
             return Aggregates.random(options);
-        } else {
-            String logic = sa.getParam("AILogic");
-            switch (logic) {
-                case "Torture":
-                	return "Torture";
-                case "GraceOrCondemnation":
-                    return ai.getCreaturesInPlay().size() > ai.getOpponent().getCreaturesInPlay().size() ? "Grace" : "Condemnation";
-                case "CarnageOrHomage":
-                    CardCollection cardsInPlay = CardLists.getNotType(sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield), "Land");
-                    CardCollection humanlist = CardLists.filterControlledBy(cardsInPlay, ai.getOpponents());
-                    CardCollection computerlist = CardLists.filterControlledBy(cardsInPlay, ai);
-                    return  (ComputerUtilCard.evaluatePermanentList(computerlist) + 3) < ComputerUtilCard
-                            .evaluatePermanentList(humanlist) ? "Carnage" : "Homage";
-                case "Judgment":
-                    if (votes.isEmpty()) {
-                        CardCollection list = new CardCollection();
-                        for (Object o : options) {
-                            if (o instanceof Card) {
-                                list.add((Card) o);
-                            }
+        }
+
+        String logic = sa.getParam("AILogic");
+        switch (logic) {
+        case "Torture":
+            return "Torture";
+        case "GraceOrCondemnation":
+            return ai.getCreaturesInPlay().size() > ai.getOpponent().getCreaturesInPlay().size() ? "Grace"
+                    : "Condemnation";
+        case "CarnageOrHomage":
+            CardCollection cardsInPlay = CardLists
+                    .getNotType(sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield), "Land");
+            CardCollection humanlist = CardLists.filterControlledBy(cardsInPlay, ai.getOpponents());
+            CardCollection computerlist = CardLists.filterControlledBy(cardsInPlay, ai);
+            return (ComputerUtilCard.evaluatePermanentList(computerlist) + 3) < ComputerUtilCard
+                    .evaluatePermanentList(humanlist) ? "Carnage" : "Homage";
+        case "Judgment":
+            if (votes.isEmpty()) {
+                CardCollection list = new CardCollection();
+                for (Object o : options) {
+                    if (o instanceof Card) {
+                        list.add((Card) o);
                         }
-                        return ComputerUtilCard.getBestAI(list);
-                    } else {
-                        return Iterables.getFirst(votes.keySet(), null);
                     }
-                case "Protection":
-                    if (votes.isEmpty()) {
-                        List<String> restrictedToColors = new ArrayList<String>();
-                        for (Object o : options) {
-                            if (o instanceof String) {
-                                restrictedToColors.add((String) o);
-                            }
-                        }
-                        CardCollection lists = CardLists.filterControlledBy(ai.getGame().getCardsInGame(), ai.getOpponents());
-                        return StringUtils.capitalize(ComputerUtilCard.getMostProminentColor(lists, restrictedToColors));
-                    } else {
-                        return Iterables.getFirst(votes.keySet(), null);
-                    }
-                default: return Iterables.getFirst(options, null);
+                return ComputerUtilCard.getBestAI(list);
+            } else {
+                return Iterables.getFirst(votes.keySet(), null);
             }
+        case "Protection":
+            if (votes.isEmpty()) {
+                List<String> restrictedToColors = Lists.newArrayList();
+                for (Object o : options) {
+                    if (o instanceof String) {
+                        restrictedToColors.add((String) o);
+                        }
+                    }
+                CardCollection lists = CardLists.filterControlledBy(ai.getGame().getCardsInGame(), ai.getOpponents());
+                return StringUtils.capitalize(ComputerUtilCard.getMostProminentColor(lists, restrictedToColors));
+            } else {
+                return Iterables.getFirst(votes.keySet(), null);
+            }
+        case "FeatherOrQuill":
+
+            // try to mill opponent with Quill vote
+            if (opponent && !controller.cantLose()) {
+                int numQuill = votes.get("Quill").size();
+                if (numQuill + 1 >= controller.getCardsIn(ZoneType.Library).size()) {
+                    return controller.isCardInPlay("Laboratory Maniac") ? "Feather" : "Quill";
+                }
+            }
+            // is it can't receive counters, choose +1/+1 ones
+            if (!source.canReceiveCounters(CounterType.P1P1)) {
+                return opponent ? "Feather" : "Quill";
+            }
+            // if source is not on the battlefield anymore, choose +1/+1
+            // ones
+            if (!game.getCardState(source).getZone().is(ZoneType.Battlefield)) {
+                return opponent ? "Feather" : "Quill";
+            }
+            // if no hand cards, try to mill opponent
+            if (controller.getCardsIn(ZoneType.Hand).isEmpty()) {
+                return opponent ? "Quill" : "Feather";
+            }
+
+            // AI has something to discard
+            if (ai.equals(controller)) {
+                CardCollectionView aiCardsInHand = ai.getCardsIn(ZoneType.Hand);
+                if (CardLists.count(aiCardsInHand, CardPredicates.hasSVar("DiscardMe")) >= 1) {
+                    return "Quill";
+                }
+            }
+
+            // default card draw and discard are better than +1/+1 counter
+            return opponent ? "Feather" : "Quill";
+        case "StrengthOrNumbers":
+            // similar to fabricate choose +1/+1 or Token
+            final SpellAbility saToken = sa.findSubAbilityByType(ApiType.Token);
+            int numStrength = votes.get("Strength").size();
+            int numNumbers = votes.get("Numbers").size();
+
+            Card token = TokenAi.spawnToken(controller, saToken);
+
+            // is it can't receive counters, choose +1/+1 ones
+            if (!source.canReceiveCounters(CounterType.P1P1)) {
+                return opponent ? "Strength" : "Numbers";
+            }
+
+            // if source is not on the battlefield anymore
+            if (!game.getCardState(source).getZone().is(ZoneType.Battlefield)) {
+                return opponent ? "Strength" : "Numbers";
+            }
+
+            // token would not survive
+            if (token == null) {
+                return opponent ? "Numbers" : "Strength";
+            }
+
+            // TODO check for ETB to +1/+1 counters
+            // or over another trigger like lifegain
+
+            int tokenScore = ComputerUtilCard.evaluateCreature(token);
+
+            // score check similar to Fabricate
+            Card sourceNumbers = CardUtil.getLKICopy(source);
+            Card sourceStrength = CardUtil.getLKICopy(source);
+
+            sourceNumbers.setCounters(CounterType.P1P1, sourceNumbers.getCounters(CounterType.P1P1) + numStrength);
+            sourceNumbers.setZone(source.getZone());
+
+            sourceStrength.setCounters(CounterType.P1P1,
+                    sourceStrength.getCounters(CounterType.P1P1) + numStrength + 1);
+            sourceStrength.setZone(source.getZone());
+
+            int scoreStrength = ComputerUtilCard.evaluateCreature(sourceStrength) + tokenScore * numNumbers;
+            int scoreNumbers = ComputerUtilCard.evaluateCreature(sourceNumbers) + tokenScore * (numNumbers + 1);
+
+            return (scoreNumbers >= scoreStrength) != opponent ? "Numbers" : "Strength";
+
+        case "SproutOrHarvest":
+
+            // lifegain would hurt or has no effect
+            if (opponent) {
+                if (lifegainNegative(controller, source)) {
+                    return "Harvest";
+                }
+            } else {
+                if (lifegainNegative(controller, source)) {
+                    return "Sprout";
+                }
+            }
+
+            // is it can't receive counters, choose +1/+1 ones
+            if (!source.canReceiveCounters(CounterType.P1P1)) {
+                return opponent ? "Sprout" : "Harvest";
+            }
+
+            // if source is not on the battlefield anymore
+            if (!game.getCardState(source).getZone().is(ZoneType.Battlefield)) {
+                return opponent ? "Sprout" : "Harvest";
+            }
+            // TODO add Lifegain to +1/+1 counters trigger
+
+            // for now +1/+1 counters are better
+            return opponent ? "Harvest" : "Sprout";
+        case "DeathOrTaxes":
+            int numDeath = votes.get("Death").size();
+            int numTaxes = votes.get("Taxes").size();
+
+            if (opponent) {
+                CardCollection aiCreatures = ai.getCreaturesInPlay();
+                CardCollectionView aiCardsInHand = ai.getCardsIn(ZoneType.Hand);
+                // would need to sacrifice more creatures than AI has
+                // sacrifice even more
+                if (aiCreatures.size() <= numDeath) {
+                    return "Death";
+                }
+                // would need to discard more cards than it has
+                if (aiCardsInHand.size() <= numTaxes) {
+                    return "Taxes";
+                }
+
+                // has cards with SacMe or Token
+                if (CardLists.count(aiCreatures,
+                        Predicates.or(CardPredicates.hasSVar("SacMe"), CardPredicates.Presets.TOKEN)) >= numDeath) {
+                    return "Death";
+                }
+
+                // has cards with DiscardMe
+                if (CardLists.count(aiCardsInHand, CardPredicates.hasSVar("DiscardMe")) >= numTaxes) {
+                    return "Taxes";
+                }
+
+                // discard is probably less worse than sacrifice
+                return "Taxes";
+            } else {
+                // ai is first voter or ally of controller
+                // both are not affected, but if opponents controll creatures,
+                // sacrifice is worse
+                return controller.getOpponents().getCreaturesInPlay().isEmpty() ? "Taxes" : "Death";
+            }
+        default:
+            return Iterables.getFirst(options, null);
         }
     }
 
@@ -2413,6 +2566,67 @@ public class ComputerUtil {
             if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    public static boolean lifegainPositive(final Player player, final Card source) {
+
+        if (!player.canGainLife()) {
+            return false;
+        }
+
+        // Run any applicable replacement effects.
+        final Map<String, Object> repParams = Maps.newHashMap();
+        repParams.put("Event", "GainLife");
+        repParams.put("Affected", player);
+        repParams.put("LifeGained", 1);
+        repParams.put("Source", source);
+
+        List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(repParams,
+                ReplacementLayer.None);
+
+        if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
+            return false;
+        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LoseLife"))) {
+            return false;
+        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LichDraw"))) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean lifegainNegative(final Player player, final Card source) {
+        return lifegainNegative(player, source, 1);
+    }
+
+    public static boolean lifegainNegative(final Player player, final Card source, final int n) {
+
+        if (!player.canGainLife()) {
+            return false;
+        }
+
+        // Run any applicable replacement effects.
+        final Map<String, Object> repParams = Maps.newHashMap();
+        repParams.put("Event", "GainLife");
+        repParams.put("Affected", player);
+        repParams.put("LifeGained", n);
+        repParams.put("Source", source);
+
+        List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(repParams,
+                ReplacementLayer.None);
+
+        if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
+            // no life gain is not negative
+            return false;
+        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LoseLife"))) {
+            // lose life is only negagive is the player can lose life
+            return player.canLoseLife();
+        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LichDraw"))) {
+            // if it would draw more cards than player has, then its negative
+            return player.getCardsIn(ZoneType.Library).size() <= n;
         }
 
         return false;
