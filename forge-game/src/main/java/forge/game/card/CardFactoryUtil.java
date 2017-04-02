@@ -3913,8 +3913,9 @@ public class CardFactoryUtil {
             StringBuilder sb = new StringBuilder();
             sb.append("AB$ Draw | Cost$ ");
             sb.append(manacost);
-            sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Cycling ");
-            sb.append("| SpellDescription$ Draw a card.");
+            sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Cycling | CostDesc$ ");
+            sb.append(ManaCostParser.parse(manacost));
+            sb.append("| SpellDescription$ (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIsCycling(true);

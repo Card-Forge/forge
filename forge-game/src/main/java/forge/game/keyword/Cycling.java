@@ -11,10 +11,6 @@ public class Cycling extends KeywordWithCost {
     }
 
     @Override
-    protected void parse(String details) {
-    }
-
-    @Override
     protected String formatReminderText(String reminderText) {
         if (type == null) {
             return super.formatReminderText(reminderText);
