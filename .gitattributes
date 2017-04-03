@@ -16702,7 +16702,10 @@ forge-gui/res/cardsfolder/u/utter_end.txt -text
 forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/upcoming/angler_drake.txt -text
+forge-gui/res/cardsfolder/upcoming/archfiend_of_ifnir.txt -text
 forge-gui/res/cardsfolder/upcoming/canyon_slough.txt -text
+forge-gui/res/cardsfolder/upcoming/cursed_minotaur.txt -text
 forge-gui/res/cardsfolder/upcoming/dune_beetle.txt -text
 forge-gui/res/cardsfolder/upcoming/fetid_pools.txt -text
 forge-gui/res/cardsfolder/upcoming/hyena_pack.txt -text
