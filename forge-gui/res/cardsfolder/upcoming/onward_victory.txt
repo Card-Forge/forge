@@ -1,0 +1,19 @@
+Name:Onward
+ManaCost:2 R
+AlternateMode: Split
+Types:Instant
+A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is its power.
+SVar:X:Targeted$CardPower
+SVar:Picture:http://www.wizards.com/global/images/magic/general/onward_victory.jpg
+Oracle:Target creature gets +X/+0 until end of turn, where X is its power.
+
+ALTERNATE
+
+Name:Victory
+ManaCost:2 W
+Types:Sorcery
+K:Aftermath
+A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
+
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nTarget creature gains double strike until end of turn. 
+
