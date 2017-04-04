@@ -2160,6 +2160,9 @@ public class CardFactoryUtil {
             else if (keyword.equals("Living Weapon")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.equals("Aftermath")) {
+                addSpellAbility(keyword, card, null);
+            }
             else if (keyword.equals("Epic")) {
                 addSpellAbility(keyword, card, null);
             }
@@ -3495,6 +3498,20 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
+        } else if (keyword.equals("Aftermath")) {
+            // Aftermath does modify existing SA, and does not add new one
+
+            // only target RightSplit of it
+            final SpellAbility origSA = card.getState(CardStateName.RightSplit).getFirstAbility();
+            origSA.getRestrictions().setZone(ZoneType.Graveyard);
+
+            // Add the Exile Self Part
+            String dbStr = "DB$ ChangeZone | Origin$ Stack | Destination$ Exile";
+
+            final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
+
+            // append to original SA
+            origSA.appendSubAbility(newSA); 
         } else if (keyword.startsWith("Awaken")) {
             final String[] k = keyword.split(":");
             final String counters = k[1];
