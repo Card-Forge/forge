@@ -1,0 +1,10 @@
+Name:Sixth Sense
+ManaCost:G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ SixthSenseTrigger | AddSVar$ SixthSenseDraw | Description$ Enchanted creature has "Whenever this creature deals combat damage to a player, you may draw a card."
+SVar:SixthSenseTrigger:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ SixthSenseDraw | OptionalDecider$ You | TriggerDescription$ Whenever this creature deals combat damage to a player, you may draw a card.
+SVar:SixthSenseDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sixth_sense.jpg
+Oracle:Enchant creature\nEnchanted creature has "Whenever this creature deals combat damage to a player, you may draw a card."

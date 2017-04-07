@@ -1,0 +1,24 @@
+Name:Insult
+ManaCost:2 R
+AlternateMode: Split
+Types:Sorcery
+A:SP$ Effect | Cost$ 2 R | Name$ Insult Effect | StaticAbilities$ STCantPrevent | ReplacementEffects$ InsultDamageEvent | SVars$ DmgTwice,X | SpellDescription$ Damage can't be prevented this turn. If a source you control would deal damage this turn, it deals double that damage instead.
+SVar:STCantPrevent:Mode$ Continuous | EffectZone$ Command | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented. 
+SVar:InsultDamageEvent:Event$ DamageDone | ValidSource$ Card.YouCtrl | ReplaceWith$ DmgTwice | Description$ 
+
+If a source you control would deal damage this turn, it deals double that damage instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
+
+SVar:X:ReplaceCount$DamageAmount/Twice 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/insult_injury.jpg
+Oracle:Damage can't be prevented this turn. If a source you control would deal damage this turn, it deals double that damage instead.
+
+ALTERNATE
+
+Name:Injury
+ManaCost:2 R
+Types:Sorcery
+K:Aftermath
+A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to target creature and 2 damage to target player.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nInjury deals 2 damage to target creature and 2 damage to target player.

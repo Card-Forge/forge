@@ -1,0 +1,10 @@
+Name:Manglehorn
+ManaCost:2 G
+Types:Creature Beast
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target artifact.
+SVar:TrigDestroy:DB$ Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Choose target artifact
+S:Mode$ ETBTapped | ValidCard$ Artifact.OppCtrl | Description$ Artifacts your opponents control enter the battlefield tapped.
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/manglehorn.jpg
+Oracle:When Manglehorn enters the battlefield, you may destroy target artifact.\nArtifacts your opponents control enter the battlefield tapped.

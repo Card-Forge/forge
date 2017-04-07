@@ -1,0 +1,16 @@
+Name:Destined
+ManaCost:1 B
+AlternateMode: Split
+Types:Instant
+A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Indestructible | SpellDescription$ Target creature gets +1/+0 and gains indestructible until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/destined_lead.jpg
+Oracle:Target creature gets +1/+0 and gains indestructible until end of turn.
+
+ALTERNATE
+
+Name:Lead
+ManaCost:3 G
+Types:Sorcery
+K:Aftermath
+A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so.
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nAll creatures able to block target creature this turn do so.

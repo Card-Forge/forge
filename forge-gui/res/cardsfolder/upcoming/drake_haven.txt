@@ -1,0 +1,9 @@
+Name:Drake Haven
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cycle or discard a card, you may pay {1}. If you do, create a 2/2 blue Drake creature token with flying.
+SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenName$ Drake | TokenTypes$ Creature,Drake | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | TokenImage$ u 2 2 drake AKH
+DeckHas:Ability$Token
+DeckHints:Ability$Discard
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_haven.jpg
+Oracle:Whenever you cycle or discard a card, you may pay {1}. If you do, create a 2/2 blue Drake creature token with flying.

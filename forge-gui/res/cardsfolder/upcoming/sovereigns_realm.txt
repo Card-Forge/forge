@@ -1,0 +1,8 @@
+Name:Sovereign's Realm
+Types:Conspiracy
+Text:(Start the game with this conspiracy face up in the command zone.)
+K:Your deck can't have basic land cards.
+K:Your starting hand size is five.
+A:AB$ Effect | Cost$ ExileFromHand<1/Card> | SpellDescription$ Exile a card from your hand: This turn, you may play basic land cards from outside the game.
+S:Mode$ Continuous | Affected$ Land.Basic+YouCtrl | AddAbility$ AnyMana | Description$ Basic lands you control have "{T}: Add one mana of any color to your mana pool."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.

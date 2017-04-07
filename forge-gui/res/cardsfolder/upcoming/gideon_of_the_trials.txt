@@ -1,0 +1,14 @@
+Name:Gideon of the Trials
+ManaCost:1 W W
+Types:Planeswalker Gideon
+Loyalty:3
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Planeswalker$ True | KW$ HIDDEN Prevent all damage that would be dealt by CARDNAME. | IsCurse$ True | UntilYourNextTurn$ True | SpellDescription$ Until your next turn, prevent all damage target permanent would deal.
+A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 4 | Toughness$ 4 | Keywords$ Indestructible | Types$ Creature,Human,Soldier | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
+SVar:GideonPrevent:DB$ Pump | Defined$ Self | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME.
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenName$ Knight Ally | TokenColors$ White | TokenTypes$ Creature,Knight,Ally | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | Planeswalker$ True | SpellDescription$ Create a 2/2 white Knight Ally creature token.
+A:AB$ Effect | Cost$ AddCounter<0/LOYALTY> | Name$ Gideon of the Trials emblem | StaticAbilities$ STPump1,STPump2 | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game."
+SVar:STPump1:Mode$ Continuous | EffectZone$ Command | Affected$ You | CheckSVar$ X | SVarCompare$ GE1 | AddKeyword$ You can't lose the game. | Description$ As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game.
+SVar:STPump2:Mode$ Continuous | EffectZone$ Command | Affected$ Player.Opponent | CheckSVar$ X | SVarCompare$ GE1 | AddKeyword$ You can't win the game.
+SVar:X:Count$Valid Planeswalker.Gideon+YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gideon_of_the_trials.jpg
+Oracle:[+1]: Until your next turn, prevent all damage target permanent would deal.\n[0]: Until end of turn, Gideon of the Trials becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.\n[0]: You get an emblem with "As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game."

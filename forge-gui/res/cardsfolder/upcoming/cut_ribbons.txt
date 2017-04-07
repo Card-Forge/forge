@@ -1,0 +1,17 @@
+Name:Cut
+ManaCost:1 R
+AlternateMode: Split
+Types:Sorcery
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cut_ribbons.jpg
+Oracle:Cut deals 4 damage to target creature.
+
+ALTERNATE
+
+Name:Ribbons
+ManaCost:X B B
+Types:Sorcery
+K:Aftermath
+A:SP$ LoseLife | Cost$ X B B | Defined$ Player.Opponent | LifeAmount$ X | References$ X | SpellDescription$ Each opponent loses X life.
+SVar:X:Count$xPaid
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEach opponent loses X life.
