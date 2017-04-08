@@ -1,0 +1,18 @@
+Name:Failure
+ManaCost:1 U
+AlternateMode: Split
+Types:Instant
+A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell to its owner's hand.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/failure_comply.jpg
+Oracle:Return target spell to its owner's hand.
+
+ALTERNATE
+
+Name:Comply
+ManaCost:W
+Types:Sorcery
+K:Aftermath
+A:SP$ NameCard | Cost$ W | Defined$ You | ValidCards$ Card | SubAbility$ DBEffect | SpellDescription$ Choose a card name. Until your next turn, your opponents can't cast spells with the chosen name.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CantCast | Duration$ UntilYourNextTurn
+SVar:CantCast:Mode$ CantBeCast | ValidCard$ Card.nonLand+NamedCard | Caster$ Opponent | EffectZone$ Command | Description$ Your opponents can't cast spells with the chosen name.
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nChoose a card name. Until your next turn, your opponents can't cast spells with the chosen name.
