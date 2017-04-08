@@ -2225,6 +2225,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Emerge")) {
                 addSpellAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Embalm")) {
+                addSpellAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Entwine")) {
                 addSpellAbility(keyword, card, null);
             }
@@ -3612,6 +3615,24 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Embalm")) {
+            final String[] kw = keyword.split(":");
+            String costStr = kw[1];
+
+            String effect = "AB$ CopyPermanent | Cost$ " + costStr + " ExileFromGrave<1/CARDNAME> " +
+            "| ActivationZone$ Graveyard | SorcerySpeed$ True | Embalm$ True " + 
+            "| PrecostDesc$ Embalm | CostDesc$ " + ManaCostParser.parse(costStr) + " | Defined$ Self " + 
+            "| StackDescription$ Embalm - CARDNAME "+
+            "| SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")" ; 
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            }
+            card.addSpellAbility(sa);
         } else if (keyword.startsWith("Entwine")) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];

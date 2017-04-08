@@ -39,6 +39,7 @@ public enum Keyword {
     DOUBLE_STRIKE(SimpleKeyword.class, true, "This creature deals both first-strike and regular combat damage."),
     DREDGE(KeywordWithAmount.class, true, "If you would draw a card, you may instead put %d cards from the top of your library into your graveyard and return this card from your graveyard to your hand."),
     ECHO(KeywordWithCost.class, false, "At the beginning of your upkeep, if this permanent came under your control since the beginning of your last upkeep, sacrifice it unless you pay %s."),
+    EMBALM(KeywordWithCost.class, false, "Create a token that's a copy of it, except it's a white Zombie in addition to is other types with no mana cost. Embalm only as a sorcery."),
     EMERGE(KeywordWithCost.class, true, "You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost."),
     ENCHANT(KeywordWithType.class, false, "Target a %s as you play this. This card enters the battlefield attached to that %s."),
     ENTWINE(KeywordWithCost.class, true, "You may choose all modes of this spell instead of just one. If you do, you pay an additional %s."),

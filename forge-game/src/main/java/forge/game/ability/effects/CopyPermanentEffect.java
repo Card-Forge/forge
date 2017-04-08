@@ -6,8 +6,11 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
+import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -21,7 +24,6 @@ import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -102,7 +104,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         }
 
         List<Card> tgtCards = getTargetCards(sa);
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("ValidSupportedCopy")) {
             List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
@@ -154,7 +155,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         hostCard.clearClones();
 
         for (final Card c : tgtCards) {
-            if ((tgt == null) || c.canBeTargetedBy(sa)) {
+            if (!sa.usesTargeting() || c.canBeTargetedBy(sa)) {
 
                 int multiplier = numCopies;
                 
@@ -241,6 +242,14 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                     if (sa.hasParam("AtEOTTrig")) {
                         addSelfTrigger(sa, sa.getParam("AtEOTTrig"), copy);
+                    }
+                    
+                    if (sa.hasParam("Embalm")) {
+                        copy.addType("Zombie");
+                        copy.setColor(MagicColor.WHITE);
+                        copy.setManaCost(ManaCost.NO_COST);
+                        String name = copy.getName().replace(",", "").replace(" ", "_").toLowerCase();
+                        copy.setImageKey(ImageKeys.getTokenKey("embalm_" + name));
                     }
                     
                     copy.updateStateForView();
