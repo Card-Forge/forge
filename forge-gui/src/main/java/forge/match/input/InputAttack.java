@@ -124,6 +124,12 @@ public class InputAttack extends InputSyncronizedBase {
                 continue;
             }
 
+            if (currentDefender != null && CombatUtil.canAttack(c, currentDefender)) {
+                combat.addAttacker(c, currentDefender);
+                refreshCards.add(CardView.get(c));
+                continue;
+            }
+
             for (final Player defender : defenders) {
                 if (CombatUtil.canAttack(c, defender)) {
                     combat.addAttacker(c, defender);
