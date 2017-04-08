@@ -14,6 +14,7 @@ import com.google.common.collect.Lists;
 
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -31,7 +32,7 @@ import forge.util.collect.FCollectionView;
 public abstract class GameState {
     private static final Map<ZoneType, String> ZONES = new HashMap<ZoneType, String>();
     static {
-        ZONES.put(ZoneType.Battlefield, "play");
+        ZONES.put(ZoneType.Battlefield, "battlefield");
         ZONES.put(ZoneType.Hand, "hand");
         ZONES.put(ZoneType.Graveyard, "graveyard");
         ZONES.put(ZoneType.Library, "library");
@@ -41,8 +42,15 @@ public abstract class GameState {
 
     private int humanLife = -1;
     private int computerLife = -1;
+    private String humanCounters = "";
+    private String computerCounters = "";
+
     private final Map<ZoneType, String> humanCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
     private final Map<ZoneType, String> aiCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
+
+    private final Map<Integer, Card> idToCard = new HashMap<>();
+    private final Map<Card, Integer> cardToAttachId = new HashMap<>();
+
     private String tChangePlayer = "NONE";
     private String tChangePhase = "NONE";
     
@@ -56,6 +64,14 @@ public abstract class GameState {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("humanlife=%d\n", humanLife));
         sb.append(String.format("ailife=%d\n", computerLife));
+
+        if (!humanCounters.isEmpty()) {
+            sb.append(String.format("humancounters=%s\n", humanCounters));
+        }
+        if (!computerCounters.isEmpty()) {
+            sb.append(String.format("aicounters=%s\n", computerCounters));
+        }
+
         sb.append(String.format("activeplayer=%s\n", tChangePlayer));
         sb.append(String.format("activephase=%s\n", tChangePhase));
         appendCards(humanCardTexts, "human", sb);
@@ -65,7 +81,7 @@ public abstract class GameState {
 
     private void appendCards(Map<ZoneType, String> cardTexts, String categoryPrefix, StringBuilder sb) {
         for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
-            sb.append(String.format("%scardsin%s=%s\n", categoryPrefix, ZONES.get(kv.getKey()), kv.getValue()));
+            sb.append(String.format("%s%s=%s\n", categoryPrefix, ZONES.get(kv.getKey()), kv.getValue()));
         }
     }
 
@@ -82,6 +98,9 @@ public abstract class GameState {
         }
         humanLife = human.getLife();
         computerLife = ai.getLife();
+        humanCounters = countersToString(human.getCounters());
+        computerCounters = countersToString(ai.getCounters());
+
         tChangePlayer = game.getPhaseHandler().getPlayerTurn() == ai ? "ai" : "human";
         tChangePhase = game.getPhaseHandler().getPhase().toString();
         aiCardTexts.clear();
@@ -111,43 +130,61 @@ public abstract class GameState {
             newText.append(c.getPaperCard().getName());
         }
         if (c.isCommander()) {
-            newText.append("|IsCommander:True");
+            newText.append("|IsCommander");
         }
         if (zoneType == ZoneType.Battlefield) {
             if (c.isTapped()) {
-                newText.append("|Tapped:True");
+                newText.append("|Tapped");
             }
             if (c.isSick()) {
-                newText.append("|SummonSick:True");
+                newText.append("|SummonSick");
             }
             if (c.isFaceDown()) {
-                newText.append("|FaceDown:True");
+                newText.append("|FaceDown");
+                if (c.isManifested()) {
+                    newText.append(":Manifested");
+                }
             }
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
                 newText.append("|Counters:");
-                boolean start = true;
-                for(Entry<CounterType, Integer> kv : counters.entrySet()) {
-                    String str = kv.getKey().toString();
-                    int count = kv.getValue();
-                    for (int i = 0; i < count; i++) {
-                        if (!start) {
-                            newText.append(",");
-                        }
-                        newText.append(str);
-                        start = false;
-                    }
-                }
+                newText.append(countersToString(counters));
+            }
+            if (c.getEquipping() != null) {
+                newText.append("|Attaching:").append(c.getEquipping().getId());
+            } else if (c.getFortifying() != null) {
+                newText.append("|Attaching:").append(c.getFortifying().getId());
+            } else if (c.getEnchantingCard() != null) {
+                newText.append("|Attaching:").append(c.getEnchantingCard().getId());
+            }
+
+            if (!c.getEnchantedBy(false).isEmpty() || !c.getEquippedBy(false).isEmpty() || !c.getFortifiedBy(false).isEmpty()) {
+                newText.append("|Id:").append(c.getId());
             }
         }
         cardTexts.put(zoneType, newText.toString());
     }
 
-    private String[] parseLine(String line) {
+    private String countersToString(Map<CounterType, Integer> counters) {
+        boolean first = true;
+        StringBuilder counterString = new StringBuilder();
+
+        for(Entry<CounterType, Integer> kv : counters.entrySet()) {
+            if (!first) {
+                counterString.append(",");
+            }
+
+            first = false;
+            counterString.append(String.format("%s=%d", kv.getKey().toString(), kv.getValue()));
+        }
+        return counterString.toString();
+    }
+
+    private String[] splitLine(String line) {
         if (line.charAt(0) == '#') {
             return null;
         }
-        final String[] tempData = line.split("=");
+        final String[] tempData = line.split("=", 2);
         if (tempData.length >= 2) {
             return tempData;
         }
@@ -163,32 +200,91 @@ public abstract class GameState {
 
         String line;
         while ((line = br.readLine()) != null) {
-            String[] keyValue = parseLine(line);
-            if (keyValue == null) {
-                continue;
-            }
-            final String categoryName = keyValue[0].toLowerCase();
-            final String categoryValue = keyValue[1];
+            parseLine(line);
+        }
+    }
 
-            if (categoryName.equals("humanlife"))                   humanLife = Integer.parseInt(categoryValue);
-            else if (categoryName.equals("ailife"))                 computerLife = Integer.parseInt(categoryValue);
+    public void parse(List<String> lines) {
+        for(String line : lines) {
+            parseLine(line);
+        }
+    }
 
-            else if (categoryName.equals("activeplayer"))           tChangePlayer = categoryValue.trim().toLowerCase();
-            else if (categoryName.equals("activephase"))            tChangePhase = categoryValue;
+    protected void parseLine(String line) {
+        String[] keyValue = splitLine(line);
+        if (keyValue == null) return;
 
-            else if (categoryName.equals("humancardsinplay"))       humanCardTexts.put(ZoneType.Battlefield, categoryValue);
-            else if (categoryName.equals("aicardsinplay"))          aiCardTexts.put(ZoneType.Battlefield, categoryValue);
-            else if (categoryName.equals("humancardsinhand"))       humanCardTexts.put(ZoneType.Hand, categoryValue);
-            else if (categoryName.equals("aicardsinhand"))          aiCardTexts.put(ZoneType.Hand, categoryValue);
-            else if (categoryName.equals("humancardsingraveyard"))  humanCardTexts.put(ZoneType.Graveyard, categoryValue);
-            else if (categoryName.equals("aicardsingraveyard"))     aiCardTexts.put(ZoneType.Graveyard, categoryValue);
-            else if (categoryName.equals("humancardsinlibrary"))    humanCardTexts.put(ZoneType.Library, categoryValue);
-            else if (categoryName.equals("aicardsinlibrary"))       aiCardTexts.put(ZoneType.Library, categoryValue);
-            else if (categoryName.equals("humancardsinexile"))      humanCardTexts.put(ZoneType.Exile, categoryValue);
-            else if (categoryName.equals("aicardsinexile"))         aiCardTexts.put(ZoneType.Exile, categoryValue);
-            else if (categoryName.equals("humancardsincommand"))    humanCardTexts.put(ZoneType.Command, categoryValue);
-            else if (categoryName.equals("aicardsincommand"))       aiCardTexts.put(ZoneType.Command, categoryValue);
-            else System.out.println("Unknown key: " + categoryName);
+        final String categoryName = keyValue[0].toLowerCase();
+        final String categoryValue = keyValue[1];
+
+        if (categoryName.startsWith("active")) {
+            if (categoryName.endsWith("player"))
+                tChangePlayer = categoryValue.trim().toLowerCase();
+            if (categoryName.endsWith("phase"))
+                tChangePhase = categoryValue.trim().toUpperCase();
+            return;
+        }
+
+        boolean isHuman = categoryName.startsWith("human");
+
+        if (categoryName.endsWith("life")) {
+            if (isHuman)
+                humanLife = Integer.parseInt(categoryValue);
+            else
+                computerLife = Integer.parseInt(categoryValue);
+        }
+
+        else if (categoryName.endsWith("counters")) {
+            if (isHuman)
+                humanCounters = categoryValue;
+            else
+                computerCounters = categoryValue;
+        }
+
+        else if (categoryName.endsWith("play") || categoryName.endsWith("battlefield")) {
+            if (isHuman)
+                humanCardTexts.put(ZoneType.Battlefield, categoryValue);
+            else
+                aiCardTexts.put(ZoneType.Battlefield, categoryValue);
+        }
+
+        else if (categoryName.endsWith("hand")) {
+            if (isHuman)
+                humanCardTexts.put(ZoneType.Hand, categoryValue);
+            else
+                aiCardTexts.put(ZoneType.Hand, categoryValue);
+        }
+
+        else if (categoryName.endsWith("graveyard")) {
+            if (isHuman)
+                humanCardTexts.put(ZoneType.Graveyard, categoryValue);
+            else
+                aiCardTexts.put(ZoneType.Graveyard, categoryValue);
+        }
+
+        else if (categoryName.equals("library")) {
+            if (isHuman)
+                humanCardTexts.put(ZoneType.Library, categoryValue);
+            else
+                aiCardTexts.put(ZoneType.Library, categoryValue);
+        }
+
+        else if (categoryName.equals("exile")) {
+            if (isHuman)
+                humanCardTexts.put(ZoneType.Exile, categoryValue);
+            else
+                aiCardTexts.put(ZoneType.Exile, categoryValue);
+        }
+
+        else if (categoryName.equals("command")) {
+            if (isHuman)
+                humanCardTexts.put(ZoneType.Command, categoryValue);
+            else
+                aiCardTexts.put(ZoneType.Command, categoryValue);
+        }
+
+        else {
+            System.out.println("Unknown key: " + categoryName);
         }
     }
 
@@ -196,27 +292,54 @@ public abstract class GameState {
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                final Player human = game.getPlayers().get(0);
-                final Player ai = game.getPlayers().get(1);
-
-                Player newPlayerTurn = tChangePlayer.equals("human") ? newPlayerTurn = human : tChangePlayer.equals("ai") ? newPlayerTurn = ai : null;
-                PhaseType newPhase = tChangePhase.trim().equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tChangePhase);
-
-                game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
-
-                game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-
-                setupPlayerState(humanLife, humanCardTexts, human);
-                setupPlayerState(computerLife, aiCardTexts, ai);
-
-                game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-
-                game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+                applyGameOnThread(game);
             }
         });
     }
 
+    protected void applyGameOnThread(final Game game) {
+        final Player human = game.getPlayers().get(0);
+        final Player ai = game.getPlayers().get(1);
+
+        Player newPlayerTurn = tChangePlayer.equals("human") ? human : tChangePlayer.equals("ai") ? ai : null;
+        PhaseType newPhase = tChangePhase.equals("none") ? null : PhaseType.smartValueOf(tChangePhase);
+
+        // Set stack to resolving so things won't trigger/effects be checked right away
+        game.getStack().setResolving(true);
+
+        if (!humanCounters.isEmpty()) {
+            applyCountersToGameEntity(human, humanCounters);
+        }
+        if (!computerCounters.isEmpty()) {
+            applyCountersToGameEntity(ai, computerCounters);
+        }
+        game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
+
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+
+        setupPlayerState(humanLife, humanCardTexts, human);
+        setupPlayerState(computerLife, aiCardTexts, ai);
+
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+
+        game.getStack().setResolving(false);
+
+        game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+    }
+
+    private void applyCountersToGameEntity(GameEntity entity, String counterString) {
+        entity.setCounters(new HashMap<CounterType, Integer>());
+        String[] allCounterStrings = counterString.split(",");
+        for (final String counterPair : allCounterStrings) {
+            String[] pair = counterPair.split("=", 2);
+
+            entity.addCounter(CounterType.valueOf(pair[0]), Integer.parseInt(pair[1]), false, false);
+        }
+    }
+
     private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
+        // Lock check static as we setup player state
+
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
         for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
             String value = kv.getValue();
@@ -245,13 +368,31 @@ public abstract class GameState {
                     // var as-is.
                     c.setCounters(new HashMap<CounterType, Integer>());
                     p.getZone(ZoneType.Hand).add(c);
-                    p.getGame().getAction().moveToPlay(c);
+                    if (c.isAura()) {
+                        p.getGame().getAction().moveToPlay(c);
+                    } else {
+                        p.getGame().getAction().moveToPlay(c);
+                    }
+
                     c.setTapped(tapped);
                     c.setSickness(sickness);
                     c.setCounters(counters);
                 }
             } else {
                 zone.setCards(kv.getValue());
+            }
+        }
+
+        for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
+            Card attachedTo = idToCard.get(entry.getValue());
+            Card attacher = entry.getKey();
+
+            if (attacher.isEquipment()) {
+                attacher.equipCard(attachedTo);
+            } else if (attacher.isAura()) {
+                attacher.enchantEntity(attachedTo);
+            } else if (attacher.isFortified()) {
+                attacher.fortifyCard(attachedTo);
             }
         }
     }
@@ -265,7 +406,7 @@ public abstract class GameState {
      *            an array of {@link java.lang.String} objects.
      * @param player
      *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.CardList} object.
+     * @return a {@link CardCollectionView} object.
      */
     private CardCollectionView processCardsForZone(final String[] data, final Player player) {
         final CardCollection cl = new CardCollection();
@@ -286,22 +427,29 @@ public abstract class GameState {
                 if (info.startsWith("Set:")) {
                     c.setSetCode(info.substring(info.indexOf(':') + 1));
                     hasSetCurSet = true;
-                } else if (info.equalsIgnoreCase("Tapped:True")) {
+                }
+                else if (info.startsWith("Tapped")) {
                     c.tap();
                 } else if (info.startsWith("Counters:")) {
-                    final String[] counterStrings = info.substring(info.indexOf(':') + 1).split(",");
-                    for (final String counter : counterStrings) {
-                        c.addCounter(CounterType.valueOf(counter), 1, true);
-                    }
-                } else if (info.equalsIgnoreCase("SummonSick:True")) {
+                    applyCountersToGameEntity(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("SummonSick")) {
                     c.setSickness(true);
-                } else if (info.equalsIgnoreCase("FaceDown:True")) {
+                } else if (info.startsWith("FaceDown")) {
                     c.setState(CardStateName.FaceDown, true);
-                } else if (info.equalsIgnoreCase("IsCommander:True")) {
+                    if (info.endsWith("Manifested")) {
+                        c.setManifested(true);
+                    }
+                } else if (info.startsWith("IsCommander")) {
                     // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);
                     player.setCommanders(Lists.newArrayList(c));
                     player.getZone(ZoneType.Command).add(Player.createCommanderEffect(player.getGame(), c));
+                } else if (info.startsWith("Id:")) {
+                    int id = Integer.parseInt(info.substring(4));
+                    idToCard.put(id, c);
+                } else if (info.startsWith("Attaching:")) {
+                    int id = Integer.parseInt(info.substring(info.indexOf(':') + 1));
+                    cardToAttachId.put(c, id);
                 }
             }
 

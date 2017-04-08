@@ -11,6 +11,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.constructed.ConstructedScreen;
 import forge.screens.gauntlet.NewGauntletScreen;
+import forge.screens.home.puzzle.PuzzleScreen;
 import forge.screens.limited.NewDraftScreen;
 import forge.screens.limited.NewSealedScreen;
 import forge.screens.planarconquest.NewConquestScreen;
@@ -24,6 +25,7 @@ public class NewGameMenu extends FPopupMenu {
         BoosterDraft("Booster Draft", FSkinImage.HAND, NewDraftScreen.class),
         SealedDeck("Sealed Deck", FSkinImage.PACK, NewSealedScreen.class),
         QuestMode("Quest Mode", FSkinImage.QUEST_ZEP, NewQuestScreen.class),
+        PuzzleMode("Puzzle Mode", FSkinImage.QUEST_BOOK, PuzzleScreen.class),
         PlanarConquest("Planar Conquest", FSkinImage.MULTIVERSE, NewConquestScreen.class),
         Gauntlet("Gauntlet", FSkinImage.ALPHASTRIKE, NewGauntletScreen.class);
  

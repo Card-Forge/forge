@@ -17,6 +17,7 @@ public enum GameType {
     Quest           (DeckFormat.QuestDeck, true, true, false, "Quest", ""),
     QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft", ""),
     PlanarConquest  (DeckFormat.PlanarConquest, true, false, false, "Planar Conquest", ""),
+    Puzzle          (DeckFormat.Puzzle, false, false, false, "Puzzle", "Solve a puzzle from the given game state"),
     Constructed     (DeckFormat.Constructed, false, true, true, "Constructed", ""),
     DeckManager     (DeckFormat.Constructed, false, true, true, "Deck Manager", ""),
     Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game."),

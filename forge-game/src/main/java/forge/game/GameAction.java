@@ -17,6 +17,7 @@
  */
 package forge.game;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -1434,6 +1435,10 @@ public class GameAction {
     }
 
     public void startGame(GameOutcome lastGameOutcome) {
+        startGame(lastGameOutcome, null);
+    }
+
+    public void startGame(GameOutcome lastGameOutcome, Runnable startGameHook) {
         Player first = determineFirstTurnPlayer(lastGameOutcome);
 
         GameType gameType = game.getRules().getGameType();
@@ -1444,6 +1449,9 @@ public class GameAction {
             // Where there are none, it should bring up speed controls
             game.fireEvent(new GameEventGameStarted(gameType, first, game.getPlayers()));
 
+            // Emissary's Plot
+            // runPreOpeningHandActions(first);
+
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
                 p1.drawCards(p1.getMaxHandSize());
@@ -1453,8 +1461,9 @@ public class GameAction {
             }
 
             // Choose starting hand for each player with multiple hands
-
-            performMulligans(first, game.getRules().hasAppliedVariant(GameType.Commander));
+            if (game.getRules().getGameType() != GameType.Puzzle) {
+                performMulligans(first, game.getRules().hasAppliedVariant(GameType.Commander));
+            }
             if (game.isGameOver()) { break; } // conceded during "mulligan" prompt
 
             game.setAge(GameStage.Play);
@@ -1472,8 +1481,8 @@ public class GameAction {
             game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, true);
             //</THIS CODE WILL WORK WITH PHASE = NULL>
 
-            game.getPhaseHandler().startFirstTurn(first);
 
+            game.getPhaseHandler().startFirstTurn(first, startGameHook);
             //after game ends, ensure Auto-Pass canceled for all players so it doesn't apply to next game
             for (Player p : game.getRegisteredPlayers()) {
                 p.getController().autoPassCancel();
@@ -1487,15 +1496,20 @@ public class GameAction {
         // Only cut/coin toss if it's the first game of the match
         Player goesFirst = null;
 
-        // 904.6: in Archenemy games the Archenemy goes first
-        if (game != null && game.getRules().hasAppliedVariant(GameType.Archenemy)) {
-            for (Player p : game.getPlayers()) {
-                if (p.isArchenemy()) {
-                    return p;
+        if (game != null) {
+            if (game.getRules().getGameType().equals(GameType.Puzzle)) {
+                return game.getPlayers().get(0);
+            }
+
+            // 904.6: in Archenemy games the Archenemy goes first
+            if (game.getRules().hasAppliedVariant(GameType.Archenemy)) {
+                for (Player p : game.getPlayers()) {
+                    if (p.isArchenemy()) {
+                        return p;
+                    }
                 }
             }
         }
-
         // Power Play - Each player with a Power Play in the CommandZone becomes the Starting Player
         Set<Player> powerPlayers = Sets.newHashSet();
         for (Card c : game.getCardsIn(ZoneType.Command)) {
@@ -1629,6 +1643,31 @@ public class GameAction {
         }
     }
 
+    private void runPreOpeningHandActions(final Player first) {
+        Player takesAction = first;
+        do {
+            //
+            List<Card> ploys = CardLists.filter(takesAction.getCardsIn(ZoneType.Command), new Predicate<Card>() {
+                @Override
+                public boolean apply(Card input) {
+                    return input.getName().equals("Emissary's Ploy");
+                }
+            });
+
+            int chosen = 1;
+            List<Integer> cmc = Lists.newArrayList(1, 2, 3);
+
+            for (Card c : ploys) {
+                if (!cmc.isEmpty()) {
+                    chosen = takesAction.getController().chooseNumber(c.getSpellPermanent(), "Emissary's Ploy", cmc, c.getOwner());
+                    cmc.remove((Object)chosen);
+                }
+
+                c.setChosenNumber(chosen);
+            }
+            takesAction = game.getNextPlayerAfter(takesAction);
+        } while (takesAction != first);
+    }
 
     private void runOpeningHandActions(final Player first) {
         Player takesAction = first;

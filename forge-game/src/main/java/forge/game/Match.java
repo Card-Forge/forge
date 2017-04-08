@@ -80,6 +80,10 @@ public class Match {
     }
 
     public void startGame(final Game game) {
+        startGame(game, null);
+    }
+
+    public void startGame(final Game game, Runnable startGameHook) {
         prepareAllZones(game);
         if (rules.useAnte()) {  // Deciding which cards go to ante
             Multimap<Player, Card> list = game.chooseCardsForAnte(rules.getMatchAnteRarity());
@@ -92,7 +96,8 @@ public class Match {
         }
 
         GameOutcome lastOutcome = gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
-        game.getAction().startGame(lastOutcome);
+
+        game.getAction().startGame(lastOutcome, startGameHook);
 
         if (rules.useAnte()) {
             executeAnte(game);

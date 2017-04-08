@@ -32,6 +32,8 @@ import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
+import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
+import forge.screens.home.puzzle.VSubmenuPuzzleSolve;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.assets.FSkinProp;
@@ -56,6 +58,7 @@ import forge.screens.home.quest.VSubmenuQuestPrefs;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.screens.home.sanctioned.VSubmenuDraft;
 import forge.screens.home.sanctioned.VSubmenuSealed;
+import forge.screens.home.sanctioned.VSubmenuWinston;
 import forge.screens.home.settings.VSubmenuAchievements;
 import forge.screens.home.settings.VSubmenuAvatars;
 import forge.screens.home.settings.VSubmenuDownloaders;
@@ -131,6 +134,9 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuGauntletBuild.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuGauntletLoad.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuGauntletContests.SINGLETON_INSTANCE);
+
+        allSubmenus.add(VSubmenuPuzzleSolve.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuPuzzleCreate.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuAchievements.SINGLETON_INSTANCE);

@@ -11,6 +11,7 @@ public enum EMenuGroup {
     SANCTIONED ("Sanctioned Formats"),
     ONLINE ("Online Multiplayer"),
     QUEST ("Quest Mode"),
+    PUZZLE ("Puzzle Mode"),
     GAUNTLET ("Gauntlets"),
     SETTINGS ("Game Settings");
 

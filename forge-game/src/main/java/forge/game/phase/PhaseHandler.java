@@ -878,6 +878,10 @@ public class PhaseHandler implements java.io.Serializable {
     private final static boolean DEBUG_PHASES = false;
 
     public void startFirstTurn(Player goesFirst) {
+        startFirstTurn(goesFirst, null);
+    }
+
+    public void startFirstTurn(Player goesFirst, Runnable startGameHook) {
         StopWatch sw = new StopWatch();
 
         if (phase != null) {
@@ -890,6 +894,11 @@ public class PhaseHandler implements java.io.Serializable {
 
         // don't even offer priority, because it's untap of 1st turn now
         givePriorityToPlayer = false;
+
+        if (startGameHook != null) {
+            startGameHook.run();
+            givePriorityToPlayer = true;
+        }
 
         // MAIN GAME LOOP
         while (!game.isGameOver()) {

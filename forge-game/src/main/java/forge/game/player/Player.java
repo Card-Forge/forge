@@ -884,7 +884,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    protected void addCounter(CounterType counterType, int n, boolean applyMultiplier, boolean fireEvents) {
+    public void addCounter(CounterType counterType, int n, boolean applyMultiplier, boolean fireEvents) {
         if (!canReceiveCounters(counterType)) {
             return;
         }

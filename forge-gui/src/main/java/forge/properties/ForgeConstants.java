@@ -62,6 +62,8 @@ public final class ForgeConstants {
     public static final String MUSIC_DIR           = RES_DIR + "music" + PATH_SEPARATOR;
     public static final String LANG_DIR            = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String EFFECTS_DIR         = RES_DIR + "effects" + PATH_SEPARATOR;
+    public static final String PUZZLE_DIR          = RES_DIR + "puzzle" + PATH_SEPARATOR;
+
 
     private static final String QUEST_DIR             = RES_DIR + "quest" + PATH_SEPARATOR;
     public static final String QUEST_WORLD_DIR        = QUEST_DIR + "world" + PATH_SEPARATOR;

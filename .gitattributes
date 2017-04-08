@@ -993,6 +993,11 @@ forge-gui-desktop/src/main/java/forge/screens/home/online/CSubmenuOnlineLobby.ja
 forge-gui-desktop/src/main/java/forge/screens/home/online/OnlineMenu.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/online/VSubmenuOnlineLobby.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/package-info.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/puzzle/CSubmenuPuzzleCreate.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/puzzle/CSubmenuPuzzleSolve.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/puzzle/PuzzleGameMenu.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/puzzle/VSubmenuPuzzleCreate.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/puzzle/VSubmenuPuzzleSolve.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuChallenges.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuDuels.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestData.java -text
@@ -1347,6 +1352,7 @@ forge-gui-mobile/src/forge/screens/gauntlet/NewGauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
 forge-gui-mobile/src/forge/screens/home/LoadGameMenu.java -text
 forge-gui-mobile/src/forge/screens/home/NewGameMenu.java -text
+forge-gui-mobile/src/forge/screens/home/puzzle/PuzzleScreen.java -text
 forge-gui-mobile/src/forge/screens/limited/DraftingProcessScreen.java -text
 forge-gui-mobile/src/forge/screens/limited/LoadDraftScreen.java -text
 forge-gui-mobile/src/forge/screens/limited/LoadSealedScreen.java -text
@@ -18806,6 +18812,7 @@ forge-gui/res/music/menus/Evil[!!-~]March.mp3 -text
 forge-gui/res/music/menus/Heroic[!!-~]Age.mp3 -text
 forge-gui/res/music/menus/Lord[!!-~]of[!!-~]the[!!-~]Land.mp3 -text
 forge-gui/res/music/menus/The[!!-~]Pyre.mp3 -text
+forge-gui/res/puzzle/PS1.pzl -text
 forge-gui/res/quest/bazaar/ape_pet_l1.txt -text
 forge-gui/res/quest/bazaar/ape_pet_l2.txt -text
 forge-gui/res/quest/bazaar/ape_pet_l3.txt -text
@@ -20844,6 +20851,8 @@ forge-gui/src/main/java/forge/player/package-info.java -text
 forge-gui/src/main/java/forge/properties/ForgeConstants.java -text
 forge-gui/src/main/java/forge/properties/ForgePreferences.java svneol=native#text/plain
 forge-gui/src/main/java/forge/properties/package-info.java svneol=native#text/plain
+forge-gui/src/main/java/forge/puzzle/Puzzle.java -text
+forge-gui/src/main/java/forge/puzzle/PuzzleIO.java -text
 forge-gui/src/main/java/forge/quest/BoosterUtils.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/IQuestEvent.java -text
 forge-gui/src/main/java/forge/quest/IQuestRewardCard.java -text

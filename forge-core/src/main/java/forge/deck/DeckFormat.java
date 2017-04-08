@@ -94,13 +94,15 @@ public enum DeckFormat {
     PlanarConquest ( Range.between(40, Integer.MAX_VALUE), Range.is(0), 1),
     Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase     ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
-    Archenemy      ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4);
+    Archenemy      ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
+    Puzzle         ( Range.between(0, Integer.MAX_VALUE), Range.is(0), 4);
 
     private final Range<Integer> mainRange;
     private final Range<Integer> sideRange; // null => no check
     private final int maxCardCopies;
     private final Predicate<CardRules> cardPoolFilter;
     private final static String ADVPROCLAMATION = "Advantageous Proclamation";
+    private final static String SOVREALM = "Sovereign's Realm";
 
     private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0) {
         this(mainRange0, sideRange0, maxCardCopies0, null);
@@ -168,11 +170,13 @@ public enum DeckFormat {
 
         int min = getMainRange().getMinimum();
         int max = getMainRange().getMaximum();
+        boolean noBasicLands = false;
 
         // Adjust minimum base on number of Advantageous Proclamation or similar cards
         CardPool conspiracies = deck.get(DeckSection.Conspiracy);
         if (conspiracies != null) {
-            min -= (5 * conspiracies.countByName(ADVPROCLAMATION, true));
+            min -= (5 * conspiracies.countByName(ADVPROCLAMATION, false));
+            noBasicLands = conspiracies.countByName(SOVREALM, false) > 0;
         }
 
         if (hasCommander()) { // 1 Commander, or 2 Partner Commanders

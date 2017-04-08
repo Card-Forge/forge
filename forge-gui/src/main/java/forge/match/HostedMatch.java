@@ -54,6 +54,7 @@ public class HostedMatch {
     private Match match;
     private Game game;
     private String title;
+    private Runnable startGameHook = null;
     private final List<PlayerControllerHuman> humanControllers = Lists.newArrayList();
     private Map<RegisteredPlayer, IGuiGame> guis;
     private int humanCount;
@@ -62,7 +63,10 @@ public class HostedMatch {
     private final Map<PlayerControllerHuman, NextGameDecision> nextGameDecisions = Maps.newHashMap();
     private boolean isMatchOver = false;
 
-    public HostedMatch() {
+    public HostedMatch() {}
+
+    public void setStartGameHook(Runnable hook) {
+        startGameHook = hook;
     }
 
     private static GameRules getDefaultRules(final GameType gameType) {
@@ -216,9 +220,8 @@ public class HostedMatch {
                     playbackControl.setGame(game);
                     game.subscribeToEvents(playbackControl);
                 }
-
                 // Actually start the game!
-                match.startGame(game);
+                match.startGame(game, startGameHook);
 
                 // After game is over...
                 isMatchOver = match.isMatchOver();
