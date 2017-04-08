@@ -49,7 +49,6 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card.SplitCMCMode;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
@@ -751,18 +750,9 @@ public class CardFactoryUtil {
             CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
             int highest = 0;
             for (final Card crd : list) {
-                if (crd.isSplitCard()) {
-                    if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > highest) {
-                        highest = crd.getCMC(Card.SplitCMCMode.LeftSplitCMC);
-                    }
-                    if (crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > highest) {
-                        highest = crd.getCMC(Card.SplitCMCMode.RightSplitCMC);
-                    }
-                }
-                else {
-                    if (crd.getCMC() > highest) {
-                        highest = crd.getCMC();
-                    }
+                // dont check for Split card anymore
+                if (crd.getCMC() > highest) {
+                    highest = crd.getCMC();
                 }
             }
             return highest;
@@ -1028,26 +1018,6 @@ public class CardFactoryUtil {
             return doXMath(topCard == null ? 0 : topCard.getCMC(), m, c);
         }
         
-        //Count$TopOfLibraryEachFaceCMC - this version accounts for each of the two split card faces individually
-        if (sq[0].contains("TopOfLibraryEachFaceCMC")) {
-            final Card topCard = cc.getCardsIn(ZoneType.Library).getFirst();
-
-            if (topCard == null) {
-                return 0;
-            }
-
-            if (topCard.isSplitCard()) {
-                // encode two CMC values so they can be processed individually
-                // TODO: devise a better mechanism for this?
-                int cmcLeft = doXMath(topCard.getCMC(SplitCMCMode.LeftSplitCMC), m, c);
-                int cmcRight = doXMath(topCard.getCMC(SplitCMCMode.RightSplitCMC), m, c);
-                int dualCMC = cmcLeft + Card.SPLIT_CMC_ENCODE_MAGIC_NUMBER * cmcRight;
-                return dualCMC;
-            }
-
-            return doXMath(topCard.getCMC(), m, c);
-        }
-
         // Count$EnchantedControllerCreatures
         if (sq[0].contains("EnchantedControllerCreatures")) {
             if (c.getEnchantingCard() != null) {

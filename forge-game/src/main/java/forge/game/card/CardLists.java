@@ -312,7 +312,8 @@ public class CardLists {
         final CardCollection tiedForHighest = new CardCollection();
         int highest = 0;
         for (final Card crd : cardList) {
-            int curCmc = crd.isSplitCard() ? Math.max(crd.getCMC(Card.SplitCMCMode.LeftSplitCMC), crd.getCMC(Card.SplitCMCMode.RightSplitCMC)) : crd.getCMC();
+            // do not check for Split Card anymore
+            int curCmc = crd.getCMC();
 
             if (curCmc > highest) {
                 highest = curCmc;
@@ -335,7 +336,8 @@ public class CardLists {
         final CardCollection tiedForLowest = new CardCollection();
         int lowest = 25;
         for (final Card crd : cardList) {
-            int curCmc = crd.isSplitCard() ? Math.min(crd.getCMC(Card.SplitCMCMode.LeftSplitCMC), crd.getCMC(Card.SplitCMCMode.RightSplitCMC)) : crd.getCMC();
+            // do not check for Split Card anymore
+            int curCmc = crd.getCMC();
 
             if (curCmc < lowest) {
                 lowest = curCmc;

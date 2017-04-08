@@ -258,13 +258,8 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (c.isSplitCard()) {
-                    return c.getCMC(Card.SplitCMCMode.LeftSplitCMC) >= cmc
-                            || c.getCMC(Card.SplitCMCMode.RightSplitCMC) >= cmc;
-                } else {
-                    return c.getCMC() >= cmc;
-                }
-                
+                // do not check for Split card anymore
+                return c.getCMC() >= cmc;
             }
         };
     }
@@ -273,13 +268,8 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (c.isSplitCard()) {
-                    return c.getCMC(Card.SplitCMCMode.LeftSplitCMC) <= cmc
-                            || c.getCMC(Card.SplitCMCMode.RightSplitCMC) <= cmc;
-                } else {
-                    return c.getCMC() <= cmc;
-                }
-                
+                // do not check for Split card anymore
+                return c.getCMC() <= cmc;
             }
         };
     }

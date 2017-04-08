@@ -255,8 +255,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         RightSplitCMC
     }
 
-    public static int SPLIT_CMC_ENCODE_MAGIC_NUMBER = 10000000;
-
     /**
      * Instantiates a new card not associated to any paper card.
      * @param id0 the unique id of the new card.
@@ -5028,14 +5026,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             final CardCollectionView cards = game.getCardsIn(ZoneType.Battlefield);
             for (final Card crd : cards) {
                 if (!crd.isLand() && !crd.isImmutable()) {
-                    if (crd.isSplitCard()) {
-                        if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) < getCMC() || crd.getCMC(Card.SplitCMCMode.RightSplitCMC) < getCMC()) {
-                            return false;
-                        }
-                    } else {
-                        if (crd.getCMC() < getCMC()) {
-                            return false;
-                        }
+                    // no check for SplitCard anymore
+                    if (crd.getCMC() < getCMC()) {
+                        return false;
                     }
                 }
             }
@@ -5127,13 +5120,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 x = Integer.parseInt(rhs);
             } catch (final NumberFormatException e) {
                 x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
-
-                // TODO: find a better solution for handling Count$TopOfLibraryCMC for split cards
-                // (currently two CMCs are encoded in one big integer value)
-                if (property.startsWith("cmc") && x > SPLIT_CMC_ENCODE_MAGIC_NUMBER) {
-                    x2 = Math.round(x / SPLIT_CMC_ENCODE_MAGIC_NUMBER);
-                    x -= x2 * SPLIT_CMC_ENCODE_MAGIC_NUMBER;
-                }
             }
 
             if (y2 == -1) {
@@ -5598,45 +5584,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         //need to get GameState for Discarded Cards
         final Card host = game.getCardState(this);
 
-        if (host.isSplitCard() && host.getCurrentStateName() == CardStateName.Original) {
-            int x = host.getCMC(SplitCMCMode.LeftSplitCMC);
-            int x2 = host.getCMC(SplitCMCMode.RightSplitCMC);
-            return x == n || x2 == n;
-        } else {
-            return host.getCMC() == n;
-        }
+        //do not check for SplitCard anymore
+        return host.getCMC() == n;
     }
     
     public final boolean sharesCMCWith(final Card c1) {
-        int x;
-        int x2 = -1;
-        int y = 0;
-        int y2 = -1;
-
         //need to get GameState for Discarded Cards
         final Card host = game.getCardState(this);
         final Card other = game.getCardState(c1);
 
-        if (host.isSplitCard() && host.getCurrentStateName() == CardStateName.Original) {
-            x = host.getCMC(SplitCMCMode.LeftSplitCMC);
-            x2 = host.getCMC(SplitCMCMode.RightSplitCMC);
-        } else {
-            x = host.getCMC();
-        }
-
-        if (other.isSplitCard() && other.getCurrentStateName() == CardStateName.Original) {
-            y = other.getCMC(SplitCMCMode.LeftSplitCMC);
-            y2 = other.getCMC(SplitCMCMode.RightSplitCMC);
-
-            if (host.isSplitCard() && host.getCurrentStateName() == CardStateName.Original) {
-                return x == y || x == y2 || x2 == y || x2 == y2;
-            } else {
-                return x == y || x == y2;
-            }
-        } else {
-            y = other.getCMC();
-            return x == y || x2 == y;
-        }
+        //do not check for SplitCard anymore
+        return host.getCMC() == other.getCMC();
     }
 
     public final boolean sharesCreatureTypeWith(final Card c1) {
