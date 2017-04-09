@@ -1022,10 +1022,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         setTotalCountersToAdd(addAmount);
 
+        final Integer oldValue = getCounters(counterType);
+        final Integer newValue = addAmount + (oldValue == null ? 0 : oldValue);
         if (fireEvents) {
-            final Integer oldValue = getCounters(counterType);
-            final Integer newValue = addAmount + (oldValue == null ? 0 : oldValue);
-
+            // Not sure why firing events wraps EVERYTHING ins
             if (!newValue.equals(oldValue)) {
                 final int powerBonusBefore = getPowerBonusFromCounters();
                 final int toughnessBonusBefore = getToughnessBonusFromCounters();
@@ -1054,6 +1054,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (addAmount > 0) {
                 getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, runParams, false);
             }
+        } else {
+            setCounters(counterType, newValue);
+            getController().addCounterToPermThisTurn(counterType, addAmount);
+            view.updateCounters(this);
         }
     }
 

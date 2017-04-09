@@ -328,11 +328,10 @@ public abstract class GameState {
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        entity.setCounters(new HashMap<CounterType, Integer>());
+        //entity.setCounters(new HashMap<CounterType, Integer>());
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
-
             entity.addCounter(CounterType.valueOf(pair[0]), Integer.parseInt(pair[1]), false, false);
         }
     }
