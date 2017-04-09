@@ -127,6 +127,9 @@ public abstract class GameState {
         if (c.isToken()) {
             newText.append("t:" + new CardFactory.TokenInfo(c).toString());
         } else {
+            if (c.getPaperCard() == null) {
+                return;
+            }
             newText.append(c.getPaperCard().getName());
         }
         if (c.isCommander()) {
