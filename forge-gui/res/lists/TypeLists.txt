@@ -255,6 +255,7 @@ Arcane
 Trap
 [EnchantmentTypes]
 Aura
+Cartouche
 Curse
 Shrine
 [ArtifactTypes]
