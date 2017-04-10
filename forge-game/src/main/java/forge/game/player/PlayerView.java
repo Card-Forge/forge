@@ -205,7 +205,6 @@ public class PlayerView extends GameEntityView {
         synchronized (kws) {
             allKws = Lists.newArrayList(kws.elementSet());
         }
-        allKws.remove("CanSeeOpponentsFaceDownCards");
         return allKws;
     }
     public boolean hasKeyword(String keyword) {

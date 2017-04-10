@@ -417,9 +417,6 @@ public class CardView extends GameEntityView {
         if (!isFaceDown()) {
             return true;
         }
-        if (viewer.hasKeyword("CanSeeOpponentsFaceDownCards")) {
-            return true;
-        }
 
         // special viewing permissions for viewer
         if (mayPlayerLook(viewer)) {
