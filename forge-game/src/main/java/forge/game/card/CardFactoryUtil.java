@@ -2003,20 +2003,7 @@ public class CardFactoryUtil {
                 addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Level up")) {
-                final String strMaxLevel = card.getSVar("maxLevel");
-                card.removeIntrinsicKeyword(keyword);
-
-                final String[] k = keyword.split(":");
-                final String manacost = k[1];
-
-                String effect = "AB$ PutCounter | Cost$ " + manacost + " | " +
-                        "SorcerySpeed$ True | LevelUp$ True | CounterNum$ 1" +
-                        " | CounterType$ LEVEL | PrecostDesc$ Level Up | MaxLevel$ " +
-                        strMaxLevel + " | SpellDescription$ (Put a level counter on" +
-                        " this permanent. Activate this ability only any time you" +
-                        " could cast a sorcery.)";
-
-                card.addSpellAbility(AbilityFactory.getAbility(effect, card));
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Cycling")) {
                 addSpellAbility(keyword, card, null);
@@ -3717,6 +3704,29 @@ public class CardFactoryUtil {
                 sa.setIntrinsic(intrinsic);
                 card.addSpellAbility(sa);
             }
+        } else if (keyword.startsWith("Level up")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("AB$ PutCounter| Cost$ ").append(manacost);
+            sb.append(" | PrecostDesc$ Level Up | CostDesc$ ").append(ManaCostParser.parse(manacost));
+            sb.append(" | SorcerySpeed$ True | LevelUp$ True | CounterNum$ 1 | CounterType$ LEVEL");
+            if (card.hasSVar("maxLevel")) {
+                final String strMaxLevel = card.getSVar("maxLevel");
+                sb.append("| MaxLevel$ ").append(strMaxLevel);
+            }
+            sb.append(" | SpellDescription$ (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
+
+            final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
+            sa.setIntrinsic(intrinsic);
+            
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                kws.addSpellAbility(sa);
+            }
+
+            card.addSpellAbility(sa);
         } else if (keyword.startsWith("Monstrosity")) {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];

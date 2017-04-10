@@ -76,7 +76,7 @@ public enum Keyword {
     INTIMIDATE(SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or creatures that share a color with it."),
     KICKER(Kicker.class, false, "You may pay an additional %s as you cast this spell."),
     LANDWALK(KeywordWithType.class, false, "This creature is unblockable as long as defending player controls a %s."),
-    LEVELUP(KeywordWithCost.class, false, "%s: Put a level counter on this permanent. Activate this ability only any time you could cast a sorcery."),
+    LEVEL_UP(KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK(SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
     LIVING_WEAPON(SimpleKeyword.class, true, "When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this Equipment to it."),
     MADNESS(KeywordWithCost.class, true, "If you discard this card, you may cast it for %s instead of putting it into your graveyard."),
