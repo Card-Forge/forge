@@ -248,6 +248,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.addType("Zombie");
                         copy.setColor(MagicColor.WHITE);
                         copy.setManaCost(ManaCost.NO_COST);
+                        copy.setEmbalmed(true);
+
                         String name = copy.getName().replace(",", "").replace(" ", "_").toLowerCase();
                         copy.setImageKey(ImageKeys.getTokenKey("embalm_" + name));
                     }

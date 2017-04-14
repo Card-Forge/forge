@@ -2,6 +2,8 @@ package forge.game.ability.effects;
 
 import forge.GameCommand;
 import forge.card.CardStateName;
+import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -329,6 +331,12 @@ public class CloneEffect extends SpellAbilityEffect {
             }
         }
         tgtCard.addColor(shortColors, !sa.hasParam("OverwriteColors"), tgtCard.getTimestamp());
+
+        if (sa.hasParam("Embalm") && tgtCard.isEmbalmed()) {
+            tgtCard.addType("Zombie");
+            tgtCard.setColor(MagicColor.WHITE);
+            tgtCard.setManaCost(ManaCost.NO_COST);
+        }
     }
 
 }

@@ -165,6 +165,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean suspendCast = false;
     private boolean suspend = false;
     private boolean tributed = false;
+    private boolean embalmed = false;
     private boolean madness = false;
 
     private boolean phasedOut = false;
@@ -6195,6 +6196,13 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void setTributed(final boolean b) {
         tributed = b;
+    }
+
+    public final boolean isEmbalmed() {
+        return embalmed;
+    }
+    public final void setEmbalmed(final boolean b) {
+        embalmed = b;
     }
 
     public boolean isMadness() {
