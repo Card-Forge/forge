@@ -17,17 +17,8 @@
  */
 package forge.game.phase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -42,6 +33,9 @@ import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -91,7 +85,8 @@ public class Untap extends Phase {
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
                 || c.hasKeyword("This card doesn't untap during your next untap step.")
                 || c.hasKeyword("This card doesn't untap during your next two untap steps.")
-                || c.hasKeyword("This card doesn't untap.")) {
+                || c.hasKeyword("This card doesn't untap.")
+                || c.hasKeyword("Exerted")) {
             return false;
         }
         return true;
@@ -211,6 +206,7 @@ public class Untap extends Phase {
                 c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next two untap steps.");
                 c.addHiddenExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
             }
+            c.removeAllExtrinsicKeyword("Exerted");
         }
     } // end doUntap
 

@@ -716,6 +716,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerDevoured.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerDiscarded.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerDrawn.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerEvolved.java -text
+forge-game/src/main/java/forge/game/trigger/TriggerExerted.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerExploited.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerFight.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerFlippedCoin.java -text
@@ -16855,6 +16856,7 @@ forge-gui/res/cardsfolder/upcoming/trueheart_duelist.txt -text
 forge-gui/res/cardsfolder/upcoming/unwavering_initiate.txt -text
 forge-gui/res/cardsfolder/upcoming/vizier_of_remedies.txt -text
 forge-gui/res/cardsfolder/upcoming/vizier_of_tumbling_sands.txt -text
+forge-gui/res/cardsfolder/upcoming/watchful_naga.txt -text
 forge-gui/res/cardsfolder/upcoming/wayward_servant.txt -text
 forge-gui/res/cardsfolder/upcoming/winds_of_rebuke.txt -text
 forge-gui/res/cardsfolder/upcoming/winged_shepherd.txt -text

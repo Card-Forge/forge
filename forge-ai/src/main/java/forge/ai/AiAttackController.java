@@ -30,11 +30,7 @@ import forge.card.CardTypeView;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
@@ -78,11 +74,7 @@ public class AiAttackController {
      * <p>
      * Constructor for ComputerUtil_Attack2.
      * </p>
-     * 
-     * @param possibleAttackers
-     *            a {@link forge.CardList} object.
-     * @param possibleBlockers
-     *            a {@link forge.CardList} object.
+     *
      */
     public AiAttackController(final Player ai) {
         this.ai = ai;
@@ -156,10 +148,7 @@ public class AiAttackController {
      * <p>
      * sortAttackers.
      * </p>
-     * 
-     * @param in
-     *            a {@link forge.CardList} object.
-     * @return a {@link forge.CardList} object.
+     *
      */
     public final static List<Card> sortAttackers(final List<Card> in) {
         final List<Card> list = new ArrayList<Card>();
@@ -971,7 +960,7 @@ public class AiAttackController {
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param defenders
-     *            a {@link forge.CardList} object.
+     *            a object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
@@ -1117,6 +1106,18 @@ public class AiAttackController {
         }
         return false; // don't attack
     }
+
+    public static List<Card> exertAttackers(List<Card> attackers) {
+        List<Card> exerters = Lists.newArrayList();
+        for(Card c : attackers) {
+            // TODO Improve when the AI wants to use Exert powers
+            if (random.nextBoolean()) {
+                exerters.add(c);
+            }
+        }
+
+        return exerters;
+    }
     
     /**
      * Find a protection type that will make an attacker unblockable.
@@ -1181,5 +1182,4 @@ public class AiAttackController {
         }
         return null;    //should never get here
     }
-
 } // end class ComputerUtil_Attack2

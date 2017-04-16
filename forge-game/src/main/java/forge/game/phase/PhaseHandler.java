@@ -508,6 +508,18 @@ public class PhaseHandler implements java.io.Serializable {
                 }
 
             } while (!success);
+
+            // Exert creatures here
+            List<Card> possibleExerters = CardLists.getKeyword(combat.getAttackers(),
+                    "You may exert CARDNAME as it attacks.");
+
+            for(Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
+                exerter.addExtrinsicKeyword("Exerted");
+                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                runParams.put("Card", exerter);
+                runParams.put("Player", playerTurn);
+                game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
+            }
         }
 
         if (game.isGameOver()) { // they just like to close window at any moment

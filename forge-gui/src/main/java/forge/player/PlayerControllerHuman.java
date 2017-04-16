@@ -577,6 +577,11 @@ public class PlayerControllerHuman
     }
 
     @Override
+    public List<Card> exertAttackers(List<Card> attackers) {
+        return getGui().getChoices("Exert Attackers?", 0, attackers.size(), attackers);
+    }
+
+    @Override
     public CardCollection orderBlocker(final Card attacker, final Card blocker, final CardCollection oldBlockers) {
         final CardView vAttacker = CardView.get(attacker);
         getGui().setPanelSelection(vAttacker);

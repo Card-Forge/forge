@@ -47,6 +47,7 @@ public enum TriggerType {
     Discarded(TriggerDiscarded.class),
     Drawn(TriggerDrawn.class),
     Evolved(TriggerEvolved.class),
+    Exerted(TriggerExerted.class),
     Exploited(TriggerExploited.class),
     Fight(TriggerFight.class),
     FlippedCoin(TriggerFlippedCoin.class),
@@ -104,7 +105,7 @@ public enum TriggerType {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param string
+     * @param value
      * @return
      */
     public static TriggerType smartValueOf(String value) {

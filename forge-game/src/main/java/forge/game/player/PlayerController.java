@@ -57,7 +57,7 @@ public abstract class PlayerController {
         Echo,
         Multikicker,
         Replicate,
-        CumulativeUpkeep;
+        CumulativeUpkeep,
     }
 
     public static enum BinaryChoiceType {
@@ -126,6 +126,7 @@ public abstract class PlayerController {
     public abstract Player chooseStartingPlayer(boolean isFirstGame);
 
     public abstract CardCollection orderBlockers(Card attacker, CardCollection blockers);
+    public abstract List<Card> exertAttackers(List<Card> attackers);
     /**
      * Add a card to a pre-existing blocking order.
      * @param attacker the attacking creature.
@@ -179,7 +180,7 @@ public abstract class PlayerController {
     public abstract int chooseNumber(SpellAbility sa, String title, List<Integer> values, Player relatedPlayer);
     public int chooseNumber(SpellAbility sa, String string, int min, int max, Map<String, Object> params) {
         return chooseNumber(sa, string, min, max);
-    };
+    }
 
     public final boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice) { return chooseBinary(sa, question, kindOfChoice, (Boolean) null); }
     public abstract boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultChioce);

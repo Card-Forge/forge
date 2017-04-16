@@ -231,11 +231,16 @@ public class PlayerControllerAi extends PlayerController {
     public CardCollection orderBlockers(Card attacker, CardCollection blockers) {
         return AiBlockController.orderBlockers(attacker, blockers);
     }
-    
+
+    @Override
+    public List<Card> exertAttackers(List<Card> attackers) {
+        return AiAttackController.exertAttackers(attackers);
+    }
+
     @Override
     public CardCollection orderBlocker(Card attacker, Card blocker, CardCollection oldBlockers) {
     	return AiBlockController.orderBlocker(attacker, blocker, oldBlockers);
-    };
+    }
 
     @Override
     public CardCollection orderAttackers(Card blocker, CardCollection attackers) {
