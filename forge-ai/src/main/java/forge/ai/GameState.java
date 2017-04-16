@@ -265,21 +265,21 @@ public abstract class GameState {
                 aiCardTexts.put(ZoneType.Graveyard, categoryValue);
         }
 
-        else if (categoryName.equals("library")) {
+        else if (categoryName.endsWith("library")) {
             if (isHuman)
                 humanCardTexts.put(ZoneType.Library, categoryValue);
             else
                 aiCardTexts.put(ZoneType.Library, categoryValue);
         }
 
-        else if (categoryName.equals("exile")) {
+        else if (categoryName.endsWith("exile")) {
             if (isHuman)
                 humanCardTexts.put(ZoneType.Exile, categoryValue);
             else
                 aiCardTexts.put(ZoneType.Exile, categoryValue);
         }
 
-        else if (categoryName.equals("command")) {
+        else if (categoryName.endsWith("command")) {
             if (isHuman)
                 humanCardTexts.put(ZoneType.Command, categoryValue);
             else
@@ -447,7 +447,7 @@ public abstract class GameState {
                     player.setCommanders(Lists.newArrayList(c));
                     player.getZone(ZoneType.Command).add(Player.createCommanderEffect(player.getGame(), c));
                 } else if (info.startsWith("Id:")) {
-                    int id = Integer.parseInt(info.substring(4));
+                    int id = Integer.parseInt(info.substring(3));
                     idToCard.put(id, c);
                 } else if (info.startsWith("Attaching:")) {
                     int id = Integer.parseInt(info.substring(info.indexOf(':') + 1));
