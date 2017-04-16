@@ -1,0 +1,8 @@
+Name:Anointed Procession
+ManaCost:3 W
+Types:Enchantment
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DoubleToken | EffectOnly$ True | Description$ If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
+SVar:DoubleToken:DB$ ReplaceEffect | VarName$ TokenNum | VarValue$ X | References$ X
+SVar:X:ReplaceCount$TokenNum/Twice
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anointed_procession.jpg
+Oracle:If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.

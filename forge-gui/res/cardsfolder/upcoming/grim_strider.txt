@@ -1,0 +1,11 @@
+Name:Dread Slag
+ManaCost:3 B
+Types:Creature Horror
+PT:6/6
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets -1/-1 for each card in your hand.
+SVar:X:Count$InYourHand
+SVar:BuffedBy:Card
+SVar:NeedsToPlayVar:Y LE5
+SVar:Y:Count$CardsInYourHand
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_strider.jpg
+Oracle:Grim Strider gets -1/-1 for each card in your hand.

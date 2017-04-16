@@ -1,0 +1,17 @@
+Name:Never
+ManaCost:1 B B
+AlternateMode: Split
+Types:Sorcery
+A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/never_return.jpg
+Oracle:Destroy target creature or planeswalker.
+
+ALTERNATE
+
+Name:Return
+ManaCost:3 B
+Types:Sorcery
+K:Aftermath
+A:SP$ ChangeZone | Cost$ 3 B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard. Create a 2/2 black Zombie creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie AKH
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nExile target card from a graveyard. Create a 2/2 black Zombie creature token.
