@@ -80,8 +80,18 @@ public class HumanPlaySpellAbility {
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(ability.getMayPlay());
 
-        final boolean manaConversion = (ability.isSpell() && (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
-                || (option != null && option.isIgnoreManaCostColor())));
+        boolean manaTypeConversion = false;
+        boolean manaColorConversion = false;
+
+        if (ability.isSpell()) {
+            if (option != null && option.isIgnoreManaCostType()) {
+                manaTypeConversion = true;
+            } else  if (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
+                    || (option != null && option.isIgnoreManaCostColor())) {
+                manaColorConversion = true;
+            }
+        }
+        
         final boolean playerManaConversion = human.hasManaConversion()
                 && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
 
@@ -108,11 +118,13 @@ public class HumanPlaySpellAbility {
 
         ability.resetPaidHash();
 
-        if (manaConversion) {
-            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_MANA_CONVERSION);
+        if (manaTypeConversion) {
+            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_TYPE_CONVERSION);
+        } else if (manaColorConversion) {
+            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_COLOR_CONVERSION);
         }
         if (playerManaConversion) {
-            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_MANA_CONVERSION);
+            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_COLOR_CONVERSION);
             human.incNumManaConversion();
         }
         
@@ -151,7 +163,7 @@ public class HumanPlaySpellAbility {
                     ability.getHostCard().unanimateBestow();
                 }
             }
-            if (manaConversion || keywordColor) {
+            if (manaTypeConversion || manaColorConversion || keywordColor) {
                 manapool.restoreColorReplacements();
             }
             if (playerManaConversion) {
@@ -177,7 +189,7 @@ public class HumanPlaySpellAbility {
             if (mayChooseTargets) {
                 clearTargets(ability);
             }
-            if (manaConversion || keywordColor) {
+            if (manaTypeConversion || manaColorConversion || keywordColor) {
                 manapool.restoreColorReplacements();
             }
         }

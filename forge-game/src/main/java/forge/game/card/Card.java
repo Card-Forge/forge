@@ -1018,7 +1018,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             addAmount = 0;
         }
 
-        if (addAmount == 0) {
+        if (addAmount <= 0) {
             return;
         }
         setTotalCountersToAdd(addAmount);
@@ -2378,17 +2378,18 @@ public class Card extends GameEntity implements Comparable<Card> {
     	}
     	return mayPlay.get(sta);
     }
+
     public final List<CardPlayOption> mayPlay(final Player player) {
-    	List<CardPlayOption> result = Lists.newArrayList();
-    	for (CardPlayOption o : mayPlay.values()) {
-    		if (o.getPlayer().equals(player)) {
-    			result.add(o);
-    		}
-    	}
+        List<CardPlayOption> result = Lists.newArrayList();
+        for (CardPlayOption o : mayPlay.values()) {
+            if (o.getPlayer().equals(player)) {
+                result.add(o);
+            }
+        }
         return result;
     }
-    public final void setMayPlay(final Player player, final boolean withoutManaCost, final boolean ignoreColor, final boolean withFlash, final StaticAbility sta) {
-        this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, ignoreColor, withFlash));
+    public final void setMayPlay(final Player player, final boolean withoutManaCost, final boolean withFlash, final StaticAbility sta) {
+        this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, withFlash));
     }
     public final void removeMayPlay(final StaticAbility sta) {
         this.mayPlay.remove(sta);

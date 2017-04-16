@@ -16,17 +16,15 @@ public final class CardPlayOption {
     private final Player player;
     private final StaticAbility sta;
     private final PayManaCost payManaCost;
-    private final boolean ignoreManaCostColor;
     private final boolean withFlash;
 
-    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
-        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, ignoreManaCostColor, withFlash);
+    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final boolean withFlash) {
+        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, withFlash);
     }
-    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final boolean ignoreManaCostColor, final boolean withFlash) {
+    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final boolean withFlash) {
         this.player = player;
         this.sta = sta;
         this.payManaCost = payManaCost;
-        this.ignoreManaCostColor = ignoreManaCostColor;
         this.withFlash = withFlash;
     }
 
@@ -48,7 +46,11 @@ public final class CardPlayOption {
     }
 
     public boolean isIgnoreManaCostColor() {
-        return ignoreManaCostColor;
+        return sta.hasParam("MayPlayIgnoreColor");
+    }
+    
+    public boolean isIgnoreManaCostType() {
+        return sta.hasParam("MayPlayIgnoreType");
     }
     
     public boolean isWithFlash() {
@@ -67,6 +69,8 @@ public final class CardPlayOption {
         case YES:
             if (isIgnoreManaCostColor()) {
                 sb.append(" (may spend mana as though it were mana of any color to cast it)");
+            } else if (isIgnoreManaCostType()) {
+                sb.append(" (may spend mana as though it were mana of any type to cast it)");
             }
             break;
         case NO:
