@@ -59,9 +59,11 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Garruk, Caller of Beasts", "Garruk's Wild Pair", "Can you beat two for the price of one?");
         add("Garruk, Primal Hunter", "Garruk's Garden", "They came out after a rain...");
         add("Gideon Jura", "Gideon's Brawl", "Are you man enough to mess with me?");
+        add("Gideon of the Trials", "Gideon's Eternity", "Justice will never die!");
+        add("Gideon, Ally of Zendikar", "Gideon's Anthem", "Giddy up! Let's all rally against the Eldrazi threat!");
         add("Gideon, Battle-Forged", "Gideon's First Steps", "I still have a long road ahead of me...");
         add("Gideon, Champion of Justice", "Gideon's Aftermath", "Gideon stands alone!");
-        add("Gideon, Ally of Zendikar", "Gideon's Anthem", "Giddy up! Let's all rally against the Eldrazi threat!");
+        add("Gideon, Martial Paragon", "Gideon's Alpha Strike", "Geronimo!");
         add("Jace Beleren", "Jace's Grind", "Nice memories... not!");
         add("Jace, Architect of Thought", "Jace's Incantation", "I like that one. I'll steal it!");
         add("Jace, Memory Adept", "Jace's Revelation", "So many things to learn!");
@@ -77,6 +79,8 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Liliana Vess", "Liliana's Bidding", "Stop being lazy and go to work!");
         add("Liliana of the Dark Realms", "Liliana's Ritual", "What do you mean, \"out of character\"?");
         add("Liliana of the Veil", "Liliana's Choice", "Which one of your children do you love best?");
+        add("Liliana, Death's Majesty", "Liliana's Wrath", "Everybody died... except for those who were already dead.");
+        add("Liliana, Death Wielder", "Liliana's Mass Raise", "Death is no excuse to stop working.");
         add("Liliana, Defiant Necromancer", "Liliana's Necromastery", "Come join the Dark Side...");
         add("Liliana, the Last Hope", "Liliana's Army", "The dead will always outnumber the living...");
         add("Nahiri, the Harbinger", "Nahiri's Mystery Guest", "This should be your cue to run.");
@@ -86,6 +90,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
         add("Nissa, Nature's Artisan", "Nissa's Stampede", "Big enough for you?");
         add("Nissa, Sage Animist", "Nissa's Wake-Up Call", "Wake up! Time to work!");
+        add("Nissa, Steward of Elements", "Nissa's Flying Rocks", "You don't need to be without sin to throw rocks!");
         add("Nissa, Vital Force", "Nissa's Harvest", "What a landfall!");
         add("Nissa, Voice of Zendikar", "Nissa's Bounty", "It's harvest time!");
         add("Nissa, Worldwaker", "Nissa's Awakening", "The whole country is here!");
