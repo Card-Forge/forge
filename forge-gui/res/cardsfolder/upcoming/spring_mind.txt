@@ -1,4 +1,4 @@
-Name:Start
+Name:Spring
 ManaCost:2 G
 AlternateMode: Split
 Types:Sorcery
