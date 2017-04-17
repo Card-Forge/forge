@@ -16709,6 +16709,8 @@ forge-gui/res/cardsfolder/u/utter_end.txt -text
 forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/upcoming/ahn_crop_champion.txt -text
+forge-gui/res/cardsfolder/upcoming/ahn_crop_crasher.txt -text
 forge-gui/res/cardsfolder/upcoming/angel_of_sanctions.txt -text
 forge-gui/res/cardsfolder/upcoming/angler_drake.txt -text
 forge-gui/res/cardsfolder/upcoming/anointed_procession.txt -text
@@ -16717,8 +16719,10 @@ forge-gui/res/cardsfolder/upcoming/archfiend_of_ifnir.txt -text
 forge-gui/res/cardsfolder/upcoming/aven_initiate.txt -text
 forge-gui/res/cardsfolder/upcoming/aven_wind_guide.txt -text
 forge-gui/res/cardsfolder/upcoming/baleful_ammit.txt -text
+forge-gui/res/cardsfolder/upcoming/battlefield_scavenger.txt -text
 forge-gui/res/cardsfolder/upcoming/benefaction_of_rhonas.txt -text
 forge-gui/res/cardsfolder/upcoming/binding_mummy.txt -text
+forge-gui/res/cardsfolder/upcoming/bitterblade_warrior.txt -text
 forge-gui/res/cardsfolder/upcoming/blazing_volley.txt -text
 forge-gui/res/cardsfolder/upcoming/blighted_bat.txt -text
 forge-gui/res/cardsfolder/upcoming/bloodlust_inciter.txt -text
@@ -16737,6 +16741,7 @@ forge-gui/res/cardsfolder/upcoming/cartouche_of_zeal.txt -text
 forge-gui/res/cardsfolder/upcoming/cascading_cataracts.txt -text
 forge-gui/res/cardsfolder/upcoming/cast_out.txt -text
 forge-gui/res/cardsfolder/upcoming/censor.txt -text
+forge-gui/res/cardsfolder/upcoming/champion_of_rhonas.txt -text
 forge-gui/res/cardsfolder/upcoming/channeler_initiate.txt -text
 forge-gui/res/cardsfolder/upcoming/colossapede.txt -text
 forge-gui/res/cardsfolder/upcoming/commit_memory.txt -text
@@ -16757,6 +16762,7 @@ forge-gui/res/cardsfolder/upcoming/deem_worthy.txt -text
 forge-gui/res/cardsfolder/upcoming/desert_cerodon.txt -text
 forge-gui/res/cardsfolder/upcoming/desiccated_naga.txt -text
 forge-gui/res/cardsfolder/upcoming/destined_lead.txt -text
+forge-gui/res/cardsfolder/upcoming/devoted_crop_mate.txt -text
 forge-gui/res/cardsfolder/upcoming/dispossess.txt -text
 forge-gui/res/cardsfolder/upcoming/dissenters_delivery.txt -text
 forge-gui/res/cardsfolder/upcoming/djerus_resolve.txt -text
@@ -16768,6 +16774,7 @@ forge-gui/res/cardsfolder/upcoming/dusk_dawn.txt -text
 forge-gui/res/cardsfolder/upcoming/edifice_of_authority.txt -text
 forge-gui/res/cardsfolder/upcoming/electrify.txt -text
 forge-gui/res/cardsfolder/upcoming/embalmers_tools.txt -text
+forge-gui/res/cardsfolder/upcoming/emberhorn_minotaur.txt -text
 forge-gui/res/cardsfolder/upcoming/emissarys_ploy.txt -text
 forge-gui/res/cardsfolder/upcoming/enigma_drake.txt -text
 forge-gui/res/cardsfolder/upcoming/exemplar_of_strength.txt -text
@@ -16788,11 +16795,14 @@ forge-gui/res/cardsfolder/upcoming/gideons_intervention.txt -text
 forge-gui/res/cardsfolder/upcoming/gideons_resolve.txt -text
 forge-gui/res/cardsfolder/upcoming/gift_of_paradise.txt -text
 forge-gui/res/cardsfolder/upcoming/glorious_end.txt -text
+forge-gui/res/cardsfolder/upcoming/glory_bound_initiate.txt -text
+forge-gui/res/cardsfolder/upcoming/glorybringer.txt -text
 forge-gui/res/cardsfolder/upcoming/glyph_keeper.txt -text
 forge-gui/res/cardsfolder/upcoming/graceful_cat.txt -text
 forge-gui/res/cardsfolder/upcoming/grasping_dunes.txt -text
 forge-gui/res/cardsfolder/upcoming/greater_sandwurm.txt -text
 forge-gui/res/cardsfolder/upcoming/grim_strider.txt -text
+forge-gui/res/cardsfolder/upcoming/gust_walker.txt -text
 forge-gui/res/cardsfolder/upcoming/hapatras_mark.txt -text
 forge-gui/res/cardsfolder/upcoming/harsh_mentor.txt -text
 forge-gui/res/cardsfolder/upcoming/harvest_season.txt -text
@@ -16806,6 +16816,7 @@ forge-gui/res/cardsfolder/upcoming/hieroglyphic_illumination.txt -text
 forge-gui/res/cardsfolder/upcoming/honed_khopesh.txt -text
 forge-gui/res/cardsfolder/upcoming/honored_crop_captain.txt -text
 forge-gui/res/cardsfolder/upcoming/honored_hydra.txt -text
+forge-gui/res/cardsfolder/upcoming/hooded_brawler.txt -text
 forge-gui/res/cardsfolder/upcoming/horror_of_the_broken_lands.txt -text
 forge-gui/res/cardsfolder/upcoming/hyena_pack.txt -text
 forge-gui/res/cardsfolder/upcoming/illusory_wrappings.txt -text
@@ -16834,6 +16845,7 @@ forge-gui/res/cardsfolder/upcoming/minotaur_sureshot.txt -text
 forge-gui/res/cardsfolder/upcoming/mouth_feed.txt -text
 forge-gui/res/cardsfolder/upcoming/naga_oracle.txt -text
 forge-gui/res/cardsfolder/upcoming/naga_vitalist.txt -text
+forge-gui/res/cardsfolder/upcoming/nef_crop_entangler.txt -text
 forge-gui/res/cardsfolder/upcoming/neheb_the_worthy.txt -text
 forge-gui/res/cardsfolder/upcoming/never_return.txt -text
 forge-gui/res/cardsfolder/upcoming/nimble_blade_khenra.txt -text
@@ -16859,6 +16871,7 @@ forge-gui/res/cardsfolder/upcoming/pursue_glory.txt -text
 forge-gui/res/cardsfolder/upcoming/pyramid_of_the_pantheon.txt -text
 forge-gui/res/cardsfolder/upcoming/reduce_rubble.txt -text
 forge-gui/res/cardsfolder/upcoming/regal_caracal.txt -text
+forge-gui/res/cardsfolder/upcoming/rhet_crop_spearmaster.txt -text
 forge-gui/res/cardsfolder/upcoming/rhonas_the_indomitable.txt -text
 forge-gui/res/cardsfolder/upcoming/rhonass_monument.txt -text
 forge-gui/res/cardsfolder/upcoming/river_serpent.txt -text
@@ -16894,6 +16907,7 @@ forge-gui/res/cardsfolder/upcoming/supernatural_stamina.txt -text
 forge-gui/res/cardsfolder/upcoming/supply_caravan.txt -text
 forge-gui/res/cardsfolder/upcoming/sweltering_suns.txt -text
 forge-gui/res/cardsfolder/upcoming/synchronized_strike.txt -text
+forge-gui/res/cardsfolder/upcoming/tah_crop_elite.txt -text
 forge-gui/res/cardsfolder/upcoming/tah_crop_skirmisher.txt -text
 forge-gui/res/cardsfolder/upcoming/tattered_mummy.txt -text
 forge-gui/res/cardsfolder/upcoming/temmet_vizier_of_naktamun.txt -text
@@ -16907,6 +16921,7 @@ forge-gui/res/cardsfolder/upcoming/trial_of_solidarity.txt -text
 forge-gui/res/cardsfolder/upcoming/trial_of_strength.txt -text
 forge-gui/res/cardsfolder/upcoming/trial_of_zeal.txt -text
 forge-gui/res/cardsfolder/upcoming/trueheart_duelist.txt -text
+forge-gui/res/cardsfolder/upcoming/trueheart_twins.txt -text
 forge-gui/res/cardsfolder/upcoming/unwavering_initiate.txt -text
 forge-gui/res/cardsfolder/upcoming/violent_impact.txt -text
 forge-gui/res/cardsfolder/upcoming/vizier_of_remedies.txt -text
