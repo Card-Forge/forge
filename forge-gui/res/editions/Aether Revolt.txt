@@ -7,7 +7,7 @@ Type=Expansion
 MciCode=aer
 Booster=10 Common:!fromSheet("AER Planeswalker Decks"), 3 Uncommon:!fromSheet("AER Planeswalker Decks"), 1 RareMythic:!fromSheet("AER Planeswalker Decks"), 1 BasicLand KLD
 AdditionalSheetForFoils=fromSheet("MPS Aether Revolt Inventions")
-AdditionalSetUnlockedInQuest=MPS
+AdditionalSetUnlockedInQuest=MPS_KLD
 
 [cards]
 1 U Aerial Modification

@@ -7,8 +7,8 @@ Type=Expansion
 MciCode=akh
 #Booster=10 Common:!fromSheet("AKH Planeswalker Decks"), 3 Uncommon:!fromSheet("AKH Planeswalker Decks"), 1 RareMythic:!fromSheet("AKH Planeswalker Decks"), 1 BasicLand AKH
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand AKH
-#AdditionalSheetForFoils=fromSheet("MPS Amonkhet Invocations")
-AdditionalSetUnlockedInQuest=MPS
+AdditionalSheetForFoils=fromSheet("MPS Amonkhet Invocations")
+AdditionalSetUnlockedInQuest=MPS_AKH
 
 [cards]
 1 M Angel of Sanctions

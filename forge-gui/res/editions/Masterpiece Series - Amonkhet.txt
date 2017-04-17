@@ -1,0 +1,38 @@
+[metadata]
+Code=MPS_AKH
+Date=2017-04-28
+Name=Masterpiece Series - Amonkhet
+MciCode=mps
+Type=Other
+
+[cards]
+1 M Austere Command
+2 M Aven Mindcensor
+3 M Containment Priest
+4 M Loyal Retainers
+5 M Oketra the True
+6 M Worship
+7 M Wrath of God
+8 M Consecrated Sphinx
+9 M Counterbalance
+10 M Counterspell
+11 M Cryptic Command
+12 M Daze
+13 M Divert
+14 M Force of Will
+15 M Kefnet the Mindful
+16 M Pact of Negation
+17 M Spell Pierce
+18 M Stifle
+19 M Attrition
+20 M Bontu the Glorified
+21 M Dark Ritual
+22 M Diabolic Intent
+23 M Entomb
+24 M Mind Twist
+25 M Aggravated Assault
+26 M Chain Lightning
+27 M Hazoret the Fervent
+28 M Rhonas the Indomitable
+29 M Maelstrom Pulse
+30 M Vindicate

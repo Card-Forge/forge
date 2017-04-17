@@ -1045,62 +1045,62 @@ Verdant Crescendo
 Woodland Stream
 
 [MPS Kaladesh Inventions]
-Cataclysmic Gearhulk|MPS
-Torrential Gearhulk|MPS
-Noxious Gearhulk|MPS
-Combustible Gearhulk|MPS
-Verdurous Gearhulk|MPS
-AEther Vial|MPS
-Champion's Helm|MPS
-Chromatic Lantern|MPS
-Chrome Mox|MPS
-Cloudstone Curio|MPS
-Crucible of Worlds|MPS
-Gauntlet of Power|MPS
-Hangarback Walker|MPS
-Lightning Greaves|MPS
-Lotus Petal|MPS
-Mana Crypt|MPS
-Mana Vault|MPS
-Mind's Eye|MPS
-Mox Opal|MPS
-Painter's Servant|MPS
-Rings of Brighthearth|MPS
-Scroll Rack|MPS
-Sculpting Steel|MPS
-Sol Ring|MPS
-Solemn Simulacrum|MPS
-Static Orb|MPS
-Steel Overseer|MPS
-Sword of Feast and Famine|MPS
-Sword of Fire and Ice|MPS
-Sword of Light and Shadow|MPS
+Cataclysmic Gearhulk|MPS_KLD
+Torrential Gearhulk|MPS_KLD
+Noxious Gearhulk|MPS_KLD
+Combustible Gearhulk|MPS_KLD
+Verdurous Gearhulk|MPS_KLD
+AEther Vial|MPS_KLD
+Champion's Helm|MPS_KLD
+Chromatic Lantern|MPS_KLD
+Chrome Mox|MPS_KLD
+Cloudstone Curio|MPS_KLD
+Crucible of Worlds|MPS_KLD
+Gauntlet of Power|MPS_KLD
+Hangarback Walker|MPS_KLD
+Lightning Greaves|MPS_KLD
+Lotus Petal|MPS_KLD
+Mana Crypt|MPS_KLD
+Mana Vault|MPS_KLD
+Mind's Eye|MPS_KLD
+Mox Opal|MPS_KLD
+Painter's Servant|MPS_KLD
+Rings of Brighthearth|MPS_KLD
+Scroll Rack|MPS_KLD
+Sculpting Steel|MPS_KLD
+Sol Ring|MPS_KLD
+Solemn Simulacrum|MPS_KLD
+Static Orb|MPS_KLD
+Steel Overseer|MPS_KLD
+Sword of Feast and Famine|MPS_KLD
+Sword of Fire and Ice|MPS_KLD
+Sword of Light and Shadow|MPS_KLD
 
 [MPS Aether Revolt Inventions]
-Arcbound Ravager|MPS
-Black Vise|MPS
-Chalice of the Void|MPS
-Defense Grid|MPS
-Duplicant|MPS
-Engineered Explosives|MPS
-Ensnaring Bridge|MPS
-Extraplanar Lens|MPS
-Grindstone|MPS
-Meekstone|MPS
-Oblivion Stone|MPS
-Ornithopter|MPS
-Paradox Engine|MPS
-Pithing Needle|MPS
-Planar Bridge|MPS
-Platinum Angel|MPS
-Sphere of Resistance|MPS
-Staff of Domination|MPS
-Sundering Titan|MPS
-Sword of Body and Mind|MPS
-Sword of War and Peace|MPS
-Trinisphere|MPS
-Vedalken Shackles|MPS
-Wurmcoil Engine|MPS
+Arcbound Ravager|MPS_KLD
+Black Vise|MPS_KLD
+Chalice of the Void|MPS_KLD
+Defense Grid|MPS_KLD
+Duplicant|MPS_KLD
+Engineered Explosives|MPS_KLD
+Ensnaring Bridge|MPS_KLD
+Extraplanar Lens|MPS_KLD
+Grindstone|MPS_KLD
+Meekstone|MPS_KLD
+Oblivion Stone|MPS_KLD
+Ornithopter|MPS_KLD
+Paradox Engine|MPS_KLD
+Pithing Needle|MPS_KLD
+Planar Bridge|MPS_KLD
+Platinum Angel|MPS_KLD
+Sphere of Resistance|MPS_KLD
+Staff of Domination|MPS_KLD
+Sundering Titan|MPS_KLD
+Sword of Body and Mind|MPS_KLD
+Sword of War and Peace|MPS_KLD
+Trinisphere|MPS_KLD
+Vedalken Shackles|MPS_KLD
+Wurmcoil Engine|MPS_KLD
 
 [AER Planeswalker Decks]
 Ajani, Valiant Protector 
@@ -1113,3 +1113,35 @@ Tezzeret's Betrayal
 Tezzeret's Simulacrum
 Pendulum of Patterns
 Submerged Boneyard
+
+[MPS Amonkhet Invocations]
+Austere Command|MPS_AKH
+Aven Mindcensor|MPS_AKH
+Containment Priest|MPS_AKH
+Loyal Retainers|MPS_AKH
+Oketra the True|MPS_AKH
+Worship|MPS_AKH
+Wrath of God|MPS_AKH
+Consecrated Sphinx|MPS_AKH
+Counterbalance|MPS_AKH
+Counterspell|MPS_AKH
+Cryptic Command|MPS_AKH
+Daze|MPS_AKH
+Divert|MPS_AKH
+Force of Will|MPS_AKH
+Kefnet the Mindful|MPS_AKH
+Pact of Negation|MPS_AKH
+Spell Pierce|MPS_AKH
+Stifle|MPS_AKH
+Attrition|MPS_AKH
+Bontu the Glorified|MPS_AKH
+Dark Ritual|MPS_AKH
+Diabolic Intent|MPS_AKH
+Entomb|MPS_AKH
+Mind Twist|MPS_AKH
+Aggravated Assault|MPS_AKH
+Chain Lightning|MPS_AKH
+Hazoret the Fervent|MPS_AKH
+Rhonas the Indomitable|MPS_AKH
+Maelstrom Pulse|MPS_AKH
+Vindicate|MPS_AKH

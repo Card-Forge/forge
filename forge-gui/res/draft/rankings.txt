@@ -1,4 +1,35 @@
 //Rank|Name|Rarity|Set
+#1|Austere Command|M|MPS_AKH
+#1|Aven Mindcensor|M|MPS_AKH
+#1|Containment Priest|M|MPS_AKH
+#1|Loyal Retainers|M|MPS_AKH
+#1|Oketra the True|M|MPS_AKH
+#1|Worship|M|MPS_AKH
+#1|Wrath of God|M|MPS_AKH
+#1|Consecrated Sphinx|M|MPS_AKH
+#1|Counterbalance|M|MPS_AKH
+#1|Counterspell|M|MPS_AKH
+#1|Cryptic Command|M|MPS_AKH
+#1|Daze|M|MPS_AKH
+#1|Divert|M|MPS_AKH
+#1|Force of Will|M|MPS_AKH
+#1|Kefnet the Mindful|M|MPS_AKH
+#1|Pact of Negation|M|MPS_AKH
+#1|Spell Pierce|M|MPS_AKH
+#1|Stifle|M|MPS_AKH
+#1|Attrition|M|MPS_AKH
+#1|Bontu the Glorified|M|MPS_AKH
+#1|Dark Ritual|M|MPS_AKH
+#1|Diabolic Intent|M|MPS_AKH
+#1|Entomb|M|MPS_AKH
+#1|Mind Twist|M|MPS_AKH
+#1|Aggravated Assault|M|MPS_AKH
+#1|Chain Lightning|M|MPS_AKH
+#1|Hazoret the Fervent|M|MPS_AKH
+#1|Rhonas the Indomitable|M|MPS_AKH
+#1|Maelstrom Pulse|M|MPS_AKH
+#1|Vindicate|M|MPS_AKH
+//Rank|Name|Rarity|Set
 #1|Bonfire of the Damned|M|MM3
 #2|Mizzium Mortars|R|MM3
 #3|Niv-Mizzet, Dracogenius|R|MM3
@@ -249,61 +280,61 @@
 #248|Past in Flames|M|MM3
 #249|Pyromancer Ascension|R|MM3
 //Rank|Name|Rarity|Set
-#1|Cataclysmic Gearhulk|M|MPS
-#1|Torrential Gearhulk|M|MPS
-#1|Noxious Gearhulk|M|MPS
-#1|Combustible Gearhulk|M|MPS
-#1|Verdurous Gearhulk|M|MPS
-#1|AEther Vial|M|MPS
-#1|Champion's Helm|M|MPS
-#1|Chromatic Lantern|M|MPS
-#1|Chrome Mox|M|MPS
-#1|Cloudstone Curio|M|MPS
-#1|Crucible of Worlds|M|MPS
-#1|Gauntlet of Power|M|MPS
-#1|Hangarback Walker|M|MPS
-#1|Lightning Greaves|M|MPS
-#1|Lotus Petal|M|MPS
-#1|Mana Crypt|M|MPS
-#1|Mana Vault|M|MPS
-#1|Mind's Eye|M|MPS
-#1|Mox Opal|M|MPS
-#1|Painter's Servant|M|MPS
-#1|Rings of Brighthearth|M|MPS
-#1|Scroll Rack|M|MPS
-#1|Sculpting Steel|M|MPS
-#1|Sol Ring|M|MPS
-#1|Solemn Simulacrum|M|MPS
-#1|Static Orb|M|MPS
-#1|Steel Overseer|M|MPS
-#1|Sword of Feast and Famine|M|MPS
-#1|Sword of Fire and Ice|M|MPS
-#1|Sword of Light and Shadow|M|MPS
-#1|Arcbound Ravager|M|MPS
-#1|Black Vise|M|MPS
-#1|Chalice of the Void|M|MPS
-#1|Defense Grid|M|MPS
-#1|Duplicant|M|MPS
-#1|Engineered Explosives|M|MPS
-#1|Ensnaring Bridge|M|MPS
-#1|Extraplanar Lens|M|MPS
-#1|Grindstone|M|MPS
-#1|Meekstone|M|MPS
-#1|Oblivion Stone|M|MPS
-#1|Ornithopter|M|MPS
-#1|Paradox Engine|M|MPS
-#1|Pithing Needle|M|MPS
-#1|Planar Bridge|M|MPS
-#1|Platinum Angel|M|MPS
-#1|Sphere of Resistance|M|MPS
-#1|Staff of Domination|M|MPS
-#1|Sundering Titan|M|MPS
-#1|Sword of Body and Mind|M|MPS
-#1|Sword of War and Peace|M|MPS
-#1|Trinisphere|M|MPS
-#1|Vedalken Shackles|M|MPS
-#1|Wurmcoil Engine|M|MPS
-#100|Dummy Card|M|MPS
+#1|Cataclysmic Gearhulk|M|MPS_KLD
+#1|Torrential Gearhulk|M|MPS_KLD
+#1|Noxious Gearhulk|M|MPS_KLD
+#1|Combustible Gearhulk|M|MPS_KLD
+#1|Verdurous Gearhulk|M|MPS_KLD
+#1|AEther Vial|M|MPS_KLD
+#1|Champion's Helm|M|MPS_KLD
+#1|Chromatic Lantern|M|MPS_KLD
+#1|Chrome Mox|M|MPS_KLD
+#1|Cloudstone Curio|M|MPS_KLD
+#1|Crucible of Worlds|M|MPS_KLD
+#1|Gauntlet of Power|M|MPS_KLD
+#1|Hangarback Walker|M|MPS_KLD
+#1|Lightning Greaves|M|MPS_KLD
+#1|Lotus Petal|M|MPS_KLD
+#1|Mana Crypt|M|MPS_KLD
+#1|Mana Vault|M|MPS_KLD
+#1|Mind's Eye|M|MPS_KLD
+#1|Mox Opal|M|MPS_KLD
+#1|Painter's Servant|M|MPS_KLD
+#1|Rings of Brighthearth|M|MPS_KLD
+#1|Scroll Rack|M|MPS_KLD
+#1|Sculpting Steel|M|MPS_KLD
+#1|Sol Ring|M|MPS_KLD
+#1|Solemn Simulacrum|M|MPS_KLD
+#1|Static Orb|M|MPS_KLD
+#1|Steel Overseer|M|MPS_KLD
+#1|Sword of Feast and Famine|M|MPS_KLD
+#1|Sword of Fire and Ice|M|MPS_KLD
+#1|Sword of Light and Shadow|M|MPS_KLD
+#1|Arcbound Ravager|M|MPS_KLD
+#1|Black Vise|M|MPS_KLD
+#1|Chalice of the Void|M|MPS_KLD
+#1|Defense Grid|M|MPS_KLD
+#1|Duplicant|M|MPS_KLD
+#1|Engineered Explosives|M|MPS_KLD
+#1|Ensnaring Bridge|M|MPS_KLD
+#1|Extraplanar Lens|M|MPS_KLD
+#1|Grindstone|M|MPS_KLD
+#1|Meekstone|M|MPS_KLD
+#1|Oblivion Stone|M|MPS_KLD
+#1|Ornithopter|M|MPS_KLD
+#1|Paradox Engine|M|MPS_KLD
+#1|Pithing Needle|M|MPS_KLD
+#1|Planar Bridge|M|MPS_KLD
+#1|Platinum Angel|M|MPS_KLD
+#1|Sphere of Resistance|M|MPS_KLD
+#1|Staff of Domination|M|MPS_KLD
+#1|Sundering Titan|M|MPS_KLD
+#1|Sword of Body and Mind|M|MPS_KLD
+#1|Sword of War and Peace|M|MPS_KLD
+#1|Trinisphere|M|MPS_KLD
+#1|Vedalken Shackles|M|MPS_KLD
+#1|Wurmcoil Engine|M|MPS_KLD
+#100|Dummy Card|M|MPS_KLD
 //Rank|Name|Rarity|Set
 #1|Herald of Anguish|M|AER
 #2|Ajani Unyielding|M|AER
