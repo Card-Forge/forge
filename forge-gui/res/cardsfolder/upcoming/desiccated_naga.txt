@@ -1,4 +1,4 @@
-Name:Dessicated Naga
+Name:Desiccated Naga
 ManaCost:2 B
 Types:Creature Zombie Naga
 PT:3/2

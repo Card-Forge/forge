@@ -1,0 +1,11 @@
+Name:Gift of Paradise
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant land
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ AbundantGrowthTap | Description$ Enchanted land has "{T}: Add two mana of any one color to your mana pool."
+SVar:AbundantGrowthTap:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color to your mana pool.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_paradise.jpg
+Oracle:Enchant land\nWhen Gift of Paradise enters the battlefield, you gain 3 life.\nEnchanted land has "{T}: Add two mana of any one color to your mana pool."

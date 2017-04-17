@@ -5,8 +5,7 @@ PT:2/2
 K:First Strike
 S:Mode$ Continuous | Affected$ Minotaur.Other+YouCtrl | AddKeyword$ First Strike | Description$ Other Minotaur creatures you control have deathtouch.
 S:Mode$ Continuous | Affected$ Minotaur.YouCtrl | AddPower$ 2 | CheckSVar$ X | SVarCompare$ LE1 | Description$ As long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, each player discards a card.
-SVar:TrigDiscardDraw:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, each player discards a card.SVar:TrigDiscardDraw:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
 SVar:X:Count$InYourHand
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neheb_the_worthy.jpg

@@ -1,0 +1,16 @@
+Name:Start
+ManaCost:2 W
+AlternateMode: Split
+Types:Instant
+A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenImage$ w 1 1 warrior AKH | SpellDescription$ Create two 1/1 white Warrior creature tokens with vigilance.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/start_finish.jpg
+Oracle:Destroy all creatures with power 3 or greater.
+
+ALTERNATE
+
+Name:Finish
+ManaCost:2 B
+Types:Sorcery
+K:Aftermath
+A:SP$ Destroy | Cost$ 2 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature. 
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nAs an additional cost to cast Finish, sacrifice a creature.\nDestroy target creature.
