@@ -11,3 +11,252 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand AKH
 AdditionalSetUnlockedInQuest=MPS
 
 [cards]
+1 M Angel of Sanctions
+2 R Anointed Procession
+3 C Anointer Priest
+4 R Approach of the Second Sun
+5 R Aven Mindcensor
+6 C Binding Mummy
+7 C Cartouche of Solidarity
+8 U Cast Out
+9 C Compulsory Rest
+10 U Devoted Crop-Mate
+11 C Djeru's Resolve
+12 C Fan Bearer
+13 C Forsake the Worldly
+14 M Gideon of the Trials
+15 R Gideon's Intervention
+16 R Glory-Bound Initiate
+17 C Gust Walker
+18 C Impeccable Timing
+19 C In Oketra's Name
+20 C Mighty Leap
+21 M Oketra the True
+22 U Oketra's Attendant
+23 U Protection of the Hekma
+24 R Regal Caracal
+25 U Renewed Faith
+26 C Rhet-Crop Spearmaster
+27 C Sacred Cat
+28 U Seraph of the Suns
+29 C Sparring Mummy
+30 C Supply Caravan
+31 C Tah-Crop Elite
+32 C Those Who Serve
+33 U Time to Reflect
+34 U Trial of Solidarity
+35 U Trueheart Duelist
+36 C Unwavering Initiate
+37 U Vizier of Deferment
+38 U Vizier of Remedies
+39 C Winged Shepherd
+40 C Ancient Crab
+41 U Angler Drake
+42 M As Foretold
+43 C Aven Initiate
+44 C Cancel
+45 C Cartouche of Knowledge
+46 U Censor
+47 C Compelling Argument
+48 U Cryptic Serpent
+49 R Curator of Mysteries
+50 C Decision Paralysis
+51 R Drake Haven
+52 C Essence Scatter
+53 C Floodwaters
+54 U Galestrike
+55 R Glyph Keeper
+56 C Hekma Sentinels
+57 C Hieroglyphic Illumination
+58 C Illusory Wrappings
+59 M Kefnet the Mindful
+60 U Labyrinth Guardian
+61 U Lay Claim
+62 C Naga Oracle
+63 R New Perspectives
+64 U Open into Wonder
+65 R Pull from Tomorrow
+66 C River Serpent
+67 U Sacred Excavation
+68 C Scribe of the Mindful
+69 C Seeker of Insight
+70 C Shimmerscale Drake
+71 C Slither Blade
+72 C Tah-Crop Skirmisher
+73 U Trial of Knowledge
+74 R Vizier of Many Faces
+75 U Vizier of Tumbling Sands
+76 C Winds of Rebuke
+77 U Zenith Seeker
+78 R Archfiend of Ifnir
+79 U Baleful Ammit
+80 C Blighted Bat
+81 U Bone Picker
+82 M Bontu the Glorified
+83 C Cartouche of Ambition
+84 M Cruel Reality
+85 C Cursed Minotaur
+86 R Dispossess
+87 C Doomed Dissenter
+88 R Dread Wanderer
+89 C Dune Beetle
+90 U Faith of the Devoted
+91 C Festering Mummy
+92 C Final Reward
+93 U Gravedigger
+94 U Grim Strider
+95 C Horror of the Broken Lands
+96 U Lay Bare the Heart
+97 M Liliana, Death's Majesty
+98 R Liliana's Mastery
+99 U Lord of the Accursed
+100 C Miasmic Mummy
+101 U Nest of Scarabs
+102 C Painful Lesson
+103 C Pitiless Vizier
+104 R Plague Belcher
+105 U Ruthless Sniper
+106 C Scarab Feast
+107 R Shadow of the Grave
+108 C Soulstinger
+109 C Splendid Agony
+110 U Stir the Sands
+111 C Supernatural Stamina
+112 C Trespasser's Curse
+113 C Unburden
+114 U Trial of Ambition
+115 C Wander in Death
+116 C Wasteland Scorpion
+117 U Ahn-Crop Crasher
+118 U Battlefield Scavenger
+119 C Blazing Volley
+120 C Bloodlust Inciter
+121 U Bloodrage Brawler
+122 C Brute Strength
+123 U By Force
+124 C Cartouche of Zeal
+125 M Combat Celebrant
+126 U Consuming Fervor
+127 U Deem Worthy
+128 C Desert Cerodon
+129 C Electrify
+130 C Emberhorn Minotaur
+131 U Flameblade Adept
+132 C Fling
+133 M Glorious End
+134 R Glorybringer
+135 R Harsh Mentor
+136 M Hazoret the Fervent
+137 R Hazoret's Favor
+138 R Heart-Piercer Manticore
+139 C Hyena Pack
+140 U Limits of Solidarity
+141 C Magma Spray
+142 C Manticore of the Gauntlet
+143 C Minotaur Sureshot
+144 C Nef-Crop Entangler
+145 C Nimble-Blade Khenra
+146 C Pathmaker Initiate
+147 C Pursue Glory
+148 R Soul-Scar Mage
+149 R Sweltering Suns
+150 C Thresher Lizard
+151 C Tormenting Voice
+152 U Trial of Zeal
+153 U Trueheart Twins
+154 C Violent Impact
+155 U Warfire Javelineer
+156 C Benefaction of Rhonas
+157 C Bitterblade Warrior
+158 C Cartouche of Strength
+159 R Champion of Rhonas
+160 R Channeler Initiate
+161 C Colossapede
+162 U Crocodile of the Crossing
+163 U Defiant Greatmaw
+164 C Dissenter's Deliverance
+165 U Exemplar of Strength
+166 C Giant Spider
+167 C Gift of Paradise
+168 C Greater Sandwurm
+169 U Hapatra's Mark
+170 R Harvest Season
+171 C Haze of Pollen
+172 R Honored Hydra
+173 C Hooded Brawler
+174 C Initiate's Companion
+175 U Manglehorn
+176 C Naga Vitalist
+177 C Oashra Cultivator
+178 C Ornery Kudu
+179 C Pouncing Cheetah
+180 R Prowling Serpopard
+181 C Quarry Hauler
+182 M Rhonas the Indomitable
+183 R Sandwurm Convergence
+184 U Scaled Behemoth
+185 C Shed Weakness
+186 U Shefet Monitor
+187 U Sixth Sense
+188 C Spidery Grasp
+189 C Stinging Shot
+190 U Synchronized Strike
+191 U Trial of Strength
+192 M Vizier of the Menagerie
+193 U Watchful Naga
+194 U Ahn-Crop Champion
+195 U Aven Wind Guide
+196 R Bounty of the Luxa
+197 U Decimator Beetle
+198 U Enigma Drake
+199 R Hapatra, Vizier of Poisons
+200 U Honored Crop-Captain
+201 U Khenra Charioteer
+202 U Merciless Javelineer
+203 R Neheb, the Worthy
+204 M Nissa, Steward of Elements
+205 M Samut, Voice of Dissent
+206 U Shadowstorm Vizier
+207 R Temmet, Vizier of Naktamun
+208 U Wayward Servant
+209 U Weaver of Currents
+210 R Dusk Dawn
+211 R Commit Memory
+212 R Never Return
+213 R Insult Injury
+214 R Mouth Feed
+215 U Start Finish
+216 U Reduce Rubble
+217 U Destined Lead
+218 U Onward Victory
+219 U Spring Mind
+220 R Prepare Fight
+221 R Failure Comply
+222 R Rags Riches
+223 R Cut Ribbons
+224 R Heaven Earth
+225 U Bontu's Monument
+226 U Edifice of Authority
+227 U Embalmer's Tools
+228 U Gate to the Afterlife
+229 U Hazoret's Monument
+230 C Honed Khopesh
+231 U Kefnet's Monument
+232 C Luxa River Shrine
+233 U Oketra's Monument
+234 R Oracle's Vault
+235 R Pyramid of the Pantheon
+236 U Rhonas's Monument
+237 R Throne of the God-Pharaoh
+238 U Watchers of the Dead
+239 R Canyon Slough
+240 R Cascading Cataracts
+241 C Cradle of the Accursed
+242 C Evolving Wilds
+243 R Fetid Pools
+244 U Grasping Dunes
+245 R Irrigated Farmland
+246 C Painted Bluffs
+247 R Scattered Groves
+248 R Sheltered Thicket
+249 C Sunscorched Desert
