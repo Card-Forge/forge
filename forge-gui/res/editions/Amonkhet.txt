@@ -5,8 +5,7 @@ Name=Amonkhet
 Code2=AKH
 Type=Expansion
 MciCode=akh
-#Booster=10 Common:!fromSheet("AKH Planeswalker Decks"), 3 Uncommon:!fromSheet("AKH Planeswalker Decks"), 1 RareMythic:!fromSheet("AKH Planeswalker Decks"), 1 BasicLand AKH
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand AKH
+Booster=10 Common:!fromSheet("AKH Planeswalker Decks"), 3 Uncommon:!fromSheet("AKH Planeswalker Decks"), 1 RareMythic:!fromSheet("AKH Planeswalker Decks"), 1 BasicLand AKH
 AdditionalSheetForFoils=fromSheet("MPS Amonkhet Invocations")
 AdditionalSetUnlockedInQuest=MPS_AKH
 
@@ -289,3 +288,4 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 276 U Desiccated Naga
 277 R Liliana’s Influence
 278 C Tattered Mummy
+279 C Foul Orchard
