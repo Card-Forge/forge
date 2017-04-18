@@ -220,21 +220,21 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 207 R Temmet, Vizier of Naktamun
 208 U Wayward Servant
 209 U Weaver of Currents
-210 R Dusk Dawn
-211 R Commit Memory
-212 R Never Return
-213 R Insult Injury
-214 R Mouth Feed
-215 U Start Finish
-216 U Reduce Rubble
-217 U Destined Lead
-218 U Onward Victory
-219 U Spring Mind
-220 R Prepare Fight
-221 R Failure Comply
-222 R Rags Riches
-223 R Cut Ribbons
-224 R Heaven Earth
+210 R Dusk // Dawn
+211 R Commit // Memory
+212 R Never // Return
+213 R Insult // Injury
+214 R Mouth // Feed
+215 U Start // Finish
+216 U Reduce // Rubble
+217 U Destined // Lead
+218 U Onward // Victory
+219 U Spring // Mind
+220 R Prepare // Fight
+221 R Failure // Comply
+222 R Rags // Riches
+223 R Cut // Ribbons
+224 R Heaven // Earth
 225 U Bontu's Monument
 226 U Edifice of Authority
 227 U Embalmer's Tools
