@@ -1,4 +1,4 @@
-Name:Dread Slag
+Name:Grim Strider
 ManaCost:3 B
 Types:Creature Horror
 PT:6/6
