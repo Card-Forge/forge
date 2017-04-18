@@ -1145,3 +1145,15 @@ Hazoret the Fervent|MPS_AKH
 Rhonas the Indomitable|MPS_AKH
 Maelstrom Pulse|MPS_AKH
 Vindicate|MPS_AKH
+
+[AKH Planeswalker Decks]
+Gideon, Martial Paragon
+Companion of the Trials
+Gideon’s Resolve
+Graceful Cat
+Stone Quarry
+Liliana, Death Wielder
+Desiccated Naga
+Liliana’s Influence
+Tattered Mummy
+Foul Orchard
