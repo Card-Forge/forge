@@ -260,3 +260,32 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 247 R Scattered Groves
 248 R Sheltered Thicket
 249 C Sunscorched Desert
+250 L Plains
+251 L Island
+252 L Swamp
+253 L Mountain
+254 L Forest
+255 L Plains
+256 L Plains
+257 L Plains
+258 L Island
+259 L Island
+260 L Island
+261 L Swamp
+262 L Swamp
+263 L Swamp
+264 L Mountain
+265 L Mountain
+266 L Mountain
+267 L Forest
+268 L Forest
+269 L Forest
+270 M Gideon, Martial Paragon
+271 U Companion of the Trials
+272 R Gideon’s Resolve
+273 C Graceful Cat
+274 C Stone Quarry
+275 M Liliana, Death Wielder
+276 U Desiccated Naga
+277 R Liliana’s Influence
+278 C Tattered Mummy
