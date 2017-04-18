@@ -63,3 +63,4 @@ SOI: 9 Boosters, 80 BasicLands
 EMN: 9 Boosters, 80 BasicLands SOI
 KLD: 10 Boosters, 80 BasicLands
 AER: 10 Boosters, 80 BasicLands KLD
+AKH: 10 Boosters, 80 BasicLands

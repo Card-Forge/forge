@@ -1,5 +1,5 @@
 [Standard]
-Sets:BFZ, OGW, SOI, EMN, W16, KLD, AER
+Sets:BFZ, OGW, SOI, EMN, W16, KLD, AER, AKH
 Banned: Emrakul, the Promised End; Smuggler's Copter; Reflector Mage
 
 [Extended]
