@@ -34,16 +34,17 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
     }
     @Override
     public void resolve(SpellAbility sa) {
+        final Card host = sa.getHostCard();
 
         final CounterType counterType = getCounterType(sa);
         final int n = Integer.valueOf(sa.getParamOrDefault("Multiplier", "2")) - 1; 
         
         for (final Card tgtCard : getTargetCards(sa)) {
             if (counterType != null) {
-                tgtCard.addCounter(counterType, tgtCard.getCounters(counterType) * n, false);
+                tgtCard.addCounter(counterType, tgtCard.getCounters(counterType) * n, host, false);
             } else {
                 for (Map.Entry<CounterType, Integer> e : tgtCard.getCounters().entrySet()) {
-                    tgtCard.addCounter(e.getKey(), e.getValue() * n, false);
+                    tgtCard.addCounter(e.getKey(), e.getValue() * n, host, false);
                 }
             }
         }

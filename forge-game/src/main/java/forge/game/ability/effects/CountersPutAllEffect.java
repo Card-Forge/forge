@@ -38,6 +38,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
 
     @Override
     public void resolve(SpellAbility sa) {
+        final Card host = sa.getHostCard();
         final String type = sa.getParam("CounterType");
         final int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String valid = sa.getParam("ValidCards");
@@ -47,18 +48,17 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         CardCollectionView cards = game.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getHostCard().getController(), sa.getHostCard());
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             final Player pl = sa.getTargets().getFirstTargetedPlayer();
             cards = CardLists.filterControlledBy(cards, pl);
         }
 
         for (final Card tgtCard : cards) {
             if (game.getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
-                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, true);
+                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, host, true);
             } else {
                 // adding counters to something like re-suspend cards
-                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, false);
+                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, host, false);
             }
         }
     }

@@ -23,15 +23,16 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Player controller = sa.getHostCard().getController();
+        final Card host = sa.getHostCard();
+        Player controller = host.getController();
         Map<GameEntity, CounterType> proliferateChoice = controller.getController().chooseProliferation(sa);
         if (proliferateChoice == null )
             return;
         for(Entry<GameEntity, CounterType> ge: proliferateChoice.entrySet()) {
             if( ge.getKey() instanceof Player )
-                ((Player) ge.getKey()).addCounter(ge.getValue(), 1, true);
+                ((Player) ge.getKey()).addCounter(ge.getValue(), 1, host, true);
             else if( ge.getKey() instanceof Card)
-                ((Card) ge.getKey()).addCounter(ge.getValue(), 1, true);
+                ((Card) ge.getKey()).addCounter(ge.getValue(), 1, host, true);
         }
     }
 }

@@ -1,7 +1,13 @@
 package forge.ai;
 
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
@@ -18,14 +24,9 @@ import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
+import forge.util.collect.FCollectionView;
 
 
 public class ComputerUtilCost {
@@ -452,12 +453,15 @@ public class ComputerUtilCost {
         
         // Try not to lose Planeswalker if not threatened
         if (sa.getRestrictions().isPwAbility()) {
-            final CostPart cost = sa.getPayCosts().getCostParts().get(0);
-            if (cost instanceof CostRemoveCounter) {
-                if (cost.convertAmount() != null && cost.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {
-                    // refuse to pay if opponent has no creature threats or 50% chance otherwise
-                    if (player.getOpponent().getCreaturesInPlay().isEmpty() || MyRandom.getRandom().nextFloat() < .5f) {
-                        return false;
+            for (final CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostRemoveCounter) {
+                    if (part.convertAmount() != null && part.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {
+                        // refuse to pay if opponent has no creature threats or
+                        // 50% chance otherwise
+                        if (player.getOpponents().getCreaturesInPlay().isEmpty()
+                                || MyRandom.getRandom().nextFloat() < .5f) {
+                            return false;
+                        }
                     }
                 }
             }
@@ -571,7 +575,7 @@ public class ComputerUtilCost {
 
     public static Set<String> getAvailableManaColors(Player ai, List<Card> additionalLands) {
         CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.UNTAPPED);
-        Set<String> colorsAvailable = new HashSet<>();
+        Set<String> colorsAvailable = Sets.newHashSet();
 
         if (additionalLands != null) {
             GameActionUtil.grantBasicLandsManaAbilities(additionalLands);

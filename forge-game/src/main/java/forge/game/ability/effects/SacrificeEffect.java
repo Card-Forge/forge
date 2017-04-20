@@ -50,7 +50,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 return;
             }
         } else if (sa.hasParam("CumulativeUpkeep")) {
-            card.addCounter(CounterType.AGE, 1, true);
+            card.addCounter(CounterType.AGE, 1, card, true);
             Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
             Cost payCost = new Cost(ManaCost.ZERO, true);
             int n = card.getCounters(CounterType.AGE);

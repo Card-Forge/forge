@@ -43,7 +43,7 @@ public class CountersNoteEffect extends SpellAbilityEffect {
         for(Entry<String, String> svar : source.getSVars().entrySet()) {
             String key = svar.getKey();
             if (key.startsWith(NOTE_COUNTERS)) {
-                notee.addCounter(CounterType.getType(key.substring(NOTE_COUNTERS.length())), Integer.parseInt(svar.getValue()), false);
+                notee.addCounter(CounterType.getType(key.substring(NOTE_COUNTERS.length())), Integer.parseInt(svar.getValue()), source, false);
             }
             // TODO Probably should "remove" the svars that were temporarily used
         }

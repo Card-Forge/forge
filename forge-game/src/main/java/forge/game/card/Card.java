@@ -982,15 +982,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         countersAdded = value;
     }
 
-    public final void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier) {
-        addCounter(counterType, n, applyMultiplier, true);
+    public final void addCounter(final CounterType counterType, final int n, final Card source, final boolean applyMultiplier) {
+        addCounter(counterType, n, source, applyMultiplier, true);
     }
-    public final void addCounterFireNoEvents(final CounterType counterType, final int n, final boolean applyMultiplier) {
-        addCounter(counterType, n, applyMultiplier, false);
+    public final void addCounterFireNoEvents(final CounterType counterType, final int n, final Card source, final boolean applyMultiplier) {
+        addCounter(counterType, n, source, applyMultiplier, false);
     }
 
     @Override
-    public void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier, final boolean fireEvents) {
+    public void addCounter(final CounterType counterType, final int n, final Card source, final boolean applyMultiplier, final boolean fireEvents) {
         int addAmount = n;
         if(addAmount < 0) {
             addAmount = 0; // As per rule 107.1b
@@ -998,6 +998,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "AddCounter");
         repParams.put("Affected", this);
+        repParams.put("Source", source);
         repParams.put("CounterType", counterType);
         repParams.put("CounterNum", addAmount);
         repParams.put("EffectOnly", applyMultiplier);
@@ -1052,6 +1053,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Run triggers
             final Map<String, Object> runParams = Maps.newTreeMap();
             runParams.put("Card", this);
+            runParams.put("Source", source);
             runParams.put("CounterType", counterType);
             for (int i = 0; i < addAmount; i++) {
                 getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams, false);
@@ -6144,7 +6146,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             if (isInPlay()) {
                 if (wither) {
-                    addCounter(CounterType.M1M1, damageIn, true);
+                    addCounter(CounterType.M1M1, damageIn, source, true);
                     damageType = DamageType.M1M1Counters;
                 }
                 else {
@@ -7160,7 +7162,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void putEtbCounters() {
         for (Map.Entry<CounterType, Integer> e : etbCounters.entrySet()) {
-            this.addCounter(e.getKey(), e.getValue(), true);
+            this.addCounter(e.getKey(), e.getValue(), this, true);
         }
     }
 }

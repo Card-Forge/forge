@@ -141,10 +141,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (eachExistingCounter) {
                     for(CounterType ct : choices) {
                         if (obj instanceof Player) {
-                            ((Player) obj).addCounter(ct, counterAmount, true);
+                            ((Player) obj).addCounter(ct, counterAmount, card, true);
                         }
                         if (obj instanceof Card) {
-                            ((Card) obj).addCounter(ct, counterAmount, true);
+                            ((Card) obj).addCounter(ct, counterAmount, card, true);
                         }
                     }
                     continue;
@@ -195,7 +195,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (etbcounter) {
                             tgtCard.addEtbCounter(counterType, counterAmount);
                         } else {
-                            tgtCard.addCounter(counterType, counterAmount, true);
+                            tgtCard.addCounter(counterType, counterAmount, card, true);
                         }
                         if (remember) {
                             final int value = tgtCard.getTotalCountersToAdd();
@@ -226,14 +226,14 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (etbcounter) {
                             tgtCard.addEtbCounter(counterType, counterAmount);
                         } else {
-                            tgtCard.addCounter(counterType, counterAmount, false);
+                            tgtCard.addCounter(counterType, counterAmount, card, false);
                         }
                     }
                 }
             } else if (obj instanceof Player) {
                 // Add Counters to players!
                 Player pl = (Player) obj;
-                pl.addCounter(counterType, counterAmount, true);
+                pl.addCounter(counterType, counterAmount, card, true);
             }
         }
     }

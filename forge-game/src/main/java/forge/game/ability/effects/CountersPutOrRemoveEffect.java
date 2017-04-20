@@ -78,10 +78,10 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                         // Put another of the chosen counter on card
                         final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                         if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
-                            tgtCard.addCounter(chosenType, counterAmount, true);
+                            tgtCard.addCounter(chosenType, counterAmount, source, true);
                         } else {
                             // adding counters to something like re-suspend cards
-                            tgtCard.addCounter(chosenType, counterAmount, false);
+                            tgtCard.addCounter(chosenType, counterAmount, source, false);
                         }
                     } else {
                         tgtCard.subtractCounter(chosenType, counterAmount);

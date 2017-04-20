@@ -243,7 +243,7 @@ public class CardFactoryUtil {
                 final Card c = game.getAction().exile(sourceCard);
 
                 int counters = AbilityUtils.calculateAmount(c, timeCounters, this);
-                c.addCounter(CounterType.TIME, counters, true);
+                c.addCounter(CounterType.TIME, counters, c, true);
                 
                 String sb = String.format("%s has suspended %s with %d time counters on it.", this.getActivatingPlayer(), c.getName(), counters);
                 game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
@@ -4142,9 +4142,9 @@ public class CardFactoryUtil {
                 @Override
                 public void run() {
                     if (card.isCreature()) {
-                        card.addCounter(CounterType.P1P1, card.getSunburstValue(), true);
+                        card.addCounter(CounterType.P1P1, card.getSunburstValue(), card, true);
                     } else {
-                        card.addCounter(CounterType.CHARGE, card.getSunburstValue(), true);
+                        card.addCounter(CounterType.CHARGE, card.getSunburstValue(), card, true);
                     }
 
                 }

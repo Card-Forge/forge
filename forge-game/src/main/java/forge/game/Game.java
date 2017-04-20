@@ -455,14 +455,7 @@ public class Game {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
-        CardCollection cards = new CardCollection();
-        for (final Player p : getPlayers()) {
-            PlayerZone playerZone = p.getZone(zone);
-            if (playerZone != null) {
-                cards.addAll(playerZone.getCards());
-            }
-        }
-        return cards;
+        return getPlayers().getCardsIn(zone);
     }
 
     public CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {

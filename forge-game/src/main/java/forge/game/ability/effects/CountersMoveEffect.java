@@ -141,7 +141,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             }
 
             if (csum > 0) {
-                dest.addCounter(cType, csum, true);
+                dest.addCounter(cType, csum, host, true);
             }
             return;
         } else if (sa.hasParam("ValidDefined")) {
@@ -193,7 +193,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 int cnum = player.getController().chooseNumber(sa, sb.toString(), 0, source.getCounters(cType), params);
 
                 source.subtractCounter(cType, cnum);
-                dest.addCounter(cType, cnum, true);
+                dest.addCounter(cType, cnum, host, true);
             }
             return;
         }
@@ -247,7 +247,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
                     if (source.getCounters(cType) >= cntToMove) {
                         source.subtractCounter(cType, cntToMove);
-                        dest.addCounter(cType, cntToMove, true);
+                        dest.addCounter(cType, cntToMove, host, true);
                     }
                 } else {
                     // any counterType currently only Leech Bonder
@@ -279,7 +279,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     int chosenAmount = pc.chooseNumber(
                             sa, sb.toString(), 0, Math.min(tgtCounters.get(chosenType), cntToMove), params);
 
-                    dest.addCounter(chosenType, chosenAmount, true);
+                    dest.addCounter(chosenType, chosenAmount, host, true);
                     source.subtractCounter(chosenType, chosenAmount);
                     cntToMove -= chosenAmount;
                 }
