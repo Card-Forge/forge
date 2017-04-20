@@ -1053,6 +1053,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams, false);
             }
             if (addAmount > 0) {
+                runParams.put("CounterAmount", addAmount);
                 getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, runParams, false);
             }
         } else {

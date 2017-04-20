@@ -92,6 +92,7 @@ public class TriggerCounterAddedOnce extends Trigger {
             sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
         if (this.getRunParams().containsKey("Player"))
             sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObject("Amount", this.getRunParams().get("CounterAmount"));
     }
 
     @Override
@@ -102,6 +103,8 @@ public class TriggerCounterAddedOnce extends Trigger {
             sb.append(sa.getTriggeringObject("Card"));
         if (sa.hasTriggeringObject("Player"))
             sb.append(sa.getTriggeringObject("Player"));
+
+        sb.append(" Amount: ").append(sa.getTriggeringObject("Amount"));
         return sb.toString();
     }
 }
