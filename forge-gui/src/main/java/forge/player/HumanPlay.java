@@ -409,7 +409,7 @@ public class HumanPlay {
                         return false;
                     }
 
-                    source.addCounter(counterType, amount, false);
+                    source.addCounter(counterType, amount, source, false);
                 }
                 else {
                     CardCollectionView list = p.getGame().getCardsIn(ZoneType.Battlefield);
@@ -427,7 +427,7 @@ public class HumanPlay {
                             continue;
                         }
                         Card selected = inp.getFirstSelected();
-                        selected.addCounter(counterType, 1, false);
+                        selected.addCounter(counterType, 1, source, false);
                         amount--;
                     }
                 }

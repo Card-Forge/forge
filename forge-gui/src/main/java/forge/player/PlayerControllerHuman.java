@@ -1674,7 +1674,7 @@ public class PlayerControllerHuman
             final Integer count = getGui().getInteger("How many counters?", 1, Integer.MAX_VALUE, 10);
             if (count == null) { return; }
 
-            card.addCounter(counter, count, false);
+            card.addCounter(counter, count, card, false);
         }
 
         /* (non-Javadoc)
