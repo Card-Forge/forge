@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control get +2/+1 and gain vigilance until end of turn.
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | AddKeyword$ Vigilance
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Cartouche.YouCtrl | Execute$ TrigReturn | TriggerDescription$ When a Cartouche enters the battlefield under your control, return CARDNAME to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Cartouche.YouCtrl | Execute$ TrigReturn | TriggerDescription$ When a Cartouche enters the battlefield under your control, return CARDNAME to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trial_of_solidarity.jpg
