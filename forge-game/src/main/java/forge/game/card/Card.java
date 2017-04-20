@@ -43,6 +43,7 @@ import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
@@ -175,6 +176,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // for Vanguard / Manapool / Emblems etc.
     private boolean isImmutable = false;
+    
+    private int exertThisTurn = 0;
+    private PlayerCollection exertedByPlayer = new PlayerCollection();
 
     private long timestamp = -1; // permanents on the battlefield
 
@@ -6206,6 +6210,27 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setEmbalmed(final boolean b) {
         embalmed = b;
     }
+    
+    public final int getExertedThisTurn() {
+        return exertThisTurn;
+    }
+    
+    public void exert() {
+        exertedByPlayer.add(controller);
+        exertThisTurn++;
+    }
+    
+    public boolean isExertedBy(final Player player) {
+        return exertedByPlayer.contains(player);
+    }
+    
+    public void removeExertedBy(final Player player) {
+        exertedByPlayer.remove(player);
+    }
+    
+    protected void resetExtertedThisTurn() {
+        exertThisTurn = 0;
+    }
 
     public boolean isMadness() {
         return madness;
@@ -6716,6 +6741,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
         resetMayPlayTurn();
+        resetExtertedThisTurn();
     }
 
     public boolean hasETBTrigger(final boolean drawbackOnly) {

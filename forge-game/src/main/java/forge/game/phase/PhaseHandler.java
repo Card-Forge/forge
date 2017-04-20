@@ -18,6 +18,7 @@
 package forge.game.phase;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
 import forge.card.mana.ManaCost;
@@ -514,8 +515,9 @@ public class PhaseHandler implements java.io.Serializable {
                     "You may exert CARDNAME as it attacks.");
 
             for(Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
-                exerter.addExtrinsicKeyword("Exerted");
-                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                //exerter.addExtrinsicKeyword("Exerted");
+                exerter.exert();
+                final Map<String, Object> runParams = Maps.newHashMap();
                 runParams.put("Card", exerter);
                 runParams.put("Player", playerTurn);
                 game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);

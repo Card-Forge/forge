@@ -19,6 +19,9 @@ package forge.game.phase;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -85,13 +88,17 @@ public class Untap extends Phase {
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
                 || c.hasKeyword("This card doesn't untap during your next untap step.")
                 || c.hasKeyword("This card doesn't untap during your next two untap steps.")
-                || c.hasKeyword("This card doesn't untap.")
-                || c.hasKeyword("Exerted")) {
+                || c.hasKeyword("This card doesn't untap.")) {
+            return false;
+        }
+        //exerted need current player turn
+        final Player playerTurn = c.getGame().getPhaseHandler().getPlayerTurn();
+        
+        if (c.isExertedBy(playerTurn)) {
             return false;
         }
         return true;
     }
-
 
     public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
         @Override
@@ -120,7 +127,7 @@ public class Untap extends Phase {
         }
         list.removeAll((Collection<?>)bounceList);
 
-        final Map<String, Integer> restrictUntap = new HashMap<String, Integer>();
+        final Map<String, Integer> restrictUntap = Maps.newHashMap();
         boolean hasChosen = false;
         for (String kw : player.getKeywords()) {
             if (kw.startsWith("UntapAdjust")) {
@@ -132,7 +139,7 @@ public class Untap extends Phase {
             }
             if (kw.startsWith("OnlyUntapChosen") && !hasChosen) {
                 List<String> validTypes = Arrays.asList(kw.split(":")[1].split(","));
-                List<String> invalidTypes = new ArrayList<String>(CardType.getAllCardTypes());
+                List<String> invalidTypes = Lists.newArrayList(CardType.getAllCardTypes());
                 invalidTypes.removeAll(validTypes);
                 final String chosen = player.getController().chooseSomeType("Card", new SpellAbility.EmptySa(ApiType.ChooseType, null, player), validTypes, invalidTypes);
                 list = CardLists.getType(list,chosen);
@@ -162,10 +169,12 @@ public class Untap extends Phase {
         List<Card> cardsWithKW = CardLists.getKeyword(game.getCardsIn(ZoneType.Battlefield),
                 "CARDNAME untaps during each other player's untap step.");
         cardsWithKW = CardLists.getNotKeyword(cardsWithKW, "This card doesn't untap.");
-        final FCollection<Player> otherPlayers = new FCollection<Player>(game.getPlayers());
-        otherPlayers.remove(player);
-        cardsWithKW = CardLists.filter(cardsWithKW, CardPredicates.isControlledByAnyOf(otherPlayers));
+        
+        cardsWithKW = CardLists.filterControlledBy(cardsWithKW, player.getAllOtherPlayers());
         for (final Card cardWithKW : cardsWithKW) {
+            if (cardWithKW.isExertedBy(player)) {
+                continue;
+            }
             cardWithKW.untap();
         }
         // end other players untapping during your untap phase
@@ -175,7 +184,7 @@ public class Untap extends Phase {
         cardList = CardLists.getValidCards(cardList, restrict, player, null, null);
 
         while (!cardList.isEmpty()) {
-            Map<String, Integer> remaining = new HashMap<String, Integer>(restrictUntap);
+            Map<String, Integer> remaining = Maps.newHashMap(restrictUntap);
             for (Entry<String, Integer> entry : remaining.entrySet()) {
                 if (entry.getValue() == 0) {
                     cardList.removeAll((Collection<?>)CardLists.getValidCards(cardList, entry.getKey(), player, null));
@@ -206,8 +215,14 @@ public class Untap extends Phase {
                 c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next two untap steps.");
                 c.addHiddenExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
             }
-            c.removeAllExtrinsicKeyword("Exerted");
         }
+        
+        // remove exerted flags from all things in play
+        // even if they are not creatures
+        for (final Card c : game.getCardsInGame()) {
+            c.removeExertedBy(player);
+        }
+        
     } // end doUntap
 
     private static void optionalUntap(final Card c) {
