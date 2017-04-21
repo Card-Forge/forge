@@ -186,7 +186,6 @@ public class FightAi extends SpellAbilityAi {
                 if ("PowerDmg".equals(sa.getParam("AILogic"))) {
                     if (FightAi.canKill(aiCreature, humanCreature, power)) {
                         sa.getTargets().add(aiCreature);
-                        System.out.println(tgtFight.usesTargeting());
                         if (!isChandrasIgnition) {
                             tgtFight.resetTargets();
                             tgtFight.getTargets().add(humanCreature);
