@@ -14,5 +14,5 @@ ManaCost:3 G
 Types:Sorcery
 K:Aftermath
 A:SP$ Draw | Cost$ 3 G | NumCards$ X | References$ X | SpellDescription$ Draw a card for each creature you control with power 3 or greater.
-SVar:X:Count$TypeYouCtrl.Creature.powerGE3
+SVar:X:Count$Valid Creature.YouCtrl+powerGE3
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nDraw a card for each creature you control with power 3 or greater.
