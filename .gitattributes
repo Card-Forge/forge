@@ -19645,6 +19645,7 @@ forge-gui/res/quest/precons/Flyover.dck -text
 forge-gui/res/quest/precons/Forged[!!-~]in[!!-~]Battle.dck -text
 forge-gui/res/quest/precons/Furious[!!-~]Forces.dck -text
 forge-gui/res/quest/precons/Ghostly[!!-~]Tide.dck -text
+forge-gui/res/quest/precons/Gideon,[!!-~]Martial[!!-~]Paragon.dck -text
 forge-gui/res/quest/precons/Gifts[!!-~]of[!!-~]the[!!-~]Gods.dck -text
 forge-gui/res/quest/precons/Gleeful[!!-~]Flames.dck -text
 forge-gui/res/quest/precons/Going[!!-~]Rogue.dck -text
@@ -19685,6 +19686,7 @@ forge-gui/res/quest/precons/Levelers'[!!-~]Scorn.dck -text
 forge-gui/res/quest/precons/Life[!!-~]Boost.dck -text
 forge-gui/res/quest/precons/Life[!!-~]Drain.dck -text
 forge-gui/res/quest/precons/Lightforce.dck -text
+forge-gui/res/quest/precons/Liliana,[!!-~]Death[!!-~]Wielder.dck -text
 forge-gui/res/quest/precons/Little[!!-~]Bashers.dck -text
 forge-gui/res/quest/precons/Lofty[!!-~]Heights.dck -text
 forge-gui/res/quest/precons/Manipulative[!!-~]Monstrosities.dck -text
