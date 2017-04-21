@@ -17,6 +17,8 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
@@ -44,39 +46,55 @@ public class TriggerCounterAddedOnce extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerCounterAddedOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCounterAddedOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
         final CounterType addedType = (CounterType) runParams2.get("CounterType");
 
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             if (!runParams2.containsKey("Card"))
                 return false;
 
             final Card addedTo = (Card) runParams2.get("Card");
-            if (!addedTo.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+            if (!addedTo.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidPlayer")) {
+        if (hasParam("ValidPlayer")) {
             if (!runParams2.containsKey("Player"))
                 return false;
 
             final Player addedTo = (Player) runParams2.get("Player");
-            if (!addedTo.isValid(this.mapParams.get("ValidPlayer").split(","), this.getHostCard().getController(),
+            if (!addedTo.isValid(getParam("ValidPlayer").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("CounterType")) {
-            final String type = this.mapParams.get("CounterType");
+        if (hasParam("ValidSource")) {
+            if (!runParams2.containsKey("Source"))
+                return false;
+
+            final Card source = (Card) runParams2.get("Source");
+
+            if (source == null) {
+                return false;
+            }
+
+            if (!source.isValid(getParam("ValidSource").split(","), this.getHostCard().getController(),
+                    this.getHostCard(), null)) {
+                return false;
+            }
+        }
+
+        if (hasParam("CounterType")) {
+            final String type = getParam("CounterType");
             if (!type.equals(addedType.toString())) {
                 return false;
             }
