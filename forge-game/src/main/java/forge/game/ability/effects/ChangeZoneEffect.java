@@ -365,7 +365,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private void changeKnownOriginResolve(final SpellAbility sa) {
-        Iterable<Card> tgtCards = getTargetCards(sa);
+        final boolean onlySpells = sa.hasParam("OnlySpells");
+        Iterable<Card> tgtCards = !onlySpells ? getTargetCards(sa) : new CardCollection();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getHostCard();
