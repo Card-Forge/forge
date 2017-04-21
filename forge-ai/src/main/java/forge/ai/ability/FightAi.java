@@ -153,6 +153,7 @@ public class FightAi extends SpellAbilityAi {
     	final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final AbilitySub tgtFight = sa.getSubAbility();
+        final boolean isChandrasIgnition = "Chandra's Ignition".equals(sourceName); // TODO: generalize this for other "fake Fight" cases that do not target
         if ("Savage Punch".equals(sourceName) && !ai.hasFerocious()) {
             power = 0;
             toughness = 0;
@@ -185,8 +186,11 @@ public class FightAi extends SpellAbilityAi {
                 if ("PowerDmg".equals(sa.getParam("AILogic"))) {
                     if (FightAi.canKill(aiCreature, humanCreature, power)) {
                         sa.getTargets().add(aiCreature);
-                        tgtFight.resetTargets();
-                        tgtFight.getTargets().add(humanCreature);
+                        System.out.println(tgtFight.usesTargeting());
+                        if (!isChandrasIgnition) {
+                            tgtFight.resetTargets();
+                            tgtFight.getTargets().add(humanCreature);
+                        }
                         return true;
                     }
                 } else {
