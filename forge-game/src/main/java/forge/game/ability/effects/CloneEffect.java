@@ -9,20 +9,21 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardState;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
+import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -37,13 +38,12 @@ public class CloneEffect extends SpellAbilityEffect {
         Card tgtCard = host;
 
         Card cardToCopy = host;
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (sa.hasParam("Defined")) {
             List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
-        } else if (tgt != null) {
+        } else if (sa.usesTargeting()) {
             cardToCopy = sa.getTargets().getFirstTargetedCard();
         }
 
@@ -61,19 +61,26 @@ public class CloneEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final Player activator = sa.getActivatingPlayer();
         Card tgtCard = host;
         final Map<String, String> origSVars = host.getSVars();
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Game game = activator.getGame();
 
         // find cloning source i.e. thing to be copied
         Card cardToCopy = null;
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (sa.hasParam("Defined")) {
+        
+        if (sa.hasParam("Choices")) {
+            CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
+            
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
+            cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, true);
+        } else if (sa.hasParam("Defined")) {
             List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
-        } else if (tgt != null) {
+        } else if (sa.usesTargeting()) {
             cardToCopy = sa.getTargets().getFirstTargetedCard();
         }
         if (cardToCopy == null) {
@@ -228,10 +235,8 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         // triggers to add to clone
-        final List<String> triggers = new ArrayList<String>();
         if (sa.hasParam("AddTriggers")) {
-            triggers.addAll(Arrays.asList(sa.getParam("AddTriggers").split(",")));
-            for (final String s : triggers) {
+            for (final String s : Arrays.asList(sa.getParam("AddTriggers").split(","))) {
                 if (origSVars.containsKey(s)) {
                     final String actualTrigger = origSVars.get(s);
                     final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, tgtCard, true);
@@ -262,9 +267,9 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         // keywords to add to clone
-        final List<String> keywords = new ArrayList<String>();
+        
         if (sa.hasParam("AddKeywords")) {
-            keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
+            final List<String> keywords = Arrays.asList(sa.getParam("AddKeywords").split(" & "));
             // allow SVar substitution for keywords
             for (int i = 0; i < keywords.size(); i++) {
                 String k = keywords.get(i);

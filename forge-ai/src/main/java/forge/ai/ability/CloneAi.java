@@ -1,17 +1,20 @@
 package forge.ai.ability;
 
+import java.util.List;
+
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-
-import java.util.List;
 
 public class CloneAi extends SpellAbilityAi {
 
@@ -150,6 +153,36 @@ public class CloneAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         // Didn't confirm in the original code
         return false;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.ai.SpellAbilityAi#chooseSingleCard(forge.game.player.Player,
+     * forge.game.spellability.SpellAbility, java.lang.Iterable, boolean,
+     * forge.game.player.Player)
+     */
+    @Override
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional,
+            Player targetedPlayer) {
+        final Card host = sa.getHostCard();
+        final Player ctrl = host.getController();
+
+        final boolean isVesuva = "Vesuva".equals(host.getName());
+
+        final String filter = !isVesuva ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
+                : "Permanent.YouDontCtrl+notnamedVesuva,Permanent.nonLegendary+notnamedVesuva";
+
+        CardCollection newOptions = CardLists.getValidCards(options, filter.split(","), ctrl, host, sa);
+        if (!newOptions.isEmpty()) {
+            options = newOptions;
+        }
+        Card choice = ComputerUtilCard.getBestAI(options);
+        if (isVesuva && "Vesuva".equals(choice.getName())) {
+            choice = null;
+        }
+
+        return choice;
     }
 
 }
