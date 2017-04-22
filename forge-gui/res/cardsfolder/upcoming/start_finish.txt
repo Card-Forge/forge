@@ -4,7 +4,7 @@ AlternateMode: Split
 Types:Instant
 A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenImage$ w 1 1 warrior AKH | SpellDescription$ Create two 1/1 white Warrior creature tokens with vigilance.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/start_finish.jpg
-Oracle:Destroy all creatures with power 3 or greater.
+Oracle:Create two 1/1 white Warrior creature tokens with vigilance.
 
 ALTERNATE
 

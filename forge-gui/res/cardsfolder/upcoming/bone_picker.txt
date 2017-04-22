@@ -7,5 +7,5 @@ SVar:X:Count$Morbid.1.0
 K:Flying
 K:Deathtouch
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_picker.jpg
-Oracle:Bone Picker costs {3} less to cast if a creature died this turn.\nFlying, deathtouch.
+Oracle:Bone Picker costs {3} less to cast if a creature died this turn.\nFlying, deathtouch
 
