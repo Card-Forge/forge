@@ -281,11 +281,11 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 269 L Forest
 270 M Gideon, Martial Paragon
 271 U Companion of the Trials
-272 R Gideon’s Resolve
+272 R Gideon's Resolve
 273 C Graceful Cat
 274 C Stone Quarry
 275 M Liliana, Death Wielder
 276 U Desiccated Naga
-277 R Liliana’s Influence
+277 R Liliana's Influence
 278 C Tattered Mummy
 279 C Foul Orchard
