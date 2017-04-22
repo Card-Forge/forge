@@ -177,6 +177,15 @@ public class GameAction {
             c.getController().setRevolt(true);
         }
 
+        // FIXME: A hack to get the Aftermath split cards to behave as correct type upon going to graveyard
+        if (c.isSplitCard() && c.hasKeyword("Aftermath")) {
+            if (zoneTo.is(ZoneType.Graveyard)) {
+                c.setType(CardType.parse(c.getState(CardStateName.RightSplit).getType().toString()));
+            } else if (!zoneTo.is(ZoneType.Stack)) {
+                c.setType(CardType.parse(c.getState(CardStateName.LeftSplit).getType().toString()));
+            }
+        }
+
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
         if (suppress || (!fromBattlefield && !toHand)) {

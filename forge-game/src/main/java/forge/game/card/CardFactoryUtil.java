@@ -3464,16 +3464,7 @@ public class CardFactoryUtil {
             // only target RightSplit of it
             final SpellAbility origSA = card.getState(CardStateName.RightSplit).getFirstAbility();
             origSA.getRestrictions().setZone(ZoneType.Graveyard);
-
-            // FIXME: Without properly setting casting speed here, Sorcery RightSplit can be cast at Instant speed
-            // despite the fact that the card type is correctly set to Sorcery.
-            if (card.getState(CardStateName.RightSplit).getType().isSorcery()) {
-                origSA.getRestrictions().setSorcerySpeed(true);
-                origSA.getRestrictions().setInstantSpeed(false);
-            } else if (card.getState(CardStateName.RightSplit).getType().isInstant()) {
-                origSA.getRestrictions().setSorcerySpeed(false);
-                origSA.getRestrictions().setInstantSpeed(true);
-            }
+            card.getState(CardStateName.RightSplit).setType(CardType.parse("Sorcery"));
 
             // Add the Exile Self Part
             String dbStr = "DB$ ChangeZone | Origin$ Stack | Destination$ Exile";
