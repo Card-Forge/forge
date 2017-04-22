@@ -7,5 +7,5 @@ SVar:TrigGetMana:AB$ Pump | Cost$ 0 | ValidTgts$ Player | RememberObjects$ Targe
 SVar:DBMana:DB$ Mana | Produced$ C | Amount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.RememberedPlayerCtrl
-SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/Orcish Squatters Avatar.full.jpg
+SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Orcish Squatters Avatar.full.jpg
 Oracle:Hand -1, life -1\nAt the beginning of your precombat main phase, add an amount of {C} to your mana pool equal to the number of lands target opponent controls.

@@ -1,16 +1,8 @@
 package forge.assets;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.google.common.collect.ImmutableList;
-
 import forge.FThreads;
 import forge.Forge;
 import forge.download.GuiDownloadZipService;
@@ -18,6 +10,12 @@ import forge.properties.ForgeConstants;
 import forge.screens.SplashScreen;
 import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
 
 public class AssetsDownloader {
     public static final boolean SHARE_DESKTOP_ASSETS = true; //change to false to test downloading separate assets for desktop version
@@ -35,12 +33,12 @@ public class AssetsDownloader {
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
         if (connectedToInternet) {
             try {
-                URL versionUrl = new URL("http://cardforge.link/releases/forge/forge-gui-android/version.txt");
+                URL versionUrl = new URL("https://releases.cardforge.org/forge/forge-gui-android/version.txt");
                 String version = FileUtil.readFileToString(versionUrl);
                 if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
                     splashScreen.prepareForDialogs();
 
-                    message = "A new version of Forge is available (" + version + ").\n" + 
+                    message = "A new version of Forge is available (" + version + ").\n" +
                             "You are currently on an older version (" + Forge.CURRENT_VERSION + ").\n\n" +
                             "Would you like to update to the new version now?";
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
@@ -49,7 +47,7 @@ public class AssetsDownloader {
                     if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
                         String filename = "forge-android-" + version + "-signed-aligned.apk";
                         String apkFile = new GuiDownloadZipService("", "update",
-                                "http://cardforge.link/releases/forge/forge-gui-android/" + version + "/" + filename,
+                                "https://releases.cardforge.org/forge/forge-gui-android/" + version + "/" + filename,
                                 Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
                             Forge.getDeviceAdapter().openFile(apkFile);
@@ -102,7 +100,7 @@ public class AssetsDownloader {
         }
 
         //prompt user whether they wish to download the updated resource files
-        message = "There are updated resource files to download. " + 
+        message = "There are updated resource files to download. " +
                 "This download is around 80MB, ";
         if (Forge.getDeviceAdapter().isConnectedToWifi()) {
             message += "which shouldn't take long if your wifi connection is good.";
@@ -132,7 +130,7 @@ public class AssetsDownloader {
         }
 
         new GuiDownloadZipService("", "resource files",
-                "http://cardforge.link/releases/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/" + "assets.zip",
+                "https://releases.cardforge.org/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/" + "assets.zip",
                 ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, splashScreen.getProgressBar()).downloadAndUnzip();
 
         FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed

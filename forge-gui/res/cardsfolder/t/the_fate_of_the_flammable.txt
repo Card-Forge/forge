@@ -7,5 +7,5 @@ SVar:DBChoose:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ Self,Others | A
 SVar:Self:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ 6 | SpellDescription$ Self
 SVar:Others:DB$ DealDamage | Defined$ OppNonParentTarget | NumDmg$ 3 | SpellDescription$ Others
 
-SVar:Picture:http://downloads.cardforge.link/images/cards/ARC/The Fate of the Flammable.full.jpg
+SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/The Fate of the Flammable.full.jpg
 Oracle:When you set this scheme in motion, target opponent chooses self or others. If that player chooses self, this scheme deals 6 damage to him or her. if the player chooses others, this scheme deals 3 damage to each of your other opponents.

@@ -204,9 +204,9 @@ while inputName != 'quit' :
                                         print text
                 #print "\n"
                 if cardData.types.find('Scheme') != -1 :
-                        print 'SVar:Picture:http://downloads.cardforge.link/images/cards/HOP/'+cardData.name+'.jpg'
+                        print 'SVar:Picture:https://downloads.cardforge.org/images/cards/HOP/'+cardData.name+'.jpg'
                 elif cardData.types.find('Vanguard') != -1 :
-                        print 'SVar:Picture:http://downloads.cardforge.link/images/cards/VAN/'+cardData.name+'.full.jpg'
+                        print 'SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/'+cardData.name+'.full.jpg'
                 else :
                         print 'SVar:Picture:http://www.wizards.com/global/images/magic/general/'+cleanName+'.jpg'
                 print '\n'

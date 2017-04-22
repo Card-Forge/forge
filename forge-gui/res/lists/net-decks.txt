@@ -1,28 +1,28 @@
-Top Decks | http://downloads.cardforge.link/decks/topdecks.zip
-World Championship | http://downloads.cardforge.link/decks/worldchampion.zip
-The Week That Was | http://downloads.cardforge.link/decks/theweekthatwas.zip
-Single Card Strategy | http://downloads.cardforge.link/decks/singlecardstrategy.zip
-WotC Preconstructed | http://downloads.cardforge.link/decks/precon.zip
-Serious Fun | http://downloads.cardforge.link/decks/seriousfun.zip
-ReConstructed | http://downloads.cardforge.link/decks/recon.zip
-Pro Tour | http://downloads.cardforge.link/decks/protour.zip
-Perilous Research | http://downloads.cardforge.link/decks/perilousresearch.zip
-Into the AEther | http://downloads.cardforge.link/decks/intotheaether.zip
-Level One | http://downloads.cardforge.link/decks/levelone.zip
-Latest Developments | http://downloads.cardforge.link/decks/latestdevelopments.zip
-From the Lab | http://downloads.cardforge.link/decks/fromthelab.zip
-Feature Article | http://downloads.cardforge.link/decks/feature.zip
-Daily Deck List | http://downloads.cardforge.link/decks/dailydecks.zip
-Building on a Budget | http://downloads.cardforge.link/decks/buildingonabudget.zip
-Breaking Through | http://downloads.cardforge.link/decks/breakingthrough.zip
-Woo Brews | http://downloads.cardforge.link/decks/woobrews.zip
-Swimming with Sharks | http://downloads.cardforge.link/decks/swimmingwithsharks.zip
-Learning Curve | http://downloads.cardforge.link/decks/learningcurve.zip
-Squandered Resources | http://downloads.cardforge.link/decks/squanderedresources.zip
-Deconstructing Famous | http://downloads.cardforge.link/decks/dfd.zip
-Going Rogue | http://downloads.cardforge.link/decks/goingrogue.zip
-Uncommon Knowledge | http://downloads.cardforge.link/decks/uncommonknowledge.zip
-MagicTheGathering.Combos | http://downloads.cardforge.link/decks/combos.zip
-Players Championship 2012 | http://downloads.cardforge.link/decks/magicplayerschampionship.zip
-Brewing on a Budget | http://downloads.cardforge.link/decks/brewingonabudget.zip
-Grand Prix Lincoln 2012 | http://downloads.cardforge.link/decks/gplincoln2012.zip
+Top Decks | https://downloads.cardforge.org/decks/topdecks.zip
+World Championship | https://downloads.cardforge.org/decks/worldchampion.zip
+The Week That Was | https://downloads.cardforge.org/decks/theweekthatwas.zip
+Single Card Strategy | https://downloads.cardforge.org/decks/singlecardstrategy.zip
+WotC Preconstructed | https://downloads.cardforge.org/decks/precon.zip
+Serious Fun | https://downloads.cardforge.org/decks/seriousfun.zip
+ReConstructed | https://downloads.cardforge.org/decks/recon.zip
+Pro Tour | https://downloads.cardforge.org/decks/protour.zip
+Perilous Research | https://downloads.cardforge.org/decks/perilousresearch.zip
+Into the AEther | https://downloads.cardforge.org/decks/intotheaether.zip
+Level One | https://downloads.cardforge.org/decks/levelone.zip
+Latest Developments | https://downloads.cardforge.org/decks/latestdevelopments.zip
+From the Lab | https://downloads.cardforge.org/decks/fromthelab.zip
+Feature Article | https://downloads.cardforge.org/decks/feature.zip
+Daily Deck List | https://downloads.cardforge.org/decks/dailydecks.zip
+Building on a Budget | https://downloads.cardforge.org/decks/buildingonabudget.zip
+Breaking Through | https://downloads.cardforge.org/decks/breakingthrough.zip
+Woo Brews | https://downloads.cardforge.org/decks/woobrews.zip
+Swimming with Sharks | https://downloads.cardforge.org/decks/swimmingwithsharks.zip
+Learning Curve | https://downloads.cardforge.org/decks/learningcurve.zip
+Squandered Resources | https://downloads.cardforge.org/decks/squanderedresources.zip
+Deconstructing Famous | https://downloads.cardforge.org/decks/dfd.zip
+Going Rogue | https://downloads.cardforge.org/decks/goingrogue.zip
+Uncommon Knowledge | https://downloads.cardforge.org/decks/uncommonknowledge.zip
+MagicTheGathering.Combos | https://downloads.cardforge.org/decks/combos.zip
+Players Championship 2012 | https://downloads.cardforge.org/decks/magicplayerschampionship.zip
+Brewing on a Budget | https://downloads.cardforge.org/decks/brewingonabudget.zip
+Grand Prix Lincoln 2012 | https://downloads.cardforge.org/decks/gplincoln2012.zip

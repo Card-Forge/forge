@@ -185,9 +185,9 @@ public final class ForgeConstants {
             CACHE_TOURNAMENTPACK_PICS_DIR };
 
     // URLs
-    private static final String URL_CARDFORGE = "http://downloads.cardforge.link";
+    private static final String URL_CARDFORGE = "https://downloads.cardforge.org";
     public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
-    public static final String URL_PRICE_DOWNLOAD = "http://downloads.cardforge.link/all-prices.txt";
+    public static final String URL_PRICE_DOWNLOAD = "https://downloads.cardforge.org/all-prices.txt";
 
     // Constants for Display Card Identity game setting
     public static final String DISP_CURRENT_COLORS_ALWAYS = "Always";

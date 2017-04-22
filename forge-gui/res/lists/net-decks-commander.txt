@@ -1,10 +1,10 @@
-The Week That Was | http://downloads.cardforge.link/decks/theweekthatwas-commander.zip
-WotC Preconstructed | http://downloads.cardforge.link/decks/precon-commander.zip
-Serious Fun | http://downloads.cardforge.link/decks/seriousfun-commander.zip
-ReConstructed | http://downloads.cardforge.link/decks/recon-commander.zip
-Latest Developments | http://downloads.cardforge.link/decks/latestdevelopments-commander.zip
-From the Lab | http://downloads.cardforge.link/decks/fromthelab-commander.zip
-Feature Article | http://downloads.cardforge.link/decks/feature-commander.zip
-Daily Deck List | http://downloads.cardforge.link/decks/dailydecks-commander.zip
-Command Tower | http://downloads.cardforge.link/decks/commandtower.zip
-Going Rogue | http://downloads.cardforge.link/decks/goingrogue-commander.zip
+The Week That Was | https://downloads.cardforge.org/decks/theweekthatwas-commander.zip
+WotC Preconstructed | https://downloads.cardforge.org/decks/precon-commander.zip
+Serious Fun | https://downloads.cardforge.org/decks/seriousfun-commander.zip
+ReConstructed | https://downloads.cardforge.org/decks/recon-commander.zip
+Latest Developments | https://downloads.cardforge.org/decks/latestdevelopments-commander.zip
+From the Lab | https://downloads.cardforge.org/decks/fromthelab-commander.zip
+Feature Article | https://downloads.cardforge.org/decks/feature-commander.zip
+Daily Deck List | https://downloads.cardforge.org/decks/dailydecks-commander.zip
+Command Tower | https://downloads.cardforge.org/decks/commandtower.zip
+Going Rogue | https://downloads.cardforge.org/decks/goingrogue-commander.zip

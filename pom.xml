@@ -12,19 +12,14 @@
         using all of the rules.
     </description>
 
-    <url>http://cardforge.org</url>
+    <url>https://www.cardforge.org/</url>
 
     <organization>
         <name>CardForge</name>
-        <url>http://cardforge.org</url>
+        <url>https://www.cardforge.org/</url>
     </organization>
 
     <inceptionYear>2007</inceptionYear>
-
-    <issueManagement>
-        <system>Mantis</system>
-        <url>http://bugs.cardforge.link/</url>
-    </issueManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -203,12 +198,12 @@
         <repository>
             <id>cardforge-repo</id>
             <name>Forge Releases</name>
-            <url>ftp://ftp.cardforge.link/releases/</url>
+            <url>ftp://ftp.cardforge.org/maven/releases/</url>
         </repository>
         <snapshotRepository>
             <id>cardforge-snapshot-repo</id>
             <name>Forge Snapshots</name>
-            <url>ftp://ftp.cardforge.link/snapshots/</url>
+            <url>ftp://ftp.cardforge.org/maven/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
