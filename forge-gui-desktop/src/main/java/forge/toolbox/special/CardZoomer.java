@@ -226,6 +226,9 @@ public enum CardZoomer {
         if (thisCard == null) {
             return 0;
         }
+        if (thisCard.getCard().isSplitCard() && thisCard.getCard().getText().contains("Aftermath")) {
+            return 270; // rotate Aftermath splits the other way to correctly show the right split (graveyard) half
+        }
         return thisCard.getCard().isSplitCard() || thisCard.getType().isPlane() || thisCard.getType().isPhenomenon() ? 90 : 0;
     }
 
