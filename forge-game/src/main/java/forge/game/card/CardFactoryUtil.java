@@ -3464,7 +3464,6 @@ public class CardFactoryUtil {
             // only target RightSplit of it
             final SpellAbility origSA = card.getState(CardStateName.RightSplit).getFirstAbility();
             origSA.getRestrictions().setZone(ZoneType.Graveyard);
-            card.getState(CardStateName.RightSplit).setType(CardType.parse("Sorcery"));
 
             // Add the Exile Self Part
             String dbStr = "DB$ ChangeZone | Origin$ Stack | Destination$ Exile";
