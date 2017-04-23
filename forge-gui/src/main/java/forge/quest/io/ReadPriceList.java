@@ -79,7 +79,7 @@ public class ReadPriceList {
         final List<String> lines = FileUtil.readFile(file);
         for (final String line : lines) {
             if (line.trim().isEmpty()) {
-                break;
+                continue;
             }
 
             if (line.startsWith(ReadPriceList.COMMENT)) {
