@@ -6,10 +6,13 @@ import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -28,8 +31,7 @@ public class RepeatEachAi extends SpellAbilityAi {
                 return false;
             }
         } else if ("CloneAllTokens".equals(logic)) {
-            final Player opp = aiPlayer.getOpponent();
-            List<Card> humTokenCreats = CardLists.filter(opp.getCreaturesInPlay(), Presets.TOKEN);
+            List<Card> humTokenCreats = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), Presets.TOKEN);
             List<Card> compTokenCreats = CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN);
 
             if (compTokenCreats.size() <= humTokenCreats.size()) {
@@ -75,6 +77,42 @@ public class RepeatEachAi extends SpellAbilityAi {
                 }
             }
             return false;
+        } else if ("AllPlayerLoseLife".equals(logic)) {
+            final Card source = sa.getHostCard();
+            AbilitySub repeat = sa.getAdditonalAbility("RepeatSubAbility");
+
+            String svar = repeat.getSVar(repeat.getParam("LifeAmount"));
+            // replace RememberedPlayerCtrl with YouCtrl
+            String svarYou = svar.replace("RememberedPlayer", "You");
+
+            // Currently all Cards with that are affect all player, including AI
+            if (aiPlayer.canLoseLife()) {
+                int lossYou = AbilityUtils.calculateAmount(source, svarYou, repeat);
+
+                // if playing it would cause AI to lose most life, don't do that
+                if (lossYou + 5 > aiPlayer.getLife()) {
+                    return false;
+                }
+            }
+
+            boolean hitOpp = false;
+            // need a copy for source so YouCtrl can be faked
+            final Card sourceLKI = CardUtil.getLKICopy(source);
+
+            // check if any opponent is affected
+            for (final Player opp : aiPlayer.getOpponents()) {
+                if (opp.canLoseLife()) {
+                    sourceLKI.setOwner(opp);
+                    int lossOpp = AbilityUtils.calculateAmount(source, svarYou, repeat);
+                    if (lossOpp > 0) {
+                        hitOpp = true;
+                    }
+                }
+            }
+            // would not hit oppoent, don't do that
+            if (!hitOpp) {
+                return false;
+            }
         }
 
         // TODO Add some normal AI variability here
