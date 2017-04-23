@@ -303,7 +303,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public final void doLayout() {
-        final int borderSize = Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
+        boolean noBorder = getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH"); // Unusual border exception
+
+        final int borderSize = noBorder ? 2 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
 
         final Point imgPos = new Point(cardXOffset + borderSize, cardYOffset + borderSize);
         final Dimension imgSize = new Dimension(cardWidth - (borderSize * 2), cardHeight - (borderSize * 2));
