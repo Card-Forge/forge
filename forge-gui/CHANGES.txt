@@ -1,4 +1,4 @@
-Forge Beta: 04-27-2017 ver 1.5.61
+Forge Beta: ??-??-2017 ver 1.5.62
 
 
 16685 cards in total.
@@ -7,6 +7,9 @@ Forge Beta: 04-27-2017 ver 1.5.61
 -------------
 Release Notes
 -------------
+
+- IMPORTANT: Partial backwards incompatibility with older decks that contain Masterpieces -
+In case you have decks in your profile folder that contain one or more Masterpieces from the Kaladesh/Aether Revolt masterpiece series (previously the set code was MPS), you may experience an issue with cards that are present in the Masterpieces set disappearing visually and malfunctioning in the game (even if you use a version of the same card from a different set). The two primary waya this manifests itself are: a) you get a message stating that there is an unsupported card in one of your decks (this message shows in the console only); b) the card picture does not show in the game or in the deck editor and the card is reported as non-functional. If this happens to you, you have several options: either remove the offending deck altogether (you may have to do a search inside the profile folder to determine which decks have the mentioned card from the MPS set), or manually edit the deck file and change the set code MPS to MPS_KLD for such cards, or start with a fresh profile folder or at least fresh deck subfolder (but the latter obviously only works if you don't mind losing your entire progress and would like to start fresh). We apologize for the inconvenience.
 
 - Amonkhet Release -
 This release contains most of the cards from the newly released Amonkhet set. Please bear with us as we iron out any bugs with this set and get the images uploaded.
