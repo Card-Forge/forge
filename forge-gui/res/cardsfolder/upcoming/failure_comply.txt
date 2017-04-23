@@ -12,7 +12,7 @@ Name:Comply
 ManaCost:W
 Types:Sorcery
 K:Aftermath
-A:SP$ NameCard | Cost$ W | Defined$ You | ValidCards$ Card | SubAbility$ DBEffect | SpellDescription$ Choose a card name. Until your next turn, your opponents can't cast spells with the chosen name.
+A:SP$ NameCard | Cost$ W | Defined$ You | SubAbility$ DBEffect | SpellDescription$ Choose a card name. Until your next turn, your opponents can't cast spells with the chosen name.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CantCast | Duration$ UntilYourNextTurn
 SVar:CantCast:Mode$ CantBeCast | ValidCard$ Card.nonLand+NamedCard | Caster$ Opponent | EffectZone$ Command | Description$ Your opponents can't cast spells with the chosen name.
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nChoose a card name. Until your next turn, your opponents can't cast spells with the chosen name.
