@@ -1097,12 +1097,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final int selBorderSize = 1;
 
             // Unusual border exceptions
-            boolean noExtraBorder = false;
+            boolean noBorder = false;
             if (itemInfo.item instanceof IPaperCard) {
-                noExtraBorder = CardView.getCardForUi((IPaperCard)itemInfo.item).getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
+                noBorder = CardView.getCardForUi((IPaperCard)itemInfo.item).getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
             }
 
-            final int borderSize = noExtraBorder? 2 : Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
+            final int borderSize = noBorder? 2 : Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
             final int cornerSize = Math.max(4, Math.round(itemWidth * CardPanel.ROUNDED_CORNER_SIZE));
 
             if (itemInfo.selected || itemInfo == hoveredItem) {
