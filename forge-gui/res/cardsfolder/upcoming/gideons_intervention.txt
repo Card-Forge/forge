@@ -2,7 +2,7 @@ Name:Gideon's Intervention
 ManaCost:2 W W
 Types:Enchantment
 K:ETBReplacement:Other:DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card | SpellDescription$ As CARDNAME enters the battlefield, name a card.
+SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, name a card.
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard+nonLand | Caster$ Opponent | Description$ Your opponents can't cast spells with the chosen name.
 S:Mode$ PreventDamage | Target$ You,Permanent.YouCtrl | Source$ Card.NamedCard | Description$ Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.
 SVar:RemRandomDeck:True
