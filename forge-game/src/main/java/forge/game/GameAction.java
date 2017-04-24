@@ -183,7 +183,19 @@ public class GameAction {
             lastKnownInfo = c;
             copied = c;
         } else {
-            lastKnownInfo = CardUtil.getLKICopy(c);
+            // if from Battlefield to Graveyard and Card does exist in LastStateBattlefield
+            // use that instead
+            if (fromBattlefield && zoneTo.is(ZoneType.Graveyard)) {
+                CardCollectionView lastBattlefield = game.getLastStateBattlefield();
+                int idx = lastBattlefield.indexOf(c);
+                if (idx != -1) {
+                    lastKnownInfo = lastBattlefield.get(idx);
+                }
+            }
+
+            if (lastKnownInfo == null) {
+                lastKnownInfo = CardUtil.getLKICopy(c);
+            }
 
             if (!c.isToken()) {
                 if (c.isCloned()) {
