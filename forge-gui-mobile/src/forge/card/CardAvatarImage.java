@@ -32,7 +32,7 @@ public class CardAvatarImage implements FImage {
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
         if (image == null) { //attempt to retrieve card art if needed
-            image = CardRenderer.getCardArt(imageKey, false, false);
+            image = CardRenderer.getCardArt(imageKey, false, false, false);
             if (image == null) {
                 return; //can't draw anything if can't be loaded yet
             }

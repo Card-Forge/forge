@@ -83,13 +83,13 @@ public class CardRenderer {
     //extract card art from the given card
     public static FImageComplex getCardArt(IPaperCard pc) {
         CardType type = pc.getRules().getType();
-        return getCardArt(pc.getImageKey(false), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon());
+        return getCardArt(pc.getImageKey(false), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"));
     }
     public static FImageComplex getCardArt(CardView card) {
         CardTypeView type = card.getCurrentState().getType();
-        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon());
+        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),card.getText().contains("Aftermath"));
     }
-    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard) {
+    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
             Texture image = ImageCache.getImage(imageKey, true);
@@ -101,7 +101,7 @@ public class CardRenderer {
                     float x, y;
                     float w = image.getWidth();
                     float h = image.getHeight();
-                    if (isSplitCard) { //allow rotated image for split cards
+                    if (isSplitCard && !isAftermathCard) { //allow rotated image for split cards
                         x = w * 33f / 250f;
                         y = 0; //delay adjusting y and h until drawn
                         w *= 106f / 250f;
@@ -182,7 +182,8 @@ public class CardRenderer {
         if (cardArt != null) {
             float artX = x - FList.PADDING;
             float artY = y - FList.PADDING;
-            if (card.isSplitCard()) {
+
+            if (card.isSplitCard() && !card.getText().contains("Aftermath")) {
                 //draw split art with proper orientation
                 float srcY = cardArt.getHeight() * 13f / 354f;
                 float srcHeight = cardArt.getHeight() * 150f / 354f;
@@ -191,6 +192,11 @@ public class CardRenderer {
                 srcY += dh / 2;
                 g.drawRotatedImage(cardArt.getTexture(), artX, artY, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), (int)srcY, (int)cardArt.getWidth(), (int)srcHeight, -90);
                 g.drawRotatedImage(cardArt.getTexture(), artX, artY + cardArtWidth / 2, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), (int)cardArt.getHeight() - (int)(srcY + srcHeight), (int)cardArt.getWidth(), (int)srcHeight, -90);
+            }
+            else if (card.getText().contains("Aftermath")) {
+                //Simply show the top art repeated
+                g.drawRotatedImage(cardArt.getTexture(), artX, artY, cardArtWidth, cardArtHeight / 2, artX + cardArtWidth, artY + cardArtHeight / 2, cardArt.getRegionX(), cardArt.getRegionY(), (int)cardArt.getWidth(), (int)cardArt.getHeight() /2, 0);
+                g.drawRotatedImage(cardArt.getTexture(), artX, artY + cardArtHeight / 2, cardArtWidth, cardArtHeight / 2, artX + cardArtWidth, artY + cardArtHeight / 2, cardArt.getRegionX(), cardArt.getRegionY(), (int)cardArt.getWidth(), (int)cardArt.getHeight() /2, 0);
             }
             else {
                 g.drawImage(cardArt, artX, artY, cardArtWidth, cardArtHeight);
