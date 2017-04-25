@@ -51,6 +51,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_STACK_CREATURES ("false"),
         UI_UPLOAD_DRAFT ("false"),
         UI_SCALE_LARGER ("true"),
+        UI_RENDER_BLACK_BORDERS ("true"),
         UI_LARGE_CARD_VIEWERS ("false"),
         UI_RANDOM_ART_IN_POOLS ("true"),
         UI_COMPACT_PROMPT ("false"),

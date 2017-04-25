@@ -43,6 +43,8 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.SItemManagerUtil;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBoxWrapper;
 import forge.toolbox.FLabel;
@@ -81,6 +83,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo focalItem;
     private final List<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
     private final List<Group> groups = new ArrayList<Group>();
+
+    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
+        return FModel.getPreferences().getPrefBoolean(preferenceName);
+    }
 
     @SuppressWarnings("serial")
     private class ExpandCollapseButton extends FLabel {
@@ -1096,11 +1102,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final int itemWidth = bounds.width;
             final int selBorderSize = 1;
 
-            // Unusual border exceptions
-            boolean noBorder = false;
-            if (itemInfo.item instanceof IPaperCard) {
-                noBorder = CardView.getCardForUi((IPaperCard)itemInfo.item).getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
-            }
+            // Determine whether to render border from properties
+            boolean noBorder = !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS)
+                    ||CardView.getCardForUi((IPaperCard)itemInfo.item).getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
 
             final int borderSize = noBorder? 2 : Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
             final int cornerSize = Math.max(4, Math.round(itemWidth * CardPanel.ROUNDED_CORNER_SIZE));

@@ -306,7 +306,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public final void doLayout() {
-        boolean noBorder = getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH"); // Unusual border exception
+        // Determine whether to render border from properties
+        boolean noBorder = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS) || getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
 
         final int borderSize = noBorder ? 2 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
 

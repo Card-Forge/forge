@@ -68,6 +68,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbImageFetcher = new OptionsCheckBox("Automatically Download Missing Card Art");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones Use Original Card Art");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
+    private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox("Render Black Card Borders");
     private final JCheckBox cbLargeCardViewers = new OptionsCheckBox("Use Large Card Viewers");
     private final JCheckBox cbDisplayFoil = new OptionsCheckBox("Display Foil Overlay");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
@@ -233,6 +234,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbScaleLarger, regularConstraints);
         pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), regularConstraints);
+
+        pnlPrefs.add(cbRenderBlackCardBorders, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Render black borders around card images."), regularConstraints);
 
         pnlPrefs.add(cbLargeCardViewers, regularConstraints);
         pnlPrefs.add(new NoteLabel("Makes all card viewers much larger for use with high resolution images. Will not fit on smaller screens."), regularConstraints);
@@ -518,6 +522,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbScaleLarger() {
         return cbScaleLarger;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbRenderBlackCardBorders() {
+        return cbRenderBlackCardBorders;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
