@@ -348,8 +348,8 @@ public class CardRenderer {
                 float manaSymbolSize = w / 4;
                 if (card.isSplitCard() && card.hasAlternateState()) {
                     float dy = manaSymbolSize / 2 + Utils.scale(5);
-                    drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
-                    drawManaCost(g, card.getAlternateState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
+                    drawManaCost(g, card.getAlternateState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
+                    drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
                 }
                 else {
                     drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
